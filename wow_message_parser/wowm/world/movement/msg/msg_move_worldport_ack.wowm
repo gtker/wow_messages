@@ -1,4 +1,4 @@
-#tag_all versions "1.12 3.3.5";
+#tag_all versions "1 2 3";
 
 msg MSG_MOVE_WORLDPORT_ACK = 0x00DC {} {
     description = "Acknowledge from the client that it has received an [SMSG_NEW_WORLD] and has loaded the new map.";

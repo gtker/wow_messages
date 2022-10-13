@@ -310,8 +310,9 @@ enum UnitStandState : u8 {
     KNEEL = 8;
     CUSTOM = 9 {
         comment = "Used for Cthun according to cmangos.";
+        comment = "mangos-tbc: Depends on model animation. Submerge, freeze, hide, hibernate, rest";
     }
 } {
-    versions = "3.3.5";
+    versions = "2 3";
 }
 

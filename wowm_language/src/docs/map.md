@@ -316,6 +316,8 @@ Used in:
 * [CMSG_BATTLEFIELD_LIST](cmsg_battlefield_list.md)
 * [Character](character.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
+* [SMSG_NEW_WORLD](smsg_new_world.md)
+* [SMSG_TRANSFER_PENDING](smsg_transfer_pending.md)
 
 # Map
 

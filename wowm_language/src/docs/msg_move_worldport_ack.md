@@ -1,6 +1,6 @@
 # MSG_MOVE_WORLDPORT_ACK
 
-## Client Version 1.12, Client Version 3.3.5
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Description
 

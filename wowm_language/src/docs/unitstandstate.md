@@ -1,6 +1,6 @@
 # UnitStandState
 
-## Client Version 1.12, Client Version 3.3.5
+## Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -34,7 +34,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `SIT_HIGH_CHAIR` | 6 (0x06) |  |  |
 | `DEAD` | 7 (0x07) |  |  |
 | `KNEEL` | 8 (0x08) |  |  |
-| `CUSTOM` | 9 (0x09) |  | Used for Cthun according to cmangos. |
+| `CUSTOM` | 9 (0x09) |  | Used for Cthun according to cmangos.<br/>mangos-tbc: Depends on model animation. Submerge, freeze, hide, hibernate, rest |
 
 Used in:
 * [CMSG_STANDSTATECHANGE](cmsg_standstatechange.md)

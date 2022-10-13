@@ -6,6 +6,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::tbc::MovementInfo;
+use crate::world::tbc::MSG_MOVE_WORLDPORT_ACK;
 use crate::world::tbc::CMSG_CHAR_CREATE;
 use crate::world::tbc::CMSG_CHAR_ENUM;
 use crate::world::tbc::CMSG_CHAR_DELETE;
@@ -45,6 +46,7 @@ use crate::world::tbc::MSG_MOVE_START_PITCH_DOWN_Client;
 use crate::world::tbc::MSG_MOVE_STOP_PITCH_Client;
 use crate::world::tbc::MSG_MOVE_SET_RUN_MODE_Client;
 use crate::world::tbc::MSG_MOVE_SET_WALK_MODE_Client;
+use crate::world::tbc::MSG_MOVE_TELEPORT_ACK_Client;
 use crate::world::tbc::MSG_MOVE_FALL_LAND_Client;
 use crate::world::tbc::MSG_MOVE_START_SWIM_Client;
 use crate::world::tbc::MSG_MOVE_STOP_SWIM_Client;
@@ -103,6 +105,7 @@ use crate::world::tbc::CMSG_SET_ACTIVE_VOICE_CHANNEL;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
+    MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
@@ -142,6 +145,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Client),
     MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Client),
     MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Client),
+    MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Client),
     MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Client),
     MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Client),
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Client),
@@ -202,6 +206,7 @@ pub enum ClientOpcodeMessage {
 impl ClientOpcodeMessage {
     fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
+            0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -241,6 +246,7 @@ impl ClientOpcodeMessage {
             0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Client as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Client as crate::Message>::read_body(&mut r, body_size)?)),
@@ -369,6 +375,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_client<W: std::io::Write>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
@@ -408,6 +415,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_client(w, e),
@@ -469,6 +477,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
@@ -508,6 +517,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_client(w),
@@ -569,6 +579,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -608,6 +619,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -669,6 +681,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -708,6 +721,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -769,6 +783,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -808,6 +823,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -869,6 +885,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
@@ -908,6 +925,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_client(w).await,
@@ -1004,6 +1022,7 @@ impl ClientOpcodeMessage {
 impl std::fmt::Display for ClientOpcodeMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
+            ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
@@ -1043,6 +1062,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH_Client",
             ClientOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE_Client",
             ClientOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE_Client",
+            ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Client",
             ClientOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND_Client",
             ClientOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM_Client",
             ClientOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM_Client",
@@ -1099,6 +1119,12 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Client",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
         })
+    }
+}
+
+impl From<MSG_MOVE_WORLDPORT_ACK> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_WORLDPORT_ACK) -> Self {
+        Self::MSG_MOVE_WORLDPORT_ACK(c)
     }
 }
 
@@ -1333,6 +1359,12 @@ impl From<MSG_MOVE_SET_RUN_MODE_Client> for ClientOpcodeMessage {
 impl From<MSG_MOVE_SET_WALK_MODE_Client> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_SET_WALK_MODE_Client) -> Self {
         Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_TELEPORT_ACK_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_TELEPORT_ACK_Client) -> Self {
+        Self::MSG_MOVE_TELEPORT_ACK(c)
     }
 }
 
@@ -1669,6 +1701,8 @@ impl From<CMSG_SET_ACTIVE_VOICE_CHANNEL> for ClientOpcodeMessage {
 use crate::world::tbc::SMSG_CHAR_CREATE;
 use crate::world::tbc::SMSG_CHAR_ENUM;
 use crate::world::tbc::SMSG_CHAR_DELETE;
+use crate::world::tbc::SMSG_NEW_WORLD;
+use crate::world::tbc::SMSG_TRANSFER_PENDING;
 use crate::world::tbc::SMSG_CHARACTER_LOGIN_FAILED;
 use crate::world::tbc::SMSG_LOGIN_SETTIMESPEED;
 use crate::world::tbc::SMSG_CHANNEL_NOTIFY;
@@ -1689,6 +1723,7 @@ use crate::world::tbc::MSG_MOVE_START_PITCH_DOWN_Server;
 use crate::world::tbc::MSG_MOVE_STOP_PITCH_Server;
 use crate::world::tbc::MSG_MOVE_SET_RUN_MODE_Server;
 use crate::world::tbc::MSG_MOVE_SET_WALK_MODE_Server;
+use crate::world::tbc::MSG_MOVE_TELEPORT_ACK_Server;
 use crate::world::tbc::MSG_MOVE_FALL_LAND_Server;
 use crate::world::tbc::MSG_MOVE_START_SWIM_Server;
 use crate::world::tbc::MSG_MOVE_STOP_SWIM_Server;
@@ -1727,6 +1762,7 @@ use crate::world::tbc::SMSG_PROCRESIST;
 use crate::world::tbc::SMSG_AUCTION_BIDDER_LIST_RESULT;
 use crate::world::tbc::SMSG_AUCTION_REMOVED_NOTIFICATION;
 use crate::world::tbc::SMSG_SERVER_MESSAGE;
+use crate::world::tbc::SMSG_STANDSTATE_UPDATE;
 use crate::world::tbc::SMSG_CHAT_PLAYER_NOT_FOUND;
 use crate::world::tbc::SMSG_DURABILITY_DAMAGE_DEATH;
 use crate::world::tbc::SMSG_CHAR_RENAME;
@@ -1740,9 +1776,12 @@ use crate::world::tbc::MSG_MOVE_START_DESCEND_Server;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
+    MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     SMSG_CHAR_CREATE(SMSG_CHAR_CREATE),
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_CHAR_DELETE(SMSG_CHAR_DELETE),
+    SMSG_NEW_WORLD(SMSG_NEW_WORLD),
+    SMSG_TRANSFER_PENDING(SMSG_TRANSFER_PENDING),
     SMSG_CHARACTER_LOGIN_FAILED(SMSG_CHARACTER_LOGIN_FAILED),
     SMSG_LOGIN_SETTIMESPEED(SMSG_LOGIN_SETTIMESPEED),
     SMSG_CHANNEL_NOTIFY(SMSG_CHANNEL_NOTIFY),
@@ -1763,6 +1802,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Server),
     MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Server),
     MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Server),
+    MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Server),
     MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Server),
     MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Server),
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Server),
@@ -1801,6 +1841,7 @@ pub enum ServerOpcodeMessage {
     SMSG_AUCTION_BIDDER_LIST_RESULT(SMSG_AUCTION_BIDDER_LIST_RESULT),
     SMSG_AUCTION_REMOVED_NOTIFICATION(SMSG_AUCTION_REMOVED_NOTIFICATION),
     SMSG_SERVER_MESSAGE(SMSG_SERVER_MESSAGE),
+    SMSG_STANDSTATE_UPDATE(SMSG_STANDSTATE_UPDATE),
     SMSG_CHAT_PLAYER_NOT_FOUND(SMSG_CHAT_PLAYER_NOT_FOUND),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
@@ -1816,9 +1857,12 @@ pub enum ServerOpcodeMessage {
 impl ServerOpcodeMessage {
     fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
+            0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x003A => Ok(Self::SMSG_CHAR_CREATE(<SMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x003C => Ok(Self::SMSG_CHAR_DELETE(<SMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x003E => Ok(Self::SMSG_NEW_WORLD(<SMSG_NEW_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
+            0x003F => Ok(Self::SMSG_TRANSFER_PENDING(<SMSG_TRANSFER_PENDING as crate::Message>::read_body(&mut r, body_size)?)),
             0x0041 => Ok(Self::SMSG_CHARACTER_LOGIN_FAILED(<SMSG_CHARACTER_LOGIN_FAILED as crate::Message>::read_body(&mut r, body_size)?)),
             0x0042 => Ok(Self::SMSG_LOGIN_SETTIMESPEED(<SMSG_LOGIN_SETTIMESPEED as crate::Message>::read_body(&mut r, body_size)?)),
             0x0099 => Ok(Self::SMSG_CHANNEL_NOTIFY(<SMSG_CHANNEL_NOTIFY as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1839,6 +1883,7 @@ impl ServerOpcodeMessage {
             0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Server as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Server as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1877,6 +1922,7 @@ impl ServerOpcodeMessage {
             0x0265 => Ok(Self::SMSG_AUCTION_BIDDER_LIST_RESULT(<SMSG_AUCTION_BIDDER_LIST_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x028D => Ok(Self::SMSG_AUCTION_REMOVED_NOTIFICATION(<SMSG_AUCTION_REMOVED_NOTIFICATION as crate::Message>::read_body(&mut r, body_size)?)),
             0x0291 => Ok(Self::SMSG_SERVER_MESSAGE(<SMSG_SERVER_MESSAGE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x029D => Ok(Self::SMSG_STANDSTATE_UPDATE(<SMSG_STANDSTATE_UPDATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x02A9 => Ok(Self::SMSG_CHAT_PLAYER_NOT_FOUND(<SMSG_CHAT_PLAYER_NOT_FOUND as crate::Message>::read_body(&mut r, body_size)?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1960,9 +2006,12 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_server<W: std::io::Write>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_DELETE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_NEW_WORLD(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_TRANSFER_PENDING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_NOTIFY(c) => c.write_encrypted_server(w, e),
@@ -1983,6 +2032,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
@@ -2021,6 +2071,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SERVER_MESSAGE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_STANDSTATE_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
@@ -2037,9 +2088,12 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_DELETE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_NEW_WORLD(c) => c.write_unencrypted_server(w),
+            Self::SMSG_TRANSFER_PENDING(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_NOTIFY(c) => c.write_unencrypted_server(w),
@@ -2060,6 +2114,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
@@ -2098,6 +2153,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_SERVER_MESSAGE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_STANDSTATE_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
@@ -2114,9 +2170,12 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_NEW_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2137,6 +2196,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2175,6 +2235,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_STANDSTATE_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2191,9 +2252,12 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_NEW_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2214,6 +2278,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2252,6 +2317,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_STANDSTATE_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2268,9 +2334,12 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_NEW_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2291,6 +2360,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2329,6 +2399,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_STANDSTATE_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2345,9 +2416,12 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_NEW_WORLD(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
@@ -2368,6 +2442,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
@@ -2406,6 +2481,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_STANDSTATE_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
@@ -2424,9 +2500,12 @@ impl ServerOpcodeMessage {
 impl std::fmt::Display for ServerOpcodeMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
+            ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => "SMSG_CHAR_CREATE",
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
             ServerOpcodeMessage::SMSG_CHAR_DELETE(_) => "SMSG_CHAR_DELETE",
+            ServerOpcodeMessage::SMSG_NEW_WORLD(_) => "SMSG_NEW_WORLD",
+            ServerOpcodeMessage::SMSG_TRANSFER_PENDING(_) => "SMSG_TRANSFER_PENDING",
             ServerOpcodeMessage::SMSG_CHARACTER_LOGIN_FAILED(_) => "SMSG_CHARACTER_LOGIN_FAILED",
             ServerOpcodeMessage::SMSG_LOGIN_SETTIMESPEED(_) => "SMSG_LOGIN_SETTIMESPEED",
             ServerOpcodeMessage::SMSG_CHANNEL_NOTIFY(_) => "SMSG_CHANNEL_NOTIFY",
@@ -2447,6 +2526,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE_Server",
+            ServerOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Server",
             ServerOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND_Server",
             ServerOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM_Server",
             ServerOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM_Server",
@@ -2485,6 +2565,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_AUCTION_BIDDER_LIST_RESULT(_) => "SMSG_AUCTION_BIDDER_LIST_RESULT",
             ServerOpcodeMessage::SMSG_AUCTION_REMOVED_NOTIFICATION(_) => "SMSG_AUCTION_REMOVED_NOTIFICATION",
             ServerOpcodeMessage::SMSG_SERVER_MESSAGE(_) => "SMSG_SERVER_MESSAGE",
+            ServerOpcodeMessage::SMSG_STANDSTATE_UPDATE(_) => "SMSG_STANDSTATE_UPDATE",
             ServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => "SMSG_CHAT_PLAYER_NOT_FOUND",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
@@ -2496,6 +2577,12 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
         })
+    }
+}
+
+impl From<MSG_MOVE_WORLDPORT_ACK> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_WORLDPORT_ACK) -> Self {
+        Self::MSG_MOVE_WORLDPORT_ACK(c)
     }
 }
 
@@ -2514,6 +2601,18 @@ impl From<SMSG_CHAR_ENUM> for ServerOpcodeMessage {
 impl From<SMSG_CHAR_DELETE> for ServerOpcodeMessage {
     fn from(c: SMSG_CHAR_DELETE) -> Self {
         Self::SMSG_CHAR_DELETE(c)
+    }
+}
+
+impl From<SMSG_NEW_WORLD> for ServerOpcodeMessage {
+    fn from(c: SMSG_NEW_WORLD) -> Self {
+        Self::SMSG_NEW_WORLD(c)
+    }
+}
+
+impl From<SMSG_TRANSFER_PENDING> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRANSFER_PENDING) -> Self {
+        Self::SMSG_TRANSFER_PENDING(c)
     }
 }
 
@@ -2634,6 +2733,12 @@ impl From<MSG_MOVE_SET_RUN_MODE_Server> for ServerOpcodeMessage {
 impl From<MSG_MOVE_SET_WALK_MODE_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_SET_WALK_MODE_Server) -> Self {
         Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_TELEPORT_ACK_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_TELEPORT_ACK_Server) -> Self {
+        Self::MSG_MOVE_TELEPORT_ACK(c)
     }
 }
 
@@ -2862,6 +2967,12 @@ impl From<SMSG_AUCTION_REMOVED_NOTIFICATION> for ServerOpcodeMessage {
 impl From<SMSG_SERVER_MESSAGE> for ServerOpcodeMessage {
     fn from(c: SMSG_SERVER_MESSAGE) -> Self {
         Self::SMSG_SERVER_MESSAGE(c)
+    }
+}
+
+impl From<SMSG_STANDSTATE_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_STANDSTATE_UPDATE) -> Self {
+        Self::SMSG_STANDSTATE_UPDATE(c)
     }
 }
 

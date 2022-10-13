@@ -4,7 +4,7 @@ cmsg MSG_MOVE_TELEPORT_ACK_Client = 0x00C7 {
     u32 time_in_msecs;
 } {
     description = "Response to [MSG_MOVE_TELEPORT_ACK_Server], at which point [MSG_MOVE_TELEPORT_ACK_Server] should be sent to observing players.";
-    paste_versions = "1.12 3.3.5";
+    versions = "1 2 3";
 }
 
 smsg MSG_MOVE_TELEPORT_ACK_Server = 0x00C7 {
@@ -12,7 +12,7 @@ smsg MSG_MOVE_TELEPORT_ACK_Server = 0x00C7 {
     u32 movement_counter;
     MovementInfo info;
 } {
-    paste_versions = "1.12 3.3.5";
+    paste_versions = "1.12 2.4.3 3.3.5";
     description = "Can be response to [CMSG_TELEPORT_TO_UNIT].";
     description = "Can also be a response to [MSG_MOVE_TELEPORT_ACK_Client] after being sent.";
 }
