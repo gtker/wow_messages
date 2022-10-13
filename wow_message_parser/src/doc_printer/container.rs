@@ -331,7 +331,7 @@ fn print_container_example_member(
                                 set = true;
                             }
                         }
-                        Equation::NotEquals { .. } => panic!(),
+                        Equation::NotEquals { .. } => unimplemented!("examples for not equals"),
                     }
                 }
                 set
@@ -380,7 +380,8 @@ fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut 
             s.bytes(size.into_iter());
             s.wln("// size");
         }
-        ContainerType::Msg(_) | ContainerType::Struct => panic!("struct/MSG not supported"),
+        ContainerType::Msg(_) => unimplemented!("MSG container example header"),
+        ContainerType::Struct => unreachable!("struct not supported"),
     }
 
     let (opcode, o) = match e.container_type() {

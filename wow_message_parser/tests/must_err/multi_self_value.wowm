@@ -1,0 +1,5 @@
+enum S : u8 {
+    ONE = 1;
+    OTHER = self.value;
+    ANOTHER = self.value;
+}

@@ -1,5 +1,5 @@
 use crate::file_info::FileInfo;
-use crate::Tags;
+use crate::{Tags, ENUM_SELF_VALUE_FIELD};
 use std::process::exit;
 use writer::ErrorWriter;
 
@@ -12,6 +12,7 @@ pub(crate) const ENUM_HAS_BITWISE_AND: i32 = 4;
 pub(crate) const FLAG_HAS_EQUALS: i32 = 5;
 pub(crate) const NO_VERSIONS: i32 = 6;
 pub(crate) const INCORRECT_OPCODE_FOR_MESSAGE: i32 = 6;
+pub(crate) const MULTIPLE_SELF_VALUE: i32 = 6;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -140,4 +141,20 @@ pub(crate) fn incorrect_opcode_for_message(
     s.fileinfo(file_info, format!("Message '{ty_name}' is expected to have opcode '{expected_opcode}' but it has '{actual}'", ));
 
     wowm_exit(s, INCORRECT_OPCODE_FOR_MESSAGE)
+}
+
+pub(crate) fn multiple_self_value(
+    ty_name: &str,
+    file_info: &FileInfo,
+    first_name: &str,
+    second_name: &str,
+) -> ! {
+    let mut s = ErrorWriter::new(format!(
+        "Multiple '{self_value}' defined for enum.",
+        self_value = ENUM_SELF_VALUE_FIELD,
+    ));
+
+    s.fileinfo(file_info, format!("Type '{ty_name} has multiple enumerators with '{self_value}', first field is '{first_name}', second name is '{second_name}'", self_value = ENUM_SELF_VALUE_FIELD));
+
+    wowm_exit(s, MULTIPLE_SELF_VALUE);
 }

@@ -476,3 +476,14 @@ fn incorrect_opcode_errors() {
         INCORRECT_OPCODE_FOR_MESSAGE,
     );
 }
+
+#[test]
+fn multi_self_value_errors() {
+    should_panic(
+        || {
+            let o = must_err_load("multi_self_value.wowm");
+            print_message_stats(&o);
+        },
+        INCORRECT_OPCODE_FOR_MESSAGE,
+    );
+}

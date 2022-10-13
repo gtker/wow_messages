@@ -9,6 +9,7 @@ use pest_derive::Parser;
 use types::definer::DefinerField;
 use types::tags::Tags;
 
+use crate::error_printer::multiple_self_value;
 use crate::file_info::FileInfo;
 use crate::parser::types::parsed::parsed_array::ParsedArray;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
@@ -483,7 +484,7 @@ pub(crate) fn parse_enum(
 
     let mut fields = Vec::new();
 
-    let mut self_value = None;
+    let mut self_value: Option<SelfValueDefinerField> = None;
 
     for item in definer_members {
         let item_rule = item.as_rule();
@@ -507,8 +508,13 @@ pub(crate) fn parse_enum(
         }
 
         if value.as_str().contains(ENUM_SELF_VALUE_FIELD) {
-            if self_value.is_some() {
-                panic!("only one self value allowed")
+            if let Some(first_value) = self_value {
+                multiple_self_value(
+                    ident.as_str(),
+                    &file_info,
+                    first_value.name(),
+                    identifier.as_str(),
+                );
             }
             self_value = Some(SelfValueDefinerField::new(identifier.as_str(), kvs));
         } else {

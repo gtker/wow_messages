@@ -70,7 +70,7 @@ impl From<&str> for DefinerValue {
             };
         }
         if s == ENUM_SELF_VALUE_FIELD {
-            panic!("self.value passed to DefinerValue From<&str>");
+            unreachable!("self.value passed to DefinerValue From<&str>");
         }
 
         panic!("complex passed to definer {:#?}", s);

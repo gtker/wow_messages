@@ -22,7 +22,7 @@ pub(crate) fn print_world_opcodes(
     let ty = match container_type {
         ContainerType::SMsg(_) => SMSG_NAME,
         ContainerType::CMsg(_) => CMSG_NAME,
-        _ => panic!("invalid type passed to opcode printer"),
+        _ => unreachable!("invalid type passed to opcode printer"),
     };
 
     includes(&mut s, v, container_type, Version::World(*version));

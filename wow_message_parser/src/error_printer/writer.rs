@@ -7,12 +7,12 @@ pub struct ErrorWriter {
 }
 
 impl ErrorWriter {
-    pub(crate) fn new(msg: &str) -> Self {
+    pub(crate) fn new(msg: impl AsRef<str>) -> Self {
         let mut s = Self {
             inner: String::with_capacity(8000),
         };
 
-        s.wln(format!("WOWM ERROR: {}", msg));
+        s.wln(format!("WOWM ERROR: {}", msg.as_ref()));
         s.newline();
 
         s
