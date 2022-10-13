@@ -327,6 +327,8 @@ pub(crate) mod msg_move_teleport_ack_client;
 pub use msg_move_teleport_ack_client::*;
 pub(crate) mod msg_move_teleport_ack_server;
 pub use msg_move_teleport_ack_server::*;
+pub(crate) mod msg_move_worldport_ack;
+pub use msg_move_worldport_ack::*;
 pub(crate) mod msg_set_dungeon_difficulty;
 pub use msg_set_dungeon_difficulty::*;
 pub(crate) mod object;

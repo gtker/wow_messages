@@ -6,6 +6,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::wrath::MovementInfo;
+use crate::world::wrath::MSG_MOVE_WORLDPORT_ACK;
 use crate::world::wrath::MSG_SET_DUNGEON_DIFFICULTY;
 use crate::world::wrath::CMSG_CHAR_CREATE;
 use crate::world::wrath::CMSG_CHAR_ENUM;
@@ -107,6 +108,7 @@ use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
+    MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
@@ -210,6 +212,7 @@ pub enum ClientOpcodeMessage {
 impl ClientOpcodeMessage {
     fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
+            0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY as crate::Message>::read_body(&mut r, body_size)?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
@@ -381,6 +384,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_client<W: std::io::Write>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
@@ -485,6 +489,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
@@ -589,6 +594,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -693,6 +699,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -797,6 +804,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -901,6 +909,7 @@ impl ClientOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
@@ -1016,6 +1025,7 @@ impl ClientOpcodeMessage {
 impl std::fmt::Display for ClientOpcodeMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
+            ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ClientOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY",
             ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
@@ -1115,6 +1125,12 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
+    }
+}
+
+impl From<MSG_MOVE_WORLDPORT_ACK> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_WORLDPORT_ACK) -> Self {
+        Self::MSG_MOVE_WORLDPORT_ACK(c)
     }
 }
 
@@ -1791,6 +1807,7 @@ use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
+    MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY),
     SMSG_CHAR_CREATE(SMSG_CHAR_CREATE),
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
@@ -1879,6 +1896,7 @@ pub enum ServerOpcodeMessage {
 impl ServerOpcodeMessage {
     fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
+            0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY as crate::Message>::read_body(&mut r, body_size)?)),
             0x003A => Ok(Self::SMSG_CHAR_CREATE(<SMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2116,6 +2134,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_encrypted_server<W: std::io::Write>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
@@ -2205,6 +2224,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "sync")]
     pub fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
@@ -2294,6 +2314,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2383,6 +2404,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "tokio")]
     pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2472,6 +2494,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2561,6 +2584,7 @@ impl ServerOpcodeMessage {
     #[cfg(feature = "async-std")]
     pub async fn astd_write_unencrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
         match self {
+            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
@@ -2652,6 +2676,7 @@ impl ServerOpcodeMessage {
 impl std::fmt::Display for ServerOpcodeMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
+            ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ServerOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY",
             ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => "SMSG_CHAR_CREATE",
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
@@ -2736,6 +2761,12 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
         })
+    }
+}
+
+impl From<MSG_MOVE_WORLDPORT_ACK> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_WORLDPORT_ACK) -> Self {
+        Self::MSG_MOVE_WORLDPORT_ACK(c)
     }
 }
 
