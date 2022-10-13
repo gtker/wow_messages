@@ -11,6 +11,7 @@ cmsg MSG_MOVE_START_TURN_RIGHT_Client = 0x00BD {
 }
 
 cmsg MSG_MOVE_START_TURN_RIGHT_Client = 0x00BD {
+    PackedGuid guid;
     MovementInfo info;
 } {
     versions = "3.3.5";

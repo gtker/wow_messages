@@ -4,7 +4,7 @@ use crate::world::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm#L45):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm:46`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm#L46):
 /// ```text
 /// smsg MSG_MOVE_SET_WALK_MODE_Server = 0x00C3 {
 ///     PackedGuid guid;
@@ -70,7 +70,7 @@ mod test {
          0xC3, 0x26, 0x29, 0xA7, 0x42, 0x2E, 0x0E, 0xC3, 0x40, 0x00, 0x00, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm` line 66.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm` line 67.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_SET_WALK_MODE_Server0() {
@@ -110,7 +110,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm` line 66.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm` line 67.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_SET_WALK_MODE_Server0() {
@@ -150,7 +150,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm` line 66.
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_set_walk_mode.wowm` line 67.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_SET_WALK_MODE_Server0() {

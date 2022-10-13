@@ -4,7 +4,7 @@ use crate::world::wrath::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_ascend.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_ascend.wowm#L20):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_ascend.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_ascend.wowm#L21):
 /// ```text
 /// smsg MSG_MOVE_START_ASCEND_Server = 0x0359 {
 ///     PackedGuid guid;

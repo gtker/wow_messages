@@ -4,7 +4,7 @@ use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_up.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_up.wowm#L26):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_up.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_pitch_up.wowm#L27):
 /// ```text
 /// smsg MSG_MOVE_START_PITCH_UP_Server = 0x00BF {
 ///     PackedGuid guid;

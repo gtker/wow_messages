@@ -11,6 +11,7 @@ cmsg MSG_MOVE_START_SWIM_Client = 0x00CA {
 }
 
 cmsg MSG_MOVE_START_SWIM_Client = 0x00CA {
+    PackedGuid guid;
     MovementInfo info;
 } {
     versions = "3.3.5";
