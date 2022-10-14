@@ -291,7 +291,7 @@ fn parse_struct(
 
             return ParsedContainer::new(identifier, v, kvs, container_type, file_info);
         }
-        members.push(parse_struct_member(member));
+        members.push(parse_struct_member(member, identifier, &file_info));
     }
 
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
@@ -309,7 +309,11 @@ fn unimplemented_member() -> ParsedStructMember {
     ))
 }
 
-fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
+fn parse_struct_member(
+    mut t: Pair<Rule>,
+    ty_name: &str,
+    file_info: &FileInfo,
+) -> ParsedStructMember {
     if t.as_rule() == Rule::container_member {
         t = t.into_inner().next().unwrap();
     }
@@ -374,14 +378,15 @@ fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
         Rule::if_statement => {
             let mut f = t.into_inner();
 
-            let (conditions, members) = parse_if_statement(&mut f);
+            let (conditions, members) = parse_if_statement(&mut f, ty_name, file_info);
 
             let else_if_statement = f.clone().filter(|a| a.as_rule() == Rule::else_if_statement);
             let mut else_ifs = Vec::new();
             for statement in else_if_statement {
-                let (conditions, members) = parse_if_statement(&mut statement.into_inner());
+                let (conditions, members) =
+                    parse_if_statement(&mut statement.into_inner(), ty_name, file_info);
                 else_ifs.push(ParsedIfStatement::new(
-                    Conditional::new(&conditions),
+                    Conditional::new(&conditions, ty_name, file_info),
                     members,
                     vec![],
                     vec![],
@@ -395,7 +400,7 @@ fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
                 let mut v = Vec::new();
 
                 for member in else_statement {
-                    v.push(parse_struct_member(member));
+                    v.push(parse_struct_member(member, ty_name, file_info));
                 }
 
                 v
@@ -403,7 +408,7 @@ fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
                 Vec::new()
             };
 
-            let conditional = Conditional::new(&conditions);
+            let conditional = Conditional::new(&conditions, ty_name, file_info);
             ParsedStructMember::IfStatement(ParsedIfStatement::new(
                 conditional,
                 members,
@@ -419,7 +424,7 @@ fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
             let mut v = Vec::new();
 
             for member in members {
-                v.push(parse_struct_member(member));
+                v.push(parse_struct_member(member, ty_name, file_info));
             }
 
             ParsedStructMember::OptionalStatement(ParsedOptionalStatement::new(name, v))
@@ -430,7 +435,11 @@ fn parse_struct_member(mut t: Pair<Rule>) -> ParsedStructMember {
     }
 }
 
-fn parse_if_statement(f: &mut Pairs<Rule>) -> (Vec<Condition>, Vec<ParsedStructMember>) {
+fn parse_if_statement(
+    f: &mut Pairs<Rule>,
+    ty_name: &str,
+    file_info: &FileInfo,
+) -> (Vec<Condition>, Vec<ParsedStructMember>) {
     let conditionals: Vec<Pair<Rule>> = f
         .clone()
         .filter(|a| a.as_rule() == Rule::if_statement_conditional)
@@ -460,7 +469,7 @@ fn parse_if_statement(f: &mut Pairs<Rule>) -> (Vec<Condition>, Vec<ParsedStructM
 
         let mut members = Vec::new();
         for m in container_members {
-            members.push(parse_struct_member(m));
+            members.push(parse_struct_member(m, ty_name, file_info));
         }
 
         members

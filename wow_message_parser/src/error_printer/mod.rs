@@ -17,6 +17,7 @@ pub(crate) const INVALID_SELF_SIZE: i32 = 9;
 pub(crate) const INVALID_DEFINER_VALUE: i32 = 10;
 pub(crate) const DUPLICATE_DEFINER_VALUES: i32 = 11;
 pub(crate) const INVALID_INTEGER_TYPE: i32 = 11;
+pub(crate) const NON_MATCHING_IF_VARIABLES: i32 = 11;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -226,4 +227,17 @@ pub(crate) fn invalid_integer_type(enum_name: &str, int_name: &str, file_info: &
     );
 
     wowm_exit(s, INVALID_INTEGER_TYPE);
+}
+
+pub(crate) fn non_matching_if_statement_variables(
+    ty_name: &str,
+    first_variable_name: &str,
+    second_variable_name: &str,
+    file_info: &FileInfo,
+) -> ! {
+    let mut s = ErrorWriter::new("If statement variables are not the same");
+
+    s.fileinfo(file_info, format!("Type '{ty_name}' has if statement with variable '{first_variable_name}' and '{second_variable_name}'. Wowm currently only allows or (||) expressions with the same variable'"));
+
+    wowm_exit(s, NON_MATCHING_IF_VARIABLES);
 }

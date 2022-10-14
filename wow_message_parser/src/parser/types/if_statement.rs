@@ -1,3 +1,5 @@
+use crate::error_printer::non_matching_if_statement_variables;
+use crate::file_info::FileInfo;
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::ty::Type;
 use crate::rust_printer::field_name_to_rust_name;
@@ -142,16 +144,13 @@ impl Conditional {
         &self.equations
     }
 
-    pub(crate) fn new(conditions: &[Condition]) -> Self {
+    pub(crate) fn new(conditions: &[Condition], ty_name: &str, file_info: &FileInfo) -> Self {
         let variable_name = conditions[0].value.to_string();
 
         let mut equations = Vec::new();
         for c in conditions {
             if c.value != variable_name {
-                panic!(
-                    "matching variable in if statement '||' is not the same, '{}' and '{}'",
-                    variable_name, c.value
-                );
+                non_matching_if_statement_variables(ty_name, &variable_name, &c.value, file_info);
             }
 
             let v = match c.operator {

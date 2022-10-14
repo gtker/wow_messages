@@ -1,0 +1,17 @@
+enum A : u8 {
+    ONE = 1;
+    TWO = 2;
+}
+enum B : u8 {
+    ONE = 1;
+    TWO = 2;
+}
+
+struct T {
+    A a;
+    B b;
+    if (a == ONE
+     || b == TWO) {
+        u8 basic;
+     }
+}
