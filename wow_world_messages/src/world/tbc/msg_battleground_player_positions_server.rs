@@ -1,0 +1,2 @@
+pub use crate::shared::msg_battleground_player_positions_server123::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
+

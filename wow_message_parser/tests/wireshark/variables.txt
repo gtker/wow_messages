@@ -1,4 +1,5 @@
     guint32 amount_of_auras = 0;
+    guint32 amount_of_carriers = 0;
     guint32 amount_of_characters = 0;
     guint32 amount_of_choice_item_rewards = 0;
     guint32 amount_of_cooldowns = 0;
@@ -9,7 +10,6 @@
     guint32 amount_of_events = 0;
     guint32 amount_of_extra_fields = 0;
     guint32 amount_of_factions = 0;
-    guint32 amount_of_flag_carriers = 0;
     guint32 amount_of_friends = 0;
     guint32 amount_of_gossip_items = 0;
     guint32 amount_of_hits = 0;
@@ -34,6 +34,7 @@
     guint32 amount_of_states = 0;
     guint32 amount_of_strings = 0;
     guint32 amount_of_targets = 0;
+    guint32 amount_of_teammates = 0;
     guint32 amount_of_zones = 0;
     guint32 aura_type = 0;
     guint32 category = 0;

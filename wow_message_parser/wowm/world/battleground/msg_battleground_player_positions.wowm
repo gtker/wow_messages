@@ -7,21 +7,17 @@ struct BattlegroundPlayerPosition {
     f32 position_x;
     f32 position_y;
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }
 
-
 smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
-    u32 amount_of_carriers = 0 {
-        comment = "vmangos/cmangos/mangoszero: All force to zero";
+    u32 amount_of_teammates; 
+    BattlegroundPlayerPosition[amount_of_teammates] teammates;
+    u8 amount_of_carriers {
+        comment = "vmangos only sends the carrier of the player team. No emu ever sends more than 2.";
     }
-    u32 amount_of_flag_carriers {
-        valid_range = "0 2";
-    }
-    BattlegroundPlayerPosition[amount_of_flag_carriers] flag_carriers;
+    BattlegroundPlayerPosition[amount_of_carriers] carriers;
 } {
-    comment = "vmangos/cmangos/mangoszero: Seems to be older versions used to be `amount_of_carriers` followed by array. All versions now just set first to 0 and have second be 0/1/2.";
-    comment = "vmangos/cmangos/mangoszero: For AB and AV always set to all zero.";
-    versions = "1.12";
+    versions = "1 2 3";
 }
 

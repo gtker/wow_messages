@@ -198,7 +198,7 @@
         },
         { &hf_woww_amount_of_carriers,
             { "Amount Of Carriers", "woww.amount.of.carriers",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -264,12 +264,6 @@
         },
         { &hf_woww_amount_of_factions,
             { "Amount Of Factions", "woww.amount.of.factions",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_amount_of_flag_carriers,
-            { "Amount Of Flag Carriers", "woww.amount.of.flag.carriers",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -426,6 +420,12 @@
         },
         { &hf_woww_amount_of_targets,
             { "Amount Of Targets", "woww.amount.of.targets",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_amount_of_teammates,
+            { "Amount Of Teammates", "woww.amount.of.teammates",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
