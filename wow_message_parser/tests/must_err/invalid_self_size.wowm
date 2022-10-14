@@ -1,4 +1,4 @@
 clogin CMD_AUTH_TEST = 0x00 {
     CString s;
     u8 size = self.size;
-}
+} { versions = "1.12"; }

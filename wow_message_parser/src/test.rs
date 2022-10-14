@@ -495,7 +495,11 @@ fn invalid_self_size_errors() {
     should_panic(
         || {
             let o = must_err_load("invalid_self_size.wowm");
-            print_message_stats(&o);
+            print_struct(
+                o.all_containers().next().unwrap(),
+                &o,
+                Version::World(WorldVersion::Minor(1, 12)),
+            );
         },
         INVALID_SELF_SIZE,
     );
