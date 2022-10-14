@@ -39,6 +39,7 @@ use crate::world::wrath::CMSG_PLAYER_LOGIN;
 use crate::world::wrath::CMSG_PLAYER_LOGOUT;
 use crate::world::wrath::CMSG_LOGOUT_REQUEST;
 use crate::world::wrath::CMSG_LOGOUT_CANCEL;
+use crate::world::wrath::CMSG_NAME_QUERY;
 use crate::world::wrath::CMSG_MESSAGECHAT;
 use crate::world::wrath::CMSG_JOIN_CHANNEL;
 use crate::world::wrath::CMSG_LEAVE_CHANNEL;
@@ -152,6 +153,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PLAYER_LOGOUT(CMSG_PLAYER_LOGOUT),
     CMSG_LOGOUT_REQUEST(CMSG_LOGOUT_REQUEST),
     CMSG_LOGOUT_CANCEL(CMSG_LOGOUT_CANCEL),
+    CMSG_NAME_QUERY(CMSG_NAME_QUERY),
     CMSG_MESSAGECHAT(CMSG_MESSAGECHAT),
     CMSG_JOIN_CHANNEL(CMSG_JOIN_CHANNEL),
     CMSG_LEAVE_CHANNEL(CMSG_LEAVE_CHANNEL),
@@ -267,6 +269,7 @@ impl ClientOpcodeMessage {
             0x004A => Ok(Self::CMSG_PLAYER_LOGOUT(<CMSG_PLAYER_LOGOUT as crate::Message>::read_body(&mut r, body_size)?)),
             0x004B => Ok(Self::CMSG_LOGOUT_REQUEST(<CMSG_LOGOUT_REQUEST as crate::Message>::read_body(&mut r, body_size)?)),
             0x004E => Ok(Self::CMSG_LOGOUT_CANCEL(<CMSG_LOGOUT_CANCEL as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0050 => Ok(Self::CMSG_NAME_QUERY(<CMSG_NAME_QUERY as crate::Message>::read_body(&mut r, body_size)?)),
             0x0095 => Ok(Self::CMSG_MESSAGECHAT(<CMSG_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0097 => Ok(Self::CMSG_JOIN_CHANNEL(<CMSG_JOIN_CHANNEL as crate::Message>::read_body(&mut r, body_size)?)),
             0x0098 => Ok(Self::CMSG_LEAVE_CHANNEL(<CMSG_LEAVE_CHANNEL as crate::Message>::read_body(&mut r, body_size)?)),
@@ -450,6 +453,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGOUT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOGOUT_REQUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOGOUT_CANCEL(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_NAME_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MESSAGECHAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_JOIN_CHANNEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LEAVE_CHANNEL(c) => c.write_encrypted_client(w, e),
@@ -566,6 +570,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGOUT(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOGOUT_REQUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOGOUT_CANCEL(c) => c.write_unencrypted_client(w),
+            Self::CMSG_NAME_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_MESSAGECHAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_JOIN_CHANNEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_LEAVE_CHANNEL(c) => c.write_unencrypted_client(w),
@@ -682,6 +687,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGOUT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MESSAGECHAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LEAVE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -798,6 +804,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGOUT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MESSAGECHAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LEAVE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
@@ -914,6 +921,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGOUT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MESSAGECHAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LEAVE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1030,6 +1038,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_LOGOUT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MESSAGECHAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_JOIN_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LEAVE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
@@ -1157,6 +1166,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PLAYER_LOGOUT(_) => "CMSG_PLAYER_LOGOUT",
             ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(_) => "CMSG_LOGOUT_REQUEST",
             ClientOpcodeMessage::CMSG_LOGOUT_CANCEL(_) => "CMSG_LOGOUT_CANCEL",
+            ClientOpcodeMessage::CMSG_NAME_QUERY(_) => "CMSG_NAME_QUERY",
             ClientOpcodeMessage::CMSG_MESSAGECHAT(_) => "CMSG_MESSAGECHAT",
             ClientOpcodeMessage::CMSG_JOIN_CHANNEL(_) => "CMSG_JOIN_CHANNEL",
             ClientOpcodeMessage::CMSG_LEAVE_CHANNEL(_) => "CMSG_LEAVE_CHANNEL",
@@ -1433,6 +1443,12 @@ impl From<CMSG_LOGOUT_REQUEST> for ClientOpcodeMessage {
 impl From<CMSG_LOGOUT_CANCEL> for ClientOpcodeMessage {
     fn from(c: CMSG_LOGOUT_CANCEL) -> Self {
         Self::CMSG_LOGOUT_CANCEL(c)
+    }
+}
+
+impl From<CMSG_NAME_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_NAME_QUERY) -> Self {
+        Self::CMSG_NAME_QUERY(c)
     }
 }
 
@@ -1908,6 +1924,7 @@ use crate::world::wrath::SMSG_LOGIN_SETTIMESPEED;
 use crate::world::wrath::SMSG_LOGOUT_RESPONSE;
 use crate::world::wrath::SMSG_LOGOUT_COMPLETE;
 use crate::world::wrath::SMSG_LOGOUT_CANCEL_ACK;
+use crate::world::wrath::SMSG_NAME_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_CONTACT_LIST;
 use crate::world::wrath::SMSG_CHANNEL_NOTIFY;
 use crate::world::wrath::SMSG_CHANNEL_LIST;
@@ -2014,6 +2031,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOGOUT_RESPONSE(SMSG_LOGOUT_RESPONSE),
     SMSG_LOGOUT_COMPLETE(SMSG_LOGOUT_COMPLETE),
     SMSG_LOGOUT_CANCEL_ACK(SMSG_LOGOUT_CANCEL_ACK),
+    SMSG_NAME_QUERY_RESPONSE(SMSG_NAME_QUERY_RESPONSE),
     SMSG_CONTACT_LIST(SMSG_CONTACT_LIST),
     SMSG_CHANNEL_NOTIFY(SMSG_CHANNEL_NOTIFY),
     SMSG_CHANNEL_LIST(SMSG_CHANNEL_LIST),
@@ -2122,6 +2140,7 @@ impl ServerOpcodeMessage {
             0x004C => Ok(Self::SMSG_LOGOUT_RESPONSE(<SMSG_LOGOUT_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
             0x004D => Ok(Self::SMSG_LOGOUT_COMPLETE(<SMSG_LOGOUT_COMPLETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x004F => Ok(Self::SMSG_LOGOUT_CANCEL_ACK(<SMSG_LOGOUT_CANCEL_ACK as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0051 => Ok(Self::SMSG_NAME_QUERY_RESPONSE(<SMSG_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0067 => Ok(Self::SMSG_CONTACT_LIST(<SMSG_CONTACT_LIST as crate::Message>::read_body(&mut r, body_size)?)),
             0x0099 => Ok(Self::SMSG_CHANNEL_NOTIFY(<SMSG_CHANNEL_NOTIFY as crate::Message>::read_body(&mut r, body_size)?)),
             0x009B => Ok(Self::SMSG_CHANNEL_LIST(<SMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2379,6 +2398,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CONTACT_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_NOTIFY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_LIST(c) => c.write_encrypted_server(w, e),
@@ -2488,6 +2508,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_unencrypted_server(w),
+            Self::SMSG_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CONTACT_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_NOTIFY(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_LIST(c) => c.write_unencrypted_server(w),
@@ -2597,6 +2618,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CONTACT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2706,6 +2728,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CONTACT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2815,6 +2838,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CONTACT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2924,6 +2948,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CONTACT_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_server(w).await,
@@ -3035,6 +3060,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(_) => "SMSG_LOGOUT_RESPONSE",
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE(_) => "SMSG_LOGOUT_COMPLETE",
             ServerOpcodeMessage::SMSG_LOGOUT_CANCEL_ACK(_) => "SMSG_LOGOUT_CANCEL_ACK",
+            ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(_) => "SMSG_NAME_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_CONTACT_LIST(_) => "SMSG_CONTACT_LIST",
             ServerOpcodeMessage::SMSG_CHANNEL_NOTIFY(_) => "SMSG_CHANNEL_NOTIFY",
             ServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => "SMSG_CHANNEL_LIST",
@@ -3319,6 +3345,12 @@ impl From<SMSG_LOGOUT_COMPLETE> for ServerOpcodeMessage {
 impl From<SMSG_LOGOUT_CANCEL_ACK> for ServerOpcodeMessage {
     fn from(c: SMSG_LOGOUT_CANCEL_ACK) -> Self {
         Self::SMSG_LOGOUT_CANCEL_ACK(c)
+    }
+}
+
+impl From<SMSG_NAME_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_NAME_QUERY_RESPONSE) -> Self {
+        Self::SMSG_NAME_QUERY_RESPONSE(c)
     }
 }
 

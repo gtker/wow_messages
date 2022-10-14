@@ -93,6 +93,7 @@
 - [GuildCommandResult](docs/guildcommandresult.md)
 - [GuildEmblemResult](docs/guildemblemresult.md)
 - [GuildEvent](docs/guildevent.md)
+- [HasDeclinedNames](docs/hasdeclinednames.md)
 - [HitInfo](docs/hitinfo.md)
 - [InfoBlock](docs/infoblock.md)
 - [InstanceResetFailedReason](docs/instanceresetfailedreason.md)

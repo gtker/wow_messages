@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 cmsg CMSG_NAME_QUERY = 0x50 {
     Guid guid;
