@@ -1,9 +1,14 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_BATTLEMASTER_JOIN = 0x02EE {
-    Guid guid;
+    Guid guid {
+        comment = "vmangos: battlemaster guid, or player guid if joining queue from BG portal";
+    }
     Map map;
-    u32 instance_id;
+    u32 instance_id {
+        comment = "vmangos: 0 if First Available selected";
+    }
     Bool join_as_group;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
+
 

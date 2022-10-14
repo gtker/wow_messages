@@ -74,6 +74,8 @@ pub(crate) mod cmsg_battlefield_status;
 pub use cmsg_battlefield_status::*;
 pub(crate) mod cmsg_battlemaster_hello;
 pub use cmsg_battlemaster_hello::*;
+pub(crate) mod cmsg_battlemaster_join;
+pub use cmsg_battlemaster_join::*;
 pub(crate) mod cmsg_cancel_channelling;
 pub use cmsg_cancel_channelling::*;
 pub(crate) mod cmsg_channel_announcements;

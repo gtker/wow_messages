@@ -314,6 +314,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [CMSG_BATTLEFIELD_LIST](cmsg_battlefield_list.md)
+* [CMSG_BATTLEMASTER_JOIN](cmsg_battlemaster_join.md)
 * [Character](character.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
 * [SMSG_NEW_WORLD](smsg_new_world.md)
@@ -609,6 +610,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [CMSG_BATTLEFIELD_LIST](cmsg_battlefield_list.md)
+* [CMSG_BATTLEMASTER_JOIN](cmsg_battlemaster_join.md)
 * [Character](character.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
