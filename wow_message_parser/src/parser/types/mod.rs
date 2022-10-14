@@ -1,3 +1,6 @@
+use crate::error_printer::invalid_integer_type;
+use crate::file_info::FileInfo;
+use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::rust_printer::field_name_to_rust_name;
 use std::cmp::Ordering;
 use std::fmt::{Display, Formatter};
@@ -194,23 +197,14 @@ impl IntegerType {
             },
         }
     }
-}
 
-impl From<&str> for IntegerType {
-    fn from(s: &str) -> Self {
-        match s {
-            "u8" | "Bool" => IntegerType::U8,
-            "u16" => IntegerType::U16(Endianness::Little),
-            "u16_be" => IntegerType::U16(Endianness::Big),
-            "u32" | "Spell" | "Item" | "Copper" | "Seconds" | "Milliseconds" => {
-                IntegerType::U32(Endianness::Little)
+    pub(crate) fn from_str(s: &str, ty_name: &str, file_info: &FileInfo) -> Self {
+        let t = ParsedType::from_str(s);
+        match t {
+            ParsedType::Integer(e) => e,
+            _ => {
+                invalid_integer_type(ty_name, s, file_info);
             }
-            "u32_be" => IntegerType::U32(Endianness::Big),
-            "u64" => IntegerType::U64(Endianness::Little),
-            "u64_be" => IntegerType::U64(Endianness::Big),
-            "i32" => IntegerType::I32(Endianness::Little),
-            "i32_be" => IntegerType::I32(Endianness::Big),
-            _ => panic!("invalid basic type attempted to be created as IntegerType"),
         }
     }
 }

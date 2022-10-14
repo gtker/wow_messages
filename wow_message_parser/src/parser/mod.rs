@@ -19,6 +19,7 @@ use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
 use crate::parser::types::parsed::parsed_ty::ParsedType;
+use crate::parser::types::IntegerType;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::DefinerType;
 use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD, UNIMPLEMENTED};
@@ -540,7 +541,7 @@ pub(crate) fn parse_enum(
         ident.as_str(),
         definer_ty,
         fields,
-        basic_type.as_str().into(),
+        IntegerType::from_str(basic_type.as_str(), ident.as_str(), &file_info),
         self_value,
         extras,
         file_info,

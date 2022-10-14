@@ -16,6 +16,7 @@ pub(crate) const MULTIPLE_SELF_VALUE: i32 = 8;
 pub(crate) const INVALID_SELF_SIZE: i32 = 9;
 pub(crate) const INVALID_DEFINER_VALUE: i32 = 10;
 pub(crate) const DUPLICATE_DEFINER_VALUES: i32 = 11;
+pub(crate) const INVALID_INTEGER_TYPE: i32 = 11;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -207,11 +208,22 @@ pub(crate) fn duplicate_definer_value(
     let mut s = ErrorWriter::new("Definer has two fields with the same value.");
 
     s.fileinfo(file_info,
-    format!(
-        "Type '{ty_name}' has enumerator '{first_enumerator_name}' and enumerator '{second_enumerator_name}' with the same value '{value}'",
-        first_enumerator_name = first_enumerator_name.as_ref(),
-    )
+               format!(
+                   "Type '{ty_name}' has enumerator '{first_enumerator_name}' and enumerator '{second_enumerator_name}' with the same value '{value}'",
+                   first_enumerator_name = first_enumerator_name.as_ref(),
+               ),
     );
 
     wowm_exit(s, DUPLICATE_DEFINER_VALUES);
+}
+
+pub(crate) fn invalid_integer_type(enum_name: &str, int_name: &str, file_info: &FileInfo) -> ! {
+    let mut s = ErrorWriter::new("Invalid integer type");
+
+    s.fileinfo(
+        file_info,
+        format!("Type '{enum_name}' using invalid integer type '{int_name}'"),
+    );
+
+    wowm_exit(s, INVALID_INTEGER_TYPE);
 }
