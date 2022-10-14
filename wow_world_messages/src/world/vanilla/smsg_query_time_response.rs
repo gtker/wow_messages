@@ -5,7 +5,7 @@ use std::io::{Write, Read};
 /// Reply to [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME).
 /// [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME) and this reply does not actually appear to set the time. Instead [`SMSG_LOGIN_SETTIMESPEED`](crate::world::vanilla::SMSG_LOGIN_SETTIMESPEED) seems to correctly set the time. Running the client with `-console` will print the date when [`SMSG_LOGIN_SETTIMESPEED`](crate::world::vanilla::SMSG_LOGIN_SETTIMESPEED) is received, but not when this message is received.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm#L1):
 /// ```text
 /// smsg SMSG_QUERY_TIME_RESPONSE = 0x01CF {
 ///     u32 time;
@@ -57,7 +57,7 @@ mod test {
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xCF, 0x01, 0x94, 0x98, 0x50, 0x61, ];
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_QUERY_TIME_RESPONSE0() {
@@ -82,7 +82,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 11.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_QUERY_TIME_RESPONSE0() {
@@ -107,7 +107,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 11.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_QUERY_TIME_RESPONSE0() {

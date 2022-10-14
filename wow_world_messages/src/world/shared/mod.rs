@@ -49,6 +49,7 @@ pub mod cmsg_next_cinematic_camera123;
 pub mod cmsg_ping1_1223;
 pub mod cmsg_player_login123;
 pub mod cmsg_player_logout123;
+pub mod cmsg_query_time1_1223;
 pub mod cmsg_realm_split2_4_33;
 pub mod cmsg_repop_request123;
 pub mod cmsg_request_account_data123;

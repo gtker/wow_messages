@@ -14,7 +14,7 @@ use std::io::{Write, Read};
 pub struct SMSG_LOGIN_SETTIMESPEED {
     /// Current server datetime.
     ///
-    /// Running the client with `-console` verifies that this message in this format sets the correct datetime. `SMSG_QUERY_TIME_RESPONSE` will not set this.
+    /// Running the client with `-console` verifies that this message in this format sets the correct datetime. [`SMSG_QUERY_TIME_RESPONSE`](crate::world::wrath::SMSG_QUERY_TIME_RESPONSE) will not set this.
     ///
     pub datetime: DateTime,
     /// How many minutes should pass by every second.
