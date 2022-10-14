@@ -72,6 +72,7 @@ use crate::world::tbc::CMSG_SET_TARGET_OBSOLETE;
 use crate::world::tbc::CMSG_ATTACKSWING;
 use crate::world::tbc::CMSG_ATTACKSTOP;
 use crate::world::tbc::CMSG_REPOP_REQUEST;
+use crate::world::tbc::CMSG_DUEL_ACCEPTED;
 use crate::world::tbc::CMSG_ACTIVATETAXI;
 use crate::world::tbc::CMSG_PING;
 use crate::world::tbc::CMSG_SETSHEATHED;
@@ -177,6 +178,7 @@ pub enum ClientOpcodeMessage {
     CMSG_ATTACKSWING(CMSG_ATTACKSWING),
     CMSG_ATTACKSTOP(CMSG_ATTACKSTOP),
     CMSG_REPOP_REQUEST(CMSG_REPOP_REQUEST),
+    CMSG_DUEL_ACCEPTED(CMSG_DUEL_ACCEPTED),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
     CMSG_PING(CMSG_PING),
     CMSG_SETSHEATHED(CMSG_SETSHEATHED),
@@ -284,6 +286,7 @@ impl ClientOpcodeMessage {
             0x0141 => Ok(Self::CMSG_ATTACKSWING(<CMSG_ATTACKSWING as crate::Message>::read_body(&mut r, body_size)?)),
             0x0142 => Ok(Self::CMSG_ATTACKSTOP(<CMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size)?)),
             0x015A => Ok(Self::CMSG_REPOP_REQUEST(<CMSG_REPOP_REQUEST as crate::Message>::read_body(&mut r, body_size)?)),
+            0x016C => Ok(Self::CMSG_DUEL_ACCEPTED(<CMSG_DUEL_ACCEPTED as crate::Message>::read_body(&mut r, body_size)?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size)?)),
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size)?)),
             0x01E0 => Ok(Self::CMSG_SETSHEATHED(<CMSG_SETSHEATHED as crate::Message>::read_body(&mut r, body_size)?)),
@@ -459,6 +462,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSTOP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REPOP_REQUEST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_DUEL_ACCEPTED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SETSHEATHED(c) => c.write_encrypted_client(w, e),
@@ -567,6 +571,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSTOP(c) => c.write_unencrypted_client(w),
             Self::CMSG_REPOP_REQUEST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_DUEL_ACCEPTED(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_SETSHEATHED(c) => c.write_unencrypted_client(w),
@@ -675,6 +680,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_DUEL_ACCEPTED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -783,6 +789,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_DUEL_ACCEPTED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_unencrypted_client(w).await,
@@ -891,6 +898,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPOP_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_DUEL_ACCEPTED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_encrypted_client(w, e).await,
@@ -999,6 +1007,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPOP_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_DUEL_ACCEPTED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_unencrypted_client(w).await,
@@ -1142,6 +1151,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_ATTACKSWING(_) => "CMSG_ATTACKSWING",
             ClientOpcodeMessage::CMSG_ATTACKSTOP(_) => "CMSG_ATTACKSTOP",
             ClientOpcodeMessage::CMSG_REPOP_REQUEST(_) => "CMSG_REPOP_REQUEST",
+            ClientOpcodeMessage::CMSG_DUEL_ACCEPTED(_) => "CMSG_DUEL_ACCEPTED",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_SETSHEATHED(_) => "CMSG_SETSHEATHED",
@@ -1575,6 +1585,12 @@ impl From<CMSG_ATTACKSTOP> for ClientOpcodeMessage {
 impl From<CMSG_REPOP_REQUEST> for ClientOpcodeMessage {
     fn from(c: CMSG_REPOP_REQUEST) -> Self {
         Self::CMSG_REPOP_REQUEST(c)
+    }
+}
+
+impl From<CMSG_DUEL_ACCEPTED> for ClientOpcodeMessage {
+    fn from(c: CMSG_DUEL_ACCEPTED) -> Self {
+        Self::CMSG_DUEL_ACCEPTED(c)
     }
 }
 

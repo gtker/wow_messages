@@ -42,6 +42,7 @@ pub mod cmsg_char_enum123;
 pub mod cmsg_char_rename123;
 pub mod cmsg_chat_ignored2_4_33;
 pub mod cmsg_complete_cinematic123;
+pub mod cmsg_duel_accepted123;
 pub mod cmsg_join_channel2_4_33;
 pub mod cmsg_leave_channel2_4_33;
 pub mod cmsg_logout_cancel123;
