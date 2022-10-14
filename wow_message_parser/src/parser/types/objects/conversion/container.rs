@@ -538,7 +538,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 let v = e.get_field_with_name(&value).unwrap().value().int();
                 TestValue::Enum(ContainerValue::new(v, value))
             } else {
-                panic!("unable to find '{}' in '{}'", s, c.name())
+                complex_not_found(c.name(), c.tags(), &c.file_info, s);
             }
         }
         ParsedType::UpdateMask | ParsedType::AuraMask => {
