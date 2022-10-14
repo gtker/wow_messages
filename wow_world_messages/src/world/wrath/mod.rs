@@ -372,6 +372,8 @@ pub(crate) mod smsg_battlefield_list;
 pub use smsg_battlefield_list::*;
 pub(crate) mod smsg_battleground_player_joined;
 pub use smsg_battleground_player_joined::*;
+pub(crate) mod smsg_battleground_player_left;
+pub use smsg_battleground_player_left::*;
 pub(crate) mod smsg_bindpointupdate;
 pub use smsg_bindpointupdate::*;
 pub(crate) mod smsg_cancel_combat;

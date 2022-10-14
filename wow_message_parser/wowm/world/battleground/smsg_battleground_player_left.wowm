@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_BATTLEGROUND_PLAYER_LEFT = 0x02ED {
     Guid guid;
