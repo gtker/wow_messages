@@ -640,12 +640,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_battle_ground_type_id,
-            { "Battle Ground Type Id", "woww.battle.ground.type.id",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_battlefield_port_action,
             { "Battlefield Port Action", "woww.battlefield.port.action",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_battlefield_port_action_strings), 0,

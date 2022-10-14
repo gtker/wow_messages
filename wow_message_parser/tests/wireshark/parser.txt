@@ -789,9 +789,7 @@
             ptvcursor_add(ptv, hf_woww_requested_rank, 4, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_LEAVE_BATTLEFIELD:
-            ptvcursor_add(ptv, hf_woww_unknown_int, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_battle_ground_type_id, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_unknown_int, 2, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_LEAVE_CHANNEL:
             add_cstring(ptv, &hf_woww_channel_name);
