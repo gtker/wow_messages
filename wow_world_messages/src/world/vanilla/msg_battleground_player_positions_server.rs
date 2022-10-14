@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 /// vmangos/cmangos/mangoszero: Seems to be older versions used to be `amount_of_carriers` followed by array. All versions now just set first to 0 and have second be 0/1/2.
 /// vmangos/cmangos/mangoszero: For AB and AV always set to all zero.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions_server.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions.wowm#L11):
 /// ```text
 /// smsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Server = 0x02E9 {
 ///     u32 amount_of_carriers = 0;

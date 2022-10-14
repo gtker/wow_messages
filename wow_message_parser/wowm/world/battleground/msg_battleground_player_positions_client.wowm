@@ -1,4 +1,0 @@
-#tag_all versions "1.12";
-
-cmsg MSG_BATTLEGROUND_PLAYER_POSITIONS_Client = 0x02E9 {}
-
