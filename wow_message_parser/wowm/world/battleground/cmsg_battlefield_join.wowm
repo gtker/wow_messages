@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12"; /* Does not exist for 2.4.3 and 3.3.5 */
 
 cmsg CMSG_BATTLEFIELD_JOIN = 0x023E {
     Map map;
