@@ -19,6 +19,7 @@ pub(crate) const DUPLICATE_DEFINER_VALUES: i32 = 11;
 pub(crate) const INVALID_INTEGER_TYPE: i32 = 12;
 pub(crate) const NON_MATCHING_IF_VARIABLES: i32 = 13;
 pub(crate) const UNSUPPORTED_UPCAST: i32 = 14;
+pub(crate) const OVERLAPPING_VERSIONS: i32 = 15;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -39,6 +40,25 @@ fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     }
 }
 
+fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &Tags) {
+    s.wln(format!("{}", msg));
+    if !tags.logon_versions().collect::<Vec<_>>().is_empty() {
+        s.wln("    Login:");
+
+        for t in tags.logon_versions() {
+            s.wln(format!("        {}", t));
+        }
+    }
+
+    if !tags.versions().collect::<Vec<_>>().is_empty() {
+        s.wln("    World:");
+
+        for t in tags.versions() {
+            s.wln(format!("        {}", t));
+        }
+    }
+}
+
 pub(crate) fn complex_not_found(
     struct_name: &str,
     struct_tags: &Tags,
@@ -52,22 +72,7 @@ pub(crate) fn complex_not_found(
         format!("Type '{}' needs type '{}'", struct_name, ty_name),
     );
 
-    s.wln(format!("    '{}' needs to cover versions:", ty_name));
-    if !struct_tags.logon_versions().collect::<Vec<_>>().is_empty() {
-        s.wln("    Login:");
-
-        for t in struct_tags.logon_versions() {
-            s.wln(format!("        {}", t));
-        }
-    }
-
-    if !struct_tags.versions().collect::<Vec<_>>().is_empty() {
-        s.wln("    World:");
-
-        for t in struct_tags.versions() {
-            s.wln(format!("        {}", t));
-        }
-    }
+    print_version_cover(&mut s, &format!("'{ty_name}' needs to cover:"), struct_tags);
 
     wowm_exit(s, COMPLEX_NOT_FOUND);
 }
@@ -254,4 +259,25 @@ pub(crate) fn unsupported_upcast(
     s.fileinfo(file_info, format!("Type '{container_name}' variable '{variable_name}' with type '{ty_name}' has upcast '{upcast}' which is unsupported."));
 
     wowm_exit(s, UNSUPPORTED_UPCAST);
+}
+
+pub(crate) fn overlapping_versions(
+    name: &str,
+    first_object_tags: &Tags,
+    first_object_file_info: &FileInfo,
+    second_object_tags: &Tags,
+    second_object_file_info: &FileInfo,
+) -> ! {
+    let mut s = ErrorWriter::new("Objects with the same name have overlapping versions.");
+
+    s.fileinfo(first_object_file_info, format!("First {name}:"));
+    s.newline();
+
+    s.fileinfo(second_object_file_info, format!("Second {name}:"));
+    s.newline();
+
+    print_version_cover(&mut s, "First covers:", first_object_tags);
+    print_version_cover(&mut s, "Second covers:", second_object_tags);
+
+    wowm_exit(s, OVERLAPPING_VERSIONS);
 }

@@ -1,0 +1,6 @@
+struct T {
+    u8 basic;
+} { versions = "1 2"; }
+struct T {
+    u64 basic;
+} { versions = "1.12"; }

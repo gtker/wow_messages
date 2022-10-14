@@ -2,7 +2,7 @@ use crate::error_printer::{
     COMPLEX_NOT_FOUND, DUPLICATE_DEFINER_VALUES, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS,
     INCORRECT_OPCODE_FOR_MESSAGE, INVALID_DEFINER_VALUE, INVALID_INTEGER_TYPE, INVALID_SELF_SIZE,
     MISSING_ENUMERATOR, MULTIPLE_SELF_VALUE, NON_MATCHING_IF_VARIABLES, NO_VERSIONS,
-    RECURSIVE_TYPE, UNSUPPORTED_UPCAST,
+    OVERLAPPING_VERSIONS, RECURSIVE_TYPE, UNSUPPORTED_UPCAST,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
@@ -557,5 +557,15 @@ fn unsupported_upcast() {
             print_message_stats(&o);
         },
         UNSUPPORTED_UPCAST,
+    );
+}
+
+#[test]
+fn overlapping_versions_errors() {
+    should_panic(
+        || {
+            must_err_load("overlapping_versions.wowm");
+        },
+        OVERLAPPING_VERSIONS,
     );
 }

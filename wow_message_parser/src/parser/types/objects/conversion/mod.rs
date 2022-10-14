@@ -1,4 +1,4 @@
-use crate::error_printer::object_has_no_versions;
+use crate::error_printer::{object_has_no_versions, overlapping_versions};
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::container::{
@@ -233,17 +233,12 @@ fn check_versions(containers: &[ParsedContainer], definers: &[Definer]) {
                 && outer.tags.has_version_intersections(inner.tags)
                 && outer.name as *const _ != inner.name as *const _
             {
-                panic!(
-                    "Objects with same name and overlapping versions: {}
-version 1: {:#?} in {} line {},
-version 2: {:#?} in {} line {}",
+                overlapping_versions(
                     inner.name,
-                    inner.tags,
-                    inner.file_info.name(),
-                    inner.file_info.start_line(),
                     outer.tags,
-                    outer.file_info.name(),
-                    outer.file_info.start_line(),
+                    outer.file_info,
+                    inner.tags,
+                    inner.file_info,
                 );
             }
         }
