@@ -105,6 +105,7 @@ pub mod smsg_chat_wrong_faction123;
 pub mod smsg_duel_complete123;
 pub mod smsg_duel_countdown123;
 pub mod smsg_duel_inbounds123;
+pub mod smsg_duel_outofbounds123;
 pub mod smsg_durability_damage_death123;
 pub mod smsg_environmentaldamagelog123;
 pub mod smsg_initialize_factions1_123_3_5;
