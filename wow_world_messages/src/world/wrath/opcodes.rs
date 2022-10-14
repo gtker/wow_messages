@@ -1883,6 +1883,7 @@ use crate::world::wrath::SMSG_ATTACKSWING_CANT_ATTACK;
 use crate::world::wrath::SMSG_ATTACKERSTATEUPDATE;
 use crate::world::wrath::SMSG_CANCEL_COMBAT;
 use crate::world::wrath::SMSG_BINDPOINTUPDATE;
+use crate::world::wrath::SMSG_DUEL_INBOUNDS;
 use crate::world::wrath::SMSG_DUEL_COMPLETE;
 use crate::world::wrath::SMSG_NOTIFICATION;
 use crate::world::wrath::SMSG_PONG;
@@ -1982,6 +1983,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ATTACKERSTATEUPDATE(SMSG_ATTACKERSTATEUPDATE),
     SMSG_CANCEL_COMBAT(SMSG_CANCEL_COMBAT),
     SMSG_BINDPOINTUPDATE(SMSG_BINDPOINTUPDATE),
+    SMSG_DUEL_INBOUNDS(SMSG_DUEL_INBOUNDS),
     SMSG_DUEL_COMPLETE(SMSG_DUEL_COMPLETE),
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
     SMSG_PONG(SMSG_PONG),
@@ -2083,6 +2085,7 @@ impl ServerOpcodeMessage {
             0x014A => Ok(Self::SMSG_ATTACKERSTATEUPDATE(<SMSG_ATTACKERSTATEUPDATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x014E => Ok(Self::SMSG_CANCEL_COMBAT(<SMSG_CANCEL_COMBAT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0155 => Ok(Self::SMSG_BINDPOINTUPDATE(<SMSG_BINDPOINTUPDATE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0169 => Ok(Self::SMSG_DUEL_INBOUNDS(<SMSG_DUEL_INBOUNDS as crate::Message>::read_body(&mut r, body_size)?)),
             0x016A => Ok(Self::SMSG_DUEL_COMPLETE(<SMSG_DUEL_COMPLETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size)?)),
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2333,6 +2336,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CANCEL_COMBAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BINDPOINTUPDATE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_DUEL_INBOUNDS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
@@ -2435,6 +2439,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CANCEL_COMBAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_BINDPOINTUPDATE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_DUEL_INBOUNDS(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
@@ -2537,6 +2542,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BINDPOINTUPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_DUEL_INBOUNDS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2639,6 +2645,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BINDPOINTUPDATE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_DUEL_INBOUNDS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2741,6 +2748,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BINDPOINTUPDATE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_DUEL_INBOUNDS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2843,6 +2851,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BINDPOINTUPDATE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_DUEL_INBOUNDS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
@@ -2947,6 +2956,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(_) => "SMSG_ATTACKERSTATEUPDATE",
             ServerOpcodeMessage::SMSG_CANCEL_COMBAT(_) => "SMSG_CANCEL_COMBAT",
             ServerOpcodeMessage::SMSG_BINDPOINTUPDATE(_) => "SMSG_BINDPOINTUPDATE",
+            ServerOpcodeMessage::SMSG_DUEL_INBOUNDS(_) => "SMSG_DUEL_INBOUNDS",
             ServerOpcodeMessage::SMSG_DUEL_COMPLETE(_) => "SMSG_DUEL_COMPLETE",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
@@ -3339,6 +3349,12 @@ impl From<SMSG_CANCEL_COMBAT> for ServerOpcodeMessage {
 impl From<SMSG_BINDPOINTUPDATE> for ServerOpcodeMessage {
     fn from(c: SMSG_BINDPOINTUPDATE) -> Self {
         Self::SMSG_BINDPOINTUPDATE(c)
+    }
+}
+
+impl From<SMSG_DUEL_INBOUNDS> for ServerOpcodeMessage {
+    fn from(c: SMSG_DUEL_INBOUNDS) -> Self {
+        Self::SMSG_DUEL_INBOUNDS(c)
     }
 }
 
