@@ -376,6 +376,8 @@ pub(crate) mod smsg_auth_response;
 pub use smsg_auth_response::*;
 pub(crate) mod smsg_battlefield_list;
 pub use smsg_battlefield_list::*;
+pub(crate) mod smsg_battleground_player_joined;
+pub use smsg_battleground_player_joined::*;
 pub(crate) mod smsg_cancel_combat;
 pub use smsg_cancel_combat::*;
 pub(crate) mod smsg_channel_list;

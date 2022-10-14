@@ -93,6 +93,7 @@ pub mod smsg_auction_bidder_notification12;
 pub mod smsg_auction_owner_notification12;
 pub mod smsg_auction_removed_notification123;
 pub mod smsg_auth_challenge12;
+pub mod smsg_battleground_player_joined123;
 pub mod smsg_cancel_combat123;
 pub mod smsg_channel_list123;
 pub mod smsg_channel_notify2_4_33;
