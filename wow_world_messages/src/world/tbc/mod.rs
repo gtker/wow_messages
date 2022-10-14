@@ -144,6 +144,8 @@ pub(crate) mod cmsg_move_fall_reset;
 pub use cmsg_move_fall_reset::*;
 pub(crate) mod cmsg_move_set_fly;
 pub use cmsg_move_set_fly::*;
+pub(crate) mod cmsg_name_query;
+pub use cmsg_name_query::*;
 pub(crate) mod cmsg_next_cinematic_camera;
 pub use cmsg_next_cinematic_camera::*;
 pub(crate) mod cmsg_ping;
