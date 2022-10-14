@@ -239,6 +239,8 @@ pub(crate) mod msg_auction_hello_client;
 pub use msg_auction_hello_client::*;
 pub(crate) mod msg_auction_hello_server;
 pub use msg_auction_hello_server::*;
+pub(crate) mod msg_battleground_player_positions_client;
+pub use msg_battleground_player_positions_client::*;
 pub(crate) mod msg_move_fall_land;
 pub use msg_move_fall_land::*;
 pub(crate) mod msg_move_heartbeat;

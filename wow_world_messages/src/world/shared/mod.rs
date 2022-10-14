@@ -71,6 +71,7 @@ pub mod language2_4_33;
 pub mod log_format1_1223;
 pub mod msg_auction_hello_client123;
 pub mod msg_auction_hello_server12;
+pub mod msg_battleground_player_positions_client123;
 pub mod msg_move_teleport_ack_client123;
 pub mod msg_move_worldport_ack123;
 pub mod player_chat_tag12;
