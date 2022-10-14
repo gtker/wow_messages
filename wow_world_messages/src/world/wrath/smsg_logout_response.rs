@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Reply to [`CMSG_LOGOUT_REQUEST`](crate::world::vanilla::CMSG_LOGOUT_REQUEST).
 ///
-/// The client expects to get an `SMSG_LOGOUT_COMPLETE` when logout is complete.
+/// The client expects to get an [`SMSG_LOGOUT_COMPLETE`](crate::world::vanilla::SMSG_LOGOUT_COMPLETE) when logout is complete.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm#L35):
 /// ```text

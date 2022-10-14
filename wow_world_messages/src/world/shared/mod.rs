@@ -100,6 +100,8 @@ pub mod smsg_durability_damage_death123;
 pub mod smsg_environmentaldamagelog123;
 pub mod smsg_initialize_factions1_123_3_5;
 pub mod smsg_login_settimespeed12;
+pub mod smsg_logout_cancel_ack1_1223;
+pub mod smsg_logout_complete1_1223;
 pub mod smsg_notification123;
 pub mod smsg_pong123;
 pub mod smsg_procresist1_1223;
