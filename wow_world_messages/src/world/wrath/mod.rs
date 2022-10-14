@@ -124,6 +124,8 @@ pub(crate) mod cmsg_complete_cinematic;
 pub use cmsg_complete_cinematic::*;
 pub(crate) mod cmsg_duel_accepted;
 pub use cmsg_duel_accepted::*;
+pub(crate) mod cmsg_duel_cancelled;
+pub use cmsg_duel_cancelled::*;
 pub(crate) mod cmsg_emote;
 pub use cmsg_emote::*;
 pub(crate) mod cmsg_force_move_root_ack;
