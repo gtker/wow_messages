@@ -1,16 +1,34 @@
-#tag_all versions "1.12";
+enum BattlegroundBracket : u8 {
+    TENS = 0 {
+        comment = "10-19";
+    }
+    TWENTIES = 1 {
+        comment = "20-29";
+    }
+    THIRTIES = 2 {
+        comment = "30-39";
+    }
+    FOURTIES = 3 {
+        comment = "40-49";
+    }
+    FIFTIES = 4 {
+        comment = "50-59";
+    }
+    SIXTY = 5 {
+        comment = "60";
+    }
+} {
+    versions = "1";
+}
 
 smsg SMSG_BATTLEFIELD_LIST = 0x023D {
     Guid battlemaster;
     Map map;
-    u8 unknown1;
-    u32 unknown2 {
-        comment = "vmangos: number of bg instances, this is also present on the number_of_battlegrounds field";
-    }
-    u8 unknown3;
-    u32 number_of_battlegrounds {
-        comment = "vmangos: number of bg instances, this is also present on the unknown2 field";
-    }
+    BattlegroundBracket bracket;
+    u32 number_of_battlegrounds;
     u32[number_of_battlegrounds] battlegrounds;
+} {
+    versions = "1.12";
 }
+
 

@@ -46,6 +46,7 @@
 - [AuraType](docs/auratype.md)
 - [BattlefieldListLocation](docs/battlefieldlistlocation.md)
 - [BattlefieldPortAction](docs/battlefieldportaction.md)
+- [BattlegroundBracket](docs/battlegroundbracket.md)
 - [BattlegroundEndStatus](docs/battlegroundendstatus.md)
 - [BattlegroundWinner](docs/battlegroundwinner.md)
 - [BgTypeId](docs/bgtypeid.md)

@@ -4153,6 +4153,24 @@ static const value_string e_world_result_strings[] =  {
 };
 
 typedef enum {
+    BATTLEGROUND_BRACKET_TENS = 0x0,
+    BATTLEGROUND_BRACKET_TWENTIES = 0x1,
+    BATTLEGROUND_BRACKET_THIRTIES = 0x2,
+    BATTLEGROUND_BRACKET_FOURTIES = 0x3,
+    BATTLEGROUND_BRACKET_FIFTIES = 0x4,
+    BATTLEGROUND_BRACKET_SIXTY = 0x5,
+} e_battleground_bracket;
+static const value_string e_battleground_bracket_strings[] =  {
+    { BATTLEGROUND_BRACKET_TENS, "Tens" },
+    { BATTLEGROUND_BRACKET_TWENTIES, "Twenties" },
+    { BATTLEGROUND_BRACKET_THIRTIES, "Thirties" },
+    { BATTLEGROUND_BRACKET_FOURTIES, "Fourties" },
+    { BATTLEGROUND_BRACKET_FIFTIES, "Fifties" },
+    { BATTLEGROUND_BRACKET_SIXTY, "Sixty" },
+    { 0, NULL }
+};
+
+typedef enum {
     STATUS_ID_NONE = 0x0,
     STATUS_ID_WAIT_QUEUE = 0x1,
     STATUS_ID_WAIT_JOIN = 0x2,

@@ -22,6 +22,8 @@ pub(crate) mod aura_type;
 pub use aura_type::*;
 pub(crate) mod battlefield_port_action;
 pub use battlefield_port_action::*;
+pub(crate) mod battleground_bracket;
+pub use battleground_bracket::*;
 pub(crate) mod battleground_end_status;
 pub use battleground_end_status::*;
 pub(crate) mod battleground_player;

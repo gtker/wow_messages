@@ -646,6 +646,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_battleground_bracket,
+            { "Battleground Bracket", "woww.battleground.bracket",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_battleground_bracket_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_battleground_end_status,
             { "Battleground End Status", "woww.battleground.end.status",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_battleground_end_status_strings), 0,

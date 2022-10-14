@@ -3609,9 +3609,7 @@
         case SMSG_BATTLEFIELD_LIST:
             ptvcursor_add(ptv, hf_woww_battlemaster, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_unknown_int, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_unknown_int, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_battleground_bracket, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_number_of_battlegrounds, 4, ENC_LITTLE_ENDIAN, &number_of_battlegrounds);
             for (i = 0; i < number_of_battlegrounds; ++i) {
                 ptvcursor_add(ptv, hf_woww_battlegrounds, 4, ENC_LITTLE_ENDIAN);
