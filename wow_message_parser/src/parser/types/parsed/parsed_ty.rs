@@ -89,7 +89,7 @@ impl ParsedType {
                 if let Ok(length) = length.parse::<usize>() {
                     sizes.inc(length, length);
                 } else {
-                    match &e.get_type_of_variable(length) {
+                    match &e.get_field_ty(length) {
                         ParsedType::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
                         _ => unreachable!("string lengths can only be int"),
                     }

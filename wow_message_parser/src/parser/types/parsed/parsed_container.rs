@@ -267,16 +267,6 @@ impl ParsedContainer {
         sizes
     }
 
-    pub(crate) fn get_type_of_variable(&self, variable_name: &str) -> ParsedType {
-        for d in self.all_definitions() {
-            if d.name() == variable_name {
-                return d.ty().clone();
-            }
-        }
-
-        panic!("unable to find type {}", variable_name)
-    }
-
     pub(crate) fn fields(&self) -> &[ParsedStructMember] {
         self.members.as_slice()
     }
@@ -420,10 +410,10 @@ impl ParsedContainer {
             match m {
                 ParsedStructMember::Definition(_) => {}
                 ParsedStructMember::IfStatement(statement) => {
-                    statement.set_original_ty(c.get_type_of_variable(statement.name()));
+                    statement.set_original_ty(c.get_field_ty(statement.name()).clone());
 
                     for else_if in statement.else_ifs_mut() {
-                        else_if.set_original_ty(c.get_type_of_variable(else_if.name()));
+                        else_if.set_original_ty(c.get_field_ty(else_if.name()).clone());
                     }
 
                     for m in statement.all_members_mut() {
