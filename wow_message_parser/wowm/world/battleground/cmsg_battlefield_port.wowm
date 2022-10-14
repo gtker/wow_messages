@@ -1,12 +1,37 @@
-#tag_all versions "1.12";
-
 enum BattlefieldPortAction : u8 {
     LEAVE_QUEUE = 0;
     ENTER_BATTLE = 1;
+} {
+    versions = "1 2 3";
 }
 
 cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
     Map map;
     BattlefieldPortAction action;
+} {
+    versions = "1.12";
 }
 
+cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
+    BattlefieldPortAction action;
+} {
+    versions = "1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8";
+}
+
+cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
+    u8 arena_type {
+        comment = "mangosone/mangos-tbc/azerothcore: arenatype if arena";
+    }
+    u8 unknown1 {
+        comment = "mangosone/mangos-tbc/azerothcore: unk, can be 0x0 (may be if was invited?) and 0x1";
+    }
+    u32 bg_type_id {
+        comment = "mangosone/mangos-tbc/azerothcore: type id from dbc"; /* TODO: Which DBC? */
+    }
+    u16 unknown2 {
+        comment = "mangosone/mangos-tbc/azerothcore: 0x1F90 constant?";
+    }
+    BattlefieldPortAction action;
+} {
+    versions = "2.4.3 3";
+}

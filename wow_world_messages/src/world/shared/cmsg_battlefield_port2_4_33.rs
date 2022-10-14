@@ -1,0 +1,92 @@
+use std::convert::{TryFrom, TryInto};
+use crate::world::shared::battlefield_port_action123::BattlefieldPortAction;
+use std::io::{Write, Read};
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlefield_port.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlefield_port.wowm#L21):
+/// ```text
+/// cmsg CMSG_BATTLEFIELD_PORT = 0x02D5 {
+///     u8 arena_type;
+///     u8 unknown1;
+///     u32 bg_type_id;
+///     u16 unknown2;
+///     BattlefieldPortAction action;
+/// }
+/// ```
+pub struct CMSG_BATTLEFIELD_PORT {
+    /// mangosone/mangos-tbc/azerothcore: arenatype if arena
+    ///
+    pub arena_type: u8,
+    /// mangosone/mangos-tbc/azerothcore: unk, can be 0x0 (may be if was invited?) and 0x1
+    ///
+    pub unknown1: u8,
+    /// mangosone/mangos-tbc/azerothcore: type id from dbc
+    ///
+    pub bg_type_id: u32,
+    /// mangosone/mangos-tbc/azerothcore: 0x1F90 constant?
+    ///
+    pub unknown2: u16,
+    pub action: BattlefieldPortAction,
+}
+
+impl crate::Message for CMSG_BATTLEFIELD_PORT {
+    const OPCODE: u32 = 0x02d5;
+
+    fn size_without_header(&self) -> u32 {
+        9
+    }
+
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        // arena_type: u8
+        w.write_all(&self.arena_type.to_le_bytes())?;
+
+        // unknown1: u8
+        w.write_all(&self.unknown1.to_le_bytes())?;
+
+        // bg_type_id: u32
+        w.write_all(&self.bg_type_id.to_le_bytes())?;
+
+        // unknown2: u16
+        w.write_all(&self.unknown2.to_le_bytes())?;
+
+        // action: BattlefieldPortAction
+        w.write_all(&(self.action.as_int() as u8).to_le_bytes())?;
+
+        Ok(())
+    }
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+        }
+
+        // arena_type: u8
+        let arena_type = crate::util::read_u8_le(r)?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::read_u8_le(r)?;
+
+        // bg_type_id: u32
+        let bg_type_id = crate::util::read_u32_le(r)?;
+
+        // unknown2: u16
+        let unknown2 = crate::util::read_u16_le(r)?;
+
+        // action: BattlefieldPortAction
+        let action: BattlefieldPortAction = crate::util::read_u8_le(r)?.try_into()?;
+
+        Ok(Self {
+            arena_type,
+            unknown1,
+            bg_type_id,
+            unknown2,
+            action,
+        })
+    }
+
+}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_BATTLEFIELD_PORT {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_BATTLEFIELD_PORT {}
+
