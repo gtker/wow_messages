@@ -1,5 +1,5 @@
 use crate::file_info::FileInfo;
-use crate::{Tags, ENUM_SELF_VALUE_FIELD};
+use crate::{Tags, CONTAINER_SELF_SIZE_FIELD, ENUM_SELF_VALUE_FIELD};
 use std::process::exit;
 use writer::ErrorWriter;
 
@@ -13,6 +13,7 @@ pub(crate) const FLAG_HAS_EQUALS: i32 = 5;
 pub(crate) const NO_VERSIONS: i32 = 6;
 pub(crate) const INCORRECT_OPCODE_FOR_MESSAGE: i32 = 6;
 pub(crate) const MULTIPLE_SELF_VALUE: i32 = 6;
+pub(crate) const INVALID_SELF_SIZE: i32 = 6;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -157,4 +158,23 @@ pub(crate) fn multiple_self_value(
     s.fileinfo(file_info, format!("Type '{ty_name} has multiple enumerators with '{self_value}', first field is '{first_name}', second name is '{second_name}'", self_value = ENUM_SELF_VALUE_FIELD));
 
     wowm_exit(s, MULTIPLE_SELF_VALUE);
+}
+
+pub(crate) fn invalid_self_size_position(
+    ty_name: &str,
+    file_info: &FileInfo,
+    msg: impl AsRef<str>,
+) -> ! {
+    let mut s = ErrorWriter::new(format!("Invalid usage of '{}'.", CONTAINER_SELF_SIZE_FIELD));
+
+    s.fileinfo(
+        file_info,
+        format!(
+            "Type '{ty_name}' has invalid usage of '{}': '{}'",
+            CONTAINER_SELF_SIZE_FIELD,
+            msg.as_ref()
+        ),
+    );
+
+    wowm_exit(s, INVALID_SELF_SIZE);
 }

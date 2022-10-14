@@ -43,7 +43,7 @@ pub(crate) fn print_login_opcodes(
     let ty = match container_type {
         ContainerType::CLogin(_) => CLOGIN_NAME,
         ContainerType::SLogin(_) => SLOGIN_NAME,
-        _ => panic!("invalid type passed to opcode printer"),
+        _ => unreachable!("invalid type passed to opcode printer"),
     };
 
     includes(&mut s, v, container_type, Version::Login(*version));

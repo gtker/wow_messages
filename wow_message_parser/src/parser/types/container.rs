@@ -1,3 +1,4 @@
+use crate::error_printer::invalid_self_size_position;
 use crate::file_info::FileInfo;
 use crate::file_utils::get_import_path;
 use crate::parser::types::array::ArrayType;
@@ -253,7 +254,14 @@ impl Container {
         let mut sum = match self.object_type {
             ContainerType::Struct => 0,
             ContainerType::CLogin(_) | ContainerType::SLogin(_) => 0,
-            _ => panic!(),
+            _ => invalid_self_size_position(
+                self.name(),
+                self.file_info(),
+                &format!(
+                    "Only login messages can contain '{}'",
+                    CONTAINER_SELF_SIZE_FIELD
+                ),
+            ),
         };
         for field in self.members() {
             match field {
@@ -265,9 +273,6 @@ impl Container {
                         Type::FloatingPoint(float_ty) => {
                             sum += float_ty.size() as u64;
                         }
-                        Type::CString => panic!("string before size"),
-                        Type::String { .. } => panic!("string before size"),
-                        Type::Array(_) => panic!("array before size"),
                         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                             let i = if let Some(upcast) = upcast {
                                 upcast.size()
@@ -276,16 +281,74 @@ impl Container {
                             } as u64;
                             sum += i;
                         }
-                        Type::Struct { .. } => {
-                            panic!("struct before size");
-                        }
-                        Type::PackedGuid => panic!("packed guid before size"),
-                        Type::Guid => sum += 8_u64,
-                        Type::UpdateMask => panic!(),
-                        Type::AuraMask => panic!(),
-                        Type::SizedCString => panic!(),
                         Type::Bool(i) => sum += i.size() as u64,
                         Type::DateTime => sum += DATETIME_SIZE as u64,
+                        Type::Struct { e, .. } => invalid_self_size_position(
+                            self.name(),
+                            self.file_info(),
+                            format!(
+                                "'{}' can not come after Struct variable '{}'",
+                                CONTAINER_SELF_SIZE_FIELD,
+                                e.name(),
+                            ),
+                        ),
+                        Type::PackedGuid => invalid_self_size_position(
+                            self.name(),
+                            self.file_info(),
+                            format!(
+                                "'{}' can not come after a PackedGuid variable",
+                                CONTAINER_SELF_SIZE_FIELD
+                            ),
+                        ),
+                        Type::Guid => sum += 8_u64,
+                        Type::UpdateMask => invalid_self_size_position(
+                            self.name(),
+                            self.file_info(),
+                            format!(
+                                "'{}' can not come after an UpdateMask variable",
+                                CONTAINER_SELF_SIZE_FIELD
+                            ),
+                        ),
+                        Type::AuraMask => invalid_self_size_position(
+                            self.name(),
+                            self.file_info(),
+                            format!(
+                                "'{}' can not come after an AuraMask variable",
+                                CONTAINER_SELF_SIZE_FIELD
+                            ),
+                        ),
+                        Type::SizedCString => invalid_self_size_position(
+                            self.name(),
+                            self.file_info(),
+                            format!(
+                                "'{}' can not come after a SizedCString variable",
+                                CONTAINER_SELF_SIZE_FIELD
+                            ),
+                        ),
+                        Type::CString => invalid_self_size_position(
+                            self.name(),
+                            self.file_info(),
+                            format!(
+                                "'{}' can not come after a CString variable",
+                                CONTAINER_SELF_SIZE_FIELD
+                            ),
+                        ),
+                        Type::String { .. } => invalid_self_size_position(
+                            self.name(),
+                            self.file_info(),
+                            format!(
+                                "'{}' can not come after a String variable",
+                                CONTAINER_SELF_SIZE_FIELD
+                            ),
+                        ),
+                        Type::Array(_) => invalid_self_size_position(
+                            self.name(),
+                            self.file_info(),
+                            format!(
+                                "'{}' can not come after an array variable",
+                                CONTAINER_SELF_SIZE_FIELD
+                            ),
+                        ),
                     }
                     if let Some(v) = d.value() {
                         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
@@ -293,8 +356,22 @@ impl Container {
                         }
                     }
                 }
-                StructMember::IfStatement(_) => panic!("if statement before size"),
-                StructMember::OptionalStatement(_) => panic!("optional statement before size"),
+                StructMember::IfStatement(_) => invalid_self_size_position(
+                    self.name(),
+                    self.file_info(),
+                    format!(
+                        "'{}' can not come after an if statement",
+                        CONTAINER_SELF_SIZE_FIELD
+                    ),
+                ),
+                StructMember::OptionalStatement(_) => invalid_self_size_position(
+                    self.name(),
+                    self.file_info(),
+                    format!(
+                        "'{}' can not come after an optional statement",
+                        CONTAINER_SELF_SIZE_FIELD
+                    ),
+                ),
             }
         }
 

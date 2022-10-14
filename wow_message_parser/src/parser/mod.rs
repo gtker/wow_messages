@@ -68,7 +68,7 @@ pub(crate) fn parse_commands(t: Pair<Rule>) -> Commands {
                 let value = command.next().unwrap();
                 tags.insert(key.as_str(), value.as_str());
             }
-            _ => panic!("invalid command"),
+            _ => unreachable!("invalid command"),
         }
     }
 
@@ -134,7 +134,7 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, path: &Path) -> P
                         file_info,
                         DefinerType::Flag,
                     )),
-                    _ => panic!("invalid keyword for definer"),
+                    _ => unreachable!("invalid keyword for definer"),
                 }
             }
             Rule::container => {
@@ -148,7 +148,7 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, path: &Path) -> P
                     "cmsg" => ContainerType::CMsg(0),
                     "smsg" => ContainerType::SMsg(0),
                     "msg" => ContainerType::Msg(0),
-                    keyword => panic!("invalid keyword for container: '{}'", keyword),
+                    keyword => unreachable!("invalid keyword for container: '{}'", keyword),
                 };
                 let s = parse_struct(&mut statement, tags, ty, file_info);
                 if s.tags.paste_versions().is_empty() {
@@ -252,7 +252,7 @@ fn parse_struct(
     let container_type = if let Some(opcode) = opcode {
         if let Some(v) = parse_value(opcode.as_str()) {
             match container_type {
-                ContainerType::Struct => panic!("struct has opcode"),
+                ContainerType::Struct => unreachable!("struct has opcode"),
                 ContainerType::CLogin(_) => ContainerType::CLogin(v as u16),
                 ContainerType::SLogin(_) => ContainerType::SLogin(v as u16),
                 ContainerType::Msg(_) => ContainerType::Msg(v as u16),
@@ -262,13 +262,13 @@ fn parse_struct(
         } else {
             match container_type {
                 ContainerType::Struct => ContainerType::Struct,
-                _ => panic!("non-struct missing opcode"),
+                _ => unreachable!("non-struct missing opcode"),
             }
         }
     } else {
         match container_type {
             ContainerType::Struct => ContainerType::Struct,
-            _ => panic!("non-struct missing opcode"),
+            _ => unreachable!("non-struct missing opcode"),
         }
     };
 

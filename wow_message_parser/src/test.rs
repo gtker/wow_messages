@@ -1,6 +1,6 @@
 use crate::error_printer::{
     COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, INCORRECT_OPCODE_FOR_MESSAGE,
-    MISSING_ENUMERATOR, NO_VERSIONS, RECURSIVE_TYPE,
+    INVALID_SELF_SIZE, MISSING_ENUMERATOR, MULTIPLE_SELF_VALUE, NO_VERSIONS, RECURSIVE_TYPE,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
@@ -484,6 +484,17 @@ fn multi_self_value_errors() {
             let o = must_err_load("multi_self_value.wowm");
             print_message_stats(&o);
         },
-        INCORRECT_OPCODE_FOR_MESSAGE,
+        MULTIPLE_SELF_VALUE,
+    );
+}
+
+#[test]
+fn invalid_self_size_errors() {
+    should_panic(
+        || {
+            let o = must_err_load("invalid_self_size.wowm");
+            print_message_stats(&o);
+        },
+        INVALID_SELF_SIZE,
     );
 }
