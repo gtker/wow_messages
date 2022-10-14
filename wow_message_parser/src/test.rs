@@ -1,6 +1,7 @@
 use crate::error_printer::{
     COMPLEX_NOT_FOUND, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, INCORRECT_OPCODE_FOR_MESSAGE,
-    INVALID_SELF_SIZE, MISSING_ENUMERATOR, MULTIPLE_SELF_VALUE, NO_VERSIONS, RECURSIVE_TYPE,
+    INVALID_DEFINER_VALUE, INVALID_SELF_SIZE, MISSING_ENUMERATOR, MULTIPLE_SELF_VALUE, NO_VERSIONS,
+    RECURSIVE_TYPE,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
@@ -496,5 +497,16 @@ fn invalid_self_size_errors() {
             print_message_stats(&o);
         },
         INVALID_SELF_SIZE,
+    );
+}
+
+#[test]
+fn invalid_definer_value() {
+    should_panic(
+        || {
+            let o = must_err_load("invalid_definer_value.wowm");
+            print_message_stats(&o);
+        },
+        INVALID_DEFINER_VALUE,
     );
 }

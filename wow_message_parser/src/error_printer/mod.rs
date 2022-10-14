@@ -14,6 +14,7 @@ pub(crate) const NO_VERSIONS: i32 = 6;
 pub(crate) const INCORRECT_OPCODE_FOR_MESSAGE: i32 = 6;
 pub(crate) const MULTIPLE_SELF_VALUE: i32 = 6;
 pub(crate) const INVALID_SELF_SIZE: i32 = 6;
+pub(crate) const INVALID_DEFINER_VALUE: i32 = 6;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -177,4 +178,20 @@ pub(crate) fn invalid_self_size_position(
     );
 
     wowm_exit(s, INVALID_SELF_SIZE);
+}
+
+pub(crate) fn invalid_definer_value(
+    ty_name: &str,
+    enumerator_name: &str,
+    value: &str,
+    file_info: &FileInfo,
+) -> ! {
+    let mut s = ErrorWriter::new("Enumerator has invalid value.");
+
+    s.fileinfo(
+        file_info,
+        format!("Type '{ty_name}' has enumerator '{enumerator_name}' with invalid value '{value}'"),
+    );
+
+    wowm_exit(s, INVALID_DEFINER_VALUE);
 }

@@ -1,3 +1,4 @@
+use crate::error_printer::invalid_definer_value;
 use crate::file_info::FileInfo;
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::sizes::Sizes;
@@ -58,10 +59,13 @@ impl DefinerValue {
     pub(crate) fn original(&self) -> &str {
         &self.original
     }
-}
 
-impl From<&str> for DefinerValue {
-    fn from(s: &str) -> Self {
+    pub(crate) fn from_str(
+        s: &str,
+        ty_name: &str,
+        enumerator_name: &str,
+        file_info: &FileInfo,
+    ) -> Self {
         let v = utility::parse_value(s);
         if let Some(v) = v {
             return Self {
@@ -69,11 +73,12 @@ impl From<&str> for DefinerValue {
                 original: s.to_string(),
             };
         }
+
         if s == ENUM_SELF_VALUE_FIELD {
             unreachable!("self.value passed to DefinerValue From<&str>");
         }
 
-        panic!("complex passed to definer {:#?}", s);
+        invalid_definer_value(ty_name, enumerator_name, s, file_info);
     }
 }
 

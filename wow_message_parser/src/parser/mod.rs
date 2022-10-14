@@ -11,6 +11,7 @@ use types::tags::Tags;
 
 use crate::error_printer::multiple_self_value;
 use crate::file_info::FileInfo;
+use crate::parser::types::definer::DefinerValue;
 use crate::parser::types::parsed::parsed_array::ParsedArray;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
@@ -520,7 +521,12 @@ pub(crate) fn parse_enum(
         } else {
             fields.push(DefinerField::new(
                 identifier.as_str(),
-                value.as_str().into(),
+                DefinerValue::from_str(
+                    value.as_str(),
+                    ident.as_str(),
+                    identifier.as_str(),
+                    &file_info,
+                ),
                 kvs,
             ));
         }

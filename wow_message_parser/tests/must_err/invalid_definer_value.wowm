@@ -1,0 +1,3 @@
+enum T : u8 {
+    INVALID = asdf;
+}
