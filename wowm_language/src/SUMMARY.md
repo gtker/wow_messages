@@ -48,6 +48,7 @@
 - [BattlefieldPortAction](docs/battlefieldportaction.md)
 - [BattlegroundBracket](docs/battlegroundbracket.md)
 - [BattlegroundEndStatus](docs/battlegroundendstatus.md)
+- [BattlegroundType](docs/battlegroundtype.md)
 - [BattlegroundWinner](docs/battlegroundwinner.md)
 - [BgTypeId](docs/bgtypeid.md)
 - [BillingPlanFlags](docs/billingplanflags.md)

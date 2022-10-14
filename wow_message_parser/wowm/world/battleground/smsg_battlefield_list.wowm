@@ -31,4 +31,26 @@ smsg SMSG_BATTLEFIELD_LIST = 0x023D {
     versions = "1.12";
 }
 
+enum BattlegroundType : u32 {
+    NONE = 0;
+    ALTERAC_VALLEY = 1;
+    WARSONG_GULCH = 2;
+    ARATHI_BASIN = 3;
+    NETHERSTORM = 4;
+    BLADES_EDGE_ARENA = 5;
+    ARENA = 6;
+    EYE_OF_THE_STORM = 7;
+    RUINS_OF_LORDAERON = 8;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_BATTLEFIELD_LIST = 0x023D {
+    Guid battlemaster;
+    BattlegroundType battleground_type;
+    u32 number_of_battlegrounds;
+    u32[number_of_battlegrounds] battlegrounds;
+} {
+    versions = "2.4.3";
+}
 
