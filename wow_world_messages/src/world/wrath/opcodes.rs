@@ -79,6 +79,7 @@ use crate::world::wrath::CMSG_REPOP_REQUEST;
 use crate::world::wrath::CMSG_DUEL_ACCEPTED;
 use crate::world::wrath::CMSG_DUEL_CANCELLED;
 use crate::world::wrath::CMSG_ACTIVATETAXI;
+use crate::world::wrath::CMSG_PLAYED_TIME;
 use crate::world::wrath::CMSG_PING;
 use crate::world::wrath::CMSG_SETSHEATHED;
 use crate::world::wrath::CMSG_AUTH_SESSION;
@@ -189,6 +190,7 @@ pub enum ClientOpcodeMessage {
     CMSG_DUEL_ACCEPTED(CMSG_DUEL_ACCEPTED),
     CMSG_DUEL_CANCELLED(CMSG_DUEL_CANCELLED),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
+    CMSG_PLAYED_TIME(CMSG_PLAYED_TIME),
     CMSG_PING(CMSG_PING),
     CMSG_SETSHEATHED(CMSG_SETSHEATHED),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
@@ -301,6 +303,7 @@ impl ClientOpcodeMessage {
             0x016C => Ok(Self::CMSG_DUEL_ACCEPTED(<CMSG_DUEL_ACCEPTED as crate::Message>::read_body(&mut r, body_size)?)),
             0x016D => Ok(Self::CMSG_DUEL_CANCELLED(<CMSG_DUEL_CANCELLED as crate::Message>::read_body(&mut r, body_size)?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01CC => Ok(Self::CMSG_PLAYED_TIME(<CMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size)?)),
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size)?)),
             0x01E0 => Ok(Self::CMSG_SETSHEATHED(<CMSG_SETSHEATHED as crate::Message>::read_body(&mut r, body_size)?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
@@ -481,6 +484,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DUEL_CANCELLED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PLAYED_TIME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SETSHEATHED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
@@ -594,6 +598,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.write_unencrypted_client(w),
             Self::CMSG_DUEL_CANCELLED(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PLAYED_TIME(c) => c.write_unencrypted_client(w),
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_SETSHEATHED(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
@@ -707,6 +712,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -820,6 +826,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
@@ -933,6 +940,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PLAYED_TIME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1046,6 +1054,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
@@ -1170,6 +1179,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_DUEL_ACCEPTED(_) => "CMSG_DUEL_ACCEPTED",
             ClientOpcodeMessage::CMSG_DUEL_CANCELLED(_) => "CMSG_DUEL_CANCELLED",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
+            ClientOpcodeMessage::CMSG_PLAYED_TIME(_) => "CMSG_PLAYED_TIME",
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_SETSHEATHED(_) => "CMSG_SETSHEATHED",
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
@@ -1646,6 +1656,12 @@ impl From<CMSG_ACTIVATETAXI> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_PLAYED_TIME> for ClientOpcodeMessage {
+    fn from(c: CMSG_PLAYED_TIME) -> Self {
+        Self::CMSG_PLAYED_TIME(c)
+    }
+}
+
 impl From<CMSG_PING> for ClientOpcodeMessage {
     fn from(c: CMSG_PING) -> Self {
         Self::CMSG_PING(c)
@@ -1889,6 +1905,7 @@ use crate::world::wrath::SMSG_DUEL_INBOUNDS;
 use crate::world::wrath::SMSG_DUEL_COMPLETE;
 use crate::world::wrath::SMSG_DUEL_WINNER;
 use crate::world::wrath::SMSG_NOTIFICATION;
+use crate::world::wrath::SMSG_PLAYED_TIME;
 use crate::world::wrath::SMSG_PONG;
 use crate::world::wrath::SMSG_AUTH_CHALLENGE;
 use crate::world::wrath::SMSG_AUTH_RESPONSE;
@@ -1992,6 +2009,7 @@ pub enum ServerOpcodeMessage {
     SMSG_DUEL_COMPLETE(SMSG_DUEL_COMPLETE),
     SMSG_DUEL_WINNER(SMSG_DUEL_WINNER),
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
+    SMSG_PLAYED_TIME(SMSG_PLAYED_TIME),
     SMSG_PONG(SMSG_PONG),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
@@ -2097,6 +2115,7 @@ impl ServerOpcodeMessage {
             0x016A => Ok(Self::SMSG_DUEL_COMPLETE(<SMSG_DUEL_COMPLETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x016B => Ok(Self::SMSG_DUEL_WINNER(<SMSG_DUEL_WINNER as crate::Message>::read_body(&mut r, body_size)?)),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01CD => Ok(Self::SMSG_PLAYED_TIME(<SMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size)?)),
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2351,6 +2370,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_WINNER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PLAYED_TIME(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -2457,6 +2477,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_WINNER(c) => c.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PLAYED_TIME(c) => c.write_unencrypted_server(w),
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -2563,6 +2584,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2669,6 +2691,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2775,6 +2798,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PLAYED_TIME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2881,6 +2905,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -2989,6 +3014,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_DUEL_COMPLETE(_) => "SMSG_DUEL_COMPLETE",
             ServerOpcodeMessage::SMSG_DUEL_WINNER(_) => "SMSG_DUEL_WINNER",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
+            ServerOpcodeMessage::SMSG_PLAYED_TIME(_) => "SMSG_PLAYED_TIME",
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
@@ -3415,6 +3441,12 @@ impl From<SMSG_DUEL_WINNER> for ServerOpcodeMessage {
 impl From<SMSG_NOTIFICATION> for ServerOpcodeMessage {
     fn from(c: SMSG_NOTIFICATION) -> Self {
         Self::SMSG_NOTIFICATION(c)
+    }
+}
+
+impl From<SMSG_PLAYED_TIME> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAYED_TIME) -> Self {
+        Self::SMSG_PLAYED_TIME(c)
     }
 }
 
