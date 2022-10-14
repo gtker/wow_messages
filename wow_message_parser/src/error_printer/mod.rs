@@ -41,8 +41,8 @@ fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
 }
 
 fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &Tags) {
-    s.wln(format!("{}", msg));
-    if !tags.logon_versions().collect::<Vec<_>>().is_empty() {
+    s.wln(msg);
+    if tags.logon_versions().next().is_some() {
         s.wln("    Login:");
 
         for t in tags.logon_versions() {
@@ -50,7 +50,7 @@ fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &Tags) {
         }
     }
 
-    if !tags.versions().collect::<Vec<_>>().is_empty() {
+    if tags.versions().next().is_some() {
         s.wln("    World:");
 
         for t in tags.versions() {

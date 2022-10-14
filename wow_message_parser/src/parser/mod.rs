@@ -78,7 +78,7 @@ pub(crate) fn parse_commands(t: Pair<Rule>) -> Commands {
 }
 
 pub(crate) fn parse_contents(contents: &str, filename: &Path) -> ParsedObjects {
-    let file = AuthParser::parse(Rule::file, &contents);
+    let file = AuthParser::parse(Rule::file, contents);
     let file = match file {
         Ok(mut f) => f.next().unwrap(),
         Err(e) => panic!("error parsing {}: {}", filename.to_str().unwrap(), e),
@@ -99,7 +99,7 @@ pub(crate) fn parse_contents(contents: &str, filename: &Path) -> ParsedObjects {
         .expect("unable to find statements")
         .into_inner();
 
-    parse_statements(&mut statements, commands.tags(), &filename)
+    parse_statements(&mut statements, commands.tags(), filename)
 }
 
 pub(crate) fn parse_file(filename: &Path) -> ParsedObjects {
