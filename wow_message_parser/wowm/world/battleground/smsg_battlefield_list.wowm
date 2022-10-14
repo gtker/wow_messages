@@ -54,3 +54,50 @@ smsg SMSG_BATTLEFIELD_LIST = 0x023D {
     versions = "2.4.3";
 }
 
+enum BattlegroundType : u32 {
+    NONE = 0;
+    ALTERAC_VALLEY = 1;
+    WARSONG_GULCH = 2;
+    ARATHI_BASIN = 3;
+    NAGRAND_ARENA = 4;
+    BLADES_EDGE_ARENA = 5;
+    ARENA = 6;
+    EYE_OF_THE_STORM = 7;
+    RUINS_OF_LORDAERON = 8;
+    STRAND_OF_THE_ANCIENT = 9;
+    DALARAN_SEWERS = 10;
+    RING_OF_VALOR = 11;
+    ISLE_OF_CONQUEST = 30;
+    RANDOM = 32;
+} {
+    versions = "3.3.5";
+}
+
+enum RandomBg : u8 {
+    NOT_RANDOM = 0;
+    RANDOM = 1;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_BATTLEFIELD_LIST = 0x023D {
+    Guid battlemaster;
+    BattlegroundType battleground_type;
+    u8 unknown1;
+    u8 unknown2;
+    u8 has_win;
+    u32 win_honor;
+    u32 win_arena;
+    u32 loss_honor;
+    RandomBg random;
+    if (random == RANDOM) {
+        u8 win_random;
+        u32 reward_honor;
+        u32 reward_arena;
+        u32 honor_lost;
+    }
+    u32 number_of_battlegrounds;
+    u32[number_of_battlegrounds] battlegrounds;
+} {
+    versions = "3.3.5";
+}

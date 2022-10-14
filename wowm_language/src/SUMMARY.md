@@ -142,6 +142,7 @@
 - [RaidInstanceMessage](docs/raidinstancemessage.md)
 - [RaidTargetIndex](docs/raidtargetindex.md)
 - [RaidTargetUpdateType](docs/raidtargetupdatetype.md)
+- [RandomBg](docs/randombg.md)
 - [RealmSplitState](docs/realmsplitstate.md)
 - [RelationType](docs/relationtype.md)
 - [RollVote](docs/rollvote.md)
