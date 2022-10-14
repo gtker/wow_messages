@@ -1,4 +1,13 @@
-#tag_all versions "1.12";
+cmsg CMSG_PLAYED_TIME = 0x01CC {
+} {
+    versions = "1.12";
+}
 
-cmsg CMSG_PLAYED_TIME = 0x01CC {}
+cmsg CMSG_PLAYED_TIME = 0x01CC {
+    Bool show_on_ui {
+        comment = "Whether the clients wants it shown on the UI. Just ping it back in [SMSG_PLAYED_TIME]";
+    }
+} {
+    versions = "3";
+}
 

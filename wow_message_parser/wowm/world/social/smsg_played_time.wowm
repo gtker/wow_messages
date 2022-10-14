@@ -1,8 +1,23 @@
-#tag_all versions "1.12";
-
 smsg SMSG_PLAYED_TIME = 0x01CD {
-    /* TODO: What unit is this? */
+    /* Units are Seconds for wrath, so likely too for vanilla? */
     u32 total_played_time;
     u32 level_played_time;
+} {
+    versions = "1.12";
+}
+
+smsg SMSG_PLAYED_TIME = 0x01CD {
+    u32 total_played_time {
+        comment = "Time played in total (seconds)";
+    }
+    u32 level_played_time {
+        comment = "Time played on this level (seconds)";
+    }
+    Bool show_on_ui {
+        comment = "Whether this is a silent query or the client should show it on the UI (chat box).";
+        comment = "Send back the value received in [CMSG_PLAYED_TIME]";
+    }
+} {
+    versions = "3";
 }
 

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_played_time.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_played_time.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_played_time.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_played_time.wowm#L1):
 /// ```text
 /// smsg SMSG_PLAYED_TIME = 0x01CD {
 ///     u32 total_played_time;
