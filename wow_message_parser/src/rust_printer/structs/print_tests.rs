@@ -449,7 +449,7 @@ fn print_value(
                     .find(|a| a.name() == i.original_string())
                     .unwrap()
                     .members_in_struct(),
-                _ => panic!("{} is not an enum", m.ty()),
+                _ => unreachable!("{} is not an enum", m.ty()),
             };
             if subvars.is_empty() {
                 s.wln_no_indent(",");

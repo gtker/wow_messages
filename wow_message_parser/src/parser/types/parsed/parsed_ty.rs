@@ -1,4 +1,5 @@
-use crate::error_printer::{complex_not_found, recursive_type};
+use crate::error_printer::{complex_not_found, recursive_type, unsupported_upcast};
+use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::{get_container, get_definer};
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
@@ -166,24 +167,22 @@ impl ParsedType {
         sizes
     }
 
-    pub(crate) fn with_upcast(s: &str, upcasted: &str) -> Self {
+    pub(crate) fn with_upcast(
+        s: &str,
+        upcasted: &str,
+        container_name: &str,
+        variable_name: &str,
+        file_info: &FileInfo,
+    ) -> Self {
         let t = Self::from_str(s);
         match t {
             ParsedType::Identifier { .. } => {}
-            _ => panic!("upcast for type that does not support it"),
+            _ => {
+                unsupported_upcast(container_name, variable_name, s, upcasted, file_info);
+            }
         }
 
-        let int = match upcasted {
-            "u16" => IntegerType::U16(Endianness::Little),
-            "u32" => IntegerType::U32(Endianness::Little),
-            "u64" => IntegerType::U64(Endianness::Little),
-            "u16_be" => IntegerType::U16(Endianness::Big),
-            "u32_be" => IntegerType::U32(Endianness::Big),
-            "u64_be" => IntegerType::U64(Endianness::Big),
-            "i32" => IntegerType::U64(Endianness::Little),
-            "i32_be" => IntegerType::U64(Endianness::Big),
-            _ => panic!("unsupported upcast: {}", upcasted),
-        };
+        let int = IntegerType::from_str(upcasted, s, file_info);
 
         Self::Identifier {
             s: s.to_string(),
@@ -267,7 +266,7 @@ impl ParsedType {
                         | ParsedType::UpdateMask
                         | ParsedType::AuraMask
                         | ParsedType::DateTime
-                        | ParsedType::Bool(_) => panic!("unsupported"),
+                        | ParsedType::Bool(_) => unimplemented!("unsupported"),
                         ParsedType::PackedGuid => {
                             Self::Array(ParsedArray::new(ParsedArrayType::PackedGuid, size))
                         }

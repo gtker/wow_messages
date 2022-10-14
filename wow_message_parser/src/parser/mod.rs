@@ -276,7 +276,7 @@ fn parse_struct(
 
     let container_members = t
         .find(|a| a.as_rule() == Rule::container_members)
-        .unwrap_or_else(|| panic!("no members for struct {}", identifier))
+        .unwrap_or_else(|| unreachable!("no members for struct {}", identifier))
         .into_inner();
 
     let mut members = Vec::new();
@@ -360,15 +360,15 @@ fn parse_struct_member(
                 _ => (next_possible.as_str(), None),
             };
 
-            let container_type = if let Some(ty) = upcasted_type {
-                ParsedType::with_upcast(container_type, ty)
-            } else {
-                ParsedType::from_str(container_type)
-            };
-
             let identifier = identifier_and_value
                 .find(|a| a.as_rule() == Rule::identifier)
                 .unwrap();
+
+            let container_type = if let Some(ty) = upcasted_type {
+                ParsedType::with_upcast(container_type, ty, ty_name, identifier.as_str(), file_info)
+            } else {
+                ParsedType::from_str(container_type)
+            };
 
             let s =
                 ParsedStructMemberDefinition::new(identifier.as_str(), container_type, value, kvs);

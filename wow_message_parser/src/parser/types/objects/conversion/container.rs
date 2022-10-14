@@ -456,13 +456,13 @@ fn convert_parsed_test_case_value_to_test_case_value(
 
             let ty_name = match ty {
                 ParsedType::Array(array) => match array.ty() {
-                    ParsedArrayType::Integer(_) => panic!(),
+                    ParsedArrayType::Integer(_) => unimplemented!(),
                     ParsedArrayType::Complex(c) => c.as_str(),
                     ParsedArrayType::CString => unimplemented!(),
                     ParsedArrayType::Guid => "Guid",
                     ParsedArrayType::PackedGuid => "Guid",
                 },
-                _ => panic!(),
+                _ => unimplemented!(),
             };
 
             for multiple in array {

@@ -16,8 +16,9 @@ pub(crate) const MULTIPLE_SELF_VALUE: i32 = 8;
 pub(crate) const INVALID_SELF_SIZE: i32 = 9;
 pub(crate) const INVALID_DEFINER_VALUE: i32 = 10;
 pub(crate) const DUPLICATE_DEFINER_VALUES: i32 = 11;
-pub(crate) const INVALID_INTEGER_TYPE: i32 = 11;
-pub(crate) const NON_MATCHING_IF_VARIABLES: i32 = 11;
+pub(crate) const INVALID_INTEGER_TYPE: i32 = 12;
+pub(crate) const NON_MATCHING_IF_VARIABLES: i32 = 13;
+pub(crate) const UNSUPPORTED_UPCAST: i32 = 14;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -240,4 +241,17 @@ pub(crate) fn non_matching_if_statement_variables(
     s.fileinfo(file_info, format!("Type '{ty_name}' has if statement with variable '{first_variable_name}' and '{second_variable_name}'. Wowm currently only allows or (||) expressions with the same variable'"));
 
     wowm_exit(s, NON_MATCHING_IF_VARIABLES);
+}
+
+pub(crate) fn unsupported_upcast(
+    container_name: &str,
+    variable_name: &str,
+    ty_name: &str,
+    upcast: &str,
+    file_info: &FileInfo,
+) -> ! {
+    let mut s = ErrorWriter::new("Unsupported upcast for type.");
+    s.fileinfo(file_info, format!("Type '{container_name}' variable '{variable_name}' with type '{ty_name}' has upcast '{upcast}' which is unsupported."));
+
+    wowm_exit(s, UNSUPPORTED_UPCAST);
 }
