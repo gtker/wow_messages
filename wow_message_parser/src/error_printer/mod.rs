@@ -11,10 +11,11 @@ pub(crate) const MISSING_ENUMERATOR: i32 = 3;
 pub(crate) const ENUM_HAS_BITWISE_AND: i32 = 4;
 pub(crate) const FLAG_HAS_EQUALS: i32 = 5;
 pub(crate) const NO_VERSIONS: i32 = 6;
-pub(crate) const INCORRECT_OPCODE_FOR_MESSAGE: i32 = 6;
-pub(crate) const MULTIPLE_SELF_VALUE: i32 = 6;
-pub(crate) const INVALID_SELF_SIZE: i32 = 6;
-pub(crate) const INVALID_DEFINER_VALUE: i32 = 6;
+pub(crate) const INCORRECT_OPCODE_FOR_MESSAGE: i32 = 7;
+pub(crate) const MULTIPLE_SELF_VALUE: i32 = 8;
+pub(crate) const INVALID_SELF_SIZE: i32 = 9;
+pub(crate) const INVALID_DEFINER_VALUE: i32 = 10;
+pub(crate) const DUPLICATE_DEFINER_VALUES: i32 = 11;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -194,4 +195,23 @@ pub(crate) fn invalid_definer_value(
     );
 
     wowm_exit(s, INVALID_DEFINER_VALUE);
+}
+
+pub(crate) fn duplicate_definer_value(
+    ty_name: &str,
+    first_enumerator_name: impl AsRef<str>,
+    second_enumerator_name: &str,
+    value: u64,
+    file_info: &FileInfo,
+) -> ! {
+    let mut s = ErrorWriter::new("Definer has two fields with the same value.");
+
+    s.fileinfo(file_info,
+    format!(
+        "Type '{ty_name}' has enumerator '{first_enumerator_name}' and enumerator '{second_enumerator_name}' with the same value '{value}'",
+        first_enumerator_name = first_enumerator_name.as_ref(),
+    )
+    );
+
+    wowm_exit(s, DUPLICATE_DEFINER_VALUES);
 }

@@ -1,4 +1,4 @@
-use crate::error_printer::invalid_definer_value;
+use crate::error_printer::{duplicate_definer_value, invalid_definer_value};
 use crate::file_info::FileInfo;
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::sizes::Sizes;
@@ -261,15 +261,14 @@ impl Definer {
         let mut h = HashMap::new();
 
         for field in &self.fields {
-            if let Some(other) = h.get(&field.value.int) {
-                panic!(
-                    "Definer '{}' already has field with value '{}' ('{}'), '{}' must not overlap. {:?}",
+            if let Some(other) = h.get(&field.value().int) {
+                duplicate_definer_value(
                     self.name(),
-                    field.value().int(),
                     other,
                     field.name(),
-                    self.file_info()
-                )
+                    field.value().int,
+                    self.file_info(),
+                );
             }
 
             h.insert(field.value.int, &field.name);

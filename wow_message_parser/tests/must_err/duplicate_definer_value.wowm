@@ -1,0 +1,4 @@
+enum T : u8 {
+    ONE = 1;
+    ALSO_ONE = 1;
+} { versions = "1.12"; }
