@@ -1,5 +1,7 @@
 pub mod conversion;
 
+use crate::error_printer::complex_not_found;
+use crate::file_info::FileInfo;
 use crate::parser::types::container::Container;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::object_new;
@@ -31,7 +33,13 @@ impl Objects {
         object_new(enums, flags, structs, messages, tests)
     }
 
-    pub(crate) fn get_object(&self, name: &str, finder_tags: &Tags) -> Object {
+    pub(crate) fn get_object(
+        &self,
+        name: &str,
+        finder_tags: &Tags,
+        finder_name: &str,
+        file_info: &FileInfo,
+    ) -> Object {
         if let Some(e) = self
             .all_containers()
             .find(|a| a.name() == name && a.tags().fulfills_all(finder_tags))
@@ -49,10 +57,7 @@ impl Objects {
             }
         }
 
-        panic!(
-            "unable to find variable name: '{}' with tags: '{:#?}'",
-            name, finder_tags
-        );
+        complex_not_found(finder_name, finder_tags, file_info, name);
     }
 
     pub(crate) fn get_container(&self, name: &str, finder_tags: &Tags) -> &Container {

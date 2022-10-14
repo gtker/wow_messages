@@ -1,3 +1,4 @@
+use crate::file_info::FileInfo;
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -306,6 +307,7 @@ fn print_definition(
                 container_name,
                 d.name(),
                 variables,
+                e.file_info(),
             ) {
                 return false;
             }
@@ -324,6 +326,7 @@ fn print_definition(
                 container_name,
                 d.name(),
                 variables,
+                e.file_info(),
             ) {
                 return false;
             }
@@ -391,6 +394,7 @@ fn print_definition(
                         container_name,
                         d.name(),
                         variables,
+                        c.file_info(),
                     ) {
                         s.closing_curly();
                         return false;
@@ -441,8 +445,9 @@ fn print_identifier(
     container_name: &str,
     variable_name: &str,
     variables: &mut Vec<String>,
+    file_info: &FileInfo,
 ) -> bool {
-    let e = o.get_object(identifier, tags);
+    let e = o.get_object(identifier, tags, container_name, file_info);
     match e {
         Object::Container(e) => {
             s.wln(format!("ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, \"{}\");", e.name()));
