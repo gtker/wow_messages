@@ -20,6 +20,7 @@ pub mod cmsg_auction_sell_item12;
 pub mod cmsg_auth_session12;
 pub mod cmsg_battlefield_port2_4_33;
 pub mod cmsg_battlefield_status123;
+pub mod cmsg_battlemaster_hello123;
 pub mod cmsg_cancel_channelling123;
 pub mod cmsg_channel_announcements123;
 pub mod cmsg_channel_ban123;

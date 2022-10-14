@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_BATTLEMASTER_HELLO = 0x02D7 {
     Guid guid;
