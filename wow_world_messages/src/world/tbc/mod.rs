@@ -128,6 +128,8 @@ pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
+pub(crate) mod cmsg_leave_battlefield;
+pub use cmsg_leave_battlefield::*;
 pub(crate) mod cmsg_leave_channel;
 pub use cmsg_leave_channel::*;
 pub(crate) mod cmsg_logout_cancel;
