@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_DUEL_COUNTDOWN = 0x02B7 {
     u32 time_in_seconds;

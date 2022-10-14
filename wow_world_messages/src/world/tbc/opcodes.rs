@@ -1896,6 +1896,7 @@ use crate::world::tbc::SMSG_AUCTION_REMOVED_NOTIFICATION;
 use crate::world::tbc::SMSG_SERVER_MESSAGE;
 use crate::world::tbc::SMSG_STANDSTATE_UPDATE;
 use crate::world::tbc::SMSG_CHAT_PLAYER_NOT_FOUND;
+use crate::world::tbc::SMSG_DUEL_COUNTDOWN;
 use crate::world::tbc::SMSG_DURABILITY_DAMAGE_DEATH;
 use crate::world::tbc::SMSG_CHAR_RENAME;
 use crate::world::tbc::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
@@ -1982,6 +1983,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SERVER_MESSAGE(SMSG_SERVER_MESSAGE),
     SMSG_STANDSTATE_UPDATE(SMSG_STANDSTATE_UPDATE),
     SMSG_CHAT_PLAYER_NOT_FOUND(SMSG_CHAT_PLAYER_NOT_FOUND),
+    SMSG_DUEL_COUNTDOWN(SMSG_DUEL_COUNTDOWN),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Server),
@@ -2070,6 +2072,7 @@ impl ServerOpcodeMessage {
             0x0291 => Ok(Self::SMSG_SERVER_MESSAGE(<SMSG_SERVER_MESSAGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x029D => Ok(Self::SMSG_STANDSTATE_UPDATE(<SMSG_STANDSTATE_UPDATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x02A9 => Ok(Self::SMSG_CHAT_PLAYER_NOT_FOUND(<SMSG_CHAT_PLAYER_NOT_FOUND as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02B7 => Ok(Self::SMSG_DUEL_COUNTDOWN(<SMSG_DUEL_COUNTDOWN as crate::Message>::read_body(&mut r, body_size)?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Server as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2226,6 +2229,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_STANDSTATE_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_DUEL_COUNTDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_server(w, e),
@@ -2315,6 +2319,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_STANDSTATE_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_unencrypted_server(w),
+            Self::SMSG_DUEL_COUNTDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_server(w),
@@ -2404,6 +2409,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_STANDSTATE_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2493,6 +2499,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_STANDSTATE_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2582,6 +2589,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_STANDSTATE_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2671,6 +2679,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_STANDSTATE_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_server(w).await,
@@ -2762,6 +2771,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SERVER_MESSAGE(_) => "SMSG_SERVER_MESSAGE",
             ServerOpcodeMessage::SMSG_STANDSTATE_UPDATE(_) => "SMSG_STANDSTATE_UPDATE",
             ServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => "SMSG_CHAT_PLAYER_NOT_FOUND",
+            ServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => "SMSG_DUEL_COUNTDOWN",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
             ServerOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Server",
@@ -3201,6 +3211,12 @@ impl From<SMSG_STANDSTATE_UPDATE> for ServerOpcodeMessage {
 impl From<SMSG_CHAT_PLAYER_NOT_FOUND> for ServerOpcodeMessage {
     fn from(c: SMSG_CHAT_PLAYER_NOT_FOUND) -> Self {
         Self::SMSG_CHAT_PLAYER_NOT_FOUND(c)
+    }
+}
+
+impl From<SMSG_DUEL_COUNTDOWN> for ServerOpcodeMessage {
+    fn from(c: SMSG_DUEL_COUNTDOWN) -> Self {
+        Self::SMSG_DUEL_COUNTDOWN(c)
     }
 }
 
