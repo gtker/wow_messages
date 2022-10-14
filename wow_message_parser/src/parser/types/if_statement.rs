@@ -122,7 +122,7 @@ impl From<&str> for Operator {
             "&" => Operator::BitwiseAnd,
             "==" => Operator::Equals,
             "!=" => Operator::NotEquals,
-            _ => panic!("invalid operator {}", s),
+            _ => unreachable!("invalid operator {}", s),
         }
     }
 }
