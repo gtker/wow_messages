@@ -408,6 +408,8 @@ pub(crate) mod smsg_contact_list;
 pub use smsg_contact_list::*;
 pub(crate) mod smsg_defense_message;
 pub use smsg_defense_message::*;
+pub(crate) mod smsg_duel_complete;
+pub use smsg_duel_complete::*;
 pub(crate) mod smsg_durability_damage_death;
 pub use smsg_durability_damage_death::*;
 pub(crate) mod smsg_emote;

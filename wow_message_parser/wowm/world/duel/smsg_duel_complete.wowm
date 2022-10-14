@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_DUEL_COMPLETE = 0x016A {
     Bool ended_without_interruption;
