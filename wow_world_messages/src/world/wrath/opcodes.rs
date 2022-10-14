@@ -112,6 +112,7 @@ use crate::world::wrath::CMSG_MOVE_SET_FLY;
 use crate::world::wrath::CMSG_REALM_SPLIT;
 use crate::world::wrath::CMSG_MOVE_CHNG_TRANSPORT;
 use crate::world::wrath::CMSG_SET_ACTIVE_VOICE_CHANNEL;
+use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -222,6 +223,7 @@ pub enum ClientOpcodeMessage {
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
     CMSG_MOVE_CHNG_TRANSPORT(CMSG_MOVE_CHNG_TRANSPORT),
     CMSG_SET_ACTIVE_VOICE_CHANNEL(CMSG_SET_ACTIVE_VOICE_CHANNEL),
+    CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
 
@@ -334,6 +336,7 @@ impl ClientOpcodeMessage {
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size)?)),
             0x038D => Ok(Self::CMSG_MOVE_CHNG_TRANSPORT(<CMSG_MOVE_CHNG_TRANSPORT as crate::Message>::read_body(&mut r, body_size)?)),
             0x03D3 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size)?)),
+            0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
         }
@@ -514,6 +517,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
     }
@@ -627,6 +631,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_unencrypted_client(w),
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
     }
@@ -740,6 +745,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
@@ -853,6 +859,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
@@ -966,6 +973,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
@@ -1079,6 +1087,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
@@ -1203,6 +1212,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
             ClientOpcodeMessage::CMSG_MOVE_CHNG_TRANSPORT(_) => "CMSG_MOVE_CHNG_TRANSPORT",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
+            ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
     }
@@ -1844,6 +1854,12 @@ impl From<CMSG_SET_ACTIVE_VOICE_CHANNEL> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_WORLD_STATE_UI_TIMER_UPDATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_WORLD_STATE_UI_TIMER_UPDATE) -> Self {
+        Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c)
+    }
+}
+
 impl From<CMSG_READY_FOR_ACCOUNT_DATA_TIMES> for ClientOpcodeMessage {
     fn from(c: CMSG_READY_FOR_ACCOUNT_DATA_TIMES) -> Self {
         Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c)
@@ -1916,6 +1932,7 @@ use crate::world::wrath::SMSG_TIME_SYNC_REQ;
 use crate::world::wrath::SMSG_FEATURE_SYSTEM_STATUS;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
+use crate::world::wrath::SMSG_WORLD_STATE_UI_TIMER_UPDATE;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -2011,6 +2028,7 @@ pub enum ServerOpcodeMessage {
     SMSG_FEATURE_SYSTEM_STATUS(SMSG_FEATURE_SYSTEM_STATUS),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
+    SMSG_WORLD_STATE_UI_TIMER_UPDATE(SMSG_WORLD_STATE_UI_TIMER_UPDATE),
 }
 
 impl ServerOpcodeMessage {
@@ -2108,6 +2126,7 @@ impl ServerOpcodeMessage {
             0x03C9 => Ok(Self::SMSG_FEATURE_SYSTEM_STATUS(<SMSG_FEATURE_SYSTEM_STATUS as crate::Message>::read_body(&mut r, body_size)?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size)?)),
+            0x04F7 => Ok(Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(<SMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size)?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
         }
     }
@@ -2354,6 +2373,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -2452,6 +2472,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
+            Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -2550,6 +2571,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -2648,6 +2670,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -2746,6 +2769,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -2844,6 +2868,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -2944,6 +2969,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FEATURE_SYSTEM_STATUS(_) => "SMSG_FEATURE_SYSTEM_STATUS",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
+            ServerOpcodeMessage::SMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "SMSG_WORLD_STATE_UI_TIMER_UPDATE",
         })
     }
 }
@@ -3497,6 +3523,12 @@ impl From<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE> for ServerOpcodeMessage {
 impl From<SMSG_CLIENTCACHE_VERSION> for ServerOpcodeMessage {
     fn from(c: SMSG_CLIENTCACHE_VERSION) -> Self {
         Self::SMSG_CLIENTCACHE_VERSION(c)
+    }
+}
+
+impl From<SMSG_WORLD_STATE_UI_TIMER_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_WORLD_STATE_UI_TIMER_UPDATE) -> Self {
+        Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c)
     }
 }
 
