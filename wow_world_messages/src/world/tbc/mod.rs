@@ -60,6 +60,8 @@ pub(crate) mod cmsg_battlefield_list;
 pub use cmsg_battlefield_list::*;
 pub(crate) mod cmsg_battlefield_port;
 pub use cmsg_battlefield_port::*;
+pub(crate) mod cmsg_battlefield_status;
+pub use cmsg_battlefield_status::*;
 pub(crate) mod cmsg_cancel_channelling;
 pub use cmsg_cancel_channelling::*;
 pub(crate) mod cmsg_channel_announcements;

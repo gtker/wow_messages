@@ -91,6 +91,7 @@ use crate::world::tbc::CMSG_SET_ACTIVE_MOVER;
 use crate::world::tbc::CMSG_SET_ACTIONBAR_TOGGLES;
 use crate::world::tbc::CMSG_CHAR_RENAME;
 use crate::world::tbc::CMSG_MOVE_FALL_RESET;
+use crate::world::tbc::CMSG_BATTLEFIELD_STATUS;
 use crate::world::tbc::CMSG_BATTLEFIELD_PORT;
 use crate::world::tbc::CMSG_FORCE_WALK_SPEED_CHANGE_ACK;
 use crate::world::tbc::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK;
@@ -191,6 +192,7 @@ pub enum ClientOpcodeMessage {
     CMSG_SET_ACTIONBAR_TOGGLES(CMSG_SET_ACTIONBAR_TOGGLES),
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
     CMSG_MOVE_FALL_RESET(CMSG_MOVE_FALL_RESET),
+    CMSG_BATTLEFIELD_STATUS(CMSG_BATTLEFIELD_STATUS),
     CMSG_BATTLEFIELD_PORT(CMSG_BATTLEFIELD_PORT),
     CMSG_FORCE_WALK_SPEED_CHANGE_ACK(CMSG_FORCE_WALK_SPEED_CHANGE_ACK),
     CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK),
@@ -293,6 +295,7 @@ impl ClientOpcodeMessage {
             0x02BF => Ok(Self::CMSG_SET_ACTIONBAR_TOGGLES(<CMSG_SET_ACTIONBAR_TOGGLES as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             0x02CA => Ok(Self::CMSG_MOVE_FALL_RESET(<CMSG_MOVE_FALL_RESET as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02D3 => Ok(Self::CMSG_BATTLEFIELD_STATUS(<CMSG_BATTLEFIELD_STATUS as crate::Message>::read_body(&mut r, body_size)?)),
             0x02D5 => Ok(Self::CMSG_BATTLEFIELD_PORT(<CMSG_BATTLEFIELD_PORT as crate::Message>::read_body(&mut r, body_size)?)),
             0x02DB => Ok(Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(<CMSG_FORCE_WALK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x02DD => Ok(Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
@@ -463,6 +466,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
@@ -566,6 +570,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_unencrypted_client(w),
+            Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
@@ -669,6 +674,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -772,6 +778,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -875,6 +882,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -978,6 +986,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -1116,6 +1125,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_ACTIONBAR_TOGGLES(_) => "CMSG_SET_ACTIONBAR_TOGGLES",
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
             ClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => "CMSG_MOVE_FALL_RESET",
+            ClientOpcodeMessage::CMSG_BATTLEFIELD_STATUS(_) => "CMSG_BATTLEFIELD_STATUS",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_PORT(_) => "CMSG_BATTLEFIELD_PORT",
             ClientOpcodeMessage::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_WALK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK",
@@ -1639,6 +1649,12 @@ impl From<CMSG_CHAR_RENAME> for ClientOpcodeMessage {
 impl From<CMSG_MOVE_FALL_RESET> for ClientOpcodeMessage {
     fn from(c: CMSG_MOVE_FALL_RESET) -> Self {
         Self::CMSG_MOVE_FALL_RESET(c)
+    }
+}
+
+impl From<CMSG_BATTLEFIELD_STATUS> for ClientOpcodeMessage {
+    fn from(c: CMSG_BATTLEFIELD_STATUS) -> Self {
+        Self::CMSG_BATTLEFIELD_STATUS(c)
     }
 }
 
