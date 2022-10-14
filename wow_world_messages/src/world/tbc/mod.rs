@@ -416,6 +416,8 @@ pub(crate) mod smsg_duel_inbounds;
 pub use smsg_duel_inbounds::*;
 pub(crate) mod smsg_duel_outofbounds;
 pub use smsg_duel_outofbounds::*;
+pub(crate) mod smsg_duel_requested;
+pub use smsg_duel_requested::*;
 pub(crate) mod smsg_durability_damage_death;
 pub use smsg_durability_damage_death::*;
 pub(crate) mod smsg_emote;
