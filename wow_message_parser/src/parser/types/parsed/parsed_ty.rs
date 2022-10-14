@@ -91,7 +91,7 @@ impl ParsedType {
                 } else {
                     match &e.get_field_ty(length) {
                         ParsedType::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
-                        _ => unreachable!("string lengths can only be int"),
+                        _ => panic!("string lengths can only be int"),
                     }
                 }
             }
@@ -127,9 +127,9 @@ impl ParsedType {
                     }
                     ParsedArraySize::Variable(f) => match e.get_field_ty(&f) {
                         ParsedType::Integer(i) => (i.smallest_value(), i.largest_value()),
-                        _ => unreachable!("only ints can be string lengths"),
+                        _ => panic!("only ints can be string lengths"),
                     },
-                    ParsedArraySize::Endless => unreachable!(),
+                    ParsedArraySize::Endless => panic!(),
                 };
 
                 match array.ty() {
