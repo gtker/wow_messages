@@ -57,6 +57,7 @@ use crate::world::wrath::CMSG_CHANNEL_BAN;
 use crate::world::wrath::CMSG_CHANNEL_UNBAN;
 use crate::world::wrath::CMSG_CHANNEL_ANNOUNCEMENTS;
 use crate::world::wrath::CMSG_CHANNEL_MODERATE;
+use crate::world::wrath::CMSG_AREATRIGGER;
 use crate::world::wrath::MSG_MOVE_TELEPORT_ACK_Client;
 use crate::world::wrath::CMSG_FORCE_RUN_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK;
@@ -173,6 +174,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN),
     CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS),
     CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE),
+    CMSG_AREATRIGGER(CMSG_AREATRIGGER),
     MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Client),
     CMSG_FORCE_RUN_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_SPEED_CHANGE_ACK),
     CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK),
@@ -291,6 +293,7 @@ impl ClientOpcodeMessage {
             0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(<CMSG_CHANNEL_UNBAN as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(<CMSG_CHANNEL_ANNOUNCEMENTS as crate::Message>::read_body(&mut r, body_size)?)),
             0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(<CMSG_CHANNEL_MODERATE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x00B4 => Ok(Self::CMSG_AREATRIGGER(<CMSG_AREATRIGGER as crate::Message>::read_body(&mut r, body_size)?)),
             0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E3 => Ok(Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00E5 => Ok(Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size)?)),
@@ -477,6 +480,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_MODERATE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_AREATRIGGER(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
@@ -596,6 +600,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_MODERATE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_AREATRIGGER(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
@@ -715,6 +720,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_AREATRIGGER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -834,6 +840,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_AREATRIGGER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -953,6 +960,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_AREATRIGGER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1072,6 +1080,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_AREATRIGGER(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -1202,6 +1211,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHANNEL_UNBAN(_) => "CMSG_CHANNEL_UNBAN",
             ClientOpcodeMessage::CMSG_CHANNEL_ANNOUNCEMENTS(_) => "CMSG_CHANNEL_ANNOUNCEMENTS",
             ClientOpcodeMessage::CMSG_CHANNEL_MODERATE(_) => "CMSG_CHANNEL_MODERATE",
+            ClientOpcodeMessage::CMSG_AREATRIGGER(_) => "CMSG_AREATRIGGER",
             ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Client",
             ClientOpcodeMessage::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK",
@@ -1571,6 +1581,12 @@ impl From<CMSG_CHANNEL_ANNOUNCEMENTS> for ClientOpcodeMessage {
 impl From<CMSG_CHANNEL_MODERATE> for ClientOpcodeMessage {
     fn from(c: CMSG_CHANNEL_MODERATE) -> Self {
         Self::CMSG_CHANNEL_MODERATE(c)
+    }
+}
+
+impl From<CMSG_AREATRIGGER> for ClientOpcodeMessage {
+    fn from(c: CMSG_AREATRIGGER) -> Self {
+        Self::CMSG_AREATRIGGER(c)
     }
 }
 

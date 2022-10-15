@@ -11,6 +11,7 @@ pub mod channel_member_flags123;
 pub mod chat_notify2_4_33;
 pub mod cmsg_activatetaxi123;
 pub mod cmsg_activatetaxiexpress12;
+pub mod cmsg_areatrigger1_1223;
 pub mod cmsg_attackstop123;
 pub mod cmsg_attackswing123;
 pub mod cmsg_auction_list_bidder_items123;
