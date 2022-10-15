@@ -9,13 +9,13 @@ flag FactionFlags : u8 {
         comment = "hidden faction from reputation pane in client (player can gain reputation, but this update not sent to client)";
     }
     INVISIBLE_FORCED = 0x08 {
-        comment = "always overwrite FACTION_FLAG_VISIBLE and hide faction in rep.list, used for hide opposite team factions";
+        comment = "always overwrite `FACTION_FLAG_VISIBLE` and hide faction in rep.list, used for hide opposite team factions";
     }
     PEACE_FORCED = 0x10 {
-        comment = "always overwrite FACTION_FLAG_AT_WAR, used for prevent war with own team factions";
+        comment = "always overwrite `FACTION_FLAG_AT_WAR`, used for prevent war with own team factions";
     }
     INACTIVE = 0x20 {
-        comment = "player controlled, state stored in characters.data ( CMSG_SET_FACTION_INACTIVE )";
+        comment = "player controlled, state stored in characters.data ( [CMSG_SET_FACTION_INACTIVE] )";
     }
     RIVAL = 0x40 {
         comment = "flag for the two competing outland factions";
@@ -44,13 +44,13 @@ flag FactionFlags : u8 {
         comment = "hidden faction from reputation pane in client (player can gain reputation, but this update not sent to client)";
     }
     INVISIBLE_FORCED = 0x08 {
-        comment = "always overwrite FACTION_FLAG_VISIBLE and hide faction in rep.list, used for hide opposite team factions";
+        comment = "always overwrite `FACTION_FLAG_VISIBLE` and hide faction in rep.list, used for hide opposite team factions";
     }
     PEACE_FORCED = 0x10 {
-        comment = "always overwrite FACTION_FLAG_AT_WAR, used for prevent war with own team factions";
+        comment = "always overwrite `FACTION_FLAG_AT_WAR`, used for prevent war with own team factions";
     }
     INACTIVE = 0x20 {
-        comment = "player controlled, state stored in characters.data ( CMSG_SET_FACTION_INACTIVE )";
+        comment = "player controlled, state stored in characters.data ( [CMSG_SET_FACTION_INACTIVE] )";
     }
     RIVAL = 0x40 {
         comment = "flag for the two competing outland factions";
