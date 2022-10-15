@@ -1912,6 +1912,7 @@ use crate::world::tbc::SMSG_DUEL_INBOUNDS;
 use crate::world::tbc::SMSG_DUEL_COMPLETE;
 use crate::world::tbc::SMSG_DUEL_WINNER;
 use crate::world::tbc::SMSG_NOTIFICATION;
+use crate::world::tbc::SMSG_LEVELUP_INFO;
 use crate::world::tbc::SMSG_PONG;
 use crate::world::tbc::SMSG_AUTH_CHALLENGE;
 use crate::world::tbc::SMSG_AUTH_RESPONSE;
@@ -2004,6 +2005,7 @@ pub enum ServerOpcodeMessage {
     SMSG_DUEL_COMPLETE(SMSG_DUEL_COMPLETE),
     SMSG_DUEL_WINNER(SMSG_DUEL_WINNER),
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
+    SMSG_LEVELUP_INFO(SMSG_LEVELUP_INFO),
     SMSG_PONG(SMSG_PONG),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
@@ -2098,6 +2100,7 @@ impl ServerOpcodeMessage {
             0x016A => Ok(Self::SMSG_DUEL_COMPLETE(<SMSG_DUEL_COMPLETE as crate::Message>::read_body(&mut r, body_size)?)),
             0x016B => Ok(Self::SMSG_DUEL_WINNER(<SMSG_DUEL_WINNER as crate::Message>::read_body(&mut r, body_size)?)),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01D4 => Ok(Self::SMSG_LEVELUP_INFO(<SMSG_LEVELUP_INFO as crate::Message>::read_body(&mut r, body_size)?)),
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2260,6 +2263,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_WINNER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LEVELUP_INFO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -2355,6 +2359,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_WINNER(c) => c.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LEVELUP_INFO(c) => c.write_unencrypted_server(w),
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -2450,6 +2455,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2545,6 +2551,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2640,6 +2647,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LEVELUP_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2735,6 +2743,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LEVELUP_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -2832,6 +2841,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_DUEL_COMPLETE(_) => "SMSG_DUEL_COMPLETE",
             ServerOpcodeMessage::SMSG_DUEL_WINNER(_) => "SMSG_DUEL_WINNER",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
+            ServerOpcodeMessage::SMSG_LEVELUP_INFO(_) => "SMSG_LEVELUP_INFO",
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
@@ -3197,6 +3207,12 @@ impl From<SMSG_DUEL_WINNER> for ServerOpcodeMessage {
 impl From<SMSG_NOTIFICATION> for ServerOpcodeMessage {
     fn from(c: SMSG_NOTIFICATION) -> Self {
         Self::SMSG_NOTIFICATION(c)
+    }
+}
+
+impl From<SMSG_LEVELUP_INFO> for ServerOpcodeMessage {
+    fn from(c: SMSG_LEVELUP_INFO) -> Self {
+        Self::SMSG_LEVELUP_INFO(c)
     }
 }
 

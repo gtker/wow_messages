@@ -448,6 +448,8 @@ pub(crate) mod smsg_force_move_unroot;
 pub use smsg_force_move_unroot::*;
 pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
+pub(crate) mod smsg_levelup_info;
+pub use smsg_levelup_info::*;
 pub(crate) mod smsg_login_settimespeed;
 pub use smsg_login_settimespeed::*;
 pub(crate) mod smsg_login_verify_world;
