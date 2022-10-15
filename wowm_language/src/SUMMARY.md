@@ -451,6 +451,7 @@
 - [CMSG_TAXIQUERYAVAILABLENODES](docs/cmsg_taxiqueryavailablenodes.md)
 - [CMSG_TELEPORT_TO_UNIT](docs/cmsg_teleport_to_unit.md)
 - [CMSG_TEXT_EMOTE](docs/cmsg_text_emote.md)
+- [CMSG_TIME_SYNC_RESP](docs/cmsg_time_sync_resp.md)
 - [CMSG_TOGGLE_CLOAK](docs/cmsg_toggle_cloak.md)
 - [CMSG_TOGGLE_HELM](docs/cmsg_toggle_helm.md)
 - [CMSG_TOGGLE_PVP](docs/cmsg_toggle_pvp.md)
