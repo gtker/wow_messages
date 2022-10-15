@@ -6,7 +6,7 @@ use crate::parser::types::version::Version;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::{
     Objects, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
-    RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
+    RUST_BASE_TYPE, SKIP_SERIALIZE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
 };
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
@@ -19,6 +19,7 @@ pub(crate) struct Tags {
     display: Option<String>,
     paste_versions: BTreeSet<WorldVersion>,
 
+    skip_serialize: Option<bool>,
     is_test: Option<bool>,
     skip: Option<bool>,
     unimplemented: Option<bool>,
@@ -147,6 +148,8 @@ impl Tags {
             }
         } else if key == COMPRESSED {
             self.compressed = Some(value.to_owned());
+        } else if key == SKIP_SERIALIZE {
+            self.skip_serialize = Some(value.eq("true"))
         } else if key == COMMENT {
             if let Some(comment) = &mut self.comment {
                 comment.add(value);
@@ -322,6 +325,10 @@ impl Tags {
 
     pub(crate) fn is_compressed(&self) -> bool {
         self.compressed.is_some()
+    }
+
+    pub(crate) fn skip_serialize(&self) -> bool {
+        self.skip_serialize.unwrap_or(false)
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {
