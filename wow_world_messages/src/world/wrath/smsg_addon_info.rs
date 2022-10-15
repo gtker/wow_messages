@@ -52,7 +52,7 @@ impl crate::Message for SMSG_ADDON_INFO {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        panic!()
+        panic!("This message has a `skip_serialize` tag which makes it impossible to generate a correct read implementation for it.")
     }
 
 }
