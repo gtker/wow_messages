@@ -1582,12 +1582,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_faction_flags,
-            { "Faction Flags", "woww.faction.flags",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_faction_id,
             { "Faction Id", "woww.faction.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,

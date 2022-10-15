@@ -607,8 +607,6 @@ pub(crate) mod faction;
 pub use faction::*;
 pub(crate) mod faction_flag;
 pub use faction_flag::*;
-pub(crate) mod faction_flags;
-pub use faction_flags::*;
 pub(crate) mod faction_initializer;
 pub use faction_initializer::*;
 pub(crate) mod far_sight_operation;

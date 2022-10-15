@@ -1348,7 +1348,7 @@
             break;
         case CMSG_SET_FACTION_ATWAR:
             ptvcursor_add(ptv, hf_woww_reputation_list_id, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_faction_flags, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_faction_flag, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_SET_FACTION_INACTIVE:
             ptvcursor_add(ptv, hf_woww_reputation_list_id, 4, ENC_LITTLE_ENDIAN);

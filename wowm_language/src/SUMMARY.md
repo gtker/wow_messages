@@ -77,7 +77,6 @@
 - [ExperienceAwardType](docs/experienceawardtype.md)
 - [ExtraMovementFlags](docs/extramovementflags.md)
 - [FactionFlag](docs/factionflag.md)
-- [FactionFlags](docs/factionflags.md)
 - [FarSightOperation](docs/farsightoperation.md)
 - [FriendResult](docs/friendresult.md)
 - [FriendStatus](docs/friendstatus.md)

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::FactionFlags;
+use crate::world::wrath::FactionFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -7,12 +7,12 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {
 ///     u32 reputation_list_id;
-///     FactionFlags flags;
+///     FactionFlag flags;
 /// }
 /// ```
 pub struct CMSG_SET_FACTION_ATWAR {
     pub reputation_list_id: u32,
-    pub flags: FactionFlags,
+    pub flags: FactionFlag,
 }
 
 impl crate::Message for CMSG_SET_FACTION_ATWAR {
@@ -26,7 +26,7 @@ impl crate::Message for CMSG_SET_FACTION_ATWAR {
         // reputation_list_id: u32
         w.write_all(&self.reputation_list_id.to_le_bytes())?;
 
-        // flags: FactionFlags
+        // flags: FactionFlag
         w.write_all(&(self.flags.as_int() as u8).to_le_bytes())?;
 
         Ok(())
@@ -39,8 +39,8 @@ impl crate::Message for CMSG_SET_FACTION_ATWAR {
         // reputation_list_id: u32
         let reputation_list_id = crate::util::read_u32_le(r)?;
 
-        // flags: FactionFlags
-        let flags = FactionFlags::new(crate::util::read_u8_le(r)?);
+        // flags: FactionFlag
+        let flags = FactionFlag::new(crate::util::read_u8_le(r)?);
 
         Ok(Self {
             reputation_list_id,

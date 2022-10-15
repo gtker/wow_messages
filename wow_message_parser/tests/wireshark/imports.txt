@@ -262,7 +262,6 @@ static int hf_woww_extend_flag = -1;
 static int hf_woww_face = -1;
 static int hf_woww_facial_hair = -1;
 static int hf_woww_faction_flag = -1;
-static int hf_woww_faction_flags = -1;
 static int hf_woww_faction_id = -1;
 static int hf_woww_fall_time = -1;
 static int hf_woww_far_sight_operation = -1;

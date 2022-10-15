@@ -6122,16 +6122,6 @@ typedef enum {
 } e_spell_cast_target_flags;
 
 typedef enum {
-    FACTION_FLAGS_VISIBLE = 0x01,
-    FACTION_FLAGS_AT_WAR = 0x02,
-    FACTION_FLAGS_HIDDEN = 0x04,
-    FACTION_FLAGS_INVISIBLE_FORCED = 0x08,
-    FACTION_FLAGS_PEACE_FORCED = 0x10,
-    FACTION_FLAGS_INACTIVE = 0x20,
-    FACTION_FLAGS_RIVAL = 0x40,
-} e_faction_flags;
-
-typedef enum {
     CHANNEL_FLAGS_NONE = 0x00,
     CHANNEL_FLAGS_CUSTOM = 0x01,
     CHANNEL_FLAGS_TRADE = 0x04,

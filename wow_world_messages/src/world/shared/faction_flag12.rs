@@ -1,6 +1,6 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm:36`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm#L36):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm#L1):
 /// ```text
-/// flag FactionFlags : u8 {
+/// flag FactionFlag : u8 {
 ///     VISIBLE = 0x01;
 ///     AT_WAR = 0x02;
 ///     HIDDEN = 0x04;
@@ -8,16 +8,15 @@
 ///     PEACE_FORCED = 0x10;
 ///     INACTIVE = 0x20;
 ///     RIVAL = 0x40;
-///     SPECIAL = 0x80;
 /// }
 
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
-pub struct FactionFlags {
+pub struct FactionFlag {
     inner: u8,
 }
 
-impl FactionFlags {
+impl FactionFlag {
     pub const fn new(inner: u8) -> Self {
         Self { inner }
     }
@@ -29,7 +28,6 @@ impl FactionFlags {
     pub(crate) const PEACE_FORCED: u8 = 0x10;
     pub(crate) const INACTIVE: u8 = 0x20;
     pub(crate) const RIVAL: u8 = 0x40;
-    pub(crate) const SPECIAL: u8 = 0x80;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -48,7 +46,6 @@ impl FactionFlags {
                 | Self::PEACE_FORCED
                 | Self::INACTIVE
                 | Self::RIVAL
-                | Self::SPECIAL
         }
     }
 
@@ -156,7 +153,7 @@ impl FactionFlags {
         (self.inner & Self::INACTIVE) != 0
     }
 
-    /// player controlled, state stored in characters.data ( `CMSG_SET_FACTION_INACTIVE` )
+    /// player controlled, state stored in characters.data ( [`CMSG_SET_FACTION_INACTIVE`](crate::world::vanilla::CMSG_SET_FACTION_INACTIVE) )
     ///
     pub const fn new_INACTIVE() -> Self {
         Self { inner: Self::INACTIVE }
@@ -190,26 +187,6 @@ impl FactionFlags {
 
     pub fn clear_RIVAL(&mut self) -> Self {
         self.inner &= Self::RIVAL.reverse_bits();
-        *self
-    }
-
-    pub const fn is_SPECIAL(&self) -> bool {
-        (self.inner & Self::SPECIAL) != 0
-    }
-
-    /// horde and alliance home cities and their northrend allies have this flag
-    ///
-    pub const fn new_SPECIAL() -> Self {
-        Self { inner: Self::SPECIAL }
-    }
-
-    pub fn set_SPECIAL(&mut self) -> Self {
-        self.inner |= Self::SPECIAL;
-        *self
-    }
-
-    pub fn clear_SPECIAL(&mut self) -> Self {
-        self.inner &= Self::SPECIAL.reverse_bits();
         *self
     }
 
