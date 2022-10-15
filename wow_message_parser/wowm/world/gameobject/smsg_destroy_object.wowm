@@ -1,11 +1,11 @@
-#tag_all versions "1.12";
-
 smsg SMSG_DESTROY_OBJECT = 0x00AA {
     Guid guid;
 } {
     description = "Immediately removes an object from the presence of the player.";
     comment = "Used by vmangos for logout.";
+    versions = "1 2";
 }
+
 
 test SMSG_DESTROY_OBJECT {
     guid = 6;
@@ -15,4 +15,15 @@ test SMSG_DESTROY_OBJECT {
   0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 /* guid */
 ] {
     description = "Remove object with GUID 6 from game world.";
+    versions = "1.12";
+}
+
+smsg SMSG_DESTROY_OBJECT = 0x00AA {
+    Guid guid;
+    Bool target_died;
+} {
+    description = "Immediately removes an object from the presence of the player.";
+    comment = "Used by vmangos for logout.";
+    comment = "azerothcore: If the following bool is true, the client will call 'void CGUnit_C::OnDeath()' for this object. OnDeath() does for eg trigger death animation and interrupts certain spells/missiles/auras/sounds...";
+    versions = "3.3.5";
 }

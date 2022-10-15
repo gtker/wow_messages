@@ -416,6 +416,8 @@ pub(crate) mod smsg_chat_wrong_faction;
 pub use smsg_chat_wrong_faction::*;
 pub(crate) mod smsg_defense_message;
 pub use smsg_defense_message::*;
+pub(crate) mod smsg_destroy_object;
+pub use smsg_destroy_object::*;
 pub(crate) mod smsg_duel_complete;
 pub use smsg_duel_complete::*;
 pub(crate) mod smsg_duel_countdown;
