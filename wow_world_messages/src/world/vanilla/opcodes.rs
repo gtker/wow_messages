@@ -11,7 +11,6 @@ use crate::world::vanilla::MSG_PETITION_DECLINE;
 use crate::world::vanilla::MSG_TABARDVENDOR_ACTIVATE;
 use crate::world::vanilla::MSG_QUEST_PUSH_RESULT;
 use crate::world::vanilla::MSG_PETITION_RENAME;
-use crate::world::vanilla::SMSG_UPDATE_WORLD_STATE;
 use crate::world::vanilla::CMSG_WORLD_TELEPORT;
 use crate::world::vanilla::CMSG_TELEPORT_TO_UNIT;
 use crate::world::vanilla::CMSG_CHAR_CREATE;
@@ -318,7 +317,6 @@ pub enum ClientOpcodeMessage {
     MSG_TABARDVENDOR_ACTIVATE(MSG_TABARDVENDOR_ACTIVATE),
     MSG_QUEST_PUSH_RESULT(MSG_QUEST_PUSH_RESULT),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
-    SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
     CMSG_WORLD_TELEPORT(CMSG_WORLD_TELEPORT),
     CMSG_TELEPORT_TO_UNIT(CMSG_TELEPORT_TO_UNIT),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
@@ -627,7 +625,6 @@ impl ClientOpcodeMessage {
             0x01F2 => Ok(Self::MSG_TABARDVENDOR_ACTIVATE(<MSG_TABARDVENDOR_ACTIVATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0276 => Ok(Self::MSG_QUEST_PUSH_RESULT(<MSG_QUEST_PUSH_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
-            0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0008 => Ok(Self::CMSG_WORLD_TELEPORT(<CMSG_WORLD_TELEPORT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0009 => Ok(Self::CMSG_TELEPORT_TO_UNIT(<CMSG_TELEPORT_TO_UNIT as crate::Message>::read_body(&mut r, body_size)?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -1004,7 +1001,6 @@ impl ClientOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_client(w, e),
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
@@ -1314,7 +1310,6 @@ impl ClientOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_client(w),
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
@@ -1624,7 +1619,6 @@ impl ClientOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1934,7 +1928,6 @@ impl ClientOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2244,7 +2237,6 @@ impl ClientOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2554,7 +2546,6 @@ impl ClientOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_client(w).await,
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2894,7 +2885,6 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => "MSG_TABARDVENDOR_ACTIVATE",
             ClientOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => "MSG_QUEST_PUSH_RESULT",
             ClientOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
-            ClientOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(_) => "CMSG_WORLD_TELEPORT",
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(_) => "CMSG_TELEPORT_TO_UNIT",
             ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
@@ -3224,12 +3214,6 @@ impl From<MSG_QUEST_PUSH_RESULT> for ClientOpcodeMessage {
 impl From<MSG_PETITION_RENAME> for ClientOpcodeMessage {
     fn from(c: MSG_PETITION_RENAME) -> Self {
         Self::MSG_PETITION_RENAME(c)
-    }
-}
-
-impl From<SMSG_UPDATE_WORLD_STATE> for ClientOpcodeMessage {
-    fn from(c: SMSG_UPDATE_WORLD_STATE) -> Self {
-        Self::SMSG_UPDATE_WORLD_STATE(c)
     }
 }
 
@@ -5302,6 +5286,7 @@ use crate::world::vanilla::SMSG_MEETINGSTONE_JOINFAILED;
 use crate::world::vanilla::SMSG_PLAYER_SKINNED;
 use crate::world::vanilla::SMSG_DURABILITY_DAMAGE_DEATH;
 use crate::world::vanilla::SMSG_INIT_WORLD_STATES;
+use crate::world::vanilla::SMSG_UPDATE_WORLD_STATE;
 use crate::world::vanilla::SMSG_ITEM_NAME_QUERY_RESPONSE;
 use crate::world::vanilla::SMSG_PET_ACTION_FEEDBACK;
 use crate::world::vanilla::SMSG_CHAR_RENAME;
@@ -5368,7 +5353,6 @@ pub enum ServerOpcodeMessage {
     MSG_TABARDVENDOR_ACTIVATE(MSG_TABARDVENDOR_ACTIVATE),
     MSG_QUEST_PUSH_RESULT(MSG_QUEST_PUSH_RESULT),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
-    SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
     SMSG_CHAR_CREATE(SMSG_CHAR_CREATE),
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_CHAR_DELETE(SMSG_CHAR_DELETE),
@@ -5650,6 +5634,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PLAYER_SKINNED(SMSG_PLAYER_SKINNED),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
     SMSG_INIT_WORLD_STATES(SMSG_INIT_WORLD_STATES),
+    SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
     SMSG_ITEM_NAME_QUERY_RESPONSE(SMSG_ITEM_NAME_QUERY_RESPONSE),
     SMSG_PET_ACTION_FEEDBACK(SMSG_PET_ACTION_FEEDBACK),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
@@ -5718,7 +5703,6 @@ impl ServerOpcodeMessage {
             0x01F2 => Ok(Self::MSG_TABARDVENDOR_ACTIVATE(<MSG_TABARDVENDOR_ACTIVATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0276 => Ok(Self::MSG_QUEST_PUSH_RESULT(<MSG_QUEST_PUSH_RESULT as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
-            0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003A => Ok(Self::SMSG_CHAR_CREATE(<SMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size)?)),
             0x003C => Ok(Self::SMSG_CHAR_DELETE(<SMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size)?)),
@@ -6000,6 +5984,7 @@ impl ServerOpcodeMessage {
             0x02BC => Ok(Self::SMSG_PLAYER_SKINNED(<SMSG_PLAYER_SKINNED as crate::Message>::read_body(&mut r, body_size)?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C2 => Ok(Self::SMSG_INIT_WORLD_STATES(<SMSG_INIT_WORLD_STATES as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C5 => Ok(Self::SMSG_ITEM_NAME_QUERY_RESPONSE(<SMSG_ITEM_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C6 => Ok(Self::SMSG_PET_ACTION_FEEDBACK(<SMSG_PET_ACTION_FEEDBACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
@@ -6136,7 +6121,6 @@ impl ServerOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_encrypted_server(w, e),
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_encrypted_server(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_DELETE(c) => c.write_encrypted_server(w, e),
@@ -6418,6 +6402,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYER_SKINNED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INIT_WORLD_STATES(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
@@ -6487,7 +6472,6 @@ impl ServerOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_unencrypted_server(w),
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_unencrypted_server(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_server(w),
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_DELETE(c) => c.write_unencrypted_server(w),
@@ -6769,6 +6753,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYER_SKINNED(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
             Self::SMSG_INIT_WORLD_STATES(c) => c.write_unencrypted_server(w),
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
@@ -6838,7 +6823,6 @@ impl ServerOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7120,6 +7104,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYER_SKINNED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7189,7 +7174,6 @@ impl ServerOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7471,6 +7455,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYER_SKINNED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7540,7 +7525,6 @@ impl ServerOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7822,6 +7806,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYER_SKINNED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7891,7 +7876,6 @@ impl ServerOpcodeMessage {
             Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8173,6 +8157,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYER_SKINNED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
@@ -8244,7 +8229,6 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => "MSG_TABARDVENDOR_ACTIVATE",
             ServerOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => "MSG_QUEST_PUSH_RESULT",
             ServerOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
-            ServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
             ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => "SMSG_CHAR_CREATE",
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
             ServerOpcodeMessage::SMSG_CHAR_DELETE(_) => "SMSG_CHAR_DELETE",
@@ -8526,6 +8510,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PLAYER_SKINNED(_) => "SMSG_PLAYER_SKINNED",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
             ServerOpcodeMessage::SMSG_INIT_WORLD_STATES(_) => "SMSG_INIT_WORLD_STATES",
+            ServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
             ServerOpcodeMessage::SMSG_ITEM_NAME_QUERY_RESPONSE(_) => "SMSG_ITEM_NAME_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_PET_ACTION_FEEDBACK(_) => "SMSG_PET_ACTION_FEEDBACK",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
@@ -8615,12 +8600,6 @@ impl From<MSG_QUEST_PUSH_RESULT> for ServerOpcodeMessage {
 impl From<MSG_PETITION_RENAME> for ServerOpcodeMessage {
     fn from(c: MSG_PETITION_RENAME) -> Self {
         Self::MSG_PETITION_RENAME(c)
-    }
-}
-
-impl From<SMSG_UPDATE_WORLD_STATE> for ServerOpcodeMessage {
-    fn from(c: SMSG_UPDATE_WORLD_STATE) -> Self {
-        Self::SMSG_UPDATE_WORLD_STATE(c)
     }
 }
 
@@ -10307,6 +10286,12 @@ impl From<SMSG_DURABILITY_DAMAGE_DEATH> for ServerOpcodeMessage {
 impl From<SMSG_INIT_WORLD_STATES> for ServerOpcodeMessage {
     fn from(c: SMSG_INIT_WORLD_STATES) -> Self {
         Self::SMSG_INIT_WORLD_STATES(c)
+    }
+}
+
+impl From<SMSG_UPDATE_WORLD_STATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_WORLD_STATE) -> Self {
+        Self::SMSG_UPDATE_WORLD_STATE(c)
     }
 }
 

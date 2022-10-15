@@ -5,7 +5,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_update_world_state.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_update_world_state.wowm#L3):
 /// ```text
-/// msg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
+/// smsg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
 ///     WorldState state;
 /// }
 /// ```
@@ -41,19 +41,10 @@ impl crate::Message for SMSG_UPDATE_WORLD_STATE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for SMSG_UPDATE_WORLD_STATE {}
-
-#[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for SMSG_UPDATE_WORLD_STATE {}
-
-#[cfg(feature = "tbc")]
 impl crate::world::tbc::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
-
-#[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for SMSG_UPDATE_WORLD_STATE {}
 
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
