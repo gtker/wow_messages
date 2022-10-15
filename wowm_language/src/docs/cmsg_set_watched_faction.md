@@ -1,6 +1,6 @@
 # CMSG_SET_WATCHED_FACTION
 
-## Client Version 1.12
+## Client Version 1.10, Client Version 1.11, Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation
 

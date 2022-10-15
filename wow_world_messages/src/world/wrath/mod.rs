@@ -200,6 +200,8 @@ pub(crate) mod cmsg_set_selection;
 pub use cmsg_set_selection::*;
 pub(crate) mod cmsg_set_target_obsolete;
 pub use cmsg_set_target_obsolete::*;
+pub(crate) mod cmsg_set_watched_faction;
+pub use cmsg_set_watched_faction::*;
 pub(crate) mod cmsg_setsheathed;
 pub use cmsg_setsheathed::*;
 pub(crate) mod cmsg_text_emote;

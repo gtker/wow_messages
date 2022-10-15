@@ -108,6 +108,7 @@ use crate::world::tbc::MSG_BATTLEGROUND_PLAYER_POSITIONS_Client;
 use crate::world::tbc::CMSG_BATTLEMASTER_JOIN;
 use crate::world::tbc::CMSG_ACTIVATETAXIEXPRESS;
 use crate::world::tbc::CMSG_SET_FACTION_INACTIVE;
+use crate::world::tbc::CMSG_SET_WATCHED_FACTION;
 use crate::world::tbc::CMSG_MOVE_SET_FLY;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Client;
 use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Client;
@@ -221,6 +222,7 @@ pub enum ClientOpcodeMessage {
     CMSG_BATTLEMASTER_JOIN(CMSG_BATTLEMASTER_JOIN),
     CMSG_ACTIVATETAXIEXPRESS(CMSG_ACTIVATETAXIEXPRESS),
     CMSG_SET_FACTION_INACTIVE(CMSG_SET_FACTION_INACTIVE),
+    CMSG_SET_WATCHED_FACTION(CMSG_SET_WATCHED_FACTION),
     CMSG_MOVE_SET_FLY(CMSG_MOVE_SET_FLY),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Client),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Client),
@@ -336,6 +338,7 @@ impl ClientOpcodeMessage {
             0x02EE => Ok(Self::CMSG_BATTLEMASTER_JOIN(<CMSG_BATTLEMASTER_JOIN as crate::Message>::read_body(&mut r, body_size)?)),
             0x0312 => Ok(Self::CMSG_ACTIVATETAXIEXPRESS(<CMSG_ACTIVATETAXIEXPRESS as crate::Message>::read_body(&mut r, body_size)?)),
             0x0317 => Ok(Self::CMSG_SET_FACTION_INACTIVE(<CMSG_SET_FACTION_INACTIVE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0318 => Ok(Self::CMSG_SET_WATCHED_FACTION(<CMSG_SET_WATCHED_FACTION as crate::Message>::read_body(&mut r, body_size)?)),
             0x0346 => Ok(Self::CMSG_MOVE_SET_FLY(<CMSG_MOVE_SET_FLY as crate::Message>::read_body(&mut r, body_size)?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Client as crate::Message>::read_body(&mut r, body_size)?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Client as crate::Message>::read_body(&mut r, body_size)?)),
@@ -519,6 +522,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SET_WATCHED_FACTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
@@ -635,6 +639,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SET_WATCHED_FACTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
@@ -751,6 +756,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -867,6 +873,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
@@ -983,6 +990,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1099,6 +1107,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
@@ -1250,6 +1259,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN(_) => "CMSG_BATTLEMASTER_JOIN",
             ClientOpcodeMessage::CMSG_ACTIVATETAXIEXPRESS(_) => "CMSG_ACTIVATETAXIEXPRESS",
             ClientOpcodeMessage::CMSG_SET_FACTION_INACTIVE(_) => "CMSG_SET_FACTION_INACTIVE",
+            ClientOpcodeMessage::CMSG_SET_WATCHED_FACTION(_) => "CMSG_SET_WATCHED_FACTION",
             ClientOpcodeMessage::CMSG_MOVE_SET_FLY(_) => "CMSG_MOVE_SET_FLY",
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Client",
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Client",
@@ -1871,6 +1881,12 @@ impl From<CMSG_ACTIVATETAXIEXPRESS> for ClientOpcodeMessage {
 impl From<CMSG_SET_FACTION_INACTIVE> for ClientOpcodeMessage {
     fn from(c: CMSG_SET_FACTION_INACTIVE) -> Self {
         Self::CMSG_SET_FACTION_INACTIVE(c)
+    }
+}
+
+impl From<CMSG_SET_WATCHED_FACTION> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_WATCHED_FACTION) -> Self {
+        Self::CMSG_SET_WATCHED_FACTION(c)
     }
 }
 

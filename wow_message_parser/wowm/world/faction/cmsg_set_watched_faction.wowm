@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.10 1.11 1.12 2 3";
 
 cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
     /* TODO rep id */

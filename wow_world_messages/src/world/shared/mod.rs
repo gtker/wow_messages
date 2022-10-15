@@ -65,6 +65,7 @@ pub mod cmsg_set_faction_atwar12;
 pub mod cmsg_set_faction_inactive12;
 pub mod cmsg_set_selection123;
 pub mod cmsg_set_target_obsolete1_1223;
+pub mod cmsg_set_watched_faction1_1223;
 pub mod cmsg_setsheathed123;
 pub mod cmsg_time_sync_resp2_4_33;
 pub mod cmsg_tutorial_clear123;
