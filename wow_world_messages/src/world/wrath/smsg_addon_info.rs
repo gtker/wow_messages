@@ -52,22 +52,7 @@ impl crate::Message for SMSG_ADDON_INFO {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        // number_of_addons: u32
-        let number_of_addons = crate::util::read_u32_le(r)?;
-
-        // addons: Addon[number_of_addons]
-        let mut addons = Vec::with_capacity(number_of_addons as usize);
-        for i in 0..number_of_addons {
-            addons.push(Addon::read(r)?);
-        }
-
-        // number_of_banned_addons: u32
-        let _number_of_banned_addons = crate::util::read_u32_le(r)?;
-        // number_of_banned_addons is expected to always be 0 (0)
-
-        Ok(Self {
-            addons,
-        })
+        panic!()
     }
 
 }

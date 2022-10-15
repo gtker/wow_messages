@@ -13,6 +13,7 @@
 
 # Low Priority
 
+* `skip_serialize` read impls currently panic.
 * Max size of vanilla message (10240) mangoszero/server/WorldSocket.cpp:367
 
 * Feature has variants that are never constructed
