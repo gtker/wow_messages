@@ -60,7 +60,7 @@ Immediately removes an object from the presence of the player.
 
 Used by vmangos for logout.
 
-azerothcore: If the following bool is true, the client will call 'void CGUnit_C::OnDeath()' for this object. OnDeath() does for eg trigger death animation and interrupts certain spells/missiles/auras/sounds...
+azerothcore: If the following bool is true, the client will call `void CGUnit_C::OnDeath()` for this object. `OnDeath()` does for eg trigger death animation and interrupts certain spells/missiles/auras/sounds...
 
 ### Wowm Representation
 
