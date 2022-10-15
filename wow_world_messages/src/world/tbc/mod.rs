@@ -188,6 +188,8 @@ pub(crate) mod cmsg_setsheathed;
 pub use cmsg_setsheathed::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
+pub(crate) mod cmsg_time_sync_resp;
+pub use cmsg_time_sync_resp::*;
 pub(crate) mod cmsg_tutorial_clear;
 pub use cmsg_tutorial_clear::*;
 pub(crate) mod cmsg_tutorial_flag;
