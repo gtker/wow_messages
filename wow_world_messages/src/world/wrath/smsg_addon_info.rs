@@ -76,8 +76,7 @@ impl crate::world::wrath::ServerMessage for SMSG_ADDON_INFO {}
 
 impl SMSG_ADDON_INFO {
     pub(crate) fn size(&self) -> usize {
-        4 // number_of_addons: u32
-        + self.addons.len() * 8 // addons: Addon[number_of_addons]
+        self.addons.len() * 8 // addons: Addon[number_of_addons]
         + 4 // number_of_banned_addons: u32
     }
 }

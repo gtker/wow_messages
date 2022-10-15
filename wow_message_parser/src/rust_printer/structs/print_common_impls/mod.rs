@@ -151,9 +151,13 @@ pub(crate) fn print_rust_members_sizes(
     is_elseif: Option<bool>,
     prefix: &str,
 ) {
-    for (i, m) in members.iter().enumerate() {
-        let is_elseif = if let Some(b) = is_elseif { b } else { true };
+    let mut i = 0;
+    for m in members {
+        if m.tags().skip_serialize() {
+            continue;
+        }
 
+        let is_elseif = if let Some(b) = is_elseif { b } else { true };
         if i == 0 && is_elseif {
             s.w("");
         } else {
@@ -161,6 +165,8 @@ pub(crate) fn print_rust_members_sizes(
         }
 
         print_size_of_ty_rust_view(s, m, prefix);
+
+        i += 1;
     }
 }
 
