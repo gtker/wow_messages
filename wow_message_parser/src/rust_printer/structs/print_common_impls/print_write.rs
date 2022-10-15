@@ -154,11 +154,18 @@ pub(crate) fn print_write_definition(
     d: &StructMemberDefinition,
     postfix: &str,
 ) {
-    s.wln(format!(
-        "// {name}: {type_name}",
-        name = d.name(),
-        type_name = d.ty().str()
-    ));
+    if !(d.used_as_size_in().is_some() && d.tags().skip_serialize()) {
+        s.wln(format!(
+            "// {name}: {type_name}",
+            name = d.name(),
+            type_name = d.ty().str()
+        ));
+    } else {
+        s.wln(format!(
+            "// {name} is included in the struct but explicitly excluded due to its `skip_serialize` tag.",
+            name = d.name(),
+        ));
+    }
 
     match d.ty() {
         Type::Integer(int_type) => {
@@ -172,16 +179,18 @@ pub(crate) fn print_write_definition(
                 0
             };
 
-            print_write_field_integer(
-                s,
-                d.name(),
-                variable_prefix,
-                int_type,
-                d.used_as_size_in(),
-                d.value(),
-                size,
-                postfix,
-            );
+            if !(d.used_as_size_in().is_some() && d.tags().skip_serialize()) {
+                print_write_field_integer(
+                    s,
+                    d.name(),
+                    variable_prefix,
+                    int_type,
+                    d.used_as_size_in(),
+                    d.value(),
+                    size,
+                    postfix,
+                );
+            }
         }
         Type::Bool(i) => {
             s.wln(format!(

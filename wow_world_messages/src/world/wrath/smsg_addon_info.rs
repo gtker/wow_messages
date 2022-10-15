@@ -39,8 +39,7 @@ impl crate::Message for SMSG_ADDON_INFO {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // number_of_addons: u32
-        w.write_all(&(self.addons.len() as u32).to_le_bytes())?;
+        // number_of_addons is included in the struct but explicitly excluded due to its `skip_serialize` tag.
 
         // addons: Addon[number_of_addons]
         for i in self.addons.iter() {

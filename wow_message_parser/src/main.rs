@@ -52,6 +52,7 @@ const COMPRESSED: &str = "compressed";
 const COMMENT: &str = "comment";
 const DISPLAY: &str = "display";
 const TEST_STR: &str = "test";
+const SKIP_SERIALIZE: &str = "skip_serialize";
 const SKIP_STR: &str = "skip_codegen";
 const LOGIN_VERSIONS: &str = "login_versions";
 const RUST_BASE_TYPE: &str = "rust_base_type";
