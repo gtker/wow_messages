@@ -434,8 +434,26 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
 
         let mut values = HashMap::new();
 
-        for m in e.members() {
-            print_container_example_member(s, e, m, &mut bytes, &mut values, o, e.tags(), "");
+        if e.tags().is_compressed() {
+            // All fully compressed messages have a u32 at the start with the decompressed size.
+            let _decompressed_size: Vec<&u8> = bytes.clone().take(4).collect();
+
+            let mut decoded_bytes = Vec::new();
+            let encoded_bytes: Vec<u8> = bytes.skip(4).cloned().collect();
+            let mut decoder = flate2::read::ZlibDecoder::new(encoded_bytes.as_slice());
+            decoder
+                .read_to_end(&mut decoded_bytes)
+                .expect("Failed to decode ZLib compressed field.");
+
+            let mut bytes = decoded_bytes.iter();
+
+            for m in e.members() {
+                print_container_example_member(s, e, m, &mut bytes, &mut values, o, e.tags(), "");
+            }
+        } else {
+            for m in e.members() {
+                print_container_example_member(s, e, m, &mut bytes, &mut values, o, e.tags(), "");
+            }
         }
 
         s.wln("```");

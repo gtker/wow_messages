@@ -835,6 +835,20 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
         return;
     }
 
+    // For fully compressed messages, replace the writer with a ZLibDecoder.
+    if e.tags().is_compressed() {
+        // Fully compressed messages always start with a u32 containing the decompressed size.
+        // We don't care about that, so we just ignore it.
+        s.wln("let mut decompressed_size = [0_u8; 4];");
+        s.wln("r.read_exact(&mut decompressed_size);"); 
+        s.newline();
+
+        s.wln(format!(
+            "let mut r = &mut flate2::read::ZlibDecoder::new(r);"
+        )); 
+        s.newline();
+    }
+
     for field in e.members() {
         print_read_field(s, e, o, field, prefix, postfix);
     }
