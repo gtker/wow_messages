@@ -145,6 +145,25 @@ pub(crate) fn print_constant_member(
     ));
 }
 
+pub(crate) fn print_rust_members_sizes(
+    s: &mut Writer,
+    members: &[RustMember],
+    is_elseif: Option<bool>,
+    prefix: &str,
+) {
+    for (i, m) in members.iter().enumerate() {
+        let is_elseif = if let Some(b) = is_elseif { b } else { true };
+
+        if i == 0 && is_elseif {
+            s.w("");
+        } else {
+            s.w("+ ");
+        }
+
+        print_size_of_ty_rust_view(s, m, prefix);
+    }
+}
+
 pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
     let str = match m.ty() {
         RustType::Bool(i) => format!("{}", i.size()),
@@ -282,15 +301,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
 pub(crate) fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
     if !r.constant_sized() {
         s.variable_size(r.name(), |s| {
-            for (i, m) in r.members().iter().enumerate() {
-                if i != 0 {
-                    s.w("+ ");
-                } else {
-                    s.w("");
-                }
-
-                print_size_of_ty_rust_view(s, m, prefix);
-            }
+            print_rust_members_sizes(s, r.members(), None, prefix);
 
             if let Some(optional) = r.optional() {
                 s.body_else(
@@ -305,15 +316,7 @@ pub(crate) fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str)
                     ),
                     |s| {
                         let prefix = format!("{}.", optional.name());
-                        for (i, m) in optional.members_in_struct().iter().enumerate() {
-                            if i != 0 {
-                                s.w("+ ");
-                            } else {
-                                s.w("");
-                            }
-
-                            print_size_of_ty_rust_view(s, m, &prefix);
-                        }
+                        print_rust_members_sizes(s, optional.members(), None, &prefix);
                     },
                     |s| {
                         s.wln("0");

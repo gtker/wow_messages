@@ -5,7 +5,9 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::rust_printer::rust_view::{RustDefiner, RustType};
-use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
+use crate::rust_printer::structs::print_common_impls::{
+    print_rust_members_sizes, print_size_of_ty_rust_view,
+};
 use crate::rust_printer::{get_new_flag_type_name, get_new_type_name, DefinerType};
 use crate::rust_printer::{get_optional_type_name, Writer};
 use crate::UTILITY_PATH;
@@ -745,15 +747,7 @@ fn print_read_field(
                         s.wln("0");
                     }
 
-                    for (i, m) in e.rust_object().members().iter().enumerate() {
-                        if i != 0 {
-                            s.w("+ ");
-                        } else {
-                            s.w("");
-                        }
-
-                        print_size_of_ty_rust_view(s, m, "");
-                    }
+                    print_rust_members_sizes(s, e.rust_object().members(), None, "");
                 },
                 ";",
             );

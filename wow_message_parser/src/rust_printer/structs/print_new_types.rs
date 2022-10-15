@@ -1,7 +1,7 @@
 use crate::parser::types::array::ArraySize;
 use crate::parser::types::container::Container;
 use crate::rust_printer::rust_view::{RustDefiner, RustType};
-use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
+use crate::rust_printer::structs::print_common_impls::print_rust_members_sizes;
 use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
 use crate::rust_printer::{get_new_flag_type_name, DefinerType};
@@ -294,15 +294,7 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         });
 
         s.variable_size(&new_type_name, |s| {
-            for (i, m) in enumerator.members().iter().enumerate() {
-                if i != 0 {
-                    s.w("+ ");
-                } else {
-                    s.w("");
-                }
-
-                print_size_of_ty_rust_view(s, m, "self.");
-            }
+            print_rust_members_sizes(s, enumerator.members(), None, "self.");
         });
     }
 }
@@ -389,15 +381,7 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
                     s.wln(format!("{}", re.int_ty().size()));
                 }
 
-                for (i, m) in enumerator.members().iter().enumerate() {
-                    if i == 0 && re.is_elseif() {
-                        s.w("");
-                    } else {
-                        s.w("+ ");
-                    }
-
-                    print_size_of_ty_rust_view(s, m, "");
-                }
+                print_rust_members_sizes(s, enumerator.members(), Some(re.is_elseif()), "");
                 s.closing_curly();
             }
         });

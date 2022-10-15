@@ -1,5 +1,5 @@
 use crate::rust_printer::rust_view::RustOptional;
-use crate::rust_printer::structs::print_common_impls::print_size_of_ty_rust_view;
+use crate::rust_printer::structs::print_common_impls::print_rust_members_sizes;
 use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
 
@@ -30,16 +30,7 @@ fn print_impls(s: &mut Writer, optional: &RustOptional) {
     s.open_curly(format!("impl {ty}", ty = optional.ty(),));
 
     s.funcn("size(&self)", "usize", |s| {
-        for (i, m) in optional.members().iter().enumerate() {
-            // Optional can never be empty so we don't need a 0 for empty cases
-            if i == 0 {
-                s.w("");
-            } else {
-                s.w("+ ");
-            }
-
-            print_size_of_ty_rust_view(s, m, "self.");
-        }
+        print_rust_members_sizes(s, optional.members(), None, "self.");
     });
 
     s.closing_curly();

@@ -454,9 +454,6 @@ impl RustOptional {
     pub(crate) fn members(&self) -> &[RustMember] {
         &self.members
     }
-    pub(crate) fn members_in_struct(&self) -> Vec<&RustMember> {
-        self.members.iter().filter(|a| a.in_rust_type).collect()
-    }
     pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
