@@ -21,7 +21,7 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
 
     s.open_curly("switch (opcode)");
     for e in o.wireshark_messages() {
-        if e.empty_body() || is_client_name(e.name()) {
+        if e.empty_body() || is_client_name(e.name()) || e.tags().compressed().is_some() {
             continue;
         }
 
