@@ -107,10 +107,9 @@ struct MovementInfo {
             u32 transport_time;
         } */
     }
-    /* TODO: Also || extra_flags & ALWAYS_ALLOW_PITCHING */
-    if (flags & SWIMMING) {
+    if (flags & SWIMMING /*TODO: || flags & FLYING || extra_flags & ALWAYS_ALLOW_PITCHING */) {
         f32 pitch1;
-    /* TODO: || not working */
+    /* TODO: Above does not work, this is a workaround */
     } else if (flags & FLYING) {
         f32 pitch2;
     }
