@@ -150,7 +150,7 @@ pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &s
         s.newline();
 
         s.wln(format!(
-            "let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::default());"
+            "let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());"
         )); 
         s.newline();
     }

@@ -1,0 +1,153 @@
+#tag_all versions "1.12";
+
+smsg SMSG_COMPRESSED_UPDATE_OBJECT = 0x1F6 {
+    u32 amount_of_objects;
+    u8 has_transport;
+    Object[amount_of_objects] objects;
+} {
+    versions = "1.12";
+    compressed = "true";
+}
+
+test SMSG_COMPRESSED_UPDATE_OBJECT {
+    has_transport = 1;
+    objects = [
+        {
+            update_type = CREATE_OBJECT;
+            guid3 = 2287828610704232776;
+            object_type = GAME_OBJECT;
+            movement2 = {
+                update_flag = ALL | TRANSPORT | HAS_POSITION;
+                flags = 0x00;
+                timestamp = 0;
+                position = {
+                    x = 0.0;
+                    y = 0.0;
+                    z = 0.0;
+                };
+                orientation = 4.0249395;
+                unknown1 = 1;
+                transport_progress_in_ms = 386273;
+            };
+            mask2 = {
+                OBJECT_GUID = 2287828610704232776;
+                OBJECT_TYPE = 0x20;
+                OBJECT_ENTRY = 20808;
+                OBJECT_SCALE_X = 1.0;
+                GAMEOBJECT_DISPLAYID = 3015;
+                GAMEOBJECT_FLAGS = 40;
+                GAMEOBJECT_STATE = 1;
+                GAMEOBJECT_TYPE_ID = 15;
+                GAMEOBJECT_ANIMPROGRESS = 100;
+            };
+        },
+        {
+            update_type = CREATE_OBJECT;
+            guid3 = 2287828610704388212;
+            object_type = GAME_OBJECT;
+            movement2 = {
+                update_flag = ALL | TRANSPORT | HAS_POSITION;
+                flags = 0x00;
+                timestamp = 0;
+                position = {
+                    x = 0.0;
+                    y = 0.0;
+                    z = 0.0;
+                };
+                orientation = 1.5709158;
+                unknown1 = 1;
+                transport_progress_in_ms = 386273;
+            };
+            mask2 = {
+                OBJECT_GUID = 2287828610704388212;
+                OBJECT_TYPE = 0x20;
+                OBJECT_ENTRY = 176244;
+                OBJECT_SCALE_X = 1.0;
+                GAMEOBJECT_DISPLAYID = 3015;
+                GAMEOBJECT_FLAGS = 40;
+                GAMEOBJECT_STATE = 1;
+                GAMEOBJECT_TYPE_ID = 15;
+                GAMEOBJECT_ANIMPROGRESS = 100;
+            };
+        },
+        {
+            update_type = CREATE_OBJECT;
+            guid3 = 2287828610704376839;
+            object_type = GAME_OBJECT;
+            movement2 = {
+                update_flag = ALL | TRANSPORT | HAS_POSITION;
+                flags = 0x00;
+                timestamp = 0;
+                position = {
+                    x = 0.0;
+                    y = 0.0;
+                    z = 0.0;
+                };
+                orientation = 4.5152526;
+                unknown1 = 1;
+                transport_progress_in_ms = 386273;
+            };
+            mask2 = {
+                OBJECT_GUID = 2287828610704376839;
+                OBJECT_TYPE = 0x20;
+                OBJECT_ENTRY = 164871;
+                OBJECT_SCALE_X = 1.0;
+                GAMEOBJECT_DISPLAYID = 3031;
+                GAMEOBJECT_FLAGS = 40;
+                GAMEOBJECT_STATE = 1;
+                GAMEOBJECT_TYPE_ID = 15;
+                GAMEOBJECT_ANIMPROGRESS = 100;
+            };
+        },
+        {
+            update_type = CREATE_OBJECT;
+            guid3 = 2287828610704389201;
+            object_type = GAME_OBJECT;
+            movement2 = {
+                update_flag = ALL | TRANSPORT | HAS_POSITION;
+                flags = 0x00;
+                timestamp = 0;
+                position = {
+                    x = 0.0;
+                    y = 0.0;
+                    z = 0.0;
+                };
+                orientation = 1.4187208;
+                unknown1 = 1;
+                transport_progress_in_ms = 386273;
+            };
+            mask2 = {
+                OBJECT_GUID = 2287828610704389201;
+                OBJECT_TYPE = 0x20;
+                OBJECT_ENTRY = 177233;
+                OBJECT_SCALE_X = 1.0;
+                GAMEOBJECT_DISPLAYID = 3015;
+                GAMEOBJECT_FLAGS = 40;
+                GAMEOBJECT_STATE = 1;
+                GAMEOBJECT_TYPE_ID = 15;
+                GAMEOBJECT_ANIMPROGRESS = 100;
+            };
+        }
+    ];
+} [
+  0x00, 0x89, 0xf6, 0x01, 0x3c, 0x01, 0x00, 0x00,
+  0x78, 0x01, 0x63, 0x61, 0x60, 0x60, 0x60, 0x64,
+  0x3a, 0xec, 0x11, 0x78, 0x40, 0x9e, 0x35, 0x08,
+  0xc8, 0x86, 0x03, 0xbf, 0x33, 0x0d, 0x0e, 0x8c,
+  0x40, 0xde, 0xc3, 0x27, 0xac, 0x0c, 0x8c, 0xf2,
+  0xce, 0x0a, 0x8c, 0x1e, 0x81, 0x20, 0xb9, 0x03,
+  0xf2, 0x8a, 0x40, 0x12, 0xc2, 0x6e, 0xb0, 0x3f,
+  0xce, 0xcd, 0xc0, 0xa0, 0x01, 0xe4, 0x83, 0x14,
+  0xf2, 0x03, 0x71, 0x0a, 0x10, 0x33, 0x1d, 0x2f,
+  0xd9, 0xc0, 0x84, 0x6e, 0xda, 0x51, 0xe1, 0x93,
+  0xf6, 0x28, 0xa6, 0x01, 0xd5, 0x00, 0xd5, 0x42,
+  0x4c, 0x83, 0xb0, 0x71, 0x99, 0xc6, 0xde, 0x82,
+  0x61, 0xda, 0xe7, 0x9a, 0x09, 0xa8, 0x6e, 0x03,
+  0xaa, 0x81, 0x9b, 0x06, 0x61, 0x37, 0xd8, 0x5f,
+  0xc7, 0xea, 0xb6, 0xc0, 0x2d, 0x18, 0xa6, 0x2d,
+  0x9d, 0xb1, 0x15, 0xd5, 0x6d, 0x40, 0x35, 0x70,
+  0xd3, 0x20, 0x6c, 0xec, 0x6e, 0x03, 0x00, 0x36,
+  0x4c, 0x30, 0x21
+] {
+    description = "Most minimal package required to load into the world. Also requires a valid [SMSG_TUTORIAL_FLAGS] and [SMSG_LOGIN_VERIFY_WORLD].";
+}
