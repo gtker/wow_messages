@@ -12,7 +12,7 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     versions = "1.12";
 }
 
-enum HasDeclinedNames : u8 {
+enum DeclinedNames : u8 {
     NO = 0;
     YES = 1;
 } {
@@ -32,7 +32,7 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     (u8)Race race;
     (u8)Gender gender;
     (u8)Class class;
-    HasDeclinedNames has_declined_names;
+    DeclinedNames has_declined_names;
     if (has_declined_names == YES) {
         CString[5] declined_names;
     }

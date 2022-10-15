@@ -87,7 +87,7 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x0051 {
     Race race;
     Gender gender;
     Class class;
-    HasDeclinedNames has_declined_names;
+    DeclinedNames has_declined_names;
     if (has_declined_names == YES) {
         CString[5] declined_names;
     }
@@ -115,7 +115,7 @@ SMSG have a header of 4 bytes.
 | - | 1 / - | [Race](race.md) | race |  |  |
 | - | 1 / - | [Gender](gender.md) | gender |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |
-| - | 1 / - | [HasDeclinedNames](hasdeclinednames.md) | has_declined_names |  |  |
+| - | 1 / - | [DeclinedNames](declinednames.md) | has_declined_names |  |  |
 
 If has_declined_names is equal to `YES`:
 

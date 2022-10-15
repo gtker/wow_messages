@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::world::wrath::Class;
+use crate::world::wrath::DeclinedNames;
 use crate::world::wrath::Gender;
-use crate::world::wrath::HasDeclinedNames;
 use crate::world::wrath::Race;
 use std::io::{Write, Read};
 
@@ -19,7 +19,7 @@ use std::io::{Write, Read};
 ///     Race race;
 ///     Gender gender;
 ///     Class class;
-///     HasDeclinedNames has_declined_names;
+///     DeclinedNames has_declined_names;
 ///     if (has_declined_names == YES) {
 ///         CString[5] declined_names;
 ///     }
@@ -34,7 +34,7 @@ pub struct SMSG_NAME_QUERY_RESPONSE {
     pub race: Race,
     pub gender: Gender,
     pub class: Class,
-    pub has_declined_names: SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames,
+    pub has_declined_names: SMSG_NAME_QUERY_RESPONSE_DeclinedNames,
 }
 
 impl SMSG_NAME_QUERY_RESPONSE {
@@ -88,12 +88,12 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         // class: Class
         w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
 
-        // has_declined_names: HasDeclinedNames
+        // has_declined_names: DeclinedNames
         w.write_all(&(self.has_declined_names.as_int() as u8).to_le_bytes())?;
 
         match &self.has_declined_names {
-            SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames::No => {}
-            SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames::Yes {
+            SMSG_NAME_QUERY_RESPONSE_DeclinedNames::No => {}
+            SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {
                 declined_names,
             } => {
                 // declined_names: CString[5]
@@ -132,12 +132,12 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         // class: Class
         let class: Class = (crate::util::read_u8_le(r)? as u8).try_into()?;
 
-        // has_declined_names: HasDeclinedNames
-        let has_declined_names: HasDeclinedNames = crate::util::read_u8_le(r)?.try_into()?;
+        // has_declined_names: DeclinedNames
+        let has_declined_names: DeclinedNames = crate::util::read_u8_le(r)?.try_into()?;
 
         let has_declined_names_if = match has_declined_names {
-            HasDeclinedNames::No => SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames::No,
-            HasDeclinedNames::Yes => {
+            DeclinedNames::No => SMSG_NAME_QUERY_RESPONSE_DeclinedNames::No,
+            DeclinedNames::Yes => {
                 // declined_names: CString[5]
                 let mut declined_names = Vec::with_capacity(5);
                 for i in 0..5 {
@@ -146,7 +146,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
                 }
                 let declined_names = declined_names.try_into().unwrap();
 
-                SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames::Yes {
+                SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {
                     declined_names,
                 }
             }
@@ -176,26 +176,26 @@ impl SMSG_NAME_QUERY_RESPONSE {
         + 1 // race: Race
         + 1 // gender: Gender
         + 1 // class: Class
-        + self.has_declined_names.size() // has_declined_names: SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames
+        + self.has_declined_names.size() // has_declined_names: SMSG_NAME_QUERY_RESPONSE_DeclinedNames
     }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
-pub enum SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames {
+pub enum SMSG_NAME_QUERY_RESPONSE_DeclinedNames {
     No,
     Yes {
         declined_names: [String; 5],
     },
 }
 
-impl Default for SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames {
+impl Default for SMSG_NAME_QUERY_RESPONSE_DeclinedNames {
     fn default() -> Self {
         // First enumerator without any fields
         Self::No
     }
 }
 
-impl SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames {
+impl SMSG_NAME_QUERY_RESPONSE_DeclinedNames {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::No => 0,
@@ -205,7 +205,7 @@ impl SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames {
 
 }
 
-impl SMSG_NAME_QUERY_RESPONSE_HasDeclinedNames {
+impl SMSG_NAME_QUERY_RESPONSE_DeclinedNames {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::No => {
