@@ -1,9 +1,20 @@
-#tag_all versions "1.12";
-
 smsg SMSG_INIT_WORLD_STATES = 0x02C2 {
     Map map;
     Area area;
     u16 amount_of_states;
     WorldState[amount_of_states] states;
+} {
+    versions = "1.12";
 }
+
+smsg SMSG_INIT_WORLD_STATES = 0x02C2 {
+    Map map;
+    Area area;
+    Area sub_area;
+    u16 amount_of_states;
+    WorldState[amount_of_states] states;
+} {
+    versions = "3.3.5";
+}
+
 

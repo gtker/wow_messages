@@ -28,6 +28,7 @@ use crate::world::wrath::MSG_MOVE_SET_FACING;
 use crate::world::wrath::MSG_MOVE_SET_PITCH;
 use crate::world::wrath::MSG_MOVE_WORLDPORT_ACK;
 use crate::world::wrath::MSG_MOVE_HEARTBEAT;
+use crate::world::wrath::SMSG_UPDATE_WORLD_STATE;
 use crate::world::wrath::MSG_SET_DUNGEON_DIFFICULTY;
 use crate::world::wrath::MSG_MOVE_START_ASCEND;
 use crate::world::wrath::MSG_MOVE_STOP_ASCEND;
@@ -143,6 +144,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH),
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT),
+    SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
@@ -260,6 +262,7 @@ impl ClientOpcodeMessage {
             0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH as crate::Message>::read_body(&mut r, body_size)?)),
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY as crate::Message>::read_body(&mut r, body_size)?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size)?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size)?)),
@@ -445,6 +448,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_client(w, e),
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
@@ -563,6 +567,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_client(w),
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_client(w),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
@@ -681,6 +686,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -799,6 +805,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
@@ -917,6 +924,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1035,6 +1043,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
@@ -1164,6 +1173,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH",
             ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT",
+            ClientOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
             ClientOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY",
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
@@ -1387,6 +1397,12 @@ impl From<MSG_MOVE_WORLDPORT_ACK> for ClientOpcodeMessage {
 impl From<MSG_MOVE_HEARTBEAT> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_HEARTBEAT) -> Self {
         Self::MSG_MOVE_HEARTBEAT(c)
+    }
+}
+
+impl From<SMSG_UPDATE_WORLD_STATE> for ClientOpcodeMessage {
+    fn from(c: SMSG_UPDATE_WORLD_STATE) -> Self {
+        Self::SMSG_UPDATE_WORLD_STATE(c)
     }
 }
 
@@ -2000,6 +2016,7 @@ use crate::world::wrath::SMSG_STANDSTATE_UPDATE;
 use crate::world::wrath::SMSG_CHAT_PLAYER_NOT_FOUND;
 use crate::world::wrath::SMSG_DUEL_COUNTDOWN;
 use crate::world::wrath::SMSG_DURABILITY_DAMAGE_DEATH;
+use crate::world::wrath::SMSG_INIT_WORLD_STATES;
 use crate::world::wrath::SMSG_CHAR_RENAME;
 use crate::world::wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
 use crate::world::wrath::SMSG_BATTLEGROUND_PLAYER_JOINED;
@@ -2038,6 +2055,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH),
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT),
+    SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
@@ -2112,6 +2130,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHAT_PLAYER_NOT_FOUND(SMSG_CHAT_PLAYER_NOT_FOUND),
     SMSG_DUEL_COUNTDOWN(SMSG_DUEL_COUNTDOWN),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
+    SMSG_INIT_WORLD_STATES(SMSG_INIT_WORLD_STATES),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Server),
     SMSG_BATTLEGROUND_PLAYER_JOINED(SMSG_BATTLEGROUND_PLAYER_JOINED),
@@ -2152,6 +2171,7 @@ impl ServerOpcodeMessage {
             0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH as crate::Message>::read_body(&mut r, body_size)?)),
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size)?)),
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY as crate::Message>::read_body(&mut r, body_size)?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size)?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2226,6 +2246,7 @@ impl ServerOpcodeMessage {
             0x02A9 => Ok(Self::SMSG_CHAT_PLAYER_NOT_FOUND(<SMSG_CHAT_PLAYER_NOT_FOUND as crate::Message>::read_body(&mut r, body_size)?)),
             0x02B7 => Ok(Self::SMSG_DUEL_COUNTDOWN(<SMSG_DUEL_COUNTDOWN as crate::Message>::read_body(&mut r, body_size)?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size)?)),
+            0x02C2 => Ok(Self::SMSG_INIT_WORLD_STATES(<SMSG_INIT_WORLD_STATES as crate::Message>::read_body(&mut r, body_size)?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size)?)),
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Server as crate::Message>::read_body(&mut r, body_size)?)),
             0x02EC => Ok(Self::SMSG_BATTLEGROUND_PLAYER_JOINED(<SMSG_BATTLEGROUND_PLAYER_JOINED as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2415,6 +2436,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
@@ -2489,6 +2511,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_INIT_WORLD_STATES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_encrypted_server(w, e),
@@ -2530,6 +2553,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
@@ -2604,6 +2628,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
+            Self::SMSG_INIT_WORLD_STATES(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_unencrypted_server(w),
@@ -2645,6 +2670,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2719,6 +2745,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_INIT_WORLD_STATES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2760,6 +2787,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2834,6 +2862,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_INIT_WORLD_STATES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2875,6 +2904,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2949,6 +2979,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_INIT_WORLD_STATES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2990,6 +3021,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
@@ -3064,6 +3096,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_INIT_WORLD_STATES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_unencrypted_server(w).await,
@@ -3107,6 +3140,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH",
             ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ServerOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT",
+            ServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
             ServerOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY",
             ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
             ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
@@ -3181,6 +3215,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => "SMSG_CHAT_PLAYER_NOT_FOUND",
             ServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => "SMSG_DUEL_COUNTDOWN",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
+            ServerOpcodeMessage::SMSG_INIT_WORLD_STATES(_) => "SMSG_INIT_WORLD_STATES",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
             ServerOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Server",
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_JOINED(_) => "SMSG_BATTLEGROUND_PLAYER_JOINED",
@@ -3327,6 +3362,12 @@ impl From<MSG_MOVE_WORLDPORT_ACK> for ServerOpcodeMessage {
 impl From<MSG_MOVE_HEARTBEAT> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_HEARTBEAT) -> Self {
         Self::MSG_MOVE_HEARTBEAT(c)
+    }
+}
+
+impl From<SMSG_UPDATE_WORLD_STATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_WORLD_STATE) -> Self {
+        Self::SMSG_UPDATE_WORLD_STATE(c)
     }
 }
 
@@ -3771,6 +3812,12 @@ impl From<SMSG_DUEL_COUNTDOWN> for ServerOpcodeMessage {
 impl From<SMSG_DURABILITY_DAMAGE_DEATH> for ServerOpcodeMessage {
     fn from(c: SMSG_DURABILITY_DAMAGE_DEATH) -> Self {
         Self::SMSG_DURABILITY_DAMAGE_DEATH(c)
+    }
+}
+
+impl From<SMSG_INIT_WORLD_STATES> for ServerOpcodeMessage {
+    fn from(c: SMSG_INIT_WORLD_STATES) -> Self {
+        Self::SMSG_INIT_WORLD_STATES(c)
     }
 }
 
