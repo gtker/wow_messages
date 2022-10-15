@@ -1,9 +1,8 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2";
 
 cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
     /* TODO rep id */
     u32 reputation_list_id;
-    /* active or inactive? */
-    u8 inactive;
+    Bool inactive;
 }
 

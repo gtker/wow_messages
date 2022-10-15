@@ -1352,7 +1352,7 @@
             break;
         case CMSG_SET_FACTION_INACTIVE:
             ptvcursor_add(ptv, hf_woww_reputation_list_id, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_inactive, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_inactive, 1, ENC_NA);
             break;
         case CMSG_SET_SELECTION:
             ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);

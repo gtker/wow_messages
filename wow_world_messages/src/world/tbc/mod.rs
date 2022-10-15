@@ -182,6 +182,8 @@ pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
 pub(crate) mod cmsg_set_faction_atwar;
 pub use cmsg_set_faction_atwar::*;
+pub(crate) mod cmsg_set_faction_inactive;
+pub use cmsg_set_faction_inactive::*;
 pub(crate) mod cmsg_set_selection;
 pub use cmsg_set_selection::*;
 pub(crate) mod cmsg_set_target_obsolete;
