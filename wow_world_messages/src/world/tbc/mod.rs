@@ -460,6 +460,8 @@ pub(crate) mod smsg_realm_split;
 pub use smsg_realm_split::*;
 pub(crate) mod smsg_server_message;
 pub use smsg_server_message::*;
+pub(crate) mod smsg_set_rest_start;
+pub use smsg_set_rest_start::*;
 pub(crate) mod smsg_standstate_update;
 pub use smsg_standstate_update::*;
 pub(crate) mod smsg_text_emote;

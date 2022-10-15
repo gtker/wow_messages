@@ -125,6 +125,7 @@ pub mod smsg_pong123;
 pub mod smsg_procresist1_1223;
 pub mod smsg_realm_split2_4_33;
 pub mod smsg_server_message1_122;
+pub mod smsg_set_rest_start123;
 pub mod smsg_standstate_update1_1223;
 pub mod smsg_time_sync_req2_4_33;
 pub mod smsg_tutorial_flags123;

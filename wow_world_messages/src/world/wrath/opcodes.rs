@@ -1966,6 +1966,7 @@ use crate::world::wrath::SMSG_ENVIRONMENTALDAMAGELOG;
 use crate::world::wrath::SMSG_ACCOUNT_DATA_TIMES;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA;
 use crate::world::wrath::SMSG_CHAT_WRONG_FACTION;
+use crate::world::wrath::SMSG_SET_REST_START;
 use crate::world::wrath::SMSG_LOGIN_VERIFY_WORLD;
 use crate::world::wrath::SMSG_BATTLEFIELD_LIST;
 use crate::world::wrath::SMSG_ZONE_UNDER_ATTACK;
@@ -2076,6 +2077,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
     SMSG_UPDATE_ACCOUNT_DATA(SMSG_UPDATE_ACCOUNT_DATA),
     SMSG_CHAT_WRONG_FACTION(SMSG_CHAT_WRONG_FACTION),
+    SMSG_SET_REST_START(SMSG_SET_REST_START),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
     SMSG_BATTLEFIELD_LIST(SMSG_BATTLEFIELD_LIST),
     SMSG_ZONE_UNDER_ATTACK(SMSG_ZONE_UNDER_ATTACK),
@@ -2188,6 +2190,7 @@ impl ServerOpcodeMessage {
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             0x020C => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA(<SMSG_UPDATE_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x0219 => Ok(Self::SMSG_CHAT_WRONG_FACTION(<SMSG_CHAT_WRONG_FACTION as crate::Message>::read_body(&mut r, body_size)?)),
+            0x021E => Ok(Self::SMSG_SET_REST_START(<SMSG_SET_REST_START as crate::Message>::read_body(&mut r, body_size)?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size)?)),
             0x023D => Ok(Self::SMSG_BATTLEFIELD_LIST(<SMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size)?)),
             0x0254 => Ok(Self::SMSG_ZONE_UNDER_ATTACK(<SMSG_ZONE_UNDER_ATTACK as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2449,6 +2452,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SET_REST_START(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_encrypted_server(w, e),
@@ -2562,6 +2566,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SET_REST_START(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_unencrypted_server(w),
@@ -2675,6 +2680,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_REST_START(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2788,6 +2794,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SET_REST_START(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2901,6 +2908,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_REST_START(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3014,6 +3022,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SET_REST_START(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
@@ -3129,6 +3138,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA(_) => "SMSG_UPDATE_ACCOUNT_DATA",
             ServerOpcodeMessage::SMSG_CHAT_WRONG_FACTION(_) => "SMSG_CHAT_WRONG_FACTION",
+            ServerOpcodeMessage::SMSG_SET_REST_START(_) => "SMSG_SET_REST_START",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
             ServerOpcodeMessage::SMSG_BATTLEFIELD_LIST(_) => "SMSG_BATTLEFIELD_LIST",
             ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => "SMSG_ZONE_UNDER_ATTACK",
@@ -3627,6 +3637,12 @@ impl From<SMSG_UPDATE_ACCOUNT_DATA> for ServerOpcodeMessage {
 impl From<SMSG_CHAT_WRONG_FACTION> for ServerOpcodeMessage {
     fn from(c: SMSG_CHAT_WRONG_FACTION) -> Self {
         Self::SMSG_CHAT_WRONG_FACTION(c)
+    }
+}
+
+impl From<SMSG_SET_REST_START> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_REST_START) -> Self {
+        Self::SMSG_SET_REST_START(c)
     }
 }
 
