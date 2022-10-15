@@ -52,6 +52,8 @@ pub(crate) mod cmsg_activatetaxi;
 pub use cmsg_activatetaxi::*;
 pub(crate) mod cmsg_activatetaxiexpress;
 pub use cmsg_activatetaxiexpress::*;
+pub(crate) mod cmsg_areatrigger;
+pub use cmsg_areatrigger::*;
 pub(crate) mod cmsg_attackstop;
 pub use cmsg_attackstop::*;
 pub(crate) mod cmsg_attackswing;
