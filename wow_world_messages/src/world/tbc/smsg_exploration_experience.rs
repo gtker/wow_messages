@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Area;
+use crate::world::tbc::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -49,6 +49,6 @@ impl crate::Message for SMSG_EXPLORATION_EXPERIENCE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_EXPLORATION_EXPERIENCE {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_EXPLORATION_EXPERIENCE {}
 

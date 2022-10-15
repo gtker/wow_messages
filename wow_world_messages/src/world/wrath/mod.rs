@@ -438,6 +438,8 @@ pub(crate) mod smsg_emote;
 pub use smsg_emote::*;
 pub(crate) mod smsg_environmentaldamagelog;
 pub use smsg_environmentaldamagelog::*;
+pub(crate) mod smsg_exploration_experience;
+pub use smsg_exploration_experience::*;
 pub(crate) mod smsg_feature_system_status;
 pub use smsg_feature_system_status::*;
 pub(crate) mod smsg_force_move_root;

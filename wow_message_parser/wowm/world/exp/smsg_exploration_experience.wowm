@@ -1,7 +1,8 @@
-#tag_all versions "1.12";
-
 smsg SMSG_EXPLORATION_EXPERIENCE = 0x01F8 {
     Area area;
     u32 experience;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
+
 

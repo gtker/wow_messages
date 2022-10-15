@@ -432,6 +432,8 @@ pub(crate) mod smsg_emote;
 pub use smsg_emote::*;
 pub(crate) mod smsg_environmentaldamagelog;
 pub use smsg_environmentaldamagelog::*;
+pub(crate) mod smsg_exploration_experience;
+pub use smsg_exploration_experience::*;
 pub(crate) mod smsg_login_settimespeed;
 pub use smsg_login_settimespeed::*;
 pub(crate) mod smsg_login_verify_world;
