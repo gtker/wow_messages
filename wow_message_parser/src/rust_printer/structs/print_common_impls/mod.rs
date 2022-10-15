@@ -96,7 +96,13 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         }
     }
 
-    print_size_rust_view(s, e.rust_object(), "self.");
+    print_size_rust_view(s, e, "self.");
+
+    // Compressed messages need an additional size implementation that measures the non-compressed size of the message.
+    // This is used to calculate the decompressed_size field, a u32 written at the start of every compressed packet.
+    if e.tags().is_compressed() {
+        print_size_uncompressed_rust_view(s, e.rust_object(), "self.", "size_uncompressed");
+    }
 }
 
 fn test_for_invalid_size(s: &mut Writer, e: &Container) {
@@ -313,9 +319,32 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
     s.wln_no_indent(m.size_comment());
 }
 
-pub(crate) fn print_size_rust_view(s: &mut Writer, r: &RustObject, prefix: &str) {
+pub(crate) fn print_size_rust_view(s: &mut Writer, c: &Container, prefix: &str) {
+    let r = c.rust_object();
+
     if !r.constant_sized() {
-        s.variable_size(r.name(), |s| {
+        if c.tags().is_compressed() {
+            s.variable_size(
+                r.name(),
+                "size", 
+                |s| {
+                    s.wln("use crate::traits::Message;");
+                    s.newline();
+
+                    s.wln("let mut v = Vec::new();");
+                    s.wln("self.write_into_vec(&mut v);");
+                    s.wln("v.len()");
+                }
+            );
+        } else {
+            print_size_uncompressed_rust_view(s, r, prefix, "size");
+        }
+    }
+}
+
+pub(crate) fn print_size_uncompressed_rust_view(s: &mut Writer, r: &RustObject, prefix: &str, function_name: &str) {
+    if !r.constant_sized() {
+        s.variable_size(r.name(), function_name, |s| {
             print_rust_members_sizes(s, r.members(), None, prefix);
 
             if let Some(optional) = r.optional() {

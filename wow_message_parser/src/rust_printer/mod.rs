@@ -160,10 +160,11 @@ impl Writer {
     pub(crate) fn variable_size(
         &mut self,
         name: impl AsRef<str>,
+        function_name: &str,
         variable_sized: impl Fn(&mut Self),
     ) {
         self.open_curly(format!("impl {}", name.as_ref()));
-        self.open_curly("pub(crate) fn size(&self) -> usize");
+        self.open_curly(format!("pub(crate) fn {}(&self) -> usize", function_name));
 
         variable_sized(self);
 
