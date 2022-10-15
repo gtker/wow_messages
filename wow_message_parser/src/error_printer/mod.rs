@@ -261,6 +261,53 @@ pub(crate) fn unsupported_upcast(
     wowm_exit(s, UNSUPPORTED_UPCAST);
 }
 
+fn print_version_overlap(s: &mut ErrorWriter, msg: &str, tags: &Tags, other_tags: &Tags) {
+    s.wln(msg);
+    if tags.logon_versions().next().is_some() {
+        s.wln("    Login:");
+
+        for t in tags.logon_versions() {
+            s.w(format!("        {}", t));
+
+            let mut has_overlapped = false;
+            for other_t in other_tags.logon_versions() {
+                if t.overlaps(&other_t) {
+                    if !has_overlapped {
+                        has_overlapped = true;
+                        s.w("    <-- Overlaps with: ");
+                    } else {
+                        s.w(", ");
+                    }
+                    s.w(other_t.to_string());
+                }
+            }
+            s.newline();
+        }
+    }
+
+    if tags.versions().next().is_some() {
+        s.wln("    World:");
+
+        for t in tags.versions() {
+            s.w(format!("        {}", t));
+
+            let mut has_overlapped = false;
+            for other_t in other_tags.versions() {
+                if t.overlaps(&other_t) {
+                    if !has_overlapped {
+                        has_overlapped = true;
+                        s.w("    <-- Overlaps with: ");
+                    } else {
+                        s.w(", ");
+                    }
+                    s.w(other_t.to_string());
+                }
+            }
+            s.newline();
+        }
+    }
+}
+
 pub(crate) fn overlapping_versions(
     name: &str,
     first_object_tags: &Tags,
@@ -271,13 +318,21 @@ pub(crate) fn overlapping_versions(
     let mut s = ErrorWriter::new("Objects with the same name have overlapping versions.");
 
     s.fileinfo(first_object_file_info, format!("First {name}:"));
-    s.newline();
 
     s.fileinfo(second_object_file_info, format!("Second {name}:"));
-    s.newline();
 
-    print_version_cover(&mut s, "First covers:", first_object_tags);
-    print_version_cover(&mut s, "Second covers:", second_object_tags);
+    print_version_overlap(
+        &mut s,
+        "First covers:",
+        first_object_tags,
+        second_object_tags,
+    );
+    print_version_overlap(
+        &mut s,
+        "Second covers:",
+        second_object_tags,
+        first_object_tags,
+    );
 
     wowm_exit(s, OVERLAPPING_VERSIONS);
 }

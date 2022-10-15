@@ -230,10 +230,21 @@ impl Display for LoginVersion {
 }
 
 impl LoginVersion {
-    pub fn as_module_case(&self) -> String {
+    pub(crate) fn as_module_case(&self) -> String {
         match self {
             LoginVersion::Specific(v) => format!("version_{}", v),
             LoginVersion::All => "all".to_string(),
+        }
+    }
+
+    /// Self overlaps with other
+    pub(crate) fn overlaps(&self, other: &Self) -> bool {
+        match self {
+            LoginVersion::Specific(e) => match other {
+                LoginVersion::Specific(oe) => e == oe,
+                LoginVersion::All => true,
+            },
+            LoginVersion::All => true,
         }
     }
 }
