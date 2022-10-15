@@ -1,6 +1,6 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3.3.5";
 
-smsg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
+msg SMSG_UPDATE_WORLD_STATE = 0x02C3 {
     WorldState state;
 }
 
