@@ -116,7 +116,7 @@ impl FactionFlags {
         (self.inner & Self::INVISIBLE_FORCED) != 0
     }
 
-    /// always overwrite FACTION_FLAG_VISIBLE and hide faction in rep.list, used for hide opposite team factions
+    /// always overwrite `FACTION_FLAG_VISIBLE` and hide faction in rep.list, used for hide opposite team factions
     ///
     pub const fn new_INVISIBLE_FORCED() -> Self {
         Self { inner: Self::INVISIBLE_FORCED }
@@ -136,7 +136,7 @@ impl FactionFlags {
         (self.inner & Self::PEACE_FORCED) != 0
     }
 
-    /// always overwrite FACTION_FLAG_AT_WAR, used for prevent war with own team factions
+    /// always overwrite `FACTION_FLAG_AT_WAR`, used for prevent war with own team factions
     ///
     pub const fn new_PEACE_FORCED() -> Self {
         Self { inner: Self::PEACE_FORCED }
@@ -156,7 +156,7 @@ impl FactionFlags {
         (self.inner & Self::INACTIVE) != 0
     }
 
-    /// player controlled, state stored in characters.data ( CMSG_SET_FACTION_INACTIVE )
+    /// player controlled, state stored in characters.data ( `CMSG_SET_FACTION_INACTIVE` )
     ///
     pub const fn new_INACTIVE() -> Self {
         Self { inner: Self::INACTIVE }
