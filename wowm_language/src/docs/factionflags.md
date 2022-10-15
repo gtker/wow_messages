@@ -60,9 +60,9 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `VISIBLE` | 1 (0x01) |  | makes visible in client (set or can be set at interaction with target of this faction) |
 | `AT_WAR` | 2 (0x02) |  | enable AtWar-button in client. player controlled (except opposition team always war state), Flag only set on initial creation |
 | `HIDDEN` | 4 (0x04) |  | hidden faction from reputation pane in client (player can gain reputation, but this update not sent to client) |
-| `INVISIBLE_FORCED` | 8 (0x08) |  | always overwrite FACTION_FLAG_VISIBLE and hide faction in rep.list, used for hide opposite team factions |
-| `PEACE_FORCED` | 16 (0x10) |  | always overwrite FACTION_FLAG_AT_WAR, used for prevent war with own team factions |
-| `INACTIVE` | 32 (0x20) |  | player controlled, state stored in characters.data ( CMSG_SET_FACTION_INACTIVE ) |
+| `INVISIBLE_FORCED` | 8 (0x08) |  | always overwrite `FACTION_FLAG_VISIBLE` and hide faction in rep.list, used for hide opposite team factions |
+| `PEACE_FORCED` | 16 (0x10) |  | always overwrite `FACTION_FLAG_AT_WAR`, used for prevent war with own team factions |
+| `INACTIVE` | 32 (0x20) |  | player controlled, state stored in characters.data ( [CMSG_SET_FACTION_INACTIVE](./cmsg_set_faction_inactive.md) ) |
 | `RIVAL` | 64 (0x40) |  | flag for the two competing outland factions<br/>This is also present in vmangos for Vanilla, unsure if it's used. |
 | `SPECIAL` | 128 (0x80) |  | horde and alliance home cities and their northrend allies have this flag |
 

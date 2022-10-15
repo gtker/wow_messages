@@ -184,7 +184,11 @@ fn print_container_example_definition(
                         let value = value.value().original();
                         format!("{} {} ({})", comment, name, value)
                     } else {
-                        unreachable!()
+                        panic!(
+                            "unable to find field with value '{}' for variable: '{}'",
+                            value,
+                            d.name()
+                        )
                     }
                 }
                 DefinerType::Flag => {

@@ -827,6 +827,14 @@ fn print_read_final_flag(s: &mut Writer, rds: &[RustDefiner]) {
 }
 
 pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
+    if e.all_definitions()
+        .iter()
+        .any(|a| a.tags().skip_serialize())
+    {
+        s.wln("panic!(\"This message has a `skip_serialize` tag which makes it impossible to generate a correct read implementation for it.\")");
+        return;
+    }
+
     for field in e.members() {
         print_read_field(s, e, o, field, prefix, postfix);
     }
