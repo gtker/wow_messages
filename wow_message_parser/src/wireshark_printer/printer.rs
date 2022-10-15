@@ -222,6 +222,10 @@ fn print_definition(
     wo: &WiresharkObject,
     variables: &mut Vec<String>,
 ) -> bool {
+    if d.tags().compressed().is_some() {
+        return false;
+    }
+
     match d.ty() {
         Type::Integer(i) => {
             let name = w.unwrap().name();
