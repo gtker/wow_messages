@@ -156,6 +156,8 @@ pub(crate) mod cmsg_gmticket_getticket;
 pub use cmsg_gmticket_getticket::*;
 pub(crate) mod cmsg_gmticket_systemstatus;
 pub use cmsg_gmticket_systemstatus::*;
+pub(crate) mod cmsg_gmticket_updatetext;
+pub use cmsg_gmticket_updatetext::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;

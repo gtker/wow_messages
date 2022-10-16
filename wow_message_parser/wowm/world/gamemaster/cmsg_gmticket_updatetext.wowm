@@ -7,4 +7,10 @@ cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
     versions = "1";
 }
 
+cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
+    CString message;
+} {
+    versions = "2 3";
+    comment = "No TBC/Wrath emulator has a `GmTicketType` field before `message`, but vmangos does.";
+}
 

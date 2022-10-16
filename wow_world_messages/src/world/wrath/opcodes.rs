@@ -89,6 +89,7 @@ use crate::world::wrath::CMSG_PING;
 use crate::world::wrath::CMSG_SETSHEATHED;
 use crate::world::wrath::CMSG_AUTH_SESSION;
 use crate::world::wrath::CMSG_ZONEUPDATE;
+use crate::world::wrath::CMSG_GMTICKET_UPDATETEXT;
 use crate::world::wrath::CMSG_REQUEST_ACCOUNT_DATA;
 use crate::world::wrath::CMSG_UPDATE_ACCOUNT_DATA;
 use crate::world::wrath::CMSG_GMTICKET_GETTICKET;
@@ -212,6 +213,7 @@ pub enum ClientOpcodeMessage {
     CMSG_SETSHEATHED(CMSG_SETSHEATHED),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
     CMSG_ZONEUPDATE(CMSG_ZONEUPDATE),
+    CMSG_GMTICKET_UPDATETEXT(CMSG_GMTICKET_UPDATETEXT),
     CMSG_REQUEST_ACCOUNT_DATA(CMSG_REQUEST_ACCOUNT_DATA),
     CMSG_UPDATE_ACCOUNT_DATA(CMSG_UPDATE_ACCOUNT_DATA),
     CMSG_GMTICKET_GETTICKET(CMSG_GMTICKET_GETTICKET),
@@ -337,6 +339,7 @@ impl ClientOpcodeMessage {
             0x01E0 => Ok(Self::CMSG_SETSHEATHED(<CMSG_SETSHEATHED as crate::Message>::read_body(&mut r, body_size)?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size)?)),
             0x01F4 => Ok(Self::CMSG_ZONEUPDATE(<CMSG_ZONEUPDATE as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0207 => Ok(Self::CMSG_GMTICKET_UPDATETEXT(<CMSG_GMTICKET_UPDATETEXT as crate::Message>::read_body(&mut r, body_size)?)),
             0x020A => Ok(Self::CMSG_REQUEST_ACCOUNT_DATA(<CMSG_REQUEST_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x020B => Ok(Self::CMSG_UPDATE_ACCOUNT_DATA(<CMSG_UPDATE_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x0211 => Ok(Self::CMSG_GMTICKET_GETTICKET(<CMSG_GMTICKET_GETTICKET as crate::Message>::read_body(&mut r, body_size)?)),
@@ -530,6 +533,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SETSHEATHED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ZONEUPDATE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GMTICKET_UPDATETEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMTICKET_GETTICKET(c) => c.write_encrypted_client(w, e),
@@ -656,6 +660,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SETSHEATHED(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
             Self::CMSG_ZONEUPDATE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GMTICKET_UPDATETEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMTICKET_GETTICKET(c) => c.write_unencrypted_client(w),
@@ -782,6 +787,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ZONEUPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -908,6 +914,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ZONEUPDATE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1034,6 +1041,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SETSHEATHED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ZONEUPDATE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1160,6 +1168,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SETSHEATHED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ZONEUPDATE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.astd_write_unencrypted_client(w).await,
@@ -1297,6 +1306,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SETSHEATHED(_) => "CMSG_SETSHEATHED",
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
             ClientOpcodeMessage::CMSG_ZONEUPDATE(_) => "CMSG_ZONEUPDATE",
+            ClientOpcodeMessage::CMSG_GMTICKET_UPDATETEXT(_) => "CMSG_GMTICKET_UPDATETEXT",
             ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(_) => "CMSG_REQUEST_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_UPDATE_ACCOUNT_DATA(_) => "CMSG_UPDATE_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_GMTICKET_GETTICKET(_) => "CMSG_GMTICKET_GETTICKET",
@@ -1833,6 +1843,12 @@ impl From<CMSG_AUTH_SESSION> for ClientOpcodeMessage {
 impl From<CMSG_ZONEUPDATE> for ClientOpcodeMessage {
     fn from(c: CMSG_ZONEUPDATE) -> Self {
         Self::CMSG_ZONEUPDATE(c)
+    }
+}
+
+impl From<CMSG_GMTICKET_UPDATETEXT> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMTICKET_UPDATETEXT) -> Self {
+        Self::CMSG_GMTICKET_UPDATETEXT(c)
     }
 }
 
