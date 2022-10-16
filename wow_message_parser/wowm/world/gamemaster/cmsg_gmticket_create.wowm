@@ -12,7 +12,9 @@ cmsg CMSG_GMTICKET_CREATE = 0x0205 {
     if (category == BEHAVIOR_HARASSMENT) {
         u32 chat_data_line_count;
         u32 chat_data_size_uncompressed;
-        u8[-] compressed_chat_data;
+        u8[-] compressed_chat_data {
+            compressed = "chat_data_size_uncompressed";
+        }
     }
 }
 
