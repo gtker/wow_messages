@@ -1,7 +1,8 @@
+use crate::error_printer::complex_not_found;
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::DefinerUsage;
-use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::objects::conversion::{get_container, get_definer, get_related};
 use crate::parser::types::parsed::parsed_array::ParsedArrayType;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_struct_member::{
@@ -294,7 +295,8 @@ impl ParsedContainer {
                     return false;
                 }
             } else {
-                unreachable!()
+                let related = get_related(containers, definers, &t);
+                complex_not_found(self.name(), self.tags(), &self.file_info, &t, &related);
             }
         }
 

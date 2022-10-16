@@ -98,7 +98,8 @@ fn parsed_type_to_type(
                     e: parsed_container_to_container(e.clone(), containers, definers),
                 }
             } else {
-                unreachable!()
+                let related = get_related(containers, definers, &s);
+                complex_not_found(p.name(), p.tags(), &p.file_info, &s, &related);
             }
         }
         ParsedType::UpdateMask => Type::UpdateMask,
@@ -306,7 +307,6 @@ fn contains_complex_type(
     }
 
     let related = get_related(containers, definers, ty_name);
-
     complex_not_found(struct_name, tags, struct_fileinfo, ty_name, &related);
 }
 
@@ -488,17 +488,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 let definers = [flags, enums].concat();
                 parsed_container_to_container(c.clone(), containers, &definers)
             } else {
-                let related = containers
-                    .iter()
-                    .filter_map(|a| {
-                        if a.name() == ty_name {
-                            Some((&a.file_info, a.tags()))
-                        } else {
-                            None
-                        }
-                    })
-                    .collect::<Vec<_>>();
-
+                let definers = [flags, enums].concat();
+                let related = get_related(containers, &definers, ty_name);
                 complex_not_found(c.name(), c.tags(), &c.file_info, ty_name, &related);
             };
             return TestValue::ArrayOfSubObject(c, v);
