@@ -94,18 +94,16 @@ pub(crate) fn get_base_filepath(object_name: &str, version: &WorldVersion) -> Pa
         .join(format!("{}.rs", file_utils::get_module_name(object_name)))
 }
 
-pub(crate) fn get_base_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> PathBuf {
-    base_directory().join("shared").join(format!(
-        "{}.rs",
-        file_utils::get_shared_module_name(object_name, versions)
-    ))
+pub(crate) fn get_base_shared_filepath(shared_module_name: &str) -> PathBuf {
+    base_directory()
+        .join("shared")
+        .join(format!("{shared_module_name}.rs",))
 }
 
-pub(crate) fn get_world_shared_filepath(object_name: &str, versions: &[WorldVersion]) -> PathBuf {
-    world_directory().join("shared").join(format!(
-        "{}.rs",
-        file_utils::get_shared_module_name(object_name, versions)
-    ))
+pub(crate) fn get_world_shared_filepath(shared_module_name: &str) -> PathBuf {
+    world_directory()
+        .join("shared")
+        .join(format!("{shared_module_name}.rs",))
 }
 
 pub(crate) fn get_world_filepath(object_name: &str, version: &WorldVersion) -> PathBuf {

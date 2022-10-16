@@ -111,12 +111,7 @@ impl ModFiles {
         }
     }
 
-    pub(crate) fn add_world_shared_file(
-        &mut self,
-        name: &str,
-        versions: &[WorldVersion],
-        tags: &ObjectTags,
-    ) {
+    pub(crate) fn add_world_shared_file(&mut self, shared_module_name: String, tags: &ObjectTags) {
         let base_path = if tags.is_in_base() {
             base_directory()
         } else {
@@ -130,10 +125,7 @@ impl ModFiles {
 
         self.add_or_append_file(
             base_path.join("shared"),
-            (
-                get_shared_module_name(name, versions),
-                SubmoduleLocation::PubMod,
-            ),
+            (shared_module_name, SubmoduleLocation::PubMod),
         );
     }
 
@@ -226,13 +218,15 @@ impl ModFiles {
     ) {
         let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
 
+        let shared_module_name = get_shared_module_name(name, &versions);
+
         let path = if tags.is_in_base() {
-            path_utils::get_base_shared_filepath(name, &versions)
+            path_utils::get_base_shared_filepath(&shared_module_name)
         } else {
-            path_utils::get_world_shared_filepath(name, &versions)
+            path_utils::get_world_shared_filepath(&shared_module_name)
         };
 
-        self.add_world_shared_file(name, &versions, tags);
+        self.add_world_shared_file(shared_module_name, tags);
         create_and_overwrite_if_not_same_contents(base_s, Path::new(&path));
 
         self.already_existing_files
