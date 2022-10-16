@@ -1,7 +1,7 @@
 use std::collections::BTreeSet;
 use std::fmt::Write;
 
-use crate::file_utils::get_import_path;
+use crate::file_utils::{get_import_path, get_shared_module_name};
 use crate::parser::types::version::{AllVersions, Version};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
@@ -140,6 +140,15 @@ impl ObjectTags {
         let (first, _) = self.first_and_main_versions();
 
         first
+    }
+
+    pub(crate) fn shared_module_name(&self, object_name: &str) -> String {
+        let versions = self
+            .main_versions()
+            .map(|a| a.as_world())
+            .collect::<Vec<_>>();
+
+        get_shared_module_name(object_name, &versions)
     }
 
     /// self is able to fulfill all version obligations for tags

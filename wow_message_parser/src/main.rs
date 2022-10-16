@@ -113,7 +113,7 @@ fn main() {
             } else {
                 versions.push(first);
 
-                m.write_shared_contents_to_file(e.name(), e.tags(), s.inner(), &versions);
+                m.write_shared_contents_to_file(e.name(), e.tags(), s.inner());
 
                 for v in versions.clone() {
                     let s = get_import_from_shared(e.name(), &versions);
@@ -136,7 +136,7 @@ fn main() {
             } else {
                 versions.push(first);
 
-                m.write_shared_contents_to_file(e.name(), e.tags(), base_s.inner(), &versions);
+                m.write_shared_contents_to_file(e.name(), e.tags(), base_s.inner());
 
                 for v in versions.clone() {
                     let (world_s, base_s) = match &e {

@@ -214,11 +214,8 @@ impl ModFiles {
         name: &str,
         tags: &ObjectTags,
         base_s: &str,
-        versions: &[Version],
     ) {
-        let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
-
-        let shared_module_name = get_shared_module_name(name, &versions);
+        let shared_module_name = tags.shared_module_name(name);
 
         let path = if tags.is_in_base() {
             path_utils::get_base_shared_filepath(&shared_module_name)
