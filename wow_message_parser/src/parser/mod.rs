@@ -1,3 +1,4 @@
+use crate::parser::types::parsed::parsed_tags::ParsedTags;
 use std::fs::read_to_string;
 use std::path::Path;
 
@@ -7,7 +8,6 @@ use pest::Parser;
 use pest_derive::Parser;
 
 use types::definer::DefinerField;
-use types::tags::Tags;
 
 use crate::error_printer::multiple_self_value;
 use crate::file_info::FileInfo;
@@ -40,26 +40,28 @@ pub(crate) struct AuthParser;
 
 #[derive(Debug)]
 pub(crate) struct Commands {
-    tags: Tags,
+    tags: ParsedTags,
 }
 
 impl Commands {
-    pub(crate) fn new(tags: Tags) -> Self {
+    pub(crate) fn new(tags: ParsedTags) -> Self {
         Self { tags }
     }
 
     pub(crate) fn empty() -> Self {
-        Self { tags: Tags::new() }
+        Self {
+            tags: ParsedTags::new(),
+        }
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ParsedTags {
         &self.tags
     }
 }
 
 pub(crate) fn parse_commands(t: Pair<Rule>) -> Commands {
     let t = t.into_inner();
-    let mut tags = Tags::new();
+    let mut tags = ParsedTags::new();
 
     for command in t {
         let mut command = command.into_inner();
@@ -107,7 +109,7 @@ pub(crate) fn parse_file(filename: &Path) -> ParsedObjects {
     parse_contents(&contents, filename)
 }
 
-fn parse_statements(statements: &mut Pairs<Rule>, tags: &Tags, path: &Path) -> ParsedObjects {
+fn parse_statements(statements: &mut Pairs<Rule>, tags: &ParsedTags, path: &Path) -> ParsedObjects {
     let mut enums = Vec::new();
     let mut flags = Vec::new();
     let mut structs = Vec::new();
@@ -216,12 +218,16 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>
     };
 
     let mut extra_kvs = m.find(|a| a.as_rule() == Rule::object_key_values);
-    let kvs = parse_object_key_values(&mut extra_kvs, &Tags::new());
+    let kvs = parse_object_key_values(&mut extra_kvs, &ParsedTags::new());
 
-    test_members.push(ParsedTestCaseMember::new(member_name, member_value, kvs));
+    test_members.push(ParsedTestCaseMember::new(
+        member_name,
+        member_value,
+        kvs.into_tags(),
+    ));
 }
 
-fn parse_test(t: &mut Pairs<Rule>, tags: &Tags, file_info: FileInfo) -> ParsedTestCase {
+fn parse_test(t: &mut Pairs<Rule>, tags: &ParsedTags, file_info: FileInfo) -> ParsedTestCase {
     let name = t.next().unwrap().as_str();
     let members = t.next().unwrap().into_inner();
 
@@ -239,12 +245,12 @@ fn parse_test(t: &mut Pairs<Rule>, tags: &Tags, file_info: FileInfo) -> ParsedTe
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
     let kvs = parse_object_key_values(&mut extra_kvs, tags);
 
-    ParsedTestCase::new(name, test_members, raw_bytes, kvs, file_info)
+    ParsedTestCase::new(name, test_members, raw_bytes, kvs.into_tags(), file_info)
 }
 
 fn parse_struct(
     t: &mut Pairs<Rule>,
-    tags: &Tags,
+    tags: &ParsedTags,
     container_type: ContainerType,
     file_info: FileInfo,
 ) -> ParsedContainer {
@@ -289,7 +295,7 @@ fn parse_struct(
             kvs.insert(UNIMPLEMENTED, "true");
             let v = vec![unimplemented_member()];
 
-            return ParsedContainer::new(identifier, v, kvs, container_type, file_info);
+            return ParsedContainer::new(identifier, v, kvs.into_tags(), container_type, file_info);
         }
         members.push(parse_struct_member(member, identifier, &file_info));
     }
@@ -297,7 +303,13 @@ fn parse_struct(
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
     let kvs = parse_object_key_values(&mut extra_kvs, tags);
 
-    ParsedContainer::new(identifier, members, kvs, container_type, file_info)
+    ParsedContainer::new(
+        identifier,
+        members,
+        kvs.into_tags(),
+        container_type,
+        file_info,
+    )
 }
 
 fn unimplemented_member() -> ParsedStructMember {
@@ -305,7 +317,7 @@ fn unimplemented_member() -> ParsedStructMember {
         UNIMPLEMENTED,
         ParsedType::Array(ParsedArray::new_unimplemented()),
         None,
-        Tags::new(),
+        ParsedTags::new().into_tags(),
     ))
 }
 
@@ -339,7 +351,7 @@ fn parse_struct_member(
             };
 
             let complex_key_value_pairs = t.filter(|a| a.as_rule() == Rule::complex_key_value_pair);
-            let mut kvs = Tags::new();
+            let mut kvs = ParsedTags::new();
             for kv in complex_key_value_pairs {
                 let mut kv = kv.into_inner();
                 let identifier = kv.find(|a| a.as_rule() == Rule::identifier).unwrap();
@@ -370,8 +382,12 @@ fn parse_struct_member(
                 ParsedType::from_str(container_type)
             };
 
-            let s =
-                ParsedStructMemberDefinition::new(identifier.as_str(), container_type, value, kvs);
+            let s = ParsedStructMemberDefinition::new(
+                identifier.as_str(),
+                container_type,
+                value,
+                kvs.into_tags(),
+            );
 
             ParsedStructMember::Definition(s)
         }
@@ -482,7 +498,7 @@ fn parse_if_statement(
 
 pub(crate) fn parse_enum(
     t: &mut Pairs<Rule>,
-    tags: &Tags,
+    tags: &ParsedTags,
     file_info: FileInfo,
     definer_ty: DefinerType,
 ) -> ParsedDefiner {
@@ -505,7 +521,7 @@ pub(crate) fn parse_enum(
         let identifier = item.next().unwrap();
         let value = item.next().unwrap();
 
-        let mut kvs = Tags::new();
+        let mut kvs = ParsedTags::new();
         if item_rule == Rule::complex_definer_item {
             let _ = complex_key_values.next().unwrap();
             let item = complex_key_values;
@@ -527,7 +543,10 @@ pub(crate) fn parse_enum(
                     identifier.as_str(),
                 );
             }
-            self_value = Some(SelfValueDefinerField::new(identifier.as_str(), kvs));
+            self_value = Some(SelfValueDefinerField::new(
+                identifier.as_str(),
+                kvs.into_tags(),
+            ));
         } else {
             fields.push(DefinerField::new(
                 identifier.as_str(),
@@ -537,7 +556,7 @@ pub(crate) fn parse_enum(
                     identifier.as_str(),
                     &file_info,
                 ),
-                kvs,
+                kvs.into_tags(),
             ));
         }
     }
@@ -552,17 +571,17 @@ pub(crate) fn parse_enum(
         fields,
         IntegerType::from_str(basic_type.as_str(), ident.as_str(), &file_info),
         self_value,
-        extras,
+        extras.into_tags(),
         file_info,
     )
 }
 
-fn parse_object_key_values(t: &mut Option<Pair<Rule>>, tags: &Tags) -> Tags {
+fn parse_object_key_values(t: &mut Option<Pair<Rule>>, tags: &ParsedTags) -> ParsedTags {
     match t {
         None => tags.clone(),
         Some(s) => {
             let s = s.clone().into_inner();
-            let mut v = Tags::new();
+            let mut v = ParsedTags::new();
             for kv in s {
                 let mut kv = kv.into_inner();
 
