@@ -49,6 +49,7 @@ pub mod cmsg_duel_cancelled123;
 pub mod cmsg_gmsurvey_submit123;
 pub mod cmsg_gmticket_deleteticket123;
 pub mod cmsg_gmticket_getticket123;
+pub mod cmsg_gmticket_systemstatus123;
 pub mod cmsg_join_channel2_4_33;
 pub mod cmsg_leave_channel2_4_33;
 pub mod cmsg_logout_cancel123;

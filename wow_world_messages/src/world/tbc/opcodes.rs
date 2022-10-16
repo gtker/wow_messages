@@ -87,6 +87,7 @@ use crate::world::tbc::CMSG_ZONEUPDATE;
 use crate::world::tbc::CMSG_REQUEST_ACCOUNT_DATA;
 use crate::world::tbc::CMSG_GMTICKET_GETTICKET;
 use crate::world::tbc::CMSG_GMTICKET_DELETETICKET;
+use crate::world::tbc::CMSG_GMTICKET_SYSTEMSTATUS;
 use crate::world::tbc::CMSG_CHAT_IGNORED;
 use crate::world::tbc::CMSG_BATTLEFIELD_LIST;
 use crate::world::tbc::MSG_AUCTION_HELLO_Client;
@@ -205,6 +206,7 @@ pub enum ClientOpcodeMessage {
     CMSG_REQUEST_ACCOUNT_DATA(CMSG_REQUEST_ACCOUNT_DATA),
     CMSG_GMTICKET_GETTICKET(CMSG_GMTICKET_GETTICKET),
     CMSG_GMTICKET_DELETETICKET(CMSG_GMTICKET_DELETETICKET),
+    CMSG_GMTICKET_SYSTEMSTATUS(CMSG_GMTICKET_SYSTEMSTATUS),
     CMSG_CHAT_IGNORED(CMSG_CHAT_IGNORED),
     CMSG_BATTLEFIELD_LIST(CMSG_BATTLEFIELD_LIST),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Client),
@@ -325,6 +327,7 @@ impl ClientOpcodeMessage {
             0x020A => Ok(Self::CMSG_REQUEST_ACCOUNT_DATA(<CMSG_REQUEST_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size)?)),
             0x0211 => Ok(Self::CMSG_GMTICKET_GETTICKET(<CMSG_GMTICKET_GETTICKET as crate::Message>::read_body(&mut r, body_size)?)),
             0x0217 => Ok(Self::CMSG_GMTICKET_DELETETICKET(<CMSG_GMTICKET_DELETETICKET as crate::Message>::read_body(&mut r, body_size)?)),
+            0x021A => Ok(Self::CMSG_GMTICKET_SYSTEMSTATUS(<CMSG_GMTICKET_SYSTEMSTATUS as crate::Message>::read_body(&mut r, body_size)?)),
             0x0225 => Ok(Self::CMSG_CHAT_IGNORED(<CMSG_CHAT_IGNORED as crate::Message>::read_body(&mut r, body_size)?)),
             0x023C => Ok(Self::CMSG_BATTLEFIELD_LIST(<CMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size)?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Client as crate::Message>::read_body(&mut r, body_size)?)),
@@ -513,6 +516,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMTICKET_GETTICKET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAT_IGNORED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_client(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_client(w, e),
@@ -634,6 +638,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMTICKET_GETTICKET(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAT_IGNORED(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_client(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_client(w),
@@ -755,6 +760,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -876,6 +882,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
@@ -997,6 +1004,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1118,6 +1126,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_client(w).await,
@@ -1274,6 +1283,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(_) => "CMSG_REQUEST_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_GMTICKET_GETTICKET(_) => "CMSG_GMTICKET_GETTICKET",
             ClientOpcodeMessage::CMSG_GMTICKET_DELETETICKET(_) => "CMSG_GMTICKET_DELETETICKET",
+            ClientOpcodeMessage::CMSG_GMTICKET_SYSTEMSTATUS(_) => "CMSG_GMTICKET_SYSTEMSTATUS",
             ClientOpcodeMessage::CMSG_CHAT_IGNORED(_) => "CMSG_CHAT_IGNORED",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_LIST(_) => "CMSG_BATTLEFIELD_LIST",
             ClientOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Client",
@@ -1795,6 +1805,12 @@ impl From<CMSG_GMTICKET_GETTICKET> for ClientOpcodeMessage {
 impl From<CMSG_GMTICKET_DELETETICKET> for ClientOpcodeMessage {
     fn from(c: CMSG_GMTICKET_DELETETICKET) -> Self {
         Self::CMSG_GMTICKET_DELETETICKET(c)
+    }
+}
+
+impl From<CMSG_GMTICKET_SYSTEMSTATUS> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMTICKET_SYSTEMSTATUS) -> Self {
+        Self::CMSG_GMTICKET_SYSTEMSTATUS(c)
     }
 }
 
