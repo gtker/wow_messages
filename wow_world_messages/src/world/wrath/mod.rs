@@ -150,6 +150,8 @@ pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
 pub(crate) mod cmsg_gmsurvey_submit;
 pub use cmsg_gmsurvey_submit::*;
+pub(crate) mod cmsg_gmticket_deleteticket;
+pub use cmsg_gmticket_deleteticket::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;

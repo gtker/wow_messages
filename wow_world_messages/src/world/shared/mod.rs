@@ -47,6 +47,7 @@ pub mod cmsg_complete_cinematic123;
 pub mod cmsg_duel_accepted123;
 pub mod cmsg_duel_cancelled123;
 pub mod cmsg_gmsurvey_submit123;
+pub mod cmsg_gmticket_deleteticket123;
 pub mod cmsg_join_channel2_4_33;
 pub mod cmsg_leave_channel2_4_33;
 pub mod cmsg_logout_cancel123;
