@@ -1978,6 +1978,7 @@ use crate::world::tbc::SMSG_TUTORIAL_FLAGS;
 use crate::world::tbc::SMSG_EMOTE;
 use crate::world::tbc::SMSG_TEXT_EMOTE;
 use crate::world::tbc::SMSG_INITIALIZE_FACTIONS;
+use crate::world::tbc::SMSG_SET_FACTION_VISIBLE;
 use crate::world::tbc::SMSG_SET_FACTION_STANDING;
 use crate::world::tbc::SMSG_ACTION_BUTTONS;
 use crate::world::tbc::SMSG_AI_REACTION;
@@ -2077,6 +2078,7 @@ pub enum ServerOpcodeMessage {
     SMSG_EMOTE(SMSG_EMOTE),
     SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE),
     SMSG_INITIALIZE_FACTIONS(SMSG_INITIALIZE_FACTIONS),
+    SMSG_SET_FACTION_VISIBLE(SMSG_SET_FACTION_VISIBLE),
     SMSG_SET_FACTION_STANDING(SMSG_SET_FACTION_STANDING),
     SMSG_ACTION_BUTTONS(SMSG_ACTION_BUTTONS),
     SMSG_AI_REACTION(SMSG_AI_REACTION),
@@ -2178,6 +2180,7 @@ impl ServerOpcodeMessage {
             0x0103 => Ok(Self::SMSG_EMOTE(<SMSG_EMOTE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0105 => Ok(Self::SMSG_TEXT_EMOTE(<SMSG_TEXT_EMOTE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0122 => Ok(Self::SMSG_INITIALIZE_FACTIONS(<SMSG_INITIALIZE_FACTIONS as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0123 => Ok(Self::SMSG_SET_FACTION_VISIBLE(<SMSG_SET_FACTION_VISIBLE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0124 => Ok(Self::SMSG_SET_FACTION_STANDING(<SMSG_SET_FACTION_STANDING as crate::Message>::read_body(&mut r, body_size)?)),
             0x0129 => Ok(Self::SMSG_ACTION_BUTTONS(<SMSG_ACTION_BUTTONS as crate::Message>::read_body(&mut r, body_size)?)),
             0x013C => Ok(Self::SMSG_AI_REACTION(<SMSG_AI_REACTION as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2347,6 +2350,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EMOTE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TEXT_EMOTE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SET_FACTION_VISIBLE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_FACTION_STANDING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACTION_BUTTONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AI_REACTION(c) => c.write_encrypted_server(w, e),
@@ -2449,6 +2453,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EMOTE(c) => c.write_unencrypted_server(w),
             Self::SMSG_TEXT_EMOTE(c) => c.write_unencrypted_server(w),
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SET_FACTION_VISIBLE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_FACTION_STANDING(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACTION_BUTTONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_AI_REACTION(c) => c.write_unencrypted_server(w),
@@ -2551,6 +2556,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EMOTE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TEXT_EMOTE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_FACTION_VISIBLE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_FACTION_STANDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACTION_BUTTONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AI_REACTION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2653,6 +2659,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EMOTE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TEXT_EMOTE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SET_FACTION_VISIBLE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_FACTION_STANDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACTION_BUTTONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AI_REACTION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2755,6 +2762,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EMOTE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TEXT_EMOTE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_FACTION_VISIBLE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_FACTION_STANDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACTION_BUTTONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AI_REACTION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -2857,6 +2865,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EMOTE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TEXT_EMOTE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SET_FACTION_VISIBLE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_FACTION_STANDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACTION_BUTTONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AI_REACTION(c) => c.astd_write_unencrypted_server(w).await,
@@ -2961,6 +2970,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_EMOTE(_) => "SMSG_EMOTE",
             ServerOpcodeMessage::SMSG_TEXT_EMOTE(_) => "SMSG_TEXT_EMOTE",
             ServerOpcodeMessage::SMSG_INITIALIZE_FACTIONS(_) => "SMSG_INITIALIZE_FACTIONS",
+            ServerOpcodeMessage::SMSG_SET_FACTION_VISIBLE(_) => "SMSG_SET_FACTION_VISIBLE",
             ServerOpcodeMessage::SMSG_SET_FACTION_STANDING(_) => "SMSG_SET_FACTION_STANDING",
             ServerOpcodeMessage::SMSG_ACTION_BUTTONS(_) => "SMSG_ACTION_BUTTONS",
             ServerOpcodeMessage::SMSG_AI_REACTION(_) => "SMSG_AI_REACTION",
@@ -3263,6 +3273,12 @@ impl From<SMSG_TEXT_EMOTE> for ServerOpcodeMessage {
 impl From<SMSG_INITIALIZE_FACTIONS> for ServerOpcodeMessage {
     fn from(c: SMSG_INITIALIZE_FACTIONS) -> Self {
         Self::SMSG_INITIALIZE_FACTIONS(c)
+    }
+}
+
+impl From<SMSG_SET_FACTION_VISIBLE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_FACTION_VISIBLE) -> Self {
+        Self::SMSG_SET_FACTION_VISIBLE(c)
     }
 }
 
