@@ -8,6 +8,7 @@ use crate::Objects;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct ObjectTags {
+    all_versions: AllVersions,
     login_versions: BTreeSet<LoginVersion>,
     world_versions: BTreeSet<WorldVersion>,
     description: Option<TagString>,
@@ -25,6 +26,7 @@ pub(crate) struct ObjectTags {
 
 impl ObjectTags {
     pub(crate) fn from_parsed(
+        all_versions: AllVersions,
         login_versions: BTreeSet<LoginVersion>,
         world_versions: BTreeSet<WorldVersion>,
         description: Option<TagString>,
@@ -40,6 +42,7 @@ impl ObjectTags {
         rust_base_ty: Option<bool>,
     ) -> Self {
         Self {
+            all_versions,
             login_versions,
             world_versions,
             description,
@@ -70,6 +73,7 @@ impl ObjectTags {
         };
 
         Self {
+            all_versions: v.0,
             login_versions: v.1,
             world_versions: v.2,
             description: None,
@@ -87,10 +91,6 @@ impl ObjectTags {
 
     pub(crate) fn push_version(&mut self, v: WorldVersion) {
         self.world_versions.insert(v);
-    }
-
-    pub(crate) fn paste_versions(&self) -> Vec<WorldVersion> {
-        self.paste_versions.clone().into_iter().collect()
     }
 
     pub(crate) fn unimplemented(&self) -> bool {

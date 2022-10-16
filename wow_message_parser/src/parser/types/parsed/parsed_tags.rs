@@ -69,7 +69,16 @@ impl ParsedTags {
     }
 
     pub(crate) fn into_tags(self, ty_name: &str, file_info: &FileInfo) -> ObjectTags {
+        let all_versions = if !self.world_versions.is_empty() {
+            AllVersions::World(self.world_versions.clone())
+        } else if !self.login_versions.is_empty() {
+            AllVersions::Login(self.login_versions.clone())
+        } else {
+            object_has_no_versions(ty_name, file_info)
+        };
+
         ObjectTags::from_parsed(
+            all_versions,
             self.login_versions,
             self.world_versions,
             self.description,
@@ -93,6 +102,14 @@ impl ParsedTags {
             self.display,
             self.skip_serialize,
         )
+    }
+
+    pub(crate) fn paste_versions(&self) -> impl Iterator<Item = WorldVersion> {
+        self.paste_versions.clone().into_iter()
+    }
+
+    pub(crate) fn push_version(&mut self, version: WorldVersion) {
+        self.world_versions.insert(version);
     }
 
     pub(crate) fn insert(&mut self, key: &str, value: &str) {

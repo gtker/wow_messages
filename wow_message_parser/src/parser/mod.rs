@@ -145,32 +145,16 @@ fn parse_statements(statements: &mut Pairs<Rule>, tags: &ParsedTags, path: &Path
                 let mut statement = statement.into_inner();
                 let keyword = statement.next().unwrap().as_str();
 
-                let ty = match keyword {
-                    "struct" => ContainerType::Struct,
-                    "clogin" => ContainerType::CLogin(0),
-                    "slogin" => ContainerType::SLogin(0),
-                    "cmsg" => ContainerType::CMsg(0),
-                    "smsg" => ContainerType::SMsg(0),
-                    "msg" => ContainerType::Msg(0),
+                let (ty, objects) = match keyword {
+                    "struct" => (ContainerType::Struct, &mut structs),
+                    "clogin" => (ContainerType::CLogin(0), &mut messages),
+                    "slogin" => (ContainerType::SLogin(0), &mut messages),
+                    "cmsg" => (ContainerType::CMsg(0), &mut messages),
+                    "smsg" => (ContainerType::SMsg(0), &mut messages),
+                    "msg" => (ContainerType::Msg(0), &mut messages),
                     keyword => unreachable!("invalid keyword for container: '{}'", keyword),
                 };
-                let s = parse_struct(&mut statement, tags, ty, file_info);
-                if s.tags.paste_versions().is_empty() {
-                    match ty {
-                        ContainerType::Struct => structs.push(s),
-                        _ => messages.push(s),
-                    }
-                } else {
-                    for v in s.tags.paste_versions() {
-                        let mut s = s.clone();
-                        s.tags.push_version(v);
-
-                        match ty {
-                            ContainerType::Struct => structs.push(s),
-                            _ => messages.push(s),
-                        }
-                    }
-                }
+                parse_struct(&mut statement, tags, ty, file_info, objects);
             }
             Rule::test => {
                 let mut statement = statement.into_inner();
@@ -259,7 +243,8 @@ fn parse_struct(
     tags: &ParsedTags,
     container_type: ContainerType,
     file_info: FileInfo,
-) -> ParsedContainer {
+    objects: &mut Vec<ParsedContainer>,
+) {
     let identifier = t.next().unwrap().as_str();
 
     let opcode = t.clone().find(|a| a.as_rule() == Rule::value);
@@ -301,13 +286,15 @@ fn parse_struct(
             kvs.insert(UNIMPLEMENTED, "true");
             let v = vec![unimplemented_member()];
 
-            return ParsedContainer::new(
+            apply_tags(
                 identifier,
                 v,
-                kvs.into_tags(identifier, &file_info),
+                kvs,
+                file_info.clone(),
                 container_type,
-                file_info,
+                objects,
             );
+            return;
         }
         members.push(parse_struct_member(member, identifier, &file_info));
     }
@@ -315,13 +302,39 @@ fn parse_struct(
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
     let kvs = parse_object_key_values(&mut extra_kvs, tags);
 
-    ParsedContainer::new(
-        identifier,
-        members,
-        kvs.into_tags(identifier, &file_info),
-        container_type,
-        file_info,
-    )
+    apply_tags(identifier, members, kvs, file_info, container_type, objects);
+}
+
+fn apply_tags(
+    identifier: &str,
+    members: Vec<ParsedStructMember>,
+    tags: ParsedTags,
+    file_info: FileInfo,
+    container_type: ContainerType,
+    objects: &mut Vec<ParsedContainer>,
+) {
+    if tags.paste_versions().next().is_none() {
+        objects.push(ParsedContainer::new(
+            identifier,
+            members,
+            tags.into_tags(identifier, &file_info),
+            container_type,
+            file_info,
+        ));
+    } else {
+        for v in tags.paste_versions() {
+            let mut tags = tags.clone();
+            tags.push_version(v);
+
+            objects.push(ParsedContainer::new(
+                identifier,
+                members.clone(),
+                tags.into_tags(identifier, &file_info),
+                container_type,
+                file_info.clone(),
+            ));
+        }
+    }
 }
 
 fn unimplemented_member() -> ParsedStructMember {
