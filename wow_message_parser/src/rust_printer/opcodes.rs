@@ -2,7 +2,7 @@ use crate::file_utils::{
     get_import_path, get_login_logon_version_path, get_world_version_path, major_version_to_string,
 };
 use crate::parser::types::container::{Container, ContainerType};
-use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version, WorldVersion};
+use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::{
     ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
     CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, SERVER_MESSAGE_TRAIT_NAME, TOKIO_IMPORT,
@@ -15,21 +15,26 @@ const SMSG_NAME: &str = "Server";
 
 pub(crate) fn print_world_opcodes(
     v: &[&Container],
-    version: &WorldVersion,
+    version: &MajorWorldVersion,
     container_type: ContainerType,
 ) -> Writer {
-    let mut s = Writer::new(&get_world_version_path(&version.as_major_world()));
+    let mut s = Writer::new(&get_world_version_path(&version));
     let ty = match container_type {
         ContainerType::SMsg(_) => SMSG_NAME,
         ContainerType::CMsg(_) => CMSG_NAME,
         _ => unreachable!("invalid type passed to opcode printer"),
     };
 
-    includes(&mut s, v, container_type, Version::World(*version));
+    includes(
+        &mut s,
+        v,
+        container_type,
+        Version::World(version.as_world()),
+    );
 
-    definition(&mut s, v, ty, (*version).into());
+    definition(&mut s, v, ty, (version.as_world()).into());
 
-    common_impls_world(&mut s, v, ty, container_type, Version::World(*version));
+    common_impls_world(&mut s, v, ty, container_type, *version);
 
     s
 }
@@ -108,7 +113,7 @@ pub(crate) fn includes(
             if any_container_is_pure_movement_info(v) {
                 s.wln(format!(
                     "use {module_name}::MovementInfo;",
-                    module_name = get_import_path(version)
+                    module_name = get_import_path(Version::World(version.as_world()))
                 ));
             }
         }
@@ -198,7 +203,7 @@ fn world_common_impls_read_write(
     opcode_size: i32,
     error_ty: &str,
     it: ImplType,
-    version: Version,
+    version: MajorWorldVersion,
     ty: &str,
 ) {
     s.wln(it.cfg());
@@ -210,7 +215,7 @@ fn world_common_impls_read_write(
         error_ty = error_ty,
     ));
 
-    if version.as_major_world().wrath_or_greater() && ty == "Server" {
+    if version.wrath_or_greater() && ty == "Server" {
         s.wln("let mut header = [0_u8; 4];");
         s.wln(format!(
             "r.read_exact(&mut header){postfix}?;",
@@ -279,7 +284,7 @@ fn world_common_impls_read_write(
         )
     );
 
-    if version.as_major_world().wrath_or_greater() && ty == "Server" {
+    if version.wrath_or_greater() && ty == "Server" {
         s.wln("let mut header = [0_u8; 4];");
         s.wln(format!(
             "r.read_exact(&mut header){postfix}?;",
@@ -347,11 +352,11 @@ pub(crate) fn common_impls_world(
     v: &[&Container],
     ty: &str,
     container_type: ContainerType,
-    version: Version,
+    version: MajorWorldVersion,
 ) {
     let ((enc_prefix, dec_prefix), cd, size, opcode_size) = match container_type {
         ContainerType::CMsg(_) => (
-            if version.as_major_world().wrath_or_greater() {
+            if version.wrath_or_greater() {
                 ("Client", "Server")
             } else {
                 ("", "")
@@ -361,7 +366,7 @@ pub(crate) fn common_impls_world(
             4,
         ),
         ContainerType::SMsg(_) => (
-            if version.as_major_world().wrath_or_greater() {
+            if version.wrath_or_greater() {
                 ("Server", "Client")
             } else {
                 ("", "")
