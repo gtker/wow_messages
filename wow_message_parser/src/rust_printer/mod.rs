@@ -209,7 +209,7 @@ impl Writer {
         let trait_to_impl = match container_type {
             ContainerType::CMsg(_) => CLIENT_MESSAGE_TRAIT_NAME,
             ContainerType::SMsg(_) => SERVER_MESSAGE_TRAIT_NAME,
-            _ => unreachable!(),
+            _ => unreachable!("login message in world server impl"),
         };
 
         self.wln(format!(

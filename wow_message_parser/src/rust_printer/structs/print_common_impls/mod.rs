@@ -82,7 +82,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
                         bind(s, ContainerType::SMsg(0), version);
                     }
-                    _ => unreachable!(),
+                    _ => unreachable!("non world container in world branch"),
                 }
             }
         }

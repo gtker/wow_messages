@@ -170,7 +170,7 @@ impl Definer {
             match v.1 {
                 DefinerUsage::NotInIf => return false,
                 DefinerUsage::InIf => {}
-                _ => unreachable!(),
+                _ => unreachable!("DefinerUsage::NotInIf encountered"),
             }
         }
 

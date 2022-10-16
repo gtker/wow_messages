@@ -75,7 +75,7 @@ impl RustMember {
                 .unwrap()
                 .members
                 .clear(),
-            _ => unreachable!(),
+            _ => unreachable!("clear_flag_enumerator was not flag"),
         }
     }
 
@@ -85,7 +85,7 @@ impl RustMember {
                 let enumerator = enumerators.iter().find(|a| a.name() == enumerator).unwrap();
                 enumerator.clone()
             }
-            _ => unreachable!(),
+            _ => unreachable!("get_flag_enumerator was not flag"),
         }
     }
 

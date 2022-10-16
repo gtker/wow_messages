@@ -71,7 +71,7 @@ pub(crate) enum IrDefinerUsage {
 impl From<DefinerUsage> for IrDefinerUsage {
     fn from(v: DefinerUsage) -> Self {
         match v {
-            DefinerUsage::Unused => unreachable!(),
+            DefinerUsage::Unused => unreachable!("DefinerUsage::Unused encountered"),
             DefinerUsage::NotInIf => IrDefinerUsage::UsedButNotInIf,
             DefinerUsage::InIf => IrDefinerUsage::InIf,
         }

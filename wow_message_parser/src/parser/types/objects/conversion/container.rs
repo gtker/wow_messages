@@ -15,7 +15,9 @@ use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
-use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
+use crate::parser::types::parsed::parsed_struct_member::{
+    ParsedStructMember, ParsedStructMemberDefinition,
+};
 use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, ParsedTestValue,
 };
@@ -63,17 +65,9 @@ fn parsed_type_to_type(
                 Type::String(StringSize::Fixed(v))
             } else {
                 let m = p.get_field(&length);
-                let m = parsed_member_to_member(
-                    p,
-                    ParsedStructMember::Definition(m),
-                    containers,
-                    definers,
-                    tags,
+                let m = parsed_struct_member_definition_to_struct_member(
+                    p, containers, definers, tags, m,
                 );
-                let m = match m {
-                    StructMember::Definition(d) => d,
-                    _ => unreachable!(),
-                };
 
                 Type::String(StringSize::Variable(Box::new(m)))
             }
@@ -118,17 +112,8 @@ fn parsed_array_to_array(
         ParsedArraySize::Fixed(v) => ArraySize::Fixed(v),
         ParsedArraySize::Variable(v) => {
             let m = p.get_field(&v);
-            let m = parsed_member_to_member(
-                p,
-                ParsedStructMember::Definition(m),
-                containers,
-                definers,
-                tags,
-            );
-            let m = match m {
-                StructMember::Definition(d) => d,
-                _ => unreachable!(),
-            };
+            let m =
+                parsed_struct_member_definition_to_struct_member(p, containers, definers, tags, m);
             ArraySize::Variable(Box::new(m))
         }
         ParsedArraySize::Endless => ArraySize::Endless,
@@ -152,6 +137,23 @@ fn parsed_array_to_array(
     Array::new(inner, size)
 }
 
+fn parsed_struct_member_definition_to_struct_member(
+    c: &ParsedContainer,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    tags: &ObjectTags,
+    d: ParsedStructMemberDefinition,
+) -> StructMemberDefinition {
+    StructMemberDefinition::new(
+        d.name,
+        parsed_type_to_type(c, containers, definers, d.struct_type, tags),
+        d.verified_value,
+        d.used_as_size_in,
+        d.used_in_if.unwrap(),
+        d.tags,
+    )
+}
+
 fn parsed_member_to_member(
     c: &ParsedContainer,
     m: ParsedStructMember,
@@ -160,14 +162,9 @@ fn parsed_member_to_member(
     tags: &ObjectTags,
 ) -> StructMember {
     match m {
-        ParsedStructMember::Definition(d) => StructMember::Definition(StructMemberDefinition::new(
-            d.name,
-            parsed_type_to_type(c, containers, definers, d.struct_type, tags),
-            d.verified_value,
-            d.used_as_size_in,
-            d.used_in_if.unwrap(),
-            d.tags,
-        )),
+        ParsedStructMember::Definition(d) => StructMember::Definition(
+            parsed_struct_member_definition_to_struct_member(c, containers, definers, tags, d),
+        ),
         ParsedStructMember::IfStatement(s) => {
             let member = c.get_field_ty(s.conditional.variable_name()).str();
             let definer = get_definer(definers, &member, c.tags()).unwrap();
