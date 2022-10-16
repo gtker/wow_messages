@@ -4,6 +4,10 @@ use core::option::Option;
 use core::option::Option::Some;
 use std::collections::BTreeSet;
 
+const VANILLA: WorldVersion = WorldVersion::Minor(1, 12);
+const TBC: WorldVersion = WorldVersion::Exact(2, 4, 3, 8606);
+const WRATH: WorldVersion = WorldVersion::Exact(3, 3, 5, 12340);
+
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
 pub enum WorldVersion {
     Major(u8),
@@ -183,10 +187,6 @@ impl WorldVersion {
     }
 
     pub(crate) fn try_as_major_world(&self) -> Option<MajorWorldVersion> {
-        const VANILLA: WorldVersion = WorldVersion::Minor(1, 12);
-        const TBC: WorldVersion = WorldVersion::Exact(2, 4, 3, 8606);
-        const WRATH: WorldVersion = WorldVersion::Exact(3, 3, 5, 12340);
-
         if self.covers(&VANILLA) {
             Some(MajorWorldVersion::Vanilla)
         } else if self.covers(&TBC) {
@@ -364,6 +364,14 @@ impl MajorWorldVersion {
         match self {
             MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => false,
             MajorWorldVersion::Wrath => true,
+        }
+    }
+
+    pub(crate) fn as_world(&self) -> WorldVersion {
+        match self {
+            MajorWorldVersion::Vanilla => VANILLA,
+            MajorWorldVersion::BurningCrusade => TBC,
+            MajorWorldVersion::Wrath => WRATH,
         }
     }
 }

@@ -8,7 +8,7 @@ use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
-use crate::parser::types::version::{LoginVersion, Version, WorldVersion};
+use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version, WorldVersion};
 use crate::ContainerType;
 
 #[derive(Debug, Clone)]
@@ -76,24 +76,19 @@ impl Objects {
         None
     }
 
-    pub(crate) fn get_main_world_versions_with_objects(&self) -> Vec<WorldVersion> {
+    pub(crate) fn get_main_world_versions_with_objects(&self) -> Vec<MajorWorldVersion> {
         let mut v = Vec::new();
 
         for s in self.all_containers() {
             for l in s.tags().versions() {
                 if l.is_main_version() {
-                    v.push(l);
+                    v.push(l.as_major_world());
                 }
             }
         }
 
         v.sort();
         v.dedup();
-
-        let index = v.iter().position(|a| a.eq(&WorldVersion::All));
-        if let Some(index) = index {
-            v.remove(index);
-        }
 
         v
     }

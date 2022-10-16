@@ -182,7 +182,7 @@ fn main() {
 
 fn write_world_opcodes(o: &Objects) {
     for e in o.get_main_world_versions_with_objects() {
-        let mut v = o.get_world_messages_with_versions_and_all(&e);
+        let mut v = o.get_world_messages_with_versions_and_all(&e.as_world());
         v.sort_by_key(|a| a.container_type());
         let cmsg: Vec<&Container> = v
             .clone()
@@ -195,8 +195,8 @@ fn write_world_opcodes(o: &Objects) {
             })
             .collect();
         if !cmsg.is_empty() {
-            let s = print_world_opcodes(&cmsg, &e, ContainerType::CMsg(0));
-            let filename = get_world_version_file_path(&e.as_major_world()).join("opcodes.rs");
+            let s = print_world_opcodes(&cmsg, &e.as_world(), ContainerType::CMsg(0));
+            let filename = get_world_version_file_path(&e).join("opcodes.rs");
 
             create_and_overwrite_if_not_same_contents(s.proper_as_str(), &filename);
         }
@@ -211,8 +211,8 @@ fn write_world_opcodes(o: &Objects) {
             })
             .collect();
         if !smsg.is_empty() {
-            let s = print_world_opcodes(&smsg, &e, ContainerType::SMsg(0));
-            let filename = get_world_version_file_path(&e.as_major_world()).join("opcodes.rs");
+            let s = print_world_opcodes(&smsg, &e.as_world(), ContainerType::SMsg(0));
+            let filename = get_world_version_file_path(&e).join("opcodes.rs");
             append_string_to_file(s.proper_as_str(), &filename);
         }
     }
