@@ -88,10 +88,10 @@ impl ParsedTags {
             self.description,
             self.compressed,
             self.comment,
-            self.is_test,
-            self.skip,
-            self.unimplemented,
-            self.rust_base_ty,
+            self.is_test.unwrap_or(false),
+            self.skip.unwrap_or(false),
+            self.unimplemented.unwrap_or(false),
+            self.rust_base_ty.unwrap_or(false),
         )
     }
 

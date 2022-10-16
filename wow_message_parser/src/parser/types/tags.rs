@@ -9,14 +9,15 @@ use crate::Objects;
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct ObjectTags {
     all_versions: AllVersions,
+
     description: Option<TagString>,
     compressed: Option<String>,
     comment: Option<TagString>,
 
-    is_test: Option<bool>,
-    skip: Option<bool>,
-    unimplemented: Option<bool>,
-    rust_base_ty: Option<bool>,
+    is_test: bool,
+    skip: bool,
+    unimplemented: bool,
+    rust_base_ty: bool,
 }
 
 impl ObjectTags {
@@ -25,10 +26,10 @@ impl ObjectTags {
         description: Option<TagString>,
         compressed: Option<String>,
         comment: Option<TagString>,
-        is_test: Option<bool>,
-        skip: Option<bool>,
-        unimplemented: Option<bool>,
-        rust_base_ty: Option<bool>,
+        is_test: bool,
+        skip: bool,
+        unimplemented: bool,
+        rust_base_ty: bool,
     ) -> Self {
         Self {
             all_versions,
@@ -61,10 +62,10 @@ impl ObjectTags {
             description: None,
             compressed: None,
             comment: None,
-            is_test: None,
-            skip: None,
-            unimplemented: None,
-            rust_base_ty: None,
+            is_test: false,
+            skip: false,
+            unimplemented: false,
+            rust_base_ty: false,
         }
     }
 
@@ -76,11 +77,7 @@ impl ObjectTags {
     }
 
     pub(crate) fn unimplemented(&self) -> bool {
-        if let Some(v) = self.unimplemented {
-            v
-        } else {
-            false
-        }
+        self.unimplemented
     }
 
     pub(crate) fn shared(&self) -> bool {
@@ -167,27 +164,15 @@ impl ObjectTags {
     }
 
     pub(crate) fn is_in_base(&self) -> bool {
-        if let Some(v) = self.rust_base_ty {
-            v
-        } else {
-            false
-        }
+        self.rust_base_ty
     }
 
     pub(crate) fn skip(&self) -> bool {
-        if let Some(v) = self.skip {
-            v
-        } else {
-            false
-        }
+        self.skip
     }
 
     pub(crate) fn test(&self) -> bool {
-        if let Some(v) = self.is_test {
-            v
-        } else {
-            false
-        }
+        self.is_test
     }
 }
 
