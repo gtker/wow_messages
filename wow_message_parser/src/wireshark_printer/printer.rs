@@ -1,4 +1,3 @@
-use crate::file_info::FileInfo;
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -11,7 +10,7 @@ use crate::wireshark_printer::{
     clean_opcode_name, enum_name, enum_strings, enumerator_name, is_client_name, is_server_name,
     name_to_hf, pretty_name, server_to_client_name, ui_name,
 };
-use crate::{Container, Object, Objects, Tags};
+use crate::{Container, Objects, Tags};
 
 pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
     let mut s = Writer::new("");
@@ -101,7 +100,7 @@ fn print_member(
     match m {
         StructMember::Definition(d) => {
             let w = wo.get(&name_to_hf(d.name(), d.ty()));
-            if !print_definition(s, e.name(), d, w, o, tags, wo, variables) {
+            if !print_definition(s, e.name(), d, w, o, wo, variables) {
                 return false;
             }
         }
@@ -218,7 +217,6 @@ fn print_definition(
     d: &StructMemberDefinition,
     w: Option<&WiresharkMember>,
     o: &Objects,
-    tags: &Tags,
     wo: &WiresharkObject,
     variables: &mut Vec<String>,
 ) -> bool {
@@ -300,38 +298,12 @@ fn print_definition(
             true
         }
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
-            if !print_identifier(
-                s,
-                e.name(),
-                w,
-                upcast,
-                o,
-                wo,
-                tags,
-                container_name,
-                d.name(),
-                variables,
-                e.file_info(),
-            ) {
-                return false;
-            }
+            print_definer(s, w, upcast, container_name, d.name(), variables, e);
 
             true
         }
         Type::Struct { e } => {
-            if !print_identifier(
-                s,
-                e.name(),
-                w,
-                &None,
-                o,
-                wo,
-                tags,
-                container_name,
-                d.name(),
-                variables,
-                e.file_info(),
-            ) {
+            if !print_container(s, o, wo, variables, e) {
                 return false;
             }
 
@@ -387,19 +359,7 @@ fn print_definition(
                     ));
                 }
                 ArrayType::Struct(c) => {
-                    if !print_identifier(
-                        s,
-                        c.name(),
-                        w,
-                        &None,
-                        o,
-                        wo,
-                        tags,
-                        container_name,
-                        d.name(),
-                        variables,
-                        c.file_info(),
-                    ) {
+                    if !print_container(s, o, wo, variables, c) {
                         s.closing_curly();
                         return false;
                     }
@@ -438,60 +398,59 @@ fn print_cstring(s: &mut Writer, w: Option<&WiresharkMember>) {
     s.wln(format!("add_cstring(ptv, &{hf});", hf = name));
 }
 
-fn print_identifier(
+fn print_container(
     s: &mut Writer,
-    identifier: &str,
-    w: Option<&WiresharkMember>,
-    upcast: &Option<IntegerType>,
     o: &Objects,
     wo: &WiresharkObject,
-    tags: &Tags,
+    variables: &mut Vec<String>,
+    e: &Container,
+) -> bool {
+    s.wln(format!(
+        "ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, \"{}\");",
+        e.name()
+    ));
+    for m in e.members() {
+        if !print_member(s, m, &e, wo, e.tags(), o, variables) {
+            return false;
+        }
+    }
+    s.wln("ptvcursor_pop_subtree(ptv);");
+
+    true
+}
+
+fn print_definer(
+    s: &mut Writer,
+    w: Option<&WiresharkMember>,
+    upcast: &Option<IntegerType>,
     container_name: &str,
     variable_name: &str,
     variables: &mut Vec<String>,
-    file_info: &FileInfo,
-) -> bool {
-    let e = o.get_object(identifier, tags, container_name, file_info);
-    match e {
-        Object::Container(e) => {
-            s.wln(format!("ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, \"{}\");", e.name()));
-            for m in e.members() {
-                if !print_member(s, m, &e, wo, e.tags(), o, variables) {
-                    return false;
-                }
-            }
-            s.wln("ptvcursor_pop_subtree(ptv);");
+    e: &Definer,
+) {
+    let (len, enc) = if let Some(upcast) = upcast {
+        (upcast.size(), upcast.wireshark_endian_str())
+    } else {
+        (e.ty().size(), e.ty().wireshark_endian_str())
+    };
+    let name = w.unwrap().name();
 
-            true
-        }
-        Object::Enum(e) | Object::Flag(e) => {
-            let (len, enc) = if let Some(upcast) = upcast {
-                (upcast.size(), upcast.wireshark_endian_str())
-            } else {
-                (e.ty().size(), e.ty().wireshark_endian_str())
-            };
-            let name = w.unwrap().name();
-
-            if e.used_in_if_in_object(container_name) {
-                variables.push(variable_name.to_string());
-                s.wln(format!(
-                    "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{var_name});",
-                    name = name,
-                    len = len,
-                    enc = enc,
-                    var_name = variable_name,
-                ));
-            } else {
-                s.wln(format!(
-                    "ptvcursor_add(ptv, {hf}, {len}, {enc});",
-                    hf = name,
-                    len = len,
-                    enc = enc,
-                ));
-            }
-
-            true
-        }
+    if e.used_in_if_in_object(container_name) {
+        variables.push(variable_name.to_string());
+        s.wln(format!(
+            "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{var_name});",
+            name = name,
+            len = len,
+            enc = enc,
+            var_name = variable_name,
+        ));
+    } else {
+        s.wln(format!(
+            "ptvcursor_add(ptv, {hf}, {len}, {enc});",
+            hf = name,
+            len = len,
+            enc = enc,
+        ));
     }
 }
 

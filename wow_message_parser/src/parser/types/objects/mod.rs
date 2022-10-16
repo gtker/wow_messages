@@ -1,7 +1,5 @@
 pub mod conversion;
 
-use crate::error_printer::complex_not_found;
-use crate::file_info::FileInfo;
 use crate::parser::types::container::Container;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::object_new;
@@ -11,7 +9,6 @@ use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::tags::Tags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::version::{LoginVersion, Version, WorldVersion};
-use crate::DefinerType;
 
 #[derive(Debug, Clone)]
 pub(crate) struct Objects {
@@ -31,33 +28,6 @@ impl Objects {
         tests: Vec<ParsedTestCase>,
     ) -> Self {
         object_new(enums, flags, structs, messages, tests)
-    }
-
-    pub(crate) fn get_object(
-        &self,
-        name: &str,
-        finder_tags: &Tags,
-        finder_name: &str,
-        file_info: &FileInfo,
-    ) -> Object {
-        if let Some(e) = self
-            .all_containers()
-            .find(|a| a.name() == name && a.tags().fulfills_all(finder_tags))
-        {
-            return Object::Container(e.clone());
-        }
-
-        if let Some(e) = self
-            .all_definers()
-            .find(|a| a.name() == name && a.tags().fulfills_all(finder_tags))
-        {
-            match e.definer_ty() {
-                DefinerType::Enum => return Object::Enum(e.clone()),
-                DefinerType::Flag => return Object::Flag(e.clone()),
-            }
-        }
-
-        complex_not_found(finder_name, finder_tags, file_info, name);
     }
 
     pub(crate) fn get_container(&self, name: &str, finder_tags: &Tags) -> &Container {
@@ -193,10 +163,6 @@ impl Objects {
             .map(|a| Object::Enum(a.clone()))
             .chain(self.flags.iter().map(|a| Object::Flag(a.clone())))
             .chain(self.all_containers().map(|a| Object::Container(a.clone())))
-    }
-
-    pub(crate) fn all_definers(&self) -> impl Iterator<Item = &Definer> {
-        self.enums.iter().chain(&self.flags)
     }
 
     pub(crate) fn all_containers(&self) -> impl Iterator<Item = &Container> {
