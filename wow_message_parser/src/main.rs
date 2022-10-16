@@ -24,7 +24,7 @@ use crate::rust_printer::{
 };
 use parser::types::container::{Container, ContainerType};
 use parser::types::parsed::parsed_object::ParsedObjects;
-use parser::types::tags::Tags;
+use parser::types::tags::ObjectTags;
 use path_utils::get_world_version_file_path;
 
 mod doc_printer;
@@ -255,6 +255,6 @@ fn load_files(dir: &Path, components: &mut ParsedObjects) {
     }
 }
 
-fn should_not_write_object(t: &Tags) -> bool {
+fn should_not_write_object(t: &ObjectTags) -> bool {
     t.test() || t.skip() || !t.is_main_version()
 }

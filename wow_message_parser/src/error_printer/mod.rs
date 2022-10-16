@@ -1,5 +1,5 @@
 use crate::file_info::FileInfo;
-use crate::{Tags, CONTAINER_SELF_SIZE_FIELD, ENUM_SELF_VALUE_FIELD};
+use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD, ENUM_SELF_VALUE_FIELD};
 use std::process::exit;
 use writer::ErrorWriter;
 
@@ -40,7 +40,7 @@ fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     }
 }
 
-fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &Tags) {
+fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &ObjectTags) {
     s.wln(msg);
     if tags.logon_versions().next().is_some() {
         s.wln("    Login:");
@@ -61,10 +61,10 @@ fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &Tags) {
 
 pub(crate) fn complex_not_found(
     struct_name: &str,
-    struct_tags: &Tags,
+    struct_tags: &ObjectTags,
     struct_fileinfo: &FileInfo,
     ty_name: &str,
-    related: &[(&FileInfo, &Tags)],
+    related: &[(&FileInfo, &ObjectTags)],
 ) -> ! {
     let mut s = ErrorWriter::new("Container has complex type that can not be found.");
 
@@ -270,7 +270,12 @@ pub(crate) fn unsupported_upcast(
     wowm_exit(s, UNSUPPORTED_UPCAST);
 }
 
-fn print_version_overlap(s: &mut ErrorWriter, msg: &str, tags: &Tags, other_tags: &Tags) {
+fn print_version_overlap(
+    s: &mut ErrorWriter,
+    msg: &str,
+    tags: &ObjectTags,
+    other_tags: &ObjectTags,
+) {
     s.wln(msg);
     if tags.logon_versions().next().is_some() {
         s.wln("    Login:");
@@ -319,9 +324,9 @@ fn print_version_overlap(s: &mut ErrorWriter, msg: &str, tags: &Tags, other_tags
 
 pub(crate) fn overlapping_versions(
     name: &str,
-    first_object_tags: &Tags,
+    first_object_tags: &ObjectTags,
     first_object_file_info: &FileInfo,
-    second_object_tags: &Tags,
+    second_object_tags: &ObjectTags,
     second_object_file_info: &FileInfo,
 ) -> ! {
     let mut s = ErrorWriter::new("Objects with the same name have overlapping versions.");

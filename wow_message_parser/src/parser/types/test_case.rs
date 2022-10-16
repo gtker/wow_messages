@@ -1,6 +1,6 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::array::ArraySize;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskType;
 
@@ -9,7 +9,7 @@ pub(crate) struct TestCase {
     subject: String,
     members: Vec<TestCaseMember>,
     raw_bytes: Vec<u8>,
-    tags: Tags,
+    tags: ObjectTags,
     file_info: FileInfo,
 }
 
@@ -18,7 +18,7 @@ impl TestCase {
         subject: String,
         members: Vec<TestCaseMember>,
         raw_bytes: Vec<u8>,
-        tags: Tags,
+        tags: ObjectTags,
         file_info: FileInfo,
     ) -> Self {
         Self {
@@ -37,7 +37,7 @@ impl TestCase {
         &self.raw_bytes
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 
@@ -63,7 +63,7 @@ impl TestCase {
 pub(crate) struct TestCaseMember {
     variable_name: String,
     value: TestValue,
-    tags: Tags,
+    tags: ObjectTags,
 }
 
 impl TestCaseMember {
@@ -75,11 +75,11 @@ impl TestCaseMember {
         &self.value
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 
-    pub(crate) fn new(name: String, value: TestValue, tags: Tags) -> Self {
+    pub(crate) fn new(name: String, value: TestValue, tags: ObjectTags) -> Self {
         Self {
             variable_name: name,
             value,

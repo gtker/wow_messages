@@ -9,7 +9,7 @@ use crate::parser::types::parsed::parsed_struct_member::{
 };
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::Sizes;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::{ContainerType, DefinerType};
 
 #[derive(Debug, Clone)]
@@ -17,7 +17,7 @@ pub(crate) struct ParsedContainer {
     pub name: String,
     pub object_type: ContainerType,
     pub members: Vec<ParsedStructMember>,
-    pub tags: Tags,
+    pub tags: ObjectTags,
     pub file_info: FileInfo,
 }
 
@@ -25,7 +25,7 @@ impl ParsedContainer {
     pub(crate) fn new(
         name: &str,
         members: Vec<ParsedStructMember>,
-        tags: Tags,
+        tags: ObjectTags,
         object_type: ContainerType,
         file_info: FileInfo,
     ) -> Self {
@@ -149,7 +149,7 @@ impl ParsedContainer {
         &self.name
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 

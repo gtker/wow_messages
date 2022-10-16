@@ -6,7 +6,7 @@ use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::parsed::parsed_ty::bool_ty_to_string;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMember;
-use crate::parser::types::tags::{MemberTags, Tags};
+use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::rust_printer::{
@@ -956,7 +956,7 @@ fn find_subject<'a>(
 pub(crate) fn create_if_statement(
     statement: &IfStatement,
     struct_ty_name: &str,
-    tags: &Tags,
+    tags: &ObjectTags,
     containers: &[ParsedContainer],
     definers: &[Definer],
     e: &ParsedContainer,
@@ -1103,7 +1103,7 @@ pub(crate) fn create_if_statement(
 pub(crate) fn create_struct_member(
     m: &StructMember,
     struct_ty_name: &str,
-    tags: &Tags,
+    tags: &ObjectTags,
     e: &ParsedContainer,
     containers: &[ParsedContainer],
     definers: &[Definer],

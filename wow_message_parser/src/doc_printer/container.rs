@@ -6,7 +6,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::{StringSize, Type};
 use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::get_struct_wowm_definition;
-use crate::{doc_printer, Container, ContainerType, DefinerType, Objects, Tags};
+use crate::{doc_printer, Container, ContainerType, DefinerType, ObjectTags, Objects};
 use std::collections::HashMap;
 use std::convert::TryInto;
 use std::fmt::Write;
@@ -42,7 +42,7 @@ fn print_container_example_array(
     bytes: &mut Iter<u8>,
     values: &mut HashMap<String, isize>,
     o: &Objects,
-    tags: &Tags,
+    tags: &ObjectTags,
     prefix: &str,
 ) {
     let size = match array.size() {
@@ -109,7 +109,7 @@ fn print_container_example_definition(
     bytes: &mut Iter<u8>,
     values: &mut HashMap<String, isize>,
     o: &Objects,
-    tags: &Tags,
+    tags: &ObjectTags,
     prefix: &str,
 ) {
     let comment = if !prefix.is_empty() {
@@ -270,7 +270,7 @@ fn print_container_example_member(
     bytes: &mut Iter<u8>,
     values: &mut HashMap<String, isize>,
     o: &Objects,
-    tags: &Tags,
+    tags: &ObjectTags,
     prefix: &str,
 ) {
     match m {
@@ -446,7 +446,7 @@ fn print_container_if_statement(
     s: &mut DocWriter,
     statement: &IfStatement,
     offset: &mut Option<usize>,
-    tags: &Tags,
+    tags: &ObjectTags,
     o: &Objects,
 ) {
     s.w(format!("If {variable} ", variable = statement.name()));
@@ -491,7 +491,7 @@ fn print_container_field(
     s: &mut DocWriter,
     m: &StructMember,
     offset: &mut Option<usize>,
-    tags: &Tags,
+    tags: &ObjectTags,
     o: &Objects,
 ) {
     match m {

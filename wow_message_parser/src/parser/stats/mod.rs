@@ -5,7 +5,7 @@ pub(crate) mod wrath_messages;
 use crate::error_printer::incorrect_opcode_for_message;
 use crate::parser::types::container::ContainerType;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::WorldVersion;
 use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::UNIMPLEMENTED;
@@ -68,7 +68,7 @@ pub(crate) fn print_message_stats(o: &Objects) {
 }
 
 fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
-    let tags = Tags::new_with_version(version);
+    let tags = ObjectTags::new_with_version(version);
     for s in o.messages() {
         if !s.tags().fulfills_all(&tags) {
             continue;

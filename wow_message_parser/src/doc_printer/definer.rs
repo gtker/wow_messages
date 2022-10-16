@@ -3,9 +3,15 @@ use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::get_definer_wowm_definition;
-use crate::{doc_printer, Tags};
+use crate::{doc_printer, ObjectTags};
 
-fn definer_common(s: &mut DocWriter, tags: &Tags, fileinfo: &FileInfo, ty: &str, e: &Definer) {
+fn definer_common(
+    s: &mut DocWriter,
+    tags: &ObjectTags,
+    fileinfo: &FileInfo,
+    ty: &str,
+    e: &Definer,
+) {
     doc_printer::common(s, tags);
 
     s.wln("### Wowm Representation");

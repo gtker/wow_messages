@@ -10,7 +10,7 @@ use crate::wireshark_printer::{
     clean_opcode_name, enum_name, enum_strings, enumerator_name, is_client_name, is_server_name,
     name_to_hf, pretty_name, server_to_client_name, ui_name,
 };
-use crate::{Container, Objects, Tags};
+use crate::{Container, ObjectTags, Objects};
 
 pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
     let mut s = Writer::new("");
@@ -93,7 +93,7 @@ fn print_member(
     m: &StructMember,
     e: &Container,
     wo: &WiresharkObject,
-    tags: &Tags,
+    tags: &ObjectTags,
     o: &Objects,
     variables: &mut Vec<String>,
 ) -> bool {
@@ -126,7 +126,7 @@ fn print_if_statement(
     s: &mut Writer,
     e: &Container,
     wo: &WiresharkObject,
-    tags: &Tags,
+    tags: &ObjectTags,
     o: &Objects,
     statement: &IfStatement,
     variables: &mut Vec<String>,

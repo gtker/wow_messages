@@ -7,7 +7,7 @@ use std::path::{Path, PathBuf};
 use heck::SnakeCase;
 use walkdir::WalkDir;
 
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::Version;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::path_utils;
@@ -115,7 +115,7 @@ impl ModFiles {
         &mut self,
         name: &str,
         versions: &[WorldVersion],
-        tags: &Tags,
+        tags: &ObjectTags,
     ) {
         let base_path = if tags.is_in_base() {
             base_directory()
@@ -137,7 +137,7 @@ impl ModFiles {
         );
     }
 
-    pub(crate) fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &Tags) {
+    pub(crate) fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &ObjectTags) {
         assert!(version.is_main_version());
 
         if tags.is_in_base() {
@@ -220,7 +220,7 @@ impl ModFiles {
     pub(crate) fn write_shared_contents_to_file(
         &mut self,
         name: &str,
-        tags: &Tags,
+        tags: &ObjectTags,
         base_s: &str,
         versions: &[Version],
     ) {
@@ -242,7 +242,7 @@ impl ModFiles {
     pub(crate) fn write_shared_import_to_file(
         &mut self,
         name: &str,
-        tags: &Tags,
+        tags: &ObjectTags,
         world_s: &str,
         base_s: &str,
         version: &Version,
@@ -264,7 +264,7 @@ impl ModFiles {
     pub(crate) fn write_base_contents_to_file(
         &mut self,
         name: &str,
-        tags: &Tags,
+        tags: &ObjectTags,
         base_s: &str,
         world_s: &str,
         version: Version,
@@ -291,7 +291,7 @@ impl ModFiles {
     pub(crate) fn write_contents_to_file(
         &mut self,
         name: &str,
-        tags: &Tags,
+        tags: &ObjectTags,
         s: &str,
         version: Version,
     ) {

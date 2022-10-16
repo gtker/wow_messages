@@ -8,7 +8,7 @@ use std::path::Path;
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::{MemberTags, Tags};
+use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::parser::types::{Endianness, IntegerType};
 
@@ -142,7 +142,7 @@ pub(crate) struct IrTags {
 }
 
 impl IrTags {
-    fn from_tags(tags: &Tags) -> Self {
+    fn from_tags(tags: &ObjectTags) -> Self {
         let description = tags.description().map(|d| d.as_ir_string());
 
         let comment = tags.comment().map(|d| d.as_ir_string());

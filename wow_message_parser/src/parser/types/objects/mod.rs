@@ -6,7 +6,7 @@ use crate::parser::types::objects::conversion::object_new;
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::version::{LoginVersion, Version, WorldVersion};
 
@@ -30,7 +30,7 @@ impl Objects {
         object_new(enums, flags, structs, messages, tests)
     }
 
-    pub(crate) fn get_container(&self, name: &str, finder_tags: &Tags) -> &Container {
+    pub(crate) fn get_container(&self, name: &str, finder_tags: &ObjectTags) -> &Container {
         if let Some(e) = self
             .all_containers()
             .find(|a| a.name() == name && a.tags().has_version_intersections(finder_tags))
@@ -47,8 +47,8 @@ impl Objects {
     pub(crate) fn get_tags_of_object_fallible(
         &self,
         type_name: &str,
-        finder_tags: &Tags,
-    ) -> Option<&Tags> {
+        finder_tags: &ObjectTags,
+    ) -> Option<&ObjectTags> {
         if let Some(e) = self
             .enums
             .iter()
@@ -104,7 +104,7 @@ impl Objects {
         let mut v = Vec::new();
 
         for e in self.all_containers() {
-            let tags = Tags::new_with_version(Version::World(*version_number));
+            let tags = ObjectTags::new_with_version(Version::World(*version_number));
             if e.tags().fulfills_all(&tags) {
                 v.push(e);
             }
@@ -178,8 +178,9 @@ impl Objects {
             .messages()
             .iter()
             .filter(|e| {
-                e.tags()
-                    .fulfills_all(&Tags::new_with_version(WorldVersion::Minor(1, 12).into()))
+                e.tags().fulfills_all(&ObjectTags::new_with_version(
+                    WorldVersion::Minor(1, 12).into(),
+                ))
             })
             .collect();
 
@@ -191,8 +192,9 @@ impl Objects {
     pub(crate) fn wireshark_containers(&self) -> Vec<&Container> {
         self.all_containers()
             .filter(|e| {
-                e.tags()
-                    .fulfills_all(&Tags::new_with_version(WorldVersion::Minor(1, 12).into()))
+                e.tags().fulfills_all(&ObjectTags::new_with_version(
+                    WorldVersion::Minor(1, 12).into(),
+                ))
             })
             .collect()
     }
@@ -218,7 +220,7 @@ pub(crate) enum Object {
 }
 
 impl Object {
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         match self {
             Object::Container(e) => e.tags(),
             Object::Enum(e) => e.tags(),

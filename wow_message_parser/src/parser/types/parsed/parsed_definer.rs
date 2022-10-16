@@ -1,7 +1,7 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::{DefinerField, SelfValueDefinerField};
 use crate::parser::types::IntegerType;
-use crate::{DefinerType, Tags};
+use crate::{DefinerType, ObjectTags};
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct ParsedDefiner {
@@ -10,7 +10,7 @@ pub(crate) struct ParsedDefiner {
     pub fields: Vec<DefinerField>,
     pub self_value: Option<SelfValueDefinerField>,
     pub basic_type: IntegerType,
-    pub tags: Tags,
+    pub tags: ObjectTags,
     pub file_info: FileInfo,
 }
 impl ParsedDefiner {
@@ -20,7 +20,7 @@ impl ParsedDefiner {
         fields: Vec<DefinerField>,
         basic_type: IntegerType,
         self_value: Option<SelfValueDefinerField>,
-        tags: Tags,
+        tags: ObjectTags,
         file_info: FileInfo,
     ) -> Self {
         Self {
@@ -38,7 +38,7 @@ impl ParsedDefiner {
         &self.name
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 }

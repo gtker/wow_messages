@@ -20,7 +20,7 @@ use crate::file_utils::{get_import_path, get_shared_module_name, major_version_t
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::MemberTags;
 use crate::parser::types::version::{Version, WorldVersion};
-use crate::{ContainerType, Objects, Tags};
+use crate::{ContainerType, ObjectTags, Objects};
 pub use update_mask::*;
 
 #[derive(Debug)]
@@ -827,7 +827,7 @@ fn print_member_docc_description_and_comment(
     s: &mut Writer,
     tags: &MemberTags,
     o: &Objects,
-    object_tags: &Tags,
+    object_tags: &ObjectTags,
 ) {
     if let Some(description) = tags.description() {
         for line in description.as_rust_doc_lines(o, object_tags) {
@@ -848,9 +848,9 @@ fn print_member_docc_description_and_comment(
 
 fn print_docc_description_and_comment(
     s: &mut Writer,
-    tags: &Tags,
+    tags: &ObjectTags,
     o: &Objects,
-    object_tags: &Tags,
+    object_tags: &ObjectTags,
 ) {
     if let Some(description) = tags.description() {
         for line in description.as_rust_doc_lines(o, object_tags) {

@@ -2,7 +2,7 @@ use crate::error_printer::{duplicate_definer_value, invalid_definer_value};
 use crate::file_info::FileInfo;
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::sizes::Sizes;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::{compare_name_and_tags, IntegerType};
 use crate::parser::utility;
 use crate::rust_printer::{field_name_to_rust_name, DefinerType};
@@ -15,11 +15,11 @@ pub(crate) struct DefinerField {
     name: String,
     rust_name: String,
     value: DefinerValue,
-    tags: Tags,
+    tags: ObjectTags,
 }
 
 impl DefinerField {
-    pub(crate) fn new(name: &str, value: DefinerValue, tags: Tags) -> Self {
+    pub(crate) fn new(name: &str, value: DefinerValue, tags: ObjectTags) -> Self {
         Self {
             name: name.to_string(),
             rust_name: field_name_to_rust_name(name),
@@ -40,7 +40,7 @@ impl DefinerField {
         &self.value
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 }
@@ -86,11 +86,11 @@ impl DefinerValue {
 pub(crate) struct SelfValueDefinerField {
     name: String,
     rust_name: String,
-    tags: Tags,
+    tags: ObjectTags,
 }
 
 impl SelfValueDefinerField {
-    pub(crate) fn new(name: &str, tags: Tags) -> Self {
+    pub(crate) fn new(name: &str, tags: ObjectTags) -> Self {
         Self {
             name: name.to_string(),
             rust_name: field_name_to_rust_name(name),
@@ -106,7 +106,7 @@ impl SelfValueDefinerField {
         &self.rust_name
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 }
@@ -118,7 +118,7 @@ pub(crate) struct Definer {
     fields: Vec<DefinerField>,
     self_value: Option<SelfValueDefinerField>,
     basic_type: IntegerType,
-    tags: Tags,
+    tags: ObjectTags,
     objects_used_in: Vec<(String, DefinerUsage)>,
     file_info: FileInfo,
 }
@@ -145,7 +145,7 @@ impl Definer {
         fields: Vec<DefinerField>,
         basic_type: IntegerType,
         self_value: Option<SelfValueDefinerField>,
-        tags: Tags,
+        tags: ObjectTags,
         objects_used_in: Vec<(String, DefinerUsage)>,
         file_info: FileInfo,
     ) -> Self {
@@ -207,7 +207,7 @@ impl Definer {
         &self.fields
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 

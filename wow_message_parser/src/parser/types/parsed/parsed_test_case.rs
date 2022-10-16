@@ -1,12 +1,12 @@
 use crate::file_info::FileInfo;
-use crate::Tags;
+use crate::ObjectTags;
 
 #[derive(Debug, Clone)]
 pub(crate) struct ParsedTestCase {
     pub subject: String,
     pub members: Vec<ParsedTestCaseMember>,
     pub raw_bytes: Vec<u8>,
-    pub tags: Tags,
+    pub tags: ObjectTags,
     pub file_info: FileInfo,
 }
 
@@ -15,7 +15,7 @@ impl ParsedTestCase {
         subject: &str,
         members: Vec<ParsedTestCaseMember>,
         raw_bytes: Vec<u8>,
-        tags: Tags,
+        tags: ObjectTags,
         file_info: FileInfo,
     ) -> Self {
         Self {
@@ -30,7 +30,7 @@ impl ParsedTestCase {
     pub(crate) fn subject(&self) -> &str {
         &self.subject
     }
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 }
@@ -46,11 +46,11 @@ pub(crate) enum ParsedTestValue {
 pub(crate) struct ParsedTestCaseMember {
     pub variable_name: String,
     pub value: ParsedTestValue,
-    pub tags: Tags,
+    pub tags: ObjectTags,
 }
 
 impl ParsedTestCaseMember {
-    pub(crate) fn new(name: &str, value: ParsedTestValue, tags: Tags) -> Self {
+    pub(crate) fn new(name: &str, value: ParsedTestValue, tags: ObjectTags) -> Self {
         Self {
             variable_name: name.to_string(),
             value,

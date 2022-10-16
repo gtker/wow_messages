@@ -12,7 +12,7 @@ use crate::parser::types::parsed::parsed_struct_member::{
 };
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::rust_printer::rust_view::create_rust_object;
-use crate::{Container, Objects, Tags};
+use crate::{Container, ObjectTags, Objects};
 
 mod container;
 
@@ -81,7 +81,11 @@ pub(crate) fn parsed_container_to_container(
     )
 }
 
-pub(crate) fn parsed_tags_to_tags(tags: &Tags, ty_name: &str, file_info: &FileInfo) -> Tags {
+pub(crate) fn parsed_tags_to_tags(
+    tags: &ObjectTags,
+    ty_name: &str,
+    file_info: &FileInfo,
+) -> ObjectTags {
     if !tags.has_login_version() && !tags.has_world_version() {
         object_has_no_versions(ty_name, file_info)
     }
@@ -132,7 +136,7 @@ pub(crate) fn get_related<'a>(
     containers: &'a [ParsedContainer],
     definers: &'a [Definer],
     name: &str,
-) -> Vec<(&'a FileInfo, &'a Tags)> {
+) -> Vec<(&'a FileInfo, &'a ObjectTags)> {
     let definers = definers.iter().filter_map(|a| {
         if a.name() == name {
             Some((a.file_info(), a.tags()))
@@ -164,7 +168,7 @@ pub(crate) fn get_related<'a>(
 pub(crate) fn get_container<'a>(
     containers: &'a [ParsedContainer],
     name: &str,
-    tags: &Tags,
+    tags: &ObjectTags,
 ) -> Option<&'a ParsedContainer> {
     containers
         .iter()
@@ -174,7 +178,7 @@ pub(crate) fn get_container<'a>(
 pub(crate) fn get_definer<'a>(
     definers: &'a [Definer],
     name: &str,
-    tags: &Tags,
+    tags: &ObjectTags,
 ) -> Option<&'a Definer> {
     definers
         .iter()
@@ -240,7 +244,7 @@ pub(crate) fn all_definitions(
 fn check_versions(containers: &[ParsedContainer], definers: &[Definer]) {
     struct Obj<'a> {
         name: &'a str,
-        tags: &'a Tags,
+        tags: &'a ObjectTags,
         file_info: &'a FileInfo,
     }
 

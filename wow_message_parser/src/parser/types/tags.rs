@@ -7,7 +7,7 @@ use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
-pub(crate) struct Tags {
+pub(crate) struct ObjectTags {
     login_versions: BTreeSet<LoginVersion>,
     world_versions: BTreeSet<WorldVersion>,
     description: Option<TagString>,
@@ -23,7 +23,7 @@ pub(crate) struct Tags {
     rust_base_ty: Option<bool>,
 }
 
-impl Tags {
+impl ObjectTags {
     pub(crate) fn from_parsed(
         login_versions: BTreeSet<LoginVersion>,
         world_versions: BTreeSet<WorldVersion>,
@@ -89,7 +89,7 @@ impl Tags {
     }
 
     /// self and tags have any version in common at all
-    pub(crate) fn has_version_intersections(&self, tags: &Tags) -> bool {
+    pub(crate) fn has_version_intersections(&self, tags: &ObjectTags) -> bool {
         if tags.test() && self.test() {
             return true;
         }
@@ -120,11 +120,11 @@ impl Tags {
     }
 
     pub(crate) fn is_main_version(&self) -> bool {
-        let mut versions = Tags::new_with_version(Version::World(WorldVersion::Minor(1, 12)));
+        let mut versions = ObjectTags::new_with_version(Version::World(WorldVersion::Minor(1, 12)));
         versions.push_version(WorldVersion::Patch(2, 4, 3));
         versions.push_version(WorldVersion::Patch(3, 3, 5));
 
-        let logon = Tags::new_with_version(Version::Login(LoginVersion::All));
+        let logon = ObjectTags::new_with_version(Version::Login(LoginVersion::All));
 
         self.has_version_intersections(&versions) || self.has_version_intersections(&logon)
     }
@@ -336,7 +336,7 @@ impl TagString {
         v
     }
 
-    pub(crate) fn as_rust_doc_lines(&self, o: &Objects, object_tags: &Tags) -> Vec<String> {
+    pub(crate) fn as_rust_doc_lines(&self, o: &Objects, object_tags: &ObjectTags) -> Vec<String> {
         let mut v = Vec::new();
 
         let mut current = String::new();

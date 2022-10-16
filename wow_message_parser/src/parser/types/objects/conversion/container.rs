@@ -26,11 +26,11 @@ use crate::parser::types::ty::{StringSize, Type};
 use crate::parser::types::ContainerValue;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
-use crate::{DefinerType, Tags};
+use crate::{DefinerType, ObjectTags};
 
 pub(crate) fn verify_and_set_members(
     members: &mut [ParsedStructMember],
-    tags: &Tags,
+    tags: &ObjectTags,
     containers: &[ParsedContainer],
     definers: &[Definer],
     fileinfo: &FileInfo,
@@ -47,7 +47,7 @@ fn parsed_type_to_type(
     containers: &[ParsedContainer],
     definers: &[Definer],
     t: ParsedType,
-    tags: &Tags,
+    tags: &ObjectTags,
 ) -> Type {
     match t {
         ParsedType::Integer(i) => Type::Integer(i),
@@ -111,7 +111,7 @@ fn parsed_array_to_array(
     array: ParsedArray,
     containers: &[ParsedContainer],
     definers: &[Definer],
-    tags: &Tags,
+    tags: &ObjectTags,
 ) -> Array {
     let size = match array.size() {
         ParsedArraySize::Fixed(v) => ArraySize::Fixed(v),
@@ -156,7 +156,7 @@ fn parsed_member_to_member(
     m: ParsedStructMember,
     containers: &[ParsedContainer],
     definers: &[Definer],
-    tags: &Tags,
+    tags: &ObjectTags,
 ) -> StructMember {
     match m {
         ParsedStructMember::Definition(d) => StructMember::Definition(StructMemberDefinition::new(
@@ -210,7 +210,7 @@ pub(crate) fn parsed_members_to_members(
     members: Vec<ParsedStructMember>,
     containers: &[ParsedContainer],
     definers: &[Definer],
-    tags: &Tags,
+    tags: &ObjectTags,
 ) -> Vec<StructMember> {
     let mut v = Vec::with_capacity(members.len());
 
@@ -226,7 +226,7 @@ fn parsed_if_statement_to_if_statement(
     parsed: Vec<ParsedIfStatement>,
     containers: &[ParsedContainer],
     definers: &[Definer],
-    tags: &Tags,
+    tags: &ObjectTags,
 ) -> Vec<IfStatement> {
     let mut v = Vec::with_capacity(parsed.len());
 
@@ -275,7 +275,11 @@ fn set_used_as_size_in(members: &mut [ParsedStructMember]) {
     }
 }
 
-fn set_verified_values(members: &mut [ParsedStructMember], definers: &[Definer], tags: &Tags) {
+fn set_verified_values(
+    members: &mut [ParsedStructMember],
+    definers: &[Definer],
+    tags: &ObjectTags,
+) {
     for d in all_definitions_mut(members) {
         d.set_verified_value(definers, tags);
     }
@@ -285,7 +289,7 @@ fn contains_complex_type(
     containers: &[ParsedContainer],
     definers: &[Definer],
     ty_name: &str,
-    tags: &Tags,
+    tags: &ObjectTags,
     struct_name: &str,
     struct_fileinfo: &FileInfo,
 ) {
@@ -310,7 +314,7 @@ fn check_complex_types_exist(
     members: &[ParsedStructMember],
     containers: &[ParsedContainer],
     definers: &[Definer],
-    tags: &Tags,
+    tags: &ObjectTags,
     fileinfo: &FileInfo,
 ) {
     for d in all_definitions(members) {

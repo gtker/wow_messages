@@ -5,7 +5,7 @@ use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::tags::MemberTags;
 use crate::parser::types::{ContainerValue, ParsedContainerValue};
-use crate::{Tags, CONTAINER_SELF_SIZE_FIELD};
+use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub(crate) enum ParsedStructMember {
@@ -67,7 +67,7 @@ impl ParsedStructMemberDefinition {
         &self.value
     }
 
-    pub(crate) fn set_verified_value(&mut self, definers: &[Definer], tags: &Tags) {
+    pub(crate) fn set_verified_value(&mut self, definers: &[Definer], tags: &ObjectTags) {
         match &self.value() {
             None => {}
             Some(v) => {

@@ -2,7 +2,7 @@ pub mod container;
 pub mod definer;
 
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use std::collections::HashMap;
 use std::fmt::Write;
@@ -13,7 +13,7 @@ pub(crate) struct DocWriter {
     name: String,
     inner: String,
     column: usize,
-    tags: Tags,
+    tags: ObjectTags,
 }
 
 impl DocWriter {
@@ -21,7 +21,7 @@ impl DocWriter {
         &self.name
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 
@@ -29,7 +29,7 @@ impl DocWriter {
         &self.inner
     }
 
-    pub(crate) fn new(name: &str, tags: &Tags) -> Self {
+    pub(crate) fn new(name: &str, tags: &ObjectTags) -> Self {
         Self {
             name: name.to_string(),
             inner: String::with_capacity(8000),
@@ -185,7 +185,7 @@ pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers:
     }
 }
 
-fn common(s: &mut DocWriter, tags: &Tags) {
+fn common(s: &mut DocWriter, tags: &ObjectTags) {
     s.wln(format!("# {}", &s.name));
     s.newline();
 
@@ -194,7 +194,7 @@ fn common(s: &mut DocWriter, tags: &Tags) {
     print_metadata(s, tags);
 }
 
-fn print_metadata(s: &mut DocWriter, tags: &Tags) {
+fn print_metadata(s: &mut DocWriter, tags: &ObjectTags) {
     if let Some(description) = tags.description() {
         s.wln("### Description");
         s.newline();

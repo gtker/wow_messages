@@ -6,7 +6,7 @@ use crate::parser::types::compare_name_and_tags;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{Sizes, DATETIME_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{LoginVersion, Version};
@@ -48,7 +48,7 @@ pub(crate) struct Container {
     object_type: ContainerType,
     sizes: Sizes,
     members: Vec<StructMember>,
-    tags: Tags,
+    tags: ObjectTags,
     file_info: FileInfo,
     only_has_io_error: bool,
     rust_object_view: RustObject,
@@ -83,7 +83,7 @@ impl Container {
     pub(crate) fn new(
         name: String,
         members: Vec<StructMember>,
-        tags: Tags,
+        tags: ObjectTags,
         object_type: ContainerType,
         file_info: FileInfo,
         sizes: Sizes,
@@ -378,7 +378,7 @@ impl Container {
         sum
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &ObjectTags {
         &self.tags
     }
 
@@ -387,7 +387,7 @@ impl Container {
     }
 
     pub(crate) fn all_definitions_transitively(&self) -> Vec<StructMemberDefinition> {
-        fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>, tags: &Tags) {
+        fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>, tags: &ObjectTags) {
             match m {
                 StructMember::Definition(d) => {
                     v.push(d.clone());

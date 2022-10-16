@@ -2,7 +2,7 @@ use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::ty::Type;
 use crate::rust_printer::DefinerType;
 use crate::CONTAINER_SELF_SIZE_FIELD;
@@ -249,7 +249,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
     }
 }
 
-fn add_version(tags: &Tags, f: &mut ImplFeatures) {
+fn add_version(tags: &ObjectTags, f: &mut ImplFeatures) {
     if tags.has_world_version() {
         f.add(Feature::WorldVersion);
     } else {

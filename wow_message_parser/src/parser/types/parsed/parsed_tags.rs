@@ -3,7 +3,7 @@ use std::collections::BTreeSet;
 use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::{
-    Tags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
+    ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
     RUST_BASE_TYPE, SKIP_SERIALIZE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
 };
 
@@ -66,8 +66,8 @@ impl ParsedTags {
         }
     }
 
-    pub(crate) fn into_tags(self) -> Tags {
-        Tags::from_parsed(
+    pub(crate) fn into_tags(self) -> ObjectTags {
+        ObjectTags::from_parsed(
             self.login_versions,
             self.world_versions,
             self.description,
