@@ -2,7 +2,7 @@ use std::collections::BTreeSet;
 use std::fmt::Write;
 
 use crate::file_utils::{get_import_path, get_shared_module_name};
-use crate::parser::types::version::{AllVersions, MajorWorldVersion, Version};
+use crate::parser::types::version::{AllVersions, Version};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
 
@@ -69,19 +69,16 @@ impl ObjectTags {
         }
     }
 
-    pub(crate) fn push_version(&mut self, v: WorldVersion) {
-        match &mut self.all_versions {
-            AllVersions::Login(_) => unreachable!(),
-            AllVersions::World(w) => w.insert(v),
-        };
-    }
-
     pub(crate) fn unimplemented(&self) -> bool {
         self.unimplemented
     }
 
     pub(crate) fn shared(&self) -> bool {
         self.main_versions().count() != 1
+    }
+
+    pub(crate) fn all_versions(&self) -> &AllVersions {
+        &self.all_versions
     }
 
     /// self and tags have any version in common at all
@@ -91,13 +88,7 @@ impl ObjectTags {
     }
 
     pub(crate) fn is_main_version(&self) -> bool {
-        let mut versions = ObjectTags::new_with_version(MajorWorldVersion::Vanilla.into());
-        versions.push_version(MajorWorldVersion::BurningCrusade.as_world());
-        versions.push_version(MajorWorldVersion::Wrath.as_world());
-
-        let logon = ObjectTags::new_with_version(Version::Login(LoginVersion::All));
-
-        self.has_version_intersections(&versions) || self.has_version_intersections(&logon)
+        self.main_versions().next().is_some()
     }
 
     pub(crate) fn logon_versions(&self) -> impl Iterator<Item = LoginVersion> {

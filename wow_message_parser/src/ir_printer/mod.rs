@@ -9,7 +9,7 @@ use std::path::Path;
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
-use crate::parser::types::version::{LoginVersion, WorldVersion};
+use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::parser::types::{Endianness, IntegerType};
 
 #[derive(Serialize, Debug)]
@@ -159,21 +159,16 @@ impl IrTags {
             None
         };
 
+        let version = Some(match tags.all_versions() {
+            AllVersions::Login(l) => IrVersions::Login(l.iter().map(|a| (*a).into()).collect()),
+            AllVersions::World(w) => IrVersions::World(w.iter().map(|a| (*a).into()).collect()),
+        });
+
         Self {
             description,
             comment,
             display: None,
-            version: if tags.has_login_version() {
-                Some(IrVersions::Login(
-                    tags.logon_versions().map(|a| a.into()).collect(),
-                ))
-            } else if tags.has_world_version() {
-                Some(IrVersions::World(
-                    tags.versions().map(|a| a.into()).collect(),
-                ))
-            } else {
-                None
-            },
+            version,
             compressed,
             unimplemented,
         }

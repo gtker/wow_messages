@@ -80,9 +80,10 @@ impl Objects {
         let mut v = Vec::new();
 
         for s in self.all_containers() {
-            for l in s.tags().versions() {
-                if l.is_main_version() {
-                    v.push(l.as_major_world());
+            for l in s.tags().main_versions() {
+                match l {
+                    Version::Login(_) => {}
+                    Version::World(w) => v.push(w),
                 }
             }
         }

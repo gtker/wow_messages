@@ -178,10 +178,6 @@ impl WorldVersion {
         }
     }
 
-    pub fn is_main_version(&self) -> bool {
-        self.try_as_major_world().is_some()
-    }
-
     pub(crate) fn try_as_major_world(&self) -> Option<MajorWorldVersion> {
         if self.covers(&VANILLA) {
             Some(MajorWorldVersion::Vanilla)
@@ -192,10 +188,6 @@ impl WorldVersion {
         } else {
             None
         }
-    }
-
-    pub(crate) fn as_major_world(&self) -> MajorWorldVersion {
-        self.try_as_major_world().unwrap()
     }
 }
 
