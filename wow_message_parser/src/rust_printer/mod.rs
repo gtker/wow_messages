@@ -16,10 +16,10 @@ pub mod rust_view;
 mod structs;
 mod update_mask;
 
-use crate::file_utils::{get_import_path, get_shared_module_name, major_version_to_string};
+use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::MemberTags;
-use crate::parser::types::version::{Version, WorldVersion};
+use crate::parser::types::version::Version;
 use crate::{ContainerType, ObjectTags, Objects};
 pub use update_mask::*;
 
@@ -50,19 +50,12 @@ const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";
 
-pub(crate) fn get_import_from_shared(name: &str, versions: &[Version]) -> String {
-    let mut s = Writer::new(&get_import_path(versions[0]));
-
-    let versions: Vec<WorldVersion> = versions.iter().map(|a| a.as_world()).collect();
-
-    s.wln(format!(
-        "pub use crate::shared::{}::{};",
-        get_shared_module_name(name, &versions),
+pub(crate) fn get_import_from_shared(name: &str, tags: &ObjectTags) -> String {
+    format!(
+        "pub use crate::shared::{}::{};\n\n",
+        tags.shared_module_name(name),
         name
-    ));
-    s.newline();
-
-    s.inner
+    )
 }
 
 pub(crate) fn get_import_from_base(name: &str, version: Version) -> String {

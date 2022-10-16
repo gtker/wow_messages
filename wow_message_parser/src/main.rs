@@ -116,7 +116,7 @@ fn main() {
                 m.write_shared_contents_to_file(e.name(), e.tags(), s.inner());
 
                 for v in versions.clone() {
-                    let s = get_import_from_shared(e.name(), &versions);
+                    let s = get_import_from_shared(e.name(), e.tags());
                     m.write_contents_to_file(e.name(), e.tags(), &s, v);
                 }
             }
@@ -141,7 +141,7 @@ fn main() {
                 for v in versions.clone() {
                     let (world_s, base_s) = match &e {
                         Object::Enum(e) => {
-                            let base_s = get_import_from_shared(e.name(), &versions);
+                            let base_s = get_import_from_shared(e.name(), e.tags());
                             let world_s = get_import_from_base(e.name(), v);
 
                             (world_s, base_s)
