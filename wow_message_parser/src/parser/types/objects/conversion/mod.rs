@@ -128,6 +128,39 @@ pub(crate) fn parsed_definer_to_definer(
     v
 }
 
+pub(crate) fn get_related<'a>(
+    containers: &'a [ParsedContainer],
+    definers: &'a [Definer],
+    name: &str,
+) -> Vec<(&'a FileInfo, &'a Tags)> {
+    let definers = definers.iter().filter_map(|a| {
+        if a.name() == name {
+            Some((a.file_info(), a.tags()))
+        } else {
+            None
+        }
+    });
+
+    let mut v = Vec::new();
+    for d in definers {
+        v.push(d);
+    }
+
+    let containers = containers.iter().filter_map(|a| {
+        if a.name() == name {
+            Some((&a.file_info, a.tags()))
+        } else {
+            None
+        }
+    });
+
+    for c in containers {
+        v.push(c);
+    }
+
+    v
+}
+
 pub(crate) fn get_container<'a>(
     containers: &'a [ParsedContainer],
     name: &str,

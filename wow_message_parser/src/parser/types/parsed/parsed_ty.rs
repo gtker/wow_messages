@@ -1,7 +1,7 @@
 use crate::error_printer::{complex_not_found, recursive_type, unsupported_upcast};
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
-use crate::parser::types::objects::conversion::{get_container, get_definer};
+use crate::parser::types::objects::conversion::{get_container, get_definer, get_related};
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
@@ -111,7 +111,8 @@ impl ParsedType {
                 } else if let Some(c) = get_container(containers, s, e.tags()) {
                     sizes += c.create_sizes(containers, definers);
                 } else {
-                    complex_not_found(e.name(), e.tags(), &e.file_info, s);
+                    let related = get_related(containers, definers, s);
+                    complex_not_found(e.name(), e.tags(), &e.file_info, s, &related);
                 }
             }
             ParsedType::Array(array) => {
@@ -157,7 +158,8 @@ impl ParsedType {
                             sizes.inc(min * c.minimum(), 0);
                             sizes.inc(0, max.saturating_mul(c.maximum()));
                         } else {
-                            complex_not_found(e.name(), e.tags(), &e.file_info, s);
+                            let related = get_related(containers, definers, s);
+                            complex_not_found(e.name(), e.tags(), &e.file_info, s, &related);
                         }
                     }
                 }

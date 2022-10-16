@@ -8,7 +8,8 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::conversion;
 use crate::parser::types::objects::conversion::{
-    all_definitions, all_definitions_mut, get_container, get_definer, parsed_container_to_container,
+    all_definitions, all_definitions_mut, get_container, get_definer, get_related,
+    parsed_container_to_container,
 };
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
@@ -301,7 +302,9 @@ fn contains_complex_type(
         }
     }
 
-    complex_not_found(struct_name, tags, struct_fileinfo, ty_name);
+    let related = get_related(containers, definers, ty_name);
+
+    complex_not_found(struct_name, tags, struct_fileinfo, ty_name, &related);
 }
 
 fn check_complex_types_exist(
@@ -538,7 +541,9 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 let v = e.get_field_with_name(&value).unwrap().value().int();
                 TestValue::Enum(ContainerValue::new(v, value))
             } else {
-                complex_not_found(c.name(), c.tags(), &c.file_info, s);
+                let definers = [flags, enums].concat();
+                let related = get_related(containers, &definers, s);
+                complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
         ParsedType::UpdateMask | ParsedType::AuraMask => {

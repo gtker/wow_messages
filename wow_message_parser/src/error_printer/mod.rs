@@ -64,6 +64,7 @@ pub(crate) fn complex_not_found(
     struct_tags: &Tags,
     struct_fileinfo: &FileInfo,
     ty_name: &str,
+    related: &[(&FileInfo, &Tags)],
 ) -> ! {
     let mut s = ErrorWriter::new("Container has complex type that can not be found.");
 
@@ -73,6 +74,14 @@ pub(crate) fn complex_not_found(
     );
 
     print_version_cover(&mut s, &format!("'{ty_name}' needs to cover:"), struct_tags);
+
+    s.wln("Found types with same name:");
+    s.newline();
+
+    for r in related {
+        s.fileinfo(r.0, "Type at:");
+        print_version_cover(&mut s, "Covers:", r.1);
+    }
 
     wowm_exit(s, COMPLEX_NOT_FOUND);
 }
