@@ -69,7 +69,9 @@ pub enum ExpectedOpcodeError {
 impl Display for ExpectedOpcodeError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Opcode(opcode) => f.write_str(&format!("unexpected opcode found: '{}'", opcode)),
+            Self::Opcode(opcode) => {
+                f.write_str(&format!("unexpected opcode found: '{:#06X}'", opcode))
+            }
             Self::Parse(i) => i.fmt(f),
         }
     }
