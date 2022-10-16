@@ -53,7 +53,7 @@ impl Display for ExpectedOpcodeError {
         match self {
             Self::Opcode { opcode, size } => write!(
                 f,
-                "unexpected opcode found: '{}' and size '{}'",
+                "unexpected opcode found: '{:#06X}' and size '{}'",
                 opcode, size
             ),
             Self::Parse(i) => i.fmt(f),
