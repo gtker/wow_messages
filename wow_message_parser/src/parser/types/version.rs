@@ -301,6 +301,13 @@ impl Version {
         }
     }
 
+    pub(crate) fn as_version_string(&self) -> String {
+        match self {
+            Version::Login(l) => l.to_string(),
+            Version::World(w) => w.to_string(),
+        }
+    }
+
     pub(crate) fn as_major_world(&self) -> MajorWorldVersion {
         self.as_world().as_major_world()
     }

@@ -8,8 +8,8 @@ use heck::SnakeCase;
 use walkdir::WalkDir;
 
 use crate::parser::types::tags::ObjectTags;
-use crate::parser::types::version::Version;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
+use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::path_utils;
 use crate::path_utils::{base_directory, login_directory, world_directory};
 
@@ -129,9 +129,12 @@ impl ModFiles {
         );
     }
 
-    pub(crate) fn add_world_file(&mut self, name: &str, version: &WorldVersion, tags: &ObjectTags) {
-        assert!(version.is_main_version());
-
+    pub(crate) fn add_world_file(
+        &mut self,
+        name: &str,
+        version: &MajorWorldVersion,
+        tags: &ObjectTags,
+    ) {
         if tags.is_in_base() {
             self.add_or_append_file(
                 base_directory(),
@@ -238,7 +241,7 @@ impl ModFiles {
         base_s: &str,
         version: &Version,
     ) {
-        let version = &version.as_world();
+        let version = &version.as_major_world();
         let base_path = path_utils::get_base_filepath(name, version);
         let world_path = path_utils::get_world_filepath(name, version);
 
@@ -263,10 +266,11 @@ impl ModFiles {
         match &version {
             Version::Login(_) => unimplemented!(),
             Version::World(version) => {
-                let world_path = path_utils::get_world_filepath(name, version);
-                let base_path = path_utils::get_base_filepath(name, version);
+                let version = version.as_major_world();
+                let world_path = path_utils::get_world_filepath(name, &version);
+                let base_path = path_utils::get_base_filepath(name, &version);
 
-                self.add_world_file(name, version, tags);
+                self.add_world_file(name, &version, tags);
 
                 create_and_overwrite_if_not_same_contents(world_s, &world_path);
                 create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
@@ -298,9 +302,10 @@ impl ModFiles {
                     .insert(path.canonicalize().unwrap(), true);
             }
             Version::World(version) => {
-                let path = path_utils::get_world_filepath(name, version);
+                let version = version.as_major_world();
+                let path = path_utils::get_world_filepath(name, &version);
 
-                self.add_world_file(name, version, tags);
+                self.add_world_file(name, &version, tags);
 
                 create_and_overwrite_if_not_same_contents(s, &path);
 
@@ -311,11 +316,11 @@ impl ModFiles {
     }
 }
 
-pub(crate) fn major_version_to_string(v: &WorldVersion) -> &'static str {
-    v.as_major_world().module_name()
+pub(crate) fn major_version_to_string(v: &MajorWorldVersion) -> &'static str {
+    v.module_name()
 }
 
-pub(crate) fn get_world_version_path(version: &WorldVersion) -> String {
+pub(crate) fn get_world_version_path(version: &MajorWorldVersion) -> String {
     format!("crate::world::{}", major_version_to_string(version))
 }
 
@@ -323,17 +328,14 @@ pub(crate) fn get_login_logon_version_path(version: &LoginVersion) -> String {
     format!("crate::logon::{}", version.as_module_case())
 }
 
-pub(crate) fn get_world_shared_path(ty_name: &str, versions: &[WorldVersion]) -> String {
-    format!(
-        "crate::world::shared::{}",
-        get_shared_module_name(ty_name, versions)
-    )
+pub(crate) fn get_world_shared_path(ty_name: &str, tags: &ObjectTags) -> String {
+    format!("crate::world::shared::{}", tags.shared_module_name(ty_name))
 }
 
 pub(crate) fn get_import_path(version: Version) -> String {
     match &version {
         Version::Login(f) => get_login_logon_version_path(f),
-        Version::World(f) => get_world_version_path(f),
+        Version::World(f) => get_world_version_path(&f.as_major_world()),
     }
 }
 

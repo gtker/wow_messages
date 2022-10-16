@@ -112,7 +112,10 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
 
     let print_missing_as_wowm = version.as_major_world() != MajorWorldVersion::Vanilla;
 
-    println!("{} Messages without definition:", version.as_world());
+    println!(
+        "{} Messages without definition:",
+        version.as_version_string()
+    );
     for d in &data {
         if !d.definition {
             if print_missing_as_wowm {
@@ -130,7 +133,7 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
                         name = &d.name,
                         opcode = d.opcode,
                         unimplemented = UNIMPLEMENTED,
-                        version = version.as_world(),
+                        version = version.as_version_string(),
                     );
                 }
             } else if let Some(reason) = d.reason {
@@ -145,7 +148,7 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
 
     println!(
         "{} Messages with definition: {} / {} ({}%) ({} left)",
-        version.as_world(),
+        version.as_version_string(),
         definition_sum,
         &data.len(),
         (definition_sum as f32 / data.len() as f32) * 100.0_f32,
@@ -153,7 +156,7 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
     );
     println!(
         "{} Total messages with tests: {} / {} ({}%)",
-        version.as_world(),
+        version.as_version_string(),
         test_sum,
         &data.len(),
         (test_sum as f32 / data.len() as f32) * 100.0_f32

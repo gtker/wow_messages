@@ -18,7 +18,7 @@ pub(crate) fn print_world_opcodes(
     version: &WorldVersion,
     container_type: ContainerType,
 ) -> Writer {
-    let mut s = Writer::new(&get_world_version_path(version));
+    let mut s = Writer::new(&get_world_version_path(&version.as_major_world()));
     let ty = match container_type {
         ContainerType::SMsg(_) => SMSG_NAME,
         ContainerType::CMsg(_) => CMSG_NAME,
@@ -80,7 +80,7 @@ pub(crate) fn includes(
         ContainerType::CMsg(_) => {
             s.wln(format!(
                 "use crate::{}::{{{}, {}}};",
-                major_version_to_string(&version.as_world()),
+                major_version_to_string(&version.as_major_world()),
                 SERVER_MESSAGE_TRAIT_NAME,
                 CLIENT_MESSAGE_TRAIT_NAME,
             ));

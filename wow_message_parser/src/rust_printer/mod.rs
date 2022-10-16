@@ -63,7 +63,7 @@ pub(crate) fn get_import_from_base(name: &str, version: Version) -> String {
 
     s.wln(format!(
         "pub use wow_world_base::{}::{};",
-        major_version_to_string(&version.as_world()),
+        major_version_to_string(&version.as_major_world()),
         name
     ));
     s.newline();

@@ -3,7 +3,7 @@ use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::MemberTags;
-use crate::parser::types::version::{Version, WorldVersion};
+use crate::parser::types::version::Version;
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment, Writer,
@@ -66,9 +66,7 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         };
 
         let module_name = if e.tags().has_world_version() && e.tags().shared() {
-            let versions: Vec<WorldVersion> =
-                c.tags().main_versions().map(|a| a.as_world()).collect();
-            get_world_shared_path(c.name(), &versions)
+            get_world_shared_path(c.name(), c.tags())
         } else {
             get_import_path(version)
         };

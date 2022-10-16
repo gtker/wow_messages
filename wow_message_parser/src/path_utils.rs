@@ -1,6 +1,6 @@
 use crate::file_utils;
+use crate::parser::types::version::LoginVersion;
 use crate::parser::types::version::MajorWorldVersion;
-use crate::parser::types::version::{LoginVersion, WorldVersion};
 use std::path::{Path, PathBuf};
 
 fn workspace_directory() -> PathBuf {
@@ -80,7 +80,7 @@ pub(crate) fn path_to_fileinfo(path: &Path) -> String {
         .replace('\\', "/")
 }
 
-pub(crate) fn get_world_version_file_path(version: &WorldVersion) -> PathBuf {
+pub(crate) fn get_world_version_file_path(version: &MajorWorldVersion) -> PathBuf {
     world_directory().join(file_utils::major_version_to_string(version))
 }
 
@@ -88,7 +88,7 @@ pub(crate) fn get_login_version_file_path(version: &LoginVersion) -> PathBuf {
     login_directory().join(version.as_module_case())
 }
 
-pub(crate) fn get_base_filepath(object_name: &str, version: &WorldVersion) -> PathBuf {
+pub(crate) fn get_base_filepath(object_name: &str, version: &MajorWorldVersion) -> PathBuf {
     base_directory()
         .join(file_utils::major_version_to_string(version))
         .join(format!("{}.rs", file_utils::get_module_name(object_name)))
@@ -106,7 +106,7 @@ pub(crate) fn get_world_shared_filepath(shared_module_name: &str) -> PathBuf {
         .join(format!("{shared_module_name}.rs",))
 }
 
-pub(crate) fn get_world_filepath(object_name: &str, version: &WorldVersion) -> PathBuf {
+pub(crate) fn get_world_filepath(object_name: &str, version: &MajorWorldVersion) -> PathBuf {
     get_world_version_file_path(version)
         .join(format!("{}.rs", file_utils::get_module_name(object_name)))
 }

@@ -196,7 +196,7 @@ fn write_world_opcodes(o: &Objects) {
             .collect();
         if !cmsg.is_empty() {
             let s = print_world_opcodes(&cmsg, &e, ContainerType::CMsg(0));
-            let filename = get_world_version_file_path(&e).join("opcodes.rs");
+            let filename = get_world_version_file_path(&e.as_major_world()).join("opcodes.rs");
 
             create_and_overwrite_if_not_same_contents(s.proper_as_str(), &filename);
         }
@@ -212,7 +212,7 @@ fn write_world_opcodes(o: &Objects) {
             .collect();
         if !smsg.is_empty() {
             let s = print_world_opcodes(&smsg, &e, ContainerType::SMsg(0));
-            let filename = get_world_version_file_path(&e).join("opcodes.rs");
+            let filename = get_world_version_file_path(&e.as_major_world()).join("opcodes.rs");
             append_string_to_file(s.proper_as_str(), &filename);
         }
     }

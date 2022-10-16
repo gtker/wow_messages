@@ -21,7 +21,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
 
     for version in e.tags().main_versions() {
         if version.is_world() && e.tags().shared() {
-            let version = major_version_to_string(&version.as_world());
+            let version = major_version_to_string(&version.as_major_world());
             s.wln(format!("#[cfg(all(feature = \"{}\", test))]", version));
         } else {
             s.wln("#[cfg(test)]");
