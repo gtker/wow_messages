@@ -300,7 +300,7 @@ fn print_container_example_member(
 
             let definer_ty = match statement.original_ty() {
                 Type::Enum { e, .. } | Type::Flag { e, .. } => e,
-                _ => unreachable!(),
+                _ => unreachable!("Non definer used in original type"),
             };
 
             let statement_set = |statement: &IfStatement, enum_value: isize| {

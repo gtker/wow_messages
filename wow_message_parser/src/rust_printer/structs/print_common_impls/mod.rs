@@ -38,7 +38,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
             let trait_to_impl = match e.container_type() {
                 ContainerType::CLogin(_) => CLIENT_MESSAGE_TRAIT_NAME,
                 ContainerType::SLogin(_) => SERVER_MESSAGE_TRAIT_NAME,
-                _ => unreachable!(),
+                _ => unreachable!("Login branch has non login container"),
             };
 
             s.impl_read_and_writable_login(

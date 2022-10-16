@@ -55,7 +55,7 @@ impl IfStatement {
 
         match &self.conditional().equations[0] {
             Equation::BitwiseAnd { value } => value.to_string(),
-            _ => unreachable!(),
+            _ => unreachable!("flag_get_enumerator was not flag"),
         }
     }
 

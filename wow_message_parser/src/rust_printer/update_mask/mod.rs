@@ -318,7 +318,7 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
                         d = d
                     )
                 }
-                _ => unreachable!(),
+                _ => unreachable!("Guid has already been checked for in outer match"),
             };
 
             s.wln(format!("self.values.insert({}, {});", m.offset, value));
@@ -379,7 +379,7 @@ fn print_builder_setter(s: &mut Writer, m: &MemberType) {
                         d = d
                     )
                 }
-                _ => unreachable!(),
+                UfType::Guid => unreachable!("Guid has already been checked for in outer match"),
             };
 
             s.wln(format!("self.values.insert({}, {});", m.offset, value));

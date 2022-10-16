@@ -157,7 +157,7 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
             Type::CString | Type::SizedCString | Type::String { .. } => {
                 name += "_name";
             }
-            _ => unreachable!(),
+            _ => unreachable!("Types with the same name but different types in wireshark printer"),
         }
     } else if name == "unknown" {
         match ty {
@@ -169,7 +169,9 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
                 ArrayType::Integer(_) => {
                     name += "_bytes";
                 }
-                _ => unreachable!(),
+                _ => unreachable!(
+                    "Types with the same name but different types in wireshark printer"
+                ),
             },
             Type::PackedGuid | Type::Guid => {
                 name += "_guid";
@@ -182,7 +184,7 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
                 name += "_int";
             }
             Type::Enum { .. } => name += "_enum",
-            _ => unreachable!(),
+            _ => panic!("Types with the same name but different types in wireshark printer"),
         }
     } else if name.starts_with("position")
         && matches!(ty, Type::Integer(IntegerType::U16(Endianness::Little)))

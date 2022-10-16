@@ -20,7 +20,7 @@ pub(crate) fn print_unencrypted_write_header(s: &mut Writer, e: &Container, post
             ));
             s.newline();
         }
-        _ => unreachable!(),
+        _ => unreachable!("Non-login container found in login function"),
     }
 }
 
@@ -424,7 +424,7 @@ fn print_write_if_enum_statement(
 
     let enumerator_name = match &statement.conditional().equations()[0] {
         Equation::Equals { value, .. } | Equation::NotEquals { value, .. } => value,
-        _ => unreachable!(),
+        _ => unreachable!("enum branch has bitwise and"),
     };
 
     let rd = e

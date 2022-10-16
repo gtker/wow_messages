@@ -388,7 +388,7 @@ fn print_definition(
             s.wln("add_update_mask(ptv);");
             true
         }
-        Type::String { .. } => unreachable!(),
+        Type::String { .. } => unreachable!("Strings are only in login messages"),
     }
 }
 
