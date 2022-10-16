@@ -547,8 +547,8 @@ impl From<&TestValue> for IrTestValue {
             TestValue::String(s) => Self::String(s.to_string()),
             TestValue::Flag(f) => Self::Flag(f.to_vec()),
             TestValue::Enum(e) => Self::Enum(e.into()),
-            TestValue::SubObject { ty_name, members } => Self::SubObject {
-                ty_name: ty_name.to_string(),
+            TestValue::SubObject { c, members } => Self::SubObject {
+                ty_name: c.name().to_string(),
                 members: members.iter().map(|a| a.into()).collect(),
             },
             TestValue::ArrayOfSubObject(e, t) => Self::ArrayOfSubObject {

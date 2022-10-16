@@ -452,10 +452,10 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 ));
             }
 
-            return TestValue::SubObject {
-                ty_name: ty.str(),
-                members,
-            };
+            let definers = [flags, enums].concat();
+            let c = parsed_container_to_container(inner_c.clone(), containers, &definers);
+
+            return TestValue::SubObject { c, members };
         }
         ParsedTestValue::ArrayOfMultiple(array) => {
             let mut v = Vec::new();

@@ -422,14 +422,13 @@ fn print_value(
             s.wln(",");
             s.dec_indent();
         }
-        TestValue::SubObject { ty_name, members } => {
-            s.wln_no_indent(format!("{} {{", ty_name));
+        TestValue::SubObject { c, members } => {
+            s.wln_no_indent(format!("{} {{", c.name()));
             s.inc_indent();
 
             let t = members.as_slice();
-            let e = o.get_container(ty_name, e.tags());
-            for m in e.rust_object().members_in_struct() {
-                print_value(s, m, t, e, o, version);
+            for m in c.rust_object().members_in_struct() {
+                print_value(s, m, t, c, o, version);
             }
 
             s.closing_curly_with(",");

@@ -130,7 +130,7 @@ pub(crate) enum TestValue {
     Flag(Vec<String>),
     Enum(ContainerValue),
     SubObject {
-        ty_name: String,
+        c: Container,
         members: Vec<TestCaseMember>,
     },
     ArrayOfSubObject(Container, Vec<Vec<TestCaseMember>>),

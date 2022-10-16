@@ -31,20 +31,6 @@ impl Objects {
         object_new(enums, flags, structs, messages, tests)
     }
 
-    pub(crate) fn get_container(&self, name: &str, finder_tags: &ObjectTags) -> &Container {
-        if let Some(e) = self
-            .all_containers()
-            .find(|a| a.name() == name && a.tags().has_version_intersections(finder_tags))
-        {
-            return e;
-        }
-
-        panic!(
-            "container not found: {} with tags: {:#?}",
-            name, finder_tags
-        );
-    }
-
     pub(crate) fn get_tags_of_object_fallible(
         &self,
         type_name: &str,
