@@ -82,6 +82,7 @@ use crate::world::wrath::CMSG_REPOP_REQUEST;
 use crate::world::wrath::CMSG_DUEL_ACCEPTED;
 use crate::world::wrath::CMSG_DUEL_CANCELLED;
 use crate::world::wrath::CMSG_ACTIVATETAXI;
+use crate::world::wrath::CMSG_BUG;
 use crate::world::wrath::CMSG_PLAYED_TIME;
 use crate::world::wrath::CMSG_QUERY_TIME;
 use crate::world::wrath::CMSG_PING;
@@ -200,6 +201,7 @@ pub enum ClientOpcodeMessage {
     CMSG_DUEL_ACCEPTED(CMSG_DUEL_ACCEPTED),
     CMSG_DUEL_CANCELLED(CMSG_DUEL_CANCELLED),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
+    CMSG_BUG(CMSG_BUG),
     CMSG_PLAYED_TIME(CMSG_PLAYED_TIME),
     CMSG_QUERY_TIME(CMSG_QUERY_TIME),
     CMSG_PING(CMSG_PING),
@@ -320,6 +322,7 @@ impl ClientOpcodeMessage {
             0x016C => Ok(Self::CMSG_DUEL_ACCEPTED(<CMSG_DUEL_ACCEPTED as crate::Message>::read_body(&mut r, body_size)?)),
             0x016D => Ok(Self::CMSG_DUEL_CANCELLED(<CMSG_DUEL_CANCELLED as crate::Message>::read_body(&mut r, body_size)?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size)?)),
+            0x01CA => Ok(Self::CMSG_BUG(<CMSG_BUG as crate::Message>::read_body(&mut r, body_size)?)),
             0x01CC => Ok(Self::CMSG_PLAYED_TIME(<CMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size)?)),
             0x01CE => Ok(Self::CMSG_QUERY_TIME(<CMSG_QUERY_TIME as crate::Message>::read_body(&mut r, body_size)?)),
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size)?)),
@@ -508,6 +511,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DUEL_CANCELLED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_BUG(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYED_TIME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUERY_TIME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
@@ -629,6 +633,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.write_unencrypted_client(w),
             Self::CMSG_DUEL_CANCELLED(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
+            Self::CMSG_BUG(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYED_TIME(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUERY_TIME(c) => c.write_unencrypted_client(w),
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
@@ -750,6 +755,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_BUG(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -871,6 +877,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_BUG(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
@@ -992,6 +999,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_BUG(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYED_TIME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_TIME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1113,6 +1121,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_ACCEPTED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_BUG(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_TIME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
@@ -1245,6 +1254,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_DUEL_ACCEPTED(_) => "CMSG_DUEL_ACCEPTED",
             ClientOpcodeMessage::CMSG_DUEL_CANCELLED(_) => "CMSG_DUEL_CANCELLED",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
+            ClientOpcodeMessage::CMSG_BUG(_) => "CMSG_BUG",
             ClientOpcodeMessage::CMSG_PLAYED_TIME(_) => "CMSG_PLAYED_TIME",
             ClientOpcodeMessage::CMSG_QUERY_TIME(_) => "CMSG_QUERY_TIME",
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
@@ -1741,6 +1751,12 @@ impl From<CMSG_DUEL_CANCELLED> for ClientOpcodeMessage {
 impl From<CMSG_ACTIVATETAXI> for ClientOpcodeMessage {
     fn from(c: CMSG_ACTIVATETAXI) -> Self {
         Self::CMSG_ACTIVATETAXI(c)
+    }
+}
+
+impl From<CMSG_BUG> for ClientOpcodeMessage {
+    fn from(c: CMSG_BUG) -> Self {
+        Self::CMSG_BUG(c)
     }
 }
 
