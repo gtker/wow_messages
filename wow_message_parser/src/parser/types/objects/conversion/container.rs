@@ -484,7 +484,24 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 v.push(members);
             }
 
-            return TestValue::ArrayOfSubObject(ty_name.to_string(), v);
+            let c = if let Some(c) = get_container(containers, ty_name, c.tags()) {
+                let definers = [flags, enums].concat();
+                parsed_container_to_container(c.clone(), containers, &definers)
+            } else {
+                let related = containers
+                    .iter()
+                    .filter_map(|a| {
+                        if a.name() == ty_name {
+                            Some((&a.file_info, a.tags()))
+                        } else {
+                            None
+                        }
+                    })
+                    .collect::<Vec<_>>();
+
+                complex_not_found(c.name(), c.tags(), &c.file_info, ty_name, &related);
+            };
+            return TestValue::ArrayOfSubObject(c, v);
         }
     };
 

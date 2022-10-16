@@ -551,8 +551,8 @@ impl From<&TestValue> for IrTestValue {
                 ty_name: ty_name.to_string(),
                 members: members.iter().map(|a| a.into()).collect(),
             },
-            TestValue::ArrayOfSubObject(s, t) => Self::ArrayOfSubObject {
-                type_name: s.to_string(),
+            TestValue::ArrayOfSubObject(e, t) => Self::ArrayOfSubObject {
+                type_name: e.name().to_string(),
                 members: t
                     .iter()
                     .map(|a| a.iter().map(|a| a.into()).collect::<Vec<_>>())

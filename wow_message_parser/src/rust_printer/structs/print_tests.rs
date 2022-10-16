@@ -340,7 +340,7 @@ fn print_value(
             s.dec_indent();
             s.wln_no_indent(" ],");
         }
-        TestValue::ArrayOfSubObject(ty_name, multiples) => {
+        TestValue::ArrayOfSubObject(array_container, multiples) => {
             if multiples.is_empty() {
                 s.wln_no_indent("vec![],");
                 return;
@@ -349,10 +349,8 @@ fn print_value(
             s.wln_no_indent("vec![");
             s.inc_indent();
 
-            let array_container = o.get_container(ty_name, e.tags());
-
             for multiple in multiples {
-                s.wln(format!("{} {{", ty_name));
+                s.wln(format!("{} {{", array_container.name()));
                 s.inc_indent();
 
                 for m in array_container.rust_object().members_in_struct() {

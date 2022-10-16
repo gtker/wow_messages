@@ -3,6 +3,7 @@ use crate::parser::types::array::ArraySize;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskType;
+use crate::Container;
 
 #[derive(Debug, Clone)]
 pub(crate) struct TestCase {
@@ -132,6 +133,6 @@ pub(crate) enum TestValue {
         ty_name: String,
         members: Vec<TestCaseMember>,
     },
-    ArrayOfSubObject(String, Vec<Vec<TestCaseMember>>),
+    ArrayOfSubObject(Container, Vec<Vec<TestCaseMember>>),
     UpdateMask(Vec<TestUpdateMaskValue>),
 }
