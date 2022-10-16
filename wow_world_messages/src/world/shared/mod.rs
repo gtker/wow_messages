@@ -133,6 +133,7 @@ pub mod smsg_durability_damage_death123;
 pub mod smsg_environmentaldamagelog123;
 pub mod smsg_gm_ticket_status_update123;
 pub mod smsg_gmticket_create123;
+pub mod smsg_gmticket_deleteticket123;
 pub mod smsg_initialize_factions12;
 pub mod smsg_levelup_info12;
 pub mod smsg_log_xpgain12;

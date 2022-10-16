@@ -478,6 +478,8 @@ pub(crate) mod smsg_gm_ticket_status_update;
 pub use smsg_gm_ticket_status_update::*;
 pub(crate) mod smsg_gmticket_create;
 pub use smsg_gmticket_create::*;
+pub(crate) mod smsg_gmticket_deleteticket;
+pub use smsg_gmticket_deleteticket::*;
 pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
 pub(crate) mod smsg_levelup_info;
