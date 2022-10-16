@@ -14,7 +14,7 @@ enum GmTicketEscalationStatus : u8 {
 
 smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
     GmTicketStatus status;
-    if (status == HASTEXT) {
+    if (status == HAS_TEXT) {
         CString text {
             comment = "cmangos: Ticket text: data, should never exceed 1999 bytes";
         }

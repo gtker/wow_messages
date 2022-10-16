@@ -3949,7 +3949,7 @@
             break;
         case SMSG_GMTICKET_GETTICKET:
             ptvcursor_add_ret_uint(ptv, hf_woww_gm_ticket_status, 4, ENC_LITTLE_ENDIAN, &status);
-            if (status == GM_TICKET_STATUS_HASTEXT) {
+            if (status == GM_TICKET_STATUS_HAS_TEXT) {
                 add_cstring(ptv, &hf_woww_text);
                 ptvcursor_add(ptv, hf_woww_gm_ticket_type, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_days_since_ticket_creation, 4, ENC_LITTLE_ENDIAN);
