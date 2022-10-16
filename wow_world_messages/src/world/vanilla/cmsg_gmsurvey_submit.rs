@@ -3,7 +3,7 @@ use crate::world::vanilla::GmSurveyQuestion;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmsurvey_submit.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmsurvey_submit.wowm#L12):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmsurvey_submit.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmsurvey_submit.wowm#L17):
 /// ```text
 /// cmsg CMSG_GMSURVEY_SUBMIT = 0x032A {
 ///     u32 survey_id;
@@ -52,10 +52,11 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
         let survey_id = crate::util::read_u32_le(r)?;
 
         // questions: GmSurveyQuestion[10]
-        let mut questions = [GmSurveyQuestion::default(); 10];
-        for i in questions.iter_mut() {
-            *i = GmSurveyQuestion::read(r)?;
+        let mut questions = Vec::with_capacity(10);
+        for i in 0..10 {
+            questions.push(GmSurveyQuestion::read(r)?);
         }
+        let questions = questions.try_into().unwrap();
 
         // answer_comment: CString
         let answer_comment = crate::util::read_c_string_to_vec(r)?;
@@ -75,7 +76,7 @@ impl crate::world::vanilla::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
 impl CMSG_GMSURVEY_SUBMIT {
     pub(crate) fn size(&self) -> usize {
         4 // survey_id: u32
-        + 10 * 5 // questions: GmSurveyQuestion[10]
+        + self.questions.iter().fold(0, |acc, x| acc + x.size()) // questions: GmSurveyQuestion[10]
         + self.answer_comment.len() + 1 // answer_comment: CString
     }
 }

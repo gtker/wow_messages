@@ -169,6 +169,7 @@ static int hf_woww_client_proof = -1;
 static int hf_woww_client_seed = -1;
 static int hf_woww_code = -1;
 static int hf_woww_coded = -1;
+static int hf_woww_comment = -1;
 static int hf_woww_compressed_chat_data = -1;
 static int hf_woww_container_slots = -1;
 static int hf_woww_content = -1;

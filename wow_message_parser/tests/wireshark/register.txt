@@ -1024,6 +1024,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_comment,
+            { "Comment", "woww.comment",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_compressed_chat_data,
             { "Compressed Chat Data", "woww.compressed.chat.data",
                 FT_BYTES, BASE_NONE, NULL, 0,

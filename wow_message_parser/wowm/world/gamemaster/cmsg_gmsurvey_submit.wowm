@@ -3,9 +3,14 @@
 struct GmSurveyQuestion {
     u32 question_id {
         comment = "cmangos: questions found in GMSurveyQuestions.dbc";
+        comment = "ref to i'th GMSurveySurveys.dbc field (all fields in that dbc point to fields in GMSurveyQuestions.dbc)";
     }
     u8 answer {
         comment = "Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+";
+    }
+    CString comment {
+        comment = "Usage: `GMSurveyAnswerSubmit(question, rank, comment)`";
+        comment = "cmangos: Unused in stock UI, can be only set by calling Lua function";
     }
 }
 
