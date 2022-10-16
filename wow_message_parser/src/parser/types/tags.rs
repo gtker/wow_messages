@@ -11,9 +11,9 @@ pub(crate) struct ObjectTags {
     all_versions: AllVersions,
 
     description: Option<TagString>,
-    compressed: Option<String>,
     comment: Option<TagString>,
 
+    compressed: bool,
     is_test: bool,
     skip: bool,
     unimplemented: bool,
@@ -24,8 +24,8 @@ impl ObjectTags {
     pub(crate) fn from_parsed(
         all_versions: AllVersions,
         description: Option<TagString>,
-        compressed: Option<String>,
         comment: Option<TagString>,
+        compressed: bool,
         is_test: bool,
         skip: bool,
         unimplemented: bool,
@@ -60,8 +60,8 @@ impl ObjectTags {
         Self {
             all_versions: v.0,
             description: None,
-            compressed: None,
             comment: None,
+            compressed: false,
             is_test: false,
             skip: false,
             unimplemented: false,
@@ -155,12 +155,12 @@ impl ObjectTags {
         self.description.as_ref()
     }
 
-    pub(crate) fn compressed(&self) -> Option<&String> {
-        self.compressed.as_ref()
-    }
-
     pub(crate) fn comment(&self) -> Option<&TagString> {
         self.comment.as_ref()
+    }
+
+    pub(crate) fn compressed(&self) -> bool {
+        self.compressed
     }
 
     pub(crate) fn is_in_base(&self) -> bool {

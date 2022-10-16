@@ -147,7 +147,11 @@ impl IrTags {
 
         let comment = tags.comment().map(|d| d.as_ir_string());
 
-        let compressed = tags.compressed().map(|d| d.to_string());
+        let compressed = if tags.compressed() {
+            Some("true".to_string())
+        } else {
+            None
+        };
 
         let unimplemented = if tags.unimplemented() {
             Some("true".to_string())

@@ -89,8 +89,12 @@ impl ParsedTags {
         ObjectTags::from_parsed(
             all_versions,
             self.description,
-            self.compressed,
             self.comment,
+            if let Some(compressed) = self.compressed {
+                compressed == "true"
+            } else {
+                false
+            },
             self.is_test.unwrap_or(false),
             self.skip.unwrap_or(false),
             self.unimplemented.unwrap_or(false),
