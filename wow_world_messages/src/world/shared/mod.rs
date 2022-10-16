@@ -74,6 +74,7 @@ pub mod cmsg_tutorial_reset123;
 pub mod duel_winner_reason123;
 pub mod environmental_damage_type123;
 pub mod experience_award_type123;
+pub mod faction123;
 pub mod faction_flag12;
 pub mod faction_initializer12;
 pub mod inventory_type1_1223;

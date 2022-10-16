@@ -1,14 +1,40 @@
-#tag_all versions "1.12";
-
 struct Faction {
     u32 reputation_list_id;
     /* TODO Units? */
     u32 standing;
+} {
+    versions = "1 2 3";
 }
 
 smsg SMSG_SET_FACTION_STANDING = 0x0124 {
     /* TODO How many factions in FactionList? */
     u32 amount_of_factions;
     Faction[amount_of_factions] factions;
+} {
+    versions = "1";
 }
 
+smsg SMSG_SET_FACTION_STANDING = 0x0124 {
+    f32 refer_a_friend_bonus {
+        comment = "All emus set to 0.";
+    }
+    /* TODO How many factions in FactionList? */
+    u32 amount_of_factions;
+    Faction[amount_of_factions] factions;
+} {
+    versions = "2.4";
+}
+
+smsg SMSG_SET_FACTION_STANDING = 0x0124 {
+    f32 refer_a_friend_bonus {
+        comment = "All emus set to 0.";
+    }
+    Bool any_rank_increased {
+        comment = "mangostwo: display visual effect";
+    }
+    /* TODO How many factions in FactionList? */
+    u32 amount_of_factions;
+    Faction[amount_of_factions] factions;
+} {
+    versions = "3.3.5";
+}
