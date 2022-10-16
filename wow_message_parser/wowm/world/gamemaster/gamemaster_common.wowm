@@ -8,6 +8,8 @@ enum GmTicketResponse : u32 {
     UPDATE_SUCCESS = 4;
     UPDATE_ERROR = 5;
     TICKET_DELETED = 9;
+} {
+    versions = "2 3";
 }
 
 /* Used for CMSG_GMTICKET_CREATE */

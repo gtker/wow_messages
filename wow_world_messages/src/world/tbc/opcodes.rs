@@ -2099,6 +2099,7 @@ use crate::world::tbc::SMSG_AUTH_CHALLENGE;
 use crate::world::tbc::SMSG_AUTH_RESPONSE;
 use crate::world::tbc::SMSG_EXPLORATION_EXPERIENCE;
 use crate::world::tbc::SMSG_ENVIRONMENTALDAMAGELOG;
+use crate::world::tbc::SMSG_GMTICKET_CREATE;
 use crate::world::tbc::SMSG_ACCOUNT_DATA_TIMES;
 use crate::world::tbc::SMSG_CHAT_WRONG_FACTION;
 use crate::world::tbc::SMSG_SET_REST_START;
@@ -2201,6 +2202,7 @@ pub enum ServerOpcodeMessage {
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
     SMSG_EXPLORATION_EXPERIENCE(SMSG_EXPLORATION_EXPERIENCE),
     SMSG_ENVIRONMENTALDAMAGELOG(SMSG_ENVIRONMENTALDAMAGELOG),
+    SMSG_GMTICKET_CREATE(SMSG_GMTICKET_CREATE),
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
     SMSG_CHAT_WRONG_FACTION(SMSG_CHAT_WRONG_FACTION),
     SMSG_SET_REST_START(SMSG_SET_REST_START),
@@ -2305,6 +2307,7 @@ impl ServerOpcodeMessage {
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01F8 => Ok(Self::SMSG_EXPLORATION_EXPERIENCE(<SMSG_EXPLORATION_EXPERIENCE as crate::Message>::read_body(&mut r, body_size)?)),
             0x01FC => Ok(Self::SMSG_ENVIRONMENTALDAMAGELOG(<SMSG_ENVIRONMENTALDAMAGELOG as crate::Message>::read_body(&mut r, body_size)?)),
+            0x0206 => Ok(Self::SMSG_GMTICKET_CREATE(<SMSG_GMTICKET_CREATE as crate::Message>::read_body(&mut r, body_size)?)),
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size)?)),
             0x0219 => Ok(Self::SMSG_CHAT_WRONG_FACTION(<SMSG_CHAT_WRONG_FACTION as crate::Message>::read_body(&mut r, body_size)?)),
             0x021E => Ok(Self::SMSG_SET_REST_START(<SMSG_SET_REST_START as crate::Message>::read_body(&mut r, body_size)?)),
@@ -2477,6 +2480,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GMTICKET_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_REST_START(c) => c.write_encrypted_server(w, e),
@@ -2582,6 +2586,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GMTICKET_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_REST_START(c) => c.write_unencrypted_server(w),
@@ -2687,6 +2692,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_REST_START(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2792,6 +2798,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_REST_START(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2897,6 +2904,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_REST_START(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3002,6 +3010,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_REST_START(c) => c.astd_write_unencrypted_server(w).await,
@@ -3109,6 +3118,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
             ServerOpcodeMessage::SMSG_EXPLORATION_EXPERIENCE(_) => "SMSG_EXPLORATION_EXPERIENCE",
             ServerOpcodeMessage::SMSG_ENVIRONMENTALDAMAGELOG(_) => "SMSG_ENVIRONMENTALDAMAGELOG",
+            ServerOpcodeMessage::SMSG_GMTICKET_CREATE(_) => "SMSG_GMTICKET_CREATE",
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
             ServerOpcodeMessage::SMSG_CHAT_WRONG_FACTION(_) => "SMSG_CHAT_WRONG_FACTION",
             ServerOpcodeMessage::SMSG_SET_REST_START(_) => "SMSG_SET_REST_START",
@@ -3539,6 +3549,12 @@ impl From<SMSG_EXPLORATION_EXPERIENCE> for ServerOpcodeMessage {
 impl From<SMSG_ENVIRONMENTALDAMAGELOG> for ServerOpcodeMessage {
     fn from(c: SMSG_ENVIRONMENTALDAMAGELOG) -> Self {
         Self::SMSG_ENVIRONMENTALDAMAGELOG(c)
+    }
+}
+
+impl From<SMSG_GMTICKET_CREATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GMTICKET_CREATE) -> Self {
+        Self::SMSG_GMTICKET_CREATE(c)
     }
 }
 
