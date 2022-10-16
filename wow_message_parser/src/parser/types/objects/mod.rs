@@ -9,6 +9,7 @@ use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::version::{LoginVersion, Version, WorldVersion};
+use crate::ContainerType;
 
 #[derive(Debug, Clone)]
 pub(crate) struct Objects {
@@ -174,15 +175,14 @@ impl Objects {
     }
 
     pub(crate) fn wireshark_messages(&self) -> Vec<&Container> {
-        let mut v: Vec<&Container> = self
-            .messages()
-            .iter()
-            .filter(|e| {
-                e.tags().fulfills_all(&ObjectTags::new_with_version(
-                    WorldVersion::Minor(1, 12).into(),
-                ))
+        let mut v = self
+            .wireshark_containers()
+            .into_iter()
+            .filter(|a| match a.container_type() {
+                ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => true,
+                _ => false,
             })
-            .collect();
+            .collect::<Vec<&Container>>();
 
         v.sort_by(|a, b| a.name().cmp(b.name()));
 
