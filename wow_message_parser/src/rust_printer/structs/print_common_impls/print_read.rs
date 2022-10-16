@@ -669,7 +669,7 @@ fn print_read_if_statement_enum(
 
     let enumerator_name = match &statement.conditional().equations()[0] {
         Equation::Equals { value, .. } | Equation::NotEquals { value, .. } => value,
-        _ => unreachable!(),
+        _ => unreachable!("enum printer is bitwise and"),
     };
 
     let rd = e

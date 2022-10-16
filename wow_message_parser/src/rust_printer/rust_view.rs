@@ -101,7 +101,7 @@ impl RustMember {
                 enumerators.remove(index);
                 enumerator
             }
-            _ => unreachable!(),
+            _ => unreachable!("pop_flag_enumerator is not flag"),
         }
     }
 

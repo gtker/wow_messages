@@ -491,7 +491,7 @@ fn print_value(
             } else if (ty & CORPSE) != 0 {
                 s.wln_no_indent("UpdateMask::Corpse(UpdateCorpse::builder()");
             } else {
-                unreachable!()
+                unreachable!("Invalid type for UpdateMask")
             }
             s.inc_indent();
 

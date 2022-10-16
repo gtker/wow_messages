@@ -150,7 +150,7 @@ impl Type {
                         Type::Integer(i) => (i.smallest_value(), i.largest_value()),
                         _ => unreachable!("only ints can be string lengths"),
                     },
-                    ArraySize::Endless => unreachable!(),
+                    ArraySize::Endless => unreachable!("Endless has already been matched"),
                 };
 
                 match array.ty() {
