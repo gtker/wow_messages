@@ -1,6 +1,10 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {
+    GmTicketType ticket_type {
+        comment = "cmangos does not have this field, vmangos does.";
+    }
     CString message;
+} {
+    versions = "1";
 }
+
 

@@ -1,6 +1,6 @@
 # GmTicketType
 
-## Client Version 1.12
+## Client Version 1
 
 ### Comment
 
@@ -42,5 +42,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [CMSG_GMTICKET_CREATE](cmsg_gmticket_create.md)
+* [CMSG_GMTICKET_UPDATETEXT](cmsg_gmticket_updatetext.md)
 * [SMSG_GMTICKET_GETTICKET](smsg_gmticket_getticket.md)
 
