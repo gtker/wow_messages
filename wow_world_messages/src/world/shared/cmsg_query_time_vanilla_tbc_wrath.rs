@@ -44,7 +44,7 @@ impl crate::world::tbc::ClientMessage for CMSG_QUERY_TIME {}
 impl crate::world::wrath::ClientMessage for CMSG_QUERY_TIME {}
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1_12 {
+mod test_vanilla {
     use super::CMSG_QUERY_TIME;
     use super::*;
     use super::super::*;
@@ -125,7 +125,7 @@ mod test1_12 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::CMSG_QUERY_TIME;
     use super::*;
     use super::super::*;
@@ -206,7 +206,7 @@ mod test2 {
 }
 
 #[cfg(all(feature = "wrath", test))]
-mod test3 {
+mod test_wrath {
     use super::CMSG_QUERY_TIME;
     use super::*;
     use super::super::*;

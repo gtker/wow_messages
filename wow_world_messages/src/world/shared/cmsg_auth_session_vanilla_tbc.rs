@@ -142,7 +142,7 @@ impl CMSG_AUTH_SESSION {
 }
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1 {
+mod test_vanilla {
     use super::CMSG_AUTH_SESSION;
     use super::*;
     use super::super::*;
@@ -501,7 +501,7 @@ mod test1 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::CMSG_AUTH_SESSION;
     use super::*;
     use super::super::*;

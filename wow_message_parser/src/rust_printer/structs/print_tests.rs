@@ -27,7 +27,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             s.wln("#[cfg(test)]");
         }
         if e.tags().shared() {
-            s.open_curly(format!("mod test{}", version.to_module_case()));
+            s.open_curly(format!("mod test_{}", version.to_module_case()));
         } else {
             s.open_curly("mod test");
         }

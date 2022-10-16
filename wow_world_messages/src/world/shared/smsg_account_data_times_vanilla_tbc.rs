@@ -57,7 +57,7 @@ impl crate::world::vanilla::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 impl crate::world::tbc::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1_12 {
+mod test_vanilla {
     use super::SMSG_ACCOUNT_DATA_TIMES;
     use super::*;
     use super::super::*;
@@ -161,7 +161,7 @@ mod test1_12 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::SMSG_ACCOUNT_DATA_TIMES;
     use super::*;
     use super::super::*;

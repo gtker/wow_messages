@@ -51,7 +51,7 @@ impl crate::world::vanilla::ServerMessage for SMSG_DESTROY_OBJECT {}
 impl crate::world::tbc::ServerMessage for SMSG_DESTROY_OBJECT {}
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1 {
+mod test_vanilla {
     use super::SMSG_DESTROY_OBJECT;
     use super::*;
     use super::super::*;
@@ -140,7 +140,7 @@ mod test1 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::SMSG_DESTROY_OBJECT;
     use super::*;
     use super::super::*;

@@ -2,7 +2,7 @@ use std::collections::BTreeSet;
 use std::fmt::Write;
 
 use crate::file_utils::{get_import_path, get_shared_module_name};
-use crate::parser::types::version::{AllVersions, Version};
+use crate::parser::types::version::{AllVersions, MajorWorldVersion, Version};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
 
@@ -52,7 +52,7 @@ impl ObjectTags {
             }
             Version::World(l) => {
                 let mut s = BTreeSet::new();
-                s.insert(l);
+                s.insert(l.as_world());
                 (AllVersions::World(s.clone()), BTreeSet::new(), s)
             }
         };
@@ -91,9 +91,9 @@ impl ObjectTags {
     }
 
     pub(crate) fn is_main_version(&self) -> bool {
-        let mut versions = ObjectTags::new_with_version(Version::World(WorldVersion::Minor(1, 12)));
-        versions.push_version(WorldVersion::Patch(2, 4, 3));
-        versions.push_version(WorldVersion::Patch(3, 3, 5));
+        let mut versions = ObjectTags::new_with_version(MajorWorldVersion::Vanilla.into());
+        versions.push_version(MajorWorldVersion::BurningCrusade.as_world());
+        versions.push_version(MajorWorldVersion::Wrath.as_world());
 
         let logon = ObjectTags::new_with_version(Version::Login(LoginVersion::All));
 
@@ -121,7 +121,7 @@ impl ObjectTags {
     pub(crate) fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
         let world = self
             .versions()
-            .filter(|a| a.is_main_version())
+            .filter_map(|a| a.try_as_major_world())
             .map(Version::World);
 
         self.logon_versions().map(Version::Login).chain(world)

@@ -8,7 +8,7 @@ use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
-use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version, WorldVersion};
+use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::ContainerType;
 
 #[derive(Debug, Clone)]
@@ -95,7 +95,7 @@ impl Objects {
 
     pub(crate) fn get_world_messages_with_versions_and_all(
         &self,
-        version_number: &WorldVersion,
+        version_number: &MajorWorldVersion,
     ) -> Vec<&Container> {
         let mut v = Vec::new();
 
@@ -188,7 +188,7 @@ impl Objects {
         self.all_containers()
             .filter(|e| {
                 e.tags().fulfills_all(&ObjectTags::new_with_version(
-                    WorldVersion::Minor(1, 12).into(),
+                    MajorWorldVersion::Vanilla.into(),
                 ))
             })
             .collect()

@@ -6,7 +6,6 @@ use crate::error_printer::incorrect_opcode_for_message;
 use crate::parser::types::container::ContainerType;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::ObjectTags;
-use crate::parser::types::version::WorldVersion;
 use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::UNIMPLEMENTED;
 
@@ -47,21 +46,21 @@ impl Data {
 
 pub(crate) fn print_message_stats(o: &Objects) {
     stats_for(
-        WorldVersion::Minor(1, 12).into(),
+        MajorWorldVersion::Vanilla.into(),
         vanilla_messages::DATA.to_vec(),
         o,
     );
     println!();
 
     stats_for(
-        WorldVersion::Patch(2, 4, 3).into(),
+        MajorWorldVersion::BurningCrusade.into(),
         tbc_messages::DATA.to_vec(),
         o,
     );
     println!();
 
     stats_for(
-        WorldVersion::Patch(3, 3, 5).into(),
+        MajorWorldVersion::Wrath.into(),
         wrath_messages::DATA.to_vec(),
         o,
     );

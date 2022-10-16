@@ -8,7 +8,7 @@ use crate::error_printer::{
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::version::{Version, WorldVersion};
+use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::path_utils::parser_test_directory;
 use crate::rust_printer::{print_enum, print_flag, print_struct, Writer};
 use crate::{load_files, print_message_stats, ParsedObjects};
@@ -67,7 +67,7 @@ fn overwrite(s: &Writer, name: &str) {
     write_string_to_file(s.proper_as_str(), Path::new(&format!("tests/{}.txt", name)));
 }
 
-const VERSION: Version = Version::World(WorldVersion::Minor(1, 12));
+const VERSION: Version = Version::World(MajorWorldVersion::Vanilla);
 
 #[test]
 fn simple_enum() {
@@ -499,7 +499,7 @@ fn invalid_self_size_errors() {
             print_struct(
                 o.all_containers().next().unwrap(),
                 &o,
-                Version::World(WorldVersion::Minor(1, 12)),
+                Version::World(MajorWorldVersion::Vanilla),
             );
         },
         INVALID_SELF_SIZE,

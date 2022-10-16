@@ -182,7 +182,7 @@ fn main() {
 
 fn write_world_opcodes(o: &Objects) {
     for e in o.get_main_world_versions_with_objects() {
-        let mut v = o.get_world_messages_with_versions_and_all(&e.as_world());
+        let mut v = o.get_world_messages_with_versions_and_all(&e);
         v.sort_by_key(|a| a.container_type());
         let cmsg: Vec<&Container> = v
             .clone()

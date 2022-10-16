@@ -25,14 +25,9 @@ pub(crate) fn print_world_opcodes(
         _ => unreachable!("invalid type passed to opcode printer"),
     };
 
-    includes(
-        &mut s,
-        v,
-        container_type,
-        Version::World(version.as_world()),
-    );
+    includes(&mut s, v, container_type, Version::World(*version));
 
-    definition(&mut s, v, ty, (version.as_world()).into());
+    definition(&mut s, v, ty, (*version).into());
 
     common_impls_world(&mut s, v, ty, container_type, *version);
 
@@ -113,7 +108,7 @@ pub(crate) fn includes(
             if any_container_is_pure_movement_info(v) {
                 s.wln(format!(
                     "use {module_name}::MovementInfo;",
-                    module_name = get_import_path(Version::World(version.as_world()))
+                    module_name = get_import_path(version)
                 ));
             }
         }

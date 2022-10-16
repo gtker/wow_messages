@@ -178,10 +178,6 @@ impl WorldVersion {
         }
     }
 
-    pub fn as_module_case(&self) -> String {
-        self.to_string().replace('.', "_")
-    }
-
     pub fn is_main_version(&self) -> bool {
         self.try_as_major_world().is_some()
     }
@@ -262,7 +258,7 @@ impl LoginVersion {
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub(crate) enum Version {
     Login(LoginVersion),
-    World(WorldVersion),
+    World(MajorWorldVersion),
 }
 
 impl Ord for Version {
@@ -294,28 +290,24 @@ impl Version {
         }
     }
 
-    pub(crate) fn as_world(&self) -> WorldVersion {
-        match self {
-            Version::Login(_) => unreachable!(),
-            Version::World(w) => *w,
-        }
-    }
-
     pub(crate) fn as_version_string(&self) -> String {
         match self {
             Version::Login(l) => l.to_string(),
-            Version::World(w) => w.to_string(),
+            Version::World(w) => w.as_version_string(),
         }
     }
 
     pub(crate) fn as_major_world(&self) -> MajorWorldVersion {
-        self.as_world().as_major_world()
+        match self {
+            Version::Login(_) => panic!(),
+            Version::World(w) => *w,
+        }
     }
 
     pub(crate) fn to_module_case(self) -> String {
         match self {
             Version::Login(l) => l.as_module_case(),
-            Version::World(l) => l.as_module_case(),
+            Version::World(l) => l.module_name().to_string(),
         }
     }
 }
@@ -326,8 +318,8 @@ impl From<LoginVersion> for Version {
     }
 }
 
-impl From<WorldVersion> for Version {
-    fn from(l: WorldVersion) -> Self {
+impl From<MajorWorldVersion> for Version {
+    fn from(l: MajorWorldVersion) -> Self {
         Self::World(l)
     }
 }
@@ -373,6 +365,15 @@ impl MajorWorldVersion {
             MajorWorldVersion::BurningCrusade => TBC,
             MajorWorldVersion::Wrath => WRATH,
         }
+    }
+
+    pub(crate) fn as_version_string(&self) -> String {
+        match self {
+            MajorWorldVersion::Vanilla => "1.12",
+            MajorWorldVersion::BurningCrusade => "2.4.3",
+            MajorWorldVersion::Wrath => "3.3.5",
+        }
+        .to_string()
     }
 }
 

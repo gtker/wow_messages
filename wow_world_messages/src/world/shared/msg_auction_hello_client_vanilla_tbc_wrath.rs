@@ -50,7 +50,7 @@ impl crate::world::tbc::ClientMessage for MSG_AUCTION_HELLO_Client {}
 impl crate::world::wrath::ClientMessage for MSG_AUCTION_HELLO_Client {}
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1 {
+mod test_vanilla {
     use super::MSG_AUCTION_HELLO_Client;
     use super::*;
     use super::super::*;
@@ -139,7 +139,7 @@ mod test1 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::MSG_AUCTION_HELLO_Client;
     use super::*;
     use super::super::*;
@@ -228,7 +228,7 @@ mod test2 {
 }
 
 #[cfg(all(feature = "wrath", test))]
-mod test3 {
+mod test_wrath {
     use super::MSG_AUCTION_HELLO_Client;
     use super::*;
     use super::super::*;

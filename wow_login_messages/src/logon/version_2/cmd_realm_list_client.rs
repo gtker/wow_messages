@@ -142,7 +142,7 @@ impl ClientMessage for CMD_REALM_LIST_Client {
 }
 
 #[cfg(test)]
-mod testversion_2 {
+mod test_version_2 {
     use super::CMD_REALM_LIST_Client;
     use crate::all::*;
     use super::*;
@@ -223,7 +223,7 @@ mod testversion_2 {
 }
 
 #[cfg(test)]
-mod testversion_3 {
+mod test_version_3 {
     use super::CMD_REALM_LIST_Client;
     use crate::all::*;
     use super::*;
@@ -304,7 +304,7 @@ mod testversion_3 {
 }
 
 #[cfg(test)]
-mod testversion_8 {
+mod test_version_8 {
     use super::CMD_REALM_LIST_Client;
     use crate::all::*;
     use super::*;

@@ -40,7 +40,7 @@ impl crate::world::tbc::ClientMessage for CMSG_PLAYER_LOGOUT {}
 impl crate::world::wrath::ClientMessage for CMSG_PLAYER_LOGOUT {}
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1 {
+mod test_vanilla {
     use super::CMSG_PLAYER_LOGOUT;
     use super::*;
     use super::super::*;
@@ -121,7 +121,7 @@ mod test1 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::CMSG_PLAYER_LOGOUT;
     use super::*;
     use super::super::*;
@@ -202,7 +202,7 @@ mod test2 {
 }
 
 #[cfg(all(feature = "wrath", test))]
-mod test3 {
+mod test_wrath {
     use super::CMSG_PLAYER_LOGOUT;
     use super::*;
     use super::super::*;

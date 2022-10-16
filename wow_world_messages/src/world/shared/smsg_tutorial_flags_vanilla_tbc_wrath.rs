@@ -59,7 +59,7 @@ impl crate::world::tbc::ServerMessage for SMSG_TUTORIAL_FLAGS {}
 impl crate::world::wrath::ServerMessage for SMSG_TUTORIAL_FLAGS {}
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1 {
+mod test_vanilla {
     use super::SMSG_TUTORIAL_FLAGS;
     use super::*;
     use super::super::*;
@@ -152,7 +152,7 @@ mod test1 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::SMSG_TUTORIAL_FLAGS;
     use super::*;
     use super::super::*;
@@ -245,7 +245,7 @@ mod test2 {
 }
 
 #[cfg(all(feature = "wrath", test))]
-mod test3 {
+mod test_wrath {
     use super::SMSG_TUTORIAL_FLAGS;
     use super::*;
     use super::super::*;

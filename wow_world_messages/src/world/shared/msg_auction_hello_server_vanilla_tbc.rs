@@ -56,7 +56,7 @@ impl crate::world::vanilla::ServerMessage for MSG_AUCTION_HELLO_Server {}
 impl crate::world::tbc::ServerMessage for MSG_AUCTION_HELLO_Server {}
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1 {
+mod test_vanilla {
     use super::MSG_AUCTION_HELLO_Server;
     use super::*;
     use super::super::*;
@@ -151,7 +151,7 @@ mod test1 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::MSG_AUCTION_HELLO_Server;
     use super::*;
     use super::super::*;

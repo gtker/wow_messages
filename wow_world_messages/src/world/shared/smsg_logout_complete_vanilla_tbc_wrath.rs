@@ -46,7 +46,7 @@ impl crate::world::tbc::ServerMessage for SMSG_LOGOUT_COMPLETE {}
 impl crate::world::wrath::ServerMessage for SMSG_LOGOUT_COMPLETE {}
 
 #[cfg(all(feature = "vanilla", test))]
-mod test1_12 {
+mod test_vanilla {
     use super::SMSG_LOGOUT_COMPLETE;
     use super::*;
     use super::super::*;
@@ -127,7 +127,7 @@ mod test1_12 {
 }
 
 #[cfg(all(feature = "tbc", test))]
-mod test2 {
+mod test_tbc {
     use super::SMSG_LOGOUT_COMPLETE;
     use super::*;
     use super::super::*;
@@ -208,7 +208,7 @@ mod test2 {
 }
 
 #[cfg(all(feature = "wrath", test))]
-mod test3 {
+mod test_wrath {
     use super::SMSG_LOGOUT_COMPLETE;
     use super::*;
     use super::super::*;
