@@ -54,6 +54,9 @@ impl ParsedTags {
 
         self.paste_versions.append(&mut t.paste_versions);
 
+        if let Some(v) = t.skip_serialize {
+            self.skip_serialize = Some(v)
+        }
         if let Some(v) = t.is_test {
             self.is_test = Some(v)
         }
