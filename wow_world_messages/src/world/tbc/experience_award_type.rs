@@ -1,2 +1,2 @@
-pub use crate::shared::experience_award_type123::ExperienceAwardType;
+pub use crate::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
 

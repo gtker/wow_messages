@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_activatetaxiexpress12::CMSG_ACTIVATETAXIEXPRESS;
+pub use crate::shared::cmsg_activatetaxiexpress_vanilla_tbc::CMSG_ACTIVATETAXIEXPRESS;
 

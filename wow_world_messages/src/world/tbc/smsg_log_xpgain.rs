@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_log_xpgain12::SMSG_LOG_XPGAIN;
+pub use crate::shared::smsg_log_xpgain_vanilla_tbc::SMSG_LOG_XPGAIN;
 

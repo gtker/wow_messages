@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_account_data_times1_122::SMSG_ACCOUNT_DATA_TIMES;
+pub use crate::shared::smsg_account_data_times_vanilla_tbc::SMSG_ACCOUNT_DATA_TIMES;
 

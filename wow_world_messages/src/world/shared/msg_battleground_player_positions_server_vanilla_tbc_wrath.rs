@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::battleground_player_position123::BattlegroundPlayerPosition;
+use crate::world::shared::battleground_player_position_vanilla_tbc_wrath::BattlegroundPlayerPosition;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]

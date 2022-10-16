@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_channel_unmute123::CMSG_CHANNEL_UNMUTE;
+pub use crate::shared::cmsg_channel_unmute_vanilla_tbc_wrath::CMSG_CHANNEL_UNMUTE;
 

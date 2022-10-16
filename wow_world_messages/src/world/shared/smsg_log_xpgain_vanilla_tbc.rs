@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::experience_award_type123::ExperienceAwardType;
+use crate::world::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]

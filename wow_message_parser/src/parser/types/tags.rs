@@ -145,7 +145,7 @@ impl ObjectTags {
     pub(crate) fn shared_module_name(&self, object_name: &str) -> String {
         let versions = self
             .main_versions()
-            .map(|a| a.as_world())
+            .map(|a| a.as_major_world())
             .collect::<Vec<_>>();
 
         get_shared_module_name(object_name, &versions)

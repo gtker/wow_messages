@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::unit_stand_state1_1223::UnitStandState;
+use crate::world::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

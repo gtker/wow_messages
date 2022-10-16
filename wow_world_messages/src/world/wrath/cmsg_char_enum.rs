@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_char_enum123::CMSG_CHAR_ENUM;
+pub use crate::shared::cmsg_char_enum_vanilla_tbc_wrath::CMSG_CHAR_ENUM;
 

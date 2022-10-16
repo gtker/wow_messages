@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::channel_member_flags123::ChannelMemberFlags;
+use crate::world::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

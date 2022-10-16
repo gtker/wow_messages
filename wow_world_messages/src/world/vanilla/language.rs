@@ -1,2 +1,2 @@
-pub use crate::shared::language11_12::Language;
+pub use crate::shared::language_vanilla_vanilla::Language;
 

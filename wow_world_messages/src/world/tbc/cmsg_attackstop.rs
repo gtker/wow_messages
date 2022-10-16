@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_attackstop123::CMSG_ATTACKSTOP;
+pub use crate::shared::cmsg_attackstop_vanilla_tbc_wrath::CMSG_ATTACKSTOP;
 

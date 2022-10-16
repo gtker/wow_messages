@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_char_delete123::CMSG_CHAR_DELETE;
+pub use crate::shared::cmsg_char_delete_vanilla_tbc_wrath::CMSG_CHAR_DELETE;
 

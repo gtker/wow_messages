@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::forced_reaction123::ForcedReaction;
+use crate::world::shared::forced_reaction_vanilla_tbc_wrath::ForcedReaction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

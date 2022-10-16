@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_attackswing_badfacing123::SMSG_ATTACKSWING_BADFACING;
+pub use crate::shared::smsg_attackswing_badfacing_vanilla_tbc_wrath::SMSG_ATTACKSWING_BADFACING;
 

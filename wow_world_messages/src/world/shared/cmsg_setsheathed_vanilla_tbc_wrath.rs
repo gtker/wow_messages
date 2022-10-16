@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::sheath_state123::SheathState;
+use crate::world::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

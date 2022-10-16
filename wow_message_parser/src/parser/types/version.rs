@@ -332,7 +332,7 @@ impl From<WorldVersion> for Version {
     }
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub(crate) enum MajorWorldVersion {
     Vanilla,
     BurningCrusade,

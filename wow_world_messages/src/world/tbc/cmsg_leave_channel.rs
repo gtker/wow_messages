@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_leave_channel2_4_33::CMSG_LEAVE_CHANNEL;
+pub use crate::shared::cmsg_leave_channel_tbc_wrath::CMSG_LEAVE_CHANNEL;
 

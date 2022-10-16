@@ -1,2 +1,2 @@
-pub use crate::shared::addon_info123_3_5::AddonInfo;
+pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 

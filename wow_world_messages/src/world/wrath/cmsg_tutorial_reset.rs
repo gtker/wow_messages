@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_tutorial_reset123::CMSG_TUTORIAL_RESET;
+pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESET;
 

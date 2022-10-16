@@ -1,2 +1,2 @@
-pub use crate::shared::msg_auction_hello_server12::MSG_AUCTION_HELLO_Server;
+pub use crate::shared::msg_auction_hello_server_vanilla_tbc::MSG_AUCTION_HELLO_Server;
 

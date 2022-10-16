@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::faction_flag12::FactionFlag;
+use crate::world::shared::faction_flag_vanilla_tbc::FactionFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

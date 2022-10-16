@@ -1,2 +1,2 @@
-pub use crate::shared::class12::Class;
+pub use crate::shared::class_vanilla_tbc::Class;
 

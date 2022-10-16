@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::duel_winner_reason123::DuelWinnerReason;
+use crate::world::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

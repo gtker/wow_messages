@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_gmticket_systemstatus123::CMSG_GMTICKET_SYSTEMSTATUS;
+pub use crate::shared::cmsg_gmticket_systemstatus_vanilla_tbc_wrath::CMSG_GMTICKET_SYSTEMSTATUS;
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::chat_notify2_4_33::ChatNotify;
+use crate::world::shared::chat_notify_tbc_wrath::ChatNotify;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

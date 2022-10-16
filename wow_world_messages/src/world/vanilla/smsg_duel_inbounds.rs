@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_duel_inbounds123::SMSG_DUEL_INBOUNDS;
+pub use crate::shared::smsg_duel_inbounds_vanilla_tbc_wrath::SMSG_DUEL_INBOUNDS;
 

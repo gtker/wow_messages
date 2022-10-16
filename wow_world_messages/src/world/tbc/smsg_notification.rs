@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_notification123::SMSG_NOTIFICATION;
+pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
 

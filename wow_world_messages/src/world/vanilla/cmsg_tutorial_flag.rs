@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_tutorial_flag123::CMSG_TUTORIAL_FLAG;
+pub use crate::shared::cmsg_tutorial_flag_vanilla_tbc_wrath::CMSG_TUTORIAL_FLAG;
 

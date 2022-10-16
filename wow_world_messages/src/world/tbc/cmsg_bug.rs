@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_bug123::CMSG_BUG;
+pub use crate::shared::cmsg_bug_vanilla_tbc_wrath::CMSG_BUG;
 

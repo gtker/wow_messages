@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_realm_split2_4_33::CMSG_REALM_SPLIT;
+pub use crate::shared::cmsg_realm_split_tbc_wrath::CMSG_REALM_SPLIT;
 

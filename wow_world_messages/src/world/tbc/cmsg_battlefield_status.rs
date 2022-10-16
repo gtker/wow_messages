@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_battlefield_status123::CMSG_BATTLEFIELD_STATUS;
+pub use crate::shared::cmsg_battlefield_status_vanilla_tbc_wrath::CMSG_BATTLEFIELD_STATUS;
 

@@ -1,2 +1,2 @@
-pub use crate::shared::world_state1_1223::WorldState;
+pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 

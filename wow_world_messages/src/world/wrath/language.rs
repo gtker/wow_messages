@@ -1,2 +1,2 @@
-pub use crate::shared::language2_4_33::Language;
+pub use crate::shared::language_tbc_wrath::Language;
 

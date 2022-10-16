@@ -1,2 +1,2 @@
-pub use crate::shared::item_quality1_122::ItemQuality;
+pub use crate::shared::item_quality_vanilla_tbc::ItemQuality;
 

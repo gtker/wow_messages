@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::realm_split_state2_4_33::RealmSplitState;
+use crate::world::shared::realm_split_state_tbc_wrath::RealmSplitState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

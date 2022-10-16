@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_update_world_state1_1223_3_5::SMSG_UPDATE_WORLD_STATE;
+pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
 

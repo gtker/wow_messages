@@ -1,2 +1,2 @@
-pub use crate::shared::power1_122::Power;
+pub use crate::shared::power_vanilla_tbc::Power;
 

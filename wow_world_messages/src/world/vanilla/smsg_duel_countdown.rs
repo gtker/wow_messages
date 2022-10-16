@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_duel_countdown123::SMSG_DUEL_COUNTDOWN;
+pub use crate::shared::smsg_duel_countdown_vanilla_tbc_wrath::SMSG_DUEL_COUNTDOWN;
 

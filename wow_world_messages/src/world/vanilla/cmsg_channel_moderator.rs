@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_channel_moderator123::CMSG_CHANNEL_MODERATOR;
+pub use crate::shared::cmsg_channel_moderator_vanilla_tbc_wrath::CMSG_CHANNEL_MODERATOR;
 

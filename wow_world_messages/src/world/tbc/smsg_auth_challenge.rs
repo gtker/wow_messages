@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_auth_challenge12::SMSG_AUTH_CHALLENGE;
+pub use crate::shared::smsg_auth_challenge_vanilla_tbc::SMSG_AUTH_CHALLENGE;
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::world_state1_1223::WorldState;
+use crate::world::shared::world_state_vanilla_tbc_wrath::WorldState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

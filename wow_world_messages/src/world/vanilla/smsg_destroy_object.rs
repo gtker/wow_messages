@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_destroy_object12::SMSG_DESTROY_OBJECT;
+pub use crate::shared::smsg_destroy_object_vanilla_tbc::SMSG_DESTROY_OBJECT;
 

@@ -1,2 +1,2 @@
-pub use crate::shared::ai_reaction123::AiReaction;
+pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 

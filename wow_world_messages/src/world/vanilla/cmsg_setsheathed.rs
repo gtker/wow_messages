@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_setsheathed123::CMSG_SETSHEATHED;
+pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::CMSG_SETSHEATHED;
 

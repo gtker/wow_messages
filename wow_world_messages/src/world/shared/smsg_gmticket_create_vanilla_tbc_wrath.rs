@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::gm_ticket_response123::GmTicketResponse;
+use crate::world::shared::gm_ticket_response_vanilla_tbc_wrath::GmTicketResponse;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

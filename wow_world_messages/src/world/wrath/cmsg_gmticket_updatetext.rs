@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_gmticket_updatetext23::CMSG_GMTICKET_UPDATETEXT;
+pub use crate::shared::cmsg_gmticket_updatetext_tbc_wrath::CMSG_GMTICKET_UPDATETEXT;
 

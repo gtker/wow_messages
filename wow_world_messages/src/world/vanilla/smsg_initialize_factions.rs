@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_initialize_factions12::SMSG_INITIALIZE_FACTIONS;
+pub use crate::shared::smsg_initialize_factions_vanilla_tbc::SMSG_INITIALIZE_FACTIONS;
 

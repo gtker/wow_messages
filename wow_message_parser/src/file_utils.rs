@@ -8,7 +8,7 @@ use heck::SnakeCase;
 use walkdir::WalkDir;
 
 use crate::parser::types::tags::ObjectTags;
-use crate::parser::types::version::{LoginVersion, WorldVersion};
+use crate::parser::types::version::LoginVersion;
 use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::path_utils;
 use crate::path_utils::{base_directory, login_directory, world_directory};
@@ -393,14 +393,14 @@ pub(crate) fn get_module_name(e: &str) -> String {
     e.to_snake_case()
 }
 
-pub(crate) fn get_shared_module_name(e: &str, versions: &[WorldVersion]) -> String {
+pub(crate) fn get_shared_module_name(e: &str, versions: &[MajorWorldVersion]) -> String {
     let mut s = e.to_snake_case();
 
     let mut versions = versions.to_vec();
     versions.sort();
 
     for v in versions {
-        s += &v.as_module_case();
+        s += &format!("_{}", v.module_name());
     }
 
     s

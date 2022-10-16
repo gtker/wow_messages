@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_query_time1_1223::CMSG_QUERY_TIME;
+pub use crate::shared::cmsg_query_time_vanilla_tbc_wrath::CMSG_QUERY_TIME;
 

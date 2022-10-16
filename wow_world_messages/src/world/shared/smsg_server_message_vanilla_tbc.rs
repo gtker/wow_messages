@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::server_message_type1_122::ServerMessageType;
+use crate::world::shared::server_message_type_vanilla_tbc::ServerMessageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

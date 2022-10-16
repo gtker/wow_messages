@@ -1,2 +1,2 @@
-pub use crate::shared::vector3d123::Vector3d;
+pub use crate::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 

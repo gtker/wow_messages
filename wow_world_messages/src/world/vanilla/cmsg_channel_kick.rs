@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_channel_kick123::CMSG_CHANNEL_KICK;
+pub use crate::shared::cmsg_channel_kick_vanilla_tbc_wrath::CMSG_CHANNEL_KICK;
 

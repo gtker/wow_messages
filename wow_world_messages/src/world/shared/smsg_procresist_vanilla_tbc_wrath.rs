@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::log_format1_1223::LogFormat;
+use crate::world::shared::log_format_vanilla_tbc_wrath::LogFormat;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

@@ -1,2 +1,2 @@
-pub use crate::shared::forced_reaction123::ForcedReaction;
+pub use crate::shared::forced_reaction_vanilla_tbc_wrath::ForcedReaction;
 

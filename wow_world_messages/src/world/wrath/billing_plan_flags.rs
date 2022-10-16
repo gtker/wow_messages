@@ -1,2 +1,2 @@
-pub use crate::shared::billing_plan_flags2_4_33::BillingPlanFlags;
+pub use crate::shared::billing_plan_flags_tbc_wrath::BillingPlanFlags;
 

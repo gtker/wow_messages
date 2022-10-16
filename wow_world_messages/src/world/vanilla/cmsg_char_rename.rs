@@ -1,2 +1,2 @@
-pub use crate::shared::cmsg_char_rename123::CMSG_CHAR_RENAME;
+pub use crate::shared::cmsg_char_rename_vanilla_tbc_wrath::CMSG_CHAR_RENAME;
 

@@ -1,2 +1,2 @@
-pub use crate::shared::transport_info1_122::TransportInfo;
+pub use crate::shared::transport_info_vanilla_tbc::TransportInfo;
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::environmental_damage_type123::EnvironmentalDamageType;
+use crate::world::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

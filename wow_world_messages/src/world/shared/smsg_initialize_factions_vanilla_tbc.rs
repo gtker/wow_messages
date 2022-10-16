@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::faction_initializer12::FactionInitializer;
+use crate::world::shared::faction_initializer_vanilla_tbc::FactionInitializer;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

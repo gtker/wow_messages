@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_pong123::SMSG_PONG;
+pub use crate::shared::smsg_pong_vanilla_tbc_wrath::SMSG_PONG;
 

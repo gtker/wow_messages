@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_attackswing_notstanding12::SMSG_ATTACKSWING_NOTSTANDING;
+pub use crate::shared::smsg_attackswing_notstanding_vanilla_tbc::SMSG_ATTACKSWING_NOTSTANDING;
 

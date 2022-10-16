@@ -1,2 +1,2 @@
-pub use crate::shared::update_flag1_122_4_3::UpdateFlag;
+pub use crate::shared::update_flag_vanilla_tbc::UpdateFlag;
 

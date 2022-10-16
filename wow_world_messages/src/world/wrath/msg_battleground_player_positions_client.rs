@@ -1,2 +1,2 @@
-pub use crate::shared::msg_battleground_player_positions_client123::MSG_BATTLEGROUND_PLAYER_POSITIONS_Client;
+pub use crate::shared::msg_battleground_player_positions_client_vanilla_tbc_wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Client;
 

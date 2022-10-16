@@ -1,2 +1,2 @@
-pub use crate::shared::faction_flag12::FactionFlag;
+pub use crate::shared::faction_flag_vanilla_tbc::FactionFlag;
 

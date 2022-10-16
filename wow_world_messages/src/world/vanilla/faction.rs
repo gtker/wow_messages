@@ -1,2 +1,2 @@
-pub use crate::shared::faction123::Faction;
+pub use crate::shared::faction_vanilla_tbc_wrath::Faction;
 

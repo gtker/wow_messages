@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::ai_reaction123::AiReaction;
+use crate::world::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

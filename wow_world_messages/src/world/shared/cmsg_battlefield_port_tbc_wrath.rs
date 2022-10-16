@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::battlefield_port_action123::BattlefieldPortAction;
+use crate::world::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

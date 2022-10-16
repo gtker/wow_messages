@@ -1,2 +1,2 @@
-pub use crate::shared::smsg_standstate_update1_1223::SMSG_STANDSTATE_UPDATE;
+pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
