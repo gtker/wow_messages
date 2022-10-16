@@ -5,8 +5,8 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{Version, WorldVersion};
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
-    print_docc_description_and_comment, Writer, CLIENT_MESSAGE_TRAIT_NAME,
-    SERVER_MESSAGE_TRAIT_NAME,
+    print_docc_description_and_comment, print_member_docc_description_and_comment, Writer,
+    CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::wowm_printer::get_struct_wowm_definition;
 
@@ -111,7 +111,7 @@ fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
 
     s.new_struct(e.name(), |s| {
         for member in e.rust_object().members_in_struct() {
-            print_docc_description_and_comment(s, member.tags(), o, e.tags());
+            print_member_docc_description_and_comment(s, member.tags(), o, e.tags());
 
             s.wln(format!(
                 "pub {name}: {ty},",

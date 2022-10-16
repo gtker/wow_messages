@@ -317,7 +317,7 @@ fn unimplemented_member() -> ParsedStructMember {
         UNIMPLEMENTED,
         ParsedType::Array(ParsedArray::new_unimplemented()),
         None,
-        ParsedTags::new().into_tags(),
+        ParsedTags::new().into_member_tags(),
     ))
 }
 
@@ -386,7 +386,7 @@ fn parse_struct_member(
                 identifier.as_str(),
                 container_type,
                 value,
-                kvs.into_tags(),
+                kvs.into_member_tags(),
             );
 
             ParsedStructMember::Definition(s)

@@ -18,6 +18,7 @@ mod update_mask;
 
 use crate::file_utils::{get_import_path, get_shared_module_name, major_version_to_string};
 use crate::parser::types::sizes::Sizes;
+use crate::parser::types::tags::MemberTags;
 use crate::parser::types::version::{Version, WorldVersion};
 use crate::{ContainerType, Objects, Tags};
 pub use update_mask::*;
@@ -820,6 +821,29 @@ fn get_optional_type_name(original_ty: &str, optional_name: &str) -> String {
 
 fn get_new_flag_type_name(original_ty: &str, enumerator_name: &str) -> String {
     format!("{original_ty}_{enumerator_name}")
+}
+
+fn print_member_docc_description_and_comment(
+    s: &mut Writer,
+    tags: &MemberTags,
+    o: &Objects,
+    object_tags: &Tags,
+) {
+    if let Some(description) = tags.description() {
+        for line in description.as_rust_doc_lines(o, object_tags) {
+            s.docc(line);
+        }
+
+        s.docc_newline();
+    }
+
+    if let Some(comment) = tags.comment() {
+        for line in comment.as_rust_doc_lines(o, object_tags) {
+            s.docc(line);
+        }
+
+        s.docc_newline();
+    }
 }
 
 fn print_docc_description_and_comment(

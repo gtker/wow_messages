@@ -3,6 +3,7 @@ use crate::parser::types::objects::conversion::get_definer;
 use crate::parser::types::parsed::parsed_if_statement::ParsedIfStatement;
 use crate::parser::types::parsed::parsed_optional::ParsedOptionalStatement;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
+use crate::parser::types::tags::MemberTags;
 use crate::parser::types::{ContainerValue, ParsedContainerValue};
 use crate::{Tags, CONTAINER_SELF_SIZE_FIELD};
 
@@ -21,7 +22,7 @@ pub(crate) struct ParsedStructMemberDefinition {
     pub verified_value: Option<ContainerValue>,
     pub used_as_size_in: Option<String>,
     pub used_in_if: Option<bool>,
-    pub tags: Tags,
+    pub tags: MemberTags,
 }
 
 impl ParsedStructMemberDefinition {
@@ -41,7 +42,7 @@ impl ParsedStructMemberDefinition {
         name: &str,
         struct_type: ParsedType,
         value: Option<ParsedContainerValue>,
-        tags: Tags,
+        tags: MemberTags,
     ) -> Self {
         Self {
             name: name.to_string(),
@@ -66,7 +67,7 @@ impl ParsedStructMemberDefinition {
         &self.value
     }
 
-    pub(crate) fn set_verified_value(&mut self, definers: &[Definer]) {
+    pub(crate) fn set_verified_value(&mut self, definers: &[Definer], tags: &Tags) {
         match &self.value() {
             None => {}
             Some(v) => {
@@ -76,7 +77,7 @@ impl ParsedStructMemberDefinition {
                         Some(ContainerValue::new(int_val, v.identifier().to_string()))
                 } else {
                     let value = if v.identifier() != CONTAINER_SELF_SIZE_FIELD {
-                        get_definer(definers, &self.ty().str(), self.tags())
+                        get_definer(definers, &self.ty().str(), tags)
                             .unwrap()
                             .get_field_with_name(v.identifier())
                             .unwrap()
@@ -90,9 +91,5 @@ impl ParsedStructMemberDefinition {
                 }
             }
         }
-    }
-
-    pub(crate) fn tags(&self) -> &Tags {
-        &self.tags
     }
 }

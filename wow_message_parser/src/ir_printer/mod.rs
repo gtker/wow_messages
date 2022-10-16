@@ -8,7 +8,7 @@ use std::path::Path;
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::{MemberTags, Tags};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::parser::types::{Endianness, IntegerType};
 
@@ -172,6 +172,23 @@ impl IrTags {
             },
             compressed,
             unimplemented,
+        }
+    }
+
+    fn from_member_tags(tags: &MemberTags) -> Self {
+        let description = tags.description().map(|d| d.as_ir_string());
+
+        let comment = tags.comment().map(|d| d.as_ir_string());
+
+        let compressed = tags.compressed().map(|d| d.to_string());
+
+        Self {
+            description,
+            comment,
+            display: tags.display().map(|a| a.to_owned()),
+            version: None,
+            compressed,
+            unimplemented: None,
         }
     }
 }

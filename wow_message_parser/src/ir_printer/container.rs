@@ -217,7 +217,7 @@ impl From<&StructMemberDefinition> for IrStructMemberDefinition {
             constant_value: v.value().as_ref().map(|a| a.into()),
             used_as_size_in: v.used_as_size_in().clone(),
             used_in_if: v.used_in_if(),
-            tags: IrTags::from_tags(v.tags()),
+            tags: IrTags::from_member_tags(v.tags()),
         }
     }
 }

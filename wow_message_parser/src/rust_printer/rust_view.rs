@@ -6,7 +6,7 @@ use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::parsed::parsed_ty::bool_ty_to_string;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMember;
-use crate::parser::types::tags::Tags;
+use crate::parser::types::tags::{MemberTags, Tags};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::rust_printer::{
@@ -25,7 +25,7 @@ pub(crate) struct RustMember {
     in_rust_type: bool,
     sizes: Sizes,
 
-    tags: Tags,
+    tags: MemberTags,
 }
 
 impl RustMember {
@@ -35,7 +35,7 @@ impl RustMember {
     pub(crate) fn ty(&self) -> &RustType {
         &self.ty
     }
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &MemberTags {
         &self.tags
     }
     pub(crate) fn constant_sized(&self) -> bool {
@@ -926,8 +926,8 @@ fn create_else_if_flag(
         },
         original_ty: struct_ty_name.to_string(),
         in_rust_type: true,
-        sizes: Sizes::new(), // TODO Make real?
-        tags: Tags::new(),   // TODO Which tags should go in here?
+        sizes: Sizes::new(),     // TODO Make real?
+        tags: MemberTags::new(), // TODO Which tags should go in here?
     };
 
     // Move RustMember into

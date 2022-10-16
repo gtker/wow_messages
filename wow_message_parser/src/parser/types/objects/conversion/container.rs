@@ -37,7 +37,7 @@ pub(crate) fn verify_and_set_members(
 ) {
     set_used_as_size_in(members);
 
-    set_verified_values(members, definers);
+    set_verified_values(members, definers, tags);
 
     check_complex_types_exist(members, containers, definers, tags, fileinfo);
 }
@@ -276,9 +276,9 @@ fn set_used_as_size_in(members: &mut [ParsedStructMember]) {
     }
 }
 
-fn set_verified_values(members: &mut [ParsedStructMember], definers: &[Definer]) {
+fn set_verified_values(members: &mut [ParsedStructMember], definers: &[Definer], tags: &Tags) {
     for d in all_definitions_mut(members) {
-        d.set_verified_value(definers);
+        d.set_verified_value(definers, tags);
     }
 }
 

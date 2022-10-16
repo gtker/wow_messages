@@ -224,14 +224,6 @@ impl Tags {
         self.compressed.as_ref()
     }
 
-    pub(crate) fn is_compressed(&self) -> bool {
-        self.compressed.is_some()
-    }
-
-    pub(crate) fn skip_serialize(&self) -> bool {
-        self.skip_serialize.unwrap_or(false)
-    }
-
     pub(crate) fn comment(&self) -> Option<&TagString> {
         self.comment.as_ref()
     }
@@ -400,5 +392,65 @@ impl TagString {
         }
 
         s
+    }
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Default)]
+pub(crate) struct MemberTags {
+    description: Option<TagString>,
+    compressed: Option<String>,
+    comment: Option<TagString>,
+    display: Option<String>,
+
+    skip_serialize: Option<bool>,
+}
+
+impl MemberTags {
+    pub(crate) fn from_parsed(
+        description: Option<TagString>,
+        compressed: Option<String>,
+        comment: Option<TagString>,
+        display: Option<String>,
+        skip_serialize: Option<bool>,
+    ) -> Self {
+        Self {
+            description,
+            compressed,
+            comment,
+            display,
+            skip_serialize,
+        }
+    }
+
+    pub(crate) fn new() -> Self {
+        Self::default()
+    }
+
+    pub(crate) fn description(&self) -> Option<&TagString> {
+        self.description.as_ref()
+    }
+
+    pub(crate) fn compressed(&self) -> Option<&String> {
+        self.compressed.as_ref()
+    }
+
+    pub(crate) fn is_compressed(&self) -> bool {
+        self.compressed.is_some()
+    }
+
+    pub(crate) fn skip_serialize(&self) -> bool {
+        self.skip_serialize.unwrap_or(false)
+    }
+
+    pub(crate) fn comment(&self) -> Option<&TagString> {
+        self.comment.as_ref()
+    }
+
+    pub(crate) fn display(&self) -> Option<&str> {
+        if let Some(v) = &self.display {
+            Some(v.as_str())
+        } else {
+            None
+        }
     }
 }

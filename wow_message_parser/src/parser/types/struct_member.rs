@@ -1,8 +1,8 @@
 use crate::parser::types::if_statement::IfStatement;
 use crate::parser::types::optional::OptionalStatement;
+use crate::parser::types::tags::MemberTags;
 use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
-use crate::Tags;
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub(crate) enum StructMember {
@@ -18,7 +18,7 @@ pub(crate) struct StructMemberDefinition {
     value: Option<ContainerValue>,
     used_as_size_in: Option<String>,
     used_in_if: bool,
-    tags: Tags,
+    tags: MemberTags,
 }
 
 impl StructMemberDefinition {
@@ -41,7 +41,7 @@ impl StructMemberDefinition {
         used_as_size_in: Option<String>,
         used_in_if: bool,
 
-        tags: Tags,
+        tags: MemberTags,
     ) -> Self {
         Self {
             name,
@@ -65,7 +65,7 @@ impl StructMemberDefinition {
         &self.value
     }
 
-    pub(crate) fn tags(&self) -> &Tags {
+    pub(crate) fn tags(&self) -> &MemberTags {
         &self.tags
     }
 }
