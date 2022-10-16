@@ -126,6 +126,9 @@ impl ParsedTags {
                 if let Ok(v) = w.parse::<u8>() {
                     if self.world_versions.get(&WorldVersion::All).is_none() {
                         self.login_versions.insert(LoginVersion::Specific(v));
+                        continue;
+                    } else {
+                        continue;
                     }
                 } else if w == "*" {
                     self.login_versions.clear();
@@ -139,6 +142,8 @@ impl ParsedTags {
                 if let Ok(v) = w.parse::<u8>() {
                     if self.world_versions.get(&WorldVersion::All).is_none() {
                         self.world_versions.insert(WorldVersion::Major(v));
+                        continue;
+                    } else {
                         continue;
                     }
                 } else if w == "*" {
