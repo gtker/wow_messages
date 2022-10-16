@@ -1,6 +1,6 @@
 # SMSG_GM_TICKET_STATUS_UPDATE
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
