@@ -20,6 +20,7 @@ pub(crate) const INVALID_INTEGER_TYPE: i32 = 12;
 pub(crate) const NON_MATCHING_IF_VARIABLES: i32 = 13;
 pub(crate) const UNSUPPORTED_UPCAST: i32 = 14;
 pub(crate) const OVERLAPPING_VERSIONS: i32 = 15;
+pub(crate) const BOTH_LOGIN_AND_WORLD_VERSIONS: i32 = 16;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -349,4 +350,15 @@ pub(crate) fn overlapping_versions(
     );
 
     wowm_exit(s, OVERLAPPING_VERSIONS);
+}
+
+pub(crate) fn object_has_both_versions(ty_name: &str, file_info: &FileInfo) -> ! {
+    let mut s = ErrorWriter::new("Object has both login and world versions.");
+
+    s.fileinfo(
+        file_info,
+        format!("Object '{ty_name}' has both login and world versions."),
+    );
+
+    wowm_exit(s, BOTH_LOGIN_AND_WORLD_VERSIONS)
 }

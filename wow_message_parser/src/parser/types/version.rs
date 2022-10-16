@@ -248,6 +248,15 @@ impl LoginVersion {
             LoginVersion::All => true,
         }
     }
+
+    /// Self completely fullfills other
+    pub(crate) fn fullfills(&self, other: &Self) -> bool {
+        if self == &Self::All {
+            return true;
+        }
+
+        self == other
+    }
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
@@ -356,4 +365,86 @@ impl MajorWorldVersion {
 pub enum AllVersions {
     Login(BTreeSet<LoginVersion>),
     World(BTreeSet<WorldVersion>),
+}
+
+impl AllVersions {
+    /// self and tags have any version in common at all
+    pub(crate) fn has_version_intersections(&self, other: &Self) -> bool {
+        match self {
+            AllVersions::Login(l) => match other {
+                AllVersions::Login(ol) => {
+                    for v in l {
+                        for ov in ol {
+                            if v.overlaps(ov) {
+                                return true;
+                            }
+                        }
+                    }
+
+                    false
+                }
+                AllVersions::World(_) => false,
+            },
+            AllVersions::World(w) => match other {
+                AllVersions::Login(_) => false,
+                AllVersions::World(ow) => {
+                    for v in w {
+                        for ov in ow {
+                            if v.overlaps(ov) {
+                                return true;
+                            }
+                        }
+                    }
+
+                    false
+                }
+            },
+        }
+    }
+
+    /// self is able to fulfill all version obligations for tags
+    pub(crate) fn fulfills_all(&self, other: &Self) -> bool {
+        match self {
+            AllVersions::Login(l) => match other {
+                AllVersions::Login(ol) => {
+                    for ov in ol {
+                        let mut covered = false;
+
+                        for v in l {
+                            if v.fullfills(ov) {
+                                covered = true;
+                            }
+                        }
+
+                        if !covered {
+                            return false;
+                        }
+                    }
+
+                    true
+                }
+                AllVersions::World(_) => false,
+            },
+            AllVersions::World(w) => match other {
+                AllVersions::Login(_) => false,
+                AllVersions::World(ow) => {
+                    for ov in ow {
+                        let mut covered = false;
+
+                        for v in w {
+                            if v.covers(ov) {
+                                covered = true;
+                            }
+                        }
+
+                        if !covered {
+                            return false;
+                        }
+                    }
+
+                    true
+                }
+            },
+        }
+    }
 }

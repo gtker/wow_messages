@@ -159,7 +159,7 @@ impl IrTags {
             description,
             comment,
             display: tags.display().map(|a| a.to_owned()),
-            version: if tags.has_logon_versions() {
+            version: if tags.has_login_version() {
                 Some(IrVersions::Login(
                     tags.logon_versions().map(|a| a.into()).collect(),
                 ))

@@ -9,8 +9,6 @@ use crate::Objects;
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct ObjectTags {
     all_versions: AllVersions,
-    login_versions: BTreeSet<LoginVersion>,
-    world_versions: BTreeSet<WorldVersion>,
     description: Option<TagString>,
     compressed: Option<String>,
     comment: Option<TagString>,
@@ -27,14 +25,11 @@ pub(crate) struct ObjectTags {
 impl ObjectTags {
     pub(crate) fn from_parsed(
         all_versions: AllVersions,
-        login_versions: BTreeSet<LoginVersion>,
-        world_versions: BTreeSet<WorldVersion>,
         description: Option<TagString>,
         compressed: Option<String>,
         comment: Option<TagString>,
         display: Option<String>,
         paste_versions: BTreeSet<WorldVersion>,
-
         skip_serialize: Option<bool>,
         is_test: Option<bool>,
         skip: Option<bool>,
@@ -43,8 +38,6 @@ impl ObjectTags {
     ) -> Self {
         Self {
             all_versions,
-            login_versions,
-            world_versions,
             description,
             compressed,
             comment,
@@ -74,8 +67,6 @@ impl ObjectTags {
 
         Self {
             all_versions: v.0,
-            login_versions: v.1,
-            world_versions: v.2,
             description: None,
             compressed: None,
             comment: None,
@@ -90,7 +81,10 @@ impl ObjectTags {
     }
 
     pub(crate) fn push_version(&mut self, v: WorldVersion) {
-        self.world_versions.insert(v);
+        match &mut self.all_versions {
+            AllVersions::Login(_) => unreachable!(),
+            AllVersions::World(w) => w.insert(v),
+        };
     }
 
     pub(crate) fn unimplemented(&self) -> bool {
@@ -107,33 +101,8 @@ impl ObjectTags {
 
     /// self and tags have any version in common at all
     pub(crate) fn has_version_intersections(&self, tags: &ObjectTags) -> bool {
-        if tags.test() && self.test() {
-            return true;
-        }
-
-        if ((tags.has_login_version() && self.has_wildcard_logon_version())
-            || (self.has_login_version() && tags.has_wildcard_logon_version()))
-            || ((tags.has_world_version() && self.has_wildcard_world_version())
-                || (self.has_world_version() && tags.has_wildcard_world_version()))
-        {
-            return true;
-        }
-
-        for t in self.logon_versions() {
-            if tags.logon_versions().any(|a| a == t) {
-                return true;
-            }
-        }
-
-        for outer in self.versions() {
-            for inner in tags.versions() {
-                if outer.overlaps(&inner) {
-                    return true;
-                }
-            }
-        }
-
-        false
+        self.all_versions
+            .has_version_intersections(&tags.all_versions)
     }
 
     pub(crate) fn is_main_version(&self) -> bool {
@@ -146,28 +115,22 @@ impl ObjectTags {
         self.has_version_intersections(&versions) || self.has_version_intersections(&logon)
     }
 
-    pub(crate) fn has_wildcard_logon_version(&self) -> bool {
-        self.logon_versions().any(|a| a == LoginVersion::All)
-    }
-
-    pub(crate) fn has_wildcard_world_version(&self) -> bool {
-        self.versions().any(|a| a == WorldVersion::All)
-    }
-
     pub(crate) fn logon_versions(&self) -> impl Iterator<Item = LoginVersion> {
-        self.login_versions.clone().into_iter()
-    }
-
-    pub(crate) fn has_logon_versions(&self) -> bool {
-        self.logon_versions().next().is_some()
+        match &self.all_versions {
+            AllVersions::Login(i) => i.clone().into_iter(),
+            AllVersions::World(_) => BTreeSet::new().into_iter(),
+        }
     }
 
     pub(crate) fn versions(&self) -> impl Iterator<Item = WorldVersion> {
-        self.world_versions.clone().into_iter()
+        match &self.all_versions {
+            AllVersions::World(w) => w.clone().into_iter(),
+            AllVersions::Login(_) => BTreeSet::new().into_iter(),
+        }
     }
 
     pub(crate) fn has_world_version(&self) -> bool {
-        self.versions().next().is_some()
+        matches!(self.all_versions, AllVersions::World(_))
     }
 
     pub(crate) fn main_versions(&self) -> impl Iterator<Item = Version> + '_ {
@@ -196,41 +159,11 @@ impl ObjectTags {
 
     /// self is able to fulfill all version obligations for tags
     pub(crate) fn fulfills_all(&self, tags: &Self) -> bool {
-        for version in tags.logon_versions() {
-            if !self.logon_versions().any(|a| a == version)
-                && !self.logon_versions().any(|a| a == LoginVersion::All)
-            {
-                return false;
-            }
-        }
-
-        for version in tags.versions() {
-            let mut covered = false;
-
-            for self_version in self.versions() {
-                if self_version.covers(&version) {
-                    covered = true;
-                }
-            }
-
-            if !covered {
-                return false;
-            }
-        }
-
-        true
+        self.all_versions.fulfills_all(&tags.all_versions)
     }
 
     pub(crate) fn has_login_version(&self) -> bool {
-        if !self.login_versions.is_empty() {
-            assert!(self.world_versions.is_empty());
-            return true;
-        } else if !self.world_versions.is_empty() {
-            assert!(self.login_versions.is_empty());
-            return false;
-        }
-
-        false
+        matches!(self.all_versions, AllVersions::Login(_))
     }
 
     pub(crate) fn description(&self) -> Option<&TagString> {
