@@ -12,10 +12,7 @@ pub(crate) struct ObjectTags {
     description: Option<TagString>,
     compressed: Option<String>,
     comment: Option<TagString>,
-    display: Option<String>,
-    paste_versions: BTreeSet<WorldVersion>,
 
-    skip_serialize: Option<bool>,
     is_test: Option<bool>,
     skip: Option<bool>,
     unimplemented: Option<bool>,
@@ -28,9 +25,6 @@ impl ObjectTags {
         description: Option<TagString>,
         compressed: Option<String>,
         comment: Option<TagString>,
-        display: Option<String>,
-        paste_versions: BTreeSet<WorldVersion>,
-        skip_serialize: Option<bool>,
         is_test: Option<bool>,
         skip: Option<bool>,
         unimplemented: Option<bool>,
@@ -41,9 +35,6 @@ impl ObjectTags {
             description,
             compressed,
             comment,
-            display,
-            paste_versions,
-            skip_serialize,
             is_test,
             skip,
             unimplemented,
@@ -70,9 +61,6 @@ impl ObjectTags {
             description: None,
             compressed: None,
             comment: None,
-            display: None,
-            paste_versions: Default::default(),
-            skip_serialize: None,
             is_test: None,
             skip: None,
             unimplemented: None,
@@ -176,14 +164,6 @@ impl ObjectTags {
 
     pub(crate) fn comment(&self) -> Option<&TagString> {
         self.comment.as_ref()
-    }
-
-    pub(crate) fn display(&self) -> Option<&str> {
-        if let Some(v) = &self.display {
-            Some(v.as_str())
-        } else {
-            None
-        }
     }
 
     pub(crate) fn is_in_base(&self) -> bool {
