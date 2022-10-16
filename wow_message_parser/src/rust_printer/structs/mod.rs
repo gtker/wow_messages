@@ -2,6 +2,7 @@ use crate::file_utils::{get_import_path, get_world_shared_path};
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
+use crate::parser::types::tags::MemberTags;
 use crate::parser::types::version::{Version, WorldVersion};
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
@@ -121,7 +122,7 @@ fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
         }
 
         if let Some(optional) = e.rust_object().optional() {
-            print_docc_description_and_comment(s, optional.tags(), o, e.tags());
+            print_member_docc_description_and_comment(s, &MemberTags::new(), o, e.tags());
             s.wln(format!(
                 "pub {name}: Option<{ty}>,",
                 name = optional.name(),

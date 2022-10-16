@@ -1,11 +1,9 @@
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
-use crate::Tags;
 
 #[derive(Debug, Clone, Eq)]
 pub(crate) struct ParsedOptionalStatement {
     pub name: String,
     pub members: Vec<ParsedStructMember>,
-    pub tags: Tags,
 }
 
 impl PartialEq for ParsedOptionalStatement {
@@ -19,7 +17,6 @@ impl ParsedOptionalStatement {
         Self {
             name: name.to_string(),
             members,
-            tags: Tags::new(),
         }
     }
 

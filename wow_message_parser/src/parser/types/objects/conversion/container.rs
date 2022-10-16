@@ -200,7 +200,6 @@ fn parsed_member_to_member(
             StructMember::OptionalStatement(OptionalStatement::new(
                 o.name,
                 parsed_members_to_members(c, o.members, containers, definers, tags),
-                o.tags,
             ))
         }
     }

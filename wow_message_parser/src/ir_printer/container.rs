@@ -90,7 +90,6 @@ impl IrContainer {
 pub(crate) struct IrOptionalStatement {
     name: String,
     members: Vec<IrStructMember>,
-    tags: IrTags,
 }
 
 impl From<&OptionalStatement> for IrOptionalStatement {
@@ -100,7 +99,6 @@ impl From<&OptionalStatement> for IrOptionalStatement {
         Self {
             name: v.name().to_string(),
             members,
-            tags: IrTags::from_tags(v.tags()),
         }
     }
 }

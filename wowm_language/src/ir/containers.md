@@ -137,7 +137,6 @@ The optional statement consists of:
 
 * `name`, an identifier for the optional block.
 * `members`, an array of [Members](#member).
-* `tags`, a [Tags](tags.md) object.
 
 ## Test
 

@@ -1,11 +1,9 @@
 use crate::parser::types::struct_member::StructMember;
-use crate::Tags;
 
 #[derive(Debug, Clone, Eq)]
 pub(crate) struct OptionalStatement {
     name: String,
     members: Vec<StructMember>,
-    tags: Tags,
 }
 
 impl PartialEq for OptionalStatement {
@@ -15,12 +13,8 @@ impl PartialEq for OptionalStatement {
 }
 
 impl OptionalStatement {
-    pub(crate) fn new(name: String, members: Vec<StructMember>, tags: Tags) -> Self {
-        Self {
-            name,
-            members,
-            tags,
-        }
+    pub(crate) fn new(name: String, members: Vec<StructMember>) -> Self {
+        Self { name, members }
     }
 
     pub(crate) fn name(&self) -> &str {
@@ -29,9 +23,5 @@ impl OptionalStatement {
 
     pub(crate) fn members(&self) -> &[StructMember] {
         &self.members
-    }
-
-    pub(crate) fn tags(&self) -> &Tags {
-        &self.tags
     }
 }
