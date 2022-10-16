@@ -1,4 +1,5 @@
 use crate::file_info::FileInfo;
+use crate::parser::types::tags::MemberTags;
 use crate::ObjectTags;
 
 #[derive(Debug, Clone)]
@@ -46,11 +47,11 @@ pub(crate) enum ParsedTestValue {
 pub(crate) struct ParsedTestCaseMember {
     pub variable_name: String,
     pub value: ParsedTestValue,
-    pub tags: ObjectTags,
+    pub tags: MemberTags,
 }
 
 impl ParsedTestCaseMember {
-    pub(crate) fn new(name: &str, value: ParsedTestValue, tags: ObjectTags) -> Self {
+    pub(crate) fn new(name: &str, value: ParsedTestValue, tags: MemberTags) -> Self {
         Self {
             variable_name: name.to_string(),
             value,

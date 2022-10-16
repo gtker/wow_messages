@@ -1,6 +1,6 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::array::ArraySize;
-use crate::parser::types::tags::ObjectTags;
+use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskType;
 
@@ -63,7 +63,7 @@ impl TestCase {
 pub(crate) struct TestCaseMember {
     variable_name: String,
     value: TestValue,
-    tags: ObjectTags,
+    tags: MemberTags,
 }
 
 impl TestCaseMember {
@@ -75,11 +75,11 @@ impl TestCaseMember {
         &self.value
     }
 
-    pub(crate) fn tags(&self) -> &ObjectTags {
+    pub(crate) fn tags(&self) -> &MemberTags {
         &self.tags
     }
 
-    pub(crate) fn new(name: String, value: TestValue, tags: ObjectTags) -> Self {
+    pub(crate) fn new(name: String, value: TestValue, tags: MemberTags) -> Self {
         Self {
             variable_name: name,
             value,

@@ -1,7 +1,9 @@
 use std::collections::BTreeSet;
 
+use crate::error_printer::object_has_no_versions;
+use crate::file_info::FileInfo;
 use crate::parser::types::tags::{MemberTags, TagString};
-use crate::parser::types::version::{LoginVersion, WorldVersion};
+use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
     ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
     RUST_BASE_TYPE, SKIP_SERIALIZE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
@@ -66,7 +68,7 @@ impl ParsedTags {
         }
     }
 
-    pub(crate) fn into_tags(self) -> ObjectTags {
+    pub(crate) fn into_tags(self, ty_name: &str, file_info: &FileInfo) -> ObjectTags {
         ObjectTags::from_parsed(
             self.login_versions,
             self.world_versions,

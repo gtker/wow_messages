@@ -2,11 +2,11 @@ use std::collections::BTreeSet;
 use std::fmt::Write;
 
 use crate::file_utils::get_import_path;
-use crate::parser::types::version::Version;
+use crate::parser::types::version::{AllVersions, Version};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
 
-#[derive(Debug, Eq, PartialEq, Clone, Default)]
+#[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct ObjectTags {
     login_versions: BTreeSet<LoginVersion>,
     world_versions: BTreeSet<WorldVersion>,
@@ -55,17 +55,34 @@ impl ObjectTags {
         }
     }
 
-    pub(crate) fn new() -> Self {
-        Self::default()
-    }
-
     pub(crate) fn new_with_version(version: Version) -> Self {
-        let mut s = Self::new();
-        match version {
-            Version::Login(l) => s.login_versions.insert(l),
-            Version::World(l) => s.world_versions.insert(l),
+        let v = match version {
+            Version::Login(l) => {
+                let mut s = BTreeSet::new();
+                s.insert(l);
+                (AllVersions::Login(s.clone()), s, BTreeSet::new())
+            }
+            Version::World(l) => {
+                let mut s = BTreeSet::new();
+                s.insert(l);
+                (AllVersions::World(s.clone()), BTreeSet::new(), s)
+            }
         };
-        s
+
+        Self {
+            login_versions: v.1,
+            world_versions: v.2,
+            description: None,
+            compressed: None,
+            comment: None,
+            display: None,
+            paste_versions: Default::default(),
+            skip_serialize: None,
+            is_test: None,
+            skip: None,
+            unimplemented: None,
+            rust_base_ty: None,
+        }
     }
 
     pub(crate) fn push_version(&mut self, v: WorldVersion) {

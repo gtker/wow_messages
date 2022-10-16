@@ -2,7 +2,9 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::version::Version;
 use crate::rust_printer::enums::print_wowm_definition;
-use crate::rust_printer::{print_docc_description_and_comment, Writer};
+use crate::rust_printer::{
+    print_docc_description_and_comment, print_member_docc_description_and_comment, Writer,
+};
 use crate::Objects;
 
 pub(crate) fn print_flag(e: &Definer, o: &Objects, version: Version) -> Writer {
@@ -81,7 +83,7 @@ fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
                 s.wln(format!("(self.inner & Self::{name}) != 0", name = f.name()));
             });
 
-            print_docc_description_and_comment(s, f.tags(), o, e.tags());
+            print_member_docc_description_and_comment(s, f.tags(), o, e.tags());
             s.funcn_pub_const(format!("new_{name}()", name = f.name()), "Self", |s| {
                 s.wln(format!("Self {{ inner: Self::{name} }}", name = f.name()));
             });

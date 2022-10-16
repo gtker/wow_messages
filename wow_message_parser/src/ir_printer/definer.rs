@@ -88,7 +88,7 @@ impl From<&SelfValueDefinerField> for IrSelfValueDefinerField {
     fn from(v: &SelfValueDefinerField) -> Self {
         Self {
             name: v.name().to_string(),
-            tags: IrTags::from_tags(v.tags()),
+            tags: IrTags::from_member_tags(v.tags()),
         }
     }
 }
@@ -108,7 +108,7 @@ impl From<&DefinerField> for IrDefinerField {
                 int: a.value().int(),
                 original: a.value().original().to_string(),
             },
-            tags: IrTags::from_tags(a.tags()),
+            tags: IrTags::from_member_tags(a.tags()),
         }
     }
 }

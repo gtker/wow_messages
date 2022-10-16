@@ -2,6 +2,7 @@ use core::cmp::{Ord, Ordering, PartialOrd};
 use core::fmt::{Display, Formatter};
 use core::option::Option;
 use core::option::Option::Some;
+use std::collections::BTreeSet;
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
 pub enum WorldVersion {
@@ -349,4 +350,10 @@ impl MajorWorldVersion {
             MajorWorldVersion::Wrath => true,
         }
     }
+}
+
+#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Clone)]
+pub enum AllVersions {
+    Login(BTreeSet<LoginVersion>),
+    World(BTreeSet<WorldVersion>),
 }

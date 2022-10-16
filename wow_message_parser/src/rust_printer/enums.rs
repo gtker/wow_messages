@@ -1,7 +1,9 @@
 use crate::file_utils::get_import_path;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::version::Version;
-use crate::rust_printer::{print_docc_description_and_comment, Writer};
+use crate::rust_printer::{
+    print_docc_description_and_comment, print_member_docc_description_and_comment, Writer,
+};
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::Objects;
 
@@ -54,7 +56,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
     };
     s.new_enum(visibility, e.name(), |s| {
         for field in e.fields() {
-            print_docc_description_and_comment(s, field.tags(), o, e.tags());
+            print_member_docc_description_and_comment(s, field.tags(), o, e.tags());
 
             s.wln(format!("{},", field.rust_name()));
         }

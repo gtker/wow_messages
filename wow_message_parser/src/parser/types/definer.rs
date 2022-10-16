@@ -2,7 +2,7 @@ use crate::error_printer::{duplicate_definer_value, invalid_definer_value};
 use crate::file_info::FileInfo;
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::sizes::Sizes;
-use crate::parser::types::tags::ObjectTags;
+use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::{compare_name_and_tags, IntegerType};
 use crate::parser::utility;
 use crate::rust_printer::{field_name_to_rust_name, DefinerType};
@@ -15,11 +15,11 @@ pub(crate) struct DefinerField {
     name: String,
     rust_name: String,
     value: DefinerValue,
-    tags: ObjectTags,
+    tags: MemberTags,
 }
 
 impl DefinerField {
-    pub(crate) fn new(name: &str, value: DefinerValue, tags: ObjectTags) -> Self {
+    pub(crate) fn new(name: &str, value: DefinerValue, tags: MemberTags) -> Self {
         Self {
             name: name.to_string(),
             rust_name: field_name_to_rust_name(name),
@@ -40,7 +40,7 @@ impl DefinerField {
         &self.value
     }
 
-    pub(crate) fn tags(&self) -> &ObjectTags {
+    pub(crate) fn tags(&self) -> &MemberTags {
         &self.tags
     }
 }
@@ -86,11 +86,11 @@ impl DefinerValue {
 pub(crate) struct SelfValueDefinerField {
     name: String,
     rust_name: String,
-    tags: ObjectTags,
+    tags: MemberTags,
 }
 
 impl SelfValueDefinerField {
-    pub(crate) fn new(name: &str, tags: ObjectTags) -> Self {
+    pub(crate) fn new(name: &str, tags: MemberTags) -> Self {
         Self {
             name: name.to_string(),
             rust_name: field_name_to_rust_name(name),
@@ -106,7 +106,7 @@ impl SelfValueDefinerField {
         &self.rust_name
     }
 
-    pub(crate) fn tags(&self) -> &ObjectTags {
+    pub(crate) fn tags(&self) -> &MemberTags {
         &self.tags
     }
 }

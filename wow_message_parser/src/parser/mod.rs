@@ -223,7 +223,7 @@ fn parse_test_values(m: Pair<Rule>, test_members: &mut Vec<ParsedTestCaseMember>
     test_members.push(ParsedTestCaseMember::new(
         member_name,
         member_value,
-        kvs.into_tags(),
+        kvs.into_member_tags(),
     ));
 }
 
@@ -245,7 +245,13 @@ fn parse_test(t: &mut Pairs<Rule>, tags: &ParsedTags, file_info: FileInfo) -> Pa
     let mut extra_kvs = t.find(|a| a.as_rule() == Rule::object_key_values);
     let kvs = parse_object_key_values(&mut extra_kvs, tags);
 
-    ParsedTestCase::new(name, test_members, raw_bytes, kvs.into_tags(), file_info)
+    ParsedTestCase::new(
+        name,
+        test_members,
+        raw_bytes,
+        kvs.into_tags(name, &file_info),
+        file_info,
+    )
 }
 
 fn parse_struct(
@@ -295,7 +301,13 @@ fn parse_struct(
             kvs.insert(UNIMPLEMENTED, "true");
             let v = vec![unimplemented_member()];
 
-            return ParsedContainer::new(identifier, v, kvs.into_tags(), container_type, file_info);
+            return ParsedContainer::new(
+                identifier,
+                v,
+                kvs.into_tags(identifier, &file_info),
+                container_type,
+                file_info,
+            );
         }
         members.push(parse_struct_member(member, identifier, &file_info));
     }
@@ -306,7 +318,7 @@ fn parse_struct(
     ParsedContainer::new(
         identifier,
         members,
-        kvs.into_tags(),
+        kvs.into_tags(identifier, &file_info),
         container_type,
         file_info,
     )
@@ -545,7 +557,7 @@ pub(crate) fn parse_enum(
             }
             self_value = Some(SelfValueDefinerField::new(
                 identifier.as_str(),
-                kvs.into_tags(),
+                kvs.into_member_tags(),
             ));
         } else {
             fields.push(DefinerField::new(
@@ -556,7 +568,7 @@ pub(crate) fn parse_enum(
                     identifier.as_str(),
                     &file_info,
                 ),
-                kvs.into_tags(),
+                kvs.into_member_tags(),
             ));
         }
     }
@@ -571,7 +583,7 @@ pub(crate) fn parse_enum(
         fields,
         IntegerType::from_str(basic_type.as_str(), ident.as_str(), &file_info),
         self_value,
-        extras.into_tags(),
+        extras.into_tags(ident.as_str(), &file_info),
         file_info,
     )
 }

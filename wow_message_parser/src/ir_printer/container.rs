@@ -429,7 +429,7 @@ impl From<&TestCaseMember> for IrTestCaseMember {
         Self {
             variable_name: v.name().to_string(),
             value: v.value().into(),
-            tags: IrTags::from_tags(v.tags()),
+            tags: IrTags::from_member_tags(v.tags()),
         }
     }
 }
