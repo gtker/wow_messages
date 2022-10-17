@@ -370,7 +370,18 @@ pub(crate) const FIELDS: [MemberType; 367] = [
         1,
         UfType::Float,
     ),
-    MemberType::new(UpdateMaskType::Unit, "BYTES_1", 0x004a, 1, UfType::Bytes),
+    MemberType::new(
+        UpdateMaskType::Unit,
+        "BYTES_1",
+        0x004a,
+        1,
+        UfType::BytesWith(
+            ByteType::new("stand_state", "UnitStandState"),
+            ByteType::byte("unknown1"),
+            ByteType::byte("unknown2"),
+            ByteType::byte("unknown3"),
+        ),
+    ),
     MemberType::new(UpdateMaskType::Unit, "PETNUMBER", 0x004b, 1, UfType::Int),
     MemberType::new(
         UpdateMaskType::Unit,

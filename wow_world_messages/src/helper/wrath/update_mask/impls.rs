@@ -4,6 +4,7 @@ use crate::wrath::{Race};
 use crate::wrath::{Class};
 use crate::wrath::{Gender};
 use crate::wrath::{Power};
+use crate::wrath::{UnitStandState};
 use crate::wrath::{UpdateContainer, UpdateContainerBuilder, UpdateCorpse, UpdateCorpseBuilder, UpdateDynamicObject, UpdateDynamicObjectBuilder, UpdateGameObject, UpdateGameObjectBuilder, UpdateItem, UpdateItemBuilder, UpdatePlayer, UpdatePlayerBuilder, UpdateUnit, UpdateUnitBuilder};
 
 impl UpdateItemBuilder {
@@ -867,9 +868,9 @@ impl UpdateUnitBuilder {
         self
     }
 
-    pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_1(mut self, stand_state: UnitStandState, unknown1: u8, unknown2: u8, unknown3: u8) -> Self {
         self.header_set(74);
-        self.values.insert(74, u32::from_le_bytes([a, b, c, d]));
+        self.values.insert(74, u32::from_le_bytes([stand_state.as_int(), unknown1, unknown2, unknown3]));
         self
     }
 
@@ -1448,9 +1449,9 @@ impl UpdatePlayerBuilder {
         self
     }
 
-    pub fn set_unit_BYTES_1(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_unit_BYTES_1(mut self, stand_state: UnitStandState, unknown1: u8, unknown2: u8, unknown3: u8) -> Self {
         self.header_set(74);
-        self.values.insert(74, u32::from_le_bytes([a, b, c, d]));
+        self.values.insert(74, u32::from_le_bytes([stand_state.as_int(), unknown1, unknown2, unknown3]));
         self
     }
 
@@ -4751,16 +4752,16 @@ impl UpdateUnit {
         self.values.get(&73).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
-    pub fn set_unit_BYTES_1(&mut self, a: u8, b: u8, c: u8, d: u8) {
+    pub fn set_unit_BYTES_1(&mut self, stand_state: UnitStandState, unknown1: u8, unknown2: u8, unknown3: u8) {
         self.header_set(74);
-        self.values.insert(74, u32::from_le_bytes([a, b, c, d]));
+        self.values.insert(74, u32::from_le_bytes([stand_state.as_int(), unknown1, unknown2, unknown3]));
     }
 
-    pub fn unit_BYTES_1(&self) -> Option<(u8, u8, u8, u8)> {
+    pub fn unit_BYTES_1(&self) -> Option<(UnitStandState, u8, u8, u8)> {
         if let Some(v) = self.values.get(&74) {
             let v = v.to_le_bytes();
-            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
-            Some((a, b, c, d))
+            let (stand_state, unknown1, unknown2, unknown3) = (v[0], v[1], v[2], v[3]);
+            Some((stand_state.try_into().unwrap(), unknown1, unknown2, unknown3))
         } else {
             None
         }
@@ -5671,16 +5672,16 @@ impl UpdatePlayer {
         self.values.get(&73).map(|v| f32::from_le_bytes(v.to_le_bytes()))
     }
 
-    pub fn set_unit_BYTES_1(&mut self, a: u8, b: u8, c: u8, d: u8) {
+    pub fn set_unit_BYTES_1(&mut self, stand_state: UnitStandState, unknown1: u8, unknown2: u8, unknown3: u8) {
         self.header_set(74);
-        self.values.insert(74, u32::from_le_bytes([a, b, c, d]));
+        self.values.insert(74, u32::from_le_bytes([stand_state.as_int(), unknown1, unknown2, unknown3]));
     }
 
-    pub fn unit_BYTES_1(&self) -> Option<(u8, u8, u8, u8)> {
+    pub fn unit_BYTES_1(&self) -> Option<(UnitStandState, u8, u8, u8)> {
         if let Some(v) = self.values.get(&74) {
             let v = v.to_le_bytes();
-            let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
-            Some((a, b, c, d))
+            let (stand_state, unknown1, unknown2, unknown3) = (v[0], v[1], v[2], v[3]);
+            Some((stand_state.try_into().unwrap(), unknown1, unknown2, unknown3))
         } else {
             None
         }
