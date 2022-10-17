@@ -5,7 +5,8 @@ use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::{
     ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
-    CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, SERVER_MESSAGE_TRAIT_NAME, TOKIO_IMPORT,
+    CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+    TOKIO_IMPORT,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -111,6 +112,8 @@ pub(crate) fn includes(
                     module_name = get_import_path(version)
                 ));
             }
+
+            s.wln(format!("use {};", PARSE_ERROR));
         }
         _ => {}
     }
@@ -173,7 +176,7 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                 ContainerType::Msg(i) => i,
                 _ => unreachable!()
             };
-            s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body(&mut r, body_size)?)),",
+            s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body(&mut r, body_size).map_err(|a| {{ if let ParseError::Io(io) = a {{ ParseError::BufferSizeTooSmall {{ opcode: {opcode:#06X}, size: body_size, io, }} }} else {{ a }} }})?)),",
                           opcode = opcode,
                           name = e.name(),
                           enum_name = get_enumerator_name(e.name())));
