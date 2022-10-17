@@ -160,9 +160,11 @@ impl Objects {
         let mut v = self
             .wireshark_containers()
             .into_iter()
-            .filter(|a| match a.container_type() {
-                ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => true,
-                _ => false,
+            .filter(|a| {
+                matches!(
+                    a.container_type(),
+                    ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_)
+                )
             })
             .collect::<Vec<&Container>>();
 

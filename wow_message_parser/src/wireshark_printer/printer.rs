@@ -410,7 +410,7 @@ fn print_container(
         e.name()
     ));
     for m in e.members() {
-        if !print_member(s, m, &e, wo, e.tags(), o, variables) {
+        if !print_member(s, m, e, wo, e.tags(), o, variables) {
             return false;
         }
     }

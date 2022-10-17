@@ -219,8 +219,9 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                         // ZLib compression is not predictable, so we compress the data and count the bytes.
                         if m.tags().is_compressed() {
                             format!(
-                                "crate::util::zlib_compressed_size(&{prefix}{name})",
+                                "crate::util::zlib_compressed_size({ref}{prefix}{name})",
                                 prefix = prefix,
+                                ref = if prefix.is_empty() { "" } else {"&"},
                                 name = m.name()
                             )
                         } else {

@@ -233,7 +233,7 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
                 1
                 + 4 // chat_data_line_count: u32
                 + 4 // chat_data_size_uncompressed: u32
-                + crate::util::zlib_compressed_size(&compressed_chat_data) // compressed_chat_data: u8[-]
+                + crate::util::zlib_compressed_size(compressed_chat_data) // compressed_chat_data: u8[-]
             }
             Self::Guild => {
                 1

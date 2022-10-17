@@ -18,7 +18,7 @@ pub(crate) fn print_world_opcodes(
     version: &MajorWorldVersion,
     container_type: ContainerType,
 ) -> Writer {
-    let mut s = Writer::new(&get_world_version_path(&version));
+    let mut s = Writer::new(&get_world_version_path(version));
     let ty = match container_type {
         ContainerType::SMsg(_) => SMSG_NAME,
         ContainerType::CMsg(_) => CMSG_NAME,

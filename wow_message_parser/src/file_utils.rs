@@ -266,10 +266,10 @@ impl ModFiles {
         match &version {
             Version::Login(_) => unimplemented!(),
             Version::World(version) => {
-                let world_path = path_utils::get_world_filepath(name, &version);
-                let base_path = path_utils::get_base_filepath(name, &version);
+                let world_path = path_utils::get_world_filepath(name, version);
+                let base_path = path_utils::get_base_filepath(name, version);
 
-                self.add_world_file(name, &version, tags);
+                self.add_world_file(name, version, tags);
 
                 create_and_overwrite_if_not_same_contents(world_s, &world_path);
                 create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
@@ -301,9 +301,9 @@ impl ModFiles {
                     .insert(path.canonicalize().unwrap(), true);
             }
             Version::World(version) => {
-                let path = path_utils::get_world_filepath(name, &version);
+                let path = path_utils::get_world_filepath(name, version);
 
-                self.add_world_file(name, &version, tags);
+                self.add_world_file(name, version, tags);
 
                 create_and_overwrite_if_not_same_contents(s, &path);
 
@@ -333,7 +333,7 @@ pub(crate) fn get_world_shared_path(ty_name: &str, tags: &ObjectTags) -> String 
 pub(crate) fn get_import_path(version: Version) -> String {
     match &version {
         Version::Login(f) => get_login_logon_version_path(f),
-        Version::World(f) => get_world_version_path(&f),
+        Version::World(f) => get_world_version_path(f),
     }
 }
 

@@ -286,14 +286,7 @@ fn parse_struct(
             kvs.insert(UNIMPLEMENTED, "true");
             let v = vec![unimplemented_member()];
 
-            apply_tags(
-                identifier,
-                v,
-                kvs,
-                file_info.clone(),
-                container_type,
-                objects,
-            );
+            apply_tags(identifier, v, kvs, file_info, container_type, objects);
             return;
         }
         members.push(parse_struct_member(member, identifier, &file_info));
