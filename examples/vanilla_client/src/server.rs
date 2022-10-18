@@ -10,7 +10,7 @@ use wow_world_messages::vanilla::{
     SMSG_AUTH_RESPONSE_WorldResult, CMSG_AUTH_SESSION, CMSG_CHAR_ENUM, CMSG_PLAYER_LOGIN,
     SMSG_AUTH_CHALLENGE, SMSG_AUTH_RESPONSE, SMSG_CHAR_ENUM,
 };
-use wow_world_messages::wrath::AddonInfo;
+use wow_world_messages::vanilla::AddonInfo;
 
 pub fn server(
     stream: &mut TcpStream,
