@@ -11,6 +11,7 @@ use crate::wireshark_printer::{
     name_to_hf, pretty_name, server_to_client_name, ui_name,
 };
 use crate::{Container, ObjectTags, Objects};
+use std::fmt::UpperHex;
 
 pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
     let mut s = Writer::new("");
@@ -520,15 +521,29 @@ pub(crate) fn print_enums(w: &WiresharkObject) -> Writer {
 fn print_typedef(s: &mut Writer, e: &Definer) {
     let hex_width = e.hex_digit_width();
 
+    struct ReallySigned(i32);
+
+    impl UpperHex for ReallySigned {
+        fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+            let prefix = if f.alternate() { "0x" } else { "" };
+            let bare_hex = format!("{:X}", self.0.abs());
+            f.pad_integral(self.0 >= 0, prefix, &bare_hex)
+        }
+    }
+
     s.body_closing_with(
         "typedef enum",
         |s| {
             for enumerator in e.fields() {
+                // C can not have different enum types other than 'int', so we'll need to
+                // make the integers signed. Rust does not format hex numbers sign aware, so
+                // we'll need `ReallySigned` to wrap.
+                let value = ReallySigned(enumerator.value().int() as i32);
+                let value = format!("{value:#0hex_width$X}");
+
                 s.wln(format!(
-                    "{enumerator_name} = {value:#0hex_width$X},",
+                    "{enumerator_name} = {value},",
                     enumerator_name = enumerator_name(e.name(), enumerator.name()),
-                    value = enumerator.value().int(),
-                    hex_width = hex_width,
                 ))
             }
         },
