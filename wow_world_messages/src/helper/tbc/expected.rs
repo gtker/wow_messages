@@ -1,5 +1,6 @@
 use crate::errors::ExpectedOpcodeError;
 use crate::tbc::{ClientMessage, ServerMessage};
+#[cfg(feature = "encryption")]
 use wow_srp::vanilla_header::{DecrypterHalf, CLIENT_HEADER_LENGTH, SERVER_HEADER_LENGTH};
 
 const CLIENT_OPCODE_LENGTH: u16 = 4;
@@ -18,7 +19,7 @@ pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
     read_server_body(&mut buf.as_slice(), size, opcode as u32)
 }
 
-#[cfg(feature = "sync")]
+#[cfg(all(feature = "sync", feature = "encryption"))]
 pub fn expect_server_message_encryption<M: ServerMessage, R: std::io::Read>(
     r: &mut R,
     d: &mut DecrypterHalf,
@@ -36,7 +37,7 @@ pub fn expect_server_message_encryption<M: ServerMessage, R: std::io::Read>(
     read_server_body(&mut buf.as_slice(), size, opcode as u32)
 }
 
-#[cfg(feature = "tokio")]
+#[cfg(all(feature = "tokio", feature = "encryption"))]
 pub async fn tokio_expect_client_message_encryption<
     M: ClientMessage,
     R: tokio::io::AsyncReadExt + Unpin + Send,
