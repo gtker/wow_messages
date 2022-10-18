@@ -1,4 +1,5 @@
 use crate::vanilla::{ServerMessage, ClientMessage};
+#[cfg(feature = "encryption")]
 use wow_srp::vanilla_header::{DecrypterHalf, EncrypterHalf};
 
 #[cfg(feature = "tokio")]
@@ -937,7 +938,7 @@ impl ClientOpcodeMessage {
         r.read_exact(&mut buf)?;
         Self::read_opcodes(opcode, size, &buf)
     }
-    #[cfg(feature = "sync")]
+    #[cfg(all(feature = "sync", feature = "encryption"))]
     pub fn read_encrypted<R: std::io::Read>(r: &mut R, d: &mut DecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header)?;
@@ -959,7 +960,7 @@ impl ClientOpcodeMessage {
         r.read_exact(&mut buf).await?;
         Self::read_opcodes(opcode, size, &buf)
     }
-    #[cfg(feature = "tokio")]
+    #[cfg(all(feature = "tokio", feature = "encryption"))]
     pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R, d: &mut DecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
@@ -981,7 +982,7 @@ impl ClientOpcodeMessage {
         r.read_exact(&mut buf).await?;
         Self::read_opcodes(opcode, size, &buf)
     }
-    #[cfg(feature = "async-std")]
+    #[cfg(all(feature = "async-std", feature = "encryption"))]
     pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R, d: &mut DecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
@@ -994,7 +995,7 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(opcode, body_size, &buf)
     }
 
-    #[cfg(feature = "sync")]
+    #[cfg(all(feature = "sync", feature = "encryption"))]
     pub fn write_encrypted_client<W: std::io::Write>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
@@ -1612,7 +1613,7 @@ impl ClientOpcodeMessage {
         }
     }
 
-    #[cfg(feature = "tokio")]
+    #[cfg(all(feature = "tokio", feature = "encryption"))]
     pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2230,7 +2231,7 @@ impl ClientOpcodeMessage {
         }
     }
 
-    #[cfg(feature = "async-std")]
+    #[cfg(all(feature = "async-std", feature = "encryption"))]
     pub async fn astd_write_encrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -6057,7 +6058,7 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut buf)?;
         Self::read_opcodes(opcode, size, &buf)
     }
-    #[cfg(feature = "sync")]
+    #[cfg(all(feature = "sync", feature = "encryption"))]
     pub fn read_encrypted<R: std::io::Read>(r: &mut R, d: &mut DecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header)?;
@@ -6079,7 +6080,7 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut buf).await?;
         Self::read_opcodes(opcode, size, &buf)
     }
-    #[cfg(feature = "tokio")]
+    #[cfg(all(feature = "tokio", feature = "encryption"))]
     pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R, d: &mut DecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
@@ -6101,7 +6102,7 @@ impl ServerOpcodeMessage {
         r.read_exact(&mut buf).await?;
         Self::read_opcodes(opcode, size, &buf)
     }
-    #[cfg(feature = "async-std")]
+    #[cfg(all(feature = "async-std", feature = "encryption"))]
     pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R, d: &mut DecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
@@ -6114,7 +6115,7 @@ impl ServerOpcodeMessage {
         Self::read_opcodes(opcode, body_size, &buf)
     }
 
-    #[cfg(feature = "sync")]
+    #[cfg(all(feature = "sync", feature = "encryption"))]
     pub fn write_encrypted_server<W: std::io::Write>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
@@ -6816,7 +6817,7 @@ impl ServerOpcodeMessage {
         }
     }
 
-    #[cfg(feature = "tokio")]
+    #[cfg(all(feature = "tokio", feature = "encryption"))]
     pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7518,7 +7519,7 @@ impl ServerOpcodeMessage {
         }
     }
 
-    #[cfg(feature = "async-std")]
+    #[cfg(all(feature = "async-std", feature = "encryption"))]
     pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,

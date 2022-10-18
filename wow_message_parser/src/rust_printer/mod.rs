@@ -46,6 +46,12 @@ pub(crate) const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 pub(crate) const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
 pub(crate) const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
 
+const CFG_SYNC_AND_ENCRYPTION: &str = "#[cfg(all(feature = \"sync\", feature = \"encryption\"))]";
+const CFG_ASYNC_TOKIO_AND_ENCRYPTION: &str =
+    "#[cfg(all(feature = \"tokio\", feature = \"encryption\"))]";
+const CFG_ASYNC_ASYNC_STD_AND_ENCRYPTION: &str =
+    "#[cfg(all(feature = \"async-std\", feature = \"encryption\"))]";
+
 const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";
@@ -778,6 +784,14 @@ impl ImplType {
             ImplType::Std => CFG_SYNC,
             ImplType::Tokio => CFG_ASYNC_TOKIO,
             ImplType::AsyncStd => CFG_ASYNC_ASYNC_STD,
+        }
+    }
+
+    pub(crate) fn cfg_and_encryption(&self) -> &str {
+        match self {
+            ImplType::Std => CFG_SYNC_AND_ENCRYPTION,
+            ImplType::Tokio => CFG_ASYNC_TOKIO_AND_ENCRYPTION,
+            ImplType::AsyncStd => CFG_ASYNC_ASYNC_STD_AND_ENCRYPTION,
         }
     }
 

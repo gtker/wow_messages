@@ -86,6 +86,7 @@ pub(crate) fn includes(
                 CLIENT_MESSAGE_TRAIT_NAME,
             ));
 
+            s.wln(format!("#[cfg(feature = \"encryption\")]",));
             let import_path = version.as_major_world().encryption_path();
             match version.as_major_world() {
                 MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
@@ -271,7 +272,7 @@ fn world_common_impls_read_write(
 
     s.closing_curly(); // read_unencrypted
 
-    s.wln(it.cfg());
+    s.wln(it.cfg_and_encryption());
     s.open_curly(
         format!("pub {func}fn {prefix}read_encrypted<R: {read}>(r: &mut R, d: &mut {dec_prefix}DecrypterHalf) -> std::result::Result<Self, {error_ty}>",
                 func = it.func(),
@@ -444,7 +445,7 @@ fn impl_display(s: &mut Writer, v: &[&Container], ty: &str) {
 }
 
 fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType, enc_prefix: &str) {
-    s.wln(it.cfg());
+    s.wln(it.cfg_and_encryption());
     s.bodyn(
         format!(
             "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}>(&self, w: &mut W, e: &mut {enc_prefix}EncrypterHalf) -> Result<(), std::io::Error>",
