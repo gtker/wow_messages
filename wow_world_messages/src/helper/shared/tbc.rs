@@ -1,7 +1,6 @@
 use crate::Message;
 use std::future::Future;
 use std::pin::Pin;
-#[cfg(feature = "encryption")]
 use wow_srp::tbc_header::EncrypterHalf;
 
 const SERVER_OPCODE_LENGTH: u16 = 2;
