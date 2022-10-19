@@ -243,7 +243,8 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[20] matrix_card_proof;
     }
     if (security_flag & AUTHENTICATOR) {
-        u8 unknown5;
+        u8 amount_of_tokens;
+        u8[amount_of_tokens] tokens;
     }
 }
 ```
@@ -285,7 +286,8 @@ If security_flag contains `AUTHENTICATOR`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | unknown5 |  |  |
+| - | 1 / - | u8 | amount_of_tokens |  |  |
+| - | ? / - | u8[amount_of_tokens] | tokens |  |  |
 
 ### Examples
 

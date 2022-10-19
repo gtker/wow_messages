@@ -24,7 +24,8 @@ use std::io::{Write, Read};
 ///         u8[20] matrix_card_proof;
 ///     }
 ///     if (security_flag & AUTHENTICATOR) {
-///         u8 unknown5;
+///         u8 amount_of_tokens;
+///         u8[amount_of_tokens] tokens;
 ///     }
 /// }
 /// ```
@@ -89,8 +90,13 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         }
 
         if let Some(if_statement) = &self.security_flag.authenticator {
-            // unknown5: u8
-            w.write_all(&if_statement.unknown5.to_le_bytes())?;
+            // amount_of_tokens: u8
+            w.write_all(&(if_statement.tokens.len() as u8).to_le_bytes())?;
+
+            // tokens: u8[amount_of_tokens]
+            for i in if_statement.tokens.iter() {
+                w.write_all(&i.to_le_bytes())?;
+            }
 
         }
 
@@ -158,11 +164,17 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         };
 
         let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
-            // unknown5: u8
-            let unknown5 = crate::util::read_u8_le(r)?;
+            // amount_of_tokens: u8
+            let amount_of_tokens = crate::util::read_u8_le(r)?;
+
+            // tokens: u8[amount_of_tokens]
+            let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
+            for i in 0..amount_of_tokens {
+                tokens.push(crate::util::read_u8_le(r)?);
+            }
 
             Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                unknown5,
+                tokens,
             })
         }
         else {
@@ -260,11 +272,17 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             };
 
             let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
-                // unknown5: u8
-                let unknown5 = crate::util::tokio_read_u8_le(r).await?;
+                // amount_of_tokens: u8
+                let amount_of_tokens = crate::util::tokio_read_u8_le(r).await?;
+
+                // tokens: u8[amount_of_tokens]
+                let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
+                for i in 0..amount_of_tokens {
+                    tokens.push(crate::util::tokio_read_u8_le(r).await?);
+                }
 
                 Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                    unknown5,
+                    tokens,
                 })
             }
             else {
@@ -376,11 +394,17 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             };
 
             let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
-                // unknown5: u8
-                let unknown5 = crate::util::astd_read_u8_le(r).await?;
+                // amount_of_tokens: u8
+                let amount_of_tokens = crate::util::astd_read_u8_le(r).await?;
+
+                // tokens: u8[amount_of_tokens]
+                let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
+                for i in 0..amount_of_tokens {
+                    tokens.push(crate::util::astd_read_u8_le(r).await?);
+                }
 
                 Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                    unknown5,
+                    tokens,
                 })
             }
             else {
@@ -437,7 +461,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     inner: u8,
     pin: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin>,
@@ -593,14 +617,15 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-    pub unknown5: u8,
+    pub tokens: Vec<u8>,
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
     pub(crate) fn size(&self) -> usize {
-        1 // unknown5: u8
+        1 // amount_of_tokens: u8
+        + self.tokens.len() * core::mem::size_of::<u8>() // tokens: u8[amount_of_tokens]
     }
 }
 
@@ -625,7 +650,7 @@ mod test {
          0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
          0x10, 0x11, 0x12, 0x13, 0x14, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 345.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 348.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client0() {
@@ -681,7 +706,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 345.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 348.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client0() {
@@ -737,7 +762,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 345.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 348.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client0() {
@@ -803,7 +828,7 @@ mod test {
          0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
          0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 402.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 405.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client1() {
@@ -851,7 +876,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 402.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 405.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client1() {
@@ -899,7 +924,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 402.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 405.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client1() {
@@ -955,7 +980,7 @@ mod test {
          0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A,
          0x58, 0xBB, 0x00, 0xD0, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 444.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 447.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client2() {
@@ -994,7 +1019,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 444.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 447.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client2() {
@@ -1033,7 +1058,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 444.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 447.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client2() {
@@ -1083,7 +1108,7 @@ mod test {
          0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
          0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 470.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 473.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client3() {
@@ -1129,7 +1154,7 @@ mod test {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 470.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 473.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client3() {
@@ -1175,7 +1200,7 @@ mod test {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 470.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 473.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client3() {

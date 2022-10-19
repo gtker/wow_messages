@@ -335,7 +335,10 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         }
     }
     if (security_flag & AUTHENTICATOR) {
-        u8 unknown5;
+        u8 amount_of_tokens {
+            valid_range = "0 16";
+        }
+        u8[amount_of_tokens] tokens;
     }
 } {
     description = "Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server].";
