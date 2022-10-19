@@ -86,7 +86,7 @@ pub(crate) fn includes(
                 CLIENT_MESSAGE_TRAIT_NAME,
             ));
 
-            s.wln(format!("#[cfg(feature = \"encryption\")]",));
+            s.wln("#[cfg(feature = \"encryption\")]");
             let import_path = version.as_major_world().encryption_path();
             match version.as_major_world() {
                 MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
