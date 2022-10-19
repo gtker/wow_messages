@@ -3,7 +3,7 @@
 enum InventoryType : u8 {
     NON_EQUIP = 0;
     HEAD = 1;
-    NECK_OR_RELIC = 2;
+    NECK = 2;
     SHOULDERS = 3;
     BODY = 4;
     CHEST = 5;
@@ -29,5 +29,6 @@ enum InventoryType : u8 {
     THROWN = 25;
     RANGED_RIGHT = 26;
     QUIVER = 27;
+    RELIC = 28;
 }
 

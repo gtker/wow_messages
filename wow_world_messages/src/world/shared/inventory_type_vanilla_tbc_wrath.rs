@@ -5,7 +5,7 @@ use std::convert::{TryFrom, TryInto};
 /// enum InventoryType : u8 {
 ///     NON_EQUIP = 0;
 ///     HEAD = 1;
-///     NECK_OR_RELIC = 2;
+///     NECK = 2;
 ///     SHOULDERS = 3;
 ///     BODY = 4;
 ///     CHEST = 5;
@@ -31,6 +31,7 @@ use std::convert::{TryFrom, TryInto};
 ///     THROWN = 25;
 ///     RANGED_RIGHT = 26;
 ///     QUIVER = 27;
+///     RELIC = 28;
 /// }
 
 /// ```
@@ -38,7 +39,7 @@ use std::convert::{TryFrom, TryInto};
 pub enum InventoryType {
     NonEquip,
     Head,
-    NeckOrRelic,
+    Neck,
     Shoulders,
     Body,
     Chest,
@@ -64,6 +65,7 @@ pub enum InventoryType {
     Thrown,
     RangedRight,
     Quiver,
+    Relic,
 }
 
 impl InventoryType {
@@ -71,7 +73,7 @@ impl InventoryType {
         match self {
             Self::NonEquip => 0x0,
             Self::Head => 0x1,
-            Self::NeckOrRelic => 0x2,
+            Self::Neck => 0x2,
             Self::Shoulders => 0x3,
             Self::Body => 0x4,
             Self::Chest => 0x5,
@@ -97,6 +99,7 @@ impl InventoryType {
             Self::Thrown => 0x19,
             Self::RangedRight => 0x1a,
             Self::Quiver => 0x1b,
+            Self::Relic => 0x1c,
         }
     }
 
@@ -113,7 +116,7 @@ impl std::fmt::Display for InventoryType {
         match self {
             Self::NonEquip => f.write_str("NonEquip"),
             Self::Head => f.write_str("Head"),
-            Self::NeckOrRelic => f.write_str("NeckOrRelic"),
+            Self::Neck => f.write_str("Neck"),
             Self::Shoulders => f.write_str("Shoulders"),
             Self::Body => f.write_str("Body"),
             Self::Chest => f.write_str("Chest"),
@@ -139,6 +142,7 @@ impl std::fmt::Display for InventoryType {
             Self::Thrown => f.write_str("Thrown"),
             Self::RangedRight => f.write_str("RangedRight"),
             Self::Quiver => f.write_str("Quiver"),
+            Self::Relic => f.write_str("Relic"),
         }
     }
 }
@@ -149,7 +153,7 @@ impl TryFrom<u8> for InventoryType {
         match value {
             0 => Ok(Self::NonEquip),
             1 => Ok(Self::Head),
-            2 => Ok(Self::NeckOrRelic),
+            2 => Ok(Self::Neck),
             3 => Ok(Self::Shoulders),
             4 => Ok(Self::Body),
             5 => Ok(Self::Chest),
@@ -175,6 +179,7 @@ impl TryFrom<u8> for InventoryType {
             25 => Ok(Self::Thrown),
             26 => Ok(Self::RangedRight),
             27 => Ok(Self::Quiver),
+            28 => Ok(Self::Relic),
             v => Err(crate::errors::EnumError::new("InventoryType", v as u32),)
         }
     }
