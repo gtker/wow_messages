@@ -527,10 +527,13 @@ fn print_typedef(s: &mut Writer, e: &Definer) {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
             let prefix = if f.alternate() { "0x" } else { "" };
 
-            let bare_hex = if self.0 == i32::MIN {
-                format!("{:X}", i32::MIN)
-            } else {
-                format!("{:X}", self.0.abs())
+            let bare_hex = {
+                let value = if self.0 == i32::MIN {
+                    self.0 + 1
+                } else {
+                    self.0
+                };
+                format!("{:X}", value.abs())
             };
             f.pad_integral(self.0 >= 0, prefix, &bare_hex)
         }
