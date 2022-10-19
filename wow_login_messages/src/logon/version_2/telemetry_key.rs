@@ -8,14 +8,16 @@ use std::io::{Write, Read};
 ///     u16 unknown1;
 ///     u32 unknown2;
 ///     u8[4] unknown3;
-///     u8[20] unknown4;
+///     u8[20] cd_key_proof;
 /// }
 /// ```
 pub struct TelemetryKey {
     pub unknown1: u16,
     pub unknown2: u32,
     pub unknown3: [u8; 4],
-    pub unknown4: [u8; 20],
+    /// SHA1 hash of the session key, server public key, and an unknown 20 byte value.
+    ///
+    pub cd_key_proof: [u8; 20],
 }
 
 impl TelemetryKey {
@@ -31,8 +33,8 @@ impl TelemetryKey {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        // unknown4: u8[20]
-        for i in self.unknown4.iter() {
+        // cd_key_proof: u8[20]
+        for i in self.cd_key_proof.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
 
@@ -52,15 +54,15 @@ impl TelemetryKey {
         let mut unknown3 = [0_u8; 4];
         r.read_exact(&mut unknown3)?;
 
-        // unknown4: u8[20]
-        let mut unknown4 = [0_u8; 20];
-        r.read_exact(&mut unknown4)?;
+        // cd_key_proof: u8[20]
+        let mut cd_key_proof = [0_u8; 20];
+        r.read_exact(&mut cd_key_proof)?;
 
         Ok(Self {
             unknown1,
             unknown2,
             unknown3,
-            unknown4,
+            cd_key_proof,
         })
     }
 
@@ -76,15 +78,15 @@ impl TelemetryKey {
         let mut unknown3 = [0_u8; 4];
         r.read_exact(&mut unknown3).await?;
 
-        // unknown4: u8[20]
-        let mut unknown4 = [0_u8; 20];
-        r.read_exact(&mut unknown4).await?;
+        // cd_key_proof: u8[20]
+        let mut cd_key_proof = [0_u8; 20];
+        r.read_exact(&mut cd_key_proof).await?;
 
         Ok(Self {
             unknown1,
             unknown2,
             unknown3,
-            unknown4,
+            cd_key_proof,
         })
     }
 
@@ -100,15 +102,15 @@ impl TelemetryKey {
         let mut unknown3 = [0_u8; 4];
         r.read_exact(&mut unknown3).await?;
 
-        // unknown4: u8[20]
-        let mut unknown4 = [0_u8; 20];
-        r.read_exact(&mut unknown4).await?;
+        // cd_key_proof: u8[20]
+        let mut cd_key_proof = [0_u8; 20];
+        r.read_exact(&mut cd_key_proof).await?;
 
         Ok(Self {
             unknown1,
             unknown2,
             unknown3,
-            unknown4,
+            cd_key_proof,
         })
     }
 
