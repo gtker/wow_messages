@@ -3,7 +3,7 @@
 /// flag SecurityFlag : u8 {
 ///     NONE = 0x00;
 ///     PIN = 0x01;
-///     UNKNOWN0 = 0x02;
+///     MATRIX_CARD = 0x02;
 ///     AUTHENTICATOR = 0x04;
 /// }
 
@@ -20,7 +20,7 @@ impl SecurityFlag {
 
     pub(crate) const NONE: u8 = 0x00;
     pub(crate) const PIN: u8 = 0x01;
-    pub(crate) const UNKNOWN0: u8 = 0x02;
+    pub(crate) const MATRIX_CARD: u8 = 0x02;
     pub(crate) const AUTHENTICATOR: u8 = 0x04;
 
     pub const fn empty() -> Self {
@@ -35,7 +35,7 @@ impl SecurityFlag {
         Self {
             inner: Self::NONE
                 | Self::PIN
-                | Self::UNKNOWN0
+                | Self::MATRIX_CARD
                 | Self::AUTHENTICATOR
         }
     }
@@ -58,21 +58,24 @@ impl SecurityFlag {
         *self
     }
 
-    pub const fn is_UNKNOWN0(&self) -> bool {
-        (self.inner & Self::UNKNOWN0) != 0
+    pub const fn is_MATRIX_CARD(&self) -> bool {
+        (self.inner & Self::MATRIX_CARD) != 0
     }
 
-    pub const fn new_UNKNOWN0() -> Self {
-        Self { inner: Self::UNKNOWN0 }
+    /// Matrix Card 2FA which requires a matrix card.
+    /// `https://forum.xentax.com/viewtopic.php?f=13&p=186022`
+    ///
+    pub const fn new_MATRIX_CARD() -> Self {
+        Self { inner: Self::MATRIX_CARD }
     }
 
-    pub fn set_UNKNOWN0(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN0;
+    pub fn set_MATRIX_CARD(&mut self) -> Self {
+        self.inner |= Self::MATRIX_CARD;
         *self
     }
 
-    pub fn clear_UNKNOWN0(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN0.reverse_bits();
+    pub fn clear_MATRIX_CARD(&mut self) -> Self {
+        self.inner &= Self::MATRIX_CARD.reverse_bits();
         *self
     }
 

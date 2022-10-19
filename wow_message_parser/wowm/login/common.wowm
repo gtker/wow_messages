@@ -8,7 +8,10 @@ enum SecurityFlag : u8 {
 flag SecurityFlag : u8 {
     NONE = 0x00;
     PIN = 0x01;
-    UNKNOWN0 = 0x02;
+    MATRIX_CARD = 0x02 {
+        comment = "Matrix Card 2FA which requires a matrix card.";
+        comment = "`https://forum.xentax.com/viewtopic.php?f=13&p=186022`";
+    }
     AUTHENTICATOR = 0x04;
 } {
     login_versions = "8";

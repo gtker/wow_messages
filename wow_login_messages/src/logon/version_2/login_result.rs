@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/common.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/common.wowm#L17):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/common.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/common.wowm#L20):
 /// ```text
 /// enum LoginResult : u8 {
 ///     SUCCESS = 0x00;

@@ -208,12 +208,12 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
             u32 pin_grid_seed;
             u8[16] pin_salt;
         }
-        if (security_flag & UNKNOWN0) {
-            u8 unknown0;
-            u8 unknown1;
-            u8 unknown2;
-            u8 unknown3;
-            u64 unknown4;
+        if (security_flag & MATRIX_CARD) {
+            u8 width;
+            u8 height;
+            u8 digit_count;
+            u8 challenge_count;
+            u64 seed;
         }
         if (security_flag & AUTHENTICATOR) {
             u8 unknown5;
@@ -258,15 +258,15 @@ If security_flag contains `PIN`:
 | - | 4 / Little | u32 | pin_grid_seed |  |  |
 | - | ? / - | u8[16] | pin_salt |  |  |
 
-If security_flag contains `UNKNOWN0`:
+If security_flag contains `MATRIX_CARD`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | unknown0 |  |  |
-| - | 1 / - | u8 | unknown1 |  |  |
-| - | 1 / - | u8 | unknown2 |  |  |
-| - | 1 / - | u8 | unknown3 |  |  |
-| - | 8 / Little | u64 | unknown4 |  |  |
+| - | 1 / - | u8 | width |  | Number of columns to display. |
+| - | 1 / - | u8 | height |  | Number of rows to display. |
+| - | 1 / - | u8 | digit_count |  | Number of digits to be entered for each cell. |
+| - | 1 / - | u8 | challenge_count |  | Number of cells to complete. |
+| - | 8 / Little | u64 | seed |  | Seed value used to randomize cell selection. |
 
 If security_flag contains `AUTHENTICATOR`:
 
@@ -349,12 +349,12 @@ If security_flag contains `AUTHENTICATOR`:
 199, 9, 135, 125, 140, 101, 82, 102, 165, 125, 184, 101, 61, 110, 166, 43, 181, 84, 
 242, 11, 207, 116, 214, 74, 119, 167, 211, 61, 243, 48, 144, 135, // salt: u8[32]
 186, 163, 30, 153, 160, 11, 33, 87, 252, 55, 63, 179, 105, 205, 210, 241, // crc_salt: u8[16]
-2, // security_flag: SecurityFlag  UNKNOWN0 (2)
-255, // unknown0: u8
-238, // unknown1: u8
-221, // unknown2: u8
-204, // unknown3: u8
-222, 202, 250, 239, 190, 173, 222, 0, // unknown4: u64
+2, // security_flag: SecurityFlag  MATRIX_CARD (2)
+255, // width: u8
+238, // height: u8
+221, // digit_count: u8
+204, // challenge_count: u8
+222, 202, 250, 239, 190, 173, 222, 0, // seed: u64
 ```
 #### Example 5
 
@@ -379,12 +379,12 @@ If security_flag contains `AUTHENTICATOR`:
 199, 9, 135, 125, 140, 101, 82, 102, 165, 125, 184, 101, 61, 110, 166, 43, 181, 84, 
 242, 11, 207, 116, 214, 74, 119, 167, 211, 61, 243, 48, 144, 135, // salt: u8[32]
 186, 163, 30, 153, 160, 11, 33, 87, 252, 55, 63, 179, 105, 205, 210, 241, // crc_salt: u8[16]
-6, // security_flag: SecurityFlag  UNKNOWN0| AUTHENTICATOR (6)
-255, // unknown0: u8
-238, // unknown1: u8
-221, // unknown2: u8
-204, // unknown3: u8
-222, 202, 250, 239, 190, 173, 222, 0, // unknown4: u64
+6, // security_flag: SecurityFlag  MATRIX_CARD| AUTHENTICATOR (6)
+255, // width: u8
+238, // height: u8
+221, // digit_count: u8
+204, // challenge_count: u8
+222, 202, 250, 239, 190, 173, 222, 0, // seed: u64
 1, // unknown5: u8
 ```
 #### Example 7

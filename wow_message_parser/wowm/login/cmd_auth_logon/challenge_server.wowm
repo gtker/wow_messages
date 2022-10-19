@@ -246,12 +246,22 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
             u32 pin_grid_seed;
             u8[16] pin_salt;
         }
-        if (security_flag & UNKNOWN0) {
-            u8 unknown0;
-            u8 unknown1;
-            u8 unknown2;
-            u8 unknown3;
-            u64 unknown4;
+        if (security_flag & MATRIX_CARD) {
+            u8 width {
+                comment = "Number of columns to display.";
+            }
+            u8 height {
+                comment = "Number of rows to display.";
+            }
+            u8 digit_count {
+                comment = "Number of digits to be entered for each cell.";
+            }
+            u8 challenge_count {
+                comment = "Number of cells to complete.";
+            }
+            u64 seed {
+                comment = "Seed value used to randomize cell selection.";
+            }
         }
         if (security_flag & AUTHENTICATOR) {
             u8 unknown5;
@@ -450,12 +460,12 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     crc_salt = [ 0xba, 0xa3, 0x1e, 0x99, 0xa0, 0x0b, 0x21, 0x57, 0xfc, 0x37,
                  0x3f, 0xb3, 0x69, 0xcd, 0xd2, 0xf1, ];
 
-    security_flag = UNKNOWN0;
-    unknown0 = 0xFF;
-    unknown1 = 0xEE;
-    unknown2 = 0xDD;
-    unknown3 = 0xCC;
-    unknown4 = 0xDEADBEEFFACADE;
+    security_flag = MATRIX_CARD;
+    width = 0xFF;
+    height = 0xEE;
+    digit_count = 0xDD;
+    challenge_count = 0xCC;
+    seed = 0xDEADBEEFFACADE;
     unknown5 = 1;
 } [
     0x00, /* Opcode: CMD_AUTH_LOGON_CHALLENGE */
@@ -483,12 +493,12 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0xba, 0xa3, 0x1e, 0x99, 0xa0, 0x0b, 0x21, 0x57, 0xfc, 0x37,
     0x3f, 0xb3, 0x69, 0xcd, 0xd2, 0xf1, /* CRC Salt */
 
-    0x02, /* Two factor fields enabled: UNKNOWN0 */
-    0xFF, /* unknown0 */
-    0xEE, /* unknown1 */
-    0xDD, /* unknown2 */
-    0xCC, /* unknown3 */
-    0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, /* unknown4 */
+    0x02, /* Two factor fields enabled: MATRIX_CARD */
+    0xFF, /* width */
+    0xEE, /* height */
+    0xDD, /* digit_count */
+    0xCC, /* challenge_count */
+    0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, /* seed */
 ] {
     login_versions = "8";
 }
@@ -524,12 +534,12 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     crc_salt = [ 0xba, 0xa3, 0x1e, 0x99, 0xa0, 0x0b, 0x21, 0x57, 0xfc, 0x37,
                  0x3f, 0xb3, 0x69, 0xcd, 0xd2, 0xf1, ];
 
-    security_flag = UNKNOWN0 | AUTHENTICATOR;
-    unknown0 = 0xFF;
-    unknown1 = 0xEE;
-    unknown2 = 0xDD;
-    unknown3 = 0xCC;
-    unknown4 = 0xDEADBEEFFACADE;
+    security_flag = MATRIX_CARD | AUTHENTICATOR;
+    width = 0xFF;
+    height = 0xEE;
+    digit_count = 0xDD;
+    challenge_count = 0xCC;
+    seed = 0xDEADBEEFFACADE;
 
     unknown5 = 1;
 } [
@@ -558,12 +568,12 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0xba, 0xa3, 0x1e, 0x99, 0xa0, 0x0b, 0x21, 0x57, 0xfc, 0x37,
     0x3f, 0xb3, 0x69, 0xcd, 0xd2, 0xf1, /* CRC Salt */
 
-    0x06, /* Two factor fields enabled: UNKNOWN0 */
-    0xFF, /* unknown0 */
-    0xEE, /* unknown1 */
-    0xDD, /* unknown2 */
-    0xCC, /* unknown3 */
-    0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, /* unknown4 */
+    0x06, /* Two factor fields enabled: MATRIX_CARD */
+    0xFF, /* width */
+    0xEE, /* height */
+    0xDD, /* digit_count */
+    0xCC, /* challenge_count */
+    0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, /* seed */
 
     0x01, /* unknown5 */
 ] {

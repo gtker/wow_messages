@@ -239,12 +239,8 @@ clogin CMD_AUTH_LOGON_PROOF_Client = 0x01 {
         u8[16] pin_salt;
         u8[20] pin_hash;
     }
-    if (security_flag & UNKNOWN0) {
-        u8 unknown0;
-        u8 unknown1;
-        u8 unknown2;
-        u8 unknown3;
-        u64 unknown4;
+    if (security_flag & MATRIX_CARD) {
+        u8[20] matrix_card_proof;
     }
     if (security_flag & AUTHENTICATOR) {
         u8 unknown5;
@@ -279,15 +275,11 @@ If security_flag contains `PIN`:
 | - | ? / - | u8[16] | pin_salt |  |  |
 | - | ? / - | u8[20] | pin_hash |  |  |
 
-If security_flag contains `UNKNOWN0`:
+If security_flag contains `MATRIX_CARD`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | unknown0 |  |  |
-| - | 1 / - | u8 | unknown1 |  |  |
-| - | 1 / - | u8 | unknown2 |  |  |
-| - | 1 / - | u8 | unknown3 |  |  |
-| - | 8 / Little | u64 | unknown4 |  |  |
+| - | ? / - | u8[20] | matrix_card_proof |  | Client proof of matrix input.<br/>Implementation details at `https://gist.github.com/barncastle/979c12a9c5e64d810a28ad1728e7e0f9`. |
 
 If security_flag contains `AUTHENTICATOR`:
 
@@ -366,47 +358,4 @@ If security_flag contains `AUTHENTICATOR`:
 1, // security_flag: SecurityFlag  PIN (1)
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
-```
-#### Example 5
-
-```c
-1, // opcode (1)
-241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
-225, 247, 204, 143, 28, 245, 238, 142, 17, 206, 211, 29, 215, 8, // client_public_key: u8[32]
-107, 30, 72, 27, 77, 4, 161, 24, 216, 242, 222, 92, 89, 213, 92, 129, 46, 101, 236, 
-62, // client_proof: u8[20]
-78, 245, 45, 225, 128, 94, 26, 103, 21, 236, 200, 65, 238, 184, 144, 138, 88, 187, 
-0, 208, // crc_hash: u8[20]
-0, // number_of_telemetry_keys: u8
-// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-3, // security_flag: SecurityFlag  PIN| UNKNOWN0 (3)
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
-16, // unknown0: u8
-32, // unknown1: u8
-48, // unknown2: u8
-64, // unknown3: u8
-239, 190, 173, 222, 0, 0, 0, 0, // unknown4: u64
-```
-#### Example 6
-
-```c
-1, // opcode (1)
-241, 62, 229, 209, 131, 196, 200, 169, 80, 14, 63, 90, 93, 138, 238, 78, 46, 69, 
-225, 247, 204, 143, 28, 245, 238, 142, 17, 206, 211, 29, 215, 8, // client_public_key: u8[32]
-107, 30, 72, 27, 77, 4, 161, 24, 216, 242, 222, 92, 89, 213, 92, 129, 46, 101, 236, 
-62, // client_proof: u8[20]
-78, 245, 45, 225, 128, 94, 26, 103, 21, 236, 200, 65, 238, 184, 144, 138, 88, 187, 
-0, 208, // crc_hash: u8[20]
-0, // number_of_telemetry_keys: u8
-// telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-7, // security_flag: SecurityFlag  PIN| UNKNOWN0| AUTHENTICATOR (7)
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, // pin_salt: u8[16]
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
-16, // unknown0: u8
-32, // unknown1: u8
-48, // unknown2: u8
-64, // unknown3: u8
-239, 190, 173, 222, 0, 0, 0, 0, // unknown4: u64
-1, // unknown5: u8
 ```

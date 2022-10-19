@@ -20,12 +20,8 @@ use std::io::{Write, Read};
 ///         u8[16] pin_salt;
 ///         u8[20] pin_hash;
 ///     }
-///     if (security_flag & UNKNOWN0) {
-///         u8 unknown0;
-///         u8 unknown1;
-///         u8 unknown2;
-///         u8 unknown3;
-///         u64 unknown4;
+///     if (security_flag & MATRIX_CARD) {
+///         u8[20] matrix_card_proof;
 ///     }
 ///     if (security_flag & AUTHENTICATOR) {
 ///         u8 unknown5;
@@ -84,21 +80,11 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 
         }
 
-        if let Some(if_statement) = &self.security_flag.unknown0 {
-            // unknown0: u8
-            w.write_all(&if_statement.unknown0.to_le_bytes())?;
-
-            // unknown1: u8
-            w.write_all(&if_statement.unknown1.to_le_bytes())?;
-
-            // unknown2: u8
-            w.write_all(&if_statement.unknown2.to_le_bytes())?;
-
-            // unknown3: u8
-            w.write_all(&if_statement.unknown3.to_le_bytes())?;
-
-            // unknown4: u64
-            w.write_all(&if_statement.unknown4.to_le_bytes())?;
+        if let Some(if_statement) = &self.security_flag.matrix_card {
+            // matrix_card_proof: u8[20]
+            for i in if_statement.matrix_card_proof.iter() {
+                w.write_all(&i.to_le_bytes())?;
+            }
 
         }
 
@@ -158,28 +144,13 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             None
         };
 
-        let security_flag_UNKNOWN0 = if security_flag.is_UNKNOWN0() {
-            // unknown0: u8
-            let unknown0 = crate::util::read_u8_le(r)?;
+        let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+            // matrix_card_proof: u8[20]
+            let mut matrix_card_proof = [0_u8; 20];
+            r.read_exact(&mut matrix_card_proof)?;
 
-            // unknown1: u8
-            let unknown1 = crate::util::read_u8_le(r)?;
-
-            // unknown2: u8
-            let unknown2 = crate::util::read_u8_le(r)?;
-
-            // unknown3: u8
-            let unknown3 = crate::util::read_u8_le(r)?;
-
-            // unknown4: u64
-            let unknown4 = crate::util::read_u64_le(r)?;
-
-            Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                unknown0,
-                unknown1,
-                unknown2,
-                unknown3,
-                unknown4,
+            Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
+                matrix_card_proof,
             })
         }
         else {
@@ -201,7 +172,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         let security_flag = CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
             inner: security_flag.as_int(),
             pin: security_flag_PIN,
-            unknown0: security_flag_UNKNOWN0,
+            matrix_card: security_flag_MATRIX_CARD,
             authenticator: security_flag_AUTHENTICATOR,
         };
 
@@ -275,28 +246,13 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_UNKNOWN0 = if security_flag.is_UNKNOWN0() {
-                // unknown0: u8
-                let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+            let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+                // matrix_card_proof: u8[20]
+                let mut matrix_card_proof = [0_u8; 20];
+                r.read_exact(&mut matrix_card_proof).await?;
 
-                // unknown1: u8
-                let unknown1 = crate::util::tokio_read_u8_le(r).await?;
-
-                // unknown2: u8
-                let unknown2 = crate::util::tokio_read_u8_le(r).await?;
-
-                // unknown3: u8
-                let unknown3 = crate::util::tokio_read_u8_le(r).await?;
-
-                // unknown4: u64
-                let unknown4 = crate::util::tokio_read_u64_le(r).await?;
-
-                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                    unknown0,
-                    unknown1,
-                    unknown2,
-                    unknown3,
-                    unknown4,
+                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
+                    matrix_card_proof,
                 })
             }
             else {
@@ -318,7 +274,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             let security_flag = CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
                 inner: security_flag.as_int(),
                 pin: security_flag_PIN,
-                unknown0: security_flag_UNKNOWN0,
+                matrix_card: security_flag_MATRIX_CARD,
                 authenticator: security_flag_AUTHENTICATOR,
             };
 
@@ -406,28 +362,13 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_UNKNOWN0 = if security_flag.is_UNKNOWN0() {
-                // unknown0: u8
-                let unknown0 = crate::util::astd_read_u8_le(r).await?;
+            let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+                // matrix_card_proof: u8[20]
+                let mut matrix_card_proof = [0_u8; 20];
+                r.read_exact(&mut matrix_card_proof).await?;
 
-                // unknown1: u8
-                let unknown1 = crate::util::astd_read_u8_le(r).await?;
-
-                // unknown2: u8
-                let unknown2 = crate::util::astd_read_u8_le(r).await?;
-
-                // unknown3: u8
-                let unknown3 = crate::util::astd_read_u8_le(r).await?;
-
-                // unknown4: u64
-                let unknown4 = crate::util::astd_read_u64_le(r).await?;
-
-                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                    unknown0,
-                    unknown1,
-                    unknown2,
-                    unknown3,
-                    unknown4,
+                Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
+                    matrix_card_proof,
                 })
             }
             else {
@@ -449,7 +390,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             let security_flag = CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
                 inner: security_flag.as_int(),
                 pin: security_flag_PIN,
-                unknown0: security_flag_UNKNOWN0,
+                matrix_card: security_flag_MATRIX_CARD,
                 authenticator: security_flag_AUTHENTICATOR,
             };
 
@@ -500,7 +441,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     inner: u8,
     pin: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin>,
-    unknown0: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0>,
+    matrix_card: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard>,
     authenticator: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator>,
 }
 
@@ -509,7 +450,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         Self {
             inner: 0,
             pin: None,
-            unknown0: None,
+            matrix_card: None,
             authenticator: None,
         }
     }
@@ -517,7 +458,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     pub const fn is_empty(&self) -> bool {
         self.inner == 0
         && self.pin.is_none()
-        && self.unknown0.is_none()
+        && self.matrix_card.is_none()
         && self.authenticator.is_none()
     }
 
@@ -525,7 +466,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         Self {
             inner: SecurityFlag::PIN,
             pin: Some(pin),
-            unknown0: None,
+            matrix_card: None,
             authenticator: None,
         }
     }
@@ -546,28 +487,28 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         self
     }
 
-    pub const fn new_UNKNOWN0(unknown0: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0) -> Self {
+    pub const fn new_MATRIX_CARD(matrix_card: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard) -> Self {
         Self {
-            inner: SecurityFlag::UNKNOWN0,
+            inner: SecurityFlag::MATRIX_CARD,
             pin: None,
-            unknown0: Some(unknown0),
+            matrix_card: Some(matrix_card),
             authenticator: None,
         }
     }
 
-    pub fn set_UNKNOWN0(mut self, unknown0: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0) -> Self {
-        self.inner |= SecurityFlag::UNKNOWN0;
-        self.unknown0 = Some(unknown0);
+    pub fn set_MATRIX_CARD(mut self, matrix_card: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard) -> Self {
+        self.inner |= SecurityFlag::MATRIX_CARD;
+        self.matrix_card = Some(matrix_card);
         self
     }
 
-    pub const fn get_UNKNOWN0(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0> {
-        self.unknown0.as_ref()
+    pub const fn get_MATRIX_CARD(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard> {
+        self.matrix_card.as_ref()
     }
 
-    pub fn clear_UNKNOWN0(mut self) -> Self {
-        self.inner &= SecurityFlag::UNKNOWN0.reverse_bits();
-        self.unknown0 = None;
+    pub fn clear_MATRIX_CARD(mut self) -> Self {
+        self.inner &= SecurityFlag::MATRIX_CARD.reverse_bits();
+        self.matrix_card = None;
         self
     }
 
@@ -575,7 +516,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         Self {
             inner: SecurityFlag::AUTHENTICATOR,
             pin: None,
-            unknown0: None,
+            matrix_card: None,
             authenticator: Some(authenticator),
         }
     }
@@ -612,7 +553,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
             }
         }
         + {
-            if let Some(s) = &self.unknown0 {
+            if let Some(s) = &self.matrix_card {
                 s.size()
             } else {
                 0
@@ -642,21 +583,13 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-    pub unknown0: u8,
-    pub unknown1: u8,
-    pub unknown2: u8,
-    pub unknown3: u8,
-    pub unknown4: u64,
+pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
+    pub matrix_card_proof: [u8; 20],
 }
 
-impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
+impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
     pub(crate) fn size(&self) -> usize {
-        1 // unknown0: u8
-        + 1 // unknown1: u8
-        + 1 // unknown2: u8
-        + 1 // unknown3: u8
-        + 8 // unknown4: u64
+        20 * core::mem::size_of::<u8>() // matrix_card_proof: u8[20]
     }
 }
 
@@ -692,7 +625,7 @@ mod test {
          0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
          0x10, 0x11, 0x12, 0x13, 0x14, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 346.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 345.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client0() {
@@ -748,7 +681,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 346.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 345.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client0() {
@@ -804,7 +737,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 346.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 345.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client0() {
@@ -870,7 +803,7 @@ mod test {
          0x02, 0x03, 0x04, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
          0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 403.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 402.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client1() {
@@ -918,7 +851,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 403.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 402.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client1() {
@@ -966,7 +899,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 403.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 402.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client1() {
@@ -1022,7 +955,7 @@ mod test {
          0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A,
          0x58, 0xBB, 0x00, 0xD0, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 445.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 444.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client2() {
@@ -1061,7 +994,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 445.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 444.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client2() {
@@ -1100,7 +1033,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 445.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 444.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client2() {
@@ -1150,7 +1083,7 @@ mod test {
          0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
          0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 471.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 470.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_PROOF_Client3() {
@@ -1196,7 +1129,7 @@ mod test {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 471.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 470.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_PROOF_Client3() {
@@ -1242,7 +1175,7 @@ mod test {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 471.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 470.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_PROOF_Client3() {
@@ -1286,357 +1219,6 @@ mod test {
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
         assert_eq!(dest, RAW3);
-    }
-
-    const RAW4: [u8; 123] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-         0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1, 0xF7,
-         0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7, 0x08,
-         0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C,
-         0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D, 0xE1,
-         0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A,
-         0x58, 0xBB, 0x00, 0xD0, 0x00, 0x03, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
-         0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00, 0x01,
-         0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
-         0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x10, 0x20, 0x30, 0x40, 0xEF, 0xBE,
-         0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
-
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 505.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_PROOF_Client4() {
-        let expected = CMD_AUTH_LOGON_PROOF_Client {
-            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
-                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
-                 0xD7, 0x08, ],
-            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
-                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
-            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-            telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
-                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
-                         0x12, 0x13, ],
-                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                    unknown0: 0x10,
-                    unknown1: 0x20,
-                    unknown2: 0x30,
-                    unknown3: 0x40,
-                    unknown4: 0xDEADBEEF,
-                })
-                ,
-        };
-
-        let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW4)).unwrap();
-        let t = match t {
-            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.client_public_key, expected.client_public_key);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.crc_hash, expected.crc_hash);
-        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-        assert_eq!(t.security_flag, expected.security_flag);
-
-        assert_eq!(t.size() + header_size, RAW4.len());
-
-        let mut dest = Vec::with_capacity(RAW4.len());
-        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
-
-        assert_eq!(dest, RAW4);
-    }
-
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 505.
-    #[cfg(feature = "tokio")]
-    #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_AUTH_LOGON_PROOF_Client4() {
-        let expected = CMD_AUTH_LOGON_PROOF_Client {
-            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
-                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
-                 0xD7, 0x08, ],
-            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
-                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
-            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-            telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
-                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
-                         0x12, 0x13, ],
-                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                    unknown0: 0x10,
-                    unknown1: 0x20,
-                    unknown2: 0x30,
-                    unknown3: 0x40,
-                    unknown4: 0xDEADBEEF,
-                })
-                ,
-        };
-
-        let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW4)).await.unwrap();
-        let t = match t {
-            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.client_public_key, expected.client_public_key);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.crc_hash, expected.crc_hash);
-        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-        assert_eq!(t.security_flag, expected.security_flag);
-
-        assert_eq!(t.size() + header_size, RAW4.len());
-
-        let mut dest = Vec::with_capacity(RAW4.len());
-        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW4);
-    }
-
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 505.
-    #[cfg(feature = "async-std")]
-    #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_AUTH_LOGON_PROOF_Client4() {
-        let expected = CMD_AUTH_LOGON_PROOF_Client {
-            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
-                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
-                 0xD7, 0x08, ],
-            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
-                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
-            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-            telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
-                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
-                         0x12, 0x13, ],
-                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                    unknown0: 0x10,
-                    unknown1: 0x20,
-                    unknown2: 0x30,
-                    unknown3: 0x40,
-                    unknown4: 0xDEADBEEF,
-                })
-                ,
-        };
-
-        let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW4)).await.unwrap();
-        let t = match t {
-            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.client_public_key, expected.client_public_key);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.crc_hash, expected.crc_hash);
-        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-        assert_eq!(t.security_flag, expected.security_flag);
-
-        assert_eq!(t.size() + header_size, RAW4.len());
-
-        let mut dest = Vec::with_capacity(RAW4.len());
-        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW4);
-    }
-
-    const RAW5: [u8; 124] = [ 0x01, 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-         0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1, 0xF7,
-         0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D, 0xD7, 0x08,
-         0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8, 0xF2, 0xDE, 0x5C,
-         0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, 0x4E, 0xF5, 0x2D, 0xE1,
-         0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC, 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A,
-         0x58, 0xBB, 0x00, 0xD0, 0x00, 0x07, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
-         0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x00, 0x01,
-         0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D,
-         0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x10, 0x20, 0x30, 0x40, 0xEF, 0xBE,
-         0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x01, ];
-
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 549.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_PROOF_Client5() {
-        let expected = CMD_AUTH_LOGON_PROOF_Client {
-            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
-                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
-                 0xD7, 0x08, ],
-            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
-                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
-            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-            telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
-                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
-                         0x12, 0x13, ],
-                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                    unknown0: 0x10,
-                    unknown1: 0x20,
-                    unknown2: 0x30,
-                    unknown3: 0x40,
-                    unknown4: 0xDEADBEEF,
-                })
-                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                    unknown5: 0x1,
-                })
-                ,
-        };
-
-        let header_size = 1;
-        let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW5)).unwrap();
-        let t = match t {
-            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.client_public_key, expected.client_public_key);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.crc_hash, expected.crc_hash);
-        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-        assert_eq!(t.security_flag, expected.security_flag);
-
-        assert_eq!(t.size() + header_size, RAW5.len());
-
-        let mut dest = Vec::with_capacity(RAW5.len());
-        expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
-
-        assert_eq!(dest, RAW5);
-    }
-
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 549.
-    #[cfg(feature = "tokio")]
-    #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_AUTH_LOGON_PROOF_Client5() {
-        let expected = CMD_AUTH_LOGON_PROOF_Client {
-            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
-                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
-                 0xD7, 0x08, ],
-            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
-                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
-            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-            telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
-                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
-                         0x12, 0x13, ],
-                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                    unknown0: 0x10,
-                    unknown1: 0x20,
-                    unknown2: 0x30,
-                    unknown3: 0x40,
-                    unknown4: 0xDEADBEEF,
-                })
-                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                    unknown5: 0x1,
-                })
-                ,
-        };
-
-        let header_size = 1;
-        let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW5)).await.unwrap();
-        let t = match t {
-            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.client_public_key, expected.client_public_key);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.crc_hash, expected.crc_hash);
-        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-        assert_eq!(t.security_flag, expected.security_flag);
-
-        assert_eq!(t.size() + header_size, RAW5.len());
-
-        let mut dest = Vec::with_capacity(RAW5.len());
-        expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW5);
-    }
-
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 549.
-    #[cfg(feature = "async-std")]
-    #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_AUTH_LOGON_PROOF_Client5() {
-        let expected = CMD_AUTH_LOGON_PROOF_Client {
-            client_public_key: [ 0xF1, 0x3E, 0xE5, 0xD1, 0x83, 0xC4, 0xC8, 0xA9,
-                 0x50, 0x0E, 0x3F, 0x5A, 0x5D, 0x8A, 0xEE, 0x4E, 0x2E, 0x45, 0xE1,
-                 0xF7, 0xCC, 0x8F, 0x1C, 0xF5, 0xEE, 0x8E, 0x11, 0xCE, 0xD3, 0x1D,
-                 0xD7, 0x08, ],
-            client_proof: [ 0x6B, 0x1E, 0x48, 0x1B, 0x4D, 0x04, 0xA1, 0x18, 0xD8,
-                 0xF2, 0xDE, 0x5C, 0x59, 0xD5, 0x5C, 0x81, 0x2E, 0x65, 0xEC, 0x3E, ],
-            crc_hash: [ 0x4E, 0xF5, 0x2D, 0xE1, 0x80, 0x5E, 0x1A, 0x67, 0x15, 0xEC,
-                 0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
-            telemetry_keys: vec![ ],
-            security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
-                    pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11,
-                         0x12, 0x13, ],
-                    pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                         0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                })
-                .set_UNKNOWN0(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Unknown0 {
-                    unknown0: 0x10,
-                    unknown1: 0x20,
-                    unknown2: 0x30,
-                    unknown3: 0x40,
-                    unknown4: 0xDEADBEEF,
-                })
-                .set_AUTHENTICATOR(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
-                    unknown5: 0x1,
-                })
-                ,
-        };
-
-        let header_size = 1;
-        let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW5)).await.unwrap();
-        let t = match t {
-            ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
-        };
-
-        assert_eq!(t.client_public_key, expected.client_public_key);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.crc_hash, expected.crc_hash);
-        assert_eq!(t.telemetry_keys, expected.telemetry_keys);
-        assert_eq!(t.security_flag, expected.security_flag);
-
-        assert_eq!(t.size() + header_size, RAW5.len());
-
-        let mut dest = Vec::with_capacity(RAW5.len());
-        expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW5);
     }
 
 }

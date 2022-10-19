@@ -23,12 +23,12 @@ use std::io::{Write, Read};
 ///             u32 pin_grid_seed;
 ///             u8[16] pin_salt;
 ///         }
-///         if (security_flag & UNKNOWN0) {
-///             u8 unknown0;
-///             u8 unknown1;
-///             u8 unknown2;
-///             u8 unknown3;
-///             u64 unknown4;
+///         if (security_flag & MATRIX_CARD) {
+///             u8 width;
+///             u8 height;
+///             u8 digit_count;
+///             u8 challenge_count;
+///             u64 seed;
 ///         }
 ///         if (security_flag & AUTHENTICATOR) {
 ///             u8 unknown5;
@@ -119,21 +119,21 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 
                 }
 
-                if let Some(if_statement) = &security_flag.unknown0 {
-                    // unknown0: u8
-                    w.write_all(&if_statement.unknown0.to_le_bytes())?;
+                if let Some(if_statement) = &security_flag.matrix_card {
+                    // width: u8
+                    w.write_all(&if_statement.width.to_le_bytes())?;
 
-                    // unknown1: u8
-                    w.write_all(&if_statement.unknown1.to_le_bytes())?;
+                    // height: u8
+                    w.write_all(&if_statement.height.to_le_bytes())?;
 
-                    // unknown2: u8
-                    w.write_all(&if_statement.unknown2.to_le_bytes())?;
+                    // digit_count: u8
+                    w.write_all(&if_statement.digit_count.to_le_bytes())?;
 
-                    // unknown3: u8
-                    w.write_all(&if_statement.unknown3.to_le_bytes())?;
+                    // challenge_count: u8
+                    w.write_all(&if_statement.challenge_count.to_le_bytes())?;
 
-                    // unknown4: u64
-                    w.write_all(&if_statement.unknown4.to_le_bytes())?;
+                    // seed: u64
+                    w.write_all(&if_statement.seed.to_le_bytes())?;
 
                 }
 
@@ -229,28 +229,28 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     None
                 };
 
-                let security_flag_UNKNOWN0 = if security_flag.is_UNKNOWN0() {
-                    // unknown0: u8
-                    let unknown0 = crate::util::read_u8_le(r)?;
+                let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+                    // width: u8
+                    let width = crate::util::read_u8_le(r)?;
 
-                    // unknown1: u8
-                    let unknown1 = crate::util::read_u8_le(r)?;
+                    // height: u8
+                    let height = crate::util::read_u8_le(r)?;
 
-                    // unknown2: u8
-                    let unknown2 = crate::util::read_u8_le(r)?;
+                    // digit_count: u8
+                    let digit_count = crate::util::read_u8_le(r)?;
 
-                    // unknown3: u8
-                    let unknown3 = crate::util::read_u8_le(r)?;
+                    // challenge_count: u8
+                    let challenge_count = crate::util::read_u8_le(r)?;
 
-                    // unknown4: u64
-                    let unknown4 = crate::util::read_u64_le(r)?;
+                    // seed: u64
+                    let seed = crate::util::read_u64_le(r)?;
 
-                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                        unknown0,
-                        unknown1,
-                        unknown2,
-                        unknown3,
-                        unknown4,
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count,
+                        digit_count,
+                        height,
+                        seed,
+                        width,
                     })
                 }
                 else {
@@ -272,7 +272,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                 let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                     inner: security_flag.as_int(),
                     pin: security_flag_PIN,
-                    unknown0: security_flag_UNKNOWN0,
+                    matrix_card: security_flag_MATRIX_CARD,
                     authenticator: security_flag_AUTHENTICATOR,
                 };
 
@@ -386,28 +386,28 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_UNKNOWN0 = if security_flag.is_UNKNOWN0() {
-                        // unknown0: u8
-                        let unknown0 = crate::util::tokio_read_u8_le(r).await?;
+                    let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+                        // width: u8
+                        let width = crate::util::tokio_read_u8_le(r).await?;
 
-                        // unknown1: u8
-                        let unknown1 = crate::util::tokio_read_u8_le(r).await?;
+                        // height: u8
+                        let height = crate::util::tokio_read_u8_le(r).await?;
 
-                        // unknown2: u8
-                        let unknown2 = crate::util::tokio_read_u8_le(r).await?;
+                        // digit_count: u8
+                        let digit_count = crate::util::tokio_read_u8_le(r).await?;
 
-                        // unknown3: u8
-                        let unknown3 = crate::util::tokio_read_u8_le(r).await?;
+                        // challenge_count: u8
+                        let challenge_count = crate::util::tokio_read_u8_le(r).await?;
 
-                        // unknown4: u64
-                        let unknown4 = crate::util::tokio_read_u64_le(r).await?;
+                        // seed: u64
+                        let seed = crate::util::tokio_read_u64_le(r).await?;
 
-                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                            unknown0,
-                            unknown1,
-                            unknown2,
-                            unknown3,
-                            unknown4,
+                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                            challenge_count,
+                            digit_count,
+                            height,
+                            seed,
+                            width,
                         })
                     }
                     else {
@@ -429,7 +429,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                         inner: security_flag.as_int(),
                         pin: security_flag_PIN,
-                        unknown0: security_flag_UNKNOWN0,
+                        matrix_card: security_flag_MATRIX_CARD,
                         authenticator: security_flag_AUTHENTICATOR,
                     };
 
@@ -557,28 +557,28 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_UNKNOWN0 = if security_flag.is_UNKNOWN0() {
-                        // unknown0: u8
-                        let unknown0 = crate::util::astd_read_u8_le(r).await?;
+                    let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+                        // width: u8
+                        let width = crate::util::astd_read_u8_le(r).await?;
 
-                        // unknown1: u8
-                        let unknown1 = crate::util::astd_read_u8_le(r).await?;
+                        // height: u8
+                        let height = crate::util::astd_read_u8_le(r).await?;
 
-                        // unknown2: u8
-                        let unknown2 = crate::util::astd_read_u8_le(r).await?;
+                        // digit_count: u8
+                        let digit_count = crate::util::astd_read_u8_le(r).await?;
 
-                        // unknown3: u8
-                        let unknown3 = crate::util::astd_read_u8_le(r).await?;
+                        // challenge_count: u8
+                        let challenge_count = crate::util::astd_read_u8_le(r).await?;
 
-                        // unknown4: u64
-                        let unknown4 = crate::util::astd_read_u64_le(r).await?;
+                        // seed: u64
+                        let seed = crate::util::astd_read_u64_le(r).await?;
 
-                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                            unknown0,
-                            unknown1,
-                            unknown2,
-                            unknown3,
-                            unknown4,
+                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                            challenge_count,
+                            digit_count,
+                            height,
+                            seed,
+                            width,
                         })
                     }
                     else {
@@ -600,7 +600,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                         inner: security_flag.as_int(),
                         pin: security_flag_PIN,
-                        unknown0: security_flag_UNKNOWN0,
+                        matrix_card: security_flag_MATRIX_CARD,
                         authenticator: security_flag_AUTHENTICATOR,
                     };
 
@@ -670,7 +670,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     inner: u8,
     pin: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin>,
-    unknown0: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0>,
+    matrix_card: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard>,
     authenticator: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator>,
 }
 
@@ -679,7 +679,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         Self {
             inner: 0,
             pin: None,
-            unknown0: None,
+            matrix_card: None,
             authenticator: None,
         }
     }
@@ -687,7 +687,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     pub const fn is_empty(&self) -> bool {
         self.inner == 0
         && self.pin.is_none()
-        && self.unknown0.is_none()
+        && self.matrix_card.is_none()
         && self.authenticator.is_none()
     }
 
@@ -695,7 +695,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         Self {
             inner: SecurityFlag::PIN,
             pin: Some(pin),
-            unknown0: None,
+            matrix_card: None,
             authenticator: None,
         }
     }
@@ -716,28 +716,28 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         self
     }
 
-    pub const fn new_UNKNOWN0(unknown0: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0) -> Self {
+    pub const fn new_MATRIX_CARD(matrix_card: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard) -> Self {
         Self {
-            inner: SecurityFlag::UNKNOWN0,
+            inner: SecurityFlag::MATRIX_CARD,
             pin: None,
-            unknown0: Some(unknown0),
+            matrix_card: Some(matrix_card),
             authenticator: None,
         }
     }
 
-    pub fn set_UNKNOWN0(mut self, unknown0: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0) -> Self {
-        self.inner |= SecurityFlag::UNKNOWN0;
-        self.unknown0 = Some(unknown0);
+    pub fn set_MATRIX_CARD(mut self, matrix_card: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard) -> Self {
+        self.inner |= SecurityFlag::MATRIX_CARD;
+        self.matrix_card = Some(matrix_card);
         self
     }
 
-    pub const fn get_UNKNOWN0(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0> {
-        self.unknown0.as_ref()
+    pub const fn get_MATRIX_CARD(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard> {
+        self.matrix_card.as_ref()
     }
 
-    pub fn clear_UNKNOWN0(mut self) -> Self {
-        self.inner &= SecurityFlag::UNKNOWN0.reverse_bits();
-        self.unknown0 = None;
+    pub fn clear_MATRIX_CARD(mut self) -> Self {
+        self.inner &= SecurityFlag::MATRIX_CARD.reverse_bits();
+        self.matrix_card = None;
         self
     }
 
@@ -745,7 +745,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         Self {
             inner: SecurityFlag::AUTHENTICATOR,
             pin: None,
-            unknown0: None,
+            matrix_card: None,
             authenticator: Some(authenticator),
         }
     }
@@ -782,7 +782,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
             }
         }
         + {
-            if let Some(s) = &self.unknown0 {
+            if let Some(s) = &self.matrix_card {
                 s.size()
             } else {
                 0
@@ -812,21 +812,21 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-    pub unknown0: u8,
-    pub unknown1: u8,
-    pub unknown2: u8,
-    pub unknown3: u8,
-    pub unknown4: u64,
+pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+    pub challenge_count: u8,
+    pub digit_count: u8,
+    pub height: u8,
+    pub seed: u64,
+    pub width: u8,
 }
 
-impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
+impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
     pub(crate) fn size(&self) -> usize {
-        1 // unknown0: u8
-        + 1 // unknown1: u8
-        + 1 // unknown2: u8
-        + 1 // unknown3: u8
-        + 8 // unknown4: u64
+        1 // challenge_count: u8
+        + 1 // digit_count: u8
+        + 1 // height: u8
+        + 8 // seed: u64
+        + 1 // width: u8
     }
 }
 
@@ -1001,7 +1001,7 @@ mod test {
          0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2,
          0xF1, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 264.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 274.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
@@ -1044,7 +1044,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 264.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 274.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server0() {
@@ -1087,7 +1087,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 264.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 274.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server0() {
@@ -1143,7 +1143,7 @@ mod test {
          0xF1, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
          0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 317.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 327.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
@@ -1191,7 +1191,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 317.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 327.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server1() {
@@ -1239,7 +1239,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 317.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 327.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server1() {
@@ -1299,7 +1299,7 @@ mod test {
          0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2,
          0xF1, 0x04, 0x01, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 377.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 387.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server2() {
@@ -1345,7 +1345,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 377.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 387.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server2() {
@@ -1391,7 +1391,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 377.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 387.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server2() {
@@ -1450,7 +1450,7 @@ mod test {
          0xF1, 0x02, 0xFF, 0xEE, 0xDD, 0xCC, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 432.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 442.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server3() {
@@ -1468,12 +1468,12 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                        unknown0: 0xFF,
-                        unknown1: 0xEE,
-                        unknown2: 0xDD,
-                        unknown3: 0xCC,
-                        unknown4: 0xDEADBEEFFACADE,
+                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0xCC,
+                        digit_count: 0xDD,
+                        height: 0xEE,
+                        seed: 0xDEADBEEFFACADE,
+                        width: 0xFF,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1500,7 +1500,7 @@ mod test {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 432.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 442.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server3() {
@@ -1518,12 +1518,12 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                        unknown0: 0xFF,
-                        unknown1: 0xEE,
-                        unknown2: 0xDD,
-                        unknown3: 0xCC,
-                        unknown4: 0xDEADBEEFFACADE,
+                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0xCC,
+                        digit_count: 0xDD,
+                        height: 0xEE,
+                        seed: 0xDEADBEEFFACADE,
+                        width: 0xFF,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1550,7 +1550,7 @@ mod test {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 432.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 442.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server3() {
@@ -1568,12 +1568,12 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                        unknown0: 0xFF,
-                        unknown1: 0xEE,
-                        unknown2: 0xDD,
-                        unknown3: 0xCC,
-                        unknown4: 0xDEADBEEFFACADE,
+                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0xCC,
+                        digit_count: 0xDD,
+                        height: 0xEE,
+                        seed: 0xDEADBEEFFACADE,
+                        width: 0xFF,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1602,7 +1602,7 @@ mod test {
 
     const RAW4: [u8; 3] = [ 0x00, 0x00, 0x05, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 496.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server4() {
@@ -1627,7 +1627,7 @@ mod test {
         assert_eq!(dest, RAW4);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 496.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server4() {
@@ -1652,7 +1652,7 @@ mod test {
         assert_eq!(dest, RAW4);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 496.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server4() {
@@ -1690,7 +1690,7 @@ mod test {
          0xF1, 0x06, 0xFF, 0xEE, 0xDD, 0xCC, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x01, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 516.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server5() {
@@ -1708,12 +1708,12 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                        unknown0: 0xFF,
-                        unknown1: 0xEE,
-                        unknown2: 0xDD,
-                        unknown3: 0xCC,
-                        unknown4: 0xDEADBEEFFACADE,
+                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0xCC,
+                        digit_count: 0xDD,
+                        height: 0xEE,
+                        seed: 0xDEADBEEFFACADE,
+                        width: 0xFF,
                     })
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
                         unknown5: 0x1,
@@ -1743,7 +1743,7 @@ mod test {
         assert_eq!(dest, RAW5);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 516.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server5() {
@@ -1761,12 +1761,12 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                        unknown0: 0xFF,
-                        unknown1: 0xEE,
-                        unknown2: 0xDD,
-                        unknown3: 0xCC,
-                        unknown4: 0xDEADBEEFFACADE,
+                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0xCC,
+                        digit_count: 0xDD,
+                        height: 0xEE,
+                        seed: 0xDEADBEEFFACADE,
+                        width: 0xFF,
                     })
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
                         unknown5: 0x1,
@@ -1796,7 +1796,7 @@ mod test {
         assert_eq!(dest, RAW5);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 516.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server5() {
@@ -1814,12 +1814,12 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_UNKNOWN0(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Unknown0 {
-                        unknown0: 0xFF,
-                        unknown1: 0xEE,
-                        unknown2: 0xDD,
-                        unknown3: 0xCC,
-                        unknown4: 0xDEADBEEFFACADE,
+                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count: 0xCC,
+                        digit_count: 0xDD,
+                        height: 0xEE,
+                        seed: 0xDEADBEEFFACADE,
+                        width: 0xFF,
                     })
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
                         unknown5: 0x1,
@@ -1851,7 +1851,7 @@ mod test {
 
     const RAW6: [u8; 3] = [ 0x00, 0x00, 0x05, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 573.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 583.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server6() {
@@ -1876,7 +1876,7 @@ mod test {
         assert_eq!(dest, RAW6);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 573.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 583.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server6() {
@@ -1901,7 +1901,7 @@ mod test {
         assert_eq!(dest, RAW6);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 573.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 583.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server6() {
