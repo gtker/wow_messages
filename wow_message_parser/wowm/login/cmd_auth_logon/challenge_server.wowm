@@ -264,7 +264,9 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
             }
         }
         if (security_flag & AUTHENTICATOR) {
-            u8 unknown5;
+            u8 required {
+                comment = "Dictates if the authenticator is in use and not just assigned to the account.";
+            }
         }
     }
 } {
@@ -406,7 +408,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
                  0x3f, 0xb3, 0x69, 0xcd, 0xd2, 0xf1, ];
 
     security_flag = AUTHENTICATOR;
-    unknown5 = 1;
+    required = 1;
 } [
     0x00, /* Opcode: CMD_AUTH_LOGON_CHALLENGE */
     0x00, /* Protocol Version: 0 */
@@ -434,7 +436,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0x3f, 0xb3, 0x69, 0xcd, 0xd2, 0xf1, /* CRC Salt */
 
     0x04, /* Two factor fields enabled: AUTHENTICATOR */
-    0x01, /* unknown5 */
+    0x01, /* required */
 ] {
     login_versions = "8";
 }
@@ -466,7 +468,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     digit_count = 0xDD;
     challenge_count = 0xCC;
     seed = 0xDEADBEEFFACADE;
-    unknown5 = 1;
+    required = 1;
 } [
     0x00, /* Opcode: CMD_AUTH_LOGON_CHALLENGE */
     0x00, /* Protocol Version: 0 */
@@ -541,7 +543,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     challenge_count = 0xCC;
     seed = 0xDEADBEEFFACADE;
 
-    unknown5 = 1;
+    required = 1;
 } [
     0x00, /* Opcode: CMD_AUTH_LOGON_CHALLENGE */
     0x00, /* Protocol Version: 0 */
@@ -575,7 +577,7 @@ test CMD_AUTH_LOGON_CHALLENGE_Server {
     0xCC, /* challenge_count */
     0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, /* seed */
 
-    0x01, /* unknown5 */
+    0x01, /* required */
 ] {
     login_versions = "8";
 }

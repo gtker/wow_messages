@@ -31,7 +31,7 @@ use std::io::{Write, Read};
 ///             u64 seed;
 ///         }
 ///         if (security_flag & AUTHENTICATOR) {
-///             u8 unknown5;
+///             u8 required;
 ///         }
 ///     }
 /// }
@@ -138,8 +138,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
                 }
 
                 if let Some(if_statement) = &security_flag.authenticator {
-                    // unknown5: u8
-                    w.write_all(&if_statement.unknown5.to_le_bytes())?;
+                    // required: u8
+                    w.write_all(&if_statement.required.to_le_bytes())?;
 
                 }
 
@@ -258,11 +258,11 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                 };
 
                 let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
-                    // unknown5: u8
-                    let unknown5 = crate::util::read_u8_le(r)?;
+                    // required: u8
+                    let required = crate::util::read_u8_le(r)?;
 
                     Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        unknown5,
+                        required,
                     })
                 }
                 else {
@@ -415,11 +415,11 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
-                        // unknown5: u8
-                        let unknown5 = crate::util::tokio_read_u8_le(r).await?;
+                        // required: u8
+                        let required = crate::util::tokio_read_u8_le(r).await?;
 
                         Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                            unknown5,
+                            required,
                         })
                     }
                     else {
@@ -586,11 +586,11 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
-                        // unknown5: u8
-                        let unknown5 = crate::util::astd_read_u8_le(r).await?;
+                        // required: u8
+                        let required = crate::util::astd_read_u8_le(r).await?;
 
                         Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                            unknown5,
+                            required,
                         })
                     }
                     else {
@@ -832,12 +832,12 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-    pub unknown5: u8,
+    pub required: u8,
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
     pub(crate) fn size(&self) -> usize {
-        1 // unknown5: u8
+        1 // required: u8
     }
 }
 
@@ -1001,7 +1001,7 @@ mod test {
          0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2,
          0xF1, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 274.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 276.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
@@ -1044,7 +1044,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 274.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 276.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server0() {
@@ -1087,7 +1087,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 274.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 276.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server0() {
@@ -1143,7 +1143,7 @@ mod test {
          0xF1, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
          0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 327.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 329.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
@@ -1191,7 +1191,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 327.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 329.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server1() {
@@ -1239,7 +1239,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 327.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 329.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server1() {
@@ -1299,7 +1299,7 @@ mod test {
          0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2,
          0xF1, 0x04, 0x01, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 387.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 389.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server2() {
@@ -1318,7 +1318,7 @@ mod test {
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        unknown5: 0x1,
+                        required: 0x1,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1345,7 +1345,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 387.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 389.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server2() {
@@ -1364,7 +1364,7 @@ mod test {
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        unknown5: 0x1,
+                        required: 0x1,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1391,7 +1391,7 @@ mod test {
         assert_eq!(dest, RAW2);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 387.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 389.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server2() {
@@ -1410,7 +1410,7 @@ mod test {
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        unknown5: 0x1,
+                        required: 0x1,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1450,7 +1450,7 @@ mod test {
          0xF1, 0x02, 0xFF, 0xEE, 0xDD, 0xCC, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 442.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 444.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server3() {
@@ -1500,7 +1500,7 @@ mod test {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 442.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 444.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server3() {
@@ -1550,7 +1550,7 @@ mod test {
         assert_eq!(dest, RAW3);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 442.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 444.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server3() {
@@ -1602,7 +1602,7 @@ mod test {
 
     const RAW4: [u8; 3] = [ 0x00, 0x00, 0x05, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 508.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server4() {
@@ -1627,7 +1627,7 @@ mod test {
         assert_eq!(dest, RAW4);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 508.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server4() {
@@ -1652,7 +1652,7 @@ mod test {
         assert_eq!(dest, RAW4);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 506.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 508.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server4() {
@@ -1690,7 +1690,7 @@ mod test {
          0xF1, 0x06, 0xFF, 0xEE, 0xDD, 0xCC, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x01, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 516.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 518.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server5() {
@@ -1716,7 +1716,7 @@ mod test {
                         width: 0xFF,
                     })
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        unknown5: 0x1,
+                        required: 0x1,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1743,7 +1743,7 @@ mod test {
         assert_eq!(dest, RAW5);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 516.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 518.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server5() {
@@ -1769,7 +1769,7 @@ mod test {
                         width: 0xFF,
                     })
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        unknown5: 0x1,
+                        required: 0x1,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1796,7 +1796,7 @@ mod test {
         assert_eq!(dest, RAW5);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 516.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 518.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server5() {
@@ -1822,7 +1822,7 @@ mod test {
                         width: 0xFF,
                     })
                     .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        unknown5: 0x1,
+                        required: 0x1,
                     })
                     ,
                 server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
@@ -1851,7 +1851,7 @@ mod test {
 
     const RAW6: [u8; 3] = [ 0x00, 0x00, 0x05, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 583.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 585.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server6() {
@@ -1876,7 +1876,7 @@ mod test {
         assert_eq!(dest, RAW6);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 583.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 585.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server6() {
@@ -1901,7 +1901,7 @@ mod test {
         assert_eq!(dest, RAW6);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 583.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 585.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server6() {

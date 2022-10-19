@@ -216,7 +216,7 @@ slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
             u64 seed;
         }
         if (security_flag & AUTHENTICATOR) {
-            u8 unknown5;
+            u8 required;
         }
     }
 }
@@ -272,7 +272,7 @@ If security_flag contains `AUTHENTICATOR`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 1 / - | u8 | unknown5 |  |  |
+| - | 1 / - | u8 | required |  | Dictates if the authenticator is in use and not just assigned to the account. |
 
 ### Examples
 
@@ -331,7 +331,7 @@ If security_flag contains `AUTHENTICATOR`:
 242, 11, 207, 116, 214, 74, 119, 167, 211, 61, 243, 48, 144, 135, // salt: u8[32]
 186, 163, 30, 153, 160, 11, 33, 87, 252, 55, 63, 179, 105, 205, 210, 241, // crc_salt: u8[16]
 4, // security_flag: SecurityFlag  AUTHENTICATOR (4)
-1, // unknown5: u8
+1, // required: u8
 ```
 #### Example 4
 
@@ -385,7 +385,7 @@ If security_flag contains `AUTHENTICATOR`:
 221, // digit_count: u8
 204, // challenge_count: u8
 222, 202, 250, 239, 190, 173, 222, 0, // seed: u64
-1, // unknown5: u8
+1, // required: u8
 ```
 #### Example 7
 
