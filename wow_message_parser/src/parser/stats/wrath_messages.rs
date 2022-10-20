@@ -675,7 +675,11 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_LOOT_MASTER_LIST", 0x2A4),
     Data::new("SMSG_SET_FORCED_REACTIONS", 0x2A5),
     Data::new("SMSG_SPELL_FAILED_OTHER", 0x2A6),
-    Data::new("SMSG_GAMEOBJECT_RESET_STATE", 0x2A7),
+    Data::with_reason(
+        "SMSG_GAMEOBJECT_RESET_STATE",
+        0x2A7,
+        "Is not implemented in emus",
+    ),
     Data::new("CMSG_REPAIR_ITEM", 0x2A8),
     Data::new("SMSG_CHAT_PLAYER_NOT_FOUND", 0x2A9),
     Data::new("MSG_TALENT_WIPE_CONFIRM", 0x2AA),
