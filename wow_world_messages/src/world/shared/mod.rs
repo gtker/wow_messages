@@ -85,6 +85,7 @@ pub mod faction_initializer_vanilla_tbc;
 pub mod faction_vanilla_tbc_wrath;
 pub mod forced_reaction_vanilla_tbc_wrath;
 pub mod gm_survey_question_vanilla_tbc_wrath;
+pub mod gm_ticket_escalation_status_vanilla_tbc;
 pub mod gm_ticket_response_vanilla_tbc_wrath;
 pub mod gm_ticket_status_response_vanilla_tbc_wrath;
 pub mod gm_ticket_status_vanilla_tbc;

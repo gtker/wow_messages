@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum GmTicketEscalationStatus : u8 {
     GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED = 0 {
         comment = "ticket is not currently assigned to a gm";
@@ -10,6 +8,8 @@ enum GmTicketEscalationStatus : u8 {
     GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED = 2 {
         comment = "ticket is in the escalation queue";
     }
+} {
+    versions = "1.12 2";
 }
 
 smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
@@ -25,5 +25,7 @@ smsg SMSG_GMTICKET_GETTICKET = 0x0212 {
         GmTicketEscalationStatus escalation_status;
         Bool read_by_gm;
     }
+} {
+    paste_versions = "1.12 2.4.3";
 }
 

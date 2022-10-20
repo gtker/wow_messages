@@ -2103,6 +2103,7 @@ use crate::world::tbc::SMSG_EXPLORATION_EXPERIENCE;
 use crate::world::tbc::SMSG_ENVIRONMENTALDAMAGELOG;
 use crate::world::tbc::SMSG_GMTICKET_CREATE;
 use crate::world::tbc::SMSG_ACCOUNT_DATA_TIMES;
+use crate::world::tbc::SMSG_GMTICKET_GETTICKET;
 use crate::world::tbc::SMSG_GMTICKET_DELETETICKET;
 use crate::world::tbc::SMSG_CHAT_WRONG_FACTION;
 use crate::world::tbc::SMSG_SET_REST_START;
@@ -2207,6 +2208,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ENVIRONMENTALDAMAGELOG(SMSG_ENVIRONMENTALDAMAGELOG),
     SMSG_GMTICKET_CREATE(SMSG_GMTICKET_CREATE),
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
+    SMSG_GMTICKET_GETTICKET(SMSG_GMTICKET_GETTICKET),
     SMSG_GMTICKET_DELETETICKET(SMSG_GMTICKET_DELETETICKET),
     SMSG_CHAT_WRONG_FACTION(SMSG_CHAT_WRONG_FACTION),
     SMSG_SET_REST_START(SMSG_SET_REST_START),
@@ -2313,6 +2315,7 @@ impl ServerOpcodeMessage {
             0x01FC => Ok(Self::SMSG_ENVIRONMENTALDAMAGELOG(<SMSG_ENVIRONMENTALDAMAGELOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FC, size: body_size, io, } } else { a } })?)),
             0x0206 => Ok(Self::SMSG_GMTICKET_CREATE(<SMSG_GMTICKET_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0206, size: body_size, io, } } else { a } })?)),
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0209, size: body_size, io, } } else { a } })?)),
+            0x0212 => Ok(Self::SMSG_GMTICKET_GETTICKET(<SMSG_GMTICKET_GETTICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0212, size: body_size, io, } } else { a } })?)),
             0x0218 => Ok(Self::SMSG_GMTICKET_DELETETICKET(<SMSG_GMTICKET_DELETETICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0218, size: body_size, io, } } else { a } })?)),
             0x0219 => Ok(Self::SMSG_CHAT_WRONG_FACTION(<SMSG_CHAT_WRONG_FACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0219, size: body_size, io, } } else { a } })?)),
             0x021E => Ok(Self::SMSG_SET_REST_START(<SMSG_SET_REST_START as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021E, size: body_size, io, } } else { a } })?)),
@@ -2487,6 +2490,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GMTICKET_GETTICKET(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_REST_START(c) => c.write_encrypted_server(w, e),
@@ -2594,6 +2598,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GMTICKET_GETTICKET(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_REST_START(c) => c.write_unencrypted_server(w),
@@ -2701,6 +2706,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GMTICKET_GETTICKET(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_REST_START(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2808,6 +2814,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GMTICKET_GETTICKET(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_REST_START(c) => c.tokio_write_unencrypted_server(w).await,
@@ -2915,6 +2922,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GMTICKET_GETTICKET(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_REST_START(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3022,6 +3030,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GMTICKET_GETTICKET(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_REST_START(c) => c.astd_write_unencrypted_server(w).await,
@@ -3131,6 +3140,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ENVIRONMENTALDAMAGELOG(_) => "SMSG_ENVIRONMENTALDAMAGELOG",
             ServerOpcodeMessage::SMSG_GMTICKET_CREATE(_) => "SMSG_GMTICKET_CREATE",
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
+            ServerOpcodeMessage::SMSG_GMTICKET_GETTICKET(_) => "SMSG_GMTICKET_GETTICKET",
             ServerOpcodeMessage::SMSG_GMTICKET_DELETETICKET(_) => "SMSG_GMTICKET_DELETETICKET",
             ServerOpcodeMessage::SMSG_CHAT_WRONG_FACTION(_) => "SMSG_CHAT_WRONG_FACTION",
             ServerOpcodeMessage::SMSG_SET_REST_START(_) => "SMSG_SET_REST_START",
@@ -3573,6 +3583,12 @@ impl From<SMSG_GMTICKET_CREATE> for ServerOpcodeMessage {
 impl From<SMSG_ACCOUNT_DATA_TIMES> for ServerOpcodeMessage {
     fn from(c: SMSG_ACCOUNT_DATA_TIMES) -> Self {
         Self::SMSG_ACCOUNT_DATA_TIMES(c)
+    }
+}
+
+impl From<SMSG_GMTICKET_GETTICKET> for ServerOpcodeMessage {
+    fn from(c: SMSG_GMTICKET_GETTICKET) -> Self {
+        Self::SMSG_GMTICKET_GETTICKET(c)
     }
 }
 
