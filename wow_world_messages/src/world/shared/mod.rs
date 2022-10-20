@@ -87,6 +87,7 @@ pub mod forced_reaction_vanilla_tbc_wrath;
 pub mod gm_survey_question_vanilla_tbc_wrath;
 pub mod gm_ticket_response_vanilla_tbc_wrath;
 pub mod gm_ticket_status_response_vanilla_tbc_wrath;
+pub mod gm_ticket_status_vanilla_tbc;
 pub mod inventory_type_vanilla_tbc_wrath;
 pub mod item_quality_vanilla_tbc;
 pub mod language_tbc_wrath;

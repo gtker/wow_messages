@@ -9,7 +9,7 @@ enum GmTicketResponse : u32 {
     UPDATE_ERROR = 5;
     TICKET_DELETED = 9;
 } {
-    versions = "2 3";
+    versions = "1 2 3";
 }
 
 /* Used for CMSG_GMTICKET_CREATE */
@@ -26,11 +26,14 @@ enum GmTicketType : u8 {
     CHARACTER = 10;
 } {
     comment = "vmangos: From GMTicketCategory.dbc";
+    versions = "1";
 }
 
 enum GmTicketStatus : u32 {
     DB_ERROR = 0x00;
     HAS_TEXT = 0x06;
     DEFAULT = 0x0A;
+} {
+    versions = "2";
 }
 
