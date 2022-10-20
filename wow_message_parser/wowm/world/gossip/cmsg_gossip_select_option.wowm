@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
     Guid guid;
     u32 gossip_list_id;
@@ -8,5 +6,19 @@ cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
             comment = "vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId))";
         }
     }
+} {
+    versions = "1";
 }
 
+cmsg CMSG_GOSSIP_SELECT_OPTION = 0x017C {
+    Guid guid;
+    u32 menu_id;
+    u32 gossip_list_id;
+    optional unknown {
+        CString code {
+            comment = "vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId))";
+        }
+    }
+} {
+    versions = "2 3";
+}
