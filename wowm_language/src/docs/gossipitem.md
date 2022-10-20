@@ -10,6 +10,7 @@ struct GossipItem {
     u32 id;
     u8 item_icon;
     Bool coded;
+    CString message;
 }
 ```
 ### Body
@@ -19,4 +20,5 @@ struct GossipItem {
 | 0x00 | 4 / Little | u32 | id |  | vmangos: sets to loop index |
 | 0x04 | 1 / - | u8 | item_icon |  |  |
 | 0x05 | 1 / - | Bool | coded |  | vmangos: makes pop up box password |
+| 0x06 | - / - | CString | message |  |  |
 

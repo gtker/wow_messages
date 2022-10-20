@@ -3977,6 +3977,7 @@
                 ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_icon, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_coded, 1, ENC_NA);
+                add_cstring(ptv, &hf_woww_message);
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_quests, 4, ENC_LITTLE_ENDIAN, &amount_of_quests);

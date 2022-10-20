@@ -5,7 +5,7 @@ use crate::world::vanilla::QuestItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm#L13):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_message.wowm#L14):
 /// ```text
 /// smsg SMSG_GOSSIP_MESSAGE = 0x017D {
 ///     Guid guid;
@@ -97,7 +97,7 @@ impl SMSG_GOSSIP_MESSAGE {
         8 // guid: Guid
         + 4 // title_text_id: u32
         + 4 // amount_of_gossip_items: u32
-        + self.gossips.len() * 6 // gossips: GossipItem[amount_of_gossip_items]
+        + self.gossips.iter().fold(0, |acc, x| acc + x.size()) // gossips: GossipItem[amount_of_gossip_items]
         + 4 // amount_of_quests: u32
         + self.quests.iter().fold(0, |acc, x| acc + x.size()) // quests: QuestItem[amount_of_quests]
     }

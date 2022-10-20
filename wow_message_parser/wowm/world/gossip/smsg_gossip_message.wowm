@@ -8,6 +8,7 @@ struct GossipItem {
     Bool coded {
         comment = "vmangos: makes pop up box password";
     }
+    CString message;
 }
 
 smsg SMSG_GOSSIP_MESSAGE = 0x017D {
