@@ -390,6 +390,8 @@ pub(crate) mod smsg_addon_info;
 pub use smsg_addon_info::*;
 pub(crate) mod smsg_ai_reaction;
 pub use smsg_ai_reaction::*;
+pub(crate) mod smsg_area_trigger_message;
+pub use smsg_area_trigger_message::*;
 pub(crate) mod smsg_attackerstateupdate;
 pub use smsg_attackerstateupdate::*;
 pub(crate) mod smsg_attackstart;

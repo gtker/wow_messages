@@ -402,6 +402,8 @@ pub(crate) mod smsg_action_buttons;
 pub use smsg_action_buttons::*;
 pub(crate) mod smsg_ai_reaction;
 pub use smsg_ai_reaction::*;
+pub(crate) mod smsg_area_trigger_message;
+pub use smsg_area_trigger_message::*;
 pub(crate) mod smsg_attackstart;
 pub use smsg_attackstart::*;
 pub(crate) mod smsg_attackstop;
