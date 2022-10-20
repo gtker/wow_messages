@@ -152,6 +152,7 @@ pub mod smsg_login_settimespeed_vanilla_tbc;
 pub mod smsg_logout_cancel_ack_vanilla_tbc_wrath;
 pub mod smsg_logout_complete_vanilla_tbc_wrath;
 pub mod smsg_notification_vanilla_tbc_wrath;
+pub mod smsg_play_object_sound_vanilla_tbc_wrath;
 pub mod smsg_pong_vanilla_tbc_wrath;
 pub mod smsg_procresist_vanilla_tbc_wrath;
 pub mod smsg_realm_split_tbc_wrath;

@@ -526,6 +526,8 @@ pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_notification;
 pub use smsg_notification::*;
+pub(crate) mod smsg_play_object_sound;
+pub use smsg_play_object_sound::*;
 pub(crate) mod smsg_played_time;
 pub use smsg_played_time::*;
 pub(crate) mod smsg_pong;
