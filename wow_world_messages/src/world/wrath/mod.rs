@@ -486,6 +486,8 @@ pub(crate) mod smsg_force_move_root;
 pub use smsg_force_move_root::*;
 pub(crate) mod smsg_force_move_unroot;
 pub use smsg_force_move_unroot::*;
+pub(crate) mod smsg_gameobject_custom_anim;
+pub use smsg_gameobject_custom_anim::*;
 pub(crate) mod smsg_gm_ticket_status_update;
 pub use smsg_gm_ticket_status_update::*;
 pub(crate) mod smsg_gmticket_create;

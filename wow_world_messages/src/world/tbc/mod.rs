@@ -486,6 +486,8 @@ pub(crate) mod smsg_environmentaldamagelog;
 pub use smsg_environmentaldamagelog::*;
 pub(crate) mod smsg_exploration_experience;
 pub use smsg_exploration_experience::*;
+pub(crate) mod smsg_gameobject_custom_anim;
+pub use smsg_gameobject_custom_anim::*;
 pub(crate) mod smsg_gm_ticket_status_update;
 pub use smsg_gm_ticket_status_update::*;
 pub(crate) mod smsg_gmticket_create;

@@ -2108,6 +2108,7 @@ use crate::world::wrath::SMSG_CHANNEL_NOTIFY;
 use crate::world::wrath::SMSG_CHANNEL_LIST;
 use crate::world::wrath::SMSG_UPDATE_OBJECT;
 use crate::world::wrath::SMSG_DESTROY_OBJECT;
+use crate::world::wrath::SMSG_GAMEOBJECT_CUSTOM_ANIM;
 use crate::world::wrath::MSG_MOVE_TELEPORT_ACK_Server;
 use crate::world::wrath::SMSG_FORCE_MOVE_ROOT;
 use crate::world::wrath::SMSG_FORCE_MOVE_UNROOT;
@@ -2231,6 +2232,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHANNEL_LIST(SMSG_CHANNEL_LIST),
     SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
     SMSG_DESTROY_OBJECT(SMSG_DESTROY_OBJECT),
+    SMSG_GAMEOBJECT_CUSTOM_ANIM(SMSG_GAMEOBJECT_CUSTOM_ANIM),
     MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Server),
     SMSG_FORCE_MOVE_ROOT(SMSG_FORCE_MOVE_ROOT),
     SMSG_FORCE_MOVE_UNROOT(SMSG_FORCE_MOVE_UNROOT),
@@ -2356,6 +2358,7 @@ impl ServerOpcodeMessage {
             0x009B => Ok(Self::SMSG_CHANNEL_LIST(<SMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x009B, size: body_size, io, } } else { a } })?)),
             0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00A9, size: body_size, io, } } else { a } })?)),
             0x00AA => Ok(Self::SMSG_DESTROY_OBJECT(<SMSG_DESTROY_OBJECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00AA, size: body_size, io, } } else { a } })?)),
+            0x00B3 => Ok(Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(<SMSG_GAMEOBJECT_CUSTOM_ANIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B3, size: body_size, io, } } else { a } })?)),
             0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C7, size: body_size, io, } } else { a } })?)),
             0x00E8 => Ok(Self::SMSG_FORCE_MOVE_ROOT(<SMSG_FORCE_MOVE_ROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E8, size: body_size, io, } } else { a } })?)),
             0x00EA => Ok(Self::SMSG_FORCE_MOVE_UNROOT(<SMSG_FORCE_MOVE_UNROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EA, size: body_size, io, } } else { a } })?)),
@@ -2630,6 +2633,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DESTROY_OBJECT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.write_encrypted_server(w, e),
@@ -2756,6 +2760,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
             Self::SMSG_DESTROY_OBJECT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.write_unencrypted_server(w),
@@ -2882,6 +2887,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DESTROY_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3008,6 +3014,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DESTROY_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -3134,6 +3141,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DESTROY_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3260,6 +3268,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DESTROY_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.astd_write_unencrypted_server(w).await,
@@ -3388,6 +3397,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => "SMSG_CHANNEL_LIST",
             ServerOpcodeMessage::SMSG_UPDATE_OBJECT(_) => "SMSG_UPDATE_OBJECT",
             ServerOpcodeMessage::SMSG_DESTROY_OBJECT(_) => "SMSG_DESTROY_OBJECT",
+            ServerOpcodeMessage::SMSG_GAMEOBJECT_CUSTOM_ANIM(_) => "SMSG_GAMEOBJECT_CUSTOM_ANIM",
             ServerOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Server",
             ServerOpcodeMessage::SMSG_FORCE_MOVE_ROOT(_) => "SMSG_FORCE_MOVE_ROOT",
             ServerOpcodeMessage::SMSG_FORCE_MOVE_UNROOT(_) => "SMSG_FORCE_MOVE_UNROOT",
@@ -3719,6 +3729,12 @@ impl From<SMSG_UPDATE_OBJECT> for ServerOpcodeMessage {
 impl From<SMSG_DESTROY_OBJECT> for ServerOpcodeMessage {
     fn from(c: SMSG_DESTROY_OBJECT) -> Self {
         Self::SMSG_DESTROY_OBJECT(c)
+    }
+}
+
+impl From<SMSG_GAMEOBJECT_CUSTOM_ANIM> for ServerOpcodeMessage {
+    fn from(c: SMSG_GAMEOBJECT_CUSTOM_ANIM) -> Self {
+        Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c)
     }
 }
 

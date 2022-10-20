@@ -136,6 +136,7 @@ pub mod smsg_duel_requested_vanilla_tbc_wrath;
 pub mod smsg_duel_winner_vanilla_tbc_wrath;
 pub mod smsg_durability_damage_death_vanilla_tbc_wrath;
 pub mod smsg_environmentaldamagelog_vanilla_tbc_wrath;
+pub mod smsg_gameobject_custom_anim_vanilla_tbc_wrath;
 pub mod smsg_gm_ticket_status_update_vanilla_tbc_wrath;
 pub mod smsg_gmticket_create_vanilla_tbc_wrath;
 pub mod smsg_gmticket_deleteticket_vanilla_tbc_wrath;
