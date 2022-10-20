@@ -510,6 +510,8 @@ pub(crate) mod smsg_gmticket_systemstatus;
 pub use smsg_gmticket_systemstatus::*;
 pub(crate) mod smsg_gmticket_updatetext;
 pub use smsg_gmticket_updatetext::*;
+pub(crate) mod smsg_gossip_complete;
+pub use smsg_gossip_complete::*;
 pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
 pub(crate) mod smsg_levelup_info;
