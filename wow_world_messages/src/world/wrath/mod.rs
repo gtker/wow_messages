@@ -148,6 +148,8 @@ pub(crate) mod cmsg_force_turn_rate_change_ack;
 pub use cmsg_force_turn_rate_change_ack::*;
 pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
+pub(crate) mod cmsg_gameobj_use;
+pub use cmsg_gameobj_use::*;
 pub(crate) mod cmsg_gmsurvey_submit;
 pub use cmsg_gmsurvey_submit::*;
 pub(crate) mod cmsg_gmticket_deleteticket;
