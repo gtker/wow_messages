@@ -1714,6 +1714,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_gm_ticket_queue_status,
+            { "Gm Ticket Queue Status", "woww.gm.ticket.queue.status",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_gm_ticket_queue_status_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_gm_ticket_response,
             { "Gm Ticket Response", "woww.gm.ticket.response",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_gm_ticket_response_strings), 0,
@@ -4759,12 +4765,6 @@
         { &hf_woww_weather_type,
             { "Weather Type", "woww.weather.type",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_weather_type_strings), 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_will_accept_tickets,
-            { "Will Accept Tickets", "woww.will.accept.tickets",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

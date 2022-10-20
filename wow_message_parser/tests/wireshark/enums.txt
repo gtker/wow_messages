@@ -4765,6 +4765,16 @@ static const value_string e_gm_ticket_escalation_status_strings[] =  {
 };
 
 typedef enum {
+    GM_TICKET_QUEUE_STATUS_ENABLED = 0x1,
+    GM_TICKET_QUEUE_STATUS_DISABLED = 0x0,
+} e_gm_ticket_queue_status;
+static const value_string e_gm_ticket_queue_status_strings[] =  {
+    { GM_TICKET_QUEUE_STATUS_ENABLED, "Enabled" },
+    { GM_TICKET_QUEUE_STATUS_DISABLED, "Disabled" },
+    { 0, NULL }
+};
+
+typedef enum {
     GM_TICKET_STATUS_RESPONSE_UPDATED = 0x1,
     GM_TICKET_STATUS_RESPONSE_CLOSED = 0x2,
     GM_TICKET_STATUS_RESPONSE_SURVEY = 0x3,

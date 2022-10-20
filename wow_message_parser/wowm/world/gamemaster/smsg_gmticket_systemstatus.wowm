@@ -1,8 +1,13 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
+
+enum GmTicketQueueStatus : u32 {
+    ENABLED = 1;
+    DISABLED = 0;
+}
 
 smsg SMSG_GMTICKET_SYSTEMSTATUS = 0x021B {
-    u32 will_accept_tickets {
-        comment = "mangoszero/cmangos/vmangos all only send 1 for true and 0 for false. vmangos: Note: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor";
+    GmTicketQueueStatus will_accept_tickets {
+        comment = "vmangos: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor";
     }
 }
 

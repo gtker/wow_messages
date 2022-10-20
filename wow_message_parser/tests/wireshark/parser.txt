@@ -3960,7 +3960,7 @@
             }
             break;
         case SMSG_GMTICKET_SYSTEMSTATUS:
-            ptvcursor_add(ptv, hf_woww_will_accept_tickets, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_gm_ticket_queue_status, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_GMTICKET_UPDATETEXT:
             ptvcursor_add(ptv, hf_woww_gm_ticket_response, 4, ENC_LITTLE_ENDIAN);

@@ -82,6 +82,7 @@
 - [FriendStatus](docs/friendstatus.md)
 - [Gender](docs/gender.md)
 - [GmTicketEscalationStatus](docs/gmticketescalationstatus.md)
+- [GmTicketQueueStatus](docs/gmticketqueuestatus.md)
 - [GmTicketResponse](docs/gmticketresponse.md)
 - [GmTicketStatus](docs/gmticketstatus.md)
 - [GmTicketStatusResponse](docs/gmticketstatusresponse.md)

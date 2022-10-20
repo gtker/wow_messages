@@ -625,6 +625,8 @@ pub(crate) mod gm_survey_question;
 pub use gm_survey_question::*;
 pub(crate) mod gm_ticket_escalation_status;
 pub use gm_ticket_escalation_status::*;
+pub(crate) mod gm_ticket_queue_status;
+pub use gm_ticket_queue_status::*;
 pub(crate) mod gm_ticket_response;
 pub use gm_ticket_response::*;
 pub(crate) mod gm_ticket_status;
