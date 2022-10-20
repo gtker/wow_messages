@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_GAMEOBJECT_DESPAWN_ANIM = 0x0215 {
     Guid guid;
