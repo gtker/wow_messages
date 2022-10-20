@@ -266,7 +266,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_AUTOEQUIP_ITEM_SLOT", 0x10F),
     Data::new("CMSG_DESTROYITEM", 0x111),
     Data::new("SMSG_INVENTORY_CHANGE_FAILURE", 0x112),
-    Data::new("SMSG_OPEN_CONTAINER", 0x113),
+    Data::with_reason("SMSG_OPEN_CONTAINER", 0x113, "Not implemented in emus"),
     Data::new("CMSG_INSPECT", 0x114),
     Data::new("SMSG_INSPECT", 0x115),
     Data::new("CMSG_INITIATE_TRADE", 0x116),

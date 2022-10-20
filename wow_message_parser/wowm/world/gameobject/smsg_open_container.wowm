@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12"; /* Not implemented for TBC/Wrath */
 
 smsg SMSG_OPEN_CONTAINER = 0x0113 {
     Guid guid;
