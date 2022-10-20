@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2"; /* different message for Wrath */
 
 smsg SMSG_GAMEOBJECT_SPAWN_ANIM = 0x0214 {
     Guid guid;

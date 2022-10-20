@@ -492,6 +492,8 @@ pub(crate) mod smsg_gameobject_despawn_anim;
 pub use smsg_gameobject_despawn_anim::*;
 pub(crate) mod smsg_gameobject_pagetext;
 pub use smsg_gameobject_pagetext::*;
+pub(crate) mod smsg_gameobject_spawn_anim;
+pub use smsg_gameobject_spawn_anim::*;
 pub(crate) mod smsg_gm_ticket_status_update;
 pub use smsg_gm_ticket_status_update::*;
 pub(crate) mod smsg_gmticket_create;

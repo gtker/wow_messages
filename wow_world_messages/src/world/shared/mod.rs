@@ -139,6 +139,7 @@ pub mod smsg_environmentaldamagelog_vanilla_tbc_wrath;
 pub mod smsg_gameobject_custom_anim_vanilla_tbc_wrath;
 pub mod smsg_gameobject_despawn_anim_vanilla_tbc_wrath;
 pub mod smsg_gameobject_pagetext_vanilla_tbc_wrath;
+pub mod smsg_gameobject_spawn_anim_vanilla_tbc;
 pub mod smsg_gm_ticket_status_update_vanilla_tbc_wrath;
 pub mod smsg_gmticket_create_vanilla_tbc_wrath;
 pub mod smsg_gmticket_deleteticket_vanilla_tbc_wrath;
