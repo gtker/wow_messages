@@ -138,6 +138,7 @@ pub mod smsg_gm_ticket_status_update_vanilla_tbc_wrath;
 pub mod smsg_gmticket_create_vanilla_tbc_wrath;
 pub mod smsg_gmticket_deleteticket_vanilla_tbc_wrath;
 pub mod smsg_gmticket_systemstatus_vanilla_tbc_wrath;
+pub mod smsg_gmticket_updatetext_vanilla_tbc_wrath;
 pub mod smsg_initialize_factions_vanilla_tbc;
 pub mod smsg_levelup_info_vanilla_tbc;
 pub mod smsg_log_xpgain_vanilla_tbc;

@@ -490,6 +490,8 @@ pub(crate) mod smsg_gmticket_deleteticket;
 pub use smsg_gmticket_deleteticket::*;
 pub(crate) mod smsg_gmticket_systemstatus;
 pub use smsg_gmticket_systemstatus::*;
+pub(crate) mod smsg_gmticket_updatetext;
+pub use smsg_gmticket_updatetext::*;
 pub(crate) mod smsg_init_world_states;
 pub use smsg_init_world_states::*;
 pub(crate) mod smsg_initialize_factions;
