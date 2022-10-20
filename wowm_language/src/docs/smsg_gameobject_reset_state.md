@@ -1,6 +1,6 @@
 # SMSG_GAMEOBJECT_RESET_STATE
 
-## Client Version 1.12
+## Client Version 1
 
 ### Wowm Representation
 
