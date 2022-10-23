@@ -93,6 +93,7 @@ use crate::world::wrath::CMSG_TEXT_EMOTE;
 use crate::world::wrath::CMSG_AUTOEQUIP_ITEM;
 use crate::world::wrath::CMSG_AUTOSTORE_BAG_ITEM;
 use crate::world::wrath::CMSG_AUTOEQUIP_ITEM_SLOT;
+use crate::world::wrath::CMSG_DESTROYITEM;
 use crate::world::wrath::CMSG_SET_FACTION_ATWAR;
 use crate::world::wrath::CMSG_SET_ACTION_BUTTON;
 use crate::world::wrath::CMSG_CANCEL_CHANNELLING;
@@ -260,6 +261,7 @@ pub enum ClientOpcodeMessage {
     CMSG_AUTOEQUIP_ITEM(CMSG_AUTOEQUIP_ITEM),
     CMSG_AUTOSTORE_BAG_ITEM(CMSG_AUTOSTORE_BAG_ITEM),
     CMSG_AUTOEQUIP_ITEM_SLOT(CMSG_AUTOEQUIP_ITEM_SLOT),
+    CMSG_DESTROYITEM(CMSG_DESTROYITEM),
     CMSG_SET_FACTION_ATWAR(CMSG_SET_FACTION_ATWAR),
     CMSG_SET_ACTION_BUTTON(CMSG_SET_ACTION_BUTTON),
     CMSG_CANCEL_CHANNELLING(CMSG_CANCEL_CHANNELLING),
@@ -429,6 +431,7 @@ impl ClientOpcodeMessage {
             0x010A => Ok(Self::CMSG_AUTOEQUIP_ITEM(<CMSG_AUTOEQUIP_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010A, size: body_size, io, } } else { a } })?)),
             0x010B => Ok(Self::CMSG_AUTOSTORE_BAG_ITEM(<CMSG_AUTOSTORE_BAG_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010B, size: body_size, io, } } else { a } })?)),
             0x010F => Ok(Self::CMSG_AUTOEQUIP_ITEM_SLOT(<CMSG_AUTOEQUIP_ITEM_SLOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010F, size: body_size, io, } } else { a } })?)),
+            0x0111 => Ok(Self::CMSG_DESTROYITEM(<CMSG_DESTROYITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0111, size: body_size, io, } } else { a } })?)),
             0x0125 => Ok(Self::CMSG_SET_FACTION_ATWAR(<CMSG_SET_FACTION_ATWAR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0125, size: body_size, io, } } else { a } })?)),
             0x0128 => Ok(Self::CMSG_SET_ACTION_BUTTON(<CMSG_SET_ACTION_BUTTON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0128, size: body_size, io, } } else { a } })?)),
             0x013B => Ok(Self::CMSG_CANCEL_CHANNELLING(<CMSG_CANCEL_CHANNELLING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013B, size: body_size, io, } } else { a } })?)),
@@ -666,6 +669,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_DESTROYITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_FACTION_ATWAR(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTION_BUTTON(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_encrypted_client(w, e),
@@ -836,6 +840,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_DESTROYITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_FACTION_ATWAR(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTION_BUTTON(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_unencrypted_client(w),
@@ -1006,6 +1011,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_DESTROYITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_FACTION_ATWAR(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1176,6 +1182,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_DESTROYITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_FACTION_ATWAR(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1346,6 +1353,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_DESTROYITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_FACTION_ATWAR(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1516,6 +1524,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_DESTROYITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_FACTION_ATWAR(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_unencrypted_client(w).await,
@@ -1697,6 +1706,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM(_) => "CMSG_AUTOEQUIP_ITEM",
             ClientOpcodeMessage::CMSG_AUTOSTORE_BAG_ITEM(_) => "CMSG_AUTOSTORE_BAG_ITEM",
             ClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM_SLOT(_) => "CMSG_AUTOEQUIP_ITEM_SLOT",
+            ClientOpcodeMessage::CMSG_DESTROYITEM(_) => "CMSG_DESTROYITEM",
             ClientOpcodeMessage::CMSG_SET_FACTION_ATWAR(_) => "CMSG_SET_FACTION_ATWAR",
             ClientOpcodeMessage::CMSG_SET_ACTION_BUTTON(_) => "CMSG_SET_ACTION_BUTTON",
             ClientOpcodeMessage::CMSG_CANCEL_CHANNELLING(_) => "CMSG_CANCEL_CHANNELLING",
@@ -2287,6 +2297,12 @@ impl From<CMSG_AUTOSTORE_BAG_ITEM> for ClientOpcodeMessage {
 impl From<CMSG_AUTOEQUIP_ITEM_SLOT> for ClientOpcodeMessage {
     fn from(c: CMSG_AUTOEQUIP_ITEM_SLOT) -> Self {
         Self::CMSG_AUTOEQUIP_ITEM_SLOT(c)
+    }
+}
+
+impl From<CMSG_DESTROYITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_DESTROYITEM) -> Self {
+        Self::CMSG_DESTROYITEM(c)
     }
 }
 
