@@ -437,6 +437,8 @@ pub(crate) mod msg_move_teleport_ack_server;
 pub use msg_move_teleport_ack_server::*;
 pub(crate) mod msg_move_worldport_ack;
 pub use msg_move_worldport_ack::*;
+pub(crate) mod msg_petition_decline;
+pub use msg_petition_decline::*;
 pub(crate) mod npc_text_update;
 pub use npc_text_update::*;
 pub(crate) mod npc_text_update_emote;
