@@ -236,6 +236,8 @@ pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
 pub(crate) mod cmsg_leave_channel;
 pub use cmsg_leave_channel::*;
+pub(crate) mod cmsg_list_inventory;
+pub use cmsg_list_inventory::*;
 pub(crate) mod cmsg_logout_cancel;
 pub use cmsg_logout_cancel::*;
 pub(crate) mod cmsg_logout_request;

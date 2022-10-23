@@ -103,6 +103,7 @@ use crate::world::tbc::CMSG_DUEL_ACCEPTED;
 use crate::world::tbc::CMSG_DUEL_CANCELLED;
 use crate::world::tbc::CMSG_GOSSIP_HELLO;
 use crate::world::tbc::CMSG_GOSSIP_SELECT_OPTION;
+use crate::world::tbc::CMSG_LIST_INVENTORY;
 use crate::world::tbc::CMSG_BUY_ITEM;
 use crate::world::tbc::CMSG_BUY_ITEM_IN_SLOT;
 use crate::world::tbc::CMSG_ACTIVATETAXI;
@@ -268,6 +269,7 @@ pub enum ClientOpcodeMessage {
     CMSG_DUEL_CANCELLED(CMSG_DUEL_CANCELLED),
     CMSG_GOSSIP_HELLO(CMSG_GOSSIP_HELLO),
     CMSG_GOSSIP_SELECT_OPTION(CMSG_GOSSIP_SELECT_OPTION),
+    CMSG_LIST_INVENTORY(CMSG_LIST_INVENTORY),
     CMSG_BUY_ITEM(CMSG_BUY_ITEM),
     CMSG_BUY_ITEM_IN_SLOT(CMSG_BUY_ITEM_IN_SLOT),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
@@ -435,6 +437,7 @@ impl ClientOpcodeMessage {
             0x016D => Ok(Self::CMSG_DUEL_CANCELLED(<CMSG_DUEL_CANCELLED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016D, size: body_size, io, } } else { a } })?)),
             0x017B => Ok(Self::CMSG_GOSSIP_HELLO(<CMSG_GOSSIP_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017B, size: body_size, io, } } else { a } })?)),
             0x017C => Ok(Self::CMSG_GOSSIP_SELECT_OPTION(<CMSG_GOSSIP_SELECT_OPTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017C, size: body_size, io, } } else { a } })?)),
+            0x019E => Ok(Self::CMSG_LIST_INVENTORY(<CMSG_LIST_INVENTORY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019E, size: body_size, io, } } else { a } })?)),
             0x01A2 => Ok(Self::CMSG_BUY_ITEM(<CMSG_BUY_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A2, size: body_size, io, } } else { a } })?)),
             0x01A3 => Ok(Self::CMSG_BUY_ITEM_IN_SLOT(<CMSG_BUY_ITEM_IN_SLOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A3, size: body_size, io, } } else { a } })?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AD, size: body_size, io, } } else { a } })?)),
@@ -670,6 +673,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_CANCELLED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GOSSIP_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LIST_INVENTORY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUY_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
@@ -838,6 +842,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_CANCELLED(c) => c.write_unencrypted_client(w),
             Self::CMSG_GOSSIP_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LIST_INVENTORY(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUY_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
@@ -1006,6 +1011,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_CANCELLED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LIST_INVENTORY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1174,6 +1180,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_CANCELLED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LIST_INVENTORY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1342,6 +1349,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_CANCELLED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LIST_INVENTORY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1510,6 +1518,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_DUEL_CANCELLED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LIST_INVENTORY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
@@ -1713,6 +1722,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_DUEL_CANCELLED(_) => "CMSG_DUEL_CANCELLED",
             ClientOpcodeMessage::CMSG_GOSSIP_HELLO(_) => "CMSG_GOSSIP_HELLO",
             ClientOpcodeMessage::CMSG_GOSSIP_SELECT_OPTION(_) => "CMSG_GOSSIP_SELECT_OPTION",
+            ClientOpcodeMessage::CMSG_LIST_INVENTORY(_) => "CMSG_LIST_INVENTORY",
             ClientOpcodeMessage::CMSG_BUY_ITEM(_) => "CMSG_BUY_ITEM",
             ClientOpcodeMessage::CMSG_BUY_ITEM_IN_SLOT(_) => "CMSG_BUY_ITEM_IN_SLOT",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
@@ -2351,6 +2361,12 @@ impl From<CMSG_GOSSIP_HELLO> for ClientOpcodeMessage {
 impl From<CMSG_GOSSIP_SELECT_OPTION> for ClientOpcodeMessage {
     fn from(c: CMSG_GOSSIP_SELECT_OPTION) -> Self {
         Self::CMSG_GOSSIP_SELECT_OPTION(c)
+    }
+}
+
+impl From<CMSG_LIST_INVENTORY> for ClientOpcodeMessage {
+    fn from(c: CMSG_LIST_INVENTORY) -> Self {
+        Self::CMSG_LIST_INVENTORY(c)
     }
 }
 
