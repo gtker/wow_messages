@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/vector3d.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/vector3d.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/vector.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/vector.wowm#L3):
 /// ```text
 /// struct Vector3d {
 ///     f32 x;

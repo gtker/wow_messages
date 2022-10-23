@@ -594,6 +594,8 @@ pub(crate) mod update_flag;
 pub use update_flag::*;
 pub(crate) mod update_type;
 pub use update_type::*;
+pub(crate) mod vector2d;
+pub use vector2d::*;
 pub(crate) mod vector3d;
 pub use vector3d::*;
 pub(crate) mod world_result;

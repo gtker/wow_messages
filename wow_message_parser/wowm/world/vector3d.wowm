@@ -1,8 +1,0 @@
-#tag_all versions "1 2 3";
-
-struct Vector3d {
-    f32 x;
-    f32 y;
-    f32 z;
-}
-

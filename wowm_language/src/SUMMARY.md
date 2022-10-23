@@ -934,6 +934,7 @@
 - [TradeSlot](docs/tradeslot.md)
 - [TrainerSpell](docs/trainerspell.md)
 - [TransportInfo](docs/transportinfo.md)
+- [Vector2d](docs/vector2d.md)
 - [Vector3d](docs/vector3d.md)
 - [WhoPlayer](docs/whoplayer.md)
 - [WorldState](docs/worldstate.md)

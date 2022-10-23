@@ -1616,6 +1616,8 @@ pub(crate) mod update_type;
 pub use update_type::*;
 pub(crate) mod url_info;
 pub use url_info::*;
+pub(crate) mod vector2d;
+pub use vector2d::*;
 pub(crate) mod vector3d;
 pub use vector3d::*;
 pub(crate) mod weather_change_type;
