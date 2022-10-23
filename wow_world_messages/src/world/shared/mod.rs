@@ -106,6 +106,7 @@ pub mod cmsg_player_logout_vanilla_tbc_wrath;
 pub mod cmsg_query_time_vanilla_tbc_wrath;
 pub mod cmsg_read_item_vanilla_tbc_wrath;
 pub mod cmsg_realm_split_tbc_wrath;
+pub mod cmsg_repair_item_tbc_wrath;
 pub mod cmsg_repop_request_vanilla_tbc_wrath;
 pub mod cmsg_request_account_data_vanilla_tbc_wrath;
 pub mod cmsg_set_action_button_vanilla_tbc_wrath;

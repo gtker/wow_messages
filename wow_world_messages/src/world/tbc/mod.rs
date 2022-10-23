@@ -268,6 +268,8 @@ pub(crate) mod cmsg_read_item;
 pub use cmsg_read_item::*;
 pub(crate) mod cmsg_realm_split;
 pub use cmsg_realm_split::*;
+pub(crate) mod cmsg_repair_item;
+pub use cmsg_repair_item::*;
 pub(crate) mod cmsg_repop_request;
 pub use cmsg_repop_request::*;
 pub(crate) mod cmsg_request_account_data;
