@@ -160,6 +160,8 @@ pub(crate) mod cmsg_guild_add_rank;
 pub use cmsg_guild_add_rank::*;
 pub(crate) mod cmsg_guild_create;
 pub use cmsg_guild_create::*;
+pub(crate) mod cmsg_guild_decline;
+pub use cmsg_guild_decline::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;
