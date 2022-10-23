@@ -322,6 +322,8 @@ pub(crate) mod cmsg_time_sync_resp;
 pub use cmsg_time_sync_resp::*;
 pub(crate) mod cmsg_toggle_cloak;
 pub use cmsg_toggle_cloak::*;
+pub(crate) mod cmsg_toggle_helm;
+pub use cmsg_toggle_helm::*;
 pub(crate) mod cmsg_turn_in_petition;
 pub use cmsg_turn_in_petition::*;
 pub(crate) mod cmsg_tutorial_clear;
