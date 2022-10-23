@@ -298,6 +298,6 @@ struct NpcTextUpdateEmote {
     u32 delay;
     u32 emote;
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }
 

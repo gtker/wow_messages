@@ -105,6 +105,7 @@ pub mod msg_battleground_player_positions_client_vanilla_tbc_wrath;
 pub mod msg_battleground_player_positions_server_vanilla_tbc_wrath;
 pub mod msg_move_teleport_ack_client_vanilla_tbc_wrath;
 pub mod msg_move_worldport_ack_vanilla_tbc_wrath;
+pub mod npc_text_update_emote_vanilla_tbc_wrath;
 pub mod player_chat_tag_vanilla_tbc;
 pub mod quest_item_vanilla_tbc;
 pub mod realm_split_state_tbc_wrath;

@@ -1,15 +1,16 @@
-#tag_all versions "1.12";
-
 struct NpcTextUpdate {
     f32 probability;
     CString[2] texts;
     Language language;
     NpcTextUpdateEmote[3] emotes;
+} {
+    paste_versions = "1 2.4.3 3";
 }
 
 smsg SMSG_NPC_TEXT_UPDATE = 0x0180 {
     u32 text_id;
-    f32 probability;
     NpcTextUpdate[8] texts;
+} {
+    paste_versions = "1 2.4.3 3";
 }
 

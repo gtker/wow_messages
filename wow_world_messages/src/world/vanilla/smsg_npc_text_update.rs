@@ -7,13 +7,11 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_NPC_TEXT_UPDATE = 0x0180 {
 ///     u32 text_id;
-///     f32 probability;
 ///     NpcTextUpdate[8] texts;
 /// }
 /// ```
 pub struct SMSG_NPC_TEXT_UPDATE {
     pub text_id: u32,
-    pub probability: f32,
     pub texts: [NpcTextUpdate; 8],
 }
 
@@ -28,9 +26,6 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
         // text_id: u32
         w.write_all(&self.text_id.to_le_bytes())?;
 
-        // probability: f32
-        w.write_all(&self.probability.to_le_bytes())?;
-
         // texts: NpcTextUpdate[8]
         for i in self.texts.iter() {
             i.write_into_vec(w)?;
@@ -42,8 +37,6 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
         // text_id: u32
         let text_id = crate::util::read_u32_le(r)?;
 
-        // probability: f32
-        let probability = crate::util::read_f32_le(r)?;
         // texts: NpcTextUpdate[8]
         let mut texts = Vec::with_capacity(8);
         for i in 0..8 {
@@ -53,7 +46,6 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
 
         Ok(Self {
             text_id,
-            probability,
             texts,
         })
     }
@@ -65,7 +57,6 @@ impl crate::world::vanilla::ServerMessage for SMSG_NPC_TEXT_UPDATE {}
 impl SMSG_NPC_TEXT_UPDATE {
     pub(crate) fn size(&self) -> usize {
         4 // text_id: u32
-        + 4 // probability: f32
         + self.texts.iter().fold(0, |acc, x| acc + x.size()) // texts: NpcTextUpdate[8]
     }
 }
