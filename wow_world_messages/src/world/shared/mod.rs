@@ -124,6 +124,7 @@ pub mod cmsg_split_item_vanilla_tbc;
 pub mod cmsg_swap_inv_item_vanilla_tbc_wrath;
 pub mod cmsg_swap_item_vanilla_tbc_wrath;
 pub mod cmsg_time_sync_resp_tbc_wrath;
+pub mod cmsg_toggle_cloak_vanilla_tbc_wrath;
 pub mod cmsg_turn_in_petition_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_clear_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_flag_vanilla_tbc_wrath;
