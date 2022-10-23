@@ -96,6 +96,7 @@ use crate::world::tbc::CMSG_GMTICKET_GETTICKET;
 use crate::world::tbc::CMSG_GMTICKET_DELETETICKET;
 use crate::world::tbc::CMSG_GMTICKET_SYSTEMSTATUS;
 use crate::world::tbc::CMSG_CHAT_IGNORED;
+use crate::world::tbc::CMSG_GUILD_ADD_RANK;
 use crate::world::tbc::CMSG_BATTLEFIELD_LIST;
 use crate::world::tbc::MSG_AUCTION_HELLO_Client;
 use crate::world::tbc::CMSG_AUCTION_SELL_ITEM;
@@ -220,6 +221,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GMTICKET_DELETETICKET(CMSG_GMTICKET_DELETETICKET),
     CMSG_GMTICKET_SYSTEMSTATUS(CMSG_GMTICKET_SYSTEMSTATUS),
     CMSG_CHAT_IGNORED(CMSG_CHAT_IGNORED),
+    CMSG_GUILD_ADD_RANK(CMSG_GUILD_ADD_RANK),
     CMSG_BATTLEFIELD_LIST(CMSG_BATTLEFIELD_LIST),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Client),
     CMSG_AUCTION_SELL_ITEM(CMSG_AUCTION_SELL_ITEM),
@@ -346,6 +348,7 @@ impl ClientOpcodeMessage {
             0x0217 => Ok(Self::CMSG_GMTICKET_DELETETICKET(<CMSG_GMTICKET_DELETETICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0217, size: body_size, io, } } else { a } })?)),
             0x021A => Ok(Self::CMSG_GMTICKET_SYSTEMSTATUS(<CMSG_GMTICKET_SYSTEMSTATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021A, size: body_size, io, } } else { a } })?)),
             0x0225 => Ok(Self::CMSG_CHAT_IGNORED(<CMSG_CHAT_IGNORED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0225, size: body_size, io, } } else { a } })?)),
+            0x0232 => Ok(Self::CMSG_GUILD_ADD_RANK(<CMSG_GUILD_ADD_RANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0232, size: body_size, io, } } else { a } })?)),
             0x023C => Ok(Self::CMSG_BATTLEFIELD_LIST(<CMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023C, size: body_size, io, } } else { a } })?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0255, size: body_size, io, } } else { a } })?)),
             0x0256 => Ok(Self::CMSG_AUCTION_SELL_ITEM(<CMSG_AUCTION_SELL_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0256, size: body_size, io, } } else { a } })?)),
@@ -540,6 +543,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAT_IGNORED(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_ADD_RANK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_client(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.write_encrypted_client(w, e),
@@ -667,6 +671,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAT_IGNORED(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GUILD_ADD_RANK(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_client(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.write_unencrypted_client(w),
@@ -794,6 +799,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_ADD_RANK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -921,6 +927,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_ADD_RANK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1048,6 +1055,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_ADD_RANK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1175,6 +1183,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_ADD_RANK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.astd_write_unencrypted_client(w).await,
@@ -1337,6 +1346,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GMTICKET_DELETETICKET(_) => "CMSG_GMTICKET_DELETETICKET",
             ClientOpcodeMessage::CMSG_GMTICKET_SYSTEMSTATUS(_) => "CMSG_GMTICKET_SYSTEMSTATUS",
             ClientOpcodeMessage::CMSG_CHAT_IGNORED(_) => "CMSG_CHAT_IGNORED",
+            ClientOpcodeMessage::CMSG_GUILD_ADD_RANK(_) => "CMSG_GUILD_ADD_RANK",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_LIST(_) => "CMSG_BATTLEFIELD_LIST",
             ClientOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Client",
             ClientOpcodeMessage::CMSG_AUCTION_SELL_ITEM(_) => "CMSG_AUCTION_SELL_ITEM",
@@ -1899,6 +1909,12 @@ impl From<CMSG_GMTICKET_SYSTEMSTATUS> for ClientOpcodeMessage {
 impl From<CMSG_CHAT_IGNORED> for ClientOpcodeMessage {
     fn from(c: CMSG_CHAT_IGNORED) -> Self {
         Self::CMSG_CHAT_IGNORED(c)
+    }
+}
+
+impl From<CMSG_GUILD_ADD_RANK> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_ADD_RANK) -> Self {
+        Self::CMSG_GUILD_ADD_RANK(c)
     }
 }
 

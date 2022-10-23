@@ -166,6 +166,8 @@ pub(crate) mod cmsg_gossip_select_option;
 pub use cmsg_gossip_select_option::*;
 pub(crate) mod cmsg_guild_accept;
 pub use cmsg_guild_accept::*;
+pub(crate) mod cmsg_guild_add_rank;
+pub use cmsg_guild_add_rank::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;
