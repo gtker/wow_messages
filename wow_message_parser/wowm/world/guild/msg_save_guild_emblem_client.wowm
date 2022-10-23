@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg MSG_SAVE_GUILD_EMBLEM_Client = 0x01F1 {
     Guid vendor;
