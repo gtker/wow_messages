@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 struct GossipItem {
     u32 id {
         comment = "vmangos: sets to loop index";
@@ -9,6 +7,8 @@ struct GossipItem {
         comment = "vmangos: makes pop up box password";
     }
     CString message;
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_GOSSIP_MESSAGE = 0x017D {
@@ -22,5 +22,7 @@ smsg SMSG_GOSSIP_MESSAGE = 0x017D {
         valid_range = "0 20";
     }
     QuestItem[amount_of_quests] quests;
+} {
+    versions = "1.12";
 }
 
