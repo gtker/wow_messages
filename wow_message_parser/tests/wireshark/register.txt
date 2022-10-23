@@ -3850,12 +3850,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_skip,
-            { "Skip", "woww.skip",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_slot,
             { "Slot", "woww.slot",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,

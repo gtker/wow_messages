@@ -1154,23 +1154,23 @@
             break;
         case CMSG_PETITION_BUY:
             ptvcursor_add(ptv, hf_woww_npc, 8, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 8, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_guid, 8, ENC_LITTLE_ENDIAN);
             add_cstring(ptv, &hf_woww_name);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 2, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 2, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_index, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_skip, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_PETITION_QUERY:
             ptvcursor_add(ptv, hf_woww_guild_guid, 4, ENC_LITTLE_ENDIAN);

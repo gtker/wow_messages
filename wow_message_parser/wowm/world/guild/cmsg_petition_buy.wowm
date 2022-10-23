@@ -1,29 +1,50 @@
-#tag_all versions "1.12";
-
-#tag_all versions "1.12";
-
 cmsg CMSG_PETITION_BUY = 0x01BD {
     Guid npc;
-    u32 skip1;
-    Guid skip2;
+    u32 unknown1;
+    Guid unknown2;
     CString name;
-    u32 skip3;
-    u32 skip4;
-    u32 skip5;
-    u32 skip6;
-    u32 skip7;
-    u32 skip8;
-    u32 skip9;
-    u32 skip10;
-    u32 skip11;
-    u32 skip12;
-    u16 skip13;
-    u8 skip14;
+    u32 unknown3;
+    u32 unknown4;
+    u32 unknown5;
+    u32 unknown6;
+    u32 unknown7;
+    u32 unknown8;
+    u32 unknown9;
+    u32 unknown10;
+    u32 unknown11;
+    u32 unknown12;
+    u16 unknown13;
+    u8 unknown14;
     u32 index {
         comment = "cmangos/vmangos/mangoszero: Named but never used";
     }
-    u32 skip15;
+    u32 unknown15;
 } {
     comment = "cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused";
+    versions = "1 2";
 }
 
+cmsg CMSG_PETITION_BUY = 0x01BD {
+    Guid npc;
+    u32 unknown1;
+    Guid unknown2;
+    CString name;
+    CString unknown3;
+    u32 unknown4;
+    u32 unknown5;
+    u32 unknown6;
+    u32 unknown7;
+    u32 unknown8;
+    u32 unknown9;
+    u32 unknown10;
+    u16 unknown11;
+    u32 unknown12;
+    u32 unknown13;
+    u32 unknown14;
+    CString[10] unknown15;
+    u32 index;
+    u32 unknown16;
+} {
+    comment = "cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused";
+    versions = "3.3.5";
+}
