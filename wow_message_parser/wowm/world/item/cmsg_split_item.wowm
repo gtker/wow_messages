@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_SPLIT_ITEM = 0x010E {
     u8 source_bag;
     u8 source_slot;
@@ -8,5 +6,18 @@ cmsg CMSG_SPLIT_ITEM = 0x010E {
     u8 amount {
         minimum_legal_value = "1";
     }
+} {
+    versions = "1 2";
 }
 
+cmsg CMSG_SPLIT_ITEM = 0x010E {
+    u8 source_bag;
+    u8 source_slot;
+    u8 destination_bag;
+    u8 destination_slot;
+    u32 amount {
+        minimum_legal_value = "1";
+    }
+} {
+    versions = "3.3.5";
+}
