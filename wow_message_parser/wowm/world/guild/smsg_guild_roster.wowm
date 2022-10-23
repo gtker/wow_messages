@@ -2,7 +2,7 @@ enum GuildMemberStatus : u8 {
     OFFLINE = 0;
     ONLINE = 1;
 } {
-    versions = "1 2";
+    versions = "1 2 3";
 }
 
 struct GuildMember {
@@ -41,6 +41,7 @@ struct GuildMember {
     Class class;
     u8 unknown1 {
         comment = "mangosone: new 2.4.0";
+        comment = "Possibly gender";
     }
     Area area;
     if (status == OFFLINE) {
@@ -52,12 +53,33 @@ struct GuildMember {
     versions = "2.4.3";
 }
 
+struct GuildMember {
+    Guid guid;
+    u32 unknown {
+        comment = "arcemu: high guid";
+    }
+    GuildMemberStatus status;
+    CString name;
+    u32 rank;
+    u8 level;
+    Class class;
+    Gender gender;
+    Area area;
+    if (status == OFFLINE) {
+        f32 time_offline;
+    }
+    CString public_note;
+    CString officer_note;
+} {
+    versions = "3.3.5";
+}
+
 struct GuildRights {
     u32 rights;
     u32 money_per_day;
     GuildBankRights[6] bank_tab_rights;
 } {
-    versions = "2.4.3";
+    versions = "2.4.3 3";
 }
 smsg SMSG_GUILD_ROSTER = 0x008A {
     u32 amount_of_members;
@@ -67,5 +89,5 @@ smsg SMSG_GUILD_ROSTER = 0x008A {
     GuildRights[amount_of_rights] rights;
     GuildMember[amount_of_members] members;
 } {
-    versions = "2.4.3";
+    paste_versions = "2.4.3";
 }

@@ -32,6 +32,7 @@ pub struct GuildMember {
     pub level: u8,
     pub class: Class,
     /// mangosone: new 2.4.0
+    /// Possibly gender
     ///
     pub unknown1: u8,
     pub area: Area,
