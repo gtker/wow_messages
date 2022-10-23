@@ -106,6 +106,7 @@ use crate::world::wrath::CMSG_DUEL_CANCELLED;
 use crate::world::wrath::CMSG_GOSSIP_HELLO;
 use crate::world::wrath::CMSG_GOSSIP_SELECT_OPTION;
 use crate::world::wrath::CMSG_ACTIVATETAXI;
+use crate::world::wrath::CMSG_BANKER_ACTIVATE;
 use crate::world::wrath::CMSG_PETITION_SHOWLIST;
 use crate::world::wrath::CMSG_PETITION_BUY;
 use crate::world::wrath::CMSG_PETITION_SHOW_SIGNATURES;
@@ -267,6 +268,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GOSSIP_HELLO(CMSG_GOSSIP_HELLO),
     CMSG_GOSSIP_SELECT_OPTION(CMSG_GOSSIP_SELECT_OPTION),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
+    CMSG_BANKER_ACTIVATE(CMSG_BANKER_ACTIVATE),
     CMSG_PETITION_SHOWLIST(CMSG_PETITION_SHOWLIST),
     CMSG_PETITION_BUY(CMSG_PETITION_BUY),
     CMSG_PETITION_SHOW_SIGNATURES(CMSG_PETITION_SHOW_SIGNATURES),
@@ -430,6 +432,7 @@ impl ClientOpcodeMessage {
             0x017B => Ok(Self::CMSG_GOSSIP_HELLO(<CMSG_GOSSIP_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017B, size: body_size, io, } } else { a } })?)),
             0x017C => Ok(Self::CMSG_GOSSIP_SELECT_OPTION(<CMSG_GOSSIP_SELECT_OPTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017C, size: body_size, io, } } else { a } })?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AD, size: body_size, io, } } else { a } })?)),
+            0x01B7 => Ok(Self::CMSG_BANKER_ACTIVATE(<CMSG_BANKER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B7, size: body_size, io, } } else { a } })?)),
             0x01BB => Ok(Self::CMSG_PETITION_SHOWLIST(<CMSG_PETITION_SHOWLIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BB, size: body_size, io, } } else { a } })?)),
             0x01BD => Ok(Self::CMSG_PETITION_BUY(<CMSG_PETITION_BUY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BD, size: body_size, io, } } else { a } })?)),
             0x01BE => Ok(Self::CMSG_PETITION_SHOW_SIGNATURES(<CMSG_PETITION_SHOW_SIGNATURES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BE, size: body_size, io, } } else { a } })?)),
@@ -661,6 +664,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_BANKER_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PETITION_SHOWLIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PETITION_BUY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PETITION_SHOW_SIGNATURES(c) => c.write_encrypted_client(w, e),
@@ -825,6 +829,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
+            Self::CMSG_BANKER_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_PETITION_SHOWLIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_PETITION_BUY(c) => c.write_unencrypted_client(w),
             Self::CMSG_PETITION_SHOW_SIGNATURES(c) => c.write_unencrypted_client(w),
@@ -989,6 +994,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_BANKER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PETITION_SHOWLIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PETITION_BUY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PETITION_SHOW_SIGNATURES(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1153,6 +1159,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_BANKER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PETITION_SHOWLIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PETITION_BUY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PETITION_SHOW_SIGNATURES(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1317,6 +1324,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_BANKER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PETITION_SHOWLIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PETITION_BUY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PETITION_SHOW_SIGNATURES(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1481,6 +1489,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_BANKER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PETITION_SHOWLIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PETITION_BUY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PETITION_SHOW_SIGNATURES(c) => c.astd_write_unencrypted_client(w).await,
@@ -1656,6 +1665,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GOSSIP_HELLO(_) => "CMSG_GOSSIP_HELLO",
             ClientOpcodeMessage::CMSG_GOSSIP_SELECT_OPTION(_) => "CMSG_GOSSIP_SELECT_OPTION",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
+            ClientOpcodeMessage::CMSG_BANKER_ACTIVATE(_) => "CMSG_BANKER_ACTIVATE",
             ClientOpcodeMessage::CMSG_PETITION_SHOWLIST(_) => "CMSG_PETITION_SHOWLIST",
             ClientOpcodeMessage::CMSG_PETITION_BUY(_) => "CMSG_PETITION_BUY",
             ClientOpcodeMessage::CMSG_PETITION_SHOW_SIGNATURES(_) => "CMSG_PETITION_SHOW_SIGNATURES",
@@ -2305,6 +2315,12 @@ impl From<CMSG_GOSSIP_SELECT_OPTION> for ClientOpcodeMessage {
 impl From<CMSG_ACTIVATETAXI> for ClientOpcodeMessage {
     fn from(c: CMSG_ACTIVATETAXI) -> Self {
         Self::CMSG_ACTIVATETAXI(c)
+    }
+}
+
+impl From<CMSG_BANKER_ACTIVATE> for ClientOpcodeMessage {
+    fn from(c: CMSG_BANKER_ACTIVATE) -> Self {
+        Self::CMSG_BANKER_ACTIVATE(c)
     }
 }
 
