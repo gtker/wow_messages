@@ -178,6 +178,8 @@ pub(crate) mod cmsg_guild_leader;
 pub use cmsg_guild_leader::*;
 pub(crate) mod cmsg_guild_leave;
 pub use cmsg_guild_leave::*;
+pub(crate) mod cmsg_guild_motd;
+pub use cmsg_guild_motd::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;
