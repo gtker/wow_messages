@@ -1,2 +1,2 @@
-pub use crate::shared::quest_item_vanilla_vanilla_tbc::QuestItem;
+pub use crate::shared::quest_item_vanilla_tbc::QuestItem;
 

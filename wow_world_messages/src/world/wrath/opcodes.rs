@@ -2167,6 +2167,7 @@ use crate::world::wrath::SMSG_DUEL_OUTOFBOUNDS;
 use crate::world::wrath::SMSG_DUEL_INBOUNDS;
 use crate::world::wrath::SMSG_DUEL_COMPLETE;
 use crate::world::wrath::SMSG_DUEL_WINNER;
+use crate::world::wrath::SMSG_GOSSIP_MESSAGE;
 use crate::world::wrath::SMSG_GOSSIP_COMPLETE;
 use crate::world::wrath::SMSG_NOTIFICATION;
 use crate::world::wrath::SMSG_PLAYED_TIME;
@@ -2295,6 +2296,7 @@ pub enum ServerOpcodeMessage {
     SMSG_DUEL_INBOUNDS(SMSG_DUEL_INBOUNDS),
     SMSG_DUEL_COMPLETE(SMSG_DUEL_COMPLETE),
     SMSG_DUEL_WINNER(SMSG_DUEL_WINNER),
+    SMSG_GOSSIP_MESSAGE(SMSG_GOSSIP_MESSAGE),
     SMSG_GOSSIP_COMPLETE(SMSG_GOSSIP_COMPLETE),
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
     SMSG_PLAYED_TIME(SMSG_PLAYED_TIME),
@@ -2425,6 +2427,7 @@ impl ServerOpcodeMessage {
             0x0169 => Ok(Self::SMSG_DUEL_INBOUNDS(<SMSG_DUEL_INBOUNDS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0169, size: body_size, io, } } else { a } })?)),
             0x016A => Ok(Self::SMSG_DUEL_COMPLETE(<SMSG_DUEL_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016A, size: body_size, io, } } else { a } })?)),
             0x016B => Ok(Self::SMSG_DUEL_WINNER(<SMSG_DUEL_WINNER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016B, size: body_size, io, } } else { a } })?)),
+            0x017D => Ok(Self::SMSG_GOSSIP_MESSAGE(<SMSG_GOSSIP_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017D, size: body_size, io, } } else { a } })?)),
             0x017E => Ok(Self::SMSG_GOSSIP_COMPLETE(<SMSG_GOSSIP_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017E, size: body_size, io, } } else { a } })?)),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CB, size: body_size, io, } } else { a } })?)),
             0x01CD => Ok(Self::SMSG_PLAYED_TIME(<SMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CD, size: body_size, io, } } else { a } })?)),
@@ -2704,6 +2707,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_INBOUNDS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_WINNER(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GOSSIP_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAYED_TIME(c) => c.write_encrypted_server(w, e),
@@ -2835,6 +2839,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_INBOUNDS(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_WINNER(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GOSSIP_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAYED_TIME(c) => c.write_unencrypted_server(w),
@@ -2966,6 +2971,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_INBOUNDS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3097,6 +3103,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_INBOUNDS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_server(w).await,
@@ -3228,6 +3235,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_INBOUNDS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3359,6 +3367,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_INBOUNDS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_server(w).await,
@@ -3492,6 +3501,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_DUEL_INBOUNDS(_) => "SMSG_DUEL_INBOUNDS",
             ServerOpcodeMessage::SMSG_DUEL_COMPLETE(_) => "SMSG_DUEL_COMPLETE",
             ServerOpcodeMessage::SMSG_DUEL_WINNER(_) => "SMSG_DUEL_WINNER",
+            ServerOpcodeMessage::SMSG_GOSSIP_MESSAGE(_) => "SMSG_GOSSIP_MESSAGE",
             ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => "SMSG_GOSSIP_COMPLETE",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
             ServerOpcodeMessage::SMSG_PLAYED_TIME(_) => "SMSG_PLAYED_TIME",
@@ -3963,6 +3973,12 @@ impl From<SMSG_DUEL_COMPLETE> for ServerOpcodeMessage {
 impl From<SMSG_DUEL_WINNER> for ServerOpcodeMessage {
     fn from(c: SMSG_DUEL_WINNER) -> Self {
         Self::SMSG_DUEL_WINNER(c)
+    }
+}
+
+impl From<SMSG_GOSSIP_MESSAGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GOSSIP_MESSAGE) -> Self {
+        Self::SMSG_GOSSIP_MESSAGE(c)
     }
 }
 

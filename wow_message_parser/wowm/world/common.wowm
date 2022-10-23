@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 flag SpellCastTargetFlags : u16 {
     SELF = 0x00000000;
     UNUSED1 = 0x00000001 {
@@ -52,6 +50,7 @@ flag SpellCastTargetFlags : u16 {
     }
 } {
     comment = "Also has `UNIT_MINIPET` = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets] needs.";
+    versions = "1.12";
 }
 
 struct SpellCastTargets {
@@ -93,6 +92,8 @@ struct SpellCastTargets {
     if (target_flags & CORPSE_ENEMY) {
         PackedGuid corpse_target_enemy;
     }
+} {
+    versions = "1.12";
 }
 
 enum ItemClass : u8 {
@@ -117,6 +118,8 @@ enum ItemClass : u8 {
     RESERVED_4 = 14;
     /* JUNK = 15; in vmangos */
     MISC = 15;
+} {
+    versions = "1.12";
 }
 
 enum SpellCastResult : u8 {
@@ -263,6 +266,8 @@ enum SpellCastResult : u8 {
     REPUTATION = 0x8F;
     MIN_SKILL = 0x90;
     UNKNOWN = 0x91;
+} {
+    versions = "1.12";
 }
 
 struct QuestItem {
@@ -276,8 +281,23 @@ struct QuestItem {
     versions = "1 2";
 }
 
+struct QuestItem {
+    u32 quest_id;
+    u32 quest_icon;
+    u32 level;
+    u32 flags;
+    Bool repeatable;
+    CString title {
+        comment = "vmangos/cmangos/mangoszero: max 0x200";
+    }
+} {
+    versions = "3.3.3 3.3.4 3.3.5";
+}
+
 struct NpcTextUpdateEmote {
     u32 delay;
     u32 emote;
+} {
+    versions = "1.12";
 }
 

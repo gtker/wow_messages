@@ -42,7 +42,7 @@ struct GossipItem {
         comment = "mangosone: related to money pop up box, 2.0.3, max 0x800";
     }
 } {
-    versions = "2.0.3 2.1 2.2 2.3 2.4";
+    versions = "2.0.3 2.1 2.2 2.3 2.4 3";
 }
 
 smsg SMSG_GOSSIP_MESSAGE = 0x017D {
@@ -60,6 +60,6 @@ smsg SMSG_GOSSIP_MESSAGE = 0x017D {
     }
     QuestItem[amount_of_quests] quests;
 } {
-    versions = "2.4";
+    paste_versions = "2.4 3.3.5";
 }
 
