@@ -100,6 +100,7 @@ use crate::world::wrath::CMSG_DUEL_CANCELLED;
 use crate::world::wrath::CMSG_GOSSIP_HELLO;
 use crate::world::wrath::CMSG_GOSSIP_SELECT_OPTION;
 use crate::world::wrath::CMSG_ACTIVATETAXI;
+use crate::world::wrath::CMSG_OFFER_PETITION;
 use crate::world::wrath::CMSG_BUG;
 use crate::world::wrath::CMSG_PLAYED_TIME;
 use crate::world::wrath::CMSG_QUERY_TIME;
@@ -246,6 +247,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GOSSIP_HELLO(CMSG_GOSSIP_HELLO),
     CMSG_GOSSIP_SELECT_OPTION(CMSG_GOSSIP_SELECT_OPTION),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
+    CMSG_OFFER_PETITION(CMSG_OFFER_PETITION),
     CMSG_BUG(CMSG_BUG),
     CMSG_PLAYED_TIME(CMSG_PLAYED_TIME),
     CMSG_QUERY_TIME(CMSG_QUERY_TIME),
@@ -394,6 +396,7 @@ impl ClientOpcodeMessage {
             0x017B => Ok(Self::CMSG_GOSSIP_HELLO(<CMSG_GOSSIP_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017B, size: body_size, io, } } else { a } })?)),
             0x017C => Ok(Self::CMSG_GOSSIP_SELECT_OPTION(<CMSG_GOSSIP_SELECT_OPTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017C, size: body_size, io, } } else { a } })?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AD, size: body_size, io, } } else { a } })?)),
+            0x01C3 => Ok(Self::CMSG_OFFER_PETITION(<CMSG_OFFER_PETITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C3, size: body_size, io, } } else { a } })?)),
             0x01CA => Ok(Self::CMSG_BUG(<CMSG_BUG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CA, size: body_size, io, } } else { a } })?)),
             0x01CC => Ok(Self::CMSG_PLAYED_TIME(<CMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CC, size: body_size, io, } } else { a } })?)),
             0x01CE => Ok(Self::CMSG_QUERY_TIME(<CMSG_QUERY_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CE, size: body_size, io, } } else { a } })?)),
@@ -610,6 +613,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_OFFER_PETITION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUG(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYED_TIME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUERY_TIME(c) => c.write_encrypted_client(w, e),
@@ -759,6 +763,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
+            Self::CMSG_OFFER_PETITION(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUG(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYED_TIME(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUERY_TIME(c) => c.write_unencrypted_client(w),
@@ -908,6 +913,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_OFFER_PETITION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUG(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1057,6 +1063,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_OFFER_PETITION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUG(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1206,6 +1213,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_OFFER_PETITION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUG(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYED_TIME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_TIME(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1355,6 +1363,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_OFFER_PETITION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUG(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_TIME(c) => c.astd_write_unencrypted_client(w).await,
@@ -1515,6 +1524,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GOSSIP_HELLO(_) => "CMSG_GOSSIP_HELLO",
             ClientOpcodeMessage::CMSG_GOSSIP_SELECT_OPTION(_) => "CMSG_GOSSIP_SELECT_OPTION",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
+            ClientOpcodeMessage::CMSG_OFFER_PETITION(_) => "CMSG_OFFER_PETITION",
             ClientOpcodeMessage::CMSG_BUG(_) => "CMSG_BUG",
             ClientOpcodeMessage::CMSG_PLAYED_TIME(_) => "CMSG_PLAYED_TIME",
             ClientOpcodeMessage::CMSG_QUERY_TIME(_) => "CMSG_QUERY_TIME",
@@ -2119,6 +2129,12 @@ impl From<CMSG_GOSSIP_SELECT_OPTION> for ClientOpcodeMessage {
 impl From<CMSG_ACTIVATETAXI> for ClientOpcodeMessage {
     fn from(c: CMSG_ACTIVATETAXI) -> Self {
         Self::CMSG_ACTIVATETAXI(c)
+    }
+}
+
+impl From<CMSG_OFFER_PETITION> for ClientOpcodeMessage {
+    fn from(c: CMSG_OFFER_PETITION) -> Self {
+        Self::CMSG_OFFER_PETITION(c)
     }
 }
 

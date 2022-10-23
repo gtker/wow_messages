@@ -224,6 +224,8 @@ pub(crate) mod cmsg_name_query;
 pub use cmsg_name_query::*;
 pub(crate) mod cmsg_next_cinematic_camera;
 pub use cmsg_next_cinematic_camera::*;
+pub(crate) mod cmsg_offer_petition;
+pub use cmsg_offer_petition::*;
 pub(crate) mod cmsg_ping;
 pub use cmsg_ping::*;
 pub(crate) mod cmsg_played_time;
