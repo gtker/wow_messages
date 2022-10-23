@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_GUILD_INVITE = 0x0082 {
     CString invited_player;
