@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_GUILD_SET_PUBLIC_NOTE = 0x0234 {
     CString player_name;

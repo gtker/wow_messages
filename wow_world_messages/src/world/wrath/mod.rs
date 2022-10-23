@@ -200,6 +200,8 @@ pub(crate) mod cmsg_guild_roster;
 pub use cmsg_guild_roster::*;
 pub(crate) mod cmsg_guild_set_officer_note;
 pub use cmsg_guild_set_officer_note::*;
+pub(crate) mod cmsg_guild_set_public_note;
+pub use cmsg_guild_set_public_note::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;
