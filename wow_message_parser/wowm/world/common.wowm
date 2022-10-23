@@ -272,6 +272,8 @@ struct QuestItem {
     CString title {
         comment = "vmangos/cmangos/mangoszero: max 0x200";
     }
+} {
+    versions = "1 2";
 }
 
 struct NpcTextUpdateEmote {
