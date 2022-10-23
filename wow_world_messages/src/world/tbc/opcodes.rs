@@ -90,6 +90,7 @@ use crate::world::tbc::CMSG_EMOTE;
 use crate::world::tbc::CMSG_TEXT_EMOTE;
 use crate::world::tbc::CMSG_AUTOEQUIP_ITEM;
 use crate::world::tbc::CMSG_AUTOSTORE_BAG_ITEM;
+use crate::world::tbc::CMSG_SWAP_INV_ITEM;
 use crate::world::tbc::CMSG_SPLIT_ITEM;
 use crate::world::tbc::CMSG_AUTOEQUIP_ITEM_SLOT;
 use crate::world::tbc::CMSG_DESTROYITEM;
@@ -262,6 +263,7 @@ pub enum ClientOpcodeMessage {
     CMSG_TEXT_EMOTE(CMSG_TEXT_EMOTE),
     CMSG_AUTOEQUIP_ITEM(CMSG_AUTOEQUIP_ITEM),
     CMSG_AUTOSTORE_BAG_ITEM(CMSG_AUTOSTORE_BAG_ITEM),
+    CMSG_SWAP_INV_ITEM(CMSG_SWAP_INV_ITEM),
     CMSG_SPLIT_ITEM(CMSG_SPLIT_ITEM),
     CMSG_AUTOEQUIP_ITEM_SLOT(CMSG_AUTOEQUIP_ITEM_SLOT),
     CMSG_DESTROYITEM(CMSG_DESTROYITEM),
@@ -436,6 +438,7 @@ impl ClientOpcodeMessage {
             0x0104 => Ok(Self::CMSG_TEXT_EMOTE(<CMSG_TEXT_EMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0104, size: body_size, io, } } else { a } })?)),
             0x010A => Ok(Self::CMSG_AUTOEQUIP_ITEM(<CMSG_AUTOEQUIP_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010A, size: body_size, io, } } else { a } })?)),
             0x010B => Ok(Self::CMSG_AUTOSTORE_BAG_ITEM(<CMSG_AUTOSTORE_BAG_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010B, size: body_size, io, } } else { a } })?)),
+            0x010D => Ok(Self::CMSG_SWAP_INV_ITEM(<CMSG_SWAP_INV_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010D, size: body_size, io, } } else { a } })?)),
             0x010E => Ok(Self::CMSG_SPLIT_ITEM(<CMSG_SPLIT_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010E, size: body_size, io, } } else { a } })?)),
             0x010F => Ok(Self::CMSG_AUTOEQUIP_ITEM_SLOT(<CMSG_AUTOEQUIP_ITEM_SLOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010F, size: body_size, io, } } else { a } })?)),
             0x0111 => Ok(Self::CMSG_DESTROYITEM(<CMSG_DESTROYITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0111, size: body_size, io, } } else { a } })?)),
@@ -678,6 +681,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TEXT_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SWAP_INV_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SPLIT_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DESTROYITEM(c) => c.write_encrypted_client(w, e),
@@ -853,6 +857,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TEXT_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SWAP_INV_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_SPLIT_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.write_unencrypted_client(w),
             Self::CMSG_DESTROYITEM(c) => c.write_unencrypted_client(w),
@@ -1028,6 +1033,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SWAP_INV_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SPLIT_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DESTROYITEM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1203,6 +1209,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SWAP_INV_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SPLIT_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DESTROYITEM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1378,6 +1385,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SWAP_INV_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SPLIT_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DESTROYITEM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1553,6 +1561,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BAG_ITEM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SWAP_INV_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SPLIT_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOEQUIP_ITEM_SLOT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DESTROYITEM(c) => c.astd_write_unencrypted_client(w).await,
@@ -1763,6 +1772,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_TEXT_EMOTE(_) => "CMSG_TEXT_EMOTE",
             ClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM(_) => "CMSG_AUTOEQUIP_ITEM",
             ClientOpcodeMessage::CMSG_AUTOSTORE_BAG_ITEM(_) => "CMSG_AUTOSTORE_BAG_ITEM",
+            ClientOpcodeMessage::CMSG_SWAP_INV_ITEM(_) => "CMSG_SWAP_INV_ITEM",
             ClientOpcodeMessage::CMSG_SPLIT_ITEM(_) => "CMSG_SPLIT_ITEM",
             ClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM_SLOT(_) => "CMSG_AUTOEQUIP_ITEM_SLOT",
             ClientOpcodeMessage::CMSG_DESTROYITEM(_) => "CMSG_DESTROYITEM",
@@ -2343,6 +2353,12 @@ impl From<CMSG_AUTOEQUIP_ITEM> for ClientOpcodeMessage {
 impl From<CMSG_AUTOSTORE_BAG_ITEM> for ClientOpcodeMessage {
     fn from(c: CMSG_AUTOSTORE_BAG_ITEM) -> Self {
         Self::CMSG_AUTOSTORE_BAG_ITEM(c)
+    }
+}
+
+impl From<CMSG_SWAP_INV_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_SWAP_INV_ITEM) -> Self {
+        Self::CMSG_SWAP_INV_ITEM(c)
     }
 }
 

@@ -300,6 +300,8 @@ pub(crate) mod cmsg_setsheathed;
 pub use cmsg_setsheathed::*;
 pub(crate) mod cmsg_split_item;
 pub use cmsg_split_item::*;
+pub(crate) mod cmsg_swap_inv_item;
+pub use cmsg_swap_inv_item::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
 pub(crate) mod cmsg_time_sync_resp;
