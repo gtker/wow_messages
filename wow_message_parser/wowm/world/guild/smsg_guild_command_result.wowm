@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum GuildCommand : u8 {
     CREATE = 0x00;
     INVITE = 0x01;
@@ -11,6 +9,21 @@ enum GuildCommand : u8 {
     UNKNOWN20 = 0x14 {
         comment = "cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE";
     }
+} {
+    versions = "1 2";
+}
+
+enum GuildCommand : u8 {
+    CREATE = 0x00;
+    INVITE = 0x01;
+    QUIT = 0x02;
+    PROMOTE = 0x03;
+    FOUNDER = 0x0C;
+    MEMBER = 0x0D;
+    PUBLIC_NOTE_CHANGED = 0x13;
+    OFFICER_NOTE_CHANGED = 0x14;
+} {
+    versions = "3.3.5";
 }
 
 enum GuildCommandResult : u8 {
@@ -32,6 +45,69 @@ enum GuildCommandResult : u8 {
     GUILD_NOT_ALLIED            = 0x0C;
     GUILD_RANK_TOO_HIGH_S       = 0x0D;
     GUILD_RANK_TOO_LOW_S        = 0x0E;
+} {
+    versions = "1";
+}
+
+enum GuildCommandResult : u8 {
+    PLAYER_NO_MORE_IN_GUILD = 0x00 {
+        comment = "no message/error";
+    }
+    GUILD_INTERNAL = 0x01;
+    ALREADY_IN_GUILD = 0x02;
+    ALREADY_IN_GUILD_S = 0x03;
+    INVITED_TO_GUILD = 0x04;
+    ALREADY_INVITED_TO_GUILD_S = 0x05;
+    GUILD_NAME_INVALID = 0x06;
+    GUILD_NAME_EXISTS_S = 0x07;
+    GUILD_LEADER_LEAVE_OR_PERMISSIONS = 0x08 {
+        comment = "for Typecommand 0x03";
+        comment = "mangosone has both `GUILD_PERMISSIONS` and `GUILD_LEADER_LEAVE` as `0x08`.";
+    }
+    GUILD_PLAYER_NOT_IN_GUILD = 0x09;
+    GUILD_PLAYER_NOT_IN_GUILD_S = 0x0A;
+    GUILD_PLAYER_NOT_FOUND_S = 0x0B;
+    GUILD_NOT_ALLIED = 0x0C;
+    GUILD_RANK_TOO_HIGH_S = 0x0D;
+    GUILD_RANK_TOO_LOW_S = 0x0E;
+    GUILD_RANKS_LOCKED = 0x11;
+    GUILD_RANK_IN_USE = 0x12;
+    GUILD_IGNORING_YOU_S = 0x13;
+    GUILD_UNK20 = 0x14 {
+        comment = "for Typecommand 0x05 only";
+    }
+} {
+    versions = "2.4.3";
+}
+
+enum GuildCommandResult : u8 {
+    PLAYER_NO_MORE_IN_GUILD     = 0x00;
+    GUILD_INTERNAL              = 0x01;
+    ALREADY_IN_GUILD            = 0x02;
+    ALREADY_IN_GUILD_S          = 0x03;
+    INVITED_TO_GUILD            = 0x04;
+    ALREADY_INVITED_TO_GUILD_S  = 0x05;
+    GUILD_NAME_INVALID          = 0x06;
+    GUILD_NAME_EXISTS_S         = 0x07;
+    GUILD_LEADER_LEAVE_OR_PERMISSIONS = 0x08 {
+        comment = "mangosone has both `GUILD_PERMISSIONS` and `GUILD_LEADER_LEAVE` as `0x08`.";
+    }
+    GUILD_PLAYER_NOT_IN_GUILD   = 0x09;
+    GUILD_PLAYER_NOT_IN_GUILD_S = 0x0A;
+    GUILD_PLAYER_NOT_FOUND_S    = 0x0B;
+    GUILD_NOT_ALLIED            = 0x0C;
+    GUILD_RANK_TOO_HIGH_S       = 0x0D;
+    GUILD_RANK_TOO_LOW_S        = 0x0E;
+    GUILD_RANKS_LOCKED          = 0x11;
+    GUILD_RANK_IN_USE           = 0x12;
+    GUILD_IGNORING_YOU_S        = 0x13;
+    GUILD_UNK1                  = 0x14;
+    GUILD_WITHDRAW_LIMIT        = 0x19;
+    GUILD_NOT_ENOUGH_MONEY      = 0x1A;
+    GUILD_BANK_FULL             = 0x1C;
+    GUILD_ITEM_NOT_FOUND        = 0x1D;
+} {
+    versions = "3.3.5";
 }
 
 /* TODO: Seems to be used for a whole host of things, might be able to narrow it down? */
@@ -39,5 +115,6 @@ smsg SMSG_GUILD_COMMAND_RESULT = 0x0093 {
     (u32)GuildCommand command;
     CString string;
     (u32)GuildCommandResult result;
+} {
+    paste_versions = "1 2.4.3 3.3.5";
 }
-
