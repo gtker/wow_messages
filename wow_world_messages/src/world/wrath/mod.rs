@@ -514,6 +514,8 @@ pub(crate) mod smsg_gossip_complete;
 pub use smsg_gossip_complete::*;
 pub(crate) mod smsg_gossip_message;
 pub use smsg_gossip_message::*;
+pub(crate) mod smsg_gossip_poi;
+pub use smsg_gossip_poi::*;
 pub(crate) mod smsg_init_world_states;
 pub use smsg_init_world_states::*;
 pub(crate) mod smsg_initialize_factions;

@@ -2163,6 +2163,7 @@ use crate::world::tbc::SMSG_GMTICKET_DELETETICKET;
 use crate::world::tbc::SMSG_CHAT_WRONG_FACTION;
 use crate::world::tbc::SMSG_GMTICKET_SYSTEMSTATUS;
 use crate::world::tbc::SMSG_SET_REST_START;
+use crate::world::tbc::SMSG_GOSSIP_POI;
 use crate::world::tbc::SMSG_LOGIN_VERIFY_WORLD;
 use crate::world::tbc::SMSG_BATTLEFIELD_LIST;
 use crate::world::tbc::SMSG_ZONE_UNDER_ATTACK;
@@ -2278,6 +2279,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHAT_WRONG_FACTION(SMSG_CHAT_WRONG_FACTION),
     SMSG_GMTICKET_SYSTEMSTATUS(SMSG_GMTICKET_SYSTEMSTATUS),
     SMSG_SET_REST_START(SMSG_SET_REST_START),
+    SMSG_GOSSIP_POI(SMSG_GOSSIP_POI),
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
     SMSG_BATTLEFIELD_LIST(SMSG_BATTLEFIELD_LIST),
     SMSG_ZONE_UNDER_ATTACK(SMSG_ZONE_UNDER_ATTACK),
@@ -2395,6 +2397,7 @@ impl ServerOpcodeMessage {
             0x0219 => Ok(Self::SMSG_CHAT_WRONG_FACTION(<SMSG_CHAT_WRONG_FACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0219, size: body_size, io, } } else { a } })?)),
             0x021B => Ok(Self::SMSG_GMTICKET_SYSTEMSTATUS(<SMSG_GMTICKET_SYSTEMSTATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021B, size: body_size, io, } } else { a } })?)),
             0x021E => Ok(Self::SMSG_SET_REST_START(<SMSG_SET_REST_START as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021E, size: body_size, io, } } else { a } })?)),
+            0x0224 => Ok(Self::SMSG_GOSSIP_POI(<SMSG_GOSSIP_POI as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0224, size: body_size, io, } } else { a } })?)),
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0236, size: body_size, io, } } else { a } })?)),
             0x023D => Ok(Self::SMSG_BATTLEFIELD_LIST(<SMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023D, size: body_size, io, } } else { a } })?)),
             0x0254 => Ok(Self::SMSG_ZONE_UNDER_ATTACK(<SMSG_ZONE_UNDER_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0254, size: body_size, io, } } else { a } })?)),
@@ -2580,6 +2583,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_REST_START(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GOSSIP_POI(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_encrypted_server(w, e),
@@ -2698,6 +2702,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_REST_START(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GOSSIP_POI(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_unencrypted_server(w),
@@ -2816,6 +2821,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_REST_START(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GOSSIP_POI(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -2934,6 +2940,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_REST_START(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GOSSIP_POI(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
@@ -3052,6 +3059,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_REST_START(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GOSSIP_POI(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3170,6 +3178,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_REST_START(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GOSSIP_POI(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
@@ -3290,6 +3299,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHAT_WRONG_FACTION(_) => "SMSG_CHAT_WRONG_FACTION",
             ServerOpcodeMessage::SMSG_GMTICKET_SYSTEMSTATUS(_) => "SMSG_GMTICKET_SYSTEMSTATUS",
             ServerOpcodeMessage::SMSG_SET_REST_START(_) => "SMSG_SET_REST_START",
+            ServerOpcodeMessage::SMSG_GOSSIP_POI(_) => "SMSG_GOSSIP_POI",
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
             ServerOpcodeMessage::SMSG_BATTLEFIELD_LIST(_) => "SMSG_BATTLEFIELD_LIST",
             ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => "SMSG_ZONE_UNDER_ATTACK",
@@ -3803,6 +3813,12 @@ impl From<SMSG_GMTICKET_SYSTEMSTATUS> for ServerOpcodeMessage {
 impl From<SMSG_SET_REST_START> for ServerOpcodeMessage {
     fn from(c: SMSG_SET_REST_START) -> Self {
         Self::SMSG_SET_REST_START(c)
+    }
+}
+
+impl From<SMSG_GOSSIP_POI> for ServerOpcodeMessage {
+    fn from(c: SMSG_GOSSIP_POI) -> Self {
+        Self::SMSG_GOSSIP_POI(c)
     }
 }
 

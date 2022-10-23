@@ -1,9 +1,8 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_GOSSIP_POI = 0x0224 {
     u32 flags;
-    f32 position_x;
-    f32 position_y;
+    Vector2d position;
     u32 icon;
     u32 data;
     CString location_name;
