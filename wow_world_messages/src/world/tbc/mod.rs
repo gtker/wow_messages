@@ -184,6 +184,8 @@ pub(crate) mod cmsg_guild_promote;
 pub use cmsg_guild_promote::*;
 pub(crate) mod cmsg_guild_rank;
 pub use cmsg_guild_rank::*;
+pub(crate) mod cmsg_guild_remove;
+pub use cmsg_guild_remove::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;
