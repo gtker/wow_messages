@@ -1,7 +1,9 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_GUILD_SET_OFFICER_NOTE = 0x0235 {
     CString player_name;
-    CString note;
+    CString note {
+        comment = "vmangos: Max length 31";
+    }
 }
 

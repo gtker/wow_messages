@@ -71,6 +71,7 @@ pub mod cmsg_guild_promote_vanilla_tbc_wrath;
 pub mod cmsg_guild_rank_tbc_wrath;
 pub mod cmsg_guild_remove_vanilla_tbc_wrath;
 pub mod cmsg_guild_roster_vanilla_tbc_wrath;
+pub mod cmsg_guild_set_officer_note_vanilla_tbc_wrath;
 pub mod cmsg_join_channel_tbc_wrath;
 pub mod cmsg_leave_channel_tbc_wrath;
 pub mod cmsg_logout_cancel_vanilla_tbc_wrath;

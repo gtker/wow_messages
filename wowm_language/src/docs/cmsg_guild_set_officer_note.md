@@ -1,6 +1,6 @@
 # CMSG_GUILD_SET_OFFICER_NOTE
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -27,5 +27,5 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | CString | player_name |  |  |
-| - | - / - | CString | note |  |  |
+| - | - / - | CString | note |  | vmangos: Max length 31 |
 
