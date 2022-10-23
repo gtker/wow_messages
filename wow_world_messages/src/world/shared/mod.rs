@@ -56,6 +56,7 @@ pub mod cmsg_gossip_hello_vanilla_tbc_wrath;
 pub mod cmsg_gossip_select_option_tbc_wrath;
 pub mod cmsg_guild_accept_vanilla_tbc_wrath;
 pub mod cmsg_guild_add_rank_vanilla_tbc_wrath;
+pub mod cmsg_guild_create_vanilla_tbc_wrath;
 pub mod cmsg_join_channel_tbc_wrath;
 pub mod cmsg_leave_channel_tbc_wrath;
 pub mod cmsg_logout_cancel_vanilla_tbc_wrath;
