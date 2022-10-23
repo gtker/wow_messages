@@ -264,6 +264,8 @@ pub(crate) mod cmsg_player_logout;
 pub use cmsg_player_logout::*;
 pub(crate) mod cmsg_query_time;
 pub use cmsg_query_time::*;
+pub(crate) mod cmsg_read_item;
+pub use cmsg_read_item::*;
 pub(crate) mod cmsg_realm_split;
 pub use cmsg_realm_split::*;
 pub(crate) mod cmsg_repop_request;
