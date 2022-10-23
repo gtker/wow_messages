@@ -166,6 +166,8 @@ pub(crate) mod cmsg_guild_del_rank;
 pub use cmsg_guild_del_rank::*;
 pub(crate) mod cmsg_guild_demote;
 pub use cmsg_guild_demote::*;
+pub(crate) mod cmsg_guild_disband;
+pub use cmsg_guild_disband::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;

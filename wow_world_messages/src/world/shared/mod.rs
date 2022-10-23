@@ -60,6 +60,7 @@ pub mod cmsg_guild_create_vanilla_tbc_wrath;
 pub mod cmsg_guild_decline_vanilla_tbc_wrath;
 pub mod cmsg_guild_del_rank_vanilla_tbc_wrath;
 pub mod cmsg_guild_demote_vanilla_tbc_wrath;
+pub mod cmsg_guild_disband_vanilla_tbc_wrath;
 pub mod cmsg_join_channel_tbc_wrath;
 pub mod cmsg_leave_channel_tbc_wrath;
 pub mod cmsg_logout_cancel_vanilla_tbc_wrath;
