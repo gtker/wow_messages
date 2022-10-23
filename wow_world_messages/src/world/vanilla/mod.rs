@@ -910,6 +910,8 @@ pub(crate) mod petition_result;
 pub use petition_result::*;
 pub(crate) mod petition_showlist;
 pub use petition_showlist::*;
+pub(crate) mod petition_signature;
+pub use petition_signature::*;
 pub(crate) mod petition_turn_in_result;
 pub use petition_turn_in_result::*;
 pub(crate) mod player_chat_tag;

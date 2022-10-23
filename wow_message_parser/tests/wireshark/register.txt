@@ -3186,7 +3186,7 @@
         },
         { &hf_woww_petition_guid,
             { "Petition Guid", "woww.petition.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -3853,6 +3853,12 @@
         { &hf_woww_sheath_state,
             { "Sheath State", "woww.sheath.state",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_sheath_state_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_signer,
+            { "Signer", "woww.signer",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

@@ -610,6 +610,7 @@
 - [Object](docs/object.md)
 - [PetSpellCooldown](docs/petspellcooldown.md)
 - [PetitionShowlist](docs/petitionshowlist.md)
+- [PetitionSignature](docs/petitionsignature.md)
 - [QuestDetailsEmote](docs/questdetailsemote.md)
 - [QuestItem](docs/questitem.md)
 - [QuestItemRequirement](docs/questitemrequirement.md)
