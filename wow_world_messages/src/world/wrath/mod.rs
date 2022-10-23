@@ -427,6 +427,8 @@ pub(crate) mod msg_save_guild_emblem_server;
 pub use msg_save_guild_emblem_server::*;
 pub(crate) mod msg_set_dungeon_difficulty;
 pub use msg_set_dungeon_difficulty::*;
+pub(crate) mod msg_tabardvendor_activate;
+pub use msg_tabardvendor_activate::*;
 pub(crate) mod npc_text_update;
 pub use npc_text_update::*;
 pub(crate) mod npc_text_update_emote;

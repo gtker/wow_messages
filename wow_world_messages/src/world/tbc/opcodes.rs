@@ -10,6 +10,7 @@ use crate::world::tbc::MovementInfo;
 use crate::errors::ParseError;
 use crate::world::tbc::MSG_MOVE_WORLDPORT_ACK;
 use crate::world::tbc::MSG_PETITION_DECLINE;
+use crate::world::tbc::MSG_TABARDVENDOR_ACTIVATE;
 use crate::world::tbc::MSG_PETITION_RENAME;
 use crate::world::tbc::CMSG_CHAR_CREATE;
 use crate::world::tbc::CMSG_CHAR_ENUM;
@@ -161,6 +162,7 @@ use crate::world::tbc::CMSG_SET_ACTIVE_VOICE_CHANNEL;
 pub enum ClientOpcodeMessage {
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
+    MSG_TABARDVENDOR_ACTIVATE(MSG_TABARDVENDOR_ACTIVATE),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
@@ -314,6 +316,7 @@ impl ClientOpcodeMessage {
         match opcode {
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DC, size: body_size, io, } } else { a } })?)),
             0x01C2 => Ok(Self::MSG_PETITION_DECLINE(<MSG_PETITION_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C2, size: body_size, io, } } else { a } })?)),
+            0x01F2 => Ok(Self::MSG_TABARDVENDOR_ACTIVATE(<MSG_TABARDVENDOR_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F2, size: body_size, io, } } else { a } })?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C1, size: body_size, io, } } else { a } })?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0036, size: body_size, io, } } else { a } })?)),
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0037, size: body_size, io, } } else { a } })?)),
@@ -535,6 +538,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_DECLINE(c) => c.write_encrypted_client(w, e),
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
@@ -689,6 +693,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_DECLINE(c) => c.write_unencrypted_client(w),
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
@@ -843,6 +848,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -997,6 +1003,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1151,6 +1158,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1305,6 +1313,7 @@ impl ClientOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
@@ -1494,6 +1503,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
         f.write_str(match self {
             ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ClientOpcodeMessage::MSG_PETITION_DECLINE(_) => "MSG_PETITION_DECLINE",
+            ClientOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => "MSG_TABARDVENDOR_ACTIVATE",
             ClientOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
             ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
@@ -1653,6 +1663,12 @@ impl From<MSG_MOVE_WORLDPORT_ACK> for ClientOpcodeMessage {
 impl From<MSG_PETITION_DECLINE> for ClientOpcodeMessage {
     fn from(c: MSG_PETITION_DECLINE) -> Self {
         Self::MSG_PETITION_DECLINE(c)
+    }
+}
+
+impl From<MSG_TABARDVENDOR_ACTIVATE> for ClientOpcodeMessage {
+    fn from(c: MSG_TABARDVENDOR_ACTIVATE) -> Self {
+        Self::MSG_TABARDVENDOR_ACTIVATE(c)
     }
 }
 
@@ -2651,6 +2667,7 @@ use crate::world::tbc::MSG_MOVE_START_DESCEND_Server;
 pub enum ServerOpcodeMessage {
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
+    MSG_TABARDVENDOR_ACTIVATE(MSG_TABARDVENDOR_ACTIVATE),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
     SMSG_CHAR_CREATE(SMSG_CHAR_CREATE),
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
@@ -2773,6 +2790,7 @@ impl ServerOpcodeMessage {
         match opcode {
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DC, size: body_size, io, } } else { a } })?)),
             0x01C2 => Ok(Self::MSG_PETITION_DECLINE(<MSG_PETITION_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C2, size: body_size, io, } } else { a } })?)),
+            0x01F2 => Ok(Self::MSG_TABARDVENDOR_ACTIVATE(<MSG_TABARDVENDOR_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F2, size: body_size, io, } } else { a } })?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C1, size: body_size, io, } } else { a } })?)),
             0x003A => Ok(Self::SMSG_CHAR_CREATE(<SMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003A, size: body_size, io, } } else { a } })?)),
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003B, size: body_size, io, } } else { a } })?)),
@@ -2963,6 +2981,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_PETITION_DECLINE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_encrypted_server(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
@@ -3086,6 +3105,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_PETITION_DECLINE(c) => c.write_unencrypted_server(w),
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_unencrypted_server(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
@@ -3209,6 +3229,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3332,6 +3353,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -3455,6 +3477,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3578,6 +3601,7 @@ impl ServerOpcodeMessage {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
@@ -3703,6 +3727,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
         f.write_str(match self {
             ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ServerOpcodeMessage::MSG_PETITION_DECLINE(_) => "MSG_PETITION_DECLINE",
+            ServerOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => "MSG_TABARDVENDOR_ACTIVATE",
             ServerOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
             ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => "SMSG_CHAR_CREATE",
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
@@ -3831,6 +3856,12 @@ impl From<MSG_MOVE_WORLDPORT_ACK> for ServerOpcodeMessage {
 impl From<MSG_PETITION_DECLINE> for ServerOpcodeMessage {
     fn from(c: MSG_PETITION_DECLINE) -> Self {
         Self::MSG_PETITION_DECLINE(c)
+    }
+}
+
+impl From<MSG_TABARDVENDOR_ACTIVATE> for ServerOpcodeMessage {
+    fn from(c: MSG_TABARDVENDOR_ACTIVATE) -> Self {
+        Self::MSG_TABARDVENDOR_ACTIVATE(c)
     }
 }
 

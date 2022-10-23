@@ -31,6 +31,7 @@ use crate::world::wrath::MSG_MOVE_SET_PITCH;
 use crate::world::wrath::MSG_MOVE_WORLDPORT_ACK;
 use crate::world::wrath::MSG_MOVE_HEARTBEAT;
 use crate::world::wrath::MSG_PETITION_DECLINE;
+use crate::world::wrath::MSG_TABARDVENDOR_ACTIVATE;
 use crate::world::wrath::MSG_PETITION_RENAME;
 use crate::world::wrath::MSG_SET_DUNGEON_DIFFICULTY;
 use crate::world::wrath::MSG_MOVE_START_ASCEND;
@@ -186,6 +187,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
+    MSG_TABARDVENDOR_ACTIVATE(MSG_TABARDVENDOR_ACTIVATE),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
@@ -343,6 +345,7 @@ impl ClientOpcodeMessage {
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DC, size: body_size, io, } } else { a } })?)),
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EE, size: body_size, io, } } else { a } })?)),
             0x01C2 => Ok(Self::MSG_PETITION_DECLINE(<MSG_PETITION_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C2, size: body_size, io, } } else { a } })?)),
+            0x01F2 => Ok(Self::MSG_TABARDVENDOR_ACTIVATE(<MSG_TABARDVENDOR_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F2, size: body_size, io, } } else { a } })?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C1, size: body_size, io, } } else { a } })?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0329, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
@@ -568,6 +571,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_DECLINE(c) => c.write_encrypted_client(w, e),
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_client(w, e),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
@@ -726,6 +730,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_DECLINE(c) => c.write_unencrypted_client(w),
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_client(w),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
@@ -884,6 +889,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1042,6 +1048,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1200,6 +1207,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1358,6 +1366,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
@@ -1527,6 +1536,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT",
             ClientOpcodeMessage::MSG_PETITION_DECLINE(_) => "MSG_PETITION_DECLINE",
+            ClientOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => "MSG_TABARDVENDOR_ACTIVATE",
             ClientOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
             ClientOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY",
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
@@ -1795,6 +1805,12 @@ impl From<MSG_MOVE_HEARTBEAT> for ClientOpcodeMessage {
 impl From<MSG_PETITION_DECLINE> for ClientOpcodeMessage {
     fn from(c: MSG_PETITION_DECLINE) -> Self {
         Self::MSG_PETITION_DECLINE(c)
+    }
+}
+
+impl From<MSG_TABARDVENDOR_ACTIVATE> for ClientOpcodeMessage {
+    fn from(c: MSG_TABARDVENDOR_ACTIVATE) -> Self {
+        Self::MSG_TABARDVENDOR_ACTIVATE(c)
     }
 }
 
@@ -2701,6 +2717,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
+    MSG_TABARDVENDOR_ACTIVATE(MSG_TABARDVENDOR_ACTIVATE),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
@@ -2837,6 +2854,7 @@ impl ServerOpcodeMessage {
             0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DC, size: body_size, io, } } else { a } })?)),
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EE, size: body_size, io, } } else { a } })?)),
             0x01C2 => Ok(Self::MSG_PETITION_DECLINE(<MSG_PETITION_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C2, size: body_size, io, } } else { a } })?)),
+            0x01F2 => Ok(Self::MSG_TABARDVENDOR_ACTIVATE(<MSG_TABARDVENDOR_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F2, size: body_size, io, } } else { a } })?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C1, size: body_size, io, } } else { a } })?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0329, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
@@ -3122,6 +3140,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_server(w, e),
             Self::MSG_PETITION_DECLINE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_encrypted_server(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
@@ -3259,6 +3278,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_server(w),
             Self::MSG_PETITION_DECLINE(c) => c.write_unencrypted_server(w),
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.write_unencrypted_server(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
@@ -3396,6 +3416,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3533,6 +3554,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -3670,6 +3692,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3807,6 +3830,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_TABARDVENDOR_ACTIVATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
@@ -3946,6 +3970,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
             ServerOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT",
             ServerOpcodeMessage::MSG_PETITION_DECLINE(_) => "MSG_PETITION_DECLINE",
+            ServerOpcodeMessage::MSG_TABARDVENDOR_ACTIVATE(_) => "MSG_TABARDVENDOR_ACTIVATE",
             ServerOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
             ServerOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY",
             ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
@@ -4193,6 +4218,12 @@ impl From<MSG_MOVE_HEARTBEAT> for ServerOpcodeMessage {
 impl From<MSG_PETITION_DECLINE> for ServerOpcodeMessage {
     fn from(c: MSG_PETITION_DECLINE) -> Self {
         Self::MSG_PETITION_DECLINE(c)
+    }
+}
+
+impl From<MSG_TABARDVENDOR_ACTIVATE> for ServerOpcodeMessage {
+    fn from(c: MSG_TABARDVENDOR_ACTIVATE) -> Self {
+        Self::MSG_TABARDVENDOR_ACTIVATE(c)
     }
 }
 

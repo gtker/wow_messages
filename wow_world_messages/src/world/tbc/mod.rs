@@ -447,6 +447,8 @@ pub(crate) mod msg_save_guild_emblem_client;
 pub use msg_save_guild_emblem_client::*;
 pub(crate) mod msg_save_guild_emblem_server;
 pub use msg_save_guild_emblem_server::*;
+pub(crate) mod msg_tabardvendor_activate;
+pub use msg_tabardvendor_activate::*;
 pub(crate) mod npc_text_update;
 pub use npc_text_update::*;
 pub(crate) mod npc_text_update_emote;
