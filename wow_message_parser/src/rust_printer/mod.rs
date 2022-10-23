@@ -346,12 +346,13 @@ impl Writer {
         &mut self,
         type_name: impl AsRef<str>,
         write_function: impl Fn(&mut Self, ImplType),
+        visibility: &str,
     ) {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
-        self.open_curly(
-            "pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>",
-        );
+        self.open_curly(format!(
+            "{visibility} fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>",
+        ));
 
         write_function(self, ImplType::Std);
 
@@ -367,10 +368,11 @@ impl Writer {
         error_name: impl AsRef<str>,
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
-        visibility: impl AsRef<str>,
+        read_visibility: impl AsRef<str>,
+        write_visibility: impl AsRef<str>,
         create_async_reads: bool,
     ) {
-        self.write_into_vec(&type_name, write_function);
+        self.write_into_vec(&type_name, write_function, read_visibility.as_ref());
 
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
@@ -388,7 +390,7 @@ impl Writer {
                 read = it.read(),
                 error = error_name.as_ref(),
                 func = it.func(),
-                visibility = visibility.as_ref(),
+                visibility = write_visibility.as_ref(),
             ));
             read_function(self, it);
             self.closing_curly_newline();
@@ -410,6 +412,7 @@ impl Writer {
             error_name,
             read_function,
             write_function,
+            "pub(crate)",
             "pub",
             create_async_reads,
         )
@@ -421,13 +424,16 @@ impl Writer {
         read_function: impl Fn(&mut Self, ImplType),
         write_function: impl Fn(&mut Self, ImplType),
         create_async_reads: bool,
+        error_name: &str,
+        visibility: &str,
     ) {
         self.impl_read_write_non_trait(
             type_name,
-            PARSE_ERROR,
+            error_name,
             read_function,
             write_function,
-            "pub(crate)",
+            visibility,
+            visibility,
             create_async_reads,
         )
     }
@@ -441,7 +447,7 @@ impl Writer {
         write_function: impl Fn(&mut Self, ImplType),
         sizes: Sizes,
     ) {
-        self.write_into_vec(&type_name, write_function);
+        self.write_into_vec(&type_name, write_function, "pub(crate)");
 
         self.open_curly(format!(
             "impl {} for {}",

@@ -1,2 +1,2 @@
-pub use crate::shared::vector2d_vanilla_tbc_wrath::Vector2d;
+pub use wow_world_base::vanilla::Vector2d;
 

@@ -10,3 +10,7 @@ pub(crate) mod power;
 pub use power::*;
 pub(crate) mod race;
 pub use race::*;
+pub(crate) mod vector2d;
+pub use vector2d::*;
+pub(crate) mod vector3d;
+pub use vector3d::*;

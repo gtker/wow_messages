@@ -121,15 +121,12 @@ fn main() {
                 }
             }
         } else {
-            let (base_s, world_s) = match &e {
-                Object::Enum(e) => {
-                    let base_s = print_enum_for_base(e, &o, first);
-                    let world_s = get_import_from_base(e.name(), first);
-
-                    (base_s, world_s)
-                }
-                _ => unimplemented!(),
+            let base_s = match &e {
+                Object::Enum(e) => print_enum_for_base(e, &o, first),
+                Object::Container(e) => print_struct(e, &o, first),
+                Object::Flag(e) => print_flag(e, &o, first),
             };
+            let world_s = get_import_from_base(e.name(), first);
 
             if versions.is_empty() {
                 m.write_base_contents_to_file(e.name(), e.tags(), base_s.inner(), &world_s, first);

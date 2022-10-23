@@ -21,6 +21,7 @@
 
 pub(crate) mod errors;
 pub(crate) mod inner;
+pub(crate) mod util;
 
 pub use errors::*;
 pub use inner::*;

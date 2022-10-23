@@ -18,6 +18,7 @@ use crate::path_utils::{base_directory, login_directory, world_directory};
 pub(crate) enum SubmoduleLocation {
     PubUseInternal,
     PubMod,
+    PubModNoCfg,
     PubCrateMod,
     PubUseOnly,
 }
@@ -68,6 +69,9 @@ impl ModFiles {
                     }
                     SubmoduleLocation::PubCrateMod => {
                         writeln!(s, "pub(crate) mod {};", i).unwrap();
+                    }
+                    SubmoduleLocation::PubModNoCfg => {
+                        writeln!(s, "pub mod {};", i).unwrap();
                     }
                 }
             }
@@ -140,7 +144,7 @@ impl ModFiles {
                 base_directory(),
                 (
                     major_version_to_string(version).to_string(),
-                    SubmoduleLocation::PubMod,
+                    SubmoduleLocation::PubModNoCfg,
                 ),
             );
 
@@ -328,6 +332,13 @@ pub(crate) fn get_login_logon_version_path(version: &LoginVersion) -> String {
 
 pub(crate) fn get_world_shared_path(ty_name: &str, tags: &ObjectTags) -> String {
     format!("crate::world::shared::{}", tags.shared_module_name(ty_name))
+}
+
+pub(crate) fn get_base_import_path(version: Version) -> String {
+    format!(
+        "wow_world_base::{version}",
+        version = major_version_to_string(&version.as_major_world())
+    )
 }
 
 pub(crate) fn get_import_path(version: Version) -> String {

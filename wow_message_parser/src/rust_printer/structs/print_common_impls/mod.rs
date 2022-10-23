@@ -19,6 +19,12 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         ContainerType::Struct => {
             let create_async_reads = e.tags().has_login_version();
 
+            let (error_name, visibility) = if e.tags().is_in_base() && e.only_has_io_errors() {
+                ("std::io::Error", "pub")
+            } else {
+                (PARSE_ERROR, "pub(crate)")
+            };
+
             s.impl_read_write_struct(
                 e.name(),
                 |s, it| {
@@ -28,6 +34,8 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
                 create_async_reads,
+                error_name,
+                visibility,
             );
         }
         ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {
