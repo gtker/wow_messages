@@ -72,6 +72,8 @@ pub(crate) mod cmsg_auction_sell_item;
 pub use cmsg_auction_sell_item::*;
 pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
+pub(crate) mod cmsg_autobank_item;
+pub use cmsg_autobank_item::*;
 pub(crate) mod cmsg_battlefield_list;
 pub use cmsg_battlefield_list::*;
 pub(crate) mod cmsg_battlefield_port;
