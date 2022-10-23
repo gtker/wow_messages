@@ -84,6 +84,8 @@ pub(crate) mod cmsg_battlemaster_hello;
 pub use cmsg_battlemaster_hello::*;
 pub(crate) mod cmsg_battlemaster_join;
 pub use cmsg_battlemaster_join::*;
+pub(crate) mod cmsg_binder_activate;
+pub use cmsg_binder_activate::*;
 pub(crate) mod cmsg_bug;
 pub use cmsg_bug::*;
 pub(crate) mod cmsg_cancel_channelling;
