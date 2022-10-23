@@ -21,6 +21,7 @@ pub mod cmsg_auction_remove_item_vanilla_tbc_wrath;
 pub mod cmsg_auction_sell_item_vanilla_tbc;
 pub mod cmsg_auth_session_vanilla_tbc;
 pub mod cmsg_autobank_item_vanilla_tbc_wrath;
+pub mod cmsg_autoequip_item_vanilla_tbc_wrath;
 pub mod cmsg_battlefield_port_tbc_wrath;
 pub mod cmsg_battlefield_status_vanilla_tbc_wrath;
 pub mod cmsg_battlemaster_hello_vanilla_tbc_wrath;
