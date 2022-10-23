@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_AUTOSTORE_BAG_ITEM = 0x010B {
     u8 source_bag;
