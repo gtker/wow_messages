@@ -3196,12 +3196,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_petition_turn_in_result,
-            { "Petition Turn In Result", "woww.petition.turn.in.result",
-                FT_UINT32, BASE_HEX_DEC, VALS(e_petition_turn_in_result_strings), 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_pitch,
             { "Pitch", "woww.pitch",
                 FT_FLOAT, BASE_NONE, NULL, 0,

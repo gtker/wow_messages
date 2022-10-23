@@ -670,6 +670,8 @@ pub(crate) mod smsg_transfer_pending;
 pub use smsg_transfer_pending::*;
 pub(crate) mod smsg_trigger_cinematic;
 pub use smsg_trigger_cinematic::*;
+pub(crate) mod smsg_turn_in_petition_results;
+pub use smsg_turn_in_petition_results::*;
 pub(crate) mod smsg_tutorial_flags;
 pub use smsg_tutorial_flags::*;
 pub(crate) mod smsg_update_object;

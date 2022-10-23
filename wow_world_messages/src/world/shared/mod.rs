@@ -212,6 +212,7 @@ pub mod smsg_set_forced_reactions_vanilla_tbc_wrath;
 pub mod smsg_set_rest_start_vanilla_tbc_wrath;
 pub mod smsg_standstate_update_vanilla_tbc_wrath;
 pub mod smsg_time_sync_req_tbc_wrath;
+pub mod smsg_turn_in_petition_results_tbc_wrath;
 pub mod smsg_tutorial_flags_vanilla_tbc_wrath;
 pub mod smsg_update_world_state_vanilla_tbc_wrath;
 pub mod transport_info_vanilla_tbc;

@@ -1,16 +1,16 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::PetitionTurnInResult;
+use crate::world::vanilla::PetitionResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm#L12):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_turn_in_petition_results.wowm#L1):
 /// ```text
 /// smsg SMSG_TURN_IN_PETITION_RESULTS = 0x01C5 {
-///     PetitionTurnInResult result;
+///     PetitionResult result;
 /// }
 /// ```
 pub struct SMSG_TURN_IN_PETITION_RESULTS {
-    pub result: PetitionTurnInResult,
+    pub result: PetitionResult,
 }
 
 impl crate::Message for SMSG_TURN_IN_PETITION_RESULTS {
@@ -21,7 +21,7 @@ impl crate::Message for SMSG_TURN_IN_PETITION_RESULTS {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // result: PetitionTurnInResult
+        // result: PetitionResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         Ok(())
@@ -31,8 +31,8 @@ impl crate::Message for SMSG_TURN_IN_PETITION_RESULTS {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // result: PetitionTurnInResult
-        let result: PetitionTurnInResult = crate::util::read_u32_le(r)?.try_into()?;
+        // result: PetitionResult
+        let result: PetitionResult = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             result,

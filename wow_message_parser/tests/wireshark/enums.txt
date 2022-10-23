@@ -5977,24 +5977,6 @@ static const value_string e_cinematic_sequence_id_strings[] =  {
 };
 
 typedef enum {
-    PETITION_TURN_IN_RESULT_OK = 0x0,
-    PETITION_TURN_IN_RESULT_ALREADY_SIGNED = 0x1,
-    PETITION_TURN_IN_RESULT_ALREADY_IN_GUILD = 0x2,
-    PETITION_TURN_IN_RESULT_CANT_SIGN_OWN = 0x3,
-    PETITION_TURN_IN_RESULT_NEED_MORE = 0x4,
-    PETITION_TURN_IN_RESULT_NOT_SERVER = 0x5,
-} e_petition_turn_in_result;
-static const value_string e_petition_turn_in_result_strings[] =  {
-    { PETITION_TURN_IN_RESULT_OK, "Ok" },
-    { PETITION_TURN_IN_RESULT_ALREADY_SIGNED, "Already Signed" },
-    { PETITION_TURN_IN_RESULT_ALREADY_IN_GUILD, "Already In Guild" },
-    { PETITION_TURN_IN_RESULT_CANT_SIGN_OWN, "Cant Sign Own" },
-    { PETITION_TURN_IN_RESULT_NEED_MORE, "Need More" },
-    { PETITION_TURN_IN_RESULT_NOT_SERVER, "Not Server" },
-    { 0, NULL }
-};
-
-typedef enum {
     WEATHER_TYPE_FINE = 0x0,
     WEATHER_TYPE_RAIN = 0x1,
     WEATHER_TYPE_SNOW = 0x2,

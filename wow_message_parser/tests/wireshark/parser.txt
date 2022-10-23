@@ -5643,7 +5643,7 @@
             ptvcursor_add(ptv, hf_woww_cinematic_sequence_id, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_TURN_IN_PETITION_RESULTS:
-            ptvcursor_add(ptv, hf_woww_petition_turn_in_result, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_petition_result, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_TUTORIAL_FLAGS:
             for (i = 0; i < 8; ++i) {

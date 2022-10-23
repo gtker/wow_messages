@@ -131,7 +131,6 @@
 - [PetTalkReason](docs/pettalkreason.md)
 - [PetTameFailureReason](docs/pettamefailurereason.md)
 - [PetitionResult](docs/petitionresult.md)
-- [PetitionTurnInResult](docs/petitionturninresult.md)
 - [PlayerChatTag](docs/playerchattag.md)
 - [Power](docs/power.md)
 - [PowerType](docs/powertype.md)
