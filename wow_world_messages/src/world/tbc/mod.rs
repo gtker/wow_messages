@@ -598,6 +598,8 @@ pub(crate) mod smsg_guild_command_result;
 pub use smsg_guild_command_result::*;
 pub(crate) mod smsg_guild_event;
 pub use smsg_guild_event::*;
+pub(crate) mod smsg_guild_info;
+pub use smsg_guild_info::*;
 pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
 pub(crate) mod smsg_levelup_info;
