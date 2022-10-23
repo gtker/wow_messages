@@ -2182,6 +2182,7 @@ Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
 * [Friend](friend.md)
+* [GuildMember](guildmember.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_CAST_RESULT](smsg_cast_result.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)

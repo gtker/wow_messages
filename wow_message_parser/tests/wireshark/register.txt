@@ -394,6 +394,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_amount_of_rights,
+            { "Amount Of Rights", "woww.amount.of.rights",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_amount_of_signatures,
             { "Amount Of Signatures", "woww.amount.of.signatures",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
@@ -1864,6 +1870,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_guild_member_status,
+            { "Guild Member Status", "woww.guild.member.status",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_guild_member_status_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_guild_name,
             { "Guild Name", "woww.guild.name",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
@@ -2722,6 +2734,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_motd,
+            { "Motd", "woww.motd",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_mount_result,
             { "Mount Result", "woww.mount.result",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_mount_result_strings), 0,
@@ -2922,6 +2940,12 @@
         },
         { &hf_woww_offer_reward_text,
             { "Offer Reward Text", "woww.offer.reward.text",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_officer_note,
+            { "Officer Note", "woww.officer.note",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
@@ -3292,6 +3316,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_public_note,
+            { "Public Note", "woww.public.note",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_pvp_rank,
             { "Pvp Rank", "woww.pvp.rank",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_pvp_rank_strings), 0,
@@ -3445,6 +3475,12 @@
         { &hf_woww_ranged_range_modification,
             { "Ranged Range Modification", "woww.ranged.range.modification",
                 FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_rank,
+            { "Rank", "woww.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -4381,6 +4417,12 @@
         { &hf_woww_time_left_in_msecs,
             { "Time Left In Msecs", "woww.time.left.in.msecs",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_time_offline,
+            { "Time Offline", "woww.time.offline",
+                FT_FLOAT, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },

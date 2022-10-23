@@ -1,9 +1,35 @@
-#tag_all versions "1.12";
-
-smsg SMSG_GUILD_ROSTER = 0x008A {
-    /* Complex 
-        https://github1s.com/vmangos/core/blob/HEAD/src/game/Guild/Guild.cpp#L754
-        https://github1s.com/cmangos/mangos-classic/blob/HEAD/src/game/Guilds/Guild.cpp#L717
-    */
+enum GuildMemberStatus : u8 {
+    OFFLINE = 0;
+    ONLINE = 1;
+} {
+    versions = "1";
 }
+
+struct GuildMember {
+    Guid guid;
+    GuildMemberStatus status;
+    CString name;
+    u32 rank;
+    u8 level;
+    Class class;
+    Area area;
+    if (status == OFFLINE) {
+        f32 time_offline;
+    }
+    CString public_note;
+    CString officer_note;
+} {
+    versions = "1.12";
+}
+smsg SMSG_GUILD_ROSTER = 0x008A {
+    u32 amount_of_members;
+    CString motd;
+    CString guild_info;
+    u32 amount_of_rights;
+    u32[amount_of_rights] rights;
+    GuildMember[amount_of_members] members;
+} {
+    versions = "1.12";
+}
+
 

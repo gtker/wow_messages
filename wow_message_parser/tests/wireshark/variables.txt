@@ -30,6 +30,7 @@
     guint32 amount_of_reactions = 0;
     guint32 amount_of_records = 0;
     guint32 amount_of_required_items = 0;
+    guint32 amount_of_rights = 0;
     guint32 amount_of_spells = 0;
     guint32 amount_of_states = 0;
     guint32 amount_of_strings = 0;

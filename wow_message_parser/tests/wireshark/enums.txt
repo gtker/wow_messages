@@ -2915,6 +2915,16 @@ static const value_string e_friend_status_strings[] =  {
 };
 
 typedef enum {
+    GUILD_MEMBER_STATUS_OFFLINE = 0x0,
+    GUILD_MEMBER_STATUS_ONLINE = 0x1,
+} e_guild_member_status;
+static const value_string e_guild_member_status_strings[] =  {
+    { GUILD_MEMBER_STATUS_OFFLINE, "Offline" },
+    { GUILD_MEMBER_STATUS_ONLINE, "Online" },
+    { 0, NULL }
+};
+
+typedef enum {
     MAIL_TYPE_NORMAL = 0x0,
     MAIL_TYPE_AUCTION = 0x2,
     MAIL_TYPE_CREATURE = 0x3,
