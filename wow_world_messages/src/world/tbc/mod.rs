@@ -284,6 +284,8 @@ pub(crate) mod cmsg_set_active_mover;
 pub use cmsg_set_active_mover::*;
 pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
+pub(crate) mod cmsg_set_ammo;
+pub use cmsg_set_ammo::*;
 pub(crate) mod cmsg_set_faction_atwar;
 pub use cmsg_set_faction_atwar::*;
 pub(crate) mod cmsg_set_faction_inactive;
