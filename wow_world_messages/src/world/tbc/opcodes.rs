@@ -2614,6 +2614,7 @@ use crate::world::tbc::SMSG_DUEL_WINNER;
 use crate::world::tbc::SMSG_GOSSIP_MESSAGE;
 use crate::world::tbc::SMSG_GOSSIP_COMPLETE;
 use crate::world::tbc::SMSG_NPC_TEXT_UPDATE;
+use crate::world::tbc::SMSG_PETITION_SHOW_SIGNATURES;
 use crate::world::tbc::SMSG_NOTIFICATION;
 use crate::world::tbc::SMSG_LOG_XPGAIN;
 use crate::world::tbc::SMSG_LEVELUP_INFO;
@@ -2740,6 +2741,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GOSSIP_MESSAGE(SMSG_GOSSIP_MESSAGE),
     SMSG_GOSSIP_COMPLETE(SMSG_GOSSIP_COMPLETE),
     SMSG_NPC_TEXT_UPDATE(SMSG_NPC_TEXT_UPDATE),
+    SMSG_PETITION_SHOW_SIGNATURES(SMSG_PETITION_SHOW_SIGNATURES),
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
     SMSG_LOG_XPGAIN(SMSG_LOG_XPGAIN),
     SMSG_LEVELUP_INFO(SMSG_LEVELUP_INFO),
@@ -2868,6 +2870,7 @@ impl ServerOpcodeMessage {
             0x017D => Ok(Self::SMSG_GOSSIP_MESSAGE(<SMSG_GOSSIP_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017D, size: body_size, io, } } else { a } })?)),
             0x017E => Ok(Self::SMSG_GOSSIP_COMPLETE(<SMSG_GOSSIP_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017E, size: body_size, io, } } else { a } })?)),
             0x0180 => Ok(Self::SMSG_NPC_TEXT_UPDATE(<SMSG_NPC_TEXT_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0180, size: body_size, io, } } else { a } })?)),
+            0x01BF => Ok(Self::SMSG_PETITION_SHOW_SIGNATURES(<SMSG_PETITION_SHOW_SIGNATURES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BF, size: body_size, io, } } else { a } })?)),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CB, size: body_size, io, } } else { a } })?)),
             0x01D0 => Ok(Self::SMSG_LOG_XPGAIN(<SMSG_LOG_XPGAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D0, size: body_size, io, } } else { a } })?)),
             0x01D4 => Ok(Self::SMSG_LEVELUP_INFO(<SMSG_LEVELUP_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D4, size: body_size, io, } } else { a } })?)),
@@ -3064,6 +3067,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOG_XPGAIN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LEVELUP_INFO(c) => c.write_encrypted_server(w, e),
@@ -3193,6 +3197,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOG_XPGAIN(c) => c.write_unencrypted_server(w),
             Self::SMSG_LEVELUP_INFO(c) => c.write_unencrypted_server(w),
@@ -3322,6 +3327,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOG_XPGAIN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3451,6 +3457,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOG_XPGAIN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_unencrypted_server(w).await,
@@ -3580,6 +3587,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOG_XPGAIN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3709,6 +3717,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOG_XPGAIN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_unencrypted_server(w).await,
@@ -3840,6 +3849,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GOSSIP_MESSAGE(_) => "SMSG_GOSSIP_MESSAGE",
             ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => "SMSG_GOSSIP_COMPLETE",
             ServerOpcodeMessage::SMSG_NPC_TEXT_UPDATE(_) => "SMSG_NPC_TEXT_UPDATE",
+            ServerOpcodeMessage::SMSG_PETITION_SHOW_SIGNATURES(_) => "SMSG_PETITION_SHOW_SIGNATURES",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
             ServerOpcodeMessage::SMSG_LOG_XPGAIN(_) => "SMSG_LOG_XPGAIN",
             ServerOpcodeMessage::SMSG_LEVELUP_INFO(_) => "SMSG_LEVELUP_INFO",
@@ -4314,6 +4324,12 @@ impl From<SMSG_GOSSIP_COMPLETE> for ServerOpcodeMessage {
 impl From<SMSG_NPC_TEXT_UPDATE> for ServerOpcodeMessage {
     fn from(c: SMSG_NPC_TEXT_UPDATE) -> Self {
         Self::SMSG_NPC_TEXT_UPDATE(c)
+    }
+}
+
+impl From<SMSG_PETITION_SHOW_SIGNATURES> for ServerOpcodeMessage {
+    fn from(c: SMSG_PETITION_SHOW_SIGNATURES) -> Self {
+        Self::SMSG_PETITION_SHOW_SIGNATURES(c)
     }
 }
 
