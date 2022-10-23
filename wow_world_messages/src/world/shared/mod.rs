@@ -82,6 +82,7 @@ pub mod cmsg_next_cinematic_camera_vanilla_tbc_wrath;
 pub mod cmsg_offer_petition_tbc_wrath;
 pub mod cmsg_petition_buy_vanilla_tbc;
 pub mod cmsg_petition_show_signatures_vanilla_tbc_wrath;
+pub mod cmsg_petition_showlist_vanilla_tbc_wrath;
 pub mod cmsg_ping_vanilla_tbc_wrath;
 pub mod cmsg_player_login_vanilla_tbc_wrath;
 pub mod cmsg_player_logout_vanilla_tbc_wrath;

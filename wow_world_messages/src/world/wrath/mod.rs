@@ -230,6 +230,8 @@ pub(crate) mod cmsg_petition_buy;
 pub use cmsg_petition_buy::*;
 pub(crate) mod cmsg_petition_show_signatures;
 pub use cmsg_petition_show_signatures::*;
+pub(crate) mod cmsg_petition_showlist;
+pub use cmsg_petition_showlist::*;
 pub(crate) mod cmsg_ping;
 pub use cmsg_ping::*;
 pub(crate) mod cmsg_played_time;
