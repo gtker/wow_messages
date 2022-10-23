@@ -288,6 +288,8 @@ pub(crate) mod cmsg_repop_request;
 pub use cmsg_repop_request::*;
 pub(crate) mod cmsg_request_account_data;
 pub use cmsg_request_account_data::*;
+pub(crate) mod cmsg_sell_item;
+pub use cmsg_sell_item::*;
 pub(crate) mod cmsg_set_action_button;
 pub use cmsg_set_action_button::*;
 pub(crate) mod cmsg_set_actionbar_toggles;
