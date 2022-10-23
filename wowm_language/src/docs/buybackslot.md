@@ -1,6 +1,6 @@
 # BuybackSlot
 
-## Client Version 1.12
+## Client Version 1.8, Client Version 1.9, Client Version 1.10, Client Version 1.11, Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
