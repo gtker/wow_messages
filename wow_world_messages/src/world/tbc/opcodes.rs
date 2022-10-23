@@ -86,6 +86,7 @@ use crate::world::tbc::CMSG_COMPLETE_CINEMATIC;
 use crate::world::tbc::CMSG_TUTORIAL_FLAG;
 use crate::world::tbc::CMSG_TUTORIAL_CLEAR;
 use crate::world::tbc::CMSG_TUTORIAL_RESET;
+use crate::world::tbc::CMSG_STANDSTATECHANGE;
 use crate::world::tbc::CMSG_EMOTE;
 use crate::world::tbc::CMSG_TEXT_EMOTE;
 use crate::world::tbc::CMSG_AUTOEQUIP_ITEM;
@@ -262,6 +263,7 @@ pub enum ClientOpcodeMessage {
     CMSG_TUTORIAL_FLAG(CMSG_TUTORIAL_FLAG),
     CMSG_TUTORIAL_CLEAR(CMSG_TUTORIAL_CLEAR),
     CMSG_TUTORIAL_RESET(CMSG_TUTORIAL_RESET),
+    CMSG_STANDSTATECHANGE(CMSG_STANDSTATECHANGE),
     CMSG_EMOTE(CMSG_EMOTE),
     CMSG_TEXT_EMOTE(CMSG_TEXT_EMOTE),
     CMSG_AUTOEQUIP_ITEM(CMSG_AUTOEQUIP_ITEM),
@@ -440,6 +442,7 @@ impl ClientOpcodeMessage {
             0x00FE => Ok(Self::CMSG_TUTORIAL_FLAG(<CMSG_TUTORIAL_FLAG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FE, size: body_size, io, } } else { a } })?)),
             0x00FF => Ok(Self::CMSG_TUTORIAL_CLEAR(<CMSG_TUTORIAL_CLEAR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FF, size: body_size, io, } } else { a } })?)),
             0x0100 => Ok(Self::CMSG_TUTORIAL_RESET(<CMSG_TUTORIAL_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0100, size: body_size, io, } } else { a } })?)),
+            0x0101 => Ok(Self::CMSG_STANDSTATECHANGE(<CMSG_STANDSTATECHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0101, size: body_size, io, } } else { a } })?)),
             0x0102 => Ok(Self::CMSG_EMOTE(<CMSG_EMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0102, size: body_size, io, } } else { a } })?)),
             0x0104 => Ok(Self::CMSG_TEXT_EMOTE(<CMSG_TEXT_EMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0104, size: body_size, io, } } else { a } })?)),
             0x010A => Ok(Self::CMSG_AUTOEQUIP_ITEM(<CMSG_AUTOEQUIP_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x010A, size: body_size, io, } } else { a } })?)),
@@ -686,6 +689,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TUTORIAL_FLAG(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TUTORIAL_CLEAR(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TUTORIAL_RESET(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_STANDSTATECHANGE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TEXT_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.write_encrypted_client(w, e),
@@ -865,6 +869,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TUTORIAL_FLAG(c) => c.write_unencrypted_client(w),
             Self::CMSG_TUTORIAL_CLEAR(c) => c.write_unencrypted_client(w),
             Self::CMSG_TUTORIAL_RESET(c) => c.write_unencrypted_client(w),
+            Self::CMSG_STANDSTATECHANGE(c) => c.write_unencrypted_client(w),
             Self::CMSG_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_TEXT_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.write_unencrypted_client(w),
@@ -1044,6 +1049,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TUTORIAL_FLAG(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TUTORIAL_CLEAR(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TUTORIAL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_STANDSTATECHANGE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1223,6 +1229,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TUTORIAL_FLAG(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TUTORIAL_CLEAR(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TUTORIAL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_STANDSTATECHANGE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1402,6 +1409,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TUTORIAL_FLAG(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TUTORIAL_CLEAR(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TUTORIAL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_STANDSTATECHANGE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1581,6 +1589,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TUTORIAL_FLAG(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TUTORIAL_CLEAR(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TUTORIAL_RESET(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_STANDSTATECHANGE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOEQUIP_ITEM(c) => c.astd_write_unencrypted_client(w).await,
@@ -1795,6 +1804,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_TUTORIAL_FLAG(_) => "CMSG_TUTORIAL_FLAG",
             ClientOpcodeMessage::CMSG_TUTORIAL_CLEAR(_) => "CMSG_TUTORIAL_CLEAR",
             ClientOpcodeMessage::CMSG_TUTORIAL_RESET(_) => "CMSG_TUTORIAL_RESET",
+            ClientOpcodeMessage::CMSG_STANDSTATECHANGE(_) => "CMSG_STANDSTATECHANGE",
             ClientOpcodeMessage::CMSG_EMOTE(_) => "CMSG_EMOTE",
             ClientOpcodeMessage::CMSG_TEXT_EMOTE(_) => "CMSG_TEXT_EMOTE",
             ClientOpcodeMessage::CMSG_AUTOEQUIP_ITEM(_) => "CMSG_AUTOEQUIP_ITEM",
@@ -2359,6 +2369,12 @@ impl From<CMSG_TUTORIAL_CLEAR> for ClientOpcodeMessage {
 impl From<CMSG_TUTORIAL_RESET> for ClientOpcodeMessage {
     fn from(c: CMSG_TUTORIAL_RESET) -> Self {
         Self::CMSG_TUTORIAL_RESET(c)
+    }
+}
+
+impl From<CMSG_STANDSTATECHANGE> for ClientOpcodeMessage {
+    fn from(c: CMSG_STANDSTATECHANGE) -> Self {
+        Self::CMSG_STANDSTATECHANGE(c)
     }
 }
 
