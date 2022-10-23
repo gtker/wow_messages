@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 cmsg CMSG_STANDSTATECHANGE = 0x0101 {
     (u32)UnitStandState animation_state;
