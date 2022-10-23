@@ -2639,6 +2639,7 @@ use crate::world::wrath::SMSG_GOSSIP_MESSAGE;
 use crate::world::wrath::SMSG_GOSSIP_COMPLETE;
 use crate::world::wrath::SMSG_NPC_TEXT_UPDATE;
 use crate::world::wrath::SMSG_PETITION_SHOW_SIGNATURES;
+use crate::world::wrath::SMSG_PETITION_SIGN_RESULTS;
 use crate::world::wrath::SMSG_NOTIFICATION;
 use crate::world::wrath::SMSG_PLAYED_TIME;
 use crate::world::wrath::SMSG_QUERY_TIME_RESPONSE;
@@ -2779,6 +2780,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GOSSIP_COMPLETE(SMSG_GOSSIP_COMPLETE),
     SMSG_NPC_TEXT_UPDATE(SMSG_NPC_TEXT_UPDATE),
     SMSG_PETITION_SHOW_SIGNATURES(SMSG_PETITION_SHOW_SIGNATURES),
+    SMSG_PETITION_SIGN_RESULTS(SMSG_PETITION_SIGN_RESULTS),
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
     SMSG_PLAYED_TIME(SMSG_PLAYED_TIME),
     SMSG_QUERY_TIME_RESPONSE(SMSG_QUERY_TIME_RESPONSE),
@@ -2921,6 +2923,7 @@ impl ServerOpcodeMessage {
             0x017E => Ok(Self::SMSG_GOSSIP_COMPLETE(<SMSG_GOSSIP_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017E, size: body_size, io, } } else { a } })?)),
             0x0180 => Ok(Self::SMSG_NPC_TEXT_UPDATE(<SMSG_NPC_TEXT_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0180, size: body_size, io, } } else { a } })?)),
             0x01BF => Ok(Self::SMSG_PETITION_SHOW_SIGNATURES(<SMSG_PETITION_SHOW_SIGNATURES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BF, size: body_size, io, } } else { a } })?)),
+            0x01C1 => Ok(Self::SMSG_PETITION_SIGN_RESULTS(<SMSG_PETITION_SIGN_RESULTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C1, size: body_size, io, } } else { a } })?)),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CB, size: body_size, io, } } else { a } })?)),
             0x01CD => Ok(Self::SMSG_PLAYED_TIME(<SMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CD, size: body_size, io, } } else { a } })?)),
             0x01CF => Ok(Self::SMSG_QUERY_TIME_RESPONSE(<SMSG_QUERY_TIME_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CF, size: body_size, io, } } else { a } })?)),
@@ -3212,6 +3215,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PETITION_SIGN_RESULTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAYED_TIME(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -3355,6 +3359,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PETITION_SIGN_RESULTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAYED_TIME(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -3498,6 +3503,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PETITION_SIGN_RESULTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3641,6 +3647,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PETITION_SIGN_RESULTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -3784,6 +3791,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PETITION_SIGN_RESULTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -3927,6 +3935,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PETITION_SIGN_RESULTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -4072,6 +4081,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => "SMSG_GOSSIP_COMPLETE",
             ServerOpcodeMessage::SMSG_NPC_TEXT_UPDATE(_) => "SMSG_NPC_TEXT_UPDATE",
             ServerOpcodeMessage::SMSG_PETITION_SHOW_SIGNATURES(_) => "SMSG_PETITION_SHOW_SIGNATURES",
+            ServerOpcodeMessage::SMSG_PETITION_SIGN_RESULTS(_) => "SMSG_PETITION_SIGN_RESULTS",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
             ServerOpcodeMessage::SMSG_PLAYED_TIME(_) => "SMSG_PLAYED_TIME",
             ServerOpcodeMessage::SMSG_QUERY_TIME_RESPONSE(_) => "SMSG_QUERY_TIME_RESPONSE",
@@ -4610,6 +4620,12 @@ impl From<SMSG_NPC_TEXT_UPDATE> for ServerOpcodeMessage {
 impl From<SMSG_PETITION_SHOW_SIGNATURES> for ServerOpcodeMessage {
     fn from(c: SMSG_PETITION_SHOW_SIGNATURES) -> Self {
         Self::SMSG_PETITION_SHOW_SIGNATURES(c)
+    }
+}
+
+impl From<SMSG_PETITION_SIGN_RESULTS> for ServerOpcodeMessage {
+    fn from(c: SMSG_PETITION_SIGN_RESULTS) -> Self {
+        Self::SMSG_PETITION_SIGN_RESULTS(c)
     }
 }
 

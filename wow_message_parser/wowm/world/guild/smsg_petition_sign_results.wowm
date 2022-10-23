@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum PetitionResult : u32 {
     OK = 0;
     ALREADY_SIGNED = 1;
@@ -7,11 +5,32 @@ enum PetitionResult : u32 {
     CANT_SIGN_OWN = 3;
     NEED_MORE = 4;
     NOT_SERVER = 5;
+} {
+    versions = "1.12";
+}
+
+enum PetitionResult : u32 {
+    OK = 0;
+    ALREADY_SIGNED = 1;
+    ALREADY_IN_GUILD = 2;
+    CANT_SIGN_OWN = 3;
+    NOT_SERVER = 4;
+} {
+    versions = "2.4.3 3";
 }
 
 smsg SMSG_PETITION_SIGN_RESULTS = 0x01C1 {
     Guid petition_guid;
     Guid owner_guid;
     PetitionResult result;
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_PETITION_SIGN_RESULTS = 0x01C1 {
+    Guid petition_guid;
+    Guid owner_guid;
+    PetitionResult result;
+} {
+    versions = "2.4.3 3";
+}
