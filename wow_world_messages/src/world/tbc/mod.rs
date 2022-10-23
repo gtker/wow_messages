@@ -88,6 +88,8 @@ pub(crate) mod cmsg_binder_activate;
 pub use cmsg_binder_activate::*;
 pub(crate) mod cmsg_bug;
 pub use cmsg_bug::*;
+pub(crate) mod cmsg_buy_bank_slot;
+pub use cmsg_buy_bank_slot::*;
 pub(crate) mod cmsg_cancel_channelling;
 pub use cmsg_cancel_channelling::*;
 pub(crate) mod cmsg_channel_announcements;
