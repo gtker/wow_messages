@@ -67,6 +67,7 @@ pub mod cmsg_guild_invite_vanilla_tbc_wrath;
 pub mod cmsg_guild_leader_vanilla_tbc_wrath;
 pub mod cmsg_guild_leave_vanilla_tbc_wrath;
 pub mod cmsg_guild_motd_vanilla_tbc_wrath;
+pub mod cmsg_guild_promote_vanilla_tbc_wrath;
 pub mod cmsg_join_channel_tbc_wrath;
 pub mod cmsg_leave_channel_tbc_wrath;
 pub mod cmsg_logout_cancel_vanilla_tbc_wrath;

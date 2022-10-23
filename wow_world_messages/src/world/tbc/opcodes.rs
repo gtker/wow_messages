@@ -22,6 +22,7 @@ use crate::world::tbc::CMSG_GUILD_INVITE;
 use crate::world::tbc::CMSG_GUILD_ACCEPT;
 use crate::world::tbc::CMSG_GUILD_DECLINE;
 use crate::world::tbc::CMSG_GUILD_INFO;
+use crate::world::tbc::CMSG_GUILD_PROMOTE;
 use crate::world::tbc::CMSG_GUILD_DEMOTE;
 use crate::world::tbc::CMSG_GUILD_LEAVE;
 use crate::world::tbc::CMSG_GUILD_DISBAND;
@@ -158,6 +159,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GUILD_ACCEPT(CMSG_GUILD_ACCEPT),
     CMSG_GUILD_DECLINE(CMSG_GUILD_DECLINE),
     CMSG_GUILD_INFO(CMSG_GUILD_INFO),
+    CMSG_GUILD_PROMOTE(CMSG_GUILD_PROMOTE),
     CMSG_GUILD_DEMOTE(CMSG_GUILD_DEMOTE),
     CMSG_GUILD_LEAVE(CMSG_GUILD_LEAVE),
     CMSG_GUILD_DISBAND(CMSG_GUILD_DISBAND),
@@ -296,6 +298,7 @@ impl ClientOpcodeMessage {
             0x0084 => Ok(Self::CMSG_GUILD_ACCEPT(<CMSG_GUILD_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0084, size: body_size, io, } } else { a } })?)),
             0x0085 => Ok(Self::CMSG_GUILD_DECLINE(<CMSG_GUILD_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0085, size: body_size, io, } } else { a } })?)),
             0x0087 => Ok(Self::CMSG_GUILD_INFO(<CMSG_GUILD_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0087, size: body_size, io, } } else { a } })?)),
+            0x008B => Ok(Self::CMSG_GUILD_PROMOTE(<CMSG_GUILD_PROMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008B, size: body_size, io, } } else { a } })?)),
             0x008C => Ok(Self::CMSG_GUILD_DEMOTE(<CMSG_GUILD_DEMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008C, size: body_size, io, } } else { a } })?)),
             0x008D => Ok(Self::CMSG_GUILD_LEAVE(<CMSG_GUILD_LEAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008D, size: body_size, io, } } else { a } })?)),
             0x008F => Ok(Self::CMSG_GUILD_DISBAND(<CMSG_GUILD_DISBAND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008F, size: body_size, io, } } else { a } })?)),
@@ -502,6 +505,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_ACCEPT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_DECLINE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_INFO(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_PROMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_DEMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_LEAVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_DISBAND(c) => c.write_encrypted_client(w, e),
@@ -641,6 +645,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_ACCEPT(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_DECLINE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_INFO(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GUILD_PROMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_DEMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_LEAVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_DISBAND(c) => c.write_unencrypted_client(w),
@@ -780,6 +785,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_PROMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_DEMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_LEAVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_DISBAND(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -919,6 +925,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INFO(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_PROMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_DEMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_LEAVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_DISBAND(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1058,6 +1065,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INFO(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_PROMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_DEMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_LEAVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_DISBAND(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1197,6 +1205,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INFO(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_PROMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_DEMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_LEAVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_DISBAND(c) => c.astd_write_unencrypted_client(w).await,
@@ -1371,6 +1380,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GUILD_ACCEPT(_) => "CMSG_GUILD_ACCEPT",
             ClientOpcodeMessage::CMSG_GUILD_DECLINE(_) => "CMSG_GUILD_DECLINE",
             ClientOpcodeMessage::CMSG_GUILD_INFO(_) => "CMSG_GUILD_INFO",
+            ClientOpcodeMessage::CMSG_GUILD_PROMOTE(_) => "CMSG_GUILD_PROMOTE",
             ClientOpcodeMessage::CMSG_GUILD_DEMOTE(_) => "CMSG_GUILD_DEMOTE",
             ClientOpcodeMessage::CMSG_GUILD_LEAVE(_) => "CMSG_GUILD_LEAVE",
             ClientOpcodeMessage::CMSG_GUILD_DISBAND(_) => "CMSG_GUILD_DISBAND",
@@ -1575,6 +1585,12 @@ impl From<CMSG_GUILD_DECLINE> for ClientOpcodeMessage {
 impl From<CMSG_GUILD_INFO> for ClientOpcodeMessage {
     fn from(c: CMSG_GUILD_INFO) -> Self {
         Self::CMSG_GUILD_INFO(c)
+    }
+}
+
+impl From<CMSG_GUILD_PROMOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_PROMOTE) -> Self {
+        Self::CMSG_GUILD_PROMOTE(c)
     }
 }
 
