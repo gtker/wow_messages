@@ -488,6 +488,7 @@
 - [GroupListMember](docs/grouplistmember.md)
 - [GuildBankRights](docs/guildbankrights.md)
 - [GuildMember](docs/guildmember.md)
+- [GuildRights](docs/guildrights.md)
 - [InitialSpell](docs/initialspell.md)
 - [ItemDamageType](docs/itemdamagetype.md)
 - [ItemSpells](docs/itemspells.md)

@@ -123,6 +123,7 @@ pub mod guild_bank_rights_tbc_wrath;
 pub mod guild_command_vanilla_tbc;
 pub mod guild_emblem_result_tbc_wrath;
 pub mod guild_event_tbc_wrath;
+pub mod guild_member_status_vanilla_tbc;
 pub mod inventory_type_vanilla_tbc_wrath;
 pub mod item_quality_vanilla_tbc;
 pub mod language_tbc_wrath;
