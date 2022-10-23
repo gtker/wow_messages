@@ -485,6 +485,7 @@
 - [GmSurveyQuestion](docs/gmsurveyquestion.md)
 - [GossipItem](docs/gossipitem.md)
 - [GroupListMember](docs/grouplistmember.md)
+- [GuildBankRights](docs/guildbankrights.md)
 - [InitialSpell](docs/initialspell.md)
 - [ItemDamageType](docs/itemdamagetype.md)
 - [ItemSpells](docs/itemspells.md)

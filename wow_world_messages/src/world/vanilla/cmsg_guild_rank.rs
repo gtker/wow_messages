@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_guild_rank.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_guild_rank.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_guild_rank.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_guild_rank.wowm#L1):
 /// ```text
 /// cmsg CMSG_GUILD_RANK = 0x0231 {
 ///     u32 rank_id;
