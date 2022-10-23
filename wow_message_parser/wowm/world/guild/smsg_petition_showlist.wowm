@@ -14,10 +14,6 @@ struct PetitionShowlist {
     u32 unknown1 {
         comment = "cmangos/vmangos/mangoszero: statically set to 1";
     }
-    u32 unknown2 {
-        comment = "cmangos/vmangos/mangoszero: statically set to 9";
-        comment = "cmangos/vmangos/mangoszero: required signs?";
-    }
 }
 
 smsg SMSG_PETITION_SHOWLIST = 0x01BC {

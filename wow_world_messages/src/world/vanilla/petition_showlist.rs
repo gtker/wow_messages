@@ -10,7 +10,6 @@ use std::io::{Write, Read};
 ///     u32 charter_display_id = 16161;
 ///     u32 guild_charter_cost;
 ///     u32 unknown1;
-///     u32 unknown2;
 /// }
 /// ```
 pub struct PetitionShowlist {
@@ -21,10 +20,6 @@ pub struct PetitionShowlist {
     /// cmangos/vmangos/mangoszero: statically set to 1
     ///
     pub unknown1: u32,
-    /// cmangos/vmangos/mangoszero: statically set to 9
-    /// cmangos/vmangos/mangoszero: required signs?
-    ///
-    pub unknown2: u32,
 }
 
 impl PetitionShowlist {
@@ -69,9 +64,6 @@ impl PetitionShowlist {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        // unknown2: u32
-        w.write_all(&self.unknown2.to_le_bytes())?;
-
         Ok(())
     }
 }
@@ -95,14 +87,10 @@ impl PetitionShowlist {
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 
-        // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(r)?;
-
         Ok(Self {
             index,
             guild_charter_cost,
             unknown1,
-            unknown2,
         })
     }
 
