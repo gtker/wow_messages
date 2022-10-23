@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum GuildEvent : u8 {
     PROMOTION = 0;
     DEMOTION = 1;
@@ -15,6 +13,53 @@ enum GuildEvent : u8 {
     ROSTER_UPDATE = 11;
     SIGNED_ON = 12;
     SIGNED_OFF = 13;
+} {
+    versions = "1";
+}
+
+enum GuildEvent : u8 {
+    PROMOTION = 0x00;
+    DEMOTION = 0x01;
+    MOTD = 0x02;
+    JOINED = 0x03;
+    LEFT = 0x04;
+    REMOVED = 0x05;
+    LEADER_IS = 0x06;
+    LEADER_CHANGED = 0x07;
+    DISBANDED = 0x08;
+    TABARD_CHANGED = 0x09;
+    UNK1 = 0x0A {
+        comment = "string EVENT_GUILD_ROSTER_UPDATE tab content change?";
+    }
+    UNK2 = 0x0B {
+        comment = "EVENT_GUILD_ROSTER_UPDATE";
+    }
+    SIGNED_ON = 0x0C {
+        comment = "ERR_FRIEND_ONLINE_SS";
+    }
+    SIGNED_OFF = 0x0D {
+        comment = "ERR_FRIEND_OFFLINE_S";
+    }
+    GUILD_BANK_BAG_SLOTS_CHANGED = 0x0E {
+        comment = "EVENT_GUILDBANKBAGSLOTS_CHANGED";
+    }
+    BANKTAB_PURCHASED = 0x0F {
+        comment = "EVENT_GUILDBANK_UPDATE_TABS";
+    }
+    UNK5 = 0x10 {
+        comment = "EVENT_GUILDBANK_UPDATE_TABS";
+    }
+    GUILD_BANK_UPDATE_MONEY = 0x11 {
+        comment = "EVENT_GUILDBANK_UPDATE_MONEY. string 0000000000002710 is 1 gold";
+    }
+    GUILD_BANK_MONEY_WITHDRAWN = 0x12 {
+        comment = "MSG_GUILD_BANK_MONEY_WITHDRAWN";
+    }
+    GUILD_BANK_TEXT_CHANGED = 0x13 {
+        comment = "EVENT_GUILDBANK_TEXT_CHANGED";
+    }
+} {
+    versions = "2.4.3 3";
 }
 
 /* TODO: Technically correct, but events require a specific amount of strings */
@@ -22,5 +67,15 @@ smsg SMSG_GUILD_EVENT = 0x0092 {
     GuildEvent event;
     u8 amount_of_events;
     CString[amount_of_events] event_descriptions;
+} {
+    versions = "1";
 }
 
+/* TODO: Technically correct, but events require a specific amount of strings */
+smsg SMSG_GUILD_EVENT = 0x0092 {
+    GuildEvent event;
+    u8 amount_of_events;
+    CString[amount_of_events] event_descriptions;
+} {
+    versions = "2.4.3 3";
+}
