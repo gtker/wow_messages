@@ -417,6 +417,8 @@ pub(crate) mod msg_move_worldport_ack;
 pub use msg_move_worldport_ack::*;
 pub(crate) mod msg_petition_decline;
 pub use msg_petition_decline::*;
+pub(crate) mod msg_petition_rename;
+pub use msg_petition_rename::*;
 pub(crate) mod msg_set_dungeon_difficulty;
 pub use msg_set_dungeon_difficulty::*;
 pub(crate) mod npc_text_update;

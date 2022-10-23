@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 msg MSG_PETITION_RENAME = 0x02C1 {
     Guid petition_guid;
