@@ -218,6 +218,8 @@ pub(crate) mod cmsg_offer_petition;
 pub use cmsg_offer_petition::*;
 pub(crate) mod cmsg_petition_buy;
 pub use cmsg_petition_buy::*;
+pub(crate) mod cmsg_petition_show_signatures;
+pub use cmsg_petition_show_signatures::*;
 pub(crate) mod cmsg_ping;
 pub use cmsg_ping::*;
 pub(crate) mod cmsg_player_login;
