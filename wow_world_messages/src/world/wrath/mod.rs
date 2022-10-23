@@ -596,6 +596,8 @@ pub(crate) mod smsg_guild_event;
 pub use smsg_guild_event::*;
 pub(crate) mod smsg_guild_info;
 pub use smsg_guild_info::*;
+pub(crate) mod smsg_guild_invite;
+pub use smsg_guild_invite::*;
 pub(crate) mod smsg_init_world_states;
 pub use smsg_init_world_states::*;
 pub(crate) mod smsg_initialize_factions;
