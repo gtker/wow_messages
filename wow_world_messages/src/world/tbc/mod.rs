@@ -66,6 +66,8 @@ pub(crate) mod cmsg_autobank_item;
 pub use cmsg_autobank_item::*;
 pub(crate) mod cmsg_autoequip_item;
 pub use cmsg_autoequip_item::*;
+pub(crate) mod cmsg_autoequip_item_slot;
+pub use cmsg_autoequip_item_slot::*;
 pub(crate) mod cmsg_battlefield_list;
 pub use cmsg_battlefield_list::*;
 pub(crate) mod cmsg_battlefield_port;
