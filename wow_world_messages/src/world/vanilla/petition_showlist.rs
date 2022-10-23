@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L21):
 /// ```text
 /// struct PetitionShowlist {
 ///     u32 index;
@@ -14,7 +14,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct PetitionShowlist {
     pub index: u32,
-    /// cmangos/vmangos/mangoszero: statically set to 1000 (10 silver).
+    /// cmangos/vmangos/mangoszero: statically set to 1000 (10 silver) for guild charters and the cost of arena charters for that.
     ///
     pub guild_charter_cost: u32,
     /// cmangos/vmangos/mangoszero: statically set to 1

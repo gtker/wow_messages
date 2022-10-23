@@ -141,6 +141,7 @@ pub mod msg_petition_rename_vanilla_tbc_wrath;
 pub mod msg_save_guild_emblem_client_vanilla_tbc_wrath;
 pub mod msg_tabardvendor_activate_vanilla_tbc_wrath;
 pub mod npc_text_update_emote_vanilla_tbc_wrath;
+pub mod petition_showlist_tbc_wrath;
 pub mod petition_signature_vanilla_tbc_wrath;
 pub mod player_chat_tag_vanilla_tbc;
 pub mod quest_item_vanilla_tbc;

@@ -4,7 +4,7 @@ use crate::world::vanilla::PetitionShowlist;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L19):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:39`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L39):
 /// ```text
 /// smsg SMSG_PETITION_SHOWLIST = 0x01BC {
 ///     Guid npc;

@@ -450,6 +450,8 @@ pub use object::*;
 pub(crate) mod object_type;
 pub use object_type::*;
 pub mod opcodes;
+pub(crate) mod petition_showlist;
+pub use petition_showlist::*;
 pub(crate) mod petition_signature;
 pub use petition_signature::*;
 pub(crate) mod player_chat_tag;
