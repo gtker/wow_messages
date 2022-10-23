@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_GUILD_LEADER = 0x0090 {
     CString new_guild_leader_name;

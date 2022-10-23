@@ -184,6 +184,8 @@ pub(crate) mod cmsg_guild_info_text;
 pub use cmsg_guild_info_text::*;
 pub(crate) mod cmsg_guild_invite;
 pub use cmsg_guild_invite::*;
+pub(crate) mod cmsg_guild_leader;
+pub use cmsg_guild_leader::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
 pub(crate) mod cmsg_leave_battlefield;
