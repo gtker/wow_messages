@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_LOOT_RELEASE = 0x015F {
     Guid guid;

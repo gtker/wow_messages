@@ -96,6 +96,8 @@ pub mod cmsg_list_inventory_vanilla_tbc_wrath;
 pub mod cmsg_logout_cancel_vanilla_tbc_wrath;
 pub mod cmsg_logout_request_vanilla_tbc_wrath;
 pub mod cmsg_loot_master_give_vanilla_tbc_wrath;
+pub mod cmsg_loot_money_vanilla_tbc_wrath;
+pub mod cmsg_loot_release_vanilla_tbc_wrath;
 pub mod cmsg_loot_vanilla_tbc_wrath;
 pub mod cmsg_name_query_vanilla_tbc_wrath;
 pub mod cmsg_next_cinematic_camera_vanilla_tbc_wrath;
