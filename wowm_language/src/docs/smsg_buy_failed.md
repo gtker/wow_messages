@@ -1,6 +1,10 @@
 # SMSG_BUY_FAILED
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
+
+### Comment
+
+Some TBC and Wrath emus have a u32 before `result` that is only included if the value is > 0, but the emus never call it with anything other than 0.`
 
 ### Wowm Representation
 

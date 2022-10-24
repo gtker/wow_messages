@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 enum BuyResult : u8 {
     CANT_FIND_ITEM = 0;
@@ -16,5 +16,7 @@ smsg SMSG_BUY_FAILED = 0x01A5 {
     Guid guid;
     u32 item_id;
     BuyResult result;
+} {
+    comment = "Some TBC and Wrath emus have a u32 before `result` that is only included if the value is > 0, but the emus never call it with anything other than 0.`";
 }
 
