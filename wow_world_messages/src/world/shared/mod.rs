@@ -233,6 +233,7 @@ pub mod smsg_initialize_factions_vanilla_tbc;
 pub mod smsg_item_cooldown_vanilla_tbc_wrath;
 pub mod smsg_item_enchant_time_update_vanilla_tbc_wrath;
 pub mod smsg_item_push_result_tbc_wrath;
+pub mod smsg_item_time_update_vanilla_tbc_wrath;
 pub mod smsg_levelup_info_vanilla_tbc;
 pub mod smsg_log_xpgain_vanilla_tbc;
 pub mod smsg_login_settimespeed_vanilla_tbc;
