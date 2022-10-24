@@ -1,18 +1,22 @@
-#tag_all versions "1.12";
-
 enum NewItemSource : u32 {
     LOOTED = 0;
     FROM_NPC = 1;
+} {
+    versions = "1 2 3";
 }
 
 enum NewItemCreationType : u32 {
     RECEIVED = 0;
     CREATED = 1;
+} {
+    versions = "1 2 3";
 }
 
 enum NewItemChatAlert : u32 {
     DO_NOT_SHOW = 0;
     SHOW = 1;
+} {
+    versions = "1 2 3";
 }
 
 smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
@@ -32,5 +36,28 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
         comment = "mangoszero: random item property id";
     }
     u32 item_count;
+} {
+    versions = "1";
 }
 
+smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
+    Guid guid;
+    NewItemSource source;
+    NewItemCreationType creation_type;
+    NewItemChatAlert alert_chat;
+    u8 bag_slot;
+    u32 item_slot {
+        comment = "mangoszero: item slot, but when added to stack: 0xFFFFFFFF";
+    }
+    u32 item_id;
+    u32 item_suffix_factor {
+        comment = "mangoszero: SuffixFactor";
+    }
+    u32 item_random_property_id {
+        comment = "mangoszero: random item property id";
+    }
+    u32 item_count;
+    u32 item_count_in_inventory;
+} {
+    versions = "2.4.3 3";
+}

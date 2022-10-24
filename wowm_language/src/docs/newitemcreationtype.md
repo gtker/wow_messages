@@ -1,6 +1,6 @@
 # NewItemCreationType
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -21,5 +21,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `CREATED` | 1 (0x01) |  |  |
 
 Used in:
+* [SMSG_ITEM_PUSH_RESULT](smsg_item_push_result.md)
 * [SMSG_ITEM_PUSH_RESULT](smsg_item_push_result.md)
 
