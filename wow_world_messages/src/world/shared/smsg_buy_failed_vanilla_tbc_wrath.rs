@@ -4,7 +4,7 @@ use crate::world::shared::buy_result_vanilla_tbc_wrath::BuyResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Some TBC and Wrath emus have a u32 before `result` that is only included if the value is > 0, but the emus never call it with anything other than 0.`
+/// Some TBC and Wrath emus have a u32 before `result` that is only included if the value is > 0, but the emus never call it with anything other than 0.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_buy_failed.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_buy_failed.wowm#L15):
 /// ```text

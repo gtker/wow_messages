@@ -4,7 +4,7 @@
 
 ### Comment
 
-Some TBC and Wrath emus have a u32 before `result` that is only included if the value is > 0, but the emus never call it with anything other than 0.`
+Some TBC and Wrath emus have a u32 before `result` that is only included if the value is > 0, but the emus never call it with anything other than 0.
 
 ### Wowm Representation
 

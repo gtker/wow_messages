@@ -17,6 +17,6 @@ smsg SMSG_BUY_FAILED = 0x01A5 {
     u32 item_id;
     BuyResult result;
 } {
-    comment = "Some TBC and Wrath emus have a u32 before `result` that is only included if the value is > 0, but the emus never call it with anything other than 0.`";
+    comment = "Some TBC and Wrath emus have a u32 before `result` that is only included if the value is > 0, but the emus never call it with anything other than 0.";
 }
 
