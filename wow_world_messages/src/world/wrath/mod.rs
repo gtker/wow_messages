@@ -762,6 +762,8 @@ pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_set_rest_start;
 pub use smsg_set_rest_start::*;
+pub(crate) mod smsg_show_bank;
+pub use smsg_show_bank::*;
 pub(crate) mod smsg_standstate_update;
 pub use smsg_standstate_update::*;
 pub(crate) mod smsg_text_emote;
