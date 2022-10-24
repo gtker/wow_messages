@@ -598,6 +598,8 @@ pub(crate) mod smsg_buy_bank_slot_result;
 pub use smsg_buy_bank_slot_result::*;
 pub(crate) mod smsg_buy_failed;
 pub use smsg_buy_failed::*;
+pub(crate) mod smsg_buy_item;
+pub use smsg_buy_item::*;
 pub(crate) mod smsg_cancel_combat;
 pub use smsg_cancel_combat::*;
 pub(crate) mod smsg_channel_list;

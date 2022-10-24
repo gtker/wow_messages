@@ -1,6 +1,6 @@
 # SMSG_BUY_ITEM
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -29,7 +29,7 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | vendor_slot |  |  |
+| 0x0C | 4 / Little | u32 | vendor_slot |  | Starts at index 1.<br/>arcemu has this field as milliseconds since something instead. |
 | 0x10 | 4 / Little | u32 | amount_for_sale |  |  |
 | 0x14 | 4 / Little | u32 | amount_bought |  |  |
 
