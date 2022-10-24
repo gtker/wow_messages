@@ -275,7 +275,11 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_INVENTORY_CHANGE_FAILURE", 0x112),
     Data::with_reason("SMSG_OPEN_CONTAINER", 0x113, "Not implemented in emus"),
     Data::new("CMSG_INSPECT", 0x114),
-    Data::new("SMSG_INSPECT_RESULTS_UPDATE", 0x115),
+    Data::with_reason(
+        "SMSG_INSPECT_RESULTS_UPDATE",
+        0x115,
+        "Not implemented in emus",
+    ),
     Data::new("CMSG_INITIATE_TRADE", 0x116),
     Data::new("CMSG_BEGIN_TRADE", 0x117),
     Data::new("CMSG_BUSY_TRADE", 0x118),

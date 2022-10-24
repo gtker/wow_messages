@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1";
 
 smsg SMSG_INSPECT = 0x0115 {
     Guid guid;
