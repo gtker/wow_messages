@@ -688,6 +688,8 @@ pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
 pub(crate) mod smsg_inventory_change_failure;
 pub use smsg_inventory_change_failure::*;
+pub(crate) mod smsg_item_cooldown;
+pub use smsg_item_cooldown::*;
 pub(crate) mod smsg_levelup_info;
 pub use smsg_levelup_info::*;
 pub(crate) mod smsg_log_xpgain;

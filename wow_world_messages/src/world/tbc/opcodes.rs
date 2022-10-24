@@ -2982,6 +2982,7 @@ use crate::world::tbc::SMSG_CHANNEL_NOTIFY;
 use crate::world::tbc::SMSG_CHANNEL_LIST;
 use crate::world::tbc::SMSG_UPDATE_OBJECT;
 use crate::world::tbc::SMSG_DESTROY_OBJECT;
+use crate::world::tbc::SMSG_ITEM_COOLDOWN;
 use crate::world::tbc::SMSG_GAMEOBJECT_CUSTOM_ANIM;
 use crate::world::tbc::MSG_MOVE_START_FORWARD_Server;
 use crate::world::tbc::MSG_MOVE_START_BACKWARD_Server;
@@ -3117,6 +3118,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHANNEL_LIST(SMSG_CHANNEL_LIST),
     SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
     SMSG_DESTROY_OBJECT(SMSG_DESTROY_OBJECT),
+    SMSG_ITEM_COOLDOWN(SMSG_ITEM_COOLDOWN),
     SMSG_GAMEOBJECT_CUSTOM_ANIM(SMSG_GAMEOBJECT_CUSTOM_ANIM),
     MSG_MOVE_START_FORWARD(MSG_MOVE_START_FORWARD_Server),
     MSG_MOVE_START_BACKWARD(MSG_MOVE_START_BACKWARD_Server),
@@ -3254,6 +3256,7 @@ impl ServerOpcodeMessage {
             0x009B => Ok(Self::SMSG_CHANNEL_LIST(<SMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x009B, size: body_size, io, } } else { a } })?)),
             0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00A9, size: body_size, io, } } else { a } })?)),
             0x00AA => Ok(Self::SMSG_DESTROY_OBJECT(<SMSG_DESTROY_OBJECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00AA, size: body_size, io, } } else { a } })?)),
+            0x00B0 => Ok(Self::SMSG_ITEM_COOLDOWN(<SMSG_ITEM_COOLDOWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B0, size: body_size, io, } } else { a } })?)),
             0x00B3 => Ok(Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(<SMSG_GAMEOBJECT_CUSTOM_ANIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B3, size: body_size, io, } } else { a } })?)),
             0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B5, size: body_size, io, } } else { a } })?)),
             0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B6, size: body_size, io, } } else { a } })?)),
@@ -3459,6 +3462,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DESTROY_OBJECT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ITEM_COOLDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_FORWARD(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_encrypted_server(w, e),
@@ -3597,6 +3601,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
             Self::SMSG_DESTROY_OBJECT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ITEM_COOLDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_FORWARD(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_unencrypted_server(w),
@@ -3735,6 +3740,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DESTROY_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ITEM_COOLDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3873,6 +3879,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DESTROY_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ITEM_COOLDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4011,6 +4018,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DESTROY_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ITEM_COOLDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4149,6 +4157,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DESTROY_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ITEM_COOLDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_unencrypted_server(w).await,
@@ -4289,6 +4298,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => "SMSG_CHANNEL_LIST",
             ServerOpcodeMessage::SMSG_UPDATE_OBJECT(_) => "SMSG_UPDATE_OBJECT",
             ServerOpcodeMessage::SMSG_DESTROY_OBJECT(_) => "SMSG_DESTROY_OBJECT",
+            ServerOpcodeMessage::SMSG_ITEM_COOLDOWN(_) => "SMSG_ITEM_COOLDOWN",
             ServerOpcodeMessage::SMSG_GAMEOBJECT_CUSTOM_ANIM(_) => "SMSG_GAMEOBJECT_CUSTOM_ANIM",
             ServerOpcodeMessage::MSG_MOVE_START_FORWARD(_) => "MSG_MOVE_START_FORWARD_Server",
             ServerOpcodeMessage::MSG_MOVE_START_BACKWARD(_) => "MSG_MOVE_START_BACKWARD_Server",
@@ -4532,6 +4542,12 @@ impl From<SMSG_UPDATE_OBJECT> for ServerOpcodeMessage {
 impl From<SMSG_DESTROY_OBJECT> for ServerOpcodeMessage {
     fn from(c: SMSG_DESTROY_OBJECT) -> Self {
         Self::SMSG_DESTROY_OBJECT(c)
+    }
+}
+
+impl From<SMSG_ITEM_COOLDOWN> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_COOLDOWN) -> Self {
+        Self::SMSG_ITEM_COOLDOWN(c)
     }
 }
 

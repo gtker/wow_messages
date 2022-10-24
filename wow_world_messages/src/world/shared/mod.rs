@@ -227,6 +227,7 @@ pub mod smsg_guild_event_tbc_wrath;
 pub mod smsg_guild_info_vanilla_tbc;
 pub mod smsg_guild_invite_vanilla_tbc_wrath;
 pub mod smsg_initialize_factions_vanilla_tbc;
+pub mod smsg_item_cooldown_vanilla_tbc_wrath;
 pub mod smsg_levelup_info_vanilla_tbc;
 pub mod smsg_log_xpgain_vanilla_tbc;
 pub mod smsg_login_settimespeed_vanilla_tbc;
