@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::vanilla::InventoryResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm#L5):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm#L1):
 /// ```text
 /// smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
 ///     InventoryResult result;
@@ -11,8 +12,8 @@ use std::io::{Write, Read};
 ///         u32 required_level;
 ///     }
 ///     if (result != OK) {
-///         u64 item1_guid;
-///         u64 item2_guid;
+///         Guid item1;
+///         Guid item2;
 ///         u8 bag_type_subclass;
 ///     }
 /// }
@@ -36,18 +37,18 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok => {}
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
                 required_level,
             } => {
                 // required_level: u32
                 w.write_all(&required_level.to_le_bytes())?;
 
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -55,14 +56,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -70,14 +71,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -85,14 +86,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -100,14 +101,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -115,14 +116,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -130,14 +131,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -145,14 +146,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -160,14 +161,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -175,14 +176,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -190,14 +191,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -205,14 +206,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -220,14 +221,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -235,14 +236,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -250,14 +251,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -265,14 +266,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -280,14 +281,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -295,14 +296,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -310,14 +311,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -325,14 +326,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -340,14 +341,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -355,14 +356,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -370,14 +371,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -385,14 +386,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -400,14 +401,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -415,14 +416,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -430,14 +431,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -445,14 +446,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -460,14 +461,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -475,14 +476,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -490,14 +491,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -505,14 +506,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -520,14 +521,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -535,14 +536,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -550,14 +551,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -565,14 +566,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -580,14 +581,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -595,14 +596,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -610,14 +611,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -625,14 +626,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -640,14 +641,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -655,14 +656,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -670,14 +671,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -685,14 +686,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -700,14 +701,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -715,14 +716,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -730,14 +731,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -745,14 +746,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -760,14 +761,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -775,14 +776,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -790,14 +791,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -805,14 +806,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -820,14 +821,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -835,14 +836,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -850,14 +851,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -865,14 +866,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -880,14 +881,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -895,14 +896,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -910,14 +911,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -925,14 +926,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -940,14 +941,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -955,14 +956,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -970,14 +971,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -985,14 +986,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1000,14 +1001,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1015,14 +1016,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1034,18 +1035,18 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok => {}
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
                 required_level,
             } => {
                 // required_level: u32
                 w.write_all(&required_level.to_le_bytes())?;
 
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1053,14 +1054,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1068,14 +1069,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1083,14 +1084,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1098,14 +1099,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1113,14 +1114,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1128,14 +1129,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1143,14 +1144,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1158,14 +1159,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1173,14 +1174,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1188,14 +1189,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1203,14 +1204,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1218,14 +1219,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1233,14 +1234,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1248,14 +1249,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1263,14 +1264,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1278,14 +1279,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1293,14 +1294,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1308,14 +1309,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1323,14 +1324,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1338,14 +1339,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1353,14 +1354,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1368,14 +1369,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1383,14 +1384,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1398,14 +1399,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1413,14 +1414,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1428,14 +1429,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1443,14 +1444,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1458,14 +1459,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1473,14 +1474,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1488,14 +1489,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1503,14 +1504,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1518,14 +1519,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1533,14 +1534,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1548,14 +1549,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1563,14 +1564,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1578,14 +1579,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1593,14 +1594,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1608,14 +1609,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1623,14 +1624,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1638,14 +1639,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1653,14 +1654,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1668,14 +1669,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1683,14 +1684,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1698,14 +1699,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1713,14 +1714,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1728,14 +1729,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1743,14 +1744,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1758,14 +1759,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1773,14 +1774,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1788,14 +1789,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1803,14 +1804,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1818,14 +1819,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1833,14 +1834,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1848,14 +1849,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1863,14 +1864,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1878,14 +1879,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1893,14 +1894,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1908,14 +1909,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1923,14 +1924,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1938,14 +1939,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1953,14 +1954,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1968,14 +1969,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1983,14 +1984,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -1998,14 +1999,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -2013,14 +2014,14 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
-                // item1_guid: u64
-                w.write_all(&item1_guid.to_le_bytes())?;
+                // item1: Guid
+                w.write_all(&item1.guid().to_le_bytes())?;
 
-                // item2_guid: u64
-                w.write_all(&item2_guid.to_le_bytes())?;
+                // item2: Guid
+                w.write_all(&item2.guid().to_le_bytes())?;
 
                 // bag_type_subclass: u8
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
@@ -2040,1060 +2041,1060 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 // required_level: u32
                 let required_level = crate::util::read_u32_le(r)?;
 
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                     required_level,
                 }
             }
             InventoryResult::CantEquipSkill => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemDoesntGoToSlot => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagFull => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NonemptyBagOverOtherBag => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantTradeEquipBags => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::OnlyAmmoCanGoHere => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NoRequiredProficiency => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::YouCanNeverUseThatItem => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::YouCanNeverUseThatItem2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantEquipWithTwohanded => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantDualWield => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemDoesntGoIntoBag => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemDoesntGoIntoBag2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantCarryMoreOfThis => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable3 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemCantStack => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemCantBeEquipped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemsCantBeSwapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::SlotIsEmpty => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemNotFound => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantDropSoulbound => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::OutOfRange => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::TriedToSplitMoreThanCount => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CouldntSplitItems => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::MissingReagent => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NotEnoughMoney => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NotABag => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CanOnlyDoWithEmptyBags => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::DontOwnThatItem => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CanEquipOnly1Quiver => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::MustPurchaseThatBagSlot => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::TooFarAwayFromBank => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemLocked => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::YouAreStunned => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::YouAreDead => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantDoRightNow => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::IntBagError => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CanEquipOnly1Bolt => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CanEquipOnly1Ammopouch => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::StackableCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::EquippedCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::WrappedCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BoundCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::UniqueCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagsCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::AlreadyLooted => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::InventoryFull => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BankFull => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemIsCurrentlySoldOut => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagFull3 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemNotFound2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemCantStack2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagFull4 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemSoldOut => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ObjectIsBusy => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::None => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NotInCombat => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NotWhileDisarmed => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagFull6 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantEquipRank => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantEquipReputation => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::TooManySpecialBags => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::LootCantLootThatNow => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
         };
@@ -3104,1060 +3105,1060 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 // required_level: u32
                 let required_level = crate::util::read_u32_le(r)?;
 
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                     required_level,
                 }
             }
             InventoryResult::CantEquipSkill => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemDoesntGoToSlot => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagFull => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NonemptyBagOverOtherBag => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantTradeEquipBags => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::OnlyAmmoCanGoHere => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NoRequiredProficiency => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::YouCanNeverUseThatItem => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::YouCanNeverUseThatItem2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantEquipWithTwohanded => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantDualWield => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemDoesntGoIntoBag => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemDoesntGoIntoBag2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantCarryMoreOfThis => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NoEquipmentSlotAvailable3 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemCantStack => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemCantBeEquipped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemsCantBeSwapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::SlotIsEmpty => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemNotFound => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantDropSoulbound => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::OutOfRange => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::TriedToSplitMoreThanCount => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CouldntSplitItems => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::MissingReagent => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NotEnoughMoney => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NotABag => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CanOnlyDoWithEmptyBags => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::DontOwnThatItem => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CanEquipOnly1Quiver => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::MustPurchaseThatBagSlot => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::TooFarAwayFromBank => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemLocked => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::YouAreStunned => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::YouAreDead => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantDoRightNow => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::IntBagError => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CanEquipOnly1Bolt => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CanEquipOnly1Ammopouch => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::StackableCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::EquippedCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::WrappedCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BoundCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::UniqueCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagsCantBeWrapped => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::AlreadyLooted => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::InventoryFull => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BankFull => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemIsCurrentlySoldOut => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagFull3 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemNotFound2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemCantStack2 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagFull4 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ItemSoldOut => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::ObjectIsBusy => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::None => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NotInCombat => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::NotWhileDisarmed => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::BagFull6 => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantEquipRank => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::CantEquipReputation => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::TooManySpecialBags => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
             InventoryResult::LootCantLootThatNow => {
-                // item1_guid: u64
-                let item1_guid = crate::util::read_u64_le(r)?;
+                // item1: Guid
+                let item1 = Guid::read(r)?;
 
-                // item2_guid: u64
-                let item2_guid = crate::util::read_u64_le(r)?;
+                // item2: Guid
+                let item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
                 let bag_type_subclass = crate::util::read_u8_le(r)?;
 
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
                     bag_type_subclass,
-                    item1_guid,
-                    item2_guid,
+                    item1,
+                    item2,
                 }
             }
         };
@@ -4182,334 +4183,334 @@ pub enum SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
     Ok,
     CantEquipLevelI {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
         required_level: u32,
     },
     CantEquipSkill {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemDoesntGoToSlot {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     BagFull {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NonemptyBagOverOtherBag {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CantTradeEquipBags {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     OnlyAmmoCanGoHere {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NoRequiredProficiency {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NoEquipmentSlotAvailable {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     YouCanNeverUseThatItem {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     YouCanNeverUseThatItem2 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NoEquipmentSlotAvailable2 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CantEquipWithTwohanded {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CantDualWield {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemDoesntGoIntoBag {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemDoesntGoIntoBag2 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CantCarryMoreOfThis {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NoEquipmentSlotAvailable3 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemCantStack {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemCantBeEquipped {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemsCantBeSwapped {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     SlotIsEmpty {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemNotFound {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CantDropSoulbound {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     OutOfRange {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     TriedToSplitMoreThanCount {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CouldntSplitItems {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     MissingReagent {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NotEnoughMoney {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NotABag {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CanOnlyDoWithEmptyBags {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     DontOwnThatItem {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CanEquipOnly1Quiver {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     MustPurchaseThatBagSlot {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     TooFarAwayFromBank {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemLocked {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     YouAreStunned {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     YouAreDead {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CantDoRightNow {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     IntBagError {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CanEquipOnly1Bolt {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CanEquipOnly1Ammopouch {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     StackableCantBeWrapped {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     EquippedCantBeWrapped {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     WrappedCantBeWrapped {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     BoundCantBeWrapped {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     UniqueCantBeWrapped {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     BagsCantBeWrapped {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     AlreadyLooted {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     InventoryFull {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     BankFull {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemIsCurrentlySoldOut {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     BagFull3 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemNotFound2 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemCantStack2 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     BagFull4 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ItemSoldOut {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     ObjectIsBusy {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     None {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NotInCombat {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     NotWhileDisarmed {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     BagFull6 {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CantEquipRank {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     CantEquipReputation {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     TooManySpecialBags {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
     LootCantLootThatNow {
         bag_type_subclass: u8,
-        item1_guid: u64,
-        item2_guid: u64,
+        item1: Guid,
+        item2: Guid,
     },
 }
 
@@ -4603,665 +4604,665 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
             }
             Self::CantEquipLevelI {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
                 required_level,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
                 + 4 // required_level: u32
             }
             Self::CantEquipSkill {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemDoesntGoToSlot {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::BagFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NonemptyBagOverOtherBag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CantTradeEquipBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::OnlyAmmoCanGoHere {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NoRequiredProficiency {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NoEquipmentSlotAvailable {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::YouCanNeverUseThatItem {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::YouCanNeverUseThatItem2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NoEquipmentSlotAvailable2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CantEquipWithTwohanded {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CantDualWield {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemDoesntGoIntoBag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemDoesntGoIntoBag2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CantCarryMoreOfThis {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NoEquipmentSlotAvailable3 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemCantStack {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemCantBeEquipped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemsCantBeSwapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::SlotIsEmpty {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemNotFound {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CantDropSoulbound {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::OutOfRange {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::TriedToSplitMoreThanCount {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CouldntSplitItems {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::MissingReagent {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NotEnoughMoney {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NotABag {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CanOnlyDoWithEmptyBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::DontOwnThatItem {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CanEquipOnly1Quiver {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::MustPurchaseThatBagSlot {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::TooFarAwayFromBank {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemLocked {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::YouAreStunned {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::YouAreDead {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CantDoRightNow {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::IntBagError {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CanEquipOnly1Bolt {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CanEquipOnly1Ammopouch {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::StackableCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::EquippedCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::WrappedCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::BoundCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::UniqueCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::BagsCantBeWrapped {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::AlreadyLooted {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::InventoryFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::BankFull {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemIsCurrentlySoldOut {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::BagFull3 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemNotFound2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemCantStack2 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::BagFull4 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ItemSoldOut {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::ObjectIsBusy {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::None {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NotInCombat {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::NotWhileDisarmed {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::BagFull6 {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CantEquipRank {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::CantEquipReputation {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::TooManySpecialBags {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
             Self::LootCantLootThatNow {
                 bag_type_subclass,
-                item1_guid,
-                item2_guid,
+                item1,
+                item2,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
-                + 8 // item1_guid: u64
-                + 8 // item2_guid: u64
+                + 8 // item1: Guid
+                + 8 // item2: Guid
             }
         }
     }

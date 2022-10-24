@@ -1,19 +1,33 @@
-#tag_all versions "1.12";
-
-
-
 smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
     InventoryResult result;
     if (result == CANT_EQUIP_LEVEL_I) {
         u32 required_level;
     }
     if (result != OK) {
-        u64 item1_guid;
-        u64 item2_guid;
+        Guid item1;
+        Guid item2;
         u8 bag_type_subclass {
             comment = "cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2";
             comment = "vmangos sets to 0";
         }
     }
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
+    InventoryResult result;
+    if (result != OK) {
+        Guid item1;
+        Guid item2;
+        u8 bag_type_subclass {
+            comment = "cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2";
+            comment = "vmangos sets to 0";
+        }
+    }
+    if (result == CANT_EQUIP_LEVEL_I) {
+        u32 required_level;
+    }
+} {
+    paste_versions = "2.4.3 3.3.5";
+}

@@ -3009,6 +3009,7 @@ use crate::world::tbc::SMSG_TRIGGER_CINEMATIC;
 use crate::world::tbc::SMSG_TUTORIAL_FLAGS;
 use crate::world::tbc::SMSG_EMOTE;
 use crate::world::tbc::SMSG_TEXT_EMOTE;
+use crate::world::tbc::SMSG_INVENTORY_CHANGE_FAILURE;
 use crate::world::tbc::SMSG_INITIALIZE_FACTIONS;
 use crate::world::tbc::SMSG_SET_FACTION_VISIBLE;
 use crate::world::tbc::SMSG_SET_FACTION_STANDING;
@@ -3143,6 +3144,7 @@ pub enum ServerOpcodeMessage {
     SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS),
     SMSG_EMOTE(SMSG_EMOTE),
     SMSG_TEXT_EMOTE(SMSG_TEXT_EMOTE),
+    SMSG_INVENTORY_CHANGE_FAILURE(SMSG_INVENTORY_CHANGE_FAILURE),
     SMSG_INITIALIZE_FACTIONS(SMSG_INITIALIZE_FACTIONS),
     SMSG_SET_FACTION_VISIBLE(SMSG_SET_FACTION_VISIBLE),
     SMSG_SET_FACTION_STANDING(SMSG_SET_FACTION_STANDING),
@@ -3279,6 +3281,7 @@ impl ServerOpcodeMessage {
             0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(<SMSG_TUTORIAL_FLAGS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FD, size: body_size, io, } } else { a } })?)),
             0x0103 => Ok(Self::SMSG_EMOTE(<SMSG_EMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0103, size: body_size, io, } } else { a } })?)),
             0x0105 => Ok(Self::SMSG_TEXT_EMOTE(<SMSG_TEXT_EMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0105, size: body_size, io, } } else { a } })?)),
+            0x0112 => Ok(Self::SMSG_INVENTORY_CHANGE_FAILURE(<SMSG_INVENTORY_CHANGE_FAILURE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0112, size: body_size, io, } } else { a } })?)),
             0x0122 => Ok(Self::SMSG_INITIALIZE_FACTIONS(<SMSG_INITIALIZE_FACTIONS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0122, size: body_size, io, } } else { a } })?)),
             0x0123 => Ok(Self::SMSG_SET_FACTION_VISIBLE(<SMSG_SET_FACTION_VISIBLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0123, size: body_size, io, } } else { a } })?)),
             0x0124 => Ok(Self::SMSG_SET_FACTION_STANDING(<SMSG_SET_FACTION_STANDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0124, size: body_size, io, } } else { a } })?)),
@@ -3483,6 +3486,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_EMOTE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TEXT_EMOTE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_FACTION_VISIBLE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_FACTION_STANDING(c) => c.write_encrypted_server(w, e),
@@ -3620,6 +3624,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_unencrypted_server(w),
             Self::SMSG_EMOTE(c) => c.write_unencrypted_server(w),
             Self::SMSG_TEXT_EMOTE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(c) => c.write_unencrypted_server(w),
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_FACTION_VISIBLE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_FACTION_STANDING(c) => c.write_unencrypted_server(w),
@@ -3757,6 +3762,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_EMOTE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TEXT_EMOTE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_FACTION_VISIBLE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_FACTION_STANDING(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3894,6 +3900,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_EMOTE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TEXT_EMOTE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_FACTION_VISIBLE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_FACTION_STANDING(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4031,6 +4038,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_EMOTE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TEXT_EMOTE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_FACTION_VISIBLE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_FACTION_STANDING(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4168,6 +4176,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_EMOTE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TEXT_EMOTE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_INVENTORY_CHANGE_FAILURE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INITIALIZE_FACTIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_FACTION_VISIBLE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_FACTION_STANDING(c) => c.astd_write_unencrypted_server(w).await,
@@ -4307,6 +4316,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => "SMSG_TUTORIAL_FLAGS",
             ServerOpcodeMessage::SMSG_EMOTE(_) => "SMSG_EMOTE",
             ServerOpcodeMessage::SMSG_TEXT_EMOTE(_) => "SMSG_TEXT_EMOTE",
+            ServerOpcodeMessage::SMSG_INVENTORY_CHANGE_FAILURE(_) => "SMSG_INVENTORY_CHANGE_FAILURE",
             ServerOpcodeMessage::SMSG_INITIALIZE_FACTIONS(_) => "SMSG_INITIALIZE_FACTIONS",
             ServerOpcodeMessage::SMSG_SET_FACTION_VISIBLE(_) => "SMSG_SET_FACTION_VISIBLE",
             ServerOpcodeMessage::SMSG_SET_FACTION_STANDING(_) => "SMSG_SET_FACTION_STANDING",
@@ -4684,6 +4694,12 @@ impl From<SMSG_EMOTE> for ServerOpcodeMessage {
 impl From<SMSG_TEXT_EMOTE> for ServerOpcodeMessage {
     fn from(c: SMSG_TEXT_EMOTE) -> Self {
         Self::SMSG_TEXT_EMOTE(c)
+    }
+}
+
+impl From<SMSG_INVENTORY_CHANGE_FAILURE> for ServerOpcodeMessage {
+    fn from(c: SMSG_INVENTORY_CHANGE_FAILURE) -> Self {
+        Self::SMSG_INVENTORY_CHANGE_FAILURE(c)
     }
 }
 
