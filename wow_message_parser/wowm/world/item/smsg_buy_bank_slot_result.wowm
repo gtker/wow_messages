@@ -1,9 +1,9 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 enum BuyBankSlotResult : u32 {
     FAILED_TOO_MANY = 0;
     INSUFFICIENT_FUNDS = 1;
-    NOTBANKER = 2;
+    NOT_BANKER = 2;
     OK = 3;
 }
 
