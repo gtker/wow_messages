@@ -122,6 +122,49 @@ enum ItemClass : u8 {
     versions = "1.12";
 }
 
+enum ItemClass : u8 {
+    CONSUMABLE                       = 0;
+    CONTAINER                        = 1;
+    WEAPON                           = 2;
+    GEM                              = 3;
+    ARMOR                            = 4;
+    REAGENT                          = 5;
+    PROJECTILE                       = 6;
+    TRADE_GOODS                      = 7;
+    GENERIC                          = 8;
+    RECIPE                           = 9;
+    MONEY                            = 10;
+    QUIVER                           = 11;
+    QUEST                            = 12;
+    KEY                              = 13;
+    PERMANENT                        = 14;
+    MISC                             = 15;
+} {
+    versions = "2.4.3";
+}
+
+enum ItemClass : u8 {
+    CONSUMABLE                       = 0;
+    CONTAINER                        = 1;
+    WEAPON                           = 2;
+    GEM                              = 3;
+    ARMOR                            = 4;
+    REAGENT                          = 5;
+    PROJECTILE                       = 6;
+    TRADE_GOODS                      = 7;
+    GENERIC                          = 8;
+    RECIPE                           = 9;
+    MONEY                            = 10;
+    QUIVER                           = 11;
+    QUEST                            = 12;
+    KEY                              = 13;
+    PERMANENT                        = 14;
+    MISC                             = 15;
+    GLYPH                            = 16;
+} {
+    versions = "3.3.5";
+}
+
 enum SpellCastResult : u8 {
     AFFECTING_COMBAT = 0x00;
     ALREADY_AT_FULL_HEALTH = 0x01;
