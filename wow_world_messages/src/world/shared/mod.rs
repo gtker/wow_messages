@@ -175,6 +175,7 @@ pub mod msg_move_worldport_ack_vanilla_tbc_wrath;
 pub mod msg_petition_decline_vanilla_tbc_wrath;
 pub mod msg_petition_rename_vanilla_tbc_wrath;
 pub mod msg_random_roll_client_vanilla_tbc_wrath;
+pub mod msg_random_roll_server_vanilla_tbc_wrath;
 pub mod msg_save_guild_emblem_client_vanilla_tbc_wrath;
 pub mod msg_tabardvendor_activate_vanilla_tbc_wrath;
 pub mod new_item_chat_alert_vanilla_tbc_wrath;

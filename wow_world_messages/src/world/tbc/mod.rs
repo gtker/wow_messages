@@ -533,6 +533,8 @@ pub(crate) mod msg_petition_rename;
 pub use msg_petition_rename::*;
 pub(crate) mod msg_random_roll_client;
 pub use msg_random_roll_client::*;
+pub(crate) mod msg_random_roll_server;
+pub use msg_random_roll_server::*;
 pub(crate) mod msg_save_guild_emblem_client;
 pub use msg_save_guild_emblem_client::*;
 pub(crate) mod msg_save_guild_emblem_server;
