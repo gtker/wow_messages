@@ -248,6 +248,7 @@ pub mod smsg_play_object_sound_vanilla_tbc_wrath;
 pub mod smsg_pong_vanilla_tbc_wrath;
 pub mod smsg_procresist_vanilla_tbc_wrath;
 pub mod smsg_read_item_failed_vanilla_tbc_wrath;
+pub mod smsg_read_item_ok_vanilla_tbc_wrath;
 pub mod smsg_realm_split_tbc_wrath;
 pub mod smsg_server_message_vanilla_tbc;
 pub mod smsg_set_faction_visible_vanilla_tbc_wrath;
