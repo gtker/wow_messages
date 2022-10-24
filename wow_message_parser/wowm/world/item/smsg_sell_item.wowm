@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum SellItemResult : u8 {
     CANT_FIND_ITEM = 1;
     CANT_SELL_ITEM = 2 {
@@ -17,11 +15,54 @@ enum SellItemResult : u8 {
     ONLY_EMPTY_BAG = 6 {
         comment = "cmangos/vmangos/mangoszero: can only do with empty bags";
     }
+} {
+    versions = "1 2";
 }
 
 smsg SMSG_SELL_ITEM = 0x01A1 {
     Guid guid;
     Guid item;
     SellItemResult result;
+} {
+    versions = "1 2";
 }
 
+enum SellItemResult : u8 {
+    ERR_CANT_FIND_ITEM                      = 1 {
+           comment = "The item was not found.";
+    }
+    ERR_CANT_SELL_ITEM                      = 2 {
+           comment = "The merchant doesn't want that item.";
+    }
+    ERR_CANT_FIND_VENDOR                    = 3 {
+           comment = "The merchant doesn't like you.";
+    }
+    ERR_YOU_DONT_OWN_THAT_ITEM              = 4 {
+           comment = "You don't own that item.";
+    }
+    ERR_UNK                                 = 5 {
+           comment = "Nothing appears...";
+    }
+    ERR_ONLY_EMPTY_BAG                      = 6 {
+           comment = "You can only do that with empty bags.";
+    }
+    ERR_CANT_SELL_TO_THIS_MERCHANT          = 7 {
+           comment = "You cannot sell items to this merchant.";
+    }
+    ERR_MUST_REPAIR_ITEM_DURABILITY_TO_USE  = 8 {
+           comment = "You must repair that item's durability to use it.";
+    }
+    INTERNAL_BAG_ERROR                      = 9 {
+           comment = "Internal Bag Error";
+    }
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_SELL_ITEM = 0x01A1 {
+    Guid guid;
+    Guid item;
+    SellItemResult result;
+} {
+    versions = "3.3.5";
+}
