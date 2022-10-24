@@ -192,6 +192,7 @@ pub mod smsg_auction_removed_notification_vanilla_tbc_wrath;
 pub mod smsg_auth_challenge_vanilla_tbc;
 pub mod smsg_battleground_player_joined_vanilla_tbc_wrath;
 pub mod smsg_battleground_player_left_vanilla_tbc_wrath;
+pub mod smsg_binder_confirm_vanilla_tbc;
 pub mod smsg_cancel_combat_vanilla_tbc_wrath;
 pub mod smsg_channel_list_vanilla_tbc_wrath;
 pub mod smsg_channel_notify_tbc_wrath;

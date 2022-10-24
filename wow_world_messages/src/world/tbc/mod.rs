@@ -588,6 +588,8 @@ pub(crate) mod smsg_battleground_player_joined;
 pub use smsg_battleground_player_joined::*;
 pub(crate) mod smsg_battleground_player_left;
 pub use smsg_battleground_player_left::*;
+pub(crate) mod smsg_binder_confirm;
+pub use smsg_binder_confirm::*;
 pub(crate) mod smsg_cancel_combat;
 pub use smsg_cancel_combat::*;
 pub(crate) mod smsg_channel_list;

@@ -10144,6 +10144,7 @@ Used in:
 * [Character](character.md)
 * [GuildMember](guildmember.md)
 * [Relation](relation.md)
+* [SMSG_BINDER_CONFIRM](smsg_binder_confirm.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_EXPLORATION_EXPERIENCE](smsg_exploration_experience.md)

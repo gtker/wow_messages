@@ -3077,6 +3077,7 @@ use crate::world::tbc::SMSG_DURABILITY_DAMAGE_DEATH;
 use crate::world::tbc::SMSG_UPDATE_WORLD_STATE;
 use crate::world::tbc::SMSG_CHAR_RENAME;
 use crate::world::tbc::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
+use crate::world::tbc::SMSG_BINDER_CONFIRM;
 use crate::world::tbc::SMSG_BATTLEGROUND_PLAYER_JOINED;
 use crate::world::tbc::SMSG_BATTLEGROUND_PLAYER_LEFT;
 use crate::world::tbc::SMSG_CHAT_RESTRICTED;
@@ -3207,6 +3208,7 @@ pub enum ServerOpcodeMessage {
     SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Server),
+    SMSG_BINDER_CONFIRM(SMSG_BINDER_CONFIRM),
     SMSG_BATTLEGROUND_PLAYER_JOINED(SMSG_BATTLEGROUND_PLAYER_JOINED),
     SMSG_BATTLEGROUND_PLAYER_LEFT(SMSG_BATTLEGROUND_PLAYER_LEFT),
     SMSG_CHAT_RESTRICTED(SMSG_CHAT_RESTRICTED),
@@ -3339,6 +3341,7 @@ impl ServerOpcodeMessage {
             0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C3, size: body_size, io, } } else { a } })?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C8, size: body_size, io, } } else { a } })?)),
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E9, size: body_size, io, } } else { a } })?)),
+            0x02EB => Ok(Self::SMSG_BINDER_CONFIRM(<SMSG_BINDER_CONFIRM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EB, size: body_size, io, } } else { a } })?)),
             0x02EC => Ok(Self::SMSG_BATTLEGROUND_PLAYER_JOINED(<SMSG_BATTLEGROUND_PLAYER_JOINED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EC, size: body_size, io, } } else { a } })?)),
             0x02ED => Ok(Self::SMSG_BATTLEGROUND_PLAYER_LEFT(<SMSG_BATTLEGROUND_PLAYER_LEFT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02ED, size: body_size, io, } } else { a } })?)),
             0x02FD => Ok(Self::SMSG_CHAT_RESTRICTED(<SMSG_CHAT_RESTRICTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FD, size: body_size, io, } } else { a } })?)),
@@ -3539,6 +3542,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_BINDER_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_encrypted_server(w, e),
@@ -3672,6 +3676,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_BINDER_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_unencrypted_server(w),
@@ -3805,6 +3810,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_BINDER_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3938,6 +3944,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_BINDER_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4071,6 +4078,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_BINDER_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4204,6 +4212,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_BINDER_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_unencrypted_server(w).await,
@@ -4339,6 +4348,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
             ServerOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Server",
+            ServerOpcodeMessage::SMSG_BINDER_CONFIRM(_) => "SMSG_BINDER_CONFIRM",
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_JOINED(_) => "SMSG_BATTLEGROUND_PLAYER_JOINED",
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_LEFT(_) => "SMSG_BATTLEGROUND_PLAYER_LEFT",
             ServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => "SMSG_CHAT_RESTRICTED",
@@ -5052,6 +5062,12 @@ impl From<SMSG_CHAR_RENAME> for ServerOpcodeMessage {
 impl From<MSG_BATTLEGROUND_PLAYER_POSITIONS_Server> for ServerOpcodeMessage {
     fn from(c: MSG_BATTLEGROUND_PLAYER_POSITIONS_Server) -> Self {
         Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c)
+    }
+}
+
+impl From<SMSG_BINDER_CONFIRM> for ServerOpcodeMessage {
+    fn from(c: SMSG_BINDER_CONFIRM) -> Self {
+        Self::SMSG_BINDER_CONFIRM(c)
     }
 }
 
