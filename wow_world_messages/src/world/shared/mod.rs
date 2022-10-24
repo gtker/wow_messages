@@ -28,6 +28,7 @@ pub mod cmsg_autoequip_item_slot_vanilla_tbc_wrath;
 pub mod cmsg_autoequip_item_vanilla_tbc_wrath;
 pub mod cmsg_autostore_bag_item_vanilla_tbc_wrath;
 pub mod cmsg_autostore_bank_item_vanilla_tbc_wrath;
+pub mod cmsg_autostore_loot_item_vanilla_tbc_wrath;
 pub mod cmsg_banker_activate_vanilla_tbc_wrath;
 pub mod cmsg_battlefield_port_tbc_wrath;
 pub mod cmsg_battlefield_status_vanilla_tbc_wrath;

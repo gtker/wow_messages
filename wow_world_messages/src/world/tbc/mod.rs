@@ -78,6 +78,8 @@ pub(crate) mod cmsg_autostore_bag_item;
 pub use cmsg_autostore_bag_item::*;
 pub(crate) mod cmsg_autostore_bank_item;
 pub use cmsg_autostore_bank_item::*;
+pub(crate) mod cmsg_autostore_loot_item;
+pub use cmsg_autostore_loot_item::*;
 pub(crate) mod cmsg_banker_activate;
 pub use cmsg_banker_activate::*;
 pub(crate) mod cmsg_battlefield_list;
