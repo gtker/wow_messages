@@ -3044,6 +3044,7 @@ use crate::world::tbc::SMSG_LOG_XPGAIN;
 use crate::world::tbc::SMSG_LEVELUP_INFO;
 use crate::world::tbc::SMSG_PONG;
 use crate::world::tbc::SMSG_GAMEOBJECT_PAGETEXT;
+use crate::world::tbc::SMSG_ITEM_ENCHANT_TIME_UPDATE;
 use crate::world::tbc::SMSG_AUTH_CHALLENGE;
 use crate::world::tbc::SMSG_AUTH_RESPONSE;
 use crate::world::tbc::MSG_SAVE_GUILD_EMBLEM_Server;
@@ -3180,6 +3181,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LEVELUP_INFO(SMSG_LEVELUP_INFO),
     SMSG_PONG(SMSG_PONG),
     SMSG_GAMEOBJECT_PAGETEXT(SMSG_GAMEOBJECT_PAGETEXT),
+    SMSG_ITEM_ENCHANT_TIME_UPDATE(SMSG_ITEM_ENCHANT_TIME_UPDATE),
     SMSG_AUTH_CHALLENGE(SMSG_AUTH_CHALLENGE),
     SMSG_AUTH_RESPONSE(SMSG_AUTH_RESPONSE),
     MSG_SAVE_GUILD_EMBLEM(MSG_SAVE_GUILD_EMBLEM_Server),
@@ -3318,6 +3320,7 @@ impl ServerOpcodeMessage {
             0x01D4 => Ok(Self::SMSG_LEVELUP_INFO(<SMSG_LEVELUP_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D4, size: body_size, io, } } else { a } })?)),
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DD, size: body_size, io, } } else { a } })?)),
             0x01DF => Ok(Self::SMSG_GAMEOBJECT_PAGETEXT(<SMSG_GAMEOBJECT_PAGETEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DF, size: body_size, io, } } else { a } })?)),
+            0x01EB => Ok(Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(<SMSG_ITEM_ENCHANT_TIME_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01EB, size: body_size, io, } } else { a } })?)),
             0x01EC => Ok(Self::SMSG_AUTH_CHALLENGE(<SMSG_AUTH_CHALLENGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01EC, size: body_size, io, } } else { a } })?)),
             0x01EE => Ok(Self::SMSG_AUTH_RESPONSE(<SMSG_AUTH_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01EE, size: body_size, io, } } else { a } })?)),
             0x01F1 => Ok(Self::MSG_SAVE_GUILD_EMBLEM(<MSG_SAVE_GUILD_EMBLEM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F1, size: body_size, io, } } else { a } })?)),
@@ -3524,6 +3527,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LEVELUP_INFO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.write_encrypted_server(w, e),
@@ -3663,6 +3667,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LEVELUP_INFO(c) => c.write_unencrypted_server(w),
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_CHALLENGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUTH_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.write_unencrypted_server(w),
@@ -3802,6 +3807,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -3941,6 +3947,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4080,6 +4087,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4219,6 +4227,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_CHALLENGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUTH_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.astd_write_unencrypted_server(w).await,
@@ -4360,6 +4369,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LEVELUP_INFO(_) => "SMSG_LEVELUP_INFO",
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_GAMEOBJECT_PAGETEXT(_) => "SMSG_GAMEOBJECT_PAGETEXT",
+            ServerOpcodeMessage::SMSG_ITEM_ENCHANT_TIME_UPDATE(_) => "SMSG_ITEM_ENCHANT_TIME_UPDATE",
             ServerOpcodeMessage::SMSG_AUTH_CHALLENGE(_) => "SMSG_AUTH_CHALLENGE",
             ServerOpcodeMessage::SMSG_AUTH_RESPONSE(_) => "SMSG_AUTH_RESPONSE",
             ServerOpcodeMessage::MSG_SAVE_GUILD_EMBLEM(_) => "MSG_SAVE_GUILD_EMBLEM_Server",
@@ -4914,6 +4924,12 @@ impl From<SMSG_PONG> for ServerOpcodeMessage {
 impl From<SMSG_GAMEOBJECT_PAGETEXT> for ServerOpcodeMessage {
     fn from(c: SMSG_GAMEOBJECT_PAGETEXT) -> Self {
         Self::SMSG_GAMEOBJECT_PAGETEXT(c)
+    }
+}
+
+impl From<SMSG_ITEM_ENCHANT_TIME_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_ENCHANT_TIME_UPDATE) -> Self {
+        Self::SMSG_ITEM_ENCHANT_TIME_UPDATE(c)
     }
 }
 
