@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_WRAP_ITEM = 0x01D3 {
     u8 gift_bag_index;

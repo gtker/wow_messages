@@ -131,6 +131,7 @@ pub mod cmsg_turn_in_petition_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_clear_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_flag_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_reset_vanilla_tbc_wrath;
+pub mod cmsg_wrap_item_vanilla_tbc_wrath;
 pub mod duel_winner_reason_vanilla_tbc_wrath;
 pub mod environmental_damage_type_vanilla_tbc_wrath;
 pub mod experience_award_type_vanilla_tbc_wrath;

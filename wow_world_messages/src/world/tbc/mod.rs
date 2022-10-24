@@ -322,6 +322,8 @@ pub(crate) mod cmsg_tutorial_flag;
 pub use cmsg_tutorial_flag::*;
 pub(crate) mod cmsg_tutorial_reset;
 pub use cmsg_tutorial_reset::*;
+pub(crate) mod cmsg_wrap_item;
+pub use cmsg_wrap_item::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
 pub use crate::helper::tbc::*;

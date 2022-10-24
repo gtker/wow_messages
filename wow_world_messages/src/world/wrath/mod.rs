@@ -338,6 +338,8 @@ pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
 pub(crate) mod cmsg_world_state_ui_timer_update;
 pub use cmsg_world_state_ui_timer_update::*;
+pub(crate) mod cmsg_wrap_item;
+pub use cmsg_wrap_item::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
 pub(crate) mod complaint_status;
