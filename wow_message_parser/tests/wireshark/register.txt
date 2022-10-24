@@ -2476,8 +2476,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_loot_guid,
-            { "Loot Guid", "woww.loot.guid",
+        { &hf_woww_loot,
+            { "Loot", "woww.loot",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -4315,12 +4315,6 @@
         { &hf_woww_target_player,
             { "Target Player", "woww.target.player",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_target_player_guid,
-            { "Target Player Guid", "woww.target.player.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

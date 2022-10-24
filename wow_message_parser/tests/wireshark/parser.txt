@@ -793,9 +793,9 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_LOOT_MASTER_GIVE:
-            ptvcursor_add(ptv, hf_woww_loot_guid, 8, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_loot, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_slot_id, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_target_player_guid, 8, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_player, 8, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_LOOT_METHOD:
             ptvcursor_add(ptv, hf_woww_group_loot_setting, 4, ENC_LITTLE_ENDIAN);

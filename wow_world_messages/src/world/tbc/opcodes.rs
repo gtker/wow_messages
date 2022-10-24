@@ -157,6 +157,7 @@ use crate::world::tbc::CMSG_SET_ACTIVE_MOVER;
 use crate::world::tbc::CMSG_AUTOSTORE_BANK_ITEM;
 use crate::world::tbc::CMSG_AUTOBANK_ITEM;
 use crate::world::tbc::CMSG_BUYBACK_ITEM;
+use crate::world::tbc::CMSG_LOOT_MASTER_GIVE;
 use crate::world::tbc::CMSG_REPAIR_ITEM;
 use crate::world::tbc::CMSG_TOGGLE_HELM;
 use crate::world::tbc::CMSG_TOGGLE_CLOAK;
@@ -337,6 +338,7 @@ pub enum ClientOpcodeMessage {
     CMSG_AUTOSTORE_BANK_ITEM(CMSG_AUTOSTORE_BANK_ITEM),
     CMSG_AUTOBANK_ITEM(CMSG_AUTOBANK_ITEM),
     CMSG_BUYBACK_ITEM(CMSG_BUYBACK_ITEM),
+    CMSG_LOOT_MASTER_GIVE(CMSG_LOOT_MASTER_GIVE),
     CMSG_REPAIR_ITEM(CMSG_REPAIR_ITEM),
     CMSG_TOGGLE_HELM(CMSG_TOGGLE_HELM),
     CMSG_TOGGLE_CLOAK(CMSG_TOGGLE_CLOAK),
@@ -519,6 +521,7 @@ impl ClientOpcodeMessage {
             0x0282 => Ok(Self::CMSG_AUTOSTORE_BANK_ITEM(<CMSG_AUTOSTORE_BANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0282, size: body_size, io, } } else { a } })?)),
             0x0283 => Ok(Self::CMSG_AUTOBANK_ITEM(<CMSG_AUTOBANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0283, size: body_size, io, } } else { a } })?)),
             0x0290 => Ok(Self::CMSG_BUYBACK_ITEM(<CMSG_BUYBACK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0290, size: body_size, io, } } else { a } })?)),
+            0x02A3 => Ok(Self::CMSG_LOOT_MASTER_GIVE(<CMSG_LOOT_MASTER_GIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A3, size: body_size, io, } } else { a } })?)),
             0x02A8 => Ok(Self::CMSG_REPAIR_ITEM(<CMSG_REPAIR_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A8, size: body_size, io, } } else { a } })?)),
             0x02B9 => Ok(Self::CMSG_TOGGLE_HELM(<CMSG_TOGGLE_HELM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B9, size: body_size, io, } } else { a } })?)),
             0x02BA => Ok(Self::CMSG_TOGGLE_CLOAK(<CMSG_TOGGLE_CLOAK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BA, size: body_size, io, } } else { a } })?)),
@@ -769,6 +772,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUYBACK_ITEM(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LOOT_MASTER_GIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REPAIR_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TOGGLE_HELM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TOGGLE_CLOAK(c) => c.write_encrypted_client(w, e),
@@ -952,6 +956,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUYBACK_ITEM(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LOOT_MASTER_GIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_REPAIR_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_TOGGLE_HELM(c) => c.write_unencrypted_client(w),
             Self::CMSG_TOGGLE_CLOAK(c) => c.write_unencrypted_client(w),
@@ -1135,6 +1140,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LOOT_MASTER_GIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPAIR_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TOGGLE_HELM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TOGGLE_CLOAK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1318,6 +1324,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LOOT_MASTER_GIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPAIR_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TOGGLE_HELM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TOGGLE_CLOAK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1501,6 +1508,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LOOT_MASTER_GIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPAIR_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TOGGLE_HELM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TOGGLE_CLOAK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1684,6 +1692,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LOOT_MASTER_GIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPAIR_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TOGGLE_HELM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TOGGLE_CLOAK(c) => c.astd_write_unencrypted_client(w).await,
@@ -1902,6 +1911,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_AUTOSTORE_BANK_ITEM(_) => "CMSG_AUTOSTORE_BANK_ITEM",
             ClientOpcodeMessage::CMSG_AUTOBANK_ITEM(_) => "CMSG_AUTOBANK_ITEM",
             ClientOpcodeMessage::CMSG_BUYBACK_ITEM(_) => "CMSG_BUYBACK_ITEM",
+            ClientOpcodeMessage::CMSG_LOOT_MASTER_GIVE(_) => "CMSG_LOOT_MASTER_GIVE",
             ClientOpcodeMessage::CMSG_REPAIR_ITEM(_) => "CMSG_REPAIR_ITEM",
             ClientOpcodeMessage::CMSG_TOGGLE_HELM(_) => "CMSG_TOGGLE_HELM",
             ClientOpcodeMessage::CMSG_TOGGLE_CLOAK(_) => "CMSG_TOGGLE_CLOAK",
@@ -2825,6 +2835,12 @@ impl From<CMSG_AUTOBANK_ITEM> for ClientOpcodeMessage {
 impl From<CMSG_BUYBACK_ITEM> for ClientOpcodeMessage {
     fn from(c: CMSG_BUYBACK_ITEM) -> Self {
         Self::CMSG_BUYBACK_ITEM(c)
+    }
+}
+
+impl From<CMSG_LOOT_MASTER_GIVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_LOOT_MASTER_GIVE) -> Self {
+        Self::CMSG_LOOT_MASTER_GIVE(c)
     }
 }
 
