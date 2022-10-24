@@ -248,6 +248,8 @@ pub(crate) mod cmsg_logout_cancel;
 pub use cmsg_logout_cancel::*;
 pub(crate) mod cmsg_logout_request;
 pub use cmsg_logout_request::*;
+pub(crate) mod cmsg_loot;
+pub use cmsg_loot::*;
 pub(crate) mod cmsg_messagechat;
 pub use cmsg_messagechat::*;
 pub(crate) mod cmsg_move_chng_transport;
