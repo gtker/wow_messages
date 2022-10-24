@@ -1,6 +1,10 @@
 # SMSG_READ_ITEM_FAILED
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
+
+### Comment
+
+vmangos has extra u8 with comment `0..2, read failure reason? if == 1, use next command`.
 
 ### Wowm Representation
 

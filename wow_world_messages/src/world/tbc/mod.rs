@@ -736,6 +736,8 @@ pub(crate) mod smsg_pong;
 pub use smsg_pong::*;
 pub(crate) mod smsg_procresist;
 pub use smsg_procresist::*;
+pub(crate) mod smsg_read_item_failed;
+pub use smsg_read_item_failed::*;
 pub(crate) mod smsg_realm_split;
 pub use smsg_realm_split::*;
 pub(crate) mod smsg_server_message;
