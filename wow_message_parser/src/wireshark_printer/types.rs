@@ -35,8 +35,24 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                                 *i = *v;
                             }
                         }
-                        WiresharkType::Enum(e) | WiresharkType::Flag(e) => match new_ty {
-                            WiresharkType::Enum(v) | WiresharkType::Flag(v) => assert_eq!(e, v),
+                        WiresharkType::Enum(e, i) => match new_ty {
+                            WiresharkType::Enum(v, new) => {
+                                if &*i < new {
+                                    *i = *new;
+                                }
+                                assert_eq!(e, v);
+                            }
+                            _ => panic!(
+                                "name '{}' m.ty() is '{:?}' and new_ty is '{:?}'",
+                                name,
+                                m.ty(),
+                                new_ty
+                            ),
+                        },
+                        WiresharkType::Flag(e) => match new_ty {
+                            WiresharkType::Flag(v) => {
+                                assert_eq!(e, v);
+                            }
                             _ => panic!(
                                 "name '{}' m.ty() is '{:?}' and new_ty is '{:?}'",
                                 name,
@@ -49,7 +65,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                 }
             } else if let Some(ty) = WiresharkType::from_type(d.ty()) {
                 match &ty {
-                    WiresharkType::Enum(e) => objects.add_enum(e.clone()),
+                    WiresharkType::Enum(e, _) => objects.add_enum(e.clone()),
                     WiresharkType::Flag(e) => objects.add_flag(e.clone()),
                     _ => {}
                 }
@@ -137,7 +153,7 @@ impl WiresharkMember {
 
     pub(crate) fn has_enum_strings(&self) -> Option<&Definer> {
         match self.ty() {
-            WiresharkType::Enum(e) => Some(e),
+            WiresharkType::Enum(e, _) => Some(e),
             _ => None,
         }
     }
@@ -149,14 +165,14 @@ pub(crate) enum WiresharkType {
     String,
     Float(FloatingPointType),
     Bytes,
-    Enum(Definer),
+    Enum(Definer, IntegerType),
     Flag(Definer),
 }
 
 impl WiresharkType {
     pub(crate) fn from_type(ty: &Type) -> Option<Self> {
         Some(match ty {
-            Type::Enum { e, .. } => Self::Enum(e.clone()),
+            Type::Enum { e, upcast } => Self::Enum(e.clone(), upcast.unwrap_or(*e.ty())),
             Type::Flag { e, .. } => Self::Flag(e.clone()),
             Type::Struct { .. } => return None,
             Type::Integer(v) => Self::Integer(*v),
@@ -186,7 +202,11 @@ impl WiresharkType {
     pub(crate) fn wireshark_str(&self) -> String {
         match self {
             WiresharkType::Integer(i) => int_type_to_wireshark_string(i),
-            WiresharkType::Enum(e) | WiresharkType::Flag(e) => {
+            WiresharkType::Enum(_, upcast) => {
+                let i = upcast;
+                int_type_to_wireshark_string(i)
+            }
+            WiresharkType::Flag(e) => {
                 let i = e.ty();
                 int_type_to_wireshark_string(i)
             }
@@ -206,7 +226,7 @@ impl WiresharkType {
                 _ => "BASE_HEX_DEC",
             }
             .to_string(),
-            WiresharkType::Enum(_) | WiresharkType::Flag(_) => "BASE_HEX_DEC".to_string(),
+            WiresharkType::Enum(_, _) | WiresharkType::Flag(_) => "BASE_HEX_DEC".to_string(),
         }
     }
 }
