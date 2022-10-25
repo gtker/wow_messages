@@ -60,7 +60,7 @@ pub(crate) fn print_write_field_array(
         ArrayType::Struct(_) => {
             // Complex types use "write_into_vec", which means we can't write directly
             // into our ZLibEncoder. Instead, we write to an intermediary Vec first.
-            if e.tags().is_compressed() || d.tags().is_compressed() {
+            if e.tags().compressed() || d.tags().is_compressed() {
                 s.wln("let mut vec = Vec::new();");
                 s.wln("i.write_into_vec(&mut vec)?;");
                 s.wln(format!(
@@ -144,7 +144,7 @@ pub(crate) fn print_write_field_identifier(
 
 pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
     // For fully compressed messages, replace the writer with a ZLibDecoder.
-    if e.tags().is_compressed() {
+    if e.tags().compressed() {
         // Fully compressed messages include the decompressed size as a u32 at the start of the packet.
         s.wln("w.write_all(&(self.size_uncompressed() as u32).to_le_bytes())?;");
         s.newline();

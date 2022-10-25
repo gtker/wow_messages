@@ -100,7 +100,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
     // Compressed messages need an additional size implementation that measures the non-compressed size of the message.
     // This is used to calculate the decompressed_size field, a u32 written at the start of every compressed packet.
-    if e.tags().is_compressed() {
+    if e.tags().compressed() {
         print_size_uncompressed_rust_view(s, e.rust_object(), "self.", "size_uncompressed");
     }
 }
@@ -323,7 +323,7 @@ pub(crate) fn print_size_rust_view(s: &mut Writer, c: &Container, prefix: &str) 
     let r = c.rust_object();
 
     if !r.constant_sized() {
-        if c.tags().is_compressed() {
+        if c.tags().compressed() {
             s.variable_size(
                 r.name(),
                 "size", 

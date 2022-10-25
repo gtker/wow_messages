@@ -836,7 +836,7 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
     }
 
     // For fully compressed messages, replace the writer with a ZLibDecoder.
-    if e.tags().is_compressed() {
+    if e.tags().compressed() {
         // Fully compressed messages always start with a u32 containing the decompressed size.
         // We don't care about that, so we just ignore it.
         s.wln("let mut decompressed_size = [0_u8; 4];");
