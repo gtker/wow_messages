@@ -3083,6 +3083,7 @@ use crate::world::tbc::SMSG_NEW_WORLD;
 use crate::world::tbc::SMSG_TRANSFER_PENDING;
 use crate::world::tbc::SMSG_CHARACTER_LOGIN_FAILED;
 use crate::world::tbc::SMSG_LOGIN_SETTIMESPEED;
+use crate::world::tbc::SMSG_LOGOUT_RESPONSE;
 use crate::world::tbc::SMSG_LOGOUT_COMPLETE;
 use crate::world::tbc::SMSG_LOGOUT_CANCEL_ACK;
 use crate::world::tbc::SMSG_GUILD_INVITE;
@@ -3229,6 +3230,7 @@ pub enum ServerOpcodeMessage {
     SMSG_TRANSFER_PENDING(SMSG_TRANSFER_PENDING),
     SMSG_CHARACTER_LOGIN_FAILED(SMSG_CHARACTER_LOGIN_FAILED),
     SMSG_LOGIN_SETTIMESPEED(SMSG_LOGIN_SETTIMESPEED),
+    SMSG_LOGOUT_RESPONSE(SMSG_LOGOUT_RESPONSE),
     SMSG_LOGOUT_COMPLETE(SMSG_LOGOUT_COMPLETE),
     SMSG_LOGOUT_CANCEL_ACK(SMSG_LOGOUT_CANCEL_ACK),
     SMSG_GUILD_INVITE(SMSG_GUILD_INVITE),
@@ -3377,6 +3379,7 @@ impl ServerOpcodeMessage {
             0x003F => Ok(Self::SMSG_TRANSFER_PENDING(<SMSG_TRANSFER_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003F, size: body_size, io, } } else { a } })?)),
             0x0041 => Ok(Self::SMSG_CHARACTER_LOGIN_FAILED(<SMSG_CHARACTER_LOGIN_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0041, size: body_size, io, } } else { a } })?)),
             0x0042 => Ok(Self::SMSG_LOGIN_SETTIMESPEED(<SMSG_LOGIN_SETTIMESPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0042, size: body_size, io, } } else { a } })?)),
+            0x004C => Ok(Self::SMSG_LOGOUT_RESPONSE(<SMSG_LOGOUT_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004C, size: body_size, io, } } else { a } })?)),
             0x004D => Ok(Self::SMSG_LOGOUT_COMPLETE(<SMSG_LOGOUT_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004D, size: body_size, io, } } else { a } })?)),
             0x004F => Ok(Self::SMSG_LOGOUT_CANCEL_ACK(<SMSG_LOGOUT_CANCEL_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004F, size: body_size, io, } } else { a } })?)),
             0x0083 => Ok(Self::SMSG_GUILD_INVITE(<SMSG_GUILD_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0083, size: body_size, io, } } else { a } })?)),
@@ -3593,6 +3596,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRANSFER_PENDING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LOGOUT_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_INVITE(c) => c.write_encrypted_server(w, e),
@@ -3742,6 +3746,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRANSFER_PENDING(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LOGOUT_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_INVITE(c) => c.write_unencrypted_server(w),
@@ -3891,6 +3896,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INVITE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4040,6 +4046,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INVITE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4189,6 +4196,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INVITE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4338,6 +4346,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INVITE(c) => c.astd_write_unencrypted_server(w).await,
@@ -4489,6 +4498,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_TRANSFER_PENDING(_) => "SMSG_TRANSFER_PENDING",
             ServerOpcodeMessage::SMSG_CHARACTER_LOGIN_FAILED(_) => "SMSG_CHARACTER_LOGIN_FAILED",
             ServerOpcodeMessage::SMSG_LOGIN_SETTIMESPEED(_) => "SMSG_LOGIN_SETTIMESPEED",
+            ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(_) => "SMSG_LOGOUT_RESPONSE",
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE(_) => "SMSG_LOGOUT_COMPLETE",
             ServerOpcodeMessage::SMSG_LOGOUT_CANCEL_ACK(_) => "SMSG_LOGOUT_CANCEL_ACK",
             ServerOpcodeMessage::SMSG_GUILD_INVITE(_) => "SMSG_GUILD_INVITE",
@@ -4688,6 +4698,12 @@ impl From<SMSG_CHARACTER_LOGIN_FAILED> for ServerOpcodeMessage {
 impl From<SMSG_LOGIN_SETTIMESPEED> for ServerOpcodeMessage {
     fn from(c: SMSG_LOGIN_SETTIMESPEED) -> Self {
         Self::SMSG_LOGIN_SETTIMESPEED(c)
+    }
+}
+
+impl From<SMSG_LOGOUT_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOGOUT_RESPONSE) -> Self {
+        Self::SMSG_LOGOUT_RESPONSE(c)
     }
 }
 
