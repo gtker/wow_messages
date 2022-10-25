@@ -21,7 +21,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                                 _ => panic!("variable: '{}' is int and {:#?}", name, new_ty),
                             };
 
-                            if v < i {
+                            if v > i {
                                 *i = *v;
                             }
                         }
