@@ -434,7 +434,7 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
 
         let mut values = HashMap::new();
 
-        if e.tags().is_compressed() {
+        if e.tags().compressed() {
             // All fully compressed messages have a u32 at the start with the decompressed size.
             let _decompressed_size: Vec<&u8> = bytes.clone().take(4).collect();
 
