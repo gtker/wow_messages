@@ -633,7 +633,11 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_GROUP_ASSISTANT_LEADER", 0x28F),
     Data::new("CMSG_BUYBACK_ITEM", 0x290),
     Data::new("SMSG_SERVER_MESSAGE", 0x291),
-    Data::new("CMSG_MEETINGSTONE_JOIN", 0x292),
+    Data::with_reason(
+        "CMSG_MEETINGSTONE_JOIN",
+        0x292,
+        "Not implemented in any emus",
+    ),
     Data::new("CMSG_MEETINGSTONE_LEAVE", 0x293),
     Data::new("CMSG_MEETINGSTONE_CHEAT", 0x294),
     Data::new("SMSG_MEETINGSTONE_SETQUEUE", 0x295),

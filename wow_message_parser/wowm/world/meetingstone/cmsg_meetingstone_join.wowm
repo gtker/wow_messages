@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1"; /* Not implemented in TBC and Wrath emus */
 
 cmsg CMSG_MEETINGSTONE_JOIN = 0x0292 {
     Guid guid;
