@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_MAIL_RETURN_TO_SENDER = 0x0248 {
     Guid mailbox_id;
