@@ -15,7 +15,7 @@ use std::io::{Write, Read};
 ///     NewItemChatAlert alert_chat;
 ///     u8 bag_slot;
 ///     u32 item_slot;
-///     u32 item_id;
+///     u32 item;
 ///     u32 item_suffix_factor;
 ///     u32 item_random_property_id;
 ///     u32 item_count;
@@ -30,7 +30,7 @@ pub struct SMSG_ITEM_PUSH_RESULT {
     /// mangoszero: item slot, but when added to stack: 0xFFFFFFFF
     ///
     pub item_slot: u32,
-    pub item_id: u32,
+    pub item: u32,
     /// mangoszero: SuffixFactor
     ///
     pub item_suffix_factor: u32,
@@ -66,8 +66,8 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
         // item_slot: u32
         w.write_all(&self.item_slot.to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // item_suffix_factor: u32
         w.write_all(&self.item_suffix_factor.to_le_bytes())?;
@@ -103,8 +103,8 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
         // item_slot: u32
         let item_slot = crate::util::read_u32_le(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // item_suffix_factor: u32
         let item_suffix_factor = crate::util::read_u32_le(r)?;
@@ -122,7 +122,7 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
             alert_chat,
             bag_slot,
             item_slot,
-            item_id,
+            item,
             item_suffix_factor,
             item_random_property_id,
             item_count,

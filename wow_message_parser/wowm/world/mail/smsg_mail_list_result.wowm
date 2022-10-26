@@ -36,7 +36,7 @@ struct Mail {
     u32 stationery {
         comment = "cmangos/vmangos/mangoszero: stationery (Stationery.dbc)";
     }
-    u32 item_id;
+    Item item;
     u32 item_enchant_id;
     u32 item_random_property_id;
     u32 item_suffix_factor;

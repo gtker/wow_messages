@@ -13,7 +13,7 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     NewItemChatAlert alert_chat;
     u8 bag_slot;
     u32 item_slot;
-    u32 item_id;
+    u32 item;
     u32 item_suffix_factor;
     u32 item_random_property_id;
     u32 item_count;
@@ -40,7 +40,7 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / - | [NewItemChatAlert](newitemchatalert.md) | alert_chat |  |  |
 | 0x18 | 1 / - | u8 | bag_slot |  |  |
 | 0x19 | 4 / Little | u32 | item_slot |  | mangoszero: item slot, but when added to stack: 0xFFFFFFFF |
-| 0x1D | 4 / Little | u32 | item_id |  |  |
+| 0x1D | 4 / Little | u32 | item |  |  |
 | 0x21 | 4 / Little | u32 | item_suffix_factor |  | mangoszero: SuffixFactor |
 | 0x25 | 4 / Little | u32 | item_random_property_id |  | mangoszero: random item property id |
 | 0x29 | 4 / Little | u32 | item_count |  |  |
@@ -60,7 +60,7 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     NewItemChatAlert alert_chat;
     u8 bag_slot;
     u32 item_slot;
-    u32 item_id;
+    u32 item;
     u32 item_suffix_factor;
     u32 item_random_property_id;
     u32 item_count;
@@ -88,7 +88,7 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / - | [NewItemChatAlert](newitemchatalert.md) | alert_chat |  |  |
 | 0x18 | 1 / - | u8 | bag_slot |  |  |
 | 0x19 | 4 / Little | u32 | item_slot |  | mangoszero: item slot, but when added to stack: 0xFFFFFFFF |
-| 0x1D | 4 / Little | u32 | item_id |  |  |
+| 0x1D | 4 / Little | u32 | item |  |  |
 | 0x21 | 4 / Little | u32 | item_suffix_factor |  | mangoszero: SuffixFactor |
 | 0x25 | 4 / Little | u32 | item_random_property_id |  | mangoszero: random item property id |
 | 0x29 | 4 / Little | u32 | item_count |  |  |

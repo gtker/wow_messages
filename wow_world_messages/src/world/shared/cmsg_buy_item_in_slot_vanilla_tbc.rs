@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
 ///     Guid vendor_guid;
-///     u32 item_id;
+///     u32 item;
 ///     Guid bag_guid;
 ///     u8 bag_slot;
 ///     u8 amount;
@@ -15,7 +15,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct CMSG_BUY_ITEM_IN_SLOT {
     pub vendor_guid: Guid,
-    pub item_id: u32,
+    pub item: u32,
     pub bag_guid: Guid,
     pub bag_slot: u8,
     pub amount: u8,
@@ -32,8 +32,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         // vendor_guid: Guid
         w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // bag_guid: Guid
         w.write_all(&self.bag_guid.guid().to_le_bytes())?;
@@ -54,8 +54,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         // vendor_guid: Guid
         let vendor_guid = Guid::read(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // bag_guid: Guid
         let bag_guid = Guid::read(r)?;
@@ -68,7 +68,7 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
 
         Ok(Self {
             vendor_guid,
-            item_id,
+            item,
             bag_guid,
             bag_slot,
             amount,

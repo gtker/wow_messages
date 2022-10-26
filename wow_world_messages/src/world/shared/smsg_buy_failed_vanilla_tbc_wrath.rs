@@ -10,13 +10,13 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_BUY_FAILED = 0x01A5 {
 ///     Guid guid;
-///     u32 item_id;
+///     u32 item;
 ///     BuyResult result;
 /// }
 /// ```
 pub struct SMSG_BUY_FAILED {
     pub guid: Guid,
-    pub item_id: u32,
+    pub item: u32,
     pub result: BuyResult,
 }
 
@@ -31,8 +31,8 @@ impl crate::Message for SMSG_BUY_FAILED {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // result: BuyResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
@@ -47,15 +47,15 @@ impl crate::Message for SMSG_BUY_FAILED {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // result: BuyResult
         let result: BuyResult = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
-            item_id,
+            item,
             result,
         })
     }

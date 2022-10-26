@@ -23,7 +23,7 @@ use std::io::{Write, Read};
 ///     u32 item_text_id;
 ///     u32 unknown1;
 ///     u32 stationery;
-///     u32 item_id;
+///     u32 item;
 ///     u32 item_enchant_id;
 ///     u32 item_random_property_id;
 ///     u32 item_suffix_factor;
@@ -49,7 +49,7 @@ pub struct Mail {
     /// cmangos/vmangos/mangoszero: stationery (Stationery.dbc)
     ///
     pub stationery: u32,
-    pub item_id: u32,
+    pub item: u32,
     pub item_enchant_id: u32,
     pub item_random_property_id: u32,
     pub item_suffix_factor: u32,
@@ -124,8 +124,8 @@ impl Mail {
         // stationery: u32
         w.write_all(&self.stationery.to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // item_enchant_id: u32
         w.write_all(&self.item_enchant_id.to_le_bytes())?;
@@ -224,8 +224,8 @@ impl Mail {
         // stationery: u32
         let stationery = crate::util::read_u32_le(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // item_enchant_id: u32
         let item_enchant_id = crate::util::read_u32_le(r)?;
@@ -269,7 +269,7 @@ impl Mail {
             item_text_id,
             unknown1,
             stationery,
-            item_id,
+            item,
             item_enchant_id,
             item_random_property_id,
             item_suffix_factor,
@@ -295,7 +295,7 @@ impl Mail {
         + 4 // item_text_id: u32
         + 4 // unknown1: u32
         + 4 // stationery: u32
-        + 4 // item_id: u32
+        + 4 // item: u32
         + 4 // item_enchant_id: u32
         + 4 // item_random_property_id: u32
         + 4 // item_suffix_factor: u32

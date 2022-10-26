@@ -1,6 +1,6 @@
 cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
     Guid vendor_guid;
-    u32 item_id;
+    Item item;
     Guid bag_guid;
     u8 bag_slot;
     u8 amount;
@@ -10,7 +10,7 @@ cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
 
 cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
     Guid vendor_guid;
-    u32 item_id;
+    Item item;
     u32 vendor_slot {
         comment = "arcemu: VLack: 3.1.2 This is the slot's number on the vendor's panel, starts from 1";
     }

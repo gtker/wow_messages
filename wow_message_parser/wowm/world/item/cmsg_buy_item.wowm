@@ -1,6 +1,6 @@
 cmsg CMSG_BUY_ITEM = 0x01A2 {
     Guid vendor_guid;
-    u32 item_id;
+    Item item;
     u8 amount;
     u8 unknown1 {
         comment = "cmangos says this is hardcoded to 1 in the TBC client.";
@@ -11,7 +11,7 @@ cmsg CMSG_BUY_ITEM = 0x01A2 {
 
 cmsg CMSG_BUY_ITEM = 0x01A2 {
     Guid vendor_guid;
-    u32 item_id;
+    Item item;
     u32 slot;
     u8 amount;
 } {

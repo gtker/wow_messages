@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 /// ```text
 /// struct ListInventoryItem {
 ///     u32 item_stack_count;
-///     u32 item_id;
+///     u32 item;
 ///     u32 item_display_id;
 ///     u32 max_items;
 ///     u32 price;
@@ -17,7 +17,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct ListInventoryItem {
     pub item_stack_count: u32,
-    pub item_id: u32,
+    pub item: u32,
     pub item_display_id: u32,
     /// cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case
     ///
@@ -33,8 +33,8 @@ impl ListInventoryItem {
         // item_stack_count: u32
         w.write_all(&self.item_stack_count.to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // item_display_id: u32
         w.write_all(&self.item_display_id.to_le_bytes())?;
@@ -63,8 +63,8 @@ impl ListInventoryItem {
         // item_stack_count: u32
         let item_stack_count = crate::util::read_u32_le(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // item_display_id: u32
         let item_display_id = crate::util::read_u32_le(r)?;
@@ -86,7 +86,7 @@ impl ListInventoryItem {
 
         Ok(Self {
             item_stack_count,
-            item_id,
+            item,
             item_display_id,
             max_items,
             price,

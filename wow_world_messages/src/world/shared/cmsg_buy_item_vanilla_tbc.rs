@@ -7,14 +7,14 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_BUY_ITEM = 0x01A2 {
 ///     Guid vendor_guid;
-///     u32 item_id;
+///     u32 item;
 ///     u8 amount;
 ///     u8 unknown1;
 /// }
 /// ```
 pub struct CMSG_BUY_ITEM {
     pub vendor_guid: Guid,
-    pub item_id: u32,
+    pub item: u32,
     pub amount: u8,
     /// cmangos says this is hardcoded to 1 in the TBC client.
     ///
@@ -32,8 +32,8 @@ impl crate::Message for CMSG_BUY_ITEM {
         // vendor_guid: Guid
         w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
@@ -51,8 +51,8 @@ impl crate::Message for CMSG_BUY_ITEM {
         // vendor_guid: Guid
         let vendor_guid = Guid::read(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // amount: u8
         let amount = crate::util::read_u8_le(r)?;
@@ -62,7 +62,7 @@ impl crate::Message for CMSG_BUY_ITEM {
 
         Ok(Self {
             vendor_guid,
-            item_id,
+            item,
             amount,
             unknown1,
         })

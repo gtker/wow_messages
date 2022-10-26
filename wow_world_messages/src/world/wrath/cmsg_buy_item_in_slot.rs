@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
 ///     Guid vendor_guid;
-///     u32 item_id;
+///     u32 item;
 ///     u32 vendor_slot;
 ///     Guid bag_guid;
 ///     u8 bag_slot;
@@ -16,7 +16,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct CMSG_BUY_ITEM_IN_SLOT {
     pub vendor_guid: Guid,
-    pub item_id: u32,
+    pub item: u32,
     /// arcemu: VLack: 3.1.2 This is the slot's number on the vendor's panel, starts from 1
     ///
     pub vendor_slot: u32,
@@ -36,8 +36,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         // vendor_guid: Guid
         w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // vendor_slot: u32
         w.write_all(&self.vendor_slot.to_le_bytes())?;
@@ -61,8 +61,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         // vendor_guid: Guid
         let vendor_guid = Guid::read(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // vendor_slot: u32
         let vendor_slot = crate::util::read_u32_le(r)?;
@@ -78,7 +78,7 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
 
         Ok(Self {
             vendor_guid,
-            item_id,
+            item,
             vendor_slot,
             bag_guid,
             bag_slot,

@@ -4,7 +4,7 @@ struct TradeSlot {
     u8 trade_slot_number {
         comment = "cmangos/vmangos/mangoszero: sets to index of array";
     }
-    u32 item_id;
+    Item item;
     u32 display_id;
     u32 stack_count;
     u32 is_wrapped;

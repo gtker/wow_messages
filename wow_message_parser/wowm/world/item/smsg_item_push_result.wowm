@@ -28,7 +28,7 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     u32 item_slot {
         comment = "mangoszero: item slot, but when added to stack: 0xFFFFFFFF";
     }
-    u32 item_id;
+    Item item;
     u32 item_suffix_factor {
         comment = "mangoszero: SuffixFactor";
     }
@@ -49,7 +49,7 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     u32 item_slot {
         comment = "mangoszero: item slot, but when added to stack: 0xFFFFFFFF";
     }
-    u32 item_id;
+    Item item;
     u32 item_suffix_factor {
         comment = "mangoszero: SuffixFactor";
     }

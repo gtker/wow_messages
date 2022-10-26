@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 /// smsg SMSG_LOOT_START_ROLL = 0x02A1 {
 ///     Guid creature_guid;
 ///     u32 loot_slot;
-///     u32 item_id;
+///     u32 item;
 ///     u32 item_random_suffix;
 ///     u32 item_random_property_id;
 ///     u32 countdown_time;
@@ -17,7 +17,7 @@ use std::io::{Write, Read};
 pub struct SMSG_LOOT_START_ROLL {
     pub creature_guid: Guid,
     pub loot_slot: u32,
-    pub item_id: u32,
+    pub item: u32,
     /// vmangos/mangoszero: not used ?
     ///
     pub item_random_suffix: u32,
@@ -39,8 +39,8 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_suffix: u32
         w.write_all(&self.item_random_suffix.to_le_bytes())?;
@@ -64,8 +64,8 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // item_random_suffix: u32
         let item_random_suffix = crate::util::read_u32_le(r)?;
@@ -79,7 +79,7 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         Ok(Self {
             creature_guid,
             loot_slot,
-            item_id,
+            item,
             item_random_suffix,
             item_random_property_id,
             countdown_time,

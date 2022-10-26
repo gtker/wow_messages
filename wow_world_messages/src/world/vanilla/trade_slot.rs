@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// ```text
 /// struct TradeSlot {
 ///     u8 trade_slot_number;
-///     u32 item_id;
+///     u32 item;
 ///     u32 display_id;
 ///     u32 stack_count;
 ///     u32 is_wrapped;
@@ -26,7 +26,7 @@ pub struct TradeSlot {
     /// cmangos/vmangos/mangoszero: sets to index of array
     ///
     pub trade_slot_number: u8,
-    pub item_id: u32,
+    pub item: u32,
     pub display_id: u32,
     pub stack_count: u32,
     pub is_wrapped: u32,
@@ -46,8 +46,8 @@ impl TradeSlot {
         // trade_slot_number: u8
         w.write_all(&self.trade_slot_number.to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // display_id: u32
         w.write_all(&self.display_id.to_le_bytes())?;
@@ -94,8 +94,8 @@ impl TradeSlot {
         // trade_slot_number: u8
         let trade_slot_number = crate::util::read_u8_le(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // display_id: u32
         let display_id = crate::util::read_u32_le(r)?;
@@ -135,7 +135,7 @@ impl TradeSlot {
 
         Ok(Self {
             trade_slot_number,
-            item_id,
+            item,
             display_id,
             stack_count,
             is_wrapped,

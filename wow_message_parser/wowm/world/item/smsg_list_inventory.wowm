@@ -1,6 +1,6 @@
 struct ListInventoryItem {
     u32 item_stack_count;
-    u32 item_id;
+    Item item;
     u32 item_display_id;
     u32 max_items {
         comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";
@@ -14,7 +14,7 @@ struct ListInventoryItem {
 
 struct ListInventoryItem {
     u32 item_stack_count;
-    u32 item_id;
+    Item item;
     u32 item_display_id;
     u32 max_items {
         comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";

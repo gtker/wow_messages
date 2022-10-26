@@ -23,7 +23,7 @@ struct Mail {
     u32 item_text_id;
     u32 unknown1;
     u32 stationery;
-    u32 item_id;
+    u32 item;
     u32 item_enchant_id;
     u32 item_random_property_id;
     u32 item_suffix_factor;
@@ -67,7 +67,7 @@ Else If message_type is equal to `AUCTION`:
 | - | 4 / Little | u32 | item_text_id |  |  |
 | - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: set to 0 |
 | - | 4 / Little | u32 | stationery |  | cmangos/vmangos/mangoszero: stationery (Stationery.dbc) |
-| - | 4 / Little | u32 | item_id |  |  |
+| - | 4 / Little | u32 | item |  |  |
 | - | 4 / Little | u32 | item_enchant_id |  |  |
 | - | 4 / Little | u32 | item_random_property_id |  |  |
 | - | 4 / Little | u32 | item_suffix_factor |  |  |
