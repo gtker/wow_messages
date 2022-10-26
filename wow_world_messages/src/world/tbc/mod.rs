@@ -102,6 +102,8 @@ pub(crate) mod cmsg_buy_item;
 pub use cmsg_buy_item::*;
 pub(crate) mod cmsg_buy_item_in_slot;
 pub use cmsg_buy_item_in_slot::*;
+pub(crate) mod cmsg_buy_stable_slot;
+pub use cmsg_buy_stable_slot::*;
 pub(crate) mod cmsg_buyback_item;
 pub use cmsg_buyback_item::*;
 pub(crate) mod cmsg_cancel_channelling;

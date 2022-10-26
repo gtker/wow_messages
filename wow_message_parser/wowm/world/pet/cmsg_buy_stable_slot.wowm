@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_BUY_STABLE_SLOT = 0x0272 {
     Guid npc_guid;
