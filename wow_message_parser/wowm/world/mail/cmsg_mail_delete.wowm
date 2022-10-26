@@ -1,7 +1,14 @@
-#tag_all versions "1.12";
+cmsg CMSG_MAIL_DELETE = 0x0249 {
+    Guid mailbox_id;
+    u32 mail_id;
+} {
+    versions = "1";
+}
 
 cmsg CMSG_MAIL_DELETE = 0x0249 {
     Guid mailbox_id;
     u32 mail_id;
+    u32 mail_template_id;
+} {
+    versions = "2.4.3 3";
 }
-
