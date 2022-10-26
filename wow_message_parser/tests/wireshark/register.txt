@@ -2536,12 +2536,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_mailbox_guid,
-            { "Mailbox Guid", "woww.mailbox.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_mailbox_id,
             { "Mailbox Id", "woww.mailbox.id",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,

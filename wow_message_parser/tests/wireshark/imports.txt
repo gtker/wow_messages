@@ -421,7 +421,6 @@ static int hf_woww_mail_id = -1;
 static int hf_woww_mail_template_id = -1;
 static int hf_woww_mail_type = -1;
 static int hf_woww_mailbox = -1;
-static int hf_woww_mailbox_guid = -1;
 static int hf_woww_mailbox_id = -1;
 static int hf_woww_mana = -1;
 static int hf_woww_map = -1;
