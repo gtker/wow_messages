@@ -750,6 +750,8 @@ pub(crate) mod smsg_loot_all_passed;
 pub use smsg_loot_all_passed::*;
 pub(crate) mod smsg_loot_clear_money;
 pub use smsg_loot_clear_money::*;
+pub(crate) mod smsg_loot_master_list;
+pub use smsg_loot_master_list::*;
 pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_notification;

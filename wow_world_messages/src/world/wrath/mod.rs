@@ -742,6 +742,8 @@ pub(crate) mod smsg_loot_all_passed;
 pub use smsg_loot_all_passed::*;
 pub(crate) mod smsg_loot_clear_money;
 pub use smsg_loot_clear_money::*;
+pub(crate) mod smsg_loot_master_list;
+pub use smsg_loot_master_list::*;
 pub(crate) mod smsg_name_query_response;
 pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_world;
