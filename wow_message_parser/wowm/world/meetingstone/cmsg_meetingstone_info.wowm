@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2"; /* In wrath this is a different message */
 
 cmsg CMSG_MEETINGSTONE_INFO = 0x0296 {}
 
