@@ -1,10 +1,16 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x024A {
     Guid mailbox;
     u32 mail_id;
     u32 mail_template_id {
         comment = "mangoszero/cmangos/vmangos: mailTemplateId, non need, Mail store own 100% correct value anyway";
     }
+} {
+    versions = "1 2";
 }
 
+cmsg CMSG_MAIL_CREATE_TEXT_ITEM = 0x024A {
+    Guid mailbox;
+    u32 mail_id;
+} {
+    versions = "3.3.5";
+}

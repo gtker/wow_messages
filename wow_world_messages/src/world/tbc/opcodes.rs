@@ -149,6 +149,7 @@ use crate::world::tbc::CMSG_GUILD_SET_PUBLIC_NOTE;
 use crate::world::tbc::CMSG_GUILD_SET_OFFICER_NOTE;
 use crate::world::tbc::CMSG_GET_MAIL_LIST;
 use crate::world::tbc::CMSG_BATTLEFIELD_LIST;
+use crate::world::tbc::CMSG_MAIL_CREATE_TEXT_ITEM;
 use crate::world::tbc::MSG_AUCTION_HELLO_Client;
 use crate::world::tbc::CMSG_AUCTION_SELL_ITEM;
 use crate::world::tbc::CMSG_AUCTION_REMOVE_ITEM;
@@ -335,6 +336,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GUILD_SET_OFFICER_NOTE(CMSG_GUILD_SET_OFFICER_NOTE),
     CMSG_GET_MAIL_LIST(CMSG_GET_MAIL_LIST),
     CMSG_BATTLEFIELD_LIST(CMSG_BATTLEFIELD_LIST),
+    CMSG_MAIL_CREATE_TEXT_ITEM(CMSG_MAIL_CREATE_TEXT_ITEM),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Client),
     CMSG_AUCTION_SELL_ITEM(CMSG_AUCTION_SELL_ITEM),
     CMSG_AUCTION_REMOVE_ITEM(CMSG_AUCTION_REMOVE_ITEM),
@@ -523,6 +525,7 @@ impl ClientOpcodeMessage {
             0x0235 => Ok(Self::CMSG_GUILD_SET_OFFICER_NOTE(<CMSG_GUILD_SET_OFFICER_NOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0235, size: body_size, io, } } else { a } })?)),
             0x023A => Ok(Self::CMSG_GET_MAIL_LIST(<CMSG_GET_MAIL_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023A, size: body_size, io, } } else { a } })?)),
             0x023C => Ok(Self::CMSG_BATTLEFIELD_LIST(<CMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023C, size: body_size, io, } } else { a } })?)),
+            0x024A => Ok(Self::CMSG_MAIL_CREATE_TEXT_ITEM(<CMSG_MAIL_CREATE_TEXT_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x024A, size: body_size, io, } } else { a } })?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0255, size: body_size, io, } } else { a } })?)),
             0x0256 => Ok(Self::CMSG_AUCTION_SELL_ITEM(<CMSG_AUCTION_SELL_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0256, size: body_size, io, } } else { a } })?)),
             0x0257 => Ok(Self::CMSG_AUCTION_REMOVE_ITEM(<CMSG_AUCTION_REMOVE_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0257, size: body_size, io, } } else { a } })?)),
@@ -779,6 +782,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GET_MAIL_LIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.write_encrypted_client(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.write_encrypted_client(w, e),
@@ -968,6 +972,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GET_MAIL_LIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.write_unencrypted_client(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.write_unencrypted_client(w),
@@ -1157,6 +1162,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1346,6 +1352,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1535,6 +1542,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1724,6 +1732,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.astd_write_unencrypted_client(w).await,
@@ -1948,6 +1957,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GUILD_SET_OFFICER_NOTE(_) => "CMSG_GUILD_SET_OFFICER_NOTE",
             ClientOpcodeMessage::CMSG_GET_MAIL_LIST(_) => "CMSG_GET_MAIL_LIST",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_LIST(_) => "CMSG_BATTLEFIELD_LIST",
+            ClientOpcodeMessage::CMSG_MAIL_CREATE_TEXT_ITEM(_) => "CMSG_MAIL_CREATE_TEXT_ITEM",
             ClientOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Client",
             ClientOpcodeMessage::CMSG_AUCTION_SELL_ITEM(_) => "CMSG_AUCTION_SELL_ITEM",
             ClientOpcodeMessage::CMSG_AUCTION_REMOVE_ITEM(_) => "CMSG_AUCTION_REMOVE_ITEM",
@@ -2837,6 +2847,12 @@ impl From<CMSG_GET_MAIL_LIST> for ClientOpcodeMessage {
 impl From<CMSG_BATTLEFIELD_LIST> for ClientOpcodeMessage {
     fn from(c: CMSG_BATTLEFIELD_LIST) -> Self {
         Self::CMSG_BATTLEFIELD_LIST(c)
+    }
+}
+
+impl From<CMSG_MAIL_CREATE_TEXT_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_MAIL_CREATE_TEXT_ITEM) -> Self {
+        Self::CMSG_MAIL_CREATE_TEXT_ITEM(c)
     }
 }
 

@@ -260,6 +260,8 @@ pub(crate) mod cmsg_loot_release;
 pub use cmsg_loot_release::*;
 pub(crate) mod cmsg_loot_roll;
 pub use cmsg_loot_roll::*;
+pub(crate) mod cmsg_mail_create_text_item;
+pub use cmsg_mail_create_text_item::*;
 pub(crate) mod cmsg_messagechat;
 pub use cmsg_messagechat::*;
 pub(crate) mod cmsg_move_chng_transport;
