@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_PET_ACTION = 0x0175 {
     Guid pet_guid;

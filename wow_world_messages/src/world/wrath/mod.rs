@@ -294,6 +294,8 @@ pub(crate) mod cmsg_open_item;
 pub use cmsg_open_item::*;
 pub(crate) mod cmsg_pet_abandon;
 pub use cmsg_pet_abandon::*;
+pub(crate) mod cmsg_pet_action;
+pub use cmsg_pet_action::*;
 pub(crate) mod cmsg_petition_buy;
 pub use cmsg_petition_buy::*;
 pub(crate) mod cmsg_petition_show_signatures;
