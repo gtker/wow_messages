@@ -274,6 +274,8 @@ pub(crate) mod cmsg_mail_take_money;
 pub use cmsg_mail_take_money::*;
 pub(crate) mod cmsg_messagechat;
 pub use cmsg_messagechat::*;
+pub(crate) mod cmsg_mountspecial_anim;
+pub use cmsg_mountspecial_anim::*;
 pub(crate) mod cmsg_move_chng_transport;
 pub use cmsg_move_chng_transport::*;
 pub(crate) mod cmsg_move_fall_reset;
