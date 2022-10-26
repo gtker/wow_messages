@@ -1,19 +1,19 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 enum MountResult : u32 {
-    INVALIDMOUNTEE = 0    {
+    INVALID_MOUNTEE = 0    {
         comment = "You can't mount that unit!";
     }
-    TOOFARAWAY = 1    {
+    TOO_FAR_AWAY = 1    {
         comment = "That mount is too far away!";
     }
-    ALREADYMOUNTED = 2    {
+    ALREADY_MOUNTED = 2    {
         comment = "You're already mounted!";
     }
-    NOTMOUNTABLE = 3    {
+    NOT_MOUNTABLE = 3    {
         comment = "That unit can't be mounted!";
     }
-    NOTYOURPET = 4    {
+    NOT_YOUR_PET = 4    {
         comment = "That mount isn't your pet!";
     }
     OTHER = 5    {
@@ -22,13 +22,13 @@ enum MountResult : u32 {
     LOOTING = 6    {
         comment = "You can't mount while looting!";
     }
-    RACECANTMOUNT = 7    {
+    RACE_CANT_MOUNT = 7    {
         comment = "You can't mount because of your race!";
     }
     SHAPESHIFTED = 8    {
         comment = "You can't mount while shapeshifted!";
     }
-    FORCEDDISMOUNT = 9    {
+    FORCED_DISMOUNT = 9    {
         comment = "You dismount before continuing.";
     }
     OK = 10    {
@@ -38,5 +38,7 @@ enum MountResult : u32 {
 
 smsg SMSG_MOUNTRESULT = 0x016E {
     MountResult result;
+} {
+    comment = "This is not used in any TBC emulator, but trinitycore has it implemented so it is assumed to be valid for TBC as well.";
 }
 
