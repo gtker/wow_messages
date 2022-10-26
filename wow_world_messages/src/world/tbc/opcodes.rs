@@ -149,6 +149,7 @@ use crate::world::tbc::CMSG_GUILD_SET_PUBLIC_NOTE;
 use crate::world::tbc::CMSG_GUILD_SET_OFFICER_NOTE;
 use crate::world::tbc::CMSG_GET_MAIL_LIST;
 use crate::world::tbc::CMSG_BATTLEFIELD_LIST;
+use crate::world::tbc::CMSG_MAIL_TAKE_MONEY;
 use crate::world::tbc::CMSG_MAIL_TAKE_ITEM;
 use crate::world::tbc::CMSG_MAIL_MARK_AS_READ;
 use crate::world::tbc::CMSG_MAIL_RETURN_TO_SENDER;
@@ -340,6 +341,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GUILD_SET_OFFICER_NOTE(CMSG_GUILD_SET_OFFICER_NOTE),
     CMSG_GET_MAIL_LIST(CMSG_GET_MAIL_LIST),
     CMSG_BATTLEFIELD_LIST(CMSG_BATTLEFIELD_LIST),
+    CMSG_MAIL_TAKE_MONEY(CMSG_MAIL_TAKE_MONEY),
     CMSG_MAIL_TAKE_ITEM(CMSG_MAIL_TAKE_ITEM),
     CMSG_MAIL_MARK_AS_READ(CMSG_MAIL_MARK_AS_READ),
     CMSG_MAIL_RETURN_TO_SENDER(CMSG_MAIL_RETURN_TO_SENDER),
@@ -533,6 +535,7 @@ impl ClientOpcodeMessage {
             0x0235 => Ok(Self::CMSG_GUILD_SET_OFFICER_NOTE(<CMSG_GUILD_SET_OFFICER_NOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0235, size: body_size, io, } } else { a } })?)),
             0x023A => Ok(Self::CMSG_GET_MAIL_LIST(<CMSG_GET_MAIL_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023A, size: body_size, io, } } else { a } })?)),
             0x023C => Ok(Self::CMSG_BATTLEFIELD_LIST(<CMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023C, size: body_size, io, } } else { a } })?)),
+            0x0245 => Ok(Self::CMSG_MAIL_TAKE_MONEY(<CMSG_MAIL_TAKE_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0245, size: body_size, io, } } else { a } })?)),
             0x0246 => Ok(Self::CMSG_MAIL_TAKE_ITEM(<CMSG_MAIL_TAKE_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0246, size: body_size, io, } } else { a } })?)),
             0x0247 => Ok(Self::CMSG_MAIL_MARK_AS_READ(<CMSG_MAIL_MARK_AS_READ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0247, size: body_size, io, } } else { a } })?)),
             0x0248 => Ok(Self::CMSG_MAIL_RETURN_TO_SENDER(<CMSG_MAIL_RETURN_TO_SENDER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0248, size: body_size, io, } } else { a } })?)),
@@ -794,6 +797,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GET_MAIL_LIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MAIL_TAKE_MONEY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MAIL_TAKE_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MAIL_MARK_AS_READ(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.write_encrypted_client(w, e),
@@ -988,6 +992,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GET_MAIL_LIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MAIL_TAKE_MONEY(c) => c.write_unencrypted_client(w),
             Self::CMSG_MAIL_TAKE_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_MAIL_MARK_AS_READ(c) => c.write_unencrypted_client(w),
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.write_unencrypted_client(w),
@@ -1182,6 +1187,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MAIL_TAKE_MONEY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_TAKE_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_MARK_AS_READ(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1376,6 +1382,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MAIL_TAKE_MONEY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_TAKE_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_MARK_AS_READ(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1570,6 +1577,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MAIL_TAKE_MONEY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_TAKE_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_MARK_AS_READ(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1764,6 +1772,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MAIL_TAKE_MONEY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_TAKE_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_MARK_AS_READ(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.astd_write_unencrypted_client(w).await,
@@ -1993,6 +2002,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GUILD_SET_OFFICER_NOTE(_) => "CMSG_GUILD_SET_OFFICER_NOTE",
             ClientOpcodeMessage::CMSG_GET_MAIL_LIST(_) => "CMSG_GET_MAIL_LIST",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_LIST(_) => "CMSG_BATTLEFIELD_LIST",
+            ClientOpcodeMessage::CMSG_MAIL_TAKE_MONEY(_) => "CMSG_MAIL_TAKE_MONEY",
             ClientOpcodeMessage::CMSG_MAIL_TAKE_ITEM(_) => "CMSG_MAIL_TAKE_ITEM",
             ClientOpcodeMessage::CMSG_MAIL_MARK_AS_READ(_) => "CMSG_MAIL_MARK_AS_READ",
             ClientOpcodeMessage::CMSG_MAIL_RETURN_TO_SENDER(_) => "CMSG_MAIL_RETURN_TO_SENDER",
@@ -2887,6 +2897,12 @@ impl From<CMSG_GET_MAIL_LIST> for ClientOpcodeMessage {
 impl From<CMSG_BATTLEFIELD_LIST> for ClientOpcodeMessage {
     fn from(c: CMSG_BATTLEFIELD_LIST) -> Self {
         Self::CMSG_BATTLEFIELD_LIST(c)
+    }
+}
+
+impl From<CMSG_MAIL_TAKE_MONEY> for ClientOpcodeMessage {
+    fn from(c: CMSG_MAIL_TAKE_MONEY) -> Self {
+        Self::CMSG_MAIL_TAKE_MONEY(c)
     }
 }
 

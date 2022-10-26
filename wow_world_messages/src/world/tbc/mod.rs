@@ -260,6 +260,8 @@ pub(crate) mod cmsg_mail_return_to_sender;
 pub use cmsg_mail_return_to_sender::*;
 pub(crate) mod cmsg_mail_take_item;
 pub use cmsg_mail_take_item::*;
+pub(crate) mod cmsg_mail_take_money;
+pub use cmsg_mail_take_money::*;
 pub(crate) mod cmsg_messagechat;
 pub use cmsg_messagechat::*;
 pub(crate) mod cmsg_move_chng_transport;
