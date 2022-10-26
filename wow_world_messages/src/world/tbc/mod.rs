@@ -752,6 +752,8 @@ pub(crate) mod smsg_loot_clear_money;
 pub use smsg_loot_clear_money::*;
 pub(crate) mod smsg_loot_master_list;
 pub use smsg_loot_master_list::*;
+pub(crate) mod smsg_loot_money_notify;
+pub use smsg_loot_money_notify::*;
 pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_notification;
