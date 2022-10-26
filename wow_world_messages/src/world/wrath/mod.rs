@@ -804,6 +804,8 @@ pub(crate) mod smsg_read_item_ok;
 pub use smsg_read_item_ok::*;
 pub(crate) mod smsg_realm_split;
 pub use smsg_realm_split::*;
+pub(crate) mod smsg_received_mail;
+pub use smsg_received_mail::*;
 pub(crate) mod smsg_sell_item;
 pub use smsg_sell_item::*;
 pub(crate) mod smsg_server_message;

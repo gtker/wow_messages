@@ -281,6 +281,7 @@ pub mod smsg_procresist_vanilla_tbc_wrath;
 pub mod smsg_read_item_failed_vanilla_tbc_wrath;
 pub mod smsg_read_item_ok_vanilla_tbc_wrath;
 pub mod smsg_realm_split_tbc_wrath;
+pub mod smsg_received_mail_vanilla_tbc_wrath;
 pub mod smsg_sell_item_vanilla_tbc;
 pub mod smsg_server_message_vanilla_tbc;
 pub mod smsg_set_faction_visible_vanilla_tbc_wrath;
