@@ -11,7 +11,7 @@ use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::LoginVersion;
 use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::path_utils;
-use crate::path_utils::{base_directory, login_directory, world_directory};
+use crate::path_utils::{base_directory, get_filepath, login_directory, world_directory};
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
 #[allow(clippy::enum_variant_names)]
@@ -21,6 +21,7 @@ pub(crate) enum SubmoduleLocation {
     PubModNoCfg,
     PubCrateMod,
     PubUseOnly,
+    SpecificLine,
 }
 
 #[derive(Debug)]
@@ -72,6 +73,9 @@ impl ModFiles {
                     }
                     SubmoduleLocation::PubModNoCfg => {
                         writeln!(s, "pub mod {};", i).unwrap();
+                    }
+                    SubmoduleLocation::SpecificLine => {
+                        write!(s, "{}", i).unwrap();
                     }
                 }
             }
@@ -133,11 +137,12 @@ impl ModFiles {
         );
     }
 
-    pub(crate) fn add_world_file(
+    pub(crate) fn add_everything_but_world_file(
         &mut self,
         name: &str,
         version: &MajorWorldVersion,
         tags: &ObjectTags,
+        file_dir: &PathBuf,
     ) {
         if tags.is_in_base() {
             self.add_or_append_file(
@@ -162,22 +167,33 @@ impl ModFiles {
             ),
         );
 
-        let file_dir = world_directory().join(major_version_to_string(version));
-        self.add_or_append_file(
-            file_dir.clone(),
-            (get_module_name(name), SubmoduleLocation::PubUseInternal),
-        );
         self.add_or_append_file(
             file_dir.clone(),
             ("opcodes".to_string(), SubmoduleLocation::PubMod),
         );
 
         self.add_or_append_file(
-            file_dir,
+            file_dir.clone(),
             (
                 format!("crate::helper::{}", major_version_to_string(version)),
                 SubmoduleLocation::PubUseOnly,
             ),
+        );
+    }
+
+    pub(crate) fn add_world_file(
+        &mut self,
+        name: &str,
+        version: &MajorWorldVersion,
+        tags: &ObjectTags,
+    ) {
+        let file_dir = world_directory().join(major_version_to_string(version));
+
+        self.add_everything_but_world_file(name, version, tags, &file_dir);
+
+        self.add_or_append_file(
+            file_dir.clone(),
+            (get_module_name(name), SubmoduleLocation::PubUseInternal),
         );
     }
 
@@ -249,7 +265,12 @@ impl ModFiles {
         let base_path = path_utils::get_base_filepath(name, version);
         let world_path = path_utils::get_world_filepath(name, version);
 
-        self.add_world_file(name, version, tags);
+        let file_dir = world_directory().join(major_version_to_string(version));
+
+        self.add_everything_but_world_file(name, version, tags, &file_dir);
+
+        self.write_specific_line_to_file(world_s.to_string(), file_dir.clone());
+
         create_and_overwrite_if_not_same_contents(world_s, &world_path);
         create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
 
@@ -257,6 +278,12 @@ impl ModFiles {
             .insert(base_path.canonicalize().unwrap(), true);
         self.already_existing_files
             .insert(world_path.canonicalize().unwrap(), true);
+    }
+
+    pub(crate) fn write_specific_line_to_file(&mut self, line: String, file_dir: PathBuf) {
+        self.add_or_append_file(file_dir.clone(), (line, SubmoduleLocation::SpecificLine));
+        self.already_existing_files
+            .insert(file_dir.canonicalize().unwrap(), true);
     }
 
     pub(crate) fn write_base_contents_to_file(
@@ -293,10 +320,10 @@ impl ModFiles {
         s: &str,
         version: Version,
     ) {
+        let path = get_filepath(name, &version);
+
         match &version {
             Version::Login(v) => {
-                let path = path_utils::get_login_filepath(name, v);
-
                 self.add_login_file(name, v);
 
                 create_and_overwrite_if_not_same_contents(s, Path::new(&path));
@@ -305,8 +332,6 @@ impl ModFiles {
                     .insert(path.canonicalize().unwrap(), true);
             }
             Version::World(version) => {
-                let path = path_utils::get_world_filepath(name, version);
-
                 self.add_world_file(name, version, tags);
 
                 create_and_overwrite_if_not_same_contents(s, &path);

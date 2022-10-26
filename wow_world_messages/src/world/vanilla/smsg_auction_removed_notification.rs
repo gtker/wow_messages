@@ -1,2 +1,0 @@
-pub use crate::shared::smsg_auction_removed_notification_vanilla_tbc_wrath::SMSG_AUCTION_REMOVED_NOTIFICATION;
-

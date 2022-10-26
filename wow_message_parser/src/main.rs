@@ -17,7 +17,7 @@ use crate::file_utils::{
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
-use crate::path_utils::{get_login_version_file_path, wowm_directory};
+use crate::path_utils::{get_filepath, get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
     print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType,
@@ -117,7 +117,8 @@ fn main() {
 
                 for v in versions.clone() {
                     let s = get_import_from_shared(e.name(), e.tags());
-                    m.write_contents_to_file(e.name(), e.tags(), &s, v);
+                    let path = get_filepath(e.name(), &v);
+                    m.write_specific_line_to_file(s, path.parent().unwrap().to_path_buf());
                 }
             }
         } else {
