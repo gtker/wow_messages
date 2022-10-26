@@ -1,6 +1,11 @@
-#tag_all versions "1.12";
+#tag_all versions "1"; /* Not implemented in TBC/Wrath emulators */
+
+enum DismountResult : u32 {
+    NOT_MOUNTED = 1;
+    OK = 3;
+}
 
 smsg SMSG_DISMOUNTRESULT = 0x016F {
-    MountResult result;
+    DismountResult result;
 }
 

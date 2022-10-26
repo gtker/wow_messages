@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/mount_common.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/mount_common.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/smsg_mountresult.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/smsg_mountresult.wowm#L3):
 /// ```text
 /// enum MountResult : u32 {
 ///     INVALIDMOUNTEE = 0;

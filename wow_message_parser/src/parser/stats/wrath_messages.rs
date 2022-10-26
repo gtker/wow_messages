@@ -369,7 +369,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_DUEL_ACCEPTED", 0x16C),
     Data::new("CMSG_DUEL_CANCELLED", 0x16D),
     Data::new("SMSG_MOUNTRESULT", 0x16E),
-    Data::new("SMSG_DISMOUNTRESULT", 0x16F),
+    Data::with_reason("SMSG_DISMOUNTRESULT", 0x16F, "Not used in any emulator"),
     Data::new("SMSG_REMOVED_FROM_PVP_QUEUE", 0x170),
     Data::new("CMSG_MOUNTSPECIAL_ANIM", 0x171),
     Data::new("SMSG_MOUNTSPECIAL_ANIM", 0x172),

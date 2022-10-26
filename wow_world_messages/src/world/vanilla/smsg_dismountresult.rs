@@ -1,16 +1,16 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::MountResult;
+use crate::world::vanilla::DismountResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/smsg_dismountresult.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/smsg_dismountresult.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mount/smsg_dismountresult.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mount/smsg_dismountresult.wowm#L8):
 /// ```text
 /// smsg SMSG_DISMOUNTRESULT = 0x016F {
-///     MountResult result;
+///     DismountResult result;
 /// }
 /// ```
 pub struct SMSG_DISMOUNTRESULT {
-    pub result: MountResult,
+    pub result: DismountResult,
 }
 
 impl crate::Message for SMSG_DISMOUNTRESULT {
@@ -21,7 +21,7 @@ impl crate::Message for SMSG_DISMOUNTRESULT {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // result: MountResult
+        // result: DismountResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
         Ok(())
@@ -31,8 +31,8 @@ impl crate::Message for SMSG_DISMOUNTRESULT {
             return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
         }
 
-        // result: MountResult
-        let result: MountResult = crate::util::read_u32_le(r)?.try_into()?;
+        // result: DismountResult
+        let result: DismountResult = crate::util::read_u32_le(r)?.try_into()?;
 
         Ok(Self {
             result,

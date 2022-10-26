@@ -69,6 +69,7 @@
 - [ComplaintStatus](docs/complaintstatus.md)
 - [CorpseQueryResult](docs/corpsequeryresult.md)
 - [DeclinedNames](docs/declinednames.md)
+- [DismountResult](docs/dismountresult.md)
 - [DuelWinnerReason](docs/duelwinnerreason.md)
 - [DungeonDifficulty](docs/dungeondifficulty.md)
 - [Emote](docs/emote.md)

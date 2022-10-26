@@ -1372,6 +1372,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_dismount_result,
+            { "Dismount Result", "woww.dismount.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_dismount_result_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_display_id,
             { "Display Id", "woww.display.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,

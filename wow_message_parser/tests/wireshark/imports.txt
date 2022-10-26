@@ -227,6 +227,7 @@ static int hf_woww_destination_position_z = -1;
 static int hf_woww_destination_slot = -1;
 static int hf_woww_destionation_slot = -1;
 static int hf_woww_details = -1;
+static int hf_woww_dismount_result = -1;
 static int hf_woww_display_id = -1;
 static int hf_woww_duel_winner_reason = -1;
 static int hf_woww_durability = -1;

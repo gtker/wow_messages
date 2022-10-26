@@ -595,6 +595,8 @@ pub use corpse_query_result::*;
 pub use crate::helper::vanilla::*;
 pub(crate) mod damage_info;
 pub use damage_info::*;
+pub(crate) mod dismount_result;
+pub use dismount_result::*;
 pub(crate) mod duel_winner_reason;
 pub use duel_winner_reason::*;
 pub(crate) mod emote;

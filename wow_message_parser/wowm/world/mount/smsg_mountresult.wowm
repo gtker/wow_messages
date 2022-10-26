@@ -1,5 +1,41 @@
 #tag_all versions "1.12";
 
+enum MountResult : u32 {
+    INVALIDMOUNTEE = 0    {
+        comment = "You can't mount that unit!";
+    }
+    TOOFARAWAY = 1    {
+        comment = "That mount is too far away!";
+    }
+    ALREADYMOUNTED = 2    {
+        comment = "You're already mounted!";
+    }
+    NOTMOUNTABLE = 3    {
+        comment = "That unit can't be mounted!";
+    }
+    NOTYOURPET = 4    {
+        comment = "That mount isn't your pet!";
+    }
+    OTHER = 5    {
+        comment = "internal";
+    }
+    LOOTING = 6    {
+        comment = "You can't mount while looting!";
+    }
+    RACECANTMOUNT = 7    {
+        comment = "You can't mount because of your race!";
+    }
+    SHAPESHIFTED = 8    {
+        comment = "You can't mount while shapeshifted!";
+    }
+    FORCEDDISMOUNT = 9    {
+        comment = "You dismount before continuing.";
+    }
+    OK = 10    {
+        comment = "no error";
+    }
+}
+
 smsg SMSG_MOUNTRESULT = 0x016E {
     MountResult result;
 }
