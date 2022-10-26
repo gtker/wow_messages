@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1"; /* Not implemented in TBC/Wrath emus */
 
 enum MeetingStoneFailure : u8 {
     MEETINGSTONE_FAIL_PARTYLEADER = 1;

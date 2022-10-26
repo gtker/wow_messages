@@ -694,7 +694,11 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_AREA_TRIGGER_MESSAGE", 0x2B8),
     Data::new("CMSG_SHOWING_HELM", 0x2B9),
     Data::new("CMSG_SHOWING_CLOAK", 0x2BA),
-    Data::new("SMSG_MEETINGSTONE_JOINFAILED", 0x2BB),
+    Data::with_reason(
+        "SMSG_MEETINGSTONE_JOINFAILED",
+        0x2BB,
+        "Not implemented in any emus",
+    ),
     Data::new("SMSG_PLAYER_SKINNED", 0x2BC),
     Data::new("SMSG_DURABILITY_DAMAGE_DEATH", 0x2BD),
     Data::new("CMSG_SET_EXPLORATION", 0x2BE),

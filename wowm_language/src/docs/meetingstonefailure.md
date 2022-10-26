@@ -1,6 +1,6 @@
 # MeetingStoneFailure
 
-## Client Version 1.12
+## Client Version 1
 
 ### Wowm Representation
 
