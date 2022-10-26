@@ -55,4 +55,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [CMSG_LOOT_ROLL](cmsg_loot_roll.md)
+* [SMSG_LOOT_ROLL](smsg_loot_roll.md)
 

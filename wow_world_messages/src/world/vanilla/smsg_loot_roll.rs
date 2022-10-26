@@ -4,13 +4,13 @@ use crate::world::vanilla::RollVote;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm#L1):
 /// ```text
 /// smsg SMSG_LOOT_ROLL = 0x02A2 {
 ///     Guid creature_guid;
 ///     u32 loot_slot;
-///     Guid item_guid;
-///     u32 item_id;
+///     Guid player;
+///     u32 item;
 ///     u32 item_random_suffix;
 ///     u32 item_random_property_id;
 ///     u8 roll_number;
@@ -20,8 +20,8 @@ use std::io::{Write, Read};
 pub struct SMSG_LOOT_ROLL {
     pub creature_guid: Guid,
     pub loot_slot: u32,
-    pub item_guid: Guid,
-    pub item_id: u32,
+    pub player: Guid,
+    pub item: u32,
     /// vmangos/mangoszero: not used ?
     ///
     pub item_random_suffix: u32,
@@ -46,11 +46,11 @@ impl crate::Message for SMSG_LOOT_ROLL {
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
 
-        // item_guid: Guid
-        w.write_all(&self.item_guid.guid().to_le_bytes())?;
+        // player: Guid
+        w.write_all(&self.player.guid().to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_suffix: u32
         w.write_all(&self.item_random_suffix.to_le_bytes())?;
@@ -77,11 +77,11 @@ impl crate::Message for SMSG_LOOT_ROLL {
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
 
-        // item_guid: Guid
-        let item_guid = Guid::read(r)?;
+        // player: Guid
+        let player = Guid::read(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // item_random_suffix: u32
         let item_random_suffix = crate::util::read_u32_le(r)?;
@@ -98,8 +98,8 @@ impl crate::Message for SMSG_LOOT_ROLL {
         Ok(Self {
             creature_guid,
             loot_slot,
-            item_guid,
-            item_id,
+            player,
+            item,
             item_random_suffix,
             item_random_property_id,
             roll_number,
