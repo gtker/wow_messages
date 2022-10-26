@@ -4392,7 +4392,7 @@
             ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_item_random_suffix, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_item_random_property_id, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_countdown_time, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_countdown_time_in_milliseconds, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_MAIL_LIST_RESULT:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_mails, 1, ENC_LITTLE_ENDIAN, &amount_of_mails);

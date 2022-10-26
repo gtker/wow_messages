@@ -762,6 +762,8 @@ pub(crate) mod smsg_loot_roll;
 pub use smsg_loot_roll::*;
 pub(crate) mod smsg_loot_roll_won;
 pub use smsg_loot_roll_won::*;
+pub(crate) mod smsg_loot_start_roll;
+pub use smsg_loot_start_roll::*;
 pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_notification;

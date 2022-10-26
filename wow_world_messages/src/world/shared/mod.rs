@@ -262,6 +262,7 @@ pub mod smsg_loot_release_response_vanilla_tbc_wrath;
 pub mod smsg_loot_removed_vanilla_tbc_wrath;
 pub mod smsg_loot_roll_tbc_wrath;
 pub mod smsg_loot_roll_won_tbc_wrath;
+pub mod smsg_loot_start_roll_vanilla_tbc;
 pub mod smsg_notification_vanilla_tbc_wrath;
 pub mod smsg_petition_show_signatures_vanilla_tbc_wrath;
 pub mod smsg_petition_sign_results_tbc_wrath;

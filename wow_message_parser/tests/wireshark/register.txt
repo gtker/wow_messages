@@ -1108,8 +1108,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_countdown_time,
-            { "Countdown Time", "woww.countdown.time",
+        { &hf_woww_countdown_time_in_milliseconds,
+            { "Countdown Time In Milliseconds", "woww.countdown.time.in.milliseconds",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

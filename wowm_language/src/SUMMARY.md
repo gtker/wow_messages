@@ -147,6 +147,7 @@
 - [RandomBg](docs/randombg.md)
 - [RealmSplitState](docs/realmsplitstate.md)
 - [RelationType](docs/relationtype.md)
+- [RollFlags](docs/rollflags.md)
 - [RollVote](docs/rollvote.md)
 - [SellItemResult](docs/sellitemresult.md)
 - [ServerMessageType](docs/servermessagetype.md)
