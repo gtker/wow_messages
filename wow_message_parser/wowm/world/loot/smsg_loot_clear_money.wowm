@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_LOOT_CLEAR_MONEY = 0x0165 {}
 

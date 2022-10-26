@@ -255,6 +255,7 @@ pub mod smsg_logout_cancel_ack_vanilla_tbc_wrath;
 pub mod smsg_logout_complete_vanilla_tbc_wrath;
 pub mod smsg_logout_response_vanilla_tbc_wrath;
 pub mod smsg_loot_all_passed_vanilla_tbc_wrath;
+pub mod smsg_loot_clear_money_vanilla_tbc_wrath;
 pub mod smsg_notification_vanilla_tbc_wrath;
 pub mod smsg_petition_show_signatures_vanilla_tbc_wrath;
 pub mod smsg_petition_sign_results_tbc_wrath;
