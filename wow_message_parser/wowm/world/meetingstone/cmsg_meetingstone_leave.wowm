@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1"; /* Not implemented in wrath/TBC emus */
 
 cmsg CMSG_MEETINGSTONE_LEAVE = 0x0293 {}
 
