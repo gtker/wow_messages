@@ -738,6 +738,8 @@ pub(crate) mod smsg_logout_complete;
 pub use smsg_logout_complete::*;
 pub(crate) mod smsg_logout_response;
 pub use smsg_logout_response::*;
+pub(crate) mod smsg_loot_all_passed;
+pub use smsg_loot_all_passed::*;
 pub(crate) mod smsg_name_query_response;
 pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_world;

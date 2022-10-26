@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_LOOT_ALL_PASSED = 0x029E {
     Guid looted_target_guid;
@@ -7,7 +7,7 @@ smsg SMSG_LOOT_ALL_PASSED = 0x029E {
     u32 item_id;
     u32 item_random_property_id;
     u32 item_random_suffix_id {
-        comment = "vmangos/mangoszero: not used ?";
+        comment = "vmangos/mangoszero: Always set to 0.";
     }
 }
 

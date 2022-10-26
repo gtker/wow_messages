@@ -1,6 +1,6 @@
 # SMSG_LOOT_ALL_PASSED
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -33,5 +33,5 @@ SMSG have a header of 4 bytes.
 | 0x0C | 4 / Little | u32 | loot_slot |  |  |
 | 0x10 | 4 / Little | u32 | item_id |  |  |
 | 0x14 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x18 | 4 / Little | u32 | item_random_suffix_id |  | vmangos/mangoszero: not used ? |
+| 0x18 | 4 / Little | u32 | item_random_suffix_id |  | vmangos/mangoszero: Always set to 0. |
 

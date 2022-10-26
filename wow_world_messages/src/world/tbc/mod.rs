@@ -746,6 +746,8 @@ pub(crate) mod smsg_logout_complete;
 pub use smsg_logout_complete::*;
 pub(crate) mod smsg_logout_response;
 pub use smsg_logout_response::*;
+pub(crate) mod smsg_loot_all_passed;
+pub use smsg_loot_all_passed::*;
 pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_notification;
