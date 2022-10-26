@@ -1,9 +1,9 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_LOOT_RELEASE_RESPONSE = 0x0161 {
     Guid guid;
     u8 unknown1 {
-        comment = "Set to 1 on mangoszero/vmangos/cmangos";
+        comment = "Set to 1 on mangoszero/vmangos/cmangos/azerothcraft/mangosone/mangostwo/arcemu";
     }
 }
 

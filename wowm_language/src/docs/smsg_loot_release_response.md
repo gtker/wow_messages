@@ -1,6 +1,6 @@
 # SMSG_LOOT_RELEASE_RESPONSE
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -27,5 +27,5 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x0C | 1 / - | u8 | unknown1 |  | Set to 1 on mangoszero/vmangos/cmangos |
+| 0x0C | 1 / - | u8 | unknown1 |  | Set to 1 on mangoszero/vmangos/cmangos/azerothcraft/mangosone/mangostwo/arcemu |
 
