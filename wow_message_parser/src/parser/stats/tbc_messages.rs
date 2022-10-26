@@ -651,7 +651,11 @@ pub(crate) const DATA: &[Data] = &[
         0x297,
         "Not implemented in any emus",
     ),
-    Data::new("SMSG_MEETINGSTONE_IN_PROGRESS", 0x298),
+    Data::with_reason(
+        "SMSG_MEETINGSTONE_IN_PROGRESS",
+        0x298,
+        "Not implemented in any emus",
+    ),
     Data::new("SMSG_MEETINGSTONE_MEMBER_ADDED", 0x299),
     Data::new("CMSG_GMTICKETSYSTEM_TOGGLE", 0x29A),
     Data::new("CMSG_CANCEL_GROWTH_AURA", 0x29B),
