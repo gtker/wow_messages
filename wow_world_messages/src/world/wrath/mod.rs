@@ -778,6 +778,8 @@ pub(crate) mod smsg_loot_roll_won;
 pub use smsg_loot_roll_won::*;
 pub(crate) mod smsg_loot_start_roll;
 pub use smsg_loot_start_roll::*;
+pub(crate) mod smsg_mountspecial_anim;
+pub use smsg_mountspecial_anim::*;
 pub(crate) mod smsg_name_query_response;
 pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_world;

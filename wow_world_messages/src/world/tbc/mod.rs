@@ -790,6 +790,8 @@ pub(crate) mod smsg_loot_start_roll;
 pub use smsg_loot_start_roll::*;
 pub(crate) mod smsg_meetingstone_setqueue;
 pub use smsg_meetingstone_setqueue::*;
+pub(crate) mod smsg_mountspecial_anim;
+pub use smsg_mountspecial_anim::*;
 pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_notification;
