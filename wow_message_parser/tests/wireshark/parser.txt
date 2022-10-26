@@ -643,7 +643,7 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_GET_MAIL_LIST:
-            ptvcursor_add(ptv, hf_woww_mailbox_guid, 8, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_mailbox, 8, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_GMSURVEY_SUBMIT:
             ptvcursor_add(ptv, hf_woww_survey_id, 4, ENC_LITTLE_ENDIAN);

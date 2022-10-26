@@ -63,6 +63,7 @@ pub mod cmsg_destroyitem_vanilla_tbc_wrath;
 pub mod cmsg_duel_accepted_vanilla_tbc_wrath;
 pub mod cmsg_duel_cancelled_vanilla_tbc_wrath;
 pub mod cmsg_gameobj_use_vanilla_tbc_wrath;
+pub mod cmsg_get_mail_list_vanilla_tbc_wrath;
 pub mod cmsg_gmsurvey_submit_vanilla_tbc_wrath;
 pub mod cmsg_gmticket_deleteticket_vanilla_tbc_wrath;
 pub mod cmsg_gmticket_getticket_vanilla_tbc_wrath;
