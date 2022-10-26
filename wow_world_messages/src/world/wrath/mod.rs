@@ -752,6 +752,8 @@ pub(crate) mod smsg_loot_removed;
 pub use smsg_loot_removed::*;
 pub(crate) mod smsg_loot_roll;
 pub use smsg_loot_roll::*;
+pub(crate) mod smsg_loot_roll_won;
+pub use smsg_loot_roll_won::*;
 pub(crate) mod smsg_name_query_response;
 pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_world;

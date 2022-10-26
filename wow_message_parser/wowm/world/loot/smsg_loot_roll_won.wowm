@@ -1,10 +1,7 @@
-#tag_all versions "1.12";
-
 smsg SMSG_LOOT_ROLL_WON = 0x029F {
     Guid looted_target_guid;
     u32 loot_slot;
-    /* TODO item_id enum */
-    u32 item_id;
+    Item item;
     u32 item_random_suffix {
         comment = "vmangos/mangoszero: not used ?";
     }
@@ -16,5 +13,25 @@ smsg SMSG_LOOT_ROLL_WON = 0x029F {
     RollVote vote {
         comment = "Rolltype related to SMSG_LOOT_ROLL";
     }
+} {
+    versions = "1";
 }
 
+smsg SMSG_LOOT_ROLL_WON = 0x029F {
+    Guid looted_target_guid;
+    u32 loot_slot;
+    Item item;
+    u32 item_random_suffix {
+        comment = "vmangos/mangoszero: not used ?";
+    }
+    u32 item_random_property_id;
+    Guid winning_player_guid;
+    u8 winning_roll {
+        comment = "rollnumber related to SMSG_LOOT_ROLL";
+    }
+    RollVote vote {
+        comment = "Rolltype related to SMSG_LOOT_ROLL";
+    }
+} {
+    versions = "2 3";
+}

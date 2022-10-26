@@ -4,12 +4,12 @@ use crate::world::vanilla::RollVote;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm#L1):
 /// ```text
 /// smsg SMSG_LOOT_ROLL_WON = 0x029F {
 ///     Guid looted_target_guid;
 ///     u32 loot_slot;
-///     u32 item_id;
+///     u32 item;
 ///     u32 item_random_suffix;
 ///     u32 item_random_property_id;
 ///     Guid winning_player_guid;
@@ -20,7 +20,7 @@ use std::io::{Write, Read};
 pub struct SMSG_LOOT_ROLL_WON {
     pub looted_target_guid: Guid,
     pub loot_slot: u32,
-    pub item_id: u32,
+    pub item: u32,
     /// vmangos/mangoszero: not used ?
     ///
     pub item_random_suffix: u32,
@@ -48,8 +48,8 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
 
-        // item_id: u32
-        w.write_all(&self.item_id.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_suffix: u32
         w.write_all(&self.item_random_suffix.to_le_bytes())?;
@@ -79,8 +79,8 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
 
-        // item_id: u32
-        let item_id = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // item_random_suffix: u32
         let item_random_suffix = crate::util::read_u32_le(r)?;
@@ -100,7 +100,7 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         Ok(Self {
             looted_target_guid,
             loot_slot,
-            item_id,
+            item,
             item_random_suffix,
             item_random_property_id,
             winning_player_guid,
