@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1"; /* Not implemeted in TBC/Wrath emus */
 
 smsg SMSG_MEETINGSTONE_COMPLETE = 0x0297 {}
 

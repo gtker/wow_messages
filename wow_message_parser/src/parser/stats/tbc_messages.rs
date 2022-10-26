@@ -646,7 +646,11 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_MEETINGSTONE_CHEAT", 0x294),
     Data::new("SMSG_MEETINGSTONE_SETQUEUE", 0x295),
     Data::new("CMSG_MEETINGSTONE_INFO", 0x296),
-    Data::new("SMSG_MEETINGSTONE_COMPLETE", 0x297),
+    Data::with_reason(
+        "SMSG_MEETINGSTONE_COMPLETE",
+        0x297,
+        "Not implemented in any emus",
+    ),
     Data::new("SMSG_MEETINGSTONE_IN_PROGRESS", 0x298),
     Data::new("SMSG_MEETINGSTONE_MEMBER_ADDED", 0x299),
     Data::new("CMSG_GMTICKETSYSTEM_TOGGLE", 0x29A),
