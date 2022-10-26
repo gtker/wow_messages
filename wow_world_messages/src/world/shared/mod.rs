@@ -178,6 +178,7 @@ pub mod log_format_vanilla_tbc_wrath;
 pub mod logout_result_vanilla_tbc_wrath;
 pub mod logout_speed_vanilla_tbc_wrath;
 pub mod mail_item_tbc_wrath;
+pub mod meeting_stone_status_vanilla_tbc;
 pub mod msg_auction_hello_client_vanilla_tbc_wrath;
 pub mod msg_auction_hello_server_vanilla_tbc;
 pub mod msg_battleground_player_positions_client_vanilla_tbc_wrath;

@@ -5505,6 +5505,7 @@ Used in:
 * [GuildMember](guildmember.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_EXPLORATION_EXPERIENCE](smsg_exploration_experience.md)
+* [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 
 # Area

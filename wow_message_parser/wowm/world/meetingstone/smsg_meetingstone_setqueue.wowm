@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+/* Not implemented in wrath */
 
 enum MeetingStoneStatus : u8 {
     LEAVE_QUEUE = 0;
@@ -7,10 +7,14 @@ enum MeetingStoneStatus : u8 {
     PARTY_MEMBER_REMOVED_PARTY_REMOVED = 3;
     LOOKING_FOR_NEW_PARTY_IN_QUEUE = 4;
     NONE = 5;
+} {
+    versions = "1 2";
 }
 
 smsg SMSG_MEETINGSTONE_SETQUEUE = 0x0295 {
     Area area;
     MeetingStoneStatus status;
+} {
+    paste_versions = "1.12 2.4.3";
 }
 

@@ -1,6 +1,6 @@
 # MeetingStoneStatus
 
-## Client Version 1.12
+## Client Version 1, Client Version 2
 
 ### Wowm Representation
 
@@ -29,5 +29,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `NONE` | 5 (0x05) |  |  |
 
 Used in:
+* [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)
 * [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)
 
