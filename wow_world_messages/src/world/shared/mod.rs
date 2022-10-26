@@ -105,6 +105,7 @@ pub mod cmsg_mail_create_text_item_vanilla_tbc;
 pub mod cmsg_mail_delete_tbc_wrath;
 pub mod cmsg_mail_mark_as_read_vanilla_tbc_wrath;
 pub mod cmsg_mail_return_to_sender_vanilla_tbc_wrath;
+pub mod cmsg_mail_take_item_tbc_wrath;
 pub mod cmsg_name_query_vanilla_tbc_wrath;
 pub mod cmsg_next_cinematic_camera_vanilla_tbc_wrath;
 pub mod cmsg_offer_petition_tbc_wrath;
