@@ -153,6 +153,7 @@ use crate::world::wrath::CMSG_GUILD_ADD_RANK;
 use crate::world::wrath::CMSG_GUILD_DEL_RANK;
 use crate::world::wrath::CMSG_GUILD_SET_PUBLIC_NOTE;
 use crate::world::wrath::CMSG_GUILD_SET_OFFICER_NOTE;
+use crate::world::wrath::CMSG_SEND_MAIL;
 use crate::world::wrath::CMSG_GET_MAIL_LIST;
 use crate::world::wrath::CMSG_BATTLEFIELD_LIST;
 use crate::world::wrath::CMSG_MAIL_TAKE_MONEY;
@@ -349,6 +350,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GUILD_DEL_RANK(CMSG_GUILD_DEL_RANK),
     CMSG_GUILD_SET_PUBLIC_NOTE(CMSG_GUILD_SET_PUBLIC_NOTE),
     CMSG_GUILD_SET_OFFICER_NOTE(CMSG_GUILD_SET_OFFICER_NOTE),
+    CMSG_SEND_MAIL(CMSG_SEND_MAIL),
     CMSG_GET_MAIL_LIST(CMSG_GET_MAIL_LIST),
     CMSG_BATTLEFIELD_LIST(CMSG_BATTLEFIELD_LIST),
     CMSG_MAIL_TAKE_MONEY(CMSG_MAIL_TAKE_MONEY),
@@ -547,6 +549,7 @@ impl ClientOpcodeMessage {
             0x0233 => Ok(Self::CMSG_GUILD_DEL_RANK(<CMSG_GUILD_DEL_RANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0233, size: body_size, io, } } else { a } })?)),
             0x0234 => Ok(Self::CMSG_GUILD_SET_PUBLIC_NOTE(<CMSG_GUILD_SET_PUBLIC_NOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0234, size: body_size, io, } } else { a } })?)),
             0x0235 => Ok(Self::CMSG_GUILD_SET_OFFICER_NOTE(<CMSG_GUILD_SET_OFFICER_NOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0235, size: body_size, io, } } else { a } })?)),
+            0x0238 => Ok(Self::CMSG_SEND_MAIL(<CMSG_SEND_MAIL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0238, size: body_size, io, } } else { a } })?)),
             0x023A => Ok(Self::CMSG_GET_MAIL_LIST(<CMSG_GET_MAIL_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023A, size: body_size, io, } } else { a } })?)),
             0x023C => Ok(Self::CMSG_BATTLEFIELD_LIST(<CMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023C, size: body_size, io, } } else { a } })?)),
             0x0245 => Ok(Self::CMSG_MAIL_TAKE_MONEY(<CMSG_MAIL_TAKE_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0245, size: body_size, io, } } else { a } })?)),
@@ -813,6 +816,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_DEL_RANK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SEND_MAIL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GET_MAIL_LIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MAIL_TAKE_MONEY(c) => c.write_encrypted_client(w, e),
@@ -1012,6 +1016,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_DEL_RANK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SEND_MAIL(c) => c.write_unencrypted_client(w),
             Self::CMSG_GET_MAIL_LIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_MAIL_TAKE_MONEY(c) => c.write_unencrypted_client(w),
@@ -1211,6 +1216,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_DEL_RANK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SEND_MAIL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_TAKE_MONEY(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1410,6 +1416,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_DEL_RANK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SEND_MAIL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_TAKE_MONEY(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1609,6 +1616,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_DEL_RANK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SEND_MAIL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_TAKE_MONEY(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1808,6 +1816,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_DEL_RANK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SEND_MAIL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GET_MAIL_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_TAKE_MONEY(c) => c.astd_write_unencrypted_client(w).await,
@@ -2018,6 +2027,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GUILD_DEL_RANK(_) => "CMSG_GUILD_DEL_RANK",
             ClientOpcodeMessage::CMSG_GUILD_SET_PUBLIC_NOTE(_) => "CMSG_GUILD_SET_PUBLIC_NOTE",
             ClientOpcodeMessage::CMSG_GUILD_SET_OFFICER_NOTE(_) => "CMSG_GUILD_SET_OFFICER_NOTE",
+            ClientOpcodeMessage::CMSG_SEND_MAIL(_) => "CMSG_SEND_MAIL",
             ClientOpcodeMessage::CMSG_GET_MAIL_LIST(_) => "CMSG_GET_MAIL_LIST",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_LIST(_) => "CMSG_BATTLEFIELD_LIST",
             ClientOpcodeMessage::CMSG_MAIL_TAKE_MONEY(_) => "CMSG_MAIL_TAKE_MONEY",
@@ -2937,6 +2947,12 @@ impl From<CMSG_GUILD_SET_PUBLIC_NOTE> for ClientOpcodeMessage {
 impl From<CMSG_GUILD_SET_OFFICER_NOTE> for ClientOpcodeMessage {
     fn from(c: CMSG_GUILD_SET_OFFICER_NOTE) -> Self {
         Self::CMSG_GUILD_SET_OFFICER_NOTE(c)
+    }
+}
+
+impl From<CMSG_SEND_MAIL> for ClientOpcodeMessage {
+    fn from(c: CMSG_SEND_MAIL) -> Self {
+        Self::CMSG_SEND_MAIL(c)
     }
 }
 

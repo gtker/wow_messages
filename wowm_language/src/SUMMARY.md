@@ -603,6 +603,7 @@
 - [MSG_TALENT_WIPE_CONFIRM_Client](docs/msg_talent_wipe_confirm_client.md)
 - [MSG_TALENT_WIPE_CONFIRM_Server](docs/msg_talent_wipe_confirm_server.md)
 - [Mail](docs/mail.md)
+- [MailItem](docs/mailitem.md)
 - [MovementBlock](docs/movementblock.md)
 - [MovementInfo](docs/movementinfo.md)
 - [NpcTextUpdate](docs/npctextupdate.md)
