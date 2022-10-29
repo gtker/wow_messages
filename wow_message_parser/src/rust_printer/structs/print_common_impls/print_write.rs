@@ -149,9 +149,7 @@ pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &s
         s.wln("w.write_all(&(self.size_uncompressed() as u32).to_le_bytes())?;");
         s.newline();
 
-        s.wln(format!(
-            "let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());"
-        )); 
+        s.wln("let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());"); 
         s.newline();
     }
 
