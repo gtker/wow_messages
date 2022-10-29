@@ -843,9 +843,7 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
         s.wln("r.read_exact(&mut decompressed_size);"); 
         s.newline();
 
-        s.wln(format!(
-            "let mut r = &mut flate2::read::ZlibDecoder::new(r);"
-        )); 
+        s.wln("let mut r = &mut flate2::read::ZlibDecoder::new(r);"); 
         s.newline();
     }
 
