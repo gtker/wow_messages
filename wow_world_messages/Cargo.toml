@@ -29,6 +29,8 @@ optional = true
 [dependencies.flate2]
 version = "1.0.24"
 optional = false
+default-features = false
+features = ["zlib"]
 
 [dependencies.tokio]
 version = "1"
