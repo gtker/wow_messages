@@ -3,6 +3,8 @@ use crate::world::vanilla::Object;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
+/// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::world::vanilla::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm#L3):
 /// ```text
 /// smsg SMSG_COMPRESSED_UPDATE_OBJECT = 0x01F6 {
@@ -111,7 +113,7 @@ mod test {
          0x18, 0xA6, 0x2D, 0x9D, 0xB1, 0x15, 0xD5, 0x6D, 0x40, 0x35, 0x70, 0xD3,
          0x20, 0x6C, 0xEC, 0x6E, 0x03, 0x00, 0x36, 0x4C, 0x30, 0x21, ];
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 13.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_COMPRESSED_UPDATE_OBJECT0() {
@@ -279,7 +281,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 13.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_COMPRESSED_UPDATE_OBJECT0() {
@@ -447,7 +449,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 13.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_COMPRESSED_UPDATE_OBJECT0() {

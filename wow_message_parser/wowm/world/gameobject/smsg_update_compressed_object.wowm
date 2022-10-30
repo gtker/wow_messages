@@ -7,6 +7,7 @@ smsg SMSG_COMPRESSED_UPDATE_OBJECT = 0x1F6 {
 } {
     versions = "1.12";
     compressed = "true";
+    comment = "Compressed version of [SMSG_UPDATE_OBJECT]. Has the same fields when uncompressed";
 }
 
 test SMSG_COMPRESSED_UPDATE_OBJECT {

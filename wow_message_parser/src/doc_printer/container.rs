@@ -436,20 +436,17 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
 
         if e.tags().compressed() {
             // All fully compressed messages have a u32 at the start with the decompressed size.
-            let _decompressed_size: Vec<&u8> = bytes.clone().take(4).collect();
+            let decompressed_size = bytes.clone().take(4);
+            s.bytes(decompressed_size);
+            s.w("// uncompressed size");
+            s.newline();
 
-            let mut decoded_bytes = Vec::new();
-            let encoded_bytes: Vec<u8> = bytes.skip(4).cloned().collect();
-            let mut decoder = flate2::read::ZlibDecoder::new(encoded_bytes.as_slice());
-            decoder
-                .read_to_end(&mut decoded_bytes)
-                .expect("Failed to decode ZLib compressed field.");
-
-            let mut bytes = decoded_bytes.iter();
-
-            for m in e.members() {
-                print_container_example_member(s, e, m, &mut bytes, &mut values, o, e.tags(), "");
+            // The rest of the message is ZLib compressed.
+            for b in bytes.skip(4) {
+                s.w_break_at(format!("{}, ", b));
             }
+            s.w("// compressed data");
+            s.newline();
         } else {
             for m in e.members() {
                 print_container_example_member(s, e, m, &mut bytes, &mut values, o, e.tags(), "");
