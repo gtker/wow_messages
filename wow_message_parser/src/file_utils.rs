@@ -142,7 +142,7 @@ impl ModFiles {
         name: &str,
         version: &MajorWorldVersion,
         tags: &ObjectTags,
-        file_dir: &PathBuf,
+        file_dir: PathBuf,
     ) {
         if tags.is_in_base() {
             self.add_or_append_file(
@@ -173,7 +173,7 @@ impl ModFiles {
         );
 
         self.add_or_append_file(
-            file_dir.clone(),
+            file_dir,
             (
                 format!("crate::helper::{}", major_version_to_string(version)),
                 SubmoduleLocation::PubUseOnly,
@@ -189,10 +189,10 @@ impl ModFiles {
     ) {
         let file_dir = world_directory().join(major_version_to_string(version));
 
-        self.add_everything_but_world_file(name, version, tags, &file_dir);
+        self.add_everything_but_world_file(name, version, tags, file_dir.clone());
 
         self.add_or_append_file(
-            file_dir.clone(),
+            file_dir,
             (get_module_name(name), SubmoduleLocation::PubUseInternal),
         );
     }
@@ -267,9 +267,9 @@ impl ModFiles {
 
         let file_dir = world_directory().join(major_version_to_string(version));
 
-        self.add_everything_but_world_file(name, version, tags, &file_dir);
+        self.add_everything_but_world_file(name, version, tags, file_dir.clone());
 
-        self.write_specific_line_to_file(world_s.to_string(), file_dir.clone());
+        self.write_specific_line_to_file(world_s.to_string(), file_dir);
 
         create_and_overwrite_if_not_same_contents(world_s, &world_path);
         create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
