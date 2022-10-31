@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! wow_login_messages = { version = "0.1", features = ["sync"] }
+//! wow_login_messages = { version = "0.2", features = ["sync"] }
 //! ```
 //!
 //! Or add it with [cargo edit](https://github.com/killercup/cargo-edit):
@@ -78,7 +78,7 @@
 //! seems to have most messages in a library format.
 //!
 
-#![doc(html_root_url = "https://docs.rs/wow_login_messages/0.1.0")]
+#![doc(html_root_url = "https://docs.rs/wow_login_messages/0.2.0")]
 #![forbid(unsafe_code)]
 #![deny(
     clippy::complexity,

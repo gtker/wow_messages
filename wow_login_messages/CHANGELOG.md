@@ -11,6 +11,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.2.0] - 2022-10-31
+
+### Added
+
 * Additional getters and setters for `CMD_AUTH_LOGON_CHALLENGE_ServerSecurityFlag`, `CMD_AUTH_LOGON_PROOF_ClientSecurityFlag`, and `RealmRealmFlag`. These types were not really usable before these changes.
 * `tokio` and `async-std` support. These are activated through the `tokio` and `async-std` feature flags.
 
@@ -28,8 +42,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: Composite type names are now separated by an underscore instead of nothing. This should improve readability.
 * BREAKING: Renaming `login_result` variables to just `result` in order to be consistent with other messages.
 
-### Deprecated
-
 ### Removed
 
 * BREAKING: `SecurifyFlag` enum. This was never used except in the `CMD_AUTH_LOGON_PROOF_ClientSecurityFlag` version.
@@ -38,14 +50,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `ClientOpcode` and `ServerOpcode` for all versions.
 This functionality exposes a difference between the opcode and the body in a way that is inconsistent with the abstractions of the crate.
 
-### Fixed
-
-### Security
-
 ## [0.1.0] - 2022-04-03
 
 ### Added
 
 * Initial release. This is very WIP and things are not guaranteed to be documented or actually work correctly.
 
+[0.2.0]: https://github.com/gtker/wow_messages/releases/tag/v0.2.0
 [0.1.0]: https://github.com/gtker/wow_messages/tree/505efadbe332dee2bdd5d321242b7e5d2565d841
