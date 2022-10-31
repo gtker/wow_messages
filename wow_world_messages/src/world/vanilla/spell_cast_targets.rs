@@ -335,6 +335,23 @@ pub struct SpellCastTargets_SpellCastTargetFlags {
 }
 
 impl SpellCastTargets_SpellCastTargetFlags {
+    pub const fn new(inner: u16, unit: Option<SpellCastTargets_SpellCastTargetFlags_Unit>,item: Option<SpellCastTargets_SpellCastTargetFlags_Item>,source_location: Option<SpellCastTargets_SpellCastTargetFlags_SourceLocation>,dest_location: Option<SpellCastTargets_SpellCastTargetFlags_DestLocation>,unit_enemy: Option<SpellCastTargets_SpellCastTargetFlags_UnitEnemy>,corpse_enemy: Option<SpellCastTargets_SpellCastTargetFlags_CorpseEnemy>,gameobject: Option<SpellCastTargets_SpellCastTargetFlags_Gameobject>,trade_item: Option<SpellCastTargets_SpellCastTargetFlags_TradeItem>,string: Option<SpellCastTargets_SpellCastTargetFlags_String>,locked: Option<SpellCastTargets_SpellCastTargetFlags_Locked>,corpse_ally: Option<SpellCastTargets_SpellCastTargetFlags_CorpseAlly>,) -> Self {
+        Self {
+            inner,
+            unit, 
+            item, 
+            source_location, 
+            dest_location, 
+            unit_enemy, 
+            corpse_enemy, 
+            gameobject, 
+            trade_item, 
+            string, 
+            locked, 
+            corpse_ally, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

@@ -177,6 +177,13 @@ pub struct SMSG_SPELL_GO_CastFlags {
 }
 
 impl SMSG_SPELL_GO_CastFlags {
+    pub const fn new(inner: u16, ammo: Option<SMSG_SPELL_GO_CastFlags_Ammo>,) -> Self {
+        Self {
+            inner,
+            ammo, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

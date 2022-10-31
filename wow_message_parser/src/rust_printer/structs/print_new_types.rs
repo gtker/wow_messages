@@ -62,6 +62,39 @@ fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
+    use std::fmt::Write;
+
+    let mut function_name = format!("new(inner: {ty}, ", ty = rd.int_ty().rust_str());
+
+    for enumerator in rd.enumerators() {
+        if !enumerator.should_not_be_in_flag_types() {
+            write!(
+                function_name,
+                "{variable_name}: Option<{ty_name}>,",
+                variable_name = enumerator.name().to_lowercase(),
+                ty_name = get_new_flag_type_name(rd.ty_name(), enumerator.rust_name())
+            )
+            .unwrap();
+        }
+    }
+
+    write!(function_name, ")").unwrap();
+
+    s.funcn_pub_const(function_name, "Self", |s| {
+        s.body("Self", |s| {
+            s.wln("inner,");
+
+            for enumerator in rd.enumerators() {
+                if !enumerator.should_not_be_in_flag_types() {
+                    s.wln(format!(
+                        "{variable_name}, ",
+                        variable_name = enumerator.name().to_lowercase(),
+                    ));
+                }
+            }
+        });
+    });
+
     s.funcn_pub_const("empty()", "Self", |s| {
         s.body("Self", |s| {
             s.wln("inner: 0,");

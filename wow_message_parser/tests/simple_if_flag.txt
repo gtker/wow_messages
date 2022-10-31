@@ -73,6 +73,13 @@ pub struct SimpleIfFlag_SimpleFlag {
 }
 
 impl SimpleIfFlag_SimpleFlag {
+    pub const fn new(inner: u8, zero: Option<SimpleIfFlag_SimpleFlag_Zero>,) -> Self {
+        Self {
+            inner,
+            zero, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

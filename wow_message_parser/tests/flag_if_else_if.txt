@@ -164,6 +164,13 @@ pub struct FlagIfElseIf_SimpleFlag {
 }
 
 impl FlagIfElseIf_SimpleFlag {
+    pub const fn new(inner: u8, one: Option<FlagIfElseIf_SimpleFlag_One>,) -> Self {
+        Self {
+            inner,
+            one, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -306,6 +313,14 @@ pub struct FlagIfElseIf_UpdateFlag {
 }
 
 impl FlagIfElseIf_UpdateFlag {
+    pub const fn new(inner: u8, one_if: Option<FlagIfElseIf_UpdateFlag_OneIf>,eight_if: Option<FlagIfElseIf_UpdateFlag_EightIf>,) -> Self {
+        Self {
+            inner,
+            one_if, 
+            eight_if, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

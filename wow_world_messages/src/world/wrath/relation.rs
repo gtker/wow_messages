@@ -214,6 +214,13 @@ pub struct Relation_RelationType {
 }
 
 impl Relation_RelationType {
+    pub const fn new(inner: u32, friend: Option<Relation_RelationType_Friend>,) -> Self {
+        Self {
+            inner,
+            friend, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

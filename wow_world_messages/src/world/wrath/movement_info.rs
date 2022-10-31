@@ -273,6 +273,16 @@ pub struct MovementInfo_MovementFlags {
 }
 
 impl MovementInfo_MovementFlags {
+    pub const fn new(inner: u32, on_transport: Option<MovementInfo_MovementFlags_OnTransport>,falling: Option<MovementInfo_MovementFlags_Falling>,swimming: Option<MovementInfo_MovementFlags_Swimming>,spline_elevation: Option<MovementInfo_MovementFlags_SplineElevation>,) -> Self {
+        Self {
+            inner,
+            on_transport, 
+            falling, 
+            swimming, 
+            spline_elevation, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

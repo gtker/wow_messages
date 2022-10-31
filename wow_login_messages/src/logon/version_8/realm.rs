@@ -291,6 +291,13 @@ pub struct Realm_RealmFlag {
 }
 
 impl Realm_RealmFlag {
+    pub const fn new(inner: u8, specify_build: Option<Realm_RealmFlag_SpecifyBuild>,) -> Self {
+        Self {
+            inner,
+            specify_build, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

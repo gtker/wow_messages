@@ -377,6 +377,17 @@ pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo {
 }
 
 impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
+    pub const fn new(inner: u32, unk1: Option<SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1>,all_absorb: Option<SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb>,all_resist: Option<SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist>,block: Option<SMSG_ATTACKERSTATEUPDATE_HitInfo_Block>,unk19: Option<SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19>,) -> Self {
+        Self {
+            inner,
+            unk1, 
+            all_absorb, 
+            all_resist, 
+            block, 
+            unk19, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

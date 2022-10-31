@@ -470,6 +470,15 @@ pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
+    pub const fn new(inner: u8, pin: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin>,matrix_card: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard>,authenticator: Option<CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator>,) -> Self {
+        Self {
+            inner,
+            pin, 
+            matrix_card, 
+            authenticator, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

@@ -580,6 +580,13 @@ pub struct MovementBlock_SplineFlag {
 }
 
 impl MovementBlock_SplineFlag {
+    pub const fn new(inner: u32, final_angle: Option<MovementBlock_SplineFlag_FinalAngle>,) -> Self {
+        Self {
+            inner,
+            final_angle, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -1253,6 +1260,17 @@ pub struct MovementBlock_MovementFlags {
 }
 
 impl MovementBlock_MovementFlags {
+    pub const fn new(inner: u32, on_transport: Option<MovementBlock_MovementFlags_OnTransport>,jumping: Option<MovementBlock_MovementFlags_Jumping>,swimming: Option<MovementBlock_MovementFlags_Swimming>,spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,spline_elevation: Option<MovementBlock_MovementFlags_SplineElevation>,) -> Self {
+        Self {
+            inner,
+            on_transport, 
+            jumping, 
+            swimming, 
+            spline_enabled, 
+            spline_elevation, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,
@@ -2084,6 +2102,17 @@ pub struct MovementBlock_UpdateFlag {
 }
 
 impl MovementBlock_UpdateFlag {
+    pub const fn new(inner: u8, transport: Option<MovementBlock_UpdateFlag_Transport>,melee_attacking: Option<MovementBlock_UpdateFlag_MeleeAttacking>,high_guid: Option<MovementBlock_UpdateFlag_HighGuid>,all: Option<MovementBlock_UpdateFlag_All>,living: Option<MovementBlock_UpdateFlag_Living>,) -> Self {
+        Self {
+            inner,
+            transport, 
+            melee_attacking, 
+            high_guid, 
+            all, 
+            living, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,

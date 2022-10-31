@@ -497,6 +497,30 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
+    pub const fn new(inner: u32, flag_status: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagStatus>,flag_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurHp>,flag_max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxHp>,flag_power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPowerType>,flag_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagCurPower>,flag_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagMaxPower>,flag_level: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagLevel>,flag_zone: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagZone>,flag_position: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPosition>,flag_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagAuras>,flag_pet_name: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetName>,flag_pet_model_id: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetModelId>,flag_pet_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurHp>,flag_pet_max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxHp>,flag_pet_power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetPowerType>,flag_pet_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetCurPower>,flag_pet_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetMaxPower>,flag_pet_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_FlagPetAuras>,) -> Self {
+        Self {
+            inner,
+            flag_status, 
+            flag_cur_hp, 
+            flag_max_hp, 
+            flag_power_type, 
+            flag_cur_power, 
+            flag_max_power, 
+            flag_level, 
+            flag_zone, 
+            flag_position, 
+            flag_auras, 
+            flag_pet_name, 
+            flag_pet_model_id, 
+            flag_pet_cur_hp, 
+            flag_pet_max_hp, 
+            flag_pet_power_type, 
+            flag_pet_cur_power, 
+            flag_pet_max_power, 
+            flag_pet_auras, 
+        }
+    }
+
     pub const fn empty() -> Self {
         Self {
             inner: 0,
