@@ -13,7 +13,7 @@ use std::convert::{TryFrom, TryInto};
 
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub(crate) enum PlayerChatTag {
+pub enum PlayerChatTag {
     None,
     Afk,
     Dnd,

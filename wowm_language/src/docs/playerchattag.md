@@ -60,4 +60,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `DEVELOPER` | 5 (0x05) |  |  |
 
 Used in:
+* [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
+* [SMSG_MESSAGECHAT](smsg_messagechat.md)
 

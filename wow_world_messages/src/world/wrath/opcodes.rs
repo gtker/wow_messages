@@ -3340,6 +3340,7 @@ use crate::world::wrath::SMSG_GUILD_INVITE;
 use crate::world::wrath::SMSG_GUILD_INFO;
 use crate::world::wrath::SMSG_GUILD_EVENT;
 use crate::world::wrath::SMSG_GUILD_COMMAND_RESULT;
+use crate::world::wrath::SMSG_MESSAGECHAT;
 use crate::world::wrath::SMSG_CHANNEL_NOTIFY;
 use crate::world::wrath::SMSG_CHANNEL_LIST;
 use crate::world::wrath::SMSG_UPDATE_OBJECT;
@@ -3458,6 +3459,7 @@ use crate::world::wrath::SMSG_GM_TICKET_STATUS_UPDATE;
 use crate::world::wrath::SMSG_DEFENSE_MESSAGE;
 use crate::world::wrath::SMSG_REALM_SPLIT;
 use crate::world::wrath::SMSG_TIME_SYNC_REQ;
+use crate::world::wrath::SMSG_GM_MESSAGECHAT;
 use crate::world::wrath::SMSG_FEATURE_SYSTEM_STATUS;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
@@ -3510,6 +3512,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GUILD_INFO(SMSG_GUILD_INFO),
     SMSG_GUILD_EVENT(SMSG_GUILD_EVENT),
     SMSG_GUILD_COMMAND_RESULT(SMSG_GUILD_COMMAND_RESULT),
+    SMSG_MESSAGECHAT(SMSG_MESSAGECHAT),
     SMSG_CHANNEL_NOTIFY(SMSG_CHANNEL_NOTIFY),
     SMSG_CHANNEL_LIST(SMSG_CHANNEL_LIST),
     SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
@@ -3628,6 +3631,7 @@ pub enum ServerOpcodeMessage {
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
+    SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
     SMSG_FEATURE_SYSTEM_STATUS(SMSG_FEATURE_SYSTEM_STATUS),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
@@ -3682,6 +3686,7 @@ impl ServerOpcodeMessage {
             0x0088 => Ok(Self::SMSG_GUILD_INFO(<SMSG_GUILD_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0088, size: body_size, io, } } else { a } })?)),
             0x0092 => Ok(Self::SMSG_GUILD_EVENT(<SMSG_GUILD_EVENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0092, size: body_size, io, } } else { a } })?)),
             0x0093 => Ok(Self::SMSG_GUILD_COMMAND_RESULT(<SMSG_GUILD_COMMAND_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0093, size: body_size, io, } } else { a } })?)),
+            0x0096 => Ok(Self::SMSG_MESSAGECHAT(<SMSG_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0096, size: body_size, io, } } else { a } })?)),
             0x0099 => Ok(Self::SMSG_CHANNEL_NOTIFY(<SMSG_CHANNEL_NOTIFY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0099, size: body_size, io, } } else { a } })?)),
             0x009B => Ok(Self::SMSG_CHANNEL_LIST(<SMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x009B, size: body_size, io, } } else { a } })?)),
             0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00A9, size: body_size, io, } } else { a } })?)),
@@ -3800,6 +3805,7 @@ impl ServerOpcodeMessage {
             0x033A => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033A, size: body_size, io, } } else { a } })?)),
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
+            0x03B3 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B3, size: body_size, io, } } else { a } })?)),
             0x03C9 => Ok(Self::SMSG_FEATURE_SYSTEM_STATUS(<SMSG_FEATURE_SYSTEM_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C9, size: body_size, io, } } else { a } })?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
@@ -4003,6 +4009,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_INFO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_EVENT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_NOTIFY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
@@ -4121,6 +4128,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
@@ -4176,6 +4184,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_INFO(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_EVENT(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MESSAGECHAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_NOTIFY(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
@@ -4294,6 +4303,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
@@ -4349,6 +4359,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_EVENT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4467,6 +4478,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4522,6 +4534,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_EVENT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4640,6 +4653,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4695,6 +4709,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_EVENT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4813,6 +4828,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4868,6 +4884,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_EVENT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
@@ -4986,6 +5003,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
@@ -5043,6 +5061,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GUILD_INFO(_) => "SMSG_GUILD_INFO",
             ServerOpcodeMessage::SMSG_GUILD_EVENT(_) => "SMSG_GUILD_EVENT",
             ServerOpcodeMessage::SMSG_GUILD_COMMAND_RESULT(_) => "SMSG_GUILD_COMMAND_RESULT",
+            ServerOpcodeMessage::SMSG_MESSAGECHAT(_) => "SMSG_MESSAGECHAT",
             ServerOpcodeMessage::SMSG_CHANNEL_NOTIFY(_) => "SMSG_CHANNEL_NOTIFY",
             ServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => "SMSG_CHANNEL_LIST",
             ServerOpcodeMessage::SMSG_UPDATE_OBJECT(_) => "SMSG_UPDATE_OBJECT",
@@ -5161,6 +5180,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => "SMSG_DEFENSE_MESSAGE",
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
+            ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
             ServerOpcodeMessage::SMSG_FEATURE_SYSTEM_STATUS(_) => "SMSG_FEATURE_SYSTEM_STATUS",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
@@ -5436,6 +5456,12 @@ impl From<SMSG_GUILD_EVENT> for ServerOpcodeMessage {
 impl From<SMSG_GUILD_COMMAND_RESULT> for ServerOpcodeMessage {
     fn from(c: SMSG_GUILD_COMMAND_RESULT) -> Self {
         Self::SMSG_GUILD_COMMAND_RESULT(c)
+    }
+}
+
+impl From<SMSG_MESSAGECHAT> for ServerOpcodeMessage {
+    fn from(c: SMSG_MESSAGECHAT) -> Self {
+        Self::SMSG_MESSAGECHAT(c)
     }
 }
 
@@ -6144,6 +6170,12 @@ impl From<SMSG_REALM_SPLIT> for ServerOpcodeMessage {
 impl From<SMSG_TIME_SYNC_REQ> for ServerOpcodeMessage {
     fn from(c: SMSG_TIME_SYNC_REQ) -> Self {
         Self::SMSG_TIME_SYNC_REQ(c)
+    }
+}
+
+impl From<SMSG_GM_MESSAGECHAT> for ServerOpcodeMessage {
+    fn from(c: SMSG_GM_MESSAGECHAT) -> Self {
+        Self::SMSG_GM_MESSAGECHAT(c)
     }
 }
 

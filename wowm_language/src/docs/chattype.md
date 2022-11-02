@@ -331,4 +331,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
+* [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
+* [SMSG_MESSAGECHAT](smsg_messagechat.md)
 

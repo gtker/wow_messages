@@ -111,5 +111,7 @@ Used in:
 * [NpcTextUpdate](npctextupdate.md)
 * [NpcTextUpdate](npctextupdate.md)
 * [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
+* [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
+* [SMSG_MESSAGECHAT](smsg_messagechat.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 
