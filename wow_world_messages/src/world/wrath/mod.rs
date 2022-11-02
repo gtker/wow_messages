@@ -216,6 +216,8 @@ pub(crate) mod player_chat_tag;
 pub use player_chat_tag::*;
 pub(crate) mod power;
 pub use power::*;
+pub use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
+
 pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 
 pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
@@ -597,6 +599,8 @@ pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 pub use crate::shared::roll_vote_tbc_wrath::RollVote;
 
 pub use crate::shared::sheath_state_vanilla_tbc_wrath::SheathState;
+
+pub use crate::shared::smsg_activatetaxireply_vanilla_tbc_wrath::SMSG_ACTIVATETAXIREPLY;
 
 pub use crate::shared::smsg_ai_reaction_vanilla_tbc_wrath::SMSG_AI_REACTION;
 

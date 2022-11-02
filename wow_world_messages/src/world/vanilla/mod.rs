@@ -1,5 +1,3 @@
-pub(crate) mod activate_taxi_reply;
-pub use activate_taxi_reply::*;
 pub(crate) mod addon;
 pub use addon::*;
 pub(crate) mod addon_type;
@@ -554,6 +552,8 @@ pub(crate) mod petition_showlist;
 pub use petition_showlist::*;
 pub(crate) mod power_type;
 pub use power_type::*;
+pub use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
+
 pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 
 pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
@@ -924,6 +924,8 @@ pub use crate::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 
 pub use crate::shared::smsg_account_data_times_vanilla_tbc::SMSG_ACCOUNT_DATA_TIMES;
 
+pub use crate::shared::smsg_activatetaxireply_vanilla_tbc_wrath::SMSG_ACTIVATETAXIREPLY;
+
 pub use crate::shared::smsg_ai_reaction_vanilla_tbc_wrath::SMSG_AI_REACTION;
 
 pub use crate::shared::smsg_area_trigger_message_vanilla_tbc_wrath::SMSG_AREA_TRIGGER_MESSAGE;
@@ -1144,8 +1146,6 @@ pub(crate) mod simple_spell_cast_result;
 pub use simple_spell_cast_result::*;
 pub(crate) mod smsg_action_buttons;
 pub use smsg_action_buttons::*;
-pub(crate) mod smsg_activatetaxireply;
-pub use smsg_activatetaxireply::*;
 pub(crate) mod smsg_addon_info;
 pub use smsg_addon_info::*;
 pub(crate) mod smsg_area_spirit_healer_time;

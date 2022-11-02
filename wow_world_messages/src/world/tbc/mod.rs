@@ -200,6 +200,8 @@ pub use object::*;
 pub(crate) mod object_type;
 pub use object_type::*;
 pub mod opcodes;
+pub use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
+
 pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 
 pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
@@ -629,6 +631,8 @@ pub use crate::shared::server_message_type_vanilla_tbc::ServerMessageType;
 pub use crate::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 
 pub use crate::shared::smsg_account_data_times_vanilla_tbc::SMSG_ACCOUNT_DATA_TIMES;
+
+pub use crate::shared::smsg_activatetaxireply_vanilla_tbc_wrath::SMSG_ACTIVATETAXIREPLY;
 
 pub use crate::shared::smsg_ai_reaction_vanilla_tbc_wrath::SMSG_AI_REACTION;
 
