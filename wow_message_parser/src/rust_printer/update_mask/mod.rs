@@ -275,17 +275,11 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
         m.ty.parameter_str(),
     ));
 
-    s.wln(format!("self.header_set({});", m.offset));
     match m.ty {
         UfType::Guid => {
-            s.wln(format!("self.header_set({});", m.offset + 1));
-
+            s.wln(format!("self.header_set({}, v.guid() as u32);", m.offset));
             s.wln(format!(
-                "self.values.insert({}, v.guid() as u32);",
-                m.offset
-            ));
-            s.wln(format!(
-                "self.values.insert({}, (v.guid() >> 32) as u32);",
+                "self.header_set({}, (v.guid() >> 32) as u32);",
                 m.offset + 1
             ));
         }
@@ -321,7 +315,7 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
                 _ => unreachable!("Guid has already been checked for in outer match"),
             };
 
-            s.wln(format!("self.values.insert({}, {});", m.offset, value));
+            s.wln(format!("self.header_set({}, {});", m.offset, value));
         }
     }
 
@@ -336,17 +330,11 @@ fn print_builder_setter(s: &mut Writer, m: &MemberType) {
         m.ty.parameter_str(),
     ));
 
-    s.wln(format!("self.header_set({});", m.offset));
     match m.ty {
         UfType::Guid => {
-            s.wln(format!("self.header_set({});", m.offset + 1));
-
+            s.wln(format!("self.header_set({}, v.guid() as u32);", m.offset));
             s.wln(format!(
-                "self.values.insert({}, v.guid() as u32);",
-                m.offset
-            ));
-            s.wln(format!(
-                "self.values.insert({}, (v.guid() >> 32) as u32);",
+                "self.header_set({}, (v.guid() >> 32) as u32);",
                 m.offset + 1
             ));
         }
@@ -382,7 +370,7 @@ fn print_builder_setter(s: &mut Writer, m: &MemberType) {
                 UfType::Guid => unreachable!("Guid has already been checked for in outer match"),
             };
 
-            s.wln(format!("self.values.insert({}, {});", m.offset, value));
+            s.wln(format!("self.header_set({}, {});", m.offset, value));
         }
     }
 

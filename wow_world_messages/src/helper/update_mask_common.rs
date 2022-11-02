@@ -118,7 +118,8 @@ macro_rules! update_item {
                 $name::from_inners(self.header, self.values)
             }
 
-            pub(crate) fn header_set(&mut self, bit: u16) {
+            pub(crate) fn header_set(&mut self, bit: u16, value: u32) {
+                self.values.insert(bit.into(), value);
                 $crate::helper::update_mask_common::array_set(&mut self.header, bit);
             }
 
@@ -162,7 +163,8 @@ macro_rules! update_item {
                 }
             }
 
-            pub(crate) fn header_set(&mut self, bit: u16) {
+            pub(crate) fn header_set(&mut self, bit: u16, value: u32) {
+                self.values.insert(bit.into(), value);
                 $crate::helper::update_mask_common::array_set(&mut self.header, bit);
                 //Any modification to the header also means we set it dirty
                 $crate::helper::update_mask_common::array_set(&mut self.dirty_mask, bit);
