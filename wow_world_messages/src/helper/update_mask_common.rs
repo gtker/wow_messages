@@ -147,25 +147,7 @@ macro_rules! update_item {
 
         impl $name {
             pub fn new() -> Self {
-                const OBJECT_FIELD_TYPE: u16 = 2;
-
-                let mut header = vec![];
-                let mut dirty_mask = vec![];
-                let mut values = BTreeMap::new();
-
-                $crate::helper::update_mask_common::array_set(&mut header, OBJECT_FIELD_TYPE);
-                $crate::helper::update_mask_common::array_set(&mut dirty_mask, OBJECT_FIELD_TYPE);
-
-                values.insert(
-                    OBJECT_FIELD_TYPE,
-                    $crate::helper::update_mask_common::OBJECT | $type_value,
-                );
-
-                Self {
-                    header,
-                    dirty_mask,
-                    values,
-                }
+                $builder_name::new().finalize()
             }
 
             pub fn builder() -> $builder_name {
