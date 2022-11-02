@@ -90,6 +90,7 @@ impl crate::Message for CMSG_CHAR_CREATE {
         // outfit_id: u8
         w.write_all(&Self::OUTFIT_ID_VALUE.to_le_bytes())?;
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

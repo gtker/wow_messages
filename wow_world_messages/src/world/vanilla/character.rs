@@ -165,6 +165,7 @@ impl Character {
         // first_bag_inventory_id: u8
         w.write_all(&Self::FIRST_BAG_INVENTORY_ID_VALUE.to_le_bytes())?;
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

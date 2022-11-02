@@ -136,6 +136,7 @@ impl Character {
             i.write_into_vec(w)?;
         }
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }
