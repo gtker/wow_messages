@@ -992,6 +992,8 @@ pub use crate::shared::smsg_durability_damage_death_vanilla_tbc_wrath::SMSG_DURA
 
 pub use crate::shared::smsg_environmentaldamagelog_vanilla_tbc_wrath::SMSG_ENVIRONMENTALDAMAGELOG;
 
+pub use crate::shared::smsg_force_run_back_speed_change_vanilla_tbc_wrath::SMSG_FORCE_RUN_BACK_SPEED_CHANGE;
+
 pub use crate::shared::smsg_gameobject_custom_anim_vanilla_tbc_wrath::SMSG_GAMEOBJECT_CUSTOM_ANIM;
 
 pub use crate::shared::smsg_gameobject_despawn_anim_vanilla_tbc_wrath::SMSG_GAMEOBJECT_DESPAWN_ANIM;
@@ -1224,8 +1226,6 @@ pub(crate) mod smsg_force_move_root;
 pub use smsg_force_move_root::*;
 pub(crate) mod smsg_force_move_unroot;
 pub use smsg_force_move_unroot::*;
-pub(crate) mod smsg_force_run_back_speed_change;
-pub use smsg_force_run_back_speed_change::*;
 pub(crate) mod smsg_force_run_speed_change;
 pub use smsg_force_run_speed_change::*;
 pub(crate) mod smsg_force_swim_back_speed_change;

@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 smsg SMSG_FORCE_RUN_BACK_SPEED_CHANGE = 0x00E4 {
     PackedGuid guid;
