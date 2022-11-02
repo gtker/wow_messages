@@ -5,7 +5,7 @@ pub use impls::*;
 
 use crate::helper::update_mask_common;
 use crate::helper::update_mask_common::{
-    update_item, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM, PLAYER, UNIT,
+    update_item, update_mask_size, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM, PLAYER, UNIT,
 };
 use std::collections::BTreeMap;
 use std::io;
@@ -89,18 +89,14 @@ impl UpdateMask {
     }
 
     pub(crate) fn size(&self) -> usize {
-        let (header_len, values_len) = match self {
-            UpdateMask::Item(i) => (i.header.len(), i.values.len()),
-            UpdateMask::Container(i) => (i.header.len(), i.values.len()),
-            UpdateMask::Unit(i) => (i.header.len(), i.values.len()),
-            UpdateMask::Player(i) => (i.header.len(), i.values.len()),
-            UpdateMask::GameObject(i) => (i.header.len(), i.values.len()),
-            UpdateMask::DynamicObject(i) => (i.header.len(), i.values.len()),
-            UpdateMask::Corpse(i) => (i.header.len(), i.values.len()),
-        };
-
-        1 // amount_of_blocks
-            + header_len * 4
-            + values_len * 4
+        match self {
+            UpdateMask::Item(i) => update_mask_size(&i.dirty_mask),
+            UpdateMask::Container(i) => update_mask_size(&i.dirty_mask),
+            UpdateMask::Unit(i) => update_mask_size(&i.dirty_mask),
+            UpdateMask::Player(i) => update_mask_size(&i.dirty_mask),
+            UpdateMask::GameObject(i) => update_mask_size(&i.dirty_mask),
+            UpdateMask::DynamicObject(i) => update_mask_size(&i.dirty_mask),
+            UpdateMask::Corpse(i) => update_mask_size(&i.dirty_mask),
+        }
     }
 }

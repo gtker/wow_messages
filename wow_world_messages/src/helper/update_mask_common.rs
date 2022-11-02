@@ -10,6 +10,13 @@ pub const GAMEOBJECT: u32 = 0x0020;
 pub const DYNAMICOBJECT: u32 = 0x0040;
 pub const CORPSE: u32 = 0x0080;
 
+pub(crate) fn update_mask_size(dirty_mask: &[u32]) -> usize {
+    let amount_of_blocks = dirty_mask.len() * 4;
+    let amount_of_values = dirty_mask.iter().fold(0, |acc, x| acc + x.count_ones()) * 4;
+
+    1 + amount_of_blocks + amount_of_values as usize
+}
+
 pub(crate) fn array_set(array: &mut Vec<u32>, bit: u16) {
     let index = bit / 32;
     let offset = bit % 32;
