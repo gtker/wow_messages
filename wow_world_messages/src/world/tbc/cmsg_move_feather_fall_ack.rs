@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -66,8 +66,8 @@ impl crate::Message for CMSG_MOVE_FEATHER_FALL_ACK {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MOVE_FEATHER_FALL_ACK {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_MOVE_FEATHER_FALL_ACK {}
 
 impl CMSG_MOVE_FEATHER_FALL_ACK {
     pub(crate) fn size(&self) -> usize {

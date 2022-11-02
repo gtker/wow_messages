@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::world::wrath::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -66,8 +66,8 @@ impl crate::Message for CMSG_MOVE_FEATHER_FALL_ACK {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MOVE_FEATHER_FALL_ACK {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_MOVE_FEATHER_FALL_ACK {}
 
 impl CMSG_MOVE_FEATHER_FALL_ACK {
     pub(crate) fn size(&self) -> usize {
