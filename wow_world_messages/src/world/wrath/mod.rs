@@ -664,6 +664,14 @@ pub use crate::shared::smsg_force_run_back_speed_change_vanilla_tbc_wrath::SMSG_
 
 pub use crate::shared::smsg_force_run_speed_change_tbc_wrath::SMSG_FORCE_RUN_SPEED_CHANGE;
 
+pub use crate::shared::smsg_force_swim_back_speed_change_vanilla_tbc_wrath::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE;
+
+pub use crate::shared::smsg_force_swim_speed_change_vanilla_tbc_wrath::SMSG_FORCE_SWIM_SPEED_CHANGE;
+
+pub use crate::shared::smsg_force_turn_rate_change_vanilla_tbc_wrath::SMSG_FORCE_TURN_RATE_CHANGE;
+
+pub use crate::shared::smsg_force_walk_speed_change_vanilla_tbc_wrath::SMSG_FORCE_WALK_SPEED_CHANGE;
+
 pub use crate::shared::smsg_gameobject_custom_anim_vanilla_tbc_wrath::SMSG_GAMEOBJECT_CUSTOM_ANIM;
 
 pub use crate::shared::smsg_gameobject_despawn_anim_vanilla_tbc_wrath::SMSG_GAMEOBJECT_DESPAWN_ANIM;

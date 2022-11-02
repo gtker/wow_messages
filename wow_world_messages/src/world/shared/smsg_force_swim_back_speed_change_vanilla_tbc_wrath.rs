@@ -3,15 +3,15 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_walk_speed_change.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_walk_speed_change.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_swim_back_speed_change.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_swim_back_speed_change.wowm#L3):
 /// ```text
-/// smsg SMSG_FORCE_WALK_SPEED_CHANGE = 0x02DA {
+/// smsg SMSG_FORCE_SWIM_BACK_SPEED_CHANGE = 0x02DC {
 ///     PackedGuid guid;
 ///     u32 move_event;
 ///     f32 speed;
 /// }
 /// ```
-pub struct SMSG_FORCE_WALK_SPEED_CHANGE {
+pub struct SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
     pub guid: Guid,
     /// cmangos/mangoszero/vmangos: set to 0
     /// cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39
@@ -20,8 +20,8 @@ pub struct SMSG_FORCE_WALK_SPEED_CHANGE {
     pub speed: f32,
 }
 
-impl crate::Message for SMSG_FORCE_WALK_SPEED_CHANGE {
-    const OPCODE: u32 = 0x02da;
+impl crate::Message for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
+    const OPCODE: u32 = 0x02dc;
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32
@@ -59,9 +59,15 @@ impl crate::Message for SMSG_FORCE_WALK_SPEED_CHANGE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_FORCE_WALK_SPEED_CHANGE {}
+impl crate::world::vanilla::ServerMessage for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {}
 
-impl SMSG_FORCE_WALK_SPEED_CHANGE {
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {}
+
+impl SMSG_FORCE_SWIM_BACK_SPEED_CHANGE {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
         + 4 // move_event: u32
