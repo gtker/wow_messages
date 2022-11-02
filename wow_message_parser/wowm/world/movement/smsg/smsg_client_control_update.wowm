@@ -1,7 +1,7 @@
-#tag_all versions "1.12";
+#tag_all versions "1.9 1.10 1.11 1.12 2 3";
 
 smsg SMSG_CLIENT_CONTROL_UPDATE = 0x0159 {
     PackedGuid guid;
-    u8 allow_movement;
+    Bool allow_movement;
 }
 

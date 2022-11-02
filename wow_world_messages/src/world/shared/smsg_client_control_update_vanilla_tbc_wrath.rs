@@ -7,12 +7,12 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_CLIENT_CONTROL_UPDATE = 0x0159 {
 ///     PackedGuid guid;
-///     u8 allow_movement;
+///     Bool allow_movement;
 /// }
 /// ```
 pub struct SMSG_CLIENT_CONTROL_UPDATE {
     pub guid: Guid,
-    pub allow_movement: u8,
+    pub allow_movement: bool,
 }
 
 impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
@@ -27,8 +27,8 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
         // guid: PackedGuid
         self.guid.write_packed_guid_into_vec(w);
 
-        // allow_movement: u8
-        w.write_all(&self.allow_movement.to_le_bytes())?;
+        // allow_movement: Bool
+        w.write_all(u8::from(self.allow_movement).to_le_bytes().as_slice())?;
 
         assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
@@ -37,9 +37,8 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
 
-        // allow_movement: u8
-        let allow_movement = crate::util::read_u8_le(r)?;
-
+        // allow_movement: Bool
+        let allow_movement = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             guid,
             allow_movement,
@@ -50,10 +49,16 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
+
 impl SMSG_CLIENT_CONTROL_UPDATE {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
-        + 1 // allow_movement: u8
+        + 1 // allow_movement: Bool
     }
 }
 

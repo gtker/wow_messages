@@ -682,6 +682,8 @@ pub use crate::shared::smsg_chat_player_not_found_vanilla_tbc_wrath::SMSG_CHAT_P
 
 pub use crate::shared::smsg_chat_wrong_faction_vanilla_tbc_wrath::SMSG_CHAT_WRONG_FACTION;
 
+pub use crate::shared::smsg_client_control_update_vanilla_tbc_wrath::SMSG_CLIENT_CONTROL_UPDATE;
+
 pub use crate::shared::smsg_destroy_object_vanilla_tbc::SMSG_DESTROY_OBJECT;
 
 pub use crate::shared::smsg_duel_complete_vanilla_tbc_wrath::SMSG_DUEL_COMPLETE;

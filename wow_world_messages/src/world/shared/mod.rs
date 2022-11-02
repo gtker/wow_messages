@@ -240,6 +240,7 @@ pub mod smsg_channel_list_vanilla_tbc_wrath;
 pub mod smsg_channel_notify_tbc_wrath;
 pub mod smsg_chat_player_not_found_vanilla_tbc_wrath;
 pub mod smsg_chat_wrong_faction_vanilla_tbc_wrath;
+pub mod smsg_client_control_update_vanilla_tbc_wrath;
 pub mod smsg_destroy_object_vanilla_tbc;
 pub mod smsg_duel_complete_vanilla_tbc_wrath;
 pub mod smsg_duel_countdown_vanilla_tbc_wrath;

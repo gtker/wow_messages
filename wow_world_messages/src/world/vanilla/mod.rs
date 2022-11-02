@@ -972,6 +972,8 @@ pub use crate::shared::smsg_chat_player_not_found_vanilla_tbc_wrath::SMSG_CHAT_P
 
 pub use crate::shared::smsg_chat_wrong_faction_vanilla_tbc_wrath::SMSG_CHAT_WRONG_FACTION;
 
+pub use crate::shared::smsg_client_control_update_vanilla_tbc_wrath::SMSG_CLIENT_CONTROL_UPDATE;
+
 pub use crate::shared::smsg_destroy_object_vanilla_tbc::SMSG_DESTROY_OBJECT;
 
 pub use crate::shared::smsg_duel_complete_vanilla_tbc_wrath::SMSG_DUEL_COMPLETE;
@@ -1188,8 +1190,6 @@ pub(crate) mod smsg_chat_restricted;
 pub use smsg_chat_restricted::*;
 pub(crate) mod smsg_clear_cooldown;
 pub use smsg_clear_cooldown::*;
-pub(crate) mod smsg_client_control_update;
-pub use smsg_client_control_update::*;
 pub(crate) mod smsg_compressed_moves;
 pub use smsg_compressed_moves::*;
 pub(crate) mod smsg_compressed_update_object;
