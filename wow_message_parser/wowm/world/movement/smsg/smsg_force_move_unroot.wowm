@@ -9,6 +9,6 @@ smsg SMSG_FORCE_MOVE_UNROOT = 0x00EA {
     PackedGuid guid;
     u32 counter;
 } {
-    versions = "3.3.5";
+    paste_versions = "2.4.3 3.3.5";
 }
 
