@@ -83,3 +83,43 @@ enum PlayerChatTag : u8 {
     versions = "3";
 }
 
+smsg SMSG_MESSAGECHAT = 0x0096 {
+    ChatType chat_type;
+    (u32)Language language;
+    if (chat_type == MONSTER_SAY
+     || chat_type == MONSTER_PARTY
+     || chat_type == MONSTER_YELL
+     || chat_type == MONSTER_WHISPER
+     || chat_type == RAID_BOSS_WHISPER
+     || chat_type == RAID_BOSS_EMOTE
+     || chat_type == MONSTER_EMOTE)
+    {
+        SizedCString sender;
+        Guid target1;
+        /* TODO GUID_NEQ_ZERO
+        if (target != 0 && !isPlayer && !isPet) {
+            SizedCString target_name;
+        } */
+    }
+    else if (chat_type == BG_SYSTEM_NEUTRAL
+          || chat_type == BG_SYSTEM_ALLIANCE
+          || chat_type == BG_SYSTEM_HORDE)
+    {
+        Guid target2;
+        /* TODO GUID_NEQ_ZERO
+        if (target != 0 && !isPlayer && !isPet) {
+            SizedCString target_name;
+        } */
+    }
+    else if (chat_type == CHANNEL) {
+        CString channel_name;
+        Guid target4;
+    } else {
+        Guid target5;
+    }
+    SizedCString message;
+    PlayerChatTag chat_tag;
+} {
+    versions = "2.4.3";
+}
+

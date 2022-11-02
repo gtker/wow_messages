@@ -1,0 +1,46 @@
+smsg SMSG_GM_MESSAGECHAT = 0x03B2 {
+    ChatType chat_type;
+    (u32)Language language;
+    if (chat_type == MONSTER_SAY
+     || chat_type == MONSTER_PARTY
+     || chat_type == MONSTER_YELL
+     || chat_type == MONSTER_WHISPER
+     || chat_type == RAID_BOSS_WHISPER
+     || chat_type == RAID_BOSS_EMOTE
+     || chat_type == MONSTER_EMOTE)
+    {
+        SizedCString sender;
+        Guid target1;
+        /* TODO GUID_NEQ_ZERO
+        if (target != 0 && !isPlayer && !isPet) {
+            SizedCString target_name;
+        } */
+        SizedCString message1;
+        PlayerChatTag chat_tag1;
+    }
+    else if (chat_type == BG_SYSTEM_NEUTRAL
+          || chat_type == BG_SYSTEM_ALLIANCE
+          || chat_type == BG_SYSTEM_HORDE)
+    {
+        Guid target2;
+        /* TODO GUID_NEQ_ZERO
+        if (target != 0 && !isPlayer && !isPet) {
+            SizedCString target_name;
+        } */
+        SizedCString message2;
+        PlayerChatTag chat_tag2;
+    }
+    else if (chat_type == CHANNEL) {
+        CString channel_name;
+        Guid target4;
+        SizedCString message3;
+        PlayerChatTag chat_tag3;
+    } else {
+        Guid target5;
+        SizedCString message4;
+        PlayerChatTag chat_tag4;
+        SizedCString sender_name;
+    }
+} {
+    versions = "2.4.3";
+}

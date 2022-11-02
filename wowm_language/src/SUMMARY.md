@@ -717,6 +717,7 @@
 - [SMSG_GMTICKET_GETTICKET](docs/smsg_gmticket_getticket.md)
 - [SMSG_GMTICKET_SYSTEMSTATUS](docs/smsg_gmticket_systemstatus.md)
 - [SMSG_GMTICKET_UPDATETEXT](docs/smsg_gmticket_updatetext.md)
+- [SMSG_GM_MESSAGECHAT](docs/smsg_gm_messagechat.md)
 - [SMSG_GM_TICKET_STATUS_UPDATE](docs/smsg_gm_ticket_status_update.md)
 - [SMSG_GOSSIP_COMPLETE](docs/smsg_gossip_complete.md)
 - [SMSG_GOSSIP_MESSAGE](docs/smsg_gossip_message.md)

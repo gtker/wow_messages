@@ -3315,6 +3315,7 @@ use crate::world::tbc::SMSG_GUILD_INFO;
 use crate::world::tbc::SMSG_GUILD_ROSTER;
 use crate::world::tbc::SMSG_GUILD_EVENT;
 use crate::world::tbc::SMSG_GUILD_COMMAND_RESULT;
+use crate::world::tbc::SMSG_MESSAGECHAT;
 use crate::world::tbc::SMSG_CHANNEL_NOTIFY;
 use crate::world::tbc::SMSG_CHANNEL_LIST;
 use crate::world::tbc::SMSG_UPDATE_OBJECT;
@@ -3453,6 +3454,7 @@ use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Server;
 use crate::world::tbc::SMSG_REALM_SPLIT;
 use crate::world::tbc::SMSG_TIME_SYNC_REQ;
 use crate::world::tbc::MSG_MOVE_START_DESCEND_Server;
+use crate::world::tbc::SMSG_GM_MESSAGECHAT;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -3475,6 +3477,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GUILD_ROSTER(SMSG_GUILD_ROSTER),
     SMSG_GUILD_EVENT(SMSG_GUILD_EVENT),
     SMSG_GUILD_COMMAND_RESULT(SMSG_GUILD_COMMAND_RESULT),
+    SMSG_MESSAGECHAT(SMSG_MESSAGECHAT),
     SMSG_CHANNEL_NOTIFY(SMSG_CHANNEL_NOTIFY),
     SMSG_CHANNEL_LIST(SMSG_CHANNEL_LIST),
     SMSG_UPDATE_OBJECT(SMSG_UPDATE_OBJECT),
@@ -3613,6 +3616,7 @@ pub enum ServerOpcodeMessage {
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Server),
+    SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
 }
 
 impl ServerOpcodeMessage {
@@ -3637,6 +3641,7 @@ impl ServerOpcodeMessage {
             0x008A => Ok(Self::SMSG_GUILD_ROSTER(<SMSG_GUILD_ROSTER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008A, size: body_size, io, } } else { a } })?)),
             0x0092 => Ok(Self::SMSG_GUILD_EVENT(<SMSG_GUILD_EVENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0092, size: body_size, io, } } else { a } })?)),
             0x0093 => Ok(Self::SMSG_GUILD_COMMAND_RESULT(<SMSG_GUILD_COMMAND_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0093, size: body_size, io, } } else { a } })?)),
+            0x0096 => Ok(Self::SMSG_MESSAGECHAT(<SMSG_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0096, size: body_size, io, } } else { a } })?)),
             0x0099 => Ok(Self::SMSG_CHANNEL_NOTIFY(<SMSG_CHANNEL_NOTIFY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0099, size: body_size, io, } } else { a } })?)),
             0x009B => Ok(Self::SMSG_CHANNEL_LIST(<SMSG_CHANNEL_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x009B, size: body_size, io, } } else { a } })?)),
             0x00A9 => Ok(Self::SMSG_UPDATE_OBJECT(<SMSG_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00A9, size: body_size, io, } } else { a } })?)),
@@ -3775,6 +3780,7 @@ impl ServerOpcodeMessage {
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
+            0x03B2 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B2, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
         }
     }
@@ -3867,6 +3873,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_ROSTER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_EVENT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_NOTIFY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
@@ -4005,6 +4012,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -4030,6 +4038,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_ROSTER(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_EVENT(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MESSAGECHAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_NOTIFY(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
@@ -4168,6 +4177,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -4193,6 +4203,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_ROSTER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_EVENT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4331,6 +4342,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -4356,6 +4368,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_ROSTER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_EVENT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4494,6 +4507,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -4519,6 +4533,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_ROSTER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_EVENT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4657,6 +4672,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -4682,6 +4698,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GUILD_ROSTER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_EVENT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_COMMAND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
@@ -4820,6 +4837,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -4847,6 +4865,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GUILD_ROSTER(_) => "SMSG_GUILD_ROSTER",
             ServerOpcodeMessage::SMSG_GUILD_EVENT(_) => "SMSG_GUILD_EVENT",
             ServerOpcodeMessage::SMSG_GUILD_COMMAND_RESULT(_) => "SMSG_GUILD_COMMAND_RESULT",
+            ServerOpcodeMessage::SMSG_MESSAGECHAT(_) => "SMSG_MESSAGECHAT",
             ServerOpcodeMessage::SMSG_CHANNEL_NOTIFY(_) => "SMSG_CHANNEL_NOTIFY",
             ServerOpcodeMessage::SMSG_CHANNEL_LIST(_) => "SMSG_CHANNEL_LIST",
             ServerOpcodeMessage::SMSG_UPDATE_OBJECT(_) => "SMSG_UPDATE_OBJECT",
@@ -4985,6 +5004,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
+            ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
         })
     }
 }
@@ -5100,6 +5120,12 @@ impl From<SMSG_GUILD_EVENT> for ServerOpcodeMessage {
 impl From<SMSG_GUILD_COMMAND_RESULT> for ServerOpcodeMessage {
     fn from(c: SMSG_GUILD_COMMAND_RESULT) -> Self {
         Self::SMSG_GUILD_COMMAND_RESULT(c)
+    }
+}
+
+impl From<SMSG_MESSAGECHAT> for ServerOpcodeMessage {
+    fn from(c: SMSG_MESSAGECHAT) -> Self {
+        Self::SMSG_MESSAGECHAT(c)
     }
 }
 
@@ -5928,6 +5954,12 @@ impl From<SMSG_TIME_SYNC_REQ> for ServerOpcodeMessage {
 impl From<MSG_MOVE_START_DESCEND_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_START_DESCEND_Server) -> Self {
         Self::MSG_MOVE_START_DESCEND(c)
+    }
+}
+
+impl From<SMSG_GM_MESSAGECHAT> for ServerOpcodeMessage {
+    fn from(c: SMSG_GM_MESSAGECHAT) -> Self {
+        Self::SMSG_GM_MESSAGECHAT(c)
     }
 }
 

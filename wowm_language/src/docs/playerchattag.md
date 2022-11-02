@@ -25,6 +25,8 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `GM` | 3 (0x03) |  |  |
 
 Used in:
+* [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
+* [SMSG_MESSAGECHAT](smsg_messagechat.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 
 # PlayerChatTag
