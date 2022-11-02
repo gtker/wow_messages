@@ -1,10 +1,10 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_TELEPORT_TO_UNIT = 0x09 {
     CString name;
 } {
     description = "Sent when using the `port` console command.";
+    versions = "1 2 3";
 }
+
 
 test CMSG_TELEPORT_TO_UNIT {
     name = "Vurtne";
@@ -12,4 +12,6 @@ test CMSG_TELEPORT_TO_UNIT {
   0x00, 0x0b, /* size */
   0x09, 0x00, 0x00, 0x00, /* opcode */
   0x56, 0x75, 0x72, 0x74, 0x6e, 0x65, 0x00 /* name */
-]
+] {
+    versions = "1.12";
+}

@@ -37,6 +37,7 @@ use crate::world::wrath::MSG_SET_DUNGEON_DIFFICULTY;
 use crate::world::wrath::MSG_MOVE_START_ASCEND;
 use crate::world::wrath::MSG_MOVE_STOP_ASCEND;
 use crate::world::wrath::MSG_MOVE_START_DESCEND;
+use crate::world::wrath::CMSG_TELEPORT_TO_UNIT;
 use crate::world::wrath::CMSG_CHAR_CREATE;
 use crate::world::wrath::CMSG_CHAR_ENUM;
 use crate::world::wrath::CMSG_CHAR_DELETE;
@@ -246,6 +247,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND),
+    CMSG_TELEPORT_TO_UNIT(CMSG_TELEPORT_TO_UNIT),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
     CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
@@ -457,6 +459,7 @@ impl ClientOpcodeMessage {
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
+            0x0009 => Ok(Self::CMSG_TELEPORT_TO_UNIT(<CMSG_TELEPORT_TO_UNIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0009, size: body_size, io, } } else { a } })?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0036, size: body_size, io, } } else { a } })?)),
             0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0037, size: body_size, io, } } else { a } })?)),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0038, size: body_size, io, } } else { a } })?)),
@@ -736,6 +739,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
@@ -948,6 +952,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_client(w),
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
@@ -1160,6 +1165,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1372,6 +1378,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1584,6 +1591,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1796,6 +1804,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2019,6 +2028,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
             ClientOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND",
+            ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(_) => "CMSG_TELEPORT_TO_UNIT",
             ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
             ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
@@ -2371,6 +2381,12 @@ impl From<MSG_MOVE_STOP_ASCEND> for ClientOpcodeMessage {
 impl From<MSG_MOVE_START_DESCEND> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_START_DESCEND) -> Self {
         Self::MSG_MOVE_START_DESCEND(c)
+    }
+}
+
+impl From<CMSG_TELEPORT_TO_UNIT> for ClientOpcodeMessage {
+    fn from(c: CMSG_TELEPORT_TO_UNIT) -> Self {
+        Self::CMSG_TELEPORT_TO_UNIT(c)
     }
 }
 

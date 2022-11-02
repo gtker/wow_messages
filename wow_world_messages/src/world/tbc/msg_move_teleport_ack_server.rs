@@ -4,7 +4,7 @@ use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Can be response to `CMSG_TELEPORT_TO_UNIT`.
+/// Can be response to [`CMSG_TELEPORT_TO_UNIT`](crate::world::vanilla::CMSG_TELEPORT_TO_UNIT).
 /// Can also be a response to [`MSG_MOVE_TELEPORT_ACK_Client`](crate::world::vanilla::MSG_MOVE_TELEPORT_ACK_Client) after being sent.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm#L10):
