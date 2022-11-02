@@ -1,16 +1,22 @@
+#tag_all versions "3.3.5";
+
 cmsg CMSG_WORLD_TELEPORT = 0x08 {
     u32 time_in_msec;
     Map map;
+    u32 unk1;
+    u32 unk2;
     Vector3d position;
     f32 orientation;
 } {
     description = "Sent when using the `worldport` console command.";
-    paste_versions = "1.12 2.4.3";
+    comment = "The 3.3.5 client includes some extra padding.";
 }
 
 test CMSG_WORLD_TELEPORT {
     time_in_msec = 0xDEADBEEF;
     map = KALIMDOR;
+    unk1 = 0;
+    unk2 = 0;
     position = {
         x = 1.0;
         y = 2.0;
@@ -18,21 +24,23 @@ test CMSG_WORLD_TELEPORT {
     };
     orientation = 4.0;
 } [
-    0x00, 0x1c, /* Size: 28 */
+    0x00, 0x24, /* Size: 28 */
     0x08, 0x00, 0x00, 0x00, /* Opcode */
     0xEF, 0xBE, 0xAD, 0xDE, /* Time in msec */
     0x01, 0x00, 0x00, 0x00, /* Map: Kalimdor */
+    0x00, 0x00, 0x00, 0x00, /* unk1: 0 */
+    0x00, 0x00, 0x00, 0x00, /* unk2: 0 */
     0x00, 0x00, 0x80, 0x3F, /* position_x: 1.0 */
     0x00, 0x00, 0x00, 0x40, /* position_y: 2.0 */
     0x00, 0x00, 0x40, 0x40, /* position_z: 3.0 */
     0x00, 0x00, 0x80, 0x40, /* orientation: 4.0 */
-] {
-    versions = "1.12";
-}
+]
 
 test CMSG_WORLD_TELEPORT {
     time_in_msec = 34160026;
     map = BLACKWING_LAIR;
+    unk1 = 0;
+    unk2 = 0;
     position = {
         x = 452.0;
         y = 6454.0;
@@ -40,15 +48,16 @@ test CMSG_WORLD_TELEPORT {
     };
     orientation = 3.1415927;
 } [
-  0x00, 0x1C, /* size */
+  0x00, 0x24, /* size */
   0x08, 0x00, 0x00, 0x00, /* opcode */
   0x9a, 0x3d, 0x09, 0x02, /* time_in_msec */
   0xd5, 0x01, 0x00, 0x00, /* map */
+  0x00, 0x00, 0x00, 0x00, /* unk1: 0 */
+  0x00, 0x00, 0x00, 0x00, /* unk2: 0 */
   0x00, 0x00, 0xe2, 0x43, /* position.x */
   0x00, 0xb0, 0xc9, 0x45, /* position.y */
   0x00, 0x80, 0x1e, 0x45, /* position.z */
   0xdb, 0x0f, 0x49, 0x40 /* orientation */
 ] {
     comment = "Command in client was `worldport 469 452 6454 2536 180`.";
-    versions = "1.12";
 }
