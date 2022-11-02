@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
     PackedGuid guid;
     u32 move_event {
@@ -11,6 +9,7 @@ smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
     description = "Tells the client that the running speed has changed.";
     description = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
     description = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
+    versions = "1.12";
 }
 
 test SMSG_FORCE_RUN_SPEED_CHANGE {
@@ -25,5 +24,24 @@ test SMSG_FORCE_RUN_SPEED_CHANGE {
     0x00, 0x00, 0xe0, 0x40 /* speed */
 ] {
     description = "Force speed to 7";
+    versions = "1.12";
+}
+
+smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
+    PackedGuid guid;
+    u32 move_event {
+        comment = "cmangos/mangoszero/vmangos: set to 0";
+        comment = "cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39";
+    }
+    u8 unknown {
+        comment = "mangosone sets to 0";
+        comment = "mangosone: new 2.1.0";
+    }
+    f32 speed;
+} {
+    description = "Tells the client that the running speed has changed.";
+    description = "Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK].";
+    description = "vmangos sends this message to the client being changed and [SMSG_SPLINE_SET_RUN_SPEED] to others.";
+    versions = "2.4.3 3";
 }
 

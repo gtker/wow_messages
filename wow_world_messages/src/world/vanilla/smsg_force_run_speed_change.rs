@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// Client replies with [`CMSG_FORCE_RUN_SPEED_CHANGE_ACK`](crate::world::vanilla::CMSG_FORCE_RUN_SPEED_CHANGE_ACK).
 /// vmangos sends this message to the client being changed and [`SMSG_SPLINE_SET_RUN_SPEED`](crate::world::vanilla::SMSG_SPLINE_SET_RUN_SPEED) to others.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm#L1):
 /// ```text
 /// smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {
 ///     PackedGuid guid;
@@ -85,7 +85,7 @@ mod test {
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xE2, 0x00, 0x01, 0x06, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0xE0, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm` line 16.
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm` line 15.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_FORCE_RUN_SPEED_CHANGE0() {
@@ -114,7 +114,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm` line 16.
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm` line 15.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_FORCE_RUN_SPEED_CHANGE0() {
@@ -143,7 +143,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm` line 16.
+    // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm` line 15.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_FORCE_RUN_SPEED_CHANGE0() {

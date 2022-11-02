@@ -251,6 +251,7 @@ pub mod smsg_duel_winner_vanilla_tbc_wrath;
 pub mod smsg_durability_damage_death_vanilla_tbc_wrath;
 pub mod smsg_environmentaldamagelog_vanilla_tbc_wrath;
 pub mod smsg_force_run_back_speed_change_vanilla_tbc_wrath;
+pub mod smsg_force_run_speed_change_tbc_wrath;
 pub mod smsg_gameobject_custom_anim_vanilla_tbc_wrath;
 pub mod smsg_gameobject_despawn_anim_vanilla_tbc_wrath;
 pub mod smsg_gameobject_pagetext_vanilla_tbc_wrath;
