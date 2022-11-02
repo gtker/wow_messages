@@ -5503,6 +5503,7 @@ Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
 * [GuildMember](guildmember.md)
+* [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_EXPLORATION_EXPERIENCE](smsg_exploration_experience.md)
 * [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)

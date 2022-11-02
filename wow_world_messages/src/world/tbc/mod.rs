@@ -850,6 +850,8 @@ pub(crate) mod smsg_auth_response;
 pub use smsg_auth_response::*;
 pub(crate) mod smsg_battlefield_list;
 pub use smsg_battlefield_list::*;
+pub(crate) mod smsg_bindpointupdate;
+pub use smsg_bindpointupdate::*;
 pub(crate) mod smsg_char_create;
 pub use smsg_char_create::*;
 pub(crate) mod smsg_char_delete;

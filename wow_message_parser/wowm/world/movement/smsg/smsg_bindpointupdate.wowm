@@ -4,6 +4,6 @@ smsg SMSG_BINDPOINTUPDATE = 0x0155 {
     Area area;
 } {
     description = "Inform the client of a their hearthstone location.";
-    paste_versions = "1.12 3.3.5";
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
 

@@ -3509,6 +3509,7 @@ use crate::world::tbc::SMSG_ATTACKSWING_NOTSTANDING;
 use crate::world::tbc::SMSG_ATTACKSWING_DEADTARGET;
 use crate::world::tbc::SMSG_ATTACKSWING_CANT_ATTACK;
 use crate::world::tbc::SMSG_CANCEL_COMBAT;
+use crate::world::tbc::SMSG_BINDPOINTUPDATE;
 use crate::world::tbc::SMSG_LOOT_RELEASE_RESPONSE;
 use crate::world::tbc::SMSG_LOOT_REMOVED;
 use crate::world::tbc::SMSG_LOOT_MONEY_NOTIFY;
@@ -3672,6 +3673,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ATTACKSWING_DEADTARGET(SMSG_ATTACKSWING_DEADTARGET),
     SMSG_ATTACKSWING_CANT_ATTACK(SMSG_ATTACKSWING_CANT_ATTACK),
     SMSG_CANCEL_COMBAT(SMSG_CANCEL_COMBAT),
+    SMSG_BINDPOINTUPDATE(SMSG_BINDPOINTUPDATE),
     SMSG_LOOT_RELEASE_RESPONSE(SMSG_LOOT_RELEASE_RESPONSE),
     SMSG_LOOT_REMOVED(SMSG_LOOT_REMOVED),
     SMSG_LOOT_MONEY_NOTIFY(SMSG_LOOT_MONEY_NOTIFY),
@@ -3837,6 +3839,7 @@ impl ServerOpcodeMessage {
             0x0148 => Ok(Self::SMSG_ATTACKSWING_DEADTARGET(<SMSG_ATTACKSWING_DEADTARGET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0148, size: body_size, io, } } else { a } })?)),
             0x0149 => Ok(Self::SMSG_ATTACKSWING_CANT_ATTACK(<SMSG_ATTACKSWING_CANT_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0149, size: body_size, io, } } else { a } })?)),
             0x014E => Ok(Self::SMSG_CANCEL_COMBAT(<SMSG_CANCEL_COMBAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x014E, size: body_size, io, } } else { a } })?)),
+            0x0155 => Ok(Self::SMSG_BINDPOINTUPDATE(<SMSG_BINDPOINTUPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0155, size: body_size, io, } } else { a } })?)),
             0x0161 => Ok(Self::SMSG_LOOT_RELEASE_RESPONSE(<SMSG_LOOT_RELEASE_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0161, size: body_size, io, } } else { a } })?)),
             0x0162 => Ok(Self::SMSG_LOOT_REMOVED(<SMSG_LOOT_REMOVED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0162, size: body_size, io, } } else { a } })?)),
             0x0163 => Ok(Self::SMSG_LOOT_MONEY_NOTIFY(<SMSG_LOOT_MONEY_NOTIFY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0163, size: body_size, io, } } else { a } })?)),
@@ -4070,6 +4073,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CANCEL_COMBAT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_BINDPOINTUPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_REMOVED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.write_encrypted_server(w, e),
@@ -4236,6 +4240,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_CANCEL_COMBAT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_BINDPOINTUPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_REMOVED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.write_unencrypted_server(w),
@@ -4402,6 +4407,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_BINDPOINTUPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_REMOVED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4568,6 +4574,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_BINDPOINTUPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_REMOVED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4734,6 +4741,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_BINDPOINTUPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_REMOVED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -4900,6 +4908,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_BINDPOINTUPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_REMOVED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
@@ -5068,6 +5077,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ATTACKSWING_DEADTARGET(_) => "SMSG_ATTACKSWING_DEADTARGET",
             ServerOpcodeMessage::SMSG_ATTACKSWING_CANT_ATTACK(_) => "SMSG_ATTACKSWING_CANT_ATTACK",
             ServerOpcodeMessage::SMSG_CANCEL_COMBAT(_) => "SMSG_CANCEL_COMBAT",
+            ServerOpcodeMessage::SMSG_BINDPOINTUPDATE(_) => "SMSG_BINDPOINTUPDATE",
             ServerOpcodeMessage::SMSG_LOOT_RELEASE_RESPONSE(_) => "SMSG_LOOT_RELEASE_RESPONSE",
             ServerOpcodeMessage::SMSG_LOOT_REMOVED(_) => "SMSG_LOOT_REMOVED",
             ServerOpcodeMessage::SMSG_LOOT_MONEY_NOTIFY(_) => "SMSG_LOOT_MONEY_NOTIFY",
@@ -5574,6 +5584,12 @@ impl From<SMSG_ATTACKSWING_CANT_ATTACK> for ServerOpcodeMessage {
 impl From<SMSG_CANCEL_COMBAT> for ServerOpcodeMessage {
     fn from(c: SMSG_CANCEL_COMBAT) -> Self {
         Self::SMSG_CANCEL_COMBAT(c)
+    }
+}
+
+impl From<SMSG_BINDPOINTUPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_BINDPOINTUPDATE) -> Self {
+        Self::SMSG_BINDPOINTUPDATE(c)
     }
 }
 
