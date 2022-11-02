@@ -180,10 +180,6 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::has_any_bit_set(&self.dirty_mask)
             }
 
-            pub fn has_specific_bit_set(&self, bit: u16) -> bool {
-                $crate::helper::update_mask_common::has_array_bit_set(&self.header, bit)
-            }
-
             pub fn is_bit_dirty(&self, bit: u16) -> bool {
                 $crate::helper::update_mask_common::has_array_bit_set(&self.dirty_mask, bit)
             }
