@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all paste_versions "1.12 2.4.3 3.3.5";
 
 cmsg CMSG_MOVE_WATER_WALK_ACK = 0x02D0 {
     Guid guid;

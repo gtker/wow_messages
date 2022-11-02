@@ -187,6 +187,7 @@ use crate::world::tbc::CMSG_MOVE_SPLINE_DONE;
 use crate::world::tbc::CMSG_MOVE_FALL_RESET;
 use crate::world::tbc::CMSG_MOVE_TIME_SKIPPED;
 use crate::world::tbc::CMSG_MOVE_FEATHER_FALL_ACK;
+use crate::world::tbc::CMSG_MOVE_WATER_WALK_ACK;
 use crate::world::tbc::CMSG_MOVE_NOT_ACTIVE_MOVER;
 use crate::world::tbc::CMSG_BATTLEFIELD_STATUS;
 use crate::world::tbc::CMSG_BATTLEFIELD_PORT;
@@ -392,6 +393,7 @@ pub enum ClientOpcodeMessage {
     CMSG_MOVE_FALL_RESET(CMSG_MOVE_FALL_RESET),
     CMSG_MOVE_TIME_SKIPPED(CMSG_MOVE_TIME_SKIPPED),
     CMSG_MOVE_FEATHER_FALL_ACK(CMSG_MOVE_FEATHER_FALL_ACK),
+    CMSG_MOVE_WATER_WALK_ACK(CMSG_MOVE_WATER_WALK_ACK),
     CMSG_MOVE_NOT_ACTIVE_MOVER(CMSG_MOVE_NOT_ACTIVE_MOVER),
     CMSG_BATTLEFIELD_STATUS(CMSG_BATTLEFIELD_STATUS),
     CMSG_BATTLEFIELD_PORT(CMSG_BATTLEFIELD_PORT),
@@ -599,6 +601,7 @@ impl ClientOpcodeMessage {
             0x02CA => Ok(Self::CMSG_MOVE_FALL_RESET(<CMSG_MOVE_FALL_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CA, size: body_size, io, } } else { a } })?)),
             0x02CE => Ok(Self::CMSG_MOVE_TIME_SKIPPED(<CMSG_MOVE_TIME_SKIPPED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CE, size: body_size, io, } } else { a } })?)),
             0x02CF => Ok(Self::CMSG_MOVE_FEATHER_FALL_ACK(<CMSG_MOVE_FEATHER_FALL_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CF, size: body_size, io, } } else { a } })?)),
+            0x02D0 => Ok(Self::CMSG_MOVE_WATER_WALK_ACK(<CMSG_MOVE_WATER_WALK_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D0, size: body_size, io, } } else { a } })?)),
             0x02D1 => Ok(Self::CMSG_MOVE_NOT_ACTIVE_MOVER(<CMSG_MOVE_NOT_ACTIVE_MOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D1, size: body_size, io, } } else { a } })?)),
             0x02D3 => Ok(Self::CMSG_BATTLEFIELD_STATUS(<CMSG_BATTLEFIELD_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D3, size: body_size, io, } } else { a } })?)),
             0x02D5 => Ok(Self::CMSG_BATTLEFIELD_PORT(<CMSG_BATTLEFIELD_PORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D5, size: body_size, io, } } else { a } })?)),
@@ -874,6 +877,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_encrypted_client(w, e),
@@ -1082,6 +1086,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_unencrypted_client(w),
@@ -1290,6 +1295,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1498,6 +1504,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1706,6 +1713,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1914,6 +1922,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_unencrypted_client(w).await,
@@ -2157,6 +2166,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => "CMSG_MOVE_FALL_RESET",
             ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(_) => "CMSG_MOVE_TIME_SKIPPED",
             ClientOpcodeMessage::CMSG_MOVE_FEATHER_FALL_ACK(_) => "CMSG_MOVE_FEATHER_FALL_ACK",
+            ClientOpcodeMessage::CMSG_MOVE_WATER_WALK_ACK(_) => "CMSG_MOVE_WATER_WALK_ACK",
             ClientOpcodeMessage::CMSG_MOVE_NOT_ACTIVE_MOVER(_) => "CMSG_MOVE_NOT_ACTIVE_MOVER",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_STATUS(_) => "CMSG_BATTLEFIELD_STATUS",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_PORT(_) => "CMSG_BATTLEFIELD_PORT",
@@ -3255,6 +3265,12 @@ impl From<CMSG_MOVE_TIME_SKIPPED> for ClientOpcodeMessage {
 impl From<CMSG_MOVE_FEATHER_FALL_ACK> for ClientOpcodeMessage {
     fn from(c: CMSG_MOVE_FEATHER_FALL_ACK) -> Self {
         Self::CMSG_MOVE_FEATHER_FALL_ACK(c)
+    }
+}
+
+impl From<CMSG_MOVE_WATER_WALK_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_WATER_WALK_ACK) -> Self {
+        Self::CMSG_MOVE_WATER_WALK_ACK(c)
     }
 }
 
