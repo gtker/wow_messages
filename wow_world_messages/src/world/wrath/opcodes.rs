@@ -85,6 +85,7 @@ use crate::world::wrath::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_MOVE_ROOT_ACK;
 use crate::world::wrath::CMSG_FORCE_MOVE_UNROOT_ACK;
+use crate::world::wrath::CMSG_MOVE_KNOCK_BACK_ACK;
 use crate::world::wrath::CMSG_MOVE_HOVER_ACK;
 use crate::world::wrath::CMSG_NEXT_CINEMATIC_CAMERA;
 use crate::world::wrath::CMSG_COMPLETE_CINEMATIC;
@@ -189,6 +190,7 @@ use crate::world::wrath::CMSG_SET_ACTIONBAR_TOGGLES;
 use crate::world::wrath::CMSG_CHAR_RENAME;
 use crate::world::wrath::CMSG_MOVE_FALL_RESET;
 use crate::world::wrath::CMSG_MOVE_FEATHER_FALL_ACK;
+use crate::world::wrath::CMSG_MOVE_NOT_ACTIVE_MOVER;
 use crate::world::wrath::CMSG_BATTLEFIELD_STATUS;
 use crate::world::wrath::CMSG_BATTLEFIELD_PORT;
 use crate::world::wrath::CMSG_BATTLEMASTER_HELLO;
@@ -289,6 +291,7 @@ pub enum ClientOpcodeMessage {
     CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(CMSG_FORCE_SWIM_SPEED_CHANGE_ACK),
     CMSG_FORCE_MOVE_ROOT_ACK(CMSG_FORCE_MOVE_ROOT_ACK),
     CMSG_FORCE_MOVE_UNROOT_ACK(CMSG_FORCE_MOVE_UNROOT_ACK),
+    CMSG_MOVE_KNOCK_BACK_ACK(CMSG_MOVE_KNOCK_BACK_ACK),
     CMSG_MOVE_HOVER_ACK(CMSG_MOVE_HOVER_ACK),
     CMSG_NEXT_CINEMATIC_CAMERA(CMSG_NEXT_CINEMATIC_CAMERA),
     CMSG_COMPLETE_CINEMATIC(CMSG_COMPLETE_CINEMATIC),
@@ -393,6 +396,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
     CMSG_MOVE_FALL_RESET(CMSG_MOVE_FALL_RESET),
     CMSG_MOVE_FEATHER_FALL_ACK(CMSG_MOVE_FEATHER_FALL_ACK),
+    CMSG_MOVE_NOT_ACTIVE_MOVER(CMSG_MOVE_NOT_ACTIVE_MOVER),
     CMSG_BATTLEFIELD_STATUS(CMSG_BATTLEFIELD_STATUS),
     CMSG_BATTLEFIELD_PORT(CMSG_BATTLEFIELD_PORT),
     CMSG_BATTLEMASTER_HELLO(CMSG_BATTLEMASTER_HELLO),
@@ -495,6 +499,7 @@ impl ClientOpcodeMessage {
             0x00E7 => Ok(Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(<CMSG_FORCE_SWIM_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E7, size: body_size, io, } } else { a } })?)),
             0x00E9 => Ok(Self::CMSG_FORCE_MOVE_ROOT_ACK(<CMSG_FORCE_MOVE_ROOT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E9, size: body_size, io, } } else { a } })?)),
             0x00EB => Ok(Self::CMSG_FORCE_MOVE_UNROOT_ACK(<CMSG_FORCE_MOVE_UNROOT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EB, size: body_size, io, } } else { a } })?)),
+            0x00F0 => Ok(Self::CMSG_MOVE_KNOCK_BACK_ACK(<CMSG_MOVE_KNOCK_BACK_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00F0, size: body_size, io, } } else { a } })?)),
             0x00F6 => Ok(Self::CMSG_MOVE_HOVER_ACK(<CMSG_MOVE_HOVER_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00F6, size: body_size, io, } } else { a } })?)),
             0x00FB => Ok(Self::CMSG_NEXT_CINEMATIC_CAMERA(<CMSG_NEXT_CINEMATIC_CAMERA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FB, size: body_size, io, } } else { a } })?)),
             0x00FC => Ok(Self::CMSG_COMPLETE_CINEMATIC(<CMSG_COMPLETE_CINEMATIC as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FC, size: body_size, io, } } else { a } })?)),
@@ -599,6 +604,7 @@ impl ClientOpcodeMessage {
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C7, size: body_size, io, } } else { a } })?)),
             0x02CA => Ok(Self::CMSG_MOVE_FALL_RESET(<CMSG_MOVE_FALL_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CA, size: body_size, io, } } else { a } })?)),
             0x02CF => Ok(Self::CMSG_MOVE_FEATHER_FALL_ACK(<CMSG_MOVE_FEATHER_FALL_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CF, size: body_size, io, } } else { a } })?)),
+            0x02D1 => Ok(Self::CMSG_MOVE_NOT_ACTIVE_MOVER(<CMSG_MOVE_NOT_ACTIVE_MOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D1, size: body_size, io, } } else { a } })?)),
             0x02D3 => Ok(Self::CMSG_BATTLEFIELD_STATUS(<CMSG_BATTLEFIELD_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D3, size: body_size, io, } } else { a } })?)),
             0x02D5 => Ok(Self::CMSG_BATTLEFIELD_PORT(<CMSG_BATTLEFIELD_PORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D5, size: body_size, io, } } else { a } })?)),
             0x02D7 => Ok(Self::CMSG_BATTLEMASTER_HELLO(<CMSG_BATTLEMASTER_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D7, size: body_size, io, } } else { a } })?)),
@@ -769,6 +775,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_HOVER_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_encrypted_client(w, e),
@@ -873,6 +880,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.write_encrypted_client(w, e),
@@ -976,6 +984,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_HOVER_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_unencrypted_client(w),
@@ -1080,6 +1089,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.write_unencrypted_client(w),
@@ -1183,6 +1193,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_HOVER_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1287,6 +1298,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1390,6 +1402,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_HOVER_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1494,6 +1507,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1597,6 +1611,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_HOVER_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1701,6 +1716,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1804,6 +1820,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_ROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_HOVER_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_unencrypted_client(w).await,
@@ -1908,6 +1925,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.astd_write_unencrypted_client(w).await,
@@ -2022,6 +2040,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_SWIM_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_MOVE_ROOT_ACK(_) => "CMSG_FORCE_MOVE_ROOT_ACK",
             ClientOpcodeMessage::CMSG_FORCE_MOVE_UNROOT_ACK(_) => "CMSG_FORCE_MOVE_UNROOT_ACK",
+            ClientOpcodeMessage::CMSG_MOVE_KNOCK_BACK_ACK(_) => "CMSG_MOVE_KNOCK_BACK_ACK",
             ClientOpcodeMessage::CMSG_MOVE_HOVER_ACK(_) => "CMSG_MOVE_HOVER_ACK",
             ClientOpcodeMessage::CMSG_NEXT_CINEMATIC_CAMERA(_) => "CMSG_NEXT_CINEMATIC_CAMERA",
             ClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC(_) => "CMSG_COMPLETE_CINEMATIC",
@@ -2126,6 +2145,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
             ClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => "CMSG_MOVE_FALL_RESET",
             ClientOpcodeMessage::CMSG_MOVE_FEATHER_FALL_ACK(_) => "CMSG_MOVE_FEATHER_FALL_ACK",
+            ClientOpcodeMessage::CMSG_MOVE_NOT_ACTIVE_MOVER(_) => "CMSG_MOVE_NOT_ACTIVE_MOVER",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_STATUS(_) => "CMSG_BATTLEFIELD_STATUS",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_PORT(_) => "CMSG_BATTLEFIELD_PORT",
             ClientOpcodeMessage::CMSG_BATTLEMASTER_HELLO(_) => "CMSG_BATTLEMASTER_HELLO",
@@ -2609,6 +2629,12 @@ impl From<CMSG_FORCE_MOVE_ROOT_ACK> for ClientOpcodeMessage {
 impl From<CMSG_FORCE_MOVE_UNROOT_ACK> for ClientOpcodeMessage {
     fn from(c: CMSG_FORCE_MOVE_UNROOT_ACK) -> Self {
         Self::CMSG_FORCE_MOVE_UNROOT_ACK(c)
+    }
+}
+
+impl From<CMSG_MOVE_KNOCK_BACK_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_KNOCK_BACK_ACK) -> Self {
+        Self::CMSG_MOVE_KNOCK_BACK_ACK(c)
     }
 }
 
@@ -3233,6 +3259,12 @@ impl From<CMSG_MOVE_FALL_RESET> for ClientOpcodeMessage {
 impl From<CMSG_MOVE_FEATHER_FALL_ACK> for ClientOpcodeMessage {
     fn from(c: CMSG_MOVE_FEATHER_FALL_ACK) -> Self {
         Self::CMSG_MOVE_FEATHER_FALL_ACK(c)
+    }
+}
+
+impl From<CMSG_MOVE_NOT_ACTIVE_MOVER> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_NOT_ACTIVE_MOVER) -> Self {
+        Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c)
     }
 }
 
