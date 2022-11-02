@@ -1,8 +1,14 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_MOVE_SPLINE_DONE = 0x02C9 {
     MovementInfo info;
     u32 movement_counter;
     u32 unknown1;
+} {
+    versions = "1.12";
 }
 
+cmsg CMSG_MOVE_SPLINE_DONE = 0x02C9 {
+    MovementInfo info;
+    u32 movement_counter;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}

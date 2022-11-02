@@ -82,6 +82,8 @@ pub(crate) mod cmsg_move_not_active_mover;
 pub use cmsg_move_not_active_mover::*;
 pub(crate) mod cmsg_move_set_fly;
 pub use cmsg_move_set_fly::*;
+pub(crate) mod cmsg_move_spline_done;
+pub use cmsg_move_spline_done::*;
 pub(crate) mod cmsg_petition_buy;
 pub use cmsg_petition_buy::*;
 pub(crate) mod cmsg_played_time;
