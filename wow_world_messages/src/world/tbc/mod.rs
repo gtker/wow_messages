@@ -50,6 +50,8 @@ pub(crate) mod cmsg_move_fall_reset;
 pub use cmsg_move_fall_reset::*;
 pub(crate) mod cmsg_move_feather_fall_ack;
 pub use cmsg_move_feather_fall_ack::*;
+pub(crate) mod cmsg_move_hover_ack;
+pub use cmsg_move_hover_ack::*;
 pub(crate) mod cmsg_move_set_fly;
 pub use cmsg_move_set_fly::*;
 pub(crate) mod cmsg_set_active_voice_channel;
