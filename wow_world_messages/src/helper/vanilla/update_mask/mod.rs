@@ -56,6 +56,7 @@ mod test {
             .finalize();
         let update_mask = UpdateMask::Player(update_mask);
 
+        assert_eq!(b.len(), update_mask.size());
         let mut v = Vec::with_capacity(update_mask.size());
         update_mask.write_into_vec(&mut v).unwrap();
         assert_eq!(b.as_slice(), v.as_slice());
@@ -87,6 +88,7 @@ mod test {
         update_mask.set_object_GUID(4.into());
 
         let update_mask = UpdateMask::Player(update_mask);
+        assert_eq!(b.len(), update_mask.size());
 
         let mut v = Vec::with_capacity(update_mask.size());
         update_mask.write_into_vec(&mut v).unwrap();
@@ -119,6 +121,7 @@ mod test {
         update_mask.dirty_reset();
         let update_mask = UpdateMask::Player(update_mask);
 
+        assert_eq!(b.len(), update_mask.size());
         let mut v = Vec::with_capacity(update_mask.size());
         update_mask.write_into_vec(&mut v).unwrap();
         assert_eq!(b.as_slice(), v.as_slice());
@@ -160,6 +163,7 @@ mod test {
             .finalize();
         let update_mask = UpdateMask::Player(update_mask);
 
+        assert_eq!(b.len(), update_mask.size());
         let mut v = Vec::with_capacity(update_mask.size());
         update_mask.write_into_vec(&mut v).unwrap();
         assert_eq!(b.as_slice(), v.as_slice());
@@ -209,6 +213,7 @@ mod test {
 
         let update_mask = UpdateMask::Player(update_mask);
 
+        assert_eq!(b.len(), update_mask.size());
         let mut v = Vec::with_capacity(update_mask.size());
         update_mask.write_into_vec(&mut v).unwrap();
 

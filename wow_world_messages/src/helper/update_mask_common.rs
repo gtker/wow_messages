@@ -10,9 +10,13 @@ pub const GAMEOBJECT: u32 = 0x0020;
 pub const DYNAMICOBJECT: u32 = 0x0040;
 pub const CORPSE: u32 = 0x0080;
 
-pub(crate) fn update_mask_size(dirty_mask: &[u32]) -> usize {
+pub(crate) fn update_mask_size(dirty_mask: &[u32], header: &[u32]) -> usize {
     let amount_of_blocks = dirty_mask.len() * 4;
-    let amount_of_values = dirty_mask.iter().fold(0, |acc, x| acc + x.count_ones()) * 4;
+    let amount_of_values = dirty_mask
+        .iter()
+        .zip(header)
+        .fold(0, |acc, x| acc + (x.0 & x.1).count_ones())
+        * 4;
 
     1 + amount_of_blocks + amount_of_values as usize
 }
@@ -283,13 +287,13 @@ macro_rules! update_mask {
 
             pub(crate) fn size(&self) -> usize {
                 match self {
-                    UpdateMask::Item(i) => update_mask_size(&i.dirty_mask),
-                    UpdateMask::Container(i) => update_mask_size(&i.dirty_mask),
-                    UpdateMask::Unit(i) => update_mask_size(&i.dirty_mask),
-                    UpdateMask::Player(i) => update_mask_size(&i.dirty_mask),
-                    UpdateMask::GameObject(i) => update_mask_size(&i.dirty_mask),
-                    UpdateMask::DynamicObject(i) => update_mask_size(&i.dirty_mask),
-                    UpdateMask::Corpse(i) => update_mask_size(&i.dirty_mask),
+                    UpdateMask::Item(i) => update_mask_size(&i.dirty_mask, &i.header),
+                    UpdateMask::Container(i) => update_mask_size(&i.dirty_mask, &i.header),
+                    UpdateMask::Unit(i) => update_mask_size(&i.dirty_mask, &i.header),
+                    UpdateMask::Player(i) => update_mask_size(&i.dirty_mask, &i.header),
+                    UpdateMask::GameObject(i) => update_mask_size(&i.dirty_mask, &i.header),
+                    UpdateMask::DynamicObject(i) => update_mask_size(&i.dirty_mask, &i.header),
+                    UpdateMask::Corpse(i) => update_mask_size(&i.dirty_mask, &i.header),
                 }
             }
         }
