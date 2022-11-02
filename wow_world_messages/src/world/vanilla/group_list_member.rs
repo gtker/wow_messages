@@ -32,7 +32,6 @@ impl GroupListMember {
         // is_online: Bool
         w.write_all(u8::from(self.is_online).to_le_bytes().as_slice())?;
 
-        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }
