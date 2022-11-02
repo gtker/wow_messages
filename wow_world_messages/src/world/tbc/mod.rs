@@ -66,6 +66,8 @@ pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
+pub(crate) mod cmsg_world_teleport;
+pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
 pub use crate::helper::tbc::*;

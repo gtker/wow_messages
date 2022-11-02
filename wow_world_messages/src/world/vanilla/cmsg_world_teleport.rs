@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
 /// Sent when using the `worldport` console command.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm#L1):
 /// ```text
 /// cmsg CMSG_WORLD_TELEPORT = 0x0008 {
 ///     u32 time_in_msec;
@@ -84,7 +84,7 @@ mod test {
          0xDE, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x3F, 0x00, 0x00, 0x00,
          0x40, 0x00, 0x00, 0x40, 0x40, 0x00, 0x00, 0x80, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_WORLD_TELEPORT0() {
@@ -119,7 +119,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 11.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT0() {
@@ -154,7 +154,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 12.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 11.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT0() {
@@ -193,7 +193,7 @@ mod test {
          0x02, 0xD5, 0x01, 0x00, 0x00, 0x00, 0x00, 0xE2, 0x43, 0x00, 0xB0, 0xC9,
          0x45, 0x00, 0x80, 0x1E, 0x45, 0xDB, 0x0F, 0x49, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 32.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 33.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_WORLD_TELEPORT1() {
@@ -228,7 +228,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 32.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 33.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT1() {
@@ -263,7 +263,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 32.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm` line 33.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT1() {
