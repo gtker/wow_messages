@@ -13,8 +13,7 @@ use std::io::{Write, Read};
 /// cmsg CMSG_WORLD_TELEPORT = 0x0008 {
 ///     u32 time_in_msec;
 ///     Map map;
-///     u32 unk1;
-///     u32 unk2;
+///     u64 unknown;
 ///     Vector3d position;
 ///     f32 orientation;
 /// }
@@ -22,8 +21,7 @@ use std::io::{Write, Read};
 pub struct CMSG_WORLD_TELEPORT {
     pub time_in_msec: u32,
     pub map: Map,
-    pub unk1: u32,
-    pub unk2: u32,
+    pub unknown: u64,
     pub position: Vector3d,
     pub orientation: f32,
 }
@@ -42,11 +40,8 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         // map: Map
         w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
 
-        // unk1: u32
-        w.write_all(&self.unk1.to_le_bytes())?;
-
-        // unk2: u32
-        w.write_all(&self.unk2.to_le_bytes())?;
+        // unknown: u64
+        w.write_all(&self.unknown.to_le_bytes())?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;
@@ -67,11 +62,8 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-        // unk1: u32
-        let unk1 = crate::util::read_u32_le(r)?;
-
-        // unk2: u32
-        let unk2 = crate::util::read_u32_le(r)?;
+        // unknown: u64
+        let unknown = crate::util::read_u64_le(r)?;
 
         // position: Vector3d
         let position = Vector3d::read(r)?;
@@ -81,8 +73,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         Ok(Self {
             time_in_msec,
             map,
-            unk1,
-            unk2,
+            unknown,
             position,
             orientation,
         })
@@ -105,15 +96,14 @@ mod test {
          0x00, 0x00, 0x00, 0x80, 0x3F, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x40,
          0x40, 0x00, 0x00, 0x80, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 15.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 14.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_WORLD_TELEPORT0() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xDEADBEEF,
             map: Map::Kalimdor,
-            unk1: 0x0,
-            unk2: 0x0,
+            unknown: 0x0,
             position: Vector3d {
                 x: 1_f32,
                 y: 2_f32,
@@ -131,8 +121,7 @@ mod test {
 
         assert_eq!(t.time_in_msec, expected.time_in_msec);
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.unk1, expected.unk1);
-        assert_eq!(t.unk2, expected.unk2);
+        assert_eq!(t.unknown, expected.unknown);
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
@@ -144,15 +133,14 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 15.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 14.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT0() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xDEADBEEF,
             map: Map::Kalimdor,
-            unk1: 0x0,
-            unk2: 0x0,
+            unknown: 0x0,
             position: Vector3d {
                 x: 1_f32,
                 y: 2_f32,
@@ -170,8 +158,7 @@ mod test {
 
         assert_eq!(t.time_in_msec, expected.time_in_msec);
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.unk1, expected.unk1);
-        assert_eq!(t.unk2, expected.unk2);
+        assert_eq!(t.unknown, expected.unknown);
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
@@ -183,15 +170,14 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 15.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 14.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT0() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0xDEADBEEF,
             map: Map::Kalimdor,
-            unk1: 0x0,
-            unk2: 0x0,
+            unknown: 0x0,
             position: Vector3d {
                 x: 1_f32,
                 y: 2_f32,
@@ -209,8 +195,7 @@ mod test {
 
         assert_eq!(t.time_in_msec, expected.time_in_msec);
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.unk1, expected.unk1);
-        assert_eq!(t.unk2, expected.unk2);
+        assert_eq!(t.unknown, expected.unknown);
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
@@ -227,15 +212,14 @@ mod test {
          0x00, 0x00, 0x00, 0xE2, 0x43, 0x00, 0xB0, 0xC9, 0x45, 0x00, 0x80, 0x1E,
          0x45, 0xDB, 0x0F, 0x49, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 39.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_WORLD_TELEPORT1() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0x2093D9A,
             map: Map::BlackwingLair,
-            unk1: 0x0,
-            unk2: 0x0,
+            unknown: 0x0,
             position: Vector3d {
                 x: 452_f32,
                 y: 6454_f32,
@@ -253,8 +237,7 @@ mod test {
 
         assert_eq!(t.time_in_msec, expected.time_in_msec);
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.unk1, expected.unk1);
-        assert_eq!(t.unk2, expected.unk2);
+        assert_eq!(t.unknown, expected.unknown);
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
@@ -266,15 +249,14 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 39.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT1() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0x2093D9A,
             map: Map::BlackwingLair,
-            unk1: 0x0,
-            unk2: 0x0,
+            unknown: 0x0,
             position: Vector3d {
                 x: 452_f32,
                 y: 6454_f32,
@@ -292,8 +274,7 @@ mod test {
 
         assert_eq!(t.time_in_msec, expected.time_in_msec);
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.unk1, expected.unk1);
-        assert_eq!(t.unk2, expected.unk2);
+        assert_eq!(t.unknown, expected.unknown);
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
@@ -305,15 +286,14 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 39.
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT1() {
         let expected = CMSG_WORLD_TELEPORT {
             time_in_msec: 0x2093D9A,
             map: Map::BlackwingLair,
-            unk1: 0x0,
-            unk2: 0x0,
+            unknown: 0x0,
             position: Vector3d {
                 x: 452_f32,
                 y: 6454_f32,
@@ -331,8 +311,7 @@ mod test {
 
         assert_eq!(t.time_in_msec, expected.time_in_msec);
         assert_eq!(t.map, expected.map);
-        assert_eq!(t.unk1, expected.unk1);
-        assert_eq!(t.unk2, expected.unk2);
+        assert_eq!(t.unknown, expected.unknown);
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
