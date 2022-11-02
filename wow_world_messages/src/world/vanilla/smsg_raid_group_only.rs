@@ -35,7 +35,7 @@ impl crate::Message for SMSG_RAID_GROUP_ONLY {
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0286, size: body_size as u32 });
         }
 
         // homebind_timer: u32

@@ -39,7 +39,7 @@ impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CF, size: body_size as u32 });
         }
 
         // time: u32

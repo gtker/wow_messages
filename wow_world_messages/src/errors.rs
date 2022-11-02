@@ -6,7 +6,10 @@ pub enum ParseError {
     Io(std::io::Error),
     Enum(EnumError),
     String(std::string::FromUtf8Error),
-    InvalidSize(u32),
+    InvalidSize {
+        opcode: u32,
+        size: u32,
+    },
     BufferSizeTooSmall {
         opcode: u32,
         size: u32,
@@ -20,9 +23,10 @@ impl Display for ParseError {
             ParseError::Io(i) => i.fmt(f),
             ParseError::Enum(i) => i.fmt(f),
             ParseError::String(i) => i.fmt(f),
-            ParseError::InvalidSize(i) => {
-                f.write_fmt(format_args!("message has invalid size: '{}'", i))
-            }
+            ParseError::InvalidSize { opcode, size } => f.write_fmt(format_args!(
+                "message '{:#06X}' has invalid size: '{size}'",
+                opcode
+            )),
             ParseError::BufferSizeTooSmall { opcode, size, io } => f.write_fmt(format_args!(
                 "opcode '{}' has received too small size '{}' with io error: '{}'",
                 opcode, size, io

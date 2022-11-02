@@ -35,7 +35,7 @@ impl crate::Message for SMSG_LOOT_RELEASE_RESPONSE {
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0161, size: body_size as u32 });
         }
 
         // guid: Guid

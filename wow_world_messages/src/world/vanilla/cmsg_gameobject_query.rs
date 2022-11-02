@@ -33,7 +33,7 @@ impl crate::Message for CMSG_GAMEOBJECT_QUERY {
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005E, size: body_size as u32 });
         }
 
         // entry_id: u32

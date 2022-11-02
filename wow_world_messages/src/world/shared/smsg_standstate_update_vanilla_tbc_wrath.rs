@@ -28,7 +28,7 @@ impl crate::Message for SMSG_STANDSTATE_UPDATE {
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029D, size: body_size as u32 });
         }
 
         // state: UnitStandState

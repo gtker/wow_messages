@@ -24,7 +24,7 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Client {
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0284, size: body_size as u32 });
         }
 
         Ok(Self {

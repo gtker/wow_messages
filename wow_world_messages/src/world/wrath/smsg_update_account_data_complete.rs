@@ -34,7 +34,7 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize(body_size as u32));
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0463, size: body_size as u32 });
         }
 
         // data_type: u32

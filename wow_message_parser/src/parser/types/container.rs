@@ -132,6 +132,17 @@ impl Container {
         }
     }
 
+    pub(crate) fn opcode(&self) -> u32 {
+        match self.container_type() {
+            ContainerType::Struct => unreachable!("struct does not have opcode"),
+            ContainerType::CLogin(i)
+            | ContainerType::SLogin(i)
+            | ContainerType::Msg(i)
+            | ContainerType::CMsg(i)
+            | ContainerType::SMsg(i) => i as u32,
+        }
+    }
+
     pub(crate) fn type_definition_in_same_scope(&self, variable_name: &str) -> bool {
         fn inner(
             m: &StructMember,

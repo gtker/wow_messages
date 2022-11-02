@@ -109,8 +109,9 @@ fn test_for_invalid_size(s: &mut Writer, e: &Container) {
     if e.is_constant_sized() {
         s.bodyn(format!("if body_size != {}", e.sizes().maximum()), |s| {
             s.wln(format!(
-                "return Err({}::InvalidSize(body_size as u32));",
-                PARSE_ERROR
+                "return Err({}::InvalidSize {{ opcode: {:#06X}, size: body_size as u32 }});",
+                PARSE_ERROR,
+                e.opcode(),
             ));
         })
     }
@@ -235,7 +236,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                             format!(
                                 "crate::util::zlib_compressed_size({ref}{prefix}{name})",
                                 prefix = prefix,
-                                ref = if prefix.is_empty() { "" } else {"&"},
+                                ref = if prefix.is_empty() { "" } else { "&" },
                                 name = m.name()
                             )
                         } else {
@@ -324,25 +325,26 @@ pub(crate) fn print_size_rust_view(s: &mut Writer, c: &Container, prefix: &str) 
 
     if !r.constant_sized() {
         if c.tags().compressed() {
-            s.variable_size(
-                r.name(),
-                "size", 
-                |s| {
-                    s.wln("use crate::traits::Message;");
-                    s.newline();
+            s.variable_size(r.name(), "size", |s| {
+                s.wln("use crate::traits::Message;");
+                s.newline();
 
-                    s.wln("let mut v = Vec::new();");
-                    s.wln("self.write_into_vec(&mut v);");
-                    s.wln("v.len()");
-                }
-            );
+                s.wln("let mut v = Vec::new();");
+                s.wln("self.write_into_vec(&mut v);");
+                s.wln("v.len()");
+            });
         } else {
             print_size_uncompressed_rust_view(s, r, prefix, "size");
         }
     }
 }
 
-pub(crate) fn print_size_uncompressed_rust_view(s: &mut Writer, r: &RustObject, prefix: &str, function_name: &str) {
+pub(crate) fn print_size_uncompressed_rust_view(
+    s: &mut Writer,
+    r: &RustObject,
+    prefix: &str,
+    function_name: &str,
+) {
     if !r.constant_sized() {
         s.variable_size(r.name(), function_name, |s| {
             print_rust_members_sizes(s, r.members(), None, prefix);
