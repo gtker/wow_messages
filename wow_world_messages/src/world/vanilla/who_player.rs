@@ -57,6 +57,7 @@ impl WhoPlayer {
         // party_status: u32
         w.write_all(&self.party_status.to_le_bytes())?;
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

@@ -27,6 +27,7 @@ impl CMD_XFER_DATA {
             w.write_all(&i.to_le_bytes())?;
         }
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

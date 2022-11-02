@@ -39,6 +39,7 @@ impl crate::Message for SMSG_GUILD_COMMAND_RESULT {
         // result: GuildCommandResult
         w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

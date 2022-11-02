@@ -149,12 +149,22 @@ pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &s
         s.wln("w.write_all(&(self.size_uncompressed() as u32).to_le_bytes())?;");
         s.newline();
 
-        s.wln("let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());"); 
+        s.wln("let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());");
         s.newline();
     }
 
     for field in e.members() {
         print_write_field(s, e, o, field, "self.", prefix, postfix);
+    }
+
+    if !e.is_constant_sized()
+        && !e.tags().compressed()
+        && !e
+            .all_definitions()
+            .iter()
+            .any(|d| d.tags().compressed().is_some())
+    {
+        s.wln("assert_eq!(self.size() as usize, w.len(), \"Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent\");");
     }
 }
 

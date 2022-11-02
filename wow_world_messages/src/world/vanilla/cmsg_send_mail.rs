@@ -94,6 +94,7 @@ impl crate::Message for CMSG_SEND_MAIL {
         // unknown4: u32
         w.write_all(&self.unknown4.to_le_bytes())?;
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

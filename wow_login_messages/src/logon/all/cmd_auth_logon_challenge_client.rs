@@ -97,6 +97,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         // account_name: String[account_name_length]
         w.write_all(self.account_name.as_bytes())?;
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

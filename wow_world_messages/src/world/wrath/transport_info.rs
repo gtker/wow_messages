@@ -39,6 +39,7 @@ impl TransportInfo {
         // seat: u8
         w.write_all(&self.seat.to_le_bytes())?;
 
+        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }
