@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Vector3d;
+use wow_world_base::vanilla::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
@@ -52,4 +52,10 @@ impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
 

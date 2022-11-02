@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 cmsg CMSG_MOVE_SET_RAW_POSITION = 0x00E1 {
     Vector3d position;

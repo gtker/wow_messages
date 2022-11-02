@@ -82,6 +82,7 @@ use crate::world::wrath::CMSG_READ_ITEM;
 use crate::world::wrath::CMSG_GAMEOBJ_USE;
 use crate::world::wrath::CMSG_AREATRIGGER;
 use crate::world::wrath::MSG_MOVE_TELEPORT_ACK_Client;
+use crate::world::wrath::CMSG_MOVE_SET_RAW_POSITION;
 use crate::world::wrath::CMSG_FORCE_RUN_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK;
@@ -293,6 +294,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GAMEOBJ_USE(CMSG_GAMEOBJ_USE),
     CMSG_AREATRIGGER(CMSG_AREATRIGGER),
     MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Client),
+    CMSG_MOVE_SET_RAW_POSITION(CMSG_MOVE_SET_RAW_POSITION),
     CMSG_FORCE_RUN_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_SPEED_CHANGE_ACK),
     CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK),
     CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(CMSG_FORCE_SWIM_SPEED_CHANGE_ACK),
@@ -506,6 +508,7 @@ impl ClientOpcodeMessage {
             0x00B1 => Ok(Self::CMSG_GAMEOBJ_USE(<CMSG_GAMEOBJ_USE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B1, size: body_size, io, } } else { a } })?)),
             0x00B4 => Ok(Self::CMSG_AREATRIGGER(<CMSG_AREATRIGGER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B4, size: body_size, io, } } else { a } })?)),
             0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C7, size: body_size, io, } } else { a } })?)),
+            0x00E1 => Ok(Self::CMSG_MOVE_SET_RAW_POSITION(<CMSG_MOVE_SET_RAW_POSITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E1, size: body_size, io, } } else { a } })?)),
             0x00E3 => Ok(Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E3, size: body_size, io, } } else { a } })?)),
             0x00E5 => Ok(Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E5, size: body_size, io, } } else { a } })?)),
             0x00E7 => Ok(Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(<CMSG_FORCE_SWIM_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E7, size: body_size, io, } } else { a } })?)),
@@ -787,6 +790,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_USE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AREATRIGGER(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
@@ -1001,6 +1005,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_USE(c) => c.write_unencrypted_client(w),
             Self::CMSG_AREATRIGGER(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
@@ -1215,6 +1220,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_USE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AREATRIGGER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1429,6 +1435,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_USE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AREATRIGGER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1643,6 +1650,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_USE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AREATRIGGER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1857,6 +1865,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_USE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AREATRIGGER(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -2082,6 +2091,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GAMEOBJ_USE(_) => "CMSG_GAMEOBJ_USE",
             ClientOpcodeMessage::CMSG_AREATRIGGER(_) => "CMSG_AREATRIGGER",
             ClientOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Client",
+            ClientOpcodeMessage::CMSG_MOVE_SET_RAW_POSITION(_) => "CMSG_MOVE_SET_RAW_POSITION",
             ClientOpcodeMessage::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_SWIM_SPEED_CHANGE_ACK",
@@ -2661,6 +2671,12 @@ impl From<CMSG_AREATRIGGER> for ClientOpcodeMessage {
 impl From<MSG_MOVE_TELEPORT_ACK_Client> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_TELEPORT_ACK_Client) -> Self {
         Self::MSG_MOVE_TELEPORT_ACK(c)
+    }
+}
+
+impl From<CMSG_MOVE_SET_RAW_POSITION> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_SET_RAW_POSITION) -> Self {
+        Self::CMSG_MOVE_SET_RAW_POSITION(c)
     }
 }
 

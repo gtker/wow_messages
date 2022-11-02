@@ -186,8 +186,6 @@ pub(crate) mod cmsg_move_knock_back_ack;
 pub use cmsg_move_knock_back_ack::*;
 pub(crate) mod cmsg_move_not_active_mover;
 pub use cmsg_move_not_active_mover::*;
-pub(crate) mod cmsg_move_set_raw_position;
-pub use cmsg_move_set_raw_position::*;
 pub(crate) mod cmsg_move_spline_done;
 pub use cmsg_move_spline_done::*;
 pub(crate) mod cmsg_move_water_walk_ack;
@@ -749,6 +747,8 @@ pub use crate::shared::cmsg_mail_take_money_vanilla_tbc_wrath::CMSG_MAIL_TAKE_MO
 pub use crate::shared::cmsg_meetingstone_info_vanilla_tbc::CMSG_MEETINGSTONE_INFO;
 
 pub use crate::shared::cmsg_mountspecial_anim_vanilla_tbc_wrath::CMSG_MOUNTSPECIAL_ANIM;
+
+pub use crate::shared::cmsg_move_set_raw_position_vanilla_tbc_wrath::CMSG_MOVE_SET_RAW_POSITION;
 
 pub use crate::shared::cmsg_move_time_skipped_vanilla_tbc_wrath::CMSG_MOVE_TIME_SKIPPED;
 

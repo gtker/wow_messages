@@ -77,6 +77,7 @@ use crate::world::tbc::MSG_MOVE_START_SWIM_Client;
 use crate::world::tbc::MSG_MOVE_STOP_SWIM_Client;
 use crate::world::tbc::MSG_MOVE_SET_FACING_Client;
 use crate::world::tbc::MSG_MOVE_SET_PITCH_Client;
+use crate::world::tbc::CMSG_MOVE_SET_RAW_POSITION;
 use crate::world::tbc::CMSG_FORCE_RUN_SPEED_CHANGE_ACK;
 use crate::world::tbc::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK;
 use crate::world::tbc::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK;
@@ -285,6 +286,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Client),
     MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING_Client),
     MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH_Client),
+    CMSG_MOVE_SET_RAW_POSITION(CMSG_MOVE_SET_RAW_POSITION),
     CMSG_FORCE_RUN_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_SPEED_CHANGE_ACK),
     CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK),
     CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(CMSG_FORCE_SWIM_SPEED_CHANGE_ACK),
@@ -495,6 +497,7 @@ impl ClientOpcodeMessage {
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00CB, size: body_size, io, } } else { a } })?)),
             0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DA, size: body_size, io, } } else { a } })?)),
             0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DB, size: body_size, io, } } else { a } })?)),
+            0x00E1 => Ok(Self::CMSG_MOVE_SET_RAW_POSITION(<CMSG_MOVE_SET_RAW_POSITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E1, size: body_size, io, } } else { a } })?)),
             0x00E3 => Ok(Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E3, size: body_size, io, } } else { a } })?)),
             0x00E5 => Ok(Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E5, size: body_size, io, } } else { a } })?)),
             0x00E7 => Ok(Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(<CMSG_FORCE_SWIM_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E7, size: body_size, io, } } else { a } })?)),
@@ -773,6 +776,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_FACING(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
@@ -984,6 +988,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_FACING(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
@@ -1195,6 +1200,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1406,6 +1412,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1617,6 +1624,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1828,6 +1836,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_RAW_POSITION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -2074,6 +2083,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM_Client",
             ClientOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING_Client",
             ClientOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH_Client",
+            ClientOpcodeMessage::CMSG_MOVE_SET_RAW_POSITION(_) => "CMSG_MOVE_SET_RAW_POSITION",
             ClientOpcodeMessage::CMSG_FORCE_RUN_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_SWIM_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_SWIM_SPEED_CHANGE_ACK",
@@ -2625,6 +2635,12 @@ impl From<MSG_MOVE_SET_FACING_Client> for ClientOpcodeMessage {
 impl From<MSG_MOVE_SET_PITCH_Client> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_SET_PITCH_Client) -> Self {
         Self::MSG_MOVE_SET_PITCH(c)
+    }
+}
+
+impl From<CMSG_MOVE_SET_RAW_POSITION> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_SET_RAW_POSITION) -> Self {
+        Self::CMSG_MOVE_SET_RAW_POSITION(c)
     }
 }
 

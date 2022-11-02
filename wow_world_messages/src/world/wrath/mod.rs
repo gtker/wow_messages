@@ -428,6 +428,8 @@ pub use crate::shared::cmsg_mail_take_money_vanilla_tbc_wrath::CMSG_MAIL_TAKE_MO
 
 pub use crate::shared::cmsg_mountspecial_anim_vanilla_tbc_wrath::CMSG_MOUNTSPECIAL_ANIM;
 
+pub use crate::shared::cmsg_move_set_raw_position_vanilla_tbc_wrath::CMSG_MOVE_SET_RAW_POSITION;
+
 pub use crate::shared::cmsg_move_time_skipped_vanilla_tbc_wrath::CMSG_MOVE_TIME_SKIPPED;
 
 pub use crate::shared::cmsg_name_query_vanilla_tbc_wrath::CMSG_NAME_QUERY;

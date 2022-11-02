@@ -1,6 +1,6 @@
 # CMSG_MOVE_SET_RAW_POSITION
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2, Client Version 3
 
 ### Comment
 
