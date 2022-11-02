@@ -1,0 +1,5 @@
+struct T {
+    u8 basic;
+    Guid target;
+    u8 basic;
+} { versions = "1.12"; }

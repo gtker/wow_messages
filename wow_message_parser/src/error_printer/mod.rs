@@ -21,6 +21,7 @@ pub(crate) const NON_MATCHING_IF_VARIABLES: i32 = 13;
 pub(crate) const UNSUPPORTED_UPCAST: i32 = 14;
 pub(crate) const OVERLAPPING_VERSIONS: i32 = 15;
 pub(crate) const BOTH_LOGIN_AND_WORLD_VERSIONS: i32 = 16;
+pub(crate) const DUPLICATE_FIELD_NAMES: i32 = 17;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -361,4 +362,15 @@ pub(crate) fn object_has_both_versions(ty_name: &str, file_info: &FileInfo) -> !
     );
 
     wowm_exit(s, BOTH_LOGIN_AND_WORLD_VERSIONS)
+}
+
+pub(crate) fn duplicate_field_names(ty_name: &str, field_name: &str, file_info: &FileInfo) -> ! {
+    let mut s = ErrorWriter::new("Object has multiple fields with the same name.");
+
+    s.fileinfo(
+        file_info,
+        format!("Object '{ty_name}' has multiple fields with the name '{field_name}'."),
+    );
+
+    wowm_exit(s, DUPLICATE_FIELD_NAMES)
 }

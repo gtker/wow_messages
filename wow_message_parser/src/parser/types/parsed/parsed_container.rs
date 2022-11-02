@@ -1,4 +1,4 @@
-use crate::error_printer::complex_not_found;
+use crate::error_printer::{complex_not_found, duplicate_field_names};
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::DefinerUsage;
@@ -451,11 +451,7 @@ impl ParsedContainer {
         let mut previous_name = "";
         for e in v {
             if e == previous_name {
-                panic!(
-                    "struct '{struct_name}' contains duplicate fields '{field_name}'",
-                    struct_name = self.name(),
-                    field_name = e
-                );
+                duplicate_field_names(self.name(), e, &self.file_info);
             }
             previous_name = e;
         }
