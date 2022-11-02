@@ -39,6 +39,7 @@ impl crate::Message for SMSG_ADDON_INFO {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        let size_assert_header_size = w.len();
         // number_of_addons is included in the struct but explicitly excluded due to its `skip_serialize` tag.
 
         // addons: Addon[number_of_addons]
@@ -49,7 +50,7 @@ impl crate::Message for SMSG_ADDON_INFO {
         // number_of_banned_addons: u32
         w.write_all(&Self::NUMBER_OF_BANNED_ADDONS_VALUE.to_le_bytes())?;
 
-        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
+        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

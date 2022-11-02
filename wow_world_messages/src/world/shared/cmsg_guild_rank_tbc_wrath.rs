@@ -29,6 +29,7 @@ impl crate::Message for CMSG_GUILD_RANK {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        let size_assert_header_size = w.len();
         // rank_id: u32
         w.write_all(&self.rank_id.to_le_bytes())?;
 
@@ -50,7 +51,7 @@ impl crate::Message for CMSG_GUILD_RANK {
             i.write_into_vec(w)?;
         }
 
-        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
+        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

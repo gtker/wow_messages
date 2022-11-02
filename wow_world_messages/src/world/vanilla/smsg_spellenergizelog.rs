@@ -30,6 +30,7 @@ impl crate::Message for SMSG_SPELLENERGIZELOG {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        let size_assert_header_size = w.len();
         // victim_guid: PackedGuid
         self.victim_guid.write_packed_guid_into_vec(w);
 
@@ -45,7 +46,7 @@ impl crate::Message for SMSG_SPELLENERGIZELOG {
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;
 
-        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
+        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

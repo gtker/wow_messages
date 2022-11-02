@@ -35,6 +35,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
+        let size_assert_header_size = w.len();
         // client_public_key: u8[32]
         for i in self.client_public_key.iter() {
             w.write_all(&i.to_le_bytes())?;
@@ -80,7 +81,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
             }
         }
 
-        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
+        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

@@ -143,6 +143,21 @@ pub(crate) fn print_write_field_identifier(
 }
 
 pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
+    //Whether this write_into_vec method should do size checking. Size checks not supported for
+    //messages that are compressed or contain any compression.
+    let should_print_size_assert = e.container_type().is_top_level()
+        && !e.is_constant_sized()
+        && !e.tags().compressed()
+        && !e
+            .all_definitions()
+            .iter()
+            .any(|d| d.tags().compressed().is_some());
+
+    //Cache the header size
+    if should_print_size_assert {
+        s.wln("let size_assert_header_size = w.len();");
+    }
+
     // For fully compressed messages, replace the writer with a ZLibDecoder.
     if e.tags().compressed() {
         // Fully compressed messages include the decompressed size as a u32 at the start of the packet.
@@ -157,14 +172,9 @@ pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &s
         print_write_field(s, e, o, field, "self.", prefix, postfix);
     }
 
-    if !e.is_constant_sized()
-        && !e.tags().compressed()
-        && !e
-            .all_definitions()
-            .iter()
-            .any(|d| d.tags().compressed().is_some())
-    {
-        s.wln("assert_eq!(self.size() as usize, w.len(), \"Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent\");");
+    //Print the actual size assert, using the cached header size to discard the header
+    if should_print_size_assert {
+        s.wln("assert_eq!(self.size() as usize + size_assert_header_size, w.len(), \"Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent\");");
     }
 }
 

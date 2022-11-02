@@ -45,6 +45,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
+        let size_assert_header_size = w.len();
         // protocol_version: u8
         w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes())?;
 
@@ -108,7 +109,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailParentalcontrol => {}
         }
 
-        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
+        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

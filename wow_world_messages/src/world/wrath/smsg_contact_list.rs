@@ -27,6 +27,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        let size_assert_header_size = w.len();
         // list_mask: RelationType
         w.write_all(&(self.list_mask.as_int() as u32).to_le_bytes())?;
 
@@ -38,7 +39,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
             i.write_into_vec(w)?;
         }
 
-        assert_eq!(self.size() as usize, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
+        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
