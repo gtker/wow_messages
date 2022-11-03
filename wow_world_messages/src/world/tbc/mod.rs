@@ -428,7 +428,7 @@ pub use crate::shared::cmsg_mountspecial_anim_vanilla_tbc_wrath::CMSG_MOUNTSPECI
 
 pub use crate::shared::cmsg_move_set_raw_position_vanilla_tbc_wrath::CMSG_MOVE_SET_RAW_POSITION;
 
-pub use crate::shared::cmsg_move_time_skipped_vanilla_tbc_wrath::CMSG_MOVE_TIME_SKIPPED;
+pub use crate::shared::cmsg_move_time_skipped_vanilla_tbc::CMSG_MOVE_TIME_SKIPPED;
 
 pub use crate::shared::cmsg_name_query_vanilla_tbc_wrath::CMSG_NAME_QUERY;
 
