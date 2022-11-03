@@ -798,6 +798,8 @@ pub use crate::shared::smsg_move_land_walk_vanilla_tbc_wrath::SMSG_MOVE_LAND_WAL
 
 pub use crate::shared::smsg_move_normal_fall_vanilla_tbc_wrath::SMSG_MOVE_NORMAL_FALL;
 
+pub use crate::shared::smsg_move_set_hover_vanilla_tbc_wrath::SMSG_MOVE_SET_HOVER;
+
 pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;

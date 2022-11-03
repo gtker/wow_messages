@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 smsg SMSG_MOVE_SET_HOVER = 0x00F4 {
     PackedGuid guid;
