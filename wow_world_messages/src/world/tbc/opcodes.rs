@@ -3632,6 +3632,7 @@ use crate::world::tbc::SMSG_SPLINE_MOVE_UNROOT;
 use crate::world::tbc::SMSG_SPLINE_MOVE_FEATHER_FALL;
 use crate::world::tbc::SMSG_SPLINE_MOVE_NORMAL_FALL;
 use crate::world::tbc::SMSG_SPLINE_MOVE_SET_HOVER;
+use crate::world::tbc::SMSG_SPLINE_MOVE_UNSET_HOVER;
 use crate::world::tbc::SMSG_SPLINE_MOVE_LAND_WALK;
 use crate::world::tbc::SMSG_SPLINE_MOVE_START_SWIM;
 use crate::world::tbc::SMSG_SPLINE_MOVE_STOP_SWIM;
@@ -3825,6 +3826,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPLINE_MOVE_FEATHER_FALL(SMSG_SPLINE_MOVE_FEATHER_FALL),
     SMSG_SPLINE_MOVE_NORMAL_FALL(SMSG_SPLINE_MOVE_NORMAL_FALL),
     SMSG_SPLINE_MOVE_SET_HOVER(SMSG_SPLINE_MOVE_SET_HOVER),
+    SMSG_SPLINE_MOVE_UNSET_HOVER(SMSG_SPLINE_MOVE_UNSET_HOVER),
     SMSG_SPLINE_MOVE_LAND_WALK(SMSG_SPLINE_MOVE_LAND_WALK),
     SMSG_SPLINE_MOVE_START_SWIM(SMSG_SPLINE_MOVE_START_SWIM),
     SMSG_SPLINE_MOVE_STOP_SWIM(SMSG_SPLINE_MOVE_STOP_SWIM),
@@ -4020,6 +4022,7 @@ impl ServerOpcodeMessage {
             0x0305 => Ok(Self::SMSG_SPLINE_MOVE_FEATHER_FALL(<SMSG_SPLINE_MOVE_FEATHER_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0305, size: body_size, io, } } else { a } })?)),
             0x0306 => Ok(Self::SMSG_SPLINE_MOVE_NORMAL_FALL(<SMSG_SPLINE_MOVE_NORMAL_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0306, size: body_size, io, } } else { a } })?)),
             0x0307 => Ok(Self::SMSG_SPLINE_MOVE_SET_HOVER(<SMSG_SPLINE_MOVE_SET_HOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0307, size: body_size, io, } } else { a } })?)),
+            0x0308 => Ok(Self::SMSG_SPLINE_MOVE_UNSET_HOVER(<SMSG_SPLINE_MOVE_UNSET_HOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0308, size: body_size, io, } } else { a } })?)),
             0x030A => Ok(Self::SMSG_SPLINE_MOVE_LAND_WALK(<SMSG_SPLINE_MOVE_LAND_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030A, size: body_size, io, } } else { a } })?)),
             0x030B => Ok(Self::SMSG_SPLINE_MOVE_START_SWIM(<SMSG_SPLINE_MOVE_START_SWIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030B, size: body_size, io, } } else { a } })?)),
             0x030C => Ok(Self::SMSG_SPLINE_MOVE_STOP_SWIM(<SMSG_SPLINE_MOVE_STOP_SWIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030C, size: body_size, io, } } else { a } })?)),
@@ -4283,6 +4286,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
@@ -4479,6 +4483,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
@@ -4675,6 +4680,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4871,6 +4877,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5067,6 +5074,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5263,6 +5271,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
@@ -5461,6 +5470,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_FEATHER_FALL(_) => "SMSG_SPLINE_MOVE_FEATHER_FALL",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_NORMAL_FALL(_) => "SMSG_SPLINE_MOVE_NORMAL_FALL",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_HOVER(_) => "SMSG_SPLINE_MOVE_SET_HOVER",
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNSET_HOVER(_) => "SMSG_SPLINE_MOVE_UNSET_HOVER",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_LAND_WALK(_) => "SMSG_SPLINE_MOVE_LAND_WALK",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_START_SWIM(_) => "SMSG_SPLINE_MOVE_START_SWIM",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_STOP_SWIM(_) => "SMSG_SPLINE_MOVE_STOP_SWIM",
@@ -6532,6 +6542,12 @@ impl From<SMSG_SPLINE_MOVE_NORMAL_FALL> for ServerOpcodeMessage {
 impl From<SMSG_SPLINE_MOVE_SET_HOVER> for ServerOpcodeMessage {
     fn from(c: SMSG_SPLINE_MOVE_SET_HOVER) -> Self {
         Self::SMSG_SPLINE_MOVE_SET_HOVER(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_UNSET_HOVER> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_UNSET_HOVER) -> Self {
+        Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c)
     }
 }
 
