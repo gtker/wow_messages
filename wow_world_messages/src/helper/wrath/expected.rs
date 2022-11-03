@@ -1,5 +1,5 @@
 use crate::errors::ExpectedOpcodeError;
-use crate::wrath::{ClientMessage, ServerMessage};
+use crate::wrath::{opcode_to_name, ClientMessage, ServerMessage};
 #[cfg(feature = "encryption")]
 use wow_srp::wrath_header::{ClientDecrypterHalf, ServerDecrypterHalf, CLIENT_HEADER_LENGTH};
 
@@ -133,6 +133,7 @@ fn read_client_body<M: ClientMessage>(
     } else {
         Err(ExpectedOpcodeError::Opcode {
             opcode,
+            name: opcode_to_name(opcode),
             size: size.into(),
         })
     }
@@ -151,6 +152,10 @@ fn read_server_body<M: ServerMessage>(
             Err(e) => Err(e.into()),
         }
     } else {
-        Err(ExpectedOpcodeError::Opcode { opcode, size })
+        Err(ExpectedOpcodeError::Opcode {
+            opcode,
+            name: opcode_to_name(opcode),
+            size,
+        })
     }
 }

@@ -57,18 +57,32 @@ impl From<std::io::Error> for ParseError {
 
 #[derive(Debug)]
 pub enum ExpectedOpcodeError {
-    Opcode { opcode: u32, size: u32 },
+    Opcode {
+        opcode: u32,
+        name: Option<&'static str>,
+        size: u32,
+    },
     Parse(ParseError),
 }
 
 impl Display for ExpectedOpcodeError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Opcode { opcode, size } => write!(
-                f,
-                "unexpected opcode found: '{:#06X}' and size '{}'",
-                opcode, size
-            ),
+            Self::Opcode { opcode, name, size } => {
+                if let Some(name) = name {
+                    write!(
+                        f,
+                        "unexpected message '{}' found: opcode '{:#06X}' and size '{}'",
+                        name, opcode, size
+                    )
+                } else {
+                    write!(
+                        f,
+                        "unexpected opcode without name found: '{:#06X}' and size '{}'",
+                        opcode, size
+                    )
+                }
+            }
             Self::Parse(i) => i.fmt(f),
         }
     }

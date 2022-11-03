@@ -8,6 +8,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::wrath::MovementInfo;
 use crate::errors::ParseError;
+use crate::wrath::opcode_to_name;
 use crate::world::wrath::MSG_MOVE_START_FORWARD;
 use crate::world::wrath::MSG_MOVE_START_BACKWARD;
 use crate::world::wrath::MSG_MOVE_STOP;
@@ -700,7 +701,7 @@ impl ClientOpcodeMessage {
             0x03D3 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D3, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
-            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
+            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
 
@@ -4395,7 +4396,7 @@ impl ServerOpcodeMessage {
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
             0x04F7 => Ok(Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(<SMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F7, size: body_size, io, } } else { a } })?)),
-            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
+            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
     }
 

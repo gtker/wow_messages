@@ -8,6 +8,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::vanilla::MovementInfo;
 use crate::errors::ParseError;
+use crate::vanilla::opcode_to_name;
 use crate::world::vanilla::MSG_MOVE_WORLDPORT_ACK;
 use crate::world::vanilla::MSG_PETITION_DECLINE;
 use crate::world::vanilla::MSG_TABARDVENDOR_ACTIVATE;
@@ -925,7 +926,7 @@ impl ClientOpcodeMessage {
             0x0321 => Ok(Self::MSG_RAID_TARGET_UPDATE(<MSG_RAID_TARGET_UPDATE_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0321, size: body_size, io, } } else { a } })?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
             0x032A => Ok(Self::CMSG_GMSURVEY_SUBMIT(<CMSG_GMSURVEY_SUBMIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032A, size: body_size, io, } } else { a } })?)),
-            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
+            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
 
@@ -6045,7 +6046,7 @@ impl ServerOpcodeMessage {
             0x0330 => Ok(Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(<SMSG_SPELL_UPDATE_CHAIN_TARGETS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0330, size: body_size, io, } } else { a } })?)),
             0x0332 => Ok(Self::SMSG_EXPECTED_SPAM_RECORDS(<SMSG_EXPECTED_SPAM_RECORDS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0332, size: body_size, io, } } else { a } })?)),
             0x033B => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033B, size: body_size, io, } } else { a } })?)),
-            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
+            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
     }
 

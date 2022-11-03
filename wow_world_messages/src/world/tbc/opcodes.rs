@@ -8,6 +8,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use async_std::io::{ReadExt, WriteExt};
 use crate::world::tbc::MovementInfo;
 use crate::errors::ParseError;
+use crate::tbc::opcode_to_name;
 use crate::world::tbc::MSG_MOVE_WORLDPORT_ACK;
 use crate::world::tbc::MSG_PETITION_DECLINE;
 use crate::world::tbc::MSG_TABARDVENDOR_ACTIVATE;
@@ -673,7 +674,7 @@ impl ClientOpcodeMessage {
             0x0391 => Ok(Self::CMSG_TIME_SYNC_RESP(<CMSG_TIME_SYNC_RESP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0391, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
             0x03D2 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D2, size: body_size, io, } } else { a } })?)),
-            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, size: body_size }),
+            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
 
@@ -4272,7 +4273,7 @@ impl ServerOpcodeMessage {
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
             0x03B2 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B2, size: body_size, io, } } else { a } })?)),
-            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), size: body_size }),
+            _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
     }
 

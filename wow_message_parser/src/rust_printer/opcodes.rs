@@ -115,6 +115,11 @@ pub(crate) fn includes(
             }
 
             s.wln(format!("use {};", PARSE_ERROR));
+
+            s.wln(format!(
+                "use crate::{}::opcode_to_name;",
+                major_version_to_string(&version.as_major_world()),
+            ));
         }
         _ => {}
     }
@@ -183,12 +188,12 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                           enum_name = get_enumerator_name(e.name())));
         }
 
-        let opcode_text = if size == "u32" {
-            "opcode"
+        let (opcode_text, opcode_to_name_text) = if size == "u32" {
+            ("opcode", "opcode")
         } else {
-            "opcode: opcode.into()"
+            ("opcode: opcode.into()", "opcode.into()")
         };
-        s.wln(format!("_ => Err({error_ty}::Opcode{{ {opcode_text}, size: body_size }}),", error_ty = error_ty, opcode_text = opcode_text));
+        s.wln(format!("_ => Err({error_ty}::Opcode{{ {opcode_text}, name: opcode_to_name({opcode_to_name_text}), size: body_size }}),"));
 
         s.closing_curly(); // match opcode
     });
