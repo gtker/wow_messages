@@ -1,4 +1,4 @@
-#tag_all versions "1 2 3";
+#tag_all versions "1 2";
 
 smsg SMSG_SET_REST_START = 0x021E {
     u32 unknown1 {

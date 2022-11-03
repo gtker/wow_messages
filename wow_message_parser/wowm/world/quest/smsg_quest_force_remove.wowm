@@ -1,0 +1,5 @@
+smsg SMSG_QUEST_FORCE_REMOVE = 0x21E {
+    u32 quest_id;
+} {
+    versions = "3.3.5";
+}

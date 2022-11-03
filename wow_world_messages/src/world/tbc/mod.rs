@@ -862,7 +862,7 @@ pub use crate::shared::smsg_set_faction_visible_vanilla_tbc_wrath::SMSG_SET_FACT
 
 pub use crate::shared::smsg_set_forced_reactions_vanilla_tbc_wrath::SMSG_SET_FORCED_REACTIONS;
 
-pub use crate::shared::smsg_set_rest_start_vanilla_tbc_wrath::SMSG_SET_REST_START;
+pub use crate::shared::smsg_set_rest_start_vanilla_tbc::SMSG_SET_REST_START;
 
 pub use crate::shared::smsg_show_bank_vanilla_tbc_wrath::SMSG_SHOW_BANK;
 

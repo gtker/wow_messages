@@ -657,7 +657,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_GROUP_RAID_CONVERT", 0x28E),
     Data::new("CMSG_GROUP_ASSISTANT_LEADER", 0x28F),
     Data::new("CMSG_BUYBACK_ITEM", 0x290),
-    Data::new("SMSG_CHAT_SERVER_MESSAGE", 0x291),
+    Data::new("SMSG_SERVER_MESSAGE", 0x291),
     Data::new("CMSG_SET_SAVED_INSTANCE_EXTEND", 0x292),
     Data::new("SMSG_LFG_OFFER_CONTINUE", 0x293),
     Data::new("CMSG_TEST_DROP_RATE", 0x294),

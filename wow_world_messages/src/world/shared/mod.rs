@@ -330,7 +330,7 @@ pub mod smsg_sell_item_vanilla_tbc;
 pub mod smsg_server_message_vanilla_tbc;
 pub mod smsg_set_faction_visible_vanilla_tbc_wrath;
 pub mod smsg_set_forced_reactions_vanilla_tbc_wrath;
-pub mod smsg_set_rest_start_vanilla_tbc_wrath;
+pub mod smsg_set_rest_start_vanilla_tbc;
 pub mod smsg_show_bank_vanilla_tbc_wrath;
 pub mod smsg_showtaxinodes_vanilla_tbc_wrath;
 pub mod smsg_spline_move_feather_fall_vanilla_tbc_wrath;

@@ -850,6 +850,7 @@
 - [SMSG_QUESTUPDATE_FAILED](docs/smsg_questupdate_failed.md)
 - [SMSG_QUESTUPDATE_FAILEDTIMER](docs/smsg_questupdate_failedtimer.md)
 - [SMSG_QUEST_CONFIRM_ACCEPT](docs/smsg_quest_confirm_accept.md)
+- [SMSG_QUEST_FORCE_REMOVE](docs/smsg_quest_force_remove.md)
 - [SMSG_QUEST_QUERY_RESPONSE](docs/smsg_quest_query_response.md)
 - [SMSG_RAID_GROUP_ONLY](docs/smsg_raid_group_only.md)
 - [SMSG_RAID_INSTANCE_INFO](docs/smsg_raid_instance_info.md)

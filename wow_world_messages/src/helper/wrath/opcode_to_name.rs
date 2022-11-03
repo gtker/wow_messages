@@ -652,7 +652,7 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x028e => "CMSG_GROUP_RAID_CONVERT",
         0x028f => "CMSG_GROUP_ASSISTANT_LEADER",
         0x0290 => "CMSG_BUYBACK_ITEM",
-        0x0291 => "SMSG_CHAT_SERVER_MESSAGE",
+        0x0291 => "SMSG_SERVER_MESSAGE",
         0x0292 => "CMSG_SET_SAVED_INSTANCE_EXTEND",
         0x0293 => "SMSG_LFG_OFFER_CONTINUE",
         0x0294 => "CMSG_TEST_DROP_RATE",
