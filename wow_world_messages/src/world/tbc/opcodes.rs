@@ -3631,6 +3631,7 @@ use crate::world::tbc::SMSG_CHAT_RESTRICTED;
 use crate::world::tbc::SMSG_SPLINE_MOVE_FEATHER_FALL;
 use crate::world::tbc::SMSG_SPLINE_MOVE_NORMAL_FALL;
 use crate::world::tbc::SMSG_SPLINE_MOVE_LAND_WALK;
+use crate::world::tbc::SMSG_SPLINE_MOVE_ROOT;
 use crate::world::tbc::SMSG_GM_TICKET_STATUS_UPDATE;
 use crate::world::tbc::SMSG_DEFENSE_MESSAGE;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Server;
@@ -3817,6 +3818,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPLINE_MOVE_FEATHER_FALL(SMSG_SPLINE_MOVE_FEATHER_FALL),
     SMSG_SPLINE_MOVE_NORMAL_FALL(SMSG_SPLINE_MOVE_NORMAL_FALL),
     SMSG_SPLINE_MOVE_LAND_WALK(SMSG_SPLINE_MOVE_LAND_WALK),
+    SMSG_SPLINE_MOVE_ROOT(SMSG_SPLINE_MOVE_ROOT),
     SMSG_GM_TICKET_STATUS_UPDATE(SMSG_GM_TICKET_STATUS_UPDATE),
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Server),
@@ -4005,6 +4007,7 @@ impl ServerOpcodeMessage {
             0x0305 => Ok(Self::SMSG_SPLINE_MOVE_FEATHER_FALL(<SMSG_SPLINE_MOVE_FEATHER_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0305, size: body_size, io, } } else { a } })?)),
             0x0306 => Ok(Self::SMSG_SPLINE_MOVE_NORMAL_FALL(<SMSG_SPLINE_MOVE_NORMAL_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0306, size: body_size, io, } } else { a } })?)),
             0x030A => Ok(Self::SMSG_SPLINE_MOVE_LAND_WALK(<SMSG_SPLINE_MOVE_LAND_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030A, size: body_size, io, } } else { a } })?)),
+            0x031A => Ok(Self::SMSG_SPLINE_MOVE_ROOT(<SMSG_SPLINE_MOVE_ROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031A, size: body_size, io, } } else { a } })?)),
             0x0328 => Ok(Self::SMSG_GM_TICKET_STATUS_UPDATE(<SMSG_GM_TICKET_STATUS_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0328, size: body_size, io, } } else { a } })?)),
             0x033A => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033A, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
@@ -4261,6 +4264,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPLINE_MOVE_ROOT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
@@ -4450,6 +4454,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPLINE_MOVE_ROOT(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
@@ -4639,6 +4644,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_ROOT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4828,6 +4834,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_ROOT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5017,6 +5024,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_ROOT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5206,6 +5214,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_ROOT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
@@ -5397,6 +5406,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_FEATHER_FALL(_) => "SMSG_SPLINE_MOVE_FEATHER_FALL",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_NORMAL_FALL(_) => "SMSG_SPLINE_MOVE_NORMAL_FALL",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_LAND_WALK(_) => "SMSG_SPLINE_MOVE_LAND_WALK",
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_ROOT(_) => "SMSG_SPLINE_MOVE_ROOT",
             ServerOpcodeMessage::SMSG_GM_TICKET_STATUS_UPDATE(_) => "SMSG_GM_TICKET_STATUS_UPDATE",
             ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => "SMSG_DEFENSE_MESSAGE",
             ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Server",
@@ -6456,6 +6466,12 @@ impl From<SMSG_SPLINE_MOVE_NORMAL_FALL> for ServerOpcodeMessage {
 impl From<SMSG_SPLINE_MOVE_LAND_WALK> for ServerOpcodeMessage {
     fn from(c: SMSG_SPLINE_MOVE_LAND_WALK) -> Self {
         Self::SMSG_SPLINE_MOVE_LAND_WALK(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_ROOT> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_ROOT) -> Self {
+        Self::SMSG_SPLINE_MOVE_ROOT(c)
     }
 }
 
