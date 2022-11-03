@@ -1,0 +1,3 @@
+#tag_all versions "3.3.5";
+
+msg MSG_GUILD_BANK_MONEY_WITHDRAWN = 0x03FE {}
