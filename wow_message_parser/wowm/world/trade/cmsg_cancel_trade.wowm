@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3.3.5";
 
 cmsg CMSG_CANCEL_TRADE = 0x011C {}
 

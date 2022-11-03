@@ -5,7 +5,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// Response if [`CMSG_PLAYER_LOGIN`](crate::world::vanilla::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [`SMSG_LOGIN_VERIFY_WORLD`](crate::world::tbc::SMSG_LOGIN_VERIFY_WORLD).
 ///
-/// Client seems to always send a `CMSG_CANCEL_TRADE` after receiving this message, for unknown reasons.
+/// Client seems to always send a [`CMSG_CANCEL_TRADE`](crate::world::vanilla::CMSG_CANCEL_TRADE) after receiving this message, for unknown reasons.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L1):
 /// ```text
