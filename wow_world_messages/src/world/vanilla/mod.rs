@@ -240,8 +240,6 @@ pub(crate) mod cmsg_repair_item;
 pub use cmsg_repair_item::*;
 pub(crate) mod cmsg_request_party_member_stats;
 pub use cmsg_request_party_member_stats::*;
-pub(crate) mod cmsg_request_raid_info;
-pub use cmsg_request_raid_info::*;
 pub(crate) mod cmsg_reset_instances;
 pub use cmsg_reset_instances::*;
 pub(crate) mod cmsg_resurrect_response;
@@ -775,6 +773,8 @@ pub use crate::shared::cmsg_repop_request_vanilla_tbc_wrath::CMSG_REPOP_REQUEST;
 pub use crate::shared::cmsg_request_account_data_vanilla_tbc_wrath::CMSG_REQUEST_ACCOUNT_DATA;
 
 pub use crate::shared::cmsg_request_pet_info_vanilla_tbc_wrath::CMSG_REQUEST_PET_INFO;
+
+pub use crate::shared::cmsg_request_raid_info_vanilla_tbc_wrath::CMSG_REQUEST_RAID_INFO;
 
 pub use crate::shared::cmsg_sell_item_vanilla_tbc_wrath::CMSG_SELL_ITEM;
 

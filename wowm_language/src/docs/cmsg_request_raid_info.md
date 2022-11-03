@@ -1,6 +1,6 @@
 # CMSG_REQUEST_RAID_INFO
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2, Client Version 3.3.5
 
 ### Wowm Representation
 
