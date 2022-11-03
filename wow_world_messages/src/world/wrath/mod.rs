@@ -776,6 +776,8 @@ pub use crate::shared::smsg_show_bank_vanilla_tbc_wrath::SMSG_SHOW_BANK;
 
 pub use crate::shared::smsg_showtaxinodes_vanilla_tbc_wrath::SMSG_SHOWTAXINODES;
 
+pub use crate::shared::smsg_spline_move_feather_fall_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_FEATHER_FALL;
+
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
 pub use crate::shared::smsg_time_sync_req_tbc_wrath::SMSG_TIME_SYNC_REQ;
