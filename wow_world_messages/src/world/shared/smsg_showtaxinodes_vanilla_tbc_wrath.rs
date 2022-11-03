@@ -81,6 +81,12 @@ impl crate::Message for SMSG_SHOWTAXINODES {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_SHOWTAXINODES {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_SHOWTAXINODES {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_SHOWTAXINODES {}
+
 impl SMSG_SHOWTAXINODES {
     pub(crate) fn size(&self) -> usize {
         4 // unknown1: u32

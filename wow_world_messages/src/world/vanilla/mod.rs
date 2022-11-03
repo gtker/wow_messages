@@ -1110,6 +1110,8 @@ pub use crate::shared::smsg_set_rest_start_vanilla_tbc_wrath::SMSG_SET_REST_STAR
 
 pub use crate::shared::smsg_show_bank_vanilla_tbc_wrath::SMSG_SHOW_BANK;
 
+pub use crate::shared::smsg_showtaxinodes_vanilla_tbc_wrath::SMSG_SHOWTAXINODES;
+
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
@@ -1464,8 +1466,6 @@ pub(crate) mod smsg_set_pct_spell_modifier;
 pub use smsg_set_pct_spell_modifier::*;
 pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
-pub(crate) mod smsg_showtaxinodes;
-pub use smsg_showtaxinodes::*;
 pub(crate) mod smsg_spell_cooldown;
 pub use smsg_spell_cooldown::*;
 pub(crate) mod smsg_spell_delayed;

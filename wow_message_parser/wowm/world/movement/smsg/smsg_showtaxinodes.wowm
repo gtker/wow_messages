@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 smsg SMSG_SHOWTAXINODES = 0x01A9 {
     u32 unknown1 {
