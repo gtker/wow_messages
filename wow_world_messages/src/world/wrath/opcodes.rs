@@ -123,6 +123,7 @@ use crate::world::wrath::CMSG_DUEL_CANCELLED;
 use crate::world::wrath::CMSG_MOUNTSPECIAL_ANIM;
 use crate::world::wrath::CMSG_PET_ACTION;
 use crate::world::wrath::CMSG_PET_ABANDON;
+use crate::world::wrath::CMSG_PET_RENAME;
 use crate::world::wrath::CMSG_GOSSIP_HELLO;
 use crate::world::wrath::CMSG_GOSSIP_SELECT_OPTION;
 use crate::world::wrath::CMSG_LIST_INVENTORY;
@@ -335,6 +336,7 @@ pub enum ClientOpcodeMessage {
     CMSG_MOUNTSPECIAL_ANIM(CMSG_MOUNTSPECIAL_ANIM),
     CMSG_PET_ACTION(CMSG_PET_ACTION),
     CMSG_PET_ABANDON(CMSG_PET_ABANDON),
+    CMSG_PET_RENAME(CMSG_PET_RENAME),
     CMSG_GOSSIP_HELLO(CMSG_GOSSIP_HELLO),
     CMSG_GOSSIP_SELECT_OPTION(CMSG_GOSSIP_SELECT_OPTION),
     CMSG_LIST_INVENTORY(CMSG_LIST_INVENTORY),
@@ -549,6 +551,7 @@ impl ClientOpcodeMessage {
             0x0171 => Ok(Self::CMSG_MOUNTSPECIAL_ANIM(<CMSG_MOUNTSPECIAL_ANIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0171, size: body_size, io, } } else { a } })?)),
             0x0175 => Ok(Self::CMSG_PET_ACTION(<CMSG_PET_ACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0175, size: body_size, io, } } else { a } })?)),
             0x0176 => Ok(Self::CMSG_PET_ABANDON(<CMSG_PET_ABANDON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0176, size: body_size, io, } } else { a } })?)),
+            0x0177 => Ok(Self::CMSG_PET_RENAME(<CMSG_PET_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0177, size: body_size, io, } } else { a } })?)),
             0x017B => Ok(Self::CMSG_GOSSIP_HELLO(<CMSG_GOSSIP_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017B, size: body_size, io, } } else { a } })?)),
             0x017C => Ok(Self::CMSG_GOSSIP_SELECT_OPTION(<CMSG_GOSSIP_SELECT_OPTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017C, size: body_size, io, } } else { a } })?)),
             0x019E => Ok(Self::CMSG_LIST_INVENTORY(<CMSG_LIST_INVENTORY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019E, size: body_size, io, } } else { a } })?)),
@@ -831,6 +834,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_ACTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_ABANDON(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PET_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GOSSIP_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LIST_INVENTORY(c) => c.write_encrypted_client(w, e),
@@ -1046,6 +1050,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_ACTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_ABANDON(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PET_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_GOSSIP_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_LIST_INVENTORY(c) => c.write_unencrypted_client(w),
@@ -1261,6 +1266,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_ACTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_ABANDON(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PET_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LIST_INVENTORY(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1476,6 +1482,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_ACTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_ABANDON(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PET_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LIST_INVENTORY(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1691,6 +1698,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_ACTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_ABANDON(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PET_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LIST_INVENTORY(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1906,6 +1914,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_ACTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_ABANDON(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PET_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LIST_INVENTORY(c) => c.astd_write_unencrypted_client(w).await,
@@ -2132,6 +2141,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_MOUNTSPECIAL_ANIM(_) => "CMSG_MOUNTSPECIAL_ANIM",
             ClientOpcodeMessage::CMSG_PET_ACTION(_) => "CMSG_PET_ACTION",
             ClientOpcodeMessage::CMSG_PET_ABANDON(_) => "CMSG_PET_ABANDON",
+            ClientOpcodeMessage::CMSG_PET_RENAME(_) => "CMSG_PET_RENAME",
             ClientOpcodeMessage::CMSG_GOSSIP_HELLO(_) => "CMSG_GOSSIP_HELLO",
             ClientOpcodeMessage::CMSG_GOSSIP_SELECT_OPTION(_) => "CMSG_GOSSIP_SELECT_OPTION",
             ClientOpcodeMessage::CMSG_LIST_INVENTORY(_) => "CMSG_LIST_INVENTORY",
@@ -2917,6 +2927,12 @@ impl From<CMSG_PET_ACTION> for ClientOpcodeMessage {
 impl From<CMSG_PET_ABANDON> for ClientOpcodeMessage {
     fn from(c: CMSG_PET_ABANDON) -> Self {
         Self::CMSG_PET_ABANDON(c)
+    }
+}
+
+impl From<CMSG_PET_RENAME> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_RENAME) -> Self {
+        Self::CMSG_PET_RENAME(c)
     }
 }
 

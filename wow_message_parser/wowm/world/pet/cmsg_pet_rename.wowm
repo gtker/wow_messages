@@ -1,7 +1,14 @@
-#tag_all versions "1.12";
+cmsg CMSG_PET_RENAME = 0x0177 {
+    Guid pet_guid;
+    CString name;
+} {
+    versions = "1";
+}
 
 cmsg CMSG_PET_RENAME = 0x0177 {
     Guid pet_guid;
     CString name;
+    Bool declined;
+} {
+    versions = "2 3";
 }
-

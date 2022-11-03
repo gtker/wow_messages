@@ -444,6 +444,8 @@ pub use crate::shared::cmsg_pet_action_vanilla_tbc_wrath::CMSG_PET_ACTION;
 
 pub use crate::shared::cmsg_pet_cancel_aura_vanilla_tbc_wrath::CMSG_PET_CANCEL_AURA;
 
+pub use crate::shared::cmsg_pet_rename_tbc_wrath::CMSG_PET_RENAME;
+
 pub use crate::shared::cmsg_petition_show_signatures_vanilla_tbc_wrath::CMSG_PETITION_SHOW_SIGNATURES;
 
 pub use crate::shared::cmsg_petition_showlist_vanilla_tbc_wrath::CMSG_PETITION_SHOWLIST;

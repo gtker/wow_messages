@@ -3,16 +3,18 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_rename.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_rename.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_rename.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_rename.wowm#L8):
 /// ```text
 /// cmsg CMSG_PET_RENAME = 0x0177 {
 ///     Guid pet_guid;
 ///     CString name;
+///     Bool declined;
 /// }
 /// ```
 pub struct CMSG_PET_RENAME {
     pub pet_guid: Guid,
     pub name: String,
+    pub declined: bool,
 }
 
 impl crate::Message for CMSG_PET_RENAME {
@@ -34,6 +36,9 @@ impl crate::Message for CMSG_PET_RENAME {
         // Null terminator
         w.write_all(&[0])?;
 
+        // declined: Bool
+        w.write_all(u8::from(self.declined).to_le_bytes().as_slice())?;
+
         assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
@@ -45,20 +50,27 @@ impl crate::Message for CMSG_PET_RENAME {
         let name = crate::util::read_c_string_to_vec(r)?;
         let name = String::from_utf8(name)?;
 
+        // declined: Bool
+        let declined = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             pet_guid,
             name,
+            declined,
         })
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PET_RENAME {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_PET_RENAME {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_PET_RENAME {}
 
 impl CMSG_PET_RENAME {
     pub(crate) fn size(&self) -> usize {
         8 // pet_guid: Guid
         + self.name.len() + 1 // name: CString
+        + 1 // declined: Bool
     }
 }
 
