@@ -489,7 +489,7 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x01f9 => "CMSG_GM_SET_SECURITY_GROUP",
         0x01fa => "CMSG_GM_NUKE",
         0x01fb => "MSG_RANDOM_ROLL",
-        0x01fc => "SMSG_ENVIRONMENTALDAMAGELOG",
+        0x01fc => "SMSG_ENVIRONMENTAL_DAMAGE_LOG",
         0x01fe => "SMSG_RWHOIS",
         0x01ff => "MSG_LOOKING_FOR_GROUP",
         0x0200 => "CMSG_SET_LOOKING_FOR_GROUP",

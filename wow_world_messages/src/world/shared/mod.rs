@@ -264,7 +264,7 @@ pub mod smsg_duel_outofbounds_vanilla_tbc_wrath;
 pub mod smsg_duel_requested_vanilla_tbc_wrath;
 pub mod smsg_duel_winner_vanilla_tbc_wrath;
 pub mod smsg_durability_damage_death_vanilla_tbc_wrath;
-pub mod smsg_environmentaldamagelog_vanilla_tbc_wrath;
+pub mod smsg_environmental_damage_log_vanilla_tbc_wrath;
 pub mod smsg_force_run_back_speed_change_vanilla_tbc_wrath;
 pub mod smsg_force_run_speed_change_tbc_wrath;
 pub mod smsg_force_swim_back_speed_change_vanilla_tbc_wrath;

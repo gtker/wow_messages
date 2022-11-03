@@ -29,5 +29,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `FIRE` | 5 (0x05) |  |  |
 
 Used in:
-* [SMSG_ENVIRONMENTALDAMAGELOG](smsg_environmentaldamagelog.md)
+* [SMSG_ENVIRONMENTAL_DAMAGE_LOG](smsg_environmental_damage_log.md)
 

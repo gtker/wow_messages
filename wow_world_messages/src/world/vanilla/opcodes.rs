@@ -5212,7 +5212,7 @@ use crate::world::vanilla::SMSG_COMPRESSED_UPDATE_OBJECT;
 use crate::world::vanilla::SMSG_PLAY_SPELL_IMPACT;
 use crate::world::vanilla::SMSG_EXPLORATION_EXPERIENCE;
 use crate::world::vanilla::MSG_RANDOM_ROLL_Server;
-use crate::world::vanilla::SMSG_ENVIRONMENTALDAMAGELOG;
+use crate::world::vanilla::SMSG_ENVIRONMENTAL_DAMAGE_LOG;
 use crate::world::vanilla::MSG_LOOKING_FOR_GROUP_Server;
 use crate::world::vanilla::SMSG_REMOVED_SPELL;
 use crate::world::vanilla::SMSG_GMTICKET_CREATE;
@@ -5560,7 +5560,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PLAY_SPELL_IMPACT(SMSG_PLAY_SPELL_IMPACT),
     SMSG_EXPLORATION_EXPERIENCE(SMSG_EXPLORATION_EXPERIENCE),
     MSG_RANDOM_ROLL(MSG_RANDOM_ROLL_Server),
-    SMSG_ENVIRONMENTALDAMAGELOG(SMSG_ENVIRONMENTALDAMAGELOG),
+    SMSG_ENVIRONMENTAL_DAMAGE_LOG(SMSG_ENVIRONMENTAL_DAMAGE_LOG),
     MSG_LOOKING_FOR_GROUP(MSG_LOOKING_FOR_GROUP_Server),
     SMSG_REMOVED_SPELL(SMSG_REMOVED_SPELL),
     SMSG_GMTICKET_CREATE(SMSG_GMTICKET_CREATE),
@@ -5910,7 +5910,7 @@ impl ServerOpcodeMessage {
             0x01F7 => Ok(Self::SMSG_PLAY_SPELL_IMPACT(<SMSG_PLAY_SPELL_IMPACT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F7, size: body_size, io, } } else { a } })?)),
             0x01F8 => Ok(Self::SMSG_EXPLORATION_EXPERIENCE(<SMSG_EXPLORATION_EXPERIENCE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F8, size: body_size, io, } } else { a } })?)),
             0x01FB => Ok(Self::MSG_RANDOM_ROLL(<MSG_RANDOM_ROLL_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FB, size: body_size, io, } } else { a } })?)),
-            0x01FC => Ok(Self::SMSG_ENVIRONMENTALDAMAGELOG(<SMSG_ENVIRONMENTALDAMAGELOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FC, size: body_size, io, } } else { a } })?)),
+            0x01FC => Ok(Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(<SMSG_ENVIRONMENTAL_DAMAGE_LOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FC, size: body_size, io, } } else { a } })?)),
             0x01FF => Ok(Self::MSG_LOOKING_FOR_GROUP(<MSG_LOOKING_FOR_GROUP_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FF, size: body_size, io, } } else { a } })?)),
             0x0203 => Ok(Self::SMSG_REMOVED_SPELL(<SMSG_REMOVED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0203, size: body_size, io, } } else { a } })?)),
             0x0206 => Ok(Self::SMSG_GMTICKET_CREATE(<SMSG_GMTICKET_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0206, size: body_size, io, } } else { a } })?)),
@@ -6328,7 +6328,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_encrypted_server(w, e),
             Self::MSG_RANDOM_ROLL(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.write_encrypted_server(w, e),
             Self::MSG_LOOKING_FOR_GROUP(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REMOVED_SPELL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_CREATE(c) => c.write_encrypted_server(w, e),
@@ -6679,7 +6679,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.write_unencrypted_server(w),
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_unencrypted_server(w),
             Self::MSG_RANDOM_ROLL(c) => c.write_unencrypted_server(w),
-            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.write_unencrypted_server(w),
             Self::MSG_LOOKING_FOR_GROUP(c) => c.write_unencrypted_server(w),
             Self::SMSG_REMOVED_SPELL(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_CREATE(c) => c.write_unencrypted_server(w),
@@ -7030,7 +7030,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_LOOKING_FOR_GROUP(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REMOVED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7381,7 +7381,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_LOOKING_FOR_GROUP(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REMOVED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7732,7 +7732,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_LOOKING_FOR_GROUP(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REMOVED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8083,7 +8083,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_ENVIRONMENTALDAMAGELOG(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_LOOKING_FOR_GROUP(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REMOVED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8436,7 +8436,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PLAY_SPELL_IMPACT(_) => "SMSG_PLAY_SPELL_IMPACT",
             ServerOpcodeMessage::SMSG_EXPLORATION_EXPERIENCE(_) => "SMSG_EXPLORATION_EXPERIENCE",
             ServerOpcodeMessage::MSG_RANDOM_ROLL(_) => "MSG_RANDOM_ROLL_Server",
-            ServerOpcodeMessage::SMSG_ENVIRONMENTALDAMAGELOG(_) => "SMSG_ENVIRONMENTALDAMAGELOG",
+            ServerOpcodeMessage::SMSG_ENVIRONMENTAL_DAMAGE_LOG(_) => "SMSG_ENVIRONMENTAL_DAMAGE_LOG",
             ServerOpcodeMessage::MSG_LOOKING_FOR_GROUP(_) => "MSG_LOOKING_FOR_GROUP_Server",
             ServerOpcodeMessage::SMSG_REMOVED_SPELL(_) => "SMSG_REMOVED_SPELL",
             ServerOpcodeMessage::SMSG_GMTICKET_CREATE(_) => "SMSG_GMTICKET_CREATE",
@@ -9830,9 +9830,9 @@ impl From<MSG_RANDOM_ROLL_Server> for ServerOpcodeMessage {
     }
 }
 
-impl From<SMSG_ENVIRONMENTALDAMAGELOG> for ServerOpcodeMessage {
-    fn from(c: SMSG_ENVIRONMENTALDAMAGELOG) -> Self {
-        Self::SMSG_ENVIRONMENTALDAMAGELOG(c)
+impl From<SMSG_ENVIRONMENTAL_DAMAGE_LOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_ENVIRONMENTAL_DAMAGE_LOG) -> Self {
+        Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c)
     }
 }
 

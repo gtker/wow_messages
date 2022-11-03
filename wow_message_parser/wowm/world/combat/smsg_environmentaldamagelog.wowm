@@ -9,7 +9,7 @@ enum EnvironmentalDamageType : u32 {
     FIRE = 5;
 }
 
-smsg SMSG_ENVIRONMENTALDAMAGELOG = 0x01FC {
+smsg SMSG_ENVIRONMENTAL_DAMAGE_LOG = 0x01FC {
     Guid guid;
     EnvironmentalDamageType damage_type;
     u32 damage;
