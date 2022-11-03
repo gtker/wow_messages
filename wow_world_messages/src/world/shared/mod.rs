@@ -165,6 +165,7 @@ pub mod cmsg_turn_in_petition_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_clear_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_flag_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_reset_vanilla_tbc_wrath;
+pub mod cmsg_unstable_pet_vanilla_tbc_wrath;
 pub mod cmsg_wrap_item_vanilla_tbc_wrath;
 pub mod duel_winner_reason_vanilla_tbc_wrath;
 pub mod dungeon_difficulty_tbc_wrath;

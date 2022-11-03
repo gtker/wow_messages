@@ -274,8 +274,6 @@ pub(crate) mod cmsg_unaccept_trade;
 pub use cmsg_unaccept_trade::*;
 pub(crate) mod cmsg_unlearn_skill;
 pub use cmsg_unlearn_skill::*;
-pub(crate) mod cmsg_unstable_pet;
-pub use cmsg_unstable_pet::*;
 pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
 pub(crate) mod cmsg_use_item;
@@ -829,6 +827,8 @@ pub use crate::shared::cmsg_tutorial_clear_vanilla_tbc_wrath::CMSG_TUTORIAL_CLEA
 pub use crate::shared::cmsg_tutorial_flag_vanilla_tbc_wrath::CMSG_TUTORIAL_FLAG;
 
 pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESET;
+
+pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
