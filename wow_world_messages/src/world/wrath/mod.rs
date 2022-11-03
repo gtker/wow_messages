@@ -46,6 +46,8 @@ pub(crate) mod cmsg_calendar_get_num_pending;
 pub use cmsg_calendar_get_num_pending::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
+pub(crate) mod cmsg_deleteequipment_set;
+pub use cmsg_deleteequipment_set::*;
 pub(crate) mod cmsg_emote;
 pub use cmsg_emote::*;
 pub(crate) mod cmsg_force_move_root_ack;
@@ -509,8 +511,6 @@ pub use crate::shared::cmsg_set_active_mover_vanilla_tbc_wrath::CMSG_SET_ACTIVE_
 pub use crate::shared::cmsg_set_ammo_vanilla_tbc_wrath::CMSG_SET_AMMO;
 
 pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
-
-pub use crate::shared::cmsg_set_target_obsolete_vanilla_tbc_wrath::CMSG_SET_TARGET_OBSOLETE;
 
 pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATCHED_FACTION;
 

@@ -1,0 +1,5 @@
+cmsg CMSG_DELETEEQUIPMENT_SET = 0x13E {
+    PackedGuid set;
+} {
+    versions = "3.3.5";
+}

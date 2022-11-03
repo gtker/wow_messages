@@ -150,7 +150,7 @@ pub mod cmsg_set_ammo_vanilla_tbc_wrath;
 pub mod cmsg_set_faction_atwar_vanilla_tbc;
 pub mod cmsg_set_faction_inactive_vanilla_tbc;
 pub mod cmsg_set_selection_vanilla_tbc_wrath;
-pub mod cmsg_set_target_obsolete_vanilla_tbc_wrath;
+pub mod cmsg_set_target_obsolete_vanilla_tbc;
 pub mod cmsg_set_watched_faction_vanilla_tbc_wrath;
 pub mod cmsg_setsheathed_vanilla_tbc_wrath;
 pub mod cmsg_split_item_vanilla_tbc;

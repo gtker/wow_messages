@@ -792,7 +792,7 @@ pub use crate::shared::cmsg_set_faction_inactive_vanilla_tbc::CMSG_SET_FACTION_I
 
 pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
 
-pub use crate::shared::cmsg_set_target_obsolete_vanilla_tbc_wrath::CMSG_SET_TARGET_OBSOLETE;
+pub use crate::shared::cmsg_set_target_obsolete_vanilla_tbc::CMSG_SET_TARGET_OBSOLETE;
 
 pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATCHED_FACTION;
 
