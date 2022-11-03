@@ -502,6 +502,8 @@ pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::CMSG_SETSHEATHED;
 
 pub use crate::shared::cmsg_stable_pet_vanilla_tbc_wrath::CMSG_STABLE_PET;
 
+pub use crate::shared::cmsg_stable_swap_pet_vanilla_tbc_wrath::CMSG_STABLE_SWAP_PET;
+
 pub use crate::shared::cmsg_standstatechange_vanilla_tbc_wrath::CMSG_STANDSTATECHANGE;
 
 pub use crate::shared::cmsg_swap_inv_item_vanilla_tbc_wrath::CMSG_SWAP_INV_ITEM;

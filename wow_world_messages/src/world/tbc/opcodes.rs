@@ -178,6 +178,7 @@ use crate::world::tbc::CMSG_SET_ACTIVE_MOVER;
 use crate::world::tbc::CMSG_PET_CANCEL_AURA;
 use crate::world::tbc::CMSG_STABLE_PET;
 use crate::world::tbc::CMSG_BUY_STABLE_SLOT;
+use crate::world::tbc::CMSG_STABLE_SWAP_PET;
 use crate::world::tbc::CMSG_REQUEST_PET_INFO;
 use crate::world::tbc::CMSG_AUTOSTORE_BANK_ITEM;
 use crate::world::tbc::CMSG_AUTOBANK_ITEM;
@@ -394,6 +395,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PET_CANCEL_AURA(CMSG_PET_CANCEL_AURA),
     CMSG_STABLE_PET(CMSG_STABLE_PET),
     CMSG_BUY_STABLE_SLOT(CMSG_BUY_STABLE_SLOT),
+    CMSG_STABLE_SWAP_PET(CMSG_STABLE_SWAP_PET),
     CMSG_REQUEST_PET_INFO(CMSG_REQUEST_PET_INFO),
     CMSG_AUTOSTORE_BANK_ITEM(CMSG_AUTOSTORE_BANK_ITEM),
     CMSG_AUTOBANK_ITEM(CMSG_AUTOBANK_ITEM),
@@ -612,6 +614,7 @@ impl ClientOpcodeMessage {
             0x026B => Ok(Self::CMSG_PET_CANCEL_AURA(<CMSG_PET_CANCEL_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x026B, size: body_size, io, } } else { a } })?)),
             0x0270 => Ok(Self::CMSG_STABLE_PET(<CMSG_STABLE_PET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0270, size: body_size, io, } } else { a } })?)),
             0x0272 => Ok(Self::CMSG_BUY_STABLE_SLOT(<CMSG_BUY_STABLE_SLOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0272, size: body_size, io, } } else { a } })?)),
+            0x0275 => Ok(Self::CMSG_STABLE_SWAP_PET(<CMSG_STABLE_SWAP_PET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0275, size: body_size, io, } } else { a } })?)),
             0x0279 => Ok(Self::CMSG_REQUEST_PET_INFO(<CMSG_REQUEST_PET_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0279, size: body_size, io, } } else { a } })?)),
             0x0282 => Ok(Self::CMSG_AUTOSTORE_BANK_ITEM(<CMSG_AUTOSTORE_BANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0282, size: body_size, io, } } else { a } })?)),
             0x0283 => Ok(Self::CMSG_AUTOBANK_ITEM(<CMSG_AUTOBANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0283, size: body_size, io, } } else { a } })?)),
@@ -898,6 +901,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_CANCEL_AURA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_STABLE_PET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUY_STABLE_SLOT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_STABLE_SWAP_PET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_PET_INFO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_encrypted_client(w, e),
@@ -1117,6 +1121,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_CANCEL_AURA(c) => c.write_unencrypted_client(w),
             Self::CMSG_STABLE_PET(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUY_STABLE_SLOT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_STABLE_SWAP_PET(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_PET_INFO(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_unencrypted_client(w),
@@ -1336,6 +1341,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_CANCEL_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_STABLE_PET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_STABLE_SLOT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_STABLE_SWAP_PET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_PET_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1555,6 +1561,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_CANCEL_AURA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_STABLE_PET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUY_STABLE_SLOT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_STABLE_SWAP_PET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_PET_INFO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1774,6 +1781,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_CANCEL_AURA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_STABLE_PET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_STABLE_SLOT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_STABLE_SWAP_PET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_PET_INFO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1993,6 +2001,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_CANCEL_AURA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_STABLE_PET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUY_STABLE_SLOT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_STABLE_SWAP_PET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_PET_INFO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
@@ -2247,6 +2256,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PET_CANCEL_AURA(_) => "CMSG_PET_CANCEL_AURA",
             ClientOpcodeMessage::CMSG_STABLE_PET(_) => "CMSG_STABLE_PET",
             ClientOpcodeMessage::CMSG_BUY_STABLE_SLOT(_) => "CMSG_BUY_STABLE_SLOT",
+            ClientOpcodeMessage::CMSG_STABLE_SWAP_PET(_) => "CMSG_STABLE_SWAP_PET",
             ClientOpcodeMessage::CMSG_REQUEST_PET_INFO(_) => "CMSG_REQUEST_PET_INFO",
             ClientOpcodeMessage::CMSG_AUTOSTORE_BANK_ITEM(_) => "CMSG_AUTOSTORE_BANK_ITEM",
             ClientOpcodeMessage::CMSG_AUTOBANK_ITEM(_) => "CMSG_AUTOBANK_ITEM",
@@ -3311,6 +3321,12 @@ impl From<CMSG_STABLE_PET> for ClientOpcodeMessage {
 impl From<CMSG_BUY_STABLE_SLOT> for ClientOpcodeMessage {
     fn from(c: CMSG_BUY_STABLE_SLOT) -> Self {
         Self::CMSG_BUY_STABLE_SLOT(c)
+    }
+}
+
+impl From<CMSG_STABLE_SWAP_PET> for ClientOpcodeMessage {
+    fn from(c: CMSG_STABLE_SWAP_PET) -> Self {
+        Self::CMSG_STABLE_SWAP_PET(c)
     }
 }
 

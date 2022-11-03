@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_STABLE_SWAP_PET = 0x0275 {
     Guid npc;
