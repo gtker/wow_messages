@@ -208,6 +208,7 @@ pub mod msg_move_teleport_ack_client_vanilla_tbc_wrath;
 pub mod msg_move_worldport_ack_vanilla_tbc_wrath;
 pub mod msg_petition_decline_vanilla_tbc_wrath;
 pub mod msg_petition_rename_vanilla_tbc_wrath;
+pub mod msg_query_next_mail_time_client_vanilla_tbc_wrath;
 pub mod msg_random_roll_client_vanilla_tbc_wrath;
 pub mod msg_random_roll_server_vanilla_tbc_wrath;
 pub mod msg_save_guild_emblem_client_vanilla_tbc_wrath;
