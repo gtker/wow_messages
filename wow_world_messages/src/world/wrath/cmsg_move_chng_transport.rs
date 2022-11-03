@@ -29,6 +29,10 @@ impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 30 || body_size > 84 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038D, size: body_size as u32 });
+        }
+
         // info: MovementInfo
         let info = MovementInfo::read(r)?;
 

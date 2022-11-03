@@ -32,6 +32,10 @@ impl crate::Message for CMSG_ADD_IGNORE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 1 || body_size > 256 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006C, size: body_size as u32 });
+        }
+
         // ignore_name: CString
         let ignore_name = crate::util::read_c_string_to_vec(r)?;
         let ignore_name = String::from_utf8(ignore_name)?;

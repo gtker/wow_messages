@@ -41,6 +41,10 @@ impl crate::Message for SMSG_GUILD_EVENT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 2 || body_size > 65538 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0092, size: body_size as u32 });
+        }
+
         // event: GuildEvent
         let event: GuildEvent = crate::util::read_u8_le(r)?.try_into()?;
 

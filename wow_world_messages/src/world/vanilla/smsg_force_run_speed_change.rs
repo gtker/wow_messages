@@ -46,6 +46,10 @@ impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 10 || body_size > 17 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E2, size: body_size as u32 });
+        }
+
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
 

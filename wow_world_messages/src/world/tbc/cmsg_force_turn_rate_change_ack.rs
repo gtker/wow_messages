@@ -45,6 +45,10 @@ impl crate::Message for CMSG_FORCE_TURN_RATE_CHANGE_ACK {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 45 || body_size > 98 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02DF, size: body_size as u32 });
+        }
+
         // guid: Guid
         let guid = Guid::read(r)?;
 

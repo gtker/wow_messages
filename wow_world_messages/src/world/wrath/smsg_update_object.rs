@@ -35,6 +35,10 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 4 || body_size > 4294967294 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00A9, size: body_size as u32 });
+        }
+
         // amount_of_objects: u32
         let amount_of_objects = crate::util::read_u32_le(r)?;
 

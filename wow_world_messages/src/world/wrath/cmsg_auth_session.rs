@@ -97,6 +97,10 @@ impl crate::Message for CMSG_AUTH_SESSION {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 61 || body_size > 65851 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01ED, size: body_size as u32 });
+        }
+
         // client_build: u32
         let client_build = crate::util::read_u32_le(r)?;
 

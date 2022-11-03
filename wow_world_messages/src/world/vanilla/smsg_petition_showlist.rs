@@ -41,6 +41,10 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 9 || body_size > 5129 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BC, size: body_size as u32 });
+        }
+
         // npc: Guid
         let npc = Guid::read(r)?;
 

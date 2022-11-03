@@ -32,6 +32,10 @@ impl crate::Message for SMSG_NOTIFICATION {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 1 || body_size > 256 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CB, size: body_size as u32 });
+        }
+
         // notification: CString
         let notification = crate::util::read_c_string_to_vec(r)?;
         let notification = String::from_utf8(notification)?;

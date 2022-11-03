@@ -49,6 +49,10 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 9 || body_size > 4294967294 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0124, size: body_size as u32 });
+        }
+
         // refer_a_friend_bonus: f32
         let refer_a_friend_bonus = crate::util::read_f32_le(r)?;
         // any_rank_increased: Bool

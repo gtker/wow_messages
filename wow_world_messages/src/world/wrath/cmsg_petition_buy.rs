@@ -132,6 +132,10 @@ impl crate::Message for CMSG_PETITION_BUY {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 82 || body_size > 3142 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BD, size: body_size as u32 });
+        }
+
         // npc: Guid
         let npc = Guid::read(r)?;
 

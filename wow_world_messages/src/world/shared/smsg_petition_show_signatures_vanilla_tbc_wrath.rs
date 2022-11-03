@@ -51,6 +51,10 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 21 || body_size > 3093 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BF, size: body_size as u32 });
+        }
+
         // item_guid: Guid
         let item_guid = Guid::read(r)?;
 

@@ -289,6 +289,10 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 4 || body_size > 1752 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0058, size: body_size as u32 });
+        }
+
         // item: u32
         let item = crate::util::read_u32_le(r)?;
 

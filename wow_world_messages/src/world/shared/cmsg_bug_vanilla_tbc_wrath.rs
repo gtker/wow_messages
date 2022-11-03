@@ -46,6 +46,10 @@ impl crate::Message for CMSG_BUG {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 14 || body_size > 16012 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CA, size: body_size as u32 });
+        }
+
         // suggestion: u32
         let suggestion = crate::util::read_u32_le(r)?;
 

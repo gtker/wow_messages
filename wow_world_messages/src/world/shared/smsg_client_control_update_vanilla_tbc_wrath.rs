@@ -34,6 +34,10 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 3 || body_size > 10 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0159, size: body_size as u32 });
+        }
+
         // guid: PackedGuid
         let guid = Guid::read_packed(r)?;
 

@@ -75,6 +75,10 @@ impl crate::Message for SMSG_GROUP_LIST {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 14 || body_size > 4294967294 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size as u32 });
+        }
+
         // group_type: GroupType
         let group_type: GroupType = crate::util::read_u8_le(r)?.try_into()?;
 

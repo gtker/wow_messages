@@ -42,6 +42,10 @@ impl crate::Message for CMSG_GUILD_RANK {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 9 || body_size > 264 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0231, size: body_size as u32 });
+        }
+
         // rank_id: u32
         let rank_id = crate::util::read_u32_le(r)?;
 

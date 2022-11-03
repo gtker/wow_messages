@@ -30,6 +30,10 @@ impl crate::Message for CMSG_WARDEN_DATA {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size > 65535 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E7, size: body_size as u32 });
+        }
+
         // unimplemented: u8[-]
         let mut current_size = {
             0

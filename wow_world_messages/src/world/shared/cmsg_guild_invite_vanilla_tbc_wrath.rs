@@ -32,6 +32,10 @@ impl crate::Message for CMSG_GUILD_INVITE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 1 || body_size > 256 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0082, size: body_size as u32 });
+        }
+
         // invited_player: CString
         let invited_player = crate::util::read_c_string_to_vec(r)?;
         let invited_player = String::from_utf8(invited_player)?;

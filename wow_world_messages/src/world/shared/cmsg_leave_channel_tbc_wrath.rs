@@ -37,6 +37,10 @@ impl crate::Message for CMSG_LEAVE_CHANNEL {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 5 || body_size > 260 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0098, size: body_size as u32 });
+        }
+
         // channel_id: u32
         let channel_id = crate::util::read_u32_le(r)?;
 

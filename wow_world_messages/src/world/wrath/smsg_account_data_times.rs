@@ -54,6 +54,10 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 9 || body_size > 65544 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0209, size: body_size as u32 });
+        }
+
         // unix_time: u32
         let unix_time = crate::util::read_u32_le(r)?;
 

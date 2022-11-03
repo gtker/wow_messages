@@ -35,6 +35,10 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 36 || body_size > 89 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D1, size: body_size as u32 });
+        }
+
         // old_mover: Guid
         let old_mover = Guid::read(r)?;
 

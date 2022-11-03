@@ -32,6 +32,10 @@ impl crate::Message for CMSG_WHOIS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 1 || body_size > 256 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0064, size: body_size as u32 });
+        }
+
         // character: CString
         let character = crate::util::read_c_string_to_vec(r)?;
         let character = String::from_utf8(character)?;

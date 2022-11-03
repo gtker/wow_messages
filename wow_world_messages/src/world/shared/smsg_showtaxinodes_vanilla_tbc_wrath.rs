@@ -48,6 +48,10 @@ impl crate::Message for SMSG_SHOWTAXINODES {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 16 || body_size > 65551 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A9, size: body_size as u32 });
+        }
+
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 

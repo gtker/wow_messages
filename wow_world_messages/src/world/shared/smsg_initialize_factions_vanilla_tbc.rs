@@ -35,6 +35,10 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 4 || body_size > 4294967294 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0122, size: body_size as u32 });
+        }
+
         // amount_of_factions: u32
         let amount_of_factions = crate::util::read_u32_le(r)?;
 

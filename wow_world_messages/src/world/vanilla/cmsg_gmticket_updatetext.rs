@@ -40,6 +40,10 @@ impl crate::Message for CMSG_GMTICKET_UPDATETEXT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 2 || body_size > 257 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0207, size: body_size as u32 });
+        }
+
         // ticket_type: GmTicketType
         let ticket_type: GmTicketType = crate::util::read_u8_le(r)?.try_into()?;
 

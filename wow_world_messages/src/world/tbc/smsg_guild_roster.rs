@@ -65,6 +65,10 @@ impl crate::Message for SMSG_GUILD_ROSTER {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 10 || body_size > 4294967294 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x008A, size: body_size as u32 });
+        }
+
         // amount_of_members: u32
         let amount_of_members = crate::util::read_u32_le(r)?;
 

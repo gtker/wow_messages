@@ -236,6 +236,10 @@ impl crate::Message for SMSG_CAST_RESULT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 5 || body_size > 18 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0130, size: body_size as u32 });
+        }
+
         // spell: u32
         let spell = crate::util::read_u32_le(r)?;
 

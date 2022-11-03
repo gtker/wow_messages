@@ -38,6 +38,10 @@ impl crate::Message for MSG_PETITION_RENAME {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 9 || body_size > 264 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C1, size: body_size as u32 });
+        }
+
         // petition_guid: Guid
         let petition_guid = Guid::read(r)?;
 

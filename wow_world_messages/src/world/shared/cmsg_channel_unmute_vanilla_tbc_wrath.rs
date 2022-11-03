@@ -41,6 +41,10 @@ impl crate::Message for CMSG_CHANNEL_UNMUTE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 2 || body_size > 512 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00A2, size: body_size as u32 });
+        }
+
         // channel_name: CString
         let channel_name = crate::util::read_c_string_to_vec(r)?;
         let channel_name = String::from_utf8(channel_name)?;

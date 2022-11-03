@@ -29,6 +29,10 @@ impl crate::Message for MSG_MOVE_START_TURN_LEFT_Client {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 28 || body_size > 81 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00BC, size: body_size as u32 });
+        }
+
         // info: MovementInfo
         let info = MovementInfo::read(r)?;
 

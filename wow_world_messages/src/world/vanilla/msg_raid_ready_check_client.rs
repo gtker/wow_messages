@@ -34,6 +34,10 @@ impl crate::Message for MSG_RAID_READY_CHECK_Client {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size > 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0322, size: body_size as u32 });
+        }
+
         // optional answer
         let current_size = {
             0

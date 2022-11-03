@@ -32,6 +32,10 @@ impl crate::Message for CMSG_GUILD_CREATE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 1 || body_size > 256 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0081, size: body_size as u32 });
+        }
+
         // guild_name: CString
         let guild_name = crate::util::read_c_string_to_vec(r)?;
         let guild_name = String::from_utf8(guild_name)?;

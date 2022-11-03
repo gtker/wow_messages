@@ -38,6 +38,10 @@ impl crate::Message for SMSG_SERVER_MESSAGE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 5 || body_size > 260 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0291, size: body_size as u32 });
+        }
+
         // message_type: ServerMessageType
         let message_type: ServerMessageType = crate::util::read_u32_le(r)?.try_into()?;
 

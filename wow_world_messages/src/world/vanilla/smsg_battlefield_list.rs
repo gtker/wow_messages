@@ -52,6 +52,10 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 17 || body_size > 4294967294 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size as u32 });
+        }
+
         // battlemaster: Guid
         let battlemaster = Guid::read(r)?;
 

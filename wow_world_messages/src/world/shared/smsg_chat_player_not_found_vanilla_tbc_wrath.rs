@@ -32,6 +32,10 @@ impl crate::Message for SMSG_CHAT_PLAYER_NOT_FOUND {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 1 || body_size > 256 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A9, size: body_size as u32 });
+        }
+
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
         let name = String::from_utf8(name)?;

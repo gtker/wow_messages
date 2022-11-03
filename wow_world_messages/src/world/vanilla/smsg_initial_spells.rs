@@ -54,6 +54,10 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 5 || body_size > 1179653 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012A, size: body_size as u32 });
+        }
+
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
 

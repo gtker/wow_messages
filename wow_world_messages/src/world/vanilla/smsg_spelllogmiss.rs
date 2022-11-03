@@ -53,6 +53,10 @@ impl crate::Message for SMSG_SPELLLOGMISS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 17 || body_size > 4294967294 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024B, size: body_size as u32 });
+        }
+
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 

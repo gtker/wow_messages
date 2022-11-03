@@ -113,6 +113,10 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size < 39 || body_size > 4294967294 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0188, size: body_size as u32 });
+        }
+
         // guid: Guid
         let guid = Guid::read(r)?;
 

@@ -106,15 +106,29 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 }
 
 fn test_for_invalid_size(s: &mut Writer, e: &Container) {
-    if e.is_constant_sized() {
-        s.bodyn(format!("if body_size != {}", e.sizes().maximum()), |s| {
-            s.wln(format!(
-                "return Err({}::InvalidSize {{ opcode: {:#06X}, size: body_size as u32 }});",
-                PARSE_ERROR,
-                e.opcode(),
-            ));
-        })
-    }
+    let header = match e.is_constant_sized() {
+        true => format!("if body_size != {}", e.sizes().maximum()),
+        false => {
+            let min = e.sizes().minimum();
+            let max = if e.sizes().maximum() >= u32::MAX as usize {
+                (u32::MAX - 1) as usize // More realistic number here?
+            } else {
+                e.sizes().maximum()
+            };
+            if min == 0 {
+                format!("if body_size > {max}",)
+            } else {
+                format!("if body_size < {min} || body_size > {max}",)
+            }
+        }
+    };
+    s.bodyn(header, |s| {
+        s.wln(format!(
+            "return Err({}::InvalidSize {{ opcode: {:#06X}, size: body_size as u32 }});",
+            PARSE_ERROR,
+            e.opcode(),
+        ));
+    });
 }
 
 fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
