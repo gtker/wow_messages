@@ -204,6 +204,7 @@ use crate::world::wrath::CMSG_SET_ACTIONBAR_TOGGLES;
 use crate::world::wrath::CMSG_CHAR_RENAME;
 use crate::world::wrath::CMSG_MOVE_SPLINE_DONE;
 use crate::world::wrath::CMSG_MOVE_FALL_RESET;
+use crate::world::wrath::CMSG_REQUEST_RAID_INFO;
 use crate::world::wrath::CMSG_MOVE_TIME_SKIPPED;
 use crate::world::wrath::CMSG_MOVE_FEATHER_FALL_ACK;
 use crate::world::wrath::CMSG_MOVE_WATER_WALK_ACK;
@@ -432,6 +433,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
     CMSG_MOVE_SPLINE_DONE(CMSG_MOVE_SPLINE_DONE),
     CMSG_MOVE_FALL_RESET(CMSG_MOVE_FALL_RESET),
+    CMSG_REQUEST_RAID_INFO(CMSG_REQUEST_RAID_INFO),
     CMSG_MOVE_TIME_SKIPPED(CMSG_MOVE_TIME_SKIPPED),
     CMSG_MOVE_FEATHER_FALL_ACK(CMSG_MOVE_FEATHER_FALL_ACK),
     CMSG_MOVE_WATER_WALK_ACK(CMSG_MOVE_WATER_WALK_ACK),
@@ -662,6 +664,7 @@ impl ClientOpcodeMessage {
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C7, size: body_size, io, } } else { a } })?)),
             0x02C9 => Ok(Self::CMSG_MOVE_SPLINE_DONE(<CMSG_MOVE_SPLINE_DONE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C9, size: body_size, io, } } else { a } })?)),
             0x02CA => Ok(Self::CMSG_MOVE_FALL_RESET(<CMSG_MOVE_FALL_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CA, size: body_size, io, } } else { a } })?)),
+            0x02CD => Ok(Self::CMSG_REQUEST_RAID_INFO(<CMSG_REQUEST_RAID_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CD, size: body_size, io, } } else { a } })?)),
             0x02CE => Ok(Self::CMSG_MOVE_TIME_SKIPPED(<CMSG_MOVE_TIME_SKIPPED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CE, size: body_size, io, } } else { a } })?)),
             0x02CF => Ok(Self::CMSG_MOVE_FEATHER_FALL_ACK(<CMSG_MOVE_FEATHER_FALL_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CF, size: body_size, io, } } else { a } })?)),
             0x02D0 => Ok(Self::CMSG_MOVE_WATER_WALK_ACK(<CMSG_MOVE_WATER_WALK_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D0, size: body_size, io, } } else { a } })?)),
@@ -960,6 +963,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_REQUEST_RAID_INFO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.write_encrypted_client(w, e),
@@ -1191,6 +1195,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_unencrypted_client(w),
+            Self::CMSG_REQUEST_RAID_INFO(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.write_unencrypted_client(w),
@@ -1422,6 +1427,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_RAID_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1653,6 +1659,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_RAID_INFO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1884,6 +1891,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_RAID_INFO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2115,6 +2123,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_RAID_INFO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -2357,6 +2366,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
             ClientOpcodeMessage::CMSG_MOVE_SPLINE_DONE(_) => "CMSG_MOVE_SPLINE_DONE",
             ClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => "CMSG_MOVE_FALL_RESET",
+            ClientOpcodeMessage::CMSG_REQUEST_RAID_INFO(_) => "CMSG_REQUEST_RAID_INFO",
             ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(_) => "CMSG_MOVE_TIME_SKIPPED",
             ClientOpcodeMessage::CMSG_MOVE_FEATHER_FALL_ACK(_) => "CMSG_MOVE_FEATHER_FALL_ACK",
             ClientOpcodeMessage::CMSG_MOVE_WATER_WALK_ACK(_) => "CMSG_MOVE_WATER_WALK_ACK",
@@ -3563,6 +3573,12 @@ impl From<CMSG_MOVE_SPLINE_DONE> for ClientOpcodeMessage {
 impl From<CMSG_MOVE_FALL_RESET> for ClientOpcodeMessage {
     fn from(c: CMSG_MOVE_FALL_RESET) -> Self {
         Self::CMSG_MOVE_FALL_RESET(c)
+    }
+}
+
+impl From<CMSG_REQUEST_RAID_INFO> for ClientOpcodeMessage {
+    fn from(c: CMSG_REQUEST_RAID_INFO) -> Self {
+        Self::CMSG_REQUEST_RAID_INFO(c)
     }
 }
 

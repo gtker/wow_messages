@@ -490,6 +490,8 @@ pub use crate::shared::cmsg_request_account_data_vanilla_tbc_wrath::CMSG_REQUEST
 
 pub use crate::shared::cmsg_request_pet_info_vanilla_tbc_wrath::CMSG_REQUEST_PET_INFO;
 
+pub use crate::shared::cmsg_request_raid_info_vanilla_tbc_wrath::CMSG_REQUEST_RAID_INFO;
+
 pub use crate::shared::cmsg_sell_item_vanilla_tbc_wrath::CMSG_SELL_ITEM;
 
 pub use crate::shared::cmsg_send_mail_tbc_wrath::CMSG_SEND_MAIL;
