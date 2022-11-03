@@ -1150,6 +1150,8 @@ pub use crate::shared::smsg_spline_set_walk_speed_vanilla_tbc_wrath::SMSG_SPLINE
 
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
+pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STATUS;
+
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
@@ -1546,8 +1548,6 @@ pub(crate) mod smsg_summon_request;
 pub use smsg_summon_request::*;
 pub(crate) mod smsg_superceded_spell;
 pub use smsg_superceded_spell::*;
-pub(crate) mod smsg_taxinode_status;
-pub use smsg_taxinode_status::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
 pub(crate) mod smsg_trade_status;
