@@ -6,6 +6,7 @@ use crate::parser::types::sizes::{
     PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::struct_member::StructMemberDefinition;
+use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::{
     Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
@@ -95,7 +96,7 @@ impl Type {
     }
 
     // NOTE: Definers used in if statements count if statement contents
-    pub(crate) fn sizes_parsed(&self) -> Sizes {
+    pub(crate) fn sizes(&self, tags: &ObjectTags) -> Sizes {
         let mut sizes = Sizes::new();
 
         match self {
@@ -106,7 +107,11 @@ impl Type {
             Type::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
             Type::PackedGuid => sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
             Type::UpdateMask => {
-                sizes.inc(UPDATE_MASK_MIN_SIZE as usize, update_mask_max() as usize)
+                let world_version = tags.main_versions().next().unwrap().as_major_world();
+                sizes.inc(
+                    UPDATE_MASK_MIN_SIZE as usize,
+                    update_mask_max(world_version) as usize,
+                )
             }
             Type::AuraMask => sizes.inc(AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize),
             Type::CString => sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED),

@@ -1216,7 +1216,7 @@ pub(crate) fn create_struct_member(
             };
 
             let name = d.name().to_string();
-            let mut sizes = d.ty().sizes_parsed();
+            let mut sizes = d.ty().sizes(e.tags());
 
             for m in e.fields() {
                 match m {
