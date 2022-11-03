@@ -256,8 +256,6 @@ pub(crate) mod cmsg_set_trade_item;
 pub use cmsg_set_trade_item::*;
 pub(crate) mod cmsg_spirit_healer_activate;
 pub use cmsg_spirit_healer_activate::*;
-pub(crate) mod cmsg_stable_pet;
-pub use cmsg_stable_pet::*;
 pub(crate) mod cmsg_stable_swap_pet;
 pub use cmsg_stable_swap_pet::*;
 pub(crate) mod cmsg_summon_response;
@@ -809,6 +807,8 @@ pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATC
 pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::CMSG_SETSHEATHED;
 
 pub use crate::shared::cmsg_split_item_vanilla_tbc::CMSG_SPLIT_ITEM;
+
+pub use crate::shared::cmsg_stable_pet_vanilla_tbc_wrath::CMSG_STABLE_PET;
 
 pub use crate::shared::cmsg_standstatechange_vanilla_tbc_wrath::CMSG_STANDSTATECHANGE;
 
