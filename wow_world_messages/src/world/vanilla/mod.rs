@@ -381,8 +381,6 @@ pub(crate) mod msg_inspect_honor_stats_client;
 pub use msg_inspect_honor_stats_client::*;
 pub(crate) mod msg_inspect_honor_stats_server;
 pub use msg_inspect_honor_stats_server::*;
-pub(crate) mod msg_list_stabled_pets_client;
-pub use msg_list_stabled_pets_client::*;
 pub(crate) mod msg_list_stabled_pets_server;
 pub use msg_list_stabled_pets_server::*;
 pub(crate) mod msg_looking_for_group_client;
@@ -885,6 +883,8 @@ pub use crate::shared::msg_auction_hello_server_vanilla_tbc::MSG_AUCTION_HELLO_S
 pub use crate::shared::msg_battleground_player_positions_client_vanilla_tbc_wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Client;
 
 pub use crate::shared::msg_battleground_player_positions_server_vanilla_tbc_wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
+
+pub use crate::shared::msg_list_stabled_pets_client_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Client;
 
 pub use crate::shared::msg_move_teleport_ack_client_vanilla_tbc_wrath::MSG_MOVE_TELEPORT_ACK_Client;
 
