@@ -3559,6 +3559,7 @@ use crate::world::tbc::SMSG_SELL_ITEM;
 use crate::world::tbc::SMSG_BUY_ITEM;
 use crate::world::tbc::SMSG_BUY_FAILED;
 use crate::world::tbc::SMSG_ACTIVATETAXIREPLY;
+use crate::world::tbc::SMSG_NEW_TAXI_PATH;
 use crate::world::tbc::SMSG_SHOW_BANK;
 use crate::world::tbc::SMSG_BUY_BANK_SLOT_RESULT;
 use crate::world::tbc::SMSG_PETITION_SHOWLIST;
@@ -3739,6 +3740,7 @@ pub enum ServerOpcodeMessage {
     SMSG_BUY_ITEM(SMSG_BUY_ITEM),
     SMSG_BUY_FAILED(SMSG_BUY_FAILED),
     SMSG_ACTIVATETAXIREPLY(SMSG_ACTIVATETAXIREPLY),
+    SMSG_NEW_TAXI_PATH(SMSG_NEW_TAXI_PATH),
     SMSG_SHOW_BANK(SMSG_SHOW_BANK),
     SMSG_BUY_BANK_SLOT_RESULT(SMSG_BUY_BANK_SLOT_RESULT),
     SMSG_PETITION_SHOWLIST(SMSG_PETITION_SHOWLIST),
@@ -3921,6 +3923,7 @@ impl ServerOpcodeMessage {
             0x01A4 => Ok(Self::SMSG_BUY_ITEM(<SMSG_BUY_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A4, size: body_size, io, } } else { a } })?)),
             0x01A5 => Ok(Self::SMSG_BUY_FAILED(<SMSG_BUY_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A5, size: body_size, io, } } else { a } })?)),
             0x01AE => Ok(Self::SMSG_ACTIVATETAXIREPLY(<SMSG_ACTIVATETAXIREPLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AE, size: body_size, io, } } else { a } })?)),
+            0x01AF => Ok(Self::SMSG_NEW_TAXI_PATH(<SMSG_NEW_TAXI_PATH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AF, size: body_size, io, } } else { a } })?)),
             0x01B8 => Ok(Self::SMSG_SHOW_BANK(<SMSG_SHOW_BANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B8, size: body_size, io, } } else { a } })?)),
             0x01BA => Ok(Self::SMSG_BUY_BANK_SLOT_RESULT(<SMSG_BUY_BANK_SLOT_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BA, size: body_size, io, } } else { a } })?)),
             0x01BC => Ok(Self::SMSG_PETITION_SHOWLIST(<SMSG_PETITION_SHOWLIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BC, size: body_size, io, } } else { a } })?)),
@@ -4171,6 +4174,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BUY_ITEM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BUY_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_NEW_TAXI_PATH(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SHOW_BANK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PETITION_SHOWLIST(c) => c.write_encrypted_server(w, e),
@@ -4354,6 +4358,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BUY_ITEM(c) => c.write_unencrypted_server(w),
             Self::SMSG_BUY_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.write_unencrypted_server(w),
+            Self::SMSG_NEW_TAXI_PATH(c) => c.write_unencrypted_server(w),
             Self::SMSG_SHOW_BANK(c) => c.write_unencrypted_server(w),
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_PETITION_SHOWLIST(c) => c.write_unencrypted_server(w),
@@ -4537,6 +4542,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BUY_ITEM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BUY_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_NEW_TAXI_PATH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SHOW_BANK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_SHOWLIST(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4720,6 +4726,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BUY_ITEM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BUY_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_NEW_TAXI_PATH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SHOW_BANK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_SHOWLIST(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4903,6 +4910,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BUY_ITEM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BUY_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_NEW_TAXI_PATH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SHOW_BANK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_SHOWLIST(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5086,6 +5094,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BUY_ITEM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BUY_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_NEW_TAXI_PATH(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SHOW_BANK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_SHOWLIST(c) => c.astd_write_unencrypted_server(w).await,
@@ -5271,6 +5280,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_BUY_ITEM(_) => "SMSG_BUY_ITEM",
             ServerOpcodeMessage::SMSG_BUY_FAILED(_) => "SMSG_BUY_FAILED",
             ServerOpcodeMessage::SMSG_ACTIVATETAXIREPLY(_) => "SMSG_ACTIVATETAXIREPLY",
+            ServerOpcodeMessage::SMSG_NEW_TAXI_PATH(_) => "SMSG_NEW_TAXI_PATH",
             ServerOpcodeMessage::SMSG_SHOW_BANK(_) => "SMSG_SHOW_BANK",
             ServerOpcodeMessage::SMSG_BUY_BANK_SLOT_RESULT(_) => "SMSG_BUY_BANK_SLOT_RESULT",
             ServerOpcodeMessage::SMSG_PETITION_SHOWLIST(_) => "SMSG_PETITION_SHOWLIST",
@@ -5964,6 +5974,12 @@ impl From<SMSG_BUY_FAILED> for ServerOpcodeMessage {
 impl From<SMSG_ACTIVATETAXIREPLY> for ServerOpcodeMessage {
     fn from(c: SMSG_ACTIVATETAXIREPLY) -> Self {
         Self::SMSG_ACTIVATETAXIREPLY(c)
+    }
+}
+
+impl From<SMSG_NEW_TAXI_PATH> for ServerOpcodeMessage {
+    fn from(c: SMSG_NEW_TAXI_PATH) -> Self {
+        Self::SMSG_NEW_TAXI_PATH(c)
     }
 }
 

@@ -744,6 +744,8 @@ pub use crate::shared::smsg_move_unset_hover_vanilla_tbc_wrath::SMSG_MOVE_UNSET_
 
 pub use crate::shared::smsg_move_water_walk_vanilla_tbc_wrath::SMSG_MOVE_WATER_WALK;
 
+pub use crate::shared::smsg_new_taxi_path_vanilla_tbc_wrath::SMSG_NEW_TAXI_PATH;
+
 pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
