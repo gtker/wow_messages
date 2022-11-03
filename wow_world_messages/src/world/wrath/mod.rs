@@ -798,6 +798,10 @@ pub use crate::shared::smsg_spline_move_unroot_vanilla_tbc_wrath::SMSG_SPLINE_MO
 
 pub use crate::shared::smsg_spline_move_unset_hover_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_UNSET_HOVER;
 
+pub use crate::shared::smsg_spline_move_water_walk_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_WATER_WALK;
+
+pub use crate::shared::smsg_spline_set_run_speed_vanilla_tbc_wrath::SMSG_SPLINE_SET_RUN_SPEED;
+
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
 pub use crate::shared::smsg_time_sync_req_tbc_wrath::SMSG_TIME_SYNC_REQ;

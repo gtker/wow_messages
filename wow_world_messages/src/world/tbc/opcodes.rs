@@ -3628,11 +3628,13 @@ use crate::world::tbc::SMSG_BINDER_CONFIRM;
 use crate::world::tbc::SMSG_BATTLEGROUND_PLAYER_JOINED;
 use crate::world::tbc::SMSG_BATTLEGROUND_PLAYER_LEFT;
 use crate::world::tbc::SMSG_CHAT_RESTRICTED;
+use crate::world::tbc::SMSG_SPLINE_SET_RUN_SPEED;
 use crate::world::tbc::SMSG_SPLINE_MOVE_UNROOT;
 use crate::world::tbc::SMSG_SPLINE_MOVE_FEATHER_FALL;
 use crate::world::tbc::SMSG_SPLINE_MOVE_NORMAL_FALL;
 use crate::world::tbc::SMSG_SPLINE_MOVE_SET_HOVER;
 use crate::world::tbc::SMSG_SPLINE_MOVE_UNSET_HOVER;
+use crate::world::tbc::SMSG_SPLINE_MOVE_WATER_WALK;
 use crate::world::tbc::SMSG_SPLINE_MOVE_LAND_WALK;
 use crate::world::tbc::SMSG_SPLINE_MOVE_START_SWIM;
 use crate::world::tbc::SMSG_SPLINE_MOVE_STOP_SWIM;
@@ -3822,11 +3824,13 @@ pub enum ServerOpcodeMessage {
     SMSG_BATTLEGROUND_PLAYER_JOINED(SMSG_BATTLEGROUND_PLAYER_JOINED),
     SMSG_BATTLEGROUND_PLAYER_LEFT(SMSG_BATTLEGROUND_PLAYER_LEFT),
     SMSG_CHAT_RESTRICTED(SMSG_CHAT_RESTRICTED),
+    SMSG_SPLINE_SET_RUN_SPEED(SMSG_SPLINE_SET_RUN_SPEED),
     SMSG_SPLINE_MOVE_UNROOT(SMSG_SPLINE_MOVE_UNROOT),
     SMSG_SPLINE_MOVE_FEATHER_FALL(SMSG_SPLINE_MOVE_FEATHER_FALL),
     SMSG_SPLINE_MOVE_NORMAL_FALL(SMSG_SPLINE_MOVE_NORMAL_FALL),
     SMSG_SPLINE_MOVE_SET_HOVER(SMSG_SPLINE_MOVE_SET_HOVER),
     SMSG_SPLINE_MOVE_UNSET_HOVER(SMSG_SPLINE_MOVE_UNSET_HOVER),
+    SMSG_SPLINE_MOVE_WATER_WALK(SMSG_SPLINE_MOVE_WATER_WALK),
     SMSG_SPLINE_MOVE_LAND_WALK(SMSG_SPLINE_MOVE_LAND_WALK),
     SMSG_SPLINE_MOVE_START_SWIM(SMSG_SPLINE_MOVE_START_SWIM),
     SMSG_SPLINE_MOVE_STOP_SWIM(SMSG_SPLINE_MOVE_STOP_SWIM),
@@ -4018,11 +4022,13 @@ impl ServerOpcodeMessage {
             0x02EC => Ok(Self::SMSG_BATTLEGROUND_PLAYER_JOINED(<SMSG_BATTLEGROUND_PLAYER_JOINED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EC, size: body_size, io, } } else { a } })?)),
             0x02ED => Ok(Self::SMSG_BATTLEGROUND_PLAYER_LEFT(<SMSG_BATTLEGROUND_PLAYER_LEFT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02ED, size: body_size, io, } } else { a } })?)),
             0x02FD => Ok(Self::SMSG_CHAT_RESTRICTED(<SMSG_CHAT_RESTRICTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FD, size: body_size, io, } } else { a } })?)),
+            0x02FE => Ok(Self::SMSG_SPLINE_SET_RUN_SPEED(<SMSG_SPLINE_SET_RUN_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FE, size: body_size, io, } } else { a } })?)),
             0x0304 => Ok(Self::SMSG_SPLINE_MOVE_UNROOT(<SMSG_SPLINE_MOVE_UNROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0304, size: body_size, io, } } else { a } })?)),
             0x0305 => Ok(Self::SMSG_SPLINE_MOVE_FEATHER_FALL(<SMSG_SPLINE_MOVE_FEATHER_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0305, size: body_size, io, } } else { a } })?)),
             0x0306 => Ok(Self::SMSG_SPLINE_MOVE_NORMAL_FALL(<SMSG_SPLINE_MOVE_NORMAL_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0306, size: body_size, io, } } else { a } })?)),
             0x0307 => Ok(Self::SMSG_SPLINE_MOVE_SET_HOVER(<SMSG_SPLINE_MOVE_SET_HOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0307, size: body_size, io, } } else { a } })?)),
             0x0308 => Ok(Self::SMSG_SPLINE_MOVE_UNSET_HOVER(<SMSG_SPLINE_MOVE_UNSET_HOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0308, size: body_size, io, } } else { a } })?)),
+            0x0309 => Ok(Self::SMSG_SPLINE_MOVE_WATER_WALK(<SMSG_SPLINE_MOVE_WATER_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0309, size: body_size, io, } } else { a } })?)),
             0x030A => Ok(Self::SMSG_SPLINE_MOVE_LAND_WALK(<SMSG_SPLINE_MOVE_LAND_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030A, size: body_size, io, } } else { a } })?)),
             0x030B => Ok(Self::SMSG_SPLINE_MOVE_START_SWIM(<SMSG_SPLINE_MOVE_START_SWIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030B, size: body_size, io, } } else { a } })?)),
             0x030C => Ok(Self::SMSG_SPLINE_MOVE_STOP_SWIM(<SMSG_SPLINE_MOVE_STOP_SWIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030C, size: body_size, io, } } else { a } })?)),
@@ -4282,11 +4288,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPLINE_MOVE_WATER_WALK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
@@ -4479,11 +4487,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPLINE_MOVE_WATER_WALK(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
@@ -4676,11 +4686,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_WATER_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4873,11 +4885,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_WATER_WALK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5070,11 +5084,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_WATER_WALK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5267,11 +5283,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_HOVER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_WATER_WALK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_LAND_WALK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_START_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
@@ -5466,11 +5484,13 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_JOINED(_) => "SMSG_BATTLEGROUND_PLAYER_JOINED",
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_LEFT(_) => "SMSG_BATTLEGROUND_PLAYER_LEFT",
             ServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => "SMSG_CHAT_RESTRICTED",
+            ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(_) => "SMSG_SPLINE_SET_RUN_SPEED",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNROOT(_) => "SMSG_SPLINE_MOVE_UNROOT",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_FEATHER_FALL(_) => "SMSG_SPLINE_MOVE_FEATHER_FALL",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_NORMAL_FALL(_) => "SMSG_SPLINE_MOVE_NORMAL_FALL",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_HOVER(_) => "SMSG_SPLINE_MOVE_SET_HOVER",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNSET_HOVER(_) => "SMSG_SPLINE_MOVE_UNSET_HOVER",
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_WATER_WALK(_) => "SMSG_SPLINE_MOVE_WATER_WALK",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_LAND_WALK(_) => "SMSG_SPLINE_MOVE_LAND_WALK",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_START_SWIM(_) => "SMSG_SPLINE_MOVE_START_SWIM",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_STOP_SWIM(_) => "SMSG_SPLINE_MOVE_STOP_SWIM",
@@ -6521,6 +6541,12 @@ impl From<SMSG_CHAT_RESTRICTED> for ServerOpcodeMessage {
     }
 }
 
+impl From<SMSG_SPLINE_SET_RUN_SPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_RUN_SPEED) -> Self {
+        Self::SMSG_SPLINE_SET_RUN_SPEED(c)
+    }
+}
+
 impl From<SMSG_SPLINE_MOVE_UNROOT> for ServerOpcodeMessage {
     fn from(c: SMSG_SPLINE_MOVE_UNROOT) -> Self {
         Self::SMSG_SPLINE_MOVE_UNROOT(c)
@@ -6548,6 +6574,12 @@ impl From<SMSG_SPLINE_MOVE_SET_HOVER> for ServerOpcodeMessage {
 impl From<SMSG_SPLINE_MOVE_UNSET_HOVER> for ServerOpcodeMessage {
     fn from(c: SMSG_SPLINE_MOVE_UNSET_HOVER) -> Self {
         Self::SMSG_SPLINE_MOVE_UNSET_HOVER(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_WATER_WALK> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_WATER_WALK) -> Self {
+        Self::SMSG_SPLINE_MOVE_WATER_WALK(c)
     }
 }
 

@@ -1134,6 +1134,10 @@ pub use crate::shared::smsg_spline_move_unroot_vanilla_tbc_wrath::SMSG_SPLINE_MO
 
 pub use crate::shared::smsg_spline_move_unset_hover_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_UNSET_HOVER;
 
+pub use crate::shared::smsg_spline_move_water_walk_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_WATER_WALK;
+
+pub use crate::shared::smsg_spline_set_run_speed_vanilla_tbc_wrath::SMSG_SPLINE_SET_RUN_SPEED;
+
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
@@ -1522,12 +1526,8 @@ pub(crate) mod smsg_spellordamage_immune;
 pub use smsg_spellordamage_immune::*;
 pub(crate) mod smsg_spirit_healer_confirm;
 pub use smsg_spirit_healer_confirm::*;
-pub(crate) mod smsg_spline_move_water_walk;
-pub use smsg_spline_move_water_walk::*;
 pub(crate) mod smsg_spline_set_run_back_speed;
 pub use smsg_spline_set_run_back_speed::*;
-pub(crate) mod smsg_spline_set_run_speed;
-pub use smsg_spline_set_run_speed::*;
 pub(crate) mod smsg_spline_set_swim_back_speed;
 pub use smsg_spline_set_swim_back_speed::*;
 pub(crate) mod smsg_spline_set_swim_speed;

@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 smsg SMSG_SPLINE_MOVE_WATER_WALK = 0x0309 {
     PackedGuid guid;
