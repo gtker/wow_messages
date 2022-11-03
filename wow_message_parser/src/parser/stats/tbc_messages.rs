@@ -512,6 +512,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_GMTICKET_GETTICKET", 0x211),
     Data::new("SMSG_GMTICKET_GETTICKET", 0x212),
     Data::new("CMSG_UNLEARN_TALENTS", 0x213),
+    Data::new("SMSG_GAMEOBJECT_SPAWN_ANIM", 0x214),
     Data::new("SMSG_GAMEOBJECT_DESPAWN_ANIM", 0x215),
     Data::new("MSG_CORPSE_QUERY", 0x216),
     Data::new("CMSG_GMTICKET_DELETETICKET", 0x217),
@@ -696,8 +697,8 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_SCRIPT_MESSAGE", 0x2B6),
     Data::new("SMSG_DUEL_COUNTDOWN", 0x2B7),
     Data::new("SMSG_AREA_TRIGGER_MESSAGE", 0x2B8),
-    Data::new("CMSG_SHOWING_HELM", 0x2B9),
-    Data::new("CMSG_SHOWING_CLOAK", 0x2BA),
+    Data::new("CMSG_TOGGLE_HELM", 0x2B9),
+    Data::new("CMSG_TOGGLE_CLOAK", 0x2BA),
     Data::with_reason(
         "SMSG_MEETINGSTONE_JOINFAILED",
         0x2BB,
