@@ -5,13 +5,13 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_voice_session_enable.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_voice_session_enable.wowm#L3):
 /// ```text
 /// cmsg CMSG_VOICE_SESSION_ENABLE = 0x03AF {
-///     Bool isVoiceEnabled;
-///     Bool isMicrophoneEnabled;
+///     Bool voice_enabled;
+///     Bool microphone_enabled;
 /// }
 /// ```
 pub struct CMSG_VOICE_SESSION_ENABLE {
-    pub isVoiceEnabled: bool,
-    pub isMicrophoneEnabled: bool,
+    pub voice_enabled: bool,
+    pub microphone_enabled: bool,
 }
 
 impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
@@ -22,11 +22,11 @@ impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // isVoiceEnabled: Bool
-        w.write_all(u8::from(self.isVoiceEnabled).to_le_bytes().as_slice())?;
+        // voice_enabled: Bool
+        w.write_all(u8::from(self.voice_enabled).to_le_bytes().as_slice())?;
 
-        // isMicrophoneEnabled: Bool
-        w.write_all(u8::from(self.isMicrophoneEnabled).to_le_bytes().as_slice())?;
+        // microphone_enabled: Bool
+        w.write_all(u8::from(self.microphone_enabled).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -35,13 +35,13 @@ impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03AF, size: body_size as u32 });
         }
 
-        // isVoiceEnabled: Bool
-        let isVoiceEnabled = crate::util::read_u8_le(r)? != 0;
-        // isMicrophoneEnabled: Bool
-        let isMicrophoneEnabled = crate::util::read_u8_le(r)? != 0;
+        // voice_enabled: Bool
+        let voice_enabled = crate::util::read_u8_le(r)? != 0;
+        // microphone_enabled: Bool
+        let microphone_enabled = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
-            isVoiceEnabled,
-            isMicrophoneEnabled,
+            voice_enabled,
+            microphone_enabled,
         })
     }
 
