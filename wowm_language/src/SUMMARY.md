@@ -343,6 +343,7 @@
 - [CMSG_LEARN_TALENT](docs/cmsg_learn_talent.md)
 - [CMSG_LEAVE_BATTLEFIELD](docs/cmsg_leave_battlefield.md)
 - [CMSG_LEAVE_CHANNEL](docs/cmsg_leave_channel.md)
+- [CMSG_LFG_GET_STATUS](docs/cmsg_lfg_get_status.md)
 - [CMSG_LIST_INVENTORY](docs/cmsg_list_inventory.md)
 - [CMSG_LOGOUT_CANCEL](docs/cmsg_logout_cancel.md)
 - [CMSG_LOGOUT_REQUEST](docs/cmsg_logout_request.md)

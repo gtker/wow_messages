@@ -66,6 +66,8 @@ pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
+pub(crate) mod cmsg_lfg_get_status;
+pub use cmsg_lfg_get_status::*;
 pub(crate) mod cmsg_mail_create_text_item;
 pub use cmsg_mail_create_text_item::*;
 pub(crate) mod cmsg_messagechat;
