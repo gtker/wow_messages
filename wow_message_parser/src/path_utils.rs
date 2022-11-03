@@ -47,6 +47,15 @@ pub(crate) fn base_directory() -> PathBuf {
         .join("inner")
 }
 
+pub(crate) fn opcode_to_name_location(version: MajorWorldVersion) -> PathBuf {
+    workspace_directory()
+        .join("wow_world_messages")
+        .join("src")
+        .join("helper")
+        .join(version.module_name())
+        .join("opcode_to_name.rs")
+}
+
 fn update_mask_location(version: MajorWorldVersion) -> PathBuf {
     workspace_directory()
         .join("wow_world_messages")

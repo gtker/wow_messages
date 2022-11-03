@@ -20,7 +20,7 @@ use crate::parser::types::objects::Object;
 use crate::path_utils::{get_filepath, get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
-    print_login_opcodes, print_update_mask, print_world_opcodes, DefinerType,
+    print_login_opcodes, print_opcode_to_name, print_update_mask, print_world_opcodes, DefinerType,
 };
 use parser::types::container::{Container, ContainerType};
 use parser::types::parsed::parsed_object::ParsedObjects;
@@ -167,6 +167,8 @@ fn main() {
     write_intermediate_representation(&o);
 
     print_update_mask();
+
+    print_opcode_to_name();
 
     print_message_stats(&o);
 }

@@ -11,11 +11,11 @@ use crate::UNIMPLEMENTED;
 
 #[derive(Debug, Clone)]
 pub(crate) struct Data {
-    name: &'static str,
-    opcode: usize,
-    definition: bool,
-    tests: usize,
-    reason: Option<&'static str>,
+    pub name: &'static str,
+    pub opcode: usize,
+    pub definition: bool,
+    pub tests: usize,
+    pub reason: Option<&'static str>,
 }
 
 impl Data {

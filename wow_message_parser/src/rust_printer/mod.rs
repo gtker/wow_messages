@@ -11,6 +11,7 @@ use crate::file_info::FileInfo;
 
 mod enums;
 mod flags;
+mod opcode_to_name;
 mod opcodes;
 pub mod rust_view;
 mod structs;
@@ -21,6 +22,7 @@ use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::MemberTags;
 use crate::parser::types::version::Version;
 use crate::{ContainerType, ObjectTags, Objects};
+pub use opcode_to_name::print_opcode_to_name;
 pub use update_mask::*;
 
 #[derive(Debug)]
