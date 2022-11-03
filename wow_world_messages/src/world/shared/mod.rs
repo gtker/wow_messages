@@ -331,6 +331,7 @@ pub mod smsg_spline_move_stop_swim_vanilla_tbc_wrath;
 pub mod smsg_spline_move_unroot_vanilla_tbc_wrath;
 pub mod smsg_spline_move_unset_hover_vanilla_tbc_wrath;
 pub mod smsg_spline_move_water_walk_vanilla_tbc_wrath;
+pub mod smsg_spline_set_run_back_speed_vanilla_tbc_wrath;
 pub mod smsg_spline_set_run_speed_vanilla_tbc_wrath;
 pub mod smsg_standstate_update_vanilla_tbc_wrath;
 pub mod smsg_time_sync_req_tbc_wrath;

@@ -3629,6 +3629,7 @@ use crate::world::tbc::SMSG_BATTLEGROUND_PLAYER_JOINED;
 use crate::world::tbc::SMSG_BATTLEGROUND_PLAYER_LEFT;
 use crate::world::tbc::SMSG_CHAT_RESTRICTED;
 use crate::world::tbc::SMSG_SPLINE_SET_RUN_SPEED;
+use crate::world::tbc::SMSG_SPLINE_SET_RUN_BACK_SPEED;
 use crate::world::tbc::SMSG_SPLINE_MOVE_UNROOT;
 use crate::world::tbc::SMSG_SPLINE_MOVE_FEATHER_FALL;
 use crate::world::tbc::SMSG_SPLINE_MOVE_NORMAL_FALL;
@@ -3825,6 +3826,7 @@ pub enum ServerOpcodeMessage {
     SMSG_BATTLEGROUND_PLAYER_LEFT(SMSG_BATTLEGROUND_PLAYER_LEFT),
     SMSG_CHAT_RESTRICTED(SMSG_CHAT_RESTRICTED),
     SMSG_SPLINE_SET_RUN_SPEED(SMSG_SPLINE_SET_RUN_SPEED),
+    SMSG_SPLINE_SET_RUN_BACK_SPEED(SMSG_SPLINE_SET_RUN_BACK_SPEED),
     SMSG_SPLINE_MOVE_UNROOT(SMSG_SPLINE_MOVE_UNROOT),
     SMSG_SPLINE_MOVE_FEATHER_FALL(SMSG_SPLINE_MOVE_FEATHER_FALL),
     SMSG_SPLINE_MOVE_NORMAL_FALL(SMSG_SPLINE_MOVE_NORMAL_FALL),
@@ -4023,6 +4025,7 @@ impl ServerOpcodeMessage {
             0x02ED => Ok(Self::SMSG_BATTLEGROUND_PLAYER_LEFT(<SMSG_BATTLEGROUND_PLAYER_LEFT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02ED, size: body_size, io, } } else { a } })?)),
             0x02FD => Ok(Self::SMSG_CHAT_RESTRICTED(<SMSG_CHAT_RESTRICTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FD, size: body_size, io, } } else { a } })?)),
             0x02FE => Ok(Self::SMSG_SPLINE_SET_RUN_SPEED(<SMSG_SPLINE_SET_RUN_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FE, size: body_size, io, } } else { a } })?)),
+            0x02FF => Ok(Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(<SMSG_SPLINE_SET_RUN_BACK_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FF, size: body_size, io, } } else { a } })?)),
             0x0304 => Ok(Self::SMSG_SPLINE_MOVE_UNROOT(<SMSG_SPLINE_MOVE_UNROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0304, size: body_size, io, } } else { a } })?)),
             0x0305 => Ok(Self::SMSG_SPLINE_MOVE_FEATHER_FALL(<SMSG_SPLINE_MOVE_FEATHER_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0305, size: body_size, io, } } else { a } })?)),
             0x0306 => Ok(Self::SMSG_SPLINE_MOVE_NORMAL_FALL(<SMSG_SPLINE_MOVE_NORMAL_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0306, size: body_size, io, } } else { a } })?)),
@@ -4289,6 +4292,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.write_encrypted_server(w, e),
@@ -4488,6 +4492,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.write_unencrypted_server(w),
@@ -4687,6 +4692,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4886,6 +4892,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5085,6 +5092,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5284,6 +5292,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_UNROOT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_FEATHER_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_NORMAL_FALL(c) => c.astd_write_unencrypted_server(w).await,
@@ -5485,6 +5494,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_LEFT(_) => "SMSG_BATTLEGROUND_PLAYER_LEFT",
             ServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => "SMSG_CHAT_RESTRICTED",
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(_) => "SMSG_SPLINE_SET_RUN_SPEED",
+            ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_BACK_SPEED(_) => "SMSG_SPLINE_SET_RUN_BACK_SPEED",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNROOT(_) => "SMSG_SPLINE_MOVE_UNROOT",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_FEATHER_FALL(_) => "SMSG_SPLINE_MOVE_FEATHER_FALL",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_NORMAL_FALL(_) => "SMSG_SPLINE_MOVE_NORMAL_FALL",
@@ -6544,6 +6554,12 @@ impl From<SMSG_CHAT_RESTRICTED> for ServerOpcodeMessage {
 impl From<SMSG_SPLINE_SET_RUN_SPEED> for ServerOpcodeMessage {
     fn from(c: SMSG_SPLINE_SET_RUN_SPEED) -> Self {
         Self::SMSG_SPLINE_SET_RUN_SPEED(c)
+    }
+}
+
+impl From<SMSG_SPLINE_SET_RUN_BACK_SPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_RUN_BACK_SPEED) -> Self {
+        Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c)
     }
 }
 

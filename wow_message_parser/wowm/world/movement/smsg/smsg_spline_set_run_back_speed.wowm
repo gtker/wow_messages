@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1.12 2 3";
 
 smsg SMSG_SPLINE_SET_RUN_BACK_SPEED = 0x02FF {
     PackedGuid guid;
