@@ -1120,6 +1120,8 @@ pub use crate::shared::smsg_spline_move_normal_fall_vanilla_tbc_wrath::SMSG_SPLI
 
 pub use crate::shared::smsg_spline_move_root_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_ROOT;
 
+pub use crate::shared::smsg_spline_move_set_hover_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_SET_HOVER;
+
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
@@ -1508,8 +1510,6 @@ pub(crate) mod smsg_spellordamage_immune;
 pub use smsg_spellordamage_immune::*;
 pub(crate) mod smsg_spirit_healer_confirm;
 pub use smsg_spirit_healer_confirm::*;
-pub(crate) mod smsg_spline_move_set_hover;
-pub use smsg_spline_move_set_hover::*;
 pub(crate) mod smsg_spline_move_set_run_mode;
 pub use smsg_spline_move_set_run_mode::*;
 pub(crate) mod smsg_spline_move_set_walk_mode;
