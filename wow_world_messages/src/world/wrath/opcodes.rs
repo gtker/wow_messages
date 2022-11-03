@@ -3489,6 +3489,7 @@ use crate::world::wrath::SMSG_CHAR_ENUM;
 use crate::world::wrath::SMSG_CHAR_DELETE;
 use crate::world::wrath::SMSG_NEW_WORLD;
 use crate::world::wrath::SMSG_TRANSFER_PENDING;
+use crate::world::wrath::SMSG_TRANSFER_ABORTED;
 use crate::world::wrath::SMSG_CHARACTER_LOGIN_FAILED;
 use crate::world::wrath::SMSG_LOGIN_SETTIMESPEED;
 use crate::world::wrath::SMSG_LOGOUT_RESPONSE;
@@ -3698,6 +3699,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHAR_DELETE(SMSG_CHAR_DELETE),
     SMSG_NEW_WORLD(SMSG_NEW_WORLD),
     SMSG_TRANSFER_PENDING(SMSG_TRANSFER_PENDING),
+    SMSG_TRANSFER_ABORTED(SMSG_TRANSFER_ABORTED),
     SMSG_CHARACTER_LOGIN_FAILED(SMSG_CHARACTER_LOGIN_FAILED),
     SMSG_LOGIN_SETTIMESPEED(SMSG_LOGIN_SETTIMESPEED),
     SMSG_LOGOUT_RESPONSE(SMSG_LOGOUT_RESPONSE),
@@ -3909,6 +3911,7 @@ impl ServerOpcodeMessage {
             0x003C => Ok(Self::SMSG_CHAR_DELETE(<SMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003C, size: body_size, io, } } else { a } })?)),
             0x003E => Ok(Self::SMSG_NEW_WORLD(<SMSG_NEW_WORLD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003E, size: body_size, io, } } else { a } })?)),
             0x003F => Ok(Self::SMSG_TRANSFER_PENDING(<SMSG_TRANSFER_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003F, size: body_size, io, } } else { a } })?)),
+            0x0040 => Ok(Self::SMSG_TRANSFER_ABORTED(<SMSG_TRANSFER_ABORTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0040, size: body_size, io, } } else { a } })?)),
             0x0041 => Ok(Self::SMSG_CHARACTER_LOGIN_FAILED(<SMSG_CHARACTER_LOGIN_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0041, size: body_size, io, } } else { a } })?)),
             0x0042 => Ok(Self::SMSG_LOGIN_SETTIMESPEED(<SMSG_LOGIN_SETTIMESPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0042, size: body_size, io, } } else { a } })?)),
             0x004C => Ok(Self::SMSG_LOGOUT_RESPONSE(<SMSG_LOGOUT_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004C, size: body_size, io, } } else { a } })?)),
@@ -4269,6 +4272,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NEW_WORLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TRANSFER_PENDING(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_TRANSFER_ABORTED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -4481,6 +4485,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_NEW_WORLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_TRANSFER_PENDING(c) => c.write_unencrypted_server(w),
+            Self::SMSG_TRANSFER_ABORTED(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -4693,6 +4698,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NEW_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_TRANSFER_ABORTED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4905,6 +4911,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NEW_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TRANSFER_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_TRANSFER_ABORTED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5117,6 +5124,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NEW_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_TRANSFER_ABORTED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5329,6 +5337,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NEW_WORLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TRANSFER_PENDING(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_TRANSFER_ABORTED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -5543,6 +5552,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHAR_DELETE(_) => "SMSG_CHAR_DELETE",
             ServerOpcodeMessage::SMSG_NEW_WORLD(_) => "SMSG_NEW_WORLD",
             ServerOpcodeMessage::SMSG_TRANSFER_PENDING(_) => "SMSG_TRANSFER_PENDING",
+            ServerOpcodeMessage::SMSG_TRANSFER_ABORTED(_) => "SMSG_TRANSFER_ABORTED",
             ServerOpcodeMessage::SMSG_CHARACTER_LOGIN_FAILED(_) => "SMSG_CHARACTER_LOGIN_FAILED",
             ServerOpcodeMessage::SMSG_LOGIN_SETTIMESPEED(_) => "SMSG_LOGIN_SETTIMESPEED",
             ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(_) => "SMSG_LOGOUT_RESPONSE",
@@ -5920,6 +5930,12 @@ impl From<SMSG_NEW_WORLD> for ServerOpcodeMessage {
 impl From<SMSG_TRANSFER_PENDING> for ServerOpcodeMessage {
     fn from(c: SMSG_TRANSFER_PENDING) -> Self {
         Self::SMSG_TRANSFER_PENDING(c)
+    }
+}
+
+impl From<SMSG_TRANSFER_ABORTED> for ServerOpcodeMessage {
+    fn from(c: SMSG_TRANSFER_ABORTED) -> Self {
+        Self::SMSG_TRANSFER_ABORTED(c)
     }
 }
 

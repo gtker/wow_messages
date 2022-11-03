@@ -522,6 +522,8 @@ pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
 pub use crate::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
 
+pub use crate::shared::dungeon_difficulty_tbc_wrath::DungeonDifficulty;
+
 pub use crate::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
 
 pub use crate::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
@@ -978,6 +980,8 @@ pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
+pub(crate) mod smsg_transfer_aborted;
+pub use smsg_transfer_aborted::*;
 pub(crate) mod smsg_transfer_pending;
 pub use smsg_transfer_pending::*;
 pub(crate) mod smsg_trigger_cinematic;
@@ -988,5 +992,7 @@ pub(crate) mod smsg_zone_under_attack;
 pub use smsg_zone_under_attack::*;
 pub(crate) mod spline_flag;
 pub use spline_flag::*;
+pub(crate) mod transfer_abort_reason;
+pub use transfer_abort_reason::*;
 pub(crate) mod world_result;
 pub use world_result::*;

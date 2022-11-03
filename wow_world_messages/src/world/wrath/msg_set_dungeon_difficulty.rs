@@ -3,7 +3,7 @@ use crate::world::wrath::DungeonDifficulty;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/msg_set_dungeon_difficulty.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/msg_set_dungeon_difficulty.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/msg_set_dungeon_difficulty.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/msg_set_dungeon_difficulty.wowm#L3):
 /// ```text
 /// msg MSG_SET_DUNGEON_DIFFICULTY = 0x0329 {
 ///     DungeonDifficulty difficulty;
@@ -44,7 +44,7 @@ impl crate::Message for MSG_SET_DUNGEON_DIFFICULTY {
         }
 
         // difficulty: DungeonDifficulty
-        let difficulty: DungeonDifficulty = crate::util::read_u32_le(r)?.try_into()?;
+        let difficulty: DungeonDifficulty = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;

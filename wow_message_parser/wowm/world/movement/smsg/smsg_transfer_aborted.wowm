@@ -1,4 +1,22 @@
-#tag_all versions "1.12";
+enum TransferAbortReason : u8 {
+    NONE = 0x00;
+    IS_FULL = 0x01;
+    NOT_FOUND = 0x02;
+    TOO_MANY_INSTANCES = 0x03;
+    ZONE_IS_IN_COMBAT = 0x05;
+} {
+    versions = "1.12";
+}
+
+smsg SMSG_TRANSFER_ABORTED = 0x0040 {
+    Map map;
+    TransferAbortReason reason;
+    u8 argument {
+        comment = "Possibly not needed.";
+    }
+} {
+    versions = "1.12";
+}
 
 enum TransferAbortReason : u8 {
     NONE = 0x00;
@@ -6,11 +24,94 @@ enum TransferAbortReason : u8 {
     NOT_FOUND = 0x02;
     TOO_MANY_INSTANCES = 0x03;
     ZONE_IS_IN_COMBAT = 0x05;
+    INSUFFICIENT_EXPANSION_LEVEL = 0x06;
+    DIFFICULTY_NOT_AVAILABLE = 0x07;
+    MISSING_DIFFICULTY = 8;
+    ZONE_IN_COMBAT = 9;
+    INSTANCE_IS_FULL = 10;
+    NOT_ALLOWED = 11;
+    HAS_BIND = 12;
+} {
+    versions = "2.4.3";
+}
+
+enum DungeonDifficulty : u8 {
+    NORMAL = 0;
+    HEROIC = 1;
+} {
+    versions = "2 3";
 }
 
 smsg SMSG_TRANSFER_ABORTED = 0x0040 {
     Map map;
     TransferAbortReason reason;
-    u8 padding = 0;
+    if (reason == INSUFFICIENT_EXPANSION_LEVEL
+     || reason == DIFFICULTY_NOT_AVAILABLE)
+    {
+        DungeonDifficulty difficulty;
+    }
+} {
+    versions = "2.4.3";
 }
 
+enum TransferAbortReason : u8 {
+    NONE = 0x00;
+    ERROR = 0x01;
+    MAX_PLAYERS = 0x02 {
+         comment = "Transfer Aborted: instance is full";
+    }
+    NOT_FOUND = 0x03 {
+         comment = "Transfer Aborted: instance not found";
+    }
+    TOO_MANY_INSTANCES = 0x04 {
+         comment = "You have entered too many instances recently.";
+    }
+    ZONE_IN_COMBAT = 0x06 {
+         comment = "Unable to zone in while an encounter is in progress.";
+    }
+    INSUFFICIENT_EXPANSION_LEVEL = 0x07 {
+         comment = "You must have TBC/WotLK expansion installed to access this area.";
+    }
+    DIFFICULTY_NOT_AVAILABLE = 0x08 {
+         comment = "Normal/Heroic/Epic difficulty mode is not available for %s.";
+    }
+    UNIQUE_MESSAGE = 0x09 {
+         comment = "Until you've escaped The Lich Kings grasp, you cannot leave this place!";
+    }
+    TOO_MANY_REALM_INSTANCES = 0x0A {
+         comment = "Additional instances cannot be launched, please try again later.";
+    }
+    NEED_GROUP = 0x0B {
+         comment = "3.1";
+    }
+    NOT_FOUND1 = 0x0C {
+         comment = "3.1";
+    }
+    NOT_FOUND2 = 0x0D {
+         comment = "3.1";
+    }
+    NOT_FOUND3 = 0x0E {
+         comment = "3.2";
+    }
+    REALM_ONLY = 0x0F {
+         comment = "All players on party must be from the same realm.";
+    }
+    MAP_NOT_ALLOWED = 0x10 {
+         comment = "Map can't be entered at this time.";
+    }
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_TRANSFER_ABORTED = 0x0040 {
+    Map map;
+    TransferAbortReason reason;
+    if (reason == INSUFFICIENT_EXPANSION_LEVEL
+     || reason == DIFFICULTY_NOT_AVAILABLE
+     || reason == UNIQUE_MESSAGE)
+    {
+        DungeonDifficulty difficulty;
+    }
+} {
+    versions = "3.3.5";
+}

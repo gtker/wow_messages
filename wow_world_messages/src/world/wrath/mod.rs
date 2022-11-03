@@ -113,8 +113,6 @@ pub use complaint_status::*;
 pub use crate::helper::wrath::*;
 pub(crate) mod declined_names;
 pub use declined_names::*;
-pub(crate) mod dungeon_difficulty;
-pub use dungeon_difficulty::*;
 pub(crate) mod emote;
 pub use emote::*;
 pub(crate) mod expansion;
@@ -515,6 +513,8 @@ pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESE
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
 pub use crate::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
+
+pub use crate::shared::dungeon_difficulty_tbc_wrath::DungeonDifficulty;
 
 pub use crate::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
 
@@ -958,6 +958,8 @@ pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
+pub(crate) mod smsg_transfer_aborted;
+pub use smsg_transfer_aborted::*;
 pub(crate) mod smsg_transfer_pending;
 pub use smsg_transfer_pending::*;
 pub(crate) mod smsg_trigger_cinematic;
@@ -974,6 +976,8 @@ pub(crate) mod smsg_zone_under_attack;
 pub use smsg_zone_under_attack::*;
 pub(crate) mod spline_flag;
 pub use spline_flag::*;
+pub(crate) mod transfer_abort_reason;
+pub use transfer_abort_reason::*;
 pub(crate) mod transport_info;
 pub use transport_info::*;
 pub(crate) mod update_flag;
