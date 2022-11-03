@@ -209,6 +209,7 @@ use crate::world::wrath::CMSG_LEAVE_BATTLEFIELD;
 use crate::world::wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Client;
 use crate::world::wrath::CMSG_PET_STOP_ATTACK;
 use crate::world::wrath::CMSG_BATTLEMASTER_JOIN;
+use crate::world::wrath::CMSG_PET_UNLEARN;
 use crate::world::wrath::CMSG_PET_SPELL_AUTOCAST;
 use crate::world::wrath::CMSG_GUILD_INFO_TEXT;
 use crate::world::wrath::CMSG_ACTIVATETAXIEXPRESS;
@@ -425,6 +426,7 @@ pub enum ClientOpcodeMessage {
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Client),
     CMSG_PET_STOP_ATTACK(CMSG_PET_STOP_ATTACK),
     CMSG_BATTLEMASTER_JOIN(CMSG_BATTLEMASTER_JOIN),
+    CMSG_PET_UNLEARN(CMSG_PET_UNLEARN),
     CMSG_PET_SPELL_AUTOCAST(CMSG_PET_SPELL_AUTOCAST),
     CMSG_GUILD_INFO_TEXT(CMSG_GUILD_INFO_TEXT),
     CMSG_ACTIVATETAXIEXPRESS(CMSG_ACTIVATETAXIEXPRESS),
@@ -643,6 +645,7 @@ impl ClientOpcodeMessage {
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E9, size: body_size, io, } } else { a } })?)),
             0x02EA => Ok(Self::CMSG_PET_STOP_ATTACK(<CMSG_PET_STOP_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EA, size: body_size, io, } } else { a } })?)),
             0x02EE => Ok(Self::CMSG_BATTLEMASTER_JOIN(<CMSG_BATTLEMASTER_JOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EE, size: body_size, io, } } else { a } })?)),
+            0x02F0 => Ok(Self::CMSG_PET_UNLEARN(<CMSG_PET_UNLEARN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F0, size: body_size, io, } } else { a } })?)),
             0x02F3 => Ok(Self::CMSG_PET_SPELL_AUTOCAST(<CMSG_PET_SPELL_AUTOCAST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F3, size: body_size, io, } } else { a } })?)),
             0x02FC => Ok(Self::CMSG_GUILD_INFO_TEXT(<CMSG_GUILD_INFO_TEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FC, size: body_size, io, } } else { a } })?)),
             0x0312 => Ok(Self::CMSG_ACTIVATETAXIEXPRESS(<CMSG_ACTIVATETAXIEXPRESS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0312, size: body_size, io, } } else { a } })?)),
@@ -929,6 +932,7 @@ impl ClientOpcodeMessage {
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_STOP_ATTACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PET_UNLEARN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_INFO_TEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_encrypted_client(w, e),
@@ -1148,6 +1152,7 @@ impl ClientOpcodeMessage {
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_STOP_ATTACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PET_UNLEARN(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_INFO_TEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_unencrypted_client(w),
@@ -1367,6 +1372,7 @@ impl ClientOpcodeMessage {
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PET_UNLEARN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INFO_TEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1586,6 +1592,7 @@ impl ClientOpcodeMessage {
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PET_UNLEARN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INFO_TEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1805,6 +1812,7 @@ impl ClientOpcodeMessage {
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PET_UNLEARN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INFO_TEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2024,6 +2032,7 @@ impl ClientOpcodeMessage {
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PET_UNLEARN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INFO_TEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_unencrypted_client(w).await,
@@ -2254,6 +2263,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Client",
             ClientOpcodeMessage::CMSG_PET_STOP_ATTACK(_) => "CMSG_PET_STOP_ATTACK",
             ClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN(_) => "CMSG_BATTLEMASTER_JOIN",
+            ClientOpcodeMessage::CMSG_PET_UNLEARN(_) => "CMSG_PET_UNLEARN",
             ClientOpcodeMessage::CMSG_PET_SPELL_AUTOCAST(_) => "CMSG_PET_SPELL_AUTOCAST",
             ClientOpcodeMessage::CMSG_GUILD_INFO_TEXT(_) => "CMSG_GUILD_INFO_TEXT",
             ClientOpcodeMessage::CMSG_ACTIVATETAXIEXPRESS(_) => "CMSG_ACTIVATETAXIEXPRESS",
@@ -3473,6 +3483,12 @@ impl From<CMSG_PET_STOP_ATTACK> for ClientOpcodeMessage {
 impl From<CMSG_BATTLEMASTER_JOIN> for ClientOpcodeMessage {
     fn from(c: CMSG_BATTLEMASTER_JOIN) -> Self {
         Self::CMSG_BATTLEMASTER_JOIN(c)
+    }
+}
+
+impl From<CMSG_PET_UNLEARN> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_UNLEARN) -> Self {
+        Self::CMSG_PET_UNLEARN(c)
     }
 }
 
