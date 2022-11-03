@@ -37,6 +37,7 @@ use crate::world::wrath::MSG_SET_DUNGEON_DIFFICULTY;
 use crate::world::wrath::MSG_MOVE_START_ASCEND;
 use crate::world::wrath::MSG_MOVE_STOP_ASCEND;
 use crate::world::wrath::MSG_MOVE_START_DESCEND;
+use crate::world::wrath::MSG_GUILD_BANK_MONEY_WITHDRAWN;
 use crate::world::wrath::CMSG_CALENDAR_GET_NUM_PENDING;
 use crate::world::wrath::CMSG_WORLD_TELEPORT;
 use crate::world::wrath::CMSG_TELEPORT_TO_UNIT;
@@ -261,6 +262,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND),
+    MSG_GUILD_BANK_MONEY_WITHDRAWN(MSG_GUILD_BANK_MONEY_WITHDRAWN),
     CMSG_CALENDAR_GET_NUM_PENDING(CMSG_CALENDAR_GET_NUM_PENDING),
     CMSG_WORLD_TELEPORT(CMSG_WORLD_TELEPORT),
     CMSG_TELEPORT_TO_UNIT(CMSG_TELEPORT_TO_UNIT),
@@ -487,6 +489,7 @@ impl ClientOpcodeMessage {
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
+            0x03FE => Ok(Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(<MSG_GUILD_BANK_MONEY_WITHDRAWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FE, size: body_size, io, } } else { a } })?)),
             0x0447 => Ok(Self::CMSG_CALENDAR_GET_NUM_PENDING(<CMSG_CALENDAR_GET_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0447, size: body_size, io, } } else { a } })?)),
             0x0008 => Ok(Self::CMSG_WORLD_TELEPORT(<CMSG_WORLD_TELEPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0008, size: body_size, io, } } else { a } })?)),
             0x0009 => Ok(Self::CMSG_TELEPORT_TO_UNIT(<CMSG_TELEPORT_TO_UNIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0009, size: body_size, io, } } else { a } })?)),
@@ -781,6 +784,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_client(w, e),
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_encrypted_client(w, e),
@@ -1008,6 +1012,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_client(w),
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.write_unencrypted_client(w),
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_unencrypted_client(w),
@@ -1235,6 +1240,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1462,6 +1468,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1689,6 +1696,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1916,6 +1924,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_unencrypted_client(w).await,
@@ -2154,6 +2163,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
             ClientOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND",
+            ClientOpcodeMessage::MSG_GUILD_BANK_MONEY_WITHDRAWN(_) => "MSG_GUILD_BANK_MONEY_WITHDRAWN",
             ClientOpcodeMessage::CMSG_CALENDAR_GET_NUM_PENDING(_) => "CMSG_CALENDAR_GET_NUM_PENDING",
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(_) => "CMSG_WORLD_TELEPORT",
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(_) => "CMSG_TELEPORT_TO_UNIT",
@@ -2521,6 +2531,12 @@ impl From<MSG_MOVE_STOP_ASCEND> for ClientOpcodeMessage {
 impl From<MSG_MOVE_START_DESCEND> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_START_DESCEND) -> Self {
         Self::MSG_MOVE_START_DESCEND(c)
+    }
+}
+
+impl From<MSG_GUILD_BANK_MONEY_WITHDRAWN> for ClientOpcodeMessage {
+    fn from(c: MSG_GUILD_BANK_MONEY_WITHDRAWN) -> Self {
+        Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c)
     }
 }
 
@@ -3886,6 +3902,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND),
+    MSG_GUILD_BANK_MONEY_WITHDRAWN(MSG_GUILD_BANK_MONEY_WITHDRAWN),
     CMSG_CALENDAR_GET_NUM_PENDING(CMSG_CALENDAR_GET_NUM_PENDING),
     SMSG_CHAR_CREATE(SMSG_CHAR_CREATE),
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
@@ -4099,6 +4116,7 @@ impl ServerOpcodeMessage {
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
+            0x03FE => Ok(Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(<MSG_GUILD_BANK_MONEY_WITHDRAWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FE, size: body_size, io, } } else { a } })?)),
             0x0447 => Ok(Self::CMSG_CALENDAR_GET_NUM_PENDING(<CMSG_CALENDAR_GET_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0447, size: body_size, io, } } else { a } })?)),
             0x003A => Ok(Self::SMSG_CHAR_CREATE(<SMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003A, size: body_size, io, } } else { a } })?)),
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003B, size: body_size, io, } } else { a } })?)),
@@ -4461,6 +4479,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.write_encrypted_server(w, e),
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
@@ -4675,6 +4694,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.write_unencrypted_server(w),
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
@@ -4889,6 +4909,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5103,6 +5124,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5317,6 +5339,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5531,6 +5554,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
@@ -5747,6 +5771,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND",
             ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND",
+            ServerOpcodeMessage::MSG_GUILD_BANK_MONEY_WITHDRAWN(_) => "MSG_GUILD_BANK_MONEY_WITHDRAWN",
             ServerOpcodeMessage::CMSG_CALENDAR_GET_NUM_PENDING(_) => "CMSG_CALENDAR_GET_NUM_PENDING",
             ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => "SMSG_CHAR_CREATE",
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
@@ -6101,6 +6126,12 @@ impl From<MSG_MOVE_STOP_ASCEND> for ServerOpcodeMessage {
 impl From<MSG_MOVE_START_DESCEND> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_START_DESCEND) -> Self {
         Self::MSG_MOVE_START_DESCEND(c)
+    }
+}
+
+impl From<MSG_GUILD_BANK_MONEY_WITHDRAWN> for ServerOpcodeMessage {
+    fn from(c: MSG_GUILD_BANK_MONEY_WITHDRAWN) -> Self {
+        Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c)
     }
 }
 

@@ -503,6 +503,7 @@
 - [MSG_BATTLEGROUND_PLAYER_POSITIONS_Server](docs/msg_battleground_player_positions_server.md)
 - [MSG_CORPSE_QUERY_Client](docs/msg_corpse_query_client.md)
 - [MSG_CORPSE_QUERY_Server](docs/msg_corpse_query_server.md)
+- [MSG_GUILD_BANK_MONEY_WITHDRAWN](docs/msg_guild_bank_money_withdrawn.md)
 - [MSG_INSPECT_HONOR_STATS_Client](docs/msg_inspect_honor_stats_client.md)
 - [MSG_INSPECT_HONOR_STATS_Server](docs/msg_inspect_honor_stats_server.md)
 - [MSG_LIST_STABLED_PETS_Client](docs/msg_list_stabled_pets_client.md)

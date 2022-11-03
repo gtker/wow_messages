@@ -153,6 +153,8 @@ pub(crate) mod movement_info;
 pub use movement_info::*;
 pub(crate) mod msg_auction_hello_server;
 pub use msg_auction_hello_server::*;
+pub(crate) mod msg_guild_bank_money_withdrawn;
+pub use msg_guild_bank_money_withdrawn::*;
 pub(crate) mod msg_move_fall_land;
 pub use msg_move_fall_land::*;
 pub(crate) mod msg_move_heartbeat;
