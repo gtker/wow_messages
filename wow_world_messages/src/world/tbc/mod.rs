@@ -560,7 +560,7 @@ pub use crate::shared::forced_reaction_vanilla_tbc_wrath::ForcedReaction;
 
 pub use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 
-pub use crate::shared::gm_ticket_escalation_status_vanilla_tbc::GmTicketEscalationStatus;
+pub use crate::shared::gm_ticket_escalation_status_vanilla_tbc_wrath::GmTicketEscalationStatus;
 
 pub use crate::shared::gm_ticket_queue_status_vanilla_tbc_wrath::GmTicketQueueStatus;
 
@@ -568,7 +568,7 @@ pub use crate::shared::gm_ticket_response_vanilla_tbc_wrath::GmTicketResponse;
 
 pub use crate::shared::gm_ticket_status_response_vanilla_tbc_wrath::GmTicketStatusResponse;
 
-pub use crate::shared::gm_ticket_status_vanilla_tbc::GmTicketStatus;
+pub use crate::shared::gm_ticket_status_vanilla_tbc_wrath::GmTicketStatus;
 
 pub use crate::shared::gossip_item_tbc_wrath::GossipItem;
 

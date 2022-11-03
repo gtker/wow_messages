@@ -75,6 +75,6 @@ enum GmTicketStatus : u32 {
     HAS_TEXT = 0x06;
     DEFAULT = 0x0A;
 } {
-    versions = "1 2";
+    versions = "1 2 3";
 }
 
