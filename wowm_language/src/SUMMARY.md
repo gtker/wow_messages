@@ -245,6 +245,7 @@
 - [CMSG_BUY_ITEM](docs/cmsg_buy_item.md)
 - [CMSG_BUY_ITEM_IN_SLOT](docs/cmsg_buy_item_in_slot.md)
 - [CMSG_BUY_STABLE_SLOT](docs/cmsg_buy_stable_slot.md)
+- [CMSG_CALENDAR_GET_NUM_PENDING](docs/cmsg_calendar_get_num_pending.md)
 - [CMSG_CANCEL_AURA](docs/cmsg_cancel_aura.md)
 - [CMSG_CANCEL_AUTO_REPEAT_SPELL](docs/cmsg_cancel_auto_repeat_spell.md)
 - [CMSG_CANCEL_CAST](docs/cmsg_cancel_cast.md)
