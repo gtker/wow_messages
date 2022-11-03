@@ -33,3 +33,9 @@ impl crate::Message for CMSG_REQUEST_PET_INFO {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_REQUEST_PET_INFO {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_REQUEST_PET_INFO {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_REQUEST_PET_INFO {}
+
