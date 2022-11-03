@@ -53,6 +53,7 @@ flag SpellCastTargetFlags : u16 {
     versions = "1.12";
 }
 
+/* TODO: Probably not valid since flags need || target_flags & other */
 struct SpellCastTargets {
     SpellCastTargetFlags target_flags;
     if (target_flags & UNIT) {

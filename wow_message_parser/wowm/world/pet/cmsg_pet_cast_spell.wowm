@@ -3,5 +3,6 @@
 cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
     Guid guid;
     Spell id;
+    SpellCastTargets targets;
 }
 
