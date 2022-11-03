@@ -930,6 +930,8 @@ pub(crate) mod smsg_npc_text_update;
 pub use smsg_npc_text_update::*;
 pub(crate) mod smsg_petition_showlist;
 pub use smsg_petition_showlist::*;
+pub(crate) mod smsg_playerbound;
+pub use smsg_playerbound::*;
 pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
 pub(crate) mod smsg_set_proficiency;
