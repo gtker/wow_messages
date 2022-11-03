@@ -1,0 +1,6 @@
+#tag_all versions "3.3.5";
+
+cmsg CMSG_VOICE_SESSION_ENABLE = 0x03AF {
+    Bool isVoiceEnabled;
+    Bool isMicrophoneEnabled;
+}
