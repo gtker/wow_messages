@@ -72,8 +72,6 @@ pub(crate) mod cmsg_cancel_cast;
 pub use cmsg_cancel_cast::*;
 pub(crate) mod cmsg_cancel_growth_aura;
 pub use cmsg_cancel_growth_aura::*;
-pub(crate) mod cmsg_cancel_trade;
-pub use cmsg_cancel_trade::*;
 pub(crate) mod cmsg_cast_spell;
 pub use cmsg_cast_spell::*;
 pub(crate) mod cmsg_char_create;
@@ -605,6 +603,8 @@ pub use crate::shared::cmsg_buy_stable_slot_vanilla_tbc_wrath::CMSG_BUY_STABLE_S
 pub use crate::shared::cmsg_buyback_item_vanilla_tbc_wrath::CMSG_BUYBACK_ITEM;
 
 pub use crate::shared::cmsg_cancel_channelling_vanilla_tbc_wrath::CMSG_CANCEL_CHANNELLING;
+
+pub use crate::shared::cmsg_cancel_trade_vanilla_tbc_wrath::CMSG_CANCEL_TRADE;
 
 pub use crate::shared::cmsg_channel_announcements_vanilla_tbc_wrath::CMSG_CHANNEL_ANNOUNCEMENTS;
 
