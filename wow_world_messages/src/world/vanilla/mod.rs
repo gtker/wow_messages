@@ -1072,6 +1072,8 @@ pub use crate::shared::smsg_move_knock_back_vanilla_tbc_wrath::SMSG_MOVE_KNOCK_B
 
 pub use crate::shared::smsg_move_land_walk_vanilla_tbc_wrath::SMSG_MOVE_LAND_WALK;
 
+pub use crate::shared::smsg_move_normal_fall_vanilla_tbc_wrath::SMSG_MOVE_NORMAL_FALL;
+
 pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
@@ -1332,8 +1334,6 @@ pub(crate) mod smsg_monster_move;
 pub use smsg_monster_move::*;
 pub(crate) mod smsg_monster_move_transport;
 pub use smsg_monster_move_transport::*;
-pub(crate) mod smsg_move_normal_fall;
-pub use smsg_move_normal_fall::*;
 pub(crate) mod smsg_move_set_hover;
 pub use smsg_move_set_hover::*;
 pub(crate) mod smsg_move_unset_hover;
