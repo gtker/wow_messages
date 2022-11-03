@@ -1,0 +1,3 @@
+#tag_all versions "3.3.5";
+
+cmsg CMSG_LFD_PLAYER_LOCK_INFO_REQUEST = 0x036E {}
