@@ -111,7 +111,7 @@ pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String 
         s.wln("unimplemented");
     } else {
         for field in e.members() {
-            print_members(&mut s, e, field);
+            print_members(&mut s, field);
         }
     }
 
@@ -121,7 +121,7 @@ pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String 
     s.inner
 }
 
-fn print_members(s: &mut WowmWriter, e: &Container, field: &StructMember) {
+fn print_members(s: &mut WowmWriter, field: &StructMember) {
     match field {
         StructMember::Definition(d) => {
             s.wln(format!(
@@ -138,7 +138,7 @@ fn print_members(s: &mut WowmWriter, e: &Container, field: &StructMember) {
             print_wowm_if_statement(s, statement, "if");
 
             for f in statement.members() {
-                print_members(s, e, f);
+                print_members(s, f);
             }
 
             s.dec();
@@ -149,7 +149,7 @@ fn print_members(s: &mut WowmWriter, e: &Container, field: &StructMember) {
                     print_wowm_if_statement(s, else_if, "else if");
 
                     for m in else_if.members() {
-                        print_members(s, e, m);
+                        print_members(s, m);
                     }
 
                     s.dec();
@@ -162,7 +162,7 @@ fn print_members(s: &mut WowmWriter, e: &Container, field: &StructMember) {
                 s.inc();
 
                 for f in statement.else_members() {
-                    print_members(s, e, f);
+                    print_members(s, f);
                 }
 
                 s.dec();
@@ -174,7 +174,7 @@ fn print_members(s: &mut WowmWriter, e: &Container, field: &StructMember) {
             s.inc();
 
             for m in optional.members() {
-                print_members(s, e, m);
+                print_members(s, m);
             }
 
             s.dec();

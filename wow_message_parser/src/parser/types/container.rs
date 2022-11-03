@@ -402,20 +402,20 @@ impl Container {
     }
 
     pub(crate) fn all_definitions_transitively(&self) -> Vec<StructMemberDefinition> {
-        fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>, tags: &ObjectTags) {
+        fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>) {
             match m {
                 StructMember::Definition(d) => {
                     v.push(d.clone());
                     match d.ty() {
                         Type::Struct { e } => {
                             for m in e.members() {
-                                inner(m, v, tags);
+                                inner(m, v);
                             }
                         }
                         Type::Array(array) => {
                             if let ArrayType::Struct(c) = array.ty() {
                                 for m in c.members() {
-                                    inner(m, v, tags);
+                                    inner(m, v);
                                 }
                             }
                         }
@@ -424,12 +424,12 @@ impl Container {
                 }
                 StructMember::IfStatement(statement) => {
                     for m in statement.all_members() {
-                        inner(m, v, tags);
+                        inner(m, v);
                     }
                 }
                 StructMember::OptionalStatement(optional) => {
                     for m in optional.members() {
-                        inner(m, v, tags);
+                        inner(m, v);
                     }
                 }
             }
@@ -438,7 +438,7 @@ impl Container {
         let mut v = Vec::new();
 
         for m in self.members() {
-            inner(m, &mut v, self.tags());
+            inner(m, &mut v);
         }
 
         v

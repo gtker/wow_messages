@@ -9,7 +9,7 @@ use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub(crate) enum ParsedStructMember {
-    Definition(ParsedStructMemberDefinition),
+    Definition(Box<ParsedStructMemberDefinition>),
     IfStatement(ParsedIfStatement),
     OptionalStatement(ParsedOptionalStatement),
 }

@@ -163,7 +163,7 @@ fn parsed_member_to_member(
 ) -> StructMember {
     match m {
         ParsedStructMember::Definition(d) => StructMember::Definition(
-            parsed_struct_member_definition_to_struct_member(c, containers, definers, tags, d),
+            parsed_struct_member_definition_to_struct_member(c, containers, definers, tags, *d),
         ),
         ParsedStructMember::IfStatement(s) => {
             let member = c.get_field_ty(s.conditional.variable_name()).str();
@@ -507,7 +507,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
         ParsedType::Array(array) => {
             assert!(value.contains('['));
             assert!(value.contains(']'));
-            let val = &value.replace('[', "").replace(']', "");
+            let val = &value.replace(['[', ']'], "");
             let mut v = Vec::new();
             for value in val.split(',') {
                 let value = value.trim();

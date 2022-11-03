@@ -570,12 +570,7 @@ impl RustObject {
     pub(crate) fn rust_definers_in_enumerator(&self, enumerator_name: &str) -> Vec<RustDefiner> {
         let mut v = Vec::new();
 
-        fn inner(
-            m: &RustMember,
-            enumerator_name: &str,
-            v: &mut Vec<RustDefiner>,
-            container_name: &str,
-        ) {
+        fn inner(m: &RustMember, enumerator_name: &str, v: &mut Vec<RustDefiner>) {
             if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                 for enumerator in rd.enumerators() {
                     if enumerator.name() == enumerator_name {
@@ -590,7 +585,7 @@ impl RustObject {
                                                 {
                                                     v.push(rd);
                                                 } else {
-                                                    inner(m, enumerator_name, v, container_name);
+                                                    inner(m, enumerator_name, v);
                                                 }
                                             }
                                         }
@@ -603,14 +598,14 @@ impl RustObject {
                                 if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                                     v.push(rd);
                                 } else {
-                                    inner(m, enumerator_name, v, container_name);
+                                    inner(m, enumerator_name, v);
                                 }
                             }
                         }
                     } else {
                         for m in enumerator.members_in_struct() {
                             if RustObject::get_rust_definer_from_ty(m).is_some() {
-                                inner(m, enumerator_name, v, container_name);
+                                inner(m, enumerator_name, v);
                             }
                         }
                     }
@@ -619,7 +614,7 @@ impl RustObject {
         }
 
         for m in self.members_in_struct() {
-            inner(m, enumerator_name, &mut v, self.name());
+            inner(m, enumerator_name, &mut v);
         }
 
         v
@@ -642,13 +637,13 @@ impl RustObject {
     }
 
     pub(crate) fn get_rust_definers(&self) -> Vec<RustDefiner> {
-        fn inner(m: &RustMember, v: &mut Vec<RustDefiner>, container_name: &str) {
+        fn inner(m: &RustMember, v: &mut Vec<RustDefiner>) {
             let rd = RustObject::get_rust_definer_from_ty(m);
 
             if let Some(rd) = rd {
                 for enumerator in rd.enumerators() {
                     for m in enumerator.members_in_struct() {
-                        inner(m, v, container_name);
+                        inner(m, v);
                     }
                 }
 
@@ -661,7 +656,7 @@ impl RustObject {
         let mut v = Vec::new();
 
         for m in self.members_in_struct() {
-            inner(m, &mut v, self.name());
+            inner(m, &mut v);
         }
 
         v
@@ -676,7 +671,6 @@ impl RustObject {
             m: &RustMember,
             variable_name: &str,
             enumerator_name: &str,
-            container_name: &str,
         ) -> Option<RustDefiner> {
             if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                 for enumerator in rd.enumerators() {
@@ -685,9 +679,7 @@ impl RustObject {
                             RustType::Enum { enumerators, .. } => {
                                 for enumerator in enumerators {
                                     for m in enumerator.members() {
-                                        if let Some(rd) =
-                                            inner(m, variable_name, enumerator_name, container_name)
-                                        {
+                                        if let Some(rd) = inner(m, variable_name, enumerator_name) {
                                             return Some(rd);
                                         }
                                     }
@@ -698,7 +690,7 @@ impl RustObject {
                     }
 
                     for m in enumerator.members() {
-                        if let Some(rd) = inner(m, variable_name, enumerator_name, container_name) {
+                        if let Some(rd) = inner(m, variable_name, enumerator_name) {
                             return Some(rd);
                         }
                     }
@@ -712,7 +704,7 @@ impl RustObject {
         }
 
         for m in self.members() {
-            if let Some(rd) = inner(m, variable_name, enumerator_name, self.name()) {
+            if let Some(rd) = inner(m, variable_name, enumerator_name) {
                 return rd;
             }
         }

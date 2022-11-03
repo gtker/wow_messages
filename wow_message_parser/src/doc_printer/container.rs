@@ -96,7 +96,7 @@ fn print_container_example_array(
             ArrayType::Struct(c) => {
                 for m in c.members() {
                     let prefix = format!("{}[{}].{}", prefix, i, c.name());
-                    print_container_example_member(s, c, m, bytes, values, o, tags, &prefix);
+                    print_container_example_member(s, m, bytes, values, o, tags, &prefix);
                 }
             }
         }
@@ -215,7 +215,7 @@ fn print_container_example_definition(
         }
         Type::Struct { e } => {
             for m in e.members() {
-                print_container_example_member(s, e, m, bytes, values, o, tags, e.name());
+                print_container_example_member(s, m, bytes, values, o, tags, e.name());
             }
 
             return;
@@ -265,7 +265,6 @@ fn print_container_example_definition(
 
 fn print_container_example_member(
     s: &mut DocWriter,
-    e: &Container,
     m: &StructMember,
     bytes: &mut Iter<u8>,
     values: &mut HashMap<String, isize>,
@@ -343,7 +342,7 @@ fn print_container_example_member(
 
             if statement_set(statement, enum_value) {
                 for m in statement.members() {
-                    print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
+                    print_container_example_member(s, m, bytes, values, o, tags, prefix);
                 }
             } else if !statement.else_ifs().is_empty() {
                 for elseif in statement.else_ifs() {
@@ -351,13 +350,13 @@ fn print_container_example_member(
 
                     if statement_set(elseif, value) {
                         for m in elseif.members() {
-                            print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
+                            print_container_example_member(s, m, bytes, values, o, tags, prefix);
                         }
                     }
                 }
             } else {
                 for m in statement.else_members() {
-                    print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
+                    print_container_example_member(s, m, bytes, values, o, tags, prefix);
                 }
             }
         }
@@ -365,7 +364,7 @@ fn print_container_example_member(
             s.wln(format!("// Optional {}", optional.name()));
 
             for m in optional.members() {
-                print_container_example_member(s, e, m, bytes, values, o, tags, prefix);
+                print_container_example_member(s, m, bytes, values, o, tags, prefix);
             }
         }
     }
@@ -449,7 +448,7 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
             s.newline();
         } else {
             for m in e.members() {
-                print_container_example_member(s, e, m, &mut bytes, &mut values, o, e.tags(), "");
+                print_container_example_member(s, m, &mut bytes, &mut values, o, e.tags(), "");
             }
         }
 

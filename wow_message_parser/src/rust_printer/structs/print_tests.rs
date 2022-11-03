@@ -62,7 +62,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                         number = i,
                     ),
                     |s| {
-                        print_test_case(s, t, e, o, it, i, version);
+                        print_test_case(s, t, e, it, i, version);
                     },
                 );
             }
@@ -121,7 +121,6 @@ fn print_test_case(
     s: &mut Writer,
     t: &TestCase,
     e: &Container,
-    o: &Objects,
     it: ImplType,
     i: usize,
     version: Version,
@@ -130,7 +129,7 @@ fn print_test_case(
         format!("let expected = {}", t.subject()),
         |s| {
             for m in e.rust_object().members_in_struct() {
-                print_value(s, m, t.members(), e, o, version);
+                print_value(s, m, t.members(), e, version);
             }
         },
         ";\n",
@@ -304,7 +303,6 @@ fn print_value(
     m: &RustMember,
     t: &[TestCaseMember],
     e: &Container,
-    o: &Objects,
     version: Version,
 ) {
     let member = TestCase::get_member(t, m.name());
@@ -354,7 +352,7 @@ fn print_value(
                 s.inc_indent();
 
                 for m in array_container.rust_object().members_in_struct() {
-                    print_value(s, m, multiple, array_container, o, version);
+                    print_value(s, m, multiple, array_container, version);
                 }
 
                 s.closing_curly_with(",");
@@ -393,7 +391,7 @@ fn print_value(
                             ));
 
                             for m in enumerator.members_in_struct() {
-                                print_value(s, m, t, e, o, version);
+                                print_value(s, m, t, e, version);
                             }
 
                             s.closing_curly_with(")");
@@ -410,7 +408,7 @@ fn print_value(
                             ));
 
                             for m in enumerator.members_in_struct() {
-                                print_value(s, m, t, e, o, version);
+                                print_value(s, m, t, e, version);
                             }
 
                             s.closing_curly_with(")");
@@ -428,7 +426,7 @@ fn print_value(
 
             let t = members.as_slice();
             for m in c.rust_object().members_in_struct() {
-                print_value(s, m, t, c, o, version);
+                print_value(s, m, t, c, version);
             }
 
             s.closing_curly_with(",");
@@ -457,7 +455,7 @@ fn print_value(
             s.inc_indent();
 
             for sf in subvars {
-                print_value(s, sf, t, e, o, version);
+                print_value(s, sf, t, e, version);
             }
 
             s.closing_curly_with(",");

@@ -331,12 +331,12 @@ fn apply_tags(
 }
 
 fn unimplemented_member() -> ParsedStructMember {
-    ParsedStructMember::Definition(ParsedStructMemberDefinition::new(
+    ParsedStructMember::Definition(Box::new(ParsedStructMemberDefinition::new(
         UNIMPLEMENTED,
         ParsedType::Array(ParsedArray::new_unimplemented()),
         None,
         ParsedTags::new().into_member_tags(),
-    ))
+    )))
 }
 
 fn parse_struct_member(
@@ -407,7 +407,7 @@ fn parse_struct_member(
                 kvs.into_member_tags(),
             );
 
-            ParsedStructMember::Definition(s)
+            ParsedStructMember::Definition(Box::new(s))
         }
         Rule::if_statement => {
             let mut f = t.into_inner();

@@ -26,7 +26,7 @@ pub mod errors;
 pub mod helper;
 mod traits;
 pub(crate) mod util;
-#[allow(unused, clippy::complexity)]
+#[allow(unused, clippy::complexity, clippy::bool_to_int_with_if)]
 #[allow(clippy::large_enum_variant)]
 mod world;
 

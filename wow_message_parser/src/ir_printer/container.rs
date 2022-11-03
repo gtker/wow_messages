@@ -107,7 +107,7 @@ impl From<&OptionalStatement> for IrOptionalStatement {
 #[serde(tag = "type", content = "content")]
 pub(crate) enum IrStructMember {
     #[serde(rename = "definition")]
-    Definition(IrStructMemberDefinition),
+    Definition(Box<IrStructMemberDefinition>),
     #[serde(rename = "if_statement")]
     IfStatement(IrIfStatement),
     #[serde(rename = "optional")]
@@ -117,7 +117,7 @@ pub(crate) enum IrStructMember {
 impl From<&StructMember> for IrStructMember {
     fn from(v: &StructMember) -> Self {
         match v {
-            StructMember::Definition(d) => Self::Definition(d.into()),
+            StructMember::Definition(d) => Self::Definition(Box::new(d.into())),
             StructMember::IfStatement(statement) => Self::IfStatement(statement.into()),
             StructMember::OptionalStatement(optional) => Self::Optional(optional.into()),
         }
