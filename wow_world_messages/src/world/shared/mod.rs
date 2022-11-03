@@ -325,6 +325,7 @@ pub mod smsg_spline_move_normal_fall_vanilla_tbc_wrath;
 pub mod smsg_spline_move_root_vanilla_tbc_wrath;
 pub mod smsg_spline_move_set_hover_vanilla_tbc_wrath;
 pub mod smsg_spline_move_set_run_mode_vanilla_tbc_wrath;
+pub mod smsg_spline_move_set_walk_mode_vanilla_tbc_wrath;
 pub mod smsg_standstate_update_vanilla_tbc_wrath;
 pub mod smsg_time_sync_req_tbc_wrath;
 pub mod smsg_turn_in_petition_results_tbc_wrath;

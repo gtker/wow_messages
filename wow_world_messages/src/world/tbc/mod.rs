@@ -852,6 +852,8 @@ pub use crate::shared::smsg_spline_move_set_hover_vanilla_tbc_wrath::SMSG_SPLINE
 
 pub use crate::shared::smsg_spline_move_set_run_mode_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_SET_RUN_MODE;
 
+pub use crate::shared::smsg_spline_move_set_walk_mode_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_SET_WALK_MODE;
+
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
 pub use crate::shared::smsg_time_sync_req_tbc_wrath::SMSG_TIME_SYNC_REQ;

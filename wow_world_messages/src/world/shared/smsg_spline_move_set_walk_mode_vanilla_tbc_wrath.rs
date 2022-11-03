@@ -41,6 +41,12 @@ impl crate::Message for SMSG_SPLINE_MOVE_SET_WALK_MODE {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_MOVE_SET_WALK_MODE {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_SPLINE_MOVE_SET_WALK_MODE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_SPLINE_MOVE_SET_WALK_MODE {}
+
 impl SMSG_SPLINE_MOVE_SET_WALK_MODE {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
