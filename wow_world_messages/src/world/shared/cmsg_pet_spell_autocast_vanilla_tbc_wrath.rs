@@ -8,13 +8,13 @@ use std::io::{Write, Read};
 /// cmsg CMSG_PET_SPELL_AUTOCAST = 0x02F3 {
 ///     Guid guid;
 ///     u32 id;
-///     Bool enabled;
+///     Bool autocast_enabled;
 /// }
 /// ```
 pub struct CMSG_PET_SPELL_AUTOCAST {
     pub guid: Guid,
     pub id: u32,
-    pub enabled: bool,
+    pub autocast_enabled: bool,
 }
 
 impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
@@ -31,8 +31,8 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
-        // enabled: Bool
-        w.write_all(u8::from(self.enabled).to_le_bytes().as_slice())?;
+        // autocast_enabled: Bool
+        w.write_all(u8::from(self.autocast_enabled).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -47,16 +47,22 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 
-        // enabled: Bool
-        let enabled = crate::util::read_u8_le(r)? != 0;
+        // autocast_enabled: Bool
+        let autocast_enabled = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             guid,
             id,
-            enabled,
+            autocast_enabled,
         })
     }
 
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_PET_SPELL_AUTOCAST {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_PET_SPELL_AUTOCAST {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_PET_SPELL_AUTOCAST {}
 

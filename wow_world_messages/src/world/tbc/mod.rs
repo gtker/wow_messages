@@ -448,6 +448,8 @@ pub use crate::shared::cmsg_pet_rename_tbc_wrath::CMSG_PET_RENAME;
 
 pub use crate::shared::cmsg_pet_set_action_vanilla_tbc_wrath::CMSG_PET_SET_ACTION;
 
+pub use crate::shared::cmsg_pet_spell_autocast_vanilla_tbc_wrath::CMSG_PET_SPELL_AUTOCAST;
+
 pub use crate::shared::cmsg_petition_buy_vanilla_tbc::CMSG_PETITION_BUY;
 
 pub use crate::shared::cmsg_petition_show_signatures_vanilla_tbc_wrath::CMSG_PETITION_SHOW_SIGNATURES;

@@ -592,6 +592,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_autocast_enabled,
+            { "Autocast Enabled", "woww.autocast.enabled",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_average_wait_time_in_ms,
             { "Average Wait Time In Ms", "woww.average.wait.time.in.ms",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -1458,12 +1464,6 @@
         },
         { &hf_woww_enable_pvp,
             { "Enable Pvp", "woww.enable.pvp",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_enabled,
-            { "Enabled", "woww.enabled",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
