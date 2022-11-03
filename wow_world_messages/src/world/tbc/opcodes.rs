@@ -3505,6 +3505,7 @@ use crate::world::tbc::MSG_MOVE_START_SWIM_Server;
 use crate::world::tbc::MSG_MOVE_STOP_SWIM_Server;
 use crate::world::tbc::MSG_MOVE_SET_FACING_Server;
 use crate::world::tbc::MSG_MOVE_SET_PITCH_Server;
+use crate::world::tbc::SMSG_MOVE_WATER_WALK;
 use crate::world::tbc::SMSG_MOVE_LAND_WALK;
 use crate::world::tbc::SMSG_FORCE_RUN_SPEED_CHANGE;
 use crate::world::tbc::SMSG_FORCE_RUN_BACK_SPEED_CHANGE;
@@ -3684,6 +3685,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM_Server),
     MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING_Server),
     MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH_Server),
+    SMSG_MOVE_WATER_WALK(SMSG_MOVE_WATER_WALK),
     SMSG_MOVE_LAND_WALK(SMSG_MOVE_LAND_WALK),
     SMSG_FORCE_RUN_SPEED_CHANGE(SMSG_FORCE_RUN_SPEED_CHANGE),
     SMSG_FORCE_RUN_BACK_SPEED_CHANGE(SMSG_FORCE_RUN_BACK_SPEED_CHANGE),
@@ -3865,6 +3867,7 @@ impl ServerOpcodeMessage {
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00CB, size: body_size, io, } } else { a } })?)),
             0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DA, size: body_size, io, } } else { a } })?)),
             0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DB, size: body_size, io, } } else { a } })?)),
+            0x00DE => Ok(Self::SMSG_MOVE_WATER_WALK(<SMSG_MOVE_WATER_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DE, size: body_size, io, } } else { a } })?)),
             0x00DF => Ok(Self::SMSG_MOVE_LAND_WALK(<SMSG_MOVE_LAND_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DF, size: body_size, io, } } else { a } })?)),
             0x00E2 => Ok(Self::SMSG_FORCE_RUN_SPEED_CHANGE(<SMSG_FORCE_RUN_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E2, size: body_size, io, } } else { a } })?)),
             0x00E4 => Ok(Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(<SMSG_FORCE_RUN_BACK_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E4, size: body_size, io, } } else { a } })?)),
@@ -4114,6 +4117,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_FACING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MOVE_WATER_WALK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOVE_LAND_WALK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
@@ -4296,6 +4300,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_FACING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MOVE_WATER_WALK(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOVE_LAND_WALK(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
@@ -4478,6 +4483,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MOVE_WATER_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_LAND_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4660,6 +4666,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MOVE_WATER_WALK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_LAND_WALK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4842,6 +4849,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MOVE_WATER_WALK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_LAND_WALK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5024,6 +5032,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MOVE_WATER_WALK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_LAND_WALK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
@@ -5208,6 +5217,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH_Server",
+            ServerOpcodeMessage::SMSG_MOVE_WATER_WALK(_) => "SMSG_MOVE_WATER_WALK",
             ServerOpcodeMessage::SMSG_MOVE_LAND_WALK(_) => "SMSG_MOVE_LAND_WALK",
             ServerOpcodeMessage::SMSG_FORCE_RUN_SPEED_CHANGE(_) => "SMSG_FORCE_RUN_SPEED_CHANGE",
             ServerOpcodeMessage::SMSG_FORCE_RUN_BACK_SPEED_CHANGE(_) => "SMSG_FORCE_RUN_BACK_SPEED_CHANGE",
@@ -5630,6 +5640,12 @@ impl From<MSG_MOVE_SET_FACING_Server> for ServerOpcodeMessage {
 impl From<MSG_MOVE_SET_PITCH_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_SET_PITCH_Server) -> Self {
         Self::MSG_MOVE_SET_PITCH(c)
+    }
+}
+
+impl From<SMSG_MOVE_WATER_WALK> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_WATER_WALK) -> Self {
+        Self::SMSG_MOVE_WATER_WALK(c)
     }
 }
 

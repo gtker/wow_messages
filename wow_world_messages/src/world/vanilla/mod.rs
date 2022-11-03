@@ -1078,6 +1078,8 @@ pub use crate::shared::smsg_move_set_hover_vanilla_tbc_wrath::SMSG_MOVE_SET_HOVE
 
 pub use crate::shared::smsg_move_unset_hover_vanilla_tbc_wrath::SMSG_MOVE_UNSET_HOVER;
 
+pub use crate::shared::smsg_move_water_walk_vanilla_tbc_wrath::SMSG_MOVE_WATER_WALK;
+
 pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
@@ -1338,8 +1340,6 @@ pub(crate) mod smsg_monster_move;
 pub use smsg_monster_move::*;
 pub(crate) mod smsg_monster_move_transport;
 pub use smsg_monster_move_transport::*;
-pub(crate) mod smsg_move_water_walk;
-pub use smsg_move_water_walk::*;
 pub(crate) mod smsg_name_query_response;
 pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_taxi_path;
