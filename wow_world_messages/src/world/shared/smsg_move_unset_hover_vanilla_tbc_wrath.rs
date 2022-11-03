@@ -50,6 +50,12 @@ impl crate::Message for SMSG_MOVE_UNSET_HOVER {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_MOVE_UNSET_HOVER {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_MOVE_UNSET_HOVER {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_MOVE_UNSET_HOVER {}
+
 impl SMSG_MOVE_UNSET_HOVER {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
