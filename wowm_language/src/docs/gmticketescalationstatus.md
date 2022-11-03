@@ -1,6 +1,6 @@
 # GmTicketEscalationStatus
 
-## Client Version 1.12, Client Version 2
+## Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -23,6 +23,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED` | 2 (0x02) |  | ticket is in the escalation queue |
 
 Used in:
+* [SMSG_GMTICKET_GETTICKET](smsg_gmticket_getticket.md)
 * [SMSG_GMTICKET_GETTICKET](smsg_gmticket_getticket.md)
 * [SMSG_GMTICKET_GETTICKET](smsg_gmticket_getticket.md)
 
