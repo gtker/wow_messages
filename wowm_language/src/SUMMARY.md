@@ -469,6 +469,7 @@
 - [CMSG_UNSTABLE_PET](docs/cmsg_unstable_pet.md)
 - [CMSG_UPDATE_ACCOUNT_DATA](docs/cmsg_update_account_data.md)
 - [CMSG_USE_ITEM](docs/cmsg_use_item.md)
+- [CMSG_VOICE_SESSION_ENABLE](docs/cmsg_voice_session_enable.md)
 - [CMSG_WARDEN_DATA](docs/cmsg_warden_data.md)
 - [CMSG_WHO](docs/cmsg_who.md)
 - [CMSG_WHOIS](docs/cmsg_whois.md)

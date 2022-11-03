@@ -104,6 +104,8 @@ pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
 pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
+pub(crate) mod cmsg_voice_session_enable;
+pub use cmsg_voice_session_enable::*;
 pub(crate) mod cmsg_world_state_ui_timer_update;
 pub use cmsg_world_state_ui_timer_update::*;
 pub(crate) mod cmsg_world_teleport;
