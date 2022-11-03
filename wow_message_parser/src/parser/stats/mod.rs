@@ -2,8 +2,9 @@ pub(crate) mod tbc_messages;
 pub(crate) mod vanilla_messages;
 pub(crate) mod wrath_messages;
 
-use crate::error_printer::incorrect_opcode_for_message;
-use crate::parser::types::container::ContainerType;
+use crate::error_printer::{
+    incorrect_opcode_for_message, message_not_in_index, opcode_has_incorrect_name,
+};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{MajorWorldVersion, Version};
@@ -74,27 +75,35 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
         }
 
         if let Some(mut container) = data.iter_mut().find(|a| a.name == get_real_name(s.name())) {
-            match s.container_type() {
-                ContainerType::CLogin(i)
-                | ContainerType::SLogin(i)
-                | ContainerType::Msg(i)
-                | ContainerType::CMsg(i)
-                | ContainerType::SMsg(i) => {
-                    if i as usize != container.opcode {
-                        incorrect_opcode_for_message(
-                            container.name,
-                            s.file_info(),
-                            container.opcode,
-                            i,
-                        );
-                    }
-                    assert_eq!(i as usize, container.opcode);
-                }
-                _ => unreachable!("not a message"),
+            let opcode = s.opcode();
+            if opcode as usize != container.opcode {
+                incorrect_opcode_for_message(
+                    container.name,
+                    s.file_info(),
+                    container.opcode,
+                    opcode,
+                );
             }
+            assert_eq!(opcode as usize, container.opcode);
 
             container.definition = !s.tags().unimplemented();
             container.tests = s.tests(o).len();
+        } else if let Some(message) = data.iter_mut().find(|a| a.opcode == s.opcode() as usize) {
+            opcode_has_incorrect_name(
+                &get_real_name(s.name()),
+                message.name,
+                s.file_info(),
+                s.opcode() as usize,
+                version.as_major_world(),
+            );
+        } else {
+            let opcode = s.opcode();
+            message_not_in_index(
+                &get_real_name(s.name()),
+                s.file_info(),
+                opcode as usize,
+                version.as_major_world(),
+            );
         }
     }
 

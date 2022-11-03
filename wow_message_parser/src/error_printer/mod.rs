@@ -1,4 +1,6 @@
 use crate::file_info::FileInfo;
+use crate::parser::types::version::MajorWorldVersion;
+use crate::path_utils::opcodes_file;
 use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD, ENUM_SELF_VALUE_FIELD};
 use std::process::exit;
 use writer::ErrorWriter;
@@ -22,6 +24,8 @@ pub(crate) const UNSUPPORTED_UPCAST: i32 = 14;
 pub(crate) const OVERLAPPING_VERSIONS: i32 = 15;
 pub(crate) const BOTH_LOGIN_AND_WORLD_VERSIONS: i32 = 16;
 pub(crate) const DUPLICATE_FIELD_NAMES: i32 = 17;
+pub(crate) const MESSAGE_NOT_IN_INDEX: i32 = 18;
+pub(crate) const OPCODE_HAS_INCORRECT_NAME: i32 = 18;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -156,7 +160,7 @@ pub(crate) fn incorrect_opcode_for_message(
     ty_name: &str,
     file_info: &FileInfo,
     expected_opcode: usize,
-    actual: u16,
+    actual: u32,
 ) -> ! {
     let mut s = ErrorWriter::new("Invalid opcode for message.");
 
@@ -373,4 +377,47 @@ pub(crate) fn duplicate_field_names(ty_name: &str, field_name: &str, file_info: 
     );
 
     wowm_exit(s, DUPLICATE_FIELD_NAMES)
+}
+
+pub(crate) fn opcode_has_incorrect_name(
+    ty_name: &str,
+    index_name: &str,
+    file_info: &FileInfo,
+    opcode: usize,
+    version: MajorWorldVersion,
+) -> ! {
+    let mut s = ErrorWriter::new("Opcode has different name than in 'opcodes.rs' index file.");
+    let opcodes_file = opcodes_file(version);
+
+    s.fileinfo(
+        file_info,
+        format!(
+            "Opcode '{opcode:#06X?}' found with name {ty_name} while index has '{index_name}' for version '{version}' in index file '{opcodes_file}'",
+            opcodes_file = opcodes_file.display(),
+            version = version.module_name(),
+        ),
+    );
+
+    wowm_exit(s, OPCODE_HAS_INCORRECT_NAME)
+}
+
+pub(crate) fn message_not_in_index(
+    ty_name: &str,
+    file_info: &FileInfo,
+    opcode: usize,
+    version: MajorWorldVersion,
+) -> ! {
+    let mut s = ErrorWriter::new("Message not in 'opcodes.rs' index file.");
+    let opcodes_file = opcodes_file(version);
+
+    s.fileinfo(
+        file_info,
+        format!(
+            "Message '{ty_name}' with opcode '{opcode:#06X?}' for version '{version}' is not in file '{opcodes_file}'",
+            opcodes_file = opcodes_file.display(),
+            version = version.module_name(),
+        ),
+    );
+
+    wowm_exit(s, MESSAGE_NOT_IN_INDEX)
 }

@@ -1,9 +1,9 @@
 use crate::error_printer::{
     BOTH_LOGIN_AND_WORLD_VERSIONS, COMPLEX_NOT_FOUND, DUPLICATE_DEFINER_VALUES,
     DUPLICATE_FIELD_NAMES, ENUM_HAS_BITWISE_AND, FLAG_HAS_EQUALS, INCORRECT_OPCODE_FOR_MESSAGE,
-    INVALID_DEFINER_VALUE, INVALID_INTEGER_TYPE, INVALID_SELF_SIZE, MISSING_ENUMERATOR,
-    MULTIPLE_SELF_VALUE, NON_MATCHING_IF_VARIABLES, NO_VERSIONS, OVERLAPPING_VERSIONS,
-    RECURSIVE_TYPE, UNSUPPORTED_UPCAST,
+    INVALID_DEFINER_VALUE, INVALID_INTEGER_TYPE, INVALID_SELF_SIZE, MESSAGE_NOT_IN_INDEX,
+    MISSING_ENUMERATOR, MULTIPLE_SELF_VALUE, NON_MATCHING_IF_VARIABLES, NO_VERSIONS,
+    OPCODE_HAS_INCORRECT_NAME, OVERLAPPING_VERSIONS, RECURSIVE_TYPE, UNSUPPORTED_UPCAST,
 };
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
@@ -588,5 +588,25 @@ fn duplicate_field_names() {
             must_err_load("duplicate_field_names.wowm");
         },
         DUPLICATE_FIELD_NAMES,
+    );
+}
+
+#[test]
+fn not_in_index() {
+    should_panic(
+        || {
+            print_message_stats(&must_err_load("not_in_index.wowm"));
+        },
+        MESSAGE_NOT_IN_INDEX,
+    );
+}
+
+#[test]
+fn incorrect_name_in_index() {
+    should_panic(
+        || {
+            print_message_stats(&must_err_load("incorrect_name_in_index.wowm"));
+        },
+        OPCODE_HAS_INCORRECT_NAME,
     );
 }
