@@ -3515,6 +3515,7 @@ use crate::world::wrath::SMSG_FORCE_RUN_BACK_SPEED_CHANGE;
 use crate::world::wrath::SMSG_FORCE_SWIM_SPEED_CHANGE;
 use crate::world::wrath::SMSG_FORCE_MOVE_ROOT;
 use crate::world::wrath::SMSG_FORCE_MOVE_UNROOT;
+use crate::world::wrath::SMSG_MOVE_KNOCK_BACK;
 use crate::world::wrath::SMSG_MOVE_FEATHER_FALL;
 use crate::world::wrath::SMSG_TRIGGER_CINEMATIC;
 use crate::world::wrath::SMSG_TUTORIAL_FLAGS;
@@ -3696,6 +3697,7 @@ pub enum ServerOpcodeMessage {
     SMSG_FORCE_SWIM_SPEED_CHANGE(SMSG_FORCE_SWIM_SPEED_CHANGE),
     SMSG_FORCE_MOVE_ROOT(SMSG_FORCE_MOVE_ROOT),
     SMSG_FORCE_MOVE_UNROOT(SMSG_FORCE_MOVE_UNROOT),
+    SMSG_MOVE_KNOCK_BACK(SMSG_MOVE_KNOCK_BACK),
     SMSG_MOVE_FEATHER_FALL(SMSG_MOVE_FEATHER_FALL),
     SMSG_TRIGGER_CINEMATIC(SMSG_TRIGGER_CINEMATIC),
     SMSG_TUTORIAL_FLAGS(SMSG_TUTORIAL_FLAGS),
@@ -3879,6 +3881,7 @@ impl ServerOpcodeMessage {
             0x00E6 => Ok(Self::SMSG_FORCE_SWIM_SPEED_CHANGE(<SMSG_FORCE_SWIM_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E6, size: body_size, io, } } else { a } })?)),
             0x00E8 => Ok(Self::SMSG_FORCE_MOVE_ROOT(<SMSG_FORCE_MOVE_ROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E8, size: body_size, io, } } else { a } })?)),
             0x00EA => Ok(Self::SMSG_FORCE_MOVE_UNROOT(<SMSG_FORCE_MOVE_UNROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EA, size: body_size, io, } } else { a } })?)),
+            0x00EF => Ok(Self::SMSG_MOVE_KNOCK_BACK(<SMSG_MOVE_KNOCK_BACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EF, size: body_size, io, } } else { a } })?)),
             0x00F2 => Ok(Self::SMSG_MOVE_FEATHER_FALL(<SMSG_MOVE_FEATHER_FALL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00F2, size: body_size, io, } } else { a } })?)),
             0x00FA => Ok(Self::SMSG_TRIGGER_CINEMATIC(<SMSG_TRIGGER_CINEMATIC as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FA, size: body_size, io, } } else { a } })?)),
             0x00FD => Ok(Self::SMSG_TUTORIAL_FLAGS(<SMSG_TUTORIAL_FLAGS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FD, size: body_size, io, } } else { a } })?)),
@@ -4211,6 +4214,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MOVE_KNOCK_BACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOVE_FEATHER_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_encrypted_server(w, e),
@@ -4395,6 +4399,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MOVE_KNOCK_BACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOVE_FEATHER_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.write_unencrypted_server(w),
             Self::SMSG_TUTORIAL_FLAGS(c) => c.write_unencrypted_server(w),
@@ -4579,6 +4584,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MOVE_KNOCK_BACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_FEATHER_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -4763,6 +4769,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MOVE_KNOCK_BACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_FEATHER_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.tokio_write_unencrypted_server(w).await,
@@ -4947,6 +4954,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MOVE_KNOCK_BACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_FEATHER_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5131,6 +5139,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_ROOT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_MOVE_UNROOT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MOVE_KNOCK_BACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_FEATHER_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TRIGGER_CINEMATIC(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TUTORIAL_FLAGS(c) => c.astd_write_unencrypted_server(w).await,
@@ -5317,6 +5326,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FORCE_SWIM_SPEED_CHANGE(_) => "SMSG_FORCE_SWIM_SPEED_CHANGE",
             ServerOpcodeMessage::SMSG_FORCE_MOVE_ROOT(_) => "SMSG_FORCE_MOVE_ROOT",
             ServerOpcodeMessage::SMSG_FORCE_MOVE_UNROOT(_) => "SMSG_FORCE_MOVE_UNROOT",
+            ServerOpcodeMessage::SMSG_MOVE_KNOCK_BACK(_) => "SMSG_MOVE_KNOCK_BACK",
             ServerOpcodeMessage::SMSG_MOVE_FEATHER_FALL(_) => "SMSG_MOVE_FEATHER_FALL",
             ServerOpcodeMessage::SMSG_TRIGGER_CINEMATIC(_) => "SMSG_TRIGGER_CINEMATIC",
             ServerOpcodeMessage::SMSG_TUTORIAL_FLAGS(_) => "SMSG_TUTORIAL_FLAGS",
@@ -5796,6 +5806,12 @@ impl From<SMSG_FORCE_MOVE_ROOT> for ServerOpcodeMessage {
 impl From<SMSG_FORCE_MOVE_UNROOT> for ServerOpcodeMessage {
     fn from(c: SMSG_FORCE_MOVE_UNROOT) -> Self {
         Self::SMSG_FORCE_MOVE_UNROOT(c)
+    }
+}
+
+impl From<SMSG_MOVE_KNOCK_BACK> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_KNOCK_BACK) -> Self {
+        Self::SMSG_MOVE_KNOCK_BACK(c)
     }
 }
 

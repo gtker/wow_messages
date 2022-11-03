@@ -93,6 +93,12 @@ impl crate::Message for SMSG_MOVE_KNOCK_BACK {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_MOVE_KNOCK_BACK {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_MOVE_KNOCK_BACK {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_MOVE_KNOCK_BACK {}
+
 impl SMSG_MOVE_KNOCK_BACK {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
