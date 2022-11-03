@@ -123,6 +123,7 @@ pub mod cmsg_pet_cancel_aura_vanilla_tbc_wrath;
 pub mod cmsg_pet_rename_tbc_wrath;
 pub mod cmsg_pet_set_action_vanilla_tbc_wrath;
 pub mod cmsg_pet_spell_autocast_vanilla_tbc_wrath;
+pub mod cmsg_pet_stop_attack_vanilla_tbc_wrath;
 pub mod cmsg_petition_buy_vanilla_tbc;
 pub mod cmsg_petition_show_signatures_vanilla_tbc_wrath;
 pub mod cmsg_petition_showlist_vanilla_tbc_wrath;

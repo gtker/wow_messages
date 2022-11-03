@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_PET_STOP_ATTACK = 0x02EA {
     Guid pet_guid;
