@@ -294,6 +294,7 @@ pub mod smsg_loot_roll_won_tbc_wrath;
 pub mod smsg_loot_start_roll_vanilla_tbc;
 pub mod smsg_mountresult_vanilla_tbc_wrath;
 pub mod smsg_mountspecial_anim_vanilla_tbc_wrath;
+pub mod smsg_move_feather_fall_vanilla_tbc_wrath;
 pub mod smsg_notification_vanilla_tbc_wrath;
 pub mod smsg_petition_show_signatures_vanilla_tbc_wrath;
 pub mod smsg_petition_sign_results_tbc_wrath;

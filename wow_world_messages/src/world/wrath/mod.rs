@@ -730,6 +730,8 @@ pub use crate::shared::smsg_mountresult_vanilla_tbc_wrath::SMSG_MOUNTRESULT;
 
 pub use crate::shared::smsg_mountspecial_anim_vanilla_tbc_wrath::SMSG_MOUNTSPECIAL_ANIM;
 
+pub use crate::shared::smsg_move_feather_fall_vanilla_tbc_wrath::SMSG_MOVE_FEATHER_FALL;
+
 pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
