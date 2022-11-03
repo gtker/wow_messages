@@ -1,7 +1,6 @@
-#tag_all versions "1 2 3";
-
 cmsg CMSG_MOVE_TIME_SKIPPED = 0x02CE {
     Guid guid;
     u32 lag;
+} {
+    versions = "1 2";
 }
-

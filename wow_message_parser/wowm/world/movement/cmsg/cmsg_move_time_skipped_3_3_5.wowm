@@ -1,0 +1,6 @@
+cmsg CMSG_MOVE_TIME_SKIPPED = 0x02CE {
+    PackedGuid guid;
+    u32 lag;
+} {
+    versions = "3.3.5";
+}
