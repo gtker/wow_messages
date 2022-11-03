@@ -202,8 +202,6 @@ pub(crate) mod cmsg_pet_name_query;
 pub use cmsg_pet_name_query::*;
 pub(crate) mod cmsg_pet_rename;
 pub use cmsg_pet_rename::*;
-pub(crate) mod cmsg_pet_set_action;
-pub use cmsg_pet_set_action::*;
 pub(crate) mod cmsg_pet_spell_autocast;
 pub use cmsg_pet_spell_autocast::*;
 pub(crate) mod cmsg_pet_stop_attack;
@@ -763,6 +761,8 @@ pub use crate::shared::cmsg_pet_abandon_vanilla_tbc_wrath::CMSG_PET_ABANDON;
 pub use crate::shared::cmsg_pet_action_vanilla_tbc_wrath::CMSG_PET_ACTION;
 
 pub use crate::shared::cmsg_pet_cancel_aura_vanilla_tbc_wrath::CMSG_PET_CANCEL_AURA;
+
+pub use crate::shared::cmsg_pet_set_action_vanilla_tbc_wrath::CMSG_PET_SET_ACTION;
 
 pub use crate::shared::cmsg_petition_buy_vanilla_tbc::CMSG_PETITION_BUY;
 

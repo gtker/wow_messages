@@ -96,6 +96,12 @@ impl crate::Message for CMSG_PET_SET_ACTION {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_PET_SET_ACTION {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_PET_SET_ACTION {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_PET_SET_ACTION {}
+
 impl CMSG_PET_SET_ACTION {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
