@@ -504,12 +504,6 @@ pub(crate) mod party_operation;
 pub use party_operation::*;
 pub(crate) mod party_result;
 pub use party_result::*;
-pub(crate) mod pet_command_state;
-pub use pet_command_state::*;
-pub(crate) mod pet_enabled;
-pub use pet_enabled::*;
-pub(crate) mod pet_react_state;
-pub use pet_react_state::*;
 pub(crate) mod pet_spell_cooldown;
 pub use pet_spell_cooldown::*;
 pub(crate) mod pet_tame_failure_reason;
@@ -906,7 +900,13 @@ pub use crate::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 
 pub use crate::shared::npc_text_update_emote_vanilla_tbc_wrath::NpcTextUpdateEmote;
 
+pub use crate::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
+
+pub use crate::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
+
 pub use crate::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
+
+pub use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 
 pub use crate::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
 
@@ -1091,6 +1091,8 @@ pub use crate::shared::smsg_pet_action_sound_vanilla_tbc_wrath::SMSG_PET_ACTION_
 pub use crate::shared::smsg_pet_broken_vanilla_tbc_wrath::SMSG_PET_BROKEN;
 
 pub use crate::shared::smsg_pet_dismiss_sound_vanilla_tbc_wrath::SMSG_PET_DISMISS_SOUND;
+
+pub use crate::shared::smsg_pet_mode_vanilla_tbc_wrath::SMSG_PET_MODE;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 
@@ -1416,8 +1418,6 @@ pub(crate) mod smsg_periodicauralog;
 pub use smsg_periodicauralog::*;
 pub(crate) mod smsg_pet_cast_failed;
 pub use smsg_pet_cast_failed::*;
-pub(crate) mod smsg_pet_mode;
-pub use smsg_pet_mode::*;
 pub(crate) mod smsg_pet_name_invalid;
 pub use smsg_pet_name_invalid::*;
 pub(crate) mod smsg_pet_name_query_response;

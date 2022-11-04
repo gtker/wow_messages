@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::PetCommandState;
-use crate::world::vanilla::PetEnabled;
-use crate::world::vanilla::PetReactState;
+use crate::world::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
+use crate::world::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
+use crate::world::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -83,4 +83,10 @@ impl crate::Message for SMSG_PET_MODE {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PET_MODE {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PET_MODE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PET_MODE {}
 
