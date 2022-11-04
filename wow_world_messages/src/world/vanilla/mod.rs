@@ -176,8 +176,6 @@ pub(crate) mod cmsg_move_spline_done;
 pub use cmsg_move_spline_done::*;
 pub(crate) mod cmsg_move_water_walk_ack;
 pub use cmsg_move_water_walk_ack::*;
-pub(crate) mod cmsg_npc_text_query;
-pub use cmsg_npc_text_query::*;
 pub(crate) mod cmsg_offer_petition;
 pub use cmsg_offer_petition::*;
 pub(crate) mod cmsg_page_text_query;
@@ -713,6 +711,8 @@ pub use crate::shared::cmsg_move_time_skipped_vanilla_tbc::CMSG_MOVE_TIME_SKIPPE
 pub use crate::shared::cmsg_name_query_vanilla_tbc_wrath::CMSG_NAME_QUERY;
 
 pub use crate::shared::cmsg_next_cinematic_camera_vanilla_tbc_wrath::CMSG_NEXT_CINEMATIC_CAMERA;
+
+pub use crate::shared::cmsg_npc_text_query_vanilla_tbc_wrath::CMSG_NPC_TEXT_QUERY;
 
 pub use crate::shared::cmsg_open_item_vanilla_tbc_wrath::CMSG_OPEN_ITEM;
 

@@ -123,6 +123,7 @@ pub mod cmsg_move_set_raw_position_vanilla_tbc_wrath;
 pub mod cmsg_move_time_skipped_vanilla_tbc;
 pub mod cmsg_name_query_vanilla_tbc_wrath;
 pub mod cmsg_next_cinematic_camera_vanilla_tbc_wrath;
+pub mod cmsg_npc_text_query_vanilla_tbc_wrath;
 pub mod cmsg_offer_petition_tbc_wrath;
 pub mod cmsg_open_item_vanilla_tbc_wrath;
 pub mod cmsg_pet_abandon_vanilla_tbc_wrath;

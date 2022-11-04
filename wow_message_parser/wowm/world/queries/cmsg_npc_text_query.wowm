@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_NPC_TEXT_QUERY = 0x017F {
     u32 text_id;
