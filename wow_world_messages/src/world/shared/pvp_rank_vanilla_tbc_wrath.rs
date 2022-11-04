@@ -33,19 +33,61 @@ pub enum PvpRank {
     Outlaw,
     Exiled,
     Dishonored,
+    /// Alliance name: Private
+    /// Horde name: Scout
+    ///
     Rank1,
+    /// Alliance name: Corporal
+    /// Horde name: Grunt
+    ///
     Rank2,
+    /// Alliance name: Sergeant
+    /// Horde name: Sergeant
+    ///
     Rank3,
+    /// Alliance name: Master Sergeant
+    /// Horde name: Senior Sergeatn
+    ///
     Rank4,
+    /// Alliance name: Sergeant Major
+    /// Horde name: First Sergeant
+    ///
     Rank5,
+    /// Alliance name: Knight
+    /// Horde name: Stone Guard
+    ///
     Rank6,
+    /// Alliance name: Knight Lieutenant
+    /// Horde name: Blood Guard
+    ///
     Rank7,
+    /// Alliance name: Knight Captain
+    /// Horde name: Legionnare
+    ///
     Rank8,
+    /// Alliance name: Kngith Champion
+    /// Horde name: Centurion
+    ///
     Rank9,
+    /// Alliance name: Liuetenant Commander
+    /// Horde name: Champion
+    ///
     Rank10,
+    /// Alliance name: Commander
+    /// Horde name: Lieutenant General
+    ///
     Rank11,
+    /// Alliance name: Marshal
+    /// Horde name: General
+    ///
     Rank12,
+    /// Alliance name: Field Marshal
+    /// Horde name: Warlord
+    ///
     Rank13,
+    /// Alliance name: Grand Marshal
+    /// Horde name: High Warlord
+    ///
     Rank14,
     FactionLeader,
 }
