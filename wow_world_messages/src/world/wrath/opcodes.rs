@@ -152,6 +152,7 @@ use crate::world::wrath::CMSG_PETITION_SHOW_SIGNATURES;
 use crate::world::wrath::CMSG_PETITION_SIGN;
 use crate::world::wrath::CMSG_OFFER_PETITION;
 use crate::world::wrath::CMSG_TURN_IN_PETITION;
+use crate::world::wrath::CMSG_PETITION_QUERY;
 use crate::world::wrath::CMSG_BUG;
 use crate::world::wrath::CMSG_PLAYED_TIME;
 use crate::world::wrath::CMSG_QUERY_TIME;
@@ -396,6 +397,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PETITION_SIGN(CMSG_PETITION_SIGN),
     CMSG_OFFER_PETITION(CMSG_OFFER_PETITION),
     CMSG_TURN_IN_PETITION(CMSG_TURN_IN_PETITION),
+    CMSG_PETITION_QUERY(CMSG_PETITION_QUERY),
     CMSG_BUG(CMSG_BUG),
     CMSG_PLAYED_TIME(CMSG_PLAYED_TIME),
     CMSG_QUERY_TIME(CMSG_QUERY_TIME),
@@ -642,6 +644,7 @@ impl ClientOpcodeMessage {
             0x01C0 => Ok(Self::CMSG_PETITION_SIGN(<CMSG_PETITION_SIGN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C0, size: body_size, io, } } else { a } })?)),
             0x01C3 => Ok(Self::CMSG_OFFER_PETITION(<CMSG_OFFER_PETITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C3, size: body_size, io, } } else { a } })?)),
             0x01C4 => Ok(Self::CMSG_TURN_IN_PETITION(<CMSG_TURN_IN_PETITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C4, size: body_size, io, } } else { a } })?)),
+            0x01C6 => Ok(Self::CMSG_PETITION_QUERY(<CMSG_PETITION_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C6, size: body_size, io, } } else { a } })?)),
             0x01CA => Ok(Self::CMSG_BUG(<CMSG_BUG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CA, size: body_size, io, } } else { a } })?)),
             0x01CC => Ok(Self::CMSG_PLAYED_TIME(<CMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CC, size: body_size, io, } } else { a } })?)),
             0x01CE => Ok(Self::CMSG_QUERY_TIME(<CMSG_QUERY_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CE, size: body_size, io, } } else { a } })?)),
@@ -956,6 +959,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_SIGN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_OFFER_PETITION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TURN_IN_PETITION(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PETITION_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUG(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYED_TIME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUERY_TIME(c) => c.write_encrypted_client(w, e),
@@ -1203,6 +1207,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_SIGN(c) => c.write_unencrypted_client(w),
             Self::CMSG_OFFER_PETITION(c) => c.write_unencrypted_client(w),
             Self::CMSG_TURN_IN_PETITION(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PETITION_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUG(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYED_TIME(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUERY_TIME(c) => c.write_unencrypted_client(w),
@@ -1450,6 +1455,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_SIGN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_OFFER_PETITION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TURN_IN_PETITION(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PETITION_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUG(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1697,6 +1703,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_SIGN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_OFFER_PETITION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TURN_IN_PETITION(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PETITION_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUG(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1944,6 +1951,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_SIGN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_OFFER_PETITION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TURN_IN_PETITION(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PETITION_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUG(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYED_TIME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_TIME(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2191,6 +2199,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_SIGN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_OFFER_PETITION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TURN_IN_PETITION(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PETITION_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUG(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_TIME(c) => c.astd_write_unencrypted_client(w).await,
@@ -2449,6 +2458,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PETITION_SIGN(_) => "CMSG_PETITION_SIGN",
             ClientOpcodeMessage::CMSG_OFFER_PETITION(_) => "CMSG_OFFER_PETITION",
             ClientOpcodeMessage::CMSG_TURN_IN_PETITION(_) => "CMSG_TURN_IN_PETITION",
+            ClientOpcodeMessage::CMSG_PETITION_QUERY(_) => "CMSG_PETITION_QUERY",
             ClientOpcodeMessage::CMSG_BUG(_) => "CMSG_BUG",
             ClientOpcodeMessage::CMSG_PLAYED_TIME(_) => "CMSG_PLAYED_TIME",
             ClientOpcodeMessage::CMSG_QUERY_TIME(_) => "CMSG_QUERY_TIME",
@@ -3406,6 +3416,12 @@ impl From<CMSG_OFFER_PETITION> for ClientOpcodeMessage {
 impl From<CMSG_TURN_IN_PETITION> for ClientOpcodeMessage {
     fn from(c: CMSG_TURN_IN_PETITION) -> Self {
         Self::CMSG_TURN_IN_PETITION(c)
+    }
+}
+
+impl From<CMSG_PETITION_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PETITION_QUERY) -> Self {
+        Self::CMSG_PETITION_QUERY(c)
     }
 }
 
