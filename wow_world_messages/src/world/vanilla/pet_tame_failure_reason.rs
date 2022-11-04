@@ -1,60 +1,60 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_tame_failure.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_tame_failure.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_tame_failure.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_tame_failure.wowm#L1):
 /// ```text
 /// enum PetTameFailureReason : u8 {
-///     INVALIDCREATURE = 1;
-///     TOOMANY = 2;
-///     CREATUREALREADYOWNED = 3;
-///     NOTTAMEABLE = 4;
-///     ANOTHERSUMMONACTIVE = 5;
-///     UNITSCANTTAME = 6;
-///     NOPETAVAILABLE = 7;
-///     INTERNALERROR = 8;
-///     TOOHIGHLEVEL = 9;
+///     INVALID_CREATURE = 1;
+///     TOO_MANY = 2;
+///     CREATURE_ALREADY_OWNED = 3;
+///     NOT_TAMEABLE = 4;
+///     ANOTHER_SUMMON_ACTIVE = 5;
+///     UNITS_CANT_TAME = 6;
+///     NO_PET_AVAILABLE = 7;
+///     INTERNAL_ERROR = 8;
+///     TOO_HIGH_LEVEL = 9;
 ///     DEAD = 10;
-///     NOTDEAD = 11;
-///     UNKNOWNERROR = 12;
+///     NOT_DEAD = 11;
+///     UNKNOWN_ERROR = 12;
 /// }
 
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetTameFailureReason {
-    Invalidcreature,
-    Toomany,
-    Creaturealreadyowned,
-    Nottameable,
-    Anothersummonactive,
-    Unitscanttame,
+    InvalidCreature,
+    TooMany,
+    CreatureAlreadyOwned,
+    NotTameable,
+    AnotherSummonActive,
+    UnitsCantTame,
     /// not used in taming
     ///
-    Nopetavailable,
-    Internalerror,
-    Toohighlevel,
+    NoPetAvailable,
+    InternalError,
+    TooHighLevel,
     /// not used in taming
     ///
     Dead,
     /// not used in taming
     ///
-    Notdead,
-    Unknownerror,
+    NotDead,
+    UnknownError,
 }
 
 impl PetTameFailureReason {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
-            Self::Invalidcreature => 0x1,
-            Self::Toomany => 0x2,
-            Self::Creaturealreadyowned => 0x3,
-            Self::Nottameable => 0x4,
-            Self::Anothersummonactive => 0x5,
-            Self::Unitscanttame => 0x6,
-            Self::Nopetavailable => 0x7,
-            Self::Internalerror => 0x8,
-            Self::Toohighlevel => 0x9,
+            Self::InvalidCreature => 0x1,
+            Self::TooMany => 0x2,
+            Self::CreatureAlreadyOwned => 0x3,
+            Self::NotTameable => 0x4,
+            Self::AnotherSummonActive => 0x5,
+            Self::UnitsCantTame => 0x6,
+            Self::NoPetAvailable => 0x7,
+            Self::InternalError => 0x8,
+            Self::TooHighLevel => 0x9,
             Self::Dead => 0xa,
-            Self::Notdead => 0xb,
-            Self::Unknownerror => 0xc,
+            Self::NotDead => 0xb,
+            Self::UnknownError => 0xc,
         }
     }
 
@@ -62,25 +62,25 @@ impl PetTameFailureReason {
 
 impl Default for PetTameFailureReason {
     fn default() -> Self {
-        Self::Invalidcreature
+        Self::InvalidCreature
     }
 }
 
 impl std::fmt::Display for PetTameFailureReason {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Invalidcreature => f.write_str("Invalidcreature"),
-            Self::Toomany => f.write_str("Toomany"),
-            Self::Creaturealreadyowned => f.write_str("Creaturealreadyowned"),
-            Self::Nottameable => f.write_str("Nottameable"),
-            Self::Anothersummonactive => f.write_str("Anothersummonactive"),
-            Self::Unitscanttame => f.write_str("Unitscanttame"),
-            Self::Nopetavailable => f.write_str("Nopetavailable"),
-            Self::Internalerror => f.write_str("Internalerror"),
-            Self::Toohighlevel => f.write_str("Toohighlevel"),
+            Self::InvalidCreature => f.write_str("InvalidCreature"),
+            Self::TooMany => f.write_str("TooMany"),
+            Self::CreatureAlreadyOwned => f.write_str("CreatureAlreadyOwned"),
+            Self::NotTameable => f.write_str("NotTameable"),
+            Self::AnotherSummonActive => f.write_str("AnotherSummonActive"),
+            Self::UnitsCantTame => f.write_str("UnitsCantTame"),
+            Self::NoPetAvailable => f.write_str("NoPetAvailable"),
+            Self::InternalError => f.write_str("InternalError"),
+            Self::TooHighLevel => f.write_str("TooHighLevel"),
             Self::Dead => f.write_str("Dead"),
-            Self::Notdead => f.write_str("Notdead"),
-            Self::Unknownerror => f.write_str("Unknownerror"),
+            Self::NotDead => f.write_str("NotDead"),
+            Self::UnknownError => f.write_str("UnknownError"),
         }
     }
 }
@@ -89,18 +89,18 @@ impl TryFrom<u8> for PetTameFailureReason {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
-            1 => Ok(Self::Invalidcreature),
-            2 => Ok(Self::Toomany),
-            3 => Ok(Self::Creaturealreadyowned),
-            4 => Ok(Self::Nottameable),
-            5 => Ok(Self::Anothersummonactive),
-            6 => Ok(Self::Unitscanttame),
-            7 => Ok(Self::Nopetavailable),
-            8 => Ok(Self::Internalerror),
-            9 => Ok(Self::Toohighlevel),
+            1 => Ok(Self::InvalidCreature),
+            2 => Ok(Self::TooMany),
+            3 => Ok(Self::CreatureAlreadyOwned),
+            4 => Ok(Self::NotTameable),
+            5 => Ok(Self::AnotherSummonActive),
+            6 => Ok(Self::UnitsCantTame),
+            7 => Ok(Self::NoPetAvailable),
+            8 => Ok(Self::InternalError),
+            9 => Ok(Self::TooHighLevel),
             10 => Ok(Self::Dead),
-            11 => Ok(Self::Notdead),
-            12 => Ok(Self::Unknownerror),
+            11 => Ok(Self::NotDead),
+            12 => Ok(Self::UnknownError),
             v => Err(crate::errors::EnumError::new("PetTameFailureReason", v as u32),)
         }
     }

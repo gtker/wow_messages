@@ -1,27 +1,28 @@
-#tag_all versions "1.12";
-
 enum PetTameFailureReason : u8 {
-    INVALIDCREATURE = 1;
-    TOOMANY = 2;
-    CREATUREALREADYOWNED = 3;
-    NOTTAMEABLE = 4;
-    ANOTHERSUMMONACTIVE = 5;
-    UNITSCANTTAME = 6;
-    NOPETAVAILABLE = 7 {
+    INVALID_CREATURE = 1;
+    TOO_MANY = 2;
+    CREATURE_ALREADY_OWNED = 3;
+    NOT_TAMEABLE = 4;
+    ANOTHER_SUMMON_ACTIVE = 5;
+    UNITS_CANT_TAME = 6;
+    NO_PET_AVAILABLE = 7 {
         comment = "not used in taming";
     }
-    INTERNALERROR = 8;
-    TOOHIGHLEVEL = 9;
+    INTERNAL_ERROR = 8;
+    TOO_HIGH_LEVEL = 9;
     DEAD = 10 {
         comment = "not used in taming";
     }
-    NOTDEAD = 11 {
+    NOT_DEAD = 11 {
         comment = "not used in taming";
     }
-    UNKNOWNERROR = 12;
+    UNKNOWN_ERROR = 12;
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_PET_TAME_FAILURE = 0x0173 {
     PetTameFailureReason reason;
+} {
+    versions = "1.12";
 }
-
