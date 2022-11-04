@@ -74,7 +74,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 37 || body_size > 65827 {
+        if !(37..=65827).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01ED, size: body_size as u32 });
         }
 

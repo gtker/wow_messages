@@ -49,7 +49,7 @@ impl crate::Message for SMSG_SPELLHEALLOG {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 13 || body_size > 27 {
+        if !(13..=27).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0150, size: body_size as u32 });
         }
 

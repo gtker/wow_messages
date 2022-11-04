@@ -37,7 +37,7 @@ impl crate::Message for SMSG_SPLINE_SET_RUN_SPEED {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 6 || body_size > 13 {
+        if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FE, size: body_size as u32 });
         }
 

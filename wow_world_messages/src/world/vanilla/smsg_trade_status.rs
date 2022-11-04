@@ -102,7 +102,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 4 || body_size > 13 {
+        if !(4..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0120, size: body_size as u32 });
         }
 

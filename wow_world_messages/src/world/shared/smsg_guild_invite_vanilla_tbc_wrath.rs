@@ -41,7 +41,7 @@ impl crate::Message for SMSG_GUILD_INVITE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 2 || body_size > 512 {
+        if !(2..=512).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0083, size: body_size as u32 });
         }
 

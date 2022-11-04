@@ -118,7 +118,7 @@ fn test_for_invalid_size(s: &mut Writer, e: &Container) {
             if min == 0 {
                 format!("if body_size > {max}",)
             } else {
-                format!("if body_size < {min} || body_size > {max}",)
+                format!("if !({min}..={max}).contains(&body_size)",)
             }
         }
     };

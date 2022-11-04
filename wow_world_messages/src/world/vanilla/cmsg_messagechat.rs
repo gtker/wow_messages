@@ -108,7 +108,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 9 || body_size > 520 {
+        if !(9..=520).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size as u32 });
         }
 

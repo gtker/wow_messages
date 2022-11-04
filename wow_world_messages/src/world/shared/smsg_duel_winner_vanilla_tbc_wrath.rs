@@ -47,7 +47,7 @@ impl crate::Message for SMSG_DUEL_WINNER {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 3 || body_size > 513 {
+        if !(3..=513).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x016B, size: body_size as u32 });
         }
 

@@ -45,7 +45,7 @@ impl crate::Message for CMSG_MOVE_WATER_WALK_ACK {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 46 || body_size > 100 {
+        if !(46..=100).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D0, size: body_size as u32 });
         }
 

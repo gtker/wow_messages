@@ -56,7 +56,7 @@ impl crate::Message for CMSG_JOIN_CHANNEL {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 8 || body_size > 518 {
+        if !(8..=518).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0097, size: body_size as u32 });
         }
 

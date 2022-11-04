@@ -54,7 +54,7 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 16 || body_size > 272 {
+        if !(16..=272).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017C, size: body_size as u32 });
         }
 

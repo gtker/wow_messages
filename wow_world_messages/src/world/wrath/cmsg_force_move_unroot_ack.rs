@@ -40,7 +40,7 @@ impl crate::Message for CMSG_FORCE_MOVE_UNROOT_ACK {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 36 || body_size > 97 {
+        if !(36..=97).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EB, size: body_size as u32 });
         }
 

@@ -29,7 +29,7 @@ impl crate::Message for CMSG_MOVE_SET_FLY {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 30 || body_size > 84 {
+        if !(30..=84).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0346, size: body_size as u32 });
         }
 

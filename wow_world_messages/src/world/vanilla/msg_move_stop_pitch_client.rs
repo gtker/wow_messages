@@ -29,7 +29,7 @@ impl crate::Message for MSG_MOVE_STOP_PITCH_Client {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 28 || body_size > 81 {
+        if !(28..=81).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00C1, size: body_size as u32 });
         }
 

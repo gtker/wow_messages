@@ -35,7 +35,7 @@ impl crate::Message for MSG_MOVE_START_BACKWARD_Server {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 31 || body_size > 91 {
+        if !(31..=91).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B6, size: body_size as u32 });
         }
 

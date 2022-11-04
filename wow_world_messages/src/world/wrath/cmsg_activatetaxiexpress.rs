@@ -40,7 +40,7 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 12 || body_size > 4294967294 {
+        if !(12..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0312, size: body_size as u32 });
         }
 

@@ -50,7 +50,7 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 65 || body_size > 2870 {
+        if !(65..=2870).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032A, size: body_size as u32 });
         }
 

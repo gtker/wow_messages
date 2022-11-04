@@ -2454,7 +2454,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 1 || body_size > 22 {
+        if !(1..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0112, size: body_size as u32 });
         }
 

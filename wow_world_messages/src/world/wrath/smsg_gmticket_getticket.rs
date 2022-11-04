@@ -84,7 +84,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 4 || body_size > 279 {
+        if !(4..=279).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0212, size: body_size as u32 });
         }
 

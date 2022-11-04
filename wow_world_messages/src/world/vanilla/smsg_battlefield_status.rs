@@ -2162,7 +2162,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 8 || body_size > 22 {
+        if !(8..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D4, size: body_size as u32 });
         }
 

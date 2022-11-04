@@ -42,7 +42,7 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 8 || body_size > 65543 {
+        if !(8..=65543).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x020C, size: body_size as u32 });
         }
 

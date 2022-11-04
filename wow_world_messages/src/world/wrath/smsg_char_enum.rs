@@ -35,7 +35,7 @@ impl crate::Message for SMSG_CHAR_ENUM {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 1 || body_size > 134401 {
+        if !(1..=134401).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003B, size: body_size as u32 });
         }
 

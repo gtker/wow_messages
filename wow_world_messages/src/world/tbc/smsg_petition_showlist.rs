@@ -41,7 +41,7 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 9 || body_size > 6153 {
+        if !(9..=6153).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BC, size: body_size as u32 });
         }
 

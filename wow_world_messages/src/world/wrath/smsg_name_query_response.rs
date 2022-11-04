@@ -110,7 +110,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 9 || body_size > 1806 {
+        if !(9..=1806).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0051, size: body_size as u32 });
         }
 

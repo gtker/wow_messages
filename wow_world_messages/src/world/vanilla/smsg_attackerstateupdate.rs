@@ -79,7 +79,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size < 29 || body_size > 5163 {
+        if !(29..=5163).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size as u32 });
         }
 
