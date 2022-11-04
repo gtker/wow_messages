@@ -632,6 +632,8 @@ pub use crate::shared::msg_petition_decline_vanilla_tbc_wrath::MSG_PETITION_DECL
 
 pub use crate::shared::msg_petition_rename_vanilla_tbc_wrath::MSG_PETITION_RENAME;
 
+pub use crate::shared::msg_pvp_log_data_client_vanilla_tbc_wrath::MSG_PVP_LOG_DATA_Client;
+
 pub use crate::shared::msg_query_next_mail_time_client_vanilla_tbc_wrath::MSG_QUERY_NEXT_MAIL_TIME_Client;
 
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;

@@ -467,8 +467,6 @@ pub(crate) mod msg_move_stop_turn_server;
 pub use msg_move_stop_turn_server::*;
 pub(crate) mod msg_move_teleport_ack_server;
 pub use msg_move_teleport_ack_server::*;
-pub(crate) mod msg_pvp_log_data_client;
-pub use msg_pvp_log_data_client::*;
 pub(crate) mod msg_pvp_log_data_server;
 pub use msg_pvp_log_data_server::*;
 pub(crate) mod msg_query_next_mail_time_server;
@@ -879,6 +877,8 @@ pub use crate::shared::msg_move_worldport_ack_vanilla_tbc_wrath::MSG_MOVE_WORLDP
 pub use crate::shared::msg_petition_decline_vanilla_tbc_wrath::MSG_PETITION_DECLINE;
 
 pub use crate::shared::msg_petition_rename_vanilla_tbc_wrath::MSG_PETITION_RENAME;
+
+pub use crate::shared::msg_pvp_log_data_client_vanilla_tbc_wrath::MSG_PVP_LOG_DATA_Client;
 
 pub use crate::shared::msg_query_next_mail_time_client_vanilla_tbc_wrath::MSG_QUERY_NEXT_MAIL_TIME_Client;
 
