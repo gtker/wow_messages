@@ -63,6 +63,7 @@ pub mod cmsg_char_enum_vanilla_tbc_wrath;
 pub mod cmsg_char_rename_vanilla_tbc_wrath;
 pub mod cmsg_chat_ignored_tbc_wrath;
 pub mod cmsg_complete_cinematic_vanilla_tbc_wrath;
+pub mod cmsg_creature_query_vanilla_tbc_wrath;
 pub mod cmsg_destroyitem_vanilla_tbc_wrath;
 pub mod cmsg_duel_accepted_vanilla_tbc_wrath;
 pub mod cmsg_duel_cancelled_vanilla_tbc_wrath;

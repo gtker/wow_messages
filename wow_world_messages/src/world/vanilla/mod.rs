@@ -78,8 +78,6 @@ pub(crate) mod cmsg_chat_ignored;
 pub use cmsg_chat_ignored::*;
 pub(crate) mod cmsg_clear_trade_item;
 pub use cmsg_clear_trade_item::*;
-pub(crate) mod cmsg_creature_query;
-pub use cmsg_creature_query::*;
 pub(crate) mod cmsg_del_friend;
 pub use cmsg_del_friend::*;
 pub(crate) mod cmsg_del_ignore;
@@ -621,6 +619,8 @@ pub use crate::shared::cmsg_char_enum_vanilla_tbc_wrath::CMSG_CHAR_ENUM;
 pub use crate::shared::cmsg_char_rename_vanilla_tbc_wrath::CMSG_CHAR_RENAME;
 
 pub use crate::shared::cmsg_complete_cinematic_vanilla_tbc_wrath::CMSG_COMPLETE_CINEMATIC;
+
+pub use crate::shared::cmsg_creature_query_vanilla_tbc_wrath::CMSG_CREATURE_QUERY;
 
 pub use crate::shared::cmsg_destroyitem_vanilla_tbc_wrath::CMSG_DESTROYITEM;
 

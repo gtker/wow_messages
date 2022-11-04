@@ -23,6 +23,7 @@ use crate::world::tbc::CMSG_PLAYER_LOGOUT;
 use crate::world::tbc::CMSG_LOGOUT_REQUEST;
 use crate::world::tbc::CMSG_LOGOUT_CANCEL;
 use crate::world::tbc::CMSG_NAME_QUERY;
+use crate::world::tbc::CMSG_CREATURE_QUERY;
 use crate::world::tbc::CMSG_GUILD_CREATE;
 use crate::world::tbc::CMSG_GUILD_INVITE;
 use crate::world::tbc::CMSG_GUILD_ACCEPT;
@@ -249,6 +250,7 @@ pub enum ClientOpcodeMessage {
     CMSG_LOGOUT_REQUEST(CMSG_LOGOUT_REQUEST),
     CMSG_LOGOUT_CANCEL(CMSG_LOGOUT_CANCEL),
     CMSG_NAME_QUERY(CMSG_NAME_QUERY),
+    CMSG_CREATURE_QUERY(CMSG_CREATURE_QUERY),
     CMSG_GUILD_CREATE(CMSG_GUILD_CREATE),
     CMSG_GUILD_INVITE(CMSG_GUILD_INVITE),
     CMSG_GUILD_ACCEPT(CMSG_GUILD_ACCEPT),
@@ -477,6 +479,7 @@ impl ClientOpcodeMessage {
             0x004B => Ok(Self::CMSG_LOGOUT_REQUEST(<CMSG_LOGOUT_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004B, size: body_size, io, } } else { a } })?)),
             0x004E => Ok(Self::CMSG_LOGOUT_CANCEL(<CMSG_LOGOUT_CANCEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004E, size: body_size, io, } } else { a } })?)),
             0x0050 => Ok(Self::CMSG_NAME_QUERY(<CMSG_NAME_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0050, size: body_size, io, } } else { a } })?)),
+            0x0060 => Ok(Self::CMSG_CREATURE_QUERY(<CMSG_CREATURE_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0060, size: body_size, io, } } else { a } })?)),
             0x0081 => Ok(Self::CMSG_GUILD_CREATE(<CMSG_GUILD_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0081, size: body_size, io, } } else { a } })?)),
             0x0082 => Ok(Self::CMSG_GUILD_INVITE(<CMSG_GUILD_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0082, size: body_size, io, } } else { a } })?)),
             0x0084 => Ok(Self::CMSG_GUILD_ACCEPT(<CMSG_GUILD_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0084, size: body_size, io, } } else { a } })?)),
@@ -773,6 +776,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOGOUT_CANCEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_NAME_QUERY(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CREATURE_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_INVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_ACCEPT(c) => c.write_encrypted_client(w, e),
@@ -1002,6 +1006,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOGOUT_CANCEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_NAME_QUERY(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CREATURE_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_INVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_ACCEPT(c) => c.write_unencrypted_client(w),
@@ -1231,6 +1236,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CREATURE_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1460,6 +1466,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CREATURE_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1689,6 +1696,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CREATURE_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1918,6 +1926,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CREATURE_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
@@ -2182,6 +2191,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(_) => "CMSG_LOGOUT_REQUEST",
             ClientOpcodeMessage::CMSG_LOGOUT_CANCEL(_) => "CMSG_LOGOUT_CANCEL",
             ClientOpcodeMessage::CMSG_NAME_QUERY(_) => "CMSG_NAME_QUERY",
+            ClientOpcodeMessage::CMSG_CREATURE_QUERY(_) => "CMSG_CREATURE_QUERY",
             ClientOpcodeMessage::CMSG_GUILD_CREATE(_) => "CMSG_GUILD_CREATE",
             ClientOpcodeMessage::CMSG_GUILD_INVITE(_) => "CMSG_GUILD_INVITE",
             ClientOpcodeMessage::CMSG_GUILD_ACCEPT(_) => "CMSG_GUILD_ACCEPT",
@@ -2476,6 +2486,12 @@ impl From<CMSG_LOGOUT_CANCEL> for ClientOpcodeMessage {
 impl From<CMSG_NAME_QUERY> for ClientOpcodeMessage {
     fn from(c: CMSG_NAME_QUERY) -> Self {
         Self::CMSG_NAME_QUERY(c)
+    }
+}
+
+impl From<CMSG_CREATURE_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_CREATURE_QUERY) -> Self {
+        Self::CMSG_CREATURE_QUERY(c)
     }
 }
 
