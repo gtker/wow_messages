@@ -138,8 +138,6 @@ pub(crate) mod cmsg_ignore_trade;
 pub use cmsg_ignore_trade::*;
 pub(crate) mod cmsg_initiate_trade;
 pub use cmsg_initiate_trade::*;
-pub(crate) mod cmsg_item_name_query;
-pub use cmsg_item_name_query::*;
 pub(crate) mod cmsg_item_query_single;
 pub use cmsg_item_query_single::*;
 pub(crate) mod cmsg_item_text_query;
@@ -679,6 +677,8 @@ pub use crate::shared::cmsg_guild_set_officer_note_vanilla_tbc_wrath::CMSG_GUILD
 pub use crate::shared::cmsg_guild_set_public_note_vanilla_tbc_wrath::CMSG_GUILD_SET_PUBLIC_NOTE;
 
 pub use crate::shared::cmsg_inspect_vanilla_tbc_wrath::CMSG_INSPECT;
+
+pub use crate::shared::cmsg_item_name_query_vanilla_tbc_wrath::CMSG_ITEM_NAME_QUERY;
 
 pub use crate::shared::cmsg_list_inventory_vanilla_tbc_wrath::CMSG_LIST_INVENTORY;
 

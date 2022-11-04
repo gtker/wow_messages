@@ -199,6 +199,7 @@ use crate::world::tbc::CMSG_REPAIR_ITEM;
 use crate::world::tbc::CMSG_TOGGLE_HELM;
 use crate::world::tbc::CMSG_TOGGLE_CLOAK;
 use crate::world::tbc::CMSG_SET_ACTIONBAR_TOGGLES;
+use crate::world::tbc::CMSG_ITEM_NAME_QUERY;
 use crate::world::tbc::CMSG_CHAR_RENAME;
 use crate::world::tbc::CMSG_MOVE_SPLINE_DONE;
 use crate::world::tbc::CMSG_MOVE_FALL_RESET;
@@ -428,6 +429,7 @@ pub enum ClientOpcodeMessage {
     CMSG_TOGGLE_HELM(CMSG_TOGGLE_HELM),
     CMSG_TOGGLE_CLOAK(CMSG_TOGGLE_CLOAK),
     CMSG_SET_ACTIONBAR_TOGGLES(CMSG_SET_ACTIONBAR_TOGGLES),
+    CMSG_ITEM_NAME_QUERY(CMSG_ITEM_NAME_QUERY),
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
     CMSG_MOVE_SPLINE_DONE(CMSG_MOVE_SPLINE_DONE),
     CMSG_MOVE_FALL_RESET(CMSG_MOVE_FALL_RESET),
@@ -659,6 +661,7 @@ impl ClientOpcodeMessage {
             0x02B9 => Ok(Self::CMSG_TOGGLE_HELM(<CMSG_TOGGLE_HELM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B9, size: body_size, io, } } else { a } })?)),
             0x02BA => Ok(Self::CMSG_TOGGLE_CLOAK(<CMSG_TOGGLE_CLOAK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BA, size: body_size, io, } } else { a } })?)),
             0x02BF => Ok(Self::CMSG_SET_ACTIONBAR_TOGGLES(<CMSG_SET_ACTIONBAR_TOGGLES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BF, size: body_size, io, } } else { a } })?)),
+            0x02C4 => Ok(Self::CMSG_ITEM_NAME_QUERY(<CMSG_ITEM_NAME_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C4, size: body_size, io, } } else { a } })?)),
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C7, size: body_size, io, } } else { a } })?)),
             0x02C9 => Ok(Self::CMSG_MOVE_SPLINE_DONE(<CMSG_MOVE_SPLINE_DONE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C9, size: body_size, io, } } else { a } })?)),
             0x02CA => Ok(Self::CMSG_MOVE_FALL_RESET(<CMSG_MOVE_FALL_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CA, size: body_size, io, } } else { a } })?)),
@@ -958,6 +961,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TOGGLE_HELM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TOGGLE_CLOAK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_ITEM_NAME_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_encrypted_client(w, e),
@@ -1190,6 +1194,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TOGGLE_HELM(c) => c.write_unencrypted_client(w),
             Self::CMSG_TOGGLE_CLOAK(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.write_unencrypted_client(w),
+            Self::CMSG_ITEM_NAME_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_unencrypted_client(w),
@@ -1422,6 +1427,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TOGGLE_HELM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TOGGLE_CLOAK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_ITEM_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1654,6 +1660,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TOGGLE_HELM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TOGGLE_CLOAK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_ITEM_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1886,6 +1893,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TOGGLE_HELM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TOGGLE_CLOAK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_ITEM_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2118,6 +2126,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TOGGLE_HELM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TOGGLE_CLOAK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_ITEM_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_unencrypted_client(w).await,
@@ -2385,6 +2394,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_TOGGLE_HELM(_) => "CMSG_TOGGLE_HELM",
             ClientOpcodeMessage::CMSG_TOGGLE_CLOAK(_) => "CMSG_TOGGLE_CLOAK",
             ClientOpcodeMessage::CMSG_SET_ACTIONBAR_TOGGLES(_) => "CMSG_SET_ACTIONBAR_TOGGLES",
+            ClientOpcodeMessage::CMSG_ITEM_NAME_QUERY(_) => "CMSG_ITEM_NAME_QUERY",
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
             ClientOpcodeMessage::CMSG_MOVE_SPLINE_DONE(_) => "CMSG_MOVE_SPLINE_DONE",
             ClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => "CMSG_MOVE_FALL_RESET",
@@ -3562,6 +3572,12 @@ impl From<CMSG_TOGGLE_CLOAK> for ClientOpcodeMessage {
 impl From<CMSG_SET_ACTIONBAR_TOGGLES> for ClientOpcodeMessage {
     fn from(c: CMSG_SET_ACTIONBAR_TOGGLES) -> Self {
         Self::CMSG_SET_ACTIONBAR_TOGGLES(c)
+    }
+}
+
+impl From<CMSG_ITEM_NAME_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_ITEM_NAME_QUERY) -> Self {
+        Self::CMSG_ITEM_NAME_QUERY(c)
     }
 }
 
