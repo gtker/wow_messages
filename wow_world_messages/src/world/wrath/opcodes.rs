@@ -177,6 +177,7 @@ use crate::world::wrath::CMSG_MAIL_MARK_AS_READ;
 use crate::world::wrath::CMSG_MAIL_RETURN_TO_SENDER;
 use crate::world::wrath::CMSG_MAIL_DELETE;
 use crate::world::wrath::CMSG_MAIL_CREATE_TEXT_ITEM;
+use crate::world::wrath::CMSG_TOGGLE_PVP;
 use crate::world::wrath::MSG_AUCTION_HELLO_Client;
 use crate::world::wrath::CMSG_AUCTION_SELL_ITEM;
 use crate::world::wrath::CMSG_AUCTION_REMOVE_ITEM;
@@ -408,6 +409,7 @@ pub enum ClientOpcodeMessage {
     CMSG_MAIL_RETURN_TO_SENDER(CMSG_MAIL_RETURN_TO_SENDER),
     CMSG_MAIL_DELETE(CMSG_MAIL_DELETE),
     CMSG_MAIL_CREATE_TEXT_ITEM(CMSG_MAIL_CREATE_TEXT_ITEM),
+    CMSG_TOGGLE_PVP(CMSG_TOGGLE_PVP),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Client),
     CMSG_AUCTION_SELL_ITEM(CMSG_AUCTION_SELL_ITEM),
     CMSG_AUCTION_REMOVE_ITEM(CMSG_AUCTION_REMOVE_ITEM),
@@ -641,6 +643,7 @@ impl ClientOpcodeMessage {
             0x0248 => Ok(Self::CMSG_MAIL_RETURN_TO_SENDER(<CMSG_MAIL_RETURN_TO_SENDER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0248, size: body_size, io, } } else { a } })?)),
             0x0249 => Ok(Self::CMSG_MAIL_DELETE(<CMSG_MAIL_DELETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0249, size: body_size, io, } } else { a } })?)),
             0x024A => Ok(Self::CMSG_MAIL_CREATE_TEXT_ITEM(<CMSG_MAIL_CREATE_TEXT_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x024A, size: body_size, io, } } else { a } })?)),
+            0x0253 => Ok(Self::CMSG_TOGGLE_PVP(<CMSG_TOGGLE_PVP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0253, size: body_size, io, } } else { a } })?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0255, size: body_size, io, } } else { a } })?)),
             0x0256 => Ok(Self::CMSG_AUCTION_SELL_ITEM(<CMSG_AUCTION_SELL_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0256, size: body_size, io, } } else { a } })?)),
             0x0257 => Ok(Self::CMSG_AUCTION_REMOVE_ITEM(<CMSG_AUCTION_REMOVE_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0257, size: body_size, io, } } else { a } })?)),
@@ -942,6 +945,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MAIL_DELETE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_TOGGLE_PVP(c) => c.write_encrypted_client(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.write_encrypted_client(w, e),
@@ -1176,6 +1180,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.write_unencrypted_client(w),
             Self::CMSG_MAIL_DELETE(c) => c.write_unencrypted_client(w),
             Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.write_unencrypted_client(w),
+            Self::CMSG_TOGGLE_PVP(c) => c.write_unencrypted_client(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.write_unencrypted_client(w),
@@ -1410,6 +1415,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TOGGLE_PVP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1644,6 +1650,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TOGGLE_PVP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1878,6 +1885,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TOGGLE_PVP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2112,6 +2120,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MAIL_RETURN_TO_SENDER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_DELETE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MAIL_CREATE_TEXT_ITEM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TOGGLE_PVP(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_SELL_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUCTION_REMOVE_ITEM(c) => c.astd_write_unencrypted_client(w).await,
@@ -2357,6 +2366,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_MAIL_RETURN_TO_SENDER(_) => "CMSG_MAIL_RETURN_TO_SENDER",
             ClientOpcodeMessage::CMSG_MAIL_DELETE(_) => "CMSG_MAIL_DELETE",
             ClientOpcodeMessage::CMSG_MAIL_CREATE_TEXT_ITEM(_) => "CMSG_MAIL_CREATE_TEXT_ITEM",
+            ClientOpcodeMessage::CMSG_TOGGLE_PVP(_) => "CMSG_TOGGLE_PVP",
             ClientOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Client",
             ClientOpcodeMessage::CMSG_AUCTION_SELL_ITEM(_) => "CMSG_AUCTION_SELL_ITEM",
             ClientOpcodeMessage::CMSG_AUCTION_REMOVE_ITEM(_) => "CMSG_AUCTION_REMOVE_ITEM",
@@ -3426,6 +3436,12 @@ impl From<CMSG_MAIL_DELETE> for ClientOpcodeMessage {
 impl From<CMSG_MAIL_CREATE_TEXT_ITEM> for ClientOpcodeMessage {
     fn from(c: CMSG_MAIL_CREATE_TEXT_ITEM) -> Self {
         Self::CMSG_MAIL_CREATE_TEXT_ITEM(c)
+    }
+}
+
+impl From<CMSG_TOGGLE_PVP> for ClientOpcodeMessage {
+    fn from(c: CMSG_TOGGLE_PVP) -> Self {
+        Self::CMSG_TOGGLE_PVP(c)
     }
 }
 

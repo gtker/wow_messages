@@ -260,8 +260,6 @@ pub(crate) mod cmsg_taxiqueryavailablenodes;
 pub use cmsg_taxiqueryavailablenodes::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
-pub(crate) mod cmsg_toggle_pvp;
-pub use cmsg_toggle_pvp::*;
 pub(crate) mod cmsg_trainer_buy_spell;
 pub use cmsg_trainer_buy_spell::*;
 pub(crate) mod cmsg_trainer_list;
@@ -801,6 +799,8 @@ pub use crate::shared::cmsg_teleport_to_unit_vanilla_tbc_wrath::CMSG_TELEPORT_TO
 pub use crate::shared::cmsg_toggle_cloak_vanilla_tbc_wrath::CMSG_TOGGLE_CLOAK;
 
 pub use crate::shared::cmsg_toggle_helm_vanilla_tbc_wrath::CMSG_TOGGLE_HELM;
+
+pub use crate::shared::cmsg_toggle_pvp_vanilla_tbc_wrath::CMSG_TOGGLE_PVP;
 
 pub use crate::shared::cmsg_turn_in_petition_vanilla_tbc_wrath::CMSG_TURN_IN_PETITION;
 

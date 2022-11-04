@@ -4,7 +4,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// vmangos: this opcode can be used in two ways: Either set explicit new status or toggle old status
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/cmsg_toggle_pvp.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/cmsg_toggle_pvp.wowm#L5):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/cmsg_toggle_pvp.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/cmsg_toggle_pvp.wowm#L3):
 /// ```text
 /// cmsg CMSG_TOGGLE_PVP = 0x0253 {
 ///     optional set {
@@ -62,6 +62,12 @@ impl crate::Message for CMSG_TOGGLE_PVP {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_TOGGLE_PVP {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_TOGGLE_PVP {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_TOGGLE_PVP {}
 
 impl CMSG_TOGGLE_PVP {
     pub(crate) fn size(&self) -> usize {
