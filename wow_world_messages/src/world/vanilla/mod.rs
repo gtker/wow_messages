@@ -914,6 +914,8 @@ pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
 pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 
+pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
+
 pub use crate::shared::quest_item_vanilla_tbc::QuestItem;
 
 pub use crate::shared::sell_item_result_vanilla_tbc::SellItemResult;
@@ -1106,6 +1108,8 @@ pub use crate::shared::smsg_pong_vanilla_tbc_wrath::SMSG_PONG;
 
 pub use crate::shared::smsg_procresist_vanilla_tbc_wrath::SMSG_PROCRESIST;
 
+pub use crate::shared::smsg_pvp_credit_vanilla_tbc_wrath::SMSG_PVP_CREDIT;
+
 pub use crate::shared::smsg_read_item_failed_vanilla_tbc_wrath::SMSG_READ_ITEM_FAILED;
 
 pub use crate::shared::smsg_read_item_ok_vanilla_tbc_wrath::SMSG_READ_ITEM_OK;
@@ -1196,8 +1200,6 @@ pub use wow_world_base::vanilla::Vector2d;
 
 pub use wow_world_base::vanilla::Vector3d;
 
-pub(crate) mod pvp_rank;
-pub use pvp_rank::*;
 pub(crate) mod quest_completable;
 pub use quest_completable::*;
 pub(crate) mod quest_details_emote;
@@ -1452,8 +1454,6 @@ pub(crate) mod smsg_player_skinned;
 pub use smsg_player_skinned::*;
 pub(crate) mod smsg_playerbound;
 pub use smsg_playerbound::*;
-pub(crate) mod smsg_pvp_credit;
-pub use smsg_pvp_credit::*;
 pub(crate) mod smsg_query_time_response;
 pub use smsg_query_time_response::*;
 pub(crate) mod smsg_quest_confirm_accept;

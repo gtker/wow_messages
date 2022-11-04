@@ -674,6 +674,8 @@ pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
 pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 
+pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
+
 pub use crate::shared::quest_item_vanilla_tbc::QuestItem;
 
 pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
@@ -887,6 +889,8 @@ pub use crate::shared::smsg_play_object_sound_vanilla_tbc_wrath::SMSG_PLAY_OBJEC
 pub use crate::shared::smsg_pong_vanilla_tbc_wrath::SMSG_PONG;
 
 pub use crate::shared::smsg_procresist_vanilla_tbc_wrath::SMSG_PROCRESIST;
+
+pub use crate::shared::smsg_pvp_credit_vanilla_tbc_wrath::SMSG_PVP_CREDIT;
 
 pub use crate::shared::smsg_read_item_failed_vanilla_tbc_wrath::SMSG_READ_ITEM_FAILED;
 
