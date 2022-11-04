@@ -340,6 +340,8 @@ pub use crate::shared::cmsg_duel_cancelled_vanilla_tbc_wrath::CMSG_DUEL_CANCELLE
 
 pub use crate::shared::cmsg_gameobj_use_vanilla_tbc_wrath::CMSG_GAMEOBJ_USE;
 
+pub use crate::shared::cmsg_gameobject_query_vanilla_tbc_wrath::CMSG_GAMEOBJECT_QUERY;
+
 pub use crate::shared::cmsg_get_mail_list_vanilla_tbc_wrath::CMSG_GET_MAIL_LIST;
 
 pub use crate::shared::cmsg_gmsurvey_submit_vanilla_tbc_wrath::CMSG_GMSURVEY_SUBMIT;

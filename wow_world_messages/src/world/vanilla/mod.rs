@@ -104,8 +104,6 @@ pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
 pub(crate) mod cmsg_friend_list;
 pub use cmsg_friend_list::*;
-pub(crate) mod cmsg_gameobject_query;
-pub use cmsg_gameobject_query::*;
 pub(crate) mod cmsg_gmticket_create;
 pub use cmsg_gmticket_create::*;
 pub(crate) mod cmsg_gmticket_updatetext;
@@ -629,6 +627,8 @@ pub use crate::shared::cmsg_duel_accepted_vanilla_tbc_wrath::CMSG_DUEL_ACCEPTED;
 pub use crate::shared::cmsg_duel_cancelled_vanilla_tbc_wrath::CMSG_DUEL_CANCELLED;
 
 pub use crate::shared::cmsg_gameobj_use_vanilla_tbc_wrath::CMSG_GAMEOBJ_USE;
+
+pub use crate::shared::cmsg_gameobject_query_vanilla_tbc_wrath::CMSG_GAMEOBJECT_QUERY;
 
 pub use crate::shared::cmsg_get_mail_list_vanilla_tbc_wrath::CMSG_GET_MAIL_LIST;
 
