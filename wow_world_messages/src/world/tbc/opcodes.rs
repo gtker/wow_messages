@@ -3818,6 +3818,7 @@ use crate::world::tbc::SMSG_AUCTION_OWNER_NOTIFICATION;
 use crate::world::tbc::SMSG_PROCRESIST;
 use crate::world::tbc::SMSG_AUCTION_BIDDER_LIST_RESULT;
 use crate::world::tbc::MSG_LIST_STABLED_PETS_Server;
+use crate::world::tbc::SMSG_STABLE_RESULT;
 use crate::world::tbc::SMSG_PLAY_OBJECT_SOUND;
 use crate::world::tbc::SMSG_RECEIVED_MAIL;
 use crate::world::tbc::SMSG_AUCTION_REMOVED_NOTIFICATION;
@@ -4031,6 +4032,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PROCRESIST(SMSG_PROCRESIST),
     SMSG_AUCTION_BIDDER_LIST_RESULT(SMSG_AUCTION_BIDDER_LIST_RESULT),
     MSG_LIST_STABLED_PETS(MSG_LIST_STABLED_PETS_Server),
+    SMSG_STABLE_RESULT(SMSG_STABLE_RESULT),
     SMSG_PLAY_OBJECT_SOUND(SMSG_PLAY_OBJECT_SOUND),
     SMSG_RECEIVED_MAIL(SMSG_RECEIVED_MAIL),
     SMSG_AUCTION_REMOVED_NOTIFICATION(SMSG_AUCTION_REMOVED_NOTIFICATION),
@@ -4246,6 +4248,7 @@ impl ServerOpcodeMessage {
             0x0260 => Ok(Self::SMSG_PROCRESIST(<SMSG_PROCRESIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0260, size: body_size, io, } } else { a } })?)),
             0x0265 => Ok(Self::SMSG_AUCTION_BIDDER_LIST_RESULT(<SMSG_AUCTION_BIDDER_LIST_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0265, size: body_size, io, } } else { a } })?)),
             0x026F => Ok(Self::MSG_LIST_STABLED_PETS(<MSG_LIST_STABLED_PETS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x026F, size: body_size, io, } } else { a } })?)),
+            0x0273 => Ok(Self::SMSG_STABLE_RESULT(<SMSG_STABLE_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0273, size: body_size, io, } } else { a } })?)),
             0x0278 => Ok(Self::SMSG_PLAY_OBJECT_SOUND(<SMSG_PLAY_OBJECT_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0278, size: body_size, io, } } else { a } })?)),
             0x0285 => Ok(Self::SMSG_RECEIVED_MAIL(<SMSG_RECEIVED_MAIL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0285, size: body_size, io, } } else { a } })?)),
             0x028D => Ok(Self::SMSG_AUCTION_REMOVED_NOTIFICATION(<SMSG_AUCTION_REMOVED_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028D, size: body_size, io, } } else { a } })?)),
@@ -4529,6 +4532,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROCRESIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.write_encrypted_server(w, e),
             Self::MSG_LIST_STABLED_PETS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_STABLE_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RECEIVED_MAIL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_encrypted_server(w, e),
@@ -4745,6 +4749,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROCRESIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.write_unencrypted_server(w),
             Self::MSG_LIST_STABLED_PETS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_STABLE_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_RECEIVED_MAIL(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_unencrypted_server(w),
@@ -4961,6 +4966,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROCRESIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_STABLE_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5177,6 +5183,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROCRESIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_STABLE_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5393,6 +5400,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROCRESIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_STABLE_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5609,6 +5617,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROCRESIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_STABLE_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
@@ -5827,6 +5836,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PROCRESIST(_) => "SMSG_PROCRESIST",
             ServerOpcodeMessage::SMSG_AUCTION_BIDDER_LIST_RESULT(_) => "SMSG_AUCTION_BIDDER_LIST_RESULT",
             ServerOpcodeMessage::MSG_LIST_STABLED_PETS(_) => "MSG_LIST_STABLED_PETS_Server",
+            ServerOpcodeMessage::SMSG_STABLE_RESULT(_) => "SMSG_STABLE_RESULT",
             ServerOpcodeMessage::SMSG_PLAY_OBJECT_SOUND(_) => "SMSG_PLAY_OBJECT_SOUND",
             ServerOpcodeMessage::SMSG_RECEIVED_MAIL(_) => "SMSG_RECEIVED_MAIL",
             ServerOpcodeMessage::SMSG_AUCTION_REMOVED_NOTIFICATION(_) => "SMSG_AUCTION_REMOVED_NOTIFICATION",
@@ -6803,6 +6813,12 @@ impl From<SMSG_AUCTION_BIDDER_LIST_RESULT> for ServerOpcodeMessage {
 impl From<MSG_LIST_STABLED_PETS_Server> for ServerOpcodeMessage {
     fn from(c: MSG_LIST_STABLED_PETS_Server) -> Self {
         Self::MSG_LIST_STABLED_PETS(c)
+    }
+}
+
+impl From<SMSG_STABLE_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_STABLE_RESULT) -> Self {
+        Self::SMSG_STABLE_RESULT(c)
     }
 }
 
