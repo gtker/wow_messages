@@ -618,6 +618,8 @@ pub use crate::shared::msg_battleground_player_positions_server_vanilla_tbc_wrat
 
 pub use crate::shared::msg_inspect_honor_stats_client_vanilla_tbc_wrath::MSG_INSPECT_HONOR_STATS_Client;
 
+pub use crate::shared::msg_inspect_honor_stats_server_tbc_wrath::MSG_INSPECT_HONOR_STATS_Server;
+
 pub use crate::shared::msg_list_stabled_pets_client_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Client;
 
 pub use crate::shared::msg_list_stabled_pets_server_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Server;

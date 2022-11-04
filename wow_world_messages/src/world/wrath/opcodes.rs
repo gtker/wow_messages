@@ -3972,6 +3972,7 @@ use crate::world::wrath::SMSG_INIT_WORLD_STATES;
 use crate::world::wrath::SMSG_UPDATE_WORLD_STATE;
 use crate::world::wrath::SMSG_PET_ACTION_FEEDBACK;
 use crate::world::wrath::SMSG_CHAR_RENAME;
+use crate::world::wrath::MSG_INSPECT_HONOR_STATS_Server;
 use crate::world::wrath::SMSG_FORCE_WALK_SPEED_CHANGE;
 use crate::world::wrath::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE;
 use crate::world::wrath::SMSG_FORCE_TURN_RATE_CHANGE;
@@ -4196,6 +4197,7 @@ pub enum ServerOpcodeMessage {
     SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
     SMSG_PET_ACTION_FEEDBACK(SMSG_PET_ACTION_FEEDBACK),
     SMSG_CHAR_RENAME(SMSG_CHAR_RENAME),
+    MSG_INSPECT_HONOR_STATS(MSG_INSPECT_HONOR_STATS_Server),
     SMSG_FORCE_WALK_SPEED_CHANGE(SMSG_FORCE_WALK_SPEED_CHANGE),
     SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(SMSG_FORCE_SWIM_BACK_SPEED_CHANGE),
     SMSG_FORCE_TURN_RATE_CHANGE(SMSG_FORCE_TURN_RATE_CHANGE),
@@ -4422,6 +4424,7 @@ impl ServerOpcodeMessage {
             0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C3, size: body_size, io, } } else { a } })?)),
             0x02C6 => Ok(Self::SMSG_PET_ACTION_FEEDBACK(<SMSG_PET_ACTION_FEEDBACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C6, size: body_size, io, } } else { a } })?)),
             0x02C8 => Ok(Self::SMSG_CHAR_RENAME(<SMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C8, size: body_size, io, } } else { a } })?)),
+            0x02D6 => Ok(Self::MSG_INSPECT_HONOR_STATS(<MSG_INSPECT_HONOR_STATS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D6, size: body_size, io, } } else { a } })?)),
             0x02DA => Ok(Self::SMSG_FORCE_WALK_SPEED_CHANGE(<SMSG_FORCE_WALK_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DA, size: body_size, io, } } else { a } })?)),
             0x02DC => Ok(Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(<SMSG_FORCE_SWIM_BACK_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DC, size: body_size, io, } } else { a } })?)),
             0x02DE => Ok(Self::SMSG_FORCE_TURN_RATE_CHANGE(<SMSG_FORCE_TURN_RATE_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DE, size: body_size, io, } } else { a } })?)),
@@ -4797,6 +4800,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_RENAME(c) => c.write_encrypted_server(w, e),
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_WALK_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.write_encrypted_server(w, e),
@@ -5024,6 +5028,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_RENAME(c) => c.write_unencrypted_server(w),
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_WALK_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.write_unencrypted_server(w),
@@ -5251,6 +5256,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_WALK_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5478,6 +5484,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_WALK_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5705,6 +5712,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_WALK_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5932,6 +5940,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_FEEDBACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_WALK_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
@@ -6161,6 +6170,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
             ServerOpcodeMessage::SMSG_PET_ACTION_FEEDBACK(_) => "SMSG_PET_ACTION_FEEDBACK",
             ServerOpcodeMessage::SMSG_CHAR_RENAME(_) => "SMSG_CHAR_RENAME",
+            ServerOpcodeMessage::MSG_INSPECT_HONOR_STATS(_) => "MSG_INSPECT_HONOR_STATS_Server",
             ServerOpcodeMessage::SMSG_FORCE_WALK_SPEED_CHANGE(_) => "SMSG_FORCE_WALK_SPEED_CHANGE",
             ServerOpcodeMessage::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(_) => "SMSG_FORCE_SWIM_BACK_SPEED_CHANGE",
             ServerOpcodeMessage::SMSG_FORCE_TURN_RATE_CHANGE(_) => "SMSG_FORCE_TURN_RATE_CHANGE",
@@ -7293,6 +7303,12 @@ impl From<SMSG_PET_ACTION_FEEDBACK> for ServerOpcodeMessage {
 impl From<SMSG_CHAR_RENAME> for ServerOpcodeMessage {
     fn from(c: SMSG_CHAR_RENAME) -> Self {
         Self::SMSG_CHAR_RENAME(c)
+    }
+}
+
+impl From<MSG_INSPECT_HONOR_STATS_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_INSPECT_HONOR_STATS_Server) -> Self {
+        Self::MSG_INSPECT_HONOR_STATS(c)
     }
 }
 

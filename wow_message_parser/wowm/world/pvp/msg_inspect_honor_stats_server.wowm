@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
     Guid guid;
     PvpRank highest_rank;
@@ -23,5 +21,17 @@ smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
     u32 this_week_honor;
     (u32)PvpRank last_week_standing;
     u8 rank_progress_bar;
+} {
+    versions = "1.12";
 }
 
+smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
+    Guid guid;
+    u8 amount_of_honor;
+    u32 kills;
+    u32 honor_today;
+    u32 honor_yesterday;
+    u32 lifetime_honorable_kills;
+} {
+    versions = "2.4.3 3";
+}
