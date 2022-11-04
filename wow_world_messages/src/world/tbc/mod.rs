@@ -542,6 +542,8 @@ pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
+pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
+
 pub use crate::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
 
 pub use crate::shared::dungeon_difficulty_tbc_wrath::DungeonDifficulty;
@@ -647,6 +649,8 @@ pub use crate::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
 pub use crate::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
 
 pub use crate::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
+
+pub use crate::shared::pet_name_invalid_reason_tbc_wrath::PetNameInvalidReason;
 
 pub use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 
@@ -857,6 +861,8 @@ pub use crate::shared::smsg_pet_broken_vanilla_tbc_wrath::SMSG_PET_BROKEN;
 pub use crate::shared::smsg_pet_dismiss_sound_vanilla_tbc_wrath::SMSG_PET_DISMISS_SOUND;
 
 pub use crate::shared::smsg_pet_mode_vanilla_tbc_wrath::SMSG_PET_MODE;
+
+pub use crate::shared::smsg_pet_name_invalid_tbc_wrath::SMSG_PET_NAME_INVALID;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 

@@ -3863,6 +3863,7 @@ use crate::world::wrath::SMSG_DUEL_COMPLETE;
 use crate::world::wrath::SMSG_DUEL_WINNER;
 use crate::world::wrath::SMSG_MOUNTRESULT;
 use crate::world::wrath::SMSG_MOUNTSPECIAL_ANIM;
+use crate::world::wrath::SMSG_PET_NAME_INVALID;
 use crate::world::wrath::SMSG_PET_MODE;
 use crate::world::wrath::SMSG_GOSSIP_MESSAGE;
 use crate::world::wrath::SMSG_GOSSIP_COMPLETE;
@@ -4083,6 +4084,7 @@ pub enum ServerOpcodeMessage {
     SMSG_DUEL_WINNER(SMSG_DUEL_WINNER),
     SMSG_MOUNTRESULT(SMSG_MOUNTRESULT),
     SMSG_MOUNTSPECIAL_ANIM(SMSG_MOUNTSPECIAL_ANIM),
+    SMSG_PET_NAME_INVALID(SMSG_PET_NAME_INVALID),
     SMSG_PET_MODE(SMSG_PET_MODE),
     SMSG_GOSSIP_MESSAGE(SMSG_GOSSIP_MESSAGE),
     SMSG_GOSSIP_COMPLETE(SMSG_GOSSIP_COMPLETE),
@@ -4305,6 +4307,7 @@ impl ServerOpcodeMessage {
             0x016B => Ok(Self::SMSG_DUEL_WINNER(<SMSG_DUEL_WINNER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016B, size: body_size, io, } } else { a } })?)),
             0x016E => Ok(Self::SMSG_MOUNTRESULT(<SMSG_MOUNTRESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016E, size: body_size, io, } } else { a } })?)),
             0x0172 => Ok(Self::SMSG_MOUNTSPECIAL_ANIM(<SMSG_MOUNTSPECIAL_ANIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0172, size: body_size, io, } } else { a } })?)),
+            0x0178 => Ok(Self::SMSG_PET_NAME_INVALID(<SMSG_PET_NAME_INVALID as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0178, size: body_size, io, } } else { a } })?)),
             0x017A => Ok(Self::SMSG_PET_MODE(<SMSG_PET_MODE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017A, size: body_size, io, } } else { a } })?)),
             0x017D => Ok(Self::SMSG_GOSSIP_MESSAGE(<SMSG_GOSSIP_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017D, size: body_size, io, } } else { a } })?)),
             0x017E => Ok(Self::SMSG_GOSSIP_COMPLETE(<SMSG_GOSSIP_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017E, size: body_size, io, } } else { a } })?)),
@@ -4676,6 +4679,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_WINNER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOUNTRESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOUNTSPECIAL_ANIM(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PET_NAME_INVALID(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_MODE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_encrypted_server(w, e),
@@ -4899,6 +4903,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_WINNER(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOUNTRESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOUNTSPECIAL_ANIM(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PET_NAME_INVALID(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_MODE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_unencrypted_server(w),
@@ -5122,6 +5127,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOUNTRESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOUNTSPECIAL_ANIM(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_NAME_INVALID(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5345,6 +5351,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOUNTRESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOUNTSPECIAL_ANIM(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PET_NAME_INVALID(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5568,6 +5575,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOUNTRESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOUNTSPECIAL_ANIM(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_NAME_INVALID(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5791,6 +5799,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOUNTRESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOUNTSPECIAL_ANIM(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PET_NAME_INVALID(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -6016,6 +6025,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_DUEL_WINNER(_) => "SMSG_DUEL_WINNER",
             ServerOpcodeMessage::SMSG_MOUNTRESULT(_) => "SMSG_MOUNTRESULT",
             ServerOpcodeMessage::SMSG_MOUNTSPECIAL_ANIM(_) => "SMSG_MOUNTSPECIAL_ANIM",
+            ServerOpcodeMessage::SMSG_PET_NAME_INVALID(_) => "SMSG_PET_NAME_INVALID",
             ServerOpcodeMessage::SMSG_PET_MODE(_) => "SMSG_PET_MODE",
             ServerOpcodeMessage::SMSG_GOSSIP_MESSAGE(_) => "SMSG_GOSSIP_MESSAGE",
             ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => "SMSG_GOSSIP_COMPLETE",
@@ -6759,6 +6769,12 @@ impl From<SMSG_MOUNTRESULT> for ServerOpcodeMessage {
 impl From<SMSG_MOUNTSPECIAL_ANIM> for ServerOpcodeMessage {
     fn from(c: SMSG_MOUNTSPECIAL_ANIM) -> Self {
         Self::SMSG_MOUNTSPECIAL_ANIM(c)
+    }
+}
+
+impl From<SMSG_PET_NAME_INVALID> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_NAME_INVALID) -> Self {
+        Self::SMSG_PET_NAME_INVALID(c)
     }
 }
 
