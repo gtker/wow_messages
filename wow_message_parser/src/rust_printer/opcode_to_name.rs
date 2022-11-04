@@ -25,19 +25,19 @@ fn print_specific_opcode_to_name(messages: &[Data]) -> Writer {
 }
 
 pub fn print_opcode_to_name() {
-    let s = print_specific_opcode_to_name(&vanilla_messages::DATA);
+    let s = print_specific_opcode_to_name(vanilla_messages::DATA);
     overwrite_if_not_same_contents(
         s.inner(),
         &opcode_to_name_location(MajorWorldVersion::Vanilla),
     );
 
-    let s = print_specific_opcode_to_name(&tbc_messages::DATA);
+    let s = print_specific_opcode_to_name(tbc_messages::DATA);
     overwrite_if_not_same_contents(
         s.inner(),
         &opcode_to_name_location(MajorWorldVersion::BurningCrusade),
     );
 
-    let s = print_specific_opcode_to_name(&wrath_messages::DATA);
+    let s = print_specific_opcode_to_name(wrath_messages::DATA);
     overwrite_if_not_same_contents(
         s.inner(),
         &opcode_to_name_location(MajorWorldVersion::Wrath),
