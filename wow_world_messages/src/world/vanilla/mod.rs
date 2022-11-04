@@ -206,8 +206,6 @@ pub(crate) mod cmsg_questgiver_quest_autolaunch;
 pub use cmsg_questgiver_quest_autolaunch::*;
 pub(crate) mod cmsg_questgiver_request_reward;
 pub use cmsg_questgiver_request_reward::*;
-pub(crate) mod cmsg_questgiver_status_query;
-pub use cmsg_questgiver_status_query::*;
 pub(crate) mod cmsg_questlog_remove_quest;
 pub use cmsg_questlog_remove_quest::*;
 pub(crate) mod cmsg_questlog_swap_quest;
@@ -747,6 +745,8 @@ pub use crate::shared::cmsg_player_logout_vanilla_tbc_wrath::CMSG_PLAYER_LOGOUT;
 pub use crate::shared::cmsg_query_time_vanilla_tbc_wrath::CMSG_QUERY_TIME;
 
 pub use crate::shared::cmsg_quest_query_vanilla_tbc_wrath::CMSG_QUEST_QUERY;
+
+pub use crate::shared::cmsg_questgiver_status_query_vanilla_tbc_wrath::CMSG_QUESTGIVER_STATUS_QUERY;
 
 pub use crate::shared::cmsg_read_item_vanilla_tbc_wrath::CMSG_READ_ITEM;
 

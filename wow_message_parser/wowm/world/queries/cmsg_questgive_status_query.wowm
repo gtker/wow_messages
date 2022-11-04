@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_QUESTGIVER_STATUS_QUERY = 0x0182 {
     Guid guid;
