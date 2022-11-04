@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_PET_UNLEARN_CONFIRM = 0x02F1 {
     Guid pet_guid;
