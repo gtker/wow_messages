@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_GUILD_QUERY = 0x54 {
     u32 guild_id;   

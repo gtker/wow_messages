@@ -386,6 +386,8 @@ pub use crate::shared::cmsg_guild_motd_vanilla_tbc_wrath::CMSG_GUILD_MOTD;
 
 pub use crate::shared::cmsg_guild_promote_vanilla_tbc_wrath::CMSG_GUILD_PROMOTE;
 
+pub use crate::shared::cmsg_guild_query_vanilla_tbc_wrath::CMSG_GUILD_QUERY;
+
 pub use crate::shared::cmsg_guild_rank_tbc_wrath::CMSG_GUILD_RANK;
 
 pub use crate::shared::cmsg_guild_remove_vanilla_tbc_wrath::CMSG_GUILD_REMOVE;

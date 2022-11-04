@@ -132,8 +132,6 @@ pub(crate) mod cmsg_group_uninvite;
 pub use cmsg_group_uninvite::*;
 pub(crate) mod cmsg_group_uninvite_guid;
 pub use cmsg_group_uninvite_guid::*;
-pub(crate) mod cmsg_guild_query;
-pub use cmsg_guild_query::*;
 pub(crate) mod cmsg_guild_rank;
 pub use cmsg_guild_rank::*;
 pub(crate) mod cmsg_ignore_trade;
@@ -669,6 +667,8 @@ pub use crate::shared::cmsg_guild_leave_vanilla_tbc_wrath::CMSG_GUILD_LEAVE;
 pub use crate::shared::cmsg_guild_motd_vanilla_tbc_wrath::CMSG_GUILD_MOTD;
 
 pub use crate::shared::cmsg_guild_promote_vanilla_tbc_wrath::CMSG_GUILD_PROMOTE;
+
+pub use crate::shared::cmsg_guild_query_vanilla_tbc_wrath::CMSG_GUILD_QUERY;
 
 pub use crate::shared::cmsg_guild_remove_vanilla_tbc_wrath::CMSG_GUILD_REMOVE;
 

@@ -91,6 +91,7 @@ pub mod cmsg_guild_leader_vanilla_tbc_wrath;
 pub mod cmsg_guild_leave_vanilla_tbc_wrath;
 pub mod cmsg_guild_motd_vanilla_tbc_wrath;
 pub mod cmsg_guild_promote_vanilla_tbc_wrath;
+pub mod cmsg_guild_query_vanilla_tbc_wrath;
 pub mod cmsg_guild_rank_tbc_wrath;
 pub mod cmsg_guild_remove_vanilla_tbc_wrath;
 pub mod cmsg_guild_roster_vanilla_tbc_wrath;
