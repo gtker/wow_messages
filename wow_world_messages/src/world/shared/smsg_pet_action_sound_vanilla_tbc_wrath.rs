@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::PetTalkReason;
+use crate::world::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -52,4 +52,10 @@ impl crate::Message for SMSG_PET_ACTION_SOUND {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PET_ACTION_SOUND {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PET_ACTION_SOUND {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PET_ACTION_SOUND {}
 

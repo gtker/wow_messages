@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 enum PetTalkReason : u32 {
     SPECIAL_SPELL = 0;
