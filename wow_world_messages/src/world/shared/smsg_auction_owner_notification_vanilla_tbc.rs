@@ -12,7 +12,7 @@ use std::io::{Write, Read};
 ///     u32 bid;
 ///     u32 auction_out_bid;
 ///     Guid bidder;
-///     u32 item_entry;
+///     u32 item;
 ///     u32 item_random_property_id;
 /// }
 /// ```
@@ -23,7 +23,7 @@ pub struct SMSG_AUCTION_OWNER_NOTIFICATION {
     pub bid: u32,
     pub auction_out_bid: u32,
     pub bidder: Guid,
-    pub item_entry: u32,
+    pub item: u32,
     pub item_random_property_id: u32,
 }
 
@@ -47,8 +47,8 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
         // bidder: Guid
         w.write_all(&self.bidder.guid().to_le_bytes())?;
 
-        // item_entry: u32
-        w.write_all(&self.item_entry.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // item_random_property_id: u32
         w.write_all(&self.item_random_property_id.to_le_bytes())?;
@@ -72,8 +72,8 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
         // bidder: Guid
         let bidder = Guid::read(r)?;
 
-        // item_entry: u32
-        let item_entry = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // item_random_property_id: u32
         let item_random_property_id = crate::util::read_u32_le(r)?;
@@ -83,7 +83,7 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
             bid,
             auction_out_bid,
             bidder,
-            item_entry,
+            item,
             item_random_property_id,
         })
     }

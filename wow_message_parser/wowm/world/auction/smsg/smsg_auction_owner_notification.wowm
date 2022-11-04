@@ -5,7 +5,7 @@ smsg SMSG_AUCTION_OWNER_NOTIFICATION = 0x025F {
     }
     u32 auction_out_bid;
     Guid bidder;
-    u32 item_entry;
+    Item item;
     u32 item_random_property_id;
 } {
     comment = "vmangos/cmangos/mangoszero: this message causes on client to display: 'Your auction sold'";
@@ -19,7 +19,7 @@ smsg SMSG_AUCTION_OWNER_NOTIFICATION = 0x025F {
     }
     u32 auction_out_bid;
     Guid bidder;
-    u32 item_entry;
+    Item item;
     u32 item_random_property_id;
     f32 time_left;
 } {

@@ -38,7 +38,7 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
     /* TODO: requires elseif for different thing */
     else {
         if (action == ITEM_TAKEN) {
-            u32 item_guid {
+            Item item {
                 comment = "cmangos/vmangos: item guid low?";
             }
             u32 item_count;

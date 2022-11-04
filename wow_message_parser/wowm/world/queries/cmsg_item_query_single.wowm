@@ -1,7 +1,7 @@
 #tag_all versions "1.12";
 
 cmsg CMSG_ITEM_QUERY_SINGLE = 0x56 {
-    u32 item;
+    Item item;
     Guid guid;
 }
 

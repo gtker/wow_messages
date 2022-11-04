@@ -2176,12 +2176,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_item_entry,
-            { "Item Entry", "woww.item.entry",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_item_guid,
             { "Item Guid", "woww.item.guid",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
@@ -2196,7 +2190,7 @@
         },
         { &hf_woww_item_id,
             { "Item Id", "woww.item.id",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT16, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

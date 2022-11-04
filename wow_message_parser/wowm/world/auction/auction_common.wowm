@@ -1,6 +1,6 @@
 struct AuctionListItem {
     u32 id;
-    u32 item_entry;
+    Item item;
     u32 item_enchantment;
     u32 item_random_property_id;
     u32 item_suffix_factor;
@@ -27,7 +27,7 @@ struct AuctionEnchantment {
 
 struct AuctionListItem {
     u32 id;
-    u32 item_entry;
+    Item item;
     AuctionEnchantment[6] enchantments;
     u32 item_random_property_id;
     u32 item_suffix_factor;
@@ -49,7 +49,7 @@ struct AuctionListItem {
 
 struct AuctionListItem {
     u32 id;
-    u32 item_entry;
+    Item item;
     AuctionEnchantment[7] enchantments;
     u32 item_random_property_id;
     u32 item_suffix_factor;

@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// ```text
 /// struct AuctionListItem {
 ///     u32 id;
-///     u32 item_entry;
+///     u32 item;
 ///     u32 item_enchantment;
 ///     u32 item_random_property_id;
 ///     u32 item_suffix_factor;
@@ -24,7 +24,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct AuctionListItem {
     pub id: u32,
-    pub item_entry: u32,
+    pub item: u32,
     pub item_enchantment: u32,
     pub item_random_property_id: u32,
     pub item_suffix_factor: u32,
@@ -44,8 +44,8 @@ impl AuctionListItem {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
-        // item_entry: u32
-        w.write_all(&self.item_entry.to_le_bytes())?;
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
 
         // item_enchantment: u32
         w.write_all(&self.item_enchantment.to_le_bytes())?;
@@ -92,8 +92,8 @@ impl AuctionListItem {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 
-        // item_entry: u32
-        let item_entry = crate::util::read_u32_le(r)?;
+        // item: u32
+        let item = crate::util::read_u32_le(r)?;
 
         // item_enchantment: u32
         let item_enchantment = crate::util::read_u32_le(r)?;
@@ -133,7 +133,7 @@ impl AuctionListItem {
 
         Ok(Self {
             id,
-            item_entry,
+            item,
             item_enchantment,
             item_random_property_id,
             item_suffix_factor,
