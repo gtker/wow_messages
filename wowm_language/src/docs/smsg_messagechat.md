@@ -245,10 +245,6 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     }
     SizedCString message;
     PlayerChatTag chat_tag;
-    if (chat_type == ACHIEVEMENT
-        || chat_type == GUILD_ACHIEVEMENT) {
-        u32 achievement_id;
-    }
 }
 ```
 ### Header
@@ -318,11 +314,4 @@ Else:
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | target6 |  |  |
 | - | - / - | SizedCString | message |  |  |
 | - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag |  |  |
-
-If chat_type is equal to `ACHIEVEMENT` **or** 
-is equal to `GUILD_ACHIEVEMENT`:
-
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | u32 | achievement_id |  |  |
 
