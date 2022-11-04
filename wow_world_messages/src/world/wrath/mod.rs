@@ -634,6 +634,8 @@ pub use crate::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 
 pub use crate::shared::npc_text_update_emote_vanilla_tbc_wrath::NpcTextUpdateEmote;
 
+pub use crate::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
+
 pub use crate::shared::petition_result_tbc_wrath::PetitionResult;
 
 pub use crate::shared::petition_showlist_tbc_wrath::PetitionShowlist;
@@ -791,6 +793,8 @@ pub use crate::shared::smsg_move_water_walk_vanilla_tbc_wrath::SMSG_MOVE_WATER_W
 pub use crate::shared::smsg_new_taxi_path_vanilla_tbc_wrath::SMSG_NEW_TAXI_PATH;
 
 pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
+
+pub use crate::shared::smsg_pet_action_feedback_vanilla_tbc_wrath::SMSG_PET_ACTION_FEEDBACK;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 

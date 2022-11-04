@@ -1,8 +1,8 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 enum PetFeedback : u8 {
     PET_DEAD = 1;
-    NOTHING_TO_EAT = 2;
+    NOTHING_TO_ATTACK = 2;
     CANT_ATTACK_TARGET = 3;
     NO_PATH_TO = 4;
 }

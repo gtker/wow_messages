@@ -4,7 +4,7 @@ use std::convert::{TryFrom, TryInto};
 /// ```text
 /// enum PetFeedback : u8 {
 ///     PET_DEAD = 1;
-///     NOTHING_TO_EAT = 2;
+///     NOTHING_TO_ATTACK = 2;
 ///     CANT_ATTACK_TARGET = 3;
 ///     NO_PATH_TO = 4;
 /// }
@@ -13,7 +13,7 @@ use std::convert::{TryFrom, TryInto};
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetFeedback {
     PetDead,
-    NothingToEat,
+    NothingToAttack,
     CantAttackTarget,
     NoPathTo,
 }
@@ -22,7 +22,7 @@ impl PetFeedback {
     pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::PetDead => 0x1,
-            Self::NothingToEat => 0x2,
+            Self::NothingToAttack => 0x2,
             Self::CantAttackTarget => 0x3,
             Self::NoPathTo => 0x4,
         }
@@ -40,7 +40,7 @@ impl std::fmt::Display for PetFeedback {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::PetDead => f.write_str("PetDead"),
-            Self::NothingToEat => f.write_str("NothingToEat"),
+            Self::NothingToAttack => f.write_str("NothingToAttack"),
             Self::CantAttackTarget => f.write_str("CantAttackTarget"),
             Self::NoPathTo => f.write_str("NoPathTo"),
         }
@@ -52,7 +52,7 @@ impl TryFrom<u8> for PetFeedback {
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::PetDead),
-            2 => Ok(Self::NothingToEat),
+            2 => Ok(Self::NothingToAttack),
             3 => Ok(Self::CantAttackTarget),
             4 => Ok(Self::NoPathTo),
             v => Err(crate::errors::EnumError::new("PetFeedback", v as u32),)

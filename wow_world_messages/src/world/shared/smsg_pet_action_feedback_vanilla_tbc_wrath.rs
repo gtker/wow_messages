@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::PetFeedback;
+use crate::world::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -42,4 +42,10 @@ impl crate::Message for SMSG_PET_ACTION_FEEDBACK {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PET_ACTION_FEEDBACK {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PET_ACTION_FEEDBACK {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PET_ACTION_FEEDBACK {}
 

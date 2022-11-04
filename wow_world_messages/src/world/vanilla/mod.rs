@@ -508,8 +508,6 @@ pub(crate) mod pet_command_state;
 pub use pet_command_state::*;
 pub(crate) mod pet_enabled;
 pub use pet_enabled::*;
-pub(crate) mod pet_feedback;
-pub use pet_feedback::*;
 pub(crate) mod pet_react_state;
 pub use pet_react_state::*;
 pub(crate) mod pet_spell_cooldown;
@@ -910,6 +908,8 @@ pub use crate::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 
 pub use crate::shared::npc_text_update_emote_vanilla_tbc_wrath::NpcTextUpdateEmote;
 
+pub use crate::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
+
 pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
 pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
@@ -1083,6 +1083,8 @@ pub use crate::shared::smsg_move_water_walk_vanilla_tbc_wrath::SMSG_MOVE_WATER_W
 pub use crate::shared::smsg_new_taxi_path_vanilla_tbc_wrath::SMSG_NEW_TAXI_PATH;
 
 pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
+
+pub use crate::shared::smsg_pet_action_feedback_vanilla_tbc_wrath::SMSG_PET_ACTION_FEEDBACK;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 
@@ -1406,8 +1408,6 @@ pub(crate) mod smsg_pause_mirror_timer;
 pub use smsg_pause_mirror_timer::*;
 pub(crate) mod smsg_periodicauralog;
 pub use smsg_periodicauralog::*;
-pub(crate) mod smsg_pet_action_feedback;
-pub use smsg_pet_action_feedback::*;
 pub(crate) mod smsg_pet_action_sound;
 pub use smsg_pet_action_sound::*;
 pub(crate) mod smsg_pet_broken;
