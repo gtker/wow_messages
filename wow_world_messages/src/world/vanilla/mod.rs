@@ -190,8 +190,6 @@ pub(crate) mod cmsg_pushquesttoparty;
 pub use cmsg_pushquesttoparty::*;
 pub(crate) mod cmsg_quest_confirm_accept;
 pub use cmsg_quest_confirm_accept::*;
-pub(crate) mod cmsg_quest_query;
-pub use cmsg_quest_query::*;
 pub(crate) mod cmsg_questgiver_accept_quest;
 pub use cmsg_questgiver_accept_quest::*;
 pub(crate) mod cmsg_questgiver_cancel;
@@ -747,6 +745,8 @@ pub use crate::shared::cmsg_player_login_vanilla_tbc_wrath::CMSG_PLAYER_LOGIN;
 pub use crate::shared::cmsg_player_logout_vanilla_tbc_wrath::CMSG_PLAYER_LOGOUT;
 
 pub use crate::shared::cmsg_query_time_vanilla_tbc_wrath::CMSG_QUERY_TIME;
+
+pub use crate::shared::cmsg_quest_query_vanilla_tbc_wrath::CMSG_QUEST_QUERY;
 
 pub use crate::shared::cmsg_read_item_vanilla_tbc_wrath::CMSG_READ_ITEM;
 

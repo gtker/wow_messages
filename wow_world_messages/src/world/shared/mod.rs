@@ -146,6 +146,7 @@ pub mod cmsg_ping_vanilla_tbc_wrath;
 pub mod cmsg_player_login_vanilla_tbc_wrath;
 pub mod cmsg_player_logout_vanilla_tbc_wrath;
 pub mod cmsg_query_time_vanilla_tbc_wrath;
+pub mod cmsg_quest_query_vanilla_tbc_wrath;
 pub mod cmsg_read_item_vanilla_tbc_wrath;
 pub mod cmsg_realm_split_tbc_wrath;
 pub mod cmsg_repair_item_tbc_wrath;

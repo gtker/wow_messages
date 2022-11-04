@@ -496,6 +496,8 @@ pub use crate::shared::cmsg_player_logout_vanilla_tbc_wrath::CMSG_PLAYER_LOGOUT;
 
 pub use crate::shared::cmsg_query_time_vanilla_tbc_wrath::CMSG_QUERY_TIME;
 
+pub use crate::shared::cmsg_quest_query_vanilla_tbc_wrath::CMSG_QUEST_QUERY;
+
 pub use crate::shared::cmsg_read_item_vanilla_tbc_wrath::CMSG_READ_ITEM;
 
 pub use crate::shared::cmsg_realm_split_tbc_wrath::CMSG_REALM_SPLIT;
