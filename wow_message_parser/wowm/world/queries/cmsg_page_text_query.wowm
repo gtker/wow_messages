@@ -1,6 +1,12 @@
-#tag_all versions "1.12";
+cmsg CMSG_PAGE_TEXT_QUERY = 0x5A {
+    u32 page_id;
+} {
+    versions = "1.12";
+}
 
 cmsg CMSG_PAGE_TEXT_QUERY = 0x5A {
     u32 page_id;
+    Guid guid;
+} {
+    versions = "2.4.3 3";
 }
-

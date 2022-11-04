@@ -25,6 +25,7 @@ use crate::world::tbc::CMSG_LOGOUT_CANCEL;
 use crate::world::tbc::CMSG_NAME_QUERY;
 use crate::world::tbc::CMSG_GUILD_QUERY;
 use crate::world::tbc::CMSG_ITEM_QUERY_SINGLE;
+use crate::world::tbc::CMSG_PAGE_TEXT_QUERY;
 use crate::world::tbc::CMSG_GAMEOBJECT_QUERY;
 use crate::world::tbc::CMSG_CREATURE_QUERY;
 use crate::world::tbc::CMSG_GUILD_CREATE;
@@ -258,6 +259,7 @@ pub enum ClientOpcodeMessage {
     CMSG_NAME_QUERY(CMSG_NAME_QUERY),
     CMSG_GUILD_QUERY(CMSG_GUILD_QUERY),
     CMSG_ITEM_QUERY_SINGLE(CMSG_ITEM_QUERY_SINGLE),
+    CMSG_PAGE_TEXT_QUERY(CMSG_PAGE_TEXT_QUERY),
     CMSG_GAMEOBJECT_QUERY(CMSG_GAMEOBJECT_QUERY),
     CMSG_CREATURE_QUERY(CMSG_CREATURE_QUERY),
     CMSG_GUILD_CREATE(CMSG_GUILD_CREATE),
@@ -493,6 +495,7 @@ impl ClientOpcodeMessage {
             0x0050 => Ok(Self::CMSG_NAME_QUERY(<CMSG_NAME_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0050, size: body_size, io, } } else { a } })?)),
             0x0054 => Ok(Self::CMSG_GUILD_QUERY(<CMSG_GUILD_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0054, size: body_size, io, } } else { a } })?)),
             0x0056 => Ok(Self::CMSG_ITEM_QUERY_SINGLE(<CMSG_ITEM_QUERY_SINGLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0056, size: body_size, io, } } else { a } })?)),
+            0x005A => Ok(Self::CMSG_PAGE_TEXT_QUERY(<CMSG_PAGE_TEXT_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x005A, size: body_size, io, } } else { a } })?)),
             0x005E => Ok(Self::CMSG_GAMEOBJECT_QUERY(<CMSG_GAMEOBJECT_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x005E, size: body_size, io, } } else { a } })?)),
             0x0060 => Ok(Self::CMSG_CREATURE_QUERY(<CMSG_CREATURE_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0060, size: body_size, io, } } else { a } })?)),
             0x0081 => Ok(Self::CMSG_GUILD_CREATE(<CMSG_GUILD_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0081, size: body_size, io, } } else { a } })?)),
@@ -796,6 +799,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NAME_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PAGE_TEXT_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GAMEOBJECT_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CREATURE_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_CREATE(c) => c.write_encrypted_client(w, e),
@@ -1032,6 +1036,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NAME_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PAGE_TEXT_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GAMEOBJECT_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_CREATURE_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_CREATE(c) => c.write_unencrypted_client(w),
@@ -1268,6 +1273,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PAGE_TEXT_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GAMEOBJECT_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CREATURE_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1504,6 +1510,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PAGE_TEXT_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GAMEOBJECT_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CREATURE_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1740,6 +1747,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PAGE_TEXT_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GAMEOBJECT_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CREATURE_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1976,6 +1984,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PAGE_TEXT_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GAMEOBJECT_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CREATURE_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_CREATE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2247,6 +2256,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_NAME_QUERY(_) => "CMSG_NAME_QUERY",
             ClientOpcodeMessage::CMSG_GUILD_QUERY(_) => "CMSG_GUILD_QUERY",
             ClientOpcodeMessage::CMSG_ITEM_QUERY_SINGLE(_) => "CMSG_ITEM_QUERY_SINGLE",
+            ClientOpcodeMessage::CMSG_PAGE_TEXT_QUERY(_) => "CMSG_PAGE_TEXT_QUERY",
             ClientOpcodeMessage::CMSG_GAMEOBJECT_QUERY(_) => "CMSG_GAMEOBJECT_QUERY",
             ClientOpcodeMessage::CMSG_CREATURE_QUERY(_) => "CMSG_CREATURE_QUERY",
             ClientOpcodeMessage::CMSG_GUILD_CREATE(_) => "CMSG_GUILD_CREATE",
@@ -2558,6 +2568,12 @@ impl From<CMSG_GUILD_QUERY> for ClientOpcodeMessage {
 impl From<CMSG_ITEM_QUERY_SINGLE> for ClientOpcodeMessage {
     fn from(c: CMSG_ITEM_QUERY_SINGLE) -> Self {
         Self::CMSG_ITEM_QUERY_SINGLE(c)
+    }
+}
+
+impl From<CMSG_PAGE_TEXT_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PAGE_TEXT_QUERY) -> Self {
+        Self::CMSG_PAGE_TEXT_QUERY(c)
     }
 }
 

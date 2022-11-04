@@ -456,6 +456,8 @@ pub use crate::shared::cmsg_offer_petition_tbc_wrath::CMSG_OFFER_PETITION;
 
 pub use crate::shared::cmsg_open_item_vanilla_tbc_wrath::CMSG_OPEN_ITEM;
 
+pub use crate::shared::cmsg_page_text_query_tbc_wrath::CMSG_PAGE_TEXT_QUERY;
+
 pub use crate::shared::cmsg_pet_abandon_vanilla_tbc_wrath::CMSG_PET_ABANDON;
 
 pub use crate::shared::cmsg_pet_action_vanilla_tbc_wrath::CMSG_PET_ACTION;

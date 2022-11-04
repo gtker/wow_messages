@@ -126,6 +126,7 @@ pub mod cmsg_next_cinematic_camera_vanilla_tbc_wrath;
 pub mod cmsg_npc_text_query_vanilla_tbc_wrath;
 pub mod cmsg_offer_petition_tbc_wrath;
 pub mod cmsg_open_item_vanilla_tbc_wrath;
+pub mod cmsg_page_text_query_tbc_wrath;
 pub mod cmsg_pet_abandon_vanilla_tbc_wrath;
 pub mod cmsg_pet_action_vanilla_tbc_wrath;
 pub mod cmsg_pet_cancel_aura_vanilla_tbc_wrath;
