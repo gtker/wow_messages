@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::StabledPet;
+use crate::world::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
@@ -75,6 +75,12 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Server {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for MSG_LIST_STABLED_PETS_Server {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for MSG_LIST_STABLED_PETS_Server {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for MSG_LIST_STABLED_PETS_Server {}
 
 impl MSG_LIST_STABLED_PETS_Server {
     pub(crate) fn size(&self) -> usize {

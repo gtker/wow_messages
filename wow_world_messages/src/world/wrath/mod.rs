@@ -606,6 +606,8 @@ pub use crate::shared::msg_battleground_player_positions_server_vanilla_tbc_wrat
 
 pub use crate::shared::msg_list_stabled_pets_client_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Client;
 
+pub use crate::shared::msg_list_stabled_pets_server_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Server;
+
 pub use crate::shared::msg_move_teleport_ack_client_vanilla_tbc_wrath::MSG_MOVE_TELEPORT_ACK_Client;
 
 pub use crate::shared::msg_move_worldport_ack_vanilla_tbc_wrath::MSG_MOVE_WORLDPORT_ACK;
@@ -863,6 +865,8 @@ pub use crate::shared::smsg_turn_in_petition_results_tbc_wrath::SMSG_TURN_IN_PET
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
+
+pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
 pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 

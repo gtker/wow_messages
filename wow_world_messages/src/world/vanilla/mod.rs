@@ -377,8 +377,6 @@ pub(crate) mod msg_inspect_honor_stats_client;
 pub use msg_inspect_honor_stats_client::*;
 pub(crate) mod msg_inspect_honor_stats_server;
 pub use msg_inspect_honor_stats_server::*;
-pub(crate) mod msg_list_stabled_pets_server;
-pub use msg_list_stabled_pets_server::*;
 pub(crate) mod msg_looking_for_group_client;
 pub use msg_looking_for_group_client::*;
 pub(crate) mod msg_looking_for_group_server;
@@ -884,6 +882,8 @@ pub use crate::shared::msg_battleground_player_positions_server_vanilla_tbc_wrat
 
 pub use crate::shared::msg_list_stabled_pets_client_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Client;
 
+pub use crate::shared::msg_list_stabled_pets_server_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Server;
+
 pub use crate::shared::msg_move_teleport_ack_client_vanilla_tbc_wrath::MSG_MOVE_TELEPORT_ACK_Client;
 
 pub use crate::shared::msg_move_worldport_ack_vanilla_tbc_wrath::MSG_MOVE_WORLDPORT_ACK;
@@ -1155,6 +1155,8 @@ pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STA
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
+
+pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
 pub use crate::shared::transport_info_vanilla_tbc::TransportInfo;
 
@@ -1608,8 +1610,6 @@ pub(crate) mod spline_flag;
 pub use spline_flag::*;
 pub(crate) mod stable_result;
 pub use stable_result::*;
-pub(crate) mod stabled_pet;
-pub use stabled_pet::*;
 pub(crate) mod status_id;
 pub use status_id::*;
 pub(crate) mod timer_type;
