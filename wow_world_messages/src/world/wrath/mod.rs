@@ -104,6 +104,8 @@ pub(crate) mod cmsg_petition_buy;
 pub use cmsg_petition_buy::*;
 pub(crate) mod cmsg_played_time;
 pub use cmsg_played_time::*;
+pub(crate) mod cmsg_questgiver_query_quest;
+pub use cmsg_questgiver_query_quest::*;
 pub(crate) mod cmsg_ready_for_account_data_times;
 pub use cmsg_ready_for_account_data_times::*;
 pub(crate) mod cmsg_set_active_voice_channel;

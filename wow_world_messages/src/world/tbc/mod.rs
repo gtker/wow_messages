@@ -498,6 +498,8 @@ pub use crate::shared::cmsg_query_time_vanilla_tbc_wrath::CMSG_QUERY_TIME;
 
 pub use crate::shared::cmsg_quest_query_vanilla_tbc_wrath::CMSG_QUEST_QUERY;
 
+pub use crate::shared::cmsg_questgiver_query_quest_vanilla_tbc::CMSG_QUESTGIVER_QUERY_QUEST;
+
 pub use crate::shared::cmsg_questgiver_status_query_vanilla_tbc_wrath::CMSG_QUESTGIVER_STATUS_QUERY;
 
 pub use crate::shared::cmsg_read_item_vanilla_tbc_wrath::CMSG_READ_ITEM;
