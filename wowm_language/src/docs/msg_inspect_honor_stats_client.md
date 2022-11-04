@@ -1,6 +1,6 @@
 # MSG_INSPECT_HONOR_STATS_Client
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 

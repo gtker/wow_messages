@@ -215,6 +215,7 @@ use crate::world::wrath::CMSG_MOVE_WATER_WALK_ACK;
 use crate::world::wrath::CMSG_MOVE_NOT_ACTIVE_MOVER;
 use crate::world::wrath::CMSG_BATTLEFIELD_STATUS;
 use crate::world::wrath::CMSG_BATTLEFIELD_PORT;
+use crate::world::wrath::MSG_INSPECT_HONOR_STATS_Client;
 use crate::world::wrath::CMSG_BATTLEMASTER_HELLO;
 use crate::world::wrath::CMSG_FORCE_WALK_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK;
@@ -447,6 +448,7 @@ pub enum ClientOpcodeMessage {
     CMSG_MOVE_NOT_ACTIVE_MOVER(CMSG_MOVE_NOT_ACTIVE_MOVER),
     CMSG_BATTLEFIELD_STATUS(CMSG_BATTLEFIELD_STATUS),
     CMSG_BATTLEFIELD_PORT(CMSG_BATTLEFIELD_PORT),
+    MSG_INSPECT_HONOR_STATS(MSG_INSPECT_HONOR_STATS_Client),
     CMSG_BATTLEMASTER_HELLO(CMSG_BATTLEMASTER_HELLO),
     CMSG_FORCE_WALK_SPEED_CHANGE_ACK(CMSG_FORCE_WALK_SPEED_CHANGE_ACK),
     CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK),
@@ -681,6 +683,7 @@ impl ClientOpcodeMessage {
             0x02D1 => Ok(Self::CMSG_MOVE_NOT_ACTIVE_MOVER(<CMSG_MOVE_NOT_ACTIVE_MOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D1, size: body_size, io, } } else { a } })?)),
             0x02D3 => Ok(Self::CMSG_BATTLEFIELD_STATUS(<CMSG_BATTLEFIELD_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D3, size: body_size, io, } } else { a } })?)),
             0x02D5 => Ok(Self::CMSG_BATTLEFIELD_PORT(<CMSG_BATTLEFIELD_PORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D5, size: body_size, io, } } else { a } })?)),
+            0x02D6 => Ok(Self::MSG_INSPECT_HONOR_STATS(<MSG_INSPECT_HONOR_STATS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D6, size: body_size, io, } } else { a } })?)),
             0x02D7 => Ok(Self::CMSG_BATTLEMASTER_HELLO(<CMSG_BATTLEMASTER_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D7, size: body_size, io, } } else { a } })?)),
             0x02DB => Ok(Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(<CMSG_FORCE_WALK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DB, size: body_size, io, } } else { a } })?)),
             0x02DD => Ok(Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DD, size: body_size, io, } } else { a } })?)),
@@ -983,6 +986,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_encrypted_client(w, e),
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
@@ -1218,6 +1222,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_unencrypted_client(w),
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
@@ -1453,6 +1458,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1688,6 +1694,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1923,6 +1930,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2158,6 +2166,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_INSPECT_HONOR_STATS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -2404,6 +2413,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_MOVE_NOT_ACTIVE_MOVER(_) => "CMSG_MOVE_NOT_ACTIVE_MOVER",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_STATUS(_) => "CMSG_BATTLEFIELD_STATUS",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_PORT(_) => "CMSG_BATTLEFIELD_PORT",
+            ClientOpcodeMessage::MSG_INSPECT_HONOR_STATS(_) => "MSG_INSPECT_HONOR_STATS_Client",
             ClientOpcodeMessage::CMSG_BATTLEMASTER_HELLO(_) => "CMSG_BATTLEMASTER_HELLO",
             ClientOpcodeMessage::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_WALK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK",
@@ -3664,6 +3674,12 @@ impl From<CMSG_BATTLEFIELD_STATUS> for ClientOpcodeMessage {
 impl From<CMSG_BATTLEFIELD_PORT> for ClientOpcodeMessage {
     fn from(c: CMSG_BATTLEFIELD_PORT) -> Self {
         Self::CMSG_BATTLEFIELD_PORT(c)
+    }
+}
+
+impl From<MSG_INSPECT_HONOR_STATS_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_INSPECT_HONOR_STATS_Client) -> Self {
+        Self::MSG_INSPECT_HONOR_STATS(c)
     }
 }
 
