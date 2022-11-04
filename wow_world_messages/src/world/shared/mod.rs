@@ -322,6 +322,7 @@ pub mod smsg_new_taxi_path_vanilla_tbc_wrath;
 pub mod smsg_notification_vanilla_tbc_wrath;
 pub mod smsg_pet_action_feedback_vanilla_tbc_wrath;
 pub mod smsg_pet_action_sound_vanilla_tbc_wrath;
+pub mod smsg_pet_broken_vanilla_tbc_wrath;
 pub mod smsg_petition_show_signatures_vanilla_tbc_wrath;
 pub mod smsg_petition_sign_results_tbc_wrath;
 pub mod smsg_play_object_sound_vanilla_tbc_wrath;

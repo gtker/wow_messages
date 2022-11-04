@@ -2,6 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+/// Not implemented in any Wrath emulator.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_broken.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_broken.wowm#L3):
 /// ```text
 /// smsg SMSG_PET_BROKEN = 0x02AF {
@@ -32,4 +34,10 @@ impl crate::Message for SMSG_PET_BROKEN {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PET_BROKEN {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PET_BROKEN {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PET_BROKEN {}
 

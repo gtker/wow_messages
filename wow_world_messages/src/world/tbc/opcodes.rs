@@ -3827,6 +3827,7 @@ use crate::world::tbc::SMSG_LOOT_ROLL;
 use crate::world::tbc::SMSG_LOOT_MASTER_LIST;
 use crate::world::tbc::SMSG_SET_FORCED_REACTIONS;
 use crate::world::tbc::SMSG_CHAT_PLAYER_NOT_FOUND;
+use crate::world::tbc::SMSG_PET_BROKEN;
 use crate::world::tbc::SMSG_DUEL_COUNTDOWN;
 use crate::world::tbc::SMSG_AREA_TRIGGER_MESSAGE;
 use crate::world::tbc::SMSG_DURABILITY_DAMAGE_DEATH;
@@ -4033,6 +4034,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOOT_MASTER_LIST(SMSG_LOOT_MASTER_LIST),
     SMSG_SET_FORCED_REACTIONS(SMSG_SET_FORCED_REACTIONS),
     SMSG_CHAT_PLAYER_NOT_FOUND(SMSG_CHAT_PLAYER_NOT_FOUND),
+    SMSG_PET_BROKEN(SMSG_PET_BROKEN),
     SMSG_DUEL_COUNTDOWN(SMSG_DUEL_COUNTDOWN),
     SMSG_AREA_TRIGGER_MESSAGE(SMSG_AREA_TRIGGER_MESSAGE),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
@@ -4241,6 +4243,7 @@ impl ServerOpcodeMessage {
             0x02A4 => Ok(Self::SMSG_LOOT_MASTER_LIST(<SMSG_LOOT_MASTER_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A4, size: body_size, io, } } else { a } })?)),
             0x02A5 => Ok(Self::SMSG_SET_FORCED_REACTIONS(<SMSG_SET_FORCED_REACTIONS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A5, size: body_size, io, } } else { a } })?)),
             0x02A9 => Ok(Self::SMSG_CHAT_PLAYER_NOT_FOUND(<SMSG_CHAT_PLAYER_NOT_FOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A9, size: body_size, io, } } else { a } })?)),
+            0x02AF => Ok(Self::SMSG_PET_BROKEN(<SMSG_PET_BROKEN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AF, size: body_size, io, } } else { a } })?)),
             0x02B7 => Ok(Self::SMSG_DUEL_COUNTDOWN(<SMSG_DUEL_COUNTDOWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B7, size: body_size, io, } } else { a } })?)),
             0x02B8 => Ok(Self::SMSG_AREA_TRIGGER_MESSAGE(<SMSG_AREA_TRIGGER_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B8, size: body_size, io, } } else { a } })?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BD, size: body_size, io, } } else { a } })?)),
@@ -4517,6 +4520,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_MASTER_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PET_BROKEN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
@@ -4726,6 +4730,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_MASTER_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PET_BROKEN(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
@@ -4935,6 +4940,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_MASTER_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_BROKEN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5144,6 +5150,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_MASTER_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PET_BROKEN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5353,6 +5360,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_MASTER_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_BROKEN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5562,6 +5570,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_MASTER_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PET_BROKEN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
@@ -5773,6 +5782,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOOT_MASTER_LIST(_) => "SMSG_LOOT_MASTER_LIST",
             ServerOpcodeMessage::SMSG_SET_FORCED_REACTIONS(_) => "SMSG_SET_FORCED_REACTIONS",
             ServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => "SMSG_CHAT_PLAYER_NOT_FOUND",
+            ServerOpcodeMessage::SMSG_PET_BROKEN(_) => "SMSG_PET_BROKEN",
             ServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => "SMSG_DUEL_COUNTDOWN",
             ServerOpcodeMessage::SMSG_AREA_TRIGGER_MESSAGE(_) => "SMSG_AREA_TRIGGER_MESSAGE",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
@@ -6787,6 +6797,12 @@ impl From<SMSG_SET_FORCED_REACTIONS> for ServerOpcodeMessage {
 impl From<SMSG_CHAT_PLAYER_NOT_FOUND> for ServerOpcodeMessage {
     fn from(c: SMSG_CHAT_PLAYER_NOT_FOUND) -> Self {
         Self::SMSG_CHAT_PLAYER_NOT_FOUND(c)
+    }
+}
+
+impl From<SMSG_PET_BROKEN> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_BROKEN) -> Self {
+        Self::SMSG_PET_BROKEN(c)
     }
 }
 

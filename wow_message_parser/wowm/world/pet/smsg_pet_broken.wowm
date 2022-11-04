@@ -1,4 +1,6 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
-smsg SMSG_PET_BROKEN = 0x02AF {}
+smsg SMSG_PET_BROKEN = 0x02AF {} {
+    comment = "Not implemented in any Wrath emulator.";
+}
 

@@ -1088,6 +1088,8 @@ pub use crate::shared::smsg_pet_action_feedback_vanilla_tbc_wrath::SMSG_PET_ACTI
 
 pub use crate::shared::smsg_pet_action_sound_vanilla_tbc_wrath::SMSG_PET_ACTION_SOUND;
 
+pub use crate::shared::smsg_pet_broken_vanilla_tbc_wrath::SMSG_PET_BROKEN;
+
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 
 pub use crate::shared::smsg_play_object_sound_vanilla_tbc_wrath::SMSG_PLAY_OBJECT_SOUND;
@@ -1410,8 +1412,6 @@ pub(crate) mod smsg_pause_mirror_timer;
 pub use smsg_pause_mirror_timer::*;
 pub(crate) mod smsg_periodicauralog;
 pub use smsg_periodicauralog::*;
-pub(crate) mod smsg_pet_broken;
-pub use smsg_pet_broken::*;
 pub(crate) mod smsg_pet_cast_failed;
 pub use smsg_pet_cast_failed::*;
 pub(crate) mod smsg_pet_dismiss_sound;
