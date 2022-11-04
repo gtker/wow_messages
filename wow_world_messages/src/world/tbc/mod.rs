@@ -656,6 +656,8 @@ pub use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 
 pub use crate::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
 
+pub use crate::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
+
 pub use crate::shared::petition_result_tbc_wrath::PetitionResult;
 
 pub use crate::shared::petition_showlist_tbc_wrath::PetitionShowlist;
@@ -863,6 +865,8 @@ pub use crate::shared::smsg_pet_dismiss_sound_vanilla_tbc_wrath::SMSG_PET_DISMIS
 pub use crate::shared::smsg_pet_mode_vanilla_tbc_wrath::SMSG_PET_MODE;
 
 pub use crate::shared::smsg_pet_name_invalid_tbc_wrath::SMSG_PET_NAME_INVALID;
+
+pub use crate::shared::smsg_pet_tame_failure_vanilla_tbc::SMSG_PET_TAME_FAILURE;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 

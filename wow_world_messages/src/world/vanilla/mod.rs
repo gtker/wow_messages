@@ -506,8 +506,6 @@ pub(crate) mod party_result;
 pub use party_result::*;
 pub(crate) mod pet_spell_cooldown;
 pub use pet_spell_cooldown::*;
-pub(crate) mod pet_tame_failure_reason;
-pub use pet_tame_failure_reason::*;
 pub(crate) mod petition_result;
 pub use petition_result::*;
 pub(crate) mod petition_showlist;
@@ -910,6 +908,8 @@ pub use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 
 pub use crate::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
 
+pub use crate::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
+
 pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
 pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
@@ -1093,6 +1093,8 @@ pub use crate::shared::smsg_pet_broken_vanilla_tbc_wrath::SMSG_PET_BROKEN;
 pub use crate::shared::smsg_pet_dismiss_sound_vanilla_tbc_wrath::SMSG_PET_DISMISS_SOUND;
 
 pub use crate::shared::smsg_pet_mode_vanilla_tbc_wrath::SMSG_PET_MODE;
+
+pub use crate::shared::smsg_pet_tame_failure_vanilla_tbc::SMSG_PET_TAME_FAILURE;
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 
@@ -1424,8 +1426,6 @@ pub(crate) mod smsg_pet_name_query_response;
 pub use smsg_pet_name_query_response::*;
 pub(crate) mod smsg_pet_spells;
 pub use smsg_pet_spells::*;
-pub(crate) mod smsg_pet_tame_failure;
-pub use smsg_pet_tame_failure::*;
 pub(crate) mod smsg_pet_unlearn_confirm;
 pub use smsg_pet_unlearn_confirm::*;
 pub(crate) mod smsg_petition_query_response;
