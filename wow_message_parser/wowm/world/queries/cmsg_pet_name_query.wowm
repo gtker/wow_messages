@@ -1,8 +1,8 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_PET_NAME_QUERY = 0x52 {
     u32 pet_number;
     Guid guid;
+} {
+    versions = "1 2 3";
 }
 
 test CMSG_PET_NAME_QUERY {
@@ -13,5 +13,7 @@ test CMSG_PET_NAME_QUERY {
     0x52, 0x00, 0x00, 0x00, /* opcode */
     0xEF, 0xBE, 0xAD, 0xDE, /* pet_number */
     0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, /* guid */
-]
+] {
+    versions = "1.12";
+}
 

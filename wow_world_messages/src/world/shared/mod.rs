@@ -130,6 +130,7 @@ pub mod cmsg_page_text_query_tbc_wrath;
 pub mod cmsg_pet_abandon_vanilla_tbc_wrath;
 pub mod cmsg_pet_action_vanilla_tbc_wrath;
 pub mod cmsg_pet_cancel_aura_vanilla_tbc_wrath;
+pub mod cmsg_pet_name_query_vanilla_tbc_wrath;
 pub mod cmsg_pet_rename_tbc_wrath;
 pub mod cmsg_pet_set_action_vanilla_tbc_wrath;
 pub mod cmsg_pet_spell_autocast_vanilla_tbc_wrath;

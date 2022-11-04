@@ -23,6 +23,7 @@ use crate::world::tbc::CMSG_PLAYER_LOGOUT;
 use crate::world::tbc::CMSG_LOGOUT_REQUEST;
 use crate::world::tbc::CMSG_LOGOUT_CANCEL;
 use crate::world::tbc::CMSG_NAME_QUERY;
+use crate::world::tbc::CMSG_PET_NAME_QUERY;
 use crate::world::tbc::CMSG_GUILD_QUERY;
 use crate::world::tbc::CMSG_ITEM_QUERY_SINGLE;
 use crate::world::tbc::CMSG_PAGE_TEXT_QUERY;
@@ -257,6 +258,7 @@ pub enum ClientOpcodeMessage {
     CMSG_LOGOUT_REQUEST(CMSG_LOGOUT_REQUEST),
     CMSG_LOGOUT_CANCEL(CMSG_LOGOUT_CANCEL),
     CMSG_NAME_QUERY(CMSG_NAME_QUERY),
+    CMSG_PET_NAME_QUERY(CMSG_PET_NAME_QUERY),
     CMSG_GUILD_QUERY(CMSG_GUILD_QUERY),
     CMSG_ITEM_QUERY_SINGLE(CMSG_ITEM_QUERY_SINGLE),
     CMSG_PAGE_TEXT_QUERY(CMSG_PAGE_TEXT_QUERY),
@@ -493,6 +495,7 @@ impl ClientOpcodeMessage {
             0x004B => Ok(Self::CMSG_LOGOUT_REQUEST(<CMSG_LOGOUT_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004B, size: body_size, io, } } else { a } })?)),
             0x004E => Ok(Self::CMSG_LOGOUT_CANCEL(<CMSG_LOGOUT_CANCEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004E, size: body_size, io, } } else { a } })?)),
             0x0050 => Ok(Self::CMSG_NAME_QUERY(<CMSG_NAME_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0050, size: body_size, io, } } else { a } })?)),
+            0x0052 => Ok(Self::CMSG_PET_NAME_QUERY(<CMSG_PET_NAME_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0052, size: body_size, io, } } else { a } })?)),
             0x0054 => Ok(Self::CMSG_GUILD_QUERY(<CMSG_GUILD_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0054, size: body_size, io, } } else { a } })?)),
             0x0056 => Ok(Self::CMSG_ITEM_QUERY_SINGLE(<CMSG_ITEM_QUERY_SINGLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0056, size: body_size, io, } } else { a } })?)),
             0x005A => Ok(Self::CMSG_PAGE_TEXT_QUERY(<CMSG_PAGE_TEXT_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x005A, size: body_size, io, } } else { a } })?)),
@@ -797,6 +800,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOGOUT_CANCEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_NAME_QUERY(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PET_NAME_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PAGE_TEXT_QUERY(c) => c.write_encrypted_client(w, e),
@@ -1034,6 +1038,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOGOUT_CANCEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_NAME_QUERY(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PET_NAME_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_PAGE_TEXT_QUERY(c) => c.write_unencrypted_client(w),
@@ -1271,6 +1276,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PET_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PAGE_TEXT_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1508,6 +1514,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PET_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PAGE_TEXT_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1745,6 +1752,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PET_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PAGE_TEXT_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
@@ -1982,6 +1990,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PET_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_QUERY_SINGLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PAGE_TEXT_QUERY(c) => c.astd_write_unencrypted_client(w).await,
@@ -2254,6 +2263,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(_) => "CMSG_LOGOUT_REQUEST",
             ClientOpcodeMessage::CMSG_LOGOUT_CANCEL(_) => "CMSG_LOGOUT_CANCEL",
             ClientOpcodeMessage::CMSG_NAME_QUERY(_) => "CMSG_NAME_QUERY",
+            ClientOpcodeMessage::CMSG_PET_NAME_QUERY(_) => "CMSG_PET_NAME_QUERY",
             ClientOpcodeMessage::CMSG_GUILD_QUERY(_) => "CMSG_GUILD_QUERY",
             ClientOpcodeMessage::CMSG_ITEM_QUERY_SINGLE(_) => "CMSG_ITEM_QUERY_SINGLE",
             ClientOpcodeMessage::CMSG_PAGE_TEXT_QUERY(_) => "CMSG_PAGE_TEXT_QUERY",
@@ -2556,6 +2566,12 @@ impl From<CMSG_LOGOUT_CANCEL> for ClientOpcodeMessage {
 impl From<CMSG_NAME_QUERY> for ClientOpcodeMessage {
     fn from(c: CMSG_NAME_QUERY) -> Self {
         Self::CMSG_NAME_QUERY(c)
+    }
+}
+
+impl From<CMSG_PET_NAME_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_NAME_QUERY) -> Self {
+        Self::CMSG_PET_NAME_QUERY(c)
     }
 }
 
