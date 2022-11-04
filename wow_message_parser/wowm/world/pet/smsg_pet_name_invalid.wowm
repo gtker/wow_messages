@@ -1,4 +1,6 @@
-#tag_all versions "1.12";
+smsg SMSG_PET_NAME_INVALID = 0x0178 {} {
+    versions = "1.12";
+    comment = "Some emulators have this with fields, but it has been verified to be empty on 1.12 through reverse engineering.";
+}
 
-smsg SMSG_PET_NAME_INVALID = 0x0178 {}
 
