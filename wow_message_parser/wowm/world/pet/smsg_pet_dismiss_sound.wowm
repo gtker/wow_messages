@@ -1,7 +1,9 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_PET_DISMISS_SOUND = 0x0325 {
     u32 sound_id;
     Vector3d position;
+} {
+    comment= "Not implemented in any Wrath emulators.";
 }
 

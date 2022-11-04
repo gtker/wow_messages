@@ -1,8 +1,10 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Vector3d;
+use wow_world_base::vanilla::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
+/// Not implemented in any Wrath emulators.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_dismiss_sound.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_dismiss_sound.wowm#L3):
 /// ```text
 /// smsg SMSG_PET_DISMISS_SOUND = 0x0325 {
@@ -51,4 +53,10 @@ impl crate::Message for SMSG_PET_DISMISS_SOUND {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PET_DISMISS_SOUND {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PET_DISMISS_SOUND {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PET_DISMISS_SOUND {}
 

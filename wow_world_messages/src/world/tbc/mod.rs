@@ -848,6 +848,8 @@ pub use crate::shared::smsg_pet_action_sound_vanilla_tbc_wrath::SMSG_PET_ACTION_
 
 pub use crate::shared::smsg_pet_broken_vanilla_tbc_wrath::SMSG_PET_BROKEN;
 
+pub use crate::shared::smsg_pet_dismiss_sound_vanilla_tbc_wrath::SMSG_PET_DISMISS_SOUND;
+
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 
 pub use crate::shared::smsg_petition_sign_results_tbc_wrath::SMSG_PETITION_SIGN_RESULTS;

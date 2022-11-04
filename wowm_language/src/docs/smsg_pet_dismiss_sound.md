@@ -1,6 +1,10 @@
 # SMSG_PET_DISMISS_SOUND
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
+
+### Comment
+
+Not implemented in any Wrath emulators.
 
 ### Wowm Representation
 
