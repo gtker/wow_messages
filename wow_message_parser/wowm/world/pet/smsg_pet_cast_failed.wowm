@@ -1,10 +1,34 @@
-#tag_all versions "1.12";
-
 smsg SMSG_PET_CAST_FAILED = 0x0138 {
     Spell id;
     u8 unknown1 {
         comment = "vmangos sets to 2 and cmangos sets to 0.";
     }
     SpellCastResult result;
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_PET_CAST_FAILED = 0x0138 {
+    Spell id;
+    SpellCastResult result;
+    Bool multiple_casts;
+    if (result == REQUIRES_SPELL_FOCUS) {
+         u32 spell_focus;
+    }
+    else if (result == REQUIRES_AREA) {
+        Area area;
+    }
+    else if (result == TOTEMS) {
+        u32[2] totems;
+    }
+    else if (result == TOTEM_CATEGORY) {
+        u32[2] totem_categories;
+    }
+    else if (result == EQUIPPED_ITEM_CLASS) {
+        u32 item_class;
+        u32 item_sub_class;
+        u32 item_inventory_type;
+    }
+} {
+    versions = "2.4.3";
+}
