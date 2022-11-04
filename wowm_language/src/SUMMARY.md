@@ -240,6 +240,7 @@
 - [CMSG_BATTLEMASTER_JOIN](docs/cmsg_battlemaster_join.md)
 - [CMSG_BEGIN_TRADE](docs/cmsg_begin_trade.md)
 - [CMSG_BINDER_ACTIVATE](docs/cmsg_binder_activate.md)
+- [CMSG_BOOTME](docs/cmsg_bootme.md)
 - [CMSG_BUG](docs/cmsg_bug.md)
 - [CMSG_BUSY_TRADE](docs/cmsg_busy_trade.md)
 - [CMSG_BUYBACK_ITEM](docs/cmsg_buyback_item.md)

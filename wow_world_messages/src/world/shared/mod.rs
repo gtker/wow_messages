@@ -36,6 +36,7 @@ pub mod cmsg_battlefield_port_tbc_wrath;
 pub mod cmsg_battlefield_status_vanilla_tbc_wrath;
 pub mod cmsg_battlemaster_hello_vanilla_tbc_wrath;
 pub mod cmsg_binder_activate_vanilla_tbc_wrath;
+pub mod cmsg_bootme_vanilla_tbc_wrath;
 pub mod cmsg_bug_vanilla_tbc_wrath;
 pub mod cmsg_buy_bank_slot_vanilla_tbc_wrath;
 pub mod cmsg_buy_item_in_slot_vanilla_tbc;

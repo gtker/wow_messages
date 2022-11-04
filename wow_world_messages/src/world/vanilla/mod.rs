@@ -554,6 +554,8 @@ pub use crate::shared::cmsg_battlemaster_hello_vanilla_tbc_wrath::CMSG_BATTLEMAS
 
 pub use crate::shared::cmsg_binder_activate_vanilla_tbc_wrath::CMSG_BINDER_ACTIVATE;
 
+pub use crate::shared::cmsg_bootme_vanilla_tbc_wrath::CMSG_BOOTME;
+
 pub use crate::shared::cmsg_bug_vanilla_tbc_wrath::CMSG_BUG;
 
 pub use crate::shared::cmsg_buy_bank_slot_vanilla_tbc_wrath::CMSG_BUY_BANK_SLOT;
