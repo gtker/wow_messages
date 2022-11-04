@@ -404,6 +404,8 @@ pub use crate::shared::cmsg_item_name_query_vanilla_tbc_wrath::CMSG_ITEM_NAME_QU
 
 pub use crate::shared::cmsg_item_query_single_tbc_wrath::CMSG_ITEM_QUERY_SINGLE;
 
+pub use crate::shared::cmsg_item_text_query_vanilla_tbc::CMSG_ITEM_TEXT_QUERY;
+
 pub use crate::shared::cmsg_join_channel_tbc_wrath::CMSG_JOIN_CHANNEL;
 
 pub use crate::shared::cmsg_leave_channel_tbc_wrath::CMSG_LEAVE_CHANNEL;

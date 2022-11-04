@@ -68,6 +68,8 @@ pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
 pub(crate) mod cmsg_gmticket_create;
 pub use cmsg_gmticket_create::*;
+pub(crate) mod cmsg_item_text_query;
+pub use cmsg_item_text_query::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
 pub(crate) mod cmsg_lfd_player_lock_info_request;
