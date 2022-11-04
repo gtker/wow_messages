@@ -145,7 +145,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
         Guid target5;
     }
     SizedCString message;
-    PlayerChatTag chat_tag;
+    PlayerChatTag tag;
 }
 ```
 ### Header
@@ -197,7 +197,7 @@ Else If chat_type is equal to `CHANNEL`:
 Else: 
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |  |
 | - | - / - | SizedCString | message |  |  |
-| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag |  |  |
+| - | 1 / - | [PlayerChatTag](playerchattag.md) | tag |  |  |
 
 # SMSG_MESSAGECHAT
 
@@ -244,7 +244,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
         Guid target6;
     }
     SizedCString message;
-    PlayerChatTag chat_tag;
+    PlayerChatTag tag;
 }
 ```
 ### Header
@@ -313,5 +313,5 @@ Else If chat_type is equal to `CHANNEL`:
 Else: 
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | target6 |  |  |
 | - | - / - | SizedCString | message |  |  |
-| - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag |  |  |
+| - | 1 / - | [PlayerChatTag](playerchattag.md) | tag |  |  |
 

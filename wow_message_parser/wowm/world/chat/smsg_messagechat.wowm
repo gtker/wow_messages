@@ -118,7 +118,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
         Guid target5;
     }
     SizedCString message;
-    PlayerChatTag chat_tag;
+    PlayerChatTag tag;
 } {
     versions = "2.4.3";
 }
@@ -172,7 +172,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
         Guid target6;
     }
     SizedCString message;
-    PlayerChatTag chat_tag;
+    PlayerChatTag tag;
     /* TODO BUG_SEPARATE_IF_DOUBLE_WRITE if (chat_type == ACHIEVEMENT
      || chat_type == GUILD_ACHIEVEMENT)
     {

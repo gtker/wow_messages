@@ -45,7 +45,7 @@ use std::io::{Write, Read};
 ///         Guid target6;
 ///     }
 ///     SizedCString message;
-///     PlayerChatTag chat_tag;
+///     PlayerChatTag tag;
 /// }
 /// ```
 pub struct SMSG_MESSAGECHAT {
@@ -56,7 +56,7 @@ pub struct SMSG_MESSAGECHAT {
     ///
     pub flags: u32,
     pub message: String,
-    pub chat_tag: PlayerChatTag,
+    pub tag: PlayerChatTag,
 }
 
 impl crate::Message for SMSG_MESSAGECHAT {
@@ -524,8 +524,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
         // Null terminator
         w.write_all(&[0])?;
 
-        // chat_tag: PlayerChatTag
-        w.write_all(&(self.chat_tag.as_int() as u8).to_le_bytes())?;
+        // tag: PlayerChatTag
+        w.write_all(&(self.tag.as_int() as u8).to_le_bytes())?;
 
         assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
@@ -1020,8 +1020,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
         let message = crate::util::read_u32_le(r)?;
         let message = crate::util::read_sized_c_string_to_vec(r, message)?;
         let message = String::from_utf8(message)?;;
-        // chat_tag: PlayerChatTag
-        let chat_tag: PlayerChatTag = crate::util::read_u8_le(r)?.try_into()?;
+        // tag: PlayerChatTag
+        let tag: PlayerChatTag = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             chat_type: chat_type_if,
@@ -1029,7 +1029,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             sender,
             flags,
             message,
-            chat_tag,
+            tag,
         })
     }
 
@@ -1044,7 +1044,7 @@ impl SMSG_MESSAGECHAT {
         + 8 // sender: Guid
         + 4 // flags: u32
         + self.message.len() + 5 // message: SizedCString
-        + 1 // chat_tag: PlayerChatTag
+        + 1 // tag: PlayerChatTag
     }
 }
 
