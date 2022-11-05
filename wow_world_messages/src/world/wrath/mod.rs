@@ -167,6 +167,8 @@ pub(crate) mod movement_info;
 pub use movement_info::*;
 pub(crate) mod msg_auction_hello_server;
 pub use msg_auction_hello_server::*;
+pub(crate) mod msg_corpse_query_server;
+pub use msg_corpse_query_server::*;
 pub(crate) mod msg_guild_bank_money_withdrawn;
 pub use msg_guild_bank_money_withdrawn::*;
 pub(crate) mod msg_move_fall_land;
@@ -583,6 +585,8 @@ pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESE
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
+
+pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
 pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
 

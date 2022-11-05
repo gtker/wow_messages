@@ -187,6 +187,7 @@ pub mod cmsg_tutorial_flag_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_reset_vanilla_tbc_wrath;
 pub mod cmsg_unstable_pet_vanilla_tbc_wrath;
 pub mod cmsg_wrap_item_vanilla_tbc_wrath;
+pub mod corpse_query_result_vanilla_tbc_wrath;
 pub mod declined_pet_name_included_tbc_wrath;
 pub mod duel_winner_reason_vanilla_tbc_wrath;
 pub mod dungeon_difficulty_tbc_wrath;

@@ -93,6 +93,8 @@ pub(crate) mod movement_flags;
 pub use movement_flags::*;
 pub(crate) mod movement_info;
 pub use movement_info::*;
+pub(crate) mod msg_corpse_query_server;
+pub use msg_corpse_query_server::*;
 pub(crate) mod msg_move_fall_land_client;
 pub use msg_move_fall_land_client::*;
 pub(crate) mod msg_move_fall_land_server;
@@ -577,6 +579,8 @@ pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESE
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
+
+pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
 pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
 

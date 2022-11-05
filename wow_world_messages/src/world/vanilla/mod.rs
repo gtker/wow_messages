@@ -256,8 +256,6 @@ pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
 pub(crate) mod cooldown_spell;
 pub use cooldown_spell::*;
-pub(crate) mod corpse_query_result;
-pub use corpse_query_result::*;
 pub use crate::helper::vanilla::*;
 pub(crate) mod damage_info;
 pub use damage_info::*;
@@ -809,6 +807,8 @@ pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESE
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
+
+pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
 pub use crate::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
 
