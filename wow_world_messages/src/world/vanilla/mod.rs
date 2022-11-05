@@ -230,8 +230,6 @@ pub(crate) mod cmsg_spirit_healer_activate;
 pub use cmsg_spirit_healer_activate::*;
 pub(crate) mod cmsg_summon_response;
 pub use cmsg_summon_response::*;
-pub(crate) mod cmsg_taxinode_status_query;
-pub use cmsg_taxinode_status_query::*;
 pub(crate) mod cmsg_taxiqueryavailablenodes;
 pub use cmsg_taxiqueryavailablenodes::*;
 pub(crate) mod cmsg_text_emote;
@@ -791,6 +789,8 @@ pub use crate::shared::cmsg_standstatechange_vanilla_tbc_wrath::CMSG_STANDSTATEC
 pub use crate::shared::cmsg_swap_inv_item_vanilla_tbc_wrath::CMSG_SWAP_INV_ITEM;
 
 pub use crate::shared::cmsg_swap_item_vanilla_tbc_wrath::CMSG_SWAP_ITEM;
+
+pub use crate::shared::cmsg_taxinode_status_query_vanilla_tbc_wrath::CMSG_TAXINODE_STATUS_QUERY;
 
 pub use crate::shared::cmsg_teleport_to_unit_vanilla_tbc_wrath::CMSG_TELEPORT_TO_UNIT;
 

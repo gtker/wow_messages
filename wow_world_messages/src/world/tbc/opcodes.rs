@@ -140,6 +140,7 @@ use crate::world::tbc::CMSG_LIST_INVENTORY;
 use crate::world::tbc::CMSG_SELL_ITEM;
 use crate::world::tbc::CMSG_BUY_ITEM;
 use crate::world::tbc::CMSG_BUY_ITEM_IN_SLOT;
+use crate::world::tbc::CMSG_TAXINODE_STATUS_QUERY;
 use crate::world::tbc::CMSG_ACTIVATETAXI;
 use crate::world::tbc::CMSG_BINDER_ACTIVATE;
 use crate::world::tbc::CMSG_BANKER_ACTIVATE;
@@ -380,6 +381,7 @@ pub enum ClientOpcodeMessage {
     CMSG_SELL_ITEM(CMSG_SELL_ITEM),
     CMSG_BUY_ITEM(CMSG_BUY_ITEM),
     CMSG_BUY_ITEM_IN_SLOT(CMSG_BUY_ITEM_IN_SLOT),
+    CMSG_TAXINODE_STATUS_QUERY(CMSG_TAXINODE_STATUS_QUERY),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
     CMSG_BINDER_ACTIVATE(CMSG_BINDER_ACTIVATE),
     CMSG_BANKER_ACTIVATE(CMSG_BANKER_ACTIVATE),
@@ -622,6 +624,7 @@ impl ClientOpcodeMessage {
             0x01A0 => Ok(Self::CMSG_SELL_ITEM(<CMSG_SELL_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A0, size: body_size, io, } } else { a } })?)),
             0x01A2 => Ok(Self::CMSG_BUY_ITEM(<CMSG_BUY_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A2, size: body_size, io, } } else { a } })?)),
             0x01A3 => Ok(Self::CMSG_BUY_ITEM_IN_SLOT(<CMSG_BUY_ITEM_IN_SLOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A3, size: body_size, io, } } else { a } })?)),
+            0x01AA => Ok(Self::CMSG_TAXINODE_STATUS_QUERY(<CMSG_TAXINODE_STATUS_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AA, size: body_size, io, } } else { a } })?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AD, size: body_size, io, } } else { a } })?)),
             0x01B5 => Ok(Self::CMSG_BINDER_ACTIVATE(<CMSG_BINDER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B5, size: body_size, io, } } else { a } })?)),
             0x01B7 => Ok(Self::CMSG_BANKER_ACTIVATE(<CMSG_BANKER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B7, size: body_size, io, } } else { a } })?)),
@@ -932,6 +935,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SELL_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUY_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_TAXINODE_STATUS_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BINDER_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BANKER_ACTIVATE(c) => c.write_encrypted_client(w, e),
@@ -1175,6 +1179,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SELL_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUY_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_TAXINODE_STATUS_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
             Self::CMSG_BINDER_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_BANKER_ACTIVATE(c) => c.write_unencrypted_client(w),
@@ -1418,6 +1423,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SELL_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TAXINODE_STATUS_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BINDER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BANKER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1661,6 +1667,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SELL_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TAXINODE_STATUS_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BINDER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BANKER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1904,6 +1911,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SELL_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TAXINODE_STATUS_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BINDER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BANKER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2147,6 +2155,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SELL_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM_IN_SLOT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TAXINODE_STATUS_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BINDER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BANKER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2425,6 +2434,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SELL_ITEM(_) => "CMSG_SELL_ITEM",
             ClientOpcodeMessage::CMSG_BUY_ITEM(_) => "CMSG_BUY_ITEM",
             ClientOpcodeMessage::CMSG_BUY_ITEM_IN_SLOT(_) => "CMSG_BUY_ITEM_IN_SLOT",
+            ClientOpcodeMessage::CMSG_TAXINODE_STATUS_QUERY(_) => "CMSG_TAXINODE_STATUS_QUERY",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
             ClientOpcodeMessage::CMSG_BINDER_ACTIVATE(_) => "CMSG_BINDER_ACTIVATE",
             ClientOpcodeMessage::CMSG_BANKER_ACTIVATE(_) => "CMSG_BANKER_ACTIVATE",
@@ -3318,6 +3328,12 @@ impl From<CMSG_BUY_ITEM> for ClientOpcodeMessage {
 impl From<CMSG_BUY_ITEM_IN_SLOT> for ClientOpcodeMessage {
     fn from(c: CMSG_BUY_ITEM_IN_SLOT) -> Self {
         Self::CMSG_BUY_ITEM_IN_SLOT(c)
+    }
+}
+
+impl From<CMSG_TAXINODE_STATUS_QUERY> for ClientOpcodeMessage {
+    fn from(c: CMSG_TAXINODE_STATUS_QUERY) -> Self {
+        Self::CMSG_TAXINODE_STATUS_QUERY(c)
     }
 }
 
