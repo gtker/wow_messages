@@ -852,6 +852,8 @@ pub use crate::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
 
 pub use crate::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 
+pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
+
 pub use crate::shared::meeting_stone_status_vanilla_tbc::MeetingStoneStatus;
 
 pub use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;

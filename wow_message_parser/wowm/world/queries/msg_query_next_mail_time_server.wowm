@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {
     /* TODO: Figure out if Cmangos is correct in this */
     f32 unread_mails {
@@ -9,5 +7,42 @@ smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {
     }
 } {
     comment = "mangoszero/vmangos: No idea when this is called.";
+    versions = "1.12";
 }
 
+enum MailMessageType : u32 {
+    NORMAL         = 0;
+    AUCTION        = 2;
+    CREATURE       = 3 {
+        comment = "client send CMSG_CREATURE_QUERY on this mailmessagetype";
+    }
+    GAMEOBJECT     = 4 {
+        comment = "client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype";
+    }
+    ITEM           = 5 {
+        comment = "client send CMSG_ITEM_QUERY on this mailmessagetype";
+    }
+} {
+    versions = "1 2 3";
+}
+
+struct ReceivedMail {
+    Guid sender;
+    u32 auction_house_id;
+    MailMessageType message_type;
+    u32 stationery;
+    f32 time {
+        comment = "mangosone sets to `0xC6000000`";
+        comment = "mangosone: float unk, time or something";
+    }
+} {
+    versions = "2.4.3 3";
+}
+
+smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {
+    u32 float;
+    u32 amount_of_mails;
+    ReceivedMail[amount_of_mails] mails;
+} {
+    versions = "2.4.3 3";
+}

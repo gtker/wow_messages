@@ -642,6 +642,8 @@ pub use crate::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 
 pub use crate::shared::mail_item_tbc_wrath::MailItem;
 
+pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
+
 pub use crate::shared::meeting_stone_status_vanilla_tbc::MeetingStoneStatus;
 
 pub use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
@@ -675,6 +677,8 @@ pub use crate::shared::msg_petition_rename_vanilla_tbc_wrath::MSG_PETITION_RENAM
 pub use crate::shared::msg_pvp_log_data_client_vanilla_tbc_wrath::MSG_PVP_LOG_DATA_Client;
 
 pub use crate::shared::msg_query_next_mail_time_client_vanilla_tbc_wrath::MSG_QUERY_NEXT_MAIL_TIME_Client;
+
+pub use crate::shared::msg_query_next_mail_time_server_tbc_wrath::MSG_QUERY_NEXT_MAIL_TIME_Server;
 
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;
 
@@ -719,6 +723,8 @@ pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 pub use crate::shared::quest_item_vanilla_tbc::QuestItem;
 
 pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
+
+pub use crate::shared::received_mail_tbc_wrath::ReceivedMail;
 
 pub use crate::shared::roll_vote_tbc_wrath::RollVote;
 
