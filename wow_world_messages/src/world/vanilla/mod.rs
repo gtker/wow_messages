@@ -339,8 +339,6 @@ pub(crate) mod movement_flags;
 pub use movement_flags::*;
 pub(crate) mod movement_info;
 pub use movement_info::*;
-pub(crate) mod msg_corpse_query_client;
-pub use msg_corpse_query_client::*;
 pub(crate) mod msg_corpse_query_server;
 pub use msg_corpse_query_server::*;
 pub(crate) mod msg_inspect_honor_stats_server;
@@ -865,6 +863,8 @@ pub use crate::shared::msg_auction_hello_server_vanilla_tbc::MSG_AUCTION_HELLO_S
 pub use crate::shared::msg_battleground_player_positions_client_vanilla_tbc_wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Client;
 
 pub use crate::shared::msg_battleground_player_positions_server_vanilla_tbc_wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
+
+pub use crate::shared::msg_corpse_query_client_vanilla_tbc_wrath::MSG_CORPSE_QUERY_Client;
 
 pub use crate::shared::msg_inspect_honor_stats_client_vanilla_tbc_wrath::MSG_INSPECT_HONOR_STATS_Client;
 
