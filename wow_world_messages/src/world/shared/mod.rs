@@ -175,6 +175,7 @@ pub mod cmsg_standstatechange_vanilla_tbc_wrath;
 pub mod cmsg_swap_inv_item_vanilla_tbc_wrath;
 pub mod cmsg_swap_item_vanilla_tbc_wrath;
 pub mod cmsg_taxinode_status_query_vanilla_tbc_wrath;
+pub mod cmsg_taxiqueryavailablenodes_vanilla_tbc_wrath;
 pub mod cmsg_teleport_to_unit_vanilla_tbc_wrath;
 pub mod cmsg_time_sync_resp_tbc_wrath;
 pub mod cmsg_toggle_cloak_vanilla_tbc_wrath;

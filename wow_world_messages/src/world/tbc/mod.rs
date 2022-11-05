@@ -554,6 +554,8 @@ pub use crate::shared::cmsg_swap_item_vanilla_tbc_wrath::CMSG_SWAP_ITEM;
 
 pub use crate::shared::cmsg_taxinode_status_query_vanilla_tbc_wrath::CMSG_TAXINODE_STATUS_QUERY;
 
+pub use crate::shared::cmsg_taxiqueryavailablenodes_vanilla_tbc_wrath::CMSG_TAXIQUERYAVAILABLENODES;
+
 pub use crate::shared::cmsg_teleport_to_unit_vanilla_tbc_wrath::CMSG_TELEPORT_TO_UNIT;
 
 pub use crate::shared::cmsg_time_sync_resp_tbc_wrath::CMSG_TIME_SYNC_RESP;
