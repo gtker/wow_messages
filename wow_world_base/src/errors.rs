@@ -1,6 +1,6 @@
 use std::fmt::{Display, Formatter, Write};
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub struct EnumError {
     pub name: &'static str,
     pub value: u32,
