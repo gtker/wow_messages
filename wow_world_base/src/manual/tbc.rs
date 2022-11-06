@@ -2,6 +2,8 @@ use crate::tbc::Race;
 use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
 
+pub use crate::manual::PlayerGender;
+
 /// Enum containing only the races players are actually allowed to be.
 ///
 /// The regular [Race](crate::tbc::Race) enum also has several races which don't
