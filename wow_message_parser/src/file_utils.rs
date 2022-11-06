@@ -157,6 +157,14 @@ impl ModFiles {
                 base_directory().join(major_version_to_string(version)),
                 (get_module_name(name), SubmoduleLocation::PubUseInternal),
             );
+
+            self.add_or_append_file(
+                base_directory().join(major_version_to_string(version)),
+                (
+                    format!("crate::manual::{}", major_version_to_string(version)),
+                    SubmoduleLocation::PubUseOnly,
+                ),
+            );
         }
 
         self.add_or_append_file(

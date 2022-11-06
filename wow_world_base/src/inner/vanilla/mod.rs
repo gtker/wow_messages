@@ -1,5 +1,6 @@
 pub(crate) mod class;
 pub use class::*;
+pub use crate::manual::vanilla::*;
 pub(crate) mod gender;
 pub use gender::*;
 pub(crate) mod map;
