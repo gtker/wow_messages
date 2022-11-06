@@ -4153,6 +4153,7 @@ use crate::world::wrath::SMSG_LOGOUT_RESPONSE;
 use crate::world::wrath::SMSG_LOGOUT_COMPLETE;
 use crate::world::wrath::SMSG_LOGOUT_CANCEL_ACK;
 use crate::world::wrath::SMSG_NAME_QUERY_RESPONSE;
+use crate::world::wrath::SMSG_CREATURE_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_CONTACT_LIST;
 use crate::world::wrath::SMSG_GUILD_INVITE;
 use crate::world::wrath::SMSG_GUILD_INFO;
@@ -4381,6 +4382,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOGOUT_COMPLETE(SMSG_LOGOUT_COMPLETE),
     SMSG_LOGOUT_CANCEL_ACK(SMSG_LOGOUT_CANCEL_ACK),
     SMSG_NAME_QUERY_RESPONSE(SMSG_NAME_QUERY_RESPONSE),
+    SMSG_CREATURE_QUERY_RESPONSE(SMSG_CREATURE_QUERY_RESPONSE),
     SMSG_CONTACT_LIST(SMSG_CONTACT_LIST),
     SMSG_GUILD_INVITE(SMSG_GUILD_INVITE),
     SMSG_GUILD_INFO(SMSG_GUILD_INFO),
@@ -4611,6 +4613,7 @@ impl ServerOpcodeMessage {
             0x004D => Ok(Self::SMSG_LOGOUT_COMPLETE(<SMSG_LOGOUT_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004D, size: body_size, io, } } else { a } })?)),
             0x004F => Ok(Self::SMSG_LOGOUT_CANCEL_ACK(<SMSG_LOGOUT_CANCEL_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004F, size: body_size, io, } } else { a } })?)),
             0x0051 => Ok(Self::SMSG_NAME_QUERY_RESPONSE(<SMSG_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0051, size: body_size, io, } } else { a } })?)),
+            0x0061 => Ok(Self::SMSG_CREATURE_QUERY_RESPONSE(<SMSG_CREATURE_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0061, size: body_size, io, } } else { a } })?)),
             0x0067 => Ok(Self::SMSG_CONTACT_LIST(<SMSG_CONTACT_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0067, size: body_size, io, } } else { a } })?)),
             0x0083 => Ok(Self::SMSG_GUILD_INVITE(<SMSG_GUILD_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0083, size: body_size, io, } } else { a } })?)),
             0x0088 => Ok(Self::SMSG_GUILD_INFO(<SMSG_GUILD_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0088, size: body_size, io, } } else { a } })?)),
@@ -4990,6 +4993,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CONTACT_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_INVITE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_INFO(c) => c.write_encrypted_server(w, e),
@@ -5221,6 +5225,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CONTACT_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_INVITE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_INFO(c) => c.write_unencrypted_server(w),
@@ -5452,6 +5457,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CONTACT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INVITE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5683,6 +5689,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CONTACT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INVITE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INFO(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5914,6 +5921,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CONTACT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INVITE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INFO(c) => c.astd_write_encrypted_server(w, e).await,
@@ -6145,6 +6153,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CONTACT_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INVITE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INFO(c) => c.astd_write_unencrypted_server(w).await,
@@ -6378,6 +6387,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE(_) => "SMSG_LOGOUT_COMPLETE",
             ServerOpcodeMessage::SMSG_LOGOUT_CANCEL_ACK(_) => "SMSG_LOGOUT_CANCEL_ACK",
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(_) => "SMSG_NAME_QUERY_RESPONSE",
+            ServerOpcodeMessage::SMSG_CREATURE_QUERY_RESPONSE(_) => "SMSG_CREATURE_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_CONTACT_LIST(_) => "SMSG_CONTACT_LIST",
             ServerOpcodeMessage::SMSG_GUILD_INVITE(_) => "SMSG_GUILD_INVITE",
             ServerOpcodeMessage::SMSG_GUILD_INFO(_) => "SMSG_GUILD_INFO",
@@ -6819,6 +6829,12 @@ impl From<SMSG_LOGOUT_CANCEL_ACK> for ServerOpcodeMessage {
 impl From<SMSG_NAME_QUERY_RESPONSE> for ServerOpcodeMessage {
     fn from(c: SMSG_NAME_QUERY_RESPONSE) -> Self {
         Self::SMSG_NAME_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_CREATURE_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_CREATURE_QUERY_RESPONSE) -> Self {
+        Self::SMSG_CREATURE_QUERY_RESPONSE(c)
     }
 }
 

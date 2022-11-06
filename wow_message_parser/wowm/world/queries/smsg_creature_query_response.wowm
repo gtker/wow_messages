@@ -71,3 +71,42 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
     versions = "2.4.3";
 }
 
+smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
+    u32 creature_entry;
+    optional found {
+        CString name1;
+        CString name2;
+        CString name3;
+        CString name4;
+        CString sub_name;
+        CString description {
+            comment = "mangosone: 'Directions' for guard, string for Icons 2.3.0";
+        }
+        u32 type_flags;
+        u32 creature_type {
+            comment = "mangosone: CreatureType.dbc   wdbFeild8";
+        }
+        u32 creature_family {
+            comment = "mangosone: CreatureFamily.dbc";
+        }
+        u32 creature_rank {
+            comment = "mangosone: Creature Rank (elite, boss, etc)";
+        }
+        u32 kill_credit1 {
+            comment = "mangosone: new in 3.1";
+        }
+        u32 kill_credit2 {
+            comment = "mangosone: new in 3.1";
+        }
+        u32[4] display_ids;
+        f32 health_multiplier;
+        f32 mana_multiplier;
+        u8 racial_leader;
+        u32[6] quest_items;
+        u32 movement_id {
+            comment = "mangosone: CreatureMovementInfo.dbc";
+        }
+    }
+} {
+    versions = "3.3.5";
+}

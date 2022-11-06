@@ -1028,6 +1028,8 @@ pub(crate) mod smsg_clientcache_version;
 pub use smsg_clientcache_version::*;
 pub(crate) mod smsg_contact_list;
 pub use smsg_contact_list::*;
+pub(crate) mod smsg_creature_query_response;
+pub use smsg_creature_query_response::*;
 pub(crate) mod smsg_defense_message;
 pub use smsg_defense_message::*;
 pub(crate) mod smsg_destroy_object;
