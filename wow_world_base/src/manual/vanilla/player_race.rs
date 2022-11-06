@@ -2,8 +2,6 @@ use crate::vanilla::Race;
 use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
 
-pub use crate::manual::PlayerGender;
-
 /// Enum containing only the races players are actually allowed to be.
 ///
 /// The regular [Race](crate::vanilla::Race) enum also has the Goblin race
@@ -36,6 +34,21 @@ impl TryFrom<Race> for PlayerRace {
             Race::Troll => Self::Troll,
             race => return Err(race),
         })
+    }
+}
+
+impl From<PlayerRace> for Race {
+    fn from(v: PlayerRace) -> Self {
+        match v {
+            PlayerRace::Human => Self::Human,
+            PlayerRace::Orc => Self::Orc,
+            PlayerRace::Dwarf => Self::Dwarf,
+            PlayerRace::NightElf => Self::NightElf,
+            PlayerRace::Undead => Self::Undead,
+            PlayerRace::Tauren => Self::Tauren,
+            PlayerRace::Gnome => Self::Gnome,
+            PlayerRace::Troll => Self::Troll,
+        }
     }
 }
 
