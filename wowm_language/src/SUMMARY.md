@@ -278,6 +278,7 @@
 - [CMSG_CHAT_IGNORED](docs/cmsg_chat_ignored.md)
 - [CMSG_CLEAR_TRADE_ITEM](docs/cmsg_clear_trade_item.md)
 - [CMSG_COMPLETE_CINEMATIC](docs/cmsg_complete_cinematic.md)
+- [CMSG_CONTACT_LIST](docs/cmsg_contact_list.md)
 - [CMSG_CREATURE_QUERY](docs/cmsg_creature_query.md)
 - [CMSG_DELETEEQUIPMENT_SET](docs/cmsg_deleteequipment_set.md)
 - [CMSG_DEL_FRIEND](docs/cmsg_del_friend.md)
