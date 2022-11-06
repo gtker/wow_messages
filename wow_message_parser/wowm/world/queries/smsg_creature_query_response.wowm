@@ -1,5 +1,7 @@
 smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
-    u32 creature_entry;
+    u32 creature_entry {
+        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
+    }
     optional found {
         CString name1;
         CString name2;
@@ -35,7 +37,9 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
 }
 
 smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
-    u32 creature_entry;
+    u32 creature_entry {
+        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
+    }
     optional found {
         CString name1;
         CString name2;
@@ -72,7 +76,9 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
 }
 
 smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
-    u32 creature_entry;
+    u32 creature_entry {
+        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
+    }
     optional found {
         CString name1;
         CString name2;

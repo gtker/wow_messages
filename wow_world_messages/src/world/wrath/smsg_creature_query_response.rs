@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm:74`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm#L74):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm:78`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm#L78):
 /// ```text
 /// smsg SMSG_CREATURE_QUERY_RESPONSE = 0x0061 {
 ///     u32 creature_entry;
@@ -29,6 +29,8 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_CREATURE_QUERY_RESPONSE {
+    /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
+    ///
     pub creature_entry: u32,
     pub found: Option<SMSG_CREATURE_QUERY_RESPONSE_found>,
 }

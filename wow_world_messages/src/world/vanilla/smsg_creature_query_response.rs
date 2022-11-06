@@ -25,6 +25,8 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_CREATURE_QUERY_RESPONSE {
+    /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
+    ///
     pub creature_entry: u32,
     pub found: Option<SMSG_CREATURE_QUERY_RESPONSE_found>,
 }
