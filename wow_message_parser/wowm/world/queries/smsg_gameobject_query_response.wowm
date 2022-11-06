@@ -1,7 +1,7 @@
-#tag_all versions "1.12";
-
 smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
-    u32 entry_id;
+    u32 entry_id {
+        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
+    }
     /* TODO: INT_EQUALS */
     optional found {
         u32 info_type;
@@ -11,8 +11,53 @@ smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
         CString name3;
         CString name4;
         CString name5;
-        /* TODO: Sure? */
         u32[6] raw_data;
     }
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
+    u32 entry_id {
+        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
+    }
+    /* TODO: INT_EQUALS */
+    optional found {
+        u32 info_type;
+        u32 display_id;
+        CString name1;
+        CString name2;
+        CString name3;
+        CString name4;
+        CString icon_name;
+        CString cast_bar_caption;
+        CString unknown;
+        u32[6] raw_data;
+        f32 gameobject_size;
+    }
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
+    u32 entry_id {
+        comment = "When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``";
+    }
+    /* TODO: INT_EQUALS */
+    optional found {
+        u32 info_type;
+        u32 display_id;
+        CString name1;
+        CString name2;
+        CString name3;
+        CString name4;
+        CString icon_name;
+        CString cast_bar_caption;
+        CString unknown;
+        u32[6] raw_data;
+        f32 gameobject_size;
+        u32[6] gameobject_quest_items;
+    }
+} {
+    versions = "3.3.5";
+}

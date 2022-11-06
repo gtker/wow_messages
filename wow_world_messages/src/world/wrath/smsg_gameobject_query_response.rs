@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_gameobject_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_gameobject_query_response.wowm#L1):
+#[derive(Debug, Clone, PartialEq, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_gameobject_query_response.wowm:42`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_gameobject_query_response.wowm#L42):
 /// ```text
 /// smsg SMSG_GAMEOBJECT_QUERY_RESPONSE = 0x005F {
 ///     u32 entry_id;
@@ -13,8 +13,12 @@ use std::io::{Write, Read};
 ///         CString name2;
 ///         CString name3;
 ///         CString name4;
-///         CString name5;
+///         CString icon_name;
+///         CString cast_bar_caption;
+///         CString unknown;
 ///         u32[6] raw_data;
+///         f32 gameobject_size;
+///         u32[6] gameobject_quest_items;
 ///     }
 /// }
 /// ```
@@ -73,15 +77,37 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             // Null terminator
             w.write_all(&[0])?;
 
-            // name5: CString
+            // icon_name: CString
             // TODO: Guard against strings that are already null-terminated
-            assert_ne!(v.name5.as_bytes().iter().rev().next(), Some(&0_u8), "String `name5` must not be null-terminated.");
-            w.write_all(v.name5.as_bytes())?;
+            assert_ne!(v.icon_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `icon_name` must not be null-terminated.");
+            w.write_all(v.icon_name.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // cast_bar_caption: CString
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.cast_bar_caption.as_bytes().iter().rev().next(), Some(&0_u8), "String `cast_bar_caption` must not be null-terminated.");
+            w.write_all(v.cast_bar_caption.as_bytes())?;
+            // Null terminator
+            w.write_all(&[0])?;
+
+            // unknown: CString
+            // TODO: Guard against strings that are already null-terminated
+            assert_ne!(v.unknown.as_bytes().iter().rev().next(), Some(&0_u8), "String `unknown` must not be null-terminated.");
+            w.write_all(v.unknown.as_bytes())?;
             // Null terminator
             w.write_all(&[0])?;
 
             // raw_data: u32[6]
             for i in v.raw_data.iter() {
+                w.write_all(&i.to_le_bytes())?;
+            }
+
+            // gameobject_size: f32
+            w.write_all(&v.gameobject_size.to_le_bytes())?;
+
+            // gameobject_quest_items: u32[6]
+            for i in v.gameobject_quest_items.iter() {
                 w.write_all(&i.to_le_bytes())?;
             }
 
@@ -91,7 +117,7 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(4..=1316).contains(&body_size) {
+        if !(4..=1856).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005F, size: body_size as u32 });
         }
 
@@ -125,13 +151,29 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             let name4 = crate::util::read_c_string_to_vec(r)?;
             let name4 = String::from_utf8(name4)?;
 
-            // name5: CString
-            let name5 = crate::util::read_c_string_to_vec(r)?;
-            let name5 = String::from_utf8(name5)?;
+            // icon_name: CString
+            let icon_name = crate::util::read_c_string_to_vec(r)?;
+            let icon_name = String::from_utf8(icon_name)?;
+
+            // cast_bar_caption: CString
+            let cast_bar_caption = crate::util::read_c_string_to_vec(r)?;
+            let cast_bar_caption = String::from_utf8(cast_bar_caption)?;
+
+            // unknown: CString
+            let unknown = crate::util::read_c_string_to_vec(r)?;
+            let unknown = String::from_utf8(unknown)?;
 
             // raw_data: u32[6]
             let mut raw_data = [u32::default(); 6];
             for i in raw_data.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+
+            // gameobject_size: f32
+            let gameobject_size = crate::util::read_f32_le(r)?;
+            // gameobject_quest_items: u32[6]
+            let mut gameobject_quest_items = [u32::default(); 6];
+            for i in gameobject_quest_items.iter_mut() {
                 *i = crate::util::read_u32_le(r)?;
             }
 
@@ -142,8 +184,12 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
                 name2,
                 name3,
                 name4,
-                name5,
+                icon_name,
+                cast_bar_caption,
+                unknown,
                 raw_data,
+                gameobject_size,
+                gameobject_quest_items,
             })
         } else {
             None
@@ -156,8 +202,8 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
 
 impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
@@ -169,15 +215,19 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
             + found.name2.len() + 1 // name2: CString
             + found.name3.len() + 1 // name3: CString
             + found.name4.len() + 1 // name4: CString
-            + found.name5.len() + 1 // name5: CString
+            + found.icon_name.len() + 1 // icon_name: CString
+            + found.cast_bar_caption.len() + 1 // cast_bar_caption: CString
+            + found.unknown.len() + 1 // unknown: CString
             + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
+            + 4 // gameobject_size: f32
+            + 6 * core::mem::size_of::<u32>() // gameobject_quest_items: u32[6]
         } else {
             0
         }
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Default)]
 pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub info_type: u32,
     pub display_id: u32,
@@ -185,8 +235,12 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub name2: String,
     pub name3: String,
     pub name4: String,
-    pub name5: String,
+    pub icon_name: String,
+    pub cast_bar_caption: String,
+    pub unknown: String,
     pub raw_data: [u32; 6],
+    pub gameobject_size: f32,
+    pub gameobject_quest_items: [u32; 6],
 }
 
 impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
@@ -197,8 +251,12 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
         + self.name2.len() + 1 // name2: CString
         + self.name3.len() + 1 // name3: CString
         + self.name4.len() + 1 // name4: CString
-        + self.name5.len() + 1 // name5: CString
+        + self.icon_name.len() + 1 // icon_name: CString
+        + self.cast_bar_caption.len() + 1 // cast_bar_caption: CString
+        + self.unknown.len() + 1 // unknown: CString
         + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
+        + 4 // gameobject_size: f32
+        + 6 * core::mem::size_of::<u32>() // gameobject_quest_items: u32[6]
     }
 
 }
