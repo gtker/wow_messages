@@ -159,6 +159,7 @@ pub mod cmsg_questgiver_query_quest_vanilla_tbc;
 pub mod cmsg_questgiver_quest_autolaunch_vanilla_tbc_wrath;
 pub mod cmsg_questgiver_request_reward_vanilla_tbc_wrath;
 pub mod cmsg_questgiver_status_query_vanilla_tbc_wrath;
+pub mod cmsg_questlog_remove_quest_vanilla_tbc_wrath;
 pub mod cmsg_read_item_vanilla_tbc_wrath;
 pub mod cmsg_realm_split_tbc_wrath;
 pub mod cmsg_repair_item_tbc_wrath;
