@@ -33,3 +33,9 @@ impl crate::Message for SMSG_QUESTLOG_FULL {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_QUESTLOG_FULL {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_QUESTLOG_FULL {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_QUESTLOG_FULL {}
+
