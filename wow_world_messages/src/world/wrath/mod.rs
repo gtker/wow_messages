@@ -1008,6 +1008,8 @@ pub use wow_world_base::wrath::Vector3d;
 
 pub(crate) mod quest_failed_reason;
 pub use quest_failed_reason::*;
+pub(crate) mod quest_giver_status;
+pub use quest_giver_status::*;
 pub(crate) mod quest_item;
 pub use quest_item::*;
 pub(crate) mod quest_party_message;
@@ -1142,6 +1144,8 @@ pub(crate) mod smsg_questgiver_quest_failed;
 pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;
 pub use smsg_questgiver_quest_invalid::*;
+pub(crate) mod smsg_questgiver_status;
+pub use smsg_questgiver_status::*;
 pub(crate) mod smsg_sell_item;
 pub use smsg_sell_item::*;
 pub(crate) mod smsg_server_message;

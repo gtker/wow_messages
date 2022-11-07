@@ -1078,6 +1078,8 @@ pub use wow_world_base::tbc::Vector3d;
 
 pub(crate) mod quest_failed_reason;
 pub use quest_failed_reason::*;
+pub(crate) mod quest_giver_status;
+pub use quest_giver_status::*;
 pub(crate) mod race;
 pub use race::*;
 pub(crate) mod smsg_action_buttons;
@@ -1152,6 +1154,8 @@ pub(crate) mod smsg_questgiver_quest_failed;
 pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;
 pub use smsg_questgiver_quest_invalid::*;
+pub(crate) mod smsg_questgiver_status;
+pub use smsg_questgiver_status::*;
 pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
 pub(crate) mod smsg_set_proficiency;

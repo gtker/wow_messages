@@ -133,6 +133,44 @@ enum QuestGiverStatus : u8 {
     versions = "1.12";
 }
 
+enum QuestGiverStatus : u8 {
+    NONE = 0;
+    UNAVAILABLE = 1;
+    CHAT = 2;
+    INCOMPLETE = 3;
+    REWARD_REP = 4;
+    AVAILABLE_REP = 5;
+    AVAILABLE = 6;
+    REWARD_OLD = 7 {
+        comment = "red dot on minimap";
+    }
+    REWARD2 = 8 {
+        comment = "yellow dot on minimap";
+    }
+} {
+    versions = "2.4.3";
+}
+
+enum QuestGiverStatus : u8 {
+    DIALOG_STATUS_NONE                     = 0;
+    DIALOG_STATUS_UNAVAILABLE              = 1;
+    DIALOG_STATUS_LOW_LEVEL_AVAILABLE      = 2;
+    DIALOG_STATUS_LOW_LEVEL_REWARD_REP     = 3;
+    DIALOG_STATUS_LOW_LEVEL_AVAILABLE_REP  = 4;
+    DIALOG_STATUS_INCOMPLETE               = 5;
+    DIALOG_STATUS_REWARD_REP               = 6;
+    DIALOG_STATUS_AVAILABLE_REP            = 7;
+    DIALOG_STATUS_AVAILABLE                = 8;
+    DIALOG_STATUS_REWARD2                  = 9 {
+        comment = "no yellow dot on minimap";
+    }
+    DIALOG_STATUS_REWARD                   = 10 {
+        comment = "yellow dot on minimap";
+    }
+} {
+    versions = "3.3.5";
+}
+
 struct QuestItemReward {
     Item item;
     u32 item_count;

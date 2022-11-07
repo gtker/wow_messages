@@ -4318,6 +4318,7 @@ use crate::world::tbc::SMSG_PET_MODE;
 use crate::world::tbc::SMSG_GOSSIP_MESSAGE;
 use crate::world::tbc::SMSG_GOSSIP_COMPLETE;
 use crate::world::tbc::SMSG_NPC_TEXT_UPDATE;
+use crate::world::tbc::SMSG_QUESTGIVER_STATUS;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_INVALID;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_FAILED;
 use crate::world::tbc::SMSG_QUEST_CONFIRM_ACCEPT;
@@ -4547,6 +4548,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GOSSIP_MESSAGE(SMSG_GOSSIP_MESSAGE),
     SMSG_GOSSIP_COMPLETE(SMSG_GOSSIP_COMPLETE),
     SMSG_NPC_TEXT_UPDATE(SMSG_NPC_TEXT_UPDATE),
+    SMSG_QUESTGIVER_STATUS(SMSG_QUESTGIVER_STATUS),
     SMSG_QUESTGIVER_QUEST_INVALID(SMSG_QUESTGIVER_QUEST_INVALID),
     SMSG_QUESTGIVER_QUEST_FAILED(SMSG_QUESTGIVER_QUEST_FAILED),
     SMSG_QUEST_CONFIRM_ACCEPT(SMSG_QUEST_CONFIRM_ACCEPT),
@@ -4778,6 +4780,7 @@ impl ServerOpcodeMessage {
             0x017D => Ok(Self::SMSG_GOSSIP_MESSAGE(<SMSG_GOSSIP_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017D, size: body_size, io, } } else { a } })?)),
             0x017E => Ok(Self::SMSG_GOSSIP_COMPLETE(<SMSG_GOSSIP_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017E, size: body_size, io, } } else { a } })?)),
             0x0180 => Ok(Self::SMSG_NPC_TEXT_UPDATE(<SMSG_NPC_TEXT_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0180, size: body_size, io, } } else { a } })?)),
+            0x0183 => Ok(Self::SMSG_QUESTGIVER_STATUS(<SMSG_QUESTGIVER_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0183, size: body_size, io, } } else { a } })?)),
             0x018F => Ok(Self::SMSG_QUESTGIVER_QUEST_INVALID(<SMSG_QUESTGIVER_QUEST_INVALID as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018F, size: body_size, io, } } else { a } })?)),
             0x0192 => Ok(Self::SMSG_QUESTGIVER_QUEST_FAILED(<SMSG_QUESTGIVER_QUEST_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0192, size: body_size, io, } } else { a } })?)),
             0x019C => Ok(Self::SMSG_QUEST_CONFIRM_ACCEPT(<SMSG_QUEST_CONFIRM_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019C, size: body_size, io, } } else { a } })?)),
@@ -5077,6 +5080,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_QUESTGIVER_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_encrypted_server(w, e),
@@ -5309,6 +5313,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_QUESTGIVER_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_unencrypted_server(w),
@@ -5541,6 +5546,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTGIVER_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5773,6 +5779,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTGIVER_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -6005,6 +6012,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTGIVER_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -6237,6 +6245,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTGIVER_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_unencrypted_server(w).await,
@@ -6471,6 +6480,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GOSSIP_MESSAGE(_) => "SMSG_GOSSIP_MESSAGE",
             ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => "SMSG_GOSSIP_COMPLETE",
             ServerOpcodeMessage::SMSG_NPC_TEXT_UPDATE(_) => "SMSG_NPC_TEXT_UPDATE",
+            ServerOpcodeMessage::SMSG_QUESTGIVER_STATUS(_) => "SMSG_QUESTGIVER_STATUS",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_INVALID(_) => "SMSG_QUESTGIVER_QUEST_INVALID",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_FAILED(_) => "SMSG_QUESTGIVER_QUEST_FAILED",
             ServerOpcodeMessage::SMSG_QUEST_CONFIRM_ACCEPT(_) => "SMSG_QUEST_CONFIRM_ACCEPT",
@@ -7248,6 +7258,12 @@ impl From<SMSG_GOSSIP_COMPLETE> for ServerOpcodeMessage {
 impl From<SMSG_NPC_TEXT_UPDATE> for ServerOpcodeMessage {
     fn from(c: SMSG_NPC_TEXT_UPDATE) -> Self {
         Self::SMSG_NPC_TEXT_UPDATE(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_STATUS> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_STATUS) -> Self {
+        Self::SMSG_QUESTGIVER_STATUS(c)
     }
 }
 
