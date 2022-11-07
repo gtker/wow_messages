@@ -138,6 +138,7 @@ use crate::world::tbc::CMSG_NPC_TEXT_QUERY;
 use crate::world::tbc::CMSG_QUESTGIVER_STATUS_QUERY;
 use crate::world::tbc::CMSG_QUESTGIVER_QUERY_QUEST;
 use crate::world::tbc::CMSG_QUESTGIVER_ACCEPT_QUEST;
+use crate::world::tbc::CMSG_QUESTGIVER_CANCEL;
 use crate::world::tbc::CMSG_QUEST_CONFIRM_ACCEPT;
 use crate::world::tbc::CMSG_PUSHQUESTTOPARTY;
 use crate::world::tbc::CMSG_LIST_INVENTORY;
@@ -385,6 +386,7 @@ pub enum ClientOpcodeMessage {
     CMSG_QUESTGIVER_STATUS_QUERY(CMSG_QUESTGIVER_STATUS_QUERY),
     CMSG_QUESTGIVER_QUERY_QUEST(CMSG_QUESTGIVER_QUERY_QUEST),
     CMSG_QUESTGIVER_ACCEPT_QUEST(CMSG_QUESTGIVER_ACCEPT_QUEST),
+    CMSG_QUESTGIVER_CANCEL(CMSG_QUESTGIVER_CANCEL),
     CMSG_QUEST_CONFIRM_ACCEPT(CMSG_QUEST_CONFIRM_ACCEPT),
     CMSG_PUSHQUESTTOPARTY(CMSG_PUSHQUESTTOPARTY),
     CMSG_LIST_INVENTORY(CMSG_LIST_INVENTORY),
@@ -634,6 +636,7 @@ impl ClientOpcodeMessage {
             0x0182 => Ok(Self::CMSG_QUESTGIVER_STATUS_QUERY(<CMSG_QUESTGIVER_STATUS_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0182, size: body_size, io, } } else { a } })?)),
             0x0186 => Ok(Self::CMSG_QUESTGIVER_QUERY_QUEST(<CMSG_QUESTGIVER_QUERY_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0186, size: body_size, io, } } else { a } })?)),
             0x0189 => Ok(Self::CMSG_QUESTGIVER_ACCEPT_QUEST(<CMSG_QUESTGIVER_ACCEPT_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0189, size: body_size, io, } } else { a } })?)),
+            0x0190 => Ok(Self::CMSG_QUESTGIVER_CANCEL(<CMSG_QUESTGIVER_CANCEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0190, size: body_size, io, } } else { a } })?)),
             0x019B => Ok(Self::CMSG_QUEST_CONFIRM_ACCEPT(<CMSG_QUEST_CONFIRM_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019B, size: body_size, io, } } else { a } })?)),
             0x019D => Ok(Self::CMSG_PUSHQUESTTOPARTY(<CMSG_PUSHQUESTTOPARTY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019D, size: body_size, io, } } else { a } })?)),
             0x019E => Ok(Self::CMSG_LIST_INVENTORY(<CMSG_LIST_INVENTORY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019E, size: body_size, io, } } else { a } })?)),
@@ -951,6 +954,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_QUESTGIVER_CANCEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PUSHQUESTTOPARTY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LIST_INVENTORY(c) => c.write_encrypted_client(w, e),
@@ -1201,6 +1205,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_QUESTGIVER_CANCEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_unencrypted_client(w),
             Self::CMSG_PUSHQUESTTOPARTY(c) => c.write_unencrypted_client(w),
             Self::CMSG_LIST_INVENTORY(c) => c.write_unencrypted_client(w),
@@ -1451,6 +1456,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_CANCEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PUSHQUESTTOPARTY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LIST_INVENTORY(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1701,6 +1707,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_CANCEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PUSHQUESTTOPARTY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LIST_INVENTORY(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1951,6 +1958,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_CANCEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PUSHQUESTTOPARTY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LIST_INVENTORY(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2201,6 +2209,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_CANCEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PUSHQUESTTOPARTY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LIST_INVENTORY(c) => c.astd_write_unencrypted_client(w).await,
@@ -2486,6 +2495,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_QUERY(_) => "CMSG_QUESTGIVER_STATUS_QUERY",
             ClientOpcodeMessage::CMSG_QUESTGIVER_QUERY_QUEST(_) => "CMSG_QUESTGIVER_QUERY_QUEST",
             ClientOpcodeMessage::CMSG_QUESTGIVER_ACCEPT_QUEST(_) => "CMSG_QUESTGIVER_ACCEPT_QUEST",
+            ClientOpcodeMessage::CMSG_QUESTGIVER_CANCEL(_) => "CMSG_QUESTGIVER_CANCEL",
             ClientOpcodeMessage::CMSG_QUEST_CONFIRM_ACCEPT(_) => "CMSG_QUEST_CONFIRM_ACCEPT",
             ClientOpcodeMessage::CMSG_PUSHQUESTTOPARTY(_) => "CMSG_PUSHQUESTTOPARTY",
             ClientOpcodeMessage::CMSG_LIST_INVENTORY(_) => "CMSG_LIST_INVENTORY",
@@ -3376,6 +3386,12 @@ impl From<CMSG_QUESTGIVER_QUERY_QUEST> for ClientOpcodeMessage {
 impl From<CMSG_QUESTGIVER_ACCEPT_QUEST> for ClientOpcodeMessage {
     fn from(c: CMSG_QUESTGIVER_ACCEPT_QUEST) -> Self {
         Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_CANCEL> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_CANCEL) -> Self {
+        Self::CMSG_QUESTGIVER_CANCEL(c)
     }
 }
 
