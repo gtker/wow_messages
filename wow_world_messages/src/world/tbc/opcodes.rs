@@ -136,6 +136,7 @@ use crate::world::tbc::CMSG_GOSSIP_HELLO;
 use crate::world::tbc::CMSG_GOSSIP_SELECT_OPTION;
 use crate::world::tbc::CMSG_NPC_TEXT_QUERY;
 use crate::world::tbc::CMSG_QUESTGIVER_STATUS_QUERY;
+use crate::world::tbc::CMSG_QUESTGIVER_HELLO;
 use crate::world::tbc::CMSG_QUESTGIVER_QUERY_QUEST;
 use crate::world::tbc::CMSG_QUESTGIVER_ACCEPT_QUEST;
 use crate::world::tbc::CMSG_QUESTGIVER_COMPLETE_QUEST;
@@ -386,6 +387,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GOSSIP_SELECT_OPTION(CMSG_GOSSIP_SELECT_OPTION),
     CMSG_NPC_TEXT_QUERY(CMSG_NPC_TEXT_QUERY),
     CMSG_QUESTGIVER_STATUS_QUERY(CMSG_QUESTGIVER_STATUS_QUERY),
+    CMSG_QUESTGIVER_HELLO(CMSG_QUESTGIVER_HELLO),
     CMSG_QUESTGIVER_QUERY_QUEST(CMSG_QUESTGIVER_QUERY_QUEST),
     CMSG_QUESTGIVER_ACCEPT_QUEST(CMSG_QUESTGIVER_ACCEPT_QUEST),
     CMSG_QUESTGIVER_COMPLETE_QUEST(CMSG_QUESTGIVER_COMPLETE_QUEST),
@@ -638,6 +640,7 @@ impl ClientOpcodeMessage {
             0x017C => Ok(Self::CMSG_GOSSIP_SELECT_OPTION(<CMSG_GOSSIP_SELECT_OPTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017C, size: body_size, io, } } else { a } })?)),
             0x017F => Ok(Self::CMSG_NPC_TEXT_QUERY(<CMSG_NPC_TEXT_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017F, size: body_size, io, } } else { a } })?)),
             0x0182 => Ok(Self::CMSG_QUESTGIVER_STATUS_QUERY(<CMSG_QUESTGIVER_STATUS_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0182, size: body_size, io, } } else { a } })?)),
+            0x0184 => Ok(Self::CMSG_QUESTGIVER_HELLO(<CMSG_QUESTGIVER_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0184, size: body_size, io, } } else { a } })?)),
             0x0186 => Ok(Self::CMSG_QUESTGIVER_QUERY_QUEST(<CMSG_QUESTGIVER_QUERY_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0186, size: body_size, io, } } else { a } })?)),
             0x0189 => Ok(Self::CMSG_QUESTGIVER_ACCEPT_QUEST(<CMSG_QUESTGIVER_ACCEPT_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0189, size: body_size, io, } } else { a } })?)),
             0x018A => Ok(Self::CMSG_QUESTGIVER_COMPLETE_QUEST(<CMSG_QUESTGIVER_COMPLETE_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018A, size: body_size, io, } } else { a } })?)),
@@ -958,6 +961,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_NPC_TEXT_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_QUESTGIVER_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.write_encrypted_client(w, e),
@@ -1211,6 +1215,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_NPC_TEXT_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.write_unencrypted_client(w),
+            Self::CMSG_QUESTGIVER_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.write_unencrypted_client(w),
@@ -1464,6 +1469,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_NPC_TEXT_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1717,6 +1723,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_NPC_TEXT_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1970,6 +1977,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_NPC_TEXT_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2223,6 +2231,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GOSSIP_SELECT_OPTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_NPC_TEXT_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.astd_write_unencrypted_client(w).await,
@@ -2511,6 +2520,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GOSSIP_SELECT_OPTION(_) => "CMSG_GOSSIP_SELECT_OPTION",
             ClientOpcodeMessage::CMSG_NPC_TEXT_QUERY(_) => "CMSG_NPC_TEXT_QUERY",
             ClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_QUERY(_) => "CMSG_QUESTGIVER_STATUS_QUERY",
+            ClientOpcodeMessage::CMSG_QUESTGIVER_HELLO(_) => "CMSG_QUESTGIVER_HELLO",
             ClientOpcodeMessage::CMSG_QUESTGIVER_QUERY_QUEST(_) => "CMSG_QUESTGIVER_QUERY_QUEST",
             ClientOpcodeMessage::CMSG_QUESTGIVER_ACCEPT_QUEST(_) => "CMSG_QUESTGIVER_ACCEPT_QUEST",
             ClientOpcodeMessage::CMSG_QUESTGIVER_COMPLETE_QUEST(_) => "CMSG_QUESTGIVER_COMPLETE_QUEST",
@@ -3394,6 +3404,12 @@ impl From<CMSG_NPC_TEXT_QUERY> for ClientOpcodeMessage {
 impl From<CMSG_QUESTGIVER_STATUS_QUERY> for ClientOpcodeMessage {
     fn from(c: CMSG_QUESTGIVER_STATUS_QUERY) -> Self {
         Self::CMSG_QUESTGIVER_STATUS_QUERY(c)
+    }
+}
+
+impl From<CMSG_QUESTGIVER_HELLO> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUESTGIVER_HELLO) -> Self {
+        Self::CMSG_QUESTGIVER_HELLO(c)
     }
 }
 

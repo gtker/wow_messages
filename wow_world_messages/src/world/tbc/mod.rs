@@ -514,6 +514,8 @@ pub use crate::shared::cmsg_questgiver_choose_reward_vanilla_tbc_wrath::CMSG_QUE
 
 pub use crate::shared::cmsg_questgiver_complete_quest_vanilla_tbc_wrath::CMSG_QUESTGIVER_COMPLETE_QUEST;
 
+pub use crate::shared::cmsg_questgiver_hello_vanilla_tbc_wrath::CMSG_QUESTGIVER_HELLO;
+
 pub use crate::shared::cmsg_questgiver_query_quest_vanilla_tbc::CMSG_QUESTGIVER_QUERY_QUEST;
 
 pub use crate::shared::cmsg_questgiver_status_query_vanilla_tbc_wrath::CMSG_QUESTGIVER_STATUS_QUERY;
