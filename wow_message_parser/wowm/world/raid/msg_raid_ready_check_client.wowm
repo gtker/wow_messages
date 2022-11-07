@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg MSG_RAID_READY_CHECK_Client = 0x0322 {
     optional answer {

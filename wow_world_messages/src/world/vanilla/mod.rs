@@ -415,8 +415,6 @@ pub(crate) mod msg_pvp_log_data_server;
 pub use msg_pvp_log_data_server::*;
 pub(crate) mod msg_query_next_mail_time_server;
 pub use msg_query_next_mail_time_server::*;
-pub(crate) mod msg_raid_ready_check_client;
-pub use msg_raid_ready_check_client::*;
 pub(crate) mod msg_raid_ready_check_server;
 pub use msg_raid_ready_check_server::*;
 pub(crate) mod msg_raid_target_update_client;
@@ -885,6 +883,8 @@ pub use crate::shared::msg_pvp_log_data_client_vanilla_tbc_wrath::MSG_PVP_LOG_DA
 pub use crate::shared::msg_query_next_mail_time_client_vanilla_tbc_wrath::MSG_QUERY_NEXT_MAIL_TIME_Client;
 
 pub use crate::shared::msg_quest_push_result_vanilla_tbc::MSG_QUEST_PUSH_RESULT;
+
+pub use crate::shared::msg_raid_ready_check_client_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Client;
 
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;
 

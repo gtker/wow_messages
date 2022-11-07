@@ -704,6 +704,8 @@ pub use crate::shared::msg_query_next_mail_time_client_vanilla_tbc_wrath::MSG_QU
 
 pub use crate::shared::msg_query_next_mail_time_server_tbc_wrath::MSG_QUERY_NEXT_MAIL_TIME_Server;
 
+pub use crate::shared::msg_raid_ready_check_client_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Client;
+
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;
 
 pub use crate::shared::msg_random_roll_server_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Server;

@@ -254,6 +254,7 @@ use crate::world::tbc::CMSG_ACTIVATETAXIEXPRESS;
 use crate::world::tbc::CMSG_SET_FACTION_INACTIVE;
 use crate::world::tbc::CMSG_SET_WATCHED_FACTION;
 use crate::world::tbc::CMSG_RESET_INSTANCES;
+use crate::world::tbc::MSG_RAID_READY_CHECK_Client;
 use crate::world::tbc::CMSG_GMSURVEY_SUBMIT;
 use crate::world::tbc::CMSG_MOVE_SET_FLY;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Client;
@@ -511,6 +512,7 @@ pub enum ClientOpcodeMessage {
     CMSG_SET_FACTION_INACTIVE(CMSG_SET_FACTION_INACTIVE),
     CMSG_SET_WATCHED_FACTION(CMSG_SET_WATCHED_FACTION),
     CMSG_RESET_INSTANCES(CMSG_RESET_INSTANCES),
+    MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Client),
     CMSG_GMSURVEY_SUBMIT(CMSG_GMSURVEY_SUBMIT),
     CMSG_MOVE_SET_FLY(CMSG_MOVE_SET_FLY),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Client),
@@ -770,6 +772,7 @@ impl ClientOpcodeMessage {
             0x0317 => Ok(Self::CMSG_SET_FACTION_INACTIVE(<CMSG_SET_FACTION_INACTIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0317, size: body_size, io, } } else { a } })?)),
             0x0318 => Ok(Self::CMSG_SET_WATCHED_FACTION(<CMSG_SET_WATCHED_FACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0318, size: body_size, io, } } else { a } })?)),
             0x031D => Ok(Self::CMSG_RESET_INSTANCES(<CMSG_RESET_INSTANCES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031D, size: body_size, io, } } else { a } })?)),
+            0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
             0x032A => Ok(Self::CMSG_GMSURVEY_SUBMIT(<CMSG_GMSURVEY_SUBMIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032A, size: body_size, io, } } else { a } })?)),
             0x0346 => Ok(Self::CMSG_MOVE_SET_FLY(<CMSG_MOVE_SET_FLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0346, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
@@ -1097,6 +1100,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_WATCHED_FACTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_RESET_INSTANCES(c) => c.write_encrypted_client(w, e),
+            Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
@@ -1357,6 +1361,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_WATCHED_FACTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_RESET_INSTANCES(c) => c.write_unencrypted_client(w),
+            Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
@@ -1617,6 +1622,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_RESET_INSTANCES(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1877,6 +1883,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_RESET_INSTANCES(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2137,6 +2144,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_RESET_INSTANCES(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2397,6 +2405,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_RESET_INSTANCES(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
@@ -2692,6 +2701,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_FACTION_INACTIVE(_) => "CMSG_SET_FACTION_INACTIVE",
             ClientOpcodeMessage::CMSG_SET_WATCHED_FACTION(_) => "CMSG_SET_WATCHED_FACTION",
             ClientOpcodeMessage::CMSG_RESET_INSTANCES(_) => "CMSG_RESET_INSTANCES",
+            ClientOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Client",
             ClientOpcodeMessage::CMSG_GMSURVEY_SUBMIT(_) => "CMSG_GMSURVEY_SUBMIT",
             ClientOpcodeMessage::CMSG_MOVE_SET_FLY(_) => "CMSG_MOVE_SET_FLY",
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Client",
@@ -4172,6 +4182,12 @@ impl From<CMSG_SET_WATCHED_FACTION> for ClientOpcodeMessage {
 impl From<CMSG_RESET_INSTANCES> for ClientOpcodeMessage {
     fn from(c: CMSG_RESET_INSTANCES) -> Self {
         Self::CMSG_RESET_INSTANCES(c)
+    }
+}
+
+impl From<MSG_RAID_READY_CHECK_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_RAID_READY_CHECK_Client) -> Self {
+        Self::MSG_RAID_READY_CHECK(c)
     }
 }
 
