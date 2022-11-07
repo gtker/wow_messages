@@ -518,6 +518,8 @@ pub use crate::shared::cmsg_questgiver_hello_vanilla_tbc_wrath::CMSG_QUESTGIVER_
 
 pub use crate::shared::cmsg_questgiver_query_quest_vanilla_tbc::CMSG_QUESTGIVER_QUERY_QUEST;
 
+pub use crate::shared::cmsg_questgiver_quest_autolaunch_vanilla_tbc_wrath::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH;
+
 pub use crate::shared::cmsg_questgiver_status_query_vanilla_tbc_wrath::CMSG_QUESTGIVER_STATUS_QUERY;
 
 pub use crate::shared::cmsg_read_item_vanilla_tbc_wrath::CMSG_READ_ITEM;

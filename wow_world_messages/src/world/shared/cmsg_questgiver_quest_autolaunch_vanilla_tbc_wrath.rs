@@ -33,3 +33,9 @@ impl crate::Message for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {}
+
