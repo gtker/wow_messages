@@ -83,6 +83,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `QUEST_FAILED_CAIS` | 27 (0x1B) |  | You cannot complete quests once you have reached tired time. |
 
 Used in:
+* [SMSG_QUESTGIVER_QUEST_FAILED](smsg_questgiver_quest_failed.md)
 * [SMSG_QUESTGIVER_QUEST_INVALID](smsg_questgiver_quest_invalid.md)
 
 # QuestFailedReason
@@ -130,5 +131,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `DAILY_QUEST_COMPLETED_TODAY` | 29 (0x1D) |  | DESCRIPTION You have completed that daily quest today. |
 
 Used in:
+* [SMSG_QUESTGIVER_QUEST_FAILED](smsg_questgiver_quest_failed.md)
 * [SMSG_QUESTGIVER_QUEST_INVALID](smsg_questgiver_quest_invalid.md)
 

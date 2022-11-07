@@ -1138,6 +1138,8 @@ pub(crate) mod smsg_query_time_response;
 pub use smsg_query_time_response::*;
 pub(crate) mod smsg_quest_force_remove;
 pub use smsg_quest_force_remove::*;
+pub(crate) mod smsg_questgiver_quest_failed;
+pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;
 pub use smsg_questgiver_quest_invalid::*;
 pub(crate) mod smsg_sell_item;

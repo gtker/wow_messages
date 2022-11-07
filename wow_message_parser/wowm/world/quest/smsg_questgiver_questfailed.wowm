@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all paste_versions "1.12 2.4.3 3.3.5";
 
 smsg SMSG_QUESTGIVER_QUEST_FAILED = 0x0192 {
     u32 quest_id;

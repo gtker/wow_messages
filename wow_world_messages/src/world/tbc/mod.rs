@@ -1148,6 +1148,8 @@ pub(crate) mod smsg_petition_showlist;
 pub use smsg_petition_showlist::*;
 pub(crate) mod smsg_playerbound;
 pub use smsg_playerbound::*;
+pub(crate) mod smsg_questgiver_quest_failed;
+pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;
 pub use smsg_questgiver_quest_invalid::*;
 pub(crate) mod smsg_set_faction_standing;
