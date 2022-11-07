@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum QuestFailedReason : u32 {
     DONT_HAVE_REQ = 0 {
         comment = "this is default case";
@@ -31,6 +29,91 @@ enum QuestFailedReason : u32 {
     QUEST_FAILED_NOT_ENOUGH_MONEY = 22 {
         comment = "You don't have enough money for that quest.";
     }
+} {
+    versions = "1.12";
+}
+
+enum QuestFailedReason : u32 {
+    DONT_HAVE_REQ = 0 {
+        comment = "this is default case";
+    }
+    QUEST_FAILED_LOW_LEVEL = 1 {
+      comment = "You are not high enough level for that quest.";
+    }
+    QUEST_FAILED_WRONG_RACE = 6 {
+      comment = "That quest is not available to your race.";
+    }
+    QUEST_ALREADY_DONE = 7 {
+      comment = "You have completed that quest.";
+    }
+    QUEST_ONLY_ONE_TIMED = 12 {
+     comment = "You can only be on one timed quest at a time.";
+    }
+    QUEST_ALREADY_ON = 13 {
+     comment = "You are already on that quest.";
+    }
+    QUEST_FAILED_EXPANSION = 16 {
+     comment = "This quest requires an expansion enabled account.";
+    }
+    QUEST_ALREADY_ON2 = 18 {
+     comment = "You are already on that quest.";
+    }
+    QUEST_FAILED_MISSING_ITEMS = 21 {
+     comment = "You don't have the required items with you. Check storage.";
+    }
+    QUEST_FAILED_NOT_ENOUGH_MONEY = 23 {
+     comment = "You don't have enough money for that quest.";
+    }
+    DAILY_QUESTS_REMAINING = 26 {
+     comment = "You have already completed 10 daily quests today.";
+    }
+    QUEST_FAILED_CAIS = 27 {
+      comment = "You cannot complete quests once you have reached tired time.";
+    }
+} {
+    versions = "2.4.3";
+}
+
+enum QuestFailedReason : u32 {
+    DONT_HAVE_REQ                 = 0;
+    QUEST_FAILED_LOW_LEVEL        = 1 {
+            comment = "DESCRIPTION You are not high enough level for that quest.";
+    }
+    QUEST_FAILED_WRONG_RACE       = 6 {
+            comment = "DESCRIPTION That quest is not available to your race.";
+    }
+    QUEST_ALREADY_DONE            = 7 {
+            comment = "DESCRIPTION You have completed that quest.";
+    }
+    QUEST_ONLY_ONE_TIMED          = 12 {
+           comment = "DESCRIPTION You can only be on one timed quest at a time.";
+    }
+    QUEST_ALREADY_ON              = 13 {
+           comment = "DESCRIPTION You are already on that quest.";
+    }
+    QUEST_FAILED_EXPANSION        = 16 {
+           comment = "DESCRIPTION This quest requires an expansion enabled account.";
+    }
+    QUEST_ALREADY_ON2             = 18 {
+           comment = "DESCRIPTION You are already on that quest.";
+    }
+    QUEST_FAILED_MISSING_ITEMS    = 21 {
+           comment = "DESCRIPTION You don't have the required items with you. Check storage.";
+    }
+    QUEST_FAILED_NOT_ENOUGH_MONEY = 23 {
+           comment = "DESCRIPTION You don't have enough money for that quest.";
+    }
+    DAILY_QUESTS_REMAINING        = 26 {
+           comment = "DESCRIPTION You have already completed 25 daily quests today.";
+    }
+    QUEST_FAILED_CAIS             = 27 {
+           comment = "DESCRIPTION You cannot complete quests once you have reached tired time.";
+    }
+    DAILY_QUEST_COMPLETED_TODAY   = 29 {
+            comment = "DESCRIPTION You have completed that daily quest today.";
+    }
+} {
+    versions = "3.3.5";
 }
 
 enum QuestGiverStatus : u8 {
@@ -46,10 +129,14 @@ enum QuestGiverStatus : u8 {
     REWARD2 = 7 {
         comment = "yellow dot on minimap";
     }
+} {
+    versions = "1.12";
 }
 
 struct QuestItemReward {
     Item item;
     u32 item_count;
+} {
+    versions = "1.12";
 }
 
