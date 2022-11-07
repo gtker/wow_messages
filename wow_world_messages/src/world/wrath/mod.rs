@@ -157,6 +157,8 @@ pub(crate) mod item_class;
 pub use item_class::*;
 pub(crate) mod item_quality;
 pub use item_quality::*;
+pub(crate) mod item_text_query;
+pub use item_text_query::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod movement_block;
@@ -820,6 +822,8 @@ pub use crate::shared::smsg_item_cooldown_vanilla_tbc_wrath::SMSG_ITEM_COOLDOWN;
 
 pub use crate::shared::smsg_item_enchant_time_update_vanilla_tbc_wrath::SMSG_ITEM_ENCHANT_TIME_UPDATE;
 
+pub use crate::shared::smsg_item_name_query_response_tbc_wrath::SMSG_ITEM_NAME_QUERY_RESPONSE;
+
 pub use crate::shared::smsg_item_push_result_tbc_wrath::SMSG_ITEM_PUSH_RESULT;
 
 pub use crate::shared::smsg_item_time_update_vanilla_tbc_wrath::SMSG_ITEM_TIME_UPDATE;
@@ -1064,6 +1068,8 @@ pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
 pub(crate) mod smsg_inventory_change_failure;
 pub use smsg_inventory_change_failure::*;
+pub(crate) mod smsg_item_text_query_response;
+pub use smsg_item_text_query_response::*;
 pub(crate) mod smsg_levelup_info;
 pub use smsg_levelup_info::*;
 pub(crate) mod smsg_log_xpgain;

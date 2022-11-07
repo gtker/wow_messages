@@ -1,9 +1,26 @@
-#tag_all versions "1.12";
-
 smsg SMSG_ITEM_TEXT_QUERY_RESPONSE = 0x0244 {
     u32 item_text_id;
     CString text {
         comment = "mangoszero: CString TODO: max length 8000";
     }
+} {
+    versions = "1 2";
+}
+
+enum ItemTextQuery : u8 {
+    HAS_TEXT = 0;
+    NO_TEXT = 1;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_ITEM_TEXT_QUERY_RESPONSE = 0x0244 {
+    ItemTextQuery query;
+    if (query == HAS_TEXT) {
+        Guid item;
+        CString text;
+    }
+} {
+    versions = "3.3.5";
 }
 

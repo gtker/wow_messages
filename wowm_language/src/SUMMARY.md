@@ -105,6 +105,7 @@
 - [InventoryType](docs/inventorytype.md)
 - [ItemClass](docs/itemclass.md)
 - [ItemQuality](docs/itemquality.md)
+- [ItemTextQuery](docs/itemtextquery.md)
 - [KeyVersion](docs/keyversion.md)
 - [Language](docs/language.md)
 - [LogFormat](docs/logformat.md)

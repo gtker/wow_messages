@@ -856,7 +856,11 @@ pub use crate::shared::smsg_item_cooldown_vanilla_tbc_wrath::SMSG_ITEM_COOLDOWN;
 
 pub use crate::shared::smsg_item_enchant_time_update_vanilla_tbc_wrath::SMSG_ITEM_ENCHANT_TIME_UPDATE;
 
+pub use crate::shared::smsg_item_name_query_response_tbc_wrath::SMSG_ITEM_NAME_QUERY_RESPONSE;
+
 pub use crate::shared::smsg_item_push_result_tbc_wrath::SMSG_ITEM_PUSH_RESULT;
+
+pub use crate::shared::smsg_item_text_query_response_vanilla_tbc::SMSG_ITEM_TEXT_QUERY_RESPONSE;
 
 pub use crate::shared::smsg_item_time_update_vanilla_tbc_wrath::SMSG_ITEM_TIME_UPDATE;
 

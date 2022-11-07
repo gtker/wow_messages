@@ -1042,6 +1042,8 @@ pub use crate::shared::smsg_item_cooldown_vanilla_tbc_wrath::SMSG_ITEM_COOLDOWN;
 
 pub use crate::shared::smsg_item_enchant_time_update_vanilla_tbc_wrath::SMSG_ITEM_ENCHANT_TIME_UPDATE;
 
+pub use crate::shared::smsg_item_text_query_response_vanilla_tbc::SMSG_ITEM_TEXT_QUERY_RESPONSE;
+
 pub use crate::shared::smsg_item_time_update_vanilla_tbc_wrath::SMSG_ITEM_TIME_UPDATE;
 
 pub use crate::shared::smsg_levelup_info_vanilla_tbc::SMSG_LEVELUP_INFO;
@@ -1376,8 +1378,6 @@ pub(crate) mod smsg_item_push_result;
 pub use smsg_item_push_result::*;
 pub(crate) mod smsg_item_query_single_response;
 pub use smsg_item_query_single_response::*;
-pub(crate) mod smsg_item_text_query_response;
-pub use smsg_item_text_query_response::*;
 pub(crate) mod smsg_learned_spell;
 pub use smsg_learned_spell::*;
 pub(crate) mod smsg_list_inventory;

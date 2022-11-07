@@ -1,7 +1,14 @@
-#tag_all versions "1.12";
+smsg SMSG_ITEM_NAME_QUERY_RESPONSE = 0x02C5 {
+    Item item;
+    CString item_name;
+} {
+    versions = "1.12";
+}
 
 smsg SMSG_ITEM_NAME_QUERY_RESPONSE = 0x02C5 {
     Item item;
     CString item_name;
+    InventoryType inventory_type;
+} {
+    versions = "2.4.3 3";
 }
-
