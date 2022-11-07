@@ -137,6 +137,7 @@ use crate::world::tbc::CMSG_GOSSIP_SELECT_OPTION;
 use crate::world::tbc::CMSG_NPC_TEXT_QUERY;
 use crate::world::tbc::CMSG_QUESTGIVER_STATUS_QUERY;
 use crate::world::tbc::CMSG_QUESTGIVER_QUERY_QUEST;
+use crate::world::tbc::CMSG_PUSHQUESTTOPARTY;
 use crate::world::tbc::CMSG_LIST_INVENTORY;
 use crate::world::tbc::CMSG_SELL_ITEM;
 use crate::world::tbc::CMSG_BUY_ITEM;
@@ -381,6 +382,7 @@ pub enum ClientOpcodeMessage {
     CMSG_NPC_TEXT_QUERY(CMSG_NPC_TEXT_QUERY),
     CMSG_QUESTGIVER_STATUS_QUERY(CMSG_QUESTGIVER_STATUS_QUERY),
     CMSG_QUESTGIVER_QUERY_QUEST(CMSG_QUESTGIVER_QUERY_QUEST),
+    CMSG_PUSHQUESTTOPARTY(CMSG_PUSHQUESTTOPARTY),
     CMSG_LIST_INVENTORY(CMSG_LIST_INVENTORY),
     CMSG_SELL_ITEM(CMSG_SELL_ITEM),
     CMSG_BUY_ITEM(CMSG_BUY_ITEM),
@@ -627,6 +629,7 @@ impl ClientOpcodeMessage {
             0x017F => Ok(Self::CMSG_NPC_TEXT_QUERY(<CMSG_NPC_TEXT_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017F, size: body_size, io, } } else { a } })?)),
             0x0182 => Ok(Self::CMSG_QUESTGIVER_STATUS_QUERY(<CMSG_QUESTGIVER_STATUS_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0182, size: body_size, io, } } else { a } })?)),
             0x0186 => Ok(Self::CMSG_QUESTGIVER_QUERY_QUEST(<CMSG_QUESTGIVER_QUERY_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0186, size: body_size, io, } } else { a } })?)),
+            0x019D => Ok(Self::CMSG_PUSHQUESTTOPARTY(<CMSG_PUSHQUESTTOPARTY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019D, size: body_size, io, } } else { a } })?)),
             0x019E => Ok(Self::CMSG_LIST_INVENTORY(<CMSG_LIST_INVENTORY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019E, size: body_size, io, } } else { a } })?)),
             0x01A0 => Ok(Self::CMSG_SELL_ITEM(<CMSG_SELL_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A0, size: body_size, io, } } else { a } })?)),
             0x01A2 => Ok(Self::CMSG_BUY_ITEM(<CMSG_BUY_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A2, size: body_size, io, } } else { a } })?)),
@@ -941,6 +944,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NPC_TEXT_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PUSHQUESTTOPARTY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LIST_INVENTORY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SELL_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUY_ITEM(c) => c.write_encrypted_client(w, e),
@@ -1188,6 +1192,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NPC_TEXT_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PUSHQUESTTOPARTY(c) => c.write_unencrypted_client(w),
             Self::CMSG_LIST_INVENTORY(c) => c.write_unencrypted_client(w),
             Self::CMSG_SELL_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUY_ITEM(c) => c.write_unencrypted_client(w),
@@ -1435,6 +1440,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NPC_TEXT_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PUSHQUESTTOPARTY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LIST_INVENTORY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SELL_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1682,6 +1688,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NPC_TEXT_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PUSHQUESTTOPARTY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LIST_INVENTORY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SELL_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -1929,6 +1936,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NPC_TEXT_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PUSHQUESTTOPARTY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LIST_INVENTORY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SELL_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2176,6 +2184,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_NPC_TEXT_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PUSHQUESTTOPARTY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LIST_INVENTORY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SELL_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUY_ITEM(c) => c.astd_write_unencrypted_client(w).await,
@@ -2458,6 +2467,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_NPC_TEXT_QUERY(_) => "CMSG_NPC_TEXT_QUERY",
             ClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_QUERY(_) => "CMSG_QUESTGIVER_STATUS_QUERY",
             ClientOpcodeMessage::CMSG_QUESTGIVER_QUERY_QUEST(_) => "CMSG_QUESTGIVER_QUERY_QUEST",
+            ClientOpcodeMessage::CMSG_PUSHQUESTTOPARTY(_) => "CMSG_PUSHQUESTTOPARTY",
             ClientOpcodeMessage::CMSG_LIST_INVENTORY(_) => "CMSG_LIST_INVENTORY",
             ClientOpcodeMessage::CMSG_SELL_ITEM(_) => "CMSG_SELL_ITEM",
             ClientOpcodeMessage::CMSG_BUY_ITEM(_) => "CMSG_BUY_ITEM",
@@ -3340,6 +3350,12 @@ impl From<CMSG_QUESTGIVER_STATUS_QUERY> for ClientOpcodeMessage {
 impl From<CMSG_QUESTGIVER_QUERY_QUEST> for ClientOpcodeMessage {
     fn from(c: CMSG_QUESTGIVER_QUERY_QUEST) -> Self {
         Self::CMSG_QUESTGIVER_QUERY_QUEST(c)
+    }
+}
+
+impl From<CMSG_PUSHQUESTTOPARTY> for ClientOpcodeMessage {
+    fn from(c: CMSG_PUSHQUESTTOPARTY) -> Self {
+        Self::CMSG_PUSHQUESTTOPARTY(c)
     }
 }
 

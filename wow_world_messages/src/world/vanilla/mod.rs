@@ -186,8 +186,6 @@ pub(crate) mod cmsg_pet_rename;
 pub use cmsg_pet_rename::*;
 pub(crate) mod cmsg_played_time;
 pub use cmsg_played_time::*;
-pub(crate) mod cmsg_pushquesttoparty;
-pub use cmsg_pushquesttoparty::*;
 pub(crate) mod cmsg_quest_confirm_accept;
 pub use cmsg_quest_confirm_accept::*;
 pub(crate) mod cmsg_questgiver_accept_quest;
@@ -731,6 +729,8 @@ pub use crate::shared::cmsg_ping_vanilla_tbc_wrath::CMSG_PING;
 pub use crate::shared::cmsg_player_login_vanilla_tbc_wrath::CMSG_PLAYER_LOGIN;
 
 pub use crate::shared::cmsg_player_logout_vanilla_tbc_wrath::CMSG_PLAYER_LOGOUT;
+
+pub use crate::shared::cmsg_pushquesttoparty_vanilla_tbc_wrath::CMSG_PUSHQUESTTOPARTY;
 
 pub use crate::shared::cmsg_query_time_vanilla_tbc_wrath::CMSG_QUERY_TIME;
 
