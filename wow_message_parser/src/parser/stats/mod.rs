@@ -7,7 +7,7 @@ use crate::error_printer::{
 };
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::ObjectTags;
-use crate::parser::types::version::{MajorWorldVersion, Version};
+use crate::parser::types::version::MajorWorldVersion;
 use crate::UNIMPLEMENTED;
 
 #[derive(Debug, Clone)]
@@ -46,29 +46,19 @@ impl Data {
 }
 
 pub(crate) fn print_message_stats(o: &Objects) {
-    stats_for(
-        MajorWorldVersion::Vanilla.into(),
-        vanilla_messages::DATA.to_vec(),
-        o,
-    );
+    stats_for(MajorWorldVersion::Vanilla, vanilla_messages::DATA, o);
     println!();
 
-    stats_for(
-        MajorWorldVersion::BurningCrusade.into(),
-        tbc_messages::DATA.to_vec(),
-        o,
-    );
+    stats_for(MajorWorldVersion::BurningCrusade, tbc_messages::DATA, o);
     println!();
 
-    stats_for(
-        MajorWorldVersion::Wrath.into(),
-        wrath_messages::DATA.to_vec(),
-        o,
-    );
+    stats_for(MajorWorldVersion::Wrath, wrath_messages::DATA, o);
 }
 
-fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
-    let tags = ObjectTags::new_with_version(version);
+fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<Data> {
+    let tags = ObjectTags::new_with_version(version.into());
+
+    let mut data = data.to_vec();
     for s in o.messages() {
         if !s.tags().fulfills_all(&tags) {
             continue;
@@ -94,7 +84,7 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
                 message.name,
                 s.file_info(),
                 s.opcode() as usize,
-                version.as_major_world(),
+                version,
             );
         } else {
             let opcode = s.opcode();
@@ -102,10 +92,16 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
                 &get_real_name(s.name()),
                 s.file_info(),
                 opcode as usize,
-                version.as_major_world(),
+                version,
             );
         }
     }
+
+    data
+}
+
+fn stats_for(version: MajorWorldVersion, data: &[Data], o: &Objects) {
+    let data = get_data_for(version, data, o);
 
     let mut definition_sum = 0;
     let mut test_sum = 0;
@@ -118,7 +114,7 @@ fn stats_for(version: Version, mut data: Vec<Data>, o: &Objects) {
         }
     }
 
-    let print_missing_as_wowm = version.as_major_world() != MajorWorldVersion::Vanilla;
+    let print_missing_as_wowm = version != MajorWorldVersion::Vanilla;
 
     println!(
         "{} Messages without definition:",
