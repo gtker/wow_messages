@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_QUESTUPDATE_ADD_ITEM = 0x019A {
     u32 required_item_id;

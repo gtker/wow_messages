@@ -51,3 +51,9 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_ITEM {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_QUESTUPDATE_ADD_ITEM {}
+

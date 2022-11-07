@@ -4322,6 +4322,7 @@ use crate::world::tbc::SMSG_QUESTGIVER_STATUS;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_INVALID;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_FAILED;
 use crate::world::tbc::SMSG_QUESTLOG_FULL;
+use crate::world::tbc::SMSG_QUESTUPDATE_ADD_ITEM;
 use crate::world::tbc::SMSG_QUEST_CONFIRM_ACCEPT;
 use crate::world::tbc::SMSG_LIST_INVENTORY;
 use crate::world::tbc::SMSG_SELL_ITEM;
@@ -4553,6 +4554,7 @@ pub enum ServerOpcodeMessage {
     SMSG_QUESTGIVER_QUEST_INVALID(SMSG_QUESTGIVER_QUEST_INVALID),
     SMSG_QUESTGIVER_QUEST_FAILED(SMSG_QUESTGIVER_QUEST_FAILED),
     SMSG_QUESTLOG_FULL(SMSG_QUESTLOG_FULL),
+    SMSG_QUESTUPDATE_ADD_ITEM(SMSG_QUESTUPDATE_ADD_ITEM),
     SMSG_QUEST_CONFIRM_ACCEPT(SMSG_QUEST_CONFIRM_ACCEPT),
     SMSG_LIST_INVENTORY(SMSG_LIST_INVENTORY),
     SMSG_SELL_ITEM(SMSG_SELL_ITEM),
@@ -4786,6 +4788,7 @@ impl ServerOpcodeMessage {
             0x018F => Ok(Self::SMSG_QUESTGIVER_QUEST_INVALID(<SMSG_QUESTGIVER_QUEST_INVALID as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018F, size: body_size, io, } } else { a } })?)),
             0x0192 => Ok(Self::SMSG_QUESTGIVER_QUEST_FAILED(<SMSG_QUESTGIVER_QUEST_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0192, size: body_size, io, } } else { a } })?)),
             0x0195 => Ok(Self::SMSG_QUESTLOG_FULL(<SMSG_QUESTLOG_FULL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0195, size: body_size, io, } } else { a } })?)),
+            0x019A => Ok(Self::SMSG_QUESTUPDATE_ADD_ITEM(<SMSG_QUESTUPDATE_ADD_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019A, size: body_size, io, } } else { a } })?)),
             0x019C => Ok(Self::SMSG_QUEST_CONFIRM_ACCEPT(<SMSG_QUEST_CONFIRM_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019C, size: body_size, io, } } else { a } })?)),
             0x019F => Ok(Self::SMSG_LIST_INVENTORY(<SMSG_LIST_INVENTORY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019F, size: body_size, io, } } else { a } })?)),
             0x01A1 => Ok(Self::SMSG_SELL_ITEM(<SMSG_SELL_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A1, size: body_size, io, } } else { a } })?)),
@@ -5087,6 +5090,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTLOG_FULL(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LIST_INVENTORY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SELL_ITEM(c) => c.write_encrypted_server(w, e),
@@ -5321,6 +5325,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTLOG_FULL(c) => c.write_unencrypted_server(w),
+            Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_unencrypted_server(w),
             Self::SMSG_LIST_INVENTORY(c) => c.write_unencrypted_server(w),
             Self::SMSG_SELL_ITEM(c) => c.write_unencrypted_server(w),
@@ -5555,6 +5560,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LIST_INVENTORY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SELL_ITEM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5789,6 +5795,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LIST_INVENTORY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SELL_ITEM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -6023,6 +6030,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LIST_INVENTORY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SELL_ITEM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -6257,6 +6265,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LIST_INVENTORY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SELL_ITEM(c) => c.astd_write_unencrypted_server(w).await,
@@ -6493,6 +6502,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_INVALID(_) => "SMSG_QUESTGIVER_QUEST_INVALID",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_FAILED(_) => "SMSG_QUESTGIVER_QUEST_FAILED",
             ServerOpcodeMessage::SMSG_QUESTLOG_FULL(_) => "SMSG_QUESTLOG_FULL",
+            ServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_ITEM(_) => "SMSG_QUESTUPDATE_ADD_ITEM",
             ServerOpcodeMessage::SMSG_QUEST_CONFIRM_ACCEPT(_) => "SMSG_QUEST_CONFIRM_ACCEPT",
             ServerOpcodeMessage::SMSG_LIST_INVENTORY(_) => "SMSG_LIST_INVENTORY",
             ServerOpcodeMessage::SMSG_SELL_ITEM(_) => "SMSG_SELL_ITEM",
@@ -7292,6 +7302,12 @@ impl From<SMSG_QUESTGIVER_QUEST_FAILED> for ServerOpcodeMessage {
 impl From<SMSG_QUESTLOG_FULL> for ServerOpcodeMessage {
     fn from(c: SMSG_QUESTLOG_FULL) -> Self {
         Self::SMSG_QUESTLOG_FULL(c)
+    }
+}
+
+impl From<SMSG_QUESTUPDATE_ADD_ITEM> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTUPDATE_ADD_ITEM) -> Self {
+        Self::SMSG_QUESTUPDATE_ADD_ITEM(c)
     }
 }
 
