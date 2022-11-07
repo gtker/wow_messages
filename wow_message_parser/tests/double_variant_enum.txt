@@ -96,9 +96,7 @@ pub enum DoubleVariantEnum_SimpleEnum {
 impl Default for DoubleVariantEnum_SimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Zero {
-            basic: Default::default(),
-        }
+        Self::Two
     }
 }
 

@@ -174,9 +174,7 @@ pub enum GuildMember_GuildMemberStatus {
 impl Default for GuildMember_GuildMemberStatus {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Offline {
-            time_offline: Default::default(),
-        }
+        Self::Online
     }
 }
 

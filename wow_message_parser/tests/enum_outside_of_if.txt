@@ -155,9 +155,7 @@ pub enum EnumOutsideOfIf_NestedEnum {
 impl Default for EnumOutsideOfIf_NestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Nested {
-            nested: Default::default(),
-        }
+        Self::NotNested
     }
 }
 

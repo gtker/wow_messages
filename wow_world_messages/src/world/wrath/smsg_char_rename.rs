@@ -412,10 +412,7 @@ pub enum SMSG_CHAR_RENAME_WorldResult {
 impl Default for SMSG_CHAR_RENAME_WorldResult {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::ResponseSuccess {
-            character: Default::default(),
-            new_name: Default::default(),
-        }
+        Self::ResponseFailure
     }
 }
 

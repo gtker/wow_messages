@@ -389,9 +389,7 @@ pub enum NestedNotIf_NestedEnum {
 impl Default for NestedNotIf_NestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Nested {
-            one: Default::default(),
-        }
+        Self::NotNested
     }
 }
 

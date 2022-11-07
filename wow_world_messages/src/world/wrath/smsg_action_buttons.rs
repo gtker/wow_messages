@@ -117,9 +117,7 @@ pub enum SMSG_ACTION_BUTTONS_ActionBarBehavior {
 impl Default for SMSG_ACTION_BUTTONS_ActionBarBehavior {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Initial {
-            data: [Default::default(); 144],
-        }
+        Self::Clear
     }
 }
 

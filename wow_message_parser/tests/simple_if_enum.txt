@@ -80,9 +80,7 @@ pub enum SimpleIfEnum_SimpleEnum {
 impl Default for SimpleIfEnum_SimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Zero {
-            basic: Default::default(),
-        }
+        Self::One
     }
 }
 

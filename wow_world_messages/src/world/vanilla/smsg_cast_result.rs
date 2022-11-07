@@ -1241,9 +1241,7 @@ pub enum SMSG_CAST_RESULT_SimpleSpellCastResult {
 impl Default for SMSG_CAST_RESULT_SimpleSpellCastResult {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Success {
-            reason: Default::default(),
-        }
+        Self::Failure
     }
 }
 

@@ -364,7 +364,14 @@ fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
         |s| {
             s.body("fn default() -> Self", |s| {
                 s.wln("// First enumerator without any fields");
-                let enumerator = rd.enumerators().first().unwrap();
+                let enumerator = if let Some(enumerator) =
+                    rd.enumerators().iter().find(|a| !a.has_members_in_struct())
+                {
+                    enumerator
+                } else {
+                    rd.enumerators().first().unwrap()
+                };
+
                 if enumerator.has_members_in_struct() {
                     s.open_curly(format!("Self::{}", enumerator.rust_name()));
 

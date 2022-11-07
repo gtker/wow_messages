@@ -430,12 +430,7 @@ pub enum CMD_AUTH_LOGON_PROOF_Server_LoginResult {
 impl Default for CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Success {
-            account_flag: Default::default(),
-            hardware_survey_id: Default::default(),
-            server_proof: [Default::default(); 20],
-            unknown_flags: Default::default(),
-        }
+        Self::FailUnknown0
     }
 }
 

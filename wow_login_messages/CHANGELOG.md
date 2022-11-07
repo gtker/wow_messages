@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* BREAKING: Enums will now default to the first enumerator without any fields. If all enumerators have fields the first one will be used.
+
 ### Deprecated
 
 ### Removed

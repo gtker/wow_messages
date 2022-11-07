@@ -104,10 +104,7 @@ pub enum SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
 impl Default for SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::HasText {
-            item: Default::default(),
-            text: Default::default(),
-        }
+        Self::NoText
     }
 }
 

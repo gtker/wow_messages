@@ -331,9 +331,7 @@ pub enum Mail_MailType {
 impl Default for Mail_MailType {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Normal {
-            sender: Default::default(),
-        }
+        Self::Item
     }
 }
 

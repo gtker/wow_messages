@@ -96,9 +96,7 @@ pub enum EnumIfElseIfNested_SimpleEnum {
 impl Default for EnumIfElseIfNested_SimpleEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Zero {
-            zero: Default::default(),
-        }
+        Self::One
     }
 }
 
@@ -143,9 +141,7 @@ pub enum EnumIfElseIfNested_NestedEnum {
 impl Default for EnumIfElseIfNested_NestedEnum {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Nested {
-            nested: Default::default(),
-        }
+        Self::NotNested
     }
 }
 

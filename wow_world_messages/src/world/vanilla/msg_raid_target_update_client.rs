@@ -233,9 +233,7 @@ pub enum MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
 impl Default for MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     fn default() -> Self {
         // First enumerator without any fields
-        Self::Unknown0 {
-            target: Default::default(),
-        }
+        Self::RequestIcons
     }
 }
 
