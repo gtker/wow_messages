@@ -1,0 +1,12 @@
+[package]
+name = "wow_common"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+vanilla = []
+tbc = []
+wrath = []
+
+[dependencies]
+wow_world_base = { path = "../../wow_world_base" }

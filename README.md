@@ -12,6 +12,7 @@ The project is split into the subdirectories:
 * `wow_world_messages`: **UNRELEASED** Rust library for the world server for WoW version 1.x.y.
 * `wow_world_base`: **UNRELEASED** Rust library that provides the basic types and enums such as `Class`, `Race`
   and `Gender` for `wow_world_messages` and others.
+* `wow_common`: Library for common operations and static data.
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification. Hosted
   at [`www.gtker.com/wow_messages`](https://www.gtker.com/wow_messages).
 * `intermediate_representation.json`: **UNRELEASED** contains a machine readable version of the `wowm` files.
