@@ -52,3 +52,9 @@ impl crate::Message for CMSG_QUESTGIVER_ACCEPT_QUEST {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_QUESTGIVER_ACCEPT_QUEST {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_QUESTGIVER_ACCEPT_QUEST {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_QUESTGIVER_ACCEPT_QUEST {}
+
