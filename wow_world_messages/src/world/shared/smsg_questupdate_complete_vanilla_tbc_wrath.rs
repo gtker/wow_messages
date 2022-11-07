@@ -42,3 +42,9 @@ impl crate::Message for SMSG_QUESTUPDATE_COMPLETE {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_QUESTUPDATE_COMPLETE {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_QUESTUPDATE_COMPLETE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_QUESTUPDATE_COMPLETE {}
+

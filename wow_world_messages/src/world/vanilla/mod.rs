@@ -1130,6 +1130,8 @@ pub use crate::shared::smsg_questupdate_add_item_vanilla_tbc_wrath::SMSG_QUESTUP
 
 pub use crate::shared::smsg_questupdate_add_kill_vanilla_tbc_wrath::SMSG_QUESTUPDATE_ADD_KILL;
 
+pub use crate::shared::smsg_questupdate_complete_vanilla_tbc_wrath::SMSG_QUESTUPDATE_COMPLETE;
+
 pub use crate::shared::smsg_read_item_failed_vanilla_tbc_wrath::SMSG_READ_ITEM_FAILED;
 
 pub use crate::shared::smsg_read_item_ok_vanilla_tbc_wrath::SMSG_READ_ITEM_OK;
@@ -1486,8 +1488,6 @@ pub(crate) mod smsg_questgiver_request_items;
 pub use smsg_questgiver_request_items::*;
 pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
-pub(crate) mod smsg_questupdate_complete;
-pub use smsg_questupdate_complete::*;
 pub(crate) mod smsg_questupdate_failed;
 pub use smsg_questupdate_failed::*;
 pub(crate) mod smsg_questupdate_failedtimer;
