@@ -186,8 +186,6 @@ pub(crate) mod cmsg_pet_rename;
 pub use cmsg_pet_rename::*;
 pub(crate) mod cmsg_played_time;
 pub use cmsg_played_time::*;
-pub(crate) mod cmsg_questgiver_complete_quest;
-pub use cmsg_questgiver_complete_quest::*;
 pub(crate) mod cmsg_questgiver_hello;
 pub use cmsg_questgiver_hello::*;
 pub(crate) mod cmsg_questgiver_quest_autolaunch;
@@ -735,6 +733,8 @@ pub use crate::shared::cmsg_questgiver_accept_quest_vanilla_tbc_wrath::CMSG_QUES
 pub use crate::shared::cmsg_questgiver_cancel_vanilla_tbc_wrath::CMSG_QUESTGIVER_CANCEL;
 
 pub use crate::shared::cmsg_questgiver_choose_reward_vanilla_tbc_wrath::CMSG_QUESTGIVER_CHOOSE_REWARD;
+
+pub use crate::shared::cmsg_questgiver_complete_quest_vanilla_tbc_wrath::CMSG_QUESTGIVER_COMPLETE_QUEST;
 
 pub use crate::shared::cmsg_questgiver_query_quest_vanilla_tbc::CMSG_QUESTGIVER_QUERY_QUEST;
 
