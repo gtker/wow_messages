@@ -1134,6 +1134,8 @@ pub use crate::shared::smsg_questupdate_complete_vanilla_tbc_wrath::SMSG_QUESTUP
 
 pub use crate::shared::smsg_questupdate_failed_vanilla_tbc_wrath::SMSG_QUESTUPDATE_FAILED;
 
+pub use crate::shared::smsg_questupdate_failedtimer_vanilla_tbc_wrath::SMSG_QUESTUPDATE_FAILEDTIMER;
+
 pub use crate::shared::smsg_read_item_failed_vanilla_tbc_wrath::SMSG_READ_ITEM_FAILED;
 
 pub use crate::shared::smsg_read_item_ok_vanilla_tbc_wrath::SMSG_READ_ITEM_OK;
@@ -1490,8 +1492,6 @@ pub(crate) mod smsg_questgiver_request_items;
 pub use smsg_questgiver_request_items::*;
 pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
-pub(crate) mod smsg_questupdate_failedtimer;
-pub use smsg_questupdate_failedtimer::*;
 pub(crate) mod smsg_raid_group_only;
 pub use smsg_raid_group_only::*;
 pub(crate) mod smsg_raid_instance_info;

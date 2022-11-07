@@ -4323,6 +4323,7 @@ use crate::world::tbc::SMSG_QUESTGIVER_QUEST_INVALID;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_FAILED;
 use crate::world::tbc::SMSG_QUESTLOG_FULL;
 use crate::world::tbc::SMSG_QUESTUPDATE_FAILED;
+use crate::world::tbc::SMSG_QUESTUPDATE_FAILEDTIMER;
 use crate::world::tbc::SMSG_QUESTUPDATE_COMPLETE;
 use crate::world::tbc::SMSG_QUESTUPDATE_ADD_KILL;
 use crate::world::tbc::SMSG_QUESTUPDATE_ADD_ITEM;
@@ -4558,6 +4559,7 @@ pub enum ServerOpcodeMessage {
     SMSG_QUESTGIVER_QUEST_FAILED(SMSG_QUESTGIVER_QUEST_FAILED),
     SMSG_QUESTLOG_FULL(SMSG_QUESTLOG_FULL),
     SMSG_QUESTUPDATE_FAILED(SMSG_QUESTUPDATE_FAILED),
+    SMSG_QUESTUPDATE_FAILEDTIMER(SMSG_QUESTUPDATE_FAILEDTIMER),
     SMSG_QUESTUPDATE_COMPLETE(SMSG_QUESTUPDATE_COMPLETE),
     SMSG_QUESTUPDATE_ADD_KILL(SMSG_QUESTUPDATE_ADD_KILL),
     SMSG_QUESTUPDATE_ADD_ITEM(SMSG_QUESTUPDATE_ADD_ITEM),
@@ -4795,6 +4797,7 @@ impl ServerOpcodeMessage {
             0x0192 => Ok(Self::SMSG_QUESTGIVER_QUEST_FAILED(<SMSG_QUESTGIVER_QUEST_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0192, size: body_size, io, } } else { a } })?)),
             0x0195 => Ok(Self::SMSG_QUESTLOG_FULL(<SMSG_QUESTLOG_FULL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0195, size: body_size, io, } } else { a } })?)),
             0x0196 => Ok(Self::SMSG_QUESTUPDATE_FAILED(<SMSG_QUESTUPDATE_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0196, size: body_size, io, } } else { a } })?)),
+            0x0197 => Ok(Self::SMSG_QUESTUPDATE_FAILEDTIMER(<SMSG_QUESTUPDATE_FAILEDTIMER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0197, size: body_size, io, } } else { a } })?)),
             0x0198 => Ok(Self::SMSG_QUESTUPDATE_COMPLETE(<SMSG_QUESTUPDATE_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0198, size: body_size, io, } } else { a } })?)),
             0x0199 => Ok(Self::SMSG_QUESTUPDATE_ADD_KILL(<SMSG_QUESTUPDATE_ADD_KILL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0199, size: body_size, io, } } else { a } })?)),
             0x019A => Ok(Self::SMSG_QUESTUPDATE_ADD_ITEM(<SMSG_QUESTUPDATE_ADD_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019A, size: body_size, io, } } else { a } })?)),
@@ -5100,6 +5103,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTLOG_FULL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_ADD_KILL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.write_encrypted_server(w, e),
@@ -5338,6 +5342,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTLOG_FULL(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_ADD_KILL(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.write_unencrypted_server(w),
@@ -5576,6 +5581,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_ADD_KILL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5814,6 +5820,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_ADD_KILL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -6052,6 +6059,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_ADD_KILL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -6290,6 +6298,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_ADD_KILL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_ADD_ITEM(c) => c.astd_write_unencrypted_server(w).await,
@@ -6530,6 +6539,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_FAILED(_) => "SMSG_QUESTGIVER_QUEST_FAILED",
             ServerOpcodeMessage::SMSG_QUESTLOG_FULL(_) => "SMSG_QUESTLOG_FULL",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_FAILED(_) => "SMSG_QUESTUPDATE_FAILED",
+            ServerOpcodeMessage::SMSG_QUESTUPDATE_FAILEDTIMER(_) => "SMSG_QUESTUPDATE_FAILEDTIMER",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_COMPLETE(_) => "SMSG_QUESTUPDATE_COMPLETE",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_KILL(_) => "SMSG_QUESTUPDATE_ADD_KILL",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_ITEM(_) => "SMSG_QUESTUPDATE_ADD_ITEM",
@@ -7338,6 +7348,12 @@ impl From<SMSG_QUESTLOG_FULL> for ServerOpcodeMessage {
 impl From<SMSG_QUESTUPDATE_FAILED> for ServerOpcodeMessage {
     fn from(c: SMSG_QUESTUPDATE_FAILED) -> Self {
         Self::SMSG_QUESTUPDATE_FAILED(c)
+    }
+}
+
+impl From<SMSG_QUESTUPDATE_FAILEDTIMER> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTUPDATE_FAILEDTIMER) -> Self {
+        Self::SMSG_QUESTUPDATE_FAILEDTIMER(c)
     }
 }
 
