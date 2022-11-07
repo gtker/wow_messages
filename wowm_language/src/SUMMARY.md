@@ -132,6 +132,7 @@
 - [PetEnabled](docs/petenabled.md)
 - [PetFeedback](docs/petfeedback.md)
 - [PetNameInvalidReason](docs/petnameinvalidreason.md)
+- [PetQueryDisabledNames](docs/petquerydisablednames.md)
 - [PetReactState](docs/petreactstate.md)
 - [PetTalkReason](docs/pettalkreason.md)
 - [PetTameFailureReason](docs/pettamefailurereason.md)

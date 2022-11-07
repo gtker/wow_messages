@@ -1,9 +1,9 @@
-#tag_all versions "1.12";
-
 smsg SMSG_PET_NAME_QUERY_RESPONSE = 0x53 {
     u32 pet_number;
     CString name;
     u32 pet_name_timestamp;
+} {
+    versions = "1.12";
 }
 
 test SMSG_PET_NAME_QUERY_RESPONSE {
@@ -16,5 +16,25 @@ test SMSG_PET_NAME_QUERY_RESPONSE {
     0xEF, 0xBE, 0xAD, 0xDE, /* pet_number */
     0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x00 /* name */
     0xDE, 0xCA, 0xFA, 0x00, /* pet_name_timestamp */
-]
+] {
+    versions = "1.12";
+}
 
+enum PetQueryDisabledNames : u8 {
+    PRESENT = 1;
+    NOT_PRESENT = 0;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_PET_NAME_QUERY_RESPONSE = 0x53 {
+    u32 pet_number;
+    CString name;
+    u32 pet_name_timestamp;
+    PetQueryDisabledNames names;
+    if (names == PRESENT) {
+        CString[5] declined_names;
+    }
+} {
+    versions = "2.4.3 3";
+}

@@ -4032,6 +4032,7 @@ use crate::world::tbc::SMSG_LOGIN_SETTIMESPEED;
 use crate::world::tbc::SMSG_LOGOUT_RESPONSE;
 use crate::world::tbc::SMSG_LOGOUT_COMPLETE;
 use crate::world::tbc::SMSG_LOGOUT_CANCEL_ACK;
+use crate::world::tbc::SMSG_PET_NAME_QUERY_RESPONSE;
 use crate::world::tbc::SMSG_GUILD_QUERY_RESPONSE;
 use crate::world::tbc::SMSG_PAGE_TEXT_QUERY_RESPONSE;
 use crate::world::tbc::SMSG_GAMEOBJECT_QUERY_RESPONSE;
@@ -4256,6 +4257,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOGOUT_RESPONSE(SMSG_LOGOUT_RESPONSE),
     SMSG_LOGOUT_COMPLETE(SMSG_LOGOUT_COMPLETE),
     SMSG_LOGOUT_CANCEL_ACK(SMSG_LOGOUT_CANCEL_ACK),
+    SMSG_PET_NAME_QUERY_RESPONSE(SMSG_PET_NAME_QUERY_RESPONSE),
     SMSG_GUILD_QUERY_RESPONSE(SMSG_GUILD_QUERY_RESPONSE),
     SMSG_PAGE_TEXT_QUERY_RESPONSE(SMSG_PAGE_TEXT_QUERY_RESPONSE),
     SMSG_GAMEOBJECT_QUERY_RESPONSE(SMSG_GAMEOBJECT_QUERY_RESPONSE),
@@ -4482,6 +4484,7 @@ impl ServerOpcodeMessage {
             0x004C => Ok(Self::SMSG_LOGOUT_RESPONSE(<SMSG_LOGOUT_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004C, size: body_size, io, } } else { a } })?)),
             0x004D => Ok(Self::SMSG_LOGOUT_COMPLETE(<SMSG_LOGOUT_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004D, size: body_size, io, } } else { a } })?)),
             0x004F => Ok(Self::SMSG_LOGOUT_CANCEL_ACK(<SMSG_LOGOUT_CANCEL_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004F, size: body_size, io, } } else { a } })?)),
+            0x0053 => Ok(Self::SMSG_PET_NAME_QUERY_RESPONSE(<SMSG_PET_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0053, size: body_size, io, } } else { a } })?)),
             0x0055 => Ok(Self::SMSG_GUILD_QUERY_RESPONSE(<SMSG_GUILD_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0055, size: body_size, io, } } else { a } })?)),
             0x005B => Ok(Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(<SMSG_PAGE_TEXT_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x005B, size: body_size, io, } } else { a } })?)),
             0x005F => Ok(Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(<SMSG_GAMEOBJECT_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x005F, size: body_size, io, } } else { a } })?)),
@@ -4776,6 +4779,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -5003,6 +5007,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -5230,6 +5235,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5457,6 +5463,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5684,6 +5691,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -5911,6 +5919,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -6140,6 +6149,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(_) => "SMSG_LOGOUT_RESPONSE",
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE(_) => "SMSG_LOGOUT_COMPLETE",
             ServerOpcodeMessage::SMSG_LOGOUT_CANCEL_ACK(_) => "SMSG_LOGOUT_CANCEL_ACK",
+            ServerOpcodeMessage::SMSG_PET_NAME_QUERY_RESPONSE(_) => "SMSG_PET_NAME_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_GUILD_QUERY_RESPONSE(_) => "SMSG_GUILD_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_PAGE_TEXT_QUERY_RESPONSE(_) => "SMSG_PAGE_TEXT_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_GAMEOBJECT_QUERY_RESPONSE(_) => "SMSG_GAMEOBJECT_QUERY_RESPONSE",
@@ -6437,6 +6447,12 @@ impl From<SMSG_LOGOUT_COMPLETE> for ServerOpcodeMessage {
 impl From<SMSG_LOGOUT_CANCEL_ACK> for ServerOpcodeMessage {
     fn from(c: SMSG_LOGOUT_CANCEL_ACK) -> Self {
         Self::SMSG_LOGOUT_CANCEL_ACK(c)
+    }
+}
+
+impl From<SMSG_PET_NAME_QUERY_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_NAME_QUERY_RESPONSE) -> Self {
+        Self::SMSG_PET_NAME_QUERY_RESPONSE(c)
     }
 }
 
