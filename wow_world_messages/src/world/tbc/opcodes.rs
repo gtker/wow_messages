@@ -4318,6 +4318,7 @@ use crate::world::tbc::SMSG_PET_MODE;
 use crate::world::tbc::SMSG_GOSSIP_MESSAGE;
 use crate::world::tbc::SMSG_GOSSIP_COMPLETE;
 use crate::world::tbc::SMSG_NPC_TEXT_UPDATE;
+use crate::world::tbc::SMSG_QUEST_CONFIRM_ACCEPT;
 use crate::world::tbc::SMSG_LIST_INVENTORY;
 use crate::world::tbc::SMSG_SELL_ITEM;
 use crate::world::tbc::SMSG_BUY_ITEM;
@@ -4544,6 +4545,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GOSSIP_MESSAGE(SMSG_GOSSIP_MESSAGE),
     SMSG_GOSSIP_COMPLETE(SMSG_GOSSIP_COMPLETE),
     SMSG_NPC_TEXT_UPDATE(SMSG_NPC_TEXT_UPDATE),
+    SMSG_QUEST_CONFIRM_ACCEPT(SMSG_QUEST_CONFIRM_ACCEPT),
     SMSG_LIST_INVENTORY(SMSG_LIST_INVENTORY),
     SMSG_SELL_ITEM(SMSG_SELL_ITEM),
     SMSG_BUY_ITEM(SMSG_BUY_ITEM),
@@ -4772,6 +4774,7 @@ impl ServerOpcodeMessage {
             0x017D => Ok(Self::SMSG_GOSSIP_MESSAGE(<SMSG_GOSSIP_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017D, size: body_size, io, } } else { a } })?)),
             0x017E => Ok(Self::SMSG_GOSSIP_COMPLETE(<SMSG_GOSSIP_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017E, size: body_size, io, } } else { a } })?)),
             0x0180 => Ok(Self::SMSG_NPC_TEXT_UPDATE(<SMSG_NPC_TEXT_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0180, size: body_size, io, } } else { a } })?)),
+            0x019C => Ok(Self::SMSG_QUEST_CONFIRM_ACCEPT(<SMSG_QUEST_CONFIRM_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019C, size: body_size, io, } } else { a } })?)),
             0x019F => Ok(Self::SMSG_LIST_INVENTORY(<SMSG_LIST_INVENTORY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019F, size: body_size, io, } } else { a } })?)),
             0x01A1 => Ok(Self::SMSG_SELL_ITEM(<SMSG_SELL_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A1, size: body_size, io, } } else { a } })?)),
             0x01A4 => Ok(Self::SMSG_BUY_ITEM(<SMSG_BUY_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A4, size: body_size, io, } } else { a } })?)),
@@ -5068,6 +5071,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LIST_INVENTORY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SELL_ITEM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BUY_ITEM(c) => c.write_encrypted_server(w, e),
@@ -5297,6 +5301,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GOSSIP_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_unencrypted_server(w),
             Self::SMSG_LIST_INVENTORY(c) => c.write_unencrypted_server(w),
             Self::SMSG_SELL_ITEM(c) => c.write_unencrypted_server(w),
             Self::SMSG_BUY_ITEM(c) => c.write_unencrypted_server(w),
@@ -5526,6 +5531,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LIST_INVENTORY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SELL_ITEM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BUY_ITEM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -5755,6 +5761,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LIST_INVENTORY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SELL_ITEM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BUY_ITEM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -5984,6 +5991,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LIST_INVENTORY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SELL_ITEM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BUY_ITEM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -6213,6 +6221,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LIST_INVENTORY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SELL_ITEM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BUY_ITEM(c) => c.astd_write_unencrypted_server(w).await,
@@ -6444,6 +6453,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GOSSIP_MESSAGE(_) => "SMSG_GOSSIP_MESSAGE",
             ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => "SMSG_GOSSIP_COMPLETE",
             ServerOpcodeMessage::SMSG_NPC_TEXT_UPDATE(_) => "SMSG_NPC_TEXT_UPDATE",
+            ServerOpcodeMessage::SMSG_QUEST_CONFIRM_ACCEPT(_) => "SMSG_QUEST_CONFIRM_ACCEPT",
             ServerOpcodeMessage::SMSG_LIST_INVENTORY(_) => "SMSG_LIST_INVENTORY",
             ServerOpcodeMessage::SMSG_SELL_ITEM(_) => "SMSG_SELL_ITEM",
             ServerOpcodeMessage::SMSG_BUY_ITEM(_) => "SMSG_BUY_ITEM",
@@ -7218,6 +7228,12 @@ impl From<SMSG_GOSSIP_COMPLETE> for ServerOpcodeMessage {
 impl From<SMSG_NPC_TEXT_UPDATE> for ServerOpcodeMessage {
     fn from(c: SMSG_NPC_TEXT_UPDATE) -> Self {
         Self::SMSG_NPC_TEXT_UPDATE(c)
+    }
+}
+
+impl From<SMSG_QUEST_CONFIRM_ACCEPT> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUEST_CONFIRM_ACCEPT) -> Self {
+        Self::SMSG_QUEST_CONFIRM_ACCEPT(c)
     }
 }
 

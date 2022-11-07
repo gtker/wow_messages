@@ -68,6 +68,12 @@ impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_QUEST_CONFIRM_ACCEPT {}
+
 impl SMSG_QUEST_CONFIRM_ACCEPT {
     pub(crate) fn size(&self) -> usize {
         4 // quest_id: u32

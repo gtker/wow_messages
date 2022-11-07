@@ -387,6 +387,7 @@ pub mod smsg_play_object_sound_vanilla_tbc_wrath;
 pub mod smsg_pong_vanilla_tbc_wrath;
 pub mod smsg_procresist_vanilla_tbc_wrath;
 pub mod smsg_pvp_credit_vanilla_tbc_wrath;
+pub mod smsg_quest_confirm_accept_vanilla_tbc_wrath;
 pub mod smsg_read_item_failed_vanilla_tbc_wrath;
 pub mod smsg_read_item_ok_vanilla_tbc_wrath;
 pub mod smsg_realm_split_tbc_wrath;
