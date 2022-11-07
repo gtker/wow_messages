@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_QUESTGIVER_CHOOSE_REWARD = 0x018E {
     Guid guid;

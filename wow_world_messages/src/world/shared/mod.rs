@@ -152,6 +152,7 @@ pub mod cmsg_quest_confirm_accept_vanilla_tbc_wrath;
 pub mod cmsg_quest_query_vanilla_tbc_wrath;
 pub mod cmsg_questgiver_accept_quest_vanilla_tbc_wrath;
 pub mod cmsg_questgiver_cancel_vanilla_tbc_wrath;
+pub mod cmsg_questgiver_choose_reward_vanilla_tbc_wrath;
 pub mod cmsg_questgiver_query_quest_vanilla_tbc;
 pub mod cmsg_questgiver_status_query_vanilla_tbc_wrath;
 pub mod cmsg_read_item_vanilla_tbc_wrath;
