@@ -67,6 +67,12 @@ impl crate::Message for SMSG_PAGE_TEXT_QUERY_RESPONSE {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PAGE_TEXT_QUERY_RESPONSE {}
+
 impl SMSG_PAGE_TEXT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
         4 // page_id: u32

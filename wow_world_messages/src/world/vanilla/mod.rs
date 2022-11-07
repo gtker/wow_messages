@@ -1094,6 +1094,8 @@ pub use crate::shared::smsg_new_taxi_path_vanilla_tbc_wrath::SMSG_NEW_TAXI_PATH;
 
 pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
 
+pub use crate::shared::smsg_page_text_query_response_vanilla_tbc_wrath::SMSG_PAGE_TEXT_QUERY_RESPONSE;
+
 pub use crate::shared::smsg_pet_action_feedback_vanilla_tbc_wrath::SMSG_PET_ACTION_FEEDBACK;
 
 pub use crate::shared::smsg_pet_action_sound_vanilla_tbc_wrath::SMSG_PET_ACTION_SOUND;
@@ -1416,8 +1418,6 @@ pub(crate) mod smsg_npc_text_update;
 pub use smsg_npc_text_update::*;
 pub(crate) mod smsg_open_container;
 pub use smsg_open_container::*;
-pub(crate) mod smsg_page_text_query_response;
-pub use smsg_page_text_query_response::*;
 pub(crate) mod smsg_party_command_result;
 pub use smsg_party_command_result::*;
 pub(crate) mod smsg_party_member_stats;
