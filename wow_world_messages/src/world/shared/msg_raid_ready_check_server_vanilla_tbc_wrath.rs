@@ -3,7 +3,7 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check_server.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check_server.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check.wowm#L9):
 /// ```text
 /// smsg MSG_RAID_READY_CHECK_Server = 0x0322 {
 ///     optional state_check {
@@ -70,6 +70,12 @@ impl crate::Message for MSG_RAID_READY_CHECK_Server {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for MSG_RAID_READY_CHECK_Server {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for MSG_RAID_READY_CHECK_Server {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for MSG_RAID_READY_CHECK_Server {}
 
 impl MSG_RAID_READY_CHECK_Server {
     pub(crate) fn size(&self) -> usize {

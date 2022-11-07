@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check_client.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check.wowm#L3):
 /// ```text
 /// cmsg MSG_RAID_READY_CHECK_Client = 0x0322 {
 ///     optional answer {

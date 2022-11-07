@@ -253,6 +253,7 @@ pub mod msg_query_next_mail_time_client_vanilla_tbc_wrath;
 pub mod msg_query_next_mail_time_server_tbc_wrath;
 pub mod msg_quest_push_result_vanilla_tbc;
 pub mod msg_raid_ready_check_client_vanilla_tbc_wrath;
+pub mod msg_raid_ready_check_server_vanilla_tbc_wrath;
 pub mod msg_random_roll_client_vanilla_tbc_wrath;
 pub mod msg_random_roll_server_vanilla_tbc_wrath;
 pub mod msg_save_guild_emblem_client_vanilla_tbc_wrath;

@@ -710,6 +710,8 @@ pub use crate::shared::msg_quest_push_result_vanilla_tbc::MSG_QUEST_PUSH_RESULT;
 
 pub use crate::shared::msg_raid_ready_check_client_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Client;
 
+pub use crate::shared::msg_raid_ready_check_server_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Server;
+
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;
 
 pub use crate::shared::msg_random_roll_server_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Server;

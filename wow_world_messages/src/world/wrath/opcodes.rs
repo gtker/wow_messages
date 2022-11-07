@@ -4565,6 +4565,7 @@ use crate::world::wrath::SMSG_SPLINE_MOVE_STOP_SWIM;
 use crate::world::wrath::SMSG_SPLINE_MOVE_SET_RUN_MODE;
 use crate::world::wrath::SMSG_SPLINE_MOVE_SET_WALK_MODE;
 use crate::world::wrath::SMSG_SPLINE_MOVE_ROOT;
+use crate::world::wrath::MSG_RAID_READY_CHECK_Server;
 use crate::world::wrath::SMSG_PET_ACTION_SOUND;
 use crate::world::wrath::SMSG_PET_DISMISS_SOUND;
 use crate::world::wrath::SMSG_GM_TICKET_STATUS_UPDATE;
@@ -4811,6 +4812,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPLINE_MOVE_SET_RUN_MODE(SMSG_SPLINE_MOVE_SET_RUN_MODE),
     SMSG_SPLINE_MOVE_SET_WALK_MODE(SMSG_SPLINE_MOVE_SET_WALK_MODE),
     SMSG_SPLINE_MOVE_ROOT(SMSG_SPLINE_MOVE_ROOT),
+    MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Server),
     SMSG_PET_ACTION_SOUND(SMSG_PET_ACTION_SOUND),
     SMSG_PET_DISMISS_SOUND(SMSG_PET_DISMISS_SOUND),
     SMSG_GM_TICKET_STATUS_UPDATE(SMSG_GM_TICKET_STATUS_UPDATE),
@@ -5059,6 +5061,7 @@ impl ServerOpcodeMessage {
             0x030D => Ok(Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(<SMSG_SPLINE_MOVE_SET_RUN_MODE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030D, size: body_size, io, } } else { a } })?)),
             0x030E => Ok(Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(<SMSG_SPLINE_MOVE_SET_WALK_MODE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030E, size: body_size, io, } } else { a } })?)),
             0x031A => Ok(Self::SMSG_SPLINE_MOVE_ROOT(<SMSG_SPLINE_MOVE_ROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031A, size: body_size, io, } } else { a } })?)),
+            0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
             0x0324 => Ok(Self::SMSG_PET_ACTION_SOUND(<SMSG_PET_ACTION_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0324, size: body_size, io, } } else { a } })?)),
             0x0325 => Ok(Self::SMSG_PET_DISMISS_SOUND(<SMSG_PET_DISMISS_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0325, size: body_size, io, } } else { a } })?)),
             0x0328 => Ok(Self::SMSG_GM_TICKET_STATUS_UPDATE(<SMSG_GM_TICKET_STATUS_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0328, size: body_size, io, } } else { a } })?)),
@@ -5456,6 +5459,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.write_encrypted_server(w, e),
+            Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_ACTION_SOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_DISMISS_SOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.write_encrypted_server(w, e),
@@ -5705,6 +5709,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.write_unencrypted_server(w),
+            Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_ACTION_SOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_DISMISS_SOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.write_unencrypted_server(w),
@@ -5954,6 +5959,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6203,6 +6209,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -6452,6 +6459,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -6701,6 +6709,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -6952,6 +6961,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_RUN_MODE(_) => "SMSG_SPLINE_MOVE_SET_RUN_MODE",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_WALK_MODE(_) => "SMSG_SPLINE_MOVE_SET_WALK_MODE",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_ROOT(_) => "SMSG_SPLINE_MOVE_ROOT",
+            ServerOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Server",
             ServerOpcodeMessage::SMSG_PET_ACTION_SOUND(_) => "SMSG_PET_ACTION_SOUND",
             ServerOpcodeMessage::SMSG_PET_DISMISS_SOUND(_) => "SMSG_PET_DISMISS_SOUND",
             ServerOpcodeMessage::SMSG_GM_TICKET_STATUS_UPDATE(_) => "SMSG_GM_TICKET_STATUS_UPDATE",
@@ -8356,6 +8366,12 @@ impl From<SMSG_SPLINE_MOVE_SET_WALK_MODE> for ServerOpcodeMessage {
 impl From<SMSG_SPLINE_MOVE_ROOT> for ServerOpcodeMessage {
     fn from(c: SMSG_SPLINE_MOVE_ROOT) -> Self {
         Self::SMSG_SPLINE_MOVE_ROOT(c)
+    }
+}
+
+impl From<MSG_RAID_READY_CHECK_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_RAID_READY_CHECK_Server) -> Self {
+        Self::MSG_RAID_READY_CHECK(c)
     }
 }
 
