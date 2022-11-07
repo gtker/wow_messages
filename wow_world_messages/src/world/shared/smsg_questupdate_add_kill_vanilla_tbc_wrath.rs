@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_QUESTUPDATE_ADD_KILL = 0x0199 {
 ///     u32 quest_id;
-///     u32 create_id;
+///     u32 creature_id;
 ///     u32 kill_count;
 ///     u32 required_kill_count;
 ///     Guid guid;
@@ -17,7 +17,7 @@ pub struct SMSG_QUESTUPDATE_ADD_KILL {
     pub quest_id: u32,
     /// Unsure of name
     ///
-    pub create_id: u32,
+    pub creature_id: u32,
     pub kill_count: u32,
     pub required_kill_count: u32,
     pub guid: Guid,
@@ -34,8 +34,8 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
-        // create_id: u32
-        w.write_all(&self.create_id.to_le_bytes())?;
+        // creature_id: u32
+        w.write_all(&self.creature_id.to_le_bytes())?;
 
         // kill_count: u32
         w.write_all(&self.kill_count.to_le_bytes())?;
@@ -56,8 +56,8 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
         // quest_id: u32
         let quest_id = crate::util::read_u32_le(r)?;
 
-        // create_id: u32
-        let create_id = crate::util::read_u32_le(r)?;
+        // creature_id: u32
+        let creature_id = crate::util::read_u32_le(r)?;
 
         // kill_count: u32
         let kill_count = crate::util::read_u32_le(r)?;
@@ -70,7 +70,7 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
 
         Ok(Self {
             quest_id,
-            create_id,
+            creature_id,
             kill_count,
             required_kill_count,
             guid,
@@ -80,4 +80,10 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
 

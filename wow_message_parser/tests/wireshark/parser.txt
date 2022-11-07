@@ -5058,7 +5058,7 @@
             break;
         case SMSG_QUESTUPDATE_ADD_KILL:
             ptvcursor_add(ptv, hf_woww_quest_id, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_create_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_creature_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_kill_count, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_required_kill_count, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
