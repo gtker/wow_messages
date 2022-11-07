@@ -417,8 +417,6 @@ pub(crate) mod msg_pvp_log_data_server;
 pub use msg_pvp_log_data_server::*;
 pub(crate) mod msg_query_next_mail_time_server;
 pub use msg_query_next_mail_time_server::*;
-pub(crate) mod msg_quest_push_result;
-pub use msg_quest_push_result::*;
 pub(crate) mod msg_raid_ready_check_client;
 pub use msg_raid_ready_check_client::*;
 pub(crate) mod msg_raid_ready_check_server;
@@ -886,6 +884,8 @@ pub use crate::shared::msg_pvp_log_data_client_vanilla_tbc_wrath::MSG_PVP_LOG_DA
 
 pub use crate::shared::msg_query_next_mail_time_client_vanilla_tbc_wrath::MSG_QUERY_NEXT_MAIL_TIME_Client;
 
+pub use crate::shared::msg_quest_push_result_vanilla_tbc::MSG_QUEST_PUSH_RESULT;
+
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;
 
 pub use crate::shared::msg_random_roll_server_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Server;
@@ -921,6 +921,8 @@ pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
 pub use crate::shared::quest_item_vanilla_tbc::QuestItem;
+
+pub use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 
 pub use crate::shared::sell_item_result_vanilla_tbc::SellItemResult;
 
@@ -1224,8 +1226,6 @@ pub(crate) mod quest_item_reward;
 pub use quest_item_reward::*;
 pub(crate) mod quest_objective;
 pub use quest_objective::*;
-pub(crate) mod quest_party_message;
-pub use quest_party_message::*;
 pub(crate) mod race;
 pub use race::*;
 pub(crate) mod raid_group_error;

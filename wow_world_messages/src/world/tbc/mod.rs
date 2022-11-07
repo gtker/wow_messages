@@ -704,6 +704,8 @@ pub use crate::shared::msg_query_next_mail_time_client_vanilla_tbc_wrath::MSG_QU
 
 pub use crate::shared::msg_query_next_mail_time_server_tbc_wrath::MSG_QUERY_NEXT_MAIL_TIME_Server;
 
+pub use crate::shared::msg_quest_push_result_vanilla_tbc::MSG_QUEST_PUSH_RESULT;
+
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;
 
 pub use crate::shared::msg_random_roll_server_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Server;
@@ -747,6 +749,8 @@ pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
 pub use crate::shared::quest_item_vanilla_tbc::QuestItem;
+
+pub use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 
 pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 
