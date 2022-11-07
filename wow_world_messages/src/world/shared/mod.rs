@@ -392,6 +392,7 @@ pub mod smsg_questlog_full_vanilla_tbc_wrath;
 pub mod smsg_questupdate_add_item_vanilla_tbc_wrath;
 pub mod smsg_questupdate_add_kill_vanilla_tbc_wrath;
 pub mod smsg_questupdate_complete_vanilla_tbc_wrath;
+pub mod smsg_questupdate_failed_vanilla_tbc_wrath;
 pub mod smsg_read_item_failed_vanilla_tbc_wrath;
 pub mod smsg_read_item_ok_vanilla_tbc_wrath;
 pub mod smsg_realm_split_tbc_wrath;
