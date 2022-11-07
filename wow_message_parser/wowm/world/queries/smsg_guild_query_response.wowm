@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg SMSG_GUILD_QUERY_RESPONSE = 0x55 {
     u32 id;
     CString name;
@@ -9,5 +7,6 @@ smsg SMSG_GUILD_QUERY_RESPONSE = 0x55 {
     u32 border_style;
     u32 border_color;
     u32 background_color;
+} {
+    versions = "1 2 3";
 }
-

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_guild_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_guild_query_response.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_guild_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_guild_query_response.wowm#L1):
 /// ```text
 /// smsg SMSG_GUILD_QUERY_RESPONSE = 0x0055 {
 ///     u32 id;
@@ -119,6 +119,12 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
 
 impl SMSG_GUILD_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

@@ -848,6 +848,8 @@ pub use crate::shared::smsg_guild_info_vanilla_tbc::SMSG_GUILD_INFO;
 
 pub use crate::shared::smsg_guild_invite_vanilla_tbc_wrath::SMSG_GUILD_INVITE;
 
+pub use crate::shared::smsg_guild_query_response_vanilla_tbc_wrath::SMSG_GUILD_QUERY_RESPONSE;
+
 pub use crate::shared::smsg_initialize_factions_vanilla_tbc::SMSG_INITIALIZE_FACTIONS;
 
 pub use crate::shared::smsg_item_cooldown_vanilla_tbc_wrath::SMSG_ITEM_COOLDOWN;

@@ -322,6 +322,7 @@ pub mod smsg_gossip_poi_vanilla_tbc_wrath;
 pub mod smsg_guild_event_tbc_wrath;
 pub mod smsg_guild_info_vanilla_tbc;
 pub mod smsg_guild_invite_vanilla_tbc_wrath;
+pub mod smsg_guild_query_response_vanilla_tbc_wrath;
 pub mod smsg_initialize_factions_vanilla_tbc;
 pub mod smsg_item_cooldown_vanilla_tbc_wrath;
 pub mod smsg_item_enchant_time_update_vanilla_tbc_wrath;
