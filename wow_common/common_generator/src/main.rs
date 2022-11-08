@@ -1,5 +1,6 @@
 mod data;
 mod file_utils;
+mod position;
 mod types;
 mod writer;
 
@@ -9,6 +10,13 @@ use crate::file_utils::{
 };
 use crate::writer::Writer;
 use std::path::Path;
+
+#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
+pub enum Expansion {
+    Vanilla,
+    BurningCrusade,
+    WrathOfTheLichKing,
+}
 
 fn main() {
     let sqlite_dir = {
@@ -48,16 +56,17 @@ fn main() {
     let tbc_data = get_data_from_sqlite_file(&tbc_path);
     let wrath_data = get_data_from_sqlite_file(&wrath_path);
 
-    write_to_files(&vanilla_dir(), &vanilla_data);
-    write_to_files(&tbc_dir(), &tbc_data);
-    write_to_files(&wrath_dir(), &wrath_data);
+    write_to_files(&vanilla_dir(), &vanilla_data, Expansion::Vanilla);
+    write_to_files(&tbc_dir(), &tbc_data, Expansion::BurningCrusade);
+    write_to_files(&wrath_dir(), &wrath_data, Expansion::WrathOfTheLichKing);
 }
 
-fn write_to_files(directory: &Path, data: &Data) {
+fn write_to_files(directory: &Path, data: &Data, expansion: Expansion) {
     write_exp(directory, data);
     write_stats(directory, data);
     write_skills(directory, data);
     write_spells(directory, data);
+    write_positions(directory, data, expansion);
 }
 
 fn write_exp(directory: &Path, data: &Data) {
@@ -165,5 +174,95 @@ fn write_spells(directory: &Path, data: &Data) {
     }
 
     let path = directory.join("spells.rs");
+    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+}
+
+fn get_string_name(s: &str) -> String {
+    s.replace('\'', "").replace(' ', "_").to_lowercase()
+}
+
+fn get_enum_name(s: &str) -> String {
+    s.replace('\'', "").replace(' ', "")
+}
+
+fn write_positions(directory: &Path, data: &Data, expansion: Expansion) {
+    let mut s = Writer::new();
+
+    s.wln("pub fn get_position_from_str(name: &str) -> Option<Position> {");
+    s.wln("    let i = match name {");
+
+    for p in data.positions(expansion) {
+        s.w("        ");
+        for (i, name) in p.names.iter().enumerate() {
+            if i != 0 {
+                s.w("| ");
+            }
+            s.w(format!("\"{}\" ", get_string_name(name)))
+        }
+
+        s.wln(format!(
+            "=> PositionIdentifier::{},",
+            get_enum_name(p.names[0])
+        ));
+    }
+
+    s.wln("        _ => return None,");
+
+    s.wln("    };");
+    s.newline();
+
+    s.wln("    Some(get_position(i))");
+    s.wln("}");
+    s.newline();
+
+    s.wln("pub const fn get_position(ident: PositionIdentifier) -> Position {");
+    s.wln("    let i = match ident {");
+
+    for (i, e) in data.positions(expansion).enumerate() {
+        s.wln(format!(
+            "        PositionIdentifier::{} => {},",
+            get_enum_name(e.names[0]),
+            i
+        ));
+    }
+
+    s.wln("    };");
+    s.newline();
+    s.wln("    POSITIONS[i]");
+    s.wln("}");
+
+    s.wln("pub enum PositionIdentifier {");
+
+    for i in data.positions(expansion) {
+        s.wln(format!("    {},", get_enum_name(i.names[0])));
+    }
+
+    s.wln("}");
+
+    s.wln("const POSITIONS: &[Position] = &[");
+
+    for i in data.positions(expansion) {
+        let map = match expansion {
+            Expansion::Vanilla => format!(
+                "{:?}",
+                wow_world_base::vanilla::Map::try_from(i.map).unwrap()
+            ),
+            Expansion::BurningCrusade => {
+                format!("{:?}", wow_world_base::tbc::Map::try_from(i.map).unwrap())
+            }
+            Expansion::WrathOfTheLichKing => {
+                format!("{:?}", wow_world_base::wrath::Map::try_from(i.map).unwrap())
+            }
+        };
+
+        s.wln(format!(
+            "    Position::new(Map::{}, {:.1}, {:.1}, {:.1}, {:.1}),",
+            map, i.x, i.y, i.z, i.orientation,
+        ));
+    }
+
+    s.wln("];");
+
+    let path = directory.join("position").join("positions.rs");
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }

@@ -1,4 +1,6 @@
+use crate::position::{positions, RawPosition};
 use crate::types::{Class, Race};
+use crate::Expansion;
 use rusqlite::Connection;
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::path::Path;
@@ -9,6 +11,17 @@ pub(crate) struct Data {
     pub skills: HashMap<(Race, Class), BTreeSet<(u32, String)>>,
     pub spells: HashMap<(Race, Class), BTreeSet<(u32, String)>>,
     pub combinations: Vec<(Race, Class)>,
+    positions: Vec<RawPosition>,
+}
+
+impl Data {
+    pub fn positions(&self, expansion: Expansion) -> impl Iterator<Item = &RawPosition> {
+        self.positions.iter().filter(move |a| match expansion {
+            Expansion::Vanilla => a.valid_versions.vanilla(),
+            Expansion::BurningCrusade => a.valid_versions.tbc(),
+            Expansion::WrathOfTheLichKing => a.valid_versions.wrath(),
+        })
+    }
 }
 
 pub(crate) struct XpPerLevel {
@@ -24,6 +37,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
     let base_stats = get_stat_data(&conn);
     let skills = get_skill_data(&conn);
     let spells = get_spell_data(&conn);
+    let positions = positions();
 
     Data {
         exp_per_level,
@@ -31,6 +45,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
         skills,
         spells,
         combinations,
+        positions,
     }
 }
 
