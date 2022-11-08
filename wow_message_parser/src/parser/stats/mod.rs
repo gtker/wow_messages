@@ -61,6 +61,10 @@ impl Data {
         }
     }
 
+    pub(crate) const fn encrypted(name: &'static str, opcode: usize) -> Self {
+        Self::with_reason(name, opcode, "Encrypted")
+    }
+
     pub(crate) fn message_ty(&self) -> MessageType {
         let i = self.name.find('_').unwrap();
         let prefix = &self.name[..i];
