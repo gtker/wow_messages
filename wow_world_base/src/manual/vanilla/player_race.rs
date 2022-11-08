@@ -1,4 +1,3 @@
-use crate::vanilla::Race;
 use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
 
@@ -19,38 +18,46 @@ pub enum PlayerRace {
     Troll,
 }
 
-impl TryFrom<Race> for PlayerRace {
-    type Error = Race;
+macro_rules! from {
+    ($player_race:ty, $race:ty) => {
+        impl TryFrom<$race> for $player_race {
+            type Error = $race;
 
-    fn try_from(value: Race) -> Result<Self, Self::Error> {
-        Ok(match value {
-            Race::Human => Self::Human,
-            Race::Orc => Self::Orc,
-            Race::Dwarf => Self::Dwarf,
-            Race::NightElf => Self::NightElf,
-            Race::Undead => Self::Undead,
-            Race::Tauren => Self::Tauren,
-            Race::Gnome => Self::Gnome,
-            Race::Troll => Self::Troll,
-            race => return Err(race),
-        })
-    }
-}
-
-impl From<PlayerRace> for Race {
-    fn from(v: PlayerRace) -> Self {
-        match v {
-            PlayerRace::Human => Self::Human,
-            PlayerRace::Orc => Self::Orc,
-            PlayerRace::Dwarf => Self::Dwarf,
-            PlayerRace::NightElf => Self::NightElf,
-            PlayerRace::Undead => Self::Undead,
-            PlayerRace::Tauren => Self::Tauren,
-            PlayerRace::Gnome => Self::Gnome,
-            PlayerRace::Troll => Self::Troll,
+            fn try_from(value: $race) -> Result<Self, Self::Error> {
+                Ok(match value {
+                    <$race>::Human => Self::Human,
+                    <$race>::Orc => Self::Orc,
+                    <$race>::Dwarf => Self::Dwarf,
+                    <$race>::NightElf => Self::NightElf,
+                    <$race>::Undead => Self::Undead,
+                    <$race>::Tauren => Self::Tauren,
+                    <$race>::Gnome => Self::Gnome,
+                    <$race>::Troll => Self::Troll,
+                    race => return Err(race),
+                })
+            }
         }
-    }
+
+        impl From<$player_race> for $race {
+            fn from(v: $player_race) -> Self {
+                match v {
+                    <$player_race>::Human => Self::Human,
+                    <$player_race>::Orc => Self::Orc,
+                    <$player_race>::Dwarf => Self::Dwarf,
+                    <$player_race>::NightElf => Self::NightElf,
+                    <$player_race>::Undead => Self::Undead,
+                    <$player_race>::Tauren => Self::Tauren,
+                    <$player_race>::Gnome => Self::Gnome,
+                    <$player_race>::Troll => Self::Troll,
+                }
+            }
+        }
+    };
 }
+
+from!(PlayerRace, crate::vanilla::Race);
+from!(PlayerRace, crate::tbc::Race);
+from!(PlayerRace, crate::wrath::Race);
 
 impl Default for PlayerRace {
     fn default() -> Self {

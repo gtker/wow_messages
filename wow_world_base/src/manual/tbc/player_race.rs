@@ -21,42 +21,49 @@ pub enum PlayerRace {
     Draenei,
 }
 
-impl TryFrom<tbc::Race> for PlayerRace {
-    type Error = tbc::Race;
+macro_rules! from {
+    ($player_race:ty, $race:ty) => {
+        impl TryFrom<$race> for $player_race {
+            type Error = $race;
 
-    fn try_from(value: tbc::Race) -> Result<Self, Self::Error> {
-        Ok(match value {
-            tbc::Race::Human => Self::Human,
-            tbc::Race::Orc => Self::Orc,
-            tbc::Race::Dwarf => Self::Dwarf,
-            tbc::Race::NightElf => Self::NightElf,
-            tbc::Race::Undead => Self::Undead,
-            tbc::Race::Tauren => Self::Tauren,
-            tbc::Race::Gnome => Self::Gnome,
-            tbc::Race::Troll => Self::Troll,
-            tbc::Race::BloodElf => Self::BloodElf,
-            tbc::Race::Draenei => Self::Draenei,
-            race => return Err(race),
-        })
-    }
-}
-
-impl From<PlayerRace> for tbc::Race {
-    fn from(v: PlayerRace) -> Self {
-        match v {
-            PlayerRace::Human => Self::Human,
-            PlayerRace::Orc => Self::Orc,
-            PlayerRace::Dwarf => Self::Dwarf,
-            PlayerRace::NightElf => Self::NightElf,
-            PlayerRace::Undead => Self::Undead,
-            PlayerRace::Tauren => Self::Tauren,
-            PlayerRace::Gnome => Self::Gnome,
-            PlayerRace::Troll => Self::Troll,
-            PlayerRace::BloodElf => Self::BloodElf,
-            PlayerRace::Draenei => Self::Draenei,
+            fn try_from(value: $race) -> Result<Self, Self::Error> {
+                Ok(match value {
+                    <$race>::Human => Self::Human,
+                    <$race>::Orc => Self::Orc,
+                    <$race>::Dwarf => Self::Dwarf,
+                    <$race>::NightElf => Self::NightElf,
+                    <$race>::Undead => Self::Undead,
+                    <$race>::Tauren => Self::Tauren,
+                    <$race>::Gnome => Self::Gnome,
+                    <$race>::Troll => Self::Troll,
+                    <$race>::BloodElf => Self::BloodElf,
+                    <$race>::Draenei => Self::Draenei,
+                    race => return Err(race),
+                })
+            }
         }
-    }
+
+        impl From<$player_race> for $race {
+            fn from(v: $player_race) -> Self {
+                match v {
+                    <$player_race>::Human => Self::Human,
+                    <$player_race>::Orc => Self::Orc,
+                    <$player_race>::Dwarf => Self::Dwarf,
+                    <$player_race>::NightElf => Self::NightElf,
+                    <$player_race>::Undead => Self::Undead,
+                    <$player_race>::Tauren => Self::Tauren,
+                    <$player_race>::Gnome => Self::Gnome,
+                    <$player_race>::Troll => Self::Troll,
+                    <$player_race>::BloodElf => Self::BloodElf,
+                    <$player_race>::Draenei => Self::Draenei,
+                }
+            }
+        }
+    };
 }
+
+from!(PlayerRace, crate::tbc::Race);
+from!(PlayerRace, crate::wrath::Race);
 
 impl Default for PlayerRace {
     fn default() -> Self {
@@ -78,42 +85,5 @@ impl Display for PlayerRace {
             PlayerRace::BloodElf => "Blood Elf",
             PlayerRace::Draenei => "Draenei",
         })
-    }
-}
-
-impl TryFrom<wrath::Race> for PlayerRace {
-    type Error = wrath::Race;
-
-    fn try_from(value: wrath::Race) -> Result<Self, Self::Error> {
-        Ok(match value {
-            wrath::Race::Human => Self::Human,
-            wrath::Race::Orc => Self::Orc,
-            wrath::Race::Dwarf => Self::Dwarf,
-            wrath::Race::NightElf => Self::NightElf,
-            wrath::Race::Undead => Self::Undead,
-            wrath::Race::Tauren => Self::Tauren,
-            wrath::Race::Gnome => Self::Gnome,
-            wrath::Race::Troll => Self::Troll,
-            wrath::Race::BloodElf => Self::BloodElf,
-            wrath::Race::Draenei => Self::Draenei,
-            race => return Err(race),
-        })
-    }
-}
-
-impl From<PlayerRace> for wrath::Race {
-    fn from(v: PlayerRace) -> Self {
-        match v {
-            PlayerRace::Human => Self::Human,
-            PlayerRace::Orc => Self::Orc,
-            PlayerRace::Dwarf => Self::Dwarf,
-            PlayerRace::NightElf => Self::NightElf,
-            PlayerRace::Undead => Self::Undead,
-            PlayerRace::Tauren => Self::Tauren,
-            PlayerRace::Gnome => Self::Gnome,
-            PlayerRace::Troll => Self::Troll,
-            PlayerRace::BloodElf => Self::BloodElf,
-            PlayerRace::Draenei => Self::Draenei,
-        }
     }
 }
