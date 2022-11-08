@@ -95,11 +95,11 @@ fn generate() -> Writer {
 }
 
 fn get_enum_name(s: &str) -> String {
-    s.replace("'", "").replace(" ", "")
+    s.replace('\'', "").replace(' ', "")
 }
 
 fn get_string_name(s: &str) -> String {
-    s.replace("'", "").replace(" ", "_").to_lowercase()
+    s.replace('\'', "").replace(' ', "_").to_lowercase()
 }
 
 pub struct Writer {

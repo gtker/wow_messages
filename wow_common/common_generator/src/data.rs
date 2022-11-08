@@ -159,8 +159,8 @@ fn get_skill_data(conn: &Connection) -> HashMap<(Race, Class), BTreeSet<(u32, St
         let class = combination.1;
 
         let skills = skills.iter().filter(|a| {
-            let race_mask = 1 << race.as_int() - 1;
-            let class_mask = 1 << class.as_int() - 1;
+            let race_mask = 1 << (race.as_int() - 1);
+            let class_mask = 1 << (class.as_int() - 1);
 
             let race = a.race_mask & race_mask != 0 || a.race_mask == 0;
             let class = a.class_mask & class_mask != 0 || a.class_mask == 0;
