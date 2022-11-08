@@ -29,14 +29,12 @@ pub(crate) fn write_stats(directory: &Path, data: &Data) {
     let mut s = Writer::new();
 
     for combination in &data.combinations {
-        let race = combination.0;
-        let class = combination.1;
         let levels = data.base_stats.get(combination).unwrap();
 
         s.wln(format!(
             "const {race}_{class}: &[BaseStats] = &[",
-            race = race.const_name(),
-            class = class.const_name(),
+            race = combination.race.const_name(),
+            class = combination.class.const_name(),
         ));
         s.inc_indent();
 
@@ -62,14 +60,12 @@ pub(crate) fn write_skills(directory: &Path, data: &Data) {
     let mut s = Writer::new();
 
     for combination in &data.combinations {
-        let race = combination.0;
-        let class = combination.1;
         let skills = data.skills.get(combination).unwrap();
 
         s.wln(format!(
             "const {race}_{class}: &[u32] = &[",
-            race = race.const_name(),
-            class = class.const_name(),
+            race = combination.race.const_name(),
+            class = combination.class.const_name(),
         ));
         s.inc_indent();
 
@@ -89,14 +85,12 @@ pub(crate) fn write_spells(directory: &Path, data: &Data) {
     let mut s = Writer::new();
 
     for combination in &data.combinations {
-        let race = combination.0;
-        let class = combination.1;
         let spells = data.spells.get(combination).unwrap();
 
         s.wln(format!(
             "const {race}_{class}: &[u32] = &[",
-            race = race.const_name(),
-            class = class.const_name(),
+            race = combination.race.const_name(),
+            class = combination.class.const_name(),
         ));
         s.inc_indent();
 

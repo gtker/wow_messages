@@ -7,10 +7,10 @@ use std::path::Path;
 
 pub(crate) struct Data {
     pub exp_per_level: Vec<XpPerLevel>,
-    pub base_stats: HashMap<(Race, Class), BTreeMap<u8, BaseStats>>,
-    pub skills: HashMap<(Race, Class), BTreeSet<(u32, String)>>,
-    pub spells: HashMap<(Race, Class), BTreeSet<(u32, String)>>,
-    pub combinations: Vec<(Race, Class)>,
+    pub base_stats: HashMap<Combination, BTreeMap<u8, BaseStats>>,
+    pub skills: HashMap<Combination, BTreeSet<(u32, String)>>,
+    pub spells: HashMap<Combination, BTreeSet<(u32, String)>>,
+    pub combinations: Vec<Combination>,
     positions: Vec<RawPosition>,
 }
 
@@ -84,7 +84,7 @@ pub(crate) struct BaseStatLevel {
     stats: BaseStats,
 }
 
-fn get_stat_data(conn: &Connection) -> HashMap<(Race, Class), BTreeMap<u8, BaseStats>> {
+fn get_stat_data(conn: &Connection) -> HashMap<Combination, BTreeMap<u8, BaseStats>> {
     let mut s = conn
         .prepare(
             "\
@@ -122,10 +122,9 @@ FROM player_levelstats l
     let mut h = HashMap::new();
 
     for combination in combinations {
-        let race = combination.0;
-        let class = combination.1;
-
-        let stats = stats.iter().filter(|a| a.race == race && a.class == class);
+        let stats = stats
+            .iter()
+            .filter(|a| a.race == combination.race && a.class == combination.class);
 
         let mut s = BTreeMap::new();
 
@@ -133,7 +132,7 @@ FROM player_levelstats l
             s.insert(stat.level, stat.stats);
         }
 
-        h.insert((race, class), s);
+        h.insert(combination, s);
     }
 
     h
@@ -146,7 +145,7 @@ struct Skill {
     note: String,
 }
 
-fn get_skill_data(conn: &Connection) -> HashMap<(Race, Class), BTreeSet<(u32, String)>> {
+fn get_skill_data(conn: &Connection) -> HashMap<Combination, BTreeSet<(u32, String)>> {
     let mut s = conn
         .prepare(
             "SELECT raceMask, classMask, skill, note FROM playercreateinfo_skills ORDER BY skill;
@@ -170,12 +169,9 @@ fn get_skill_data(conn: &Connection) -> HashMap<(Race, Class), BTreeSet<(u32, St
     let mut h = HashMap::new();
 
     for combination in combinations {
-        let race = combination.0;
-        let class = combination.1;
-
         let skills = skills.iter().filter(|a| {
-            let race_mask = 1 << (race.as_int() - 1);
-            let class_mask = 1 << (class.as_int() - 1);
+            let race_mask = 1 << (combination.race.as_int() - 1);
+            let class_mask = 1 << (combination.class.as_int() - 1);
 
             let race = a.race_mask & race_mask != 0 || a.race_mask == 0;
             let class = a.class_mask & class_mask != 0 || a.class_mask == 0;
@@ -202,7 +198,7 @@ struct Spell {
     note: String,
 }
 
-fn get_spell_data(conn: &Connection) -> HashMap<(Race, Class), BTreeSet<(u32, String)>> {
+fn get_spell_data(conn: &Connection) -> HashMap<Combination, BTreeSet<(u32, String)>> {
     let mut s = conn
         .prepare("SELECT race, class, Spell, Note FROM playercreateinfo_spell;")
         .unwrap();
@@ -224,10 +220,9 @@ fn get_spell_data(conn: &Connection) -> HashMap<(Race, Class), BTreeSet<(u32, St
     let mut h = HashMap::new();
 
     for combination in combinations {
-        let race = combination.0;
-        let class = combination.1;
-
-        let spells = spells.iter().filter(|a| a.class == class && a.race == race);
+        let spells = spells
+            .iter()
+            .filter(|a| a.class == combination.class && a.race == combination.race);
 
         let mut s = BTreeSet::new();
         for spell in spells {
@@ -240,21 +235,27 @@ fn get_spell_data(conn: &Connection) -> HashMap<(Race, Class), BTreeSet<(u32, St
     h
 }
 
-fn get_combinations(conn: &Connection) -> Vec<(Race, Class)> {
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+pub(crate) struct Combination {
+    pub race: Race,
+    pub class: Class,
+}
+
+fn get_combinations(conn: &Connection) -> Vec<Combination> {
     let mut combinations = conn
         .prepare("SELECT DISTINCT race, class FROM player_levelstats ORDER BY race, class;")
         .unwrap();
 
     let combinations = combinations
         .query_map([], |row| {
-            Ok((
-                row.get::<usize, u8>(0).unwrap().try_into().unwrap(),
-                row.get::<usize, u8>(1).unwrap().try_into().unwrap(),
-            ))
+            Ok(Combination {
+                race: row.get::<usize, u8>(0).unwrap().try_into().unwrap(),
+                class: row.get::<usize, u8>(1).unwrap().try_into().unwrap(),
+            })
         })
         .unwrap();
-    let mut combinations: Vec<(Race, Class)> = combinations.map(|a| a.unwrap()).collect();
-    combinations.sort_by(|a, b| a.0.cmp(&b.0).then(a.1.cmp(&b.1)));
+    let mut combinations: Vec<_> = combinations.map(|a| a.unwrap()).collect();
+    combinations.sort_by(|a, b| a.race.cmp(&b.race).then(a.class.cmp(&b.class)));
 
     combinations
 }
