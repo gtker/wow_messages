@@ -2052,8 +2052,18 @@ impl UpdatePlayerBuilder {
         self
     }
 
-    pub fn set_player_SKILL_INFO_1_1(mut self, a: u16, b: u16) -> Self {
-        self.header_set(928, (a as u32) << 16 | b as u32);
+    pub fn set_player_SKILL_INFO_1_1(mut self, v: i32) -> Self {
+        self.header_set(928, v as u32);
+        self
+    }
+
+    pub fn set_player_SKILL_INFO_1_2(mut self, a: u16, b: u16) -> Self {
+        self.header_set(929, (a as u32) << 16 | b as u32);
+        self
+    }
+
+    pub fn set_player_SKILL_INFO_1_3(mut self, v: i32) -> Self {
+        self.header_set(930, v as u32);
         self
     }
 
@@ -6369,18 +6379,34 @@ impl UpdatePlayer {
         self.values.get(&927).map(|v| *v as i32)
     }
 
-    pub fn set_player_SKILL_INFO_1_1(&mut self, a: u16, b: u16) {
-        self.header_set(928, (a as u32) << 16 | b as u32);
+    pub fn set_player_SKILL_INFO_1_1(&mut self, v: i32) {
+        self.header_set(928, v as u32);
     }
 
-    pub fn player_SKILL_INFO_1_1(&self) -> Option<(u16, u16)> {
-        if let Some(v) = self.values.get(&928) {
+    pub fn player_SKILL_INFO_1_1(&self) -> Option<i32> {
+        self.values.get(&928).map(|v| *v as i32)
+    }
+
+    pub fn set_player_SKILL_INFO_1_2(&mut self, a: u16, b: u16) {
+        self.header_set(929, (a as u32) << 16 | b as u32);
+    }
+
+    pub fn player_SKILL_INFO_1_2(&self) -> Option<(u16, u16)> {
+        if let Some(v) = self.values.get(&929) {
             let v = v.to_le_bytes();
             let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));
             Some((a, b))
         } else {
             None
         }
+    }
+
+    pub fn set_player_SKILL_INFO_1_3(&mut self, v: i32) {
+        self.header_set(930, v as u32);
+    }
+
+    pub fn player_SKILL_INFO_1_3(&self) -> Option<i32> {
+        self.values.get(&930).map(|v| *v as i32)
     }
 
     pub fn set_player_CHARACTER_POINTS1(&mut self, v: i32) {

@@ -1,6 +1,6 @@
 use crate::rust_printer::{ByteType, MemberType, UfType, UpdateMaskType};
 
-pub(crate) const FIELDS: [MemberType; 367] = [
+pub(crate) const FIELDS: [MemberType; 369] = [
     MemberType::new(UpdateMaskType::Object, "GUID", 0x0000, 2, UfType::Guid),
     MemberType::new(UpdateMaskType::Object, "TYPE", 0x0002, 1, UfType::Int),
     MemberType::new(UpdateMaskType::Object, "ENTRY", 0x0003, 1, UfType::Int),
@@ -1641,8 +1641,22 @@ pub(crate) const FIELDS: [MemberType; 367] = [
         UpdateMaskType::Player,
         "SKILL_INFO_1_1",
         0x027C,
-        384,
+        1,
+        UfType::Int,
+    ),
+    MemberType::new(
+        UpdateMaskType::Player,
+        "SKILL_INFO_1_2",
+        0x027D,
+        1,
         UfType::TwoShort,
+    ),
+    MemberType::new(
+        UpdateMaskType::Player,
+        "SKILL_INFO_1_3",
+        0x027E,
+        382,
+        UfType::Int,
     ),
     MemberType::new(
         UpdateMaskType::Player,
