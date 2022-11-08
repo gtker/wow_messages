@@ -24,6 +24,7 @@ The following environment variables can be used with the parser:
 
 * `WOWM_WIRESHARK`: must point to a valid `packet-woww.c` in a wireshark repo. This file will then be modified with the auto generated Wireshark messages.
 * `WOWM_PRINT_TEST_ERRORS`: when set errors testing that the application exists with a message will print error messages.
+* `WOWM_ONLY_PRINT_NAME_OF_SINGLE_MESSAGE`: when set the reporting output will be the first unimplemented message without a newline character. This is intended for quickly implementing many messages in quick succession.
 
 ## License
 

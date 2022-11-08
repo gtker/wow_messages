@@ -10,6 +10,23 @@ use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::MajorWorldVersion;
 use crate::UNIMPLEMENTED;
 
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
+pub enum MessageType {
+    Cmsg,
+    Smsg,
+    Msg,
+}
+
+impl MessageType {
+    pub const fn wowm_str(&self) -> &'static str {
+        match self {
+            MessageType::Cmsg => "cmsg",
+            MessageType::Smsg => "smsg",
+            MessageType::Msg => "msg",
+        }
+    }
+}
+
 #[derive(Debug, Clone)]
 pub(crate) struct Data {
     pub name: &'static str,
@@ -43,6 +60,74 @@ impl Data {
             reason: Some(reason),
         }
     }
+
+    pub(crate) fn message_ty(&self) -> MessageType {
+        let i = self.name.find('_').unwrap();
+        let prefix = &self.name[..i];
+
+        match prefix {
+            "SMSG" => MessageType::Smsg,
+            "CMSG" => MessageType::Cmsg,
+            "MSG" => MessageType::Msg,
+            _ => unreachable!("{} in {}", prefix, self.name),
+        }
+    }
+}
+
+fn get_messages_to_print(wrath: &[Data], vanilla: &[Data]) -> (Vec<Data>, &'static str) {
+    struct Option {
+        f: Box<dyn Fn(&Data, &Data) -> bool>,
+        s: &'static str,
+    }
+
+    fn cmsg_that_are_also_in_vanilla(a: &Data, v: &Data) -> bool {
+        a.name == v.name && a.opcode == v.opcode && a.message_ty() == MessageType::Cmsg
+    }
+    let cmsg_that_are_also_in_vanilla = Option {
+        f: Box::new(cmsg_that_are_also_in_vanilla),
+        s: "Client messages that are also in Vanilla",
+    };
+
+    fn messages_that_are_also_in_vanilla(a: &Data, v: &Data) -> bool {
+        a.name == v.name && a.opcode == v.opcode
+    }
+    let messages_that_are_also_in_vanilla = Option {
+        f: Box::new(messages_that_are_also_in_vanilla),
+        s: "Messages that are also in Vanilla",
+    };
+
+    fn cmsg_for_wrath(a: &Data, _v: &Data) -> bool {
+        a.message_ty() == MessageType::Cmsg
+    }
+    let cmsg_for_wrath = Option {
+        f: Box::new(cmsg_for_wrath),
+        s: "Client messages",
+    };
+
+    for condition in [
+        cmsg_that_are_also_in_vanilla,
+        messages_that_are_also_in_vanilla,
+        cmsg_for_wrath,
+    ] {
+        let data = wrath
+            .iter()
+            .filter(|a| vanilla.iter().find(|v| (condition.f)(a, v)).is_some())
+            .cloned()
+            .collect::<Vec<_>>();
+
+        if data.len() != 0 {
+            return (data, condition.s);
+        }
+    }
+
+    (
+        if wrath.len() != 0 {
+            wrath.to_vec()
+        } else {
+            vanilla.to_vec()
+        },
+        "Messages",
+    )
 }
 
 pub(crate) fn print_message_stats(o: &Objects) {
@@ -59,31 +144,26 @@ pub(crate) fn print_message_stats(o: &Objects) {
         (get_data_for(version, wrath_messages::DATA, o), version)
     };
 
-    let (data, description) = {
-        let description = "Messsages that are also in Vanilla";
-        let data = wrath
-            .0
-            .iter()
-            .filter(|a| {
-                vanilla
-                    .0
-                    .iter()
-                    .find(|v| a.name == v.name && a.opcode == v.opcode)
-                    .is_some()
-            })
-            .cloned()
-            .collect::<Vec<_>>();
-        (data, description)
-    };
+    let (data, description) = get_messages_to_print(&wrath.0, &vanilla.0);
 
-    print_missing_definitions(&data, wrath.1, description);
+    if std::env::var("WOWM_ONLY_PRINT_NAME_OF_SINGLE_MESSAGE").is_ok() {
+        print!(
+            "{}",
+            data.iter()
+                .find(|a| !a.definition && a.reason.is_none())
+                .unwrap()
+                .name
+        );
+    } else {
+        print_missing_definitions(&data, wrath.1, description);
 
-    stats_for(wrath.1, &data, description);
+        stats_for(wrath.1, &data, description);
 
-    let messages_description = "Messages";
+        let messages_description = "Messages";
 
-    for (data, version) in [&vanilla, &tbc, &wrath] {
-        stats_for(*version, &data, messages_description);
+        for (data, version) in [&vanilla, &tbc, &wrath] {
+            stats_for(*version, &data, messages_description);
+        }
     }
 }
 
@@ -145,14 +225,7 @@ fn print_missing_definitions(data: &[Data], version: MajorWorldVersion, descript
         if !d.definition {
             if print_missing_as_wowm {
                 if d.reason.is_none() {
-                    let i = d.name.find('_').unwrap();
-                    let prefix = &d.name[..i];
-                    let ty = match prefix {
-                        "SMSG" => "smsg",
-                        "CMSG" => "cmsg",
-                        "MSG" => "msg",
-                        _ => unreachable!("{} in {}", prefix, d.name),
-                    };
+                    let ty = d.message_ty().wowm_str();
                     println!(
                         "{ty} {name} = {opcode:#06X} {{ {unimplemented} }} {{ versions = \"{version}\"; }}",
                         name = &d.name,
