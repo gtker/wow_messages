@@ -46,13 +46,22 @@ impl Data {
 }
 
 pub(crate) fn print_message_stats(o: &Objects) {
-    stats_for(MajorWorldVersion::Vanilla, vanilla_messages::DATA, o);
-    println!();
+    let vanilla = get_data_for(MajorWorldVersion::Vanilla, vanilla_messages::DATA, o);
+    let tbc = get_data_for(MajorWorldVersion::BurningCrusade, tbc_messages::DATA, o);
+    let wrath = get_data_for(MajorWorldVersion::Wrath, wrath_messages::DATA, o);
 
-    stats_for(MajorWorldVersion::BurningCrusade, tbc_messages::DATA, o);
-    println!();
+    if std::env::var("").is_err() {
+        print_missing_definitions(&vanilla, MajorWorldVersion::Vanilla);
+        print_missing_definitions(&tbc, MajorWorldVersion::BurningCrusade);
+        print_missing_definitions(&wrath, MajorWorldVersion::Wrath);
 
-    stats_for(MajorWorldVersion::Wrath, wrath_messages::DATA, o);
+        stats_for(MajorWorldVersion::Vanilla, &vanilla);
+        println!();
+        stats_for(MajorWorldVersion::BurningCrusade, &tbc);
+        println!();
+        stats_for(MajorWorldVersion::Wrath, &wrath);
+    } else {
+    }
 }
 
 fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<Data> {
@@ -100,27 +109,15 @@ fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<D
     data
 }
 
-fn stats_for(version: MajorWorldVersion, data: &[Data], o: &Objects) {
-    let data = get_data_for(version, data, o);
-
-    let mut definition_sum = 0;
-    let mut test_sum = 0;
-    for d in &data {
-        if d.definition {
-            definition_sum += 1;
-        }
-        if d.tests > 0 {
-            test_sum += 1;
-        }
-    }
-
-    let print_missing_as_wowm = version != MajorWorldVersion::Vanilla;
-
+fn print_missing_definitions(data: &[Data], version: MajorWorldVersion) {
     println!(
         "{} Messages without definition:",
         version.as_version_string()
     );
-    for d in &data {
+
+    let print_missing_as_wowm = version != MajorWorldVersion::Vanilla;
+
+    for d in data {
         if !d.definition {
             if print_missing_as_wowm {
                 if d.reason.is_none() {
@@ -149,12 +146,25 @@ fn stats_for(version: MajorWorldVersion, data: &[Data], o: &Objects) {
     }
 
     println!();
+}
+
+fn stats_for(version: MajorWorldVersion, data: &[Data]) {
+    let mut definition_sum = 0;
+    let mut test_sum = 0;
+    for d in data {
+        if d.definition {
+            definition_sum += 1;
+        }
+        if d.tests > 0 {
+            test_sum += 1;
+        }
+    }
 
     println!(
         "{} Messages with definition: {} / {} ({}%) ({} left)",
         version.as_version_string(),
         definition_sum,
-        &data.len(),
+        data.len(),
         (definition_sum as f32 / data.len() as f32) * 100.0_f32,
         data.len() - definition_sum
     );
@@ -162,7 +172,7 @@ fn stats_for(version: MajorWorldVersion, data: &[Data], o: &Objects) {
         "{} Total messages with tests: {} / {} ({}%)",
         version.as_version_string(),
         test_sum,
-        &data.len(),
+        data.len(),
         (test_sum as f32 / data.len() as f32) * 100.0_f32
     );
 }
