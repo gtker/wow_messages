@@ -2,6 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+/// Respond with [`SMSG_CALENDAR_SEND_NUM_PENDING`](crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING)
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/cmsg_calendar_get_num_pending.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/cmsg_calendar_get_num_pending.wowm#L3):
 /// ```text
 /// msg CMSG_CALENDAR_GET_NUM_PENDING = 0x0447 {

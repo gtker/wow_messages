@@ -1080,6 +1080,8 @@ pub(crate) mod smsg_binder_confirm;
 pub use smsg_binder_confirm::*;
 pub(crate) mod smsg_bindpointupdate;
 pub use smsg_bindpointupdate::*;
+pub(crate) mod smsg_calendar_send_num_pending;
+pub use smsg_calendar_send_num_pending::*;
 pub(crate) mod smsg_char_create;
 pub use smsg_char_create::*;
 pub(crate) mod smsg_char_delete;

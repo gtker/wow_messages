@@ -668,6 +668,7 @@
 - [SMSG_BUY_BANK_SLOT_RESULT](docs/smsg_buy_bank_slot_result.md)
 - [SMSG_BUY_FAILED](docs/smsg_buy_failed.md)
 - [SMSG_BUY_ITEM](docs/smsg_buy_item.md)
+- [SMSG_CALENDAR_SEND_NUM_PENDING](docs/smsg_calendar_send_num_pending.md)
 - [SMSG_CANCEL_AUTO_REPEAT](docs/smsg_cancel_auto_repeat.md)
 - [SMSG_CANCEL_COMBAT](docs/smsg_cancel_combat.md)
 - [SMSG_CAST_RESULT](docs/smsg_cast_result.md)
