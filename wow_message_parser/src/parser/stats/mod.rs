@@ -46,21 +46,44 @@ impl Data {
 }
 
 pub(crate) fn print_message_stats(o: &Objects) {
-    let vanilla = get_data_for(MajorWorldVersion::Vanilla, vanilla_messages::DATA, o);
-    let tbc = get_data_for(MajorWorldVersion::BurningCrusade, tbc_messages::DATA, o);
-    let wrath = get_data_for(MajorWorldVersion::Wrath, wrath_messages::DATA, o);
+    let vanilla = {
+        let version = MajorWorldVersion::Vanilla;
+        (get_data_for(version, vanilla_messages::DATA, o), version)
+    };
+    let tbc = {
+        let version = MajorWorldVersion::BurningCrusade;
+        (get_data_for(version, tbc_messages::DATA, o), version)
+    };
+    let wrath = {
+        let version = MajorWorldVersion::Wrath;
+        (get_data_for(version, wrath_messages::DATA, o), version)
+    };
 
-    if std::env::var("").is_err() {
-        print_missing_definitions(&vanilla, MajorWorldVersion::Vanilla);
-        print_missing_definitions(&tbc, MajorWorldVersion::BurningCrusade);
-        print_missing_definitions(&wrath, MajorWorldVersion::Wrath);
+    let (data, description) = {
+        let description = "Messsages that are also in Vanilla";
+        let data = wrath
+            .0
+            .iter()
+            .filter(|a| {
+                vanilla
+                    .0
+                    .iter()
+                    .find(|v| a.name == v.name && a.opcode == v.opcode)
+                    .is_some()
+            })
+            .cloned()
+            .collect::<Vec<_>>();
+        (data, description)
+    };
 
-        stats_for(MajorWorldVersion::Vanilla, &vanilla);
-        println!();
-        stats_for(MajorWorldVersion::BurningCrusade, &tbc);
-        println!();
-        stats_for(MajorWorldVersion::Wrath, &wrath);
-    } else {
+    print_missing_definitions(&data, wrath.1, description);
+
+    stats_for(wrath.1, &data, description);
+
+    let messages_description = "Messages";
+
+    for (data, version) in [&vanilla, &tbc, &wrath] {
+        stats_for(*version, &data, messages_description);
     }
 }
 
@@ -109,10 +132,11 @@ fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<D
     data
 }
 
-fn print_missing_definitions(data: &[Data], version: MajorWorldVersion) {
+fn print_missing_definitions(data: &[Data], version: MajorWorldVersion, description: &str) {
     println!(
-        "{} Messages without definition:",
-        version.as_version_string()
+        "{} {} without definition:",
+        version.as_version_string(),
+        description,
     );
 
     let print_missing_as_wowm = version != MajorWorldVersion::Vanilla;
@@ -148,7 +172,7 @@ fn print_missing_definitions(data: &[Data], version: MajorWorldVersion) {
     println!();
 }
 
-fn stats_for(version: MajorWorldVersion, data: &[Data]) {
+fn stats_for(version: MajorWorldVersion, data: &[Data], description: &str) {
     let mut definition_sum = 0;
     let mut test_sum = 0;
     for d in data {
@@ -161,16 +185,16 @@ fn stats_for(version: MajorWorldVersion, data: &[Data]) {
     }
 
     println!(
-        "{} Messages with definition: {} / {} ({}%) ({} left)",
+        "{} {} with definition: {} / {} ({}%) ({} left)",
         version.as_version_string(),
+        description,
         definition_sum,
         data.len(),
         (definition_sum as f32 / data.len() as f32) * 100.0_f32,
         data.len() - definition_sum
     );
     println!(
-        "{} Total messages with tests: {} / {} ({}%)",
-        version.as_version_string(),
+        "    with tests: {} / {} ({}%)",
         test_sum,
         data.len(),
         (test_sum as f32 / data.len() as f32) * 100.0_f32
