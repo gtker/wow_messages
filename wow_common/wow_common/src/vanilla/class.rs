@@ -1,3 +1,4 @@
+use crate::shared::vanilla_tbc_power;
 use wow_world_base::vanilla::{Class, PlayerGender, PlayerRace, Power};
 
 pub fn get_display_id_for_player(race: PlayerRace, gender: PlayerGender) -> i32 {
@@ -20,16 +21,4 @@ pub fn get_display_id_for_player(race: PlayerRace, gender: PlayerGender) -> i32 
     race + gender
 }
 
-pub fn get_power_for_class(class: Class) -> Power {
-    match class {
-        Class::Warrior => Power::Rage,
-        Class::Rogue => Power::Energy,
-        Class::Paladin
-        | Class::Hunter
-        | Class::Priest
-        | Class::Shaman
-        | Class::Mage
-        | Class::Warlock
-        | Class::Druid => Power::Mana,
-    }
-}
+vanilla_tbc_power!();

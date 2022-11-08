@@ -3,18 +3,12 @@ mod shared;
 
 #[cfg(feature = "tbc")]
 pub mod tbc;
-#[cfg(not(feature = "tbc"))]
-pub(crate) mod tbc;
 
 #[cfg(feature = "wrath")]
 pub mod wrath;
-#[cfg(not(feature = "wrath"))]
-pub(crate) mod wrath;
 
 #[cfg(feature = "vanilla")]
 pub mod vanilla;
-#[cfg(not(feature = "vanilla"))]
-pub(crate) mod vanilla;
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub struct BaseStats {
