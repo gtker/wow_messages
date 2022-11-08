@@ -1,4 +1,4 @@
-pub use wow_world_base::vanilla::{Class, Map, Race};
+pub use wow_world_base::vanilla::{Class, Map, Race, RaceClass};
 
 pub mod base_stats;
 pub mod class;
