@@ -1,0 +1,9 @@
+#tag_all versions "3.3.5";
+
+smsg SMSG_CALENDAR_SEND_NUM_PENDING = 0x0448 {
+    u32 pending_events {
+        comment = "Number of calendar items that require attention, e.g. pending invites";
+    }
+} {
+    comment = "Sent as response to [CMSG_CALENDAR_GET_NUM_PENDING]";
+}
