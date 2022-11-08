@@ -606,6 +606,8 @@ pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
+pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
+
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
 pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
@@ -651,6 +653,8 @@ pub use crate::shared::guild_event_tbc_wrath::GuildEvent;
 pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
 
 pub use crate::shared::guild_rights_tbc_wrath::GuildRights;
+
+pub use crate::shared::initial_spell_vanilla_tbc_wrath::InitialSpell;
 
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
@@ -883,6 +887,8 @@ pub use crate::shared::smsg_guild_info_vanilla_tbc::SMSG_GUILD_INFO;
 pub use crate::shared::smsg_guild_invite_vanilla_tbc_wrath::SMSG_GUILD_INVITE;
 
 pub use crate::shared::smsg_guild_query_response_vanilla_tbc_wrath::SMSG_GUILD_QUERY_RESPONSE;
+
+pub use crate::shared::smsg_initial_spells_vanilla_tbc_wrath::SMSG_INITIAL_SPELLS;
 
 pub use crate::shared::smsg_initialize_factions_vanilla_tbc::SMSG_INITIALIZE_FACTIONS;
 

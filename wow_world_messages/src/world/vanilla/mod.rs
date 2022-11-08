@@ -230,8 +230,6 @@ pub(crate) mod cmsg_world_teleport;
 pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
-pub(crate) mod cooldown_spell;
-pub use cooldown_spell::*;
 pub use crate::helper::vanilla::*;
 pub(crate) mod damage_info;
 pub use damage_info::*;
@@ -273,8 +271,6 @@ pub(crate) mod hit_info;
 pub use hit_info::*;
 pub(crate) mod info_block;
 pub use info_block::*;
-pub(crate) mod initial_spell;
-pub use initial_spell::*;
 pub(crate) mod instance_reset_failed_reason;
 pub use instance_reset_failed_reason::*;
 pub(crate) mod inventory_result;
@@ -802,6 +798,8 @@ pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
+pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
+
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
 pub use crate::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
@@ -833,6 +831,8 @@ pub use crate::shared::gm_ticket_status_vanilla_tbc_wrath::GmTicketStatus;
 pub use crate::shared::guild_command_vanilla_tbc::GuildCommand;
 
 pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
+
+pub use crate::shared::initial_spell_vanilla_tbc_wrath::InitialSpell;
 
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
@@ -1037,6 +1037,8 @@ pub use crate::shared::smsg_guild_info_vanilla_tbc::SMSG_GUILD_INFO;
 pub use crate::shared::smsg_guild_invite_vanilla_tbc_wrath::SMSG_GUILD_INVITE;
 
 pub use crate::shared::smsg_guild_query_response_vanilla_tbc_wrath::SMSG_GUILD_QUERY_RESPONSE;
+
+pub use crate::shared::smsg_initial_spells_vanilla_tbc_wrath::SMSG_INITIAL_SPELLS;
 
 pub use crate::shared::smsg_initialize_factions_vanilla_tbc::SMSG_INITIALIZE_FACTIONS;
 
@@ -1374,8 +1376,6 @@ pub(crate) mod smsg_ignore_list;
 pub use smsg_ignore_list::*;
 pub(crate) mod smsg_init_world_states;
 pub use smsg_init_world_states::*;
-pub(crate) mod smsg_initial_spells;
-pub use smsg_initial_spells::*;
 pub(crate) mod smsg_inspect;
 pub use smsg_inspect::*;
 pub(crate) mod smsg_instance_reset;
