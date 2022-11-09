@@ -7,6 +7,7 @@ use std::path::Path;
 
 pub(crate) struct Data {
     pub exp_per_level: Vec<XpPerLevel>,
+    pub exploration_exp_per_level: Vec<XpPerLevel>,
     pub base_stats: HashMap<Combination, BTreeMap<u8, BaseStats>>,
     pub skills: HashMap<Combination, BTreeSet<(u32, String)>>,
     pub spells: HashMap<Combination, BTreeSet<(u32, String)>>,
@@ -35,6 +36,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
 
     let combinations = get_combinations(&conn);
     let exp_per_level = get_exp_data(&conn);
+    let exploration_exp_per_level = get_exploration_exp_data(&conn);
     let base_stats = get_stat_data(&conn);
     let skills = get_skill_data(&conn);
     let spells = get_spell_data(&conn);
@@ -43,6 +45,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
 
     Data {
         exp_per_level,
+        exploration_exp_per_level,
         base_stats,
         skills,
         spells,
@@ -50,6 +53,27 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
         positions,
         actions,
     }
+}
+
+fn get_exploration_exp_data(conn: &Connection) -> Vec<XpPerLevel> {
+    conn.prepare("SELECT level, basexp FROM exploration_basexp;")
+        .unwrap()
+        .query_map([], |row| {
+            Ok(XpPerLevel {
+                level: row.get(0).unwrap(),
+                exp: row.get(1).unwrap(),
+            })
+        })
+        .unwrap()
+        .filter_map(|a| {
+            let a = a.unwrap();
+            if a.level == 0 {
+                None
+            } else {
+                Some(a)
+            }
+        })
+        .collect::<Vec<_>>()
 }
 
 fn get_exp_data(conn: &Connection) -> Vec<XpPerLevel> {

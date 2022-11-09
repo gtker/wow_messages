@@ -7,10 +7,7 @@ use std::path::Path;
 pub(crate) fn write_exp(directory: &Path, data: &Data) {
     let mut s = Writer::new();
 
-    s.wln(format!(
-        "const EXP_REQUIRED_FOR_LEVEL: [i32; {}] = [",
-        data.exp_per_level.len()
-    ));
+    s.wln("const EXP_REQUIRED_FOR_LEVEL: &[i32] = &[");
     s.inc_indent();
     for x in &data.exp_per_level {
         s.wln(format!(
@@ -18,6 +15,21 @@ pub(crate) fn write_exp(directory: &Path, data: &Data) {
             x.exp, x.level
         ));
     }
+    s.dec_indent();
+    s.wln("];");
+
+    s.newline();
+
+    s.wln("const EXPLORATION_EXP_PER_LEVEL: &[i32] = &[");
+    s.inc_indent();
+
+    for x in &data.exploration_exp_per_level {
+        s.wln(format!(
+            "{}, // Exploration exp for level {}",
+            x.exp, x.level
+        ));
+    }
+
     s.dec_indent();
     s.wln("];");
 

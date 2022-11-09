@@ -16,6 +16,43 @@ macro_rules! exp_required_to_level_up {
 }
 pub(crate) use exp_required_to_level_up;
 
+macro_rules! exploration_exp_for {
+    ($level:expr) => {
+        /// Get exploration exp for area.
+        ///
+        #[doc = "`level` `== 0 || >="]
+        #[doc = stringify!($level)]
+        #[doc = "` will return [None]."]
+        pub const fn exploration_exp_for(level: u8, area_level: u8) -> Option<i32> {
+            if level == 0 || level > $level {
+                return None;
+            }
+
+            let level = level - 1;
+
+            let difference = level.abs_diff(area_level);
+
+            Some(if difference > 5 {
+                if level < area_level {
+                    let level = level + 5;
+
+                    let level = if level > $level { $level } else { level };
+
+                    EXPLORATION_EXP_PER_LEVEL[level as usize]
+                } else {
+                    let difference = difference as i32;
+                    let exploration_percent = (100 - (difference - 5) * 5) / 100;
+                    let exp = EXPLORATION_EXP_PER_LEVEL[level as usize];
+                    exp * exploration_percent
+                }
+            } else {
+                EXPLORATION_EXP_PER_LEVEL[level as usize]
+            })
+        }
+    };
+}
+pub(crate) use exploration_exp_for;
+
 macro_rules! get_base_stats_for {
     ($level:expr) => {
         /// Get the base stats for a race/class/level combination.
