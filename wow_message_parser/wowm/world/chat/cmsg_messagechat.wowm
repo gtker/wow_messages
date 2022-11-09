@@ -29,7 +29,7 @@ test CMSG_MESSAGECHAT {
 
 cmsg CMSG_MESSAGECHAT = 0x0095 {
     (u32)ChatType chat_type;   
-    Language language;
+    (u32)Language language;
     if (chat_type == WHISPER) {
         CString target_player;
     } else if (chat_type == CHANNEL) {
@@ -43,7 +43,7 @@ cmsg CMSG_MESSAGECHAT = 0x0095 {
 
 cmsg CMSG_MESSAGECHAT = 0x0095 {
     (u32)ChatType chat_type;   
-    Language language;
+    (u32)Language language;
     if (chat_type == WHISPER) {
         CString target_player;
     } else if (chat_type == CHANNEL) {

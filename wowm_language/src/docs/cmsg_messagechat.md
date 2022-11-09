@@ -100,13 +100,13 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [ChatType](chattype.md) | chat_type |  |  |
-| 0x0A | 1 / - | [Language](language.md) | language |  |  |
+| 0x0A | 4 / - | [Language](language.md) | language |  |  |
 
 If chat_type is equal to `WHISPER`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0B | - / - | CString | target_player |  |  |
+| 0x0E | - / - | CString | target_player |  |  |
 
 Else If chat_type is equal to `CHANNEL`:
 
@@ -151,13 +151,13 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [ChatType](chattype.md) | chat_type |  |  |
-| 0x0A | 1 / - | [Language](language.md) | language |  |  |
+| 0x0A | 4 / - | [Language](language.md) | language |  |  |
 
 If chat_type is equal to `WHISPER`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0B | - / - | CString | target_player |  |  |
+| 0x0E | - / - | CString | target_player |  |  |
 
 Else If chat_type is equal to `CHANNEL`:
 

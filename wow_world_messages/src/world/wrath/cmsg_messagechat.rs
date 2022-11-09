@@ -37,7 +37,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
         w.write_all(&(self.chat_type.as_int() as u32).to_le_bytes())?;
 
         // language: Language
-        w.write_all(&(self.language.as_int() as u8).to_le_bytes())?;
+        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
 
         match &self.chat_type {
             CMSG_MESSAGECHAT_ChatType::System => {}
@@ -125,7 +125,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(6..=517).contains(&body_size) {
+        if !(9..=520).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size as u32 });
         }
 
@@ -133,7 +133,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
         let chat_type: ChatType = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // language: Language
-        let language: Language = crate::util::read_u8_le(r)?.try_into()?;
+        let language: Language = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         let chat_type_if = match chat_type {
             ChatType::System => CMSG_MESSAGECHAT_ChatType::System,
@@ -224,7 +224,7 @@ impl crate::world::wrath::ClientMessage for CMSG_MESSAGECHAT {}
 impl CMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {
         self.chat_type.size() // chat_type: CMSG_MESSAGECHAT_ChatType
-        + 1 // language: Language
+        + 4 // language: Language
         + self.message.len() + 1 // message: CString
     }
 }
