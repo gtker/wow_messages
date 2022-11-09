@@ -114,8 +114,6 @@ pub(crate) mod cmsg_group_decline;
 pub use cmsg_group_decline::*;
 pub(crate) mod cmsg_group_disband;
 pub use cmsg_group_disband::*;
-pub(crate) mod cmsg_group_invite;
-pub use cmsg_group_invite::*;
 pub(crate) mod cmsg_group_raid_convert;
 pub use cmsg_group_raid_convert::*;
 pub(crate) mod cmsg_group_set_leader;
@@ -579,6 +577,8 @@ pub use crate::shared::cmsg_gmticket_getticket_vanilla_tbc_wrath::CMSG_GMTICKET_
 pub use crate::shared::cmsg_gmticket_systemstatus_vanilla_tbc_wrath::CMSG_GMTICKET_SYSTEMSTATUS;
 
 pub use crate::shared::cmsg_gossip_hello_vanilla_tbc_wrath::CMSG_GOSSIP_HELLO;
+
+pub use crate::shared::cmsg_group_invite_vanilla_tbc::CMSG_GROUP_INVITE;
 
 pub use crate::shared::cmsg_guild_accept_vanilla_tbc_wrath::CMSG_GUILD_ACCEPT;
 

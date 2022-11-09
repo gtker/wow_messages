@@ -1,6 +1,12 @@
-#tag_all versions "1.12";
+cmsg CMSG_GROUP_INVITE = 0x6E {
+    CString name;
+} {
+    versions = "1 2";
+}
 
 cmsg CMSG_GROUP_INVITE = 0x6E {
     CString name;
+    u32 unknown1;
+} {
+    versions = "3.3.5";
 }
-
