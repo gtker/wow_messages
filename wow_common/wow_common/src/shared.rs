@@ -30,7 +30,7 @@ macro_rules! get_base_stats_for {
 
             let level = level - 1;
 
-            Some(get_base_stats(combo)[level as usize])
+            Some(base_stats(combo)[level as usize])
         }
     };
 }
@@ -39,7 +39,7 @@ pub(crate) use get_base_stats_for;
 
 macro_rules! race_scale {
     () => {
-        pub fn get_race_scale(race: PlayerRace, gender: PlayerGender) -> f32 {
+        pub const fn get_race_scale(race: PlayerRace, gender: PlayerGender) -> f32 {
             match (race, gender) {
                 (PlayerRace::Tauren, PlayerGender::Male) => 1.35,
                 (PlayerRace::Tauren, PlayerGender::Female) => 1.25,
@@ -117,7 +117,7 @@ pub(crate) use tbc_starter_positions;
 
 macro_rules! tbc_wrath_display_id {
     () => {
-        pub fn get_display_id_for_player(race: PlayerRace, gender: PlayerGender) -> i32 {
+        pub const fn get_display_id_for_player(race: PlayerRace, gender: PlayerGender) -> i32 {
             let race = match race {
                 PlayerRace::Human => 49,
                 PlayerRace::Orc => 51,
@@ -168,7 +168,7 @@ pub(crate) use tbc_wrath_race_faction;
 
 macro_rules! vanilla_tbc_power {
     () => {
-        pub fn get_power_for_class(class: Class) -> Power {
+        pub const fn get_power_for_class(class: Class) -> Power {
             match class {
                 Class::Warrior => Power::Rage,
                 Class::Rogue => Power::Energy,
@@ -186,7 +186,7 @@ macro_rules! vanilla_tbc_power {
 pub(crate) use vanilla_tbc_power;
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
-pub(crate) struct Action {
+pub struct Action {
     button: u8,
     action: u16,
     ty: u8,
