@@ -151,6 +151,8 @@ pub(crate) mod guild_member;
 pub use guild_member::*;
 pub(crate) mod hit_info;
 pub use hit_info::*;
+pub(crate) mod initial_spell;
+pub use initial_spell::*;
 pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class;
@@ -658,8 +660,6 @@ pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
 
 pub use crate::shared::guild_rights_tbc_wrath::GuildRights;
 
-pub use crate::shared::initial_spell_vanilla_tbc_wrath::InitialSpell;
-
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
 pub use crate::shared::language_tbc_wrath::Language;
@@ -853,8 +853,6 @@ pub use crate::shared::smsg_guild_event_tbc_wrath::SMSG_GUILD_EVENT;
 pub use crate::shared::smsg_guild_invite_vanilla_tbc_wrath::SMSG_GUILD_INVITE;
 
 pub use crate::shared::smsg_guild_query_response_vanilla_tbc_wrath::SMSG_GUILD_QUERY_RESPONSE;
-
-pub use crate::shared::smsg_initial_spells_vanilla_tbc_wrath::SMSG_INITIAL_SPELLS;
 
 pub use crate::shared::smsg_item_cooldown_vanilla_tbc_wrath::SMSG_ITEM_COOLDOWN;
 
@@ -1126,6 +1124,8 @@ pub(crate) mod smsg_guild_info;
 pub use smsg_guild_info::*;
 pub(crate) mod smsg_init_world_states;
 pub use smsg_init_world_states::*;
+pub(crate) mod smsg_initial_spells;
+pub use smsg_initial_spells::*;
 pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
 pub(crate) mod smsg_inventory_change_failure;

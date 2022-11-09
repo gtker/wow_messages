@@ -832,7 +832,7 @@ pub use crate::shared::guild_command_vanilla_tbc::GuildCommand;
 
 pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
 
-pub use crate::shared::initial_spell_vanilla_tbc_wrath::InitialSpell;
+pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
@@ -1038,7 +1038,7 @@ pub use crate::shared::smsg_guild_invite_vanilla_tbc_wrath::SMSG_GUILD_INVITE;
 
 pub use crate::shared::smsg_guild_query_response_vanilla_tbc_wrath::SMSG_GUILD_QUERY_RESPONSE;
 
-pub use crate::shared::smsg_initial_spells_vanilla_tbc_wrath::SMSG_INITIAL_SPELLS;
+pub use crate::shared::smsg_initial_spells_vanilla_tbc::SMSG_INITIAL_SPELLS;
 
 pub use crate::shared::smsg_initialize_factions_vanilla_tbc::SMSG_INITIALIZE_FACTIONS;
 

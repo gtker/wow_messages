@@ -1,5 +1,3 @@
-#tag_all versions "1 2 3";
-
 struct CooldownSpell {
     u16 spell_id;
     u16 item_id {
@@ -8,6 +6,8 @@ struct CooldownSpell {
     u16 spell_category;
     u32 cooldown_in_msecs;
     u32 category_cooldown_in_msecs;
+} {
+    versions = "1 2 3";
 }
 
 struct InitialSpell {
@@ -18,6 +18,8 @@ struct InitialSpell {
         comment = "cmangos/mangoszero: sets to 0";
         comment = "cmangos/mangoszero: it's not slot id";
     }
+} {
+    versions = "1 2";
 }
 
 smsg SMSG_INITIAL_SPELLS = 0x012A {
@@ -28,5 +30,30 @@ smsg SMSG_INITIAL_SPELLS = 0x012A {
     InitialSpell[spell_count] initial_spells;
     u16 cooldown_count;
     CooldownSpell[cooldown_count] cooldowns;
+} {
+    versions = "1 2";
 }
 
+struct InitialSpell {
+    u32 spell_id {
+        comment = "cmangos/mangoszero: only send 'first' part of spell";
+    }
+    u16 unknown1 {
+        comment = "cmangos/mangoszero: sets to 0";
+        comment = "cmangos/mangoszero: it's not slot id";
+    }
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_INITIAL_SPELLS = 0x012A {
+    u8 unknown1 {
+        comment = "cmangos/mangoszero: sets to 0";
+    }
+    u16 spell_count;
+    InitialSpell[spell_count] initial_spells;
+    u16 cooldown_count;
+    CooldownSpell[cooldown_count] cooldowns;
+} {
+    versions = "3.3.5";
+}
