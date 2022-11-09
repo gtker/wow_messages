@@ -16,6 +16,7 @@ pub mod chat_notify_tbc_wrath;
 pub mod cmsg_activatetaxi_vanilla_tbc_wrath;
 pub mod cmsg_activatetaxiexpress_vanilla_tbc;
 pub mod cmsg_add_friend_tbc_wrath;
+pub mod cmsg_add_ignore_vanilla_tbc_wrath;
 pub mod cmsg_area_spirit_healer_query_vanilla_tbc_wrath;
 pub mod cmsg_areatrigger_vanilla_tbc_wrath;
 pub mod cmsg_attackstop_vanilla_tbc_wrath;

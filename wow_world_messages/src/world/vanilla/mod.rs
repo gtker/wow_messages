@@ -44,8 +44,6 @@ pub(crate) mod cmsg_accept_trade;
 pub use cmsg_accept_trade::*;
 pub(crate) mod cmsg_add_friend;
 pub use cmsg_add_friend::*;
-pub(crate) mod cmsg_add_ignore;
-pub use cmsg_add_ignore::*;
 pub(crate) mod cmsg_area_spirit_healer_queue;
 pub use cmsg_area_spirit_healer_queue::*;
 pub(crate) mod cmsg_auction_list_items;
@@ -459,6 +457,8 @@ pub use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
 pub use crate::shared::cmsg_activatetaxi_vanilla_tbc_wrath::CMSG_ACTIVATETAXI;
 
 pub use crate::shared::cmsg_activatetaxiexpress_vanilla_tbc::CMSG_ACTIVATETAXIEXPRESS;
+
+pub use crate::shared::cmsg_add_ignore_vanilla_tbc_wrath::CMSG_ADD_IGNORE;
 
 pub use crate::shared::cmsg_area_spirit_healer_query_vanilla_tbc_wrath::CMSG_AREA_SPIRIT_HEALER_QUERY;
 
