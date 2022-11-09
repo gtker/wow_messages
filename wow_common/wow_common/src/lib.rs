@@ -1,4 +1,5 @@
 pub mod range;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 mod shared;
 
 #[cfg(feature = "tbc")]
