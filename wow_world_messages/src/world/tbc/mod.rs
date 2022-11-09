@@ -344,6 +344,8 @@ pub use crate::shared::cmsg_creature_query_vanilla_tbc_wrath::CMSG_CREATURE_QUER
 
 pub use crate::shared::cmsg_del_friend_vanilla_tbc_wrath::CMSG_DEL_FRIEND;
 
+pub use crate::shared::cmsg_del_ignore_vanilla_tbc_wrath::CMSG_DEL_IGNORE;
+
 pub use crate::shared::cmsg_destroyitem_vanilla_tbc_wrath::CMSG_DESTROYITEM;
 
 pub use crate::shared::cmsg_duel_accepted_vanilla_tbc_wrath::CMSG_DUEL_ACCEPTED;
