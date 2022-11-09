@@ -320,6 +320,7 @@ Used in:
 * [CMSG_WORLD_TELEPORT](cmsg_world_teleport.md)
 * [Character](character.md)
 * [MSG_CORPSE_QUERY_Server](msg_corpse_query_server.md)
+* [RaidInfo](raidinfo.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
 * [SMSG_NEW_WORLD](smsg_new_world.md)

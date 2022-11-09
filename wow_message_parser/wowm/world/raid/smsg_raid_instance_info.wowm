@@ -10,7 +10,18 @@ smsg SMSG_RAID_INSTANCE_INFO = 0x02CC {
     u32 amount_of_raid_infos;
     RaidInfo[amount_of_raid_infos] raid_infos;
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3 3.3.5";
+}
+
+struct RaidInfo {
+    Map map;
+    u32 reset_time;
+    u32 instance_id;
+    u32 index {
+        comment = "Neither 1.12 nor 3.3.5 have an index field so this might not be accurate.";
+    }
+} {
+    versions = "2.4.3";
 }
 
 struct RaidInfo {
@@ -25,12 +36,4 @@ struct RaidInfo {
 } {
     versions = "3.3.5";
 }
-
-smsg SMSG_RAID_INSTANCE_INFO = 0x02CC {
-    u32 amount_of_raid_infos;
-    RaidInfo[amount_of_raid_infos] raid_infos;
-} {
-    versions = "3.3.5";
-}
-
 
