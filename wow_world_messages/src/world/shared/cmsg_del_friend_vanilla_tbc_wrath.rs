@@ -43,3 +43,9 @@ impl crate::Message for CMSG_DEL_FRIEND {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_DEL_FRIEND {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_DEL_FRIEND {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_DEL_FRIEND {}
+
