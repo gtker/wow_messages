@@ -322,8 +322,14 @@ const GNOME_DEATH_KNIGHT: &[Action] = &[
     Action::new(96, 6603, 0),
     Action::new(108, 6603, 0),
 ];
-const GNOME_MAGE: &[Action] = &[Action::new(0, 133, 0), Action::new(1, 168, 0)];
-const GNOME_WARLOCK: &[Action] = &[Action::new(0, 686, 0), Action::new(1, 687, 0)];
+const GNOME_MAGE: &[Action] = &[
+    Action::new(0, 133, 0),
+    Action::new(1, 168, 0),
+];
+const GNOME_WARLOCK: &[Action] = &[
+    Action::new(0, 686, 0),
+    Action::new(1, 687, 0),
+];
 const TROLL_WARRIOR: &[Action] = &[
     Action::new(0, 6603, 0),
     Action::new(1, 78, 0),
