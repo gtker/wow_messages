@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_name_invalid.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_name_invalid.wowm#L31):
 /// ```text
 /// smsg SMSG_PET_NAME_INVALID = 0x0178 {
-///     PetNameInvalidReason reason;
+///     (u32)PetNameInvalidReason reason;
 ///     CString name;
 ///     DeclinedPetNameIncluded included;
 ///     if (included == INCLUDED) {

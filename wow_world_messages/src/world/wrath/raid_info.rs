@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 /// ```text
 /// struct RaidInfo {
 ///     Map map;
-///     DungeonDifficulty difficulty;
+///     (u32)DungeonDifficulty difficulty;
 ///     u64 instance_id;
 ///     Bool expired;
 ///     Bool extended;

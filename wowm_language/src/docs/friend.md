@@ -12,7 +12,7 @@ struct Friend {
     if (status != OFFLINE) {
         Area area;
         u32 level;
-        Class class;
+        (u32)Class class;
     }
 }
 ```

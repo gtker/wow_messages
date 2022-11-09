@@ -12,7 +12,7 @@ smsg SMSG_TRADE_STATUS = 0x0120 {
         Guid unknown1;
     }
     else if (status == CLOSE_WINDOW) {
-        InventoryResult inventory_result;
+        (u32)InventoryResult inventory_result;
         Bool target_error;
         u32 item_limit_category_id;
     }

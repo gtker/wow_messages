@@ -21,7 +21,7 @@ smsg MSG_INSPECT_HONOR_STATS_Server = 0x02D6 {
     u32 yesterday_honor;
     u32 last_week_honor;
     u32 this_week_honor;
-    PvpRank last_week_standing;
+    (u32)PvpRank last_week_standing;
     u8 rank_progress_bar;
 }
 ```

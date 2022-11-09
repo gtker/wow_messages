@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L53):
 /// ```text
 /// struct Realm {
-///     RealmType realm_type;
+///     (u32)RealmType realm_type;
 ///     RealmFlag flag;
 ///     CString name;
 ///     CString address;

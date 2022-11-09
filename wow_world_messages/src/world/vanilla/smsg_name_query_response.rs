@@ -14,9 +14,9 @@ use std::io::{Write, Read};
 ///     Guid guid;
 ///     CString character_name;
 ///     CString realm_name;
-///     Race race;
-///     Gender gender;
-///     Class class;
+///     (u32)Race race;
+///     (u32)Gender gender;
+///     (u32)Class class;
 /// }
 /// ```
 pub struct SMSG_NAME_QUERY_RESPONSE {

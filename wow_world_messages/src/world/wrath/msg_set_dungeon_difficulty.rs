@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/msg_set_dungeon_difficulty.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/msg_set_dungeon_difficulty.wowm#L3):
 /// ```text
 /// msg MSG_SET_DUNGEON_DIFFICULTY = 0x0329 {
-///     DungeonDifficulty difficulty;
+///     (u32)DungeonDifficulty difficulty;
 ///     u32 unknown1;
 ///     Bool32 is_in_group;
 /// }

@@ -15,7 +15,7 @@ cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
     u32 auction_slot_id;
     u32 auction_main_category;
     u32 auction_sub_category;
-    ItemQuality auction_quality;
+    (u32)ItemQuality auction_quality;
     u8 usable;
 }
 ```
@@ -62,7 +62,7 @@ cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
     u32 auction_slot_id;
     u32 auction_main_category;
     u32 auction_sub_category;
-    ItemQuality auction_quality;
+    (u32)ItemQuality auction_quality;
     u8 usable;
     u8 is_full;
     u8 amount_of_sorted_auctions;
@@ -115,7 +115,7 @@ cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
     u32 auction_slot_id;
     u32 auction_main_category;
     u32 auction_sub_category;
-    ItemQuality auction_quality;
+    (u32)ItemQuality auction_quality;
     u8 usable;
     u8 is_full;
     u8 amount_of_sorted_auctions;

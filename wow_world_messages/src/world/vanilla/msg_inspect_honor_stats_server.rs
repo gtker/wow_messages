@@ -21,7 +21,7 @@ use std::io::{Write, Read};
 ///     u32 yesterday_honor;
 ///     u32 last_week_honor;
 ///     u32 this_week_honor;
-///     PvpRank last_week_standing;
+///     (u32)PvpRank last_week_standing;
 ///     u8 rank_progress_bar;
 /// }
 /// ```

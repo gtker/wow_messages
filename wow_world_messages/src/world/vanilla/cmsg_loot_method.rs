@@ -8,9 +8,9 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_loot_method.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_loot_method.wowm#L3):
 /// ```text
 /// cmsg CMSG_LOOT_METHOD = 0x007A {
-///     GroupLootSetting loot_setting;
+///     (u32)GroupLootSetting loot_setting;
 ///     Guid loot_master;
-///     ItemQuality loot_threshold;
+///     (u32)ItemQuality loot_threshold;
 /// }
 /// ```
 pub struct CMSG_LOOT_METHOD {

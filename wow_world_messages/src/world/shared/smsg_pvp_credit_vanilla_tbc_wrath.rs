@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// smsg SMSG_PVP_CREDIT = 0x028C {
 ///     u32 honor_points;
 ///     Guid victim;
-///     PvpRank rank;
+///     (u32)PvpRank rank;
 /// }
 /// ```
 pub struct SMSG_PVP_CREDIT {

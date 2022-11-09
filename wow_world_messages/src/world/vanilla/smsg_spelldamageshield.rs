@@ -10,7 +10,7 @@ use std::io::{Write, Read};
 ///     Guid victim_guid;
 ///     Guid caster_guid;
 ///     u32 damage;
-///     SpellSchool school;
+///     (u32)SpellSchool school;
 /// }
 /// ```
 pub struct SMSG_SPELLDAMAGESHIELD {

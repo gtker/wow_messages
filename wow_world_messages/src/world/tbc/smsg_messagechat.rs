@@ -10,7 +10,7 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_MESSAGECHAT = 0x0096 {
 ///     ChatType chat_type;
-///     Language language;
+///     (u32)Language language;
 ///     if (chat_type == MONSTER_SAY
 ///         || chat_type == MONSTER_PARTY
 ///         || chat_type == MONSTER_YELL

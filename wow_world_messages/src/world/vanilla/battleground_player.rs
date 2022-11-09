@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 /// ```text
 /// struct BattlegroundPlayer {
 ///     Guid player;
-///     PvpRank rank;
+///     (u32)PvpRank rank;
 ///     u32 killing_blows;
 ///     u32 honorable_kills;
 ///     u32 deaths;

@@ -18,7 +18,7 @@ use std::io::{Write, Read};
 ///         if (status == ONLINE) {
 ///             Area area;
 ///             u32 level;
-///             Class class;
+///             (u32)Class class;
 ///         }
 ///     }
 /// }

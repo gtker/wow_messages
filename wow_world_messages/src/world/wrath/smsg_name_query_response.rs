@@ -16,9 +16,9 @@ use std::io::{Write, Read};
 ///     u8 early_terminate = 0;
 ///     CString character_name;
 ///     CString realm_name;
-///     Race race;
-///     Gender gender;
-///     Class class;
+///     (u8)Race race;
+///     (u8)Gender gender;
+///     (u8)Class class;
 ///     DeclinedNames has_declined_names;
 ///     if (has_declined_names == YES) {
 ///         CString[5] declined_names;

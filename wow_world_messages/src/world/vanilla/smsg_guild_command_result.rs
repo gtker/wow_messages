@@ -7,9 +7,9 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_command_result.wowm:114`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_command_result.wowm#L114):
 /// ```text
 /// smsg SMSG_GUILD_COMMAND_RESULT = 0x0093 {
-///     GuildCommand command;
+///     (u32)GuildCommand command;
 ///     CString string;
-///     GuildCommandResult result;
+///     (u32)GuildCommandResult result;
 /// }
 /// ```
 pub struct SMSG_GUILD_COMMAND_RESULT {

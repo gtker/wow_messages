@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_setsheathed.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_setsheathed.wowm#L11):
 /// ```text
 /// cmsg CMSG_SETSHEATHED = 0x01E0 {
-///     SheathState sheathed;
+///     (u32)SheathState sheathed;
 /// }
 /// ```
 pub struct CMSG_SETSHEATHED {

@@ -2,6 +2,7 @@ use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::StructMember;
+use crate::parser::types::ty::Type;
 use crate::rust_printer::Writer;
 use crate::ENUM_SELF_VALUE_FIELD;
 use std::fmt::Write;
@@ -124,8 +125,19 @@ pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String 
 fn print_members(s: &mut WowmWriter, field: &StructMember) {
     match field {
         StructMember::Definition(d) => {
+            let upcast = match d.ty() {
+                Type::Enum { upcast, .. } | Type::Flag { upcast, .. } => {
+                    if let Some(upcast) = upcast {
+                        format!("({})", upcast.rust_str())
+                    } else {
+                        "".to_string()
+                    }
+                }
+                _ => "".to_string(),
+            };
+
             s.wln(format!(
-                "{ty} {name}{constant};",
+                "{upcast}{ty} {name}{constant};",
                 ty = d.ty().str(),
                 name = d.name(),
                 constant = match d.value() {

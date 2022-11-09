@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_standstatechange.wowm#L3):
 /// ```text
 /// cmsg CMSG_STANDSTATECHANGE = 0x0101 {
-///     UnitStandState animation_state;
+///     (u32)UnitStandState animation_state;
 /// }
 /// ```
 pub struct CMSG_STANDSTATECHANGE {
