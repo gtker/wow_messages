@@ -195,3 +195,31 @@ pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansio
     let path = directory.join("position").join("positions.rs");
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
+
+pub(crate) fn write_actions(directory: &Path, data: &Data) {
+    let mut s = Writer::new();
+
+    for combination in &data.combinations {
+        let actions = data.actions.get(combination).unwrap();
+
+        s.wln(format!(
+            "const {race}_{class}: &[Action] = &[",
+            race = combination.race.const_name(),
+            class = combination.class.const_name(),
+        ));
+        s.inc_indent();
+
+        for action in actions {
+            s.wln(format!(
+                "Action::new({}, {}, {}),",
+                action.button, action.action, action.ty
+            ));
+        }
+
+        s.dec_indent();
+        s.wln("];");
+    }
+
+    let path = directory.join("actions.rs");
+    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+}

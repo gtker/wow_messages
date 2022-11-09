@@ -1,5 +1,6 @@
 pub use wow_world_base::vanilla::{Class, Map, Race, RaceClass};
 
+pub mod actions;
 pub mod base_stats;
 pub mod class;
 pub mod exp;

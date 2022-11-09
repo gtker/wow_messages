@@ -184,3 +184,16 @@ macro_rules! vanilla_tbc_power {
     };
 }
 pub(crate) use vanilla_tbc_power;
+
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+pub(crate) struct Action {
+    button: u8,
+    action: u16,
+    ty: u8,
+}
+
+impl Action {
+    pub const fn new(button: u8, action: u16, ty: u8) -> Self {
+        Self { button, action, ty }
+    }
+}

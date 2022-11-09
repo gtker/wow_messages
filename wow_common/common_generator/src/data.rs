@@ -12,6 +12,7 @@ pub(crate) struct Data {
     pub spells: HashMap<Combination, BTreeSet<(u32, String)>>,
     pub combinations: Vec<Combination>,
     positions: Vec<RawPosition>,
+    pub actions: HashMap<Combination, BTreeSet<Action>>,
 }
 
 impl Data {
@@ -37,6 +38,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
     let base_stats = get_stat_data(&conn);
     let skills = get_skill_data(&conn);
     let spells = get_spell_data(&conn);
+    let actions = get_action_data(&conn);
     let positions = positions();
 
     Data {
@@ -46,6 +48,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
         spells,
         combinations,
         positions,
+        actions,
     }
 }
 
@@ -239,6 +242,59 @@ fn get_spell_data(conn: &Connection) -> HashMap<Combination, BTreeSet<(u32, Stri
 pub(crate) struct Combination {
     pub race: Race,
     pub class: Class,
+}
+
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+struct ActionRaceClass {
+    race: Race,
+    class: Class,
+    action: Action,
+}
+
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+pub(crate) struct Action {
+    pub button: u8,
+    pub action: u16,
+    pub ty: u8,
+}
+
+fn get_action_data(conn: &Connection) -> HashMap<Combination, BTreeSet<Action>> {
+    let mut s = conn
+        .prepare("SELECT race, class, button, action, type FROM playercreateinfo_action;")
+        .unwrap();
+    let actions = s
+        .query_map([], |row| {
+            Ok(ActionRaceClass {
+                race: row.get::<usize, u8>(0).unwrap().try_into().unwrap(),
+                class: row.get::<usize, u8>(1).unwrap().try_into().unwrap(),
+                action: Action {
+                    button: row.get(2).unwrap(),
+                    action: row.get(3).unwrap(),
+                    ty: row.get(4).unwrap(),
+                },
+            })
+        })
+        .unwrap()
+        .map(|a| a.unwrap())
+        .collect::<Vec<_>>();
+
+    let combinations = get_combinations(conn);
+
+    let mut h = HashMap::new();
+
+    for combination in combinations {
+        let actions = actions
+            .iter()
+            .filter(|a| a.class == combination.class && a.race == combination.race);
+
+        let mut s = BTreeSet::new();
+        for action in actions {
+            s.insert(action.action);
+        }
+        h.insert(combination, s);
+    }
+
+    h
 }
 
 fn get_combinations(conn: &Connection) -> Vec<Combination> {
