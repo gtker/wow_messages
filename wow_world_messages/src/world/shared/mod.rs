@@ -199,6 +199,7 @@ pub mod cmsg_tutorial_clear_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_flag_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_reset_vanilla_tbc_wrath;
 pub mod cmsg_unstable_pet_vanilla_tbc_wrath;
+pub mod cmsg_who_vanilla_tbc_wrath;
 pub mod cmsg_wrap_item_vanilla_tbc_wrath;
 pub mod cooldown_spell_vanilla_tbc_wrath;
 pub mod corpse_query_result_vanilla_tbc_wrath;

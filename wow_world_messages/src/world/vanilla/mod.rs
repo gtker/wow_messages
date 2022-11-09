@@ -222,8 +222,6 @@ pub(crate) mod cmsg_use_item;
 pub use cmsg_use_item::*;
 pub(crate) mod cmsg_warden_data;
 pub use cmsg_warden_data::*;
-pub(crate) mod cmsg_who;
-pub use cmsg_who::*;
 pub(crate) mod cmsg_whois;
 pub use cmsg_whois::*;
 pub(crate) mod cmsg_world_teleport;
@@ -795,6 +793,8 @@ pub use crate::shared::cmsg_tutorial_flag_vanilla_tbc_wrath::CMSG_TUTORIAL_FLAG;
 pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESET;
 
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
+
+pub use crate::shared::cmsg_who_vanilla_tbc_wrath::CMSG_WHO;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 

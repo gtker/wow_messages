@@ -604,6 +604,8 @@ pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESE
 
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
+pub use crate::shared::cmsg_who_vanilla_tbc_wrath::CMSG_WHO;
+
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
 pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
