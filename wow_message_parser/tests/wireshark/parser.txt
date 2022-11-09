@@ -16,10 +16,10 @@
             }
             break;
         case CMSG_ADD_FRIEND:
-            add_cstring(ptv, &hf_woww_friend_name);
+            add_cstring(ptv, &hf_woww_name);
             break;
         case CMSG_ADD_IGNORE:
-            add_cstring(ptv, &hf_woww_ignore_name);
+            add_cstring(ptv, &hf_woww_name);
             break;
         case CMSG_AREATRIGGER:
             ptvcursor_add(ptv, hf_woww_trigger_id, 4, ENC_LITTLE_ENDIAN);

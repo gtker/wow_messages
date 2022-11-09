@@ -5,11 +5,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_add_ignore.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_add_ignore.wowm#L3):
 /// ```text
 /// cmsg CMSG_ADD_IGNORE = 0x006C {
-///     CString ignore_name;
+///     CString name;
 /// }
 /// ```
 pub struct CMSG_ADD_IGNORE {
-    pub ignore_name: String,
+    pub name: String,
 }
 
 impl crate::Message for CMSG_ADD_IGNORE {
@@ -21,10 +21,10 @@ impl crate::Message for CMSG_ADD_IGNORE {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // ignore_name: CString
+        // name: CString
         // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.ignore_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `ignore_name` must not be null-terminated.");
-        w.write_all(self.ignore_name.as_bytes())?;
+        assert_ne!(self.name.as_bytes().iter().rev().next(), Some(&0_u8), "String `name` must not be null-terminated.");
+        w.write_all(self.name.as_bytes())?;
         // Null terminator
         w.write_all(&[0])?;
 
@@ -36,12 +36,12 @@ impl crate::Message for CMSG_ADD_IGNORE {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006C, size: body_size as u32 });
         }
 
-        // ignore_name: CString
-        let ignore_name = crate::util::read_c_string_to_vec(r)?;
-        let ignore_name = String::from_utf8(ignore_name)?;
+        // name: CString
+        let name = crate::util::read_c_string_to_vec(r)?;
+        let name = String::from_utf8(name)?;
 
         Ok(Self {
-            ignore_name,
+            name,
         })
     }
 
@@ -57,7 +57,7 @@ impl crate::world::wrath::ClientMessage for CMSG_ADD_IGNORE {}
 
 impl CMSG_ADD_IGNORE {
     pub(crate) fn size(&self) -> usize {
-        self.ignore_name.len() + 1 // ignore_name: CString
+        self.name.len() + 1 // name: CString
     }
 }
 
