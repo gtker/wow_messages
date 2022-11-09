@@ -104,8 +104,6 @@ pub(crate) mod cmsg_gmticket_updatetext;
 pub use cmsg_gmticket_updatetext::*;
 pub(crate) mod cmsg_gossip_select_option;
 pub use cmsg_gossip_select_option::*;
-pub(crate) mod cmsg_group_accept;
-pub use cmsg_group_accept::*;
 pub(crate) mod cmsg_group_assistant_leader;
 pub use cmsg_group_assistant_leader::*;
 pub(crate) mod cmsg_group_change_sub_group;
@@ -577,6 +575,8 @@ pub use crate::shared::cmsg_gmticket_getticket_vanilla_tbc_wrath::CMSG_GMTICKET_
 pub use crate::shared::cmsg_gmticket_systemstatus_vanilla_tbc_wrath::CMSG_GMTICKET_SYSTEMSTATUS;
 
 pub use crate::shared::cmsg_gossip_hello_vanilla_tbc_wrath::CMSG_GOSSIP_HELLO;
+
+pub use crate::shared::cmsg_group_accept_vanilla_tbc::CMSG_GROUP_ACCEPT;
 
 pub use crate::shared::cmsg_group_invite_vanilla_tbc::CMSG_GROUP_INVITE;
 
