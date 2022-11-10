@@ -21,5 +21,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `EXTRA` | 2 (0x02) |  |  |
 
 Used in:
+* [CMSG_CAST_SPELL](cmsg_cast_spell.md)
 * [CMSG_USE_ITEM](cmsg_use_item.md)
 

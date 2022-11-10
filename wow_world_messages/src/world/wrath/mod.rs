@@ -48,6 +48,8 @@ pub(crate) mod cmsg_buy_item_in_slot;
 pub use cmsg_buy_item_in_slot::*;
 pub(crate) mod cmsg_calendar_get_num_pending;
 pub use cmsg_calendar_get_num_pending::*;
+pub(crate) mod cmsg_cast_spell;
+pub use cmsg_cast_spell::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
 pub(crate) mod cmsg_deleteequipment_set;

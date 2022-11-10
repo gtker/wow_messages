@@ -20,6 +20,8 @@ pub(crate) mod cmsg_battlefield_list;
 pub use cmsg_battlefield_list::*;
 pub(crate) mod cmsg_battlemaster_join;
 pub use cmsg_battlemaster_join::*;
+pub(crate) mod cmsg_cast_spell;
+pub use cmsg_cast_spell::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
 pub(crate) mod cmsg_emote;

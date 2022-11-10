@@ -1,7 +1,25 @@
-#tag_all versions "1.12";
-
 cmsg CMSG_CAST_SPELL = 0x012E {
     Spell spell;
     SpellCastTargets targets;
+} {
+    paste_versions = "1.12 2.4.3";
 }
 
+cmsg CMSG_CAST_SPELL = 0x012E {
+    u8 cast_count;
+    Spell spell;
+    ClientCastFlags cast_flags;
+    SpellCastTargets targets;
+    if (cast_flags == EXTRA) {
+        f32 elevation;
+        f32 speed;
+        ClientMovementData movement_data;
+        if (movement_data == PRESENT) {
+            u32 opcode;
+            PackedGuid guid;
+            MovementInfo info;
+        }
+    }
+} {
+    versions = "3.3.5";
+}
