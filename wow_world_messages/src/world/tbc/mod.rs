@@ -68,6 +68,8 @@ pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
+pub(crate) mod cmsg_use_item;
+pub use cmsg_use_item::*;
 pub(crate) mod cmsg_world_teleport;
 pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
@@ -1105,6 +1107,10 @@ pub use crate::shared::smsg_turn_in_petition_results_tbc_wrath::SMSG_TURN_IN_PET
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
+
+pub use crate::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags;
+
+pub use crate::shared::spell_cast_targets_vanilla_tbc::SpellCastTargets;
 
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 

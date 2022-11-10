@@ -50,7 +50,7 @@ flag SpellCastTargetFlags : u16 {
     }
 } {
     comment = "Also has `UNIT_MINIPET` = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets] needs.";
-    versions = "1.12";
+    versions = "1.12 2";
 }
 
 /* TODO: Probably not valid since flags need || target_flags & other */
@@ -78,7 +78,7 @@ struct SpellCastTargets {
         PackedGuid corpse_target_ally;
     }
 } {
-    versions = "1.12";
+    versions = "1.12 2";
 }
 
 enum ItemClass : u8 {

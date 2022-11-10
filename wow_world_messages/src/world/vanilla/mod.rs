@@ -1204,6 +1204,10 @@ pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAG
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
 
+pub use crate::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags;
+
+pub use crate::shared::spell_cast_targets_vanilla_tbc::SpellCastTargets;
+
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
@@ -1596,10 +1600,6 @@ pub(crate) mod smsg_zone_under_attack;
 pub use smsg_zone_under_attack::*;
 pub(crate) mod spell_cast_result;
 pub use spell_cast_result::*;
-pub(crate) mod spell_cast_target_flags;
-pub use spell_cast_target_flags::*;
-pub(crate) mod spell_cast_targets;
-pub use spell_cast_targets::*;
 pub(crate) mod spell_cooldown_status;
 pub use spell_cooldown_status::*;
 pub(crate) mod spell_effect;

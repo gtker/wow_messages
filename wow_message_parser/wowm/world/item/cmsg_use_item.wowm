@@ -6,3 +6,16 @@ cmsg CMSG_USE_ITEM = 0x00AB {
 } {
     versions = "1.12";
 }
+
+cmsg CMSG_USE_ITEM = 0x00AB {
+    u8 bag_index;
+    u8 bag_slot;
+    u8 spell_index;
+    u8 cast_count {
+        comment = "mangosone: next cast if exists (single or not)";
+    }
+    Guid item;
+    SpellCastTargets targets;
+} {
+    versions = "2";
+}

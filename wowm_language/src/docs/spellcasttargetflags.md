@@ -1,6 +1,6 @@
 # SpellCastTargetFlags
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2
 
 ### Comment
 
