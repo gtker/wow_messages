@@ -416,6 +416,8 @@ pub use crate::shared::cmsg_duel_accepted_vanilla_tbc_wrath::CMSG_DUEL_ACCEPTED;
 
 pub use crate::shared::cmsg_duel_cancelled_vanilla_tbc_wrath::CMSG_DUEL_CANCELLED;
 
+pub use crate::shared::cmsg_far_sight_vanilla_tbc_wrath::CMSG_FAR_SIGHT;
+
 pub use crate::shared::cmsg_gameobj_use_vanilla_tbc_wrath::CMSG_GAMEOBJ_USE;
 
 pub use crate::shared::cmsg_gameobject_query_vanilla_tbc_wrath::CMSG_GAMEOBJECT_QUERY;
@@ -709,6 +711,8 @@ pub use crate::shared::environmental_damage_type_vanilla_tbc_wrath::Environmenta
 pub use crate::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
 
 pub use crate::shared::faction_vanilla_tbc_wrath::Faction;
+
+pub use crate::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
 
 pub use crate::shared::forced_reaction_vanilla_tbc_wrath::ForcedReaction;
 

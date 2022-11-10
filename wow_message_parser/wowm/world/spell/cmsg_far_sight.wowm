@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 enum FarSightOperation : u8 {
     REMOVE = 0;
