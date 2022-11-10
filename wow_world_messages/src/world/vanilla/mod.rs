@@ -116,8 +116,6 @@ pub(crate) mod cmsg_group_set_leader;
 pub use cmsg_group_set_leader::*;
 pub(crate) mod cmsg_group_swap_sub_group;
 pub use cmsg_group_swap_sub_group::*;
-pub(crate) mod cmsg_group_uninvite;
-pub use cmsg_group_uninvite::*;
 pub(crate) mod cmsg_group_uninvite_guid;
 pub use cmsg_group_uninvite_guid::*;
 pub(crate) mod cmsg_guild_rank;
@@ -579,6 +577,8 @@ pub use crate::shared::cmsg_group_accept_vanilla_tbc::CMSG_GROUP_ACCEPT;
 pub use crate::shared::cmsg_group_decline_vanilla_tbc_wrath::CMSG_GROUP_DECLINE;
 
 pub use crate::shared::cmsg_group_invite_vanilla_tbc::CMSG_GROUP_INVITE;
+
+pub use crate::shared::cmsg_group_uninvite_vanilla_tbc_wrath::CMSG_GROUP_UNINVITE;
 
 pub use crate::shared::cmsg_guild_accept_vanilla_tbc_wrath::CMSG_GUILD_ACCEPT;
 
