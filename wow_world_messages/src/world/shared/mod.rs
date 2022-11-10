@@ -85,6 +85,7 @@ pub mod cmsg_gossip_hello_vanilla_tbc_wrath;
 pub mod cmsg_gossip_select_option_tbc_wrath;
 pub mod cmsg_group_accept_vanilla_tbc;
 pub mod cmsg_group_decline_vanilla_tbc_wrath;
+pub mod cmsg_group_disband_vanilla_tbc_wrath;
 pub mod cmsg_group_invite_vanilla_tbc;
 pub mod cmsg_group_set_leader_vanilla_tbc_wrath;
 pub mod cmsg_group_uninvite_guid_vanilla_tbc;

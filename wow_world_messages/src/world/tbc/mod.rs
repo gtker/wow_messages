@@ -378,6 +378,8 @@ pub use crate::shared::cmsg_group_accept_vanilla_tbc::CMSG_GROUP_ACCEPT;
 
 pub use crate::shared::cmsg_group_decline_vanilla_tbc_wrath::CMSG_GROUP_DECLINE;
 
+pub use crate::shared::cmsg_group_disband_vanilla_tbc_wrath::CMSG_GROUP_DISBAND;
+
 pub use crate::shared::cmsg_group_invite_vanilla_tbc::CMSG_GROUP_INVITE;
 
 pub use crate::shared::cmsg_group_set_leader_vanilla_tbc_wrath::CMSG_GROUP_SET_LEADER;
