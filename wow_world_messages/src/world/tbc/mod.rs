@@ -434,6 +434,8 @@ pub use crate::shared::cmsg_guild_set_officer_note_vanilla_tbc_wrath::CMSG_GUILD
 
 pub use crate::shared::cmsg_guild_set_public_note_vanilla_tbc_wrath::CMSG_GUILD_SET_PUBLIC_NOTE;
 
+pub use crate::shared::cmsg_ignore_trade_vanilla_tbc_wrath::CMSG_IGNORE_TRADE;
+
 pub use crate::shared::cmsg_initiate_trade_vanilla_tbc_wrath::CMSG_INITIATE_TRADE;
 
 pub use crate::shared::cmsg_inspect_vanilla_tbc_wrath::CMSG_INSPECT;

@@ -110,8 +110,6 @@ pub(crate) mod cmsg_group_swap_sub_group;
 pub use cmsg_group_swap_sub_group::*;
 pub(crate) mod cmsg_guild_rank;
 pub use cmsg_guild_rank::*;
-pub(crate) mod cmsg_ignore_trade;
-pub use cmsg_ignore_trade::*;
 pub(crate) mod cmsg_item_query_single;
 pub use cmsg_item_query_single::*;
 pub(crate) mod cmsg_join_channel;
@@ -613,6 +611,8 @@ pub use crate::shared::cmsg_guild_roster_vanilla_tbc_wrath::CMSG_GUILD_ROSTER;
 pub use crate::shared::cmsg_guild_set_officer_note_vanilla_tbc_wrath::CMSG_GUILD_SET_OFFICER_NOTE;
 
 pub use crate::shared::cmsg_guild_set_public_note_vanilla_tbc_wrath::CMSG_GUILD_SET_PUBLIC_NOTE;
+
+pub use crate::shared::cmsg_ignore_trade_vanilla_tbc_wrath::CMSG_IGNORE_TRADE;
 
 pub use crate::shared::cmsg_initiate_trade_vanilla_tbc_wrath::CMSG_INITIATE_TRADE;
 

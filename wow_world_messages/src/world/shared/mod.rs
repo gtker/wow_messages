@@ -112,6 +112,7 @@ pub mod cmsg_guild_remove_vanilla_tbc_wrath;
 pub mod cmsg_guild_roster_vanilla_tbc_wrath;
 pub mod cmsg_guild_set_officer_note_vanilla_tbc_wrath;
 pub mod cmsg_guild_set_public_note_vanilla_tbc_wrath;
+pub mod cmsg_ignore_trade_vanilla_tbc_wrath;
 pub mod cmsg_initiate_trade_vanilla_tbc_wrath;
 pub mod cmsg_inspect_vanilla_tbc_wrath;
 pub mod cmsg_item_name_query_vanilla_tbc_wrath;
