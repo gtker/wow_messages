@@ -1,8 +1,8 @@
 smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
     InventoryResult result;
-    if (result == CANT_EQUIP_LEVEL_I) {
+    /* TODO BUG_SEPARATE_IF_DOUBLE_WRITE if (result == CANT_EQUIP_LEVEL_I) {
         u32 required_level;
-    }
+    } */
     if (result != OK) {
         Guid item1;
         Guid item2;
@@ -25,9 +25,9 @@ smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
             comment = "vmangos sets to 0";
         }
     }
-    if (result == CANT_EQUIP_LEVEL_I) {
+    /* TODO BUG_SEPARATE_IF_DOUBLE_WRITE if (result == CANT_EQUIP_LEVEL_I) {
         u32 required_level;
-    }
+    } */
 } {
     paste_versions = "2.4.3 3.3.5";
 }
