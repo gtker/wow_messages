@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_REQUEST_PARTY_MEMBER_STATS = 0x027F {
     Guid guid;

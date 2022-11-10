@@ -144,8 +144,6 @@ pub(crate) mod cmsg_played_time;
 pub use cmsg_played_time::*;
 pub(crate) mod cmsg_repair_item;
 pub use cmsg_repair_item::*;
-pub(crate) mod cmsg_request_party_member_stats;
-pub use cmsg_request_party_member_stats::*;
 pub(crate) mod cmsg_self_res;
 pub use cmsg_self_res::*;
 pub(crate) mod cmsg_send_mail;
@@ -709,6 +707,8 @@ pub use crate::shared::cmsg_reclaim_corpse_vanilla_tbc_wrath::CMSG_RECLAIM_CORPS
 pub use crate::shared::cmsg_repop_request_vanilla_tbc_wrath::CMSG_REPOP_REQUEST;
 
 pub use crate::shared::cmsg_request_account_data_vanilla_tbc_wrath::CMSG_REQUEST_ACCOUNT_DATA;
+
+pub use crate::shared::cmsg_request_party_member_stats_vanilla_tbc_wrath::CMSG_REQUEST_PARTY_MEMBER_STATS;
 
 pub use crate::shared::cmsg_request_pet_info_vanilla_tbc_wrath::CMSG_REQUEST_PET_INFO;
 

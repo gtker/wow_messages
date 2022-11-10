@@ -190,6 +190,7 @@ pub mod cmsg_reclaim_corpse_vanilla_tbc_wrath;
 pub mod cmsg_repair_item_tbc_wrath;
 pub mod cmsg_repop_request_vanilla_tbc_wrath;
 pub mod cmsg_request_account_data_vanilla_tbc_wrath;
+pub mod cmsg_request_party_member_stats_vanilla_tbc_wrath;
 pub mod cmsg_request_pet_info_vanilla_tbc_wrath;
 pub mod cmsg_request_raid_info_vanilla_tbc_wrath;
 pub mod cmsg_reset_instances_vanilla_tbc_wrath;

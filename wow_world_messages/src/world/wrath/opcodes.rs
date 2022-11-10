@@ -261,6 +261,7 @@ use crate::world::wrath::CMSG_STABLE_SWAP_PET;
 use crate::world::wrath::CMSG_REQUEST_PET_INFO;
 use crate::world::wrath::CMSG_FAR_SIGHT;
 use crate::world::wrath::CMSG_GROUP_CHANGE_SUB_GROUP;
+use crate::world::wrath::CMSG_REQUEST_PARTY_MEMBER_STATS;
 use crate::world::wrath::CMSG_AUTOSTORE_BANK_ITEM;
 use crate::world::wrath::CMSG_AUTOBANK_ITEM;
 use crate::world::wrath::MSG_QUERY_NEXT_MAIL_TIME_Client;
@@ -566,6 +567,7 @@ pub enum ClientOpcodeMessage {
     CMSG_REQUEST_PET_INFO(CMSG_REQUEST_PET_INFO),
     CMSG_FAR_SIGHT(CMSG_FAR_SIGHT),
     CMSG_GROUP_CHANGE_SUB_GROUP(CMSG_GROUP_CHANGE_SUB_GROUP),
+    CMSG_REQUEST_PARTY_MEMBER_STATS(CMSG_REQUEST_PARTY_MEMBER_STATS),
     CMSG_AUTOSTORE_BANK_ITEM(CMSG_AUTOSTORE_BANK_ITEM),
     CMSG_AUTOBANK_ITEM(CMSG_AUTOBANK_ITEM),
     MSG_QUERY_NEXT_MAIL_TIME(MSG_QUERY_NEXT_MAIL_TIME_Client),
@@ -873,6 +875,7 @@ impl ClientOpcodeMessage {
             0x0279 => Ok(Self::CMSG_REQUEST_PET_INFO(<CMSG_REQUEST_PET_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0279, size: body_size, io, } } else { a } })?)),
             0x027A => Ok(Self::CMSG_FAR_SIGHT(<CMSG_FAR_SIGHT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x027A, size: body_size, io, } } else { a } })?)),
             0x027E => Ok(Self::CMSG_GROUP_CHANGE_SUB_GROUP(<CMSG_GROUP_CHANGE_SUB_GROUP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x027E, size: body_size, io, } } else { a } })?)),
+            0x027F => Ok(Self::CMSG_REQUEST_PARTY_MEMBER_STATS(<CMSG_REQUEST_PARTY_MEMBER_STATS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x027F, size: body_size, io, } } else { a } })?)),
             0x0282 => Ok(Self::CMSG_AUTOSTORE_BANK_ITEM(<CMSG_AUTOSTORE_BANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0282, size: body_size, io, } } else { a } })?)),
             0x0283 => Ok(Self::CMSG_AUTOBANK_ITEM(<CMSG_AUTOBANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0283, size: body_size, io, } } else { a } })?)),
             0x0284 => Ok(Self::MSG_QUERY_NEXT_MAIL_TIME(<MSG_QUERY_NEXT_MAIL_TIME_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0284, size: body_size, io, } } else { a } })?)),
@@ -1248,6 +1251,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_PET_INFO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FAR_SIGHT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_encrypted_client(w, e),
@@ -1556,6 +1560,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_PET_INFO(c) => c.write_unencrypted_client(w),
             Self::CMSG_FAR_SIGHT(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.write_unencrypted_client(w),
+            Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_unencrypted_client(w),
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_unencrypted_client(w),
@@ -1864,6 +1869,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_PET_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FAR_SIGHT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2172,6 +2178,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_PET_INFO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FAR_SIGHT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2480,6 +2487,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_PET_INFO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FAR_SIGHT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2788,6 +2796,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_PET_INFO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FAR_SIGHT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_unencrypted_client(w).await,
@@ -3107,6 +3116,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_REQUEST_PET_INFO(_) => "CMSG_REQUEST_PET_INFO",
             ClientOpcodeMessage::CMSG_FAR_SIGHT(_) => "CMSG_FAR_SIGHT",
             ClientOpcodeMessage::CMSG_GROUP_CHANGE_SUB_GROUP(_) => "CMSG_GROUP_CHANGE_SUB_GROUP",
+            ClientOpcodeMessage::CMSG_REQUEST_PARTY_MEMBER_STATS(_) => "CMSG_REQUEST_PARTY_MEMBER_STATS",
             ClientOpcodeMessage::CMSG_AUTOSTORE_BANK_ITEM(_) => "CMSG_AUTOSTORE_BANK_ITEM",
             ClientOpcodeMessage::CMSG_AUTOBANK_ITEM(_) => "CMSG_AUTOBANK_ITEM",
             ClientOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => "MSG_QUERY_NEXT_MAIL_TIME_Client",
@@ -4670,6 +4680,12 @@ impl From<CMSG_FAR_SIGHT> for ClientOpcodeMessage {
 impl From<CMSG_GROUP_CHANGE_SUB_GROUP> for ClientOpcodeMessage {
     fn from(c: CMSG_GROUP_CHANGE_SUB_GROUP) -> Self {
         Self::CMSG_GROUP_CHANGE_SUB_GROUP(c)
+    }
+}
+
+impl From<CMSG_REQUEST_PARTY_MEMBER_STATS> for ClientOpcodeMessage {
+    fn from(c: CMSG_REQUEST_PARTY_MEMBER_STATS) -> Self {
+        Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c)
     }
 }
 
