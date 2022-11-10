@@ -62,7 +62,7 @@ fn main() {
 fn write_to_files(directory: &Path, data: &Data, expansion: Expansion) {
     write::write_exp(directory, data);
     write::write_stats(directory, data);
-    write::write_skills(directory, data);
+    write::write_skills(directory, data, expansion);
     write::write_spells(directory, data);
     write::write_positions(directory, data, expansion);
     write::write_actions(directory, data);

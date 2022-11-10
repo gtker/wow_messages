@@ -68,21 +68,37 @@ pub(crate) fn write_stats(directory: &Path, data: &Data) {
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-pub(crate) fn write_skills(directory: &Path, data: &Data) {
+pub(crate) fn write_skills(directory: &Path, data: &Data, expansion: Expansion) {
     let mut s = Writer::new();
 
     for combination in &data.combinations {
         let skills = data.skills.get(combination).unwrap();
 
         s.wln(format!(
-            "const {race}_{class}: &[u32] = &[",
+            "const {race}_{class}: &[Skill] = &[",
             race = combination.race.const_name(),
             class = combination.class.const_name(),
         ));
         s.inc_indent();
 
         for skill in skills {
-            s.wln(format!("{}, // {}", skill.0, skill.1));
+            let comment = skill.1.clone();
+            let skill = match expansion {
+                Expansion::Vanilla => format!(
+                    "{:?}",
+                    wow_world_base::vanilla::Skill::try_from(skill.0 as u16).unwrap()
+                ),
+                Expansion::BurningCrusade => format!(
+                    "{:?}",
+                    wow_world_base::wrath::Skill::try_from(skill.0 as u16).unwrap()
+                ),
+                Expansion::WrathOfTheLichKing => format!(
+                    "{:?}",
+                    wow_world_base::wrath::Skill::try_from(skill.0 as u16).unwrap()
+                ),
+            };
+
+            s.wln(format!("Skill::{}, // {}", skill, comment));
         }
 
         s.dec_indent();
