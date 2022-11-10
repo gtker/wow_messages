@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_AREA_SPIRIT_HEALER_QUEUE = 0x02E3 {
     Guid guid;

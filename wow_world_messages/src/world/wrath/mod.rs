@@ -302,6 +302,8 @@ pub use crate::shared::cmsg_add_ignore_vanilla_tbc_wrath::CMSG_ADD_IGNORE;
 
 pub use crate::shared::cmsg_area_spirit_healer_query_vanilla_tbc_wrath::CMSG_AREA_SPIRIT_HEALER_QUERY;
 
+pub use crate::shared::cmsg_area_spirit_healer_queue_vanilla_tbc_wrath::CMSG_AREA_SPIRIT_HEALER_QUEUE;
+
 pub use crate::shared::cmsg_areatrigger_vanilla_tbc_wrath::CMSG_AREATRIGGER;
 
 pub use crate::shared::cmsg_attackstop_vanilla_tbc_wrath::CMSG_ATTACKSTOP;
