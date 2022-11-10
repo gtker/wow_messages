@@ -21,7 +21,7 @@ struct TrainerSpell {
         comment = "cmangos: 1 for true 0 for false";
     }
     u8 required_level;
-    u32 required_skill;
+    (u32)Skill required_skill;
     u32 required_skill_value;
     u32 spell_chain_required;
     u32 spell_chain_previous;

@@ -237,7 +237,6 @@ pub mod cmsg_tutorial_clear_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_flag_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_reset_vanilla_tbc_wrath;
 pub mod cmsg_unaccept_trade_vanilla_tbc_wrath;
-pub mod cmsg_unlearn_skill_vanilla_tbc_wrath;
 pub mod cmsg_unstable_pet_vanilla_tbc_wrath;
 pub mod cmsg_who_vanilla_tbc_wrath;
 pub mod cmsg_whois_vanilla_tbc_wrath;

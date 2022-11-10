@@ -164,7 +164,7 @@ smsg SMSG_PET_CAST_FAILED = 0x0138 {
         u32 count;
     }
     else if (result == MIN_SKILL) {
-        u32 skill;
+        (u32)Skill skill;
         u32 skill_required;
     }
     else if (result == FISHING_TOO_LOW) {
@@ -266,7 +266,7 @@ Else If result is equal to `MIN_SKILL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x47 | 4 / Little | u32 | skill |  | SkillLine.dbc Id |
+| 0x47 | 4 / - | [Skill](skill.md) | skill |  |  |
 | 0x4B | 4 / Little | u32 | skill_required |  |  |
 
 Else If result is equal to `FISHING_TOO_LOW`:

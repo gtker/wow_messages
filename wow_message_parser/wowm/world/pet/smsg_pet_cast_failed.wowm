@@ -76,9 +76,7 @@ smsg SMSG_PET_CAST_FAILED = 0x0138 {
         u32 count;
     }
     else if (result == MIN_SKILL) {
-        u32 skill {
-            comment = "SkillLine.dbc Id";
-        }
+        (u32)Skill skill;
         u32 skill_required;
     }
     else if (result == FISHING_TOO_LOW) {

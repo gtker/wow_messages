@@ -25,7 +25,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 allowed_race;
         u32 item_level;
         u32 required_level;
-        u32 required_skill;
+        (u32)Skill required_skill;
         u32 required_skill_rank;
         u32 required_spell;
         u32 required_honor_rank;
@@ -104,7 +104,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | allowed_race |  |  |
 | - | 4 / Little | u32 | item_level |  |  |
 | - | 4 / Little | u32 | required_level |  |  |
-| - | 4 / Little | u32 | required_skill |  | cmangos/vmangos/mangoszero: id from Spell.dbc |
+| - | 4 / - | [Skill](skill.md) | required_skill |  |  |
 | - | 4 / Little | u32 | required_skill_rank |  |  |
 | - | 4 / Little | u32 | required_spell |  |  |
 | - | 4 / Little | u32 | required_honor_rank |  |  |

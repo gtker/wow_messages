@@ -9,6 +9,8 @@ pub(crate) mod power;
 pub use power::*;
 pub(crate) mod race;
 pub use race::*;
+pub(crate) mod skill;
+pub use skill::*;
 pub(crate) mod vector2d;
 pub use vector2d::*;
 pub(crate) mod vector3d;

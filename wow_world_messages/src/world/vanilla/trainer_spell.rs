@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::vanilla::Skill;
 use crate::world::vanilla::TrainerSpellState;
 use std::io::{Write, Read};
 
@@ -12,7 +13,7 @@ use std::io::{Write, Read};
 ///     u32 talent_point_cost;
 ///     u32 first_rank;
 ///     u8 required_level;
-///     u32 required_skill;
+///     (u32)Skill required_skill;
 ///     u32 required_skill_value;
 ///     u32 spell_chain_required;
 ///     u32 spell_chain_previous;
@@ -34,7 +35,7 @@ pub struct TrainerSpell {
     ///
     pub first_rank: u32,
     pub required_level: u8,
-    pub required_skill: u32,
+    pub required_skill: Skill,
     pub required_skill_value: u32,
     pub spell_chain_required: u32,
     pub spell_chain_previous: u32,
@@ -63,8 +64,8 @@ impl TrainerSpell {
         // required_level: u8
         w.write_all(&self.required_level.to_le_bytes())?;
 
-        // required_skill: u32
-        w.write_all(&self.required_skill.to_le_bytes())?;
+        // required_skill: Skill
+        w.write_all(&(self.required_skill.as_int() as u32).to_le_bytes())?;
 
         // required_skill_value: u32
         w.write_all(&self.required_skill_value.to_le_bytes())?;
@@ -102,8 +103,8 @@ impl TrainerSpell {
         // required_level: u8
         let required_level = crate::util::read_u8_le(r)?;
 
-        // required_skill: u32
-        let required_skill = crate::util::read_u32_le(r)?;
+        // required_skill: Skill
+        let required_skill: Skill = (crate::util::read_u32_le(r)? as u16).try_into()?;
 
         // required_skill_value: u32
         let required_skill_value = crate::util::read_u32_le(r)?;

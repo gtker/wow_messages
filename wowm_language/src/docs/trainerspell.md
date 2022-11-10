@@ -13,7 +13,7 @@ struct TrainerSpell {
     u32 talent_point_cost;
     u32 first_rank;
     u8 required_level;
-    u32 required_skill;
+    (u32)Skill required_skill;
     u32 required_skill_value;
     u32 spell_chain_required;
     u32 spell_chain_previous;
@@ -30,7 +30,7 @@ struct TrainerSpell {
 | 0x09 | 4 / Little | u32 | talent_point_cost |  | cmangos: spells don't cost talent points<br/>cmangos: set to 0 |
 | 0x0D | 4 / Little | u32 | first_rank |  | cmangos: must be equal prev. field to have learn button in enabled state<br/>cmangos: 1 for true 0 for false |
 | 0x11 | 1 / - | u8 | required_level |  |  |
-| 0x12 | 4 / Little | u32 | required_skill |  |  |
+| 0x12 | 4 / - | [Skill](skill.md) | required_skill |  |  |
 | 0x16 | 4 / Little | u32 | required_skill_value |  |  |
 | 0x1A | 4 / Little | u32 | spell_chain_required |  |  |
 | 0x1E | 4 / Little | u32 | spell_chain_previous |  |  |

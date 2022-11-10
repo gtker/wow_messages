@@ -1,5 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::wrath::Area;
+use crate::world::wrath::Skill;
 use crate::world::wrath::SpellCastResult;
 use std::io::{Write, Read};
 
@@ -49,7 +50,7 @@ use std::io::{Write, Read};
 ///         u32 count;
 ///     }
 ///     else if (result == MIN_SKILL) {
-///         u32 skill;
+///         (u32)Skill skill;
 ///         u32 skill_required;
 ///     }
 ///     else if (result == FISHING_TOO_LOW) {
@@ -332,8 +333,8 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
                 skill,
                 skill_required,
             } => {
-                // skill: u32
-                w.write_all(&skill.to_le_bytes())?;
+                // skill: Skill
+                w.write_all(&(skill.as_int() as u32).to_le_bytes())?;
 
                 // skill_required: u32
                 w.write_all(&skill_required.to_le_bytes())?;
@@ -667,8 +668,8 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             SpellCastResult::PlayTime => SMSG_PET_CAST_FAILED_SpellCastResult::PlayTime,
             SpellCastResult::Reputation => SMSG_PET_CAST_FAILED_SpellCastResult::Reputation,
             SpellCastResult::MinSkill => {
-                // skill: u32
-                let skill = crate::util::read_u32_le(r)?;
+                // skill: Skill
+                let skill: Skill = (crate::util::read_u32_le(r)? as u16).try_into()?;
 
                 // skill_required: u32
                 let skill_required = crate::util::read_u32_le(r)?;
@@ -933,7 +934,7 @@ pub enum SMSG_PET_CAST_FAILED_SpellCastResult {
     PlayTime,
     Reputation,
     MinSkill {
-        skill: u32,
+        skill: Skill,
         skill_required: u32,
     },
     NotInArena,
@@ -1684,7 +1685,7 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 skill_required,
             } => {
                 1
-                + 4 // skill: u32
+                + 4 // skill: Skill
                 + 4 // skill_required: u32
             }
             Self::NotInArena => {

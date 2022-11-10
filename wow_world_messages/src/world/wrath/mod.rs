@@ -132,6 +132,8 @@ pub(crate) mod cmsg_split_item;
 pub use cmsg_split_item::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
+pub(crate) mod cmsg_unlearn_skill;
+pub use cmsg_unlearn_skill::*;
 pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
 pub(crate) mod cmsg_use_item;
@@ -706,8 +708,6 @@ pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESE
 
 pub use crate::shared::cmsg_unaccept_trade_vanilla_tbc_wrath::CMSG_UNACCEPT_TRADE;
 
-pub use crate::shared::cmsg_unlearn_skill_vanilla_tbc_wrath::CMSG_UNLEARN_SKILL;
-
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_who_vanilla_tbc_wrath::CMSG_WHO;
@@ -1154,6 +1154,8 @@ pub(crate) mod sell_item_result;
 pub use sell_item_result::*;
 pub(crate) mod server_message_type;
 pub use server_message_type::*;
+pub(crate) mod skill;
+pub use skill::*;
 pub(crate) mod smsg_account_data_times;
 pub use smsg_account_data_times::*;
 pub(crate) mod smsg_action_buttons;

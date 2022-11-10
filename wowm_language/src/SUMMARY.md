@@ -161,6 +161,7 @@
 - [ServerMessageType](docs/servermessagetype.md)
 - [SheathState](docs/sheathstate.md)
 - [SimpleSpellCastResult](docs/simplespellcastresult.md)
+- [Skill](docs/skill.md)
 - [SpellCastResult](docs/spellcastresult.md)
 - [SpellCastTargetFlags](docs/spellcasttargetflags.md)
 - [SpellEffect](docs/spelleffect.md)

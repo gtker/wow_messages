@@ -7,6 +7,7 @@ use crate::world::vanilla::InventoryType;
 use crate::world::vanilla::ItemClass;
 use crate::world::vanilla::ItemQuality;
 use crate::world::vanilla::Map;
+use crate::world::vanilla::Skill;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -31,7 +32,7 @@ use std::io::{Write, Read};
 ///         u32 allowed_race;
 ///         u32 item_level;
 ///         u32 required_level;
-///         u32 required_skill;
+///         (u32)Skill required_skill;
 ///         u32 required_skill_rank;
 ///         u32 required_spell;
 ///         u32 required_honor_rank;
@@ -156,8 +157,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // required_level: u32
             w.write_all(&v.required_level.to_le_bytes())?;
 
-            // required_skill: u32
-            w.write_all(&v.required_skill.to_le_bytes())?;
+            // required_skill: Skill
+            w.write_all(&(v.required_skill.as_int() as u32).to_le_bytes())?;
 
             // required_skill_rank: u32
             w.write_all(&v.required_skill_rank.to_le_bytes())?;
@@ -353,8 +354,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // required_level: u32
             let required_level = crate::util::read_u32_le(r)?;
 
-            // required_skill: u32
-            let required_skill = crate::util::read_u32_le(r)?;
+            // required_skill: Skill
+            let required_skill: Skill = (crate::util::read_u32_le(r)? as u16).try_into()?;
 
             // required_skill_rank: u32
             let required_skill_rank = crate::util::read_u32_le(r)?;
@@ -570,7 +571,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // allowed_race: u32
             + 4 // item_level: u32
             + 4 // required_level: u32
-            + 4 // required_skill: u32
+            + 4 // required_skill: Skill
             + 4 // required_skill_rank: u32
             + 4 // required_spell: u32
             + 4 // required_honor_rank: u32
@@ -633,7 +634,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub allowed_race: u32,
     pub item_level: u32,
     pub required_level: u32,
-    pub required_skill: u32,
+    pub required_skill: Skill,
     pub required_skill_rank: u32,
     pub required_spell: u32,
     pub required_honor_rank: u32,
@@ -692,7 +693,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // allowed_race: u32
         + 4 // item_level: u32
         + 4 // required_level: u32
-        + 4 // required_skill: u32
+        + 4 // required_skill: Skill
         + 4 // required_skill_rank: u32
         + 4 // required_spell: u32
         + 4 // required_honor_rank: u32

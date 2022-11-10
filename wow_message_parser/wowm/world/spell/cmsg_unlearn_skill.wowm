@@ -1,7 +1,7 @@
-#tag_all versions "1 2 3";
-
 cmsg CMSG_UNLEARN_SKILL = 0x0202 {
-    /* TODO: Same as spell_id? */
-    u32 skill_id;
+    (u32)Skill skill;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
+
 
