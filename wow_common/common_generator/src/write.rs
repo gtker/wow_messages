@@ -123,7 +123,7 @@ fn get_string_name(s: &str) -> String {
 }
 
 fn get_enum_name(s: &str) -> String {
-    s.replace('\'', "").replace(' ', "")
+    s.replace(['\'', ' '], "")
 }
 
 pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansion) {

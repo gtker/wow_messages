@@ -6,7 +6,8 @@ use wow_world_base::wrath::{Class, Map, PlayerRace};
 
 position!();
 
-pub fn get_starting_position(race: PlayerRace, class: Class) -> Position {
+pub const fn get_starting_position(race: PlayerRace, class: Class) -> Position {
+    #[allow(clippy::single_match)] // PartialEq is not allowed in const but clippy thinks it is
     match class {
         Class::DeathKnight => return DEATH_KNIGHT_START_POSITION,
         _ => {}

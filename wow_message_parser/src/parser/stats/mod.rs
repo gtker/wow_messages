@@ -79,8 +79,9 @@ impl Data {
 }
 
 fn get_messages_to_print(wrath: &[Data], vanilla: &[Data]) -> (Vec<Data>, &'static str) {
+    type ComparisonFunction = dyn Fn(&Data, &Data) -> bool;
     struct Option {
-        f: Box<dyn Fn(&Data, &Data) -> bool>,
+        f: Box<ComparisonFunction>,
         s: &'static str,
     }
 
@@ -115,17 +116,17 @@ fn get_messages_to_print(wrath: &[Data], vanilla: &[Data]) -> (Vec<Data>, &'stat
     ] {
         let data = wrath
             .iter()
-            .filter(|a| vanilla.iter().find(|v| (condition.f)(a, v)).is_some())
+            .filter(|a| vanilla.iter().any(|v| (condition.f)(a, v)))
             .cloned()
             .collect::<Vec<_>>();
 
-        if data.len() != 0 {
+        if !data.is_empty() {
             return (data, condition.s);
         }
     }
 
     (
-        if wrath.len() != 0 {
+        if !wrath.is_empty() {
             wrath.to_vec()
         } else {
             vanilla.to_vec()
@@ -166,7 +167,7 @@ pub(crate) fn print_message_stats(o: &Objects) {
         let messages_description = "Messages";
 
         for (data, version) in [&vanilla, &tbc, &wrath] {
-            stats_for(*version, &data, messages_description);
+            stats_for(*version, data, messages_description);
         }
     }
 }
