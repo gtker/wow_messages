@@ -53,6 +53,75 @@ flag SpellCastTargetFlags : u16 {
     versions = "1.12 2";
 }
 
+flag SpellCastTargetFlags : u32 {
+    SELF = 0x00000000;
+    UNUSED1 = 0x00000001 {
+        comment = "not used in any spells as of 2.4.3 (can be set dynamically)";
+    }
+    UNIT = 0x00000002 {
+        comment = "pguid";
+    }
+    UNIT_RAID = 0x00000004 {
+        comment = "not used in any spells as of 2.4.3 (can be set dynamically) - raid member";
+    }
+    UNIT_PARTY = 0x00000008 {
+        comment = "not used in any spells as of 2.4.3 (can be set dynamically) - party member";
+    }
+    ITEM = 0x00000010 {
+        comment = "pguid";
+    }
+    SOURCE_LOCATION = 0x00000020 {
+        comment = "3xfloat";
+    }
+    DEST_LOCATION = 0x00000040 {
+        comment = "3xfloat";
+    }
+    UNIT_ENEMY = 0x00000080 {
+        comment = "`CanAttack` == true";
+    }
+    UNIT_ALLY = 0x00000100 {
+        comment = "`CanAssist` == true";
+    }
+    CORPSE_ENEMY = 0x00000200 {
+        comment = "pguid, `CanAssist` == false";
+    }
+    UNIT_DEAD = 0x00000400 {
+        comment = "skinning-like effects";
+    }
+    GAMEOBJECT = 0x00000800 {
+        comment = "pguid, 0 spells in 2.4.3";
+    }
+    TRADE_ITEM = 0x00001000 {
+        comment = "pguid, 0 spells";
+    }
+    STRING = 0x00002000 {
+        comment = "string, 0 spells";
+    }
+    LOCKED = 0x00004000 {
+        comment = "199 spells, opening object/lock";
+    }
+    CORPSE_ALLY = 0x00008000 {
+        comment = "pguid, `CanAssist` == true";
+    }
+    UNIT_MINIPET = 0x00010000 {
+        comment = "pguid, not used in any spells as of 2.4.3 (can be set dynamically)";
+    }
+    GLYPH_SLOT      = 0x00020000 {
+        comment = "used in glyph spells";
+    }
+    DEST_TARGET     = 0x00040000 {
+        comment = "sometimes appears with DEST_TARGET spells (may appear or not for a given spell)";
+    }
+    UNUSED20        = 0x00080000 {
+        comment = "uint32 counter loop, vec3 - screen position (?) guid, not used so far";
+    }
+    UNIT_PASSENGER  = 0x00100000 {
+        comment = "guessed, used to validate target (if vehicle passenger)";
+    }
+} {
+    versions = "3.3.5";
+}
+
 /* TODO: Probably not valid since flags need || target_flags & other */
 struct SpellCastTargets {
     SpellCastTargetFlags target_flags;
@@ -79,6 +148,28 @@ struct SpellCastTargets {
     }
 } {
     versions = "1.12 2";
+}
+
+/* TODO: Probably not valid since flags need || target_flags & other */
+struct SpellCastTargets {
+    SpellCastTargetFlags target_flags;
+    if (target_flags & UNIT /* FLAG_OR || target_flags & UNIT_MINIPET || target_flags & GAMEOBJECT || target_flags & CORPSE_ENEMY || target_flags & CORPSE_ALLY*/) {
+        PackedGuid unit_target;
+    }
+    if (target_flags & ITEM /* FLAG_OR || target_flags & TRADE_ITEM */) {
+        PackedGuid item_target;
+    }
+    if (target_flags & SOURCE_LOCATION) {
+        Vector3d source;
+    }
+    if (target_flags & DEST_LOCATION) {
+        Vector3d destination;
+    }
+    if (target_flags & STRING) {
+        CString target_string;
+    }
+} {
+    versions = "3.3.5";
 }
 
 enum ItemClass : u8 {

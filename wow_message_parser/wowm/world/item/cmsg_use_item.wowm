@@ -17,5 +17,45 @@ cmsg CMSG_USE_ITEM = 0x00AB {
     Guid item;
     SpellCastTargets targets;
 } {
-    versions = "2";
+    versions = "2.4.3";
+}
+
+enum ClientCastFlags : u8 {
+    NONE = 0;
+    EXTRA = 2;
+} {
+    versions = "3.3.5";
+}
+
+enum ClientMovementData : u8 {
+    NOT_PRESENT = 0;
+    PRESENT = 1;
+} {
+    versions = "3.3.5";
+}
+
+cmsg CMSG_USE_ITEM = 0x00AB {
+    u8 bag_index;
+    u8 bag_slot;
+    u8 spell_index;
+    u8 cast_count {
+        comment = "mangosone: next cast if exists (single or not)";
+    }
+    Spell spell;
+    Guid item;
+    u32 glyph_index;
+    ClientCastFlags cast_flags;
+    if (cast_flags == EXTRA) {
+        f32 elevation;
+        f32 speed;
+        ClientMovementData movement_data;
+        if (movement_data == PRESENT) {
+            u32 opcode;
+            PackedGuid guid;
+            MovementInfo info;
+        }
+    }
+    SpellCastTargets targets;
+} {
+    versions = "3.3.5";
 }

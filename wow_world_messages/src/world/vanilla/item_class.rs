@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:84`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L84):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:175`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L175):
 /// ```text
 /// enum ItemClass : u8 {
 ///     CONSUMABLE = 0;

@@ -104,6 +104,7 @@ use crate::world::wrath::CMSG_CHANNEL_BAN;
 use crate::world::wrath::CMSG_CHANNEL_UNBAN;
 use crate::world::wrath::CMSG_CHANNEL_ANNOUNCEMENTS;
 use crate::world::wrath::CMSG_CHANNEL_MODERATE;
+use crate::world::wrath::CMSG_USE_ITEM;
 use crate::world::wrath::CMSG_OPEN_ITEM;
 use crate::world::wrath::CMSG_READ_ITEM;
 use crate::world::wrath::CMSG_GAMEOBJ_USE;
@@ -385,6 +386,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHANNEL_UNBAN(CMSG_CHANNEL_UNBAN),
     CMSG_CHANNEL_ANNOUNCEMENTS(CMSG_CHANNEL_ANNOUNCEMENTS),
     CMSG_CHANNEL_MODERATE(CMSG_CHANNEL_MODERATE),
+    CMSG_USE_ITEM(CMSG_USE_ITEM),
     CMSG_OPEN_ITEM(CMSG_OPEN_ITEM),
     CMSG_READ_ITEM(CMSG_READ_ITEM),
     CMSG_GAMEOBJ_USE(CMSG_GAMEOBJ_USE),
@@ -668,6 +670,7 @@ impl ClientOpcodeMessage {
             0x00A6 => Ok(Self::CMSG_CHANNEL_UNBAN(<CMSG_CHANNEL_UNBAN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00A6, size: body_size, io, } } else { a } })?)),
             0x00A7 => Ok(Self::CMSG_CHANNEL_ANNOUNCEMENTS(<CMSG_CHANNEL_ANNOUNCEMENTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00A7, size: body_size, io, } } else { a } })?)),
             0x00A8 => Ok(Self::CMSG_CHANNEL_MODERATE(<CMSG_CHANNEL_MODERATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00A8, size: body_size, io, } } else { a } })?)),
+            0x00AB => Ok(Self::CMSG_USE_ITEM(<CMSG_USE_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00AB, size: body_size, io, } } else { a } })?)),
             0x00AC => Ok(Self::CMSG_OPEN_ITEM(<CMSG_OPEN_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00AC, size: body_size, io, } } else { a } })?)),
             0x00AD => Ok(Self::CMSG_READ_ITEM(<CMSG_READ_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00AD, size: body_size, io, } } else { a } })?)),
             0x00B1 => Ok(Self::CMSG_GAMEOBJ_USE(<CMSG_GAMEOBJ_USE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B1, size: body_size, io, } } else { a } })?)),
@@ -1019,6 +1022,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_MODERATE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_USE_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_OPEN_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READ_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GAMEOBJ_USE(c) => c.write_encrypted_client(w, e),
@@ -1303,6 +1307,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_MODERATE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_USE_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_OPEN_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_READ_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_GAMEOBJ_USE(c) => c.write_unencrypted_client(w),
@@ -1587,6 +1592,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_USE_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_OPEN_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READ_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GAMEOBJ_USE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1871,6 +1877,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_USE_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_OPEN_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READ_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GAMEOBJ_USE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2155,6 +2162,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_USE_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_OPEN_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READ_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GAMEOBJ_USE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2439,6 +2447,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_UNBAN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_ANNOUNCEMENTS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_MODERATE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_USE_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_OPEN_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READ_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GAMEOBJ_USE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2734,6 +2743,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHANNEL_UNBAN(_) => "CMSG_CHANNEL_UNBAN",
             ClientOpcodeMessage::CMSG_CHANNEL_ANNOUNCEMENTS(_) => "CMSG_CHANNEL_ANNOUNCEMENTS",
             ClientOpcodeMessage::CMSG_CHANNEL_MODERATE(_) => "CMSG_CHANNEL_MODERATE",
+            ClientOpcodeMessage::CMSG_USE_ITEM(_) => "CMSG_USE_ITEM",
             ClientOpcodeMessage::CMSG_OPEN_ITEM(_) => "CMSG_OPEN_ITEM",
             ClientOpcodeMessage::CMSG_READ_ITEM(_) => "CMSG_READ_ITEM",
             ClientOpcodeMessage::CMSG_GAMEOBJ_USE(_) => "CMSG_GAMEOBJ_USE",
@@ -3488,6 +3498,12 @@ impl From<CMSG_CHANNEL_ANNOUNCEMENTS> for ClientOpcodeMessage {
 impl From<CMSG_CHANNEL_MODERATE> for ClientOpcodeMessage {
     fn from(c: CMSG_CHANNEL_MODERATE) -> Self {
         Self::CMSG_CHANNEL_MODERATE(c)
+    }
+}
+
+impl From<CMSG_USE_ITEM> for ClientOpcodeMessage {
+    fn from(c: CMSG_USE_ITEM) -> Self {
+        Self::CMSG_USE_ITEM(c)
     }
 }
 

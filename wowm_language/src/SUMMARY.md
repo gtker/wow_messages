@@ -66,6 +66,8 @@
 - [ChatType](docs/chattype.md)
 - [CinematicSequenceId](docs/cinematicsequenceid.md)
 - [Class](docs/class.md)
+- [ClientCastFlags](docs/clientcastflags.md)
+- [ClientMovementData](docs/clientmovementdata.md)
 - [ComplaintStatus](docs/complaintstatus.md)
 - [CorpseQueryResult](docs/corpsequeryresult.md)
 - [DeclinedNames](docs/declinednames.md)
