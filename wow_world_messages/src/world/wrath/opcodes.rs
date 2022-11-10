@@ -266,6 +266,7 @@ use crate::world::wrath::CMSG_GROUP_SWAP_SUB_GROUP;
 use crate::world::wrath::CMSG_AUTOSTORE_BANK_ITEM;
 use crate::world::wrath::CMSG_AUTOBANK_ITEM;
 use crate::world::wrath::MSG_QUERY_NEXT_MAIL_TIME_Client;
+use crate::world::wrath::CMSG_GROUP_RAID_CONVERT;
 use crate::world::wrath::CMSG_BUYBACK_ITEM;
 use crate::world::wrath::CMSG_LFG_GET_STATUS;
 use crate::world::wrath::CMSG_LOOT_ROLL;
@@ -573,6 +574,7 @@ pub enum ClientOpcodeMessage {
     CMSG_AUTOSTORE_BANK_ITEM(CMSG_AUTOSTORE_BANK_ITEM),
     CMSG_AUTOBANK_ITEM(CMSG_AUTOBANK_ITEM),
     MSG_QUERY_NEXT_MAIL_TIME(MSG_QUERY_NEXT_MAIL_TIME_Client),
+    CMSG_GROUP_RAID_CONVERT(CMSG_GROUP_RAID_CONVERT),
     CMSG_BUYBACK_ITEM(CMSG_BUYBACK_ITEM),
     CMSG_LFG_GET_STATUS(CMSG_LFG_GET_STATUS),
     CMSG_LOOT_ROLL(CMSG_LOOT_ROLL),
@@ -882,6 +884,7 @@ impl ClientOpcodeMessage {
             0x0282 => Ok(Self::CMSG_AUTOSTORE_BANK_ITEM(<CMSG_AUTOSTORE_BANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0282, size: body_size, io, } } else { a } })?)),
             0x0283 => Ok(Self::CMSG_AUTOBANK_ITEM(<CMSG_AUTOBANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0283, size: body_size, io, } } else { a } })?)),
             0x0284 => Ok(Self::MSG_QUERY_NEXT_MAIL_TIME(<MSG_QUERY_NEXT_MAIL_TIME_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0284, size: body_size, io, } } else { a } })?)),
+            0x028E => Ok(Self::CMSG_GROUP_RAID_CONVERT(<CMSG_GROUP_RAID_CONVERT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028E, size: body_size, io, } } else { a } })?)),
             0x0290 => Ok(Self::CMSG_BUYBACK_ITEM(<CMSG_BUYBACK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0290, size: body_size, io, } } else { a } })?)),
             0x0296 => Ok(Self::CMSG_LFG_GET_STATUS(<CMSG_LFG_GET_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0296, size: body_size, io, } } else { a } })?)),
             0x02A0 => Ok(Self::CMSG_LOOT_ROLL(<CMSG_LOOT_ROLL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A0, size: body_size, io, } } else { a } })?)),
@@ -1259,6 +1262,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GROUP_RAID_CONVERT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUYBACK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_GET_STATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT_ROLL(c) => c.write_encrypted_client(w, e),
@@ -1569,6 +1573,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_unencrypted_client(w),
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GROUP_RAID_CONVERT(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUYBACK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_GET_STATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT_ROLL(c) => c.write_unencrypted_client(w),
@@ -1879,6 +1884,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_RAID_CONVERT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_GET_STATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_ROLL(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2189,6 +2195,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_RAID_CONVERT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_GET_STATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_ROLL(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2499,6 +2506,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_RAID_CONVERT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_GET_STATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_ROLL(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2809,6 +2817,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_RAID_CONVERT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_GET_STATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_ROLL(c) => c.astd_write_unencrypted_client(w).await,
@@ -3130,6 +3139,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_AUTOSTORE_BANK_ITEM(_) => "CMSG_AUTOSTORE_BANK_ITEM",
             ClientOpcodeMessage::CMSG_AUTOBANK_ITEM(_) => "CMSG_AUTOBANK_ITEM",
             ClientOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => "MSG_QUERY_NEXT_MAIL_TIME_Client",
+            ClientOpcodeMessage::CMSG_GROUP_RAID_CONVERT(_) => "CMSG_GROUP_RAID_CONVERT",
             ClientOpcodeMessage::CMSG_BUYBACK_ITEM(_) => "CMSG_BUYBACK_ITEM",
             ClientOpcodeMessage::CMSG_LFG_GET_STATUS(_) => "CMSG_LFG_GET_STATUS",
             ClientOpcodeMessage::CMSG_LOOT_ROLL(_) => "CMSG_LOOT_ROLL",
@@ -4720,6 +4730,12 @@ impl From<CMSG_AUTOBANK_ITEM> for ClientOpcodeMessage {
 impl From<MSG_QUERY_NEXT_MAIL_TIME_Client> for ClientOpcodeMessage {
     fn from(c: MSG_QUERY_NEXT_MAIL_TIME_Client) -> Self {
         Self::MSG_QUERY_NEXT_MAIL_TIME(c)
+    }
+}
+
+impl From<CMSG_GROUP_RAID_CONVERT> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_RAID_CONVERT) -> Self {
+        Self::CMSG_GROUP_RAID_CONVERT(c)
     }
 }
 

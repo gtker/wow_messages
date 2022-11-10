@@ -96,6 +96,7 @@ pub mod cmsg_group_change_sub_group_vanilla_tbc_wrath;
 pub mod cmsg_group_decline_vanilla_tbc_wrath;
 pub mod cmsg_group_disband_vanilla_tbc_wrath;
 pub mod cmsg_group_invite_vanilla_tbc;
+pub mod cmsg_group_raid_convert_vanilla_tbc_wrath;
 pub mod cmsg_group_set_leader_vanilla_tbc_wrath;
 pub mod cmsg_group_swap_sub_group_vanilla_tbc_wrath;
 pub mod cmsg_group_uninvite_guid_vanilla_tbc;

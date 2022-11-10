@@ -90,8 +90,6 @@ pub(crate) mod cmsg_gossip_select_option;
 pub use cmsg_gossip_select_option::*;
 pub(crate) mod cmsg_group_assistant_leader;
 pub use cmsg_group_assistant_leader::*;
-pub(crate) mod cmsg_group_raid_convert;
-pub use cmsg_group_raid_convert::*;
 pub(crate) mod cmsg_guild_rank;
 pub use cmsg_guild_rank::*;
 pub(crate) mod cmsg_item_query_single;
@@ -541,6 +539,8 @@ pub use crate::shared::cmsg_group_decline_vanilla_tbc_wrath::CMSG_GROUP_DECLINE;
 pub use crate::shared::cmsg_group_disband_vanilla_tbc_wrath::CMSG_GROUP_DISBAND;
 
 pub use crate::shared::cmsg_group_invite_vanilla_tbc::CMSG_GROUP_INVITE;
+
+pub use crate::shared::cmsg_group_raid_convert_vanilla_tbc_wrath::CMSG_GROUP_RAID_CONVERT;
 
 pub use crate::shared::cmsg_group_set_leader_vanilla_tbc_wrath::CMSG_GROUP_SET_LEADER;
 
