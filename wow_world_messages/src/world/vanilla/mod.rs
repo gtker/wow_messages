@@ -92,8 +92,6 @@ pub(crate) mod cmsg_group_assistant_leader;
 pub use cmsg_group_assistant_leader::*;
 pub(crate) mod cmsg_group_raid_convert;
 pub use cmsg_group_raid_convert::*;
-pub(crate) mod cmsg_group_swap_sub_group;
-pub use cmsg_group_swap_sub_group::*;
 pub(crate) mod cmsg_guild_rank;
 pub use cmsg_guild_rank::*;
 pub(crate) mod cmsg_item_query_single;
@@ -545,6 +543,8 @@ pub use crate::shared::cmsg_group_disband_vanilla_tbc_wrath::CMSG_GROUP_DISBAND;
 pub use crate::shared::cmsg_group_invite_vanilla_tbc::CMSG_GROUP_INVITE;
 
 pub use crate::shared::cmsg_group_set_leader_vanilla_tbc_wrath::CMSG_GROUP_SET_LEADER;
+
+pub use crate::shared::cmsg_group_swap_sub_group_vanilla_tbc_wrath::CMSG_GROUP_SWAP_SUB_GROUP;
 
 pub use crate::shared::cmsg_group_uninvite_guid_vanilla_tbc::CMSG_GROUP_UNINVITE_GUID;
 

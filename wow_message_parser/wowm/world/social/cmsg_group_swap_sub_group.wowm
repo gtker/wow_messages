@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_GROUP_SWAP_SUB_GROUP = 0x0280 {
     CString name;

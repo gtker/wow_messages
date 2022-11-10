@@ -446,6 +446,8 @@ pub use crate::shared::cmsg_group_disband_vanilla_tbc_wrath::CMSG_GROUP_DISBAND;
 
 pub use crate::shared::cmsg_group_set_leader_vanilla_tbc_wrath::CMSG_GROUP_SET_LEADER;
 
+pub use crate::shared::cmsg_group_swap_sub_group_vanilla_tbc_wrath::CMSG_GROUP_SWAP_SUB_GROUP;
+
 pub use crate::shared::cmsg_group_uninvite_vanilla_tbc_wrath::CMSG_GROUP_UNINVITE;
 
 pub use crate::shared::cmsg_guild_accept_vanilla_tbc_wrath::CMSG_GUILD_ACCEPT;
