@@ -458,7 +458,7 @@ impl SpellCastTargetFlags {
         (self.inner & Self::DEST_TARGET) != 0
     }
 
-    /// sometimes appears with DEST_TARGET spells (may appear or not for a given spell)
+    /// sometimes appears with `DEST_TARGET` spells (may appear or not for a given spell)
     ///
     pub const fn new_DEST_TARGET() -> Self {
         Self { inner: Self::DEST_TARGET }

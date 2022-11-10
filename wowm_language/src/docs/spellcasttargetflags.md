@@ -114,7 +114,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `CORPSE_ALLY` | 32768 (0x8000) |  | pguid, `CanAssist` == true |
 | `UNIT_MINIPET` | 65536 (0x10000) |  | pguid, not used in any spells as of 2.4.3 (can be set dynamically) |
 | `GLYPH_SLOT` | 131072 (0x20000) |  | used in glyph spells |
-| `DEST_TARGET` | 262144 (0x40000) |  | sometimes appears with DEST_TARGET spells (may appear or not for a given spell) |
+| `DEST_TARGET` | 262144 (0x40000) |  | sometimes appears with `DEST_TARGET` spells (may appear or not for a given spell) |
 | `UNUSED20` | 524288 (0x80000) |  | uint32 counter loop, vec3 - screen position (?) guid, not used so far |
 | `UNIT_PASSENGER` | 1048576 (0x100000) |  | guessed, used to validate target (if vehicle passenger) |
 

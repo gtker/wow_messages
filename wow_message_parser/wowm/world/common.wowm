@@ -110,7 +110,7 @@ flag SpellCastTargetFlags : u32 {
         comment = "used in glyph spells";
     }
     DEST_TARGET     = 0x00040000 {
-        comment = "sometimes appears with DEST_TARGET spells (may appear or not for a given spell)";
+        comment = "sometimes appears with `DEST_TARGET` spells (may appear or not for a given spell)";
     }
     UNUSED20        = 0x00080000 {
         comment = "uint32 counter loop, vec3 - screen position (?) guid, not used so far";
