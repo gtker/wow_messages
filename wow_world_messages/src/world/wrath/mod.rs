@@ -636,6 +636,8 @@ pub use crate::shared::cmsg_reset_instances_vanilla_tbc_wrath::CMSG_RESET_INSTAN
 
 pub use crate::shared::cmsg_resurrect_response_vanilla_tbc_wrath::CMSG_RESURRECT_RESPONSE;
 
+pub use crate::shared::cmsg_self_res_vanilla_tbc_wrath::CMSG_SELF_RES;
+
 pub use crate::shared::cmsg_sell_item_vanilla_tbc_wrath::CMSG_SELL_ITEM;
 
 pub use crate::shared::cmsg_send_mail_tbc_wrath::CMSG_SEND_MAIL;
