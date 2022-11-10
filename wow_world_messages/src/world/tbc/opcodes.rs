@@ -203,6 +203,7 @@ use crate::world::tbc::CMSG_WRAP_ITEM;
 use crate::world::tbc::CMSG_PING;
 use crate::world::tbc::CMSG_SETSHEATHED;
 use crate::world::tbc::CMSG_AUTH_SESSION;
+use crate::world::tbc::CMSG_PET_CAST_SPELL;
 use crate::world::tbc::MSG_SAVE_GUILD_EMBLEM_Client;
 use crate::world::tbc::CMSG_ZONEUPDATE;
 use crate::world::tbc::MSG_RANDOM_ROLL_Client;
@@ -492,6 +493,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PING(CMSG_PING),
     CMSG_SETSHEATHED(CMSG_SETSHEATHED),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
+    CMSG_PET_CAST_SPELL(CMSG_PET_CAST_SPELL),
     MSG_SAVE_GUILD_EMBLEM(MSG_SAVE_GUILD_EMBLEM_Client),
     CMSG_ZONEUPDATE(CMSG_ZONEUPDATE),
     MSG_RANDOM_ROLL(MSG_RANDOM_ROLL_Client),
@@ -783,6 +785,7 @@ impl ClientOpcodeMessage {
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DC, size: body_size, io, } } else { a } })?)),
             0x01E0 => Ok(Self::CMSG_SETSHEATHED(<CMSG_SETSHEATHED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01E0, size: body_size, io, } } else { a } })?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01ED, size: body_size, io, } } else { a } })?)),
+            0x01F0 => Ok(Self::CMSG_PET_CAST_SPELL(<CMSG_PET_CAST_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F0, size: body_size, io, } } else { a } })?)),
             0x01F1 => Ok(Self::MSG_SAVE_GUILD_EMBLEM(<MSG_SAVE_GUILD_EMBLEM_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F1, size: body_size, io, } } else { a } })?)),
             0x01F4 => Ok(Self::CMSG_ZONEUPDATE(<CMSG_ZONEUPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F4, size: body_size, io, } } else { a } })?)),
             0x01FB => Ok(Self::MSG_RANDOM_ROLL(<MSG_RANDOM_ROLL_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FB, size: body_size, io, } } else { a } })?)),
@@ -1142,6 +1145,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SETSHEATHED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PET_CAST_SPELL(c) => c.write_encrypted_client(w, e),
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ZONEUPDATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_RANDOM_ROLL(c) => c.write_encrypted_client(w, e),
@@ -1434,6 +1438,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_SETSHEATHED(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PET_CAST_SPELL(c) => c.write_unencrypted_client(w),
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_ZONEUPDATE(c) => c.write_unencrypted_client(w),
             Self::MSG_RANDOM_ROLL(c) => c.write_unencrypted_client(w),
@@ -1726,6 +1731,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PET_CAST_SPELL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ZONEUPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2018,6 +2024,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PET_CAST_SPELL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ZONEUPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2310,6 +2317,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PET_CAST_SPELL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ZONEUPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2602,6 +2610,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PET_CAST_SPELL(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ZONEUPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_unencrypted_client(w).await,
@@ -2929,6 +2938,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_SETSHEATHED(_) => "CMSG_SETSHEATHED",
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
+            ClientOpcodeMessage::CMSG_PET_CAST_SPELL(_) => "CMSG_PET_CAST_SPELL",
             ClientOpcodeMessage::MSG_SAVE_GUILD_EMBLEM(_) => "MSG_SAVE_GUILD_EMBLEM_Client",
             ClientOpcodeMessage::CMSG_ZONEUPDATE(_) => "CMSG_ZONEUPDATE",
             ClientOpcodeMessage::MSG_RANDOM_ROLL(_) => "MSG_RANDOM_ROLL_Client",
@@ -4186,6 +4196,12 @@ impl From<CMSG_SETSHEATHED> for ClientOpcodeMessage {
 impl From<CMSG_AUTH_SESSION> for ClientOpcodeMessage {
     fn from(c: CMSG_AUTH_SESSION) -> Self {
         Self::CMSG_AUTH_SESSION(c)
+    }
+}
+
+impl From<CMSG_PET_CAST_SPELL> for ClientOpcodeMessage {
+    fn from(c: CMSG_PET_CAST_SPELL) -> Self {
+        Self::CMSG_PET_CAST_SPELL(c)
     }
 }
 
