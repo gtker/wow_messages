@@ -306,6 +306,7 @@ use crate::world::wrath::CMSG_PET_UNLEARN;
 use crate::world::wrath::CMSG_PET_SPELL_AUTOCAST;
 use crate::world::wrath::CMSG_GUILD_INFO_TEXT;
 use crate::world::wrath::CMSG_ACTIVATETAXIEXPRESS;
+use crate::world::wrath::CMSG_SET_FACTION_INACTIVE;
 use crate::world::wrath::CMSG_SET_WATCHED_FACTION;
 use crate::world::wrath::CMSG_RESET_INSTANCES;
 use crate::world::wrath::MSG_RAID_READY_CHECK_Client;
@@ -619,6 +620,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PET_SPELL_AUTOCAST(CMSG_PET_SPELL_AUTOCAST),
     CMSG_GUILD_INFO_TEXT(CMSG_GUILD_INFO_TEXT),
     CMSG_ACTIVATETAXIEXPRESS(CMSG_ACTIVATETAXIEXPRESS),
+    CMSG_SET_FACTION_INACTIVE(CMSG_SET_FACTION_INACTIVE),
     CMSG_SET_WATCHED_FACTION(CMSG_SET_WATCHED_FACTION),
     CMSG_RESET_INSTANCES(CMSG_RESET_INSTANCES),
     MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Client),
@@ -934,6 +936,7 @@ impl ClientOpcodeMessage {
             0x02F3 => Ok(Self::CMSG_PET_SPELL_AUTOCAST(<CMSG_PET_SPELL_AUTOCAST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F3, size: body_size, io, } } else { a } })?)),
             0x02FC => Ok(Self::CMSG_GUILD_INFO_TEXT(<CMSG_GUILD_INFO_TEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FC, size: body_size, io, } } else { a } })?)),
             0x0312 => Ok(Self::CMSG_ACTIVATETAXIEXPRESS(<CMSG_ACTIVATETAXIEXPRESS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0312, size: body_size, io, } } else { a } })?)),
+            0x0317 => Ok(Self::CMSG_SET_FACTION_INACTIVE(<CMSG_SET_FACTION_INACTIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0317, size: body_size, io, } } else { a } })?)),
             0x0318 => Ok(Self::CMSG_SET_WATCHED_FACTION(<CMSG_SET_WATCHED_FACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0318, size: body_size, io, } } else { a } })?)),
             0x031D => Ok(Self::CMSG_RESET_INSTANCES(<CMSG_RESET_INSTANCES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031D, size: body_size, io, } } else { a } })?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
@@ -1317,6 +1320,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_INFO_TEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_WATCHED_FACTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_RESET_INSTANCES(c) => c.write_encrypted_client(w, e),
             Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_client(w, e),
@@ -1633,6 +1637,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_INFO_TEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_WATCHED_FACTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_RESET_INSTANCES(c) => c.write_unencrypted_client(w),
             Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_client(w),
@@ -1949,6 +1954,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INFO_TEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_RESET_INSTANCES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2265,6 +2271,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INFO_TEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_RESET_INSTANCES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2581,6 +2588,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INFO_TEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_RESET_INSTANCES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2897,6 +2905,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PET_SPELL_AUTOCAST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INFO_TEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_RESET_INSTANCES(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_client(w).await,
@@ -3224,6 +3233,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PET_SPELL_AUTOCAST(_) => "CMSG_PET_SPELL_AUTOCAST",
             ClientOpcodeMessage::CMSG_GUILD_INFO_TEXT(_) => "CMSG_GUILD_INFO_TEXT",
             ClientOpcodeMessage::CMSG_ACTIVATETAXIEXPRESS(_) => "CMSG_ACTIVATETAXIEXPRESS",
+            ClientOpcodeMessage::CMSG_SET_FACTION_INACTIVE(_) => "CMSG_SET_FACTION_INACTIVE",
             ClientOpcodeMessage::CMSG_SET_WATCHED_FACTION(_) => "CMSG_SET_WATCHED_FACTION",
             ClientOpcodeMessage::CMSG_RESET_INSTANCES(_) => "CMSG_RESET_INSTANCES",
             ClientOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Client",
@@ -5020,6 +5030,12 @@ impl From<CMSG_GUILD_INFO_TEXT> for ClientOpcodeMessage {
 impl From<CMSG_ACTIVATETAXIEXPRESS> for ClientOpcodeMessage {
     fn from(c: CMSG_ACTIVATETAXIEXPRESS) -> Self {
         Self::CMSG_ACTIVATETAXIEXPRESS(c)
+    }
+}
+
+impl From<CMSG_SET_FACTION_INACTIVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_FACTION_INACTIVE) -> Self {
+        Self::CMSG_SET_FACTION_INACTIVE(c)
     }
 }
 

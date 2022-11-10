@@ -630,7 +630,7 @@ pub use crate::shared::cmsg_set_ammo_vanilla_tbc_wrath::CMSG_SET_AMMO;
 
 pub use crate::shared::cmsg_set_faction_atwar_vanilla_tbc::CMSG_SET_FACTION_ATWAR;
 
-pub use crate::shared::cmsg_set_faction_inactive_vanilla_tbc::CMSG_SET_FACTION_INACTIVE;
+pub use crate::shared::cmsg_set_faction_inactive_vanilla_tbc_wrath::CMSG_SET_FACTION_INACTIVE;
 
 pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
 

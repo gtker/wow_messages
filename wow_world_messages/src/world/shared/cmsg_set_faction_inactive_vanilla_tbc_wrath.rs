@@ -53,3 +53,6 @@ impl crate::world::vanilla::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
 #[cfg(feature = "tbc")]
 impl crate::world::tbc::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
 
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
+

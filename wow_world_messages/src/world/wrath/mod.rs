@@ -652,6 +652,8 @@ pub use crate::shared::cmsg_set_active_mover_vanilla_tbc_wrath::CMSG_SET_ACTIVE_
 
 pub use crate::shared::cmsg_set_ammo_vanilla_tbc_wrath::CMSG_SET_AMMO;
 
+pub use crate::shared::cmsg_set_faction_inactive_vanilla_tbc_wrath::CMSG_SET_FACTION_INACTIVE;
+
 pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
 
 pub use crate::shared::cmsg_set_trade_gold_vanilla_tbc_wrath::CMSG_SET_TRADE_GOLD;

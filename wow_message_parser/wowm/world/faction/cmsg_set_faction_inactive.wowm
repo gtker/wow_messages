@@ -1,4 +1,4 @@
-#tag_all versions "1 2";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
     /* TODO rep id */
