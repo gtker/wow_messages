@@ -16,8 +16,6 @@ use std::fs::read_to_string;
 use std::panic;
 use std::path::Path;
 
-const OVERWRITE_ALL_TESTS: bool = false;
-
 fn should_panic<F: FnOnce() -> R + panic::UnwindSafe, R>(f: F, error_code: i32) {
     let prev_hook = panic::take_hook();
     panic::set_hook(Box::new(|_| {}));
@@ -50,7 +48,7 @@ fn get_all_impl_items() -> Objects {
 }
 
 fn tcheck(s: &Writer, name: &str) {
-    if OVERWRITE_ALL_TESTS {
+    if std::env::var("WOWM_OVERWRITE_ALL_TESTS").is_ok() {
         overwrite(s, name);
     } else {
         check(s, name);
