@@ -7,12 +7,12 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_GROUP_ASSISTANT_LEADER = 0x028F {
 ///     Guid guid;
-///     u8 set_assistant;
+///     Bool set_assistant;
 /// }
 /// ```
 pub struct CMSG_GROUP_ASSISTANT_LEADER {
     pub guid: Guid,
-    pub set_assistant: u8,
+    pub set_assistant: bool,
 }
 
 impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
@@ -26,8 +26,8 @@ impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // set_assistant: u8
-        w.write_all(&self.set_assistant.to_le_bytes())?;
+        // set_assistant: Bool
+        w.write_all(u8::from(self.set_assistant).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -39,9 +39,8 @@ impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // set_assistant: u8
-        let set_assistant = crate::util::read_u8_le(r)?;
-
+        // set_assistant: Bool
+        let set_assistant = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             guid,
             set_assistant,
@@ -51,4 +50,10 @@ impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_GROUP_ASSISTANT_LEADER {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_GROUP_ASSISTANT_LEADER {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_GROUP_ASSISTANT_LEADER {}
 
