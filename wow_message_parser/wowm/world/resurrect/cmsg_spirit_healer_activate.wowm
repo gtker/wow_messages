@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_SPIRIT_HEALER_ACTIVATE = 0x021C {
     Guid guid;

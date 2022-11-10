@@ -158,8 +158,6 @@ pub(crate) mod cmsg_self_res;
 pub use cmsg_self_res::*;
 pub(crate) mod cmsg_send_mail;
 pub use cmsg_send_mail::*;
-pub(crate) mod cmsg_spirit_healer_activate;
-pub use cmsg_spirit_healer_activate::*;
 pub(crate) mod cmsg_summon_response;
 pub use cmsg_summon_response::*;
 pub(crate) mod cmsg_text_emote;
@@ -747,6 +745,8 @@ pub use crate::shared::cmsg_set_trade_item_vanilla_tbc_wrath::CMSG_SET_TRADE_ITE
 pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATCHED_FACTION;
 
 pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::CMSG_SETSHEATHED;
+
+pub use crate::shared::cmsg_spirit_healer_activate_vanilla_tbc_wrath::CMSG_SPIRIT_HEALER_ACTIVATE;
 
 pub use crate::shared::cmsg_split_item_vanilla_tbc::CMSG_SPLIT_ITEM;
 
