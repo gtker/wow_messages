@@ -191,6 +191,7 @@ use crate::world::wrath::CMSG_TAXINODE_STATUS_QUERY;
 use crate::world::wrath::CMSG_TAXIQUERYAVAILABLENODES;
 use crate::world::wrath::CMSG_ACTIVATETAXI;
 use crate::world::wrath::CMSG_TRAINER_LIST;
+use crate::world::wrath::CMSG_TRAINER_BUY_SPELL;
 use crate::world::wrath::CMSG_BINDER_ACTIVATE;
 use crate::world::wrath::CMSG_BANKER_ACTIVATE;
 use crate::world::wrath::CMSG_BUY_BANK_SLOT;
@@ -487,6 +488,7 @@ pub enum ClientOpcodeMessage {
     CMSG_TAXIQUERYAVAILABLENODES(CMSG_TAXIQUERYAVAILABLENODES),
     CMSG_ACTIVATETAXI(CMSG_ACTIVATETAXI),
     CMSG_TRAINER_LIST(CMSG_TRAINER_LIST),
+    CMSG_TRAINER_BUY_SPELL(CMSG_TRAINER_BUY_SPELL),
     CMSG_BINDER_ACTIVATE(CMSG_BINDER_ACTIVATE),
     CMSG_BANKER_ACTIVATE(CMSG_BANKER_ACTIVATE),
     CMSG_BUY_BANK_SLOT(CMSG_BUY_BANK_SLOT),
@@ -785,6 +787,7 @@ impl ClientOpcodeMessage {
             0x01AC => Ok(Self::CMSG_TAXIQUERYAVAILABLENODES(<CMSG_TAXIQUERYAVAILABLENODES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AC, size: body_size, io, } } else { a } })?)),
             0x01AD => Ok(Self::CMSG_ACTIVATETAXI(<CMSG_ACTIVATETAXI as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AD, size: body_size, io, } } else { a } })?)),
             0x01B0 => Ok(Self::CMSG_TRAINER_LIST(<CMSG_TRAINER_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B0, size: body_size, io, } } else { a } })?)),
+            0x01B2 => Ok(Self::CMSG_TRAINER_BUY_SPELL(<CMSG_TRAINER_BUY_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B2, size: body_size, io, } } else { a } })?)),
             0x01B5 => Ok(Self::CMSG_BINDER_ACTIVATE(<CMSG_BINDER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B5, size: body_size, io, } } else { a } })?)),
             0x01B7 => Ok(Self::CMSG_BANKER_ACTIVATE(<CMSG_BANKER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B7, size: body_size, io, } } else { a } })?)),
             0x01B9 => Ok(Self::CMSG_BUY_BANK_SLOT(<CMSG_BUY_BANK_SLOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B9, size: body_size, io, } } else { a } })?)),
@@ -1151,6 +1154,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TAXIQUERYAVAILABLENODES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACTIVATETAXI(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TRAINER_LIST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_TRAINER_BUY_SPELL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BINDER_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BANKER_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUY_BANK_SLOT(c) => c.write_encrypted_client(w, e),
@@ -1450,6 +1454,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TAXIQUERYAVAILABLENODES(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACTIVATETAXI(c) => c.write_unencrypted_client(w),
             Self::CMSG_TRAINER_LIST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_TRAINER_BUY_SPELL(c) => c.write_unencrypted_client(w),
             Self::CMSG_BINDER_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_BANKER_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUY_BANK_SLOT(c) => c.write_unencrypted_client(w),
@@ -1749,6 +1754,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TAXIQUERYAVAILABLENODES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TRAINER_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TRAINER_BUY_SPELL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BINDER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BANKER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_BANK_SLOT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2048,6 +2054,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TAXIQUERYAVAILABLENODES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TRAINER_LIST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TRAINER_BUY_SPELL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BINDER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BANKER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUY_BANK_SLOT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2347,6 +2354,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TAXIQUERYAVAILABLENODES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TRAINER_LIST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TRAINER_BUY_SPELL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BINDER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BANKER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_BANK_SLOT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2646,6 +2654,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_TAXIQUERYAVAILABLENODES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACTIVATETAXI(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TRAINER_LIST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TRAINER_BUY_SPELL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BINDER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BANKER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUY_BANK_SLOT(c) => c.astd_write_unencrypted_client(w).await,
@@ -2956,6 +2965,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_TAXIQUERYAVAILABLENODES(_) => "CMSG_TAXIQUERYAVAILABLENODES",
             ClientOpcodeMessage::CMSG_ACTIVATETAXI(_) => "CMSG_ACTIVATETAXI",
             ClientOpcodeMessage::CMSG_TRAINER_LIST(_) => "CMSG_TRAINER_LIST",
+            ClientOpcodeMessage::CMSG_TRAINER_BUY_SPELL(_) => "CMSG_TRAINER_BUY_SPELL",
             ClientOpcodeMessage::CMSG_BINDER_ACTIVATE(_) => "CMSG_BINDER_ACTIVATE",
             ClientOpcodeMessage::CMSG_BANKER_ACTIVATE(_) => "CMSG_BANKER_ACTIVATE",
             ClientOpcodeMessage::CMSG_BUY_BANK_SLOT(_) => "CMSG_BUY_BANK_SLOT",
@@ -4160,6 +4170,12 @@ impl From<CMSG_ACTIVATETAXI> for ClientOpcodeMessage {
 impl From<CMSG_TRAINER_LIST> for ClientOpcodeMessage {
     fn from(c: CMSG_TRAINER_LIST) -> Self {
         Self::CMSG_TRAINER_LIST(c)
+    }
+}
+
+impl From<CMSG_TRAINER_BUY_SPELL> for ClientOpcodeMessage {
+    fn from(c: CMSG_TRAINER_BUY_SPELL) -> Self {
+        Self::CMSG_TRAINER_BUY_SPELL(c)
     }
 }
 

@@ -166,8 +166,6 @@ pub(crate) mod cmsg_summon_response;
 pub use cmsg_summon_response::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
-pub(crate) mod cmsg_trainer_buy_spell;
-pub use cmsg_trainer_buy_spell::*;
 pub(crate) mod cmsg_unlearn_skill;
 pub use cmsg_unlearn_skill::*;
 pub(crate) mod cmsg_update_account_data;
@@ -775,6 +773,8 @@ pub use crate::shared::cmsg_toggle_cloak_vanilla_tbc_wrath::CMSG_TOGGLE_CLOAK;
 pub use crate::shared::cmsg_toggle_helm_vanilla_tbc_wrath::CMSG_TOGGLE_HELM;
 
 pub use crate::shared::cmsg_toggle_pvp_vanilla_tbc_wrath::CMSG_TOGGLE_PVP;
+
+pub use crate::shared::cmsg_trainer_buy_spell_vanilla_tbc_wrath::CMSG_TRAINER_BUY_SPELL;
 
 pub use crate::shared::cmsg_trainer_list_vanilla_tbc_wrath::CMSG_TRAINER_LIST;
 
