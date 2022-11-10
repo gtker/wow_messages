@@ -398,6 +398,8 @@ pub use crate::shared::cmsg_gossip_select_option_tbc_wrath::CMSG_GOSSIP_SELECT_O
 
 pub use crate::shared::cmsg_group_accept_vanilla_tbc::CMSG_GROUP_ACCEPT;
 
+pub use crate::shared::cmsg_group_change_sub_group_vanilla_tbc_wrath::CMSG_GROUP_CHANGE_SUB_GROUP;
+
 pub use crate::shared::cmsg_group_decline_vanilla_tbc_wrath::CMSG_GROUP_DECLINE;
 
 pub use crate::shared::cmsg_group_disband_vanilla_tbc_wrath::CMSG_GROUP_DISBAND;

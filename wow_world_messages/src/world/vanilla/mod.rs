@@ -90,8 +90,6 @@ pub(crate) mod cmsg_gossip_select_option;
 pub use cmsg_gossip_select_option::*;
 pub(crate) mod cmsg_group_assistant_leader;
 pub use cmsg_group_assistant_leader::*;
-pub(crate) mod cmsg_group_change_sub_group;
-pub use cmsg_group_change_sub_group::*;
 pub(crate) mod cmsg_group_raid_convert;
 pub use cmsg_group_raid_convert::*;
 pub(crate) mod cmsg_group_swap_sub_group;
@@ -539,6 +537,8 @@ pub use crate::shared::cmsg_gmticket_systemstatus_vanilla_tbc_wrath::CMSG_GMTICK
 pub use crate::shared::cmsg_gossip_hello_vanilla_tbc_wrath::CMSG_GOSSIP_HELLO;
 
 pub use crate::shared::cmsg_group_accept_vanilla_tbc::CMSG_GROUP_ACCEPT;
+
+pub use crate::shared::cmsg_group_change_sub_group_vanilla_tbc_wrath::CMSG_GROUP_CHANGE_SUB_GROUP;
 
 pub use crate::shared::cmsg_group_decline_vanilla_tbc_wrath::CMSG_GROUP_DECLINE;
 
