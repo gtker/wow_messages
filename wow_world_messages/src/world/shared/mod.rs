@@ -48,6 +48,7 @@ pub mod cmsg_buy_item_in_slot_vanilla_tbc;
 pub mod cmsg_buy_item_vanilla_tbc;
 pub mod cmsg_buy_stable_slot_vanilla_tbc_wrath;
 pub mod cmsg_buyback_item_vanilla_tbc_wrath;
+pub mod cmsg_cancel_cast_vanilla_tbc_wrath;
 pub mod cmsg_cancel_channelling_vanilla_tbc_wrath;
 pub mod cmsg_cancel_trade_vanilla_tbc_wrath;
 pub mod cmsg_channel_announcements_vanilla_tbc_wrath;
