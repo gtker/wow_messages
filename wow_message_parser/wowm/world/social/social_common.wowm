@@ -6,6 +6,8 @@ enum GroupLootSetting : u8 {
     MASTER_LOOT = 2;
     GROUP_LOOT = 3;
     NEED_BEFORE_GREED = 4;
+} {
+    versions = "2 3";
 }
 
 enum ItemQuality : u8 {

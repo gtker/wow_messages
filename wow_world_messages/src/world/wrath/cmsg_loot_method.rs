@@ -1,11 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::GroupLootSetting;
-use crate::world::vanilla::ItemQuality;
+use crate::world::wrath::GroupLootSetting;
+use crate::world::wrath::ItemQuality;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_loot_method.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_loot_method.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_loot_method.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_loot_method.wowm#L17):
 /// ```text
 /// cmsg CMSG_LOOT_METHOD = 0x007A {
 ///     (u32)GroupLootSetting loot_setting;
@@ -60,6 +60,6 @@ impl crate::Message for CMSG_LOOT_METHOD {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_LOOT_METHOD {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_LOOT_METHOD {}
 

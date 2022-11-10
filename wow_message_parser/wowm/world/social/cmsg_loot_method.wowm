@@ -1,8 +1,23 @@
-#tag_all versions "1.12";
+cmsg CMSG_LOOT_METHOD = 0x007A {
+    (u32)GroupLootSetting loot_setting;
+    Guid loot_master;
+    (u32)ItemQuality loot_threshold;
+} {
+    versions = "1.12";
+}
 
 cmsg CMSG_LOOT_METHOD = 0x007A {
     (u32)GroupLootSetting loot_setting;
     Guid loot_master;
     (u32)ItemQuality loot_threshold;
+} {
+    versions = "2.4.3";
 }
 
+cmsg CMSG_LOOT_METHOD = 0x007A {
+    (u32)GroupLootSetting loot_setting;
+    Guid loot_master;
+    (u32)ItemQuality loot_threshold;
+} {
+    versions = "3.3.5";
+}

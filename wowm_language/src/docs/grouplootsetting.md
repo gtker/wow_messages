@@ -1,6 +1,6 @@
 # GroupLootSetting
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -27,6 +27,8 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `NEED_BEFORE_GREED` | 4 (0x04) |  |  |
 
 Used in:
+* [CMSG_LOOT_METHOD](cmsg_loot_method.md)
+* [CMSG_LOOT_METHOD](cmsg_loot_method.md)
 * [CMSG_LOOT_METHOD](cmsg_loot_method.md)
 * [SMSG_GROUP_LIST](smsg_group_list.md)
 

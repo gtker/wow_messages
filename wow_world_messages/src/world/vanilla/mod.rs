@@ -229,8 +229,6 @@ pub(crate) mod gossip_item;
 pub use gossip_item::*;
 pub(crate) mod group_list_member;
 pub use group_list_member::*;
-pub(crate) mod group_loot_setting;
-pub use group_loot_setting::*;
 pub(crate) mod group_member_online_status;
 pub use group_member_online_status::*;
 pub(crate) mod group_type;
@@ -827,6 +825,8 @@ pub use crate::shared::gm_ticket_response_vanilla_tbc_wrath::GmTicketResponse;
 pub use crate::shared::gm_ticket_status_response_vanilla_tbc_wrath::GmTicketStatusResponse;
 
 pub use crate::shared::gm_ticket_status_vanilla_tbc_wrath::GmTicketStatus;
+
+pub use crate::shared::group_loot_setting_vanilla_tbc_wrath::GroupLootSetting;
 
 pub use crate::shared::guild_command_vanilla_tbc::GuildCommand;
 

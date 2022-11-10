@@ -42,6 +42,8 @@ pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
+pub(crate) mod cmsg_loot_method;
+pub use cmsg_loot_method::*;
 pub(crate) mod cmsg_messagechat;
 pub use cmsg_messagechat::*;
 pub(crate) mod cmsg_move_chng_transport;
@@ -665,6 +667,8 @@ pub use crate::shared::gm_ticket_status_response_vanilla_tbc_wrath::GmTicketStat
 pub use crate::shared::gm_ticket_status_vanilla_tbc_wrath::GmTicketStatus;
 
 pub use crate::shared::gossip_item_tbc_wrath::GossipItem;
+
+pub use crate::shared::group_loot_setting_vanilla_tbc_wrath::GroupLootSetting;
 
 pub use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 

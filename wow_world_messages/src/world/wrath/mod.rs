@@ -82,6 +82,8 @@ pub(crate) mod cmsg_lfd_player_lock_info_request;
 pub use cmsg_lfd_player_lock_info_request::*;
 pub(crate) mod cmsg_lfg_get_status;
 pub use cmsg_lfg_get_status::*;
+pub(crate) mod cmsg_loot_method;
+pub use cmsg_loot_method::*;
 pub(crate) mod cmsg_mail_create_text_item;
 pub use cmsg_mail_create_text_item::*;
 pub(crate) mod cmsg_messagechat;
@@ -673,6 +675,8 @@ pub use crate::shared::gm_ticket_status_response_vanilla_tbc_wrath::GmTicketStat
 pub use crate::shared::gm_ticket_status_vanilla_tbc_wrath::GmTicketStatus;
 
 pub use crate::shared::gossip_item_tbc_wrath::GossipItem;
+
+pub use crate::shared::group_loot_setting_vanilla_tbc_wrath::GroupLootSetting;
 
 pub use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 
