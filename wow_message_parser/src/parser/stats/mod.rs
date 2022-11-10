@@ -85,14 +85,6 @@ fn get_messages_to_print(wrath: &[Data], vanilla: &[Data]) -> (Vec<Data>, &'stat
         s: &'static str,
     }
 
-    fn cmsg_that_are_also_in_vanilla(a: &Data, v: &Data) -> bool {
-        a.name == v.name && a.opcode == v.opcode && a.message_ty() == MessageType::Cmsg
-    }
-    let cmsg_that_are_also_in_vanilla = Option {
-        f: Box::new(cmsg_that_are_also_in_vanilla),
-        s: "Client messages that are also in Vanilla",
-    };
-
     fn messages_that_are_also_in_vanilla(a: &Data, v: &Data) -> bool {
         a.name == v.name && a.opcode == v.opcode
     }
@@ -109,18 +101,14 @@ fn get_messages_to_print(wrath: &[Data], vanilla: &[Data]) -> (Vec<Data>, &'stat
         s: "Client messages",
     };
 
-    for condition in [
-        cmsg_that_are_also_in_vanilla,
-        messages_that_are_also_in_vanilla,
-        cmsg_for_wrath,
-    ] {
+    for condition in [messages_that_are_also_in_vanilla, cmsg_for_wrath] {
         let data = wrath
             .iter()
             .filter(|a| vanilla.iter().any(|v| (condition.f)(a, v)))
             .cloned()
             .collect::<Vec<_>>();
 
-        if !data.is_empty() {
+        if data.iter().any(|a| !a.definition && a.reason.is_none()) {
             return (data, condition.s);
         }
     }
