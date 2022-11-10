@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_UNLEARN_SKILL = 0x0202 {
     /* TODO: Same as spell_id? */
