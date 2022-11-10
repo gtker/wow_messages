@@ -44,6 +44,7 @@ use crate::world::tbc::CMSG_GROUP_ACCEPT;
 use crate::world::tbc::CMSG_GROUP_DECLINE;
 use crate::world::tbc::CMSG_GROUP_UNINVITE;
 use crate::world::tbc::CMSG_GROUP_UNINVITE_GUID;
+use crate::world::tbc::CMSG_GROUP_SET_LEADER;
 use crate::world::tbc::CMSG_GUILD_CREATE;
 use crate::world::tbc::CMSG_GUILD_INVITE;
 use crate::world::tbc::CMSG_GUILD_ACCEPT;
@@ -313,6 +314,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GROUP_DECLINE(CMSG_GROUP_DECLINE),
     CMSG_GROUP_UNINVITE(CMSG_GROUP_UNINVITE),
     CMSG_GROUP_UNINVITE_GUID(CMSG_GROUP_UNINVITE_GUID),
+    CMSG_GROUP_SET_LEADER(CMSG_GROUP_SET_LEADER),
     CMSG_GUILD_CREATE(CMSG_GUILD_CREATE),
     CMSG_GUILD_INVITE(CMSG_GUILD_INVITE),
     CMSG_GUILD_ACCEPT(CMSG_GUILD_ACCEPT),
@@ -584,6 +586,7 @@ impl ClientOpcodeMessage {
             0x0073 => Ok(Self::CMSG_GROUP_DECLINE(<CMSG_GROUP_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0073, size: body_size, io, } } else { a } })?)),
             0x0075 => Ok(Self::CMSG_GROUP_UNINVITE(<CMSG_GROUP_UNINVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0075, size: body_size, io, } } else { a } })?)),
             0x0076 => Ok(Self::CMSG_GROUP_UNINVITE_GUID(<CMSG_GROUP_UNINVITE_GUID as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0076, size: body_size, io, } } else { a } })?)),
+            0x0078 => Ok(Self::CMSG_GROUP_SET_LEADER(<CMSG_GROUP_SET_LEADER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0078, size: body_size, io, } } else { a } })?)),
             0x0081 => Ok(Self::CMSG_GUILD_CREATE(<CMSG_GUILD_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0081, size: body_size, io, } } else { a } })?)),
             0x0082 => Ok(Self::CMSG_GUILD_INVITE(<CMSG_GUILD_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0082, size: body_size, io, } } else { a } })?)),
             0x0084 => Ok(Self::CMSG_GUILD_ACCEPT(<CMSG_GUILD_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0084, size: body_size, io, } } else { a } })?)),
@@ -923,6 +926,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_DECLINE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_UNINVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GROUP_SET_LEADER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_INVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_ACCEPT(c) => c.write_encrypted_client(w, e),
@@ -1195,6 +1199,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_DECLINE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_UNINVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GROUP_SET_LEADER(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_INVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_ACCEPT(c) => c.write_unencrypted_client(w),
@@ -1467,6 +1472,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_SET_LEADER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1739,6 +1745,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_SET_LEADER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2011,6 +2018,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_SET_LEADER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2283,6 +2291,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_SET_LEADER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
@@ -2590,6 +2599,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GROUP_DECLINE(_) => "CMSG_GROUP_DECLINE",
             ClientOpcodeMessage::CMSG_GROUP_UNINVITE(_) => "CMSG_GROUP_UNINVITE",
             ClientOpcodeMessage::CMSG_GROUP_UNINVITE_GUID(_) => "CMSG_GROUP_UNINVITE_GUID",
+            ClientOpcodeMessage::CMSG_GROUP_SET_LEADER(_) => "CMSG_GROUP_SET_LEADER",
             ClientOpcodeMessage::CMSG_GUILD_CREATE(_) => "CMSG_GUILD_CREATE",
             ClientOpcodeMessage::CMSG_GUILD_INVITE(_) => "CMSG_GUILD_INVITE",
             ClientOpcodeMessage::CMSG_GUILD_ACCEPT(_) => "CMSG_GUILD_ACCEPT",
@@ -3032,6 +3042,12 @@ impl From<CMSG_GROUP_UNINVITE> for ClientOpcodeMessage {
 impl From<CMSG_GROUP_UNINVITE_GUID> for ClientOpcodeMessage {
     fn from(c: CMSG_GROUP_UNINVITE_GUID) -> Self {
         Self::CMSG_GROUP_UNINVITE_GUID(c)
+    }
+}
+
+impl From<CMSG_GROUP_SET_LEADER> for ClientOpcodeMessage {
+    fn from(c: CMSG_GROUP_SET_LEADER) -> Self {
+        Self::CMSG_GROUP_SET_LEADER(c)
     }
 }
 
