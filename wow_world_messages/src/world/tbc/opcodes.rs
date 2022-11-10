@@ -133,6 +133,7 @@ use crate::world::tbc::CMSG_INITIATE_TRADE;
 use crate::world::tbc::CMSG_BEGIN_TRADE;
 use crate::world::tbc::CMSG_BUSY_TRADE;
 use crate::world::tbc::CMSG_IGNORE_TRADE;
+use crate::world::tbc::CMSG_ACCEPT_TRADE;
 use crate::world::tbc::CMSG_CANCEL_TRADE;
 use crate::world::tbc::CMSG_SET_FACTION_ATWAR;
 use crate::world::tbc::CMSG_SET_ACTION_BUTTON;
@@ -410,6 +411,7 @@ pub enum ClientOpcodeMessage {
     CMSG_BEGIN_TRADE(CMSG_BEGIN_TRADE),
     CMSG_BUSY_TRADE(CMSG_BUSY_TRADE),
     CMSG_IGNORE_TRADE(CMSG_IGNORE_TRADE),
+    CMSG_ACCEPT_TRADE(CMSG_ACCEPT_TRADE),
     CMSG_CANCEL_TRADE(CMSG_CANCEL_TRADE),
     CMSG_SET_FACTION_ATWAR(CMSG_SET_FACTION_ATWAR),
     CMSG_SET_ACTION_BUTTON(CMSG_SET_ACTION_BUTTON),
@@ -689,6 +691,7 @@ impl ClientOpcodeMessage {
             0x0117 => Ok(Self::CMSG_BEGIN_TRADE(<CMSG_BEGIN_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0117, size: body_size, io, } } else { a } })?)),
             0x0118 => Ok(Self::CMSG_BUSY_TRADE(<CMSG_BUSY_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0118, size: body_size, io, } } else { a } })?)),
             0x0119 => Ok(Self::CMSG_IGNORE_TRADE(<CMSG_IGNORE_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0119, size: body_size, io, } } else { a } })?)),
+            0x011A => Ok(Self::CMSG_ACCEPT_TRADE(<CMSG_ACCEPT_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x011A, size: body_size, io, } } else { a } })?)),
             0x011C => Ok(Self::CMSG_CANCEL_TRADE(<CMSG_CANCEL_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x011C, size: body_size, io, } } else { a } })?)),
             0x0125 => Ok(Self::CMSG_SET_FACTION_ATWAR(<CMSG_SET_FACTION_ATWAR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0125, size: body_size, io, } } else { a } })?)),
             0x0128 => Ok(Self::CMSG_SET_ACTION_BUTTON(<CMSG_SET_ACTION_BUTTON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0128, size: body_size, io, } } else { a } })?)),
@@ -1036,6 +1039,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BEGIN_TRADE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUSY_TRADE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_IGNORE_TRADE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_ACCEPT_TRADE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_TRADE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_FACTION_ATWAR(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTION_BUTTON(c) => c.write_encrypted_client(w, e),
@@ -1316,6 +1320,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BEGIN_TRADE(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUSY_TRADE(c) => c.write_unencrypted_client(w),
             Self::CMSG_IGNORE_TRADE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_ACCEPT_TRADE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_TRADE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_FACTION_ATWAR(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTION_BUTTON(c) => c.write_unencrypted_client(w),
@@ -1596,6 +1601,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BEGIN_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUSY_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_IGNORE_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_ACCEPT_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_FACTION_ATWAR(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1876,6 +1882,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BEGIN_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUSY_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_IGNORE_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_ACCEPT_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_FACTION_ATWAR(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2156,6 +2163,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BEGIN_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUSY_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_IGNORE_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_ACCEPT_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_FACTION_ATWAR(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2436,6 +2444,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BEGIN_TRADE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUSY_TRADE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_IGNORE_TRADE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_ACCEPT_TRADE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_TRADE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_FACTION_ATWAR(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTION_BUTTON(c) => c.astd_write_unencrypted_client(w).await,
@@ -2751,6 +2760,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_BEGIN_TRADE(_) => "CMSG_BEGIN_TRADE",
             ClientOpcodeMessage::CMSG_BUSY_TRADE(_) => "CMSG_BUSY_TRADE",
             ClientOpcodeMessage::CMSG_IGNORE_TRADE(_) => "CMSG_IGNORE_TRADE",
+            ClientOpcodeMessage::CMSG_ACCEPT_TRADE(_) => "CMSG_ACCEPT_TRADE",
             ClientOpcodeMessage::CMSG_CANCEL_TRADE(_) => "CMSG_CANCEL_TRADE",
             ClientOpcodeMessage::CMSG_SET_FACTION_ATWAR(_) => "CMSG_SET_FACTION_ATWAR",
             ClientOpcodeMessage::CMSG_SET_ACTION_BUTTON(_) => "CMSG_SET_ACTION_BUTTON",
@@ -3646,6 +3656,12 @@ impl From<CMSG_BUSY_TRADE> for ClientOpcodeMessage {
 impl From<CMSG_IGNORE_TRADE> for ClientOpcodeMessage {
     fn from(c: CMSG_IGNORE_TRADE) -> Self {
         Self::CMSG_IGNORE_TRADE(c)
+    }
+}
+
+impl From<CMSG_ACCEPT_TRADE> for ClientOpcodeMessage {
+    fn from(c: CMSG_ACCEPT_TRADE) -> Self {
+        Self::CMSG_ACCEPT_TRADE(c)
     }
 }
 

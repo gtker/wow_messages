@@ -40,8 +40,6 @@ pub(crate) mod chat_type;
 pub use chat_type::*;
 pub(crate) mod cinematic_sequence_id;
 pub use cinematic_sequence_id::*;
-pub(crate) mod cmsg_accept_trade;
-pub use cmsg_accept_trade::*;
 pub(crate) mod cmsg_add_friend;
 pub use cmsg_add_friend::*;
 pub(crate) mod cmsg_area_spirit_healer_queue;
@@ -427,6 +425,8 @@ pub use crate::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
 pub use crate::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
 
 pub use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
+
+pub use crate::shared::cmsg_accept_trade_vanilla_tbc_wrath::CMSG_ACCEPT_TRADE;
 
 pub use crate::shared::cmsg_activatetaxi_vanilla_tbc_wrath::CMSG_ACTIVATETAXI;
 

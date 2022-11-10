@@ -236,6 +236,8 @@ pub use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
 
 pub use crate::shared::chat_notify_tbc_wrath::ChatNotify;
 
+pub use crate::shared::cmsg_accept_trade_vanilla_tbc_wrath::CMSG_ACCEPT_TRADE;
+
 pub use crate::shared::cmsg_activatetaxi_vanilla_tbc_wrath::CMSG_ACTIVATETAXI;
 
 pub use crate::shared::cmsg_activatetaxiexpress_vanilla_tbc::CMSG_ACTIVATETAXIEXPRESS;
