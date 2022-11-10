@@ -1,6 +1,12 @@
-#tag_all versions "1.12";
+cmsg CMSG_GROUP_UNINVITE_GUID = 0x76 {
+    Guid guid;
+} {
+    versions = "1 2";
+}
 
 cmsg CMSG_GROUP_UNINVITE_GUID = 0x76 {
     Guid guid;
+    CString reason;
+} {
+    versions = "3.3.5";
 }
-

@@ -116,8 +116,6 @@ pub(crate) mod cmsg_group_set_leader;
 pub use cmsg_group_set_leader::*;
 pub(crate) mod cmsg_group_swap_sub_group;
 pub use cmsg_group_swap_sub_group::*;
-pub(crate) mod cmsg_group_uninvite_guid;
-pub use cmsg_group_uninvite_guid::*;
 pub(crate) mod cmsg_guild_rank;
 pub use cmsg_guild_rank::*;
 pub(crate) mod cmsg_ignore_trade;
@@ -577,6 +575,8 @@ pub use crate::shared::cmsg_group_accept_vanilla_tbc::CMSG_GROUP_ACCEPT;
 pub use crate::shared::cmsg_group_decline_vanilla_tbc_wrath::CMSG_GROUP_DECLINE;
 
 pub use crate::shared::cmsg_group_invite_vanilla_tbc::CMSG_GROUP_INVITE;
+
+pub use crate::shared::cmsg_group_uninvite_guid_vanilla_tbc::CMSG_GROUP_UNINVITE_GUID;
 
 pub use crate::shared::cmsg_group_uninvite_vanilla_tbc_wrath::CMSG_GROUP_UNINVITE;
 
