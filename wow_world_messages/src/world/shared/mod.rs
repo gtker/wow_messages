@@ -218,6 +218,7 @@ pub mod cmsg_split_item_vanilla_tbc;
 pub mod cmsg_stable_pet_vanilla_tbc_wrath;
 pub mod cmsg_stable_swap_pet_vanilla_tbc_wrath;
 pub mod cmsg_standstatechange_vanilla_tbc_wrath;
+pub mod cmsg_summon_response_tbc_wrath;
 pub mod cmsg_swap_inv_item_vanilla_tbc_wrath;
 pub mod cmsg_swap_item_vanilla_tbc_wrath;
 pub mod cmsg_taxinode_status_query_vanilla_tbc_wrath;

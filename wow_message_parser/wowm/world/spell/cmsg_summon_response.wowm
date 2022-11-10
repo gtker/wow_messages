@@ -1,6 +1,12 @@
-#tag_all versions "1.12";
+cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
+    Guid summoner_guid;
+} {
+    versions = "1";
+}
 
 cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
     Guid summoner_guid;
+    Bool agree;
+} {
+    versions = "2.4.3 3";
 }
-
