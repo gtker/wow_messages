@@ -54,8 +54,6 @@ pub(crate) mod cmsg_battlefield_port;
 pub use cmsg_battlefield_port::*;
 pub(crate) mod cmsg_battlemaster_join;
 pub use cmsg_battlemaster_join::*;
-pub(crate) mod cmsg_cancel_growth_aura;
-pub use cmsg_cancel_growth_aura::*;
 pub(crate) mod cmsg_cast_spell;
 pub use cmsg_cast_spell::*;
 pub(crate) mod cmsg_char_create;
@@ -457,6 +455,8 @@ pub use crate::shared::cmsg_cancel_auto_repeat_spell_vanilla_tbc_wrath::CMSG_CAN
 pub use crate::shared::cmsg_cancel_cast_vanilla_tbc_wrath::CMSG_CANCEL_CAST;
 
 pub use crate::shared::cmsg_cancel_channelling_vanilla_tbc_wrath::CMSG_CANCEL_CHANNELLING;
+
+pub use crate::shared::cmsg_cancel_growth_aura_vanilla_tbc_wrath::CMSG_CANCEL_GROWTH_AURA;
 
 pub use crate::shared::cmsg_cancel_trade_vanilla_tbc_wrath::CMSG_CANCEL_TRADE;
 
