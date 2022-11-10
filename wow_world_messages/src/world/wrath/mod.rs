@@ -408,6 +408,8 @@ pub use crate::shared::cmsg_gossip_hello_vanilla_tbc_wrath::CMSG_GOSSIP_HELLO;
 
 pub use crate::shared::cmsg_gossip_select_option_tbc_wrath::CMSG_GOSSIP_SELECT_OPTION;
 
+pub use crate::shared::cmsg_group_decline_vanilla_tbc_wrath::CMSG_GROUP_DECLINE;
+
 pub use crate::shared::cmsg_guild_accept_vanilla_tbc_wrath::CMSG_GUILD_ACCEPT;
 
 pub use crate::shared::cmsg_guild_add_rank_vanilla_tbc_wrath::CMSG_GUILD_ADD_RANK;

@@ -33,3 +33,9 @@ impl crate::Message for CMSG_GROUP_DECLINE {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_GROUP_DECLINE {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_GROUP_DECLINE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_GROUP_DECLINE {}
+
