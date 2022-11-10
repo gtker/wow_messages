@@ -494,6 +494,8 @@ pub use crate::shared::cmsg_item_query_single_tbc_wrath::CMSG_ITEM_QUERY_SINGLE;
 
 pub use crate::shared::cmsg_join_channel_tbc_wrath::CMSG_JOIN_CHANNEL;
 
+pub use crate::shared::cmsg_learn_talent_vanilla_tbc_wrath::CMSG_LEARN_TALENT;
+
 pub use crate::shared::cmsg_leave_channel_tbc_wrath::CMSG_LEAVE_CHANNEL;
 
 pub use crate::shared::cmsg_list_inventory_vanilla_tbc_wrath::CMSG_LIST_INVENTORY;

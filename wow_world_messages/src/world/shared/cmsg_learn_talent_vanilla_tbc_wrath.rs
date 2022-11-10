@@ -51,3 +51,9 @@ impl crate::Message for CMSG_LEARN_TALENT {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_LEARN_TALENT {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_LEARN_TALENT {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_LEARN_TALENT {}
+

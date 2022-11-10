@@ -123,6 +123,7 @@ pub mod cmsg_item_name_query_vanilla_tbc_wrath;
 pub mod cmsg_item_query_single_tbc_wrath;
 pub mod cmsg_item_text_query_vanilla_tbc;
 pub mod cmsg_join_channel_tbc_wrath;
+pub mod cmsg_learn_talent_vanilla_tbc_wrath;
 pub mod cmsg_leave_channel_tbc_wrath;
 pub mod cmsg_list_inventory_vanilla_tbc_wrath;
 pub mod cmsg_logout_cancel_vanilla_tbc_wrath;

@@ -106,8 +106,6 @@ pub(crate) mod cmsg_item_query_single;
 pub use cmsg_item_query_single::*;
 pub(crate) mod cmsg_join_channel;
 pub use cmsg_join_channel::*;
-pub(crate) mod cmsg_learn_talent;
-pub use cmsg_learn_talent::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
 pub(crate) mod cmsg_leave_channel;
@@ -603,6 +601,8 @@ pub use crate::shared::cmsg_inspect_vanilla_tbc_wrath::CMSG_INSPECT;
 pub use crate::shared::cmsg_item_name_query_vanilla_tbc_wrath::CMSG_ITEM_NAME_QUERY;
 
 pub use crate::shared::cmsg_item_text_query_vanilla_tbc::CMSG_ITEM_TEXT_QUERY;
+
+pub use crate::shared::cmsg_learn_talent_vanilla_tbc_wrath::CMSG_LEARN_TALENT;
 
 pub use crate::shared::cmsg_list_inventory_vanilla_tbc_wrath::CMSG_LIST_INVENTORY;
 
