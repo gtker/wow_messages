@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_CANCEL_AUTO_REPEAT_SPELL = 0x026D {}
 

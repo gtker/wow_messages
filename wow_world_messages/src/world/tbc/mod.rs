@@ -312,6 +312,8 @@ pub use crate::shared::cmsg_buyback_item_vanilla_tbc_wrath::CMSG_BUYBACK_ITEM;
 
 pub use crate::shared::cmsg_cancel_aura_vanilla_tbc_wrath::CMSG_CANCEL_AURA;
 
+pub use crate::shared::cmsg_cancel_auto_repeat_spell_vanilla_tbc_wrath::CMSG_CANCEL_AUTO_REPEAT_SPELL;
+
 pub use crate::shared::cmsg_cancel_cast_vanilla_tbc_wrath::CMSG_CANCEL_CAST;
 
 pub use crate::shared::cmsg_cancel_channelling_vanilla_tbc_wrath::CMSG_CANCEL_CHANNELLING;

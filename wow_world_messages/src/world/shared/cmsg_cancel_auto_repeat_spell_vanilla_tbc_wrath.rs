@@ -33,3 +33,9 @@ impl crate::Message for CMSG_CANCEL_AUTO_REPEAT_SPELL {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_CANCEL_AUTO_REPEAT_SPELL {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_CANCEL_AUTO_REPEAT_SPELL {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_CANCEL_AUTO_REPEAT_SPELL {}
+
