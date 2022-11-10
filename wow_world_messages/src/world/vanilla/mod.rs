@@ -150,8 +150,6 @@ pub(crate) mod cmsg_pet_rename;
 pub use cmsg_pet_rename::*;
 pub(crate) mod cmsg_played_time;
 pub use cmsg_played_time::*;
-pub(crate) mod cmsg_reclaim_corpse;
-pub use cmsg_reclaim_corpse::*;
 pub(crate) mod cmsg_repair_item;
 pub use cmsg_repair_item::*;
 pub(crate) mod cmsg_request_party_member_stats;
@@ -711,6 +709,8 @@ pub use crate::shared::cmsg_questlog_remove_quest_vanilla_tbc_wrath::CMSG_QUESTL
 pub use crate::shared::cmsg_questlog_swap_quest_vanilla_tbc_wrath::CMSG_QUESTLOG_SWAP_QUEST;
 
 pub use crate::shared::cmsg_read_item_vanilla_tbc_wrath::CMSG_READ_ITEM;
+
+pub use crate::shared::cmsg_reclaim_corpse_vanilla_tbc_wrath::CMSG_RECLAIM_CORPSE;
 
 pub use crate::shared::cmsg_repop_request_vanilla_tbc_wrath::CMSG_REPOP_REQUEST;
 

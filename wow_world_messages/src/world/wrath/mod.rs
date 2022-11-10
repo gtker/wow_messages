@@ -600,6 +600,8 @@ pub use crate::shared::cmsg_read_item_vanilla_tbc_wrath::CMSG_READ_ITEM;
 
 pub use crate::shared::cmsg_realm_split_tbc_wrath::CMSG_REALM_SPLIT;
 
+pub use crate::shared::cmsg_reclaim_corpse_vanilla_tbc_wrath::CMSG_RECLAIM_CORPSE;
+
 pub use crate::shared::cmsg_repair_item_tbc_wrath::CMSG_REPAIR_ITEM;
 
 pub use crate::shared::cmsg_repop_request_vanilla_tbc_wrath::CMSG_REPOP_REQUEST;

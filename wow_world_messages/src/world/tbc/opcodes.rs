@@ -198,6 +198,7 @@ use crate::world::tbc::CMSG_TURN_IN_PETITION;
 use crate::world::tbc::CMSG_PETITION_QUERY;
 use crate::world::tbc::CMSG_BUG;
 use crate::world::tbc::CMSG_QUERY_TIME;
+use crate::world::tbc::CMSG_RECLAIM_CORPSE;
 use crate::world::tbc::CMSG_WRAP_ITEM;
 use crate::world::tbc::CMSG_PING;
 use crate::world::tbc::CMSG_SETSHEATHED;
@@ -486,6 +487,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PETITION_QUERY(CMSG_PETITION_QUERY),
     CMSG_BUG(CMSG_BUG),
     CMSG_QUERY_TIME(CMSG_QUERY_TIME),
+    CMSG_RECLAIM_CORPSE(CMSG_RECLAIM_CORPSE),
     CMSG_WRAP_ITEM(CMSG_WRAP_ITEM),
     CMSG_PING(CMSG_PING),
     CMSG_SETSHEATHED(CMSG_SETSHEATHED),
@@ -776,6 +778,7 @@ impl ClientOpcodeMessage {
             0x01C6 => Ok(Self::CMSG_PETITION_QUERY(<CMSG_PETITION_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C6, size: body_size, io, } } else { a } })?)),
             0x01CA => Ok(Self::CMSG_BUG(<CMSG_BUG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CA, size: body_size, io, } } else { a } })?)),
             0x01CE => Ok(Self::CMSG_QUERY_TIME(<CMSG_QUERY_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CE, size: body_size, io, } } else { a } })?)),
+            0x01D2 => Ok(Self::CMSG_RECLAIM_CORPSE(<CMSG_RECLAIM_CORPSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D2, size: body_size, io, } } else { a } })?)),
             0x01D3 => Ok(Self::CMSG_WRAP_ITEM(<CMSG_WRAP_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D3, size: body_size, io, } } else { a } })?)),
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DC, size: body_size, io, } } else { a } })?)),
             0x01E0 => Ok(Self::CMSG_SETSHEATHED(<CMSG_SETSHEATHED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01E0, size: body_size, io, } } else { a } })?)),
@@ -1134,6 +1137,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUG(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUERY_TIME(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_RECLAIM_CORPSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WRAP_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SETSHEATHED(c) => c.write_encrypted_client(w, e),
@@ -1425,6 +1429,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUG(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUERY_TIME(c) => c.write_unencrypted_client(w),
+            Self::CMSG_RECLAIM_CORPSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_WRAP_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_SETSHEATHED(c) => c.write_unencrypted_client(w),
@@ -1716,6 +1721,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUG(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_RECLAIM_CORPSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WRAP_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2007,6 +2013,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUG(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_RECLAIM_CORPSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WRAP_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2298,6 +2305,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUG(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_TIME(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_RECLAIM_CORPSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WRAP_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2589,6 +2597,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUG(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_TIME(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_RECLAIM_CORPSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WRAP_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_unencrypted_client(w).await,
@@ -2915,6 +2924,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PETITION_QUERY(_) => "CMSG_PETITION_QUERY",
             ClientOpcodeMessage::CMSG_BUG(_) => "CMSG_BUG",
             ClientOpcodeMessage::CMSG_QUERY_TIME(_) => "CMSG_QUERY_TIME",
+            ClientOpcodeMessage::CMSG_RECLAIM_CORPSE(_) => "CMSG_RECLAIM_CORPSE",
             ClientOpcodeMessage::CMSG_WRAP_ITEM(_) => "CMSG_WRAP_ITEM",
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_SETSHEATHED(_) => "CMSG_SETSHEATHED",
@@ -4146,6 +4156,12 @@ impl From<CMSG_BUG> for ClientOpcodeMessage {
 impl From<CMSG_QUERY_TIME> for ClientOpcodeMessage {
     fn from(c: CMSG_QUERY_TIME) -> Self {
         Self::CMSG_QUERY_TIME(c)
+    }
+}
+
+impl From<CMSG_RECLAIM_CORPSE> for ClientOpcodeMessage {
+    fn from(c: CMSG_RECLAIM_CORPSE) -> Self {
+        Self::CMSG_RECLAIM_CORPSE(c)
     }
 }
 
