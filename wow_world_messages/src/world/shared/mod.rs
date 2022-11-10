@@ -68,6 +68,7 @@ pub mod cmsg_char_delete_vanilla_tbc_wrath;
 pub mod cmsg_char_enum_vanilla_tbc_wrath;
 pub mod cmsg_char_rename_vanilla_tbc_wrath;
 pub mod cmsg_chat_ignored_tbc_wrath;
+pub mod cmsg_clear_trade_item_vanilla_tbc_wrath;
 pub mod cmsg_complete_cinematic_vanilla_tbc_wrath;
 pub mod cmsg_contact_list_tbc_wrath;
 pub mod cmsg_creature_query_vanilla_tbc_wrath;

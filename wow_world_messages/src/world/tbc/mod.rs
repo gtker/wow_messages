@@ -346,6 +346,8 @@ pub use crate::shared::cmsg_char_rename_vanilla_tbc_wrath::CMSG_CHAR_RENAME;
 
 pub use crate::shared::cmsg_chat_ignored_tbc_wrath::CMSG_CHAT_IGNORED;
 
+pub use crate::shared::cmsg_clear_trade_item_vanilla_tbc_wrath::CMSG_CLEAR_TRADE_ITEM;
+
 pub use crate::shared::cmsg_complete_cinematic_vanilla_tbc_wrath::CMSG_COMPLETE_CINEMATIC;
 
 pub use crate::shared::cmsg_contact_list_tbc_wrath::CMSG_CONTACT_LIST;
