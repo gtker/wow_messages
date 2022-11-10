@@ -214,6 +214,7 @@ pub mod cmsg_turn_in_petition_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_clear_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_flag_vanilla_tbc_wrath;
 pub mod cmsg_tutorial_reset_vanilla_tbc_wrath;
+pub mod cmsg_unaccept_trade_vanilla_tbc_wrath;
 pub mod cmsg_unstable_pet_vanilla_tbc_wrath;
 pub mod cmsg_who_vanilla_tbc_wrath;
 pub mod cmsg_whois_vanilla_tbc_wrath;
