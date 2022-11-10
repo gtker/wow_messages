@@ -143,6 +143,7 @@ use crate::world::tbc::CMSG_SET_FACTION_ATWAR;
 use crate::world::tbc::CMSG_SET_ACTION_BUTTON;
 use crate::world::tbc::CMSG_CAST_SPELL;
 use crate::world::tbc::CMSG_CANCEL_CAST;
+use crate::world::tbc::CMSG_CANCEL_AURA;
 use crate::world::tbc::CMSG_CANCEL_CHANNELLING;
 use crate::world::tbc::CMSG_SET_SELECTION;
 use crate::world::tbc::CMSG_SET_TARGET_OBSOLETE;
@@ -427,6 +428,7 @@ pub enum ClientOpcodeMessage {
     CMSG_SET_ACTION_BUTTON(CMSG_SET_ACTION_BUTTON),
     CMSG_CAST_SPELL(CMSG_CAST_SPELL),
     CMSG_CANCEL_CAST(CMSG_CANCEL_CAST),
+    CMSG_CANCEL_AURA(CMSG_CANCEL_AURA),
     CMSG_CANCEL_CHANNELLING(CMSG_CANCEL_CHANNELLING),
     CMSG_SET_SELECTION(CMSG_SET_SELECTION),
     CMSG_SET_TARGET_OBSOLETE(CMSG_SET_TARGET_OBSOLETE),
@@ -713,6 +715,7 @@ impl ClientOpcodeMessage {
             0x0128 => Ok(Self::CMSG_SET_ACTION_BUTTON(<CMSG_SET_ACTION_BUTTON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0128, size: body_size, io, } } else { a } })?)),
             0x012E => Ok(Self::CMSG_CAST_SPELL(<CMSG_CAST_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x012E, size: body_size, io, } } else { a } })?)),
             0x012F => Ok(Self::CMSG_CANCEL_CAST(<CMSG_CANCEL_CAST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x012F, size: body_size, io, } } else { a } })?)),
+            0x0136 => Ok(Self::CMSG_CANCEL_AURA(<CMSG_CANCEL_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0136, size: body_size, io, } } else { a } })?)),
             0x013B => Ok(Self::CMSG_CANCEL_CHANNELLING(<CMSG_CANCEL_CHANNELLING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013B, size: body_size, io, } } else { a } })?)),
             0x013D => Ok(Self::CMSG_SET_SELECTION(<CMSG_SET_SELECTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013D, size: body_size, io, } } else { a } })?)),
             0x013E => Ok(Self::CMSG_SET_TARGET_OBSOLETE(<CMSG_SET_TARGET_OBSOLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013E, size: body_size, io, } } else { a } })?)),
@@ -1067,6 +1070,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTION_BUTTON(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CAST_SPELL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_CAST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CANCEL_AURA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_SELECTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_TARGET_OBSOLETE(c) => c.write_encrypted_client(w, e),
@@ -1354,6 +1358,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTION_BUTTON(c) => c.write_unencrypted_client(w),
             Self::CMSG_CAST_SPELL(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_CAST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CANCEL_AURA(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_SELECTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_TARGET_OBSOLETE(c) => c.write_unencrypted_client(w),
@@ -1641,6 +1646,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTION_BUTTON(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CAST_SPELL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CAST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_SELECTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TARGET_OBSOLETE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1928,6 +1934,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTION_BUTTON(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CAST_SPELL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CAST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_AURA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_SELECTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_TARGET_OBSOLETE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2215,6 +2222,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTION_BUTTON(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CAST_SPELL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CAST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_AURA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_SELECTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TARGET_OBSOLETE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2502,6 +2510,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_ACTION_BUTTON(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CAST_SPELL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CAST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_AURA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_SELECTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_TARGET_OBSOLETE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2824,6 +2833,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_ACTION_BUTTON(_) => "CMSG_SET_ACTION_BUTTON",
             ClientOpcodeMessage::CMSG_CAST_SPELL(_) => "CMSG_CAST_SPELL",
             ClientOpcodeMessage::CMSG_CANCEL_CAST(_) => "CMSG_CANCEL_CAST",
+            ClientOpcodeMessage::CMSG_CANCEL_AURA(_) => "CMSG_CANCEL_AURA",
             ClientOpcodeMessage::CMSG_CANCEL_CHANNELLING(_) => "CMSG_CANCEL_CHANNELLING",
             ClientOpcodeMessage::CMSG_SET_SELECTION(_) => "CMSG_SET_SELECTION",
             ClientOpcodeMessage::CMSG_SET_TARGET_OBSOLETE(_) => "CMSG_SET_TARGET_OBSOLETE",
@@ -3776,6 +3786,12 @@ impl From<CMSG_CAST_SPELL> for ClientOpcodeMessage {
 impl From<CMSG_CANCEL_CAST> for ClientOpcodeMessage {
     fn from(c: CMSG_CANCEL_CAST) -> Self {
         Self::CMSG_CANCEL_CAST(c)
+    }
+}
+
+impl From<CMSG_CANCEL_AURA> for ClientOpcodeMessage {
+    fn from(c: CMSG_CANCEL_AURA) -> Self {
+        Self::CMSG_CANCEL_AURA(c)
     }
 }
 
