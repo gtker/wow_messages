@@ -15,7 +15,7 @@ impl UpdateItemBuilder {
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -49,52 +49,52 @@ impl UpdateItemBuilder {
     }
 
     pub fn set_item_STACK_COUNT(mut self, v: i32) -> Self {
-        self.header_set(14, v as u32);
+        self.header_set(14, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_DURATION(mut self, v: i32) -> Self {
-        self.header_set(15, v as u32);
+        self.header_set(15, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_SPELL_CHARGES(mut self, v: i32) -> Self {
-        self.header_set(16, v as u32);
+        self.header_set(16, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(21, v as u32);
+        self.header_set(21, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_ENCHANTMENT(mut self, v: i32) -> Self {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_PROPERTY_SEED(mut self, v: i32) -> Self {
-        self.header_set(43, v as u32);
+        self.header_set(43, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
-        self.header_set(44, v as u32);
+        self.header_set(44, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_ITEM_TEXT_ID(mut self, v: i32) -> Self {
-        self.header_set(45, v as u32);
+        self.header_set(45, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_DURABILITY(mut self, v: i32) -> Self {
-        self.header_set(46, v as u32);
+        self.header_set(46, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_MAXDURABILITY(mut self, v: i32) -> Self {
-        self.header_set(47, v as u32);
+        self.header_set(47, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -108,7 +108,7 @@ impl UpdateContainerBuilder {
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -142,57 +142,57 @@ impl UpdateContainerBuilder {
     }
 
     pub fn set_item_STACK_COUNT(mut self, v: i32) -> Self {
-        self.header_set(14, v as u32);
+        self.header_set(14, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_DURATION(mut self, v: i32) -> Self {
-        self.header_set(15, v as u32);
+        self.header_set(15, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_SPELL_CHARGES(mut self, v: i32) -> Self {
-        self.header_set(16, v as u32);
+        self.header_set(16, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(21, v as u32);
+        self.header_set(21, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_ENCHANTMENT(mut self, v: i32) -> Self {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_PROPERTY_SEED(mut self, v: i32) -> Self {
-        self.header_set(43, v as u32);
+        self.header_set(43, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_RANDOM_PROPERTIES_ID(mut self, v: i32) -> Self {
-        self.header_set(44, v as u32);
+        self.header_set(44, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_ITEM_TEXT_ID(mut self, v: i32) -> Self {
-        self.header_set(45, v as u32);
+        self.header_set(45, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_DURABILITY(mut self, v: i32) -> Self {
-        self.header_set(46, v as u32);
+        self.header_set(46, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_item_MAXDURABILITY(mut self, v: i32) -> Self {
-        self.header_set(47, v as u32);
+        self.header_set(47, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_container_NUM_SLOTS(mut self, v: i32) -> Self {
-        self.header_set(48, v as u32);
+        self.header_set(48, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -212,7 +212,7 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -270,72 +270,72 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_HEALTH(mut self, v: i32) -> Self {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER1(mut self, v: i32) -> Self {
-        self.header_set(23, v as u32);
+        self.header_set(23, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER2(mut self, v: i32) -> Self {
-        self.header_set(24, v as u32);
+        self.header_set(24, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER3(mut self, v: i32) -> Self {
-        self.header_set(25, v as u32);
+        self.header_set(25, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER4(mut self, v: i32) -> Self {
-        self.header_set(26, v as u32);
+        self.header_set(26, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER5(mut self, v: i32) -> Self {
-        self.header_set(27, v as u32);
+        self.header_set(27, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXHEALTH(mut self, v: i32) -> Self {
-        self.header_set(28, v as u32);
+        self.header_set(28, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER1(mut self, v: i32) -> Self {
-        self.header_set(29, v as u32);
+        self.header_set(29, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER2(mut self, v: i32) -> Self {
-        self.header_set(30, v as u32);
+        self.header_set(30, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER3(mut self, v: i32) -> Self {
-        self.header_set(31, v as u32);
+        self.header_set(31, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER4(mut self, v: i32) -> Self {
-        self.header_set(32, v as u32);
+        self.header_set(32, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER5(mut self, v: i32) -> Self {
-        self.header_set(33, v as u32);
+        self.header_set(33, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_LEVEL(mut self, v: i32) -> Self {
-        self.header_set(34, v as u32);
+        self.header_set(34, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_FACTIONTEMPLATE(mut self, v: i32) -> Self {
-        self.header_set(35, v as u32);
+        self.header_set(35, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -345,7 +345,7 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_VIRTUAL_ITEM_SLOT_DISPLAY(mut self, v: i32) -> Self {
-        self.header_set(37, v as u32);
+        self.header_set(37, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -355,12 +355,12 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(46, v as u32);
+        self.header_set(46, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_AURA(mut self, v: i32) -> Self {
-        self.header_set(47, v as u32);
+        self.header_set(47, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -380,17 +380,17 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_AURASTATE(mut self, v: i32) -> Self {
-        self.header_set(125, v as u32);
+        self.header_set(125, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_BASEATTACKTIME(mut self, v: i32) -> Self {
-        self.header_set(126, v as u32);
+        self.header_set(126, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_RANGEDATTACKTIME(mut self, v: i32) -> Self {
-        self.header_set(128, v as u32);
+        self.header_set(128, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -405,17 +405,17 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_DISPLAYID(mut self, v: i32) -> Self {
-        self.header_set(131, v as u32);
+        self.header_set(131, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NATIVEDISPLAYID(mut self, v: i32) -> Self {
-        self.header_set(132, v as u32);
+        self.header_set(132, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MOUNTDISPLAYID(mut self, v: i32) -> Self {
-        self.header_set(133, v as u32);
+        self.header_set(133, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -445,32 +445,32 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_PETNUMBER(mut self, v: i32) -> Self {
-        self.header_set(139, v as u32);
+        self.header_set(139, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
-        self.header_set(140, v as u32);
+        self.header_set(140, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_PETEXPERIENCE(mut self, v: i32) -> Self {
-        self.header_set(141, v as u32);
+        self.header_set(141, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
-        self.header_set(142, v as u32);
+        self.header_set(142, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(143, v as u32);
+        self.header_set(143, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_CHANNEL_SPELL(mut self, v: i32) -> Self {
-        self.header_set(144, v as u32);
+        self.header_set(144, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -480,92 +480,92 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_CREATED_BY_SPELL(mut self, v: i32) -> Self {
-        self.header_set(146, v as u32);
+        self.header_set(146, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NPC_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(147, v as u32);
+        self.header_set(147, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NPC_EMOTESTATE(mut self, v: i32) -> Self {
-        self.header_set(148, v as u32);
+        self.header_set(148, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_TRAINING_POINTS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(149, (a as u32) << 16 | b as u32);
+        self.header_set(149, crate::util::u16s_to_u32(a, b));
         self
     }
 
     pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
-        self.header_set(150, v as u32);
+        self.header_set(150, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
-        self.header_set(151, v as u32);
+        self.header_set(151, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
-        self.header_set(152, v as u32);
+        self.header_set(152, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
-        self.header_set(153, v as u32);
+        self.header_set(153, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
-        self.header_set(154, v as u32);
+        self.header_set(154, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NORMAL_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(155, v as u32);
+        self.header_set(155, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_HOLY_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(156, v as u32);
+        self.header_set(156, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_FIRE_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(157, v as u32);
+        self.header_set(157, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NATURE_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(158, v as u32);
+        self.header_set(158, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_FROST_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(159, v as u32);
+        self.header_set(159, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_SHADOW_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(160, v as u32);
+        self.header_set(160, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_ARCANE_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(161, v as u32);
+        self.header_set(161, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_BASE_MANA(mut self, v: i32) -> Self {
-        self.header_set(162, v as u32);
+        self.header_set(162, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_BASE_HEALTH(mut self, v: i32) -> Self {
-        self.header_set(163, v as u32);
+        self.header_set(163, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -575,12 +575,12 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_ATTACK_POWER(mut self, v: i32) -> Self {
-        self.header_set(165, v as u32);
+        self.header_set(165, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(166, (a as u32) << 16 | b as u32);
+        self.header_set(166, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -590,12 +590,12 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
-        self.header_set(168, v as u32);
+        self.header_set(168, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(169, (a as u32) << 16 | b as u32);
+        self.header_set(169, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -615,7 +615,7 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
-        self.header_set(173, v as u32);
+        self.header_set(173, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -634,7 +634,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -692,72 +692,72 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_HEALTH(mut self, v: i32) -> Self {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER1(mut self, v: i32) -> Self {
-        self.header_set(23, v as u32);
+        self.header_set(23, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER2(mut self, v: i32) -> Self {
-        self.header_set(24, v as u32);
+        self.header_set(24, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER3(mut self, v: i32) -> Self {
-        self.header_set(25, v as u32);
+        self.header_set(25, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER4(mut self, v: i32) -> Self {
-        self.header_set(26, v as u32);
+        self.header_set(26, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_POWER5(mut self, v: i32) -> Self {
-        self.header_set(27, v as u32);
+        self.header_set(27, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXHEALTH(mut self, v: i32) -> Self {
-        self.header_set(28, v as u32);
+        self.header_set(28, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER1(mut self, v: i32) -> Self {
-        self.header_set(29, v as u32);
+        self.header_set(29, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER2(mut self, v: i32) -> Self {
-        self.header_set(30, v as u32);
+        self.header_set(30, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER3(mut self, v: i32) -> Self {
-        self.header_set(31, v as u32);
+        self.header_set(31, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER4(mut self, v: i32) -> Self {
-        self.header_set(32, v as u32);
+        self.header_set(32, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MAXPOWER5(mut self, v: i32) -> Self {
-        self.header_set(33, v as u32);
+        self.header_set(33, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_LEVEL(mut self, v: i32) -> Self {
-        self.header_set(34, v as u32);
+        self.header_set(34, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_FACTIONTEMPLATE(mut self, v: i32) -> Self {
-        self.header_set(35, v as u32);
+        self.header_set(35, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -767,7 +767,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_VIRTUAL_ITEM_SLOT_DISPLAY(mut self, v: i32) -> Self {
-        self.header_set(37, v as u32);
+        self.header_set(37, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -777,12 +777,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(46, v as u32);
+        self.header_set(46, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_AURA(mut self, v: i32) -> Self {
-        self.header_set(47, v as u32);
+        self.header_set(47, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -802,17 +802,17 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_AURASTATE(mut self, v: i32) -> Self {
-        self.header_set(125, v as u32);
+        self.header_set(125, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_BASEATTACKTIME(mut self, v: i32) -> Self {
-        self.header_set(126, v as u32);
+        self.header_set(126, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_RANGEDATTACKTIME(mut self, v: i32) -> Self {
-        self.header_set(128, v as u32);
+        self.header_set(128, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -827,17 +827,17 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_DISPLAYID(mut self, v: i32) -> Self {
-        self.header_set(131, v as u32);
+        self.header_set(131, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NATIVEDISPLAYID(mut self, v: i32) -> Self {
-        self.header_set(132, v as u32);
+        self.header_set(132, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_MOUNTDISPLAYID(mut self, v: i32) -> Self {
-        self.header_set(133, v as u32);
+        self.header_set(133, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -867,32 +867,32 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_PETNUMBER(mut self, v: i32) -> Self {
-        self.header_set(139, v as u32);
+        self.header_set(139, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_PET_NAME_TIMESTAMP(mut self, v: i32) -> Self {
-        self.header_set(140, v as u32);
+        self.header_set(140, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_PETEXPERIENCE(mut self, v: i32) -> Self {
-        self.header_set(141, v as u32);
+        self.header_set(141, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_PETNEXTLEVELEXP(mut self, v: i32) -> Self {
-        self.header_set(142, v as u32);
+        self.header_set(142, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(143, v as u32);
+        self.header_set(143, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_CHANNEL_SPELL(mut self, v: i32) -> Self {
-        self.header_set(144, v as u32);
+        self.header_set(144, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -902,92 +902,92 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_CREATED_BY_SPELL(mut self, v: i32) -> Self {
-        self.header_set(146, v as u32);
+        self.header_set(146, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NPC_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(147, v as u32);
+        self.header_set(147, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NPC_EMOTESTATE(mut self, v: i32) -> Self {
-        self.header_set(148, v as u32);
+        self.header_set(148, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_TRAINING_POINTS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(149, (a as u32) << 16 | b as u32);
+        self.header_set(149, crate::util::u16s_to_u32(a, b));
         self
     }
 
     pub fn set_unit_STRENGTH(mut self, v: i32) -> Self {
-        self.header_set(150, v as u32);
+        self.header_set(150, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_AGILITY(mut self, v: i32) -> Self {
-        self.header_set(151, v as u32);
+        self.header_set(151, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_STAMINA(mut self, v: i32) -> Self {
-        self.header_set(152, v as u32);
+        self.header_set(152, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_INTELLECT(mut self, v: i32) -> Self {
-        self.header_set(153, v as u32);
+        self.header_set(153, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_SPIRIT(mut self, v: i32) -> Self {
-        self.header_set(154, v as u32);
+        self.header_set(154, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NORMAL_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(155, v as u32);
+        self.header_set(155, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_HOLY_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(156, v as u32);
+        self.header_set(156, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_FIRE_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(157, v as u32);
+        self.header_set(157, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_NATURE_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(158, v as u32);
+        self.header_set(158, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_FROST_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(159, v as u32);
+        self.header_set(159, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_SHADOW_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(160, v as u32);
+        self.header_set(160, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_ARCANE_RESISTANCE(mut self, v: i32) -> Self {
-        self.header_set(161, v as u32);
+        self.header_set(161, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_BASE_MANA(mut self, v: i32) -> Self {
-        self.header_set(162, v as u32);
+        self.header_set(162, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_BASE_HEALTH(mut self, v: i32) -> Self {
-        self.header_set(163, v as u32);
+        self.header_set(163, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -997,12 +997,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_ATTACK_POWER(mut self, v: i32) -> Self {
-        self.header_set(165, v as u32);
+        self.header_set(165, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(166, (a as u32) << 16 | b as u32);
+        self.header_set(166, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1012,12 +1012,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER(mut self, v: i32) -> Self {
-        self.header_set(168, v as u32);
+        self.header_set(168, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MODS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(169, (a as u32) << 16 | b as u32);
+        self.header_set(169, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1037,7 +1037,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_POWER_COST_MODIFIER(mut self, v: i32) -> Self {
-        self.header_set(173, v as u32);
+        self.header_set(173, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1053,17 +1053,17 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(190, v as u32);
+        self.header_set(190, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_GUILDID(mut self, v: i32) -> Self {
-        self.header_set(191, v as u32);
+        self.header_set(191, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_GUILDRANK(mut self, v: i32) -> Self {
-        self.header_set(192, v as u32);
+        self.header_set(192, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1083,212 +1083,212 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_DUEL_TEAM(mut self, v: i32) -> Self {
-        self.header_set(196, v as u32);
+        self.header_set(196, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_GUILD_TIMESTAMP(mut self, v: i32) -> Self {
-        self.header_set(197, v as u32);
+        self.header_set(197, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_1_1(mut self, v: i32) -> Self {
-        self.header_set(198, v as u32);
+        self.header_set(198, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_1_2(mut self, v: i32) -> Self {
-        self.header_set(199, v as u32);
+        self.header_set(199, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_2_1(mut self, v: i32) -> Self {
-        self.header_set(201, v as u32);
+        self.header_set(201, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_2_2(mut self, v: i32) -> Self {
-        self.header_set(202, v as u32);
+        self.header_set(202, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_3_1(mut self, v: i32) -> Self {
-        self.header_set(204, v as u32);
+        self.header_set(204, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_3_2(mut self, v: i32) -> Self {
-        self.header_set(205, v as u32);
+        self.header_set(205, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_4_1(mut self, v: i32) -> Self {
-        self.header_set(207, v as u32);
+        self.header_set(207, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_4_2(mut self, v: i32) -> Self {
-        self.header_set(208, v as u32);
+        self.header_set(208, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_5_1(mut self, v: i32) -> Self {
-        self.header_set(210, v as u32);
+        self.header_set(210, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_5_2(mut self, v: i32) -> Self {
-        self.header_set(211, v as u32);
+        self.header_set(211, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_6_1(mut self, v: i32) -> Self {
-        self.header_set(213, v as u32);
+        self.header_set(213, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_6_2(mut self, v: i32) -> Self {
-        self.header_set(214, v as u32);
+        self.header_set(214, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_7_1(mut self, v: i32) -> Self {
-        self.header_set(216, v as u32);
+        self.header_set(216, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_7_2(mut self, v: i32) -> Self {
-        self.header_set(217, v as u32);
+        self.header_set(217, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_8_1(mut self, v: i32) -> Self {
-        self.header_set(219, v as u32);
+        self.header_set(219, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_8_2(mut self, v: i32) -> Self {
-        self.header_set(220, v as u32);
+        self.header_set(220, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_9_1(mut self, v: i32) -> Self {
-        self.header_set(222, v as u32);
+        self.header_set(222, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_9_2(mut self, v: i32) -> Self {
-        self.header_set(223, v as u32);
+        self.header_set(223, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_10_1(mut self, v: i32) -> Self {
-        self.header_set(225, v as u32);
+        self.header_set(225, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_10_2(mut self, v: i32) -> Self {
-        self.header_set(226, v as u32);
+        self.header_set(226, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_11_1(mut self, v: i32) -> Self {
-        self.header_set(228, v as u32);
+        self.header_set(228, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_11_2(mut self, v: i32) -> Self {
-        self.header_set(229, v as u32);
+        self.header_set(229, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_12_1(mut self, v: i32) -> Self {
-        self.header_set(231, v as u32);
+        self.header_set(231, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_12_2(mut self, v: i32) -> Self {
-        self.header_set(232, v as u32);
+        self.header_set(232, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_13_1(mut self, v: i32) -> Self {
-        self.header_set(234, v as u32);
+        self.header_set(234, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_13_2(mut self, v: i32) -> Self {
-        self.header_set(235, v as u32);
+        self.header_set(235, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_14_1(mut self, v: i32) -> Self {
-        self.header_set(237, v as u32);
+        self.header_set(237, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_14_2(mut self, v: i32) -> Self {
-        self.header_set(238, v as u32);
+        self.header_set(238, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_15_1(mut self, v: i32) -> Self {
-        self.header_set(240, v as u32);
+        self.header_set(240, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_15_2(mut self, v: i32) -> Self {
-        self.header_set(241, v as u32);
+        self.header_set(241, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_16_1(mut self, v: i32) -> Self {
-        self.header_set(243, v as u32);
+        self.header_set(243, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_16_2(mut self, v: i32) -> Self {
-        self.header_set(244, v as u32);
+        self.header_set(244, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_17_1(mut self, v: i32) -> Self {
-        self.header_set(246, v as u32);
+        self.header_set(246, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_17_2(mut self, v: i32) -> Self {
-        self.header_set(247, v as u32);
+        self.header_set(247, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_18_1(mut self, v: i32) -> Self {
-        self.header_set(249, v as u32);
+        self.header_set(249, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_18_2(mut self, v: i32) -> Self {
-        self.header_set(250, v as u32);
+        self.header_set(250, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_19_1(mut self, v: i32) -> Self {
-        self.header_set(252, v as u32);
+        self.header_set(252, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_19_2(mut self, v: i32) -> Self {
-        self.header_set(253, v as u32);
+        self.header_set(253, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_20_1(mut self, v: i32) -> Self {
-        self.header_set(255, v as u32);
+        self.header_set(255, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_QUEST_LOG_20_2(mut self, v: i32) -> Self {
-        self.header_set(256, v as u32);
+        self.header_set(256, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1299,12 +1299,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_1_0(mut self, v: i32) -> Self {
-        self.header_set(260, v as u32);
+        self.header_set(260, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_1_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(268, (a as u32) << 16 | b as u32);
+        self.header_set(268, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1315,12 +1315,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_2_0(mut self, v: i32) -> Self {
-        self.header_set(272, v as u32);
+        self.header_set(272, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_2_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(280, (a as u32) << 16 | b as u32);
+        self.header_set(280, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1331,12 +1331,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_3_0(mut self, v: i32) -> Self {
-        self.header_set(284, v as u32);
+        self.header_set(284, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_3_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(292, (a as u32) << 16 | b as u32);
+        self.header_set(292, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1347,12 +1347,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_4_0(mut self, v: i32) -> Self {
-        self.header_set(296, v as u32);
+        self.header_set(296, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_4_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(304, (a as u32) << 16 | b as u32);
+        self.header_set(304, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1363,12 +1363,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_5_0(mut self, v: i32) -> Self {
-        self.header_set(308, v as u32);
+        self.header_set(308, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_5_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(316, (a as u32) << 16 | b as u32);
+        self.header_set(316, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1379,12 +1379,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_6_0(mut self, v: i32) -> Self {
-        self.header_set(320, v as u32);
+        self.header_set(320, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_6_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(328, (a as u32) << 16 | b as u32);
+        self.header_set(328, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1395,12 +1395,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_7_0(mut self, v: i32) -> Self {
-        self.header_set(332, v as u32);
+        self.header_set(332, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_7_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(340, (a as u32) << 16 | b as u32);
+        self.header_set(340, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1411,12 +1411,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_8_0(mut self, v: i32) -> Self {
-        self.header_set(344, v as u32);
+        self.header_set(344, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_8_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(352, (a as u32) << 16 | b as u32);
+        self.header_set(352, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1427,12 +1427,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_9_0(mut self, v: i32) -> Self {
-        self.header_set(356, v as u32);
+        self.header_set(356, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_9_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(364, (a as u32) << 16 | b as u32);
+        self.header_set(364, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1443,12 +1443,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_10_0(mut self, v: i32) -> Self {
-        self.header_set(368, v as u32);
+        self.header_set(368, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_10_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(376, (a as u32) << 16 | b as u32);
+        self.header_set(376, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1459,12 +1459,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_11_0(mut self, v: i32) -> Self {
-        self.header_set(380, v as u32);
+        self.header_set(380, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_11_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(388, (a as u32) << 16 | b as u32);
+        self.header_set(388, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1475,12 +1475,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_12_0(mut self, v: i32) -> Self {
-        self.header_set(392, v as u32);
+        self.header_set(392, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_12_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(400, (a as u32) << 16 | b as u32);
+        self.header_set(400, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1491,12 +1491,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_13_0(mut self, v: i32) -> Self {
-        self.header_set(404, v as u32);
+        self.header_set(404, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_13_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(412, (a as u32) << 16 | b as u32);
+        self.header_set(412, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1507,12 +1507,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_14_0(mut self, v: i32) -> Self {
-        self.header_set(416, v as u32);
+        self.header_set(416, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_14_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(424, (a as u32) << 16 | b as u32);
+        self.header_set(424, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1523,12 +1523,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_15_0(mut self, v: i32) -> Self {
-        self.header_set(428, v as u32);
+        self.header_set(428, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_15_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(436, (a as u32) << 16 | b as u32);
+        self.header_set(436, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1539,12 +1539,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_16_0(mut self, v: i32) -> Self {
-        self.header_set(440, v as u32);
+        self.header_set(440, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_16_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(448, (a as u32) << 16 | b as u32);
+        self.header_set(448, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1555,12 +1555,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_17_0(mut self, v: i32) -> Self {
-        self.header_set(452, v as u32);
+        self.header_set(452, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_17_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(460, (a as u32) << 16 | b as u32);
+        self.header_set(460, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1571,12 +1571,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_18_0(mut self, v: i32) -> Self {
-        self.header_set(464, v as u32);
+        self.header_set(464, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_18_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(472, (a as u32) << 16 | b as u32);
+        self.header_set(472, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1587,12 +1587,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_VISIBLE_ITEM_19_0(mut self, v: i32) -> Self {
-        self.header_set(476, v as u32);
+        self.header_set(476, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_VISIBLE_ITEM_19_PROPERTIES(mut self, a: u16, b: u16) -> Self {
-        self.header_set(484, (a as u32) << 16 | b as u32);
+        self.header_set(484, crate::util::u16s_to_u32(a, b));
         self
     }
 
@@ -1645,12 +1645,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_XP(mut self, v: i32) -> Self {
-        self.header_set(716, v as u32);
+        self.header_set(716, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_NEXT_LEVEL_XP(mut self, v: i32) -> Self {
-        self.header_set(717, v as u32);
+        self.header_set(717, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1662,22 +1662,22 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_CHARACTER_POINTS1(mut self, v: i32) -> Self {
-        self.header_set(1102, v as u32);
+        self.header_set(1102, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_CHARACTER_POINTS2(mut self, v: i32) -> Self {
-        self.header_set(1103, v as u32);
+        self.header_set(1103, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_TRACK_CREATURES(mut self, v: i32) -> Self {
-        self.header_set(1104, v as u32);
+        self.header_set(1104, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_TRACK_RESOURCES(mut self, v: i32) -> Self {
-        self.header_set(1105, v as u32);
+        self.header_set(1105, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1712,87 +1712,87 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_REST_STATE_EXPERIENCE(mut self, v: i32) -> Self {
-        self.header_set(1175, v as u32);
+        self.header_set(1175, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_COINAGE(mut self, v: i32) -> Self {
-        self.header_set(1176, v as u32);
+        self.header_set(1176, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_POSSTAT0(mut self, v: i32) -> Self {
-        self.header_set(1177, v as u32);
+        self.header_set(1177, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_POSSTAT1(mut self, v: i32) -> Self {
-        self.header_set(1178, v as u32);
+        self.header_set(1178, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_POSSTAT2(mut self, v: i32) -> Self {
-        self.header_set(1179, v as u32);
+        self.header_set(1179, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_POSSTAT3(mut self, v: i32) -> Self {
-        self.header_set(1180, v as u32);
+        self.header_set(1180, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_POSSTAT4(mut self, v: i32) -> Self {
-        self.header_set(1181, v as u32);
+        self.header_set(1181, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_NEGSTAT0(mut self, v: i32) -> Self {
-        self.header_set(1182, v as u32);
+        self.header_set(1182, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_NEGSTAT1(mut self, v: i32) -> Self {
-        self.header_set(1183, v as u32);
+        self.header_set(1183, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_NEGSTAT2(mut self, v: i32) -> Self {
-        self.header_set(1184, v as u32);
+        self.header_set(1184, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_NEGSTAT3(mut self, v: i32) -> Self {
-        self.header_set(1185, v as u32);
+        self.header_set(1185, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_NEGSTAT4(mut self, v: i32) -> Self {
-        self.header_set(1186, v as u32);
+        self.header_set(1186, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_RESISTANCEBUFFMODSPOSITIVE(mut self, v: i32) -> Self {
-        self.header_set(1187, v as u32);
+        self.header_set(1187, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_RESISTANCEBUFFMODSNEGATIVE(mut self, v: i32) -> Self {
-        self.header_set(1194, v as u32);
+        self.header_set(1194, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_MOD_DAMAGE_DONE_POS(mut self, v: i32) -> Self {
-        self.header_set(1201, v as u32);
+        self.header_set(1201, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_MOD_DAMAGE_DONE_NEG(mut self, v: i32) -> Self {
-        self.header_set(1208, v as u32);
+        self.header_set(1208, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_MOD_DAMAGE_DONE_PCT(mut self, v: i32) -> Self {
-        self.header_set(1215, v as u32);
+        self.header_set(1215, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1802,77 +1802,77 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_AMMO_ID(mut self, v: i32) -> Self {
-        self.header_set(1223, v as u32);
+        self.header_set(1223, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_SELF_RES_SPELL(mut self, v: i32) -> Self {
-        self.header_set(1224, v as u32);
+        self.header_set(1224, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_PVP_MEDALS(mut self, v: i32) -> Self {
-        self.header_set(1225, v as u32);
+        self.header_set(1225, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_BUYBACK_PRICE_1(mut self, v: i32) -> Self {
-        self.header_set(1226, v as u32);
+        self.header_set(1226, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_BUYBACK_TIMESTAMP_1(mut self, v: i32) -> Self {
-        self.header_set(1238, v as u32);
+        self.header_set(1238, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_SESSION_KILLS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(1250, (a as u32) << 16 | b as u32);
+        self.header_set(1250, crate::util::u16s_to_u32(a, b));
         self
     }
 
     pub fn set_player_FIELD_YESTERDAY_KILLS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(1251, (a as u32) << 16 | b as u32);
+        self.header_set(1251, crate::util::u16s_to_u32(a, b));
         self
     }
 
     pub fn set_player_FIELD_LAST_WEEK_KILLS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(1252, (a as u32) << 16 | b as u32);
+        self.header_set(1252, crate::util::u16s_to_u32(a, b));
         self
     }
 
     pub fn set_player_FIELD_THIS_WEEK_KILLS(mut self, a: u16, b: u16) -> Self {
-        self.header_set(1253, (a as u32) << 16 | b as u32);
+        self.header_set(1253, crate::util::u16s_to_u32(a, b));
         self
     }
 
     pub fn set_player_FIELD_THIS_WEEK_CONTRIBUTION(mut self, v: i32) -> Self {
-        self.header_set(1254, v as u32);
+        self.header_set(1254, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_LIFETIME_HONORBALE_KILLS(mut self, v: i32) -> Self {
-        self.header_set(1255, v as u32);
+        self.header_set(1255, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_LIFETIME_DISHONORBALE_KILLS(mut self, v: i32) -> Self {
-        self.header_set(1256, v as u32);
+        self.header_set(1256, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_YESTERDAY_CONTRIBUTION(mut self, v: i32) -> Self {
-        self.header_set(1257, v as u32);
+        self.header_set(1257, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_LAST_WEEK_CONTRIBUTION(mut self, v: i32) -> Self {
-        self.header_set(1258, v as u32);
+        self.header_set(1258, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_LAST_WEEK_RANK(mut self, v: i32) -> Self {
-        self.header_set(1259, v as u32);
+        self.header_set(1259, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1882,12 +1882,12 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_FIELD_WATCHED_FACTION_INDEX(mut self, v: i32) -> Self {
-        self.header_set(1261, v as u32);
+        self.header_set(1261, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_player_FIELD_COMBAT_RATING_1(mut self, v: i32) -> Self {
-        self.header_set(1262, v as u32);
+        self.header_set(1262, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1901,7 +1901,7 @@ impl UpdateGameObjectBuilder {
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1917,12 +1917,12 @@ impl UpdateGameObjectBuilder {
     }
 
     pub fn set_gameobject_DISPLAYID(mut self, v: i32) -> Self {
-        self.header_set(8, v as u32);
+        self.header_set(8, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_gameobject_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(9, v as u32);
+        self.header_set(9, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1932,7 +1932,7 @@ impl UpdateGameObjectBuilder {
     }
 
     pub fn set_gameobject_STATE(mut self, v: i32) -> Self {
-        self.header_set(14, v as u32);
+        self.header_set(14, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1957,32 +1957,32 @@ impl UpdateGameObjectBuilder {
     }
 
     pub fn set_gameobject_DYN_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(19, v as u32);
+        self.header_set(19, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_gameobject_FACTION(mut self, v: i32) -> Self {
-        self.header_set(20, v as u32);
+        self.header_set(20, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_gameobject_TYPE_ID(mut self, v: i32) -> Self {
-        self.header_set(21, v as u32);
+        self.header_set(21, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_gameobject_LEVEL(mut self, v: i32) -> Self {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_gameobject_ARTKIT(mut self, v: i32) -> Self {
-        self.header_set(23, v as u32);
+        self.header_set(23, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_gameobject_ANIMPROGRESS(mut self, v: i32) -> Self {
-        self.header_set(24, v as u32);
+        self.header_set(24, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -1996,7 +1996,7 @@ impl UpdateDynamicObjectBuilder {
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -2017,7 +2017,7 @@ impl UpdateDynamicObjectBuilder {
     }
 
     pub fn set_dynamicobject_SPELLID(mut self, v: i32) -> Self {
-        self.header_set(9, v as u32);
+        self.header_set(9, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -2056,7 +2056,7 @@ impl UpdateCorpseBuilder {
     }
 
     pub fn set_object_ENTRY(mut self, v: i32) -> Self {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -2092,12 +2092,12 @@ impl UpdateCorpseBuilder {
     }
 
     pub fn set_corpse_DISPLAY_ID(mut self, v: i32) -> Self {
-        self.header_set(12, v as u32);
+        self.header_set(12, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_corpse_ITEM(mut self, v: i32) -> Self {
-        self.header_set(13, v as u32);
+        self.header_set(13, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -2112,17 +2112,17 @@ impl UpdateCorpseBuilder {
     }
 
     pub fn set_corpse_GUILD(mut self, v: i32) -> Self {
-        self.header_set(34, v as u32);
+        self.header_set(34, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_corpse_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(35, v as u32);
+        self.header_set(35, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
     pub fn set_corpse_DYNAMIC_FLAGS(mut self, v: i32) -> Self {
-        self.header_set(36, v as u32);
+        self.header_set(36, u32::from_le_bytes(v.to_le_bytes()));
         self
     }
 
@@ -2142,7 +2142,7 @@ impl UpdateItem {
     }
 
     pub fn set_object_ENTRY(&mut self, v: i32) {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
@@ -2206,7 +2206,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_STACK_COUNT(&mut self, v: i32) {
-        self.header_set(14, v as u32);
+        self.header_set(14, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_STACK_COUNT(&self) -> Option<i32> {
@@ -2214,7 +2214,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_DURATION(&mut self, v: i32) {
-        self.header_set(15, v as u32);
+        self.header_set(15, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_DURATION(&self) -> Option<i32> {
@@ -2222,7 +2222,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_SPELL_CHARGES(&mut self, v: i32) {
-        self.header_set(16, v as u32);
+        self.header_set(16, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_SPELL_CHARGES(&self) -> Option<i32> {
@@ -2230,7 +2230,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_FLAGS(&mut self, v: i32) {
-        self.header_set(21, v as u32);
+        self.header_set(21, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_FLAGS(&self) -> Option<i32> {
@@ -2238,7 +2238,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_ENCHANTMENT(&mut self, v: i32) {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_ENCHANTMENT(&self) -> Option<i32> {
@@ -2246,7 +2246,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_PROPERTY_SEED(&mut self, v: i32) {
-        self.header_set(43, v as u32);
+        self.header_set(43, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_PROPERTY_SEED(&self) -> Option<i32> {
@@ -2254,7 +2254,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_RANDOM_PROPERTIES_ID(&mut self, v: i32) {
-        self.header_set(44, v as u32);
+        self.header_set(44, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_RANDOM_PROPERTIES_ID(&self) -> Option<i32> {
@@ -2262,7 +2262,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_ITEM_TEXT_ID(&mut self, v: i32) {
-        self.header_set(45, v as u32);
+        self.header_set(45, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_ITEM_TEXT_ID(&self) -> Option<i32> {
@@ -2270,7 +2270,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_DURABILITY(&mut self, v: i32) {
-        self.header_set(46, v as u32);
+        self.header_set(46, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_DURABILITY(&self) -> Option<i32> {
@@ -2278,7 +2278,7 @@ impl UpdateItem {
     }
 
     pub fn set_item_MAXDURABILITY(&mut self, v: i32) {
-        self.header_set(47, v as u32);
+        self.header_set(47, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_MAXDURABILITY(&self) -> Option<i32> {
@@ -2301,7 +2301,7 @@ impl UpdateContainer {
     }
 
     pub fn set_object_ENTRY(&mut self, v: i32) {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
@@ -2365,7 +2365,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_STACK_COUNT(&mut self, v: i32) {
-        self.header_set(14, v as u32);
+        self.header_set(14, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_STACK_COUNT(&self) -> Option<i32> {
@@ -2373,7 +2373,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_DURATION(&mut self, v: i32) {
-        self.header_set(15, v as u32);
+        self.header_set(15, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_DURATION(&self) -> Option<i32> {
@@ -2381,7 +2381,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_SPELL_CHARGES(&mut self, v: i32) {
-        self.header_set(16, v as u32);
+        self.header_set(16, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_SPELL_CHARGES(&self) -> Option<i32> {
@@ -2389,7 +2389,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_FLAGS(&mut self, v: i32) {
-        self.header_set(21, v as u32);
+        self.header_set(21, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_FLAGS(&self) -> Option<i32> {
@@ -2397,7 +2397,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_ENCHANTMENT(&mut self, v: i32) {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_ENCHANTMENT(&self) -> Option<i32> {
@@ -2405,7 +2405,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_PROPERTY_SEED(&mut self, v: i32) {
-        self.header_set(43, v as u32);
+        self.header_set(43, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_PROPERTY_SEED(&self) -> Option<i32> {
@@ -2413,7 +2413,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_RANDOM_PROPERTIES_ID(&mut self, v: i32) {
-        self.header_set(44, v as u32);
+        self.header_set(44, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_RANDOM_PROPERTIES_ID(&self) -> Option<i32> {
@@ -2421,7 +2421,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_ITEM_TEXT_ID(&mut self, v: i32) {
-        self.header_set(45, v as u32);
+        self.header_set(45, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_ITEM_TEXT_ID(&self) -> Option<i32> {
@@ -2429,7 +2429,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_DURABILITY(&mut self, v: i32) {
-        self.header_set(46, v as u32);
+        self.header_set(46, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_DURABILITY(&self) -> Option<i32> {
@@ -2437,7 +2437,7 @@ impl UpdateContainer {
     }
 
     pub fn set_item_MAXDURABILITY(&mut self, v: i32) {
-        self.header_set(47, v as u32);
+        self.header_set(47, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn item_MAXDURABILITY(&self) -> Option<i32> {
@@ -2445,7 +2445,7 @@ impl UpdateContainer {
     }
 
     pub fn set_container_NUM_SLOTS(&mut self, v: i32) {
-        self.header_set(48, v as u32);
+        self.header_set(48, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn container_NUM_SLOTS(&self) -> Option<i32> {
@@ -2480,7 +2480,7 @@ impl UpdateUnit {
     }
 
     pub fn set_object_ENTRY(&mut self, v: i32) {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
@@ -2592,7 +2592,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_HEALTH(&mut self, v: i32) {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_HEALTH(&self) -> Option<i32> {
@@ -2600,7 +2600,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_POWER1(&mut self, v: i32) {
-        self.header_set(23, v as u32);
+        self.header_set(23, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER1(&self) -> Option<i32> {
@@ -2608,7 +2608,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_POWER2(&mut self, v: i32) {
-        self.header_set(24, v as u32);
+        self.header_set(24, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER2(&self) -> Option<i32> {
@@ -2616,7 +2616,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_POWER3(&mut self, v: i32) {
-        self.header_set(25, v as u32);
+        self.header_set(25, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER3(&self) -> Option<i32> {
@@ -2624,7 +2624,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_POWER4(&mut self, v: i32) {
-        self.header_set(26, v as u32);
+        self.header_set(26, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER4(&self) -> Option<i32> {
@@ -2632,7 +2632,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_POWER5(&mut self, v: i32) {
-        self.header_set(27, v as u32);
+        self.header_set(27, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER5(&self) -> Option<i32> {
@@ -2640,7 +2640,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_MAXHEALTH(&mut self, v: i32) {
-        self.header_set(28, v as u32);
+        self.header_set(28, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXHEALTH(&self) -> Option<i32> {
@@ -2648,7 +2648,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_MAXPOWER1(&mut self, v: i32) {
-        self.header_set(29, v as u32);
+        self.header_set(29, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER1(&self) -> Option<i32> {
@@ -2656,7 +2656,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_MAXPOWER2(&mut self, v: i32) {
-        self.header_set(30, v as u32);
+        self.header_set(30, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER2(&self) -> Option<i32> {
@@ -2664,7 +2664,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_MAXPOWER3(&mut self, v: i32) {
-        self.header_set(31, v as u32);
+        self.header_set(31, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER3(&self) -> Option<i32> {
@@ -2672,7 +2672,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_MAXPOWER4(&mut self, v: i32) {
-        self.header_set(32, v as u32);
+        self.header_set(32, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER4(&self) -> Option<i32> {
@@ -2680,7 +2680,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_MAXPOWER5(&mut self, v: i32) {
-        self.header_set(33, v as u32);
+        self.header_set(33, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER5(&self) -> Option<i32> {
@@ -2688,7 +2688,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_LEVEL(&mut self, v: i32) {
-        self.header_set(34, v as u32);
+        self.header_set(34, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_LEVEL(&self) -> Option<i32> {
@@ -2696,7 +2696,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_FACTIONTEMPLATE(&mut self, v: i32) {
-        self.header_set(35, v as u32);
+        self.header_set(35, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_FACTIONTEMPLATE(&self) -> Option<i32> {
@@ -2718,7 +2718,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_VIRTUAL_ITEM_SLOT_DISPLAY(&mut self, v: i32) {
-        self.header_set(37, v as u32);
+        self.header_set(37, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_VIRTUAL_ITEM_SLOT_DISPLAY(&self) -> Option<i32> {
@@ -2740,7 +2740,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_FLAGS(&mut self, v: i32) {
-        self.header_set(46, v as u32);
+        self.header_set(46, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_FLAGS(&self) -> Option<i32> {
@@ -2748,7 +2748,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_AURA(&mut self, v: i32) {
-        self.header_set(47, v as u32);
+        self.header_set(47, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_AURA(&self) -> Option<i32> {
@@ -2798,7 +2798,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_AURASTATE(&mut self, v: i32) {
-        self.header_set(125, v as u32);
+        self.header_set(125, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_AURASTATE(&self) -> Option<i32> {
@@ -2806,7 +2806,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_BASEATTACKTIME(&mut self, v: i32) {
-        self.header_set(126, v as u32);
+        self.header_set(126, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_BASEATTACKTIME(&self) -> Option<i32> {
@@ -2814,7 +2814,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_RANGEDATTACKTIME(&mut self, v: i32) {
-        self.header_set(128, v as u32);
+        self.header_set(128, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_RANGEDATTACKTIME(&self) -> Option<i32> {
@@ -2838,7 +2838,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_DISPLAYID(&mut self, v: i32) {
-        self.header_set(131, v as u32);
+        self.header_set(131, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_DISPLAYID(&self) -> Option<i32> {
@@ -2846,7 +2846,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_NATIVEDISPLAYID(&mut self, v: i32) {
-        self.header_set(132, v as u32);
+        self.header_set(132, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NATIVEDISPLAYID(&self) -> Option<i32> {
@@ -2854,7 +2854,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_MOUNTDISPLAYID(&mut self, v: i32) {
-        self.header_set(133, v as u32);
+        self.header_set(133, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MOUNTDISPLAYID(&self) -> Option<i32> {
@@ -2908,7 +2908,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_PETNUMBER(&mut self, v: i32) {
-        self.header_set(139, v as u32);
+        self.header_set(139, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_PETNUMBER(&self) -> Option<i32> {
@@ -2916,7 +2916,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_PET_NAME_TIMESTAMP(&mut self, v: i32) {
-        self.header_set(140, v as u32);
+        self.header_set(140, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_PET_NAME_TIMESTAMP(&self) -> Option<i32> {
@@ -2924,7 +2924,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_PETEXPERIENCE(&mut self, v: i32) {
-        self.header_set(141, v as u32);
+        self.header_set(141, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_PETEXPERIENCE(&self) -> Option<i32> {
@@ -2932,7 +2932,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_PETNEXTLEVELEXP(&mut self, v: i32) {
-        self.header_set(142, v as u32);
+        self.header_set(142, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_PETNEXTLEVELEXP(&self) -> Option<i32> {
@@ -2940,7 +2940,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_DYNAMIC_FLAGS(&mut self, v: i32) {
-        self.header_set(143, v as u32);
+        self.header_set(143, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_DYNAMIC_FLAGS(&self) -> Option<i32> {
@@ -2948,7 +2948,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_CHANNEL_SPELL(&mut self, v: i32) {
-        self.header_set(144, v as u32);
+        self.header_set(144, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_CHANNEL_SPELL(&self) -> Option<i32> {
@@ -2964,7 +2964,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_CREATED_BY_SPELL(&mut self, v: i32) {
-        self.header_set(146, v as u32);
+        self.header_set(146, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_CREATED_BY_SPELL(&self) -> Option<i32> {
@@ -2972,7 +2972,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_NPC_FLAGS(&mut self, v: i32) {
-        self.header_set(147, v as u32);
+        self.header_set(147, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NPC_FLAGS(&self) -> Option<i32> {
@@ -2980,7 +2980,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_NPC_EMOTESTATE(&mut self, v: i32) {
-        self.header_set(148, v as u32);
+        self.header_set(148, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NPC_EMOTESTATE(&self) -> Option<i32> {
@@ -2988,7 +2988,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_TRAINING_POINTS(&mut self, a: u16, b: u16) {
-        self.header_set(149, (a as u32) << 16 | b as u32);
+        self.header_set(149, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn unit_TRAINING_POINTS(&self) -> Option<(u16, u16)> {
@@ -3002,7 +3002,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_STRENGTH(&mut self, v: i32) {
-        self.header_set(150, v as u32);
+        self.header_set(150, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_STRENGTH(&self) -> Option<i32> {
@@ -3010,7 +3010,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_AGILITY(&mut self, v: i32) {
-        self.header_set(151, v as u32);
+        self.header_set(151, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_AGILITY(&self) -> Option<i32> {
@@ -3018,7 +3018,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_STAMINA(&mut self, v: i32) {
-        self.header_set(152, v as u32);
+        self.header_set(152, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_STAMINA(&self) -> Option<i32> {
@@ -3026,7 +3026,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_INTELLECT(&mut self, v: i32) {
-        self.header_set(153, v as u32);
+        self.header_set(153, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_INTELLECT(&self) -> Option<i32> {
@@ -3034,7 +3034,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_SPIRIT(&mut self, v: i32) {
-        self.header_set(154, v as u32);
+        self.header_set(154, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_SPIRIT(&self) -> Option<i32> {
@@ -3042,7 +3042,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_NORMAL_RESISTANCE(&mut self, v: i32) {
-        self.header_set(155, v as u32);
+        self.header_set(155, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NORMAL_RESISTANCE(&self) -> Option<i32> {
@@ -3050,7 +3050,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_HOLY_RESISTANCE(&mut self, v: i32) {
-        self.header_set(156, v as u32);
+        self.header_set(156, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_HOLY_RESISTANCE(&self) -> Option<i32> {
@@ -3058,7 +3058,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_FIRE_RESISTANCE(&mut self, v: i32) {
-        self.header_set(157, v as u32);
+        self.header_set(157, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_FIRE_RESISTANCE(&self) -> Option<i32> {
@@ -3066,7 +3066,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_NATURE_RESISTANCE(&mut self, v: i32) {
-        self.header_set(158, v as u32);
+        self.header_set(158, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NATURE_RESISTANCE(&self) -> Option<i32> {
@@ -3074,7 +3074,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_FROST_RESISTANCE(&mut self, v: i32) {
-        self.header_set(159, v as u32);
+        self.header_set(159, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_FROST_RESISTANCE(&self) -> Option<i32> {
@@ -3082,7 +3082,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_SHADOW_RESISTANCE(&mut self, v: i32) {
-        self.header_set(160, v as u32);
+        self.header_set(160, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_SHADOW_RESISTANCE(&self) -> Option<i32> {
@@ -3090,7 +3090,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_ARCANE_RESISTANCE(&mut self, v: i32) {
-        self.header_set(161, v as u32);
+        self.header_set(161, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_ARCANE_RESISTANCE(&self) -> Option<i32> {
@@ -3098,7 +3098,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_BASE_MANA(&mut self, v: i32) {
-        self.header_set(162, v as u32);
+        self.header_set(162, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_BASE_MANA(&self) -> Option<i32> {
@@ -3106,7 +3106,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_BASE_HEALTH(&mut self, v: i32) {
-        self.header_set(163, v as u32);
+        self.header_set(163, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_BASE_HEALTH(&self) -> Option<i32> {
@@ -3128,7 +3128,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_ATTACK_POWER(&mut self, v: i32) {
-        self.header_set(165, v as u32);
+        self.header_set(165, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_ATTACK_POWER(&self) -> Option<i32> {
@@ -3136,7 +3136,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_ATTACK_POWER_MODS(&mut self, a: u16, b: u16) {
-        self.header_set(166, (a as u32) << 16 | b as u32);
+        self.header_set(166, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn unit_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
@@ -3158,7 +3158,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER(&mut self, v: i32) {
-        self.header_set(168, v as u32);
+        self.header_set(168, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_RANGED_ATTACK_POWER(&self) -> Option<i32> {
@@ -3166,7 +3166,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MODS(&mut self, a: u16, b: u16) {
-        self.header_set(169, (a as u32) << 16 | b as u32);
+        self.header_set(169, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn unit_RANGED_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
@@ -3204,7 +3204,7 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_POWER_COST_MODIFIER(&mut self, v: i32) {
-        self.header_set(173, v as u32);
+        self.header_set(173, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER_COST_MODIFIER(&self) -> Option<i32> {
@@ -3235,7 +3235,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_object_ENTRY(&mut self, v: i32) {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
@@ -3347,7 +3347,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_HEALTH(&mut self, v: i32) {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_HEALTH(&self) -> Option<i32> {
@@ -3355,7 +3355,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_POWER1(&mut self, v: i32) {
-        self.header_set(23, v as u32);
+        self.header_set(23, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER1(&self) -> Option<i32> {
@@ -3363,7 +3363,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_POWER2(&mut self, v: i32) {
-        self.header_set(24, v as u32);
+        self.header_set(24, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER2(&self) -> Option<i32> {
@@ -3371,7 +3371,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_POWER3(&mut self, v: i32) {
-        self.header_set(25, v as u32);
+        self.header_set(25, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER3(&self) -> Option<i32> {
@@ -3379,7 +3379,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_POWER4(&mut self, v: i32) {
-        self.header_set(26, v as u32);
+        self.header_set(26, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER4(&self) -> Option<i32> {
@@ -3387,7 +3387,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_POWER5(&mut self, v: i32) {
-        self.header_set(27, v as u32);
+        self.header_set(27, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER5(&self) -> Option<i32> {
@@ -3395,7 +3395,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_MAXHEALTH(&mut self, v: i32) {
-        self.header_set(28, v as u32);
+        self.header_set(28, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXHEALTH(&self) -> Option<i32> {
@@ -3403,7 +3403,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_MAXPOWER1(&mut self, v: i32) {
-        self.header_set(29, v as u32);
+        self.header_set(29, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER1(&self) -> Option<i32> {
@@ -3411,7 +3411,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_MAXPOWER2(&mut self, v: i32) {
-        self.header_set(30, v as u32);
+        self.header_set(30, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER2(&self) -> Option<i32> {
@@ -3419,7 +3419,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_MAXPOWER3(&mut self, v: i32) {
-        self.header_set(31, v as u32);
+        self.header_set(31, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER3(&self) -> Option<i32> {
@@ -3427,7 +3427,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_MAXPOWER4(&mut self, v: i32) {
-        self.header_set(32, v as u32);
+        self.header_set(32, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER4(&self) -> Option<i32> {
@@ -3435,7 +3435,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_MAXPOWER5(&mut self, v: i32) {
-        self.header_set(33, v as u32);
+        self.header_set(33, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MAXPOWER5(&self) -> Option<i32> {
@@ -3443,7 +3443,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_LEVEL(&mut self, v: i32) {
-        self.header_set(34, v as u32);
+        self.header_set(34, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_LEVEL(&self) -> Option<i32> {
@@ -3451,7 +3451,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_FACTIONTEMPLATE(&mut self, v: i32) {
-        self.header_set(35, v as u32);
+        self.header_set(35, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_FACTIONTEMPLATE(&self) -> Option<i32> {
@@ -3473,7 +3473,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_VIRTUAL_ITEM_SLOT_DISPLAY(&mut self, v: i32) {
-        self.header_set(37, v as u32);
+        self.header_set(37, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_VIRTUAL_ITEM_SLOT_DISPLAY(&self) -> Option<i32> {
@@ -3495,7 +3495,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_FLAGS(&mut self, v: i32) {
-        self.header_set(46, v as u32);
+        self.header_set(46, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_FLAGS(&self) -> Option<i32> {
@@ -3503,7 +3503,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_AURA(&mut self, v: i32) {
-        self.header_set(47, v as u32);
+        self.header_set(47, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_AURA(&self) -> Option<i32> {
@@ -3553,7 +3553,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_AURASTATE(&mut self, v: i32) {
-        self.header_set(125, v as u32);
+        self.header_set(125, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_AURASTATE(&self) -> Option<i32> {
@@ -3561,7 +3561,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_BASEATTACKTIME(&mut self, v: i32) {
-        self.header_set(126, v as u32);
+        self.header_set(126, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_BASEATTACKTIME(&self) -> Option<i32> {
@@ -3569,7 +3569,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_RANGEDATTACKTIME(&mut self, v: i32) {
-        self.header_set(128, v as u32);
+        self.header_set(128, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_RANGEDATTACKTIME(&self) -> Option<i32> {
@@ -3593,7 +3593,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_DISPLAYID(&mut self, v: i32) {
-        self.header_set(131, v as u32);
+        self.header_set(131, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_DISPLAYID(&self) -> Option<i32> {
@@ -3601,7 +3601,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_NATIVEDISPLAYID(&mut self, v: i32) {
-        self.header_set(132, v as u32);
+        self.header_set(132, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NATIVEDISPLAYID(&self) -> Option<i32> {
@@ -3609,7 +3609,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_MOUNTDISPLAYID(&mut self, v: i32) {
-        self.header_set(133, v as u32);
+        self.header_set(133, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_MOUNTDISPLAYID(&self) -> Option<i32> {
@@ -3663,7 +3663,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_PETNUMBER(&mut self, v: i32) {
-        self.header_set(139, v as u32);
+        self.header_set(139, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_PETNUMBER(&self) -> Option<i32> {
@@ -3671,7 +3671,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_PET_NAME_TIMESTAMP(&mut self, v: i32) {
-        self.header_set(140, v as u32);
+        self.header_set(140, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_PET_NAME_TIMESTAMP(&self) -> Option<i32> {
@@ -3679,7 +3679,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_PETEXPERIENCE(&mut self, v: i32) {
-        self.header_set(141, v as u32);
+        self.header_set(141, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_PETEXPERIENCE(&self) -> Option<i32> {
@@ -3687,7 +3687,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_PETNEXTLEVELEXP(&mut self, v: i32) {
-        self.header_set(142, v as u32);
+        self.header_set(142, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_PETNEXTLEVELEXP(&self) -> Option<i32> {
@@ -3695,7 +3695,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_DYNAMIC_FLAGS(&mut self, v: i32) {
-        self.header_set(143, v as u32);
+        self.header_set(143, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_DYNAMIC_FLAGS(&self) -> Option<i32> {
@@ -3703,7 +3703,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_CHANNEL_SPELL(&mut self, v: i32) {
-        self.header_set(144, v as u32);
+        self.header_set(144, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_CHANNEL_SPELL(&self) -> Option<i32> {
@@ -3719,7 +3719,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_CREATED_BY_SPELL(&mut self, v: i32) {
-        self.header_set(146, v as u32);
+        self.header_set(146, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_CREATED_BY_SPELL(&self) -> Option<i32> {
@@ -3727,7 +3727,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_NPC_FLAGS(&mut self, v: i32) {
-        self.header_set(147, v as u32);
+        self.header_set(147, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NPC_FLAGS(&self) -> Option<i32> {
@@ -3735,7 +3735,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_NPC_EMOTESTATE(&mut self, v: i32) {
-        self.header_set(148, v as u32);
+        self.header_set(148, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NPC_EMOTESTATE(&self) -> Option<i32> {
@@ -3743,7 +3743,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_TRAINING_POINTS(&mut self, a: u16, b: u16) {
-        self.header_set(149, (a as u32) << 16 | b as u32);
+        self.header_set(149, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn unit_TRAINING_POINTS(&self) -> Option<(u16, u16)> {
@@ -3757,7 +3757,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_STRENGTH(&mut self, v: i32) {
-        self.header_set(150, v as u32);
+        self.header_set(150, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_STRENGTH(&self) -> Option<i32> {
@@ -3765,7 +3765,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_AGILITY(&mut self, v: i32) {
-        self.header_set(151, v as u32);
+        self.header_set(151, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_AGILITY(&self) -> Option<i32> {
@@ -3773,7 +3773,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_STAMINA(&mut self, v: i32) {
-        self.header_set(152, v as u32);
+        self.header_set(152, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_STAMINA(&self) -> Option<i32> {
@@ -3781,7 +3781,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_INTELLECT(&mut self, v: i32) {
-        self.header_set(153, v as u32);
+        self.header_set(153, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_INTELLECT(&self) -> Option<i32> {
@@ -3789,7 +3789,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_SPIRIT(&mut self, v: i32) {
-        self.header_set(154, v as u32);
+        self.header_set(154, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_SPIRIT(&self) -> Option<i32> {
@@ -3797,7 +3797,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_NORMAL_RESISTANCE(&mut self, v: i32) {
-        self.header_set(155, v as u32);
+        self.header_set(155, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NORMAL_RESISTANCE(&self) -> Option<i32> {
@@ -3805,7 +3805,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_HOLY_RESISTANCE(&mut self, v: i32) {
-        self.header_set(156, v as u32);
+        self.header_set(156, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_HOLY_RESISTANCE(&self) -> Option<i32> {
@@ -3813,7 +3813,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_FIRE_RESISTANCE(&mut self, v: i32) {
-        self.header_set(157, v as u32);
+        self.header_set(157, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_FIRE_RESISTANCE(&self) -> Option<i32> {
@@ -3821,7 +3821,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_NATURE_RESISTANCE(&mut self, v: i32) {
-        self.header_set(158, v as u32);
+        self.header_set(158, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_NATURE_RESISTANCE(&self) -> Option<i32> {
@@ -3829,7 +3829,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_FROST_RESISTANCE(&mut self, v: i32) {
-        self.header_set(159, v as u32);
+        self.header_set(159, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_FROST_RESISTANCE(&self) -> Option<i32> {
@@ -3837,7 +3837,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_SHADOW_RESISTANCE(&mut self, v: i32) {
-        self.header_set(160, v as u32);
+        self.header_set(160, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_SHADOW_RESISTANCE(&self) -> Option<i32> {
@@ -3845,7 +3845,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_ARCANE_RESISTANCE(&mut self, v: i32) {
-        self.header_set(161, v as u32);
+        self.header_set(161, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_ARCANE_RESISTANCE(&self) -> Option<i32> {
@@ -3853,7 +3853,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_BASE_MANA(&mut self, v: i32) {
-        self.header_set(162, v as u32);
+        self.header_set(162, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_BASE_MANA(&self) -> Option<i32> {
@@ -3861,7 +3861,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_BASE_HEALTH(&mut self, v: i32) {
-        self.header_set(163, v as u32);
+        self.header_set(163, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_BASE_HEALTH(&self) -> Option<i32> {
@@ -3883,7 +3883,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_ATTACK_POWER(&mut self, v: i32) {
-        self.header_set(165, v as u32);
+        self.header_set(165, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_ATTACK_POWER(&self) -> Option<i32> {
@@ -3891,7 +3891,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_ATTACK_POWER_MODS(&mut self, a: u16, b: u16) {
-        self.header_set(166, (a as u32) << 16 | b as u32);
+        self.header_set(166, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn unit_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
@@ -3913,7 +3913,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER(&mut self, v: i32) {
-        self.header_set(168, v as u32);
+        self.header_set(168, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_RANGED_ATTACK_POWER(&self) -> Option<i32> {
@@ -3921,7 +3921,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_RANGED_ATTACK_POWER_MODS(&mut self, a: u16, b: u16) {
-        self.header_set(169, (a as u32) << 16 | b as u32);
+        self.header_set(169, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn unit_RANGED_ATTACK_POWER_MODS(&self) -> Option<(u16, u16)> {
@@ -3959,7 +3959,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_POWER_COST_MODIFIER(&mut self, v: i32) {
-        self.header_set(173, v as u32);
+        self.header_set(173, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn unit_POWER_COST_MODIFIER(&self) -> Option<i32> {
@@ -3987,7 +3987,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FLAGS(&mut self, v: i32) {
-        self.header_set(190, v as u32);
+        self.header_set(190, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FLAGS(&self) -> Option<i32> {
@@ -3995,7 +3995,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_GUILDID(&mut self, v: i32) {
-        self.header_set(191, v as u32);
+        self.header_set(191, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_GUILDID(&self) -> Option<i32> {
@@ -4003,7 +4003,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_GUILDRANK(&mut self, v: i32) {
-        self.header_set(192, v as u32);
+        self.header_set(192, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_GUILDRANK(&self) -> Option<i32> {
@@ -4053,7 +4053,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_DUEL_TEAM(&mut self, v: i32) {
-        self.header_set(196, v as u32);
+        self.header_set(196, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_DUEL_TEAM(&self) -> Option<i32> {
@@ -4061,7 +4061,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_GUILD_TIMESTAMP(&mut self, v: i32) {
-        self.header_set(197, v as u32);
+        self.header_set(197, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_GUILD_TIMESTAMP(&self) -> Option<i32> {
@@ -4069,7 +4069,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_1_1(&mut self, v: i32) {
-        self.header_set(198, v as u32);
+        self.header_set(198, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_1_1(&self) -> Option<i32> {
@@ -4077,7 +4077,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_1_2(&mut self, v: i32) {
-        self.header_set(199, v as u32);
+        self.header_set(199, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_1_2(&self) -> Option<i32> {
@@ -4085,7 +4085,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_2_1(&mut self, v: i32) {
-        self.header_set(201, v as u32);
+        self.header_set(201, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_2_1(&self) -> Option<i32> {
@@ -4093,7 +4093,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_2_2(&mut self, v: i32) {
-        self.header_set(202, v as u32);
+        self.header_set(202, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_2_2(&self) -> Option<i32> {
@@ -4101,7 +4101,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_3_1(&mut self, v: i32) {
-        self.header_set(204, v as u32);
+        self.header_set(204, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_3_1(&self) -> Option<i32> {
@@ -4109,7 +4109,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_3_2(&mut self, v: i32) {
-        self.header_set(205, v as u32);
+        self.header_set(205, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_3_2(&self) -> Option<i32> {
@@ -4117,7 +4117,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_4_1(&mut self, v: i32) {
-        self.header_set(207, v as u32);
+        self.header_set(207, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_4_1(&self) -> Option<i32> {
@@ -4125,7 +4125,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_4_2(&mut self, v: i32) {
-        self.header_set(208, v as u32);
+        self.header_set(208, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_4_2(&self) -> Option<i32> {
@@ -4133,7 +4133,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_5_1(&mut self, v: i32) {
-        self.header_set(210, v as u32);
+        self.header_set(210, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_5_1(&self) -> Option<i32> {
@@ -4141,7 +4141,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_5_2(&mut self, v: i32) {
-        self.header_set(211, v as u32);
+        self.header_set(211, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_5_2(&self) -> Option<i32> {
@@ -4149,7 +4149,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_6_1(&mut self, v: i32) {
-        self.header_set(213, v as u32);
+        self.header_set(213, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_6_1(&self) -> Option<i32> {
@@ -4157,7 +4157,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_6_2(&mut self, v: i32) {
-        self.header_set(214, v as u32);
+        self.header_set(214, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_6_2(&self) -> Option<i32> {
@@ -4165,7 +4165,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_7_1(&mut self, v: i32) {
-        self.header_set(216, v as u32);
+        self.header_set(216, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_7_1(&self) -> Option<i32> {
@@ -4173,7 +4173,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_7_2(&mut self, v: i32) {
-        self.header_set(217, v as u32);
+        self.header_set(217, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_7_2(&self) -> Option<i32> {
@@ -4181,7 +4181,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_8_1(&mut self, v: i32) {
-        self.header_set(219, v as u32);
+        self.header_set(219, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_8_1(&self) -> Option<i32> {
@@ -4189,7 +4189,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_8_2(&mut self, v: i32) {
-        self.header_set(220, v as u32);
+        self.header_set(220, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_8_2(&self) -> Option<i32> {
@@ -4197,7 +4197,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_9_1(&mut self, v: i32) {
-        self.header_set(222, v as u32);
+        self.header_set(222, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_9_1(&self) -> Option<i32> {
@@ -4205,7 +4205,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_9_2(&mut self, v: i32) {
-        self.header_set(223, v as u32);
+        self.header_set(223, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_9_2(&self) -> Option<i32> {
@@ -4213,7 +4213,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_10_1(&mut self, v: i32) {
-        self.header_set(225, v as u32);
+        self.header_set(225, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_10_1(&self) -> Option<i32> {
@@ -4221,7 +4221,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_10_2(&mut self, v: i32) {
-        self.header_set(226, v as u32);
+        self.header_set(226, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_10_2(&self) -> Option<i32> {
@@ -4229,7 +4229,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_11_1(&mut self, v: i32) {
-        self.header_set(228, v as u32);
+        self.header_set(228, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_11_1(&self) -> Option<i32> {
@@ -4237,7 +4237,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_11_2(&mut self, v: i32) {
-        self.header_set(229, v as u32);
+        self.header_set(229, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_11_2(&self) -> Option<i32> {
@@ -4245,7 +4245,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_12_1(&mut self, v: i32) {
-        self.header_set(231, v as u32);
+        self.header_set(231, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_12_1(&self) -> Option<i32> {
@@ -4253,7 +4253,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_12_2(&mut self, v: i32) {
-        self.header_set(232, v as u32);
+        self.header_set(232, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_12_2(&self) -> Option<i32> {
@@ -4261,7 +4261,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_13_1(&mut self, v: i32) {
-        self.header_set(234, v as u32);
+        self.header_set(234, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_13_1(&self) -> Option<i32> {
@@ -4269,7 +4269,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_13_2(&mut self, v: i32) {
-        self.header_set(235, v as u32);
+        self.header_set(235, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_13_2(&self) -> Option<i32> {
@@ -4277,7 +4277,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_14_1(&mut self, v: i32) {
-        self.header_set(237, v as u32);
+        self.header_set(237, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_14_1(&self) -> Option<i32> {
@@ -4285,7 +4285,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_14_2(&mut self, v: i32) {
-        self.header_set(238, v as u32);
+        self.header_set(238, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_14_2(&self) -> Option<i32> {
@@ -4293,7 +4293,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_15_1(&mut self, v: i32) {
-        self.header_set(240, v as u32);
+        self.header_set(240, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_15_1(&self) -> Option<i32> {
@@ -4301,7 +4301,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_15_2(&mut self, v: i32) {
-        self.header_set(241, v as u32);
+        self.header_set(241, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_15_2(&self) -> Option<i32> {
@@ -4309,7 +4309,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_16_1(&mut self, v: i32) {
-        self.header_set(243, v as u32);
+        self.header_set(243, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_16_1(&self) -> Option<i32> {
@@ -4317,7 +4317,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_16_2(&mut self, v: i32) {
-        self.header_set(244, v as u32);
+        self.header_set(244, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_16_2(&self) -> Option<i32> {
@@ -4325,7 +4325,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_17_1(&mut self, v: i32) {
-        self.header_set(246, v as u32);
+        self.header_set(246, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_17_1(&self) -> Option<i32> {
@@ -4333,7 +4333,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_17_2(&mut self, v: i32) {
-        self.header_set(247, v as u32);
+        self.header_set(247, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_17_2(&self) -> Option<i32> {
@@ -4341,7 +4341,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_18_1(&mut self, v: i32) {
-        self.header_set(249, v as u32);
+        self.header_set(249, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_18_1(&self) -> Option<i32> {
@@ -4349,7 +4349,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_18_2(&mut self, v: i32) {
-        self.header_set(250, v as u32);
+        self.header_set(250, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_18_2(&self) -> Option<i32> {
@@ -4357,7 +4357,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_19_1(&mut self, v: i32) {
-        self.header_set(252, v as u32);
+        self.header_set(252, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_19_1(&self) -> Option<i32> {
@@ -4365,7 +4365,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_19_2(&mut self, v: i32) {
-        self.header_set(253, v as u32);
+        self.header_set(253, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_19_2(&self) -> Option<i32> {
@@ -4373,7 +4373,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_20_1(&mut self, v: i32) {
-        self.header_set(255, v as u32);
+        self.header_set(255, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_20_1(&self) -> Option<i32> {
@@ -4381,7 +4381,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_QUEST_LOG_20_2(&mut self, v: i32) {
-        self.header_set(256, v as u32);
+        self.header_set(256, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_QUEST_LOG_20_2(&self) -> Option<i32> {
@@ -4401,7 +4401,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_1_0(&mut self, v: i32) {
-        self.header_set(260, v as u32);
+        self.header_set(260, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_1_0(&self) -> Option<i32> {
@@ -4409,7 +4409,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_1_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(268, (a as u32) << 16 | b as u32);
+        self.header_set(268, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_1_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4435,7 +4435,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_2_0(&mut self, v: i32) {
-        self.header_set(272, v as u32);
+        self.header_set(272, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_2_0(&self) -> Option<i32> {
@@ -4443,7 +4443,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_2_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(280, (a as u32) << 16 | b as u32);
+        self.header_set(280, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_2_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4469,7 +4469,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_3_0(&mut self, v: i32) {
-        self.header_set(284, v as u32);
+        self.header_set(284, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_3_0(&self) -> Option<i32> {
@@ -4477,7 +4477,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_3_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(292, (a as u32) << 16 | b as u32);
+        self.header_set(292, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_3_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4503,7 +4503,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_4_0(&mut self, v: i32) {
-        self.header_set(296, v as u32);
+        self.header_set(296, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_4_0(&self) -> Option<i32> {
@@ -4511,7 +4511,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_4_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(304, (a as u32) << 16 | b as u32);
+        self.header_set(304, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_4_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4537,7 +4537,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_5_0(&mut self, v: i32) {
-        self.header_set(308, v as u32);
+        self.header_set(308, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_5_0(&self) -> Option<i32> {
@@ -4545,7 +4545,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_5_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(316, (a as u32) << 16 | b as u32);
+        self.header_set(316, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_5_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4571,7 +4571,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_6_0(&mut self, v: i32) {
-        self.header_set(320, v as u32);
+        self.header_set(320, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_6_0(&self) -> Option<i32> {
@@ -4579,7 +4579,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_6_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(328, (a as u32) << 16 | b as u32);
+        self.header_set(328, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_6_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4605,7 +4605,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_7_0(&mut self, v: i32) {
-        self.header_set(332, v as u32);
+        self.header_set(332, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_7_0(&self) -> Option<i32> {
@@ -4613,7 +4613,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_7_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(340, (a as u32) << 16 | b as u32);
+        self.header_set(340, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_7_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4639,7 +4639,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_8_0(&mut self, v: i32) {
-        self.header_set(344, v as u32);
+        self.header_set(344, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_8_0(&self) -> Option<i32> {
@@ -4647,7 +4647,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_8_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(352, (a as u32) << 16 | b as u32);
+        self.header_set(352, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_8_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4673,7 +4673,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_9_0(&mut self, v: i32) {
-        self.header_set(356, v as u32);
+        self.header_set(356, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_9_0(&self) -> Option<i32> {
@@ -4681,7 +4681,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_9_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(364, (a as u32) << 16 | b as u32);
+        self.header_set(364, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_9_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4707,7 +4707,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_10_0(&mut self, v: i32) {
-        self.header_set(368, v as u32);
+        self.header_set(368, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_10_0(&self) -> Option<i32> {
@@ -4715,7 +4715,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_10_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(376, (a as u32) << 16 | b as u32);
+        self.header_set(376, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_10_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4741,7 +4741,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_11_0(&mut self, v: i32) {
-        self.header_set(380, v as u32);
+        self.header_set(380, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_11_0(&self) -> Option<i32> {
@@ -4749,7 +4749,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_11_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(388, (a as u32) << 16 | b as u32);
+        self.header_set(388, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_11_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4775,7 +4775,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_12_0(&mut self, v: i32) {
-        self.header_set(392, v as u32);
+        self.header_set(392, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_12_0(&self) -> Option<i32> {
@@ -4783,7 +4783,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_12_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(400, (a as u32) << 16 | b as u32);
+        self.header_set(400, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_12_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4809,7 +4809,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_13_0(&mut self, v: i32) {
-        self.header_set(404, v as u32);
+        self.header_set(404, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_13_0(&self) -> Option<i32> {
@@ -4817,7 +4817,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_13_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(412, (a as u32) << 16 | b as u32);
+        self.header_set(412, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_13_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4843,7 +4843,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_14_0(&mut self, v: i32) {
-        self.header_set(416, v as u32);
+        self.header_set(416, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_14_0(&self) -> Option<i32> {
@@ -4851,7 +4851,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_14_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(424, (a as u32) << 16 | b as u32);
+        self.header_set(424, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_14_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4877,7 +4877,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_15_0(&mut self, v: i32) {
-        self.header_set(428, v as u32);
+        self.header_set(428, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_15_0(&self) -> Option<i32> {
@@ -4885,7 +4885,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_15_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(436, (a as u32) << 16 | b as u32);
+        self.header_set(436, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_15_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4911,7 +4911,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_16_0(&mut self, v: i32) {
-        self.header_set(440, v as u32);
+        self.header_set(440, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_16_0(&self) -> Option<i32> {
@@ -4919,7 +4919,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_16_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(448, (a as u32) << 16 | b as u32);
+        self.header_set(448, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_16_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4945,7 +4945,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_17_0(&mut self, v: i32) {
-        self.header_set(452, v as u32);
+        self.header_set(452, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_17_0(&self) -> Option<i32> {
@@ -4953,7 +4953,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_17_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(460, (a as u32) << 16 | b as u32);
+        self.header_set(460, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_17_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -4979,7 +4979,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_18_0(&mut self, v: i32) {
-        self.header_set(464, v as u32);
+        self.header_set(464, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_18_0(&self) -> Option<i32> {
@@ -4987,7 +4987,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_18_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(472, (a as u32) << 16 | b as u32);
+        self.header_set(472, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_18_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -5013,7 +5013,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_19_0(&mut self, v: i32) {
-        self.header_set(476, v as u32);
+        self.header_set(476, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_VISIBLE_ITEM_19_0(&self) -> Option<i32> {
@@ -5021,7 +5021,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_VISIBLE_ITEM_19_PROPERTIES(&mut self, a: u16, b: u16) {
-        self.header_set(484, (a as u32) << 16 | b as u32);
+        self.header_set(484, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_VISIBLE_ITEM_19_PROPERTIES(&self) -> Option<(u16, u16)> {
@@ -5131,7 +5131,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_XP(&mut self, v: i32) {
-        self.header_set(716, v as u32);
+        self.header_set(716, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_XP(&self) -> Option<i32> {
@@ -5139,7 +5139,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_NEXT_LEVEL_XP(&mut self, v: i32) {
-        self.header_set(717, v as u32);
+        self.header_set(717, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_NEXT_LEVEL_XP(&self) -> Option<i32> {
@@ -5157,7 +5157,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_CHARACTER_POINTS1(&mut self, v: i32) {
-        self.header_set(1102, v as u32);
+        self.header_set(1102, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_CHARACTER_POINTS1(&self) -> Option<i32> {
@@ -5165,7 +5165,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_CHARACTER_POINTS2(&mut self, v: i32) {
-        self.header_set(1103, v as u32);
+        self.header_set(1103, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_CHARACTER_POINTS2(&self) -> Option<i32> {
@@ -5173,7 +5173,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_TRACK_CREATURES(&mut self, v: i32) {
-        self.header_set(1104, v as u32);
+        self.header_set(1104, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_TRACK_CREATURES(&self) -> Option<i32> {
@@ -5181,7 +5181,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_TRACK_RESOURCES(&mut self, v: i32) {
-        self.header_set(1105, v as u32);
+        self.header_set(1105, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_TRACK_RESOURCES(&self) -> Option<i32> {
@@ -5243,7 +5243,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_REST_STATE_EXPERIENCE(&mut self, v: i32) {
-        self.header_set(1175, v as u32);
+        self.header_set(1175, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_REST_STATE_EXPERIENCE(&self) -> Option<i32> {
@@ -5251,7 +5251,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_COINAGE(&mut self, v: i32) {
-        self.header_set(1176, v as u32);
+        self.header_set(1176, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_COINAGE(&self) -> Option<i32> {
@@ -5259,7 +5259,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_POSSTAT0(&mut self, v: i32) {
-        self.header_set(1177, v as u32);
+        self.header_set(1177, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_POSSTAT0(&self) -> Option<i32> {
@@ -5267,7 +5267,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_POSSTAT1(&mut self, v: i32) {
-        self.header_set(1178, v as u32);
+        self.header_set(1178, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_POSSTAT1(&self) -> Option<i32> {
@@ -5275,7 +5275,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_POSSTAT2(&mut self, v: i32) {
-        self.header_set(1179, v as u32);
+        self.header_set(1179, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_POSSTAT2(&self) -> Option<i32> {
@@ -5283,7 +5283,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_POSSTAT3(&mut self, v: i32) {
-        self.header_set(1180, v as u32);
+        self.header_set(1180, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_POSSTAT3(&self) -> Option<i32> {
@@ -5291,7 +5291,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_POSSTAT4(&mut self, v: i32) {
-        self.header_set(1181, v as u32);
+        self.header_set(1181, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_POSSTAT4(&self) -> Option<i32> {
@@ -5299,7 +5299,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_NEGSTAT0(&mut self, v: i32) {
-        self.header_set(1182, v as u32);
+        self.header_set(1182, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_NEGSTAT0(&self) -> Option<i32> {
@@ -5307,7 +5307,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_NEGSTAT1(&mut self, v: i32) {
-        self.header_set(1183, v as u32);
+        self.header_set(1183, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_NEGSTAT1(&self) -> Option<i32> {
@@ -5315,7 +5315,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_NEGSTAT2(&mut self, v: i32) {
-        self.header_set(1184, v as u32);
+        self.header_set(1184, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_NEGSTAT2(&self) -> Option<i32> {
@@ -5323,7 +5323,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_NEGSTAT3(&mut self, v: i32) {
-        self.header_set(1185, v as u32);
+        self.header_set(1185, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_NEGSTAT3(&self) -> Option<i32> {
@@ -5331,7 +5331,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_NEGSTAT4(&mut self, v: i32) {
-        self.header_set(1186, v as u32);
+        self.header_set(1186, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_NEGSTAT4(&self) -> Option<i32> {
@@ -5339,7 +5339,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_RESISTANCEBUFFMODSPOSITIVE(&mut self, v: i32) {
-        self.header_set(1187, v as u32);
+        self.header_set(1187, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_RESISTANCEBUFFMODSPOSITIVE(&self) -> Option<i32> {
@@ -5347,7 +5347,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_RESISTANCEBUFFMODSNEGATIVE(&mut self, v: i32) {
-        self.header_set(1194, v as u32);
+        self.header_set(1194, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_RESISTANCEBUFFMODSNEGATIVE(&self) -> Option<i32> {
@@ -5355,7 +5355,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_MOD_DAMAGE_DONE_POS(&mut self, v: i32) {
-        self.header_set(1201, v as u32);
+        self.header_set(1201, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_MOD_DAMAGE_DONE_POS(&self) -> Option<i32> {
@@ -5363,7 +5363,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_MOD_DAMAGE_DONE_NEG(&mut self, v: i32) {
-        self.header_set(1208, v as u32);
+        self.header_set(1208, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_MOD_DAMAGE_DONE_NEG(&self) -> Option<i32> {
@@ -5371,7 +5371,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_MOD_DAMAGE_DONE_PCT(&mut self, v: i32) {
-        self.header_set(1215, v as u32);
+        self.header_set(1215, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_MOD_DAMAGE_DONE_PCT(&self) -> Option<i32> {
@@ -5393,7 +5393,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_AMMO_ID(&mut self, v: i32) {
-        self.header_set(1223, v as u32);
+        self.header_set(1223, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_AMMO_ID(&self) -> Option<i32> {
@@ -5401,7 +5401,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_SELF_RES_SPELL(&mut self, v: i32) {
-        self.header_set(1224, v as u32);
+        self.header_set(1224, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_SELF_RES_SPELL(&self) -> Option<i32> {
@@ -5409,7 +5409,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_PVP_MEDALS(&mut self, v: i32) {
-        self.header_set(1225, v as u32);
+        self.header_set(1225, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_PVP_MEDALS(&self) -> Option<i32> {
@@ -5417,7 +5417,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_BUYBACK_PRICE_1(&mut self, v: i32) {
-        self.header_set(1226, v as u32);
+        self.header_set(1226, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_BUYBACK_PRICE_1(&self) -> Option<i32> {
@@ -5425,7 +5425,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_BUYBACK_TIMESTAMP_1(&mut self, v: i32) {
-        self.header_set(1238, v as u32);
+        self.header_set(1238, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_BUYBACK_TIMESTAMP_1(&self) -> Option<i32> {
@@ -5433,7 +5433,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_SESSION_KILLS(&mut self, a: u16, b: u16) {
-        self.header_set(1250, (a as u32) << 16 | b as u32);
+        self.header_set(1250, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_FIELD_SESSION_KILLS(&self) -> Option<(u16, u16)> {
@@ -5447,7 +5447,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_YESTERDAY_KILLS(&mut self, a: u16, b: u16) {
-        self.header_set(1251, (a as u32) << 16 | b as u32);
+        self.header_set(1251, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_FIELD_YESTERDAY_KILLS(&self) -> Option<(u16, u16)> {
@@ -5461,7 +5461,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_LAST_WEEK_KILLS(&mut self, a: u16, b: u16) {
-        self.header_set(1252, (a as u32) << 16 | b as u32);
+        self.header_set(1252, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_FIELD_LAST_WEEK_KILLS(&self) -> Option<(u16, u16)> {
@@ -5475,7 +5475,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_THIS_WEEK_KILLS(&mut self, a: u16, b: u16) {
-        self.header_set(1253, (a as u32) << 16 | b as u32);
+        self.header_set(1253, crate::util::u16s_to_u32(a, b));
     }
 
     pub fn player_FIELD_THIS_WEEK_KILLS(&self) -> Option<(u16, u16)> {
@@ -5489,7 +5489,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_THIS_WEEK_CONTRIBUTION(&mut self, v: i32) {
-        self.header_set(1254, v as u32);
+        self.header_set(1254, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_THIS_WEEK_CONTRIBUTION(&self) -> Option<i32> {
@@ -5497,7 +5497,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_LIFETIME_HONORBALE_KILLS(&mut self, v: i32) {
-        self.header_set(1255, v as u32);
+        self.header_set(1255, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_LIFETIME_HONORBALE_KILLS(&self) -> Option<i32> {
@@ -5505,7 +5505,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_LIFETIME_DISHONORBALE_KILLS(&mut self, v: i32) {
-        self.header_set(1256, v as u32);
+        self.header_set(1256, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_LIFETIME_DISHONORBALE_KILLS(&self) -> Option<i32> {
@@ -5513,7 +5513,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_YESTERDAY_CONTRIBUTION(&mut self, v: i32) {
-        self.header_set(1257, v as u32);
+        self.header_set(1257, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_YESTERDAY_CONTRIBUTION(&self) -> Option<i32> {
@@ -5521,7 +5521,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_LAST_WEEK_CONTRIBUTION(&mut self, v: i32) {
-        self.header_set(1258, v as u32);
+        self.header_set(1258, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_LAST_WEEK_CONTRIBUTION(&self) -> Option<i32> {
@@ -5529,7 +5529,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_LAST_WEEK_RANK(&mut self, v: i32) {
-        self.header_set(1259, v as u32);
+        self.header_set(1259, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_LAST_WEEK_RANK(&self) -> Option<i32> {
@@ -5551,7 +5551,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_WATCHED_FACTION_INDEX(&mut self, v: i32) {
-        self.header_set(1261, v as u32);
+        self.header_set(1261, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_WATCHED_FACTION_INDEX(&self) -> Option<i32> {
@@ -5559,7 +5559,7 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_FIELD_COMBAT_RATING_1(&mut self, v: i32) {
-        self.header_set(1262, v as u32);
+        self.header_set(1262, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn player_FIELD_COMBAT_RATING_1(&self) -> Option<i32> {
@@ -5582,7 +5582,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_object_ENTRY(&mut self, v: i32) {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
@@ -5610,7 +5610,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_DISPLAYID(&mut self, v: i32) {
-        self.header_set(8, v as u32);
+        self.header_set(8, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_DISPLAYID(&self) -> Option<i32> {
@@ -5618,7 +5618,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_FLAGS(&mut self, v: i32) {
-        self.header_set(9, v as u32);
+        self.header_set(9, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_FLAGS(&self) -> Option<i32> {
@@ -5634,7 +5634,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_STATE(&mut self, v: i32) {
-        self.header_set(14, v as u32);
+        self.header_set(14, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_STATE(&self) -> Option<i32> {
@@ -5674,7 +5674,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_DYN_FLAGS(&mut self, v: i32) {
-        self.header_set(19, v as u32);
+        self.header_set(19, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_DYN_FLAGS(&self) -> Option<i32> {
@@ -5682,7 +5682,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_FACTION(&mut self, v: i32) {
-        self.header_set(20, v as u32);
+        self.header_set(20, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_FACTION(&self) -> Option<i32> {
@@ -5690,7 +5690,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_TYPE_ID(&mut self, v: i32) {
-        self.header_set(21, v as u32);
+        self.header_set(21, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_TYPE_ID(&self) -> Option<i32> {
@@ -5698,7 +5698,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_LEVEL(&mut self, v: i32) {
-        self.header_set(22, v as u32);
+        self.header_set(22, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_LEVEL(&self) -> Option<i32> {
@@ -5706,7 +5706,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_ARTKIT(&mut self, v: i32) {
-        self.header_set(23, v as u32);
+        self.header_set(23, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_ARTKIT(&self) -> Option<i32> {
@@ -5714,7 +5714,7 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_ANIMPROGRESS(&mut self, v: i32) {
-        self.header_set(24, v as u32);
+        self.header_set(24, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn gameobject_ANIMPROGRESS(&self) -> Option<i32> {
@@ -5737,7 +5737,7 @@ impl UpdateDynamicObject {
     }
 
     pub fn set_object_ENTRY(&mut self, v: i32) {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
@@ -5779,7 +5779,7 @@ impl UpdateDynamicObject {
     }
 
     pub fn set_dynamicobject_SPELLID(&mut self, v: i32) {
-        self.header_set(9, v as u32);
+        self.header_set(9, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn dynamicobject_SPELLID(&self) -> Option<i32> {
@@ -5842,7 +5842,7 @@ impl UpdateCorpse {
     }
 
     pub fn set_object_ENTRY(&mut self, v: i32) {
-        self.header_set(3, v as u32);
+        self.header_set(3, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn object_ENTRY(&self) -> Option<i32> {
@@ -5902,7 +5902,7 @@ impl UpdateCorpse {
     }
 
     pub fn set_corpse_DISPLAY_ID(&mut self, v: i32) {
-        self.header_set(12, v as u32);
+        self.header_set(12, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn corpse_DISPLAY_ID(&self) -> Option<i32> {
@@ -5910,7 +5910,7 @@ impl UpdateCorpse {
     }
 
     pub fn set_corpse_ITEM(&mut self, v: i32) {
-        self.header_set(13, v as u32);
+        self.header_set(13, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn corpse_ITEM(&self) -> Option<i32> {
@@ -5946,7 +5946,7 @@ impl UpdateCorpse {
     }
 
     pub fn set_corpse_GUILD(&mut self, v: i32) {
-        self.header_set(34, v as u32);
+        self.header_set(34, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn corpse_GUILD(&self) -> Option<i32> {
@@ -5954,7 +5954,7 @@ impl UpdateCorpse {
     }
 
     pub fn set_corpse_FLAGS(&mut self, v: i32) {
-        self.header_set(35, v as u32);
+        self.header_set(35, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn corpse_FLAGS(&self) -> Option<i32> {
@@ -5962,7 +5962,7 @@ impl UpdateCorpse {
     }
 
     pub fn set_corpse_DYNAMIC_FLAGS(&mut self, v: i32) {
-        self.header_set(36, v as u32);
+        self.header_set(36, u32::from_le_bytes(v.to_le_bytes()));
     }
 
     pub fn corpse_DYNAMIC_FLAGS(&self) -> Option<i32> {

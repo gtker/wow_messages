@@ -403,10 +403,9 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
         }
         _ => {
             let value = match &m.ty {
-                UfType::Int => "v as u32".to_string(),
-                UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
+                UfType::Int | UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
                 UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
-                UfType::TwoShort => "(a as u32) << 16 | b as u32".to_string(),
+                UfType::TwoShort => "crate::util::u16s_to_u32(a, b)".to_string(),
                 UfType::BytesWith(a, b, c, d) => {
                     let get_name = |byte_type: &ByteType| -> String {
                         match byte_type.ty {
