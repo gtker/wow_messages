@@ -41,6 +41,7 @@ pub mod cmsg_begin_trade_vanilla_tbc_wrath;
 pub mod cmsg_binder_activate_vanilla_tbc_wrath;
 pub mod cmsg_bootme_vanilla_tbc_wrath;
 pub mod cmsg_bug_vanilla_tbc_wrath;
+pub mod cmsg_busy_trade_vanilla_tbc_wrath;
 pub mod cmsg_buy_bank_slot_vanilla_tbc_wrath;
 pub mod cmsg_buy_item_in_slot_vanilla_tbc;
 pub mod cmsg_buy_item_vanilla_tbc;

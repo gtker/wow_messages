@@ -56,8 +56,6 @@ pub(crate) mod cmsg_battlefield_port;
 pub use cmsg_battlefield_port::*;
 pub(crate) mod cmsg_battlemaster_join;
 pub use cmsg_battlemaster_join::*;
-pub(crate) mod cmsg_busy_trade;
-pub use cmsg_busy_trade::*;
 pub(crate) mod cmsg_cancel_aura;
 pub use cmsg_cancel_aura::*;
 pub(crate) mod cmsg_cancel_auto_repeat_spell;
@@ -483,6 +481,8 @@ pub use crate::shared::cmsg_binder_activate_vanilla_tbc_wrath::CMSG_BINDER_ACTIV
 pub use crate::shared::cmsg_bootme_vanilla_tbc_wrath::CMSG_BOOTME;
 
 pub use crate::shared::cmsg_bug_vanilla_tbc_wrath::CMSG_BUG;
+
+pub use crate::shared::cmsg_busy_trade_vanilla_tbc_wrath::CMSG_BUSY_TRADE;
 
 pub use crate::shared::cmsg_buy_bank_slot_vanilla_tbc_wrath::CMSG_BUY_BANK_SLOT;
 

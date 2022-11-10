@@ -338,6 +338,8 @@ pub use crate::shared::cmsg_bootme_vanilla_tbc_wrath::CMSG_BOOTME;
 
 pub use crate::shared::cmsg_bug_vanilla_tbc_wrath::CMSG_BUG;
 
+pub use crate::shared::cmsg_busy_trade_vanilla_tbc_wrath::CMSG_BUSY_TRADE;
+
 pub use crate::shared::cmsg_buy_bank_slot_vanilla_tbc_wrath::CMSG_BUY_BANK_SLOT;
 
 pub use crate::shared::cmsg_buy_stable_slot_vanilla_tbc_wrath::CMSG_BUY_STABLE_SLOT;
