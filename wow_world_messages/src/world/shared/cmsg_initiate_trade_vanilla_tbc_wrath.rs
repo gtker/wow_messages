@@ -43,3 +43,9 @@ impl crate::Message for CMSG_INITIATE_TRADE {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_INITIATE_TRADE {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_INITIATE_TRADE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_INITIATE_TRADE {}
+
