@@ -150,6 +150,7 @@ use crate::world::tbc::CMSG_SET_TARGET_OBSOLETE;
 use crate::world::tbc::CMSG_ATTACKSWING;
 use crate::world::tbc::CMSG_ATTACKSTOP;
 use crate::world::tbc::CMSG_REPOP_REQUEST;
+use crate::world::tbc::CMSG_RESURRECT_RESPONSE;
 use crate::world::tbc::CMSG_LOOT;
 use crate::world::tbc::CMSG_LOOT_MONEY;
 use crate::world::tbc::CMSG_LOOT_RELEASE;
@@ -435,6 +436,7 @@ pub enum ClientOpcodeMessage {
     CMSG_ATTACKSWING(CMSG_ATTACKSWING),
     CMSG_ATTACKSTOP(CMSG_ATTACKSTOP),
     CMSG_REPOP_REQUEST(CMSG_REPOP_REQUEST),
+    CMSG_RESURRECT_RESPONSE(CMSG_RESURRECT_RESPONSE),
     CMSG_LOOT(CMSG_LOOT),
     CMSG_LOOT_MONEY(CMSG_LOOT_MONEY),
     CMSG_LOOT_RELEASE(CMSG_LOOT_RELEASE),
@@ -722,6 +724,7 @@ impl ClientOpcodeMessage {
             0x0141 => Ok(Self::CMSG_ATTACKSWING(<CMSG_ATTACKSWING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0141, size: body_size, io, } } else { a } })?)),
             0x0142 => Ok(Self::CMSG_ATTACKSTOP(<CMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0142, size: body_size, io, } } else { a } })?)),
             0x015A => Ok(Self::CMSG_REPOP_REQUEST(<CMSG_REPOP_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015A, size: body_size, io, } } else { a } })?)),
+            0x015C => Ok(Self::CMSG_RESURRECT_RESPONSE(<CMSG_RESURRECT_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015C, size: body_size, io, } } else { a } })?)),
             0x015D => Ok(Self::CMSG_LOOT(<CMSG_LOOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015D, size: body_size, io, } } else { a } })?)),
             0x015E => Ok(Self::CMSG_LOOT_MONEY(<CMSG_LOOT_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015E, size: body_size, io, } } else { a } })?)),
             0x015F => Ok(Self::CMSG_LOOT_RELEASE(<CMSG_LOOT_RELEASE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015F, size: body_size, io, } } else { a } })?)),
@@ -1077,6 +1080,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSTOP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REPOP_REQUEST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_RESURRECT_RESPONSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT_MONEY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT_RELEASE(c) => c.write_encrypted_client(w, e),
@@ -1365,6 +1369,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSTOP(c) => c.write_unencrypted_client(w),
             Self::CMSG_REPOP_REQUEST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_RESURRECT_RESPONSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT_MONEY(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT_RELEASE(c) => c.write_unencrypted_client(w),
@@ -1653,6 +1658,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_RESURRECT_RESPONSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_MONEY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_RELEASE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1941,6 +1947,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_RESURRECT_RESPONSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_MONEY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_RELEASE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2229,6 +2236,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPOP_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_RESURRECT_RESPONSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_MONEY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_RELEASE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2517,6 +2525,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ATTACKSWING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPOP_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_RESURRECT_RESPONSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_MONEY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_RELEASE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2840,6 +2849,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_ATTACKSWING(_) => "CMSG_ATTACKSWING",
             ClientOpcodeMessage::CMSG_ATTACKSTOP(_) => "CMSG_ATTACKSTOP",
             ClientOpcodeMessage::CMSG_REPOP_REQUEST(_) => "CMSG_REPOP_REQUEST",
+            ClientOpcodeMessage::CMSG_RESURRECT_RESPONSE(_) => "CMSG_RESURRECT_RESPONSE",
             ClientOpcodeMessage::CMSG_LOOT(_) => "CMSG_LOOT",
             ClientOpcodeMessage::CMSG_LOOT_MONEY(_) => "CMSG_LOOT_MONEY",
             ClientOpcodeMessage::CMSG_LOOT_RELEASE(_) => "CMSG_LOOT_RELEASE",
@@ -3828,6 +3838,12 @@ impl From<CMSG_ATTACKSTOP> for ClientOpcodeMessage {
 impl From<CMSG_REPOP_REQUEST> for ClientOpcodeMessage {
     fn from(c: CMSG_REPOP_REQUEST) -> Self {
         Self::CMSG_REPOP_REQUEST(c)
+    }
+}
+
+impl From<CMSG_RESURRECT_RESPONSE> for ClientOpcodeMessage {
+    fn from(c: CMSG_RESURRECT_RESPONSE) -> Self {
+        Self::CMSG_RESURRECT_RESPONSE(c)
     }
 }
 

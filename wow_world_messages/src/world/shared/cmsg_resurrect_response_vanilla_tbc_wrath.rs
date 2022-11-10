@@ -52,3 +52,9 @@ impl crate::Message for CMSG_RESURRECT_RESPONSE {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for CMSG_RESURRECT_RESPONSE {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_RESURRECT_RESPONSE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_RESURRECT_RESPONSE {}
+
