@@ -1,5 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::vanilla::Vector3d;
 use crate::world::vanilla::SpellCastTargetFlags;
 use std::io::{Write, Read};
 
@@ -11,39 +12,23 @@ use std::io::{Write, Read};
 ///     if (target_flags & UNIT) {
 ///         PackedGuid unit_target;
 ///     }
-///     if (target_flags & UNIT_ENEMY) {
-///         PackedGuid unit_enemy_target;
-///     }
 ///     if (target_flags & GAMEOBJECT) {
 ///         PackedGuid object_target;
-///     }
-///     if (target_flags & LOCKED) {
-///         PackedGuid object_target_locked;
 ///     }
 ///     if (target_flags & ITEM) {
 ///         PackedGuid item_target;
 ///     }
-///     if (target_flags & TRADE_ITEM) {
-///         PackedGuid item_trade_target;
-///     }
 ///     if (target_flags & SOURCE_LOCATION) {
-///         f32 source_position_x;
-///         f32 source_position_y;
-///         f32 source_position_z;
+///         Vector3d source;
 ///     }
 ///     if (target_flags & DEST_LOCATION) {
-///         f32 destination_position_x;
-///         f32 destination_position_y;
-///         f32 destination_position_z;
+///         Vector3d destination;
 ///     }
 ///     if (target_flags & STRING) {
 ///         CString target_string;
 ///     }
 ///     if (target_flags & CORPSE_ALLY) {
 ///         PackedGuid corpse_target_ally;
-///     }
-///     if (target_flags & CORPSE_ENEMY) {
-///         PackedGuid corpse_target_enemy;
 ///     }
 /// }
 /// ```
@@ -62,21 +47,9 @@ impl SpellCastTargets {
 
         }
 
-        if let Some(if_statement) = &self.target_flags.unit_enemy {
-            // unit_enemy_target: PackedGuid
-            if_statement.unit_enemy_target.write_packed_guid_into_vec(w);
-
-        }
-
         if let Some(if_statement) = &self.target_flags.gameobject {
             // object_target: PackedGuid
             if_statement.object_target.write_packed_guid_into_vec(w);
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.locked {
-            // object_target_locked: PackedGuid
-            if_statement.object_target_locked.write_packed_guid_into_vec(w);
 
         }
 
@@ -86,33 +59,15 @@ impl SpellCastTargets {
 
         }
 
-        if let Some(if_statement) = &self.target_flags.trade_item {
-            // item_trade_target: PackedGuid
-            if_statement.item_trade_target.write_packed_guid_into_vec(w);
-
-        }
-
         if let Some(if_statement) = &self.target_flags.source_location {
-            // source_position_x: f32
-            w.write_all(&if_statement.source_position_x.to_le_bytes())?;
-
-            // source_position_y: f32
-            w.write_all(&if_statement.source_position_y.to_le_bytes())?;
-
-            // source_position_z: f32
-            w.write_all(&if_statement.source_position_z.to_le_bytes())?;
+            // source: Vector3d
+            if_statement.source.write_into_vec(w)?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.dest_location {
-            // destination_position_x: f32
-            w.write_all(&if_statement.destination_position_x.to_le_bytes())?;
-
-            // destination_position_y: f32
-            w.write_all(&if_statement.destination_position_y.to_le_bytes())?;
-
-            // destination_position_z: f32
-            w.write_all(&if_statement.destination_position_z.to_le_bytes())?;
+            // destination: Vector3d
+            if_statement.destination.write_into_vec(w)?;
 
         }
 
@@ -129,12 +84,6 @@ impl SpellCastTargets {
         if let Some(if_statement) = &self.target_flags.corpse_ally {
             // corpse_target_ally: PackedGuid
             if_statement.corpse_target_ally.write_packed_guid_into_vec(w);
-
-        }
-
-        if let Some(if_statement) = &self.target_flags.corpse_enemy {
-            // corpse_target_enemy: PackedGuid
-            if_statement.corpse_target_enemy.write_packed_guid_into_vec(w);
 
         }
 
@@ -159,36 +108,12 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_UNIT_ENEMY = if target_flags.is_UNIT_ENEMY() {
-            // unit_enemy_target: PackedGuid
-            let unit_enemy_target = Guid::read_packed(r)?;
-
-            Some(SpellCastTargets_SpellCastTargetFlags_UnitEnemy {
-                unit_enemy_target,
-            })
-        }
-        else {
-            None
-        };
-
         let target_flags_GAMEOBJECT = if target_flags.is_GAMEOBJECT() {
             // object_target: PackedGuid
             let object_target = Guid::read_packed(r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Gameobject {
                 object_target,
-            })
-        }
-        else {
-            None
-        };
-
-        let target_flags_LOCKED = if target_flags.is_LOCKED() {
-            // object_target_locked: PackedGuid
-            let object_target_locked = Guid::read_packed(r)?;
-
-            Some(SpellCastTargets_SpellCastTargetFlags_Locked {
-                object_target_locked,
             })
         }
         else {
@@ -207,29 +132,12 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_TRADE_ITEM = if target_flags.is_TRADE_ITEM() {
-            // item_trade_target: PackedGuid
-            let item_trade_target = Guid::read_packed(r)?;
-
-            Some(SpellCastTargets_SpellCastTargetFlags_TradeItem {
-                item_trade_target,
-            })
-        }
-        else {
-            None
-        };
-
         let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
-            // source_position_x: f32
-            let source_position_x = crate::util::read_f32_le(r)?;
-            // source_position_y: f32
-            let source_position_y = crate::util::read_f32_le(r)?;
-            // source_position_z: f32
-            let source_position_z = crate::util::read_f32_le(r)?;
+            // source: Vector3d
+            let source = Vector3d::read(r)?;
+
             Some(SpellCastTargets_SpellCastTargetFlags_SourceLocation {
-                source_position_x,
-                source_position_y,
-                source_position_z,
+                source,
             })
         }
         else {
@@ -237,16 +145,11 @@ impl SpellCastTargets {
         };
 
         let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
-            // destination_position_x: f32
-            let destination_position_x = crate::util::read_f32_le(r)?;
-            // destination_position_y: f32
-            let destination_position_y = crate::util::read_f32_le(r)?;
-            // destination_position_z: f32
-            let destination_position_z = crate::util::read_f32_le(r)?;
+            // destination: Vector3d
+            let destination = Vector3d::read(r)?;
+
             Some(SpellCastTargets_SpellCastTargetFlags_DestLocation {
-                destination_position_x,
-                destination_position_y,
-                destination_position_z,
+                destination,
             })
         }
         else {
@@ -278,30 +181,14 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_CORPSE_ENEMY = if target_flags.is_CORPSE_ENEMY() {
-            // corpse_target_enemy: PackedGuid
-            let corpse_target_enemy = Guid::read_packed(r)?;
-
-            Some(SpellCastTargets_SpellCastTargetFlags_CorpseEnemy {
-                corpse_target_enemy,
-            })
-        }
-        else {
-            None
-        };
-
         let target_flags = SpellCastTargets_SpellCastTargetFlags {
             inner: target_flags.as_int(),
             unit: target_flags_UNIT,
             item: target_flags_ITEM,
             source_location: target_flags_SOURCE_LOCATION,
             dest_location: target_flags_DEST_LOCATION,
-            unit_enemy: target_flags_UNIT_ENEMY,
-            corpse_enemy: target_flags_CORPSE_ENEMY,
             gameobject: target_flags_GAMEOBJECT,
-            trade_item: target_flags_TRADE_ITEM,
             string: target_flags_STRING,
-            locked: target_flags_LOCKED,
             corpse_ally: target_flags_CORPSE_ALLY,
         };
 
@@ -325,29 +212,21 @@ pub struct SpellCastTargets_SpellCastTargetFlags {
     item: Option<SpellCastTargets_SpellCastTargetFlags_Item>,
     source_location: Option<SpellCastTargets_SpellCastTargetFlags_SourceLocation>,
     dest_location: Option<SpellCastTargets_SpellCastTargetFlags_DestLocation>,
-    unit_enemy: Option<SpellCastTargets_SpellCastTargetFlags_UnitEnemy>,
-    corpse_enemy: Option<SpellCastTargets_SpellCastTargetFlags_CorpseEnemy>,
     gameobject: Option<SpellCastTargets_SpellCastTargetFlags_Gameobject>,
-    trade_item: Option<SpellCastTargets_SpellCastTargetFlags_TradeItem>,
     string: Option<SpellCastTargets_SpellCastTargetFlags_String>,
-    locked: Option<SpellCastTargets_SpellCastTargetFlags_Locked>,
     corpse_ally: Option<SpellCastTargets_SpellCastTargetFlags_CorpseAlly>,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags {
-    pub const fn new(inner: u16, unit: Option<SpellCastTargets_SpellCastTargetFlags_Unit>,item: Option<SpellCastTargets_SpellCastTargetFlags_Item>,source_location: Option<SpellCastTargets_SpellCastTargetFlags_SourceLocation>,dest_location: Option<SpellCastTargets_SpellCastTargetFlags_DestLocation>,unit_enemy: Option<SpellCastTargets_SpellCastTargetFlags_UnitEnemy>,corpse_enemy: Option<SpellCastTargets_SpellCastTargetFlags_CorpseEnemy>,gameobject: Option<SpellCastTargets_SpellCastTargetFlags_Gameobject>,trade_item: Option<SpellCastTargets_SpellCastTargetFlags_TradeItem>,string: Option<SpellCastTargets_SpellCastTargetFlags_String>,locked: Option<SpellCastTargets_SpellCastTargetFlags_Locked>,corpse_ally: Option<SpellCastTargets_SpellCastTargetFlags_CorpseAlly>,) -> Self {
+    pub const fn new(inner: u16, unit: Option<SpellCastTargets_SpellCastTargetFlags_Unit>,item: Option<SpellCastTargets_SpellCastTargetFlags_Item>,source_location: Option<SpellCastTargets_SpellCastTargetFlags_SourceLocation>,dest_location: Option<SpellCastTargets_SpellCastTargetFlags_DestLocation>,gameobject: Option<SpellCastTargets_SpellCastTargetFlags_Gameobject>,string: Option<SpellCastTargets_SpellCastTargetFlags_String>,corpse_ally: Option<SpellCastTargets_SpellCastTargetFlags_CorpseAlly>,) -> Self {
         Self {
             inner,
             unit, 
             item, 
             source_location, 
             dest_location, 
-            unit_enemy, 
-            corpse_enemy, 
             gameobject, 
-            trade_item, 
             string, 
-            locked, 
             corpse_ally, 
         }
     }
@@ -359,12 +238,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -375,12 +250,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
         && self.item.is_none()
         && self.source_location.is_none()
         && self.dest_location.is_none()
-        && self.unit_enemy.is_none()
-        && self.corpse_enemy.is_none()
         && self.gameobject.is_none()
-        && self.trade_item.is_none()
         && self.string.is_none()
-        && self.locked.is_none()
         && self.corpse_ally.is_none()
     }
 
@@ -391,12 +262,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -422,12 +289,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -455,12 +318,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -486,12 +345,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -517,12 +372,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: Some(item),
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -550,12 +401,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: Some(source_location),
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -583,12 +430,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: Some(dest_location),
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -609,36 +452,30 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_UNIT_ENEMY(unit_enemy: SpellCastTargets_SpellCastTargetFlags_UnitEnemy) -> Self {
+    pub const fn new_UNIT_ENEMY() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_ENEMY,
             unit: None,
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: Some(unit_enemy),
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
 
-    pub fn set_UNIT_ENEMY(mut self, unit_enemy: SpellCastTargets_SpellCastTargetFlags_UnitEnemy) -> Self {
+    pub fn set_UNIT_ENEMY(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_ENEMY;
-        self.unit_enemy = Some(unit_enemy);
         self
     }
 
-    pub const fn get_UNIT_ENEMY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_UnitEnemy> {
-        self.unit_enemy.as_ref()
+    pub const fn get_UNIT_ENEMY(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::UNIT_ENEMY) != 0
     }
 
     pub fn clear_UNIT_ENEMY(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_ENEMY.reverse_bits();
-        self.unit_enemy = None;
         self
     }
 
@@ -649,12 +486,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -673,36 +506,30 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_CORPSE_ENEMY(corpse_enemy: SpellCastTargets_SpellCastTargetFlags_CorpseEnemy) -> Self {
+    pub const fn new_CORPSE_ENEMY() -> Self {
         Self {
             inner: SpellCastTargetFlags::CORPSE_ENEMY,
             unit: None,
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: Some(corpse_enemy),
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
 
-    pub fn set_CORPSE_ENEMY(mut self, corpse_enemy: SpellCastTargets_SpellCastTargetFlags_CorpseEnemy) -> Self {
+    pub fn set_CORPSE_ENEMY(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::CORPSE_ENEMY;
-        self.corpse_enemy = Some(corpse_enemy);
         self
     }
 
-    pub const fn get_CORPSE_ENEMY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_CorpseEnemy> {
-        self.corpse_enemy.as_ref()
+    pub const fn get_CORPSE_ENEMY(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::CORPSE_ENEMY) != 0
     }
 
     pub fn clear_CORPSE_ENEMY(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::CORPSE_ENEMY.reverse_bits();
-        self.corpse_enemy = None;
         self
     }
 
@@ -713,12 +540,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -744,12 +567,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: Some(gameobject),
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -770,36 +589,30 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_TRADE_ITEM(trade_item: SpellCastTargets_SpellCastTargetFlags_TradeItem) -> Self {
+    pub const fn new_TRADE_ITEM() -> Self {
         Self {
             inner: SpellCastTargetFlags::TRADE_ITEM,
             unit: None,
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: Some(trade_item),
             string: None,
-            locked: None,
             corpse_ally: None,
         }
     }
 
-    pub fn set_TRADE_ITEM(mut self, trade_item: SpellCastTargets_SpellCastTargetFlags_TradeItem) -> Self {
+    pub fn set_TRADE_ITEM(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::TRADE_ITEM;
-        self.trade_item = Some(trade_item);
         self
     }
 
-    pub const fn get_TRADE_ITEM(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_TradeItem> {
-        self.trade_item.as_ref()
+    pub const fn get_TRADE_ITEM(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::TRADE_ITEM) != 0
     }
 
     pub fn clear_TRADE_ITEM(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::TRADE_ITEM.reverse_bits();
-        self.trade_item = None;
         self
     }
 
@@ -810,12 +623,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: Some(string),
-            locked: None,
             corpse_ally: None,
         }
     }
@@ -836,36 +645,30 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_LOCKED(locked: SpellCastTargets_SpellCastTargetFlags_Locked) -> Self {
+    pub const fn new_LOCKED() -> Self {
         Self {
             inner: SpellCastTargetFlags::LOCKED,
             unit: None,
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: Some(locked),
             corpse_ally: None,
         }
     }
 
-    pub fn set_LOCKED(mut self, locked: SpellCastTargets_SpellCastTargetFlags_Locked) -> Self {
+    pub fn set_LOCKED(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::LOCKED;
-        self.locked = Some(locked);
         self
     }
 
-    pub const fn get_LOCKED(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Locked> {
-        self.locked.as_ref()
+    pub const fn get_LOCKED(&self) -> bool {
+        (self.inner & SpellCastTargetFlags::LOCKED) != 0
     }
 
     pub fn clear_LOCKED(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::LOCKED.reverse_bits();
-        self.locked = None;
         self
     }
 
@@ -876,12 +679,8 @@ impl SpellCastTargets_SpellCastTargetFlags {
             item: None,
             source_location: None,
             dest_location: None,
-            unit_enemy: None,
-            corpse_enemy: None,
             gameobject: None,
-            trade_item: None,
             string: None,
-            locked: None,
             corpse_ally: Some(corpse_ally),
         }
     }
@@ -939,20 +738,6 @@ impl SpellCastTargets_SpellCastTargetFlags {
             }
         }
         + {
-            if let Some(s) = &self.unit_enemy {
-                s.size()
-            } else {
-                0
-            }
-        }
-        + {
-            if let Some(s) = &self.corpse_enemy {
-                s.size()
-            } else {
-                0
-            }
-        }
-        + {
             if let Some(s) = &self.gameobject {
                 s.size()
             } else {
@@ -960,21 +745,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
             }
         }
         + {
-            if let Some(s) = &self.trade_item {
-                s.size()
-            } else {
-                0
-            }
-        }
-        + {
             if let Some(s) = &self.string {
-                s.size()
-            } else {
-                0
-            }
-        }
-        + {
-            if let Some(s) = &self.locked {
                 s.size()
             } else {
                 0
@@ -1014,53 +785,23 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_SourceLocation {
-    pub source_position_x: f32,
-    pub source_position_y: f32,
-    pub source_position_z: f32,
+    pub source: Vector3d,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_SourceLocation {
     pub(crate) fn size(&self) -> usize {
-        4 // source_position_x: f32
-        + 4 // source_position_y: f32
-        + 4 // source_position_z: f32
+        12 // source: Vector3d
     }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_DestLocation {
-    pub destination_position_x: f32,
-    pub destination_position_y: f32,
-    pub destination_position_z: f32,
+    pub destination: Vector3d,
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_DestLocation {
     pub(crate) fn size(&self) -> usize {
-        4 // destination_position_x: f32
-        + 4 // destination_position_y: f32
-        + 4 // destination_position_z: f32
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-pub struct SpellCastTargets_SpellCastTargetFlags_UnitEnemy {
-    pub unit_enemy_target: Guid,
-}
-
-impl SpellCastTargets_SpellCastTargetFlags_UnitEnemy {
-    pub(crate) fn size(&self) -> usize {
-        self.unit_enemy_target.size() // unit_enemy_target: Guid
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-pub struct SpellCastTargets_SpellCastTargetFlags_CorpseEnemy {
-    pub corpse_target_enemy: Guid,
-}
-
-impl SpellCastTargets_SpellCastTargetFlags_CorpseEnemy {
-    pub(crate) fn size(&self) -> usize {
-        self.corpse_target_enemy.size() // corpse_target_enemy: Guid
+        12 // destination: Vector3d
     }
 }
 
@@ -1076,17 +817,6 @@ impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-pub struct SpellCastTargets_SpellCastTargetFlags_TradeItem {
-    pub item_trade_target: Guid,
-}
-
-impl SpellCastTargets_SpellCastTargetFlags_TradeItem {
-    pub(crate) fn size(&self) -> usize {
-        self.item_trade_target.size() // item_trade_target: Guid
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_String {
     pub target_string: String,
 }
@@ -1094,17 +824,6 @@ pub struct SpellCastTargets_SpellCastTargetFlags_String {
 impl SpellCastTargets_SpellCastTargetFlags_String {
     pub(crate) fn size(&self) -> usize {
         self.target_string.len() + 1 // target_string: CString
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-pub struct SpellCastTargets_SpellCastTargetFlags_Locked {
-    pub object_target_locked: Guid,
-}
-
-impl SpellCastTargets_SpellCastTargetFlags_Locked {
-    pub(crate) fn size(&self) -> usize {
-        self.object_target_locked.size() // object_target_locked: Guid
     }
 }
 

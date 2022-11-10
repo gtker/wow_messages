@@ -1096,12 +1096,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_corpse_target_enemy,
-            { "Corpse Target Enemy", "woww.corpse.target.enemy",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_cos_angle,
             { "Cos Angle", "woww.cos.angle",
                 FT_FLOAT, BASE_NONE, NULL, 0,
@@ -1339,24 +1333,6 @@
         { &hf_woww_destination_node,
             { "Destination Node", "woww.destination.node",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_destination_position_x,
-            { "Destination Position X", "woww.destination.position.x",
-                FT_FLOAT, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_destination_position_y,
-            { "Destination Position Y", "woww.destination.position.y",
-                FT_FLOAT, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_destination_position_z,
-            { "Destination Position Z", "woww.destination.position.z",
-                FT_FLOAT, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -2314,12 +2290,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_item_trade_target,
-            { "Item Trade Target", "woww.item.trade.target",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_items_required,
             { "Items Required", "woww.items.required",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -2886,12 +2856,6 @@
         },
         { &hf_woww_object_target,
             { "Object Target", "woww.object.target",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_object_target_locked,
-            { "Object Target Locked", "woww.object.target.locked",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -3904,24 +3868,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_source_position_x,
-            { "Source Position X", "woww.source.position.x",
-                FT_FLOAT, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_source_position_y,
-            { "Source Position Y", "woww.source.position.y",
-                FT_FLOAT, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_source_position_z,
-            { "Source Position Z", "woww.source.position.z",
-                FT_FLOAT, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_source_slot,
             { "Source Slot", "woww.source.slot",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
@@ -4597,12 +4543,6 @@
         { &hf_woww_unimplemented,
             { "Unimplemented", "woww.unimplemented",
                 FT_BYTES, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_unit_enemy_target,
-            { "Unit Enemy Target", "woww.unit.enemy.target",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

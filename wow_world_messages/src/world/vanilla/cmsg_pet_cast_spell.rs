@@ -40,7 +40,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(14..=366).contains(&body_size) {
+        if !(14..=330).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F0, size: body_size as u32 });
         }
 

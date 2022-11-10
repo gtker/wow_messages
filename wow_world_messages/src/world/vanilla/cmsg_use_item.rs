@@ -3,7 +3,7 @@ use crate::world::vanilla::SpellCastTargets;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_use_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_use_item.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_use_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_use_item.wowm#L1):
 /// ```text
 /// cmsg CMSG_USE_ITEM = 0x00AB {
 ///     u8 bag_index;
@@ -44,7 +44,7 @@ impl crate::Message for CMSG_USE_ITEM {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(5..=357).contains(&body_size) {
+        if !(5..=321).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size as u32 });
         }
 

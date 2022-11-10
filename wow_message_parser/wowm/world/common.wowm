@@ -56,42 +56,26 @@ flag SpellCastTargetFlags : u16 {
 /* TODO: Probably not valid since flags need || target_flags & other */
 struct SpellCastTargets {
     SpellCastTargetFlags target_flags;
-    if (target_flags & UNIT) {
+    if (target_flags & UNIT /* FLAG_OR || target_flags & TRADE_ITEM || target_flags & UNIT_ENEMY */) {
         PackedGuid unit_target;
     }
-    if (target_flags & UNIT_ENEMY) {
-        PackedGuid unit_enemy_target;
-    }
-    if (target_flags & GAMEOBJECT) {
+    if (target_flags & GAMEOBJECT /* FLAG_OR || target_flags & LOCKED */) {
         PackedGuid object_target;
     }
-    if (target_flags & LOCKED) {
-        PackedGuid object_target_locked;
-    }
-    if (target_flags & ITEM) {
+    if (target_flags & ITEM /* FLAG_OR || target_flags & TRADE_ITEM */) {
         PackedGuid item_target;
     }
-    if (target_flags & TRADE_ITEM) {
-        PackedGuid item_trade_target;
-    }
     if (target_flags & SOURCE_LOCATION) {
-        f32 source_position_x;
-        f32 source_position_y;
-        f32 source_position_z;
+        Vector3d source;
     }
     if (target_flags & DEST_LOCATION) {
-        f32 destination_position_x;
-        f32 destination_position_y;
-        f32 destination_position_z;
+        Vector3d destination;
     }
     if (target_flags & STRING) {
         CString target_string;
     }
-    if (target_flags & CORPSE_ALLY) {
+    if (target_flags & CORPSE_ALLY /* FLAG_OR || target_flags & CORPSE_ENEMY */) {
         PackedGuid corpse_target_ally;
-    }
-    if (target_flags & CORPSE_ENEMY) {
-        PackedGuid corpse_target_enemy;
     }
 } {
     versions = "1.12";
