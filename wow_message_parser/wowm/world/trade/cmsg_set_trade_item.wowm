@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 cmsg CMSG_SET_TRADE_ITEM = 0x011D {
     u8 trade_slot;

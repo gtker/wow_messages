@@ -170,8 +170,6 @@ pub(crate) mod cmsg_send_mail;
 pub use cmsg_send_mail::*;
 pub(crate) mod cmsg_set_trade_gold;
 pub use cmsg_set_trade_gold::*;
-pub(crate) mod cmsg_set_trade_item;
-pub use cmsg_set_trade_item::*;
 pub(crate) mod cmsg_spirit_healer_activate;
 pub use cmsg_spirit_healer_activate::*;
 pub(crate) mod cmsg_summon_response;
@@ -749,6 +747,8 @@ pub use crate::shared::cmsg_set_faction_inactive_vanilla_tbc::CMSG_SET_FACTION_I
 pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
 
 pub use crate::shared::cmsg_set_target_obsolete_vanilla_tbc::CMSG_SET_TARGET_OBSOLETE;
+
+pub use crate::shared::cmsg_set_trade_item_vanilla_tbc_wrath::CMSG_SET_TRADE_ITEM;
 
 pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATCHED_FACTION;
 

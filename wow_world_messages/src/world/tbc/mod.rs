@@ -600,6 +600,8 @@ pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
 
 pub use crate::shared::cmsg_set_target_obsolete_vanilla_tbc::CMSG_SET_TARGET_OBSOLETE;
 
+pub use crate::shared::cmsg_set_trade_item_vanilla_tbc_wrath::CMSG_SET_TRADE_ITEM;
+
 pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATCHED_FACTION;
 
 pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::CMSG_SETSHEATHED;
