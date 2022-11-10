@@ -620,6 +620,8 @@ pub use crate::shared::cmsg_set_ammo_vanilla_tbc_wrath::CMSG_SET_AMMO;
 
 pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
 
+pub use crate::shared::cmsg_set_trade_gold_vanilla_tbc_wrath::CMSG_SET_TRADE_GOLD;
+
 pub use crate::shared::cmsg_set_trade_item_vanilla_tbc_wrath::CMSG_SET_TRADE_ITEM;
 
 pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATCHED_FACTION;
