@@ -360,6 +360,11 @@ impl MajorWorldVersion {
         }
         .to_string()
     }
+
+    const VERSIONS: &'static [Self] = &[Self::Vanilla, Self::BurningCrusade, Self::Wrath];
+    pub(crate) const fn versions() -> &'static [Self] {
+        Self::VERSIONS
+    }
 }
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Clone)]

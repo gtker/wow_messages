@@ -1,13 +1,16 @@
 mod impls;
+mod indices;
 
 pub use impls::*;
+pub use indices::*;
 
 use crate::helper::update_mask_common;
 use crate::helper::update_mask_common::{
-    update_item, update_mask, update_mask_size, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM,
-    PLAYER, UNIT,
+    skill_info, update_item, update_mask, update_mask_size, CONTAINER, CORPSE, DYNAMICOBJECT,
+    GAMEOBJECT, ITEM, PLAYER, UNIT,
 };
 use std::collections::BTreeMap;
+use std::convert::TryFrom;
 use std::io;
 use std::io::Read;
 
@@ -24,3 +27,5 @@ update_item!(
 update_item!(UpdateCorpse, UpdateCorpseBuilder, CORPSE);
 
 update_mask!();
+
+skill_info!(wow_world_base::wrath::Skill, indices::SkillInfoIndex);

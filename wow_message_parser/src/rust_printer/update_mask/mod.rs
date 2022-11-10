@@ -1,8 +1,6 @@
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::parser::types::version::MajorWorldVersion;
-use crate::path_utils::{
-    tbc_update_mask_location, vanilla_update_mask_location, wrath_update_mask_location,
-};
+use crate::path_utils::{update_mask_index_location, update_mask_location};
 use crate::rust_printer::Writer;
 use std::fmt::Write;
 use std::fmt::{Display, Formatter};
@@ -38,6 +36,7 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
                     UfType::Float => "FLOAT",
                     UfType::BytesWith(_, _, _, _) | UfType::Bytes => "BYTES",
                     UfType::TwoShort => "TWO_SHORT",
+                    UfType::Custom { .. } => "CUSTOM",
                 };
 
                 writeln!(
@@ -138,6 +137,7 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     let mut s = Writer::new("");
     s.wln("use crate::Guid;");
     s.wln("use std::convert::TryInto;");
+    s.wln("use super::indices::*;");
     for m in fields {
         if let UfType::BytesWith(a, b, c, d) = m.ty() {
             for ty in [a, b, c, d] {
@@ -174,26 +174,128 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     s
 }
 
+fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
+    let mut s = Writer::new("");
+
+    s.wln("use std::convert::TryFrom;");
+
+    for field in fields {
+        if let UfType::Custom { name, size, .. } = field.ty {
+            assert_eq!(field.size % size, 0);
+            let amount_of_fields = field.size / size;
+
+            let ty_name = format!("{name}Index");
+
+            s.new_enum("pub", &ty_name, |s| {
+                for i in 0..amount_of_fields {
+                    s.wln(format!("Index{i},"));
+                }
+            });
+
+            s.bodyn(format!("impl {ty_name}"), |s| {
+                s.funcn_const("offset(&self)", "u16", |s| {
+                    s.wln(format!("{offset} + self.index()", offset = field.offset));
+                });
+
+                s.funcn_const("index(&self)", "u16", |s| {
+                    s.open_curly("match self");
+
+                    for i in 0..amount_of_fields {
+                        s.wln(format!("Self::Index{i} => {index},", index = i * size));
+                    }
+
+                    s.closing_curly();
+                });
+
+                s.funcn_const("first(&self)", "u16", |s| {
+                    s.wln(format!("{offset} + self.index()", offset = field.offset));
+                });
+
+                s.funcn_const("last(&self)", "u16", |s| {
+                    s.wln(format!("self.first() + {size}"));
+                });
+            });
+
+            s.impl_for("Default", &ty_name, |s| {
+                s.open_curly("fn default() -> Self");
+                s.wln("Self::Index0");
+                s.closing_curly();
+            });
+
+            s.funcn_const(
+                "try_from_inner(value: u16)",
+                format!("Option<{ty_name}>"),
+                |s| {
+                    s.open_curly("Some(match value");
+
+                    for i in 0..amount_of_fields {
+                        s.wln(format!("{i} => {ty_name}::Index{i},"));
+                    }
+
+                    s.wln("_ => return None,");
+
+                    s.closing_curly_with(")"); // match
+                },
+            );
+
+            for from_ty in ["u16", "u32", "u64", "i16", "i32", "i64"] {
+                s.impl_for(format!("TryFrom<{from_ty}>"), &ty_name, |s| {
+                    s.wln(format!("type Error = {from_ty};"));
+                    s.newline();
+
+                    s.open_curly(format!(
+                        "fn try_from(value: {from_ty}) -> Result<Self, Self::Error>"
+                    ));
+                    let cast = if from_ty == "u16" { "" } else { " as u16" };
+
+                    s.wln(format!("try_from_inner(value{cast}).ok_or(value)"));
+
+                    s.closing_curly(); // fn try_from
+                })
+            }
+        }
+    }
+
+    s
+}
+
 pub(crate) fn print_update_mask() {
     print_update_mask_docs();
 
-    let s = print_specific_update_mask(&vanilla_fields::FIELDS, MajorWorldVersion::Vanilla);
-    overwrite_if_not_same_contents(s.inner(), &vanilla_update_mask_location());
+    for version in MajorWorldVersion::versions() {
+        let fields = match version {
+            MajorWorldVersion::Vanilla => vanilla_fields::FIELDS.as_slice(),
+            MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS.as_slice(),
+            MajorWorldVersion::Wrath => wrath_fields::FIELDS.as_slice(),
+        };
 
-    let s = print_specific_update_mask(&tbc_fields::FIELDS, MajorWorldVersion::BurningCrusade);
-    overwrite_if_not_same_contents(s.inner(), &tbc_update_mask_location());
+        let s = print_specific_update_mask(fields, *version);
+        overwrite_if_not_same_contents(s.inner(), &update_mask_location(*version));
 
-    let s = print_specific_update_mask(&wrath_fields::FIELDS, MajorWorldVersion::Wrath);
-    overwrite_if_not_same_contents(s.inner(), &wrath_update_mask_location());
+        let s = print_specific_update_mask_indices(fields);
+        overwrite_if_not_same_contents(s.inner(), &update_mask_index_location(*version));
+    }
 }
 
 fn print_getter(s: &mut Writer, m: &MemberType) {
-    s.open_curly(format!(
-        "pub fn {}_{}(&self) -> Option<{}>",
-        m.object_ty,
-        m.name,
-        m.ty.ty_str(),
-    ));
+    match m.ty() {
+        UfType::Custom { name, .. } => {
+            s.open_curly(format!(
+                "pub fn {}_{}(&self, index: {name}Index) -> Option<{}>",
+                m.object_ty,
+                m.name,
+                m.ty.ty_str(),
+            ));
+        }
+        _ => {
+            s.open_curly(format!(
+                "pub fn {}_{}(&self) -> Option<{}>",
+                m.object_ty,
+                m.name,
+                m.ty.ty_str(),
+            ));
+        }
+    }
 
     match m.ty() {
         UfType::Guid => {
@@ -262,6 +364,9 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
                 s.wln("None");
             },
         ),
+        UfType::Custom { name,  import_location, .. } => {
+            s.wln(format!("{import_location}::{name}::from_range(self.values.range(index.first()..=index.last()))"));
+        }
     }
 
     s.closing_curly_newline(); // pub(crate) fn get_
@@ -275,6 +380,12 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
         m.ty.parameter_str(),
     ));
 
+    print_setter_internals(s, m);
+
+    s.closing_curly_newline(); // pub(crate) fn set_
+}
+
+fn print_setter_internals(s: &mut Writer, m: &MemberType) {
     match m.ty {
         UfType::Guid => {
             s.wln(format!("self.header_set({}, v.guid() as u32);", m.offset));
@@ -282,6 +393,13 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
                 "self.header_set({}, (v.guid() >> 32) as u32);",
                 m.offset + 1
             ));
+        }
+        UfType::Custom { variable_name, .. } => {
+            s.open_curly(format!(
+                "for (index, value) in {variable_name}.mask_values(index)"
+            ));
+            s.wln("self.header_set(index, value);");
+            s.closing_curly();
         }
         _ => {
             let value = match &m.ty {
@@ -312,14 +430,15 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
                         d = d
                     )
                 }
-                _ => unreachable!("Guid has already been checked for in outer match"),
+                UfType::Custom { .. } => {
+                    unreachable!("Guid has already been checked for in outer match")
+                }
+                UfType::Guid => unreachable!("Guid has already been checked for in outer match"),
             };
 
             s.wln(format!("self.header_set({}, {});", m.offset, value));
         }
     }
-
-    s.closing_curly_newline(); // pub(crate) fn set_
 }
 
 fn print_builder_setter(s: &mut Writer, m: &MemberType) {
@@ -330,49 +449,7 @@ fn print_builder_setter(s: &mut Writer, m: &MemberType) {
         m.ty.parameter_str(),
     ));
 
-    match m.ty {
-        UfType::Guid => {
-            s.wln(format!("self.header_set({}, v.guid() as u32);", m.offset));
-            s.wln(format!(
-                "self.header_set({}, (v.guid() >> 32) as u32);",
-                m.offset + 1
-            ));
-        }
-        _ => {
-            let value = match &m.ty {
-                UfType::Int => "v as u32".to_string(),
-                UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
-                UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
-                UfType::TwoShort => "(a as u32) << 16 | b as u32".to_string(),
-                UfType::BytesWith(a, b, c, d) => {
-                    let get_name = |byte_type: &ByteType| -> String {
-                        match byte_type.ty {
-                            ByteInnerTy::Byte => byte_type.name.to_string(),
-                            ByteInnerTy::Ty(_) => {
-                                format!("{name}.as_int()", name = byte_type.name)
-                            }
-                        }
-                    };
-
-                    let a = get_name(a);
-                    let b = get_name(b);
-                    let c = get_name(c);
-                    let d = get_name(d);
-
-                    format!(
-                        "u32::from_le_bytes([{a}, {b}, {c}, {d}])",
-                        a = a,
-                        b = b,
-                        c = c,
-                        d = d
-                    )
-                }
-                UfType::Guid => unreachable!("Guid has already been checked for in outer match"),
-            };
-
-            s.wln(format!("self.header_set({}, {});", m.offset, value));
-        }
-    }
+    print_setter_internals(s, m);
 
     s.wln("self");
     s.closing_curly_newline(); // pub(crate) fn set_
@@ -477,6 +554,12 @@ pub(crate) enum UfType {
     Bytes,
     BytesWith(ByteType, ByteType, ByteType, ByteType),
     TwoShort,
+    Custom {
+        name: &'static str,
+        variable_name: &'static str,
+        import_location: &'static str,
+        size: i32,
+    },
 }
 
 const GUID_TYPE: &str = "Guid";
@@ -499,6 +582,11 @@ impl UfType {
                 c.ty_str(),
                 d.ty_str(),
             ),
+            UfType::Custom {
+                name,
+                import_location,
+                ..
+            } => format!("{import_location}::{name}"),
         }
     }
 
@@ -526,6 +614,15 @@ impl UfType {
                         d.ty_str(),
                     );
                 }
+                UfType::Custom {
+                    name,
+                    variable_name,
+                    import_location,
+                    ..
+                } =>
+                    return format!(
+                        "{variable_name}: {import_location}::{name}, index: {name}Index"
+                    ),
             }
         )
     }

@@ -282,3 +282,82 @@ macro_rules! update_mask {
 
 pub(crate) use update_item;
 pub(crate) use update_mask;
+
+macro_rules! skill_info {
+    ($skill:ty, $index:ty) => {
+        #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
+        pub struct SkillInfo {
+            pub skill: $skill,
+            pub skill_step: u16,
+            pub minimum: u16,
+            pub maximum: u16,
+            pub permanent_bonus: u16,
+            pub temporary_bonus: u16,
+        }
+
+        impl SkillInfo {
+            pub const fn new(
+                skill: $skill,
+                skill_step: u16,
+                minimum: u16,
+                maximum: u16,
+                permanent_bonus: u16,
+                temporary_bonus: u16,
+            ) -> Self {
+                Self {
+                    skill,
+                    skill_step,
+                    minimum,
+                    maximum,
+                    permanent_bonus,
+                    temporary_bonus,
+                }
+            }
+
+            pub(crate) const fn mask_values(&self, index: $index) -> [(u16, u32); 3] {
+                let offset = index.offset();
+
+                [
+                    (
+                        offset,
+                        $crate::util::u16s_to_u32(self.skill.as_int(), self.skill_step),
+                    ),
+                    (
+                        offset + 1,
+                        $crate::util::u16s_to_u32(self.minimum, self.maximum),
+                    ),
+                    (
+                        offset + 2,
+                        $crate::util::u16s_to_u32(self.temporary_bonus, self.permanent_bonus),
+                    ),
+                ]
+            }
+
+            pub(crate) fn from_range<'a>(
+                mut range: impl Iterator<Item = (&'a u16, &'a u32)>,
+            ) -> Option<Self> {
+                let (_, first) = range.next()?;
+                let (_, second) = range.next()?;
+                let (_, third) = range.next()?;
+
+                let (skill, skill_step) = $crate::util::u32_to_u16s(*first);
+                let (minimum, maximum) = $crate::util::u32_to_u16s(*second);
+                let (temporary_bonus, permanent_bonus) = $crate::util::u32_to_u16s(*third);
+                let skill = match <$skill>::try_from(skill) {
+                    Ok(v) => v,
+                    Err(_) => return None,
+                };
+
+                Some(Self {
+                    skill,
+                    skill_step,
+                    minimum,
+                    maximum,
+                    permanent_bonus,
+                    temporary_bonus,
+                })
+            }
+        }
+    };
+}
+pub(crate) use skill_info;

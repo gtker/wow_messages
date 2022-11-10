@@ -65,7 +65,7 @@ pub(crate) fn opcode_to_name_location(version: MajorWorldVersion) -> PathBuf {
         .join("opcode_to_name.rs")
 }
 
-fn update_mask_location(version: MajorWorldVersion) -> PathBuf {
+pub(crate) fn update_mask_location(version: MajorWorldVersion) -> PathBuf {
     workspace_directory()
         .join("wow_world_messages")
         .join("src")
@@ -75,16 +75,14 @@ fn update_mask_location(version: MajorWorldVersion) -> PathBuf {
         .join("impls.rs")
 }
 
-pub(crate) fn vanilla_update_mask_location() -> PathBuf {
-    update_mask_location(MajorWorldVersion::Vanilla)
-}
-
-pub(crate) fn tbc_update_mask_location() -> PathBuf {
-    update_mask_location(MajorWorldVersion::BurningCrusade)
-}
-
-pub(crate) fn wrath_update_mask_location() -> PathBuf {
-    update_mask_location(MajorWorldVersion::Wrath)
+pub(crate) fn update_mask_index_location(version: MajorWorldVersion) -> PathBuf {
+    workspace_directory()
+        .join("wow_world_messages")
+        .join("src")
+        .join("helper")
+        .join(version.module_name())
+        .join("update_mask")
+        .join("indices.rs")
 }
 
 pub(crate) fn path_to_fileinfo(path: &Path) -> String {
