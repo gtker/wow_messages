@@ -1,6 +1,6 @@
 # SMSG_WHOIS
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -25,5 +25,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | - / - | CString | message |  |  |
+| 0x04 | - / - | CString | message |  | vmangos: max CString length allowed: 256 |
 

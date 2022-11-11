@@ -485,6 +485,7 @@ pub mod smsg_time_sync_req_tbc_wrath;
 pub mod smsg_turn_in_petition_results_tbc_wrath;
 pub mod smsg_tutorial_flags_vanilla_tbc_wrath;
 pub mod smsg_update_world_state_vanilla_tbc_wrath;
+pub mod smsg_whois_vanilla_tbc_wrath;
 pub mod spell_cast_target_flags_vanilla_tbc;
 pub mod spell_cast_targets_vanilla_tbc;
 pub mod stable_result_vanilla_tbc;

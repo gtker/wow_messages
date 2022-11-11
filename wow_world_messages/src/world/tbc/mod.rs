@@ -1184,6 +1184,8 @@ pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAG
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
 
+pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;
+
 pub use crate::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags;
 
 pub use crate::shared::spell_cast_targets_vanilla_tbc::SpellCastTargets;

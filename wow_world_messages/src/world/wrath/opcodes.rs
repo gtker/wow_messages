@@ -5137,6 +5137,7 @@ use crate::world::wrath::SMSG_QUEST_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_GAMEOBJECT_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_CREATURE_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_WHO;
+use crate::world::wrath::SMSG_WHOIS;
 use crate::world::wrath::SMSG_CONTACT_LIST;
 use crate::world::wrath::SMSG_GUILD_INVITE;
 use crate::world::wrath::SMSG_GUILD_INFO;
@@ -5390,6 +5391,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GAMEOBJECT_QUERY_RESPONSE(SMSG_GAMEOBJECT_QUERY_RESPONSE),
     SMSG_CREATURE_QUERY_RESPONSE(SMSG_CREATURE_QUERY_RESPONSE),
     SMSG_WHO(SMSG_WHO),
+    SMSG_WHOIS(SMSG_WHOIS),
     SMSG_CONTACT_LIST(SMSG_CONTACT_LIST),
     SMSG_GUILD_INVITE(SMSG_GUILD_INVITE),
     SMSG_GUILD_INFO(SMSG_GUILD_INFO),
@@ -5645,6 +5647,7 @@ impl ServerOpcodeMessage {
             0x005F => Ok(Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(<SMSG_GAMEOBJECT_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x005F, size: body_size, io, } } else { a } })?)),
             0x0061 => Ok(Self::SMSG_CREATURE_QUERY_RESPONSE(<SMSG_CREATURE_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0061, size: body_size, io, } } else { a } })?)),
             0x0063 => Ok(Self::SMSG_WHO(<SMSG_WHO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0063, size: body_size, io, } } else { a } })?)),
+            0x0065 => Ok(Self::SMSG_WHOIS(<SMSG_WHOIS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0065, size: body_size, io, } } else { a } })?)),
             0x0067 => Ok(Self::SMSG_CONTACT_LIST(<SMSG_CONTACT_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0067, size: body_size, io, } } else { a } })?)),
             0x0083 => Ok(Self::SMSG_GUILD_INVITE(<SMSG_GUILD_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0083, size: body_size, io, } } else { a } })?)),
             0x0088 => Ok(Self::SMSG_GUILD_INFO(<SMSG_GUILD_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0088, size: body_size, io, } } else { a } })?)),
@@ -6049,6 +6052,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WHO(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_WHOIS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CONTACT_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_INVITE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_INFO(c) => c.write_encrypted_server(w, e),
@@ -6305,6 +6309,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_WHO(c) => c.write_unencrypted_server(w),
+            Self::SMSG_WHOIS(c) => c.write_unencrypted_server(w),
             Self::SMSG_CONTACT_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_INVITE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_INFO(c) => c.write_unencrypted_server(w),
@@ -6561,6 +6566,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WHO(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_WHOIS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CONTACT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INVITE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6817,6 +6823,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WHO(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_WHOIS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CONTACT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INVITE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INFO(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7073,6 +7080,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WHO(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_WHOIS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CONTACT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INVITE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INFO(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7329,6 +7337,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WHO(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_WHOIS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CONTACT_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INVITE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INFO(c) => c.astd_write_unencrypted_server(w).await,
@@ -7587,6 +7596,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GAMEOBJECT_QUERY_RESPONSE(_) => "SMSG_GAMEOBJECT_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_CREATURE_QUERY_RESPONSE(_) => "SMSG_CREATURE_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_WHO(_) => "SMSG_WHO",
+            ServerOpcodeMessage::SMSG_WHOIS(_) => "SMSG_WHOIS",
             ServerOpcodeMessage::SMSG_CONTACT_LIST(_) => "SMSG_CONTACT_LIST",
             ServerOpcodeMessage::SMSG_GUILD_INVITE(_) => "SMSG_GUILD_INVITE",
             ServerOpcodeMessage::SMSG_GUILD_INFO(_) => "SMSG_GUILD_INFO",
@@ -8098,6 +8108,12 @@ impl From<SMSG_CREATURE_QUERY_RESPONSE> for ServerOpcodeMessage {
 impl From<SMSG_WHO> for ServerOpcodeMessage {
     fn from(c: SMSG_WHO) -> Self {
         Self::SMSG_WHO(c)
+    }
+}
+
+impl From<SMSG_WHOIS> for ServerOpcodeMessage {
+    fn from(c: SMSG_WHOIS) -> Self {
+        Self::SMSG_WHOIS(c)
     }
 }
 

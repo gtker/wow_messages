@@ -1130,6 +1130,8 @@ pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAG
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
 
+pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;
+
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
 pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;

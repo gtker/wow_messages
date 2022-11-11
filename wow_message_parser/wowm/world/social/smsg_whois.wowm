@@ -1,6 +1,8 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_WHOIS = 0x65 {
-    CString message;
+    CString message {
+        comment = "vmangos: max CString length allowed: 256";
+    }
 }
 
