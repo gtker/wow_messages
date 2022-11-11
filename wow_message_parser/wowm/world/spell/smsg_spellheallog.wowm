@@ -1,10 +1,37 @@
-#tag_all versions "1.12";
-
 smsg SMSG_SPELLHEALLOG = 0x0150 {
-    PackedGuid victim_guid;
-    PackedGuid caster_guid;
+    PackedGuid victim;
+    PackedGuid caster;
     Spell id;
     u32 damage;
     Bool critical;
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_SPELLHEALLOG = 0x0150 {
+    PackedGuid victim;
+    PackedGuid caster;
+    Spell id;
+    u32 damage;
+    Bool critical;
+    u8 unknown {
+        comment = "mangosone: unused in client?";
+    }
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_SPELLHEALLOG = 0x0150 {
+    PackedGuid victim;
+    PackedGuid caster;
+    Spell id;
+    u32 damage;
+    u32 overheal;
+    u32 absorb;
+    Bool critical;
+    u8 unknown {
+        comment = "mangostwo: unused in client?";
+    }
+} {
+    versions = "3.3.5";
+}

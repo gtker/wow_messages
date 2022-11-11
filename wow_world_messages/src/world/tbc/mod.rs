@@ -1360,6 +1360,8 @@ pub(crate) mod smsg_spell_go;
 pub use smsg_spell_go::*;
 pub(crate) mod smsg_spell_start;
 pub use smsg_spell_start::*;
+pub(crate) mod smsg_spellheallog;
+pub use smsg_spellheallog::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
 pub(crate) mod smsg_trade_status;
