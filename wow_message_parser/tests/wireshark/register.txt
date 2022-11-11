@@ -2446,6 +2446,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_loot_slot_type,
+            { "Loot Slot Type", "woww.loot.slot.type",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_loot_slot_type_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_looted_target_guid,
             { "Looted Target Guid", "woww.looted.target.guid",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,

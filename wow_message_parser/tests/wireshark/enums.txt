@@ -2925,6 +2925,22 @@ static const value_string e_guild_member_status_strings[] =  {
 };
 
 typedef enum {
+    LOOT_SLOT_TYPE_TYPE_ALLOW_LOOT = 0x0,
+    LOOT_SLOT_TYPE_TYPE_ROLL_ONGOING = 0x1,
+    LOOT_SLOT_TYPE_TYPE_MASTER = 0x2,
+    LOOT_SLOT_TYPE_TYPE_LOCKED = 0x3,
+    LOOT_SLOT_TYPE_TYPE_OWNER = 0x4,
+} e_loot_slot_type;
+static const value_string e_loot_slot_type_strings[] =  {
+    { LOOT_SLOT_TYPE_TYPE_ALLOW_LOOT, "Type Allow Loot" },
+    { LOOT_SLOT_TYPE_TYPE_ROLL_ONGOING, "Type Roll Ongoing" },
+    { LOOT_SLOT_TYPE_TYPE_MASTER, "Type Master" },
+    { LOOT_SLOT_TYPE_TYPE_LOCKED, "Type Locked" },
+    { LOOT_SLOT_TYPE_TYPE_OWNER, "Type Owner" },
+    { 0, NULL }
+};
+
+typedef enum {
     MAIL_TYPE_NORMAL = 0x0,
     MAIL_TYPE_AUCTION = 0x2,
     MAIL_TYPE_CREATURE = 0x3,

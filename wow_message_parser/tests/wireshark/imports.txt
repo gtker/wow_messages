@@ -406,6 +406,7 @@ static int hf_woww_loot = -1;
 static int hf_woww_loot_master = -1;
 static int hf_woww_loot_method = -1;
 static int hf_woww_loot_slot = -1;
+static int hf_woww_loot_slot_type = -1;
 static int hf_woww_looted_target_guid = -1;
 static int hf_woww_loyalty = -1;
 static int hf_woww_mail_id = -1;

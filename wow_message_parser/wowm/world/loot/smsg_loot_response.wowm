@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum LootMethod : u8 {
     CORPSE                 = 1;
     PICKPOCKETING          = 2;
@@ -17,10 +15,44 @@ enum LootMethod : u8 {
     INSIGNIA               = 22 {
         comment = "unsupported by client, send LOOT_CORPSE instead";
     }
+} {
+    versions = "1.12";
+}
+
+enum LootSlotType : u8 {
+    TYPE_ALLOW_LOOT = 0 {
+        comment = " player can loot the item.";
+    }
+    TYPE_ROLL_ONGOING = 1 {
+        comment = " roll is ongoing. player cannot loot.";
+    }
+    TYPE_MASTER = 2 {
+        comment = " item can only be distributed by group loot master.";
+    }
+    TYPE_LOCKED = 3 {
+        comment = " item is shown in red. player cannot loot.";
+    }
+    TYPE_OWNER = 4 {
+        comment = " ignore binding confirmation and etc, for single player looting";
+    }
+} {
+    versions = "1.12";
+}
+
+struct LootItem {
+    u8 index;
+    Item item;
+    LootSlotType ty;
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_LOOT_RESPONSE = 0x0160 {
     Guid guid;
     LootMethod loot_method;
+    u32 gold;
+    u8 amount_of_items;
+    LootItem[amount_of_items] items;
+} {
+    versions = "1.12";
 }
-
