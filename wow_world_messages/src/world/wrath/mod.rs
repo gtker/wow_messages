@@ -1348,6 +1348,8 @@ pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_stable_result;
 pub use smsg_stable_result::*;
+pub(crate) mod smsg_superceded_spell;
+pub use smsg_superceded_spell::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
 pub(crate) mod smsg_trade_status;

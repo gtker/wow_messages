@@ -1214,6 +1214,8 @@ pub use crate::shared::smsg_stable_result_vanilla_tbc::SMSG_STABLE_RESULT;
 
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
+pub use crate::shared::smsg_superceded_spell_vanilla_tbc::SMSG_SUPERCEDED_SPELL;
+
 pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STATUS;
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
@@ -1564,8 +1566,6 @@ pub(crate) mod smsg_stop_mirror_timer;
 pub use smsg_stop_mirror_timer::*;
 pub(crate) mod smsg_summon_request;
 pub use smsg_summon_request::*;
-pub(crate) mod smsg_superceded_spell;
-pub use smsg_superceded_spell::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
 pub(crate) mod smsg_trade_status;

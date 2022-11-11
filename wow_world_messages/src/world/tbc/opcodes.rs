@@ -5071,6 +5071,7 @@ use crate::world::tbc::SMSG_SET_PROFICIENCY;
 use crate::world::tbc::SMSG_ACTION_BUTTONS;
 use crate::world::tbc::SMSG_INITIAL_SPELLS;
 use crate::world::tbc::SMSG_LEARNED_SPELL;
+use crate::world::tbc::SMSG_SUPERCEDED_SPELL;
 use crate::world::tbc::SMSG_PET_CAST_FAILED;
 use crate::world::tbc::SMSG_AI_REACTION;
 use crate::world::tbc::SMSG_ATTACKSTART;
@@ -5325,6 +5326,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ACTION_BUTTONS(SMSG_ACTION_BUTTONS),
     SMSG_INITIAL_SPELLS(SMSG_INITIAL_SPELLS),
     SMSG_LEARNED_SPELL(SMSG_LEARNED_SPELL),
+    SMSG_SUPERCEDED_SPELL(SMSG_SUPERCEDED_SPELL),
     SMSG_PET_CAST_FAILED(SMSG_PET_CAST_FAILED),
     SMSG_AI_REACTION(SMSG_AI_REACTION),
     SMSG_ATTACKSTART(SMSG_ATTACKSTART),
@@ -5581,6 +5583,7 @@ impl ServerOpcodeMessage {
             0x0129 => Ok(Self::SMSG_ACTION_BUTTONS(<SMSG_ACTION_BUTTONS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0129, size: body_size, io, } } else { a } })?)),
             0x012A => Ok(Self::SMSG_INITIAL_SPELLS(<SMSG_INITIAL_SPELLS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x012A, size: body_size, io, } } else { a } })?)),
             0x012B => Ok(Self::SMSG_LEARNED_SPELL(<SMSG_LEARNED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x012B, size: body_size, io, } } else { a } })?)),
+            0x012C => Ok(Self::SMSG_SUPERCEDED_SPELL(<SMSG_SUPERCEDED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x012C, size: body_size, io, } } else { a } })?)),
             0x0138 => Ok(Self::SMSG_PET_CAST_FAILED(<SMSG_PET_CAST_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0138, size: body_size, io, } } else { a } })?)),
             0x013C => Ok(Self::SMSG_AI_REACTION(<SMSG_AI_REACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013C, size: body_size, io, } } else { a } })?)),
             0x0143 => Ok(Self::SMSG_ATTACKSTART(<SMSG_ATTACKSTART as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0143, size: body_size, io, } } else { a } })?)),
@@ -5905,6 +5908,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACTION_BUTTONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INITIAL_SPELLS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LEARNED_SPELL(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SUPERCEDED_SPELL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_CAST_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AI_REACTION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSTART(c) => c.write_encrypted_server(w, e),
@@ -6162,6 +6166,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACTION_BUTTONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_INITIAL_SPELLS(c) => c.write_unencrypted_server(w),
             Self::SMSG_LEARNED_SPELL(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SUPERCEDED_SPELL(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_CAST_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_AI_REACTION(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSTART(c) => c.write_unencrypted_server(w),
@@ -6419,6 +6424,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACTION_BUTTONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INITIAL_SPELLS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LEARNED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SUPERCEDED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_CAST_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AI_REACTION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6676,6 +6682,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACTION_BUTTONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INITIAL_SPELLS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LEARNED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SUPERCEDED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_CAST_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AI_REACTION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_unencrypted_server(w).await,
@@ -6933,6 +6940,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACTION_BUTTONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INITIAL_SPELLS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LEARNED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SUPERCEDED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_CAST_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AI_REACTION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTART(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7190,6 +7198,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACTION_BUTTONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INITIAL_SPELLS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LEARNED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SUPERCEDED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_CAST_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AI_REACTION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTART(c) => c.astd_write_unencrypted_server(w).await,
@@ -7449,6 +7458,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ACTION_BUTTONS(_) => "SMSG_ACTION_BUTTONS",
             ServerOpcodeMessage::SMSG_INITIAL_SPELLS(_) => "SMSG_INITIAL_SPELLS",
             ServerOpcodeMessage::SMSG_LEARNED_SPELL(_) => "SMSG_LEARNED_SPELL",
+            ServerOpcodeMessage::SMSG_SUPERCEDED_SPELL(_) => "SMSG_SUPERCEDED_SPELL",
             ServerOpcodeMessage::SMSG_PET_CAST_FAILED(_) => "SMSG_PET_CAST_FAILED",
             ServerOpcodeMessage::SMSG_AI_REACTION(_) => "SMSG_AI_REACTION",
             ServerOpcodeMessage::SMSG_ATTACKSTART(_) => "SMSG_ATTACKSTART",
@@ -8176,6 +8186,12 @@ impl From<SMSG_INITIAL_SPELLS> for ServerOpcodeMessage {
 impl From<SMSG_LEARNED_SPELL> for ServerOpcodeMessage {
     fn from(c: SMSG_LEARNED_SPELL) -> Self {
         Self::SMSG_LEARNED_SPELL(c)
+    }
+}
+
+impl From<SMSG_SUPERCEDED_SPELL> for ServerOpcodeMessage {
+    fn from(c: SMSG_SUPERCEDED_SPELL) -> Self {
+        Self::SMSG_SUPERCEDED_SPELL(c)
     }
 }
 
