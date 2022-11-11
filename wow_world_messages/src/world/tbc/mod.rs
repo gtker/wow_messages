@@ -236,6 +236,8 @@ pub use crate::shared::buy_result_vanilla_tbc_wrath::BuyResult;
 
 pub use crate::shared::buyback_slot_vanilla_tbc_wrath::BuybackSlot;
 
+pub use crate::shared::cast_flags_vanilla_tbc::CastFlags;
+
 pub use crate::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
 
 pub use crate::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
@@ -1344,6 +1346,8 @@ pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
 pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
+pub(crate) mod smsg_spell_start;
+pub use smsg_spell_start::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
 pub(crate) mod smsg_trade_status;

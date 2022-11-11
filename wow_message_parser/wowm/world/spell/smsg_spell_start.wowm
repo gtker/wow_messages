@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg SMSG_SPELL_START = 0x0131 {
     PackedGuid cast_item {
         comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
@@ -13,5 +11,49 @@ smsg SMSG_SPELL_START = 0x0131 {
         u32 ammo_display_id;
         u32 ammo_inventory_type;
     }
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_SPELL_START = 0x0131 {
+    PackedGuid cast_item {
+        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
+    }
+    PackedGuid caster;
+    Spell spell;
+    u8 cast_count;
+    CastFlags flags;
+    u32 timer;
+    SpellCastTargets targets;
+    if (flags & AMMO) {
+        u32 ammo_display_id;
+        u32 ammo_inventory_type;
+    }
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_SPELL_START = 0x0131 {
+    PackedGuid cast_item {
+        comment = "cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.";
+    }
+    PackedGuid caster;
+    u8 cast_count;
+    Spell spell;
+    CastFlags flags;
+    u32 timer;
+    SpellCastTargets targets;
+    if(flags & POWER_LEFT_SELF) {
+        (u32)Power power;
+    }
+    if (flags & AMMO) {
+        u32 ammo_display_id;
+        u32 ammo_inventory_type;
+    }
+    if (flags & UNKNOWN_23) {
+        u32 unknown1;
+        u32 unknown2;
+    }
+} {
+    versions = "3.3.5";
+}

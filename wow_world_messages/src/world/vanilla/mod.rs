@@ -26,8 +26,6 @@ pub(crate) mod bg_type_id;
 pub use bg_type_id::*;
 pub(crate) mod cast_failure_reason;
 pub use cast_failure_reason::*;
-pub(crate) mod cast_flags;
-pub use cast_flags::*;
 pub(crate) mod character;
 pub use character::*;
 pub(crate) mod character_flags;
@@ -361,6 +359,8 @@ pub use crate::shared::buy_bank_slot_result_vanilla_tbc_wrath::BuyBankSlotResult
 pub use crate::shared::buy_result_vanilla_tbc_wrath::BuyResult;
 
 pub use crate::shared::buyback_slot_vanilla_tbc_wrath::BuybackSlot;
+
+pub use crate::shared::cast_flags_vanilla_tbc::CastFlags;
 
 pub use crate::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
 

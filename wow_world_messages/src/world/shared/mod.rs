@@ -9,6 +9,7 @@ pub mod billing_plan_flags_tbc_wrath;
 pub mod buy_bank_slot_result_vanilla_tbc_wrath;
 pub mod buy_result_vanilla_tbc_wrath;
 pub mod buyback_slot_vanilla_tbc_wrath;
+pub mod cast_flags_vanilla_tbc;
 pub mod channel_flags_vanilla_tbc_wrath;
 pub mod channel_member_flags_vanilla_tbc_wrath;
 pub mod channel_member_vanilla_tbc_wrath;

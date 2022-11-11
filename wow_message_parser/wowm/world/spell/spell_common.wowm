@@ -59,5 +59,7 @@ flag CastFlags : u16 {
     }
     UNKNOWN8 = 0x00000080;
     UNKNOWN9 = 0x00000100;
+} {
+    versions = "2";
 }
 

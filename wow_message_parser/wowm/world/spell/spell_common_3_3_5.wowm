@@ -1,0 +1,47 @@
+flag CastFlags : u32 {
+    NONE               = 0x00000000;
+    PENDING            = 0x00000001 {
+        comment = "aoe combat log?";
+    }
+    HAS_TRAJECTORY     = 0x00000002;
+    UNKNOWN_3          = 0x00000004;
+    UNKNOWN_4          = 0x00000008 {
+        comment = "ignore AOE visual";
+    }
+    UNKNOWN_5          = 0x00000010;
+    AMMO               = 0x00000020 {
+        comment = "Projectiles visual";
+    }
+    UNKNOWN_7          = 0x00000040;
+    UNKNOWN_8          = 0x00000080;
+    UNKNOWN_9          = 0x00000100;
+    UNKNOWN_10         = 0x00000200;
+    UNKNOWN_11         = 0x00000400;
+    POWER_LEFT_SELF    = 0x00000800;
+    UNKNOWN_13         = 0x00001000;
+    UNKNOWN_14         = 0x00002000;
+    UNKNOWN_15         = 0x00004000;
+    UNKNOWN_16         = 0x00008000;
+    UNKNOWN_17         = 0x00010000;
+    ADJUST_MISSILE     = 0x00020000;
+    NO_GCD             = 0x00040000 {
+        comment = "no GCD for spell casts from charm/summon (vehicle spells is an example)";
+    }
+    VISUAL_CHAIN       = 0x00080000;
+    UNKNOWN_21         = 0x00100000;
+    RUNE_LIST          = 0x00200000;
+    UNKNOWN_23         = 0x00400000;
+    UNKNOWN_24         = 0x00800000;
+    UNKNOWN_25         = 0x01000000;
+    UNKNOWN_26         = 0x02000000;
+    IMMUNITY           = 0x04000000;
+    UNKNOWN_28         = 0x08000000;
+    UNKNOWN_29         = 0x10000000;
+    UNKNOWN_30         = 0x20000000;
+    HEAL_PREDICTION    = 0x40000000 {
+        comment = "Unused on TC 3.3.5a. Defined from TC Master.";
+    }
+    UNKNOWN_32         = 0x80000000;
+} {
+    versions = "3.3.5";
+}
