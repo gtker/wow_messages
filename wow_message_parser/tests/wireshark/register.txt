@@ -3994,12 +3994,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_spell_ppm_rate,
-            { "Spell Ppm Rate", "woww.spell.ppm.rate",
-                FT_FLOAT, BASE_NONE, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_spell_school,
             { "Spell School", "woww.spell.school",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_spell_school_strings), 0,

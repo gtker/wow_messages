@@ -11,7 +11,7 @@ use crate::world::vanilla::Skill;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L28):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L31):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -290,7 +290,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(4..=1752).contains(&body_size) {
+        if !(4..=1732).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0058, size: body_size as u32 });
         }
 
@@ -593,7 +593,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // delay: u32
             + 4 // ammo_type: u32
             + 4 // ranged_range_modification: f32
-            + 5 * 28 // spells: ItemSpells[5]
+            + 5 * 24 // spells: ItemSpells[5]
             + 4 // bonding: u32
             + found.description.len() + 1 // description: CString
             + 4 // page_text: u32
@@ -715,7 +715,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // delay: u32
         + 4 // ammo_type: u32
         + 4 // ranged_range_modification: f32
-        + 5 * 28 // spells: ItemSpells[5]
+        + 5 * 24 // spells: ItemSpells[5]
         + 4 // bonding: u32
         + self.description.len() + 1 // description: CString
         + 4 // page_text: u32

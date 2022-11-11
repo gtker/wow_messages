@@ -1,15 +1,14 @@
-#tag_all versions "1.12";
-
 struct ItemSpells {
     Spell spell;   
     u32 spell_trigger;
     i32 spell_charges {
         comment = "let the database control the sign here. negative means that the item should be consumed once the charges are consumed.";
     }
-    f32 spell_ppm_rate;
     i32 spell_cooldown;
     u32 spell_category;
     i32 spell_category_cooldown;
+} {
+    versions = "1.12";
 }
 
 struct ItemDamageType {
@@ -18,11 +17,15 @@ struct ItemDamageType {
     u32 damage_type {
         comment = "mangoszero/vmangos/cmangos: id from Resistances.dbc";
     }
+} {
+    versions = "1.12";
 }
 
 struct ItemStat {
     u32 item_stat_type;
     i32 item_stat_value;
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
@@ -104,5 +107,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     } {
         comment = "mangos doesn't send this if item doesn't exist";
     }
+} {
+    versions = "1.12";
 }
 

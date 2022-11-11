@@ -4258,7 +4258,6 @@
                     ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_trigger, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_charges, 4, ENC_LITTLE_ENDIAN);
-                    ptvcursor_add(ptv, hf_woww_spell_ppm_rate, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_cooldown, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_category, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_category_cooldown, 4, ENC_LITTLE_ENDIAN);

@@ -664,7 +664,6 @@ static int hf_woww_spell_id = -1;
 static int hf_woww_spell_index = -1;
 static int hf_woww_spell_miss_info = -1;
 static int hf_woww_spell_on_lowest_slot = -1;
-static int hf_woww_spell_ppm_rate = -1;
 static int hf_woww_spell_school = -1;
 static int hf_woww_spell_school_mask = -1;
 static int hf_woww_spell_trigger = -1;
