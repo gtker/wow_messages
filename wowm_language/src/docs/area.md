@@ -2194,6 +2194,7 @@ Used in:
 * [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
+* [WhoPlayer](whoplayer.md)
 
 # Area
 
