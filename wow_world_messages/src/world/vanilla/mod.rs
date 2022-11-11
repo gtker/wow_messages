@@ -1228,6 +1228,8 @@ pub use crate::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags
 
 pub use crate::shared::spell_cast_targets_vanilla_tbc::SpellCastTargets;
 
+pub use crate::shared::spell_miss_info_vanilla_tbc::SpellMissInfo;
+
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
@@ -1612,8 +1614,6 @@ pub(crate) mod spell_log;
 pub use spell_log::*;
 pub(crate) mod spell_miss;
 pub use spell_miss::*;
-pub(crate) mod spell_miss_info;
-pub use spell_miss_info::*;
 pub(crate) mod spell_school;
 pub use spell_school::*;
 pub(crate) mod spline_flag;

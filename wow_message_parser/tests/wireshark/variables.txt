@@ -53,6 +53,7 @@
     guint32 map = 0;
     guint32 mask = 0;
     guint32 message_type = 0;
+    guint32 miss_info = 0;
     guint32 node_count = 0;
     guint32 number_of_battlegrounds = 0;
     guint32 reason = 0;

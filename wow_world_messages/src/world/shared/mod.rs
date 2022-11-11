@@ -501,6 +501,7 @@ pub mod smsg_update_world_state_vanilla_tbc_wrath;
 pub mod smsg_whois_vanilla_tbc_wrath;
 pub mod spell_cast_target_flags_vanilla_tbc;
 pub mod spell_cast_targets_vanilla_tbc;
+pub mod spell_miss_info_vanilla_tbc;
 pub mod stable_result_vanilla_tbc;
 pub mod stabled_pet_vanilla_tbc_wrath;
 pub mod trade_slot_tbc_wrath;

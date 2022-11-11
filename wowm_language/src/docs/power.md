@@ -67,5 +67,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `HEALTH` | 254 (0xFE) |  |  |
 
 Used in:
+* [SMSG_SPELL_GO](smsg_spell_go.md)
 * [SMSG_SPELL_START](smsg_spell_start.md)
 

@@ -1218,6 +1218,8 @@ pub use crate::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags
 
 pub use crate::shared::spell_cast_targets_vanilla_tbc::SpellCastTargets;
 
+pub use crate::shared::spell_miss_info_vanilla_tbc::SpellMissInfo;
+
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
@@ -1346,6 +1348,8 @@ pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
 pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
+pub(crate) mod smsg_spell_go;
+pub use smsg_spell_go::*;
 pub(crate) mod smsg_spell_start;
 pub use smsg_spell_start::*;
 pub(crate) mod smsg_text_emote;
@@ -1366,6 +1370,8 @@ pub(crate) mod smsg_zone_under_attack;
 pub use smsg_zone_under_attack::*;
 pub(crate) mod spell_cast_result;
 pub use spell_cast_result::*;
+pub(crate) mod spell_miss;
+pub use spell_miss::*;
 pub(crate) mod spline_flag;
 pub use spline_flag::*;
 pub(crate) mod transfer_abort_reason;

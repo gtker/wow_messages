@@ -84,6 +84,7 @@
 - [FarSightOperation](docs/farsightoperation.md)
 - [FriendResult](docs/friendresult.md)
 - [FriendStatus](docs/friendstatus.md)
+- [GameobjectCastFlags](docs/gameobjectcastflags.md)
 - [Gender](docs/gender.md)
 - [GmTicketEscalationStatus](docs/gmticketescalationstatus.md)
 - [GmTicketQueueStatus](docs/gmticketqueuestatus.md)
