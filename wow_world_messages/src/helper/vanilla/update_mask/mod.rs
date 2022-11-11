@@ -86,9 +86,9 @@ mod test {
             1, // UNIT_FIELD_BYTES[1] // Class (Warrior)
             1, // UNIT_FIELD_BYTES[2] // Gender (Female)
             1, // UNIT_FIELD_BYTES[3] // Power (Rage)
-            5, 0, 98, 0, // PLAYER_SKILL_INFO_1_1
-            46, 1, 44, 1, // PLAYER_SKILL_INFO_1_2
-            7, 0, 10, 0, // PLAYER_SKILL_INFO_1_3
+            98, 0, 5, 0, // PLAYER_SKILL_INFO_1_1
+            44, 1, 46, 1, // PLAYER_SKILL_INFO_1_2
+            10, 0, 7, 0, // PLAYER_SKILL_INFO_1_3
         ];
 
         let skill_info = SkillInfo::new(Skill::LanguageCommon, 5, 300, 302, 7, 10);

@@ -320,15 +320,15 @@ macro_rules! skill_info {
                 [
                     (
                         offset,
-                        $crate::util::u16s_to_u32(self.skill.as_int(), self.skill_step),
+                        $crate::util::u16s_to_u32(self.skill_step, self.skill.as_int()),
                     ),
                     (
                         offset + 1,
-                        $crate::util::u16s_to_u32(self.minimum, self.maximum),
+                        $crate::util::u16s_to_u32(self.maximum, self.minimum),
                     ),
                     (
                         offset + 2,
-                        $crate::util::u16s_to_u32(self.temporary_bonus, self.permanent_bonus),
+                        $crate::util::u16s_to_u32(self.permanent_bonus, self.temporary_bonus),
                     ),
                 ]
             }
@@ -340,9 +340,9 @@ macro_rules! skill_info {
                 let (_, second) = range.next()?;
                 let (_, third) = range.next()?;
 
-                let (skill, skill_step) = $crate::util::u32_to_u16s(*first);
-                let (minimum, maximum) = $crate::util::u32_to_u16s(*second);
-                let (temporary_bonus, permanent_bonus) = $crate::util::u32_to_u16s(*third);
+                let (skill_step, skill) = $crate::util::u32_to_u16s(*first);
+                let (maximum, minimum) = $crate::util::u32_to_u16s(*second);
+                let (permanent_bonus, temporary_bonus) = $crate::util::u32_to_u16s(*third);
                 let skill = match <$skill>::try_from(skill) {
                     Ok(v) => v,
                     Err(_) => return None,
