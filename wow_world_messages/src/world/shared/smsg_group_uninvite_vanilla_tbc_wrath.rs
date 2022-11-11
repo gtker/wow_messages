@@ -33,3 +33,9 @@ impl crate::Message for SMSG_GROUP_UNINVITE {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_GROUP_UNINVITE {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_GROUP_UNINVITE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_GROUP_UNINVITE {}
+
