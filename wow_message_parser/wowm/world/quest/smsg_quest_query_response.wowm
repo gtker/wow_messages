@@ -6,7 +6,14 @@ struct QuestObjective {
     u32 required_item_id;
     u32 required_item_count;
 } {
-    versions = "1.12";
+    versions = "1 2 3";
+}
+
+struct QuestItemRequirement {
+    Item item;
+    u32 count;
+} {
+    versions = "3.3.5";
 }
 
 smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
@@ -52,4 +59,126 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     CString[4] objective_texts;
 } {
     versions = "1.12";
+}
+
+smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
+    u32 quest_id;
+    u32 quest_method {
+        comment = "Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)";
+    }
+    u32 quest_level;
+    u32 zone_or_sort;
+    u32 quest_type;
+    u32 suggest_player_amount;
+    u32 reputation_objective_faction {
+        comment = "cmangos: shown in quest log as part of quest objective";
+    }
+    u32 reputation_objective_value {
+        comment = "cmangos: shown in quest log as part of quest objective";
+    }
+    u32 required_opposite_faction {
+        comment = "cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0";
+    }
+    u32 required_opposite_reputation_value {
+        comment = "cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0";
+    }
+    u32 next_quest_in_chain;
+    u32 money_reward;
+    u32 max_level_money_reward {
+        comment = "cmangos: used in XP calculation at client";
+    }
+    u32 reward_spell {
+        comment = "cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0)";
+    }
+    u32 casted_reward_spell {
+        comment = "mangosone: casted spell";
+    }
+    u32 honor_reward;
+    u32 source_item_id;
+    u32 quest_flags;
+    u32 title_reward {
+        comment = "CharTitleId, new 2.4.0, player gets this title (id from CharTitles)";
+    }
+    QuestItemReward[4] rewards;
+    QuestItemReward[6] choice_rewards;
+    u32 point_map_id;
+    Vector2d position;
+    u32 point_opt;
+    CString title;
+    CString objective_text;
+    CString details;
+    CString end_text;
+    QuestObjective[4] objectives;
+    CString[4] objective_texts;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
+    u32 quest_id;
+    u32 quest_method {
+        comment = "Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)";
+    }
+    u32 quest_level;
+    u32 minimum_quest_level {
+        comment = "min required level to obtain (added for 3.3).";
+        comment = "Assumed allowed (database) range is -1 to 255 (still using uint32, since negative value would not be of any known use for client)";
+    }
+    u32 zone_or_sort;
+    u32 quest_type;
+    u32 suggest_player_amount;
+    u32 reputation_objective_faction {
+        comment = "cmangos: shown in quest log as part of quest objective";
+    }
+    u32 reputation_objective_value {
+        comment = "cmangos: shown in quest log as part of quest objective";
+    }
+    u32 required_opposite_faction {
+        comment = "cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0";
+    }
+    u32 required_opposite_reputation_value {
+        comment = "cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0";
+    }
+    u32 next_quest_in_chain;
+    u32 money_reward;
+    u32 max_level_money_reward {
+        comment = "cmangos: used in XP calculation at client";
+    }
+    u32 reward_spell {
+        comment = "cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0)";
+    }
+    u32 casted_reward_spell {
+        comment = "mangosone: casted spell";
+    }
+    u32 honor_reward;
+    f32 honor_reward_multiplier {
+        comment = "new reward honor (multiplied by around 62 at client side)";
+    }
+    u32 source_item_id;
+    u32 quest_flags;
+    u32 title_reward {
+        comment = "CharTitleId, new 2.4.0, player gets this title (id from CharTitles)";
+    }
+    u32 players_slain;
+    u32 bonus_talents;
+    u32 bonus_arena_points;
+    u32 unknown1;
+    QuestItemReward[4] rewards;
+    QuestItemReward[6] choice_rewards;
+    u32[5] reputation_rewards;
+    u32[5] reputation_reward_amounts;
+    u32[5] reputation_reward_overrides;
+    u32 point_map_id;
+    Vector2d position;
+    u32 point_opt;
+    CString title;
+    CString objective_text;
+    CString details;
+    CString end_text;
+    CString completed_text;
+    QuestObjective[4] objectives;
+    QuestItemRequirement[6] item_requirements;
+    CString[4] objective_texts;
+} {
+    versions = "3.3.5";
 }

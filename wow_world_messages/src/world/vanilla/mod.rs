@@ -920,7 +920,11 @@ pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
+pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
+
 pub use crate::shared::quest_item_vanilla_tbc::QuestItem;
+
+pub use crate::shared::quest_objective_vanilla_tbc_wrath::QuestObjective;
 
 pub use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 
@@ -1242,10 +1246,6 @@ pub(crate) mod quest_giver_status;
 pub use quest_giver_status::*;
 pub(crate) mod quest_item_requirement;
 pub use quest_item_requirement::*;
-pub(crate) mod quest_item_reward;
-pub use quest_item_reward::*;
-pub(crate) mod quest_objective;
-pub use quest_objective::*;
 pub(crate) mod race;
 pub use race::*;
 pub(crate) mod raid_group_error;

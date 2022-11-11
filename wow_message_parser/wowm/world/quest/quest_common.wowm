@@ -175,6 +175,6 @@ struct QuestItemReward {
     Item item;
     u32 item_count;
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }
 

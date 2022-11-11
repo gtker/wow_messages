@@ -860,6 +860,10 @@ pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
+pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
+
+pub use crate::shared::quest_objective_vanilla_tbc_wrath::QuestObjective;
+
 pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 
 pub use crate::shared::received_mail_tbc_wrath::ReceivedMail;
@@ -1144,6 +1148,8 @@ pub(crate) mod quest_giver_status;
 pub use quest_giver_status::*;
 pub(crate) mod quest_item;
 pub use quest_item::*;
+pub(crate) mod quest_item_requirement;
+pub use quest_item_requirement::*;
 pub(crate) mod quest_party_message;
 pub use quest_party_message::*;
 pub(crate) mod race;
@@ -1282,6 +1288,8 @@ pub(crate) mod smsg_query_time_response;
 pub use smsg_query_time_response::*;
 pub(crate) mod smsg_quest_force_remove;
 pub use smsg_quest_force_remove::*;
+pub(crate) mod smsg_quest_query_response;
+pub use smsg_quest_query_response::*;
 pub(crate) mod smsg_questgiver_quest_failed;
 pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;
