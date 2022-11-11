@@ -3210,13 +3210,7 @@
         },
         { &hf_woww_power,
             { "Power", "woww.power",
-                FT_UINT8, BASE_HEX_DEC, VALS(e_power_strings), 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_power_type,
-            { "Power Type", "woww.power.type",
-                FT_UINT32, BASE_HEX_DEC, VALS(e_power_type_strings), 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_power_strings), 0,
                 NULL, HFILL
             }
         },

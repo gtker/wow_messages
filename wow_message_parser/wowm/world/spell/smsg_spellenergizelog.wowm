@@ -1,31 +1,19 @@
-#tag_all versions "1.12";
-
-enum PowerType : u32 {
-    MANA = 0 {
-        comment = "UNIT_FIELD_POWER1";
-    }
-    RAGE = 1 {
-        comment = "UNIT_FIELD_POWER2";
-    }
-    FOCUS = 2 {
-        comment = "UNIT_FIELD_POWER3";
-    }
-    ENERGY = 3 {
-        comment = "UNIT_FIELD_POWER4";
-    }
-    HAPPINESS = 4 {
-        comment = "UNIT_FIELD_POWER5";
-    }
-    HEALTH = 0xFFFFFFFE {
-        comment = "(-2 as signed value)";
-    }
+smsg SMSG_SPELLENERGIZELOG = 0x0151 {
+    PackedGuid victim;
+    PackedGuid caster;
+    Spell spell;
+    (u32)Power power;
+    u32 damage;
+} {
+    versions = "1 2";
 }
 
 smsg SMSG_SPELLENERGIZELOG = 0x0151 {
-    PackedGuid victim_guid;
-    PackedGuid caster_guid;
+    PackedGuid victim;
+    PackedGuid caster;
     Spell spell;
-    PowerType power;
+    (u32)Power power;
     u32 damage;
+} {
+    versions = "3";
 }
-

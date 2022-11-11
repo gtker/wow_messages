@@ -1,6 +1,6 @@
 # Power
 
-## Client Version 1.12, Client Version 2
+## Client Version 1, Client Version 2
 
 ### Wowm Representation
 
@@ -31,10 +31,11 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
 * [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
+* [SMSG_SPELLENERGIZELOG](smsg_spellenergizelog.md)
 
 # Power
 
-## Client Version 3.3.5
+## Client Version 3
 
 ### Wowm Representation
 
@@ -67,6 +68,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `HEALTH` | 254 (0xFE) |  |  |
 
 Used in:
+* [SMSG_SPELLENERGIZELOG](smsg_spellenergizelog.md)
 * [SMSG_SPELL_GO](smsg_spell_go.md)
 * [SMSG_SPELL_START](smsg_spell_start.md)
 

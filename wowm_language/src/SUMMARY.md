@@ -143,7 +143,6 @@
 - [PlayerChatTag](docs/playerchattag.md)
 - [PlayerInviteStatus](docs/playerinvitestatus.md)
 - [Power](docs/power.md)
-- [PowerType](docs/powertype.md)
 - [PvpRank](docs/pvprank.md)
 - [QuestCompletable](docs/questcompletable.md)
 - [QuestFailedReason](docs/questfailedreason.md)

@@ -342,8 +342,6 @@ pub(crate) mod petition_result;
 pub use petition_result::*;
 pub(crate) mod petition_showlist;
 pub use petition_showlist::*;
-pub(crate) mod power_type;
-pub use power_type::*;
 pub use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
 
 pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
@@ -1176,6 +1174,8 @@ pub use crate::shared::smsg_show_bank_vanilla_tbc_wrath::SMSG_SHOW_BANK;
 
 pub use crate::shared::smsg_showtaxinodes_vanilla_tbc_wrath::SMSG_SHOWTAXINODES;
 
+pub use crate::shared::smsg_spellenergizelog_vanilla_tbc::SMSG_SPELLENERGIZELOG;
+
 pub use crate::shared::smsg_spline_move_feather_fall_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_FEATHER_FALL;
 
 pub use crate::shared::smsg_spline_move_land_walk_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_LAND_WALK;
@@ -1548,8 +1548,6 @@ pub(crate) mod smsg_spelldamageshield;
 pub use smsg_spelldamageshield::*;
 pub(crate) mod smsg_spelldispellog;
 pub use smsg_spelldispellog::*;
-pub(crate) mod smsg_spellenergizelog;
-pub use smsg_spellenergizelog::*;
 pub(crate) mod smsg_spellheallog;
 pub use smsg_spellheallog::*;
 pub(crate) mod smsg_spellinstakilllog;

@@ -6101,24 +6101,6 @@ static const value_string e_server_message_type_strings[] =  {
 };
 
 typedef enum {
-    POWER_TYPE_MANA = 0x00000000,
-    POWER_TYPE_RAGE = 0x00000001,
-    POWER_TYPE_FOCUS = 0x00000002,
-    POWER_TYPE_ENERGY = 0x00000003,
-    POWER_TYPE_HAPPINESS = 0x00000004,
-    POWER_TYPE_HEALTH = -0x0000002,
-} e_power_type;
-static const value_string e_power_type_strings[] =  {
-    { POWER_TYPE_MANA, "Mana" },
-    { POWER_TYPE_RAGE, "Rage" },
-    { POWER_TYPE_FOCUS, "Focus" },
-    { POWER_TYPE_ENERGY, "Energy" },
-    { POWER_TYPE_HAPPINESS, "Happiness" },
-    { POWER_TYPE_HEALTH, "Health" },
-    { 0, NULL }
-};
-
-typedef enum {
     STABLE_RESULT_ERR_MONEY = 0x1,
     STABLE_RESULT_ERR_STABLE = 0x6,
     STABLE_RESULT_SUCCESS_STABLE = 0x8,
