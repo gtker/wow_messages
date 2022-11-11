@@ -5093,6 +5093,7 @@ use crate::world::tbc::SMSG_BINDPOINTUPDATE;
 use crate::world::tbc::SMSG_PLAYERBOUND;
 use crate::world::tbc::SMSG_CLIENT_CONTROL_UPDATE;
 use crate::world::tbc::SMSG_RESURRECT_REQUEST;
+use crate::world::tbc::SMSG_LOOT_RESPONSE;
 use crate::world::tbc::SMSG_LOOT_RELEASE_RESPONSE;
 use crate::world::tbc::SMSG_LOOT_REMOVED;
 use crate::world::tbc::SMSG_LOOT_MONEY_NOTIFY;
@@ -5356,6 +5357,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PLAYERBOUND(SMSG_PLAYERBOUND),
     SMSG_CLIENT_CONTROL_UPDATE(SMSG_CLIENT_CONTROL_UPDATE),
     SMSG_RESURRECT_REQUEST(SMSG_RESURRECT_REQUEST),
+    SMSG_LOOT_RESPONSE(SMSG_LOOT_RESPONSE),
     SMSG_LOOT_RELEASE_RESPONSE(SMSG_LOOT_RELEASE_RESPONSE),
     SMSG_LOOT_REMOVED(SMSG_LOOT_REMOVED),
     SMSG_LOOT_MONEY_NOTIFY(SMSG_LOOT_MONEY_NOTIFY),
@@ -5621,6 +5623,7 @@ impl ServerOpcodeMessage {
             0x0158 => Ok(Self::SMSG_PLAYERBOUND(<SMSG_PLAYERBOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0158, size: body_size, io, } } else { a } })?)),
             0x0159 => Ok(Self::SMSG_CLIENT_CONTROL_UPDATE(<SMSG_CLIENT_CONTROL_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0159, size: body_size, io, } } else { a } })?)),
             0x015B => Ok(Self::SMSG_RESURRECT_REQUEST(<SMSG_RESURRECT_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015B, size: body_size, io, } } else { a } })?)),
+            0x0160 => Ok(Self::SMSG_LOOT_RESPONSE(<SMSG_LOOT_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0160, size: body_size, io, } } else { a } })?)),
             0x0161 => Ok(Self::SMSG_LOOT_RELEASE_RESPONSE(<SMSG_LOOT_RELEASE_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0161, size: body_size, io, } } else { a } })?)),
             0x0162 => Ok(Self::SMSG_LOOT_REMOVED(<SMSG_LOOT_REMOVED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0162, size: body_size, io, } } else { a } })?)),
             0x0163 => Ok(Self::SMSG_LOOT_MONEY_NOTIFY(<SMSG_LOOT_MONEY_NOTIFY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0163, size: body_size, io, } } else { a } })?)),
@@ -5954,6 +5957,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYERBOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENT_CONTROL_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RESURRECT_REQUEST(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LOOT_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_REMOVED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.write_encrypted_server(w, e),
@@ -6220,6 +6224,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYERBOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENT_CONTROL_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_RESURRECT_REQUEST(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LOOT_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_REMOVED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.write_unencrypted_server(w),
@@ -6486,6 +6491,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYERBOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENT_CONTROL_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RESURRECT_REQUEST(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LOOT_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_REMOVED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6752,6 +6758,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYERBOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENT_CONTROL_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RESURRECT_REQUEST(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LOOT_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_REMOVED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7018,6 +7025,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYERBOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENT_CONTROL_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RESURRECT_REQUEST(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LOOT_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_REMOVED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7284,6 +7292,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PLAYERBOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENT_CONTROL_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RESURRECT_REQUEST(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LOOT_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_REMOVED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
@@ -7552,6 +7561,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PLAYERBOUND(_) => "SMSG_PLAYERBOUND",
             ServerOpcodeMessage::SMSG_CLIENT_CONTROL_UPDATE(_) => "SMSG_CLIENT_CONTROL_UPDATE",
             ServerOpcodeMessage::SMSG_RESURRECT_REQUEST(_) => "SMSG_RESURRECT_REQUEST",
+            ServerOpcodeMessage::SMSG_LOOT_RESPONSE(_) => "SMSG_LOOT_RESPONSE",
             ServerOpcodeMessage::SMSG_LOOT_RELEASE_RESPONSE(_) => "SMSG_LOOT_RELEASE_RESPONSE",
             ServerOpcodeMessage::SMSG_LOOT_REMOVED(_) => "SMSG_LOOT_REMOVED",
             ServerOpcodeMessage::SMSG_LOOT_MONEY_NOTIFY(_) => "SMSG_LOOT_MONEY_NOTIFY",
@@ -8398,6 +8408,12 @@ impl From<SMSG_CLIENT_CONTROL_UPDATE> for ServerOpcodeMessage {
 impl From<SMSG_RESURRECT_REQUEST> for ServerOpcodeMessage {
     fn from(c: SMSG_RESURRECT_REQUEST) -> Self {
         Self::SMSG_RESURRECT_REQUEST(c)
+    }
+}
+
+impl From<SMSG_LOOT_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_LOOT_RESPONSE) -> Self {
+        Self::SMSG_LOOT_RESPONSE(c)
     }
 }
 

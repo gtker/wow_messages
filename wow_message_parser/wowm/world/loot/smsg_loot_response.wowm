@@ -16,7 +16,7 @@ enum LootMethod : u8 {
         comment = "unsupported by client, send LOOT_CORPSE instead";
     }
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }
 
 enum LootSlotType : u8 {
@@ -36,7 +36,7 @@ enum LootSlotType : u8 {
         comment = " ignore binding confirmation and etc, for single player looting";
     }
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }
 
 struct LootItem {
@@ -44,7 +44,7 @@ struct LootItem {
     Item item;
     LootSlotType ty;
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }
 
 smsg SMSG_LOOT_RESPONSE = 0x0160 {
@@ -54,5 +54,5 @@ smsg SMSG_LOOT_RESPONSE = 0x0160 {
     u8 amount_of_items;
     LootItem[amount_of_items] items;
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }

@@ -193,12 +193,6 @@ pub(crate) mod key_version;
 pub use key_version::*;
 pub(crate) mod list_inventory_item;
 pub use list_inventory_item::*;
-pub(crate) mod loot_item;
-pub use loot_item::*;
-pub(crate) mod loot_method;
-pub use loot_method::*;
-pub(crate) mod loot_slot_type;
-pub use loot_slot_type::*;
 pub(crate) mod mail;
 pub use mail::*;
 pub(crate) mod mail_action;
@@ -846,6 +840,12 @@ pub use crate::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
 
 pub use crate::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 
+pub use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
+
+pub use crate::shared::loot_method_vanilla_tbc_wrath::LootMethod;
+
+pub use crate::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
+
 pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 
 pub use crate::shared::meeting_stone_status_vanilla_tbc::MeetingStoneStatus;
@@ -1093,6 +1093,8 @@ pub use crate::shared::smsg_loot_money_notify_vanilla_tbc::SMSG_LOOT_MONEY_NOTIF
 pub use crate::shared::smsg_loot_release_response_vanilla_tbc_wrath::SMSG_LOOT_RELEASE_RESPONSE;
 
 pub use crate::shared::smsg_loot_removed_vanilla_tbc_wrath::SMSG_LOOT_REMOVED;
+
+pub use crate::shared::smsg_loot_response_vanilla_tbc_wrath::SMSG_LOOT_RESPONSE;
 
 pub use crate::shared::smsg_loot_start_roll_vanilla_tbc::SMSG_LOOT_START_ROLL;
 
@@ -1422,8 +1424,6 @@ pub(crate) mod smsg_list_inventory;
 pub use smsg_list_inventory::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
-pub(crate) mod smsg_loot_response;
-pub use smsg_loot_response::*;
 pub(crate) mod smsg_loot_roll;
 pub use smsg_loot_roll::*;
 pub(crate) mod smsg_loot_roll_won;

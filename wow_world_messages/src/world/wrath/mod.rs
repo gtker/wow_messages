@@ -792,6 +792,12 @@ pub use crate::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
 
 pub use crate::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 
+pub use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
+
+pub use crate::shared::loot_method_vanilla_tbc_wrath::LootMethod;
+
+pub use crate::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
+
 pub use crate::shared::mail_item_tbc_wrath::MailItem;
 
 pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
@@ -1019,6 +1025,8 @@ pub use crate::shared::smsg_loot_master_list_vanilla_tbc_wrath::SMSG_LOOT_MASTER
 pub use crate::shared::smsg_loot_release_response_vanilla_tbc_wrath::SMSG_LOOT_RELEASE_RESPONSE;
 
 pub use crate::shared::smsg_loot_removed_vanilla_tbc_wrath::SMSG_LOOT_REMOVED;
+
+pub use crate::shared::smsg_loot_response_vanilla_tbc_wrath::SMSG_LOOT_RESPONSE;
 
 pub use crate::shared::smsg_loot_roll_tbc_wrath::SMSG_LOOT_ROLL;
 
