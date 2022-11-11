@@ -1292,6 +1292,8 @@ pub(crate) mod smsg_item_query_single_response;
 pub use smsg_item_query_single_response::*;
 pub(crate) mod smsg_item_text_query_response;
 pub use smsg_item_text_query_response::*;
+pub(crate) mod smsg_learned_spell;
+pub use smsg_learned_spell::*;
 pub(crate) mod smsg_levelup_info;
 pub use smsg_levelup_info::*;
 pub(crate) mod smsg_log_xpgain;

@@ -1,6 +1,14 @@
-#tag_all versions "1.12";
+smsg SMSG_LEARNED_SPELL = 0x012B {
+    Spell id;
+} {
+    paste_versions = "1.12 2.4.3";
+}
 
 smsg SMSG_LEARNED_SPELL = 0x012B {
     Spell id;
+    u16 unknown {
+        comment = "mangostwo: 3.3.3 unk";
+    }
+} {
+    versions = "3.3.5";
 }
-
