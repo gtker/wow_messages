@@ -986,6 +986,8 @@ pub use crate::shared::smsg_chat_wrong_faction_vanilla_tbc_wrath::SMSG_CHAT_WRON
 
 pub use crate::shared::smsg_client_control_update_vanilla_tbc_wrath::SMSG_CLIENT_CONTROL_UPDATE;
 
+pub use crate::shared::smsg_cooldown_event_vanilla_tbc_wrath::SMSG_COOLDOWN_EVENT;
+
 pub use crate::shared::smsg_destroy_object_vanilla_tbc::SMSG_DESTROY_OBJECT;
 
 pub use crate::shared::smsg_duel_complete_vanilla_tbc_wrath::SMSG_DUEL_COMPLETE;
@@ -1336,8 +1338,6 @@ pub(crate) mod smsg_compressed_moves;
 pub use smsg_compressed_moves::*;
 pub(crate) mod smsg_compressed_update_object;
 pub use smsg_compressed_update_object::*;
-pub(crate) mod smsg_cooldown_event;
-pub use smsg_cooldown_event::*;
 pub(crate) mod smsg_corpse_reclaim_delay;
 pub use smsg_corpse_reclaim_delay::*;
 pub(crate) mod smsg_creature_query_response;
