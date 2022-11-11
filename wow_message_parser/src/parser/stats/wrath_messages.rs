@@ -126,7 +126,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_GROUP_DISBAND", 0x07B),
     Data::new("SMSG_GROUP_DESTROYED", 0x07C),
     Data::new("SMSG_GROUP_LIST", 0x07D),
-    Data::new("SMSG_PARTY_MEMBER_STATS", 0x07E),
+    Data::with_reason("SMSG_PARTY_MEMBER_STATS", 0x07E, "Requires AuraMask"),
     Data::new("SMSG_PARTY_COMMAND_RESULT", 0x07F),
     Data::new("CMSG_GUILD_CREATE", 0x081),
     Data::new("CMSG_GUILD_INVITE", 0x082),
