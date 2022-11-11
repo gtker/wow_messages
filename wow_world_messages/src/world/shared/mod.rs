@@ -390,6 +390,7 @@ pub mod smsg_gmticket_updatetext_vanilla_tbc_wrath;
 pub mod smsg_gossip_complete_vanilla_tbc_wrath;
 pub mod smsg_gossip_poi_vanilla_tbc_wrath;
 pub mod smsg_group_decline_vanilla_tbc_wrath;
+pub mod smsg_group_destroyed_vanilla_tbc_wrath;
 pub mod smsg_group_invite_vanilla_tbc;
 pub mod smsg_group_set_leader_vanilla_tbc_wrath;
 pub mod smsg_group_uninvite_vanilla_tbc_wrath;

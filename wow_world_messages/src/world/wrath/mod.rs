@@ -968,6 +968,8 @@ pub use crate::shared::smsg_gossip_poi_vanilla_tbc_wrath::SMSG_GOSSIP_POI;
 
 pub use crate::shared::smsg_group_decline_vanilla_tbc_wrath::SMSG_GROUP_DECLINE;
 
+pub use crate::shared::smsg_group_destroyed_vanilla_tbc_wrath::SMSG_GROUP_DESTROYED;
+
 pub use crate::shared::smsg_group_set_leader_vanilla_tbc_wrath::SMSG_GROUP_SET_LEADER;
 
 pub use crate::shared::smsg_group_uninvite_vanilla_tbc_wrath::SMSG_GROUP_UNINVITE;
