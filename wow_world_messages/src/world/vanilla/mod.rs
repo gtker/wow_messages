@@ -1230,6 +1230,8 @@ pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
+pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
+
 pub use crate::shared::transport_info_vanilla_tbc::TransportInfo;
 
 pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
@@ -1622,8 +1624,6 @@ pub(crate) mod timer_type;
 pub use timer_type::*;
 pub(crate) mod trade_slot;
 pub use trade_slot::*;
-pub(crate) mod trade_status;
-pub use trade_status::*;
 pub(crate) mod trainer_spell;
 pub use trainer_spell::*;
 pub(crate) mod trainer_spell_state;

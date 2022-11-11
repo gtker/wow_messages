@@ -277,7 +277,7 @@ enum TradeStatus : u32 {
     ONLY_CONJURED = 22;
     NOT_ON_TAPLIST = 23;
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }
 
 smsg SMSG_TRADE_STATUS = 0x0120 {
@@ -302,6 +302,6 @@ smsg SMSG_TRADE_STATUS = 0x0120 {
         }
     }
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
 

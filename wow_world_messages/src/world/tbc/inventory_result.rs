@@ -90,7 +90,7 @@ use std::convert::{TryFrom, TryInto};
 
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub(crate) enum InventoryResult {
+pub enum InventoryResult {
     Ok,
     CantEquipLevelI,
     CantEquipSkill,

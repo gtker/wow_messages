@@ -1,6 +1,6 @@
 # TradeStatus
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -65,5 +65,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `NOT_ON_TAPLIST` | 23 (0x17) |  |  |
 
 Used in:
+* [SMSG_TRADE_STATUS](smsg_trade_status.md)
+* [SMSG_TRADE_STATUS](smsg_trade_status.md)
 * [SMSG_TRADE_STATUS](smsg_trade_status.md)
 

@@ -1216,6 +1216,8 @@ pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
+pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
+
 pub use crate::shared::transport_info_vanilla_tbc::TransportInfo;
 
 pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
@@ -1336,6 +1338,8 @@ pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
+pub(crate) mod smsg_trade_status;
+pub use smsg_trade_status::*;
 pub(crate) mod smsg_transfer_aborted;
 pub use smsg_transfer_aborted::*;
 pub(crate) mod smsg_transfer_pending;
