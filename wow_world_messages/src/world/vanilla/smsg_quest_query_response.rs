@@ -1,6 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::QuestItemReward;
 use crate::world::vanilla::QuestObjective;
+use crate::world::vanilla::Vector2d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -25,8 +26,7 @@ use std::io::{Write, Read};
 ///     QuestItemReward[4] rewards;
 ///     QuestItemReward[6] choice_rewards;
 ///     u32 point_map_id;
-///     f32 position_x;
-///     f32 position_y;
+///     Vector2d position;
 ///     u32 point_opt;
 ///     CString title;
 ///     CString objective_text;
@@ -69,8 +69,7 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     pub rewards: [QuestItemReward; 4],
     pub choice_rewards: [QuestItemReward; 6],
     pub point_map_id: u32,
-    pub position_x: f32,
-    pub position_y: f32,
+    pub position: Vector2d,
     pub point_opt: u32,
     pub title: String,
     pub objective_text: String,
@@ -147,11 +146,8 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // point_map_id: u32
         w.write_all(&self.point_map_id.to_le_bytes())?;
 
-        // position_x: f32
-        w.write_all(&self.position_x.to_le_bytes())?;
-
-        // position_y: f32
-        w.write_all(&self.position_y.to_le_bytes())?;
+        // position: Vector2d
+        self.position.write_into_vec(w)?;
 
         // point_opt: u32
         w.write_all(&self.point_opt.to_le_bytes())?;
@@ -263,10 +259,9 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // point_map_id: u32
         let point_map_id = crate::util::read_u32_le(r)?;
 
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
+        // position: Vector2d
+        let position = Vector2d::read(r)?;
+
         // point_opt: u32
         let point_opt = crate::util::read_u32_le(r)?;
 
@@ -319,8 +314,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
             rewards,
             choice_rewards,
             point_map_id,
-            position_x,
-            position_y,
+            position,
             point_opt,
             title,
             objective_text,
@@ -355,8 +349,7 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + 4 * 8 // rewards: QuestItemReward[4]
         + 6 * 8 // choice_rewards: QuestItemReward[6]
         + 4 // point_map_id: u32
-        + 4 // position_x: f32
-        + 4 // position_y: f32
+        + 8 // position: Vector2d
         + 4 // point_opt: u32
         + self.title.len() + 1 // title: CString
         + self.objective_text.len() + 1 // objective_text: CString

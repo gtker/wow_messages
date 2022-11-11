@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 struct QuestObjective {
     u32 creature_id {
         comment = "cmangos: client expected gameobject template id in form (id|0x80000000)";
@@ -7,6 +5,8 @@ struct QuestObjective {
     u32 kill_count;
     u32 required_item_id;
     u32 required_item_count;
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
@@ -42,8 +42,7 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     QuestItemReward[4] rewards;
     QuestItemReward[6] choice_rewards;
     u32 point_map_id;
-    f32 position_x;
-    f32 position_y;
+    Vector2d position;
     u32 point_opt;
     CString title;
     CString objective_text;
@@ -51,5 +50,6 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     CString end_text;
     QuestObjective[4] objectives;
     CString[4] objective_texts;
+} {
+    versions = "1.12";
 }
-

@@ -25,8 +25,7 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     QuestItemReward[4] rewards;
     QuestItemReward[6] choice_rewards;
     u32 point_map_id;
-    f32 position_x;
-    f32 position_y;
+    Vector2d position;
     u32 point_opt;
     CString title;
     CString objective_text;
@@ -69,8 +68,7 @@ SMSG have a header of 4 bytes.
 | 0x40 | ? / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
 | 0x60 | ? / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
 | 0x90 | 4 / Little | u32 | point_map_id |  |  |
-| 0x94 | 4 / Little | f32 | position_x |  |  |
-| 0x98 | 4 / Little | f32 | position_y |  |  |
+| 0x94 | 8 / - | [Vector2d](vector2d.md) | position |  |  |
 | 0x9C | 4 / Little | u32 | point_opt |  |  |
 | 0xA0 | - / - | CString | title |  |  |
 | - | - / - | CString | objective_text |  |  |
