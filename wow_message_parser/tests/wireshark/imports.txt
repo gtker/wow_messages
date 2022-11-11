@@ -490,7 +490,6 @@ static int hf_woww_orientation = -1;
 static int hf_woww_out_bid = -1;
 static int hf_woww_outbid_item_ids = -1;
 static int hf_woww_outfit_id = -1;
-static int hf_woww_own_flags = -1;
 static int hf_woww_owner_guid = -1;
 static int hf_woww_page_id = -1;
 static int hf_woww_page_material = -1;

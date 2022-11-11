@@ -9,12 +9,16 @@ use std::io::{Write, Read};
 ///     CString name;
 ///     Guid guid;
 ///     Bool is_online;
+///     u8 flags;
 /// }
 /// ```
 pub struct GroupListMember {
     pub name: String,
     pub guid: Guid,
     pub is_online: bool,
+    /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
+    ///
+    pub flags: u8,
 }
 
 impl GroupListMember {
@@ -32,6 +36,9 @@ impl GroupListMember {
         // is_online: Bool
         w.write_all(u8::from(self.is_online).to_le_bytes().as_slice())?;
 
+        // flags: u8
+        w.write_all(&self.flags.to_le_bytes())?;
+
         Ok(())
     }
 }
@@ -47,10 +54,14 @@ impl GroupListMember {
 
         // is_online: Bool
         let is_online = crate::util::read_u8_le(r)? != 0;
+        // flags: u8
+        let flags = crate::util::read_u8_le(r)?;
+
         Ok(Self {
             name,
             guid,
             is_online,
+            flags,
         })
     }
 
@@ -61,6 +72,7 @@ impl GroupListMember {
         self.name.len() + 1 // name: CString
         + 8 // guid: Guid
         + 1 // is_online: Bool
+        + 1 // flags: u8
     }
 }
 

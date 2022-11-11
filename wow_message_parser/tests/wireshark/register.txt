@@ -2950,12 +2950,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_own_flags,
-            { "Own Flags", "woww.own.flags",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_owner_guid,
             { "Owner Guid", "woww.owner.guid",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,

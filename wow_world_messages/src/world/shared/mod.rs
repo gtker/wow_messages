@@ -262,6 +262,7 @@ pub mod gm_ticket_status_response_vanilla_tbc_wrath;
 pub mod gm_ticket_status_vanilla_tbc_wrath;
 pub mod gossip_item_tbc_wrath;
 pub mod group_loot_setting_vanilla_tbc_wrath;
+pub mod group_type_vanilla_tbc;
 pub mod guild_bank_rights_tbc_wrath;
 pub mod guild_command_vanilla_tbc;
 pub mod guild_emblem_result_tbc_wrath;

@@ -23,6 +23,8 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [MSG_SET_DUNGEON_DIFFICULTY](msg_set_dungeon_difficulty.md)
 * [RaidInfo](raidinfo.md)
+* [SMSG_GROUP_LIST](smsg_group_list.md)
+* [SMSG_GROUP_LIST](smsg_group_list.md)
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
 

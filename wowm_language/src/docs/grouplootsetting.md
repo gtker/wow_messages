@@ -31,4 +31,6 @@ Used in:
 * [CMSG_LOOT_METHOD](cmsg_loot_method.md)
 * [CMSG_LOOT_METHOD](cmsg_loot_method.md)
 * [SMSG_GROUP_LIST](smsg_group_list.md)
+* [SMSG_GROUP_LIST](smsg_group_list.md)
+* [SMSG_GROUP_LIST](smsg_group_list.md)
 

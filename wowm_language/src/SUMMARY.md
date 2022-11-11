@@ -149,6 +149,7 @@
 - [QuestGiverStatus](docs/questgiverstatus.md)
 - [QuestPartyMessage](docs/questpartymessage.md)
 - [Race](docs/race.md)
+- [RaidDifficulty](docs/raiddifficulty.md)
 - [RaidGroupError](docs/raidgrouperror.md)
 - [RaidInstanceMessage](docs/raidinstancemessage.md)
 - [RaidTargetIndex](docs/raidtargetindex.md)
