@@ -889,5 +889,6 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 
 Used in:
 * [CMSG_UNLEARN_SKILL](cmsg_unlearn_skill.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
 

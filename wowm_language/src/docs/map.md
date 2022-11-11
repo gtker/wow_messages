@@ -627,6 +627,7 @@ Used in:
 * [RaidInfo](raidinfo.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
 * [SMSG_LOOT_START_ROLL](smsg_loot_start_roll.md)
 * [SMSG_NEW_WORLD](smsg_new_world.md)

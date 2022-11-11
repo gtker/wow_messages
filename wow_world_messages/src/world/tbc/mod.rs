@@ -95,8 +95,6 @@ pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class;
 pub use item_class::*;
-pub(crate) mod item_socket;
-pub use item_socket::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod movement_block;
@@ -756,13 +754,15 @@ pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
-pub use crate::shared::item_damage_type_vanilla_tbc::ItemDamageType;
+pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
 
 pub use crate::shared::item_quality_vanilla_tbc::ItemQuality;
 
-pub use crate::shared::item_spells_vanilla_tbc::ItemSpells;
+pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
 
-pub use crate::shared::item_stat_vanilla_tbc::ItemStat;
+pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
+
+pub use crate::shared::item_stat_vanilla_tbc_wrath::ItemStat;
 
 pub use crate::shared::language_tbc_wrath::Language;
 

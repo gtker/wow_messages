@@ -764,6 +764,14 @@ pub use crate::shared::guild_rights_tbc_wrath::GuildRights;
 
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
+pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
+
+pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
+
+pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
+
+pub use crate::shared::item_stat_vanilla_tbc_wrath::ItemStat;
+
 pub use crate::shared::language_tbc_wrath::Language;
 
 pub use crate::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
@@ -1238,6 +1246,8 @@ pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
 pub(crate) mod smsg_inventory_change_failure;
 pub use smsg_inventory_change_failure::*;
+pub(crate) mod smsg_item_query_single_response;
+pub use smsg_item_query_single_response::*;
 pub(crate) mod smsg_item_text_query_response;
 pub use smsg_item_text_query_response::*;
 pub(crate) mod smsg_levelup_info;

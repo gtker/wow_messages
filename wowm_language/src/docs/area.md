@@ -10154,6 +10154,7 @@ Used in:
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_EXPLORATION_EXPERIENCE](smsg_exploration_experience.md)
 * [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)

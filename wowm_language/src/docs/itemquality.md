@@ -76,4 +76,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [CMSG_AUCTION_LIST_ITEMS](cmsg_auction_list_items.md)
 * [CMSG_LOOT_METHOD](cmsg_loot_method.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 

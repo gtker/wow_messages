@@ -5131,6 +5131,7 @@ use crate::world::wrath::SMSG_LOGOUT_CANCEL_ACK;
 use crate::world::wrath::SMSG_NAME_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_PET_NAME_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_GUILD_QUERY_RESPONSE;
+use crate::world::wrath::SMSG_ITEM_QUERY_SINGLE_RESPONSE;
 use crate::world::wrath::SMSG_PAGE_TEXT_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_GAMEOBJECT_QUERY_RESPONSE;
 use crate::world::wrath::SMSG_CREATURE_QUERY_RESPONSE;
@@ -5381,6 +5382,7 @@ pub enum ServerOpcodeMessage {
     SMSG_NAME_QUERY_RESPONSE(SMSG_NAME_QUERY_RESPONSE),
     SMSG_PET_NAME_QUERY_RESPONSE(SMSG_PET_NAME_QUERY_RESPONSE),
     SMSG_GUILD_QUERY_RESPONSE(SMSG_GUILD_QUERY_RESPONSE),
+    SMSG_ITEM_QUERY_SINGLE_RESPONSE(SMSG_ITEM_QUERY_SINGLE_RESPONSE),
     SMSG_PAGE_TEXT_QUERY_RESPONSE(SMSG_PAGE_TEXT_QUERY_RESPONSE),
     SMSG_GAMEOBJECT_QUERY_RESPONSE(SMSG_GAMEOBJECT_QUERY_RESPONSE),
     SMSG_CREATURE_QUERY_RESPONSE(SMSG_CREATURE_QUERY_RESPONSE),
@@ -5633,6 +5635,7 @@ impl ServerOpcodeMessage {
             0x0051 => Ok(Self::SMSG_NAME_QUERY_RESPONSE(<SMSG_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0051, size: body_size, io, } } else { a } })?)),
             0x0053 => Ok(Self::SMSG_PET_NAME_QUERY_RESPONSE(<SMSG_PET_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0053, size: body_size, io, } } else { a } })?)),
             0x0055 => Ok(Self::SMSG_GUILD_QUERY_RESPONSE(<SMSG_GUILD_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0055, size: body_size, io, } } else { a } })?)),
+            0x0058 => Ok(Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(<SMSG_ITEM_QUERY_SINGLE_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0058, size: body_size, io, } } else { a } })?)),
             0x005B => Ok(Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(<SMSG_PAGE_TEXT_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x005B, size: body_size, io, } } else { a } })?)),
             0x005F => Ok(Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(<SMSG_GAMEOBJECT_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x005F, size: body_size, io, } } else { a } })?)),
             0x0061 => Ok(Self::SMSG_CREATURE_QUERY_RESPONSE(<SMSG_CREATURE_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0061, size: body_size, io, } } else { a } })?)),
@@ -6034,6 +6037,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -6287,6 +6291,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -6540,6 +6545,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6793,6 +6799,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7046,6 +7053,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7299,6 +7307,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PAGE_TEXT_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CREATURE_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -7554,6 +7563,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(_) => "SMSG_NAME_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_PET_NAME_QUERY_RESPONSE(_) => "SMSG_PET_NAME_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_GUILD_QUERY_RESPONSE(_) => "SMSG_GUILD_QUERY_RESPONSE",
+            ServerOpcodeMessage::SMSG_ITEM_QUERY_SINGLE_RESPONSE(_) => "SMSG_ITEM_QUERY_SINGLE_RESPONSE",
             ServerOpcodeMessage::SMSG_PAGE_TEXT_QUERY_RESPONSE(_) => "SMSG_PAGE_TEXT_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_GAMEOBJECT_QUERY_RESPONSE(_) => "SMSG_GAMEOBJECT_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_CREATURE_QUERY_RESPONSE(_) => "SMSG_CREATURE_QUERY_RESPONSE",
@@ -8032,6 +8042,12 @@ impl From<SMSG_PET_NAME_QUERY_RESPONSE> for ServerOpcodeMessage {
 impl From<SMSG_GUILD_QUERY_RESPONSE> for ServerOpcodeMessage {
     fn from(c: SMSG_GUILD_QUERY_RESPONSE) -> Self {
         Self::SMSG_GUILD_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_ITEM_QUERY_SINGLE_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ITEM_QUERY_SINGLE_RESPONSE) -> Self {
+        Self::SMSG_ITEM_QUERY_SINGLE_RESPONSE(c)
     }
 }
 

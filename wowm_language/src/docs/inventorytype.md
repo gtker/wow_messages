@@ -81,4 +81,5 @@ Used in:
 * [SMSG_ITEM_NAME_QUERY_RESPONSE](smsg_item_name_query_response.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 

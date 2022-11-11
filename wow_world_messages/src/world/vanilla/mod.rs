@@ -830,13 +830,13 @@ pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
-pub use crate::shared::item_damage_type_vanilla_tbc::ItemDamageType;
+pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
 
 pub use crate::shared::item_quality_vanilla_tbc::ItemQuality;
 
-pub use crate::shared::item_spells_vanilla_tbc::ItemSpells;
+pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
 
-pub use crate::shared::item_stat_vanilla_tbc::ItemStat;
+pub use crate::shared::item_stat_vanilla_tbc_wrath::ItemStat;
 
 pub use crate::shared::language_vanilla_vanilla::Language;
 
