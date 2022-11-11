@@ -195,12 +195,6 @@ pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class;
 pub use item_class::*;
-pub(crate) mod item_damage_type;
-pub use item_damage_type::*;
-pub(crate) mod item_spells;
-pub use item_spells::*;
-pub(crate) mod item_stat;
-pub use item_stat::*;
 pub(crate) mod key_version;
 pub use key_version::*;
 pub(crate) mod list_inventory_item;
@@ -836,7 +830,13 @@ pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
+pub use crate::shared::item_damage_type_vanilla_tbc::ItemDamageType;
+
 pub use crate::shared::item_quality_vanilla_tbc::ItemQuality;
+
+pub use crate::shared::item_spells_vanilla_tbc::ItemSpells;
+
+pub use crate::shared::item_stat_vanilla_tbc::ItemStat;
 
 pub use crate::shared::language_vanilla_vanilla::Language;
 

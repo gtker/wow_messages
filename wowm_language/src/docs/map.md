@@ -322,6 +322,7 @@ Used in:
 * [MSG_CORPSE_QUERY_Server](msg_corpse_query_server.md)
 * [RaidInfo](raidinfo.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
 * [SMSG_NEW_WORLD](smsg_new_world.md)
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)

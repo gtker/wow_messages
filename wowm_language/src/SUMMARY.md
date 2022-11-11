@@ -507,6 +507,7 @@
 - [GuildRights](docs/guildrights.md)
 - [InitialSpell](docs/initialspell.md)
 - [ItemDamageType](docs/itemdamagetype.md)
+- [ItemSocket](docs/itemsocket.md)
 - [ItemSpells](docs/itemspells.md)
 - [ItemStat](docs/itemstat.md)
 - [ListInventoryItem](docs/listinventoryitem.md)

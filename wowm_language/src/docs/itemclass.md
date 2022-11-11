@@ -103,6 +103,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `MISC` | 15 (0x0F) |  |  |
 
 Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_SET_PROFICIENCY](smsg_set_proficiency.md)
 
 # ItemClass
