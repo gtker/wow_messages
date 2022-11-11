@@ -5348,7 +5348,7 @@
             break;
         case SMSG_SPELL_FAILURE:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_spell_cast_result, 1, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPELL_GO:

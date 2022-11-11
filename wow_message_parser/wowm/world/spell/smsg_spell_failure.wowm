@@ -1,8 +1,16 @@
-#tag_all versions "1.12";
+smsg SMSG_SPELL_FAILURE = 0x0133 {
+    Guid guid;
+    Spell spell;
+    SpellCastResult result;
+} {
+    paste_versions = "1.12 2.4.3";
+}
 
 smsg SMSG_SPELL_FAILURE = 0x0133 {
     Guid guid;
-    Spell id;
+    u8 extra_casts;
+    Spell spell;
     SpellCastResult result;
+} {
+    paste_versions = "3.3.5";
 }
-

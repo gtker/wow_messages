@@ -4,17 +4,17 @@ use crate::world::vanilla::SpellCastResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_failure.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELL_FAILURE = 0x0133 {
 ///     Guid guid;
-///     u32 id;
+///     u32 spell;
 ///     SpellCastResult result;
 /// }
 /// ```
 pub struct SMSG_SPELL_FAILURE {
     pub guid: Guid,
-    pub id: u32,
+    pub spell: u32,
     pub result: SpellCastResult,
 }
 
@@ -29,8 +29,8 @@ impl crate::Message for SMSG_SPELL_FAILURE {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes())?;
 
         // result: SpellCastResult
         w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
@@ -45,15 +45,15 @@ impl crate::Message for SMSG_SPELL_FAILURE {
         // guid: Guid
         let guid = Guid::read(r)?;
 
-        // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        // spell: u32
+        let spell = crate::util::read_u32_le(r)?;
 
         // result: SpellCastResult
         let result: SpellCastResult = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
             guid,
-            id,
+            spell,
             result,
         })
     }

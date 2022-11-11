@@ -176,7 +176,7 @@ use std::convert::{TryFrom, TryInto};
 
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub(crate) enum SpellCastResult {
+pub enum SpellCastResult {
     AffectingCombat,
     AlreadyAtFullHealth,
     AlreadyAtFullMana,
