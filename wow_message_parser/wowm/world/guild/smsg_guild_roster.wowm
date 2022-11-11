@@ -89,5 +89,5 @@ smsg SMSG_GUILD_ROSTER = 0x008A {
     GuildRights[amount_of_rights] rights;
     GuildMember[amount_of_members] members;
 } {
-    paste_versions = "2.4.3";
+    paste_versions = "2.4.3 3.3.5";
 }

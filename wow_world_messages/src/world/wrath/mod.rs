@@ -1272,6 +1272,8 @@ pub(crate) mod smsg_guild_command_result;
 pub use smsg_guild_command_result::*;
 pub(crate) mod smsg_guild_info;
 pub use smsg_guild_info::*;
+pub(crate) mod smsg_guild_roster;
+pub use smsg_guild_roster::*;
 pub(crate) mod smsg_init_world_states;
 pub use smsg_init_world_states::*;
 pub(crate) mod smsg_initial_spells;
