@@ -313,6 +313,8 @@ pub mod new_item_chat_alert_vanilla_tbc_wrath;
 pub mod new_item_creation_type_vanilla_tbc_wrath;
 pub mod new_item_source_vanilla_tbc_wrath;
 pub mod npc_text_update_emote_vanilla_tbc_wrath;
+pub mod party_operation_vanilla_tbc_wrath;
+pub mod party_result_tbc_wrath;
 pub mod pet_command_state_vanilla_tbc_wrath;
 pub mod pet_enabled_vanilla_tbc_wrath;
 pub mod pet_feedback_vanilla_tbc_wrath;

@@ -336,8 +336,6 @@ pub use object::*;
 pub(crate) mod object_type;
 pub use object_type::*;
 pub mod opcodes;
-pub(crate) mod party_operation;
-pub use party_operation::*;
 pub(crate) mod party_result;
 pub use party_result::*;
 pub(crate) mod pet_spell_cooldown;
@@ -901,6 +899,8 @@ pub use crate::shared::new_item_creation_type_vanilla_tbc_wrath::NewItemCreation
 pub use crate::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 
 pub use crate::shared::npc_text_update_emote_vanilla_tbc_wrath::NpcTextUpdateEmote;
+
+pub use crate::shared::party_operation_vanilla_tbc_wrath::PartyOperation;
 
 pub use crate::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
 

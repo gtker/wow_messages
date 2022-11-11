@@ -844,6 +844,10 @@ pub use crate::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 
 pub use crate::shared::npc_text_update_emote_vanilla_tbc_wrath::NpcTextUpdateEmote;
 
+pub use crate::shared::party_operation_vanilla_tbc_wrath::PartyOperation;
+
+pub use crate::shared::party_result_tbc_wrath::PartyResult;
+
 pub use crate::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
 
 pub use crate::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
@@ -1300,6 +1304,8 @@ pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_npc_text_update;
 pub use smsg_npc_text_update::*;
+pub(crate) mod smsg_party_command_result;
+pub use smsg_party_command_result::*;
 pub(crate) mod smsg_pet_cast_failed;
 pub use smsg_pet_cast_failed::*;
 pub(crate) mod smsg_pet_tame_failure;

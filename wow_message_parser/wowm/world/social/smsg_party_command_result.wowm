@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum PartyResult : u8 {
     SUCCESS = 0;
     BAD_PLAYER_NAME = 1;
@@ -10,11 +8,32 @@ enum PartyResult : u8 {
     NOT_LEADER = 6;
     PLAYER_WRONG_FACTION = 7;
     IGNORING_YOU = 8;
+} {
+    versions = "1.12";
+}
+
+enum PartyResult : u8 {
+    SUCCESS = 0;
+    BAD_PLAYER_NAME = 1;
+    TARGET_NOT_IN_GROUP = 2;
+    TARGET_NOT_IN_INSTANCE = 3;
+    GROUP_FULL = 4;
+    ALREADY_IN_GROUP = 5;
+    NOT_IN_GROUP = 6;
+    NOT_LEADER = 7;
+    PLAYER_WRONG_FACTION = 8;
+    IGNORING_YOU = 9;
+    LFG_PENDING = 12;
+    INVITE_RESTRICTED = 13;
+} {
+    versions = "2.4.3 3";
 }
 
 enum PartyOperation : u8 {
     INVITE = 0;
     LEAVE = 2;
+} {
+    versions = "1 2 3";
 }
 
 smsg SMSG_PARTY_COMMAND_RESULT = 0x007F {
@@ -23,5 +42,17 @@ smsg SMSG_PARTY_COMMAND_RESULT = 0x007F {
         maximum_length = "48";
     }
     (u32)PartyResult result;
+} {
+    paste_versions = "1.12";
+}
+
+smsg SMSG_PARTY_COMMAND_RESULT = 0x007F {
+    (u32)PartyOperation operation;
+    CString member {
+        maximum_length = "48";
+    }
+    (u32)PartyResult result;
+} {
+    paste_versions = "2.4.3 3";
 }
 
