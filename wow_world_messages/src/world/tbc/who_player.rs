@@ -1,11 +1,12 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Class;
-use crate::world::vanilla::Race;
+use crate::world::tbc::Area;
+use crate::world::tbc::Class;
+use crate::world::tbc::Gender;
+use crate::world::tbc::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_who.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_who.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_who.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_who.wowm#L13):
 /// ```text
 /// struct WhoPlayer {
 ///     CString name;
@@ -13,8 +14,8 @@ use std::io::{Write, Read};
 ///     u32 level;
 ///     Class class;
 ///     Race race;
+///     Gender gender;
 ///     Area area;
-///     u32 party_status;
 /// }
 /// ```
 pub struct WhoPlayer {
@@ -23,8 +24,8 @@ pub struct WhoPlayer {
     pub level: u32,
     pub class: Class,
     pub race: Race,
+    pub gender: Gender,
     pub area: Area,
-    pub party_status: u32,
 }
 
 impl WhoPlayer {
@@ -52,11 +53,11 @@ impl WhoPlayer {
         // race: Race
         w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
 
+        // gender: Gender
+        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
+
         // area: Area
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
-
-        // party_status: u32
-        w.write_all(&self.party_status.to_le_bytes())?;
 
         Ok(())
     }
@@ -81,11 +82,11 @@ impl WhoPlayer {
         // race: Race
         let race: Race = crate::util::read_u8_le(r)?.try_into()?;
 
+        // gender: Gender
+        let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
+
         // area: Area
         let area: Area = crate::util::read_u32_le(r)?.try_into()?;
-
-        // party_status: u32
-        let party_status = crate::util::read_u32_le(r)?;
 
         Ok(Self {
             name,
@@ -93,8 +94,8 @@ impl WhoPlayer {
             level,
             class,
             race,
+            gender,
             area,
-            party_status,
         })
     }
 
@@ -107,8 +108,8 @@ impl WhoPlayer {
         + 4 // level: u32
         + 1 // class: Class
         + 1 // race: Race
+        + 1 // gender: Gender
         + 4 // area: Area
-        + 4 // party_status: u32
     }
 }
 

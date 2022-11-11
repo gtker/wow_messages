@@ -2992,6 +2992,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_party_status,
+            { "Party Status", "woww.party.status",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_periodic_log,
             { "Periodic Log", "woww.periodic.log",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,

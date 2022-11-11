@@ -4,10 +4,22 @@ struct WhoPlayer {
     u32 level;
     Class class;
     Race race;
+    Area area;
+    u32 party_status;
+} {
+    versions = "1.12";
+}
+
+struct WhoPlayer {
+    CString name;
+    CString guild;
+    u32 level;
+    Class class;
+    Race race;
     Gender gender;
     Area area;
 } {
-    versions = "1.12";
+    paste_versions = "2.4.3 3.3.5";
 }
 
 smsg SMSG_WHO = 0x63 {
@@ -15,5 +27,5 @@ smsg SMSG_WHO = 0x63 {
     u32 online_players;
     WhoPlayer[listed_players] players;
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3 3.3.5";
 }

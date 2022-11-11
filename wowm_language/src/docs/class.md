@@ -44,6 +44,7 @@ Used in:
 * [GuildMember](guildmember.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [WhoPlayer](whoplayer.md)
+* [WhoPlayer](whoplayer.md)
 
 # Class
 
@@ -89,4 +90,5 @@ Used in:
 * [GuildMember](guildmember.md)
 * [Relation](relation.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
+* [WhoPlayer](whoplayer.md)
 

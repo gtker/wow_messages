@@ -5512,6 +5512,7 @@ Used in:
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
+* [WhoPlayer](whoplayer.md)
 
 # Area
 
@@ -10159,4 +10160,5 @@ Used in:
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
+* [WhoPlayer](whoplayer.md)
 
