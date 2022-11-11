@@ -5581,7 +5581,7 @@
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_display_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_stack_count, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_is_wrapped, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_wrapped, 4, ENC_NA);
                 ptvcursor_add(ptv, hf_woww_gift_wrapper, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_enchantment, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_creator, 8, ENC_LITTLE_ENDIAN);

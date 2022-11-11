@@ -3,14 +3,14 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status_extended.wowm#L1):
 /// ```text
 /// struct TradeSlot {
 ///     u8 trade_slot_number;
 ///     u32 item;
 ///     u32 display_id;
 ///     u32 stack_count;
-///     u32 is_wrapped;
+///     Bool32 wrapped;
 ///     Guid gift_wrapper;
 ///     u32 enchantment;
 ///     Guid item_creator;
@@ -29,7 +29,7 @@ pub struct TradeSlot {
     pub item: u32,
     pub display_id: u32,
     pub stack_count: u32,
-    pub is_wrapped: u32,
+    pub wrapped: bool,
     pub gift_wrapper: Guid,
     pub enchantment: u32,
     pub item_creator: Guid,
@@ -55,8 +55,8 @@ impl TradeSlot {
         // stack_count: u32
         w.write_all(&self.stack_count.to_le_bytes())?;
 
-        // is_wrapped: u32
-        w.write_all(&self.is_wrapped.to_le_bytes())?;
+        // wrapped: Bool32
+        w.write_all(u32::from(self.wrapped).to_le_bytes().as_slice())?;
 
         // gift_wrapper: Guid
         w.write_all(&self.gift_wrapper.guid().to_le_bytes())?;
@@ -103,9 +103,8 @@ impl TradeSlot {
         // stack_count: u32
         let stack_count = crate::util::read_u32_le(r)?;
 
-        // is_wrapped: u32
-        let is_wrapped = crate::util::read_u32_le(r)?;
-
+        // wrapped: Bool32
+        let wrapped = crate::util::read_u32_le(r)? != 0;
         // gift_wrapper: Guid
         let gift_wrapper = Guid::read(r)?;
 
@@ -138,7 +137,7 @@ impl TradeSlot {
             item,
             display_id,
             stack_count,
-            is_wrapped,
+            wrapped,
             gift_wrapper,
             enchantment,
             item_creator,

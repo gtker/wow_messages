@@ -2062,12 +2062,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_is_wrapped,
-            { "Is Wrapped", "woww.is.wrapped",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_issue_date,
             { "Issue Date", "woww.issue.date",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -4723,6 +4717,12 @@
         { &hf_woww_world_result,
             { "World Result", "woww.world.result",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_world_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_wrapped,
+            { "Wrapped", "woww.wrapped",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
