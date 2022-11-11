@@ -49,6 +49,12 @@ impl crate::Message for SMSG_GROUP_SET_LEADER {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_GROUP_SET_LEADER {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_GROUP_SET_LEADER {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_GROUP_SET_LEADER {}
+
 impl SMSG_GROUP_SET_LEADER {
     pub(crate) fn size(&self) -> usize {
         self.name.len() + 1 // name: CString

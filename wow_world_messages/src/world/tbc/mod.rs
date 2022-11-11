@@ -996,6 +996,8 @@ pub use crate::shared::smsg_group_decline_vanilla_tbc_wrath::SMSG_GROUP_DECLINE;
 
 pub use crate::shared::smsg_group_invite_vanilla_tbc::SMSG_GROUP_INVITE;
 
+pub use crate::shared::smsg_group_set_leader_vanilla_tbc_wrath::SMSG_GROUP_SET_LEADER;
+
 pub use crate::shared::smsg_group_uninvite_vanilla_tbc_wrath::SMSG_GROUP_UNINVITE;
 
 pub use crate::shared::smsg_guild_event_tbc_wrath::SMSG_GUILD_EVENT;

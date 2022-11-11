@@ -1042,6 +1042,8 @@ pub use crate::shared::smsg_group_decline_vanilla_tbc_wrath::SMSG_GROUP_DECLINE;
 
 pub use crate::shared::smsg_group_invite_vanilla_tbc::SMSG_GROUP_INVITE;
 
+pub use crate::shared::smsg_group_set_leader_vanilla_tbc_wrath::SMSG_GROUP_SET_LEADER;
+
 pub use crate::shared::smsg_group_uninvite_vanilla_tbc_wrath::SMSG_GROUP_UNINVITE;
 
 pub use crate::shared::smsg_guild_info_vanilla_tbc::SMSG_GUILD_INFO;
@@ -1372,8 +1374,6 @@ pub(crate) mod smsg_group_joined_battleground;
 pub use smsg_group_joined_battleground::*;
 pub(crate) mod smsg_group_list;
 pub use smsg_group_list::*;
-pub(crate) mod smsg_group_set_leader;
-pub use smsg_group_set_leader::*;
 pub(crate) mod smsg_guild_command_result;
 pub use smsg_guild_command_result::*;
 pub(crate) mod smsg_guild_event;
