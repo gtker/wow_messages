@@ -1038,6 +1038,8 @@ pub use crate::shared::smsg_gossip_complete_vanilla_tbc_wrath::SMSG_GOSSIP_COMPL
 
 pub use crate::shared::smsg_gossip_poi_vanilla_tbc_wrath::SMSG_GOSSIP_POI;
 
+pub use crate::shared::smsg_group_decline_vanilla_tbc_wrath::SMSG_GROUP_DECLINE;
+
 pub use crate::shared::smsg_group_invite_vanilla_tbc::SMSG_GROUP_INVITE;
 
 pub use crate::shared::smsg_guild_info_vanilla_tbc::SMSG_GUILD_INFO;
@@ -1362,8 +1364,6 @@ pub(crate) mod smsg_gmticket_getticket;
 pub use smsg_gmticket_getticket::*;
 pub(crate) mod smsg_gossip_message;
 pub use smsg_gossip_message::*;
-pub(crate) mod smsg_group_decline;
-pub use smsg_group_decline::*;
 pub(crate) mod smsg_group_destroyed;
 pub use smsg_group_destroyed::*;
 pub(crate) mod smsg_group_joined_battleground;

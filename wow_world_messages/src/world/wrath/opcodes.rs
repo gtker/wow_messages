@@ -5141,6 +5141,7 @@ use crate::world::wrath::SMSG_WHOIS;
 use crate::world::wrath::SMSG_CONTACT_LIST;
 use crate::world::wrath::SMSG_FRIEND_STATUS;
 use crate::world::wrath::SMSG_GROUP_INVITE;
+use crate::world::wrath::SMSG_GROUP_DECLINE;
 use crate::world::wrath::SMSG_GUILD_INVITE;
 use crate::world::wrath::SMSG_GUILD_INFO;
 use crate::world::wrath::SMSG_GUILD_EVENT;
@@ -5397,6 +5398,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CONTACT_LIST(SMSG_CONTACT_LIST),
     SMSG_FRIEND_STATUS(SMSG_FRIEND_STATUS),
     SMSG_GROUP_INVITE(SMSG_GROUP_INVITE),
+    SMSG_GROUP_DECLINE(SMSG_GROUP_DECLINE),
     SMSG_GUILD_INVITE(SMSG_GUILD_INVITE),
     SMSG_GUILD_INFO(SMSG_GUILD_INFO),
     SMSG_GUILD_EVENT(SMSG_GUILD_EVENT),
@@ -5655,6 +5657,7 @@ impl ServerOpcodeMessage {
             0x0067 => Ok(Self::SMSG_CONTACT_LIST(<SMSG_CONTACT_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0067, size: body_size, io, } } else { a } })?)),
             0x0068 => Ok(Self::SMSG_FRIEND_STATUS(<SMSG_FRIEND_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0068, size: body_size, io, } } else { a } })?)),
             0x006F => Ok(Self::SMSG_GROUP_INVITE(<SMSG_GROUP_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006F, size: body_size, io, } } else { a } })?)),
+            0x0074 => Ok(Self::SMSG_GROUP_DECLINE(<SMSG_GROUP_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0074, size: body_size, io, } } else { a } })?)),
             0x0083 => Ok(Self::SMSG_GUILD_INVITE(<SMSG_GUILD_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0083, size: body_size, io, } } else { a } })?)),
             0x0088 => Ok(Self::SMSG_GUILD_INFO(<SMSG_GUILD_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0088, size: body_size, io, } } else { a } })?)),
             0x0092 => Ok(Self::SMSG_GUILD_EVENT(<SMSG_GUILD_EVENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0092, size: body_size, io, } } else { a } })?)),
@@ -6062,6 +6065,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CONTACT_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FRIEND_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GROUP_INVITE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GROUP_DECLINE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_INVITE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_INFO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_EVENT(c) => c.write_encrypted_server(w, e),
@@ -6321,6 +6325,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CONTACT_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_FRIEND_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_GROUP_INVITE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GROUP_DECLINE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_INVITE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_INFO(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_EVENT(c) => c.write_unencrypted_server(w),
@@ -6580,6 +6585,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CONTACT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FRIEND_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_INVITE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GROUP_DECLINE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INVITE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_EVENT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6839,6 +6845,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CONTACT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FRIEND_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_INVITE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GROUP_DECLINE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INVITE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_EVENT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7098,6 +7105,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CONTACT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FRIEND_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_INVITE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GROUP_DECLINE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INVITE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_EVENT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7357,6 +7365,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CONTACT_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FRIEND_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_INVITE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GROUP_DECLINE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INVITE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_EVENT(c) => c.astd_write_unencrypted_server(w).await,
@@ -7618,6 +7627,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CONTACT_LIST(_) => "SMSG_CONTACT_LIST",
             ServerOpcodeMessage::SMSG_FRIEND_STATUS(_) => "SMSG_FRIEND_STATUS",
             ServerOpcodeMessage::SMSG_GROUP_INVITE(_) => "SMSG_GROUP_INVITE",
+            ServerOpcodeMessage::SMSG_GROUP_DECLINE(_) => "SMSG_GROUP_DECLINE",
             ServerOpcodeMessage::SMSG_GUILD_INVITE(_) => "SMSG_GUILD_INVITE",
             ServerOpcodeMessage::SMSG_GUILD_INFO(_) => "SMSG_GUILD_INFO",
             ServerOpcodeMessage::SMSG_GUILD_EVENT(_) => "SMSG_GUILD_EVENT",
@@ -8152,6 +8162,12 @@ impl From<SMSG_FRIEND_STATUS> for ServerOpcodeMessage {
 impl From<SMSG_GROUP_INVITE> for ServerOpcodeMessage {
     fn from(c: SMSG_GROUP_INVITE) -> Self {
         Self::SMSG_GROUP_INVITE(c)
+    }
+}
+
+impl From<SMSG_GROUP_DECLINE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_DECLINE) -> Self {
+        Self::SMSG_GROUP_DECLINE(c)
     }
 }
 
