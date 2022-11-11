@@ -5075,6 +5075,7 @@ use crate::world::tbc::SMSG_SUPERCEDED_SPELL;
 use crate::world::tbc::SMSG_SPELL_START;
 use crate::world::tbc::SMSG_SPELL_GO;
 use crate::world::tbc::SMSG_SPELL_FAILURE;
+use crate::world::tbc::SMSG_SPELL_COOLDOWN;
 use crate::world::tbc::SMSG_PET_CAST_FAILED;
 use crate::world::tbc::SMSG_AI_REACTION;
 use crate::world::tbc::SMSG_ATTACKSTART;
@@ -5333,6 +5334,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPELL_START(SMSG_SPELL_START),
     SMSG_SPELL_GO(SMSG_SPELL_GO),
     SMSG_SPELL_FAILURE(SMSG_SPELL_FAILURE),
+    SMSG_SPELL_COOLDOWN(SMSG_SPELL_COOLDOWN),
     SMSG_PET_CAST_FAILED(SMSG_PET_CAST_FAILED),
     SMSG_AI_REACTION(SMSG_AI_REACTION),
     SMSG_ATTACKSTART(SMSG_ATTACKSTART),
@@ -5593,6 +5595,7 @@ impl ServerOpcodeMessage {
             0x0131 => Ok(Self::SMSG_SPELL_START(<SMSG_SPELL_START as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0131, size: body_size, io, } } else { a } })?)),
             0x0132 => Ok(Self::SMSG_SPELL_GO(<SMSG_SPELL_GO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0132, size: body_size, io, } } else { a } })?)),
             0x0133 => Ok(Self::SMSG_SPELL_FAILURE(<SMSG_SPELL_FAILURE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0133, size: body_size, io, } } else { a } })?)),
+            0x0134 => Ok(Self::SMSG_SPELL_COOLDOWN(<SMSG_SPELL_COOLDOWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0134, size: body_size, io, } } else { a } })?)),
             0x0138 => Ok(Self::SMSG_PET_CAST_FAILED(<SMSG_PET_CAST_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0138, size: body_size, io, } } else { a } })?)),
             0x013C => Ok(Self::SMSG_AI_REACTION(<SMSG_AI_REACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013C, size: body_size, io, } } else { a } })?)),
             0x0143 => Ok(Self::SMSG_ATTACKSTART(<SMSG_ATTACKSTART as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0143, size: body_size, io, } } else { a } })?)),
@@ -5921,6 +5924,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_START(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELL_GO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELL_FAILURE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPELL_COOLDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_CAST_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AI_REACTION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSTART(c) => c.write_encrypted_server(w, e),
@@ -6182,6 +6186,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_START(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELL_GO(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELL_FAILURE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPELL_COOLDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_CAST_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_AI_REACTION(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSTART(c) => c.write_unencrypted_server(w),
@@ -6443,6 +6448,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_START(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_GO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_FAILURE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPELL_COOLDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_CAST_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AI_REACTION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6704,6 +6710,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_START(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_GO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_FAILURE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPELL_COOLDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_CAST_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AI_REACTION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_unencrypted_server(w).await,
@@ -6965,6 +6972,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_START(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_GO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_FAILURE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPELL_COOLDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_CAST_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AI_REACTION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTART(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7226,6 +7234,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELL_START(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_GO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_FAILURE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPELL_COOLDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_CAST_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AI_REACTION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTART(c) => c.astd_write_unencrypted_server(w).await,
@@ -7489,6 +7498,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPELL_START(_) => "SMSG_SPELL_START",
             ServerOpcodeMessage::SMSG_SPELL_GO(_) => "SMSG_SPELL_GO",
             ServerOpcodeMessage::SMSG_SPELL_FAILURE(_) => "SMSG_SPELL_FAILURE",
+            ServerOpcodeMessage::SMSG_SPELL_COOLDOWN(_) => "SMSG_SPELL_COOLDOWN",
             ServerOpcodeMessage::SMSG_PET_CAST_FAILED(_) => "SMSG_PET_CAST_FAILED",
             ServerOpcodeMessage::SMSG_AI_REACTION(_) => "SMSG_AI_REACTION",
             ServerOpcodeMessage::SMSG_ATTACKSTART(_) => "SMSG_ATTACKSTART",
@@ -8240,6 +8250,12 @@ impl From<SMSG_SPELL_GO> for ServerOpcodeMessage {
 impl From<SMSG_SPELL_FAILURE> for ServerOpcodeMessage {
     fn from(c: SMSG_SPELL_FAILURE) -> Self {
         Self::SMSG_SPELL_FAILURE(c)
+    }
+}
+
+impl From<SMSG_SPELL_COOLDOWN> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELL_COOLDOWN) -> Self {
+        Self::SMSG_SPELL_COOLDOWN(c)
     }
 }
 

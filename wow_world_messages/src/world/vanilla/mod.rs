@@ -1228,6 +1228,8 @@ pub use crate::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags
 
 pub use crate::shared::spell_cast_targets_vanilla_tbc::SpellCastTargets;
 
+pub use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
+
 pub use crate::shared::spell_miss_info_vanilla_tbc::SpellMissInfo;
 
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
@@ -1606,8 +1608,6 @@ pub(crate) mod smsg_zone_under_attack;
 pub use smsg_zone_under_attack::*;
 pub(crate) mod spell_cast_result;
 pub use spell_cast_result::*;
-pub(crate) mod spell_cooldown_status;
-pub use spell_cooldown_status::*;
 pub(crate) mod spell_effect;
 pub use spell_effect::*;
 pub(crate) mod spell_log;
