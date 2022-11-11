@@ -1,9 +1,7 @@
-#tag_all versions "1.12";
-
 smsg SMSG_RESURRECT_REQUEST = 0x015B {
     Guid guid;
     SizedCString name;
-    u8 caster_is_spirit_healer;
-    u8 respect_resurrection_timer;
+    Bool player;
+} {
+    versions = "1 2 3";
 }
-

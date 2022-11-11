@@ -874,12 +874,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_caster_is_spirit_healer,
-            { "Caster Is Spirit Healer", "woww.caster.is.spirit.healer",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_category_cooldown_in_msecs,
             { "Category Cooldown In Msecs", "woww.category.cooldown.in.msecs",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -3607,12 +3601,6 @@
         { &hf_woww_resisted,
             { "Resisted", "woww.resisted",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_respect_resurrection_timer,
-            { "Respect Resurrection Timer", "woww.respect.resurrection.timer",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

@@ -5146,8 +5146,7 @@
         case SMSG_RESURRECT_REQUEST:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             add_sized_cstring(ptv, &hf_woww_name);
-            ptvcursor_add(ptv, hf_woww_caster_is_spirit_healer, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_respect_resurrection_timer, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_player, 1, ENC_NA);
             break;
         case SMSG_SELL_ITEM:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
