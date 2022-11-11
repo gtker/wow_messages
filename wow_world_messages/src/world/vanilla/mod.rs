@@ -161,8 +161,6 @@ pub(crate) mod emote;
 pub use emote::*;
 pub(crate) mod friend;
 pub use friend::*;
-pub(crate) mod friend_result;
-pub use friend_result::*;
 pub(crate) mod friend_status;
 pub use friend_status::*;
 pub(crate) mod gm_ticket_type;
@@ -808,6 +806,8 @@ pub use crate::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
 
 pub use crate::shared::forced_reaction_vanilla_tbc_wrath::ForcedReaction;
 
+pub use crate::shared::friend_result_vanilla_tbc::FriendResult;
+
 pub use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 
 pub use crate::shared::gm_ticket_escalation_status_vanilla_tbc_wrath::GmTicketEscalationStatus;
@@ -1013,6 +1013,8 @@ pub use crate::shared::smsg_force_swim_speed_change_vanilla_tbc_wrath::SMSG_FORC
 pub use crate::shared::smsg_force_turn_rate_change_vanilla_tbc_wrath::SMSG_FORCE_TURN_RATE_CHANGE;
 
 pub use crate::shared::smsg_force_walk_speed_change_vanilla_tbc_wrath::SMSG_FORCE_WALK_SPEED_CHANGE;
+
+pub use crate::shared::smsg_friend_status_vanilla_tbc::SMSG_FRIEND_STATUS;
 
 pub use crate::shared::smsg_gameobject_custom_anim_vanilla_tbc_wrath::SMSG_GAMEOBJECT_CUSTOM_ANIM;
 
@@ -1350,8 +1352,6 @@ pub(crate) mod smsg_force_run_speed_change;
 pub use smsg_force_run_speed_change::*;
 pub(crate) mod smsg_friend_list;
 pub use smsg_friend_list::*;
-pub(crate) mod smsg_friend_status;
-pub use smsg_friend_status::*;
 pub(crate) mod smsg_gameobject_query_response;
 pub use smsg_gameobject_query_response::*;
 pub(crate) mod smsg_gameobject_reset_state;
