@@ -1,6 +1,30 @@
-#tag_all versions "1.12";
-
 smsg SMSG_GROUP_INVITE = 0x6F {
     CString name;
+} {
+    versions = "1 2";
 }
 
+enum PlayerInviteStatus : u8 {
+    ALREADY_IN_GROUP = 0;
+    NOT_IN_GROUP = 1;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_GROUP_INVITE = 0x6F {
+    PlayerInviteStatus status;
+    CString name;
+    optional unknown {
+        u32 unknown1 {
+            comment = "All emulators set entire optional to 0.";
+        }
+        u8 count {
+            comment = "All emulators set entire optional to 0.";
+        }
+        u32 unknown2 {
+            comment = "All emulators set entire optional to 0.";
+        }
+    }
+} {
+    versions = "3.3.5";
+}

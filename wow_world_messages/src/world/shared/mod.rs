@@ -389,6 +389,7 @@ pub mod smsg_gmticket_systemstatus_vanilla_tbc_wrath;
 pub mod smsg_gmticket_updatetext_vanilla_tbc_wrath;
 pub mod smsg_gossip_complete_vanilla_tbc_wrath;
 pub mod smsg_gossip_poi_vanilla_tbc_wrath;
+pub mod smsg_group_invite_vanilla_tbc;
 pub mod smsg_guild_event_tbc_wrath;
 pub mod smsg_guild_info_vanilla_tbc;
 pub mod smsg_guild_invite_vanilla_tbc_wrath;
