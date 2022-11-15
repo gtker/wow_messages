@@ -1364,6 +1364,8 @@ pub(crate) mod smsg_quest_query_response;
 pub use smsg_quest_query_response::*;
 pub(crate) mod smsg_questgiver_offer_reward;
 pub use smsg_questgiver_offer_reward::*;
+pub(crate) mod smsg_questgiver_quest_complete;
+pub use smsg_questgiver_quest_complete::*;
 pub(crate) mod smsg_questgiver_quest_details;
 pub use smsg_questgiver_quest_details::*;
 pub(crate) mod smsg_questgiver_quest_failed;

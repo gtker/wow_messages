@@ -1,15 +1,18 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::QuestItemReward;
+use crate::world::wrath::QuestItemReward;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm#L32):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
 ///     u32 quest_id;
 ///     u32 unknown;
 ///     u32 experience_reward;
 ///     u32 money_reward;
+///     u32 honor_reward;
+///     u32 talent_reward;
+///     u32 arena_point_reward;
 ///     u32 amount_of_item_rewards;
 ///     QuestItemReward[amount_of_item_rewards] item_rewards;
 /// }
@@ -21,6 +24,9 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub unknown: u32,
     pub experience_reward: u32,
     pub money_reward: u32,
+    pub honor_reward: u32,
+    pub talent_reward: u32,
+    pub arena_point_reward: u32,
     pub item_rewards: Vec<QuestItemReward>,
 }
 
@@ -45,6 +51,15 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         // money_reward: u32
         w.write_all(&self.money_reward.to_le_bytes())?;
 
+        // honor_reward: u32
+        w.write_all(&self.honor_reward.to_le_bytes())?;
+
+        // talent_reward: u32
+        w.write_all(&self.talent_reward.to_le_bytes())?;
+
+        // arena_point_reward: u32
+        w.write_all(&self.arena_point_reward.to_le_bytes())?;
+
         // amount_of_item_rewards: u32
         w.write_all(&(self.item_rewards.len() as u32).to_le_bytes())?;
 
@@ -57,7 +72,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(20..=4294967294).contains(&body_size) {
+        if !(32..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0191, size: body_size as u32 });
         }
 
@@ -73,6 +88,15 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         // money_reward: u32
         let money_reward = crate::util::read_u32_le(r)?;
 
+        // honor_reward: u32
+        let honor_reward = crate::util::read_u32_le(r)?;
+
+        // talent_reward: u32
+        let talent_reward = crate::util::read_u32_le(r)?;
+
+        // arena_point_reward: u32
+        let arena_point_reward = crate::util::read_u32_le(r)?;
+
         // amount_of_item_rewards: u32
         let amount_of_item_rewards = crate::util::read_u32_le(r)?;
 
@@ -87,13 +111,16 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
             unknown,
             experience_reward,
             money_reward,
+            honor_reward,
+            talent_reward,
+            arena_point_reward,
             item_rewards,
         })
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_QUESTGIVER_QUEST_COMPLETE {}
 
 impl SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub(crate) fn size(&self) -> usize {
@@ -101,6 +128,9 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
         + 4 // unknown: u32
         + 4 // experience_reward: u32
         + 4 // money_reward: u32
+        + 4 // honor_reward: u32
+        + 4 // talent_reward: u32
+        + 4 // arena_point_reward: u32
         + 4 // amount_of_item_rewards: u32
         + self.item_rewards.len() * 8 // item_rewards: QuestItemReward[amount_of_item_rewards]
     }

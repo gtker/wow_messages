@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
     u32 quest_id;
     u32 unknown {
@@ -11,5 +9,40 @@ smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
         valid_range = "0 5";
     }
     QuestItemReward[amount_of_item_rewards] item_rewards;
+} {
+    versions = "1";
 }
 
+smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
+    u32 quest_id;
+    u32 unknown {
+        comment = "cmangos/vmangos/mangoszero: set to 0x03";
+    }
+    u32 experience_reward;
+    u32 money_reward;
+    u32 honor_reward;
+    u32 amount_of_item_rewards {
+        valid_range = "0 5";
+    }
+    QuestItemReward[amount_of_item_rewards] item_rewards;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
+    u32 quest_id;
+    u32 unknown {
+        comment = "cmangos/vmangos/mangoszero: set to 0x03";
+    }
+    u32 experience_reward;
+    u32 money_reward;
+    u32 honor_reward;
+    u32 talent_reward;
+    u32 arena_point_reward;
+    u32 amount_of_item_rewards {
+        valid_range = "0 5";
+    }
+    QuestItemReward[amount_of_item_rewards] item_rewards;
+} {
+    versions = "3.3.5";
+}
