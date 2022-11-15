@@ -3,10 +3,10 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_petition_query_response.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_petition_query_response.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_petition_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_petition_query_response.wowm#L1):
 /// ```text
 /// smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
-///     Guid petition_guid;
+///     u32 petition_id;
 ///     Guid charter_owner;
 ///     CString guild_name;
 ///     CString body_text;
@@ -26,7 +26,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_PETITION_QUERY_RESPONSE {
-    pub petition_guid: Guid,
+    pub petition_id: u32,
     pub charter_owner: Guid,
     pub guild_name: String,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
@@ -66,6 +66,7 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     ///
     pub allowed_maximum_level: u32,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
+    /// vmangos: char m_choicetext`10``64`
     ///
     pub todo_amount_of_signers: u32,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
@@ -82,8 +83,8 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
+        // petition_id: u32
+        w.write_all(&self.petition_id.to_le_bytes())?;
 
         // charter_owner: Guid
         w.write_all(&self.charter_owner.guid().to_le_bytes())?;
@@ -145,12 +146,12 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(68..=578).contains(&body_size) {
+        if !(64..=574).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C7, size: body_size as u32 });
         }
 
-        // petition_guid: Guid
-        let petition_guid = Guid::read(r)?;
+        // petition_id: u32
+        let petition_id = crate::util::read_u32_le(r)?;
 
         // charter_owner: Guid
         let charter_owner = Guid::read(r)?;
@@ -203,7 +204,7 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         let number_of_choices = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            petition_guid,
+            petition_id,
             charter_owner,
             guild_name,
             body_text,
@@ -229,7 +230,7 @@ impl crate::world::vanilla::ServerMessage for SMSG_PETITION_QUERY_RESPONSE {}
 
 impl SMSG_PETITION_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        8 // petition_guid: Guid
+        4 // petition_id: u32
         + 8 // charter_owner: Guid
         + self.guild_name.len() + 1 // guild_name: CString
         + self.body_text.len() + 1 // body_text: CString

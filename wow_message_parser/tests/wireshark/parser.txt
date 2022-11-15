@@ -4761,7 +4761,7 @@
             }
             break;
         case SMSG_PETITION_QUERY_RESPONSE:
-            ptvcursor_add(ptv, hf_woww_petition_guid, 8, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_petition_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_charter_owner, 8, ENC_LITTLE_ENDIAN);
             add_cstring(ptv, &hf_woww_guild_name);
             add_cstring(ptv, &hf_woww_body_text);

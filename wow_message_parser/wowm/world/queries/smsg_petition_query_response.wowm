@@ -1,7 +1,5 @@
-#tag_all versions "1.12";
-
 smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
-    Guid petition_guid;
+    u32 petition_id;
     Guid charter_owner;
     CString guild_name;
     CString body_text {
@@ -43,9 +41,79 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     /* TODO Figure out if CStrings work? */
     u32 todo_amount_of_signers {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+        comment = "vmangos: char m_choicetext[10][64]";
     }
     u32 number_of_choices {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
+} {
+    versions = "1";
 }
 
+enum CharterType : u8 {
+    GUILD = 0;
+    ARENA = 1;
+} {
+    versions = "2 3";
+}
+
+smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
+    u32 petition_id;
+    Guid charter_owner;
+    CString guild_name;
+    CString body_text {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 minimum_signatures {
+        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
+    }
+    u32 maximum_signatures {
+        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
+    }
+    u32 unknown1 {
+        comment = "mangosone: bypass client - side limitation, a different value is needed here for each petition";
+    }
+    u32 unknown2;
+    u32 unknown3;
+    u32 unknown4;
+    u32 unknown5;
+    u16 unknown6;
+    u32 unknown7;
+    u32 unknown8;
+    u32 unknown9;
+    u32 unknown10;
+    (u32)CharterType charter_type;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
+    u32 petition_id;
+    Guid charter_owner;
+    CString guild_name;
+    CString body_text {
+        comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
+    }
+    u32 minimum_signatures {
+        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
+    }
+    u32 maximum_signatures {
+        comment = "cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos";
+    }
+    u32 unknown1 {
+        comment = "mangosone: bypass client - side limitation, a different value is needed here for each petition";
+    }
+    u32 unknown2;
+    u32 unknown3;
+    u32 unknown4;
+    u32 unknown5;
+    u16 unknown6;
+    u32 unknown7;
+    u32 unknown8;
+    u32 unknown9;
+    u8[10] unknown10;
+    u32 unknown11;
+    (u32)CharterType charter_type;
+} {
+    versions = "3.3.5";
+}

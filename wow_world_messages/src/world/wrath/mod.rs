@@ -306,6 +306,8 @@ pub use crate::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlag
 
 pub use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
 
+pub use crate::shared::charter_type_tbc_wrath::CharterType;
+
 pub use crate::shared::chat_notify_tbc_wrath::ChatNotify;
 
 pub use crate::shared::cmsg_accept_trade_vanilla_tbc_wrath::CMSG_ACCEPT_TRADE;
@@ -1362,6 +1364,8 @@ pub(crate) mod smsg_pet_spells;
 pub use smsg_pet_spells::*;
 pub(crate) mod smsg_pet_tame_failure;
 pub use smsg_pet_tame_failure::*;
+pub(crate) mod smsg_petition_query_response;
+pub use smsg_petition_query_response::*;
 pub(crate) mod smsg_played_time;
 pub use smsg_played_time::*;
 pub(crate) mod smsg_playerbound;

@@ -13,6 +13,7 @@ pub mod cast_flags_vanilla_tbc;
 pub mod channel_flags_vanilla_tbc_wrath;
 pub mod channel_member_flags_vanilla_tbc_wrath;
 pub mod channel_member_vanilla_tbc_wrath;
+pub mod charter_type_tbc_wrath;
 pub mod chat_notify_tbc_wrath;
 pub mod cmsg_accept_trade_vanilla_tbc_wrath;
 pub mod cmsg_activatetaxi_vanilla_tbc_wrath;

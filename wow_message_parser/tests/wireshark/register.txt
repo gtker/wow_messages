@@ -3106,6 +3106,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_petition_id,
+            { "Petition Id", "woww.petition.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_petition_result,
             { "Petition Result", "woww.petition.result",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_petition_result_strings), 0,

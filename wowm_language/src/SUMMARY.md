@@ -61,6 +61,7 @@
 - [ChannelFlags](docs/channelflags.md)
 - [ChannelMemberFlags](docs/channelmemberflags.md)
 - [CharacterFlags](docs/characterflags.md)
+- [CharterType](docs/chartertype.md)
 - [ChatNotify](docs/chatnotify.md)
 - [ChatRestrictionType](docs/chatrestrictiontype.md)
 - [ChatType](docs/chattype.md)
