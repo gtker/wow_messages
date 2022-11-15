@@ -204,7 +204,7 @@ impl ParsedType {
             "Bool16" => Self::Bool(IntegerType::U16(Endianness::Little)),
             "Bool32" => Self::Bool(IntegerType::U32(Endianness::Little)),
             "Bool64" => Self::Bool(IntegerType::U64(Endianness::Little)),
-            "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
+            "Item16" | "Spell16" | "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
             "Spell" | "Milliseconds" | "Seconds" | "Copper" | "Item" => {
                 Self::Integer(IntegerType::U32(Endianness::Little))
