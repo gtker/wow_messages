@@ -12,7 +12,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_PLAY_SPELL_IMPACT {
     pub guid: Guid,
-    /// mangoszero: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A
+    /// mangoszero/mangosone/azerothcore: index from SpellVisualKit.dbc. Used for visual effect on player with 0x016A
     ///
     pub spell_visual_kit: u32,
 }
@@ -53,4 +53,10 @@ impl crate::Message for SMSG_PLAY_SPELL_IMPACT {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PLAY_SPELL_IMPACT {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PLAY_SPELL_IMPACT {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PLAY_SPELL_IMPACT {}
 

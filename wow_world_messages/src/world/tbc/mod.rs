@@ -1158,6 +1158,8 @@ pub use crate::shared::smsg_petition_sign_results_tbc_wrath::SMSG_PETITION_SIGN_
 
 pub use crate::shared::smsg_play_object_sound_vanilla_tbc_wrath::SMSG_PLAY_OBJECT_SOUND;
 
+pub use crate::shared::smsg_play_spell_impact_vanilla_tbc_wrath::SMSG_PLAY_SPELL_IMPACT;
+
 pub use crate::shared::smsg_play_spell_visual_vanilla_tbc_wrath::SMSG_PLAY_SPELL_VISUAL;
 
 pub use crate::shared::smsg_pong_vanilla_tbc_wrath::SMSG_PONG;

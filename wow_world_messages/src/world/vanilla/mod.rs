@@ -1162,6 +1162,8 @@ pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PET
 
 pub use crate::shared::smsg_play_object_sound_vanilla_tbc_wrath::SMSG_PLAY_OBJECT_SOUND;
 
+pub use crate::shared::smsg_play_spell_impact_vanilla_tbc_wrath::SMSG_PLAY_SPELL_IMPACT;
+
 pub use crate::shared::smsg_play_spell_visual_vanilla_tbc_wrath::SMSG_PLAY_SPELL_VISUAL;
 
 pub use crate::shared::smsg_pong_vanilla_tbc_wrath::SMSG_PONG;
@@ -1506,8 +1508,6 @@ pub(crate) mod smsg_play_music;
 pub use smsg_play_music::*;
 pub(crate) mod smsg_play_sound;
 pub use smsg_play_sound::*;
-pub(crate) mod smsg_play_spell_impact;
-pub use smsg_play_spell_impact::*;
 pub(crate) mod smsg_played_time;
 pub use smsg_played_time::*;
 pub(crate) mod smsg_player_skinned;
