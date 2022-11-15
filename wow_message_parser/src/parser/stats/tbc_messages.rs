@@ -549,7 +549,11 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_LOGIN_VERIFY_WORLD", 0x236),
     Data::new("CMSG_CLEAR_EXPLORATION", 0x237),
     Data::new("CMSG_SEND_MAIL", 0x238),
-    Data::new("SMSG_SEND_MAIL_RESULT", 0x239),
+    Data::with_reason(
+        "SMSG_SEND_MAIL_RESULT",
+        0x239,
+        "Elseif for different variable",
+    ),
     Data::new("CMSG_GET_MAIL_LIST", 0x23A),
     Data::new("SMSG_MAIL_LIST_RESULT", 0x23B),
     Data::new("CMSG_BATTLEFIELD_LIST", 0x23C),
