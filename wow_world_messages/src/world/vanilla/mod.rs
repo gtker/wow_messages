@@ -1216,6 +1216,8 @@ pub use crate::shared::smsg_spell_delayed_vanilla_tbc_wrath::SMSG_SPELL_DELAYED;
 
 pub use crate::shared::smsg_spellenergizelog_vanilla_tbc::SMSG_SPELLENERGIZELOG;
 
+pub use crate::shared::smsg_spirit_healer_confirm_vanilla_tbc_wrath::SMSG_SPIRIT_HEALER_CONFIRM;
+
 pub use crate::shared::smsg_spline_move_feather_fall_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_FEATHER_FALL;
 
 pub use crate::shared::smsg_spline_move_land_walk_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_LAND_WALK;
@@ -1580,8 +1582,6 @@ pub(crate) mod smsg_spellnonmeleedamagelog;
 pub use smsg_spellnonmeleedamagelog::*;
 pub(crate) mod smsg_spellordamage_immune;
 pub use smsg_spellordamage_immune::*;
-pub(crate) mod smsg_spirit_healer_confirm;
-pub use smsg_spirit_healer_confirm::*;
 pub(crate) mod smsg_summon_request;
 pub use smsg_summon_request::*;
 pub(crate) mod smsg_text_emote;
