@@ -1134,6 +1134,8 @@ pub use crate::shared::smsg_pet_unlearn_confirm_vanilla_tbc_wrath::SMSG_PET_UNLE
 
 pub use crate::shared::smsg_petition_show_signatures_vanilla_tbc_wrath::SMSG_PETITION_SHOW_SIGNATURES;
 
+pub use crate::shared::smsg_petition_showlist_tbc_wrath::SMSG_PETITION_SHOWLIST;
+
 pub use crate::shared::smsg_petition_sign_results_tbc_wrath::SMSG_PETITION_SIGN_RESULTS;
 
 pub use crate::shared::smsg_play_object_sound_vanilla_tbc_wrath::SMSG_PLAY_OBJECT_SOUND;
@@ -1370,8 +1372,6 @@ pub(crate) mod smsg_party_command_result;
 pub use smsg_party_command_result::*;
 pub(crate) mod smsg_pet_cast_failed;
 pub use smsg_pet_cast_failed::*;
-pub(crate) mod smsg_petition_showlist;
-pub use smsg_petition_showlist::*;
 pub(crate) mod smsg_playerbound;
 pub use smsg_playerbound::*;
 pub(crate) mod smsg_quest_query_response;

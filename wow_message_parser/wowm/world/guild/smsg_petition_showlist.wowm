@@ -1,9 +1,9 @@
 struct PetitionShowlist {
     u32 index;
-    u32 charter_entry = 5863 {
+    u32 charter_entry {
         comment = "cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863).";
     }
-    u32 charter_display_id = 16161 {
+    u32 charter_display_id {
         comment = "cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161).";
     }
     u32 guild_charter_cost {
@@ -20,10 +20,10 @@ struct PetitionShowlist {
 
 struct PetitionShowlist {
     u32 index;
-    u32 charter_entry = 5863 {
+    u32 charter_entry {
         comment = "cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863) and arena charter ids.";
     }
-    u32 charter_display_id = 16161 {
+    u32 charter_display_id {
         comment = "cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161) and arena charter ids.";
     }
     u32 guild_charter_cost {
@@ -41,7 +41,13 @@ smsg SMSG_PETITION_SHOWLIST = 0x01BC {
     u8 amount_of_petitions;
     PetitionShowlist[amount_of_petitions] petitions;
 } {
-    paste_versions = "1 2.4.3";
+    versions = "1";
 }
 
-
+smsg SMSG_PETITION_SHOWLIST = 0x01BC {
+    Guid npc;
+    u8 amount_of_petitions;
+    PetitionShowlist[amount_of_petitions] petitions;
+} {
+    versions = "2.4.3 3.3.5";
+}

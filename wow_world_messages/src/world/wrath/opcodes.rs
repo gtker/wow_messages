@@ -5258,6 +5258,7 @@ use crate::world::wrath::SMSG_TRAINER_BUY_SUCCEEDED;
 use crate::world::wrath::SMSG_TRAINER_BUY_FAILED;
 use crate::world::wrath::SMSG_SHOW_BANK;
 use crate::world::wrath::SMSG_BUY_BANK_SLOT_RESULT;
+use crate::world::wrath::SMSG_PETITION_SHOWLIST;
 use crate::world::wrath::SMSG_PETITION_SHOW_SIGNATURES;
 use crate::world::wrath::SMSG_PETITION_SIGN_RESULTS;
 use crate::world::wrath::SMSG_TURN_IN_PETITION_RESULTS;
@@ -5543,6 +5544,7 @@ pub enum ServerOpcodeMessage {
     SMSG_TRAINER_BUY_FAILED(SMSG_TRAINER_BUY_FAILED),
     SMSG_SHOW_BANK(SMSG_SHOW_BANK),
     SMSG_BUY_BANK_SLOT_RESULT(SMSG_BUY_BANK_SLOT_RESULT),
+    SMSG_PETITION_SHOWLIST(SMSG_PETITION_SHOWLIST),
     SMSG_PETITION_SHOW_SIGNATURES(SMSG_PETITION_SHOW_SIGNATURES),
     SMSG_PETITION_SIGN_RESULTS(SMSG_PETITION_SIGN_RESULTS),
     SMSG_TURN_IN_PETITION_RESULTS(SMSG_TURN_IN_PETITION_RESULTS),
@@ -5830,6 +5832,7 @@ impl ServerOpcodeMessage {
             0x01B4 => Ok(Self::SMSG_TRAINER_BUY_FAILED(<SMSG_TRAINER_BUY_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B4, size: body_size, io, } } else { a } })?)),
             0x01B8 => Ok(Self::SMSG_SHOW_BANK(<SMSG_SHOW_BANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B8, size: body_size, io, } } else { a } })?)),
             0x01BA => Ok(Self::SMSG_BUY_BANK_SLOT_RESULT(<SMSG_BUY_BANK_SLOT_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BA, size: body_size, io, } } else { a } })?)),
+            0x01BC => Ok(Self::SMSG_PETITION_SHOWLIST(<SMSG_PETITION_SHOWLIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BC, size: body_size, io, } } else { a } })?)),
             0x01BF => Ok(Self::SMSG_PETITION_SHOW_SIGNATURES(<SMSG_PETITION_SHOW_SIGNATURES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01BF, size: body_size, io, } } else { a } })?)),
             0x01C1 => Ok(Self::SMSG_PETITION_SIGN_RESULTS(<SMSG_PETITION_SIGN_RESULTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C1, size: body_size, io, } } else { a } })?)),
             0x01C5 => Ok(Self::SMSG_TURN_IN_PETITION_RESULTS(<SMSG_TURN_IN_PETITION_RESULTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C5, size: body_size, io, } } else { a } })?)),
@@ -6266,6 +6269,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SHOW_BANK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PETITION_SHOWLIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.write_encrypted_server(w, e),
@@ -6554,6 +6558,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SHOW_BANK(c) => c.write_unencrypted_server(w),
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PETITION_SHOWLIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.write_unencrypted_server(w),
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.write_unencrypted_server(w),
@@ -6842,6 +6847,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SHOW_BANK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PETITION_SHOWLIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7130,6 +7136,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SHOW_BANK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PETITION_SHOWLIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7418,6 +7425,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SHOW_BANK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PETITION_SHOWLIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7706,6 +7714,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SHOW_BANK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BUY_BANK_SLOT_RESULT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PETITION_SHOWLIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_SHOW_SIGNATURES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.astd_write_unencrypted_server(w).await,
@@ -7996,6 +8005,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_TRAINER_BUY_FAILED(_) => "SMSG_TRAINER_BUY_FAILED",
             ServerOpcodeMessage::SMSG_SHOW_BANK(_) => "SMSG_SHOW_BANK",
             ServerOpcodeMessage::SMSG_BUY_BANK_SLOT_RESULT(_) => "SMSG_BUY_BANK_SLOT_RESULT",
+            ServerOpcodeMessage::SMSG_PETITION_SHOWLIST(_) => "SMSG_PETITION_SHOWLIST",
             ServerOpcodeMessage::SMSG_PETITION_SHOW_SIGNATURES(_) => "SMSG_PETITION_SHOW_SIGNATURES",
             ServerOpcodeMessage::SMSG_PETITION_SIGN_RESULTS(_) => "SMSG_PETITION_SIGN_RESULTS",
             ServerOpcodeMessage::SMSG_TURN_IN_PETITION_RESULTS(_) => "SMSG_TURN_IN_PETITION_RESULTS",
@@ -9144,6 +9154,12 @@ impl From<SMSG_SHOW_BANK> for ServerOpcodeMessage {
 impl From<SMSG_BUY_BANK_SLOT_RESULT> for ServerOpcodeMessage {
     fn from(c: SMSG_BUY_BANK_SLOT_RESULT) -> Self {
         Self::SMSG_BUY_BANK_SLOT_RESULT(c)
+    }
+}
+
+impl From<SMSG_PETITION_SHOWLIST> for ServerOpcodeMessage {
+    fn from(c: SMSG_PETITION_SHOWLIST) -> Self {
+        Self::SMSG_PETITION_SHOWLIST(c)
     }
 }
 

@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::PetitionShowlist;
+use crate::world::shared::petition_showlist_tbc_wrath::PetitionShowlist;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:39`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L39):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:47`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L47):
 /// ```text
 /// smsg SMSG_PETITION_SHOWLIST = 0x01BC {
 ///     Guid npc;
@@ -66,6 +66,9 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
 }
 #[cfg(feature = "tbc")]
 impl crate::world::tbc::ServerMessage for SMSG_PETITION_SHOWLIST {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PETITION_SHOWLIST {}
 
 impl SMSG_PETITION_SHOWLIST {
     pub(crate) fn size(&self) -> usize {

@@ -458,6 +458,7 @@ pub mod smsg_pet_spells_vanilla_tbc;
 pub mod smsg_pet_tame_failure_vanilla_tbc;
 pub mod smsg_pet_unlearn_confirm_vanilla_tbc_wrath;
 pub mod smsg_petition_show_signatures_vanilla_tbc_wrath;
+pub mod smsg_petition_showlist_tbc_wrath;
 pub mod smsg_petition_sign_results_tbc_wrath;
 pub mod smsg_play_object_sound_vanilla_tbc_wrath;
 pub mod smsg_pong_vanilla_tbc_wrath;
