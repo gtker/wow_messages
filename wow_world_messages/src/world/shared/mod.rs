@@ -514,6 +514,7 @@ pub mod smsg_spline_set_walk_speed_vanilla_tbc_wrath;
 pub mod smsg_stable_result_vanilla_tbc;
 pub mod smsg_standstate_update_vanilla_tbc_wrath;
 pub mod smsg_start_mirror_timer_vanilla_tbc_wrath;
+pub mod smsg_stop_mirror_timer_vanilla_tbc_wrath;
 pub mod smsg_superceded_spell_vanilla_tbc;
 pub mod smsg_taxinode_status_vanilla_tbc_wrath;
 pub mod smsg_time_sync_req_tbc_wrath;

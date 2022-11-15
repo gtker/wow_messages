@@ -5290,6 +5290,7 @@ use crate::world::wrath::MSG_MINIMAP_PING_Server;
 use crate::world::wrath::SMSG_ENCHANTMENTLOG;
 use crate::world::wrath::SMSG_START_MIRROR_TIMER;
 use crate::world::wrath::SMSG_PAUSE_MIRROR_TIMER;
+use crate::world::wrath::SMSG_STOP_MIRROR_TIMER;
 use crate::world::wrath::SMSG_PONG;
 use crate::world::wrath::SMSG_GAMEOBJECT_PAGETEXT;
 use crate::world::wrath::SMSG_ITEM_TIME_UPDATE;
@@ -5583,6 +5584,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ENCHANTMENTLOG(SMSG_ENCHANTMENTLOG),
     SMSG_START_MIRROR_TIMER(SMSG_START_MIRROR_TIMER),
     SMSG_PAUSE_MIRROR_TIMER(SMSG_PAUSE_MIRROR_TIMER),
+    SMSG_STOP_MIRROR_TIMER(SMSG_STOP_MIRROR_TIMER),
     SMSG_PONG(SMSG_PONG),
     SMSG_GAMEOBJECT_PAGETEXT(SMSG_GAMEOBJECT_PAGETEXT),
     SMSG_ITEM_TIME_UPDATE(SMSG_ITEM_TIME_UPDATE),
@@ -5878,6 +5880,7 @@ impl ServerOpcodeMessage {
             0x01D7 => Ok(Self::SMSG_ENCHANTMENTLOG(<SMSG_ENCHANTMENTLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D7, size: body_size, io, } } else { a } })?)),
             0x01D9 => Ok(Self::SMSG_START_MIRROR_TIMER(<SMSG_START_MIRROR_TIMER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D9, size: body_size, io, } } else { a } })?)),
             0x01DA => Ok(Self::SMSG_PAUSE_MIRROR_TIMER(<SMSG_PAUSE_MIRROR_TIMER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DA, size: body_size, io, } } else { a } })?)),
+            0x01DB => Ok(Self::SMSG_STOP_MIRROR_TIMER(<SMSG_STOP_MIRROR_TIMER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DB, size: body_size, io, } } else { a } })?)),
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DD, size: body_size, io, } } else { a } })?)),
             0x01DF => Ok(Self::SMSG_GAMEOBJECT_PAGETEXT(<SMSG_GAMEOBJECT_PAGETEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DF, size: body_size, io, } } else { a } })?)),
             0x01EA => Ok(Self::SMSG_ITEM_TIME_UPDATE(<SMSG_ITEM_TIME_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01EA, size: body_size, io, } } else { a } })?)),
@@ -6322,6 +6325,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENCHANTMENTLOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_START_MIRROR_TIMER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PAUSE_MIRROR_TIMER(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_STOP_MIRROR_TIMER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.write_encrypted_server(w, e),
@@ -6618,6 +6622,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENCHANTMENTLOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_START_MIRROR_TIMER(c) => c.write_unencrypted_server(w),
             Self::SMSG_PAUSE_MIRROR_TIMER(c) => c.write_unencrypted_server(w),
+            Self::SMSG_STOP_MIRROR_TIMER(c) => c.write_unencrypted_server(w),
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.write_unencrypted_server(w),
@@ -6914,6 +6919,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENCHANTMENTLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_START_MIRROR_TIMER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PAUSE_MIRROR_TIMER(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_STOP_MIRROR_TIMER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7210,6 +7216,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENCHANTMENTLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_START_MIRROR_TIMER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PAUSE_MIRROR_TIMER(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_STOP_MIRROR_TIMER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7506,6 +7513,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENCHANTMENTLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_START_MIRROR_TIMER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PAUSE_MIRROR_TIMER(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_STOP_MIRROR_TIMER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7802,6 +7810,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ENCHANTMENTLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_START_MIRROR_TIMER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PAUSE_MIRROR_TIMER(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_STOP_MIRROR_TIMER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8100,6 +8109,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ENCHANTMENTLOG(_) => "SMSG_ENCHANTMENTLOG",
             ServerOpcodeMessage::SMSG_START_MIRROR_TIMER(_) => "SMSG_START_MIRROR_TIMER",
             ServerOpcodeMessage::SMSG_PAUSE_MIRROR_TIMER(_) => "SMSG_PAUSE_MIRROR_TIMER",
+            ServerOpcodeMessage::SMSG_STOP_MIRROR_TIMER(_) => "SMSG_STOP_MIRROR_TIMER",
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_GAMEOBJECT_PAGETEXT(_) => "SMSG_GAMEOBJECT_PAGETEXT",
             ServerOpcodeMessage::SMSG_ITEM_TIME_UPDATE(_) => "SMSG_ITEM_TIME_UPDATE",
@@ -9336,6 +9346,12 @@ impl From<SMSG_START_MIRROR_TIMER> for ServerOpcodeMessage {
 impl From<SMSG_PAUSE_MIRROR_TIMER> for ServerOpcodeMessage {
     fn from(c: SMSG_PAUSE_MIRROR_TIMER) -> Self {
         Self::SMSG_PAUSE_MIRROR_TIMER(c)
+    }
+}
+
+impl From<SMSG_STOP_MIRROR_TIMER> for ServerOpcodeMessage {
+    fn from(c: SMSG_STOP_MIRROR_TIMER) -> Self {
+        Self::SMSG_STOP_MIRROR_TIMER(c)
     }
 }
 

@@ -1246,6 +1246,8 @@ pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE
 
 pub use crate::shared::smsg_start_mirror_timer_vanilla_tbc_wrath::SMSG_START_MIRROR_TIMER;
 
+pub use crate::shared::smsg_stop_mirror_timer_vanilla_tbc_wrath::SMSG_STOP_MIRROR_TIMER;
+
 pub use crate::shared::smsg_superceded_spell_vanilla_tbc::SMSG_SUPERCEDED_SPELL;
 
 pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STATUS;
