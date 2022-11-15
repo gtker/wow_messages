@@ -1240,6 +1240,8 @@ pub use crate::shared::smsg_superceded_spell_vanilla_tbc::SMSG_SUPERCEDED_SPELL;
 
 pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STATUS;
 
+pub use crate::shared::smsg_trainer_buy_failed_vanilla_tbc_wrath::SMSG_TRAINER_BUY_FAILED;
+
 pub use crate::shared::smsg_trainer_buy_succeeded_vanilla_tbc_wrath::SMSG_TRAINER_BUY_SUCCEEDED;
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
@@ -1263,6 +1265,8 @@ pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
 
 pub use crate::shared::trainer_spell_state_vanilla_tbc_wrath::TrainerSpellState;
+
+pub use crate::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
 
 pub use crate::shared::transport_info_vanilla_tbc::TransportInfo;
 
@@ -1584,8 +1588,6 @@ pub(crate) mod smsg_trade_status;
 pub use smsg_trade_status::*;
 pub(crate) mod smsg_trade_status_extended;
 pub use smsg_trade_status_extended::*;
-pub(crate) mod smsg_trainer_buy_failed;
-pub use smsg_trainer_buy_failed::*;
 pub(crate) mod smsg_trainer_list;
 pub use smsg_trainer_list::*;
 pub(crate) mod smsg_transfer_aborted;
@@ -1632,8 +1634,6 @@ pub(crate) mod trade_slot;
 pub use trade_slot::*;
 pub(crate) mod trainer_spell;
 pub use trainer_spell::*;
-pub(crate) mod training_failure_reason;
-pub use training_failure_reason::*;
 pub(crate) mod transfer_abort_reason;
 pub use transfer_abort_reason::*;
 pub(crate) mod url_info;

@@ -1,9 +1,11 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::TrainingFailureReason;
+use crate::world::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+/// No TBC emulators implement this.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_trainer_buy_failed.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_trainer_buy_failed.wowm#L18):
 /// ```text
 /// smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
@@ -61,4 +63,10 @@ impl crate::Message for SMSG_TRAINER_BUY_FAILED {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_TRAINER_BUY_FAILED {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_TRAINER_BUY_FAILED {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_TRAINER_BUY_FAILED {}
 

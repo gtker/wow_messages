@@ -1,6 +1,10 @@
 # SMSG_TRAINER_BUY_FAILED
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
+
+### Comment
+
+No TBC emulators implement this.
 
 ### Wowm Representation
 

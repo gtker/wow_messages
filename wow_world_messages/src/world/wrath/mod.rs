@@ -1172,6 +1172,8 @@ pub use crate::shared::smsg_time_sync_req_tbc_wrath::SMSG_TIME_SYNC_REQ;
 
 pub use crate::shared::smsg_trade_status_extended_tbc_wrath::SMSG_TRADE_STATUS_EXTENDED;
 
+pub use crate::shared::smsg_trainer_buy_failed_vanilla_tbc_wrath::SMSG_TRAINER_BUY_FAILED;
+
 pub use crate::shared::smsg_trainer_buy_succeeded_vanilla_tbc_wrath::SMSG_TRAINER_BUY_SUCCEEDED;
 
 pub use crate::shared::smsg_turn_in_petition_results_tbc_wrath::SMSG_TURN_IN_PETITION_RESULTS;
@@ -1191,6 +1193,8 @@ pub use crate::shared::trade_slot_tbc_wrath::TradeSlot;
 pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
 
 pub use crate::shared::trainer_spell_state_vanilla_tbc_wrath::TrainerSpellState;
+
+pub use crate::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
 
 pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 

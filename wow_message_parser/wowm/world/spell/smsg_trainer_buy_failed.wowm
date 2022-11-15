@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 enum TrainingFailureReason : u32
 {
@@ -19,5 +19,7 @@ smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {
     Guid guid;
     Spell id;
     TrainingFailureReason error;
+} {
+    comment = "No TBC emulators implement this.";
 }
 
