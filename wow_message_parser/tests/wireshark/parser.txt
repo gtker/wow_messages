@@ -5147,7 +5147,7 @@
             ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_REMOVED_SPELL:
-            ptvcursor_add(ptv, hf_woww_spell_id, 2, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_spell, 2, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_RESISTLOG:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);

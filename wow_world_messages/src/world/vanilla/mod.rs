@@ -1194,6 +1194,8 @@ pub use crate::shared::smsg_read_item_ok_vanilla_tbc_wrath::SMSG_READ_ITEM_OK;
 
 pub use crate::shared::smsg_received_mail_vanilla_tbc_wrath::SMSG_RECEIVED_MAIL;
 
+pub use crate::shared::smsg_removed_spell_vanilla_tbc::SMSG_REMOVED_SPELL;
+
 pub use crate::shared::smsg_resurrect_request_vanilla_tbc_wrath::SMSG_RESURRECT_REQUEST;
 
 pub use crate::shared::smsg_sell_item_vanilla_tbc::SMSG_SELL_ITEM;
@@ -1538,8 +1540,6 @@ pub(crate) mod smsg_raid_instance_info;
 pub use smsg_raid_instance_info::*;
 pub(crate) mod smsg_raid_instance_message;
 pub use smsg_raid_instance_message::*;
-pub(crate) mod smsg_removed_spell;
-pub use smsg_removed_spell::*;
 pub(crate) mod smsg_resistlog;
 pub use smsg_resistlog::*;
 pub(crate) mod smsg_send_mail_result;

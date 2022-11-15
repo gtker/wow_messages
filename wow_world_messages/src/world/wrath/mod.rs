@@ -1422,6 +1422,8 @@ pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
 pub(crate) mod smsg_raid_instance_info;
 pub use smsg_raid_instance_info::*;
+pub(crate) mod smsg_removed_spell;
+pub use smsg_removed_spell::*;
 pub(crate) mod smsg_sell_item;
 pub use smsg_sell_item::*;
 pub(crate) mod smsg_server_message;

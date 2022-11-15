@@ -1,7 +1,11 @@
-#tag_all versions "1.12";
-
 smsg SMSG_REMOVED_SPELL = 0x0203 {
-    /* TODO: cmangos + vmangos cast this to u16, but reserve 4 bytes */
-    u16 spell_id;
+    Spell16 spell;
+} {
+    versions = "1 2";
 }
 
+smsg SMSG_REMOVED_SPELL = 0x0203 {
+    Spell spell;
+} {
+    versions = "3.3.5";
+}

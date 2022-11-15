@@ -5306,6 +5306,7 @@ use crate::world::wrath::SMSG_PLAY_SPELL_IMPACT;
 use crate::world::wrath::SMSG_EXPLORATION_EXPERIENCE;
 use crate::world::wrath::MSG_RANDOM_ROLL_Server;
 use crate::world::wrath::SMSG_ENVIRONMENTAL_DAMAGE_LOG;
+use crate::world::wrath::SMSG_REMOVED_SPELL;
 use crate::world::wrath::SMSG_GMTICKET_CREATE;
 use crate::world::wrath::SMSG_GMTICKET_UPDATETEXT;
 use crate::world::wrath::SMSG_ACCOUNT_DATA_TIMES;
@@ -5605,6 +5606,7 @@ pub enum ServerOpcodeMessage {
     SMSG_EXPLORATION_EXPERIENCE(SMSG_EXPLORATION_EXPERIENCE),
     MSG_RANDOM_ROLL(MSG_RANDOM_ROLL_Server),
     SMSG_ENVIRONMENTAL_DAMAGE_LOG(SMSG_ENVIRONMENTAL_DAMAGE_LOG),
+    SMSG_REMOVED_SPELL(SMSG_REMOVED_SPELL),
     SMSG_GMTICKET_CREATE(SMSG_GMTICKET_CREATE),
     SMSG_GMTICKET_UPDATETEXT(SMSG_GMTICKET_UPDATETEXT),
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
@@ -5906,6 +5908,7 @@ impl ServerOpcodeMessage {
             0x01F8 => Ok(Self::SMSG_EXPLORATION_EXPERIENCE(<SMSG_EXPLORATION_EXPERIENCE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F8, size: body_size, io, } } else { a } })?)),
             0x01FB => Ok(Self::MSG_RANDOM_ROLL(<MSG_RANDOM_ROLL_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FB, size: body_size, io, } } else { a } })?)),
             0x01FC => Ok(Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(<SMSG_ENVIRONMENTAL_DAMAGE_LOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FC, size: body_size, io, } } else { a } })?)),
+            0x0203 => Ok(Self::SMSG_REMOVED_SPELL(<SMSG_REMOVED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0203, size: body_size, io, } } else { a } })?)),
             0x0206 => Ok(Self::SMSG_GMTICKET_CREATE(<SMSG_GMTICKET_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0206, size: body_size, io, } } else { a } })?)),
             0x0208 => Ok(Self::SMSG_GMTICKET_UPDATETEXT(<SMSG_GMTICKET_UPDATETEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0208, size: body_size, io, } } else { a } })?)),
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0209, size: body_size, io, } } else { a } })?)),
@@ -6356,6 +6359,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_encrypted_server(w, e),
             Self::MSG_RANDOM_ROLL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_REMOVED_SPELL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
@@ -6658,6 +6662,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_unencrypted_server(w),
             Self::MSG_RANDOM_ROLL(c) => c.write_unencrypted_server(w),
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.write_unencrypted_server(w),
+            Self::SMSG_REMOVED_SPELL(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
@@ -6960,6 +6965,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_REMOVED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7262,6 +7268,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_REMOVED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7564,6 +7571,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_REMOVED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7866,6 +7874,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_REMOVED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
@@ -8170,6 +8179,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_EXPLORATION_EXPERIENCE(_) => "SMSG_EXPLORATION_EXPERIENCE",
             ServerOpcodeMessage::MSG_RANDOM_ROLL(_) => "MSG_RANDOM_ROLL_Server",
             ServerOpcodeMessage::SMSG_ENVIRONMENTAL_DAMAGE_LOG(_) => "SMSG_ENVIRONMENTAL_DAMAGE_LOG",
+            ServerOpcodeMessage::SMSG_REMOVED_SPELL(_) => "SMSG_REMOVED_SPELL",
             ServerOpcodeMessage::SMSG_GMTICKET_CREATE(_) => "SMSG_GMTICKET_CREATE",
             ServerOpcodeMessage::SMSG_GMTICKET_UPDATETEXT(_) => "SMSG_GMTICKET_UPDATETEXT",
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
@@ -9492,6 +9502,12 @@ impl From<MSG_RANDOM_ROLL_Server> for ServerOpcodeMessage {
 impl From<SMSG_ENVIRONMENTAL_DAMAGE_LOG> for ServerOpcodeMessage {
     fn from(c: SMSG_ENVIRONMENTAL_DAMAGE_LOG) -> Self {
         Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c)
+    }
+}
+
+impl From<SMSG_REMOVED_SPELL> for ServerOpcodeMessage {
+    fn from(c: SMSG_REMOVED_SPELL) -> Self {
+        Self::SMSG_REMOVED_SPELL(c)
     }
 }
 
