@@ -1,13 +1,13 @@
-#tag_all versions "1.12";
-
 enum TrainerSpellState : u8 {
     GREEN = 0;
     RED = 1;
     GRAY = 2;
+} {
+    versions = "1 2 3";
 }
 
 struct TrainerSpell {
-    u32 spell {
+    Spell spell {
         comment = "cmangos: learned spell (or cast-spell in profession case)";
     }
     TrainerSpellState state;
@@ -23,19 +23,17 @@ struct TrainerSpell {
     u8 required_level;
     (u32)Skill required_skill;
     u32 required_skill_value;
-    u32 spell_chain_required;
-    u32 spell_chain_previous;
-    u32 unknown1 {
-        comment = "cmangos/vmangos/mangoszero: all set 0";
-    }
+    u32[3] required_spells;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
 
 smsg SMSG_TRAINER_LIST = 0x01B1 {
     Guid guid;
-    /* TODO Enum? */
     u32 trainer_type;
     u32 amount_of_spells;
     TrainerSpell[amount_of_spells] spells;
     CString greeting;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
-

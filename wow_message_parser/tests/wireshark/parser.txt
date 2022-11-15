@@ -5631,9 +5631,9 @@
                 ptvcursor_add(ptv, hf_woww_required_level, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_skill, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_required_skill_value, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_spell_chain_required, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_spell_chain_previous, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                for (i = 0; i < 3; ++i) {
+                    ptvcursor_add(ptv, hf_woww_required_spells, 4, ENC_LITTLE_ENDIAN);
+                }
                 ptvcursor_pop_subtree(ptv);
             }
             add_cstring(ptv, &hf_woww_greeting);

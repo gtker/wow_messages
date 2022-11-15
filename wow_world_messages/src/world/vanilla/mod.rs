@@ -1260,6 +1260,8 @@ pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
 pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
 
+pub use crate::shared::trainer_spell_state_vanilla_tbc_wrath::TrainerSpellState;
+
 pub use crate::shared::transport_info_vanilla_tbc::TransportInfo;
 
 pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
@@ -1630,8 +1632,6 @@ pub(crate) mod trade_slot;
 pub use trade_slot::*;
 pub(crate) mod trainer_spell;
 pub use trainer_spell::*;
-pub(crate) mod trainer_spell_state;
-pub use trainer_spell_state::*;
 pub(crate) mod training_failure_reason;
 pub use training_failure_reason::*;
 pub(crate) mod transfer_abort_reason;

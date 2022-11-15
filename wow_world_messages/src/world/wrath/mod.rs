@@ -1188,6 +1188,8 @@ pub use crate::shared::trade_slot_tbc_wrath::TradeSlot;
 
 pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
 
+pub use crate::shared::trainer_spell_state_vanilla_tbc_wrath::TrainerSpellState;
+
 pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
@@ -1406,6 +1408,8 @@ pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
 pub(crate) mod smsg_trade_status;
 pub use smsg_trade_status::*;
+pub(crate) mod smsg_trainer_list;
+pub use smsg_trainer_list::*;
 pub(crate) mod smsg_transfer_aborted;
 pub use smsg_transfer_aborted::*;
 pub(crate) mod smsg_transfer_pending;
@@ -1434,6 +1438,8 @@ pub(crate) mod spline_flag;
 pub use spline_flag::*;
 pub(crate) mod stable_result;
 pub use stable_result::*;
+pub(crate) mod trainer_spell;
+pub use trainer_spell::*;
 pub(crate) mod transfer_abort_reason;
 pub use transfer_abort_reason::*;
 pub(crate) mod transport_info;

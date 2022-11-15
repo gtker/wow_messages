@@ -521,6 +521,7 @@ pub mod stable_result_vanilla_tbc;
 pub mod stabled_pet_vanilla_tbc_wrath;
 pub mod trade_slot_tbc_wrath;
 pub mod trade_status_vanilla_tbc_wrath;
+pub mod trainer_spell_state_vanilla_tbc_wrath;
 pub mod transport_info_vanilla_tbc;
 pub mod unit_stand_state_vanilla_tbc_wrath;
 pub mod update_flag_vanilla_tbc;

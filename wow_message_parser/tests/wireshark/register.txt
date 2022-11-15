@@ -3574,6 +3574,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_required_spells,
+            { "Required Spells", "woww.required.spells",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_reserved_for_future_use,
             { "Reserved For Future Use", "woww.reserved.for.future.use",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
@@ -3877,18 +3883,6 @@
         { &hf_woww_spell_category_cooldown,
             { "Spell Category Cooldown", "woww.spell.category.cooldown",
                 FT_INT32, BASE_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_spell_chain_previous,
-            { "Spell Chain Previous", "woww.spell.chain.previous",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_spell_chain_required,
-            { "Spell Chain Required", "woww.spell.chain.required",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

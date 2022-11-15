@@ -15,9 +15,7 @@ use std::io::{Write, Read};
 ///     u8 required_level;
 ///     (u32)Skill required_skill;
 ///     u32 required_skill_value;
-///     u32 spell_chain_required;
-///     u32 spell_chain_previous;
-///     u32 unknown1;
+///     u32[3] required_spells;
 /// }
 /// ```
 pub struct TrainerSpell {
@@ -37,11 +35,7 @@ pub struct TrainerSpell {
     pub required_level: u8,
     pub required_skill: Skill,
     pub required_skill_value: u32,
-    pub spell_chain_required: u32,
-    pub spell_chain_previous: u32,
-    /// cmangos/vmangos/mangoszero: all set 0
-    ///
-    pub unknown1: u32,
+    pub required_spells: [u32; 3],
 }
 
 impl TrainerSpell {
@@ -70,14 +64,10 @@ impl TrainerSpell {
         // required_skill_value: u32
         w.write_all(&self.required_skill_value.to_le_bytes())?;
 
-        // spell_chain_required: u32
-        w.write_all(&self.spell_chain_required.to_le_bytes())?;
-
-        // spell_chain_previous: u32
-        w.write_all(&self.spell_chain_previous.to_le_bytes())?;
-
-        // unknown1: u32
-        w.write_all(&self.unknown1.to_le_bytes())?;
+        // required_spells: u32[3]
+        for i in self.required_spells.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
 
         Ok(())
     }
@@ -109,14 +99,11 @@ impl TrainerSpell {
         // required_skill_value: u32
         let required_skill_value = crate::util::read_u32_le(r)?;
 
-        // spell_chain_required: u32
-        let spell_chain_required = crate::util::read_u32_le(r)?;
-
-        // spell_chain_previous: u32
-        let spell_chain_previous = crate::util::read_u32_le(r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        // required_spells: u32[3]
+        let mut required_spells = [u32::default(); 3];
+        for i in required_spells.iter_mut() {
+            *i = crate::util::read_u32_le(r)?;
+        }
 
         Ok(Self {
             spell,
@@ -127,9 +114,7 @@ impl TrainerSpell {
             required_level,
             required_skill,
             required_skill_value,
-            spell_chain_required,
-            spell_chain_previous,
-            unknown1,
+            required_spells,
         })
     }
 
