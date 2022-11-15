@@ -493,6 +493,7 @@ pub mod smsg_set_rest_start_vanilla_tbc;
 pub mod smsg_show_bank_vanilla_tbc_wrath;
 pub mod smsg_showtaxinodes_vanilla_tbc_wrath;
 pub mod smsg_spell_cooldown_tbc_wrath;
+pub mod smsg_spell_delayed_vanilla_tbc_wrath;
 pub mod smsg_spellenergizelog_vanilla_tbc;
 pub mod smsg_spline_move_feather_fall_vanilla_tbc_wrath;
 pub mod smsg_spline_move_land_walk_vanilla_tbc_wrath;

@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_SPELL_DELAYED = 0x01E2 {
     Guid guid;

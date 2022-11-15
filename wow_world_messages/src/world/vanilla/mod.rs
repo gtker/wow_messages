@@ -1204,6 +1204,8 @@ pub use crate::shared::smsg_show_bank_vanilla_tbc_wrath::SMSG_SHOW_BANK;
 
 pub use crate::shared::smsg_showtaxinodes_vanilla_tbc_wrath::SMSG_SHOWTAXINODES;
 
+pub use crate::shared::smsg_spell_delayed_vanilla_tbc_wrath::SMSG_SPELL_DELAYED;
+
 pub use crate::shared::smsg_spellenergizelog_vanilla_tbc::SMSG_SPELLENERGIZELOG;
 
 pub use crate::shared::smsg_spline_move_feather_fall_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_FEATHER_FALL;
@@ -1552,8 +1554,6 @@ pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_spell_cooldown;
 pub use smsg_spell_cooldown::*;
-pub(crate) mod smsg_spell_delayed;
-pub use smsg_spell_delayed::*;
 pub(crate) mod smsg_spell_failed_other;
 pub use smsg_spell_failed_other::*;
 pub(crate) mod smsg_spell_failure;
