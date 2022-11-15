@@ -968,6 +968,8 @@ pub use crate::shared::smsg_chat_player_not_found_vanilla_tbc_wrath::SMSG_CHAT_P
 
 pub use crate::shared::smsg_chat_wrong_faction_vanilla_tbc_wrath::SMSG_CHAT_WRONG_FACTION;
 
+pub use crate::shared::smsg_clear_cooldown_vanilla_tbc_wrath::SMSG_CLEAR_COOLDOWN;
+
 pub use crate::shared::smsg_client_control_update_vanilla_tbc_wrath::SMSG_CLIENT_CONTROL_UPDATE;
 
 pub use crate::shared::smsg_cooldown_event_vanilla_tbc_wrath::SMSG_COOLDOWN_EVENT;
