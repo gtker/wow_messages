@@ -1016,6 +1016,8 @@ pub use crate::shared::smsg_durability_damage_death_vanilla_tbc_wrath::SMSG_DURA
 
 pub use crate::shared::smsg_environmental_damage_log_vanilla_tbc_wrath::SMSG_ENVIRONMENTAL_DAMAGE_LOG;
 
+pub use crate::shared::smsg_fish_not_hooked_vanilla_tbc_wrath::SMSG_FISH_NOT_HOOKED;
+
 pub use crate::shared::smsg_force_run_back_speed_change_vanilla_tbc_wrath::SMSG_FORCE_RUN_BACK_SPEED_CHANGE;
 
 pub use crate::shared::smsg_force_swim_back_speed_change_vanilla_tbc_wrath::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE;
@@ -1382,8 +1384,6 @@ pub(crate) mod smsg_feign_death_resisted;
 pub use smsg_feign_death_resisted::*;
 pub(crate) mod smsg_fish_escaped;
 pub use smsg_fish_escaped::*;
-pub(crate) mod smsg_fish_not_hooked;
-pub use smsg_fish_not_hooked::*;
 pub(crate) mod smsg_force_move_root;
 pub use smsg_force_move_root::*;
 pub(crate) mod smsg_force_move_unroot;

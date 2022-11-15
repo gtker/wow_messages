@@ -5263,6 +5263,7 @@ use crate::world::wrath::SMSG_PETITION_SHOW_SIGNATURES;
 use crate::world::wrath::SMSG_PETITION_SIGN_RESULTS;
 use crate::world::wrath::SMSG_TURN_IN_PETITION_RESULTS;
 use crate::world::wrath::SMSG_PETITION_QUERY_RESPONSE;
+use crate::world::wrath::SMSG_FISH_NOT_HOOKED;
 use crate::world::wrath::SMSG_NOTIFICATION;
 use crate::world::wrath::SMSG_PLAYED_TIME;
 use crate::world::wrath::SMSG_QUERY_TIME_RESPONSE;
@@ -5550,6 +5551,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PETITION_SIGN_RESULTS(SMSG_PETITION_SIGN_RESULTS),
     SMSG_TURN_IN_PETITION_RESULTS(SMSG_TURN_IN_PETITION_RESULTS),
     SMSG_PETITION_QUERY_RESPONSE(SMSG_PETITION_QUERY_RESPONSE),
+    SMSG_FISH_NOT_HOOKED(SMSG_FISH_NOT_HOOKED),
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
     SMSG_PLAYED_TIME(SMSG_PLAYED_TIME),
     SMSG_QUERY_TIME_RESPONSE(SMSG_QUERY_TIME_RESPONSE),
@@ -5839,6 +5841,7 @@ impl ServerOpcodeMessage {
             0x01C1 => Ok(Self::SMSG_PETITION_SIGN_RESULTS(<SMSG_PETITION_SIGN_RESULTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C1, size: body_size, io, } } else { a } })?)),
             0x01C5 => Ok(Self::SMSG_TURN_IN_PETITION_RESULTS(<SMSG_TURN_IN_PETITION_RESULTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C5, size: body_size, io, } } else { a } })?)),
             0x01C7 => Ok(Self::SMSG_PETITION_QUERY_RESPONSE(<SMSG_PETITION_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C7, size: body_size, io, } } else { a } })?)),
+            0x01C8 => Ok(Self::SMSG_FISH_NOT_HOOKED(<SMSG_FISH_NOT_HOOKED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C8, size: body_size, io, } } else { a } })?)),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CB, size: body_size, io, } } else { a } })?)),
             0x01CD => Ok(Self::SMSG_PLAYED_TIME(<SMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CD, size: body_size, io, } } else { a } })?)),
             0x01CF => Ok(Self::SMSG_QUERY_TIME_RESPONSE(<SMSG_QUERY_TIME_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CF, size: body_size, io, } } else { a } })?)),
@@ -6277,6 +6280,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_FISH_NOT_HOOKED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAYED_TIME(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -6567,6 +6571,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_FISH_NOT_HOOKED(c) => c.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAYED_TIME(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -6857,6 +6862,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_FISH_NOT_HOOKED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7147,6 +7153,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_FISH_NOT_HOOKED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7437,6 +7444,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_FISH_NOT_HOOKED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7727,6 +7735,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_FISH_NOT_HOOKED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8019,6 +8028,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PETITION_SIGN_RESULTS(_) => "SMSG_PETITION_SIGN_RESULTS",
             ServerOpcodeMessage::SMSG_TURN_IN_PETITION_RESULTS(_) => "SMSG_TURN_IN_PETITION_RESULTS",
             ServerOpcodeMessage::SMSG_PETITION_QUERY_RESPONSE(_) => "SMSG_PETITION_QUERY_RESPONSE",
+            ServerOpcodeMessage::SMSG_FISH_NOT_HOOKED(_) => "SMSG_FISH_NOT_HOOKED",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
             ServerOpcodeMessage::SMSG_PLAYED_TIME(_) => "SMSG_PLAYED_TIME",
             ServerOpcodeMessage::SMSG_QUERY_TIME_RESPONSE(_) => "SMSG_QUERY_TIME_RESPONSE",
@@ -9194,6 +9204,12 @@ impl From<SMSG_TURN_IN_PETITION_RESULTS> for ServerOpcodeMessage {
 impl From<SMSG_PETITION_QUERY_RESPONSE> for ServerOpcodeMessage {
     fn from(c: SMSG_PETITION_QUERY_RESPONSE) -> Self {
         Self::SMSG_PETITION_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_FISH_NOT_HOOKED> for ServerOpcodeMessage {
+    fn from(c: SMSG_FISH_NOT_HOOKED) -> Self {
+        Self::SMSG_FISH_NOT_HOOKED(c)
     }
 }
 

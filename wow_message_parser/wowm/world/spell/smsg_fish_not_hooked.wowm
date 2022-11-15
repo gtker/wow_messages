@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_FISH_NOT_HOOKED = 0x01C8 {}
 
