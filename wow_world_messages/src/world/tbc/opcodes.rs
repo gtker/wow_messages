@@ -5168,6 +5168,7 @@ use crate::world::tbc::SMSG_NOTIFICATION;
 use crate::world::tbc::SMSG_LOG_XPGAIN;
 use crate::world::tbc::SMSG_LEVELUP_INFO;
 use crate::world::tbc::MSG_MINIMAP_PING_Server;
+use crate::world::tbc::SMSG_ENCHANTMENTLOG;
 use crate::world::tbc::SMSG_PONG;
 use crate::world::tbc::SMSG_GAMEOBJECT_PAGETEXT;
 use crate::world::tbc::SMSG_ITEM_TIME_UPDATE;
@@ -5445,6 +5446,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOG_XPGAIN(SMSG_LOG_XPGAIN),
     SMSG_LEVELUP_INFO(SMSG_LEVELUP_INFO),
     MSG_MINIMAP_PING(MSG_MINIMAP_PING_Server),
+    SMSG_ENCHANTMENTLOG(SMSG_ENCHANTMENTLOG),
     SMSG_PONG(SMSG_PONG),
     SMSG_GAMEOBJECT_PAGETEXT(SMSG_GAMEOBJECT_PAGETEXT),
     SMSG_ITEM_TIME_UPDATE(SMSG_ITEM_TIME_UPDATE),
@@ -5724,6 +5726,7 @@ impl ServerOpcodeMessage {
             0x01D0 => Ok(Self::SMSG_LOG_XPGAIN(<SMSG_LOG_XPGAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D0, size: body_size, io, } } else { a } })?)),
             0x01D4 => Ok(Self::SMSG_LEVELUP_INFO(<SMSG_LEVELUP_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D4, size: body_size, io, } } else { a } })?)),
             0x01D5 => Ok(Self::MSG_MINIMAP_PING(<MSG_MINIMAP_PING_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D5, size: body_size, io, } } else { a } })?)),
+            0x01D7 => Ok(Self::SMSG_ENCHANTMENTLOG(<SMSG_ENCHANTMENTLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D7, size: body_size, io, } } else { a } })?)),
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DD, size: body_size, io, } } else { a } })?)),
             0x01DF => Ok(Self::SMSG_GAMEOBJECT_PAGETEXT(<SMSG_GAMEOBJECT_PAGETEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DF, size: body_size, io, } } else { a } })?)),
             0x01EA => Ok(Self::SMSG_ITEM_TIME_UPDATE(<SMSG_ITEM_TIME_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01EA, size: body_size, io, } } else { a } })?)),
@@ -6071,6 +6074,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOG_XPGAIN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LEVELUP_INFO(c) => c.write_encrypted_server(w, e),
             Self::MSG_MINIMAP_PING(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ENCHANTMENTLOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.write_encrypted_server(w, e),
@@ -6351,6 +6355,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOG_XPGAIN(c) => c.write_unencrypted_server(w),
             Self::SMSG_LEVELUP_INFO(c) => c.write_unencrypted_server(w),
             Self::MSG_MINIMAP_PING(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ENCHANTMENTLOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.write_unencrypted_server(w),
@@ -6631,6 +6636,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOG_XPGAIN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MINIMAP_PING(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ENCHANTMENTLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6911,6 +6917,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOG_XPGAIN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MINIMAP_PING(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ENCHANTMENTLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7191,6 +7198,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOG_XPGAIN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MINIMAP_PING(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ENCHANTMENTLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7471,6 +7479,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOG_XPGAIN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MINIMAP_PING(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ENCHANTMENTLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -7753,6 +7762,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOG_XPGAIN(_) => "SMSG_LOG_XPGAIN",
             ServerOpcodeMessage::SMSG_LEVELUP_INFO(_) => "SMSG_LEVELUP_INFO",
             ServerOpcodeMessage::MSG_MINIMAP_PING(_) => "MSG_MINIMAP_PING_Server",
+            ServerOpcodeMessage::SMSG_ENCHANTMENTLOG(_) => "SMSG_ENCHANTMENTLOG",
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_GAMEOBJECT_PAGETEXT(_) => "SMSG_GAMEOBJECT_PAGETEXT",
             ServerOpcodeMessage::SMSG_ITEM_TIME_UPDATE(_) => "SMSG_ITEM_TIME_UPDATE",
@@ -8908,6 +8918,12 @@ impl From<SMSG_LEVELUP_INFO> for ServerOpcodeMessage {
 impl From<MSG_MINIMAP_PING_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MINIMAP_PING_Server) -> Self {
         Self::MSG_MINIMAP_PING(c)
+    }
+}
+
+impl From<SMSG_ENCHANTMENTLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_ENCHANTMENTLOG) -> Self {
+        Self::SMSG_ENCHANTMENTLOG(c)
     }
 }
 

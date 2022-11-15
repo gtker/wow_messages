@@ -3760,6 +3760,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_show_affiliation,
+            { "Show Affiliation", "woww.show.affiliation",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_signer,
             { "Signer", "woww.signer",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,

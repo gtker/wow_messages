@@ -1302,6 +1302,8 @@ pub(crate) mod smsg_destroy_object;
 pub use smsg_destroy_object::*;
 pub(crate) mod smsg_emote;
 pub use smsg_emote::*;
+pub(crate) mod smsg_enchantmentlog;
+pub use smsg_enchantmentlog::*;
 pub(crate) mod smsg_exploration_experience;
 pub use smsg_exploration_experience::*;
 pub(crate) mod smsg_feature_system_status;

@@ -3846,7 +3846,7 @@
             ptvcursor_add(ptv, hf_woww_caster_guid, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_unknown_int, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_show_affiliation, 1, ENC_NA);
             break;
         case SMSG_ENVIRONMENTAL_DAMAGE_LOG:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);

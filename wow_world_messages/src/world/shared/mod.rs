@@ -385,6 +385,7 @@ pub mod smsg_duel_outofbounds_vanilla_tbc_wrath;
 pub mod smsg_duel_requested_vanilla_tbc_wrath;
 pub mod smsg_duel_winner_vanilla_tbc_wrath;
 pub mod smsg_durability_damage_death_vanilla_tbc_wrath;
+pub mod smsg_enchantmentlog_vanilla_tbc;
 pub mod smsg_environmental_damage_log_vanilla_tbc_wrath;
 pub mod smsg_fish_escaped_vanilla_tbc_wrath;
 pub mod smsg_fish_not_hooked_vanilla_tbc_wrath;

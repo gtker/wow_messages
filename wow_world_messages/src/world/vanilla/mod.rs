@@ -1014,6 +1014,8 @@ pub use crate::shared::smsg_duel_winner_vanilla_tbc_wrath::SMSG_DUEL_WINNER;
 
 pub use crate::shared::smsg_durability_damage_death_vanilla_tbc_wrath::SMSG_DURABILITY_DAMAGE_DEATH;
 
+pub use crate::shared::smsg_enchantmentlog_vanilla_tbc::SMSG_ENCHANTMENTLOG;
+
 pub use crate::shared::smsg_environmental_damage_log_vanilla_tbc_wrath::SMSG_ENVIRONMENTAL_DAMAGE_LOG;
 
 pub use crate::shared::smsg_fish_escaped_vanilla_tbc_wrath::SMSG_FISH_ESCAPED;
@@ -1376,8 +1378,6 @@ pub(crate) mod smsg_dispel_failed;
 pub use smsg_dispel_failed::*;
 pub(crate) mod smsg_emote;
 pub use smsg_emote::*;
-pub(crate) mod smsg_enchantmentlog;
-pub use smsg_enchantmentlog::*;
 pub(crate) mod smsg_expected_spam_records;
 pub use smsg_expected_spam_records::*;
 pub(crate) mod smsg_exploration_experience;
