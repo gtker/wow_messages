@@ -884,6 +884,8 @@ pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
+pub use crate::shared::quest_details_emote_vanilla_tbc_wrath::QuestDetailsEmote;
+
 pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
 
 pub use crate::shared::quest_objective_vanilla_tbc_wrath::QuestObjective;
@@ -1194,6 +1196,8 @@ pub use wow_world_base::wrath::Vector3d;
 
 pub(crate) mod quest_failed_reason;
 pub use quest_failed_reason::*;
+pub(crate) mod quest_giver_reward;
+pub use quest_giver_reward::*;
 pub(crate) mod quest_giver_status;
 pub use quest_giver_status::*;
 pub(crate) mod quest_item;
@@ -1356,6 +1360,8 @@ pub(crate) mod smsg_quest_force_remove;
 pub use smsg_quest_force_remove::*;
 pub(crate) mod smsg_quest_query_response;
 pub use smsg_quest_query_response::*;
+pub(crate) mod smsg_questgiver_quest_details;
+pub use smsg_questgiver_quest_details::*;
 pub(crate) mod smsg_questgiver_quest_failed;
 pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;

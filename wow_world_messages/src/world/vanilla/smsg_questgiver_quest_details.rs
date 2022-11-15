@@ -13,7 +13,7 @@ use std::io::{Write, Read};
 ///     CString title;
 ///     CString details;
 ///     CString objectives;
-///     u32 auto_finish;
+///     Bool32 auto_finish;
 ///     u32 amount_of_choice_item_rewards;
 ///     QuestItemReward[amount_of_choice_item_rewards] choice_item_rewards;
 ///     u32 amount_of_item_rewards;
@@ -30,9 +30,7 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub title: String,
     pub details: String,
     pub objectives: String,
-    /// cmangos/vmangos/mangoszero: sets to 1 for true and 0 for false
-    ///
-    pub auto_finish: u32,
+    pub auto_finish: bool,
     pub choice_item_rewards: Vec<QuestItemReward>,
     pub item_rewards: Vec<QuestItemReward>,
     pub money_reward: u32,
@@ -76,8 +74,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // Null terminator
         w.write_all(&[0])?;
 
-        // auto_finish: u32
-        w.write_all(&self.auto_finish.to_le_bytes())?;
+        // auto_finish: Bool32
+        w.write_all(u32::from(self.auto_finish).to_le_bytes().as_slice())?;
 
         // amount_of_choice_item_rewards: u32
         w.write_all(&(self.choice_item_rewards.len() as u32).to_le_bytes())?;
@@ -135,9 +133,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         let objectives = crate::util::read_c_string_to_vec(r)?;
         let objectives = String::from_utf8(objectives)?;
 
-        // auto_finish: u32
-        let auto_finish = crate::util::read_u32_le(r)?;
-
+        // auto_finish: Bool32
+        let auto_finish = crate::util::read_u32_le(r)? != 0;
         // amount_of_choice_item_rewards: u32
         let amount_of_choice_item_rewards = crate::util::read_u32_le(r)?;
 
@@ -197,7 +194,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + self.title.len() + 1 // title: CString
         + self.details.len() + 1 // details: CString
         + self.objectives.len() + 1 // objectives: CString
-        + 4 // auto_finish: u32
+        + 4 // auto_finish: Bool32
         + 4 // amount_of_choice_item_rewards: u32
         + self.choice_item_rewards.len() * 8 // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         + 4 // amount_of_item_rewards: u32

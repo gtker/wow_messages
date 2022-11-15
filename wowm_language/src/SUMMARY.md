@@ -636,6 +636,7 @@
 - [PetitionShowlist](docs/petitionshowlist.md)
 - [PetitionSignature](docs/petitionsignature.md)
 - [QuestDetailsEmote](docs/questdetailsemote.md)
+- [QuestGiverReward](docs/questgiverreward.md)
 - [QuestItem](docs/questitem.md)
 - [QuestItemRequirement](docs/questitemrequirement.md)
 - [QuestItemReward](docs/questitemreward.md)

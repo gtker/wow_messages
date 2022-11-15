@@ -924,6 +924,8 @@ pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
+pub use crate::shared::quest_details_emote_vanilla_tbc_wrath::QuestDetailsEmote;
+
 pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
 
 pub use crate::shared::quest_item_vanilla_tbc::QuestItem;
@@ -1276,8 +1278,6 @@ pub use wow_world_base::vanilla::Vector3d;
 
 pub(crate) mod quest_completable;
 pub use quest_completable::*;
-pub(crate) mod quest_details_emote;
-pub use quest_details_emote::*;
 pub(crate) mod quest_failed_reason;
 pub use quest_failed_reason::*;
 pub(crate) mod quest_giver_status;
