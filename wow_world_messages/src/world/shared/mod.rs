@@ -509,6 +509,7 @@ pub mod smsg_superceded_spell_vanilla_tbc;
 pub mod smsg_taxinode_status_vanilla_tbc_wrath;
 pub mod smsg_time_sync_req_tbc_wrath;
 pub mod smsg_trade_status_extended_tbc_wrath;
+pub mod smsg_trainer_buy_succeeded_vanilla_tbc_wrath;
 pub mod smsg_turn_in_petition_results_tbc_wrath;
 pub mod smsg_tutorial_flags_vanilla_tbc_wrath;
 pub mod smsg_update_world_state_vanilla_tbc_wrath;

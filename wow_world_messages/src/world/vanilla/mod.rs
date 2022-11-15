@@ -1240,6 +1240,8 @@ pub use crate::shared::smsg_superceded_spell_vanilla_tbc::SMSG_SUPERCEDED_SPELL;
 
 pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STATUS;
 
+pub use crate::shared::smsg_trainer_buy_succeeded_vanilla_tbc_wrath::SMSG_TRAINER_BUY_SUCCEEDED;
+
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
@@ -1584,8 +1586,6 @@ pub(crate) mod smsg_trade_status_extended;
 pub use smsg_trade_status_extended::*;
 pub(crate) mod smsg_trainer_buy_failed;
 pub use smsg_trainer_buy_failed::*;
-pub(crate) mod smsg_trainer_buy_succeeded;
-pub use smsg_trainer_buy_succeeded::*;
 pub(crate) mod smsg_trainer_list;
 pub use smsg_trainer_list::*;
 pub(crate) mod smsg_transfer_aborted;

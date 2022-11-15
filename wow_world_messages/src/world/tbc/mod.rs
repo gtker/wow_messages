@@ -1236,6 +1236,8 @@ pub use crate::shared::smsg_time_sync_req_tbc_wrath::SMSG_TIME_SYNC_REQ;
 
 pub use crate::shared::smsg_trade_status_extended_tbc_wrath::SMSG_TRADE_STATUS_EXTENDED;
 
+pub use crate::shared::smsg_trainer_buy_succeeded_vanilla_tbc_wrath::SMSG_TRAINER_BUY_SUCCEEDED;
+
 pub use crate::shared::smsg_turn_in_petition_results_tbc_wrath::SMSG_TURN_IN_PETITION_RESULTS;
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
