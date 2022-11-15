@@ -25,16 +25,16 @@ use std::io::{Write, Read};
 ///     u32 money_reward;
 ///     u32 experience_reward;
 ///     u32 honor_reward;
-///     f32 unknown1;
+///     f32 honor_reward_multiplier;
 ///     u32 reward_spell;
 ///     u32 casted_spell;
 ///     u32 title_reward;
 ///     u32 talent_reward;
 ///     u32 arena_point_reward;
 ///     u32 unknown2;
-///     u32[5] unknown3;
-///     u32[5] unknown4;
-///     u32[5] unknown5;
+///     u32[5] reward_factions;
+///     u32[5] reward_reputations;
+///     u32[5] reward_reputations_override;
 ///     u32 amount_of_emotes;
 ///     QuestDetailsEmote[amount_of_emotes] emotes;
 /// }
@@ -63,7 +63,7 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub honor_reward: u32,
     /// arcemu: new 3.3
     ///
-    pub unknown1: f32,
+    pub honor_reward_multiplier: f32,
     /// mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0)
     ///
     pub reward_spell: u32,
@@ -76,9 +76,13 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     /// arcemu: new 3.3.0
     ///
     pub unknown2: u32,
-    pub unknown3: [u32; 5],
-    pub unknown4: [u32; 5],
-    pub unknown5: [u32; 5],
+    pub reward_factions: [u32; 5],
+    /// mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row)
+    ///
+    pub reward_reputations: [u32; 5],
+    /// mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window
+    ///
+    pub reward_reputations_override: [u32; 5],
     pub emotes: Vec<QuestDetailsEmote>,
 }
 
@@ -158,8 +162,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // honor_reward: u32
         w.write_all(&self.honor_reward.to_le_bytes())?;
 
-        // unknown1: f32
-        w.write_all(&self.unknown1.to_le_bytes())?;
+        // honor_reward_multiplier: f32
+        w.write_all(&self.honor_reward_multiplier.to_le_bytes())?;
 
         // reward_spell: u32
         w.write_all(&self.reward_spell.to_le_bytes())?;
@@ -179,18 +183,18 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // unknown2: u32
         w.write_all(&self.unknown2.to_le_bytes())?;
 
-        // unknown3: u32[5]
-        for i in self.unknown3.iter() {
+        // reward_factions: u32[5]
+        for i in self.reward_factions.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        // unknown4: u32[5]
-        for i in self.unknown4.iter() {
+        // reward_reputations: u32[5]
+        for i in self.reward_reputations.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        // unknown5: u32[5]
-        for i in self.unknown5.iter() {
+        // reward_reputations_override: u32[5]
+        for i in self.reward_reputations_override.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
 
@@ -269,8 +273,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // honor_reward: u32
         let honor_reward = crate::util::read_u32_le(r)?;
 
-        // unknown1: f32
-        let unknown1 = crate::util::read_f32_le(r)?;
+        // honor_reward_multiplier: f32
+        let honor_reward_multiplier = crate::util::read_f32_le(r)?;
         // reward_spell: u32
         let reward_spell = crate::util::read_u32_le(r)?;
 
@@ -289,21 +293,21 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // unknown2: u32
         let unknown2 = crate::util::read_u32_le(r)?;
 
-        // unknown3: u32[5]
-        let mut unknown3 = [u32::default(); 5];
-        for i in unknown3.iter_mut() {
+        // reward_factions: u32[5]
+        let mut reward_factions = [u32::default(); 5];
+        for i in reward_factions.iter_mut() {
             *i = crate::util::read_u32_le(r)?;
         }
 
-        // unknown4: u32[5]
-        let mut unknown4 = [u32::default(); 5];
-        for i in unknown4.iter_mut() {
+        // reward_reputations: u32[5]
+        let mut reward_reputations = [u32::default(); 5];
+        for i in reward_reputations.iter_mut() {
             *i = crate::util::read_u32_le(r)?;
         }
 
-        // unknown5: u32[5]
-        let mut unknown5 = [u32::default(); 5];
-        for i in unknown5.iter_mut() {
+        // reward_reputations_override: u32[5]
+        let mut reward_reputations_override = [u32::default(); 5];
+        for i in reward_reputations_override.iter_mut() {
             *i = crate::util::read_u32_le(r)?;
         }
 
@@ -332,16 +336,16 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
             money_reward,
             experience_reward,
             honor_reward,
-            unknown1,
+            honor_reward_multiplier,
             reward_spell,
             casted_spell,
             title_reward,
             talent_reward,
             arena_point_reward,
             unknown2,
-            unknown3,
-            unknown4,
-            unknown5,
+            reward_factions,
+            reward_reputations,
+            reward_reputations_override,
             emotes,
         })
     }
@@ -369,16 +373,16 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + 4 // money_reward: u32
         + 4 // experience_reward: u32
         + 4 // honor_reward: u32
-        + 4 // unknown1: f32
+        + 4 // honor_reward_multiplier: f32
         + 4 // reward_spell: u32
         + 4 // casted_spell: u32
         + 4 // title_reward: u32
         + 4 // talent_reward: u32
         + 4 // arena_point_reward: u32
         + 4 // unknown2: u32
-        + 5 * core::mem::size_of::<u32>() // unknown3: u32[5]
-        + 5 * core::mem::size_of::<u32>() // unknown4: u32[5]
-        + 5 * core::mem::size_of::<u32>() // unknown5: u32[5]
+        + 5 * core::mem::size_of::<u32>() // reward_factions: u32[5]
+        + 5 * core::mem::size_of::<u32>() // reward_reputations: u32[5]
+        + 5 * core::mem::size_of::<u32>() // reward_reputations_override: u32[5]
         + 4 // amount_of_emotes: u32
         + self.emotes.len() * 8 // emotes: QuestDetailsEmote[amount_of_emotes]
     }

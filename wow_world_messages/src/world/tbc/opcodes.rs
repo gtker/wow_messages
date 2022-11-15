@@ -5117,6 +5117,7 @@ use crate::world::tbc::SMSG_QUESTGIVER_STATUS;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_LIST;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_DETAILS;
 use crate::world::tbc::SMSG_QUESTGIVER_REQUEST_ITEMS;
+use crate::world::tbc::SMSG_QUESTGIVER_OFFER_REWARD;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_INVALID;
 use crate::world::tbc::SMSG_QUESTGIVER_QUEST_FAILED;
 use crate::world::tbc::SMSG_QUESTLOG_FULL;
@@ -5385,6 +5386,7 @@ pub enum ServerOpcodeMessage {
     SMSG_QUESTGIVER_QUEST_LIST(SMSG_QUESTGIVER_QUEST_LIST),
     SMSG_QUESTGIVER_QUEST_DETAILS(SMSG_QUESTGIVER_QUEST_DETAILS),
     SMSG_QUESTGIVER_REQUEST_ITEMS(SMSG_QUESTGIVER_REQUEST_ITEMS),
+    SMSG_QUESTGIVER_OFFER_REWARD(SMSG_QUESTGIVER_OFFER_REWARD),
     SMSG_QUESTGIVER_QUEST_INVALID(SMSG_QUESTGIVER_QUEST_INVALID),
     SMSG_QUESTGIVER_QUEST_FAILED(SMSG_QUESTGIVER_QUEST_FAILED),
     SMSG_QUESTLOG_FULL(SMSG_QUESTLOG_FULL),
@@ -5655,6 +5657,7 @@ impl ServerOpcodeMessage {
             0x0185 => Ok(Self::SMSG_QUESTGIVER_QUEST_LIST(<SMSG_QUESTGIVER_QUEST_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0185, size: body_size, io, } } else { a } })?)),
             0x0188 => Ok(Self::SMSG_QUESTGIVER_QUEST_DETAILS(<SMSG_QUESTGIVER_QUEST_DETAILS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0188, size: body_size, io, } } else { a } })?)),
             0x018B => Ok(Self::SMSG_QUESTGIVER_REQUEST_ITEMS(<SMSG_QUESTGIVER_REQUEST_ITEMS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018B, size: body_size, io, } } else { a } })?)),
+            0x018D => Ok(Self::SMSG_QUESTGIVER_OFFER_REWARD(<SMSG_QUESTGIVER_OFFER_REWARD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018D, size: body_size, io, } } else { a } })?)),
             0x018F => Ok(Self::SMSG_QUESTGIVER_QUEST_INVALID(<SMSG_QUESTGIVER_QUEST_INVALID as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018F, size: body_size, io, } } else { a } })?)),
             0x0192 => Ok(Self::SMSG_QUESTGIVER_QUEST_FAILED(<SMSG_QUESTGIVER_QUEST_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0192, size: body_size, io, } } else { a } })?)),
             0x0195 => Ok(Self::SMSG_QUESTLOG_FULL(<SMSG_QUESTLOG_FULL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0195, size: body_size, io, } } else { a } })?)),
@@ -5993,6 +5996,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_DETAILS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_REQUEST_ITEMS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_QUESTGIVER_OFFER_REWARD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTLOG_FULL(c) => c.write_encrypted_server(w, e),
@@ -6264,6 +6268,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_DETAILS(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_REQUEST_ITEMS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_QUESTGIVER_OFFER_REWARD(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTLOG_FULL(c) => c.write_unencrypted_server(w),
@@ -6535,6 +6540,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_DETAILS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_REQUEST_ITEMS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTGIVER_OFFER_REWARD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -6806,6 +6812,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_DETAILS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_REQUEST_ITEMS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTGIVER_OFFER_REWARD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7077,6 +7084,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_DETAILS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_REQUEST_ITEMS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTGIVER_OFFER_REWARD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7348,6 +7356,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_DETAILS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_REQUEST_ITEMS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTGIVER_OFFER_REWARD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTLOG_FULL(c) => c.astd_write_unencrypted_server(w).await,
@@ -7621,6 +7630,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_LIST(_) => "SMSG_QUESTGIVER_QUEST_LIST",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_DETAILS(_) => "SMSG_QUESTGIVER_QUEST_DETAILS",
             ServerOpcodeMessage::SMSG_QUESTGIVER_REQUEST_ITEMS(_) => "SMSG_QUESTGIVER_REQUEST_ITEMS",
+            ServerOpcodeMessage::SMSG_QUESTGIVER_OFFER_REWARD(_) => "SMSG_QUESTGIVER_OFFER_REWARD",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_INVALID(_) => "SMSG_QUESTGIVER_QUEST_INVALID",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_FAILED(_) => "SMSG_QUESTGIVER_QUEST_FAILED",
             ServerOpcodeMessage::SMSG_QUESTLOG_FULL(_) => "SMSG_QUESTLOG_FULL",
@@ -8592,6 +8602,12 @@ impl From<SMSG_QUESTGIVER_QUEST_DETAILS> for ServerOpcodeMessage {
 impl From<SMSG_QUESTGIVER_REQUEST_ITEMS> for ServerOpcodeMessage {
     fn from(c: SMSG_QUESTGIVER_REQUEST_ITEMS) -> Self {
         Self::SMSG_QUESTGIVER_REQUEST_ITEMS(c)
+    }
+}
+
+impl From<SMSG_QUESTGIVER_OFFER_REWARD> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUESTGIVER_OFFER_REWARD) -> Self {
+        Self::SMSG_QUESTGIVER_OFFER_REWARD(c)
     }
 }
 

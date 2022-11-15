@@ -1,25 +1,95 @@
-#tag_all versions "1.12";
+smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
+    Guid npc;
+    u32 quest_id;
+    CString title;
+    CString offer_reward_text;
+    Bool32 auto_finish;
+    u32 amount_of_emotes {
+        valid_range = "0 4";
+    }
+    NpcTextUpdateEmote[amount_of_emotes] emotes;
+    u32 amount_of_choice_item_rewards;
+    QuestItemRequirement[amount_of_choice_item_rewards] choice_item_rewards;
+    u32 amount_of_item_rewards;
+    QuestItemRequirement[amount_of_item_rewards] item_rewards;
+    u32 money_reward;
+    Spell reward_spell;
+    Spell reward_spell_cast {
+        comment = "mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.";
+    }
+} {
+    versions = "1.12";
+}
 
 smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     Guid npc;
     u32 quest_id;
     CString title;
     CString offer_reward_text;
-    u32 enable_next {
-        comment = "vmangos/mangoszero/cmangos: Auto Finish";
-    }
+    Bool32 auto_finish;
+    u32 suggested_players;
     u32 amount_of_emotes {
         valid_range = "0 4";
     }
     NpcTextUpdateEmote[amount_of_emotes] emotes;
     u32 amount_of_choice_item_rewards;
-    QuestItemReward[amount_of_choice_item_rewards] choice_item_rewards;
+    QuestItemRequirement[amount_of_choice_item_rewards] choice_item_rewards;
     u32 amount_of_item_rewards;
-    QuestItemReward[amount_of_item_rewards] item_rewards;
+    QuestItemRequirement[amount_of_item_rewards] item_rewards;
     u32 money_reward;
+    u32 honor_reward;
+    u32 unknown1 {
+        comment = "mangostwo: unused by client?";
+        comment = "mangostwo sets to 0x08.";
+    }
     Spell reward_spell;
     Spell reward_spell_cast {
         comment = "mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.";
     }
+    u32 title_reward;
+} {
+    versions = "2.4.3";
 }
 
+smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
+    Guid npc;
+    u32 quest_id;
+    CString title;
+    CString offer_reward_text;
+    Bool32 auto_finish;
+    u32 flags1;
+    u32 suggested_players;
+    u32 amount_of_emotes {
+        valid_range = "0 4";
+    }
+    NpcTextUpdateEmote[amount_of_emotes] emotes;
+    u32 amount_of_choice_item_rewards;
+    QuestItemRequirement[amount_of_choice_item_rewards] choice_item_rewards;
+    u32 amount_of_item_rewards;
+    QuestItemRequirement[amount_of_item_rewards] item_rewards;
+    u32 money_reward;
+    u32 experience_reward;
+    u32 honor_reward;
+    f32 honor_reward_multiplier;
+    u32 unknown1 {
+        comment = "mangostwo: unused by client?";
+        comment = "mangostwo sets to 0x08.";
+    }
+    Spell reward_spell;
+    Spell reward_spell_cast {
+        comment = "mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.";
+    }
+    u32 title_reward;
+    u32 reward_talents;
+    u32 reward_arena_points;
+    u32 reward_reputation_mask;
+    u32[5] reward_factions;
+    u32[5] reward_reputations {
+        comment = "mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row)";
+    }
+    u32[5] reward_reputations_override {
+        comment = "mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window";
+    }
+} {
+    versions = "3.3.5";
+}

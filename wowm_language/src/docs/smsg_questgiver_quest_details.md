@@ -142,16 +142,16 @@ smsg SMSG_QUESTGIVER_QUEST_DETAILS = 0x0188 {
     u32 money_reward;
     u32 experience_reward;
     u32 honor_reward;
-    f32 unknown1;
+    f32 honor_reward_multiplier;
     u32 reward_spell;
     u32 casted_spell;
     u32 title_reward;
     u32 talent_reward;
     u32 arena_point_reward;
     u32 unknown2;
-    u32[5] unknown3;
-    u32[5] unknown4;
-    u32[5] unknown5;
+    u32[5] reward_factions;
+    u32[5] reward_reputations;
+    u32[5] reward_reputations_override;
     u32 amount_of_emotes;
     QuestDetailsEmote[amount_of_emotes] emotes;
 }
@@ -188,16 +188,16 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | money_reward |  |  |
 | - | 4 / Little | u32 | experience_reward |  | arcemu: New 3.3 - this is the XP you'll see on the quest reward panel too, but I think it is fine not to show it, because it can change if the player levels up before completing the quest. |
 | - | 4 / Little | u32 | honor_reward |  |  |
-| - | 4 / Little | f32 | unknown1 |  | arcemu: new 3.3 |
+| - | 4 / Little | f32 | honor_reward_multiplier |  | arcemu: new 3.3 |
 | - | 4 / Little | u32 | reward_spell |  | mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
 | - | 4 / Little | u32 | casted_spell |  |  |
 | - | 4 / Little | u32 | title_reward |  | mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles) |
 | - | 4 / Little | u32 | talent_reward |  |  |
 | - | 4 / Little | u32 | arena_point_reward |  |  |
 | - | 4 / Little | u32 | unknown2 |  | arcemu: new 3.3.0 |
-| - | ? / - | u32[5] | unknown3 |  |  |
-| - | ? / - | u32[5] | unknown4 |  |  |
-| - | ? / - | u32[5] | unknown5 |  |  |
+| - | ? / - | u32[5] | reward_factions |  |  |
+| - | ? / - | u32[5] | reward_reputations |  | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
+| - | ? / - | u32[5] | reward_reputations_override |  | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
 | - | 4 / Little | u32 | amount_of_emotes |  |  |
 | - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |  |
 

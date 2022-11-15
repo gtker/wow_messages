@@ -1420,12 +1420,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_enable_next,
-            { "Enable Next", "woww.enable.next",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_enable_pvp,
             { "Enable Pvp", "woww.enable.pvp",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,

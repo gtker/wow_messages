@@ -4923,7 +4923,7 @@
             ptvcursor_add(ptv, hf_woww_quest_id, 4, ENC_LITTLE_ENDIAN);
             add_cstring(ptv, &hf_woww_title);
             add_cstring(ptv, &hf_woww_offer_reward_text);
-            ptvcursor_add(ptv, hf_woww_enable_next, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_auto_finish, 4, ENC_NA);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_emotes, 4, ENC_LITTLE_ENDIAN, &amount_of_emotes);
             for (i = 0; i < amount_of_emotes; ++i) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "NpcTextUpdateEmote");
@@ -4933,16 +4933,18 @@
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_choice_item_rewards, 4, ENC_LITTLE_ENDIAN, &amount_of_choice_item_rewards);
             for (i = 0; i < amount_of_choice_item_rewards; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward");
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemRequirement");
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_display_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_item_rewards, 4, ENC_LITTLE_ENDIAN, &amount_of_item_rewards);
             for (i = 0; i < amount_of_item_rewards; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward");
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemRequirement");
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_display_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add(ptv, hf_woww_money_reward, 4, ENC_LITTLE_ENDIAN);
