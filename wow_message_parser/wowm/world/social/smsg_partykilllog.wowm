@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_PARTYKILLLOG = 0x01F5 {
     Guid player_with_killing_blow;
