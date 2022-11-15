@@ -1360,6 +1360,8 @@ pub(crate) mod smsg_questgiver_quest_failed;
 pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;
 pub use smsg_questgiver_quest_invalid::*;
+pub(crate) mod smsg_questgiver_quest_list;
+pub use smsg_questgiver_quest_list::*;
 pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
 pub(crate) mod smsg_raid_instance_info;

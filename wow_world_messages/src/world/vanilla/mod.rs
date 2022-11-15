@@ -1152,6 +1152,8 @@ pub use crate::shared::smsg_pvp_credit_vanilla_tbc_wrath::SMSG_PVP_CREDIT;
 
 pub use crate::shared::smsg_quest_confirm_accept_vanilla_tbc_wrath::SMSG_QUEST_CONFIRM_ACCEPT;
 
+pub use crate::shared::smsg_questgiver_quest_list_vanilla_tbc::SMSG_QUESTGIVER_QUEST_LIST;
+
 pub use crate::shared::smsg_questlog_full_vanilla_tbc_wrath::SMSG_QUESTLOG_FULL;
 
 pub use crate::shared::smsg_questupdate_add_item_vanilla_tbc_wrath::SMSG_QUESTUPDATE_ADD_ITEM;
@@ -1510,8 +1512,6 @@ pub(crate) mod smsg_questgiver_quest_failed;
 pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;
 pub use smsg_questgiver_quest_invalid::*;
-pub(crate) mod smsg_questgiver_quest_list;
-pub use smsg_questgiver_quest_list::*;
 pub(crate) mod smsg_questgiver_request_items;
 pub use smsg_questgiver_request_items::*;
 pub(crate) mod smsg_questgiver_status;

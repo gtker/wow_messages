@@ -461,6 +461,7 @@ pub mod smsg_pong_vanilla_tbc_wrath;
 pub mod smsg_procresist_vanilla_tbc_wrath;
 pub mod smsg_pvp_credit_vanilla_tbc_wrath;
 pub mod smsg_quest_confirm_accept_vanilla_tbc_wrath;
+pub mod smsg_questgiver_quest_list_vanilla_tbc;
 pub mod smsg_questlog_full_vanilla_tbc_wrath;
 pub mod smsg_questupdate_add_item_vanilla_tbc_wrath;
 pub mod smsg_questupdate_add_kill_vanilla_tbc_wrath;

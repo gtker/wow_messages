@@ -1,4 +1,19 @@
-#tag_all versions "1.12";
+smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
+    Guid npc;
+    CString title;
+    u32 emote_delay {
+        comment = "mangoszero: player emote";
+    }
+    u32 emote {
+        comment = "mangoszero: NPC emote";
+    }
+    u8 amount_of_entries {
+        valid_range = "0 32";
+    }
+    QuestItem[amount_of_entries] quest_items;
+} {
+    versions = "1 2";
+}
 
 smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
     Guid npc;
@@ -13,5 +28,6 @@ smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {
         valid_range = "0 32";
     }
     QuestItem[amount_of_entries] quest_items;
+} {
+    versions = "3.3.5";
 }
-
