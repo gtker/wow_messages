@@ -6,7 +6,7 @@ use crate::world::wrath::Vector2d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm:117`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm#L117):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm:110`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm#L110):
 /// ```text
 /// smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
 ///     u32 quest_id;
@@ -292,7 +292,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(377..=2672).contains(&body_size) {
+        if !(401..=2696).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005D, size: body_size as u32 });
         }
 
@@ -539,7 +539,7 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + self.end_text.len() + 1 // end_text: CString
         + self.completed_text.len() + 1 // completed_text: CString
         + 4 * 16 // objectives: QuestObjective[4]
-        + 6 * 8 // item_requirements: QuestItemRequirement[6]
+        + 6 * 12 // item_requirements: QuestItemRequirement[6]
         + self.objective_texts.iter().fold(0, |acc, x| acc + x.len() + 1) // objective_texts: CString[4]
     }
 }

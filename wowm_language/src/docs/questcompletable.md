@@ -1,6 +1,6 @@
 # QuestCompletable
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -21,5 +21,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `COMPLETEABLE` | 3 (0x03) |  |  |
 
 Used in:
+* [SMSG_QUESTGIVER_REQUEST_ITEMS](smsg_questgiver_request_items.md)
+* [SMSG_QUESTGIVER_REQUEST_ITEMS](smsg_questgiver_request_items.md)
 * [SMSG_QUESTGIVER_REQUEST_ITEMS](smsg_questgiver_request_items.md)
 

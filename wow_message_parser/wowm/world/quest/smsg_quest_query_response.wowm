@@ -9,13 +9,6 @@ struct QuestObjective {
     versions = "1 2 3";
 }
 
-struct QuestItemRequirement {
-    Item item;
-    u32 count;
-} {
-    versions = "3.3.5";
-}
-
 smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 quest_id;
     u32 quest_method {

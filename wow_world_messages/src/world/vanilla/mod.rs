@@ -924,7 +924,11 @@ pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
+pub use crate::shared::quest_completable_vanilla_tbc_wrath::QuestCompletable;
+
 pub use crate::shared::quest_details_emote_vanilla_tbc_wrath::QuestDetailsEmote;
+
+pub use crate::shared::quest_item_requirement_vanilla_tbc_wrath::QuestItemRequirement;
 
 pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
 
@@ -1276,14 +1280,10 @@ pub use wow_world_base::vanilla::Vector2d;
 
 pub use wow_world_base::vanilla::Vector3d;
 
-pub(crate) mod quest_completable;
-pub use quest_completable::*;
 pub(crate) mod quest_failed_reason;
 pub use quest_failed_reason::*;
 pub(crate) mod quest_giver_status;
 pub use quest_giver_status::*;
-pub(crate) mod quest_item_requirement;
-pub use quest_item_requirement::*;
 pub(crate) mod race;
 pub use race::*;
 pub(crate) mod raid_group_error;

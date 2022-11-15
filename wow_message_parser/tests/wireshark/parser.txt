@@ -5022,7 +5022,7 @@
             add_cstring(ptv, &hf_woww_request_items_text);
             ptvcursor_add(ptv, hf_woww_emote_delay, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_emote_int, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_auto_finish, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_auto_finish, 4, ENC_NA);
             ptvcursor_add(ptv, hf_woww_required_money, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_required_items, 4, ENC_LITTLE_ENDIAN, &amount_of_required_items);
             for (i = 0; i < amount_of_required_items; ++i) {

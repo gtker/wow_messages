@@ -884,7 +884,11 @@ pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
+pub use crate::shared::quest_completable_vanilla_tbc_wrath::QuestCompletable;
+
 pub use crate::shared::quest_details_emote_vanilla_tbc_wrath::QuestDetailsEmote;
+
+pub use crate::shared::quest_item_requirement_vanilla_tbc_wrath::QuestItemRequirement;
 
 pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
 
@@ -1202,8 +1206,6 @@ pub(crate) mod quest_giver_status;
 pub use quest_giver_status::*;
 pub(crate) mod quest_item;
 pub use quest_item::*;
-pub(crate) mod quest_item_requirement;
-pub use quest_item_requirement::*;
 pub(crate) mod quest_party_message;
 pub use quest_party_message::*;
 pub(crate) mod race;
@@ -1368,6 +1370,8 @@ pub(crate) mod smsg_questgiver_quest_invalid;
 pub use smsg_questgiver_quest_invalid::*;
 pub(crate) mod smsg_questgiver_quest_list;
 pub use smsg_questgiver_quest_list::*;
+pub(crate) mod smsg_questgiver_request_items;
+pub use smsg_questgiver_request_items::*;
 pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
 pub(crate) mod smsg_raid_instance_info;

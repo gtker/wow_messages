@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
 /// mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_request_item.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_request_item.wowm#L14):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_request_item.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_request_item.wowm#L16):
 /// ```text
 /// smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
 ///     Guid npc;
@@ -16,7 +16,7 @@ use std::io::{Write, Read};
 ///     CString request_items_text;
 ///     u32 emote_delay;
 ///     u32 emote;
-///     u32 auto_finish;
+///     Bool32 auto_finish;
 ///     u32 required_money;
 ///     u32 amount_of_required_items;
 ///     QuestItemRequirement[amount_of_required_items] required_items;
@@ -33,14 +33,12 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub request_items_text: String,
     pub emote_delay: u32,
     pub emote: u32,
-    pub auto_finish: u32,
+    pub auto_finish: bool,
     pub required_money: u32,
     pub required_items: Vec<QuestItemRequirement>,
-    /// cmangos/vmangos/mangoszero: All set to 0x02
+    /// cmangos/vmangos/mangoszero: All emulators set to 0x02
     ///
     pub unknown1: u32,
-    /// cmangos/vmangos/mangoszero: Called flags1.
-    ///
     pub completable: QuestCompletable,
     /// cmangos/vmangos/mangoszero: set to 0x04
     ///
@@ -85,8 +83,8 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         // emote: u32
         w.write_all(&self.emote.to_le_bytes())?;
 
-        // auto_finish: u32
-        w.write_all(&self.auto_finish.to_le_bytes())?;
+        // auto_finish: Bool32
+        w.write_all(u32::from(self.auto_finish).to_le_bytes().as_slice())?;
 
         // required_money: u32
         w.write_all(&self.required_money.to_le_bytes())?;
@@ -139,9 +137,8 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         // emote: u32
         let emote = crate::util::read_u32_le(r)?;
 
-        // auto_finish: u32
-        let auto_finish = crate::util::read_u32_le(r)?;
-
+        // auto_finish: Bool32
+        let auto_finish = crate::util::read_u32_le(r)? != 0;
         // required_money: u32
         let required_money = crate::util::read_u32_le(r)?;
 
@@ -195,7 +192,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
         + self.request_items_text.len() + 1 // request_items_text: CString
         + 4 // emote_delay: u32
         + 4 // emote: u32
-        + 4 // auto_finish: u32
+        + 4 // auto_finish: Bool32
         + 4 // required_money: u32
         + 4 // amount_of_required_items: u32
         + self.required_items.len() * 12 // required_items: QuestItemRequirement[amount_of_required_items]

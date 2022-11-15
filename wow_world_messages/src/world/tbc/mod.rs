@@ -884,7 +884,11 @@ pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 
 pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 
+pub use crate::shared::quest_completable_vanilla_tbc_wrath::QuestCompletable;
+
 pub use crate::shared::quest_details_emote_vanilla_tbc_wrath::QuestDetailsEmote;
+
+pub use crate::shared::quest_item_requirement_vanilla_tbc_wrath::QuestItemRequirement;
 
 pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
 
@@ -1370,6 +1374,8 @@ pub(crate) mod smsg_questgiver_quest_failed;
 pub use smsg_questgiver_quest_failed::*;
 pub(crate) mod smsg_questgiver_quest_invalid;
 pub use smsg_questgiver_quest_invalid::*;
+pub(crate) mod smsg_questgiver_request_items;
+pub use smsg_questgiver_request_items::*;
 pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
 pub(crate) mod smsg_raid_instance_info;
