@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_PLAY_MUSIC = 0x0277 {
     u32 sound_id;
