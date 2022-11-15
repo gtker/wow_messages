@@ -5637,13 +5637,13 @@ static const value_string e_power_strings[] =  {
 typedef enum {
     TIMER_TYPE_FATIGUE = 0x0,
     TIMER_TYPE_BREATH = 0x1,
-    TIMER_TYPE_FEIGNDEATH = 0x2,
+    TIMER_TYPE_FEIGN_DEATH = 0x2,
     TIMER_TYPE_ENVIRONMENTAL = 0x3,
 } e_timer_type;
 static const value_string e_timer_type_strings[] =  {
     { TIMER_TYPE_FATIGUE, "Fatigue" },
     { TIMER_TYPE_BREATH, "Breath" },
-    { TIMER_TYPE_FEIGNDEATH, "Feigndeath" },
+    { TIMER_TYPE_FEIGN_DEATH, "Feign Death" },
     { TIMER_TYPE_ENVIRONMENTAL, "Environmental" },
     { 0, NULL }
 };

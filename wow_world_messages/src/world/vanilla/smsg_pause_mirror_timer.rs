@@ -5,7 +5,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 /// According to cmangos: 'Default UI handler for this is bugged, args dont match. Gotta do a full update with `SMSG_START_MIRROR_TIMER` to avoid lua errors.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm:5`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm#L5):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_pause_mirror_timer.wowm#L3):
 /// ```text
 /// smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
 ///     TimerType timer;

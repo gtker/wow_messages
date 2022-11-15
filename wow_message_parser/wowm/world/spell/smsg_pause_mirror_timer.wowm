@@ -1,7 +1,5 @@
 #tag_all versions "1.12";
 
-#tag_all versions "1.12";
-
 smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
     TimerType timer;
     u8 is_frozen;

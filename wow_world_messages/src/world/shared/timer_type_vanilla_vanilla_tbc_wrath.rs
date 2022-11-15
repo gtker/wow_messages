@@ -5,7 +5,7 @@ use std::convert::{TryFrom, TryInto};
 /// enum TimerType : u32 {
 ///     FATIGUE = 0;
 ///     BREATH = 1;
-///     FEIGNDEATH = 2;
+///     FEIGN_DEATH = 2;
 ///     ENVIRONMENTAL = 3;
 /// }
 
@@ -14,7 +14,7 @@ use std::convert::{TryFrom, TryInto};
 pub enum TimerType {
     Fatigue,
     Breath,
-    Feigndeath,
+    FeignDeath,
     /// Might be a mangos only thing.
     ///
     Environmental,
@@ -25,7 +25,7 @@ impl TimerType {
         match self {
             Self::Fatigue => 0x0,
             Self::Breath => 0x1,
-            Self::Feigndeath => 0x2,
+            Self::FeignDeath => 0x2,
             Self::Environmental => 0x3,
         }
     }
@@ -43,7 +43,7 @@ impl std::fmt::Display for TimerType {
         match self {
             Self::Fatigue => f.write_str("Fatigue"),
             Self::Breath => f.write_str("Breath"),
-            Self::Feigndeath => f.write_str("Feigndeath"),
+            Self::FeignDeath => f.write_str("FeignDeath"),
             Self::Environmental => f.write_str("Environmental"),
         }
     }
@@ -55,7 +55,7 @@ impl TryFrom<u32> for TimerType {
         match value {
             0 => Ok(Self::Fatigue),
             1 => Ok(Self::Breath),
-            2 => Ok(Self::Feigndeath),
+            2 => Ok(Self::FeignDeath),
             3 => Ok(Self::Environmental),
             v => Err(crate::errors::EnumError::new("TimerType", v as u32),)
         }

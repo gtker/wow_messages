@@ -1178,6 +1178,8 @@ pub use crate::shared::smsg_spline_set_walk_speed_vanilla_tbc_wrath::SMSG_SPLINE
 
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
+pub use crate::shared::smsg_start_mirror_timer_vanilla_tbc_wrath::SMSG_START_MIRROR_TIMER;
+
 pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STATUS;
 
 pub use crate::shared::smsg_time_sync_req_tbc_wrath::SMSG_TIME_SYNC_REQ;
@@ -1199,6 +1201,8 @@ pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;
 pub use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
+
+pub use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
 
 pub use crate::shared::trade_slot_tbc_wrath::TradeSlot;
 

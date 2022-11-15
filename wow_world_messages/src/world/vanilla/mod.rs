@@ -1242,6 +1242,8 @@ pub use crate::shared::smsg_stable_result_vanilla_tbc::SMSG_STABLE_RESULT;
 
 pub use crate::shared::smsg_standstate_update_vanilla_tbc_wrath::SMSG_STANDSTATE_UPDATE;
 
+pub use crate::shared::smsg_start_mirror_timer_vanilla_tbc_wrath::SMSG_START_MIRROR_TIMER;
+
 pub use crate::shared::smsg_superceded_spell_vanilla_tbc::SMSG_SUPERCEDED_SPELL;
 
 pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STATUS;
@@ -1267,6 +1269,8 @@ pub use crate::shared::spell_miss_info_vanilla_tbc::SpellMissInfo;
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
+
+pub use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
 
 pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
 
@@ -1576,8 +1580,6 @@ pub(crate) mod smsg_spellordamage_immune;
 pub use smsg_spellordamage_immune::*;
 pub(crate) mod smsg_spirit_healer_confirm;
 pub use smsg_spirit_healer_confirm::*;
-pub(crate) mod smsg_start_mirror_timer;
-pub use smsg_start_mirror_timer::*;
 pub(crate) mod smsg_stop_mirror_timer;
 pub use smsg_stop_mirror_timer::*;
 pub(crate) mod smsg_summon_request;
@@ -1628,8 +1630,6 @@ pub(crate) mod spline_flag;
 pub use spline_flag::*;
 pub(crate) mod status_id;
 pub use status_id::*;
-pub(crate) mod timer_type;
-pub use timer_type::*;
 pub(crate) mod trade_slot;
 pub use trade_slot::*;
 pub(crate) mod trainer_spell;
