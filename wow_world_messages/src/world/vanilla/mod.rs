@@ -151,6 +151,8 @@ pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
 pub use crate::helper::vanilla::*;
+pub(crate) mod creature_family;
+pub use creature_family::*;
 pub(crate) mod damage_info;
 pub use damage_info::*;
 pub(crate) mod dismount_result;
@@ -334,8 +336,6 @@ pub use object_type::*;
 pub mod opcodes;
 pub(crate) mod party_result;
 pub use party_result::*;
-pub(crate) mod pet_spell_cooldown;
-pub use pet_spell_cooldown::*;
 pub(crate) mod petition_result;
 pub use petition_result::*;
 pub(crate) mod petition_showlist;
@@ -912,6 +912,8 @@ pub use crate::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
 
 pub use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 
+pub use crate::shared::pet_spell_cooldown_vanilla_tbc::PetSpellCooldown;
+
 pub use crate::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
 
 pub use crate::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
@@ -1131,6 +1133,8 @@ pub use crate::shared::smsg_pet_broken_vanilla_tbc_wrath::SMSG_PET_BROKEN;
 pub use crate::shared::smsg_pet_dismiss_sound_vanilla_tbc_wrath::SMSG_PET_DISMISS_SOUND;
 
 pub use crate::shared::smsg_pet_mode_vanilla_tbc_wrath::SMSG_PET_MODE;
+
+pub use crate::shared::smsg_pet_spells_vanilla_tbc::SMSG_PET_SPELLS;
 
 pub use crate::shared::smsg_pet_tame_failure_vanilla_tbc::SMSG_PET_TAME_FAILURE;
 
@@ -1472,8 +1476,6 @@ pub(crate) mod smsg_pet_name_invalid;
 pub use smsg_pet_name_invalid::*;
 pub(crate) mod smsg_pet_name_query_response;
 pub use smsg_pet_name_query_response::*;
-pub(crate) mod smsg_pet_spells;
-pub use smsg_pet_spells::*;
 pub(crate) mod smsg_petition_query_response;
 pub use smsg_petition_query_response::*;
 pub(crate) mod smsg_petition_showlist;

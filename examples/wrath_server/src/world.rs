@@ -104,7 +104,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         first_login: false,
                         pet_display_id: 0,
                         pet_level: 0,
-                        pet_family: 0,
+                        pet_family: CreatureFamily::None,
                         equipment: [Default::default(); 23],
                     }],
                 }

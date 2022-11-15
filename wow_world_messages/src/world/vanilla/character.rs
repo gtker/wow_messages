@@ -4,6 +4,7 @@ use crate::world::vanilla::CharacterGear;
 use crate::world::vanilla::Vector3d;
 use crate::world::vanilla::Area;
 use crate::world::vanilla::Class;
+use crate::world::vanilla::CreatureFamily;
 use crate::world::vanilla::Gender;
 use crate::world::vanilla::Map;
 use crate::world::vanilla::Race;
@@ -33,7 +34,7 @@ use std::io::{Write, Read};
 ///     Bool first_login;
 ///     u32 pet_display_id;
 ///     u32 pet_level;
-///     u32 pet_family;
+///     (u32)CreatureFamily pet_family;
 ///     CharacterGear[19] equipment;
 ///     u32 first_bag_display_id = 0;
 ///     u8 first_bag_inventory_id = 0;
@@ -59,7 +60,7 @@ pub struct Character {
     pub first_login: bool,
     pub pet_display_id: u32,
     pub pet_level: u32,
-    pub pet_family: u32,
+    pub pet_family: CreatureFamily,
     pub equipment: [CharacterGear; 19],
 }
 
@@ -151,8 +152,8 @@ impl Character {
         // pet_level: u32
         w.write_all(&self.pet_level.to_le_bytes())?;
 
-        // pet_family: u32
-        w.write_all(&self.pet_family.to_le_bytes())?;
+        // pet_family: CreatureFamily
+        w.write_all(&(self.pet_family.as_int() as u32).to_le_bytes())?;
 
         // equipment: CharacterGear[19]
         for i in self.equipment.iter() {
@@ -228,8 +229,8 @@ impl Character {
         // pet_level: u32
         let pet_level = crate::util::read_u32_le(r)?;
 
-        // pet_family: u32
-        let pet_family = crate::util::read_u32_le(r)?;
+        // pet_family: CreatureFamily
+        let pet_family: CreatureFamily = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // equipment: CharacterGear[19]
         let mut equipment = [CharacterGear::default(); 19];
@@ -293,7 +294,7 @@ impl Character {
         + 1 // first_login: Bool
         + 4 // pet_display_id: u32
         + 4 // pet_level: u32
-        + 4 // pet_family: u32
+        + 4 // pet_family: CreatureFamily
         + 19 * 5 // equipment: CharacterGear[19]
         + 4 // first_bag_display_id: u32
         + 1 // first_bag_inventory_id: u8

@@ -1,8 +1,9 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::wrath::CreatureFamily;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm:78`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm#L78):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm:74`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_creature_query_response.wowm#L74):
 /// ```text
 /// smsg SMSG_CREATURE_QUERY_RESPONSE = 0x0061 {
 ///     u32 creature_entry;
@@ -15,7 +16,7 @@ use std::io::{Write, Read};
 ///         CString description;
 ///         u32 type_flags;
 ///         u32 creature_type;
-///         u32 creature_family;
+///         (u32)CreatureFamily creature_family;
 ///         u32 creature_rank;
 ///         u32 kill_credit1;
 ///         u32 kill_credit2;
@@ -97,8 +98,8 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
             // creature_type: u32
             w.write_all(&v.creature_type.to_le_bytes())?;
 
-            // creature_family: u32
-            w.write_all(&v.creature_family.to_le_bytes())?;
+            // creature_family: CreatureFamily
+            w.write_all(&(v.creature_family.as_int() as u32).to_le_bytes())?;
 
             // creature_rank: u32
             w.write_all(&v.creature_rank.to_le_bytes())?;
@@ -179,8 +180,8 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
             // creature_type: u32
             let creature_type = crate::util::read_u32_le(r)?;
 
-            // creature_family: u32
-            let creature_family = crate::util::read_u32_le(r)?;
+            // creature_family: CreatureFamily
+            let creature_family: CreatureFamily = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // creature_rank: u32
             let creature_rank = crate::util::read_u32_le(r)?;
@@ -259,7 +260,7 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
             + found.description.len() + 1 // description: CString
             + 4 // type_flags: u32
             + 4 // creature_type: u32
-            + 4 // creature_family: u32
+            + 4 // creature_family: CreatureFamily
             + 4 // creature_rank: u32
             + 4 // kill_credit1: u32
             + 4 // kill_credit2: u32
@@ -285,7 +286,7 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE_found {
     pub description: String,
     pub type_flags: u32,
     pub creature_type: u32,
-    pub creature_family: u32,
+    pub creature_family: CreatureFamily,
     pub creature_rank: u32,
     pub kill_credit1: u32,
     pub kill_credit2: u32,
@@ -307,7 +308,7 @@ impl SMSG_CREATURE_QUERY_RESPONSE_found {
         + self.description.len() + 1 // description: CString
         + 4 // type_flags: u32
         + 4 // creature_type: u32
-        + 4 // creature_family: u32
+        + 4 // creature_family: CreatureFamily
         + 4 // creature_rank: u32
         + 4 // kill_credit1: u32
         + 4 // kill_credit2: u32

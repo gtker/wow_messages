@@ -70,6 +70,7 @@
 - [ClientMovementData](docs/clientmovementdata.md)
 - [ComplaintStatus](docs/complaintstatus.md)
 - [CorpseQueryResult](docs/corpsequeryresult.md)
+- [CreatureFamily](docs/creaturefamily.md)
 - [DeclinedNames](docs/declinednames.md)
 - [DeclinedPetNameIncluded](docs/declinedpetnameincluded.md)
 - [DismountResult](docs/dismountresult.md)

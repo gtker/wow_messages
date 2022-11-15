@@ -1152,7 +1152,7 @@
         },
         { &hf_woww_creature_family,
             { "Creature Family", "woww.creature.family",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_creature_family_strings), 0,
                 NULL, HFILL
             }
         },
@@ -3025,12 +3025,6 @@
         { &hf_woww_pet_enabled,
             { "Pet Enabled", "woww.pet.enabled",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_pet_enabled_strings), 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_pet_family,
-            { "Pet Family", "woww.pet.family",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

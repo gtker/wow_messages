@@ -1,28 +1,62 @@
-#tag_all versions "1.12";
-
 struct PetSpellCooldown {
-    u16 spell_id;
+    Spell16 spell;
     u16 spell_category {
         comment = "mangoszero: sets to 0";
     }
     u32 cooldown_in_msecs;
     u32 category_cooldown_in_msecs;
+} {
+    versions = "1 2";
 }
 
 smsg SMSG_PET_SPELLS = 0x0179 {
     Guid pet;
-    u32 unknown1 {
-        comment = "mangoszero: set to 0";
+    optional action_bars {
+        u32 duration;
+        PetReactState react;
+        PetCommandState command;
+        u8 unknown {
+            comment = "mangoszero: set to 0";
+        }
+        PetEnabled pet_enabled;
+        u32[10] action_bars;
+        u8 amount_of_spells;
+        u32[amount_of_spells] spells;
+        u8 amount_of_cooldowns;
+        PetSpellCooldown[amount_of_cooldowns] cooldowns;
     }
-    PetReactState react;
-    PetCommandState command;
-    u16 unknown2 {
-        comment = "mangoszero: set to 0";
-    }
-    u32[10] action_bars;
-    u8 amount_of_spells;
-    u32[amount_of_spells] spells;
-    u8 amount_of_cooldowns;
-    PetSpellCooldown[amount_of_cooldowns] cooldowns;
+} {
+    versions = "1 2";
 }
 
+struct PetSpellCooldown {
+    Spell spell;
+    u16 spell_category {
+        comment = "mangoszero: sets to 0";
+    }
+    u32 cooldown_in_msecs;
+    u32 category_cooldown_in_msecs;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_PET_SPELLS = 0x0179 {
+    Guid pet;
+    optional action_bars {
+        (u16)CreatureFamily family;
+        u32 duration;
+        PetReactState react;
+        PetCommandState command;
+        u8 unknown {
+            comment = "mangoszero: set to 0";
+        }
+        PetEnabled pet_enabled;
+        u32[10] action_bars;
+        u8 amount_of_spells;
+        u32[amount_of_spells] spells;
+        u8 amount_of_cooldowns;
+        PetSpellCooldown[amount_of_cooldowns] cooldowns;
+    }
+} {
+    versions = "3.3.5";
+}

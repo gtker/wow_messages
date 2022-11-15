@@ -81,6 +81,8 @@ pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
 pub use crate::helper::tbc::*;
+pub(crate) mod creature_family;
+pub use creature_family::*;
 pub(crate) mod emote;
 pub use emote::*;
 pub(crate) mod expansion;
@@ -866,6 +868,8 @@ pub use crate::shared::pet_query_disabled_names_tbc_wrath::PetQueryDisabledNames
 
 pub use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 
+pub use crate::shared::pet_spell_cooldown_vanilla_tbc::PetSpellCooldown;
+
 pub use crate::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
 
 pub use crate::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
@@ -1115,6 +1119,8 @@ pub use crate::shared::smsg_pet_mode_vanilla_tbc_wrath::SMSG_PET_MODE;
 pub use crate::shared::smsg_pet_name_invalid_tbc_wrath::SMSG_PET_NAME_INVALID;
 
 pub use crate::shared::smsg_pet_name_query_response_tbc_wrath::SMSG_PET_NAME_QUERY_RESPONSE;
+
+pub use crate::shared::smsg_pet_spells_vanilla_tbc::SMSG_PET_SPELLS;
 
 pub use crate::shared::smsg_pet_tame_failure_vanilla_tbc::SMSG_PET_TAME_FAILURE;
 

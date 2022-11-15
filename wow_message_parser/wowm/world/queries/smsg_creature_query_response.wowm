@@ -12,9 +12,7 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
         u32 creature_type {
             comment = "cmangos: CreatureType.dbc   wdbFeild8";
         }
-        u32 creature_family {
-            comment = "cmangos: CreatureFamily.dbc";
-        }
+        (u32)CreatureFamily creature_family;
         u32 creature_rank {
             comment = "cmangos: Creature Rank (elite, boss, etc)";
         }
@@ -53,9 +51,7 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
         u32 creature_type {
             comment = "mangosone: CreatureType.dbc   wdbFeild8";
         }
-        u32 creature_family {
-            comment = "mangosone: CreatureFamily.dbc";
-        }
+        (u32)CreatureFamily creature_family;
         u32 creature_rank {
             comment = "mangosone: Creature Rank (elite, boss, etc)";
         }
@@ -92,9 +88,7 @@ smsg SMSG_CREATURE_QUERY_RESPONSE = 0x61 {
         u32 creature_type {
             comment = "mangosone: CreatureType.dbc   wdbFeild8";
         }
-        u32 creature_family {
-            comment = "mangosone: CreatureFamily.dbc";
-        }
+        (u32)CreatureFamily creature_family;
         u32 creature_rank {
             comment = "mangosone: Creature Rank (elite, boss, etc)";
         }
