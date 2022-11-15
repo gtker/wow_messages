@@ -1136,6 +1136,8 @@ pub use crate::shared::smsg_notification_vanilla_tbc_wrath::SMSG_NOTIFICATION;
 
 pub use crate::shared::smsg_page_text_query_response_vanilla_tbc_wrath::SMSG_PAGE_TEXT_QUERY_RESPONSE;
 
+pub use crate::shared::smsg_pause_mirror_timer_vanilla_tbc_wrath::SMSG_PAUSE_MIRROR_TIMER;
+
 pub use crate::shared::smsg_pet_action_feedback_vanilla_tbc_wrath::SMSG_PET_ACTION_FEEDBACK;
 
 pub use crate::shared::smsg_pet_action_sound_vanilla_tbc_wrath::SMSG_PET_ACTION_SOUND;
@@ -1480,8 +1482,6 @@ pub(crate) mod smsg_party_member_stats_full;
 pub use smsg_party_member_stats_full::*;
 pub(crate) mod smsg_partykilllog;
 pub use smsg_partykilllog::*;
-pub(crate) mod smsg_pause_mirror_timer;
-pub use smsg_pause_mirror_timer::*;
 pub(crate) mod smsg_periodicauralog;
 pub use smsg_periodicauralog::*;
 pub(crate) mod smsg_pet_cast_failed;

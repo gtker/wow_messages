@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::TimerType;
+use crate::world::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -9,12 +9,12 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_PAUSE_MIRROR_TIMER = 0x01DA {
 ///     TimerType timer;
-///     u8 is_frozen;
+///     Bool is_frozen;
 /// }
 /// ```
 pub struct SMSG_PAUSE_MIRROR_TIMER {
     pub timer: TimerType,
-    pub is_frozen: u8,
+    pub is_frozen: bool,
 }
 
 impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
@@ -28,8 +28,8 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
         // timer: TimerType
         w.write_all(&(self.timer.as_int() as u32).to_le_bytes())?;
 
-        // is_frozen: u8
-        w.write_all(&self.is_frozen.to_le_bytes())?;
+        // is_frozen: Bool
+        w.write_all(u8::from(self.is_frozen).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -41,9 +41,8 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
         // timer: TimerType
         let timer: TimerType = crate::util::read_u32_le(r)?.try_into()?;
 
-        // is_frozen: u8
-        let is_frozen = crate::util::read_u8_le(r)?;
-
+        // is_frozen: Bool
+        let is_frozen = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
             timer,
             is_frozen,
@@ -53,4 +52,10 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
 

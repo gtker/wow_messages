@@ -453,6 +453,7 @@ pub mod smsg_move_water_walk_vanilla_tbc_wrath;
 pub mod smsg_new_taxi_path_vanilla_tbc_wrath;
 pub mod smsg_notification_vanilla_tbc_wrath;
 pub mod smsg_page_text_query_response_vanilla_tbc_wrath;
+pub mod smsg_pause_mirror_timer_vanilla_tbc_wrath;
 pub mod smsg_pet_action_feedback_vanilla_tbc_wrath;
 pub mod smsg_pet_action_sound_vanilla_tbc_wrath;
 pub mod smsg_pet_broken_vanilla_tbc_wrath;
