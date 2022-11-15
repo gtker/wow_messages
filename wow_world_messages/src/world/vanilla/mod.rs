@@ -223,10 +223,6 @@ pub(crate) mod msg_looking_for_group_client;
 pub use msg_looking_for_group_client::*;
 pub(crate) mod msg_looking_for_group_server;
 pub use msg_looking_for_group_server::*;
-pub(crate) mod msg_minimap_ping_client;
-pub use msg_minimap_ping_client::*;
-pub(crate) mod msg_minimap_ping_server;
-pub use msg_minimap_ping_server::*;
 pub(crate) mod msg_move_fall_land_client;
 pub use msg_move_fall_land_client::*;
 pub(crate) mod msg_move_fall_land_server;
@@ -867,6 +863,10 @@ pub use crate::shared::msg_inspect_honor_stats_client_vanilla_tbc_wrath::MSG_INS
 pub use crate::shared::msg_list_stabled_pets_client_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Client;
 
 pub use crate::shared::msg_list_stabled_pets_server_vanilla_tbc_wrath::MSG_LIST_STABLED_PETS_Server;
+
+pub use crate::shared::msg_minimap_ping_client_vanilla_tbc_wrath::MSG_MINIMAP_PING_Client;
+
+pub use crate::shared::msg_minimap_ping_server_vanilla_tbc_wrath::MSG_MINIMAP_PING_Server;
 
 pub use crate::shared::msg_move_teleport_ack_client_vanilla_tbc_wrath::MSG_MOVE_TELEPORT_ACK_Client;
 

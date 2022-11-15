@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg MSG_MINIMAP_PING_Server = 0x01D5 {
     Guid guid;

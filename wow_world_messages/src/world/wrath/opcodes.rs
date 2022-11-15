@@ -207,6 +207,7 @@ use crate::world::wrath::CMSG_PLAYED_TIME;
 use crate::world::wrath::CMSG_QUERY_TIME;
 use crate::world::wrath::CMSG_RECLAIM_CORPSE;
 use crate::world::wrath::CMSG_WRAP_ITEM;
+use crate::world::wrath::MSG_MINIMAP_PING_Client;
 use crate::world::wrath::CMSG_PING;
 use crate::world::wrath::CMSG_SETSHEATHED;
 use crate::world::wrath::CMSG_AUTH_SESSION;
@@ -521,6 +522,7 @@ pub enum ClientOpcodeMessage {
     CMSG_QUERY_TIME(CMSG_QUERY_TIME),
     CMSG_RECLAIM_CORPSE(CMSG_RECLAIM_CORPSE),
     CMSG_WRAP_ITEM(CMSG_WRAP_ITEM),
+    MSG_MINIMAP_PING(MSG_MINIMAP_PING_Client),
     CMSG_PING(CMSG_PING),
     CMSG_SETSHEATHED(CMSG_SETSHEATHED),
     CMSG_AUTH_SESSION(CMSG_AUTH_SESSION),
@@ -837,6 +839,7 @@ impl ClientOpcodeMessage {
             0x01CE => Ok(Self::CMSG_QUERY_TIME(<CMSG_QUERY_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CE, size: body_size, io, } } else { a } })?)),
             0x01D2 => Ok(Self::CMSG_RECLAIM_CORPSE(<CMSG_RECLAIM_CORPSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D2, size: body_size, io, } } else { a } })?)),
             0x01D3 => Ok(Self::CMSG_WRAP_ITEM(<CMSG_WRAP_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D3, size: body_size, io, } } else { a } })?)),
+            0x01D5 => Ok(Self::MSG_MINIMAP_PING(<MSG_MINIMAP_PING_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D5, size: body_size, io, } } else { a } })?)),
             0x01DC => Ok(Self::CMSG_PING(<CMSG_PING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DC, size: body_size, io, } } else { a } })?)),
             0x01E0 => Ok(Self::CMSG_SETSHEATHED(<CMSG_SETSHEATHED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01E0, size: body_size, io, } } else { a } })?)),
             0x01ED => Ok(Self::CMSG_AUTH_SESSION(<CMSG_AUTH_SESSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01ED, size: body_size, io, } } else { a } })?)),
@@ -1221,6 +1224,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUERY_TIME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_RECLAIM_CORPSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WRAP_ITEM(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MINIMAP_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SETSHEATHED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTH_SESSION(c) => c.write_encrypted_client(w, e),
@@ -1538,6 +1542,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUERY_TIME(c) => c.write_unencrypted_client(w),
             Self::CMSG_RECLAIM_CORPSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_WRAP_ITEM(c) => c.write_unencrypted_client(w),
+            Self::MSG_MINIMAP_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_PING(c) => c.write_unencrypted_client(w),
             Self::CMSG_SETSHEATHED(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTH_SESSION(c) => c.write_unencrypted_client(w),
@@ -1855,6 +1860,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_RECLAIM_CORPSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WRAP_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MINIMAP_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2172,6 +2178,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUERY_TIME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_RECLAIM_CORPSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WRAP_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MINIMAP_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2489,6 +2496,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUERY_TIME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_RECLAIM_CORPSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WRAP_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MINIMAP_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2806,6 +2814,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUERY_TIME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_RECLAIM_CORPSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WRAP_ITEM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MINIMAP_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SETSHEATHED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTH_SESSION(c) => c.astd_write_unencrypted_client(w).await,
@@ -3134,6 +3143,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_QUERY_TIME(_) => "CMSG_QUERY_TIME",
             ClientOpcodeMessage::CMSG_RECLAIM_CORPSE(_) => "CMSG_RECLAIM_CORPSE",
             ClientOpcodeMessage::CMSG_WRAP_ITEM(_) => "CMSG_WRAP_ITEM",
+            ClientOpcodeMessage::MSG_MINIMAP_PING(_) => "MSG_MINIMAP_PING_Client",
             ClientOpcodeMessage::CMSG_PING(_) => "CMSG_PING",
             ClientOpcodeMessage::CMSG_SETSHEATHED(_) => "CMSG_SETSHEATHED",
             ClientOpcodeMessage::CMSG_AUTH_SESSION(_) => "CMSG_AUTH_SESSION",
@@ -4439,6 +4449,12 @@ impl From<CMSG_WRAP_ITEM> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_MINIMAP_PING_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_MINIMAP_PING_Client) -> Self {
+        Self::MSG_MINIMAP_PING(c)
+    }
+}
+
 impl From<CMSG_PING> for ClientOpcodeMessage {
     fn from(c: CMSG_PING) -> Self {
         Self::CMSG_PING(c)
@@ -5270,6 +5286,7 @@ use crate::world::wrath::SMSG_PLAYED_TIME;
 use crate::world::wrath::SMSG_QUERY_TIME_RESPONSE;
 use crate::world::wrath::SMSG_LOG_XPGAIN;
 use crate::world::wrath::SMSG_LEVELUP_INFO;
+use crate::world::wrath::MSG_MINIMAP_PING_Server;
 use crate::world::wrath::SMSG_PONG;
 use crate::world::wrath::SMSG_GAMEOBJECT_PAGETEXT;
 use crate::world::wrath::SMSG_ITEM_TIME_UPDATE;
@@ -5559,6 +5576,7 @@ pub enum ServerOpcodeMessage {
     SMSG_QUERY_TIME_RESPONSE(SMSG_QUERY_TIME_RESPONSE),
     SMSG_LOG_XPGAIN(SMSG_LOG_XPGAIN),
     SMSG_LEVELUP_INFO(SMSG_LEVELUP_INFO),
+    MSG_MINIMAP_PING(MSG_MINIMAP_PING_Server),
     SMSG_PONG(SMSG_PONG),
     SMSG_GAMEOBJECT_PAGETEXT(SMSG_GAMEOBJECT_PAGETEXT),
     SMSG_ITEM_TIME_UPDATE(SMSG_ITEM_TIME_UPDATE),
@@ -5850,6 +5868,7 @@ impl ServerOpcodeMessage {
             0x01CF => Ok(Self::SMSG_QUERY_TIME_RESPONSE(<SMSG_QUERY_TIME_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CF, size: body_size, io, } } else { a } })?)),
             0x01D0 => Ok(Self::SMSG_LOG_XPGAIN(<SMSG_LOG_XPGAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D0, size: body_size, io, } } else { a } })?)),
             0x01D4 => Ok(Self::SMSG_LEVELUP_INFO(<SMSG_LEVELUP_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D4, size: body_size, io, } } else { a } })?)),
+            0x01D5 => Ok(Self::MSG_MINIMAP_PING(<MSG_MINIMAP_PING_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D5, size: body_size, io, } } else { a } })?)),
             0x01DD => Ok(Self::SMSG_PONG(<SMSG_PONG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DD, size: body_size, io, } } else { a } })?)),
             0x01DF => Ok(Self::SMSG_GAMEOBJECT_PAGETEXT(<SMSG_GAMEOBJECT_PAGETEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01DF, size: body_size, io, } } else { a } })?)),
             0x01EA => Ok(Self::SMSG_ITEM_TIME_UPDATE(<SMSG_ITEM_TIME_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01EA, size: body_size, io, } } else { a } })?)),
@@ -6290,6 +6309,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOG_XPGAIN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LEVELUP_INFO(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MINIMAP_PING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PONG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.write_encrypted_server(w, e),
@@ -6582,6 +6602,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOG_XPGAIN(c) => c.write_unencrypted_server(w),
             Self::SMSG_LEVELUP_INFO(c) => c.write_unencrypted_server(w),
+            Self::MSG_MINIMAP_PING(c) => c.write_unencrypted_server(w),
             Self::SMSG_PONG(c) => c.write_unencrypted_server(w),
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.write_unencrypted_server(w),
@@ -6874,6 +6895,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOG_XPGAIN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MINIMAP_PING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7166,6 +7188,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOG_XPGAIN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MINIMAP_PING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7458,6 +7481,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOG_XPGAIN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MINIMAP_PING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PONG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7750,6 +7774,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOG_XPGAIN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MINIMAP_PING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PONG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_PAGETEXT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TIME_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8044,6 +8069,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_QUERY_TIME_RESPONSE(_) => "SMSG_QUERY_TIME_RESPONSE",
             ServerOpcodeMessage::SMSG_LOG_XPGAIN(_) => "SMSG_LOG_XPGAIN",
             ServerOpcodeMessage::SMSG_LEVELUP_INFO(_) => "SMSG_LEVELUP_INFO",
+            ServerOpcodeMessage::MSG_MINIMAP_PING(_) => "MSG_MINIMAP_PING_Server",
             ServerOpcodeMessage::SMSG_PONG(_) => "SMSG_PONG",
             ServerOpcodeMessage::SMSG_GAMEOBJECT_PAGETEXT(_) => "SMSG_GAMEOBJECT_PAGETEXT",
             ServerOpcodeMessage::SMSG_ITEM_TIME_UPDATE(_) => "SMSG_ITEM_TIME_UPDATE",
@@ -9256,6 +9282,12 @@ impl From<SMSG_LOG_XPGAIN> for ServerOpcodeMessage {
 impl From<SMSG_LEVELUP_INFO> for ServerOpcodeMessage {
     fn from(c: SMSG_LEVELUP_INFO) -> Self {
         Self::SMSG_LEVELUP_INFO(c)
+    }
+}
+
+impl From<MSG_MINIMAP_PING_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MINIMAP_PING_Server) -> Self {
+        Self::MSG_MINIMAP_PING(c)
     }
 }
 

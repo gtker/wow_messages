@@ -300,6 +300,8 @@ pub mod msg_inspect_honor_stats_client_vanilla_tbc_wrath;
 pub mod msg_inspect_honor_stats_server_tbc_wrath;
 pub mod msg_list_stabled_pets_client_vanilla_tbc_wrath;
 pub mod msg_list_stabled_pets_server_vanilla_tbc_wrath;
+pub mod msg_minimap_ping_client_vanilla_tbc_wrath;
+pub mod msg_minimap_ping_server_vanilla_tbc_wrath;
 pub mod msg_move_teleport_ack_client_vanilla_tbc_wrath;
 pub mod msg_move_worldport_ack_vanilla_tbc_wrath;
 pub mod msg_petition_decline_vanilla_tbc_wrath;
