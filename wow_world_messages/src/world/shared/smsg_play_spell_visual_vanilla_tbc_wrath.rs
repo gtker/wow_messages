@@ -12,7 +12,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_PLAY_SPELL_VISUAL {
     pub guid: Guid,
-    /// mangoszero: index from SpellVisualKit.dbc. Used with 0xB3 when buying spells.
+    /// mangoszero/mangosone: index from SpellVisualKit.dbc. Set to 0xB3 when buying spells.
     ///
     pub spell_art_kit: u32,
 }
@@ -53,4 +53,10 @@ impl crate::Message for SMSG_PLAY_SPELL_VISUAL {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PLAY_SPELL_VISUAL {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PLAY_SPELL_VISUAL {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PLAY_SPELL_VISUAL {}
 

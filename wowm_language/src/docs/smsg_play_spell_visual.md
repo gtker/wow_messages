@@ -1,6 +1,6 @@
 # SMSG_PLAY_SPELL_VISUAL
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -27,5 +27,5 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x0C | 4 / Little | u32 | spell_art_kit |  | mangoszero: index from SpellVisualKit.dbc. Used with 0xB3 when buying spells. |
+| 0x0C | 4 / Little | u32 | spell_art_kit |  | mangoszero/mangosone: index from SpellVisualKit.dbc. Set to 0xB3 when buying spells. |
 
