@@ -13,16 +13,23 @@ pub fn character_features_are_valid(
     hair_color: u8,
     hair_style: u8,
 ) -> bool {
-    // Valid skin colors are all between 0 and a race/gender specific number
-    let max_skin_color = match race {
-        PlayerRace::Human => 9,
-        PlayerRace::Orc | PlayerRace::Dwarf | PlayerRace::NightElf => 8,
-        PlayerRace::Tauren => match gender {
-            PlayerGender::Male => 18,
-            PlayerGender::Female => 10,
-        },
-        PlayerRace::Gnome => 4,
-        PlayerRace::Undead | PlayerRace::Troll => 5,
+    let max_skin_color = match (race, gender) {
+        (PlayerRace::Human, PlayerGender::Male) => 9,
+        (PlayerRace::Human, PlayerGender::Female) => 9,
+        (PlayerRace::Orc, PlayerGender::Male) => 8,
+        (PlayerRace::Orc, PlayerGender::Female) => 8,
+        (PlayerRace::Dwarf, PlayerGender::Male) => 9,
+        (PlayerRace::Dwarf, PlayerGender::Female) => 8,
+        (PlayerRace::NightElf, PlayerGender::Male) => 8,
+        (PlayerRace::NightElf, PlayerGender::Female) => 8,
+        (PlayerRace::Undead, PlayerGender::Male) => 5,
+        (PlayerRace::Undead, PlayerGender::Female) => 5,
+        (PlayerRace::Tauren, PlayerGender::Male) => 18,
+        (PlayerRace::Tauren, PlayerGender::Female) => 10,
+        (PlayerRace::Gnome, PlayerGender::Male) => 4,
+        (PlayerRace::Gnome, PlayerGender::Female) => 4,
+        (PlayerRace::Troll, PlayerGender::Male) => 8,
+        (PlayerRace::Troll, PlayerGender::Female) => 8,
     };
 
     let max_facial_hair = match (race, gender) {
@@ -44,50 +51,49 @@ pub fn character_features_are_valid(
         (PlayerRace::Troll, PlayerGender::Female) => 5,
     };
 
-    let max_face = match (race, gender) {
-        (PlayerRace::Dwarf, PlayerGender::Male | PlayerGender::Female) => 9,
-        (PlayerRace::Gnome, PlayerGender::Male | PlayerGender::Female) => 6,
-        (PlayerRace::Human, PlayerGender::Male) => 11,
-        (PlayerRace::Human, PlayerGender::Female) => 14,
-        (PlayerRace::NightElf, PlayerGender::Male | PlayerGender::Female) => 8,
-        (PlayerRace::Orc, PlayerGender::Male | PlayerGender::Female) => 8,
-        (PlayerRace::Tauren, PlayerGender::Male) => 4,
-        (PlayerRace::Tauren, PlayerGender::Female) => 3,
-        (PlayerRace::Troll, PlayerGender::Male) => 4,
-        (PlayerRace::Troll, PlayerGender::Female) => 5,
-        (PlayerRace::Undead, PlayerGender::Male | PlayerGender::Female) => 9,
+    let (max_face, max_face_color) = match (race, gender) {
+        (PlayerRace::Human, PlayerGender::Male) => (11, 9),
+        (PlayerRace::Human, PlayerGender::Female) => (14, 9),
+        (PlayerRace::Orc, PlayerGender::Male) => (8, 8),
+        (PlayerRace::Orc, PlayerGender::Female) => (8, 8),
+        (PlayerRace::Dwarf, PlayerGender::Male) => (9, 8),
+        (PlayerRace::Dwarf, PlayerGender::Female) => (9, 8),
+        (PlayerRace::NightElf, PlayerGender::Male) => (8, 8),
+        (PlayerRace::NightElf, PlayerGender::Female) => (8, 8),
+        (PlayerRace::Undead, PlayerGender::Male) => (9, 5),
+        (PlayerRace::Undead, PlayerGender::Female) => (9, 5),
+        (PlayerRace::Tauren, PlayerGender::Male) => (4, 18),
+        (PlayerRace::Tauren, PlayerGender::Female) => (3, 10),
+        (PlayerRace::Gnome, PlayerGender::Male) => (6, 4),
+        (PlayerRace::Gnome, PlayerGender::Female) => (6, 4),
+        (PlayerRace::Troll, PlayerGender::Male) => (4, 5),
+        (PlayerRace::Troll, PlayerGender::Female) => (5, 5),
     };
 
-    let max_hairstyle = match (race, gender) {
-        (PlayerRace::Dwarf, PlayerGender::Male) => 10,
-        (PlayerRace::Dwarf, PlayerGender::Female) => 13,
-        (PlayerRace::Gnome, PlayerGender::Male | PlayerGender::Female) => 6,
-        (PlayerRace::Human, PlayerGender::Male) => 11,
-        (PlayerRace::Human, PlayerGender::Female) => 18,
-        (PlayerRace::NightElf, PlayerGender::Male | PlayerGender::Female) => 6,
-        (PlayerRace::Orc, PlayerGender::Male) => 6,
-        (PlayerRace::Orc, PlayerGender::Female) => 7,
-        (PlayerRace::Undead, PlayerGender::Male | PlayerGender::Female) => 9,
-        (PlayerRace::Tauren, PlayerGender::Male) => 7,
-        (PlayerRace::Tauren, PlayerGender::Female) => 6,
-        (PlayerRace::Troll, PlayerGender::Male) => 5,
-        (PlayerRace::Troll, PlayerGender::Female) => 4,
-    };
-
-    let max_haircolor = match race {
-        PlayerRace::Dwarf => 9,
-        PlayerRace::Gnome => 8,
-        PlayerRace::Human => 9,
-        PlayerRace::NightElf => 7,
-        PlayerRace::Orc => 7,
-        PlayerRace::Undead => 9,
-        PlayerRace::Tauren => 2,
-        PlayerRace::Troll => 9,
+    let (max_hair, max_hair_color) = match (race, gender) {
+        (PlayerRace::Human, PlayerGender::Male) => (11, 9),
+        (PlayerRace::Human, PlayerGender::Female) => (18, 9),
+        (PlayerRace::Orc, PlayerGender::Male) => (6, 7),
+        (PlayerRace::Orc, PlayerGender::Female) => (7, 7),
+        (PlayerRace::Dwarf, PlayerGender::Male) => (10, 9),
+        (PlayerRace::Dwarf, PlayerGender::Female) => (13, 9),
+        (PlayerRace::NightElf, PlayerGender::Male) => (6, 7),
+        (PlayerRace::NightElf, PlayerGender::Female) => (6, 7),
+        (PlayerRace::Undead, PlayerGender::Male) => (9, 9),
+        (PlayerRace::Undead, PlayerGender::Female) => (9, 9),
+        (PlayerRace::Tauren, PlayerGender::Male) => (7, 2),
+        (PlayerRace::Tauren, PlayerGender::Female) => (6, 2),
+        (PlayerRace::Gnome, PlayerGender::Male) => (6, 8),
+        (PlayerRace::Gnome, PlayerGender::Female) => (6, 8),
+        (PlayerRace::Troll, PlayerGender::Male) => (5, 9),
+        (PlayerRace::Troll, PlayerGender::Female) => (4, 9),
     };
 
     skin <= max_skin_color
-        && facial_hair <= max_facial_hair
-        && face <= max_face
-        && hair_color <= max_haircolor
-        && hair_style <= max_hairstyle
+    && facial_hair <= max_facial_hair
+    && hair_style <= max_hair
+    && hair_color <= max_hair_color
+    && face <= max_face
+    && skin <= max_face_color
 }
+
