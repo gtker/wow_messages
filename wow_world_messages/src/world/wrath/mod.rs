@@ -1152,6 +1152,8 @@ pub use crate::shared::smsg_resurrect_request_vanilla_tbc_wrath::SMSG_RESURRECT_
 
 pub use crate::shared::smsg_set_faction_visible_vanilla_tbc_wrath::SMSG_SET_FACTION_VISIBLE;
 
+pub use crate::shared::smsg_set_flat_spell_modifier_vanilla_tbc_wrath::SMSG_SET_FLAT_SPELL_MODIFIER;
+
 pub use crate::shared::smsg_set_forced_reactions_vanilla_tbc_wrath::SMSG_SET_FORCED_REACTIONS;
 
 pub use crate::shared::smsg_show_bank_vanilla_tbc_wrath::SMSG_SHOW_BANK;

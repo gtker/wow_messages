@@ -1214,6 +1214,8 @@ pub use crate::shared::smsg_server_message_vanilla_tbc::SMSG_SERVER_MESSAGE;
 
 pub use crate::shared::smsg_set_faction_visible_vanilla_tbc_wrath::SMSG_SET_FACTION_VISIBLE;
 
+pub use crate::shared::smsg_set_flat_spell_modifier_vanilla_tbc_wrath::SMSG_SET_FLAT_SPELL_MODIFIER;
+
 pub use crate::shared::smsg_set_forced_reactions_vanilla_tbc_wrath::SMSG_SET_FORCED_REACTIONS;
 
 pub use crate::shared::smsg_set_rest_start_vanilla_tbc::SMSG_SET_REST_START;

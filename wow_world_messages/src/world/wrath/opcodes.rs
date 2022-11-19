@@ -5338,6 +5338,7 @@ use crate::world::wrath::SMSG_PROCRESIST;
 use crate::world::wrath::SMSG_DISPEL_FAILED;
 use crate::world::wrath::SMSG_SPELLORDAMAGE_IMMUNE;
 use crate::world::wrath::SMSG_AUCTION_BIDDER_LIST_RESULT;
+use crate::world::wrath::SMSG_SET_FLAT_SPELL_MODIFIER;
 use crate::world::wrath::MSG_LIST_STABLED_PETS_Server;
 use crate::world::wrath::SMSG_STABLE_RESULT;
 use crate::world::wrath::SMSG_PLAY_MUSIC;
@@ -5648,6 +5649,7 @@ pub enum ServerOpcodeMessage {
     SMSG_DISPEL_FAILED(SMSG_DISPEL_FAILED),
     SMSG_SPELLORDAMAGE_IMMUNE(SMSG_SPELLORDAMAGE_IMMUNE),
     SMSG_AUCTION_BIDDER_LIST_RESULT(SMSG_AUCTION_BIDDER_LIST_RESULT),
+    SMSG_SET_FLAT_SPELL_MODIFIER(SMSG_SET_FLAT_SPELL_MODIFIER),
     MSG_LIST_STABLED_PETS(MSG_LIST_STABLED_PETS_Server),
     SMSG_STABLE_RESULT(SMSG_STABLE_RESULT),
     SMSG_PLAY_MUSIC(SMSG_PLAY_MUSIC),
@@ -5960,6 +5962,7 @@ impl ServerOpcodeMessage {
             0x0262 => Ok(Self::SMSG_DISPEL_FAILED(<SMSG_DISPEL_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0262, size: body_size, io, } } else { a } })?)),
             0x0263 => Ok(Self::SMSG_SPELLORDAMAGE_IMMUNE(<SMSG_SPELLORDAMAGE_IMMUNE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0263, size: body_size, io, } } else { a } })?)),
             0x0265 => Ok(Self::SMSG_AUCTION_BIDDER_LIST_RESULT(<SMSG_AUCTION_BIDDER_LIST_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0265, size: body_size, io, } } else { a } })?)),
+            0x0266 => Ok(Self::SMSG_SET_FLAT_SPELL_MODIFIER(<SMSG_SET_FLAT_SPELL_MODIFIER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0266, size: body_size, io, } } else { a } })?)),
             0x026F => Ok(Self::MSG_LIST_STABLED_PETS(<MSG_LIST_STABLED_PETS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x026F, size: body_size, io, } } else { a } })?)),
             0x0273 => Ok(Self::SMSG_STABLE_RESULT(<SMSG_STABLE_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0273, size: body_size, io, } } else { a } })?)),
             0x0277 => Ok(Self::SMSG_PLAY_MUSIC(<SMSG_PLAY_MUSIC as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0277, size: body_size, io, } } else { a } })?)),
@@ -6421,6 +6424,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DISPEL_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELLORDAMAGE_IMMUNE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SET_FLAT_SPELL_MODIFIER(c) => c.write_encrypted_server(w, e),
             Self::MSG_LIST_STABLED_PETS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_STABLE_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAY_MUSIC(c) => c.write_encrypted_server(w, e),
@@ -6734,6 +6738,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DISPEL_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELLORDAMAGE_IMMUNE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SET_FLAT_SPELL_MODIFIER(c) => c.write_unencrypted_server(w),
             Self::MSG_LIST_STABLED_PETS(c) => c.write_unencrypted_server(w),
             Self::SMSG_STABLE_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAY_MUSIC(c) => c.write_unencrypted_server(w),
@@ -7047,6 +7052,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DISPEL_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLORDAMAGE_IMMUNE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_FLAT_SPELL_MODIFIER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_STABLE_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_MUSIC(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7360,6 +7366,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DISPEL_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLORDAMAGE_IMMUNE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SET_FLAT_SPELL_MODIFIER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_STABLE_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_MUSIC(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7673,6 +7680,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DISPEL_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLORDAMAGE_IMMUNE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_FLAT_SPELL_MODIFIER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_STABLE_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_MUSIC(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7986,6 +7994,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DISPEL_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLORDAMAGE_IMMUNE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SET_FLAT_SPELL_MODIFIER(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_STABLE_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_MUSIC(c) => c.astd_write_unencrypted_server(w).await,
@@ -8301,6 +8310,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_DISPEL_FAILED(_) => "SMSG_DISPEL_FAILED",
             ServerOpcodeMessage::SMSG_SPELLORDAMAGE_IMMUNE(_) => "SMSG_SPELLORDAMAGE_IMMUNE",
             ServerOpcodeMessage::SMSG_AUCTION_BIDDER_LIST_RESULT(_) => "SMSG_AUCTION_BIDDER_LIST_RESULT",
+            ServerOpcodeMessage::SMSG_SET_FLAT_SPELL_MODIFIER(_) => "SMSG_SET_FLAT_SPELL_MODIFIER",
             ServerOpcodeMessage::MSG_LIST_STABLED_PETS(_) => "MSG_LIST_STABLED_PETS_Server",
             ServerOpcodeMessage::SMSG_STABLE_RESULT(_) => "SMSG_STABLE_RESULT",
             ServerOpcodeMessage::SMSG_PLAY_MUSIC(_) => "SMSG_PLAY_MUSIC",
@@ -9794,6 +9804,12 @@ impl From<SMSG_SPELLORDAMAGE_IMMUNE> for ServerOpcodeMessage {
 impl From<SMSG_AUCTION_BIDDER_LIST_RESULT> for ServerOpcodeMessage {
     fn from(c: SMSG_AUCTION_BIDDER_LIST_RESULT) -> Self {
         Self::SMSG_AUCTION_BIDDER_LIST_RESULT(c)
+    }
+}
+
+impl From<SMSG_SET_FLAT_SPELL_MODIFIER> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_FLAT_SPELL_MODIFIER) -> Self {
+        Self::SMSG_SET_FLAT_SPELL_MODIFIER(c)
     }
 }
 

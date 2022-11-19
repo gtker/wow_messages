@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_set_flat_spell_modifier.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_set_flat_spell_modifier.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_set_flat_spell_modifier.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_set_flat_spell_modifier.wowm#L1):
 /// ```text
 /// smsg SMSG_SET_FLAT_SPELL_MODIFIER = 0x0266 {
 ///     u8 eff;
@@ -59,4 +59,10 @@ impl crate::Message for SMSG_SET_FLAT_SPELL_MODIFIER {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_SET_FLAT_SPELL_MODIFIER {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_SET_FLAT_SPELL_MODIFIER {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_SET_FLAT_SPELL_MODIFIER {}
 
