@@ -938,6 +938,8 @@ pub use crate::shared::quest_objective_vanilla_tbc_wrath::QuestObjective;
 
 pub use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 
+pub use crate::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
+
 pub use crate::shared::sell_item_result_vanilla_tbc::SellItemResult;
 
 pub use crate::shared::server_message_type_vanilla_tbc::ServerMessageType;
@@ -1196,6 +1198,8 @@ pub use crate::shared::smsg_questupdate_failed_vanilla_tbc_wrath::SMSG_QUESTUPDA
 
 pub use crate::shared::smsg_questupdate_failedtimer_vanilla_tbc_wrath::SMSG_QUESTUPDATE_FAILEDTIMER;
 
+pub use crate::shared::smsg_raid_group_only_vanilla_tbc_wrath::SMSG_RAID_GROUP_ONLY;
+
 pub use crate::shared::smsg_read_item_failed_vanilla_tbc_wrath::SMSG_READ_ITEM_FAILED;
 
 pub use crate::shared::smsg_read_item_ok_vanilla_tbc_wrath::SMSG_READ_ITEM_OK;
@@ -1342,8 +1346,6 @@ pub(crate) mod quest_giver_status;
 pub use quest_giver_status::*;
 pub(crate) mod race;
 pub use race::*;
-pub(crate) mod raid_group_error;
-pub use raid_group_error::*;
 pub(crate) mod raid_info;
 pub use raid_info::*;
 pub(crate) mod raid_instance_message;
@@ -1548,8 +1550,6 @@ pub(crate) mod smsg_questgiver_request_items;
 pub use smsg_questgiver_request_items::*;
 pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
-pub(crate) mod smsg_raid_group_only;
-pub use smsg_raid_group_only::*;
 pub(crate) mod smsg_raid_instance_info;
 pub use smsg_raid_instance_info::*;
 pub(crate) mod smsg_raid_instance_message;

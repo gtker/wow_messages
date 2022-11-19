@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::RaidGroupError;
+use crate::world::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -53,4 +53,10 @@ impl crate::Message for SMSG_RAID_GROUP_ONLY {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_RAID_GROUP_ONLY {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_RAID_GROUP_ONLY {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_RAID_GROUP_ONLY {}
 

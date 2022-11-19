@@ -908,6 +908,8 @@ pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
 
 pub use crate::shared::quest_objective_vanilla_tbc_wrath::QuestObjective;
 
+pub use crate::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
+
 pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 
 pub use crate::shared::received_mail_tbc_wrath::ReceivedMail;
@@ -1145,6 +1147,8 @@ pub use crate::shared::smsg_questupdate_complete_vanilla_tbc_wrath::SMSG_QUESTUP
 pub use crate::shared::smsg_questupdate_failed_vanilla_tbc_wrath::SMSG_QUESTUPDATE_FAILED;
 
 pub use crate::shared::smsg_questupdate_failedtimer_vanilla_tbc_wrath::SMSG_QUESTUPDATE_FAILEDTIMER;
+
+pub use crate::shared::smsg_raid_group_only_vanilla_tbc_wrath::SMSG_RAID_GROUP_ONLY;
 
 pub use crate::shared::smsg_read_item_failed_vanilla_tbc_wrath::SMSG_READ_ITEM_FAILED;
 

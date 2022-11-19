@@ -5229,6 +5229,7 @@ use crate::world::tbc::SMSG_PLAY_OBJECT_SOUND;
 use crate::world::tbc::SMSG_SPELLDISPELLOG;
 use crate::world::tbc::MSG_QUERY_NEXT_MAIL_TIME_Server;
 use crate::world::tbc::SMSG_RECEIVED_MAIL;
+use crate::world::tbc::SMSG_RAID_GROUP_ONLY;
 use crate::world::tbc::SMSG_PVP_CREDIT;
 use crate::world::tbc::SMSG_AUCTION_REMOVED_NOTIFICATION;
 use crate::world::tbc::SMSG_SERVER_MESSAGE;
@@ -5530,6 +5531,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPELLDISPELLOG(SMSG_SPELLDISPELLOG),
     MSG_QUERY_NEXT_MAIL_TIME(MSG_QUERY_NEXT_MAIL_TIME_Server),
     SMSG_RECEIVED_MAIL(SMSG_RECEIVED_MAIL),
+    SMSG_RAID_GROUP_ONLY(SMSG_RAID_GROUP_ONLY),
     SMSG_PVP_CREDIT(SMSG_PVP_CREDIT),
     SMSG_AUCTION_REMOVED_NOTIFICATION(SMSG_AUCTION_REMOVED_NOTIFICATION),
     SMSG_SERVER_MESSAGE(SMSG_SERVER_MESSAGE),
@@ -5833,6 +5835,7 @@ impl ServerOpcodeMessage {
             0x027B => Ok(Self::SMSG_SPELLDISPELLOG(<SMSG_SPELLDISPELLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x027B, size: body_size, io, } } else { a } })?)),
             0x0284 => Ok(Self::MSG_QUERY_NEXT_MAIL_TIME(<MSG_QUERY_NEXT_MAIL_TIME_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0284, size: body_size, io, } } else { a } })?)),
             0x0285 => Ok(Self::SMSG_RECEIVED_MAIL(<SMSG_RECEIVED_MAIL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0285, size: body_size, io, } } else { a } })?)),
+            0x0286 => Ok(Self::SMSG_RAID_GROUP_ONLY(<SMSG_RAID_GROUP_ONLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0286, size: body_size, io, } } else { a } })?)),
             0x028C => Ok(Self::SMSG_PVP_CREDIT(<SMSG_PVP_CREDIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028C, size: body_size, io, } } else { a } })?)),
             0x028D => Ok(Self::SMSG_AUCTION_REMOVED_NOTIFICATION(<SMSG_AUCTION_REMOVED_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028D, size: body_size, io, } } else { a } })?)),
             0x0291 => Ok(Self::SMSG_SERVER_MESSAGE(<SMSG_SERVER_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0291, size: body_size, io, } } else { a } })?)),
@@ -6204,6 +6207,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLDISPELLOG(c) => c.write_encrypted_server(w, e),
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RECEIVED_MAIL(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_RAID_GROUP_ONLY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PVP_CREDIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SERVER_MESSAGE(c) => c.write_encrypted_server(w, e),
@@ -6508,6 +6512,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLDISPELLOG(c) => c.write_unencrypted_server(w),
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_unencrypted_server(w),
             Self::SMSG_RECEIVED_MAIL(c) => c.write_unencrypted_server(w),
+            Self::SMSG_RAID_GROUP_ONLY(c) => c.write_unencrypted_server(w),
             Self::SMSG_PVP_CREDIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_SERVER_MESSAGE(c) => c.write_unencrypted_server(w),
@@ -6812,6 +6817,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLDISPELLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_RAID_GROUP_ONLY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PVP_CREDIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7116,6 +7122,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLDISPELLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_RAID_GROUP_ONLY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PVP_CREDIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7420,6 +7427,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLDISPELLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_RAID_GROUP_ONLY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PVP_CREDIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7724,6 +7732,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLDISPELLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_RAID_GROUP_ONLY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PVP_CREDIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8030,6 +8039,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPELLDISPELLOG(_) => "SMSG_SPELLDISPELLOG",
             ServerOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => "MSG_QUERY_NEXT_MAIL_TIME_Server",
             ServerOpcodeMessage::SMSG_RECEIVED_MAIL(_) => "SMSG_RECEIVED_MAIL",
+            ServerOpcodeMessage::SMSG_RAID_GROUP_ONLY(_) => "SMSG_RAID_GROUP_ONLY",
             ServerOpcodeMessage::SMSG_PVP_CREDIT(_) => "SMSG_PVP_CREDIT",
             ServerOpcodeMessage::SMSG_AUCTION_REMOVED_NOTIFICATION(_) => "SMSG_AUCTION_REMOVED_NOTIFICATION",
             ServerOpcodeMessage::SMSG_SERVER_MESSAGE(_) => "SMSG_SERVER_MESSAGE",
@@ -9514,6 +9524,12 @@ impl From<MSG_QUERY_NEXT_MAIL_TIME_Server> for ServerOpcodeMessage {
 impl From<SMSG_RECEIVED_MAIL> for ServerOpcodeMessage {
     fn from(c: SMSG_RECEIVED_MAIL) -> Self {
         Self::SMSG_RECEIVED_MAIL(c)
+    }
+}
+
+impl From<SMSG_RAID_GROUP_ONLY> for ServerOpcodeMessage {
+    fn from(c: SMSG_RAID_GROUP_ONLY) -> Self {
+        Self::SMSG_RAID_GROUP_ONLY(c)
     }
 }
 
