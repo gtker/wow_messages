@@ -42,3 +42,9 @@ impl crate::Message for SMSG_PLAY_SOUND {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PLAY_SOUND {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PLAY_SOUND {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PLAY_SOUND {}
+

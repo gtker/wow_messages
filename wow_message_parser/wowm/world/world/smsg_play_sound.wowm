@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_PLAY_SOUND = 0x02D2 {
     /* TODO Enum? */

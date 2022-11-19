@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum MailType : u8 {
     NORMAL = 0;
     AUCTION = 2;
@@ -12,6 +10,8 @@ enum MailType : u8 {
     ITEM = 5 {
         comment = "client send CMSG_ITEM_QUERY on this mailmessagetype";
     }
+} {
+    versions = "1.12";
 }
 
 struct Mail {
@@ -53,10 +53,13 @@ struct Mail {
     u32 mail_template_id {
         comment = "cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)";
     }
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_MAIL_LIST_RESULT = 0x023B {
     u8 amount_of_mails;
     Mail[amount_of_mails] mails;
+} {
+    versions = "1.12";
 }
-

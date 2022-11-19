@@ -471,6 +471,7 @@ pub mod smsg_petition_showlist_tbc_wrath;
 pub mod smsg_petition_sign_results_tbc_wrath;
 pub mod smsg_play_music_vanilla_tbc_wrath;
 pub mod smsg_play_object_sound_vanilla_tbc_wrath;
+pub mod smsg_play_sound_vanilla_tbc_wrath;
 pub mod smsg_play_spell_impact_vanilla_tbc_wrath;
 pub mod smsg_play_spell_visual_vanilla_tbc_wrath;
 pub mod smsg_pong_vanilla_tbc_wrath;

@@ -1160,6 +1160,8 @@ pub use crate::shared::smsg_play_music_vanilla_tbc_wrath::SMSG_PLAY_MUSIC;
 
 pub use crate::shared::smsg_play_object_sound_vanilla_tbc_wrath::SMSG_PLAY_OBJECT_SOUND;
 
+pub use crate::shared::smsg_play_sound_vanilla_tbc_wrath::SMSG_PLAY_SOUND;
+
 pub use crate::shared::smsg_play_spell_impact_vanilla_tbc_wrath::SMSG_PLAY_SPELL_IMPACT;
 
 pub use crate::shared::smsg_play_spell_visual_vanilla_tbc_wrath::SMSG_PLAY_SPELL_VISUAL;
