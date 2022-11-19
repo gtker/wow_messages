@@ -1292,7 +1292,7 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
-pub use crate::shared::spell_school_vanilla_tbc_wrath::SpellSchool;
+pub use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 

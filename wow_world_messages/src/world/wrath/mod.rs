@@ -1230,7 +1230,7 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
-pub use crate::shared::spell_school_vanilla_tbc_wrath::SpellSchool;
+pub use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
@@ -1466,6 +1466,8 @@ pub(crate) mod smsg_spellheallog;
 pub use smsg_spellheallog::*;
 pub(crate) mod smsg_spelllogexecute;
 pub use smsg_spelllogexecute::*;
+pub(crate) mod smsg_spellnonmeleedamagelog;
+pub use smsg_spellnonmeleedamagelog::*;
 pub(crate) mod smsg_stable_result;
 pub use smsg_stable_result::*;
 pub(crate) mod smsg_superceded_spell;

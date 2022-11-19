@@ -5360,7 +5360,7 @@
             ptvcursor_add(ptv, hf_woww_spell_school, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_absorbed_damage, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_resisted, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_periodic_log, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_periodic_log, 1, ENC_NA);
             ptvcursor_add(ptv, hf_woww_unused, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_blocked, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_hit_info, 4, ENC_LITTLE_ENDIAN);

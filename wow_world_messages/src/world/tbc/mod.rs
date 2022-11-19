@@ -99,6 +99,8 @@ pub(crate) mod guild_command_result;
 pub use guild_command_result::*;
 pub(crate) mod guild_member;
 pub use guild_member::*;
+pub(crate) mod hit_info;
+pub use hit_info::*;
 pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class;
@@ -1302,7 +1304,7 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
-pub use crate::shared::spell_school_vanilla_tbc_wrath::SpellSchool;
+pub use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
@@ -1460,6 +1462,8 @@ pub(crate) mod smsg_spellheallog;
 pub use smsg_spellheallog::*;
 pub(crate) mod smsg_spelllogexecute;
 pub use smsg_spelllogexecute::*;
+pub(crate) mod smsg_spellnonmeleedamagelog;
+pub use smsg_spellnonmeleedamagelog::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
 pub(crate) mod smsg_trade_status;

@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     PackedGuid target;
     PackedGuid attacker;
@@ -10,7 +8,7 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     u32 resisted {
         comment = "cmangos/mangoszero/vmangos: sent as int32";
     }
-    u8 periodic_log {
+    Bool periodic_log {
         comment = "cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name";
     }
     u8 unused;
@@ -19,5 +17,31 @@ smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
     u8 extend_flag {
         comment = "cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.";
     }
+} {
+    paste_versions = "1.12 2.4.3";
+}
+
+smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
+    PackedGuid target;
+    PackedGuid attacker;
+    Spell spell;
+    u32 damage;
+    u32 overkill;
+    SpellSchool school;
+    u32 absorbed_damage;
+    u32 resisted {
+        comment = "cmangos/mangoszero/vmangos: sent as int32";
+    }
+    Bool periodic_log {
+        comment = "cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name";
+    }
+    u8 unused;
+    u32 blocked;
+    HitInfo hit_info;
+    u8 extend_flag {
+        comment = "cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.";
+    }
+} {
+    versions = "3.3.5";
 }
 

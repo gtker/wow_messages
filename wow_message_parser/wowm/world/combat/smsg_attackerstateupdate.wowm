@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum HitInfo : u32 {
     NORMAL_SWING        = 0x00000000;
     UNK1                = 0x00000001 {
@@ -30,7 +28,10 @@ enum HitInfo : u32 {
     CRUSHING            = 0x00008000;
     NO_ACTION           = 0x00010000;
     SWING_NO_HIT_SOUND  = 0x00080000;
+} {
+    versions = "1.12";
 }
+
 
 struct DamageInfo {
     u32 spell_school_mask;
@@ -42,6 +43,8 @@ struct DamageInfo {
     }
     u32 absorb;
     u32 resist;
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
@@ -57,5 +60,37 @@ smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
         comment = "vmangos: spell id, seen with heroic strike and disarm as examples";
     }
     u32 blocked_amount;
+} {
+    versions = "1.12";
+}
+
+flag HitInfo : u32 {
+    NORMALSWING         = 0x00000000;
+    UNK0                = 0x00000001 {
+        comment = "req correct packet structure";
+    }
+    NORMALSWING2        = 0x00000002;
+    LEFTSWING           = 0x00000004;
+    UNK3                = 0x00000008;
+    MISS                = 0x00000010;
+    ABSORB              = 0x00000020 {
+        comment = "plays absorb sound";
+    }
+    RESIST              = 0x00000040 {
+        comment = "resisted atleast some damage";
+    }
+    CRITICALHIT         = 0x00000080;
+    UNK8                = 0x00000100 {
+        comment = "wotlk?";
+    }
+    UNK9                = 0x00002000 {
+        comment = "wotlk?";
+    }
+    GLANCING            = 0x00004000;
+    CRUSHING            = 0x00008000;
+    NOACTION            = 0x00010000;
+    SWINGNOHITSOUND     = 0x00080000;
+} {
+    versions = "2.4.3";
 }
 

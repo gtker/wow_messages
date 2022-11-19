@@ -5,7 +5,7 @@ use crate::world::vanilla::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellnonmeleedamagelog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellnonmeleedamagelog.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellnonmeleedamagelog.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellnonmeleedamagelog.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELLNONMELEEDAMAGELOG = 0x0250 {
 ///     PackedGuid target;
@@ -15,7 +15,7 @@ use std::io::{Write, Read};
 ///     SpellSchool school;
 ///     u32 absorbed_damage;
 ///     u32 resisted;
-///     u8 periodic_log;
+///     Bool periodic_log;
 ///     u8 unused;
 ///     u32 blocked;
 ///     HitInfo hit_info;
@@ -34,7 +34,7 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub resisted: u32,
     /// cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name
     ///
-    pub periodic_log: u8,
+    pub periodic_log: bool,
     pub unused: u8,
     pub blocked: u32,
     pub hit_info: HitInfo,
@@ -73,8 +73,8 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         // resisted: u32
         w.write_all(&self.resisted.to_le_bytes())?;
 
-        // periodic_log: u8
-        w.write_all(&self.periodic_log.to_le_bytes())?;
+        // periodic_log: Bool
+        w.write_all(u8::from(self.periodic_log).to_le_bytes().as_slice())?;
 
         // unused: u8
         w.write_all(&self.unused.to_le_bytes())?;
@@ -117,9 +117,8 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         // resisted: u32
         let resisted = crate::util::read_u32_le(r)?;
 
-        // periodic_log: u8
-        let periodic_log = crate::util::read_u8_le(r)?;
-
+        // periodic_log: Bool
+        let periodic_log = crate::util::read_u8_le(r)? != 0;
         // unused: u8
         let unused = crate::util::read_u8_le(r)?;
 
@@ -161,7 +160,7 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
         + 1 // school: SpellSchool
         + 4 // absorbed_damage: u32
         + 4 // resisted: u32
-        + 1 // periodic_log: u8
+        + 1 // periodic_log: Bool
         + 1 // unused: u8
         + 4 // blocked: u32
         + 4 // hit_info: HitInfo
