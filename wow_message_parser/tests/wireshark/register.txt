@@ -4792,12 +4792,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_zone_id,
-            { "Zone Id", "woww.zone.id",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_zone_or_sort,
             { "Zone Or Sort", "woww.zone.or.sort",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,

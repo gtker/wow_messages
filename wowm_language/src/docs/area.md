@@ -2193,6 +2193,7 @@ Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
 * [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
+* [SMSG_SUMMON_REQUEST](smsg_summon_request.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 * [WhoPlayer](whoplayer.md)
 
@@ -5511,6 +5512,7 @@ Used in:
 * [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
+* [SMSG_SUMMON_REQUEST](smsg_summon_request.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 * [WhoPlayer](whoplayer.md)
 
@@ -10159,6 +10161,7 @@ Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
 * [SMSG_PLAYERBOUND](smsg_playerbound.md)
+* [SMSG_SUMMON_REQUEST](smsg_summon_request.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 * [WhoPlayer](whoplayer.md)
 

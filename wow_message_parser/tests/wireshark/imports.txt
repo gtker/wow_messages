@@ -797,6 +797,5 @@ static int hf_woww_yesterday_honor = -1;
 static int hf_woww_yesterday_honorable = -1;
 static int hf_woww_z = -1;
 static int hf_woww_z_speed = -1;
-static int hf_woww_zone_id = -1;
 static int hf_woww_zone_or_sort = -1;
 static int hf_woww_zones = -1;

@@ -1498,6 +1498,8 @@ pub(crate) mod smsg_spellnonmeleedamagelog;
 pub use smsg_spellnonmeleedamagelog::*;
 pub(crate) mod smsg_stable_result;
 pub use smsg_stable_result::*;
+pub(crate) mod smsg_summon_request;
+pub use smsg_summon_request::*;
 pub(crate) mod smsg_superceded_spell;
 pub use smsg_superceded_spell::*;
 pub(crate) mod smsg_text_emote;
