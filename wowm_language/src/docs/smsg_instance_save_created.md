@@ -1,6 +1,6 @@
 # SMSG_INSTANCE_SAVE_CREATED
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -25,5 +25,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | unknown |  | cmangos/vmangos/mangoszero set to 0 |
+| 0x04 | 4 / Little | u32 | unknown |  | All emulators across all versions set to 0 |
 

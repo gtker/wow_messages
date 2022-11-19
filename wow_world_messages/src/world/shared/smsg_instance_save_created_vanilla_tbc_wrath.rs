@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_INSTANCE_SAVE_CREATED {
-    /// cmangos/vmangos/mangoszero set to 0
+    /// All emulators across all versions set to 0
     ///
     pub unknown: u32,
 }
@@ -43,4 +43,10 @@ impl crate::Message for SMSG_INSTANCE_SAVE_CREATED {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_INSTANCE_SAVE_CREATED {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_INSTANCE_SAVE_CREATED {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_INSTANCE_SAVE_CREATED {}
 
