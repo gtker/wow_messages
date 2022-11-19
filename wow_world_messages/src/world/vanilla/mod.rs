@@ -1224,6 +1224,8 @@ pub use crate::shared::smsg_spellenergizelog_vanilla_tbc::SMSG_SPELLENERGIZELOG;
 
 pub use crate::shared::smsg_spelllogmiss_vanilla_tbc_wrath::SMSG_SPELLLOGMISS;
 
+pub use crate::shared::smsg_spellordamage_immune_vanilla_tbc_wrath::SMSG_SPELLORDAMAGE_IMMUNE;
+
 pub use crate::shared::smsg_spirit_healer_confirm_vanilla_tbc_wrath::SMSG_SPIRIT_HEALER_CONFIRM;
 
 pub use crate::shared::smsg_spline_move_feather_fall_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_FEATHER_FALL;
@@ -1584,8 +1586,6 @@ pub(crate) mod smsg_spelllogexecute;
 pub use smsg_spelllogexecute::*;
 pub(crate) mod smsg_spellnonmeleedamagelog;
 pub use smsg_spellnonmeleedamagelog::*;
-pub(crate) mod smsg_spellordamage_immune;
-pub use smsg_spellordamage_immune::*;
 pub(crate) mod smsg_summon_request;
 pub use smsg_summon_request::*;
 pub(crate) mod smsg_text_emote;

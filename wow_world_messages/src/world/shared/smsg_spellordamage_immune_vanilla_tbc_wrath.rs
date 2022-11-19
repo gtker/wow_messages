@@ -6,19 +6,17 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellordamage_immune.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellordamage_immune.wowm#L3):
 /// ```text
 /// smsg SMSG_SPELLORDAMAGE_IMMUNE = 0x0263 {
-///     Guid caster_guid;
-///     Guid target_guid;
+///     Guid caster;
+///     Guid target;
 ///     u32 id;
-///     u8 unknown1;
+///     Bool debug_log_format;
 /// }
 /// ```
 pub struct SMSG_SPELLORDAMAGE_IMMUNE {
-    pub caster_guid: Guid,
-    pub target_guid: Guid,
+    pub caster: Guid,
+    pub target: Guid,
     pub id: u32,
-    /// vmangos/cmangos sets to 0
-    ///
-    pub unknown1: u8,
+    pub debug_log_format: bool,
 }
 
 impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
@@ -29,17 +27,17 @@ impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
+        // caster: Guid
+        w.write_all(&self.caster.guid().to_le_bytes())?;
 
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
-        // unknown1: u8
-        w.write_all(&self.unknown1.to_le_bytes())?;
+        // debug_log_format: Bool
+        w.write_all(u8::from(self.debug_log_format).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -48,27 +46,32 @@ impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0263, size: body_size as u32 });
         }
 
-        // caster_guid: Guid
-        let caster_guid = Guid::read(r)?;
+        // caster: Guid
+        let caster = Guid::read(r)?;
 
-        // target_guid: Guid
-        let target_guid = Guid::read(r)?;
+        // target: Guid
+        let target = Guid::read(r)?;
 
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 
-        // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
-
+        // debug_log_format: Bool
+        let debug_log_format = crate::util::read_u8_le(r)? != 0;
         Ok(Self {
-            caster_guid,
-            target_guid,
+            caster,
+            target,
             id,
-            unknown1,
+            debug_log_format,
         })
     }
 
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
 

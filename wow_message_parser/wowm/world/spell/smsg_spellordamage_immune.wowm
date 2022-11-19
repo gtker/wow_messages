@@ -1,11 +1,9 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_SPELLORDAMAGE_IMMUNE = 0x0263 {
-    Guid caster_guid;
-    Guid target_guid;
+    Guid caster;
+    Guid target;
     Spell id;
-    u8 unknown1 {
-        comment = "vmangos/cmangos sets to 0";
-    }
+    Bool debug_log_format;
 }
 

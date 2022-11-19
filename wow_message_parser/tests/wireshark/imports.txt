@@ -213,6 +213,7 @@ static int hf_woww_days_since_oldest_ticket_creation = -1;
 static int hf_woww_days_since_ticket_creation = -1;
 static int hf_woww_deadline = -1;
 static int hf_woww_deaths = -1;
+static int hf_woww_debug_log_format = -1;
 static int hf_woww_decompressed_addon_info_size = -1;
 static int hf_woww_delay = -1;
 static int hf_woww_delay_in_seconds = -1;
