@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::vanilla::BattlegroundBracket;
 use crate::world::vanilla::Map;
 use crate::world::vanilla::StatusId;
 use std::io::{Write, Read};
@@ -10,7 +11,7 @@ use std::io::{Write, Read};
 ///     u32 queue_slot;
 ///     Map map;
 ///     if (map != EASTERN_KINGDOMS) {
-///         u8 unknown0;
+///         BattlegroundBracket bracket;
 ///         u32 client_instance_id;
 ///         StatusId status_id;
 ///         if (status_id == WAIT_QUEUE) {
@@ -50,12 +51,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         match &self.map {
             SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms => {}
             SMSG_BATTLEFIELD_STATUS_Map::Kalimdor {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -99,12 +100,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Testing {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -148,12 +149,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::ScottTest {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -197,12 +198,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::CashTest {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -246,12 +247,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::AlteracValley {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -295,12 +296,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::ShadowfangKeep {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -344,12 +345,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::StormwindStockade {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -393,12 +394,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::StormwindPrison {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -442,12 +443,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Deadmines {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -491,12 +492,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::AzsharaCrater {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -540,12 +541,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::CollinsTest {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -589,12 +590,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::WailingCaverns {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -638,12 +639,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Monastery {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -687,12 +688,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::RazorfenKraul {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -736,12 +737,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::BlackfathomDeeps {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -785,12 +786,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Uldaman {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -834,12 +835,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Gnomeragon {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -883,12 +884,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::SunkenTemple {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -932,12 +933,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::RazorfenDowns {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -981,12 +982,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::EmeraldDream {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1030,12 +1031,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::ScarletMonastery {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1079,12 +1080,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::ZulFarrak {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1128,12 +1129,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::BlackrockSpire {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1177,12 +1178,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::BlackrockDepths {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1226,12 +1227,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::OnyxiasLair {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1275,12 +1276,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::CavernsOfTime {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1324,12 +1325,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Scholomance {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1373,12 +1374,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::ZulGurub {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1422,12 +1423,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Stratholme {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1471,12 +1472,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Mauradon {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1520,12 +1521,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::DeeprunTram {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1569,12 +1570,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::RagefireChasm {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1618,12 +1619,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::MoltenCore {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1667,12 +1668,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::DireMaul {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1716,12 +1717,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::AlliancePvpBarracks {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1765,12 +1766,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::HordePvpBarracks {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1814,12 +1815,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::DevelopmentLand {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1863,12 +1864,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::BlackwingLair {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1912,12 +1913,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::WarsongGulch {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -1961,12 +1962,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::RuinsOfAhnQiraj {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -2010,12 +2011,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::ArathiBasin {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -2059,12 +2060,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::AhnQirajTemple {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -2108,12 +2109,12 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
             }
             SMSG_BATTLEFIELD_STATUS_Map::Naxxramas {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
-                // unknown0: u8
-                w.write_all(&unknown0.to_le_bytes())?;
+                // bracket: BattlegroundBracket
+                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
@@ -2175,8 +2176,8 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         let map_if = match map {
             Map::EasternKingdoms => SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms,
             Map::Kalimdor => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2222,14 +2223,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Kalimdor {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Testing => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2275,14 +2276,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Testing {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::ScottTest => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2328,14 +2329,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::ScottTest {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::CashTest => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2381,14 +2382,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::CashTest {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::AlteracValley => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2434,14 +2435,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::AlteracValley {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::ShadowfangKeep => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2487,14 +2488,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::ShadowfangKeep {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::StormwindStockade => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2540,14 +2541,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::StormwindStockade {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::StormwindPrison => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2593,14 +2594,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::StormwindPrison {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Deadmines => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2646,14 +2647,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Deadmines {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::AzsharaCrater => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2699,14 +2700,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::AzsharaCrater {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::CollinsTest => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2752,14 +2753,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::CollinsTest {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::WailingCaverns => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2805,14 +2806,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::WailingCaverns {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Monastery => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2858,14 +2859,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Monastery {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::RazorfenKraul => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2911,14 +2912,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::RazorfenKraul {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::BlackfathomDeeps => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -2964,14 +2965,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::BlackfathomDeeps {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Uldaman => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3017,14 +3018,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Uldaman {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Gnomeragon => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3070,14 +3071,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Gnomeragon {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::SunkenTemple => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3123,14 +3124,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::SunkenTemple {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::RazorfenDowns => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3176,14 +3177,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::RazorfenDowns {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::EmeraldDream => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3229,14 +3230,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::EmeraldDream {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::ScarletMonastery => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3282,14 +3283,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::ScarletMonastery {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::ZulFarrak => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3335,14 +3336,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::ZulFarrak {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::BlackrockSpire => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3388,14 +3389,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::BlackrockSpire {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::BlackrockDepths => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3441,14 +3442,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::BlackrockDepths {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::OnyxiasLair => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3494,14 +3495,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::OnyxiasLair {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::CavernsOfTime => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3547,14 +3548,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::CavernsOfTime {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Scholomance => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3600,14 +3601,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Scholomance {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::ZulGurub => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3653,14 +3654,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::ZulGurub {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Stratholme => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3706,14 +3707,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Stratholme {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Mauradon => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3759,14 +3760,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Mauradon {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::DeeprunTram => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3812,14 +3813,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::DeeprunTram {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::RagefireChasm => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3865,14 +3866,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::RagefireChasm {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::MoltenCore => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3918,14 +3919,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::MoltenCore {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::DireMaul => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -3971,14 +3972,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::DireMaul {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::AlliancePvpBarracks => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4024,14 +4025,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::AlliancePvpBarracks {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::HordePvpBarracks => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4077,14 +4078,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::HordePvpBarracks {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::DevelopmentLand => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4130,14 +4131,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::DevelopmentLand {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::BlackwingLair => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4183,14 +4184,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::BlackwingLair {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::WarsongGulch => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4236,14 +4237,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::WarsongGulch {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::RuinsOfAhnQiraj => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4289,14 +4290,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::RuinsOfAhnQiraj {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::ArathiBasin => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4342,14 +4343,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::ArathiBasin {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::AhnQirajTemple => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4395,14 +4396,14 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::AhnQirajTemple {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
             Map::Naxxramas => {
-                // unknown0: u8
-                let unknown0 = crate::util::read_u8_le(r)?;
+                // bracket: BattlegroundBracket
+                let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(r)?;
@@ -4448,9 +4449,9 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 };
 
                 SMSG_BATTLEFIELD_STATUS_Map::Naxxramas {
+                    bracket,
                     client_instance_id,
                     status_id: status_id_if,
-                    unknown0,
                 }
             }
         };
@@ -4548,219 +4549,219 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
 pub enum SMSG_BATTLEFIELD_STATUS_Map {
     EasternKingdoms,
     Kalimdor {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Testing {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     ScottTest {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     CashTest {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     AlteracValley {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     ShadowfangKeep {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     StormwindStockade {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     StormwindPrison {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Deadmines {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     AzsharaCrater {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     CollinsTest {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     WailingCaverns {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Monastery {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     RazorfenKraul {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     BlackfathomDeeps {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Uldaman {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Gnomeragon {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     SunkenTemple {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     RazorfenDowns {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     EmeraldDream {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     ScarletMonastery {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     ZulFarrak {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     BlackrockSpire {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     BlackrockDepths {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     OnyxiasLair {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     CavernsOfTime {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Scholomance {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     ZulGurub {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Stratholme {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Mauradon {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     DeeprunTram {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     RagefireChasm {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     MoltenCore {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     DireMaul {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     AlliancePvpBarracks {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     HordePvpBarracks {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     DevelopmentLand {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     BlackwingLair {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     WarsongGulch {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     RuinsOfAhnQiraj {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     ArathiBasin {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     AhnQirajTemple {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
     Naxxramas {
+        bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
-        unknown0: u8,
     },
 }
 
@@ -4830,434 +4831,434 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 4
             }
             Self::Kalimdor {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Testing {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::ScottTest {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::CashTest {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::AlteracValley {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::ShadowfangKeep {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::StormwindStockade {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::StormwindPrison {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Deadmines {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::AzsharaCrater {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::CollinsTest {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::WailingCaverns {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Monastery {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::RazorfenKraul {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::BlackfathomDeeps {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Uldaman {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Gnomeragon {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::SunkenTemple {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::RazorfenDowns {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::EmeraldDream {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::ScarletMonastery {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::ZulFarrak {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::BlackrockSpire {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::BlackrockDepths {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::OnyxiasLair {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::CavernsOfTime {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Scholomance {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::ZulGurub {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Stratholme {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Mauradon {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::DeeprunTram {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::RagefireChasm {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::MoltenCore {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::DireMaul {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::AlliancePvpBarracks {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::HordePvpBarracks {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::DevelopmentLand {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::BlackwingLair {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::WarsongGulch {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::RuinsOfAhnQiraj {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::ArathiBasin {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::AhnQirajTemple {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
             Self::Naxxramas {
+                bracket,
                 client_instance_id,
                 status_id,
-                unknown0,
             } => {
                 4
+                + 1 // bracket: BattlegroundBracket
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
-                + 1 // unknown0: u8
             }
         }
     }

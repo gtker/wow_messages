@@ -10,7 +10,7 @@ smsg SMSG_BATTLEFIELD_STATUS = 0x02D4 {
     u32 queue_slot;
     Map map;
     if (map != EASTERN_KINGDOMS) {
-        u8 unknown0;
+        BattlegroundBracket bracket;
         u32 client_instance_id;
         StatusId status_id;
         if (status_id == WAIT_QUEUE) {
@@ -49,7 +49,7 @@ If map is not equal to `EASTERN_KINGDOMS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 1 / - | u8 | unknown0 |  |  |
+| 0x0C | 1 / - | [BattlegroundBracket](battlegroundbracket.md) | bracket |  |  |
 | 0x0D | 4 / Little | u32 | client_instance_id |  |  |
 | 0x11 | 1 / - | [StatusId](statusid.md) | status_id |  |  |
 
