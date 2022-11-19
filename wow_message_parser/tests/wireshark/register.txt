@@ -4042,6 +4042,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_spirit_released,
+            { "Spirit Released", "woww.spirit.released",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_spline_elevation,
             { "Spline Elevation", "woww.spline.elevation",
                 FT_FLOAT, BASE_NONE, NULL, 0,

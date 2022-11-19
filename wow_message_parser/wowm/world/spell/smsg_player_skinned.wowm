@@ -1,4 +1,6 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
-smsg SMSG_PLAYER_SKINNED = 0x02BC {}
+smsg SMSG_PLAYER_SKINNED = 0x02BC {
+    Bool spirit_released;
+}
 

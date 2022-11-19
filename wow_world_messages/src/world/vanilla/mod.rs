@@ -1180,6 +1180,8 @@ pub use crate::shared::smsg_play_spell_impact_vanilla_tbc_wrath::SMSG_PLAY_SPELL
 
 pub use crate::shared::smsg_play_spell_visual_vanilla_tbc_wrath::SMSG_PLAY_SPELL_VISUAL;
 
+pub use crate::shared::smsg_player_skinned_vanilla_tbc_wrath::SMSG_PLAYER_SKINNED;
+
 pub use crate::shared::smsg_pong_vanilla_tbc_wrath::SMSG_PONG;
 
 pub use crate::shared::smsg_procresist_vanilla_tbc_wrath::SMSG_PROCRESIST;
@@ -1530,8 +1532,6 @@ pub(crate) mod smsg_petition_sign_results;
 pub use smsg_petition_sign_results::*;
 pub(crate) mod smsg_played_time;
 pub use smsg_played_time::*;
-pub(crate) mod smsg_player_skinned;
-pub use smsg_player_skinned::*;
 pub(crate) mod smsg_playerbound;
 pub use smsg_playerbound::*;
 pub(crate) mod smsg_query_time_response;

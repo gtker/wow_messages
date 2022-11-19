@@ -483,6 +483,7 @@ pub mod smsg_play_object_sound_vanilla_tbc_wrath;
 pub mod smsg_play_sound_vanilla_tbc_wrath;
 pub mod smsg_play_spell_impact_vanilla_tbc_wrath;
 pub mod smsg_play_spell_visual_vanilla_tbc_wrath;
+pub mod smsg_player_skinned_vanilla_tbc_wrath;
 pub mod smsg_pong_vanilla_tbc_wrath;
 pub mod smsg_procresist_vanilla_tbc_wrath;
 pub mod smsg_pvp_credit_vanilla_tbc_wrath;

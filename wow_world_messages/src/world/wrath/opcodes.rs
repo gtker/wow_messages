@@ -5384,6 +5384,7 @@ use crate::world::wrath::SMSG_PET_BROKEN;
 use crate::world::wrath::SMSG_FEIGN_DEATH_RESISTED;
 use crate::world::wrath::SMSG_DUEL_COUNTDOWN;
 use crate::world::wrath::SMSG_AREA_TRIGGER_MESSAGE;
+use crate::world::wrath::SMSG_PLAYER_SKINNED;
 use crate::world::wrath::SMSG_DURABILITY_DAMAGE_DEATH;
 use crate::world::wrath::SMSG_INIT_WORLD_STATES;
 use crate::world::wrath::SMSG_UPDATE_WORLD_STATE;
@@ -5704,6 +5705,7 @@ pub enum ServerOpcodeMessage {
     SMSG_FEIGN_DEATH_RESISTED(SMSG_FEIGN_DEATH_RESISTED),
     SMSG_DUEL_COUNTDOWN(SMSG_DUEL_COUNTDOWN),
     SMSG_AREA_TRIGGER_MESSAGE(SMSG_AREA_TRIGGER_MESSAGE),
+    SMSG_PLAYER_SKINNED(SMSG_PLAYER_SKINNED),
     SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
     SMSG_INIT_WORLD_STATES(SMSG_INIT_WORLD_STATES),
     SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
@@ -6026,6 +6028,7 @@ impl ServerOpcodeMessage {
             0x02B4 => Ok(Self::SMSG_FEIGN_DEATH_RESISTED(<SMSG_FEIGN_DEATH_RESISTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B4, size: body_size, io, } } else { a } })?)),
             0x02B7 => Ok(Self::SMSG_DUEL_COUNTDOWN(<SMSG_DUEL_COUNTDOWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B7, size: body_size, io, } } else { a } })?)),
             0x02B8 => Ok(Self::SMSG_AREA_TRIGGER_MESSAGE(<SMSG_AREA_TRIGGER_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B8, size: body_size, io, } } else { a } })?)),
+            0x02BC => Ok(Self::SMSG_PLAYER_SKINNED(<SMSG_PLAYER_SKINNED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BC, size: body_size, io, } } else { a } })?)),
             0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BD, size: body_size, io, } } else { a } })?)),
             0x02C2 => Ok(Self::SMSG_INIT_WORLD_STATES(<SMSG_INIT_WORLD_STATES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C2, size: body_size, io, } } else { a } })?)),
             0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C3, size: body_size, io, } } else { a } })?)),
@@ -6497,6 +6500,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PLAYER_SKINNED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INIT_WORLD_STATES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_server(w, e),
@@ -6820,6 +6824,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PLAYER_SKINNED(c) => c.write_unencrypted_server(w),
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
             Self::SMSG_INIT_WORLD_STATES(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_server(w),
@@ -7143,6 +7148,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PLAYER_SKINNED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7466,6 +7472,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PLAYER_SKINNED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7789,6 +7796,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PLAYER_SKINNED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8112,6 +8120,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PLAYER_SKINNED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8437,6 +8446,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FEIGN_DEATH_RESISTED(_) => "SMSG_FEIGN_DEATH_RESISTED",
             ServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => "SMSG_DUEL_COUNTDOWN",
             ServerOpcodeMessage::SMSG_AREA_TRIGGER_MESSAGE(_) => "SMSG_AREA_TRIGGER_MESSAGE",
+            ServerOpcodeMessage::SMSG_PLAYER_SKINNED(_) => "SMSG_PLAYER_SKINNED",
             ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
             ServerOpcodeMessage::SMSG_INIT_WORLD_STATES(_) => "SMSG_INIT_WORLD_STATES",
             ServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
@@ -10090,6 +10100,12 @@ impl From<SMSG_DUEL_COUNTDOWN> for ServerOpcodeMessage {
 impl From<SMSG_AREA_TRIGGER_MESSAGE> for ServerOpcodeMessage {
     fn from(c: SMSG_AREA_TRIGGER_MESSAGE) -> Self {
         Self::SMSG_AREA_TRIGGER_MESSAGE(c)
+    }
+}
+
+impl From<SMSG_PLAYER_SKINNED> for ServerOpcodeMessage {
+    fn from(c: SMSG_PLAYER_SKINNED) -> Self {
+        Self::SMSG_PLAYER_SKINNED(c)
     }
 }
 
