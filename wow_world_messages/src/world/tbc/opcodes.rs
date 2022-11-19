@@ -266,6 +266,7 @@ use crate::world::tbc::CMSG_CANCEL_GROWTH_AURA;
 use crate::world::tbc::CMSG_LOOT_ROLL;
 use crate::world::tbc::CMSG_LOOT_MASTER_GIVE;
 use crate::world::tbc::CMSG_REPAIR_ITEM;
+use crate::world::tbc::MSG_TALENT_WIPE_CONFIRM_Client;
 use crate::world::tbc::CMSG_SUMMON_RESPONSE;
 use crate::world::tbc::CMSG_SELF_RES;
 use crate::world::tbc::CMSG_TOGGLE_HELM;
@@ -571,6 +572,7 @@ pub enum ClientOpcodeMessage {
     CMSG_LOOT_ROLL(CMSG_LOOT_ROLL),
     CMSG_LOOT_MASTER_GIVE(CMSG_LOOT_MASTER_GIVE),
     CMSG_REPAIR_ITEM(CMSG_REPAIR_ITEM),
+    MSG_TALENT_WIPE_CONFIRM(MSG_TALENT_WIPE_CONFIRM_Client),
     CMSG_SUMMON_RESPONSE(CMSG_SUMMON_RESPONSE),
     CMSG_SELF_RES(CMSG_SELF_RES),
     CMSG_TOGGLE_HELM(CMSG_TOGGLE_HELM),
@@ -878,6 +880,7 @@ impl ClientOpcodeMessage {
             0x02A0 => Ok(Self::CMSG_LOOT_ROLL(<CMSG_LOOT_ROLL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A0, size: body_size, io, } } else { a } })?)),
             0x02A3 => Ok(Self::CMSG_LOOT_MASTER_GIVE(<CMSG_LOOT_MASTER_GIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A3, size: body_size, io, } } else { a } })?)),
             0x02A8 => Ok(Self::CMSG_REPAIR_ITEM(<CMSG_REPAIR_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A8, size: body_size, io, } } else { a } })?)),
+            0x02AA => Ok(Self::MSG_TALENT_WIPE_CONFIRM(<MSG_TALENT_WIPE_CONFIRM_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AA, size: body_size, io, } } else { a } })?)),
             0x02AC => Ok(Self::CMSG_SUMMON_RESPONSE(<CMSG_SUMMON_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AC, size: body_size, io, } } else { a } })?)),
             0x02B3 => Ok(Self::CMSG_SELF_RES(<CMSG_SELF_RES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B3, size: body_size, io, } } else { a } })?)),
             0x02B9 => Ok(Self::CMSG_TOGGLE_HELM(<CMSG_TOGGLE_HELM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B9, size: body_size, io, } } else { a } })?)),
@@ -1253,6 +1256,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOOT_ROLL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REPAIR_ITEM(c) => c.write_encrypted_client(w, e),
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SUMMON_RESPONSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SELF_RES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TOGGLE_HELM(c) => c.write_encrypted_client(w, e),
@@ -1561,6 +1565,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOOT_ROLL(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_REPAIR_ITEM(c) => c.write_unencrypted_client(w),
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_unencrypted_client(w),
             Self::CMSG_SUMMON_RESPONSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SELF_RES(c) => c.write_unencrypted_client(w),
             Self::CMSG_TOGGLE_HELM(c) => c.write_unencrypted_client(w),
@@ -1869,6 +1874,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOOT_ROLL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPAIR_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SUMMON_RESPONSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SELF_RES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TOGGLE_HELM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2177,6 +2183,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOOT_ROLL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPAIR_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SUMMON_RESPONSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SELF_RES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TOGGLE_HELM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2485,6 +2492,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOOT_ROLL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPAIR_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SUMMON_RESPONSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SELF_RES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TOGGLE_HELM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2793,6 +2801,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LOOT_ROLL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPAIR_ITEM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SUMMON_RESPONSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SELF_RES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TOGGLE_HELM(c) => c.astd_write_unencrypted_client(w).await,
@@ -3136,6 +3145,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_LOOT_ROLL(_) => "CMSG_LOOT_ROLL",
             ClientOpcodeMessage::CMSG_LOOT_MASTER_GIVE(_) => "CMSG_LOOT_MASTER_GIVE",
             ClientOpcodeMessage::CMSG_REPAIR_ITEM(_) => "CMSG_REPAIR_ITEM",
+            ClientOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => "MSG_TALENT_WIPE_CONFIRM_Client",
             ClientOpcodeMessage::CMSG_SUMMON_RESPONSE(_) => "CMSG_SUMMON_RESPONSE",
             ClientOpcodeMessage::CMSG_SELF_RES(_) => "CMSG_SELF_RES",
             ClientOpcodeMessage::CMSG_TOGGLE_HELM(_) => "CMSG_TOGGLE_HELM",
@@ -4727,6 +4737,12 @@ impl From<CMSG_REPAIR_ITEM> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_TALENT_WIPE_CONFIRM_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_TALENT_WIPE_CONFIRM_Client) -> Self {
+        Self::MSG_TALENT_WIPE_CONFIRM(c)
+    }
+}
+
 impl From<CMSG_SUMMON_RESPONSE> for ClientOpcodeMessage {
     fn from(c: CMSG_SUMMON_RESPONSE) -> Self {
         Self::CMSG_SUMMON_RESPONSE(c)
@@ -5244,6 +5260,7 @@ use crate::world::tbc::SMSG_LOOT_MASTER_LIST;
 use crate::world::tbc::SMSG_SET_FORCED_REACTIONS;
 use crate::world::tbc::SMSG_SPELL_FAILED_OTHER;
 use crate::world::tbc::SMSG_CHAT_PLAYER_NOT_FOUND;
+use crate::world::tbc::MSG_TALENT_WIPE_CONFIRM_Server;
 use crate::world::tbc::SMSG_PET_BROKEN;
 use crate::world::tbc::SMSG_DUEL_COUNTDOWN;
 use crate::world::tbc::SMSG_AREA_TRIGGER_MESSAGE;
@@ -5548,6 +5565,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SET_FORCED_REACTIONS(SMSG_SET_FORCED_REACTIONS),
     SMSG_SPELL_FAILED_OTHER(SMSG_SPELL_FAILED_OTHER),
     SMSG_CHAT_PLAYER_NOT_FOUND(SMSG_CHAT_PLAYER_NOT_FOUND),
+    MSG_TALENT_WIPE_CONFIRM(MSG_TALENT_WIPE_CONFIRM_Server),
     SMSG_PET_BROKEN(SMSG_PET_BROKEN),
     SMSG_DUEL_COUNTDOWN(SMSG_DUEL_COUNTDOWN),
     SMSG_AREA_TRIGGER_MESSAGE(SMSG_AREA_TRIGGER_MESSAGE),
@@ -5854,6 +5872,7 @@ impl ServerOpcodeMessage {
             0x02A5 => Ok(Self::SMSG_SET_FORCED_REACTIONS(<SMSG_SET_FORCED_REACTIONS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A5, size: body_size, io, } } else { a } })?)),
             0x02A6 => Ok(Self::SMSG_SPELL_FAILED_OTHER(<SMSG_SPELL_FAILED_OTHER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A6, size: body_size, io, } } else { a } })?)),
             0x02A9 => Ok(Self::SMSG_CHAT_PLAYER_NOT_FOUND(<SMSG_CHAT_PLAYER_NOT_FOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A9, size: body_size, io, } } else { a } })?)),
+            0x02AA => Ok(Self::MSG_TALENT_WIPE_CONFIRM(<MSG_TALENT_WIPE_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AA, size: body_size, io, } } else { a } })?)),
             0x02AF => Ok(Self::SMSG_PET_BROKEN(<SMSG_PET_BROKEN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AF, size: body_size, io, } } else { a } })?)),
             0x02B7 => Ok(Self::SMSG_DUEL_COUNTDOWN(<SMSG_DUEL_COUNTDOWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B7, size: body_size, io, } } else { a } })?)),
             0x02B8 => Ok(Self::SMSG_AREA_TRIGGER_MESSAGE(<SMSG_AREA_TRIGGER_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B8, size: body_size, io, } } else { a } })?)),
@@ -6228,6 +6247,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELL_FAILED_OTHER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_encrypted_server(w, e),
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_BROKEN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_encrypted_server(w, e),
@@ -6535,6 +6555,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELL_FAILED_OTHER(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_unencrypted_server(w),
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_BROKEN(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_unencrypted_server(w),
@@ -6842,6 +6863,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_FAILED_OTHER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_BROKEN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7149,6 +7171,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_FAILED_OTHER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_BROKEN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7456,6 +7479,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_FAILED_OTHER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_BROKEN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7763,6 +7787,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_FORCED_REACTIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_FAILED_OTHER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_BROKEN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8072,6 +8097,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SET_FORCED_REACTIONS(_) => "SMSG_SET_FORCED_REACTIONS",
             ServerOpcodeMessage::SMSG_SPELL_FAILED_OTHER(_) => "SMSG_SPELL_FAILED_OTHER",
             ServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => "SMSG_CHAT_PLAYER_NOT_FOUND",
+            ServerOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => "MSG_TALENT_WIPE_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_PET_BROKEN(_) => "SMSG_PET_BROKEN",
             ServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => "SMSG_DUEL_COUNTDOWN",
             ServerOpcodeMessage::SMSG_AREA_TRIGGER_MESSAGE(_) => "SMSG_AREA_TRIGGER_MESSAGE",
@@ -9634,6 +9660,12 @@ impl From<SMSG_SPELL_FAILED_OTHER> for ServerOpcodeMessage {
 impl From<SMSG_CHAT_PLAYER_NOT_FOUND> for ServerOpcodeMessage {
     fn from(c: SMSG_CHAT_PLAYER_NOT_FOUND) -> Self {
         Self::SMSG_CHAT_PLAYER_NOT_FOUND(c)
+    }
+}
+
+impl From<MSG_TALENT_WIPE_CONFIRM_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_TALENT_WIPE_CONFIRM_Server) -> Self {
+        Self::MSG_TALENT_WIPE_CONFIRM(c)
     }
 }
 

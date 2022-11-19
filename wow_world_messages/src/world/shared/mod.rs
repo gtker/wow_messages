@@ -318,6 +318,8 @@ pub mod msg_random_roll_client_vanilla_tbc_wrath;
 pub mod msg_random_roll_server_vanilla_tbc_wrath;
 pub mod msg_save_guild_emblem_client_vanilla_tbc_wrath;
 pub mod msg_tabardvendor_activate_vanilla_tbc_wrath;
+pub mod msg_talent_wipe_confirm_client_vanilla_tbc_wrath;
+pub mod msg_talent_wipe_confirm_server_vanilla_tbc_wrath;
 pub mod new_item_chat_alert_vanilla_tbc_wrath;
 pub mod new_item_creation_type_vanilla_tbc_wrath;
 pub mod new_item_source_vanilla_tbc_wrath;

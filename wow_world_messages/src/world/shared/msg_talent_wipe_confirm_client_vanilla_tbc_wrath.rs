@@ -43,3 +43,9 @@ impl crate::Message for MSG_TALENT_WIPE_CONFIRM_Client {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ClientMessage for MSG_TALENT_WIPE_CONFIRM_Client {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for MSG_TALENT_WIPE_CONFIRM_Client {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for MSG_TALENT_WIPE_CONFIRM_Client {}
+

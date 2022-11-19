@@ -319,10 +319,6 @@ pub(crate) mod msg_raid_target_update_server;
 pub use msg_raid_target_update_server::*;
 pub(crate) mod msg_save_guild_emblem_server;
 pub use msg_save_guild_emblem_server::*;
-pub(crate) mod msg_talent_wipe_confirm_client;
-pub use msg_talent_wipe_confirm_client::*;
-pub(crate) mod msg_talent_wipe_confirm_server;
-pub use msg_talent_wipe_confirm_server::*;
 pub(crate) mod npc_text_update;
 pub use npc_text_update::*;
 pub(crate) mod object;
@@ -893,6 +889,10 @@ pub use crate::shared::msg_random_roll_server_vanilla_tbc_wrath::MSG_RANDOM_ROLL
 pub use crate::shared::msg_save_guild_emblem_client_vanilla_tbc_wrath::MSG_SAVE_GUILD_EMBLEM_Client;
 
 pub use crate::shared::msg_tabardvendor_activate_vanilla_tbc_wrath::MSG_TABARDVENDOR_ACTIVATE;
+
+pub use crate::shared::msg_talent_wipe_confirm_client_vanilla_tbc_wrath::MSG_TALENT_WIPE_CONFIRM_Client;
+
+pub use crate::shared::msg_talent_wipe_confirm_server_vanilla_tbc_wrath::MSG_TALENT_WIPE_CONFIRM_Server;
 
 pub use crate::shared::new_item_chat_alert_vanilla_tbc_wrath::NewItemChatAlert;
 
