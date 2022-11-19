@@ -373,6 +373,7 @@ pub mod smsg_binder_confirm_vanilla_tbc;
 pub mod smsg_buy_bank_slot_result_vanilla_tbc_wrath;
 pub mod smsg_buy_failed_vanilla_tbc_wrath;
 pub mod smsg_buy_item_vanilla_tbc_wrath;
+pub mod smsg_cancel_auto_repeat_vanilla_tbc;
 pub mod smsg_cancel_combat_vanilla_tbc_wrath;
 pub mod smsg_channel_list_vanilla_tbc_wrath;
 pub mod smsg_channel_notify_tbc_wrath;

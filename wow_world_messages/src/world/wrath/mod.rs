@@ -1334,6 +1334,8 @@ pub(crate) mod smsg_bindpointupdate;
 pub use smsg_bindpointupdate::*;
 pub(crate) mod smsg_calendar_send_num_pending;
 pub use smsg_calendar_send_num_pending::*;
+pub(crate) mod smsg_cancel_auto_repeat;
+pub use smsg_cancel_auto_repeat::*;
 pub(crate) mod smsg_char_create;
 pub use smsg_char_create::*;
 pub(crate) mod smsg_char_delete;

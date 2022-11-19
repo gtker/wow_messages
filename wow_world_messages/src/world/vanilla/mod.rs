@@ -988,6 +988,8 @@ pub use crate::shared::smsg_buy_failed_vanilla_tbc_wrath::SMSG_BUY_FAILED;
 
 pub use crate::shared::smsg_buy_item_vanilla_tbc_wrath::SMSG_BUY_ITEM;
 
+pub use crate::shared::smsg_cancel_auto_repeat_vanilla_tbc::SMSG_CANCEL_AUTO_REPEAT;
+
 pub use crate::shared::smsg_cancel_combat_vanilla_tbc_wrath::SMSG_CANCEL_COMBAT;
 
 pub use crate::shared::smsg_channel_list_vanilla_tbc_wrath::SMSG_CHANNEL_LIST;
@@ -1386,8 +1388,6 @@ pub(crate) mod smsg_battlefield_status;
 pub use smsg_battlefield_status::*;
 pub(crate) mod smsg_bindpointupdate;
 pub use smsg_bindpointupdate::*;
-pub(crate) mod smsg_cancel_auto_repeat;
-pub use smsg_cancel_auto_repeat::*;
 pub(crate) mod smsg_cast_result;
 pub use smsg_cast_result::*;
 pub(crate) mod smsg_channel_notify;

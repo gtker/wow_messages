@@ -1,4 +1,9 @@
-#tag_all versions "1.12";
+smsg SMSG_CANCEL_AUTO_REPEAT = 0x029C {} {
+    versions = "1 2";
+}
 
-smsg SMSG_CANCEL_AUTO_REPEAT = 0x029C {}
-
+smsg SMSG_CANCEL_AUTO_REPEAT = 0x029C {
+    PackedGuid target;
+} {
+    versions = "3.3.5";
+}
