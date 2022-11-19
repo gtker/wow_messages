@@ -1,3 +1,12 @@
+smsg SMSG_SPELLLOGEXECUTE = 0x024C {
+    PackedGuid caster;
+    Spell spell;
+    u32 amount_of_effects;
+    SpellLog[amount_of_effects] logs;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
+}
+
 enum SpellEffect : u32 {
     NONE = 0;
     INSTAKILL = 1;
@@ -204,12 +213,457 @@ struct SpellLog {
     versions = "1.12";
 }
 
-smsg SMSG_SPELLLOGEXECUTE = 0x024C {
-    PackedGuid caster;
-    Spell spell;
-    u32 amount_of_effects;
-    SpellLog[amount_of_effects] logs;
+enum SpellEffect : u32 {
+    NONE = 0;
+    INSTAKILL = 1;
+    SCHOOL_DAMAGE = 2;
+    DUMMY = 3;
+    PORTAL_TELEPORT = 4;
+    TELEPORT_UNITS = 5;
+    APPLY_AURA = 6;
+    ENVIRONMENTAL_DAMAGE = 7;
+    POWER_DRAIN = 8;
+    HEALTH_LEECH = 9;
+    HEAL = 10;
+    BIND = 11;
+    PORTAL = 12;
+    RITUAL_BASE = 13;
+    RITUAL_SPECIALIZE = 14;
+    RITUAL_ACTIVATE_PORTAL = 15;
+    QUEST_COMPLETE = 16;
+    WEAPON_DAMAGE_NOSCHOOL = 17;
+    RESURRECT = 18;
+    ADD_EXTRA_ATTACKS = 19;
+    DODGE = 20;
+    EVADE = 21;
+    PARRY = 22;
+    BLOCK = 23;
+    CREATE_ITEM = 24;
+    WEAPON = 25;
+    DEFENSE = 26;
+    PERSISTENT_AREA_AURA = 27;
+    SUMMON = 28;
+    LEAP = 29;
+    ENERGIZE = 30;
+    WEAPON_PERCENT_DAMAGE = 31;
+    TRIGGER_MISSILE = 32;
+    OPEN_LOCK = 33;
+    SUMMON_CHANGE_ITEM = 34;
+    APPLY_AREA_AURA_PARTY = 35;
+    LEARN_SPELL = 36;
+    SPELL_DEFENSE = 37;
+    DISPEL = 38;
+    LANGUAGE = 39;
+    DUAL_WIELD = 40;
+    UNKNOWN41 = 41 {
+        comment = "old SPELL_EFFECT_SUMMON_WILD";
+    }
+    UNKNOWN42 = 42 {
+        comment = "old SPELL_EFFECT_SUMMON_GUARDIAN";
+    }
+    TELEPORT_UNITS_FACE_CASTER = 43;
+    SKILL_STEP = 44;
+    UNDEFINED_45 = 45;
+    SPAWN = 46;
+    TRADE_SKILL = 47;
+    STEALTH = 48;
+    DETECT = 49;
+    TRANS_DOOR = 50;
+    FORCE_CRITICAL_HIT = 51;
+    GUARANTEE_HIT = 52;
+    ENCHANT_ITEM = 53;
+    ENCHANT_ITEM_TEMPORARY = 54;
+    TAMECREATURE = 55;
+    SUMMON_PET = 56;
+    LEARN_PET_SPELL = 57;
+    WEAPON_DAMAGE = 58;
+    OPEN_LOCK_ITEM = 59;
+    PROFICIENCY = 60;
+    SEND_EVENT = 61;
+    POWER_BURN = 62;
+    THREAT = 63;
+    TRIGGER_SPELL = 64;
+    HEALTH_FUNNEL = 65;
+    POWER_FUNNEL = 66;
+    HEAL_MAX_HEALTH = 67;
+    INTERRUPT_CAST = 68;
+    DISTRACT = 69;
+    PULL = 70;
+    PICKPOCKET = 71;
+    ADD_FARSIGHT = 72;
+    UNKNOWN73 = 73 {
+        comment = "old SPELL_EFFECT_SUMMON_POSSESSED";
+    }
+    UNKNOWN74 = 74 {
+        comment = "old SPELL_EFFECT_SUMMON_TOTEM";
+    }
+    HEAL_MECHANICAL = 75;
+    SUMMON_OBJECT_WILD = 76;
+    SCRIPT_EFFECT = 77;
+    ATTACK = 78;
+    SANCTUARY = 79;
+    ADD_COMBO_POINTS = 80;
+    CREATE_HOUSE = 81;
+    BIND_SIGHT = 82;
+    DUEL = 83;
+    STUCK = 84;
+    SUMMON_PLAYER = 85;
+    ACTIVATE_OBJECT = 86;
+    UNKNOWN87 = 87 {
+        comment = "old SPELL_EFFECT_SUMMON_TOTEM_SLOT1";
+    }
+    UNKNOWN88 = 88 {
+        comment = "old SPELL_EFFECT_SUMMON_TOTEM_SLOT2";
+    }
+    UNKNOWN89 = 89 {
+        comment = "old SPELL_EFFECT_SUMMON_TOTEM_SLOT3";
+    }
+    UNKNOWN90 = 90 {
+        comment = "old SPELL_EFFECT_SUMMON_TOTEM_SLOT4";
+    }
+    THREAT_ALL = 91;
+    ENCHANT_HELD_ITEM = 92;
+    UNKNOWN93 = 93 {
+        comment = "old SPELL_EFFECT_SUMMON_PHANTASM";
+    }
+    SELF_RESURRECT = 94;
+    SKINNING = 95;
+    CHARGE = 96;
+    UNKNOWN97 = 97 {
+        comment = "old SPELL_EFFECT_SUMMON_CRITTER";
+    }
+    KNOCK_BACK = 98;
+    DISENCHANT = 99;
+    INEBRIATE = 100;
+    FEED_PET = 101;
+    DISMISS_PET = 102;
+    REPUTATION = 103;
+    SUMMON_OBJECT_SLOT1 = 104;
+    SUMMON_OBJECT_SLOT2 = 105;
+    SUMMON_OBJECT_SLOT3 = 106;
+    SUMMON_OBJECT_SLOT4 = 107;
+    DISPEL_MECHANIC = 108;
+    SUMMON_DEAD_PET = 109;
+    DESTROY_ALL_TOTEMS = 110;
+    DURABILITY_DAMAGE = 111;
+    UNKNOWN112 = 112 {
+        comment = "old SPELL_EFFECT_SUMMON_DEMON";
+    }
+    RESURRECT_NEW = 113;
+    ATTACK_ME = 114;
+    DURABILITY_DAMAGE_PCT = 115;
+    SKIN_PLAYER_CORPSE = 116;
+    SPIRIT_HEAL = 117;
+    SKILL = 118;
+    APPLY_AREA_AURA_PET = 119;
+    TELEPORT_GRAVEYARD = 120;
+    NORMALIZED_WEAPON_DMG = 121;
+    UNKNOWN122 = 122;
+    SEND_TAXI = 123;
+    PLAYER_PULL = 124;
+    MODIFY_THREAT_PERCENT = 125;
+    STEAL_BENEFICIAL_BUFF = 126;
+    PROSPECTING = 127;
+    APPLY_AREA_AURA_FRIEND = 128;
+    APPLY_AREA_AURA_ENEMY = 129;
+    REDIRECT_THREAT = 130;
+    PLAY_SOUND = 131;
+    PLAY_MUSIC = 132;
+    UNLEARN_SPECIALIZATION = 133;
+    KILL_CREDIT_GROUP = 134;
+    CALL_PET = 135;
+    HEAL_PCT = 136;
+    ENERGIZE_PCT = 137;
+    LEAP_BACK = 138;
+    CLEAR_QUEST = 139;
+    FORCE_CAST = 140;
+    UNKNOWN141 = 141;
+    TRIGGER_SPELL_WITH_VALUE = 142;
+    APPLY_AREA_AURA_OWNER = 143;
+    KNOCKBACK_FROM_POSITION = 144;
+    UNKNOWN145 = 145;
+    UNKNOWN146 = 146;
+    QUEST_FAIL = 147;
+    UNKNOWN148 = 148;
+    CHARGE2 = 149;
+    UNKNOWN150 = 150;
+    TRIGGER_SPELL_2 = 151;
+    UNKNOWN152 = 152;
+    UNKNOWN153 = 153;
 } {
-    versions = "1.12";
+    versions = "2.4.3";
 }
+
+struct SpellLog {
+    SpellEffect effect;
+    u32 amount_of_logs = 1 {
+        comment = "vmangos/cmangos/mangoszero: Can be variable but all use constant 1";
+    }
+    if (effect == POWER_DRAIN) {
+        PackedGuid target1;
+        u32 amount;
+        (u32)Power power;
+        f32 multiplier;
+    } else if (effect == ADD_EXTRA_ATTACKS) {
+        PackedGuid target4;
+        u32 extra_attacks;
+    } else if (effect == INTERRUPT_CAST) {
+        PackedGuid target5;
+        Spell interrupted_spell;
+    } else if (effect == DURABILITY_DAMAGE) {
+        PackedGuid target6;
+        Item item_to_damage;
+        u32 unknown5;
+    } else if (effect == OPEN_LOCK
+            || effect == OPEN_LOCK_ITEM) {
+        PackedGuid lock_target;
+    } else if (effect == CREATE_ITEM) {
+        Item item;
+    } else if (effect == SUMMON
+            || effect == TRANS_DOOR
+            || effect == SUMMON_PET
+            || effect == SUMMON_OBJECT_WILD
+            || effect == CREATE_HOUSE
+            || effect == DUEL
+            || effect == SUMMON_OBJECT_SLOT1
+            || effect == SUMMON_OBJECT_SLOT2
+            || effect == SUMMON_OBJECT_SLOT3
+            || effect == SUMMON_OBJECT_SLOT4) {
+        PackedGuid summon_target;
+    }
+    else if (effect == FEED_PET) {
+        PackedGuid pet_feed_guid;
+    }
+    else if (effect == DISMISS_PET) {
+        PackedGuid pet_dismiss_guid;
+    }
+} {
+    versions = "2.4.3";
+}
+
+enum SpellEffect : u32 {
+    NONE = 0;
+    INSTAKILL = 1;
+    SCHOOL_DAMAGE = 2;
+    DUMMY = 3;
+    PORTAL_TELEPORT = 4;
+    TELEPORT_UNITS = 5;
+    APPLY_AURA = 6;
+    ENVIRONMENTAL_DAMAGE = 7;
+    POWER_DRAIN = 8;
+    HEALTH_LEECH = 9;
+    HEAL = 10;
+    BIND = 11;
+    PORTAL = 12;
+    RITUAL_BASE = 13;
+    RITUAL_SPECIALIZE = 14;
+    RITUAL_ACTIVATE_PORTAL = 15;
+    QUEST_COMPLETE = 16;
+    WEAPON_DAMAGE_NOSCHOOL = 17;
+    RESURRECT = 18;
+    ADD_EXTRA_ATTACKS = 19;
+    DODGE = 20;
+    EVADE = 21;
+    PARRY = 22;
+    BLOCK = 23;
+    CREATE_ITEM = 24;
+    WEAPON = 25;
+    DEFENSE = 26;
+    PERSISTENT_AREA_AURA = 27;
+    SUMMON = 28;
+    LEAP = 29;
+    ENERGIZE = 30;
+    WEAPON_PERCENT_DAMAGE = 31;
+    TRIGGER_MISSILE = 32;
+    OPEN_LOCK = 33;
+    SUMMON_CHANGE_ITEM = 34;
+    APPLY_AREA_AURA_PARTY = 35;
+    LEARN_SPELL = 36;
+    SPELL_DEFENSE = 37;
+    DISPEL = 38;
+    LANGUAGE = 39;
+    DUAL_WIELD = 40;
+    JUMP = 41;
+    JUMP2 = 42;
+    TELEPORT_UNITS_FACE_CASTER = 43;
+    SKILL_STEP = 44;
+    ADD_HONOR = 45;
+    SPAWN = 46;
+    TRADE_SKILL = 47;
+    STEALTH = 48;
+    DETECT = 49;
+    TRANS_DOOR = 50;
+    FORCE_CRITICAL_HIT = 51;
+    GUARANTEE_HIT = 52;
+    ENCHANT_ITEM = 53;
+    ENCHANT_ITEM_TEMPORARY = 54;
+    TAMECREATURE = 55;
+    SUMMON_PET = 56;
+    LEARN_PET_SPELL = 57;
+    WEAPON_DAMAGE = 58;
+    CREATE_RANDOM_ITEM = 59;
+    PROFICIENCY = 60;
+    SEND_EVENT = 61;
+    POWER_BURN = 62;
+    THREAT = 63;
+    TRIGGER_SPELL = 64;
+    APPLY_AREA_AURA_RAID = 65;
+    RESTORE_ITEM_CHARGES = 66;
+    HEAL_MAX_HEALTH = 67;
+    INTERRUPT_CAST = 68;
+    DISTRACT = 69;
+    PULL = 70;
+    PICKPOCKET = 71;
+    ADD_FARSIGHT = 72;
+    UNTRAIN_TALENTS = 73;
+    APPLY_GLYPH = 74;
+    HEAL_MECHANICAL = 75;
+    SUMMON_OBJECT_WILD = 76;
+    SCRIPT_EFFECT = 77;
+    ATTACK = 78;
+    SANCTUARY = 79;
+    ADD_COMBO_POINTS = 80;
+    CREATE_HOUSE = 81;
+    BIND_SIGHT = 82;
+    DUEL = 83;
+    STUCK = 84;
+    SUMMON_PLAYER = 85;
+    ACTIVATE_OBJECT = 86;
+    WMO_DAMAGE = 87;
+    WMO_REPAIR = 88;
+    WMO_CHANGE = 89;
+    KILL_CREDIT_PERSONAL = 90;
+    THREAT_ALL = 91;
+    ENCHANT_HELD_ITEM = 92;
+    BREAK_PLAYER_TARGETING = 93;
+    SELF_RESURRECT = 94;
+    SKINNING = 95;
+    CHARGE = 96;
+    SUMMON_ALL_TOTEMS = 97;
+    KNOCK_BACK = 98;
+    DISENCHANT = 99;
+    INEBRIATE = 100;
+    FEED_PET = 101;
+    DISMISS_PET = 102;
+    REPUTATION = 103;
+    SUMMON_OBJECT_SLOT1 = 104;
+    SUMMON_OBJECT_SLOT2 = 105;
+    SUMMON_OBJECT_SLOT3 = 106;
+    SUMMON_OBJECT_SLOT4 = 107;
+    DISPEL_MECHANIC = 108;
+    SUMMON_DEAD_PET = 109;
+    DESTROY_ALL_TOTEMS = 110;
+    DURABILITY_DAMAGE = 111;
+    UNKNOWN112 = 112 {
+        comment = "old SPELL_EFFECT_SUMMON_DEMON";
+    }
+    RESURRECT_NEW = 113;
+    ATTACK_ME = 114;
+    DURABILITY_DAMAGE_PCT = 115;
+    SKIN_PLAYER_CORPSE = 116;
+    SPIRIT_HEAL = 117;
+    SKILL = 118;
+    APPLY_AREA_AURA_PET = 119;
+    TELEPORT_GRAVEYARD = 120;
+    NORMALIZED_WEAPON_DMG = 121;
+    UNKNOWN122 = 122;
+    SEND_TAXI = 123;
+    PLAYER_PULL = 124;
+    MODIFY_THREAT_PERCENT = 125;
+    STEAL_BENEFICIAL_BUFF = 126;
+    PROSPECTING = 127;
+    APPLY_AREA_AURA_FRIEND = 128;
+    APPLY_AREA_AURA_ENEMY = 129;
+    REDIRECT_THREAT = 130;
+    PLAY_SOUND = 131;
+    PLAY_MUSIC = 132;
+    UNLEARN_SPECIALIZATION = 133;
+    KILL_CREDIT_GROUP = 134;
+    CALL_PET = 135;
+    HEAL_PCT = 136;
+    ENERGIZE_PCT = 137;
+    LEAP_BACK = 138;
+    CLEAR_QUEST = 139;
+    FORCE_CAST = 140;
+    FORCE_CAST_WITH_VALUE = 141;
+    TRIGGER_SPELL_WITH_VALUE = 142;
+    APPLY_AREA_AURA_OWNER = 143;
+    KNOCKBACK_FROM_POSITION = 144;
+    GRAVITY_PULL = 145;
+    ACTIVATE_RUNE = 146;
+    QUEST_FAIL = 147;
+    UNKNOWN148 = 148;
+    CHARGE2 = 149;
+    QUEST_OFFER = 150;
+    TRIGGER_SPELL_2 = 151;
+    UNKNOWN152 = 152;
+    CREATE_PET = 153;
+    TEACH_TAXI_NODE = 154;
+    TITAN_GRIP = 155;
+    ENCHANT_ITEM_PRISMATIC = 156;
+    CREATE_ITEM_2 = 157;
+    MILLING = 158;
+    ALLOW_RENAME_PET = 159;
+    UNKNOWN160 = 160;
+    TALENT_SPEC_COUNT = 161;
+    TALENT_SPEC_SELECT = 162;
+    UNKNOWN163 = 163;
+    CANCEL_AURA = 164;
+} {
+    versions = "3.3.5";
+}
+
+struct SpellLog {
+    SpellEffect effect;
+    u32 amount_of_logs = 1 {
+        comment = "vmangos/cmangos/mangoszero: Can be variable but all use constant 1";
+    }
+    if (effect == POWER_DRAIN) {
+        PackedGuid target1;
+        u32 amount;
+        (u32)Power power;
+        f32 multiplier;
+    } else if (effect == ADD_EXTRA_ATTACKS) {
+        PackedGuid target4;
+        u32 extra_attacks;
+    } else if (effect == INTERRUPT_CAST) {
+        PackedGuid target5;
+        Spell interrupted_spell;
+    } else if (effect == DURABILITY_DAMAGE) {
+        PackedGuid target6;
+        Item item_to_damage;
+        u32 unknown5;
+    } else if (effect == OPEN_LOCK
+            || effect == OPEN_LOCK_ITEM) {
+        PackedGuid lock_target;
+    } else if (effect == CREATE_ITEM
+            || effect == CREATE_ITEM2) {
+        Item item;
+    } else if (effect == SUMMON
+            || effect == TRANS_DOOR
+            || effect == SUMMON_PET
+            || effect == SUMMON_OBJECT_WILD
+            || effect == CREATE_HOUSE
+            || effect == DUEL
+            || effect == SUMMON_OBJECT_SLOT1
+            || effect == SUMMON_OBJECT_SLOT2
+            || effect == SUMMON_OBJECT_SLOT3
+            || effect == SUMMON_OBJECT_SLOT4) {
+        PackedGuid summon_target;
+    }
+    else if (effect == FEED_PET) {
+        PackedGuid pet_feed_guid;
+    }
+    else if (effect == DISMISS_PET) {
+        PackedGuid pet_dismiss_guid;
+    }
+    else if(effect == RESURRECT
+         || effect == RESURRECT_NEW) {
+        PackedGuid resurrect_guid;
+    }
+} {
+    versions = "3.3.5";
+}
+
+
 
