@@ -509,6 +509,7 @@ pub mod smsg_show_bank_vanilla_tbc_wrath;
 pub mod smsg_showtaxinodes_vanilla_tbc_wrath;
 pub mod smsg_spell_cooldown_tbc_wrath;
 pub mod smsg_spell_delayed_vanilla_tbc_wrath;
+pub mod smsg_spell_failed_other_vanilla_tbc_wrath;
 pub mod smsg_spelldispellog_tbc_wrath;
 pub mod smsg_spellenergizelog_vanilla_tbc;
 pub mod smsg_spelllogmiss_vanilla_tbc_wrath;
