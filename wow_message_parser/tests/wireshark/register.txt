@@ -1450,6 +1450,18 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_energize_amount,
+            { "Energize Amount", "woww.energize.amount",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_energize_power,
+            { "Energize Power", "woww.energize.power",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_energy,
             { "Energy", "woww.energy",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -1546,6 +1558,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_extra_attacks,
+            { "Extra Attacks", "woww.extra.attacks",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_face,
             { "Face", "woww.face",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
@@ -1579,6 +1597,12 @@
         { &hf_woww_far_sight_operation,
             { "Far Sight Operation", "woww.far.sight.operation",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_far_sight_operation_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_feed_pet_item,
+            { "Feed Pet Item", "woww.feed.pet.item",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -1873,6 +1897,18 @@
         { &hf_woww_has_transport,
             { "Has Transport", "woww.has.transport",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_heal_amount,
+            { "Heal Amount", "woww.heal.amount",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_heal_critical,
+            { "Heal Critical", "woww.heal.critical",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -2254,12 +2290,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_item_target_entry,
-            { "Item Target Entry", "woww.item.target.entry",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_item_template,
             { "Item Template", "woww.item.template",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -2268,6 +2298,12 @@
         },
         { &hf_woww_item_text_id,
             { "Item Text Id", "woww.item.text.id",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_to_damage,
+            { "Item To Damage", "woww.item.to.damage",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -2701,6 +2737,12 @@
         { &hf_woww_movement_flags,
             { "Movement Flags", "woww.movement.flags",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_multiplier,
+            { "Multiplier", "woww.multiplier",
+                FT_FLOAT, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -3931,12 +3973,6 @@
         { &hf_woww_spell_effect,
             { "Spell Effect", "woww.spell.effect",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_spell_effect_strings), 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_spell_effect_item_type,
-            { "Spell Effect Item Type", "woww.spell.effect.item.type",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

@@ -32,6 +32,7 @@ Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
 * [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
 * [SMSG_SPELLENERGIZELOG](smsg_spellenergizelog.md)
+* [SpellLog](spelllog.md)
 
 # Power
 

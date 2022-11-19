@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum SpellEffect : u32 {
     NONE = 0;
     INSTAKILL = 1;
@@ -129,6 +127,8 @@ enum SpellEffect : u32 {
     MODIFY_THREAT_PERCENT = 125;
     UNKNOWN126 = 126;
     UNKNOWN127 = 127;
+} {
+    versions = "1.12";
 }
 
 struct SpellLog {
@@ -138,24 +138,34 @@ struct SpellLog {
     }
     if (effect == POWER_DRAIN) {
         Guid target1;
-        u32 unknown1;
-        u32 unknown2;
-        f32 unknown3;
-    } else if (effect == ADD_EXTRA_ATTACKS) {
+        u32 amount;
+        (u32)Power power;
+        f32 multiplier;
+    } else if (effect == HEAL
+            || effect == HEAL_MAX_HEALTH) {
         Guid target2;
-        u32 unknown4;
-    } else if (effect == INTERRUPT_CAST) {
+        u32 heal_amount;
+        u32 heal_critical;
+    } else if (effect == ENERGIZE) {
         Guid target3;
+        u32 energize_amount;
+        u32 energize_power;
+    } else if (effect == ADD_EXTRA_ATTACKS) {
+        Guid target4;
+        u32 extra_attacks;
+    } else if (effect == CREATE_ITEM) {
+        Item item;
+    } else if (effect == INTERRUPT_CAST) {
+        Guid target5;
         Spell interrupted_spell;
     } else if (effect == DURABILITY_DAMAGE) {
-        Guid target4;
+        Guid target6;
+        Item item_to_damage;
         u32 unknown5;
-        u32 unknown6;
-    } else if (effect == CREATE_ITEM) {
-        u32 spell_effect_item_type;
     } else if (effect == FEED_PET) {
-        u32 item_target_entry;
-    } else if (effect == RESURRECT
+        Item feed_pet_item;
+    } else if (effect == INSTAKILL
+            || effect == RESURRECT
             || effect == DISPEL
             || effect == THREAT
             || effect == DISTRACT
@@ -167,13 +177,31 @@ struct SpellLog {
             || effect == SKIN_PLAYER_CORPSE
             || effect == MODIFY_THREAT_PERCENT
             || effect == UNKNOWN126
-            || effect == DISMISS_PET
             || effect == OPEN_LOCK
             || effect == OPEN_LOCK_ITEM
-            || effect == INSTAKILL)
-    {
-        Guid target5;
+            || effect == DISMISS_PET
+            || effect == TRANS_DOOR
+            || effect == SUMMON
+            || effect == SUMMON_PET
+            || effect == SUMMON_WILD
+            || effect == SUMMON_GUARDIAN
+            || effect == SUMMON_TOTEM_SLOT1
+            || effect == SUMMON_TOTEM_SLOT2
+            || effect == SUMMON_TOTEM_SLOT3
+            || effect == SUMMON_TOTEM_SLOT4
+            || effect == SUMMON_POSSESSED
+            || effect == SUMMON_TOTEM
+            || effect == SUMMON_CRITTER
+            || effect == SUMMON_OBJECT_WILD
+            || effect == SUMMON_OBJECT_SLOT1
+            || effect == SUMMON_OBJECT_SLOT2
+            || effect == SUMMON_OBJECT_SLOT3
+            || effect == SUMMON_OBJECT_SLOT4
+            || effect == SUMMON_DEMON) {
+        Guid target7;
     }
+} {
+    versions = "1.12";
 }
 
 smsg SMSG_SPELLLOGEXECUTE = 0x024C {
@@ -181,5 +209,7 @@ smsg SMSG_SPELLLOGEXECUTE = 0x024C {
     Spell spell;
     u32 amount_of_effects;
     SpellLog[amount_of_effects] logs;
+} {
+    versions = "1.12";
 }
 

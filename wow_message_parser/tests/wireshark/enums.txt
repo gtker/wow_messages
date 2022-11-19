@@ -3375,6 +3375,24 @@ static const value_string e_spell_effect_strings[] =  {
 };
 
 typedef enum {
+    POWER_MANA = 0x00,
+    POWER_RAGE = 0x01,
+    POWER_FOCUS = 0x02,
+    POWER_ENERGY = 0x03,
+    POWER_HAPPINESS = 0x04,
+    POWER_HEALTH = 0xFE,
+} e_power;
+static const value_string e_power_strings[] =  {
+    { POWER_MANA, "Mana" },
+    { POWER_RAGE, "Rage" },
+    { POWER_FOCUS, "Focus" },
+    { POWER_ENERGY, "Energy" },
+    { POWER_HAPPINESS, "Happiness" },
+    { POWER_HEALTH, "Health" },
+    { 0, NULL }
+};
+
+typedef enum {
     SPELL_MISS_INFO_NONE = 0x0,
     SPELL_MISS_INFO_MISS = 0x1,
     SPELL_MISS_INFO_RESIST = 0x2,
@@ -5613,24 +5631,6 @@ static const value_string e_party_result_strings[] =  {
     { PARTY_RESULT_NOT_LEADER, "Not Leader" },
     { PARTY_RESULT_PLAYER_WRONG_FACTION, "Player Wrong Faction" },
     { PARTY_RESULT_IGNORING_YOU, "Ignoring You" },
-    { 0, NULL }
-};
-
-typedef enum {
-    POWER_MANA = 0x00,
-    POWER_RAGE = 0x01,
-    POWER_FOCUS = 0x02,
-    POWER_ENERGY = 0x03,
-    POWER_HAPPINESS = 0x04,
-    POWER_HEALTH = 0xFE,
-} e_power;
-static const value_string e_power_strings[] =  {
-    { POWER_MANA, "Mana" },
-    { POWER_RAGE, "Rage" },
-    { POWER_FOCUS, "Focus" },
-    { POWER_ENERGY, "Energy" },
-    { POWER_HAPPINESS, "Happiness" },
-    { POWER_HEALTH, "Health" },
     { 0, NULL }
 };
 

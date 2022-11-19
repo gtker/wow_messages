@@ -5267,13 +5267,27 @@
                 ptvcursor_add(ptv, hf_woww_amount_of_logs, 4, ENC_LITTLE_ENDIAN);
                 if (effect == SPELL_EFFECT_POWER_DRAIN) {
                     ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
-                    ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
-                    ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
-                    ptvcursor_add(ptv, hf_woww_unknown_float, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_amount, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_power, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_multiplier, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (effect == SPELL_EFFECT_HEAL
+                 || effect == SPELL_EFFECT_HEAL_MAX_HEALTH) {
+                    ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_heal_amount, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_heal_critical, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (effect == SPELL_EFFECT_ENERGIZE) {
+                    ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_energize_amount, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_energize_power, 4, ENC_LITTLE_ENDIAN);
                 }
                 else if (effect == SPELL_EFFECT_ADD_EXTRA_ATTACKS) {
                     ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
-                    ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_extra_attacks, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (effect == SPELL_EFFECT_CREATE_ITEM) {
+                    ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 }
                 else if (effect == SPELL_EFFECT_INTERRUPT_CAST) {
                     ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
@@ -5281,16 +5295,14 @@
                 }
                 else if (effect == SPELL_EFFECT_DURABILITY_DAMAGE) {
                     ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_item_to_damage, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
-                    ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
-                }
-                else if (effect == SPELL_EFFECT_CREATE_ITEM) {
-                    ptvcursor_add(ptv, hf_woww_spell_effect_item_type, 4, ENC_LITTLE_ENDIAN);
                 }
                 else if (effect == SPELL_EFFECT_FEED_PET) {
-                    ptvcursor_add(ptv, hf_woww_item_target_entry, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_feed_pet_item, 4, ENC_LITTLE_ENDIAN);
                 }
-                else if (effect == SPELL_EFFECT_RESURRECT
+                else if (effect == SPELL_EFFECT_INSTAKILL
+                 || effect == SPELL_EFFECT_RESURRECT
                  || effect == SPELL_EFFECT_DISPEL
                  || effect == SPELL_EFFECT_THREAT
                  || effect == SPELL_EFFECT_DISTRACT
@@ -5302,10 +5314,27 @@
                  || effect == SPELL_EFFECT_SKIN_PLAYER_CORPSE
                  || effect == SPELL_EFFECT_MODIFY_THREAT_PERCENT
                  || effect == SPELL_EFFECT_UNKNOWN126
-                 || effect == SPELL_EFFECT_DISMISS_PET
                  || effect == SPELL_EFFECT_OPEN_LOCK
                  || effect == SPELL_EFFECT_OPEN_LOCK_ITEM
-                 || effect == SPELL_EFFECT_INSTAKILL) {
+                 || effect == SPELL_EFFECT_DISMISS_PET
+                 || effect == SPELL_EFFECT_TRANS_DOOR
+                 || effect == SPELL_EFFECT_SUMMON
+                 || effect == SPELL_EFFECT_SUMMON_PET
+                 || effect == SPELL_EFFECT_SUMMON_WILD
+                 || effect == SPELL_EFFECT_SUMMON_GUARDIAN
+                 || effect == SPELL_EFFECT_SUMMON_TOTEM_SLOT1
+                 || effect == SPELL_EFFECT_SUMMON_TOTEM_SLOT2
+                 || effect == SPELL_EFFECT_SUMMON_TOTEM_SLOT3
+                 || effect == SPELL_EFFECT_SUMMON_TOTEM_SLOT4
+                 || effect == SPELL_EFFECT_SUMMON_POSSESSED
+                 || effect == SPELL_EFFECT_SUMMON_TOTEM
+                 || effect == SPELL_EFFECT_SUMMON_CRITTER
+                 || effect == SPELL_EFFECT_SUMMON_OBJECT_WILD
+                 || effect == SPELL_EFFECT_SUMMON_OBJECT_SLOT1
+                 || effect == SPELL_EFFECT_SUMMON_OBJECT_SLOT2
+                 || effect == SPELL_EFFECT_SUMMON_OBJECT_SLOT3
+                 || effect == SPELL_EFFECT_SUMMON_OBJECT_SLOT4
+                 || effect == SPELL_EFFECT_SUMMON_DEMON) {
                     ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
                 }
                 ptvcursor_pop_subtree(ptv);

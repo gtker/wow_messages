@@ -11,30 +11,42 @@ struct SpellLog {
     u32 amount_of_logs = 1;
     if (effect == POWER_DRAIN) {
         Guid target1;
-        u32 unknown1;
-        u32 unknown2;
-        f32 unknown3;
+        u32 amount;
+        (u32)Power power;
+        f32 multiplier;
+    }
+    else if (effect == HEAL
+        || effect == HEAL_MAX_HEALTH) {
+        Guid target2;
+        u32 heal_amount;
+        u32 heal_critical;
+    }
+    else if (effect == ENERGIZE) {
+        Guid target3;
+        u32 energize_amount;
+        u32 energize_power;
     }
     else if (effect == ADD_EXTRA_ATTACKS) {
-        Guid target2;
-        u32 unknown4;
+        Guid target4;
+        u32 extra_attacks;
+    }
+    else if (effect == CREATE_ITEM) {
+        u32 item;
     }
     else if (effect == INTERRUPT_CAST) {
-        Guid target3;
+        Guid target5;
         u32 interrupted_spell;
     }
     else if (effect == DURABILITY_DAMAGE) {
-        Guid target4;
+        Guid target6;
+        u32 item_to_damage;
         u32 unknown5;
-        u32 unknown6;
-    }
-    else if (effect == CREATE_ITEM) {
-        u32 spell_effect_item_type;
     }
     else if (effect == FEED_PET) {
-        u32 item_target_entry;
+        u32 feed_pet_item;
     }
-    else if (effect == RESURRECT
+    else if (effect == INSTAKILL
+        || effect == RESURRECT
         || effect == DISPEL
         || effect == THREAT
         || effect == DISTRACT
@@ -46,11 +58,28 @@ struct SpellLog {
         || effect == SKIN_PLAYER_CORPSE
         || effect == MODIFY_THREAT_PERCENT
         || effect == UNKNOWN126
-        || effect == DISMISS_PET
         || effect == OPEN_LOCK
         || effect == OPEN_LOCK_ITEM
-        || effect == INSTAKILL) {
-        Guid target5;
+        || effect == DISMISS_PET
+        || effect == TRANS_DOOR
+        || effect == SUMMON
+        || effect == SUMMON_PET
+        || effect == SUMMON_WILD
+        || effect == SUMMON_GUARDIAN
+        || effect == SUMMON_TOTEM_SLOT1
+        || effect == SUMMON_TOTEM_SLOT2
+        || effect == SUMMON_TOTEM_SLOT3
+        || effect == SUMMON_TOTEM_SLOT4
+        || effect == SUMMON_POSSESSED
+        || effect == SUMMON_TOTEM
+        || effect == SUMMON_CRITTER
+        || effect == SUMMON_OBJECT_WILD
+        || effect == SUMMON_OBJECT_SLOT1
+        || effect == SUMMON_OBJECT_SLOT2
+        || effect == SUMMON_OBJECT_SLOT3
+        || effect == SUMMON_OBJECT_SLOT4
+        || effect == SUMMON_DEMON) {
+        Guid target7;
     }
 }
 ```
@@ -66,45 +95,63 @@ If effect is equal to `POWER_DRAIN`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | target1 |  |  |
-| 0x10 | 4 / Little | u32 | unknown1 |  |  |
-| 0x14 | 4 / Little | u32 | unknown2 |  |  |
-| 0x18 | 4 / Little | f32 | unknown3 |  |  |
+| 0x10 | 4 / Little | u32 | amount |  |  |
+| 0x14 | 4 / - | [Power](power.md) | power |  |  |
+| 0x18 | 4 / Little | f32 | multiplier |  |  |
+
+Else If effect is equal to `HEAL` **or** 
+is equal to `HEAL_MAX_HEALTH`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x1C | 8 / Little | [Guid](../spec/packed-guid.md) | target2 |  |  |
+| 0x24 | 4 / Little | u32 | heal_amount |  |  |
+| 0x28 | 4 / Little | u32 | heal_critical |  |  |
+
+Else If effect is equal to `ENERGIZE`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x2C | 8 / Little | [Guid](../spec/packed-guid.md) | target3 |  |  |
+| 0x34 | 4 / Little | u32 | energize_amount |  |  |
+| 0x38 | 4 / Little | u32 | energize_power |  |  |
 
 Else If effect is equal to `ADD_EXTRA_ATTACKS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1C | 8 / Little | [Guid](../spec/packed-guid.md) | target2 |  |  |
-| 0x24 | 4 / Little | u32 | unknown4 |  |  |
-
-Else If effect is equal to `INTERRUPT_CAST`:
-
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x28 | 8 / Little | [Guid](../spec/packed-guid.md) | target3 |  |  |
-| 0x30 | 4 / Little | u32 | interrupted_spell |  |  |
-
-Else If effect is equal to `DURABILITY_DAMAGE`:
-
-| Offset | Size / Endianness | Type | Name | Description | Comment |
-| ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x34 | 8 / Little | [Guid](../spec/packed-guid.md) | target4 |  |  |
-| 0x3C | 4 / Little | u32 | unknown5 |  |  |
-| 0x40 | 4 / Little | u32 | unknown6 |  |  |
+| 0x3C | 8 / Little | [Guid](../spec/packed-guid.md) | target4 |  |  |
+| 0x44 | 4 / Little | u32 | extra_attacks |  |  |
 
 Else If effect is equal to `CREATE_ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x44 | 4 / Little | u32 | spell_effect_item_type |  |  |
+| 0x48 | 4 / Little | u32 | item |  |  |
+
+Else If effect is equal to `INTERRUPT_CAST`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x4C | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |  |
+| 0x54 | 4 / Little | u32 | interrupted_spell |  |  |
+
+Else If effect is equal to `DURABILITY_DAMAGE`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x58 | 8 / Little | [Guid](../spec/packed-guid.md) | target6 |  |  |
+| 0x60 | 4 / Little | u32 | item_to_damage |  |  |
+| 0x64 | 4 / Little | u32 | unknown5 |  |  |
 
 Else If effect is equal to `FEED_PET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x48 | 4 / Little | u32 | item_target_entry |  |  |
+| 0x68 | 4 / Little | u32 | feed_pet_item |  |  |
 
-Else If effect is equal to `RESURRECT` **or** 
+Else If effect is equal to `INSTAKILL` **or** 
+is equal to `RESURRECT` **or** 
 is equal to `DISPEL` **or** 
 is equal to `THREAT` **or** 
 is equal to `DISTRACT` **or** 
@@ -116,12 +163,29 @@ is equal to `ATTACK_ME` **or**
 is equal to `SKIN_PLAYER_CORPSE` **or** 
 is equal to `MODIFY_THREAT_PERCENT` **or** 
 is equal to `UNKNOWN126` **or** 
-is equal to `DISMISS_PET` **or** 
 is equal to `OPEN_LOCK` **or** 
 is equal to `OPEN_LOCK_ITEM` **or** 
-is equal to `INSTAKILL`:
+is equal to `DISMISS_PET` **or** 
+is equal to `TRANS_DOOR` **or** 
+is equal to `SUMMON` **or** 
+is equal to `SUMMON_PET` **or** 
+is equal to `SUMMON_WILD` **or** 
+is equal to `SUMMON_GUARDIAN` **or** 
+is equal to `SUMMON_TOTEM_SLOT1` **or** 
+is equal to `SUMMON_TOTEM_SLOT2` **or** 
+is equal to `SUMMON_TOTEM_SLOT3` **or** 
+is equal to `SUMMON_TOTEM_SLOT4` **or** 
+is equal to `SUMMON_POSSESSED` **or** 
+is equal to `SUMMON_TOTEM` **or** 
+is equal to `SUMMON_CRITTER` **or** 
+is equal to `SUMMON_OBJECT_WILD` **or** 
+is equal to `SUMMON_OBJECT_SLOT1` **or** 
+is equal to `SUMMON_OBJECT_SLOT2` **or** 
+is equal to `SUMMON_OBJECT_SLOT3` **or** 
+is equal to `SUMMON_OBJECT_SLOT4` **or** 
+is equal to `SUMMON_DEMON`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x4C | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |  |
+| 0x6C | 8 / Little | [Guid](../spec/packed-guid.md) | target7 |  |  |
 
