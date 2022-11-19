@@ -1,10 +1,35 @@
-#tag_all versions "1.12";
-
 smsg SMSG_SPELLDISPELLOG = 0x027B {
-    Guid victim;
-    Guid caster;
+    PackedGuid victim;
+    PackedGuid caster;
     u32 amount_of_spells;
-    /* TODO Make Spell type */
-    u32[amount_of_spells] spells;
+    Spell[amount_of_spells] spells;
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_SPELLDISPELLOG = 0x027B {
+    PackedGuid victim;
+    PackedGuid caster;
+    Spell dispell_spell;
+    u8 unknown {
+        comment = "mangosone: unused";
+    }
+    u32 amount_of_spells;
+    DispelledSpell[amount_of_spells] spells;
+} {
+    versions = "2.4.3 3";
+}
+
+enum DispelMethod : u8 {
+    DISPELLED = 0;
+    CLEANSED = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+struct DispelledSpell {
+    Spell spell;
+    DispelMethod method;
+} {
+    versions = "2.4.3 3";
+}

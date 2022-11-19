@@ -718,6 +718,10 @@ pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
 pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
 
+pub use crate::shared::dispel_method_tbc_wrath::DispelMethod;
+
+pub use crate::shared::dispelled_spell_tbc_wrath::DispelledSpell;
+
 pub use crate::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
 
 pub use crate::shared::dungeon_difficulty_tbc_wrath::DungeonDifficulty;
@@ -1231,6 +1235,8 @@ pub use crate::shared::smsg_showtaxinodes_vanilla_tbc_wrath::SMSG_SHOWTAXINODES;
 pub use crate::shared::smsg_spell_cooldown_tbc_wrath::SMSG_SPELL_COOLDOWN;
 
 pub use crate::shared::smsg_spell_delayed_vanilla_tbc_wrath::SMSG_SPELL_DELAYED;
+
+pub use crate::shared::smsg_spelldispellog_tbc_wrath::SMSG_SPELLDISPELLOG;
 
 pub use crate::shared::smsg_spellenergizelog_vanilla_tbc::SMSG_SPELLENERGIZELOG;
 

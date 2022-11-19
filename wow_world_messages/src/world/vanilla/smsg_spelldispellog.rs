@@ -3,11 +3,11 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelldispellog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelldispellog.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelldispellog.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelldispellog.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELLDISPELLOG = 0x027B {
-///     Guid victim;
-///     Guid caster;
+///     PackedGuid victim;
+///     PackedGuid caster;
 ///     u32 amount_of_spells;
 ///     u32[amount_of_spells] spells;
 /// }
@@ -27,11 +27,11 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // victim: Guid
-        w.write_all(&self.victim.guid().to_le_bytes())?;
+        // victim: PackedGuid
+        self.victim.write_packed_guid_into_vec(w);
 
-        // caster: Guid
-        w.write_all(&self.caster.guid().to_le_bytes())?;
+        // caster: PackedGuid
+        self.caster.write_packed_guid_into_vec(w);
 
         // amount_of_spells: u32
         w.write_all(&(self.spells.len() as u32).to_le_bytes())?;
@@ -45,15 +45,15 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(20..=4294967294).contains(&body_size) {
+        if !(8..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027B, size: body_size as u32 });
         }
 
-        // victim: Guid
-        let victim = Guid::read(r)?;
+        // victim: PackedGuid
+        let victim = Guid::read_packed(r)?;
 
-        // caster: Guid
-        let caster = Guid::read(r)?;
+        // caster: PackedGuid
+        let caster = Guid::read_packed(r)?;
 
         // amount_of_spells: u32
         let amount_of_spells = crate::util::read_u32_le(r)?;
@@ -77,8 +77,8 @@ impl crate::world::vanilla::ServerMessage for SMSG_SPELLDISPELLOG {}
 
 impl SMSG_SPELLDISPELLOG {
     pub(crate) fn size(&self) -> usize {
-        8 // victim: Guid
-        + 8 // caster: Guid
+        self.victim.size() // victim: Guid
+        + self.caster.size() // caster: Guid
         + 4 // amount_of_spells: u32
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
     }

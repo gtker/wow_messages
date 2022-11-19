@@ -5345,6 +5345,7 @@ use crate::world::wrath::MSG_LIST_STABLED_PETS_Server;
 use crate::world::wrath::SMSG_STABLE_RESULT;
 use crate::world::wrath::SMSG_PLAY_MUSIC;
 use crate::world::wrath::SMSG_PLAY_OBJECT_SOUND;
+use crate::world::wrath::SMSG_SPELLDISPELLOG;
 use crate::world::wrath::MSG_QUERY_NEXT_MAIL_TIME_Server;
 use crate::world::wrath::SMSG_RECEIVED_MAIL;
 use crate::world::wrath::SMSG_PVP_CREDIT;
@@ -5658,6 +5659,7 @@ pub enum ServerOpcodeMessage {
     SMSG_STABLE_RESULT(SMSG_STABLE_RESULT),
     SMSG_PLAY_MUSIC(SMSG_PLAY_MUSIC),
     SMSG_PLAY_OBJECT_SOUND(SMSG_PLAY_OBJECT_SOUND),
+    SMSG_SPELLDISPELLOG(SMSG_SPELLDISPELLOG),
     MSG_QUERY_NEXT_MAIL_TIME(MSG_QUERY_NEXT_MAIL_TIME_Server),
     SMSG_RECEIVED_MAIL(SMSG_RECEIVED_MAIL),
     SMSG_PVP_CREDIT(SMSG_PVP_CREDIT),
@@ -5973,6 +5975,7 @@ impl ServerOpcodeMessage {
             0x0273 => Ok(Self::SMSG_STABLE_RESULT(<SMSG_STABLE_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0273, size: body_size, io, } } else { a } })?)),
             0x0277 => Ok(Self::SMSG_PLAY_MUSIC(<SMSG_PLAY_MUSIC as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0277, size: body_size, io, } } else { a } })?)),
             0x0278 => Ok(Self::SMSG_PLAY_OBJECT_SOUND(<SMSG_PLAY_OBJECT_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0278, size: body_size, io, } } else { a } })?)),
+            0x027B => Ok(Self::SMSG_SPELLDISPELLOG(<SMSG_SPELLDISPELLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x027B, size: body_size, io, } } else { a } })?)),
             0x0284 => Ok(Self::MSG_QUERY_NEXT_MAIL_TIME(<MSG_QUERY_NEXT_MAIL_TIME_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0284, size: body_size, io, } } else { a } })?)),
             0x0285 => Ok(Self::SMSG_RECEIVED_MAIL(<SMSG_RECEIVED_MAIL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0285, size: body_size, io, } } else { a } })?)),
             0x028C => Ok(Self::SMSG_PVP_CREDIT(<SMSG_PVP_CREDIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028C, size: body_size, io, } } else { a } })?)),
@@ -6437,6 +6440,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_STABLE_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAY_MUSIC(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPELLDISPELLOG(c) => c.write_encrypted_server(w, e),
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RECEIVED_MAIL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PVP_CREDIT(c) => c.write_encrypted_server(w, e),
@@ -6753,6 +6757,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_STABLE_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAY_MUSIC(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPELLDISPELLOG(c) => c.write_unencrypted_server(w),
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_unencrypted_server(w),
             Self::SMSG_RECEIVED_MAIL(c) => c.write_unencrypted_server(w),
             Self::SMSG_PVP_CREDIT(c) => c.write_unencrypted_server(w),
@@ -7069,6 +7074,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_STABLE_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_MUSIC(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPELLDISPELLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PVP_CREDIT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7385,6 +7391,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_STABLE_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_MUSIC(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPELLDISPELLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PVP_CREDIT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7701,6 +7708,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_STABLE_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_MUSIC(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPELLDISPELLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PVP_CREDIT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8017,6 +8025,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_STABLE_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_MUSIC(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_OBJECT_SOUND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPELLDISPELLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RECEIVED_MAIL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PVP_CREDIT(c) => c.astd_write_unencrypted_server(w).await,
@@ -8335,6 +8344,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_STABLE_RESULT(_) => "SMSG_STABLE_RESULT",
             ServerOpcodeMessage::SMSG_PLAY_MUSIC(_) => "SMSG_PLAY_MUSIC",
             ServerOpcodeMessage::SMSG_PLAY_OBJECT_SOUND(_) => "SMSG_PLAY_OBJECT_SOUND",
+            ServerOpcodeMessage::SMSG_SPELLDISPELLOG(_) => "SMSG_SPELLDISPELLOG",
             ServerOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => "MSG_QUERY_NEXT_MAIL_TIME_Server",
             ServerOpcodeMessage::SMSG_RECEIVED_MAIL(_) => "SMSG_RECEIVED_MAIL",
             ServerOpcodeMessage::SMSG_PVP_CREDIT(_) => "SMSG_PVP_CREDIT",
@@ -9866,6 +9876,12 @@ impl From<SMSG_PLAY_MUSIC> for ServerOpcodeMessage {
 impl From<SMSG_PLAY_OBJECT_SOUND> for ServerOpcodeMessage {
     fn from(c: SMSG_PLAY_OBJECT_SOUND) -> Self {
         Self::SMSG_PLAY_OBJECT_SOUND(c)
+    }
+}
+
+impl From<SMSG_SPELLDISPELLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLDISPELLOG) -> Self {
+        Self::SMSG_SPELLDISPELLOG(c)
     }
 }
 

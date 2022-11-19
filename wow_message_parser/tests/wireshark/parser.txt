@@ -5232,8 +5232,8 @@
             ptvcursor_add(ptv, hf_woww_spell_school, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SPELLDISPELLOG:
-            ptvcursor_add(ptv, hf_woww_victim, 8, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_caster, 8, ENC_LITTLE_ENDIAN);
+            add_packed_guid(ptv, pinfo);
+            add_packed_guid(ptv, pinfo);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_spells, 4, ENC_LITTLE_ENDIAN, &amount_of_spells);
             for (i = 0; i < amount_of_spells; ++i) {
                 ptvcursor_add(ptv, hf_woww_spells, 4, ENC_LITTLE_ENDIAN);
