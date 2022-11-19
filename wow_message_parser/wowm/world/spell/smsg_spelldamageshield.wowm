@@ -1,10 +1,29 @@
-#tag_all versions "1.12";
-
 smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
     Guid victim_guid;
     Guid caster_guid;
     u32 damage;
-    /* TODO: RIGHT ? */
     (u32)SpellSchool school;
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
+    Guid victim_guid;
+    Guid caster_guid;
+    Spell spell;
+    u32 damage;
+    (u32)SpellSchool school;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
+    Guid victim_guid;
+    Guid caster_guid;
+    Spell spell;
+    u32 damage;
+    u32 overkill;
+    (u32)SpellSchool school;
+} {
+    versions = "3.3.5";
+}

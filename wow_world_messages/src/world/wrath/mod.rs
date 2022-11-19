@@ -1458,6 +1458,8 @@ pub(crate) mod smsg_spell_go;
 pub use smsg_spell_go::*;
 pub(crate) mod smsg_spell_start;
 pub use smsg_spell_start::*;
+pub(crate) mod smsg_spelldamageshield;
+pub use smsg_spelldamageshield::*;
 pub(crate) mod smsg_spellenergizelog;
 pub use smsg_spellenergizelog::*;
 pub(crate) mod smsg_spellheallog;
