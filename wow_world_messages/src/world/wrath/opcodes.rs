@@ -5323,6 +5323,7 @@ use crate::world::wrath::SMSG_GOSSIP_POI;
 use crate::world::wrath::SMSG_LOGIN_VERIFY_WORLD;
 use crate::world::wrath::SMSG_BATTLEFIELD_LIST;
 use crate::world::wrath::SMSG_ITEM_TEXT_QUERY_RESPONSE;
+use crate::world::wrath::SMSG_SPELLLOGMISS;
 use crate::world::wrath::SMSG_ZONE_UNDER_ATTACK;
 use crate::world::wrath::MSG_AUCTION_HELLO_Server;
 use crate::world::wrath::SMSG_AUCTION_LIST_RESULT;
@@ -5626,6 +5627,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOGIN_VERIFY_WORLD(SMSG_LOGIN_VERIFY_WORLD),
     SMSG_BATTLEFIELD_LIST(SMSG_BATTLEFIELD_LIST),
     SMSG_ITEM_TEXT_QUERY_RESPONSE(SMSG_ITEM_TEXT_QUERY_RESPONSE),
+    SMSG_SPELLLOGMISS(SMSG_SPELLLOGMISS),
     SMSG_ZONE_UNDER_ATTACK(SMSG_ZONE_UNDER_ATTACK),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Server),
     SMSG_AUCTION_LIST_RESULT(SMSG_AUCTION_LIST_RESULT),
@@ -5931,6 +5933,7 @@ impl ServerOpcodeMessage {
             0x0236 => Ok(Self::SMSG_LOGIN_VERIFY_WORLD(<SMSG_LOGIN_VERIFY_WORLD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0236, size: body_size, io, } } else { a } })?)),
             0x023D => Ok(Self::SMSG_BATTLEFIELD_LIST(<SMSG_BATTLEFIELD_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x023D, size: body_size, io, } } else { a } })?)),
             0x0244 => Ok(Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(<SMSG_ITEM_TEXT_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0244, size: body_size, io, } } else { a } })?)),
+            0x024B => Ok(Self::SMSG_SPELLLOGMISS(<SMSG_SPELLLOGMISS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x024B, size: body_size, io, } } else { a } })?)),
             0x0254 => Ok(Self::SMSG_ZONE_UNDER_ATTACK(<SMSG_ZONE_UNDER_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0254, size: body_size, io, } } else { a } })?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0255, size: body_size, io, } } else { a } })?)),
             0x025C => Ok(Self::SMSG_AUCTION_LIST_RESULT(<SMSG_AUCTION_LIST_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x025C, size: body_size, io, } } else { a } })?)),
@@ -6385,6 +6388,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEFIELD_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPELLLOGMISS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.write_encrypted_server(w, e),
@@ -6691,6 +6695,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEFIELD_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPELLLOGMISS(c) => c.write_unencrypted_server(w),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_unencrypted_server(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.write_unencrypted_server(w),
@@ -6997,6 +7002,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPELLLOGMISS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7303,6 +7309,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPELLLOGMISS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7609,6 +7616,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPELLLOGMISS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7915,6 +7923,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOGIN_VERIFY_WORLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPELLLOGMISS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
@@ -8223,6 +8232,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(_) => "SMSG_LOGIN_VERIFY_WORLD",
             ServerOpcodeMessage::SMSG_BATTLEFIELD_LIST(_) => "SMSG_BATTLEFIELD_LIST",
             ServerOpcodeMessage::SMSG_ITEM_TEXT_QUERY_RESPONSE(_) => "SMSG_ITEM_TEXT_QUERY_RESPONSE",
+            ServerOpcodeMessage::SMSG_SPELLLOGMISS(_) => "SMSG_SPELLLOGMISS",
             ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => "SMSG_ZONE_UNDER_ATTACK",
             ServerOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Server",
             ServerOpcodeMessage::SMSG_AUCTION_LIST_RESULT(_) => "SMSG_AUCTION_LIST_RESULT",
@@ -9634,6 +9644,12 @@ impl From<SMSG_BATTLEFIELD_LIST> for ServerOpcodeMessage {
 impl From<SMSG_ITEM_TEXT_QUERY_RESPONSE> for ServerOpcodeMessage {
     fn from(c: SMSG_ITEM_TEXT_QUERY_RESPONSE) -> Self {
         Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_SPELLLOGMISS> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLLOGMISS) -> Self {
+        Self::SMSG_SPELLLOGMISS(c)
     }
 }
 

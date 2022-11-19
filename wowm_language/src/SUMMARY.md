@@ -964,6 +964,7 @@
 - [SpellCastTargets](docs/spellcasttargets.md)
 - [SpellCooldownStatus](docs/spellcooldownstatus.md)
 - [SpellLog](docs/spelllog.md)
+- [SpellLogMiss](docs/spelllogmiss.md)
 - [SpellMiss](docs/spellmiss.md)
 - [StabledPet](docs/stabledpet.md)
 - [TradeSlot](docs/tradeslot.md)

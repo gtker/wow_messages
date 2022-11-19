@@ -1,4 +1,9 @@
-#tag_all versions "1.12";
+struct SpellLogMiss {
+    Guid target_guid;
+    SpellMissInfo miss_info;
+} {
+    versions = "1 2 3";
+}
 
 smsg SMSG_SPELLLOGMISS = 0x024B {
     Spell id;
@@ -7,6 +12,7 @@ smsg SMSG_SPELLLOGMISS = 0x024B {
         comment = "cmangos/mangoszero: can be 0 or 1";
     }
     u32 amount_of_targets;
-    SpellMiss[amount_of_targets] targets;
+    SpellLogMiss[amount_of_targets] targets;
+} {
+    versions = "1 2 3";
 }
-

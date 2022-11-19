@@ -1156,6 +1156,8 @@ pub use crate::shared::smsg_spell_cooldown_tbc_wrath::SMSG_SPELL_COOLDOWN;
 
 pub use crate::shared::smsg_spell_delayed_vanilla_tbc_wrath::SMSG_SPELL_DELAYED;
 
+pub use crate::shared::smsg_spelllogmiss_vanilla_tbc_wrath::SMSG_SPELLLOGMISS;
+
 pub use crate::shared::smsg_spirit_healer_confirm_vanilla_tbc_wrath::SMSG_SPIRIT_HEALER_CONFIRM;
 
 pub use crate::shared::smsg_spline_move_feather_fall_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_FEATHER_FALL;
@@ -1219,6 +1221,10 @@ pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WO
 pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;
 
 pub use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
+
+pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
+
+pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 

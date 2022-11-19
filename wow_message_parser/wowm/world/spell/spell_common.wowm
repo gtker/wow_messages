@@ -25,7 +25,7 @@ enum SpellMissInfo : u32 {
     ABSORB = 10;
     REFLECT = 11;
 } {
-    versions = "2";
+    versions = "1 2 3";
 }
 
 struct SpellMiss {
