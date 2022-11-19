@@ -1002,6 +1002,8 @@ pub use crate::shared::smsg_cooldown_event_vanilla_tbc_wrath::SMSG_COOLDOWN_EVEN
 
 pub use crate::shared::smsg_destroy_object_vanilla_tbc::SMSG_DESTROY_OBJECT;
 
+pub use crate::shared::smsg_dispel_failed_vanilla_tbc_wrath::SMSG_DISPEL_FAILED;
+
 pub use crate::shared::smsg_duel_complete_vanilla_tbc_wrath::SMSG_DUEL_COMPLETE;
 
 pub use crate::shared::smsg_duel_countdown_vanilla_tbc_wrath::SMSG_DUEL_COUNTDOWN;
@@ -1404,8 +1406,6 @@ pub(crate) mod smsg_defense_message;
 pub use smsg_defense_message::*;
 pub(crate) mod smsg_dismountresult;
 pub use smsg_dismountresult::*;
-pub(crate) mod smsg_dispel_failed;
-pub use smsg_dispel_failed::*;
 pub(crate) mod smsg_emote;
 pub use smsg_emote::*;
 pub(crate) mod smsg_expected_spam_records;

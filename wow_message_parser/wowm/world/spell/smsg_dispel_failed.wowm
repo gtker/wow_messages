@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_DISPEL_FAILED = 0x0262 {
     Guid caster_guid;
