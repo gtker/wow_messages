@@ -1,6 +1,6 @@
 # SpellSchool
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -31,6 +31,8 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `ARCANE` | 6 (0x06) |  |  |
 
 Used in:
+* [AuraLog](auralog.md)
+* [AuraLog](auralog.md)
 * [AuraLog](auralog.md)
 * [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)
 * [SMSG_SPELLNONMELEEDAMAGELOG](smsg_spellnonmeleedamagelog.md)

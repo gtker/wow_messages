@@ -2,6 +2,10 @@ pub(crate) mod area;
 pub use area::*;
 pub(crate) mod auction_list_item;
 pub use auction_list_item::*;
+pub(crate) mod aura_log;
+pub use aura_log::*;
+pub(crate) mod aura_type;
+pub use aura_type::*;
 pub(crate) mod battleground_type;
 pub use battleground_type::*;
 pub(crate) mod character;
@@ -1298,6 +1302,8 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
+pub use crate::shared::spell_school_vanilla_tbc_wrath::SpellSchool;
+
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
@@ -1412,6 +1418,8 @@ pub(crate) mod smsg_npc_text_update;
 pub use smsg_npc_text_update::*;
 pub(crate) mod smsg_party_command_result;
 pub use smsg_party_command_result::*;
+pub(crate) mod smsg_periodicauralog;
+pub use smsg_periodicauralog::*;
 pub(crate) mod smsg_pet_cast_failed;
 pub use smsg_pet_cast_failed::*;
 pub(crate) mod smsg_petition_query_response;

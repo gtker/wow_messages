@@ -5206,6 +5206,7 @@ use crate::world::tbc::SMSG_BATTLEFIELD_LIST;
 use crate::world::tbc::SMSG_ITEM_TEXT_QUERY_RESPONSE;
 use crate::world::tbc::SMSG_SPELLLOGMISS;
 use crate::world::tbc::SMSG_SPELLLOGEXECUTE;
+use crate::world::tbc::SMSG_PERIODICAURALOG;
 use crate::world::tbc::SMSG_ZONE_UNDER_ATTACK;
 use crate::world::tbc::MSG_AUCTION_HELLO_Server;
 use crate::world::tbc::SMSG_AUCTION_LIST_RESULT;
@@ -5498,6 +5499,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ITEM_TEXT_QUERY_RESPONSE(SMSG_ITEM_TEXT_QUERY_RESPONSE),
     SMSG_SPELLLOGMISS(SMSG_SPELLLOGMISS),
     SMSG_SPELLLOGEXECUTE(SMSG_SPELLLOGEXECUTE),
+    SMSG_PERIODICAURALOG(SMSG_PERIODICAURALOG),
     SMSG_ZONE_UNDER_ATTACK(SMSG_ZONE_UNDER_ATTACK),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Server),
     SMSG_AUCTION_LIST_RESULT(SMSG_AUCTION_LIST_RESULT),
@@ -5792,6 +5794,7 @@ impl ServerOpcodeMessage {
             0x0244 => Ok(Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(<SMSG_ITEM_TEXT_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0244, size: body_size, io, } } else { a } })?)),
             0x024B => Ok(Self::SMSG_SPELLLOGMISS(<SMSG_SPELLLOGMISS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x024B, size: body_size, io, } } else { a } })?)),
             0x024C => Ok(Self::SMSG_SPELLLOGEXECUTE(<SMSG_SPELLLOGEXECUTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x024C, size: body_size, io, } } else { a } })?)),
+            0x024E => Ok(Self::SMSG_PERIODICAURALOG(<SMSG_PERIODICAURALOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x024E, size: body_size, io, } } else { a } })?)),
             0x0254 => Ok(Self::SMSG_ZONE_UNDER_ATTACK(<SMSG_ZONE_UNDER_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0254, size: body_size, io, } } else { a } })?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0255, size: body_size, io, } } else { a } })?)),
             0x025C => Ok(Self::SMSG_AUCTION_LIST_RESULT(<SMSG_AUCTION_LIST_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x025C, size: body_size, io, } } else { a } })?)),
@@ -6154,6 +6157,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELLLOGMISS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELLLOGEXECUTE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PERIODICAURALOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.write_encrypted_server(w, e),
@@ -6449,6 +6453,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELLLOGMISS(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELLLOGEXECUTE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PERIODICAURALOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_unencrypted_server(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.write_unencrypted_server(w),
@@ -6744,6 +6749,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLLOGMISS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLLOGEXECUTE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PERIODICAURALOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7039,6 +7045,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLLOGMISS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLLOGEXECUTE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PERIODICAURALOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7334,6 +7341,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLLOGMISS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLLOGEXECUTE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PERIODICAURALOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7629,6 +7637,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_TEXT_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLLOGMISS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLLOGEXECUTE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PERIODICAURALOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
@@ -7926,6 +7935,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ITEM_TEXT_QUERY_RESPONSE(_) => "SMSG_ITEM_TEXT_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_SPELLLOGMISS(_) => "SMSG_SPELLLOGMISS",
             ServerOpcodeMessage::SMSG_SPELLLOGEXECUTE(_) => "SMSG_SPELLLOGEXECUTE",
+            ServerOpcodeMessage::SMSG_PERIODICAURALOG(_) => "SMSG_PERIODICAURALOG",
             ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => "SMSG_ZONE_UNDER_ATTACK",
             ServerOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Server",
             ServerOpcodeMessage::SMSG_AUCTION_LIST_RESULT(_) => "SMSG_AUCTION_LIST_RESULT",
@@ -9286,6 +9296,12 @@ impl From<SMSG_SPELLLOGMISS> for ServerOpcodeMessage {
 impl From<SMSG_SPELLLOGEXECUTE> for ServerOpcodeMessage {
     fn from(c: SMSG_SPELLLOGEXECUTE) -> Self {
         Self::SMSG_SPELLLOGEXECUTE(c)
+    }
+}
+
+impl From<SMSG_PERIODICAURALOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_PERIODICAURALOG) -> Self {
+        Self::SMSG_PERIODICAURALOG(c)
     }
 }
 

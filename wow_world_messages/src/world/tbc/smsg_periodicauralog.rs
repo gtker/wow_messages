@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::AuraLog;
+use crate::world::tbc::AuraLog;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
@@ -82,8 +82,8 @@ impl crate::Message for SMSG_PERIODICAURALOG {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PERIODICAURALOG {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PERIODICAURALOG {}
 
 impl SMSG_PERIODICAURALOG {
     pub(crate) fn size(&self) -> usize {

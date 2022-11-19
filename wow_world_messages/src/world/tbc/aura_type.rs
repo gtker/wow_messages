@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L11):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:310`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L310):
 /// ```text
 /// enum AuraType : u32 {
 ///     NONE = 0;
@@ -195,6 +195,76 @@ use std::convert::{TryFrom, TryInto};
 ///     MOD_RATING = 189;
 ///     MOD_FACTION_REPUTATION_GAIN = 190;
 ///     USE_NORMAL_MOVEMENT_SPEED = 191;
+///     MOD_MELEE_RANGED_HASTE = 192;
+///     HASTE_ALL = 193;
+///     MOD_DEPRICATED_1 = 194;
+///     MOD_DEPRICATED_2 = 195;
+///     MOD_COOLDOWN = 196;
+///     MOD_ATTACKER_SPELL_AND_WEAPON_CRIT_CHANCE = 197;
+///     MOD_ALL_WEAPON_SKILLS = 198;
+///     MOD_INCREASES_SPELL_PCT_TO_HIT = 199;
+///     MOD_XP_PCT = 200;
+///     FLY = 201;
+///     IGNORE_COMBAT_RESULT = 202;
+///     MOD_ATTACKER_MELEE_CRIT_DAMAGE = 203;
+///     MOD_ATTACKER_RANGED_CRIT_DAMAGE = 204;
+///     MOD_ATTACKER_SPELL_CRIT_DAMAGE = 205;
+///     MOD_FLIGHT_SPEED = 206;
+///     MOD_FLIGHT_SPEED_MOUNTED = 207;
+///     MOD_FLIGHT_SPEED_STACKING = 208;
+///     MOD_FLIGHT_SPEED_MOUNTED_STACKING = 209;
+///     MOD_FLIGHT_SPEED_NOT_STACKING = 210;
+///     MOD_FLIGHT_SPEED_MOUNTED_NOT_STACKING = 211;
+///     MOD_RANGED_ATTACK_POWER_OF_STAT_PERCENT = 212;
+///     MOD_RAGE_FROM_DAMAGE_DEALT = 213;
+///     UNKNOWN214 = 214;
+///     ARENA_PREPARATION = 215;
+///     HASTE_SPELLS = 216;
+///     UNKNOWN217 = 217;
+///     HASTE_RANGED = 218;
+///     MOD_MANA_REGEN_FROM_STAT = 219;
+///     MOD_RATING_FROM_STAT = 220;
+///     UNKNOWN221 = 221;
+///     UNKNOWN222 = 222;
+///     UNKNOWN223 = 223;
+///     UNKNOWN224 = 224;
+///     PRAYER_OF_MENDING = 225;
+///     PERIODIC_DUMMY = 226;
+///     PERIODIC_TRIGGER_SPELL_WITH_VALUE = 227;
+///     DETECT_STEALTH = 228;
+///     MOD_AOE_DAMAGE_AVOIDANCE = 229;
+///     UNKNOWN230 = 230;
+///     PROC_TRIGGER_SPELL_WITH_VALUE = 231;
+///     MECHANIC_DURATION_MOD = 232;
+///     UNKNOWN233 = 233;
+///     MECHANIC_DURATION_MOD_NOT_STACK = 234;
+///     MOD_DISPEL_RESIST = 235;
+///     UNKNOWN236 = 236;
+///     MOD_SPELL_DAMAGE_OF_ATTACK_POWER = 237;
+///     MOD_SPELL_HEALING_OF_ATTACK_POWER = 238;
+///     MOD_SCALE_2 = 239;
+///     MOD_EXPERTISE = 240;
+///     FORCE_MOVE_FORWARD = 241;
+///     UNKNOWN242 = 242;
+///     UNKNOWN243 = 243;
+///     COMPREHEND_LANGUAGE = 244;
+///     UNKNOWN245 = 245;
+///     UNKNOWN246 = 246;
+///     MIRROR_IMAGE = 247;
+///     MOD_COMBAT_RESULT_CHANCE = 248;
+///     UNKNOWN249 = 249;
+///     MOD_INCREASE_HEALTH_2 = 250;
+///     MOD_ENEMY_DODGE = 251;
+///     UNKNOWN252 = 252;
+///     UNKNOWN253 = 253;
+///     UNKNOWN254 = 254;
+///     UNKNOWN255 = 255;
+///     UNKNOWN256 = 256;
+///     UNKNOWN257 = 257;
+///     UNKNOWN258 = 258;
+///     UNKNOWN259 = 259;
+///     UNKNOWN260 = 260;
+///     UNKNOWN261 = 261;
 /// }
 
 /// ```
@@ -203,73 +273,75 @@ pub(crate) enum AuraType {
     None,
     BindSight,
     ModPossess,
-    /// vmangos: The aura should do periodic damage, the function that handles this is Aura::HandlePeriodicDamage, the amount is usually decided by the Unit::SpellDamageBonusDone or Unit::MeleeDamageBonusDone which increases/decreases the Modifier::m_amount
+    /// The aura should do periodic damage, the function that handles this is `Aura::HandlePeriodicDamage`, the amount is usually decided by the `Unit::SpellDamageBonusDone` or `Unit::MeleeDamageBonusDone` which increases/decreases the `Modifier::m_amount`.
     ///
     PeriodicDamage,
-    /// vmangos: Used by Aura::HandleAuraDummy
+    /// Used by \ref Aura::HandleAuraDummy
     ///
     Dummy,
-    /// vmangos: Used by Aura::HandleModConfuse, will either confuse or unconfuse the target depending on whether the apply flag is set
+    /// Used by `Aura::HandleModConfuse`, will either confuse or unconfuse the target depending on whether the apply flag is set
     ///
     ModConfuse,
     ModCharm,
     ModFear,
-    /// vmangos: The aura will do periodic heals of a target, handled by Aura::HandlePeriodicHeal, uses Unit::SpellHealingBonusDone to calculate whether to increase or decrease Modifier::m_amount
+    /// The aura will do periodic heals of a target, handled by `Aura::HandlePeriodicHeal`, uses `Unit::SpellHealingBonusDone` to calculate whether to increase or decrease `Modifier::m_amount`
     ///
     PeriodicHeal,
-    /// vmangos: Changes the attackspeed, the Modifier::m_amount decides how much we change in percent, ie, if the m_amount is 50 the attackspeed will increase by 50%
+    /// Changes the attackspeed, the `Modifier::m_amount` decides how much we change in percent, ie, if the m_amount is 50 the attackspeed will increase by 50%
     ///
     ModAttackspeed,
-    /// vmangos: Modifies the threat that the Aura does in percent, the Modifier::m_miscvalue decides which of the SpellSchools it should affect threat for.  \see SpellSchoolMask
+    /// Modifies the threat that the Aura does in percent, the `Modifier::m_miscvalue` decides which of the SpellSchools it should affect threat for.
     ///
     ModThreat,
-    /// vmangos: Just applies a taunt which will change the threat a mob has Taken care of in Aura::HandleModThreat
+    /// Just applies a taunt which will change the threat a mob has taken care of in `Aura::HandleModThreat`
     ///
     ModTaunt,
-    /// vmangos: Stuns targets in different ways, taken care of in Aura::HandleAuraModStun
+    /// Stuns targets in different ways, taken care of in `Aura::HandleAuraModStun`
     ///
     ModStun,
-    /// vmangos: Changes the damage done by a weapon in any hand, the Modifier::m_miscvalue will tell what school the damage is from, it's used as a bitmask \see SpellSchoolMask
+    /// Changes the damage done by a weapon in any hand, the `Modifier::m_miscvalue` will tell what school the damage is from, it's used as a bitmask `SpellSchoolMask`
     ///
     ModDamageDone,
-    /// vmangos: Not handled by the Aura class but instead this is implemented in Unit::MeleeDamageBonusTaken and Unit::SpellBaseDamageBonusTaken
+    /// Not handled by the Aura class but instead this is implemented in `Unit::MeleeDamageBonusTaken` and `Unit::SpellBaseDamageBonusTaken`
     ///
     ModDamageTaken,
-    /// vmangos: Not handled by the Aura class, implemented in Unit::DealMeleeDamage
+    /// Not handled by the Aura class, implemented in `Unit::DealMeleeDamage`
     ///
     DamageShield,
-    /// vmangos: Taken care of in Aura::HandleModStealth, take note that this is not the same thing as invisibility
+    /// Taken care of in `Aura::HandleModStealth`, take note that this is not the same thing as invisibility
     ///
     ModStealth,
-    /// vmangos: Not handled by the Aura class, implemented in Unit::isVisibleForOrDetect which does a lot of checks to determine whether the person is visible or not, the SPELL_AURA_MOD_STEALTH seems to determine how in/visible ie a rogue is.
+    /// Not handled by the Aura class, implemented in `Unit::IsVisibleForOrDetect` which does a lot of checks to determine whether the person is visible or not, the `AuraType::MOD_STEALTH` seems to determine how in/visible ie a rogue is.
     ///
     ModStealthDetect,
-    /// vmangos: Handled by Aura::HandleInvisibility, the Modifier::m_miscvalue in the struct seems to decide what kind of invisibility it is with a bitflag. the miscvalue decides which bit is set, ie: 3 would make the 3rd bit be set.
+    /// Handled by `Aura::HandleInvisibility`, the `Modifier::m_miscvalue` in the struct seems to decide what kind of invisibility it is with a bitflag. the miscvalue decides which bit is set, ie: 3 would make the 3rd bit be set.
     ///
     ModInvisibility,
-    /// vmangos: Adds one of the kinds of detections to the possible detections.  As in SPEALL_AURA_MOD_INVISIBILITY the Modifier::m_miscvalue seems to decide what kind of invisibility the Unit should be able to detect.
+    /// Adds one of the kinds of detections to the possible detections. As in `AuraType::SPEALL_AURA_MOD_INVISIBILITY` the `Modifier::m_miscvalue` seems to decide what kind of invisibility the Unit or Player should be able to detect.
     ///
     ModInvisibilityDetection,
-    /// 20,21 unofficial
+    /// unofficial
     ///
     ObsModHealth,
+    /// unofficial
+    ///
     ObsModMana,
-    /// vmangos: Handled by Aura::HandleAuraModResistance, changes the resistance for a unit the field Modifier::m_miscvalue decides which kind of resistance that should be changed, for possible values see SpellSchools.  \see SpellSchools
+    /// Handled by `Aura::HandleAuraModResistance`, changes the resistance for a Unit the field `Modifier::m_miscvalue` decides which kind of resistance that should be changed
     ///
     ModResistance,
-    /// vmangos: Currently just sets Aura::m_isPeriodic to apply and has a special case for Curse of the Plaguebringer.
+    /// Currently just sets `Aura::m_isPeriodic` to apply and has a special case for Curse of the Plaguebringer.
     ///
     PeriodicTriggerSpell,
-    /// vmangos: Just sets Aura::m_isPeriodic to apply
+    /// Just sets `Aura::m_isPeriodic` to apply
     ///
     PeriodicEnergize,
-    /// vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: http://classic.wowhead.com/spell=6462
+    /// Changes whether the target is pacified or not depending on the apply flag. Pacify makes the target silenced and have all it's attack skill disabled. See: `http://www.wowhead.com/spell=6462/pacified`
     ///
     ModPacify,
-    /// vmangos: Roots or unroots the target
+    /// Roots or unroots the target
     ///
     ModRoot,
-    /// vmangos: Silences the target and stops and spell casts that should be stopped, they have the flag SpellPreventionType::SPELL_PREVENTION_TYPE_SILENCE
+    /// Silences the target and stops and spell casts that should be stopped, they have the flag `SpellPreventionType::SPELL_PREVENTION_TYPE_SILENCE`
     ///
     ModSilence,
     ReflectSpells,
@@ -424,6 +496,8 @@ pub(crate) enum AuraType {
     PetDamageMulti,
     ModShieldBlockvalue,
     NoPvpCredit,
+    /// Reduces the hit chance for AOE spells
+    ///
     ModAoeAvoidance,
     ModHealthRegenInCombat,
     PowerBurnMana,
@@ -438,7 +512,7 @@ pub(crate) enum AuraType {
     ModSpeedNotStack,
     ModMountedSpeedNotStack,
     AllowChampionSpells,
-    /// in 1.12.1 only dependent spirit case
+    /// by defeult intelect, dependent from MOD_SPELL_HEALING_OF_STAT_PERCENT
     ///
     ModSpellDamageOfStatPercent,
     ModSpellHealingOfStatPercent,
@@ -460,6 +534,82 @@ pub(crate) enum AuraType {
     ModRating,
     ModFactionReputationGain,
     UseNormalMovementSpeed,
+    ModMeleeRangedHaste,
+    HasteAll,
+    /// not used now, old MOD_SPELL_DAMAGE_OF_INTELLECT
+    ///
+    ModDepricated1,
+    /// not used now, old MOD_SPELL_HEALING_OF_INTELLECT
+    ///
+    ModDepricated2,
+    /// only 24818 Noxious Breath
+    ///
+    ModCooldown,
+    ModAttackerSpellAndWeaponCritChance,
+    ModAllWeaponSkills,
+    ModIncreasesSpellPctToHit,
+    ModXpPct,
+    Fly,
+    IgnoreCombatResult,
+    ModAttackerMeleeCritDamage,
+    ModAttackerRangedCritDamage,
+    ModAttackerSpellCritDamage,
+    ModFlightSpeed,
+    ModFlightSpeedMounted,
+    ModFlightSpeedStacking,
+    ModFlightSpeedMountedStacking,
+    ModFlightSpeedNotStacking,
+    ModFlightSpeedMountedNotStacking,
+    ModRangedAttackPowerOfStatPercent,
+    ModRageFromDamageDealt,
+    Unknown214,
+    ArenaPreparation,
+    HasteSpells,
+    Unknown217,
+    HasteRanged,
+    ModManaRegenFromStat,
+    ModRatingFromStat,
+    Unknown221,
+    Unknown222,
+    Unknown223,
+    Unknown224,
+    PrayerOfMending,
+    PeriodicDummy,
+    PeriodicTriggerSpellWithValue,
+    DetectStealth,
+    ModAoeDamageAvoidance,
+    Unknown230,
+    ProcTriggerSpellWithValue,
+    MechanicDurationMod,
+    Unknown233,
+    MechanicDurationModNotStack,
+    ModDispelResist,
+    Unknown236,
+    ModSpellDamageOfAttackPower,
+    ModSpellHealingOfAttackPower,
+    ModScale2,
+    ModExpertise,
+    ForceMoveForward,
+    Unknown242,
+    Unknown243,
+    ComprehendLanguage,
+    Unknown245,
+    Unknown246,
+    MirrorImage,
+    ModCombatResultChance,
+    Unknown249,
+    ModIncreaseHealth2,
+    ModEnemyDodge,
+    Unknown252,
+    Unknown253,
+    Unknown254,
+    Unknown255,
+    Unknown256,
+    Unknown257,
+    Unknown258,
+    Unknown259,
+    Unknown260,
+    Unknown261,
 }
 
 impl AuraType {
@@ -657,6 +807,76 @@ impl AuraType {
             Self::ModRating => 0xbd,
             Self::ModFactionReputationGain => 0xbe,
             Self::UseNormalMovementSpeed => 0xbf,
+            Self::ModMeleeRangedHaste => 0xc0,
+            Self::HasteAll => 0xc1,
+            Self::ModDepricated1 => 0xc2,
+            Self::ModDepricated2 => 0xc3,
+            Self::ModCooldown => 0xc4,
+            Self::ModAttackerSpellAndWeaponCritChance => 0xc5,
+            Self::ModAllWeaponSkills => 0xc6,
+            Self::ModIncreasesSpellPctToHit => 0xc7,
+            Self::ModXpPct => 0xc8,
+            Self::Fly => 0xc9,
+            Self::IgnoreCombatResult => 0xca,
+            Self::ModAttackerMeleeCritDamage => 0xcb,
+            Self::ModAttackerRangedCritDamage => 0xcc,
+            Self::ModAttackerSpellCritDamage => 0xcd,
+            Self::ModFlightSpeed => 0xce,
+            Self::ModFlightSpeedMounted => 0xcf,
+            Self::ModFlightSpeedStacking => 0xd0,
+            Self::ModFlightSpeedMountedStacking => 0xd1,
+            Self::ModFlightSpeedNotStacking => 0xd2,
+            Self::ModFlightSpeedMountedNotStacking => 0xd3,
+            Self::ModRangedAttackPowerOfStatPercent => 0xd4,
+            Self::ModRageFromDamageDealt => 0xd5,
+            Self::Unknown214 => 0xd6,
+            Self::ArenaPreparation => 0xd7,
+            Self::HasteSpells => 0xd8,
+            Self::Unknown217 => 0xd9,
+            Self::HasteRanged => 0xda,
+            Self::ModManaRegenFromStat => 0xdb,
+            Self::ModRatingFromStat => 0xdc,
+            Self::Unknown221 => 0xdd,
+            Self::Unknown222 => 0xde,
+            Self::Unknown223 => 0xdf,
+            Self::Unknown224 => 0xe0,
+            Self::PrayerOfMending => 0xe1,
+            Self::PeriodicDummy => 0xe2,
+            Self::PeriodicTriggerSpellWithValue => 0xe3,
+            Self::DetectStealth => 0xe4,
+            Self::ModAoeDamageAvoidance => 0xe5,
+            Self::Unknown230 => 0xe6,
+            Self::ProcTriggerSpellWithValue => 0xe7,
+            Self::MechanicDurationMod => 0xe8,
+            Self::Unknown233 => 0xe9,
+            Self::MechanicDurationModNotStack => 0xea,
+            Self::ModDispelResist => 0xeb,
+            Self::Unknown236 => 0xec,
+            Self::ModSpellDamageOfAttackPower => 0xed,
+            Self::ModSpellHealingOfAttackPower => 0xee,
+            Self::ModScale2 => 0xef,
+            Self::ModExpertise => 0xf0,
+            Self::ForceMoveForward => 0xf1,
+            Self::Unknown242 => 0xf2,
+            Self::Unknown243 => 0xf3,
+            Self::ComprehendLanguage => 0xf4,
+            Self::Unknown245 => 0xf5,
+            Self::Unknown246 => 0xf6,
+            Self::MirrorImage => 0xf7,
+            Self::ModCombatResultChance => 0xf8,
+            Self::Unknown249 => 0xf9,
+            Self::ModIncreaseHealth2 => 0xfa,
+            Self::ModEnemyDodge => 0xfb,
+            Self::Unknown252 => 0xfc,
+            Self::Unknown253 => 0xfd,
+            Self::Unknown254 => 0xfe,
+            Self::Unknown255 => 0xff,
+            Self::Unknown256 => 0x100,
+            Self::Unknown257 => 0x101,
+            Self::Unknown258 => 0x102,
+            Self::Unknown259 => 0x103,
+            Self::Unknown260 => 0x104,
+            Self::Unknown261 => 0x105,
         }
     }
 
@@ -863,6 +1083,76 @@ impl std::fmt::Display for AuraType {
             Self::ModRating => f.write_str("ModRating"),
             Self::ModFactionReputationGain => f.write_str("ModFactionReputationGain"),
             Self::UseNormalMovementSpeed => f.write_str("UseNormalMovementSpeed"),
+            Self::ModMeleeRangedHaste => f.write_str("ModMeleeRangedHaste"),
+            Self::HasteAll => f.write_str("HasteAll"),
+            Self::ModDepricated1 => f.write_str("ModDepricated1"),
+            Self::ModDepricated2 => f.write_str("ModDepricated2"),
+            Self::ModCooldown => f.write_str("ModCooldown"),
+            Self::ModAttackerSpellAndWeaponCritChance => f.write_str("ModAttackerSpellAndWeaponCritChance"),
+            Self::ModAllWeaponSkills => f.write_str("ModAllWeaponSkills"),
+            Self::ModIncreasesSpellPctToHit => f.write_str("ModIncreasesSpellPctToHit"),
+            Self::ModXpPct => f.write_str("ModXpPct"),
+            Self::Fly => f.write_str("Fly"),
+            Self::IgnoreCombatResult => f.write_str("IgnoreCombatResult"),
+            Self::ModAttackerMeleeCritDamage => f.write_str("ModAttackerMeleeCritDamage"),
+            Self::ModAttackerRangedCritDamage => f.write_str("ModAttackerRangedCritDamage"),
+            Self::ModAttackerSpellCritDamage => f.write_str("ModAttackerSpellCritDamage"),
+            Self::ModFlightSpeed => f.write_str("ModFlightSpeed"),
+            Self::ModFlightSpeedMounted => f.write_str("ModFlightSpeedMounted"),
+            Self::ModFlightSpeedStacking => f.write_str("ModFlightSpeedStacking"),
+            Self::ModFlightSpeedMountedStacking => f.write_str("ModFlightSpeedMountedStacking"),
+            Self::ModFlightSpeedNotStacking => f.write_str("ModFlightSpeedNotStacking"),
+            Self::ModFlightSpeedMountedNotStacking => f.write_str("ModFlightSpeedMountedNotStacking"),
+            Self::ModRangedAttackPowerOfStatPercent => f.write_str("ModRangedAttackPowerOfStatPercent"),
+            Self::ModRageFromDamageDealt => f.write_str("ModRageFromDamageDealt"),
+            Self::Unknown214 => f.write_str("Unknown214"),
+            Self::ArenaPreparation => f.write_str("ArenaPreparation"),
+            Self::HasteSpells => f.write_str("HasteSpells"),
+            Self::Unknown217 => f.write_str("Unknown217"),
+            Self::HasteRanged => f.write_str("HasteRanged"),
+            Self::ModManaRegenFromStat => f.write_str("ModManaRegenFromStat"),
+            Self::ModRatingFromStat => f.write_str("ModRatingFromStat"),
+            Self::Unknown221 => f.write_str("Unknown221"),
+            Self::Unknown222 => f.write_str("Unknown222"),
+            Self::Unknown223 => f.write_str("Unknown223"),
+            Self::Unknown224 => f.write_str("Unknown224"),
+            Self::PrayerOfMending => f.write_str("PrayerOfMending"),
+            Self::PeriodicDummy => f.write_str("PeriodicDummy"),
+            Self::PeriodicTriggerSpellWithValue => f.write_str("PeriodicTriggerSpellWithValue"),
+            Self::DetectStealth => f.write_str("DetectStealth"),
+            Self::ModAoeDamageAvoidance => f.write_str("ModAoeDamageAvoidance"),
+            Self::Unknown230 => f.write_str("Unknown230"),
+            Self::ProcTriggerSpellWithValue => f.write_str("ProcTriggerSpellWithValue"),
+            Self::MechanicDurationMod => f.write_str("MechanicDurationMod"),
+            Self::Unknown233 => f.write_str("Unknown233"),
+            Self::MechanicDurationModNotStack => f.write_str("MechanicDurationModNotStack"),
+            Self::ModDispelResist => f.write_str("ModDispelResist"),
+            Self::Unknown236 => f.write_str("Unknown236"),
+            Self::ModSpellDamageOfAttackPower => f.write_str("ModSpellDamageOfAttackPower"),
+            Self::ModSpellHealingOfAttackPower => f.write_str("ModSpellHealingOfAttackPower"),
+            Self::ModScale2 => f.write_str("ModScale2"),
+            Self::ModExpertise => f.write_str("ModExpertise"),
+            Self::ForceMoveForward => f.write_str("ForceMoveForward"),
+            Self::Unknown242 => f.write_str("Unknown242"),
+            Self::Unknown243 => f.write_str("Unknown243"),
+            Self::ComprehendLanguage => f.write_str("ComprehendLanguage"),
+            Self::Unknown245 => f.write_str("Unknown245"),
+            Self::Unknown246 => f.write_str("Unknown246"),
+            Self::MirrorImage => f.write_str("MirrorImage"),
+            Self::ModCombatResultChance => f.write_str("ModCombatResultChance"),
+            Self::Unknown249 => f.write_str("Unknown249"),
+            Self::ModIncreaseHealth2 => f.write_str("ModIncreaseHealth2"),
+            Self::ModEnemyDodge => f.write_str("ModEnemyDodge"),
+            Self::Unknown252 => f.write_str("Unknown252"),
+            Self::Unknown253 => f.write_str("Unknown253"),
+            Self::Unknown254 => f.write_str("Unknown254"),
+            Self::Unknown255 => f.write_str("Unknown255"),
+            Self::Unknown256 => f.write_str("Unknown256"),
+            Self::Unknown257 => f.write_str("Unknown257"),
+            Self::Unknown258 => f.write_str("Unknown258"),
+            Self::Unknown259 => f.write_str("Unknown259"),
+            Self::Unknown260 => f.write_str("Unknown260"),
+            Self::Unknown261 => f.write_str("Unknown261"),
         }
     }
 }
@@ -1063,6 +1353,76 @@ impl TryFrom<u32> for AuraType {
             189 => Ok(Self::ModRating),
             190 => Ok(Self::ModFactionReputationGain),
             191 => Ok(Self::UseNormalMovementSpeed),
+            192 => Ok(Self::ModMeleeRangedHaste),
+            193 => Ok(Self::HasteAll),
+            194 => Ok(Self::ModDepricated1),
+            195 => Ok(Self::ModDepricated2),
+            196 => Ok(Self::ModCooldown),
+            197 => Ok(Self::ModAttackerSpellAndWeaponCritChance),
+            198 => Ok(Self::ModAllWeaponSkills),
+            199 => Ok(Self::ModIncreasesSpellPctToHit),
+            200 => Ok(Self::ModXpPct),
+            201 => Ok(Self::Fly),
+            202 => Ok(Self::IgnoreCombatResult),
+            203 => Ok(Self::ModAttackerMeleeCritDamage),
+            204 => Ok(Self::ModAttackerRangedCritDamage),
+            205 => Ok(Self::ModAttackerSpellCritDamage),
+            206 => Ok(Self::ModFlightSpeed),
+            207 => Ok(Self::ModFlightSpeedMounted),
+            208 => Ok(Self::ModFlightSpeedStacking),
+            209 => Ok(Self::ModFlightSpeedMountedStacking),
+            210 => Ok(Self::ModFlightSpeedNotStacking),
+            211 => Ok(Self::ModFlightSpeedMountedNotStacking),
+            212 => Ok(Self::ModRangedAttackPowerOfStatPercent),
+            213 => Ok(Self::ModRageFromDamageDealt),
+            214 => Ok(Self::Unknown214),
+            215 => Ok(Self::ArenaPreparation),
+            216 => Ok(Self::HasteSpells),
+            217 => Ok(Self::Unknown217),
+            218 => Ok(Self::HasteRanged),
+            219 => Ok(Self::ModManaRegenFromStat),
+            220 => Ok(Self::ModRatingFromStat),
+            221 => Ok(Self::Unknown221),
+            222 => Ok(Self::Unknown222),
+            223 => Ok(Self::Unknown223),
+            224 => Ok(Self::Unknown224),
+            225 => Ok(Self::PrayerOfMending),
+            226 => Ok(Self::PeriodicDummy),
+            227 => Ok(Self::PeriodicTriggerSpellWithValue),
+            228 => Ok(Self::DetectStealth),
+            229 => Ok(Self::ModAoeDamageAvoidance),
+            230 => Ok(Self::Unknown230),
+            231 => Ok(Self::ProcTriggerSpellWithValue),
+            232 => Ok(Self::MechanicDurationMod),
+            233 => Ok(Self::Unknown233),
+            234 => Ok(Self::MechanicDurationModNotStack),
+            235 => Ok(Self::ModDispelResist),
+            236 => Ok(Self::Unknown236),
+            237 => Ok(Self::ModSpellDamageOfAttackPower),
+            238 => Ok(Self::ModSpellHealingOfAttackPower),
+            239 => Ok(Self::ModScale2),
+            240 => Ok(Self::ModExpertise),
+            241 => Ok(Self::ForceMoveForward),
+            242 => Ok(Self::Unknown242),
+            243 => Ok(Self::Unknown243),
+            244 => Ok(Self::ComprehendLanguage),
+            245 => Ok(Self::Unknown245),
+            246 => Ok(Self::Unknown246),
+            247 => Ok(Self::MirrorImage),
+            248 => Ok(Self::ModCombatResultChance),
+            249 => Ok(Self::Unknown249),
+            250 => Ok(Self::ModIncreaseHealth2),
+            251 => Ok(Self::ModEnemyDodge),
+            252 => Ok(Self::Unknown252),
+            253 => Ok(Self::Unknown253),
+            254 => Ok(Self::Unknown254),
+            255 => Ok(Self::Unknown255),
+            256 => Ok(Self::Unknown256),
+            257 => Ok(Self::Unknown257),
+            258 => Ok(Self::Unknown258),
+            259 => Ok(Self::Unknown259),
+            260 => Ok(Self::Unknown260),
+            261 => Ok(Self::Unknown261),
             v => Err(crate::errors::EnumError::new("AuraType", v as u32),)
         }
     }

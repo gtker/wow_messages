@@ -44,6 +44,8 @@ enum SpellSchool : u8 {
     FROST = 4;
     SHADOW = 5;
     ARCANE = 6;
+} {
+    versions = "2 3";
 }
 
 flag CastFlags : u16 {

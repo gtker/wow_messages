@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::AuraType;
-use crate::world::vanilla::SpellSchool;
+use crate::world::tbc::AuraType;
+use crate::world::tbc::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:276`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L276):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:655`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L655):
 /// ```text
 /// struct AuraLog {
 ///     AuraType aura_type;
@@ -315,6 +315,76 @@ impl AuraLog {
             AuraLog_AuraType::ModRating => {}
             AuraLog_AuraType::ModFactionReputationGain => {}
             AuraLog_AuraType::UseNormalMovementSpeed => {}
+            AuraLog_AuraType::ModMeleeRangedHaste => {}
+            AuraLog_AuraType::HasteAll => {}
+            AuraLog_AuraType::ModDepricated1 => {}
+            AuraLog_AuraType::ModDepricated2 => {}
+            AuraLog_AuraType::ModCooldown => {}
+            AuraLog_AuraType::ModAttackerSpellAndWeaponCritChance => {}
+            AuraLog_AuraType::ModAllWeaponSkills => {}
+            AuraLog_AuraType::ModIncreasesSpellPctToHit => {}
+            AuraLog_AuraType::ModXpPct => {}
+            AuraLog_AuraType::Fly => {}
+            AuraLog_AuraType::IgnoreCombatResult => {}
+            AuraLog_AuraType::ModAttackerMeleeCritDamage => {}
+            AuraLog_AuraType::ModAttackerRangedCritDamage => {}
+            AuraLog_AuraType::ModAttackerSpellCritDamage => {}
+            AuraLog_AuraType::ModFlightSpeed => {}
+            AuraLog_AuraType::ModFlightSpeedMounted => {}
+            AuraLog_AuraType::ModFlightSpeedStacking => {}
+            AuraLog_AuraType::ModFlightSpeedMountedStacking => {}
+            AuraLog_AuraType::ModFlightSpeedNotStacking => {}
+            AuraLog_AuraType::ModFlightSpeedMountedNotStacking => {}
+            AuraLog_AuraType::ModRangedAttackPowerOfStatPercent => {}
+            AuraLog_AuraType::ModRageFromDamageDealt => {}
+            AuraLog_AuraType::Unknown214 => {}
+            AuraLog_AuraType::ArenaPreparation => {}
+            AuraLog_AuraType::HasteSpells => {}
+            AuraLog_AuraType::Unknown217 => {}
+            AuraLog_AuraType::HasteRanged => {}
+            AuraLog_AuraType::ModManaRegenFromStat => {}
+            AuraLog_AuraType::ModRatingFromStat => {}
+            AuraLog_AuraType::Unknown221 => {}
+            AuraLog_AuraType::Unknown222 => {}
+            AuraLog_AuraType::Unknown223 => {}
+            AuraLog_AuraType::Unknown224 => {}
+            AuraLog_AuraType::PrayerOfMending => {}
+            AuraLog_AuraType::PeriodicDummy => {}
+            AuraLog_AuraType::PeriodicTriggerSpellWithValue => {}
+            AuraLog_AuraType::DetectStealth => {}
+            AuraLog_AuraType::ModAoeDamageAvoidance => {}
+            AuraLog_AuraType::Unknown230 => {}
+            AuraLog_AuraType::ProcTriggerSpellWithValue => {}
+            AuraLog_AuraType::MechanicDurationMod => {}
+            AuraLog_AuraType::Unknown233 => {}
+            AuraLog_AuraType::MechanicDurationModNotStack => {}
+            AuraLog_AuraType::ModDispelResist => {}
+            AuraLog_AuraType::Unknown236 => {}
+            AuraLog_AuraType::ModSpellDamageOfAttackPower => {}
+            AuraLog_AuraType::ModSpellHealingOfAttackPower => {}
+            AuraLog_AuraType::ModScale2 => {}
+            AuraLog_AuraType::ModExpertise => {}
+            AuraLog_AuraType::ForceMoveForward => {}
+            AuraLog_AuraType::Unknown242 => {}
+            AuraLog_AuraType::Unknown243 => {}
+            AuraLog_AuraType::ComprehendLanguage => {}
+            AuraLog_AuraType::Unknown245 => {}
+            AuraLog_AuraType::Unknown246 => {}
+            AuraLog_AuraType::MirrorImage => {}
+            AuraLog_AuraType::ModCombatResultChance => {}
+            AuraLog_AuraType::Unknown249 => {}
+            AuraLog_AuraType::ModIncreaseHealth2 => {}
+            AuraLog_AuraType::ModEnemyDodge => {}
+            AuraLog_AuraType::Unknown252 => {}
+            AuraLog_AuraType::Unknown253 => {}
+            AuraLog_AuraType::Unknown254 => {}
+            AuraLog_AuraType::Unknown255 => {}
+            AuraLog_AuraType::Unknown256 => {}
+            AuraLog_AuraType::Unknown257 => {}
+            AuraLog_AuraType::Unknown258 => {}
+            AuraLog_AuraType::Unknown259 => {}
+            AuraLog_AuraType::Unknown260 => {}
+            AuraLog_AuraType::Unknown261 => {}
         }
 
         Ok(())
@@ -607,6 +677,76 @@ impl AuraLog {
             AuraType::ModRating => AuraLog_AuraType::ModRating,
             AuraType::ModFactionReputationGain => AuraLog_AuraType::ModFactionReputationGain,
             AuraType::UseNormalMovementSpeed => AuraLog_AuraType::UseNormalMovementSpeed,
+            AuraType::ModMeleeRangedHaste => AuraLog_AuraType::ModMeleeRangedHaste,
+            AuraType::HasteAll => AuraLog_AuraType::HasteAll,
+            AuraType::ModDepricated1 => AuraLog_AuraType::ModDepricated1,
+            AuraType::ModDepricated2 => AuraLog_AuraType::ModDepricated2,
+            AuraType::ModCooldown => AuraLog_AuraType::ModCooldown,
+            AuraType::ModAttackerSpellAndWeaponCritChance => AuraLog_AuraType::ModAttackerSpellAndWeaponCritChance,
+            AuraType::ModAllWeaponSkills => AuraLog_AuraType::ModAllWeaponSkills,
+            AuraType::ModIncreasesSpellPctToHit => AuraLog_AuraType::ModIncreasesSpellPctToHit,
+            AuraType::ModXpPct => AuraLog_AuraType::ModXpPct,
+            AuraType::Fly => AuraLog_AuraType::Fly,
+            AuraType::IgnoreCombatResult => AuraLog_AuraType::IgnoreCombatResult,
+            AuraType::ModAttackerMeleeCritDamage => AuraLog_AuraType::ModAttackerMeleeCritDamage,
+            AuraType::ModAttackerRangedCritDamage => AuraLog_AuraType::ModAttackerRangedCritDamage,
+            AuraType::ModAttackerSpellCritDamage => AuraLog_AuraType::ModAttackerSpellCritDamage,
+            AuraType::ModFlightSpeed => AuraLog_AuraType::ModFlightSpeed,
+            AuraType::ModFlightSpeedMounted => AuraLog_AuraType::ModFlightSpeedMounted,
+            AuraType::ModFlightSpeedStacking => AuraLog_AuraType::ModFlightSpeedStacking,
+            AuraType::ModFlightSpeedMountedStacking => AuraLog_AuraType::ModFlightSpeedMountedStacking,
+            AuraType::ModFlightSpeedNotStacking => AuraLog_AuraType::ModFlightSpeedNotStacking,
+            AuraType::ModFlightSpeedMountedNotStacking => AuraLog_AuraType::ModFlightSpeedMountedNotStacking,
+            AuraType::ModRangedAttackPowerOfStatPercent => AuraLog_AuraType::ModRangedAttackPowerOfStatPercent,
+            AuraType::ModRageFromDamageDealt => AuraLog_AuraType::ModRageFromDamageDealt,
+            AuraType::Unknown214 => AuraLog_AuraType::Unknown214,
+            AuraType::ArenaPreparation => AuraLog_AuraType::ArenaPreparation,
+            AuraType::HasteSpells => AuraLog_AuraType::HasteSpells,
+            AuraType::Unknown217 => AuraLog_AuraType::Unknown217,
+            AuraType::HasteRanged => AuraLog_AuraType::HasteRanged,
+            AuraType::ModManaRegenFromStat => AuraLog_AuraType::ModManaRegenFromStat,
+            AuraType::ModRatingFromStat => AuraLog_AuraType::ModRatingFromStat,
+            AuraType::Unknown221 => AuraLog_AuraType::Unknown221,
+            AuraType::Unknown222 => AuraLog_AuraType::Unknown222,
+            AuraType::Unknown223 => AuraLog_AuraType::Unknown223,
+            AuraType::Unknown224 => AuraLog_AuraType::Unknown224,
+            AuraType::PrayerOfMending => AuraLog_AuraType::PrayerOfMending,
+            AuraType::PeriodicDummy => AuraLog_AuraType::PeriodicDummy,
+            AuraType::PeriodicTriggerSpellWithValue => AuraLog_AuraType::PeriodicTriggerSpellWithValue,
+            AuraType::DetectStealth => AuraLog_AuraType::DetectStealth,
+            AuraType::ModAoeDamageAvoidance => AuraLog_AuraType::ModAoeDamageAvoidance,
+            AuraType::Unknown230 => AuraLog_AuraType::Unknown230,
+            AuraType::ProcTriggerSpellWithValue => AuraLog_AuraType::ProcTriggerSpellWithValue,
+            AuraType::MechanicDurationMod => AuraLog_AuraType::MechanicDurationMod,
+            AuraType::Unknown233 => AuraLog_AuraType::Unknown233,
+            AuraType::MechanicDurationModNotStack => AuraLog_AuraType::MechanicDurationModNotStack,
+            AuraType::ModDispelResist => AuraLog_AuraType::ModDispelResist,
+            AuraType::Unknown236 => AuraLog_AuraType::Unknown236,
+            AuraType::ModSpellDamageOfAttackPower => AuraLog_AuraType::ModSpellDamageOfAttackPower,
+            AuraType::ModSpellHealingOfAttackPower => AuraLog_AuraType::ModSpellHealingOfAttackPower,
+            AuraType::ModScale2 => AuraLog_AuraType::ModScale2,
+            AuraType::ModExpertise => AuraLog_AuraType::ModExpertise,
+            AuraType::ForceMoveForward => AuraLog_AuraType::ForceMoveForward,
+            AuraType::Unknown242 => AuraLog_AuraType::Unknown242,
+            AuraType::Unknown243 => AuraLog_AuraType::Unknown243,
+            AuraType::ComprehendLanguage => AuraLog_AuraType::ComprehendLanguage,
+            AuraType::Unknown245 => AuraLog_AuraType::Unknown245,
+            AuraType::Unknown246 => AuraLog_AuraType::Unknown246,
+            AuraType::MirrorImage => AuraLog_AuraType::MirrorImage,
+            AuraType::ModCombatResultChance => AuraLog_AuraType::ModCombatResultChance,
+            AuraType::Unknown249 => AuraLog_AuraType::Unknown249,
+            AuraType::ModIncreaseHealth2 => AuraLog_AuraType::ModIncreaseHealth2,
+            AuraType::ModEnemyDodge => AuraLog_AuraType::ModEnemyDodge,
+            AuraType::Unknown252 => AuraLog_AuraType::Unknown252,
+            AuraType::Unknown253 => AuraLog_AuraType::Unknown253,
+            AuraType::Unknown254 => AuraLog_AuraType::Unknown254,
+            AuraType::Unknown255 => AuraLog_AuraType::Unknown255,
+            AuraType::Unknown256 => AuraLog_AuraType::Unknown256,
+            AuraType::Unknown257 => AuraLog_AuraType::Unknown257,
+            AuraType::Unknown258 => AuraLog_AuraType::Unknown258,
+            AuraType::Unknown259 => AuraLog_AuraType::Unknown259,
+            AuraType::Unknown260 => AuraLog_AuraType::Unknown260,
+            AuraType::Unknown261 => AuraLog_AuraType::Unknown261,
         };
 
         Ok(Self {
@@ -840,6 +980,76 @@ pub enum AuraLog_AuraType {
     ModRating,
     ModFactionReputationGain,
     UseNormalMovementSpeed,
+    ModMeleeRangedHaste,
+    HasteAll,
+    ModDepricated1,
+    ModDepricated2,
+    ModCooldown,
+    ModAttackerSpellAndWeaponCritChance,
+    ModAllWeaponSkills,
+    ModIncreasesSpellPctToHit,
+    ModXpPct,
+    Fly,
+    IgnoreCombatResult,
+    ModAttackerMeleeCritDamage,
+    ModAttackerRangedCritDamage,
+    ModAttackerSpellCritDamage,
+    ModFlightSpeed,
+    ModFlightSpeedMounted,
+    ModFlightSpeedStacking,
+    ModFlightSpeedMountedStacking,
+    ModFlightSpeedNotStacking,
+    ModFlightSpeedMountedNotStacking,
+    ModRangedAttackPowerOfStatPercent,
+    ModRageFromDamageDealt,
+    Unknown214,
+    ArenaPreparation,
+    HasteSpells,
+    Unknown217,
+    HasteRanged,
+    ModManaRegenFromStat,
+    ModRatingFromStat,
+    Unknown221,
+    Unknown222,
+    Unknown223,
+    Unknown224,
+    PrayerOfMending,
+    PeriodicDummy,
+    PeriodicTriggerSpellWithValue,
+    DetectStealth,
+    ModAoeDamageAvoidance,
+    Unknown230,
+    ProcTriggerSpellWithValue,
+    MechanicDurationMod,
+    Unknown233,
+    MechanicDurationModNotStack,
+    ModDispelResist,
+    Unknown236,
+    ModSpellDamageOfAttackPower,
+    ModSpellHealingOfAttackPower,
+    ModScale2,
+    ModExpertise,
+    ForceMoveForward,
+    Unknown242,
+    Unknown243,
+    ComprehendLanguage,
+    Unknown245,
+    Unknown246,
+    MirrorImage,
+    ModCombatResultChance,
+    Unknown249,
+    ModIncreaseHealth2,
+    ModEnemyDodge,
+    Unknown252,
+    Unknown253,
+    Unknown254,
+    Unknown255,
+    Unknown256,
+    Unknown257,
+    Unknown258,
+    Unknown259,
+    Unknown260,
+    Unknown261,
 }
 
 impl Default for AuraLog_AuraType {
@@ -1044,6 +1254,76 @@ impl AuraLog_AuraType {
             Self::ModRating => 189,
             Self::ModFactionReputationGain => 190,
             Self::UseNormalMovementSpeed => 191,
+            Self::ModMeleeRangedHaste => 192,
+            Self::HasteAll => 193,
+            Self::ModDepricated1 => 194,
+            Self::ModDepricated2 => 195,
+            Self::ModCooldown => 196,
+            Self::ModAttackerSpellAndWeaponCritChance => 197,
+            Self::ModAllWeaponSkills => 198,
+            Self::ModIncreasesSpellPctToHit => 199,
+            Self::ModXpPct => 200,
+            Self::Fly => 201,
+            Self::IgnoreCombatResult => 202,
+            Self::ModAttackerMeleeCritDamage => 203,
+            Self::ModAttackerRangedCritDamage => 204,
+            Self::ModAttackerSpellCritDamage => 205,
+            Self::ModFlightSpeed => 206,
+            Self::ModFlightSpeedMounted => 207,
+            Self::ModFlightSpeedStacking => 208,
+            Self::ModFlightSpeedMountedStacking => 209,
+            Self::ModFlightSpeedNotStacking => 210,
+            Self::ModFlightSpeedMountedNotStacking => 211,
+            Self::ModRangedAttackPowerOfStatPercent => 212,
+            Self::ModRageFromDamageDealt => 213,
+            Self::Unknown214 => 214,
+            Self::ArenaPreparation => 215,
+            Self::HasteSpells => 216,
+            Self::Unknown217 => 217,
+            Self::HasteRanged => 218,
+            Self::ModManaRegenFromStat => 219,
+            Self::ModRatingFromStat => 220,
+            Self::Unknown221 => 221,
+            Self::Unknown222 => 222,
+            Self::Unknown223 => 223,
+            Self::Unknown224 => 224,
+            Self::PrayerOfMending => 225,
+            Self::PeriodicDummy => 226,
+            Self::PeriodicTriggerSpellWithValue => 227,
+            Self::DetectStealth => 228,
+            Self::ModAoeDamageAvoidance => 229,
+            Self::Unknown230 => 230,
+            Self::ProcTriggerSpellWithValue => 231,
+            Self::MechanicDurationMod => 232,
+            Self::Unknown233 => 233,
+            Self::MechanicDurationModNotStack => 234,
+            Self::ModDispelResist => 235,
+            Self::Unknown236 => 236,
+            Self::ModSpellDamageOfAttackPower => 237,
+            Self::ModSpellHealingOfAttackPower => 238,
+            Self::ModScale2 => 239,
+            Self::ModExpertise => 240,
+            Self::ForceMoveForward => 241,
+            Self::Unknown242 => 242,
+            Self::Unknown243 => 243,
+            Self::ComprehendLanguage => 244,
+            Self::Unknown245 => 245,
+            Self::Unknown246 => 246,
+            Self::MirrorImage => 247,
+            Self::ModCombatResultChance => 248,
+            Self::Unknown249 => 249,
+            Self::ModIncreaseHealth2 => 250,
+            Self::ModEnemyDodge => 251,
+            Self::Unknown252 => 252,
+            Self::Unknown253 => 253,
+            Self::Unknown254 => 254,
+            Self::Unknown255 => 255,
+            Self::Unknown256 => 256,
+            Self::Unknown257 => 257,
+            Self::Unknown258 => 258,
+            Self::Unknown259 => 259,
+            Self::Unknown260 => 260,
+            Self::Unknown261 => 261,
         }
     }
 
@@ -1667,6 +1947,216 @@ impl AuraLog_AuraType {
                 4
             }
             Self::UseNormalMovementSpeed => {
+                4
+            }
+            Self::ModMeleeRangedHaste => {
+                4
+            }
+            Self::HasteAll => {
+                4
+            }
+            Self::ModDepricated1 => {
+                4
+            }
+            Self::ModDepricated2 => {
+                4
+            }
+            Self::ModCooldown => {
+                4
+            }
+            Self::ModAttackerSpellAndWeaponCritChance => {
+                4
+            }
+            Self::ModAllWeaponSkills => {
+                4
+            }
+            Self::ModIncreasesSpellPctToHit => {
+                4
+            }
+            Self::ModXpPct => {
+                4
+            }
+            Self::Fly => {
+                4
+            }
+            Self::IgnoreCombatResult => {
+                4
+            }
+            Self::ModAttackerMeleeCritDamage => {
+                4
+            }
+            Self::ModAttackerRangedCritDamage => {
+                4
+            }
+            Self::ModAttackerSpellCritDamage => {
+                4
+            }
+            Self::ModFlightSpeed => {
+                4
+            }
+            Self::ModFlightSpeedMounted => {
+                4
+            }
+            Self::ModFlightSpeedStacking => {
+                4
+            }
+            Self::ModFlightSpeedMountedStacking => {
+                4
+            }
+            Self::ModFlightSpeedNotStacking => {
+                4
+            }
+            Self::ModFlightSpeedMountedNotStacking => {
+                4
+            }
+            Self::ModRangedAttackPowerOfStatPercent => {
+                4
+            }
+            Self::ModRageFromDamageDealt => {
+                4
+            }
+            Self::Unknown214 => {
+                4
+            }
+            Self::ArenaPreparation => {
+                4
+            }
+            Self::HasteSpells => {
+                4
+            }
+            Self::Unknown217 => {
+                4
+            }
+            Self::HasteRanged => {
+                4
+            }
+            Self::ModManaRegenFromStat => {
+                4
+            }
+            Self::ModRatingFromStat => {
+                4
+            }
+            Self::Unknown221 => {
+                4
+            }
+            Self::Unknown222 => {
+                4
+            }
+            Self::Unknown223 => {
+                4
+            }
+            Self::Unknown224 => {
+                4
+            }
+            Self::PrayerOfMending => {
+                4
+            }
+            Self::PeriodicDummy => {
+                4
+            }
+            Self::PeriodicTriggerSpellWithValue => {
+                4
+            }
+            Self::DetectStealth => {
+                4
+            }
+            Self::ModAoeDamageAvoidance => {
+                4
+            }
+            Self::Unknown230 => {
+                4
+            }
+            Self::ProcTriggerSpellWithValue => {
+                4
+            }
+            Self::MechanicDurationMod => {
+                4
+            }
+            Self::Unknown233 => {
+                4
+            }
+            Self::MechanicDurationModNotStack => {
+                4
+            }
+            Self::ModDispelResist => {
+                4
+            }
+            Self::Unknown236 => {
+                4
+            }
+            Self::ModSpellDamageOfAttackPower => {
+                4
+            }
+            Self::ModSpellHealingOfAttackPower => {
+                4
+            }
+            Self::ModScale2 => {
+                4
+            }
+            Self::ModExpertise => {
+                4
+            }
+            Self::ForceMoveForward => {
+                4
+            }
+            Self::Unknown242 => {
+                4
+            }
+            Self::Unknown243 => {
+                4
+            }
+            Self::ComprehendLanguage => {
+                4
+            }
+            Self::Unknown245 => {
+                4
+            }
+            Self::Unknown246 => {
+                4
+            }
+            Self::MirrorImage => {
+                4
+            }
+            Self::ModCombatResultChance => {
+                4
+            }
+            Self::Unknown249 => {
+                4
+            }
+            Self::ModIncreaseHealth2 => {
+                4
+            }
+            Self::ModEnemyDodge => {
+                4
+            }
+            Self::Unknown252 => {
+                4
+            }
+            Self::Unknown253 => {
+                4
+            }
+            Self::Unknown254 => {
+                4
+            }
+            Self::Unknown255 => {
+                4
+            }
+            Self::Unknown256 => {
+                4
+            }
+            Self::Unknown257 => {
+                4
+            }
+            Self::Unknown258 => {
+                4
+            }
+            Self::Unknown259 => {
+                4
+            }
+            Self::Unknown260 => {
+                4
+            }
+            Self::Unknown261 => {
                 4
             }
         }
