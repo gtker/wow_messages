@@ -1,6 +1,6 @@
 # SMSG_SET_PCT_SPELL_MODIFIER
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 

@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_SET_PCT_SPELL_MODIFIER = 0x0267 {
     /* TODO What does this mean? */

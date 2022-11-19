@@ -497,6 +497,7 @@ pub mod smsg_server_message_vanilla_tbc;
 pub mod smsg_set_faction_visible_vanilla_tbc_wrath;
 pub mod smsg_set_flat_spell_modifier_vanilla_tbc_wrath;
 pub mod smsg_set_forced_reactions_vanilla_tbc_wrath;
+pub mod smsg_set_pct_spell_modifier_vanilla_tbc_wrath;
 pub mod smsg_set_rest_start_vanilla_tbc;
 pub mod smsg_show_bank_vanilla_tbc_wrath;
 pub mod smsg_showtaxinodes_vanilla_tbc_wrath;
