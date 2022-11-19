@@ -588,7 +588,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_AUCTION_LIST_ITEMS", 0x258),
     Data::new("CMSG_AUCTION_LIST_OWNER_ITEMS", 0x259),
     Data::new("CMSG_AUCTION_PLACE_BID", 0x25A),
-    Data::new("SMSG_AUCTION_COMMAND_RESULT", 0x25B),
+    Data::with_reason("SMSG_AUCTION_COMMAND_RESULT", 0x25B, "Nested if"),
     Data::new("SMSG_AUCTION_LIST_RESULT", 0x25C),
     Data::new("SMSG_AUCTION_OWNER_LIST_RESULT", 0x25D),
     Data::new("SMSG_AUCTION_BIDDER_NOTIFICATION", 0x25E),
