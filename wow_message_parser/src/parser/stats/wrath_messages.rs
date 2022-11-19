@@ -576,7 +576,11 @@ pub(crate) const DATA: &[Data] = &[
         "Elseif for different variable",
     ),
     Data::new("CMSG_GET_MAIL_LIST", 0x23A),
-    Data::new("SMSG_MAIL_LIST_RESULT", 0x23B),
+    Data::with_reason(
+        "SMSG_MAIL_LIST_RESULT",
+        0x23B,
+        "Requires self.size for struct",
+    ),
     Data::new("CMSG_BATTLEFIELD_LIST", 0x23C),
     Data::new("SMSG_BATTLEFIELD_LIST", 0x23D),
     Data::new("SMSG_FORCE_SET_VEHICLE_REC_ID", 0x23F),
