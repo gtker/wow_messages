@@ -15,11 +15,13 @@ enum StatusId : u8 {
         comment = "means some faction has won BG and it is ending";
     }
 } {
-    versions = "1.12";
+    versions = "1 2 3";
 }
 
 smsg SMSG_BATTLEFIELD_STATUS = 0x2D4 {
-    u32 queue_slot;
+    u32 queue_slot {
+        comment = "vmangos: players can be in 3 queues at the same time (0..2)";
+    }
     Map map;
     /* TODO: Is this really Map or Area?
         Might also be something else (BG only maps).
@@ -42,4 +44,93 @@ smsg SMSG_BATTLEFIELD_STATUS = 0x2D4 {
     }
 } {
     versions = "1.12";
+}
+
+smsg SMSG_BATTLEFIELD_STATUS = 0x2D4 {
+    u32 queue_slot {
+        comment = "vmangos: players can be in 3 queues at the same time (0..2)";
+    }
+    ArenaType arena_type;
+    u8 unknown1 {
+        comment = "mangosone sets to 0x0D.";
+    }
+    BattlegroundType battleground_type;
+    u16 unknown2 {
+        comment = "mangosone sets to 0x1F90";
+    }
+    u32 client_instance_id;
+    Bool rated;
+    StatusId status_id;
+    if (status_id == WAIT_QUEUE) {
+        u32 average_wait_time_in_ms;
+        u32 time_in_queue_in_ms;
+    }
+    else if (status_id == WAIT_JOIN) {
+        u32 time_to_remove_in_queue_in_ms;
+    }
+    else if (status_id == IN_PROGRESS) {
+        u32 time_to_bg_autoleave_in_ms;
+        u32 time_to_bg_start_in_ms;
+    }
+} {
+    versions = "2.4.3";
+    comment = "mangosone treats `arena_type`, `unknown1`, `battleground_type_id`, and `unknown2` as one big u64 and does not send any fields after these if all fields are 0.";
+}
+
+enum ArenaType : u8 {
+    NOT_ARENA = 0;
+    TWO_VS_TWO = 2;
+    THREE_VS_THREE = 3;
+    FIVE_VS_FIVE = 5;
+} {
+    versions = "2 3";
+}
+
+enum ArenaFaction : u8 {
+    HORDE = 0;
+    ALLIANCE = 1;
+} {
+    versions = "2 3";
+}
+
+smsg SMSG_BATTLEFIELD_STATUS = 0x2D4 {
+    u32 queue_slot {
+        comment = "vmangos: players can be in 3 queues at the same time (0..2)";
+    }
+    ArenaType arena_type;
+    u8 is_arena {
+        comment = "azerothcore sets to 0x0E if it is arena, 0 otherwise.";
+    }
+    BattlegroundType battleground_type;
+    u16 unknown1 {
+        comment = "azerothcore sets to 0x1F90";
+    }
+    u8 minimum_level;
+    u8 maximum_level;
+    u32 client_instance_id;
+    Bool rated;
+    StatusId status_id;
+    if (status_id == WAIT_QUEUE) {
+        u32 average_wait_time_in_ms;
+        u32 time_in_queue_in_ms;
+    }
+    else if (status_id == WAIT_JOIN) {
+        Map map1;
+        u64 unknown2 {
+            comment = "azerothcore: 3.3.5 unknown";
+        }
+        u32 time_to_remove_in_queue_in_ms;
+    }
+    else if (status_id == IN_PROGRESS) {
+        Map map2;
+        u64 unknown3 {
+            comment = "azerothcore: 3.3.5 unknown";
+        }
+        u32 time_to_bg_autoleave_in_ms;
+        u32 time_to_bg_start_in_ms;
+        ArenaFaction faction;
+    }
+} {
+    versions = "3.3.5";
+    comment = "mangosone treats `arena_type`, `unknown1`, `battleground_type_id`, and `unknown2` as one big u64 and does not send any fields after these if all fields are 0.";
 }

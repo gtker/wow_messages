@@ -1,6 +1,8 @@
 pub mod activate_taxi_reply_vanilla_tbc_wrath;
 pub mod addon_info_vanilla_tbc_wrath;
 pub mod ai_reaction_vanilla_tbc_wrath;
+pub mod arena_faction_tbc_wrath;
+pub mod arena_type_tbc_wrath;
 pub mod auction_enchantment_tbc_wrath;
 pub mod auction_sort_tbc_wrath;
 pub mod battlefield_port_action_vanilla_tbc_wrath;
@@ -560,6 +562,7 @@ pub mod spell_miss_info_vanilla_vanilla_tbc_wrath;
 pub mod spell_school_vanilla_vanilla_tbc_wrath;
 pub mod stable_result_vanilla_tbc;
 pub mod stabled_pet_vanilla_tbc_wrath;
+pub mod status_id_vanilla_tbc_wrath;
 pub mod timer_type_vanilla_vanilla_tbc_wrath;
 pub mod trade_slot_tbc_wrath;
 pub mod trade_status_vanilla_tbc_wrath;

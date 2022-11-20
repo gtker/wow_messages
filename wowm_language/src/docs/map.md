@@ -625,6 +625,7 @@ Used in:
 * [Character](character.md)
 * [MSG_CORPSE_QUERY_Server](msg_corpse_query_server.md)
 * [RaidInfo](raidinfo.md)
+* [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)

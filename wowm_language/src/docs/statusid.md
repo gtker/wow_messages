@@ -1,6 +1,6 @@
 # StatusId
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -27,5 +27,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `WAIT_LEAVE` | 4 (0x04) |  | means some faction has won BG and it is ending |
 
 Used in:
+* [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
+* [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 * [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 

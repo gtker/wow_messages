@@ -41,6 +41,8 @@
 - [AddonType](docs/addontype.md)
 - [AiReaction](docs/aireaction.md)
 - [Area](docs/area.md)
+- [ArenaFaction](docs/arenafaction.md)
+- [ArenaType](docs/arenatype.md)
 - [AuctionCommandAction](docs/auctioncommandaction.md)
 - [AuctionCommandResult](docs/auctioncommandresult.md)
 - [AuraType](docs/auratype.md)

@@ -36,6 +36,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [SMSG_BATTLEFIELD_LIST](smsg_battlefield_list.md)
+* [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 
 # BattlegroundType
 
@@ -85,4 +86,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [SMSG_BATTLEFIELD_LIST](smsg_battlefield_list.md)
+* [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 

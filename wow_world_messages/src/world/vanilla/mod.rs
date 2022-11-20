@@ -1322,6 +1322,8 @@ pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
+pub use crate::shared::status_id_vanilla_tbc_wrath::StatusId;
+
 pub use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
 
 pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
@@ -1630,8 +1632,6 @@ pub(crate) mod spell_miss;
 pub use spell_miss::*;
 pub(crate) mod spline_flag;
 pub use spline_flag::*;
-pub(crate) mod status_id;
-pub use status_id::*;
 pub(crate) mod trade_slot;
 pub use trade_slot::*;
 pub(crate) mod trainer_spell;

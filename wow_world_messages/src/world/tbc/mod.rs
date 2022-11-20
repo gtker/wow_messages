@@ -228,6 +228,10 @@ pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 
 pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 
+pub use crate::shared::arena_faction_tbc_wrath::ArenaFaction;
+
+pub use crate::shared::arena_type_tbc_wrath::ArenaType;
+
 pub use crate::shared::auction_enchantment_tbc_wrath::AuctionEnchantment;
 
 pub use crate::shared::auction_sort_tbc_wrath::AuctionSort;
@@ -1344,6 +1348,8 @@ pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
+pub use crate::shared::status_id_vanilla_tbc_wrath::StatusId;
+
 pub use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
 
 pub use crate::shared::trade_slot_tbc_wrath::TradeSlot;
@@ -1396,6 +1402,8 @@ pub(crate) mod smsg_auth_response;
 pub use smsg_auth_response::*;
 pub(crate) mod smsg_battlefield_list;
 pub use smsg_battlefield_list::*;
+pub(crate) mod smsg_battlefield_status;
+pub use smsg_battlefield_status::*;
 pub(crate) mod smsg_bindpointupdate;
 pub use smsg_bindpointupdate::*;
 pub(crate) mod smsg_char_create;
