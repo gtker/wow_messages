@@ -17,6 +17,38 @@ pub enum MessageType {
     Msg,
 }
 
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
+pub enum Reason {
+    None,
+    Encrypted,
+    Compressed,
+    RequiresNestedIf,
+    ElseIfForDifferentVariable,
+    NotImplementedInAnyEmulator,
+    SelfSizeStruct,
+    RequiresAuraMask,
+    RequiresNotEqualGuid,
+    ComplexImplementation,
+    Custom(&'static str),
+}
+
+impl Reason {
+    pub const fn is_none(&self) -> bool {
+        matches!(self, Self::None)
+    }
+
+    pub const fn is_some(&self) -> bool {
+        !self.is_none()
+    }
+
+    pub const fn str(&self) -> Option<&'static str> {
+        match self {
+            Reason::Custom(s) => Some(s),
+            _ => None,
+        }
+    }
+}
+
 impl MessageType {
     pub const fn wowm_str(&self) -> &'static str {
         match self {
@@ -33,7 +65,7 @@ pub(crate) struct Data {
     pub opcode: usize,
     pub definition: bool,
     pub tests: usize,
-    pub reason: Option<&'static str>,
+    pub reason: Reason,
 }
 
 impl Data {
@@ -43,10 +75,11 @@ impl Data {
             opcode,
             definition: false,
             tests: 0,
-            reason: None,
+            reason: Reason::None,
         }
     }
 
+    #[allow(unused)]
     pub(crate) const fn with_reason(
         name: &'static str,
         opcode: usize,
@@ -57,12 +90,66 @@ impl Data {
             opcode,
             definition: false,
             tests: 0,
-            reason: Some(reason),
+            reason: Reason::Custom(reason),
         }
     }
 
+    const fn direct(name: &'static str, opcode: usize, reason: Reason) -> Self {
+        Self {
+            name,
+            opcode,
+            definition: false,
+            tests: 0,
+            reason,
+        }
+    }
+
+    const fn reason(&self) -> Option<&'static str> {
+        Some(match self.reason {
+            Reason::Custom(reason) => reason,
+            Reason::None => return None,
+            Reason::Compressed => "Requires compression",
+            Reason::NotImplementedInAnyEmulator => "Not implemented in any emulator yet",
+            Reason::Encrypted => "Requires encryption",
+            Reason::RequiresNestedIf => "Requires nested if",
+            Reason::ElseIfForDifferentVariable => "Requires else if for different variable",
+            Reason::SelfSizeStruct => "Requires self.size for struct",
+            Reason::RequiresAuraMask => "Requires AuraMask",
+            Reason::RequiresNotEqualGuid => "Requires != 0 for Guid type",
+            Reason::ComplexImplementation => "Complex implementation",
+        })
+    }
+
     pub(crate) const fn encrypted(name: &'static str, opcode: usize) -> Self {
-        Self::with_reason(name, opcode, "Encrypted")
+        Self::direct(name, opcode, Reason::Encrypted)
+    }
+
+    pub(crate) const fn compressed(name: &'static str, opcode: usize) -> Self {
+        Self::direct(name, opcode, Reason::Encrypted)
+    }
+
+    pub(crate) const fn nested_if(name: &'static str, opcode: usize) -> Self {
+        Self::direct(name, opcode, Reason::RequiresNestedIf)
+    }
+
+    pub(crate) const fn nyi(name: &'static str, opcode: usize) -> Self {
+        Self::direct(name, opcode, Reason::NotImplementedInAnyEmulator)
+    }
+
+    pub(crate) const fn aura_mask(name: &'static str, opcode: usize) -> Self {
+        Self::direct(name, opcode, Reason::RequiresAuraMask)
+    }
+
+    pub(crate) const fn complex(name: &'static str, opcode: usize) -> Self {
+        Self::direct(name, opcode, Reason::ComplexImplementation)
+    }
+
+    pub(crate) const fn else_if_different_variable(name: &'static str, opcode: usize) -> Self {
+        Self::direct(name, opcode, Reason::ElseIfForDifferentVariable)
+    }
+
+    pub(crate) const fn self_size_struct(name: &'static str, opcode: usize) -> Self {
+        Self::direct(name, opcode, Reason::SelfSizeStruct)
     }
 
     pub(crate) fn message_ty(&self) -> MessageType {
@@ -227,10 +314,8 @@ fn print_missing_definitions(data: &[Data], version: MajorWorldVersion, descript
                         version = version.as_version_string(),
                     );
                 }
-            } else if let Some(reason) = d.reason {
-                println!("    {}: {}", d.name, reason);
             } else {
-                println!("    {}", d.name);
+                println!("    {}: {}", d.name, d.reason().unwrap());
             }
         }
     }
