@@ -260,8 +260,15 @@ fn print_definition(
         }
         Type::Bool(i) => {
             let name = w.unwrap().name();
+
+            let enc = if *i == IntegerType::U8 {
+                "ENC_NA"
+            } else {
+                i.wireshark_endian_str()
+            };
+
             s.wln(format!(
-                "ptvcursor_add(ptv, {hf}, {len}, ENC_NA);",
+                "ptvcursor_add(ptv, {hf}, {len}, {enc});",
                 hf = name,
                 len = i.size()
             ));
