@@ -1,8 +1,0 @@
-[package]
-name = "common_generator"
-version = "0.0.0"
-edition = "2021"
-
-[dependencies]
-rusqlite = { version = "0.28.0", features = ["bundled"] }
-wow_world_base = { path = "../../wow_world_base" }

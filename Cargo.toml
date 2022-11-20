@@ -6,5 +6,4 @@ members = [
     "wow_world_base",
     "wow_login_messages",
     "examples/*",
-    "wow_common/*",
 ]

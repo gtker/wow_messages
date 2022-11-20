@@ -1,7 +1,7 @@
-use crate::data::Data;
+use super::data::Data;
+use super::writer::Writer;
+use super::Expansion;
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
-use crate::writer::Writer;
-use crate::Expansion;
 use std::path::Path;
 
 pub(crate) fn write_exp(directory: &Path, data: &Data) {

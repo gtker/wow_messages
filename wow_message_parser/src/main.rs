@@ -27,6 +27,7 @@ use parser::types::parsed::parsed_object::ParsedObjects;
 use parser::types::tags::ObjectTags;
 use path_utils::get_world_version_file_path;
 
+mod base_printer;
 mod doc_printer;
 pub(crate) mod file_info;
 mod file_utils;
@@ -82,6 +83,7 @@ fn main() {
     let o = o.into_objects();
 
     wireshark_printer::print_wireshark(&o);
+    base_printer::print_base();
 
     let mut m = ModFiles::new();
 

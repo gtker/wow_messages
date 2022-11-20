@@ -12,7 +12,6 @@ The project is split into the subdirectories:
 * `wow_world_messages`: **UNRELEASED** Rust library for the world server for WoW version 1.x.y.
 * `wow_world_base`: **UNRELEASED** Rust library that provides the basic types and enums such as `Class`, `Race`
   and `Gender` for `wow_world_messages` and others.
-* `wow_common`: Library for common operations and static data.
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification. Hosted
   at [`www.gtker.com/wow_messages`](https://www.gtker.com/wow_messages).
 * `intermediate_representation.json`: **UNRELEASED** contains a machine readable version of the `wowm` files.
@@ -23,6 +22,7 @@ Run `cargo run -p wow_message_parser && cargo test` to "compile" all libraries a
 The following environment variables can be used with the parser:
 
 * `WOWM_WIRESHARK`: must point to a valid `packet-woww.c` in a wireshark repo. This file will then be modified with the auto generated Wireshark messages.
+* `WOWM_SQLITE_DB_PATH`: `wow_db_sqlite` directory. Writes the types and functions for `wow_world_base` `extended`.
 * `WOWM_PRINT_TEST_ERRORS`: when set errors testing that the application exists with a message will print error messages.
 * `WOWM_ONLY_PRINT_NAME_OF_SINGLE_MESSAGE`: when set the reporting output will be the first unimplemented message without a newline character. This is intended for quickly implementing many messages in quick succession.
 * `WOWM_OVERWRITE_ALL_TESTS`: overwrites the current regression test files with new output.

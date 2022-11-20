@@ -1,6 +1,6 @@
-use crate::position::{positions, RawPosition};
-use crate::types::{Class, Race};
-use crate::Expansion;
+use super::position::{positions, RawPosition};
+use super::types::{Class, Race};
+use super::Expansion;
 use rusqlite::Connection;
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::path::Path;

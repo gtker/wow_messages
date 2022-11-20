@@ -9,6 +9,30 @@ fn workspace_directory() -> PathBuf {
     p
 }
 
+pub(crate) fn vanilla_base_extended_dir() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_base")
+        .join("src")
+        .join("extended")
+        .join("vanilla")
+}
+
+pub(crate) fn tbc_base_extended_dir() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_base")
+        .join("src")
+        .join("extended")
+        .join("tbc")
+}
+
+pub(crate) fn wrath_base_extended_dir() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_base")
+        .join("src")
+        .join("extended")
+        .join("wrath")
+}
+
 pub(crate) fn parser_test_directory() -> PathBuf {
     workspace_directory()
         .join("wow_message_parser")
