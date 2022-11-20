@@ -940,6 +940,8 @@ pub use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 
 pub use crate::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
 
+pub use crate::shared::raid_instance_message_vanilla_tbc::RaidInstanceMessage;
+
 pub use crate::shared::sell_item_result_vanilla_tbc::SellItemResult;
 
 pub use crate::shared::server_message_type_vanilla_tbc::ServerMessageType;
@@ -1364,8 +1366,6 @@ pub(crate) mod race;
 pub use race::*;
 pub(crate) mod raid_info;
 pub use raid_info::*;
-pub(crate) mod raid_instance_message;
-pub use raid_instance_message::*;
 pub(crate) mod raid_target_index;
 pub use raid_target_index::*;
 pub(crate) mod raid_target_update;

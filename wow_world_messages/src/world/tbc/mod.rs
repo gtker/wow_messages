@@ -926,6 +926,8 @@ pub use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 
 pub use crate::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
 
+pub use crate::shared::raid_instance_message_vanilla_tbc::RaidInstanceMessage;
+
 pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 
 pub use crate::shared::received_mail_tbc_wrath::ReceivedMail;
@@ -1496,6 +1498,8 @@ pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
 pub(crate) mod smsg_raid_instance_info;
 pub use smsg_raid_instance_info::*;
+pub(crate) mod smsg_raid_instance_message;
+pub use smsg_raid_instance_message::*;
 pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
 pub(crate) mod smsg_set_proficiency;

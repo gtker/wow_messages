@@ -350,6 +350,7 @@ pub mod quest_item_vanilla_tbc;
 pub mod quest_objective_vanilla_tbc_wrath;
 pub mod quest_party_message_vanilla_tbc;
 pub mod raid_group_error_vanilla_tbc_wrath;
+pub mod raid_instance_message_vanilla_tbc;
 pub mod realm_split_state_tbc_wrath;
 pub mod received_mail_tbc_wrath;
 pub mod roll_vote_tbc_wrath;

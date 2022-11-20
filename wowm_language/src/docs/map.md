@@ -325,6 +325,7 @@ Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
 * [SMSG_NEW_WORLD](smsg_new_world.md)
+* [SMSG_RAID_INSTANCE_MESSAGE](smsg_raid_instance_message.md)
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
 * [SMSG_TRANSFER_PENDING](smsg_transfer_pending.md)
 
@@ -632,6 +633,7 @@ Used in:
 * [SMSG_LOGIN_VERIFY_WORLD](smsg_login_verify_world.md)
 * [SMSG_LOOT_START_ROLL](smsg_loot_start_roll.md)
 * [SMSG_NEW_WORLD](smsg_new_world.md)
+* [SMSG_RAID_INSTANCE_MESSAGE](smsg_raid_instance_message.md)
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
 * [SMSG_TRANSFER_PENDING](smsg_transfer_pending.md)
 
