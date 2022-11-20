@@ -1456,6 +1456,8 @@ pub(crate) mod smsg_guild_command_result;
 pub use smsg_guild_command_result::*;
 pub(crate) mod smsg_guild_roster;
 pub use smsg_guild_roster::*;
+pub(crate) mod smsg_instance_reset;
+pub use smsg_instance_reset::*;
 pub(crate) mod smsg_inventory_change_failure;
 pub use smsg_inventory_change_failure::*;
 pub(crate) mod smsg_item_query_single_response;

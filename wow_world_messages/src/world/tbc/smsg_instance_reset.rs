@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Map;
+use crate::world::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -40,6 +40,6 @@ impl crate::Message for SMSG_INSTANCE_RESET {
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_INSTANCE_RESET {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_INSTANCE_RESET {}
 

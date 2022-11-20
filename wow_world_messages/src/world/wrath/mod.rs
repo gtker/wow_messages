@@ -1428,6 +1428,8 @@ pub(crate) mod smsg_initial_spells;
 pub use smsg_initial_spells::*;
 pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
+pub(crate) mod smsg_instance_reset;
+pub use smsg_instance_reset::*;
 pub(crate) mod smsg_inventory_change_failure;
 pub use smsg_inventory_change_failure::*;
 pub(crate) mod smsg_item_query_single_response;

@@ -1,6 +1,5 @@
-#tag_all versions "1.12";
-
 smsg SMSG_INSTANCE_RESET = 0x031E {
     Map map;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
-
