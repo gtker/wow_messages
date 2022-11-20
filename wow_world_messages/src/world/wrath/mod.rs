@@ -1552,6 +1552,8 @@ pub(crate) mod smsg_update_account_data;
 pub use smsg_update_account_data::*;
 pub(crate) mod smsg_update_account_data_complete;
 pub use smsg_update_account_data_complete::*;
+pub(crate) mod smsg_update_last_instance;
+pub use smsg_update_last_instance::*;
 pub(crate) mod smsg_update_object;
 pub use smsg_update_object::*;
 pub(crate) mod smsg_weather;

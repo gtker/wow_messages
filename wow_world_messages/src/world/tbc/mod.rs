@@ -1540,6 +1540,8 @@ pub(crate) mod smsg_transfer_pending;
 pub use smsg_transfer_pending::*;
 pub(crate) mod smsg_trigger_cinematic;
 pub use smsg_trigger_cinematic::*;
+pub(crate) mod smsg_update_last_instance;
+pub use smsg_update_last_instance::*;
 pub(crate) mod smsg_update_object;
 pub use smsg_update_object::*;
 pub(crate) mod smsg_weather;

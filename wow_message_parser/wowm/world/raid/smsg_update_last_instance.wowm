@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all paste_versions "1.12 2.4.3 3.3.5";
 
 smsg SMSG_UPDATE_LAST_INSTANCE = 0x0320 {
     Map map;
