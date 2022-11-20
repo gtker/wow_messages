@@ -1,7 +1,15 @@
-#tag_all versions "1.12";
+smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
+    Guid target;
+    Spell spell;
+} {
+    versions = "1.12";
+}
 
 smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
-    Guid target_guid;
+    Guid caster;
+    Guid target;
     Spell spell;
+} {
+    versions = "2.4.3 3";
 }
 

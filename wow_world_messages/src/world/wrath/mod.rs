@@ -1212,6 +1212,8 @@ pub use crate::shared::smsg_spell_failed_other_vanilla_tbc_wrath::SMSG_SPELL_FAI
 
 pub use crate::shared::smsg_spelldispellog_tbc_wrath::SMSG_SPELLDISPELLOG;
 
+pub use crate::shared::smsg_spellinstakilllog_tbc_wrath::SMSG_SPELLINSTAKILLLOG;
+
 pub use crate::shared::smsg_spelllogmiss_vanilla_tbc_wrath::SMSG_SPELLLOGMISS;
 
 pub use crate::shared::smsg_spellordamage_immune_vanilla_tbc_wrath::SMSG_SPELLORDAMAGE_IMMUNE;

@@ -3,15 +3,15 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellinstakilllog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellinstakilllog.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spellinstakilllog.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spellinstakilllog.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELLINSTAKILLLOG = 0x032F {
-///     Guid target_guid;
+///     Guid target;
 ///     u32 spell;
 /// }
 /// ```
 pub struct SMSG_SPELLINSTAKILLLOG {
-    pub target_guid: Guid,
+    pub target: Guid,
     pub spell: u32,
 }
 
@@ -23,8 +23,8 @@ impl crate::Message for SMSG_SPELLINSTAKILLLOG {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -36,14 +36,14 @@ impl crate::Message for SMSG_SPELLINSTAKILLLOG {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032F, size: body_size as u32 });
         }
 
-        // target_guid: Guid
-        let target_guid = Guid::read(r)?;
+        // target: Guid
+        let target = Guid::read(r)?;
 
         // spell: u32
         let spell = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            target_guid,
+            target,
             spell,
         })
     }
