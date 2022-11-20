@@ -1094,6 +1094,8 @@ pub use crate::shared::smsg_initialize_factions_vanilla_tbc::SMSG_INITIALIZE_FAC
 
 pub use crate::shared::smsg_instance_save_created_vanilla_tbc_wrath::SMSG_INSTANCE_SAVE_CREATED;
 
+pub use crate::shared::smsg_invalidate_player_vanilla_tbc_wrath::SMSG_INVALIDATE_PLAYER;
+
 pub use crate::shared::smsg_item_cooldown_vanilla_tbc_wrath::SMSG_ITEM_COOLDOWN;
 
 pub use crate::shared::smsg_item_enchant_time_update_vanilla_tbc_wrath::SMSG_ITEM_ENCHANT_TIME_UPDATE;
@@ -1468,8 +1470,6 @@ pub(crate) mod smsg_instance_reset;
 pub use smsg_instance_reset::*;
 pub(crate) mod smsg_instance_reset_failed;
 pub use smsg_instance_reset_failed::*;
-pub(crate) mod smsg_invalidate_player;
-pub use smsg_invalidate_player::*;
 pub(crate) mod smsg_inventory_change_failure;
 pub use smsg_inventory_change_failure::*;
 pub(crate) mod smsg_item_name_query_response;
