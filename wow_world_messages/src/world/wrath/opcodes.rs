@@ -311,6 +311,7 @@ use crate::world::wrath::CMSG_ACTIVATETAXIEXPRESS;
 use crate::world::wrath::CMSG_SET_FACTION_INACTIVE;
 use crate::world::wrath::CMSG_SET_WATCHED_FACTION;
 use crate::world::wrath::CMSG_RESET_INSTANCES;
+use crate::world::wrath::MSG_RAID_TARGET_UPDATE_Client;
 use crate::world::wrath::MSG_RAID_READY_CHECK_Client;
 use crate::world::wrath::CMSG_GMSURVEY_SUBMIT;
 use crate::world::wrath::CMSG_MOVE_SET_FLY;
@@ -627,6 +628,7 @@ pub enum ClientOpcodeMessage {
     CMSG_SET_FACTION_INACTIVE(CMSG_SET_FACTION_INACTIVE),
     CMSG_SET_WATCHED_FACTION(CMSG_SET_WATCHED_FACTION),
     CMSG_RESET_INSTANCES(CMSG_RESET_INSTANCES),
+    MSG_RAID_TARGET_UPDATE(MSG_RAID_TARGET_UPDATE_Client),
     MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Client),
     CMSG_GMSURVEY_SUBMIT(CMSG_GMSURVEY_SUBMIT),
     CMSG_MOVE_SET_FLY(CMSG_MOVE_SET_FLY),
@@ -945,6 +947,7 @@ impl ClientOpcodeMessage {
             0x0317 => Ok(Self::CMSG_SET_FACTION_INACTIVE(<CMSG_SET_FACTION_INACTIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0317, size: body_size, io, } } else { a } })?)),
             0x0318 => Ok(Self::CMSG_SET_WATCHED_FACTION(<CMSG_SET_WATCHED_FACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0318, size: body_size, io, } } else { a } })?)),
             0x031D => Ok(Self::CMSG_RESET_INSTANCES(<CMSG_RESET_INSTANCES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031D, size: body_size, io, } } else { a } })?)),
+            0x0321 => Ok(Self::MSG_RAID_TARGET_UPDATE(<MSG_RAID_TARGET_UPDATE_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0321, size: body_size, io, } } else { a } })?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
             0x032A => Ok(Self::CMSG_GMSURVEY_SUBMIT(<CMSG_GMSURVEY_SUBMIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032A, size: body_size, io, } } else { a } })?)),
             0x0346 => Ok(Self::CMSG_MOVE_SET_FLY(<CMSG_MOVE_SET_FLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0346, size: body_size, io, } } else { a } })?)),
@@ -1331,6 +1334,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_WATCHED_FACTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_RESET_INSTANCES(c) => c.write_encrypted_client(w, e),
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_encrypted_client(w, e),
@@ -1650,6 +1654,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_WATCHED_FACTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_RESET_INSTANCES(c) => c.write_unencrypted_client(w),
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.write_unencrypted_client(w),
             Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_unencrypted_client(w),
@@ -1969,6 +1974,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_RESET_INSTANCES(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2288,6 +2294,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_RESET_INSTANCES(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2607,6 +2614,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_RESET_INSTANCES(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2926,6 +2934,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_RESET_INSTANCES(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_unencrypted_client(w).await,
@@ -3256,6 +3265,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_FACTION_INACTIVE(_) => "CMSG_SET_FACTION_INACTIVE",
             ClientOpcodeMessage::CMSG_SET_WATCHED_FACTION(_) => "CMSG_SET_WATCHED_FACTION",
             ClientOpcodeMessage::CMSG_RESET_INSTANCES(_) => "CMSG_RESET_INSTANCES",
+            ClientOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => "MSG_RAID_TARGET_UPDATE_Client",
             ClientOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Client",
             ClientOpcodeMessage::CMSG_GMSURVEY_SUBMIT(_) => "CMSG_GMSURVEY_SUBMIT",
             ClientOpcodeMessage::CMSG_MOVE_SET_FLY(_) => "CMSG_MOVE_SET_FLY",
@@ -5083,6 +5093,12 @@ impl From<CMSG_RESET_INSTANCES> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_RAID_TARGET_UPDATE_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_RAID_TARGET_UPDATE_Client) -> Self {
+        Self::MSG_RAID_TARGET_UPDATE(c)
+    }
+}
+
 impl From<MSG_RAID_READY_CHECK_Client> for ClientOpcodeMessage {
     fn from(c: MSG_RAID_READY_CHECK_Client) -> Self {
         Self::MSG_RAID_READY_CHECK(c)
@@ -5432,6 +5448,7 @@ use crate::world::wrath::SMSG_INVALIDATE_PLAYER;
 use crate::world::wrath::SMSG_INSTANCE_RESET;
 use crate::world::wrath::SMSG_INSTANCE_RESET_FAILED;
 use crate::world::wrath::SMSG_UPDATE_LAST_INSTANCE;
+use crate::world::wrath::MSG_RAID_TARGET_UPDATE_Server;
 use crate::world::wrath::MSG_RAID_READY_CHECK_Server;
 use crate::world::wrath::SMSG_PET_ACTION_SOUND;
 use crate::world::wrath::SMSG_PET_DISMISS_SOUND;
@@ -5763,6 +5780,7 @@ pub enum ServerOpcodeMessage {
     SMSG_INSTANCE_RESET(SMSG_INSTANCE_RESET),
     SMSG_INSTANCE_RESET_FAILED(SMSG_INSTANCE_RESET_FAILED),
     SMSG_UPDATE_LAST_INSTANCE(SMSG_UPDATE_LAST_INSTANCE),
+    MSG_RAID_TARGET_UPDATE(MSG_RAID_TARGET_UPDATE_Server),
     MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Server),
     SMSG_PET_ACTION_SOUND(SMSG_PET_ACTION_SOUND),
     SMSG_PET_DISMISS_SOUND(SMSG_PET_DISMISS_SOUND),
@@ -6096,6 +6114,7 @@ impl ServerOpcodeMessage {
             0x031E => Ok(Self::SMSG_INSTANCE_RESET(<SMSG_INSTANCE_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031E, size: body_size, io, } } else { a } })?)),
             0x031F => Ok(Self::SMSG_INSTANCE_RESET_FAILED(<SMSG_INSTANCE_RESET_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031F, size: body_size, io, } } else { a } })?)),
             0x0320 => Ok(Self::SMSG_UPDATE_LAST_INSTANCE(<SMSG_UPDATE_LAST_INSTANCE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0320, size: body_size, io, } } else { a } })?)),
+            0x0321 => Ok(Self::MSG_RAID_TARGET_UPDATE(<MSG_RAID_TARGET_UPDATE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0321, size: body_size, io, } } else { a } })?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
             0x0324 => Ok(Self::SMSG_PET_ACTION_SOUND(<SMSG_PET_ACTION_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0324, size: body_size, io, } } else { a } })?)),
             0x0325 => Ok(Self::SMSG_PET_DISMISS_SOUND(<SMSG_PET_DISMISS_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0325, size: body_size, io, } } else { a } })?)),
@@ -6578,6 +6597,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_INSTANCE_RESET(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INSTANCE_RESET_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_LAST_INSTANCE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_ACTION_SOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_DISMISS_SOUND(c) => c.write_encrypted_server(w, e),
@@ -6912,6 +6932,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_INSTANCE_RESET(c) => c.write_unencrypted_server(w),
             Self::SMSG_INSTANCE_RESET_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_LAST_INSTANCE(c) => c.write_unencrypted_server(w),
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.write_unencrypted_server(w),
             Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_ACTION_SOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_DISMISS_SOUND(c) => c.write_unencrypted_server(w),
@@ -7246,6 +7267,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_INSTANCE_RESET(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_RESET_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_LAST_INSTANCE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7580,6 +7602,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_INSTANCE_RESET(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_RESET_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_LAST_INSTANCE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7914,6 +7937,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_INSTANCE_RESET(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_RESET_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_LAST_INSTANCE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8248,6 +8272,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_INSTANCE_RESET(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_RESET_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_LAST_INSTANCE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.astd_write_unencrypted_server(w).await,
@@ -8584,6 +8609,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_INSTANCE_RESET(_) => "SMSG_INSTANCE_RESET",
             ServerOpcodeMessage::SMSG_INSTANCE_RESET_FAILED(_) => "SMSG_INSTANCE_RESET_FAILED",
             ServerOpcodeMessage::SMSG_UPDATE_LAST_INSTANCE(_) => "SMSG_UPDATE_LAST_INSTANCE",
+            ServerOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => "MSG_RAID_TARGET_UPDATE_Server",
             ServerOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Server",
             ServerOpcodeMessage::SMSG_PET_ACTION_SOUND(_) => "SMSG_PET_ACTION_SOUND",
             ServerOpcodeMessage::SMSG_PET_DISMISS_SOUND(_) => "SMSG_PET_DISMISS_SOUND",
@@ -10488,6 +10514,12 @@ impl From<SMSG_INSTANCE_RESET_FAILED> for ServerOpcodeMessage {
 impl From<SMSG_UPDATE_LAST_INSTANCE> for ServerOpcodeMessage {
     fn from(c: SMSG_UPDATE_LAST_INSTANCE) -> Self {
         Self::SMSG_UPDATE_LAST_INSTANCE(c)
+    }
+}
+
+impl From<MSG_RAID_TARGET_UPDATE_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_RAID_TARGET_UPDATE_Server) -> Self {
+        Self::MSG_RAID_TARGET_UPDATE(c)
     }
 }
 

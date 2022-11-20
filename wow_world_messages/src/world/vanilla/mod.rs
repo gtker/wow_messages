@@ -311,10 +311,6 @@ pub(crate) mod msg_pvp_log_data_server;
 pub use msg_pvp_log_data_server::*;
 pub(crate) mod msg_query_next_mail_time_server;
 pub use msg_query_next_mail_time_server::*;
-pub(crate) mod msg_raid_target_update_client;
-pub use msg_raid_target_update_client::*;
-pub(crate) mod msg_raid_target_update_server;
-pub use msg_raid_target_update_server::*;
 pub(crate) mod msg_save_guild_emblem_server;
 pub use msg_save_guild_emblem_server::*;
 pub(crate) mod npc_text_update;
@@ -882,6 +878,10 @@ pub use crate::shared::msg_raid_ready_check_client_vanilla_tbc_wrath::MSG_RAID_R
 
 pub use crate::shared::msg_raid_ready_check_server_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Server;
 
+pub use crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client;
+
+pub use crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server;
+
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;
 
 pub use crate::shared::msg_random_roll_server_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Server;
@@ -941,6 +941,12 @@ pub use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 pub use crate::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
 
 pub use crate::shared::raid_instance_message_vanilla_tbc::RaidInstanceMessage;
+
+pub use crate::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
+
+pub use crate::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
+
+pub use crate::shared::raid_target_update_vanilla_tbc_wrath::RaidTargetUpdate;
 
 pub use crate::shared::sell_item_result_vanilla_tbc::SellItemResult;
 
@@ -1368,12 +1374,6 @@ pub(crate) mod race;
 pub use race::*;
 pub(crate) mod raid_info;
 pub use raid_info::*;
-pub(crate) mod raid_target_index;
-pub use raid_target_index::*;
-pub(crate) mod raid_target_update;
-pub use raid_target_update::*;
-pub(crate) mod raid_target_update_type;
-pub use raid_target_update_type::*;
 pub(crate) mod roll_vote;
 pub use roll_vote::*;
 pub(crate) mod simple_spell_cast_result;

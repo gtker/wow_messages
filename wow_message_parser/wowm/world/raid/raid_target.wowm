@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 enum RaidTargetUpdateType : u8 {
     PARTIAL = 0;

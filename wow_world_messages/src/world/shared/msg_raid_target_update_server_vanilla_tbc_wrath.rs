@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::RaidTargetUpdate;
-use crate::world::vanilla::RaidTargetUpdateType;
+use crate::world::shared::raid_target_update_vanilla_tbc_wrath::RaidTargetUpdate;
+use crate::world::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -92,6 +92,12 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for MSG_RAID_TARGET_UPDATE_Server {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for MSG_RAID_TARGET_UPDATE_Server {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for MSG_RAID_TARGET_UPDATE_Server {}
 
 impl MSG_RAID_TARGET_UPDATE_Server {
     pub(crate) fn size(&self) -> usize {

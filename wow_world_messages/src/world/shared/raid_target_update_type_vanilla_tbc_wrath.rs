@@ -9,7 +9,7 @@ use std::convert::{TryFrom, TryInto};
 
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub(crate) enum RaidTargetUpdateType {
+pub enum RaidTargetUpdateType {
     Partial,
     Full,
 }

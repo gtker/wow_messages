@@ -864,6 +864,10 @@ pub use crate::shared::msg_raid_ready_check_client_vanilla_tbc_wrath::MSG_RAID_R
 
 pub use crate::shared::msg_raid_ready_check_server_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Server;
 
+pub use crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client;
+
+pub use crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server;
+
 pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Client;
 
 pub use crate::shared::msg_random_roll_server_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Server;
@@ -921,6 +925,12 @@ pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
 pub use crate::shared::quest_objective_vanilla_tbc_wrath::QuestObjective;
 
 pub use crate::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
+
+pub use crate::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
+
+pub use crate::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
+
+pub use crate::shared::raid_target_update_vanilla_tbc_wrath::RaidTargetUpdate;
 
 pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 
