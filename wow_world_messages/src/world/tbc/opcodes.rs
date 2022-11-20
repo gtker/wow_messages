@@ -5281,6 +5281,7 @@ use crate::world::tbc::SMSG_FORCE_WALK_SPEED_CHANGE;
 use crate::world::tbc::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE;
 use crate::world::tbc::SMSG_FORCE_TURN_RATE_CHANGE;
 use crate::world::tbc::SMSG_AREA_SPIRIT_HEALER_TIME;
+use crate::world::tbc::SMSG_GROUP_JOINED_BATTLEGROUND;
 use crate::world::tbc::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
 use crate::world::tbc::SMSG_BINDER_CONFIRM;
 use crate::world::tbc::SMSG_BATTLEGROUND_PLAYER_JOINED;
@@ -5592,6 +5593,7 @@ pub enum ServerOpcodeMessage {
     SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(SMSG_FORCE_SWIM_BACK_SPEED_CHANGE),
     SMSG_FORCE_TURN_RATE_CHANGE(SMSG_FORCE_TURN_RATE_CHANGE),
     SMSG_AREA_SPIRIT_HEALER_TIME(SMSG_AREA_SPIRIT_HEALER_TIME),
+    SMSG_GROUP_JOINED_BATTLEGROUND(SMSG_GROUP_JOINED_BATTLEGROUND),
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Server),
     SMSG_BINDER_CONFIRM(SMSG_BINDER_CONFIRM),
     SMSG_BATTLEGROUND_PLAYER_JOINED(SMSG_BATTLEGROUND_PLAYER_JOINED),
@@ -5905,6 +5907,7 @@ impl ServerOpcodeMessage {
             0x02DC => Ok(Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(<SMSG_FORCE_SWIM_BACK_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DC, size: body_size, io, } } else { a } })?)),
             0x02DE => Ok(Self::SMSG_FORCE_TURN_RATE_CHANGE(<SMSG_FORCE_TURN_RATE_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DE, size: body_size, io, } } else { a } })?)),
             0x02E4 => Ok(Self::SMSG_AREA_SPIRIT_HEALER_TIME(<SMSG_AREA_SPIRIT_HEALER_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E4, size: body_size, io, } } else { a } })?)),
+            0x02E8 => Ok(Self::SMSG_GROUP_JOINED_BATTLEGROUND(<SMSG_GROUP_JOINED_BATTLEGROUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E8, size: body_size, io, } } else { a } })?)),
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E9, size: body_size, io, } } else { a } })?)),
             0x02EB => Ok(Self::SMSG_BINDER_CONFIRM(<SMSG_BINDER_CONFIRM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EB, size: body_size, io, } } else { a } })?)),
             0x02EC => Ok(Self::SMSG_BATTLEGROUND_PLAYER_JOINED(<SMSG_BATTLEGROUND_PLAYER_JOINED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EC, size: body_size, io, } } else { a } })?)),
@@ -6286,6 +6289,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.write_encrypted_server(w, e),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BINDER_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_encrypted_server(w, e),
@@ -6600,6 +6604,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.write_unencrypted_server(w),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_BINDER_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.write_unencrypted_server(w),
@@ -6914,6 +6919,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7228,6 +7234,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7542,6 +7549,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7856,6 +7864,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEGROUND_PLAYER_JOINED(c) => c.astd_write_unencrypted_server(w).await,
@@ -8172,6 +8181,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(_) => "SMSG_FORCE_SWIM_BACK_SPEED_CHANGE",
             ServerOpcodeMessage::SMSG_FORCE_TURN_RATE_CHANGE(_) => "SMSG_FORCE_TURN_RATE_CHANGE",
             ServerOpcodeMessage::SMSG_AREA_SPIRIT_HEALER_TIME(_) => "SMSG_AREA_SPIRIT_HEALER_TIME",
+            ServerOpcodeMessage::SMSG_GROUP_JOINED_BATTLEGROUND(_) => "SMSG_GROUP_JOINED_BATTLEGROUND",
             ServerOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Server",
             ServerOpcodeMessage::SMSG_BINDER_CONFIRM(_) => "SMSG_BINDER_CONFIRM",
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_JOINED(_) => "SMSG_BATTLEGROUND_PLAYER_JOINED",
@@ -9846,6 +9856,12 @@ impl From<SMSG_FORCE_TURN_RATE_CHANGE> for ServerOpcodeMessage {
 impl From<SMSG_AREA_SPIRIT_HEALER_TIME> for ServerOpcodeMessage {
     fn from(c: SMSG_AREA_SPIRIT_HEALER_TIME) -> Self {
         Self::SMSG_AREA_SPIRIT_HEALER_TIME(c)
+    }
+}
+
+impl From<SMSG_GROUP_JOINED_BATTLEGROUND> for ServerOpcodeMessage {
+    fn from(c: SMSG_GROUP_JOINED_BATTLEGROUND) -> Self {
+        Self::SMSG_GROUP_JOINED_BATTLEGROUND(c)
     }
 }
 
