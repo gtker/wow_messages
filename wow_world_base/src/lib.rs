@@ -18,11 +18,17 @@
     clippy::missing_const_for_fn,
     clippy::approx_constant
 )]
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 
 pub(crate) mod errors;
+#[cfg(feature = "extended")]
+pub(crate) mod extended;
 pub(crate) mod inner;
 pub(crate) mod manual;
 pub(crate) mod util;
 
 pub use errors::*;
+#[cfg(feature = "extended")]
+pub use extended::top_level::*;
 pub use inner::*;

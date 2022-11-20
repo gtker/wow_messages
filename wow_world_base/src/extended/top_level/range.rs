@@ -1,5 +1,5 @@
-use wow_world_base::tbc::Vector2d;
-use wow_world_base::vanilla::Vector3d;
+use crate::shared::vector2d_vanilla_tbc_wrath::Vector2d;
+use crate::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
 pub fn trace_point_2d(from: Vector2d, angle: f32, distance: f32) -> (f32, f32) {
     (

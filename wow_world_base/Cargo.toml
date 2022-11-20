@@ -3,3 +3,5 @@ name = "wow_world_base"
 version = "0.1.0"
 edition = "2018"
 
+[features]
+extended = []
