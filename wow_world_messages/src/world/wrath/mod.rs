@@ -438,6 +438,8 @@ pub use crate::shared::cmsg_contact_list_tbc_wrath::CMSG_CONTACT_LIST;
 
 pub use crate::shared::cmsg_creature_query_vanilla_tbc_wrath::CMSG_CREATURE_QUERY;
 
+pub use crate::shared::cmsg_dblookup_vanilla_tbc_wrath::CMSG_DBLOOKUP;
+
 pub use crate::shared::cmsg_del_friend_vanilla_tbc_wrath::CMSG_DEL_FRIEND;
 
 pub use crate::shared::cmsg_del_ignore_vanilla_tbc_wrath::CMSG_DEL_IGNORE;

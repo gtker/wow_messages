@@ -1,6 +1,8 @@
 pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
     Some(match opcode {
         0x0001 => "CMSG_BOOTME",
+        0x0002 => "CMSG_DBLOOKUP",
+        0x0003 => "SMSG_DBLOOKUP",
         0x0008 => "CMSG_WORLD_TELEPORT",
         0x0009 => "CMSG_TELEPORT_TO_UNIT",
         0x0036 => "CMSG_CHAR_CREATE",

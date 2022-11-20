@@ -535,6 +535,7 @@ static int hf_woww_probability = -1;
 static int hf_woww_public_key = -1;
 static int hf_woww_public_note = -1;
 static int hf_woww_pvp_rank = -1;
+static int hf_woww_query = -1;
 static int hf_woww_quest_completable = -1;
 static int hf_woww_quest_failed_reason = -1;
 static int hf_woww_quest_flags = -1;

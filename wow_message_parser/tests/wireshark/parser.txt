@@ -283,6 +283,9 @@
             ptvcursor_add(ptv, hf_woww_creature, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             break;
+        case CMSG_DBLOOKUP:
+            add_cstring(ptv, &hf_woww_query);
+            break;
         case CMSG_DEL_FRIEND:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             break;

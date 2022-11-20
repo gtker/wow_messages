@@ -15,6 +15,7 @@ use crate::world::tbc::MSG_TABARDVENDOR_ACTIVATE;
 use crate::world::tbc::MSG_QUEST_PUSH_RESULT;
 use crate::world::tbc::MSG_PETITION_RENAME;
 use crate::world::tbc::CMSG_BOOTME;
+use crate::world::tbc::CMSG_DBLOOKUP;
 use crate::world::tbc::CMSG_WORLD_TELEPORT;
 use crate::world::tbc::CMSG_TELEPORT_TO_UNIT;
 use crate::world::tbc::CMSG_CHAR_CREATE;
@@ -322,6 +323,7 @@ pub enum ClientOpcodeMessage {
     MSG_QUEST_PUSH_RESULT(MSG_QUEST_PUSH_RESULT),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
     CMSG_BOOTME(CMSG_BOOTME),
+    CMSG_DBLOOKUP(CMSG_DBLOOKUP),
     CMSG_WORLD_TELEPORT(CMSG_WORLD_TELEPORT),
     CMSG_TELEPORT_TO_UNIT(CMSG_TELEPORT_TO_UNIT),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
@@ -631,6 +633,7 @@ impl ClientOpcodeMessage {
             0x0276 => Ok(Self::MSG_QUEST_PUSH_RESULT(<MSG_QUEST_PUSH_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0276, size: body_size, io, } } else { a } })?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C1, size: body_size, io, } } else { a } })?)),
             0x0001 => Ok(Self::CMSG_BOOTME(<CMSG_BOOTME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0001, size: body_size, io, } } else { a } })?)),
+            0x0002 => Ok(Self::CMSG_DBLOOKUP(<CMSG_DBLOOKUP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0002, size: body_size, io, } } else { a } })?)),
             0x0008 => Ok(Self::CMSG_WORLD_TELEPORT(<CMSG_WORLD_TELEPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0008, size: body_size, io, } } else { a } })?)),
             0x0009 => Ok(Self::CMSG_TELEPORT_TO_UNIT(<CMSG_TELEPORT_TO_UNIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0009, size: body_size, io, } } else { a } })?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0036, size: body_size, io, } } else { a } })?)),
@@ -1008,6 +1011,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BOOTME(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_DBLOOKUP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
@@ -1318,6 +1322,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_BOOTME(c) => c.write_unencrypted_client(w),
+            Self::CMSG_DBLOOKUP(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
@@ -1628,6 +1633,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BOOTME(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_DBLOOKUP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -1938,6 +1944,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BOOTME(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_DBLOOKUP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2248,6 +2255,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BOOTME(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_DBLOOKUP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2558,6 +2566,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BOOTME(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_DBLOOKUP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
@@ -2903,6 +2912,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => "MSG_QUEST_PUSH_RESULT",
             ClientOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
             ClientOpcodeMessage::CMSG_BOOTME(_) => "CMSG_BOOTME",
+            ClientOpcodeMessage::CMSG_DBLOOKUP(_) => "CMSG_DBLOOKUP",
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(_) => "CMSG_WORLD_TELEPORT",
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(_) => "CMSG_TELEPORT_TO_UNIT",
             ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
@@ -3238,6 +3248,12 @@ impl From<MSG_PETITION_RENAME> for ClientOpcodeMessage {
 impl From<CMSG_BOOTME> for ClientOpcodeMessage {
     fn from(c: CMSG_BOOTME) -> Self {
         Self::CMSG_BOOTME(c)
+    }
+}
+
+impl From<CMSG_DBLOOKUP> for ClientOpcodeMessage {
+    fn from(c: CMSG_DBLOOKUP) -> Self {
+        Self::CMSG_DBLOOKUP(c)
     }
 }
 

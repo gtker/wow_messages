@@ -3220,6 +3220,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_query,
+            { "Query", "woww.query",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_quest_completable,
             { "Quest Completable", "woww.quest.completable",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_quest_completable_strings), 0,

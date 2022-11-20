@@ -1,0 +1,7 @@
+cmsg CMSG_DBLOOKUP = 0x02 {
+    CString query;
+} {
+    description = "Executes a query directly on the world server.";
+    comment = "Not implemented on any major emulator.";
+    versions = "1 2 3";
+}
