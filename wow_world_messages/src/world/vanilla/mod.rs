@@ -1252,6 +1252,8 @@ pub use crate::shared::smsg_spell_delayed_vanilla_tbc_wrath::SMSG_SPELL_DELAYED;
 
 pub use crate::shared::smsg_spell_failed_other_vanilla_tbc_wrath::SMSG_SPELL_FAILED_OTHER;
 
+pub use crate::shared::smsg_spell_update_chain_targets_vanilla_tbc_wrath::SMSG_SPELL_UPDATE_CHAIN_TARGETS;
+
 pub use crate::shared::smsg_spellenergizelog_vanilla_tbc::SMSG_SPELLENERGIZELOG;
 
 pub use crate::shared::smsg_spelllogmiss_vanilla_tbc_wrath::SMSG_SPELLLOGMISS;
@@ -1578,8 +1580,6 @@ pub(crate) mod smsg_spell_go;
 pub use smsg_spell_go::*;
 pub(crate) mod smsg_spell_start;
 pub use smsg_spell_start::*;
-pub(crate) mod smsg_spell_update_chain_targets;
-pub use smsg_spell_update_chain_targets::*;
 pub(crate) mod smsg_spelldamageshield;
 pub use smsg_spelldamageshield::*;
 pub(crate) mod smsg_spelldispellog;
