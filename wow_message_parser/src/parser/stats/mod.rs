@@ -165,19 +165,35 @@ impl Data {
     }
 }
 
-fn get_messages_to_print(wrath: &[Data], vanilla: &[Data]) -> (Vec<Data>, &'static str) {
+fn get_messages_to_print(wrath: &[Data], tbc: &[Data]) -> (Vec<Data>, &'static str) {
     type ComparisonFunction = dyn Fn(&Data, &Data) -> bool;
     struct Option {
         f: Box<ComparisonFunction>,
         s: &'static str,
     }
 
-    fn messages_that_are_also_in_vanilla(a: &Data, v: &Data) -> bool {
+    fn cmsg_that_are_also_in_tbc(a: &Data, v: &Data) -> bool {
+        a.name == v.name && a.opcode == v.opcode && v.name.starts_with("CMSG")
+    }
+    let cmsg_that_are_also_in_tbc = Option {
+        f: Box::new(cmsg_that_are_also_in_tbc),
+        s: "CMSG that are also in TBC",
+    };
+
+    fn msg_that_are_also_in_tbc(a: &Data, v: &Data) -> bool {
+        a.name == v.name && a.opcode == v.opcode && v.name.starts_with("CMSG")
+    }
+    let msg_that_are_also_in_tbc = Option {
+        f: Box::new(msg_that_are_also_in_tbc),
+        s: "MSG that are also in TBC",
+    };
+
+    fn messages_that_are_also_in_tbc(a: &Data, v: &Data) -> bool {
         a.name == v.name && a.opcode == v.opcode
     }
-    let messages_that_are_also_in_vanilla = Option {
-        f: Box::new(messages_that_are_also_in_vanilla),
-        s: "Messages that are also in Vanilla",
+    let messages_that_are_also_in_tbc = Option {
+        f: Box::new(messages_that_are_also_in_tbc),
+        s: "Messages that are also in TBC",
     };
 
     fn cmsg_for_wrath(a: &Data, _v: &Data) -> bool {
@@ -188,10 +204,24 @@ fn get_messages_to_print(wrath: &[Data], vanilla: &[Data]) -> (Vec<Data>, &'stat
         s: "Client messages",
     };
 
-    for condition in [messages_that_are_also_in_vanilla, cmsg_for_wrath] {
+    fn msg_for_wrath(a: &Data, _v: &Data) -> bool {
+        a.message_ty() == MessageType::Cmsg
+    }
+    let msg_for_wrath = Option {
+        f: Box::new(msg_for_wrath),
+        s: "Client messages",
+    };
+
+    for condition in [
+        cmsg_that_are_also_in_tbc,
+        msg_that_are_also_in_tbc,
+        messages_that_are_also_in_tbc,
+        cmsg_for_wrath,
+        msg_for_wrath,
+    ] {
         let data = wrath
             .iter()
-            .filter(|a| vanilla.iter().any(|v| (condition.f)(a, v)))
+            .filter(|a| tbc.iter().any(|v| (condition.f)(a, v)))
             .cloned()
             .collect::<Vec<_>>();
 
@@ -204,7 +234,7 @@ fn get_messages_to_print(wrath: &[Data], vanilla: &[Data]) -> (Vec<Data>, &'stat
         if !wrath.is_empty() {
             wrath.to_vec()
         } else {
-            vanilla.to_vec()
+            tbc.to_vec()
         },
         "Messages",
     )
@@ -224,7 +254,7 @@ pub(crate) fn print_message_stats(o: &Objects) {
         (get_data_for(version, wrath_messages::DATA, o), version)
     };
 
-    let (data, description) = get_messages_to_print(&wrath.0, &vanilla.0);
+    let (data, description) = get_messages_to_print(&wrath.0, &tbc.0);
 
     if std::env::var("WOWM_ONLY_PRINT_NAME_OF_SINGLE_MESSAGE").is_ok() {
         print!(
