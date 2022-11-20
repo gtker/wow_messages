@@ -1,6 +1,6 @@
 # WeatherChangeType
 
-## Client Version 1.12
+## Client Version 1, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -21,5 +21,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `INSTANT` | 1 (0x01) |  |  |
 
 Used in:
+* [SMSG_WEATHER](smsg_weather.md)
+* [SMSG_WEATHER](smsg_weather.md)
 * [SMSG_WEATHER](smsg_weather.md)
 

@@ -1342,6 +1342,8 @@ pub use crate::shared::update_flag_vanilla_tbc::UpdateFlag;
 
 pub use crate::shared::update_type_vanilla_tbc::UpdateType;
 
+pub use crate::shared::weather_change_type_vanilla_tbc_wrath::WeatherChangeType;
+
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
 pub use wow_world_base::vanilla::Class;
@@ -1640,8 +1642,6 @@ pub(crate) mod transfer_abort_reason;
 pub use transfer_abort_reason::*;
 pub(crate) mod url_info;
 pub use url_info::*;
-pub(crate) mod weather_change_type;
-pub use weather_change_type::*;
 pub(crate) mod weather_type;
 pub use weather_type::*;
 pub(crate) mod who_player;

@@ -573,4 +573,5 @@ pub mod transport_info_vanilla_tbc;
 pub mod unit_stand_state_vanilla_tbc_wrath;
 pub mod update_flag_vanilla_tbc;
 pub mod update_type_vanilla_tbc;
+pub mod weather_change_type_vanilla_tbc_wrath;
 pub mod world_state_vanilla_tbc_wrath;

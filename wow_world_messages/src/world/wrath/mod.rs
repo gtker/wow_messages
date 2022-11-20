@@ -1288,6 +1288,8 @@ pub use crate::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailur
 
 pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 
+pub use crate::shared::weather_change_type_vanilla_tbc_wrath::WeatherChangeType;
+
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
 pub use wow_world_base::wrath::Gender;
@@ -1540,6 +1542,8 @@ pub(crate) mod smsg_update_account_data_complete;
 pub use smsg_update_account_data_complete::*;
 pub(crate) mod smsg_update_object;
 pub use smsg_update_object::*;
+pub(crate) mod smsg_weather;
+pub use smsg_weather::*;
 pub(crate) mod smsg_who;
 pub use smsg_who::*;
 pub(crate) mod smsg_world_state_ui_timer_update;
@@ -1570,6 +1574,8 @@ pub(crate) mod update_flag;
 pub use update_flag::*;
 pub(crate) mod update_type;
 pub use update_type::*;
+pub(crate) mod weather_type;
+pub use weather_type::*;
 pub(crate) mod who_player;
 pub use who_player::*;
 pub(crate) mod world_result;

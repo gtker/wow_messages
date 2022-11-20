@@ -1372,6 +1372,8 @@ pub use crate::shared::update_flag_vanilla_tbc::UpdateFlag;
 
 pub use crate::shared::update_type_vanilla_tbc::UpdateType;
 
+pub use crate::shared::weather_change_type_vanilla_tbc_wrath::WeatherChangeType;
+
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
 pub use wow_world_base::tbc::Class;
@@ -1528,6 +1530,8 @@ pub(crate) mod smsg_trigger_cinematic;
 pub use smsg_trigger_cinematic::*;
 pub(crate) mod smsg_update_object;
 pub use smsg_update_object::*;
+pub(crate) mod smsg_weather;
+pub use smsg_weather::*;
 pub(crate) mod smsg_who;
 pub use smsg_who::*;
 pub(crate) mod smsg_zone_under_attack;
@@ -1546,6 +1550,8 @@ pub(crate) mod trainer_spell;
 pub use trainer_spell::*;
 pub(crate) mod transfer_abort_reason;
 pub use transfer_abort_reason::*;
+pub(crate) mod weather_type;
+pub use weather_type::*;
 pub(crate) mod who_player;
 pub use who_player::*;
 pub(crate) mod world_result;

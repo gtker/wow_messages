@@ -1,15 +1,17 @@
-#tag_all versions "1.12";
-
 enum WeatherType : u32 {
     FINE = 0;
     RAIN = 1;
     SNOW = 2;
     STORM = 3;
+} {
+    versions = "1.12";
 }
 
 enum WeatherChangeType : u8 {
     SMOOTH = 0;
     INSTANT = 1;
+} {
+    versions = "1 2 3";
 }
 
 smsg SMSG_WEATHER = 0x02F4 {
@@ -18,5 +20,57 @@ smsg SMSG_WEATHER = 0x02F4 {
     /* TODO weather sound id enum? */
     u32 sound_id;
     WeatherChangeType change;
+} {
+    versions = "1.12";
 }
 
+enum WeatherType : u32 {
+    FINE              = 0;
+    LIGHT_RAIN        = 3;
+    MEDIUM_RAIN       = 4;
+    HEAVY_RAIN        = 5;
+    LIGHT_SNOW        = 6;
+    MEDIUM_SNOW       = 7;
+    HEAVY_SNOW        = 8;
+    LIGHT_SANDSTORM   = 22;
+    MEDIUM_SANDSTORM  = 41;
+    HEAVY_SANDSTORM   = 42;
+    THUNDERS          = 86;
+    BLACKRAIN         = 90;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_WEATHER = 0x02F4 {
+    WeatherType weather_type;
+    f32 grade;
+    WeatherChangeType change;
+} {
+    versions = "2.4.3";
+}
+
+enum WeatherType : u32 {
+    FINE              = 0;
+    FOG               = 1;
+    LIGHT_RAIN        = 3;
+    MEDIUM_RAIN       = 4;
+    HEAVY_RAIN        = 5;
+    LIGHT_SNOW        = 6;
+    MEDIUM_SNOW       = 7;
+    HEAVY_SNOW        = 8;
+    LIGHT_SANDSTORM   = 22;
+    MEDIUM_SANDSTORM  = 41;
+    HEAVY_SANDSTORM   = 42;
+    THUNDERS          = 86;
+    BLACKRAIN         = 90;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_WEATHER = 0x02F4 {
+    WeatherType weather_type;
+    f32 grade;
+    WeatherChangeType change;
+} {
+    versions = "3.3.5";
+}
