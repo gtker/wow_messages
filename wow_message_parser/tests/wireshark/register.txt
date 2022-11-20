@@ -2040,7 +2040,7 @@
         },
         { &hf_woww_instance_reset_failed_reason,
             { "Instance Reset Failed Reason", "woww.instance.reset.failed.reason",
-                FT_UINT8, BASE_HEX_DEC, VALS(e_instance_reset_failed_reason_strings), 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_instance_reset_failed_reason_strings), 0,
                 NULL, HFILL
             }
         },

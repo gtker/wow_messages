@@ -780,6 +780,8 @@ pub use crate::shared::guild_rights_tbc_wrath::GuildRights;
 
 pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
+pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceResetFailedReason;
+
 pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
@@ -1458,6 +1460,8 @@ pub(crate) mod smsg_guild_roster;
 pub use smsg_guild_roster::*;
 pub(crate) mod smsg_instance_reset;
 pub use smsg_instance_reset::*;
+pub(crate) mod smsg_instance_reset_failed;
+pub use smsg_instance_reset_failed::*;
 pub(crate) mod smsg_inventory_change_failure;
 pub use smsg_inventory_change_failure::*;
 pub(crate) mod smsg_item_query_single_response;

@@ -5310,6 +5310,7 @@ use crate::world::tbc::SMSG_SPLINE_MOVE_SET_WALK_MODE;
 use crate::world::tbc::SMSG_SPLINE_MOVE_ROOT;
 use crate::world::tbc::SMSG_INVALIDATE_PLAYER;
 use crate::world::tbc::SMSG_INSTANCE_RESET;
+use crate::world::tbc::SMSG_INSTANCE_RESET_FAILED;
 use crate::world::tbc::MSG_RAID_READY_CHECK_Server;
 use crate::world::tbc::SMSG_PET_ACTION_SOUND;
 use crate::world::tbc::SMSG_PET_DISMISS_SOUND;
@@ -5626,6 +5627,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPLINE_MOVE_ROOT(SMSG_SPLINE_MOVE_ROOT),
     SMSG_INVALIDATE_PLAYER(SMSG_INVALIDATE_PLAYER),
     SMSG_INSTANCE_RESET(SMSG_INSTANCE_RESET),
+    SMSG_INSTANCE_RESET_FAILED(SMSG_INSTANCE_RESET_FAILED),
     MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Server),
     SMSG_PET_ACTION_SOUND(SMSG_PET_ACTION_SOUND),
     SMSG_PET_DISMISS_SOUND(SMSG_PET_DISMISS_SOUND),
@@ -5944,6 +5946,7 @@ impl ServerOpcodeMessage {
             0x031A => Ok(Self::SMSG_SPLINE_MOVE_ROOT(<SMSG_SPLINE_MOVE_ROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031A, size: body_size, io, } } else { a } })?)),
             0x031C => Ok(Self::SMSG_INVALIDATE_PLAYER(<SMSG_INVALIDATE_PLAYER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031C, size: body_size, io, } } else { a } })?)),
             0x031E => Ok(Self::SMSG_INSTANCE_RESET(<SMSG_INSTANCE_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031E, size: body_size, io, } } else { a } })?)),
+            0x031F => Ok(Self::SMSG_INSTANCE_RESET_FAILED(<SMSG_INSTANCE_RESET_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031F, size: body_size, io, } } else { a } })?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
             0x0324 => Ok(Self::SMSG_PET_ACTION_SOUND(<SMSG_PET_ACTION_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0324, size: body_size, io, } } else { a } })?)),
             0x0325 => Ok(Self::SMSG_PET_DISMISS_SOUND(<SMSG_PET_DISMISS_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0325, size: body_size, io, } } else { a } })?)),
@@ -6330,6 +6333,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INVALIDATE_PLAYER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INSTANCE_RESET(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_INSTANCE_RESET_FAILED(c) => c.write_encrypted_server(w, e),
             Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_ACTION_SOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_DISMISS_SOUND(c) => c.write_encrypted_server(w, e),
@@ -6649,6 +6653,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.write_unencrypted_server(w),
             Self::SMSG_INVALIDATE_PLAYER(c) => c.write_unencrypted_server(w),
             Self::SMSG_INSTANCE_RESET(c) => c.write_unencrypted_server(w),
+            Self::SMSG_INSTANCE_RESET_FAILED(c) => c.write_unencrypted_server(w),
             Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_ACTION_SOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_DISMISS_SOUND(c) => c.write_unencrypted_server(w),
@@ -6968,6 +6973,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INVALIDATE_PLAYER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_RESET(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_INSTANCE_RESET_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7287,6 +7293,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INVALIDATE_PLAYER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_RESET(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_INSTANCE_RESET_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7606,6 +7613,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INVALIDATE_PLAYER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_RESET(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_INSTANCE_RESET_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -7925,6 +7933,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INVALIDATE_PLAYER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_RESET(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_INSTANCE_RESET_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_ACTION_SOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_DISMISS_SOUND(c) => c.astd_write_unencrypted_server(w).await,
@@ -8246,6 +8255,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_ROOT(_) => "SMSG_SPLINE_MOVE_ROOT",
             ServerOpcodeMessage::SMSG_INVALIDATE_PLAYER(_) => "SMSG_INVALIDATE_PLAYER",
             ServerOpcodeMessage::SMSG_INSTANCE_RESET(_) => "SMSG_INSTANCE_RESET",
+            ServerOpcodeMessage::SMSG_INSTANCE_RESET_FAILED(_) => "SMSG_INSTANCE_RESET_FAILED",
             ServerOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Server",
             ServerOpcodeMessage::SMSG_PET_ACTION_SOUND(_) => "SMSG_PET_ACTION_SOUND",
             ServerOpcodeMessage::SMSG_PET_DISMISS_SOUND(_) => "SMSG_PET_DISMISS_SOUND",
@@ -10070,6 +10080,12 @@ impl From<SMSG_INVALIDATE_PLAYER> for ServerOpcodeMessage {
 impl From<SMSG_INSTANCE_RESET> for ServerOpcodeMessage {
     fn from(c: SMSG_INSTANCE_RESET) -> Self {
         Self::SMSG_INSTANCE_RESET(c)
+    }
+}
+
+impl From<SMSG_INSTANCE_RESET_FAILED> for ServerOpcodeMessage {
+    fn from(c: SMSG_INSTANCE_RESET_FAILED) -> Self {
+        Self::SMSG_INSTANCE_RESET_FAILED(c)
     }
 }
 
