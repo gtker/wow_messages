@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm:23`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_items.wowm#L23):
 /// ```text
 /// cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
-///     Guid auctioneer_guid;
+///     Guid auctioneer;
 ///     u32 list_start_item;
 ///     CString searched_name;
 ///     u8 minimum_level;
@@ -24,7 +24,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_AUCTION_LIST_ITEMS {
-    pub auctioneer_guid: Guid,
+    pub auctioneer: Guid,
     pub list_start_item: u32,
     pub searched_name: String,
     pub minimum_level: u8,
@@ -47,8 +47,8 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // auctioneer_guid: Guid
-        w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
+        // auctioneer: Guid
+        w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 
         // list_start_item: u32
         w.write_all(&self.list_start_item.to_le_bytes())?;
@@ -100,8 +100,8 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0258, size: body_size as u32 });
         }
 
-        // auctioneer_guid: Guid
-        let auctioneer_guid = Guid::read(r)?;
+        // auctioneer: Guid
+        let auctioneer = Guid::read(r)?;
 
         // list_start_item: u32
         let list_start_item = crate::util::read_u32_le(r)?;
@@ -144,7 +144,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         }
 
         Ok(Self {
-            auctioneer_guid,
+            auctioneer,
             list_start_item,
             searched_name,
             minimum_level,
@@ -165,7 +165,7 @@ impl crate::world::wrath::ClientMessage for CMSG_AUCTION_LIST_ITEMS {}
 
 impl CMSG_AUCTION_LIST_ITEMS {
     pub(crate) fn size(&self) -> usize {
-        8 // auctioneer_guid: Guid
+        8 // auctioneer: Guid
         + 4 // list_start_item: u32
         + self.searched_name.len() + 1 // searched_name: CString
         + 1 // minimum_level: u8

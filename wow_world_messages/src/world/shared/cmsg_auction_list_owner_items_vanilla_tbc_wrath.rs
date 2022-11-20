@@ -6,12 +6,12 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_owner_items.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/cmsg/cmsg_auction_list_owner_items.wowm#L3):
 /// ```text
 /// cmsg CMSG_AUCTION_LIST_OWNER_ITEMS = 0x0259 {
-///     Guid auctioneer_guid;
+///     Guid auctioneer;
 ///     u32 list_from;
 /// }
 /// ```
 pub struct CMSG_AUCTION_LIST_OWNER_ITEMS {
-    pub auctioneer_guid: Guid,
+    pub auctioneer: Guid,
     pub list_from: u32,
 }
 
@@ -23,8 +23,8 @@ impl crate::Message for CMSG_AUCTION_LIST_OWNER_ITEMS {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // auctioneer_guid: Guid
-        w.write_all(&self.auctioneer_guid.guid().to_le_bytes())?;
+        // auctioneer: Guid
+        w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 
         // list_from: u32
         w.write_all(&self.list_from.to_le_bytes())?;
@@ -36,14 +36,14 @@ impl crate::Message for CMSG_AUCTION_LIST_OWNER_ITEMS {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0259, size: body_size as u32 });
         }
 
-        // auctioneer_guid: Guid
-        let auctioneer_guid = Guid::read(r)?;
+        // auctioneer: Guid
+        let auctioneer = Guid::read(r)?;
 
         // list_from: u32
         let list_from = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            auctioneer_guid,
+            auctioneer,
             list_from,
         })
     }

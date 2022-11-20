@@ -6,11 +6,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_summon_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_summon_response.wowm#L1):
 /// ```text
 /// cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
-///     Guid summoner_guid;
+///     Guid summoner;
 /// }
 /// ```
 pub struct CMSG_SUMMON_RESPONSE {
-    pub summoner_guid: Guid,
+    pub summoner: Guid,
 }
 
 impl crate::Message for CMSG_SUMMON_RESPONSE {
@@ -21,8 +21,8 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // summoner_guid: Guid
-        w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
+        // summoner: Guid
+        w.write_all(&self.summoner.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -31,11 +31,11 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AC, size: body_size as u32 });
         }
 
-        // summoner_guid: Guid
-        let summoner_guid = Guid::read(r)?;
+        // summoner: Guid
+        let summoner = Guid::read(r)?;
 
         Ok(Self {
-            summoner_guid,
+            summoner,
         })
     }
 

@@ -6,13 +6,13 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackstart.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackstart.wowm#L3):
 /// ```text
 /// smsg SMSG_ATTACKSTART = 0x0143 {
-///     Guid attacker_guid;
-///     Guid victim_guid;
+///     Guid attacker;
+///     Guid victim;
 /// }
 /// ```
 pub struct SMSG_ATTACKSTART {
-    pub attacker_guid: Guid,
-    pub victim_guid: Guid,
+    pub attacker: Guid,
+    pub victim: Guid,
 }
 
 impl crate::Message for SMSG_ATTACKSTART {
@@ -23,11 +23,11 @@ impl crate::Message for SMSG_ATTACKSTART {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // attacker_guid: Guid
-        w.write_all(&self.attacker_guid.guid().to_le_bytes())?;
+        // attacker: Guid
+        w.write_all(&self.attacker.guid().to_le_bytes())?;
 
-        // victim_guid: Guid
-        w.write_all(&self.victim_guid.guid().to_le_bytes())?;
+        // victim: Guid
+        w.write_all(&self.victim.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -36,15 +36,15 @@ impl crate::Message for SMSG_ATTACKSTART {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0143, size: body_size as u32 });
         }
 
-        // attacker_guid: Guid
-        let attacker_guid = Guid::read(r)?;
+        // attacker: Guid
+        let attacker = Guid::read(r)?;
 
-        // victim_guid: Guid
-        let victim_guid = Guid::read(r)?;
+        // victim: Guid
+        let victim = Guid::read(r)?;
 
         Ok(Self {
-            attacker_guid,
-            victim_guid,
+            attacker,
+            victim,
         })
     }
 

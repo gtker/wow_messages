@@ -1,5 +1,5 @@
 cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
-    Guid auctioneer_guid;
+    Guid auctioneer;
     u32 list_start_item;
     CString searched_name;
     u8 minimum_level;
@@ -21,7 +21,7 @@ struct AuctionSort {
 }
 
 cmsg CMSG_AUCTION_LIST_ITEMS = 0x0258 {
-    Guid auctioneer_guid;
+    Guid auctioneer;
     u32 list_start_item;
     CString searched_name;
     u8 minimum_level;

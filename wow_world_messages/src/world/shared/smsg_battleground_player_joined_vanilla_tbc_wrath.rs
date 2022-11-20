@@ -6,11 +6,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battleground_player_joined.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battleground_player_joined.wowm#L3):
 /// ```text
 /// smsg SMSG_BATTLEGROUND_PLAYER_JOINED = 0x02EC {
-///     Guid player_guid;
+///     Guid player;
 /// }
 /// ```
 pub struct SMSG_BATTLEGROUND_PLAYER_JOINED {
-    pub player_guid: Guid,
+    pub player: Guid,
 }
 
 impl crate::Message for SMSG_BATTLEGROUND_PLAYER_JOINED {
@@ -21,8 +21,8 @@ impl crate::Message for SMSG_BATTLEGROUND_PLAYER_JOINED {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // player_guid: Guid
-        w.write_all(&self.player_guid.guid().to_le_bytes())?;
+        // player: Guid
+        w.write_all(&self.player.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -31,11 +31,11 @@ impl crate::Message for SMSG_BATTLEGROUND_PLAYER_JOINED {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EC, size: body_size as u32 });
         }
 
-        // player_guid: Guid
-        let player_guid = Guid::read(r)?;
+        // player: Guid
+        let player = Guid::read(r)?;
 
         Ok(Self {
-            player_guid,
+            player,
         })
     }
 

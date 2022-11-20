@@ -6,21 +6,21 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_buy_item_in_slot.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_buy_item_in_slot.wowm#L11):
 /// ```text
 /// cmsg CMSG_BUY_ITEM_IN_SLOT = 0x01A3 {
-///     Guid vendor_guid;
+///     Guid vendor;
 ///     u32 item;
 ///     u32 vendor_slot;
-///     Guid bag_guid;
+///     Guid bag;
 ///     u8 bag_slot;
 ///     u8 amount;
 /// }
 /// ```
 pub struct CMSG_BUY_ITEM_IN_SLOT {
-    pub vendor_guid: Guid,
+    pub vendor: Guid,
     pub item: u32,
     /// arcemu: VLack: 3.1.2 This is the slot's number on the vendor's panel, starts from 1
     ///
     pub vendor_slot: u32,
-    pub bag_guid: Guid,
+    pub bag: Guid,
     pub bag_slot: u8,
     pub amount: u8,
 }
@@ -33,8 +33,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // vendor_guid: Guid
-        w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
+        // vendor: Guid
+        w.write_all(&self.vendor.guid().to_le_bytes())?;
 
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
@@ -42,8 +42,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         // vendor_slot: u32
         w.write_all(&self.vendor_slot.to_le_bytes())?;
 
-        // bag_guid: Guid
-        w.write_all(&self.bag_guid.guid().to_le_bytes())?;
+        // bag: Guid
+        w.write_all(&self.bag.guid().to_le_bytes())?;
 
         // bag_slot: u8
         w.write_all(&self.bag_slot.to_le_bytes())?;
@@ -58,8 +58,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A3, size: body_size as u32 });
         }
 
-        // vendor_guid: Guid
-        let vendor_guid = Guid::read(r)?;
+        // vendor: Guid
+        let vendor = Guid::read(r)?;
 
         // item: u32
         let item = crate::util::read_u32_le(r)?;
@@ -67,8 +67,8 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         // vendor_slot: u32
         let vendor_slot = crate::util::read_u32_le(r)?;
 
-        // bag_guid: Guid
-        let bag_guid = Guid::read(r)?;
+        // bag: Guid
+        let bag = Guid::read(r)?;
 
         // bag_slot: u8
         let bag_slot = crate::util::read_u8_le(r)?;
@@ -77,10 +77,10 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         let amount = crate::util::read_u8_le(r)?;
 
         Ok(Self {
-            vendor_guid,
+            vendor,
             item,
             vendor_slot,
-            bag_guid,
+            bag,
             bag_slot,
             amount,
         })

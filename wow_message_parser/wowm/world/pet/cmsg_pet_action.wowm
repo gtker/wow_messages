@@ -1,9 +1,9 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_PET_ACTION = 0x0175 {
-    Guid pet_guid;
+    Guid pet;
     /* data? */
     u32 data;
-    Guid target_guid;
+    Guid target;
 }
 

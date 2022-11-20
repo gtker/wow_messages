@@ -2,6 +2,6 @@
 
 smsg SMSG_CLEAR_COOLDOWN = 0x01DE {
     Spell id;
-    Guid target_guid;
+    Guid target;
 }
 

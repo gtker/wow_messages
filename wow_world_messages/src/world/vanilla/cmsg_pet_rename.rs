@@ -6,12 +6,12 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_rename.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_rename.wowm#L1):
 /// ```text
 /// cmsg CMSG_PET_RENAME = 0x0177 {
-///     Guid pet_guid;
+///     Guid pet;
 ///     CString name;
 /// }
 /// ```
 pub struct CMSG_PET_RENAME {
-    pub pet_guid: Guid,
+    pub pet: Guid,
     pub name: String,
 }
 
@@ -24,8 +24,8 @@ impl crate::Message for CMSG_PET_RENAME {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // pet_guid: Guid
-        w.write_all(&self.pet_guid.guid().to_le_bytes())?;
+        // pet: Guid
+        w.write_all(&self.pet.guid().to_le_bytes())?;
 
         // name: CString
         // TODO: Guard against strings that are already null-terminated
@@ -42,15 +42,15 @@ impl crate::Message for CMSG_PET_RENAME {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0177, size: body_size as u32 });
         }
 
-        // pet_guid: Guid
-        let pet_guid = Guid::read(r)?;
+        // pet: Guid
+        let pet = Guid::read(r)?;
 
         // name: CString
         let name = crate::util::read_c_string_to_vec(r)?;
         let name = String::from_utf8(name)?;
 
         Ok(Self {
-            pet_guid,
+            pet,
             name,
         })
     }
@@ -61,7 +61,7 @@ impl crate::world::vanilla::ClientMessage for CMSG_PET_RENAME {}
 
 impl CMSG_PET_RENAME {
     pub(crate) fn size(&self) -> usize {
-        8 // pet_guid: Guid
+        8 // pet: Guid
         + self.name.len() + 1 // name: CString
     }
 }

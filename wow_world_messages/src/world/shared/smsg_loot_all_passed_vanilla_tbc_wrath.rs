@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_all_passed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_all_passed.wowm#L3):
 /// ```text
 /// smsg SMSG_LOOT_ALL_PASSED = 0x029E {
-///     Guid looted_target_guid;
+///     Guid looted_target;
 ///     u32 loot_slot;
 ///     u32 item;
 ///     u32 item_random_property_id;
@@ -14,7 +14,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_LOOT_ALL_PASSED {
-    pub looted_target_guid: Guid,
+    pub looted_target: Guid,
     pub loot_slot: u32,
     pub item: u32,
     pub item_random_property_id: u32,
@@ -31,8 +31,8 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // looted_target_guid: Guid
-        w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
+        // looted_target: Guid
+        w.write_all(&self.looted_target.guid().to_le_bytes())?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -53,8 +53,8 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029E, size: body_size as u32 });
         }
 
-        // looted_target_guid: Guid
-        let looted_target_guid = Guid::read(r)?;
+        // looted_target: Guid
+        let looted_target = Guid::read(r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
@@ -69,7 +69,7 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
         let item_random_suffix_id = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            looted_target_guid,
+            looted_target,
             loot_slot,
             item,
             item_random_property_id,

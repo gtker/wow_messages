@@ -1,5 +1,5 @@
 smsg SMSG_LOOT_ROLL = 0x02A2 {
-    Guid creature_guid;
+    Guid creature;
     u32 loot_slot;
     Guid player;
     Item item;
@@ -17,7 +17,7 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
 }
 
 smsg SMSG_LOOT_ROLL = 0x02A2 {
-    Guid creature_guid;
+    Guid creature;
     u32 loot_slot;
     Guid player;
     Item item;

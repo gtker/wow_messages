@@ -1,6 +1,6 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_PET_ABANDON = 0x0176 {
-    Guid pet_guid;
+    Guid pet;
 }
 

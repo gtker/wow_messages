@@ -1,14 +1,14 @@
 cmsg CMSG_OFFER_PETITION = 0x01C3 {
-    Guid petition_guid;
-    Guid target_guid;
+    Guid petition;
+    Guid target;
 } {
     versions = "1.12";
 }
 
 cmsg CMSG_OFFER_PETITION = 0x01C3 {
     u32 unknown0;
-    Guid petition_guid;
-    Guid target_guid;
+    Guid petition;
+    Guid target;
 } {
     versions = "2.4.3 3";
 }

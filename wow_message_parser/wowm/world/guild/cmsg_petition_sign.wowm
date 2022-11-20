@@ -1,7 +1,7 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_PETITION_SIGN = 0x01C0 {
-    Guid petition_guid;
+    Guid petition;
     u8 unknown1;
 }
 

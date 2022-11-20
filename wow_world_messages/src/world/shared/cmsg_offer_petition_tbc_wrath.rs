@@ -7,14 +7,14 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_OFFER_PETITION = 0x01C3 {
 ///     u32 unknown0;
-///     Guid petition_guid;
-///     Guid target_guid;
+///     Guid petition;
+///     Guid target;
 /// }
 /// ```
 pub struct CMSG_OFFER_PETITION {
     pub unknown0: u32,
-    pub petition_guid: Guid,
-    pub target_guid: Guid,
+    pub petition: Guid,
+    pub target: Guid,
 }
 
 impl crate::Message for CMSG_OFFER_PETITION {
@@ -28,11 +28,11 @@ impl crate::Message for CMSG_OFFER_PETITION {
         // unknown0: u32
         w.write_all(&self.unknown0.to_le_bytes())?;
 
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
+        // petition: Guid
+        w.write_all(&self.petition.guid().to_le_bytes())?;
 
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -44,16 +44,16 @@ impl crate::Message for CMSG_OFFER_PETITION {
         // unknown0: u32
         let unknown0 = crate::util::read_u32_le(r)?;
 
-        // petition_guid: Guid
-        let petition_guid = Guid::read(r)?;
+        // petition: Guid
+        let petition = Guid::read(r)?;
 
-        // target_guid: Guid
-        let target_guid = Guid::read(r)?;
+        // target: Guid
+        let target = Guid::read(r)?;
 
         Ok(Self {
             unknown0,
-            petition_guid,
-            target_guid,
+            petition,
+            target,
         })
     }
 

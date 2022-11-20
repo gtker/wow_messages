@@ -7,13 +7,13 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_summon_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_summon_request.wowm#L3):
 /// ```text
 /// smsg SMSG_SUMMON_REQUEST = 0x02AB {
-///     Guid summoner_guid;
+///     Guid summoner;
 ///     Area area;
 ///     u32 auto_decline_time_in_msecs;
 /// }
 /// ```
 pub struct SMSG_SUMMON_REQUEST {
-    pub summoner_guid: Guid,
+    pub summoner: Guid,
     pub area: Area,
     pub auto_decline_time_in_msecs: u32,
 }
@@ -26,8 +26,8 @@ impl crate::Message for SMSG_SUMMON_REQUEST {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // summoner_guid: Guid
-        w.write_all(&self.summoner_guid.guid().to_le_bytes())?;
+        // summoner: Guid
+        w.write_all(&self.summoner.guid().to_le_bytes())?;
 
         // area: Area
         w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
@@ -42,8 +42,8 @@ impl crate::Message for SMSG_SUMMON_REQUEST {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AB, size: body_size as u32 });
         }
 
-        // summoner_guid: Guid
-        let summoner_guid = Guid::read(r)?;
+        // summoner: Guid
+        let summoner = Guid::read(r)?;
 
         // area: Area
         let area: Area = crate::util::read_u32_le(r)?.try_into()?;
@@ -52,7 +52,7 @@ impl crate::Message for SMSG_SUMMON_REQUEST {
         let auto_decline_time_in_msecs = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            summoner_guid,
+            summoner,
             area,
             auto_decline_time_in_msecs,
         })

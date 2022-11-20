@@ -6,14 +6,14 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_dispel_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_dispel_failed.wowm#L3):
 /// ```text
 /// smsg SMSG_DISPEL_FAILED = 0x0262 {
-///     Guid caster_guid;
-///     Guid target_guid;
+///     Guid caster;
+///     Guid target;
 ///     u32[-] spells;
 /// }
 /// ```
 pub struct SMSG_DISPEL_FAILED {
-    pub caster_guid: Guid,
-    pub target_guid: Guid,
+    pub caster: Guid,
+    pub target: Guid,
     pub spells: Vec<u32>,
 }
 
@@ -26,11 +26,11 @@ impl crate::Message for SMSG_DISPEL_FAILED {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
+        // caster: Guid
+        w.write_all(&self.caster.guid().to_le_bytes())?;
 
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         // spells: u32[-]
         for i in self.spells.iter() {
@@ -45,16 +45,16 @@ impl crate::Message for SMSG_DISPEL_FAILED {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0262, size: body_size as u32 });
         }
 
-        // caster_guid: Guid
-        let caster_guid = Guid::read(r)?;
+        // caster: Guid
+        let caster = Guid::read(r)?;
 
-        // target_guid: Guid
-        let target_guid = Guid::read(r)?;
+        // target: Guid
+        let target = Guid::read(r)?;
 
         // spells: u32[-]
         let mut current_size = {
-            8 // caster_guid: Guid
-            + 8 // target_guid: Guid
+            8 // caster: Guid
+            + 8 // target: Guid
         };
         let mut spells = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
@@ -63,8 +63,8 @@ impl crate::Message for SMSG_DISPEL_FAILED {
         }
 
         Ok(Self {
-            caster_guid,
-            target_guid,
+            caster,
+            target,
             spells,
         })
     }
@@ -81,8 +81,8 @@ impl crate::world::wrath::ServerMessage for SMSG_DISPEL_FAILED {}
 
 impl SMSG_DISPEL_FAILED {
     pub(crate) fn size(&self) -> usize {
-        8 // caster_guid: Guid
-        + 8 // target_guid: Guid
+        8 // caster: Guid
+        + 8 // target: Guid
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[-]
     }
 }

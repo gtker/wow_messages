@@ -1,11 +1,11 @@
 cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
-    Guid summoner_guid;
+    Guid summoner;
 } {
     versions = "1";
 }
 
 cmsg CMSG_SUMMON_RESPONSE = 0x02AC {
-    Guid summoner_guid;
+    Guid summoner;
     Bool agree;
 } {
     versions = "2.4.3 3";

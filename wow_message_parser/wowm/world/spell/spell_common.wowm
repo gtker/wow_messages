@@ -29,7 +29,7 @@ enum SpellMissInfo : u32 {
 }
 
 struct SpellMiss {
-    Guid target_guid;
+    Guid target;
     SpellMissInfo miss_info;
 }
 

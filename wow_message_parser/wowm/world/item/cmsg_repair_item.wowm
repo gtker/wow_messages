@@ -1,13 +1,13 @@
 cmsg CMSG_REPAIR_ITEM = 0x02A8 {
-    Guid npc_guid;
-    Guid item_guid;
+    Guid npc;
+    Guid item;
 } {
     versions = "1";
 }
 
 cmsg CMSG_REPAIR_ITEM = 0x02A8 {
-    Guid npc_guid;
-    Guid item_guid;
+    Guid npc;
+    Guid item;
     Bool from_guild_bank;
 } {
     versions = "2.3.2 2.3.3 2.3.4 2.4 3";

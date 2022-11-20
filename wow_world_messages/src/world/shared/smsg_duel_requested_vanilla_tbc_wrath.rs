@@ -6,13 +6,13 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/duel/smsg_duel_requested.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/duel/smsg_duel_requested.wowm#L3):
 /// ```text
 /// smsg SMSG_DUEL_REQUESTED = 0x0167 {
-///     Guid initiator_guid;
-///     Guid target_guid;
+///     Guid initiator;
+///     Guid target;
 /// }
 /// ```
 pub struct SMSG_DUEL_REQUESTED {
-    pub initiator_guid: Guid,
-    pub target_guid: Guid,
+    pub initiator: Guid,
+    pub target: Guid,
 }
 
 impl crate::Message for SMSG_DUEL_REQUESTED {
@@ -23,11 +23,11 @@ impl crate::Message for SMSG_DUEL_REQUESTED {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // initiator_guid: Guid
-        w.write_all(&self.initiator_guid.guid().to_le_bytes())?;
+        // initiator: Guid
+        w.write_all(&self.initiator.guid().to_le_bytes())?;
 
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -36,15 +36,15 @@ impl crate::Message for SMSG_DUEL_REQUESTED {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0167, size: body_size as u32 });
         }
 
-        // initiator_guid: Guid
-        let initiator_guid = Guid::read(r)?;
+        // initiator: Guid
+        let initiator = Guid::read(r)?;
 
-        // target_guid: Guid
-        let target_guid = Guid::read(r)?;
+        // target: Guid
+        let target = Guid::read(r)?;
 
         Ok(Self {
-            initiator_guid,
-            target_guid,
+            initiator,
+            target,
         })
     }
 

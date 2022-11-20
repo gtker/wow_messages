@@ -7,25 +7,25 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll_won.wowm#L1):
 /// ```text
 /// smsg SMSG_LOOT_ROLL_WON = 0x029F {
-///     Guid looted_target_guid;
+///     Guid looted_target;
 ///     u32 loot_slot;
 ///     u32 item;
 ///     u32 item_random_suffix;
 ///     u32 item_random_property_id;
-///     Guid winning_player_guid;
+///     Guid winning_player;
 ///     u8 winning_roll;
 ///     RollVote vote;
 /// }
 /// ```
 pub struct SMSG_LOOT_ROLL_WON {
-    pub looted_target_guid: Guid,
+    pub looted_target: Guid,
     pub loot_slot: u32,
     pub item: u32,
     /// vmangos/mangoszero: not used ?
     ///
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
-    pub winning_player_guid: Guid,
+    pub winning_player: Guid,
     /// rollnumber related to SMSG_LOOT_ROLL
     ///
     pub winning_roll: u8,
@@ -42,8 +42,8 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // looted_target_guid: Guid
-        w.write_all(&self.looted_target_guid.guid().to_le_bytes())?;
+        // looted_target: Guid
+        w.write_all(&self.looted_target.guid().to_le_bytes())?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -57,8 +57,8 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         // item_random_property_id: u32
         w.write_all(&self.item_random_property_id.to_le_bytes())?;
 
-        // winning_player_guid: Guid
-        w.write_all(&self.winning_player_guid.guid().to_le_bytes())?;
+        // winning_player: Guid
+        w.write_all(&self.winning_player.guid().to_le_bytes())?;
 
         // winning_roll: u8
         w.write_all(&self.winning_roll.to_le_bytes())?;
@@ -73,8 +73,8 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029F, size: body_size as u32 });
         }
 
-        // looted_target_guid: Guid
-        let looted_target_guid = Guid::read(r)?;
+        // looted_target: Guid
+        let looted_target = Guid::read(r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
@@ -88,8 +88,8 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         // item_random_property_id: u32
         let item_random_property_id = crate::util::read_u32_le(r)?;
 
-        // winning_player_guid: Guid
-        let winning_player_guid = Guid::read(r)?;
+        // winning_player: Guid
+        let winning_player = Guid::read(r)?;
 
         // winning_roll: u8
         let winning_roll = crate::util::read_u8_le(r)?;
@@ -98,12 +98,12 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         let vote: RollVote = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
-            looted_target_guid,
+            looted_target,
             loot_slot,
             item,
             item_random_suffix,
             item_random_property_id,
-            winning_player_guid,
+            winning_player,
             winning_roll,
             vote,
         })

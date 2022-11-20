@@ -1,6 +1,6 @@
 smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
-    Guid victim_guid;
-    Guid caster_guid;
+    Guid victim;
+    Guid caster;
     u32 damage;
     (u32)SpellSchool school;
 } {
@@ -8,8 +8,8 @@ smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
 }
 
 smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
-    Guid victim_guid;
-    Guid caster_guid;
+    Guid victim;
+    Guid caster;
     Spell spell;
     u32 damage;
     (u32)SpellSchool school;
@@ -18,8 +18,8 @@ smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
 }
 
 smsg SMSG_SPELLDAMAGESHIELD = 0x024F {
-    Guid victim_guid;
-    Guid caster_guid;
+    Guid victim;
+    Guid caster;
     Spell spell;
     u32 damage;
     u32 overkill;

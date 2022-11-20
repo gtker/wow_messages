@@ -1,5 +1,5 @@
 smsg SMSG_LOOT_START_ROLL = 0x02A1 {
-    Guid creature_guid;
+    Guid creature;
     u32 loot_slot;
     Item item;
     u32 item_random_suffix {
@@ -21,7 +21,7 @@ flag RollFlags : u8 {
 }
 
 smsg SMSG_LOOT_START_ROLL = 0x02A1 {
-    Guid creature_guid;
+    Guid creature;
     Map map;
     u32 loot_slot;
     Item item;

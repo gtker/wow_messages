@@ -502,12 +502,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_attacker_guid,
-            { "Attacker Guid", "woww.attacker.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_auction_duration_in_minutes,
             { "Auction Duration In Minutes", "woww.auction.duration.in.minutes",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -552,12 +546,6 @@
         },
         { &hf_woww_auctioneer,
             { "Auctioneer", "woww.auctioneer",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_auctioneer_guid,
-            { "Auctioneer Guid", "woww.auctioneer.guid",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -624,19 +612,13 @@
         },
         { &hf_woww_bag,
             { "Bag", "woww.bag",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
         { &hf_woww_bag_family,
             { "Bag Family", "woww.bag.family",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_bag_guid,
-            { "Bag Guid", "woww.bag.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -864,12 +846,6 @@
         },
         { &hf_woww_caster,
             { "Caster", "woww.caster",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_caster_guid,
-            { "Caster Guid", "woww.caster.guid",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -1140,7 +1116,7 @@
         },
         { &hf_woww_creature,
             { "Creature", "woww.creature",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -1153,12 +1129,6 @@
         { &hf_woww_creature_family,
             { "Creature Family", "woww.creature.family",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_creature_family_strings), 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_creature_guid,
-            { "Creature Guid", "woww.creature.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -1846,12 +1816,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_guild_guid,
-            { "Guild Guid", "woww.guild.guid",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_guild_id,
             { "Guild Id", "woww.guild.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -2014,8 +1978,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_initiator_guid,
-            { "Initiator Guid", "woww.initiator.guid",
+        { &hf_woww_initiator,
+            { "Initiator", "woww.initiator",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -2149,12 +2113,6 @@
         { &hf_woww_item_enchantment,
             { "Item Enchantment", "woww.item.enchantment",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_item_guid,
-            { "Item Guid", "woww.item.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -2482,8 +2440,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_looted_target_guid,
-            { "Looted Target Guid", "woww.looted.target.guid",
+        { &hf_woww_looted_target,
+            { "Looted Target", "woww.looted.target",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -2866,12 +2824,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_npc_guid,
-            { "Npc Guid", "woww.npc.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_number_of_battlegrounds,
             { "Number Of Battlegrounds", "woww.number.of.battlegrounds",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -2980,8 +2932,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_owner_guid,
-            { "Owner Guid", "woww.owner.guid",
+        { &hf_woww_owner,
+            { "Owner", "woww.owner",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -3070,12 +3022,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_pet_guid,
-            { "Pet Guid", "woww.pet.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_pet_level,
             { "Pet Level", "woww.pet.level",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -3142,12 +3088,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_petition_guid,
-            { "Petition Guid", "woww.petition.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_petition_id,
             { "Petition Id", "woww.petition.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -3175,12 +3115,6 @@
         { &hf_woww_player_chat_tag,
             { "Player Chat Tag", "woww.player.chat.tag",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_player_chat_tag_strings), 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_player_guid,
-            { "Player Guid", "woww.player.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -4066,6 +4000,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_stable_master,
+            { "Stable Master", "woww.stable.master",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_stable_result,
             { "Stable Result", "woww.stable.result",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_stable_result_strings), 0,
@@ -4180,8 +4120,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_summoner_guid,
-            { "Summoner Guid", "woww.summoner.guid",
+        { &hf_woww_summoner,
+            { "Summoner", "woww.summoner",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -4231,12 +4171,6 @@
         { &hf_woww_target_error,
             { "Target Error", "woww.target.error",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_target_guid,
-            { "Target Guid", "woww.target.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -4672,12 +4606,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_vendor_guid,
-            { "Vendor Guid", "woww.vendor.guid",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_vendor_slot,
             { "Vendor Slot", "woww.vendor.slot",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -4692,12 +4620,6 @@
         },
         { &hf_woww_victim,
             { "Victim", "woww.victim",
-                FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_victim_guid,
-            { "Victim Guid", "woww.victim.guid",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -4720,8 +4642,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_winning_player_guid,
-            { "Winning Player Guid", "woww.winning.player.guid",
+        { &hf_woww_winning_player,
+            { "Winning Player", "woww.winning.player",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

@@ -6,11 +6,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_stable_pet.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_stable_pet.wowm#L3):
 /// ```text
 /// cmsg CMSG_STABLE_PET = 0x0270 {
-///     Guid npc_guid;
+///     Guid stable_master;
 /// }
 /// ```
 pub struct CMSG_STABLE_PET {
-    pub npc_guid: Guid,
+    pub stable_master: Guid,
 }
 
 impl crate::Message for CMSG_STABLE_PET {
@@ -21,8 +21,8 @@ impl crate::Message for CMSG_STABLE_PET {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc_guid: Guid
-        w.write_all(&self.npc_guid.guid().to_le_bytes())?;
+        // stable_master: Guid
+        w.write_all(&self.stable_master.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -31,11 +31,11 @@ impl crate::Message for CMSG_STABLE_PET {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0270, size: body_size as u32 });
         }
 
-        // npc_guid: Guid
-        let npc_guid = Guid::read(r)?;
+        // stable_master: Guid
+        let stable_master = Guid::read(r)?;
 
         Ok(Self {
-            npc_guid,
+            stable_master,
         })
     }
 

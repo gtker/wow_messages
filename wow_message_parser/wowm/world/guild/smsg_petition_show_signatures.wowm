@@ -6,9 +6,9 @@ struct PetitionSignature {
 }
 
 smsg SMSG_PETITION_SHOW_SIGNATURES = 0x01BF {
-    Guid item_guid;
-    Guid owner_guid;
-    u32 petition_guid;
+    Guid item;
+    Guid owner;
+    u32 petition;
     u8 amount_of_signatures;
     PetitionSignature[amount_of_signatures] signatures;
 }

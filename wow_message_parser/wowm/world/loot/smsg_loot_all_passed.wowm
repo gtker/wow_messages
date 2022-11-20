@@ -1,7 +1,7 @@
 #tag_all versions "1 2 3";
 
 smsg SMSG_LOOT_ALL_PASSED = 0x029E {
-    Guid looted_target_guid;
+    Guid looted_target;
     u32 loot_slot;
     Item item;
     u32 item_random_property_id;

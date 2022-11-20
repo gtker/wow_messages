@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm#L1):
 /// ```text
 /// smsg SMSG_LOOT_ROLL = 0x02A2 {
-///     Guid creature_guid;
+///     Guid creature;
 ///     u32 loot_slot;
 ///     Guid player;
 ///     u32 item;
@@ -18,7 +18,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_LOOT_ROLL {
-    pub creature_guid: Guid,
+    pub creature: Guid,
     pub loot_slot: u32,
     pub player: Guid,
     pub item: u32,
@@ -40,8 +40,8 @@ impl crate::Message for SMSG_LOOT_ROLL {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // creature_guid: Guid
-        w.write_all(&self.creature_guid.guid().to_le_bytes())?;
+        // creature: Guid
+        w.write_all(&self.creature.guid().to_le_bytes())?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -71,8 +71,8 @@ impl crate::Message for SMSG_LOOT_ROLL {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A2, size: body_size as u32 });
         }
 
-        // creature_guid: Guid
-        let creature_guid = Guid::read(r)?;
+        // creature: Guid
+        let creature = Guid::read(r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
@@ -96,7 +96,7 @@ impl crate::Message for SMSG_LOOT_ROLL {
         let vote: RollVote = crate::util::read_u8_le(r)?.try_into()?;
 
         Ok(Self {
-            creature_guid,
+            creature,
             loot_slot,
             player,
             item,

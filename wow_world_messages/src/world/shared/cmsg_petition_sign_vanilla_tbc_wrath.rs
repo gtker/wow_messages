@@ -6,12 +6,12 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_petition_sign.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_petition_sign.wowm#L3):
 /// ```text
 /// cmsg CMSG_PETITION_SIGN = 0x01C0 {
-///     Guid petition_guid;
+///     Guid petition;
 ///     u8 unknown1;
 /// }
 /// ```
 pub struct CMSG_PETITION_SIGN {
-    pub petition_guid: Guid,
+    pub petition: Guid,
     pub unknown1: u8,
 }
 
@@ -23,8 +23,8 @@ impl crate::Message for CMSG_PETITION_SIGN {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
+        // petition: Guid
+        w.write_all(&self.petition.guid().to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -36,14 +36,14 @@ impl crate::Message for CMSG_PETITION_SIGN {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C0, size: body_size as u32 });
         }
 
-        // petition_guid: Guid
-        let petition_guid = Guid::read(r)?;
+        // petition: Guid
+        let petition = Guid::read(r)?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
 
         Ok(Self {
-            petition_guid,
+            petition,
             unknown1,
         })
     }

@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_start_roll.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_start_roll.wowm#L1):
 /// ```text
 /// smsg SMSG_LOOT_START_ROLL = 0x02A1 {
-///     Guid creature_guid;
+///     Guid creature;
 ///     u32 loot_slot;
 ///     u32 item;
 ///     u32 item_random_suffix;
@@ -15,7 +15,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_LOOT_START_ROLL {
-    pub creature_guid: Guid,
+    pub creature: Guid,
     pub loot_slot: u32,
     pub item: u32,
     /// vmangos/mangoszero: not used ?
@@ -33,8 +33,8 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // creature_guid: Guid
-        w.write_all(&self.creature_guid.guid().to_le_bytes())?;
+        // creature: Guid
+        w.write_all(&self.creature.guid().to_le_bytes())?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -58,8 +58,8 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A1, size: body_size as u32 });
         }
 
-        // creature_guid: Guid
-        let creature_guid = Guid::read(r)?;
+        // creature: Guid
+        let creature = Guid::read(r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(r)?;
@@ -77,7 +77,7 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         let countdown_time_in_milliseconds = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            creature_guid,
+            creature,
             loot_slot,
             item,
             item_random_suffix,

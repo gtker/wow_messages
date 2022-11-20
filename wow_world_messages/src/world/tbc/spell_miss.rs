@@ -7,7 +7,7 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/spell_common_3_3_5.wowm:49`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/spell_common_3_3_5.wowm#L49):
 /// ```text
 /// struct SpellMiss {
-///     Guid target_guid;
+///     Guid target;
 ///     SpellMissInfo miss_info;
 ///     if (miss_info == REFLECT) {
 ///         u8 reflect_result;
@@ -15,14 +15,14 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SpellMiss {
-    pub target_guid: Guid,
+    pub target: Guid,
     pub miss_info: SpellMiss_SpellMissInfo,
 }
 
 impl SpellMiss {
     pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         // miss_info: SpellMissInfo
         w.write_all(&(self.miss_info.as_int() as u32).to_le_bytes())?;
@@ -54,8 +54,8 @@ impl SpellMiss {
 
 impl SpellMiss {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
-        // target_guid: Guid
-        let target_guid = Guid::read(r)?;
+        // target: Guid
+        let target = Guid::read(r)?;
 
         // miss_info: SpellMissInfo
         let miss_info: SpellMissInfo = crate::util::read_u32_le(r)?.try_into()?;
@@ -83,7 +83,7 @@ impl SpellMiss {
         };
 
         Ok(Self {
-            target_guid,
+            target,
             miss_info: miss_info_if,
         })
     }
@@ -92,7 +92,7 @@ impl SpellMiss {
 
 impl SpellMiss {
     pub(crate) fn size(&self) -> usize {
-        8 // target_guid: Guid
+        8 // target: Guid
         + self.miss_info.size() // miss_info: SpellMiss_SpellMissInfo
     }
 }

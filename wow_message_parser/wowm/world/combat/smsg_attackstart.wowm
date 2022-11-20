@@ -1,7 +1,7 @@
 #tag_all versions "1 2 3";
 
 smsg SMSG_ATTACKSTART = 0x0143 {
-    Guid attacker_guid;
-    Guid victim_guid;
+    Guid attacker;
+    Guid victim;
 }
 

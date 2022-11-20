@@ -1,5 +1,5 @@
 cmsg CMSG_BUY_ITEM = 0x01A2 {
-    Guid vendor_guid;
+    Guid vendor;
     Item item;
     u8 amount;
     u8 unknown1 {
@@ -10,7 +10,7 @@ cmsg CMSG_BUY_ITEM = 0x01A2 {
 }
 
 cmsg CMSG_BUY_ITEM = 0x01A2 {
-    Guid vendor_guid;
+    Guid vendor;
     Item item;
     u32 slot;
     u8 amount;

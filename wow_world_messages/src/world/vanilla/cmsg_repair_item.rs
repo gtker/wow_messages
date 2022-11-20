@@ -6,13 +6,13 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_repair_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_repair_item.wowm#L1):
 /// ```text
 /// cmsg CMSG_REPAIR_ITEM = 0x02A8 {
-///     Guid npc_guid;
-///     Guid item_guid;
+///     Guid npc;
+///     Guid item;
 /// }
 /// ```
 pub struct CMSG_REPAIR_ITEM {
-    pub npc_guid: Guid,
-    pub item_guid: Guid,
+    pub npc: Guid,
+    pub item: Guid,
 }
 
 impl crate::Message for CMSG_REPAIR_ITEM {
@@ -23,11 +23,11 @@ impl crate::Message for CMSG_REPAIR_ITEM {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc_guid: Guid
-        w.write_all(&self.npc_guid.guid().to_le_bytes())?;
+        // npc: Guid
+        w.write_all(&self.npc.guid().to_le_bytes())?;
 
-        // item_guid: Guid
-        w.write_all(&self.item_guid.guid().to_le_bytes())?;
+        // item: Guid
+        w.write_all(&self.item.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -36,15 +36,15 @@ impl crate::Message for CMSG_REPAIR_ITEM {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A8, size: body_size as u32 });
         }
 
-        // npc_guid: Guid
-        let npc_guid = Guid::read(r)?;
+        // npc: Guid
+        let npc = Guid::read(r)?;
 
-        // item_guid: Guid
-        let item_guid = Guid::read(r)?;
+        // item: Guid
+        let item = Guid::read(r)?;
 
         Ok(Self {
-            npc_guid,
-            item_guid,
+            npc,
+            item,
         })
     }
 

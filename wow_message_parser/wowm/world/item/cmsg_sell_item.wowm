@@ -1,8 +1,8 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_SELL_ITEM = 0x01A0 {
-    Guid vendor_guid;
-    Guid item_guid;
+    Guid vendor;
+    Guid item;
     u8 amount;
 }
 

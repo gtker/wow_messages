@@ -84,7 +84,7 @@ cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
         ClientMovementData movement_data;
         if (movement_data == PRESENT) {
             u32 opcode;
-            PackedGuid movement_guid;
+            PackedGuid movement;
             MovementInfo info;
         }
     }
@@ -124,6 +124,6 @@ If movement_data is equal to `PRESENT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | opcode |  |  |
-| - | - / - | [PackedGuid](../spec/packed-guid.md) | movement_guid |  |  |
+| - | - / - | [PackedGuid](../spec/packed-guid.md) | movement |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 

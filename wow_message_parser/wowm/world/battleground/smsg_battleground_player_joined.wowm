@@ -1,6 +1,6 @@
 #tag_all versions "1 2 3";
 
 smsg SMSG_BATTLEGROUND_PLAYER_JOINED = 0x02EC {
-    Guid player_guid;
+    Guid player;
 }
 

@@ -20,16 +20,16 @@ enum PetitionResult : u32 {
 }
 
 smsg SMSG_PETITION_SIGN_RESULTS = 0x01C1 {
-    Guid petition_guid;
-    Guid owner_guid;
+    Guid petition;
+    Guid owner;
     PetitionResult result;
 } {
     versions = "1.12";
 }
 
 smsg SMSG_PETITION_SIGN_RESULTS = 0x01C1 {
-    Guid petition_guid;
-    Guid owner_guid;
+    Guid petition;
+    Guid owner;
     PetitionResult result;
 } {
     versions = "2.4.3 3";

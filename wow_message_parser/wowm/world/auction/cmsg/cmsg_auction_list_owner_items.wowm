@@ -1,7 +1,7 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_AUCTION_LIST_OWNER_ITEMS = 0x0259 {
-    Guid auctioneer_guid;
+    Guid auctioneer;
     u32 list_from;
 }
 

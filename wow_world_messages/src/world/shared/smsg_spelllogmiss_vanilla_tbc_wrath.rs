@@ -8,7 +8,7 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_SPELLLOGMISS = 0x024B {
 ///     u32 id;
-///     Guid caster_guid;
+///     Guid caster;
 ///     u8 unknown1;
 ///     u32 amount_of_targets;
 ///     SpellLogMiss[amount_of_targets] targets;
@@ -16,7 +16,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_SPELLLOGMISS {
     pub id: u32,
-    pub caster_guid: Guid,
+    pub caster: Guid,
     /// cmangos/mangoszero: can be 0 or 1
     ///
     pub unknown1: u8,
@@ -35,8 +35,8 @@ impl crate::Message for SMSG_SPELLLOGMISS {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
-        // caster_guid: Guid
-        w.write_all(&self.caster_guid.guid().to_le_bytes())?;
+        // caster: Guid
+        w.write_all(&self.caster.guid().to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -60,8 +60,8 @@ impl crate::Message for SMSG_SPELLLOGMISS {
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 
-        // caster_guid: Guid
-        let caster_guid = Guid::read(r)?;
+        // caster: Guid
+        let caster = Guid::read(r)?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(r)?;
@@ -77,7 +77,7 @@ impl crate::Message for SMSG_SPELLLOGMISS {
 
         Ok(Self {
             id,
-            caster_guid,
+            caster,
             unknown1,
             targets,
         })
@@ -96,7 +96,7 @@ impl crate::world::wrath::ServerMessage for SMSG_SPELLLOGMISS {}
 impl SMSG_SPELLLOGMISS {
     pub(crate) fn size(&self) -> usize {
         4 // id: u32
-        + 8 // caster_guid: Guid
+        + 8 // caster: Guid
         + 1 // unknown1: u8
         + 4 // amount_of_targets: u32
         + self.targets.len() * 12 // targets: SpellLogMiss[amount_of_targets]

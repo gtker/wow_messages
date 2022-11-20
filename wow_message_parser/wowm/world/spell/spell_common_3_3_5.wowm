@@ -47,7 +47,7 @@ flag CastFlags : u32 {
 }
 
 struct SpellMiss {
-    Guid target_guid;
+    Guid target;
     SpellMissInfo miss_info;
     if (miss_info == REFLECT) {
         u8 reflect_result;

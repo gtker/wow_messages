@@ -1,12 +1,12 @@
 cmsg CMSG_PET_RENAME = 0x0177 {
-    Guid pet_guid;
+    Guid pet;
     CString name;
 } {
     versions = "1";
 }
 
 cmsg CMSG_PET_RENAME = 0x0177 {
-    Guid pet_guid;
+    Guid pet;
     CString name;
     Bool declined;
 } {

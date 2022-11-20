@@ -1,5 +1,5 @@
 cmsg CMSG_LOOT_ROLL = 0x02A0 {
-    Guid item_guid;
+    Guid item;
     u32 item_slot;
     RollVote vote;
 } {
@@ -7,7 +7,7 @@ cmsg CMSG_LOOT_ROLL = 0x02A0 {
 }
 
 cmsg CMSG_LOOT_ROLL = 0x02A0 {
-    Guid item_guid;
+    Guid item;
     u32 item_slot;
     RollVote vote;
 } {

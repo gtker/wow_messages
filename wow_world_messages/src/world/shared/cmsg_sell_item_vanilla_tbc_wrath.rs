@@ -6,14 +6,14 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_sell_item.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_sell_item.wowm#L3):
 /// ```text
 /// cmsg CMSG_SELL_ITEM = 0x01A0 {
-///     Guid vendor_guid;
-///     Guid item_guid;
+///     Guid vendor;
+///     Guid item;
 ///     u8 amount;
 /// }
 /// ```
 pub struct CMSG_SELL_ITEM {
-    pub vendor_guid: Guid,
-    pub item_guid: Guid,
+    pub vendor: Guid,
+    pub item: Guid,
     pub amount: u8,
 }
 
@@ -25,11 +25,11 @@ impl crate::Message for CMSG_SELL_ITEM {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // vendor_guid: Guid
-        w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
+        // vendor: Guid
+        w.write_all(&self.vendor.guid().to_le_bytes())?;
 
-        // item_guid: Guid
-        w.write_all(&self.item_guid.guid().to_le_bytes())?;
+        // item: Guid
+        w.write_all(&self.item.guid().to_le_bytes())?;
 
         // amount: u8
         w.write_all(&self.amount.to_le_bytes())?;
@@ -41,18 +41,18 @@ impl crate::Message for CMSG_SELL_ITEM {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A0, size: body_size as u32 });
         }
 
-        // vendor_guid: Guid
-        let vendor_guid = Guid::read(r)?;
+        // vendor: Guid
+        let vendor = Guid::read(r)?;
 
-        // item_guid: Guid
-        let item_guid = Guid::read(r)?;
+        // item: Guid
+        let item = Guid::read(r)?;
 
         // amount: u8
         let amount = crate::util::read_u8_le(r)?;
 
         Ok(Self {
-            vendor_guid,
-            item_guid,
+            vendor,
+            item,
             amount,
         })
     }

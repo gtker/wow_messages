@@ -6,14 +6,14 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_buy_item.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_buy_item.wowm#L1):
 /// ```text
 /// cmsg CMSG_BUY_ITEM = 0x01A2 {
-///     Guid vendor_guid;
+///     Guid vendor;
 ///     u32 item;
 ///     u8 amount;
 ///     u8 unknown1;
 /// }
 /// ```
 pub struct CMSG_BUY_ITEM {
-    pub vendor_guid: Guid,
+    pub vendor: Guid,
     pub item: u32,
     pub amount: u8,
     /// cmangos says this is hardcoded to 1 in the TBC client.
@@ -29,8 +29,8 @@ impl crate::Message for CMSG_BUY_ITEM {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // vendor_guid: Guid
-        w.write_all(&self.vendor_guid.guid().to_le_bytes())?;
+        // vendor: Guid
+        w.write_all(&self.vendor.guid().to_le_bytes())?;
 
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
@@ -48,8 +48,8 @@ impl crate::Message for CMSG_BUY_ITEM {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A2, size: body_size as u32 });
         }
 
-        // vendor_guid: Guid
-        let vendor_guid = Guid::read(r)?;
+        // vendor: Guid
+        let vendor = Guid::read(r)?;
 
         // item: u32
         let item = crate::util::read_u32_le(r)?;
@@ -61,7 +61,7 @@ impl crate::Message for CMSG_BUY_ITEM {
         let unknown1 = crate::util::read_u8_le(r)?;
 
         Ok(Self {
-            vendor_guid,
+            vendor,
             item,
             amount,
             unknown1,

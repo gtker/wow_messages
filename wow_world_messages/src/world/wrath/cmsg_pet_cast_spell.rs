@@ -21,7 +21,7 @@ use std::io::{Write, Read};
 ///         ClientMovementData movement_data;
 ///         if (movement_data == PRESENT) {
 ///             u32 opcode;
-///             PackedGuid movement_guid;
+///             PackedGuid movement;
 ///             MovementInfo info;
 ///         }
 ///     }
@@ -79,14 +79,14 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
                     CMSG_PET_CAST_SPELL_ClientMovementData::NotPresent => {}
                     CMSG_PET_CAST_SPELL_ClientMovementData::Present {
                         info,
-                        movement_guid,
+                        movement,
                         opcode,
                     } => {
                         // opcode: u32
                         w.write_all(&opcode.to_le_bytes())?;
 
-                        // movement_guid: PackedGuid
-                        movement_guid.write_packed_guid_into_vec(w);
+                        // movement: PackedGuid
+                        movement.write_packed_guid_into_vec(w);
 
                         // info: MovementInfo
                         info.write_into_vec(w)?;
@@ -136,15 +136,15 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
                         // opcode: u32
                         let opcode = crate::util::read_u32_le(r)?;
 
-                        // movement_guid: PackedGuid
-                        let movement_guid = Guid::read_packed(r)?;
+                        // movement: PackedGuid
+                        let movement = Guid::read_packed(r)?;
 
                         // info: MovementInfo
                         let info = MovementInfo::read(r)?;
 
                         CMSG_PET_CAST_SPELL_ClientMovementData::Present {
                             info,
-                            movement_guid,
+                            movement,
                             opcode,
                         }
                     }
@@ -186,7 +186,7 @@ pub enum CMSG_PET_CAST_SPELL_ClientMovementData {
     NotPresent,
     Present {
         info: MovementInfo,
-        movement_guid: Guid,
+        movement: Guid,
         opcode: u32,
     },
 }
@@ -216,12 +216,12 @@ impl CMSG_PET_CAST_SPELL_ClientMovementData {
             }
             Self::Present {
                 info,
-                movement_guid,
+                movement,
                 opcode,
             } => {
                 1
                 + info.size() // info: MovementInfo
-                + movement_guid.size() // movement_guid: Guid
+                + movement.size() // movement: Guid
                 + 4 // opcode: u32
             }
         }

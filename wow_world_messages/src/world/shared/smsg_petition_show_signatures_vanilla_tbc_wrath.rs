@@ -7,17 +7,17 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_show_signatures.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_show_signatures.wowm#L8):
 /// ```text
 /// smsg SMSG_PETITION_SHOW_SIGNATURES = 0x01BF {
-///     Guid item_guid;
-///     Guid owner_guid;
-///     u32 petition_guid;
+///     Guid item;
+///     Guid owner;
+///     u32 petition;
 ///     u8 amount_of_signatures;
 ///     PetitionSignature[amount_of_signatures] signatures;
 /// }
 /// ```
 pub struct SMSG_PETITION_SHOW_SIGNATURES {
-    pub item_guid: Guid,
-    pub owner_guid: Guid,
-    pub petition_guid: u32,
+    pub item: Guid,
+    pub owner: Guid,
+    pub petition: u32,
     pub signatures: Vec<PetitionSignature>,
 }
 
@@ -30,14 +30,14 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // item_guid: Guid
-        w.write_all(&self.item_guid.guid().to_le_bytes())?;
+        // item: Guid
+        w.write_all(&self.item.guid().to_le_bytes())?;
 
-        // owner_guid: Guid
-        w.write_all(&self.owner_guid.guid().to_le_bytes())?;
+        // owner: Guid
+        w.write_all(&self.owner.guid().to_le_bytes())?;
 
-        // petition_guid: u32
-        w.write_all(&self.petition_guid.to_le_bytes())?;
+        // petition: u32
+        w.write_all(&self.petition.to_le_bytes())?;
 
         // amount_of_signatures: u8
         w.write_all(&(self.signatures.len() as u8).to_le_bytes())?;
@@ -55,14 +55,14 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BF, size: body_size as u32 });
         }
 
-        // item_guid: Guid
-        let item_guid = Guid::read(r)?;
+        // item: Guid
+        let item = Guid::read(r)?;
 
-        // owner_guid: Guid
-        let owner_guid = Guid::read(r)?;
+        // owner: Guid
+        let owner = Guid::read(r)?;
 
-        // petition_guid: u32
-        let petition_guid = crate::util::read_u32_le(r)?;
+        // petition: u32
+        let petition = crate::util::read_u32_le(r)?;
 
         // amount_of_signatures: u8
         let amount_of_signatures = crate::util::read_u8_le(r)?;
@@ -74,9 +74,9 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
         }
 
         Ok(Self {
-            item_guid,
-            owner_guid,
-            petition_guid,
+            item,
+            owner,
+            petition,
             signatures,
         })
     }
@@ -93,9 +93,9 @@ impl crate::world::wrath::ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {}
 
 impl SMSG_PETITION_SHOW_SIGNATURES {
     pub(crate) fn size(&self) -> usize {
-        8 // item_guid: Guid
-        + 8 // owner_guid: Guid
-        + 4 // petition_guid: u32
+        8 // item: Guid
+        + 8 // owner: Guid
+        + 4 // petition: u32
         + 1 // amount_of_signatures: u8
         + self.signatures.len() * 12 // signatures: PetitionSignature[amount_of_signatures]
     }

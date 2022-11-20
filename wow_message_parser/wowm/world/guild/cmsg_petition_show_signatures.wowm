@@ -1,6 +1,6 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_PETITION_SHOW_SIGNATURES = 0x01BE {
-    Guid item_guid;
+    Guid item;
 }
 

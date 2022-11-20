@@ -1,5 +1,5 @@
 struct SpellLogMiss {
-    Guid target_guid;
+    Guid target;
     SpellMissInfo miss_info;
 } {
     versions = "1 2 3";
@@ -7,7 +7,7 @@ struct SpellLogMiss {
 
 smsg SMSG_SPELLLOGMISS = 0x024B {
     Spell id;
-    Guid caster_guid;
+    Guid caster;
     u8 unknown1 {
         comment = "cmangos/mangoszero: can be 0 or 1";
     }

@@ -6,11 +6,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_turn_in_petition.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_turn_in_petition.wowm#L3):
 /// ```text
 /// cmsg CMSG_TURN_IN_PETITION = 0x01C4 {
-///     Guid petition_guid;
+///     Guid petition;
 /// }
 /// ```
 pub struct CMSG_TURN_IN_PETITION {
-    pub petition_guid: Guid,
+    pub petition: Guid,
 }
 
 impl crate::Message for CMSG_TURN_IN_PETITION {
@@ -21,8 +21,8 @@ impl crate::Message for CMSG_TURN_IN_PETITION {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
+        // petition: Guid
+        w.write_all(&self.petition.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -31,11 +31,11 @@ impl crate::Message for CMSG_TURN_IN_PETITION {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C4, size: body_size as u32 });
         }
 
-        // petition_guid: Guid
-        let petition_guid = Guid::read(r)?;
+        // petition: Guid
+        let petition = Guid::read(r)?;
 
         Ok(Self {
-            petition_guid,
+            petition,
         })
     }
 

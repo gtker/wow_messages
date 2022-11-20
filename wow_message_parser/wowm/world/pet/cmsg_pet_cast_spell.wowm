@@ -18,7 +18,7 @@ cmsg CMSG_PET_CAST_SPELL = 0x01F0 {
         ClientMovementData movement_data;
         if (movement_data == PRESENT) {
             u32 opcode;
-            PackedGuid movement_guid;
+            PackedGuid movement;
             MovementInfo info;
         }
     }

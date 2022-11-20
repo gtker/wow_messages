@@ -1,12 +1,12 @@
 smsg SMSG_LOOT_ROLL_WON = 0x029F {
-    Guid looted_target_guid;
+    Guid looted_target;
     u32 loot_slot;
     Item item;
     u32 item_random_suffix {
         comment = "vmangos/mangoszero: not used ?";
     }
     u32 item_random_property_id;
-    Guid winning_player_guid;
+    Guid winning_player;
     u8 winning_roll {
         comment = "rollnumber related to SMSG_LOOT_ROLL";
     }
@@ -18,14 +18,14 @@ smsg SMSG_LOOT_ROLL_WON = 0x029F {
 }
 
 smsg SMSG_LOOT_ROLL_WON = 0x029F {
-    Guid looted_target_guid;
+    Guid looted_target;
     u32 loot_slot;
     Item item;
     u32 item_random_suffix {
         comment = "vmangos/mangoszero: not used ?";
     }
     u32 item_random_property_id;
-    Guid winning_player_guid;
+    Guid winning_player;
     u8 winning_roll {
         comment = "rollnumber related to SMSG_LOOT_ROLL";
     }

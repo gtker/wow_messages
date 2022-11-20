@@ -6,13 +6,13 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/cmsg_offer_petition.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/cmsg_offer_petition.wowm#L1):
 /// ```text
 /// cmsg CMSG_OFFER_PETITION = 0x01C3 {
-///     Guid petition_guid;
-///     Guid target_guid;
+///     Guid petition;
+///     Guid target;
 /// }
 /// ```
 pub struct CMSG_OFFER_PETITION {
-    pub petition_guid: Guid,
-    pub target_guid: Guid,
+    pub petition: Guid,
+    pub target: Guid,
 }
 
 impl crate::Message for CMSG_OFFER_PETITION {
@@ -23,11 +23,11 @@ impl crate::Message for CMSG_OFFER_PETITION {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // petition_guid: Guid
-        w.write_all(&self.petition_guid.guid().to_le_bytes())?;
+        // petition: Guid
+        w.write_all(&self.petition.guid().to_le_bytes())?;
 
-        // target_guid: Guid
-        w.write_all(&self.target_guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -36,15 +36,15 @@ impl crate::Message for CMSG_OFFER_PETITION {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C3, size: body_size as u32 });
         }
 
-        // petition_guid: Guid
-        let petition_guid = Guid::read(r)?;
+        // petition: Guid
+        let petition = Guid::read(r)?;
 
-        // target_guid: Guid
-        let target_guid = Guid::read(r)?;
+        // target: Guid
+        let target = Guid::read(r)?;
 
         Ok(Self {
-            petition_guid,
-            target_guid,
+            petition,
+            target,
         })
     }
 

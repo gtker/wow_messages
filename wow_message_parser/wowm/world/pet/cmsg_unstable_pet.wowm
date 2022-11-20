@@ -1,7 +1,7 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_UNSTABLE_PET = 0x0271 {
-    Guid npc_guid;
+    Guid stable_master;
     u32 pet_number;
 }
 

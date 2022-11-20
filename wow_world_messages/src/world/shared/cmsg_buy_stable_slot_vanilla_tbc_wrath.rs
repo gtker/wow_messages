@@ -6,11 +6,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_buy_stable_slot.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_buy_stable_slot.wowm#L3):
 /// ```text
 /// cmsg CMSG_BUY_STABLE_SLOT = 0x0272 {
-///     Guid npc_guid;
+///     Guid npc;
 /// }
 /// ```
 pub struct CMSG_BUY_STABLE_SLOT {
-    pub npc_guid: Guid,
+    pub npc: Guid,
 }
 
 impl crate::Message for CMSG_BUY_STABLE_SLOT {
@@ -21,8 +21,8 @@ impl crate::Message for CMSG_BUY_STABLE_SLOT {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // npc_guid: Guid
-        w.write_all(&self.npc_guid.guid().to_le_bytes())?;
+        // npc: Guid
+        w.write_all(&self.npc.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -31,11 +31,11 @@ impl crate::Message for CMSG_BUY_STABLE_SLOT {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0272, size: body_size as u32 });
         }
 
-        // npc_guid: Guid
-        let npc_guid = Guid::read(r)?;
+        // npc: Guid
+        let npc = Guid::read(r)?;
 
         Ok(Self {
-            npc_guid,
+            npc,
         })
     }
 
