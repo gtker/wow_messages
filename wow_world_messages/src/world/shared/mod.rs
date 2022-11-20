@@ -359,6 +359,7 @@ pub mod sheath_state_vanilla_tbc_wrath;
 pub mod smsg_account_data_times_vanilla_tbc;
 pub mod smsg_activatetaxireply_vanilla_tbc_wrath;
 pub mod smsg_ai_reaction_vanilla_tbc_wrath;
+pub mod smsg_area_spirit_healer_time_vanilla_tbc_wrath;
 pub mod smsg_area_trigger_message_vanilla_tbc_wrath;
 pub mod smsg_attackstart_vanilla_tbc_wrath;
 pub mod smsg_attackstop_vanilla_tbc_wrath;

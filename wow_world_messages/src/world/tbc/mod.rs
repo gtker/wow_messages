@@ -942,6 +942,8 @@ pub use crate::shared::smsg_activatetaxireply_vanilla_tbc_wrath::SMSG_ACTIVATETA
 
 pub use crate::shared::smsg_ai_reaction_vanilla_tbc_wrath::SMSG_AI_REACTION;
 
+pub use crate::shared::smsg_area_spirit_healer_time_vanilla_tbc_wrath::SMSG_AREA_SPIRIT_HEALER_TIME;
+
 pub use crate::shared::smsg_area_trigger_message_vanilla_tbc_wrath::SMSG_AREA_TRIGGER_MESSAGE;
 
 pub use crate::shared::smsg_attackstart_vanilla_tbc_wrath::SMSG_ATTACKSTART;

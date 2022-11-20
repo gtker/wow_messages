@@ -952,6 +952,8 @@ pub use crate::shared::smsg_activatetaxireply_vanilla_tbc_wrath::SMSG_ACTIVATETA
 
 pub use crate::shared::smsg_ai_reaction_vanilla_tbc_wrath::SMSG_AI_REACTION;
 
+pub use crate::shared::smsg_area_spirit_healer_time_vanilla_tbc_wrath::SMSG_AREA_SPIRIT_HEALER_TIME;
+
 pub use crate::shared::smsg_area_trigger_message_vanilla_tbc_wrath::SMSG_AREA_TRIGGER_MESSAGE;
 
 pub use crate::shared::smsg_attackstart_vanilla_tbc_wrath::SMSG_ATTACKSTART;
@@ -1378,8 +1380,6 @@ pub(crate) mod smsg_action_buttons;
 pub use smsg_action_buttons::*;
 pub(crate) mod smsg_addon_info;
 pub use smsg_addon_info::*;
-pub(crate) mod smsg_area_spirit_healer_time;
-pub use smsg_area_spirit_healer_time::*;
 pub(crate) mod smsg_attackerstateupdate;
 pub use smsg_attackerstateupdate::*;
 pub(crate) mod smsg_auction_bidder_list_result;

@@ -1,4 +1,4 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_AREA_SPIRIT_HEALER_TIME = 0x02E4 {
     Guid guid;
