@@ -2,6 +2,8 @@ pub(crate) mod cache_mask;
 pub use cache_mask::*;
 pub(crate) mod class;
 pub use class::*;
+#[cfg(feature = "extended")]
+pub use crate::extended::wrath::*;
 pub use crate::manual::wrath::*;
 pub(crate) mod gender;
 pub use gender::*;

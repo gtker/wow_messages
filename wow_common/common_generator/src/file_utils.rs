@@ -11,25 +11,25 @@ pub(crate) fn workspace_directory() -> PathBuf {
 
 pub(crate) fn vanilla_dir() -> PathBuf {
     workspace_directory()
-        .join("wow_common")
-        .join("wow_common")
+        .join("wow_world_base")
         .join("src")
+        .join("extended")
         .join("vanilla")
 }
 
 pub(crate) fn tbc_dir() -> PathBuf {
     workspace_directory()
-        .join("wow_common")
-        .join("wow_common")
+        .join("wow_world_base")
         .join("src")
+        .join("extended")
         .join("tbc")
 }
 
 pub(crate) fn wrath_dir() -> PathBuf {
     workspace_directory()
-        .join("wow_common")
-        .join("wow_common")
+        .join("wow_world_base")
         .join("src")
+        .join("extended")
         .join("wrath")
 }
 

@@ -1,5 +1,7 @@
 pub(crate) mod class;
 pub use class::*;
+#[cfg(feature = "extended")]
+pub use crate::extended::vanilla::*;
 pub use crate::manual::vanilla::*;
 pub(crate) mod gender;
 pub use gender::*;

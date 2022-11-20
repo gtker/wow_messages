@@ -145,7 +145,7 @@ fn get_enum_name(s: &str) -> String {
 pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansion) {
     let mut s = Writer::new();
 
-    s.wln("pub fn get_position_from_str(name: &str) -> Option<Position> {");
+    s.wln("pub fn position_from_str(name: &str) -> Option<Position> {");
     s.wln("    let i = match name {");
 
     for p in data.positions(expansion) {
@@ -168,11 +168,11 @@ pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansio
     s.wln("    };");
     s.newline();
 
-    s.wln("    Some(get_position(i))");
+    s.wln("    Some(position(i))");
     s.wln("}");
     s.newline();
 
-    s.wln("pub const fn get_position(ident: PositionIdentifier) -> Position {");
+    s.wln("pub const fn position(ident: PositionIdentifier) -> Position {");
     s.wln("    let i = match ident {");
 
     for (i, e) in data.positions(expansion).enumerate() {
