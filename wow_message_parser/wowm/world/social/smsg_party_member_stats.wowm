@@ -1,31 +1,31 @@
 smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
     PackedGuid guid;
     GroupUpdateFlags mask;
-    if (mask & FLAG_STATUS) {
+    if (mask & STATUS) {
         GroupMemberOnlineStatus status;       
     }
-    if (mask & FLAG_CUR_HP) {
+    if (mask & CUR_HP) {
         u16 current_health;
     }
-    if (mask & FLAG_MAX_HP) {
+    if (mask & MAX_HP) {
         u16 max_health;
     }
-    if (mask & FLAG_POWER_TYPE) {
+    if (mask & POWER_TYPE) {
         Power power; 
     }
-    if (mask & FLAG_CUR_POWER) {
+    if (mask & CUR_POWER) {
         u16 current_power;
     }
-    if (mask & FLAG_MAX_POWER) {
+    if (mask & MAX_POWER) {
         u16 max_power;
     }
-    if (mask & FLAG_LEVEL) {
+    if (mask & LEVEL) {
         u16 level;
     }
-    if (mask & FLAG_ZONE) {
+    if (mask & ZONE) {
         Area area;
     }
-    if (mask & FLAG_POSITION) {
+    if (mask & POSITION) {
         u16 position_x {
             comment = "cmangos: float cast to u16";
         }
@@ -33,36 +33,36 @@ smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
             comment = "cmangos: float cast to u16";
         }
     }
-    if (mask & FLAG_AURAS) {
+    if (mask & AURAS) {
         AuraMask auras {
             comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
         }
     }
-    if (mask & FLAG_PET_GUID) {
+    if (mask & PET_GUID) {
         Guid pet;
     }
-    if (mask & FLAG_PET_NAME) {
+    if (mask & PET_NAME) {
         CString pet_name;
     }
-    if (mask & FLAG_PET_MODEL_ID) {
+    if (mask & PET_MODEL_ID) {
         u16 pet_display_id;
     }
-    if (mask & FLAG_PET_CUR_HP) {
+    if (mask & PET_CUR_HP) {
         u16 pet_current_health;
     }
-    if (mask & FLAG_PET_MAX_HP) {
+    if (mask & PET_MAX_HP) {
         u16 pet_max_health;
     }
-    if (mask & FLAG_PET_POWER_TYPE) {
+    if (mask & PET_POWER_TYPE) {
         Power pet_power_type;
     }
-    if (mask & FLAG_PET_CUR_POWER) {
+    if (mask & PET_CUR_POWER) {
         u16 pet_current_power;
     }
-    if (mask & FLAG_PET_MAX_POWER) {
+    if (mask & PET_MAX_POWER) {
         u16 pet_max_power;
     }
-    if (mask & FLAG_PET_AURAS) {
+    if (mask & PET_AURAS) {
         AuraMask pet_auras;
     }
 } {

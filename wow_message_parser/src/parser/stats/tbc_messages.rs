@@ -765,7 +765,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_ADDON_INFO", 0x2EF),
     Data::new("CMSG_PET_UNLEARN", 0x2F0),
     Data::new("SMSG_PET_UNLEARN_CONFIRM", 0x2F1),
-    Data::new("SMSG_PARTY_MEMBER_STATS_FULL", 0x2F2),
+    Data::with_reason("SMSG_PARTY_MEMBER_STATS_FULL", 0x2F2, "Requires AuraMask"),
     Data::new("CMSG_PET_SPELL_AUTOCAST", 0x2F3),
     Data::new("SMSG_WEATHER", 0x2F4),
     Data::new("SMSG_PLAY_TIME_WARNING", 0x2F5),

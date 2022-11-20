@@ -1,28 +1,28 @@
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:205`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L205):
 /// ```text
 /// flag GroupUpdateFlags : u32 {
-///     FLAG_NONE = 0x00000000;
-///     FLAG_STATUS = 0x00000001;
-///     FLAG_CUR_HP = 0x00000002;
-///     FLAG_MAX_HP = 0x00000004;
-///     FLAG_POWER_TYPE = 0x00000008;
-///     FLAG_CUR_POWER = 0x00000010;
-///     FLAG_MAX_POWER = 0x00000020;
-///     FLAG_LEVEL = 0x00000040;
-///     FLAG_ZONE = 0x00000080;
-///     FLAG_POSITION = 0x00000100;
-///     FLAG_AURAS = 0x00000200;
-///     FLAG_AURAS_2 = 0x00000400;
-///     FLAG_PET_GUID = 0x00000800;
-///     FLAG_PET_NAME = 0x00001000;
-///     FLAG_PET_MODEL_ID = 0x00002000;
-///     FLAG_PET_CUR_HP = 0x00004000;
-///     FLAG_PET_MAX_HP = 0x00008000;
-///     FLAG_PET_POWER_TYPE = 0x00010000;
-///     FLAG_PET_CUR_POWER = 0x00020000;
-///     FLAG_PET_MAX_POWER = 0x00040000;
-///     FLAG_PET_AURAS = 0x00080000;
-///     FLAG_PET_AURAS_2 = 0x00100000;
+///     NONE = 0x00000000;
+///     STATUS = 0x00000001;
+///     CUR_HP = 0x00000002;
+///     MAX_HP = 0x00000004;
+///     POWER_TYPE = 0x00000008;
+///     CUR_POWER = 0x00000010;
+///     MAX_POWER = 0x00000020;
+///     LEVEL = 0x00000040;
+///     ZONE = 0x00000080;
+///     POSITION = 0x00000100;
+///     AURAS = 0x00000200;
+///     AURAS_2 = 0x00000400;
+///     PET_GUID = 0x00000800;
+///     PET_NAME = 0x00001000;
+///     PET_MODEL_ID = 0x00002000;
+///     PET_CUR_HP = 0x00004000;
+///     PET_MAX_HP = 0x00008000;
+///     PET_POWER_TYPE = 0x00010000;
+///     PET_CUR_POWER = 0x00020000;
+///     PET_MAX_POWER = 0x00040000;
+///     PET_AURAS = 0x00080000;
+///     PET_AURAS_2 = 0x00100000;
 ///     MODE_OFFLINE = 0x10000000;
 /// }
 
@@ -37,28 +37,28 @@ impl GroupUpdateFlags {
         Self { inner }
     }
 
-    pub(crate) const FLAG_NONE: u32 = 0x00;
-    pub(crate) const FLAG_STATUS: u32 = 0x01;
-    pub(crate) const FLAG_CUR_HP: u32 = 0x02;
-    pub(crate) const FLAG_MAX_HP: u32 = 0x04;
-    pub(crate) const FLAG_POWER_TYPE: u32 = 0x08;
-    pub(crate) const FLAG_CUR_POWER: u32 = 0x10;
-    pub(crate) const FLAG_MAX_POWER: u32 = 0x20;
-    pub(crate) const FLAG_LEVEL: u32 = 0x40;
-    pub(crate) const FLAG_ZONE: u32 = 0x80;
-    pub(crate) const FLAG_POSITION: u32 = 0x100;
-    pub(crate) const FLAG_AURAS: u32 = 0x200;
-    pub(crate) const FLAG_AURAS_2: u32 = 0x400;
-    pub(crate) const FLAG_PET_GUID: u32 = 0x800;
-    pub(crate) const FLAG_PET_NAME: u32 = 0x1000;
-    pub(crate) const FLAG_PET_MODEL_ID: u32 = 0x2000;
-    pub(crate) const FLAG_PET_CUR_HP: u32 = 0x4000;
-    pub(crate) const FLAG_PET_MAX_HP: u32 = 0x8000;
-    pub(crate) const FLAG_PET_POWER_TYPE: u32 = 0x10000;
-    pub(crate) const FLAG_PET_CUR_POWER: u32 = 0x20000;
-    pub(crate) const FLAG_PET_MAX_POWER: u32 = 0x40000;
-    pub(crate) const FLAG_PET_AURAS: u32 = 0x80000;
-    pub(crate) const FLAG_PET_AURAS_2: u32 = 0x100000;
+    pub(crate) const NONE: u32 = 0x00;
+    pub(crate) const STATUS: u32 = 0x01;
+    pub(crate) const CUR_HP: u32 = 0x02;
+    pub(crate) const MAX_HP: u32 = 0x04;
+    pub(crate) const POWER_TYPE: u32 = 0x08;
+    pub(crate) const CUR_POWER: u32 = 0x10;
+    pub(crate) const MAX_POWER: u32 = 0x20;
+    pub(crate) const LEVEL: u32 = 0x40;
+    pub(crate) const ZONE: u32 = 0x80;
+    pub(crate) const POSITION: u32 = 0x100;
+    pub(crate) const AURAS: u32 = 0x200;
+    pub(crate) const AURAS_2: u32 = 0x400;
+    pub(crate) const PET_GUID: u32 = 0x800;
+    pub(crate) const PET_NAME: u32 = 0x1000;
+    pub(crate) const PET_MODEL_ID: u32 = 0x2000;
+    pub(crate) const PET_CUR_HP: u32 = 0x4000;
+    pub(crate) const PET_MAX_HP: u32 = 0x8000;
+    pub(crate) const PET_POWER_TYPE: u32 = 0x10000;
+    pub(crate) const PET_CUR_POWER: u32 = 0x20000;
+    pub(crate) const PET_MAX_POWER: u32 = 0x40000;
+    pub(crate) const PET_AURAS: u32 = 0x80000;
+    pub(crate) const PET_AURAS_2: u32 = 0x100000;
     pub(crate) const MODE_OFFLINE: u32 = 0x10000000;
 
     pub const fn empty() -> Self {
@@ -71,449 +71,449 @@ impl GroupUpdateFlags {
 
     pub const fn all() -> Self {
         Self {
-            inner: Self::FLAG_NONE
-                | Self::FLAG_STATUS
-                | Self::FLAG_CUR_HP
-                | Self::FLAG_MAX_HP
-                | Self::FLAG_POWER_TYPE
-                | Self::FLAG_CUR_POWER
-                | Self::FLAG_MAX_POWER
-                | Self::FLAG_LEVEL
-                | Self::FLAG_ZONE
-                | Self::FLAG_POSITION
-                | Self::FLAG_AURAS
-                | Self::FLAG_AURAS_2
-                | Self::FLAG_PET_GUID
-                | Self::FLAG_PET_NAME
-                | Self::FLAG_PET_MODEL_ID
-                | Self::FLAG_PET_CUR_HP
-                | Self::FLAG_PET_MAX_HP
-                | Self::FLAG_PET_POWER_TYPE
-                | Self::FLAG_PET_CUR_POWER
-                | Self::FLAG_PET_MAX_POWER
-                | Self::FLAG_PET_AURAS
-                | Self::FLAG_PET_AURAS_2
+            inner: Self::NONE
+                | Self::STATUS
+                | Self::CUR_HP
+                | Self::MAX_HP
+                | Self::POWER_TYPE
+                | Self::CUR_POWER
+                | Self::MAX_POWER
+                | Self::LEVEL
+                | Self::ZONE
+                | Self::POSITION
+                | Self::AURAS
+                | Self::AURAS_2
+                | Self::PET_GUID
+                | Self::PET_NAME
+                | Self::PET_MODEL_ID
+                | Self::PET_CUR_HP
+                | Self::PET_MAX_HP
+                | Self::PET_POWER_TYPE
+                | Self::PET_CUR_POWER
+                | Self::PET_MAX_POWER
+                | Self::PET_AURAS
+                | Self::PET_AURAS_2
                 | Self::MODE_OFFLINE
         }
     }
 
-    pub const fn is_FLAG_STATUS(&self) -> bool {
-        (self.inner & Self::FLAG_STATUS) != 0
+    pub const fn is_STATUS(&self) -> bool {
+        (self.inner & Self::STATUS) != 0
     }
 
     /// uint8, enum `GroupMemberOnlineStatus`
     ///
-    pub const fn new_FLAG_STATUS() -> Self {
-        Self { inner: Self::FLAG_STATUS }
+    pub const fn new_STATUS() -> Self {
+        Self { inner: Self::STATUS }
     }
 
-    pub fn set_FLAG_STATUS(&mut self) -> Self {
-        self.inner |= Self::FLAG_STATUS;
+    pub fn set_STATUS(&mut self) -> Self {
+        self.inner |= Self::STATUS;
         *self
     }
 
-    pub fn clear_FLAG_STATUS(&mut self) -> Self {
-        self.inner &= Self::FLAG_STATUS.reverse_bits();
+    pub fn clear_STATUS(&mut self) -> Self {
+        self.inner &= Self::STATUS.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_CUR_HP(&self) -> bool {
-        (self.inner & Self::FLAG_CUR_HP) != 0
+    pub const fn is_CUR_HP(&self) -> bool {
+        (self.inner & Self::CUR_HP) != 0
     }
 
     /// uint16
     ///
-    pub const fn new_FLAG_CUR_HP() -> Self {
-        Self { inner: Self::FLAG_CUR_HP }
+    pub const fn new_CUR_HP() -> Self {
+        Self { inner: Self::CUR_HP }
     }
 
-    pub fn set_FLAG_CUR_HP(&mut self) -> Self {
-        self.inner |= Self::FLAG_CUR_HP;
+    pub fn set_CUR_HP(&mut self) -> Self {
+        self.inner |= Self::CUR_HP;
         *self
     }
 
-    pub fn clear_FLAG_CUR_HP(&mut self) -> Self {
-        self.inner &= Self::FLAG_CUR_HP.reverse_bits();
+    pub fn clear_CUR_HP(&mut self) -> Self {
+        self.inner &= Self::CUR_HP.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_MAX_HP(&self) -> bool {
-        (self.inner & Self::FLAG_MAX_HP) != 0
+    pub const fn is_MAX_HP(&self) -> bool {
+        (self.inner & Self::MAX_HP) != 0
     }
 
     /// uint16
     ///
-    pub const fn new_FLAG_MAX_HP() -> Self {
-        Self { inner: Self::FLAG_MAX_HP }
+    pub const fn new_MAX_HP() -> Self {
+        Self { inner: Self::MAX_HP }
     }
 
-    pub fn set_FLAG_MAX_HP(&mut self) -> Self {
-        self.inner |= Self::FLAG_MAX_HP;
+    pub fn set_MAX_HP(&mut self) -> Self {
+        self.inner |= Self::MAX_HP;
         *self
     }
 
-    pub fn clear_FLAG_MAX_HP(&mut self) -> Self {
-        self.inner &= Self::FLAG_MAX_HP.reverse_bits();
+    pub fn clear_MAX_HP(&mut self) -> Self {
+        self.inner &= Self::MAX_HP.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_POWER_TYPE(&self) -> bool {
-        (self.inner & Self::FLAG_POWER_TYPE) != 0
+    pub const fn is_POWER_TYPE(&self) -> bool {
+        (self.inner & Self::POWER_TYPE) != 0
     }
 
     /// uint8, enum Powers
     ///
-    pub const fn new_FLAG_POWER_TYPE() -> Self {
-        Self { inner: Self::FLAG_POWER_TYPE }
+    pub const fn new_POWER_TYPE() -> Self {
+        Self { inner: Self::POWER_TYPE }
     }
 
-    pub fn set_FLAG_POWER_TYPE(&mut self) -> Self {
-        self.inner |= Self::FLAG_POWER_TYPE;
+    pub fn set_POWER_TYPE(&mut self) -> Self {
+        self.inner |= Self::POWER_TYPE;
         *self
     }
 
-    pub fn clear_FLAG_POWER_TYPE(&mut self) -> Self {
-        self.inner &= Self::FLAG_POWER_TYPE.reverse_bits();
+    pub fn clear_POWER_TYPE(&mut self) -> Self {
+        self.inner &= Self::POWER_TYPE.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_CUR_POWER(&self) -> bool {
-        (self.inner & Self::FLAG_CUR_POWER) != 0
+    pub const fn is_CUR_POWER(&self) -> bool {
+        (self.inner & Self::CUR_POWER) != 0
     }
 
     /// uint16
     ///
-    pub const fn new_FLAG_CUR_POWER() -> Self {
-        Self { inner: Self::FLAG_CUR_POWER }
+    pub const fn new_CUR_POWER() -> Self {
+        Self { inner: Self::CUR_POWER }
     }
 
-    pub fn set_FLAG_CUR_POWER(&mut self) -> Self {
-        self.inner |= Self::FLAG_CUR_POWER;
+    pub fn set_CUR_POWER(&mut self) -> Self {
+        self.inner |= Self::CUR_POWER;
         *self
     }
 
-    pub fn clear_FLAG_CUR_POWER(&mut self) -> Self {
-        self.inner &= Self::FLAG_CUR_POWER.reverse_bits();
+    pub fn clear_CUR_POWER(&mut self) -> Self {
+        self.inner &= Self::CUR_POWER.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_MAX_POWER(&self) -> bool {
-        (self.inner & Self::FLAG_MAX_POWER) != 0
+    pub const fn is_MAX_POWER(&self) -> bool {
+        (self.inner & Self::MAX_POWER) != 0
     }
 
     /// uint16
     ///
-    pub const fn new_FLAG_MAX_POWER() -> Self {
-        Self { inner: Self::FLAG_MAX_POWER }
+    pub const fn new_MAX_POWER() -> Self {
+        Self { inner: Self::MAX_POWER }
     }
 
-    pub fn set_FLAG_MAX_POWER(&mut self) -> Self {
-        self.inner |= Self::FLAG_MAX_POWER;
+    pub fn set_MAX_POWER(&mut self) -> Self {
+        self.inner |= Self::MAX_POWER;
         *self
     }
 
-    pub fn clear_FLAG_MAX_POWER(&mut self) -> Self {
-        self.inner &= Self::FLAG_MAX_POWER.reverse_bits();
+    pub fn clear_MAX_POWER(&mut self) -> Self {
+        self.inner &= Self::MAX_POWER.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_LEVEL(&self) -> bool {
-        (self.inner & Self::FLAG_LEVEL) != 0
+    pub const fn is_LEVEL(&self) -> bool {
+        (self.inner & Self::LEVEL) != 0
     }
 
     /// uint16
     ///
-    pub const fn new_FLAG_LEVEL() -> Self {
-        Self { inner: Self::FLAG_LEVEL }
+    pub const fn new_LEVEL() -> Self {
+        Self { inner: Self::LEVEL }
     }
 
-    pub fn set_FLAG_LEVEL(&mut self) -> Self {
-        self.inner |= Self::FLAG_LEVEL;
+    pub fn set_LEVEL(&mut self) -> Self {
+        self.inner |= Self::LEVEL;
         *self
     }
 
-    pub fn clear_FLAG_LEVEL(&mut self) -> Self {
-        self.inner &= Self::FLAG_LEVEL.reverse_bits();
+    pub fn clear_LEVEL(&mut self) -> Self {
+        self.inner &= Self::LEVEL.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_ZONE(&self) -> bool {
-        (self.inner & Self::FLAG_ZONE) != 0
+    pub const fn is_ZONE(&self) -> bool {
+        (self.inner & Self::ZONE) != 0
     }
 
     /// uint16
     ///
-    pub const fn new_FLAG_ZONE() -> Self {
-        Self { inner: Self::FLAG_ZONE }
+    pub const fn new_ZONE() -> Self {
+        Self { inner: Self::ZONE }
     }
 
-    pub fn set_FLAG_ZONE(&mut self) -> Self {
-        self.inner |= Self::FLAG_ZONE;
+    pub fn set_ZONE(&mut self) -> Self {
+        self.inner |= Self::ZONE;
         *self
     }
 
-    pub fn clear_FLAG_ZONE(&mut self) -> Self {
-        self.inner &= Self::FLAG_ZONE.reverse_bits();
+    pub fn clear_ZONE(&mut self) -> Self {
+        self.inner &= Self::ZONE.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_POSITION(&self) -> bool {
-        (self.inner & Self::FLAG_POSITION) != 0
+    pub const fn is_POSITION(&self) -> bool {
+        (self.inner & Self::POSITION) != 0
     }
 
     /// uint16, uint16
     ///
-    pub const fn new_FLAG_POSITION() -> Self {
-        Self { inner: Self::FLAG_POSITION }
+    pub const fn new_POSITION() -> Self {
+        Self { inner: Self::POSITION }
     }
 
-    pub fn set_FLAG_POSITION(&mut self) -> Self {
-        self.inner |= Self::FLAG_POSITION;
+    pub fn set_POSITION(&mut self) -> Self {
+        self.inner |= Self::POSITION;
         *self
     }
 
-    pub fn clear_FLAG_POSITION(&mut self) -> Self {
-        self.inner &= Self::FLAG_POSITION.reverse_bits();
+    pub fn clear_POSITION(&mut self) -> Self {
+        self.inner &= Self::POSITION.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_AURAS(&self) -> bool {
-        (self.inner & Self::FLAG_AURAS) != 0
+    pub const fn is_AURAS(&self) -> bool {
+        (self.inner & Self::AURAS) != 0
     }
 
     /// uint32 mask, for each bit set uint16 spellid
     ///
-    pub const fn new_FLAG_AURAS() -> Self {
-        Self { inner: Self::FLAG_AURAS }
+    pub const fn new_AURAS() -> Self {
+        Self { inner: Self::AURAS }
     }
 
-    pub fn set_FLAG_AURAS(&mut self) -> Self {
-        self.inner |= Self::FLAG_AURAS;
+    pub fn set_AURAS(&mut self) -> Self {
+        self.inner |= Self::AURAS;
         *self
     }
 
-    pub fn clear_FLAG_AURAS(&mut self) -> Self {
-        self.inner &= Self::FLAG_AURAS.reverse_bits();
+    pub fn clear_AURAS(&mut self) -> Self {
+        self.inner &= Self::AURAS.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_AURAS_2(&self) -> bool {
-        (self.inner & Self::FLAG_AURAS_2) != 0
+    pub const fn is_AURAS_2(&self) -> bool {
+        (self.inner & Self::AURAS_2) != 0
     }
 
     /// uint16 above mask continuation, giving max total of 48 auras possible
     ///
-    pub const fn new_FLAG_AURAS_2() -> Self {
-        Self { inner: Self::FLAG_AURAS_2 }
+    pub const fn new_AURAS_2() -> Self {
+        Self { inner: Self::AURAS_2 }
     }
 
-    pub fn set_FLAG_AURAS_2(&mut self) -> Self {
-        self.inner |= Self::FLAG_AURAS_2;
+    pub fn set_AURAS_2(&mut self) -> Self {
+        self.inner |= Self::AURAS_2;
         *self
     }
 
-    pub fn clear_FLAG_AURAS_2(&mut self) -> Self {
-        self.inner &= Self::FLAG_AURAS_2.reverse_bits();
+    pub fn clear_AURAS_2(&mut self) -> Self {
+        self.inner &= Self::AURAS_2.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_GUID(&self) -> bool {
-        (self.inner & Self::FLAG_PET_GUID) != 0
+    pub const fn is_PET_GUID(&self) -> bool {
+        (self.inner & Self::PET_GUID) != 0
     }
 
     /// uint64 pet guid
     ///
-    pub const fn new_FLAG_PET_GUID() -> Self {
-        Self { inner: Self::FLAG_PET_GUID }
+    pub const fn new_PET_GUID() -> Self {
+        Self { inner: Self::PET_GUID }
     }
 
-    pub fn set_FLAG_PET_GUID(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_GUID;
+    pub fn set_PET_GUID(&mut self) -> Self {
+        self.inner |= Self::PET_GUID;
         *self
     }
 
-    pub fn clear_FLAG_PET_GUID(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_GUID.reverse_bits();
+    pub fn clear_PET_GUID(&mut self) -> Self {
+        self.inner &= Self::PET_GUID.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_NAME(&self) -> bool {
-        (self.inner & Self::FLAG_PET_NAME) != 0
+    pub const fn is_PET_NAME(&self) -> bool {
+        (self.inner & Self::PET_NAME) != 0
     }
 
     /// pet name, NULL terminated string
     ///
-    pub const fn new_FLAG_PET_NAME() -> Self {
-        Self { inner: Self::FLAG_PET_NAME }
+    pub const fn new_PET_NAME() -> Self {
+        Self { inner: Self::PET_NAME }
     }
 
-    pub fn set_FLAG_PET_NAME(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_NAME;
+    pub fn set_PET_NAME(&mut self) -> Self {
+        self.inner |= Self::PET_NAME;
         *self
     }
 
-    pub fn clear_FLAG_PET_NAME(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_NAME.reverse_bits();
+    pub fn clear_PET_NAME(&mut self) -> Self {
+        self.inner &= Self::PET_NAME.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_MODEL_ID(&self) -> bool {
-        (self.inner & Self::FLAG_PET_MODEL_ID) != 0
+    pub const fn is_PET_MODEL_ID(&self) -> bool {
+        (self.inner & Self::PET_MODEL_ID) != 0
     }
 
     /// uint16, model id
     ///
-    pub const fn new_FLAG_PET_MODEL_ID() -> Self {
-        Self { inner: Self::FLAG_PET_MODEL_ID }
+    pub const fn new_PET_MODEL_ID() -> Self {
+        Self { inner: Self::PET_MODEL_ID }
     }
 
-    pub fn set_FLAG_PET_MODEL_ID(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_MODEL_ID;
+    pub fn set_PET_MODEL_ID(&mut self) -> Self {
+        self.inner |= Self::PET_MODEL_ID;
         *self
     }
 
-    pub fn clear_FLAG_PET_MODEL_ID(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_MODEL_ID.reverse_bits();
+    pub fn clear_PET_MODEL_ID(&mut self) -> Self {
+        self.inner &= Self::PET_MODEL_ID.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_CUR_HP(&self) -> bool {
-        (self.inner & Self::FLAG_PET_CUR_HP) != 0
+    pub const fn is_PET_CUR_HP(&self) -> bool {
+        (self.inner & Self::PET_CUR_HP) != 0
     }
 
     /// uint16 pet cur health
     ///
-    pub const fn new_FLAG_PET_CUR_HP() -> Self {
-        Self { inner: Self::FLAG_PET_CUR_HP }
+    pub const fn new_PET_CUR_HP() -> Self {
+        Self { inner: Self::PET_CUR_HP }
     }
 
-    pub fn set_FLAG_PET_CUR_HP(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_CUR_HP;
+    pub fn set_PET_CUR_HP(&mut self) -> Self {
+        self.inner |= Self::PET_CUR_HP;
         *self
     }
 
-    pub fn clear_FLAG_PET_CUR_HP(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_CUR_HP.reverse_bits();
+    pub fn clear_PET_CUR_HP(&mut self) -> Self {
+        self.inner &= Self::PET_CUR_HP.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_MAX_HP(&self) -> bool {
-        (self.inner & Self::FLAG_PET_MAX_HP) != 0
+    pub const fn is_PET_MAX_HP(&self) -> bool {
+        (self.inner & Self::PET_MAX_HP) != 0
     }
 
     /// uint16 pet max health
     ///
-    pub const fn new_FLAG_PET_MAX_HP() -> Self {
-        Self { inner: Self::FLAG_PET_MAX_HP }
+    pub const fn new_PET_MAX_HP() -> Self {
+        Self { inner: Self::PET_MAX_HP }
     }
 
-    pub fn set_FLAG_PET_MAX_HP(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_MAX_HP;
+    pub fn set_PET_MAX_HP(&mut self) -> Self {
+        self.inner |= Self::PET_MAX_HP;
         *self
     }
 
-    pub fn clear_FLAG_PET_MAX_HP(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_MAX_HP.reverse_bits();
+    pub fn clear_PET_MAX_HP(&mut self) -> Self {
+        self.inner &= Self::PET_MAX_HP.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_POWER_TYPE(&self) -> bool {
-        (self.inner & Self::FLAG_PET_POWER_TYPE) != 0
+    pub const fn is_PET_POWER_TYPE(&self) -> bool {
+        (self.inner & Self::PET_POWER_TYPE) != 0
     }
 
     /// uint8 pet power type
     ///
-    pub const fn new_FLAG_PET_POWER_TYPE() -> Self {
-        Self { inner: Self::FLAG_PET_POWER_TYPE }
+    pub const fn new_PET_POWER_TYPE() -> Self {
+        Self { inner: Self::PET_POWER_TYPE }
     }
 
-    pub fn set_FLAG_PET_POWER_TYPE(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_POWER_TYPE;
+    pub fn set_PET_POWER_TYPE(&mut self) -> Self {
+        self.inner |= Self::PET_POWER_TYPE;
         *self
     }
 
-    pub fn clear_FLAG_PET_POWER_TYPE(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_POWER_TYPE.reverse_bits();
+    pub fn clear_PET_POWER_TYPE(&mut self) -> Self {
+        self.inner &= Self::PET_POWER_TYPE.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_CUR_POWER(&self) -> bool {
-        (self.inner & Self::FLAG_PET_CUR_POWER) != 0
+    pub const fn is_PET_CUR_POWER(&self) -> bool {
+        (self.inner & Self::PET_CUR_POWER) != 0
     }
 
     /// uint16 pet cur power
     ///
-    pub const fn new_FLAG_PET_CUR_POWER() -> Self {
-        Self { inner: Self::FLAG_PET_CUR_POWER }
+    pub const fn new_PET_CUR_POWER() -> Self {
+        Self { inner: Self::PET_CUR_POWER }
     }
 
-    pub fn set_FLAG_PET_CUR_POWER(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_CUR_POWER;
+    pub fn set_PET_CUR_POWER(&mut self) -> Self {
+        self.inner |= Self::PET_CUR_POWER;
         *self
     }
 
-    pub fn clear_FLAG_PET_CUR_POWER(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_CUR_POWER.reverse_bits();
+    pub fn clear_PET_CUR_POWER(&mut self) -> Self {
+        self.inner &= Self::PET_CUR_POWER.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_MAX_POWER(&self) -> bool {
-        (self.inner & Self::FLAG_PET_MAX_POWER) != 0
+    pub const fn is_PET_MAX_POWER(&self) -> bool {
+        (self.inner & Self::PET_MAX_POWER) != 0
     }
 
     /// uint16 pet max power
     ///
-    pub const fn new_FLAG_PET_MAX_POWER() -> Self {
-        Self { inner: Self::FLAG_PET_MAX_POWER }
+    pub const fn new_PET_MAX_POWER() -> Self {
+        Self { inner: Self::PET_MAX_POWER }
     }
 
-    pub fn set_FLAG_PET_MAX_POWER(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_MAX_POWER;
+    pub fn set_PET_MAX_POWER(&mut self) -> Self {
+        self.inner |= Self::PET_MAX_POWER;
         *self
     }
 
-    pub fn clear_FLAG_PET_MAX_POWER(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_MAX_POWER.reverse_bits();
+    pub fn clear_PET_MAX_POWER(&mut self) -> Self {
+        self.inner &= Self::PET_MAX_POWER.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_AURAS(&self) -> bool {
-        (self.inner & Self::FLAG_PET_AURAS) != 0
+    pub const fn is_PET_AURAS(&self) -> bool {
+        (self.inner & Self::PET_AURAS) != 0
     }
 
     /// uint32 mask, for each bit set uint16 spellid, pet auras...
     ///
-    pub const fn new_FLAG_PET_AURAS() -> Self {
-        Self { inner: Self::FLAG_PET_AURAS }
+    pub const fn new_PET_AURAS() -> Self {
+        Self { inner: Self::PET_AURAS }
     }
 
-    pub fn set_FLAG_PET_AURAS(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_AURAS;
+    pub fn set_PET_AURAS(&mut self) -> Self {
+        self.inner |= Self::PET_AURAS;
         *self
     }
 
-    pub fn clear_FLAG_PET_AURAS(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_AURAS.reverse_bits();
+    pub fn clear_PET_AURAS(&mut self) -> Self {
+        self.inner &= Self::PET_AURAS.reverse_bits();
         *self
     }
 
-    pub const fn is_FLAG_PET_AURAS_2(&self) -> bool {
-        (self.inner & Self::FLAG_PET_AURAS_2) != 0
+    pub const fn is_PET_AURAS_2(&self) -> bool {
+        (self.inner & Self::PET_AURAS_2) != 0
     }
 
     /// uint16 above mask continuation, giving max total of 48 auras possible
     ///
-    pub const fn new_FLAG_PET_AURAS_2() -> Self {
-        Self { inner: Self::FLAG_PET_AURAS_2 }
+    pub const fn new_PET_AURAS_2() -> Self {
+        Self { inner: Self::PET_AURAS_2 }
     }
 
-    pub fn set_FLAG_PET_AURAS_2(&mut self) -> Self {
-        self.inner |= Self::FLAG_PET_AURAS_2;
+    pub fn set_PET_AURAS_2(&mut self) -> Self {
+        self.inner |= Self::PET_AURAS_2;
         *self
     }
 
-    pub fn clear_FLAG_PET_AURAS_2(&mut self) -> Self {
-        self.inner &= Self::FLAG_PET_AURAS_2.reverse_bits();
+    pub fn clear_PET_AURAS_2(&mut self) -> Self {
+        self.inner &= Self::PET_AURAS_2.reverse_bits();
         *self
     }
 

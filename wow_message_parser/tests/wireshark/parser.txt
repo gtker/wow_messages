@@ -4606,121 +4606,121 @@
         case SMSG_PARTY_MEMBER_STATS:
             add_packed_guid(ptv, pinfo);
             ptvcursor_add_ret_uint(ptv, hf_woww_group_update_flags, 4, ENC_LITTLE_ENDIAN, &mask);
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_STATUS) {
+            if (mask & GROUP_UPDATE_FLAGS_STATUS) {
                 ptvcursor_add(ptv, hf_woww_group_member_online_status, 1, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_CUR_HP) {
+            if (mask & GROUP_UPDATE_FLAGS_CUR_HP) {
                 ptvcursor_add(ptv, hf_woww_current_health, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_MAX_HP) {
+            if (mask & GROUP_UPDATE_FLAGS_MAX_HP) {
                 ptvcursor_add(ptv, hf_woww_max_health, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_POWER_TYPE) {
+            if (mask & GROUP_UPDATE_FLAGS_POWER_TYPE) {
                 ptvcursor_add(ptv, hf_woww_power, 1, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_CUR_POWER) {
+            if (mask & GROUP_UPDATE_FLAGS_CUR_POWER) {
                 ptvcursor_add(ptv, hf_woww_current_power, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_MAX_POWER) {
+            if (mask & GROUP_UPDATE_FLAGS_MAX_POWER) {
                 ptvcursor_add(ptv, hf_woww_max_power, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_LEVEL) {
+            if (mask & GROUP_UPDATE_FLAGS_LEVEL) {
                 ptvcursor_add(ptv, hf_woww_level, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_ZONE) {
+            if (mask & GROUP_UPDATE_FLAGS_ZONE) {
                 ptvcursor_add(ptv, hf_woww_area, 4, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_POSITION) {
+            if (mask & GROUP_UPDATE_FLAGS_POSITION) {
                 ptvcursor_add(ptv, hf_woww_position_x_int, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_position_y_int, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_AURAS) {
+            if (mask & GROUP_UPDATE_FLAGS_AURAS) {
                 add_aura_mask(ptv);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_GUID) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_GUID) {
                 ptvcursor_add(ptv, hf_woww_pet, 8, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_NAME) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_NAME) {
                 add_cstring(ptv, &hf_woww_pet_name);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_MODEL_ID) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_MODEL_ID) {
                 ptvcursor_add(ptv, hf_woww_pet_display_id, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_CUR_HP) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_CUR_HP) {
                 ptvcursor_add(ptv, hf_woww_pet_current_health, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_MAX_HP) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_MAX_HP) {
                 ptvcursor_add(ptv, hf_woww_pet_max_health, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_POWER_TYPE) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_POWER_TYPE) {
                 ptvcursor_add(ptv, hf_woww_power, 1, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_CUR_POWER) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_CUR_POWER) {
                 ptvcursor_add(ptv, hf_woww_pet_current_power, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_MAX_POWER) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_MAX_POWER) {
                 ptvcursor_add(ptv, hf_woww_pet_max_power, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_AURAS) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_AURAS) {
                 add_aura_mask(ptv);
             }
             break;
         case SMSG_PARTY_MEMBER_STATS_FULL:
             add_packed_guid(ptv, pinfo);
             ptvcursor_add_ret_uint(ptv, hf_woww_group_update_flags, 4, ENC_LITTLE_ENDIAN, &mask);
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_STATUS) {
+            if (mask & GROUP_UPDATE_FLAGS_STATUS) {
                 ptvcursor_add(ptv, hf_woww_group_member_online_status, 1, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_CUR_HP) {
+            if (mask & GROUP_UPDATE_FLAGS_CUR_HP) {
                 ptvcursor_add(ptv, hf_woww_current_health, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_MAX_HP) {
+            if (mask & GROUP_UPDATE_FLAGS_MAX_HP) {
                 ptvcursor_add(ptv, hf_woww_max_health, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_POWER_TYPE) {
+            if (mask & GROUP_UPDATE_FLAGS_POWER_TYPE) {
                 ptvcursor_add(ptv, hf_woww_power, 1, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_CUR_POWER) {
+            if (mask & GROUP_UPDATE_FLAGS_CUR_POWER) {
                 ptvcursor_add(ptv, hf_woww_current_power, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_MAX_POWER) {
+            if (mask & GROUP_UPDATE_FLAGS_MAX_POWER) {
                 ptvcursor_add(ptv, hf_woww_max_power, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_LEVEL) {
+            if (mask & GROUP_UPDATE_FLAGS_LEVEL) {
                 ptvcursor_add(ptv, hf_woww_level, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_ZONE) {
+            if (mask & GROUP_UPDATE_FLAGS_ZONE) {
                 ptvcursor_add(ptv, hf_woww_area, 4, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_POSITION) {
+            if (mask & GROUP_UPDATE_FLAGS_POSITION) {
                 ptvcursor_add(ptv, hf_woww_position_x_int, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_position_y_int, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_AURAS) {
+            if (mask & GROUP_UPDATE_FLAGS_AURAS) {
                 add_aura_mask(ptv);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_NAME) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_NAME) {
                 add_cstring(ptv, &hf_woww_pet_name);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_MODEL_ID) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_MODEL_ID) {
                 ptvcursor_add(ptv, hf_woww_pet_display_id, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_CUR_HP) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_CUR_HP) {
                 ptvcursor_add(ptv, hf_woww_pet_current_health, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_MAX_HP) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_MAX_HP) {
                 ptvcursor_add(ptv, hf_woww_pet_max_health, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_POWER_TYPE) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_POWER_TYPE) {
                 ptvcursor_add(ptv, hf_woww_power, 1, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_CUR_POWER) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_CUR_POWER) {
                 ptvcursor_add(ptv, hf_woww_pet_current_power, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_MAX_POWER) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_MAX_POWER) {
                 ptvcursor_add(ptv, hf_woww_pet_max_power, 2, ENC_LITTLE_ENDIAN);
             }
-            if (mask & GROUP_UPDATE_FLAGS_FLAG_PET_AURAS) {
+            if (mask & GROUP_UPDATE_FLAGS_PET_AURAS) {
                 add_aura_mask(ptv);
             }
             break;
