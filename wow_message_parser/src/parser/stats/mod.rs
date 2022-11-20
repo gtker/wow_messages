@@ -325,10 +325,13 @@ fn print_missing_definitions(data: &[Data], version: MajorWorldVersion, descript
 
 fn stats_for(version: MajorWorldVersion, data: &[Data], description: &str) {
     let mut definition_sum = 0;
+    let mut reason_sum = 0;
     let mut test_sum = 0;
     for d in data {
         if d.definition {
             definition_sum += 1;
+        } else if d.reason.is_some() {
+            reason_sum += 1;
         }
         if d.tests > 0 {
             test_sum += 1;
@@ -336,13 +339,14 @@ fn stats_for(version: MajorWorldVersion, data: &[Data], description: &str) {
     }
 
     println!(
-        "{} {} with definition: {} / {} ({}%) ({} left)",
+        "{} {} with definition: {} / {} ({}%) ({} left, {} without implementation excluded with reason)",
         version.as_version_string(),
         description,
         definition_sum,
         data.len(),
         (definition_sum as f32 / data.len() as f32) * 100.0_f32,
-        data.len() - definition_sum
+        data.len() - definition_sum,
+        reason_sum,
     );
     println!(
         "    with tests: {} / {} ({}%)",
