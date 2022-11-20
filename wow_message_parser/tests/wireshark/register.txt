@@ -1894,12 +1894,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_has_been_saved,
-            { "Has Been Saved", "woww.has.been.saved",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_has_transport,
             { "Has Transport", "woww.has.transport",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
@@ -3187,6 +3181,12 @@
         { &hf_woww_player_guid,
             { "Player Guid", "woww.player.guid",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_player_is_saved_to_a_raid,
+            { "Player Is Saved To A Raid", "woww.player.is.saved.to.a.raid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

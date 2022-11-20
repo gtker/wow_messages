@@ -1,8 +1,6 @@
-#tag_all versions "1.12";
+#tag_all versions "1 2 3";
 
 smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
-    u32 has_been_saved {
-        comment = "cmangos/vmangos/mangoszero: true or false means, whether you have current raid instances";
-    }
+    Bool32 player_is_saved_to_a_raid;
 }
 

@@ -1348,6 +1348,8 @@ pub use crate::shared::smsg_turn_in_petition_results_tbc_wrath::SMSG_TURN_IN_PET
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
+pub use crate::shared::smsg_update_instance_ownership_vanilla_tbc_wrath::SMSG_UPDATE_INSTANCE_OWNERSHIP;
+
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
 
 pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;

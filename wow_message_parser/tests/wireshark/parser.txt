@@ -5699,7 +5699,7 @@
             ptvcursor_add(ptv, hf_woww_aura_duration, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_UPDATE_INSTANCE_OWNERSHIP:
-            ptvcursor_add(ptv, hf_woww_has_been_saved, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_player_is_saved_to_a_raid, 4, ENC_NA);
             break;
         case SMSG_UPDATE_LAST_INSTANCE:
             ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);

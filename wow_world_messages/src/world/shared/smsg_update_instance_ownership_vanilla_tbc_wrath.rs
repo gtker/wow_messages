@@ -5,13 +5,11 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_update_instance_ownership.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_update_instance_ownership.wowm#L3):
 /// ```text
 /// smsg SMSG_UPDATE_INSTANCE_OWNERSHIP = 0x032B {
-///     u32 has_been_saved;
+///     Bool32 player_is_saved_to_a_raid;
 /// }
 /// ```
 pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    /// cmangos/vmangos/mangoszero: true or false means, whether you have current raid instances
-    ///
-    pub has_been_saved: u32,
+    pub player_is_saved_to_a_raid: bool,
 }
 
 impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
@@ -22,8 +20,8 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // has_been_saved: u32
-        w.write_all(&self.has_been_saved.to_le_bytes())?;
+        // player_is_saved_to_a_raid: Bool32
+        w.write_all(u32::from(self.player_is_saved_to_a_raid).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -32,15 +30,20 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032B, size: body_size as u32 });
         }
 
-        // has_been_saved: u32
-        let has_been_saved = crate::util::read_u32_le(r)?;
-
+        // player_is_saved_to_a_raid: Bool32
+        let player_is_saved_to_a_raid = crate::util::read_u32_le(r)? != 0;
         Ok(Self {
-            has_been_saved,
+            player_is_saved_to_a_raid,
         })
     }
 
 }
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
+
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
+
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 
