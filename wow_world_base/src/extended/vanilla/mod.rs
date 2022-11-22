@@ -8,6 +8,7 @@ mod player_race;
 pub mod position;
 mod skills;
 mod spells;
+pub mod trigger;
 
 pub use actions::*;
 pub use base_stats::*;
@@ -65,4 +66,5 @@ macro_rules! vanilla_race_class_match {
         }
     };
 }
+use crate::vanilla::position::Position;
 pub(crate) use vanilla_race_class_match;

@@ -1,4 +1,4 @@
-pub mod range;
+pub mod geometry;
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub struct BaseStats {

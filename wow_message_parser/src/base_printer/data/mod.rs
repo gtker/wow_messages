@@ -1,3 +1,5 @@
+pub(crate) mod area_triggers;
+
 use super::position::{positions, RawPosition};
 use super::types::{Class, Race};
 use super::Expansion;
@@ -14,6 +16,7 @@ pub(crate) struct Data {
     pub combinations: Vec<Combination>,
     positions: Vec<RawPosition>,
     pub actions: HashMap<Combination, BTreeSet<Action>>,
+    pub triggers: Vec<Trigger>,
 }
 
 impl Data {
@@ -31,7 +34,7 @@ pub(crate) struct XpPerLevel {
     pub exp: i32,
 }
 
-pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
+pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion) -> Data {
     let conn = Connection::open(sqlite_file).unwrap();
 
     let combinations = get_combinations(&conn);
@@ -42,6 +45,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
     let spells = get_spell_data(&conn);
     let actions = get_action_data(&conn);
     let positions = positions();
+    let triggers = get_triggers(&conn, expansion);
 
     Data {
         exp_per_level,
@@ -52,6 +56,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path) -> Data {
         combinations,
         positions,
         actions,
+        triggers,
     }
 }
 
@@ -338,4 +343,204 @@ fn get_combinations(conn: &Connection) -> Vec<Combination> {
     combinations.sort_by(|a, b| a.race.cmp(&b.race).then(a.class.cmp(&b.class)));
 
     combinations
+}
+
+#[derive(Debug, Clone, PartialOrd, PartialEq)]
+pub enum Trigger {
+    Inn {
+        id: u32,
+        name: String,
+    },
+    Teleport {
+        id: u32,
+        map: u32,
+        x: f32,
+        y: f32,
+        z: f32,
+        orientation: f32,
+        required_level: u8,
+        required_item: u32,
+        required_quest: u32,
+        failed_text: Option<String>,
+        // Below not required for vanilla
+        heroic_keys: Vec<u32>,
+        heroic_required_quest: u32,
+        name: String,
+    },
+}
+
+impl Trigger {
+    pub const fn id(&self) -> u32 {
+        match *self {
+            Trigger::Inn { id, .. } => id,
+            Trigger::Teleport { id, .. } => id,
+        }
+    }
+}
+
+fn get_triggers(conn: &Connection, expansion: Expansion) -> Vec<Trigger> {
+    let mut taverns = conn
+        .prepare("SELECT id, name from areatrigger_tavern;")
+        .unwrap();
+    let taverns = taverns
+        .query_map([], |row| {
+            Ok(Trigger::Inn {
+                id: row.get(0).unwrap(),
+                name: row.get(1).unwrap(),
+            })
+        })
+        .unwrap();
+
+    match expansion {
+        Expansion::Vanilla => {
+            let mut t = conn
+                .prepare(
+                    "\
+SELECT
+    id,
+    required_level,
+    required_item,
+    required_quest_done,
+    target_map,
+    target_position_x,
+    target_position_y,
+    target_position_z,
+    target_orientation,
+    status_failed_text,
+    name
+FROM
+    areatrigger_teleport;",
+                )
+                .unwrap();
+            t.query_map([], |row| {
+                Ok(Trigger::Teleport {
+                    id: row.get(0).unwrap(),
+                    required_level: row.get(1).unwrap(),
+                    required_item: row.get(2).unwrap(),
+                    required_quest: row.get(3).unwrap(),
+                    map: row.get(4).unwrap(),
+                    x: row.get(5).unwrap(),
+                    y: row.get(6).unwrap(),
+                    z: row.get(7).unwrap(),
+                    orientation: row.get(8).unwrap(),
+                    failed_text: row.get(9).unwrap(),
+                    heroic_keys: vec![],
+                    heroic_required_quest: 0,
+                    name: row.get(10).unwrap(),
+                })
+            })
+            .unwrap()
+            .chain(taverns)
+            .map(|a| a.unwrap())
+            .collect()
+        }
+        Expansion::BurningCrusade => {
+            let mut t = conn
+                .prepare(
+                    "\
+SELECT
+    id,
+    required_level,
+    required_item,
+    required_quest_done,
+    target_map,
+    target_position_x,
+    target_position_y,
+    target_position_z,
+    target_orientation,
+    status_failed_text,
+    heroic_key,
+    heroic_key2,
+    required_quest_done_heroic,
+    name
+FROM
+    areatrigger_teleport;",
+                )
+                .unwrap();
+            t.query_map([], |row| {
+                let mut heroic_keys = vec![];
+                let heroic_key: u32 = row.get(10).unwrap();
+                if heroic_key != 0 {
+                    heroic_keys.push(heroic_key);
+                }
+                let heroic_key2 = row.get(11).unwrap();
+                if heroic_key2 != 0 {
+                    heroic_keys.push(heroic_key2);
+                }
+                Ok(Trigger::Teleport {
+                    id: row.get(0).unwrap(),
+                    required_level: row.get(1).unwrap(),
+                    required_item: row.get(2).unwrap(),
+                    required_quest: row.get(3).unwrap(),
+                    map: row.get(4).unwrap(),
+                    x: row.get(5).unwrap(),
+                    y: row.get(6).unwrap(),
+                    z: row.get(7).unwrap(),
+                    orientation: row.get(8).unwrap(),
+                    failed_text: row.get(9).unwrap(),
+                    heroic_keys: vec![],
+                    heroic_required_quest: row.get(12).unwrap(),
+                    name: row.get(13).unwrap(),
+                })
+            })
+            .unwrap()
+            .chain(taverns)
+            .map(|a| a.unwrap())
+            .collect()
+        }
+        Expansion::WrathOfTheLichKing => {
+            let mut t = conn
+                .prepare(
+                    "\
+SELECT
+    id,
+    required_level,
+    required_item,
+    required_quest_done,
+    target_map,
+    target_position_x,
+    target_position_y,
+    target_position_z,
+    target_orientation,
+    heroic_key,
+    heroic_key2,
+    required_quest_done_heroic,
+    name
+FROM
+    areatrigger_teleport;",
+                )
+                .unwrap();
+            t.query_map([], |row| {
+                let mut heroic_keys = vec![];
+                let heroic_key = row.get(9).unwrap();
+                if heroic_key != 0 {
+                    heroic_keys.push(heroic_key);
+                }
+                let heroic_key2 = row.get(10).unwrap();
+                if heroic_key2 != 0 {
+                    heroic_keys.push(heroic_key2);
+                }
+
+                Ok(Trigger::Teleport {
+                    id: row.get(0).unwrap(),
+                    required_level: row.get(1).unwrap(),
+                    required_item: row.get(2).unwrap(),
+                    required_quest: row.get(3).unwrap(),
+                    map: row.get(4).unwrap(),
+                    x: row.get(5).unwrap(),
+                    y: row.get(6).unwrap(),
+                    z: row.get(7).unwrap(),
+                    orientation: row.get(8).unwrap(),
+                    failed_text: None,
+                    heroic_keys,
+                    heroic_required_quest: row.get(11).unwrap(),
+                    name: row.get(12).unwrap(),
+                })
+            })
+            .unwrap()
+            .chain(taverns)
+            .map(|a| a.unwrap())
+            .collect()
+        }
+    }
 }

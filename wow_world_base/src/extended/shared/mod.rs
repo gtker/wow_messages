@@ -84,7 +84,7 @@ pub(crate) use get_base_stats_for;
 
 macro_rules! position {
     () => {
-        #[derive(Debug, Copy, Clone)]
+        #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
         pub struct Position {
             pub map: Map,
             pub x: f32,
@@ -102,6 +102,22 @@ macro_rules! position {
                     z,
                     orientation,
                 }
+            }
+        }
+
+        impl From<Position> for $crate::shared::vector3d_vanilla_tbc_wrath::Vector3d {
+            fn from(v: Position) -> $crate::shared::vector3d_vanilla_tbc_wrath::Vector3d {
+                $crate::shared::vector3d_vanilla_tbc_wrath::Vector3d {
+                    x: v.x,
+                    y: v.y,
+                    z: v.z,
+                }
+            }
+        }
+
+        impl From<Position> for $crate::shared::vector2d_vanilla_tbc_wrath::Vector2d {
+            fn from(v: Position) -> $crate::shared::vector2d_vanilla_tbc_wrath::Vector2d {
+                $crate::shared::vector2d_vanilla_tbc_wrath::Vector2d { x: v.x, y: v.y }
             }
         }
     };
@@ -144,7 +160,122 @@ macro_rules! tbc_starter_positions {
             Position::new(Map::Outland, -3961.64, -13931.2, 100.615, 2.08364);
     };
 }
+use crate::tbc::position::Position;
 pub(crate) use tbc_starter_positions;
+
+macro_rules! area_trigger {
+    () => {
+        #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
+        pub enum AreaTrigger {
+            Circle {
+                position: Position,
+                radius: f32,
+            },
+            Square {
+                position: Position,
+                /// Size along the x axis.
+                length: f32,
+                /// Size along the y axis.
+                width: f32,
+                /// Size along the z axis.
+                height: f32,
+                /// Rotation about the Z axis
+                yaw: f32,
+            },
+        }
+    };
+}
+use crate::vanilla::trigger::{AreaTrigger, Trigger};
+pub(crate) use area_trigger;
+
+macro_rules! verify_trigger {
+    () => {
+        #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
+        pub enum TriggerResult {
+            NotFound,
+            NotInsideTrigger(&'static (AreaTrigger, Trigger)),
+            Success(&'static (AreaTrigger, Trigger)),
+        }
+
+        pub fn verify_trigger(player: Position, trigger: u32) -> TriggerResult {
+            let t = match TRIGGERS.iter().find(|(id, _)| *id == trigger) {
+                None => return TriggerResult::NotFound,
+                Some(t) => &t.1,
+            };
+
+            match t.0 {
+                AreaTrigger::Circle { position, radius } => {
+                    if position.map == player.map
+                        && is_within_distance(position.into(), player.into(), radius)
+                    {
+                        TriggerResult::Success(t)
+                    } else {
+                        TriggerResult::NotInsideTrigger(t)
+                    }
+                }
+                AreaTrigger::Square {
+                    position,
+                    length,
+                    width,
+                    height,
+                    yaw,
+                } => {
+                    if position.map == player.map
+                        && is_within_square(
+                            player.into(),
+                            position.into(),
+                            length,
+                            width,
+                            height,
+                            yaw,
+                        )
+                    {
+                        TriggerResult::Success(t)
+                    } else {
+                        TriggerResult::NotInsideTrigger(t)
+                    }
+                }
+            }
+        }
+    };
+}
+pub(crate) use verify_trigger;
+
+macro_rules! tbc_wrath_trigger {
+    () => {
+        #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
+        pub enum Trigger {
+            Inn,
+            Teleport {
+                location: Position,
+                required_level: u8,
+                required_item: u32,
+                required_quest: u32,
+                failed_text: Option<&'static str>,
+                heroic_keys: Option<&'static [u32]>,
+                heroic_required_quest: u32,
+            },
+        }
+    };
+}
+pub(crate) use tbc_wrath_trigger;
+
+macro_rules! vanilla_trigger {
+    () => {
+        #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
+        pub enum Trigger {
+            Inn,
+            Teleport {
+                location: Position,
+                required_level: u8,
+                required_item: u32,
+                required_quest: u32,
+                failed_text: Option<&'static str>,
+            },
+        }
+    };
+}
+pub(crate) use vanilla_trigger;
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub struct Action {

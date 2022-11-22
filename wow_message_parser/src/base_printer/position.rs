@@ -7,7 +7,7 @@ impl ValidVersions {
     const TBC: u8 = 2;
     const WRATH: u8 = 4;
 
-    pub fn new(vanilla: bool, tbc: bool, wrath: bool) -> Self {
+    pub const fn new(vanilla: bool, tbc: bool, wrath: bool) -> Self {
         let vanilla = if vanilla { Self::VANILLA } else { 0 };
         let tbc = if tbc { Self::TBC } else { 0 };
         let wrath = if wrath { Self::WRATH } else { 0 };
@@ -17,15 +17,15 @@ impl ValidVersions {
         }
     }
 
-    pub fn vanilla(&self) -> bool {
+    pub const fn vanilla(&self) -> bool {
         self.inner & Self::VANILLA != 0
     }
 
-    pub fn tbc(&self) -> bool {
+    pub const fn tbc(&self) -> bool {
         self.inner & Self::TBC != 0
     }
 
-    pub fn wrath(&self) -> bool {
+    pub const fn wrath(&self) -> bool {
         self.inner & Self::WRATH != 0
     }
 }
@@ -58,6 +58,18 @@ impl RawPosition {
             orientation,
             names,
             valid_versions,
+        }
+    }
+
+    pub const fn no_names(map: u32, x: f32, y: f32, z: f32) -> Self {
+        Self {
+            map,
+            x,
+            y,
+            z,
+            orientation: 0.0,
+            names: vec![],
+            valid_versions: ValidVersions::new(false, false, false),
         }
     }
 }

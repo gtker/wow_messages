@@ -1,6 +1,8 @@
 use super::data::Data;
 use super::writer::Writer;
 use super::Expansion;
+use crate::base_printer::data::area_triggers::{AreaTrigger, AREA_TRIGGERS};
+use crate::base_printer::data::Trigger;
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
 use std::path::Path;
 
@@ -249,5 +251,103 @@ pub(crate) fn write_actions(directory: &Path, data: &Data) {
     }
 
     let path = directory.join("actions.rs");
+    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+}
+
+pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expansion) {
+    let mut s = Writer::new();
+
+    for area_trigger in AREA_TRIGGERS {
+        let trigger = match data.triggers.iter().find(|a| a.id() == area_trigger.0) {
+            None => continue,
+            Some(t) => t,
+        };
+
+        let position = area_trigger.1.position();
+        let map = expansion.to_map(position.map);
+        let x = position.x;
+        let y = position.y;
+        let z = position.z;
+
+        s.wln(format!("({}, (", area_trigger.0));
+        s.inc_indent();
+        match &area_trigger.1 {
+            AreaTrigger::Circle { radius, .. } => {
+                s.wln(format!("AreaTrigger::Circle {{ position: Position::new({map}, {x:.1}, {y:.1}, {z:.1}, 0.0), radius: {radius:.1} }}, "));
+            }
+            AreaTrigger::Square {
+                length,
+                width,
+                height,
+                yaw,
+                ..
+            } => {
+                s.wln(format!("AreaTrigger::Square {{ position: Position::new({map}, {x:.1}, {y:.1}, {z:.1}, 0.0), length: {length:.1}, width: {width:.1}, height: {height:.1}, yaw: {yaw:.1} }},"));
+            }
+        }
+
+        match trigger.clone() {
+            Trigger::Inn { .. } => {
+                s.wln("Trigger::Inn");
+            }
+            Trigger::Teleport {
+                map,
+                x,
+                y,
+                z,
+                orientation,
+                required_level,
+                required_item,
+                required_quest,
+                failed_text,
+                heroic_keys,
+                heroic_required_quest,
+                ..
+            } => {
+                let map = expansion.to_map(map);
+
+                let failed_text = if let Some(t) = failed_text {
+                    format!("Some(\"{}\")", t)
+                } else {
+                    "None".to_string()
+                };
+
+                let heroic_keys = if !heroic_keys.is_empty() {
+                    use std::fmt::Write;
+                    let mut s = "Some(&[".to_string();
+                    for key in heroic_keys {
+                        write!(s, "{}, ", key).unwrap();
+                    }
+                    write!(s, "]").unwrap();
+                    s
+                } else {
+                    "None".to_string()
+                };
+
+                s.wln(format!("Trigger::Teleport {{ location: Position::new({map}, {x:.1}, {y:.1}, {z:.1}, {orientation:.1}),\
+required_level: {required_level},\
+required_item: {required_item},\
+required_quest: {required_quest},\
+failed_text: {failed_text},"));
+                match expansion {
+                    Expansion::Vanilla => {
+                        s.wln_no_indent("}");
+                    }
+                    Expansion::BurningCrusade | Expansion::WrathOfTheLichKing => {
+                        s.wln_no_indent(format!(
+                            "heroic_keys: {heroic_keys},\
+heroic_required_quest: {heroic_required_quest} }}"
+                        ));
+                    }
+                }
+            }
+        }
+
+        s.dec_indent();
+
+        s.wln(")),");
+    }
+
+    let path = directory.join("trigger").join("triggers.rs");
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }

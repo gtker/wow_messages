@@ -7,6 +7,7 @@ pub mod exp;
 pub mod position;
 mod skills;
 mod spells;
+pub mod trigger;
 
 pub use actions::*;
 pub use base_stats::*;

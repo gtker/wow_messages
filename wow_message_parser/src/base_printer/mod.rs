@@ -17,6 +17,29 @@ pub enum Expansion {
     WrathOfTheLichKing,
 }
 
+impl Expansion {
+    pub(crate) fn to_map(&self, map: u32) -> String {
+        match self {
+            Expansion::Vanilla => format!(
+                "Map::{:?}",
+                wow_world_base::vanilla::Map::try_from(map).unwrap()
+            ),
+            Expansion::BurningCrusade => {
+                format!(
+                    "Map::{:?}",
+                    wow_world_base::tbc::Map::try_from(map).unwrap()
+                )
+            }
+            Expansion::WrathOfTheLichKing => {
+                format!(
+                    "Map::{:?}",
+                    wow_world_base::wrath::Map::try_from(map).unwrap()
+                )
+            }
+        }
+    }
+}
+
 pub(crate) fn print_base() {
     let sqlite_dir = if let Ok(p) = std::env::var("WOWM_SQLITE_DB_PATH") {
         PathBuf::from(p)
@@ -51,9 +74,9 @@ pub(crate) fn print_base() {
         std::process::exit(1);
     }
 
-    let vanilla_data = get_data_from_sqlite_file(&vanilla_path);
-    let tbc_data = get_data_from_sqlite_file(&tbc_path);
-    let wrath_data = get_data_from_sqlite_file(&wrath_path);
+    let vanilla_data = get_data_from_sqlite_file(&vanilla_path, Expansion::Vanilla);
+    let tbc_data = get_data_from_sqlite_file(&tbc_path, Expansion::BurningCrusade);
+    let wrath_data = get_data_from_sqlite_file(&wrath_path, Expansion::WrathOfTheLichKing);
 
     write_to_files(
         &vanilla_base_extended_dir(),
@@ -79,4 +102,5 @@ fn write_to_files(directory: &Path, data: &Data, expansion: Expansion) {
     write::write_spells(directory, data);
     write::write_positions(directory, data, expansion);
     write::write_actions(directory, data);
+    write::write_area_triggers(directory, data, expansion);
 }
