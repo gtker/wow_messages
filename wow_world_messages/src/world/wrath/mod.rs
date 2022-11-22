@@ -474,6 +474,8 @@ pub use crate::shared::cmsg_gossip_select_option_tbc_wrath::CMSG_GOSSIP_SELECT_O
 
 pub use crate::shared::cmsg_group_assistant_leader_vanilla_tbc_wrath::CMSG_GROUP_ASSISTANT_LEADER;
 
+pub use crate::shared::cmsg_group_cancel_tbc_wrath::CMSG_GROUP_CANCEL;
+
 pub use crate::shared::cmsg_group_change_sub_group_vanilla_tbc_wrath::CMSG_GROUP_CHANGE_SUB_GROUP;
 
 pub use crate::shared::cmsg_group_decline_vanilla_tbc_wrath::CMSG_GROUP_DECLINE;

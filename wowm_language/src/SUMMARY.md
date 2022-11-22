@@ -324,6 +324,7 @@
 - [CMSG_GOSSIP_SELECT_OPTION](docs/cmsg_gossip_select_option.md)
 - [CMSG_GROUP_ACCEPT](docs/cmsg_group_accept.md)
 - [CMSG_GROUP_ASSISTANT_LEADER](docs/cmsg_group_assistant_leader.md)
+- [CMSG_GROUP_CANCEL](docs/cmsg_group_cancel.md)
 - [CMSG_GROUP_CHANGE_SUB_GROUP](docs/cmsg_group_change_sub_group.md)
 - [CMSG_GROUP_DECLINE](docs/cmsg_group_decline.md)
 - [CMSG_GROUP_DISBAND](docs/cmsg_group_disband.md)

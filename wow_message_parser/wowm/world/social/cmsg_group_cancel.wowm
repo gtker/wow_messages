@@ -1,0 +1,3 @@
+cmsg CMSG_GROUP_CANCEL = 0x070 {} {
+    versions = "2.4.3 3";
+}
