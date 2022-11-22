@@ -1,8 +1,8 @@
 use crate::extended::shared::get_base_stats_for;
 use crate::extended::tbc::exp::MAX_LEVEL;
 use crate::extended::tbc::tbc_race_class_match;
-use crate::extended::BaseStats;
 use crate::tbc::RaceClass;
+use crate::BaseStats;
 
 tbc_race_class_match!(base_stats, &'static [BaseStats]);
 
