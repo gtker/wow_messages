@@ -6,6 +6,7 @@ use crate::rust_printer::DefinerType;
 use core::convert::From;
 use core::option::Option;
 use serde::Serialize;
+use std::collections::BTreeSet;
 
 pub(crate) fn definers_to_ir(definers: &[Definer]) -> Vec<IrDefiner> {
     definers.iter().map(definer_to_ir).collect()
@@ -60,7 +61,7 @@ impl From<DefinerType> for IrDefinerType {
     }
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Ord, PartialOrd, Eq, PartialEq)]
 pub(crate) enum IrDefinerUsage {
     #[serde(rename = "used_but_not_in_if")]
     UsedButNotInIf,
@@ -119,7 +120,7 @@ struct IrDefinerValue {
     original: String,
 }
 
-#[derive(Serialize, Debug)]
+#[derive(Serialize, Debug, Ord, PartialOrd, Eq, PartialEq)]
 struct ObjectUsedIn {
     name: String,
     usage: IrDefinerUsage,
@@ -133,7 +134,7 @@ pub(crate) struct IrDefiner {
     self_value: Option<IrSelfValueDefinerField>,
     integer_type: IrIntegerType,
     tags: IrTags,
-    objects_used_in: Vec<ObjectUsedIn>,
+    objects_used_in: BTreeSet<ObjectUsedIn>,
     file_info: IrFileInfo,
     features: Vec<Feature>,
 }
