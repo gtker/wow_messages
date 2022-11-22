@@ -172,7 +172,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_MOVE_UNSET_HOVER", 0x0F5),
     Data::new("CMSG_MOVE_HOVER_ACK", 0x0F6),
     Data::new("MSG_MOVE_HOVER", 0x0F7),
-    Data::new("CMSG_OPENING_CINEMATIC", 0x0F9),
+    Data::nyi("CMSG_OPENING_CINEMATIC", 0x0F9),
     Data::new("SMSG_TRIGGER_CINEMATIC", 0x0FA),
     Data::new("CMSG_NEXT_CINEMATIC_CAMERA", 0x0FB),
     Data::new("CMSG_COMPLETE_CINEMATIC", 0x0FC),
