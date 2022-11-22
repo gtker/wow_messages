@@ -212,6 +212,7 @@ pub mod cmsg_set_action_button_vanilla_tbc_wrath;
 pub mod cmsg_set_actionbar_toggles_vanilla_tbc_wrath;
 pub mod cmsg_set_active_mover_vanilla_tbc_wrath;
 pub mod cmsg_set_ammo_vanilla_tbc_wrath;
+pub mod cmsg_set_contact_notes_tbc_wrath;
 pub mod cmsg_set_faction_atwar_vanilla_tbc;
 pub mod cmsg_set_faction_inactive_vanilla_tbc_wrath;
 pub mod cmsg_set_selection_vanilla_tbc_wrath;

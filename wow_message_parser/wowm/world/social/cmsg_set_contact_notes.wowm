@@ -1,0 +1,6 @@
+cmsg CMSG_SET_CONTACT_NOTES = 0x06B {
+    Guid player;
+    CString note;
+} {
+    versions = "2.4.3 3";
+}

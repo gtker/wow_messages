@@ -65,6 +65,7 @@ use crate::world::wrath::CMSG_WHOIS;
 use crate::world::wrath::CMSG_CONTACT_LIST;
 use crate::world::wrath::CMSG_ADD_FRIEND;
 use crate::world::wrath::CMSG_DEL_FRIEND;
+use crate::world::wrath::CMSG_SET_CONTACT_NOTES;
 use crate::world::wrath::CMSG_ADD_IGNORE;
 use crate::world::wrath::CMSG_DEL_IGNORE;
 use crate::world::wrath::CMSG_GROUP_INVITE;
@@ -383,6 +384,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CONTACT_LIST(CMSG_CONTACT_LIST),
     CMSG_ADD_FRIEND(CMSG_ADD_FRIEND),
     CMSG_DEL_FRIEND(CMSG_DEL_FRIEND),
+    CMSG_SET_CONTACT_NOTES(CMSG_SET_CONTACT_NOTES),
     CMSG_ADD_IGNORE(CMSG_ADD_IGNORE),
     CMSG_DEL_IGNORE(CMSG_DEL_IGNORE),
     CMSG_GROUP_INVITE(CMSG_GROUP_INVITE),
@@ -703,6 +705,7 @@ impl ClientOpcodeMessage {
             0x0066 => Ok(Self::CMSG_CONTACT_LIST(<CMSG_CONTACT_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0066, size: body_size, io, } } else { a } })?)),
             0x0069 => Ok(Self::CMSG_ADD_FRIEND(<CMSG_ADD_FRIEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0069, size: body_size, io, } } else { a } })?)),
             0x006A => Ok(Self::CMSG_DEL_FRIEND(<CMSG_DEL_FRIEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006A, size: body_size, io, } } else { a } })?)),
+            0x006B => Ok(Self::CMSG_SET_CONTACT_NOTES(<CMSG_SET_CONTACT_NOTES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006B, size: body_size, io, } } else { a } })?)),
             0x006C => Ok(Self::CMSG_ADD_IGNORE(<CMSG_ADD_IGNORE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006C, size: body_size, io, } } else { a } })?)),
             0x006D => Ok(Self::CMSG_DEL_IGNORE(<CMSG_DEL_IGNORE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006D, size: body_size, io, } } else { a } })?)),
             0x006E => Ok(Self::CMSG_GROUP_INVITE(<CMSG_GROUP_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006E, size: body_size, io, } } else { a } })?)),
@@ -1091,6 +1094,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CONTACT_LIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ADD_FRIEND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DEL_FRIEND(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SET_CONTACT_NOTES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ADD_IGNORE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DEL_IGNORE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_INVITE(c) => c.write_encrypted_client(w, e),
@@ -1412,6 +1416,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CONTACT_LIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_ADD_FRIEND(c) => c.write_unencrypted_client(w),
             Self::CMSG_DEL_FRIEND(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SET_CONTACT_NOTES(c) => c.write_unencrypted_client(w),
             Self::CMSG_ADD_IGNORE(c) => c.write_unencrypted_client(w),
             Self::CMSG_DEL_IGNORE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_INVITE(c) => c.write_unencrypted_client(w),
@@ -1733,6 +1738,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CONTACT_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ADD_FRIEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DEL_FRIEND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_CONTACT_NOTES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ADD_IGNORE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DEL_IGNORE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2054,6 +2060,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CONTACT_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ADD_FRIEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DEL_FRIEND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SET_CONTACT_NOTES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ADD_IGNORE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DEL_IGNORE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2375,6 +2382,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CONTACT_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ADD_FRIEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DEL_FRIEND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_CONTACT_NOTES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ADD_IGNORE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DEL_IGNORE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2696,6 +2704,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CONTACT_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ADD_FRIEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DEL_FRIEND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SET_CONTACT_NOTES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ADD_IGNORE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DEL_IGNORE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_INVITE(c) => c.astd_write_unencrypted_client(w).await,
@@ -3028,6 +3037,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CONTACT_LIST(_) => "CMSG_CONTACT_LIST",
             ClientOpcodeMessage::CMSG_ADD_FRIEND(_) => "CMSG_ADD_FRIEND",
             ClientOpcodeMessage::CMSG_DEL_FRIEND(_) => "CMSG_DEL_FRIEND",
+            ClientOpcodeMessage::CMSG_SET_CONTACT_NOTES(_) => "CMSG_SET_CONTACT_NOTES",
             ClientOpcodeMessage::CMSG_ADD_IGNORE(_) => "CMSG_ADD_IGNORE",
             ClientOpcodeMessage::CMSG_DEL_IGNORE(_) => "CMSG_DEL_IGNORE",
             ClientOpcodeMessage::CMSG_GROUP_INVITE(_) => "CMSG_GROUP_INVITE",
@@ -3624,6 +3634,12 @@ impl From<CMSG_ADD_FRIEND> for ClientOpcodeMessage {
 impl From<CMSG_DEL_FRIEND> for ClientOpcodeMessage {
     fn from(c: CMSG_DEL_FRIEND) -> Self {
         Self::CMSG_DEL_FRIEND(c)
+    }
+}
+
+impl From<CMSG_SET_CONTACT_NOTES> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_CONTACT_NOTES) -> Self {
+        Self::CMSG_SET_CONTACT_NOTES(c)
     }
 }
 
