@@ -718,6 +718,8 @@ pub use crate::shared::cmsg_unaccept_trade_vanilla_tbc_wrath::CMSG_UNACCEPT_TRAD
 
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
+pub use crate::shared::cmsg_warden_data_vanilla_tbc_wrath::CMSG_WARDEN_DATA;
+
 pub use crate::shared::cmsg_who_vanilla_tbc_wrath::CMSG_WHO;
 
 pub use crate::shared::cmsg_whois_vanilla_tbc_wrath::CMSG_WHOIS;
@@ -1361,6 +1363,8 @@ pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAG
 pub use crate::shared::smsg_update_instance_ownership_vanilla_tbc_wrath::SMSG_UPDATE_INSTANCE_OWNERSHIP;
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
+
+pub use crate::shared::smsg_warden_data_vanilla_tbc_wrath::SMSG_WARDEN_DATA;
 
 pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;
 

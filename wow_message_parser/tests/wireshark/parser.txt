@@ -1508,7 +1508,7 @@
             break;
         case CMSG_WARDEN_DATA:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
+            ptvcursor_add(ptv, hf_woww_encrypted_data, len, ENC_NA);
             break;
         case CMSG_WHO:
             ptvcursor_add(ptv, hf_woww_minimum_level, 4, ENC_LITTLE_ENDIAN);
@@ -5936,7 +5936,7 @@
             break;
         case SMSG_WARDEN_DATA:
             len = offset_packet_end - ptvcursor_current_offset(ptv);
-            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
+            ptvcursor_add(ptv, hf_woww_encrypted_data, len, ENC_NA);
             break;
         case SMSG_WEATHER:
             ptvcursor_add(ptv, hf_woww_weather_type, 4, ENC_LITTLE_ENDIAN);

@@ -1,5 +1,0 @@
-smsg SMSG_WARDEN_DATA = 0x2E6 {
-    unimplemented
-} {
-    versions = "1.12";
-}

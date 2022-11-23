@@ -1408,6 +1408,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_encrypted_data,
+            { "Encrypted Data", "woww.encrypted.data",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_end_text,
             { "End Text", "woww.end.text",
                 FT_STRINGZ, BASE_NONE, NULL, 0,

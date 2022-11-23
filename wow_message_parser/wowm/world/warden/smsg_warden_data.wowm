@@ -1,0 +1,6 @@
+smsg SMSG_WARDEN_DATA = 0x2E6 {
+    /* TODO ENCRYPTED_MESSAGES Handle encryption? */
+    u8[-] encrypted_data;
+} {
+    versions = "1 2 3";
+}

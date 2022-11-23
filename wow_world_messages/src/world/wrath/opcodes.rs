@@ -304,6 +304,7 @@ use crate::world::wrath::MSG_PVP_LOG_DATA_Client;
 use crate::world::wrath::CMSG_LEAVE_BATTLEFIELD;
 use crate::world::wrath::CMSG_AREA_SPIRIT_HEALER_QUERY;
 use crate::world::wrath::CMSG_AREA_SPIRIT_HEALER_QUEUE;
+use crate::world::wrath::CMSG_WARDEN_DATA;
 use crate::world::wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Client;
 use crate::world::wrath::CMSG_PET_STOP_ATTACK;
 use crate::world::wrath::CMSG_BATTLEMASTER_JOIN;
@@ -624,6 +625,7 @@ pub enum ClientOpcodeMessage {
     CMSG_LEAVE_BATTLEFIELD(CMSG_LEAVE_BATTLEFIELD),
     CMSG_AREA_SPIRIT_HEALER_QUERY(CMSG_AREA_SPIRIT_HEALER_QUERY),
     CMSG_AREA_SPIRIT_HEALER_QUEUE(CMSG_AREA_SPIRIT_HEALER_QUEUE),
+    CMSG_WARDEN_DATA(CMSG_WARDEN_DATA),
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Client),
     CMSG_PET_STOP_ATTACK(CMSG_PET_STOP_ATTACK),
     CMSG_BATTLEMASTER_JOIN(CMSG_BATTLEMASTER_JOIN),
@@ -946,6 +948,7 @@ impl ClientOpcodeMessage {
             0x02E1 => Ok(Self::CMSG_LEAVE_BATTLEFIELD(<CMSG_LEAVE_BATTLEFIELD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E1, size: body_size, io, } } else { a } })?)),
             0x02E2 => Ok(Self::CMSG_AREA_SPIRIT_HEALER_QUERY(<CMSG_AREA_SPIRIT_HEALER_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E2, size: body_size, io, } } else { a } })?)),
             0x02E3 => Ok(Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(<CMSG_AREA_SPIRIT_HEALER_QUEUE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E3, size: body_size, io, } } else { a } })?)),
+            0x02E7 => Ok(Self::CMSG_WARDEN_DATA(<CMSG_WARDEN_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E7, size: body_size, io, } } else { a } })?)),
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E9, size: body_size, io, } } else { a } })?)),
             0x02EA => Ok(Self::CMSG_PET_STOP_ATTACK(<CMSG_PET_STOP_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EA, size: body_size, io, } } else { a } })?)),
             0x02EE => Ok(Self::CMSG_BATTLEMASTER_JOIN(<CMSG_BATTLEMASTER_JOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EE, size: body_size, io, } } else { a } })?)),
@@ -1336,6 +1339,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_WARDEN_DATA(c) => c.write_encrypted_client(w, e),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_STOP_ATTACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_encrypted_client(w, e),
@@ -1659,6 +1663,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.write_unencrypted_client(w),
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_WARDEN_DATA(c) => c.write_unencrypted_client(w),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_STOP_ATTACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_unencrypted_client(w),
@@ -1982,6 +1987,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_WARDEN_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2305,6 +2311,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_WARDEN_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2628,6 +2635,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_WARDEN_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2951,6 +2959,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_WARDEN_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_unencrypted_client(w).await,
@@ -3285,6 +3294,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_LEAVE_BATTLEFIELD(_) => "CMSG_LEAVE_BATTLEFIELD",
             ClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUERY(_) => "CMSG_AREA_SPIRIT_HEALER_QUERY",
             ClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUEUE(_) => "CMSG_AREA_SPIRIT_HEALER_QUEUE",
+            ClientOpcodeMessage::CMSG_WARDEN_DATA(_) => "CMSG_WARDEN_DATA",
             ClientOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Client",
             ClientOpcodeMessage::CMSG_PET_STOP_ATTACK(_) => "CMSG_PET_STOP_ATTACK",
             ClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN(_) => "CMSG_BATTLEMASTER_JOIN",
@@ -5081,6 +5091,12 @@ impl From<CMSG_AREA_SPIRIT_HEALER_QUEUE> for ClientOpcodeMessage {
     }
 }
 
+impl From<CMSG_WARDEN_DATA> for ClientOpcodeMessage {
+    fn from(c: CMSG_WARDEN_DATA) -> Self {
+        Self::CMSG_WARDEN_DATA(c)
+    }
+}
+
 impl From<MSG_BATTLEGROUND_PLAYER_POSITIONS_Client> for ClientOpcodeMessage {
     fn from(c: MSG_BATTLEGROUND_PLAYER_POSITIONS_Client) -> Self {
         Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c)
@@ -5464,6 +5480,7 @@ use crate::world::wrath::SMSG_FORCE_WALK_SPEED_CHANGE;
 use crate::world::wrath::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE;
 use crate::world::wrath::SMSG_FORCE_TURN_RATE_CHANGE;
 use crate::world::wrath::SMSG_AREA_SPIRIT_HEALER_TIME;
+use crate::world::wrath::SMSG_WARDEN_DATA;
 use crate::world::wrath::SMSG_GROUP_JOINED_BATTLEGROUND;
 use crate::world::wrath::MSG_BATTLEGROUND_PLAYER_POSITIONS_Server;
 use crate::world::wrath::SMSG_BINDER_CONFIRM;
@@ -5799,6 +5816,7 @@ pub enum ServerOpcodeMessage {
     SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(SMSG_FORCE_SWIM_BACK_SPEED_CHANGE),
     SMSG_FORCE_TURN_RATE_CHANGE(SMSG_FORCE_TURN_RATE_CHANGE),
     SMSG_AREA_SPIRIT_HEALER_TIME(SMSG_AREA_SPIRIT_HEALER_TIME),
+    SMSG_WARDEN_DATA(SMSG_WARDEN_DATA),
     SMSG_GROUP_JOINED_BATTLEGROUND(SMSG_GROUP_JOINED_BATTLEGROUND),
     MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Server),
     SMSG_BINDER_CONFIRM(SMSG_BINDER_CONFIRM),
@@ -6136,6 +6154,7 @@ impl ServerOpcodeMessage {
             0x02DC => Ok(Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(<SMSG_FORCE_SWIM_BACK_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DC, size: body_size, io, } } else { a } })?)),
             0x02DE => Ok(Self::SMSG_FORCE_TURN_RATE_CHANGE(<SMSG_FORCE_TURN_RATE_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DE, size: body_size, io, } } else { a } })?)),
             0x02E4 => Ok(Self::SMSG_AREA_SPIRIT_HEALER_TIME(<SMSG_AREA_SPIRIT_HEALER_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E4, size: body_size, io, } } else { a } })?)),
+            0x02E6 => Ok(Self::SMSG_WARDEN_DATA(<SMSG_WARDEN_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E6, size: body_size, io, } } else { a } })?)),
             0x02E8 => Ok(Self::SMSG_GROUP_JOINED_BATTLEGROUND(<SMSG_GROUP_JOINED_BATTLEGROUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E8, size: body_size, io, } } else { a } })?)),
             0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E9, size: body_size, io, } } else { a } })?)),
             0x02EB => Ok(Self::SMSG_BINDER_CONFIRM(<SMSG_BINDER_CONFIRM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EB, size: body_size, io, } } else { a } })?)),
@@ -6622,6 +6641,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_WARDEN_DATA(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.write_encrypted_server(w, e),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BINDER_CONFIRM(c) => c.write_encrypted_server(w, e),
@@ -6960,6 +6980,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.write_unencrypted_server(w),
+            Self::SMSG_WARDEN_DATA(c) => c.write_unencrypted_server(w),
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.write_unencrypted_server(w),
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_server(w),
             Self::SMSG_BINDER_CONFIRM(c) => c.write_unencrypted_server(w),
@@ -7298,6 +7319,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_WARDEN_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7636,6 +7658,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_WARDEN_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7974,6 +7997,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_WARDEN_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8312,6 +8336,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_TURN_RATE_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AREA_SPIRIT_HEALER_TIME(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_WARDEN_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_JOINED_BATTLEGROUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BINDER_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
@@ -8652,6 +8677,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FORCE_SWIM_BACK_SPEED_CHANGE(_) => "SMSG_FORCE_SWIM_BACK_SPEED_CHANGE",
             ServerOpcodeMessage::SMSG_FORCE_TURN_RATE_CHANGE(_) => "SMSG_FORCE_TURN_RATE_CHANGE",
             ServerOpcodeMessage::SMSG_AREA_SPIRIT_HEALER_TIME(_) => "SMSG_AREA_SPIRIT_HEALER_TIME",
+            ServerOpcodeMessage::SMSG_WARDEN_DATA(_) => "SMSG_WARDEN_DATA",
             ServerOpcodeMessage::SMSG_GROUP_JOINED_BATTLEGROUND(_) => "SMSG_GROUP_JOINED_BATTLEGROUND",
             ServerOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Server",
             ServerOpcodeMessage::SMSG_BINDER_CONFIRM(_) => "SMSG_BINDER_CONFIRM",
@@ -10400,6 +10426,12 @@ impl From<SMSG_FORCE_TURN_RATE_CHANGE> for ServerOpcodeMessage {
 impl From<SMSG_AREA_SPIRIT_HEALER_TIME> for ServerOpcodeMessage {
     fn from(c: SMSG_AREA_SPIRIT_HEALER_TIME) -> Self {
         Self::SMSG_AREA_SPIRIT_HEALER_TIME(c)
+    }
+}
+
+impl From<SMSG_WARDEN_DATA> for ServerOpcodeMessage {
+    fn from(c: SMSG_WARDEN_DATA) -> Self {
+        Self::SMSG_WARDEN_DATA(c)
     }
 }
 

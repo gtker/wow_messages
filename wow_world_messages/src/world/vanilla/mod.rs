@@ -144,8 +144,6 @@ pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
 pub(crate) mod cmsg_use_item;
 pub use cmsg_use_item::*;
-pub(crate) mod cmsg_warden_data;
-pub use cmsg_warden_data::*;
 pub(crate) mod cmsg_world_teleport;
 pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
@@ -760,6 +758,8 @@ pub use crate::shared::cmsg_unaccept_trade_vanilla_tbc_wrath::CMSG_UNACCEPT_TRAD
 
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
+pub use crate::shared::cmsg_warden_data_vanilla_tbc_wrath::CMSG_WARDEN_DATA;
+
 pub use crate::shared::cmsg_who_vanilla_tbc_wrath::CMSG_WHO;
 
 pub use crate::shared::cmsg_whois_vanilla_tbc_wrath::CMSG_WHOIS;
@@ -1322,6 +1322,8 @@ pub use crate::shared::smsg_update_instance_ownership_vanilla_tbc_wrath::SMSG_UP
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
 
+pub use crate::shared::smsg_warden_data_vanilla_tbc_wrath::SMSG_WARDEN_DATA;
+
 pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;
 
 pub use crate::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags;
@@ -1618,8 +1620,6 @@ pub(crate) mod smsg_update_last_instance;
 pub use smsg_update_last_instance::*;
 pub(crate) mod smsg_update_object;
 pub use smsg_update_object::*;
-pub(crate) mod smsg_warden_data;
-pub use smsg_warden_data::*;
 pub(crate) mod smsg_weather;
 pub use smsg_weather::*;
 pub(crate) mod smsg_who;

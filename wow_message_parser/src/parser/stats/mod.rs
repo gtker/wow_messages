@@ -20,7 +20,6 @@ pub enum MessageType {
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
 pub enum Reason {
     None,
-    Encrypted,
     Compressed,
     RequiresNestedIf,
     ElseIfForDifferentVariable,
@@ -110,7 +109,6 @@ impl Data {
             Reason::None => return None,
             Reason::Compressed => "Requires compression",
             Reason::NotImplementedInAnyEmulator => "Not implemented in any emulator yet",
-            Reason::Encrypted => "Requires encryption",
             Reason::RequiresNestedIf => "Requires nested if",
             Reason::ElseIfForDifferentVariable => "Requires else if for different variable",
             Reason::SelfSizeStruct => "Requires self.size for struct",
@@ -120,12 +118,8 @@ impl Data {
         })
     }
 
-    pub(crate) const fn encrypted(name: &'static str, opcode: usize) -> Self {
-        Self::direct(name, opcode, Reason::Encrypted)
-    }
-
     pub(crate) const fn compressed(name: &'static str, opcode: usize) -> Self {
-        Self::direct(name, opcode, Reason::Encrypted)
+        Self::direct(name, opcode, Reason::Compressed)
     }
 
     pub(crate) const fn nested_if(name: &'static str, opcode: usize) -> Self {

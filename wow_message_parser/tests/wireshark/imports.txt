@@ -233,6 +233,7 @@ static int hf_woww_emote_enum = -1;
 static int hf_woww_emote_int = -1;
 static int hf_woww_enable_pvp = -1;
 static int hf_woww_enchantment = -1;
+static int hf_woww_encrypted_data = -1;
 static int hf_woww_end_text = -1;
 static int hf_woww_ended_without_interruption = -1;
 static int hf_woww_enemy = -1;
