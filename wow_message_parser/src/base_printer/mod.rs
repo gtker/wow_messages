@@ -18,7 +18,7 @@ pub enum Expansion {
 }
 
 impl Expansion {
-    pub(crate) fn to_map(&self, map: u32) -> String {
+    pub(crate) fn as_map_string(&self, map: u32) -> String {
         match self {
             Expansion::Vanilla => format!(
                 "Map::{:?}",

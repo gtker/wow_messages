@@ -264,7 +264,7 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
         };
 
         let position = area_trigger.1.position();
-        let map = expansion.to_map(position.map);
+        let map = expansion.as_map_string(position.map);
         let x = position.x;
         let y = position.y;
         let z = position.z;
@@ -304,7 +304,7 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
                 heroic_required_quest,
                 ..
             } => {
-                let map = expansion.to_map(map);
+                let map = expansion.as_map_string(map);
 
                 let failed_text = if let Some(t) = failed_text {
                     format!("Some(\"{}\")", t)
