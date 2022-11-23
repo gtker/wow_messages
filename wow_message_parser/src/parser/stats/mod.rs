@@ -175,7 +175,7 @@ fn get_messages_to_print(wrath: &[Data], tbc: &[Data]) -> (Vec<Data>, &'static s
     };
 
     fn msg_that_are_also_in_tbc(a: &Data, v: &Data) -> bool {
-        a.name == v.name && a.opcode == v.opcode && v.name.starts_with("CMSG")
+        a.name == v.name && a.opcode == v.opcode && v.name.starts_with("MSG")
     }
     let msg_that_are_also_in_tbc = Option {
         f: Box::new(msg_that_are_also_in_tbc),
@@ -199,7 +199,7 @@ fn get_messages_to_print(wrath: &[Data], tbc: &[Data]) -> (Vec<Data>, &'static s
     };
 
     fn msg_for_wrath(a: &Data, _v: &Data) -> bool {
-        a.message_ty() == MessageType::Cmsg
+        a.message_ty() == MessageType::Msg
     }
     let msg_for_wrath = Option {
         f: Box::new(msg_for_wrath),
