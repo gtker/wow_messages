@@ -186,7 +186,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_TEXT_EMOTE", 0x105),
     Data::nyi("CMSG_AUTOSTORE_GROUND_ITEM", 0x107),
     Data::new("CMSG_AUTOSTORE_LOOT_ITEM", 0x108),
-    Data::new("CMSG_STORE_LOOT_IN_SLOT", 0x109),
+    Data::nyi("CMSG_STORE_LOOT_IN_SLOT", 0x109),
     Data::new("CMSG_AUTOEQUIP_ITEM", 0x10A),
     Data::new("CMSG_AUTOSTORE_BAG_ITEM", 0x10B),
     Data::new("CMSG_SWAP_ITEM", 0x10C),
