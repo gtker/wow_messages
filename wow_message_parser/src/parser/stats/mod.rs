@@ -251,13 +251,11 @@ pub(crate) fn print_message_stats(o: &Objects) {
     let (data, description) = get_messages_to_print(&wrath.0, &tbc.0);
 
     if std::env::var("WOWM_ONLY_PRINT_NAME_OF_SINGLE_MESSAGE").is_ok() {
-        print!(
-            "{}",
-            data.iter()
-                .find(|a| !a.definition && a.reason.is_none())
-                .unwrap()
-                .name
-        );
+        let message = data
+            .iter()
+            .find(|a| !a.definition && a.reason.is_none())
+            .unwrap();
+        print!("{} {:#06X}", message.name, message.opcode);
     } else {
         print_missing_definitions(&data, wrath.1, description);
 
