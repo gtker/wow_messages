@@ -78,7 +78,6 @@ fn main() {
     load_files(&wowm_directory("login"), &mut o);
     load_files(&wowm_directory("world"), &mut o);
     load_files(&wowm_directory("unimplemented"), &mut o);
-    //load_files(&wowm_directory("test"), &mut o);
 
     let o = o.into_objects();
 
