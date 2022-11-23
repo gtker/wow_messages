@@ -183,6 +183,34 @@ macro_rules! area_trigger {
                 yaw: f32,
             },
         }
+
+        impl AreaTrigger {
+            pub fn contains(&self, player: Position) -> bool {
+                match *self {
+                    AreaTrigger::Circle { position, radius } => {
+                        position.map == player.map
+                            && is_within_distance(position.into(), player.into(), radius)
+                    }
+                    AreaTrigger::Square {
+                        position,
+                        length,
+                        width,
+                        height,
+                        yaw,
+                    } => {
+                        position.map == player.map
+                            && is_within_square(
+                                player.into(),
+                                position.into(),
+                                length,
+                                width,
+                                height,
+                                yaw,
+                            )
+                    }
+                }
+            }
+        }
     };
 }
 use crate::vanilla::trigger::{AreaTrigger, Trigger};
@@ -203,38 +231,10 @@ macro_rules! verify_trigger {
                 Some(t) => &t.1,
             };
 
-            match t.0 {
-                AreaTrigger::Circle { position, radius } => {
-                    if position.map == player.map
-                        && is_within_distance(position.into(), player.into(), radius)
-                    {
-                        TriggerResult::Success(t)
-                    } else {
-                        TriggerResult::NotInsideTrigger(t)
-                    }
-                }
-                AreaTrigger::Square {
-                    position,
-                    length,
-                    width,
-                    height,
-                    yaw,
-                } => {
-                    if position.map == player.map
-                        && is_within_square(
-                            player.into(),
-                            position.into(),
-                            length,
-                            width,
-                            height,
-                            yaw,
-                        )
-                    {
-                        TriggerResult::Success(t)
-                    } else {
-                        TriggerResult::NotInsideTrigger(t)
-                    }
-                }
+            if t.0.contains(player) {
+                TriggerResult::Success(t)
+            } else {
+                TriggerResult::NotInsideTrigger(t)
             }
         }
     };
