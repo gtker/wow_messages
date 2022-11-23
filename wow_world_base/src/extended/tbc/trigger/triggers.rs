@@ -461,12 +461,12 @@ heroic_keys: None,heroic_required_quest: 0 }
 heroic_keys: None,heroic_required_quest: 0 }
 )),
 (2532, (
-    AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, -8768.1, 409.2, 103.9, 0.0), length: 8.8, width: 4.3, height: 7.8, yaw: 2.3 },
+    AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, -8768.5, 409.8, 103.9, 0.0), length: 8.8, width: 4.3, height: 7.8, yaw: 2.3 },
     Trigger::Teleport { location: Position::new(Map::AlliancePvpBarracks, -0.4, 2.4, -0.3, 1.6),required_level: 0,required_item: 0,required_quest: 0,failed_text: Some("You must be a Knight or higher rank in order to enter the Champions' Hall."),
 heroic_keys: None,heroic_required_quest: 0 }
 )),
 (2534, (
-    AreaTrigger::Square { position: Position::new(Map::AlliancePvpBarracks, -0.2, -1.6, -0.3, 0.0), length: 4.8, width: 4.9, height: 8.2, yaw: 0.0 },
+    AreaTrigger::Square { position: Position::new(Map::AlliancePvpBarracks, -0.4, -2.0, -0.3, 0.0), length: 7.3, width: 3.8, height: 6.2, yaw: 0.0 },
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -8762.8, 402.4, 103.9, 5.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
 )),
@@ -481,7 +481,7 @@ heroic_keys: None,heroic_required_quest: 0 }
 heroic_keys: None,heroic_required_quest: 0 }
 )),
 (2606, (
-    AreaTrigger::Square { position: Position::new(Map::AlteracValley, -723.6, -707.6, 52.9, 0.0), length: 9.6, width: 14.1, height: 16.2, yaw: 5.3 },
+    AreaTrigger::Square { position: Position::new(Map::AlteracValley, -1510.1, -715.9, 48.9, 0.0), length: 9.6, width: 14.1, height: 16.2, yaw: 0.7 },
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, 536.5, -1085.7, 106.3, 3.7),required_level: 0,required_item: 0,required_quest: 0,failed_text: Some("Only the Horde may use this portal."),
 heroic_keys: None,heroic_required_quest: 0 }
 )),
@@ -687,9 +687,568 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 2716.6, 1496.8, 236.8, 0.0), radius: 30.0 }, 
     Trigger::Inn
 )),
+(4108, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 7557.3, -6889.6, 96.0, 0.0), radius: 13.0 }, 
+    Trigger::Inn
+)),
+(4109, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 7557.4, -6888.6, 115.0, 0.0), length: 32.2, width: 57.8, height: 8.1, yaw: 4.2 },
+    Trigger::Inn
+)),
+(4131, (
+    AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, -11101.9, -1998.1, 49.3, 0.0), length: 20.1, width: 13.8, height: 14.7, yaw: 0.7 },
+    Trigger::Teleport { location: Position::new(Map::Karazhan, -11101.8, -1998.3, 49.9, 0.0),required_level: 70,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 68 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4135, (
+    AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, -11041.9, -1995.0, 93.0, 0.0), length: 9.0, width: 5.6, height: 13.3, yaw: 5.4 },
+    Trigger::Teleport { location: Position::new(Map::Karazhan, -11040.1, -1996.8, 94.7, 2.2),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 68 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4145, (
+    AreaTrigger::Square { position: Position::new(Map::HellfireCitadelTheShatteredHalls, -41.7, -32.5, -13.5, 0.0), length: 10.7, width: 7.7, height: 15.4, yaw: 1.5 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -311.2, 3082.1, -3.7, 4.9),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4147, (
+    AreaTrigger::Square { position: Position::new(Map::HellfireCitadelTheBloodFurnace, 0.3, 27.5, -44.8, 0.0), length: 6.4, width: 7.4, height: 18.2, yaw: 1.2 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -303.5, 3164.8, 31.7, 5.2),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4149, (
+    AreaTrigger::Square { position: Position::new(Map::MagtheridonsLair, 189.0, 57.1, 68.1, 0.0), length: 25.3, width: 26.6, height: 32.1, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -313.7, 3088.4, -116.5, 2.1),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4150, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -365.6, 3087.6, -14.6, 0.0), length: 11.4, width: 12.2, height: 15.6, yaw: 1.8 },
+    Trigger::Teleport { location: Position::new(Map::HellfireCitadelRamparts, -1355.2, 1641.1, 68.2, 0.7),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4151, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -310.2, 3091.6, -4.2, 0.0), length: 8.3, width: 7.0, height: 17.4, yaw: 1.5 },
+    Trigger::Teleport { location: Position::new(Map::HellfireCitadelTheShatteredHalls, -40.9, -19.8, -13.8, 1.1),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4152, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -307.3, 3170.5, 28.9, 0.0), length: 7.0, width: 13.8, height: 15.4, yaw: 2.1 },
+    Trigger::Teleport { location: Position::new(Map::HellfireCitadelTheBloodFurnace, -4.0, 14.6, -44.8, 4.9),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4153, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -309.7, 3079.1, -116.6, 0.0), length: 9.4, width: 15.4, height: 17.9, yaw: 5.2 },
+    Trigger::Teleport { location: Position::new(Map::MagtheridonsLair, 187.8, 35.9, 67.9, 4.8),required_level: 65,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 and in a raid group to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
 (4156, (
     AreaTrigger::Circle { position: Position::new(Map::Naxxramas, 3006.1, -3434.2, 306.2, 0.0), radius: 6.0 }, 
     Trigger::Teleport { location: Position::new(Map::Naxxramas, 3498.3, -5349.9, 145.0, 1.3),required_level: 51,required_item: 0,required_quest: 9378,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4240, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -4133.4, -12471.8, 44.6, 0.0), radius: 15.0 }, 
+    Trigger::Inn
+)),
+(4241, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -2058.2, -11895.0, 46.1, 0.0), radius: 15.0 }, 
+    Trigger::Inn
+)),
+(4265, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 8701.5, -6636.8, 64.0, 0.0), radius: 15.0 }, 
+    Trigger::Inn
+)),
+(4297, (
+    AreaTrigger::Square { position: Position::new(Map::HellfireCitadelRamparts, -1360.2, 1631.9, 68.4, 0.0), length: 8.2, width: 11.8, height: 19.2, yaw: 4.2 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -360.7, 3071.9, -15.1, 5.1),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4300, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -201.4, 5515.0, 22.1, 0.0), length: 8.6, width: 8.6, height: 14.7, yaw: 0.3 },
+    Trigger::Inn
+)),
+(4311, (
+    AreaTrigger::Square { position: Position::new(Map::TheBattleForMountHyjal, 4162.0, -4227.1, 869.2, 0.0), length: 11.2, width: 25.3, height: 35.1, yaw: 3.1 },
+    Trigger::Teleport { location: Position::new(Map::TheBattleForMountHyjal, 5066.8, -1791.9, 1321.7, 2.4),required_level: 70,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4312, (
+    AreaTrigger::Square { position: Position::new(Map::TheBattleForMountHyjal, 4284.1, -4138.9, 866.8, 0.0), length: 20.3, width: 21.2, height: 22.0, yaw: 0.3 },
+    Trigger::Teleport { location: Position::new(Map::TheBattleForMountHyjal, 5500.0, -2756.8, 1489.0, 1.4),required_level: 70,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4313, (
+    AreaTrigger::Square { position: Position::new(Map::TheBattleForMountHyjal, 4203.6, -4103.2, 878.4, 0.0), length: 26.3, width: 14.3, height: 22.9, yaw: 0.3 },
+    Trigger::Teleport { location: Position::new(Map::TheBattleForMountHyjal, 5163.0, -3428.3, 1627.6, 0.8),required_level: 70,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4319, (
+    AreaTrigger::Square { position: Position::new(Map::Kalimdor, -8158.9, -4155.6, -163.3, 0.0), length: 27.6, width: 28.6, height: 30.7, yaw: 1.0 },
+    Trigger::Teleport { location: Position::new(Map::TheBattleForMountHyjal, 4252.7, -4226.2, 868.2, 2.4),required_level: 70,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 and in a raid group to enter. You must also have The Burning Crusade installed."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4320, (
+    AreaTrigger::Square { position: Position::new(Map::Kalimdor, -8777.4, -4156.9, -208.1, 0.0), length: 28.4, width: 55.1, height: 51.9, yaw: 1.9 },
+    Trigger::Teleport { location: Position::new(Map::OpeningOfTheDarkPortal, -1491.6, 7056.5, 32.1, 1.7),required_level: 66,required_item: 0,required_quest: 10285,failed_text: Some("You must first save Thrall in Old Hillsbrad by helping him escape from Durnholde Keep before you may enter the Black Morass. You must also have The Burning Crusade installed."),
+heroic_keys: None,heroic_required_quest: 10298 }
+)),
+(4321, (
+    AreaTrigger::Square { position: Position::new(Map::Kalimdor, -8326.3, -4047.4, -207.5, 0.0), length: 40.8, width: 21.4, height: 112.4, yaw: 2.2 },
+    Trigger::Teleport { location: Position::new(Map::TheEscapeFromDurnholde, 2741.7, 1312.6, 14.0, 2.8),required_level: 66,required_item: 0,required_quest: 0,failed_text: Some("You must first complete the quest, \"The Caverns of Time,\" before you may enter Old Hillsbrad. You must also have The Burning Crusade installed."),
+heroic_keys: None,heroic_required_quest: 10285 }
+)),
+(4322, (
+    AreaTrigger::Square { position: Position::new(Map::OpeningOfTheDarkPortal, -1498.4, 7017.9, 33.3, 0.0), length: 58.3, width: 24.1, height: 71.7, yaw: 3.0 },
+    Trigger::Teleport { location: Position::new(Map::Kalimdor, -8759.5, -4192.3, -209.5, 5.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4323, (
+    AreaTrigger::Square { position: Position::new(Map::TheBattleForMountHyjal, 4273.8, -4235.8, 866.1, 0.0), length: 17.2, width: 15.6, height: 30.1, yaw: 6.0 },
+    Trigger::Teleport { location: Position::new(Map::Kalimdor, -8177.0, -4176.9, -166.5, 3.9),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4324, (
+    AreaTrigger::Square { position: Position::new(Map::TheEscapeFromDurnholde, 2768.3, 1292.8, 13.6, 0.0), length: 15.1, width: 59.8, height: 38.8, yaw: 6.0 },
+    Trigger::Teleport { location: Position::new(Map::Kalimdor, -8359.1, -4058.8, -208.2, 3.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4336, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 192.9, 2607.4, 87.3, 0.0), radius: 20.0 }, 
+    Trigger::Inn
+)),
+(4337, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -704.9, 2734.0, 100.0, 0.0), length: 26.4, width: 55.1, height: 25.4, yaw: 0.0 },
+    Trigger::Inn
+)),
+(4352, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -247.7, 895.7, 84.4, 0.0), length: 72.8, width: 6.6, height: 53.8, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -11877.7, -3204.5, -18.5, 0.2),required_level: 58,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4354, (
+    AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, -11908.9, -3209.1, -14.8, 0.0), length: 3.8, width: 15.5, height: 25.8, yaw: 3.3 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -248.1, 921.9, 84.4, 1.6),required_level: 58,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4363, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 782.9, 6741.9, -72.5, 0.0), length: 29.8, width: 7.8, height: 33.9, yaw: 3.2 },
+    Trigger::Teleport { location: Position::new(Map::CoilfangTheUnderbog, 9.7, -16.2, -2.8, 5.6),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4364, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 818.5, 6951.3, -80.6, 0.0), length: 30.6, width: 7.8, height: 29.7, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::CoilfangTheSteamvault, -13.8, 6.8, -4.3, 0.0),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4365, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 745.8, 7015.3, -72.1, 0.0), length: 12.2, width: 35.9, height: 24.1, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::CoilfangTheSlavePens, 120.1, -132.0, -0.8, 1.5),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4366, (
+    AreaTrigger::Square { position: Position::new(Map::CoilfangTheSteamvault, -29.3, 4.5, -4.3, 0.0), length: 11.9, width: 35.2, height: 31.4, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 816.6, 6934.7, -80.5, 4.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4367, (
+    AreaTrigger::Square { position: Position::new(Map::CoilfangTheUnderbog, 4.0, -8.2, -2.8, 0.0), length: 22.4, width: 8.3, height: 22.8, yaw: 0.5 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 777.1, 6763.5, -72.1, 2.7),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4373, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 229.4, 7933.0, 35.0, 0.0), length: 32.9, width: 36.2, height: 20.9, yaw: 2.8 },
+    Trigger::Inn
+)),
+(4374, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 282.2, 6099.0, 132.5, 0.0), length: 49.7, width: 21.6, height: 35.1, yaw: 0.0 },
+    Trigger::Inn
+)),
+(4375, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -1224.9, 7158.4, 57.3, 0.0), radius: 32.0 }, 
+    Trigger::Inn
+)),
+(4376, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -2734.7, 7308.7, 71.4, 0.0), length: 134.5, width: 67.6, height: 106.6, yaw: 2.7 },
+    Trigger::Inn
+)),
+(4377, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -2912.4, 4024.9, 0.4, 0.0), radius: 14.0 }, 
+    Trigger::Inn
+)),
+(4378, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -2620.1, 4461.4, 36.1, 0.0), radius: 32.0 }, 
+    Trigger::Inn
+)),
+(4379, (
+    AreaTrigger::Square { position: Position::new(Map::CoilfangTheSlavePens, 120.4, -144.0, -0.3, 0.0), length: 29.9, width: 12.9, height: 29.4, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 719.5, 6999.3, -73.1, 4.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4380, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -574.0, 4147.9, 68.5, 0.0), radius: 13.0 }, 
+    Trigger::Inn
+)),
+(4381, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 218.7, 4333.9, 119.0, 0.0), radius: 15.0 }, 
+    Trigger::Inn
+)),
+(4382, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -172.6, 5524.6, 29.4, 0.0), length: 18.8, width: 27.2, height: 20.0, yaw: 5.0 },
+    Trigger::Inn
+)),
+(4383, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 1060.5, 7372.8, 39.3, 0.0), radius: 20.0 }, 
+    Trigger::Inn
+)),
+(4386, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 6107.3, -6990.6, 137.3, 0.0), length: 42.1, width: 18.6, height: 45.7, yaw: 0.7 },
+    Trigger::Teleport { location: Position::new(Map::EasternKingdoms, 3476.4, -4493.4, 137.5, 2.3),required_level: 1,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4397, (
+    AreaTrigger::Square { position: Position::new(Map::AuchindounShadowLabyrinth, 13.2, -0.0, -1.1, 0.0), length: 11.5, width: 16.9, height: 22.2, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -3645.1, 4943.6, -101.0, 6.3),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4399, (
+    AreaTrigger::Square { position: Position::new(Map::AuchindounSethekkHalls, -14.4, -0.5, 0.0, 0.0), length: 12.8, width: 27.7, height: 28.5, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -3362.0, 4660.4, -101.0, 1.6),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4401, (
+    AreaTrigger::Square { position: Position::new(Map::AuchindounManaTombs, 13.1, 1.4, -1.0, 0.0), length: 13.8, width: 22.1, height: 29.5, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -3079.8, 4943.0, -101.0, 3.2),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4403, (
+    AreaTrigger::Square { position: Position::new(Map::AuchindounAuchenaiCrypts, -33.9, 0.4, -0.1, 0.0), length: 11.6, width: 23.6, height: 25.6, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -3362.2, 5225.8, -101.0, 4.7),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4404, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -3361.6, 5236.9, -101.0, 0.0), length: 26.3, width: 11.4, height: 19.6, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::AuchindounAuchenaiCrypts, -21.9, 0.2, -0.1, 0.0),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4405, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -3068.1, 4942.8, -101.0, 0.0), length: 12.3, width: 22.2, height: 27.1, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::AuchindounManaTombs, 0.0, 0.9, -1.0, 3.0),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4406, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -3362.4, 4650.3, -101.0, 0.0), length: 25.2, width: 9.6, height: 23.8, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::AuchindounSethekkHalls, -4.7, -0.1, 0.0, 0.0),required_level: 55,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 55 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4407, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -3656.1, 4943.1, -101.0, 0.0), length: 12.2, width: 23.9, height: 26.7, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::AuchindounShadowLabyrinth, 0.5, -0.2, -1.1, 3.2),required_level: 65,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4409, (
+    AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, 3483.6, -4510.2, 138.1, 0.0), length: 27.5, width: 67.3, height: 46.0, yaw: 5.3 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 6123.0, -7005.0, 138.0, 5.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4416, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 843.9, 6865.2, -67.0, 0.0), length: 12.5, width: 22.1, height: 41.1, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::CoilfangSerpentshrineCavern, 2.5, -0.0, 821.7, 0.0),required_level: 70,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 70 and in a raid group to enter the Serpentshrine."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4418, (
+    AreaTrigger::Square { position: Position::new(Map::CoilfangSerpentshrineCavern, -13.1, 1.5, 824.9, 0.0), length: 21.5, width: 24.0, height: 47.2, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 827.0, 6865.5, -63.8, 3.1),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4436, (
+    AreaTrigger::Square { position: Position::new(Map::Karazhan, -11118.4, -2007.9, 47.1, 0.0), length: 17.4, width: 33.7, height: 21.2, yaw: 0.7 },
+    Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -11112.9, -2005.9, 49.3, 4.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4455, (
+    AreaTrigger::Square { position: Position::new(Map::TempestKeepTheArcatraz, -11.2, 0.1, -0.2, 0.0), length: 14.1, width: 16.7, height: 43.9, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 3312.1, 1331.9, 505.6, 2.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4457, (
+    AreaTrigger::Square { position: Position::new(Map::TempestKeep, -25.8, -0.9, -2.4, 0.0), length: 20.1, width: 21.8, height: 47.6, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 3087.3, 1373.8, 184.6, 1.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4459, (
+    AreaTrigger::Square { position: Position::new(Map::TempestKeepTheBotanica, 53.1, -41.0, -1.1, 0.0), length: 16.2, width: 12.6, height: 27.2, yaw: 5.5 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 3413.6, 1483.3, 182.8, 2.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4461, (
+    AreaTrigger::Square { position: Position::new(Map::TempestKeepTheMechanar, -47.2, 0.1, -1.8, 0.0), length: 17.0, width: 31.9, height: 49.8, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 2862.4, 1546.1, 252.2, 0.8),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4467, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 3418.9, 1479.0, 184.1, 0.0), length: 9.3, width: 10.2, height: 24.0, yaw: 5.6 },
+    Trigger::Teleport { location: Position::new(Map::TempestKeepTheBotanica, 40.0, -28.6, -1.1, 2.4),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4468, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 3314.8, 1325.9, 507.3, 0.0), length: 9.5, width: 10.6, height: 15.9, yaw: 5.1 },
+    Trigger::Teleport { location: Position::new(Map::TempestKeepTheArcatraz, -1.2, 0.0, -0.2, 0.0),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4469, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 2861.4, 1545.4, 252.2, 0.0), length: 2.4, width: 11.1, height: 17.1, yaw: 3.9 },
+    Trigger::Teleport { location: Position::new(Map::TempestKeepTheMechanar, -28.9, 0.7, -1.8, 0.0),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4470, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 3087.2, 1364.5, 184.1, 0.0), length: 10.0, width: 12.3, height: 31.1, yaw: 4.6 },
+    Trigger::Teleport { location: Position::new(Map::TempestKeep, -10.8, -1.2, -2.4, 6.2),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 70 and in a raid group to enter Tempest Keep."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4486, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 9477.7, -6858.7, 17.4, 0.0), length: 45.6, width: 21.5, height: 43.1, yaw: 5.5 },
+    Trigger::Inn
+)),
+(4487, (
+    AreaTrigger::Square { position: Position::new(Map::TheBattleForMountHyjal, 4274.7, -4234.8, 866.0, 0.0), length: 18.5, width: 26.7, height: 24.6, yaw: 6.1 },
+    Trigger::Teleport { location: Position::new(Map::Kalimdor, -8177.5, -4183.0, -168.0, 4.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4494, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 2405.0, 5941.0, 153.0, 0.0), radius: 30.0 }, 
+    Trigger::Inn
+)),
+(4498, (
+    AreaTrigger::Circle { position: Position::new(Map::TheEscapeFromDurnholde, 1810.9, 1033.2, 11.1, 0.0), radius: 3.0 }, 
+    Trigger::Inn
+)),
+(4499, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 2099.5, 6904.7, 183.2, 0.0), length: 37.6, width: 29.2, height: 49.9, yaw: 0.8 },
+    Trigger::Inn
+)),
+(4520, (
+    AreaTrigger::Square { position: Position::new(Map::Karazhan, -11036.5, -2001.7, 93.5, 0.0), length: 5.9, width: 6.8, height: 10.7, yaw: 5.4 },
+    Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -11034.8, -2003.8, 93.0, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4521, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 3070.6, 3699.8, 142.5, 0.0), length: 27.0, width: 24.6, height: 13.4, yaw: 2.1 },
+    Trigger::Inn
+)),
+(4526, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -2961.9, 2559.3, 78.5, 0.0), radius: 14.0 }, 
+    Trigger::Inn
+)),
+(4528, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -4085.0, 2176.0, 111.7, 0.0), length: 39.7, width: 33.4, height: 26.6, yaw: 3.2 },
+    Trigger::Inn
+)),
+(4534, (
+    AreaTrigger::Square { position: Position::new(Map::GruulsLair, 21.3, -2.9, 0.1, 0.0), length: 96.8, width: 120.7, height: 39.4, yaw: 1.1 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 3549.8, 5086.0, 2.5, 2.3),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4535, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 3556.8, 5083.4, 1.4, 0.0), length: 3.4, width: 39.7, height: 56.9, yaw: 5.7 },
+    Trigger::Teleport { location: Position::new(Map::GruulsLair, 62.8, 35.5, -4.0, 1.4),required_level: 65,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 and in a raid group to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4555, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 4112.0, 3071.0, 339.5, 0.0), length: 24.1, width: 27.3, height: 22.5, yaw: 0.4 },
+    Trigger::Inn
+)),
+(4558, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 1945.4, 5537.4, 266.6, 0.0), radius: 7.0 }, 
+    Trigger::Inn
+)),
+(4561, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -2829.8, 1953.8, 202.5, 0.0), radius: 2.3 }, 
+    Trigger::Teleport { location: Position::new(Map::Outland, -3277.9, 2831.6, 123.0, 1.6),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4562, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -2745.2, 2730.4, 127.8, 0.0), radius: 2.3 }, 
+    Trigger::Teleport { location: Position::new(Map::Outland, -3277.9, 2831.6, 123.0, 1.6),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4577, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -2978.5, 864.1, -7.5, 0.0), radius: 18.0 }, 
+    Trigger::Inn
+)),
+(4595, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 2230.1, 4716.4, 161.9, 0.0), radius: 14.0 }, 
+    Trigger::Inn
+)),
+(4598, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, -3672.0, 318.5, 31.6, 0.0), length: 25.9, width: 27.4, height: 33.6, yaw: 3.0 },
+    Trigger::Teleport { location: Position::new(Map::BlackTemple, 96.4, 1002.3, -87.0, 6.2),required_level: 70,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 70 and in a raid group to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4607, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -4133.8, 1131.4, 50.0, 0.0), radius: 17.0 }, 
+    Trigger::Inn
+)),
+(4608, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -4133.8, 1131.5, 74.0, 0.0), radius: 26.0 }, 
+    Trigger::Inn
+)),
+(4612, (
+    AreaTrigger::Square { position: Position::new(Map::TempestKeepTheBotanica, 166.0, 391.6, -37.1, 0.0), length: 11.8, width: 10.6, height: 28.3, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 3409.9, 1486.3, 182.8, 2.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4614, (
+    AreaTrigger::Square { position: Position::new(Map::TempestKeepTheMechanar, 66.0, 149.7, 25.6, 0.0), length: 15.0, width: 30.5, height: 40.7, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 2862.4, 1546.1, 252.2, 0.8),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4619, (
+    AreaTrigger::Square { position: Position::new(Map::BlackTemple, 75.8, 997.8, -89.8, 0.0), length: 18.5, width: 46.1, height: 54.9, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, -3653.5, 317.5, 36.2, 6.2),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4640, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 3020.9, 5434.3, 146.6, 0.0), length: 15.4, width: 25.4, height: 27.9, yaw: 5.4 },
+    Trigger::Inn
+)),
+(4714, (
+    AreaTrigger::Square { position: Position::new(Map::Kalimdor, -4622.3, -3172.1, 34.8, 0.0), length: 22.1, width: 15.3, height: 25.8, yaw: 0.0 },
+    Trigger::Inn
+)),
+(4738, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 6851.9, -8008.7, 192.3, 0.0), length: 33.8, width: 17.2, height: 26.9, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::ZulAman, 120.7, 1776.0, 43.5, 4.8),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 68 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4739, (
+    AreaTrigger::Square { position: Position::new(Map::ZulAman, 120.6, 1789.9, 43.5, 0.0), length: 32.2, width: 19.1, height: 42.1, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 6851.5, -7997.7, 192.4, 1.6),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4769, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -4921.0, -954.6, 501.5, 0.0), radius: 30.0 }, 
+    Trigger::Inn
+)),
+(4775, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -3182.4, -2920.8, 33.6, 0.0), radius: 21.0 }, 
+    Trigger::Inn
+)),
+(4847, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 12831.2, -7011.4, 50.6, 0.0), length: 103.6, width: 64.0, height: 67.0, yaw: 5.4 },
+    Trigger::Inn
+)),
+(4885, (
+    AreaTrigger::Square { position: Position::new(Map::MagistersTerrace, -5.9, -0.1, -2.8, 0.0), length: 3.4, width: 16.1, height: 7.5, yaw: 0.0 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 12884.6, -7336.2, 65.5, 1.1),required_level: 0,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 65 to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4887, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 12878.8, -7348.7, 65.5, 0.0), length: 19.0, width: 17.0, height: 36.0, yaw: 5.8 },
+    Trigger::Teleport { location: Position::new(Map::MagistersTerrace, 7.1, -0.4, -2.8, 0.1),required_level: 70,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 11492 }
+)),
+(4889, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 12551.0, -6775.1, 15.1, 0.0), length: 5.0, width: 12.0, height: 28.0, yaw: 6.3 },
+    Trigger::Teleport { location: Position::new(Map::TheSunwell, 1790.7, 925.7, 15.1, 3.1),required_level: 70,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 70 and in a raid group to enter."),
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4891, (
+    AreaTrigger::Square { position: Position::new(Map::TheSunwell, 1797.3, 925.3, 15.1, 0.0), length: 4.9, width: 14.7, height: 16.8, yaw: 6.3 },
+    Trigger::Teleport { location: Position::new(Map::Outland, 12560.8, -6774.6, 15.1, 6.2),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4917, (
+    AreaTrigger::Square { position: Position::new(Map::NagrandArena, 4054.1, 2923.7, -40.0, 0.0), length: 214.0, width: 216.0, height: 20.0, yaw: 0.5 },
+    Trigger::Teleport { location: Position::new(Map::NagrandArena, 4054.6, 2923.2, 13.8, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4919, (
+    AreaTrigger::Square { position: Position::new(Map::BladesEdgeArena, 6188.0, 320.0, 20.0, 0.0), length: 313.9, width: 27.1, height: 60.0, yaw: 0.9 },
+    Trigger::Teleport { location: Position::new(Map::BladesEdgeArena, 6238.9, 264.2, 0.9, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4921, (
+    AreaTrigger::Square { position: Position::new(Map::BladesEdgeArena, 6288.2, 210.0, 20.0, 0.0), length: 313.9, width: 27.1, height: 60.0, yaw: 0.9 },
+    Trigger::Teleport { location: Position::new(Map::BladesEdgeArena, 6238.9, 264.2, 0.9, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4922, (
+    AreaTrigger::Square { position: Position::new(Map::BladesEdgeArena, 6214.9, 200.3, 20.0, 0.0), length: 71.1, width: 24.6, height: 60.0, yaw: 5.6 },
+    Trigger::Teleport { location: Position::new(Map::BladesEdgeArena, 6238.9, 264.2, 0.9, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4923, (
+    AreaTrigger::Square { position: Position::new(Map::BladesEdgeArena, 6187.8, 196.9, 20.0, 0.0), length: 159.0, width: 23.3, height: 60.0, yaw: 5.6 },
+    Trigger::Teleport { location: Position::new(Map::BladesEdgeArena, 6238.9, 264.2, 0.9, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4924, (
+    AreaTrigger::Square { position: Position::new(Map::BladesEdgeArena, 6264.8, 329.8, 3.4, 0.0), length: 71.1, width: 24.6, height: 60.0, yaw: 5.6 },
+    Trigger::Teleport { location: Position::new(Map::BladesEdgeArena, 6238.9, 264.2, 0.9, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4925, (
+    AreaTrigger::Square { position: Position::new(Map::BladesEdgeArena, 6290.8, 333.4, 20.0, 0.0), length: 208.0, width: 37.6, height: 60.0, yaw: 5.6 },
+    Trigger::Teleport { location: Position::new(Map::BladesEdgeArena, 6238.9, 264.2, 0.9, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4927, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1200.3, 1682.1, 33.1, 0.0), length: 158.4, width: 26.1, height: 40.0, yaw: 0.9 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4928, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1223.6, 1630.8, 32.6, 0.0), length: 127.3, width: 28.4, height: 40.0, yaw: 5.6 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4929, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1359.2, 1692.2, 37.1, 0.0), length: 158.4, width: 26.1, height: 40.0, yaw: 5.6 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4930, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1371.5, 1649.1, 34.5, 0.0), length: 158.4, width: 26.1, height: 40.0, yaw: 0.9 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4931, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1299.8, 1554.7, 40.0, 0.0), length: 127.0, width: 30.6, height: 40.0, yaw: 0.1 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4932, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1274.5, 1774.7, 27.0, 0.0), length: 127.0, width: 30.6, height: 40.0, yaw: 0.1 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4933, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1246.1, 1743.6, 40.0, 0.0), length: 33.9, width: 21.2, height: 40.0, yaw: 1.7 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4934, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1305.4, 1754.1, 40.0, 0.0), length: 33.9, width: 21.2, height: 40.0, yaw: 1.7 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4935, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1321.6, 1587.0, 40.0, 0.0), length: 33.9, width: 21.2, height: 40.0, yaw: 1.7 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4936, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1269.1, 1580.0, 40.0, 0.0), length: 33.9, width: 21.2, height: 40.0, yaw: 1.7 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4941, (
+    AreaTrigger::Square { position: Position::new(Map::RuinsOfLordaeron, 1285.4, 1667.7, 10.0, 0.0), length: 212.5, width: 207.3, height: 20.0, yaw: 2.5 },
+    Trigger::Teleport { location: Position::new(Map::RuinsOfLordaeron, 1286.6, 1667.4, 39.6, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 }
+)),
+(4944, (
+    AreaTrigger::Square { position: Position::new(Map::BladesEdgeArena, 6237.8, 261.4, -20.0, 0.0), length: 185.1, width: 227.0, height: 20.0, yaw: 5.6 },
+    Trigger::Teleport { location: Position::new(Map::BladesEdgeArena, 6238.9, 264.2, 0.9, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
 )),
 // AUTOGENERATED_END

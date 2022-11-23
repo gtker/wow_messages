@@ -1,7 +1,9 @@
 use super::data::Data;
 use super::writer::Writer;
 use super::Expansion;
-use crate::base_printer::data::area_triggers::{AreaTrigger, AREA_TRIGGERS};
+use crate::base_printer::data::area_triggers::{
+    AreaTrigger, TBC_AREA_TRIGGERS, VANILLA_AREA_TRIGGERS, WRATH_AREA_TRIGGERS,
+};
 use crate::base_printer::data::Trigger;
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
 use std::path::Path;
@@ -257,7 +259,13 @@ pub(crate) fn write_actions(directory: &Path, data: &Data) {
 pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expansion) {
     let mut s = Writer::new();
 
-    for area_trigger in AREA_TRIGGERS {
+    let triggers = match expansion {
+        Expansion::Vanilla => VANILLA_AREA_TRIGGERS,
+        Expansion::BurningCrusade => TBC_AREA_TRIGGERS,
+        Expansion::WrathOfTheLichKing => WRATH_AREA_TRIGGERS,
+    };
+
+    for area_trigger in triggers {
         let trigger = match data.triggers.iter().find(|a| a.id() == area_trigger.0) {
             None => continue,
             Some(t) => t,
@@ -307,7 +315,7 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
                 let map = expansion.as_map_string(map);
 
                 let failed_text = if let Some(t) = failed_text {
-                    format!("Some(\"{}\")", t)
+                    format!("Some(\"{}\")", t.replace("\"", "\\\""))
                 } else {
                     "None".to_string()
                 };
@@ -318,7 +326,7 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
                     for key in heroic_keys {
                         write!(s, "{}, ", key).unwrap();
                     }
-                    write!(s, "]").unwrap();
+                    write!(s, "])").unwrap();
                     s
                 } else {
                     "None".to_string()
