@@ -331,7 +331,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_BUY_ITEM_IN_SLOT", 0x1A3),
     Data::new("SMSG_BUY_ITEM", 0x1A4),
     Data::new("SMSG_BUY_FAILED", 0x1A5),
-    Data::new("CMSG_TAXICLEARALLNODES", 0x1A6),
+    Data::nyi("CMSG_TAXICLEARALLNODES", 0x1A6),
     Data::new("CMSG_TAXIENABLEALLNODES", 0x1A7),
     Data::new("CMSG_TAXISHOWNODES", 0x1A8),
     Data::new("SMSG_SHOWTAXINODES", 0x1A9),
