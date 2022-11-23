@@ -347,6 +347,10 @@ fn get_combinations(conn: &Connection) -> Vec<Combination> {
 
 #[derive(Debug, Clone, PartialOrd, PartialEq)]
 pub enum Trigger {
+    Quest {
+        id: u32,
+        quest: u32,
+    },
     Inn {
         id: u32,
         name: String,
@@ -374,6 +378,7 @@ impl Trigger {
         match *self {
             Trigger::Inn { id, .. } => id,
             Trigger::Teleport { id, .. } => id,
+            Trigger::Quest { id, .. } => id,
         }
     }
 }
@@ -387,6 +392,18 @@ fn get_triggers(conn: &Connection, expansion: Expansion) -> Vec<Trigger> {
             Ok(Trigger::Inn {
                 id: row.get(0).unwrap(),
                 name: row.get(1).unwrap(),
+            })
+        })
+        .unwrap();
+
+    let mut quests = conn
+        .prepare("SELECT id, quest FROM areatrigger_involvedrelation;")
+        .unwrap();
+    let quests = quests
+        .query_map([], |row| {
+            Ok(Trigger::Quest {
+                id: row.get(0).unwrap(),
+                quest: row.get(1).unwrap(),
             })
         })
         .unwrap();
@@ -430,6 +447,7 @@ FROM
                 })
             })
             .unwrap()
+            .chain(quests)
             .chain(taverns)
             .map(|a| a.unwrap())
             .collect()
@@ -484,6 +502,7 @@ FROM
                 })
             })
             .unwrap()
+            .chain(quests)
             .chain(taverns)
             .map(|a| a.unwrap())
             .collect()
@@ -538,6 +557,7 @@ FROM
                 })
             })
             .unwrap()
+            .chain(quests)
             .chain(taverns)
             .map(|a| a.unwrap())
             .collect()

@@ -298,6 +298,9 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
             Trigger::Inn { .. } => {
                 s.wln("Trigger::Inn");
             }
+            Trigger::Quest { quest, .. } => {
+                s.wln(format!("Trigger::Quest {{ quest_id: {} }}", quest))
+            }
             Trigger::Teleport {
                 map,
                 x,

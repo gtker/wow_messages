@@ -246,6 +246,9 @@ macro_rules! tbc_wrath_trigger {
         #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
         pub enum Trigger {
             Inn,
+            Quest {
+                quest_id: u32,
+            },
             Teleport {
                 location: Position,
                 required_level: u8,
@@ -265,6 +268,9 @@ macro_rules! vanilla_trigger {
         #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
         pub enum Trigger {
             Inn,
+            Quest {
+                quest_id: u32,
+            },
             Teleport {
                 location: Position,
                 required_level: u8,

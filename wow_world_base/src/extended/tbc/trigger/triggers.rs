@@ -19,9 +19,17 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::Deadmines, -14.6, -385.5, 62.5, 1.6),required_level: 10,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 10 to enter."),
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(87, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -9077.3, -552.9, 60.3, 0.0), radius: 30.0 }, 
+    Trigger::Quest { quest_id: 76 }
+)),
+(88, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -9843.5, 127.5, 5.4, 0.0), radius: 10.0 }, 
+    Trigger::Quest { quest_id: 62 }
+)),
 (98, (
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -11634.8, -54.1, 13.4, 0.0), radius: 30.0 }, 
-    Trigger::Inn
+    Trigger::Quest { quest_id: 201 }
 )),
 (101, (
     AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, -8761.8, 848.6, 87.8, 0.0), length: 5.0, width: 9.7, height: 7.4, yaw: 0.7 },
@@ -53,14 +61,38 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::ShadowfangKeep, -228.2, 2111.4, 76.9, 1.2),required_level: 10,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 10 to enter."),
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(169, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -5586.5, 679.3, 385.0, 0.0), radius: 8.0 }, 
+    Trigger::Quest { quest_id: 287 }
+)),
+(173, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, 1058.1, 1554.7, -15.0, 0.0), radius: 90.0 }, 
+    Trigger::Quest { quest_id: 437 }
+)),
+(175, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -4086.4, -2610.9, 46.0, 0.0), radius: 20.0 }, 
+    Trigger::Quest { quest_id: 455 }
+)),
 (178, (
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, 683.8, -912.1, 174.5, 0.0), radius: 5.0 }, 
-    Trigger::Inn
+    Trigger::Quest { quest_id: 503 }
 )),
 (194, (
     AreaTrigger::Circle { position: Position::new(Map::ShadowfangKeep, -231.0, 2105.1, 79.8, 0.0), radius: 5.0 }, 
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -233.0, 1567.5, 76.9, 4.3),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
+)),
+(196, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -12153.6, 894.0, 9.5, 0.0), radius: 80.0 }, 
+    Trigger::Quest { quest_id: 578 }
+)),
+(216, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 90.1, -1943.4, 79.5, 0.0), radius: 9.0 }, 
+    Trigger::Quest { quest_id: 870 }
+)),
+(225, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 4558.4, 421.4, 33.7, 0.0), radius: 50.0 }, 
+    Trigger::Quest { quest_id: 944 }
 )),
 (226, (
     AreaTrigger::Circle { position: Position::new(Map::WailingCaverns, -172.2, 139.0, -66.6, 0.0), radius: 12.0 }, 
@@ -72,6 +104,22 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::WailingCaverns, -158.4, 131.6, -74.3, 5.8),required_level: 10,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 10 to enter."),
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(230, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 6745.0, 41.1, 47.6, 0.0), radius: 13.0 }, 
+    Trigger::Quest { quest_id: 954 }
+)),
+(231, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 5996.6, 365.2, 21.9, 0.0), radius: 40.0 }, 
+    Trigger::Quest { quest_id: 984 }
+)),
+(232, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 5980.2, 330.7, 21.8, 0.0), radius: 40.0 }, 
+    Trigger::Quest { quest_id: 984 }
+)),
+(235, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 4554.6, 146.4, 59.5, 0.0), radius: 70.0 }, 
+    Trigger::Quest { quest_id: 984 }
+)),
 (242, (
     AreaTrigger::Circle { position: Position::new(Map::RazorfenKraul, 1936.4, 1534.5, 86.9, 0.0), radius: 8.0 }, 
     Trigger::Teleport { location: Position::new(Map::Kalimdor, -4463.3, -1664.3, 84.0, 3.9),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
@@ -81,6 +129,10 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -4456.7, -1656.0, 86.1, 0.0), radius: 8.0 }, 
     Trigger::Teleport { location: Position::new(Map::RazorfenKraul, 1942.3, 1544.2, 83.3, 1.3),required_level: 15,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 15 to enter."),
 heroic_keys: None,heroic_required_quest: 0 }
+)),
+(246, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -4932.5, -1596.1, 84.8, 0.0), radius: 20.0 }, 
+    Trigger::Quest { quest_id: 1149 }
 )),
 (257, (
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 4252.4, 757.0, -23.1, 0.0), radius: 12.0 }, 
@@ -112,6 +164,10 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::Gnomeregan, -329.1, -3.2, -152.9, 3.0),required_level: 15,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 15 to enter."),
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(362, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -10429.4, -3828.8, -31.6, 0.0), radius: 150.0 }, 
+    Trigger::Quest { quest_id: 1448 }
+)),
 (442, (
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -4666.5, -2536.8, 87.0, 0.0), radius: 10.0 }, 
     Trigger::Teleport { location: Position::new(Map::RazorfenDowns, 2593.7, 1111.2, 51.0, 4.7),required_level: 25,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 25 to enter."),
@@ -132,10 +188,18 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -10176.6, -3995.4, -112.2, 3.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(482, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -8932.8, -1986.4, 139.9, 0.0), radius: 12.0 }, 
+    Trigger::Quest { quest_id: 1699 }
+)),
 (503, (
     AreaTrigger::Circle { position: Position::new(Map::StormwindStockade, 39.4, 0.8, -12.8, 0.0), radius: 8.0 }, 
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -8766.1, 845.5, 88.0, 3.8),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
+)),
+(522, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -1679.3, -4329.0, 2.6, 0.0), radius: 4.0 }, 
+    Trigger::Quest { quest_id: 1719 }
 )),
 (523, (
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -4858.3, 785.0, 241.1, 0.0), radius: 12.0 }, 
@@ -270,6 +334,10 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -1051.4, -3653.8, 31.1, 0.0), radius: 30.0 }, 
     Trigger::Inn
 )),
+(822, (
+    AreaTrigger::Circle { position: Position::new(Map::Uldaman, -234.4, 319.1, -47.6, 0.0), radius: 20.0 }, 
+    Trigger::Quest { quest_id: 2240 }
+)),
 (843, (
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 341.4, -4684.7, 30.9, 0.0), radius: 30.0 }, 
     Trigger::Inn
@@ -346,6 +414,14 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -14460.0, 463.3, 15.2, 4.7),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(1205, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -295.6, -3460.7, 193.9, 0.0), radius: 14.0 }, 
+    Trigger::Quest { quest_id: 2989 }
+)),
+(1388, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 4277.6, -6296.0, 95.6, 0.0), radius: 20.0 }, 
+    Trigger::Quest { quest_id: 3505 }
+)),
 (1466, (
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -7176.6, -937.7, 170.2, 0.0), radius: 13.0 }, 
     Trigger::Teleport { location: Position::new(Map::BlackrockDepths, 456.9, 34.1, -68.1, 4.7),required_level: 40,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 40 to enter."),
@@ -374,6 +450,10 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -907.9, -3534.2, 83.8, 0.0), radius: 30.0 }, 
     Trigger::Inn
 )),
+(1667, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -3464.7, -4120.9, 17.1, 0.0), radius: 9.0 }, 
+    Trigger::Quest { quest_id: 1265 }
+)),
 (2068, (
     AreaTrigger::Square { position: Position::new(Map::BlackrockSpire, 25.9, -299.3, 24.1, 0.0), length: 20.0, width: 20.0, height: 20.0, yaw: 0.0 },
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -7558.4, -1309.4, 248.5, 1.6),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
@@ -398,6 +478,10 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -4840.3, -1330.5, 508.2, 0.0), radius: 10.0 }, 
     Trigger::Teleport { location: Position::new(Map::DeeprunTram, 69.2, 10.4, -4.3, 3.1),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
+)),
+(2207, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 5552.1, -683.8, 335.2, 0.0), radius: 25.0 }, 
+    Trigger::Quest { quest_id: 5156 }
 )),
 (2214, (
     AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, 3237.5, -4060.6, 112.0, 0.0), length: 10.0, width: 10.0, height: 10.0, yaw: 0.0 },
@@ -445,10 +529,18 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 6688.0, -4670.1, 723.9, 0.0), radius: 20.0 }, 
     Trigger::Inn
 )),
+(2327, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 5018.9, -4563.9, 851.8, 0.0), radius: 50.0 }, 
+    Trigger::Quest { quest_id: 4842 }
+)),
 (2406, (
     AreaTrigger::Square { position: Position::new(Map::ShadowfangKeep, -287.1, 2175.6, 36.9, 0.0), length: 98.9, width: 185.6, height: 80.6, yaw: 2.9 },
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -276.2, 1652.7, 77.6, 3.1),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
+)),
+(2486, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 6207.5, -152.8, 79.8, 0.0), radius: 15.0 }, 
+    Trigger::Quest { quest_id: 4811 }
 )),
 (2527, (
     AreaTrigger::Square { position: Position::new(Map::Kalimdor, 1643.4, -4233.6, 56.2, 0.0), length: 12.4, width: 11.9, height: 15.1, yaw: 5.8 },
@@ -494,6 +586,10 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 2343.6, -2569.0, 118.8, 0.0), radius: 30.0 }, 
     Trigger::Inn
 )),
+(2726, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, 1869.0, -3223.4, 123.1, 0.0), radius: 35.0 }, 
+    Trigger::Quest { quest_id: 6185 }
+)),
 (2786, (
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -9050.9, 445.5, 93.1, 0.0), radius: 1.0 }, 
     Trigger::Inn
@@ -512,6 +608,14 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::MoltenCore, 1115.2, -463.0, -95.0, 0.0), radius: 20.0 }, 
     Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -7508.3, -1039.7, 180.9, 3.8),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
+)),
+(2926, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 1999.2, -1121.3, 97.4, 0.0), radius: 9.0 }, 
+    Trigger::Quest { quest_id: 25 }
+)),
+(2946, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 2.0, 402.7, 101.0, 0.0), radius: 45.0 }, 
+    Trigger::Quest { quest_id: 6421 }
 )),
 (3126, (
     AreaTrigger::Square { position: Position::new(Map::Maraudon, 756.9, -634.0, -32.8, 0.0), length: 15.9, width: 26.4, height: 44.1, yaw: 1.6 },
@@ -598,6 +702,10 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::Kalimdor, -3585.8, 847.4, 138.6, 2.4),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(3367, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, 2843.4, -1553.3, 190.7, 0.0), radius: 7.0 }, 
+    Trigger::Quest { quest_id: 6025 }
+)),
 (3528, (
     AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, -7510.9, -1035.9, 183.0, 0.0), length: 3.8, width: 0.4, height: 2.1, yaw: 0.7 },
     Trigger::Teleport { location: Position::new(Map::MoltenCore, 1091.9, -467.0, -105.1, 3.1),required_level: 50,required_item: 0,required_quest: 7848,failed_text: Some("You must be attuned and in a raid group to enter."),
@@ -654,6 +762,14 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -6865.0, 731.6, 50.0, 0.0), radius: 20.0 }, 
     Trigger::Inn
 )),
+(3986, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -8215.1, -4622.0, 7.5, 0.0), radius: 40.0 }, 
+    Trigger::Quest { quest_id: 8286 }
+)),
+(3991, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, 1733.3, 526.5, 34.2, 0.0), radius: 35.0 }, 
+    Trigger::Quest { quest_id: 1658 }
+)),
 (4006, (
     AreaTrigger::Square { position: Position::new(Map::RuinsOfAhnQiraj, -8419.6, 1504.3, 31.7, 0.0), length: 18.0, width: 41.8, height: 40.5, yaw: 5.8 },
     Trigger::Teleport { location: Position::new(Map::Kalimdor, -8415.7, 1502.4, 30.7, 5.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
@@ -683,9 +799,65 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, 2298.2, -5341.0, 90.9, 0.0), length: 33.5, width: 17.7, height: 24.6, yaw: 2.2 },
     Trigger::Inn
 )),
+(4064, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 7922.7, -6501.5, 47.4, 0.0), radius: 30.0 }, 
+    Trigger::Quest { quest_id: 9160 }
+)),
+(4071, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 7567.7, -7359.5, 161.7, 0.0), radius: 20.0 }, 
+    Trigger::Quest { quest_id: 9193 }
+)),
 (4090, (
     AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 2716.6, 1496.8, 236.8, 0.0), radius: 30.0 }, 
     Trigger::Inn
+)),
+(4092, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -9061.9, 349.8, 93.1, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9260 }
+)),
+(4094, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -9119.0, 327.8, 93.2, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9260 }
+)),
+(4095, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -9182.6, 414.9, 89.6, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9260 }
+)),
+(4096, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -9218.1, 318.6, 73.9, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9260 }
+)),
+(4098, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -5163.2, -645.9, 397.0, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9261 }
+)),
+(4099, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -5175.2, -588.1, 398.0, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9261 }
+)),
+(4100, (
+    AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, 1980.0, 305.3, 41.2, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9265 }
+)),
+(4101, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 1218.0, -4339.3, 25.9, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9263 }
+)),
+(4102, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 1169.6, -4320.1, 20.9, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9263 }
+)),
+(4103, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, -1545.4, 51.3, 5.4, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9264 }
+)),
+(4104, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 9914.2, 1864.7, 1321.3, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9262 }
+)),
+(4105, (
+    AreaTrigger::Circle { position: Position::new(Map::Kalimdor, 9948.0, 1932.5, 1328.7, 0.0), radius: 6.0 }, 
+    Trigger::Quest { quest_id: 9262 }
 )),
 (4108, (
     AreaTrigger::Circle { position: Position::new(Map::Outland, 7557.3, -6889.6, 96.0, 0.0), radius: 13.0 }, 
@@ -745,6 +917,18 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::Naxxramas, 3498.3, -5349.9, 145.0, 1.3),required_level: 51,required_item: 0,required_quest: 9378,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(4170, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -17.6, 3803.6, 94.1, 0.0), radius: 10.0 }, 
+    Trigger::Quest { quest_id: 9400 }
+)),
+(4200, (
+    AreaTrigger::Square { position: Position::new(Map::HellfireCitadelTheBloodFurnace, 327.4, -153.9, -18.0, 0.0), length: 3.5, width: 15.7, height: 15.8, yaw: 4.7 },
+    Trigger::Quest { quest_id: 9607 }
+)),
+(4201, (
+    AreaTrigger::Square { position: Position::new(Map::HellfireCitadelTheBloodFurnace, 326.4, -160.0, -19.7, 0.0), length: 2.9, width: 18.4, height: 13.1, yaw: 1.5 },
+    Trigger::Quest { quest_id: 9608 }
+)),
 (4240, (
     AreaTrigger::Circle { position: Position::new(Map::Outland, -4133.4, -12471.8, 44.6, 0.0), radius: 15.0 }, 
     Trigger::Inn
@@ -757,14 +941,34 @@ heroic_keys: None,heroic_required_quest: 0 }
     AreaTrigger::Circle { position: Position::new(Map::Outland, 8701.5, -6636.8, 64.0, 0.0), radius: 15.0 }, 
     Trigger::Inn
 )),
+(4280, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -1163.7, -11828.7, 28.9, 0.0), radius: 100.0 }, 
+    Trigger::Quest { quest_id: 9700 }
+)),
+(4291, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -111.1, 8751.4, 18.7, 0.0), radius: 60.0 }, 
+    Trigger::Quest { quest_id: 9701 }
+)),
+(4293, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -751.1, 5918.4, 15.4, 0.0), radius: 80.0 }, 
+    Trigger::Quest { quest_id: 9716 }
+)),
 (4297, (
     AreaTrigger::Square { position: Position::new(Map::HellfireCitadelRamparts, -1360.2, 1631.9, 68.4, 0.0), length: 8.2, width: 11.8, height: 19.2, yaw: 4.2 },
     Trigger::Teleport { location: Position::new(Map::Outland, -360.7, 3071.9, -15.1, 5.1),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(4298, (
+    AreaTrigger::Square { position: Position::new(Map::Outland, 565.4, 6944.3, -14.3, 0.0), length: 29.4, width: 36.6, height: 33.1, yaw: 0.0 },
+    Trigger::Quest { quest_id: 9731 }
+)),
 (4300, (
     AreaTrigger::Square { position: Position::new(Map::Outland, -201.4, 5515.0, 22.1, 0.0), length: 8.6, width: 8.6, height: 14.7, yaw: 0.3 },
-    Trigger::Inn
+    Trigger::Quest { quest_id: 9752 }
+)),
+(4301, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -383.1, 7257.3, 55.5, 0.0), radius: 10.0 }, 
+    Trigger::Quest { quest_id: 9786 }
 )),
 (4311, (
     AreaTrigger::Square { position: Position::new(Map::TheBattleForMountHyjal, 4162.0, -4227.1, 869.2, 0.0), length: 11.2, width: 25.3, height: 35.1, yaw: 3.1 },
@@ -1004,6 +1208,14 @@ heroic_keys: None,heroic_required_quest: 0 }
     Trigger::Teleport { location: Position::new(Map::TempestKeep, -10.8, -1.2, -2.4, 6.2),required_level: 68,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 70 and in a raid group to enter Tempest Keep."),
 heroic_keys: None,heroic_required_quest: 0 }
 )),
+(4473, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 4199.7, 1766.4, 133.2, 0.0), radius: 10.0 }, 
+    Trigger::Quest { quest_id: 10269 }
+)),
+(4475, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, 3923.1, 3873.4, 180.8, 0.0), radius: 10.0 }, 
+    Trigger::Quest { quest_id: 10275 }
+)),
 (4486, (
     AreaTrigger::Square { position: Position::new(Map::Outland, 9477.7, -6858.7, 17.4, 0.0), length: 45.6, width: 21.5, height: 43.1, yaw: 5.5 },
     Trigger::Inn
@@ -1073,6 +1285,14 @@ heroic_keys: None,heroic_required_quest: 0 }
 (4577, (
     AreaTrigger::Circle { position: Position::new(Map::Outland, -2978.5, 864.1, -7.5, 0.0), radius: 18.0 }, 
     Trigger::Inn
+)),
+(4581, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -4301.0, 1390.9, 144.0, 0.0), radius: 40.0 }, 
+    Trigger::Quest { quest_id: 10750 }
+)),
+(4588, (
+    AreaTrigger::Circle { position: Position::new(Map::Outland, -4230.6, 1419.3, 130.5, 0.0), radius: 35.0 }, 
+    Trigger::Quest { quest_id: 10772 }
 )),
 (4595, (
     AreaTrigger::Circle { position: Position::new(Map::Outland, 2230.1, 4716.4, 161.9, 0.0), radius: 14.0 }, 
