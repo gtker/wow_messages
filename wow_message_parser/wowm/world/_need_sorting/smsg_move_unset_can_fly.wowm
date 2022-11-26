@@ -1,0 +1,6 @@
+smsg SMSG_MOVE_UNSET_CAN_FLY = 0x0344 {
+    PackedGuid player;
+    u32 counter;
+} {
+    versions = "2.4.3 3";
+}

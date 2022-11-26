@@ -1266,6 +1266,8 @@ pub use crate::shared::smsg_move_set_can_fly_tbc_wrath::SMSG_MOVE_SET_CAN_FLY;
 
 pub use crate::shared::smsg_move_set_hover_vanilla_tbc_wrath::SMSG_MOVE_SET_HOVER;
 
+pub use crate::shared::smsg_move_unset_can_fly_tbc_wrath::SMSG_MOVE_UNSET_CAN_FLY;
+
 pub use crate::shared::smsg_move_unset_hover_vanilla_tbc_wrath::SMSG_MOVE_UNSET_HOVER;
 
 pub use crate::shared::smsg_move_water_walk_vanilla_tbc_wrath::SMSG_MOVE_WATER_WALK;
