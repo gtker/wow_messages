@@ -1,5 +1,5 @@
 cmsg CMSG_ARENA_TEAM_DISBAND = 0x0355 {
     u32 arena_team;
 } {
-    versions = "2.4.3 3.3.5";
+    versions = "2.4.3 3";
 }

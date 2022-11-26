@@ -1,0 +1,6 @@
+cmsg CMSG_ARENA_TEAM_LEADER = 0x0356 {
+    u32 arena_team;
+    CString player;
+} {
+    versions = "2.4.3 3";
+}

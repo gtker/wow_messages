@@ -344,6 +344,8 @@ pub use crate::shared::cmsg_arena_team_disband_tbc_wrath::CMSG_ARENA_TEAM_DISBAN
 
 pub use crate::shared::cmsg_arena_team_invite_tbc_wrath::CMSG_ARENA_TEAM_INVITE;
 
+pub use crate::shared::cmsg_arena_team_leader_tbc_wrath::CMSG_ARENA_TEAM_LEADER;
+
 pub use crate::shared::cmsg_arena_team_leave_tbc_wrath::CMSG_ARENA_TEAM_LEAVE;
 
 pub use crate::shared::cmsg_arena_team_remove_tbc_wrath::CMSG_ARENA_TEAM_REMOVE;
