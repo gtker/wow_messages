@@ -859,6 +859,7 @@
 - [SMSG_MESSAGECHAT](docs/smsg_messagechat.md)
 - [SMSG_MONSTER_MOVE](docs/smsg_monster_move.md)
 - [SMSG_MONSTER_MOVE_TRANSPORT](docs/smsg_monster_move_transport.md)
+- [SMSG_MOTD](docs/smsg_motd.md)
 - [SMSG_MOUNTRESULT](docs/smsg_mountresult.md)
 - [SMSG_MOUNTSPECIAL_ANIM](docs/smsg_mountspecial_anim.md)
 - [SMSG_MOVE_FEATHER_FALL](docs/smsg_move_feather_fall.md)

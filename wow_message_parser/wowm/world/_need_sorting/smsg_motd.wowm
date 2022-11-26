@@ -1,0 +1,5 @@
+smsg SMSG_MOTD = 0x033D {
+    SizedCString motd;
+} {
+    versions = "2.4.3 3";
+}

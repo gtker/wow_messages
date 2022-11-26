@@ -498,6 +498,7 @@ pub mod smsg_loot_response_vanilla_tbc_wrath;
 pub mod smsg_loot_roll_tbc_wrath;
 pub mod smsg_loot_roll_won_tbc_wrath;
 pub mod smsg_loot_start_roll_vanilla_tbc;
+pub mod smsg_motd_tbc_wrath;
 pub mod smsg_mountresult_vanilla_tbc_wrath;
 pub mod smsg_mountspecial_anim_vanilla_tbc_wrath;
 pub mod smsg_move_feather_fall_vanilla_tbc_wrath;

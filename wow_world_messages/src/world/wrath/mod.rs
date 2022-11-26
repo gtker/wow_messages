@@ -1194,6 +1194,8 @@ pub use crate::shared::smsg_loot_roll_tbc_wrath::SMSG_LOOT_ROLL;
 
 pub use crate::shared::smsg_loot_roll_won_tbc_wrath::SMSG_LOOT_ROLL_WON;
 
+pub use crate::shared::smsg_motd_tbc_wrath::SMSG_MOTD;
+
 pub use crate::shared::smsg_mountresult_vanilla_tbc_wrath::SMSG_MOUNTRESULT;
 
 pub use crate::shared::smsg_mountspecial_anim_vanilla_tbc_wrath::SMSG_MOUNTSPECIAL_ANIM;
