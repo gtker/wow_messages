@@ -18,7 +18,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_TRANSFER_ABORTED", 0x040),
     Data::new("SMSG_CHARACTER_LOGIN_FAILED", 0x041),
     Data::new("SMSG_LOGIN_SETTIMESPEED", 0x042),
-    Data::new("SMSG_GAMETIME_UPDATE", 0x043),
     Data::new("CMSG_PLAYER_LOGOUT", 0x04A),
     Data::new("CMSG_LOGOUT_REQUEST", 0x04B),
     Data::new("SMSG_LOGOUT_RESPONSE", 0x04C),

@@ -17,7 +17,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0040 => "SMSG_TRANSFER_ABORTED",
         0x0041 => "SMSG_CHARACTER_LOGIN_FAILED",
         0x0042 => "SMSG_LOGIN_SETTIMESPEED",
-        0x0043 => "SMSG_GAMETIME_UPDATE",
         0x004a => "CMSG_PLAYER_LOGOUT",
         0x004b => "CMSG_LOGOUT_REQUEST",
         0x004c => "SMSG_LOGOUT_RESPONSE",
