@@ -1316,6 +1316,8 @@ pub use crate::shared::smsg_spelllogmiss_vanilla_tbc_wrath::SMSG_SPELLLOGMISS;
 
 pub use crate::shared::smsg_spellordamage_immune_vanilla_tbc_wrath::SMSG_SPELLORDAMAGE_IMMUNE;
 
+pub use crate::shared::smsg_spellsteallog_tbc_wrath::SMSG_SPELLSTEALLOG;
+
 pub use crate::shared::smsg_spirit_healer_confirm_vanilla_tbc_wrath::SMSG_SPIRIT_HEALER_CONFIRM;
 
 pub use crate::shared::smsg_spline_move_feather_fall_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_FEATHER_FALL;
@@ -1389,6 +1391,10 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
 pub use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
+
+pub use crate::shared::spell_steal_action_tbc_wrath::SpellStealAction;
+
+pub use crate::shared::spell_steal_tbc_wrath::SpellSteal;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 

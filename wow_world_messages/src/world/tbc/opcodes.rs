@@ -5845,6 +5845,7 @@ use crate::world::tbc::SMSG_UPDATE_INSTANCE_OWNERSHIP;
 use crate::world::tbc::SMSG_CHAT_PLAYER_AMBIGUOUS;
 use crate::world::tbc::SMSG_SPELLINSTAKILLLOG;
 use crate::world::tbc::SMSG_SPELL_UPDATE_CHAIN_TARGETS;
+use crate::world::tbc::SMSG_SPELLSTEALLOG;
 use crate::world::tbc::SMSG_DEFENSE_MESSAGE;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Server;
 use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Server;
@@ -6187,6 +6188,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHAT_PLAYER_AMBIGUOUS(SMSG_CHAT_PLAYER_AMBIGUOUS),
     SMSG_SPELLINSTAKILLLOG(SMSG_SPELLINSTAKILLLOG),
     SMSG_SPELL_UPDATE_CHAIN_TARGETS(SMSG_SPELL_UPDATE_CHAIN_TARGETS),
+    SMSG_SPELLSTEALLOG(SMSG_SPELLSTEALLOG),
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Server),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Server),
@@ -6531,6 +6533,7 @@ impl ServerOpcodeMessage {
             0x032D => Ok(Self::SMSG_CHAT_PLAYER_AMBIGUOUS(<SMSG_CHAT_PLAYER_AMBIGUOUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032D, size: body_size, io, } } else { a } })?)),
             0x032F => Ok(Self::SMSG_SPELLINSTAKILLLOG(<SMSG_SPELLINSTAKILLLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032F, size: body_size, io, } } else { a } })?)),
             0x0330 => Ok(Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(<SMSG_SPELL_UPDATE_CHAIN_TARGETS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0330, size: body_size, io, } } else { a } })?)),
+            0x0333 => Ok(Self::SMSG_SPELLSTEALLOG(<SMSG_SPELLSTEALLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0333, size: body_size, io, } } else { a } })?)),
             0x033A => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033A, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
@@ -6943,6 +6946,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPELLSTEALLOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
@@ -7288,6 +7292,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPELLSTEALLOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
@@ -7633,6 +7638,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPELLSTEALLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7978,6 +7984,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPELLSTEALLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8323,6 +8330,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPELLSTEALLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8668,6 +8676,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPELLSTEALLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
@@ -9015,6 +9024,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHAT_PLAYER_AMBIGUOUS(_) => "SMSG_CHAT_PLAYER_AMBIGUOUS",
             ServerOpcodeMessage::SMSG_SPELLINSTAKILLLOG(_) => "SMSG_SPELLINSTAKILLLOG",
             ServerOpcodeMessage::SMSG_SPELL_UPDATE_CHAIN_TARGETS(_) => "SMSG_SPELL_UPDATE_CHAIN_TARGETS",
+            ServerOpcodeMessage::SMSG_SPELLSTEALLOG(_) => "SMSG_SPELLSTEALLOG",
             ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => "SMSG_DEFENSE_MESSAGE",
             ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Server",
             ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Server",
@@ -10995,6 +11005,12 @@ impl From<SMSG_SPELLINSTAKILLLOG> for ServerOpcodeMessage {
 impl From<SMSG_SPELL_UPDATE_CHAIN_TARGETS> for ServerOpcodeMessage {
     fn from(c: SMSG_SPELL_UPDATE_CHAIN_TARGETS) -> Self {
         Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c)
+    }
+}
+
+impl From<SMSG_SPELLSTEALLOG> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPELLSTEALLOG) -> Self {
+        Self::SMSG_SPELLSTEALLOG(c)
     }
 }
 

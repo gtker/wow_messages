@@ -1,0 +1,24 @@
+enum SpellStealAction : u8 {
+    STEAL = 0;
+    CLEANSE = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+struct SpellSteal {
+    Spell spell;
+    SpellStealAction action;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_SPELLSTEALLOG = 0x0333 {
+    PackedGuid victim;
+    PackedGuid caster;
+    Spell spell;
+    u8 unknown;
+    u32 amount_of_spell_steals;
+    SpellSteal[amount_of_spell_steals] spell_steals;
+} {
+    versions = "2.4.3 3";
+}
