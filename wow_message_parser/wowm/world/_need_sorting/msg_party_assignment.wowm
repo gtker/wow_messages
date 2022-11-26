@@ -1,0 +1,14 @@
+enum PartyRole : u8 {
+    MAIN_TANK = 0;
+    ASSISTANT = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+cmsg MSG_PARTY_ASSIGNMENT_Client = 0x038E {
+    PartyRole role;
+    Bool apply;
+    Guid player;
+} {
+    versions = "2.4.3 3";
+}

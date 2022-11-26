@@ -924,6 +924,8 @@ pub use crate::shared::msg_move_time_skipped_server_vanilla_tbc_wrath::MSG_MOVE_
 
 pub use crate::shared::msg_move_worldport_ack_vanilla_tbc_wrath::MSG_MOVE_WORLDPORT_ACK;
 
+pub use crate::shared::msg_party_assignment_client_tbc_wrath::MSG_PARTY_ASSIGNMENT_Client;
+
 pub use crate::shared::msg_petition_decline_vanilla_tbc_wrath::MSG_PETITION_DECLINE;
 
 pub use crate::shared::msg_petition_rename_vanilla_tbc_wrath::MSG_PETITION_RENAME;
@@ -967,6 +969,8 @@ pub use crate::shared::npc_text_update_emote_vanilla_tbc_wrath::NpcTextUpdateEmo
 pub use crate::shared::party_operation_vanilla_tbc_wrath::PartyOperation;
 
 pub use crate::shared::party_result_tbc_wrath::PartyResult;
+
+pub use crate::shared::party_role_tbc_wrath::PartyRole;
 
 pub use crate::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
 
