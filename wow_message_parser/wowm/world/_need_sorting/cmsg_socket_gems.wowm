@@ -1,0 +1,6 @@
+cmsg CMSG_SOCKET_GEMS = 0x0347 {
+    Guid item;
+    Guid[3] gems;
+} {
+    versions = "2.4.3 3.3.5";
+}

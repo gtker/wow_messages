@@ -676,6 +676,8 @@ pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATC
 
 pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::CMSG_SETSHEATHED;
 
+pub use crate::shared::cmsg_socket_gems_tbc_wrath::CMSG_SOCKET_GEMS;
+
 pub use crate::shared::cmsg_spirit_healer_activate_vanilla_tbc_wrath::CMSG_SPIRIT_HEALER_ACTIVATE;
 
 pub use crate::shared::cmsg_split_item_vanilla_tbc::CMSG_SPLIT_ITEM;

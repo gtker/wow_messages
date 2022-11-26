@@ -313,6 +313,7 @@ use crate::world::tbc::MSG_RAID_READY_CHECK_Client;
 use crate::world::tbc::CMSG_GMSURVEY_SUBMIT;
 use crate::world::tbc::CMSG_MOVE_SET_CAN_FLY_ACK;
 use crate::world::tbc::CMSG_MOVE_SET_FLY;
+use crate::world::tbc::CMSG_SOCKET_GEMS;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Client;
 use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Client;
 use crate::world::tbc::CMSG_REALM_SPLIT;
@@ -627,6 +628,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GMSURVEY_SUBMIT(CMSG_GMSURVEY_SUBMIT),
     CMSG_MOVE_SET_CAN_FLY_ACK(CMSG_MOVE_SET_CAN_FLY_ACK),
     CMSG_MOVE_SET_FLY(CMSG_MOVE_SET_FLY),
+    CMSG_SOCKET_GEMS(CMSG_SOCKET_GEMS),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Client),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Client),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
@@ -943,6 +945,7 @@ impl ClientOpcodeMessage {
             0x032A => Ok(Self::CMSG_GMSURVEY_SUBMIT(<CMSG_GMSURVEY_SUBMIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032A, size: body_size, io, } } else { a } })?)),
             0x0345 => Ok(Self::CMSG_MOVE_SET_CAN_FLY_ACK(<CMSG_MOVE_SET_CAN_FLY_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0345, size: body_size, io, } } else { a } })?)),
             0x0346 => Ok(Self::CMSG_MOVE_SET_FLY(<CMSG_MOVE_SET_FLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0346, size: body_size, io, } } else { a } })?)),
+            0x0347 => Ok(Self::CMSG_SOCKET_GEMS(<CMSG_SOCKET_GEMS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0347, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038C, size: body_size, io, } } else { a } })?)),
@@ -1327,6 +1330,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SOCKET_GEMS(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
@@ -1644,6 +1648,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SOCKET_GEMS(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
@@ -1961,6 +1966,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SOCKET_GEMS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2278,6 +2284,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SOCKET_GEMS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2595,6 +2602,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SOCKET_GEMS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2912,6 +2920,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SOCKET_GEMS(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
@@ -3264,6 +3273,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GMSURVEY_SUBMIT(_) => "CMSG_GMSURVEY_SUBMIT",
             ClientOpcodeMessage::CMSG_MOVE_SET_CAN_FLY_ACK(_) => "CMSG_MOVE_SET_CAN_FLY_ACK",
             ClientOpcodeMessage::CMSG_MOVE_SET_FLY(_) => "CMSG_MOVE_SET_FLY",
+            ClientOpcodeMessage::CMSG_SOCKET_GEMS(_) => "CMSG_SOCKET_GEMS",
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Client",
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Client",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
@@ -5096,6 +5106,12 @@ impl From<CMSG_MOVE_SET_CAN_FLY_ACK> for ClientOpcodeMessage {
 impl From<CMSG_MOVE_SET_FLY> for ClientOpcodeMessage {
     fn from(c: CMSG_MOVE_SET_FLY) -> Self {
         Self::CMSG_MOVE_SET_FLY(c)
+    }
+}
+
+impl From<CMSG_SOCKET_GEMS> for ClientOpcodeMessage {
+    fn from(c: CMSG_SOCKET_GEMS) -> Self {
+        Self::CMSG_SOCKET_GEMS(c)
     }
 }
 
