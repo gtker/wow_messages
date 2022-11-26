@@ -1,0 +1,6 @@
+msg MSG_MOVE_HOVER = 0x00F7 {
+    PackedGuid player;
+    MovementInfo info;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}

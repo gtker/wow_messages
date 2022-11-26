@@ -221,6 +221,8 @@ pub(crate) mod msg_move_fall_land;
 pub use msg_move_fall_land::*;
 pub(crate) mod msg_move_heartbeat;
 pub use msg_move_heartbeat::*;
+pub(crate) mod msg_move_hover;
+pub use msg_move_hover::*;
 pub(crate) mod msg_move_jump;
 pub use msg_move_jump::*;
 pub(crate) mod msg_move_knock_back_server;

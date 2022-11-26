@@ -566,6 +566,7 @@
 - [MSG_MOVE_HEARTBEAT](docs/msg_move_heartbeat.md)
 - [MSG_MOVE_HEARTBEAT_Client](docs/msg_move_heartbeat_client.md)
 - [MSG_MOVE_HEARTBEAT_Server](docs/msg_move_heartbeat_server.md)
+- [MSG_MOVE_HOVER](docs/msg_move_hover.md)
 - [MSG_MOVE_JUMP](docs/msg_move_jump.md)
 - [MSG_MOVE_JUMP_Client](docs/msg_move_jump_client.md)
 - [MSG_MOVE_JUMP_Server](docs/msg_move_jump_server.md)

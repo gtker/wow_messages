@@ -131,6 +131,8 @@ pub(crate) mod msg_move_heartbeat_client;
 pub use msg_move_heartbeat_client::*;
 pub(crate) mod msg_move_heartbeat_server;
 pub use msg_move_heartbeat_server::*;
+pub(crate) mod msg_move_hover;
+pub use msg_move_hover::*;
 pub(crate) mod msg_move_jump_client;
 pub use msg_move_jump_client::*;
 pub(crate) mod msg_move_jump_server;
