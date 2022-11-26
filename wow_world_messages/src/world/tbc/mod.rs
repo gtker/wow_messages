@@ -894,6 +894,8 @@ pub use crate::shared::msg_minimap_ping_server_vanilla_tbc_wrath::MSG_MINIMAP_PI
 
 pub use crate::shared::msg_move_teleport_ack_client_vanilla_tbc_wrath::MSG_MOVE_TELEPORT_ACK_Client;
 
+pub use crate::shared::msg_move_teleport_cheat_server_tbc_wrath::MSG_MOVE_TELEPORT_CHEAT_Server;
+
 pub use crate::shared::msg_move_worldport_ack_vanilla_tbc_wrath::MSG_MOVE_WORLDPORT_ACK;
 
 pub use crate::shared::msg_petition_decline_vanilla_tbc_wrath::MSG_PETITION_DECLINE;

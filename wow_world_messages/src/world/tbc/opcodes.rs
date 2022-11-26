@@ -5486,6 +5486,7 @@ use crate::world::tbc::MSG_MOVE_START_PITCH_DOWN_Server;
 use crate::world::tbc::MSG_MOVE_STOP_PITCH_Server;
 use crate::world::tbc::MSG_MOVE_SET_RUN_MODE_Server;
 use crate::world::tbc::MSG_MOVE_SET_WALK_MODE_Server;
+use crate::world::tbc::MSG_MOVE_TELEPORT_CHEAT_Server;
 use crate::world::tbc::MSG_MOVE_TELEPORT_ACK_Server;
 use crate::world::tbc::MSG_MOVE_FALL_LAND_Server;
 use crate::world::tbc::MSG_MOVE_START_SWIM_Server;
@@ -5809,6 +5810,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_STOP_PITCH(MSG_MOVE_STOP_PITCH_Server),
     MSG_MOVE_SET_RUN_MODE(MSG_MOVE_SET_RUN_MODE_Server),
     MSG_MOVE_SET_WALK_MODE(MSG_MOVE_SET_WALK_MODE_Server),
+    MSG_MOVE_TELEPORT_CHEAT(MSG_MOVE_TELEPORT_CHEAT_Server),
     MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Server),
     MSG_MOVE_FALL_LAND(MSG_MOVE_FALL_LAND_Server),
     MSG_MOVE_START_SWIM(MSG_MOVE_START_SWIM_Server),
@@ -6134,6 +6136,7 @@ impl ServerOpcodeMessage {
             0x00C1 => Ok(Self::MSG_MOVE_STOP_PITCH(<MSG_MOVE_STOP_PITCH_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C1, size: body_size, io, } } else { a } })?)),
             0x00C2 => Ok(Self::MSG_MOVE_SET_RUN_MODE(<MSG_MOVE_SET_RUN_MODE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C2, size: body_size, io, } } else { a } })?)),
             0x00C3 => Ok(Self::MSG_MOVE_SET_WALK_MODE(<MSG_MOVE_SET_WALK_MODE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C3, size: body_size, io, } } else { a } })?)),
+            0x00C6 => Ok(Self::MSG_MOVE_TELEPORT_CHEAT(<MSG_MOVE_TELEPORT_CHEAT_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C6, size: body_size, io, } } else { a } })?)),
             0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C7, size: body_size, io, } } else { a } })?)),
             0x00C9 => Ok(Self::MSG_MOVE_FALL_LAND(<MSG_MOVE_FALL_LAND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C9, size: body_size, io, } } else { a } })?)),
             0x00CA => Ok(Self::MSG_MOVE_START_SWIM(<MSG_MOVE_START_SWIM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00CA, size: body_size, io, } } else { a } })?)),
@@ -6527,6 +6530,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_SWIM(c) => c.write_encrypted_server(w, e),
@@ -6853,6 +6857,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_FALL_LAND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_SWIM(c) => c.write_unencrypted_server(w),
@@ -7179,6 +7184,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7505,6 +7511,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7831,6 +7838,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8157,6 +8165,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_PITCH(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FALL_LAND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_SWIM(c) => c.astd_write_unencrypted_server(w).await,
@@ -8485,6 +8494,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_STOP_PITCH(_) => "MSG_MOVE_STOP_PITCH_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_RUN_MODE(_) => "MSG_MOVE_SET_RUN_MODE_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_WALK_MODE(_) => "MSG_MOVE_SET_WALK_MODE_Server",
+            ServerOpcodeMessage::MSG_MOVE_TELEPORT_CHEAT(_) => "MSG_MOVE_TELEPORT_CHEAT_Server",
             ServerOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Server",
             ServerOpcodeMessage::MSG_MOVE_FALL_LAND(_) => "MSG_MOVE_FALL_LAND_Server",
             ServerOpcodeMessage::MSG_MOVE_START_SWIM(_) => "MSG_MOVE_START_SWIM_Server",
@@ -9116,6 +9126,12 @@ impl From<MSG_MOVE_SET_RUN_MODE_Server> for ServerOpcodeMessage {
 impl From<MSG_MOVE_SET_WALK_MODE_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_SET_WALK_MODE_Server) -> Self {
         Self::MSG_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_TELEPORT_CHEAT_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_TELEPORT_CHEAT_Server) -> Self {
+        Self::MSG_MOVE_TELEPORT_CHEAT(c)
     }
 }
 
