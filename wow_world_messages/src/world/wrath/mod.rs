@@ -318,6 +318,10 @@ pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 
 pub use crate::shared::arena_faction_tbc_wrath::ArenaFaction;
 
+pub use crate::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandError;
+
+pub use crate::shared::arena_team_command_tbc_wrath::ArenaTeamCommand;
+
 pub use crate::shared::arena_type_tbc_wrath::ArenaType;
 
 pub use crate::shared::auction_enchantment_tbc_wrath::AuctionEnchantment;
@@ -1037,6 +1041,8 @@ pub use crate::shared::smsg_ai_reaction_vanilla_tbc_wrath::SMSG_AI_REACTION;
 pub use crate::shared::smsg_area_spirit_healer_time_vanilla_tbc_wrath::SMSG_AREA_SPIRIT_HEALER_TIME;
 
 pub use crate::shared::smsg_area_trigger_message_vanilla_tbc_wrath::SMSG_AREA_TRIGGER_MESSAGE;
+
+pub use crate::shared::smsg_arena_team_command_result_tbc_wrath::SMSG_ARENA_TEAM_COMMAND_RESULT;
 
 pub use crate::shared::smsg_attackstart_vanilla_tbc_wrath::SMSG_ATTACKSTART;
 

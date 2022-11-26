@@ -1,0 +1,39 @@
+enum ArenaTeamCommandError : u32 {
+    ARENA_TEAM_INTERNAL                 = 0x01;
+    ALREADY_IN_ARENA_TEAM               = 0x02;
+    ALREADY_IN_ARENA_TEAM_S             = 0x03;
+    INVITED_TO_ARENA_TEAM               = 0x04;
+    ALREADY_INVITED_TO_ARENA_TEAM_S     = 0x05;
+    ARENA_TEAM_NAME_INVALID             = 0x06;
+    ARENA_TEAM_NAME_EXISTS_S            = 0x07;
+    ARENA_TEAM_LEADER_LEAVE_S           = 0x08 {
+        comment = "This value also has the name `ARENA_TEAM_PERMISSIONS`.";
+    }
+    ARENA_TEAM_PLAYER_NOT_IN_TEAM       = 0x09;
+    ARENA_TEAM_PLAYER_NOT_IN_TEAM_SS    = 0x0A;
+    ARENA_TEAM_PLAYER_NOT_FOUND_S       = 0x0B;
+    ARENA_TEAM_NOT_ALLIED               = 0x0C;
+    ARENA_TEAM_IGNORING_YOU_S           = 0x13;
+    ARENA_TEAM_TARGET_TOO_LOW_S         = 0x15;
+    ARENA_TEAM_TOO_MANY_MEMBERS_S       = 0x16;
+} {
+    versions = "2.4.3 3";
+}
+
+enum ArenaTeamCommand : u32 {
+    TEAM_CREATE_S                 = 0x00;
+    TEAM_INVITE_SS                = 0x01;
+    TEAM_QUIT_S                   = 0x03;
+    TEAM_FOUNDER_S                = 0x0E;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_ARENA_TEAM_COMMAND_RESULT = 0x0349 {
+    ArenaTeamCommand command;
+    CString team;
+    CString player;
+    ArenaTeamCommandError error;
+} {
+    versions = "2.4.3 3";
+}
