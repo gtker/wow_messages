@@ -1,0 +1,5 @@
+cmsg CMSG_ARENA_TEAM_LEAVE = 0x0353 {
+    u32 arena_team;
+} {
+    versions = "2.4.3 3";
+}

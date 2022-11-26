@@ -28,6 +28,7 @@ pub mod cmsg_areatrigger_vanilla_tbc_wrath;
 pub mod cmsg_arena_team_accept_tbc_wrath;
 pub mod cmsg_arena_team_decline_tbc_wrath;
 pub mod cmsg_arena_team_invite_tbc_wrath;
+pub mod cmsg_arena_team_leave_tbc_wrath;
 pub mod cmsg_arena_team_roster_tbc_wrath;
 pub mod cmsg_attackstop_vanilla_tbc_wrath;
 pub mod cmsg_attackswing_vanilla_tbc_wrath;

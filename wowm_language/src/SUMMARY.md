@@ -233,6 +233,7 @@
 - [CMSG_ARENA_TEAM_ACCEPT](docs/cmsg_arena_team_accept.md)
 - [CMSG_ARENA_TEAM_DECLINE](docs/cmsg_arena_team_decline.md)
 - [CMSG_ARENA_TEAM_INVITE](docs/cmsg_arena_team_invite.md)
+- [CMSG_ARENA_TEAM_LEAVE](docs/cmsg_arena_team_leave.md)
 - [CMSG_ARENA_TEAM_ROSTER](docs/cmsg_arena_team_roster.md)
 - [CMSG_ATTACKSTOP](docs/cmsg_attackstop.md)
 - [CMSG_ATTACKSWING](docs/cmsg_attackswing.md)
