@@ -1,0 +1,3 @@
+cmsg CMSG_UNLEARN_TALENTS = 0x0213 { } {
+    versions = "2 3";
+}

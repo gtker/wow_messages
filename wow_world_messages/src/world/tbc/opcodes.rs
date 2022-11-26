@@ -215,6 +215,7 @@ use crate::world::tbc::CMSG_UNLEARN_SKILL;
 use crate::world::tbc::CMSG_GMTICKET_UPDATETEXT;
 use crate::world::tbc::CMSG_REQUEST_ACCOUNT_DATA;
 use crate::world::tbc::CMSG_GMTICKET_GETTICKET;
+use crate::world::tbc::CMSG_UNLEARN_TALENTS;
 use crate::world::tbc::MSG_CORPSE_QUERY_Client;
 use crate::world::tbc::CMSG_GMTICKET_DELETETICKET;
 use crate::world::tbc::CMSG_GMTICKET_SYSTEMSTATUS;
@@ -526,6 +527,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GMTICKET_UPDATETEXT(CMSG_GMTICKET_UPDATETEXT),
     CMSG_REQUEST_ACCOUNT_DATA(CMSG_REQUEST_ACCOUNT_DATA),
     CMSG_GMTICKET_GETTICKET(CMSG_GMTICKET_GETTICKET),
+    CMSG_UNLEARN_TALENTS(CMSG_UNLEARN_TALENTS),
     MSG_CORPSE_QUERY(MSG_CORPSE_QUERY_Client),
     CMSG_GMTICKET_DELETETICKET(CMSG_GMTICKET_DELETETICKET),
     CMSG_GMTICKET_SYSTEMSTATUS(CMSG_GMTICKET_SYSTEMSTATUS),
@@ -839,6 +841,7 @@ impl ClientOpcodeMessage {
             0x0207 => Ok(Self::CMSG_GMTICKET_UPDATETEXT(<CMSG_GMTICKET_UPDATETEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0207, size: body_size, io, } } else { a } })?)),
             0x020A => Ok(Self::CMSG_REQUEST_ACCOUNT_DATA(<CMSG_REQUEST_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x020A, size: body_size, io, } } else { a } })?)),
             0x0211 => Ok(Self::CMSG_GMTICKET_GETTICKET(<CMSG_GMTICKET_GETTICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0211, size: body_size, io, } } else { a } })?)),
+            0x0213 => Ok(Self::CMSG_UNLEARN_TALENTS(<CMSG_UNLEARN_TALENTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0213, size: body_size, io, } } else { a } })?)),
             0x0216 => Ok(Self::MSG_CORPSE_QUERY(<MSG_CORPSE_QUERY_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0216, size: body_size, io, } } else { a } })?)),
             0x0217 => Ok(Self::CMSG_GMTICKET_DELETETICKET(<CMSG_GMTICKET_DELETETICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0217, size: body_size, io, } } else { a } })?)),
             0x021A => Ok(Self::CMSG_GMTICKET_SYSTEMSTATUS(<CMSG_GMTICKET_SYSTEMSTATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021A, size: body_size, io, } } else { a } })?)),
@@ -1220,6 +1223,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMTICKET_GETTICKET(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_UNLEARN_TALENTS(c) => c.write_encrypted_client(w, e),
             Self::MSG_CORPSE_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_encrypted_client(w, e),
@@ -1534,6 +1538,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMTICKET_GETTICKET(c) => c.write_unencrypted_client(w),
+            Self::CMSG_UNLEARN_TALENTS(c) => c.write_unencrypted_client(w),
             Self::MSG_CORPSE_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_unencrypted_client(w),
@@ -1848,6 +1853,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_UNLEARN_TALENTS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_CORPSE_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2162,6 +2168,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_UNLEARN_TALENTS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_CORPSE_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2476,6 +2483,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_UNLEARN_TALENTS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_CORPSE_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2790,6 +2798,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_GETTICKET(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_UNLEARN_TALENTS(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_CORPSE_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_DELETETICKET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_unencrypted_client(w).await,
@@ -3139,6 +3148,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GMTICKET_UPDATETEXT(_) => "CMSG_GMTICKET_UPDATETEXT",
             ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(_) => "CMSG_REQUEST_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_GMTICKET_GETTICKET(_) => "CMSG_GMTICKET_GETTICKET",
+            ClientOpcodeMessage::CMSG_UNLEARN_TALENTS(_) => "CMSG_UNLEARN_TALENTS",
             ClientOpcodeMessage::MSG_CORPSE_QUERY(_) => "MSG_CORPSE_QUERY_Client",
             ClientOpcodeMessage::CMSG_GMTICKET_DELETETICKET(_) => "CMSG_GMTICKET_DELETETICKET",
             ClientOpcodeMessage::CMSG_GMTICKET_SYSTEMSTATUS(_) => "CMSG_GMTICKET_SYSTEMSTATUS",
@@ -4478,6 +4488,12 @@ impl From<CMSG_REQUEST_ACCOUNT_DATA> for ClientOpcodeMessage {
 impl From<CMSG_GMTICKET_GETTICKET> for ClientOpcodeMessage {
     fn from(c: CMSG_GMTICKET_GETTICKET) -> Self {
         Self::CMSG_GMTICKET_GETTICKET(c)
+    }
+}
+
+impl From<CMSG_UNLEARN_TALENTS> for ClientOpcodeMessage {
+    fn from(c: CMSG_UNLEARN_TALENTS) -> Self {
+        Self::CMSG_UNLEARN_TALENTS(c)
     }
 }
 

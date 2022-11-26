@@ -740,6 +740,8 @@ pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESE
 
 pub use crate::shared::cmsg_unaccept_trade_vanilla_tbc_wrath::CMSG_UNACCEPT_TRADE;
 
+pub use crate::shared::cmsg_unlearn_talents_tbc_wrath::CMSG_UNLEARN_TALENTS;
+
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_warden_data_vanilla_tbc_wrath::CMSG_WARDEN_DATA;
