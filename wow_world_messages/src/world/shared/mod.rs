@@ -505,6 +505,7 @@ pub mod smsg_move_feather_fall_vanilla_tbc_wrath;
 pub mod smsg_move_knock_back_vanilla_tbc_wrath;
 pub mod smsg_move_land_walk_vanilla_tbc_wrath;
 pub mod smsg_move_normal_fall_vanilla_tbc_wrath;
+pub mod smsg_move_set_can_fly_tbc_wrath;
 pub mod smsg_move_set_hover_vanilla_tbc_wrath;
 pub mod smsg_move_unset_hover_vanilla_tbc_wrath;
 pub mod smsg_move_water_walk_vanilla_tbc_wrath;

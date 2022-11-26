@@ -866,6 +866,7 @@
 - [SMSG_MOVE_KNOCK_BACK](docs/smsg_move_knock_back.md)
 - [SMSG_MOVE_LAND_WALK](docs/smsg_move_land_walk.md)
 - [SMSG_MOVE_NORMAL_FALL](docs/smsg_move_normal_fall.md)
+- [SMSG_MOVE_SET_CAN_FLY](docs/smsg_move_set_can_fly.md)
 - [SMSG_MOVE_SET_HOVER](docs/smsg_move_set_hover.md)
 - [SMSG_MOVE_UNSET_HOVER](docs/smsg_move_unset_hover.md)
 - [SMSG_MOVE_WATER_WALK](docs/smsg_move_water_walk.md)
