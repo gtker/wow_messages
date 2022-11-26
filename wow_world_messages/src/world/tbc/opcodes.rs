@@ -221,6 +221,7 @@ use crate::world::tbc::CMSG_GMTICKET_DELETETICKET;
 use crate::world::tbc::CMSG_GMTICKET_SYSTEMSTATUS;
 use crate::world::tbc::CMSG_SPIRIT_HEALER_ACTIVATE;
 use crate::world::tbc::CMSG_SKILL_BUY_STEP;
+use crate::world::tbc::CMSG_SKILL_BUY_RANK;
 use crate::world::tbc::CMSG_CHAT_IGNORED;
 use crate::world::tbc::CMSG_GUILD_RANK;
 use crate::world::tbc::CMSG_GUILD_ADD_RANK;
@@ -534,6 +535,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GMTICKET_SYSTEMSTATUS(CMSG_GMTICKET_SYSTEMSTATUS),
     CMSG_SPIRIT_HEALER_ACTIVATE(CMSG_SPIRIT_HEALER_ACTIVATE),
     CMSG_SKILL_BUY_STEP(CMSG_SKILL_BUY_STEP),
+    CMSG_SKILL_BUY_RANK(CMSG_SKILL_BUY_RANK),
     CMSG_CHAT_IGNORED(CMSG_CHAT_IGNORED),
     CMSG_GUILD_RANK(CMSG_GUILD_RANK),
     CMSG_GUILD_ADD_RANK(CMSG_GUILD_ADD_RANK),
@@ -849,6 +851,7 @@ impl ClientOpcodeMessage {
             0x021A => Ok(Self::CMSG_GMTICKET_SYSTEMSTATUS(<CMSG_GMTICKET_SYSTEMSTATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021A, size: body_size, io, } } else { a } })?)),
             0x021C => Ok(Self::CMSG_SPIRIT_HEALER_ACTIVATE(<CMSG_SPIRIT_HEALER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021C, size: body_size, io, } } else { a } })?)),
             0x021F => Ok(Self::CMSG_SKILL_BUY_STEP(<CMSG_SKILL_BUY_STEP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021F, size: body_size, io, } } else { a } })?)),
+            0x0220 => Ok(Self::CMSG_SKILL_BUY_RANK(<CMSG_SKILL_BUY_RANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0220, size: body_size, io, } } else { a } })?)),
             0x0225 => Ok(Self::CMSG_CHAT_IGNORED(<CMSG_CHAT_IGNORED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0225, size: body_size, io, } } else { a } })?)),
             0x0231 => Ok(Self::CMSG_GUILD_RANK(<CMSG_GUILD_RANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0231, size: body_size, io, } } else { a } })?)),
             0x0232 => Ok(Self::CMSG_GUILD_ADD_RANK(<CMSG_GUILD_ADD_RANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0232, size: body_size, io, } } else { a } })?)),
@@ -1232,6 +1235,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SKILL_BUY_STEP(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SKILL_BUY_RANK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAT_IGNORED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_RANK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_ADD_RANK(c) => c.write_encrypted_client(w, e),
@@ -1548,6 +1552,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SKILL_BUY_STEP(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SKILL_BUY_RANK(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAT_IGNORED(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_RANK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_ADD_RANK(c) => c.write_unencrypted_client(w),
@@ -1864,6 +1869,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SKILL_BUY_STEP(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SKILL_BUY_RANK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_RANK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_ADD_RANK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2180,6 +2186,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SKILL_BUY_STEP(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SKILL_BUY_RANK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_RANK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_ADD_RANK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2496,6 +2503,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SKILL_BUY_STEP(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SKILL_BUY_RANK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_RANK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_ADD_RANK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2812,6 +2820,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SKILL_BUY_STEP(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SKILL_BUY_RANK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_RANK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_ADD_RANK(c) => c.astd_write_unencrypted_client(w).await,
@@ -3163,6 +3172,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GMTICKET_SYSTEMSTATUS(_) => "CMSG_GMTICKET_SYSTEMSTATUS",
             ClientOpcodeMessage::CMSG_SPIRIT_HEALER_ACTIVATE(_) => "CMSG_SPIRIT_HEALER_ACTIVATE",
             ClientOpcodeMessage::CMSG_SKILL_BUY_STEP(_) => "CMSG_SKILL_BUY_STEP",
+            ClientOpcodeMessage::CMSG_SKILL_BUY_RANK(_) => "CMSG_SKILL_BUY_RANK",
             ClientOpcodeMessage::CMSG_CHAT_IGNORED(_) => "CMSG_CHAT_IGNORED",
             ClientOpcodeMessage::CMSG_GUILD_RANK(_) => "CMSG_GUILD_RANK",
             ClientOpcodeMessage::CMSG_GUILD_ADD_RANK(_) => "CMSG_GUILD_ADD_RANK",
@@ -4534,6 +4544,12 @@ impl From<CMSG_SPIRIT_HEALER_ACTIVATE> for ClientOpcodeMessage {
 impl From<CMSG_SKILL_BUY_STEP> for ClientOpcodeMessage {
     fn from(c: CMSG_SKILL_BUY_STEP) -> Self {
         Self::CMSG_SKILL_BUY_STEP(c)
+    }
+}
+
+impl From<CMSG_SKILL_BUY_RANK> for ClientOpcodeMessage {
+    fn from(c: CMSG_SKILL_BUY_RANK) -> Self {
+        Self::CMSG_SKILL_BUY_RANK(c)
     }
 }
 

@@ -222,6 +222,7 @@ pub mod cmsg_set_trade_gold_vanilla_tbc_wrath;
 pub mod cmsg_set_trade_item_vanilla_tbc_wrath;
 pub mod cmsg_set_watched_faction_vanilla_tbc_wrath;
 pub mod cmsg_setsheathed_vanilla_tbc_wrath;
+pub mod cmsg_skill_buy_rank_tbc_wrath;
 pub mod cmsg_skill_buy_step_tbc_wrath;
 pub mod cmsg_spirit_healer_activate_vanilla_tbc_wrath;
 pub mod cmsg_split_item_vanilla_tbc;

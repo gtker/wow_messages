@@ -466,6 +466,7 @@
 - [CMSG_SET_TRADE_GOLD](docs/cmsg_set_trade_gold.md)
 - [CMSG_SET_TRADE_ITEM](docs/cmsg_set_trade_item.md)
 - [CMSG_SET_WATCHED_FACTION](docs/cmsg_set_watched_faction.md)
+- [CMSG_SKILL_BUY_RANK](docs/cmsg_skill_buy_rank.md)
 - [CMSG_SKILL_BUY_STEP](docs/cmsg_skill_buy_step.md)
 - [CMSG_SPIRIT_HEALER_ACTIVATE](docs/cmsg_spirit_healer_activate.md)
 - [CMSG_SPLIT_ITEM](docs/cmsg_split_item.md)

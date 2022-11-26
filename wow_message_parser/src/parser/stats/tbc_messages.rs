@@ -433,7 +433,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_SPIRIT_HEALER_ACTIVATE", 0x21C),
     Data::new("SMSG_SET_REST_START", 0x21E),
     Data::nyi("CMSG_SKILL_BUY_STEP", 0x21F),
-    Data::new("CMSG_SKILL_BUY_RANK", 0x220),
+    Data::nyi("CMSG_SKILL_BUY_RANK", 0x220),
     Data::new("SMSG_SPIRIT_HEALER_CONFIRM", 0x222),
     Data::new("SMSG_GOSSIP_POI", 0x224),
     Data::new("CMSG_CHAT_IGNORED", 0x225),
