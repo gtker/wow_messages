@@ -1,0 +1,16 @@
+enum JoinArenaType : u8 {
+    TWO_VS_TWO = 0;
+    THREE_VS_THREE = 1;
+    FIVE_VS_FIVE = 2;
+} {
+    versions = "2.4.3 3";
+}
+
+cmsg CMSG_BATTLEMASTER_JOIN_ARENA = 0x0358 {
+    Guid battlemaster;
+    JoinArenaType arena_type;
+    Bool as_group;
+    Bool rated;
+} {
+    versions = "2.4.3 3";
+}

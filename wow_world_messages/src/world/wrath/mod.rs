@@ -384,6 +384,8 @@ pub use crate::shared::cmsg_battlefield_status_vanilla_tbc_wrath::CMSG_BATTLEFIE
 
 pub use crate::shared::cmsg_battlemaster_hello_vanilla_tbc_wrath::CMSG_BATTLEMASTER_HELLO;
 
+pub use crate::shared::cmsg_battlemaster_join_arena_tbc_wrath::CMSG_BATTLEMASTER_JOIN_ARENA;
+
 pub use crate::shared::cmsg_begin_trade_vanilla_tbc_wrath::CMSG_BEGIN_TRADE;
 
 pub use crate::shared::cmsg_binder_activate_vanilla_tbc_wrath::CMSG_BINDER_ACTIVATE;
@@ -835,6 +837,8 @@ pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
 pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
 
 pub use crate::shared::item_stat_vanilla_tbc_wrath::ItemStat;
+
+pub use crate::shared::join_arena_type_tbc_wrath::JoinArenaType;
 
 pub use crate::shared::language_tbc_wrath::Language;
 
