@@ -550,6 +550,7 @@
 - [MSG_BATTLEGROUND_PLAYER_POSITIONS_Client](docs/msg_battleground_player_positions_client.md)
 - [MSG_BATTLEGROUND_PLAYER_POSITIONS_Server](docs/msg_battleground_player_positions_server.md)
 - [MSG_CHANNEL_START_Server](docs/msg_channel_start_server.md)
+- [MSG_CHANNEL_UPDATE_Server](docs/msg_channel_update_server.md)
 - [MSG_CORPSE_QUERY_Client](docs/msg_corpse_query_client.md)
 - [MSG_CORPSE_QUERY_Server](docs/msg_corpse_query_server.md)
 - [MSG_GUILD_BANK_MONEY_WITHDRAWN](docs/msg_guild_bank_money_withdrawn.md)

@@ -1,0 +1,12 @@
+smsg MSG_CHANNEL_UPDATE_Server = 0x013A {
+    u32 time;
+} {
+    versions = "1";
+}
+
+smsg MSG_CHANNEL_UPDATE_Server = 0x013A {
+    PackedGuid caster;
+    u32 time;
+} {
+    versions = "2.4.3 3";
+}

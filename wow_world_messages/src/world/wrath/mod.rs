@@ -894,6 +894,8 @@ pub use crate::shared::msg_battleground_player_positions_server_vanilla_tbc_wrat
 
 pub use crate::shared::msg_channel_start_server_tbc_wrath::MSG_CHANNEL_START_Server;
 
+pub use crate::shared::msg_channel_update_server_tbc_wrath::MSG_CHANNEL_UPDATE_Server;
+
 pub use crate::shared::msg_corpse_query_client_vanilla_tbc_wrath::MSG_CORPSE_QUERY_Client;
 
 pub use crate::shared::msg_inspect_honor_stats_client_vanilla_tbc_wrath::MSG_INSPECT_HONOR_STATS_Client;
