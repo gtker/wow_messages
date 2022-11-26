@@ -1,0 +1,6 @@
+smsg MSG_MOVE_FEATHER_FALL_Server = 0x02B0 {
+    PackedGuid player;
+    MovementInfo info;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
+}

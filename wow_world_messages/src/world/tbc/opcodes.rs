@@ -5701,6 +5701,7 @@ use crate::world::tbc::SMSG_CHAT_PLAYER_NOT_FOUND;
 use crate::world::tbc::MSG_TALENT_WIPE_CONFIRM_Server;
 use crate::world::tbc::SMSG_SUMMON_REQUEST;
 use crate::world::tbc::SMSG_PET_BROKEN;
+use crate::world::tbc::MSG_MOVE_FEATHER_FALL_Server;
 use crate::world::tbc::SMSG_FEIGN_DEATH_RESISTED;
 use crate::world::tbc::SMSG_DUEL_COUNTDOWN;
 use crate::world::tbc::SMSG_AREA_TRIGGER_MESSAGE;
@@ -6031,6 +6032,7 @@ pub enum ServerOpcodeMessage {
     MSG_TALENT_WIPE_CONFIRM(MSG_TALENT_WIPE_CONFIRM_Server),
     SMSG_SUMMON_REQUEST(SMSG_SUMMON_REQUEST),
     SMSG_PET_BROKEN(SMSG_PET_BROKEN),
+    MSG_MOVE_FEATHER_FALL(MSG_MOVE_FEATHER_FALL_Server),
     SMSG_FEIGN_DEATH_RESISTED(SMSG_FEIGN_DEATH_RESISTED),
     SMSG_DUEL_COUNTDOWN(SMSG_DUEL_COUNTDOWN),
     SMSG_AREA_TRIGGER_MESSAGE(SMSG_AREA_TRIGGER_MESSAGE),
@@ -6363,6 +6365,7 @@ impl ServerOpcodeMessage {
             0x02AA => Ok(Self::MSG_TALENT_WIPE_CONFIRM(<MSG_TALENT_WIPE_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AA, size: body_size, io, } } else { a } })?)),
             0x02AB => Ok(Self::SMSG_SUMMON_REQUEST(<SMSG_SUMMON_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AB, size: body_size, io, } } else { a } })?)),
             0x02AF => Ok(Self::SMSG_PET_BROKEN(<SMSG_PET_BROKEN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AF, size: body_size, io, } } else { a } })?)),
+            0x02B0 => Ok(Self::MSG_MOVE_FEATHER_FALL(<MSG_MOVE_FEATHER_FALL_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B0, size: body_size, io, } } else { a } })?)),
             0x02B4 => Ok(Self::SMSG_FEIGN_DEATH_RESISTED(<SMSG_FEIGN_DEATH_RESISTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B4, size: body_size, io, } } else { a } })?)),
             0x02B7 => Ok(Self::SMSG_DUEL_COUNTDOWN(<SMSG_DUEL_COUNTDOWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B7, size: body_size, io, } } else { a } })?)),
             0x02B8 => Ok(Self::SMSG_AREA_TRIGGER_MESSAGE(<SMSG_AREA_TRIGGER_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B8, size: body_size, io, } } else { a } })?)),
@@ -6763,6 +6766,7 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SUMMON_REQUEST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_BROKEN(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_FEATHER_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_encrypted_server(w, e),
@@ -7096,6 +7100,7 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_SUMMON_REQUEST(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_BROKEN(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_FEATHER_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_unencrypted_server(w),
@@ -7429,6 +7434,7 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_BROKEN(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_FEATHER_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7762,6 +7768,7 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_BROKEN(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_FEATHER_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8095,6 +8102,7 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_BROKEN(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_FEATHER_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8428,6 +8436,7 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_BROKEN(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_FEATHER_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8763,6 +8772,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => "MSG_TALENT_WIPE_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_SUMMON_REQUEST(_) => "SMSG_SUMMON_REQUEST",
             ServerOpcodeMessage::SMSG_PET_BROKEN(_) => "SMSG_PET_BROKEN",
+            ServerOpcodeMessage::MSG_MOVE_FEATHER_FALL(_) => "MSG_MOVE_FEATHER_FALL_Server",
             ServerOpcodeMessage::SMSG_FEIGN_DEATH_RESISTED(_) => "SMSG_FEIGN_DEATH_RESISTED",
             ServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => "SMSG_DUEL_COUNTDOWN",
             ServerOpcodeMessage::SMSG_AREA_TRIGGER_MESSAGE(_) => "SMSG_AREA_TRIGGER_MESSAGE",
@@ -10401,6 +10411,12 @@ impl From<SMSG_SUMMON_REQUEST> for ServerOpcodeMessage {
 impl From<SMSG_PET_BROKEN> for ServerOpcodeMessage {
     fn from(c: SMSG_PET_BROKEN) -> Self {
         Self::SMSG_PET_BROKEN(c)
+    }
+}
+
+impl From<MSG_MOVE_FEATHER_FALL_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_FEATHER_FALL_Server) -> Self {
+        Self::MSG_MOVE_FEATHER_FALL(c)
     }
 }
 

@@ -565,6 +565,7 @@
 - [MSG_MOVE_FALL_LAND](docs/msg_move_fall_land.md)
 - [MSG_MOVE_FALL_LAND_Client](docs/msg_move_fall_land_client.md)
 - [MSG_MOVE_FALL_LAND_Server](docs/msg_move_fall_land_server.md)
+- [MSG_MOVE_FEATHER_FALL_Server](docs/msg_move_feather_fall_server.md)
 - [MSG_MOVE_HEARTBEAT](docs/msg_move_heartbeat.md)
 - [MSG_MOVE_HEARTBEAT_Client](docs/msg_move_heartbeat_client.md)
 - [MSG_MOVE_HEARTBEAT_Server](docs/msg_move_heartbeat_server.md)

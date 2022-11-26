@@ -127,6 +127,8 @@ pub(crate) mod msg_move_fall_land_client;
 pub use msg_move_fall_land_client::*;
 pub(crate) mod msg_move_fall_land_server;
 pub use msg_move_fall_land_server::*;
+pub(crate) mod msg_move_feather_fall_server;
+pub use msg_move_feather_fall_server::*;
 pub(crate) mod msg_move_heartbeat_client;
 pub use msg_move_heartbeat_client::*;
 pub(crate) mod msg_move_heartbeat_server;
