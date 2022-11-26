@@ -636,7 +636,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_SPELL_UPDATE_CHAIN_TARGETS", 0x330),
     Data::nyi("SMSG_EXPECTED_SPAM_RECORDS", 0x332),
     Data::new("SMSG_SPELLSTEALLOG", 0x333),
-    Data::new("SMSG_CHARACTER_PROFILE", 0x338),
     Data::new("SMSG_CHARACTER_PROFILE_REALM_CONNECTED", 0x339),
     Data::new("SMSG_DEFENSE_MESSAGE", 0x33A),
     Data::new("SMSG_INSTANCE_DIFFICULTY", 0x33B),

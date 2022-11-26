@@ -647,7 +647,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0330 => "SMSG_SPELL_UPDATE_CHAIN_TARGETS",
         0x0332 => "SMSG_EXPECTED_SPAM_RECORDS",
         0x0333 => "SMSG_SPELLSTEALLOG",
-        0x0338 => "SMSG_CHARACTER_PROFILE",
         0x0339 => "SMSG_CHARACTER_PROFILE_REALM_CONNECTED",
         0x033a => "SMSG_DEFENSE_MESSAGE",
         0x033b => "SMSG_INSTANCE_DIFFICULTY",
