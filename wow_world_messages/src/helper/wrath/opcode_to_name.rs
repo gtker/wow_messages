@@ -385,7 +385,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x01e2 => "SMSG_SPELL_DELAYED",
         0x01e3 => "CMSG_QUEST_POI_QUERY",
         0x01e4 => "SMSG_QUEST_POI_QUERY_RESPONSE",
-        0x01e7 => "SMSG_INVALID_PROMOTION_CODE",
         0x01ea => "SMSG_ITEM_TIME_UPDATE",
         0x01eb => "SMSG_ITEM_ENCHANT_TIME_UPDATE",
         0x01ec => "SMSG_AUTH_CHALLENGE",

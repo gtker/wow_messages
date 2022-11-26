@@ -386,7 +386,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_SPELL_DELAYED", 0x1E2),
     Data::new("CMSG_QUEST_POI_QUERY", 0x1E3),
     Data::new("SMSG_QUEST_POI_QUERY_RESPONSE", 0x1E4),
-    Data::new("SMSG_INVALID_PROMOTION_CODE", 0x1E7),
     Data::new("SMSG_ITEM_TIME_UPDATE", 0x1EA),
     Data::new("SMSG_ITEM_ENCHANT_TIME_UPDATE", 0x1EB),
     Data::new("SMSG_AUTH_CHALLENGE", 0x1EC),
