@@ -343,7 +343,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x01b3 => "SMSG_TRAINER_BUY_SUCCEEDED",
         0x01b4 => "SMSG_TRAINER_BUY_FAILED",
         0x01b5 => "CMSG_BINDER_ACTIVATE",
-        0x01b6 => "SMSG_PLAYERBINDERROR",
         0x01b7 => "CMSG_BANKER_ACTIVATE",
         0x01b8 => "SMSG_SHOW_BANK",
         0x01b9 => "CMSG_BUY_BANK_SLOT",

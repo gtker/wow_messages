@@ -339,7 +339,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_TRAINER_BUY_SUCCEEDED", 0x1B3),
     Data::new("SMSG_TRAINER_BUY_FAILED", 0x1B4),
     Data::new("CMSG_BINDER_ACTIVATE", 0x1B5),
-    Data::new("SMSG_PLAYERBINDERROR", 0x1B6),
     Data::new("CMSG_BANKER_ACTIVATE", 0x1B7),
     Data::new("SMSG_SHOW_BANK", 0x1B8),
     Data::new("CMSG_BUY_BANK_SLOT", 0x1B9),
