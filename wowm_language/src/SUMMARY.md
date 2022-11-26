@@ -637,6 +637,7 @@
 - [MSG_MOVE_TELEPORT_ACK_Server](docs/msg_move_teleport_ack_server.md)
 - [MSG_MOVE_TELEPORT_CHEAT_Server](docs/msg_move_teleport_cheat_server.md)
 - [MSG_MOVE_TELEPORT_Server](docs/msg_move_teleport_server.md)
+- [MSG_MOVE_UNROOT_Server](docs/msg_move_unroot_server.md)
 - [MSG_MOVE_WORLDPORT_ACK](docs/msg_move_worldport_ack.md)
 - [MSG_PETITION_DECLINE](docs/msg_petition_decline.md)
 - [MSG_PETITION_RENAME](docs/msg_petition_rename.md)

@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::Guid;
 use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
@@ -8,10 +9,12 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_move_root.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_move_root.wowm#L1):
 /// ```text
 /// smsg MSG_MOVE_ROOT_Server = 0x00EC {
+///     PackedGuid player;
 ///     MovementInfo info;
 /// }
 /// ```
 pub struct MSG_MOVE_ROOT_Server {
+    pub player: Guid,
     pub info: MovementInfo,
 }
 
@@ -24,6 +27,9 @@ impl crate::Message for MSG_MOVE_ROOT_Server {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
+        // player: PackedGuid
+        self.player.write_packed_guid_into_vec(w);
+
         // info: MovementInfo
         self.info.write_into_vec(w)?;
 
@@ -31,14 +37,18 @@ impl crate::Message for MSG_MOVE_ROOT_Server {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(29..=82).contains(&body_size) {
+        if !(31..=91).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EC, size: body_size as u32 });
         }
+
+        // player: PackedGuid
+        let player = Guid::read_packed(r)?;
 
         // info: MovementInfo
         let info = MovementInfo::read(r)?;
 
         Ok(Self {
+            player,
             info,
         })
     }
@@ -49,7 +59,8 @@ impl crate::world::tbc::ServerMessage for MSG_MOVE_ROOT_Server {}
 
 impl MSG_MOVE_ROOT_Server {
     pub(crate) fn size(&self) -> usize {
-        self.info.size() // info: MovementInfo
+        self.player.size() // player: Guid
+        + self.info.size() // info: MovementInfo
     }
 }
 

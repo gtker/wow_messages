@@ -1,0 +1,12 @@
+smsg MSG_MOVE_UNROOT_Server = 0x00ED {
+    PackedGuid player;
+    MovementInfo info;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_MOVE_UNROOT_Server = 0x00ED {
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}
