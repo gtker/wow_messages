@@ -331,6 +331,7 @@ use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Client;
 use crate::world::tbc::CMSG_SET_LFG_COMMENT;
 use crate::world::tbc::CMSG_SET_TITLE;
 use crate::world::tbc::CMSG_CANCEL_MOUNT_AURA;
+use crate::world::tbc::MSG_INSPECT_ARENA_TEAMS_Client;
 use crate::world::tbc::CMSG_CANCEL_TEMP_ENCHANTMENT;
 use crate::world::tbc::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK;
 use crate::world::tbc::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK;
@@ -665,6 +666,7 @@ pub enum ClientOpcodeMessage {
     CMSG_SET_LFG_COMMENT(CMSG_SET_LFG_COMMENT),
     CMSG_SET_TITLE(CMSG_SET_TITLE),
     CMSG_CANCEL_MOUNT_AURA(CMSG_CANCEL_MOUNT_AURA),
+    MSG_INSPECT_ARENA_TEAMS(MSG_INSPECT_ARENA_TEAMS_Client),
     CMSG_CANCEL_TEMP_ENCHANTMENT(CMSG_CANCEL_TEMP_ENCHANTMENT),
     CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK),
     CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK),
@@ -1001,6 +1003,7 @@ impl ClientOpcodeMessage {
             0x0366 => Ok(Self::CMSG_SET_LFG_COMMENT(<CMSG_SET_LFG_COMMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0366, size: body_size, io, } } else { a } })?)),
             0x0374 => Ok(Self::CMSG_SET_TITLE(<CMSG_SET_TITLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0374, size: body_size, io, } } else { a } })?)),
             0x0375 => Ok(Self::CMSG_CANCEL_MOUNT_AURA(<CMSG_CANCEL_MOUNT_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0375, size: body_size, io, } } else { a } })?)),
+            0x0377 => Ok(Self::MSG_INSPECT_ARENA_TEAMS(<MSG_INSPECT_ARENA_TEAMS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0377, size: body_size, io, } } else { a } })?)),
             0x0379 => Ok(Self::CMSG_CANCEL_TEMP_ENCHANTMENT(<CMSG_CANCEL_TEMP_ENCHANTMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0379, size: body_size, io, } } else { a } })?)),
             0x0382 => Ok(Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(<CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0382, size: body_size, io, } } else { a } })?)),
             0x0384 => Ok(Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0384, size: body_size, io, } } else { a } })?)),
@@ -1405,6 +1408,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_TITLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_encrypted_client(w, e),
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
@@ -1742,6 +1746,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_TITLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_unencrypted_client(w),
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
@@ -2079,6 +2084,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2416,6 +2422,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2753,6 +2760,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3090,6 +3098,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -3462,6 +3471,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_LFG_COMMENT(_) => "CMSG_SET_LFG_COMMENT",
             ClientOpcodeMessage::CMSG_SET_TITLE(_) => "CMSG_SET_TITLE",
             ClientOpcodeMessage::CMSG_CANCEL_MOUNT_AURA(_) => "CMSG_CANCEL_MOUNT_AURA",
+            ClientOpcodeMessage::MSG_INSPECT_ARENA_TEAMS(_) => "MSG_INSPECT_ARENA_TEAMS_Client",
             ClientOpcodeMessage::CMSG_CANCEL_TEMP_ENCHANTMENT(_) => "CMSG_CANCEL_TEMP_ENCHANTMENT",
             ClientOpcodeMessage::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK",
@@ -5407,6 +5417,12 @@ impl From<CMSG_CANCEL_MOUNT_AURA> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_INSPECT_ARENA_TEAMS_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_INSPECT_ARENA_TEAMS_Client) -> Self {
+        Self::MSG_INSPECT_ARENA_TEAMS(c)
+    }
+}
+
 impl From<CMSG_CANCEL_TEMP_ENCHANTMENT> for ClientOpcodeMessage {
     fn from(c: CMSG_CANCEL_TEMP_ENCHANTMENT) -> Self {
         Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c)
@@ -5780,6 +5796,7 @@ use crate::world::tbc::SMSG_SPELL_UPDATE_CHAIN_TARGETS;
 use crate::world::tbc::SMSG_DEFENSE_MESSAGE;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Server;
 use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Server;
+use crate::world::tbc::MSG_INSPECT_ARENA_TEAMS_Server;
 use crate::world::tbc::SMSG_REALM_SPLIT;
 use crate::world::tbc::SMSG_TIME_SYNC_REQ;
 use crate::world::tbc::MSG_MOVE_START_DESCEND_Server;
@@ -6113,6 +6130,7 @@ pub enum ServerOpcodeMessage {
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Server),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Server),
+    MSG_INSPECT_ARENA_TEAMS(MSG_INSPECT_ARENA_TEAMS_Server),
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Server),
@@ -6448,6 +6466,7 @@ impl ServerOpcodeMessage {
             0x033A => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033A, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
+            0x0377 => Ok(Self::MSG_INSPECT_ARENA_TEAMS(<MSG_INSPECT_ARENA_TEAMS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0377, size: body_size, io, } } else { a } })?)),
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
@@ -6851,6 +6870,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
@@ -7187,6 +7207,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_unencrypted_server(w),
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
@@ -7523,6 +7544,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7859,6 +7881,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8195,6 +8218,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8531,6 +8555,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
@@ -8869,6 +8894,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => "SMSG_DEFENSE_MESSAGE",
             ServerOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Server",
             ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Server",
+            ServerOpcodeMessage::MSG_INSPECT_ARENA_TEAMS(_) => "MSG_INSPECT_ARENA_TEAMS_Server",
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
@@ -10830,6 +10856,12 @@ impl From<MSG_MOVE_START_ASCEND_Server> for ServerOpcodeMessage {
 impl From<MSG_MOVE_STOP_ASCEND_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_STOP_ASCEND_Server) -> Self {
         Self::MSG_MOVE_STOP_ASCEND(c)
+    }
+}
+
+impl From<MSG_INSPECT_ARENA_TEAMS_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_INSPECT_ARENA_TEAMS_Server) -> Self {
+        Self::MSG_INSPECT_ARENA_TEAMS(c)
     }
 }
 

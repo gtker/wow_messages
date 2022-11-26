@@ -1,0 +1,18 @@
+smsg MSG_INSPECT_ARENA_TEAMS_Server = 0x0377 {
+    Guid player;
+    u8 slot;
+    u32 arena_team;
+    u32 rating;
+    u32 games_played_this_season;
+    u32 wins_this_season;
+    u32 total_games_played;
+    u32 personal_rating;
+} {
+    versions = "2.4.3 3";
+}
+
+cmsg MSG_INSPECT_ARENA_TEAMS_Client = 0x0377 {
+    Guid player;
+} {
+    versions = "2.4.3 3";
+}
