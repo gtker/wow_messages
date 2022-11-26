@@ -597,6 +597,7 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0312 => "CMSG_ACTIVATETAXIEXPRESS",
         0x0317 => "CMSG_SET_FACTION_INACTIVE",
         0x0318 => "CMSG_SET_WATCHED_FACTION",
+        0x0319 => "MSG_MOVE_TIME_SKIPPED",
         0x031a => "SMSG_SPLINE_MOVE_ROOT",
         0x031c => "SMSG_INVALIDATE_PLAYER",
         0x031d => "CMSG_RESET_INSTANCES",

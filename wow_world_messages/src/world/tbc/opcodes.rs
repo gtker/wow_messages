@@ -5763,6 +5763,7 @@ use crate::world::tbc::SMSG_SPLINE_MOVE_START_SWIM;
 use crate::world::tbc::SMSG_SPLINE_MOVE_STOP_SWIM;
 use crate::world::tbc::SMSG_SPLINE_MOVE_SET_RUN_MODE;
 use crate::world::tbc::SMSG_SPLINE_MOVE_SET_WALK_MODE;
+use crate::world::tbc::MSG_MOVE_TIME_SKIPPED_Server;
 use crate::world::tbc::SMSG_SPLINE_MOVE_ROOT;
 use crate::world::tbc::SMSG_INVALIDATE_PLAYER;
 use crate::world::tbc::SMSG_INSTANCE_RESET;
@@ -6095,6 +6096,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPLINE_MOVE_STOP_SWIM(SMSG_SPLINE_MOVE_STOP_SWIM),
     SMSG_SPLINE_MOVE_SET_RUN_MODE(SMSG_SPLINE_MOVE_SET_RUN_MODE),
     SMSG_SPLINE_MOVE_SET_WALK_MODE(SMSG_SPLINE_MOVE_SET_WALK_MODE),
+    MSG_MOVE_TIME_SKIPPED(MSG_MOVE_TIME_SKIPPED_Server),
     SMSG_SPLINE_MOVE_ROOT(SMSG_SPLINE_MOVE_ROOT),
     SMSG_INVALIDATE_PLAYER(SMSG_INVALIDATE_PLAYER),
     SMSG_INSTANCE_RESET(SMSG_INSTANCE_RESET),
@@ -6429,6 +6431,7 @@ impl ServerOpcodeMessage {
             0x030C => Ok(Self::SMSG_SPLINE_MOVE_STOP_SWIM(<SMSG_SPLINE_MOVE_STOP_SWIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030C, size: body_size, io, } } else { a } })?)),
             0x030D => Ok(Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(<SMSG_SPLINE_MOVE_SET_RUN_MODE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030D, size: body_size, io, } } else { a } })?)),
             0x030E => Ok(Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(<SMSG_SPLINE_MOVE_SET_WALK_MODE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x030E, size: body_size, io, } } else { a } })?)),
+            0x0319 => Ok(Self::MSG_MOVE_TIME_SKIPPED(<MSG_MOVE_TIME_SKIPPED_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0319, size: body_size, io, } } else { a } })?)),
             0x031A => Ok(Self::SMSG_SPLINE_MOVE_ROOT(<SMSG_SPLINE_MOVE_ROOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031A, size: body_size, io, } } else { a } })?)),
             0x031C => Ok(Self::SMSG_INVALIDATE_PLAYER(<SMSG_INVALIDATE_PLAYER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031C, size: body_size, io, } } else { a } })?)),
             0x031E => Ok(Self::SMSG_INSTANCE_RESET(<SMSG_INSTANCE_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031E, size: body_size, io, } } else { a } })?)),
@@ -6831,6 +6834,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_TIME_SKIPPED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INVALIDATE_PLAYER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INSTANCE_RESET(c) => c.write_encrypted_server(w, e),
@@ -7166,6 +7170,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_TIME_SKIPPED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.write_unencrypted_server(w),
             Self::SMSG_INVALIDATE_PLAYER(c) => c.write_unencrypted_server(w),
             Self::SMSG_INSTANCE_RESET(c) => c.write_unencrypted_server(w),
@@ -7501,6 +7506,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TIME_SKIPPED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INVALIDATE_PLAYER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_RESET(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7836,6 +7842,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TIME_SKIPPED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INVALIDATE_PLAYER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_RESET(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8171,6 +8178,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_TIME_SKIPPED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INVALIDATE_PLAYER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_RESET(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8506,6 +8514,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_RUN_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_TIME_SKIPPED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_ROOT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INVALIDATE_PLAYER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_RESET(c) => c.astd_write_unencrypted_server(w).await,
@@ -8843,6 +8852,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_STOP_SWIM(_) => "SMSG_SPLINE_MOVE_STOP_SWIM",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_RUN_MODE(_) => "SMSG_SPLINE_MOVE_SET_RUN_MODE",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_WALK_MODE(_) => "SMSG_SPLINE_MOVE_SET_WALK_MODE",
+            ServerOpcodeMessage::MSG_MOVE_TIME_SKIPPED(_) => "MSG_MOVE_TIME_SKIPPED_Server",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_ROOT(_) => "SMSG_SPLINE_MOVE_ROOT",
             ServerOpcodeMessage::SMSG_INVALIDATE_PLAYER(_) => "SMSG_INVALIDATE_PLAYER",
             ServerOpcodeMessage::SMSG_INSTANCE_RESET(_) => "SMSG_INSTANCE_RESET",
@@ -10718,6 +10728,12 @@ impl From<SMSG_SPLINE_MOVE_SET_RUN_MODE> for ServerOpcodeMessage {
 impl From<SMSG_SPLINE_MOVE_SET_WALK_MODE> for ServerOpcodeMessage {
     fn from(c: SMSG_SPLINE_MOVE_SET_WALK_MODE) -> Self {
         Self::SMSG_SPLINE_MOVE_SET_WALK_MODE(c)
+    }
+}
+
+impl From<MSG_MOVE_TIME_SKIPPED_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_TIME_SKIPPED_Server) -> Self {
+        Self::MSG_MOVE_TIME_SKIPPED(c)
     }
 }
 

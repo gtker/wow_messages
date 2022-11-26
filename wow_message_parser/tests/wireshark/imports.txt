@@ -716,6 +716,7 @@ static int hf_woww_time_left_in_msecs = -1;
 static int hf_woww_time_offline = -1;
 static int hf_woww_time_passed = -1;
 static int hf_woww_time_remaining = -1;
+static int hf_woww_time_skipped = -1;
 static int hf_woww_time_to_bg_autoleave_in_ms = -1;
 static int hf_woww_time_to_bg_start_in_ms = -1;
 static int hf_woww_time_to_remove_in_queue_in_ms = -1;

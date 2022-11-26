@@ -3370,6 +3370,12 @@
                 ptvcursor_add(ptv, hf_woww_time_in_msecs, 4, ENC_LITTLE_ENDIAN);
             }
             break;
+        case MSG_MOVE_TIME_SKIPPED:
+            if (WOWW_SERVER_TO_CLIENT) {
+                add_packed_guid(ptv, pinfo);
+                ptvcursor_add(ptv, hf_woww_time_skipped, 4, ENC_LITTLE_ENDIAN);
+            }
+            break;
         case MSG_MOVE_WATER_WALK:
             add_packed_guid(ptv, pinfo);
             ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "MovementInfo");

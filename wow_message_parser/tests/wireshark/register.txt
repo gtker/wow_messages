@@ -4306,6 +4306,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_time_skipped,
+            { "Time Skipped", "woww.time.skipped",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_time_to_bg_autoleave_in_ms,
             { "Time To Bg Autoleave In Ms", "woww.time.to.bg.autoleave.in.ms",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,

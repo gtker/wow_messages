@@ -598,6 +598,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_ACTIVATETAXIEXPRESS", 0x312),
     Data::new("CMSG_SET_FACTION_INACTIVE", 0x317),
     Data::new("CMSG_SET_WATCHED_FACTION", 0x318),
+    Data::new("MSG_MOVE_TIME_SKIPPED", 0x319),
     Data::new("SMSG_SPLINE_MOVE_ROOT", 0x31A),
     Data::new("SMSG_INVALIDATE_PLAYER", 0x31C),
     Data::new("CMSG_RESET_INSTANCES", 0x31D),

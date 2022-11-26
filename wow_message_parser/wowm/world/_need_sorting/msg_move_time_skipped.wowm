@@ -1,0 +1,6 @@
+smsg MSG_MOVE_TIME_SKIPPED_Server = 0x0319 {
+    PackedGuid player;
+    u32 time_skipped;
+} {
+    versions = "1 2 3";
+}
