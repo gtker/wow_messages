@@ -579,7 +579,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_BATTLEFIELD_PORT", 0x2D5),
     Data::new("MSG_INSPECT_HONOR_STATS", 0x2D6),
     Data::new("CMSG_BATTLEMASTER_HELLO", 0x2D7),
-    Data::new("CMSG_MOVE_STOP_SWIM_CHEAT", 0x2D9),
     Data::new("SMSG_FORCE_WALK_SPEED_CHANGE", 0x2DA),
     Data::new("CMSG_FORCE_WALK_SPEED_CHANGE_ACK", 0x2DB),
     Data::new("SMSG_FORCE_SWIM_BACK_SPEED_CHANGE", 0x2DC),

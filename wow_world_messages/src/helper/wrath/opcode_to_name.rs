@@ -590,7 +590,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x02d5 => "CMSG_BATTLEFIELD_PORT",
         0x02d6 => "MSG_INSPECT_HONOR_STATS",
         0x02d7 => "CMSG_BATTLEMASTER_HELLO",
-        0x02d9 => "CMSG_MOVE_STOP_SWIM_CHEAT",
         0x02da => "SMSG_FORCE_WALK_SPEED_CHANGE",
         0x02db => "CMSG_FORCE_WALK_SPEED_CHANGE_ACK",
         0x02dc => "SMSG_FORCE_SWIM_BACK_SPEED_CHANGE",
