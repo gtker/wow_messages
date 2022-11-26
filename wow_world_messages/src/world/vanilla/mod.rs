@@ -311,6 +311,8 @@ pub(crate) mod msg_move_stop_turn_server;
 pub use msg_move_stop_turn_server::*;
 pub(crate) mod msg_move_teleport_ack_server;
 pub use msg_move_teleport_ack_server::*;
+pub(crate) mod msg_move_water_walk;
+pub use msg_move_water_walk::*;
 pub(crate) mod msg_pvp_log_data_server;
 pub use msg_pvp_log_data_server::*;
 pub(crate) mod msg_query_next_mail_time_server;

@@ -1,0 +1,6 @@
+msg MSG_MOVE_WATER_WALK = 0x02B1 {
+    PackedGuid player;
+    MovementInfo info;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
+}

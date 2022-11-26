@@ -514,6 +514,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_MONSTER_MOVE_TRANSPORT", 0x2AE),
     Data::new("SMSG_PET_BROKEN", 0x2AF),
     Data::new("MSG_MOVE_FEATHER_FALL", 0x2B0),
+    Data::new("MSG_MOVE_WATER_WALK", 0x2B1),
     Data::new("CMSG_SELF_RES", 0x2B3),
     Data::new("SMSG_FEIGN_DEATH_RESISTED", 0x2B4),
     Data::new("SMSG_DUEL_COUNTDOWN", 0x2B7),

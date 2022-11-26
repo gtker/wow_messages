@@ -233,6 +233,8 @@ pub(crate) mod msg_move_teleport_server;
 pub use msg_move_teleport_server::*;
 pub(crate) mod msg_move_unroot_server;
 pub use msg_move_unroot_server::*;
+pub(crate) mod msg_move_water_walk;
+pub use msg_move_water_walk::*;
 pub(crate) mod msg_save_guild_emblem_server;
 pub use msg_save_guild_emblem_server::*;
 pub(crate) mod npc_text_update;
