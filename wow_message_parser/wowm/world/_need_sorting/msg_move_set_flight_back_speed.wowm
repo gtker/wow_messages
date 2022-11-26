@@ -1,0 +1,7 @@
+msg MSG_MOVE_SET_FLIGHT_BACK_SPEED = 0x0380 {
+    PackedGuid player;
+    MovementInfo info;
+    f32 new_speed;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}

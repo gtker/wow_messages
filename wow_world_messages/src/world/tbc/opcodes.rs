@@ -16,6 +16,7 @@ use crate::world::tbc::MSG_TABARDVENDOR_ACTIVATE;
 use crate::world::tbc::MSG_QUEST_PUSH_RESULT;
 use crate::world::tbc::MSG_MOVE_WATER_WALK;
 use crate::world::tbc::MSG_PETITION_RENAME;
+use crate::world::tbc::MSG_MOVE_SET_FLIGHT_BACK_SPEED;
 use crate::world::tbc::CMSG_BOOTME;
 use crate::world::tbc::CMSG_DBLOOKUP;
 use crate::world::tbc::CMSG_WORLD_TELEPORT;
@@ -351,6 +352,7 @@ pub enum ClientOpcodeMessage {
     MSG_QUEST_PUSH_RESULT(MSG_QUEST_PUSH_RESULT),
     MSG_MOVE_WATER_WALK(MSG_MOVE_WATER_WALK),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
+    MSG_MOVE_SET_FLIGHT_BACK_SPEED(MSG_MOVE_SET_FLIGHT_BACK_SPEED),
     CMSG_BOOTME(CMSG_BOOTME),
     CMSG_DBLOOKUP(CMSG_DBLOOKUP),
     CMSG_WORLD_TELEPORT(CMSG_WORLD_TELEPORT),
@@ -688,6 +690,7 @@ impl ClientOpcodeMessage {
             0x0276 => Ok(Self::MSG_QUEST_PUSH_RESULT(<MSG_QUEST_PUSH_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0276, size: body_size, io, } } else { a } })?)),
             0x02B1 => Ok(Self::MSG_MOVE_WATER_WALK(<MSG_MOVE_WATER_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B1, size: body_size, io, } } else { a } })?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C1, size: body_size, io, } } else { a } })?)),
+            0x0380 => Ok(Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(<MSG_MOVE_SET_FLIGHT_BACK_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0380, size: body_size, io, } } else { a } })?)),
             0x0001 => Ok(Self::CMSG_BOOTME(<CMSG_BOOTME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0001, size: body_size, io, } } else { a } })?)),
             0x0002 => Ok(Self::CMSG_DBLOOKUP(<CMSG_DBLOOKUP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0002, size: body_size, io, } } else { a } })?)),
             0x0008 => Ok(Self::CMSG_WORLD_TELEPORT(<CMSG_WORLD_TELEPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0008, size: body_size, io, } } else { a } })?)),
@@ -1093,6 +1096,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_WATER_WALK(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BOOTME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DBLOOKUP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_encrypted_client(w, e),
@@ -1431,6 +1435,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_WATER_WALK(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.write_unencrypted_client(w),
             Self::CMSG_BOOTME(c) => c.write_unencrypted_client(w),
             Self::CMSG_DBLOOKUP(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_unencrypted_client(w),
@@ -1769,6 +1774,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_WATER_WALK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BOOTME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DBLOOKUP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2107,6 +2113,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_WATER_WALK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BOOTME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DBLOOKUP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2445,6 +2452,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_WATER_WALK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BOOTME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DBLOOKUP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2783,6 +2791,7 @@ impl ClientOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_WATER_WALK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BOOTME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DBLOOKUP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_unencrypted_client(w).await,
@@ -3156,6 +3165,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => "MSG_QUEST_PUSH_RESULT",
             ClientOpcodeMessage::MSG_MOVE_WATER_WALK(_) => "MSG_MOVE_WATER_WALK",
             ClientOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
+            ClientOpcodeMessage::MSG_MOVE_SET_FLIGHT_BACK_SPEED(_) => "MSG_MOVE_SET_FLIGHT_BACK_SPEED",
             ClientOpcodeMessage::CMSG_BOOTME(_) => "CMSG_BOOTME",
             ClientOpcodeMessage::CMSG_DBLOOKUP(_) => "CMSG_DBLOOKUP",
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(_) => "CMSG_WORLD_TELEPORT",
@@ -3524,6 +3534,12 @@ impl From<MSG_MOVE_WATER_WALK> for ClientOpcodeMessage {
 impl From<MSG_PETITION_RENAME> for ClientOpcodeMessage {
     fn from(c: MSG_PETITION_RENAME) -> Self {
         Self::MSG_PETITION_RENAME(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_FLIGHT_BACK_SPEED> for ClientOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_FLIGHT_BACK_SPEED) -> Self {
+        Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c)
     }
 }
 
@@ -5812,6 +5828,7 @@ pub enum ServerOpcodeMessage {
     MSG_QUEST_PUSH_RESULT(MSG_QUEST_PUSH_RESULT),
     MSG_MOVE_WATER_WALK(MSG_MOVE_WATER_WALK),
     MSG_PETITION_RENAME(MSG_PETITION_RENAME),
+    MSG_MOVE_SET_FLIGHT_BACK_SPEED(MSG_MOVE_SET_FLIGHT_BACK_SPEED),
     SMSG_CHAR_CREATE(SMSG_CHAR_CREATE),
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_CHAR_DELETE(SMSG_CHAR_DELETE),
@@ -6149,6 +6166,7 @@ impl ServerOpcodeMessage {
             0x0276 => Ok(Self::MSG_QUEST_PUSH_RESULT(<MSG_QUEST_PUSH_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0276, size: body_size, io, } } else { a } })?)),
             0x02B1 => Ok(Self::MSG_MOVE_WATER_WALK(<MSG_MOVE_WATER_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B1, size: body_size, io, } } else { a } })?)),
             0x02C1 => Ok(Self::MSG_PETITION_RENAME(<MSG_PETITION_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C1, size: body_size, io, } } else { a } })?)),
+            0x0380 => Ok(Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(<MSG_MOVE_SET_FLIGHT_BACK_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0380, size: body_size, io, } } else { a } })?)),
             0x003A => Ok(Self::SMSG_CHAR_CREATE(<SMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003A, size: body_size, io, } } else { a } })?)),
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003B, size: body_size, io, } } else { a } })?)),
             0x003C => Ok(Self::SMSG_CHAR_DELETE(<SMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003C, size: body_size, io, } } else { a } })?)),
@@ -6554,6 +6572,7 @@ impl ServerOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_WATER_WALK(c) => c.write_encrypted_server(w, e),
             Self::MSG_PETITION_RENAME(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_DELETE(c) => c.write_encrypted_server(w, e),
@@ -6892,6 +6911,7 @@ impl ServerOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_WATER_WALK(c) => c.write_unencrypted_server(w),
             Self::MSG_PETITION_RENAME(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_DELETE(c) => c.write_unencrypted_server(w),
@@ -7230,6 +7250,7 @@ impl ServerOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_WATER_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7568,6 +7589,7 @@ impl ServerOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_WATER_WALK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PETITION_RENAME(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7906,6 +7928,7 @@ impl ServerOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_WATER_WALK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8244,6 +8267,7 @@ impl ServerOpcodeMessage {
             Self::MSG_QUEST_PUSH_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_WATER_WALK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PETITION_RENAME(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -8584,6 +8608,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_QUEST_PUSH_RESULT(_) => "MSG_QUEST_PUSH_RESULT",
             ServerOpcodeMessage::MSG_MOVE_WATER_WALK(_) => "MSG_MOVE_WATER_WALK",
             ServerOpcodeMessage::MSG_PETITION_RENAME(_) => "MSG_PETITION_RENAME",
+            ServerOpcodeMessage::MSG_MOVE_SET_FLIGHT_BACK_SPEED(_) => "MSG_MOVE_SET_FLIGHT_BACK_SPEED",
             ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => "SMSG_CHAR_CREATE",
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
             ServerOpcodeMessage::SMSG_CHAR_DELETE(_) => "SMSG_CHAR_DELETE",
@@ -8952,6 +8977,12 @@ impl From<MSG_MOVE_WATER_WALK> for ServerOpcodeMessage {
 impl From<MSG_PETITION_RENAME> for ServerOpcodeMessage {
     fn from(c: MSG_PETITION_RENAME) -> Self {
         Self::MSG_PETITION_RENAME(c)
+    }
+}
+
+impl From<MSG_MOVE_SET_FLIGHT_BACK_SPEED> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_SET_FLIGHT_BACK_SPEED) -> Self {
+        Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c)
     }
 }
 

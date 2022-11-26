@@ -147,6 +147,8 @@ pub(crate) mod msg_move_set_facing_client;
 pub use msg_move_set_facing_client::*;
 pub(crate) mod msg_move_set_facing_server;
 pub use msg_move_set_facing_server::*;
+pub(crate) mod msg_move_set_flight_back_speed;
+pub use msg_move_set_flight_back_speed::*;
 pub(crate) mod msg_move_set_flight_speed_server;
 pub use msg_move_set_flight_speed_server::*;
 pub(crate) mod msg_move_set_pitch_client;

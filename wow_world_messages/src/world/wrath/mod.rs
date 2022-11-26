@@ -233,6 +233,8 @@ pub(crate) mod msg_move_root_server;
 pub use msg_move_root_server::*;
 pub(crate) mod msg_move_set_facing;
 pub use msg_move_set_facing::*;
+pub(crate) mod msg_move_set_flight_back_speed;
+pub use msg_move_set_flight_back_speed::*;
 pub(crate) mod msg_move_set_flight_speed_server;
 pub use msg_move_set_flight_speed_server::*;
 pub(crate) mod msg_move_set_pitch;
