@@ -282,6 +282,8 @@ pub use crate::shared::cmsg_areatrigger_vanilla_tbc_wrath::CMSG_AREATRIGGER;
 
 pub use crate::shared::cmsg_arena_team_accept_tbc_wrath::CMSG_ARENA_TEAM_ACCEPT;
 
+pub use crate::shared::cmsg_arena_team_decline_tbc_wrath::CMSG_ARENA_TEAM_DECLINE;
+
 pub use crate::shared::cmsg_arena_team_invite_tbc_wrath::CMSG_ARENA_TEAM_INVITE;
 
 pub use crate::shared::cmsg_arena_team_roster_tbc_wrath::CMSG_ARENA_TEAM_ROSTER;

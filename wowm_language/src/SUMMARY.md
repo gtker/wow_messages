@@ -231,6 +231,7 @@
 - [CMSG_AREA_SPIRIT_HEALER_QUERY](docs/cmsg_area_spirit_healer_query.md)
 - [CMSG_AREA_SPIRIT_HEALER_QUEUE](docs/cmsg_area_spirit_healer_queue.md)
 - [CMSG_ARENA_TEAM_ACCEPT](docs/cmsg_arena_team_accept.md)
+- [CMSG_ARENA_TEAM_DECLINE](docs/cmsg_arena_team_decline.md)
 - [CMSG_ARENA_TEAM_INVITE](docs/cmsg_arena_team_invite.md)
 - [CMSG_ARENA_TEAM_ROSTER](docs/cmsg_arena_team_roster.md)
 - [CMSG_ATTACKSTOP](docs/cmsg_attackstop.md)
