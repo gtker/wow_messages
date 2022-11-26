@@ -409,7 +409,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_SET_LOOKING_FOR_GROUP", 0x200),
     Data::new("CMSG_UNLEARN_SKILL", 0x202),
     Data::new("SMSG_REMOVED_SPELL", 0x203),
-    Data::new("CMSG_DECHARGE", 0x204),
+    Data::nyi("CMSG_DECHARGE", 0x204),
     Data::new("CMSG_GMTICKET_CREATE", 0x205),
     Data::new("SMSG_GMTICKET_CREATE", 0x206),
     Data::new("CMSG_GMTICKET_UPDATETEXT", 0x207),
