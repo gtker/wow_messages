@@ -608,7 +608,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_PLAY_TIME_WARNING", 0x2F5),
     Data::new("SMSG_MINIGAME_SETUP", 0x2F6),
     Data::new("SMSG_MINIGAME_STATE", 0x2F7),
-    Data::new("CMSG_MINIGAME_MOVE", 0x2F8),
     Data::new("SMSG_MINIGAME_MOVE_FAILED", 0x2F9),
     Data::new("SMSG_RAID_INSTANCE_MESSAGE", 0x2FA),
     Data::compressed("SMSG_COMPRESSED_MOVES", 0x2FB),

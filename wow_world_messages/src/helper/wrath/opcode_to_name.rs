@@ -619,7 +619,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x02f5 => "SMSG_PLAY_TIME_WARNING",
         0x02f6 => "SMSG_MINIGAME_SETUP",
         0x02f7 => "SMSG_MINIGAME_STATE",
-        0x02f8 => "CMSG_MINIGAME_MOVE",
         0x02f9 => "SMSG_MINIGAME_MOVE_FAILED",
         0x02fa => "SMSG_RAID_INSTANCE_MESSAGE",
         0x02fb => "SMSG_COMPRESSED_MOVES",
