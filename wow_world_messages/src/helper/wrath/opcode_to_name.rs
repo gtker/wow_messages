@@ -603,7 +603,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x02f2 => "SMSG_PARTY_MEMBER_STATS_FULL",
         0x02f3 => "CMSG_PET_SPELL_AUTOCAST",
         0x02f4 => "SMSG_WEATHER",
-        0x02f7 => "SMSG_MINIGAME_STATE",
         0x02f9 => "SMSG_MINIGAME_MOVE_FAILED",
         0x02fa => "SMSG_RAID_INSTANCE_MESSAGE",
         0x02fb => "SMSG_COMPRESSED_MOVES",
