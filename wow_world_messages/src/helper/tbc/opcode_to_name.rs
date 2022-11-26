@@ -406,7 +406,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x020a => "CMSG_REQUEST_ACCOUNT_DATA",
         0x020b => "CMSG_UPDATE_ACCOUNT_DATA",
         0x020c => "SMSG_UPDATE_ACCOUNT_DATA",
-        0x020d => "SMSG_CLEAR_FAR_SIGHT_IMMEDIATE",
         0x0211 => "CMSG_GMTICKET_GETTICKET",
         0x0212 => "SMSG_GMTICKET_GETTICKET",
         0x0213 => "CMSG_UNLEARN_TALENTS",

@@ -415,7 +415,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_REQUEST_ACCOUNT_DATA", 0x20A),
     Data::new("CMSG_UPDATE_ACCOUNT_DATA", 0x20B),
     Data::new("SMSG_UPDATE_ACCOUNT_DATA", 0x20C),
-    Data::new("SMSG_CLEAR_FAR_SIGHT_IMMEDIATE", 0x20D),
     Data::new("SMSG_CHANGEPLAYER_DIFFICULTY_RESULT", 0x20E),
     Data::new("CMSG_GMTICKET_GETTICKET", 0x211),
     Data::new("SMSG_GMTICKET_GETTICKET", 0x212),
