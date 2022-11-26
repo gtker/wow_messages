@@ -1196,6 +1196,8 @@ pub use crate::shared::smsg_initial_spells_vanilla_tbc::SMSG_INITIAL_SPELLS;
 
 pub use crate::shared::smsg_initialize_factions_vanilla_tbc::SMSG_INITIALIZE_FACTIONS;
 
+pub use crate::shared::smsg_instance_difficulty_tbc_wrath::SMSG_INSTANCE_DIFFICULTY;
+
 pub use crate::shared::smsg_instance_save_created_vanilla_tbc_wrath::SMSG_INSTANCE_SAVE_CREATED;
 
 pub use crate::shared::smsg_invalidate_player_vanilla_tbc_wrath::SMSG_INVALIDATE_PLAYER;

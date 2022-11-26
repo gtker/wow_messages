@@ -472,6 +472,7 @@ pub mod smsg_guild_invite_vanilla_tbc_wrath;
 pub mod smsg_guild_query_response_vanilla_tbc_wrath;
 pub mod smsg_initial_spells_vanilla_tbc;
 pub mod smsg_initialize_factions_vanilla_tbc;
+pub mod smsg_instance_difficulty_tbc_wrath;
 pub mod smsg_instance_save_created_vanilla_tbc_wrath;
 pub mod smsg_invalidate_player_vanilla_tbc_wrath;
 pub mod smsg_item_cooldown_vanilla_tbc_wrath;

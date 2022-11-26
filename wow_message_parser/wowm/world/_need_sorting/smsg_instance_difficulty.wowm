@@ -1,0 +1,6 @@
+smsg SMSG_INSTANCE_DIFFICULTY = 0x033B {
+    u32 difficulty;
+    Bool32 dynamic_difficulty;
+} {
+    versions = "2.4.3 3";
+}
