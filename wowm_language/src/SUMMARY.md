@@ -580,6 +580,7 @@
 - [MSG_MOVE_SET_FACING](docs/msg_move_set_facing.md)
 - [MSG_MOVE_SET_FACING_Client](docs/msg_move_set_facing_client.md)
 - [MSG_MOVE_SET_FACING_Server](docs/msg_move_set_facing_server.md)
+- [MSG_MOVE_SET_FLIGHT_SPEED_Server](docs/msg_move_set_flight_speed_server.md)
 - [MSG_MOVE_SET_PITCH](docs/msg_move_set_pitch.md)
 - [MSG_MOVE_SET_PITCH_Client](docs/msg_move_set_pitch_client.md)
 - [MSG_MOVE_SET_PITCH_Server](docs/msg_move_set_pitch_server.md)
