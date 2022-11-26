@@ -267,6 +267,8 @@ pub(crate) mod msg_move_stop_turn;
 pub use msg_move_stop_turn::*;
 pub(crate) mod msg_move_teleport_ack_server;
 pub use msg_move_teleport_ack_server::*;
+pub(crate) mod msg_move_teleport_server;
+pub use msg_move_teleport_server::*;
 pub(crate) mod msg_quest_push_result;
 pub use msg_quest_push_result::*;
 pub(crate) mod msg_save_guild_emblem_server;

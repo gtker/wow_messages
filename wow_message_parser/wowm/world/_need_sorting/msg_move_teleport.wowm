@@ -1,0 +1,7 @@
+cmsg MSG_MOVE_TELEPORT_Server = 0x00C5 {
+    PackedGuid player;
+    MovementInfo info;
+} {
+    paste_versions = "2.4.3 3.3.5";
+    comment = "There does not appear to be a client version of this MSG.";
+}
