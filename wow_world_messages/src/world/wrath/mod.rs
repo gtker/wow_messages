@@ -698,15 +698,9 @@ pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATC
 
 pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::CMSG_SETSHEATHED;
 
-pub use crate::shared::cmsg_skill_buy_rank_tbc_wrath::CMSG_SKILL_BUY_RANK;
-
-pub use crate::shared::cmsg_skill_buy_step_tbc_wrath::CMSG_SKILL_BUY_STEP;
-
 pub use crate::shared::cmsg_spirit_healer_activate_vanilla_tbc_wrath::CMSG_SPIRIT_HEALER_ACTIVATE;
 
 pub use crate::shared::cmsg_stable_pet_vanilla_tbc_wrath::CMSG_STABLE_PET;
-
-pub use crate::shared::cmsg_stable_revive_pet_tbc_wrath::CMSG_STABLE_REVIVE_PET;
 
 pub use crate::shared::cmsg_stable_swap_pet_vanilla_tbc_wrath::CMSG_STABLE_SWAP_PET;
 

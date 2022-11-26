@@ -1,5 +1,0 @@
-cmsg CMSG_SKILL_BUY_STEP = 0x021F {
-    
-} {
-    versions = "2.4.3 3.3.5";
-}

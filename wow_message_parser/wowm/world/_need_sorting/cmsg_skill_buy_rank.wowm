@@ -1,5 +1,0 @@
-cmsg CMSG_SKILL_BUY_RANK = 0x0220 {
-    
-} {
-    versions = "2.4.3 3.3.5";
-}
