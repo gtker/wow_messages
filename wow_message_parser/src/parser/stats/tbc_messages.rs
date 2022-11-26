@@ -663,8 +663,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_MOVE_SET_FLIGHT", 0x33E),
     Data::new("SMSG_MOVE_UNSET_FLIGHT", 0x33F),
     Data::new("CMSG_MOVE_FLIGHT_ACK", 0x340),
-    Data::new("MSG_MOVE_START_SWIM_CHEAT", 0x341),
-    Data::new("MSG_MOVE_STOP_SWIM_CHEAT", 0x342),
     Data::new("SMSG_MOVE_SET_CAN_FLY", 0x343),
     Data::new("SMSG_MOVE_UNSET_CAN_FLY", 0x344),
     Data::new("CMSG_MOVE_SET_CAN_FLY_ACK", 0x345),

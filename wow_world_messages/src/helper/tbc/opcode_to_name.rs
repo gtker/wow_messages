@@ -662,8 +662,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x033e => "SMSG_MOVE_SET_FLIGHT",
         0x033f => "SMSG_MOVE_UNSET_FLIGHT",
         0x0340 => "CMSG_MOVE_FLIGHT_ACK",
-        0x0341 => "MSG_MOVE_START_SWIM_CHEAT",
-        0x0342 => "MSG_MOVE_STOP_SWIM_CHEAT",
         0x0343 => "SMSG_MOVE_SET_CAN_FLY",
         0x0344 => "SMSG_MOVE_UNSET_CAN_FLY",
         0x0345 => "CMSG_MOVE_SET_CAN_FLY_ACK",
