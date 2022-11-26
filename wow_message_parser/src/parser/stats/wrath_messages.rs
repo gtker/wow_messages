@@ -525,7 +525,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("MSG_QUERY_NEXT_MAIL_TIME", 0x284),
     Data::new("SMSG_RECEIVED_MAIL", 0x285),
     Data::new("SMSG_RAID_GROUP_ONLY", 0x286),
-    Data::new("CMSG_SET_PVP_TITLE", 0x28B),
+    Data::nyi("CMSG_SET_PVP_TITLE", 0x28B),
     Data::new("SMSG_PVP_CREDIT", 0x28C),
     Data::new("SMSG_AUCTION_REMOVED_NOTIFICATION", 0x28D),
     Data::new("CMSG_GROUP_RAID_CONVERT", 0x28E),
