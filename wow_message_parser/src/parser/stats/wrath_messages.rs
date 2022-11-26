@@ -255,7 +255,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_SPELLENERGIZELOG", 0x151),
     Data::new("SMSG_BREAK_TARGET", 0x152),
     Data::new("SMSG_BINDPOINTUPDATE", 0x155),
-    Data::new("SMSG_BINDZONEREPLY", 0x157),
     Data::new("SMSG_PLAYERBOUND", 0x158),
     Data::new("SMSG_CLIENT_CONTROL_UPDATE", 0x159),
     Data::new("CMSG_REPOP_REQUEST", 0x15A),

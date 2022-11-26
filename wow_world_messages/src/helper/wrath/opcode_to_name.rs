@@ -254,7 +254,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0151 => "SMSG_SPELLENERGIZELOG",
         0x0152 => "SMSG_BREAK_TARGET",
         0x0155 => "SMSG_BINDPOINTUPDATE",
-        0x0157 => "SMSG_BINDZONEREPLY",
         0x0158 => "SMSG_PLAYERBOUND",
         0x0159 => "SMSG_CLIENT_CONTROL_UPDATE",
         0x015a => "CMSG_REPOP_REQUEST",
