@@ -55,7 +55,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_GROUP_INVITE", 0x06E),
     Data::new("SMSG_GROUP_INVITE", 0x06F),
     Data::new("CMSG_GROUP_CANCEL", 0x070),
-    Data::new("SMSG_GROUP_CANCEL", 0x071),
     Data::new("CMSG_GROUP_ACCEPT", 0x072),
     Data::new("CMSG_GROUP_DECLINE", 0x073),
     Data::new("SMSG_GROUP_DECLINE", 0x074),

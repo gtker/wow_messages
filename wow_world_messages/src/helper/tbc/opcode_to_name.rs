@@ -54,7 +54,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x006e => "CMSG_GROUP_INVITE",
         0x006f => "SMSG_GROUP_INVITE",
         0x0070 => "CMSG_GROUP_CANCEL",
-        0x0071 => "SMSG_GROUP_CANCEL",
         0x0072 => "CMSG_GROUP_ACCEPT",
         0x0073 => "CMSG_GROUP_DECLINE",
         0x0074 => "SMSG_GROUP_DECLINE",
