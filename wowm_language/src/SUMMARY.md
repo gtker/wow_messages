@@ -730,6 +730,7 @@
 - [SMSG_CALENDAR_SEND_NUM_PENDING](docs/smsg_calendar_send_num_pending.md)
 - [SMSG_CANCEL_AUTO_REPEAT](docs/smsg_cancel_auto_repeat.md)
 - [SMSG_CANCEL_COMBAT](docs/smsg_cancel_combat.md)
+- [SMSG_CAST_FAILED](docs/smsg_cast_failed.md)
 - [SMSG_CAST_RESULT](docs/smsg_cast_result.md)
 - [SMSG_CHANNEL_LIST](docs/smsg_channel_list.md)
 - [SMSG_CHANNEL_NOTIFY](docs/smsg_channel_notify.md)

@@ -1528,6 +1528,8 @@ pub(crate) mod smsg_battlefield_status;
 pub use smsg_battlefield_status::*;
 pub(crate) mod smsg_bindpointupdate;
 pub use smsg_bindpointupdate::*;
+pub(crate) mod smsg_cast_failed;
+pub use smsg_cast_failed::*;
 pub(crate) mod smsg_char_create;
 pub use smsg_char_create::*;
 pub(crate) mod smsg_char_delete;

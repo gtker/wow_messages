@@ -1,0 +1,77 @@
+smsg SMSG_CAST_FAILED = 0x0130 {
+    Spell id;
+    SpellCastResult result;
+    Bool multiple_casts;
+    if (result == REQUIRES_SPELL_FOCUS) {
+         u32 spell_focus;
+    }
+    else if (result == REQUIRES_AREA) {
+        Area area;
+    }
+    else if (result == TOTEMS) {
+        u32[2] totems;
+    }
+    else if (result == TOTEM_CATEGORY) {
+        u32[2] totem_categories;
+    }
+    else if (result == EQUIPPED_ITEM_CLASS) {
+        u32 item_class;
+        u32 item_sub_class;
+        u32 item_inventory_type;
+    }
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_CAST_FAILED = 0x0130 {
+    u8 cast_count;
+    Spell id;
+    SpellCastResult result;
+    Bool multiple_casts;
+    if (result == REQUIRES_SPELL_FOCUS) {
+         u32 spell_focus;
+    }
+    else if (result == REQUIRES_AREA) {
+        Area area;
+    }
+    else if (result == TOTEMS) {
+        u32[2] totems;
+    }
+    else if (result == TOTEM_CATEGORY) {
+        u32[2] totem_categories;
+    }
+    else if (result == EQUIPPED_ITEM_CLASS
+          || result == EQUIPPED_ITEM_CLASS_OFFHAND
+          || result == EQUIPPED_ITEM_CLASS_MAINHAND) {
+        u32 item_class;
+        u32 item_sub_class;
+    }
+    else if (result == TOO_MANY_OF_ITEM) {
+        u32 item_limit_category;
+    }
+    else if (result == CUSTOM_ERROR) {
+        u32 custom_error;
+    }
+    else if (result == REAGENTS) {
+        u32 missing_item;
+    }
+    else if (result == PREVENTED_BY_MECHANIC) {
+        u32 mechanic;
+    }
+    else if (result == NEED_EXOTIC_AMMO) {
+        u32 equipped_item_sub_class;
+    }
+    else if (result == NEED_MORE_ITEMS) {
+        Item item;
+        u32 count;
+    }
+    else if (result == MIN_SKILL) {
+        (u32)Skill skill;
+        u32 skill_required;
+    }
+    else if (result == FISHING_TOO_LOW) {
+        u32 fishing_skill_required;
+    }
+} {
+    versions = "3.3.5";
+}
