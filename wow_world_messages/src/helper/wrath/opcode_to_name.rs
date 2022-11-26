@@ -655,7 +655,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0320 => "SMSG_UPDATE_LAST_INSTANCE",
         0x0321 => "MSG_RAID_TARGET_UPDATE",
         0x0322 => "MSG_RAID_READY_CHECK",
-        0x0323 => "CMSG_LUA_USAGE",
         0x0324 => "SMSG_PET_ACTION_SOUND",
         0x0325 => "SMSG_PET_DISMISS_SOUND",
         0x0328 => "SMSG_GM_TICKET_STATUS_UPDATE",

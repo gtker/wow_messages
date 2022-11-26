@@ -644,7 +644,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_UPDATE_LAST_INSTANCE", 0x320),
     Data::new("MSG_RAID_TARGET_UPDATE", 0x321),
     Data::new("MSG_RAID_READY_CHECK", 0x322),
-    Data::new("CMSG_LUA_USAGE", 0x323),
     Data::new("SMSG_PET_ACTION_SOUND", 0x324),
     Data::new("SMSG_PET_DISMISS_SOUND", 0x325),
     Data::new("SMSG_GM_TICKET_STATUS_UPDATE", 0x328),
