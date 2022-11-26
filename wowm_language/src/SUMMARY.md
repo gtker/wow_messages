@@ -278,6 +278,7 @@
 - [CMSG_CANCEL_CAST](docs/cmsg_cancel_cast.md)
 - [CMSG_CANCEL_CHANNELLING](docs/cmsg_cancel_channelling.md)
 - [CMSG_CANCEL_GROWTH_AURA](docs/cmsg_cancel_growth_aura.md)
+- [CMSG_CANCEL_MOUNT_AURA](docs/cmsg_cancel_mount_aura.md)
 - [CMSG_CANCEL_TRADE](docs/cmsg_cancel_trade.md)
 - [CMSG_CAST_SPELL](docs/cmsg_cast_spell.md)
 - [CMSG_CHANNEL_ANNOUNCEMENTS](docs/cmsg_channel_announcements.md)

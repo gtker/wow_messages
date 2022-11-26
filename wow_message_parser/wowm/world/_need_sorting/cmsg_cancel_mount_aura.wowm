@@ -1,0 +1,3 @@
+cmsg CMSG_CANCEL_MOUNT_AURA = 0x0375 {} {
+    versions = "2.4.3 3";
+}
