@@ -383,7 +383,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_CLEAR_COOLDOWN", 0x1DE),
     Data::new("SMSG_GAMEOBJECT_PAGETEXT", 0x1DF),
     Data::new("CMSG_SETSHEATHED", 0x1E0),
-    Data::new("SMSG_COOLDOWN_CHEAT", 0x1E1),
     Data::new("SMSG_SPELL_DELAYED", 0x1E2),
     Data::new("CMSG_QUEST_POI_QUERY", 0x1E3),
     Data::new("SMSG_QUEST_POI_QUERY_RESPONSE", 0x1E4),

@@ -382,7 +382,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x01de => "SMSG_CLEAR_COOLDOWN",
         0x01df => "SMSG_GAMEOBJECT_PAGETEXT",
         0x01e0 => "CMSG_SETSHEATHED",
-        0x01e1 => "SMSG_COOLDOWN_CHEAT",
         0x01e2 => "SMSG_SPELL_DELAYED",
         0x01e3 => "CMSG_QUEST_POI_QUERY",
         0x01e4 => "SMSG_QUEST_POI_QUERY_RESPONSE",

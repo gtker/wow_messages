@@ -378,7 +378,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_CLEAR_COOLDOWN", 0x1DE),
     Data::new("SMSG_GAMEOBJECT_PAGETEXT", 0x1DF),
     Data::new("CMSG_SETSHEATHED", 0x1E0),
-    Data::new("SMSG_COOLDOWN_CHEAT", 0x1E1),
     Data::new("SMSG_SPELL_DELAYED", 0x1E2),
     Data::new("SMSG_INVALID_PROMOTION_CODE", 0x1E7),
     Data::new("SMSG_ITEM_TIME_UPDATE", 0x1EA),
