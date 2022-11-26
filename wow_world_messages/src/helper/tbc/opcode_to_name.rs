@@ -751,7 +751,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x03a6 => "SMSG_CLEAR_EXTRA_AURA_INFO",
         0x03a7 => "MSG_MOVE_START_DESCEND",
         0x03aa => "SMSG_SPELL_CHANCE_PROC_LOG",
-        0x03ab => "CMSG_MOVE_SET_RUN_SPEED",
         0x03ac => "SMSG_DISMOUNT",
         0x03ad => "MSG_MOVE_UPDATE_CAN_FLY",
         0x03ae => "MSG_RAID_READY_CHECK_CONFIRM",

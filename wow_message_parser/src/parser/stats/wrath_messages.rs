@@ -767,7 +767,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_VOICE_SET_TALKER_MUTED", 0x3A2),
     Data::new("MSG_MOVE_START_DESCEND", 0x3A7),
     Data::new("SMSG_SPELL_CHANCE_PROC_LOG", 0x3AA),
-    Data::new("CMSG_MOVE_SET_RUN_SPEED", 0x3AB),
     Data::new("SMSG_DISMOUNT", 0x3AC),
     Data::new("MSG_MOVE_UPDATE_CAN_FLY", 0x3AD),
     Data::new("MSG_RAID_READY_CHECK_CONFIRM", 0x3AE),
