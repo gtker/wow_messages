@@ -318,7 +318,7 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
                 let map = expansion.as_map_string(map);
 
                 let failed_text = if let Some(t) = failed_text {
-                    format!("Some(\"{}\")", t.replace("\"", "\\\""))
+                    format!("Some(\"{}\")", t.replace('\"', "\\\""))
                 } else {
                     "None".to_string()
                 };
