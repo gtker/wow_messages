@@ -441,7 +441,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_GMTICKET_SYSTEMSTATUS", 0x21B),
     Data::new("CMSG_SPIRIT_HEALER_ACTIVATE", 0x21C),
     Data::new("SMSG_QUEST_FORCE_REMOVE", 0x21E),
-    Data::new("CMSG_SKILL_BUY_STEP", 0x21F),
+    Data::nyi("CMSG_SKILL_BUY_STEP", 0x21F),
     Data::new("CMSG_SKILL_BUY_RANK", 0x220),
     Data::new("SMSG_SPIRIT_HEALER_CONFIRM", 0x222),
     Data::new("SMSG_GOSSIP_POI", 0x224),
