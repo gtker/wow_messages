@@ -1,0 +1,6 @@
+cmsg CMSG_ARENA_TEAM_INVITE = 0x034F {
+    u32 arena_team;
+    CString player;
+} {
+    versions = "2.4.3 3";
+}
