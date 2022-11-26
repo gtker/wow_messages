@@ -738,7 +738,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0396 => "SMSG_RESET_FAILED_NOTIFY",
         0x0397 => "SMSG_REAL_GROUP_UPDATE",
         0x0398 => "SMSG_LFG_DISABLED",
-        0x039a => "CMSG_CHEAT_DUMP_ITEMS_DEBUG_ONLY",
         0x039b => "SMSG_CHEAT_DUMP_ITEMS_DEBUG_ONLY_RESPONSE",
         0x039c => "SMSG_CHEAT_DUMP_ITEMS_DEBUG_ONLY_RESPONSE_WRITE_FILE",
         0x039d => "SMSG_UPDATE_COMBO_POINTS",
