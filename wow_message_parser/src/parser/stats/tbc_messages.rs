@@ -592,7 +592,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::aura_mask("SMSG_PARTY_MEMBER_STATS_FULL", 0x2F2),
     Data::new("CMSG_PET_SPELL_AUTOCAST", 0x2F3),
     Data::new("SMSG_WEATHER", 0x2F4),
-    Data::new("SMSG_PLAY_TIME_WARNING", 0x2F5),
     Data::new("SMSG_MINIGAME_SETUP", 0x2F6),
     Data::new("SMSG_MINIGAME_STATE", 0x2F7),
     Data::new("SMSG_MINIGAME_MOVE_FAILED", 0x2F9),
