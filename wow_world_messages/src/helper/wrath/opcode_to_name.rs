@@ -498,7 +498,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0279 => "CMSG_REQUEST_PET_INFO",
         0x027a => "CMSG_FAR_SIGHT",
         0x027b => "SMSG_SPELLDISPELLOG",
-        0x027c => "SMSG_DAMAGE_CALC_LOG",
         0x027e => "CMSG_GROUP_CHANGE_SUB_GROUP",
         0x027f => "CMSG_REQUEST_PARTY_MEMBER_STATS",
         0x0280 => "CMSG_GROUP_SWAP_SUB_GROUP",

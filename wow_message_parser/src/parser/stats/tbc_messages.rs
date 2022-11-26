@@ -487,7 +487,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_REQUEST_PET_INFO", 0x279),
     Data::new("CMSG_FAR_SIGHT", 0x27A),
     Data::new("SMSG_SPELLDISPELLOG", 0x27B),
-    Data::new("SMSG_DAMAGE_CALC_LOG", 0x27C),
     Data::new("CMSG_GROUP_CHANGE_SUB_GROUP", 0x27E),
     Data::new("CMSG_REQUEST_PARTY_MEMBER_STATS", 0x27F),
     Data::new("CMSG_GROUP_SWAP_SUB_GROUP", 0x280),
