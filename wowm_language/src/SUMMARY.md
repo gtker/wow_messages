@@ -393,6 +393,7 @@
 - [CMSG_MOVE_HOVER_ACK](docs/cmsg_move_hover_ack.md)
 - [CMSG_MOVE_KNOCK_BACK_ACK](docs/cmsg_move_knock_back_ack.md)
 - [CMSG_MOVE_NOT_ACTIVE_MOVER](docs/cmsg_move_not_active_mover.md)
+- [CMSG_MOVE_SET_CAN_FLY_ACK](docs/cmsg_move_set_can_fly_ack.md)
 - [CMSG_MOVE_SET_FLY](docs/cmsg_move_set_fly.md)
 - [CMSG_MOVE_SET_RAW_POSITION](docs/cmsg_move_set_raw_position.md)
 - [CMSG_MOVE_SPLINE_DONE](docs/cmsg_move_spline_done.md)
