@@ -27,6 +27,7 @@ pub mod cmsg_area_spirit_healer_queue_vanilla_tbc_wrath;
 pub mod cmsg_areatrigger_vanilla_tbc_wrath;
 pub mod cmsg_arena_team_accept_tbc_wrath;
 pub mod cmsg_arena_team_decline_tbc_wrath;
+pub mod cmsg_arena_team_disband_tbc_wrath;
 pub mod cmsg_arena_team_invite_tbc_wrath;
 pub mod cmsg_arena_team_leave_tbc_wrath;
 pub mod cmsg_arena_team_remove_tbc_wrath;

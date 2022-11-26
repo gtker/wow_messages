@@ -232,6 +232,7 @@
 - [CMSG_AREA_SPIRIT_HEALER_QUEUE](docs/cmsg_area_spirit_healer_queue.md)
 - [CMSG_ARENA_TEAM_ACCEPT](docs/cmsg_arena_team_accept.md)
 - [CMSG_ARENA_TEAM_DECLINE](docs/cmsg_arena_team_decline.md)
+- [CMSG_ARENA_TEAM_DISBAND](docs/cmsg_arena_team_disband.md)
 - [CMSG_ARENA_TEAM_INVITE](docs/cmsg_arena_team_invite.md)
 - [CMSG_ARENA_TEAM_LEAVE](docs/cmsg_arena_team_leave.md)
 - [CMSG_ARENA_TEAM_REMOVE](docs/cmsg_arena_team_remove.md)
