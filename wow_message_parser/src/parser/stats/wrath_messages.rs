@@ -764,7 +764,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_VOICE_SESSION_ROSTER_UPDATE", 0x39E),
     Data::new("SMSG_VOICE_SESSION_LEAVE", 0x39F),
     Data::new("SMSG_VOICE_SESSION_ADJUST_PRIORITY", 0x3A0),
-    Data::new("CMSG_VOICE_SET_TALKER_MUTED_REQUEST", 0x3A1),
     Data::new("SMSG_VOICE_SET_TALKER_MUTED", 0x3A2),
     Data::new("MSG_MOVE_START_DESCEND", 0x3A7),
     Data::new("SMSG_SPELL_CHANCE_PROC_LOG", 0x3AA),
