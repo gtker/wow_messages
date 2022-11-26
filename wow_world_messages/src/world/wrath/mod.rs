@@ -1068,6 +1068,8 @@ pub use crate::shared::smsg_channel_list_vanilla_tbc_wrath::SMSG_CHANNEL_LIST;
 
 pub use crate::shared::smsg_channel_notify_tbc_wrath::SMSG_CHANNEL_NOTIFY;
 
+pub use crate::shared::smsg_chat_player_ambiguous_tbc_wrath::SMSG_CHAT_PLAYER_AMBIGUOUS;
+
 pub use crate::shared::smsg_chat_player_not_found_vanilla_tbc_wrath::SMSG_CHAT_PLAYER_NOT_FOUND;
 
 pub use crate::shared::smsg_chat_wrong_faction_vanilla_tbc_wrath::SMSG_CHAT_WRONG_FACTION;

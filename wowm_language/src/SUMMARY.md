@@ -739,6 +739,7 @@
 - [SMSG_CHAR_DELETE](docs/smsg_char_delete.md)
 - [SMSG_CHAR_ENUM](docs/smsg_char_enum.md)
 - [SMSG_CHAR_RENAME](docs/smsg_char_rename.md)
+- [SMSG_CHAT_PLAYER_AMBIGUOUS](docs/smsg_chat_player_ambiguous.md)
 - [SMSG_CHAT_PLAYER_NOT_FOUND](docs/smsg_chat_player_not_found.md)
 - [SMSG_CHAT_RESTRICTED](docs/smsg_chat_restricted.md)
 - [SMSG_CHAT_WRONG_FACTION](docs/smsg_chat_wrong_faction.md)

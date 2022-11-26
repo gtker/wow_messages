@@ -1,0 +1,6 @@
+smsg SMSG_CHAT_PLAYER_AMBIGUOUS = 0x032D {
+    CString player;
+} {
+    comment = "Never actually sent in any emulator.";
+    versions = "2.4.3 3";
+}

@@ -421,6 +421,7 @@ pub mod smsg_cancel_auto_repeat_vanilla_tbc;
 pub mod smsg_cancel_combat_vanilla_tbc_wrath;
 pub mod smsg_channel_list_vanilla_tbc_wrath;
 pub mod smsg_channel_notify_tbc_wrath;
+pub mod smsg_chat_player_ambiguous_tbc_wrath;
 pub mod smsg_chat_player_not_found_vanilla_tbc_wrath;
 pub mod smsg_chat_wrong_faction_vanilla_tbc_wrath;
 pub mod smsg_clear_cooldown_vanilla_tbc_wrath;

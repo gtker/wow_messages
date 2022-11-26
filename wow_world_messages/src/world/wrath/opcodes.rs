@@ -5962,6 +5962,7 @@ use crate::world::wrath::SMSG_PET_ACTION_SOUND;
 use crate::world::wrath::SMSG_PET_DISMISS_SOUND;
 use crate::world::wrath::SMSG_GM_TICKET_STATUS_UPDATE;
 use crate::world::wrath::SMSG_UPDATE_INSTANCE_OWNERSHIP;
+use crate::world::wrath::SMSG_CHAT_PLAYER_AMBIGUOUS;
 use crate::world::wrath::SMSG_SPELLINSTAKILLLOG;
 use crate::world::wrath::SMSG_SPELL_UPDATE_CHAIN_TARGETS;
 use crate::world::wrath::SMSG_DEFENSE_MESSAGE;
@@ -6316,6 +6317,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PET_DISMISS_SOUND(SMSG_PET_DISMISS_SOUND),
     SMSG_GM_TICKET_STATUS_UPDATE(SMSG_GM_TICKET_STATUS_UPDATE),
     SMSG_UPDATE_INSTANCE_OWNERSHIP(SMSG_UPDATE_INSTANCE_OWNERSHIP),
+    SMSG_CHAT_PLAYER_AMBIGUOUS(SMSG_CHAT_PLAYER_AMBIGUOUS),
     SMSG_SPELLINSTAKILLLOG(SMSG_SPELLINSTAKILLLOG),
     SMSG_SPELL_UPDATE_CHAIN_TARGETS(SMSG_SPELL_UPDATE_CHAIN_TARGETS),
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
@@ -6672,6 +6674,7 @@ impl ServerOpcodeMessage {
             0x0325 => Ok(Self::SMSG_PET_DISMISS_SOUND(<SMSG_PET_DISMISS_SOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0325, size: body_size, io, } } else { a } })?)),
             0x0328 => Ok(Self::SMSG_GM_TICKET_STATUS_UPDATE(<SMSG_GM_TICKET_STATUS_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0328, size: body_size, io, } } else { a } })?)),
             0x032B => Ok(Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(<SMSG_UPDATE_INSTANCE_OWNERSHIP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032B, size: body_size, io, } } else { a } })?)),
+            0x032D => Ok(Self::SMSG_CHAT_PLAYER_AMBIGUOUS(<SMSG_CHAT_PLAYER_AMBIGUOUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032D, size: body_size, io, } } else { a } })?)),
             0x032F => Ok(Self::SMSG_SPELLINSTAKILLLOG(<SMSG_SPELLINSTAKILLLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032F, size: body_size, io, } } else { a } })?)),
             0x0330 => Ok(Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(<SMSG_SPELL_UPDATE_CHAIN_TARGETS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0330, size: body_size, io, } } else { a } })?)),
             0x033A => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033A, size: body_size, io, } } else { a } })?)),
@@ -7177,6 +7180,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_DISMISS_SOUND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_encrypted_server(w, e),
@@ -7534,6 +7538,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_DISMISS_SOUND(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.write_unencrypted_server(w),
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_unencrypted_server(w),
@@ -7891,6 +7896,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_DISMISS_SOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8248,6 +8254,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_DISMISS_SOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8605,6 +8612,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_DISMISS_SOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8962,6 +8970,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_DISMISS_SOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_TICKET_STATUS_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLINSTAKILLLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELL_UPDATE_CHAIN_TARGETS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
@@ -9329,6 +9338,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PET_DISMISS_SOUND(_) => "SMSG_PET_DISMISS_SOUND",
             ServerOpcodeMessage::SMSG_GM_TICKET_STATUS_UPDATE(_) => "SMSG_GM_TICKET_STATUS_UPDATE",
             ServerOpcodeMessage::SMSG_UPDATE_INSTANCE_OWNERSHIP(_) => "SMSG_UPDATE_INSTANCE_OWNERSHIP",
+            ServerOpcodeMessage::SMSG_CHAT_PLAYER_AMBIGUOUS(_) => "SMSG_CHAT_PLAYER_AMBIGUOUS",
             ServerOpcodeMessage::SMSG_SPELLINSTAKILLLOG(_) => "SMSG_SPELLINSTAKILLLOG",
             ServerOpcodeMessage::SMSG_SPELL_UPDATE_CHAIN_TARGETS(_) => "SMSG_SPELL_UPDATE_CHAIN_TARGETS",
             ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => "SMSG_DEFENSE_MESSAGE",
@@ -11361,6 +11371,12 @@ impl From<SMSG_GM_TICKET_STATUS_UPDATE> for ServerOpcodeMessage {
 impl From<SMSG_UPDATE_INSTANCE_OWNERSHIP> for ServerOpcodeMessage {
     fn from(c: SMSG_UPDATE_INSTANCE_OWNERSHIP) -> Self {
         Self::SMSG_UPDATE_INSTANCE_OWNERSHIP(c)
+    }
+}
+
+impl From<SMSG_CHAT_PLAYER_AMBIGUOUS> for ServerOpcodeMessage {
+    fn from(c: SMSG_CHAT_PLAYER_AMBIGUOUS) -> Self {
+        Self::SMSG_CHAT_PLAYER_AMBIGUOUS(c)
     }
 }
 
