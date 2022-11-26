@@ -315,6 +315,7 @@
 - [CMSG_GAMEOBJ_USE](docs/cmsg_gameobj_use.md)
 - [CMSG_GET_MAIL_LIST](docs/cmsg_get_mail_list.md)
 - [CMSG_GMSURVEY_SUBMIT](docs/cmsg_gmsurvey_submit.md)
+- [CMSG_GMTICKETSYSTEM_TOGGLE](docs/cmsg_gmticketsystem_toggle.md)
 - [CMSG_GMTICKET_CREATE](docs/cmsg_gmticket_create.md)
 - [CMSG_GMTICKET_DELETETICKET](docs/cmsg_gmticket_deleteticket.md)
 - [CMSG_GMTICKET_GETTICKET](docs/cmsg_gmticket_getticket.md)

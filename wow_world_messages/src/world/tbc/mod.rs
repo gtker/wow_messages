@@ -420,6 +420,8 @@ pub use crate::shared::cmsg_gmticket_systemstatus_vanilla_tbc_wrath::CMSG_GMTICK
 
 pub use crate::shared::cmsg_gmticket_updatetext_tbc_wrath::CMSG_GMTICKET_UPDATETEXT;
 
+pub use crate::shared::cmsg_gmticketsystem_toggle_tbc_wrath::CMSG_GMTICKETSYSTEM_TOGGLE;
+
 pub use crate::shared::cmsg_gossip_hello_vanilla_tbc_wrath::CMSG_GOSSIP_HELLO;
 
 pub use crate::shared::cmsg_gossip_select_option_tbc_wrath::CMSG_GOSSIP_SELECT_OPTION;

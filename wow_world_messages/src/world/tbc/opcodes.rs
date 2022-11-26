@@ -266,6 +266,7 @@ use crate::world::tbc::CMSG_GROUP_RAID_CONVERT;
 use crate::world::tbc::CMSG_GROUP_ASSISTANT_LEADER;
 use crate::world::tbc::CMSG_BUYBACK_ITEM;
 use crate::world::tbc::CMSG_MEETINGSTONE_INFO;
+use crate::world::tbc::CMSG_GMTICKETSYSTEM_TOGGLE;
 use crate::world::tbc::CMSG_CANCEL_GROWTH_AURA;
 use crate::world::tbc::CMSG_LOOT_ROLL;
 use crate::world::tbc::CMSG_LOOT_MASTER_GIVE;
@@ -578,6 +579,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GROUP_ASSISTANT_LEADER(CMSG_GROUP_ASSISTANT_LEADER),
     CMSG_BUYBACK_ITEM(CMSG_BUYBACK_ITEM),
     CMSG_MEETINGSTONE_INFO(CMSG_MEETINGSTONE_INFO),
+    CMSG_GMTICKETSYSTEM_TOGGLE(CMSG_GMTICKETSYSTEM_TOGGLE),
     CMSG_CANCEL_GROWTH_AURA(CMSG_CANCEL_GROWTH_AURA),
     CMSG_LOOT_ROLL(CMSG_LOOT_ROLL),
     CMSG_LOOT_MASTER_GIVE(CMSG_LOOT_MASTER_GIVE),
@@ -892,6 +894,7 @@ impl ClientOpcodeMessage {
             0x028F => Ok(Self::CMSG_GROUP_ASSISTANT_LEADER(<CMSG_GROUP_ASSISTANT_LEADER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028F, size: body_size, io, } } else { a } })?)),
             0x0290 => Ok(Self::CMSG_BUYBACK_ITEM(<CMSG_BUYBACK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0290, size: body_size, io, } } else { a } })?)),
             0x0296 => Ok(Self::CMSG_MEETINGSTONE_INFO(<CMSG_MEETINGSTONE_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0296, size: body_size, io, } } else { a } })?)),
+            0x029A => Ok(Self::CMSG_GMTICKETSYSTEM_TOGGLE(<CMSG_GMTICKETSYSTEM_TOGGLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x029A, size: body_size, io, } } else { a } })?)),
             0x029B => Ok(Self::CMSG_CANCEL_GROWTH_AURA(<CMSG_CANCEL_GROWTH_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x029B, size: body_size, io, } } else { a } })?)),
             0x02A0 => Ok(Self::CMSG_LOOT_ROLL(<CMSG_LOOT_ROLL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A0, size: body_size, io, } } else { a } })?)),
             0x02A3 => Ok(Self::CMSG_LOOT_MASTER_GIVE(<CMSG_LOOT_MASTER_GIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A3, size: body_size, io, } } else { a } })?)),
@@ -1274,6 +1277,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUYBACK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MEETINGSTONE_INFO(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_GROWTH_AURA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT_ROLL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.write_encrypted_client(w, e),
@@ -1589,6 +1593,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUYBACK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_MEETINGSTONE_INFO(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_GROWTH_AURA(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT_ROLL(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.write_unencrypted_client(w),
@@ -1904,6 +1909,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MEETINGSTONE_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_GROWTH_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_ROLL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2219,6 +2225,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MEETINGSTONE_INFO(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_GROWTH_AURA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_ROLL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2534,6 +2541,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MEETINGSTONE_INFO(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_GROWTH_AURA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_ROLL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2849,6 +2857,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MEETINGSTONE_INFO(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_GROWTH_AURA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_ROLL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.astd_write_unencrypted_client(w).await,
@@ -3199,6 +3208,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GROUP_ASSISTANT_LEADER(_) => "CMSG_GROUP_ASSISTANT_LEADER",
             ClientOpcodeMessage::CMSG_BUYBACK_ITEM(_) => "CMSG_BUYBACK_ITEM",
             ClientOpcodeMessage::CMSG_MEETINGSTONE_INFO(_) => "CMSG_MEETINGSTONE_INFO",
+            ClientOpcodeMessage::CMSG_GMTICKETSYSTEM_TOGGLE(_) => "CMSG_GMTICKETSYSTEM_TOGGLE",
             ClientOpcodeMessage::CMSG_CANCEL_GROWTH_AURA(_) => "CMSG_CANCEL_GROWTH_AURA",
             ClientOpcodeMessage::CMSG_LOOT_ROLL(_) => "CMSG_LOOT_ROLL",
             ClientOpcodeMessage::CMSG_LOOT_MASTER_GIVE(_) => "CMSG_LOOT_MASTER_GIVE",
@@ -4794,6 +4804,12 @@ impl From<CMSG_BUYBACK_ITEM> for ClientOpcodeMessage {
 impl From<CMSG_MEETINGSTONE_INFO> for ClientOpcodeMessage {
     fn from(c: CMSG_MEETINGSTONE_INFO) -> Self {
         Self::CMSG_MEETINGSTONE_INFO(c)
+    }
+}
+
+impl From<CMSG_GMTICKETSYSTEM_TOGGLE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GMTICKETSYSTEM_TOGGLE) -> Self {
+        Self::CMSG_GMTICKETSYSTEM_TOGGLE(c)
     }
 }
 
