@@ -223,6 +223,8 @@ pub(crate) mod msg_move_heartbeat;
 pub use msg_move_heartbeat::*;
 pub(crate) mod msg_move_jump;
 pub use msg_move_jump::*;
+pub(crate) mod msg_move_root_server;
+pub use msg_move_root_server::*;
 pub(crate) mod msg_move_set_facing;
 pub use msg_move_set_facing::*;
 pub(crate) mod msg_move_set_pitch;
