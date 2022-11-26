@@ -1,0 +1,5 @@
+cmsg CMSG_CANCEL_TEMP_ENCHANTMENT = 0x0379 {
+    u32 slot;
+} {
+    versions = "2.4.3 3";
+}

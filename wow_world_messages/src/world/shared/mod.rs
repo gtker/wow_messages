@@ -68,6 +68,7 @@ pub mod cmsg_cancel_cast_vanilla_tbc_wrath;
 pub mod cmsg_cancel_channelling_vanilla_tbc_wrath;
 pub mod cmsg_cancel_growth_aura_vanilla_tbc_wrath;
 pub mod cmsg_cancel_mount_aura_tbc_wrath;
+pub mod cmsg_cancel_temp_enchantment_tbc_wrath;
 pub mod cmsg_cancel_trade_vanilla_tbc_wrath;
 pub mod cmsg_channel_announcements_vanilla_tbc_wrath;
 pub mod cmsg_channel_ban_vanilla_tbc_wrath;
