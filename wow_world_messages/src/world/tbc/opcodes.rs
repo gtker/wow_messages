@@ -5833,6 +5833,7 @@ use crate::world::tbc::MSG_MOVE_SET_FLIGHT_SPEED_Server;
 use crate::world::tbc::SMSG_REALM_SPLIT;
 use crate::world::tbc::SMSG_TIME_SYNC_REQ;
 use crate::world::tbc::MSG_MOVE_START_DESCEND_Server;
+use crate::world::tbc::MSG_MOVE_UPDATE_CAN_FLY_Server;
 use crate::world::tbc::SMSG_GM_MESSAGECHAT;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -6169,6 +6170,7 @@ pub enum ServerOpcodeMessage {
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Server),
+    MSG_MOVE_UPDATE_CAN_FLY(MSG_MOVE_UPDATE_CAN_FLY_Server),
     SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
 }
 
@@ -6507,6 +6509,7 @@ impl ServerOpcodeMessage {
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
+            0x03AD => Ok(Self::MSG_MOVE_UPDATE_CAN_FLY(<MSG_MOVE_UPDATE_CAN_FLY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AD, size: body_size, io, } } else { a } })?)),
             0x03B2 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B2, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
@@ -6913,6 +6916,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
         }
     }
@@ -7252,6 +7256,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
         }
     }
@@ -7591,6 +7596,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
@@ -7930,6 +7936,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
@@ -8269,6 +8276,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
@@ -8608,6 +8616,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
@@ -8949,6 +8958,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
+            ServerOpcodeMessage::MSG_MOVE_UPDATE_CAN_FLY(_) => "MSG_MOVE_UPDATE_CAN_FLY_Server",
             ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
         })
     }
@@ -10943,6 +10953,12 @@ impl From<SMSG_TIME_SYNC_REQ> for ServerOpcodeMessage {
 impl From<MSG_MOVE_START_DESCEND_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_START_DESCEND_Server) -> Self {
         Self::MSG_MOVE_START_DESCEND(c)
+    }
+}
+
+impl From<MSG_MOVE_UPDATE_CAN_FLY_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_UPDATE_CAN_FLY_Server) -> Self {
+        Self::MSG_MOVE_UPDATE_CAN_FLY(c)
     }
 }
 

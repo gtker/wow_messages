@@ -283,6 +283,8 @@ pub(crate) mod msg_move_teleport_server;
 pub use msg_move_teleport_server::*;
 pub(crate) mod msg_move_unroot_server;
 pub use msg_move_unroot_server::*;
+pub(crate) mod msg_move_update_can_fly_server;
+pub use msg_move_update_can_fly_server::*;
 pub(crate) mod msg_move_water_walk;
 pub use msg_move_water_walk::*;
 pub(crate) mod msg_quest_push_result;

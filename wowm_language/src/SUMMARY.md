@@ -649,6 +649,7 @@
 - [MSG_MOVE_TELEPORT_Server](docs/msg_move_teleport_server.md)
 - [MSG_MOVE_TIME_SKIPPED_Server](docs/msg_move_time_skipped_server.md)
 - [MSG_MOVE_UNROOT_Server](docs/msg_move_unroot_server.md)
+- [MSG_MOVE_UPDATE_CAN_FLY_Server](docs/msg_move_update_can_fly_server.md)
 - [MSG_MOVE_WATER_WALK](docs/msg_move_water_walk.md)
 - [MSG_MOVE_WORLDPORT_ACK](docs/msg_move_worldport_ack.md)
 - [MSG_PARTY_ASSIGNMENT_Client](docs/msg_party_assignment_client.md)

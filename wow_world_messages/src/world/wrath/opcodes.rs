@@ -5950,6 +5950,7 @@ use crate::world::wrath::MSG_INSPECT_ARENA_TEAMS_Server;
 use crate::world::wrath::MSG_MOVE_SET_FLIGHT_SPEED_Server;
 use crate::world::wrath::SMSG_REALM_SPLIT;
 use crate::world::wrath::SMSG_TIME_SYNC_REQ;
+use crate::world::wrath::MSG_MOVE_UPDATE_CAN_FLY_Server;
 use crate::world::wrath::SMSG_GM_MESSAGECHAT;
 use crate::world::wrath::SMSG_FEATURE_SYSTEM_STATUS;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
@@ -6299,6 +6300,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_SET_FLIGHT_SPEED(MSG_MOVE_SET_FLIGHT_SPEED_Server),
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
+    MSG_MOVE_UPDATE_CAN_FLY(MSG_MOVE_UPDATE_CAN_FLY_Server),
     SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
     SMSG_FEATURE_SYSTEM_STATUS(SMSG_FEATURE_SYSTEM_STATUS),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
@@ -6650,6 +6652,7 @@ impl ServerOpcodeMessage {
             0x037E => Ok(Self::MSG_MOVE_SET_FLIGHT_SPEED(<MSG_MOVE_SET_FLIGHT_SPEED_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x037E, size: body_size, io, } } else { a } })?)),
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
+            0x03AD => Ok(Self::MSG_MOVE_UPDATE_CAN_FLY(<MSG_MOVE_UPDATE_CAN_FLY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AD, size: body_size, io, } } else { a } })?)),
             0x03B3 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B3, size: body_size, io, } } else { a } })?)),
             0x03C9 => Ok(Self::SMSG_FEATURE_SYSTEM_STATUS(<SMSG_FEATURE_SYSTEM_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C9, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
@@ -7150,6 +7153,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
@@ -7502,6 +7506,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
@@ -7854,6 +7859,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8206,6 +8212,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8558,6 +8565,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8910,6 +8918,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
@@ -9272,6 +9281,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_SET_FLIGHT_SPEED(_) => "MSG_MOVE_SET_FLIGHT_SPEED_Server",
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
+            ServerOpcodeMessage::MSG_MOVE_UPDATE_CAN_FLY(_) => "MSG_MOVE_UPDATE_CAN_FLY_Server",
             ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
             ServerOpcodeMessage::SMSG_FEATURE_SYSTEM_STATUS(_) => "SMSG_FEATURE_SYSTEM_STATUS",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
@@ -11319,6 +11329,12 @@ impl From<SMSG_REALM_SPLIT> for ServerOpcodeMessage {
 impl From<SMSG_TIME_SYNC_REQ> for ServerOpcodeMessage {
     fn from(c: SMSG_TIME_SYNC_REQ) -> Self {
         Self::SMSG_TIME_SYNC_REQ(c)
+    }
+}
+
+impl From<MSG_MOVE_UPDATE_CAN_FLY_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_MOVE_UPDATE_CAN_FLY_Server) -> Self {
+        Self::MSG_MOVE_UPDATE_CAN_FLY(c)
     }
 }
 

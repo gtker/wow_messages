@@ -1,0 +1,6 @@
+smsg MSG_MOVE_UPDATE_CAN_FLY_Server = 0x03AD {
+    PackedGuid player;
+    MovementInfo info;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}
