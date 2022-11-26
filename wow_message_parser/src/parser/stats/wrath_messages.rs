@@ -267,7 +267,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_LOOT_RELEASE_RESPONSE", 0x161),
     Data::new("SMSG_LOOT_REMOVED", 0x162),
     Data::new("SMSG_LOOT_MONEY_NOTIFY", 0x163),
-    Data::new("SMSG_LOOT_ITEM_NOTIFY", 0x164),
     Data::new("SMSG_LOOT_CLEAR_MONEY", 0x165),
     Data::new("SMSG_ITEM_PUSH_RESULT", 0x166),
     Data::new("SMSG_DUEL_REQUESTED", 0x167),

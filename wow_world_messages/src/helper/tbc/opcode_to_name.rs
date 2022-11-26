@@ -262,7 +262,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0161 => "SMSG_LOOT_RELEASE_RESPONSE",
         0x0162 => "SMSG_LOOT_REMOVED",
         0x0163 => "SMSG_LOOT_MONEY_NOTIFY",
-        0x0164 => "SMSG_LOOT_ITEM_NOTIFY",
         0x0165 => "SMSG_LOOT_CLEAR_MONEY",
         0x0166 => "SMSG_ITEM_PUSH_RESULT",
         0x0167 => "SMSG_DUEL_REQUESTED",
