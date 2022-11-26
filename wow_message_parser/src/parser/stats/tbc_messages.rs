@@ -614,7 +614,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_SPLINE_MOVE_SET_RUN_MODE", 0x30D),
     Data::new("SMSG_SPLINE_MOVE_SET_WALK_MODE", 0x30E),
     Data::new("CMSG_ACTIVATETAXIEXPRESS", 0x312),
-    Data::new("SMSG_GAMETIMEBIAS_SET", 0x314),
     Data::new("CMSG_SET_FACTION_INACTIVE", 0x317),
     Data::new("CMSG_SET_WATCHED_FACTION", 0x318),
     Data::new("MSG_MOVE_TIME_SKIPPED", 0x319),

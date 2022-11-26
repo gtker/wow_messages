@@ -625,7 +625,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x030d => "SMSG_SPLINE_MOVE_SET_RUN_MODE",
         0x030e => "SMSG_SPLINE_MOVE_SET_WALK_MODE",
         0x0312 => "CMSG_ACTIVATETAXIEXPRESS",
-        0x0314 => "SMSG_GAMETIMEBIAS_SET",
         0x0317 => "CMSG_SET_FACTION_INACTIVE",
         0x0318 => "CMSG_SET_WATCHED_FACTION",
         0x0319 => "MSG_MOVE_TIME_SKIPPED",
