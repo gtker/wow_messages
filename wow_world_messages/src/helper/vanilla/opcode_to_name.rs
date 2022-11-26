@@ -217,6 +217,7 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0136 => "CMSG_CANCEL_AURA",
         0x0137 => "SMSG_UPDATE_AURA_DURATION",
         0x0138 => "SMSG_PET_CAST_FAILED",
+        0x0139 => "MSG_CHANNEL_START",
         0x013b => "CMSG_CANCEL_CHANNELLING",
         0x013c => "SMSG_AI_REACTION",
         0x013d => "CMSG_SET_SELECTION",

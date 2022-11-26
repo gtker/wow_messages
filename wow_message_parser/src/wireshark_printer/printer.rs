@@ -34,16 +34,17 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
 
             s.closing_curly(); // if (WOWW_SERVER_TO_CLIENT)
 
-            s.open_curly("else");
-
             let v = o.wireshark_messages();
-            let e = v
+            if let Some(e) = v
                 .iter()
                 .find(|a| a.name() == server_to_client_name(e.name()))
-                .unwrap();
-            print_message(&mut s, e, w, o, &mut variables);
+            {
+                s.open_curly("else");
 
-            s.closing_curly(); // else
+                print_message(&mut s, e, w, o, &mut variables);
+
+                s.closing_curly(); // else
+            }
         } else {
             print_message(&mut s, e, w, o, &mut variables);
         }

@@ -322,6 +322,7 @@ pub mod msg_auction_hello_client_vanilla_tbc_wrath;
 pub mod msg_auction_hello_server_vanilla_tbc;
 pub mod msg_battleground_player_positions_client_vanilla_tbc_wrath;
 pub mod msg_battleground_player_positions_server_vanilla_tbc_wrath;
+pub mod msg_channel_start_server_tbc_wrath;
 pub mod msg_corpse_query_client_vanilla_tbc_wrath;
 pub mod msg_inspect_honor_stats_client_vanilla_tbc_wrath;
 pub mod msg_inspect_honor_stats_server_tbc_wrath;

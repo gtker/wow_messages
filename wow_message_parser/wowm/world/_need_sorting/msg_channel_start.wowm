@@ -1,0 +1,14 @@
+smsg MSG_CHANNEL_START_Server = 0x0139 {
+    Spell spell;
+    u32 duration;
+} {
+    versions = "1.12";
+}
+
+smsg MSG_CHANNEL_START_Server = 0x0139 {
+    PackedGuid caster;
+    Spell spell;
+    u32 duration;
+} {
+    versions = "2.4.3 3";
+}

@@ -218,6 +218,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_CANCEL_AURA", 0x136),
     Data::new("SMSG_UPDATE_AURA_DURATION", 0x137),
     Data::new("SMSG_PET_CAST_FAILED", 0x138),
+    Data::new("MSG_CHANNEL_START", 0x139),
     Data::new("CMSG_CANCEL_CHANNELLING", 0x13B),
     Data::new("SMSG_AI_REACTION", 0x13C),
     Data::new("CMSG_SET_SELECTION", 0x13D),

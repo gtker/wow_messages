@@ -211,6 +211,8 @@ pub(crate) mod movement_flags;
 pub use movement_flags::*;
 pub(crate) mod movement_info;
 pub use movement_info::*;
+pub(crate) mod msg_channel_start_server;
+pub use msg_channel_start_server::*;
 pub(crate) mod msg_corpse_query_server;
 pub use msg_corpse_query_server::*;
 pub(crate) mod msg_inspect_honor_stats_server;
