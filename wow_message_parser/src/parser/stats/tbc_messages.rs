@@ -365,7 +365,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_QUERY_TIME", 0x1CE),
     Data::new("SMSG_QUERY_TIME_RESPONSE", 0x1CF),
     Data::new("SMSG_LOG_XPGAIN", 0x1D0),
-    Data::new("SMSG_AURACASTLOG", 0x1D1),
     Data::new("CMSG_RECLAIM_CORPSE", 0x1D2),
     Data::new("CMSG_WRAP_ITEM", 0x1D3),
     Data::new("SMSG_LEVELUP_INFO", 0x1D4),

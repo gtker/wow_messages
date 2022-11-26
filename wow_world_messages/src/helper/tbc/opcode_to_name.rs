@@ -364,7 +364,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x01ce => "CMSG_QUERY_TIME",
         0x01cf => "SMSG_QUERY_TIME_RESPONSE",
         0x01d0 => "SMSG_LOG_XPGAIN",
-        0x01d1 => "SMSG_AURACASTLOG",
         0x01d2 => "CMSG_RECLAIM_CORPSE",
         0x01d3 => "CMSG_WRAP_ITEM",
         0x01d4 => "SMSG_LEVELUP_INFO",
