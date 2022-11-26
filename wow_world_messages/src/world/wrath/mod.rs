@@ -344,6 +344,8 @@ pub use crate::shared::cmsg_arena_team_invite_tbc_wrath::CMSG_ARENA_TEAM_INVITE;
 
 pub use crate::shared::cmsg_arena_team_leave_tbc_wrath::CMSG_ARENA_TEAM_LEAVE;
 
+pub use crate::shared::cmsg_arena_team_remove_tbc_wrath::CMSG_ARENA_TEAM_REMOVE;
+
 pub use crate::shared::cmsg_arena_team_roster_tbc_wrath::CMSG_ARENA_TEAM_ROSTER;
 
 pub use crate::shared::cmsg_attackstop_vanilla_tbc_wrath::CMSG_ATTACKSTOP;

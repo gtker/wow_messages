@@ -319,6 +319,7 @@ use crate::world::tbc::CMSG_ARENA_TEAM_INVITE;
 use crate::world::tbc::CMSG_ARENA_TEAM_ACCEPT;
 use crate::world::tbc::CMSG_ARENA_TEAM_DECLINE;
 use crate::world::tbc::CMSG_ARENA_TEAM_LEAVE;
+use crate::world::tbc::CMSG_ARENA_TEAM_REMOVE;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Client;
 use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Client;
 use crate::world::tbc::CMSG_REALM_SPLIT;
@@ -639,6 +640,7 @@ pub enum ClientOpcodeMessage {
     CMSG_ARENA_TEAM_ACCEPT(CMSG_ARENA_TEAM_ACCEPT),
     CMSG_ARENA_TEAM_DECLINE(CMSG_ARENA_TEAM_DECLINE),
     CMSG_ARENA_TEAM_LEAVE(CMSG_ARENA_TEAM_LEAVE),
+    CMSG_ARENA_TEAM_REMOVE(CMSG_ARENA_TEAM_REMOVE),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Client),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Client),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
@@ -961,6 +963,7 @@ impl ClientOpcodeMessage {
             0x0351 => Ok(Self::CMSG_ARENA_TEAM_ACCEPT(<CMSG_ARENA_TEAM_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0351, size: body_size, io, } } else { a } })?)),
             0x0352 => Ok(Self::CMSG_ARENA_TEAM_DECLINE(<CMSG_ARENA_TEAM_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0352, size: body_size, io, } } else { a } })?)),
             0x0353 => Ok(Self::CMSG_ARENA_TEAM_LEAVE(<CMSG_ARENA_TEAM_LEAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0353, size: body_size, io, } } else { a } })?)),
+            0x0354 => Ok(Self::CMSG_ARENA_TEAM_REMOVE(<CMSG_ARENA_TEAM_REMOVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0354, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038C, size: body_size, io, } } else { a } })?)),
@@ -1351,6 +1354,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ARENA_TEAM_DECLINE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_ARENA_TEAM_REMOVE(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
@@ -1674,6 +1678,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.write_unencrypted_client(w),
             Self::CMSG_ARENA_TEAM_DECLINE(c) => c.write_unencrypted_client(w),
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_ARENA_TEAM_REMOVE(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
@@ -1997,6 +2002,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_ARENA_TEAM_REMOVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2320,6 +2326,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_ARENA_TEAM_REMOVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2643,6 +2650,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_ARENA_TEAM_REMOVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -2966,6 +2974,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_ARENA_TEAM_REMOVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
@@ -3324,6 +3333,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_ARENA_TEAM_ACCEPT(_) => "CMSG_ARENA_TEAM_ACCEPT",
             ClientOpcodeMessage::CMSG_ARENA_TEAM_DECLINE(_) => "CMSG_ARENA_TEAM_DECLINE",
             ClientOpcodeMessage::CMSG_ARENA_TEAM_LEAVE(_) => "CMSG_ARENA_TEAM_LEAVE",
+            ClientOpcodeMessage::CMSG_ARENA_TEAM_REMOVE(_) => "CMSG_ARENA_TEAM_REMOVE",
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Client",
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Client",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
@@ -5192,6 +5202,12 @@ impl From<CMSG_ARENA_TEAM_DECLINE> for ClientOpcodeMessage {
 impl From<CMSG_ARENA_TEAM_LEAVE> for ClientOpcodeMessage {
     fn from(c: CMSG_ARENA_TEAM_LEAVE) -> Self {
         Self::CMSG_ARENA_TEAM_LEAVE(c)
+    }
+}
+
+impl From<CMSG_ARENA_TEAM_REMOVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_ARENA_TEAM_REMOVE) -> Self {
+        Self::CMSG_ARENA_TEAM_REMOVE(c)
     }
 }
 
