@@ -1,0 +1,5 @@
+cmsg CMSG_ARENA_TEAM_ROSTER = 0x034D {
+    u32 arena_team;
+} {
+    versions = "2.4.3 3";
+}

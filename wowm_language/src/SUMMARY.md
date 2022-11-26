@@ -230,6 +230,7 @@
 - [CMSG_AREATRIGGER](docs/cmsg_areatrigger.md)
 - [CMSG_AREA_SPIRIT_HEALER_QUERY](docs/cmsg_area_spirit_healer_query.md)
 - [CMSG_AREA_SPIRIT_HEALER_QUEUE](docs/cmsg_area_spirit_healer_queue.md)
+- [CMSG_ARENA_TEAM_ROSTER](docs/cmsg_arena_team_roster.md)
 - [CMSG_ATTACKSTOP](docs/cmsg_attackstop.md)
 - [CMSG_ATTACKSWING](docs/cmsg_attackswing.md)
 - [CMSG_AUCTION_LIST_BIDDER_ITEMS](docs/cmsg_auction_list_bidder_items.md)
