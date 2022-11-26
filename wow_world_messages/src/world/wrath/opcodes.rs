@@ -337,6 +337,7 @@ use crate::world::wrath::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST;
 use crate::world::wrath::CMSG_SET_TITLE;
 use crate::world::wrath::CMSG_CANCEL_MOUNT_AURA;
 use crate::world::wrath::CMSG_CANCEL_TEMP_ENCHANTMENT;
+use crate::world::wrath::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK;
 use crate::world::wrath::CMSG_REALM_SPLIT;
 use crate::world::wrath::CMSG_MOVE_CHNG_TRANSPORT;
 use crate::world::wrath::CMSG_TIME_SYNC_RESP;
@@ -675,6 +676,7 @@ pub enum ClientOpcodeMessage {
     CMSG_SET_TITLE(CMSG_SET_TITLE),
     CMSG_CANCEL_MOUNT_AURA(CMSG_CANCEL_MOUNT_AURA),
     CMSG_CANCEL_TEMP_ENCHANTMENT(CMSG_CANCEL_TEMP_ENCHANTMENT),
+    CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
     CMSG_MOVE_CHNG_TRANSPORT(CMSG_MOVE_CHNG_TRANSPORT),
     CMSG_TIME_SYNC_RESP(CMSG_TIME_SYNC_RESP),
@@ -1015,6 +1017,7 @@ impl ClientOpcodeMessage {
             0x0374 => Ok(Self::CMSG_SET_TITLE(<CMSG_SET_TITLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0374, size: body_size, io, } } else { a } })?)),
             0x0375 => Ok(Self::CMSG_CANCEL_MOUNT_AURA(<CMSG_CANCEL_MOUNT_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0375, size: body_size, io, } } else { a } })?)),
             0x0379 => Ok(Self::CMSG_CANCEL_TEMP_ENCHANTMENT(<CMSG_CANCEL_TEMP_ENCHANTMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0379, size: body_size, io, } } else { a } })?)),
+            0x0382 => Ok(Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(<CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0382, size: body_size, io, } } else { a } })?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038C, size: body_size, io, } } else { a } })?)),
             0x038D => Ok(Self::CMSG_MOVE_CHNG_TRANSPORT(<CMSG_MOVE_CHNG_TRANSPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038D, size: body_size, io, } } else { a } })?)),
             0x0391 => Ok(Self::CMSG_TIME_SYNC_RESP(<CMSG_TIME_SYNC_RESP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0391, size: body_size, io, } } else { a } })?)),
@@ -1423,6 +1426,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_TITLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TIME_SYNC_RESP(c) => c.write_encrypted_client(w, e),
@@ -1764,6 +1768,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_TITLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_TIME_SYNC_RESP(c) => c.write_unencrypted_client(w),
@@ -2105,6 +2110,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_TITLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2446,6 +2452,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_TITLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2787,6 +2794,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_TITLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3128,6 +3136,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_TITLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.astd_write_unencrypted_client(w).await,
@@ -3480,6 +3489,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_TITLE(_) => "CMSG_SET_TITLE",
             ClientOpcodeMessage::CMSG_CANCEL_MOUNT_AURA(_) => "CMSG_CANCEL_MOUNT_AURA",
             ClientOpcodeMessage::CMSG_CANCEL_TEMP_ENCHANTMENT(_) => "CMSG_CANCEL_TEMP_ENCHANTMENT",
+            ClientOpcodeMessage::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
             ClientOpcodeMessage::CMSG_MOVE_CHNG_TRANSPORT(_) => "CMSG_MOVE_CHNG_TRANSPORT",
             ClientOpcodeMessage::CMSG_TIME_SYNC_RESP(_) => "CMSG_TIME_SYNC_RESP",
@@ -5456,6 +5466,12 @@ impl From<CMSG_CANCEL_MOUNT_AURA> for ClientOpcodeMessage {
 impl From<CMSG_CANCEL_TEMP_ENCHANTMENT> for ClientOpcodeMessage {
     fn from(c: CMSG_CANCEL_TEMP_ENCHANTMENT) -> Self {
         Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c)
+    }
+}
+
+impl From<CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK) -> Self {
+        Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c)
     }
 }
 

@@ -1,0 +1,8 @@
+cmsg CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK = 0x0382 {
+    Guid player;
+    u32 counter;
+    MovementInfo info;
+    f32 new_speed;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}

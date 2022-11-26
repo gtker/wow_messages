@@ -314,6 +314,7 @@
 - [CMSG_DUEL_CANCELLED](docs/cmsg_duel_cancelled.md)
 - [CMSG_EMOTE](docs/cmsg_emote.md)
 - [CMSG_FAR_SIGHT](docs/cmsg_far_sight.md)
+- [CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK](docs/cmsg_force_flight_speed_change_ack.md)
 - [CMSG_FORCE_MOVE_ROOT_ACK](docs/cmsg_force_move_root_ack.md)
 - [CMSG_FORCE_MOVE_UNROOT_ACK](docs/cmsg_force_move_unroot_ack.md)
 - [CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK](docs/cmsg_force_run_back_speed_change_ack.md)

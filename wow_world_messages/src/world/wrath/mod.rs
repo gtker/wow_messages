@@ -64,6 +64,8 @@ pub(crate) mod cmsg_deleteequipment_set;
 pub use cmsg_deleteequipment_set::*;
 pub(crate) mod cmsg_emote;
 pub use cmsg_emote::*;
+pub(crate) mod cmsg_force_flight_speed_change_ack;
+pub use cmsg_force_flight_speed_change_ack::*;
 pub(crate) mod cmsg_force_move_root_ack;
 pub use cmsg_force_move_root_ack::*;
 pub(crate) mod cmsg_force_move_unroot_ack;
