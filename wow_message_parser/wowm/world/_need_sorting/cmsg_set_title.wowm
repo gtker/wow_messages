@@ -1,0 +1,5 @@
+cmsg CMSG_SET_TITLE = 0x0374 {
+    u32 title;
+} {
+    versions = "2.4.3 3";
+}
