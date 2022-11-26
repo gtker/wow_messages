@@ -473,6 +473,7 @@
 - [CMSG_SET_CONTACT_NOTES](docs/cmsg_set_contact_notes.md)
 - [CMSG_SET_FACTION_ATWAR](docs/cmsg_set_faction_atwar.md)
 - [CMSG_SET_FACTION_INACTIVE](docs/cmsg_set_faction_inactive.md)
+- [CMSG_SET_LFG_COMMENT](docs/cmsg_set_lfg_comment.md)
 - [CMSG_SET_SELECTION](docs/cmsg_set_selection.md)
 - [CMSG_SET_TARGET_OBSOLETE](docs/cmsg_set_target_obsolete.md)
 - [CMSG_SET_TRADE_GOLD](docs/cmsg_set_trade_gold.md)

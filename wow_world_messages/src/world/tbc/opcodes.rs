@@ -325,6 +325,7 @@ use crate::world::tbc::CMSG_ARENA_TEAM_LEADER;
 use crate::world::tbc::CMSG_BATTLEMASTER_JOIN_ARENA;
 use crate::world::tbc::MSG_MOVE_START_ASCEND_Client;
 use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Client;
+use crate::world::tbc::CMSG_SET_LFG_COMMENT;
 use crate::world::tbc::CMSG_REALM_SPLIT;
 use crate::world::tbc::CMSG_MOVE_CHNG_TRANSPORT;
 use crate::world::tbc::CMSG_TIME_SYNC_RESP;
@@ -649,6 +650,7 @@ pub enum ClientOpcodeMessage {
     CMSG_BATTLEMASTER_JOIN_ARENA(CMSG_BATTLEMASTER_JOIN_ARENA),
     MSG_MOVE_START_ASCEND(MSG_MOVE_START_ASCEND_Client),
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Client),
+    CMSG_SET_LFG_COMMENT(CMSG_SET_LFG_COMMENT),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
     CMSG_MOVE_CHNG_TRANSPORT(CMSG_MOVE_CHNG_TRANSPORT),
     CMSG_TIME_SYNC_RESP(CMSG_TIME_SYNC_RESP),
@@ -975,6 +977,7 @@ impl ClientOpcodeMessage {
             0x0358 => Ok(Self::CMSG_BATTLEMASTER_JOIN_ARENA(<CMSG_BATTLEMASTER_JOIN_ARENA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0358, size: body_size, io, } } else { a } })?)),
             0x0359 => Ok(Self::MSG_MOVE_START_ASCEND(<MSG_MOVE_START_ASCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0359, size: body_size, io, } } else { a } })?)),
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
+            0x0366 => Ok(Self::CMSG_SET_LFG_COMMENT(<CMSG_SET_LFG_COMMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0366, size: body_size, io, } } else { a } })?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038C, size: body_size, io, } } else { a } })?)),
             0x038D => Ok(Self::CMSG_MOVE_CHNG_TRANSPORT(<CMSG_MOVE_CHNG_TRANSPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038D, size: body_size, io, } } else { a } })?)),
             0x0391 => Ok(Self::CMSG_TIME_SYNC_RESP(<CMSG_TIME_SYNC_RESP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0391, size: body_size, io, } } else { a } })?)),
@@ -1369,6 +1372,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SET_LFG_COMMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TIME_SYNC_RESP(c) => c.write_encrypted_client(w, e),
@@ -1696,6 +1700,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SET_LFG_COMMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_TIME_SYNC_RESP(c) => c.write_unencrypted_client(w),
@@ -2023,6 +2028,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2350,6 +2356,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2677,6 +2684,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3004,6 +3012,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.astd_write_unencrypted_client(w).await,
@@ -3366,6 +3375,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN_ARENA(_) => "CMSG_BATTLEMASTER_JOIN_ARENA",
             ClientOpcodeMessage::MSG_MOVE_START_ASCEND(_) => "MSG_MOVE_START_ASCEND_Client",
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Client",
+            ClientOpcodeMessage::CMSG_SET_LFG_COMMENT(_) => "CMSG_SET_LFG_COMMENT",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
             ClientOpcodeMessage::CMSG_MOVE_CHNG_TRANSPORT(_) => "CMSG_MOVE_CHNG_TRANSPORT",
             ClientOpcodeMessage::CMSG_TIME_SYNC_RESP(_) => "CMSG_TIME_SYNC_RESP",
@@ -5268,6 +5278,12 @@ impl From<MSG_MOVE_START_ASCEND_Client> for ClientOpcodeMessage {
 impl From<MSG_MOVE_STOP_ASCEND_Client> for ClientOpcodeMessage {
     fn from(c: MSG_MOVE_STOP_ASCEND_Client) -> Self {
         Self::MSG_MOVE_STOP_ASCEND(c)
+    }
+}
+
+impl From<CMSG_SET_LFG_COMMENT> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_LFG_COMMENT) -> Self {
+        Self::CMSG_SET_LFG_COMMENT(c)
     }
 }
 

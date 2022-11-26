@@ -1,0 +1,5 @@
+cmsg CMSG_SET_LFG_COMMENT = 0x0366 {
+    CString comment;
+} {
+    versions = "2.4.3 3";
+}
