@@ -445,7 +445,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_MAIL_CREATE_TEXT_ITEM", 0x24A),
     Data::new("SMSG_SPELLLOGMISS", 0x24B),
     Data::new("SMSG_SPELLLOGEXECUTE", 0x24C),
-    Data::new("SMSG_DEBUGAURAPROC", 0x24D),
     Data::new("SMSG_PERIODICAURALOG", 0x24E),
     Data::new("SMSG_SPELLDAMAGESHIELD", 0x24F),
     Data::new("SMSG_SPELLNONMELEEDAMAGELOG", 0x250),

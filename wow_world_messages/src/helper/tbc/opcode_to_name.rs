@@ -444,7 +444,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x024a => "CMSG_MAIL_CREATE_TEXT_ITEM",
         0x024b => "SMSG_SPELLLOGMISS",
         0x024c => "SMSG_SPELLLOGEXECUTE",
-        0x024d => "SMSG_DEBUGAURAPROC",
         0x024e => "SMSG_PERIODICAURALOG",
         0x024f => "SMSG_SPELLDAMAGESHIELD",
         0x0250 => "SMSG_SPELLNONMELEEDAMAGELOG",
