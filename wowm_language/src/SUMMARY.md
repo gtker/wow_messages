@@ -480,6 +480,7 @@
 - [CMSG_SET_LFG_COMMENT](docs/cmsg_set_lfg_comment.md)
 - [CMSG_SET_SELECTION](docs/cmsg_set_selection.md)
 - [CMSG_SET_TARGET_OBSOLETE](docs/cmsg_set_target_obsolete.md)
+- [CMSG_SET_TAXI_BENCHMARK_MODE](docs/cmsg_set_taxi_benchmark_mode.md)
 - [CMSG_SET_TITLE](docs/cmsg_set_title.md)
 - [CMSG_SET_TRADE_GOLD](docs/cmsg_set_trade_gold.md)
 - [CMSG_SET_TRADE_ITEM](docs/cmsg_set_trade_item.md)

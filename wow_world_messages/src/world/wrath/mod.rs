@@ -722,6 +722,8 @@ pub use crate::shared::cmsg_set_lfg_comment_tbc_wrath::CMSG_SET_LFG_COMMENT;
 
 pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
 
+pub use crate::shared::cmsg_set_taxi_benchmark_mode_tbc_wrath::CMSG_SET_TAXI_BENCHMARK_MODE;
+
 pub use crate::shared::cmsg_set_title_tbc_wrath::CMSG_SET_TITLE;
 
 pub use crate::shared::cmsg_set_trade_gold_vanilla_tbc_wrath::CMSG_SET_TRADE_GOLD;

@@ -1,0 +1,6 @@
+cmsg CMSG_SET_TAXI_BENCHMARK_MODE = 0x0389 {
+    u8 mode;
+} {
+    versions = "2.4.3 3";
+    comment = "Sent when the client runs `/timetest 1`.";
+}

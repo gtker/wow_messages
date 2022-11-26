@@ -331,6 +331,7 @@ use crate::world::tbc::CMSG_CANCEL_MOUNT_AURA;
 use crate::world::tbc::CMSG_CANCEL_TEMP_ENCHANTMENT;
 use crate::world::tbc::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK;
 use crate::world::tbc::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK;
+use crate::world::tbc::CMSG_SET_TAXI_BENCHMARK_MODE;
 use crate::world::tbc::CMSG_REALM_SPLIT;
 use crate::world::tbc::CMSG_MOVE_CHNG_TRANSPORT;
 use crate::world::tbc::CMSG_TIME_SYNC_RESP;
@@ -661,6 +662,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CANCEL_TEMP_ENCHANTMENT(CMSG_CANCEL_TEMP_ENCHANTMENT),
     CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK),
     CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK),
+    CMSG_SET_TAXI_BENCHMARK_MODE(CMSG_SET_TAXI_BENCHMARK_MODE),
     CMSG_REALM_SPLIT(CMSG_REALM_SPLIT),
     CMSG_MOVE_CHNG_TRANSPORT(CMSG_MOVE_CHNG_TRANSPORT),
     CMSG_TIME_SYNC_RESP(CMSG_TIME_SYNC_RESP),
@@ -993,6 +995,7 @@ impl ClientOpcodeMessage {
             0x0379 => Ok(Self::CMSG_CANCEL_TEMP_ENCHANTMENT(<CMSG_CANCEL_TEMP_ENCHANTMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0379, size: body_size, io, } } else { a } })?)),
             0x0382 => Ok(Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(<CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0382, size: body_size, io, } } else { a } })?)),
             0x0384 => Ok(Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0384, size: body_size, io, } } else { a } })?)),
+            0x0389 => Ok(Self::CMSG_SET_TAXI_BENCHMARK_MODE(<CMSG_SET_TAXI_BENCHMARK_MODE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0389, size: body_size, io, } } else { a } })?)),
             0x038C => Ok(Self::CMSG_REALM_SPLIT(<CMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038C, size: body_size, io, } } else { a } })?)),
             0x038D => Ok(Self::CMSG_MOVE_CHNG_TRANSPORT(<CMSG_MOVE_CHNG_TRANSPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038D, size: body_size, io, } } else { a } })?)),
             0x0391 => Ok(Self::CMSG_TIME_SYNC_RESP(<CMSG_TIME_SYNC_RESP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0391, size: body_size, io, } } else { a } })?)),
@@ -1393,6 +1396,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SET_TAXI_BENCHMARK_MODE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REALM_SPLIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TIME_SYNC_RESP(c) => c.write_encrypted_client(w, e),
@@ -1726,6 +1730,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SET_TAXI_BENCHMARK_MODE(c) => c.write_unencrypted_client(w),
             Self::CMSG_REALM_SPLIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_TIME_SYNC_RESP(c) => c.write_unencrypted_client(w),
@@ -2059,6 +2064,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_TAXI_BENCHMARK_MODE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2392,6 +2398,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SET_TAXI_BENCHMARK_MODE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2725,6 +2732,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_TAXI_BENCHMARK_MODE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3058,6 +3066,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SET_TAXI_BENCHMARK_MODE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.astd_write_unencrypted_client(w).await,
@@ -3426,6 +3435,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CANCEL_TEMP_ENCHANTMENT(_) => "CMSG_CANCEL_TEMP_ENCHANTMENT",
             ClientOpcodeMessage::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK",
+            ClientOpcodeMessage::CMSG_SET_TAXI_BENCHMARK_MODE(_) => "CMSG_SET_TAXI_BENCHMARK_MODE",
             ClientOpcodeMessage::CMSG_REALM_SPLIT(_) => "CMSG_REALM_SPLIT",
             ClientOpcodeMessage::CMSG_MOVE_CHNG_TRANSPORT(_) => "CMSG_MOVE_CHNG_TRANSPORT",
             ClientOpcodeMessage::CMSG_TIME_SYNC_RESP(_) => "CMSG_TIME_SYNC_RESP",
@@ -5364,6 +5374,12 @@ impl From<CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
 impl From<CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK> for ClientOpcodeMessage {
     fn from(c: CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK) -> Self {
         Self::CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK(c)
+    }
+}
+
+impl From<CMSG_SET_TAXI_BENCHMARK_MODE> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_TAXI_BENCHMARK_MODE) -> Self {
+        Self::CMSG_SET_TAXI_BENCHMARK_MODE(c)
     }
 }
 
