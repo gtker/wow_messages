@@ -1,0 +1,10 @@
+smsg MSG_MOVE_KNOCK_BACK_Server = 0x00F1 {
+    PackedGuid player;
+    MovementInfo info;
+    f32 sin_angle;
+    f32 cos_angle;
+    f32 x_y_speed;
+    f32 velocity;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}

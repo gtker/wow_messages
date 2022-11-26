@@ -135,6 +135,8 @@ pub(crate) mod msg_move_jump_client;
 pub use msg_move_jump_client::*;
 pub(crate) mod msg_move_jump_server;
 pub use msg_move_jump_server::*;
+pub(crate) mod msg_move_knock_back_server;
+pub use msg_move_knock_back_server::*;
 pub(crate) mod msg_move_root_server;
 pub use msg_move_root_server::*;
 pub(crate) mod msg_move_set_facing_client;

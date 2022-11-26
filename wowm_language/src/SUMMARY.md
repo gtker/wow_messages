@@ -569,6 +569,7 @@
 - [MSG_MOVE_JUMP](docs/msg_move_jump.md)
 - [MSG_MOVE_JUMP_Client](docs/msg_move_jump_client.md)
 - [MSG_MOVE_JUMP_Server](docs/msg_move_jump_server.md)
+- [MSG_MOVE_KNOCK_BACK_Server](docs/msg_move_knock_back_server.md)
 - [MSG_MOVE_ROOT_Server](docs/msg_move_root_server.md)
 - [MSG_MOVE_SET_FACING](docs/msg_move_set_facing.md)
 - [MSG_MOVE_SET_FACING_Client](docs/msg_move_set_facing_client.md)
