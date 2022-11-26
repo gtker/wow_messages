@@ -227,6 +227,7 @@ pub mod cmsg_skill_buy_step_tbc_wrath;
 pub mod cmsg_spirit_healer_activate_vanilla_tbc_wrath;
 pub mod cmsg_split_item_vanilla_tbc;
 pub mod cmsg_stable_pet_vanilla_tbc_wrath;
+pub mod cmsg_stable_revive_pet_tbc_wrath;
 pub mod cmsg_stable_swap_pet_vanilla_tbc_wrath;
 pub mod cmsg_standstatechange_vanilla_tbc_wrath;
 pub mod cmsg_summon_response_tbc_wrath;

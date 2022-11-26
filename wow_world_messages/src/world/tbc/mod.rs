@@ -682,6 +682,8 @@ pub use crate::shared::cmsg_split_item_vanilla_tbc::CMSG_SPLIT_ITEM;
 
 pub use crate::shared::cmsg_stable_pet_vanilla_tbc_wrath::CMSG_STABLE_PET;
 
+pub use crate::shared::cmsg_stable_revive_pet_tbc_wrath::CMSG_STABLE_REVIVE_PET;
+
 pub use crate::shared::cmsg_stable_swap_pet_vanilla_tbc_wrath::CMSG_STABLE_SWAP_PET;
 
 pub use crate::shared::cmsg_standstatechange_vanilla_tbc_wrath::CMSG_STANDSTATECHANGE;

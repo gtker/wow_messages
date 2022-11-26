@@ -706,6 +706,8 @@ pub use crate::shared::cmsg_spirit_healer_activate_vanilla_tbc_wrath::CMSG_SPIRI
 
 pub use crate::shared::cmsg_stable_pet_vanilla_tbc_wrath::CMSG_STABLE_PET;
 
+pub use crate::shared::cmsg_stable_revive_pet_tbc_wrath::CMSG_STABLE_REVIVE_PET;
+
 pub use crate::shared::cmsg_stable_swap_pet_vanilla_tbc_wrath::CMSG_STABLE_SWAP_PET;
 
 pub use crate::shared::cmsg_standstatechange_vanilla_tbc_wrath::CMSG_STANDSTATECHANGE;

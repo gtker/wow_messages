@@ -495,7 +495,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_UNSTABLE_PET", 0x271),
     Data::new("CMSG_BUY_STABLE_SLOT", 0x272),
     Data::new("SMSG_STABLE_RESULT", 0x273),
-    Data::new("CMSG_STABLE_REVIVE_PET", 0x274),
+    Data::nyi("CMSG_STABLE_REVIVE_PET", 0x274),
     Data::new("CMSG_STABLE_SWAP_PET", 0x275),
     Data::new("MSG_QUEST_PUSH_RESULT", 0x276),
     Data::new("SMSG_PLAY_MUSIC", 0x277),

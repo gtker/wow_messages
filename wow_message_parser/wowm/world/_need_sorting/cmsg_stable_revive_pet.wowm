@@ -1,0 +1,5 @@
+cmsg CMSG_STABLE_REVIVE_PET = 0x0274 {
+    
+} {
+    versions = "2.4.3 3.3.5";
+}

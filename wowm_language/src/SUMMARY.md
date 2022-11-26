@@ -471,6 +471,7 @@
 - [CMSG_SPIRIT_HEALER_ACTIVATE](docs/cmsg_spirit_healer_activate.md)
 - [CMSG_SPLIT_ITEM](docs/cmsg_split_item.md)
 - [CMSG_STABLE_PET](docs/cmsg_stable_pet.md)
+- [CMSG_STABLE_REVIVE_PET](docs/cmsg_stable_revive_pet.md)
 - [CMSG_STABLE_SWAP_PET](docs/cmsg_stable_swap_pet.md)
 - [CMSG_STANDSTATECHANGE](docs/cmsg_standstatechange.md)
 - [CMSG_SUMMON_RESPONSE](docs/cmsg_summon_response.md)
