@@ -946,6 +946,10 @@ pub use crate::shared::msg_query_next_mail_time_server_tbc_wrath::MSG_QUERY_NEXT
 
 pub use crate::shared::msg_raid_ready_check_client_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Client;
 
+pub use crate::shared::msg_raid_ready_check_confirm_client_tbc_wrath::MSG_RAID_READY_CHECK_CONFIRM_Client;
+
+pub use crate::shared::msg_raid_ready_check_confirm_server_tbc_wrath::MSG_RAID_READY_CHECK_CONFIRM_Server;
+
 pub use crate::shared::msg_raid_ready_check_server_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Server;
 
 pub use crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client;

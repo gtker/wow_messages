@@ -349,6 +349,7 @@ use crate::world::wrath::CMSG_REALM_SPLIT;
 use crate::world::wrath::CMSG_MOVE_CHNG_TRANSPORT;
 use crate::world::wrath::MSG_PARTY_ASSIGNMENT_Client;
 use crate::world::wrath::CMSG_TIME_SYNC_RESP;
+use crate::world::wrath::MSG_RAID_READY_CHECK_CONFIRM_Client;
 use crate::world::wrath::CMSG_VOICE_SESSION_ENABLE;
 use crate::world::wrath::CMSG_SET_ACTIVE_VOICE_CHANNEL;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
@@ -696,6 +697,7 @@ pub enum ClientOpcodeMessage {
     CMSG_MOVE_CHNG_TRANSPORT(CMSG_MOVE_CHNG_TRANSPORT),
     MSG_PARTY_ASSIGNMENT(MSG_PARTY_ASSIGNMENT_Client),
     CMSG_TIME_SYNC_RESP(CMSG_TIME_SYNC_RESP),
+    MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Client),
     CMSG_VOICE_SESSION_ENABLE(CMSG_VOICE_SESSION_ENABLE),
     CMSG_SET_ACTIVE_VOICE_CHANNEL(CMSG_SET_ACTIVE_VOICE_CHANNEL),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
@@ -1045,6 +1047,7 @@ impl ClientOpcodeMessage {
             0x038D => Ok(Self::CMSG_MOVE_CHNG_TRANSPORT(<CMSG_MOVE_CHNG_TRANSPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038D, size: body_size, io, } } else { a } })?)),
             0x038E => Ok(Self::MSG_PARTY_ASSIGNMENT(<MSG_PARTY_ASSIGNMENT_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038E, size: body_size, io, } } else { a } })?)),
             0x0391 => Ok(Self::CMSG_TIME_SYNC_RESP(<CMSG_TIME_SYNC_RESP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0391, size: body_size, io, } } else { a } })?)),
+            0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
             0x03AF => Ok(Self::CMSG_VOICE_SESSION_ENABLE(<CMSG_VOICE_SESSION_ENABLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AF, size: body_size, io, } } else { a } })?)),
             0x03D3 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D3, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
@@ -1462,6 +1465,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_encrypted_client(w, e),
             Self::MSG_PARTY_ASSIGNMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TIME_SYNC_RESP(c) => c.write_encrypted_client(w, e),
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
@@ -1812,6 +1816,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.write_unencrypted_client(w),
             Self::MSG_PARTY_ASSIGNMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_TIME_SYNC_RESP(c) => c.write_unencrypted_client(w),
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_client(w),
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
@@ -2162,6 +2167,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PARTY_ASSIGNMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2512,6 +2518,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PARTY_ASSIGNMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2862,6 +2869,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PARTY_ASSIGNMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3212,6 +3220,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_MOVE_CHNG_TRANSPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PARTY_ASSIGNMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TIME_SYNC_RESP(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
@@ -3573,6 +3582,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_MOVE_CHNG_TRANSPORT(_) => "CMSG_MOVE_CHNG_TRANSPORT",
             ClientOpcodeMessage::MSG_PARTY_ASSIGNMENT(_) => "MSG_PARTY_ASSIGNMENT_Client",
             ClientOpcodeMessage::CMSG_TIME_SYNC_RESP(_) => "CMSG_TIME_SYNC_RESP",
+            ClientOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Client",
             ClientOpcodeMessage::CMSG_VOICE_SESSION_ENABLE(_) => "CMSG_VOICE_SESSION_ENABLE",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
@@ -5621,6 +5631,12 @@ impl From<CMSG_TIME_SYNC_RESP> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_RAID_READY_CHECK_CONFIRM_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_RAID_READY_CHECK_CONFIRM_Client) -> Self {
+        Self::MSG_RAID_READY_CHECK_CONFIRM(c)
+    }
+}
+
 impl From<CMSG_VOICE_SESSION_ENABLE> for ClientOpcodeMessage {
     fn from(c: CMSG_VOICE_SESSION_ENABLE) -> Self {
         Self::CMSG_VOICE_SESSION_ENABLE(c)
@@ -5951,6 +5967,7 @@ use crate::world::wrath::MSG_MOVE_SET_FLIGHT_SPEED_Server;
 use crate::world::wrath::SMSG_REALM_SPLIT;
 use crate::world::wrath::SMSG_TIME_SYNC_REQ;
 use crate::world::wrath::MSG_MOVE_UPDATE_CAN_FLY_Server;
+use crate::world::wrath::MSG_RAID_READY_CHECK_CONFIRM_Server;
 use crate::world::wrath::SMSG_GM_MESSAGECHAT;
 use crate::world::wrath::SMSG_FEATURE_SYSTEM_STATUS;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
@@ -6301,6 +6318,7 @@ pub enum ServerOpcodeMessage {
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
     MSG_MOVE_UPDATE_CAN_FLY(MSG_MOVE_UPDATE_CAN_FLY_Server),
+    MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Server),
     SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
     SMSG_FEATURE_SYSTEM_STATUS(SMSG_FEATURE_SYSTEM_STATUS),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
@@ -6653,6 +6671,7 @@ impl ServerOpcodeMessage {
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
             0x03AD => Ok(Self::MSG_MOVE_UPDATE_CAN_FLY(<MSG_MOVE_UPDATE_CAN_FLY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AD, size: body_size, io, } } else { a } })?)),
+            0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
             0x03B3 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B3, size: body_size, io, } } else { a } })?)),
             0x03C9 => Ok(Self::SMSG_FEATURE_SYSTEM_STATUS(<SMSG_FEATURE_SYSTEM_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C9, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
@@ -7154,6 +7173,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_encrypted_server(w, e),
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
@@ -7507,6 +7527,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_unencrypted_server(w),
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
@@ -7860,6 +7881,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8213,6 +8235,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8566,6 +8589,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8919,6 +8943,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
@@ -9282,6 +9307,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
             ServerOpcodeMessage::MSG_MOVE_UPDATE_CAN_FLY(_) => "MSG_MOVE_UPDATE_CAN_FLY_Server",
+            ServerOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
             ServerOpcodeMessage::SMSG_FEATURE_SYSTEM_STATUS(_) => "SMSG_FEATURE_SYSTEM_STATUS",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
@@ -11335,6 +11361,12 @@ impl From<SMSG_TIME_SYNC_REQ> for ServerOpcodeMessage {
 impl From<MSG_MOVE_UPDATE_CAN_FLY_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_UPDATE_CAN_FLY_Server) -> Self {
         Self::MSG_MOVE_UPDATE_CAN_FLY(c)
+    }
+}
+
+impl From<MSG_RAID_READY_CHECK_CONFIRM_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_RAID_READY_CHECK_CONFIRM_Server) -> Self {
+        Self::MSG_RAID_READY_CHECK_CONFIRM(c)
     }
 }
 

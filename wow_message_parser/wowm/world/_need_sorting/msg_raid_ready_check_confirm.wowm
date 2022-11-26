@@ -1,0 +1,14 @@
+cmsg MSG_RAID_READY_CHECK_CONFIRM_Client = 0x03AE {
+    optional set {
+        u8 state;
+    }
+} {
+    versions = "2.4.3 3";
+}
+
+smsg MSG_RAID_READY_CHECK_CONFIRM_Server = 0x03AE {
+    Guid player;
+    u8 state;
+} {
+    versions = "2.4.3 3";
+}

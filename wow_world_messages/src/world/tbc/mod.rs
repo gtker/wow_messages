@@ -942,6 +942,10 @@ pub use crate::shared::msg_quest_push_result_vanilla_tbc::MSG_QUEST_PUSH_RESULT;
 
 pub use crate::shared::msg_raid_ready_check_client_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Client;
 
+pub use crate::shared::msg_raid_ready_check_confirm_client_tbc_wrath::MSG_RAID_READY_CHECK_CONFIRM_Client;
+
+pub use crate::shared::msg_raid_ready_check_confirm_server_tbc_wrath::MSG_RAID_READY_CHECK_CONFIRM_Server;
+
 pub use crate::shared::msg_raid_ready_check_server_vanilla_tbc_wrath::MSG_RAID_READY_CHECK_Server;
 
 pub use crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client;
