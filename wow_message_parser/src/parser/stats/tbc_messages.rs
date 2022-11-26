@@ -653,7 +653,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_CHAT_PLAYER_AMBIGUOUS", 0x32D),
     Data::new("SMSG_SPELLINSTAKILLLOG", 0x32F),
     Data::new("SMSG_SPELL_UPDATE_CHAIN_TARGETS", 0x330),
-    Data::new("CMSG_CHAT_FILTERED", 0x331),
     Data::nyi("SMSG_EXPECTED_SPAM_RECORDS", 0x332),
     Data::new("SMSG_SPELLSTEALLOG", 0x333),
     Data::new("SMSG_CHARACTER_PROFILE", 0x338),
