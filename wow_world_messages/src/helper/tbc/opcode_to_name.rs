@@ -289,7 +289,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x017e => "SMSG_GOSSIP_COMPLETE",
         0x017f => "CMSG_NPC_TEXT_QUERY",
         0x0180 => "SMSG_NPC_TEXT_UPDATE",
-        0x0181 => "SMSG_NPC_WONT_TALK",
         0x0182 => "CMSG_QUESTGIVER_STATUS_QUERY",
         0x0183 => "SMSG_QUESTGIVER_STATUS",
         0x0184 => "CMSG_QUESTGIVER_HELLO",

@@ -290,7 +290,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_GOSSIP_COMPLETE", 0x17E),
     Data::new("CMSG_NPC_TEXT_QUERY", 0x17F),
     Data::new("SMSG_NPC_TEXT_UPDATE", 0x180),
-    Data::new("SMSG_NPC_WONT_TALK", 0x181),
     Data::new("CMSG_QUESTGIVER_STATUS_QUERY", 0x182),
     Data::new("SMSG_QUESTGIVER_STATUS", 0x183),
     Data::new("CMSG_QUESTGIVER_HELLO", 0x184),
