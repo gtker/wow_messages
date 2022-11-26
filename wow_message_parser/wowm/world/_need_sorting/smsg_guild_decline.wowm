@@ -1,0 +1,5 @@
+smsg SMSG_GUILD_DECLINE = 0x0086 {
+    CString player;
+} {
+    versions = "2.4.3 3";
+}

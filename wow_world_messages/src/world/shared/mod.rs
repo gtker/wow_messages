@@ -464,6 +464,7 @@ pub mod smsg_group_destroyed_vanilla_tbc_wrath;
 pub mod smsg_group_invite_vanilla_tbc;
 pub mod smsg_group_set_leader_vanilla_tbc_wrath;
 pub mod smsg_group_uninvite_vanilla_tbc_wrath;
+pub mod smsg_guild_decline_tbc_wrath;
 pub mod smsg_guild_event_tbc_wrath;
 pub mod smsg_guild_info_vanilla_tbc;
 pub mod smsg_guild_invite_vanilla_tbc_wrath;

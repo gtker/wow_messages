@@ -804,6 +804,7 @@
 - [SMSG_GROUP_SET_LEADER](docs/smsg_group_set_leader.md)
 - [SMSG_GROUP_UNINVITE](docs/smsg_group_uninvite.md)
 - [SMSG_GUILD_COMMAND_RESULT](docs/smsg_guild_command_result.md)
+- [SMSG_GUILD_DECLINE](docs/smsg_guild_decline.md)
 - [SMSG_GUILD_EVENT](docs/smsg_guild_event.md)
 - [SMSG_GUILD_INFO](docs/smsg_guild_info.md)
 - [SMSG_GUILD_INVITE](docs/smsg_guild_invite.md)
