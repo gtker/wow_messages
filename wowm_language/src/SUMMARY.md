@@ -931,6 +931,7 @@
 - [SMSG_RECEIVED_MAIL](docs/smsg_received_mail.md)
 - [SMSG_REMOVED_SPELL](docs/smsg_removed_spell.md)
 - [SMSG_RESISTLOG](docs/smsg_resistlog.md)
+- [SMSG_RESURRECT_FAILED](docs/smsg_resurrect_failed.md)
 - [SMSG_RESURRECT_REQUEST](docs/smsg_resurrect_request.md)
 - [SMSG_SELL_ITEM](docs/smsg_sell_item.md)
 - [SMSG_SEND_MAIL_RESULT](docs/smsg_send_mail_result.md)

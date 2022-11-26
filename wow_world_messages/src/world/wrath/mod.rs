@@ -1282,6 +1282,8 @@ pub use crate::shared::smsg_realm_split_tbc_wrath::SMSG_REALM_SPLIT;
 
 pub use crate::shared::smsg_received_mail_vanilla_tbc_wrath::SMSG_RECEIVED_MAIL;
 
+pub use crate::shared::smsg_resurrect_failed_tbc_wrath::SMSG_RESURRECT_FAILED;
+
 pub use crate::shared::smsg_resurrect_request_vanilla_tbc_wrath::SMSG_RESURRECT_REQUEST;
 
 pub use crate::shared::smsg_set_faction_visible_vanilla_tbc_wrath::SMSG_SET_FACTION_VISIBLE;
