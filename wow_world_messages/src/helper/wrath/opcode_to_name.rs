@@ -717,7 +717,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0386 => "SMSG_SPLINE_SET_FLIGHT_BACK_SPEED",
         0x0388 => "SMSG_FLIGHT_SPLINE_SYNC",
         0x0389 => "CMSG_SET_TAXI_BENCHMARK_MODE",
-        0x038a => "SMSG_JOINED_BATTLEGROUND_QUEUE",
         0x038b => "SMSG_REALM_SPLIT",
         0x038c => "CMSG_REALM_SPLIT",
         0x038d => "CMSG_MOVE_CHNG_TRANSPORT",

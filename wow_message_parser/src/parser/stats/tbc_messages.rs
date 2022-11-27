@@ -705,7 +705,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_SPLINE_SET_FLIGHT_BACK_SPEED", 0x386),
     Data::new("SMSG_FLIGHT_SPLINE_SYNC", 0x388),
     Data::new("CMSG_SET_TAXI_BENCHMARK_MODE", 0x389),
-    Data::new("SMSG_JOINED_BATTLEGROUND_QUEUE", 0x38A),
     Data::new("SMSG_REALM_SPLIT", 0x38B),
     Data::new("CMSG_REALM_SPLIT", 0x38C),
     Data::new("CMSG_MOVE_CHNG_TRANSPORT", 0x38D),
