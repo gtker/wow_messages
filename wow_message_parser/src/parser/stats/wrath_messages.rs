@@ -235,7 +235,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_SET_SELECTION", 0x13D),
     Data::new("CMSG_DELETEEQUIPMENT_SET", 0x13E),
     Data::new("CMSG_INSTANCE_LOCK_RESPONSE", 0x13F),
-    Data::new("CMSG_DEBUG_PASSIVE_AURA", 0x140),
     Data::new("CMSG_ATTACKSWING", 0x141),
     Data::new("CMSG_ATTACKSTOP", 0x142),
     Data::new("SMSG_ATTACKSTART", 0x143),
