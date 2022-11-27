@@ -713,7 +713,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0396 => "SMSG_RESET_FAILED_NOTIFY",
         0x0398 => "SMSG_LFG_DISABLED",
         0x039d => "SMSG_UPDATE_COMBO_POINTS",
-        0x039e => "SMSG_VOICE_SESSION_ROSTER_UPDATE",
         0x039f => "SMSG_VOICE_SESSION_LEAVE",
         0x03a0 => "SMSG_VOICE_SESSION_ADJUST_PRIORITY",
         0x03a2 => "SMSG_VOICE_SET_TALKER_MUTED",
