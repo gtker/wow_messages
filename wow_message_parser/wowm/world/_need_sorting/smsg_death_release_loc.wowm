@@ -1,0 +1,6 @@
+smsg SMSG_DEATH_RELEASE_LOC = 0x0378 {
+    Map map;
+    Vector3d position;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}

@@ -1590,6 +1590,8 @@ pub(crate) mod smsg_chat_restricted;
 pub use smsg_chat_restricted::*;
 pub(crate) mod smsg_creature_query_response;
 pub use smsg_creature_query_response::*;
+pub(crate) mod smsg_death_release_loc;
+pub use smsg_death_release_loc::*;
 pub(crate) mod smsg_defense_message;
 pub use smsg_defense_message::*;
 pub(crate) mod smsg_emote;
