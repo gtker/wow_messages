@@ -510,7 +510,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0291 => "SMSG_SERVER_MESSAGE",
         0x0292 => "CMSG_SET_SAVED_INSTANCE_EXTEND",
         0x0293 => "SMSG_LFG_OFFER_CONTINUE",
-        0x0294 => "CMSG_TEST_DROP_RATE",
         0x0295 => "SMSG_TEST_DROP_RATE_RESULT",
         0x0296 => "CMSG_LFG_GET_STATUS",
         0x0297 => "SMSG_SHOW_MAILBOX",
