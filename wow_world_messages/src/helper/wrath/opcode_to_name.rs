@@ -245,7 +245,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0149 => "SMSG_ATTACKSWING_CANT_ATTACK",
         0x014a => "SMSG_ATTACKERSTATEUPDATE",
         0x014b => "SMSG_BATTLEFIELD_PORT_DENIED",
-        0x014c => "CMSG_PERFORM_ACTION_SET",
         0x014d => "SMSG_RESUME_CAST_BAR",
         0x014e => "SMSG_CANCEL_COMBAT",
         0x014f => "SMSG_SPELLBREAKLOG",

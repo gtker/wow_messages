@@ -246,7 +246,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_ATTACKSWING_CANT_ATTACK", 0x149),
     Data::new("SMSG_ATTACKERSTATEUPDATE", 0x14A),
     Data::new("SMSG_BATTLEFIELD_PORT_DENIED", 0x14B),
-    Data::new("CMSG_PERFORM_ACTION_SET", 0x14C),
     Data::new("SMSG_RESUME_CAST_BAR", 0x14D),
     Data::new("SMSG_CANCEL_COMBAT", 0x14E),
     Data::new("SMSG_SPELLBREAKLOG", 0x14F),
