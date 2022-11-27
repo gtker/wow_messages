@@ -1128,6 +1128,8 @@ pub use crate::shared::smsg_fish_escaped_vanilla_tbc_wrath::SMSG_FISH_ESCAPED;
 
 pub use crate::shared::smsg_fish_not_hooked_vanilla_tbc_wrath::SMSG_FISH_NOT_HOOKED;
 
+pub use crate::shared::smsg_force_flight_back_speed_change_tbc_wrath::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE;
+
 pub use crate::shared::smsg_force_flight_speed_change_tbc_wrath::SMSG_FORCE_FLIGHT_SPEED_CHANGE;
 
 pub use crate::shared::smsg_force_run_back_speed_change_vanilla_tbc_wrath::SMSG_FORCE_RUN_BACK_SPEED_CHANGE;
