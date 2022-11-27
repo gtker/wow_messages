@@ -5867,6 +5867,7 @@ use crate::world::tbc::SMSG_FORCED_DEATH_UPDATE;
 use crate::world::tbc::MSG_MOVE_SET_FLIGHT_SPEED_Server;
 use crate::world::tbc::SMSG_FORCE_FLIGHT_SPEED_CHANGE;
 use crate::world::tbc::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE;
+use crate::world::tbc::SMSG_SPLINE_SET_FLIGHT_SPEED;
 use crate::world::tbc::SMSG_REALM_SPLIT;
 use crate::world::tbc::SMSG_TIME_SYNC_REQ;
 use crate::world::tbc::MSG_MOVE_START_DESCEND_Server;
@@ -6226,6 +6227,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_SET_FLIGHT_SPEED(MSG_MOVE_SET_FLIGHT_SPEED_Server),
     SMSG_FORCE_FLIGHT_SPEED_CHANGE(SMSG_FORCE_FLIGHT_SPEED_CHANGE),
     SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE),
+    SMSG_SPLINE_SET_FLIGHT_SPEED(SMSG_SPLINE_SET_FLIGHT_SPEED),
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Server),
@@ -6587,6 +6589,7 @@ impl ServerOpcodeMessage {
             0x037E => Ok(Self::MSG_MOVE_SET_FLIGHT_SPEED(<MSG_MOVE_SET_FLIGHT_SPEED_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x037E, size: body_size, io, } } else { a } })?)),
             0x0381 => Ok(Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(<SMSG_FORCE_FLIGHT_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0381, size: body_size, io, } } else { a } })?)),
             0x0383 => Ok(Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(<SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0383, size: body_size, io, } } else { a } })?)),
+            0x0385 => Ok(Self::SMSG_SPLINE_SET_FLIGHT_SPEED(<SMSG_SPLINE_SET_FLIGHT_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0385, size: body_size, io, } } else { a } })?)),
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
@@ -7016,6 +7019,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPLINE_SET_FLIGHT_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
@@ -7378,6 +7382,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPLINE_SET_FLIGHT_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
@@ -7740,6 +7745,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_SET_FLIGHT_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8102,6 +8108,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_SET_FLIGHT_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8464,6 +8471,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_SET_FLIGHT_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8826,6 +8834,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_SET_FLIGHT_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
@@ -9190,6 +9199,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_SET_FLIGHT_SPEED(_) => "MSG_MOVE_SET_FLIGHT_SPEED_Server",
             ServerOpcodeMessage::SMSG_FORCE_FLIGHT_SPEED_CHANGE(_) => "SMSG_FORCE_FLIGHT_SPEED_CHANGE",
             ServerOpcodeMessage::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(_) => "SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE",
+            ServerOpcodeMessage::SMSG_SPLINE_SET_FLIGHT_SPEED(_) => "SMSG_SPLINE_SET_FLIGHT_SPEED",
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
@@ -11297,6 +11307,12 @@ impl From<SMSG_FORCE_FLIGHT_SPEED_CHANGE> for ServerOpcodeMessage {
 impl From<SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE> for ServerOpcodeMessage {
     fn from(c: SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE) -> Self {
         Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c)
+    }
+}
+
+impl From<SMSG_SPLINE_SET_FLIGHT_SPEED> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_SET_FLIGHT_SPEED) -> Self {
+        Self::SMSG_SPLINE_SET_FLIGHT_SPEED(c)
     }
 }
 
