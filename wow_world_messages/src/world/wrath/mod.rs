@@ -1048,6 +1048,8 @@ pub use crate::shared::smsg_area_trigger_message_vanilla_tbc_wrath::SMSG_AREA_TR
 
 pub use crate::shared::smsg_arena_team_command_result_tbc_wrath::SMSG_ARENA_TEAM_COMMAND_RESULT;
 
+pub use crate::shared::smsg_arena_team_invite_tbc_wrath::SMSG_ARENA_TEAM_INVITE;
+
 pub use crate::shared::smsg_arena_team_query_response_tbc_wrath::SMSG_ARENA_TEAM_QUERY_RESPONSE;
 
 pub use crate::shared::smsg_attackstart_vanilla_tbc_wrath::SMSG_ATTACKSTART;

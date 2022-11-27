@@ -1,0 +1,6 @@
+smsg SMSG_ARENA_TEAM_INVITE = 0x0350 {
+    CString player_name;
+    CString team_name;
+} {
+    versions = "2.4.3 3";
+}
