@@ -1,0 +1,52 @@
+enum ArenaTeamEvent : u8 {
+    JOIN = 3 {
+        comment = "player name + arena team name";
+    }
+    LEAVE = 4 {
+        comment = "player name + arena team name";
+    }
+    REMOVE = 5 {
+        comment = "player name + arena team name + captain name";
+    }
+    LEADER_IS = 6 {
+        comment = "player name + arena team name";
+    }
+    LEADER_CHANGED = 7 {
+        comment = "old captain + new captain + arena team name";
+    }
+    DISBANDED = 8 {
+        comment = "captain name + arena team name";
+    }
+} {
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_ARENA_TEAM_EVENT = 0x0357 {
+    ArenaTeamEvent event;
+    if (event == JOIN) {
+        CString joiner_name;
+        CString arena_team_name1;
+        Guid joiner;
+    }
+    else if (event == LEAVE) {
+        CString leaver_name;
+        Guid leaver;
+    }
+    else if (event == REMOVE) {
+        CString kicked_player_name;
+        CString arena_team_name2;
+        CString kicker_name;
+    }
+    else if (event == LEADER_IS || event == DISBANDED) {
+        CString leader_name;
+        CString arena_team_name3;
+    }
+    else if (event == LEADER_CHANGED) {
+        CString old_leader;
+        CString new_leader;
+    }
+    u8 amount_of_strings;
+    CString[amount_of_strings] string;
+} {
+    versions = "2.4.3 3";
+}

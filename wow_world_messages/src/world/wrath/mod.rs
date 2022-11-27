@@ -324,6 +324,8 @@ pub use crate::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandError
 
 pub use crate::shared::arena_team_command_tbc_wrath::ArenaTeamCommand;
 
+pub use crate::shared::arena_team_event_tbc_wrath::ArenaTeamEvent;
+
 pub use crate::shared::arena_team_role_tbc_wrath::ArenaTeamRole;
 
 pub use crate::shared::arena_type_tbc_wrath::ArenaType;
@@ -1047,6 +1049,8 @@ pub use crate::shared::smsg_area_spirit_healer_time_vanilla_tbc_wrath::SMSG_AREA
 pub use crate::shared::smsg_area_trigger_message_vanilla_tbc_wrath::SMSG_AREA_TRIGGER_MESSAGE;
 
 pub use crate::shared::smsg_arena_team_command_result_tbc_wrath::SMSG_ARENA_TEAM_COMMAND_RESULT;
+
+pub use crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT;
 
 pub use crate::shared::smsg_arena_team_invite_tbc_wrath::SMSG_ARENA_TEAM_INVITE;
 
