@@ -26,6 +26,8 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_ARENA_TEAM_QUERY_RESPONSE](smsg_arena_team_query_response.md)
+* [SMSG_ARENA_TEAM_ROSTER](smsg_arena_team_roster.md)
+* [SMSG_ARENA_TEAM_ROSTER](smsg_arena_team_roster.md)
 * [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 * [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 

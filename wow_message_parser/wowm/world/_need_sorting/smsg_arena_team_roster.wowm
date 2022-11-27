@@ -1,0 +1,43 @@
+smsg SMSG_ARENA_TEAM_ROSTER = 0x034E {
+    u32 arena_team;
+    u32 amount_of_members;
+    ArenaType arena_type;
+    ArenaTeamMember[amount_of_members] members;
+} {
+    versions = "2.4.3";
+}
+
+enum ArenaTeamRole : u8 {
+    CAPTAIN = 0;
+    MEMBER = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+struct ArenaTeamMember {
+    Guid guid;
+    Bool online;
+    CString name;
+    u8 level;
+    Class class;
+    u32 games_played_this_week;
+    u32 wins_this_week;
+    u32 games_played_this_season;
+    u32 wins_this_season;
+    u32 personal_rating;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}
+
+smsg SMSG_ARENA_TEAM_ROSTER = 0x034E {
+    u32 arena_team;
+    u8 unknown {
+        comment = "arcemu: new 3.0.8.";
+        comment = "arcemu sets to 0.";
+    }
+    u32 amount_of_members;
+    ArenaType arena_type;
+    ArenaTeamMember[amount_of_members] members;
+} {
+    versions = "3.3.5";
+}

@@ -4,6 +4,7 @@ pub mod ai_reaction_vanilla_tbc_wrath;
 pub mod arena_faction_tbc_wrath;
 pub mod arena_team_command_error_tbc_wrath;
 pub mod arena_team_command_tbc_wrath;
+pub mod arena_team_role_tbc_wrath;
 pub mod arena_type_tbc_wrath;
 pub mod auction_enchantment_tbc_wrath;
 pub mod auction_sort_tbc_wrath;

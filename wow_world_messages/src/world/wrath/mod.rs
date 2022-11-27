@@ -6,6 +6,8 @@ pub(crate) mod addon;
 pub use addon::*;
 pub(crate) mod area;
 pub use area::*;
+pub(crate) mod arena_team_member;
+pub use arena_team_member::*;
 pub(crate) mod auction_list_item;
 pub use auction_list_item::*;
 pub(crate) mod aura_log;
@@ -321,6 +323,8 @@ pub use crate::shared::arena_faction_tbc_wrath::ArenaFaction;
 pub use crate::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandError;
 
 pub use crate::shared::arena_team_command_tbc_wrath::ArenaTeamCommand;
+
+pub use crate::shared::arena_team_role_tbc_wrath::ArenaTeamRole;
 
 pub use crate::shared::arena_type_tbc_wrath::ArenaType;
 
@@ -1476,6 +1480,8 @@ pub(crate) mod smsg_action_buttons;
 pub use smsg_action_buttons::*;
 pub(crate) mod smsg_addon_info;
 pub use smsg_addon_info::*;
+pub(crate) mod smsg_arena_team_roster;
+pub use smsg_arena_team_roster::*;
 pub(crate) mod smsg_attackerstateupdate;
 pub use smsg_attackerstateupdate::*;
 pub(crate) mod smsg_auction_bidder_list_result;
