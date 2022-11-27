@@ -1,0 +1,6 @@
+smsg SMSG_SPLINE_SET_FLIGHT_BACK_SPEED = 0x0386 {
+    PackedGuid guid;
+    f32 speed;
+} {
+    versions = "2.4.3 3";
+}

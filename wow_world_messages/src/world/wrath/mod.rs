@@ -1380,6 +1380,8 @@ pub use crate::shared::smsg_spline_move_unset_hover_vanilla_tbc_wrath::SMSG_SPLI
 
 pub use crate::shared::smsg_spline_move_water_walk_vanilla_tbc_wrath::SMSG_SPLINE_MOVE_WATER_WALK;
 
+pub use crate::shared::smsg_spline_set_flight_back_speed_tbc_wrath::SMSG_SPLINE_SET_FLIGHT_BACK_SPEED;
+
 pub use crate::shared::smsg_spline_set_flight_speed_tbc_wrath::SMSG_SPLINE_SET_FLIGHT_SPEED;
 
 pub use crate::shared::smsg_spline_set_run_back_speed_vanilla_tbc_wrath::SMSG_SPLINE_SET_RUN_BACK_SPEED;

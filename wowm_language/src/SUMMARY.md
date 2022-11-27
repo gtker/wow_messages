@@ -998,6 +998,7 @@
 - [SMSG_SPLINE_MOVE_UNROOT](docs/smsg_spline_move_unroot.md)
 - [SMSG_SPLINE_MOVE_UNSET_HOVER](docs/smsg_spline_move_unset_hover.md)
 - [SMSG_SPLINE_MOVE_WATER_WALK](docs/smsg_spline_move_water_walk.md)
+- [SMSG_SPLINE_SET_FLIGHT_BACK_SPEED](docs/smsg_spline_set_flight_back_speed.md)
 - [SMSG_SPLINE_SET_FLIGHT_SPEED](docs/smsg_spline_set_flight_speed.md)
 - [SMSG_SPLINE_SET_RUN_BACK_SPEED](docs/smsg_spline_set_run_back_speed.md)
 - [SMSG_SPLINE_SET_RUN_SPEED](docs/smsg_spline_set_run_speed.md)
