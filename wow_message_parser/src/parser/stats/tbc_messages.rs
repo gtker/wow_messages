@@ -712,7 +712,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_TIME_SYNC_REQ", 0x390),
     Data::new("CMSG_TIME_SYNC_RESP", 0x391),
     Data::new("SMSG_RESET_FAILED_NOTIFY", 0x396),
-    Data::new("SMSG_REAL_GROUP_UPDATE", 0x397),
     Data::new("SMSG_LFG_DISABLED", 0x398),
     Data::new("SMSG_CHEAT_DUMP_ITEMS_DEBUG_ONLY_RESPONSE", 0x39B),
     Data::new(
