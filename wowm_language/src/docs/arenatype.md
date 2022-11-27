@@ -25,6 +25,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `FIVE_VS_FIVE` | 5 (0x05) |  |  |
 
 Used in:
+* [SMSG_ARENA_ERROR](smsg_arena_error.md)
 * [SMSG_ARENA_TEAM_QUERY_RESPONSE](smsg_arena_team_query_response.md)
 * [SMSG_ARENA_TEAM_ROSTER](smsg_arena_team_roster.md)
 * [SMSG_ARENA_TEAM_ROSTER](smsg_arena_team_roster.md)

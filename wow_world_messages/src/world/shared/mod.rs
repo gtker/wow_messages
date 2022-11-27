@@ -404,6 +404,7 @@ pub mod smsg_activatetaxireply_vanilla_tbc_wrath;
 pub mod smsg_ai_reaction_vanilla_tbc_wrath;
 pub mod smsg_area_spirit_healer_time_vanilla_tbc_wrath;
 pub mod smsg_area_trigger_message_vanilla_tbc_wrath;
+pub mod smsg_arena_error_tbc_wrath;
 pub mod smsg_arena_team_command_result_tbc_wrath;
 pub mod smsg_arena_team_event_tbc_wrath;
 pub mod smsg_arena_team_invite_tbc_wrath;

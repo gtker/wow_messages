@@ -1,0 +1,6 @@
+smsg SMSG_ARENA_ERROR = 0x0376 {
+    u32 unknown;
+    ArenaType arena_type;
+} {
+    versions = "2.4.3 3";
+}
