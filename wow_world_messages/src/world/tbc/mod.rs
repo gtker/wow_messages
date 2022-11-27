@@ -1608,6 +1608,8 @@ pub(crate) mod smsg_emote;
 pub use smsg_emote::*;
 pub(crate) mod smsg_exploration_experience;
 pub use smsg_exploration_experience::*;
+pub(crate) mod smsg_flight_spline_sync;
+pub use smsg_flight_spline_sync::*;
 pub(crate) mod smsg_force_move_root;
 pub use smsg_force_move_root::*;
 pub(crate) mod smsg_force_move_unroot;

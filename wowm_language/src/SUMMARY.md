@@ -787,6 +787,7 @@
 - [SMSG_FEIGN_DEATH_RESISTED](docs/smsg_feign_death_resisted.md)
 - [SMSG_FISH_ESCAPED](docs/smsg_fish_escaped.md)
 - [SMSG_FISH_NOT_HOOKED](docs/smsg_fish_not_hooked.md)
+- [SMSG_FLIGHT_SPLINE_SYNC](docs/smsg_flight_spline_sync.md)
 - [SMSG_FORCED_DEATH_UPDATE](docs/smsg_forced_death_update.md)
 - [SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE](docs/smsg_force_flight_back_speed_change.md)
 - [SMSG_FORCE_FLIGHT_SPEED_CHANGE](docs/smsg_force_flight_speed_change.md)
