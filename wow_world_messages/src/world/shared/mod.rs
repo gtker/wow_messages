@@ -452,6 +452,7 @@ pub mod smsg_environmental_damage_log_vanilla_tbc_wrath;
 pub mod smsg_feign_death_resisted_vanilla_tbc_wrath;
 pub mod smsg_fish_escaped_vanilla_tbc_wrath;
 pub mod smsg_fish_not_hooked_vanilla_tbc_wrath;
+pub mod smsg_force_flight_speed_change_tbc_wrath;
 pub mod smsg_force_run_back_speed_change_vanilla_tbc_wrath;
 pub mod smsg_force_run_speed_change_tbc_wrath;
 pub mod smsg_force_swim_back_speed_change_vanilla_tbc_wrath;
