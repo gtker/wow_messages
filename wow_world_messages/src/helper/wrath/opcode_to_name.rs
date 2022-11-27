@@ -441,7 +441,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x023c => "CMSG_BATTLEFIELD_LIST",
         0x023d => "SMSG_BATTLEFIELD_LIST",
         0x023f => "SMSG_FORCE_SET_VEHICLE_REC_ID",
-        0x0240 => "CMSG_SET_VEHICLE_REC_ID_ACK",
         0x0243 => "CMSG_ITEM_TEXT_QUERY",
         0x0244 => "SMSG_ITEM_TEXT_QUERY_RESPONSE",
         0x0245 => "CMSG_MAIL_TAKE_MONEY",
