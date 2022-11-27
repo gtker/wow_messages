@@ -708,7 +708,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x038c => "CMSG_REALM_SPLIT",
         0x038d => "CMSG_MOVE_CHNG_TRANSPORT",
         0x038e => "MSG_PARTY_ASSIGNMENT",
-        0x038f => "SMSG_OFFER_PETITION_ERROR",
         0x0390 => "SMSG_TIME_SYNC_REQ",
         0x0391 => "CMSG_TIME_SYNC_RESP",
         0x0396 => "SMSG_RESET_FAILED_NOTIFY",

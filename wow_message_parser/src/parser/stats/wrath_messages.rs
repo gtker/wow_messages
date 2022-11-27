@@ -725,7 +725,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_REALM_SPLIT", 0x38C),
     Data::new("CMSG_MOVE_CHNG_TRANSPORT", 0x38D),
     Data::new("MSG_PARTY_ASSIGNMENT", 0x38E),
-    Data::new("SMSG_OFFER_PETITION_ERROR", 0x38F),
     Data::new("SMSG_TIME_SYNC_REQ", 0x390),
     Data::new("CMSG_TIME_SYNC_RESP", 0x391),
     Data::new("SMSG_RESET_FAILED_NOTIFY", 0x396),
