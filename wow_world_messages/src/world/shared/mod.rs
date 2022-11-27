@@ -495,6 +495,7 @@ pub mod smsg_item_push_result_tbc_wrath;
 pub mod smsg_item_text_query_response_vanilla_tbc;
 pub mod smsg_item_time_update_vanilla_tbc_wrath;
 pub mod smsg_levelup_info_vanilla_tbc;
+pub mod smsg_lfg_disabled_tbc_wrath;
 pub mod smsg_list_inventory_tbc_wrath;
 pub mod smsg_log_xpgain_vanilla_tbc;
 pub mod smsg_login_settimespeed_vanilla_tbc;

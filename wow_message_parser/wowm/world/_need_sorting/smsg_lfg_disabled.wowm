@@ -1,0 +1,3 @@
+smsg SMSG_LFG_DISABLED = 0x0398 {} {
+    versions = "2.4.3 3";
+}

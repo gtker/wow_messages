@@ -1198,6 +1198,8 @@ pub use crate::shared::smsg_item_push_result_tbc_wrath::SMSG_ITEM_PUSH_RESULT;
 
 pub use crate::shared::smsg_item_time_update_vanilla_tbc_wrath::SMSG_ITEM_TIME_UPDATE;
 
+pub use crate::shared::smsg_lfg_disabled_tbc_wrath::SMSG_LFG_DISABLED;
+
 pub use crate::shared::smsg_list_inventory_tbc_wrath::SMSG_LIST_INVENTORY;
 
 pub use crate::shared::smsg_logout_cancel_ack_vanilla_tbc_wrath::SMSG_LOGOUT_CANCEL_ACK;

@@ -851,6 +851,7 @@
 - [SMSG_ITEM_TIME_UPDATE](docs/smsg_item_time_update.md)
 - [SMSG_LEARNED_SPELL](docs/smsg_learned_spell.md)
 - [SMSG_LEVELUP_INFO](docs/smsg_levelup_info.md)
+- [SMSG_LFG_DISABLED](docs/smsg_lfg_disabled.md)
 - [SMSG_LIST_INVENTORY](docs/smsg_list_inventory.md)
 - [SMSG_LOGIN_SETTIMESPEED](docs/smsg_login_settimespeed.md)
 - [SMSG_LOGIN_VERIFY_WORLD](docs/smsg_login_verify_world.md)

@@ -1244,6 +1244,8 @@ pub use crate::shared::smsg_item_time_update_vanilla_tbc_wrath::SMSG_ITEM_TIME_U
 
 pub use crate::shared::smsg_levelup_info_vanilla_tbc::SMSG_LEVELUP_INFO;
 
+pub use crate::shared::smsg_lfg_disabled_tbc_wrath::SMSG_LFG_DISABLED;
+
 pub use crate::shared::smsg_list_inventory_tbc_wrath::SMSG_LIST_INVENTORY;
 
 pub use crate::shared::smsg_log_xpgain_vanilla_tbc::SMSG_LOG_XPGAIN;
