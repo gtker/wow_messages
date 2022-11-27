@@ -461,6 +461,7 @@
 - [CMSG_QUESTLOG_REMOVE_QUEST](docs/cmsg_questlog_remove_quest.md)
 - [CMSG_QUESTLOG_SWAP_QUEST](docs/cmsg_questlog_swap_quest.md)
 - [CMSG_QUEST_CONFIRM_ACCEPT](docs/cmsg_quest_confirm_accept.md)
+- [CMSG_QUEST_POI_QUERY](docs/cmsg_quest_poi_query.md)
 - [CMSG_QUEST_QUERY](docs/cmsg_quest_query.md)
 - [CMSG_READY_FOR_ACCOUNT_DATA_TIMES](docs/cmsg_ready_for_account_data_times.md)
 - [CMSG_READ_ITEM](docs/cmsg_read_item.md)
