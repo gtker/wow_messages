@@ -1056,6 +1056,8 @@ pub use crate::shared::smsg_arena_team_invite_tbc_wrath::SMSG_ARENA_TEAM_INVITE;
 
 pub use crate::shared::smsg_arena_team_query_response_tbc_wrath::SMSG_ARENA_TEAM_QUERY_RESPONSE;
 
+pub use crate::shared::smsg_arena_team_stats_tbc_wrath::SMSG_ARENA_TEAM_STATS;
+
 pub use crate::shared::smsg_attackstart_vanilla_tbc_wrath::SMSG_ATTACKSTART;
 
 pub use crate::shared::smsg_attackstop_vanilla_tbc_wrath::SMSG_ATTACKSTOP;

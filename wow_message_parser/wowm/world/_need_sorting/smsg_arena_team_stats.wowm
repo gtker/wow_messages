@@ -1,0 +1,11 @@
+smsg SMSG_ARENA_TEAM_STATS = 0x035B {
+    u32 arena_team;
+    u32 rating;
+    u32 games_played_this_week;
+    u32 games_won_this_week;
+    u32 games_played_this_season;
+    u32 games_won_this_season;
+    u32 ranking;
+} {
+    versions = "2.4.3 3";
+}

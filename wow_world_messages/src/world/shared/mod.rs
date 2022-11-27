@@ -408,6 +408,7 @@ pub mod smsg_arena_team_command_result_tbc_wrath;
 pub mod smsg_arena_team_event_tbc_wrath;
 pub mod smsg_arena_team_invite_tbc_wrath;
 pub mod smsg_arena_team_query_response_tbc_wrath;
+pub mod smsg_arena_team_stats_tbc_wrath;
 pub mod smsg_attackstart_vanilla_tbc_wrath;
 pub mod smsg_attackstop_vanilla_tbc_wrath;
 pub mod smsg_attackswing_badfacing_vanilla_tbc_wrath;
