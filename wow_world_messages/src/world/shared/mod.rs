@@ -458,6 +458,7 @@ pub mod smsg_force_swim_back_speed_change_vanilla_tbc_wrath;
 pub mod smsg_force_swim_speed_change_vanilla_tbc_wrath;
 pub mod smsg_force_turn_rate_change_vanilla_tbc_wrath;
 pub mod smsg_force_walk_speed_change_vanilla_tbc_wrath;
+pub mod smsg_forced_death_update_tbc_wrath;
 pub mod smsg_friend_status_vanilla_tbc;
 pub mod smsg_gameobject_custom_anim_vanilla_tbc_wrath;
 pub mod smsg_gameobject_despawn_anim_vanilla_tbc_wrath;

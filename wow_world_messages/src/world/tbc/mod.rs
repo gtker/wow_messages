@@ -1170,6 +1170,8 @@ pub use crate::shared::smsg_force_turn_rate_change_vanilla_tbc_wrath::SMSG_FORCE
 
 pub use crate::shared::smsg_force_walk_speed_change_vanilla_tbc_wrath::SMSG_FORCE_WALK_SPEED_CHANGE;
 
+pub use crate::shared::smsg_forced_death_update_tbc_wrath::SMSG_FORCED_DEATH_UPDATE;
+
 pub use crate::shared::smsg_friend_status_vanilla_tbc::SMSG_FRIEND_STATUS;
 
 pub use crate::shared::smsg_gameobject_custom_anim_vanilla_tbc_wrath::SMSG_GAMEOBJECT_CUSTOM_ANIM;

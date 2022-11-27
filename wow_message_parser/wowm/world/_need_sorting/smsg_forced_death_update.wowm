@@ -1,0 +1,4 @@
+smsg SMSG_FORCED_DEATH_UPDATE = 0x037A {} {
+    versions = "2.4.3 3.3.5";
+    description = "Resets `Release spirit` timer clientside.";
+}
