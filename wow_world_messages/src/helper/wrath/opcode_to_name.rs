@@ -725,8 +725,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0391 => "CMSG_TIME_SYNC_RESP",
         0x0396 => "SMSG_RESET_FAILED_NOTIFY",
         0x0398 => "SMSG_LFG_DISABLED",
-        0x039b => "SMSG_CHEAT_DUMP_ITEMS_DEBUG_ONLY_RESPONSE",
-        0x039c => "SMSG_CHEAT_DUMP_ITEMS_DEBUG_ONLY_RESPONSE_WRITE_FILE",
         0x039d => "SMSG_UPDATE_COMBO_POINTS",
         0x039e => "SMSG_VOICE_SESSION_ROSTER_UPDATE",
         0x039f => "SMSG_VOICE_SESSION_LEAVE",
