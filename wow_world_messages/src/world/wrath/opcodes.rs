@@ -160,6 +160,7 @@ use crate::world::wrath::CMSG_CANCEL_AURA;
 use crate::world::wrath::CMSG_CANCEL_CHANNELLING;
 use crate::world::wrath::CMSG_SET_SELECTION;
 use crate::world::wrath::CMSG_DELETEEQUIPMENT_SET;
+use crate::world::wrath::CMSG_INSTANCE_LOCK_RESPONSE;
 use crate::world::wrath::CMSG_ATTACKSWING;
 use crate::world::wrath::CMSG_ATTACKSTOP;
 use crate::world::wrath::CMSG_REPOP_REQUEST;
@@ -508,6 +509,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CANCEL_CHANNELLING(CMSG_CANCEL_CHANNELLING),
     CMSG_SET_SELECTION(CMSG_SET_SELECTION),
     CMSG_DELETEEQUIPMENT_SET(CMSG_DELETEEQUIPMENT_SET),
+    CMSG_INSTANCE_LOCK_RESPONSE(CMSG_INSTANCE_LOCK_RESPONSE),
     CMSG_ATTACKSWING(CMSG_ATTACKSWING),
     CMSG_ATTACKSTOP(CMSG_ATTACKSTOP),
     CMSG_REPOP_REQUEST(CMSG_REPOP_REQUEST),
@@ -858,6 +860,7 @@ impl ClientOpcodeMessage {
             0x013B => Ok(Self::CMSG_CANCEL_CHANNELLING(<CMSG_CANCEL_CHANNELLING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013B, size: body_size, io, } } else { a } })?)),
             0x013D => Ok(Self::CMSG_SET_SELECTION(<CMSG_SET_SELECTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013D, size: body_size, io, } } else { a } })?)),
             0x013E => Ok(Self::CMSG_DELETEEQUIPMENT_SET(<CMSG_DELETEEQUIPMENT_SET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013E, size: body_size, io, } } else { a } })?)),
+            0x013F => Ok(Self::CMSG_INSTANCE_LOCK_RESPONSE(<CMSG_INSTANCE_LOCK_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013F, size: body_size, io, } } else { a } })?)),
             0x0141 => Ok(Self::CMSG_ATTACKSWING(<CMSG_ATTACKSWING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0141, size: body_size, io, } } else { a } })?)),
             0x0142 => Ok(Self::CMSG_ATTACKSTOP(<CMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0142, size: body_size, io, } } else { a } })?)),
             0x015A => Ok(Self::CMSG_REPOP_REQUEST(<CMSG_REPOP_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015A, size: body_size, io, } } else { a } })?)),
@@ -1276,6 +1279,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_SELECTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSWING(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSTOP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REPOP_REQUEST(c) => c.write_encrypted_client(w, e),
@@ -1627,6 +1631,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_CHANNELLING(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_SELECTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.write_unencrypted_client(w),
+            Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSWING(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSTOP(c) => c.write_unencrypted_client(w),
             Self::CMSG_REPOP_REQUEST(c) => c.write_unencrypted_client(w),
@@ -1978,6 +1983,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_SELECTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2329,6 +2335,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_CHANNELLING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_SELECTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2680,6 +2687,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_SELECTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPOP_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3031,6 +3039,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CANCEL_CHANNELLING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_SELECTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPOP_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
@@ -3393,6 +3402,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CANCEL_CHANNELLING(_) => "CMSG_CANCEL_CHANNELLING",
             ClientOpcodeMessage::CMSG_SET_SELECTION(_) => "CMSG_SET_SELECTION",
             ClientOpcodeMessage::CMSG_DELETEEQUIPMENT_SET(_) => "CMSG_DELETEEQUIPMENT_SET",
+            ClientOpcodeMessage::CMSG_INSTANCE_LOCK_RESPONSE(_) => "CMSG_INSTANCE_LOCK_RESPONSE",
             ClientOpcodeMessage::CMSG_ATTACKSWING(_) => "CMSG_ATTACKSWING",
             ClientOpcodeMessage::CMSG_ATTACKSTOP(_) => "CMSG_ATTACKSTOP",
             ClientOpcodeMessage::CMSG_REPOP_REQUEST(_) => "CMSG_REPOP_REQUEST",
@@ -4494,6 +4504,12 @@ impl From<CMSG_SET_SELECTION> for ClientOpcodeMessage {
 impl From<CMSG_DELETEEQUIPMENT_SET> for ClientOpcodeMessage {
     fn from(c: CMSG_DELETEEQUIPMENT_SET) -> Self {
         Self::CMSG_DELETEEQUIPMENT_SET(c)
+    }
+}
+
+impl From<CMSG_INSTANCE_LOCK_RESPONSE> for ClientOpcodeMessage {
+    fn from(c: CMSG_INSTANCE_LOCK_RESPONSE) -> Self {
+        Self::CMSG_INSTANCE_LOCK_RESPONSE(c)
     }
 }
 

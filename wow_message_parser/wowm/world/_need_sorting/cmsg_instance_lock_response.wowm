@@ -1,0 +1,5 @@
+cmsg CMSG_INSTANCE_LOCK_RESPONSE = 0x013F {
+    Bool accept;
+} {
+    versions = "3.3.5";
+}

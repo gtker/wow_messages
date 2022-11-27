@@ -380,6 +380,7 @@
 - [CMSG_IGNORE_TRADE](docs/cmsg_ignore_trade.md)
 - [CMSG_INITIATE_TRADE](docs/cmsg_initiate_trade.md)
 - [CMSG_INSPECT](docs/cmsg_inspect.md)
+- [CMSG_INSTANCE_LOCK_RESPONSE](docs/cmsg_instance_lock_response.md)
 - [CMSG_ITEM_NAME_QUERY](docs/cmsg_item_name_query.md)
 - [CMSG_ITEM_QUERY_SINGLE](docs/cmsg_item_query_single.md)
 - [CMSG_ITEM_TEXT_QUERY](docs/cmsg_item_text_query.md)
