@@ -1678,6 +1678,8 @@ pub(crate) mod smsg_raid_instance_message;
 pub use smsg_raid_instance_message::*;
 pub(crate) mod smsg_removed_spell;
 pub use smsg_removed_spell::*;
+pub(crate) mod smsg_reset_failed_notify;
+pub use smsg_reset_failed_notify::*;
 pub(crate) mod smsg_sell_item;
 pub use smsg_sell_item::*;
 pub(crate) mod smsg_server_message;

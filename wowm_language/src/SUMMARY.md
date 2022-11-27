@@ -954,6 +954,7 @@
 - [SMSG_REALM_SPLIT](docs/smsg_realm_split.md)
 - [SMSG_RECEIVED_MAIL](docs/smsg_received_mail.md)
 - [SMSG_REMOVED_SPELL](docs/smsg_removed_spell.md)
+- [SMSG_RESET_FAILED_NOTIFY](docs/smsg_reset_failed_notify.md)
 - [SMSG_RESISTLOG](docs/smsg_resistlog.md)
 - [SMSG_RESURRECT_FAILED](docs/smsg_resurrect_failed.md)
 - [SMSG_RESURRECT_REQUEST](docs/smsg_resurrect_request.md)

@@ -5872,6 +5872,7 @@ use crate::world::tbc::SMSG_SPLINE_SET_FLIGHT_BACK_SPEED;
 use crate::world::tbc::SMSG_FLIGHT_SPLINE_SYNC;
 use crate::world::tbc::SMSG_REALM_SPLIT;
 use crate::world::tbc::SMSG_TIME_SYNC_REQ;
+use crate::world::tbc::SMSG_RESET_FAILED_NOTIFY;
 use crate::world::tbc::MSG_MOVE_START_DESCEND_Server;
 use crate::world::tbc::MSG_MOVE_UPDATE_CAN_FLY_Server;
 use crate::world::tbc::MSG_RAID_READY_CHECK_CONFIRM_Server;
@@ -6234,6 +6235,7 @@ pub enum ServerOpcodeMessage {
     SMSG_FLIGHT_SPLINE_SYNC(SMSG_FLIGHT_SPLINE_SYNC),
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
+    SMSG_RESET_FAILED_NOTIFY(SMSG_RESET_FAILED_NOTIFY),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Server),
     MSG_MOVE_UPDATE_CAN_FLY(MSG_MOVE_UPDATE_CAN_FLY_Server),
     MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Server),
@@ -6598,6 +6600,7 @@ impl ServerOpcodeMessage {
             0x0388 => Ok(Self::SMSG_FLIGHT_SPLINE_SYNC(<SMSG_FLIGHT_SPLINE_SYNC as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0388, size: body_size, io, } } else { a } })?)),
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
+            0x0396 => Ok(Self::SMSG_RESET_FAILED_NOTIFY(<SMSG_RESET_FAILED_NOTIFY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0396, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
             0x03AD => Ok(Self::MSG_MOVE_UPDATE_CAN_FLY(<MSG_MOVE_UPDATE_CAN_FLY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AD, size: body_size, io, } } else { a } })?)),
             0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
@@ -7030,6 +7033,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FLIGHT_SPLINE_SYNC(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_RESET_FAILED_NOTIFY(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_encrypted_server(w, e),
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_server(w, e),
@@ -7395,6 +7399,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FLIGHT_SPLINE_SYNC(c) => c.write_unencrypted_server(w),
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
+            Self::SMSG_RESET_FAILED_NOTIFY(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_unencrypted_server(w),
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_server(w),
@@ -7760,6 +7765,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FLIGHT_SPLINE_SYNC(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_RESET_FAILED_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8125,6 +8131,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FLIGHT_SPLINE_SYNC(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_RESET_FAILED_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8490,6 +8497,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FLIGHT_SPLINE_SYNC(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_RESET_FAILED_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8855,6 +8863,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FLIGHT_SPLINE_SYNC(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_RESET_FAILED_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
@@ -9222,6 +9231,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FLIGHT_SPLINE_SYNC(_) => "SMSG_FLIGHT_SPLINE_SYNC",
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
+            ServerOpcodeMessage::SMSG_RESET_FAILED_NOTIFY(_) => "SMSG_RESET_FAILED_NOTIFY",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
             ServerOpcodeMessage::MSG_MOVE_UPDATE_CAN_FLY(_) => "MSG_MOVE_UPDATE_CAN_FLY_Server",
             ServerOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Server",
@@ -11357,6 +11367,12 @@ impl From<SMSG_REALM_SPLIT> for ServerOpcodeMessage {
 impl From<SMSG_TIME_SYNC_REQ> for ServerOpcodeMessage {
     fn from(c: SMSG_TIME_SYNC_REQ) -> Self {
         Self::SMSG_TIME_SYNC_REQ(c)
+    }
+}
+
+impl From<SMSG_RESET_FAILED_NOTIFY> for ServerOpcodeMessage {
+    fn from(c: SMSG_RESET_FAILED_NOTIFY) -> Self {
+        Self::SMSG_RESET_FAILED_NOTIFY(c)
     }
 }
 

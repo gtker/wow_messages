@@ -1,0 +1,5 @@
+smsg SMSG_RESET_FAILED_NOTIFY = 0x0396 {
+    Map map;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}
