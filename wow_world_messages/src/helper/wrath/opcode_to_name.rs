@@ -727,7 +727,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0398 => "SMSG_LFG_DISABLED",
         0x039d => "SMSG_UPDATE_COMBO_POINTS",
         0x03a7 => "MSG_MOVE_START_DESCEND",
-        0x03aa => "SMSG_SPELL_CHANCE_PROC_LOG",
         0x03ac => "SMSG_DISMOUNT",
         0x03ad => "MSG_MOVE_UPDATE_CAN_FLY",
         0x03ae => "MSG_RAID_READY_CHECK_CONFIRM",
