@@ -5993,6 +5993,7 @@ use crate::world::wrath::SMSG_TIME_SYNC_REQ;
 use crate::world::wrath::SMSG_RESET_FAILED_NOTIFY;
 use crate::world::wrath::SMSG_LFG_DISABLED;
 use crate::world::wrath::SMSG_UPDATE_COMBO_POINTS;
+use crate::world::wrath::SMSG_DISMOUNT;
 use crate::world::wrath::MSG_MOVE_UPDATE_CAN_FLY_Server;
 use crate::world::wrath::MSG_RAID_READY_CHECK_CONFIRM_Server;
 use crate::world::wrath::SMSG_GM_MESSAGECHAT;
@@ -6371,6 +6372,7 @@ pub enum ServerOpcodeMessage {
     SMSG_RESET_FAILED_NOTIFY(SMSG_RESET_FAILED_NOTIFY),
     SMSG_LFG_DISABLED(SMSG_LFG_DISABLED),
     SMSG_UPDATE_COMBO_POINTS(SMSG_UPDATE_COMBO_POINTS),
+    SMSG_DISMOUNT(SMSG_DISMOUNT),
     MSG_MOVE_UPDATE_CAN_FLY(MSG_MOVE_UPDATE_CAN_FLY_Server),
     MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Server),
     SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
@@ -6751,6 +6753,7 @@ impl ServerOpcodeMessage {
             0x0396 => Ok(Self::SMSG_RESET_FAILED_NOTIFY(<SMSG_RESET_FAILED_NOTIFY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0396, size: body_size, io, } } else { a } })?)),
             0x0398 => Ok(Self::SMSG_LFG_DISABLED(<SMSG_LFG_DISABLED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0398, size: body_size, io, } } else { a } })?)),
             0x039D => Ok(Self::SMSG_UPDATE_COMBO_POINTS(<SMSG_UPDATE_COMBO_POINTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x039D, size: body_size, io, } } else { a } })?)),
+            0x03AC => Ok(Self::SMSG_DISMOUNT(<SMSG_DISMOUNT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AC, size: body_size, io, } } else { a } })?)),
             0x03AD => Ok(Self::MSG_MOVE_UPDATE_CAN_FLY(<MSG_MOVE_UPDATE_CAN_FLY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AD, size: body_size, io, } } else { a } })?)),
             0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
             0x03B3 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B3, size: body_size, io, } } else { a } })?)),
@@ -7280,6 +7283,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LFG_DISABLED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_DISMOUNT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_encrypted_server(w, e),
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
@@ -7661,6 +7665,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.write_unencrypted_server(w),
             Self::SMSG_LFG_DISABLED(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_DISMOUNT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_unencrypted_server(w),
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
@@ -8042,6 +8047,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_DISABLED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_DISMOUNT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8423,6 +8429,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LFG_DISABLED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_DISMOUNT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8804,6 +8811,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_DISABLED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_DISMOUNT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9185,6 +9193,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LFG_DISABLED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_DISMOUNT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
@@ -9576,6 +9585,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_RESET_FAILED_NOTIFY(_) => "SMSG_RESET_FAILED_NOTIFY",
             ServerOpcodeMessage::SMSG_LFG_DISABLED(_) => "SMSG_LFG_DISABLED",
             ServerOpcodeMessage::SMSG_UPDATE_COMBO_POINTS(_) => "SMSG_UPDATE_COMBO_POINTS",
+            ServerOpcodeMessage::SMSG_DISMOUNT(_) => "SMSG_DISMOUNT",
             ServerOpcodeMessage::MSG_MOVE_UPDATE_CAN_FLY(_) => "MSG_MOVE_UPDATE_CAN_FLY_Server",
             ServerOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
@@ -11787,6 +11797,12 @@ impl From<SMSG_LFG_DISABLED> for ServerOpcodeMessage {
 impl From<SMSG_UPDATE_COMBO_POINTS> for ServerOpcodeMessage {
     fn from(c: SMSG_UPDATE_COMBO_POINTS) -> Self {
         Self::SMSG_UPDATE_COMBO_POINTS(c)
+    }
+}
+
+impl From<SMSG_DISMOUNT> for ServerOpcodeMessage {
+    fn from(c: SMSG_DISMOUNT) -> Self {
+        Self::SMSG_DISMOUNT(c)
     }
 }
 

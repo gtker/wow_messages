@@ -769,6 +769,7 @@
 - [SMSG_DEATH_RELEASE_LOC](docs/smsg_death_release_loc.md)
 - [SMSG_DEFENSE_MESSAGE](docs/smsg_defense_message.md)
 - [SMSG_DESTROY_OBJECT](docs/smsg_destroy_object.md)
+- [SMSG_DISMOUNT](docs/smsg_dismount.md)
 - [SMSG_DISMOUNTRESULT](docs/smsg_dismountresult.md)
 - [SMSG_DISPEL_FAILED](docs/smsg_dispel_failed.md)
 - [SMSG_DUEL_COMPLETE](docs/smsg_duel_complete.md)

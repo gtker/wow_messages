@@ -1,0 +1,5 @@
+smsg SMSG_DISMOUNT = 0x03AC {
+    PackedGuid player;
+} {
+    versions = "2.4.3 3";
+}

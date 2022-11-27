@@ -439,6 +439,7 @@ pub mod smsg_client_control_update_vanilla_tbc_wrath;
 pub mod smsg_cooldown_event_vanilla_tbc_wrath;
 pub mod smsg_corpse_reclaim_delay_vanilla_tbc_wrath;
 pub mod smsg_destroy_object_vanilla_tbc;
+pub mod smsg_dismount_tbc_wrath;
 pub mod smsg_dispel_failed_vanilla_tbc_wrath;
 pub mod smsg_duel_complete_vanilla_tbc_wrath;
 pub mod smsg_duel_countdown_vanilla_tbc_wrath;
