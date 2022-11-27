@@ -327,6 +327,7 @@ use crate::world::wrath::CMSG_RESET_INSTANCES;
 use crate::world::wrath::MSG_RAID_TARGET_UPDATE_Client;
 use crate::world::wrath::MSG_RAID_READY_CHECK_Client;
 use crate::world::wrath::CMSG_GMSURVEY_SUBMIT;
+use crate::world::wrath::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK;
 use crate::world::wrath::CMSG_MOVE_SET_CAN_FLY_ACK;
 use crate::world::wrath::CMSG_MOVE_SET_FLY;
 use crate::world::wrath::CMSG_SOCKET_GEMS;
@@ -678,6 +679,7 @@ pub enum ClientOpcodeMessage {
     MSG_RAID_TARGET_UPDATE(MSG_RAID_TARGET_UPDATE_Client),
     MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Client),
     CMSG_GMSURVEY_SUBMIT(CMSG_GMSURVEY_SUBMIT),
+    CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK),
     CMSG_MOVE_SET_CAN_FLY_ACK(CMSG_MOVE_SET_CAN_FLY_ACK),
     CMSG_MOVE_SET_FLY(CMSG_MOVE_SET_FLY),
     CMSG_SOCKET_GEMS(CMSG_SOCKET_GEMS),
@@ -1031,6 +1033,7 @@ impl ClientOpcodeMessage {
             0x0321 => Ok(Self::MSG_RAID_TARGET_UPDATE(<MSG_RAID_TARGET_UPDATE_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0321, size: body_size, io, } } else { a } })?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
             0x032A => Ok(Self::CMSG_GMSURVEY_SUBMIT(<CMSG_GMSURVEY_SUBMIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x032A, size: body_size, io, } } else { a } })?)),
+            0x0340 => Ok(Self::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(<CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0340, size: body_size, io, } } else { a } })?)),
             0x0345 => Ok(Self::CMSG_MOVE_SET_CAN_FLY_ACK(<CMSG_MOVE_SET_CAN_FLY_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0345, size: body_size, io, } } else { a } })?)),
             0x0346 => Ok(Self::CMSG_MOVE_SET_FLY(<CMSG_MOVE_SET_FLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0346, size: body_size, io, } } else { a } })?)),
             0x0347 => Ok(Self::CMSG_SOCKET_GEMS(<CMSG_SOCKET_GEMS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0347, size: body_size, io, } } else { a } })?)),
@@ -1452,6 +1455,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SOCKET_GEMS(c) => c.write_encrypted_client(w, e),
@@ -1806,6 +1810,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.write_unencrypted_client(w),
             Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_FLY(c) => c.write_unencrypted_client(w),
             Self::CMSG_SOCKET_GEMS(c) => c.write_unencrypted_client(w),
@@ -2160,6 +2165,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SOCKET_GEMS(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2514,6 +2520,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SOCKET_GEMS(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2868,6 +2875,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SOCKET_GEMS(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3222,6 +3230,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GMSURVEY_SUBMIT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_CAN_FLY_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_FLY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SOCKET_GEMS(c) => c.astd_write_unencrypted_client(w).await,
@@ -3587,6 +3596,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => "MSG_RAID_TARGET_UPDATE_Client",
             ClientOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Client",
             ClientOpcodeMessage::CMSG_GMSURVEY_SUBMIT(_) => "CMSG_GMSURVEY_SUBMIT",
+            ClientOpcodeMessage::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(_) => "CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK",
             ClientOpcodeMessage::CMSG_MOVE_SET_CAN_FLY_ACK(_) => "CMSG_MOVE_SET_CAN_FLY_ACK",
             ClientOpcodeMessage::CMSG_MOVE_SET_FLY(_) => "CMSG_MOVE_SET_FLY",
             ClientOpcodeMessage::CMSG_SOCKET_GEMS(_) => "CMSG_SOCKET_GEMS",
@@ -5526,6 +5536,12 @@ impl From<MSG_RAID_READY_CHECK_Client> for ClientOpcodeMessage {
 impl From<CMSG_GMSURVEY_SUBMIT> for ClientOpcodeMessage {
     fn from(c: CMSG_GMSURVEY_SUBMIT) -> Self {
         Self::CMSG_GMSURVEY_SUBMIT(c)
+    }
+}
+
+impl From<CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK) -> Self {
+        Self::CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK(c)
     }
 }
 

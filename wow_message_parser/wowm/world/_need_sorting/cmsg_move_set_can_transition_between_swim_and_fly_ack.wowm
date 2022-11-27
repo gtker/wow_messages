@@ -1,0 +1,8 @@
+cmsg CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK = 0x0340 {
+    PackedGuid guid;
+    u32 unknown1;
+    MovementInfo info;
+    u32 unknown2;
+} {
+    versions = "3.3.5";
+}
