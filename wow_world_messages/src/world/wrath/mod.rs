@@ -148,6 +148,8 @@ pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
 pub(crate) mod cmsg_set_faction_atwar;
 pub use cmsg_set_faction_atwar::*;
+pub(crate) mod cmsg_set_saved_instance_extend;
+pub use cmsg_set_saved_instance_extend::*;
 pub(crate) mod cmsg_split_item;
 pub use cmsg_split_item::*;
 pub(crate) mod cmsg_text_emote;

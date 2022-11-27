@@ -488,6 +488,7 @@
 - [CMSG_SET_FACTION_ATWAR](docs/cmsg_set_faction_atwar.md)
 - [CMSG_SET_FACTION_INACTIVE](docs/cmsg_set_faction_inactive.md)
 - [CMSG_SET_LFG_COMMENT](docs/cmsg_set_lfg_comment.md)
+- [CMSG_SET_SAVED_INSTANCE_EXTEND](docs/cmsg_set_saved_instance_extend.md)
 - [CMSG_SET_SELECTION](docs/cmsg_set_selection.md)
 - [CMSG_SET_TARGET_OBSOLETE](docs/cmsg_set_target_obsolete.md)
 - [CMSG_SET_TAXI_BENCHMARK_MODE](docs/cmsg_set_taxi_benchmark_mode.md)

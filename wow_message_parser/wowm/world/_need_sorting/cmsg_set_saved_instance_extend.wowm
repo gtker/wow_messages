@@ -1,0 +1,7 @@
+cmsg CMSG_SET_SAVED_INSTANCE_EXTEND = 0x0292 {
+    Map map;
+    RaidDifficulty difficulty;
+    Bool toggle_extend;
+} {
+    versions = "3.3.5";
+}

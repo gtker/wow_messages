@@ -25,6 +25,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `TWENTY_FIVE_MAN_HEROIC` | 3 (0x03) |  |  |
 
 Used in:
+* [CMSG_SET_SAVED_INSTANCE_EXTEND](cmsg_set_saved_instance_extend.md)
 * [SMSG_GROUP_LIST](smsg_group_list.md)
 * [SMSG_RAID_INSTANCE_MESSAGE](smsg_raid_instance_message.md)
 

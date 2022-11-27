@@ -627,6 +627,7 @@ Used in:
 * [CMSG_BATTLEMASTER_JOIN](cmsg_battlemaster_join.md)
 * [CMSG_GMTICKET_CREATE](cmsg_gmticket_create.md)
 * [CMSG_LEAVE_BATTLEFIELD](cmsg_leave_battlefield.md)
+* [CMSG_SET_SAVED_INSTANCE_EXTEND](cmsg_set_saved_instance_extend.md)
 * [CMSG_WORLD_TELEPORT](cmsg_world_teleport.md)
 * [Character](character.md)
 * [MSG_CORPSE_QUERY_Server](msg_corpse_query_server.md)
