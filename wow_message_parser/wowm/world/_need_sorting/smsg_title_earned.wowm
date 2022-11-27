@@ -1,0 +1,13 @@
+enum TitleEarnStatus : u32 {
+    LOST = 0;
+    EARNED = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_TITLE_EARNED = 0x0373 {
+    u32 title;
+    TitleEarnStatus status;
+} {
+    versions = "2.4.3 3";
+}

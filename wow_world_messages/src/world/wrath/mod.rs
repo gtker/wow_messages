@@ -1394,6 +1394,8 @@ pub use crate::shared::smsg_taxinode_status_vanilla_tbc_wrath::SMSG_TAXINODE_STA
 
 pub use crate::shared::smsg_time_sync_req_tbc_wrath::SMSG_TIME_SYNC_REQ;
 
+pub use crate::shared::smsg_title_earned_tbc_wrath::SMSG_TITLE_EARNED;
+
 pub use crate::shared::smsg_trade_status_extended_tbc_wrath::SMSG_TRADE_STATUS_EXTENDED;
 
 pub use crate::shared::smsg_trainer_buy_failed_vanilla_tbc_wrath::SMSG_TRAINER_BUY_FAILED;
@@ -1429,6 +1431,8 @@ pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 pub use crate::shared::status_id_vanilla_tbc_wrath::StatusId;
 
 pub use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
+
+pub use crate::shared::title_earn_status_tbc_wrath::TitleEarnStatus;
 
 pub use crate::shared::trade_slot_tbc_wrath::TradeSlot;
 

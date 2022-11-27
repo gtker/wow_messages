@@ -5977,6 +5977,7 @@ use crate::world::wrath::SMSG_ARENA_TEAM_ROSTER;
 use crate::world::wrath::SMSG_ARENA_TEAM_INVITE;
 use crate::world::wrath::SMSG_ARENA_TEAM_EVENT;
 use crate::world::wrath::SMSG_ARENA_TEAM_STATS;
+use crate::world::wrath::SMSG_TITLE_EARNED;
 use crate::world::wrath::MSG_INSPECT_ARENA_TEAMS_Server;
 use crate::world::wrath::MSG_MOVE_SET_FLIGHT_SPEED_Server;
 use crate::world::wrath::SMSG_REALM_SPLIT;
@@ -6343,6 +6344,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ARENA_TEAM_INVITE(SMSG_ARENA_TEAM_INVITE),
     SMSG_ARENA_TEAM_EVENT(SMSG_ARENA_TEAM_EVENT),
     SMSG_ARENA_TEAM_STATS(SMSG_ARENA_TEAM_STATS),
+    SMSG_TITLE_EARNED(SMSG_TITLE_EARNED),
     MSG_INSPECT_ARENA_TEAMS(MSG_INSPECT_ARENA_TEAMS_Server),
     MSG_MOVE_SET_FLIGHT_SPEED(MSG_MOVE_SET_FLIGHT_SPEED_Server),
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
@@ -6711,6 +6713,7 @@ impl ServerOpcodeMessage {
             0x0350 => Ok(Self::SMSG_ARENA_TEAM_INVITE(<SMSG_ARENA_TEAM_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0350, size: body_size, io, } } else { a } })?)),
             0x0357 => Ok(Self::SMSG_ARENA_TEAM_EVENT(<SMSG_ARENA_TEAM_EVENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0357, size: body_size, io, } } else { a } })?)),
             0x035B => Ok(Self::SMSG_ARENA_TEAM_STATS(<SMSG_ARENA_TEAM_STATS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035B, size: body_size, io, } } else { a } })?)),
+            0x0373 => Ok(Self::SMSG_TITLE_EARNED(<SMSG_TITLE_EARNED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0373, size: body_size, io, } } else { a } })?)),
             0x0377 => Ok(Self::MSG_INSPECT_ARENA_TEAMS(<MSG_INSPECT_ARENA_TEAMS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0377, size: body_size, io, } } else { a } })?)),
             0x037E => Ok(Self::MSG_MOVE_SET_FLIGHT_SPEED(<MSG_MOVE_SET_FLIGHT_SPEED_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x037E, size: body_size, io, } } else { a } })?)),
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
@@ -7228,6 +7231,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_TEAM_INVITE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ARENA_TEAM_EVENT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ARENA_TEAM_STATS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_TITLE_EARNED(c) => c.write_encrypted_server(w, e),
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
@@ -7597,6 +7601,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_TEAM_INVITE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ARENA_TEAM_EVENT(c) => c.write_unencrypted_server(w),
             Self::SMSG_ARENA_TEAM_STATS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_TITLE_EARNED(c) => c.write_unencrypted_server(w),
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
@@ -7966,6 +7971,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_TEAM_INVITE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ARENA_TEAM_EVENT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ARENA_TEAM_STATS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_TITLE_EARNED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8335,6 +8341,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_TEAM_INVITE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ARENA_TEAM_EVENT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ARENA_TEAM_STATS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_TITLE_EARNED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8704,6 +8711,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_TEAM_INVITE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ARENA_TEAM_EVENT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ARENA_TEAM_STATS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_TITLE_EARNED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9073,6 +9081,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_TEAM_INVITE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ARENA_TEAM_EVENT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ARENA_TEAM_STATS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_TITLE_EARNED(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
@@ -9452,6 +9461,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ARENA_TEAM_INVITE(_) => "SMSG_ARENA_TEAM_INVITE",
             ServerOpcodeMessage::SMSG_ARENA_TEAM_EVENT(_) => "SMSG_ARENA_TEAM_EVENT",
             ServerOpcodeMessage::SMSG_ARENA_TEAM_STATS(_) => "SMSG_ARENA_TEAM_STATS",
+            ServerOpcodeMessage::SMSG_TITLE_EARNED(_) => "SMSG_TITLE_EARNED",
             ServerOpcodeMessage::MSG_INSPECT_ARENA_TEAMS(_) => "MSG_INSPECT_ARENA_TEAMS_Server",
             ServerOpcodeMessage::MSG_MOVE_SET_FLIGHT_SPEED(_) => "MSG_MOVE_SET_FLIGHT_SPEED_Server",
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
@@ -11571,6 +11581,12 @@ impl From<SMSG_ARENA_TEAM_EVENT> for ServerOpcodeMessage {
 impl From<SMSG_ARENA_TEAM_STATS> for ServerOpcodeMessage {
     fn from(c: SMSG_ARENA_TEAM_STATS) -> Self {
         Self::SMSG_ARENA_TEAM_STATS(c)
+    }
+}
+
+impl From<SMSG_TITLE_EARNED> for ServerOpcodeMessage {
+    fn from(c: SMSG_TITLE_EARNED) -> Self {
+        Self::SMSG_TITLE_EARNED(c)
     }
 }
 
