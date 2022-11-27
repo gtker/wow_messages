@@ -1,0 +1,6 @@
+smsg SMSG_UPDATE_COMBO_POINTS = 0x039D {
+    PackedGuid target;
+    u8 combo_points;
+} {
+    versions = "2.4.3 3";
+}

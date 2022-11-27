@@ -620,6 +620,7 @@ pub mod smsg_trainer_buy_failed_vanilla_tbc_wrath;
 pub mod smsg_trainer_buy_succeeded_vanilla_tbc_wrath;
 pub mod smsg_turn_in_petition_results_tbc_wrath;
 pub mod smsg_tutorial_flags_vanilla_tbc_wrath;
+pub mod smsg_update_combo_points_tbc_wrath;
 pub mod smsg_update_instance_ownership_vanilla_tbc_wrath;
 pub mod smsg_update_world_state_vanilla_tbc_wrath;
 pub mod smsg_warden_data_vanilla_tbc_wrath;
