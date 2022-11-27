@@ -399,7 +399,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x01f8 => "SMSG_EXPLORATION_EXPERIENCE",
         0x01fb => "MSG_RANDOM_ROLL",
         0x01fc => "SMSG_ENVIRONMENTAL_DAMAGE_LOG",
-        0x01fd => "CMSG_CHANGEPLAYER_DIFFICULTY",
         0x01ff => "SMSG_LFG_PLAYER_REWARD",
         0x0200 => "SMSG_LFG_TELEPORT_DENIED",
         0x0202 => "CMSG_UNLEARN_SKILL",

@@ -400,7 +400,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_EXPLORATION_EXPERIENCE", 0x1F8),
     Data::new("MSG_RANDOM_ROLL", 0x1FB),
     Data::new("SMSG_ENVIRONMENTAL_DAMAGE_LOG", 0x1FC),
-    Data::new("CMSG_CHANGEPLAYER_DIFFICULTY", 0x1FD),
     Data::new("SMSG_LFG_PLAYER_REWARD", 0x1FF),
     Data::new("SMSG_LFG_TELEPORT_DENIED", 0x200),
     Data::new("CMSG_UNLEARN_SKILL", 0x202),
