@@ -705,6 +705,7 @@
 - [SMSG_AREA_SPIRIT_HEALER_TIME](docs/smsg_area_spirit_healer_time.md)
 - [SMSG_AREA_TRIGGER_MESSAGE](docs/smsg_area_trigger_message.md)
 - [SMSG_ARENA_TEAM_COMMAND_RESULT](docs/smsg_arena_team_command_result.md)
+- [SMSG_ARENA_TEAM_QUERY_RESPONSE](docs/smsg_arena_team_query_response.md)
 - [SMSG_ATTACKERSTATEUPDATE](docs/smsg_attackerstateupdate.md)
 - [SMSG_ATTACKSTART](docs/smsg_attackstart.md)
 - [SMSG_ATTACKSTOP](docs/smsg_attackstop.md)

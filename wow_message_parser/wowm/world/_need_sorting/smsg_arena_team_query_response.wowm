@@ -1,0 +1,12 @@
+smsg SMSG_ARENA_TEAM_QUERY_RESPONSE = 0x034C {
+    u32 arena_team;
+    CString team_name;
+    ArenaType team_type;
+    u32 background_color;
+    u32 emblem_style;
+    u32 emblem_color;
+    u32 border_style;
+    u32 border_color;
+} {
+    versions = "2.4.3 3";
+}
