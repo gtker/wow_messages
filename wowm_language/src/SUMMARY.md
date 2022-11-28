@@ -520,6 +520,7 @@
 - [CMSG_SET_CONTACT_NOTES](docs/cmsg_set_contact_notes.md)
 - [CMSG_SET_FACTION_ATWAR](docs/cmsg_set_faction_atwar.md)
 - [CMSG_SET_FACTION_INACTIVE](docs/cmsg_set_faction_inactive.md)
+- [CMSG_SET_GUILD_BANK_TEXT](docs/cmsg_set_guild_bank_text.md)
 - [CMSG_SET_LFG_COMMENT](docs/cmsg_set_lfg_comment.md)
 - [CMSG_SET_SAVED_INSTANCE_EXTEND](docs/cmsg_set_saved_instance_extend.md)
 - [CMSG_SET_SELECTION](docs/cmsg_set_selection.md)

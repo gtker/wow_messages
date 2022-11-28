@@ -1,0 +1,13 @@
+cmsg CMSG_SET_GUILD_BANK_TEXT = 0x040A {
+    u8 tab;
+    CString text;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_SET_GUILD_BANK_TEXT = 0x040B {
+    u8 tab;
+    CString text;
+} {
+    versions = "3.3.5";
+}
