@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_calendar_event_rsvp.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_calendar_event_rsvp.wowm#L1):
 /// ```text
-/// enum CalendarStatus : u32 {
+/// enum CalendarStatus : u8 {
 ///     INVITED = 0;
 ///     ACCEPTED = 1;
 ///     DECLINED = 2;
@@ -31,7 +31,7 @@ pub enum CalendarStatus {
 }
 
 impl CalendarStatus {
-    pub(crate) const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u8 {
         match self {
             Self::Invited => 0x0,
             Self::Accepted => 0x1,
@@ -71,9 +71,9 @@ impl std::fmt::Display for CalendarStatus {
     }
 }
 
-impl TryFrom<u32> for CalendarStatus {
+impl TryFrom<u8> for CalendarStatus {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Invited),
             1 => Ok(Self::Accepted),

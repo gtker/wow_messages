@@ -1,4 +1,4 @@
-enum CalendarStatus : u32 {
+enum CalendarStatus : u8 {
     INVITED         = 0;
     ACCEPTED        = 1;
     DECLINED        = 2;
@@ -16,7 +16,7 @@ enum CalendarStatus : u32 {
 cmsg CMSG_CALENDAR_EVENT_RSVP = 0x0432 {
     Guid event;
     Guid invite_id;
-    CalendarStatus status;
+    (u32)CalendarStatus status;
 } {
     versions = "3.3.5";
 }

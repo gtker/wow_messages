@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// cmsg CMSG_CALENDAR_EVENT_RSVP = 0x0432 {
 ///     Guid event;
 ///     Guid invite_id;
-///     CalendarStatus status;
+///     (u32)CalendarStatus status;
 /// }
 /// ```
 pub struct CMSG_CALENDAR_EVENT_RSVP {
@@ -49,7 +49,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_RSVP {
         let invite_id = Guid::read(r)?;
 
         // status: CalendarStatus
-        let status: CalendarStatus = crate::util::read_u32_le(r)?.try_into()?;
+        let status: CalendarStatus = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             event,

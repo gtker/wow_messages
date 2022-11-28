@@ -1,0 +1,8 @@
+cmsg CMSG_CALENDAR_EVENT_STATUS = 0x0434 {
+    Guid event;
+    Guid invite_id;
+    Guid sender_invite_id;
+    CalendarStatus status;
+} {
+    versions = "3.3.5";
+}
