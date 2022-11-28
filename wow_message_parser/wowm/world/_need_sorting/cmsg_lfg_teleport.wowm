@@ -1,0 +1,12 @@
+enum LfgTeleportLocation : u8 {
+    IN = 0;
+    OUT = 1;
+} {
+    versions = "3.3.5";
+}
+
+cmsg CMSG_LFG_TELEPORT = 0x0370 {
+    LfgTeleportLocation location;
+} {
+    versions = "3.3.5";
+}
