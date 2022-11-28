@@ -347,6 +347,7 @@ use crate::world::wrath::CMSG_SEARCH_LFG_LEAVE;
 use crate::world::wrath::CMSG_LFG_PROPOSAL_RESULT;
 use crate::world::wrath::CMSG_SET_LFG_COMMENT;
 use crate::world::wrath::CMSG_LFG_SET_ROLES;
+use crate::world::wrath::CMSG_LFG_SET_BOOT_VOTE;
 use crate::world::wrath::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST;
 use crate::world::wrath::CMSG_SET_TITLE;
 use crate::world::wrath::CMSG_CANCEL_MOUNT_AURA;
@@ -705,6 +706,7 @@ pub enum ClientOpcodeMessage {
     CMSG_LFG_PROPOSAL_RESULT(CMSG_LFG_PROPOSAL_RESULT),
     CMSG_SET_LFG_COMMENT(CMSG_SET_LFG_COMMENT),
     CMSG_LFG_SET_ROLES(CMSG_LFG_SET_ROLES),
+    CMSG_LFG_SET_BOOT_VOTE(CMSG_LFG_SET_BOOT_VOTE),
     CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(CMSG_LFD_PLAYER_LOCK_INFO_REQUEST),
     CMSG_SET_TITLE(CMSG_SET_TITLE),
     CMSG_CANCEL_MOUNT_AURA(CMSG_CANCEL_MOUNT_AURA),
@@ -1065,6 +1067,7 @@ impl ClientOpcodeMessage {
             0x0362 => Ok(Self::CMSG_LFG_PROPOSAL_RESULT(<CMSG_LFG_PROPOSAL_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0362, size: body_size, io, } } else { a } })?)),
             0x0366 => Ok(Self::CMSG_SET_LFG_COMMENT(<CMSG_SET_LFG_COMMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0366, size: body_size, io, } } else { a } })?)),
             0x036A => Ok(Self::CMSG_LFG_SET_ROLES(<CMSG_LFG_SET_ROLES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036A, size: body_size, io, } } else { a } })?)),
+            0x036C => Ok(Self::CMSG_LFG_SET_BOOT_VOTE(<CMSG_LFG_SET_BOOT_VOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036C, size: body_size, io, } } else { a } })?)),
             0x036E => Ok(Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(<CMSG_LFD_PLAYER_LOCK_INFO_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036E, size: body_size, io, } } else { a } })?)),
             0x0374 => Ok(Self::CMSG_SET_TITLE(<CMSG_SET_TITLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0374, size: body_size, io, } } else { a } })?)),
             0x0375 => Ok(Self::CMSG_CANCEL_MOUNT_AURA(<CMSG_CANCEL_MOUNT_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0375, size: body_size, io, } } else { a } })?)),
@@ -1493,6 +1496,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_SET_ROLES(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_TITLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_encrypted_client(w, e),
@@ -1854,6 +1858,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_SET_ROLES(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_TITLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_unencrypted_client(w),
@@ -2215,6 +2220,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_SET_ROLES(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2576,6 +2582,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_SET_ROLES(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2937,6 +2944,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_SET_ROLES(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3298,6 +3306,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_SET_ROLES(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_unencrypted_client(w).await,
@@ -3670,6 +3679,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_LFG_PROPOSAL_RESULT(_) => "CMSG_LFG_PROPOSAL_RESULT",
             ClientOpcodeMessage::CMSG_SET_LFG_COMMENT(_) => "CMSG_SET_LFG_COMMENT",
             ClientOpcodeMessage::CMSG_LFG_SET_ROLES(_) => "CMSG_LFG_SET_ROLES",
+            ClientOpcodeMessage::CMSG_LFG_SET_BOOT_VOTE(_) => "CMSG_LFG_SET_BOOT_VOTE",
             ClientOpcodeMessage::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(_) => "CMSG_LFD_PLAYER_LOCK_INFO_REQUEST",
             ClientOpcodeMessage::CMSG_SET_TITLE(_) => "CMSG_SET_TITLE",
             ClientOpcodeMessage::CMSG_CANCEL_MOUNT_AURA(_) => "CMSG_CANCEL_MOUNT_AURA",
@@ -5716,6 +5726,12 @@ impl From<CMSG_SET_LFG_COMMENT> for ClientOpcodeMessage {
 impl From<CMSG_LFG_SET_ROLES> for ClientOpcodeMessage {
     fn from(c: CMSG_LFG_SET_ROLES) -> Self {
         Self::CMSG_LFG_SET_ROLES(c)
+    }
+}
+
+impl From<CMSG_LFG_SET_BOOT_VOTE> for ClientOpcodeMessage {
+    fn from(c: CMSG_LFG_SET_BOOT_VOTE) -> Self {
+        Self::CMSG_LFG_SET_BOOT_VOTE(c)
     }
 }
 

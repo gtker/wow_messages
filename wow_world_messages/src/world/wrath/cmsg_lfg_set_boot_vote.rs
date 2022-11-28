@@ -1,0 +1,43 @@
+use std::convert::{TryFrom, TryInto};
+use std::io::{Write, Read};
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_lfg_set_boot_vote.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_lfg_set_boot_vote.wowm#L1):
+/// ```text
+/// cmsg CMSG_LFG_SET_BOOT_VOTE = 0x036C {
+///     Bool agree_to_kick_player;
+/// }
+/// ```
+pub struct CMSG_LFG_SET_BOOT_VOTE {
+    pub agree_to_kick_player: bool,
+}
+
+impl crate::Message for CMSG_LFG_SET_BOOT_VOTE {
+    const OPCODE: u32 = 0x036c;
+
+    fn size_without_header(&self) -> u32 {
+        1
+    }
+
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        // agree_to_kick_player: Bool
+        w.write_all(u8::from(self.agree_to_kick_player).to_le_bytes().as_slice())?;
+
+        Ok(())
+    }
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size as u32 });
+        }
+
+        // agree_to_kick_player: Bool
+        let agree_to_kick_player = crate::util::read_u8_le(r)? != 0;
+        Ok(Self {
+            agree_to_kick_player,
+        })
+    }
+
+}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ClientMessage for CMSG_LFG_SET_BOOT_VOTE {}
+

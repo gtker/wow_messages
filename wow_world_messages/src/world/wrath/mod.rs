@@ -110,6 +110,8 @@ pub(crate) mod cmsg_lfg_leave;
 pub use cmsg_lfg_leave::*;
 pub(crate) mod cmsg_lfg_proposal_result;
 pub use cmsg_lfg_proposal_result::*;
+pub(crate) mod cmsg_lfg_set_boot_vote;
+pub use cmsg_lfg_set_boot_vote::*;
 pub(crate) mod cmsg_lfg_set_roles;
 pub use cmsg_lfg_set_roles::*;
 pub(crate) mod cmsg_loot_method;
