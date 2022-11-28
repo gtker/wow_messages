@@ -367,6 +367,7 @@
 - [CMSG_GROUP_UNINVITE_GUID](docs/cmsg_group_uninvite_guid.md)
 - [CMSG_GUILD_ACCEPT](docs/cmsg_guild_accept.md)
 - [CMSG_GUILD_ADD_RANK](docs/cmsg_guild_add_rank.md)
+- [CMSG_GUILD_BANKER_ACTIVATE](docs/cmsg_guild_banker_activate.md)
 - [CMSG_GUILD_CREATE](docs/cmsg_guild_create.md)
 - [CMSG_GUILD_DECLINE](docs/cmsg_guild_decline.md)
 - [CMSG_GUILD_DEL_RANK](docs/cmsg_guild_del_rank.md)

@@ -64,6 +64,8 @@ pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
 pub(crate) mod cmsg_get_channel_member_count;
 pub use cmsg_get_channel_member_count::*;
+pub(crate) mod cmsg_guild_banker_activate;
+pub use cmsg_guild_banker_activate::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
 pub(crate) mod cmsg_loot_method;

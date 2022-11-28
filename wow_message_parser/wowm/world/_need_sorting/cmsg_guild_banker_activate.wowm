@@ -1,0 +1,13 @@
+cmsg CMSG_GUILD_BANKER_ACTIVATE = 0x03E5 {
+    Guid bank;
+    Bool full_update;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_GUILD_BANKER_ACTIVATE = 0x03E6 {
+    Guid bank;
+    Bool full_update;
+} {
+    versions = "3.3.5";
+}
