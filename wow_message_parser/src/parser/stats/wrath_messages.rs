@@ -690,7 +690,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_LFG_UPDATE_PARTY", 0x368),
     Data::new("SMSG_LFG_UPDATE_SEARCH", 0x369),
     Data::new("CMSG_LFG_SET_ROLES", 0x36A),
-    Data::new("CMSG_LFG_SET_NEEDS", 0x36B),
     Data::new("CMSG_LFG_SET_BOOT_VOTE", 0x36C),
     Data::new("SMSG_LFG_BOOT_PROPOSAL_UPDATE", 0x36D),
     Data::new("CMSG_LFD_PLAYER_LOCK_INFO_REQUEST", 0x36E),

@@ -686,7 +686,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0368 => "SMSG_LFG_UPDATE_PARTY",
         0x0369 => "SMSG_LFG_UPDATE_SEARCH",
         0x036a => "CMSG_LFG_SET_ROLES",
-        0x036b => "CMSG_LFG_SET_NEEDS",
         0x036c => "CMSG_LFG_SET_BOOT_VOTE",
         0x036d => "SMSG_LFG_BOOT_PROPOSAL_UPDATE",
         0x036e => "CMSG_LFD_PLAYER_LOCK_INFO_REQUEST",
