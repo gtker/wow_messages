@@ -743,7 +743,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_CHANNEL_MEMBER_COUNT", 0x3D4),
     Data::new("CMSG_CHANNEL_VOICE_ON", 0x3D5),
     Data::nyi("CMSG_CHANNEL_VOICE_OFF", 0x3D6),
-    Data::new("CMSG_DEBUG_LIST_TARGETS", 0x3D7),
     Data::new("SMSG_DEBUG_LIST_TARGETS", 0x3D8),
     Data::new("SMSG_AVAILABLE_VOICE_CHANNEL", 0x3D9),
     Data::new("CMSG_ADD_VOICE_IGNORE", 0x3DA),
