@@ -68,6 +68,8 @@ pub(crate) mod cmsg_get_channel_member_count;
 pub use cmsg_get_channel_member_count::*;
 pub(crate) mod cmsg_get_mirrorimage_data;
 pub use cmsg_get_mirrorimage_data::*;
+pub(crate) mod cmsg_grant_level;
+pub use cmsg_grant_level::*;
 pub(crate) mod cmsg_guild_bank_buy_tab;
 pub use cmsg_guild_bank_buy_tab::*;
 pub(crate) mod cmsg_guild_bank_deposit_money;

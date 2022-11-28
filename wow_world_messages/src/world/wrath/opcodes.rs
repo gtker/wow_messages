@@ -385,6 +385,7 @@ use crate::world::wrath::CMSG_GET_MIRRORIMAGE_DATA;
 use crate::world::wrath::CMSG_KEEP_ALIVE;
 use crate::world::wrath::CMSG_OPT_OUT_OF_LOOT;
 use crate::world::wrath::CMSG_SET_GUILD_BANK_TEXT;
+use crate::world::wrath::CMSG_GRANT_LEVEL;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -766,6 +767,7 @@ pub enum ClientOpcodeMessage {
     CMSG_KEEP_ALIVE(CMSG_KEEP_ALIVE),
     CMSG_OPT_OUT_OF_LOOT(CMSG_OPT_OUT_OF_LOOT),
     CMSG_SET_GUILD_BANK_TEXT(CMSG_SET_GUILD_BANK_TEXT),
+    CMSG_GRANT_LEVEL(CMSG_GRANT_LEVEL),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1149,6 +1151,7 @@ impl ClientOpcodeMessage {
             0x0407 => Ok(Self::CMSG_KEEP_ALIVE(<CMSG_KEEP_ALIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0407, size: body_size, io, } } else { a } })?)),
             0x0409 => Ok(Self::CMSG_OPT_OUT_OF_LOOT(<CMSG_OPT_OUT_OF_LOOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0409, size: body_size, io, } } else { a } })?)),
             0x040B => Ok(Self::CMSG_SET_GUILD_BANK_TEXT(<CMSG_SET_GUILD_BANK_TEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040B, size: body_size, io, } } else { a } })?)),
+            0x040D => Ok(Self::CMSG_GRANT_LEVEL(<CMSG_GRANT_LEVEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040D, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1600,6 +1603,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GRANT_LEVEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -1984,6 +1988,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GRANT_LEVEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2368,6 +2373,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -2752,6 +2758,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3136,6 +3143,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GRANT_LEVEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3520,6 +3528,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GRANT_LEVEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -3915,6 +3924,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_KEEP_ALIVE(_) => "CMSG_KEEP_ALIVE",
             ClientOpcodeMessage::CMSG_OPT_OUT_OF_LOOT(_) => "CMSG_OPT_OUT_OF_LOOT",
             ClientOpcodeMessage::CMSG_SET_GUILD_BANK_TEXT(_) => "CMSG_SET_GUILD_BANK_TEXT",
+            ClientOpcodeMessage::CMSG_GRANT_LEVEL(_) => "CMSG_GRANT_LEVEL",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6174,6 +6184,12 @@ impl From<CMSG_OPT_OUT_OF_LOOT> for ClientOpcodeMessage {
 impl From<CMSG_SET_GUILD_BANK_TEXT> for ClientOpcodeMessage {
     fn from(c: CMSG_SET_GUILD_BANK_TEXT) -> Self {
         Self::CMSG_SET_GUILD_BANK_TEXT(c)
+    }
+}
+
+impl From<CMSG_GRANT_LEVEL> for ClientOpcodeMessage {
+    fn from(c: CMSG_GRANT_LEVEL) -> Self {
+        Self::CMSG_GRANT_LEVEL(c)
     }
 }
 

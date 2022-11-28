@@ -1,0 +1,11 @@
+cmsg CMSG_GRANT_LEVEL = 0x040C {
+    PackedGuid player;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_GRANT_LEVEL = 0x040D {
+    PackedGuid player;
+} {
+    versions = "3.3.5";
+}

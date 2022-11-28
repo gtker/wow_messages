@@ -364,6 +364,7 @@ use crate::world::tbc::CMSG_GET_MIRRORIMAGE_DATA;
 use crate::world::tbc::CMSG_KEEP_ALIVE;
 use crate::world::tbc::CMSG_OPT_OUT_OF_LOOT;
 use crate::world::tbc::CMSG_SET_GUILD_BANK_TEXT;
+use crate::world::tbc::CMSG_GRANT_LEVEL;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -722,6 +723,7 @@ pub enum ClientOpcodeMessage {
     CMSG_KEEP_ALIVE(CMSG_KEEP_ALIVE),
     CMSG_OPT_OUT_OF_LOOT(CMSG_OPT_OUT_OF_LOOT),
     CMSG_SET_GUILD_BANK_TEXT(CMSG_SET_GUILD_BANK_TEXT),
+    CMSG_GRANT_LEVEL(CMSG_GRANT_LEVEL),
 }
 
 impl ClientOpcodeMessage {
@@ -1082,6 +1084,7 @@ impl ClientOpcodeMessage {
             0x0406 => Ok(Self::CMSG_KEEP_ALIVE(<CMSG_KEEP_ALIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0406, size: body_size, io, } } else { a } })?)),
             0x0408 => Ok(Self::CMSG_OPT_OUT_OF_LOOT(<CMSG_OPT_OUT_OF_LOOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0408, size: body_size, io, } } else { a } })?)),
             0x040A => Ok(Self::CMSG_SET_GUILD_BANK_TEXT(<CMSG_SET_GUILD_BANK_TEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040A, size: body_size, io, } } else { a } })?)),
+            0x040C => Ok(Self::CMSG_GRANT_LEVEL(<CMSG_GRANT_LEVEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040C, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
@@ -1510,6 +1513,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GRANT_LEVEL(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -1871,6 +1875,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GRANT_LEVEL(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -2232,6 +2237,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -2593,6 +2599,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -2954,6 +2961,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GRANT_LEVEL(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -3315,6 +3323,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_KEEP_ALIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GRANT_LEVEL(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -3711,6 +3720,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_KEEP_ALIVE(_) => "CMSG_KEEP_ALIVE",
             ClientOpcodeMessage::CMSG_OPT_OUT_OF_LOOT(_) => "CMSG_OPT_OUT_OF_LOOT",
             ClientOpcodeMessage::CMSG_SET_GUILD_BANK_TEXT(_) => "CMSG_SET_GUILD_BANK_TEXT",
+            ClientOpcodeMessage::CMSG_GRANT_LEVEL(_) => "CMSG_GRANT_LEVEL",
         })
     }
 }
@@ -5842,6 +5852,12 @@ impl From<CMSG_OPT_OUT_OF_LOOT> for ClientOpcodeMessage {
 impl From<CMSG_SET_GUILD_BANK_TEXT> for ClientOpcodeMessage {
     fn from(c: CMSG_SET_GUILD_BANK_TEXT) -> Self {
         Self::CMSG_SET_GUILD_BANK_TEXT(c)
+    }
+}
+
+impl From<CMSG_GRANT_LEVEL> for ClientOpcodeMessage {
+    fn from(c: CMSG_GRANT_LEVEL) -> Self {
+        Self::CMSG_GRANT_LEVEL(c)
     }
 }
 

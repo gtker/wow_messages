@@ -357,6 +357,7 @@
 - [CMSG_GMTICKET_UPDATETEXT](docs/cmsg_gmticket_updatetext.md)
 - [CMSG_GOSSIP_HELLO](docs/cmsg_gossip_hello.md)
 - [CMSG_GOSSIP_SELECT_OPTION](docs/cmsg_gossip_select_option.md)
+- [CMSG_GRANT_LEVEL](docs/cmsg_grant_level.md)
 - [CMSG_GROUP_ACCEPT](docs/cmsg_group_accept.md)
 - [CMSG_GROUP_ASSISTANT_LEADER](docs/cmsg_group_assistant_leader.md)
 - [CMSG_GROUP_CANCEL](docs/cmsg_group_cancel.md)
