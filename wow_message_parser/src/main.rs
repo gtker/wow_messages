@@ -1,5 +1,6 @@
 #![allow(clippy::too_many_arguments)]
 
+use std::fmt::Write;
 use std::path::Path;
 
 use doc_printer::container::print_docs_for_container;
@@ -10,10 +11,7 @@ use parser::types::objects::Objects;
 use rust_printer::print_struct;
 
 use crate::doc_printer::print_docs_summary_and_objects;
-use crate::file_utils::{
-    append_string_to_file, create_and_overwrite_if_not_same_contents, write_string_to_file,
-    ModFiles,
-};
+use crate::file_utils::{create_and_overwrite_if_not_same_contents, ModFiles};
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
@@ -180,6 +178,8 @@ fn print_main_types(o: &Objects) {
 
 fn write_world_opcodes(o: &Objects) {
     for e in o.get_main_world_versions_with_objects() {
+        let mut contents = String::with_capacity(16000);
+
         let mut v = o.get_world_messages_with_versions_and_all(&e);
         v.sort_by_key(|a| a.container_type());
         let cmsg: Vec<&Container> = v
@@ -194,9 +194,7 @@ fn write_world_opcodes(o: &Objects) {
             .collect();
         if !cmsg.is_empty() {
             let s = print_world_opcodes(&cmsg, &e, ContainerType::CMsg(0));
-            let filename = get_world_version_file_path(&e).join("opcodes.rs");
-
-            create_and_overwrite_if_not_same_contents(s.proper_as_str(), &filename);
+            contents.write_str(s.inner()).unwrap();
         }
 
         let smsg: Vec<&Container> = v
@@ -210,14 +208,18 @@ fn write_world_opcodes(o: &Objects) {
             .collect();
         if !smsg.is_empty() {
             let s = print_world_opcodes(&smsg, &e, ContainerType::SMsg(0));
-            let filename = get_world_version_file_path(&e).join("opcodes.rs");
-            append_string_to_file(s.proper_as_str(), &filename);
+            contents.write_str(s.inner()).unwrap();
         }
+
+        let filename = get_world_version_file_path(&e).join("opcodes.rs");
+        create_and_overwrite_if_not_same_contents(&contents, &filename);
     }
 }
 
 fn write_login_opcodes(o: &Objects) {
     for e in o.get_login_versions_with_objects() {
+        let mut contents = String::with_capacity(16000);
+
         let mut v: Vec<&Container> = o.get_login_messages_with_versions_and_all(&e);
         v.sort_by_key(|a| a.container_type());
         let slogin: Vec<&Container> = v
@@ -227,8 +229,7 @@ fn write_login_opcodes(o: &Objects) {
             .collect();
         if !slogin.is_empty() {
             let s = print_login_opcodes(&slogin, &e, ContainerType::SLogin(0));
-            let filename = get_login_version_file_path(&e).join("opcodes.rs");
-            write_string_to_file(s.proper_as_str(), &filename);
+            contents.write_str(s.inner()).unwrap();
         }
 
         let clogin: Vec<&Container> = v
@@ -237,9 +238,11 @@ fn write_login_opcodes(o: &Objects) {
             .collect();
         if !clogin.is_empty() {
             let s = print_login_opcodes(&clogin, &e, ContainerType::CLogin(0));
-            let filename = get_login_version_file_path(&e).join("opcodes.rs");
-            append_string_to_file(s.proper_as_str(), &filename);
+            contents.write_str(s.inner()).unwrap();
         }
+
+        let filename = get_login_version_file_path(&e).join("opcodes.rs");
+        create_and_overwrite_if_not_same_contents(&contents, &filename);
     }
 }
 

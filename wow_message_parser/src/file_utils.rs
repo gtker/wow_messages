@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 use std::fmt::Write as wfmt;
 use std::fs::{read_to_string, remove_file};
-use std::io::Write;
+use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 
 use heck::SnakeCase;
@@ -103,7 +103,12 @@ impl ModFiles {
 
                 let filename = file.path().canonicalize().unwrap();
 
-                already_existing_files.insert(filename, false);
+                let value = if let Some(p) = filename.file_name() {
+                    p.to_string_lossy() == "opcodes.rs"
+                } else {
+                    false
+                };
+                already_existing_files.insert(filename, value);
             }
         }
 
@@ -394,19 +399,6 @@ pub(crate) fn get_import_path(version: Version) -> String {
     }
 }
 
-pub(crate) fn append_string_to_file(s: &str, filename: &Path) {
-    let f = std::fs::OpenOptions::new().append(true).open(filename);
-    let mut f = match f {
-        Ok(f) => f,
-        Err(e) => panic!(
-            "Unable to append string to file: '{:?}' with error '{:?}'",
-            filename, e
-        ),
-    };
-
-    f.write_all(s.as_bytes()).unwrap();
-}
-
 pub(crate) fn write_string_to_file(s: &str, filename: &Path) {
     let f = std::fs::OpenOptions::new()
         .write(true)
@@ -433,14 +425,19 @@ pub(crate) fn overwrite_if_not_same_contents(s: &str, filename: &Path) {
 }
 
 pub(crate) fn create_and_overwrite_if_not_same_contents(s: &str, filename: &Path) {
-    let f = std::fs::OpenOptions::new().open(filename);
-    if f.is_ok() {
-        let f = read_to_string(filename).unwrap();
-        if f != s {
+    let f = std::fs::OpenOptions::new().read(true).open(filename);
+    match f {
+        Ok(mut f) => {
+            let mut contents = String::with_capacity(8000);
+            f.read_to_string(&mut contents).unwrap();
+            if contents != s {
+                write_string_to_file(s, filename);
+            }
+        }
+        Err(e) => {
+            eprintln!("Unable to open file '{}': '{:?}'", filename.display(), e);
             write_string_to_file(s, filename);
         }
-    } else {
-        write_string_to_file(s, filename);
     }
 }
 
