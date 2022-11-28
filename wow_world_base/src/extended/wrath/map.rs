@@ -166,7 +166,7 @@ impl Map {
     }
 
     pub const fn accessible_all(&self) -> bool {
-        true
+        !matches!(self, Map::DevelopmentLand)
     }
 
     pub const fn accessible_user(&self) -> bool {
