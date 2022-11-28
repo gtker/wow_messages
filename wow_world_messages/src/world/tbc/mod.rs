@@ -128,6 +128,8 @@ pub(crate) mod cmsg_spellclick;
 pub use cmsg_spellclick::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
+pub(crate) mod cmsg_totem_destroyed;
+pub use cmsg_totem_destroyed::*;
 pub(crate) mod cmsg_unlearn_skill;
 pub use cmsg_unlearn_skill::*;
 pub(crate) mod cmsg_use_item;

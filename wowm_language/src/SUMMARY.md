@@ -549,6 +549,7 @@
 - [CMSG_TOGGLE_CLOAK](docs/cmsg_toggle_cloak.md)
 - [CMSG_TOGGLE_HELM](docs/cmsg_toggle_helm.md)
 - [CMSG_TOGGLE_PVP](docs/cmsg_toggle_pvp.md)
+- [CMSG_TOTEM_DESTROYED](docs/cmsg_totem_destroyed.md)
 - [CMSG_TRAINER_BUY_SPELL](docs/cmsg_trainer_buy_spell.md)
 - [CMSG_TRAINER_LIST](docs/cmsg_trainer_list.md)
 - [CMSG_TURN_IN_PETITION](docs/cmsg_turn_in_petition.md)

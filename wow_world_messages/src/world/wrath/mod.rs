@@ -216,6 +216,8 @@ pub(crate) mod cmsg_split_item;
 pub use cmsg_split_item::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
+pub(crate) mod cmsg_totem_destroyed;
+pub use cmsg_totem_destroyed::*;
 pub(crate) mod cmsg_unlearn_skill;
 pub use cmsg_unlearn_skill::*;
 pub(crate) mod cmsg_update_account_data;

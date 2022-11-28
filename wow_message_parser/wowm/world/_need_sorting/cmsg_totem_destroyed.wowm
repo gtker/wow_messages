@@ -1,0 +1,11 @@
+cmsg CMSG_TOTEM_DESTROYED = 0x0413 {
+    u8 slot;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_TOTEM_DESTROYED = 0x0414 {
+    u8 slot;
+} {
+    versions = "3.3.5";
+}
