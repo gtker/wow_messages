@@ -1,0 +1,6 @@
+cmsg CMSG_LFG_PROPOSAL_RESULT = 0x0362 {
+    u32 proposal_id;
+    Bool accept_join;
+} {
+    versions = "3.3.5";
+}
