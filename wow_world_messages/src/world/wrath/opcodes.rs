@@ -366,6 +366,7 @@ use crate::world::wrath::MSG_RAID_READY_CHECK_CONFIRM_Client;
 use crate::world::wrath::CMSG_VOICE_SESSION_ENABLE;
 use crate::world::wrath::CMSG_COMMENTATOR_ENABLE;
 use crate::world::wrath::CMSG_COMPLAIN;
+use crate::world::wrath::CMSG_CHANNEL_DISPLAY_LIST;
 use crate::world::wrath::CMSG_SET_ACTIVE_VOICE_CHANNEL;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
@@ -729,6 +730,7 @@ pub enum ClientOpcodeMessage {
     CMSG_VOICE_SESSION_ENABLE(CMSG_VOICE_SESSION_ENABLE),
     CMSG_COMMENTATOR_ENABLE(CMSG_COMMENTATOR_ENABLE),
     CMSG_COMPLAIN(CMSG_COMPLAIN),
+    CMSG_CHANNEL_DISPLAY_LIST(CMSG_CHANNEL_DISPLAY_LIST),
     CMSG_SET_ACTIVE_VOICE_CHANNEL(CMSG_SET_ACTIVE_VOICE_CHANNEL),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
@@ -1094,6 +1096,7 @@ impl ClientOpcodeMessage {
             0x03AF => Ok(Self::CMSG_VOICE_SESSION_ENABLE(<CMSG_VOICE_SESSION_ENABLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AF, size: body_size, io, } } else { a } })?)),
             0x03B5 => Ok(Self::CMSG_COMMENTATOR_ENABLE(<CMSG_COMMENTATOR_ENABLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B5, size: body_size, io, } } else { a } })?)),
             0x03C7 => Ok(Self::CMSG_COMPLAIN(<CMSG_COMPLAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C7, size: body_size, io, } } else { a } })?)),
+            0x03D2 => Ok(Self::CMSG_CHANNEL_DISPLAY_LIST(<CMSG_CHANNEL_DISPLAY_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D2, size: body_size, io, } } else { a } })?)),
             0x03D3 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D3, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
@@ -1527,6 +1530,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMPLAIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
@@ -1893,6 +1897,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMPLAIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
@@ -2259,6 +2264,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLAIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2625,6 +2631,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMPLAIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2991,6 +2998,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLAIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3357,6 +3365,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMPLAIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
@@ -3734,6 +3743,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_VOICE_SESSION_ENABLE(_) => "CMSG_VOICE_SESSION_ENABLE",
             ClientOpcodeMessage::CMSG_COMMENTATOR_ENABLE(_) => "CMSG_COMMENTATOR_ENABLE",
             ClientOpcodeMessage::CMSG_COMPLAIN(_) => "CMSG_COMPLAIN",
+            ClientOpcodeMessage::CMSG_CHANNEL_DISPLAY_LIST(_) => "CMSG_CHANNEL_DISPLAY_LIST",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
@@ -5880,6 +5890,12 @@ impl From<CMSG_COMMENTATOR_ENABLE> for ClientOpcodeMessage {
 impl From<CMSG_COMPLAIN> for ClientOpcodeMessage {
     fn from(c: CMSG_COMPLAIN) -> Self {
         Self::CMSG_COMPLAIN(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_DISPLAY_LIST> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_DISPLAY_LIST) -> Self {
+        Self::CMSG_CHANNEL_DISPLAY_LIST(c)
     }
 }
 

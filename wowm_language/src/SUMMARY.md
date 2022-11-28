@@ -295,6 +295,7 @@
 - [CMSG_CAST_SPELL](docs/cmsg_cast_spell.md)
 - [CMSG_CHANNEL_ANNOUNCEMENTS](docs/cmsg_channel_announcements.md)
 - [CMSG_CHANNEL_BAN](docs/cmsg_channel_ban.md)
+- [CMSG_CHANNEL_DISPLAY_LIST](docs/cmsg_channel_display_list.md)
 - [CMSG_CHANNEL_INVITE](docs/cmsg_channel_invite.md)
 - [CMSG_CHANNEL_KICK](docs/cmsg_channel_kick.md)
 - [CMSG_CHANNEL_LIST](docs/cmsg_channel_list.md)

@@ -1,0 +1,11 @@
+cmsg CMSG_CHANNEL_DISPLAY_LIST = 0x03D1 {
+    CString channel;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_CHANNEL_DISPLAY_LIST = 0x03D2 {
+    CString channel;
+} {
+    versions = "3.3.5";
+}

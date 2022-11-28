@@ -345,6 +345,7 @@ use crate::world::tbc::MSG_MOVE_START_DESCEND_Client;
 use crate::world::tbc::MSG_RAID_READY_CHECK_CONFIRM_Client;
 use crate::world::tbc::CMSG_COMMENTATOR_ENABLE;
 use crate::world::tbc::CMSG_COMPLAIN;
+use crate::world::tbc::CMSG_CHANNEL_DISPLAY_LIST;
 use crate::world::tbc::CMSG_SET_ACTIVE_VOICE_CHANNEL;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -685,6 +686,7 @@ pub enum ClientOpcodeMessage {
     MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Client),
     CMSG_COMMENTATOR_ENABLE(CMSG_COMMENTATOR_ENABLE),
     CMSG_COMPLAIN(CMSG_COMPLAIN),
+    CMSG_CHANNEL_DISPLAY_LIST(CMSG_CHANNEL_DISPLAY_LIST),
     CMSG_SET_ACTIVE_VOICE_CHANNEL(CMSG_SET_ACTIVE_VOICE_CHANNEL),
 }
 
@@ -1027,6 +1029,7 @@ impl ClientOpcodeMessage {
             0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
             0x03B4 => Ok(Self::CMSG_COMMENTATOR_ENABLE(<CMSG_COMMENTATOR_ENABLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B4, size: body_size, io, } } else { a } })?)),
             0x03C6 => Ok(Self::CMSG_COMPLAIN(<CMSG_COMPLAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C6, size: body_size, io, } } else { a } })?)),
+            0x03D1 => Ok(Self::CMSG_CHANNEL_DISPLAY_LIST(<CMSG_CHANNEL_DISPLAY_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D1, size: body_size, io, } } else { a } })?)),
             0x03D2 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D2, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
@@ -1437,6 +1440,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMPLAIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_encrypted_client(w, e),
         }
     }
@@ -1780,6 +1784,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMPLAIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_unencrypted_client(w),
         }
     }
@@ -2123,6 +2128,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLAIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
@@ -2466,6 +2472,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMPLAIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
@@ -2809,6 +2816,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLAIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
@@ -3152,6 +3160,7 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMPLAIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
@@ -3530,6 +3539,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Client",
             ClientOpcodeMessage::CMSG_COMMENTATOR_ENABLE(_) => "CMSG_COMMENTATOR_ENABLE",
             ClientOpcodeMessage::CMSG_COMPLAIN(_) => "CMSG_COMPLAIN",
+            ClientOpcodeMessage::CMSG_CHANNEL_DISPLAY_LIST(_) => "CMSG_CHANNEL_DISPLAY_LIST",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
         })
     }
@@ -5548,6 +5558,12 @@ impl From<CMSG_COMMENTATOR_ENABLE> for ClientOpcodeMessage {
 impl From<CMSG_COMPLAIN> for ClientOpcodeMessage {
     fn from(c: CMSG_COMPLAIN) -> Self {
         Self::CMSG_COMPLAIN(c)
+    }
+}
+
+impl From<CMSG_CHANNEL_DISPLAY_LIST> for ClientOpcodeMessage {
+    fn from(c: CMSG_CHANNEL_DISPLAY_LIST) -> Self {
+        Self::CMSG_CHANNEL_DISPLAY_LIST(c)
     }
 }
 
