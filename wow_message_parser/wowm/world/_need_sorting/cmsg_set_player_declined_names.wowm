@@ -1,0 +1,15 @@
+cmsg CMSG_SET_PLAYER_DECLINED_NAMES = 0x0418 {
+    Guid player;
+    CString name;
+    CString[5] declined_names;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_SET_PLAYER_DECLINED_NAMES = 0x0419 {
+    Guid player;
+    CString name;
+    CString[5] declined_names;
+} {
+    versions = "3.3.5";
+}

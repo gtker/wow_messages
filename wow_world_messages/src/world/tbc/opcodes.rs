@@ -367,6 +367,7 @@ use crate::world::tbc::CMSG_SET_GUILD_BANK_TEXT;
 use crate::world::tbc::CMSG_GRANT_LEVEL;
 use crate::world::tbc::CMSG_TOTEM_DESTROYED;
 use crate::world::tbc::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY;
+use crate::world::tbc::CMSG_SET_PLAYER_DECLINED_NAMES;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -728,6 +729,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GRANT_LEVEL(CMSG_GRANT_LEVEL),
     CMSG_TOTEM_DESTROYED(CMSG_TOTEM_DESTROYED),
     CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY),
+    CMSG_SET_PLAYER_DECLINED_NAMES(CMSG_SET_PLAYER_DECLINED_NAMES),
 }
 
 impl ClientOpcodeMessage {
@@ -1091,6 +1093,7 @@ impl ClientOpcodeMessage {
             0x040C => Ok(Self::CMSG_GRANT_LEVEL(<CMSG_GRANT_LEVEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040C, size: body_size, io, } } else { a } })?)),
             0x0413 => Ok(Self::CMSG_TOTEM_DESTROYED(<CMSG_TOTEM_DESTROYED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0413, size: body_size, io, } } else { a } })?)),
             0x0416 => Ok(Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(<CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0416, size: body_size, io, } } else { a } })?)),
+            0x0418 => Ok(Self::CMSG_SET_PLAYER_DECLINED_NAMES(<CMSG_SET_PLAYER_DECLINED_NAMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0418, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
@@ -1522,6 +1525,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GRANT_LEVEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TOTEM_DESTROYED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -1886,6 +1890,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GRANT_LEVEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_TOTEM_DESTROYED(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -2250,6 +2255,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -2614,6 +2620,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -2978,6 +2985,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GRANT_LEVEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -3342,6 +3350,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GRANT_LEVEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -3741,6 +3750,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GRANT_LEVEL(_) => "CMSG_GRANT_LEVEL",
             ClientOpcodeMessage::CMSG_TOTEM_DESTROYED(_) => "CMSG_TOTEM_DESTROYED",
             ClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(_) => "CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY",
+            ClientOpcodeMessage::CMSG_SET_PLAYER_DECLINED_NAMES(_) => "CMSG_SET_PLAYER_DECLINED_NAMES",
         })
     }
 }
@@ -5890,6 +5900,12 @@ impl From<CMSG_TOTEM_DESTROYED> for ClientOpcodeMessage {
 impl From<CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY> for ClientOpcodeMessage {
     fn from(c: CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY) -> Self {
         Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c)
+    }
+}
+
+impl From<CMSG_SET_PLAYER_DECLINED_NAMES> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_PLAYER_DECLINED_NAMES) -> Self {
+        Self::CMSG_SET_PLAYER_DECLINED_NAMES(c)
     }
 }
 

@@ -210,6 +210,8 @@ pub(crate) mod cmsg_set_faction_atwar;
 pub use cmsg_set_faction_atwar::*;
 pub(crate) mod cmsg_set_guild_bank_text;
 pub use cmsg_set_guild_bank_text::*;
+pub(crate) mod cmsg_set_player_declined_names;
+pub use cmsg_set_player_declined_names::*;
 pub(crate) mod cmsg_set_saved_instance_extend;
 pub use cmsg_set_saved_instance_extend::*;
 pub(crate) mod cmsg_spellclick;
