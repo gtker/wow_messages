@@ -787,7 +787,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("MSG_QUERY_GUILD_BANK_TEXT", 0x409),
     Data::new("CMSG_SET_GUILD_BANK_TEXT", 0x40A),
     Data::new("CMSG_GRANT_LEVEL", 0x40C),
-    Data::new("CMSG_REFER_A_FRIEND", 0x40D),
     Data::new("MSG_GM_CHANGE_ARENA_RATING", 0x40E),
     Data::new("CMSG_DECLINE_CHANNEL_INVITE", 0x40F),
     Data::new("CMSG_GROUPACTION_THROTTLED", 0x410),

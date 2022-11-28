@@ -788,7 +788,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x040a => "MSG_QUERY_GUILD_BANK_TEXT",
         0x040b => "CMSG_SET_GUILD_BANK_TEXT",
         0x040d => "CMSG_GRANT_LEVEL",
-        0x040e => "CMSG_REFER_A_FRIEND",
         0x0410 => "CMSG_DECLINE_CHANNEL_INVITE",
         0x0411 => "SMSG_GROUPACTION_THROTTLED",
         0x0412 => "SMSG_OVERRIDE_LIGHT",
