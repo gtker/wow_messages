@@ -767,7 +767,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x03f2 => "CMSG_CLEAR_CHANNEL_WATCH",
         0x03f3 => "SMSG_INSPECT_TALENT",
         0x03f5 => "SMSG_ECHO_PARTY_SQUELCH",
-        0x03f6 => "CMSG_SET_TITLE_SUFFIX",
         0x03f7 => "CMSG_SPELLCLICK",
         0x03f8 => "SMSG_LOOT_LIST",
         0x03fb => "SMSG_VOICESESSION_FULL",
