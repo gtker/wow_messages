@@ -316,6 +316,7 @@
 - [CMSG_CHAR_ENUM](docs/cmsg_char_enum.md)
 - [CMSG_CHAR_RENAME](docs/cmsg_char_rename.md)
 - [CMSG_CHAT_IGNORED](docs/cmsg_chat_ignored.md)
+- [CMSG_CLEAR_CHANNEL_WATCH](docs/cmsg_clear_channel_watch.md)
 - [CMSG_CLEAR_TRADE_ITEM](docs/cmsg_clear_trade_item.md)
 - [CMSG_COMMENTATOR_ENABLE](docs/cmsg_commentator_enable.md)
 - [CMSG_COMPLAIN](docs/cmsg_complain.md)

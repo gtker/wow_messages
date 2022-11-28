@@ -1,0 +1,11 @@
+cmsg CMSG_CLEAR_CHANNEL_WATCH = 0x03F2 {
+    CString channel;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_CLEAR_CHANNEL_WATCH = 0x03F3 {
+    CString channel;
+} {
+    versions = "3.3.5";
+}
