@@ -82,6 +82,8 @@ pub(crate) mod cmsg_guild_bank_withdraw_money;
 pub use cmsg_guild_bank_withdraw_money::*;
 pub(crate) mod cmsg_guild_banker_activate;
 pub use cmsg_guild_banker_activate::*;
+pub(crate) mod cmsg_keep_alive;
+pub use cmsg_keep_alive::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
 pub(crate) mod cmsg_loot_method;

@@ -126,6 +126,8 @@ pub(crate) mod cmsg_instance_lock_response;
 pub use cmsg_instance_lock_response::*;
 pub(crate) mod cmsg_item_text_query;
 pub use cmsg_item_text_query::*;
+pub(crate) mod cmsg_keep_alive;
+pub use cmsg_keep_alive::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
 pub(crate) mod cmsg_lfd_party_lock_info_request;

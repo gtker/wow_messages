@@ -404,6 +404,7 @@
 - [CMSG_ITEM_QUERY_SINGLE](docs/cmsg_item_query_single.md)
 - [CMSG_ITEM_TEXT_QUERY](docs/cmsg_item_text_query.md)
 - [CMSG_JOIN_CHANNEL](docs/cmsg_join_channel.md)
+- [CMSG_KEEP_ALIVE](docs/cmsg_keep_alive.md)
 - [CMSG_LEARN_TALENT](docs/cmsg_learn_talent.md)
 - [CMSG_LEAVE_BATTLEFIELD](docs/cmsg_leave_battlefield.md)
 - [CMSG_LEAVE_CHANNEL](docs/cmsg_leave_channel.md)

@@ -1,0 +1,7 @@
+cmsg CMSG_KEEP_ALIVE = 0x0406 {} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_KEEP_ALIVE = 0x0407 {} {
+    versions = "3.3.5";
+}

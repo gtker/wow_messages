@@ -361,6 +361,7 @@ use crate::world::tbc::CMSG_SET_CHANNEL_WATCH;
 use crate::world::tbc::CMSG_CLEAR_CHANNEL_WATCH;
 use crate::world::tbc::CMSG_SPELLCLICK;
 use crate::world::tbc::CMSG_GET_MIRRORIMAGE_DATA;
+use crate::world::tbc::CMSG_KEEP_ALIVE;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -716,6 +717,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CLEAR_CHANNEL_WATCH(CMSG_CLEAR_CHANNEL_WATCH),
     CMSG_SPELLCLICK(CMSG_SPELLCLICK),
     CMSG_GET_MIRRORIMAGE_DATA(CMSG_GET_MIRRORIMAGE_DATA),
+    CMSG_KEEP_ALIVE(CMSG_KEEP_ALIVE),
 }
 
 impl ClientOpcodeMessage {
@@ -1073,6 +1075,7 @@ impl ClientOpcodeMessage {
             0x03F2 => Ok(Self::CMSG_CLEAR_CHANNEL_WATCH(<CMSG_CLEAR_CHANNEL_WATCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F2, size: body_size, io, } } else { a } })?)),
             0x03F7 => Ok(Self::CMSG_SPELLCLICK(<CMSG_SPELLCLICK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F7, size: body_size, io, } } else { a } })?)),
             0x0400 => Ok(Self::CMSG_GET_MIRRORIMAGE_DATA(<CMSG_GET_MIRRORIMAGE_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0400, size: body_size, io, } } else { a } })?)),
+            0x0406 => Ok(Self::CMSG_KEEP_ALIVE(<CMSG_KEEP_ALIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0406, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
@@ -1498,6 +1501,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SPELLCLICK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_KEEP_ALIVE(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -1856,6 +1860,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.write_unencrypted_client(w),
             Self::CMSG_SPELLCLICK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.write_unencrypted_client(w),
+            Self::CMSG_KEEP_ALIVE(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -2214,6 +2219,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SPELLCLICK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -2572,6 +2578,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SPELLCLICK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -2930,6 +2937,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SPELLCLICK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_KEEP_ALIVE(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -3288,6 +3296,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SPELLCLICK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_KEEP_ALIVE(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -3681,6 +3690,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CLEAR_CHANNEL_WATCH(_) => "CMSG_CLEAR_CHANNEL_WATCH",
             ClientOpcodeMessage::CMSG_SPELLCLICK(_) => "CMSG_SPELLCLICK",
             ClientOpcodeMessage::CMSG_GET_MIRRORIMAGE_DATA(_) => "CMSG_GET_MIRRORIMAGE_DATA",
+            ClientOpcodeMessage::CMSG_KEEP_ALIVE(_) => "CMSG_KEEP_ALIVE",
         })
     }
 }
@@ -5794,6 +5804,12 @@ impl From<CMSG_SPELLCLICK> for ClientOpcodeMessage {
 impl From<CMSG_GET_MIRRORIMAGE_DATA> for ClientOpcodeMessage {
     fn from(c: CMSG_GET_MIRRORIMAGE_DATA) -> Self {
         Self::CMSG_GET_MIRRORIMAGE_DATA(c)
+    }
+}
+
+impl From<CMSG_KEEP_ALIVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_KEEP_ALIVE) -> Self {
+        Self::CMSG_KEEP_ALIVE(c)
     }
 }
 
