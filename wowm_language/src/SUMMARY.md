@@ -242,6 +242,7 @@
 - [CMSG_ACTIVATETAXIEXPRESS](docs/cmsg_activatetaxiexpress.md)
 - [CMSG_ADD_FRIEND](docs/cmsg_add_friend.md)
 - [CMSG_ADD_IGNORE](docs/cmsg_add_ignore.md)
+- [CMSG_ALTER_APPEARANCE](docs/cmsg_alter_appearance.md)
 - [CMSG_AREATRIGGER](docs/cmsg_areatrigger.md)
 - [CMSG_AREA_SPIRIT_HEALER_QUERY](docs/cmsg_area_spirit_healer_query.md)
 - [CMSG_AREA_SPIRIT_HEALER_QUEUE](docs/cmsg_area_spirit_healer_queue.md)

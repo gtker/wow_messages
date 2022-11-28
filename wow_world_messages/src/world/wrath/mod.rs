@@ -44,6 +44,8 @@ pub(crate) mod cmsg_accept_level_grant;
 pub use cmsg_accept_level_grant::*;
 pub(crate) mod cmsg_activatetaxiexpress;
 pub use cmsg_activatetaxiexpress::*;
+pub(crate) mod cmsg_alter_appearance;
+pub use cmsg_alter_appearance::*;
 pub(crate) mod cmsg_auction_list_items;
 pub use cmsg_auction_list_items::*;
 pub(crate) mod cmsg_auction_sell_item;

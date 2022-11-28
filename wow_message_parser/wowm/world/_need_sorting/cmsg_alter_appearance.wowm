@@ -1,0 +1,7 @@
+cmsg CMSG_ALTER_APPEARANCE = 0x0426 {
+    u32 hair;
+    u32 hair_color;
+    u32 facial_hair;
+} {
+    versions = "3.3.5";
+}
