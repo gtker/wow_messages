@@ -792,7 +792,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0411 => "SMSG_OVERRIDE_LIGHT",
         0x0412 => "SMSG_TOTEM_CREATED",
         0x0413 => "CMSG_TOTEM_DESTROYED",
-        0x0414 => "CMSG_EXPIRE_RAID_INSTANCE",
         0x0415 => "CMSG_NO_SPELL_VARIANCE",
         0x0416 => "CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY",
         0x0417 => "SMSG_QUESTGIVER_STATUS_MULTIPLE",

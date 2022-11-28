@@ -797,7 +797,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_OVERRIDE_LIGHT", 0x412),
     Data::new("SMSG_TOTEM_CREATED", 0x413),
     Data::new("CMSG_TOTEM_DESTROYED", 0x414),
-    Data::new("CMSG_EXPIRE_RAID_INSTANCE", 0x415),
     Data::new("CMSG_NO_SPELL_VARIANCE", 0x416),
     Data::new("CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY", 0x417),
     Data::new("SMSG_QUESTGIVER_STATUS_MULTIPLE", 0x418),
