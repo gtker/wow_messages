@@ -292,6 +292,7 @@
 - [CMSG_CALENDAR_ARENA_TEAM](docs/cmsg_calendar_arena_team.md)
 - [CMSG_CALENDAR_COPY_EVENT](docs/cmsg_calendar_copy_event.md)
 - [CMSG_CALENDAR_EVENT_INVITE](docs/cmsg_calendar_event_invite.md)
+- [CMSG_CALENDAR_EVENT_REMOVE_INVITE](docs/cmsg_calendar_event_remove_invite.md)
 - [CMSG_CALENDAR_EVENT_RSVP](docs/cmsg_calendar_event_rsvp.md)
 - [CMSG_CALENDAR_GET_CALENDAR](docs/cmsg_calendar_get_calendar.md)
 - [CMSG_CALENDAR_GET_EVENT](docs/cmsg_calendar_get_event.md)

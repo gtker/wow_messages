@@ -1,0 +1,7 @@
+cmsg CMSG_CALENDAR_EVENT_REMOVE_INVITE = 0x0433 {
+    Guid event;
+    Guid sender_invite_id;
+    Guid invite_id;
+} {
+    versions = "3.3.5";
+}

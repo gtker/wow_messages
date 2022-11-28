@@ -401,6 +401,7 @@ use crate::world::wrath::CMSG_CALENDAR_REMOVE_EVENT;
 use crate::world::wrath::CMSG_CALENDAR_COPY_EVENT;
 use crate::world::wrath::CMSG_CALENDAR_EVENT_INVITE;
 use crate::world::wrath::CMSG_CALENDAR_EVENT_RSVP;
+use crate::world::wrath::CMSG_CALENDAR_EVENT_REMOVE_INVITE;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -798,6 +799,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CALENDAR_COPY_EVENT(CMSG_CALENDAR_COPY_EVENT),
     CMSG_CALENDAR_EVENT_INVITE(CMSG_CALENDAR_EVENT_INVITE),
     CMSG_CALENDAR_EVENT_RSVP(CMSG_CALENDAR_EVENT_RSVP),
+    CMSG_CALENDAR_EVENT_REMOVE_INVITE(CMSG_CALENDAR_EVENT_REMOVE_INVITE),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1197,6 +1199,7 @@ impl ClientOpcodeMessage {
             0x0430 => Ok(Self::CMSG_CALENDAR_COPY_EVENT(<CMSG_CALENDAR_COPY_EVENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0430, size: body_size, io, } } else { a } })?)),
             0x0431 => Ok(Self::CMSG_CALENDAR_EVENT_INVITE(<CMSG_CALENDAR_EVENT_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0431, size: body_size, io, } } else { a } })?)),
             0x0432 => Ok(Self::CMSG_CALENDAR_EVENT_RSVP(<CMSG_CALENDAR_EVENT_RSVP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0432, size: body_size, io, } } else { a } })?)),
+            0x0433 => Ok(Self::CMSG_CALENDAR_EVENT_REMOVE_INVITE(<CMSG_CALENDAR_EVENT_REMOVE_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0433, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1664,6 +1667,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COPY_EVENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CALENDAR_EVENT_INVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CALENDAR_EVENT_RSVP(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CALENDAR_EVENT_REMOVE_INVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2064,6 +2068,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COPY_EVENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_CALENDAR_EVENT_INVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CALENDAR_EVENT_RSVP(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CALENDAR_EVENT_REMOVE_INVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2464,6 +2469,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COPY_EVENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_EVENT_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_EVENT_RSVP(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CALENDAR_EVENT_REMOVE_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -2864,6 +2870,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COPY_EVENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_EVENT_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_EVENT_RSVP(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CALENDAR_EVENT_REMOVE_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3264,6 +3271,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COPY_EVENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_EVENT_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_EVENT_RSVP(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CALENDAR_EVENT_REMOVE_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3664,6 +3672,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COPY_EVENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_EVENT_INVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_EVENT_RSVP(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CALENDAR_EVENT_REMOVE_INVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4075,6 +4084,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CALENDAR_COPY_EVENT(_) => "CMSG_CALENDAR_COPY_EVENT",
             ClientOpcodeMessage::CMSG_CALENDAR_EVENT_INVITE(_) => "CMSG_CALENDAR_EVENT_INVITE",
             ClientOpcodeMessage::CMSG_CALENDAR_EVENT_RSVP(_) => "CMSG_CALENDAR_EVENT_RSVP",
+            ClientOpcodeMessage::CMSG_CALENDAR_EVENT_REMOVE_INVITE(_) => "CMSG_CALENDAR_EVENT_REMOVE_INVITE",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6430,6 +6440,12 @@ impl From<CMSG_CALENDAR_EVENT_INVITE> for ClientOpcodeMessage {
 impl From<CMSG_CALENDAR_EVENT_RSVP> for ClientOpcodeMessage {
     fn from(c: CMSG_CALENDAR_EVENT_RSVP) -> Self {
         Self::CMSG_CALENDAR_EVENT_RSVP(c)
+    }
+}
+
+impl From<CMSG_CALENDAR_EVENT_REMOVE_INVITE> for ClientOpcodeMessage {
+    fn from(c: CMSG_CALENDAR_EVENT_REMOVE_INVITE) -> Self {
+        Self::CMSG_CALENDAR_EVENT_REMOVE_INVITE(c)
     }
 }
 
