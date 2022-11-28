@@ -60,6 +60,8 @@ pub(crate) mod cmsg_buy_item;
 pub use cmsg_buy_item::*;
 pub(crate) mod cmsg_buy_item_in_slot;
 pub use cmsg_buy_item_in_slot::*;
+pub(crate) mod cmsg_calendar_arena_team;
+pub use cmsg_calendar_arena_team::*;
 pub(crate) mod cmsg_calendar_get_calendar;
 pub use cmsg_calendar_get_calendar::*;
 pub(crate) mod cmsg_calendar_get_event;

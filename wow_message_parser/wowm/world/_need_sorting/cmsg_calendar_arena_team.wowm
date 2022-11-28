@@ -1,0 +1,5 @@
+cmsg CMSG_CALENDAR_ARENA_TEAM = 0x042C {
+    u32 arena_team;
+} {
+    versions = "3.3.5";
+}
