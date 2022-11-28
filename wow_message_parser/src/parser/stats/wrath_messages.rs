@@ -753,7 +753,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::nyi("CMSG_CHANNEL_VOICE_OFF", 0x3D7),
     Data::new("SMSG_DEBUG_LIST_TARGETS", 0x3D9),
     Data::new("SMSG_AVAILABLE_VOICE_CHANNEL", 0x3DA),
-    Data::new("CMSG_PARTY_UNSILENCE", 0x3DE),
     Data::new("MSG_NOTIFY_PARTY_SQUELCH", 0x3DF),
     Data::new("SMSG_COMSAT_RECONNECT_TRY", 0x3E0),
     Data::new("SMSG_COMSAT_DISCONNECT", 0x3E1),
