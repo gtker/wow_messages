@@ -730,7 +730,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_COMMENTATOR_MAP_INFO", 0x3B7),
     Data::new("SMSG_COMMENTATOR_GET_PLAYER_INFO", 0x3B9),
     Data::new("SMSG_COMMENTATOR_PLAYER_INFO", 0x3BA),
-    Data::new("CMSG_COMMENTATOR_EXIT_INSTANCE", 0x3BC),
     Data::new("CMSG_COMMENTATOR_INSTANCE_COMMAND", 0x3BD),
     Data::new("SMSG_CLEAR_TARGET", 0x3BE),
     Data::new("CMSG_BOT_DETECTED", 0x3BF),

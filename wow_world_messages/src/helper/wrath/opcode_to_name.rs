@@ -734,7 +734,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x03b8 => "SMSG_COMMENTATOR_MAP_INFO",
         0x03ba => "SMSG_COMMENTATOR_GET_PLAYER_INFO",
         0x03bb => "SMSG_COMMENTATOR_PLAYER_INFO",
-        0x03bd => "CMSG_COMMENTATOR_EXIT_INSTANCE",
         0x03be => "CMSG_COMMENTATOR_INSTANCE_COMMAND",
         0x03bf => "SMSG_CLEAR_TARGET",
         0x03c0 => "CMSG_BOT_DETECTED",
