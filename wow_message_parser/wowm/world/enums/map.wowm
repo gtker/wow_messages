@@ -149,7 +149,7 @@ enum Map : u32 {
     SCOTT_TEST = 25 {
         display = "Scott Test";
     }
-    CASHTEST = 29 {
+    CASH_TEST = 29 {
         display = "CashTest";
     }
     ALTERAC_VALLEY = 30 {

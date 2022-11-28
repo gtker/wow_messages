@@ -7,7 +7,7 @@ use std::convert::{TryFrom, TryInto};
 ///     KALIMDOR = 1;
 ///     TESTING = 13;
 ///     SCOTT_TEST = 25;
-///     CASHTEST = 29;
+///     CASH_TEST = 29;
 ///     ALTERAC_VALLEY = 30;
 ///     SHADOWFANG_KEEP = 33;
 ///     STORMWIND_STOCKADE = 34;
@@ -95,7 +95,7 @@ pub enum Map {
     Kalimdor,
     Testing,
     ScottTest,
-    Cashtest,
+    CashTest,
     AlteracValley,
     ShadowfangKeep,
     StormwindStockade,
@@ -183,7 +183,7 @@ impl Map {
             Self::Kalimdor => 0x1,
             Self::Testing => 0xd,
             Self::ScottTest => 0x19,
-            Self::Cashtest => 0x1d,
+            Self::CashTest => 0x1d,
             Self::AlteracValley => 0x1e,
             Self::ShadowfangKeep => 0x21,
             Self::StormwindStockade => 0x22,
@@ -280,7 +280,7 @@ impl std::fmt::Display for Map {
             Self::Kalimdor => f.write_str("Kalimdor"),
             Self::Testing => f.write_str("Testing"),
             Self::ScottTest => f.write_str("Scott Test"),
-            Self::Cashtest => f.write_str("CashTest"),
+            Self::CashTest => f.write_str("CashTest"),
             Self::AlteracValley => f.write_str("Alterac Valley"),
             Self::ShadowfangKeep => f.write_str("Shadowfang Keep"),
             Self::StormwindStockade => f.write_str("Stormwind Stockade"),
@@ -371,7 +371,7 @@ impl TryFrom<u32> for Map {
             1 => Ok(Self::Kalimdor),
             13 => Ok(Self::Testing),
             25 => Ok(Self::ScottTest),
-            29 => Ok(Self::Cashtest),
+            29 => Ok(Self::CashTest),
             30 => Ok(Self::AlteracValley),
             33 => Ok(Self::ShadowfangKeep),
             34 => Ok(Self::StormwindStockade),

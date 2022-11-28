@@ -143,7 +143,7 @@ enum Map : u32 {
     KALIMDOR = 1;
     TESTING = 13;
     SCOTT_TEST = 25;
-    CASHTEST = 29;
+    CASH_TEST = 29;
     ALTERAC_VALLEY = 30;
     SHADOWFANG_KEEP = 33;
     STORMWIND_STOCKADE = 34;
@@ -233,7 +233,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `KALIMDOR` | 1 (0x01) |  |  | Kalimdor |
 | `TESTING` | 13 (0x0D) |  |  | Testing |
 | `SCOTT_TEST` | 25 (0x19) |  |  | Scott Test |
-| `CASHTEST` | 29 (0x1D) |  |  | CashTest |
+| `CASH_TEST` | 29 (0x1D) |  |  | CashTest |
 | `ALTERAC_VALLEY` | 30 (0x1E) |  |  | Alterac Valley |
 | `SHADOWFANG_KEEP` | 33 (0x21) |  |  | Shadowfang Keep |
 | `STORMWIND_STOCKADE` | 34 (0x22) |  |  | Stormwind Stockade |
