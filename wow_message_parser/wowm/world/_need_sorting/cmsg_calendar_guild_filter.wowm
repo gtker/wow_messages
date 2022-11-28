@@ -1,0 +1,7 @@
+cmsg CMSG_CALENDAR_GUILD_FILTER = 0x042B {
+    u32 minimum_level;
+    u32 maximum_level;
+    u32 minimum_rank;
+} {
+    versions = "3.3.5";
+}
