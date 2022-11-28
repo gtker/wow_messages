@@ -1,0 +1,12 @@
+cmsg CMSG_LFG_JOIN = 0x035C {
+    u32 roles;
+    Bool no_partial_clear;
+    Bool achievements;
+    u8 amount_of_slots;
+    u32[amount_of_slots] slots;
+    u8 amount_of_needs;
+    u8[amount_of_needs] needs;
+    CString comment;
+} {
+    versions = "3.3.5";
+}

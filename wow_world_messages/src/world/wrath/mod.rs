@@ -104,6 +104,8 @@ pub(crate) mod cmsg_lfd_player_lock_info_request;
 pub use cmsg_lfd_player_lock_info_request::*;
 pub(crate) mod cmsg_lfg_get_status;
 pub use cmsg_lfg_get_status::*;
+pub(crate) mod cmsg_lfg_join;
+pub use cmsg_lfg_join::*;
 pub(crate) mod cmsg_loot_method;
 pub use cmsg_loot_method::*;
 pub(crate) mod cmsg_mail_create_text_item;
