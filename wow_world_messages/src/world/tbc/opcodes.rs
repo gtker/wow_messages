@@ -357,6 +357,7 @@ use crate::world::tbc::CMSG_GUILD_BANK_BUY_TAB;
 use crate::world::tbc::CMSG_GUILD_BANK_UPDATE_TAB;
 use crate::world::tbc::CMSG_GUILD_BANK_DEPOSIT_MONEY;
 use crate::world::tbc::CMSG_GUILD_BANK_WITHDRAW_MONEY;
+use crate::world::tbc::CMSG_SET_CHANNEL_WATCH;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -708,6 +709,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GUILD_BANK_UPDATE_TAB(CMSG_GUILD_BANK_UPDATE_TAB),
     CMSG_GUILD_BANK_DEPOSIT_MONEY(CMSG_GUILD_BANK_DEPOSIT_MONEY),
     CMSG_GUILD_BANK_WITHDRAW_MONEY(CMSG_GUILD_BANK_WITHDRAW_MONEY),
+    CMSG_SET_CHANNEL_WATCH(CMSG_SET_CHANNEL_WATCH),
 }
 
 impl ClientOpcodeMessage {
@@ -1061,6 +1063,7 @@ impl ClientOpcodeMessage {
             0x03EA => Ok(Self::CMSG_GUILD_BANK_UPDATE_TAB(<CMSG_GUILD_BANK_UPDATE_TAB as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EA, size: body_size, io, } } else { a } })?)),
             0x03EB => Ok(Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(<CMSG_GUILD_BANK_DEPOSIT_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EB, size: body_size, io, } } else { a } })?)),
             0x03EC => Ok(Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(<CMSG_GUILD_BANK_WITHDRAW_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EC, size: body_size, io, } } else { a } })?)),
+            0x03EE => Ok(Self::CMSG_SET_CHANNEL_WATCH(<CMSG_SET_CHANNEL_WATCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EE, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
@@ -1482,6 +1485,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SET_CHANNEL_WATCH(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -1836,6 +1840,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SET_CHANNEL_WATCH(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -2190,6 +2195,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_CHANNEL_WATCH(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -2544,6 +2550,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SET_CHANNEL_WATCH(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -2898,6 +2905,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SET_CHANNEL_WATCH(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -3252,6 +3260,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SET_CHANNEL_WATCH(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -3641,6 +3650,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GUILD_BANK_UPDATE_TAB(_) => "CMSG_GUILD_BANK_UPDATE_TAB",
             ClientOpcodeMessage::CMSG_GUILD_BANK_DEPOSIT_MONEY(_) => "CMSG_GUILD_BANK_DEPOSIT_MONEY",
             ClientOpcodeMessage::CMSG_GUILD_BANK_WITHDRAW_MONEY(_) => "CMSG_GUILD_BANK_WITHDRAW_MONEY",
+            ClientOpcodeMessage::CMSG_SET_CHANNEL_WATCH(_) => "CMSG_SET_CHANNEL_WATCH",
         })
     }
 }
@@ -5730,6 +5740,12 @@ impl From<CMSG_GUILD_BANK_DEPOSIT_MONEY> for ClientOpcodeMessage {
 impl From<CMSG_GUILD_BANK_WITHDRAW_MONEY> for ClientOpcodeMessage {
     fn from(c: CMSG_GUILD_BANK_WITHDRAW_MONEY) -> Self {
         Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c)
+    }
+}
+
+impl From<CMSG_SET_CHANNEL_WATCH> for ClientOpcodeMessage {
+    fn from(c: CMSG_SET_CHANNEL_WATCH) -> Self {
+        Self::CMSG_SET_CHANNEL_WATCH(c)
     }
 }
 
