@@ -1,0 +1,11 @@
+cmsg CMSG_REPORT_PVP_AFK = 0x03E3 {
+    Guid player;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_REPORT_PVP_AFK = 0x03E4 {
+    Guid player;
+} {
+    versions = "3.3.5";
+}

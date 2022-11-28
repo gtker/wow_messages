@@ -485,6 +485,7 @@
 - [CMSG_RECLAIM_CORPSE](docs/cmsg_reclaim_corpse.md)
 - [CMSG_REPAIR_ITEM](docs/cmsg_repair_item.md)
 - [CMSG_REPOP_REQUEST](docs/cmsg_repop_request.md)
+- [CMSG_REPORT_PVP_AFK](docs/cmsg_report_pvp_afk.md)
 - [CMSG_REQUEST_ACCOUNT_DATA](docs/cmsg_request_account_data.md)
 - [CMSG_REQUEST_PARTY_MEMBER_STATS](docs/cmsg_request_party_member_stats.md)
 - [CMSG_REQUEST_PET_INFO](docs/cmsg_request_pet_info.md)

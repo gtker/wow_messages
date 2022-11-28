@@ -170,6 +170,8 @@ pub(crate) mod cmsg_questgiver_query_quest;
 pub use cmsg_questgiver_query_quest::*;
 pub(crate) mod cmsg_ready_for_account_data_times;
 pub use cmsg_ready_for_account_data_times::*;
+pub(crate) mod cmsg_report_pvp_afk;
+pub use cmsg_report_pvp_afk::*;
 pub(crate) mod cmsg_search_lfg_join;
 pub use cmsg_search_lfg_join::*;
 pub(crate) mod cmsg_search_lfg_leave;
