@@ -84,6 +84,22 @@ fn main() {
     wireshark_printer::print_wireshark(&o);
     base_printer::print_base();
 
+    print_main_types(&o);
+
+    write_login_opcodes(&o);
+
+    write_world_opcodes(&o);
+
+    write_intermediate_representation(&o);
+
+    print_update_mask();
+
+    print_opcode_to_name();
+
+    print_message_stats(&o);
+}
+
+fn print_main_types(o: &Objects) {
     let mut m = ModFiles::new();
 
     let mut definer_docs = Vec::new();
@@ -160,18 +176,6 @@ fn main() {
 
     m.write_mod_files();
     m.remove_unwritten_files();
-
-    write_login_opcodes(&o);
-
-    write_world_opcodes(&o);
-
-    write_intermediate_representation(&o);
-
-    print_update_mask();
-
-    print_opcode_to_name();
-
-    print_message_stats(&o);
 }
 
 fn write_world_opcodes(o: &Objects) {
