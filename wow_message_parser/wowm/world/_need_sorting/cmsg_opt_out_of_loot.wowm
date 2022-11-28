@@ -1,0 +1,11 @@
+cmsg CMSG_OPT_OUT_OF_LOOT = 0x0408 {
+    Bool32 pass_on_loot;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_OPT_OUT_OF_LOOT = 0x0409 {
+    Bool32 pass_on_loot;
+} {
+    versions = "3.3.5";
+}

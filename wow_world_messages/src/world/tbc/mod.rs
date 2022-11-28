@@ -110,6 +110,8 @@ pub(crate) mod cmsg_move_spline_done;
 pub use cmsg_move_spline_done::*;
 pub(crate) mod cmsg_move_water_walk_ack;
 pub use cmsg_move_water_walk_ack::*;
+pub(crate) mod cmsg_opt_out_of_loot;
+pub use cmsg_opt_out_of_loot::*;
 pub(crate) mod cmsg_pet_cast_spell;
 pub use cmsg_pet_cast_spell::*;
 pub(crate) mod cmsg_report_pvp_afk;

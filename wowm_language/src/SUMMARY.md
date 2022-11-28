@@ -455,6 +455,7 @@
 - [CMSG_NPC_TEXT_QUERY](docs/cmsg_npc_text_query.md)
 - [CMSG_OFFER_PETITION](docs/cmsg_offer_petition.md)
 - [CMSG_OPEN_ITEM](docs/cmsg_open_item.md)
+- [CMSG_OPT_OUT_OF_LOOT](docs/cmsg_opt_out_of_loot.md)
 - [CMSG_PAGE_TEXT_QUERY](docs/cmsg_page_text_query.md)
 - [CMSG_PETITION_BUY](docs/cmsg_petition_buy.md)
 - [CMSG_PETITION_QUERY](docs/cmsg_petition_query.md)
