@@ -846,7 +846,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("MSG_MOVE_SET_PITCH_RATE_CHEAT", 0x45A),
     Data::new("MSG_MOVE_SET_PITCH_RATE", 0x45B),
     Data::new("SMSG_FORCE_PITCH_RATE_CHANGE", 0x45C),
-    Data::new("CMSG_FORCE_PITCH_RATE_CHANGE_ACK", 0x45D),
     Data::new("SMSG_SPLINE_SET_PITCH_RATE", 0x45E),
     Data::new("CMSG_CALENDAR_EVENT_INVITE_NOTES", 0x45F),
     Data::new("SMSG_CALENDAR_EVENT_INVITE_NOTES", 0x460),
