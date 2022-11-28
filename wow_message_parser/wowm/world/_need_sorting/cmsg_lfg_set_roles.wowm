@@ -1,0 +1,5 @@
+cmsg CMSG_LFG_SET_ROLES = 0x036A {
+    u8 roles;
+} {
+    versions = "3.3.5";
+}
