@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ATTACK = 2;
 ///     DISMISS = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetCommandState {

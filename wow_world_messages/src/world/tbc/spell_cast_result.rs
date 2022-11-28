@@ -173,7 +173,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TARGET_LOCKED_TO_RAID_INSTANCE = 0xA7;
 ///     UNKNOWN = 0xA8;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SpellCastResult {

@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ENABLED = 1;
 ///     DISABLED = 0;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketQueueStatus {

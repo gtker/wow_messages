@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_ENOUGH_MONEY = 4;
 ///     INVALID_VENDOR = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildEmblemResult {

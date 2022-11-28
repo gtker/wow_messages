@@ -21,7 +21,6 @@ use std::convert::{TryFrom, TryInto};
 ///     IGNORE_ADDED = 0x0F;
 ///     IGNORE_REMOVED = 0x10;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum FriendResult {

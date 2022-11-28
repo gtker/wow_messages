@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     THREE_VS_THREE = 3;
 ///     FIVE_VS_FIVE = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ArenaType {

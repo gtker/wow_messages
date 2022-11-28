@@ -139,7 +139,6 @@ use std::convert::{TryFrom, TryInto};
 ///     STORMWIND = 723;
 ///     THE_RUBY_SANCTUM = 724;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Map {

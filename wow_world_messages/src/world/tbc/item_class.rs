@@ -20,7 +20,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PERMANENT = 14;
 ///     MISC = 15;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ItemClass {

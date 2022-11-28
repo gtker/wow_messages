@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     WELCOME = 4;
 ///     EXPIRED = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidInstanceMessage {

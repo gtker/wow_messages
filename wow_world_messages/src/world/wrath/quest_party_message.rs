@@ -16,7 +16,6 @@ use std::convert::{TryFrom, TryInto};
 ///     MSG_NOT_IN_PARTY = 10;
 ///     MSG_DIFFERENT_SERVER_DAILY = 11;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestPartyMessage {

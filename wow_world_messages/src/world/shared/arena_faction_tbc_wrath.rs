@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     HORDE = 0;
 ///     ALLIANCE = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ArenaFaction {

@@ -21,7 +21,6 @@ use std::convert::{TryFrom, TryInto};
 ///     FAIL_PARENTALCONTROL = 0x0F;
 ///     FAIL_LOCKED_ENFORCED = 0x10;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LoginResult {

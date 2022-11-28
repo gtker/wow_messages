@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NORMAL = 0;
 ///     HEROIC = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum DungeonDifficulty {

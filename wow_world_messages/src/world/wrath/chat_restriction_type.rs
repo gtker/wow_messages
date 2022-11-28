@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     USER_SQUELCHED = 2;
 ///     YELL_RESTRICTED = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ChatRestrictionType {

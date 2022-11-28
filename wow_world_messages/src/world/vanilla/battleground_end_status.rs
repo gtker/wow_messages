@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_ENDED = 0;
 ///     ENDED = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum BattlegroundEndStatus {

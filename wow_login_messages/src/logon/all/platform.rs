@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     POWER_PC = "\0PPC";
 ///     OTHER = self.value
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Platform {

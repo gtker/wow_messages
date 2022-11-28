@@ -17,7 +17,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SAME_NODE = 11;
 ///     NOT_STANDING = 12;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ActivateTaxiReply {

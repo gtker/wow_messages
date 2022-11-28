@@ -7,7 +7,6 @@
 ///     MUTED = 0x04;
 ///     RECRUITAFRIEND = 0x08;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct RelationType {

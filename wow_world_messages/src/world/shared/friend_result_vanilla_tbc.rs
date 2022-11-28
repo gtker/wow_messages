@@ -31,7 +31,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNKNOWN19 = 0x19;
 ///     UNKNOWN20 = 0x1A;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum FriendResult {

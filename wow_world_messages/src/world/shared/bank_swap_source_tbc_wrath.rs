@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     INVENTORY = 0;
 ///     BANK = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BankSwapSource {

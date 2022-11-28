@@ -12,7 +12,6 @@ use std::convert::{TryFrom, TryInto};
 ///     FISHING_FAIL = 21;
 ///     INSIGNIA = 22;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LootMethod {

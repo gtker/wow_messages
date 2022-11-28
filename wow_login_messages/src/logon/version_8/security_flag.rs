@@ -6,7 +6,6 @@
 ///     MATRIX_CARD = 0x02;
 ///     AUTHENTICATOR = 0x04;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct SecurityFlag {

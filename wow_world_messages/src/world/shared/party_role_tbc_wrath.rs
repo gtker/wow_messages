@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     MAIN_TANK = 0;
 ///     ASSISTANT = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PartyRole {

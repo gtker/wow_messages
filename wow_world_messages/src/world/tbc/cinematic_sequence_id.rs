@@ -18,7 +18,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DRAENEI = 163;
 ///     SUNWELL_FIVE_MAN = 164;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CinematicSequenceId {

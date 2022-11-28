@@ -51,7 +51,6 @@ use std::convert::{TryFrom, TryInto};
 ///     BATTLEGROUND_LEADER = 0x2D;
 ///     RESTRICTED = 0x2E;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum ChatType {

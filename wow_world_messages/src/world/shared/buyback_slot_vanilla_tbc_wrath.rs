@@ -17,7 +17,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SLOT12 = 80;
 ///     SLOT13 = 81;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BuybackSlot {

@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SPECIAL_SPELL = 0;
 ///     ATTACK = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetTalkReason {

@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SUCCESS = 0;
 ///     FAILURE = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum SimpleSpellCastResult {

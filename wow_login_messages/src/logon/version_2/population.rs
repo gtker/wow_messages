@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     BLUE_RECOMMENDED = 0x44160000;
 ///     OTHER = self.value
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Population {

@@ -24,7 +24,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GUILD_BANK_MONEY_WITHDRAWN = 0x12;
 ///     GUILD_BANK_TEXT_CHANGED = 0x13;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildEvent {

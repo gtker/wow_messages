@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GREED = 2;
 ///     DISENCHANT = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RollVote {

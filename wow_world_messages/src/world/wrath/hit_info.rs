@@ -30,7 +30,6 @@
 ///     RAGE_GAIN = 0x00800000;
 ///     FAKE_DAMAGE = 0x01000000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct HitInfo {

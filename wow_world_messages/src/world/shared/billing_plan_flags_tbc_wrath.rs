@@ -11,7 +11,6 @@
 ///     RESTRICTED = 0x40;
 ///     ENABLE_CAIS = 0x80;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct BillingPlanFlags {

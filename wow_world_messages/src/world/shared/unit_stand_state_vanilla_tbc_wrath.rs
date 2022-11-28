@@ -14,7 +14,6 @@ use std::convert::{TryFrom, TryInto};
 ///     KNEEL = 8;
 ///     CUSTOM = 9;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum UnitStandState {

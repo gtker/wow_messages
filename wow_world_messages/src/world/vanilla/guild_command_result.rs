@@ -19,7 +19,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GUILD_RANK_TOO_HIGH_S = 0x0D;
 ///     GUILD_RANK_TOO_LOW_S = 0x0E;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildCommandResult {

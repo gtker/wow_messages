@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DND = 2;
 ///     GM = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PlayerChatTag {

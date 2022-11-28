@@ -22,7 +22,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GNOMISH_BINARY = 37;
 ///     GOBLIN_BINARY = 38;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Language {

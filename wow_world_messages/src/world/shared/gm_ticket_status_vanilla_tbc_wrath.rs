@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     HAS_TEXT = 0x06;
 ///     DEFAULT = 0x0A;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketStatus {

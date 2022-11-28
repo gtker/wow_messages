@@ -12,7 +12,6 @@ use std::convert::{TryFrom, TryInto};
 ///     REWARD_OLD = 6;
 ///     REWARD2 = 7;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestGiverStatus {

@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GlobalCache = 0x15;
 ///     PerCharacterCache = 0xEA;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CacheMask {

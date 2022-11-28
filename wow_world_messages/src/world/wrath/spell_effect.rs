@@ -169,7 +169,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNKNOWN163 = 163;
 ///     CANCEL_AURA = 164;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum SpellEffect {

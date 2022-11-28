@@ -12,7 +12,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DYNAMIC_OBJECT = 6;
 ///     CORPSE = 7;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ObjectType {

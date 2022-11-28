@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_MOUNTED = 1;
 ///     OK = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum DismountResult {

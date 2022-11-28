@@ -19,7 +19,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ARENA_TEAM_TARGET_TOO_LOW_S = 0x15;
 ///     ARENA_TEAM_TOO_MANY_MEMBERS_S = 0x16;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ArenaTeamCommandError {

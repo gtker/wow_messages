@@ -1085,7 +1085,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GATES_OF_AHN_QIRAJ = 3478;
 ///     RAVENHOLDT_MANOR = 3486;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Area {

@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TOO_MANY_INSTANCES = 0x03;
 ///     ZONE_IS_IN_COMBAT = 0x05;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TransferAbortReason {

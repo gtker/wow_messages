@@ -142,7 +142,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PET_RAVAGER = 767;
 ///     PET_SERPENT = 768;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Skill {

@@ -158,7 +158,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNKNOWN152 = 152;
 ///     UNKNOWN153 = 153;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum SpellEffect {

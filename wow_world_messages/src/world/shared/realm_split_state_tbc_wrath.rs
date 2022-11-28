@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SPLIT = 1;
 ///     SPLIT_PENDING = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RealmSplitState {

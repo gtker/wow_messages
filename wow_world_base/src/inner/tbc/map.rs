@@ -87,7 +87,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TRANSPORT_BOOTY_BAY_TO_RATCHET = 593;
 ///     SUNWELL_FIX_UNUSED = 598;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Map {

@@ -321,7 +321,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNDERWATER_WALKING = 315;
 ///     PERIODIC_HASTE = 316;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum AuraType {

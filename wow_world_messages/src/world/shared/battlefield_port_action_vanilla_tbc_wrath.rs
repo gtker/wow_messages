@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     LEAVE_QUEUE = 0;
 ///     ENTER_BATTLE = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BattlefieldPortAction {

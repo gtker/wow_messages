@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     OUT_OF_RANGE_OBJECTS = 4;
 ///     NEAR_OBJECTS = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum UpdateType {

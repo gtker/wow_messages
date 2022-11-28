@@ -2311,7 +2311,6 @@ use std::convert::{TryFrom, TryInto};
 ///     FROSTMOURNE1 = 4910;
 ///     THE_RUBY_SANCTUM = 4987;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Area {

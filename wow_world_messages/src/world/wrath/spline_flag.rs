@@ -35,7 +35,6 @@
 ///     UNKNOWN30 = 0x40000000;
 ///     UNKNOWN31 = 0x80000000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct SplineFlag {

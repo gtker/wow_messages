@@ -17,7 +17,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CANT_CONTROL_EXOTIC = 12;
 ///     UNKNOWN_ERROR = 13;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetTameFailureReason {

@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     BATTLEMASTER = 0;
 ///     UI = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BattlefieldListLocation {

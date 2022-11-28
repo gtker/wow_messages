@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     HAS_TEXT = 0;
 ///     NO_TEXT = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum ItemTextQuery {

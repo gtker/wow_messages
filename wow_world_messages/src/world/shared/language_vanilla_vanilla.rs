@@ -19,7 +19,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GUTTERSPEAK = 33;
 ///     ADDON = 0xFFFFFFFF;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Language {

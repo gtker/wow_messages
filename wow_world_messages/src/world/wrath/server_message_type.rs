@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     INSTANCE_SHUTDOWN = 8;
 ///     INSTANCE_RESTART = 9;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ServerMessageType {

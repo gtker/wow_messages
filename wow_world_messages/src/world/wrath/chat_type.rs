@@ -56,7 +56,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ARENA_POINTS = 0x32;
 ///     PARTY_LEADER = 0x33;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum ChatType {

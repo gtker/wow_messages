@@ -155,7 +155,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PET_EXOTIC_CORE_HOUND = 787;
 ///     PET_EXOTIC_SPIRIT_BEAST = 788;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Skill {

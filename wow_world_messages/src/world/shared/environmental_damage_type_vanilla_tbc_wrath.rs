@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SLIME = 4;
 ///     FIRE = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum EnvironmentalDamageType {

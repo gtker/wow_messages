@@ -33,7 +33,6 @@ use std::convert::{TryFrom, TryInto};
 ///     QUIVER = 27;
 ///     RELIC = 28;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InventoryType {

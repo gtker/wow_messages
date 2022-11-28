@@ -92,7 +92,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CANT_EQUIP_NEED_TALENT = 88;
 ///     ITEM_MAX_LIMIT_CATEGORY_EQUIPPED_EXCEEDED = 89;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InventoryResult {

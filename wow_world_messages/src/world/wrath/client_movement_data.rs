@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_PRESENT = 0;
 ///     PRESENT = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum ClientMovementData {

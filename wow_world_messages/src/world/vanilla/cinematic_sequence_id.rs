@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TROLL = 121;
 ///     TAUREN = 141;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CinematicSequenceId {

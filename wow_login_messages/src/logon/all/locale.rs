@@ -19,7 +19,6 @@ use std::convert::{TryFrom, TryInto};
 ///     EN_CN = "enCN";
 ///     OTHER = self.value
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Locale {

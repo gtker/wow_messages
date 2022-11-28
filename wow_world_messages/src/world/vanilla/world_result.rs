@@ -86,7 +86,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CHAR_NAME_SUCCESS = 0x50;
 ///     CHAR_NAME_FAILURE = 0x51;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum WorldResult {

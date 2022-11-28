@@ -28,7 +28,6 @@ use std::convert::{TryFrom, TryInto};
 ///     WIND_SERPENT = 27;
 ///     REMOTE_CONTROL = 28;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CreatureFamily {

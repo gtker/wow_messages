@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ENABLED = 0x8;
 ///     DISABLED = 0x0;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetEnabled {

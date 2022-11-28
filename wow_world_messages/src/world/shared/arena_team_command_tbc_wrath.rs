@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TEAM_QUIT_S = 0x03;
 ///     TEAM_FOUNDER_S = 0x0E;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ArenaTeamCommand {

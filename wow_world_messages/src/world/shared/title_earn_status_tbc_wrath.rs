@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     LOST = 0;
 ///     EARNED = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TitleEarnStatus {

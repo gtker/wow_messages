@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     QUEUED_FOR_AB = 3;
 ///     REMOVE_FROM_QUEUE = 0xFFFFFFFE;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BgTypeId {

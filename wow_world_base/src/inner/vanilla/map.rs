@@ -48,7 +48,6 @@ use std::convert::{TryFrom, TryInto};
 ///     AHN_QIRAJ_TEMPLE = 531;
 ///     NAXXRAMAS = 533;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Map {

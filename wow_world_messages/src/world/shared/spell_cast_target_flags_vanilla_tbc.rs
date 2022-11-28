@@ -21,7 +21,6 @@
 ///     LOCKED = 0x00004000;
 ///     CORPSE_ALLY = 0x00008000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct SpellCastTargetFlags {

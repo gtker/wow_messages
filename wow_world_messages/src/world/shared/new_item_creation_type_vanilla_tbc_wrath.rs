@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     RECEIVED = 0;
 ///     CREATED = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum NewItemCreationType {

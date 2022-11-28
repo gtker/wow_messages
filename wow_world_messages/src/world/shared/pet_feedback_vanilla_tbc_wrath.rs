@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CANT_ATTACK_TARGET = 3;
 ///     NO_PATH_TO = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetFeedback {

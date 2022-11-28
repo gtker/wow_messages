@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PLAYER_WRONG_FACTION = 7;
 ///     IGNORING_YOU = 8;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PartyResult {

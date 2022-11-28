@@ -21,7 +21,6 @@
 ///     RUNE_UPDATE = 0x200000;
 ///     UNK400000 = 0x400000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct GameobjectCastFlags {

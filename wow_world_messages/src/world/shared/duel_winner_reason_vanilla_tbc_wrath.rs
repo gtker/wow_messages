@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     WON = 0;
 ///     FLED = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum DuelWinnerReason {

@@ -16,7 +16,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DAILY_QUESTS_REMAINING = 26;
 ///     QUEST_FAILED_CAIS = 27;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestFailedReason {

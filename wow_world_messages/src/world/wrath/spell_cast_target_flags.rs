@@ -24,7 +24,6 @@
 ///     UNUSED20 = 0x00080000;
 ///     UNIT_PASSENGER = 0x00100000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct SpellCastTargetFlags {

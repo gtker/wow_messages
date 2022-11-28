@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GUILD = 0;
 ///     ARENA = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CharterType {

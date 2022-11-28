@@ -192,7 +192,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TARGET_CANNOT_BE_RESURRECTED = 0xBA;
 ///     UNKNOWN = 0xBB;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SpellCastResult {

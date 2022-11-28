@@ -21,7 +21,6 @@ use std::convert::{TryFrom, TryInto};
 ///     MISC = 15;
 ///     GLYPH = 16;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ItemClass {

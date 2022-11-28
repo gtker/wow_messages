@@ -5,7 +5,6 @@
 ///     ONE = 1;
 ///     TWO = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct SimpleFlag {

@@ -16,7 +16,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ACCOUNT_BILLING = 9;
 ///     CHARACTER = 10;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketType {

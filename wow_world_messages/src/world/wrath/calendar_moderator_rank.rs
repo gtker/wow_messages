@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     MODERATOR = 1;
 ///     OWNER = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CalendarModeratorRank {

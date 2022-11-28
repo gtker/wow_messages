@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     FAILURE_FROZEN_BY_GM = 2;
 ///     FAILURE_JUMPING_OR_FALLING = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LogoutResult {

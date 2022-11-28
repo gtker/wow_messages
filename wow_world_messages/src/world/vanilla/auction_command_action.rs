@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     REMOVED = 1;
 ///     BID_PLACED = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum AuctionCommandAction {

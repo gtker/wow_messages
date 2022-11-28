@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     AFRAID = 3;
 ///     DESTROY = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum AiReaction {

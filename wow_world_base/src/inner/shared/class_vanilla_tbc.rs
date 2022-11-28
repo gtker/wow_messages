@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     WARLOCK = 9;
 ///     DRUID = 11;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Class {

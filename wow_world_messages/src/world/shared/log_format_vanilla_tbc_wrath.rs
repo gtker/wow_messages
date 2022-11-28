@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DEFAULT = 0;
 ///     DEBUG = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LogFormat {

@@ -36,7 +36,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SERPENT = 35;
 ///     SEA_LION = 36;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CreatureFamily {

@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_INCLUDED = 0;
 ///     INCLUDED = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum DeclinedPetNameIncluded {

@@ -11,7 +11,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SHADOW = 5;
 ///     ARCANE = 6;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SpellSchool {

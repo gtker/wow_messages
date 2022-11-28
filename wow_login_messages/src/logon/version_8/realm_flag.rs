@@ -9,7 +9,6 @@
 ///     FORCE_GREEN_RECOMMENDED = 0x40;
 ///     FORCE_RED_FULL = 0x80;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct RealmFlag {

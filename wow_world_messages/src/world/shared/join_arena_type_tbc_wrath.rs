@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     THREE_VS_THREE = 1;
 ///     FIVE_VS_FIVE = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum JoinArenaType {

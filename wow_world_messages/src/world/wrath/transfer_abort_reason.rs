@@ -20,7 +20,6 @@ use std::convert::{TryFrom, TryInto};
 ///     REALM_ONLY = 0x0F;
 ///     MAP_NOT_ALLOWED = 0x10;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum TransferAbortReason {

@@ -17,7 +17,6 @@ use std::convert::{TryFrom, TryInto};
 ///     RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END = 15;
 ///     DECLENSION_DOESNT_MATCH_BASE_NAME = 16;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetNameInvalidReason {

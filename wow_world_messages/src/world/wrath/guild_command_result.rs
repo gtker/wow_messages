@@ -27,7 +27,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GUILD_BANK_FULL = 0x1C;
 ///     GUILD_ITEM_NOT_FOUND = 0x1D;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildCommandResult {

@@ -121,7 +121,6 @@ use std::convert::{TryFrom, TryInto};
 ///     STATE_SPELLEFFECT_HOLD = 422;
 ///     STATE_EAT_NO_SHEATHE = 423;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Emote {

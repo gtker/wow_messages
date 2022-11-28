@@ -12,7 +12,6 @@ use std::convert::{TryFrom, TryInto};
 ///     RUNIC_POWER = 6;
 ///     HEALTH = 0xFE;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Power {

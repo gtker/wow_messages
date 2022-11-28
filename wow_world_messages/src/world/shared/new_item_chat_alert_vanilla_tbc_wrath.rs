@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DO_NOT_SHOW = 0;
 ///     SHOW = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum NewItemChatAlert {

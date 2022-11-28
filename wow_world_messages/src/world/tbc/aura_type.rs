@@ -266,7 +266,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNKNOWN260 = 260;
 ///     UNKNOWN261 = 261;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum AuraType {

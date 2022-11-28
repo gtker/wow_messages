@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     KILL = 0;
 ///     NON_KILL = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ExperienceAwardType {

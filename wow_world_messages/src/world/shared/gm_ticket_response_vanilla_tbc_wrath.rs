@@ -11,7 +11,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UPDATE_ERROR = 5;
 ///     TICKET_DELETED = 9;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketResponse {

@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     MAC_OS_X = "\0OSX";
 ///     OTHER = self.value
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Os {

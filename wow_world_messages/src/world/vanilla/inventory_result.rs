@@ -73,7 +73,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TOO_MANY_SPECIAL_BAGS = 65;
 ///     LOOT_CANT_LOOT_THAT_NOW = 66;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InventoryResult {

@@ -14,7 +14,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TENTATIVE = 8;
 ///     REMOVED = 9;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CalendarStatus {

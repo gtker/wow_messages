@@ -15,7 +15,6 @@ use std::convert::{TryFrom, TryInto};
 ///     FORCED_DISMOUNT = 9;
 ///     OK = 10;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum MountResult {

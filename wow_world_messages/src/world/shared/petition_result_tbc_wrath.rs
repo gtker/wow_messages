@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CANT_SIGN_OWN = 3;
 ///     NOT_SERVER = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetitionResult {

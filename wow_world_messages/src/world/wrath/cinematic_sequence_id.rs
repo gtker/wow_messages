@@ -19,7 +19,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SUNWELL_FIVE_MAN = 164;
 ///     DEATH_KNIGHT = 165;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CinematicSequenceId {

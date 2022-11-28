@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ENABLE = 1;
 ///     TOGGLE = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CommentatorEnableOption {

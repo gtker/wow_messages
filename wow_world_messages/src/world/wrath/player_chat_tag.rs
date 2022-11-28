@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     COMMENTATOR = 4;
 ///     DEVELOPER = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PlayerChatTag {

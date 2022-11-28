@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     INVITE = 0;
 ///     LEAVE = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PartyOperation {

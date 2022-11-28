@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNKNOWN19 = 0x13;
 ///     UNKNOWN20 = 0x14;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildCommand {

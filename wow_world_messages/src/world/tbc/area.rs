@@ -1647,7 +1647,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PARHELION_PLAZA = 4139;
 ///     THE_DEAD_SCAR3 = 4140;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Area {

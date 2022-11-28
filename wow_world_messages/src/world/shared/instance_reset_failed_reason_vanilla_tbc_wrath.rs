@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ZONING = 2;
 ///     SILENTLY = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InstanceResetFailedReason {

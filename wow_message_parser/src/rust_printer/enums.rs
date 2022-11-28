@@ -77,7 +77,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
 pub(crate) fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
     s.docc_wowm(
         |s| {
-            s.wln(get_definer_wowm_definition(kind, e, "/// "));
+            s.w(get_definer_wowm_definition(kind, e, "/// "));
         },
         e.file_info(),
     );

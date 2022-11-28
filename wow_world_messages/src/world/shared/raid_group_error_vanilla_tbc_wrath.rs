@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     REQUIRED = 1;
 ///     FULL = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidGroupError {

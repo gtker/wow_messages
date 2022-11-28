@@ -28,7 +28,6 @@
 ///     SAFE_FALL = 0x20000000;
 ///     HOVER = 0x40000000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct MovementFlags {

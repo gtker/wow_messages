@@ -196,7 +196,6 @@ use std::convert::{TryFrom, TryInto};
 ///     MOD_FACTION_REPUTATION_GAIN = 190;
 ///     USE_NORMAL_MOVEMENT_SPEED = 191;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum AuraType {

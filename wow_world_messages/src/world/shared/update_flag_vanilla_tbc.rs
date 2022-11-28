@@ -10,7 +10,6 @@
 ///     LIVING = 0x20;
 ///     HAS_POSITION = 0x40;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct UpdateFlag {

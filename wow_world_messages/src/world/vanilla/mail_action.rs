@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DELETED = 4;
 ///     MADE_PERMANENT = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum MailAction {

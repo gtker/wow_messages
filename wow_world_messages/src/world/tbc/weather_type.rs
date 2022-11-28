@@ -16,7 +16,6 @@ use std::convert::{TryFrom, TryInto};
 ///     THUNDERS = 86;
 ///     BLACKRAIN = 90;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum WeatherType {

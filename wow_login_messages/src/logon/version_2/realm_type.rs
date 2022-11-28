@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ROLEPLAYING = 6;
 ///     ROLEPLAYING_PLAYER_VS_PLAYER = 8;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RealmType {

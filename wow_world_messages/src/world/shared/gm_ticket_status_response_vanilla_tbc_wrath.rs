@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CLOSED = 2;
 ///     SURVEY = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketStatusResponse {

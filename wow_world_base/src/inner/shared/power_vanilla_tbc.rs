@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     HAPPINESS = 4;
 ///     HEALTH = 0xFE;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Power {

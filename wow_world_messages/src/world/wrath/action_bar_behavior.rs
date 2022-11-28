@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SET = 1;
 ///     CLEAR = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum ActionBarBehavior {

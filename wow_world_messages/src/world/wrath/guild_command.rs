@@ -12,7 +12,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PUBLIC_NOTE_CHANGED = 0x13;
 ///     OFFICER_NOTE_CHANGED = 0x14;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildCommand {

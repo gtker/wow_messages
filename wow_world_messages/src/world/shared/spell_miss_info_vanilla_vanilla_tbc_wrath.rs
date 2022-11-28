@@ -16,7 +16,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ABSORB = 10;
 ///     REFLECT = 11;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SpellMissInfo {

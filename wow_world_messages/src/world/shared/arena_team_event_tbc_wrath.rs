@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     LEADER_CHANGED = 7;
 ///     DISBANDED = 8;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ArenaTeamEvent {

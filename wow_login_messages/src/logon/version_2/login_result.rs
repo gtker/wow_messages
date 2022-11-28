@@ -20,7 +20,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SUCCESS_SURVEY = 0x0E;
 ///     FAIL_PARENTALCONTROL = 0x0F;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LoginResult {

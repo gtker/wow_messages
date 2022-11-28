@@ -35,7 +35,6 @@
 ///     HEAL_PREDICTION = 0x40000000;
 ///     UNKNOWN_32 = 0x80000000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct CastFlags {

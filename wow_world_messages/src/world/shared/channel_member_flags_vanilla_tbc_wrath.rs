@@ -9,7 +9,6 @@
 ///     CUSTOM = 0x20;
 ///     MICROPHONE_MUTE = 0x40;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct ChannelMemberFlags {

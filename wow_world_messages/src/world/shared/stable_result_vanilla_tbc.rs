@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SUCCESS_UNSTABLE = 0x09;
 ///     SUCCESS_BUY_SLOT = 0x0A;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum StableResult {

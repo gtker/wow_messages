@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PRESENT = 1;
 ///     NOT_PRESENT = 0;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetQueryDisabledNames {

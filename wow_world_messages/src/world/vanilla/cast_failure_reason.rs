@@ -150,7 +150,6 @@ use std::convert::{TryFrom, TryInto};
 ///     MIN_SKILL = 0x90;
 ///     UNKNOWN = 0x91;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum CastFailureReason {

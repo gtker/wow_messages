@@ -14,7 +14,6 @@ use std::convert::{TryFrom, TryInto};
 ///     QUEST_FAILED_MISSING_ITEMS = 20;
 ///     QUEST_FAILED_NOT_ENOUGH_MONEY = 22;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestFailedReason {

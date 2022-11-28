@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     IN_PROGRESS = 3;
 ///     WAIT_LEAVE = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum StatusId {

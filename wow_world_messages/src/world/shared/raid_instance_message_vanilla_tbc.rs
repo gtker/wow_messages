@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     WARNING_MIN_SOON = 3;
 ///     WELCOME = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidInstanceMessage {

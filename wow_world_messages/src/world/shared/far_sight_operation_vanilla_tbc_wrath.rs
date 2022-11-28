@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     REMOVE = 0;
 ///     ADD = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum FarSightOperation {

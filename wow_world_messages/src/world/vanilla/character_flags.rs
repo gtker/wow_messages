@@ -8,7 +8,6 @@
 ///     GHOST = 0x2000;
 ///     RENAME = 0x4000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct CharacterFlags {

@@ -10,7 +10,6 @@
 ///     LFG = 0x40;
 ///     VOICE = 0x80;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct ChannelFlags {

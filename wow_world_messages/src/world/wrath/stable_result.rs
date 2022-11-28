@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SUCCESS_BUY_SLOT = 0x0A;
 ///     ERR_EXOTIC = 0x0C;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum StableResult {

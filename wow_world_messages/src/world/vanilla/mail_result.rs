@@ -19,7 +19,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ERR_TOO_MANY_ATTACHMENTS = 18;
 ///     ERR_MAIL_ATTACHMENT_INVALID = 19;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum MailResult {

@@ -15,7 +15,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DIALOG_STATUS_REWARD2 = 9;
 ///     DIALOG_STATUS_REWARD = 10;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestGiverStatus {

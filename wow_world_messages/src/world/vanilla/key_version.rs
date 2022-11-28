@@ -14,7 +14,6 @@ use std::convert::{TryFrom, TryInto};
 ///     EIGHT = 8;
 ///     NINE = 9;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum KeyVersion {

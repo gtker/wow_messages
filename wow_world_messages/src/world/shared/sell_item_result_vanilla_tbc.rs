@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNK = 5;
 ///     ONLY_EMPTY_BAG = 6;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SellItemResult {

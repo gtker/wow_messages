@@ -108,7 +108,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CHAR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END = 0x66;
 ///     CHAR_NAME_DECLENSION_DOESNT_MATCH_BASE_NAME = 0x67;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum WorldResult {

@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     VANILLA = 0;
 ///     THE_BURNING_CRUSADE = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Expansion {

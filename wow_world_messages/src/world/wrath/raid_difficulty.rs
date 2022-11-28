@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TEN_MAN_HEROIC = 2;
 ///     TWENTY_FIVE_MAN_HEROIC = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidDifficulty {

@@ -16,7 +16,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_DEAD = 11;
 ///     UNKNOWN_ERROR = 12;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetTameFailureReason {

@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     LOOKING_FOR_NEW_PARTY_IN_QUEUE = 4;
 ///     NONE = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum MeetingStoneStatus {

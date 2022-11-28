@@ -179,7 +179,6 @@ use std::convert::{TryFrom, TryInto};
 ///     STATE_HOLD_JOUST = 475;
 ///     ONESHOT_CRY_JAINA = 476;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Emote {

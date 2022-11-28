@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PARTIAL = 0;
 ///     FULL = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidTargetUpdateType {

@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_RANDOM = 0;
 ///     RANDOM = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum RandomBg {

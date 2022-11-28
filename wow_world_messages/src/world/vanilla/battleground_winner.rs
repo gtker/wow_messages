@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ALLIANCE = 1;
 ///     NONE = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BattlegroundWinner {

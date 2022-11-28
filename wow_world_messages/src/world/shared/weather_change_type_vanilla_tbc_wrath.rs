@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SMOOTH = 0;
 ///     INSTANT = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum WeatherChangeType {

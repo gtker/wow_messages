@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NEED_MORE = 4;
 ///     NOT_SERVER = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PetitionResult {

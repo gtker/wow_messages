@@ -15,7 +15,6 @@ use std::convert::{TryFrom, TryInto};
 ///     HAVE_QUEST = 7;
 ///     FINISH_QUEST = 8;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum QuestPartyMessage {

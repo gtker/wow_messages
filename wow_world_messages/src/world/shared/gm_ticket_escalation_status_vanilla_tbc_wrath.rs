@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED = 1;
 ///     GMTICKET_ASSIGNEDTOGM_STATUS_ESCALATED = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketEscalationStatus {

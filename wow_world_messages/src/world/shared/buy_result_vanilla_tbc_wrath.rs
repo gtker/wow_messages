@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     RANK_REQUIRE = 11;
 ///     REPUTATION_REQUIRE = 12;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BuyResult {

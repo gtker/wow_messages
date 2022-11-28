@@ -6,7 +6,6 @@
 ///     GREED = 0x04;
 ///     DISENCHANT = 0x08;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct RollFlags {

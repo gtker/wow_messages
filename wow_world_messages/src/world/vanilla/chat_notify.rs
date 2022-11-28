@@ -36,7 +36,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PLAYER_INVITE_BANNED_NOTICE = 0x1E;
 ///     THROTTLED_NOTICE = 0x1F;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ChatNotify {

@@ -19,7 +19,6 @@
 ///     UNK15 = 0x00004000;
 ///     UNK16 = 0x00008000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct ExtraMovementFlags {

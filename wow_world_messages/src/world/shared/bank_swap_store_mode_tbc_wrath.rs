@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     MANUAL = 0;
 ///     AUTOMATIC = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BankSwapStoreMode {

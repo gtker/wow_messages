@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_ENOUGH_MONEY = 1;
 ///     NOT_ENOUGH_SKILL = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TrainingFailureReason {

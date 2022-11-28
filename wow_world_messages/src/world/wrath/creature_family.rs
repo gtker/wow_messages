@@ -45,7 +45,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CORE_HOUND = 45;
 ///     SPIRIT_BEAST = 46;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CreatureFamily {

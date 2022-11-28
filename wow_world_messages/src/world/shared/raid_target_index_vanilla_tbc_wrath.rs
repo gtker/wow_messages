@@ -14,7 +14,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNKNOWN8 = 8;
 ///     REQUEST_ICONS = 0xFF;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RaidTargetIndex {

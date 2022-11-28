@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ERR_BID_OWN = 10;
 ///     ERR_RESTRICTED_ACCOUNT = 13;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum AuctionCommandResult {

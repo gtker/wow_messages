@@ -25,7 +25,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NORTHREND_SKELETON = 20;
 ///     ICE_TROLL = 21;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Race {

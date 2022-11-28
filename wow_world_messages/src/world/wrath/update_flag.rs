@@ -13,7 +13,6 @@
 ///     POSITION = 0x0100;
 ///     ROTATION = 0x0200;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct UpdateFlag {

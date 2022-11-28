@@ -40,7 +40,6 @@ use std::convert::{TryFrom, TryInto};
 ///     VOICE_ON_NOTICE = 0x22;
 ///     VOICE_OFF_NOTICE = 0x23;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ChatNotify {

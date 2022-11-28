@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     LOOTED = 0;
 ///     FROM_NPC = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum NewItemSource {

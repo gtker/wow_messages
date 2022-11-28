@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_FOUND = 0;
 ///     FOUND = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum CorpseQueryResult {

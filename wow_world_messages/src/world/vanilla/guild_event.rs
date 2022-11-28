@@ -18,7 +18,6 @@ use std::convert::{TryFrom, TryInto};
 ///     SIGNED_ON = 12;
 ///     SIGNED_OFF = 13;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildEvent {

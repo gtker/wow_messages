@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNKNOWN3 = 3;
 ///     DND = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum FriendStatus {

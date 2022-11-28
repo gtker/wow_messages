@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     DISPELLED = 0;
 ///     CLEANSED = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum DispelMethod {

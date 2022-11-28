@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     THREE = 0x3;
 ///     FIVE = 0x5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum RealmCategory {

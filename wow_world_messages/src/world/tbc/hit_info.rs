@@ -17,7 +17,6 @@
 ///     NOACTION = 0x00010000;
 ///     SWINGNOHITSOUND = 0x00080000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct HitInfo {

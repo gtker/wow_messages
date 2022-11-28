@@ -7,7 +7,6 @@
 ///     TRIAL = 0x000008;
 ///     PROPASS = 0x800000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct AccountFlag {

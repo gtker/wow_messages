@@ -25,7 +25,6 @@
 ///     PET_AURAS_2 = 0x00100000;
 ///     MODE_OFFLINE = 0x10000000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct GroupUpdateFlags {

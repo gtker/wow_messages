@@ -87,7 +87,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CANNOT_TRADE_THAT = 79;
 ///     PERSONAL_ARENA_RATING_TOO_LOW = 80;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum InventoryResult {

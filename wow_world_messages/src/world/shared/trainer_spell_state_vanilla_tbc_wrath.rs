@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     RED = 1;
 ///     GRAY = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TrainerSpellState {

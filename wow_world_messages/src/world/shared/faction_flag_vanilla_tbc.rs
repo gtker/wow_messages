@@ -9,7 +9,6 @@
 ///     INACTIVE = 0x20;
 ///     RIVAL = 0x40;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct FactionFlag {

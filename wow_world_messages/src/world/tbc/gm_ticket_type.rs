@@ -41,7 +41,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TECHNICAL_SOUND_GRAPHICS_ISSUE = 35;
 ///     UI_ISSUE = 36;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GmTicketType {

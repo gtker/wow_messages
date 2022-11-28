@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     CAPTAIN = 0;
 ///     MEMBER = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ArenaTeamRole {

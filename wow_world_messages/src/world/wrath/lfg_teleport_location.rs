@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     IN = 0;
 ///     OUT = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LfgTeleportLocation {

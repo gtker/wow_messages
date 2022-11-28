@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TYPE_LOCKED = 3;
 ///     TYPE_OWNER = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum LootSlotType {

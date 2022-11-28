@@ -7,7 +7,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ENABLED_WITHOUT_AUTO_IGNORE = 1;
 ///     ENABLED_WITH_AUTO_IGNORE = 2;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ComplaintStatus {

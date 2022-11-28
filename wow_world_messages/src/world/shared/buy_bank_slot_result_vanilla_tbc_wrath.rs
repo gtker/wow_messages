@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_BANKER = 2;
 ///     OK = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BuyBankSlotResult {

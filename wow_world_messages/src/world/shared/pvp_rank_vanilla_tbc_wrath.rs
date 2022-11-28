@@ -24,7 +24,6 @@ use std::convert::{TryFrom, TryInto};
 ///     RANK14 = 18;
 ///     FACTION_LEADER = 19;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PvpRank {

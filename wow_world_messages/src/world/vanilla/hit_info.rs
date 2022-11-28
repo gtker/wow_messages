@@ -19,7 +19,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NO_ACTION = 0x00010000;
 ///     SWING_NO_HIT_SOUND = 0x00080000;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum HitInfo {

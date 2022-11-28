@@ -12,7 +12,6 @@
 ///     UNKNOWN8 = 0x00000080;
 ///     UNKNOWN9 = 0x00000100;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct CastFlags {

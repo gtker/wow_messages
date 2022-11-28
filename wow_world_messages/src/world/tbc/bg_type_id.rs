@@ -14,7 +14,6 @@ use std::convert::{TryFrom, TryInto};
 ///     QUEUED_FOR_RUINS_OF_LORDAERON = 8;
 ///     REMOVE_FROM_QUEUE = 0xFFFFFFFE;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BgTypeId {

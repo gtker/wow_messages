@@ -16,7 +16,6 @@ use std::convert::{TryFrom, TryInto};
 ///     LFG_PENDING = 12;
 ///     INVITE_RESTRICTED = 13;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PartyResult {

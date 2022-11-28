@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TROLL = 8;
 ///     GOBLIN = 9;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Race {

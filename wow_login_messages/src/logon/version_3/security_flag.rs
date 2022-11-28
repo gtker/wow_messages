@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NONE = 0x0;
 ///     PIN = 0x1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum SecurityFlag {

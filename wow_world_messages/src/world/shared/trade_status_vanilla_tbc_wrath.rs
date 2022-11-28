@@ -28,7 +28,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ONLY_CONJURED = 22;
 ///     NOT_ON_TAPLIST = 23;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TradeStatus {

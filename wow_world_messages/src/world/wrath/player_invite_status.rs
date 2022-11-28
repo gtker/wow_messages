@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ALREADY_IN_GROUP = 0;
 ///     NOT_IN_GROUP = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum PlayerInviteStatus {

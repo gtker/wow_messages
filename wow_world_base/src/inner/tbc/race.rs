@@ -22,7 +22,6 @@ use std::convert::{TryFrom, TryInto};
 ///     TUSKARR = 17;
 ///     FOREST_TROLL = 18;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Race {

@@ -8,7 +8,6 @@ use std::convert::{TryFrom, TryInto};
 ///     FEIGN_DEATH = 2;
 ///     ENVIRONMENTAL = 3;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum TimerType {

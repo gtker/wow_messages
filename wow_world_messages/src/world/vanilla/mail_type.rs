@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GAMEOBJECT = 4;
 ///     ITEM = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum MailType {

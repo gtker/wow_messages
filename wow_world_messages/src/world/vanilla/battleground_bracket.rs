@@ -10,7 +10,6 @@ use std::convert::{TryFrom, TryInto};
 ///     FIFTIES = 4;
 ///     SIXTY = 5;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BattlegroundBracket {

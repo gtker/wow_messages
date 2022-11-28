@@ -16,7 +16,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NOT_ALLOWED = 11;
 ///     HAS_BIND = 12;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum TransferAbortReason {

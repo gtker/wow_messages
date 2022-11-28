@@ -18,7 +18,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ISLE_OF_CONQUEST = 30;
 ///     RANDOM = 32;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BattlegroundType {

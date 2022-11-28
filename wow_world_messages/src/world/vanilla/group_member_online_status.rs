@@ -11,7 +11,6 @@
 ///     AFK = 0x0040;
 ///     DND = 0x0080;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 pub struct GroupMemberOnlineStatus {

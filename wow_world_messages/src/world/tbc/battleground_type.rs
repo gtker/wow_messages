@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     EYE_OF_THE_STORM = 7;
 ///     RUINS_OF_LORDAERON = 8;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum BattlegroundType {

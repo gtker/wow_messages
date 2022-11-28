@@ -13,7 +13,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ERR_MUST_REPAIR_ITEM_DURABILITY_TO_USE = 8;
 ///     INTERNAL_BAG_ERROR = 9;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum SellItemResult {

@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     NO = 0;
 ///     YES = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum DeclinedNames {

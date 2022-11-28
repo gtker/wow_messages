@@ -128,7 +128,6 @@ use std::convert::{TryFrom, TryInto};
 ///     PET_EVENT_RC = 758;
 ///     RIDING = 762;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Skill {

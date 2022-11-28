@@ -6,7 +6,6 @@ use std::convert::{TryFrom, TryInto};
 ///     UNAVAILABLE = 0;
 ///     AVAILABLE = 1;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub(crate) enum UrlInfo {

@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GROUP_LOOT = 3;
 ///     NEED_BEFORE_GREED = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GroupLootSetting {

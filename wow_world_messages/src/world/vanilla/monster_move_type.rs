@@ -9,7 +9,6 @@ use std::convert::{TryFrom, TryInto};
 ///     FACING_TARGET = 3;
 ///     FACING_ANGLE = 4;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum MonsterMoveType {

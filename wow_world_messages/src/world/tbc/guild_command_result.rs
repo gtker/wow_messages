@@ -23,7 +23,6 @@ use std::convert::{TryFrom, TryInto};
 ///     GUILD_IGNORING_YOU_S = 0x13;
 ///     GUILD_UNK20 = 0x14;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum GuildCommandResult {

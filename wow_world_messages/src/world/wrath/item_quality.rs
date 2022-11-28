@@ -12,7 +12,6 @@ use std::convert::{TryFrom, TryInto};
 ///     ARTIFACT = 6;
 ///     HEIRLOOM = 7;
 /// }
-
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum ItemQuality {
