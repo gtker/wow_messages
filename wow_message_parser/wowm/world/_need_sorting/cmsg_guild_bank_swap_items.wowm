@@ -1,0 +1,83 @@
+enum BankSwapSource : u8 {
+    INVENTORY = 0;
+    BANK = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+enum BankSwapStoreMode : u8 {
+    MANUAL = 0;
+    AUTOMATIC = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+cmsg CMSG_GUILD_BANK_SWAP_ITEMS = 0x03E8 {
+    Guid bank;
+    BankSwapSource source;
+    if (source == BANK) {
+        u8 bank_destination_tab;
+        u8 bank_destination_slot;
+        u32 unknown1;
+        u8 bank_source_tab;
+        u8 bank_source_slot;
+        Item item1;
+        u8 unknown2;
+        u8 amount;
+    } else {
+        u8 bank_tab;
+        u8 bank_slot;
+        Item item2;
+        BankSwapStoreMode mode;
+        if (mode == AUTOMATIC) {
+            u32 auto_count;
+            u8 unknown3;
+            u8 unknown4;
+        } else {
+            u8 player_bag;
+            u8 player_bag_slot;
+            Bool bank_to_character_transfer;
+            u8 split_amount;
+        }
+    }
+    u8[-] unknown5 {
+        comment = "cmangos-tbc/mangosone has extra ";
+    }
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_GUILD_BANK_SWAP_ITEMS = 0x03E9 {
+    Guid bank;
+    BankSwapSource source;
+    if (source == BANK) {
+        u8 bank_destination_tab;
+        u8 bank_destination_slot;
+        u32 unknown1;
+        u8 bank_source_tab;
+        u8 bank_source_slot;
+        Item item1;
+        u8 unknown2;
+        u32 amount;
+    } else {
+        u8 bank_tab;
+        u8 bank_slot;
+        Item item2;
+        BankSwapStoreMode mode;
+        if (mode == AUTOMATIC) {
+            u32 auto_count;
+            u8 unknown3;
+            u32 unknown4;
+        } else {
+            u8 player_bag;
+            u8 player_bag_slot;
+            Bool bank_to_character_transfer;
+            u32 split_amount;
+        }
+    }
+    u8[-] unknown5 {
+        comment = "cmangos-tbc/mangosone has extra ";
+    }
+} {
+    versions = "3.3.5";
+}

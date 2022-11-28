@@ -106,6 +106,8 @@ pub(crate) mod cmsg_group_uninvite_guid;
 pub use cmsg_group_uninvite_guid::*;
 pub(crate) mod cmsg_guild_bank_query_tab;
 pub use cmsg_guild_bank_query_tab::*;
+pub(crate) mod cmsg_guild_bank_swap_items;
+pub use cmsg_guild_bank_swap_items::*;
 pub(crate) mod cmsg_guild_banker_activate;
 pub use cmsg_guild_banker_activate::*;
 pub(crate) mod cmsg_instance_lock_response;
@@ -377,6 +379,10 @@ pub use crate::shared::arena_type_tbc_wrath::ArenaType;
 pub use crate::shared::auction_enchantment_tbc_wrath::AuctionEnchantment;
 
 pub use crate::shared::auction_sort_tbc_wrath::AuctionSort;
+
+pub use crate::shared::bank_swap_source_tbc_wrath::BankSwapSource;
+
+pub use crate::shared::bank_swap_store_mode_tbc_wrath::BankSwapStoreMode;
 
 pub use crate::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
 
