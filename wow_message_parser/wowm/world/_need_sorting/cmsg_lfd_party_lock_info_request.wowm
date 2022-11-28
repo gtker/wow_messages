@@ -1,0 +1,3 @@
+cmsg CMSG_LFD_PARTY_LOCK_INFO_REQUEST = 0x0371 {} {
+    versions = "3.3.5";
+}

@@ -389,6 +389,7 @@
 - [CMSG_LEARN_TALENT](docs/cmsg_learn_talent.md)
 - [CMSG_LEAVE_BATTLEFIELD](docs/cmsg_leave_battlefield.md)
 - [CMSG_LEAVE_CHANNEL](docs/cmsg_leave_channel.md)
+- [CMSG_LFD_PARTY_LOCK_INFO_REQUEST](docs/cmsg_lfd_party_lock_info_request.md)
 - [CMSG_LFD_PLAYER_LOCK_INFO_REQUEST](docs/cmsg_lfd_player_lock_info_request.md)
 - [CMSG_LFG_GET_STATUS](docs/cmsg_lfg_get_status.md)
 - [CMSG_LFG_JOIN](docs/cmsg_lfg_join.md)
