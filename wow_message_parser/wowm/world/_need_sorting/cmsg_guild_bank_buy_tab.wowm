@@ -1,0 +1,13 @@
+cmsg CMSG_GUILD_BANK_BUY_TAB = 0x03E9 {
+    Guid banker;
+    u8 tab;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_GUILD_BANK_BUY_TAB = 0x03EA {
+    Guid banker;
+    u8 tab;
+} {
+    versions = "3.3.5";
+}
