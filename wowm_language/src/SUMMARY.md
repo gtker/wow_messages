@@ -371,6 +371,7 @@
 - [CMSG_GUILD_ADD_RANK](docs/cmsg_guild_add_rank.md)
 - [CMSG_GUILD_BANKER_ACTIVATE](docs/cmsg_guild_banker_activate.md)
 - [CMSG_GUILD_BANK_BUY_TAB](docs/cmsg_guild_bank_buy_tab.md)
+- [CMSG_GUILD_BANK_DEPOSIT_MONEY](docs/cmsg_guild_bank_deposit_money.md)
 - [CMSG_GUILD_BANK_QUERY_TAB](docs/cmsg_guild_bank_query_tab.md)
 - [CMSG_GUILD_BANK_SWAP_ITEMS](docs/cmsg_guild_bank_swap_items.md)
 - [CMSG_GUILD_BANK_UPDATE_TAB](docs/cmsg_guild_bank_update_tab.md)

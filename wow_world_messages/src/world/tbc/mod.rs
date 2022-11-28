@@ -66,6 +66,8 @@ pub(crate) mod cmsg_get_channel_member_count;
 pub use cmsg_get_channel_member_count::*;
 pub(crate) mod cmsg_guild_bank_buy_tab;
 pub use cmsg_guild_bank_buy_tab::*;
+pub(crate) mod cmsg_guild_bank_deposit_money;
+pub use cmsg_guild_bank_deposit_money::*;
 pub(crate) mod cmsg_guild_bank_query_tab;
 pub use cmsg_guild_bank_query_tab::*;
 pub(crate) mod cmsg_guild_bank_swap_items;
