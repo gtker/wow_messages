@@ -14,7 +14,7 @@ use std::io::{Write, Read};
 ///     u32 maximum_invites;
 ///     u32 dungeon_id;
 ///     DateTime event_time;
-///     DateTime unknown_time;
+///     DateTime time_zone_time;
 ///     u32 flags;
 ///     u32 amount_of_invitees;
 ///     CalendarInvitee[amount_of_invitees] invitees;
@@ -28,7 +28,7 @@ pub struct CMSG_CALENDAR_ADD_EVENT {
     pub maximum_invites: u32,
     pub dungeon_id: u32,
     pub event_time: DateTime,
-    pub unknown_time: DateTime,
+    pub time_zone_time: DateTime,
     pub flags: u32,
     pub invitees: Vec<CalendarInvitee>,
 }
@@ -71,8 +71,8 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
         // event_time: DateTime
         w.write_all(&self.event_time.as_int().to_le_bytes())?;
 
-        // unknown_time: DateTime
-        w.write_all(&self.unknown_time.as_int().to_le_bytes())?;
+        // time_zone_time: DateTime
+        w.write_all(&self.time_zone_time.as_int().to_le_bytes())?;
 
         // flags: u32
         w.write_all(&self.flags.to_le_bytes())?;
@@ -114,8 +114,8 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
 
         // event_time: DateTime
         let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
-        // unknown_time: DateTime
-        let unknown_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        // time_zone_time: DateTime
+        let time_zone_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
         // flags: u32
         let flags = crate::util::read_u32_le(r)?;
 
@@ -136,7 +136,7 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
             maximum_invites,
             dungeon_id,
             event_time,
-            unknown_time,
+            time_zone_time,
             flags,
             invitees,
         })
@@ -155,7 +155,7 @@ impl CMSG_CALENDAR_ADD_EVENT {
         + 4 // maximum_invites: u32
         + 4 // dungeon_id: u32
         + 4 // event_time: DateTime
-        + 4 // unknown_time: DateTime
+        + 4 // time_zone_time: DateTime
         + 4 // flags: u32
         + 4 // amount_of_invitees: u32
         + self.invitees.iter().fold(0, |acc, x| acc + x.size()) // invitees: CalendarInvitee[amount_of_invitees]

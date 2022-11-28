@@ -14,7 +14,7 @@ cmsg CMSG_CALENDAR_ADD_EVENT = 0x042D {
     u32 maximum_invites;
     u32 dungeon_id;
     DateTime event_time;
-    DateTime unknown_time;
+    DateTime time_zone_time;
     u32 flags;
     u32 amount_of_invitees;
     CalendarInvitee[amount_of_invitees] invitees;
@@ -42,7 +42,7 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | maximum_invites |  |  |
 | - | 4 / Little | u32 | dungeon_id |  |  |
 | - | 4 / Little | DateTime | event_time |  |  |
-| - | 4 / Little | DateTime | unknown_time |  |  |
+| - | 4 / Little | DateTime | time_zone_time |  |  |
 | - | 4 / Little | u32 | flags |  |  |
 | - | 4 / Little | u32 | amount_of_invitees |  |  |
 | - | ? / - | [CalendarInvitee](calendarinvitee.md)[amount_of_invitees] | invitees |  |  |

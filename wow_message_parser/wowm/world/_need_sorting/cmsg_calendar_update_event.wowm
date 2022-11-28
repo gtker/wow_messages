@@ -1,0 +1,15 @@
+cmsg CMSG_CALENDAR_UPDATE_EVENT = 0x042E {
+    Guid event;
+    Guid invite_id;
+    CString title;
+    CString description;
+    u8 event_type;
+    Bool repeatable;
+    u32 maximum_invites;
+    u32 dungeon_id;
+    DateTime event_time;
+    DateTime time_zone_time;
+    u32 flags;
+} {
+    versions = "3.3.5";
+}
