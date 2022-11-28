@@ -176,8 +176,8 @@ enum Map : u32 {
     WAILING_CAVERNS = 43 {
         display = "Wailing Caverns";
     }
-    UNUSED_MONASTERY = 44 {
-        display = "<unused> Monastery";
+    MONASTERY = 44 {
+        display = "Monastery";
     }
     RAZORFEN_KRAUL = 47 {
         display = "Razorfen Kraul";

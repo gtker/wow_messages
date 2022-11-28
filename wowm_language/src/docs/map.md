@@ -152,7 +152,7 @@ enum Map : u32 {
     AZSHARA_CRATER = 37;
     COLLINS_TEST = 42;
     WAILING_CAVERNS = 43;
-    UNUSED_MONASTERY = 44;
+    MONASTERY = 44;
     RAZORFEN_KRAUL = 47;
     BLACKFATHOM_DEEPS = 48;
     ULDAMAN = 70;
@@ -242,7 +242,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `AZSHARA_CRATER` | 37 (0x25) |  |  | Azshara Crater |
 | `COLLINS_TEST` | 42 (0x2A) |  |  | Collin's Test |
 | `WAILING_CAVERNS` | 43 (0x2B) |  |  | Wailing Caverns |
-| `UNUSED_MONASTERY` | 44 (0x2C) |  |  | <unused> Monastery |
+| `MONASTERY` | 44 (0x2C) |  |  | Monastery |
 | `RAZORFEN_KRAUL` | 47 (0x2F) |  |  | Razorfen Kraul |
 | `BLACKFATHOM_DEEPS` | 48 (0x30) |  |  | Blackfathom Deeps |
 | `ULDAMAN` | 70 (0x46) |  |  | Uldaman |
