@@ -5,6 +5,7 @@ mod base_stats;
 pub mod character_features;
 mod class;
 pub mod exp;
+mod map;
 pub mod position;
 mod skills;
 mod spells;
@@ -13,6 +14,7 @@ pub mod trigger;
 pub use actions::*;
 pub use base_stats::*;
 pub use class::*;
+pub use map::*;
 pub use skills::*;
 pub use spells::*;
 
