@@ -203,21 +203,10 @@ pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansio
     s.wln("const POSITIONS: &[Position] = &[");
 
     for i in data.positions(expansion) {
-        let map = match expansion {
-            Expansion::Vanilla => format!(
-                "{:?}",
-                wow_world_base::vanilla::Map::try_from(i.map).unwrap()
-            ),
-            Expansion::BurningCrusade => {
-                format!("{:?}", wow_world_base::tbc::Map::try_from(i.map).unwrap())
-            }
-            Expansion::WrathOfTheLichKing => {
-                format!("{:?}", wow_world_base::wrath::Map::try_from(i.map).unwrap())
-            }
-        };
+        let map = expansion.as_map_string(i.map).unwrap();
 
         s.wln(format!(
-            "    Position::new(Map::{}, {:.1}, {:.1}, {:.1}, {:.1}),",
+            "    Position::new({}, {:.1}, {:.1}, {:.1}, {:.1}),",
             map, i.x, i.y, i.z, i.orientation,
         ));
     }
