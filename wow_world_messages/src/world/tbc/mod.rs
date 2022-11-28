@@ -32,6 +32,8 @@ pub(crate) mod cmsg_cast_spell;
 pub use cmsg_cast_spell::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
+pub(crate) mod cmsg_commentator_enable;
+pub use cmsg_commentator_enable::*;
 pub(crate) mod cmsg_emote;
 pub use cmsg_emote::*;
 pub(crate) mod cmsg_force_flight_back_speed_change_ack;
@@ -795,6 +797,8 @@ pub use crate::shared::cmsg_who_vanilla_tbc_wrath::CMSG_WHO;
 pub use crate::shared::cmsg_whois_vanilla_tbc_wrath::CMSG_WHOIS;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
+
+pub use crate::shared::commentator_enable_option_tbc_wrath::CommentatorEnableOption;
 
 pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 

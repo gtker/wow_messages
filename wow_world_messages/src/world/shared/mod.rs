@@ -270,6 +270,7 @@ pub mod cmsg_warden_data_vanilla_tbc_wrath;
 pub mod cmsg_who_vanilla_tbc_wrath;
 pub mod cmsg_whois_vanilla_tbc_wrath;
 pub mod cmsg_wrap_item_vanilla_tbc_wrath;
+pub mod commentator_enable_option_tbc_wrath;
 pub mod cooldown_spell_vanilla_tbc_wrath;
 pub mod corpse_query_result_vanilla_tbc_wrath;
 pub mod declined_pet_name_included_tbc_wrath;

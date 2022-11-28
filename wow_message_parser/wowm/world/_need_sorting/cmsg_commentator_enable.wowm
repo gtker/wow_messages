@@ -1,0 +1,19 @@
+enum CommentatorEnableOption : u32 {
+    DISABLE = 0;
+    ENABLE = 1;
+    TOGGLE = 2;
+} {
+    versions = "2.4.3 3";
+}
+
+cmsg CMSG_COMMENTATOR_ENABLE = 0x03B4 {
+    CommentatorEnableOption option;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_COMMENTATOR_ENABLE = 0x03B5 {
+    CommentatorEnableOption option;
+} {
+    versions = "3.3.5";
+}
