@@ -1,0 +1,22 @@
+enum CalendarStatus : u32 {
+    INVITED         = 0;
+    ACCEPTED        = 1;
+    DECLINED        = 2;
+    CONFIRMED       = 3;
+    OUT             = 4;
+    STANDBY         = 5;
+    SIGNED_UP       = 6;
+    NOT_SIGNED_UP   = 7;
+    TENTATIVE       = 8;
+    REMOVED         = 9;
+} {
+    versions = "3.3.5";
+}
+
+cmsg CMSG_CALENDAR_EVENT_RSVP = 0x0432 {
+    Guid event;
+    Guid invite_id;
+    CalendarStatus status;
+} {
+    versions = "3.3.5";
+}
