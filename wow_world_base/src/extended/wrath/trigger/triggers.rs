@@ -55,12 +55,12 @@ heroic_keys: None,heroic_required_quest: 0 },
 (107, (
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -8667.6, 623.6, 85.4, 0.0), radius: 7.0 }, 
     &[
-        Trigger::Teleport { location: Position::new(Map::Stormwindprison, -0.9, 40.6, -24.2, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+        Trigger::Teleport { location: Position::new(Map::StormwindPrison, -0.9, 40.6, -24.2, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 },
     ]
 )),
 (109, (
-    AreaTrigger::Circle { position: Position::new(Map::Stormwindprison, -0.9, 16.4, -14.2, 0.0), radius: 7.0 }, 
+    AreaTrigger::Circle { position: Position::new(Map::StormwindPrison, -0.9, 16.4, -14.2, 0.0), radius: 7.0 }, 
     &[
         Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -8653.5, 606.2, 91.2, 0.0),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 },

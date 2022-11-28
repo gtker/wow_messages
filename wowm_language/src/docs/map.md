@@ -147,7 +147,7 @@ enum Map : u32 {
     ALTERAC_VALLEY = 30;
     SHADOWFANG_KEEP = 33;
     STORMWIND_STOCKADE = 34;
-    UNUSEDSTORMWINDPRISON = 35;
+    STORMWIND_PRISON = 35;
     DEADMINES = 36;
     AZSHARA_CRATER = 37;
     COLLINS_TEST = 42;
@@ -237,7 +237,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `ALTERAC_VALLEY` | 30 (0x1E) |  |  | Alterac Valley |
 | `SHADOWFANG_KEEP` | 33 (0x21) |  |  | Shadowfang Keep |
 | `STORMWIND_STOCKADE` | 34 (0x22) |  |  | Stormwind Stockade |
-| `UNUSEDSTORMWINDPRISON` | 35 (0x23) |  |  | <unused>StormwindPrison |
+| `STORMWIND_PRISON` | 35 (0x23) |  |  | Stormwind Prison |
 | `DEADMINES` | 36 (0x24) |  |  | Deadmines |
 | `AZSHARA_CRATER` | 37 (0x25) |  |  | Azshara Crater |
 | `COLLINS_TEST` | 42 (0x2A) |  |  | Collin's Test |
@@ -351,7 +351,7 @@ enum Map : u32 {
     ALTERAC_VALLEY = 30;
     SHADOWFANG_KEEP = 33;
     STORMWIND_STOCKADE = 34;
-    STORMWINDPRISON = 35;
+    STORMWIND_PRISON = 35;
     DEADMINES = 36;
     AZSHARA_CRATER = 37;
     COLLINS_TEST = 42;
@@ -493,7 +493,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `ALTERAC_VALLEY` | 30 (0x1E) |  |  | Alterac Valley |
 | `SHADOWFANG_KEEP` | 33 (0x21) |  |  | Shadowfang Keep |
 | `STORMWIND_STOCKADE` | 34 (0x22) |  |  | Stormwind Stockade |
-| `STORMWINDPRISON` | 35 (0x23) |  |  | StormwindPrison |
+| `STORMWIND_PRISON` | 35 (0x23) |  |  | Stormwind Prison |
 | `DEADMINES` | 36 (0x24) |  |  | Deadmines |
 | `AZSHARA_CRATER` | 37 (0x25) |  |  | Azshara Crater |
 | `COLLINS_TEST` | 42 (0x2A) |  |  | Collin's Test |

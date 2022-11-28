@@ -11,7 +11,7 @@ use std::convert::{TryFrom, TryInto};
 ///     ALTERAC_VALLEY = 30;
 ///     SHADOWFANG_KEEP = 33;
 ///     STORMWIND_STOCKADE = 34;
-///     UNUSEDSTORMWINDPRISON = 35;
+///     STORMWIND_PRISON = 35;
 ///     DEADMINES = 36;
 ///     AZSHARA_CRATER = 37;
 ///     COLLINS_TEST = 42;
@@ -99,7 +99,7 @@ pub enum Map {
     AlteracValley,
     ShadowfangKeep,
     StormwindStockade,
-    Unusedstormwindprison,
+    StormwindPrison,
     Deadmines,
     AzsharaCrater,
     CollinsTest,
@@ -187,7 +187,7 @@ impl Map {
             Self::AlteracValley => 0x1e,
             Self::ShadowfangKeep => 0x21,
             Self::StormwindStockade => 0x22,
-            Self::Unusedstormwindprison => 0x23,
+            Self::StormwindPrison => 0x23,
             Self::Deadmines => 0x24,
             Self::AzsharaCrater => 0x25,
             Self::CollinsTest => 0x2a,
@@ -284,7 +284,7 @@ impl std::fmt::Display for Map {
             Self::AlteracValley => f.write_str("Alterac Valley"),
             Self::ShadowfangKeep => f.write_str("Shadowfang Keep"),
             Self::StormwindStockade => f.write_str("Stormwind Stockade"),
-            Self::Unusedstormwindprison => f.write_str("<unused>StormwindPrison"),
+            Self::StormwindPrison => f.write_str("Stormwind Prison"),
             Self::Deadmines => f.write_str("Deadmines"),
             Self::AzsharaCrater => f.write_str("Azshara Crater"),
             Self::CollinsTest => f.write_str("Collin's Test"),
@@ -375,7 +375,7 @@ impl TryFrom<u32> for Map {
             30 => Ok(Self::AlteracValley),
             33 => Ok(Self::ShadowfangKeep),
             34 => Ok(Self::StormwindStockade),
-            35 => Ok(Self::Unusedstormwindprison),
+            35 => Ok(Self::StormwindPrison),
             36 => Ok(Self::Deadmines),
             37 => Ok(Self::AzsharaCrater),
             42 => Ok(Self::CollinsTest),

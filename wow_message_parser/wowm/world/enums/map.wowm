@@ -161,8 +161,8 @@ enum Map : u32 {
     STORMWIND_STOCKADE = 34 {
         display = "Stormwind Stockade";
     }
-    UNUSEDSTORMWINDPRISON = 35 {
-        display = "<unused>StormwindPrison";
+    STORMWIND_PRISON = 35 {
+        display = "Stormwind Prison";
     }
     DEADMINES = 36 {
         display = "Deadmines";
@@ -413,8 +413,8 @@ enum Map : u32 {
     STORMWIND_STOCKADE = 34 {
         display = "Stormwind Stockade";
     }
-    STORMWINDPRISON = 35 {
-        display = "StormwindPrison";
+    STORMWIND_PRISON = 35 {
+        display = "Stormwind Prison";
     }
     DEADMINES = 36 {
         display = "Deadmines";
