@@ -1,0 +1,13 @@
+cmsg CMSG_GUILD_BANK_WITHDRAW_MONEY = 0x03EC {
+    Guid bank;
+    u32 money;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_GUILD_BANK_WITHDRAW_MONEY = 0x03ED {
+    Guid bank;
+    u32 money;
+} {
+    versions = "3.3.5";
+}
