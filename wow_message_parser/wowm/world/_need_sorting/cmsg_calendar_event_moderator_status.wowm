@@ -1,0 +1,16 @@
+enum CalendarModeratorRank : u8 {
+    PLAYER = 0;
+    MODERATOR = 1;
+    OWNER = 2;
+} {
+    versions = "3.3.5";
+}
+
+cmsg CMSG_CALENDAR_EVENT_MODERATOR_STATUS = 0x0435 {
+    Guid event;
+    Guid invite_id;
+    Guid sender_invite_id;
+    CalendarModeratorRank rank;
+} {
+    versions = "3.3.5";
+}
