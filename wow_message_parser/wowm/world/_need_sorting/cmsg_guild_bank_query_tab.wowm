@@ -1,0 +1,15 @@
+cmsg CMSG_GUILD_BANK_QUERY_TAB = 0x03E6 {
+    Guid bank;
+    u8 tab;
+    Bool full_update;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_GUILD_BANK_QUERY_TAB = 0x03E7 {
+    Guid bank;
+    u8 tab;
+    Bool full_update;
+} {
+    versions = "3.3.5";
+}

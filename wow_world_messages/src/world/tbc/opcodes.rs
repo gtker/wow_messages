@@ -351,6 +351,7 @@ use crate::world::tbc::CMSG_GET_CHANNEL_MEMBER_COUNT;
 use crate::world::tbc::CMSG_CHANNEL_VOICE_ON;
 use crate::world::tbc::CMSG_REPORT_PVP_AFK;
 use crate::world::tbc::CMSG_GUILD_BANKER_ACTIVATE;
+use crate::world::tbc::CMSG_GUILD_BANK_QUERY_TAB;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -696,6 +697,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHANNEL_VOICE_ON(CMSG_CHANNEL_VOICE_ON),
     CMSG_REPORT_PVP_AFK(CMSG_REPORT_PVP_AFK),
     CMSG_GUILD_BANKER_ACTIVATE(CMSG_GUILD_BANKER_ACTIVATE),
+    CMSG_GUILD_BANK_QUERY_TAB(CMSG_GUILD_BANK_QUERY_TAB),
 }
 
 impl ClientOpcodeMessage {
@@ -1043,6 +1045,7 @@ impl ClientOpcodeMessage {
             0x03D5 => Ok(Self::CMSG_CHANNEL_VOICE_ON(<CMSG_CHANNEL_VOICE_ON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D5, size: body_size, io, } } else { a } })?)),
             0x03E3 => Ok(Self::CMSG_REPORT_PVP_AFK(<CMSG_REPORT_PVP_AFK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03E3, size: body_size, io, } } else { a } })?)),
             0x03E5 => Ok(Self::CMSG_GUILD_BANKER_ACTIVATE(<CMSG_GUILD_BANKER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03E5, size: body_size, io, } } else { a } })?)),
+            0x03E6 => Ok(Self::CMSG_GUILD_BANK_QUERY_TAB(<CMSG_GUILD_BANK_QUERY_TAB as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03E6, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
@@ -1458,6 +1461,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_VOICE_ON(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REPORT_PVP_AFK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -1806,6 +1810,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_VOICE_ON(c) => c.write_unencrypted_client(w),
             Self::CMSG_REPORT_PVP_AFK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -2154,6 +2159,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_VOICE_ON(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPORT_PVP_AFK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -2502,6 +2508,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_VOICE_ON(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPORT_PVP_AFK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -2850,6 +2857,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_VOICE_ON(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPORT_PVP_AFK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -3198,6 +3206,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHANNEL_VOICE_ON(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPORT_PVP_AFK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -3581,6 +3590,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHANNEL_VOICE_ON(_) => "CMSG_CHANNEL_VOICE_ON",
             ClientOpcodeMessage::CMSG_REPORT_PVP_AFK(_) => "CMSG_REPORT_PVP_AFK",
             ClientOpcodeMessage::CMSG_GUILD_BANKER_ACTIVATE(_) => "CMSG_GUILD_BANKER_ACTIVATE",
+            ClientOpcodeMessage::CMSG_GUILD_BANK_QUERY_TAB(_) => "CMSG_GUILD_BANK_QUERY_TAB",
         })
     }
 }
@@ -5634,6 +5644,12 @@ impl From<CMSG_REPORT_PVP_AFK> for ClientOpcodeMessage {
 impl From<CMSG_GUILD_BANKER_ACTIVATE> for ClientOpcodeMessage {
     fn from(c: CMSG_GUILD_BANKER_ACTIVATE) -> Self {
         Self::CMSG_GUILD_BANKER_ACTIVATE(c)
+    }
+}
+
+impl From<CMSG_GUILD_BANK_QUERY_TAB> for ClientOpcodeMessage {
+    fn from(c: CMSG_GUILD_BANK_QUERY_TAB) -> Self {
+        Self::CMSG_GUILD_BANK_QUERY_TAB(c)
     }
 }
 

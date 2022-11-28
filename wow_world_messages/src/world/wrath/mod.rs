@@ -104,6 +104,8 @@ pub(crate) mod cmsg_group_invite;
 pub use cmsg_group_invite::*;
 pub(crate) mod cmsg_group_uninvite_guid;
 pub use cmsg_group_uninvite_guid::*;
+pub(crate) mod cmsg_guild_bank_query_tab;
+pub use cmsg_guild_bank_query_tab::*;
 pub(crate) mod cmsg_guild_banker_activate;
 pub use cmsg_guild_banker_activate::*;
 pub(crate) mod cmsg_instance_lock_response;
