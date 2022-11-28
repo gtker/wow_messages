@@ -735,7 +735,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("MSG_GM_GEARRATING", 0x3B4),
     Data::new("CMSG_COMMENTATOR_ENABLE", 0x3B5),
     Data::new("SMSG_COMMENTATOR_STATE_CHANGED", 0x3B6),
-    Data::new("CMSG_COMMENTATOR_GET_MAP_INFO", 0x3B7),
     Data::new("SMSG_COMMENTATOR_MAP_INFO", 0x3B8),
     Data::new("CMSG_COMMENTATOR_GET_PLAYER_INFO", 0x3B9),
     Data::new("SMSG_COMMENTATOR_GET_PLAYER_INFO", 0x3BA),

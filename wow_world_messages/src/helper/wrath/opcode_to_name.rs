@@ -731,7 +731,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x03b4 => "MSG_GM_GEARRATING",
         0x03b5 => "CMSG_COMMENTATOR_ENABLE",
         0x03b6 => "SMSG_COMMENTATOR_STATE_CHANGED",
-        0x03b7 => "CMSG_COMMENTATOR_GET_MAP_INFO",
         0x03b8 => "SMSG_COMMENTATOR_MAP_INFO",
         0x03b9 => "CMSG_COMMENTATOR_GET_PLAYER_INFO",
         0x03ba => "SMSG_COMMENTATOR_GET_PLAYER_INFO",
