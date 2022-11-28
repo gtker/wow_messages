@@ -38,8 +38,8 @@ enum Map : u32 {
     WAILING_CAVERNS = 43 {
         display = "Wailing Caverns";
     }
-    MONASTERY = 44 {
-        display = "Monastery";
+    MONASTERY_UNUSED = 44 {
+        display = "<Unused> Monastery";
     }
     RAZORFEN_KRAUL = 47 {
         display = "Razorfen Kraul";
@@ -54,7 +54,7 @@ enum Map : u32 {
         display = "Gnomeregan";
     }
     SUNKEN_TEMPLE = 109 {
-        display = "SunkenTemple";
+        display = "Sunken Temple";
     }
     RAZORFEN_DOWNS = 129 {
         display = "Razorfen Downs";
@@ -177,8 +177,8 @@ enum Map : u32 {
     WAILING_CAVERNS = 43 {
         display = "Wailing Caverns";
     }
-    MONASTERY = 44 {
-        display = "Monastery";
+    MONASTERY_UNUSED = 44 {
+        display = "<Unused> Monastery";
     }
     RAZORFEN_KRAUL = 47 {
         display = "Razorfen Kraul";
@@ -429,8 +429,8 @@ enum Map : u32 {
     WAILING_CAVERNS = 43 {
         display = "Wailing Caverns";
     }
-    MONASTERY = 44 {
-        display = "Monastery";
+    MONASTERY_UNUSED = 44 {
+        display = "<Unused> Monastery";
     }
     RAZORFEN_KRAUL = 47 {
         display = "Razorfen Kraul";
@@ -503,6 +503,7 @@ enum Map : u32 {
     }
     DEVELOPMENT_LAND = 451 {
         display = "Development Land";
+        comment = "Map files not present on 3.3.5 client, so loading the map will crash the client.";
     }
     BLACKWING_LAIR = 469 {
         display = "Blackwing Lair";
@@ -669,8 +670,8 @@ enum Map : u32 {
     CRAIG_TEST = 597 {
         display = "Craig Test";
     }
-    SUNWELL_FIX = 598 {
-        display = "Sunwell Fix";
+    SUNWELL_FIX_UNUSED = 598 {
+        display = "Sunwell Fix (Unused)";
     }
     HALLS_OF_STONE = 599 {
         display = "Halls of Stone";
@@ -789,8 +790,8 @@ enum Map : u32 {
     TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON = 713 {
         display = "Transport: Orgrim's Hammer (IC Dungeon)";
     }
-    TRASNPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718 {
-        display = "Trasnport: The Mighty Wind (Icecrown Citadel Raid)";
+    TRANSPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718 {
+        display = "Transport: The Mighty Wind (Icecrown Citadel Raid)";
     }
     STORMWIND = 723 {
         display = "Stormwind";

@@ -698,7 +698,7 @@ const POSITIONS: &[Position] = &[
     Position::new(Map::Kalimdor, -2917.6, -258.0, 53.0, 0.0),
     Position::new(Map::EasternKingdoms, 1676.7, 1678.3, 121.7, 2.7),
     Position::new(Map::AzsharaCrater, 126.0, 125.4, 232.5, 4.7),
-    Position::new(Map::Monastery, 45.1, -0.5, 15.2, 0.0),
+    Position::new(Map::MonasteryUnused, 45.1, -0.5, 15.2, 0.0),
     Position::new(Map::Kalimdor, 7434.3, -1559.8, 187.4, 2.7),
     Position::new(Map::OpeningOfTheDarkPortal, 2394.2, 1195.9, 68.2, 4.1),
     Position::new(Map::Kalimdor, 4617.0, -3853.4, 944.1, 1.1),

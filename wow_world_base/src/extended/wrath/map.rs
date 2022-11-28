@@ -15,7 +15,7 @@ impl Map {
             | Map::Exteriortest
             | Map::HordePvpBarracks
             | Map::Kalimdor
-            | Map::Monastery
+            | Map::MonasteryUnused
             | Map::Northrend
             | Map::OpeningOfTheDarkPortal
             | Map::Outland
@@ -23,7 +23,7 @@ impl Map {
             | Map::ScottTest
             | Map::Stormwind
             | Map::StormwindPrison
-            | Map::SunwellFix
+            | Map::SunwellFixUnused
             | Map::Testing
             | Map::TransportAllianceAirshipBg
             | Map::TransportBootyBayToRatchet
@@ -52,7 +52,7 @@ impl Map {
             | Map::TransportTheSkybreakerIcecrownCitadelRaid
             | Map::TransportTirisfalToVengeanceLanding
             | Map::TransportUndercityToOrgrimmar
-            | Map::TrasnportTheMightyWindIcecrownCitadelRaid => false,
+            | Map::TransportTheMightyWindIcecrownCitadelRaid => false,
 
             Map::AhnKahetTheOldKingdom
             | Map::AhnQirajTemple
@@ -272,12 +272,12 @@ impl Map {
             | Map::DevelopmentLandNonWeightedTextures
             | Map::EmeraldDream
             | Map::Exteriortest
-            | Map::Monastery
+            | Map::MonasteryUnused
             | Map::OpeningOfTheDarkPortal
             | Map::QaAndDvd
             | Map::ScottTest
             | Map::StormwindPrison
-            | Map::SunwellFix
+            | Map::SunwellFixUnused
             | Map::Testing
             | Map::TransportAllianceAirshipBg
             | Map::TransportBootyBayToRatchet
@@ -306,7 +306,7 @@ impl Map {
             | Map::TransportTheSkybreakerIcecrownCitadelRaid
             | Map::TransportTirisfalToVengeanceLanding
             | Map::TransportUndercityToOrgrimmar
-            | Map::TrasnportTheMightyWindIcecrownCitadelRaid => false,
+            | Map::TransportTheMightyWindIcecrownCitadelRaid => false,
         }
     }
 }

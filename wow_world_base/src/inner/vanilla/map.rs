@@ -16,7 +16,7 @@ use std::convert::{TryFrom, TryInto};
 ///     AZSHARA_CRATER = 37;
 ///     COLLINS_TEST = 42;
 ///     WAILING_CAVERNS = 43;
-///     MONASTERY = 44;
+///     MONASTERY_UNUSED = 44;
 ///     RAZORFEN_KRAUL = 47;
 ///     BLACKFATHOM_DEEPS = 48;
 ///     ULDAMAN = 70;
@@ -65,7 +65,7 @@ pub enum Map {
     AzsharaCrater,
     CollinsTest,
     WailingCaverns,
-    Monastery,
+    MonasteryUnused,
     RazorfenKraul,
     BlackfathomDeeps,
     Uldaman,
@@ -116,7 +116,7 @@ impl Map {
             Self::AzsharaCrater => 0x25,
             Self::CollinsTest => 0x2a,
             Self::WailingCaverns => 0x2b,
-            Self::Monastery => 0x2c,
+            Self::MonasteryUnused => 0x2c,
             Self::RazorfenKraul => 0x2f,
             Self::BlackfathomDeeps => 0x30,
             Self::Uldaman => 0x46,
@@ -174,12 +174,12 @@ impl std::fmt::Display for Map {
             Self::AzsharaCrater => f.write_str("Azshara Crater"),
             Self::CollinsTest => f.write_str("Collin's Test"),
             Self::WailingCaverns => f.write_str("Wailing Caverns"),
-            Self::Monastery => f.write_str("Monastery"),
+            Self::MonasteryUnused => f.write_str("<Unused> Monastery"),
             Self::RazorfenKraul => f.write_str("Razorfen Kraul"),
             Self::BlackfathomDeeps => f.write_str("Blackfathom Deeps"),
             Self::Uldaman => f.write_str("Uldaman"),
             Self::Gnomeregan => f.write_str("Gnomeregan"),
-            Self::SunkenTemple => f.write_str("SunkenTemple"),
+            Self::SunkenTemple => f.write_str("Sunken Temple"),
             Self::RazorfenDowns => f.write_str("Razorfen Downs"),
             Self::EmeraldDream => f.write_str("Emerald Dream"),
             Self::ScarletMonastery => f.write_str("Scarlet Monastery"),
@@ -226,7 +226,7 @@ impl TryFrom<u32> for Map {
             37 => Ok(Self::AzsharaCrater),
             42 => Ok(Self::CollinsTest),
             43 => Ok(Self::WailingCaverns),
-            44 => Ok(Self::Monastery),
+            44 => Ok(Self::MonasteryUnused),
             47 => Ok(Self::RazorfenKraul),
             48 => Ok(Self::BlackfathomDeeps),
             70 => Ok(Self::Uldaman),

@@ -21,7 +21,7 @@ enum Map : u32 {
     AZSHARA_CRATER = 37;
     COLLINS_TEST = 42;
     WAILING_CAVERNS = 43;
-    MONASTERY = 44;
+    MONASTERY_UNUSED = 44;
     RAZORFEN_KRAUL = 47;
     BLACKFATHOM_DEEPS = 48;
     ULDAMAN = 70;
@@ -72,12 +72,12 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `AZSHARA_CRATER` | 37 (0x25) |  |  | Azshara Crater |
 | `COLLINS_TEST` | 42 (0x2A) |  |  | Collin's Test |
 | `WAILING_CAVERNS` | 43 (0x2B) |  |  | Wailing Caverns |
-| `MONASTERY` | 44 (0x2C) |  |  | Monastery |
+| `MONASTERY_UNUSED` | 44 (0x2C) |  |  | <Unused> Monastery |
 | `RAZORFEN_KRAUL` | 47 (0x2F) |  |  | Razorfen Kraul |
 | `BLACKFATHOM_DEEPS` | 48 (0x30) |  |  | Blackfathom Deeps |
 | `ULDAMAN` | 70 (0x46) |  |  | Uldaman |
 | `GNOMEREGAN` | 90 (0x5A) |  |  | Gnomeregan |
-| `SUNKEN_TEMPLE` | 109 (0x6D) |  |  | SunkenTemple |
+| `SUNKEN_TEMPLE` | 109 (0x6D) |  |  | Sunken Temple |
 | `RAZORFEN_DOWNS` | 129 (0x81) |  |  | Razorfen Downs |
 | `EMERALD_DREAM` | 169 (0xA9) |  |  | Emerald Dream |
 | `SCARLET_MONASTERY` | 189 (0xBD) |  |  | Scarlet Monastery |
@@ -152,7 +152,7 @@ enum Map : u32 {
     AZSHARA_CRATER = 37;
     COLLINS_TEST = 42;
     WAILING_CAVERNS = 43;
-    MONASTERY = 44;
+    MONASTERY_UNUSED = 44;
     RAZORFEN_KRAUL = 47;
     BLACKFATHOM_DEEPS = 48;
     ULDAMAN = 70;
@@ -242,7 +242,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `AZSHARA_CRATER` | 37 (0x25) |  |  | Azshara Crater |
 | `COLLINS_TEST` | 42 (0x2A) |  |  | Collin's Test |
 | `WAILING_CAVERNS` | 43 (0x2B) |  |  | Wailing Caverns |
-| `MONASTERY` | 44 (0x2C) |  |  | Monastery |
+| `MONASTERY_UNUSED` | 44 (0x2C) |  |  | <Unused> Monastery |
 | `RAZORFEN_KRAUL` | 47 (0x2F) |  |  | Razorfen Kraul |
 | `BLACKFATHOM_DEEPS` | 48 (0x30) |  |  | Blackfathom Deeps |
 | `ULDAMAN` | 70 (0x46) |  |  | Uldaman |
@@ -356,7 +356,7 @@ enum Map : u32 {
     AZSHARA_CRATER = 37;
     COLLINS_TEST = 42;
     WAILING_CAVERNS = 43;
-    MONASTERY = 44;
+    MONASTERY_UNUSED = 44;
     RAZORFEN_KRAUL = 47;
     BLACKFATHOM_DEEPS = 48;
     ULDAMAN = 70;
@@ -436,7 +436,7 @@ enum Map : u32 {
     THE_CULLING_OF_STRATHOLME = 595;
     TRANSPORT_NAGLFAR = 596;
     CRAIG_TEST = 597;
-    SUNWELL_FIX = 598;
+    SUNWELL_FIX_UNUSED = 598;
     HALLS_OF_STONE = 599;
     DRAK_THARON_KEEP = 600;
     AZJOL_NERUB = 601;
@@ -476,7 +476,7 @@ enum Map : u32 {
     TRANSPORT_ORGRIMS_HAMMER_ICECROWN_CITADEL_RAID = 673;
     TRANSPORT_THE_SKYBREAKER_IC_DUNGEON = 712;
     TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON = 713;
-    TRASNPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718;
+    TRANSPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718;
     STORMWIND = 723;
     THE_RUBY_SANCTUM = 724;
 }
@@ -498,7 +498,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `AZSHARA_CRATER` | 37 (0x25) |  |  | Azshara Crater |
 | `COLLINS_TEST` | 42 (0x2A) |  |  | Collin's Test |
 | `WAILING_CAVERNS` | 43 (0x2B) |  |  | Wailing Caverns |
-| `MONASTERY` | 44 (0x2C) |  |  | Monastery |
+| `MONASTERY_UNUSED` | 44 (0x2C) |  |  | <Unused> Monastery |
 | `RAZORFEN_KRAUL` | 47 (0x2F) |  |  | Razorfen Kraul |
 | `BLACKFATHOM_DEEPS` | 48 (0x30) |  |  | Blackfathom Deeps |
 | `ULDAMAN` | 70 (0x46) |  |  | Uldaman |
@@ -522,7 +522,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `DIRE_MAUL` | 429 (0x1AD) |  |  | Dire Maul |
 | `ALLIANCE_PVP_BARRACKS` | 449 (0x1C1) |  |  | Alliance PVP Barracks |
 | `HORDE_PVP_BARRACKS` | 450 (0x1C2) |  |  | Horde PVP Barracks |
-| `DEVELOPMENT_LAND` | 451 (0x1C3) |  |  | Development Land |
+| `DEVELOPMENT_LAND` | 451 (0x1C3) |  | Map files not present on 3.3.5 client, so loading the map will crash the client. | Development Land |
 | `BLACKWING_LAIR` | 469 (0x1D5) |  |  | Blackwing Lair |
 | `WARSONG_GULCH` | 489 (0x1E9) |  |  | Warsong Gulch |
 | `RUINS_OF_AHN_QIRAJ` | 509 (0x1FD) |  |  | Ruins of Ahn'Qiraj |
@@ -578,7 +578,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `THE_CULLING_OF_STRATHOLME` | 595 (0x253) |  |  | The Culling of Stratholme |
 | `TRANSPORT_NAGLFAR` | 596 (0x254) |  |  | Transport: Naglfar |
 | `CRAIG_TEST` | 597 (0x255) |  |  | Craig Test |
-| `SUNWELL_FIX` | 598 (0x256) |  |  | Sunwell Fix |
+| `SUNWELL_FIX_UNUSED` | 598 (0x256) |  |  | Sunwell Fix (Unused) |
 | `HALLS_OF_STONE` | 599 (0x257) |  |  | Halls of Stone |
 | `DRAK_THARON_KEEP` | 600 (0x258) |  |  | Drak'Tharon Keep |
 | `AZJOL_NERUB` | 601 (0x259) |  |  | Azjol-Nerub |
@@ -618,7 +618,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `TRANSPORT_ORGRIMS_HAMMER_ICECROWN_CITADEL_RAID` | 673 (0x2A1) |  |  | Transport: Orgrim's Hammer (Icecrown Citadel Raid) |
 | `TRANSPORT_THE_SKYBREAKER_IC_DUNGEON` | 712 (0x2C8) |  |  | Transport: The Skybreaker (IC Dungeon) |
 | `TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON` | 713 (0x2C9) |  |  | Transport: Orgrim's Hammer (IC Dungeon) |
-| `TRASNPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID` | 718 (0x2CE) |  |  | Trasnport: The Mighty Wind (Icecrown Citadel Raid) |
+| `TRANSPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID` | 718 (0x2CE) |  |  | Transport: The Mighty Wind (Icecrown Citadel Raid) |
 | `STORMWIND` | 723 (0x2D3) |  |  | Stormwind |
 | `THE_RUBY_SANCTUM` | 724 (0x2D4) |  |  | The Ruby Sanctum |
 

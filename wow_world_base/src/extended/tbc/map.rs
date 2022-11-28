@@ -13,7 +13,7 @@ impl Map {
             | Map::EmeraldDream
             | Map::HordePvpBarracks
             | Map::Kalimdor
-            | Map::Monastery
+            | Map::MonasteryUnused
             | Map::OpeningOfTheDarkPortal
             | Map::Outland
             | Map::ScottTest
@@ -179,7 +179,7 @@ impl Map {
             | Map::CollinsTest
             | Map::DevelopmentLand
             | Map::EmeraldDream
-            | Map::Monastery
+            | Map::MonasteryUnused
             | Map::OpeningOfTheDarkPortal
             | Map::ScottTest
             | Map::StormwindPrison

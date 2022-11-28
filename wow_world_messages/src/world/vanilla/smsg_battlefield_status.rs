@@ -640,7 +640,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::Monastery {
+            SMSG_BATTLEFIELD_STATUS_Map::MonasteryUnused {
                 bracket,
                 client_instance_id,
                 status_id,
@@ -2813,7 +2813,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                     status_id: status_id_if,
                 }
             }
-            Map::Monastery => {
+            Map::MonasteryUnused => {
                 // bracket: BattlegroundBracket
                 let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -2860,7 +2860,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                     StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::Monastery {
+                SMSG_BATTLEFIELD_STATUS_Map::MonasteryUnused {
                     bracket,
                     client_instance_id,
                     status_id: status_id_if,
@@ -4610,7 +4610,7 @@ pub enum SMSG_BATTLEFIELD_STATUS_Map {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
     },
-    Monastery {
+    MonasteryUnused {
         bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
@@ -4790,7 +4790,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
             Self::AzsharaCrater { .. } => 37,
             Self::CollinsTest { .. } => 42,
             Self::WailingCaverns { .. } => 43,
-            Self::Monastery { .. } => 44,
+            Self::MonasteryUnused { .. } => 44,
             Self::RazorfenKraul { .. } => 47,
             Self::BlackfathomDeeps { .. } => 48,
             Self::Uldaman { .. } => 70,
@@ -4952,7 +4952,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
-            Self::Monastery {
+            Self::MonasteryUnused {
                 bracket,
                 client_instance_id,
                 status_id,

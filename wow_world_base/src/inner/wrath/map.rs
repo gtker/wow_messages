@@ -15,7 +15,7 @@ use std::convert::{TryFrom, TryInto};
 ///     AZSHARA_CRATER = 37;
 ///     COLLINS_TEST = 42;
 ///     WAILING_CAVERNS = 43;
-///     MONASTERY = 44;
+///     MONASTERY_UNUSED = 44;
 ///     RAZORFEN_KRAUL = 47;
 ///     BLACKFATHOM_DEEPS = 48;
 ///     ULDAMAN = 70;
@@ -95,7 +95,7 @@ use std::convert::{TryFrom, TryInto};
 ///     THE_CULLING_OF_STRATHOLME = 595;
 ///     TRANSPORT_NAGLFAR = 596;
 ///     CRAIG_TEST = 597;
-///     SUNWELL_FIX = 598;
+///     SUNWELL_FIX_UNUSED = 598;
 ///     HALLS_OF_STONE = 599;
 ///     DRAK_THARON_KEEP = 600;
 ///     AZJOL_NERUB = 601;
@@ -135,7 +135,7 @@ use std::convert::{TryFrom, TryInto};
 ///     TRANSPORT_ORGRIMS_HAMMER_ICECROWN_CITADEL_RAID = 673;
 ///     TRANSPORT_THE_SKYBREAKER_IC_DUNGEON = 712;
 ///     TRANSPORT_ORGRIMS_HAMMER_IC_DUNGEON = 713;
-///     TRASNPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718;
+///     TRANSPORT_THE_MIGHTY_WIND_ICECROWN_CITADEL_RAID = 718;
 ///     STORMWIND = 723;
 ///     THE_RUBY_SANCTUM = 724;
 /// }
@@ -155,7 +155,7 @@ pub enum Map {
     AzsharaCrater,
     CollinsTest,
     WailingCaverns,
-    Monastery,
+    MonasteryUnused,
     RazorfenKraul,
     BlackfathomDeeps,
     Uldaman,
@@ -179,6 +179,8 @@ pub enum Map {
     DireMaul,
     AlliancePvpBarracks,
     HordePvpBarracks,
+    /// Map files not present on 3.3.5 client, so loading the map will crash the client.
+    ///
     DevelopmentLand,
     BlackwingLair,
     WarsongGulch,
@@ -235,7 +237,7 @@ pub enum Map {
     TheCullingOfStratholme,
     TransportNaglfar,
     CraigTest,
-    SunwellFix,
+    SunwellFixUnused,
     HallsOfStone,
     DrakTharonKeep,
     AzjolNerub,
@@ -275,7 +277,7 @@ pub enum Map {
     TransportOrgrimsHammerIcecrownCitadelRaid,
     TransportTheSkybreakerIcDungeon,
     TransportOrgrimsHammerIcDungeon,
-    TrasnportTheMightyWindIcecrownCitadelRaid,
+    TransportTheMightyWindIcecrownCitadelRaid,
     Stormwind,
     TheRubySanctum,
 }
@@ -295,7 +297,7 @@ impl Map {
             Self::AzsharaCrater => 0x25,
             Self::CollinsTest => 0x2a,
             Self::WailingCaverns => 0x2b,
-            Self::Monastery => 0x2c,
+            Self::MonasteryUnused => 0x2c,
             Self::RazorfenKraul => 0x2f,
             Self::BlackfathomDeeps => 0x30,
             Self::Uldaman => 0x46,
@@ -375,7 +377,7 @@ impl Map {
             Self::TheCullingOfStratholme => 0x253,
             Self::TransportNaglfar => 0x254,
             Self::CraigTest => 0x255,
-            Self::SunwellFix => 0x256,
+            Self::SunwellFixUnused => 0x256,
             Self::HallsOfStone => 0x257,
             Self::DrakTharonKeep => 0x258,
             Self::AzjolNerub => 0x259,
@@ -415,7 +417,7 @@ impl Map {
             Self::TransportOrgrimsHammerIcecrownCitadelRaid => 0x2a1,
             Self::TransportTheSkybreakerIcDungeon => 0x2c8,
             Self::TransportOrgrimsHammerIcDungeon => 0x2c9,
-            Self::TrasnportTheMightyWindIcecrownCitadelRaid => 0x2ce,
+            Self::TransportTheMightyWindIcecrownCitadelRaid => 0x2ce,
             Self::Stormwind => 0x2d3,
             Self::TheRubySanctum => 0x2d4,
         }
@@ -444,7 +446,7 @@ impl std::fmt::Display for Map {
             Self::AzsharaCrater => f.write_str("Azshara Crater"),
             Self::CollinsTest => f.write_str("Collin's Test"),
             Self::WailingCaverns => f.write_str("Wailing Caverns"),
-            Self::Monastery => f.write_str("Monastery"),
+            Self::MonasteryUnused => f.write_str("<Unused> Monastery"),
             Self::RazorfenKraul => f.write_str("Razorfen Kraul"),
             Self::BlackfathomDeeps => f.write_str("Blackfathom Deeps"),
             Self::Uldaman => f.write_str("Uldaman"),
@@ -524,7 +526,7 @@ impl std::fmt::Display for Map {
             Self::TheCullingOfStratholme => f.write_str("The Culling of Stratholme"),
             Self::TransportNaglfar => f.write_str("Transport: Naglfar"),
             Self::CraigTest => f.write_str("Craig Test"),
-            Self::SunwellFix => f.write_str("Sunwell Fix"),
+            Self::SunwellFixUnused => f.write_str("Sunwell Fix (Unused)"),
             Self::HallsOfStone => f.write_str("Halls of Stone"),
             Self::DrakTharonKeep => f.write_str("Drak'Tharon Keep"),
             Self::AzjolNerub => f.write_str("Azjol-Nerub"),
@@ -564,7 +566,7 @@ impl std::fmt::Display for Map {
             Self::TransportOrgrimsHammerIcecrownCitadelRaid => f.write_str("Transport: Orgrim's Hammer (Icecrown Citadel Raid)"),
             Self::TransportTheSkybreakerIcDungeon => f.write_str("Transport: The Skybreaker (IC Dungeon)"),
             Self::TransportOrgrimsHammerIcDungeon => f.write_str("Transport: Orgrim's Hammer (IC Dungeon)"),
-            Self::TrasnportTheMightyWindIcecrownCitadelRaid => f.write_str("Trasnport: The Mighty Wind (Icecrown Citadel Raid)"),
+            Self::TransportTheMightyWindIcecrownCitadelRaid => f.write_str("Transport: The Mighty Wind (Icecrown Citadel Raid)"),
             Self::Stormwind => f.write_str("Stormwind"),
             Self::TheRubySanctum => f.write_str("The Ruby Sanctum"),
         }
@@ -587,7 +589,7 @@ impl TryFrom<u32> for Map {
             37 => Ok(Self::AzsharaCrater),
             42 => Ok(Self::CollinsTest),
             43 => Ok(Self::WailingCaverns),
-            44 => Ok(Self::Monastery),
+            44 => Ok(Self::MonasteryUnused),
             47 => Ok(Self::RazorfenKraul),
             48 => Ok(Self::BlackfathomDeeps),
             70 => Ok(Self::Uldaman),
@@ -667,7 +669,7 @@ impl TryFrom<u32> for Map {
             595 => Ok(Self::TheCullingOfStratholme),
             596 => Ok(Self::TransportNaglfar),
             597 => Ok(Self::CraigTest),
-            598 => Ok(Self::SunwellFix),
+            598 => Ok(Self::SunwellFixUnused),
             599 => Ok(Self::HallsOfStone),
             600 => Ok(Self::DrakTharonKeep),
             601 => Ok(Self::AzjolNerub),
@@ -707,7 +709,7 @@ impl TryFrom<u32> for Map {
             673 => Ok(Self::TransportOrgrimsHammerIcecrownCitadelRaid),
             712 => Ok(Self::TransportTheSkybreakerIcDungeon),
             713 => Ok(Self::TransportOrgrimsHammerIcDungeon),
-            718 => Ok(Self::TrasnportTheMightyWindIcecrownCitadelRaid),
+            718 => Ok(Self::TransportTheMightyWindIcecrownCitadelRaid),
             723 => Ok(Self::Stormwind),
             724 => Ok(Self::TheRubySanctum),
             v => Err(crate::errors::EnumError::new("Map", v as u32),)
