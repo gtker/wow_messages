@@ -1,0 +1,42 @@
+enum SpamType : u8 {
+    MAIL = 0;
+    CHAT = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+cmsg CMSG_COMPLAIN = 0x03C7 {
+    SpamType complaint_type;
+    Guid offender;
+    if (complaint_type == MAIL) {
+        u32 unknown1;
+        u32 mail_id;
+        u32 unknown2;
+    } else if (complaint_type == CHAT) {
+        u32 language;
+        u32 message_type;
+        u32 channel_id;
+        u32 time;
+        CString description;
+    }
+} {
+    versions = "3.3.5";
+}
+
+cmsg CMSG_COMPLAIN = 0x03C6 {
+    SpamType complaint_type;
+    Guid offender;
+    if (complaint_type == MAIL) {
+        u32 unknown1;
+        u32 mail_id;
+        u32 unknown2;
+    } else if (complaint_type == CHAT) {
+        u32 language;
+        u32 message_type;
+        u32 channel_id;
+        u32 time;
+        CString description;
+    }
+} {
+    versions = "2.4.3";
+}

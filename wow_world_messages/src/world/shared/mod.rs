@@ -627,6 +627,7 @@ pub mod smsg_update_instance_ownership_vanilla_tbc_wrath;
 pub mod smsg_update_world_state_vanilla_tbc_wrath;
 pub mod smsg_warden_data_vanilla_tbc_wrath;
 pub mod smsg_whois_vanilla_tbc_wrath;
+pub mod spam_type_tbc_wrath;
 pub mod spell_cast_target_flags_vanilla_tbc;
 pub mod spell_cast_targets_vanilla_tbc;
 pub mod spell_cooldown_status_vanilla_tbc_wrath;

@@ -64,6 +64,8 @@ pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
 pub(crate) mod cmsg_commentator_enable;
 pub use cmsg_commentator_enable::*;
+pub(crate) mod cmsg_complain;
+pub use cmsg_complain::*;
 pub(crate) mod cmsg_deleteequipment_set;
 pub use cmsg_deleteequipment_set::*;
 pub(crate) mod cmsg_emote;
@@ -1463,6 +1465,8 @@ pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WO
 pub use crate::shared::smsg_warden_data_vanilla_tbc_wrath::SMSG_WARDEN_DATA;
 
 pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;
+
+pub use crate::shared::spam_type_tbc_wrath::SpamType;
 
 pub use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
 
