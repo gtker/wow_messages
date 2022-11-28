@@ -68,6 +68,8 @@ pub(crate) mod cmsg_calendar_arena_team;
 pub use cmsg_calendar_arena_team::*;
 pub(crate) mod cmsg_calendar_copy_event;
 pub use cmsg_calendar_copy_event::*;
+pub(crate) mod cmsg_calendar_event_invite;
+pub use cmsg_calendar_event_invite::*;
 pub(crate) mod cmsg_calendar_get_calendar;
 pub use cmsg_calendar_get_calendar::*;
 pub(crate) mod cmsg_calendar_get_event;

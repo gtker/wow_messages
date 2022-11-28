@@ -1,0 +1,9 @@
+cmsg CMSG_CALENDAR_EVENT_INVITE = 0x0431 {
+    Guid event;
+    Guid invite_id;
+    CString name;
+    Bool pre_event;
+    Bool guild_event;
+} {
+    versions = "3.3.5";
+}
