@@ -1,0 +1,11 @@
+cmsg CMSG_GET_CHANNEL_MEMBER_COUNT = 0x03D3 {
+    CString channel;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_GET_CHANNEL_MEMBER_COUNT = 0x03D4 {
+    CString channel;
+} {
+    versions = "3.3.5";
+}

@@ -92,6 +92,8 @@ pub(crate) mod cmsg_force_turn_rate_change_ack;
 pub use cmsg_force_turn_rate_change_ack::*;
 pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
+pub(crate) mod cmsg_get_channel_member_count;
+pub use cmsg_get_channel_member_count::*;
 pub(crate) mod cmsg_gmticket_create;
 pub use cmsg_gmticket_create::*;
 pub(crate) mod cmsg_group_accept;
