@@ -787,7 +787,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0409 => "CMSG_OPT_OUT_OF_LOOT",
         0x040a => "MSG_QUERY_GUILD_BANK_TEXT",
         0x040b => "CMSG_SET_GUILD_BANK_TEXT",
-        0x040c => "CMSG_SET_GRANTABLE_LEVELS",
         0x040d => "CMSG_GRANT_LEVEL",
         0x040e => "CMSG_REFER_A_FRIEND",
         0x0410 => "CMSG_DECLINE_CHANNEL_INVITE",

@@ -785,7 +785,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0408 => "CMSG_OPT_OUT_OF_LOOT",
         0x0409 => "MSG_QUERY_GUILD_BANK_TEXT",
         0x040a => "CMSG_SET_GUILD_BANK_TEXT",
-        0x040b => "CMSG_SET_GRANTABLE_LEVELS",
         0x040c => "CMSG_GRANT_LEVEL",
         0x040d => "CMSG_REFER_A_FRIEND",
         0x040e => "MSG_GM_CHANGE_ARENA_RATING",

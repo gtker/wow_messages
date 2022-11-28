@@ -791,7 +791,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_OPT_OUT_OF_LOOT", 0x409),
     Data::new("MSG_QUERY_GUILD_BANK_TEXT", 0x40A),
     Data::new("CMSG_SET_GUILD_BANK_TEXT", 0x40B),
-    Data::new("CMSG_SET_GRANTABLE_LEVELS", 0x40C),
     Data::new("CMSG_GRANT_LEVEL", 0x40D),
     Data::new("CMSG_REFER_A_FRIEND", 0x40E),
     Data::new("CMSG_DECLINE_CHANNEL_INVITE", 0x410),
