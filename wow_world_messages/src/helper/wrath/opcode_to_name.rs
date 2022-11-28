@@ -741,7 +741,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x03c7 => "CMSG_COMPLAIN",
         0x03c8 => "SMSG_COMPLAIN_RESULT",
         0x03c9 => "SMSG_FEATURE_SYSTEM_STATUS",
-        0x03ce => "CMSG_CHANNEL_UNSILENCE_VOICE",
         0x03cf => "CMSG_CHANNEL_UNSILENCE_ALL",
         0x03d2 => "CMSG_CHANNEL_DISPLAY_LIST",
         0x03d3 => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
