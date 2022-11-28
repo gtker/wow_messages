@@ -114,6 +114,8 @@ pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
 pub(crate) mod cmsg_set_channel_watch;
 pub use cmsg_set_channel_watch::*;
+pub(crate) mod cmsg_spellclick;
+pub use cmsg_spellclick::*;
 pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
 pub(crate) mod cmsg_unlearn_skill;

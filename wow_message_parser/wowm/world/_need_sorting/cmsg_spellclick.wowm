@@ -1,0 +1,11 @@
+cmsg CMSG_SPELLCLICK = 0x03F7 {
+    Guid target;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_SPELLCLICK = 0x03F8 {
+    Guid target;
+} {
+    versions = "3.3.5";
+}

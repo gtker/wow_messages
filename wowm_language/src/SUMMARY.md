@@ -527,6 +527,7 @@
 - [CMSG_SET_TRADE_ITEM](docs/cmsg_set_trade_item.md)
 - [CMSG_SET_WATCHED_FACTION](docs/cmsg_set_watched_faction.md)
 - [CMSG_SOCKET_GEMS](docs/cmsg_socket_gems.md)
+- [CMSG_SPELLCLICK](docs/cmsg_spellclick.md)
 - [CMSG_SPIRIT_HEALER_ACTIVATE](docs/cmsg_spirit_healer_activate.md)
 - [CMSG_SPLIT_ITEM](docs/cmsg_split_item.md)
 - [CMSG_STABLE_PET](docs/cmsg_stable_pet.md)
