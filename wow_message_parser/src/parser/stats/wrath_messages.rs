@@ -739,7 +739,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_COMMENTATOR_GET_PLAYER_INFO", 0x3BA),
     Data::new("SMSG_COMMENTATOR_PLAYER_INFO", 0x3BB),
     Data::new("SMSG_CLEAR_TARGET", 0x3BF),
-    Data::new("CMSG_BOT_DETECTED", 0x3C0),
     Data::new("SMSG_CROSSED_INEBRIATION_THRESHOLD", 0x3C1),
     Data::new("SMSG_KICK_REASON", 0x3C5),
     Data::new("MSG_RAID_READY_CHECK_FINISHED", 0x3C6),
