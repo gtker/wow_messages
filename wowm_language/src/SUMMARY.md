@@ -581,6 +581,7 @@
 - [CMSG_UNLEARN_TALENTS](docs/cmsg_unlearn_talents.md)
 - [CMSG_UNSTABLE_PET](docs/cmsg_unstable_pet.md)
 - [CMSG_UPDATE_ACCOUNT_DATA](docs/cmsg_update_account_data.md)
+- [CMSG_UPDATE_MISSILE_TRAJECTORY](docs/cmsg_update_missile_trajectory.md)
 - [CMSG_USE_ITEM](docs/cmsg_use_item.md)
 - [CMSG_VOICE_SESSION_ENABLE](docs/cmsg_voice_session_enable.md)
 - [CMSG_WARDEN_DATA](docs/cmsg_warden_data.md)

@@ -1,0 +1,11 @@
+cmsg CMSG_UPDATE_MISSILE_TRAJECTORY = 0x0462 {
+    Guid guid;
+    Spell spell;
+    f32 elevation;
+    f32 speed;
+    Vector3d position;
+    Vector3d target;
+    /* TODO Possibly has movementinfo afterwards? */
+} {
+    versions = "3.3.5";
+}

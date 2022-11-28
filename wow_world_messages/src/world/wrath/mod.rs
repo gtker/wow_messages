@@ -264,6 +264,8 @@ pub(crate) mod cmsg_unlearn_skill;
 pub use cmsg_unlearn_skill::*;
 pub(crate) mod cmsg_update_account_data;
 pub use cmsg_update_account_data::*;
+pub(crate) mod cmsg_update_missile_trajectory;
+pub use cmsg_update_missile_trajectory::*;
 pub(crate) mod cmsg_use_item;
 pub use cmsg_use_item::*;
 pub(crate) mod cmsg_voice_session_enable;
