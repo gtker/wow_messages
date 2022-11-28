@@ -836,7 +836,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::Gnomeragon {
+            SMSG_BATTLEFIELD_STATUS_Map::Gnomeregan {
                 bracket,
                 client_instance_id,
                 status_id,
@@ -1277,7 +1277,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::CavernsOfTime {
+            SMSG_BATTLEFIELD_STATUS_Map::OpeningOfTheDarkPortal {
                 bracket,
                 client_instance_id,
                 status_id,
@@ -1473,7 +1473,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 }
 
             }
-            SMSG_BATTLEFIELD_STATUS_Map::Mauradon {
+            SMSG_BATTLEFIELD_STATUS_Map::Maraudon {
                 bracket,
                 client_instance_id,
                 status_id,
@@ -3025,7 +3025,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                     status_id: status_id_if,
                 }
             }
-            Map::Gnomeragon => {
+            Map::Gnomeregan => {
                 // bracket: BattlegroundBracket
                 let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -3072,7 +3072,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                     StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::Gnomeragon {
+                SMSG_BATTLEFIELD_STATUS_Map::Gnomeregan {
                     bracket,
                     client_instance_id,
                     status_id: status_id_if,
@@ -3502,7 +3502,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                     status_id: status_id_if,
                 }
             }
-            Map::CavernsOfTime => {
+            Map::OpeningOfTheDarkPortal => {
                 // bracket: BattlegroundBracket
                 let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -3549,7 +3549,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                     StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::CavernsOfTime {
+                SMSG_BATTLEFIELD_STATUS_Map::OpeningOfTheDarkPortal {
                     bracket,
                     client_instance_id,
                     status_id: status_id_if,
@@ -3714,7 +3714,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                     status_id: status_id_if,
                 }
             }
-            Map::Mauradon => {
+            Map::Maraudon => {
                 // bracket: BattlegroundBracket
                 let bracket: BattlegroundBracket = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -3761,7 +3761,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                     StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
                 };
 
-                SMSG_BATTLEFIELD_STATUS_Map::Mauradon {
+                SMSG_BATTLEFIELD_STATUS_Map::Maraudon {
                     bracket,
                     client_instance_id,
                     status_id: status_id_if,
@@ -4630,7 +4630,7 @@ pub enum SMSG_BATTLEFIELD_STATUS_Map {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
     },
-    Gnomeragon {
+    Gnomeregan {
         bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
@@ -4675,7 +4675,7 @@ pub enum SMSG_BATTLEFIELD_STATUS_Map {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
     },
-    CavernsOfTime {
+    OpeningOfTheDarkPortal {
         bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
@@ -4695,7 +4695,7 @@ pub enum SMSG_BATTLEFIELD_STATUS_Map {
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
     },
-    Mauradon {
+    Maraudon {
         bracket: BattlegroundBracket,
         client_instance_id: u32,
         status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
@@ -4794,7 +4794,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
             Self::RazorfenKraul { .. } => 47,
             Self::BlackfathomDeeps { .. } => 48,
             Self::Uldaman { .. } => 70,
-            Self::Gnomeragon { .. } => 90,
+            Self::Gnomeregan { .. } => 90,
             Self::SunkenTemple { .. } => 109,
             Self::RazorfenDowns { .. } => 129,
             Self::EmeraldDream { .. } => 169,
@@ -4803,11 +4803,11 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
             Self::BlackrockSpire { .. } => 229,
             Self::BlackrockDepths { .. } => 230,
             Self::OnyxiasLair { .. } => 249,
-            Self::CavernsOfTime { .. } => 269,
+            Self::OpeningOfTheDarkPortal { .. } => 269,
             Self::Scholomance { .. } => 289,
             Self::ZulGurub { .. } => 309,
             Self::Stratholme { .. } => 329,
-            Self::Mauradon { .. } => 349,
+            Self::Maraudon { .. } => 349,
             Self::DeeprunTram { .. } => 369,
             Self::RagefireChasm { .. } => 389,
             Self::MoltenCore { .. } => 409,
@@ -4992,7 +4992,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
-            Self::Gnomeragon {
+            Self::Gnomeregan {
                 bracket,
                 client_instance_id,
                 status_id,
@@ -5082,7 +5082,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
-            Self::CavernsOfTime {
+            Self::OpeningOfTheDarkPortal {
                 bracket,
                 client_instance_id,
                 status_id,
@@ -5122,7 +5122,7 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + 4 // client_instance_id: u32
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
-            Self::Mauradon {
+            Self::Maraudon {
                 bracket,
                 client_instance_id,
                 status_id,

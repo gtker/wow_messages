@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/map.wowm:394`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/map.wowm#L394):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/map.wowm:395`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/map.wowm#L395):
 /// ```text
 /// enum Map : u32 {
 ///     EASTERN_KINGDOMS = 0;

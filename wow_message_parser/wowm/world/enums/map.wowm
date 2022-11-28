@@ -50,8 +50,8 @@ enum Map : u32 {
     ULDAMAN = 70 {
         display = "Uldaman";
     }
-    GNOMERAGON = 90 {
-        display = "Gnomeragon";
+    GNOMEREGAN = 90 {
+        display = "Gnomeregan";
     }
     SUNKEN_TEMPLE = 109 {
         display = "SunkenTemple";
@@ -77,8 +77,9 @@ enum Map : u32 {
     ONYXIAS_LAIR = 249 {
         display = "Onyxia's Lair";
     }
-    CAVERNS_OF_TIME = 269 {
-        display = "Caverns of Time";
+    OPENING_OF_THE_DARK_PORTAL = 269 {
+        display = "Opening of the Dark Portal";
+        comment = "Also called 'Caverns of Time' in Vanilla. Named this way for consistency across versions.";
     }
     SCHOLOMANCE = 289 {
         display = "Scholomance";
@@ -89,8 +90,8 @@ enum Map : u32 {
     STRATHOLME = 329 {
         display = "Stratholme";
     }
-    MAURADON = 349 {
-        display = "Mauradon";
+    MARAUDON = 349 {
+        display = "Maraudon";
     }
     DEEPRUN_TRAM = 369 {
         display = "Deeprun Tram";

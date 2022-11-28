@@ -217,7 +217,7 @@ pub(crate) const TRIGGERS: &[(u32, (AreaTrigger, &'static [Trigger]))] = &[
     ]
 )),
 (322, (
-    AreaTrigger::Circle { position: Position::new(Map::Gnomeragon, -312.2, -4.6, -148.7, 0.0), radius: 14.0 }, 
+    AreaTrigger::Circle { position: Position::new(Map::Gnomeregan, -312.2, -4.6, -148.7, 0.0), radius: 14.0 }, 
     &[
         Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -5162.6, 927.8, 257.2, 4.7),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 },
@@ -226,7 +226,7 @@ pub(crate) const TRIGGERS: &[(u32, (AreaTrigger, &'static [Trigger]))] = &[
 (324, (
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -5161.3, 939.6, 258.3, 0.0), radius: 10.0 }, 
     &[
-        Trigger::Teleport { location: Position::new(Map::Gnomeragon, -329.1, -3.2, -152.9, 3.0),required_level: 15,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 15 to enter."),
+        Trigger::Teleport { location: Position::new(Map::Gnomeregan, -329.1, -3.2, -152.9, 3.0),required_level: 15,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 15 to enter."),
 },
     ]
 )),
@@ -286,12 +286,12 @@ pub(crate) const TRIGGERS: &[(u32, (AreaTrigger, &'static [Trigger]))] = &[
 (523, (
     AreaTrigger::Circle { position: Position::new(Map::EasternKingdoms, -4858.3, 785.0, 241.1, 0.0), radius: 12.0 }, 
     &[
-        Trigger::Teleport { location: Position::new(Map::Gnomeragon, -733.6, 1.9, -249.1, 3.1),required_level: 15,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 15 to enter."),
+        Trigger::Teleport { location: Position::new(Map::Gnomeregan, -733.6, 1.9, -249.1, 3.1),required_level: 15,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 15 to enter."),
 },
     ]
 )),
 (525, (
-    AreaTrigger::Circle { position: Position::new(Map::Gnomeragon, -717.9, 1.4, -241.3, 0.0), radius: 12.0 }, 
+    AreaTrigger::Circle { position: Position::new(Map::Gnomeregan, -717.9, 1.4, -241.3, 0.0), radius: 12.0 }, 
     &[
         Trigger::Teleport { location: Position::new(Map::EasternKingdoms, -4859.0, 770.2, 241.8, 4.7),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 },
@@ -878,14 +878,14 @@ pub(crate) const TRIGGERS: &[(u32, (AreaTrigger, &'static [Trigger]))] = &[
     ]
 )),
 (3126, (
-    AreaTrigger::Square { position: Position::new(Map::Mauradon, 756.9, -634.0, -32.8, 0.0), length: 15.9, width: 26.4, height: 44.1, yaw: 1.6 },
+    AreaTrigger::Square { position: Position::new(Map::Maraudon, 756.9, -634.0, -32.8, 0.0), length: 15.9, width: 26.4, height: 44.1, yaw: 1.6 },
     &[
         Trigger::Teleport { location: Position::new(Map::Kalimdor, -1182.8, 2877.4, 85.9, 1.7),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 },
     ]
 )),
 (3131, (
-    AreaTrigger::Square { position: Position::new(Map::Mauradon, 1005.0, -460.5, -43.3, 0.0), length: 10.1, width: 31.4, height: 23.4, yaw: 0.0 },
+    AreaTrigger::Square { position: Position::new(Map::Maraudon, 1005.0, -460.5, -43.3, 0.0), length: 10.1, width: 31.4, height: 23.4, yaw: 0.0 },
     &[
         Trigger::Teleport { location: Position::new(Map::Kalimdor, -1468.2, 2614.2, 76.4, 6.3),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 },
@@ -894,14 +894,14 @@ pub(crate) const TRIGGERS: &[(u32, (AreaTrigger, &'static [Trigger]))] = &[
 (3133, (
     AreaTrigger::Square { position: Position::new(Map::Kalimdor, -1484.1, 2617.6, 75.7, 0.0), length: 24.7, width: 15.8, height: 35.2, yaw: 4.5 },
     &[
-        Trigger::Teleport { location: Position::new(Map::Mauradon, 1016.8, -458.5, -43.5, 6.3),required_level: 35,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 35 to enter."),
+        Trigger::Teleport { location: Position::new(Map::Maraudon, 1016.8, -458.5, -43.5, 6.3),required_level: 35,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 35 to enter."),
 },
     ]
 )),
 (3134, (
     AreaTrigger::Square { position: Position::new(Map::Kalimdor, -1182.0, 2861.9, 85.3, 0.0), length: 31.7, width: 17.3, height: 34.2, yaw: 3.2 },
     &[
-        Trigger::Teleport { location: Position::new(Map::Mauradon, 755.1, -617.7, -32.9, 1.6),required_level: 35,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 35 to enter."),
+        Trigger::Teleport { location: Position::new(Map::Maraudon, 755.1, -617.7, -32.9, 1.6),required_level: 35,required_item: 0,required_quest: 0,failed_text: Some("You must be at least level 35 to enter."),
 },
     ]
 )),

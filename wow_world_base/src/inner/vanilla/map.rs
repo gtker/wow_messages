@@ -20,7 +20,7 @@ use std::convert::{TryFrom, TryInto};
 ///     RAZORFEN_KRAUL = 47;
 ///     BLACKFATHOM_DEEPS = 48;
 ///     ULDAMAN = 70;
-///     GNOMERAGON = 90;
+///     GNOMEREGAN = 90;
 ///     SUNKEN_TEMPLE = 109;
 ///     RAZORFEN_DOWNS = 129;
 ///     EMERALD_DREAM = 169;
@@ -29,11 +29,11 @@ use std::convert::{TryFrom, TryInto};
 ///     BLACKROCK_SPIRE = 229;
 ///     BLACKROCK_DEPTHS = 230;
 ///     ONYXIAS_LAIR = 249;
-///     CAVERNS_OF_TIME = 269;
+///     OPENING_OF_THE_DARK_PORTAL = 269;
 ///     SCHOLOMANCE = 289;
 ///     ZUL_GURUB = 309;
 ///     STRATHOLME = 329;
-///     MAURADON = 349;
+///     MARAUDON = 349;
 ///     DEEPRUN_TRAM = 369;
 ///     RAGEFIRE_CHASM = 389;
 ///     MOLTEN_CORE = 409;
@@ -69,7 +69,7 @@ pub enum Map {
     RazorfenKraul,
     BlackfathomDeeps,
     Uldaman,
-    Gnomeragon,
+    Gnomeregan,
     SunkenTemple,
     RazorfenDowns,
     EmeraldDream,
@@ -78,11 +78,13 @@ pub enum Map {
     BlackrockSpire,
     BlackrockDepths,
     OnyxiasLair,
-    CavernsOfTime,
+    /// Also called 'Caverns of Time' in Vanilla. Named this way for consistency across versions.
+    ///
+    OpeningOfTheDarkPortal,
     Scholomance,
     ZulGurub,
     Stratholme,
-    Mauradon,
+    Maraudon,
     DeeprunTram,
     RagefireChasm,
     MoltenCore,
@@ -118,7 +120,7 @@ impl Map {
             Self::RazorfenKraul => 0x2f,
             Self::BlackfathomDeeps => 0x30,
             Self::Uldaman => 0x46,
-            Self::Gnomeragon => 0x5a,
+            Self::Gnomeregan => 0x5a,
             Self::SunkenTemple => 0x6d,
             Self::RazorfenDowns => 0x81,
             Self::EmeraldDream => 0xa9,
@@ -127,11 +129,11 @@ impl Map {
             Self::BlackrockSpire => 0xe5,
             Self::BlackrockDepths => 0xe6,
             Self::OnyxiasLair => 0xf9,
-            Self::CavernsOfTime => 0x10d,
+            Self::OpeningOfTheDarkPortal => 0x10d,
             Self::Scholomance => 0x121,
             Self::ZulGurub => 0x135,
             Self::Stratholme => 0x149,
-            Self::Mauradon => 0x15d,
+            Self::Maraudon => 0x15d,
             Self::DeeprunTram => 0x171,
             Self::RagefireChasm => 0x185,
             Self::MoltenCore => 0x199,
@@ -176,7 +178,7 @@ impl std::fmt::Display for Map {
             Self::RazorfenKraul => f.write_str("Razorfen Kraul"),
             Self::BlackfathomDeeps => f.write_str("Blackfathom Deeps"),
             Self::Uldaman => f.write_str("Uldaman"),
-            Self::Gnomeragon => f.write_str("Gnomeragon"),
+            Self::Gnomeregan => f.write_str("Gnomeregan"),
             Self::SunkenTemple => f.write_str("SunkenTemple"),
             Self::RazorfenDowns => f.write_str("Razorfen Downs"),
             Self::EmeraldDream => f.write_str("Emerald Dream"),
@@ -185,11 +187,11 @@ impl std::fmt::Display for Map {
             Self::BlackrockSpire => f.write_str("Blackrock Spire"),
             Self::BlackrockDepths => f.write_str("Blackrock Depths"),
             Self::OnyxiasLair => f.write_str("Onyxia's Lair"),
-            Self::CavernsOfTime => f.write_str("Caverns of Time"),
+            Self::OpeningOfTheDarkPortal => f.write_str("Opening of the Dark Portal"),
             Self::Scholomance => f.write_str("Scholomance"),
             Self::ZulGurub => f.write_str("Zul'Gurub"),
             Self::Stratholme => f.write_str("Stratholme"),
-            Self::Mauradon => f.write_str("Mauradon"),
+            Self::Maraudon => f.write_str("Maraudon"),
             Self::DeeprunTram => f.write_str("Deeprun Tram"),
             Self::RagefireChasm => f.write_str("Ragefire Chasm"),
             Self::MoltenCore => f.write_str("Molten Core"),
@@ -228,7 +230,7 @@ impl TryFrom<u32> for Map {
             47 => Ok(Self::RazorfenKraul),
             48 => Ok(Self::BlackfathomDeeps),
             70 => Ok(Self::Uldaman),
-            90 => Ok(Self::Gnomeragon),
+            90 => Ok(Self::Gnomeregan),
             109 => Ok(Self::SunkenTemple),
             129 => Ok(Self::RazorfenDowns),
             169 => Ok(Self::EmeraldDream),
@@ -237,11 +239,11 @@ impl TryFrom<u32> for Map {
             229 => Ok(Self::BlackrockSpire),
             230 => Ok(Self::BlackrockDepths),
             249 => Ok(Self::OnyxiasLair),
-            269 => Ok(Self::CavernsOfTime),
+            269 => Ok(Self::OpeningOfTheDarkPortal),
             289 => Ok(Self::Scholomance),
             309 => Ok(Self::ZulGurub),
             329 => Ok(Self::Stratholme),
-            349 => Ok(Self::Mauradon),
+            349 => Ok(Self::Maraudon),
             369 => Ok(Self::DeeprunTram),
             389 => Ok(Self::RagefireChasm),
             409 => Ok(Self::MoltenCore),
