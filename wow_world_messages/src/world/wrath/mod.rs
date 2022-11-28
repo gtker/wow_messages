@@ -152,6 +152,8 @@ pub(crate) mod cmsg_ready_for_account_data_times;
 pub use cmsg_ready_for_account_data_times::*;
 pub(crate) mod cmsg_search_lfg_join;
 pub use cmsg_search_lfg_join::*;
+pub(crate) mod cmsg_search_lfg_leave;
+pub use cmsg_search_lfg_leave::*;
 pub(crate) mod cmsg_set_active_voice_channel;
 pub use cmsg_set_active_voice_channel::*;
 pub(crate) mod cmsg_set_faction_atwar;

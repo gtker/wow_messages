@@ -343,6 +343,7 @@ use crate::world::wrath::CMSG_BATTLEMASTER_JOIN_ARENA;
 use crate::world::wrath::CMSG_LFG_JOIN;
 use crate::world::wrath::CMSG_LFG_LEAVE;
 use crate::world::wrath::CMSG_SEARCH_LFG_JOIN;
+use crate::world::wrath::CMSG_SEARCH_LFG_LEAVE;
 use crate::world::wrath::CMSG_SET_LFG_COMMENT;
 use crate::world::wrath::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST;
 use crate::world::wrath::CMSG_SET_TITLE;
@@ -698,6 +699,7 @@ pub enum ClientOpcodeMessage {
     CMSG_LFG_JOIN(CMSG_LFG_JOIN),
     CMSG_LFG_LEAVE(CMSG_LFG_LEAVE),
     CMSG_SEARCH_LFG_JOIN(CMSG_SEARCH_LFG_JOIN),
+    CMSG_SEARCH_LFG_LEAVE(CMSG_SEARCH_LFG_LEAVE),
     CMSG_SET_LFG_COMMENT(CMSG_SET_LFG_COMMENT),
     CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(CMSG_LFD_PLAYER_LOCK_INFO_REQUEST),
     CMSG_SET_TITLE(CMSG_SET_TITLE),
@@ -1055,6 +1057,7 @@ impl ClientOpcodeMessage {
             0x035C => Ok(Self::CMSG_LFG_JOIN(<CMSG_LFG_JOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035C, size: body_size, io, } } else { a } })?)),
             0x035D => Ok(Self::CMSG_LFG_LEAVE(<CMSG_LFG_LEAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035D, size: body_size, io, } } else { a } })?)),
             0x035E => Ok(Self::CMSG_SEARCH_LFG_JOIN(<CMSG_SEARCH_LFG_JOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035E, size: body_size, io, } } else { a } })?)),
+            0x035F => Ok(Self::CMSG_SEARCH_LFG_LEAVE(<CMSG_SEARCH_LFG_LEAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035F, size: body_size, io, } } else { a } })?)),
             0x0366 => Ok(Self::CMSG_SET_LFG_COMMENT(<CMSG_SET_LFG_COMMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0366, size: body_size, io, } } else { a } })?)),
             0x036E => Ok(Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(<CMSG_LFD_PLAYER_LOCK_INFO_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036E, size: body_size, io, } } else { a } })?)),
             0x0374 => Ok(Self::CMSG_SET_TITLE(<CMSG_SET_TITLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0374, size: body_size, io, } } else { a } })?)),
@@ -1480,6 +1483,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_JOIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_LEAVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SEARCH_LFG_LEAVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_TITLE(c) => c.write_encrypted_client(w, e),
@@ -1838,6 +1842,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_JOIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_LEAVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SEARCH_LFG_LEAVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_TITLE(c) => c.write_unencrypted_client(w),
@@ -2196,6 +2201,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_LEAVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SEARCH_LFG_LEAVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2554,6 +2560,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_LEAVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SEARCH_LFG_LEAVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2912,6 +2919,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_LEAVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SEARCH_LFG_LEAVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3270,6 +3278,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_LFG_JOIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_LEAVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SEARCH_LFG_LEAVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_unencrypted_client(w).await,
@@ -3639,6 +3648,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_LFG_JOIN(_) => "CMSG_LFG_JOIN",
             ClientOpcodeMessage::CMSG_LFG_LEAVE(_) => "CMSG_LFG_LEAVE",
             ClientOpcodeMessage::CMSG_SEARCH_LFG_JOIN(_) => "CMSG_SEARCH_LFG_JOIN",
+            ClientOpcodeMessage::CMSG_SEARCH_LFG_LEAVE(_) => "CMSG_SEARCH_LFG_LEAVE",
             ClientOpcodeMessage::CMSG_SET_LFG_COMMENT(_) => "CMSG_SET_LFG_COMMENT",
             ClientOpcodeMessage::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(_) => "CMSG_LFD_PLAYER_LOCK_INFO_REQUEST",
             ClientOpcodeMessage::CMSG_SET_TITLE(_) => "CMSG_SET_TITLE",
@@ -5662,6 +5672,12 @@ impl From<CMSG_LFG_LEAVE> for ClientOpcodeMessage {
 impl From<CMSG_SEARCH_LFG_JOIN> for ClientOpcodeMessage {
     fn from(c: CMSG_SEARCH_LFG_JOIN) -> Self {
         Self::CMSG_SEARCH_LFG_JOIN(c)
+    }
+}
+
+impl From<CMSG_SEARCH_LFG_LEAVE> for ClientOpcodeMessage {
+    fn from(c: CMSG_SEARCH_LFG_LEAVE) -> Self {
+        Self::CMSG_SEARCH_LFG_LEAVE(c)
     }
 }
 

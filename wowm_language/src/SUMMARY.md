@@ -479,6 +479,7 @@
 - [CMSG_RESET_INSTANCES](docs/cmsg_reset_instances.md)
 - [CMSG_RESURRECT_RESPONSE](docs/cmsg_resurrect_response.md)
 - [CMSG_SEARCH_LFG_JOIN](docs/cmsg_search_lfg_join.md)
+- [CMSG_SEARCH_LFG_LEAVE](docs/cmsg_search_lfg_leave.md)
 - [CMSG_SELF_RES](docs/cmsg_self_res.md)
 - [CMSG_SELL_ITEM](docs/cmsg_sell_item.md)
 - [CMSG_SEND_MAIL](docs/cmsg_send_mail.md)
