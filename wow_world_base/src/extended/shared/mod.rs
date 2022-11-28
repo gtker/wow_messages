@@ -221,8 +221,8 @@ macro_rules! verify_trigger {
         #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
         pub enum TriggerResult {
             NotFound,
-            NotInsideTrigger(&'static (AreaTrigger, Trigger)),
-            Success(&'static (AreaTrigger, Trigger)),
+            NotInsideTrigger(&'static (AreaTrigger, &'static [Trigger])),
+            Success(&'static (AreaTrigger, &'static [Trigger])),
         }
 
         pub fn verify_trigger(player: Position, trigger: u32) -> TriggerResult {

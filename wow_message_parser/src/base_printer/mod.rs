@@ -18,25 +18,19 @@ pub enum Expansion {
 }
 
 impl Expansion {
-    pub(crate) fn as_map_string(&self, map: u32) -> String {
-        match self {
+    pub(crate) fn as_map_string(&self, map: u32) -> Option<String> {
+        Some(match self {
             Expansion::Vanilla => format!(
                 "Map::{:?}",
-                wow_world_base::vanilla::Map::try_from(map).unwrap()
+                wow_world_base::vanilla::Map::try_from(map).ok()?
             ),
             Expansion::BurningCrusade => {
-                format!(
-                    "Map::{:?}",
-                    wow_world_base::tbc::Map::try_from(map).unwrap()
-                )
+                format!("Map::{:?}", wow_world_base::tbc::Map::try_from(map).ok()?)
             }
             Expansion::WrathOfTheLichKing => {
-                format!(
-                    "Map::{:?}",
-                    wow_world_base::wrath::Map::try_from(map).unwrap()
-                )
+                format!("Map::{:?}", wow_world_base::wrath::Map::try_from(map).ok()?)
             }
-        }
+        })
     }
 }
 

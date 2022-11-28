@@ -266,16 +266,23 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
     };
 
     for area_trigger in triggers {
-        let trigger = match data.triggers.iter().find(|a| a.id() == area_trigger.0) {
-            None => continue,
-            Some(t) => t,
-        };
-
         let position = area_trigger.1.position();
-        let map = expansion.as_map_string(position.map);
+        let map = match expansion.as_map_string(position.map) {
+            None => continue,
+            Some(e) => e,
+        };
         let x = position.x;
         let y = position.y;
         let z = position.z;
+
+        let triggers: Vec<_> = data
+            .triggers
+            .iter()
+            .filter(|a| a.id() == area_trigger.0)
+            .collect();
+        if triggers.is_empty() {
+            continue;
+        }
 
         s.wln(format!("({}, (", area_trigger.0));
         s.inc_indent();
@@ -294,65 +301,73 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
             }
         }
 
-        match trigger.clone() {
-            Trigger::Inn { .. } => {
-                s.wln("Trigger::Inn");
-            }
-            Trigger::Quest { quest, .. } => {
-                s.wln(format!("Trigger::Quest {{ quest_id: {} }}", quest))
-            }
-            Trigger::Teleport {
-                map,
-                x,
-                y,
-                z,
-                orientation,
-                required_level,
-                required_item,
-                required_quest,
-                failed_text,
-                heroic_keys,
-                heroic_required_quest,
-                ..
-            } => {
-                let map = expansion.as_map_string(map);
+        s.wln("&[");
+        s.inc_indent();
 
-                let failed_text = if let Some(t) = failed_text {
-                    format!("Some(\"{}\")", t.replace('\"', "\\\""))
-                } else {
-                    "None".to_string()
-                };
+        for trigger in triggers {
+            match trigger.clone() {
+                Trigger::Inn { .. } => {
+                    s.wln("Trigger::Inn,");
+                }
+                Trigger::Quest { quest, .. } => {
+                    s.wln(format!("Trigger::Quest {{ quest_id: {} }},", quest))
+                }
+                Trigger::Teleport {
+                    map,
+                    x,
+                    y,
+                    z,
+                    orientation,
+                    required_level,
+                    required_item,
+                    required_quest,
+                    failed_text,
+                    heroic_keys,
+                    heroic_required_quest,
+                    ..
+                } => {
+                    let map = expansion.as_map_string(map).unwrap();
 
-                let heroic_keys = if !heroic_keys.is_empty() {
-                    use std::fmt::Write;
-                    let mut s = "Some(&[".to_string();
-                    for key in heroic_keys {
-                        write!(s, "{}, ", key).unwrap();
-                    }
-                    write!(s, "])").unwrap();
-                    s
-                } else {
-                    "None".to_string()
-                };
+                    let failed_text = if let Some(t) = failed_text {
+                        format!("Some(\"{}\")", t.replace('\"', "\\\""))
+                    } else {
+                        "None".to_string()
+                    };
 
-                s.wln(format!("Trigger::Teleport {{ location: Position::new({map}, {x:.1}, {y:.1}, {z:.1}, {orientation:.1}),\
+                    let heroic_keys = if !heroic_keys.is_empty() {
+                        use std::fmt::Write;
+                        let mut s = "Some(&[".to_string();
+                        for key in heroic_keys {
+                            write!(s, "{}, ", key).unwrap();
+                        }
+                        write!(s, "])").unwrap();
+                        s
+                    } else {
+                        "None".to_string()
+                    };
+
+                    s.wln(format!("Trigger::Teleport {{ location: Position::new({map}, {x:.1}, {y:.1}, {z:.1}, {orientation:.1}),\
 required_level: {required_level},\
 required_item: {required_item},\
 required_quest: {required_quest},\
 failed_text: {failed_text},"));
-                match expansion {
-                    Expansion::Vanilla => {
-                        s.wln_no_indent("}");
-                    }
-                    Expansion::BurningCrusade | Expansion::WrathOfTheLichKing => {
-                        s.wln_no_indent(format!(
-                            "heroic_keys: {heroic_keys},\
-heroic_required_quest: {heroic_required_quest} }}"
-                        ));
+                    match expansion {
+                        Expansion::Vanilla => {
+                            s.wln_no_indent("},");
+                        }
+                        Expansion::BurningCrusade | Expansion::WrathOfTheLichKing => {
+                            s.wln_no_indent(format!(
+                                "heroic_keys: {heroic_keys},\
+heroic_required_quest: {heroic_required_quest} }},"
+                            ));
+                        }
                     }
                 }
             }
         }
+
+        s.dec_indent();
+        s.wln("]");
 
         s.dec_indent();
 
