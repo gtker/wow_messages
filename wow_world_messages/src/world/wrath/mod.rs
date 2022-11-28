@@ -74,6 +74,8 @@ pub(crate) mod cmsg_calendar_get_num_pending;
 pub use cmsg_calendar_get_num_pending::*;
 pub(crate) mod cmsg_calendar_guild_filter;
 pub use cmsg_calendar_guild_filter::*;
+pub(crate) mod cmsg_calendar_remove_event;
+pub use cmsg_calendar_remove_event::*;
 pub(crate) mod cmsg_calendar_update_event;
 pub use cmsg_calendar_update_event::*;
 pub(crate) mod cmsg_cast_spell;

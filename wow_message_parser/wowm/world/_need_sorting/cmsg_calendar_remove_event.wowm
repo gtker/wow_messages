@@ -1,0 +1,7 @@
+cmsg CMSG_CALENDAR_REMOVE_EVENT = 0x042F {
+    Guid event;
+    Guid invite_id;
+    u32 flags;
+} {
+    versions = "3.3.5";
+}
