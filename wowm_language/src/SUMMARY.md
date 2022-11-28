@@ -236,6 +236,7 @@
 - [AuraLog](docs/auralog.md)
 - [BattlegroundPlayer](docs/battlegroundplayer.md)
 - [BattlegroundPlayerPosition](docs/battlegroundplayerposition.md)
+- [CMSG_ACCEPT_LEVEL_GRANT](docs/cmsg_accept_level_grant.md)
 - [CMSG_ACCEPT_TRADE](docs/cmsg_accept_trade.md)
 - [CMSG_ACTIVATETAXI](docs/cmsg_activatetaxi.md)
 - [CMSG_ACTIVATETAXIEXPRESS](docs/cmsg_activatetaxiexpress.md)

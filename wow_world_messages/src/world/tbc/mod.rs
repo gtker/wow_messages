@@ -22,6 +22,8 @@ pub(crate) mod chat_type;
 pub use chat_type::*;
 pub(crate) mod cinematic_sequence_id;
 pub use cinematic_sequence_id::*;
+pub(crate) mod cmsg_accept_level_grant;
+pub use cmsg_accept_level_grant::*;
 pub(crate) mod cmsg_auction_list_items;
 pub use cmsg_auction_list_items::*;
 pub(crate) mod cmsg_battlefield_list;

@@ -1,0 +1,11 @@
+cmsg CMSG_ACCEPT_LEVEL_GRANT = 0x041F {
+    PackedGuid guid;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_ACCEPT_LEVEL_GRANT = 0x0420 {
+    PackedGuid guid;
+} {
+    versions = "3.3.5";
+}
