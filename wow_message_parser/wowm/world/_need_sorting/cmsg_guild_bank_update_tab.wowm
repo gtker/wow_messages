@@ -1,0 +1,17 @@
+cmsg CMSG_GUILD_BANK_UPDATE_TAB = 0x03EA {
+    Guid bank;
+    u8 tab;
+    CString name;
+    CString icon;
+} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_GUILD_BANK_UPDATE_TAB = 0x03EB {
+    Guid bank;
+    u8 tab;
+    CString name;
+    CString icon;
+} {
+    versions = "3.3.5";
+}

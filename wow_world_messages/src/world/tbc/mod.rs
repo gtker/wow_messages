@@ -70,6 +70,8 @@ pub(crate) mod cmsg_guild_bank_query_tab;
 pub use cmsg_guild_bank_query_tab::*;
 pub(crate) mod cmsg_guild_bank_swap_items;
 pub use cmsg_guild_bank_swap_items::*;
+pub(crate) mod cmsg_guild_bank_update_tab;
+pub use cmsg_guild_bank_update_tab::*;
 pub(crate) mod cmsg_guild_banker_activate;
 pub use cmsg_guild_banker_activate::*;
 pub(crate) mod cmsg_leave_battlefield;
