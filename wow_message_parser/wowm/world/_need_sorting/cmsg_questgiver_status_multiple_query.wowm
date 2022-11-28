@@ -1,0 +1,7 @@
+cmsg CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY = 0x0416 {} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY = 0x0417 {} {
+    versions = "3.3.5";
+}

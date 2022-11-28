@@ -487,6 +487,7 @@
 - [CMSG_QUESTGIVER_QUERY_QUEST](docs/cmsg_questgiver_query_quest.md)
 - [CMSG_QUESTGIVER_QUEST_AUTOLAUNCH](docs/cmsg_questgiver_quest_autolaunch.md)
 - [CMSG_QUESTGIVER_REQUEST_REWARD](docs/cmsg_questgiver_request_reward.md)
+- [CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY](docs/cmsg_questgiver_status_multiple_query.md)
 - [CMSG_QUESTGIVER_STATUS_QUERY](docs/cmsg_questgiver_status_query.md)
 - [CMSG_QUESTLOG_REMOVE_QUEST](docs/cmsg_questlog_remove_quest.md)
 - [CMSG_QUESTLOG_SWAP_QUEST](docs/cmsg_questlog_swap_quest.md)

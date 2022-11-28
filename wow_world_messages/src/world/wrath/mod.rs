@@ -192,6 +192,8 @@ pub(crate) mod cmsg_quest_poi_query;
 pub use cmsg_quest_poi_query::*;
 pub(crate) mod cmsg_questgiver_query_quest;
 pub use cmsg_questgiver_query_quest::*;
+pub(crate) mod cmsg_questgiver_status_multiple_query;
+pub use cmsg_questgiver_status_multiple_query::*;
 pub(crate) mod cmsg_ready_for_account_data_times;
 pub use cmsg_ready_for_account_data_times::*;
 pub(crate) mod cmsg_report_pvp_afk;

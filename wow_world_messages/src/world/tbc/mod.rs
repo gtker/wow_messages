@@ -116,6 +116,8 @@ pub(crate) mod cmsg_opt_out_of_loot;
 pub use cmsg_opt_out_of_loot::*;
 pub(crate) mod cmsg_pet_cast_spell;
 pub use cmsg_pet_cast_spell::*;
+pub(crate) mod cmsg_questgiver_status_multiple_query;
+pub use cmsg_questgiver_status_multiple_query::*;
 pub(crate) mod cmsg_report_pvp_afk;
 pub use cmsg_report_pvp_afk::*;
 pub(crate) mod cmsg_set_active_voice_channel;
