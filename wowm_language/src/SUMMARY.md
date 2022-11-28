@@ -288,6 +288,7 @@
 - [CMSG_BUY_ITEM_IN_SLOT](docs/cmsg_buy_item_in_slot.md)
 - [CMSG_BUY_STABLE_SLOT](docs/cmsg_buy_stable_slot.md)
 - [CMSG_CALENDAR_GET_CALENDAR](docs/cmsg_calendar_get_calendar.md)
+- [CMSG_CALENDAR_GET_EVENT](docs/cmsg_calendar_get_event.md)
 - [CMSG_CALENDAR_GET_NUM_PENDING](docs/cmsg_calendar_get_num_pending.md)
 - [CMSG_CANCEL_AURA](docs/cmsg_cancel_aura.md)
 - [CMSG_CANCEL_AUTO_REPEAT_SPELL](docs/cmsg_cancel_auto_repeat_spell.md)

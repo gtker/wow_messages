@@ -62,6 +62,8 @@ pub(crate) mod cmsg_buy_item_in_slot;
 pub use cmsg_buy_item_in_slot::*;
 pub(crate) mod cmsg_calendar_get_calendar;
 pub use cmsg_calendar_get_calendar::*;
+pub(crate) mod cmsg_calendar_get_event;
+pub use cmsg_calendar_get_event::*;
 pub(crate) mod cmsg_calendar_get_num_pending;
 pub use cmsg_calendar_get_num_pending::*;
 pub(crate) mod cmsg_cast_spell;

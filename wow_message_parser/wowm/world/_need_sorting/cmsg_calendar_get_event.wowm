@@ -1,0 +1,5 @@
+cmsg CMSG_CALENDAR_GET_EVENT = 0x042A {
+    Guid event;
+} {
+    versions = "3.3.5";
+}
