@@ -291,6 +291,7 @@
 - [CMSG_BUY_STABLE_SLOT](docs/cmsg_buy_stable_slot.md)
 - [CMSG_CALENDAR_ADD_EVENT](docs/cmsg_calendar_add_event.md)
 - [CMSG_CALENDAR_ARENA_TEAM](docs/cmsg_calendar_arena_team.md)
+- [CMSG_CALENDAR_COMPLAIN](docs/cmsg_calendar_complain.md)
 - [CMSG_CALENDAR_COPY_EVENT](docs/cmsg_calendar_copy_event.md)
 - [CMSG_CALENDAR_EVENT_INVITE](docs/cmsg_calendar_event_invite.md)
 - [CMSG_CALENDAR_EVENT_MODERATOR_STATUS](docs/cmsg_calendar_event_moderator_status.md)

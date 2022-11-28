@@ -1,0 +1,7 @@
+cmsg CMSG_CALENDAR_COMPLAIN = 0x0446 {
+    Guid responsible_player;
+    Guid event;
+    Guid invite_id;
+} {
+    versions = "3.3.5";
+}

@@ -70,6 +70,8 @@ pub(crate) mod cmsg_calendar_add_event;
 pub use cmsg_calendar_add_event::*;
 pub(crate) mod cmsg_calendar_arena_team;
 pub use cmsg_calendar_arena_team::*;
+pub(crate) mod cmsg_calendar_complain;
+pub use cmsg_calendar_complain::*;
 pub(crate) mod cmsg_calendar_copy_event;
 pub use cmsg_calendar_copy_event::*;
 pub(crate) mod cmsg_calendar_event_invite;
