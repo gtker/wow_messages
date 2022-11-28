@@ -749,7 +749,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x03d7 => "CMSG_CHANNEL_VOICE_OFF",
         0x03d9 => "SMSG_DEBUG_LIST_TARGETS",
         0x03da => "SMSG_AVAILABLE_VOICE_CHANNEL",
-        0x03dd => "CMSG_PARTY_SILENCE",
         0x03de => "CMSG_PARTY_UNSILENCE",
         0x03df => "MSG_NOTIFY_PARTY_SQUELCH",
         0x03e0 => "SMSG_COMSAT_RECONNECT_TRY",
