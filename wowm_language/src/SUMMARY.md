@@ -391,6 +391,7 @@
 - [CMSG_LFD_PLAYER_LOCK_INFO_REQUEST](docs/cmsg_lfd_player_lock_info_request.md)
 - [CMSG_LFG_GET_STATUS](docs/cmsg_lfg_get_status.md)
 - [CMSG_LFG_JOIN](docs/cmsg_lfg_join.md)
+- [CMSG_LFG_LEAVE](docs/cmsg_lfg_leave.md)
 - [CMSG_LIST_INVENTORY](docs/cmsg_list_inventory.md)
 - [CMSG_LOGOUT_CANCEL](docs/cmsg_logout_cancel.md)
 - [CMSG_LOGOUT_REQUEST](docs/cmsg_logout_request.md)
