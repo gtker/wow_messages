@@ -839,7 +839,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0446 => "CMSG_CALENDAR_COMPLAIN",
         0x0447 => "CMSG_CALENDAR_GET_NUM_PENDING",
         0x0448 => "SMSG_CALENDAR_SEND_NUM_PENDING",
-        0x0458 => "CMSG_SET_RUNE_COUNT",
         0x0459 => "CMSG_SET_RUNE_COOLDOWN",
         0x045a => "MSG_MOVE_SET_PITCH_RATE_CHEAT",
         0x045b => "MSG_MOVE_SET_PITCH_RATE",
