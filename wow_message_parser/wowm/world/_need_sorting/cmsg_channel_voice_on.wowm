@@ -1,0 +1,7 @@
+cmsg CMSG_CHANNEL_VOICE_ON = 0x03D5 {} {
+    versions = "2.4.3";
+}
+
+cmsg CMSG_CHANNEL_VOICE_ON = 0x03D6 {} {
+    versions = "3.3.5";
+}
