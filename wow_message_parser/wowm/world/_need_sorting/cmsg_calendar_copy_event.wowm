@@ -1,0 +1,7 @@
+cmsg CMSG_CALENDAR_COPY_EVENT = 0x0430 {
+    Guid event;
+    Guid invite_id;
+    DateTime time;
+} {
+    versions = "3.3.5";
+}
