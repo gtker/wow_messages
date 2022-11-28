@@ -1,0 +1,5 @@
+cmsg CMSG_SEARCH_LFG_JOIN = 0x035E {
+    u32 dungeon_id;
+} {
+    versions = "3.3.5";
+}
