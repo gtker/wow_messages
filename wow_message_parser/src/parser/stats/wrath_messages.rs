@@ -745,7 +745,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_COMPLAIN", 0x3C7),
     Data::new("SMSG_COMPLAIN_RESULT", 0x3C8),
     Data::new("SMSG_FEATURE_SYSTEM_STATUS", 0x3C9),
-    Data::new("CMSG_CHANNEL_UNSILENCE_ALL", 0x3CF),
     Data::new("CMSG_CHANNEL_DISPLAY_LIST", 0x3D2),
     Data::new("CMSG_SET_ACTIVE_VOICE_CHANNEL", 0x3D3),
     Data::new("CMSG_GET_CHANNEL_MEMBER_COUNT", 0x3D4),
