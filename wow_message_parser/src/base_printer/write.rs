@@ -4,6 +4,7 @@ use super::Expansion;
 use crate::base_printer::data::area_triggers::{
     AreaTrigger, TBC_AREA_TRIGGERS, VANILLA_AREA_TRIGGERS, WRATH_AREA_TRIGGERS,
 };
+use crate::base_printer::data::pet_names::Pet;
 use crate::base_printer::data::Trigger;
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
 use std::path::Path;
@@ -242,6 +243,43 @@ pub(crate) fn write_actions(directory: &Path, data: &Data) {
     }
 
     let path = directory.join("actions.rs");
+    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+}
+
+pub(crate) fn write_pet_names(directory: &Path, data: &Data, expansion: Expansion) {
+    let mut s = Writer::new();
+
+    for pet in &data.pet_names {
+        let name = match pet.0 {
+            Pet::Imp => "IMP",
+            Pet::Felhunter => "FELHUNTER",
+            Pet::Voidwalker => "VOIDWALKER",
+            Pet::Succubus => "SUCCUBUS",
+            Pet::Felguard => {
+                if expansion == Expansion::Vanilla {
+                    continue;
+                }
+                "FELGUARD"
+            }
+            Pet::RisenGhoul => "GHOUL",
+        };
+        s.wln(format!("const {name}_NAMES: &[&str] = &["));
+        s.inc_indent();
+
+        let names = pet.1;
+
+        for first_name in &names.first_names {
+            for last_name in &names.last_names {
+                s.wln(format!("\"{first_name}{last_name}\","));
+            }
+        }
+
+        s.dec_indent();
+        s.wln("];");
+        s.newline();
+    }
+
+    let path = directory.join("creature_family.rs");
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 

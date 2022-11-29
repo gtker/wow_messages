@@ -3,6 +3,7 @@ use crate::vanilla::{Class, Map, Race, RaceClass};
 mod actions;
 mod base_stats;
 pub mod character_features;
+mod creature_family;
 pub mod exp;
 mod map;
 mod player_race;
@@ -13,6 +14,7 @@ pub mod trigger;
 
 pub use actions::*;
 pub use base_stats::*;
+pub use creature_family::*;
 pub use map::*;
 pub use player_race::*;
 pub use skills::*;
