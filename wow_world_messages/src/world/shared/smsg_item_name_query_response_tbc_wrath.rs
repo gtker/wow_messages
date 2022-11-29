@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
+use wow_world_base::tbc::InventoryType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]

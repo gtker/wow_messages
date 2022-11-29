@@ -305,7 +305,6 @@ pub mod guild_member_status_vanilla_tbc_wrath;
 pub mod guild_rights_tbc_wrath;
 pub mod initial_spell_vanilla_tbc;
 pub mod instance_reset_failed_reason_vanilla_tbc_wrath;
-pub mod inventory_type_vanilla_tbc_wrath;
 pub mod item_damage_type_vanilla_tbc_wrath;
 pub mod item_quality_vanilla_tbc;
 pub mod item_socket_tbc_wrath;

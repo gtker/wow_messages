@@ -68,7 +68,7 @@ pub enum InventoryType {
 }
 
 impl InventoryType {
-    pub(crate) const fn as_int(&self) -> u8 {
+    pub const fn as_int(&self) -> u8 {
         match self {
             Self::NonEquip => 0x0,
             Self::Head => 0x1,

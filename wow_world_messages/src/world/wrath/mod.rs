@@ -994,8 +994,6 @@ pub use crate::shared::guild_rights_tbc_wrath::GuildRights;
 
 pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceResetFailedReason;
 
-pub use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
-
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
 
 pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
@@ -1591,6 +1589,8 @@ pub use crate::shared::weather_change_type_vanilla_tbc_wrath::WeatherChangeType;
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
 pub use wow_world_base::wrath::Gender;
+
+pub use wow_world_base::wrath::InventoryType;
 
 pub use wow_world_base::wrath::Vector2d;
 

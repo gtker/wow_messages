@@ -7,6 +7,8 @@ pub(crate) mod creature_family;
 pub use creature_family::*;
 pub(crate) mod gender;
 pub use gender::*;
+pub(crate) mod inventory_type;
+pub use inventory_type::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod power;
