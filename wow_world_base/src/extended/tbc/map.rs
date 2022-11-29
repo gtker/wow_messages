@@ -91,17 +91,17 @@ impl Map {
     }
 
     pub const fn battleground(&self) -> bool {
-        match self {
-            Map::EyeOfTheStorm | Map::AlteracValley | Map::WarsongGulch | Map::ArathiBasin => true,
-            _ => false,
-        }
+        matches!(
+            self,
+            Map::EyeOfTheStorm | Map::AlteracValley | Map::WarsongGulch | Map::ArathiBasin
+        )
     }
 
     pub const fn arena(&self) -> bool {
-        match self {
-            Map::NagrandArena | Map::BladesEdgeArena | Map::RuinsOfLordaeron => true,
-            _ => false,
-        }
+        matches!(
+            self,
+            Map::NagrandArena | Map::BladesEdgeArena | Map::RuinsOfLordaeron
+        )
     }
 
     pub const fn accessible_all(&self) -> bool {

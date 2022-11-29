@@ -143,26 +143,26 @@ impl Map {
     }
 
     pub const fn battleground(&self) -> bool {
-        match self {
+        matches!(
+            self,
             Map::IsleOfConquest
-            | Map::EyeOfTheStorm
-            | Map::AlteracValley
-            | Map::WarsongGulch
-            | Map::ArathiBasin => true,
-            _ => false,
-        }
+                | Map::EyeOfTheStorm
+                | Map::AlteracValley
+                | Map::WarsongGulch
+                | Map::ArathiBasin
+        )
     }
 
     pub const fn arena(&self) -> bool {
-        match self {
+        matches!(
+            self,
             Map::IsleOfConquest
-            | Map::DalaranSewers
-            | Map::TheRingOfValor
-            | Map::NagrandArena
-            | Map::BladesEdgeArena
-            | Map::RuinsOfLordaeron => true,
-            _ => false,
-        }
+                | Map::DalaranSewers
+                | Map::TheRingOfValor
+                | Map::NagrandArena
+                | Map::BladesEdgeArena
+                | Map::RuinsOfLordaeron
+        )
     }
 
     pub const fn accessible_all(&self) -> bool {

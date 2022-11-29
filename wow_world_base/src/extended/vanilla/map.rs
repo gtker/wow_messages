@@ -52,10 +52,10 @@ impl Map {
     }
 
     pub const fn battleground(&self) -> bool {
-        match self {
-            Map::AlteracValley | Map::WarsongGulch | Map::ArathiBasin => true,
-            _ => false,
-        }
+        matches!(
+            self,
+            Map::AlteracValley | Map::WarsongGulch | Map::ArathiBasin
+        )
     }
 
     pub const fn accessible_all(&self) -> bool {
