@@ -146,6 +146,7 @@ impl Map {
         matches!(
             self,
             Map::IsleOfConquest
+                | Map::StrandOfTheAncients
                 | Map::EyeOfTheStorm
                 | Map::AlteracValley
                 | Map::WarsongGulch
@@ -156,8 +157,7 @@ impl Map {
     pub const fn arena(&self) -> bool {
         matches!(
             self,
-            Map::IsleOfConquest
-                | Map::DalaranSewers
+            Map::DalaranSewers
                 | Map::TheRingOfValor
                 | Map::NagrandArena
                 | Map::BladesEdgeArena
