@@ -42,6 +42,7 @@ enum CreatureFamily : u8 {
     REMOTE_CONTROL = 28;
 } {
     versions = "1.12";
+    rust_base_type = "true";
 }
 
 enum CreatureFamily : u8 {
@@ -79,6 +80,7 @@ enum CreatureFamily : u8 {
     SEA_LION = 36;
 } {
     versions = "2.4.3";
+    rust_base_type = "true";
 }
 
 enum CreatureFamily : u8 {
@@ -125,4 +127,5 @@ enum CreatureFamily : u8 {
     SPIRIT_BEAST = 46;
 } {
     versions = "3.3.5";
+    rust_base_type = "true";
 }

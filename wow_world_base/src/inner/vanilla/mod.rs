@@ -3,6 +3,8 @@ pub use class::*;
 #[cfg(feature = "extended")]
 pub use crate::extended::vanilla::*;
 pub use crate::manual::vanilla::*;
+pub(crate) mod creature_family;
+pub use creature_family::*;
 pub(crate) mod gender;
 pub use gender::*;
 pub(crate) mod map;
