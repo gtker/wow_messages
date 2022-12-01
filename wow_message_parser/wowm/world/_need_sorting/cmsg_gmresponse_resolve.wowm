@@ -1,0 +1,3 @@
+cmsg CMSG_GMRESPONSE_RESOLVE = 0x04F0 {} {
+    versions = "3.3.5";
+}

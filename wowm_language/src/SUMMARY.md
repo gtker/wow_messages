@@ -383,6 +383,7 @@
 - [CMSG_GET_CHANNEL_MEMBER_COUNT](docs/cmsg_get_channel_member_count.md)
 - [CMSG_GET_MAIL_LIST](docs/cmsg_get_mail_list.md)
 - [CMSG_GET_MIRRORIMAGE_DATA](docs/cmsg_get_mirrorimage_data.md)
+- [CMSG_GMRESPONSE_RESOLVE](docs/cmsg_gmresponse_resolve.md)
 - [CMSG_GMSURVEY_SUBMIT](docs/cmsg_gmsurvey_submit.md)
 - [CMSG_GMTICKETSYSTEM_TOGGLE](docs/cmsg_gmticketsystem_toggle.md)
 - [CMSG_GMTICKET_CREATE](docs/cmsg_gmticket_create.md)
