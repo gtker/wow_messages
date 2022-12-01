@@ -423,6 +423,7 @@
 - [CMSG_GUILD_ROSTER](docs/cmsg_guild_roster.md)
 - [CMSG_GUILD_SET_OFFICER_NOTE](docs/cmsg_guild_set_officer_note.md)
 - [CMSG_GUILD_SET_PUBLIC_NOTE](docs/cmsg_guild_set_public_note.md)
+- [CMSG_HEARTH_AND_RESURRECT](docs/cmsg_hearth_and_resurrect.md)
 - [CMSG_IGNORE_TRADE](docs/cmsg_ignore_trade.md)
 - [CMSG_INITIATE_TRADE](docs/cmsg_initiate_trade.md)
 - [CMSG_INSPECT](docs/cmsg_inspect.md)

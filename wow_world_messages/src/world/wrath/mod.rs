@@ -178,6 +178,8 @@ pub(crate) mod cmsg_guild_bank_withdraw_money;
 pub use cmsg_guild_bank_withdraw_money::*;
 pub(crate) mod cmsg_guild_banker_activate;
 pub use cmsg_guild_banker_activate::*;
+pub(crate) mod cmsg_hearth_and_resurrect;
+pub use cmsg_hearth_and_resurrect::*;
 pub(crate) mod cmsg_instance_lock_response;
 pub use cmsg_instance_lock_response::*;
 pub(crate) mod cmsg_item_text_query;

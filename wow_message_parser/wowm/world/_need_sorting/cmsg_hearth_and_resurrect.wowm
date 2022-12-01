@@ -1,0 +1,3 @@
+cmsg CMSG_HEARTH_AND_RESURRECT = 0x049C {} {
+    versions = "3.3.5";
+}
