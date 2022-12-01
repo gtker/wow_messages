@@ -200,6 +200,8 @@ pub(crate) mod cmsg_keep_alive;
 pub use cmsg_keep_alive::*;
 pub(crate) mod cmsg_learn_preview_talents;
 pub use cmsg_learn_preview_talents::*;
+pub(crate) mod cmsg_learn_preview_talents_pet;
+pub use cmsg_learn_preview_talents_pet::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
 pub(crate) mod cmsg_lfd_party_lock_info_request;

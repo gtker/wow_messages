@@ -440,6 +440,7 @@
 - [CMSG_JOIN_CHANNEL](docs/cmsg_join_channel.md)
 - [CMSG_KEEP_ALIVE](docs/cmsg_keep_alive.md)
 - [CMSG_LEARN_PREVIEW_TALENTS](docs/cmsg_learn_preview_talents.md)
+- [CMSG_LEARN_PREVIEW_TALENTS_PET](docs/cmsg_learn_preview_talents_pet.md)
 - [CMSG_LEARN_TALENT](docs/cmsg_learn_talent.md)
 - [CMSG_LEAVE_BATTLEFIELD](docs/cmsg_leave_battlefield.md)
 - [CMSG_LEAVE_CHANNEL](docs/cmsg_leave_channel.md)
