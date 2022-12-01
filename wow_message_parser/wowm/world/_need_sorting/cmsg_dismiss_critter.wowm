@@ -1,0 +1,5 @@
+cmsg CMSG_DISMISS_CRITTER = 0x048D {
+    Guid critter;
+} {
+    versions = "3.3.5";
+}

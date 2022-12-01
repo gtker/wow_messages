@@ -349,6 +349,7 @@
 - [CMSG_DEL_IGNORE](docs/cmsg_del_ignore.md)
 - [CMSG_DESTROYITEM](docs/cmsg_destroyitem.md)
 - [CMSG_DISMISS_CONTROLLED_VEHICLE](docs/cmsg_dismiss_controlled_vehicle.md)
+- [CMSG_DISMISS_CRITTER](docs/cmsg_dismiss_critter.md)
 - [CMSG_DUEL_ACCEPTED](docs/cmsg_duel_accepted.md)
 - [CMSG_DUEL_CANCELLED](docs/cmsg_duel_cancelled.md)
 - [CMSG_EMOTE](docs/cmsg_emote.md)

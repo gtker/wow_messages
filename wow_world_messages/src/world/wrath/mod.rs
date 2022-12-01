@@ -118,6 +118,8 @@ pub(crate) mod cmsg_deleteequipment_set;
 pub use cmsg_deleteequipment_set::*;
 pub(crate) mod cmsg_dismiss_controlled_vehicle;
 pub use cmsg_dismiss_controlled_vehicle::*;
+pub(crate) mod cmsg_dismiss_critter;
+pub use cmsg_dismiss_critter::*;
 pub(crate) mod cmsg_emote;
 pub use cmsg_emote::*;
 pub(crate) mod cmsg_force_flight_back_speed_change_ack;
