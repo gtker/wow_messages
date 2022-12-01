@@ -882,7 +882,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_CONVERT_RUNE", 0x486),
     Data::new("SMSG_RESYNC_RUNES", 0x487),
     Data::new("SMSG_ADD_RUNE_POWER", 0x488),
-    Data::new("CMSG_START_QUEST", 0x489),
     Data::new("CMSG_REMOVE_GLYPH", 0x48A),
     Data::new("CMSG_DUMP_OBJECTS", 0x48B),
     Data::new("SMSG_DUMP_OBJECTS_DATA", 0x48C),
