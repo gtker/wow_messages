@@ -62,6 +62,8 @@ pub(crate) mod cmsg_auth_session;
 pub use cmsg_auth_session::*;
 pub(crate) mod cmsg_battlefield_list;
 pub use cmsg_battlefield_list::*;
+pub(crate) mod cmsg_battlefield_mgr_entry_invite_response;
+pub use cmsg_battlefield_mgr_entry_invite_response::*;
 pub(crate) mod cmsg_battlefield_mgr_queue_invite_response;
 pub use cmsg_battlefield_mgr_queue_invite_response::*;
 pub(crate) mod cmsg_battlemaster_join;

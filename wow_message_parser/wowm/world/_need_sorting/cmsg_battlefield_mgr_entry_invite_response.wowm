@@ -1,0 +1,6 @@
+cmsg CMSG_BATTLEFIELD_MGR_ENTRY_INVITE_RESPONSE = 0x04DF {
+    u32 battle_id;
+    Bool accepted;
+} {
+    versions = "3.3.5";
+}
