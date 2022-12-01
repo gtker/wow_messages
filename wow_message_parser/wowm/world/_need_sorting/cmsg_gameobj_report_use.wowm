@@ -1,0 +1,5 @@
+cmsg CMSG_GAMEOBJ_REPORT_USE = 0x0481 {
+    Guid guid;
+} {
+    versions = "3.3.5";
+}

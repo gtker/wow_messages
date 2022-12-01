@@ -365,6 +365,7 @@
 - [CMSG_FORCE_WALK_SPEED_CHANGE_ACK](docs/cmsg_force_walk_speed_change_ack.md)
 - [CMSG_FRIEND_LIST](docs/cmsg_friend_list.md)
 - [CMSG_GAMEOBJECT_QUERY](docs/cmsg_gameobject_query.md)
+- [CMSG_GAMEOBJ_REPORT_USE](docs/cmsg_gameobj_report_use.md)
 - [CMSG_GAMEOBJ_USE](docs/cmsg_gameobj_use.md)
 - [CMSG_GET_CHANNEL_MEMBER_COUNT](docs/cmsg_get_channel_member_count.md)
 - [CMSG_GET_MAIL_LIST](docs/cmsg_get_mail_list.md)

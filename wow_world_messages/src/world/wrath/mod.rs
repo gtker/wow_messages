@@ -140,6 +140,8 @@ pub(crate) mod cmsg_force_turn_rate_change_ack;
 pub use cmsg_force_turn_rate_change_ack::*;
 pub(crate) mod cmsg_force_walk_speed_change_ack;
 pub use cmsg_force_walk_speed_change_ack::*;
+pub(crate) mod cmsg_gameobj_report_use;
+pub use cmsg_gameobj_report_use::*;
 pub(crate) mod cmsg_get_channel_member_count;
 pub use cmsg_get_channel_member_count::*;
 pub(crate) mod cmsg_get_mirrorimage_data;

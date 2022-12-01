@@ -415,6 +415,7 @@ use crate::world::wrath::CMSG_REQUEST_VEHICLE_PREV_SEAT;
 use crate::world::wrath::CMSG_REQUEST_VEHICLE_NEXT_SEAT;
 use crate::world::wrath::CMSG_REQUEST_VEHICLE_SWITCH_SEAT;
 use crate::world::wrath::CMSG_PET_LEARN_TALENT;
+use crate::world::wrath::CMSG_GAMEOBJ_REPORT_USE;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -826,6 +827,7 @@ pub enum ClientOpcodeMessage {
     CMSG_REQUEST_VEHICLE_NEXT_SEAT(CMSG_REQUEST_VEHICLE_NEXT_SEAT),
     CMSG_REQUEST_VEHICLE_SWITCH_SEAT(CMSG_REQUEST_VEHICLE_SWITCH_SEAT),
     CMSG_PET_LEARN_TALENT(CMSG_PET_LEARN_TALENT),
+    CMSG_GAMEOBJ_REPORT_USE(CMSG_GAMEOBJ_REPORT_USE),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1239,6 +1241,7 @@ impl ClientOpcodeMessage {
             0x0478 => Ok(Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(<CMSG_REQUEST_VEHICLE_NEXT_SEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0478, size: body_size, io, } } else { a } })?)),
             0x0479 => Ok(Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(<CMSG_REQUEST_VEHICLE_SWITCH_SEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0479, size: body_size, io, } } else { a } })?)),
             0x047A => Ok(Self::CMSG_PET_LEARN_TALENT(<CMSG_PET_LEARN_TALENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x047A, size: body_size, io, } } else { a } })?)),
+            0x0481 => Ok(Self::CMSG_GAMEOBJ_REPORT_USE(<CMSG_GAMEOBJ_REPORT_USE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0481, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1720,6 +1723,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_LEARN_TALENT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2134,6 +2138,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_LEARN_TALENT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2548,6 +2553,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_LEARN_TALENT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -2962,6 +2968,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_LEARN_TALENT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3376,6 +3383,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_LEARN_TALENT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3790,6 +3798,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_LEARN_TALENT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4215,6 +4224,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_NEXT_SEAT(_) => "CMSG_REQUEST_VEHICLE_NEXT_SEAT",
             ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(_) => "CMSG_REQUEST_VEHICLE_SWITCH_SEAT",
             ClientOpcodeMessage::CMSG_PET_LEARN_TALENT(_) => "CMSG_PET_LEARN_TALENT",
+            ClientOpcodeMessage::CMSG_GAMEOBJ_REPORT_USE(_) => "CMSG_GAMEOBJ_REPORT_USE",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6654,6 +6664,12 @@ impl From<CMSG_REQUEST_VEHICLE_SWITCH_SEAT> for ClientOpcodeMessage {
 impl From<CMSG_PET_LEARN_TALENT> for ClientOpcodeMessage {
     fn from(c: CMSG_PET_LEARN_TALENT) -> Self {
         Self::CMSG_PET_LEARN_TALENT(c)
+    }
+}
+
+impl From<CMSG_GAMEOBJ_REPORT_USE> for ClientOpcodeMessage {
+    fn from(c: CMSG_GAMEOBJ_REPORT_USE) -> Self {
+        Self::CMSG_GAMEOBJ_REPORT_USE(c)
     }
 }
 
