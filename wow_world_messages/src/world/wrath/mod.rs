@@ -246,6 +246,8 @@ pub(crate) mod cmsg_report_pvp_afk;
 pub use cmsg_report_pvp_afk::*;
 pub(crate) mod cmsg_request_vehicle_exit;
 pub use cmsg_request_vehicle_exit::*;
+pub(crate) mod cmsg_request_vehicle_prev_seat;
+pub use cmsg_request_vehicle_prev_seat::*;
 pub(crate) mod cmsg_search_lfg_join;
 pub use cmsg_search_lfg_join::*;
 pub(crate) mod cmsg_search_lfg_leave;
