@@ -104,6 +104,8 @@ pub(crate) mod cmsg_channel_voice_on;
 pub use cmsg_channel_voice_on::*;
 pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
+pub(crate) mod cmsg_char_customize;
+pub use cmsg_char_customize::*;
 pub(crate) mod cmsg_clear_channel_watch;
 pub use cmsg_clear_channel_watch::*;
 pub(crate) mod cmsg_commentator_enable;

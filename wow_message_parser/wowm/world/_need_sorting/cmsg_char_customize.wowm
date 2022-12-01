@@ -1,0 +1,12 @@
+cmsg CMSG_CHAR_CUSTOMIZE = 0x0473 {
+    Guid player;
+    CString new_name;
+    Gender gender;
+    u8 skin_color;
+    u8 hair_color;
+    u8 hair_style;
+    u8 facial_hair;
+    u8 face;
+} {
+    versions = "3.3.5";
+}

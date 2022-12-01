@@ -26,6 +26,7 @@ Used in:
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)
+* [CMSG_CHAR_CUSTOMIZE](cmsg_char_customize.md)
 * [Character](character.md)
 * [Character](character.md)
 * [Character](character.md)

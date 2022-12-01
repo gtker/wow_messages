@@ -330,6 +330,7 @@
 - [CMSG_CHANNEL_UNMUTE](docs/cmsg_channel_unmute.md)
 - [CMSG_CHANNEL_VOICE_ON](docs/cmsg_channel_voice_on.md)
 - [CMSG_CHAR_CREATE](docs/cmsg_char_create.md)
+- [CMSG_CHAR_CUSTOMIZE](docs/cmsg_char_customize.md)
 - [CMSG_CHAR_DELETE](docs/cmsg_char_delete.md)
 - [CMSG_CHAR_ENUM](docs/cmsg_char_enum.md)
 - [CMSG_CHAR_RENAME](docs/cmsg_char_rename.md)
