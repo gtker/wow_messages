@@ -890,7 +890,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0494 => "SMSG_PRE_RESURRECT",
         0x0495 => "SMSG_AURA_UPDATE_ALL",
         0x0496 => "SMSG_AURA_UPDATE",
-        0x0497 => "CMSG_FLOOD_GRACE_CHEAT",
         0x0498 => "SMSG_SERVER_FIRST_ACHIEVEMENT",
         0x0499 => "SMSG_PET_LEARNED_SPELL",
         0x049a => "SMSG_PET_UNLEARNED_SPELL",

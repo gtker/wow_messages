@@ -894,7 +894,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_PRE_RESURRECT", 0x494),
     Data::new("SMSG_AURA_UPDATE_ALL", 0x495),
     Data::new("SMSG_AURA_UPDATE", 0x496),
-    Data::new("CMSG_FLOOD_GRACE_CHEAT", 0x497),
     Data::new("SMSG_SERVER_FIRST_ACHIEVEMENT", 0x498),
     Data::new("SMSG_PET_LEARNED_SPELL", 0x499),
     Data::new("SMSG_PET_UNLEARNED_SPELL", 0x49A),
