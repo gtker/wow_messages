@@ -339,6 +339,7 @@
 - [CMSG_COMMENTATOR_ENABLE](docs/cmsg_commentator_enable.md)
 - [CMSG_COMPLAIN](docs/cmsg_complain.md)
 - [CMSG_COMPLETE_CINEMATIC](docs/cmsg_complete_cinematic.md)
+- [CMSG_COMPLETE_MOVIE](docs/cmsg_complete_movie.md)
 - [CMSG_CONTACT_LIST](docs/cmsg_contact_list.md)
 - [CMSG_CREATURE_QUERY](docs/cmsg_creature_query.md)
 - [CMSG_DBLOOKUP](docs/cmsg_dblookup.md)
