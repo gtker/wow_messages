@@ -1,0 +1,9 @@
+cmsg CMSG_EQUIPMENT_SET_SAVE = 0x04BD {
+    PackedGuid guid;
+    u32 index;
+    CString name;
+    CString icon_name;
+    Guid[19] equipment;
+} {
+    versions = "3.3.5";
+}

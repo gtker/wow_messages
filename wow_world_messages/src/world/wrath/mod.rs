@@ -134,6 +134,8 @@ pub(crate) mod cmsg_emote;
 pub use cmsg_emote::*;
 pub(crate) mod cmsg_enabletaxi;
 pub use cmsg_enabletaxi::*;
+pub(crate) mod cmsg_equipment_set_save;
+pub use cmsg_equipment_set_save::*;
 pub(crate) mod cmsg_force_flight_back_speed_change_ack;
 pub use cmsg_force_flight_back_speed_change_ack::*;
 pub(crate) mod cmsg_force_flight_speed_change_ack;
