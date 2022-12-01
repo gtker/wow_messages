@@ -928,7 +928,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_ARENA_UNIT_DESTROYED", 0x4C7),
     Data::new("SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED", 0x4C8),
     Data::new("SMSG_PROFILEDATA_RESPONSE", 0x4CA),
-    Data::new("CMSG_END_BATTLEFIELD_CHEAT", 0x4CC),
     Data::new("SMSG_MULTIPLE_PACKETS", 0x4CD),
     Data::new("SMSG_MOVE_GRAVITY_DISABLE", 0x4CE),
     Data::new("CMSG_MOVE_GRAVITY_DISABLE_ACK", 0x4CF),
