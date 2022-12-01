@@ -530,6 +530,7 @@
 - [CMSG_REQUEST_VEHICLE_EXIT](docs/cmsg_request_vehicle_exit.md)
 - [CMSG_REQUEST_VEHICLE_NEXT_SEAT](docs/cmsg_request_vehicle_next_seat.md)
 - [CMSG_REQUEST_VEHICLE_PREV_SEAT](docs/cmsg_request_vehicle_prev_seat.md)
+- [CMSG_REQUEST_VEHICLE_SWITCH_SEAT](docs/cmsg_request_vehicle_switch_seat.md)
 - [CMSG_RESET_INSTANCES](docs/cmsg_reset_instances.md)
 - [CMSG_RESURRECT_RESPONSE](docs/cmsg_resurrect_response.md)
 - [CMSG_SEARCH_LFG_JOIN](docs/cmsg_search_lfg_join.md)

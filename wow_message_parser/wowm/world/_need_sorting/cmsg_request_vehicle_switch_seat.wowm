@@ -1,0 +1,6 @@
+cmsg CMSG_REQUEST_VEHICLE_SWITCH_SEAT = 0x0479 {
+    Guid vehicle;
+    u8 seat;
+} {
+    versions = "3.3.5";
+}
