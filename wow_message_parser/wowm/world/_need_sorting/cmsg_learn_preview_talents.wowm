@@ -1,0 +1,13 @@
+struct Talent {
+    u32 talent;
+    u32 rank;
+} {
+    versions = "3.3.5";
+}
+
+cmsg CMSG_LEARN_PREVIEW_TALENTS = 0x04C1 {
+    u32 amount_of_talents;
+    Talent[amount_of_talents] talents;
+} {
+    versions = "3.3.5";
+}

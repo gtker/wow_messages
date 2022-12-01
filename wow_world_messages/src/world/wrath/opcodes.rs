@@ -430,6 +430,7 @@ use crate::world::wrath::CMSG_CORPSE_MAP_POSITION_QUERY;
 use crate::world::wrath::CMSG_CALENDAR_EVENT_SIGNUP;
 use crate::world::wrath::CMSG_EQUIPMENT_SET_SAVE;
 use crate::world::wrath::CMSG_UPDATE_PROJECTILE_POSITION;
+use crate::world::wrath::CMSG_LEARN_PREVIEW_TALENTS;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -856,6 +857,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CALENDAR_EVENT_SIGNUP(CMSG_CALENDAR_EVENT_SIGNUP),
     CMSG_EQUIPMENT_SET_SAVE(CMSG_EQUIPMENT_SET_SAVE),
     CMSG_UPDATE_PROJECTILE_POSITION(CMSG_UPDATE_PROJECTILE_POSITION),
+    CMSG_LEARN_PREVIEW_TALENTS(CMSG_LEARN_PREVIEW_TALENTS),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1284,6 +1286,7 @@ impl ClientOpcodeMessage {
             0x04BA => Ok(Self::CMSG_CALENDAR_EVENT_SIGNUP(<CMSG_CALENDAR_EVENT_SIGNUP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BA, size: body_size, io, } } else { a } })?)),
             0x04BD => Ok(Self::CMSG_EQUIPMENT_SET_SAVE(<CMSG_EQUIPMENT_SET_SAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BD, size: body_size, io, } } else { a } })?)),
             0x04BE => Ok(Self::CMSG_UPDATE_PROJECTILE_POSITION(<CMSG_UPDATE_PROJECTILE_POSITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BE, size: body_size, io, } } else { a } })?)),
+            0x04C1 => Ok(Self::CMSG_LEARN_PREVIEW_TALENTS(<CMSG_LEARN_PREVIEW_TALENTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04C1, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1780,6 +1783,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_SIGNUP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_EQUIPMENT_SET_SAVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2209,6 +2213,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_SIGNUP(c) => c.write_unencrypted_client(w),
             Self::CMSG_EQUIPMENT_SET_SAVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2638,6 +2643,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_SIGNUP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_EQUIPMENT_SET_SAVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -3067,6 +3073,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_SIGNUP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_EQUIPMENT_SET_SAVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3496,6 +3503,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_SIGNUP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_EQUIPMENT_SET_SAVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3925,6 +3933,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_SIGNUP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_EQUIPMENT_SET_SAVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4365,6 +4374,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CALENDAR_EVENT_SIGNUP(_) => "CMSG_CALENDAR_EVENT_SIGNUP",
             ClientOpcodeMessage::CMSG_EQUIPMENT_SET_SAVE(_) => "CMSG_EQUIPMENT_SET_SAVE",
             ClientOpcodeMessage::CMSG_UPDATE_PROJECTILE_POSITION(_) => "CMSG_UPDATE_PROJECTILE_POSITION",
+            ClientOpcodeMessage::CMSG_LEARN_PREVIEW_TALENTS(_) => "CMSG_LEARN_PREVIEW_TALENTS",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6894,6 +6904,12 @@ impl From<CMSG_EQUIPMENT_SET_SAVE> for ClientOpcodeMessage {
 impl From<CMSG_UPDATE_PROJECTILE_POSITION> for ClientOpcodeMessage {
     fn from(c: CMSG_UPDATE_PROJECTILE_POSITION) -> Self {
         Self::CMSG_UPDATE_PROJECTILE_POSITION(c)
+    }
+}
+
+impl From<CMSG_LEARN_PREVIEW_TALENTS> for ClientOpcodeMessage {
+    fn from(c: CMSG_LEARN_PREVIEW_TALENTS) -> Self {
+        Self::CMSG_LEARN_PREVIEW_TALENTS(c)
     }
 }
 
