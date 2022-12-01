@@ -246,6 +246,8 @@ pub(crate) mod cmsg_questgiver_status_multiple_query;
 pub use cmsg_questgiver_status_multiple_query::*;
 pub(crate) mod cmsg_ready_for_account_data_times;
 pub use cmsg_ready_for_account_data_times::*;
+pub(crate) mod cmsg_remove_glyph;
+pub use cmsg_remove_glyph::*;
 pub(crate) mod cmsg_report_pvp_afk;
 pub use cmsg_report_pvp_afk::*;
 pub(crate) mod cmsg_request_vehicle_exit;

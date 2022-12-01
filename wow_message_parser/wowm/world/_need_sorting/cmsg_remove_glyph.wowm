@@ -1,0 +1,5 @@
+cmsg CMSG_REMOVE_GLYPH = 0x048A {
+    u32 glyph;
+} {
+    versions = "3.3.5";
+}

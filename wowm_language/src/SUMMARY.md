@@ -522,6 +522,7 @@
 - [CMSG_READ_ITEM](docs/cmsg_read_item.md)
 - [CMSG_REALM_SPLIT](docs/cmsg_realm_split.md)
 - [CMSG_RECLAIM_CORPSE](docs/cmsg_reclaim_corpse.md)
+- [CMSG_REMOVE_GLYPH](docs/cmsg_remove_glyph.md)
 - [CMSG_REPAIR_ITEM](docs/cmsg_repair_item.md)
 - [CMSG_REPOP_REQUEST](docs/cmsg_repop_request.md)
 - [CMSG_REPORT_PVP_AFK](docs/cmsg_report_pvp_afk.md)
