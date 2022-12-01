@@ -246,6 +246,8 @@ pub(crate) mod cmsg_petition_buy;
 pub use cmsg_petition_buy::*;
 pub(crate) mod cmsg_played_time;
 pub use cmsg_played_time::*;
+pub(crate) mod cmsg_player_vehicle_enter;
+pub use cmsg_player_vehicle_enter::*;
 pub(crate) mod cmsg_query_inspect_achievements;
 pub use cmsg_query_inspect_achievements::*;
 pub(crate) mod cmsg_quest_poi_query;

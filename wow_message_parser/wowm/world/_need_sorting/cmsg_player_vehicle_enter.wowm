@@ -1,0 +1,5 @@
+cmsg CMSG_PLAYER_VEHICLE_ENTER = 0x04A8 {
+    Guid vehicle;
+} {
+    versions = "3.3.5";
+}

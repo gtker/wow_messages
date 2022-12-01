@@ -505,6 +505,7 @@
 - [CMSG_PLAYED_TIME](docs/cmsg_played_time.md)
 - [CMSG_PLAYER_LOGIN](docs/cmsg_player_login.md)
 - [CMSG_PLAYER_LOGOUT](docs/cmsg_player_logout.md)
+- [CMSG_PLAYER_VEHICLE_ENTER](docs/cmsg_player_vehicle_enter.md)
 - [CMSG_PUSHQUESTTOPARTY](docs/cmsg_pushquesttoparty.md)
 - [CMSG_QUERY_INSPECT_ACHIEVEMENTS](docs/cmsg_query_inspect_achievements.md)
 - [CMSG_QUERY_TIME](docs/cmsg_query_time.md)

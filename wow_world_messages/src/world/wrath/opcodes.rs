@@ -422,6 +422,7 @@ use crate::world::wrath::CMSG_AUCTION_LIST_PENDING_SALES;
 use crate::world::wrath::CMSG_ENABLETAXI;
 use crate::world::wrath::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE;
 use crate::world::wrath::CMSG_HEARTH_AND_RESURRECT;
+use crate::world::wrath::CMSG_PLAYER_VEHICLE_ENTER;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -840,6 +841,7 @@ pub enum ClientOpcodeMessage {
     CMSG_ENABLETAXI(CMSG_ENABLETAXI),
     CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE),
     CMSG_HEARTH_AND_RESURRECT(CMSG_HEARTH_AND_RESURRECT),
+    CMSG_PLAYER_VEHICLE_ENTER(CMSG_PLAYER_VEHICLE_ENTER),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1260,6 +1262,7 @@ impl ClientOpcodeMessage {
             0x0493 => Ok(Self::CMSG_ENABLETAXI(<CMSG_ENABLETAXI as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0493, size: body_size, io, } } else { a } })?)),
             0x049B => Ok(Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(<CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049B, size: body_size, io, } } else { a } })?)),
             0x049C => Ok(Self::CMSG_HEARTH_AND_RESURRECT(<CMSG_HEARTH_AND_RESURRECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049C, size: body_size, io, } } else { a } })?)),
+            0x04A8 => Ok(Self::CMSG_PLAYER_VEHICLE_ENTER(<CMSG_PLAYER_VEHICLE_ENTER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04A8, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1748,6 +1751,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ENABLETAXI(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_HEARTH_AND_RESURRECT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2169,6 +2173,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ENABLETAXI(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_HEARTH_AND_RESURRECT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2590,6 +2595,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ENABLETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_HEARTH_AND_RESURRECT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -3011,6 +3017,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ENABLETAXI(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_HEARTH_AND_RESURRECT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3432,6 +3439,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ENABLETAXI(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_HEARTH_AND_RESURRECT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3853,6 +3861,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ENABLETAXI(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_HEARTH_AND_RESURRECT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4285,6 +4294,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_ENABLETAXI(_) => "CMSG_ENABLETAXI",
             ClientOpcodeMessage::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(_) => "CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE",
             ClientOpcodeMessage::CMSG_HEARTH_AND_RESURRECT(_) => "CMSG_HEARTH_AND_RESURRECT",
+            ClientOpcodeMessage::CMSG_PLAYER_VEHICLE_ENTER(_) => "CMSG_PLAYER_VEHICLE_ENTER",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6766,6 +6776,12 @@ impl From<CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE> for ClientOpcodeMessage {
 impl From<CMSG_HEARTH_AND_RESURRECT> for ClientOpcodeMessage {
     fn from(c: CMSG_HEARTH_AND_RESURRECT) -> Self {
         Self::CMSG_HEARTH_AND_RESURRECT(c)
+    }
+}
+
+impl From<CMSG_PLAYER_VEHICLE_ENTER> for ClientOpcodeMessage {
+    fn from(c: CMSG_PLAYER_VEHICLE_ENTER) -> Self {
+        Self::CMSG_PLAYER_VEHICLE_ENTER(c)
     }
 }
 
