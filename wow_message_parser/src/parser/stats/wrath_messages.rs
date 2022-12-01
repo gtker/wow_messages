@@ -854,7 +854,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_UPDATE_ACCOUNT_DATA_COMPLETE", 0x463),
     Data::new("SMSG_TRIGGER_MOVIE", 0x464),
     Data::new("CMSG_COMPLETE_MOVIE", 0x465),
-    Data::new("CMSG_SET_GLYPH_SLOT", 0x466),
     Data::new("CMSG_SET_GLYPH", 0x467),
     Data::new("SMSG_ACHIEVEMENT_EARNED", 0x468),
     Data::new("SMSG_DYNAMIC_DROP_ROLL_RESULT", 0x469),
