@@ -354,6 +354,7 @@
 - [CMSG_DUEL_ACCEPTED](docs/cmsg_duel_accepted.md)
 - [CMSG_DUEL_CANCELLED](docs/cmsg_duel_cancelled.md)
 - [CMSG_EMOTE](docs/cmsg_emote.md)
+- [CMSG_ENABLETAXI](docs/cmsg_enabletaxi.md)
 - [CMSG_FAR_SIGHT](docs/cmsg_far_sight.md)
 - [CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK](docs/cmsg_force_flight_back_speed_change_ack.md)
 - [CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK](docs/cmsg_force_flight_speed_change_ack.md)
