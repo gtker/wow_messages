@@ -850,7 +850,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0463 => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
         0x0464 => "SMSG_TRIGGER_MOVIE",
         0x0465 => "CMSG_COMPLETE_MOVIE",
-        0x0467 => "CMSG_SET_GLYPH",
         0x0468 => "SMSG_ACHIEVEMENT_EARNED",
         0x0469 => "SMSG_DYNAMIC_DROP_ROLL_RESULT",
         0x046a => "SMSG_CRITERIA_UPDATE",
