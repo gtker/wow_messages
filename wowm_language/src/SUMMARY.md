@@ -527,6 +527,7 @@
 - [CMSG_REQUEST_PARTY_MEMBER_STATS](docs/cmsg_request_party_member_stats.md)
 - [CMSG_REQUEST_PET_INFO](docs/cmsg_request_pet_info.md)
 - [CMSG_REQUEST_RAID_INFO](docs/cmsg_request_raid_info.md)
+- [CMSG_REQUEST_VEHICLE_EXIT](docs/cmsg_request_vehicle_exit.md)
 - [CMSG_RESET_INSTANCES](docs/cmsg_reset_instances.md)
 - [CMSG_RESURRECT_RESPONSE](docs/cmsg_resurrect_response.md)
 - [CMSG_SEARCH_LFG_JOIN](docs/cmsg_search_lfg_join.md)

@@ -1,0 +1,3 @@
+cmsg CMSG_REQUEST_VEHICLE_EXIT = 0x0476 {} {
+    versions = "3.3.5";
+}
