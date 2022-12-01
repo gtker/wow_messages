@@ -84,6 +84,8 @@ pub(crate) mod cmsg_calendar_event_remove_invite;
 pub use cmsg_calendar_event_remove_invite::*;
 pub(crate) mod cmsg_calendar_event_rsvp;
 pub use cmsg_calendar_event_rsvp::*;
+pub(crate) mod cmsg_calendar_event_signup;
+pub use cmsg_calendar_event_signup::*;
 pub(crate) mod cmsg_calendar_event_status;
 pub use cmsg_calendar_event_status::*;
 pub(crate) mod cmsg_calendar_get_calendar;

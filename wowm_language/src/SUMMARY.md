@@ -298,6 +298,7 @@
 - [CMSG_CALENDAR_EVENT_MODERATOR_STATUS](docs/cmsg_calendar_event_moderator_status.md)
 - [CMSG_CALENDAR_EVENT_REMOVE_INVITE](docs/cmsg_calendar_event_remove_invite.md)
 - [CMSG_CALENDAR_EVENT_RSVP](docs/cmsg_calendar_event_rsvp.md)
+- [CMSG_CALENDAR_EVENT_SIGNUP](docs/cmsg_calendar_event_signup.md)
 - [CMSG_CALENDAR_EVENT_STATUS](docs/cmsg_calendar_event_status.md)
 - [CMSG_CALENDAR_GET_CALENDAR](docs/cmsg_calendar_get_calendar.md)
 - [CMSG_CALENDAR_GET_EVENT](docs/cmsg_calendar_get_event.md)

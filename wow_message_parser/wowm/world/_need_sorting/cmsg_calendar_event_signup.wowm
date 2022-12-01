@@ -1,0 +1,6 @@
+cmsg CMSG_CALENDAR_EVENT_SIGNUP = 0x04BA {
+    Guid event_id;
+    Bool tentative;
+} {
+    versions = "3.3.5";
+}
