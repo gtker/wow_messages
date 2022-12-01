@@ -923,7 +923,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04c2 => "CMSG_LEARN_PREVIEW_TALENTS_PET",
         0x04c7 => "SMSG_ARENA_UNIT_DESTROYED",
         0x04c8 => "SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED",
-        0x04c9 => "CMSG_PROFILEDATA_REQUEST",
         0x04ca => "SMSG_PROFILEDATA_RESPONSE",
         0x04cb => "CMSG_START_BATTLEFIELD_CHEAT",
         0x04cc => "CMSG_END_BATTLEFIELD_CHEAT",
