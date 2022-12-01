@@ -955,7 +955,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04f0 => "CMSG_GMRESPONSE_RESOLVE",
         0x04f1 => "SMSG_GMRESPONSE_STATUS_UPDATE",
         0x04f2 => "SMSG_GMRESPONSE_CREATE_TICKET",
-        0x04f3 => "CMSG_GMRESPONSE_CREATE_TICKET",
         0x04f4 => "CMSG_SERVERINFO",
         0x04f5 => "SMSG_SERVERINFO",
         0x04f6 => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
