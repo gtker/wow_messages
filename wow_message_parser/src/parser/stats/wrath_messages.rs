@@ -910,7 +910,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_CONTROLLER_EJECT_PASSENGER", 0x4A9),
     Data::new("SMSG_PET_GUIDS", 0x4AA),
     Data::new("SMSG_CLIENTCACHE_VERSION", 0x4AB),
-    Data::new("CMSG_SET_ARENA_MEMBER_WEEKLY_GAMES", 0x4B0),
     Data::new("CMSG_SET_ARENA_MEMBER_SEASON_GAMES", 0x4B1),
     Data::new("SMSG_ITEM_REFUND_INFO_RESPONSE", 0x4B2),
     Data::new("CMSG_ITEM_REFUND_INFO", 0x4B3),
