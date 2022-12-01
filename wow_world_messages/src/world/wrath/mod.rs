@@ -54,6 +54,8 @@ pub(crate) mod cmsg_alter_appearance;
 pub use cmsg_alter_appearance::*;
 pub(crate) mod cmsg_auction_list_items;
 pub use cmsg_auction_list_items::*;
+pub(crate) mod cmsg_auction_list_pending_sales;
+pub use cmsg_auction_list_pending_sales::*;
 pub(crate) mod cmsg_auction_sell_item;
 pub use cmsg_auction_sell_item::*;
 pub(crate) mod cmsg_auth_session;

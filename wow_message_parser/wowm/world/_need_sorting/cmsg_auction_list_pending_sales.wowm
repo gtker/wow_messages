@@ -1,0 +1,5 @@
+cmsg CMSG_AUCTION_LIST_PENDING_SALES = 0x048F {
+    Guid auctioneer;
+} {
+    versions = "3.3.5";
+}

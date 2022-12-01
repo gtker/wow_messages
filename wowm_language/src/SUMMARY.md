@@ -261,6 +261,7 @@
 - [CMSG_AUCTION_LIST_BIDDER_ITEMS](docs/cmsg_auction_list_bidder_items.md)
 - [CMSG_AUCTION_LIST_ITEMS](docs/cmsg_auction_list_items.md)
 - [CMSG_AUCTION_LIST_OWNER_ITEMS](docs/cmsg_auction_list_owner_items.md)
+- [CMSG_AUCTION_LIST_PENDING_SALES](docs/cmsg_auction_list_pending_sales.md)
 - [CMSG_AUCTION_PLACE_BID](docs/cmsg_auction_place_bid.md)
 - [CMSG_AUCTION_REMOVE_ITEM](docs/cmsg_auction_remove_item.md)
 - [CMSG_AUCTION_SELL_ITEM](docs/cmsg_auction_sell_item.md)

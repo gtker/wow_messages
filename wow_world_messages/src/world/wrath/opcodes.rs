@@ -418,6 +418,7 @@ use crate::world::wrath::CMSG_PET_LEARN_TALENT;
 use crate::world::wrath::CMSG_GAMEOBJ_REPORT_USE;
 use crate::world::wrath::CMSG_REMOVE_GLYPH;
 use crate::world::wrath::CMSG_DISMISS_CRITTER;
+use crate::world::wrath::CMSG_AUCTION_LIST_PENDING_SALES;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -832,6 +833,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GAMEOBJ_REPORT_USE(CMSG_GAMEOBJ_REPORT_USE),
     CMSG_REMOVE_GLYPH(CMSG_REMOVE_GLYPH),
     CMSG_DISMISS_CRITTER(CMSG_DISMISS_CRITTER),
+    CMSG_AUCTION_LIST_PENDING_SALES(CMSG_AUCTION_LIST_PENDING_SALES),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1248,6 +1250,7 @@ impl ClientOpcodeMessage {
             0x0481 => Ok(Self::CMSG_GAMEOBJ_REPORT_USE(<CMSG_GAMEOBJ_REPORT_USE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0481, size: body_size, io, } } else { a } })?)),
             0x048A => Ok(Self::CMSG_REMOVE_GLYPH(<CMSG_REMOVE_GLYPH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x048A, size: body_size, io, } } else { a } })?)),
             0x048D => Ok(Self::CMSG_DISMISS_CRITTER(<CMSG_DISMISS_CRITTER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x048D, size: body_size, io, } } else { a } })?)),
+            0x048F => Ok(Self::CMSG_AUCTION_LIST_PENDING_SALES(<CMSG_AUCTION_LIST_PENDING_SALES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x048F, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1732,6 +1735,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REMOVE_GLYPH(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DISMISS_CRITTER(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2149,6 +2153,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.write_unencrypted_client(w),
             Self::CMSG_REMOVE_GLYPH(c) => c.write_unencrypted_client(w),
             Self::CMSG_DISMISS_CRITTER(c) => c.write_unencrypted_client(w),
+            Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2566,6 +2571,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REMOVE_GLYPH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DISMISS_CRITTER(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -2983,6 +2989,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REMOVE_GLYPH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DISMISS_CRITTER(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3400,6 +3407,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REMOVE_GLYPH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DISMISS_CRITTER(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3817,6 +3825,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REMOVE_GLYPH(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DISMISS_CRITTER(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4245,6 +4254,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GAMEOBJ_REPORT_USE(_) => "CMSG_GAMEOBJ_REPORT_USE",
             ClientOpcodeMessage::CMSG_REMOVE_GLYPH(_) => "CMSG_REMOVE_GLYPH",
             ClientOpcodeMessage::CMSG_DISMISS_CRITTER(_) => "CMSG_DISMISS_CRITTER",
+            ClientOpcodeMessage::CMSG_AUCTION_LIST_PENDING_SALES(_) => "CMSG_AUCTION_LIST_PENDING_SALES",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6702,6 +6712,12 @@ impl From<CMSG_REMOVE_GLYPH> for ClientOpcodeMessage {
 impl From<CMSG_DISMISS_CRITTER> for ClientOpcodeMessage {
     fn from(c: CMSG_DISMISS_CRITTER) -> Self {
         Self::CMSG_DISMISS_CRITTER(c)
+    }
+}
+
+impl From<CMSG_AUCTION_LIST_PENDING_SALES> for ClientOpcodeMessage {
+    fn from(c: CMSG_AUCTION_LIST_PENDING_SALES) -> Self {
+        Self::CMSG_AUCTION_LIST_PENDING_SALES(c)
     }
 }
 
