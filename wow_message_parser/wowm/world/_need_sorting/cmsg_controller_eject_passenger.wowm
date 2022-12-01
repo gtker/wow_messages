@@ -1,0 +1,5 @@
+cmsg CMSG_CONTROLLER_EJECT_PASSENGER = 0x04A9 {
+    Guid player;
+} {
+    versions = "3.3.5";
+}
