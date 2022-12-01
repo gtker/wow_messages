@@ -1,0 +1,5 @@
+cmsg CMSG_BATTLEFIELD_MGR_EXIT_REQUEST = 0x04E7 {
+    u32 battle_id;
+} {
+    versions = "3.3.5";
+}
