@@ -345,6 +345,7 @@
 - [CMSG_COMPLETE_MOVIE](docs/cmsg_complete_movie.md)
 - [CMSG_CONTACT_LIST](docs/cmsg_contact_list.md)
 - [CMSG_CONTROLLER_EJECT_PASSENGER](docs/cmsg_controller_eject_passenger.md)
+- [CMSG_CORPSE_MAP_POSITION_QUERY](docs/cmsg_corpse_map_position_query.md)
 - [CMSG_CREATURE_QUERY](docs/cmsg_creature_query.md)
 - [CMSG_DBLOOKUP](docs/cmsg_dblookup.md)
 - [CMSG_DELETEEQUIPMENT_SET](docs/cmsg_deleteequipment_set.md)

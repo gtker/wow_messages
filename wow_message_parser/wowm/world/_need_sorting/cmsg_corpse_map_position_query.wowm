@@ -1,0 +1,5 @@
+cmsg CMSG_CORPSE_MAP_POSITION_QUERY = 0x04B6 {
+    u32 unknown;
+} {
+    versions = "3.3.5";
+}

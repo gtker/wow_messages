@@ -120,6 +120,8 @@ pub(crate) mod cmsg_complete_movie;
 pub use cmsg_complete_movie::*;
 pub(crate) mod cmsg_controller_eject_passenger;
 pub use cmsg_controller_eject_passenger::*;
+pub(crate) mod cmsg_corpse_map_position_query;
+pub use cmsg_corpse_map_position_query::*;
 pub(crate) mod cmsg_deleteequipment_set;
 pub use cmsg_deleteequipment_set::*;
 pub(crate) mod cmsg_dismiss_controlled_vehicle;
