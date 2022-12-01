@@ -1,0 +1,13 @@
+struct EquipmentSet {
+    Guid item;
+    u8 source_bag;
+    u8 source_slot;
+} {
+    versions = "3.3.5";
+}
+
+cmsg CMSG_EQUIPMENT_SET_USE = 0x04D5 {
+    EquipmentSet[19] sets;
+} {
+    versions = "3.3.5";
+}
