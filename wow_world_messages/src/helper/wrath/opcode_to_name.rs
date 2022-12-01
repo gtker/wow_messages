@@ -879,7 +879,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0487 => "SMSG_RESYNC_RUNES",
         0x0488 => "SMSG_ADD_RUNE_POWER",
         0x048a => "CMSG_REMOVE_GLYPH",
-        0x048b => "CMSG_DUMP_OBJECTS",
         0x048c => "SMSG_DUMP_OBJECTS_DATA",
         0x048d => "CMSG_DISMISS_CRITTER",
         0x048e => "SMSG_NOTIFY_DEST_LOC_SPELL_CAST",
