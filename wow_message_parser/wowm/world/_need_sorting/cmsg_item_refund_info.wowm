@@ -1,0 +1,5 @@
+cmsg CMSG_ITEM_REFUND_INFO = 0x04B3 {
+    Guid item;
+} {
+    versions = "3.3.5";
+}

@@ -184,6 +184,8 @@ pub(crate) mod cmsg_hearth_and_resurrect;
 pub use cmsg_hearth_and_resurrect::*;
 pub(crate) mod cmsg_instance_lock_response;
 pub use cmsg_instance_lock_response::*;
+pub(crate) mod cmsg_item_refund_info;
+pub use cmsg_item_refund_info::*;
 pub(crate) mod cmsg_item_text_query;
 pub use cmsg_item_text_query::*;
 pub(crate) mod cmsg_keep_alive;
