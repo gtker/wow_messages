@@ -425,6 +425,7 @@ use crate::world::wrath::CMSG_HEARTH_AND_RESURRECT;
 use crate::world::wrath::CMSG_PLAYER_VEHICLE_ENTER;
 use crate::world::wrath::CMSG_CONTROLLER_EJECT_PASSENGER;
 use crate::world::wrath::CMSG_ITEM_REFUND_INFO;
+use crate::world::wrath::CMSG_ITEM_REFUND;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -846,6 +847,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PLAYER_VEHICLE_ENTER(CMSG_PLAYER_VEHICLE_ENTER),
     CMSG_CONTROLLER_EJECT_PASSENGER(CMSG_CONTROLLER_EJECT_PASSENGER),
     CMSG_ITEM_REFUND_INFO(CMSG_ITEM_REFUND_INFO),
+    CMSG_ITEM_REFUND(CMSG_ITEM_REFUND),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1269,6 +1271,7 @@ impl ClientOpcodeMessage {
             0x04A8 => Ok(Self::CMSG_PLAYER_VEHICLE_ENTER(<CMSG_PLAYER_VEHICLE_ENTER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04A8, size: body_size, io, } } else { a } })?)),
             0x04A9 => Ok(Self::CMSG_CONTROLLER_EJECT_PASSENGER(<CMSG_CONTROLLER_EJECT_PASSENGER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04A9, size: body_size, io, } } else { a } })?)),
             0x04B3 => Ok(Self::CMSG_ITEM_REFUND_INFO(<CMSG_ITEM_REFUND_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B3, size: body_size, io, } } else { a } })?)),
+            0x04B4 => Ok(Self::CMSG_ITEM_REFUND(<CMSG_ITEM_REFUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B4, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1760,6 +1763,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ITEM_REFUND_INFO(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_ITEM_REFUND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2184,6 +2188,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.write_unencrypted_client(w),
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.write_unencrypted_client(w),
             Self::CMSG_ITEM_REFUND_INFO(c) => c.write_unencrypted_client(w),
+            Self::CMSG_ITEM_REFUND(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2608,6 +2613,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_REFUND_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_ITEM_REFUND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -3032,6 +3038,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_REFUND_INFO(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_ITEM_REFUND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3456,6 +3463,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_REFUND_INFO(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_ITEM_REFUND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3880,6 +3888,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_REFUND_INFO(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_ITEM_REFUND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4315,6 +4324,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PLAYER_VEHICLE_ENTER(_) => "CMSG_PLAYER_VEHICLE_ENTER",
             ClientOpcodeMessage::CMSG_CONTROLLER_EJECT_PASSENGER(_) => "CMSG_CONTROLLER_EJECT_PASSENGER",
             ClientOpcodeMessage::CMSG_ITEM_REFUND_INFO(_) => "CMSG_ITEM_REFUND_INFO",
+            ClientOpcodeMessage::CMSG_ITEM_REFUND(_) => "CMSG_ITEM_REFUND",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6814,6 +6824,12 @@ impl From<CMSG_CONTROLLER_EJECT_PASSENGER> for ClientOpcodeMessage {
 impl From<CMSG_ITEM_REFUND_INFO> for ClientOpcodeMessage {
     fn from(c: CMSG_ITEM_REFUND_INFO) -> Self {
         Self::CMSG_ITEM_REFUND_INFO(c)
+    }
+}
+
+impl From<CMSG_ITEM_REFUND> for ClientOpcodeMessage {
+    fn from(c: CMSG_ITEM_REFUND) -> Self {
+        Self::CMSG_ITEM_REFUND(c)
     }
 }
 
