@@ -314,6 +314,7 @@
 - [CMSG_CANCEL_TEMP_ENCHANTMENT](docs/cmsg_cancel_temp_enchantment.md)
 - [CMSG_CANCEL_TRADE](docs/cmsg_cancel_trade.md)
 - [CMSG_CAST_SPELL](docs/cmsg_cast_spell.md)
+- [CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE](docs/cmsg_change_seats_on_controlled_vehicle.md)
 - [CMSG_CHANNEL_ANNOUNCEMENTS](docs/cmsg_channel_announcements.md)
 - [CMSG_CHANNEL_BAN](docs/cmsg_channel_ban.md)
 - [CMSG_CHANNEL_DISPLAY_LIST](docs/cmsg_channel_display_list.md)

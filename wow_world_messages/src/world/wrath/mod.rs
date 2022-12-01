@@ -100,6 +100,8 @@ pub(crate) mod cmsg_calendar_update_event;
 pub use cmsg_calendar_update_event::*;
 pub(crate) mod cmsg_cast_spell;
 pub use cmsg_cast_spell::*;
+pub(crate) mod cmsg_change_seats_on_controlled_vehicle;
+pub use cmsg_change_seats_on_controlled_vehicle::*;
 pub(crate) mod cmsg_channel_display_list;
 pub use cmsg_channel_display_list::*;
 pub(crate) mod cmsg_channel_voice_on;

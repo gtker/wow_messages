@@ -1,0 +1,8 @@
+cmsg CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE = 0x049B {
+    PackedGuid vehicle;
+    MovementInfo info;
+    PackedGuid accessory;
+    u8 seat;
+} {
+    versions = "3.3.5";
+}
