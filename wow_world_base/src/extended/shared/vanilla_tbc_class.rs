@@ -1,4 +1,4 @@
-use crate::vanilla::{Class, Power};
+use crate::vanilla::{Class, InventoryType, Power};
 
 impl Class {
     pub const fn power_type(&self) -> Power {
@@ -13,5 +13,17 @@ impl Class {
             | Class::Warlock
             | Class::Druid => Power::Mana,
         }
+    }
+}
+
+impl crate::vanilla::RaceClass {
+    pub const fn power_type(&self) -> Power {
+        self.to_race_class().1.power_type()
+    }
+}
+
+impl crate::tbc::RaceClass {
+    pub const fn power_type(&self) -> Power {
+        self.class().power_type()
     }
 }

@@ -50,3 +50,31 @@ impl crate::tbc::PlayerRace {
         }
     }
 }
+
+impl crate::tbc::RaceClass {
+    pub const fn display_id(&self, gender: PlayerGender) -> i32 {
+        self.race().display_id(gender)
+    }
+
+    pub const fn faction_id(&self) -> i32 {
+        self.race().faction_id()
+    }
+
+    pub const fn race_scale(&self, gender: PlayerGender) -> f32 {
+        self.race().race_scale(gender)
+    }
+}
+
+impl crate::wrath::RaceClass {
+    pub const fn display_id(&self, gender: PlayerGender) -> i32 {
+        self.race().display_id(gender)
+    }
+
+    pub const fn faction_id(&self) -> i32 {
+        self.race().faction_id()
+    }
+
+    pub const fn race_scale(&self, gender: PlayerGender) -> f32 {
+        self.race().race_scale(gender)
+    }
+}

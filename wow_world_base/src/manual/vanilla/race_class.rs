@@ -50,6 +50,14 @@ pub enum RaceClass {
 }
 
 impl RaceClass {
+    pub const fn race(&self) -> PlayerRace {
+        self.to_race_class().0
+    }
+
+    pub const fn class(&self) -> Class {
+        self.to_race_class().1
+    }
+
     pub const fn to_race_class(&self) -> (PlayerRace, Class) {
         match self {
             RaceClass::DwarfHunter => (PlayerRace::Dwarf, Class::Hunter),

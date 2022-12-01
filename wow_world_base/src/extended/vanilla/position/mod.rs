@@ -21,4 +21,10 @@ impl PlayerRace {
     }
 }
 
+impl crate::vanilla::RaceClass {
+    pub const fn starting_position(&self) -> Position {
+        self.race().starting_position()
+    }
+}
+
 vanilla_starter_positions!();

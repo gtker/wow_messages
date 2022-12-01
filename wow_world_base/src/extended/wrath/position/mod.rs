@@ -29,6 +29,12 @@ impl PlayerRace {
     }
 }
 
+impl crate::wrath::RaceClass {
+    pub const fn starting_position(&self) -> Position {
+        self.race().wrath_starting_position(self.class())
+    }
+}
+
 vanilla_starter_positions!();
 
 tbc_starter_positions!();

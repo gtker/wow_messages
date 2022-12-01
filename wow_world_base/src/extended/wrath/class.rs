@@ -16,3 +16,9 @@ impl Class {
         }
     }
 }
+
+impl crate::wrath::RaceClass {
+    pub const fn power_type(&self) -> Power {
+        self.to_race_class().1.power_type()
+    }
+}

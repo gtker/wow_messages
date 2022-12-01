@@ -1,5 +1,5 @@
 use crate::manual::PlayerGender;
-use crate::vanilla::PlayerRace;
+use crate::vanilla::{PlayerRace, RaceClass};
 
 impl PlayerRace {
     pub const fn display_id(&self, gender: PlayerGender) -> i32 {
@@ -41,5 +41,19 @@ impl PlayerRace {
             (Self::Tauren, PlayerGender::Female) => 1.25,
             (_, _) => 1.0,
         }
+    }
+}
+
+impl RaceClass {
+    pub const fn display_id(&self, gender: PlayerGender) -> i32 {
+        self.to_race_class().0.display_id(gender)
+    }
+
+    pub const fn faction_id(&self) -> i32 {
+        self.to_race_class().0.faction_id()
+    }
+
+    pub const fn race_scale(&self, gender: PlayerGender) -> f32 {
+        self.to_race_class().0.race_scale(gender)
     }
 }
