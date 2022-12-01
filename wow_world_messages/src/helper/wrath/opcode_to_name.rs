@@ -938,7 +938,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04d9 => "CMSG_CHAR_FACTION_CHANGE",
         0x04da => "SMSG_CHAR_FACTION_CHANGE",
         0x04dc => "SMSG_PVP_QUEUE_STATS",
-        0x04dd => "CMSG_SET_PAID_SERVICE_CHEAT",
         0x04de => "SMSG_BATTLEFIELD_MGR_ENTRY_INVITE",
         0x04df => "CMSG_BATTLEFIELD_MGR_ENTRY_INVITE_RESPONSE",
         0x04e0 => "SMSG_BATTLEFIELD_MGR_ENTERED",
