@@ -899,7 +899,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x049e => "SMSG_CRITERIA_DELETED",
         0x049f => "SMSG_ACHIEVEMENT_DELETED",
         0x04a1 => "SMSG_SERVER_INFO_RESPONSE",
-        0x04a2 => "CMSG_CHECK_LOGIN_CRITERIA",
         0x04a3 => "SMSG_SERVER_BUCK_DATA_START",
         0x04a4 => "CMSG_SET_BREATH",
         0x04a5 => "CMSG_QUERY_VEHICLE_STATUS",
