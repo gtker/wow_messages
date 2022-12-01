@@ -949,7 +949,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04e7 => "CMSG_BATTLEFIELD_MGR_EXIT_REQUEST",
         0x04e8 => "SMSG_BATTLEFIELD_MGR_STATE_CHANGE",
         0x04eb => "MSG_SET_RAID_DIFFICULTY",
-        0x04ec => "CMSG_TOGGLE_XP_GAIN",
         0x04ed => "SMSG_TOGGLE_XP_GAIN",
         0x04ee => "SMSG_GMRESPONSE_DB_ERROR",
         0x04ef => "SMSG_GMRESPONSE_RECEIVED",
