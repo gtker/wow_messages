@@ -1,0 +1,13 @@
+cmsg CMSG_CHAR_FACTION_CHANGE = 0x04D9 {
+    Guid guid;
+    CString name;
+    Gender gender;
+    u8 skin_color;
+    u8 hair_color;
+    u8 hair_style;
+    u8 facial_hair;
+    u8 face;
+    Race race;
+} {
+    versions = "3.3.5";
+}

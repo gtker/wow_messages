@@ -161,6 +161,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)
+* [CMSG_CHAR_FACTION_CHANGE](cmsg_char_faction_change.md)
 * [Character](character.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [WhoPlayer](whoplayer.md)

@@ -336,6 +336,7 @@
 - [CMSG_CHAR_CUSTOMIZE](docs/cmsg_char_customize.md)
 - [CMSG_CHAR_DELETE](docs/cmsg_char_delete.md)
 - [CMSG_CHAR_ENUM](docs/cmsg_char_enum.md)
+- [CMSG_CHAR_FACTION_CHANGE](docs/cmsg_char_faction_change.md)
 - [CMSG_CHAR_RENAME](docs/cmsg_char_rename.md)
 - [CMSG_CHAT_IGNORED](docs/cmsg_chat_ignored.md)
 - [CMSG_CLEAR_CHANNEL_WATCH](docs/cmsg_clear_channel_watch.md)
