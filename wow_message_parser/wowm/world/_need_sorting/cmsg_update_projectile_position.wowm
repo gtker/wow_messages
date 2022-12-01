@@ -1,0 +1,8 @@
+cmsg CMSG_UPDATE_PROJECTILE_POSITION = 0x04BE {
+    Guid caster;
+    Spell spell;
+    u8 cast_count;
+    Vector3d position;
+} {
+    versions = "3.3.5";
+}
