@@ -477,6 +477,7 @@
 - [CMSG_MOVE_FALL_RESET](docs/cmsg_move_fall_reset.md)
 - [CMSG_MOVE_FEATHER_FALL_ACK](docs/cmsg_move_feather_fall_ack.md)
 - [CMSG_MOVE_GRAVITY_DISABLE_ACK](docs/cmsg_move_gravity_disable_ack.md)
+- [CMSG_MOVE_GRAVITY_ENABLE_ACK](docs/cmsg_move_gravity_enable_ack.md)
 - [CMSG_MOVE_HOVER_ACK](docs/cmsg_move_hover_ack.md)
 - [CMSG_MOVE_KNOCK_BACK_ACK](docs/cmsg_move_knock_back_ack.md)
 - [CMSG_MOVE_NOT_ACTIVE_MOVER](docs/cmsg_move_not_active_mover.md)
