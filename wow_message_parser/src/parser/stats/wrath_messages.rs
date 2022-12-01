@@ -938,7 +938,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_SPLINE_MOVE_GRAVITY_ENABLE", 0x4D4),
     Data::new("CMSG_EQUIPMENT_SET_USE", 0x4D5),
     Data::new("SMSG_EQUIPMENT_SET_USE_RESULT", 0x4D6),
-    Data::new("CMSG_FORCE_ANIM", 0x4D7),
     Data::new("SMSG_FORCE_ANIM", 0x4D8),
     Data::new("CMSG_CHAR_FACTION_CHANGE", 0x4D9),
     Data::new("SMSG_CHAR_FACTION_CHANGE", 0x4DA),
