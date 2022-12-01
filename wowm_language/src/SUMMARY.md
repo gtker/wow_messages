@@ -275,6 +275,7 @@
 - [CMSG_BANKER_ACTIVATE](docs/cmsg_banker_activate.md)
 - [CMSG_BATTLEFIELD_JOIN](docs/cmsg_battlefield_join.md)
 - [CMSG_BATTLEFIELD_LIST](docs/cmsg_battlefield_list.md)
+- [CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE](docs/cmsg_battlefield_mgr_queue_invite_response.md)
 - [CMSG_BATTLEFIELD_PORT](docs/cmsg_battlefield_port.md)
 - [CMSG_BATTLEFIELD_STATUS](docs/cmsg_battlefield_status.md)
 - [CMSG_BATTLEMASTER_HELLO](docs/cmsg_battlemaster_hello.md)
