@@ -912,8 +912,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04b5 => "SMSG_ITEM_REFUND_RESULT",
         0x04b6 => "CMSG_CORPSE_MAP_POSITION_QUERY",
         0x04b7 => "SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE",
-        0x04b8 => "CMSG_UNUSED5",
-        0x04b9 => "CMSG_UNUSED6",
         0x04ba => "CMSG_CALENDAR_EVENT_SIGNUP",
         0x04bb => "SMSG_CALENDAR_CLEAR_PENDING_ACTION",
         0x04bc => "SMSG_EQUIPMENT_SET_LIST",

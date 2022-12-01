@@ -916,8 +916,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_ITEM_REFUND_RESULT", 0x4B5),
     Data::new("CMSG_CORPSE_MAP_POSITION_QUERY", 0x4B6),
     Data::new("SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE", 0x4B7),
-    Data::new("CMSG_UNUSED5", 0x4B8),
-    Data::new("CMSG_UNUSED6", 0x4B9),
     Data::new("CMSG_CALENDAR_EVENT_SIGNUP", 0x4BA),
     Data::new("SMSG_CALENDAR_CLEAR_PENDING_ACTION", 0x4BB),
     Data::new("SMSG_EQUIPMENT_SET_LIST", 0x4BC),
