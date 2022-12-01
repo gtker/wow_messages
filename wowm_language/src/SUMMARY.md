@@ -528,6 +528,7 @@
 - [CMSG_REQUEST_PET_INFO](docs/cmsg_request_pet_info.md)
 - [CMSG_REQUEST_RAID_INFO](docs/cmsg_request_raid_info.md)
 - [CMSG_REQUEST_VEHICLE_EXIT](docs/cmsg_request_vehicle_exit.md)
+- [CMSG_REQUEST_VEHICLE_NEXT_SEAT](docs/cmsg_request_vehicle_next_seat.md)
 - [CMSG_REQUEST_VEHICLE_PREV_SEAT](docs/cmsg_request_vehicle_prev_seat.md)
 - [CMSG_RESET_INSTANCES](docs/cmsg_reset_instances.md)
 - [CMSG_RESURRECT_RESPONSE](docs/cmsg_resurrect_response.md)

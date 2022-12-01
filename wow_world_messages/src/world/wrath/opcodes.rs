@@ -412,6 +412,7 @@ use crate::world::wrath::CMSG_DISMISS_CONTROLLED_VEHICLE;
 use crate::world::wrath::CMSG_CHAR_CUSTOMIZE;
 use crate::world::wrath::CMSG_REQUEST_VEHICLE_EXIT;
 use crate::world::wrath::CMSG_REQUEST_VEHICLE_PREV_SEAT;
+use crate::world::wrath::CMSG_REQUEST_VEHICLE_NEXT_SEAT;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -820,6 +821,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CHAR_CUSTOMIZE(CMSG_CHAR_CUSTOMIZE),
     CMSG_REQUEST_VEHICLE_EXIT(CMSG_REQUEST_VEHICLE_EXIT),
     CMSG_REQUEST_VEHICLE_PREV_SEAT(CMSG_REQUEST_VEHICLE_PREV_SEAT),
+    CMSG_REQUEST_VEHICLE_NEXT_SEAT(CMSG_REQUEST_VEHICLE_NEXT_SEAT),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1230,6 +1232,7 @@ impl ClientOpcodeMessage {
             0x0473 => Ok(Self::CMSG_CHAR_CUSTOMIZE(<CMSG_CHAR_CUSTOMIZE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0473, size: body_size, io, } } else { a } })?)),
             0x0476 => Ok(Self::CMSG_REQUEST_VEHICLE_EXIT(<CMSG_REQUEST_VEHICLE_EXIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0476, size: body_size, io, } } else { a } })?)),
             0x0477 => Ok(Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(<CMSG_REQUEST_VEHICLE_PREV_SEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0477, size: body_size, io, } } else { a } })?)),
+            0x0478 => Ok(Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(<CMSG_REQUEST_VEHICLE_NEXT_SEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0478, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1708,6 +1711,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2119,6 +2123,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2530,6 +2535,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -2941,6 +2947,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3352,6 +3359,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3763,6 +3771,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4185,6 +4194,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CHAR_CUSTOMIZE(_) => "CMSG_CHAR_CUSTOMIZE",
             ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_EXIT(_) => "CMSG_REQUEST_VEHICLE_EXIT",
             ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_PREV_SEAT(_) => "CMSG_REQUEST_VEHICLE_PREV_SEAT",
+            ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_NEXT_SEAT(_) => "CMSG_REQUEST_VEHICLE_NEXT_SEAT",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6606,6 +6616,12 @@ impl From<CMSG_REQUEST_VEHICLE_EXIT> for ClientOpcodeMessage {
 impl From<CMSG_REQUEST_VEHICLE_PREV_SEAT> for ClientOpcodeMessage {
     fn from(c: CMSG_REQUEST_VEHICLE_PREV_SEAT) -> Self {
         Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c)
+    }
+}
+
+impl From<CMSG_REQUEST_VEHICLE_NEXT_SEAT> for ClientOpcodeMessage {
+    fn from(c: CMSG_REQUEST_VEHICLE_NEXT_SEAT) -> Self {
+        Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c)
     }
 }
 

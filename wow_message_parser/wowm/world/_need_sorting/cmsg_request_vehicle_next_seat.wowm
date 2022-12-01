@@ -1,0 +1,3 @@
+cmsg CMSG_REQUEST_VEHICLE_NEXT_SEAT = 0x0478 {} {
+    versions = "3.3.5";
+}
