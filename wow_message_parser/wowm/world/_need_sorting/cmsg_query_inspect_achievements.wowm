@@ -1,0 +1,5 @@
+cmsg CMSG_QUERY_INSPECT_ACHIEVEMENTS = 0x046B {
+    PackedGuid player;
+} {
+    versions = "3.3.5";
+}

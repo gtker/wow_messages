@@ -497,6 +497,7 @@
 - [CMSG_PLAYER_LOGIN](docs/cmsg_player_login.md)
 - [CMSG_PLAYER_LOGOUT](docs/cmsg_player_logout.md)
 - [CMSG_PUSHQUESTTOPARTY](docs/cmsg_pushquesttoparty.md)
+- [CMSG_QUERY_INSPECT_ACHIEVEMENTS](docs/cmsg_query_inspect_achievements.md)
 - [CMSG_QUERY_TIME](docs/cmsg_query_time.md)
 - [CMSG_QUESTGIVER_ACCEPT_QUEST](docs/cmsg_questgiver_accept_quest.md)
 - [CMSG_QUESTGIVER_CANCEL](docs/cmsg_questgiver_cancel.md)

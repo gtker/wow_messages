@@ -407,6 +407,7 @@ use crate::world::wrath::CMSG_CALENDAR_EVENT_MODERATOR_STATUS;
 use crate::world::wrath::CMSG_CALENDAR_COMPLAIN;
 use crate::world::wrath::CMSG_UPDATE_MISSILE_TRAJECTORY;
 use crate::world::wrath::CMSG_COMPLETE_MOVIE;
+use crate::world::wrath::CMSG_QUERY_INSPECT_ACHIEVEMENTS;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -810,6 +811,7 @@ pub enum ClientOpcodeMessage {
     CMSG_CALENDAR_COMPLAIN(CMSG_CALENDAR_COMPLAIN),
     CMSG_UPDATE_MISSILE_TRAJECTORY(CMSG_UPDATE_MISSILE_TRAJECTORY),
     CMSG_COMPLETE_MOVIE(CMSG_COMPLETE_MOVIE),
+    CMSG_QUERY_INSPECT_ACHIEVEMENTS(CMSG_QUERY_INSPECT_ACHIEVEMENTS),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1215,6 +1217,7 @@ impl ClientOpcodeMessage {
             0x0446 => Ok(Self::CMSG_CALENDAR_COMPLAIN(<CMSG_CALENDAR_COMPLAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0446, size: body_size, io, } } else { a } })?)),
             0x0462 => Ok(Self::CMSG_UPDATE_MISSILE_TRAJECTORY(<CMSG_UPDATE_MISSILE_TRAJECTORY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0462, size: body_size, io, } } else { a } })?)),
             0x0465 => Ok(Self::CMSG_COMPLETE_MOVIE(<CMSG_COMPLETE_MOVIE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0465, size: body_size, io, } } else { a } })?)),
+            0x046B => Ok(Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(<CMSG_QUERY_INSPECT_ACHIEVEMENTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x046B, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1688,6 +1691,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMPLETE_MOVIE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2094,6 +2098,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMPLETE_MOVIE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2500,6 +2505,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_MOVIE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -2906,6 +2912,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_MOVIE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3312,6 +3319,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLETE_MOVIE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3718,6 +3726,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMPLETE_MOVIE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4135,6 +4144,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CALENDAR_COMPLAIN(_) => "CMSG_CALENDAR_COMPLAIN",
             ClientOpcodeMessage::CMSG_UPDATE_MISSILE_TRAJECTORY(_) => "CMSG_UPDATE_MISSILE_TRAJECTORY",
             ClientOpcodeMessage::CMSG_COMPLETE_MOVIE(_) => "CMSG_COMPLETE_MOVIE",
+            ClientOpcodeMessage::CMSG_QUERY_INSPECT_ACHIEVEMENTS(_) => "CMSG_QUERY_INSPECT_ACHIEVEMENTS",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6526,6 +6536,12 @@ impl From<CMSG_UPDATE_MISSILE_TRAJECTORY> for ClientOpcodeMessage {
 impl From<CMSG_COMPLETE_MOVIE> for ClientOpcodeMessage {
     fn from(c: CMSG_COMPLETE_MOVIE) -> Self {
         Self::CMSG_COMPLETE_MOVIE(c)
+    }
+}
+
+impl From<CMSG_QUERY_INSPECT_ACHIEVEMENTS> for ClientOpcodeMessage {
+    fn from(c: CMSG_QUERY_INSPECT_ACHIEVEMENTS) -> Self {
+        Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c)
     }
 }
 

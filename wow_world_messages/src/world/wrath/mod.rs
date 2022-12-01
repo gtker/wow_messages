@@ -228,6 +228,8 @@ pub(crate) mod cmsg_petition_buy;
 pub use cmsg_petition_buy::*;
 pub(crate) mod cmsg_played_time;
 pub use cmsg_played_time::*;
+pub(crate) mod cmsg_query_inspect_achievements;
+pub use cmsg_query_inspect_achievements::*;
 pub(crate) mod cmsg_quest_poi_query;
 pub use cmsg_quest_poi_query::*;
 pub(crate) mod cmsg_questgiver_query_quest;
