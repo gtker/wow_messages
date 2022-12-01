@@ -906,7 +906,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04a9 => "CMSG_CONTROLLER_EJECT_PASSENGER",
         0x04aa => "SMSG_PET_GUIDS",
         0x04ab => "SMSG_CLIENTCACHE_VERSION",
-        0x04b1 => "CMSG_SET_ARENA_MEMBER_SEASON_GAMES",
         0x04b2 => "SMSG_ITEM_REFUND_INFO_RESPONSE",
         0x04b3 => "CMSG_ITEM_REFUND_INFO",
         0x04b4 => "CMSG_ITEM_REFUND",
