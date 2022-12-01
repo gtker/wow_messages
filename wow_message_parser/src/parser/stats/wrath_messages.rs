@@ -925,7 +925,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_TALENTS_INFO", 0x4C0),
     Data::new("CMSG_LEARN_PREVIEW_TALENTS", 0x4C1),
     Data::new("CMSG_LEARN_PREVIEW_TALENTS_PET", 0x4C2),
-    Data::new("CMSG_GM_SET_CRITERIA_FOR_PLAYER", 0x4C6),
     Data::new("SMSG_ARENA_UNIT_DESTROYED", 0x4C7),
     Data::new("SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED", 0x4C8),
     Data::new("CMSG_PROFILEDATA_REQUEST", 0x4C9),
