@@ -488,6 +488,7 @@
 - [CMSG_PET_ACTION](docs/cmsg_pet_action.md)
 - [CMSG_PET_CANCEL_AURA](docs/cmsg_pet_cancel_aura.md)
 - [CMSG_PET_CAST_SPELL](docs/cmsg_pet_cast_spell.md)
+- [CMSG_PET_LEARN_TALENT](docs/cmsg_pet_learn_talent.md)
 - [CMSG_PET_NAME_QUERY](docs/cmsg_pet_name_query.md)
 - [CMSG_PET_RENAME](docs/cmsg_pet_rename.md)
 - [CMSG_PET_SET_ACTION](docs/cmsg_pet_set_action.md)

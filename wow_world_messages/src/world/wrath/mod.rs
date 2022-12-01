@@ -228,6 +228,8 @@ pub(crate) mod cmsg_opt_out_of_loot;
 pub use cmsg_opt_out_of_loot::*;
 pub(crate) mod cmsg_pet_cast_spell;
 pub use cmsg_pet_cast_spell::*;
+pub(crate) mod cmsg_pet_learn_talent;
+pub use cmsg_pet_learn_talent::*;
 pub(crate) mod cmsg_petition_buy;
 pub use cmsg_petition_buy::*;
 pub(crate) mod cmsg_played_time;

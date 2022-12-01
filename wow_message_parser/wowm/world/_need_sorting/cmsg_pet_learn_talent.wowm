@@ -1,0 +1,7 @@
+cmsg CMSG_PET_LEARN_TALENT = 0x047A {
+    Guid pet;
+    u32 talent;
+    u32 rank;
+} {
+    versions = "3.3.5";
+}
