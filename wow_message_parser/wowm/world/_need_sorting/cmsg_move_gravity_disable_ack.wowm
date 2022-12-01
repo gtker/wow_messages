@@ -1,0 +1,7 @@
+cmsg CMSG_MOVE_GRAVITY_DISABLE_ACK = 0x04CF {
+    PackedGuid guid;
+    u32 unknown;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}

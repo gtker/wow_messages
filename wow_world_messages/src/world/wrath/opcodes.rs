@@ -432,6 +432,7 @@ use crate::world::wrath::CMSG_EQUIPMENT_SET_SAVE;
 use crate::world::wrath::CMSG_UPDATE_PROJECTILE_POSITION;
 use crate::world::wrath::CMSG_LEARN_PREVIEW_TALENTS;
 use crate::world::wrath::CMSG_LEARN_PREVIEW_TALENTS_PET;
+use crate::world::wrath::CMSG_MOVE_GRAVITY_DISABLE_ACK;
 use crate::world::wrath::CMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 
@@ -860,6 +861,7 @@ pub enum ClientOpcodeMessage {
     CMSG_UPDATE_PROJECTILE_POSITION(CMSG_UPDATE_PROJECTILE_POSITION),
     CMSG_LEARN_PREVIEW_TALENTS(CMSG_LEARN_PREVIEW_TALENTS),
     CMSG_LEARN_PREVIEW_TALENTS_PET(CMSG_LEARN_PREVIEW_TALENTS_PET),
+    CMSG_MOVE_GRAVITY_DISABLE_ACK(CMSG_MOVE_GRAVITY_DISABLE_ACK),
     CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
 }
@@ -1290,6 +1292,7 @@ impl ClientOpcodeMessage {
             0x04BE => Ok(Self::CMSG_UPDATE_PROJECTILE_POSITION(<CMSG_UPDATE_PROJECTILE_POSITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BE, size: body_size, io, } } else { a } })?)),
             0x04C1 => Ok(Self::CMSG_LEARN_PREVIEW_TALENTS(<CMSG_LEARN_PREVIEW_TALENTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04C1, size: body_size, io, } } else { a } })?)),
             0x04C2 => Ok(Self::CMSG_LEARN_PREVIEW_TALENTS_PET(<CMSG_LEARN_PREVIEW_TALENTS_PET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04C2, size: body_size, io, } } else { a } })?)),
+            0x04CF => Ok(Self::CMSG_MOVE_GRAVITY_DISABLE_ACK(<CMSG_MOVE_GRAVITY_DISABLE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04CF, size: body_size, io, } } else { a } })?)),
             0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1788,6 +1791,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LEARN_PREVIEW_TALENTS_PET(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_GRAVITY_DISABLE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
         }
@@ -2219,6 +2223,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.write_unencrypted_client(w),
             Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.write_unencrypted_client(w),
             Self::CMSG_LEARN_PREVIEW_TALENTS_PET(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_GRAVITY_DISABLE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
         }
@@ -2650,6 +2655,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LEARN_PREVIEW_TALENTS_PET(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_GRAVITY_DISABLE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -3081,6 +3087,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LEARN_PREVIEW_TALENTS_PET(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_GRAVITY_DISABLE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3512,6 +3519,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LEARN_PREVIEW_TALENTS_PET(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_GRAVITY_DISABLE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3943,6 +3951,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_UPDATE_PROJECTILE_POSITION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LEARN_PREVIEW_TALENTS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LEARN_PREVIEW_TALENTS_PET(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_GRAVITY_DISABLE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4385,6 +4394,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_UPDATE_PROJECTILE_POSITION(_) => "CMSG_UPDATE_PROJECTILE_POSITION",
             ClientOpcodeMessage::CMSG_LEARN_PREVIEW_TALENTS(_) => "CMSG_LEARN_PREVIEW_TALENTS",
             ClientOpcodeMessage::CMSG_LEARN_PREVIEW_TALENTS_PET(_) => "CMSG_LEARN_PREVIEW_TALENTS_PET",
+            ClientOpcodeMessage::CMSG_MOVE_GRAVITY_DISABLE_ACK(_) => "CMSG_MOVE_GRAVITY_DISABLE_ACK",
             ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
         })
@@ -6926,6 +6936,12 @@ impl From<CMSG_LEARN_PREVIEW_TALENTS> for ClientOpcodeMessage {
 impl From<CMSG_LEARN_PREVIEW_TALENTS_PET> for ClientOpcodeMessage {
     fn from(c: CMSG_LEARN_PREVIEW_TALENTS_PET) -> Self {
         Self::CMSG_LEARN_PREVIEW_TALENTS_PET(c)
+    }
+}
+
+impl From<CMSG_MOVE_GRAVITY_DISABLE_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_GRAVITY_DISABLE_ACK) -> Self {
+        Self::CMSG_MOVE_GRAVITY_DISABLE_ACK(c)
     }
 }
 
