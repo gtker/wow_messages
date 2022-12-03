@@ -28,6 +28,7 @@ Used in:
 * [CMSG_CHAR_CREATE](cmsg_char_create.md)
 * [CMSG_CHAR_CUSTOMIZE](cmsg_char_customize.md)
 * [CMSG_CHAR_FACTION_CHANGE](cmsg_char_faction_change.md)
+* [CMSG_CHAR_RACE_CHANGE](cmsg_char_race_change.md)
 * [Character](character.md)
 * [Character](character.md)
 * [Character](character.md)

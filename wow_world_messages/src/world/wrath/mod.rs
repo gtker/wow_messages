@@ -120,6 +120,8 @@ pub(crate) mod cmsg_char_customize;
 pub use cmsg_char_customize::*;
 pub(crate) mod cmsg_char_faction_change;
 pub use cmsg_char_faction_change::*;
+pub(crate) mod cmsg_char_race_change;
+pub use cmsg_char_race_change::*;
 pub(crate) mod cmsg_clear_channel_watch;
 pub use cmsg_clear_channel_watch::*;
 pub(crate) mod cmsg_commentator_enable;

@@ -1,0 +1,13 @@
+cmsg CMSG_CHAR_RACE_CHANGE = 0x04F8 {
+    Guid player;
+    CString name;
+    Gender gender;
+    u8 skin_color;
+    u8 hair_color;
+    u8 hair_style;
+    u8 facial_hair;
+    u8 face;
+    Race race;
+} {
+    versions = "3.3.5";
+}
