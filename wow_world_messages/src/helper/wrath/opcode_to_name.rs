@@ -979,7 +979,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0516 => "SMSG_MOVE_SET_COLLISION_HGT",
         0x0517 => "CMSG_MOVE_SET_COLLISION_HGT_ACK",
         0x0518 => "MSG_MOVE_SET_COLLISION_HGT",
-        0x0519 => "CMSG_CLEAR_RANDOM_BG_WIN_TIME",
         0x051a => "CMSG_CLEAR_HOLIDAY_BG_WIN_TIME",
         0x051b => "CMSG_COMMENTATOR_SKIRMISH_QUEUE_COMMAND",
         0x051c => "SMSG_COMMENTATOR_SKIRMISH_QUEUE_RESULT1",
