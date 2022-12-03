@@ -491,6 +491,7 @@
 - [CMSG_MOVE_NOT_ACTIVE_MOVER](docs/cmsg_move_not_active_mover.md)
 - [CMSG_MOVE_SET_CAN_FLY_ACK](docs/cmsg_move_set_can_fly_ack.md)
 - [CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK](docs/cmsg_move_set_can_transition_between_swim_and_fly_ack.md)
+- [CMSG_MOVE_SET_COLLISION_HGT_ACK](docs/cmsg_move_set_collision_hgt_ack.md)
 - [CMSG_MOVE_SET_FLY](docs/cmsg_move_set_fly.md)
 - [CMSG_MOVE_SET_RAW_POSITION](docs/cmsg_move_set_raw_position.md)
 - [CMSG_MOVE_SPLINE_DONE](docs/cmsg_move_spline_done.md)

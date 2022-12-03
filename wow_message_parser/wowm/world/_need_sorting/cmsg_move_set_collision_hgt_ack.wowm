@@ -1,0 +1,8 @@
+cmsg CMSG_MOVE_SET_COLLISION_HGT_ACK = 0x0517 {
+    PackedGuid player;
+    u32 movement_counter;
+    MovementInfo info;
+    f32 new_height;
+} {
+    versions = "3.3.5";
+}

@@ -264,6 +264,8 @@ pub(crate) mod cmsg_move_set_can_fly_ack;
 pub use cmsg_move_set_can_fly_ack::*;
 pub(crate) mod cmsg_move_set_can_transition_between_swim_and_fly_ack;
 pub use cmsg_move_set_can_transition_between_swim_and_fly_ack::*;
+pub(crate) mod cmsg_move_set_collision_hgt_ack;
+pub use cmsg_move_set_collision_hgt_ack::*;
 pub(crate) mod cmsg_move_set_fly;
 pub use cmsg_move_set_fly::*;
 pub(crate) mod cmsg_move_spline_done;

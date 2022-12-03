@@ -445,6 +445,7 @@ use crate::world::wrath::CMSG_CHAR_RACE_CHANGE;
 use crate::world::wrath::CMSG_READY_FOR_ACCOUNT_DATA_TIMES;
 use crate::world::wrath::CMSG_QUERY_QUESTS_COMPLETED;
 use crate::world::wrath::CMSG_GM_REPORT_LAG;
+use crate::world::wrath::CMSG_MOVE_SET_COLLISION_HGT_ACK;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
@@ -884,6 +885,7 @@ pub enum ClientOpcodeMessage {
     CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
     CMSG_QUERY_QUESTS_COMPLETED(CMSG_QUERY_QUESTS_COMPLETED),
     CMSG_GM_REPORT_LAG(CMSG_GM_REPORT_LAG),
+    CMSG_MOVE_SET_COLLISION_HGT_ACK(CMSG_MOVE_SET_COLLISION_HGT_ACK),
 }
 
 impl ClientOpcodeMessage {
@@ -1325,6 +1327,7 @@ impl ClientOpcodeMessage {
             0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
             0x0500 => Ok(Self::CMSG_QUERY_QUESTS_COMPLETED(<CMSG_QUERY_QUESTS_COMPLETED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0500, size: body_size, io, } } else { a } })?)),
             0x0502 => Ok(Self::CMSG_GM_REPORT_LAG(<CMSG_GM_REPORT_LAG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0502, size: body_size, io, } } else { a } })?)),
+            0x0517 => Ok(Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(<CMSG_MOVE_SET_COLLISION_HGT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0517, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
         }
     }
@@ -1834,6 +1837,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GM_REPORT_LAG(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.write_encrypted_client(w, e),
         }
     }
 
@@ -2276,6 +2280,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.write_unencrypted_client(w),
             Self::CMSG_GM_REPORT_LAG(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.write_unencrypted_client(w),
         }
     }
 
@@ -2718,6 +2723,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GM_REPORT_LAG(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
         }
     }
 
@@ -3160,6 +3166,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GM_REPORT_LAG(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
         }
     }
 
@@ -3602,6 +3609,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GM_REPORT_LAG(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
         }
     }
 
@@ -4044,6 +4052,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GM_REPORT_LAG(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.astd_write_unencrypted_client(w).await,
         }
     }
 
@@ -4497,6 +4506,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
             ClientOpcodeMessage::CMSG_QUERY_QUESTS_COMPLETED(_) => "CMSG_QUERY_QUESTS_COMPLETED",
             ClientOpcodeMessage::CMSG_GM_REPORT_LAG(_) => "CMSG_GM_REPORT_LAG",
+            ClientOpcodeMessage::CMSG_MOVE_SET_COLLISION_HGT_ACK(_) => "CMSG_MOVE_SET_COLLISION_HGT_ACK",
         })
     }
 }
@@ -7114,6 +7124,12 @@ impl From<CMSG_QUERY_QUESTS_COMPLETED> for ClientOpcodeMessage {
 impl From<CMSG_GM_REPORT_LAG> for ClientOpcodeMessage {
     fn from(c: CMSG_GM_REPORT_LAG) -> Self {
         Self::CMSG_GM_REPORT_LAG(c)
+    }
+}
+
+impl From<CMSG_MOVE_SET_COLLISION_HGT_ACK> for ClientOpcodeMessage {
+    fn from(c: CMSG_MOVE_SET_COLLISION_HGT_ACK) -> Self {
+        Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c)
     }
 }
 
