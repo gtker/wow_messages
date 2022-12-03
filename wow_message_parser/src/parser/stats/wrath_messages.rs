@@ -973,8 +973,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_GM_REPORT_LAG", 0x502),
     Data::new("SMSG_AFK_MONITOR_INFO_RESPONSE", 0x504),
     Data::new("SMSG_CORPSE_NOT_IN_INSTANCE", 0x506),
-    Data::new("CMSG_SET_ALLOW_LOW_LEVEL_RAID1", 0x508),
-    Data::new("CMSG_SET_ALLOW_LOW_LEVEL_RAID2", 0x509),
     Data::new("SMSG_CAMERA_SHAKE", 0x50A),
     Data::new("SMSG_SOCKET_GEMS_RESULT", 0x50B),
     Data::new("CMSG_SET_CHARACTER_MODEL", 0x50C),
