@@ -1,0 +1,7 @@
+cmsg CMSG_GM_REPORT_LAG = 0x0502 {
+    u32 lag_type;
+    Map map;
+    Vector3d position;
+} {
+    versions = "3.3.5";
+}

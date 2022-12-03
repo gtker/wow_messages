@@ -392,6 +392,7 @@
 - [CMSG_GMTICKET_GETTICKET](docs/cmsg_gmticket_getticket.md)
 - [CMSG_GMTICKET_SYSTEMSTATUS](docs/cmsg_gmticket_systemstatus.md)
 - [CMSG_GMTICKET_UPDATETEXT](docs/cmsg_gmticket_updatetext.md)
+- [CMSG_GM_REPORT_LAG](docs/cmsg_gm_report_lag.md)
 - [CMSG_GOSSIP_HELLO](docs/cmsg_gossip_hello.md)
 - [CMSG_GOSSIP_SELECT_OPTION](docs/cmsg_gossip_select_option.md)
 - [CMSG_GRANT_LEVEL](docs/cmsg_grant_level.md)

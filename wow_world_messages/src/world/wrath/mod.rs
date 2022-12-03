@@ -174,6 +174,8 @@ pub(crate) mod cmsg_get_channel_member_count;
 pub use cmsg_get_channel_member_count::*;
 pub(crate) mod cmsg_get_mirrorimage_data;
 pub use cmsg_get_mirrorimage_data::*;
+pub(crate) mod cmsg_gm_report_lag;
+pub use cmsg_gm_report_lag::*;
 pub(crate) mod cmsg_gmresponse_resolve;
 pub use cmsg_gmresponse_resolve::*;
 pub(crate) mod cmsg_gmticket_create;
