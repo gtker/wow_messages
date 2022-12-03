@@ -284,6 +284,8 @@ pub(crate) mod cmsg_player_vehicle_enter;
 pub use cmsg_player_vehicle_enter::*;
 pub(crate) mod cmsg_query_inspect_achievements;
 pub use cmsg_query_inspect_achievements::*;
+pub(crate) mod cmsg_query_quests_completed;
+pub use cmsg_query_quests_completed::*;
 pub(crate) mod cmsg_quest_poi_query;
 pub use cmsg_quest_poi_query::*;
 pub(crate) mod cmsg_questgiver_query_quest;

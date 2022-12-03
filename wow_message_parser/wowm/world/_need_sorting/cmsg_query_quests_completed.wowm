@@ -1,0 +1,3 @@
+cmsg CMSG_QUERY_QUESTS_COMPLETED = 0x0500 {} {
+    versions = "3.3.5";
+}
