@@ -961,7 +961,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04f8 => "CMSG_CHAR_RACE_CHANGE",
         0x04f9 => "MSG_VIEW_PHASE_SHIFT",
         0x04fa => "SMSG_TALENTS_INVOLUNTARILY_RESET",
-        0x04fb => "CMSG_DEBUG_SERVER_GEO",
         0x04fc => "SMSG_DEBUG_SERVER_GEO",
         0x04fd => "SMSG_LOOT_SLOT_CHANGED",
         0x04ff => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",

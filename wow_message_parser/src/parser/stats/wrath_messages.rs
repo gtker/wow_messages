@@ -965,7 +965,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_CHAR_RACE_CHANGE", 0x4F8),
     Data::new("MSG_VIEW_PHASE_SHIFT", 0x4F9),
     Data::new("SMSG_TALENTS_INVOLUNTARILY_RESET", 0x4FA),
-    Data::new("CMSG_DEBUG_SERVER_GEO", 0x4FB),
     Data::new("SMSG_DEBUG_SERVER_GEO", 0x4FC),
     Data::new("SMSG_LOOT_SLOT_CHANGED", 0x4FD),
     Data::new("CMSG_READY_FOR_ACCOUNT_DATA_TIMES", 0x4FF),
