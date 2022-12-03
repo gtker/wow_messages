@@ -978,7 +978,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_REDIRECT_CLIENT", 0x50D),
     Data::new("SMSG_SUSPEND_COMMS", 0x50F),
     Data::new("SMSG_FORCE_SEND_QUEUED_PACKETS", 0x511),
-    Data::new("CMSG_REDIRECTION_AUTH_PROOF", 0x512),
     Data::new("CMSG_DROP_NEW_CONNECTION", 0x513),
     Data::new("SMSG_SEND_ALL_COMBAT_LOG", 0x514),
     Data::new("SMSG_OPEN_LFG_DUNGEON_FINDER", 0x515),
