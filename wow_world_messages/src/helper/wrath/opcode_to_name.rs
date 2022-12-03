@@ -969,7 +969,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0502 => "CMSG_GM_REPORT_LAG",
         0x0504 => "SMSG_AFK_MONITOR_INFO_RESPONSE",
         0x0506 => "SMSG_CORPSE_NOT_IN_INSTANCE",
-        0x0507 => "CMSG_GM_NUKE_CHARACTER",
         0x0508 => "CMSG_SET_ALLOW_LOW_LEVEL_RAID1",
         0x0509 => "CMSG_SET_ALLOW_LOW_LEVEL_RAID2",
         0x050a => "SMSG_CAMERA_SHAKE",
