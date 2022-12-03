@@ -976,7 +976,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_CAMERA_SHAKE", 0x50A),
     Data::new("SMSG_SOCKET_GEMS_RESULT", 0x50B),
     Data::new("SMSG_REDIRECT_CLIENT", 0x50D),
-    Data::new("CMSG_REDIRECTION_FAILED", 0x50E),
     Data::new("SMSG_SUSPEND_COMMS", 0x50F),
     Data::new("CMSG_SUSPEND_COMMS_ACK", 0x510),
     Data::new("SMSG_FORCE_SEND_QUEUED_PACKETS", 0x511),

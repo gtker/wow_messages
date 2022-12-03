@@ -972,7 +972,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x050a => "SMSG_CAMERA_SHAKE",
         0x050b => "SMSG_SOCKET_GEMS_RESULT",
         0x050d => "SMSG_REDIRECT_CLIENT",
-        0x050e => "CMSG_REDIRECTION_FAILED",
         0x050f => "SMSG_SUSPEND_COMMS",
         0x0510 => "CMSG_SUSPEND_COMMS_ACK",
         0x0511 => "SMSG_FORCE_SEND_QUEUED_PACKETS",
