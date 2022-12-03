@@ -967,7 +967,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0500 => "CMSG_QUERY_QUESTS_COMPLETED",
         0x0501 => "SMSG_QUERY_QUESTS_COMPLETED_RESPONSE",
         0x0502 => "CMSG_GM_REPORT_LAG",
-        0x0503 => "CMSG_AFK_MONITOR_INFO_REQUEST",
         0x0504 => "SMSG_AFK_MONITOR_INFO_RESPONSE",
         0x0505 => "CMSG_AFK_MONITOR_INFO_CLEAR",
         0x0506 => "SMSG_CORPSE_NOT_IN_INSTANCE",
