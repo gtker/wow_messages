@@ -971,7 +971,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0506 => "SMSG_CORPSE_NOT_IN_INSTANCE",
         0x050a => "SMSG_CAMERA_SHAKE",
         0x050b => "SMSG_SOCKET_GEMS_RESULT",
-        0x050c => "CMSG_SET_CHARACTER_MODEL",
         0x050d => "SMSG_REDIRECT_CLIENT",
         0x050e => "CMSG_REDIRECTION_FAILED",
         0x050f => "SMSG_SUSPEND_COMMS",
