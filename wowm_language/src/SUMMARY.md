@@ -701,6 +701,7 @@
 - [MSG_MOVE_SET_FLIGHT_SPEED_Server](docs/msg_move_set_flight_speed_server.md)
 - [MSG_MOVE_SET_PITCH](docs/msg_move_set_pitch.md)
 - [MSG_MOVE_SET_PITCH_Client](docs/msg_move_set_pitch_client.md)
+- [MSG_MOVE_SET_PITCH_RATE_Server](docs/msg_move_set_pitch_rate_server.md)
 - [MSG_MOVE_SET_PITCH_Server](docs/msg_move_set_pitch_server.md)
 - [MSG_MOVE_SET_RUN_MODE](docs/msg_move_set_run_mode.md)
 - [MSG_MOVE_SET_RUN_MODE_Client](docs/msg_move_set_run_mode_client.md)

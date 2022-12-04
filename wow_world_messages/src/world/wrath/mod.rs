@@ -447,6 +447,8 @@ pub(crate) mod msg_move_set_flight_speed_server;
 pub use msg_move_set_flight_speed_server::*;
 pub(crate) mod msg_move_set_pitch;
 pub use msg_move_set_pitch::*;
+pub(crate) mod msg_move_set_pitch_rate_server;
+pub use msg_move_set_pitch_rate_server::*;
 pub(crate) mod msg_move_set_run_mode;
 pub use msg_move_set_run_mode::*;
 pub(crate) mod msg_move_set_walk_mode;

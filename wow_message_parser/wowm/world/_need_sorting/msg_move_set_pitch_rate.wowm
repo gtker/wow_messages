@@ -1,0 +1,7 @@
+smsg MSG_MOVE_SET_PITCH_RATE_Server = 0x045B {
+    PackedGuid player;
+    MovementInfo info;
+    f32 new_speed;
+} {
+    versions = "3.3.5";
+}
