@@ -26,6 +26,8 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [CMSG_SET_SAVED_INSTANCE_EXTEND](cmsg_set_saved_instance_extend.md)
+* [MSG_SET_RAID_DIFFICULTY_Client](msg_set_raid_difficulty_client.md)
+* [MSG_SET_RAID_DIFFICULTY_Server](msg_set_raid_difficulty_server.md)
 * [SMSG_GROUP_LIST](smsg_group_list.md)
 * [SMSG_RAID_INSTANCE_MESSAGE](smsg_raid_instance_message.md)
 

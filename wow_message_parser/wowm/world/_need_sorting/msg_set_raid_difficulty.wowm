@@ -1,0 +1,15 @@
+cmsg MSG_SET_RAID_DIFFICULTY_Client = 0x04EB {
+    (u32)RaidDifficulty difficulty;
+} {
+    versions = "3.3.5";
+}
+
+smsg MSG_SET_RAID_DIFFICULTY_Server = 0x04EB {
+    (u32)RaidDifficulty difficulty;
+    u32 unknown1 {
+        comment = "Emus set to 1.";
+    }
+    Bool32 in_group;
+} {
+    versions = "3.3.5";
+}
