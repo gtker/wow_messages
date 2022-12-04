@@ -657,7 +657,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_MOVE_SET_FLY", 0x346),
     Data::new("CMSG_SOCKET_GEMS", 0x347),
     Data::new("SMSG_ARENA_TEAM_COMMAND_RESULT", 0x349),
-    Data::new("MSG_MOVE_UPDATE_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY", 0x34A),
     Data::new("SMSG_ARENA_TEAM_QUERY_RESPONSE", 0x34C),
     Data::new("CMSG_ARENA_TEAM_ROSTER", 0x34D),
     Data::new("SMSG_ARENA_TEAM_ROSTER", 0x34E),

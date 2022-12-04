@@ -653,7 +653,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0346 => "CMSG_MOVE_SET_FLY",
         0x0347 => "CMSG_SOCKET_GEMS",
         0x0349 => "SMSG_ARENA_TEAM_COMMAND_RESULT",
-        0x034a => "MSG_MOVE_UPDATE_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY",
         0x034c => "SMSG_ARENA_TEAM_QUERY_RESPONSE",
         0x034d => "CMSG_ARENA_TEAM_ROSTER",
         0x034e => "SMSG_ARENA_TEAM_ROSTER",
