@@ -972,7 +972,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0515 => "SMSG_OPEN_LFG_DUNGEON_FINDER",
         0x0516 => "SMSG_MOVE_SET_COLLISION_HGT",
         0x0517 => "CMSG_MOVE_SET_COLLISION_HGT_ACK",
-        0x0518 => "MSG_MOVE_SET_COLLISION_HGT",
         0x051c => "SMSG_COMMENTATOR_SKIRMISH_QUEUE_RESULT1",
         0x051d => "SMSG_COMMENTATOR_SKIRMISH_QUEUE_RESULT2",
         0x051e => "SMSG_MULTIPLE_MOVES",
