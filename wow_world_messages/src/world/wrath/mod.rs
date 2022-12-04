@@ -485,6 +485,8 @@ pub(crate) mod msg_move_water_walk;
 pub use msg_move_water_walk::*;
 pub(crate) mod msg_quest_push_result;
 pub use msg_quest_push_result::*;
+pub(crate) mod msg_raid_ready_check_finished_client;
+pub use msg_raid_ready_check_finished_client::*;
 pub(crate) mod msg_save_guild_emblem_server;
 pub use msg_save_guild_emblem_server::*;
 pub(crate) mod msg_set_dungeon_difficulty;

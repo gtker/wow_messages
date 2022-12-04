@@ -771,6 +771,7 @@
 - [MSG_RAID_READY_CHECK_CONFIRM_Client](docs/msg_raid_ready_check_confirm_client.md)
 - [MSG_RAID_READY_CHECK_CONFIRM_Server](docs/msg_raid_ready_check_confirm_server.md)
 - [MSG_RAID_READY_CHECK_Client](docs/msg_raid_ready_check_client.md)
+- [MSG_RAID_READY_CHECK_FINISHED_Client](docs/msg_raid_ready_check_finished_client.md)
 - [MSG_RAID_READY_CHECK_Server](docs/msg_raid_ready_check_server.md)
 - [MSG_RAID_TARGET_UPDATE_Client](docs/msg_raid_target_update_client.md)
 - [MSG_RAID_TARGET_UPDATE_Server](docs/msg_raid_target_update_server.md)
