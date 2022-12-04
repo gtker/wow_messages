@@ -1,0 +1,6 @@
+smsg MSG_MOVE_GRAVITY_CHNG_Server = 0x04D2 {
+    PackedGuid player;
+    MovementInfo info;
+} {
+    versions = "3.3.5";
+}

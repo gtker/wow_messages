@@ -429,6 +429,8 @@ pub(crate) mod msg_move_fall_land;
 pub use msg_move_fall_land::*;
 pub(crate) mod msg_move_feather_fall_server;
 pub use msg_move_feather_fall_server::*;
+pub(crate) mod msg_move_gravity_chng_server;
+pub use msg_move_gravity_chng_server::*;
 pub(crate) mod msg_move_heartbeat;
 pub use msg_move_heartbeat::*;
 pub(crate) mod msg_move_hover;
