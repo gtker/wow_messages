@@ -1,0 +1,34 @@
+cmsg MSG_GUILD_PERMISSIONS_Client = 0x03FC {} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_GUILD_PERMISSIONS_Client = 0x03FD {} {
+    versions = "3.3.5";
+}
+
+struct BankTab {
+    u32 flags;
+    u32 stacks_per_day;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg MSG_GUILD_PERMISSIONS_Server = 0x03FC {
+    u32 id;
+    u32 rights;
+    u32 gold_limit_per_day;
+    u8 purchased_bank_tabs;
+    BankTab[6] bank_tabs;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_GUILD_PERMISSIONS_Server = 0x03FD {
+    u32 id;
+    u32 rights;
+    u32 gold_limit_per_day;
+    u8 purchased_bank_tabs;
+    BankTab[6] bank_tabs;
+} {
+    versions = "3.3.5";
+}

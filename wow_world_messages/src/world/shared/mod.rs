@@ -11,6 +11,7 @@ pub mod auction_enchantment_tbc_wrath;
 pub mod auction_sort_tbc_wrath;
 pub mod bank_swap_source_tbc_wrath;
 pub mod bank_swap_store_mode_tbc_wrath;
+pub mod bank_tab_tbc_wrath;
 pub mod battlefield_port_action_vanilla_tbc_wrath;
 pub mod battleground_player_position_vanilla_tbc_wrath;
 pub mod billing_plan_flags_tbc_wrath;

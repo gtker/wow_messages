@@ -179,6 +179,10 @@ pub(crate) mod msg_guild_bank_log_query_client;
 pub use msg_guild_bank_log_query_client::*;
 pub(crate) mod msg_guild_bank_log_query_server;
 pub use msg_guild_bank_log_query_server::*;
+pub(crate) mod msg_guild_permissions_client;
+pub use msg_guild_permissions_client::*;
+pub(crate) mod msg_guild_permissions_server;
+pub use msg_guild_permissions_server::*;
 pub(crate) mod msg_move_fall_land_client;
 pub use msg_move_fall_land_client::*;
 pub(crate) mod msg_move_fall_land_server;
@@ -333,6 +337,8 @@ pub use crate::shared::auction_sort_tbc_wrath::AuctionSort;
 pub use crate::shared::bank_swap_source_tbc_wrath::BankSwapSource;
 
 pub use crate::shared::bank_swap_store_mode_tbc_wrath::BankSwapStoreMode;
+
+pub use crate::shared::bank_tab_tbc_wrath::BankTab;
 
 pub use crate::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
 
