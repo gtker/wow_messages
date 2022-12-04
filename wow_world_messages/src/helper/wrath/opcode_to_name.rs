@@ -726,7 +726,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x03b0 => "SMSG_VOICE_SESSION_ENABLE",
         0x03b1 => "SMSG_VOICE_PARENTAL_CONTROLS",
         0x03b3 => "SMSG_GM_MESSAGECHAT",
-        0x03b4 => "MSG_GM_GEARRATING",
         0x03b5 => "CMSG_COMMENTATOR_ENABLE",
         0x03b6 => "SMSG_COMMENTATOR_STATE_CHANGED",
         0x03b8 => "SMSG_COMMENTATOR_MAP_INFO",

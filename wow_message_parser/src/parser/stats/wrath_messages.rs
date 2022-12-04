@@ -730,7 +730,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_VOICE_SESSION_ENABLE", 0x3B0),
     Data::new("SMSG_VOICE_PARENTAL_CONTROLS", 0x3B1),
     Data::new("SMSG_GM_MESSAGECHAT", 0x3B3),
-    Data::new("MSG_GM_GEARRATING", 0x3B4),
     Data::new("CMSG_COMMENTATOR_ENABLE", 0x3B5),
     Data::new("SMSG_COMMENTATOR_STATE_CHANGED", 0x3B6),
     Data::new("SMSG_COMMENTATOR_MAP_INFO", 0x3B8),
