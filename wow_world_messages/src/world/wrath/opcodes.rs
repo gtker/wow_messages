@@ -379,6 +379,7 @@ use crate::world::wrath::CMSG_GUILD_BANK_BUY_TAB;
 use crate::world::wrath::CMSG_GUILD_BANK_UPDATE_TAB;
 use crate::world::wrath::CMSG_GUILD_BANK_DEPOSIT_MONEY;
 use crate::world::wrath::CMSG_GUILD_BANK_WITHDRAW_MONEY;
+use crate::world::wrath::MSG_GUILD_BANK_LOG_QUERY_Client;
 use crate::world::wrath::CMSG_SET_CHANNEL_WATCH;
 use crate::world::wrath::CMSG_CLEAR_CHANNEL_WATCH;
 use crate::world::wrath::CMSG_SPELLCLICK;
@@ -820,6 +821,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GUILD_BANK_UPDATE_TAB(CMSG_GUILD_BANK_UPDATE_TAB),
     CMSG_GUILD_BANK_DEPOSIT_MONEY(CMSG_GUILD_BANK_DEPOSIT_MONEY),
     CMSG_GUILD_BANK_WITHDRAW_MONEY(CMSG_GUILD_BANK_WITHDRAW_MONEY),
+    MSG_GUILD_BANK_LOG_QUERY(MSG_GUILD_BANK_LOG_QUERY_Client),
     CMSG_SET_CHANNEL_WATCH(CMSG_SET_CHANNEL_WATCH),
     CMSG_CLEAR_CHANNEL_WATCH(CMSG_CLEAR_CHANNEL_WATCH),
     CMSG_SPELLCLICK(CMSG_SPELLCLICK),
@@ -1263,6 +1265,7 @@ impl ClientOpcodeMessage {
             0x03EB => Ok(Self::CMSG_GUILD_BANK_UPDATE_TAB(<CMSG_GUILD_BANK_UPDATE_TAB as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EB, size: body_size, io, } } else { a } })?)),
             0x03EC => Ok(Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(<CMSG_GUILD_BANK_DEPOSIT_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EC, size: body_size, io, } } else { a } })?)),
             0x03ED => Ok(Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(<CMSG_GUILD_BANK_WITHDRAW_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03ED, size: body_size, io, } } else { a } })?)),
+            0x03EE => Ok(Self::MSG_GUILD_BANK_LOG_QUERY(<MSG_GUILD_BANK_LOG_QUERY_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EE, size: body_size, io, } } else { a } })?)),
             0x03EF => Ok(Self::CMSG_SET_CHANNEL_WATCH(<CMSG_SET_CHANNEL_WATCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EF, size: body_size, io, } } else { a } })?)),
             0x03F3 => Ok(Self::CMSG_CLEAR_CHANNEL_WATCH(<CMSG_CLEAR_CHANNEL_WATCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F3, size: body_size, io, } } else { a } })?)),
             0x03F8 => Ok(Self::CMSG_SPELLCLICK(<CMSG_SPELLCLICK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F8, size: body_size, io, } } else { a } })?)),
@@ -1774,6 +1777,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.write_encrypted_client(w, e),
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SPELLCLICK(c) => c.write_encrypted_client(w, e),
@@ -2218,6 +2222,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.write_unencrypted_client(w),
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.write_unencrypted_client(w),
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.write_unencrypted_client(w),
             Self::CMSG_SPELLCLICK(c) => c.write_unencrypted_client(w),
@@ -2662,6 +2667,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SPELLCLICK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -3106,6 +3112,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SPELLCLICK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3550,6 +3557,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SPELLCLICK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3994,6 +4002,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GUILD_BANK_UPDATE_TAB(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_DEPOSIT_MONEY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_WITHDRAW_MONEY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SPELLCLICK(c) => c.astd_write_unencrypted_client(w).await,
@@ -4449,6 +4458,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GUILD_BANK_UPDATE_TAB(_) => "CMSG_GUILD_BANK_UPDATE_TAB",
             ClientOpcodeMessage::CMSG_GUILD_BANK_DEPOSIT_MONEY(_) => "CMSG_GUILD_BANK_DEPOSIT_MONEY",
             ClientOpcodeMessage::CMSG_GUILD_BANK_WITHDRAW_MONEY(_) => "CMSG_GUILD_BANK_WITHDRAW_MONEY",
+            ClientOpcodeMessage::MSG_GUILD_BANK_LOG_QUERY(_) => "MSG_GUILD_BANK_LOG_QUERY_Client",
             ClientOpcodeMessage::CMSG_SET_CHANNEL_WATCH(_) => "CMSG_SET_CHANNEL_WATCH",
             ClientOpcodeMessage::CMSG_CLEAR_CHANNEL_WATCH(_) => "CMSG_CLEAR_CHANNEL_WATCH",
             ClientOpcodeMessage::CMSG_SPELLCLICK(_) => "CMSG_SPELLCLICK",
@@ -6741,6 +6751,12 @@ impl From<CMSG_GUILD_BANK_WITHDRAW_MONEY> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_GUILD_BANK_LOG_QUERY_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_GUILD_BANK_LOG_QUERY_Client) -> Self {
+        Self::MSG_GUILD_BANK_LOG_QUERY(c)
+    }
+}
+
 impl From<CMSG_SET_CHANNEL_WATCH> for ClientOpcodeMessage {
     fn from(c: CMSG_SET_CHANNEL_WATCH) -> Self {
         Self::CMSG_SET_CHANNEL_WATCH(c)
@@ -7486,6 +7502,7 @@ use crate::world::wrath::MSG_MOVE_UPDATE_CAN_FLY_Server;
 use crate::world::wrath::MSG_RAID_READY_CHECK_CONFIRM_Server;
 use crate::world::wrath::SMSG_GM_MESSAGECHAT;
 use crate::world::wrath::SMSG_FEATURE_SYSTEM_STATUS;
+use crate::world::wrath::MSG_GUILD_BANK_LOG_QUERY_Server;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
@@ -7865,6 +7882,7 @@ pub enum ServerOpcodeMessage {
     MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Server),
     SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
     SMSG_FEATURE_SYSTEM_STATUS(SMSG_FEATURE_SYSTEM_STATUS),
+    MSG_GUILD_BANK_LOG_QUERY(MSG_GUILD_BANK_LOG_QUERY_Server),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
@@ -8246,6 +8264,7 @@ impl ServerOpcodeMessage {
             0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
             0x03B3 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B3, size: body_size, io, } } else { a } })?)),
             0x03C9 => Ok(Self::SMSG_FEATURE_SYSTEM_STATUS(<SMSG_FEATURE_SYSTEM_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C9, size: body_size, io, } } else { a } })?)),
+            0x03EE => Ok(Self::MSG_GUILD_BANK_LOG_QUERY(<MSG_GUILD_BANK_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EE, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
@@ -8776,6 +8795,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_encrypted_server(w, e),
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
@@ -9158,6 +9178,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.write_unencrypted_server(w),
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
@@ -9540,6 +9561,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9922,6 +9944,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10304,6 +10327,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -10686,6 +10710,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FEATURE_SYSTEM_STATUS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
@@ -11078,6 +11103,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
             ServerOpcodeMessage::SMSG_FEATURE_SYSTEM_STATUS(_) => "SMSG_FEATURE_SYSTEM_STATUS",
+            ServerOpcodeMessage::MSG_GUILD_BANK_LOG_QUERY(_) => "MSG_GUILD_BANK_LOG_QUERY_Server",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
@@ -13315,6 +13341,12 @@ impl From<SMSG_GM_MESSAGECHAT> for ServerOpcodeMessage {
 impl From<SMSG_FEATURE_SYSTEM_STATUS> for ServerOpcodeMessage {
     fn from(c: SMSG_FEATURE_SYSTEM_STATUS) -> Self {
         Self::SMSG_FEATURE_SYSTEM_STATUS(c)
+    }
+}
+
+impl From<MSG_GUILD_BANK_LOG_QUERY_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_GUILD_BANK_LOG_QUERY_Server) -> Self {
+        Self::MSG_GUILD_BANK_LOG_QUERY(c)
     }
 }
 

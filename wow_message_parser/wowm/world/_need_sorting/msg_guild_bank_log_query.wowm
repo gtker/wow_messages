@@ -1,0 +1,38 @@
+cmsg MSG_GUILD_BANK_LOG_QUERY_Client = 0x03ED {
+    u8 slot;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_GUILD_BANK_LOG_QUERY_Server = 0x03ED {
+    u32 unix_time;
+    u8 slot;
+    u8 amount_of_money_logs;
+    MoneyLogItem[amount_of_money_logs] money_logs;
+} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_GUILD_BANK_LOG_QUERY_Client = 0x03EE {
+    u8 slot;
+} {
+    versions = "3.3.5";
+}
+
+struct MoneyLogItem {
+    u8 action;
+    Guid player;
+    u32 entry;
+    u32 timestamp;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg MSG_GUILD_BANK_LOG_QUERY_Server = 0x03EE {
+    u32 unix_time;
+    u8 slot;
+    u8 amount_of_money_logs;
+    MoneyLogItem[amount_of_money_logs] money_logs;
+} {
+    versions = "3.3.5";
+}

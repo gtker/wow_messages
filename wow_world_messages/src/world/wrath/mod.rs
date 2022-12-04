@@ -411,6 +411,10 @@ pub(crate) mod msg_auction_hello_server;
 pub use msg_auction_hello_server::*;
 pub(crate) mod msg_corpse_query_server;
 pub use msg_corpse_query_server::*;
+pub(crate) mod msg_guild_bank_log_query_client;
+pub use msg_guild_bank_log_query_client::*;
+pub(crate) mod msg_guild_bank_log_query_server;
+pub use msg_guild_bank_log_query_server::*;
 pub(crate) mod msg_guild_bank_money_withdrawn;
 pub use msg_guild_bank_money_withdrawn::*;
 pub(crate) mod msg_move_fall_land;
@@ -1103,6 +1107,8 @@ pub use crate::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
 pub use crate::shared::mail_item_tbc_wrath::MailItem;
 
 pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
+
+pub use crate::shared::money_log_item_tbc_wrath::MoneyLogItem;
 
 pub use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
 

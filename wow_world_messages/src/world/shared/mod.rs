@@ -323,6 +323,7 @@ pub mod loot_slot_type_vanilla_tbc_wrath;
 pub mod mail_item_tbc_wrath;
 pub mod mail_message_type_vanilla_tbc_wrath;
 pub mod meeting_stone_status_vanilla_tbc;
+pub mod money_log_item_tbc_wrath;
 pub mod mount_result_vanilla_tbc_wrath;
 pub mod msg_auction_hello_client_vanilla_tbc_wrath;
 pub mod msg_auction_hello_server_vanilla_tbc;

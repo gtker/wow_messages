@@ -175,6 +175,10 @@ pub(crate) mod movement_info;
 pub use movement_info::*;
 pub(crate) mod msg_corpse_query_server;
 pub use msg_corpse_query_server::*;
+pub(crate) mod msg_guild_bank_log_query_client;
+pub use msg_guild_bank_log_query_client::*;
+pub(crate) mod msg_guild_bank_log_query_server;
+pub use msg_guild_bank_log_query_server::*;
 pub(crate) mod msg_move_fall_land_client;
 pub use msg_move_fall_land_client::*;
 pub(crate) mod msg_move_fall_land_server;
@@ -951,6 +955,8 @@ pub use crate::shared::mail_item_tbc_wrath::MailItem;
 pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 
 pub use crate::shared::meeting_stone_status_vanilla_tbc::MeetingStoneStatus;
+
+pub use crate::shared::money_log_item_tbc_wrath::MoneyLogItem;
 
 pub use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
 
