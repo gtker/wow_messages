@@ -839,7 +839,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_CALENDAR_COMPLAIN", 0x446),
     Data::new("CMSG_CALENDAR_GET_NUM_PENDING", 0x447),
     Data::new("SMSG_CALENDAR_SEND_NUM_PENDING", 0x448),
-    Data::new("MSG_MOVE_SET_PITCH_RATE_CHEAT", 0x45A),
     Data::new("MSG_MOVE_SET_PITCH_RATE", 0x45B),
     Data::new("SMSG_FORCE_PITCH_RATE_CHANGE", 0x45C),
     Data::new("SMSG_SPLINE_SET_PITCH_RATE", 0x45E),
