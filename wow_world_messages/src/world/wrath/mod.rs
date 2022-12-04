@@ -417,6 +417,10 @@ pub(crate) mod msg_guild_bank_log_query_server;
 pub use msg_guild_bank_log_query_server::*;
 pub(crate) mod msg_guild_bank_money_withdrawn;
 pub use msg_guild_bank_money_withdrawn::*;
+pub(crate) mod msg_guild_event_log_query_client;
+pub use msg_guild_event_log_query_client::*;
+pub(crate) mod msg_guild_event_log_query_server;
+pub use msg_guild_event_log_query_server::*;
 pub(crate) mod msg_guild_permissions_client;
 pub use msg_guild_permissions_client::*;
 pub(crate) mod msg_guild_permissions_server;
@@ -1077,6 +1081,8 @@ pub use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 pub use crate::shared::guild_emblem_result_tbc_wrath::GuildEmblemResult;
 
 pub use crate::shared::guild_event_tbc_wrath::GuildEvent;
+
+pub use crate::shared::guild_log_event_tbc_wrath::GuildLogEvent;
 
 pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
 

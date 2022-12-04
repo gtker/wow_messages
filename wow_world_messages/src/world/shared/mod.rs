@@ -302,6 +302,7 @@ pub mod guild_bank_rights_tbc_wrath;
 pub mod guild_command_vanilla_tbc;
 pub mod guild_emblem_result_tbc_wrath;
 pub mod guild_event_tbc_wrath;
+pub mod guild_log_event_tbc_wrath;
 pub mod guild_member_status_vanilla_tbc_wrath;
 pub mod guild_rights_tbc_wrath;
 pub mod initial_spell_vanilla_tbc;

@@ -106,5 +106,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `GUILD_BANK_TEXT_CHANGED` | 19 (0x13) |  | EVENT_GUILDBANK_TEXT_CHANGED |
 
 Used in:
+* [GuildLogEvent](guildlogevent.md)
 * [SMSG_GUILD_EVENT](smsg_guild_event.md)
 

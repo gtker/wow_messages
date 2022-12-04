@@ -1,0 +1,39 @@
+cmsg MSG_GUILD_EVENT_LOG_QUERY_Client = 0x03FE {} {
+    versions = "2.4.3";
+}
+
+cmsg MSG_GUILD_EVENT_LOG_QUERY_Client = 0x03FF {} {
+    versions = "3.3.5";
+}
+
+struct GuildLogEvent {
+    GuildEvent event;
+    Guid player1;
+    if (event == JOINED
+     || event == LEFT)
+    {
+        Guid player2;
+    }
+    else if (event == PROMOTE_PLAYER
+          || event == DEMOTE_PLAYER)
+    {
+        u8 new_rank;
+    }
+    u32 unix_time;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg MSG_GUILD_EVENT_LOG_QUERY_Server = 0x03FE {
+    u8 amount_of_events;
+    GuildLogEvent[amount_of_events] events;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_GUILD_EVENT_LOG_QUERY_Server = 0x03FF {
+    u8 amount_of_events;
+    GuildLogEvent[amount_of_events] events;
+} {
+    versions = "3.3.5";
+}
