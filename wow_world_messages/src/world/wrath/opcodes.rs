@@ -388,6 +388,7 @@ use crate::world::wrath::MSG_GUILD_EVENT_LOG_QUERY_Client;
 use crate::world::wrath::CMSG_GET_MIRRORIMAGE_DATA;
 use crate::world::wrath::CMSG_KEEP_ALIVE;
 use crate::world::wrath::CMSG_OPT_OUT_OF_LOOT;
+use crate::world::wrath::MSG_QUERY_GUILD_BANK_TEXT_Client;
 use crate::world::wrath::CMSG_SET_GUILD_BANK_TEXT;
 use crate::world::wrath::CMSG_GRANT_LEVEL;
 use crate::world::wrath::CMSG_TOTEM_DESTROYED;
@@ -832,6 +833,7 @@ pub enum ClientOpcodeMessage {
     CMSG_GET_MIRRORIMAGE_DATA(CMSG_GET_MIRRORIMAGE_DATA),
     CMSG_KEEP_ALIVE(CMSG_KEEP_ALIVE),
     CMSG_OPT_OUT_OF_LOOT(CMSG_OPT_OUT_OF_LOOT),
+    MSG_QUERY_GUILD_BANK_TEXT(MSG_QUERY_GUILD_BANK_TEXT_Client),
     CMSG_SET_GUILD_BANK_TEXT(CMSG_SET_GUILD_BANK_TEXT),
     CMSG_GRANT_LEVEL(CMSG_GRANT_LEVEL),
     CMSG_TOTEM_DESTROYED(CMSG_TOTEM_DESTROYED),
@@ -1278,6 +1280,7 @@ impl ClientOpcodeMessage {
             0x0401 => Ok(Self::CMSG_GET_MIRRORIMAGE_DATA(<CMSG_GET_MIRRORIMAGE_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0401, size: body_size, io, } } else { a } })?)),
             0x0407 => Ok(Self::CMSG_KEEP_ALIVE(<CMSG_KEEP_ALIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0407, size: body_size, io, } } else { a } })?)),
             0x0409 => Ok(Self::CMSG_OPT_OUT_OF_LOOT(<CMSG_OPT_OUT_OF_LOOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0409, size: body_size, io, } } else { a } })?)),
+            0x040A => Ok(Self::MSG_QUERY_GUILD_BANK_TEXT(<MSG_QUERY_GUILD_BANK_TEXT_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040A, size: body_size, io, } } else { a } })?)),
             0x040B => Ok(Self::CMSG_SET_GUILD_BANK_TEXT(<CMSG_SET_GUILD_BANK_TEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040B, size: body_size, io, } } else { a } })?)),
             0x040D => Ok(Self::CMSG_GRANT_LEVEL(<CMSG_GRANT_LEVEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040D, size: body_size, io, } } else { a } })?)),
             0x0414 => Ok(Self::CMSG_TOTEM_DESTROYED(<CMSG_TOTEM_DESTROYED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0414, size: body_size, io, } } else { a } })?)),
@@ -1792,6 +1795,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_KEEP_ALIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.write_encrypted_client(w, e),
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GRANT_LEVEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TOTEM_DESTROYED(c) => c.write_encrypted_client(w, e),
@@ -2239,6 +2243,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_KEEP_ALIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.write_unencrypted_client(w),
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_GRANT_LEVEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_TOTEM_DESTROYED(c) => c.write_unencrypted_client(w),
@@ -2686,6 +2691,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -3133,6 +3139,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3580,6 +3587,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_KEEP_ALIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GRANT_LEVEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.astd_write_encrypted_client(w, e).await,
@@ -4027,6 +4035,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_KEEP_ALIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GRANT_LEVEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.astd_write_unencrypted_client(w).await,
@@ -4485,6 +4494,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GET_MIRRORIMAGE_DATA(_) => "CMSG_GET_MIRRORIMAGE_DATA",
             ClientOpcodeMessage::CMSG_KEEP_ALIVE(_) => "CMSG_KEEP_ALIVE",
             ClientOpcodeMessage::CMSG_OPT_OUT_OF_LOOT(_) => "CMSG_OPT_OUT_OF_LOOT",
+            ClientOpcodeMessage::MSG_QUERY_GUILD_BANK_TEXT(_) => "MSG_QUERY_GUILD_BANK_TEXT_Client",
             ClientOpcodeMessage::CMSG_SET_GUILD_BANK_TEXT(_) => "CMSG_SET_GUILD_BANK_TEXT",
             ClientOpcodeMessage::CMSG_GRANT_LEVEL(_) => "CMSG_GRANT_LEVEL",
             ClientOpcodeMessage::CMSG_TOTEM_DESTROYED(_) => "CMSG_TOTEM_DESTROYED",
@@ -6825,6 +6835,12 @@ impl From<CMSG_OPT_OUT_OF_LOOT> for ClientOpcodeMessage {
     }
 }
 
+impl From<MSG_QUERY_GUILD_BANK_TEXT_Client> for ClientOpcodeMessage {
+    fn from(c: MSG_QUERY_GUILD_BANK_TEXT_Client) -> Self {
+        Self::MSG_QUERY_GUILD_BANK_TEXT(c)
+    }
+}
+
 impl From<CMSG_SET_GUILD_BANK_TEXT> for ClientOpcodeMessage {
     fn from(c: CMSG_SET_GUILD_BANK_TEXT) -> Self {
         Self::CMSG_SET_GUILD_BANK_TEXT(c)
@@ -7537,6 +7553,7 @@ use crate::world::wrath::SMSG_FEATURE_SYSTEM_STATUS;
 use crate::world::wrath::MSG_GUILD_BANK_LOG_QUERY_Server;
 use crate::world::wrath::MSG_GUILD_PERMISSIONS_Server;
 use crate::world::wrath::MSG_GUILD_EVENT_LOG_QUERY_Server;
+use crate::world::wrath::MSG_QUERY_GUILD_BANK_TEXT_Server;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
@@ -7919,6 +7936,7 @@ pub enum ServerOpcodeMessage {
     MSG_GUILD_BANK_LOG_QUERY(MSG_GUILD_BANK_LOG_QUERY_Server),
     MSG_GUILD_PERMISSIONS(MSG_GUILD_PERMISSIONS_Server),
     MSG_GUILD_EVENT_LOG_QUERY(MSG_GUILD_EVENT_LOG_QUERY_Server),
+    MSG_QUERY_GUILD_BANK_TEXT(MSG_QUERY_GUILD_BANK_TEXT_Server),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
@@ -8303,6 +8321,7 @@ impl ServerOpcodeMessage {
             0x03EE => Ok(Self::MSG_GUILD_BANK_LOG_QUERY(<MSG_GUILD_BANK_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EE, size: body_size, io, } } else { a } })?)),
             0x03FD => Ok(Self::MSG_GUILD_PERMISSIONS(<MSG_GUILD_PERMISSIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FD, size: body_size, io, } } else { a } })?)),
             0x03FF => Ok(Self::MSG_GUILD_EVENT_LOG_QUERY(<MSG_GUILD_EVENT_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FF, size: body_size, io, } } else { a } })?)),
+            0x040A => Ok(Self::MSG_QUERY_GUILD_BANK_TEXT(<MSG_QUERY_GUILD_BANK_TEXT_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040A, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
@@ -8836,6 +8855,7 @@ impl ServerOpcodeMessage {
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_encrypted_server(w, e),
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
@@ -9221,6 +9241,7 @@ impl ServerOpcodeMessage {
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_unencrypted_server(w),
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
@@ -9606,6 +9627,7 @@ impl ServerOpcodeMessage {
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9991,6 +10013,7 @@ impl ServerOpcodeMessage {
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10376,6 +10399,7 @@ impl ServerOpcodeMessage {
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -10761,6 +10785,7 @@ impl ServerOpcodeMessage {
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
@@ -11156,6 +11181,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_GUILD_BANK_LOG_QUERY(_) => "MSG_GUILD_BANK_LOG_QUERY_Server",
             ServerOpcodeMessage::MSG_GUILD_PERMISSIONS(_) => "MSG_GUILD_PERMISSIONS_Server",
             ServerOpcodeMessage::MSG_GUILD_EVENT_LOG_QUERY(_) => "MSG_GUILD_EVENT_LOG_QUERY_Server",
+            ServerOpcodeMessage::MSG_QUERY_GUILD_BANK_TEXT(_) => "MSG_QUERY_GUILD_BANK_TEXT_Server",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
@@ -13411,6 +13437,12 @@ impl From<MSG_GUILD_PERMISSIONS_Server> for ServerOpcodeMessage {
 impl From<MSG_GUILD_EVENT_LOG_QUERY_Server> for ServerOpcodeMessage {
     fn from(c: MSG_GUILD_EVENT_LOG_QUERY_Server) -> Self {
         Self::MSG_GUILD_EVENT_LOG_QUERY(c)
+    }
+}
+
+impl From<MSG_QUERY_GUILD_BANK_TEXT_Server> for ServerOpcodeMessage {
+    fn from(c: MSG_QUERY_GUILD_BANK_TEXT_Server) -> Self {
+        Self::MSG_QUERY_GUILD_BANK_TEXT(c)
     }
 }
 

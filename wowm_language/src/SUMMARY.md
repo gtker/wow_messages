@@ -773,6 +773,8 @@
 - [MSG_PETITION_RENAME](docs/msg_petition_rename.md)
 - [MSG_PVP_LOG_DATA_Client](docs/msg_pvp_log_data_client.md)
 - [MSG_PVP_LOG_DATA_Server](docs/msg_pvp_log_data_server.md)
+- [MSG_QUERY_GUILD_BANK_TEXT_Client](docs/msg_query_guild_bank_text_client.md)
+- [MSG_QUERY_GUILD_BANK_TEXT_Server](docs/msg_query_guild_bank_text_server.md)
 - [MSG_QUERY_NEXT_MAIL_TIME_Client](docs/msg_query_next_mail_time_client.md)
 - [MSG_QUERY_NEXT_MAIL_TIME_Server](docs/msg_query_next_mail_time_server.md)
 - [MSG_QUEST_PUSH_RESULT](docs/msg_quest_push_result.md)
