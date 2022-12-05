@@ -1,3 +1,4 @@
+pub mod combat;
 pub mod geometry;
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
