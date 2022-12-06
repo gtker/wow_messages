@@ -8,6 +8,7 @@ mod creature_family;
 pub mod exp;
 mod items;
 mod map;
+pub mod item;
 pub mod position;
 mod skill;
 mod skills;
