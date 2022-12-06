@@ -635,7 +635,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x033a => "SMSG_DEFENSE_MESSAGE",
         0x033b => "SMSG_INSTANCE_DIFFICULTY",
         0x033d => "SMSG_MOTD",
-        0x033e => "SMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY",
         0x033f => "SMSG_MOVE_UNSET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY",
         0x0340 => "CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK",
         0x0343 => "SMSG_MOVE_SET_CAN_FLY",
