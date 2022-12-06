@@ -1,0 +1,37 @@
+enum EncounterFrame : u32 {
+    ENGAGE              = 0;
+    DISENGAGE           = 1;
+    UPDATE_PRIORITY     = 2;
+    ADD_TIMER           = 3;
+    ENABLE_OBJECTIVE    = 4;
+    UPDATE_OBJECTIVE    = 5;
+    DISABLE_OBJECTIVE   = 6;
+    REFRESH_FRAMES      = 7 {
+        comment = "azerothcore: can be used to refresh frames after unit was destroyed from client and send back (phase changes)";
+    }
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT = 0x0214 {
+    EncounterFrame frame;
+    if (frame == ENGAGE
+     || frame == DISENGAGE
+     || frame == UPDATE_PRIORITY)
+    {
+        PackedGuid guid;
+        u8 parameter1;
+    }
+    else if (frame == ADD_TIMER
+          || frame == ENABLE_OBJECTIVE
+          || frame == DISABLE_OBJECTIVE)
+    {
+        u8 parameter2;
+    }
+    else if (frame == UPDATE_OBJECTIVE) {
+        u8 parameter3;
+        u8 parameter4;
+    }
+} {
+    versions = "3.3.5";
+}

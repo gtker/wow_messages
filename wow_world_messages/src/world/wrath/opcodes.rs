@@ -7421,6 +7421,7 @@ use crate::world::wrath::SMSG_GMTICKET_UPDATETEXT;
 use crate::world::wrath::SMSG_ACCOUNT_DATA_TIMES;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA;
 use crate::world::wrath::SMSG_GMTICKET_GETTICKET;
+use crate::world::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT;
 use crate::world::wrath::SMSG_GAMEOBJECT_DESPAWN_ANIM;
 use crate::world::wrath::MSG_CORPSE_QUERY_Server;
 use crate::world::wrath::SMSG_GMTICKET_DELETETICKET;
@@ -7812,6 +7813,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ACCOUNT_DATA_TIMES(SMSG_ACCOUNT_DATA_TIMES),
     SMSG_UPDATE_ACCOUNT_DATA(SMSG_UPDATE_ACCOUNT_DATA),
     SMSG_GMTICKET_GETTICKET(SMSG_GMTICKET_GETTICKET),
+    SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT),
     SMSG_GAMEOBJECT_DESPAWN_ANIM(SMSG_GAMEOBJECT_DESPAWN_ANIM),
     MSG_CORPSE_QUERY(MSG_CORPSE_QUERY_Server),
     SMSG_GMTICKET_DELETETICKET(SMSG_GMTICKET_DELETETICKET),
@@ -8205,6 +8207,7 @@ impl ServerOpcodeMessage {
             0x0209 => Ok(Self::SMSG_ACCOUNT_DATA_TIMES(<SMSG_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0209, size: body_size, io, } } else { a } })?)),
             0x020C => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA(<SMSG_UPDATE_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x020C, size: body_size, io, } } else { a } })?)),
             0x0212 => Ok(Self::SMSG_GMTICKET_GETTICKET(<SMSG_GMTICKET_GETTICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0212, size: body_size, io, } } else { a } })?)),
+            0x0214 => Ok(Self::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(<SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0214, size: body_size, io, } } else { a } })?)),
             0x0215 => Ok(Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(<SMSG_GAMEOBJECT_DESPAWN_ANIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0215, size: body_size, io, } } else { a } })?)),
             0x0216 => Ok(Self::MSG_CORPSE_QUERY(<MSG_CORPSE_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0216, size: body_size, io, } } else { a } })?)),
             0x0218 => Ok(Self::SMSG_GMTICKET_DELETETICKET(<SMSG_GMTICKET_DELETETICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0218, size: body_size, io, } } else { a } })?)),
@@ -8747,6 +8750,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_GETTICKET(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_CORPSE_QUERY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.write_encrypted_server(w, e),
@@ -9141,6 +9145,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_GETTICKET(c) => c.write_unencrypted_server(w),
+            Self::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.write_unencrypted_server(w),
             Self::MSG_CORPSE_QUERY(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.write_unencrypted_server(w),
@@ -9535,6 +9540,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_GETTICKET(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_CORPSE_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9929,6 +9935,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_GETTICKET(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_CORPSE_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10323,6 +10330,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_GETTICKET(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_CORPSE_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.astd_write_encrypted_server(w, e).await,
@@ -10717,6 +10725,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_GETTICKET(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_CORPSE_QUERY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.astd_write_unencrypted_server(w).await,
@@ -11121,6 +11130,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ACCOUNT_DATA_TIMES(_) => "SMSG_ACCOUNT_DATA_TIMES",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA(_) => "SMSG_UPDATE_ACCOUNT_DATA",
             ServerOpcodeMessage::SMSG_GMTICKET_GETTICKET(_) => "SMSG_GMTICKET_GETTICKET",
+            ServerOpcodeMessage::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(_) => "SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT",
             ServerOpcodeMessage::SMSG_GAMEOBJECT_DESPAWN_ANIM(_) => "SMSG_GAMEOBJECT_DESPAWN_ANIM",
             ServerOpcodeMessage::MSG_CORPSE_QUERY(_) => "MSG_CORPSE_QUERY_Server",
             ServerOpcodeMessage::SMSG_GMTICKET_DELETETICKET(_) => "SMSG_GMTICKET_DELETETICKET",
@@ -12645,6 +12655,12 @@ impl From<SMSG_UPDATE_ACCOUNT_DATA> for ServerOpcodeMessage {
 impl From<SMSG_GMTICKET_GETTICKET> for ServerOpcodeMessage {
     fn from(c: SMSG_GMTICKET_GETTICKET) -> Self {
         Self::SMSG_GMTICKET_GETTICKET(c)
+    }
+}
+
+impl From<SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT> for ServerOpcodeMessage {
+    fn from(c: SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT) -> Self {
+        Self::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT(c)
     }
 }
 
