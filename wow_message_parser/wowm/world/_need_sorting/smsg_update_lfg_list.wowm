@@ -1,0 +1,131 @@
+enum LfgType : u8 {
+    NONE = 0;
+    DUNGEON = 1;
+    RAID = 2;
+    ZONE = 4;
+    HEROIC = 5;
+    RANDOM = 6;
+} {
+    versions = "3.3.5";
+}
+
+enum LfgListUpdateType : u8 {
+    PARTIAL = 0;
+    FULL = 1;
+} {
+    versions = "3.3.5";
+}
+
+flag LfgUpdateFlag : u32 {
+    NONE = 0x00;
+    CHARACTER_INFO = 0x01;
+    COMMENT = 0x02;
+    GROUP_LEADER = 0x04;
+    GROUP_GUID = 0x08;
+    ROLES = 0x10;
+    AREA = 0x20;
+    STATUS = 0x40;
+    BOUND = 0x80;
+} {
+    versions = "3.3.5";
+}
+
+struct LfgListGroup {
+    Guid group;
+    LfgUpdateFlag flags;
+    if (flags & COMMENT) {
+        CString comment;
+    }
+    if (flags & ROLES) {
+        u8[3] roles {
+            comment = "Emu just sets all to 0.";
+        }
+    }
+    Guid instance;
+    u32 encounter_mask;
+} {
+    versions = "3.3.5";
+}
+
+struct LfgListPlayer {
+    Guid player;
+    LfgUpdateFlag flags;
+    if (flags & CHARACTER_INFO) {
+        u8 level;
+        Class class;
+        Race race;
+        u8 talents0;
+        u8 talents1;
+        u8 talents2;
+        u32 armor;
+        u32 spell_damage;
+        u32 spell_heal;
+        u32 crit_rating_melee;
+        u32 crit_rating_ranged;
+        u32 crit_rating_spell;
+        f32 mana_per_5_seconds;
+        f32 mana_per_5_seconds_combat;
+        u32 attack_power;
+        u32 agility;
+        u32 health;
+        u32 mana;
+        Bool32 online {
+            comment = "azerothcore: talentpoints, used as online/offline marker :D";
+        }
+        u32 average_item_level;
+        u32 defense_skill;
+        u32 dodge_rating;
+        u32 block_rating;
+        u32 parry_rating;
+        u32 haste_rating;
+        u32 expertise_rating;
+    }
+    if (flags & COMMENT) {
+        CString comment;
+    }
+    if (flags & GROUP_LEADER) {
+        Bool is_looking_for_more {
+            comment = "emu sets to true.";
+        }
+    }
+    if (flags & GROUP_GUID) {
+        Guid group;
+    }
+    if (flags & ROLES) {
+        u8 roles;
+    }
+    if (flags & AREA) {
+        Area area;
+    }
+    if (flags & STATUS) {
+        u8 unknown1 {
+            comment = "Emus set to 0.";
+        }
+    }
+    Guid instance;
+    u32 encounter_mask;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_UPDATE_LFG_LIST = 0x0360 {
+    (u32)LfgType lfg_type;
+    u32 dungeon_id;
+    LfgListUpdateType update_type;
+    if (update_type == PARTIAL) {
+        u32 amount_of_deleted_guids;
+        Guid[amount_of_deleted_guids] deleted_guids;
+    }
+    u32 amount_of_groups;
+    u32 unknown1 {
+        comment = "emus set to 0.";
+    }
+    LfgListGroup[amount_of_groups] groups;
+    u32 amount_of_players;
+    u32 unknown2 {
+        comment = "emus set to 0.";
+    }
+    LfgListPlayer[amount_of_players] players;
+} {
+    versions = "3.3.5";
+}

@@ -10153,6 +10153,7 @@ Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
 * [GuildMember](guildmember.md)
+* [LfgListPlayer](lfglistplayer.md)
 * [QuestPoi](questpoi.md)
 * [Relation](relation.md)
 * [SMSG_BINDER_CONFIRM](smsg_binder_confirm.md)

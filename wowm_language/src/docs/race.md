@@ -164,6 +164,7 @@ Used in:
 * [CMSG_CHAR_FACTION_CHANGE](cmsg_char_faction_change.md)
 * [CMSG_CHAR_RACE_CHANGE](cmsg_char_race_change.md)
 * [Character](character.md)
+* [LfgListPlayer](lfglistplayer.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [WhoPlayer](whoplayer.md)
 
