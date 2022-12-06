@@ -855,6 +855,7 @@
 - [SMSG_BATTLEGROUND_PLAYER_LEFT](docs/smsg_battleground_player_left.md)
 - [SMSG_BINDER_CONFIRM](docs/smsg_binder_confirm.md)
 - [SMSG_BINDPOINTUPDATE](docs/smsg_bindpointupdate.md)
+- [SMSG_BREAK_TARGET](docs/smsg_break_target.md)
 - [SMSG_BUY_BANK_SLOT_RESULT](docs/smsg_buy_bank_slot_result.md)
 - [SMSG_BUY_FAILED](docs/smsg_buy_failed.md)
 - [SMSG_BUY_ITEM](docs/smsg_buy_item.md)

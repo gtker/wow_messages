@@ -1770,6 +1770,8 @@ pub(crate) mod smsg_binder_confirm;
 pub use smsg_binder_confirm::*;
 pub(crate) mod smsg_bindpointupdate;
 pub use smsg_bindpointupdate::*;
+pub(crate) mod smsg_break_target;
+pub use smsg_break_target::*;
 pub(crate) mod smsg_calendar_send_num_pending;
 pub use smsg_calendar_send_num_pending::*;
 pub(crate) mod smsg_cancel_auto_repeat;

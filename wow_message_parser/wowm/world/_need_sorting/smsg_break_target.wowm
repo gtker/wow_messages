@@ -1,0 +1,5 @@
+smsg SMSG_BREAK_TARGET = 0x0152 {
+    PackedGuid guid;
+} {
+    versions = "3.3.5";
+}
