@@ -1,9 +1,11 @@
 pub(crate) mod area_triggers;
+pub(crate) mod items;
 pub(crate) mod pet_names;
 
 use super::position::{positions, RawPosition};
 use super::types::{Class, Race};
 use super::Expansion;
+use crate::base_printer::data::items::{get_items, Items};
 use crate::base_printer::data::pet_names::{get_pet_name_data, Pet, PetNames};
 use rusqlite::Connection;
 use std::collections::{BTreeMap, BTreeSet, HashMap};
@@ -20,6 +22,7 @@ pub(crate) struct Data {
     pub actions: HashMap<Combination, BTreeSet<Action>>,
     pub triggers: Vec<Trigger>,
     pub pet_names: BTreeMap<Pet, PetNames>,
+    pub items: Items,
 }
 
 impl Data {
@@ -50,6 +53,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion
     let positions = positions();
     let triggers = get_triggers(&conn, expansion);
     let pet_names = get_pet_name_data(&conn);
+    let items = get_items(&conn, expansion);
 
     Data {
         exp_per_level,
@@ -62,6 +66,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion
         actions,
         triggers,
         pet_names,
+        items,
     }
 }
 

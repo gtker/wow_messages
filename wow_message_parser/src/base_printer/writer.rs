@@ -31,6 +31,10 @@ impl Writer {
         self.indentation -= 1;
     }
 
+    pub fn w_no_indent(&mut self, s: impl AsRef<str>) {
+        self.inner.write_str(s.as_ref()).unwrap();
+    }
+
     pub fn w(&mut self, s: impl AsRef<str>) {
         for _ in 0..self.indentation {
             self.inner.write_str(Self::INDENTATION).unwrap();

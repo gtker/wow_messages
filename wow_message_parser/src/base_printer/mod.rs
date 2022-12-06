@@ -4,6 +4,7 @@ mod types;
 mod write;
 mod writer;
 
+use crate::base_printer::write::items::write_items;
 use crate::path_utils::{
     tbc_base_extended_dir, vanilla_base_extended_dir, wrath_base_extended_dir,
 };
@@ -98,4 +99,5 @@ fn write_to_files(directory: &Path, data: &Data, expansion: Expansion) {
     write::write_actions(directory, data);
     write::write_area_triggers(directory, data, expansion);
     write::write_pet_names(directory, data, expansion);
+    write_items(directory, data);
 }
