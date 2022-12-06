@@ -267,6 +267,7 @@ enum Skill : u16 {
     PET_WARP_STALKER = 766;
     PET_RAVAGER = 767;
     PET_SERPENT = 768;
+    INTERNAL = 769;
 } {
     versions = "2.4.3";
     rust_base_type = "true";

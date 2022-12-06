@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/skill.wowm:275`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/skill.wowm#L275):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/skill.wowm:276`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/skill.wowm#L276):
 /// ```text
 /// enum Skill : u16 {
 ///     NONE = 0;

@@ -141,6 +141,7 @@ use std::convert::{TryFrom, TryInto};
 ///     PET_WARP_STALKER = 766;
 ///     PET_RAVAGER = 767;
 ///     PET_SERPENT = 768;
+///     INTERNAL = 769;
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
@@ -283,6 +284,7 @@ pub enum Skill {
     PetWarpStalker,
     PetRavager,
     PetSerpent,
+    Internal,
 }
 
 impl Skill {
@@ -426,6 +428,7 @@ impl Skill {
             Self::PetWarpStalker => 0x2fe,
             Self::PetRavager => 0x2ff,
             Self::PetSerpent => 0x300,
+            Self::Internal => 0x301,
         }
     }
 
@@ -578,6 +581,7 @@ impl std::fmt::Display for Skill {
             Self::PetWarpStalker => f.write_str("PetWarpStalker"),
             Self::PetRavager => f.write_str("PetRavager"),
             Self::PetSerpent => f.write_str("PetSerpent"),
+            Self::Internal => f.write_str("Internal"),
         }
     }
 }
@@ -724,6 +728,7 @@ impl TryFrom<u16> for Skill {
             766 => Ok(Self::PetWarpStalker),
             767 => Ok(Self::PetRavager),
             768 => Ok(Self::PetSerpent),
+            769 => Ok(Self::Internal),
             v => Err(crate::errors::EnumError::new("Skill", v as u32),)
         }
     }
