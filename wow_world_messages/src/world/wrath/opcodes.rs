@@ -7414,6 +7414,7 @@ use crate::world::wrath::SMSG_EXPLORATION_EXPERIENCE;
 use crate::world::wrath::MSG_RANDOM_ROLL_Server;
 use crate::world::wrath::SMSG_ENVIRONMENTAL_DAMAGE_LOG;
 use crate::world::wrath::SMSG_LFG_PLAYER_REWARD;
+use crate::world::wrath::SMSG_LFG_TELEPORT_DENIED;
 use crate::world::wrath::SMSG_REMOVED_SPELL;
 use crate::world::wrath::SMSG_GMTICKET_CREATE;
 use crate::world::wrath::SMSG_GMTICKET_UPDATETEXT;
@@ -7804,6 +7805,7 @@ pub enum ServerOpcodeMessage {
     MSG_RANDOM_ROLL(MSG_RANDOM_ROLL_Server),
     SMSG_ENVIRONMENTAL_DAMAGE_LOG(SMSG_ENVIRONMENTAL_DAMAGE_LOG),
     SMSG_LFG_PLAYER_REWARD(SMSG_LFG_PLAYER_REWARD),
+    SMSG_LFG_TELEPORT_DENIED(SMSG_LFG_TELEPORT_DENIED),
     SMSG_REMOVED_SPELL(SMSG_REMOVED_SPELL),
     SMSG_GMTICKET_CREATE(SMSG_GMTICKET_CREATE),
     SMSG_GMTICKET_UPDATETEXT(SMSG_GMTICKET_UPDATETEXT),
@@ -8196,6 +8198,7 @@ impl ServerOpcodeMessage {
             0x01FB => Ok(Self::MSG_RANDOM_ROLL(<MSG_RANDOM_ROLL_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FB, size: body_size, io, } } else { a } })?)),
             0x01FC => Ok(Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(<SMSG_ENVIRONMENTAL_DAMAGE_LOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FC, size: body_size, io, } } else { a } })?)),
             0x01FF => Ok(Self::SMSG_LFG_PLAYER_REWARD(<SMSG_LFG_PLAYER_REWARD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FF, size: body_size, io, } } else { a } })?)),
+            0x0200 => Ok(Self::SMSG_LFG_TELEPORT_DENIED(<SMSG_LFG_TELEPORT_DENIED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0200, size: body_size, io, } } else { a } })?)),
             0x0203 => Ok(Self::SMSG_REMOVED_SPELL(<SMSG_REMOVED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0203, size: body_size, io, } } else { a } })?)),
             0x0206 => Ok(Self::SMSG_GMTICKET_CREATE(<SMSG_GMTICKET_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0206, size: body_size, io, } } else { a } })?)),
             0x0208 => Ok(Self::SMSG_GMTICKET_UPDATETEXT(<SMSG_GMTICKET_UPDATETEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0208, size: body_size, io, } } else { a } })?)),
@@ -8737,6 +8740,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RANDOM_ROLL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LFG_PLAYER_REWARD(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LFG_TELEPORT_DENIED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REMOVED_SPELL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.write_encrypted_server(w, e),
@@ -9130,6 +9134,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RANDOM_ROLL(c) => c.write_unencrypted_server(w),
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_LFG_PLAYER_REWARD(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LFG_TELEPORT_DENIED(c) => c.write_unencrypted_server(w),
             Self::SMSG_REMOVED_SPELL(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.write_unencrypted_server(w),
@@ -9523,6 +9528,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_PLAYER_REWARD(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LFG_TELEPORT_DENIED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REMOVED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9916,6 +9922,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LFG_PLAYER_REWARD(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LFG_TELEPORT_DENIED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REMOVED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10309,6 +10316,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_PLAYER_REWARD(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LFG_TELEPORT_DENIED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REMOVED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -10702,6 +10710,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ENVIRONMENTAL_DAMAGE_LOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LFG_PLAYER_REWARD(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LFG_TELEPORT_DENIED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REMOVED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_unencrypted_server(w).await,
@@ -11105,6 +11114,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_RANDOM_ROLL(_) => "MSG_RANDOM_ROLL_Server",
             ServerOpcodeMessage::SMSG_ENVIRONMENTAL_DAMAGE_LOG(_) => "SMSG_ENVIRONMENTAL_DAMAGE_LOG",
             ServerOpcodeMessage::SMSG_LFG_PLAYER_REWARD(_) => "SMSG_LFG_PLAYER_REWARD",
+            ServerOpcodeMessage::SMSG_LFG_TELEPORT_DENIED(_) => "SMSG_LFG_TELEPORT_DENIED",
             ServerOpcodeMessage::SMSG_REMOVED_SPELL(_) => "SMSG_REMOVED_SPELL",
             ServerOpcodeMessage::SMSG_GMTICKET_CREATE(_) => "SMSG_GMTICKET_CREATE",
             ServerOpcodeMessage::SMSG_GMTICKET_UPDATETEXT(_) => "SMSG_GMTICKET_UPDATETEXT",
@@ -12593,6 +12603,12 @@ impl From<SMSG_ENVIRONMENTAL_DAMAGE_LOG> for ServerOpcodeMessage {
 impl From<SMSG_LFG_PLAYER_REWARD> for ServerOpcodeMessage {
     fn from(c: SMSG_LFG_PLAYER_REWARD) -> Self {
         Self::SMSG_LFG_PLAYER_REWARD(c)
+    }
+}
+
+impl From<SMSG_LFG_TELEPORT_DENIED> for ServerOpcodeMessage {
+    fn from(c: SMSG_LFG_TELEPORT_DENIED) -> Self {
+        Self::SMSG_LFG_TELEPORT_DENIED(c)
     }
 }
 
