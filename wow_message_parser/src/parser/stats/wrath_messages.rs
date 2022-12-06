@@ -507,7 +507,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_LFG_OFFER_CONTINUE", 0x293),
     Data::new("CMSG_LFG_GET_STATUS", 0x296),
     Data::new("SMSG_SHOW_MAILBOX", 0x297),
-    Data::new("SMSG_RESET_RANGED_COMBAT_TIMER", 0x298),
     Data::new("SMSG_CHAT_NOT_IN_PARTY", 0x299),
     Data::new("CMSG_GMTICKETSYSTEM_TOGGLE", 0x29A),
     Data::new("CMSG_CANCEL_GROWTH_AURA", 0x29B),

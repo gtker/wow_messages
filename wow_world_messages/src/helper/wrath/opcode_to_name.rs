@@ -506,7 +506,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0293 => "SMSG_LFG_OFFER_CONTINUE",
         0x0296 => "CMSG_LFG_GET_STATUS",
         0x0297 => "SMSG_SHOW_MAILBOX",
-        0x0298 => "SMSG_RESET_RANGED_COMBAT_TIMER",
         0x0299 => "SMSG_CHAT_NOT_IN_PARTY",
         0x029a => "CMSG_GMTICKETSYSTEM_TOGGLE",
         0x029b => "CMSG_CANCEL_GROWTH_AURA",
