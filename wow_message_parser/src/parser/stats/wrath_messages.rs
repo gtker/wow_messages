@@ -466,7 +466,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_AUCTION_BIDDER_NOTIFICATION", 0x25E),
     Data::new("SMSG_AUCTION_OWNER_NOTIFICATION", 0x25F),
     Data::new("SMSG_PROCRESIST", 0x260),
-    Data::new("SMSG_COMBAT_EVENT_FAILED", 0x261),
     Data::new("SMSG_DISPEL_FAILED", 0x262),
     Data::new("SMSG_SPELLORDAMAGE_IMMUNE", 0x263),
     Data::new("CMSG_AUCTION_LIST_BIDDER_ITEMS", 0x264),

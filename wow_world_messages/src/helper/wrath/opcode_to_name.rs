@@ -465,7 +465,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x025e => "SMSG_AUCTION_BIDDER_NOTIFICATION",
         0x025f => "SMSG_AUCTION_OWNER_NOTIFICATION",
         0x0260 => "SMSG_PROCRESIST",
-        0x0261 => "SMSG_COMBAT_EVENT_FAILED",
         0x0262 => "SMSG_DISPEL_FAILED",
         0x0263 => "SMSG_SPELLORDAMAGE_IMMUNE",
         0x0264 => "CMSG_AUCTION_LIST_BIDDER_ITEMS",
