@@ -1948,6 +1948,8 @@ pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
 pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
+pub(crate) mod smsg_show_mailbox;
+pub use smsg_show_mailbox::*;
 pub(crate) mod smsg_spell_failure;
 pub use smsg_spell_failure::*;
 pub(crate) mod smsg_spell_go;

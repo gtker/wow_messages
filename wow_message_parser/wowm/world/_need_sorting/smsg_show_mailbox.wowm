@@ -1,0 +1,5 @@
+smsg SMSG_SHOW_MAILBOX = 0x0297 {
+    Guid guid;
+} {
+    versions = "3.3.5";
+}

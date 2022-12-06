@@ -7464,6 +7464,7 @@ use crate::world::wrath::SMSG_PVP_CREDIT;
 use crate::world::wrath::SMSG_AUCTION_REMOVED_NOTIFICATION;
 use crate::world::wrath::SMSG_SERVER_MESSAGE;
 use crate::world::wrath::SMSG_LFG_OFFER_CONTINUE;
+use crate::world::wrath::SMSG_SHOW_MAILBOX;
 use crate::world::wrath::SMSG_CANCEL_AUTO_REPEAT;
 use crate::world::wrath::SMSG_STANDSTATE_UPDATE;
 use crate::world::wrath::SMSG_LOOT_ALL_PASSED;
@@ -7857,6 +7858,7 @@ pub enum ServerOpcodeMessage {
     SMSG_AUCTION_REMOVED_NOTIFICATION(SMSG_AUCTION_REMOVED_NOTIFICATION),
     SMSG_SERVER_MESSAGE(SMSG_SERVER_MESSAGE),
     SMSG_LFG_OFFER_CONTINUE(SMSG_LFG_OFFER_CONTINUE),
+    SMSG_SHOW_MAILBOX(SMSG_SHOW_MAILBOX),
     SMSG_CANCEL_AUTO_REPEAT(SMSG_CANCEL_AUTO_REPEAT),
     SMSG_STANDSTATE_UPDATE(SMSG_STANDSTATE_UPDATE),
     SMSG_LOOT_ALL_PASSED(SMSG_LOOT_ALL_PASSED),
@@ -8252,6 +8254,7 @@ impl ServerOpcodeMessage {
             0x028D => Ok(Self::SMSG_AUCTION_REMOVED_NOTIFICATION(<SMSG_AUCTION_REMOVED_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028D, size: body_size, io, } } else { a } })?)),
             0x0291 => Ok(Self::SMSG_SERVER_MESSAGE(<SMSG_SERVER_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0291, size: body_size, io, } } else { a } })?)),
             0x0293 => Ok(Self::SMSG_LFG_OFFER_CONTINUE(<SMSG_LFG_OFFER_CONTINUE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0293, size: body_size, io, } } else { a } })?)),
+            0x0297 => Ok(Self::SMSG_SHOW_MAILBOX(<SMSG_SHOW_MAILBOX as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0297, size: body_size, io, } } else { a } })?)),
             0x029C => Ok(Self::SMSG_CANCEL_AUTO_REPEAT(<SMSG_CANCEL_AUTO_REPEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x029C, size: body_size, io, } } else { a } })?)),
             0x029D => Ok(Self::SMSG_STANDSTATE_UPDATE(<SMSG_STANDSTATE_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x029D, size: body_size, io, } } else { a } })?)),
             0x029E => Ok(Self::SMSG_LOOT_ALL_PASSED(<SMSG_LOOT_ALL_PASSED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x029E, size: body_size, io, } } else { a } })?)),
@@ -8796,6 +8799,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SERVER_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LFG_OFFER_CONTINUE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SHOW_MAILBOX(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CANCEL_AUTO_REPEAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_STANDSTATE_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_ALL_PASSED(c) => c.write_encrypted_server(w, e),
@@ -9192,6 +9196,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_SERVER_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LFG_OFFER_CONTINUE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SHOW_MAILBOX(c) => c.write_unencrypted_server(w),
             Self::SMSG_CANCEL_AUTO_REPEAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_STANDSTATE_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_ALL_PASSED(c) => c.write_unencrypted_server(w),
@@ -9588,6 +9593,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_OFFER_CONTINUE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SHOW_MAILBOX(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CANCEL_AUTO_REPEAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_STANDSTATE_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_ALL_PASSED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9984,6 +9990,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LFG_OFFER_CONTINUE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SHOW_MAILBOX(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CANCEL_AUTO_REPEAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_STANDSTATE_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_ALL_PASSED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10380,6 +10387,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_OFFER_CONTINUE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SHOW_MAILBOX(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CANCEL_AUTO_REPEAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_STANDSTATE_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_ALL_PASSED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -10776,6 +10784,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_AUCTION_REMOVED_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SERVER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LFG_OFFER_CONTINUE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SHOW_MAILBOX(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CANCEL_AUTO_REPEAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_STANDSTATE_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_ALL_PASSED(c) => c.astd_write_unencrypted_server(w).await,
@@ -11182,6 +11191,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_AUCTION_REMOVED_NOTIFICATION(_) => "SMSG_AUCTION_REMOVED_NOTIFICATION",
             ServerOpcodeMessage::SMSG_SERVER_MESSAGE(_) => "SMSG_SERVER_MESSAGE",
             ServerOpcodeMessage::SMSG_LFG_OFFER_CONTINUE(_) => "SMSG_LFG_OFFER_CONTINUE",
+            ServerOpcodeMessage::SMSG_SHOW_MAILBOX(_) => "SMSG_SHOW_MAILBOX",
             ServerOpcodeMessage::SMSG_CANCEL_AUTO_REPEAT(_) => "SMSG_CANCEL_AUTO_REPEAT",
             ServerOpcodeMessage::SMSG_STANDSTATE_UPDATE(_) => "SMSG_STANDSTATE_UPDATE",
             ServerOpcodeMessage::SMSG_LOOT_ALL_PASSED(_) => "SMSG_LOOT_ALL_PASSED",
@@ -12923,6 +12933,12 @@ impl From<SMSG_SERVER_MESSAGE> for ServerOpcodeMessage {
 impl From<SMSG_LFG_OFFER_CONTINUE> for ServerOpcodeMessage {
     fn from(c: SMSG_LFG_OFFER_CONTINUE) -> Self {
         Self::SMSG_LFG_OFFER_CONTINUE(c)
+    }
+}
+
+impl From<SMSG_SHOW_MAILBOX> for ServerOpcodeMessage {
+    fn from(c: SMSG_SHOW_MAILBOX) -> Self {
+        Self::SMSG_SHOW_MAILBOX(c)
     }
 }
 
