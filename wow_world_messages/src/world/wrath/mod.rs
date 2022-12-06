@@ -1868,6 +1868,8 @@ pub(crate) mod smsg_learned_spell;
 pub use smsg_learned_spell::*;
 pub(crate) mod smsg_levelup_info;
 pub use smsg_levelup_info::*;
+pub(crate) mod smsg_lfg_offer_continue;
+pub use smsg_lfg_offer_continue::*;
 pub(crate) mod smsg_lfg_player_reward;
 pub use smsg_lfg_player_reward::*;
 pub(crate) mod smsg_lfg_teleport_denied;

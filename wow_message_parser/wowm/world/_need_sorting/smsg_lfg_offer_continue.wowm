@@ -1,0 +1,5 @@
+smsg SMSG_LFG_OFFER_CONTINUE = 0x0293 {
+    u32 dungeon_entry;
+} {
+    versions = "3.3.5";
+}

@@ -976,6 +976,7 @@
 - [SMSG_LEARNED_SPELL](docs/smsg_learned_spell.md)
 - [SMSG_LEVELUP_INFO](docs/smsg_levelup_info.md)
 - [SMSG_LFG_DISABLED](docs/smsg_lfg_disabled.md)
+- [SMSG_LFG_OFFER_CONTINUE](docs/smsg_lfg_offer_continue.md)
 - [SMSG_LFG_PLAYER_REWARD](docs/smsg_lfg_player_reward.md)
 - [SMSG_LFG_TELEPORT_DENIED](docs/smsg_lfg_teleport_denied.md)
 - [SMSG_LIST_INVENTORY](docs/smsg_list_inventory.md)
