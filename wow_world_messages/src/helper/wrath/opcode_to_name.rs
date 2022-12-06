@@ -273,7 +273,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x016d => "CMSG_DUEL_CANCELLED",
         0x016e => "SMSG_MOUNTRESULT",
         0x016f => "SMSG_DISMOUNTRESULT",
-        0x0170 => "SMSG_REMOVED_FROM_PVP_QUEUE",
         0x0171 => "CMSG_MOUNTSPECIAL_ANIM",
         0x0172 => "SMSG_MOUNTSPECIAL_ANIM",
         0x0173 => "SMSG_PET_TAME_FAILURE",

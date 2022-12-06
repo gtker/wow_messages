@@ -274,7 +274,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_DUEL_CANCELLED", 0x16D),
     Data::new("SMSG_MOUNTRESULT", 0x16E),
     Data::nyi("SMSG_DISMOUNTRESULT", 0x16F),
-    Data::new("SMSG_REMOVED_FROM_PVP_QUEUE", 0x170),
     Data::new("CMSG_MOUNTSPECIAL_ANIM", 0x171),
     Data::new("SMSG_MOUNTSPECIAL_ANIM", 0x172),
     Data::new("SMSG_PET_TAME_FAILURE", 0x173),
