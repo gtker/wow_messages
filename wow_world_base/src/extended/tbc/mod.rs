@@ -8,6 +8,7 @@ pub mod exp;
 mod items;
 mod map;
 pub mod position;
+mod skill;
 mod skills;
 mod spells;
 pub mod trigger;
@@ -17,6 +18,7 @@ pub use base_stats::*;
 pub use creature_family::*;
 pub use items::*;
 pub use map::*;
+pub use skill::*;
 pub use skills::*;
 pub use spells::*;
 

@@ -6,6 +6,7 @@ use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
 
 pub use crate::manual::PlayerGender;
+pub use crate::manual::SkillCategory;
 
 pub use player_race::*;
 pub use race_class::*;

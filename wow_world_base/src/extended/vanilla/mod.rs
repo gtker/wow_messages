@@ -9,6 +9,7 @@ mod items;
 mod map;
 mod player_race;
 pub mod position;
+mod skill;
 mod skills;
 mod spells;
 pub mod trigger;
@@ -19,6 +20,7 @@ pub use creature_family::*;
 pub use items::*;
 pub use map::*;
 pub use player_race::*;
+pub use skill::*;
 pub use skills::*;
 pub use spells::*;
 

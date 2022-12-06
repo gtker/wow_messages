@@ -79,14 +79,11 @@ use std::convert::{TryFrom, TryInto};
 ///     PET_RAPTOR = 217;
 ///     PET_TALLSTRIDER = 218;
 ///     RACIAL_UNDED = 220;
-///     WEAPON_TALENTS = 222;
 ///     CROSSBOWS = 226;
-///     SPEARS = 227;
 ///     WANDS = 228;
 ///     POLEARMS = 229;
 ///     PET_SCORPID = 236;
 ///     ARCANE = 237;
-///     OPEN_LOCK = 242;
 ///     PET_TURTLE = 251;
 ///     ASSASSINATION = 253;
 ///     FURY = 256;
@@ -222,14 +219,11 @@ pub enum Skill {
     PetRaptor,
     PetTallstrider,
     RacialUnded,
-    WeaponTalents,
     Crossbows,
-    Spears,
     Wands,
     Polearms,
     PetScorpid,
     Arcane,
-    OpenLock,
     PetTurtle,
     Assassination,
     Fury,
@@ -366,14 +360,11 @@ impl Skill {
             Self::PetRaptor => 0xd9,
             Self::PetTallstrider => 0xda,
             Self::RacialUnded => 0xdc,
-            Self::WeaponTalents => 0xde,
             Self::Crossbows => 0xe2,
-            Self::Spears => 0xe3,
             Self::Wands => 0xe4,
             Self::Polearms => 0xe5,
             Self::PetScorpid => 0xec,
             Self::Arcane => 0xed,
-            Self::OpenLock => 0xf2,
             Self::PetTurtle => 0xfb,
             Self::Assassination => 0xfd,
             Self::Fury => 0x100,
@@ -519,14 +510,11 @@ impl std::fmt::Display for Skill {
             Self::PetRaptor => f.write_str("PetRaptor"),
             Self::PetTallstrider => f.write_str("PetTallstrider"),
             Self::RacialUnded => f.write_str("RacialUnded"),
-            Self::WeaponTalents => f.write_str("WeaponTalents"),
             Self::Crossbows => f.write_str("Crossbows"),
-            Self::Spears => f.write_str("Spears"),
             Self::Wands => f.write_str("Wands"),
             Self::Polearms => f.write_str("Polearms"),
             Self::PetScorpid => f.write_str("PetScorpid"),
             Self::Arcane => f.write_str("Arcane"),
-            Self::OpenLock => f.write_str("OpenLock"),
             Self::PetTurtle => f.write_str("PetTurtle"),
             Self::Assassination => f.write_str("Assassination"),
             Self::Fury => f.write_str("Fury"),
@@ -666,14 +654,11 @@ impl TryFrom<u16> for Skill {
             217 => Ok(Self::PetRaptor),
             218 => Ok(Self::PetTallstrider),
             220 => Ok(Self::RacialUnded),
-            222 => Ok(Self::WeaponTalents),
             226 => Ok(Self::Crossbows),
-            227 => Ok(Self::Spears),
             228 => Ok(Self::Wands),
             229 => Ok(Self::Polearms),
             236 => Ok(Self::PetScorpid),
             237 => Ok(Self::Arcane),
-            242 => Ok(Self::OpenLock),
             251 => Ok(Self::PetTurtle),
             253 => Ok(Self::Assassination),
             256 => Ok(Self::Fury),
