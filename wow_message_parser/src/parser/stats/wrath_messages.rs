@@ -437,7 +437,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::self_size_struct("SMSG_MAIL_LIST_RESULT", 0x23B),
     Data::new("CMSG_BATTLEFIELD_LIST", 0x23C),
     Data::new("SMSG_BATTLEFIELD_LIST", 0x23D),
-    Data::new("SMSG_FORCE_SET_VEHICLE_REC_ID", 0x23F),
     Data::new("CMSG_ITEM_TEXT_QUERY", 0x243),
     Data::new("SMSG_ITEM_TEXT_QUERY_RESPONSE", 0x244),
     Data::new("CMSG_MAIL_TAKE_MONEY", 0x245),
