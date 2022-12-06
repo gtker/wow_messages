@@ -978,6 +978,7 @@
 - [SMSG_LFG_DISABLED](docs/smsg_lfg_disabled.md)
 - [SMSG_LFG_OFFER_CONTINUE](docs/smsg_lfg_offer_continue.md)
 - [SMSG_LFG_PLAYER_REWARD](docs/smsg_lfg_player_reward.md)
+- [SMSG_LFG_ROLE_CHOSEN](docs/smsg_lfg_role_chosen.md)
 - [SMSG_LFG_TELEPORT_DENIED](docs/smsg_lfg_teleport_denied.md)
 - [SMSG_LIST_INVENTORY](docs/smsg_list_inventory.md)
 - [SMSG_LOGIN_SETTIMESPEED](docs/smsg_login_settimespeed.md)

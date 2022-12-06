@@ -1,0 +1,7 @@
+smsg SMSG_LFG_ROLE_CHOSEN = 0x02BB {
+    Guid guid;
+    Bool ready;
+    u32 roles;
+} {
+    versions = "3.3.5";
+}

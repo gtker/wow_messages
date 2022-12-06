@@ -1872,6 +1872,8 @@ pub(crate) mod smsg_lfg_offer_continue;
 pub use smsg_lfg_offer_continue::*;
 pub(crate) mod smsg_lfg_player_reward;
 pub use smsg_lfg_player_reward::*;
+pub(crate) mod smsg_lfg_role_chosen;
+pub use smsg_lfg_role_chosen::*;
 pub(crate) mod smsg_lfg_teleport_denied;
 pub use smsg_lfg_teleport_denied::*;
 pub(crate) mod smsg_log_xpgain;
