@@ -1,0 +1,35 @@
+struct QuestPoiList {
+    u32 quest_id;
+    u32 amount_of_pois;
+
+} {
+    versions = "3.3.5";
+}
+
+struct Vector2dUnsigned {
+    u32 x;
+    u32 y;
+} {
+    versions = "3.3.5";
+}
+
+struct QuestPoi {
+    u32 id;
+    u32 objective_id;
+    Map map;
+    Area area;
+    u32 floor_id;
+    u32 unknown1;
+    u32 unknown2;
+    u32 amount_of_points;
+    Vector2dUnsigned[amount_of_points] points;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_QUEST_POI_QUERY_RESPONSE = 0x01E4 {
+    u32 amount_of_quests;
+    QuestPoiList[amount_of_quests] quests;
+} {
+    versions = "3.3.5";
+}

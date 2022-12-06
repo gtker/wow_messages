@@ -632,6 +632,7 @@ Used in:
 * [CMSG_WORLD_TELEPORT](cmsg_world_teleport.md)
 * [Character](character.md)
 * [MSG_CORPSE_QUERY_Server](msg_corpse_query_server.md)
+* [QuestPoi](questpoi.md)
 * [RaidInfo](raidinfo.md)
 * [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
