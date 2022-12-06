@@ -1842,6 +1842,8 @@ pub(crate) mod smsg_initial_spells;
 pub use smsg_initial_spells::*;
 pub(crate) mod smsg_initialize_factions;
 pub use smsg_initialize_factions::*;
+pub(crate) mod smsg_instance_lock_warning_query;
+pub use smsg_instance_lock_warning_query::*;
 pub(crate) mod smsg_instance_reset;
 pub use smsg_instance_reset::*;
 pub(crate) mod smsg_instance_reset_failed;

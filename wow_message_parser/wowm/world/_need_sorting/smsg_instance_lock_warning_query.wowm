@@ -1,0 +1,7 @@
+smsg SMSG_INSTANCE_LOCK_WARNING_QUERY = 0x0147 {
+    u32 time_in_milliseconds;
+    u32 encounter_mask;
+    u8 unknown;
+} {
+    versions = "3.3.5";
+}

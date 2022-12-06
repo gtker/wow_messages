@@ -955,6 +955,7 @@
 - [SMSG_INIT_WORLD_STATES](docs/smsg_init_world_states.md)
 - [SMSG_INSPECT](docs/smsg_inspect.md)
 - [SMSG_INSTANCE_DIFFICULTY](docs/smsg_instance_difficulty.md)
+- [SMSG_INSTANCE_LOCK_WARNING_QUERY](docs/smsg_instance_lock_warning_query.md)
 - [SMSG_INSTANCE_RESET](docs/smsg_instance_reset.md)
 - [SMSG_INSTANCE_RESET_FAILED](docs/smsg_instance_reset_failed.md)
 - [SMSG_INSTANCE_SAVE_CREATED](docs/smsg_instance_save_created.md)

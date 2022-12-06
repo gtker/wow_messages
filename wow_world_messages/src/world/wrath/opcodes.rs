@@ -7320,6 +7320,7 @@ use crate::world::wrath::SMSG_ATTACKSTART;
 use crate::world::wrath::SMSG_ATTACKSTOP;
 use crate::world::wrath::SMSG_ATTACKSWING_NOTINRANGE;
 use crate::world::wrath::SMSG_ATTACKSWING_BADFACING;
+use crate::world::wrath::SMSG_INSTANCE_LOCK_WARNING_QUERY;
 use crate::world::wrath::SMSG_ATTACKSWING_DEADTARGET;
 use crate::world::wrath::SMSG_ATTACKSWING_CANT_ATTACK;
 use crate::world::wrath::SMSG_ATTACKERSTATEUPDATE;
@@ -7706,6 +7707,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ATTACKSTOP(SMSG_ATTACKSTOP),
     SMSG_ATTACKSWING_NOTINRANGE(SMSG_ATTACKSWING_NOTINRANGE),
     SMSG_ATTACKSWING_BADFACING(SMSG_ATTACKSWING_BADFACING),
+    SMSG_INSTANCE_LOCK_WARNING_QUERY(SMSG_INSTANCE_LOCK_WARNING_QUERY),
     SMSG_ATTACKSWING_DEADTARGET(SMSG_ATTACKSWING_DEADTARGET),
     SMSG_ATTACKSWING_CANT_ATTACK(SMSG_ATTACKSWING_CANT_ATTACK),
     SMSG_ATTACKERSTATEUPDATE(SMSG_ATTACKERSTATEUPDATE),
@@ -8094,6 +8096,7 @@ impl ServerOpcodeMessage {
             0x0144 => Ok(Self::SMSG_ATTACKSTOP(<SMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0144, size: body_size, io, } } else { a } })?)),
             0x0145 => Ok(Self::SMSG_ATTACKSWING_NOTINRANGE(<SMSG_ATTACKSWING_NOTINRANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0145, size: body_size, io, } } else { a } })?)),
             0x0146 => Ok(Self::SMSG_ATTACKSWING_BADFACING(<SMSG_ATTACKSWING_BADFACING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0146, size: body_size, io, } } else { a } })?)),
+            0x0147 => Ok(Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(<SMSG_INSTANCE_LOCK_WARNING_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0147, size: body_size, io, } } else { a } })?)),
             0x0148 => Ok(Self::SMSG_ATTACKSWING_DEADTARGET(<SMSG_ATTACKSWING_DEADTARGET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0148, size: body_size, io, } } else { a } })?)),
             0x0149 => Ok(Self::SMSG_ATTACKSWING_CANT_ATTACK(<SMSG_ATTACKSWING_CANT_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0149, size: body_size, io, } } else { a } })?)),
             0x014A => Ok(Self::SMSG_ATTACKERSTATEUPDATE(<SMSG_ATTACKERSTATEUPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x014A, size: body_size, io, } } else { a } })?)),
@@ -8631,6 +8634,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTOP(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.write_encrypted_server(w, e),
@@ -9020,6 +9024,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTOP(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.write_unencrypted_server(w),
+            Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.write_unencrypted_server(w),
@@ -9409,6 +9414,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9798,6 +9804,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10187,6 +10194,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTOP(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -10576,6 +10584,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_BADFACING(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -10975,6 +10984,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ATTACKSTOP(_) => "SMSG_ATTACKSTOP",
             ServerOpcodeMessage::SMSG_ATTACKSWING_NOTINRANGE(_) => "SMSG_ATTACKSWING_NOTINRANGE",
             ServerOpcodeMessage::SMSG_ATTACKSWING_BADFACING(_) => "SMSG_ATTACKSWING_BADFACING",
+            ServerOpcodeMessage::SMSG_INSTANCE_LOCK_WARNING_QUERY(_) => "SMSG_INSTANCE_LOCK_WARNING_QUERY",
             ServerOpcodeMessage::SMSG_ATTACKSWING_DEADTARGET(_) => "SMSG_ATTACKSWING_DEADTARGET",
             ServerOpcodeMessage::SMSG_ATTACKSWING_CANT_ATTACK(_) => "SMSG_ATTACKSWING_CANT_ATTACK",
             ServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(_) => "SMSG_ATTACKERSTATEUPDATE",
@@ -11989,6 +11999,12 @@ impl From<SMSG_ATTACKSWING_NOTINRANGE> for ServerOpcodeMessage {
 impl From<SMSG_ATTACKSWING_BADFACING> for ServerOpcodeMessage {
     fn from(c: SMSG_ATTACKSWING_BADFACING) -> Self {
         Self::SMSG_ATTACKSWING_BADFACING(c)
+    }
+}
+
+impl From<SMSG_INSTANCE_LOCK_WARNING_QUERY> for ServerOpcodeMessage {
+    fn from(c: SMSG_INSTANCE_LOCK_WARNING_QUERY) -> Self {
+        Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c)
     }
 }
 
