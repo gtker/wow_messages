@@ -5,6 +5,7 @@ mod base_stats;
 pub mod character_features;
 mod creature_family;
 pub mod exp;
+pub mod item;
 mod items;
 mod map;
 pub mod position;
