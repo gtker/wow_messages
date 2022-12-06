@@ -1,0 +1,20 @@
+smsg SMSG_LFG_PLAYER_REWARD = 0x01FF {
+    u32 random_dungeon_entry;
+    u32 dungeon_finished_entry;
+    Bool done;
+    u32 unknown1 {
+        comment = "emus set to 1.";
+    }
+    u32 money_reward;
+    u32 experience_reward;
+    u32 unknown2 {
+        comment = "emus set to 0.";
+    }
+    u32 unknown3 {
+        comment = "emus set to 0.";
+    }
+    u8 amount_of_rewards;
+    QuestGiverReward[amount_of_rewards] rewards;
+} {
+    versions = "3.3.5";
+}
