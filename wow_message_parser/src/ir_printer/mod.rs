@@ -39,20 +39,26 @@ impl From<&Endianness> for IrEndianness {
 #[serde(tag = "type", content = "endianness")]
 pub(crate) enum IrIntegerType {
     u8,
+    i8,
     u16(IrEndianness),
     u32(IrEndianness),
     u64(IrEndianness),
+    i16(IrEndianness),
     i32(IrEndianness),
+    i64(IrEndianness),
 }
 
 impl From<&IntegerType> for IrIntegerType {
     fn from(v: &IntegerType) -> Self {
         match v {
-            IntegerType::U8 => IrIntegerType::u8,
-            IntegerType::U16(e) => IrIntegerType::u16(e.into()),
-            IntegerType::U32(e) => IrIntegerType::u32(e.into()),
-            IntegerType::U64(e) => IrIntegerType::u64(e.into()),
-            IntegerType::I32(e) => IrIntegerType::i32(e.into()),
+            IntegerType::U8 => Self::u8,
+            IntegerType::U16(e) => Self::u16(e.into()),
+            IntegerType::U32(e) => Self::u32(e.into()),
+            IntegerType::U64(e) => Self::u64(e.into()),
+            IntegerType::I32(e) => Self::i32(e.into()),
+            IntegerType::I8 => Self::i8,
+            IntegerType::I16(e) => Self::i16(e.into()),
+            IntegerType::I64(e) => Self::i64(e.into()),
         }
     }
 }

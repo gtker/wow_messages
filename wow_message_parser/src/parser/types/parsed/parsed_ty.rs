@@ -217,8 +217,13 @@ impl ParsedType {
             "u16_be" => Self::Integer(IntegerType::U16(Endianness::Big)),
             "u32_be" => Self::Integer(IntegerType::U32(Endianness::Big)),
             "u64_be" => Self::Integer(IntegerType::U64(Endianness::Big)),
+            "i8" => Self::Integer(IntegerType::I8),
+            "i16" => Self::Integer(IntegerType::I16(Endianness::Little)),
+            "i16_be" => Self::Integer(IntegerType::I16(Endianness::Big)),
             "i32" => Self::Integer(IntegerType::I32(Endianness::Little)),
             "i32_be" => Self::Integer(IntegerType::I32(Endianness::Big)),
+            "i64" => Self::Integer(IntegerType::I64(Endianness::Little)),
+            "i64_be" => Self::Integer(IntegerType::I64(Endianness::Big)),
             "f32" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Little)),
             "f32_be" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Big)),
             "f64" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Little)),
@@ -291,9 +296,9 @@ impl ParsedType {
 
 pub(crate) fn bool_ty_to_string(i: &IntegerType) -> String {
     match i {
-        IntegerType::U8 => "Bool".to_string(),
-        IntegerType::U16(_) => "Bool16".to_string(),
+        IntegerType::I8 | IntegerType::U8 => "Bool".to_string(),
+        IntegerType::I16(_) | IntegerType::U16(_) => "Bool16".to_string(),
         IntegerType::I32(_) | IntegerType::U32(_) => "Bool32".to_string(),
-        IntegerType::U64(_) => "Bool64".to_string(),
+        IntegerType::I64(_) | IntegerType::U64(_) => "Bool64".to_string(),
     }
 }

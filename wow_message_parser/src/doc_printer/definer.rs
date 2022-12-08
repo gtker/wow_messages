@@ -74,9 +74,11 @@ fn print_definer_table(s: &mut DocWriter, e: &Definer) {
         byte = e.ty().size(),
         bit = e.ty().size() * 8,
         endian = match e.ty() {
-            IntegerType::U8 => "".to_string(),
+            IntegerType::I8 | IntegerType::U8 => "".to_string(),
             IntegerType::U16(e)
             | IntegerType::U32(e)
+            | IntegerType::I16(e)
+            | IntegerType::I64(e)
             | IntegerType::U64(e)
             | IntegerType::I32(e) => format!(
                 " {} endian",

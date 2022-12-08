@@ -770,8 +770,8 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
 
 fn get_integer_value(t: &IntegerType, value: &[u8]) -> isize {
     match t {
-        IntegerType::U8 => value[0] as isize,
-        IntegerType::U16(e) => {
+        IntegerType::I8 | IntegerType::U8 => value[0] as isize,
+        IntegerType::I16(e) | IntegerType::U16(e) => {
             let value: [u8; 2] = value.try_into().unwrap();
             match e {
                 Endianness::Little => u16::from_le_bytes(value) as isize,
@@ -785,7 +785,7 @@ fn get_integer_value(t: &IntegerType, value: &[u8]) -> isize {
                 Endianness::Big => u32::from_be_bytes(value) as isize,
             }
         }
-        IntegerType::U64(e) => {
+        IntegerType::I64(e) | IntegerType::U64(e) => {
             let value: [u8; 8] = value.try_into().unwrap();
             match e {
                 Endianness::Little => u64::from_le_bytes(value) as isize,

@@ -112,16 +112,19 @@ pub(crate) enum IntegerType {
     U16(Endianness),
     U32(Endianness),
     U64(Endianness),
+    I8,
+    I16(Endianness),
     I32(Endianness),
+    I64(Endianness),
 }
 
 impl IntegerType {
     pub(crate) fn size(&self) -> u8 {
         match self {
-            IntegerType::U8 => 1,
-            IntegerType::U16(_) => 2,
+            IntegerType::I8 | IntegerType::U8 => 1,
+            IntegerType::I16(_) | IntegerType::U16(_) => 2,
             IntegerType::U32(_) | IntegerType::I32(_) => 4,
-            IntegerType::U64(_) => 8,
+            IntegerType::I64(_) | IntegerType::U64(_) => 8,
         }
     }
 
@@ -152,6 +155,15 @@ impl IntegerType {
                 Endianness::Little => "i32",
                 Endianness::Big => "i32_be",
             },
+            IntegerType::I8 => "i8",
+            IntegerType::I16(e) => match e {
+                Endianness::Little => "i16",
+                Endianness::Big => "i16_be",
+            },
+            IntegerType::I64(e) => match e {
+                Endianness::Little => "i64",
+                Endianness::Big => "i64_be",
+            },
         }
     }
 
@@ -162,13 +174,18 @@ impl IntegerType {
             IntegerType::U32(_) => "u32",
             IntegerType::U64(_) => "u64",
             IntegerType::I32(_) => "i32",
+            IntegerType::I8 => "i8",
+            IntegerType::I16(_) => "i16",
+            IntegerType::I64(_) => "i64",
         }
     }
 
     pub(crate) fn rust_endian_str(&self) -> &str {
         match self {
-            IntegerType::U8 => "le",
-            IntegerType::U16(i)
+            IntegerType::I8 | IntegerType::U8 => "le",
+            IntegerType::I16(i)
+            | IntegerType::I64(i)
+            | IntegerType::U16(i)
             | IntegerType::U32(i)
             | IntegerType::U64(i)
             | IntegerType::I32(i) => i.rust_str(),
@@ -177,8 +194,10 @@ impl IntegerType {
 
     pub(crate) fn wireshark_endian_str(&self) -> &str {
         match self {
-            IntegerType::U8 => "ENC_LITTLE_ENDIAN",
-            IntegerType::U16(i)
+            IntegerType::I8 | IntegerType::U8 => "ENC_LITTLE_ENDIAN",
+            IntegerType::I16(i)
+            | IntegerType::I64(i)
+            | IntegerType::U16(i)
             | IntegerType::U32(i)
             | IntegerType::U64(i)
             | IntegerType::I32(i) => i.wireshark_str(),
@@ -187,8 +206,10 @@ impl IntegerType {
 
     pub(crate) fn doc_endian_str(&self) -> &str {
         match self {
-            IntegerType::U8 => "-",
-            IntegerType::U16(e)
+            IntegerType::I8 | IntegerType::U8 => "-",
+            IntegerType::I16(e)
+            | IntegerType::I64(e)
+            | IntegerType::U16(e)
             | IntegerType::U32(e)
             | IntegerType::U64(e)
             | IntegerType::I32(e) => match e {

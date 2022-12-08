@@ -238,6 +238,9 @@ fn int_type_to_wireshark_string(i: &IntegerType) -> String {
         IntegerType::U32(_) => "FT_UINT32",
         IntegerType::U64(_) => "FT_UINT64",
         IntegerType::I32(_) => "FT_INT32",
+        IntegerType::I8 => "FT_INT8",
+        IntegerType::I16(_) => "FT_INT16",
+        IntegerType::I64(_) => "FT_INT64",
     }
     .to_string()
 }
