@@ -27,7 +27,7 @@ fn float_format(v: f32) -> String {
 }
 
 fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
-    s.wln("pub const ITEMS: &'static [Item] = &[");
+    s.wln("pub const ITEMS: &[Item] = &[");
     s.inc_indent();
 
     for item in items {
@@ -170,7 +170,7 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
 }
 
 fn tbc(s: &mut Writer, items: &[TbcItem]) {
-    s.wln("pub const ITEMS: &'static [Item] = &[");
+    s.wln("pub const ITEMS: &[Item] = &[");
     s.inc_indent();
 
     for item in items {
@@ -180,7 +180,7 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.class));
         s.w_no_indent(format!("{},", item.subclass));
         s.w_no_indent(format!("{},", item.unk0));
-        s.w_no_indent(format!("\"{}\",", item.name.replace("\"", "\\\"")));
+        s.w_no_indent(format!("\"{}\",", item.name.replace('\"', "\\\"")));
         s.w_no_indent(format!("{},", item.displayid));
         s.w_no_indent(format!("{},", item.quality));
         s.w_no_indent(format!("{},", item.flags));
@@ -283,7 +283,7 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.spell_category_5));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_5));
         s.w_no_indent(format!("{},", item.bonding));
-        s.w_no_indent(format!("\"{}\",", item.description.replace("\"", "\\\"")));
+        s.w_no_indent(format!("\"{}\",", item.description.replace('\"', "\\\"")));
         s.w_no_indent(format!("{},", item.page_text));
         s.w_no_indent(format!("{},", item.language_id));
         s.w_no_indent(format!("{},", item.page_material));
@@ -310,7 +310,7 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.gem_properties));
         s.w_no_indent(format!("{},", item.required_disenchant_skill));
         s.w_no_indent(float_format(item.armor_damage_modifier));
-        s.w_no_indent(format!("\"{}\",", item.script_name.replace("\"", "\\\"")));
+        s.w_no_indent(format!("\"{}\",", item.script_name.replace('\"', "\\\"")));
         s.w_no_indent(format!("{},", item.disenchant_id));
         s.w_no_indent(format!("{},", item.food_type));
         s.w_no_indent(format!("{},", item.min_money_loot));
@@ -326,7 +326,7 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
 }
 
 fn wrath(s: &mut Writer, items: &[WrathItem]) {
-    s.wln("pub const ITEMS: &'static [Item] = &[");
+    s.wln("pub const ITEMS: &[Item] = &[");
     s.inc_indent();
 
     for item in items {
@@ -336,7 +336,7 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.class));
         s.w_no_indent(format!("{},", item.subclass));
         s.w_no_indent(format!("{},", item.unk0));
-        s.w_no_indent(format!("\"{}\",", item.name.replace("\"", "\\\"")));
+        s.w_no_indent(format!("\"{}\",", item.name.replace('\"', "\\\"")));
         s.w_no_indent(format!("{},", item.displayid));
         s.w_no_indent(format!("{},", item.quality));
         s.w_no_indent(format!("{},", item.flags));
@@ -434,7 +434,7 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.spell_category_5));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_5));
         s.w_no_indent(format!("{},", item.bonding));
-        s.w_no_indent(format!("\"{}\",", item.description.replace("\"", "\\\"")));
+        s.w_no_indent(format!("\"{}\",", item.description.replace('\"', "\\\"")));
         s.w_no_indent(format!("{},", item.page_text));
         s.w_no_indent(format!("{},", item.language_id));
         s.w_no_indent(format!("{},", item.page_material));
@@ -464,7 +464,7 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.duration));
         s.w_no_indent(format!("{},", item.item_limit_category));
         s.w_no_indent(format!("{},", item.holiday_id));
-        s.w_no_indent(format!("\"{}\",", item.script_name.replace("\"", "\\\"")));
+        s.w_no_indent(format!("\"{}\",", item.script_name.replace('\"', "\\\"")));
         s.w_no_indent(format!("{},", item.disenchant_id));
         s.w_no_indent(format!("{},", item.food_type));
         s.w_no_indent(format!("{},", item.min_money_loot));
