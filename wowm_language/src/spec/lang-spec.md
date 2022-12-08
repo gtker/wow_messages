@@ -71,13 +71,14 @@ In order to give semantic type information to languages that can use it, the fol
 Codegen units are free to simply substitute for the original built-in type if they want.
 These are often used in places where enums do not make sense since almost every single value is valid, but where extra type information would be nice.
 
-| Alias | Built-in | Why |
-| ----- | -------- | --- |
-| `Guid` | `u64` | Provides interoperability with [PackedGuid](packed-guid.md). |
-| `Spell` | `u32` | Signifies a spell id. |
-| `Seconds` | `u32` | Specifies that the time unit is seconds. |
-| `Milliseconds` | `u32` | Specifies that the time unit is milliseconds. |
-| `Copper` | `u32` | Specifies that the currency unit is coppers (one silver being 100 copper, one gold being 100 silver). |
+| Alias          | Built-in | Why                                                                                                   |
+|----------------|----------|-------------------------------------------------------------------------------------------------------|
+| `Guid`         | `u64`    | Provides interoperability with [PackedGuid](packed-guid.md).                                          |
+| `Spell`        | `u32`    | Signifies a spell id.                                                                                 |
+| `Seconds`      | `u32`    | Specifies that the time unit is seconds.                                                              |
+| `Milliseconds` | `u32`    | Specifies that the time unit is milliseconds.                                                         |
+| `Copper`       | `u32`    | Specifies that the currency unit is coppers (one silver being 100 copper, one gold being 100 silver). |
+| `Item`         | `u32`    | Specifies an item id..                                                                                |
 
 ## Statements
 
