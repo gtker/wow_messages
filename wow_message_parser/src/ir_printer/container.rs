@@ -240,7 +240,7 @@ pub(crate) enum IrType {
     #[serde(rename = "sized_cstring")]
     SizedCString,
     #[serde(rename = "string")]
-    String { length: String },
+    String,
     #[serde(rename = "array")]
     Array(IrArray),
     #[serde(rename = "enum")]
@@ -271,9 +271,7 @@ impl From<&Type> for IrType {
             Type::Guid => Self::Guid,
             Type::FloatingPoint(f) => Self::FloatingPoint(f.into()),
             Type::CString => Self::CString,
-            Type::String(size) => Self::String {
-                length: size.to_string(),
-            },
+            Type::String => Self::String,
             Type::UpdateMask => Self::UpdateMask,
             Type::AuraMask => Self::AuraMask,
             Type::Array(array) => Self::Array(array.into()),

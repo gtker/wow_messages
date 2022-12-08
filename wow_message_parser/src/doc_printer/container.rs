@@ -3,7 +3,7 @@ use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::sizes::DATETIME_SIZE;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
-use crate::parser::types::ty::{StringSize, Type};
+use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, DefinerType, ObjectTags, Objects};
@@ -156,11 +156,8 @@ fn print_container_example_definition(
             }
             s.w(format!("{}, ", b));
         }
-        Type::String(size) => {
-            let length = match size {
-                StringSize::Fixed(v) => *v,
-                StringSize::Variable(v) => *values.get(v.name()).unwrap() as usize,
-            };
+        Type::String => {
+            let length = *(bytes.take(1).collect::<Vec<_>>()[0]) as usize;
             s.bytes(bytes.take(length).into_iter());
         }
         Type::Array(array) => {

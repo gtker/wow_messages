@@ -23,8 +23,7 @@ use std::io::{Write, Read};
 ///     Locale locale;
 ///     u32 utc_timezone_offset;
 ///     u32_be client_ip_address;
-///     u8 account_name_length;
-///     String[account_name_length] account_name;
+///     String account_name;
 /// }
 /// ```
 pub struct CMD_AUTH_RECONNECT_CHALLENGE_Client {
@@ -39,6 +38,7 @@ pub struct CMD_AUTH_RECONNECT_CHALLENGE_Client {
     ///
     pub utc_timezone_offset: u32,
     pub client_ip_address: u32,
+    /// Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte.
     /// Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.
     /// Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.
     ///
@@ -92,10 +92,8 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
         // client_ip_address: u32_be
         w.write_all(&self.client_ip_address.to_be_bytes())?;
 
-        // account_name_length: u8
+        // account_name: String
         w.write_all(&(self.account_name.len() as u8).to_le_bytes())?;
-
-        // account_name: String[account_name_length]
         w.write_all(self.account_name.as_bytes())?;
 
         assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
@@ -136,11 +134,9 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         // client_ip_address: u32_be
         let client_ip_address = crate::util::read_u32_be(r)?;
 
-        // account_name_length: u8
-        let account_name_length = crate::util::read_u8_le(r)?;
-
-        // account_name: String[account_name_length]
-        let account_name = crate::util::read_fixed_string_to_vec(r, account_name_length as usize)?;
+        // account_name: String
+        let account_name = crate::util::read_u8_le(r)?;
+        let account_name = crate::util::read_fixed_string_to_vec(r, account_name as usize)?;
         let account_name = String::from_utf8(account_name)?;
 
         Ok(Self {
@@ -203,11 +199,9 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             // client_ip_address: u32_be
             let client_ip_address = crate::util::tokio_read_u32_be(r).await?;
 
-            // account_name_length: u8
-            let account_name_length = crate::util::tokio_read_u8_le(r).await?;
-
-            // account_name: String[account_name_length]
-            let account_name = crate::util::tokio_read_fixed_string_to_vec(r, account_name_length as usize).await?;
+            // account_name: String
+            let account_name = crate::util::tokio_read_u8_le(r).await?;
+            let account_name = crate::util::tokio_read_fixed_string_to_vec(r, account_name as usize).await?;
             let account_name = String::from_utf8(account_name)?;
 
             Ok(Self {
@@ -284,11 +278,9 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             // client_ip_address: u32_be
             let client_ip_address = crate::util::astd_read_u32_be(r).await?;
 
-            // account_name_length: u8
-            let account_name_length = crate::util::astd_read_u8_le(r).await?;
-
-            // account_name: String[account_name_length]
-            let account_name = crate::util::astd_read_fixed_string_to_vec(r, account_name_length as usize).await?;
+            // account_name: String
+            let account_name = crate::util::astd_read_u8_le(r).await?;
+            let account_name = crate::util::astd_read_fixed_string_to_vec(r, account_name as usize).await?;
             let account_name = String::from_utf8(account_name)?;
 
             Ok(Self {
@@ -337,8 +329,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
         + 4 // locale: Locale
         + 4 // utc_timezone_offset: u32
         + 4 // client_ip_address: u32_be
-        + 1 // account_name_length: u8
-        + self.account_name.len() // account_name: String
+        + self.account_name.len() + 1 // account_name: String
     }
 }
 
@@ -355,7 +346,7 @@ mod test {
          0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x01,
          0x01, 0x41, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 27.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -399,7 +390,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 27.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -443,7 +434,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 27.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
@@ -493,7 +484,7 @@ mod test {
          0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B,
          0x4C, 0x4D, 0x4E, 0x4F, 0x50, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 58.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
@@ -537,7 +528,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 58.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
@@ -581,7 +572,7 @@ mod test {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 58.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {

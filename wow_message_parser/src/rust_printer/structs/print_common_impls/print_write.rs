@@ -277,6 +277,10 @@ pub(crate) fn print_write_definition(
         }
         Type::String { .. } => {
             s.wln(format!(
+                "w.write_all(&({variable_prefix}{name}.len() as u8).to_le_bytes()){postfix}?;",
+                name = d.name(),
+            ));
+            s.wln(format!(
                 "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
                 name = d.name(),
                 prefix = variable_prefix,

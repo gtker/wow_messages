@@ -5,30 +5,13 @@ use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GUID_SIZE,
     PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
-use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::{
     Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
-    SIZED_CSTRING_SMALLEST_ALLOWED,
+    SIZED_CSTRING_SMALLEST_ALLOWED, STRING_LARGEST_POSSIBLE, STRING_SMALLEST_POSSIBLE,
 };
 use std::convert::TryInto;
-use std::fmt::{Display, Formatter};
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub(crate) enum StringSize {
-    Fixed(usize),
-    Variable(Box<StructMemberDefinition>),
-}
-
-impl Display for StringSize {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            StringSize::Fixed(v) => f.write_fmt(format_args!("{}", v)),
-            StringSize::Variable(m) => f.write_fmt(format_args!("{}", m.name())),
-        }
-    }
-}
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum Type {
@@ -40,7 +23,7 @@ pub(crate) enum Type {
     FloatingPoint(FloatingPointType),
     CString,
     SizedCString,
-    String(StringSize),
+    String,
     Array(Array),
     Enum {
         e: Definer,
@@ -62,7 +45,7 @@ impl Type {
         match self {
             Type::Integer(i) => i.str().to_string(),
             Type::CString => "CString".to_string(),
-            Type::String(size) => format!("String[{}]", size),
+            Type::String => "String".to_string(),
             Type::Array(a) => a.str(),
             Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
             Type::Struct { e, .. } => e.name().to_string(),
@@ -119,15 +102,7 @@ impl Type {
                 SIZED_CSTRING_SMALLEST_ALLOWED,
                 SIZED_CSTRING_LARGEST_ALLOWED,
             ),
-            Type::String(size) => match size {
-                StringSize::Fixed(length) => {
-                    sizes.inc(*length, *length);
-                }
-                StringSize::Variable(m) => match m.ty() {
-                    Type::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
-                    _ => unreachable!("string lengths can only be int"),
-                },
-            },
+            Type::String => sizes.inc(STRING_SMALLEST_POSSIBLE, STRING_LARGEST_POSSIBLE),
             Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                 let s = if let Some(upcast) = upcast {
                     upcast.size()
@@ -191,7 +166,6 @@ impl Type {
             Type::Integer(i) => i.size().to_string(),
             Type::Guid => 8.to_string(),
             Type::FloatingPoint(f) => f.size().to_string(),
-            Type::String(size) => size.to_string(),
             Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                 if let Some(upcast) = upcast {
                     upcast.size().to_string()
@@ -210,7 +184,8 @@ impl Type {
                 }
             }
             Type::Array(_) => "?".to_string(),
-            Type::SizedCString
+            Type::String
+            | Type::SizedCString
             | Type::CString
             | Type::UpdateMask
             | Type::AuraMask

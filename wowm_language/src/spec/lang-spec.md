@@ -27,7 +27,7 @@ The following types are not looked up but are expected to be handled by the comp
 * The basic floating point types `f32` and `f64` are sent as little endian over the network.
 * The basic floating point types `f32_be` and `f64_be` are sent as big endian over the network.
 
-The `String[len]` type is the same as a sized `u8` array (`u8[len]`) containing valid UTF-8 values, although it should be presented in the native string type.
+The `String` type is the same as a sized `u8` array (`u8[len]`) containing valid UTF-8 values plus a `u8` for the length of the string, although it should be presented in the native string type.
 
 The `CString` type is an array of valid UTF-8 `u8`s terminated by a null (0) byte.
 

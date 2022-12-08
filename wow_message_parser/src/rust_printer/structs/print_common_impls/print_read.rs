@@ -408,12 +408,15 @@ fn print_read_definition(
 
             s.newline();
         }
-        Type::String(size) => {
+        Type::String => {
             s.wln(format!(
-                "let {name} = {module}::{prefix}read_fixed_string_to_vec(r, {length} as usize){postfix}?;",
+                "let {name} = crate::util::{prefix}read_u8_le(r){postfix}?;",
+                name = d.name()
+            ));
+            s.wln(format!(
+                "let {name} = {module}::{prefix}read_fixed_string_to_vec(r, {name} as usize){postfix}?;",
                 name = d.name(),
                 module = UTILITY_PATH,
-                length = size,
                 prefix = prefix, postfix = postfix,
             ));
             s.wln(format!(
@@ -841,7 +844,7 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
         // We don't care about that, so we just ignore it.
         s.wln("let decompressed_size = crate::util::read_u32_le(r)?;;");
         s.wln("let decompressed_buffer = vec![0; decompressed_size as usize];");
-        s.wln("let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);"); 
+        s.wln("let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);");
         s.newline();
     }
 

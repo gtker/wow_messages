@@ -24,7 +24,7 @@ use crate::parser::types::parsed::parsed_test_case::{
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
-use crate::parser::types::ty::{StringSize, Type};
+use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
@@ -60,18 +60,7 @@ fn parsed_type_to_type(
         ParsedType::FloatingPoint(f) => Type::FloatingPoint(f),
         ParsedType::CString => Type::CString,
         ParsedType::SizedCString => Type::SizedCString,
-        ParsedType::String { length } => {
-            if let Ok(v) = length.parse::<usize>() {
-                Type::String(StringSize::Fixed(v))
-            } else {
-                let m = p.get_field(&length);
-                let m = parsed_struct_member_definition_to_struct_member(
-                    p, containers, definers, tags, m,
-                );
-
-                Type::String(StringSize::Variable(Box::new(m)))
-            }
-        }
+        ParsedType::String => Type::String,
         ParsedType::Array(a) => {
             Type::Array(parsed_array_to_array(p, a, containers, definers, tags))
         }
@@ -245,20 +234,12 @@ fn set_used_as_size_in(members: &mut [ParsedStructMember]) {
     let mut variables_used_as_size_in = Vec::new();
 
     for d in all_definitions(members) {
-        match d.ty() {
-            ParsedType::String { length } => {
+        if let ParsedType::Array(array) = d.ty() {
+            if let ParsedArraySize::Variable(length) = array.size() {
                 if length.parse::<u8>().is_err() {
                     variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
                 }
             }
-            ParsedType::Array(array) => {
-                if let ParsedArraySize::Variable(length) = array.size() {
-                    if length.parse::<u8>().is_err() {
-                        variables_used_as_size_in.push((d.name().to_string(), length.to_string()));
-                    }
-                }
-            }
-            _ => {}
         }
     }
 

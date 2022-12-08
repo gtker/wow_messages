@@ -14,10 +14,8 @@ clogin CMD_AUTH_LOGON_CHALLENGE_Client = 0x00 {
         description = "Offset in minutes from UTC time. 180 would be UTC+3";
     }
     u32_be client_ip_address;
-    u8 account_name_length {
+    String account_name {
         comment = "Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte.";
-    }
-    String[account_name_length] account_name {
         comment = "Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.";
         comment = "Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.";
     }

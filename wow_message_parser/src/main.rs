@@ -64,6 +64,9 @@ const CSTRING_LARGEST_ALLOWED: usize = 256; // 256 is a guess
 const SIZED_CSTRING_SMALLEST_ALLOWED: usize = 4 + 1;
 const SIZED_CSTRING_LARGEST_ALLOWED: usize = 4 + 8000; // 8000 is a guess
 
+const STRING_SMALLEST_POSSIBLE: usize = 1;
+const STRING_LARGEST_POSSIBLE: usize = 257;
+
 // Also used in auth.pest
 const ENUM_SELF_VALUE_FIELD: &str = "self.value";
 const CONTAINER_SELF_SIZE_FIELD: &str = "self.size";

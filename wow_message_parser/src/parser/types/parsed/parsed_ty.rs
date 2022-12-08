@@ -11,7 +11,7 @@ use crate::parser::types::sizes::{
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
 use crate::{
     CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
-    SIZED_CSTRING_SMALLEST_ALLOWED,
+    SIZED_CSTRING_SMALLEST_ALLOWED, STRING_LARGEST_POSSIBLE, STRING_SMALLEST_POSSIBLE,
 };
 use std::convert::TryInto;
 
@@ -25,9 +25,7 @@ pub(crate) enum ParsedType {
     FloatingPoint(FloatingPointType),
     CString,
     SizedCString,
-    String {
-        length: String,
-    },
+    String,
     Array(ParsedArray),
     Identifier {
         s: String,
@@ -42,7 +40,7 @@ impl ParsedType {
         match self {
             ParsedType::Integer(i) => i.str().to_string(),
             ParsedType::CString => "CString".to_string(),
-            ParsedType::String { length } => format!("String[{}]", length),
+            ParsedType::String => "String".to_string(),
             ParsedType::Array(a) => a.str(),
             ParsedType::Identifier { s, .. } => s.clone(),
             ParsedType::FloatingPoint(i) => i.str().to_string(),
@@ -89,15 +87,8 @@ impl ParsedType {
                 SIZED_CSTRING_SMALLEST_ALLOWED,
                 SIZED_CSTRING_LARGEST_ALLOWED,
             ),
-            ParsedType::String { length } => {
-                if let Ok(length) = length.parse::<usize>() {
-                    sizes.inc(length, length);
-                } else {
-                    match &e.get_field_ty(length) {
-                        ParsedType::Integer(i) => sizes.inc(i.smallest_value(), i.largest_value()),
-                        _ => panic!("string lengths can only be int"),
-                    }
-                }
+            ParsedType::String => {
+                sizes.inc(STRING_SMALLEST_POSSIBLE, STRING_LARGEST_POSSIBLE);
             }
             ParsedType::Identifier { s, upcast } => {
                 if s == e.name() {
@@ -231,6 +222,7 @@ impl ParsedType {
             "CString" => Self::CString,
             "SizedCString" => Self::SizedCString,
             "DateTime" => Self::DateTime,
+            "String" => Self::String,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,
@@ -259,12 +251,6 @@ impl ParsedType {
                             Self::Array(ParsedArray::new(ParsedArrayType::Integer(i), size))
                         }
                         ParsedType::Identifier { s: i, .. } => {
-                            if i == "String" {
-                                return Self::String {
-                                    length: amount.to_string(),
-                                };
-                            }
-
                             Self::Array(ParsedArray::new(ParsedArrayType::Complex(i), size))
                         }
                         ParsedType::CString => {

@@ -29,7 +29,7 @@ struct StructWithAllBuiltInTypes {
     f64 decimal64;
     f64_be decimal64_be;
     CString simple_cstring;
-    String[basic8] simple_string;
+    String simple_string;
 }
 
 /* 4 Any clogin with only basic types */
