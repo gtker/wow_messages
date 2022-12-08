@@ -33,22 +33,22 @@ The `CString` type is an array of valid UTF-8 `u8`s terminated by a null (0) byt
 
 The `SizedCString` is the same as a `u32` followed by a `CString`, but they are kept in the same type to semantically convey that the `u32` field has no purpose other than to parse the `CString`.
 
-| Type | Purpose | C Name |
-| ---- | ------- | ------ |
-| `u*` | Unsigned little endian `*` bit value. | `unsigned` `char`/`short`/`int`/`long long` |
-| `u*_be` | Unsigned big endian `*` bit value. | `unsigned` `char`/`short`/`int`/`long long` |
-| `i*` | Signed little endian `*` bit value. | `char`/`short`/`int`/`long long` |
-| `i*_be` | Signed big endian `*` bit value. | `char`/`short`/`int`/`long long` |
-| `f32` and `f64` | Floating point value. | `float`/`double` |
-| `f*_be` | Floating point value sent as big endian. | `float`/`double` |
-| `CString` | UTF-8 string type that is terminated by a zero byte value. | `char*` |
-| `SizedCString` | A `u32` field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value. | `uint32_t` + `char*` |
-| `String[len]` | UTF-8 string type of exactly length `len`. | - |
-| `PackedGuid` | GUID sent in the "packed" format. See [PackedGuid](packed-guid.md). | - |
-| `UpdateMask` | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md). | - |
-| `AuraMask` | Update values sent in a relatively complex format. See [AuraMask](aura-mask.md). | - |
-| `Bool` | `u8` where `0` is false and any other value is `true`. Can be substituted by a `u8`. | - |
-| `DateTime` | `u32` that represents a custom bitmask for date and time. See [the DateTime section](#datetime)| - |
+| Type            | Purpose                                                                                                                       | C Name                                      |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| `u*`            | Unsigned little endian `*` bit value.                                                                                         | `unsigned` `char`/`short`/`int`/`long long` |
+| `u*_be`         | Unsigned big endian `*` bit value.                                                                                            | `unsigned` `char`/`short`/`int`/`long long` |
+| `i*`            | Signed little endian `*` bit value.                                                                                           | `char`/`short`/`int`/`long long`            |
+| `i*_be`         | Signed big endian `*` bit value.                                                                                              | `char`/`short`/`int`/`long long`            |
+| `f32` and `f64` | Floating point value.                                                                                                         | `float`/`double`                            |
+| `f*_be`         | Floating point value sent as big endian.                                                                                      | `float`/`double`                            |
+| `CString`       | UTF-8 string type that is terminated by a zero byte value.                                                                    | `char*`                                     |
+| `SizedCString`  | A `u32` field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value. | `uint32_t` + `char*`                        |
+| `String[len]`   | UTF-8 string type of exactly length `len`.                                                                                    | -                                           |
+| `PackedGuid`    | GUID sent in the "packed" format. See [PackedGuid](packed-guid.md).                                                           | -                                           |
+| `UpdateMask`    | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md).                                          | -                                           |
+| `AuraMask`      | Update values sent in a relatively complex format. See [AuraMask](aura-mask.md).                                              | -                                           |
+| `Bool`          | `u8` where `0` is false and any other value is `true`. Can be substituted by a `u8`.                                          | -                                           |
+| `DateTime`      | `u32` that represents a custom bitmask for date and time. See [the DateTime section](#datetime)                               | -                                           |
 
 ### DateTime
 
