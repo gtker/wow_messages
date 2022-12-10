@@ -142,11 +142,11 @@ pub(crate) fn write_spells(directory: &Path, data: &Data) {
 }
 
 fn get_string_name(s: &str) -> String {
-    s.replace('\'', "").replace(' ', "_").to_lowercase()
+    s.replace(['\'', ':'], "").replace(' ', "_").to_lowercase()
 }
 
 fn get_enum_name(s: &str) -> String {
-    s.replace(['\'', ' '], "")
+    s.replace(['\'', ' ', ':', '-', '.'], "")
 }
 
 pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansion) {
