@@ -144,9 +144,7 @@ impl crate::Message for SMSG_PET_SPELLS {
                 unknown,
                 pet_enabled,
                 action_bars,
-                amount_of_spells,
                 spells,
-                amount_of_cooldowns,
                 cooldowns,
             })
         } else {
@@ -194,9 +192,7 @@ pub struct SMSG_PET_SPELLS_action_bars {
     pub unknown: u8,
     pub pet_enabled: PetEnabled,
     pub action_bars: [u32; 10],
-    pub amount_of_spells: u8,
     pub spells: Vec<u32>,
-    pub amount_of_cooldowns: u8,
     pub cooldowns: Vec<PetSpellCooldown>,
 }
 

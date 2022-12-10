@@ -772,14 +772,9 @@ fn print_read_field(
                             optional_ty_name = get_optional_type_name(e.name(), optional.name()),
                         ),
                         |s| {
-                            for field in optional.members() {
-                                match field {
-                                    StructMember::Definition(d) => {
-                                        s.wln(format!("{name},", name = d.name()));
-                                    }
-                                    StructMember::IfStatement(_) => {}
-                                    StructMember::OptionalStatement(_) => {}
-                                }
+                            let rust_optional = e.rust_object().optional().unwrap();
+                            for field in rust_optional.members_in_struct() {
+                                s.wln(format!("{name},", name = field.name()));
                             }
                         },
                         ")",

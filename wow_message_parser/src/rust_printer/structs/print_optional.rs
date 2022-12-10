@@ -20,7 +20,7 @@ fn print_declaration(s: &mut Writer, optional: &RustOptional) {
         false,
     );
     s.new_struct(optional.ty(), |s| {
-        for m in optional.members() {
+        for m in optional.members_in_struct() {
             s.wln(format!("pub {name}: {ty},", name = m.name(), ty = m.ty(),));
         }
     });
