@@ -1,4 +1,5 @@
 enum Area : u32 {
+    NONE = 0;
     DUN_MOROGH = 1 {
         display = "Dun Morogh";
     }
@@ -3247,6 +3248,7 @@ enum Area : u32 {
 }
 
 enum Area : u32 {
+    NONE = 0;
     DUN_MOROGH = 1 {
         display = "Dun Morogh";
     }
@@ -8181,6 +8183,7 @@ enum Area : u32 {
 }
 
 enum Area : u32 {
+    NONE = 0;
     DUN_MOROGH = 1 {
         display = "Dun Morogh";
     }

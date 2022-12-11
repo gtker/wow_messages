@@ -1,8 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/area.wowm:8183`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/area.wowm#L8183):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/area.wowm:8185`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/area.wowm#L8185):
 /// ```text
 /// enum Area : u32 {
+///     NONE = 0;
 ///     DUN_MOROGH = 1;
 ///     LONGSHORE = 2;
 ///     BADLANDS = 3;
@@ -2314,6 +2315,7 @@ use std::convert::{TryFrom, TryInto};
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Area {
+    None,
     DunMorogh,
     Longshore,
     Badlands,
@@ -4626,6 +4628,7 @@ pub enum Area {
 impl Area {
     pub(crate) const fn as_int(&self) -> u32 {
         match self {
+            Self::None => 0x0,
             Self::DunMorogh => 0x1,
             Self::Longshore => 0x2,
             Self::Badlands => 0x3,
@@ -6940,13 +6943,14 @@ impl Area {
 
 impl Default for Area {
     fn default() -> Self {
-        Self::DunMorogh
+        Self::None
     }
 }
 
 impl std::fmt::Display for Area {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Self::None => f.write_str("None"),
             Self::DunMorogh => f.write_str("Dun Morogh"),
             Self::Longshore => f.write_str("Longshore"),
             Self::Badlands => f.write_str("Badlands"),
@@ -9262,6 +9266,7 @@ impl TryFrom<u32> for Area {
     type Error = crate::errors::EnumError;
     fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
         match value {
+            0 => Ok(Self::None),
             1 => Ok(Self::DunMorogh),
             2 => Ok(Self::Longshore),
             3 => Ok(Self::Badlands),
