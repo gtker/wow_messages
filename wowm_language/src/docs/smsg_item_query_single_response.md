@@ -371,6 +371,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 material;
         u32 sheath;
         u32 random_property;
+        u32 random_suffix;
         u32 block;
         u32 item_set;
         u32 max_durability;
@@ -464,6 +465,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | material |  | cmangos/vmangos/mangoszero: id from Material.dbc |
 | - | 4 / Little | u32 | sheath |  |  |
 | - | 4 / Little | u32 | random_property |  | cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc |
+| - | 4 / Little | u32 | random_suffix |  |  |
 | - | 4 / Little | u32 | block |  |  |
 | - | 4 / Little | u32 | item_set |  | cmangos/vmangos/mangoszero: id from ItemSet.dbc |
 | - | 4 / Little | u32 | max_durability |  |  |

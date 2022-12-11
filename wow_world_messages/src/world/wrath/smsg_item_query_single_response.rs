@@ -71,6 +71,7 @@ use std::io::{Write, Read};
 ///         u32 material;
 ///         u32 sheath;
 ///         u32 random_property;
+///         u32 random_suffix;
 ///         u32 block;
 ///         u32 item_set;
 ///         u32 max_durability;
@@ -295,6 +296,9 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // random_property: u32
             w.write_all(&v.random_property.to_le_bytes())?;
+
+            // random_suffix: u32
+            w.write_all(&v.random_suffix.to_le_bytes())?;
 
             // block: u32
             w.write_all(&v.block.to_le_bytes())?;
@@ -536,6 +540,9 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // random_property: u32
             let random_property = crate::util::read_u32_le(r)?;
 
+            // random_suffix: u32
+            let random_suffix = crate::util::read_u32_le(r)?;
+
             // block: u32
             let block = crate::util::read_u32_le(r)?;
 
@@ -637,6 +644,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 material,
                 sheath,
                 random_property,
+                random_suffix,
                 block,
                 item_set,
                 max_durability,
@@ -725,6 +733,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // material: u32
             + 4 // sheath: u32
             + 4 // random_property: u32
+            + 4 // random_suffix: u32
             + 4 // block: u32
             + 4 // item_set: u32
             + 4 // max_durability: u32
@@ -801,6 +810,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub material: u32,
     pub sheath: u32,
     pub random_property: u32,
+    pub random_suffix: u32,
     pub block: u32,
     pub item_set: u32,
     pub max_durability: u32,
@@ -874,6 +884,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // material: u32
         + 4 // sheath: u32
         + 4 // random_property: u32
+        + 4 // random_suffix: u32
         + 4 // block: u32
         + 4 // item_set: u32
         + 4 // max_durability: u32
