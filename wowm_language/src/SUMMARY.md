@@ -990,6 +990,7 @@
 - [SMSG_LFG_OFFER_CONTINUE](docs/smsg_lfg_offer_continue.md)
 - [SMSG_LFG_PLAYER_REWARD](docs/smsg_lfg_player_reward.md)
 - [SMSG_LFG_PROPOSAL_UPDATE](docs/smsg_lfg_proposal_update.md)
+- [SMSG_LFG_QUEUE_STATUS](docs/smsg_lfg_queue_status.md)
 - [SMSG_LFG_ROLE_CHECK_UPDATE](docs/smsg_lfg_role_check_update.md)
 - [SMSG_LFG_ROLE_CHOSEN](docs/smsg_lfg_role_chosen.md)
 - [SMSG_LFG_TELEPORT_DENIED](docs/smsg_lfg_teleport_denied.md)

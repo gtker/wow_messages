@@ -1896,6 +1896,8 @@ pub(crate) mod smsg_lfg_player_reward;
 pub use smsg_lfg_player_reward::*;
 pub(crate) mod smsg_lfg_proposal_update;
 pub use smsg_lfg_proposal_update::*;
+pub(crate) mod smsg_lfg_queue_status;
+pub use smsg_lfg_queue_status::*;
 pub(crate) mod smsg_lfg_role_check_update;
 pub use smsg_lfg_role_check_update::*;
 pub(crate) mod smsg_lfg_role_chosen;

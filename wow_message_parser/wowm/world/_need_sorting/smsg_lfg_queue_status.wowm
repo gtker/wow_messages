@@ -1,0 +1,14 @@
+smsg SMSG_LFG_QUEUE_STATUS = 0x0365 {
+    u32 dungeon;
+    i32 average_wait_time;
+    i32 wait_time;
+    i32 wait_time_tank;
+    i32 wait_time_healer;
+    i32 wait_time_dps;
+    u8 tanks_needed;
+    u8 healers_needed;
+    u8 dps_needed;
+    u32 queue_time;
+} {
+    versions = "3.3.5";
+}
