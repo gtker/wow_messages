@@ -207,6 +207,7 @@
 - [UpdateFlag](docs/updateflag.md)
 - [UpdateType](docs/updatetype.md)
 - [UrlInfo](docs/urlinfo.md)
+- [VictimState](docs/victimstate.md)
 - [WeatherChangeType](docs/weatherchangetype.md)
 - [WeatherType](docs/weathertype.md)
 - [WorldResult](docs/worldresult.md)

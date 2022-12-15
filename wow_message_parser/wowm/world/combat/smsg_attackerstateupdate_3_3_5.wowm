@@ -45,15 +45,7 @@ flag HitInfo : u32 {
     }
 }
 
-smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
-    HitInfo hit_info;
-    PackedGuid attacker;
-    PackedGuid target;
-    u32 total_damage;
-    u32 overkill;
-    u8 amount_of_damages = 1 {
-        comment = "Forced to be one in order to correctly handle struct depending on `hit_info`.";
-    }
+struct DamageInfo {
     u32 spell_school_mask;
     f32 damage_float {
         comment = "arcemu sends the same data in `damage_uint`.";
@@ -61,13 +53,41 @@ smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
     u32 damage_uint {
         comment = "arcemu sends the same data in `damage_float`.";
     }
+}
+
+flag VictimState : u8 {
+    INTACT         = 0 {
+        comment = "azerothcore: set when attacker misses";
+    }
+    HIT            = 1 {
+        comment = "azerothcore: victim got clear/blocked hit";
+    }
+    DODGE          = 2;
+    PARRY          = 3;
+    INTERRUPT      = 4;
+    BLOCKS         = 5 {
+        comment = "azerothcore: unused? not set when blocked, even on full block";
+    }
+    EVADES         = 6;
+    IS_IMMUNE      = 7;
+    DEFLECTS       = 8;
+}
+
+smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
+    HitInfo hit_info;
+    PackedGuid attacker;
+    PackedGuid target;
+    u32 total_damage;
+    u32 overkill;
+    u8 amount_of_damages;
+    DamageInfo[amount_of_damages] damage_infos;
     if (hit_info & ALL_ABSORB) {
         u32 absorb;
     }
     if (hit_info & ALL_RESIST) {
         u32 resist;
     }
-    u8 v_state;
+    VictimState victim_state;
     u32 unknown1 {
         comment = "arcemu: can be 0,1000 or -1";
     }

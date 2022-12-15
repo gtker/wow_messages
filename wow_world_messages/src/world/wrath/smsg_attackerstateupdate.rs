@@ -1,10 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::wrath::DamageInfo;
 use crate::world::wrath::HitInfo;
+use crate::world::wrath::VictimState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm:48`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm#L48):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm:76`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm#L76):
 /// ```text
 /// smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
 ///     HitInfo hit_info;
@@ -12,17 +14,15 @@ use std::io::{Write, Read};
 ///     PackedGuid target;
 ///     u32 total_damage;
 ///     u32 overkill;
-///     u8 amount_of_damages = 1;
-///     u32 spell_school_mask;
-///     f32 damage_float;
-///     u32 damage_uint;
+///     u8 amount_of_damages;
+///     DamageInfo[amount_of_damages] damage_infos;
 ///     if (hit_info & ALL_ABSORB) {
 ///         u32 absorb;
 ///     }
 ///     if (hit_info & ALL_RESIST) {
 ///         u32 resist;
 ///     }
-///     u8 v_state;
+///     VictimState victim_state;
 ///     u32 unknown1;
 ///     u32 unknown2;
 ///     if (hit_info & BLOCK) {
@@ -53,32 +53,12 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub target: Guid,
     pub total_damage: u32,
     pub overkill: u32,
-    pub spell_school_mask: u32,
-    /// arcemu sends the same data in `damage_uint`.
-    ///
-    pub damage_float: f32,
-    /// arcemu sends the same data in `damage_float`.
-    ///
-    pub damage_uint: u32,
-    pub v_state: u8,
+    pub damage_infos: Vec<DamageInfo>,
+    pub victim_state: VictimState,
     /// arcemu: can be 0,1000 or -1
     ///
     pub unknown1: u32,
     pub unknown2: u32,
-}
-
-impl SMSG_ATTACKERSTATEUPDATE {
-    /// The field `amount_of_damages` is constantly specified to be:
-    ///
-    /// | Format | Value |
-    /// | ------ | ----- |
-    /// | Decimal | `1` |
-    /// | Hex | `0x01` |
-    /// | Original | `1` |
-    ///
-    /// **This field is not in the Rust struct, but is written as this constant value.**
-    pub const AMOUNT_OF_DAMAGES_VALUE: u8 = 0x01;
-
 }
 
 impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
@@ -106,16 +86,12 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         w.write_all(&self.overkill.to_le_bytes())?;
 
         // amount_of_damages: u8
-        w.write_all(&Self::AMOUNT_OF_DAMAGES_VALUE.to_le_bytes())?;
+        w.write_all(&(self.damage_infos.len() as u8).to_le_bytes())?;
 
-        // spell_school_mask: u32
-        w.write_all(&self.spell_school_mask.to_le_bytes())?;
-
-        // damage_float: f32
-        w.write_all(&self.damage_float.to_le_bytes())?;
-
-        // damage_uint: u32
-        w.write_all(&self.damage_uint.to_le_bytes())?;
+        // damage_infos: DamageInfo[amount_of_damages]
+        for i in self.damage_infos.iter() {
+            i.write_into_vec(w)?;
+        }
 
         if let Some(if_statement) = &self.hit_info.all_absorb {
             // absorb: u32
@@ -129,8 +105,8 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         }
 
-        // v_state: u8
-        w.write_all(&self.v_state.to_le_bytes())?;
+        // victim_state: VictimState
+        w.write_all(&(self.victim_state.as_int() as u8).to_le_bytes())?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -193,7 +169,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(38..=116).contains(&body_size) {
+        if !(26..=3176).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size as u32 });
         }
 
@@ -213,16 +189,13 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         let overkill = crate::util::read_u32_le(r)?;
 
         // amount_of_damages: u8
-        let _amount_of_damages = crate::util::read_u8_le(r)?;
-        // amount_of_damages is expected to always be 1 (1)
+        let amount_of_damages = crate::util::read_u8_le(r)?;
 
-        // spell_school_mask: u32
-        let spell_school_mask = crate::util::read_u32_le(r)?;
-
-        // damage_float: f32
-        let damage_float = crate::util::read_f32_le(r)?;
-        // damage_uint: u32
-        let damage_uint = crate::util::read_u32_le(r)?;
+        // damage_infos: DamageInfo[amount_of_damages]
+        let mut damage_infos = Vec::with_capacity(amount_of_damages as usize);
+        for i in 0..amount_of_damages {
+            damage_infos.push(DamageInfo::read(r)?);
+        }
 
         let hit_info_ALL_ABSORB = if hit_info.is_ALL_ABSORB() {
             // absorb: u32
@@ -248,8 +221,8 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             None
         };
 
-        // v_state: u8
-        let v_state = crate::util::read_u8_le(r)?;
+        // victim_state: VictimState
+        let victim_state = VictimState::new(crate::util::read_u8_le(r)?);
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
@@ -342,10 +315,8 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             target,
             total_damage,
             overkill,
-            spell_school_mask,
-            damage_float,
-            damage_uint,
-            v_state,
+            damage_infos,
+            victim_state,
             unknown1,
             unknown2,
         })
@@ -363,10 +334,8 @@ impl SMSG_ATTACKERSTATEUPDATE {
         + 4 // total_damage: u32
         + 4 // overkill: u32
         + 1 // amount_of_damages: u8
-        + 4 // spell_school_mask: u32
-        + 4 // damage_float: f32
-        + 4 // damage_uint: u32
-        + 1 // v_state: u8
+        + self.damage_infos.len() * 12 // damage_infos: DamageInfo[amount_of_damages]
+        + 1 // victim_state: VictimState
         + 4 // unknown1: u32
         + 4 // unknown2: u32
     }
