@@ -1,0 +1,22 @@
+smsg SMSG_LFG_PROPOSAL_UPDATE = 0x0361 {
+    u32 dungeon_id;
+    u8 proposal_state;
+    u32 proposal_id;
+    u32 encounters_finished_mask;
+    u8 silent;
+    u8 amount_of_proposals;
+    LfgProposal[amount_of_proposals] proposals;
+} {
+    versions = "3.3.5";
+}
+
+struct LfgProposal {
+    u32 role_mask;
+    u8 is_current_player;
+    u8 in_dungeon;
+    u8 in_same_group;
+    u8 has_answered;
+    u8 has_accepted;
+} {
+    versions = "3.3.5";
+}
