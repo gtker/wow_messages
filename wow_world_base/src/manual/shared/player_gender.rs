@@ -23,6 +23,15 @@ impl TryFrom<Gender> for PlayerGender {
     }
 }
 
+impl From<PlayerGender> for Gender {
+    fn from(v: PlayerGender) -> Self {
+        match v {
+            PlayerGender::Male => Self::Male,
+            PlayerGender::Female => Self::Female,
+        }
+    }
+}
+
 impl Default for PlayerGender {
     fn default() -> Self {
         Self::Male
