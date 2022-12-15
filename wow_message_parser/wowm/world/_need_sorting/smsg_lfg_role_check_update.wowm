@@ -1,0 +1,21 @@
+smsg SMSG_LFG_ROLE_CHECK_UPDATE = 0x0363 {
+    u32 rolecheck_state;
+    u8 rolecheck_initializing;
+    u8 amount_of_dungeon_entries;
+    u32[amount_of_dungeon_entries] dungeon_entries;
+    u8 amount_of_roles;
+    LfgRole[amount_of_roles] roles {
+        comment = "azerothcore: Leader info MUST be sent first.";
+    }
+} {
+    versions = "3.3.5";
+}
+
+struct LfgRole {
+    Guid guid;
+    Bool ready;
+    u32 roles;
+    u8 level;
+} {
+    versions = "3.3.5";
+}
