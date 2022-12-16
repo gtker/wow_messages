@@ -16,7 +16,7 @@ enum BattlefieldListLocation : u8 {
 }
 
 cmsg CMSG_BATTLEFIELD_LIST = 0x023C {
-    Map map;
+    BattlegroundType battleground_type;
     BattlefieldListLocation location;
     Bool can_gain_exp {
         comment = "azerothcore: players with locked xp have their own bg queue on retail";

@@ -623,7 +623,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `THE_RUBY_SANCTUM` | 724 (0x2D4) |  |  | The Ruby Sanctum |
 
 Used in:
-* [CMSG_BATTLEFIELD_LIST](cmsg_battlefield_list.md)
 * [CMSG_BATTLEMASTER_JOIN](cmsg_battlemaster_join.md)
 * [CMSG_GMTICKET_CREATE](cmsg_gmticket_create.md)
 * [CMSG_GM_REPORT_LAG](cmsg_gm_report_lag.md)
