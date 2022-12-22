@@ -48,12 +48,6 @@ pub struct Item {
     pub stat_value6: i32,
     pub stat_type7: i32,
     pub stat_value7: i32,
-    pub stat_type8: i32,
-    pub stat_value8: i32,
-    pub stat_type9: i32,
-    pub stat_value9: i32,
-    pub stat_type10: i32,
-    pub stat_value10: i32,
     pub dmg_min1: f32,
     pub dmg_max1: f32,
     pub dmg_type1: i32,
@@ -194,12 +188,6 @@ impl Item {
         stat_value6: i32,
         stat_type7: i32,
         stat_value7: i32,
-        stat_type8: i32,
-        stat_value8: i32,
-        stat_type9: i32,
-        stat_value9: i32,
-        stat_type10: i32,
-        stat_value10: i32,
         dmg_min1: f32,
         dmg_max1: f32,
         dmg_type1: i32,
@@ -337,12 +325,6 @@ impl Item {
             stat_value6,
             stat_type7,
             stat_value7,
-            stat_type8,
-            stat_value8,
-            stat_type9,
-            stat_value9,
-            stat_type10,
-            stat_value10,
             dmg_min1,
             dmg_max1,
             dmg_type1,
@@ -439,5 +421,24 @@ impl Item {
             duration,
             extra_flags,
         }
+    }
+
+    pub const fn stat_type8(&self) -> i32 {
+        0
+    }
+    pub const fn stat_value8(&self) -> i32 {
+        0
+    }
+    pub const fn stat_type9(&self) -> i32 {
+        0
+    }
+    pub const fn stat_value9(&self) -> i32 {
+        0
+    }
+    pub const fn stat_type10(&self) -> i32 {
+        0
+    }
+    pub const fn stat_value10(&self) -> i32 {
+        0
     }
 }

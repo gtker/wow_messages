@@ -220,12 +220,14 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.stat_value6));
         s.w_no_indent(format!("{},", item.stat_type7));
         s.w_no_indent(format!("{},", item.stat_value7));
-        s.w_no_indent(format!("{},", item.stat_type8));
-        s.w_no_indent(format!("{},", item.stat_value8));
-        s.w_no_indent(format!("{},", item.stat_type9));
-        s.w_no_indent(format!("{},", item.stat_value9));
-        s.w_no_indent(format!("{},", item.stat_type10));
-        s.w_no_indent(format!("{},", item.stat_value10));
+
+        assert_eq!(item.stat_type8, 0);
+        assert_eq!(item.stat_value8, 0);
+        assert_eq!(item.stat_type9, 0);
+        assert_eq!(item.stat_value9, 0);
+        assert_eq!(item.stat_type10, 0);
+        assert_eq!(item.stat_value10, 0);
+
         s.w_no_indent(float_format(item.dmg_min1));
         s.w_no_indent(float_format(item.dmg_max1));
         s.w_no_indent(format!("{},", item.dmg_type1));
@@ -378,12 +380,14 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.stat_value6));
         s.w_no_indent(format!("{},", item.stat_type7));
         s.w_no_indent(format!("{},", item.stat_value7));
-        s.w_no_indent(format!("{},", item.stat_type8));
-        s.w_no_indent(format!("{},", item.stat_value8));
-        s.w_no_indent(format!("{},", item.stat_type9));
-        s.w_no_indent(format!("{},", item.stat_value9));
-        s.w_no_indent(format!("{},", item.stat_type10));
-        s.w_no_indent(format!("{},", item.stat_value10));
+
+        assert_eq!(item.stat_type8, 0);
+        assert_eq!(item.stat_value8, 0);
+        assert_eq!(item.stat_type9, 0);
+        assert_eq!(item.stat_value9, 0);
+        assert_eq!(item.stat_type10, 0);
+        assert_eq!(item.stat_value10, 0);
+
         s.w_no_indent(format!("{},", item.scaling_stat_distribution));
         s.w_no_indent(format!("{},", item.scaling_stat_value));
         s.w_no_indent(float_format(item.dmg_min1));

@@ -49,12 +49,6 @@ pub struct Item {
     pub stat_value6: i32,
     pub stat_type7: i32,
     pub stat_value7: i32,
-    pub stat_type8: i32,
-    pub stat_value8: i32,
-    pub stat_type9: i32,
-    pub stat_value9: i32,
-    pub stat_type10: i32,
-    pub stat_value10: i32,
     pub scaling_stat_distribution: i32,
     pub scaling_stat_value: i32,
     pub dmg_min1: f32,
@@ -192,12 +186,6 @@ impl Item {
         stat_value6: i32,
         stat_type7: i32,
         stat_value7: i32,
-        stat_type8: i32,
-        stat_value8: i32,
-        stat_type9: i32,
-        stat_value9: i32,
-        stat_type10: i32,
-        stat_value10: i32,
         scaling_stat_distribution: i32,
         scaling_stat_value: i32,
         dmg_min1: f32,
@@ -332,12 +320,6 @@ impl Item {
             stat_value6,
             stat_type7,
             stat_value7,
-            stat_type8,
-            stat_value8,
-            stat_type9,
-            stat_value9,
-            stat_type10,
-            stat_value10,
             scaling_stat_distribution,
             scaling_stat_value,
             dmg_min1,
@@ -429,5 +411,24 @@ impl Item {
             max_money_loot,
             extra_flags,
         }
+    }
+
+    pub const fn stat_type8(&self) -> i32 {
+        0
+    }
+    pub const fn stat_value8(&self) -> i32 {
+        0
+    }
+    pub const fn stat_type9(&self) -> i32 {
+        0
+    }
+    pub const fn stat_value9(&self) -> i32 {
+        0
+    }
+    pub const fn stat_type10(&self) -> i32 {
+        0
+    }
+    pub const fn stat_value10(&self) -> i32 {
+        0
     }
 }
