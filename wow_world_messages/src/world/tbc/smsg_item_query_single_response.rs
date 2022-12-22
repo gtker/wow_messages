@@ -19,7 +19,7 @@ use std::io::{Write, Read};
 ///     optional found {
 ///         (u32)ItemClass item_class;
 ///         u32 item_sub_class;
-///         u32 unknown1;
+///         u32 sound_override_sub_class;
 ///         CString name1;
 ///         CString name2;
 ///         CString name3;
@@ -108,8 +108,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // item_sub_class: u32
             w.write_all(&v.item_sub_class.to_le_bytes())?;
 
-            // unknown1: u32
-            w.write_all(&v.unknown1.to_le_bytes())?;
+            // sound_override_sub_class: u32
+            w.write_all(&v.sound_override_sub_class.to_le_bytes())?;
 
             // name1: CString
             // TODO: Guard against strings that are already null-terminated
@@ -343,8 +343,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // item_sub_class: u32
             let item_sub_class = crate::util::read_u32_le(r)?;
 
-            // unknown1: u32
-            let unknown1 = crate::util::read_u32_le(r)?;
+            // sound_override_sub_class: u32
+            let sound_override_sub_class = crate::util::read_u32_le(r)?;
 
             // name1: CString
             let name1 = crate::util::read_c_string_to_vec(r)?;
@@ -544,7 +544,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
                 item_class,
                 item_sub_class,
-                unknown1,
+                sound_override_sub_class,
                 name1,
                 name2,
                 name3,
@@ -626,7 +626,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         + if let Some(found) = &self.found {
             4 // item_class: ItemClass
             + 4 // item_sub_class: u32
-            + 4 // unknown1: u32
+            + 4 // sound_override_sub_class: u32
             + found.name1.len() + 1 // name1: CString
             + found.name2.len() + 1 // name2: CString
             + found.name3.len() + 1 // name3: CString
@@ -697,7 +697,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub item_class: ItemClass,
     pub item_sub_class: u32,
-    pub unknown1: u32,
+    pub sound_override_sub_class: u32,
     pub name1: String,
     pub name2: String,
     pub name3: String,
@@ -764,7 +764,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub(crate) fn size(&self) -> usize {
         4 // item_class: ItemClass
         + 4 // item_sub_class: u32
-        + 4 // unknown1: u32
+        + 4 // sound_override_sub_class: u32
         + self.name1.len() + 1 // name1: CString
         + self.name2.len() + 1 // name2: CString
         + self.name3.len() + 1 // name3: CString
