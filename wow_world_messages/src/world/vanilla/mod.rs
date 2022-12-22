@@ -185,8 +185,6 @@ pub(crate) mod info_block;
 pub use info_block::*;
 pub(crate) mod inventory_result;
 pub use inventory_result::*;
-pub(crate) mod item_class;
-pub use item_class::*;
 pub(crate) mod key_version;
 pub use key_version::*;
 pub(crate) mod list_inventory_item;
@@ -819,6 +817,8 @@ pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
 pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
 pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceResetFailedReason;
+
+pub use crate::shared::item_class_vanilla_tbc::ItemClass;
 
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
 

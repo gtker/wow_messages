@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:783`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L783):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:757`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L757):
 /// ```text
 /// struct NpcTextUpdateEmote {
 ///     u32 delay;

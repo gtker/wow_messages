@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:392`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L392):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:366`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L366):
 /// ```text
 /// enum SpellCastResult : u8 {
 ///     AFFECTING_COMBAT = 0x00;
