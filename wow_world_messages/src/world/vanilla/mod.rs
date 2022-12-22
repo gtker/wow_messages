@@ -818,8 +818,6 @@ pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
 pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceResetFailedReason;
 
-pub use crate::shared::item_class_vanilla_tbc::ItemClass;
-
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
 
 pub use crate::shared::item_quality_vanilla_tbc::ItemQuality;
@@ -1377,6 +1375,8 @@ pub use wow_world_base::vanilla::Class;
 pub use wow_world_base::vanilla::Gender;
 
 pub use wow_world_base::vanilla::InventoryType;
+
+pub use wow_world_base::vanilla::ItemClass;
 
 pub use wow_world_base::vanilla::Power;
 

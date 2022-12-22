@@ -191,6 +191,7 @@ enum ItemClass : u8 {
     MISC = 15;
 } {
     versions = "1 2";
+    rust_base_type = "true";
 }
 
 enum ItemClass : u8 {
@@ -213,6 +214,7 @@ enum ItemClass : u8 {
     GLYPH                            = 16;
 } {
     versions = "3.3.5";
+    rust_base_type = "true";
 }
 
 enum SpellCastResult : u8 {
