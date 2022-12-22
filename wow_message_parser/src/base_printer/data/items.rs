@@ -278,7 +278,7 @@ fn vanilla(conn: &Connection) -> Vec<VanillaItem> {
     maxMoneyLoot,
     Duration,
     ExtraFlags
-FROM item_template;",
+FROM item_template ORDER BY entry;",
         )
         .unwrap();
 
@@ -711,6 +711,8 @@ fn tbc(conn: &Connection) -> Vec<TbcItem> {
     ExtraFlags                
 FROM
     item_template
+ORDER BY
+    entry
     ",
         )
         .unwrap();
@@ -1151,6 +1153,8 @@ fn wrath(conn: &Connection) -> Vec<WrathItem> {
     ExtraFlags
 FROM
     item_template;
+ORDER BY
+    entry
     ",
         )
         .unwrap();
