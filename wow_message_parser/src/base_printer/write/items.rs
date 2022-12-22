@@ -13,7 +13,7 @@ pub(crate) fn write_items(directory: &Path, data: &Data) {
         Items::Wrath(v) => wrath(&mut s, v),
     }
 
-    let path = directory.join("item.rs");
+    let path = directory.join("item").join("data.rs");
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
