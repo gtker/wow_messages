@@ -8,6 +8,7 @@ use std::fmt::{Display, Formatter};
 /// exist and is only partially supported in the client.
 /// This enum exists in order to avoid having to check for the extra enumerators every time of use.
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PlayerRace {
     Human,
     Orc,

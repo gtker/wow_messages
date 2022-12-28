@@ -50,6 +50,7 @@ use std::convert::{TryFrom, TryInto};
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Map {
     EasternKingdoms,
     Kalimdor,

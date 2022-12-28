@@ -6,6 +6,7 @@ use std::convert::TryFrom;
 /// Player characters must be either male or female for e.g. display ids
 /// and can not legally choose anything else through the client.
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PlayerGender {
     Male,
     Female,

@@ -49,6 +49,9 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
     print_wowm_definition("enum", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
+    if e.tags().is_in_base() {
+        s.wln("#[cfg_attr(feature = \"serde\", derive(serde::Deserialize, serde::Serialize))]");
+    }
     let visibility = match e.only_used_in_if() && !common_visibility_override && !e.tags().shared()
     {
         true => "pub(crate)",

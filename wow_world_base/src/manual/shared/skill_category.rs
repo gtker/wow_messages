@@ -3,6 +3,7 @@ use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SkillCategory {
     /// Not used for anything in Vanilla and TBC, only used for `Pet - Exotic Spirit Beast` in Wrath.
     Attribute,

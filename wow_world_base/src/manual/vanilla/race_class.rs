@@ -6,6 +6,7 @@ use std::fmt::{Display, Formatter};
 
 /// Enum containing only the allowed race/class combinations.
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum RaceClass {
     DwarfHunter,
     DwarfPaladin,
