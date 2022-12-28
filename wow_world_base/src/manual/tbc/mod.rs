@@ -1,3 +1,4 @@
+mod item;
 mod player_race;
 mod race_class;
 
@@ -10,3 +11,5 @@ pub use crate::manual::SkillCategory;
 
 pub use player_race::*;
 pub use race_class::*;
+
+pub use item::*;
