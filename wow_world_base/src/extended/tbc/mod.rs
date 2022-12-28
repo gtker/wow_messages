@@ -12,6 +12,7 @@ pub mod position;
 mod skill;
 mod skills;
 mod spells;
+pub mod stats;
 pub mod trigger;
 
 pub use actions::*;

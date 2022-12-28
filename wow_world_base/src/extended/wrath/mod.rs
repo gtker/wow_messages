@@ -6,13 +6,14 @@ pub mod character_features;
 mod class;
 mod creature_family;
 pub mod exp;
+pub mod item;
 mod items;
 mod map;
-pub mod item;
 pub mod position;
 mod skill;
 mod skills;
 mod spells;
+pub mod stats;
 pub mod trigger;
 
 pub use actions::*;
