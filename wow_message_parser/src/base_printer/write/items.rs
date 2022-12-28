@@ -47,7 +47,10 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         s.w_no_indent(format!("{},", item.buy_count,));
         s.w_no_indent(format!("{},", item.buy_price,));
         s.w_no_indent(format!("{},", item.sell_price,));
-        s.w_no_indent(format!("{},", item.inventory_type,));
+        s.w_no_indent(format!(
+            "InventoryType::{},",
+            wow_world_base::vanilla::InventoryType::try_from(item.inventory_type as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.allowed_class,));
         s.w_no_indent(format!("{},", item.allowed_race,));
         s.w_no_indent(format!("{},", item.item_level,));
@@ -191,7 +194,10 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.buy_count));
         s.w_no_indent(format!("{},", item.buy_price));
         s.w_no_indent(format!("{},", item.sell_price));
-        s.w_no_indent(format!("{},", item.inventory_type));
+        s.w_no_indent(format!(
+            "InventoryType::{},",
+            wow_world_base::tbc::InventoryType::try_from(item.inventory_type as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.allowed_class));
         s.w_no_indent(format!("{},", item.allowed_race));
         s.w_no_indent(format!("{},", item.item_level));
@@ -350,7 +356,10 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.buy_count));
         s.w_no_indent(format!("{},", item.buy_price));
         s.w_no_indent(format!("{},", item.sell_price));
-        s.w_no_indent(format!("{},", item.inventory_type));
+        s.w_no_indent(format!(
+            "InventoryType::{},",
+            wow_world_base::wrath::InventoryType::try_from(item.inventory_type as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.allowed_class));
         s.w_no_indent(format!("{},", item.allowed_race));
         s.w_no_indent(format!("{},", item.item_level));

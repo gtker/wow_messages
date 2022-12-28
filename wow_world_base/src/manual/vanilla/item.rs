@@ -1,3 +1,5 @@
+use crate::vanilla::InventoryType;
+
 #[derive(Debug, Copy, Clone)]
 pub struct Item {
     pub entry: i32,
@@ -10,7 +12,7 @@ pub struct Item {
     pub buy_count: i32,
     pub buy_price: i32,
     pub sell_price: i32,
-    pub inventory_type: i32,
+    pub inventory_type: InventoryType,
     pub allowed_class: i32,
     pub allowed_race: i32,
     pub item_level: i32,
@@ -143,7 +145,7 @@ impl Item {
         buy_count: i32,
         buy_price: i32,
         sell_price: i32,
-        inventory_type: i32,
+        inventory_type: InventoryType,
         allowed_class: i32,
         allowed_race: i32,
         item_level: i32,
