@@ -3,9 +3,9 @@ use crate::wrath::{Class, RaceClass};
 
 /// Calculate base melee attack power.
 ///
-/// For druids this does not take into account the different attack power calculations when
-/// the different forms. Use [bear_form_base_attack_power],
-/// [cat_form_base_attack_power], or [moonkin_form_base_attack_power] instead.
+/// For druids this does not take into account the different attack power calculations for
+/// the different forms. Use [`non_cat_form_base_attack_power`] or
+/// [`cat_form_base_attack_power`] instead.
 pub fn base_melee_attack_power(class: Class, strength: u16, agility: u16, level: u8) -> u32 {
     let level = level as u32;
     let strength = strength as u32;
@@ -112,9 +112,9 @@ pub fn base_ranged_attack_power(class: Class, agility: u16, level: u8) -> u32 {
 impl RaceClass {
     /// Calculate base melee attack power.
     ///
-    /// For druids this does not take into account the different attack power calculations when
-    /// the different forms. Use [bear_form_base_attack_power],
-    /// [cat_form_base_attack_power], or [moonkin_form_base_attack_power] instead.
+    /// For druids this does not take into account the different attack power calculations for
+    /// the different forms. Use [`non_cat_form_base_attack_power`] or
+    /// [`cat_form_base_attack_power`] instead.
     pub fn base_melee_attack_power(&self, strength: u16, agility: u16, level: u8) -> u32 {
         base_melee_attack_power(self.class(), strength, agility, level)
     }
