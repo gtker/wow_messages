@@ -113,6 +113,7 @@ pub fn base_ranged_attack_power(class: Class, agility: u16, level: u8) -> u32 {
 // Also found in the `gtChanceToMeleeCrit` .dbc.
 // In there it's an array that can be indexed by `(class.as_int() - 1) * 100 + (level - 1)`.
 // Careful that level 0 does not wrap around.
+#[allow(clippy::excessive_precision)]
 const fn crit_ratio(class: Class, level: u8) -> f32 {
     let level_index = if level == 0 {
         0
@@ -882,6 +883,7 @@ const fn crit_ratio(class: Class, level: u8) -> f32 {
 ///
 /// Does not return the chance as a percentage, but as a whole number.
 /// So a 4% chance to crit would return 4.0.
+#[allow(clippy::excessive_precision)]
 pub fn base_melee_crit(class: Class, agility: u16, level: u8) -> f32 {
     let base: f32 = match class {
         Class::Warrior => 0.031890999525785446,
