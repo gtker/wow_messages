@@ -1,7 +1,5 @@
 use crate::errors::ExpectedOpcodeError;
 use crate::wrath::{opcode_to_name, ClientMessage, ServerMessage};
-#[cfg(feature = "encryption")]
-use wow_srp::wrath_header::{ClientDecrypterHalf, ServerDecrypterHalf, CLIENT_HEADER_LENGTH};
 
 const CLIENT_OPCODE_LENGTH: u16 = 4;
 const SERVER_OPCODE_LENGTH: u16 = 2;
@@ -37,7 +35,7 @@ pub fn expect_server_message<M: ServerMessage, R: std::io::Read>(
 #[cfg(all(feature = "sync", feature = "encryption"))]
 pub fn expect_server_message_encryption<M: ServerMessage, R: std::io::Read>(
     r: &mut R,
-    d: &mut ClientDecrypterHalf,
+    d: &mut wow_srp::wrath_header::ClientDecrypterHalf,
 ) -> Result<M, ExpectedOpcodeError> {
     let mut header = [0_u8; 4];
     r.read_exact(&mut header)?;
@@ -71,9 +69,9 @@ pub async fn tokio_expect_client_message_encryption<
     R: tokio::io::AsyncReadExt + Unpin + Send,
 >(
     r: &mut R,
-    d: &mut ServerDecrypterHalf,
+    d: &mut wow_srp::wrath_header::ServerDecrypterHalf,
 ) -> Result<M, ExpectedOpcodeError> {
-    let mut buf = [0_u8; CLIENT_HEADER_LENGTH as usize];
+    let mut buf = [0_u8; wow_srp::wrath_header::CLIENT_HEADER_LENGTH as usize];
     r.read_exact(&mut buf).await?;
     let d = d.decrypt_client_header(buf);
 

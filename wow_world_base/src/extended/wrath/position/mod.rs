@@ -1,11 +1,13 @@
 mod positions;
 
 use crate::extended::shared::{position, tbc_starter_positions, vanilla_starter_positions};
-use crate::wrath::{Class, Map, PlayerRace};
+use crate::manual::shared::PlayerRace;
+use crate::wrath::{Class, Map};
 pub use positions::*;
 
 position!();
 
+#[cfg(feature = "wrath")]
 impl PlayerRace {
     pub const fn wrath_starting_position(&self, class: Class) -> Position {
         #[allow(clippy::single_match)] // PartialEq is not allowed in const but clippy thinks it is
@@ -29,6 +31,7 @@ impl PlayerRace {
     }
 }
 
+#[cfg(feature = "wrath")]
 impl crate::wrath::RaceClass {
     pub const fn starting_position(&self) -> Position {
         self.race().wrath_starting_position(self.class())

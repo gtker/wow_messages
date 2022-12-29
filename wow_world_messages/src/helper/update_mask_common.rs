@@ -105,6 +105,7 @@ pub(crate) fn read_inner(
     Ok((header, values))
 }
 
+#[allow(unused)]
 macro_rules! update_item {
     ($name:ident, $builder_name:ident, $type_value:expr) => {
         #[derive(Debug, Hash, Clone, Default, PartialEq, Eq)]
@@ -198,6 +199,7 @@ macro_rules! update_item {
     };
 }
 
+#[allow(unused)]
 macro_rules! update_mask {
     () => {
         #[derive(Debug, Hash, Clone, PartialEq, Eq)]
@@ -280,9 +282,12 @@ macro_rules! update_mask {
     };
 }
 
+#[allow(unused)]
 pub(crate) use update_item;
+#[allow(unused)]
 pub(crate) use update_mask;
 
+#[allow(unused)]
 macro_rules! skill_info {
     ($skill:ty, $index:ty) => {
         #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
@@ -360,4 +365,5 @@ macro_rules! skill_info {
         }
     };
 }
+#[allow(unused)]
 pub(crate) use skill_info;

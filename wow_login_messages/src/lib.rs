@@ -101,7 +101,9 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+#[cfg(any(feature = "tokio", feature = "async-std"))]
 use std::future::Future;
+#[cfg(any(feature = "tokio", feature = "async-std"))]
 use std::pin::Pin;
 #[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};

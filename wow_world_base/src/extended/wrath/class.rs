@@ -1,4 +1,5 @@
-use crate::wrath::{Class, PlayerGender, PlayerRace, Power};
+use crate::manual::shared::PlayerRace;
+use crate::wrath::{Class, PlayerGender, Power};
 
 impl Class {
     pub const fn power_type(&self) -> Power {

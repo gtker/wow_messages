@@ -31,6 +31,7 @@ pub(crate) mod util;
 mod world;
 
 pub use traits::*;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub use world::*;
 
 pub use helper::datetime::DateTime;

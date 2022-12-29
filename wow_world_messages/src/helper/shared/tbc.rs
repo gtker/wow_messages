@@ -1,6 +1,9 @@
 use crate::Message;
+#[cfg(any(feature = "tokio", feature = "async-std"))]
 use std::future::Future;
+#[cfg(any(feature = "tokio", feature = "async-std"))]
 use std::pin::Pin;
+#[cfg(feature = "encryption")]
 use wow_srp::tbc_header::EncrypterHalf;
 
 const SERVER_OPCODE_LENGTH: u16 = 2;
