@@ -1,7 +1,7 @@
 use std::collections::BTreeSet;
 use std::fmt::Write;
 
-use crate::file_utils::{get_import_path, get_shared_module_name};
+use crate::file_utils::{get_import_path, get_shared_module_name, major_version_to_string};
 use crate::parser::types::version::{AllVersions, Version};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
@@ -145,6 +145,26 @@ impl ObjectTags {
     /// self is able to fulfill all version obligations for tags
     pub(crate) fn fulfills_all(&self, tags: &Self) -> bool {
         self.all_versions.fulfills_all(&tags.all_versions)
+    }
+
+    pub(crate) fn get_cfg_for_versions(&self) -> String {
+        let (main, versions) = self.first_and_main_versions();
+        let main = major_version_to_string(&main.as_major_world());
+        if versions.is_empty() {
+            format!("feature = \"{}\"", main)
+        } else {
+            let mut s = format!("any(feature = \"{}\"", main);
+            for version in versions {
+                write!(
+                    s,
+                    ", feature = \"{}\"",
+                    major_version_to_string(&version.as_major_world())
+                )
+                .unwrap();
+            }
+            write!(s, ")").unwrap();
+            s
+        }
     }
 
     pub(crate) fn has_login_version(&self) -> bool {

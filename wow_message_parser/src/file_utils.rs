@@ -21,6 +21,7 @@ pub(crate) enum SubmoduleLocation {
     PubCrateMod,
     PubUseOnly,
     PubUseAndCfg(String),
+    PubModAndCfg(String),
     SpecificLine,
 }
 
@@ -77,6 +78,10 @@ impl ModFiles {
                     }
                     SubmoduleLocation::SpecificLine => {
                         write!(s, "{}", i).unwrap();
+                    }
+                    SubmoduleLocation::PubModAndCfg(cfg) => {
+                        writeln!(s, "#[cfg({})]", cfg).unwrap();
+                        writeln!(s, "pub mod {};", i).unwrap();
                     }
                 }
             }
@@ -144,7 +149,10 @@ impl ModFiles {
 
         self.add_or_append_file(
             base_path.join("shared"),
-            (shared_module_name, SubmoduleLocation::PubMod),
+            (
+                shared_module_name,
+                SubmoduleLocation::PubModAndCfg(tags.get_cfg_for_versions()),
+            ),
         );
     }
 
