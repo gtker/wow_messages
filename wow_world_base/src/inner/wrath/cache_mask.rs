@@ -5,8 +5,8 @@ use std::convert::{TryFrom, TryInto};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/cache_mask.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/cache_mask.wowm#L1):
 /// ```text
 /// enum CacheMask : u32 {
-///     GlobalCache = 0x15;
-///     PerCharacterCache = 0xEA;
+///     GLOBAL_CACHE = 0x15;
+///     PER_CHARACTER_CACHE = 0xEA;
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
@@ -39,7 +39,7 @@ impl Default for CacheMask {
 impl std::fmt::Display for CacheMask {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::GlobalCache => f.write_str("Global Cache"),
+            Self::GlobalCache => f.write_str("GlobalCache"),
             Self::PerCharacterCache => f.write_str("Per-Character Cache"),
         }
     }
