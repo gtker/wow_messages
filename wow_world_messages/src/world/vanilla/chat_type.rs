@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:25`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L25):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L26):
 /// ```text
 /// enum ChatType : u8 {
 ///     SAY = 0x00;

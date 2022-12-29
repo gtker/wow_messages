@@ -242,6 +242,7 @@ enum ItemQuality : u8 {
     LEGENDARY = 5;
     ARTIFACT = 6;
     HEIRLOOM = 7;
+} {
+    rust_base_type = "true";
 }
-
 

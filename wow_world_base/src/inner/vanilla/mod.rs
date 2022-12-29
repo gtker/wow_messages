@@ -15,6 +15,8 @@ pub(crate) mod inventory_type;
 pub use inventory_type::*;
 pub(crate) mod item_class;
 pub use item_class::*;
+pub(crate) mod item_quality;
+pub use item_quality::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod power;

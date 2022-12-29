@@ -10,6 +10,8 @@ pub mod inventory_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod item_class_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod item_quality_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod power_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod vector2d_vanilla_tbc_wrath;

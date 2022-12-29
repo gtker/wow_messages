@@ -940,8 +940,6 @@ pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceR
 
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
 
-pub use crate::shared::item_quality_vanilla_tbc::ItemQuality;
-
 pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
 
 pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
@@ -1641,6 +1639,8 @@ pub use wow_world_base::tbc::Gender;
 pub use wow_world_base::tbc::InventoryType;
 
 pub use wow_world_base::tbc::ItemClass;
+
+pub use wow_world_base::tbc::ItemQuality;
 
 pub use wow_world_base::tbc::Power;
 
