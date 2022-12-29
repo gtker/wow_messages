@@ -42,7 +42,10 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         s.w_no_indent(format!("{},", item.sub_class,));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid,));
-        s.w_no_indent(format!("{},", item.quality,));
+        s.w_no_indent(format!(
+            "ItemQuality::{},",
+            wow_world_base::vanilla::ItemQuality::try_from(item.quality as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.flags,));
         s.w_no_indent(format!("{},", item.buy_count,));
         s.w_no_indent(format!("{},", item.buy_price,));
@@ -189,7 +192,10 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.unk0));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid));
-        s.w_no_indent(format!("{},", item.quality));
+        s.w_no_indent(format!(
+            "ItemQuality::{},",
+            wow_world_base::tbc::ItemQuality::try_from(item.quality as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.flags));
         s.w_no_indent(format!("{},", item.buy_count));
         s.w_no_indent(format!("{},", item.buy_price));
@@ -350,7 +356,10 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.unk0));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid));
-        s.w_no_indent(format!("{},", item.quality));
+        s.w_no_indent(format!(
+            "ItemQuality::{},",
+            wow_world_base::wrath::ItemQuality::try_from(item.quality as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.flags));
         s.w_no_indent(format!("{},", item.flags2));
         s.w_no_indent(format!("{},", item.buy_count));

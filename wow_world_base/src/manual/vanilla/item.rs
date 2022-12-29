@@ -1,4 +1,4 @@
-use crate::vanilla::InventoryType;
+use crate::vanilla::{InventoryType, ItemQuality};
 
 #[derive(Debug, Copy, Clone)]
 pub struct Item {
@@ -7,7 +7,7 @@ pub struct Item {
     pub sub_class: i32,
     pub name: &'static str,
     pub displayid: i32,
-    pub quality: i32,
+    pub quality: ItemQuality,
     pub flags: i32,
     pub buy_count: i32,
     pub buy_price: i32,
@@ -140,7 +140,7 @@ impl Item {
         sub_class: i32,
         name: &'static str,
         displayid: i32,
-        quality: i32,
+        quality: ItemQuality,
         flags: i32,
         buy_count: i32,
         buy_price: i32,
