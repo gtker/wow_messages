@@ -1,3 +1,4 @@
+use crate::vanilla::exp::MAX_LEVEL;
 use crate::vanilla::{Class, PlayerRace, RaceClass};
 
 /// Calculate base melee attack power.
@@ -98,6 +99,54 @@ pub fn base_ranged_attack_power(class: Class, agility: u16, level: u8) -> u32 {
     }
 }
 
+/// Calculate base melee crit from agility.
+///
+/// Does not return the chance as a percentage, but as a whole number.
+/// So a 4% chance to crit would return 4.0.
+pub fn base_melee_crit(class: Class, agility: u16, level: u8) -> f32 {
+    let level_1: f32;
+    let level_60: f32;
+
+    match class {
+        Class::Paladin | Class::Shaman | Class::Druid => {
+            level_1 = 4.6;
+            level_60 = 20.0;
+        }
+        Class::Mage => {
+            level_1 = 12.9;
+            level_60 = 20.0;
+        }
+        Class::Rogue => {
+            level_1 = 2.2;
+            level_60 = 29.0;
+        }
+        Class::Hunter => {
+            level_1 = 3.5;
+            level_60 = 53.0;
+        }
+        Class::Priest => {
+            level_1 = 11.0;
+            level_60 = 20.0;
+        }
+        Class::Warlock => {
+            level_1 = 8.4;
+            level_60 = 20.0;
+        }
+        Class::Warrior => {
+            level_1 = 3.9;
+            level_60 = 20.0;
+        }
+    }
+
+    let level = level as f32;
+    let max_level = MAX_LEVEL as f32;
+    let max_level_minus_one = (MAX_LEVEL - 1) as f32;
+    let extrapolated = level_1 * (max_level - level) / max_level_minus_one
+        + level_60 * (level - 1.0) / max_level_minus_one;
+
+    agility as f32 / extrapolated
+}
+
 impl RaceClass {
     /// Calculate base melee attack power.
     ///
@@ -114,5 +163,13 @@ impl RaceClass {
     /// all other classes return 0.
     pub fn base_ranged_attack_power(&self, agility: u16, level: u8) -> u32 {
         base_ranged_attack_power(self.class(), agility, level)
+    }
+
+    /// Calculate base melee crit from agility.
+    ///
+    /// Does not return the chance as a percentage, but as a whole number.
+    /// So a 4% chance to crit would return 4.0.
+    pub fn base_melee_crit(&self, agility: u16, level: u8) -> f32 {
+        base_melee_crit(self.class(), agility, level)
     }
 }
