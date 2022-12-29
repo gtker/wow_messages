@@ -1,3 +1,7 @@
+pub(crate) mod allowed_class;
+pub use allowed_class::*;
+pub(crate) mod allowed_race;
+pub use allowed_race::*;
 pub(crate) mod class;
 pub use class::*;
 #[cfg(feature = "extended")]

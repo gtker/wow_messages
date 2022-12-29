@@ -2,6 +2,8 @@ pub(crate) mod addon;
 pub use addon::*;
 pub(crate) mod addon_type;
 pub use addon_type::*;
+pub(crate) mod allowed_race;
+pub use allowed_race::*;
 pub(crate) mod area;
 pub use area::*;
 pub(crate) mod auction_command_action;
@@ -1369,6 +1371,8 @@ pub use crate::shared::update_type_vanilla_tbc::UpdateType;
 pub use crate::shared::weather_change_type_vanilla_tbc_wrath::WeatherChangeType;
 
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
+
+pub use wow_world_base::vanilla::AllowedClass;
 
 pub use wow_world_base::vanilla::Class;
 

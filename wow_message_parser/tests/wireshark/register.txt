@@ -106,12 +106,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_allowed_classes,
-            { "Allowed Classes", "woww.allowed.classes",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_allowed_genders,
             { "Allowed Genders", "woww.allowed.genders",
                 FT_UINT16, BASE_HEX_DEC, NULL, 0,
@@ -138,12 +132,6 @@
         },
         { &hf_woww_allowed_race,
             { "Allowed Race", "woww.allowed.race",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_allowed_races,
-            { "Allowed Races", "woww.allowed.races",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

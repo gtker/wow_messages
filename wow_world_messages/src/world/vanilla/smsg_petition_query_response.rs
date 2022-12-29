@@ -1,5 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
+use crate::world::vanilla::AllowedClass;
+use crate::world::vanilla::AllowedRace;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
@@ -16,8 +18,8 @@ use std::io::{Write, Read};
 ///     u32 deadline;
 ///     u32 issue_date;
 ///     u32 allowed_guild_id;
-///     u32 allowed_classes;
-///     u32 allowed_races;
+///     AllowedClass allowed_class;
+///     AllowedRace allowed_race;
 ///     u16 allowed_genders;
 ///     u32 allowed_minimum_level;
 ///     u32 allowed_maximum_level;
@@ -52,10 +54,10 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub allowed_guild_id: u32,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
     ///
-    pub allowed_classes: u32,
+    pub allowed_class: AllowedClass,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
     ///
-    pub allowed_races: u32,
+    pub allowed_race: AllowedRace,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
     ///
     pub allowed_genders: u16,
@@ -121,11 +123,11 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         // allowed_guild_id: u32
         w.write_all(&self.allowed_guild_id.to_le_bytes())?;
 
-        // allowed_classes: u32
-        w.write_all(&self.allowed_classes.to_le_bytes())?;
+        // allowed_class: AllowedClass
+        w.write_all(&(self.allowed_class.as_int() as u32).to_le_bytes())?;
 
-        // allowed_races: u32
-        w.write_all(&self.allowed_races.to_le_bytes())?;
+        // allowed_race: AllowedRace
+        w.write_all(&(self.allowed_race.as_int() as u32).to_le_bytes())?;
 
         // allowed_genders: u16
         w.write_all(&self.allowed_genders.to_le_bytes())?;
@@ -182,11 +184,11 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         // allowed_guild_id: u32
         let allowed_guild_id = crate::util::read_u32_le(r)?;
 
-        // allowed_classes: u32
-        let allowed_classes = crate::util::read_u32_le(r)?;
+        // allowed_class: AllowedClass
+        let allowed_class = AllowedClass::new(crate::util::read_u32_le(r)?);
 
-        // allowed_races: u32
-        let allowed_races = crate::util::read_u32_le(r)?;
+        // allowed_race: AllowedRace
+        let allowed_race = AllowedRace::new(crate::util::read_u32_le(r)?);
 
         // allowed_genders: u16
         let allowed_genders = crate::util::read_u16_le(r)?;
@@ -214,8 +216,8 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
             deadline,
             issue_date,
             allowed_guild_id,
-            allowed_classes,
-            allowed_races,
+            allowed_class,
+            allowed_race,
             allowed_genders,
             allowed_minimum_level,
             allowed_maximum_level,
@@ -240,8 +242,8 @@ impl SMSG_PETITION_QUERY_RESPONSE {
         + 4 // deadline: u32
         + 4 // issue_date: u32
         + 4 // allowed_guild_id: u32
-        + 4 // allowed_classes: u32
-        + 4 // allowed_races: u32
+        + 4 // allowed_class: AllowedClass
+        + 4 // allowed_race: AllowedRace
         + 2 // allowed_genders: u16
         + 4 // allowed_minimum_level: u32
         + 4 // allowed_maximum_level: u32

@@ -38,7 +38,13 @@ fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
 
         print_fields(s, e, o);
 
-        s.funcn_const("as_int(&self)", e.ty().rust_str(), |s| {
+        let func_type = if e.tags().is_in_base() {
+            Writer::funcn_pub_const
+        } else {
+            Writer::funcn_const
+        };
+
+        func_type(s, "as_int(&self)", e.ty().rust_str(), |s: &mut Writer| {
             s.wln("self.inner");
         });
     });

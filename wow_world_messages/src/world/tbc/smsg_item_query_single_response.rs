@@ -9,10 +9,12 @@ use crate::world::tbc::ItemClass;
 use crate::world::tbc::ItemQuality;
 use crate::world::tbc::Map;
 use crate::world::tbc::Skill;
+use crate::world::tbc::AllowedClass;
+use crate::world::tbc::AllowedRace;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:121`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L121):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:120`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L120):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -30,8 +32,8 @@ use std::io::{Write, Read};
 ///         u32 buy_price;
 ///         u32 sell_price;
 ///         (u32)InventoryType inventory_type;
-///         u32 allowed_class;
-///         u32 allowed_race;
+///         AllowedClass allowed_class;
+///         AllowedRace allowed_race;
 ///         u32 item_level;
 ///         u32 required_level;
 ///         (u32)Skill required_skill;
@@ -157,11 +159,11 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // inventory_type: InventoryType
             w.write_all(&(v.inventory_type.as_int() as u32).to_le_bytes())?;
 
-            // allowed_class: u32
-            w.write_all(&v.allowed_class.to_le_bytes())?;
+            // allowed_class: AllowedClass
+            w.write_all(&(v.allowed_class.as_int() as u32).to_le_bytes())?;
 
-            // allowed_race: u32
-            w.write_all(&v.allowed_race.to_le_bytes())?;
+            // allowed_race: AllowedRace
+            w.write_all(&(v.allowed_race.as_int() as u32).to_le_bytes())?;
 
             // item_level: u32
             w.write_all(&v.item_level.to_le_bytes())?;
@@ -380,11 +382,11 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // inventory_type: InventoryType
             let inventory_type: InventoryType = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-            // allowed_class: u32
-            let allowed_class = crate::util::read_u32_le(r)?;
+            // allowed_class: AllowedClass
+            let allowed_class = AllowedClass::new(crate::util::read_u32_le(r)?);
 
-            // allowed_race: u32
-            let allowed_race = crate::util::read_u32_le(r)?;
+            // allowed_race: AllowedRace
+            let allowed_race = AllowedRace::new(crate::util::read_u32_le(r)?);
 
             // item_level: u32
             let item_level = crate::util::read_u32_le(r)?;
@@ -637,8 +639,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // buy_price: u32
             + 4 // sell_price: u32
             + 4 // inventory_type: InventoryType
-            + 4 // allowed_class: u32
-            + 4 // allowed_race: u32
+            + 4 // allowed_class: AllowedClass
+            + 4 // allowed_race: AllowedRace
             + 4 // item_level: u32
             + 4 // required_level: u32
             + 4 // required_skill: Skill
@@ -708,8 +710,8 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub buy_price: u32,
     pub sell_price: u32,
     pub inventory_type: InventoryType,
-    pub allowed_class: u32,
-    pub allowed_race: u32,
+    pub allowed_class: AllowedClass,
+    pub allowed_race: AllowedRace,
     pub item_level: u32,
     pub required_level: u32,
     pub required_skill: Skill,
@@ -775,8 +777,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // buy_price: u32
         + 4 // sell_price: u32
         + 4 // inventory_type: InventoryType
-        + 4 // allowed_class: u32
-        + 4 // allowed_race: u32
+        + 4 // allowed_class: AllowedClass
+        + 4 // allowed_race: AllowedRace
         + 4 // item_level: u32
         + 4 // required_level: u32
         + 4 // required_skill: Skill

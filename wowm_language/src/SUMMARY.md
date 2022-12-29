@@ -40,6 +40,8 @@
 - [ActivateTaxiReply](docs/activatetaxireply.md)
 - [AddonType](docs/addontype.md)
 - [AiReaction](docs/aireaction.md)
+- [AllowedClass](docs/allowedclass.md)
+- [AllowedRace](docs/allowedrace.md)
 - [Area](docs/area.md)
 - [ArenaFaction](docs/arenafaction.md)
 - [ArenaTeamCommand](docs/arenateamcommand.md)

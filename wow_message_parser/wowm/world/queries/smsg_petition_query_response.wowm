@@ -23,10 +23,10 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     u32 allowed_guild_id {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
-    u32 allowed_classes {
+    AllowedClass allowed_class {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
-    u32 allowed_races {
+    AllowedRace allowed_race {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
     u16 allowed_genders {
@@ -47,7 +47,7 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
 } {
-    versions = "1";
+    versions = "1.12";
 }
 
 enum CharterType : u8 {

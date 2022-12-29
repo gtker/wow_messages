@@ -1,0 +1,98 @@
+#tag_all rust_base_type "true";
+
+flag AllowedRace : u32 {
+    ALL = 0;
+    HUMAN = 1;
+    ORC = 2;
+    DWARF = 4;
+    NIGHT_ELF = 8;
+    UNDEAD = 16;
+    TAUREN = 32;
+    GNOME = 64;
+    TROLL = 128;
+    GOBLIN = 256;
+} {
+    versions = "1.12";
+}
+
+flag AllowedRace : u32 {
+    ALL = 0;
+    HUMAN = 1;
+    ORC = 2;
+    DWARF = 4;
+    NIGHT_ELF = 8;
+    UNDEAD = 16;
+    TAUREN = 32;
+    GNOME = 64;
+    TROLL = 128;
+    GOBLIN = 256;
+    BLOODELF = 512;
+    DRAENEI = 1024;
+    FEL_ORC = 2048;
+    NAGA = 4096;
+    BROKEN = 8192;
+    SKELETON = 16384;
+    VRYKUL = 32768;
+    TUSKARR = 65536;
+    FOREST_TROLL = 131072;
+} {
+    versions = "2.4.3";
+}
+
+flag AllowedRace : u32 {
+    ALL = 0;
+    HUMAN = 1;
+    ORC = 2;
+    DWARF = 4;
+    NIGHT_ELF = 8;
+    UNDEAD = 16;
+    TAUREN = 32;
+    GNOME = 64;
+    TROLL = 128;
+    GOBLIN = 256;
+    BLOODELF = 512;
+    DRAENEI = 1024;
+    FEL_ORC = 2048;
+    NAGA = 4096;
+    BROKEN = 8192;
+    SKELETON = 16384;
+    VRYKUL = 32768;
+    TUSKARR = 65536;
+    FOREST_TROLL = 131072;
+    TAUNKA = 262144;
+    NORTHREND_SKELETON = 524288;
+    ICE_TROLL = 1048576;
+} {
+    versions = "3.3.5";
+}
+
+flag AllowedClass : u32 {
+    ALL = 0;
+    WARRIOR = 1;
+    PALADIN = 2;
+    HUNTER = 4;
+    ROGUE = 8;
+    PRIEST = 16;
+    SHAMAN = 64;
+    MAGE = 128;
+    WARLOCK = 256;
+    DRUID = 1024;
+} {
+    versions = "1 2";
+}
+
+flag AllowedClass : u32 {
+    ALL = 0;
+    WARRIOR = 1;
+    PALADIN = 2;
+    HUNTER = 4;
+    ROGUE = 8;
+    PRIEST = 16;
+    DEATH_KNIGHT = 32;
+    SHAMAN = 64;
+    MAGE = 128;
+    WARLOCK = 256;
+    DRUID = 1024;
+} {
+    versions = "3";
+}

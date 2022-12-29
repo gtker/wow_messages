@@ -4869,8 +4869,8 @@
             ptvcursor_add(ptv, hf_woww_deadline, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_issue_date, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_allowed_guild_id, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_allowed_classes, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_allowed_races, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_allowed_class, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_allowed_race, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_allowed_genders, 2, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_allowed_minimum_level, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_allowed_maximum_level, 4, ENC_LITTLE_ENDIAN);

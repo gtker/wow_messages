@@ -1,6 +1,6 @@
 # SMSG_PETITION_QUERY_RESPONSE
 
-## Client Version 1
+## Client Version 1.12
 
 ### Wowm Representation
 
@@ -17,8 +17,8 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     u32 deadline;
     u32 issue_date;
     u32 allowed_guild_id;
-    u32 allowed_classes;
-    u32 allowed_races;
+    AllowedClass allowed_class;
+    AllowedRace allowed_race;
     u16 allowed_genders;
     u32 allowed_minimum_level;
     u32 allowed_maximum_level;
@@ -51,8 +51,8 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | deadline |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | issue_date |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | allowed_guild_id |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | allowed_classes |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | allowed_races |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 2 / Little | u16 | allowed_genders |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | allowed_minimum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | allowed_maximum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
