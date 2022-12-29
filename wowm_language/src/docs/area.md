@@ -7254,7 +7254,7 @@ enum Area : u32 {
     THE_SUN_FORGE = 4093;
     SUNWELL_PLATEAU1 = 4094;
     MAGISTERS_TERRACE = 4095;
-    CLAYTÖNS_WOWEDIT_LAND = 4096;
+    CLAYTONS_WOWEDIT_LAND = 4096;
     WINTERFIN_CAVERNS = 4097;
     GLIMMER_BAY = 4098;
     WINTERFIN_RETREAT = 4099;
@@ -9569,7 +9569,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `THE_SUN_FORGE` | 4093 (0xFFD) |  |  | The Sun Forge |
 | `SUNWELL_PLATEAU1` | 4094 (0xFFE) |  |  | Sunwell Plateau |
 | `MAGISTERS_TERRACE` | 4095 (0xFFF) |  |  | Magisters' Terrace |
-| `CLAYTÖNS_WOWEDIT_LAND` | 4096 (0x1000) |  |  | Claytön's WoWEdit Land |
+| `CLAYTONS_WOWEDIT_LAND` | 4096 (0x1000) |  |  | Clayton's WoWEdit Land |
 | `WINTERFIN_CAVERNS` | 4097 (0x1001) |  |  | Winterfin Caverns |
 | `GLIMMER_BAY` | 4098 (0x1002) |  |  | Glimmer Bay |
 | `WINTERFIN_RETREAT` | 4099 (0x1003) |  |  | Winterfin Retreat |

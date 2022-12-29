@@ -1726,7 +1726,7 @@ use std::convert::{TryFrom, TryInto};
 ///     THE_SUN_FORGE = 4093;
 ///     SUNWELL_PLATEAU1 = 4094;
 ///     MAGISTERS_TERRACE = 4095;
-///     CLAYTÖNS_WOWEDIT_LAND = 4096;
+///     CLAYTONS_WOWEDIT_LAND = 4096;
 ///     WINTERFIN_CAVERNS = 4097;
 ///     GLIMMER_BAY = 4098;
 ///     WINTERFIN_RETREAT = 4099;
@@ -4038,7 +4038,7 @@ pub enum Area {
     TheSunForge,
     SunwellPlateau1,
     MagistersTerrace,
-    ClaytönsWoweditLand,
+    ClaytonsWoweditLand,
     WinterfinCaverns,
     GlimmerBay,
     WinterfinRetreat,
@@ -6351,7 +6351,7 @@ impl Area {
             Self::TheSunForge => 0xffd,
             Self::SunwellPlateau1 => 0xffe,
             Self::MagistersTerrace => 0xfff,
-            Self::ClaytönsWoweditLand => 0x1000,
+            Self::ClaytonsWoweditLand => 0x1000,
             Self::WinterfinCaverns => 0x1001,
             Self::GlimmerBay => 0x1002,
             Self::WinterfinRetreat => 0x1003,
@@ -8673,7 +8673,7 @@ impl std::fmt::Display for Area {
             Self::TheSunForge => f.write_str("The Sun Forge"),
             Self::SunwellPlateau1 => f.write_str("Sunwell Plateau"),
             Self::MagistersTerrace => f.write_str("Magisters' Terrace"),
-            Self::ClaytönsWoweditLand => f.write_str("Claytön's WoWEdit Land"),
+            Self::ClaytonsWoweditLand => f.write_str("Clayton's WoWEdit Land"),
             Self::WinterfinCaverns => f.write_str("Winterfin Caverns"),
             Self::GlimmerBay => f.write_str("Glimmer Bay"),
             Self::WinterfinRetreat => f.write_str("Winterfin Retreat"),
@@ -10989,7 +10989,7 @@ impl TryFrom<u32> for Area {
             4093 => Ok(Self::TheSunForge),
             4094 => Ok(Self::SunwellPlateau1),
             4095 => Ok(Self::MagistersTerrace),
-            4096 => Ok(Self::ClaytönsWoweditLand),
+            4096 => Ok(Self::ClaytonsWoweditLand),
             4097 => Ok(Self::WinterfinCaverns),
             4098 => Ok(Self::GlimmerBay),
             4099 => Ok(Self::WinterfinRetreat),

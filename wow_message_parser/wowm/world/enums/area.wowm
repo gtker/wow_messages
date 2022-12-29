@@ -13350,8 +13350,8 @@ enum Area : u32 {
     MAGISTERS_TERRACE = 4095 {
         display = "Magisters' Terrace";
     }
-    CLAYTÖNS_WOWEDIT_LAND = 4096 {
-        display = "Claytön's WoWEdit Land";
+    CLAYTONS_WOWEDIT_LAND = 4096 {
+        display = "Clayton's WoWEdit Land";
     }
     WINTERFIN_CAVERNS = 4097 {
         display = "Winterfin Caverns";
