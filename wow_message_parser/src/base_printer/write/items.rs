@@ -54,8 +54,8 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
             "InventoryType::{},",
             wow_world_base::vanilla::InventoryType::try_from(item.inventory_type as u8).unwrap()
         ));
-        s.w_no_indent(format!("{},", item.allowed_class,));
-        s.w_no_indent(format!("{},", item.allowed_race,));
+        s.w_no_indent(format!("AllowedClass::new({}),", item.allowed_class,));
+        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race,));
         s.w_no_indent(format!("{},", item.item_level,));
         s.w_no_indent(format!("{},", item.required_level,));
         s.w_no_indent(format!("{},", item.required_skill,));
@@ -204,8 +204,8 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
             "InventoryType::{},",
             wow_world_base::tbc::InventoryType::try_from(item.inventory_type as u8).unwrap()
         ));
-        s.w_no_indent(format!("{},", item.allowed_class));
-        s.w_no_indent(format!("{},", item.allowed_race));
+        s.w_no_indent(format!("AllowedClass::new({}),", item.allowed_class));
+        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race));
         s.w_no_indent(format!("{},", item.item_level));
         s.w_no_indent(format!("{},", item.required_level));
         s.w_no_indent(format!("{},", item.required_skill));
@@ -369,8 +369,8 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
             "InventoryType::{},",
             wow_world_base::wrath::InventoryType::try_from(item.inventory_type as u8).unwrap()
         ));
-        s.w_no_indent(format!("{},", item.allowed_class));
-        s.w_no_indent(format!("{},", item.allowed_race));
+        s.w_no_indent(format!("AllowedClass::new({}),", item.allowed_class));
+        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race));
         s.w_no_indent(format!("{},", item.item_level));
         s.w_no_indent(format!("{},", item.required_level));
         s.w_no_indent(format!("{},", item.required_skill));

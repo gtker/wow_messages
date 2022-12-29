@@ -1,4 +1,4 @@
-use crate::vanilla::{InventoryType, ItemQuality};
+use crate::vanilla::{AllowedClass, AllowedRace, InventoryType, ItemQuality};
 
 #[derive(Debug, Copy, Clone)]
 pub struct Item {
@@ -13,8 +13,8 @@ pub struct Item {
     pub buy_price: i32,
     pub sell_price: i32,
     pub inventory_type: InventoryType,
-    pub allowed_class: i32,
-    pub allowed_race: i32,
+    pub allowed_class: AllowedClass,
+    pub allowed_race: AllowedRace,
     pub item_level: i32,
     pub required_level: i32,
     pub required_skill: i32,
@@ -146,8 +146,8 @@ impl Item {
         buy_price: i32,
         sell_price: i32,
         inventory_type: InventoryType,
-        allowed_class: i32,
-        allowed_race: i32,
+        allowed_class: AllowedClass,
+        allowed_race: AllowedRace,
         item_level: i32,
         required_level: i32,
         required_skill: i32,
