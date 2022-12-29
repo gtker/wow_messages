@@ -177,6 +177,16 @@ impl ModFiles {
                 ),
             );
 
+            if tags.shared() {
+                self.add_or_append_file(
+                    base_directory().join("shared"),
+                    (
+                        "crate::manual::shared".to_string(),
+                        SubmoduleLocation::PubUseOnly,
+                    ),
+                );
+            }
+
             self.add_or_append_file(
                 base_directory().join(major_version_to_string(version)),
                 (

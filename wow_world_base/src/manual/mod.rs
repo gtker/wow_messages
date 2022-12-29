@@ -6,5 +6,3 @@ pub mod vanilla;
 pub mod wrath;
 
 pub mod shared;
-
-pub use shared::*;

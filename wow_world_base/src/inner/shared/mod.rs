@@ -1,5 +1,6 @@
 pub mod allowed_class_vanilla_tbc;
 pub mod class_vanilla_tbc;
+pub use crate::manual::shared::*;
 pub mod gender_vanilla_tbc_wrath;
 pub mod inventory_type_vanilla_tbc_wrath;
 pub mod item_class_vanilla_tbc;

@@ -1,4 +1,4 @@
-use crate::manual::PlayerGender;
+use crate::shared::player_gender_vanilla_tbc_wrath::PlayerGender;
 use crate::vanilla::{PlayerRace, RaceClass};
 
 impl PlayerRace {

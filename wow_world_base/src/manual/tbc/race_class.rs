@@ -1,4 +1,4 @@
-use crate::manual::shared::PlayerRace;
+use crate::manual::shared::player_race_tbc_wrath::PlayerRace;
 use crate::tbc::Class;
 use crate::tbc::Race;
 use std::convert::TryFrom;

@@ -1,7 +1,3 @@
-mod player_gender;
-mod skill_category;
-mod player_race;
-
-pub use player_gender::*;
-pub use skill_category::*;
-pub use player_race::*;
+pub mod player_gender_vanilla_tbc_wrath;
+pub mod player_race_tbc_wrath;
+pub mod skill_category_vanilla_tbc_wrath;
