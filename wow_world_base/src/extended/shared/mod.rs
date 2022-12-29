@@ -1,8 +1,10 @@
 mod tbc_wrath_player_race;
 mod vanilla_tbc_class;
+mod vanilla_tbc_item_quality;
 
 pub use tbc_wrath_player_race::*;
 pub use vanilla_tbc_class::*;
+pub use vanilla_tbc_item_quality::*;
 
 macro_rules! exp_required_to_level_up {
     ($level:expr) => {
@@ -293,3 +295,12 @@ impl Action {
         Self { button, action, ty }
     }
 }
+
+// Item Quality Colors
+pub(crate) const GREY: [u8; 4] = [0xff, 0x9d, 0x9d, 0x9d];
+pub(crate) const WHITE: [u8; 4] = [0xff, 0xff, 0xff, 0xff];
+pub(crate) const GREEN: [u8; 4] = [0xff, 0x1e, 0xff, 0x00];
+pub(crate) const BLUE: [u8; 4] = [0xff, 0x00, 0x70, 0xdd];
+pub(crate) const PURPLE: [u8; 4] = [0xff, 0xa3, 0x35, 0xee];
+pub(crate) const ORANGE: [u8; 4] = [0xff, 0xff, 0x80, 0x00];
+pub(crate) const LIGHT_YELLOW: [u8; 4] = [0xff, 0xe6, 0xcc, 0x80];
