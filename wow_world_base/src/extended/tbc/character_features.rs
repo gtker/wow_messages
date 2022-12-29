@@ -1,5 +1,5 @@
+use crate::manual::shared::PlayerRace;
 use crate::tbc::PlayerGender;
-use crate::tbc::PlayerRace;
 
 pub fn character_features_are_valid(
     race: PlayerRace,

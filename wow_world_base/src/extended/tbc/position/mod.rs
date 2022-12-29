@@ -1,7 +1,8 @@
 mod positions;
 
 use crate::extended::shared::{position, tbc_starter_positions, vanilla_starter_positions};
-use crate::tbc::{Map, PlayerRace};
+use crate::manual::shared::PlayerRace;
+use crate::tbc::Map;
 pub use positions::*;
 
 position!();

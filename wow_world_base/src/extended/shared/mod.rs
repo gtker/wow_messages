@@ -160,7 +160,6 @@ macro_rules! tbc_starter_positions {
             Position::new(Map::Outland, -3961.64, -13931.2, 100.615, 2.08364);
     };
 }
-use crate::tbc::position::Position;
 pub(crate) use tbc_starter_positions;
 
 macro_rules! area_trigger {
@@ -213,7 +212,6 @@ macro_rules! area_trigger {
         }
     };
 }
-use crate::vanilla::trigger::{AreaTrigger, Trigger};
 pub(crate) use area_trigger;
 
 macro_rules! verify_trigger {

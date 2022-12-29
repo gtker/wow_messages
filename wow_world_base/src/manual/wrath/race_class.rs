@@ -1,4 +1,4 @@
-use crate::manual::wrath::PlayerRace;
+use crate::manual::shared::PlayerRace;
 use crate::wrath::Class;
 use crate::wrath::Race;
 use std::convert::TryFrom;

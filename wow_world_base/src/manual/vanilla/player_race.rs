@@ -57,7 +57,9 @@ macro_rules! from {
 }
 
 from!(PlayerRace, crate::vanilla::Race);
+#[cfg(feature = "tbc")]
 from!(PlayerRace, crate::tbc::Race);
+#[cfg(feature = "wrath")]
 from!(PlayerRace, crate::wrath::Race);
 
 impl Default for PlayerRace {

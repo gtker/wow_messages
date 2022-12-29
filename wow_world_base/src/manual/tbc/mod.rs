@@ -1,5 +1,4 @@
 mod item;
-mod player_race;
 mod race_class;
 
 use crate::tbc::Race;
@@ -9,7 +8,6 @@ use std::fmt::{Display, Formatter};
 pub use crate::manual::PlayerGender;
 pub use crate::manual::SkillCategory;
 
-pub use player_race::*;
 pub use race_class::*;
 
 pub use item::*;

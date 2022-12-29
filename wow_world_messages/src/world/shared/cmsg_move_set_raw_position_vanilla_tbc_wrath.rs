@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use wow_world_base::vanilla::Vector3d;
+use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]

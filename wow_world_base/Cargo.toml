@@ -5,6 +5,9 @@ edition = "2018"
 
 [features]
 extended = []
+vanilla = []
+tbc = []
+wrath = []
 
 [dependencies]
 serde = { version = "1", optional = true, features = ["derive"] }

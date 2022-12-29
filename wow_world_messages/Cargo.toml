@@ -17,9 +17,9 @@ optional = true
 [features]
 default = ["encryption"]
 sync = []
-vanilla = []
-tbc = ["wow_srp/tbc-header"]
-wrath = ["wow_srp/wrath-header"]
+vanilla = ["wow_world_base/vanilla"]
+tbc = ["wow_srp/tbc-header", "wow_world_base/tbc"]
+wrath = ["wow_srp/wrath-header", "wow_world_base/wrath"]
 encryption = ["wow_srp"]
 
 [dependencies.chrono]

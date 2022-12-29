@@ -1,4 +1,3 @@
-use crate::{tbc, wrath};
 use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
 
@@ -63,7 +62,9 @@ macro_rules! from {
     };
 }
 
+#[cfg(feature = "tbc")]
 from!(PlayerRace, crate::tbc::Race);
+#[cfg(feature = "wrath")]
 from!(PlayerRace, crate::wrath::Race);
 
 impl Default for PlayerRace {

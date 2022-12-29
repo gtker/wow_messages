@@ -1,4 +1,5 @@
-use crate::tbc::{Class, PlayerRace, RaceClass};
+use crate::manual::shared::PlayerRace;
+use crate::tbc::{Class, RaceClass};
 
 /// Calculate base melee attack power.
 ///

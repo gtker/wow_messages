@@ -1,6 +1,7 @@
 use crate::manual::PlayerGender;
 
-impl crate::tbc::PlayerRace {
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+impl crate::manual::shared::PlayerRace {
     pub const fn display_id(&self, gender: PlayerGender) -> i32 {
         let race = match self {
             Self::Human => 49,
@@ -51,6 +52,7 @@ impl crate::tbc::PlayerRace {
     }
 }
 
+#[cfg(feature = "tbc")]
 impl crate::tbc::RaceClass {
     pub const fn display_id(&self, gender: PlayerGender) -> i32 {
         self.race().display_id(gender)
@@ -65,6 +67,7 @@ impl crate::tbc::RaceClass {
     }
 }
 
+#[cfg(feature = "wrath")]
 impl crate::wrath::RaceClass {
     pub const fn display_id(&self, gender: PlayerGender) -> i32 {
         self.race().display_id(gender)

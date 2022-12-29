@@ -18,7 +18,6 @@ use crate::path_utils::{base_directory, get_filepath, login_directory, world_dir
 pub(crate) enum SubmoduleLocation {
     PubUseInternal,
     PubMod,
-    PubModNoCfg,
     PubCrateMod,
     PubUseOnly,
     PubUseAndCfg(String),
@@ -75,9 +74,6 @@ impl ModFiles {
                     }
                     SubmoduleLocation::PubCrateMod => {
                         writeln!(s, "pub(crate) mod {};", i).unwrap();
-                    }
-                    SubmoduleLocation::PubModNoCfg => {
-                        writeln!(s, "pub mod {};", i).unwrap();
                     }
                     SubmoduleLocation::SpecificLine => {
                         write!(s, "{}", i).unwrap();
@@ -136,9 +132,14 @@ impl ModFiles {
             world_directory()
         };
 
+        let submodule_location = if tags.is_in_base() {
+            SubmoduleLocation::PubMod
+        } else {
+            SubmoduleLocation::PubCrateMod
+        };
         self.add_or_append_file(
             base_path.clone(),
-            ("shared".to_string(), SubmoduleLocation::PubCrateMod),
+            ("shared".to_string(), submodule_location),
         );
 
         self.add_or_append_file(
@@ -159,7 +160,7 @@ impl ModFiles {
                 base_directory(),
                 (
                     major_version_to_string(version).to_string(),
-                    SubmoduleLocation::PubModNoCfg,
+                    SubmoduleLocation::PubMod,
                 ),
             );
 
@@ -385,10 +386,10 @@ pub(crate) fn get_world_shared_path(ty_name: &str, tags: &ObjectTags) -> String 
     format!("crate::world::shared::{}", tags.shared_module_name(ty_name))
 }
 
-pub(crate) fn get_base_import_path(version: Version) -> String {
+pub(crate) fn get_base_shared_path(ty_name: &str, tags: &ObjectTags) -> String {
     format!(
-        "wow_world_base::{version}",
-        version = major_version_to_string(&version.as_major_world())
+        "wow_world_base::shared::{}",
+        tags.shared_module_name(ty_name)
     )
 }
 

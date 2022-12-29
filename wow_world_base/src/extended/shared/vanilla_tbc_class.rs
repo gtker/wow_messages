@@ -1,4 +1,6 @@
-use crate::vanilla::{Class, InventoryType, Power};
+use crate::shared::class_vanilla_tbc::Class;
+use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
+use crate::shared::power_vanilla_tbc::Power;
 
 impl Class {
     pub const fn power_type(&self) -> Power {
@@ -16,12 +18,14 @@ impl Class {
     }
 }
 
+#[cfg(feature = "vanilla")]
 impl crate::vanilla::RaceClass {
     pub const fn power_type(&self) -> Power {
         self.to_race_class().1.power_type()
     }
 }
 
+#[cfg(feature = "tbc")]
 impl crate::tbc::RaceClass {
     pub const fn power_type(&self) -> Power {
         self.class().power_type()

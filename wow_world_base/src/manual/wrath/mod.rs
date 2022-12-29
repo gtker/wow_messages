@@ -1,7 +1,8 @@
 mod item;
 mod race_class;
 
-pub use crate::manual::tbc::PlayerRace;
+#[cfg(feature = "tbc")]
+pub use crate::manual::shared::PlayerRace;
 
 pub use crate::manual::PlayerGender;
 pub use crate::manual::SkillCategory;

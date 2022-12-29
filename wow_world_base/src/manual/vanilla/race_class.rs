@@ -1,5 +1,5 @@
 use crate::manual::vanilla::player_race::PlayerRace;
-use crate::tbc::Class;
+use crate::shared::class_vanilla_tbc::Class;
 use crate::vanilla::Race;
 use std::convert::TryFrom;
 use std::fmt::{Display, Formatter};
