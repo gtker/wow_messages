@@ -904,6 +904,51 @@ pub fn base_melee_crit(class: Class, agility: u16, level: u8) -> f32 {
     crit * 100.0
 }
 
+/// Calculate base dodge chance from agility.
+///
+/// *Does* include the 2% from the night elf Quickness racial (skill id 20582)
+/// and the base class dodge chances.
+pub fn base_dodge_chance(class: Class, race: PlayerRace, agility: u16, level: u8) -> f32 {
+    let class_base: f32 = match class {
+        Class::Warrior => 0.0075,
+        Class::Paladin => 0.00652,
+        Class::Hunter => -0.0545,
+        Class::Rogue => -0.0059,
+        Class::Priest => 0.03183,
+        Class::DeathKnight => 0.0114,
+        Class::Shaman => 0.0167,
+        Class::Mage => 0.034575,
+        Class::Warlock => 0.02011,
+        Class::Druid => -0.0187,
+    };
+
+    let crit_per_agility_to_dodge_per_agility_coefficient: f32 = match class {
+        Class::Warrior => 1.1,
+        Class::Paladin => 1.0,
+        Class::Hunter => 1.6,
+        Class::Rogue => 2.0,
+        Class::Priest => 1.0,
+        Class::DeathKnight => 1.0,
+        Class::Shaman => 1.0,
+        Class::Mage => 1.0,
+        Class::Warlock => 1.0,
+        Class::Druid => 1.7,
+    };
+
+    let dodge_ratio = crit_ratio(class, level) * crit_per_agility_to_dodge_per_agility_coefficient;
+
+    let dodge = class_base + agility as f32 * dodge_ratio;
+
+    /// 2% from Quickness racial (skill id 20582)
+    let racial_bonus: f32 = if matches!(race, PlayerRace::NightElf) {
+        2.0
+    } else {
+        0.0
+    };
+
+    (dodge * 100.0) + racial_bonus
+}
+
 impl RaceClass {
     /// Calculate base melee attack power.
     ///
@@ -928,5 +973,13 @@ impl RaceClass {
     /// So a 4% chance to crit would return 4.0.
     pub fn base_melee_crit(&self, agility: u16, level: u8) -> f32 {
         base_melee_crit(self.class(), agility, level)
+    }
+
+    /// Calculate base dodge chance from agility.
+    ///
+    /// *Does* include the 2% from the night elf Quickness racial (skill id 20582)
+    /// and the base class dodge chances.
+    pub fn base_dodge_chance(&self, agility: u16, level: u8) -> f32 {
+        base_dodge_chance(self.class(), self.race(), agility, level)
     }
 }

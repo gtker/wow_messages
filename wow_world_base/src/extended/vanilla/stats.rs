@@ -138,13 +138,82 @@ pub fn base_melee_crit(class: Class, agility: u16, level: u8) -> f32 {
         }
     }
 
-    let level = level as f32;
-    let max_level = MAX_LEVEL as f32;
-    let max_level_minus_one = (MAX_LEVEL - 1) as f32;
-    let extrapolated = level_1 * (max_level - level) / max_level_minus_one
-        + level_60 * (level - 1.0) / max_level_minus_one;
+    let extrapolated = {
+        let level = level as f32;
+        let max_level = MAX_LEVEL as f32;
+        let max_level_minus_one = (MAX_LEVEL - 1) as f32;
+        level_1 * (max_level - level) / max_level_minus_one
+            + level_60 * (level - 1.0) / max_level_minus_one
+    };
 
     agility as f32 / extrapolated
+}
+
+/// Calculate base dodge chance from agility.
+///
+/// *Does* include the 1% from the night elf Quickness racial (skill id 20582)
+/// and the base class dodge chances.
+pub fn base_dodge_chance(class: Class, race: PlayerRace, agility: u16, level: u8) -> f32 {
+    let class_base: f32 = match class {
+        Class::Druid => 0.9,
+        Class::Mage => 3.2,
+        Class::Paladin => 0.7,
+        Class::Priest => 3.0,
+        Class::Shaman => 1.7,
+        Class::Warlock => 2.0,
+
+        Class::Rogue | Class::Hunter | Class::Warrior => 0.0,
+    };
+
+    let level_1: f32;
+    let level_60: f32;
+    match class {
+        Class::Warrior => {
+            level_1 = 3.9;
+            level_60 = 20.0;
+        }
+        Class::Hunter => {
+            level_1 = 1.8;
+            level_60 = 26.5;
+        }
+        Class::Rogue => {
+            level_1 = 1.1;
+            level_60 = 14.5;
+        }
+        Class::Priest => {
+            level_1 = 11.0;
+            level_60 = 20.0;
+        }
+        Class::Mage => {
+            level_1 = 12.9;
+            level_60 = 20.0;
+        }
+        Class::Warlock => {
+            level_1 = 8.4;
+            level_60 = 20.0;
+        }
+        Class::Paladin | Class::Shaman | Class::Druid => {
+            level_1 = 4.6;
+            level_60 = 20.0;
+        }
+    }
+
+    let extrapolated = {
+        let level = level as f32;
+        let max_level = MAX_LEVEL as f32;
+        let max_level_minus_one = (MAX_LEVEL - 1) as f32;
+        level_1 * (max_level - level) / max_level_minus_one
+            + level_60 * (level - 1.0) / max_level_minus_one
+    };
+    let from_agility = agility as f32 / extrapolated;
+
+    let racial_bonus: f32 = if matches!(race, PlayerRace::NightElf) {
+        1.0
+    } else {
+        0.0
+    };
+
+    class_base + racial_bonus + from_agility
 }
 
 impl RaceClass {
@@ -171,5 +240,13 @@ impl RaceClass {
     /// So a 4% chance to crit would return 4.0.
     pub fn base_melee_crit(&self, agility: u16, level: u8) -> f32 {
         base_melee_crit(self.class(), agility, level)
+    }
+
+    /// Calculate base dodge chance from agility.
+    ///
+    /// *Does* include the 1% from the night elf Quickness racial (skill id 20582)
+    /// and the base class dodge chances.
+    pub fn base_dodge_chance(&self, agility: u16, level: u8) -> f32 {
+        base_dodge_chance(self.class(), self.race(), agility, level)
     }
 }
