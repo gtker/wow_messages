@@ -11,7 +11,7 @@ use crate::wireshark_printer::printer::{
     print_enums, print_int_declarations, print_parser, print_register_info,
 };
 use crate::{file_utils, Objects};
-use heck::{ShoutySnakeCase, SnakeCase, TitleCase};
+use heck::{ToShoutySnakeCase, ToSnakeCase, ToTitleCase};
 use std::fs::read_to_string;
 use std::path::Path;
 

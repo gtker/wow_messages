@@ -1,4 +1,4 @@
-use heck::CamelCase;
+use heck::ToPascalCase;
 use std::fmt::Write;
 
 pub(crate) use enums::{print_enum, print_enum_for_base};
@@ -886,7 +886,7 @@ fn print_docc_description_and_comment(
 }
 
 pub(crate) fn field_name_to_rust_name(s: &str) -> String {
-    let name = s.to_camel_case();
+    let name = s.to_pascal_case();
     if name == "Self" {
         "SelfX".to_string() // Self is a reserved keyword
     } else if name == "Error" {

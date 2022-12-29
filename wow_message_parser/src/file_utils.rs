@@ -4,7 +4,7 @@ use std::fs::{read_to_string, remove_file};
 use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 
-use heck::SnakeCase;
+use heck::ToSnakeCase;
 use walkdir::WalkDir;
 
 use crate::parser::types::tags::ObjectTags;
