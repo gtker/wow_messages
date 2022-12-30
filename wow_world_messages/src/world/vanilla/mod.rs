@@ -1347,8 +1347,6 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
-pub use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
-
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
@@ -1390,6 +1388,8 @@ pub use wow_world_base::vanilla::ItemClass;
 pub use wow_world_base::vanilla::ItemQuality;
 
 pub use wow_world_base::vanilla::Power;
+
+pub use wow_world_base::vanilla::SpellSchool;
 
 pub use wow_world_base::vanilla::Vector2d;
 

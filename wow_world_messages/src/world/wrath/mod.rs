@@ -1701,8 +1701,6 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
-pub use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
-
 pub use crate::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 
 pub use crate::shared::spell_steal_tbc_wrath::SpellSteal;
@@ -1734,6 +1732,8 @@ pub use wow_world_base::wrath::Bonding;
 pub use wow_world_base::wrath::Gender;
 
 pub use wow_world_base::wrath::InventoryType;
+
+pub use wow_world_base::wrath::SpellSchool;
 
 pub use wow_world_base::wrath::Vector2d;
 

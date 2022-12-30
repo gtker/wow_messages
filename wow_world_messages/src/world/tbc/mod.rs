@@ -1597,8 +1597,6 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
-pub use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
-
 pub use crate::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 
 pub use crate::shared::spell_steal_tbc_wrath::SpellSteal;
@@ -1648,6 +1646,8 @@ pub use wow_world_base::tbc::ItemClass;
 pub use wow_world_base::tbc::ItemQuality;
 
 pub use wow_world_base::tbc::Power;
+
+pub use wow_world_base::tbc::SpellSchool;
 
 pub use wow_world_base::tbc::Vector2d;
 

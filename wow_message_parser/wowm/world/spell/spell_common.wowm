@@ -46,6 +46,7 @@ enum SpellSchool : u8 {
     ARCANE = 6;
 } {
     versions = "1 2 3";
+    rust_base_type = "true";
 }
 
 flag CastFlags : u16 {

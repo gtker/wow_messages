@@ -1275,8 +1275,6 @@ pub mod spell_cooldown_status_vanilla_tbc_wrath;
 pub mod spell_log_miss_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod spell_miss_info_vanilla_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod spell_school_vanilla_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod spell_steal_action_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
