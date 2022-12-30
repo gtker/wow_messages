@@ -41,6 +41,55 @@ fn float_format(v: f32) -> String {
     }
 }
 
+fn vanilla_unobtainable(item: &VanillaItem) -> bool {
+    unobtainable(item.entry, item.extra_flags, &item.name)
+}
+
+fn tbc_unobtainable(item: &TbcItem) -> bool {
+    unobtainable(item.entry, item.extra_flags, &item.name)
+}
+
+fn wrath_unobtainable(item: &WrathItem) -> bool {
+    unobtainable(item.entry, item.extra_flags, &item.name)
+}
+
+fn unobtainable(entry: i32, extra_flags: i32, name: &str) -> bool {
+    const UNOBTAINABLE_FLAG: i32 = 0x04;
+    let unobtainable_flag_is_set = extra_flags & UNOBTAINABLE_FLAG != 0;
+
+    let name_ends_with_deprecated = name.ends_with("DEPRECATED") || name.ends_with("DEP");
+    let name_ends_with_test = name.ends_with(" Test") || name.ends_with("(Test)");
+
+    let name_starts_with_old = name.starts_with("OLD") || name.starts_with("(OLD)");
+    let name_starts_with_monster = name.starts_with("Monster - ");
+    let name_starts_with_test = name.starts_with("TEST ");
+    let name_starts_with_deprecated = name.starts_with("Deprecated");
+
+    let name_contains_ph = name.contains("[PH]");
+
+    let martin_thunder_or_martin_fury = entry == 17 || entry == 192;
+
+    let glaive_of_the_defender = entry == 23051;
+
+    let warglaives_of_azzinoth = entry == 18582 || entry == 18583 || entry == 18584;
+
+    unobtainable_flag_is_set
+        || name_ends_with_deprecated
+        || name_starts_with_old
+        || name_ends_with_test
+        || name_starts_with_monster
+        || name_starts_with_test
+        || name_starts_with_deprecated
+        || name_contains_ph
+        || martin_thunder_or_martin_fury
+        || glaive_of_the_defender
+        || warglaives_of_azzinoth
+}
+
+fn print_unobtainable_cfg(s: &mut Writer) {
+    s.wln("#[cfg(feature = \"unobtainable-items\")]");
+}
+
 fn string_format(v: &str) -> String {
     format!("\"{}\",", v.replace('"', "\\\""))
 }
@@ -50,6 +99,9 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
     s.inc_indent();
 
     for item in items {
+        if vanilla_unobtainable(item) {
+            print_unobtainable_cfg(s);
+        }
         s.w("Item::new(");
 
         s.w_no_indent(format!("{},", item.entry,));
@@ -60,18 +112,18 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         let sub_class =
             // The game does not recognize consumables other than class 0 and subclass 0,
             // but the cmangos database uses these for some reason
-        if item.class == CLASS_CONSUMABLE
-            // The game does not recognize trade goods for greater than 3 (Devices)
-            // but the cmangos database uses these for some reason
-            ||item.class == CLASS_TRADE_GOODS && item.sub_class > 3
-            // The game does not recognize junk subclasses other than class 15 and subclass 0,
-            // but the cmangos database uses these for some reason
-            ||item.class == CLASS_JUNK
-        {
-            0
-        } else {
-            item.sub_class
-        };
+            if item.class == CLASS_CONSUMABLE
+                // The game does not recognize trade goods for greater than 3 (Devices)
+                // but the cmangos database uses these for some reason
+                || item.class == CLASS_TRADE_GOODS && item.sub_class > 3
+                // The game does not recognize junk subclasses other than class 15 and subclass 0,
+                // but the cmangos database uses these for some reason
+                || item.class == CLASS_JUNK
+            {
+                0
+            } else {
+                item.sub_class
+            };
 
         s.w_no_indent(format!(
             "ItemClassAndSubClass::{},",
@@ -275,6 +327,9 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
     s.inc_indent();
 
     for item in items {
+        if tbc_unobtainable(item) {
+            print_unobtainable_cfg(s);
+        }
         s.w("Item::new(");
         s.w_no_indent(format!("{},", item.entry));
         s.w_no_indent(format!(
@@ -476,6 +531,9 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
     s.inc_indent();
 
     for item in items {
+        if wrath_unobtainable(item) {
+            print_unobtainable_cfg(s);
+        }
         s.w("Item::new(");
 
         s.w_no_indent(format!("{},", item.entry));
