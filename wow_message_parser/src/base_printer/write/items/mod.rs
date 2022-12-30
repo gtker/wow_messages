@@ -1,6 +1,7 @@
 mod conversions;
 
 use crate::base_printer::data::items::{Items, TbcItem, VanillaItem, WrathItem};
+use wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 
 pub(crate) struct Stats {
     strength: i32,
@@ -142,19 +143,34 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
 
         s.w_no_indent(float_format(item.dmg_min1));
         s.w_no_indent(float_format(item.dmg_max1));
-        s.w_no_indent(format!("{},", item.dmg_type1,));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type1 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min2));
         s.w_no_indent(float_format(item.dmg_max2));
-        s.w_no_indent(format!("{},", item.dmg_type2,));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type2 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min3));
         s.w_no_indent(float_format(item.dmg_max3));
-        s.w_no_indent(format!("{},", item.dmg_type3,));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type3 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min4));
         s.w_no_indent(float_format(item.dmg_max4));
-        s.w_no_indent(format!("{},", item.dmg_type4,));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type4 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min5));
         s.w_no_indent(float_format(item.dmg_max5));
-        s.w_no_indent(format!("{},", item.dmg_type5,));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type5 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.armor,));
         s.w_no_indent(format!("{},", item.holy_res,));
         s.w_no_indent(format!("{},", item.fire_res,));
@@ -301,19 +317,34 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
 
         s.w_no_indent(float_format(item.dmg_min1));
         s.w_no_indent(float_format(item.dmg_max1));
-        s.w_no_indent(format!("{},", item.dmg_type1));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type1 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min2));
         s.w_no_indent(float_format(item.dmg_max2));
-        s.w_no_indent(format!("{},", item.dmg_type2));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type2 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min3));
         s.w_no_indent(float_format(item.dmg_max3));
-        s.w_no_indent(format!("{},", item.dmg_type3));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type3 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min4));
         s.w_no_indent(float_format(item.dmg_max4));
-        s.w_no_indent(format!("{},", item.dmg_type4));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type4 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min5));
         s.w_no_indent(float_format(item.dmg_max5));
-        s.w_no_indent(format!("{},", item.dmg_type5));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type5 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.armor));
         s.w_no_indent(format!("{},", item.holy_res));
         s.w_no_indent(format!("{},", item.fire_res));
@@ -477,10 +508,16 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.scaling_stat_value));
         s.w_no_indent(float_format(item.dmg_min1));
         s.w_no_indent(float_format(item.dmg_max1));
-        s.w_no_indent(format!("{},", item.dmg_type1));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type1 as u8).unwrap()
+        ));
         s.w_no_indent(float_format(item.dmg_min2));
         s.w_no_indent(float_format(item.dmg_max2));
-        s.w_no_indent(format!("{},", item.dmg_type2));
+        s.w_no_indent(format!(
+            "SpellSchool::{},",
+            SpellSchool::try_from(item.dmg_type2 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.armor));
         s.w_no_indent(format!("{},", item.holy_res));
         s.w_no_indent(format!("{},", item.fire_res));

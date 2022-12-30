@@ -1,5 +1,6 @@
 use crate::wrath::{
     AllowedClass, AllowedRace, Bonding, InventoryType, ItemClassAndSubClass, ItemQuality,
+    SpellSchool,
 };
 
 #[derive(Debug, Copy, Clone)]
@@ -49,10 +50,10 @@ pub struct Item {
     pub scaling_stat_value: i32,
     pub dmg_min1: f32,
     pub dmg_max1: f32,
-    pub dmg_type1: i32,
+    pub dmg_type1: SpellSchool,
     pub dmg_min2: f32,
     pub dmg_max2: f32,
-    pub dmg_type2: i32,
+    pub dmg_type2: SpellSchool,
     pub armor: i32,
     pub holy_res: i32,
     pub fire_res: i32,
@@ -185,10 +186,10 @@ impl Item {
         scaling_stat_value: i32,
         dmg_min1: f32,
         dmg_max1: f32,
-        dmg_type1: i32,
+        dmg_type1: SpellSchool,
         dmg_min2: f32,
         dmg_max2: f32,
-        dmg_type2: i32,
+        dmg_type2: SpellSchool,
         armor: i32,
         holy_res: i32,
         fire_res: i32,

@@ -1,6 +1,6 @@
 use crate::vanilla::{
     Area, ItemDamageType, ItemSpells, ItemStat, ItemStatType,
-    SMSG_ITEM_QUERY_SINGLE_RESPONSE_found, SpellSchool, SMSG_ITEM_NAME_QUERY_RESPONSE,
+    SMSG_ITEM_QUERY_SINGLE_RESPONSE_found, SMSG_ITEM_NAME_QUERY_RESPONSE,
     SMSG_ITEM_QUERY_SINGLE_RESPONSE,
 };
 use std::convert::TryFrom;
@@ -106,27 +106,27 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                     ItemDamageType {
                         damage_minimum: v.dmg_min1,
                         damage_maximum: v.dmg_max1,
-                        school: SpellSchool::try_from(v.dmg_type1 as u8).unwrap(),
+                        school: v.dmg_type1,
                     },
                     ItemDamageType {
                         damage_minimum: v.dmg_min2,
                         damage_maximum: v.dmg_max2,
-                        school: SpellSchool::try_from(v.dmg_type2 as u8).unwrap(),
+                        school: v.dmg_type2,
                     },
                     ItemDamageType {
                         damage_minimum: v.dmg_min3,
                         damage_maximum: v.dmg_max3,
-                        school: SpellSchool::try_from(v.dmg_type3 as u8).unwrap(),
+                        school: v.dmg_type3,
                     },
                     ItemDamageType {
                         damage_minimum: v.dmg_min4,
                         damage_maximum: v.dmg_max4,
-                        school: SpellSchool::try_from(v.dmg_type4 as u8).unwrap(),
+                        school: v.dmg_type4,
                     },
                     ItemDamageType {
                         damage_minimum: v.dmg_min5,
                         damage_maximum: v.dmg_max5,
-                        school: SpellSchool::try_from(v.dmg_type5 as u8).unwrap(),
+                        school: v.dmg_type5,
                     },
                 ],
                 armor: v.armor,

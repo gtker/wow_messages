@@ -1,6 +1,6 @@
 use crate::wrath::{
     Area, ItemDamageType, ItemSocket, ItemSpells, ItemStat, SMSG_ITEM_QUERY_SINGLE_RESPONSE_found,
-    SpellSchool, SMSG_ITEM_NAME_QUERY_RESPONSE, SMSG_ITEM_QUERY_SINGLE_RESPONSE,
+    SMSG_ITEM_NAME_QUERY_RESPONSE, SMSG_ITEM_QUERY_SINGLE_RESPONSE,
 };
 use std::convert::TryFrom;
 use wow_world_base::wrath::{Item, Map, Skill};
@@ -90,12 +90,12 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                     ItemDamageType {
                         damage_minimum: v.dmg_min1,
                         damage_maximum: v.dmg_max1,
-                        school: SpellSchool::try_from(v.dmg_type1 as u8).unwrap(),
+                        school: v.dmg_type1,
                     },
                     ItemDamageType {
                         damage_minimum: v.dmg_min2,
                         damage_maximum: v.dmg_max2,
-                        school: SpellSchool::try_from(v.dmg_type1 as u8).unwrap(),
+                        school: v.dmg_type1,
                     },
                 ],
                 armor: v.armor,
