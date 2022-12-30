@@ -1,0 +1,22 @@
+enum Bonding : u8 {
+    NO_BIND = 0;
+    PICK_UP = 1 {
+        display = "Binds when picked up";
+    }
+    EQUIP = 2 {
+        display = "Binds when equipped";
+    }
+    USE = 3 {
+        display = "Binds on use";
+    }
+    QUEST_ITEM = 4 {
+        display = "Quest Item";
+    }
+    QUEST_ITEM1 = 5 {
+        display = "Quest Item";
+        comment = "Not used in game according to all emulators.";
+    }
+} {
+    rust_base_type = "true";
+    versions = "1 2 3";
+}

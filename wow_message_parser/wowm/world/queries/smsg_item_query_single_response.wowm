@@ -79,7 +79,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 ammo_type;
         f32 ranged_range_modification;
         ItemSpells[5] spells;
-        u32 bonding;
+        (u32)Bonding bonding;
         CString description;
         u32 page_text;
         u32 language_id;
@@ -173,7 +173,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 ammo_type;
         f32 ranged_range_modification;
         ItemSpells[5] spells;
-        u32 bonding;
+        (u32)Bonding bonding;
         CString description;
         u32 page_text;
         u32 language_id;
@@ -276,7 +276,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 ammo_type;
         f32 ranged_range_modification;
         ItemSpells[5] spells;
-        u32 bonding;
+        (u32)Bonding bonding;
         CString description;
         u32 page_text;
         u32 language_id;

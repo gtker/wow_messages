@@ -62,6 +62,7 @@
 - [BattlegroundWinner](docs/battlegroundwinner.md)
 - [BgTypeId](docs/bgtypeid.md)
 - [BillingPlanFlags](docs/billingplanflags.md)
+- [Bonding](docs/bonding.md)
 - [BuyBankSlotResult](docs/buybankslotresult.md)
 - [BuyResult](docs/buyresult.md)
 - [BuybackSlot](docs/buybackslot.md)

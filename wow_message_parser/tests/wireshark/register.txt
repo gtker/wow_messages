@@ -732,7 +732,7 @@
         },
         { &hf_woww_bonding,
             { "Bonding", "woww.bonding",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_bonding_strings), 0,
                 NULL, HFILL
             }
         },

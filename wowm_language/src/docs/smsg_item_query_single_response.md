@@ -48,7 +48,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 ammo_type;
         f32 ranged_range_modification;
         ItemSpells[5] spells;
-        u32 bonding;
+        (u32)Bonding bonding;
         CString description;
         u32 page_text;
         u32 language_id;
@@ -127,7 +127,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | ammo_type |  |  |
 | - | 4 / Little | f32 | ranged_range_modification |  |  |
 | - | ? / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
-| - | 4 / Little | u32 | bonding |  |  |
+| - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
 | - | 4 / Little | u32 | language_id |  |  |
@@ -195,7 +195,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 ammo_type;
         f32 ranged_range_modification;
         ItemSpells[5] spells;
-        u32 bonding;
+        (u32)Bonding bonding;
         CString description;
         u32 page_text;
         u32 language_id;
@@ -282,7 +282,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | ammo_type |  |  |
 | - | 4 / Little | f32 | ranged_range_modification |  |  |
 | - | ? / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
-| - | 4 / Little | u32 | bonding |  |  |
+| - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
 | - | 4 / Little | u32 | language_id |  |  |
@@ -361,7 +361,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 ammo_type;
         f32 ranged_range_modification;
         ItemSpells[5] spells;
-        u32 bonding;
+        (u32)Bonding bonding;
         CString description;
         u32 page_text;
         u32 language_id;
@@ -455,7 +455,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | ammo_type |  |  |
 | - | 4 / Little | f32 | ranged_range_modification |  |  |
 | - | ? / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
-| - | 4 / Little | u32 | bonding |  |  |
+| - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
 | - | 4 / Little | u32 | language_id |  |  |

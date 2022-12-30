@@ -3,6 +3,7 @@ use crate::world::vanilla::ItemDamageType;
 use crate::world::vanilla::ItemSpells;
 use crate::world::vanilla::ItemStat;
 use crate::world::vanilla::Area;
+use crate::world::vanilla::Bonding;
 use crate::world::vanilla::InventoryType;
 use crate::world::vanilla::ItemClass;
 use crate::world::vanilla::ItemQuality;
@@ -57,7 +58,7 @@ use std::io::{Write, Read};
 ///         u32 ammo_type;
 ///         f32 ranged_range_modification;
 ///         ItemSpells[5] spells;
-///         u32 bonding;
+///         (u32)Bonding bonding;
 ///         CString description;
 ///         u32 page_text;
 ///         u32 language_id;
@@ -234,8 +235,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 i.write_into_vec(w)?;
             }
 
-            // bonding: u32
-            w.write_all(&v.bonding.to_le_bytes())?;
+            // bonding: Bonding
+            w.write_all(&(v.bonding.as_int() as u32).to_le_bytes())?;
 
             // description: CString
             // TODO: Guard against strings that are already null-terminated
@@ -433,8 +434,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 *i = ItemSpells::read(r)?;
             }
 
-            // bonding: u32
-            let bonding = crate::util::read_u32_le(r)?;
+            // bonding: Bonding
+            let bonding: Bonding = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // description: CString
             let description = crate::util::read_c_string_to_vec(r)?;
@@ -596,7 +597,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // ammo_type: u32
             + 4 // ranged_range_modification: f32
             + 5 * 24 // spells: ItemSpells[5]
-            + 4 // bonding: u32
+            + 4 // bonding: Bonding
             + found.description.len() + 1 // description: CString
             + 4 // page_text: u32
             + 4 // language_id: u32
@@ -659,7 +660,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub ammo_type: u32,
     pub ranged_range_modification: f32,
     pub spells: [ItemSpells; 5],
-    pub bonding: u32,
+    pub bonding: Bonding,
     pub description: String,
     pub page_text: u32,
     pub language_id: u32,
@@ -718,7 +719,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // ammo_type: u32
         + 4 // ranged_range_modification: f32
         + 5 * 24 // spells: ItemSpells[5]
-        + 4 // bonding: u32
+        + 4 // bonding: Bonding
         + self.description.len() + 1 // description: CString
         + 4 // page_text: u32
         + 4 // language_id: u32
