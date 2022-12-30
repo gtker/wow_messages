@@ -114,7 +114,7 @@ use std::convert::{TryFrom, TryInto};
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
-pub(crate) enum ItemClassAndSubClass {
+pub enum ItemClassAndSubClass {
     Consumable,
     FoodAndDrink,
     Potion,

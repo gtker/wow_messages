@@ -5,7 +5,7 @@ use crate::world::vanilla::ItemStat;
 use crate::world::vanilla::Area;
 use crate::world::vanilla::Bonding;
 use crate::world::vanilla::InventoryType;
-use crate::world::vanilla::ItemClass;
+use crate::world::vanilla::ItemClassAndSubClass;
 use crate::world::vanilla::ItemQuality;
 use crate::world::vanilla::Map;
 use crate::world::vanilla::Skill;
@@ -19,8 +19,7 @@ use std::io::{Write, Read};
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
 ///     optional found {
-///         (u32)ItemClass item_class;
-///         u32 item_sub_class;
+///         ItemClassAndSubClass class_and_sub_class;
 ///         CString name1;
 ///         CString name2;
 ///         CString name3;
@@ -96,11 +95,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
         // optional found
         if let Some(v) = &self.found {
-            // item_class: ItemClass
-            w.write_all(&(v.item_class.as_int() as u32).to_le_bytes())?;
-
-            // item_sub_class: u32
-            w.write_all(&v.item_sub_class.to_le_bytes())?;
+            // class_and_sub_class: ItemClassAndSubClass
+            w.write_all(&(v.class_and_sub_class.as_int() as u64).to_le_bytes())?;
 
             // name1: CString
             // TODO: Guard against strings that are already null-terminated
@@ -305,11 +301,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             4 // item: u32
         };
         let found = if current_size < body_size as usize {
-            // item_class: ItemClass
-            let item_class: ItemClass = (crate::util::read_u32_le(r)? as u8).try_into()?;
-
-            // item_sub_class: u32
-            let item_sub_class = crate::util::read_u32_le(r)?;
+            // class_and_sub_class: ItemClassAndSubClass
+            let class_and_sub_class: ItemClassAndSubClass = crate::util::read_u64_le(r)?.try_into()?;
 
             // name1: CString
             let name1 = crate::util::read_c_string_to_vec(r)?;
@@ -484,8 +477,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let bag_family = crate::util::read_u32_le(r)?;
 
             Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
-                item_class,
-                item_sub_class,
+                class_and_sub_class,
                 name1,
                 name2,
                 name3,
@@ -558,8 +550,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub(crate) fn size(&self) -> usize {
         4 // item: u32
         + if let Some(found) = &self.found {
-            4 // item_class: ItemClass
-            + 4 // item_sub_class: u32
+            8 // class_and_sub_class: ItemClassAndSubClass
             + found.name1.len() + 1 // name1: CString
             + found.name2.len() + 1 // name2: CString
             + found.name3.len() + 1 // name3: CString
@@ -621,8 +612,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
-    pub item_class: ItemClass,
-    pub item_sub_class: u32,
+    pub class_and_sub_class: ItemClassAndSubClass,
     pub name1: String,
     pub name2: String,
     pub name3: String,
@@ -680,8 +670,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub(crate) fn size(&self) -> usize {
-        4 // item_class: ItemClass
-        + 4 // item_sub_class: u32
+        8 // class_and_sub_class: ItemClassAndSubClass
         + self.name1.len() + 1 // name1: CString
         + self.name2.len() + 1 // name2: CString
         + self.name3.len() + 1 // name3: CString

@@ -31,11 +31,7 @@ struct ItemStat {
 smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     Item item;
     optional found {
-        (u32)ItemClass item_class;
-        u32 item_sub_class {
-            comment = "mangoszero/vmangos/cmangos: client known only 0 subclass (and 1-2 obsolute subclasses)";
-            comment = "mangoszero/vmangos/cmangos: id from ItemSubClass.dbc";
-        }
+        ItemClassAndSubClass class_and_sub_class;
         CString name1;
         CString name2;
         CString name3;
@@ -120,11 +116,7 @@ struct ItemSocket {
 smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     Item item;
     optional found {
-        (u32)ItemClass item_class;
-        u32 item_sub_class {
-            comment = "mangoszero/vmangos/cmangos: client known only 0 subclass (and 1-2 obsolute subclasses)";
-            comment = "mangoszero/vmangos/cmangos: id from ItemSubClass.dbc";
-        }
+        ItemClassAndSubClass class_and_sub_class;
         u32 sound_override_sub_class {
             comment = "mangosone: new 2.0.3, not exist in wdb cache?";
             comment = "mangosone sets to -1.";
@@ -219,11 +211,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     Item item;
     optional found {
-        (u32)ItemClass item_class;
-        u32 item_sub_class {
-            comment = "mangoszero/vmangos/cmangos: client known only 0 subclass (and 1-2 obsolute subclasses)";
-            comment = "mangoszero/vmangos/cmangos: id from ItemSubClass.dbc";
-        }
+        ItemClassAndSubClass class_and_sub_class;
         u32 sound_override_sub_class {
             comment = "mangosone: new 2.0.3, not exist in wdb cache?";
             comment = "mangosone sets to -1.";

@@ -6,7 +6,7 @@ use crate::world::tbc::ItemStat;
 use crate::world::tbc::Area;
 use crate::world::tbc::Bonding;
 use crate::world::tbc::InventoryType;
-use crate::world::tbc::ItemClass;
+use crate::world::tbc::ItemClassAndSubClass;
 use crate::world::tbc::ItemQuality;
 use crate::world::tbc::Map;
 use crate::world::tbc::Skill;
@@ -15,13 +15,12 @@ use crate::world::tbc::AllowedRace;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:120`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L120):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:116`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L116):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
 ///     optional found {
-///         (u32)ItemClass item_class;
-///         u32 item_sub_class;
+///         ItemClassAndSubClass class_and_sub_class;
 ///         u32 sound_override_sub_class;
 ///         CString name1;
 ///         CString name2;
@@ -105,11 +104,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
         // optional found
         if let Some(v) = &self.found {
-            // item_class: ItemClass
-            w.write_all(&(v.item_class.as_int() as u32).to_le_bytes())?;
-
-            // item_sub_class: u32
-            w.write_all(&v.item_sub_class.to_le_bytes())?;
+            // class_and_sub_class: ItemClassAndSubClass
+            w.write_all(&(v.class_and_sub_class.as_int() as u64).to_le_bytes())?;
 
             // sound_override_sub_class: u32
             w.write_all(&v.sound_override_sub_class.to_le_bytes())?;
@@ -340,11 +336,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             4 // item: u32
         };
         let found = if current_size < body_size as usize {
-            // item_class: ItemClass
-            let item_class: ItemClass = (crate::util::read_u32_le(r)? as u8).try_into()?;
-
-            // item_sub_class: u32
-            let item_sub_class = crate::util::read_u32_le(r)?;
+            // class_and_sub_class: ItemClassAndSubClass
+            let class_and_sub_class: ItemClassAndSubClass = crate::util::read_u64_le(r)?.try_into()?;
 
             // sound_override_sub_class: u32
             let sound_override_sub_class = crate::util::read_u32_le(r)?;
@@ -545,8 +538,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let duration_in_seconds = crate::util::read_u32_le(r)?;
 
             Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
-                item_class,
-                item_sub_class,
+                class_and_sub_class,
                 sound_override_sub_class,
                 name1,
                 name2,
@@ -627,8 +619,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub(crate) fn size(&self) -> usize {
         4 // item: u32
         + if let Some(found) = &self.found {
-            4 // item_class: ItemClass
-            + 4 // item_sub_class: u32
+            8 // class_and_sub_class: ItemClassAndSubClass
             + 4 // sound_override_sub_class: u32
             + found.name1.len() + 1 // name1: CString
             + found.name2.len() + 1 // name2: CString
@@ -698,8 +689,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
-    pub item_class: ItemClass,
-    pub item_sub_class: u32,
+    pub class_and_sub_class: ItemClassAndSubClass,
     pub sound_override_sub_class: u32,
     pub name1: String,
     pub name2: String,
@@ -765,8 +755,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub(crate) fn size(&self) -> usize {
-        4 // item_class: ItemClass
-        + 4 // item_sub_class: u32
+        8 // class_and_sub_class: ItemClassAndSubClass
         + 4 // sound_override_sub_class: u32
         + self.name1.len() + 1 // name1: CString
         + self.name2.len() + 1 // name2: CString

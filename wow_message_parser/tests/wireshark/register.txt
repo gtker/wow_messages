@@ -2070,7 +2070,13 @@
         },
         { &hf_woww_item_class,
             { "Item Class", "woww.item.class",
-                FT_UINT32, BASE_HEX_DEC, VALS(e_item_class_strings), 0,
+                FT_UINT8, BASE_HEX_DEC, VALS(e_item_class_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_class_and_sub_class,
+            { "Item Class And Sub Class", "woww.item.class.and.sub.class",
+                FT_UINT64, BASE_HEX_DEC, VALS(e_item_class_and_sub_class_strings), 0,
                 NULL, HFILL
             }
         },
@@ -2215,12 +2221,6 @@
         { &hf_woww_item_stat_value,
             { "Item Stat Value", "woww.item.stat.value",
                 FT_INT32, BASE_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_item_sub_class,
-            { "Item Sub Class", "woww.item.sub.class",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

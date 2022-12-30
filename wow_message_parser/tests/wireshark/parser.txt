@@ -4303,8 +4303,7 @@
             ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
             len = offset_packet_end - ptvcursor_current_offset(ptv);
             if (len > 0) {
-                ptvcursor_add(ptv, hf_woww_item_class, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_item_sub_class, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_class_and_sub_class, 8, ENC_LITTLE_ENDIAN);
                 add_cstring(ptv, &hf_woww_name);
                 add_cstring(ptv, &hf_woww_name);
                 add_cstring(ptv, &hf_woww_name);

@@ -167,6 +167,7 @@ The basic type is `u64`, a 8 byte (64 bit) little endian integer.
 | `JUNK` | 15 (0x0F) |  |  |
 
 Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 
 # ItemClassAndSubClass
 
@@ -403,6 +404,7 @@ The basic type is `u64`, a 8 byte (64 bit) little endian integer.
 | `MOUNT` | 21474836495 (0x50000000F) |  |  |
 
 Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 
 # ItemClassAndSubClass
 
@@ -669,4 +671,5 @@ The basic type is `u64`, a 8 byte (64 bit) little endian integer.
 | `DRUID_GLYPH` | 47244640272 (0xB00000010) |  |  |
 
 Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 
