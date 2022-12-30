@@ -188,6 +188,8 @@ pub(crate) mod info_block;
 pub use info_block::*;
 pub(crate) mod inventory_result;
 pub use inventory_result::*;
+pub(crate) mod item_class_and_sub_class;
+pub use item_class_and_sub_class::*;
 pub(crate) mod key_version;
 pub use key_version::*;
 pub(crate) mod list_inventory_item;

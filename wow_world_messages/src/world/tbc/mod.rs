@@ -166,6 +166,8 @@ pub(crate) mod hit_info;
 pub use hit_info::*;
 pub(crate) mod inventory_result;
 pub use inventory_result::*;
+pub(crate) mod item_class_and_sub_class;
+pub use item_class_and_sub_class::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod movement_block;

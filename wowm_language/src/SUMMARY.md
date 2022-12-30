@@ -125,6 +125,7 @@
 - [InventoryResult](docs/inventoryresult.md)
 - [InventoryType](docs/inventorytype.md)
 - [ItemClass](docs/itemclass.md)
+- [ItemClassAndSubClass](docs/itemclassandsubclass.md)
 - [ItemQuality](docs/itemquality.md)
 - [ItemTextQuery](docs/itemtextquery.md)
 - [JoinArenaType](docs/joinarenatype.md)

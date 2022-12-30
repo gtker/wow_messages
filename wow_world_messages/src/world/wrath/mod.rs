@@ -402,6 +402,8 @@ pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class;
 pub use item_class::*;
+pub(crate) mod item_class_and_sub_class;
+pub use item_class_and_sub_class::*;
 pub(crate) mod item_quality;
 pub use item_quality::*;
 pub(crate) mod item_text_query;
