@@ -29,7 +29,7 @@ use std::convert::{TryFrom, TryInto};
 ///     ONE_HANDED_EXOTIC = 0x0000000B00000002;
 ///     TWO_HANDED_EXOTIC = 0x0000000C00000002;
 ///     FIST_WEAPON = 0x0000000D00000002;
-///     MISCELLANEOUS = 0x0000000E00000002;
+///     MISCELLANEOUS_WEAPON = 0x0000000E00000002;
 ///     DAGGER = 0x0000000F00000002;
 ///     THROWN = 0x0000001000000002;
 ///     SPEAR = 0x0000001100000002;
@@ -42,7 +42,7 @@ use std::convert::{TryFrom, TryInto};
 ///     LEATHER_ARMOR = 0x0000000200000004;
 ///     MAIL_ARMOR = 0x0000000300000004;
 ///     PLATE_ARMOR = 0x0000000400000004;
-///     BUCKLERS_OBSOLETE = 0x0000000500000004;
+///     BUCKLER_OBSOLETE = 0x0000000500000004;
 ///     SHIELD = 0x0000000600000004;
 ///     LIBRAM = 0x0000000700000004;
 ///     IDOL = 0x0000000800000004;
@@ -105,7 +105,7 @@ pub enum ItemClassAndSubClass {
     OneHandedExotic,
     TwoHandedExotic,
     FistWeapon,
-    Miscellaneous,
+    MiscellaneousWeapon,
     Dagger,
     Thrown,
     Spear,
@@ -118,7 +118,7 @@ pub enum ItemClassAndSubClass {
     LeatherArmor,
     MailArmor,
     PlateArmor,
-    BucklersObsolete,
+    BucklerObsolete,
     Shield,
     Libram,
     Idol,
@@ -181,7 +181,7 @@ impl ItemClassAndSubClass {
             Self::OneHandedExotic => 0xb00000002,
             Self::TwoHandedExotic => 0xc00000002,
             Self::FistWeapon => 0xd00000002,
-            Self::Miscellaneous => 0xe00000002,
+            Self::MiscellaneousWeapon => 0xe00000002,
             Self::Dagger => 0xf00000002,
             Self::Thrown => 0x1000000002,
             Self::Spear => 0x1100000002,
@@ -194,7 +194,7 @@ impl ItemClassAndSubClass {
             Self::LeatherArmor => 0x200000004,
             Self::MailArmor => 0x300000004,
             Self::PlateArmor => 0x400000004,
-            Self::BucklersObsolete => 0x500000004,
+            Self::BucklerObsolete => 0x500000004,
             Self::Shield => 0x600000004,
             Self::Libram => 0x700000004,
             Self::Idol => 0x800000004,
@@ -266,7 +266,7 @@ impl std::fmt::Display for ItemClassAndSubClass {
             Self::OneHandedExotic => f.write_str("OneHandedExotic"),
             Self::TwoHandedExotic => f.write_str("TwoHandedExotic"),
             Self::FistWeapon => f.write_str("FistWeapon"),
-            Self::Miscellaneous => f.write_str("Miscellaneous"),
+            Self::MiscellaneousWeapon => f.write_str("MiscellaneousWeapon"),
             Self::Dagger => f.write_str("Dagger"),
             Self::Thrown => f.write_str("Thrown"),
             Self::Spear => f.write_str("Spear"),
@@ -279,7 +279,7 @@ impl std::fmt::Display for ItemClassAndSubClass {
             Self::LeatherArmor => f.write_str("LeatherArmor"),
             Self::MailArmor => f.write_str("MailArmor"),
             Self::PlateArmor => f.write_str("PlateArmor"),
-            Self::BucklersObsolete => f.write_str("BucklersObsolete"),
+            Self::BucklerObsolete => f.write_str("BucklerObsolete"),
             Self::Shield => f.write_str("Shield"),
             Self::Libram => f.write_str("Libram"),
             Self::Idol => f.write_str("Idol"),
@@ -345,7 +345,7 @@ impl TryFrom<u64> for ItemClassAndSubClass {
             47244640258 => Ok(Self::OneHandedExotic),
             51539607554 => Ok(Self::TwoHandedExotic),
             55834574850 => Ok(Self::FistWeapon),
-            60129542146 => Ok(Self::Miscellaneous),
+            60129542146 => Ok(Self::MiscellaneousWeapon),
             64424509442 => Ok(Self::Dagger),
             68719476738 => Ok(Self::Thrown),
             73014444034 => Ok(Self::Spear),
@@ -358,7 +358,7 @@ impl TryFrom<u64> for ItemClassAndSubClass {
             8589934596 => Ok(Self::LeatherArmor),
             12884901892 => Ok(Self::MailArmor),
             17179869188 => Ok(Self::PlateArmor),
-            21474836484 => Ok(Self::BucklersObsolete),
+            21474836484 => Ok(Self::BucklerObsolete),
             25769803780 => Ok(Self::Shield),
             30064771076 => Ok(Self::Libram),
             34359738372 => Ok(Self::Idol),

@@ -38,7 +38,7 @@ use std::convert::{TryFrom, TryInto};
 ///     ONE_HANDED_EXOTIC = 0x0000000B00000002;
 ///     TWO_HANDED_EXOTIC = 0x0000000C00000002;
 ///     FIST_WEAPON = 0x0000000D00000002;
-///     MISCELLANEOUS = 0x0000000E00000002;
+///     MISCELLANEOUS_WEAPON = 0x0000000E00000002;
 ///     DAGGER = 0x0000000F00000002;
 ///     THROWN = 0x0000001000000002;
 ///     SPEAR = 0x0000001100000002;
@@ -79,10 +79,10 @@ use std::convert::{TryFrom, TryInto};
 ///     HERB_TRADE_GOOD = 0x0000000900000007;
 ///     ENCHANTING_TRADE_GOOD = 0x0000000C00000007;
 ///     JEWELCRAFTING_TRADE_GOOD = 0x0000000400000007;
-///     PARTS_TRADE_GOOD = 0x0000000100000007;
-///     DEVICES_TRADE_GOOD = 0x0000000300000007;
-///     EXPLOSIVES_TRADE_GOOD = 0x0000000200000007;
-///     MATERIALS_TRADE_GOOD = 0x0000000D00000007;
+///     PART_TRADE_GOOD = 0x0000000100000007;
+///     DEVICE_TRADE_GOOD = 0x0000000300000007;
+///     EXPLOSIVE_TRADE_GOOD = 0x0000000200000007;
+///     MATERIAL_TRADE_GOOD = 0x0000000D00000007;
 ///     OTHER_TRADE_GOOD = 0x0000000B00000007;
 ///     GENERIC_OBSOLETE = 0x0000000000000008;
 ///     BOOK = 0x0000000000000009;
@@ -147,7 +147,7 @@ pub enum ItemClassAndSubClass {
     OneHandedExotic,
     TwoHandedExotic,
     FistWeapon,
-    Miscellaneous,
+    MiscellaneousWeapon,
     Dagger,
     Thrown,
     Spear,
@@ -188,10 +188,10 @@ pub enum ItemClassAndSubClass {
     HerbTradeGood,
     EnchantingTradeGood,
     JewelcraftingTradeGood,
-    PartsTradeGood,
-    DevicesTradeGood,
-    ExplosivesTradeGood,
-    MaterialsTradeGood,
+    PartTradeGood,
+    DeviceTradeGood,
+    ExplosiveTradeGood,
+    MaterialTradeGood,
     OtherTradeGood,
     GenericObsolete,
     Book,
@@ -256,7 +256,7 @@ impl ItemClassAndSubClass {
             Self::OneHandedExotic => 0xb00000002,
             Self::TwoHandedExotic => 0xc00000002,
             Self::FistWeapon => 0xd00000002,
-            Self::Miscellaneous => 0xe00000002,
+            Self::MiscellaneousWeapon => 0xe00000002,
             Self::Dagger => 0xf00000002,
             Self::Thrown => 0x1000000002,
             Self::Spear => 0x1100000002,
@@ -297,10 +297,10 @@ impl ItemClassAndSubClass {
             Self::HerbTradeGood => 0x900000007,
             Self::EnchantingTradeGood => 0xc00000007,
             Self::JewelcraftingTradeGood => 0x400000007,
-            Self::PartsTradeGood => 0x100000007,
-            Self::DevicesTradeGood => 0x300000007,
-            Self::ExplosivesTradeGood => 0x200000007,
-            Self::MaterialsTradeGood => 0xd00000007,
+            Self::PartTradeGood => 0x100000007,
+            Self::DeviceTradeGood => 0x300000007,
+            Self::ExplosiveTradeGood => 0x200000007,
+            Self::MaterialTradeGood => 0xd00000007,
             Self::OtherTradeGood => 0xb00000007,
             Self::GenericObsolete => 0x8,
             Self::Book => 0x9,
@@ -374,7 +374,7 @@ impl std::fmt::Display for ItemClassAndSubClass {
             Self::OneHandedExotic => f.write_str("OneHandedExotic"),
             Self::TwoHandedExotic => f.write_str("TwoHandedExotic"),
             Self::FistWeapon => f.write_str("FistWeapon"),
-            Self::Miscellaneous => f.write_str("Miscellaneous"),
+            Self::MiscellaneousWeapon => f.write_str("MiscellaneousWeapon"),
             Self::Dagger => f.write_str("Dagger"),
             Self::Thrown => f.write_str("Thrown"),
             Self::Spear => f.write_str("Spear"),
@@ -415,10 +415,10 @@ impl std::fmt::Display for ItemClassAndSubClass {
             Self::HerbTradeGood => f.write_str("HerbTradeGood"),
             Self::EnchantingTradeGood => f.write_str("EnchantingTradeGood"),
             Self::JewelcraftingTradeGood => f.write_str("JewelcraftingTradeGood"),
-            Self::PartsTradeGood => f.write_str("PartsTradeGood"),
-            Self::DevicesTradeGood => f.write_str("DevicesTradeGood"),
-            Self::ExplosivesTradeGood => f.write_str("ExplosivesTradeGood"),
-            Self::MaterialsTradeGood => f.write_str("MaterialsTradeGood"),
+            Self::PartTradeGood => f.write_str("PartTradeGood"),
+            Self::DeviceTradeGood => f.write_str("DeviceTradeGood"),
+            Self::ExplosiveTradeGood => f.write_str("ExplosiveTradeGood"),
+            Self::MaterialTradeGood => f.write_str("MaterialTradeGood"),
             Self::OtherTradeGood => f.write_str("OtherTradeGood"),
             Self::GenericObsolete => f.write_str("GenericObsolete"),
             Self::Book => f.write_str("Book"),
@@ -486,7 +486,7 @@ impl TryFrom<u64> for ItemClassAndSubClass {
             47244640258 => Ok(Self::OneHandedExotic),
             51539607554 => Ok(Self::TwoHandedExotic),
             55834574850 => Ok(Self::FistWeapon),
-            60129542146 => Ok(Self::Miscellaneous),
+            60129542146 => Ok(Self::MiscellaneousWeapon),
             64424509442 => Ok(Self::Dagger),
             68719476738 => Ok(Self::Thrown),
             73014444034 => Ok(Self::Spear),
@@ -527,10 +527,10 @@ impl TryFrom<u64> for ItemClassAndSubClass {
             38654705671 => Ok(Self::HerbTradeGood),
             51539607559 => Ok(Self::EnchantingTradeGood),
             17179869191 => Ok(Self::JewelcraftingTradeGood),
-            4294967303 => Ok(Self::PartsTradeGood),
-            12884901895 => Ok(Self::DevicesTradeGood),
-            8589934599 => Ok(Self::ExplosivesTradeGood),
-            55834574855 => Ok(Self::MaterialsTradeGood),
+            4294967303 => Ok(Self::PartTradeGood),
+            12884901895 => Ok(Self::DeviceTradeGood),
+            8589934599 => Ok(Self::ExplosiveTradeGood),
+            55834574855 => Ok(Self::MaterialTradeGood),
             47244640263 => Ok(Self::OtherTradeGood),
             8 => Ok(Self::GenericObsolete),
             9 => Ok(Self::Book),

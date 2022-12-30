@@ -39,7 +39,7 @@ use std::convert::{TryFrom, TryInto};
 ///     ONE_HANDED_EXOTIC = 0x0000000b00000002;
 ///     TWO_HANDED_EXOTIC = 0x0000000c00000002;
 ///     FIST_WEAPON = 0x0000000d00000002;
-///     MISCELLANEOUS = 0x0000000e00000002;
+///     MISCELLANEOUS_WEAPON = 0x0000000e00000002;
 ///     DAGGER = 0x0000000f00000002;
 ///     THROWN = 0x0000001000000002;
 ///     SPEAR = 0x0000001100000002;
@@ -163,7 +163,7 @@ pub enum ItemClassAndSubClass {
     OneHandedExotic,
     TwoHandedExotic,
     FistWeapon,
-    Miscellaneous,
+    MiscellaneousWeapon,
     Dagger,
     Thrown,
     Spear,
@@ -287,7 +287,7 @@ impl ItemClassAndSubClass {
             Self::OneHandedExotic => 0xb00000002,
             Self::TwoHandedExotic => 0xc00000002,
             Self::FistWeapon => 0xd00000002,
-            Self::Miscellaneous => 0xe00000002,
+            Self::MiscellaneousWeapon => 0xe00000002,
             Self::Dagger => 0xf00000002,
             Self::Thrown => 0x1000000002,
             Self::Spear => 0x1100000002,
@@ -420,7 +420,7 @@ impl std::fmt::Display for ItemClassAndSubClass {
             Self::OneHandedExotic => f.write_str("OneHandedExotic"),
             Self::TwoHandedExotic => f.write_str("TwoHandedExotic"),
             Self::FistWeapon => f.write_str("FistWeapon"),
-            Self::Miscellaneous => f.write_str("Miscellaneous"),
+            Self::MiscellaneousWeapon => f.write_str("MiscellaneousWeapon"),
             Self::Dagger => f.write_str("Dagger"),
             Self::Thrown => f.write_str("Thrown"),
             Self::Spear => f.write_str("Spear"),
@@ -547,7 +547,7 @@ impl TryFrom<u64> for ItemClassAndSubClass {
             47244640258 => Ok(Self::OneHandedExotic),
             51539607554 => Ok(Self::TwoHandedExotic),
             55834574850 => Ok(Self::FistWeapon),
-            60129542146 => Ok(Self::Miscellaneous),
+            60129542146 => Ok(Self::MiscellaneousWeapon),
             64424509442 => Ok(Self::Dagger),
             68719476738 => Ok(Self::Thrown),
             73014444034 => Ok(Self::Spear),
