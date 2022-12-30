@@ -1,7 +1,7 @@
 mod data;
 
 use crate::manual::vanilla::Item;
-use crate::vanilla::{Class, InventoryType};
+use crate::vanilla::{Class, InventoryType, ItemClassAndSubClass};
 use crate::vanilla::{PlayerRace, RaceClass};
 pub use data::*;
 
@@ -10,7 +10,10 @@ pub fn lookup_item(id: u32) -> Option<&'static Item> {
 }
 
 impl Item {
-    pub const fn possibly_usable_by(&self, race_class: RaceClass) -> bool {
+    /// Returns true if the item is usable by the [`RaceClass`].
+    ///
+    /// Non-equipable items along with bags and quivers will always return false.
+    pub const fn possibly_equipable_by(&self, race_class: RaceClass) -> bool {
         let race = race_class.race();
         let class = race_class.class();
 
@@ -39,42 +42,149 @@ impl Item {
                 Class::Druid => self.allowed_class.is_DRUID(),
             };
 
-        let equip_allowed = match self.inventory_type {
-            InventoryType::Head
-            | InventoryType::Shoulders
-            | InventoryType::Chest
-            | InventoryType::Waist
-            | InventoryType::Legs
-            | InventoryType::Feet
-            | InventoryType::Wrists
-            | InventoryType::Hands
-            | InventoryType::Robe => true, // Check for armor skills
-            InventoryType::Weapon
-            | InventoryType::TwoHandedWeapon
-            | InventoryType::WeaponMainHand
-            | InventoryType::WeaponOffHand => true, // check for weapon skills
-            InventoryType::Ranged | InventoryType::RangedRight => matches!(
-                class,
-                Class::Warrior | Class::Rogue | Class::Hunter | Class::Mage
-            ), // Check for wands
-            InventoryType::Body | InventoryType::NonEquip => true, // more?
+        let equip_allowed = match self.class_and_sub_class {
+            ItemClassAndSubClass::Consumable
+            | ItemClassAndSubClass::CheeseOrBreadObsolete
+            | ItemClassAndSubClass::LiquidObsolete
+            | ItemClassAndSubClass::Bag
+            | ItemClassAndSubClass::SoulBag
+            | ItemClassAndSubClass::HerbBag
+            | ItemClassAndSubClass::EnchantingBag
+            | ItemClassAndSubClass::ObsoleteWeapon
+            | ItemClassAndSubClass::Reagent
+            | ItemClassAndSubClass::WandObsolete
+            | ItemClassAndSubClass::BoltObsolete
+            | ItemClassAndSubClass::Arrow
+            | ItemClassAndSubClass::Bullet
+            | ItemClassAndSubClass::ThrownObsolete
+            | ItemClassAndSubClass::TradeGood
+            | ItemClassAndSubClass::PartTradeGood
+            | ItemClassAndSubClass::ExplosiveTradeGood
+            | ItemClassAndSubClass::DeviceTradeGood
+            | ItemClassAndSubClass::GenericObsolete
+            | ItemClassAndSubClass::Book
+            | ItemClassAndSubClass::LeatherworkingRecipe
+            | ItemClassAndSubClass::TailoringRecipe
+            | ItemClassAndSubClass::EngineeringRecipe
+            | ItemClassAndSubClass::BlacksmithingRecipe
+            | ItemClassAndSubClass::CookingRecipe
+            | ItemClassAndSubClass::AlchemyRecipe
+            | ItemClassAndSubClass::FirstAidRecipe
+            | ItemClassAndSubClass::EnchantingRecipe
+            | ItemClassAndSubClass::FishingRecipe
+            | ItemClassAndSubClass::MoneyObsolete
+            | ItemClassAndSubClass::QuiverObsolete
+            | ItemClassAndSubClass::QuiverObsolete1
+            | ItemClassAndSubClass::Quiver
+            | ItemClassAndSubClass::AmmoPouch
+            | ItemClassAndSubClass::Quest
+            | ItemClassAndSubClass::Key
+            | ItemClassAndSubClass::Lockpick
+            | ItemClassAndSubClass::Permanent
+            | ItemClassAndSubClass::Junk
+            | ItemClassAndSubClass::JewelryObsolete
+            | ItemClassAndSubClass::BucklerObsolete
+            | ItemClassAndSubClass::EngineeringBag => false,
 
-            InventoryType::Shield => {
-                matches!(class, Class::Warrior | Class::Paladin | Class::Shaman)
+            ItemClassAndSubClass::OneHandedAxe | ItemClassAndSubClass::TwoHandedAxe => {
+                matches!(class, Class::Hunter | Class::Warrior | Class::Paladin)
             }
-            InventoryType::Ammo | InventoryType::Thrown | InventoryType::Quiver => {
+            ItemClassAndSubClass::OneHandedMace => {
+                matches!(
+                    class,
+                    Class::Warrior | Class::Druid | Class::Paladin | Class::Priest | Class::Rogue
+                )
+            }
+            ItemClassAndSubClass::TwoHandedMace => {
+                matches!(class, Class::Warrior | Class::Druid | Class::Paladin)
+            }
+            ItemClassAndSubClass::Polearm => {
+                matches!(class, Class::Hunter | Class::Warrior | Class::Paladin)
+            }
+            ItemClassAndSubClass::OneHandedSword => {
+                matches!(
+                    class,
+                    Class::Hunter
+                        | Class::Warrior
+                        | Class::Mage
+                        | Class::Paladin
+                        | Class::Rogue
+                        | Class::Warlock
+                )
+            }
+            ItemClassAndSubClass::TwoHandedSword => {
+                matches!(
+                    class,
+                    Class::Hunter | Class::Warrior | Class::Mage | Class::Paladin
+                )
+            }
+            ItemClassAndSubClass::Staff => {
+                matches!(
+                    class,
+                    Class::Hunter
+                        | Class::Warrior
+                        | Class::Druid
+                        | Class::Mage
+                        | Class::Priest
+                        | Class::Warlock
+                )
+            }
+            ItemClassAndSubClass::FistWeapon => {
+                matches!(
+                    class,
+                    Class::Hunter | Class::Warrior | Class::Druid | Class::Rogue
+                )
+            }
+            ItemClassAndSubClass::Dagger => {
+                matches!(
+                    class,
+                    Class::Hunter
+                        | Class::Warrior
+                        | Class::Druid
+                        | Class::Mage
+                        | Class::Priest
+                        | Class::Rogue
+                        | Class::Warlock
+                )
+            }
+            ItemClassAndSubClass::Wand => {
+                matches!(class, Class::Mage | Class::Warlock | Class::Priest)
+            }
+
+            ItemClassAndSubClass::Crossbow
+            | ItemClassAndSubClass::Thrown
+            | ItemClassAndSubClass::Bow
+            | ItemClassAndSubClass::Gun => {
                 matches!(class, Class::Warrior | Class::Rogue | Class::Hunter)
             }
-            InventoryType::Relic => matches!(class, Class::Paladin | Class::Shaman | Class::Druid),
-            InventoryType::Holdable
-            | InventoryType::Bag
-            | InventoryType::Tabard
-            | InventoryType::Neck
-            | InventoryType::Cloak
-            | InventoryType::Finger
-            | InventoryType::Trinket => true,
+
+            ItemClassAndSubClass::ClothArmor => true,
+            ItemClassAndSubClass::LeatherArmor => {
+                !matches!(class, Class::Mage | Class::Warlock | Class::Priest)
+            }
+            ItemClassAndSubClass::MailArmor => matches!(
+                class,
+                Class::Paladin | Class::Warrior | Class::Hunter | Class::Shaman
+            ),
+            ItemClassAndSubClass::PlateArmor => matches!(class, Class::Paladin | Class::Warrior),
+
+            ItemClassAndSubClass::Shield => {
+                matches!(class, Class::Warrior | Class::Paladin | Class::Shaman)
+            }
+            ItemClassAndSubClass::Libram => matches!(class, Class::Paladin),
+            ItemClassAndSubClass::Idol => matches!(class, Class::Druid),
+            ItemClassAndSubClass::Totem => matches!(class, Class::Shaman),
+
+            ItemClassAndSubClass::FishingPole
+            | ItemClassAndSubClass::Spear
+            | ItemClassAndSubClass::MiscellaneousWeapon
+            | ItemClassAndSubClass::MiscellaneousArmor => true,
+            // cmangos has no items with these types
+            ItemClassAndSubClass::OneHandedExotic | ItemClassAndSubClass::TwoHandedExotic => false,
         };
 
-        allowed_by_class && allowed_by_race && equip_allowed
+        let inventory_type_is_equip = !matches!(self.inventory_type, InventoryType::NonEquip);
+
+        allowed_by_class && allowed_by_race && equip_allowed && inventory_type_is_equip
     }
 }
