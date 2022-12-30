@@ -945,7 +945,7 @@ pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
 
 pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
 
-pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
+pub use crate::shared::item_spells_tbc_wrath::ItemSpells;
 
 pub use crate::shared::item_stat_tbc_wrath::ItemStat;
 
@@ -1648,6 +1648,8 @@ pub use wow_world_base::tbc::ItemQuality;
 pub use wow_world_base::tbc::Power;
 
 pub use wow_world_base::tbc::SpellSchool;
+
+pub use wow_world_base::tbc::SpellTriggerType;
 
 pub use wow_world_base::tbc::Vector2d;
 

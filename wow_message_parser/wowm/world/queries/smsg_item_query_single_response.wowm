@@ -1,6 +1,15 @@
+enum SpellTriggerType : u8 {
+    ON_USE = 0;
+    ON_EQUIP = 1;
+    CHANCE_ON_HIT = 2;
+} {
+    rust_base_type = "true";
+    versions = "1";
+}
+
 struct ItemSpells {
     Spell spell;   
-    u32 spell_trigger;
+    (u32)SpellTriggerType spell_trigger;
     i32 spell_charges {
         comment = "let the database control the sign here. negative means that the item should be consumed once the charges are consumed.";
     }
@@ -8,7 +17,37 @@ struct ItemSpells {
     u32 spell_category;
     i32 spell_category_cooldown;
 } {
-    versions = "1 2 3";
+    versions = "1";
+}
+
+enum SpellTriggerType : u8 {
+    ON_USE = 0;
+    ON_EQUIP = 1;
+    CHANCE_ON_HIT = 2;
+    SERVER_SIDE_SCRIPT = 3 {
+        comment = "cmangos-tbc: Only used by 23442, Glowing Sanctified Crystal which is used for a Hellfire Peninsula quest.";
+        comment = "Unknown why exactly it does not use the normal triggers.";
+    }
+    SOULSTONE = 4;
+    NO_EQUIP_COOLDOWN = 5;
+    LEARN_SPELL_ID = 6;
+} {
+    rust_base_type = "true";
+    versions = "2 3";
+    comment = "azerothcore: ItemSpelltriggerType 5 might have changed on 2.4.3/3.0.3: Such auras will be applied on item pickup and removed on item loss - maybe on the other hand the item is destroyed if the aura is removed ('removed on death' of spell 57348 makes me think so)";
+}
+
+struct ItemSpells {
+    Spell spell;   
+    (u32)SpellTriggerType spell_trigger;
+    i32 spell_charges {
+        comment = "let the database control the sign here. negative means that the item should be consumed once the charges are consumed.";
+    }
+    i32 spell_cooldown;
+    u32 spell_category;
+    i32 spell_category_cooldown;
+} {
+    versions = "2 3";
 }
 
 struct ItemDamageType {

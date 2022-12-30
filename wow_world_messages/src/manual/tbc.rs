@@ -134,7 +134,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 spells: [
                     ItemSpells {
                         spell: v.spell_id_1 as u32,
-                        spell_trigger: v.spell_trigger_1 as u32,
+                        spell_trigger: v.spell_trigger_1,
                         spell_charges: v.spell_charges_1,
                         spell_cooldown: v.spell_cooldown_1,
                         spell_category: v.spell_category_1 as u32,
@@ -142,7 +142,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                     },
                     ItemSpells {
                         spell: v.spell_id_2 as u32,
-                        spell_trigger: v.spell_trigger_2 as u32,
+                        spell_trigger: v.spell_trigger_2,
                         spell_charges: v.spell_charges_2,
                         spell_cooldown: v.spell_cooldown_2,
                         spell_category: v.spell_category_2 as u32,
@@ -150,7 +150,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                     },
                     ItemSpells {
                         spell: v.spell_id_3 as u32,
-                        spell_trigger: v.spell_trigger_3 as u32,
+                        spell_trigger: v.spell_trigger_3,
                         spell_charges: v.spell_charges_3,
                         spell_cooldown: v.spell_cooldown_3,
                         spell_category: v.spell_category_3 as u32,
@@ -158,7 +158,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                     },
                     ItemSpells {
                         spell: v.spell_id_4 as u32,
-                        spell_trigger: v.spell_trigger_4 as u32,
+                        spell_trigger: v.spell_trigger_4,
                         spell_charges: v.spell_charges_4,
                         spell_cooldown: v.spell_cooldown_4,
                         spell_category: v.spell_category_4 as u32,
@@ -166,7 +166,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                     },
                     ItemSpells {
                         spell: v.spell_id_5 as u32,
-                        spell_trigger: v.spell_trigger_5 as u32,
+                        spell_trigger: v.spell_trigger_5,
                         spell_charges: v.spell_charges_5,
                         spell_cooldown: v.spell_cooldown_5,
                         spell_category: v.spell_category_5 as u32,

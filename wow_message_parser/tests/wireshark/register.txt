@@ -3940,9 +3940,9 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_spell_trigger,
-            { "Spell Trigger", "woww.spell.trigger",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+        { &hf_woww_spell_trigger_type,
+            { "Spell Trigger Type", "woww.spell.trigger.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_spell_trigger_type_strings), 0,
                 NULL, HFILL
             }
         },

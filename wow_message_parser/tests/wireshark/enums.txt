@@ -2981,6 +2981,18 @@ static const value_string e_guild_member_status_strings[] =  {
 };
 
 typedef enum {
+    SPELL_TRIGGER_TYPE_ON_USE = 0x0,
+    SPELL_TRIGGER_TYPE_ON_EQUIP = 0x1,
+    SPELL_TRIGGER_TYPE_CHANCE_ON_HIT = 0x2,
+} e_spell_trigger_type;
+static const value_string e_spell_trigger_type_strings[] =  {
+    { SPELL_TRIGGER_TYPE_ON_USE, "On Use" },
+    { SPELL_TRIGGER_TYPE_ON_EQUIP, "On Equip" },
+    { SPELL_TRIGGER_TYPE_CHANCE_ON_HIT, "Chance On Hit" },
+    { 0, NULL }
+};
+
+typedef enum {
     ITEM_STAT_TYPE_MANA = 0x0,
     ITEM_STAT_TYPE_HEALTH = 0x1,
     ITEM_STAT_TYPE_AGILITY = 0x3,

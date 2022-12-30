@@ -199,6 +199,7 @@
 - [SpellMissInfo](docs/spellmissinfo.md)
 - [SpellSchool](docs/spellschool.md)
 - [SpellStealAction](docs/spellstealaction.md)
+- [SpellTriggerType](docs/spelltriggertype.md)
 - [SplineFlag](docs/splineflag.md)
 - [StableResult](docs/stableresult.md)
 - [StatusId](docs/statusid.md)

@@ -31,6 +31,8 @@ pub(crate) mod skill;
 pub use skill::*;
 pub(crate) mod spell_school;
 pub use spell_school::*;
+pub(crate) mod spell_trigger_type;
+pub use spell_trigger_type::*;
 pub(crate) mod vector2d;
 pub use vector2d::*;
 pub(crate) mod vector3d;

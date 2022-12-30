@@ -182,35 +182,55 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         s.w_no_indent(format!("{},", item.ammo_type,));
         s.w_no_indent(float_format(item.ranged_mod_range));
         s.w_no_indent(format!("{},", item.spell_id_1,));
-        s.w_no_indent(format!("{},", item.spell_trigger_1,));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_1 as u8)
+                .unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_1,));
         s.w_no_indent(float_format(item.spell_ppm_rate_1));
         s.w_no_indent(format!("{},", item.spell_cooldown_1,));
         s.w_no_indent(format!("{},", item.spell_category_1,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_1,));
         s.w_no_indent(format!("{},", item.spell_id_2,));
-        s.w_no_indent(format!("{},", item.spell_trigger_2,));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_2 as u8)
+                .unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_2,));
         s.w_no_indent(float_format(item.spell_ppm_rate_2));
         s.w_no_indent(format!("{},", item.spell_cooldown_2,));
         s.w_no_indent(format!("{},", item.spell_category_2,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_2,));
         s.w_no_indent(format!("{},", item.spell_id_3,));
-        s.w_no_indent(format!("{},", item.spell_trigger_3,));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_3 as u8)
+                .unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_3,));
         s.w_no_indent(float_format(item.spell_ppm_rate_3));
         s.w_no_indent(format!("{},", item.spell_cooldown_3,));
         s.w_no_indent(format!("{},", item.spell_category_3,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_3,));
         s.w_no_indent(format!("{},", item.spell_id_4,));
-        s.w_no_indent(format!("{},", item.spell_trigger_4,));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_4 as u8)
+                .unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_4,));
         s.w_no_indent(float_format(item.spell_ppm_rate_4));
         s.w_no_indent(format!("{},", item.spell_cooldown_4,));
         s.w_no_indent(format!("{},", item.spell_category_4,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_4,));
         s.w_no_indent(format!("{},", item.spell_id_5,));
-        s.w_no_indent(format!("{},", item.spell_trigger_5,));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_5 as u8)
+                .unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_5,));
         s.w_no_indent(float_format(item.spell_ppm_rate_5));
         s.w_no_indent(format!("{},", item.spell_cooldown_5,));
@@ -356,35 +376,50 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.ammo_type));
         s.w_no_indent(float_format(item.ranged_mod_range));
         s.w_no_indent(format!("{},", item.spell_id_1));
-        s.w_no_indent(format!("{},", item.spell_trigger_1));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_1 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_1));
         s.w_no_indent(float_format(item.spell_ppm_rate_1));
         s.w_no_indent(format!("{},", item.spell_cooldown_1));
         s.w_no_indent(format!("{},", item.spell_category_1));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_1));
         s.w_no_indent(format!("{},", item.spell_id_2));
-        s.w_no_indent(format!("{},", item.spell_trigger_2));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_2 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_2));
         s.w_no_indent(float_format(item.spell_ppm_rate_2));
         s.w_no_indent(format!("{},", item.spell_cooldown_2));
         s.w_no_indent(format!("{},", item.spell_category_2));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_2));
         s.w_no_indent(format!("{},", item.spell_id_3));
-        s.w_no_indent(format!("{},", item.spell_trigger_3));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_3 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_3));
         s.w_no_indent(float_format(item.spell_ppm_rate_3));
         s.w_no_indent(format!("{},", item.spell_cooldown_3));
         s.w_no_indent(format!("{},", item.spell_category_3));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_3));
         s.w_no_indent(format!("{},", item.spell_id_4));
-        s.w_no_indent(format!("{},", item.spell_trigger_4));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_4 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_4));
         s.w_no_indent(float_format(item.spell_ppm_rate_4));
         s.w_no_indent(format!("{},", item.spell_cooldown_4));
         s.w_no_indent(format!("{},", item.spell_category_4));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_4));
         s.w_no_indent(format!("{},", item.spell_id_5));
-        s.w_no_indent(format!("{},", item.spell_trigger_5));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_5 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_5));
         s.w_no_indent(float_format(item.spell_ppm_rate_5));
         s.w_no_indent(format!("{},", item.spell_cooldown_5));
@@ -529,35 +564,50 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.ammo_type));
         s.w_no_indent(float_format(item.ranged_mod_range));
         s.w_no_indent(format!("{},", item.spell_id_1));
-        s.w_no_indent(format!("{},", item.spell_trigger_1));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_1 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_1));
         s.w_no_indent(float_format(item.spell_ppm_rate_1));
         s.w_no_indent(format!("{},", item.spell_cooldown_1));
         s.w_no_indent(format!("{},", item.spell_category_1));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_1));
         s.w_no_indent(format!("{},", item.spell_id_2));
-        s.w_no_indent(format!("{},", item.spell_trigger_2));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_2 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_2));
         s.w_no_indent(float_format(item.spell_ppm_rate_2));
         s.w_no_indent(format!("{},", item.spell_cooldown_2));
         s.w_no_indent(format!("{},", item.spell_category_2));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_2));
         s.w_no_indent(format!("{},", item.spell_id_3));
-        s.w_no_indent(format!("{},", item.spell_trigger_3));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_3 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_3));
         s.w_no_indent(float_format(item.spell_ppm_rate_3));
         s.w_no_indent(format!("{},", item.spell_cooldown_3));
         s.w_no_indent(format!("{},", item.spell_category_3));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_3));
         s.w_no_indent(format!("{},", item.spell_id_4));
-        s.w_no_indent(format!("{},", item.spell_trigger_4));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_4 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_4));
         s.w_no_indent(float_format(item.spell_ppm_rate_4));
         s.w_no_indent(format!("{},", item.spell_cooldown_4));
         s.w_no_indent(format!("{},", item.spell_category_4));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_4));
         s.w_no_indent(format!("{},", item.spell_id_5));
-        s.w_no_indent(format!("{},", item.spell_trigger_5));
+        s.w_no_indent(format!(
+            "SpellTriggerType::{},",
+            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_5 as u8).unwrap()
+        ));
         s.w_no_indent(format!("{},", item.spell_charges_5));
         s.w_no_indent(float_format(item.spell_ppm_rate_5));
         s.w_no_indent(format!("{},", item.spell_cooldown_5));

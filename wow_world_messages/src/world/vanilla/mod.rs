@@ -190,6 +190,8 @@ pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class_and_sub_class;
 pub use item_class_and_sub_class::*;
+pub(crate) mod item_spells;
+pub use item_spells::*;
 pub(crate) mod item_stat;
 pub use item_stat::*;
 pub(crate) mod item_stat_type;
@@ -828,8 +830,6 @@ pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceResetFailedReason;
 
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
-
-pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
 
 pub use crate::shared::language_vanilla_vanilla::Language;
 
@@ -1655,6 +1655,8 @@ pub(crate) mod spell_log;
 pub use spell_log::*;
 pub(crate) mod spell_miss;
 pub use spell_miss::*;
+pub(crate) mod spell_trigger_type;
+pub use spell_trigger_type::*;
 pub(crate) mod spline_flag;
 pub use spline_flag::*;
 pub(crate) mod trade_slot;
