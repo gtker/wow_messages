@@ -1,7 +1,6 @@
 use crate::tbc::{
-    Area, ItemClassAndSubClass, ItemDamageType, ItemSocket, ItemSpells, ItemStat,
-    SMSG_ITEM_QUERY_SINGLE_RESPONSE_found, SMSG_ITEM_NAME_QUERY_RESPONSE,
-    SMSG_ITEM_QUERY_SINGLE_RESPONSE,
+    Area, ItemDamageType, ItemSocket, ItemSpells, ItemStat, SMSG_ITEM_QUERY_SINGLE_RESPONSE_found,
+    SMSG_ITEM_NAME_QUERY_RESPONSE, SMSG_ITEM_QUERY_SINGLE_RESPONSE,
 };
 use std::convert::TryFrom;
 use wow_world_base::tbc::{Bonding, Item, Map, Skill};
@@ -27,10 +26,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         Self {
             item: v.entry as u32,
             found: Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
-                class_and_sub_class: ItemClassAndSubClass::try_from(
-                    (v.subclass as u64) << 32 | v.class as u64,
-                )
-                .unwrap(),
+                class_and_sub_class: v.class_and_sub_class,
                 sound_override_sub_class: v.sound_override_subclass as u32,
                 name1: v.name.to_string(),
                 name2: "".to_string(),

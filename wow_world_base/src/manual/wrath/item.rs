@@ -1,10 +1,9 @@
-use crate::wrath::{AllowedClass, AllowedRace, InventoryType, ItemQuality};
+use crate::wrath::{AllowedClass, AllowedRace, InventoryType, ItemClassAndSubClass, ItemQuality};
 
 #[derive(Debug, Copy, Clone)]
 pub struct Item {
     pub entry: i32,
-    pub class: i32,
-    pub subclass: i32,
+    pub class_and_sub_class: ItemClassAndSubClass,
     pub sound_override_subclass: i32,
     pub name: &'static str,
     pub displayid: i32,
@@ -140,8 +139,7 @@ impl Item {
     #[allow(clippy::complexity)]
     pub const fn new(
         entry: i32,
-        class: i32,
-        subclass: i32,
+        class_and_sub_class: ItemClassAndSubClass,
         sound_override_subclass: i32,
         name: &'static str,
         displayid: i32,
@@ -274,8 +272,7 @@ impl Item {
     ) -> Self {
         Self {
             entry,
-            class,
-            subclass,
+            class_and_sub_class,
             sound_override_subclass,
             name,
             displayid,

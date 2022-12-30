@@ -1,10 +1,9 @@
-use crate::vanilla::{AllowedClass, AllowedRace, InventoryType, ItemQuality};
+use crate::vanilla::{AllowedClass, AllowedRace, InventoryType, ItemClassAndSubClass, ItemQuality};
 
 #[derive(Debug, Copy, Clone)]
 pub struct Item {
     pub entry: i32,
-    pub class: i32,
-    pub sub_class: i32,
+    pub class_and_sub_class: ItemClassAndSubClass,
     pub name: &'static str,
     pub displayid: i32,
     pub quality: ItemQuality,
@@ -136,8 +135,7 @@ impl Item {
     #[allow(clippy::complexity)]
     pub const fn new(
         entry: i32,
-        class: i32,
-        sub_class: i32,
+        class_and_sub_class: ItemClassAndSubClass,
         name: &'static str,
         displayid: i32,
         quality: ItemQuality,
@@ -266,8 +264,7 @@ impl Item {
     ) -> Self {
         Self {
             entry,
-            class,
-            sub_class,
+            class_and_sub_class,
             name,
             displayid,
             quality,

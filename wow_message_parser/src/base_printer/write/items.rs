@@ -38,8 +38,35 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         s.w("Item::new(");
 
         s.w_no_indent(format!("{},", item.entry,));
-        s.w_no_indent(format!("{},", item.class,));
-        s.w_no_indent(format!("{},", item.sub_class,));
+        const CLASS_CONSUMABLE: i32 = 0;
+        const CLASS_TRADE_GOODS: i32 = 7;
+        const CLASS_JUNK: i32 = 15;
+
+        let sub_class = if item.class == CLASS_CONSUMABLE {
+            // The game does not recognize consumables other than class 0 and subclass 0,
+            // but the cmangos database uses these for some reason
+            0
+        } else if item.class == CLASS_TRADE_GOODS && item.sub_class > 3 {
+            // The game does not recognize trade goods for greater than 3 (Devices)
+            // but the cmangos database uses these for some reason
+            0
+        } else if item.class == CLASS_JUNK {
+            // The game does not recognize junk subclasses other than class 15 and subclass 0,
+            // but the cmangos database uses these for some reason
+            0
+        } else {
+            item.sub_class
+        };
+
+        s.w_no_indent(format!(
+            "ItemClassAndSubClass::{},",
+            match wow_world_base::vanilla::ItemClassAndSubClass::try_from(
+                (sub_class as u64) << 32 | item.class as u64,
+            ) {
+                Ok(e) => e,
+                Err(e) => panic!("{:#X}", e.value),
+            }
+        ));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid,));
         s.w_no_indent(format!(
@@ -185,10 +212,14 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
 
     for item in items {
         s.w("Item::new(");
-
         s.w_no_indent(format!("{},", item.entry));
-        s.w_no_indent(format!("{},", item.class));
-        s.w_no_indent(format!("{},", item.subclass));
+        s.w_no_indent(format!(
+            "ItemClassAndSubClass::{},",
+            wow_world_base::tbc::ItemClassAndSubClass::try_from(
+                (item.subclass as u64) << 32 | item.class as u64,
+            )
+            .unwrap()
+        ));
         s.w_no_indent(format!("{},", item.unk0));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid));
@@ -351,8 +382,13 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w("Item::new(");
 
         s.w_no_indent(format!("{},", item.entry));
-        s.w_no_indent(format!("{},", item.class));
-        s.w_no_indent(format!("{},", item.subclass));
+        s.w_no_indent(format!(
+            "ItemClassAndSubClass::{},",
+            wow_world_base::wrath::ItemClassAndSubClass::try_from(
+                (item.subclass as u64) << 32 | item.class as u64,
+            )
+            .unwrap()
+        ));
         s.w_no_indent(format!("{},", item.unk0));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid));
