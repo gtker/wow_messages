@@ -24,7 +24,7 @@ pub fn item_to_name_query_response(item: &Item) -> SMSG_ITEM_NAME_QUERY_RESPONSE
 impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     fn from(v: &Item) -> Self {
         Self {
-            item: v.entry as u32,
+            item: v.entry,
             found: Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
                 class_and_sub_class: v.class_and_sub_class,
                 name1: v.name.to_string(),

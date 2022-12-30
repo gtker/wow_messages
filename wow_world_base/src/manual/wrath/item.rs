@@ -4,7 +4,7 @@ use crate::wrath::{
 
 #[derive(Debug, Copy, Clone)]
 pub struct Item {
-    pub entry: i32,
+    pub entry: u32,
     pub class_and_sub_class: ItemClassAndSubClass,
     pub sound_override_subclass: i32,
     pub name: &'static str,
@@ -140,7 +140,7 @@ pub struct Item {
 impl Item {
     #[allow(clippy::complexity)]
     pub const fn new(
-        entry: i32,
+        entry: u32,
         class_and_sub_class: ItemClassAndSubClass,
         sound_override_subclass: i32,
         name: &'static str,
