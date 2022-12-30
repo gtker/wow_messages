@@ -49,7 +49,7 @@ impl TryFrom<u8> for BattlegroundWinner {
             0 => Ok(Self::Horde),
             1 => Ok(Self::Alliance),
             2 => Ok(Self::None),
-            v => Err(crate::errors::EnumError::new("BattlegroundWinner", v as u32),)
+            v => Err(crate::errors::EnumError::new("BattlegroundWinner", v as u64),)
         }
     }
 }

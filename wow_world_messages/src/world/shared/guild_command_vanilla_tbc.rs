@@ -68,7 +68,7 @@ impl TryFrom<u8> for GuildCommand {
             14 => Ok(Self::Founder),
             19 => Ok(Self::Unknown19),
             20 => Ok(Self::Unknown20),
-            v => Err(crate::errors::EnumError::new("GuildCommand", v as u32),)
+            v => Err(crate::errors::EnumError::new("GuildCommand", v as u64),)
         }
     }
 }

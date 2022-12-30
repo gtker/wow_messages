@@ -76,7 +76,7 @@ impl TryFrom<u32> for EncounterFrame {
             5 => Ok(Self::UpdateObjective),
             6 => Ok(Self::DisableObjective),
             7 => Ok(Self::RefreshFrames),
-            v => Err(crate::errors::EnumError::new("EncounterFrame", v),)
+            v => Err(crate::errors::EnumError::new("EncounterFrame", v as u64),)
         }
     }
 }

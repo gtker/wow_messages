@@ -44,7 +44,7 @@ impl TryFrom<u8> for BankSwapSource {
         match value {
             0 => Ok(Self::Inventory),
             1 => Ok(Self::Bank),
-            v => Err(crate::errors::EnumError::new("BankSwapSource", v as u32),)
+            v => Err(crate::errors::EnumError::new("BankSwapSource", v as u64),)
         }
     }
 }

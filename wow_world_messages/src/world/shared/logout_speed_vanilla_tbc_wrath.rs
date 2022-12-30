@@ -44,7 +44,7 @@ impl TryFrom<u8> for LogoutSpeed {
         match value {
             0 => Ok(Self::Delayed),
             1 => Ok(Self::Instant),
-            v => Err(crate::errors::EnumError::new("LogoutSpeed", v as u32),)
+            v => Err(crate::errors::EnumError::new("LogoutSpeed", v as u64),)
         }
     }
 }

@@ -44,7 +44,7 @@ impl TryFrom<u8> for ItemTextQuery {
         match value {
             0 => Ok(Self::HasText),
             1 => Ok(Self::NoText),
-            v => Err(crate::errors::EnumError::new("ItemTextQuery", v as u32),)
+            v => Err(crate::errors::EnumError::new("ItemTextQuery", v as u64),)
         }
     }
 }

@@ -59,7 +59,7 @@ impl TryFrom<u8> for MonsterMoveType {
             2 => Ok(Self::FacingSpot),
             3 => Ok(Self::FacingTarget),
             4 => Ok(Self::FacingAngle),
-            v => Err(crate::errors::EnumError::new("MonsterMoveType", v as u32),)
+            v => Err(crate::errors::EnumError::new("MonsterMoveType", v as u64),)
         }
     }
 }

@@ -78,7 +78,7 @@ impl TryFrom<u8> for Power {
             3 => Ok(Self::Energy),
             4 => Ok(Self::Happiness),
             254 => Ok(Self::Health),
-            v => Err(crate::errors::EnumError::new("Power", v as u32),)
+            v => Err(crate::errors::EnumError::new("Power", v as u64),)
         }
     }
 }

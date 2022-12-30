@@ -44,7 +44,7 @@ impl TryFrom<u8> for RandomBg {
         match value {
             0 => Ok(Self::NotRandom),
             1 => Ok(Self::Random),
-            v => Err(crate::errors::EnumError::new("RandomBg", v as u32),)
+            v => Err(crate::errors::EnumError::new("RandomBg", v as u64),)
         }
     }
 }

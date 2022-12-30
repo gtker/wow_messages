@@ -51,7 +51,7 @@ impl TryFrom<u8> for SheathState {
             0 => Ok(Self::Unarmed),
             1 => Ok(Self::Melee),
             2 => Ok(Self::Ranged),
-            v => Err(crate::errors::EnumError::new("SheathState", v as u32),)
+            v => Err(crate::errors::EnumError::new("SheathState", v as u64),)
         }
     }
 }

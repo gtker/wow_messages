@@ -49,7 +49,7 @@ impl TryFrom<u8> for Expansion {
             0 => Ok(Self::Vanilla),
             1 => Ok(Self::TheBurningCrusade),
             2 => Ok(Self::WrathOfTheLichLing),
-            v => Err(crate::errors::EnumError::new("Expansion", v as u32),)
+            v => Err(crate::errors::EnumError::new("Expansion", v as u64),)
         }
     }
 }

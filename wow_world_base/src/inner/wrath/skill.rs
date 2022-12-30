@@ -790,7 +790,7 @@ impl TryFrom<u16> for Skill {
             786 => Ok(Self::PetExoticRhino),
             787 => Ok(Self::PetExoticCoreHound),
             788 => Ok(Self::PetExoticSpiritBeast),
-            v => Err(crate::errors::EnumError::new("Skill", v as u32),)
+            v => Err(crate::errors::EnumError::new("Skill", v as u64),)
         }
     }
 }

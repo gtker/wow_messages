@@ -741,7 +741,7 @@ impl TryFrom<u8> for SpellCastResult {
             143 => Ok(Self::Reputation),
             144 => Ok(Self::MinSkill),
             145 => Ok(Self::Unknown),
-            v => Err(crate::errors::EnumError::new("SpellCastResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("SpellCastResult", v as u64),)
         }
     }
 }

@@ -59,7 +59,7 @@ impl TryFrom<u8> for TransferAbortReason {
             2 => Ok(Self::NotFound),
             3 => Ok(Self::TooManyInstances),
             5 => Ok(Self::ZoneIsInCombat),
-            v => Err(crate::errors::EnumError::new("TransferAbortReason", v as u32),)
+            v => Err(crate::errors::EnumError::new("TransferAbortReason", v as u64),)
         }
     }
 }

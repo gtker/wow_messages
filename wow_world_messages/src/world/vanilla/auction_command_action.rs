@@ -55,7 +55,7 @@ impl TryFrom<u32> for AuctionCommandAction {
             0 => Ok(Self::Started),
             1 => Ok(Self::Removed),
             2 => Ok(Self::BidPlaced),
-            v => Err(crate::errors::EnumError::new("AuctionCommandAction", v),)
+            v => Err(crate::errors::EnumError::new("AuctionCommandAction", v as u64),)
         }
     }
 }

@@ -142,7 +142,7 @@ impl TryFrom<u8> for TransferAbortReason {
             14 => Ok(Self::NotFound3),
             15 => Ok(Self::RealmOnly),
             16 => Ok(Self::MapNotAllowed),
-            v => Err(crate::errors::EnumError::new("TransferAbortReason", v as u32),)
+            v => Err(crate::errors::EnumError::new("TransferAbortReason", v as u64),)
         }
     }
 }

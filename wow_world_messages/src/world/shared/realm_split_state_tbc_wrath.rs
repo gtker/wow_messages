@@ -49,7 +49,7 @@ impl TryFrom<u32> for RealmSplitState {
             0 => Ok(Self::Normal),
             1 => Ok(Self::Split),
             2 => Ok(Self::SplitPending),
-            v => Err(crate::errors::EnumError::new("RealmSplitState", v),)
+            v => Err(crate::errors::EnumError::new("RealmSplitState", v as u64),)
         }
     }
 }

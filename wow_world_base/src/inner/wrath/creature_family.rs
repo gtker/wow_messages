@@ -240,7 +240,7 @@ impl TryFrom<u8> for CreatureFamily {
             44 => Ok(Self::Wasp),
             45 => Ok(Self::CoreHound),
             46 => Ok(Self::SpiritBeast),
-            v => Err(crate::errors::EnumError::new("CreatureFamily", v as u32),)
+            v => Err(crate::errors::EnumError::new("CreatureFamily", v as u64),)
         }
     }
 }

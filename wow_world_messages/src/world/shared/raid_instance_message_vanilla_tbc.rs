@@ -62,7 +62,7 @@ impl TryFrom<u32> for RaidInstanceMessage {
             2 => Ok(Self::WarningMin),
             3 => Ok(Self::WarningMinSoon),
             4 => Ok(Self::Welcome),
-            v => Err(crate::errors::EnumError::new("RaidInstanceMessage", v),)
+            v => Err(crate::errors::EnumError::new("RaidInstanceMessage", v as u64),)
         }
     }
 }

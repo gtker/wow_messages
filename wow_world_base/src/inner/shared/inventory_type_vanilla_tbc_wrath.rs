@@ -180,7 +180,7 @@ impl TryFrom<u8> for InventoryType {
             26 => Ok(Self::RangedRight),
             27 => Ok(Self::Quiver),
             28 => Ok(Self::Relic),
-            v => Err(crate::errors::EnumError::new("InventoryType", v as u32),)
+            v => Err(crate::errors::EnumError::new("InventoryType", v as u64),)
         }
     }
 }

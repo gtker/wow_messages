@@ -124,7 +124,7 @@ impl TryFrom<u8> for Language {
             36 => Ok(Self::Zombie),
             37 => Ok(Self::GnomishBinary),
             38 => Ok(Self::GoblinBinary),
-            v => Err(crate::errors::EnumError::new("Language", v as u32),)
+            v => Err(crate::errors::EnumError::new("Language", v as u64),)
         }
     }
 }

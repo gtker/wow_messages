@@ -450,7 +450,7 @@ impl TryFrom<u32> for Map {
             591 => Ok(Self::TransportUndercityToOrgrimmar),
             593 => Ok(Self::TransportBootyBayToRatchet),
             598 => Ok(Self::SunwellFixUnused),
-            v => Err(crate::errors::EnumError::new("Map", v),)
+            v => Err(crate::errors::EnumError::new("Map", v as u64),)
         }
     }
 }

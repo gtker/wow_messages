@@ -674,7 +674,7 @@ impl TryFrom<u32> for SpellEffect {
             125 => Ok(Self::ModifyThreatPercent),
             126 => Ok(Self::Unknown126),
             127 => Ok(Self::Unknown127),
-            v => Err(crate::errors::EnumError::new("SpellEffect", v),)
+            v => Err(crate::errors::EnumError::new("SpellEffect", v as u64),)
         }
     }
 }

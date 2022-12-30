@@ -93,7 +93,7 @@ impl TryFrom<u8> for QuestGiverStatus {
             8 => Ok(Self::DialogStatusAvailable),
             9 => Ok(Self::DialogStatusReward2),
             10 => Ok(Self::DialogStatusReward),
-            v => Err(crate::errors::EnumError::new("QuestGiverStatus", v as u32),)
+            v => Err(crate::errors::EnumError::new("QuestGiverStatus", v as u64),)
         }
     }
 }

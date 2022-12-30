@@ -44,7 +44,7 @@ impl TryFrom<u8> for LfgTeleportLocation {
         match value {
             0 => Ok(Self::In),
             1 => Ok(Self::Out),
-            v => Err(crate::errors::EnumError::new("LfgTeleportLocation", v as u32),)
+            v => Err(crate::errors::EnumError::new("LfgTeleportLocation", v as u64),)
         }
     }
 }

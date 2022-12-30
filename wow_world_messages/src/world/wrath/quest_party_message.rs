@@ -94,7 +94,7 @@ impl TryFrom<u8> for QuestPartyMessage {
             9 => Ok(Self::MsgSharingTimerExpired),
             10 => Ok(Self::MsgNotInParty),
             11 => Ok(Self::MsgDifferentServerDaily),
-            v => Err(crate::errors::EnumError::new("QuestPartyMessage", v as u32),)
+            v => Err(crate::errors::EnumError::new("QuestPartyMessage", v as u64),)
         }
     }
 }

@@ -596,7 +596,7 @@ impl TryFrom<u8> for WorldResult {
             79 => Ok(Self::CharNameInvalidSpace),
             80 => Ok(Self::CharNameSuccess),
             81 => Ok(Self::CharNameFailure),
-            v => Err(crate::errors::EnumError::new("WorldResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("WorldResult", v as u64),)
         }
     }
 }

@@ -74,7 +74,7 @@ impl TryFrom<u8> for SellItemResult {
             4 => Ok(Self::YouDontOwnThatItem),
             5 => Ok(Self::Unk),
             6 => Ok(Self::OnlyEmptyBag),
-            v => Err(crate::errors::EnumError::new("SellItemResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("SellItemResult", v as u64),)
         }
     }
 }

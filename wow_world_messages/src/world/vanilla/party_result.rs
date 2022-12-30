@@ -79,7 +79,7 @@ impl TryFrom<u8> for PartyResult {
             6 => Ok(Self::NotLeader),
             7 => Ok(Self::PlayerWrongFaction),
             8 => Ok(Self::IgnoringYou),
-            v => Err(crate::errors::EnumError::new("PartyResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("PartyResult", v as u64),)
         }
     }
 }

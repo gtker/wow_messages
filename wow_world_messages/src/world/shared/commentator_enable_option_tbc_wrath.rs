@@ -49,7 +49,7 @@ impl TryFrom<u32> for CommentatorEnableOption {
             0 => Ok(Self::Disable),
             1 => Ok(Self::Enable),
             2 => Ok(Self::Toggle),
-            v => Err(crate::errors::EnumError::new("CommentatorEnableOption", v),)
+            v => Err(crate::errors::EnumError::new("CommentatorEnableOption", v as u64),)
         }
     }
 }

@@ -49,7 +49,7 @@ impl TryFrom<u8> for CalendarModeratorRank {
             0 => Ok(Self::Player),
             1 => Ok(Self::Moderator),
             2 => Ok(Self::Owner),
-            v => Err(crate::errors::EnumError::new("CalendarModeratorRank", v as u32),)
+            v => Err(crate::errors::EnumError::new("CalendarModeratorRank", v as u64),)
         }
     }
 }

@@ -111,7 +111,7 @@ impl TryFrom<u32> for MountResult {
             8 => Ok(Self::Shapeshifted),
             9 => Ok(Self::ForcedDismount),
             10 => Ok(Self::Ok),
-            v => Err(crate::errors::EnumError::new("MountResult", v),)
+            v => Err(crate::errors::EnumError::new("MountResult", v as u64),)
         }
     }
 }

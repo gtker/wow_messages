@@ -54,7 +54,7 @@ impl TryFrom<u8> for PetFeedback {
             2 => Ok(Self::NothingToAttack),
             3 => Ok(Self::CantAttackTarget),
             4 => Ok(Self::NoPathTo),
-            v => Err(crate::errors::EnumError::new("PetFeedback", v as u32),)
+            v => Err(crate::errors::EnumError::new("PetFeedback", v as u64),)
         }
     }
 }

@@ -99,7 +99,7 @@ impl TryFrom<u8> for PetNameInvalidReason {
             14 => Ok(Self::RussianConsecutiveSilentCharacters),
             15 => Ok(Self::RussianSilentCharacterAtBeginningOrEnd),
             16 => Ok(Self::DeclensionDoesntMatchBaseName),
-            v => Err(crate::errors::EnumError::new("PetNameInvalidReason", v as u32),)
+            v => Err(crate::errors::EnumError::new("PetNameInvalidReason", v as u64),)
         }
     }
 }

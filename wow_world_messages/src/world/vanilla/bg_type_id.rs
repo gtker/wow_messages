@@ -69,7 +69,7 @@ impl TryFrom<u32> for BgTypeId {
             2 => Ok(Self::QueuedForWsg),
             3 => Ok(Self::QueuedForAb),
             4294967294 => Ok(Self::RemoveFromQueue),
-            v => Err(crate::errors::EnumError::new("BgTypeId", v),)
+            v => Err(crate::errors::EnumError::new("BgTypeId", v as u64),)
         }
     }
 }

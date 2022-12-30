@@ -294,7 +294,7 @@ impl TryFrom<u8> for ChatType {
             49 => Ok(Self::GuildAchievement),
             50 => Ok(Self::ArenaPoints),
             51 => Ok(Self::PartyLeader),
-            v => Err(crate::errors::EnumError::new("ChatType", v as u32),)
+            v => Err(crate::errors::EnumError::new("ChatType", v as u64),)
         }
     }
 }

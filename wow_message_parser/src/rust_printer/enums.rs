@@ -187,10 +187,10 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         ));
                     }
 
-                    let cast = if let IntegerType::U32(_) = e.ty() {
+                    let cast = if let IntegerType::U64(_) = e.ty() {
                         "v"
                     } else {
-                        "v as u32"
+                        "v as u64"
                     };
                     s.wln(format!(
                         "v => Err(crate::errors::EnumError::new(\"{}\", {}),)",

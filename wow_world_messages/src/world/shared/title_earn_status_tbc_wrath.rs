@@ -44,7 +44,7 @@ impl TryFrom<u32> for TitleEarnStatus {
         match value {
             0 => Ok(Self::Lost),
             1 => Ok(Self::Earned),
-            v => Err(crate::errors::EnumError::new("TitleEarnStatus", v),)
+            v => Err(crate::errors::EnumError::new("TitleEarnStatus", v as u64),)
         }
     }
 }

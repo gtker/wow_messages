@@ -76,7 +76,7 @@ impl TryFrom<u8> for ArenaTeamEvent {
             6 => Ok(Self::LeaderIs),
             7 => Ok(Self::LeaderChanged),
             8 => Ok(Self::Disbanded),
-            v => Err(crate::errors::EnumError::new("ArenaTeamEvent", v as u32),)
+            v => Err(crate::errors::EnumError::new("ArenaTeamEvent", v as u64),)
         }
     }
 }

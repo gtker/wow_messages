@@ -119,7 +119,7 @@ impl TryFrom<u8> for LoginResult {
             14 => Ok(Self::SuccessSurvey),
             15 => Ok(Self::FailParentalcontrol),
             16 => Ok(Self::FailLockedEnforced),
-            v => Err(crate::errors::EnumError::new("LoginResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("LoginResult", v as u64),)
         }
     }
 }

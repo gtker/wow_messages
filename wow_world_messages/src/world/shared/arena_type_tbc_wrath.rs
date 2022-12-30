@@ -54,7 +54,7 @@ impl TryFrom<u8> for ArenaType {
             2 => Ok(Self::TwoVsTwo),
             3 => Ok(Self::ThreeVsThree),
             5 => Ok(Self::FiveVsFive),
-            v => Err(crate::errors::EnumError::new("ArenaType", v as u32),)
+            v => Err(crate::errors::EnumError::new("ArenaType", v as u64),)
         }
     }
 }

@@ -54,7 +54,7 @@ impl TryFrom<u8> for PetCommandState {
             1 => Ok(Self::Follow),
             2 => Ok(Self::Attack),
             3 => Ok(Self::Dismiss),
-            v => Err(crate::errors::EnumError::new("PetCommandState", v as u32),)
+            v => Err(crate::errors::EnumError::new("PetCommandState", v as u64),)
         }
     }
 }

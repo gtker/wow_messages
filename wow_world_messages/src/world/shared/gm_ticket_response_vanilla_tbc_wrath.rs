@@ -69,7 +69,7 @@ impl TryFrom<u32> for GmTicketResponse {
             4 => Ok(Self::UpdateSuccess),
             5 => Ok(Self::UpdateError),
             9 => Ok(Self::TicketDeleted),
-            v => Err(crate::errors::EnumError::new("GmTicketResponse", v),)
+            v => Err(crate::errors::EnumError::new("GmTicketResponse", v as u64),)
         }
     }
 }

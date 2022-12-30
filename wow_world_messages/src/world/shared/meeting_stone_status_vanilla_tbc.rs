@@ -64,7 +64,7 @@ impl TryFrom<u8> for MeetingStoneStatus {
             3 => Ok(Self::PartyMemberRemovedPartyRemoved),
             4 => Ok(Self::LookingForNewPartyInQueue),
             5 => Ok(Self::None),
-            v => Err(crate::errors::EnumError::new("MeetingStoneStatus", v as u32),)
+            v => Err(crate::errors::EnumError::new("MeetingStoneStatus", v as u64),)
         }
     }
 }

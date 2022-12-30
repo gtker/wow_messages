@@ -120,7 +120,7 @@ impl TryFrom<u8> for ItemClass {
             14 => Ok(Self::Permanent),
             15 => Ok(Self::Misc),
             16 => Ok(Self::Glyph),
-            v => Err(crate::errors::EnumError::new("ItemClass", v as u32),)
+            v => Err(crate::errors::EnumError::new("ItemClass", v as u64),)
         }
     }
 }

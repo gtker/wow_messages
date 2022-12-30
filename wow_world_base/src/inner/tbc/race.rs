@@ -125,7 +125,7 @@ impl TryFrom<u8> for Race {
             16 => Ok(Self::Vrykul),
             17 => Ok(Self::Tuskarr),
             18 => Ok(Self::ForestTroll),
-            v => Err(crate::errors::EnumError::new("Race", v as u32),)
+            v => Err(crate::errors::EnumError::new("Race", v as u64),)
         }
     }
 }

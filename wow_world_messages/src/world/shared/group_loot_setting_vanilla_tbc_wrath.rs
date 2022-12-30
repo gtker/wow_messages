@@ -59,7 +59,7 @@ impl TryFrom<u8> for GroupLootSetting {
             2 => Ok(Self::MasterLoot),
             3 => Ok(Self::GroupLoot),
             4 => Ok(Self::NeedBeforeGreed),
-            v => Err(crate::errors::EnumError::new("GroupLootSetting", v as u32),)
+            v => Err(crate::errors::EnumError::new("GroupLootSetting", v as u64),)
         }
     }
 }

@@ -49,7 +49,7 @@ impl TryFrom<u8> for SimpleEnum {
             0 => Ok(Self::Zero),
             1 => Ok(Self::One),
             2 => Ok(Self::Two),
-            v => Err(crate::errors::EnumError::new("SimpleEnum", v as u32),)
+            v => Err(crate::errors::EnumError::new("SimpleEnum", v as u64),)
         }
     }
 }

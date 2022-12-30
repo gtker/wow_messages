@@ -75,7 +75,7 @@ impl TryFrom<u8> for Power {
             5 => Ok(Self::Rune),
             6 => Ok(Self::RunicPower),
             254 => Ok(Self::Health),
-            v => Err(crate::errors::EnumError::new("Power", v as u32),)
+            v => Err(crate::errors::EnumError::new("Power", v as u64),)
         }
     }
 }

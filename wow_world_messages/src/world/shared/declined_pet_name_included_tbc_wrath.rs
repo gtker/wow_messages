@@ -44,7 +44,7 @@ impl TryFrom<u8> for DeclinedPetNameIncluded {
         match value {
             0 => Ok(Self::NotIncluded),
             1 => Ok(Self::Included),
-            v => Err(crate::errors::EnumError::new("DeclinedPetNameIncluded", v as u32),)
+            v => Err(crate::errors::EnumError::new("DeclinedPetNameIncluded", v as u64),)
         }
     }
 }

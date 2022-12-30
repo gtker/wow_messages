@@ -44,7 +44,7 @@ impl TryFrom<u8> for GroupType {
         match value {
             0 => Ok(Self::Normal),
             1 => Ok(Self::Raid),
-            v => Err(crate::errors::EnumError::new("GroupType", v as u32),)
+            v => Err(crate::errors::EnumError::new("GroupType", v as u64),)
         }
     }
 }

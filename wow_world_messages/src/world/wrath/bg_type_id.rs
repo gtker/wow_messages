@@ -114,7 +114,7 @@ impl TryFrom<u32> for BgTypeId {
             11 => Ok(Self::QueuedForRingOfValor),
             30 => Ok(Self::QueuedForIsleOfConquest),
             4294967294 => Ok(Self::RemoveFromQueue),
-            v => Err(crate::errors::EnumError::new("BgTypeId", v),)
+            v => Err(crate::errors::EnumError::new("BgTypeId", v as u64),)
         }
     }
 }

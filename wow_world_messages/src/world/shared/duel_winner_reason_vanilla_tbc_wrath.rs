@@ -44,7 +44,7 @@ impl TryFrom<u8> for DuelWinnerReason {
         match value {
             0 => Ok(Self::Won),
             1 => Ok(Self::Fled),
-            v => Err(crate::errors::EnumError::new("DuelWinnerReason", v as u32),)
+            v => Err(crate::errors::EnumError::new("DuelWinnerReason", v as u64),)
         }
     }
 }

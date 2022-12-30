@@ -69,7 +69,7 @@ impl TryFrom<u8> for StatusId {
             2 => Ok(Self::WaitJoin),
             3 => Ok(Self::InProgress),
             4 => Ok(Self::WaitLeave),
-            v => Err(crate::errors::EnumError::new("StatusId", v as u32),)
+            v => Err(crate::errors::EnumError::new("StatusId", v as u64),)
         }
     }
 }

@@ -67,7 +67,7 @@ impl TryFrom<u8> for Bonding {
             3 => Ok(Self::Use),
             4 => Ok(Self::QuestItem),
             5 => Ok(Self::QuestItem1),
-            v => Err(crate::errors::EnumError::new("Bonding", v as u32),)
+            v => Err(crate::errors::EnumError::new("Bonding", v as u64),)
         }
     }
 }

@@ -99,7 +99,7 @@ impl TryFrom<u8> for QuestPartyMessage {
             6 => Ok(Self::LogFull),
             7 => Ok(Self::HaveQuest),
             8 => Ok(Self::FinishQuest),
-            v => Err(crate::errors::EnumError::new("QuestPartyMessage", v as u32),)
+            v => Err(crate::errors::EnumError::new("QuestPartyMessage", v as u64),)
         }
     }
 }

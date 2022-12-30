@@ -44,7 +44,7 @@ impl TryFrom<u8> for ArenaTeamRole {
         match value {
             0 => Ok(Self::Captain),
             1 => Ok(Self::Member),
-            v => Err(crate::errors::EnumError::new("ArenaTeamRole", v as u32),)
+            v => Err(crate::errors::EnumError::new("ArenaTeamRole", v as u64),)
         }
     }
 }

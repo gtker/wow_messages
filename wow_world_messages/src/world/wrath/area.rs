@@ -11574,7 +11574,7 @@ impl TryFrom<u32> for Area {
             4908 => Ok(Self::TheHiddenPassage),
             4910 => Ok(Self::Frostmourne1),
             4987 => Ok(Self::TheRubySanctum),
-            v => Err(crate::errors::EnumError::new("Area", v),)
+            v => Err(crate::errors::EnumError::new("Area", v as u64),)
         }
     }
 }

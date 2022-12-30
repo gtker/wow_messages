@@ -64,7 +64,7 @@ impl TryFrom<u32> for MailAction {
             3 => Ok(Self::ReturnedToSender),
             4 => Ok(Self::Deleted),
             5 => Ok(Self::MadePermanent),
-            v => Err(crate::errors::EnumError::new("MailAction", v),)
+            v => Err(crate::errors::EnumError::new("MailAction", v as u64),)
         }
     }
 }

@@ -49,7 +49,7 @@ impl TryFrom<u8> for JoinArenaType {
             0 => Ok(Self::TwoVsTwo),
             1 => Ok(Self::ThreeVsThree),
             2 => Ok(Self::FiveVsFive),
-            v => Err(crate::errors::EnumError::new("JoinArenaType", v as u32),)
+            v => Err(crate::errors::EnumError::new("JoinArenaType", v as u64),)
         }
     }
 }

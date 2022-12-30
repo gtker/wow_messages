@@ -151,7 +151,7 @@ impl TryFrom<u8> for GuildCommandResult {
             26 => Ok(Self::GuildNotEnoughMoney),
             28 => Ok(Self::GuildBankFull),
             29 => Ok(Self::GuildItemNotFound),
-            v => Err(crate::errors::EnumError::new("GuildCommandResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("GuildCommandResult", v as u64),)
         }
     }
 }

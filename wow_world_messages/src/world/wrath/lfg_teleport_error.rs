@@ -66,7 +66,7 @@ impl TryFrom<u32> for LfgTeleportError {
             4 => Ok(Self::Fatigue),
             6 => Ok(Self::InvalidLocation),
             8 => Ok(Self::Combat),
-            v => Err(crate::errors::EnumError::new("LfgTeleportError", v),)
+            v => Err(crate::errors::EnumError::new("LfgTeleportError", v as u64),)
         }
     }
 }

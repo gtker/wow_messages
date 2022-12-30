@@ -154,7 +154,7 @@ impl TryFrom<u32> for TradeStatus {
             21 => Ok(Self::TrialAccount),
             22 => Ok(Self::OnlyConjured),
             23 => Ok(Self::NotOnTaplist),
-            v => Err(crate::errors::EnumError::new("TradeStatus", v),)
+            v => Err(crate::errors::EnumError::new("TradeStatus", v as u64),)
         }
     }
 }

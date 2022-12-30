@@ -44,7 +44,7 @@ impl TryFrom<u8> for PartyOperation {
         match value {
             0 => Ok(Self::Invite),
             2 => Ok(Self::Leave),
-            v => Err(crate::errors::EnumError::new("PartyOperation", v as u32),)
+            v => Err(crate::errors::EnumError::new("PartyOperation", v as u64),)
         }
     }
 }

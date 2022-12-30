@@ -84,7 +84,7 @@ impl TryFrom<u8> for RaidTargetIndex {
             7 => Ok(Self::Unknown7),
             8 => Ok(Self::Unknown8),
             255 => Ok(Self::RequestIcons),
-            v => Err(crate::errors::EnumError::new("RaidTargetIndex", v as u32),)
+            v => Err(crate::errors::EnumError::new("RaidTargetIndex", v as u64),)
         }
     }
 }

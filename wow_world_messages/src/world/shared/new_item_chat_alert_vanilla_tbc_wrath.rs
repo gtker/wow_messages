@@ -44,7 +44,7 @@ impl TryFrom<u32> for NewItemChatAlert {
         match value {
             0 => Ok(Self::DoNotShow),
             1 => Ok(Self::Show),
-            v => Err(crate::errors::EnumError::new("NewItemChatAlert", v),)
+            v => Err(crate::errors::EnumError::new("NewItemChatAlert", v as u64),)
         }
     }
 }

@@ -49,7 +49,7 @@ impl TryFrom<u8> for ActionBarBehavior {
             0 => Ok(Self::Initial),
             1 => Ok(Self::Set),
             2 => Ok(Self::Clear),
-            v => Err(crate::errors::EnumError::new("ActionBarBehavior", v as u32),)
+            v => Err(crate::errors::EnumError::new("ActionBarBehavior", v as u64),)
         }
     }
 }

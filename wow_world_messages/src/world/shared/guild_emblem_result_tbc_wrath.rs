@@ -64,7 +64,7 @@ impl TryFrom<u32> for GuildEmblemResult {
             3 => Ok(Self::NotGuildMaster),
             4 => Ok(Self::NotEnoughMoney),
             5 => Ok(Self::InvalidVendor),
-            v => Err(crate::errors::EnumError::new("GuildEmblemResult", v),)
+            v => Err(crate::errors::EnumError::new("GuildEmblemResult", v as u64),)
         }
     }
 }

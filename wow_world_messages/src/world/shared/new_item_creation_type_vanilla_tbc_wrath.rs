@@ -44,7 +44,7 @@ impl TryFrom<u32> for NewItemCreationType {
         match value {
             0 => Ok(Self::Received),
             1 => Ok(Self::Created),
-            v => Err(crate::errors::EnumError::new("NewItemCreationType", v),)
+            v => Err(crate::errors::EnumError::new("NewItemCreationType", v as u64),)
         }
     }
 }

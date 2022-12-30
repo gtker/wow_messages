@@ -49,7 +49,7 @@ impl TryFrom<u8> for ChatRestrictionType {
             0 => Ok(Self::ChatRestricted),
             1 => Ok(Self::ChatThrottled),
             2 => Ok(Self::UserSquelched),
-            v => Err(crate::errors::EnumError::new("ChatRestrictionType", v as u32),)
+            v => Err(crate::errors::EnumError::new("ChatRestrictionType", v as u64),)
         }
     }
 }

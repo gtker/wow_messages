@@ -44,7 +44,7 @@ impl TryFrom<u8> for GuildMemberStatus {
         match value {
             0 => Ok(Self::Offline),
             1 => Ok(Self::Online),
-            v => Err(crate::errors::EnumError::new("GuildMemberStatus", v as u32),)
+            v => Err(crate::errors::EnumError::new("GuildMemberStatus", v as u64),)
         }
     }
 }

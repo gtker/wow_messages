@@ -87,7 +87,7 @@ impl TryFrom<u8> for UnitStandState {
             7 => Ok(Self::Dead),
             8 => Ok(Self::Kneel),
             9 => Ok(Self::Custom),
-            v => Err(crate::errors::EnumError::new("UnitStandState", v as u32),)
+            v => Err(crate::errors::EnumError::new("UnitStandState", v as u64),)
         }
     }
 }

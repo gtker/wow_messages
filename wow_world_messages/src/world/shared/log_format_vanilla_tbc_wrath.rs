@@ -44,7 +44,7 @@ impl TryFrom<u8> for LogFormat {
         match value {
             0 => Ok(Self::Default),
             1 => Ok(Self::Debug),
-            v => Err(crate::errors::EnumError::new("LogFormat", v as u32),)
+            v => Err(crate::errors::EnumError::new("LogFormat", v as u64),)
         }
     }
 }

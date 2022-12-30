@@ -54,7 +54,7 @@ impl TryFrom<u8> for PlayerChatTag {
             1 => Ok(Self::Afk),
             2 => Ok(Self::Dnd),
             3 => Ok(Self::Gm),
-            v => Err(crate::errors::EnumError::new("PlayerChatTag", v as u32),)
+            v => Err(crate::errors::EnumError::new("PlayerChatTag", v as u64),)
         }
     }
 }

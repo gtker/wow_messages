@@ -64,7 +64,7 @@ impl TryFrom<u32> for EnvironmentalDamageType {
             3 => Ok(Self::Lava),
             4 => Ok(Self::Slime),
             5 => Ok(Self::Fire),
-            v => Err(crate::errors::EnumError::new("EnvironmentalDamageType", v),)
+            v => Err(crate::errors::EnumError::new("EnvironmentalDamageType", v as u64),)
         }
     }
 }

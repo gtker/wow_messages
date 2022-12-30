@@ -44,7 +44,7 @@ impl TryFrom<u8> for FarSightOperation {
         match value {
             0 => Ok(Self::Remove),
             1 => Ok(Self::Add),
-            v => Err(crate::errors::EnumError::new("FarSightOperation", v as u32),)
+            v => Err(crate::errors::EnumError::new("FarSightOperation", v as u64),)
         }
     }
 }

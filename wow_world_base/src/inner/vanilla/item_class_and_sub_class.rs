@@ -394,7 +394,7 @@ impl TryFrom<u64> for ItemClassAndSubClass {
             4294967309 => Ok(Self::Lockpick),
             14 => Ok(Self::Permanent),
             15 => Ok(Self::Junk),
-            v => Err(crate::errors::EnumError::new("ItemClassAndSubClass", v as u32),)
+            v => Err(crate::errors::EnumError::new("ItemClassAndSubClass", v),)
         }
     }
 }

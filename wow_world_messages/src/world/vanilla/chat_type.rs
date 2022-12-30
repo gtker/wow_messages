@@ -209,7 +209,7 @@ impl TryFrom<u8> for ChatType {
             90 => Ok(Self::RaidBossEmote),
             92 => Ok(Self::Battleground),
             93 => Ok(Self::BattlegroundLeader),
-            v => Err(crate::errors::EnumError::new("ChatType", v as u32),)
+            v => Err(crate::errors::EnumError::new("ChatType", v as u64),)
         }
     }
 }

@@ -3,11 +3,11 @@ use std::fmt::{Display, Formatter, Write};
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub struct EnumError {
     pub name: &'static str,
-    pub value: u32,
+    pub value: u64,
 }
 
 impl EnumError {
-    pub fn new(name: &'static str, value: u32) -> Self {
+    pub fn new(name: &'static str, value: u64) -> Self {
         Self { name, value }
     }
 }

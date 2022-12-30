@@ -44,7 +44,7 @@ impl TryFrom<u8> for PetQueryDisabledNames {
         match value {
             1 => Ok(Self::Present),
             0 => Ok(Self::NotPresent),
-            v => Err(crate::errors::EnumError::new("PetQueryDisabledNames", v as u32),)
+            v => Err(crate::errors::EnumError::new("PetQueryDisabledNames", v as u64),)
         }
     }
 }

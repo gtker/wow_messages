@@ -256,7 +256,7 @@ impl TryFrom<u8> for ChatNotify {
             29 => Ok(Self::PlayerInvitedNotice),
             30 => Ok(Self::PlayerInviteBannedNotice),
             31 => Ok(Self::ThrottledNotice),
-            v => Err(crate::errors::EnumError::new("ChatNotify", v as u32),)
+            v => Err(crate::errors::EnumError::new("ChatNotify", v as u64),)
         }
     }
 }

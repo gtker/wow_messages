@@ -186,7 +186,7 @@ impl TryFrom<u32> for Weekday {
             4 => Self::Thursday,
             5 => Self::Friday,
             6 => Self::Saturday,
-            v => return Err(EnumError::new("Weekday", v)),
+            v => return Err(EnumError::new("Weekday", v.into())),
         })
     }
 }
@@ -249,7 +249,7 @@ impl TryFrom<u32> for Month {
             9 => Month::October,
             10 => Month::November,
             11 => Month::December,
-            v => return Err(EnumError::new("Month", v)),
+            v => return Err(EnumError::new("Month", v.into())),
         })
     }
 }

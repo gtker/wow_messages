@@ -64,7 +64,7 @@ impl TryFrom<u8> for LfgType {
             4 => Ok(Self::Zone),
             5 => Ok(Self::Heroic),
             6 => Ok(Self::Random),
-            v => Err(crate::errors::EnumError::new("LfgType", v as u32),)
+            v => Err(crate::errors::EnumError::new("LfgType", v as u64),)
         }
     }
 }

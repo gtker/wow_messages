@@ -44,7 +44,7 @@ impl TryFrom<u32> for PetTalkReason {
         match value {
             0 => Ok(Self::SpecialSpell),
             1 => Ok(Self::Attack),
-            v => Err(crate::errors::EnumError::new("PetTalkReason", v),)
+            v => Err(crate::errors::EnumError::new("PetTalkReason", v as u64),)
         }
     }
 }

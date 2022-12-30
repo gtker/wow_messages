@@ -76,7 +76,7 @@ impl TryFrom<u8> for StableResult {
             9 => Ok(Self::SuccessUnstable),
             10 => Ok(Self::SuccessBuySlot),
             12 => Ok(Self::ErrExotic),
-            v => Err(crate::errors::EnumError::new("StableResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("StableResult", v as u64),)
         }
     }
 }

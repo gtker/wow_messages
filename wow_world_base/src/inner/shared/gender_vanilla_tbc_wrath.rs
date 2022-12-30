@@ -52,7 +52,7 @@ impl TryFrom<u8> for Gender {
             0 => Ok(Self::Male),
             1 => Ok(Self::Female),
             2 => Ok(Self::None),
-            v => Err(crate::errors::EnumError::new("Gender", v as u32),)
+            v => Err(crate::errors::EnumError::new("Gender", v as u64),)
         }
     }
 }

@@ -49,7 +49,7 @@ impl TryFrom<u32> for GmTicketStatus {
             0 => Ok(Self::DbError),
             6 => Ok(Self::HasText),
             10 => Ok(Self::Default),
-            v => Err(crate::errors::EnumError::new("GmTicketStatus", v),)
+            v => Err(crate::errors::EnumError::new("GmTicketStatus", v as u64),)
         }
     }
 }

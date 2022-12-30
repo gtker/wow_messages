@@ -104,7 +104,7 @@ impl TryFrom<u8> for GuildEvent {
             11 => Ok(Self::RosterUpdate),
             12 => Ok(Self::SignedOn),
             13 => Ok(Self::SignedOff),
-            v => Err(crate::errors::EnumError::new("GuildEvent", v as u32),)
+            v => Err(crate::errors::EnumError::new("GuildEvent", v as u64),)
         }
     }
 }

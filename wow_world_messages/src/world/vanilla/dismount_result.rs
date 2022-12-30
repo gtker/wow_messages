@@ -44,7 +44,7 @@ impl TryFrom<u32> for DismountResult {
         match value {
             1 => Ok(Self::NotMounted),
             3 => Ok(Self::Ok),
-            v => Err(crate::errors::EnumError::new("DismountResult", v),)
+            v => Err(crate::errors::EnumError::new("DismountResult", v as u64),)
         }
     }
 }

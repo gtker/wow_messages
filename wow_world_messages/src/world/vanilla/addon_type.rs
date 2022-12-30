@@ -53,7 +53,7 @@ impl TryFrom<u8> for AddonType {
             0 => Ok(Self::Banned),
             1 => Ok(Self::Enabled),
             2 => Ok(Self::Blizzard),
-            v => Err(crate::errors::EnumError::new("AddonType", v as u32),)
+            v => Err(crate::errors::EnumError::new("AddonType", v as u64),)
         }
     }
 }

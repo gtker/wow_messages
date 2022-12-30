@@ -84,7 +84,7 @@ impl TryFrom<u8> for CalendarStatus {
             7 => Ok(Self::NotSignedUp),
             8 => Ok(Self::Tentative),
             9 => Ok(Self::Removed),
-            v => Err(crate::errors::EnumError::new("CalendarStatus", v as u32),)
+            v => Err(crate::errors::EnumError::new("CalendarStatus", v as u64),)
         }
     }
 }

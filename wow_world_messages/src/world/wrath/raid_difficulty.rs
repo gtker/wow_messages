@@ -54,7 +54,7 @@ impl TryFrom<u8> for RaidDifficulty {
             1 => Ok(Self::TwentyFiveManNormal),
             2 => Ok(Self::TenManHeroic),
             3 => Ok(Self::TwentyFiveManHeroic),
-            v => Err(crate::errors::EnumError::new("RaidDifficulty", v as u32),)
+            v => Err(crate::errors::EnumError::new("RaidDifficulty", v as u64),)
         }
     }
 }

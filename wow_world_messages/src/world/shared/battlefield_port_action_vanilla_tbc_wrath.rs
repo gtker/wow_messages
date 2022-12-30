@@ -44,7 +44,7 @@ impl TryFrom<u8> for BattlefieldPortAction {
         match value {
             0 => Ok(Self::LeaveQueue),
             1 => Ok(Self::EnterBattle),
-            v => Err(crate::errors::EnumError::new("BattlefieldPortAction", v as u32),)
+            v => Err(crate::errors::EnumError::new("BattlefieldPortAction", v as u64),)
         }
     }
 }

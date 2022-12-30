@@ -44,7 +44,7 @@ impl TryFrom<u8> for LfgListUpdateType {
         match value {
             0 => Ok(Self::Partial),
             1 => Ok(Self::Full),
-            v => Err(crate::errors::EnumError::new("LfgListUpdateType", v as u32),)
+            v => Err(crate::errors::EnumError::new("LfgListUpdateType", v as u64),)
         }
     }
 }

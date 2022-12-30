@@ -65,7 +65,7 @@ impl TryFrom<u32> for MailMessageType {
             3 => Ok(Self::Creature),
             4 => Ok(Self::Gameobject),
             5 => Ok(Self::Item),
-            v => Err(crate::errors::EnumError::new("MailMessageType", v),)
+            v => Err(crate::errors::EnumError::new("MailMessageType", v as u64),)
         }
     }
 }

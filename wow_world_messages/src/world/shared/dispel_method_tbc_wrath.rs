@@ -44,7 +44,7 @@ impl TryFrom<u8> for DispelMethod {
         match value {
             0 => Ok(Self::Dispelled),
             1 => Ok(Self::Cleansed),
-            v => Err(crate::errors::EnumError::new("DispelMethod", v as u32),)
+            v => Err(crate::errors::EnumError::new("DispelMethod", v as u64),)
         }
     }
 }

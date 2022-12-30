@@ -71,7 +71,7 @@ impl TryFrom<u8> for SpellSchool {
             4 => Ok(Self::Frost),
             5 => Ok(Self::Shadow),
             6 => Ok(Self::Arcane),
-            v => Err(crate::errors::EnumError::new("SpellSchool", v as u32),)
+            v => Err(crate::errors::EnumError::new("SpellSchool", v as u64),)
         }
     }
 }

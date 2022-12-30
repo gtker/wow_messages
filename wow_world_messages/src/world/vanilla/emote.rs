@@ -619,7 +619,7 @@ impl TryFrom<u32> for Emote {
             415 => Ok(Self::StateSitChairMed),
             422 => Ok(Self::StateSpelleffectHold),
             423 => Ok(Self::StateEatNoSheathe),
-            v => Err(crate::errors::EnumError::new("Emote", v),)
+            v => Err(crate::errors::EnumError::new("Emote", v as u64),)
         }
     }
 }
