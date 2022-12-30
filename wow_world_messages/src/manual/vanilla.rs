@@ -3,7 +3,7 @@ use crate::vanilla::{
     SMSG_ITEM_NAME_QUERY_RESPONSE, SMSG_ITEM_QUERY_SINGLE_RESPONSE,
 };
 use std::convert::TryFrom;
-use wow_world_base::vanilla::{Bonding, Item, Map, Skill};
+use wow_world_base::vanilla::{Item, Map, Skill};
 
 /// Convert an [`Item`] to a [`SMSG_ITEM_QUERY_SINGLE_RESPONSE`].
 ///
@@ -172,7 +172,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                         spell_category_cooldown: v.spell_category_cooldown_5,
                     },
                 ],
-                bonding: Bonding::try_from(v.bonding as u8).unwrap(),
+                bonding: v.bonding,
                 description: v.description.to_string(),
                 page_text: v.page_text as u32,
                 language_id: v.language_id as u32,

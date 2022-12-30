@@ -175,7 +175,10 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         s.w_no_indent(format!("{},", item.spell_cooldown_5,));
         s.w_no_indent(format!("{},", item.spell_category_5,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_5,));
-        s.w_no_indent(format!("{},", item.bonding,));
+        s.w_no_indent(format!(
+            "Bonding::{:?},",
+            wow_world_base::vanilla::Bonding::try_from(item.bonding as u8).unwrap()
+        ));
         s.w_no_indent(string_format(&item.description));
         s.w_no_indent(format!("{},", item.page_text,));
         s.w_no_indent(format!("{},", item.language_id,));
@@ -331,7 +334,10 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.spell_cooldown_5));
         s.w_no_indent(format!("{},", item.spell_category_5));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_5));
-        s.w_no_indent(format!("{},", item.bonding));
+        s.w_no_indent(format!(
+            "Bonding::{:?},",
+            wow_world_base::tbc::Bonding::try_from(item.bonding as u8).unwrap()
+        ));
         s.w_no_indent(string_format(&item.description));
         s.w_no_indent(format!("{},", item.page_text));
         s.w_no_indent(format!("{},", item.language_id));
@@ -495,7 +501,10 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.spell_cooldown_5));
         s.w_no_indent(format!("{},", item.spell_category_5));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_5));
-        s.w_no_indent(format!("{},", item.bonding));
+        s.w_no_indent(format!(
+            "Bonding::{:?},",
+            wow_world_base::wrath::Bonding::try_from(item.bonding as u8).unwrap()
+        ));
         s.w_no_indent(string_format(&item.description));
         s.w_no_indent(format!("{},", item.page_text));
         s.w_no_indent(format!("{},", item.language_id));

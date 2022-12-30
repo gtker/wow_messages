@@ -1,4 +1,6 @@
-use crate::wrath::{AllowedClass, AllowedRace, InventoryType, ItemClassAndSubClass, ItemQuality};
+use crate::wrath::{
+    AllowedClass, AllowedRace, Bonding, InventoryType, ItemClassAndSubClass, ItemQuality,
+};
 
 #[derive(Debug, Copy, Clone)]
 pub struct Item {
@@ -96,7 +98,7 @@ pub struct Item {
     pub spell_cooldown_5: i32,
     pub spell_category_5: i32,
     pub spell_category_cooldown_5: i32,
-    pub bonding: i32,
+    pub bonding: Bonding,
     pub description: &'static str,
     pub page_text: i32,
     pub language_id: i32,
@@ -232,7 +234,7 @@ impl Item {
         spell_cooldown_5: i32,
         spell_category_5: i32,
         spell_category_cooldown_5: i32,
-        bonding: i32,
+        bonding: Bonding,
         description: &'static str,
         page_text: i32,
         language_id: i32,
