@@ -57,7 +57,7 @@ impl TryFrom<u32> for TrainingFailureReason {
             0 => Ok(Self::Unavailable),
             1 => Ok(Self::NotEnoughMoney),
             2 => Ok(Self::NotEnoughSkill),
-            v => Err(crate::errors::EnumError::new("TrainingFailureReason", v as u32),)
+            v => Err(crate::errors::EnumError::new("TrainingFailureReason", v),)
         }
     }
 }

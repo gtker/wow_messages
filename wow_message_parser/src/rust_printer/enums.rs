@@ -1,6 +1,7 @@
 use crate::file_utils::get_import_path;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::version::Version;
+use crate::parser::types::IntegerType;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment, Writer,
 };
@@ -186,9 +187,15 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         ));
                     }
 
+                    let cast = if let IntegerType::U32(_) = e.ty() {
+                        "v"
+                    } else {
+                        "v as u32"
+                    };
                     s.wln(format!(
-                        "v => Err(crate::errors::EnumError::new(\"{}\", v as u32),)",
-                        e.name()
+                        "v => Err(crate::errors::EnumError::new(\"{}\", {}),)",
+                        e.name(),
+                        cast,
                     ));
                 });
             },

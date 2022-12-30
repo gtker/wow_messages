@@ -64,7 +64,7 @@ impl TryFrom<u32> for PetitionResult {
             3 => Ok(Self::CantSignOwn),
             4 => Ok(Self::NeedMore),
             5 => Ok(Self::NotServer),
-            v => Err(crate::errors::EnumError::new("PetitionResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("PetitionResult", v),)
         }
     }
 }

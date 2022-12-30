@@ -54,7 +54,7 @@ impl TryFrom<u32> for BuyBankSlotResult {
             1 => Ok(Self::InsufficientFunds),
             2 => Ok(Self::NotBanker),
             3 => Ok(Self::Ok),
-            v => Err(crate::errors::EnumError::new("BuyBankSlotResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("BuyBankSlotResult", v),)
         }
     }
 }

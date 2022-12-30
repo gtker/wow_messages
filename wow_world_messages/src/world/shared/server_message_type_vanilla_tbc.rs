@@ -59,7 +59,7 @@ impl TryFrom<u32> for ServerMessageType {
             3 => Ok(Self::Custom),
             4 => Ok(Self::ShutdownCancelled),
             5 => Ok(Self::RestartCancelled),
-            v => Err(crate::errors::EnumError::new("ServerMessageType", v as u32),)
+            v => Err(crate::errors::EnumError::new("ServerMessageType", v),)
         }
     }
 }

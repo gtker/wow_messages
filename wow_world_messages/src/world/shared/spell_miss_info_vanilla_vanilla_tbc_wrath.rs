@@ -94,7 +94,7 @@ impl TryFrom<u32> for SpellMissInfo {
             9 => Ok(Self::Deflect),
             10 => Ok(Self::Absorb),
             11 => Ok(Self::Reflect),
-            v => Err(crate::errors::EnumError::new("SpellMissInfo", v as u32),)
+            v => Err(crate::errors::EnumError::new("SpellMissInfo", v),)
         }
     }
 }

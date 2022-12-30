@@ -54,7 +54,7 @@ impl TryFrom<u32> for ArenaTeamCommand {
             1 => Ok(Self::TeamInviteSs),
             3 => Ok(Self::TeamQuitS),
             14 => Ok(Self::TeamFounderS),
-            v => Err(crate::errors::EnumError::new("ArenaTeamCommand", v as u32),)
+            v => Err(crate::errors::EnumError::new("ArenaTeamCommand", v),)
         }
     }
 }

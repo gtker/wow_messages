@@ -56,7 +56,7 @@ impl TryFrom<u32> for LogoutResult {
             1 => Ok(Self::FailureInCombat),
             2 => Ok(Self::FailureFrozenByGm),
             3 => Ok(Self::FailureJumpingOrFalling),
-            v => Err(crate::errors::EnumError::new("LogoutResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("LogoutResult", v),)
         }
     }
 }

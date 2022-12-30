@@ -1,3 +1,4 @@
+use crate::util::CSTRING_LARGEST_ALLOWED;
 use async_std::io::{ReadExt, WriteExt};
 
 pub async fn astd_read_fixed_string_to_vec<R: ReadExt + Unpin + Unpin>(
@@ -16,9 +17,7 @@ pub async fn astd_read_fixed_string_to_vec<R: ReadExt + Unpin + Unpin>(
 pub async fn astd_read_c_string_to_vec<R: ReadExt + Unpin>(
     r: &mut R,
 ) -> Result<Vec<u8>, std::io::Error> {
-    const CSTRING_LARGEST_ALLOWED: usize = 256;
-
-    let mut v = Vec::with_capacity(CSTRING_LARGEST_ALLOWED as usize);
+    let mut v = Vec::with_capacity(CSTRING_LARGEST_ALLOWED);
 
     let mut byte = astd_read_u8_le(r).await?;
     let mut count = 0;

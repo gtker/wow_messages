@@ -104,7 +104,7 @@ impl TryFrom<u32> for BattlegroundType {
             11 => Ok(Self::RingOfValor),
             30 => Ok(Self::IsleOfConquest),
             32 => Ok(Self::Random),
-            v => Err(crate::errors::EnumError::new("BattlegroundType", v as u32),)
+            v => Err(crate::errors::EnumError::new("BattlegroundType", v),)
         }
     }
 }

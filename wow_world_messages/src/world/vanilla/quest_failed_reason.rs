@@ -104,7 +104,7 @@ impl TryFrom<u32> for QuestFailedReason {
             17 => Ok(Self::QuestFailedDuplicateItem),
             20 => Ok(Self::QuestFailedMissingItems),
             22 => Ok(Self::QuestFailedNotEnoughMoney),
-            v => Err(crate::errors::EnumError::new("QuestFailedReason", v as u32),)
+            v => Err(crate::errors::EnumError::new("QuestFailedReason", v),)
         }
     }
 }

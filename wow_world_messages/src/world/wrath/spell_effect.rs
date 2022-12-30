@@ -861,7 +861,7 @@ impl TryFrom<u32> for SpellEffect {
             162 => Ok(Self::TalentSpecSelect),
             163 => Ok(Self::Unknown163),
             164 => Ok(Self::CancelAura),
-            v => Err(crate::errors::EnumError::new("SpellEffect", v as u32),)
+            v => Err(crate::errors::EnumError::new("SpellEffect", v),)
         }
     }
 }

@@ -1,3 +1,4 @@
+use crate::util::CSTRING_LARGEST_ALLOWED;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
 pub async fn tokio_read_fixed_string_to_vec<R: AsyncReadExt + Unpin + Unpin>(
@@ -16,9 +17,7 @@ pub async fn tokio_read_fixed_string_to_vec<R: AsyncReadExt + Unpin + Unpin>(
 pub async fn tokio_read_c_string_to_vec<R: AsyncReadExt + Unpin>(
     r: &mut R,
 ) -> Result<Vec<u8>, std::io::Error> {
-    const CSTRING_LARGEST_ALLOWED: usize = 256;
-
-    let mut v = Vec::with_capacity(CSTRING_LARGEST_ALLOWED as usize);
+    let mut v = Vec::with_capacity(CSTRING_LARGEST_ALLOWED);
 
     let mut byte = tokio_read_u8_le(r).await?;
     let mut count = 0;

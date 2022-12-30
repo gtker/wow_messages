@@ -5444,7 +5444,7 @@ impl TryFrom<u32> for Area {
             3459 => Ok(Self::City),
             3478 => Ok(Self::GatesOfAhnQiraj),
             3486 => Ok(Self::RavenholdtManor),
-            v => Err(crate::errors::EnumError::new("Area", v as u32),)
+            v => Err(crate::errors::EnumError::new("Area", v),)
         }
     }
 }

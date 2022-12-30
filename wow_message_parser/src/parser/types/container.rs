@@ -272,7 +272,7 @@ impl Container {
             _ => invalid_self_size_position(
                 self.name(),
                 self.file_info(),
-                &format!(
+                format!(
                     "Only login messages can contain '{}'",
                     CONTAINER_SELF_SIZE_FIELD
                 ),

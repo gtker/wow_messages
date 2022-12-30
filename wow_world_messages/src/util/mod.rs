@@ -12,6 +12,8 @@ pub use tokio_impl::*;
 
 use std::io::{Read, Write};
 
+pub(crate) const CSTRING_LARGEST_ALLOWED: usize = 256;
+
 pub fn read_fixed_string_to_vec<R: Read>(
     r: &mut R,
     size: usize,
@@ -26,9 +28,7 @@ pub fn read_fixed_string_to_vec<R: Read>(
 }
 
 pub fn read_c_string_to_vec<R: Read>(r: &mut R) -> Result<Vec<u8>, std::io::Error> {
-    const CSTRING_LARGEST_ALLOWED: usize = 256;
-
-    let mut v = Vec::with_capacity(CSTRING_LARGEST_ALLOWED as usize);
+    let mut v = Vec::with_capacity(CSTRING_LARGEST_ALLOWED);
 
     let mut byte = read_u8_le(r)?;
     let mut count = 0;

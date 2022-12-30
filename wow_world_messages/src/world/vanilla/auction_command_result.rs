@@ -97,7 +97,7 @@ impl TryFrom<u32> for AuctionCommandResult {
             7 => Ok(Self::ErrBidIncrement),
             10 => Ok(Self::ErrBidOwn),
             13 => Ok(Self::ErrRestrictedAccount),
-            v => Err(crate::errors::EnumError::new("AuctionCommandResult", v as u32),)
+            v => Err(crate::errors::EnumError::new("AuctionCommandResult", v),)
         }
     }
 }

@@ -44,7 +44,7 @@ impl TryFrom<u32> for GmTicketQueueStatus {
         match value {
             1 => Ok(Self::Enabled),
             0 => Ok(Self::Disabled),
-            v => Err(crate::errors::EnumError::new("GmTicketQueueStatus", v as u32),)
+            v => Err(crate::errors::EnumError::new("GmTicketQueueStatus", v),)
         }
     }
 }

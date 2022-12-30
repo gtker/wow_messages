@@ -109,7 +109,7 @@ impl TryFrom<u32> for Language {
             14 => Ok(Self::Troll),
             33 => Ok(Self::Gutterspeak),
             4294967295 => Ok(Self::Addon),
-            v => Err(crate::errors::EnumError::new("Language", v as u32),)
+            v => Err(crate::errors::EnumError::new("Language", v),)
         }
     }
 }
