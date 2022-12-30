@@ -5,7 +5,7 @@ pub use data::*;
 use crate::wrath::{Class, InventoryType, Item, ItemClassAndSubClass, PlayerRace, RaceClass};
 
 pub fn lookup_item(id: u32) -> Option<&'static Item> {
-    ITEMS.iter().find(|a| a.entry as u32 == id)
+    ITEMS.iter().find(|a| a.entry == id)
 }
 
 impl Item {

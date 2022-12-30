@@ -57,17 +57,17 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         const CLASS_TRADE_GOODS: i32 = 7;
         const CLASS_JUNK: i32 = 15;
 
-        let sub_class = if item.class == CLASS_CONSUMABLE {
+        let sub_class =
             // The game does not recognize consumables other than class 0 and subclass 0,
             // but the cmangos database uses these for some reason
-            0
-        } else if item.class == CLASS_TRADE_GOODS && item.sub_class > 3 {
+        if item.class == CLASS_CONSUMABLE
             // The game does not recognize trade goods for greater than 3 (Devices)
             // but the cmangos database uses these for some reason
-            0
-        } else if item.class == CLASS_JUNK {
+            ||item.class == CLASS_TRADE_GOODS && item.sub_class > 3
             // The game does not recognize junk subclasses other than class 15 and subclass 0,
             // but the cmangos database uses these for some reason
+            ||item.class == CLASS_JUNK
+        {
             0
         } else {
             item.sub_class

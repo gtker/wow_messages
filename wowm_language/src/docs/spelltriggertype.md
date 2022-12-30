@@ -31,7 +31,7 @@ Used in:
 
 ### Comment
 
-azerothcore: ItemSpelltriggerType 5 might have changed on 2.4.3/3.0.3: Such auras will be applied on item pickup and removed on item loss - maybe on the other hand the item is destroyed if the aura is removed ('removed on death' of spell 57348 makes me think so)
+azerothcore: `ItemSpelltriggerType` 5 might have changed on 2.4.3/3.0.3: Such auras will be applied on item pickup and removed on item loss - maybe on the other hand the item is destroyed if the aura is removed ('removed on death' of spell 57348 makes me think so)
 
 ### Wowm Representation
 

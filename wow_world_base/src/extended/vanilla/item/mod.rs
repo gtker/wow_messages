@@ -6,7 +6,7 @@ use crate::vanilla::{PlayerRace, RaceClass};
 pub use data::*;
 
 pub fn lookup_item(id: u32) -> Option<&'static Item> {
-    ITEMS.iter().find(|a| a.entry as u32 == id)
+    ITEMS.iter().find(|a| a.entry == id)
 }
 
 impl Item {

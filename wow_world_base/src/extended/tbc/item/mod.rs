@@ -6,7 +6,7 @@ use crate::shared::player_race_tbc_wrath::PlayerRace;
 use crate::tbc::{Class, InventoryType, Item, ItemClassAndSubClass, RaceClass};
 
 pub fn lookup_item(id: u32) -> Option<&'static Item> {
-    ITEMS.iter().find(|a| a.entry as u32 == id)
+    ITEMS.iter().find(|a| a.entry == id)
 }
 
 impl Item {

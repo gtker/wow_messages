@@ -211,7 +211,7 @@ impl From<Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 impl From<&Item> for SMSG_ITEM_NAME_QUERY_RESPONSE {
     fn from(v: &Item) -> Self {
         Self {
-            item: v.entry as u32,
+            item: v.entry,
             item_name: v.name.to_string(),
         }
     }
