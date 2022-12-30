@@ -151,6 +151,7 @@ pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
 pub use crate::helper::vanilla::*;
+pub use crate::manual::vanilla::*;
 pub(crate) mod creature_family;
 pub use creature_family::*;
 pub(crate) mod damage_info;

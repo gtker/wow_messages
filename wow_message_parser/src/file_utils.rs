@@ -218,6 +218,24 @@ impl ModFiles {
         );
 
         self.add_or_append_file(
+            world_directory().join(major_version_to_string(version)),
+            (
+                format!("crate::manual::{}", major_version_to_string(version)),
+                SubmoduleLocation::PubUseOnly,
+            ),
+        );
+
+        if tags.shared() {
+            self.add_or_append_file(
+                world_directory().join("shared"),
+                (
+                    "crate::manual::shared".to_string(),
+                    SubmoduleLocation::PubUseOnly,
+                ),
+            );
+        }
+
+        self.add_or_append_file(
             file_dir,
             (
                 format!("crate::helper::{}", major_version_to_string(version)),

@@ -554,6 +554,7 @@ pub mod commentator_enable_option_tbc_wrath;
 pub mod cooldown_spell_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod corpse_query_result_vanilla_tbc_wrath;
+pub use crate::manual::shared::*;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod declined_pet_name_included_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]

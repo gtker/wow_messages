@@ -147,6 +147,7 @@ pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
 pub use crate::helper::tbc::*;
+pub use crate::manual::tbc::*;
 pub(crate) mod creature_family;
 pub use creature_family::*;
 pub(crate) mod emote;

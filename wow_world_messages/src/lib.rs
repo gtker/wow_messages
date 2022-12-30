@@ -24,6 +24,7 @@
 
 pub mod errors;
 pub mod helper;
+mod manual;
 mod traits;
 pub(crate) mod util;
 #[allow(unused, clippy::complexity, clippy::bool_to_int_with_if)]

@@ -359,6 +359,7 @@ pub use cmsg_zoneupdate::*;
 pub(crate) mod complaint_status;
 pub use complaint_status::*;
 pub use crate::helper::wrath::*;
+pub use crate::manual::wrath::*;
 pub(crate) mod creature_family;
 pub use creature_family::*;
 pub(crate) mod damage_info;
