@@ -28,7 +28,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             item: v.entry as u32,
             found: Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
                 class_and_sub_class: ItemClassAndSubClass::try_from(
-                    (v.class as u64) << 32 | v.sub_class as u64,
+                    (v.sub_class as u64) << 32 | v.class as u64,
                 )
                 .unwrap(),
                 name1: v.name.to_string(),

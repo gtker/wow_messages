@@ -28,7 +28,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             item: v.entry as u32,
             found: Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
                 class_and_sub_class: ItemClassAndSubClass::try_from(
-                    (v.class as u64) << 32 | v.subclass as u64,
+                    (v.subclass as u64) << 32 | v.class as u64,
                 )
                 .unwrap(),
                 sound_override_sub_class: v.sound_override_subclass as u32,
