@@ -23,6 +23,14 @@ pub fn item_to_name_query_response(item: &Item) -> SMSG_ITEM_NAME_QUERY_RESPONSE
 
 impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     fn from(v: &Item) -> Self {
+        const ITEM_MOD_MANA: u32 = 0;
+        const ITEM_MOD_HEALTH: u32 = 1;
+        const ITEM_MOD_AGILITY: u32 = 3;
+        const ITEM_MOD_STRENGTH: u32 = 4;
+        const ITEM_MOD_INTELLECT: u32 = 5;
+        const ITEM_MOD_SPIRIT: u32 = 6;
+        const ITEM_MOD_STAMINA: u32 = 7;
+
         Self {
             item: v.entry,
             found: Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
@@ -53,36 +61,36 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 container_slots: v.container_slots as u32,
                 stats: [
                     ItemStat {
-                        item_stat_type: v.stat_type1 as u32,
-                        item_stat_value: v.stat_value1,
+                        item_stat_type: ITEM_MOD_MANA,
+                        item_stat_value: v.mana,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type2 as u32,
-                        item_stat_value: v.stat_value2,
+                        item_stat_type: ITEM_MOD_HEALTH,
+                        item_stat_value: v.health,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type3 as u32,
-                        item_stat_value: v.stat_value3,
+                        item_stat_type: ITEM_MOD_AGILITY,
+                        item_stat_value: v.agility,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type4 as u32,
-                        item_stat_value: v.stat_value4,
+                        item_stat_type: ITEM_MOD_STAMINA,
+                        item_stat_value: v.stamina,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type5 as u32,
-                        item_stat_value: v.stat_value5,
+                        item_stat_type: ITEM_MOD_STRENGTH,
+                        item_stat_value: v.strength,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type6 as u32,
-                        item_stat_value: v.stat_value6,
+                        item_stat_type: ITEM_MOD_STAMINA,
+                        item_stat_value: v.stamina,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type7 as u32,
-                        item_stat_value: v.stat_value7,
+                        item_stat_type: ITEM_MOD_INTELLECT,
+                        item_stat_value: v.intellect,
                     },
                     ItemStat {
-                        item_stat_type: 0,
-                        item_stat_value: 0,
+                        item_stat_type: ITEM_MOD_SPIRIT,
+                        item_stat_value: v.spirit,
                     },
                     ItemStat {
                         item_stat_type: 0,
