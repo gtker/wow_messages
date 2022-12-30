@@ -190,6 +190,10 @@ pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class_and_sub_class;
 pub use item_class_and_sub_class::*;
+pub(crate) mod item_stat;
+pub use item_stat::*;
+pub(crate) mod item_stat_type;
+pub use item_stat_type::*;
 pub(crate) mod key_version;
 pub use key_version::*;
 pub(crate) mod list_inventory_item;
@@ -826,8 +830,6 @@ pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceR
 pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
 
 pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
-
-pub use crate::shared::item_stat_vanilla_tbc_wrath::ItemStat;
 
 pub use crate::shared::language_vanilla_vanilla::Language;
 

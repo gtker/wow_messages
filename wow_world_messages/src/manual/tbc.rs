@@ -54,44 +54,44 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 container_slots: v.container_slots as u32,
                 stats: [
                     ItemStat {
-                        item_stat_type: v.stat_type1 as u32,
-                        item_stat_value: v.stat_value1,
+                        stat_type: v.stat_type1 as u32,
+                        value: v.stat_value1,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type2 as u32,
-                        item_stat_value: v.stat_value2,
+                        stat_type: v.stat_type2 as u32,
+                        value: v.stat_value2,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type3 as u32,
-                        item_stat_value: v.stat_value3,
+                        stat_type: v.stat_type3 as u32,
+                        value: v.stat_value3,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type4 as u32,
-                        item_stat_value: v.stat_value4,
+                        stat_type: v.stat_type4 as u32,
+                        value: v.stat_value4,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type5 as u32,
-                        item_stat_value: v.stat_value5,
+                        stat_type: v.stat_type5 as u32,
+                        value: v.stat_value5,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type6 as u32,
-                        item_stat_value: v.stat_value6,
+                        stat_type: v.stat_type6 as u32,
+                        value: v.stat_value6,
                     },
                     ItemStat {
-                        item_stat_type: v.stat_type7 as u32,
-                        item_stat_value: v.stat_value7,
+                        stat_type: v.stat_type7 as u32,
+                        value: v.stat_value7,
                     },
                     ItemStat {
-                        item_stat_type: 0,
-                        item_stat_value: 0,
+                        stat_type: 0,
+                        value: 0,
                     },
                     ItemStat {
-                        item_stat_type: 0,
-                        item_stat_value: 0,
+                        stat_type: 0,
+                        value: 0,
                     },
                     ItemStat {
-                        item_stat_type: 0,
-                        item_stat_value: 0,
+                        stat_type: 0,
+                        value: 0,
                     },
                 ],
                 damages: [

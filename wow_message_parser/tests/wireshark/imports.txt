@@ -368,7 +368,6 @@ static int hf_woww_item_spell_charges = -1;
 static int hf_woww_item_stack_count = -1;
 static int hf_woww_item_stack_size = -1;
 static int hf_woww_item_stat_type = -1;
-static int hf_woww_item_stat_value = -1;
 static int hf_woww_item_sub_class_mask = -1;
 static int hf_woww_item_suffix_factor = -1;
 static int hf_woww_item_target = -1;

@@ -947,7 +947,7 @@ pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
 
 pub use crate::shared::item_spells_vanilla_tbc_wrath::ItemSpells;
 
-pub use crate::shared::item_stat_vanilla_tbc_wrath::ItemStat;
+pub use crate::shared::item_stat_tbc_wrath::ItemStat;
 
 pub use crate::shared::join_arena_type_tbc_wrath::JoinArenaType;
 

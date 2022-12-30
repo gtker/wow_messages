@@ -127,6 +127,7 @@
 - [ItemClass](docs/itemclass.md)
 - [ItemClassAndSubClass](docs/itemclassandsubclass.md)
 - [ItemQuality](docs/itemquality.md)
+- [ItemStatType](docs/itemstattype.md)
 - [ItemTextQuery](docs/itemtextquery.md)
 - [JoinArenaType](docs/joinarenatype.md)
 - [KeyVersion](docs/keyversion.md)

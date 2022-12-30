@@ -2981,6 +2981,26 @@ static const value_string e_guild_member_status_strings[] =  {
 };
 
 typedef enum {
+    ITEM_STAT_TYPE_MANA = 0x0,
+    ITEM_STAT_TYPE_HEALTH = 0x1,
+    ITEM_STAT_TYPE_AGILITY = 0x3,
+    ITEM_STAT_TYPE_STRENGTH = 0x4,
+    ITEM_STAT_TYPE_INTELLECT = 0x5,
+    ITEM_STAT_TYPE_SPIRIT = 0x6,
+    ITEM_STAT_TYPE_STAMINA = 0x7,
+} e_item_stat_type;
+static const value_string e_item_stat_type_strings[] =  {
+    { ITEM_STAT_TYPE_MANA, "Mana" },
+    { ITEM_STAT_TYPE_HEALTH, "Health" },
+    { ITEM_STAT_TYPE_AGILITY, "Agility" },
+    { ITEM_STAT_TYPE_STRENGTH, "Strength" },
+    { ITEM_STAT_TYPE_INTELLECT, "Intellect" },
+    { ITEM_STAT_TYPE_SPIRIT, "Spirit" },
+    { ITEM_STAT_TYPE_STAMINA, "Stamina" },
+    { 0, NULL }
+};
+
+typedef enum {
     LOOT_SLOT_TYPE_TYPE_ALLOW_LOOT = 0x0,
     LOOT_SLOT_TYPE_TYPE_ROLL_ONGOING = 0x1,
     LOOT_SLOT_TYPE_TYPE_MASTER = 0x2,

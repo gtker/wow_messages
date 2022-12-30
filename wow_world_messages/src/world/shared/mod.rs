@@ -623,8 +623,8 @@ pub mod item_damage_type_vanilla_tbc_wrath;
 pub mod item_socket_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod item_spells_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod item_stat_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod item_stat_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod join_arena_type_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]

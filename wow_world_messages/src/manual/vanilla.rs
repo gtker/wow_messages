@@ -1,6 +1,7 @@
 use crate::vanilla::{
-    Area, ItemDamageType, ItemSpells, ItemStat, SMSG_ITEM_QUERY_SINGLE_RESPONSE_found,
-    SMSG_ITEM_NAME_QUERY_RESPONSE, SMSG_ITEM_QUERY_SINGLE_RESPONSE,
+    Area, ItemDamageType, ItemSpells, ItemStat, ItemStatType,
+    SMSG_ITEM_QUERY_SINGLE_RESPONSE_found, SMSG_ITEM_NAME_QUERY_RESPONSE,
+    SMSG_ITEM_QUERY_SINGLE_RESPONSE,
 };
 use std::convert::TryFrom;
 use wow_world_base::vanilla::{Item, Map, Skill};
@@ -61,44 +62,44 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 container_slots: v.container_slots as u32,
                 stats: [
                     ItemStat {
-                        item_stat_type: ITEM_MOD_MANA,
-                        item_stat_value: v.mana,
+                        stat_type: ItemStatType::Mana,
+                        value: v.mana,
                     },
                     ItemStat {
-                        item_stat_type: ITEM_MOD_HEALTH,
-                        item_stat_value: v.health,
+                        stat_type: ItemStatType::Health,
+                        value: v.health,
                     },
                     ItemStat {
-                        item_stat_type: ITEM_MOD_AGILITY,
-                        item_stat_value: v.agility,
+                        stat_type: ItemStatType::Strength,
+                        value: v.strength,
                     },
                     ItemStat {
-                        item_stat_type: ITEM_MOD_STAMINA,
-                        item_stat_value: v.stamina,
+                        stat_type: ItemStatType::Agility,
+                        value: v.agility,
                     },
                     ItemStat {
-                        item_stat_type: ITEM_MOD_STRENGTH,
-                        item_stat_value: v.strength,
+                        stat_type: ItemStatType::Stamina,
+                        value: v.stamina,
                     },
                     ItemStat {
-                        item_stat_type: ITEM_MOD_STAMINA,
-                        item_stat_value: v.stamina,
+                        stat_type: ItemStatType::Intellect,
+                        value: v.intellect,
                     },
                     ItemStat {
-                        item_stat_type: ITEM_MOD_INTELLECT,
-                        item_stat_value: v.intellect,
+                        stat_type: ItemStatType::Spirit,
+                        value: v.spirit,
                     },
                     ItemStat {
-                        item_stat_type: ITEM_MOD_SPIRIT,
-                        item_stat_value: v.spirit,
+                        stat_type: ItemStatType::Mana,
+                        value: 0,
                     },
                     ItemStat {
-                        item_stat_type: 0,
-                        item_stat_value: 0,
+                        stat_type: ItemStatType::Mana,
+                        value: 0,
                     },
                     ItemStat {
-                        item_stat_type: 0,
-                        item_stat_value: 0,
+                        stat_type: ItemStatType::Mana,
+                        value: 0,
                     },
                 ],
                 damages: [

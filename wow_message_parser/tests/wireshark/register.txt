@@ -2214,13 +2214,7 @@
         },
         { &hf_woww_item_stat_type,
             { "Item Stat Type", "woww.item.stat.type",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_item_stat_value,
-            { "Item Stat Value", "woww.item.stat.value",
-                FT_INT32, BASE_DEC, NULL, 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_item_stat_type_strings), 0,
                 NULL, HFILL
             }
         },
@@ -4602,7 +4596,7 @@
         },
         { &hf_woww_value,
             { "Value", "woww.value",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_INT32, BASE_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

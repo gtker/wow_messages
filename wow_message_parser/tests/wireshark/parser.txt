@@ -4331,7 +4331,7 @@
                 for (i = 0; i < 10; ++i) {
                     ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemStat");
                     ptvcursor_add(ptv, hf_woww_item_stat_type, 4, ENC_LITTLE_ENDIAN);
-                    ptvcursor_add(ptv, hf_woww_item_stat_value, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_value, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_pop_subtree(ptv);
                 }
                 for (i = 0; i < 5; ++i) {

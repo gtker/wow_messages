@@ -21,11 +21,30 @@ struct ItemDamageType {
     versions = "1 2 3";
 }
 
-struct ItemStat {
-    u32 item_stat_type;
-    i32 item_stat_value;
+enum ItemStatType : u8 {
+    MANA = 0;
+    HEALTH = 1;
+    AGILITY = 3;
+    STRENGTH = 4;
+    INTELLECT = 5;
+    SPIRIT = 6;
+    STAMINA = 7;
 } {
-    versions = "1 2 3";
+    versions = "1";
+}
+
+struct ItemStat {
+    (u32)ItemStatType stat_type;
+    i32 value;
+} {
+    versions = "1";
+}
+
+struct ItemStat {
+    u32 stat_type;
+    i32 value;
+} {
+    versions = "2 3";
 }
 
 smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
