@@ -75,6 +75,7 @@ enum ItemClassAndSubClass : u64 {
     comment = "They are combined into one enum because the value of the sub class depends on the value of the class.";
     comment = "The high bits of this are the class field since they are both sent as little endian.";
     versions = "1.12";
+    rust_base_type = "true";
 }
 
 enum ItemClassAndSubClass : u64 {
@@ -187,6 +188,7 @@ enum ItemClassAndSubClass : u64 {
     comment = "They are combined into one enum because the value of the sub class depends on the value of the class.";
     comment = "The high bits of this are the class field since they are both sent as little endian.";
     versions = "2.4.3";
+    rust_base_type = "true";
 }
 
 
@@ -314,5 +316,6 @@ enum ItemClassAndSubClass : u64 {
     comment = "This is both the class field and the sub class field.";
     comment = "They are combined into one enum because the value of the sub class depends on the value of the class.";
     comment = "The high bits of this are the class field since they are both sent as little endian.";
+    rust_base_type = "true";
     versions = "3.3.5";
 }
