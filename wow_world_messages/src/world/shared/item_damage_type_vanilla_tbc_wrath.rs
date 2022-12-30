@@ -1,4 +1,5 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
@@ -7,15 +8,13 @@ use std::io::{Write, Read};
 /// struct ItemDamageType {
 ///     f32 damage_minimum;
 ///     f32 damage_maximum;
-///     u32 damage_type;
+///     (u32)SpellSchool school;
 /// }
 /// ```
 pub struct ItemDamageType {
     pub damage_minimum: f32,
     pub damage_maximum: f32,
-    /// mangoszero/vmangos/cmangos: id from Resistances.dbc
-    ///
-    pub damage_type: u32,
+    pub school: SpellSchool,
 }
 
 impl ItemDamageType {
@@ -26,8 +25,8 @@ impl ItemDamageType {
         // damage_maximum: f32
         w.write_all(&self.damage_maximum.to_le_bytes())?;
 
-        // damage_type: u32
-        w.write_all(&self.damage_type.to_le_bytes())?;
+        // school: SpellSchool
+        w.write_all(&(self.school.as_int() as u32).to_le_bytes())?;
 
         Ok(())
     }
@@ -39,13 +38,13 @@ impl ItemDamageType {
         let damage_minimum = crate::util::read_f32_le(r)?;
         // damage_maximum: f32
         let damage_maximum = crate::util::read_f32_le(r)?;
-        // damage_type: u32
-        let damage_type = crate::util::read_u32_le(r)?;
+        // school: SpellSchool
+        let school: SpellSchool = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         Ok(Self {
             damage_minimum,
             damage_maximum,
-            damage_type,
+            school,
         })
     }
 

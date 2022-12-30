@@ -34,6 +34,7 @@ Used in:
 * [AuraLog](auralog.md)
 * [AuraLog](auralog.md)
 * [AuraLog](auralog.md)
+* [ItemDamageType](itemdamagetype.md)
 * [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)
 * [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)
 * [SMSG_SPELLDAMAGESHIELD](smsg_spelldamageshield.md)

@@ -196,7 +196,6 @@ static int hf_woww_damage_float = -1;
 static int hf_woww_damage_maximum = -1;
 static int hf_woww_damage_minimum = -1;
 static int hf_woww_damage_state = -1;
-static int hf_woww_damage_type = -1;
 static int hf_woww_damage_uint = -1;
 static int hf_woww_data = -1;
 static int hf_woww_data_type = -1;

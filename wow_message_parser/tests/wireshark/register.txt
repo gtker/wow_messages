@@ -1186,12 +1186,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_damage_type,
-            { "Damage Type", "woww.damage.type",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_damage_uint,
             { "Damage Uint", "woww.damage.uint",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,

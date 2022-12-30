@@ -14,9 +14,7 @@ struct ItemSpells {
 struct ItemDamageType {
     f32 damage_minimum;
     f32 damage_maximum;
-    u32 damage_type {
-        comment = "mangoszero/vmangos/cmangos: id from Resistances.dbc";
-    }
+    (u32)SpellSchool school;
 } {
     versions = "1 2 3";
 }
