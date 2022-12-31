@@ -19,8 +19,8 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: clippy # "extended" feature bloats compile time significantly
-          args: --features ''vanilla tbc wrath sync tokio async-std serde encryption''
+          args: --features 'vanilla tbc wrath sync tokio async-std serde encryption'
       - uses: actions-rs/cargo@v1
         with:
           command: test # "extended" feature bloats compile time significantly
-          args: --features ''vanilla tbc wrath sync tokio async-std serde encryption''
+          args: --features 'vanilla tbc wrath sync tokio async-std serde encryption'
