@@ -1,4 +1,5 @@
 pub mod combat;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod geometry;
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
