@@ -8,6 +8,10 @@ pub fn lookup_item(id: u32) -> Option<&'static Item> {
     ITEMS.iter().find(|a| a.entry == id)
 }
 
+pub const fn all_items() -> &'static [Item] {
+    ITEMS
+}
+
 impl Item {
     /// Returns true if the item is usable by the [`RaceClass`].
     ///
