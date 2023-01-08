@@ -772,8 +772,6 @@ pub mod petition_signature_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod player_chat_tag_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod pvp_rank_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod quest_completable_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod quest_details_emote_vanilla_tbc_wrath;

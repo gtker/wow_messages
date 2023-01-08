@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
+use wow_world_base::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]

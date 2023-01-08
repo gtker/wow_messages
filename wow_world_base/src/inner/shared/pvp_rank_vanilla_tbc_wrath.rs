@@ -26,6 +26,7 @@ use std::convert::{TryFrom, TryInto};
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum PvpRank {
     NoRank,
     Pariah,
@@ -92,7 +93,7 @@ pub enum PvpRank {
 }
 
 impl PvpRank {
-    pub(crate) const fn as_int(&self) -> u8 {
+    pub const fn as_int(&self) -> u8 {
         match self {
             Self::NoRank => 0x0,
             Self::Pariah => 0x1,

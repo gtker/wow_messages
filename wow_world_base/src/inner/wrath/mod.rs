@@ -27,6 +27,8 @@ pub(crate) mod map;
 pub use map::*;
 pub(crate) mod power;
 pub use power::*;
+pub(crate) mod pvp_rank;
+pub use pvp_rank::*;
 pub(crate) mod race;
 pub use race::*;
 pub(crate) mod skill;

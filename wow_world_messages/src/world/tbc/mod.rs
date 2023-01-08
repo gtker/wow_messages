@@ -1093,8 +1093,6 @@ pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
 pub use crate::shared::player_chat_tag_vanilla_tbc::PlayerChatTag;
 
-pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
-
 pub use crate::shared::quest_completable_vanilla_tbc_wrath::QuestCompletable;
 
 pub use crate::shared::quest_details_emote_vanilla_tbc_wrath::QuestDetailsEmote;
@@ -1646,6 +1644,8 @@ pub use wow_world_base::tbc::ItemClass;
 pub use wow_world_base::tbc::ItemQuality;
 
 pub use wow_world_base::tbc::Power;
+
+pub use wow_world_base::tbc::PvpRank;
 
 pub use wow_world_base::tbc::SpellSchool;
 

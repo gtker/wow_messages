@@ -63,5 +63,7 @@ enum PvpRank : u8 {
         comment = "Horde name: High Warlord";
     }
     FACTION_LEADER = 19;
+} {
+    rust_base_type = "true";
 }
 

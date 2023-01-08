@@ -1273,8 +1273,6 @@ pub use crate::shared::petition_showlist_tbc_wrath::PetitionShowlist;
 
 pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 
-pub use crate::shared::pvp_rank_vanilla_tbc_wrath::PvpRank;
-
 pub use crate::shared::quest_completable_vanilla_tbc_wrath::QuestCompletable;
 
 pub use crate::shared::quest_details_emote_vanilla_tbc_wrath::QuestDetailsEmote;
@@ -1732,6 +1730,8 @@ pub use wow_world_base::wrath::Bonding;
 pub use wow_world_base::wrath::Gender;
 
 pub use wow_world_base::wrath::InventoryType;
+
+pub use wow_world_base::wrath::PvpRank;
 
 pub use wow_world_base::wrath::SpellSchool;
 
