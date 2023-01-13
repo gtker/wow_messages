@@ -162,3 +162,27 @@ impl RealmFlag {
 
 }
 
+impl std::fmt::UpperHex for RealmFlag {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::UpperHex::fmt(&self.inner, f)
+    }
+}
+
+impl std::fmt::LowerHex for RealmFlag {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::LowerHex::fmt(&self.inner, f)
+    }
+}
+
+impl std::fmt::Octal for RealmFlag {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::Octal::fmt(&self.inner, f)
+    }
+}
+
+impl std::fmt::Binary for RealmFlag {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::Binary::fmt(&self.inner, f)
+    }
+}
+

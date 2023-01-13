@@ -14,6 +14,7 @@
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct AllowedClass {
     inner: u32,
 }
@@ -223,5 +224,29 @@ impl AllowedClass {
         self.inner
     }
 
+}
+
+impl std::fmt::UpperHex for AllowedClass {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::UpperHex::fmt(&self.inner, f)
+    }
+}
+
+impl std::fmt::LowerHex for AllowedClass {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::LowerHex::fmt(&self.inner, f)
+    }
+}
+
+impl std::fmt::Octal for AllowedClass {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::Octal::fmt(&self.inner, f)
+    }
+}
+
+impl std::fmt::Binary for AllowedClass {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::Binary::fmt(&self.inner, f)
+    }
 }
 

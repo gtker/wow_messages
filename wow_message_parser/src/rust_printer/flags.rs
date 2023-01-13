@@ -23,6 +23,9 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
     print_wowm_definition("flag", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]");
+    if e.tags().is_in_base() {
+        s.wln("#[cfg_attr(feature = \"serde\", derive(serde::Deserialize, serde::Serialize))]");
+    }
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});
 }
 
@@ -48,6 +51,22 @@ fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
             s.wln("self.inner");
         });
     });
+
+    for fmt in [
+        "std::fmt::UpperHex",
+        "std::fmt::LowerHex",
+        "std::fmt::Octal",
+        "std::fmt::Binary",
+    ] {
+        s.bodyn(format!("impl {fmt} for {ty}", ty = e.name()), |s| {
+            s.body(
+                "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
+                |s| {
+                    s.wln(format!("{fmt}::fmt(&self.inner, f)"));
+                },
+            );
+        });
+    }
 }
 
 fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
