@@ -7632,6 +7632,7 @@ use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
 use crate::world::wrath::MSG_MOVE_SET_PITCH_RATE_Server;
 use crate::world::wrath::SMSG_FORCE_PITCH_RATE_CHANGE;
 use crate::world::wrath::SMSG_CALENDAR_EVENT_INVITE_NOTES;
+use crate::world::wrath::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 use crate::world::wrath::MSG_MOVE_GRAVITY_CHNG_Server;
@@ -8078,6 +8079,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_SET_PITCH_RATE(MSG_MOVE_SET_PITCH_RATE_Server),
     SMSG_FORCE_PITCH_RATE_CHANGE(SMSG_FORCE_PITCH_RATE_CHANGE),
     SMSG_CALENDAR_EVENT_INVITE_NOTES(SMSG_CALENDAR_EVENT_INVITE_NOTES),
+    SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
     MSG_MOVE_GRAVITY_CHNG(MSG_MOVE_GRAVITY_CHNG_Server),
@@ -8526,6 +8528,7 @@ impl ServerOpcodeMessage {
             0x045B => Ok(Self::MSG_MOVE_SET_PITCH_RATE(<MSG_MOVE_SET_PITCH_RATE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x045B, size: body_size, io, } } else { a } })?)),
             0x045C => Ok(Self::SMSG_FORCE_PITCH_RATE_CHANGE(<SMSG_FORCE_PITCH_RATE_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x045C, size: body_size, io, } } else { a } })?)),
             0x0460 => Ok(Self::SMSG_CALENDAR_EVENT_INVITE_NOTES(<SMSG_CALENDAR_EVENT_INVITE_NOTES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0460, size: body_size, io, } } else { a } })?)),
+            0x0461 => Ok(Self::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(<SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0461, size: body_size, io, } } else { a } })?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
             0x04D2 => Ok(Self::MSG_MOVE_GRAVITY_CHNG(<MSG_MOVE_GRAVITY_CHNG_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04D2, size: body_size, io, } } else { a } })?)),
@@ -9123,6 +9126,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_PITCH_RATE_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_EVENT_INVITE_NOTES(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_encrypted_server(w, e),
@@ -9572,6 +9576,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_PITCH_RATE_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_EVENT_INVITE_NOTES(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_unencrypted_server(w),
@@ -10021,6 +10026,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_PITCH_RATE_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_EVENT_INVITE_NOTES(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10470,6 +10476,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_PITCH_RATE_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_EVENT_INVITE_NOTES(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10919,6 +10926,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_PITCH_RATE_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_EVENT_INVITE_NOTES(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11368,6 +11376,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_PITCH_RATE_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_EVENT_INVITE_NOTES(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_unencrypted_server(w).await,
@@ -11827,6 +11836,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH_RATE(_) => "MSG_MOVE_SET_PITCH_RATE_Server",
             ServerOpcodeMessage::SMSG_FORCE_PITCH_RATE_CHANGE(_) => "SMSG_FORCE_PITCH_RATE_CHANGE",
             ServerOpcodeMessage::SMSG_CALENDAR_EVENT_INVITE_NOTES(_) => "SMSG_CALENDAR_EVENT_INVITE_NOTES",
+            ServerOpcodeMessage::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(_) => "SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
             ServerOpcodeMessage::MSG_MOVE_GRAVITY_CHNG(_) => "MSG_MOVE_GRAVITY_CHNG_Server",
@@ -14461,6 +14471,12 @@ impl From<SMSG_FORCE_PITCH_RATE_CHANGE> for ServerOpcodeMessage {
 impl From<SMSG_CALENDAR_EVENT_INVITE_NOTES> for ServerOpcodeMessage {
     fn from(c: SMSG_CALENDAR_EVENT_INVITE_NOTES) -> Self {
         Self::SMSG_CALENDAR_EVENT_INVITE_NOTES(c)
+    }
+}
+
+impl From<SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT> for ServerOpcodeMessage {
+    fn from(c: SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT) -> Self {
+        Self::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT(c)
     }
 }
 

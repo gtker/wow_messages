@@ -905,6 +905,7 @@
 - [SMSG_CALENDAR_EVENT_INVITE](docs/smsg_calendar_event_invite.md)
 - [SMSG_CALENDAR_EVENT_INVITE_ALERT](docs/smsg_calendar_event_invite_alert.md)
 - [SMSG_CALENDAR_EVENT_INVITE_NOTES](docs/smsg_calendar_event_invite_notes.md)
+- [SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT](docs/smsg_calendar_event_invite_notes_alert.md)
 - [SMSG_CALENDAR_EVENT_INVITE_REMOVED](docs/smsg_calendar_event_invite_removed.md)
 - [SMSG_CALENDAR_EVENT_INVITE_REMOVED_ALERT](docs/smsg_calendar_event_invite_removed_alert.md)
 - [SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT](docs/smsg_calendar_event_moderator_status_alert.md)
