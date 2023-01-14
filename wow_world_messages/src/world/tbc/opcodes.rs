@@ -6364,6 +6364,7 @@ use crate::world::tbc::SMSG_KICK_REASON;
 use crate::world::tbc::SMSG_COMPLAIN_RESULT;
 use crate::world::tbc::SMSG_CHANNEL_MEMBER_COUNT;
 use crate::world::tbc::MSG_GUILD_BANK_LOG_QUERY_Server;
+use crate::world::tbc::SMSG_USERLIST_ADD;
 use crate::world::tbc::MSG_GUILD_PERMISSIONS_Server;
 use crate::world::tbc::MSG_GUILD_EVENT_LOG_QUERY_Server;
 use crate::world::tbc::MSG_QUERY_GUILD_BANK_TEXT_Server;
@@ -6737,6 +6738,7 @@ pub enum ServerOpcodeMessage {
     SMSG_COMPLAIN_RESULT(SMSG_COMPLAIN_RESULT),
     SMSG_CHANNEL_MEMBER_COUNT(SMSG_CHANNEL_MEMBER_COUNT),
     MSG_GUILD_BANK_LOG_QUERY(MSG_GUILD_BANK_LOG_QUERY_Server),
+    SMSG_USERLIST_ADD(SMSG_USERLIST_ADD),
     MSG_GUILD_PERMISSIONS(MSG_GUILD_PERMISSIONS_Server),
     MSG_GUILD_EVENT_LOG_QUERY(MSG_GUILD_EVENT_LOG_QUERY_Server),
     MSG_QUERY_GUILD_BANK_TEXT(MSG_QUERY_GUILD_BANK_TEXT_Server),
@@ -7112,6 +7114,7 @@ impl ServerOpcodeMessage {
             0x03C7 => Ok(Self::SMSG_COMPLAIN_RESULT(<SMSG_COMPLAIN_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C7, size: body_size, io, } } else { a } })?)),
             0x03D4 => Ok(Self::SMSG_CHANNEL_MEMBER_COUNT(<SMSG_CHANNEL_MEMBER_COUNT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D4, size: body_size, io, } } else { a } })?)),
             0x03ED => Ok(Self::MSG_GUILD_BANK_LOG_QUERY(<MSG_GUILD_BANK_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03ED, size: body_size, io, } } else { a } })?)),
+            0x03EF => Ok(Self::SMSG_USERLIST_ADD(<SMSG_USERLIST_ADD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EF, size: body_size, io, } } else { a } })?)),
             0x03FC => Ok(Self::MSG_GUILD_PERMISSIONS(<MSG_GUILD_PERMISSIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FC, size: body_size, io, } } else { a } })?)),
             0x03FE => Ok(Self::MSG_GUILD_EVENT_LOG_QUERY(<MSG_GUILD_EVENT_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FE, size: body_size, io, } } else { a } })?)),
             0x0409 => Ok(Self::MSG_QUERY_GUILD_BANK_TEXT(<MSG_QUERY_GUILD_BANK_TEXT_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0409, size: body_size, io, } } else { a } })?)),
@@ -7555,6 +7558,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_COMPLAIN_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_USERLIST_ADD(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_encrypted_server(w, e),
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_encrypted_server(w, e),
@@ -7931,6 +7935,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_COMPLAIN_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_unencrypted_server(w),
+            Self::SMSG_USERLIST_ADD(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_unencrypted_server(w),
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_unencrypted_server(w),
@@ -8307,6 +8312,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_COMPLAIN_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_USERLIST_ADD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8683,6 +8689,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_COMPLAIN_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_USERLIST_ADD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -9059,6 +9066,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_COMPLAIN_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_USERLIST_ADD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9435,6 +9443,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_COMPLAIN_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_USERLIST_ADD(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_server(w).await,
@@ -9813,6 +9822,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_COMPLAIN_RESULT(_) => "SMSG_COMPLAIN_RESULT",
             ServerOpcodeMessage::SMSG_CHANNEL_MEMBER_COUNT(_) => "SMSG_CHANNEL_MEMBER_COUNT",
             ServerOpcodeMessage::MSG_GUILD_BANK_LOG_QUERY(_) => "MSG_GUILD_BANK_LOG_QUERY_Server",
+            ServerOpcodeMessage::SMSG_USERLIST_ADD(_) => "SMSG_USERLIST_ADD",
             ServerOpcodeMessage::MSG_GUILD_PERMISSIONS(_) => "MSG_GUILD_PERMISSIONS_Server",
             ServerOpcodeMessage::MSG_GUILD_EVENT_LOG_QUERY(_) => "MSG_GUILD_EVENT_LOG_QUERY_Server",
             ServerOpcodeMessage::MSG_QUERY_GUILD_BANK_TEXT(_) => "MSG_QUERY_GUILD_BANK_TEXT_Server",
@@ -12019,6 +12029,12 @@ impl From<SMSG_CHANNEL_MEMBER_COUNT> for ServerOpcodeMessage {
 impl From<MSG_GUILD_BANK_LOG_QUERY_Server> for ServerOpcodeMessage {
     fn from(c: MSG_GUILD_BANK_LOG_QUERY_Server) -> Self {
         Self::MSG_GUILD_BANK_LOG_QUERY(c)
+    }
+}
+
+impl From<SMSG_USERLIST_ADD> for ServerOpcodeMessage {
+    fn from(c: SMSG_USERLIST_ADD) -> Self {
+        Self::SMSG_USERLIST_ADD(c)
     }
 }
 

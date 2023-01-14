@@ -1212,6 +1212,7 @@
 - [SMSG_UPDATE_LFG_LIST](docs/smsg_update_lfg_list.md)
 - [SMSG_UPDATE_OBJECT](docs/smsg_update_object.md)
 - [SMSG_UPDATE_WORLD_STATE](docs/smsg_update_world_state.md)
+- [SMSG_USERLIST_ADD](docs/smsg_userlist_add.md)
 - [SMSG_WARDEN_DATA](docs/smsg_warden_data.md)
 - [SMSG_WEATHER](docs/smsg_weather.md)
 - [SMSG_WHO](docs/smsg_who.md)

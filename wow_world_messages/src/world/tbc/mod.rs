@@ -1825,6 +1825,8 @@ pub(crate) mod smsg_update_last_instance;
 pub use smsg_update_last_instance::*;
 pub(crate) mod smsg_update_object;
 pub use smsg_update_object::*;
+pub(crate) mod smsg_userlist_add;
+pub use smsg_userlist_add::*;
 pub(crate) mod smsg_weather;
 pub use smsg_weather::*;
 pub(crate) mod smsg_who;
