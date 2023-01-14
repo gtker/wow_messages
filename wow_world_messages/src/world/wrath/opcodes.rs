@@ -7613,6 +7613,7 @@ use crate::world::wrath::SMSG_SPLINE_MOVE_SET_FLYING;
 use crate::world::wrath::SMSG_SPLINE_MOVE_UNSET_FLYING;
 use crate::world::wrath::SMSG_ENABLE_BARBER_SHOP;
 use crate::world::wrath::SMSG_BARBER_SHOP_RESULT;
+use crate::world::wrath::SMSG_CALENDAR_SEND_CALENDAR;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
 use crate::world::wrath::MSG_MOVE_SET_PITCH_RATE_Server;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
@@ -8042,6 +8043,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SPLINE_MOVE_UNSET_FLYING(SMSG_SPLINE_MOVE_UNSET_FLYING),
     SMSG_ENABLE_BARBER_SHOP(SMSG_ENABLE_BARBER_SHOP),
     SMSG_BARBER_SHOP_RESULT(SMSG_BARBER_SHOP_RESULT),
+    SMSG_CALENDAR_SEND_CALENDAR(SMSG_CALENDAR_SEND_CALENDAR),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
     MSG_MOVE_SET_PITCH_RATE(MSG_MOVE_SET_PITCH_RATE_Server),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
@@ -8473,6 +8475,7 @@ impl ServerOpcodeMessage {
             0x0423 => Ok(Self::SMSG_SPLINE_MOVE_UNSET_FLYING(<SMSG_SPLINE_MOVE_UNSET_FLYING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0423, size: body_size, io, } } else { a } })?)),
             0x0427 => Ok(Self::SMSG_ENABLE_BARBER_SHOP(<SMSG_ENABLE_BARBER_SHOP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0427, size: body_size, io, } } else { a } })?)),
             0x0428 => Ok(Self::SMSG_BARBER_SHOP_RESULT(<SMSG_BARBER_SHOP_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0428, size: body_size, io, } } else { a } })?)),
+            0x0436 => Ok(Self::SMSG_CALENDAR_SEND_CALENDAR(<SMSG_CALENDAR_SEND_CALENDAR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0436, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
             0x045B => Ok(Self::MSG_MOVE_SET_PITCH_RATE(<MSG_MOVE_SET_PITCH_RATE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x045B, size: body_size, io, } } else { a } })?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
@@ -9053,6 +9056,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ENABLE_BARBER_SHOP(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
@@ -9485,6 +9489,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.write_unencrypted_server(w),
             Self::SMSG_ENABLE_BARBER_SHOP(c) => c.write_unencrypted_server(w),
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
@@ -9917,6 +9922,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ENABLE_BARBER_SHOP(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10349,6 +10355,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ENABLE_BARBER_SHOP(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10781,6 +10788,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ENABLE_BARBER_SHOP(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11213,6 +11221,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ENABLE_BARBER_SHOP(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11655,6 +11664,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNSET_FLYING(_) => "SMSG_SPLINE_MOVE_UNSET_FLYING",
             ServerOpcodeMessage::SMSG_ENABLE_BARBER_SHOP(_) => "SMSG_ENABLE_BARBER_SHOP",
             ServerOpcodeMessage::SMSG_BARBER_SHOP_RESULT(_) => "SMSG_BARBER_SHOP_RESULT",
+            ServerOpcodeMessage::SMSG_CALENDAR_SEND_CALENDAR(_) => "SMSG_CALENDAR_SEND_CALENDAR",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH_RATE(_) => "MSG_MOVE_SET_PITCH_RATE_Server",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
@@ -14177,6 +14187,12 @@ impl From<SMSG_ENABLE_BARBER_SHOP> for ServerOpcodeMessage {
 impl From<SMSG_BARBER_SHOP_RESULT> for ServerOpcodeMessage {
     fn from(c: SMSG_BARBER_SHOP_RESULT) -> Self {
         Self::SMSG_BARBER_SHOP_RESULT(c)
+    }
+}
+
+impl From<SMSG_CALENDAR_SEND_CALENDAR> for ServerOpcodeMessage {
+    fn from(c: SMSG_CALENDAR_SEND_CALENDAR) -> Self {
+        Self::SMSG_CALENDAR_SEND_CALENDAR(c)
     }
 }
 

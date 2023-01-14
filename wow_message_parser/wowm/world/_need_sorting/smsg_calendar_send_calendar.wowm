@@ -1,0 +1,70 @@
+struct SendCalendarInvite {
+    Guid event_id;
+    Guid invite_id;
+    u8 status;
+    u8 rank;
+    Bool is_guild_event;
+    PackedGuid creator;
+} {
+    versions = "3.3.5";
+}
+
+struct SendCalendarEvent {
+    Guid event_id;
+    CString title;
+    u32 event_type;
+    DateTime event_time;
+    u32 flags;
+    u32 dungeon_id;
+    PackedGuid creator;
+} {
+    versions = "3.3.5";
+}
+
+struct SendCalendarInstance {
+    Map map;
+    u32 difficulty;
+    u32 reset_time;
+    Guid instance_id;
+} {
+    versions = "3.3.5";
+}
+
+struct SendCalendarResetTime {
+    Map map;
+    u32 period;
+    u32 time_offset;
+} {
+    versions = "3.3.5";
+}
+
+struct SendCalendarHoliday {
+    u32 holiday_id;
+    u32 region;
+    u32 looping;
+    u32 priority;
+    u32 calendar_filter_type;
+    u32[26] holiday_days;
+    u32[10] durations;
+    u32[10] flags;
+    CString texture_file_name;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_CALENDAR_SEND_CALENDAR = 0x0436 {
+    u32 amount_of_invites;
+    SendCalendarInvite[amount_of_invites] invites;
+    u32 amount_of_events;
+    SendCalendarEvent[amount_of_events] events;
+    u32 current_time;
+    DateTime zone_time;
+    u32 amount_of_instances;
+    SendCalendarInstance[amount_of_instances] instances;
+    u32 relative_time;
+    u32 amount_of_reset_times;
+    SendCalendarResetTime[amount_of_reset_times] reset_times;
+    u32 amount_of_holidays;
+} {
+    versions = "3.3.5";
+}

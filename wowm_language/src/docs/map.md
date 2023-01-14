@@ -648,4 +648,6 @@ Used in:
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
 * [SMSG_TRANSFER_PENDING](smsg_transfer_pending.md)
 * [SMSG_UPDATE_LAST_INSTANCE](smsg_update_last_instance.md)
+* [SendCalendarInstance](sendcalendarinstance.md)
+* [SendCalendarResetTime](sendcalendarresettime.md)
 
