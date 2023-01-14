@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::CalendarFilterMember;
+use crate::world::wrath::CalendarMember;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
@@ -7,11 +7,11 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_CALENDAR_FILTER_GUILD = 0x0438 {
 ///     u32 amount_of_members;
-///     CalendarFilterMember[amount_of_members] members;
+///     CalendarMember[amount_of_members] members;
 /// }
 /// ```
 pub struct SMSG_CALENDAR_FILTER_GUILD {
-    pub members: Vec<CalendarFilterMember>,
+    pub members: Vec<CalendarMember>,
 }
 
 impl crate::Message for SMSG_CALENDAR_FILTER_GUILD {
@@ -26,7 +26,7 @@ impl crate::Message for SMSG_CALENDAR_FILTER_GUILD {
         // amount_of_members: u32
         w.write_all(&(self.members.len() as u32).to_le_bytes())?;
 
-        // members: CalendarFilterMember[amount_of_members]
+        // members: CalendarMember[amount_of_members]
         for i in self.members.iter() {
             i.write_into_vec(w)?;
         }
@@ -42,10 +42,10 @@ impl crate::Message for SMSG_CALENDAR_FILTER_GUILD {
         // amount_of_members: u32
         let amount_of_members = crate::util::read_u32_le(r)?;
 
-        // members: CalendarFilterMember[amount_of_members]
+        // members: CalendarMember[amount_of_members]
         let mut members = Vec::with_capacity(amount_of_members as usize);
         for i in 0..amount_of_members {
-            members.push(CalendarFilterMember::read(r)?);
+            members.push(CalendarMember::read(r)?);
         }
 
         Ok(Self {
@@ -60,7 +60,7 @@ impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_FILTER_GUILD {}
 impl SMSG_CALENDAR_FILTER_GUILD {
     pub(crate) fn size(&self) -> usize {
         4 // amount_of_members: u32
-        + self.members.iter().fold(0, |acc, x| acc + x.size()) // members: CalendarFilterMember[amount_of_members]
+        + self.members.iter().fold(0, |acc, x| acc + x.size()) // members: CalendarMember[amount_of_members]
     }
 }
 

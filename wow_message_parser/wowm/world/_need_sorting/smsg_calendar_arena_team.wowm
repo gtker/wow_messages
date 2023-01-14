@@ -1,0 +1,6 @@
+smsg SMSG_CALENDAR_ARENA_TEAM = 0x0439 {
+    u32 amount_of_members;
+    CalendarMember[amount_of_members] members;
+} {
+    versions = "3.3.5";
+}

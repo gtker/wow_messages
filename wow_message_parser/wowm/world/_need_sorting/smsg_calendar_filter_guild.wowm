@@ -1,4 +1,4 @@
-struct CalendarFilterMember {
+struct CalendarMember {
     PackedGuid member;
     u8 level;
 } {
@@ -7,7 +7,7 @@ struct CalendarFilterMember {
 
 smsg SMSG_CALENDAR_FILTER_GUILD = 0x0438 {
     u32 amount_of_members;
-    CalendarFilterMember[amount_of_members] members;
+    CalendarMember[amount_of_members] members;
 } {
     versions = "3.3.5";
 }
