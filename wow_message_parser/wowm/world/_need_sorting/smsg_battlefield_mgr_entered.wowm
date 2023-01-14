@@ -1,0 +1,8 @@
+smsg SMSG_BATTLEFIELD_MGR_ENTERED = 0x04E0 {
+    u32 battle_id;
+    u8 unknown1;
+    u8 unknown2;
+    Bool clear_afk;
+} {
+    versions = "3.3.5";
+}
