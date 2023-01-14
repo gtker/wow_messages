@@ -1,0 +1,8 @@
+smsg SMSG_CALENDAR_EVENT_INVITE_REMOVED_ALERT = 0x0441 {
+    Guid event_id;
+    DateTime event_time;
+    u32 flags;
+    u8 status;
+} {
+    versions = "3.3.5";
+}

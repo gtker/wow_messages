@@ -1873,6 +1873,8 @@ pub(crate) mod smsg_calendar_event_invite_alert;
 pub use smsg_calendar_event_invite_alert::*;
 pub(crate) mod smsg_calendar_event_invite_removed;
 pub use smsg_calendar_event_invite_removed::*;
+pub(crate) mod smsg_calendar_event_invite_removed_alert;
+pub use smsg_calendar_event_invite_removed_alert::*;
 pub(crate) mod smsg_calendar_event_status;
 pub use smsg_calendar_event_status::*;
 pub(crate) mod smsg_calendar_filter_guild;
