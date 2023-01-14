@@ -1,0 +1,37 @@
+enum ReferAFriendError : u8
+{
+    NONE                          = 0x00;
+    NOT_REFERRED_BY               = 0x01;
+    TARGET_TOO_HIGH               = 0x02;
+    INSUFFICIENT_GRANTABLE_LEVELS = 0x03;
+    TOO_FAR                       = 0x04;
+    DIFFERENT_FACTION             = 0x05;
+    NOT_NOW                       = 0x06;
+    GRANT_LEVEL_MAX             = 0x07;
+    NO_TARGET                     = 0x08;
+    NOT_IN_GROUP                  = 0x09;
+    SUMMON_LEVEL_MAX            = 0x0A;
+    SUMMON_COOLDOWN               = 0x0B;
+    INSUFFICIENT_EXPANSION_LEVEL = 0x0C;
+    SUMMON_OFFLINE              = 0x0D;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_REFER_A_FRIEND_FAILURE = 0x0420 {
+    (u32)ReferAFriendError error;
+    if (error == NOT_IN_GROUP) {
+        CString target_name;
+    }
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_REFER_A_FRIEND_FAILURE = 0x0421 {
+    (u32)ReferAFriendError error;
+    if (error == NOT_IN_GROUP) {
+        CString target_name;
+    }
+} {
+    versions = "3.3.5";
+}

@@ -802,6 +802,8 @@ pub mod realm_split_state_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod received_mail_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod refer_a_friend_error_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod roll_vote_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod sell_item_result_vanilla_tbc;

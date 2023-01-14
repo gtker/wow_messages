@@ -1123,6 +1123,8 @@ pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 
 pub use crate::shared::received_mail_tbc_wrath::ReceivedMail;
 
+pub use crate::shared::refer_a_friend_error_tbc_wrath::ReferAFriendError;
+
 pub use crate::shared::roll_vote_tbc_wrath::RollVote;
 
 pub use crate::shared::sell_item_result_vanilla_tbc::SellItemResult;
@@ -1799,6 +1801,8 @@ pub(crate) mod smsg_raid_instance_info;
 pub use smsg_raid_instance_info::*;
 pub(crate) mod smsg_raid_instance_message;
 pub use smsg_raid_instance_message::*;
+pub(crate) mod smsg_refer_a_friend_failure;
+pub use smsg_refer_a_friend_failure::*;
 pub(crate) mod smsg_reset_failed_notify;
 pub use smsg_reset_failed_notify::*;
 pub(crate) mod smsg_send_unlearn_spells;
