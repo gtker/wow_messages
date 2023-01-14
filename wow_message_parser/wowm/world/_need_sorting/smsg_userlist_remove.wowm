@@ -1,0 +1,17 @@
+smsg SMSG_USERLIST_REMOVE = 0x03F0 {
+    Guid player;
+    u8 flags;
+    u32 amount_of_players;
+    CString name;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_USERLIST_REMOVE = 0x03F1 {
+    Guid player;
+    u8 flags;
+    u32 amount_of_players;
+    CString name;
+} {
+    versions = "3.3.5";
+}
