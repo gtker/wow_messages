@@ -2097,6 +2097,8 @@ pub(crate) mod smsg_pet_spells;
 pub use smsg_pet_spells::*;
 pub(crate) mod smsg_pet_tame_failure;
 pub use smsg_pet_tame_failure::*;
+pub(crate) mod smsg_pet_unlearned_spell;
+pub use smsg_pet_unlearned_spell::*;
 pub(crate) mod smsg_pet_update_combo_points;
 pub use smsg_pet_update_combo_points::*;
 pub(crate) mod smsg_petition_query_response;

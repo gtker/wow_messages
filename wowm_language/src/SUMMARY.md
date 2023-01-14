@@ -1137,6 +1137,7 @@
 - [SMSG_PET_NAME_QUERY_RESPONSE](docs/smsg_pet_name_query_response.md)
 - [SMSG_PET_SPELLS](docs/smsg_pet_spells.md)
 - [SMSG_PET_TAME_FAILURE](docs/smsg_pet_tame_failure.md)
+- [SMSG_PET_UNLEARNED_SPELL](docs/smsg_pet_unlearned_spell.md)
 - [SMSG_PET_UNLEARN_CONFIRM](docs/smsg_pet_unlearn_confirm.md)
 - [SMSG_PET_UPDATE_COMBO_POINTS](docs/smsg_pet_update_combo_points.md)
 - [SMSG_PLAYED_TIME](docs/smsg_played_time.md)
