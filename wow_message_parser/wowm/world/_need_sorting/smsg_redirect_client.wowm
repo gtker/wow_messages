@@ -1,0 +1,11 @@
+smsg SMSG_REDIRECT_CLIENT = 0x050D {
+    u32 ip_address;
+    u16 port;
+    u32 unknown;
+    u8[20] hash {
+        comment = "azerothcore: ip + port, seed = sessionkey";
+    }
+} {
+    comment = "Only exists as a comment in azerothcore/trinitycore.";
+    versions = "3.3.5";
+}

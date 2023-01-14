@@ -2211,6 +2211,8 @@ pub(crate) mod smsg_raid_instance_info;
 pub use smsg_raid_instance_info::*;
 pub(crate) mod smsg_raid_instance_message;
 pub use smsg_raid_instance_message::*;
+pub(crate) mod smsg_redirect_client;
+pub use smsg_redirect_client::*;
 pub(crate) mod smsg_refer_a_friend_failure;
 pub use smsg_refer_a_friend_failure::*;
 pub(crate) mod smsg_removed_spell;

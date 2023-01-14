@@ -1216,6 +1216,7 @@
 - [SMSG_READ_ITEM_OK](docs/smsg_read_item_ok.md)
 - [SMSG_REALM_SPLIT](docs/smsg_realm_split.md)
 - [SMSG_RECEIVED_MAIL](docs/smsg_received_mail.md)
+- [SMSG_REDIRECT_CLIENT](docs/smsg_redirect_client.md)
 - [SMSG_REFER_A_FRIEND_FAILURE](docs/smsg_refer_a_friend_failure.md)
 - [SMSG_REMOVED_SPELL](docs/smsg_removed_spell.md)
 - [SMSG_RESET_FAILED_NOTIFY](docs/smsg_reset_failed_notify.md)
