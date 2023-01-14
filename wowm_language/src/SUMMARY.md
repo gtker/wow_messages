@@ -1216,6 +1216,7 @@
 - [SMSG_SET_PHASE_SHIFT](docs/smsg_set_phase_shift.md)
 - [SMSG_SET_PLAYER_DECLINED_NAMES_RESULT](docs/smsg_set_player_declined_names_result.md)
 - [SMSG_SET_PROFICIENCY](docs/smsg_set_proficiency.md)
+- [SMSG_SET_PROJECTILE_POSITION](docs/smsg_set_projectile_position.md)
 - [SMSG_SET_REST_START](docs/smsg_set_rest_start.md)
 - [SMSG_SHOWTAXINODES](docs/smsg_showtaxinodes.md)
 - [SMSG_SHOW_BANK](docs/smsg_show_bank.md)

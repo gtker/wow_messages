@@ -1,0 +1,7 @@
+smsg SMSG_SET_PROJECTILE_POSITION = 0x04BF {
+    Guid caster;
+    u8 amount_of_casts;
+    Vector3d position;
+} {
+    versions = "3.3.5";
+}
