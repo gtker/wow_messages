@@ -1,0 +1,6 @@
+smsg SMSG_BATTLEFIELD_MGR_EJECT_PENDING = 0x04E5 {
+    u32 unknown;
+} {
+    comment = "Only exists as a comment in azerothcore/trinitycore.";
+    versions = "3.3.5";
+}

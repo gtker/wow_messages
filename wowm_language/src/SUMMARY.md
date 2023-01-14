@@ -908,6 +908,7 @@
 - [SMSG_AUTH_RESPONSE](docs/smsg_auth_response.md)
 - [SMSG_BARBER_SHOP_RESULT](docs/smsg_barber_shop_result.md)
 - [SMSG_BATTLEFIELD_LIST](docs/smsg_battlefield_list.md)
+- [SMSG_BATTLEFIELD_MGR_EJECT_PENDING](docs/smsg_battlefield_mgr_eject_pending.md)
 - [SMSG_BATTLEFIELD_MGR_ENTERED](docs/smsg_battlefield_mgr_entered.md)
 - [SMSG_BATTLEFIELD_MGR_ENTRY_INVITE](docs/smsg_battlefield_mgr_entry_invite.md)
 - [SMSG_BATTLEFIELD_MGR_QUEUE_INVITE](docs/smsg_battlefield_mgr_queue_invite.md)

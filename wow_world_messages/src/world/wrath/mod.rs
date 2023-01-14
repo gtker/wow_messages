@@ -1887,6 +1887,8 @@ pub(crate) mod smsg_barber_shop_result;
 pub use smsg_barber_shop_result::*;
 pub(crate) mod smsg_battlefield_list;
 pub use smsg_battlefield_list::*;
+pub(crate) mod smsg_battlefield_mgr_eject_pending;
+pub use smsg_battlefield_mgr_eject_pending::*;
 pub(crate) mod smsg_battlefield_mgr_entered;
 pub use smsg_battlefield_mgr_entered::*;
 pub(crate) mod smsg_battlefield_mgr_entry_invite;
