@@ -3,7 +3,8 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::version::Version;
 use crate::rust_printer::enums::print_wowm_definition;
 use crate::rust_printer::{
-    print_docc_description_and_comment, print_member_docc_description_and_comment, Writer,
+    print_docc_description_and_comment, print_member_docc_description_and_comment,
+    print_serde_derive, Writer,
 };
 use crate::Objects;
 
@@ -23,9 +24,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
     print_wowm_definition("flag", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]");
-    if e.tags().is_in_base() {
-        s.wln("#[cfg_attr(feature = \"serde\", derive(serde::Deserialize, serde::Serialize))]");
-    }
+    print_serde_derive(s, e.tags().is_in_base());
     s.new_flag(e.name(), e.ty().rust_str(), |_| {});
 }
 

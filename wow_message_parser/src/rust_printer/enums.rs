@@ -3,7 +3,8 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::version::Version;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::{
-    print_docc_description_and_comment, print_member_docc_description_and_comment, Writer,
+    print_docc_description_and_comment, print_member_docc_description_and_comment,
+    print_serde_derive, Writer,
 };
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::Objects;
@@ -50,9 +51,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
     print_wowm_definition("enum", s, e);
 
     s.wln("#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]");
-    if e.tags().is_in_base() {
-        s.wln("#[cfg_attr(feature = \"serde\", derive(serde::Deserialize, serde::Serialize))]");
-    }
+    print_serde_derive(s, e.tags().is_in_base());
     let visibility = match e.only_used_in_if() && !common_visibility_override && !e.tags().shared()
     {
         true => "pub(crate)",

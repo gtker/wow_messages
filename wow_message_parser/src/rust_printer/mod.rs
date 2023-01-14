@@ -862,6 +862,12 @@ fn print_member_docc_description_and_comment(
     }
 }
 
+fn print_serde_derive(s: &mut Writer, in_base: bool) {
+    if in_base {
+        s.wln("#[cfg_attr(feature = \"serde\", derive(serde::Deserialize, serde::Serialize))]");
+    }
+}
+
 fn print_docc_description_and_comment(
     s: &mut Writer,
     tags: &ObjectTags,
