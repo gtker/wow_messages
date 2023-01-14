@@ -1,0 +1,20 @@
+struct QuestGiverStatusReport {
+    Guid npc;
+    QuestGiverStatus dialog_status;
+} {
+    paste_versions = "2.4.3 3.3.5";
+}
+
+smsg SMSG_QUESTGIVER_STATUS_MULTIPLE = 0x0417 {
+    u32 amount_of_statuses;
+    QuestGiverStatusReport[amount_of_statuses] statuses;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_QUESTGIVER_STATUS_MULTIPLE = 0x0418 {
+    u32 amount_of_statuses;
+    QuestGiverStatusReport[amount_of_statuses] statuses;
+} {
+    versions = "3.3.5";
+}

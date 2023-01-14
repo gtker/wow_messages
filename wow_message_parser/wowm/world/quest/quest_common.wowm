@@ -152,19 +152,19 @@ enum QuestGiverStatus : u8 {
 }
 
 enum QuestGiverStatus : u8 {
-    DIALOG_STATUS_NONE                     = 0;
-    DIALOG_STATUS_UNAVAILABLE              = 1;
-    DIALOG_STATUS_LOW_LEVEL_AVAILABLE      = 2;
-    DIALOG_STATUS_LOW_LEVEL_REWARD_REP     = 3;
-    DIALOG_STATUS_LOW_LEVEL_AVAILABLE_REP  = 4;
-    DIALOG_STATUS_INCOMPLETE               = 5;
-    DIALOG_STATUS_REWARD_REP               = 6;
-    DIALOG_STATUS_AVAILABLE_REP            = 7;
-    DIALOG_STATUS_AVAILABLE                = 8;
-    DIALOG_STATUS_REWARD2                  = 9 {
+    NONE                     = 0;
+    UNAVAILABLE              = 1;
+    LOW_LEVEL_AVAILABLE      = 2;
+    LOW_LEVEL_REWARD_REP     = 3;
+    LOW_LEVEL_AVAILABLE_REP  = 4;
+    INCOMPLETE               = 5;
+    REWARD_REP               = 6;
+    AVAILABLE_REP            = 7;
+    AVAILABLE                = 8;
+    REWARD2                  = 9 {
         comment = "no yellow dot on minimap";
     }
-    DIALOG_STATUS_REWARD                   = 10 {
+    REWARD                   = 10 {
         comment = "yellow dot on minimap";
     }
 } {
