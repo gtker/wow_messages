@@ -6375,6 +6375,7 @@ use crate::world::tbc::MSG_QUERY_GUILD_BANK_TEXT_Server;
 use crate::world::tbc::SMSG_OVERRIDE_LIGHT;
 use crate::world::tbc::SMSG_TOTEM_CREATED;
 use crate::world::tbc::SMSG_QUESTGIVER_STATUS_MULTIPLE;
+use crate::world::tbc::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -6756,6 +6757,7 @@ pub enum ServerOpcodeMessage {
     SMSG_OVERRIDE_LIGHT(SMSG_OVERRIDE_LIGHT),
     SMSG_TOTEM_CREATED(SMSG_TOTEM_CREATED),
     SMSG_QUESTGIVER_STATUS_MULTIPLE(SMSG_QUESTGIVER_STATUS_MULTIPLE),
+    SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(SMSG_SET_PLAYER_DECLINED_NAMES_RESULT),
 }
 
 impl ServerOpcodeMessage {
@@ -7139,6 +7141,7 @@ impl ServerOpcodeMessage {
             0x0411 => Ok(Self::SMSG_OVERRIDE_LIGHT(<SMSG_OVERRIDE_LIGHT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0411, size: body_size, io, } } else { a } })?)),
             0x0412 => Ok(Self::SMSG_TOTEM_CREATED(<SMSG_TOTEM_CREATED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0412, size: body_size, io, } } else { a } })?)),
             0x0417 => Ok(Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(<SMSG_QUESTGIVER_STATUS_MULTIPLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0417, size: body_size, io, } } else { a } })?)),
+            0x0419 => Ok(Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(<SMSG_SET_PLAYER_DECLINED_NAMES_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0419, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
     }
@@ -7590,6 +7593,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_OVERRIDE_LIGHT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TOTEM_CREATED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -7974,6 +7978,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_OVERRIDE_LIGHT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TOTEM_CREATED(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -8358,6 +8363,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_OVERRIDE_LIGHT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TOTEM_CREATED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -8742,6 +8748,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_OVERRIDE_LIGHT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TOTEM_CREATED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -9126,6 +9133,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_OVERRIDE_LIGHT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TOTEM_CREATED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -9510,6 +9518,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_OVERRIDE_LIGHT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TOTEM_CREATED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -9896,6 +9905,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_OVERRIDE_LIGHT(_) => "SMSG_OVERRIDE_LIGHT",
             ServerOpcodeMessage::SMSG_TOTEM_CREATED(_) => "SMSG_TOTEM_CREATED",
             ServerOpcodeMessage::SMSG_QUESTGIVER_STATUS_MULTIPLE(_) => "SMSG_QUESTGIVER_STATUS_MULTIPLE",
+            ServerOpcodeMessage::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(_) => "SMSG_SET_PLAYER_DECLINED_NAMES_RESULT",
         })
     }
 }
@@ -12165,6 +12175,12 @@ impl From<SMSG_TOTEM_CREATED> for ServerOpcodeMessage {
 impl From<SMSG_QUESTGIVER_STATUS_MULTIPLE> for ServerOpcodeMessage {
     fn from(c: SMSG_QUESTGIVER_STATUS_MULTIPLE) -> Self {
         Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c)
+    }
+}
+
+impl From<SMSG_SET_PLAYER_DECLINED_NAMES_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_PLAYER_DECLINED_NAMES_RESULT) -> Self {
+        Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c)
     }
 }
 

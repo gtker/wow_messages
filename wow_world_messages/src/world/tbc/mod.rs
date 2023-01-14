@@ -1801,6 +1801,8 @@ pub(crate) mod smsg_reset_failed_notify;
 pub use smsg_reset_failed_notify::*;
 pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
+pub(crate) mod smsg_set_player_declined_names_result;
+pub use smsg_set_player_declined_names_result::*;
 pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_spell_failure;

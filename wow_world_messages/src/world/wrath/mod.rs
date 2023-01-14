@@ -2051,6 +2051,8 @@ pub(crate) mod smsg_server_message;
 pub use smsg_server_message::*;
 pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
+pub(crate) mod smsg_set_player_declined_names_result;
+pub use smsg_set_player_declined_names_result::*;
 pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_show_mailbox;
