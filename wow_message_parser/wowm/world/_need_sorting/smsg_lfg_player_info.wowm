@@ -1,0 +1,29 @@
+struct LfgQuestReward {
+    Item item;
+    u32 display_id;
+    u32 amount_of_rewards;
+} {
+     versions = "3.3.5";
+}
+
+struct LfgAvailableDungeon {
+    u32 dungeon_entry;
+    Bool done;
+    u32 quest_reward;
+    u32 xp_reward;
+    u32 unknown1;
+    u32 unknown2;
+    u8 amount_of_rewards;
+    LfgQuestReward[amount_of_rewards] rewards;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_LFG_PLAYER_INFO = 0x036F {
+    u8 amount_of_available_dungeons;
+    LfgAvailableDungeon[amount_of_available_dungeons] available_dungeons;
+    u8 amount_of_locked_dungeons;
+    LfgJoinLockedDungeon[amount_of_locked_dungeons] locked_dungeons;
+} {
+    versions = "3.3.5";
+}
