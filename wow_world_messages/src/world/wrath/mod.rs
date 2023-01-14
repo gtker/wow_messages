@@ -1989,6 +1989,8 @@ pub(crate) mod smsg_enchantmentlog;
 pub use smsg_enchantmentlog::*;
 pub(crate) mod smsg_equipment_set_list;
 pub use smsg_equipment_set_list::*;
+pub(crate) mod smsg_equipment_set_use_result;
+pub use smsg_equipment_set_use_result::*;
 pub(crate) mod smsg_exploration_experience;
 pub use smsg_exploration_experience::*;
 pub(crate) mod smsg_feature_system_status;

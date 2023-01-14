@@ -988,6 +988,7 @@
 - [SMSG_ENCHANTMENTLOG](docs/smsg_enchantmentlog.md)
 - [SMSG_ENVIRONMENTAL_DAMAGE_LOG](docs/smsg_environmental_damage_log.md)
 - [SMSG_EQUIPMENT_SET_LIST](docs/smsg_equipment_set_list.md)
+- [SMSG_EQUIPMENT_SET_USE_RESULT](docs/smsg_equipment_set_use_result.md)
 - [SMSG_EXPECTED_SPAM_RECORDS](docs/smsg_expected_spam_records.md)
 - [SMSG_EXPLORATION_EXPERIENCE](docs/smsg_exploration_experience.md)
 - [SMSG_FEATURE_SYSTEM_STATUS](docs/smsg_feature_system_status.md)

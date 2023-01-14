@@ -1,0 +1,5 @@
+smsg SMSG_EQUIPMENT_SET_USE_RESULT = 0x04D6 {
+    u8 result;
+} {
+    versions = "3.3.5";
+}
