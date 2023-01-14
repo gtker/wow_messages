@@ -1180,6 +1180,7 @@
 - [SMSG_SPLINE_MOVE_LAND_WALK](docs/smsg_spline_move_land_walk.md)
 - [SMSG_SPLINE_MOVE_NORMAL_FALL](docs/smsg_spline_move_normal_fall.md)
 - [SMSG_SPLINE_MOVE_ROOT](docs/smsg_spline_move_root.md)
+- [SMSG_SPLINE_MOVE_SET_FLYING](docs/smsg_spline_move_set_flying.md)
 - [SMSG_SPLINE_MOVE_SET_HOVER](docs/smsg_spline_move_set_hover.md)
 - [SMSG_SPLINE_MOVE_SET_RUN_MODE](docs/smsg_spline_move_set_run_mode.md)
 - [SMSG_SPLINE_MOVE_SET_WALK_MODE](docs/smsg_spline_move_set_walk_mode.md)

@@ -6379,6 +6379,7 @@ use crate::world::tbc::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT;
 use crate::world::tbc::SMSG_SEND_UNLEARN_SPELLS;
 use crate::world::tbc::SMSG_PROPOSE_LEVEL_GRANT;
 use crate::world::tbc::SMSG_REFER_A_FRIEND_FAILURE;
+use crate::world::tbc::SMSG_SPLINE_MOVE_SET_FLYING;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -6764,6 +6765,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SEND_UNLEARN_SPELLS(SMSG_SEND_UNLEARN_SPELLS),
     SMSG_PROPOSE_LEVEL_GRANT(SMSG_PROPOSE_LEVEL_GRANT),
     SMSG_REFER_A_FRIEND_FAILURE(SMSG_REFER_A_FRIEND_FAILURE),
+    SMSG_SPLINE_MOVE_SET_FLYING(SMSG_SPLINE_MOVE_SET_FLYING),
 }
 
 impl ServerOpcodeMessage {
@@ -7151,6 +7153,7 @@ impl ServerOpcodeMessage {
             0x041D => Ok(Self::SMSG_SEND_UNLEARN_SPELLS(<SMSG_SEND_UNLEARN_SPELLS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x041D, size: body_size, io, } } else { a } })?)),
             0x041E => Ok(Self::SMSG_PROPOSE_LEVEL_GRANT(<SMSG_PROPOSE_LEVEL_GRANT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x041E, size: body_size, io, } } else { a } })?)),
             0x0420 => Ok(Self::SMSG_REFER_A_FRIEND_FAILURE(<SMSG_REFER_A_FRIEND_FAILURE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0420, size: body_size, io, } } else { a } })?)),
+            0x0421 => Ok(Self::SMSG_SPLINE_MOVE_SET_FLYING(<SMSG_SPLINE_MOVE_SET_FLYING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0421, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
     }
@@ -7606,6 +7609,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -7994,6 +7998,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.write_unencrypted_server(w),
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.write_unencrypted_server(w),
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -8382,6 +8387,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -8770,6 +8776,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -9158,6 +9165,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -9546,6 +9554,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -9936,6 +9945,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SEND_UNLEARN_SPELLS(_) => "SMSG_SEND_UNLEARN_SPELLS",
             ServerOpcodeMessage::SMSG_PROPOSE_LEVEL_GRANT(_) => "SMSG_PROPOSE_LEVEL_GRANT",
             ServerOpcodeMessage::SMSG_REFER_A_FRIEND_FAILURE(_) => "SMSG_REFER_A_FRIEND_FAILURE",
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_FLYING(_) => "SMSG_SPLINE_MOVE_SET_FLYING",
         })
     }
 }
@@ -12229,6 +12239,12 @@ impl From<SMSG_PROPOSE_LEVEL_GRANT> for ServerOpcodeMessage {
 impl From<SMSG_REFER_A_FRIEND_FAILURE> for ServerOpcodeMessage {
     fn from(c: SMSG_REFER_A_FRIEND_FAILURE) -> Self {
         Self::SMSG_REFER_A_FRIEND_FAILURE(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_SET_FLYING> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_SET_FLYING) -> Self {
+        Self::SMSG_SPLINE_MOVE_SET_FLYING(c)
     }
 }
 

@@ -1827,6 +1827,8 @@ pub(crate) mod smsg_spelllogexecute;
 pub use smsg_spelllogexecute::*;
 pub(crate) mod smsg_spellnonmeleedamagelog;
 pub use smsg_spellnonmeleedamagelog::*;
+pub(crate) mod smsg_spline_move_set_flying;
+pub use smsg_spline_move_set_flying::*;
 pub(crate) mod smsg_summon_request;
 pub use smsg_summon_request::*;
 pub(crate) mod smsg_text_emote;
