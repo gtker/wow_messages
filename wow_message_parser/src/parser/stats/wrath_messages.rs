@@ -838,7 +838,11 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_ACHIEVEMENT_EARNED", 0x468),
     Data::with_reason("SMSG_CRITERIA_UPDATE", 0x46A, "u32 is sent as bit mask"),
     Data::new("CMSG_QUERY_INSPECT_ACHIEVEMENTS", 0x46B),
-    Data::new("SMSG_RESPOND_INSPECT_ACHIEVEMENTS", 0x46C),
+    Data::with_reason(
+        "SMSG_RESPOND_INSPECT_ACHIEVEMENTS",
+        0x46C,
+        "Requires custom dual array that splits on -1.",
+    ),
     Data::new("CMSG_DISMISS_CONTROLLED_VEHICLE", 0x46D),
     Data::new("SMSG_QUESTUPDATE_ADD_PVP_KILL", 0x46F),
     Data::new("SMSG_CALENDAR_RAID_LOCKOUT_UPDATED", 0x471),
