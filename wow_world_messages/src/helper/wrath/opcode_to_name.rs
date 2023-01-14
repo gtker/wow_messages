@@ -901,7 +901,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04c7 => "SMSG_ARENA_UNIT_DESTROYED",
         0x04c8 => "SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED",
         0x04ca => "SMSG_PROFILEDATA_RESPONSE",
-        0x04cd => "SMSG_MULTIPLE_PACKETS",
         0x04ce => "SMSG_MOVE_GRAVITY_DISABLE",
         0x04cf => "CMSG_MOVE_GRAVITY_DISABLE_ACK",
         0x04d0 => "SMSG_MOVE_GRAVITY_ENABLE",
