@@ -1879,6 +1879,8 @@ pub(crate) mod smsg_calendar_event_removed_alert;
 pub use smsg_calendar_event_removed_alert::*;
 pub(crate) mod smsg_calendar_event_status;
 pub use smsg_calendar_event_status::*;
+pub(crate) mod smsg_calendar_event_updated_alert;
+pub use smsg_calendar_event_updated_alert::*;
 pub(crate) mod smsg_calendar_filter_guild;
 pub use smsg_calendar_filter_guild::*;
 pub(crate) mod smsg_calendar_raid_lockout_added;

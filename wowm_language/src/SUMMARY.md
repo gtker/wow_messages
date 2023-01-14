@@ -908,6 +908,7 @@
 - [SMSG_CALENDAR_EVENT_INVITE_REMOVED_ALERT](docs/smsg_calendar_event_invite_removed_alert.md)
 - [SMSG_CALENDAR_EVENT_REMOVED_ALERT](docs/smsg_calendar_event_removed_alert.md)
 - [SMSG_CALENDAR_EVENT_STATUS](docs/smsg_calendar_event_status.md)
+- [SMSG_CALENDAR_EVENT_UPDATED_ALERT](docs/smsg_calendar_event_updated_alert.md)
 - [SMSG_CALENDAR_FILTER_GUILD](docs/smsg_calendar_filter_guild.md)
 - [SMSG_CALENDAR_RAID_LOCKOUT_ADDED](docs/smsg_calendar_raid_lockout_added.md)
 - [SMSG_CALENDAR_RAID_LOCKOUT_REMOVED](docs/smsg_calendar_raid_lockout_removed.md)

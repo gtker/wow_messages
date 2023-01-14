@@ -1,0 +1,16 @@
+smsg SMSG_CALENDAR_EVENT_UPDATED_ALERT = 0x0444 {
+    Bool show_alert;
+    Guid event_id;
+    DateTime old_event_time;
+    u32 flags;
+    DateTime new_event_time;
+    u8 event_type;
+    u32 dungeon_id;
+    CString title;
+    CString description;
+    u8 repeatable;
+    u32 max_invitees;
+    DateTime unknown_time;
+} {
+    versions = "3.3.5";
+}
