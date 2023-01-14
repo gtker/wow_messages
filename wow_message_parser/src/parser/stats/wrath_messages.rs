@@ -767,7 +767,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("MSG_GUILD_EVENT_LOG_QUERY", 0x3FF),
     Data::new("CMSG_GET_MIRRORIMAGE_DATA", 0x401),
     Data::new("SMSG_MIRRORIMAGE_DATA", 0x402),
-    Data::new("SMSG_FORCE_DISPLAY_UPDATE", 0x403),
+    Data::nyi("SMSG_FORCE_DISPLAY_UPDATE", 0x403),
     Data::new("SMSG_SPELL_CHANCE_RESIST_PUSHBACK", 0x404),
     Data::new("CMSG_KEEP_ALIVE", 0x407),
     Data::new("SMSG_RAID_READY_CHECK_ERROR", 0x408),
