@@ -1,0 +1,30 @@
+enum TalentInfoType : u8 {
+    PLAYER = 0;
+    PET = 1;
+} {
+     versions = "3.3.5";
+}
+
+struct TalentInfoSpec {
+    u8 amount_of_talents;
+    InspectTalent[amount_of_talents] talents;
+    u8 amount_of_glyphs;
+    u16[amount_of_glyphs] glyphs;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_TALENTS_INFO = 0x04C0 {
+    TalentInfoType talent_type;
+    u32 points_left;
+    if (talent_type == PET) {
+        u8 amount_of_talents;
+        InspectTalent[amount_of_talents] talents;
+    } else if (talent_type == PLAYER) {
+        u8 amount_of_specs;
+        u8 active_spec;
+        TalentInfoSpec[amount_of_specs] specs;
+    }
+} {
+    versions = "3.3.5";
+}
