@@ -1839,6 +1839,8 @@ pub(crate) mod smsg_character_login_failed;
 pub use smsg_character_login_failed::*;
 pub(crate) mod smsg_chat_restricted;
 pub use smsg_chat_restricted::*;
+pub(crate) mod smsg_clear_target;
+pub use smsg_clear_target::*;
 pub(crate) mod smsg_clientcache_version;
 pub use smsg_clientcache_version::*;
 pub(crate) mod smsg_contact_list;

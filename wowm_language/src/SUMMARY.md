@@ -901,6 +901,7 @@
 - [SMSG_CHAT_RESTRICTED](docs/smsg_chat_restricted.md)
 - [SMSG_CHAT_WRONG_FACTION](docs/smsg_chat_wrong_faction.md)
 - [SMSG_CLEAR_COOLDOWN](docs/smsg_clear_cooldown.md)
+- [SMSG_CLEAR_TARGET](docs/smsg_clear_target.md)
 - [SMSG_CLIENTCACHE_VERSION](docs/smsg_clientcache_version.md)
 - [SMSG_CLIENT_CONTROL_UPDATE](docs/smsg_client_control_update.md)
 - [SMSG_COMPRESSED_MOVES](docs/smsg_compressed_moves.md)

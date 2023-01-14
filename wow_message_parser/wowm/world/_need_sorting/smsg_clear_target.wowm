@@ -1,0 +1,5 @@
+smsg SMSG_CLEAR_TARGET = 0x03BF {
+    Guid target;
+} {
+    versions = "3.3.5";
+}
