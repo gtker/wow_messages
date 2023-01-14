@@ -1148,6 +1148,7 @@
 - [SMSG_QUESTLOG_FULL](docs/smsg_questlog_full.md)
 - [SMSG_QUESTUPDATE_ADD_ITEM](docs/smsg_questupdate_add_item.md)
 - [SMSG_QUESTUPDATE_ADD_KILL](docs/smsg_questupdate_add_kill.md)
+- [SMSG_QUESTUPDATE_ADD_PVP_KILL](docs/smsg_questupdate_add_pvp_kill.md)
 - [SMSG_QUESTUPDATE_COMPLETE](docs/smsg_questupdate_complete.md)
 - [SMSG_QUESTUPDATE_FAILED](docs/smsg_questupdate_failed.md)
 - [SMSG_QUESTUPDATE_FAILEDTIMER](docs/smsg_questupdate_failedtimer.md)

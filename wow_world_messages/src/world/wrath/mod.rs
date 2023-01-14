@@ -2101,6 +2101,8 @@ pub(crate) mod smsg_questgiver_status;
 pub use smsg_questgiver_status::*;
 pub(crate) mod smsg_questgiver_status_multiple;
 pub use smsg_questgiver_status_multiple::*;
+pub(crate) mod smsg_questupdate_add_pvp_kill;
+pub use smsg_questupdate_add_pvp_kill::*;
 pub(crate) mod smsg_raid_instance_info;
 pub use smsg_raid_instance_info::*;
 pub(crate) mod smsg_raid_instance_message;

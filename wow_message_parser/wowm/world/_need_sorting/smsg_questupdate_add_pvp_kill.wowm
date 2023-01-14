@@ -1,0 +1,7 @@
+smsg SMSG_QUESTUPDATE_ADD_PVP_KILL = 0x046F {
+    u32 quest_id;
+    u32 count;
+    u32 players_slain;
+} {
+    versions = "3.3.5";
+}
