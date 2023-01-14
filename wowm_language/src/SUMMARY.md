@@ -974,6 +974,7 @@
 - [SMSG_CONVERT_RUNE](docs/smsg_convert_rune.md)
 - [SMSG_COOLDOWN_EVENT](docs/smsg_cooldown_event.md)
 - [SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE](docs/smsg_corpse_map_position_query_response.md)
+- [SMSG_CORPSE_NOT_IN_INSTANCE](docs/smsg_corpse_not_in_instance.md)
 - [SMSG_CORPSE_RECLAIM_DELAY](docs/smsg_corpse_reclaim_delay.md)
 - [SMSG_CREATURE_QUERY_RESPONSE](docs/smsg_creature_query_response.md)
 - [SMSG_CRITERIA_DELETED](docs/smsg_criteria_deleted.md)

@@ -1,0 +1,3 @@
+smsg SMSG_CORPSE_NOT_IN_INSTANCE = 0x0506 {} {
+    versions = "3.3.5";
+}

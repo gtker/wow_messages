@@ -1985,6 +1985,8 @@ pub(crate) mod smsg_convert_rune;
 pub use smsg_convert_rune::*;
 pub(crate) mod smsg_corpse_map_position_query_response;
 pub use smsg_corpse_map_position_query_response::*;
+pub(crate) mod smsg_corpse_not_in_instance;
+pub use smsg_corpse_not_in_instance::*;
 pub(crate) mod smsg_creature_query_response;
 pub use smsg_creature_query_response::*;
 pub(crate) mod smsg_criteria_deleted;
