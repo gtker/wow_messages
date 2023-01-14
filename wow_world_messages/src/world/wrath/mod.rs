@@ -1923,6 +1923,8 @@ pub(crate) mod smsg_lfg_update_party;
 pub use smsg_lfg_update_party::*;
 pub(crate) mod smsg_lfg_update_player;
 pub use smsg_lfg_update_player::*;
+pub(crate) mod smsg_lfg_update_search;
+pub use smsg_lfg_update_search::*;
 pub(crate) mod smsg_log_xpgain;
 pub use smsg_log_xpgain::*;
 pub(crate) mod smsg_login_settimespeed;

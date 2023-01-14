@@ -1,0 +1,5 @@
+smsg SMSG_LFG_UPDATE_SEARCH = 0x0369 {
+    Bool in_lfg_queue;
+} {
+    versions = "3.3.5";
+}
