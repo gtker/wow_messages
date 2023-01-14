@@ -1865,6 +1865,8 @@ pub(crate) mod smsg_break_target;
 pub use smsg_break_target::*;
 pub(crate) mod smsg_calendar_arena_team;
 pub use smsg_calendar_arena_team::*;
+pub(crate) mod smsg_calendar_command_result;
+pub use smsg_calendar_command_result::*;
 pub(crate) mod smsg_calendar_event_invite;
 pub use smsg_calendar_event_invite::*;
 pub(crate) mod smsg_calendar_event_invite_removed;
