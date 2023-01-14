@@ -36,6 +36,7 @@
 - [SecurityFlag](docs/securityflag.md)
 
 # World Definers
+- [AchievementNameLinkType](docs/achievementnamelinktype.md)
 - [ActionBarBehavior](docs/actionbarbehavior.md)
 - [ActivateTaxiReply](docs/activatetaxireply.md)
 - [AddonType](docs/addontype.md)
@@ -1189,6 +1190,7 @@
 - [SMSG_SELL_ITEM](docs/smsg_sell_item.md)
 - [SMSG_SEND_MAIL_RESULT](docs/smsg_send_mail_result.md)
 - [SMSG_SEND_UNLEARN_SPELLS](docs/smsg_send_unlearn_spells.md)
+- [SMSG_SERVER_FIRST_ACHIEVEMENT](docs/smsg_server_first_achievement.md)
 - [SMSG_SERVER_MESSAGE](docs/smsg_server_message.md)
 - [SMSG_SET_FACTION_STANDING](docs/smsg_set_faction_standing.md)
 - [SMSG_SET_FACTION_VISIBLE](docs/smsg_set_faction_visible.md)

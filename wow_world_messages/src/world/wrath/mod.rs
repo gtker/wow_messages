@@ -1,3 +1,5 @@
+pub(crate) mod achievement_name_link_type;
+pub use achievement_name_link_type::*;
 pub(crate) mod action_bar_behavior;
 pub use action_bar_behavior::*;
 pub(crate) mod action_button;
@@ -2151,6 +2153,8 @@ pub(crate) mod smsg_sell_item;
 pub use smsg_sell_item::*;
 pub(crate) mod smsg_send_unlearn_spells;
 pub use smsg_send_unlearn_spells::*;
+pub(crate) mod smsg_server_first_achievement;
+pub use smsg_server_first_achievement::*;
 pub(crate) mod smsg_server_message;
 pub use smsg_server_message::*;
 pub(crate) mod smsg_set_faction_standing;

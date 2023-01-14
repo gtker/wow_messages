@@ -1,0 +1,15 @@
+enum AchievementNameLinkType : u8 {
+    NORMAL = 0;
+    CLICKABLE = 1;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_SERVER_FIRST_ACHIEVEMENT = 0x0498 {
+    CString name;
+    Guid player;
+    u32 achievement;
+    AchievementNameLinkType link_type;
+} {
+    versions = "3.3.5";
+}
