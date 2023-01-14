@@ -1,0 +1,9 @@
+smsg SMSG_CAMERA_SHAKE = 0x050A {
+    u32 camera_shake_id {
+        comment = "SpellEffectCameraShakes.dbc";
+    }
+    u32 unknown;
+} {
+    comment = "Only exists as a comment in trinitycore/azerothcore.";
+    versions = "3.3.5";
+}

@@ -945,6 +945,7 @@
 - [SMSG_CALENDAR_SEND_CALENDAR](docs/smsg_calendar_send_calendar.md)
 - [SMSG_CALENDAR_SEND_EVENT](docs/smsg_calendar_send_event.md)
 - [SMSG_CALENDAR_SEND_NUM_PENDING](docs/smsg_calendar_send_num_pending.md)
+- [SMSG_CAMERA_SHAKE](docs/smsg_camera_shake.md)
 - [SMSG_CANCEL_AUTO_REPEAT](docs/smsg_cancel_auto_repeat.md)
 - [SMSG_CANCEL_COMBAT](docs/smsg_cancel_combat.md)
 - [SMSG_CAST_FAILED](docs/smsg_cast_failed.md)

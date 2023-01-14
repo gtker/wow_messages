@@ -1951,6 +1951,8 @@ pub(crate) mod smsg_calendar_send_event;
 pub use smsg_calendar_send_event::*;
 pub(crate) mod smsg_calendar_send_num_pending;
 pub use smsg_calendar_send_num_pending::*;
+pub(crate) mod smsg_camera_shake;
+pub use smsg_camera_shake::*;
 pub(crate) mod smsg_cancel_auto_repeat;
 pub use smsg_cancel_auto_repeat::*;
 pub(crate) mod smsg_cast_failed;
