@@ -1,0 +1,7 @@
+smsg SMSG_CROSSED_INEBRIATION_THRESHOLD = 0x03C1 {
+    Guid player;
+    u32 state;
+    Item item;
+} {
+    versions = "3.3.5";
+}
