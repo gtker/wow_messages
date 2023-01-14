@@ -775,7 +775,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_SET_GUILD_BANK_TEXT", 0x40B),
     Data::new("CMSG_GRANT_LEVEL", 0x40D),
     Data::nyi("CMSG_DECLINE_CHANNEL_INVITE", 0x410),
-    Data::new("SMSG_GROUPACTION_THROTTLED", 0x411),
+    Data::nyi("SMSG_GROUPACTION_THROTTLED", 0x411),
     Data::new("SMSG_OVERRIDE_LIGHT", 0x412),
     Data::new("SMSG_TOTEM_CREATED", 0x413),
     Data::new("CMSG_TOTEM_DESTROYED", 0x414),
