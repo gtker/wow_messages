@@ -855,7 +855,11 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_REQUEST_VEHICLE_SWITCH_SEAT", 0x479),
     Data::new("CMSG_PET_LEARN_TALENT", 0x47A),
     Data::new("SMSG_SET_PHASE_SHIFT", 0x47C),
-    Data::new("SMSG_ALL_ACHIEVEMENT_DATA", 0x47D),
+    Data::with_reason(
+        "SMSG_ALL_ACHIEVEMENT_DATA",
+        0x47D,
+        "Requires custom dual array that splits on -1.",
+    ),
     Data::new("SMSG_HEALTH_UPDATE", 0x47F),
     Data::new("SMSG_POWER_UPDATE", 0x480),
     Data::new("CMSG_GAMEOBJ_REPORT_USE", 0x481),
