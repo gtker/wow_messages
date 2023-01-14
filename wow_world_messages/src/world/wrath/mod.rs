@@ -2267,6 +2267,8 @@ pub(crate) mod smsg_threat_remove;
 pub use smsg_threat_remove::*;
 pub(crate) mod smsg_threat_update;
 pub use smsg_threat_update::*;
+pub(crate) mod smsg_toggle_xp_gain;
+pub use smsg_toggle_xp_gain::*;
 pub(crate) mod smsg_totem_created;
 pub use smsg_totem_created::*;
 pub(crate) mod smsg_trade_status;

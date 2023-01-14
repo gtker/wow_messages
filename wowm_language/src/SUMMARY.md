@@ -1291,6 +1291,7 @@
 - [SMSG_THREAT_UPDATE](docs/smsg_threat_update.md)
 - [SMSG_TIME_SYNC_REQ](docs/smsg_time_sync_req.md)
 - [SMSG_TITLE_EARNED](docs/smsg_title_earned.md)
+- [SMSG_TOGGLE_XP_GAIN](docs/smsg_toggle_xp_gain.md)
 - [SMSG_TOTEM_CREATED](docs/smsg_totem_created.md)
 - [SMSG_TRADE_STATUS](docs/smsg_trade_status.md)
 - [SMSG_TRADE_STATUS_EXTENDED](docs/smsg_trade_status_extended.md)
