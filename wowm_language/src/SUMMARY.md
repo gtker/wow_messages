@@ -915,6 +915,7 @@
 - [SMSG_BUY_FAILED](docs/smsg_buy_failed.md)
 - [SMSG_BUY_ITEM](docs/smsg_buy_item.md)
 - [SMSG_CALENDAR_ARENA_TEAM](docs/smsg_calendar_arena_team.md)
+- [SMSG_CALENDAR_CLEAR_PENDING_ACTION](docs/smsg_calendar_clear_pending_action.md)
 - [SMSG_CALENDAR_COMMAND_RESULT](docs/smsg_calendar_command_result.md)
 - [SMSG_CALENDAR_EVENT_INVITE](docs/smsg_calendar_event_invite.md)
 - [SMSG_CALENDAR_EVENT_INVITE_ALERT](docs/smsg_calendar_event_invite_alert.md)

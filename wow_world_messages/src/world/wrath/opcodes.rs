@@ -7667,6 +7667,7 @@ use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 use crate::world::wrath::SMSG_ITEM_REFUND_INFO_RESPONSE;
 use crate::world::wrath::SMSG_ITEM_REFUND_RESULT;
 use crate::world::wrath::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE;
+use crate::world::wrath::SMSG_CALENDAR_CLEAR_PENDING_ACTION;
 use crate::world::wrath::MSG_MOVE_GRAVITY_CHNG_Server;
 use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
 use crate::world::wrath::SMSG_WORLD_STATE_UI_TIMER_UPDATE;
@@ -8146,6 +8147,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ITEM_REFUND_INFO_RESPONSE(SMSG_ITEM_REFUND_INFO_RESPONSE),
     SMSG_ITEM_REFUND_RESULT(SMSG_ITEM_REFUND_RESULT),
     SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE),
+    SMSG_CALENDAR_CLEAR_PENDING_ACTION(SMSG_CALENDAR_CLEAR_PENDING_ACTION),
     MSG_MOVE_GRAVITY_CHNG(MSG_MOVE_GRAVITY_CHNG_Server),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
     SMSG_WORLD_STATE_UI_TIMER_UPDATE(SMSG_WORLD_STATE_UI_TIMER_UPDATE),
@@ -8627,6 +8629,7 @@ impl ServerOpcodeMessage {
             0x04B2 => Ok(Self::SMSG_ITEM_REFUND_INFO_RESPONSE(<SMSG_ITEM_REFUND_INFO_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B2, size: body_size, io, } } else { a } })?)),
             0x04B5 => Ok(Self::SMSG_ITEM_REFUND_RESULT(<SMSG_ITEM_REFUND_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B5, size: body_size, io, } } else { a } })?)),
             0x04B7 => Ok(Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(<SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B7, size: body_size, io, } } else { a } })?)),
+            0x04BB => Ok(Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(<SMSG_CALENDAR_CLEAR_PENDING_ACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BB, size: body_size, io, } } else { a } })?)),
             0x04D2 => Ok(Self::MSG_MOVE_GRAVITY_CHNG(<MSG_MOVE_GRAVITY_CHNG_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04D2, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
             0x04F7 => Ok(Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(<SMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F7, size: body_size, io, } } else { a } })?)),
@@ -9257,6 +9260,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_server(w, e),
@@ -9739,6 +9743,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_server(w),
@@ -10221,6 +10226,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10703,6 +10709,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11185,6 +11192,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11667,6 +11675,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -12159,6 +12168,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ITEM_REFUND_INFO_RESPONSE(_) => "SMSG_ITEM_REFUND_INFO_RESPONSE",
             ServerOpcodeMessage::SMSG_ITEM_REFUND_RESULT(_) => "SMSG_ITEM_REFUND_RESULT",
             ServerOpcodeMessage::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(_) => "SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE",
+            ServerOpcodeMessage::SMSG_CALENDAR_CLEAR_PENDING_ACTION(_) => "SMSG_CALENDAR_CLEAR_PENDING_ACTION",
             ServerOpcodeMessage::MSG_MOVE_GRAVITY_CHNG(_) => "MSG_MOVE_GRAVITY_CHNG_Server",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
             ServerOpcodeMessage::SMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "SMSG_WORLD_STATE_UI_TIMER_UPDATE",
@@ -15001,6 +15011,12 @@ impl From<SMSG_ITEM_REFUND_RESULT> for ServerOpcodeMessage {
 impl From<SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE> for ServerOpcodeMessage {
     fn from(c: SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE) -> Self {
         Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c)
+    }
+}
+
+impl From<SMSG_CALENDAR_CLEAR_PENDING_ACTION> for ServerOpcodeMessage {
+    fn from(c: SMSG_CALENDAR_CLEAR_PENDING_ACTION) -> Self {
+        Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c)
     }
 }
 
