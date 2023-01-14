@@ -910,7 +910,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x04d4 => "SMSG_SPLINE_MOVE_GRAVITY_ENABLE",
         0x04d5 => "CMSG_EQUIPMENT_SET_USE",
         0x04d6 => "SMSG_EQUIPMENT_SET_USE_RESULT",
-        0x04d8 => "SMSG_FORCE_ANIM",
         0x04d9 => "CMSG_CHAR_FACTION_CHANGE",
         0x04da => "SMSG_CHAR_FACTION_CHANGE",
         0x04dc => "SMSG_PVP_QUEUE_STATS",
