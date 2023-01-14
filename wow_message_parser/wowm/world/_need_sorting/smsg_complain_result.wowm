@@ -1,0 +1,24 @@
+enum ComplainResultWindow : u8 {
+    DO_NOT_SHOW = 0;
+    SHOW = 1;
+} {
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_COMPLAIN_RESULT = 0x03C7 {
+    u8 unknown {
+        comment = "All emulators set to 0.";
+    }
+    ComplainResultWindow window_result;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_COMPLAIN_RESULT = 0x03C8 {
+    u8 unknown {
+        comment = "All emulators set to 0.";
+    }
+    ComplainResultWindow window_result;
+} {
+    versions = "3.3.5";
+}

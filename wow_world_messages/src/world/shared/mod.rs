@@ -550,6 +550,8 @@ pub mod cmsg_whois_vanilla_tbc_wrath;
 pub mod cmsg_wrap_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod commentator_enable_option_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod complain_result_window_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cooldown_spell_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

@@ -875,6 +875,8 @@ pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
 pub use crate::shared::commentator_enable_option_tbc_wrath::CommentatorEnableOption;
 
+pub use crate::shared::complain_result_window_tbc_wrath::ComplainResultWindow;
+
 pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
@@ -1697,6 +1699,8 @@ pub(crate) mod smsg_character_login_failed;
 pub use smsg_character_login_failed::*;
 pub(crate) mod smsg_chat_restricted;
 pub use smsg_chat_restricted::*;
+pub(crate) mod smsg_complain_result;
+pub use smsg_complain_result::*;
 pub(crate) mod smsg_creature_query_response;
 pub use smsg_creature_query_response::*;
 pub(crate) mod smsg_death_release_loc;
