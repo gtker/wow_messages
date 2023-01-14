@@ -2047,6 +2047,8 @@ pub(crate) mod smsg_reset_failed_notify;
 pub use smsg_reset_failed_notify::*;
 pub(crate) mod smsg_sell_item;
 pub use smsg_sell_item::*;
+pub(crate) mod smsg_send_unlearn_spells;
+pub use smsg_send_unlearn_spells::*;
 pub(crate) mod smsg_server_message;
 pub use smsg_server_message::*;
 pub(crate) mod smsg_set_faction_standing;
