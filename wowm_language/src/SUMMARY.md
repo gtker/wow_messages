@@ -864,6 +864,7 @@
 - [SMSG_ACTION_BUTTONS](docs/smsg_action_buttons.md)
 - [SMSG_ACTIVATETAXIREPLY](docs/smsg_activatetaxireply.md)
 - [SMSG_ADDON_INFO](docs/smsg_addon_info.md)
+- [SMSG_ADD_RUNE_POWER](docs/smsg_add_rune_power.md)
 - [SMSG_AI_REACTION](docs/smsg_ai_reaction.md)
 - [SMSG_AREA_SPIRIT_HEALER_TIME](docs/smsg_area_spirit_healer_time.md)
 - [SMSG_AREA_TRIGGER_MESSAGE](docs/smsg_area_trigger_message.md)

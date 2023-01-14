@@ -1835,6 +1835,8 @@ pub(crate) mod smsg_achievement_earned;
 pub use smsg_achievement_earned::*;
 pub(crate) mod smsg_action_buttons;
 pub use smsg_action_buttons::*;
+pub(crate) mod smsg_add_rune_power;
+pub use smsg_add_rune_power::*;
 pub(crate) mod smsg_addon_info;
 pub use smsg_addon_info::*;
 pub(crate) mod smsg_arena_team_roster;

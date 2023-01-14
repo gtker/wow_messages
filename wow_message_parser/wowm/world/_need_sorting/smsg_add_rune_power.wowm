@@ -1,0 +1,8 @@
+smsg SMSG_ADD_RUNE_POWER = 0x0488 {
+    u32 rune {
+        comment = "Emus bitshifts 1 by the rune index instead of directly sending the index.";
+        comment = "mangostwo: mask (0x00-0x3F probably)";
+    }
+} {
+    versions = "3.3.5";
+}
