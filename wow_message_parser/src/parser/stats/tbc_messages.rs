@@ -803,5 +803,5 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_REFER_A_FRIEND_FAILURE", 0x420),
     Data::new("SMSG_SPLINE_MOVE_SET_FLYING", 0x421),
     Data::new("SMSG_SPLINE_MOVE_UNSET_FLYING", 0x422),
-    Data::new("SMSG_SUMMON_CANCEL", 0x423),
+    Data::nyi("SMSG_SUMMON_CANCEL", 0x423),
 ];

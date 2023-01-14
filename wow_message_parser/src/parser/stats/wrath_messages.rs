@@ -789,7 +789,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_REFER_A_FRIEND_FAILURE", 0x421),
     Data::new("SMSG_SPLINE_MOVE_SET_FLYING", 0x422),
     Data::new("SMSG_SPLINE_MOVE_UNSET_FLYING", 0x423),
-    Data::new("SMSG_SUMMON_CANCEL", 0x424),
+    Data::nyi("SMSG_SUMMON_CANCEL", 0x424),
     Data::new("CMSG_ALTER_APPEARANCE", 0x426),
     Data::new("SMSG_ENABLE_BARBER_SHOP", 0x427),
     Data::new("SMSG_BARBER_SHOP_RESULT", 0x428),
