@@ -1,0 +1,15 @@
+smsg SMSG_KICK_REASON = 0x03C4 {
+    u8 reason;
+    CString text;
+} {
+    comment = "All that exists of this is an implementation in cmangos-tbc.";
+    versions = "2.4.3";
+}
+
+smsg SMSG_KICK_REASON = 0x03C5 {
+    u8 reason;
+    CString text;
+} {
+    comment = "All that exists of this is an implementation in cmangos-tbc.";
+    versions = "3.3.5";
+}

@@ -6360,6 +6360,7 @@ use crate::world::tbc::SMSG_DISMOUNT;
 use crate::world::tbc::MSG_MOVE_UPDATE_CAN_FLY_Server;
 use crate::world::tbc::MSG_RAID_READY_CHECK_CONFIRM_Server;
 use crate::world::tbc::SMSG_GM_MESSAGECHAT;
+use crate::world::tbc::SMSG_KICK_REASON;
 use crate::world::tbc::MSG_GUILD_BANK_LOG_QUERY_Server;
 use crate::world::tbc::MSG_GUILD_PERMISSIONS_Server;
 use crate::world::tbc::MSG_GUILD_EVENT_LOG_QUERY_Server;
@@ -6730,6 +6731,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_UPDATE_CAN_FLY(MSG_MOVE_UPDATE_CAN_FLY_Server),
     MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Server),
     SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
+    SMSG_KICK_REASON(SMSG_KICK_REASON),
     MSG_GUILD_BANK_LOG_QUERY(MSG_GUILD_BANK_LOG_QUERY_Server),
     MSG_GUILD_PERMISSIONS(MSG_GUILD_PERMISSIONS_Server),
     MSG_GUILD_EVENT_LOG_QUERY(MSG_GUILD_EVENT_LOG_QUERY_Server),
@@ -7102,6 +7104,7 @@ impl ServerOpcodeMessage {
             0x03AD => Ok(Self::MSG_MOVE_UPDATE_CAN_FLY(<MSG_MOVE_UPDATE_CAN_FLY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AD, size: body_size, io, } } else { a } })?)),
             0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
             0x03B2 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B2, size: body_size, io, } } else { a } })?)),
+            0x03C4 => Ok(Self::SMSG_KICK_REASON(<SMSG_KICK_REASON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C4, size: body_size, io, } } else { a } })?)),
             0x03ED => Ok(Self::MSG_GUILD_BANK_LOG_QUERY(<MSG_GUILD_BANK_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03ED, size: body_size, io, } } else { a } })?)),
             0x03FC => Ok(Self::MSG_GUILD_PERMISSIONS(<MSG_GUILD_PERMISSIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FC, size: body_size, io, } } else { a } })?)),
             0x03FE => Ok(Self::MSG_GUILD_EVENT_LOG_QUERY(<MSG_GUILD_EVENT_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FE, size: body_size, io, } } else { a } })?)),
@@ -7542,6 +7545,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_encrypted_server(w, e),
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_KICK_REASON(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_encrypted_server(w, e),
@@ -7915,6 +7919,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_unencrypted_server(w),
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_KICK_REASON(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_unencrypted_server(w),
@@ -8288,6 +8293,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_KICK_REASON(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8661,6 +8667,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_KICK_REASON(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -9034,6 +9041,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_KICK_REASON(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9407,6 +9415,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_KICK_REASON(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_BANK_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
@@ -9782,6 +9791,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_UPDATE_CAN_FLY(_) => "MSG_MOVE_UPDATE_CAN_FLY_Server",
             ServerOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
+            ServerOpcodeMessage::SMSG_KICK_REASON(_) => "SMSG_KICK_REASON",
             ServerOpcodeMessage::MSG_GUILD_BANK_LOG_QUERY(_) => "MSG_GUILD_BANK_LOG_QUERY_Server",
             ServerOpcodeMessage::MSG_GUILD_PERMISSIONS(_) => "MSG_GUILD_PERMISSIONS_Server",
             ServerOpcodeMessage::MSG_GUILD_EVENT_LOG_QUERY(_) => "MSG_GUILD_EVENT_LOG_QUERY_Server",
@@ -11965,6 +11975,12 @@ impl From<MSG_RAID_READY_CHECK_CONFIRM_Server> for ServerOpcodeMessage {
 impl From<SMSG_GM_MESSAGECHAT> for ServerOpcodeMessage {
     fn from(c: SMSG_GM_MESSAGECHAT) -> Self {
         Self::SMSG_GM_MESSAGECHAT(c)
+    }
+}
+
+impl From<SMSG_KICK_REASON> for ServerOpcodeMessage {
+    fn from(c: SMSG_KICK_REASON) -> Self {
+        Self::SMSG_KICK_REASON(c)
     }
 }
 

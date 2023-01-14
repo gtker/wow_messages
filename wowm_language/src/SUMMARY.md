@@ -996,6 +996,7 @@
 - [SMSG_ITEM_QUERY_SINGLE_RESPONSE](docs/smsg_item_query_single_response.md)
 - [SMSG_ITEM_TEXT_QUERY_RESPONSE](docs/smsg_item_text_query_response.md)
 - [SMSG_ITEM_TIME_UPDATE](docs/smsg_item_time_update.md)
+- [SMSG_KICK_REASON](docs/smsg_kick_reason.md)
 - [SMSG_LEARNED_SPELL](docs/smsg_learned_spell.md)
 - [SMSG_LEVELUP_INFO](docs/smsg_levelup_info.md)
 - [SMSG_LFG_BOOT_PROPOSAL_UPDATE](docs/smsg_lfg_boot_proposal_update.md)

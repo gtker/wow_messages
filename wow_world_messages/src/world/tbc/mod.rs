@@ -1737,6 +1737,8 @@ pub(crate) mod smsg_inventory_change_failure;
 pub use smsg_inventory_change_failure::*;
 pub(crate) mod smsg_item_query_single_response;
 pub use smsg_item_query_single_response::*;
+pub(crate) mod smsg_kick_reason;
+pub use smsg_kick_reason::*;
 pub(crate) mod smsg_learned_spell;
 pub use smsg_learned_spell::*;
 pub(crate) mod smsg_login_verify_world;
