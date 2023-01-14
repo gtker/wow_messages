@@ -758,7 +758,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_USERLIST_UPDATE", 0x3F2),
     Data::new("CMSG_CLEAR_CHANNEL_WATCH", 0x3F3),
     Data::new("SMSG_INSPECT_TALENT", 0x3F4),
-    Data::new("SMSG_ECHO_PARTY_SQUELCH", 0x3F6),
+    Data::nyi("SMSG_ECHO_PARTY_SQUELCH", 0x3F6),
     Data::new("CMSG_SPELLCLICK", 0x3F8),
     Data::new("SMSG_LOOT_LIST", 0x3F9),
     Data::new("SMSG_VOICESESSION_FULL", 0x3FC),
