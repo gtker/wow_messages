@@ -903,6 +903,7 @@
 - [SMSG_CALENDAR_ARENA_TEAM](docs/smsg_calendar_arena_team.md)
 - [SMSG_CALENDAR_COMMAND_RESULT](docs/smsg_calendar_command_result.md)
 - [SMSG_CALENDAR_EVENT_INVITE](docs/smsg_calendar_event_invite.md)
+- [SMSG_CALENDAR_EVENT_INVITE_ALERT](docs/smsg_calendar_event_invite_alert.md)
 - [SMSG_CALENDAR_EVENT_INVITE_REMOVED](docs/smsg_calendar_event_invite_removed.md)
 - [SMSG_CALENDAR_EVENT_STATUS](docs/smsg_calendar_event_status.md)
 - [SMSG_CALENDAR_FILTER_GUILD](docs/smsg_calendar_filter_guild.md)

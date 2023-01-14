@@ -1,0 +1,15 @@
+smsg SMSG_CALENDAR_EVENT_INVITE_ALERT = 0x0440 {
+    Guid event_id;
+    CString title;
+    DateTime event_time;
+    u32 flags;
+    u32 event_type;
+    u32 dungeon_id;
+    Guid invite_id;
+    u8 status;
+    u8 rank;
+    PackedGuid event_creator;
+    PackedGuid invite_sender;
+} {
+    versions = "3.3.5";
+}
