@@ -45,5 +45,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `GROUP_DISBAND` | 16 (0x10) |  |  |
 
 Used in:
+* [SMSG_LFG_UPDATE_PARTY](smsg_lfg_update_party.md)
 * [SMSG_LFG_UPDATE_PLAYER](smsg_lfg_update_player.md)
 

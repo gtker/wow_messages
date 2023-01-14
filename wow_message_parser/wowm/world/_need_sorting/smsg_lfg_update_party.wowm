@@ -1,0 +1,15 @@
+smsg SMSG_LFG_UPDATE_PARTY = 0x0368 {
+    LfgUpdateType update_type;
+    LfgJoinStatus join_status;
+    if (join_status == JOINED) {
+        u8 joined;
+        u8 queued;
+        u8 no_partial_clear;
+        u8 achievements;
+        u8 amount_of_dungeons;
+        u32[amount_of_dungeons] dungeons;
+        CString comment;
+    }
+} {
+    versions = "3.3.5";
+}

@@ -1002,6 +1002,7 @@
 - [SMSG_LFG_ROLE_CHECK_UPDATE](docs/smsg_lfg_role_check_update.md)
 - [SMSG_LFG_ROLE_CHOSEN](docs/smsg_lfg_role_chosen.md)
 - [SMSG_LFG_TELEPORT_DENIED](docs/smsg_lfg_teleport_denied.md)
+- [SMSG_LFG_UPDATE_PARTY](docs/smsg_lfg_update_party.md)
 - [SMSG_LFG_UPDATE_PLAYER](docs/smsg_lfg_update_player.md)
 - [SMSG_LIST_INVENTORY](docs/smsg_list_inventory.md)
 - [SMSG_LOGIN_SETTIMESPEED](docs/smsg_login_settimespeed.md)
