@@ -1,0 +1,5 @@
+smsg SMSG_SPLINE_MOVE_GRAVITY_DISABLE = 0x04D3 {
+    PackedGuid unit;
+} {
+    versions = "3.3.5";
+}

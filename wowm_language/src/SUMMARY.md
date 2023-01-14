@@ -1245,6 +1245,8 @@
 - [SMSG_SPELL_UPDATE_CHAIN_TARGETS](docs/smsg_spell_update_chain_targets.md)
 - [SMSG_SPIRIT_HEALER_CONFIRM](docs/smsg_spirit_healer_confirm.md)
 - [SMSG_SPLINE_MOVE_FEATHER_FALL](docs/smsg_spline_move_feather_fall.md)
+- [SMSG_SPLINE_MOVE_GRAVITY_DISABLE](docs/smsg_spline_move_gravity_disable.md)
+- [SMSG_SPLINE_MOVE_GRAVITY_ENABLE](docs/smsg_spline_move_gravity_enable.md)
 - [SMSG_SPLINE_MOVE_LAND_WALK](docs/smsg_spline_move_land_walk.md)
 - [SMSG_SPLINE_MOVE_NORMAL_FALL](docs/smsg_spline_move_normal_fall.md)
 - [SMSG_SPLINE_MOVE_ROOT](docs/smsg_spline_move_root.md)
