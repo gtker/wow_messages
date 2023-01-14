@@ -1,0 +1,5 @@
+smsg SMSG_GMRESPONSE_STATUS_UPDATE = 0x04F1 {
+    Bool show_survey;
+} {
+    versions = "3.3.5";
+}

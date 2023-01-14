@@ -7691,6 +7691,7 @@ use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
 use crate::world::wrath::SMSG_TOGGLE_XP_GAIN;
 use crate::world::wrath::SMSG_GMRESPONSE_DB_ERROR;
 use crate::world::wrath::SMSG_GMRESPONSE_RECEIVED;
+use crate::world::wrath::SMSG_GMRESPONSE_STATUS_UPDATE;
 use crate::world::wrath::SMSG_WORLD_STATE_UI_TIMER_UPDATE;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -8192,6 +8193,7 @@ pub enum ServerOpcodeMessage {
     SMSG_TOGGLE_XP_GAIN(SMSG_TOGGLE_XP_GAIN),
     SMSG_GMRESPONSE_DB_ERROR(SMSG_GMRESPONSE_DB_ERROR),
     SMSG_GMRESPONSE_RECEIVED(SMSG_GMRESPONSE_RECEIVED),
+    SMSG_GMRESPONSE_STATUS_UPDATE(SMSG_GMRESPONSE_STATUS_UPDATE),
     SMSG_WORLD_STATE_UI_TIMER_UPDATE(SMSG_WORLD_STATE_UI_TIMER_UPDATE),
 }
 
@@ -8695,6 +8697,7 @@ impl ServerOpcodeMessage {
             0x04ED => Ok(Self::SMSG_TOGGLE_XP_GAIN(<SMSG_TOGGLE_XP_GAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04ED, size: body_size, io, } } else { a } })?)),
             0x04EE => Ok(Self::SMSG_GMRESPONSE_DB_ERROR(<SMSG_GMRESPONSE_DB_ERROR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EE, size: body_size, io, } } else { a } })?)),
             0x04EF => Ok(Self::SMSG_GMRESPONSE_RECEIVED(<SMSG_GMRESPONSE_RECEIVED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EF, size: body_size, io, } } else { a } })?)),
+            0x04F1 => Ok(Self::SMSG_GMRESPONSE_STATUS_UPDATE(<SMSG_GMRESPONSE_STATUS_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F1, size: body_size, io, } } else { a } })?)),
             0x04F7 => Ok(Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(<SMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F7, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
@@ -9347,6 +9350,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TOGGLE_XP_GAIN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_server(w, e),
         }
     }
@@ -9851,6 +9855,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TOGGLE_XP_GAIN(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_server(w),
         }
     }
@@ -10355,6 +10360,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TOGGLE_XP_GAIN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
@@ -10859,6 +10865,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TOGGLE_XP_GAIN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
@@ -11363,6 +11370,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TOGGLE_XP_GAIN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
@@ -11867,6 +11875,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TOGGLE_XP_GAIN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
@@ -12381,6 +12390,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_TOGGLE_XP_GAIN(_) => "SMSG_TOGGLE_XP_GAIN",
             ServerOpcodeMessage::SMSG_GMRESPONSE_DB_ERROR(_) => "SMSG_GMRESPONSE_DB_ERROR",
             ServerOpcodeMessage::SMSG_GMRESPONSE_RECEIVED(_) => "SMSG_GMRESPONSE_RECEIVED",
+            ServerOpcodeMessage::SMSG_GMRESPONSE_STATUS_UPDATE(_) => "SMSG_GMRESPONSE_STATUS_UPDATE",
             ServerOpcodeMessage::SMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "SMSG_WORLD_STATE_UI_TIMER_UPDATE",
         })
     }
@@ -15365,6 +15375,12 @@ impl From<SMSG_GMRESPONSE_DB_ERROR> for ServerOpcodeMessage {
 impl From<SMSG_GMRESPONSE_RECEIVED> for ServerOpcodeMessage {
     fn from(c: SMSG_GMRESPONSE_RECEIVED) -> Self {
         Self::SMSG_GMRESPONSE_RECEIVED(c)
+    }
+}
+
+impl From<SMSG_GMRESPONSE_STATUS_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_GMRESPONSE_STATUS_UPDATE) -> Self {
+        Self::SMSG_GMRESPONSE_STATUS_UPDATE(c)
     }
 }
 

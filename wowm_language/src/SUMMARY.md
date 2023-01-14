@@ -1026,6 +1026,7 @@
 - [SMSG_GAMEOBJECT_SPAWN_ANIM](docs/smsg_gameobject_spawn_anim.md)
 - [SMSG_GMRESPONSE_DB_ERROR](docs/smsg_gmresponse_db_error.md)
 - [SMSG_GMRESPONSE_RECEIVED](docs/smsg_gmresponse_received.md)
+- [SMSG_GMRESPONSE_STATUS_UPDATE](docs/smsg_gmresponse_status_update.md)
 - [SMSG_GMTICKET_CREATE](docs/smsg_gmticket_create.md)
 - [SMSG_GMTICKET_DELETETICKET](docs/smsg_gmticket_deleteticket.md)
 - [SMSG_GMTICKET_GETTICKET](docs/smsg_gmticket_getticket.md)

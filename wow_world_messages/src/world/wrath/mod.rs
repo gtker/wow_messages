@@ -2029,6 +2029,8 @@ pub(crate) mod smsg_gmresponse_db_error;
 pub use smsg_gmresponse_db_error::*;
 pub(crate) mod smsg_gmresponse_received;
 pub use smsg_gmresponse_received::*;
+pub(crate) mod smsg_gmresponse_status_update;
+pub use smsg_gmresponse_status_update::*;
 pub(crate) mod smsg_gmticket_getticket;
 pub use smsg_gmticket_getticket::*;
 pub(crate) mod smsg_gossip_message;
