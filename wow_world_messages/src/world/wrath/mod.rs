@@ -2113,6 +2113,8 @@ pub(crate) mod smsg_petition_query_response;
 pub use smsg_petition_query_response::*;
 pub(crate) mod smsg_played_time;
 pub use smsg_played_time::*;
+pub(crate) mod smsg_player_vehicle_data;
+pub use smsg_player_vehicle_data::*;
 pub(crate) mod smsg_playerbound;
 pub use smsg_playerbound::*;
 pub(crate) mod smsg_power_update;

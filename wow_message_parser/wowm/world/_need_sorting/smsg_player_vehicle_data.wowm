@@ -1,0 +1,6 @@
+smsg SMSG_PLAYER_VEHICLE_DATA = 0x04A7 {
+    PackedGuid target;
+    u32 vehicle_id;
+} {
+    versions = "3.3.5";
+}

@@ -1147,6 +1147,7 @@
 - [SMSG_PLAYED_TIME](docs/smsg_played_time.md)
 - [SMSG_PLAYERBOUND](docs/smsg_playerbound.md)
 - [SMSG_PLAYER_SKINNED](docs/smsg_player_skinned.md)
+- [SMSG_PLAYER_VEHICLE_DATA](docs/smsg_player_vehicle_data.md)
 - [SMSG_PLAY_MUSIC](docs/smsg_play_music.md)
 - [SMSG_PLAY_OBJECT_SOUND](docs/smsg_play_object_sound.md)
 - [SMSG_PLAY_SOUND](docs/smsg_play_sound.md)
