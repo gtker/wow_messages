@@ -7650,6 +7650,7 @@ use crate::world::wrath::SMSG_RESYNC_RUNES;
 use crate::world::wrath::SMSG_ADD_RUNE_POWER;
 use crate::world::wrath::SMSG_AUCTION_LIST_PENDING_SALES;
 use crate::world::wrath::SMSG_MODIFY_COOLDOWN;
+use crate::world::wrath::SMSG_PET_UPDATE_COMBO_POINTS;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 use crate::world::wrath::MSG_MOVE_GRAVITY_CHNG_Server;
 use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
@@ -8113,6 +8114,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ADD_RUNE_POWER(SMSG_ADD_RUNE_POWER),
     SMSG_AUCTION_LIST_PENDING_SALES(SMSG_AUCTION_LIST_PENDING_SALES),
     SMSG_MODIFY_COOLDOWN(SMSG_MODIFY_COOLDOWN),
+    SMSG_PET_UPDATE_COMBO_POINTS(SMSG_PET_UPDATE_COMBO_POINTS),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
     MSG_MOVE_GRAVITY_CHNG(MSG_MOVE_GRAVITY_CHNG_Server),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
@@ -8578,6 +8580,7 @@ impl ServerOpcodeMessage {
             0x0488 => Ok(Self::SMSG_ADD_RUNE_POWER(<SMSG_ADD_RUNE_POWER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0488, size: body_size, io, } } else { a } })?)),
             0x0490 => Ok(Self::SMSG_AUCTION_LIST_PENDING_SALES(<SMSG_AUCTION_LIST_PENDING_SALES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0490, size: body_size, io, } } else { a } })?)),
             0x0491 => Ok(Self::SMSG_MODIFY_COOLDOWN(<SMSG_MODIFY_COOLDOWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0491, size: body_size, io, } } else { a } })?)),
+            0x0492 => Ok(Self::SMSG_PET_UPDATE_COMBO_POINTS(<SMSG_PET_UPDATE_COMBO_POINTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0492, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
             0x04D2 => Ok(Self::MSG_MOVE_GRAVITY_CHNG(<MSG_MOVE_GRAVITY_CHNG_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04D2, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
@@ -9192,6 +9195,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADD_RUNE_POWER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_LIST_PENDING_SALES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MODIFY_COOLDOWN(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PET_UPDATE_COMBO_POINTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
@@ -9658,6 +9662,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADD_RUNE_POWER(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_LIST_PENDING_SALES(c) => c.write_unencrypted_server(w),
             Self::SMSG_MODIFY_COOLDOWN(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PET_UPDATE_COMBO_POINTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
@@ -10124,6 +10129,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADD_RUNE_POWER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_PENDING_SALES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MODIFY_COOLDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_UPDATE_COMBO_POINTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10590,6 +10596,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADD_RUNE_POWER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_PENDING_SALES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MODIFY_COOLDOWN(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PET_UPDATE_COMBO_POINTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11056,6 +11063,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADD_RUNE_POWER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_PENDING_SALES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MODIFY_COOLDOWN(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_UPDATE_COMBO_POINTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11522,6 +11530,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ADD_RUNE_POWER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_PENDING_SALES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MODIFY_COOLDOWN(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PET_UPDATE_COMBO_POINTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
@@ -11998,6 +12007,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ADD_RUNE_POWER(_) => "SMSG_ADD_RUNE_POWER",
             ServerOpcodeMessage::SMSG_AUCTION_LIST_PENDING_SALES(_) => "SMSG_AUCTION_LIST_PENDING_SALES",
             ServerOpcodeMessage::SMSG_MODIFY_COOLDOWN(_) => "SMSG_MODIFY_COOLDOWN",
+            ServerOpcodeMessage::SMSG_PET_UPDATE_COMBO_POINTS(_) => "SMSG_PET_UPDATE_COMBO_POINTS",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
             ServerOpcodeMessage::MSG_MOVE_GRAVITY_CHNG(_) => "MSG_MOVE_GRAVITY_CHNG_Server",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
@@ -14739,6 +14749,12 @@ impl From<SMSG_AUCTION_LIST_PENDING_SALES> for ServerOpcodeMessage {
 impl From<SMSG_MODIFY_COOLDOWN> for ServerOpcodeMessage {
     fn from(c: SMSG_MODIFY_COOLDOWN) -> Self {
         Self::SMSG_MODIFY_COOLDOWN(c)
+    }
+}
+
+impl From<SMSG_PET_UPDATE_COMBO_POINTS> for ServerOpcodeMessage {
+    fn from(c: SMSG_PET_UPDATE_COMBO_POINTS) -> Self {
+        Self::SMSG_PET_UPDATE_COMBO_POINTS(c)
     }
 }
 

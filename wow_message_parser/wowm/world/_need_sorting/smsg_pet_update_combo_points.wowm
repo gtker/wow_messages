@@ -1,0 +1,7 @@
+smsg SMSG_PET_UPDATE_COMBO_POINTS = 0x0492 {
+    PackedGuid unit;
+    PackedGuid target;
+    u8 combo_points;
+} {
+    versions = "3.3.5";
+}
