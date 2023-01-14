@@ -2135,6 +2135,8 @@ pub(crate) mod smsg_move_gravity_disable;
 pub use smsg_move_gravity_disable::*;
 pub(crate) mod smsg_move_gravity_enable;
 pub use smsg_move_gravity_enable::*;
+pub(crate) mod smsg_move_set_collision_hgt;
+pub use smsg_move_set_collision_hgt::*;
 pub(crate) mod smsg_name_query_response;
 pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_world;

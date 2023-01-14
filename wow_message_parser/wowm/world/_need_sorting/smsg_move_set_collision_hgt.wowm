@@ -1,0 +1,7 @@
+smsg SMSG_MOVE_SET_COLLISION_HGT = 0x0516 {
+    PackedGuid unit;
+    u32 packet_counter;
+    f32 collision_height;
+} {
+    versions = "3.3.5";
+}
