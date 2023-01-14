@@ -945,6 +945,7 @@
 - [SMSG_COMPRESSED_MOVES](docs/smsg_compressed_moves.md)
 - [SMSG_COMPRESSED_UPDATE_OBJECT](docs/smsg_compressed_update_object.md)
 - [SMSG_CONTACT_LIST](docs/smsg_contact_list.md)
+- [SMSG_CONVERT_RUNE](docs/smsg_convert_rune.md)
 - [SMSG_COOLDOWN_EVENT](docs/smsg_cooldown_event.md)
 - [SMSG_CORPSE_RECLAIM_DELAY](docs/smsg_corpse_reclaim_delay.md)
 - [SMSG_CREATURE_QUERY_RESPONSE](docs/smsg_creature_query_response.md)

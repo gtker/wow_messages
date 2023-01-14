@@ -1931,6 +1931,8 @@ pub(crate) mod smsg_complain_result;
 pub use smsg_complain_result::*;
 pub(crate) mod smsg_contact_list;
 pub use smsg_contact_list::*;
+pub(crate) mod smsg_convert_rune;
+pub use smsg_convert_rune::*;
 pub(crate) mod smsg_creature_query_response;
 pub use smsg_creature_query_response::*;
 pub(crate) mod smsg_crossed_inebriation_threshold;

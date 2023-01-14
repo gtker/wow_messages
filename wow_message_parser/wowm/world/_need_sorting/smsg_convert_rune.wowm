@@ -1,0 +1,6 @@
+smsg SMSG_CONVERT_RUNE = 0x0486 {
+    u8 index;
+    u8 new_type;
+} {
+    versions = "3.3.5";
+}
