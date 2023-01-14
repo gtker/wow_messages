@@ -1991,6 +1991,8 @@ pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_npc_text_update;
 pub use smsg_npc_text_update::*;
+pub(crate) mod smsg_override_light;
+pub use smsg_override_light::*;
 pub(crate) mod smsg_party_command_result;
 pub use smsg_party_command_result::*;
 pub(crate) mod smsg_periodicauralog;

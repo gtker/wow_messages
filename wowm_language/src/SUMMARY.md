@@ -1073,6 +1073,7 @@
 - [SMSG_NOTIFICATION](docs/smsg_notification.md)
 - [SMSG_NPC_TEXT_UPDATE](docs/smsg_npc_text_update.md)
 - [SMSG_OPEN_CONTAINER](docs/smsg_open_container.md)
+- [SMSG_OVERRIDE_LIGHT](docs/smsg_override_light.md)
 - [SMSG_PAGE_TEXT_QUERY_RESPONSE](docs/smsg_page_text_query_response.md)
 - [SMSG_PARTYKILLLOG](docs/smsg_partykilllog.md)
 - [SMSG_PARTY_COMMAND_RESULT](docs/smsg_party_command_result.md)
