@@ -2173,6 +2173,8 @@ pub(crate) mod smsg_pre_resurrect;
 pub use smsg_pre_resurrect::*;
 pub(crate) mod smsg_propose_level_grant;
 pub use smsg_propose_level_grant::*;
+pub(crate) mod smsg_query_quests_completed_response;
+pub use smsg_query_quests_completed_response::*;
 pub(crate) mod smsg_query_time_response;
 pub use smsg_query_time_response::*;
 pub(crate) mod smsg_quest_force_remove;

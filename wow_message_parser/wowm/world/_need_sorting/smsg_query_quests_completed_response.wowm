@@ -1,0 +1,6 @@
+smsg SMSG_QUERY_QUESTS_COMPLETED_RESPONSE = 0x0501 {
+    u32 amount_of_reward_quests;
+    u32[amount_of_reward_quests] reward_quests;
+} {
+    versions = "3.3.5";
+}

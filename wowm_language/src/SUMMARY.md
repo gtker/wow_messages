@@ -1185,6 +1185,7 @@
 - [SMSG_PROCRESIST](docs/smsg_procresist.md)
 - [SMSG_PROPOSE_LEVEL_GRANT](docs/smsg_propose_level_grant.md)
 - [SMSG_PVP_CREDIT](docs/smsg_pvp_credit.md)
+- [SMSG_QUERY_QUESTS_COMPLETED_RESPONSE](docs/smsg_query_quests_completed_response.md)
 - [SMSG_QUERY_TIME_RESPONSE](docs/smsg_query_time_response.md)
 - [SMSG_QUESTGIVER_OFFER_REWARD](docs/smsg_questgiver_offer_reward.md)
 - [SMSG_QUESTGIVER_QUEST_COMPLETE](docs/smsg_questgiver_quest_complete.md)

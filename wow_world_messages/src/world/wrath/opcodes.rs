@@ -7694,6 +7694,7 @@ use crate::world::wrath::SMSG_GMRESPONSE_RECEIVED;
 use crate::world::wrath::SMSG_GMRESPONSE_STATUS_UPDATE;
 use crate::world::wrath::SMSG_WORLD_STATE_UI_TIMER_UPDATE;
 use crate::world::wrath::SMSG_TALENTS_INVOLUNTARILY_RESET;
+use crate::world::wrath::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -8197,6 +8198,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GMRESPONSE_STATUS_UPDATE(SMSG_GMRESPONSE_STATUS_UPDATE),
     SMSG_WORLD_STATE_UI_TIMER_UPDATE(SMSG_WORLD_STATE_UI_TIMER_UPDATE),
     SMSG_TALENTS_INVOLUNTARILY_RESET(SMSG_TALENTS_INVOLUNTARILY_RESET),
+    SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(SMSG_QUERY_QUESTS_COMPLETED_RESPONSE),
 }
 
 impl ServerOpcodeMessage {
@@ -8702,6 +8704,7 @@ impl ServerOpcodeMessage {
             0x04F1 => Ok(Self::SMSG_GMRESPONSE_STATUS_UPDATE(<SMSG_GMRESPONSE_STATUS_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F1, size: body_size, io, } } else { a } })?)),
             0x04F7 => Ok(Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(<SMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F7, size: body_size, io, } } else { a } })?)),
             0x04FA => Ok(Self::SMSG_TALENTS_INVOLUNTARILY_RESET(<SMSG_TALENTS_INVOLUNTARILY_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FA, size: body_size, io, } } else { a } })?)),
+            0x0501 => Ok(Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(<SMSG_QUERY_QUESTS_COMPLETED_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0501, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
     }
@@ -9356,6 +9359,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -9862,6 +9866,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.write_unencrypted_server(w),
+            Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -10368,6 +10373,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -10874,6 +10880,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -11380,6 +11387,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -11886,6 +11894,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -12402,6 +12411,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GMRESPONSE_STATUS_UPDATE(_) => "SMSG_GMRESPONSE_STATUS_UPDATE",
             ServerOpcodeMessage::SMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "SMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ServerOpcodeMessage::SMSG_TALENTS_INVOLUNTARILY_RESET(_) => "SMSG_TALENTS_INVOLUNTARILY_RESET",
+            ServerOpcodeMessage::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(_) => "SMSG_QUERY_QUESTS_COMPLETED_RESPONSE",
         })
     }
 }
@@ -15403,6 +15413,12 @@ impl From<SMSG_WORLD_STATE_UI_TIMER_UPDATE> for ServerOpcodeMessage {
 impl From<SMSG_TALENTS_INVOLUNTARILY_RESET> for ServerOpcodeMessage {
     fn from(c: SMSG_TALENTS_INVOLUNTARILY_RESET) -> Self {
         Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c)
+    }
+}
+
+impl From<SMSG_QUERY_QUESTS_COMPLETED_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUERY_QUESTS_COMPLETED_RESPONSE) -> Self {
+        Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c)
     }
 }
 
