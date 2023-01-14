@@ -1879,6 +1879,8 @@ pub(crate) mod smsg_battlefield_list;
 pub use smsg_battlefield_list::*;
 pub(crate) mod smsg_battlefield_status;
 pub use smsg_battlefield_status::*;
+pub(crate) mod smsg_battleground_info_throttled;
+pub use smsg_battleground_info_throttled::*;
 pub(crate) mod smsg_binder_confirm;
 pub use smsg_binder_confirm::*;
 pub(crate) mod smsg_bindpointupdate;

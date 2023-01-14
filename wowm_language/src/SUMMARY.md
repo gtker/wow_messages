@@ -903,6 +903,7 @@
 - [SMSG_BARBER_SHOP_RESULT](docs/smsg_barber_shop_result.md)
 - [SMSG_BATTLEFIELD_LIST](docs/smsg_battlefield_list.md)
 - [SMSG_BATTLEFIELD_STATUS](docs/smsg_battlefield_status.md)
+- [SMSG_BATTLEGROUND_INFO_THROTTLED](docs/smsg_battleground_info_throttled.md)
 - [SMSG_BATTLEGROUND_PLAYER_JOINED](docs/smsg_battleground_player_joined.md)
 - [SMSG_BATTLEGROUND_PLAYER_LEFT](docs/smsg_battleground_player_left.md)
 - [SMSG_BINDER_CONFIRM](docs/smsg_binder_confirm.md)

@@ -7660,6 +7660,7 @@ use crate::world::wrath::SMSG_PET_UNLEARNED_SPELL;
 use crate::world::wrath::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA;
 use crate::world::wrath::SMSG_CRITERIA_DELETED;
 use crate::world::wrath::SMSG_ACHIEVEMENT_DELETED;
+use crate::world::wrath::SMSG_BATTLEGROUND_INFO_THROTTLED;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 use crate::world::wrath::MSG_MOVE_GRAVITY_CHNG_Server;
 use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
@@ -8133,6 +8134,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA),
     SMSG_CRITERIA_DELETED(SMSG_CRITERIA_DELETED),
     SMSG_ACHIEVEMENT_DELETED(SMSG_ACHIEVEMENT_DELETED),
+    SMSG_BATTLEGROUND_INFO_THROTTLED(SMSG_BATTLEGROUND_INFO_THROTTLED),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
     MSG_MOVE_GRAVITY_CHNG(MSG_MOVE_GRAVITY_CHNG_Server),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
@@ -8608,6 +8610,7 @@ impl ServerOpcodeMessage {
             0x049D => Ok(Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(<SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049D, size: body_size, io, } } else { a } })?)),
             0x049E => Ok(Self::SMSG_CRITERIA_DELETED(<SMSG_CRITERIA_DELETED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049E, size: body_size, io, } } else { a } })?)),
             0x049F => Ok(Self::SMSG_ACHIEVEMENT_DELETED(<SMSG_ACHIEVEMENT_DELETED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049F, size: body_size, io, } } else { a } })?)),
+            0x04A6 => Ok(Self::SMSG_BATTLEGROUND_INFO_THROTTLED(<SMSG_BATTLEGROUND_INFO_THROTTLED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04A6, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
             0x04D2 => Ok(Self::MSG_MOVE_GRAVITY_CHNG(<MSG_MOVE_GRAVITY_CHNG_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04D2, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
@@ -9232,6 +9235,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CRITERIA_DELETED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
@@ -9708,6 +9712,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.write_unencrypted_server(w),
             Self::SMSG_CRITERIA_DELETED(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
@@ -10184,6 +10189,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CRITERIA_DELETED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10660,6 +10666,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CRITERIA_DELETED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11136,6 +11143,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CRITERIA_DELETED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11612,6 +11620,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CRITERIA_DELETED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
@@ -12098,6 +12107,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(_) => "SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA",
             ServerOpcodeMessage::SMSG_CRITERIA_DELETED(_) => "SMSG_CRITERIA_DELETED",
             ServerOpcodeMessage::SMSG_ACHIEVEMENT_DELETED(_) => "SMSG_ACHIEVEMENT_DELETED",
+            ServerOpcodeMessage::SMSG_BATTLEGROUND_INFO_THROTTLED(_) => "SMSG_BATTLEGROUND_INFO_THROTTLED",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
             ServerOpcodeMessage::MSG_MOVE_GRAVITY_CHNG(_) => "MSG_MOVE_GRAVITY_CHNG_Server",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
@@ -14899,6 +14909,12 @@ impl From<SMSG_CRITERIA_DELETED> for ServerOpcodeMessage {
 impl From<SMSG_ACHIEVEMENT_DELETED> for ServerOpcodeMessage {
     fn from(c: SMSG_ACHIEVEMENT_DELETED) -> Self {
         Self::SMSG_ACHIEVEMENT_DELETED(c)
+    }
+}
+
+impl From<SMSG_BATTLEGROUND_INFO_THROTTLED> for ServerOpcodeMessage {
+    fn from(c: SMSG_BATTLEGROUND_INFO_THROTTLED) -> Self {
+        Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c)
     }
 }
 
