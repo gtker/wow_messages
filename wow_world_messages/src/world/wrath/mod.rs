@@ -1893,6 +1893,8 @@ pub(crate) mod smsg_battlefield_mgr_entry_invite;
 pub use smsg_battlefield_mgr_entry_invite::*;
 pub(crate) mod smsg_battlefield_mgr_queue_invite;
 pub use smsg_battlefield_mgr_queue_invite::*;
+pub(crate) mod smsg_battlefield_mgr_queue_request_response;
+pub use smsg_battlefield_mgr_queue_request_response::*;
 pub(crate) mod smsg_battlefield_status;
 pub use smsg_battlefield_status::*;
 pub(crate) mod smsg_battleground_info_throttled;

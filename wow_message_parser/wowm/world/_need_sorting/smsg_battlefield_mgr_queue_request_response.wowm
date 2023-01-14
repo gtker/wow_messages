@@ -1,0 +1,9 @@
+smsg SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE = 0x04E4 {
+    u32 battle_id;
+    Area area;
+    Bool queued;
+    Bool full;
+    Bool warmup;
+} {
+    versions = "3.3.5";
+}
