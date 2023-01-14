@@ -1,0 +1,8 @@
+smsg SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT = 0x0445 {
+    PackedGuid invitee;
+    Guid event_id;
+    u8 rank;
+    Bool show_alert;
+} {
+    versions = "3.3.5";
+}
