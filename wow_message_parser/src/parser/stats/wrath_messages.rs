@@ -942,7 +942,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_GMRESPONSE_RESOLVE", 0x4F0),
     Data::new("SMSG_GMRESPONSE_STATUS_UPDATE", 0x4F1),
     Data::nyi("SMSG_GMRESPONSE_CREATE_TICKET", 0x4F2),
-    Data::new("SMSG_SERVERINFO", 0x4F5),
+    Data::nyi("SMSG_SERVERINFO", 0x4F5),
     Data::new("CMSG_WORLD_STATE_UI_TIMER_UPDATE", 0x4F6),
     Data::new("SMSG_WORLD_STATE_UI_TIMER_UPDATE", 0x4F7),
     Data::new("CMSG_CHAR_RACE_CHANGE", 0x4F8),
