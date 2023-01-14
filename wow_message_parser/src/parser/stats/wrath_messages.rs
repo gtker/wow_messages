@@ -836,7 +836,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_TRIGGER_MOVIE", 0x464),
     Data::new("CMSG_COMPLETE_MOVIE", 0x465),
     Data::new("SMSG_ACHIEVEMENT_EARNED", 0x468),
-    Data::new("SMSG_CRITERIA_UPDATE", 0x46A),
+    Data::with_reason("SMSG_CRITERIA_UPDATE", 0x46A, "u32 is sent as bit mask"),
     Data::new("CMSG_QUERY_INSPECT_ACHIEVEMENTS", 0x46B),
     Data::new("SMSG_RESPOND_INSPECT_ACHIEVEMENTS", 0x46C),
     Data::new("CMSG_DISMISS_CONTROLLED_VEHICLE", 0x46D),
