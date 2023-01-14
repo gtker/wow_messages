@@ -1214,6 +1214,7 @@
 - [SMSG_UPDATE_WORLD_STATE](docs/smsg_update_world_state.md)
 - [SMSG_USERLIST_ADD](docs/smsg_userlist_add.md)
 - [SMSG_USERLIST_REMOVE](docs/smsg_userlist_remove.md)
+- [SMSG_USERLIST_UPDATE](docs/smsg_userlist_update.md)
 - [SMSG_WARDEN_DATA](docs/smsg_warden_data.md)
 - [SMSG_WEATHER](docs/smsg_weather.md)
 - [SMSG_WHO](docs/smsg_who.md)

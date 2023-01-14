@@ -1829,6 +1829,8 @@ pub(crate) mod smsg_userlist_add;
 pub use smsg_userlist_add::*;
 pub(crate) mod smsg_userlist_remove;
 pub use smsg_userlist_remove::*;
+pub(crate) mod smsg_userlist_update;
+pub use smsg_userlist_update::*;
 pub(crate) mod smsg_weather;
 pub use smsg_weather::*;
 pub(crate) mod smsg_who;
