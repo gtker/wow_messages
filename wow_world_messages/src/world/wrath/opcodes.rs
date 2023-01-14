@@ -7658,6 +7658,7 @@ use crate::world::wrath::SMSG_SERVER_FIRST_ACHIEVEMENT;
 use crate::world::wrath::SMSG_PET_LEARNED_SPELL;
 use crate::world::wrath::SMSG_PET_UNLEARNED_SPELL;
 use crate::world::wrath::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA;
+use crate::world::wrath::SMSG_CRITERIA_DELETED;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 use crate::world::wrath::MSG_MOVE_GRAVITY_CHNG_Server;
 use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
@@ -8129,6 +8130,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PET_LEARNED_SPELL(SMSG_PET_LEARNED_SPELL),
     SMSG_PET_UNLEARNED_SPELL(SMSG_PET_UNLEARNED_SPELL),
     SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA),
+    SMSG_CRITERIA_DELETED(SMSG_CRITERIA_DELETED),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
     MSG_MOVE_GRAVITY_CHNG(MSG_MOVE_GRAVITY_CHNG_Server),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
@@ -8602,6 +8604,7 @@ impl ServerOpcodeMessage {
             0x0499 => Ok(Self::SMSG_PET_LEARNED_SPELL(<SMSG_PET_LEARNED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0499, size: body_size, io, } } else { a } })?)),
             0x049A => Ok(Self::SMSG_PET_UNLEARNED_SPELL(<SMSG_PET_UNLEARNED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049A, size: body_size, io, } } else { a } })?)),
             0x049D => Ok(Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(<SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049D, size: body_size, io, } } else { a } })?)),
+            0x049E => Ok(Self::SMSG_CRITERIA_DELETED(<SMSG_CRITERIA_DELETED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049E, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
             0x04D2 => Ok(Self::MSG_MOVE_GRAVITY_CHNG(<MSG_MOVE_GRAVITY_CHNG_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04D2, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
@@ -9224,6 +9227,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_LEARNED_SPELL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CRITERIA_DELETED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
@@ -9698,6 +9702,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_LEARNED_SPELL(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.write_unencrypted_server(w),
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CRITERIA_DELETED(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
@@ -10172,6 +10177,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_LEARNED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CRITERIA_DELETED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10646,6 +10652,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_LEARNED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CRITERIA_DELETED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11120,6 +11127,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_LEARNED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CRITERIA_DELETED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11594,6 +11602,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_LEARNED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CRITERIA_DELETED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
@@ -12078,6 +12087,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PET_LEARNED_SPELL(_) => "SMSG_PET_LEARNED_SPELL",
             ServerOpcodeMessage::SMSG_PET_UNLEARNED_SPELL(_) => "SMSG_PET_UNLEARNED_SPELL",
             ServerOpcodeMessage::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(_) => "SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA",
+            ServerOpcodeMessage::SMSG_CRITERIA_DELETED(_) => "SMSG_CRITERIA_DELETED",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
             ServerOpcodeMessage::MSG_MOVE_GRAVITY_CHNG(_) => "MSG_MOVE_GRAVITY_CHNG_Server",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
@@ -14867,6 +14877,12 @@ impl From<SMSG_PET_UNLEARNED_SPELL> for ServerOpcodeMessage {
 impl From<SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA> for ServerOpcodeMessage {
     fn from(c: SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA) -> Self {
         Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c)
+    }
+}
+
+impl From<SMSG_CRITERIA_DELETED> for ServerOpcodeMessage {
+    fn from(c: SMSG_CRITERIA_DELETED) -> Self {
+        Self::SMSG_CRITERIA_DELETED(c)
     }
 }
 

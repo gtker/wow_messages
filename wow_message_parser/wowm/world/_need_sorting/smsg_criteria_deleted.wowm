@@ -1,0 +1,5 @@
+smsg SMSG_CRITERIA_DELETED = 0x049E {
+    u32 criteria_id;
+} {
+    versions = "3.3.5";
+}

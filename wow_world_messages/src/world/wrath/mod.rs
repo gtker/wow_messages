@@ -1953,6 +1953,8 @@ pub(crate) mod smsg_convert_rune;
 pub use smsg_convert_rune::*;
 pub(crate) mod smsg_creature_query_response;
 pub use smsg_creature_query_response::*;
+pub(crate) mod smsg_criteria_deleted;
+pub use smsg_criteria_deleted::*;
 pub(crate) mod smsg_crossed_inebriation_threshold;
 pub use smsg_crossed_inebriation_threshold::*;
 pub(crate) mod smsg_death_release_loc;
