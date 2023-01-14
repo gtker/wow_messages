@@ -1951,6 +1951,8 @@ pub(crate) mod smsg_char_delete;
 pub use smsg_char_delete::*;
 pub(crate) mod smsg_char_enum;
 pub use smsg_char_enum::*;
+pub(crate) mod smsg_char_faction_change;
+pub use smsg_char_faction_change::*;
 pub(crate) mod smsg_char_rename;
 pub use smsg_char_rename::*;
 pub(crate) mod smsg_character_login_failed;

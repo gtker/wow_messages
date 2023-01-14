@@ -1,0 +1,16 @@
+smsg SMSG_CHAR_FACTION_CHANGE = 0x04DA {
+    WorldResult result;
+    if (result == RESPONSE_SUCCESS) {
+        Guid guid;
+        CString name;
+        Gender gender;
+        u8 skin_color;
+        u8 face;
+        u8 hair_style;
+        u8 hair_color;
+        u8 facial_hair;
+        Race race;
+    }
+} {
+    versions = "3.3.5";
+}

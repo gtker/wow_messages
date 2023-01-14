@@ -34,6 +34,7 @@ Used in:
 * [Character](character.md)
 * [GuildMember](guildmember.md)
 * [SMSG_CHAR_CUSTOMIZE](smsg_char_customize.md)
+* [SMSG_CHAR_FACTION_CHANGE](smsg_char_faction_change.md)
 * [SMSG_MIRRORIMAGE_DATA](smsg_mirrorimage_data.md)
 * [SMSG_MIRRORIMAGE_DATA](smsg_mirrorimage_data.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
