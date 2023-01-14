@@ -1,0 +1,15 @@
+struct ThreatUpdateUnit {
+    PackedGuid unit;
+    u32 threat;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_HIGHEST_THREAT_UPDATE = 0x0482 {
+    PackedGuid unit;
+    PackedGuid new_victim;
+    u32 amount_of_units;
+    ThreatUpdateUnit[amount_of_units] units;
+} {
+    versions = "3.3.5";
+}
