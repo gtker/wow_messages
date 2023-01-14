@@ -1829,6 +1829,8 @@ pub(crate) mod skill;
 pub use skill::*;
 pub(crate) mod smsg_account_data_times;
 pub use smsg_account_data_times::*;
+pub(crate) mod smsg_achievement_earned;
+pub use smsg_achievement_earned::*;
 pub(crate) mod smsg_action_buttons;
 pub use smsg_action_buttons::*;
 pub(crate) mod smsg_addon_info;

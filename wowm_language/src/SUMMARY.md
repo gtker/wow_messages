@@ -859,6 +859,7 @@
 - [ReceivedMail](docs/receivedmail.md)
 - [Relation](docs/relation.md)
 - [SMSG_ACCOUNT_DATA_TIMES](docs/smsg_account_data_times.md)
+- [SMSG_ACHIEVEMENT_EARNED](docs/smsg_achievement_earned.md)
 - [SMSG_ACTION_BUTTONS](docs/smsg_action_buttons.md)
 - [SMSG_ACTIVATETAXIREPLY](docs/smsg_activatetaxireply.md)
 - [SMSG_ADDON_INFO](docs/smsg_addon_info.md)

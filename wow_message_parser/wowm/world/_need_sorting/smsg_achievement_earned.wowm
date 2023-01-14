@@ -1,0 +1,10 @@
+smsg SMSG_ACHIEVEMENT_EARNED = 0x0468 {
+    PackedGuid player;
+    u32 achievement;
+    DateTime earn_time;
+    u32 unknown {
+        comment = "All emus set to 0.";
+    }
+} {
+    versions = "3.3.5";
+}
