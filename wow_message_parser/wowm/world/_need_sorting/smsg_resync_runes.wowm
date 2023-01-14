@@ -1,0 +1,13 @@
+struct ResyncRune {
+    u8 current_rune;
+    u8 rune_cooldown;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_RESYNC_RUNES = 0x0487 {
+    u32 amount_of_runes;
+    ResyncRune[amount_of_runes] runes;
+} {
+    versions = "3.3.5";
+}
