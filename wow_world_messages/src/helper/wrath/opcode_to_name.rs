@@ -877,7 +877,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x049d => "SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA",
         0x049e => "SMSG_CRITERIA_DELETED",
         0x049f => "SMSG_ACHIEVEMENT_DELETED",
-        0x04a1 => "SMSG_SERVER_INFO_RESPONSE",
         0x04a3 => "SMSG_SERVER_BUCK_DATA_START",
         0x04a6 => "SMSG_BATTLEGROUND_INFO_THROTTLED",
         0x04a7 => "SMSG_PLAYER_VEHICLE_DATA",

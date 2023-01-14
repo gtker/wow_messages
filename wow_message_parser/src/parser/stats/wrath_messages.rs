@@ -889,7 +889,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA", 0x49D),
     Data::new("SMSG_CRITERIA_DELETED", 0x49E),
     Data::new("SMSG_ACHIEVEMENT_DELETED", 0x49F),
-    Data::new("SMSG_SERVER_INFO_RESPONSE", 0x4A1),
     Data::new("SMSG_SERVER_BUCK_DATA_START", 0x4A3),
     Data::new("SMSG_BATTLEGROUND_INFO_THROTTLED", 0x4A6),
     Data::new("SMSG_PLAYER_VEHICLE_DATA", 0x4A7),
