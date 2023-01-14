@@ -1036,6 +1036,7 @@
 - [SMSG_LOG_XPGAIN](docs/smsg_log_xpgain.md)
 - [SMSG_LOOT_ALL_PASSED](docs/smsg_loot_all_passed.md)
 - [SMSG_LOOT_CLEAR_MONEY](docs/smsg_loot_clear_money.md)
+- [SMSG_LOOT_LIST](docs/smsg_loot_list.md)
 - [SMSG_LOOT_MASTER_LIST](docs/smsg_loot_master_list.md)
 - [SMSG_LOOT_MONEY_NOTIFY](docs/smsg_loot_money_notify.md)
 - [SMSG_LOOT_RELEASE_RESPONSE](docs/smsg_loot_release_response.md)

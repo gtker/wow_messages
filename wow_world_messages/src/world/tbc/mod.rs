@@ -1749,6 +1749,8 @@ pub(crate) mod smsg_learned_spell;
 pub use smsg_learned_spell::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
+pub(crate) mod smsg_loot_list;
+pub use smsg_loot_list::*;
 pub(crate) mod smsg_meetingstone_setqueue;
 pub use smsg_meetingstone_setqueue::*;
 pub(crate) mod smsg_messagechat;

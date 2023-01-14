@@ -1,0 +1,15 @@
+smsg SMSG_LOOT_LIST = 0x03F8 {
+    Guid creature;
+    PackedGuid master_looter;
+    PackedGuid group_looter;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_LOOT_LIST = 0x03F9 {
+    Guid creature;
+    PackedGuid master_looter;
+    PackedGuid group_looter;
+} {
+    versions = "3.3.5";
+}

@@ -1975,6 +1975,8 @@ pub(crate) mod smsg_login_settimespeed;
 pub use smsg_login_settimespeed::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
+pub(crate) mod smsg_loot_list;
+pub use smsg_loot_list::*;
 pub(crate) mod smsg_loot_money_notify;
 pub use smsg_loot_money_notify::*;
 pub(crate) mod smsg_loot_start_roll;
