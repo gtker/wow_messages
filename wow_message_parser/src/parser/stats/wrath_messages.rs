@@ -924,7 +924,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_EQUIPMENT_SET_USE_RESULT", 0x4D6),
     Data::new("CMSG_CHAR_FACTION_CHANGE", 0x4D9),
     Data::new("SMSG_CHAR_FACTION_CHANGE", 0x4DA),
-    Data::new("SMSG_PVP_QUEUE_STATS", 0x4DC),
+    Data::nyi("SMSG_PVP_QUEUE_STATS", 0x4DC),
     Data::new("SMSG_BATTLEFIELD_MGR_ENTRY_INVITE", 0x4DE),
     Data::new("CMSG_BATTLEFIELD_MGR_ENTRY_INVITE_RESPONSE", 0x4DF),
     Data::new("SMSG_BATTLEFIELD_MGR_ENTERED", 0x4E0),
