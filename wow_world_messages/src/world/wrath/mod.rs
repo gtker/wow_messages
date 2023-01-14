@@ -2095,6 +2095,8 @@ pub(crate) mod smsg_playerbound;
 pub use smsg_playerbound::*;
 pub(crate) mod smsg_power_update;
 pub use smsg_power_update::*;
+pub(crate) mod smsg_pre_resurrect;
+pub use smsg_pre_resurrect::*;
 pub(crate) mod smsg_propose_level_grant;
 pub use smsg_propose_level_grant::*;
 pub(crate) mod smsg_query_time_response;

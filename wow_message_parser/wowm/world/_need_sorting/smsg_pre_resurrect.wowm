@@ -1,0 +1,5 @@
+smsg SMSG_PRE_RESURRECT = 0x0494 {
+    PackedGuid player;
+} {
+    versions = "3.3.5";
+}
