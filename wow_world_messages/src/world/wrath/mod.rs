@@ -1895,6 +1895,8 @@ pub(crate) mod smsg_calendar_raid_lockout_added;
 pub use smsg_calendar_raid_lockout_added::*;
 pub(crate) mod smsg_calendar_raid_lockout_removed;
 pub use smsg_calendar_raid_lockout_removed::*;
+pub(crate) mod smsg_calendar_raid_lockout_updated;
+pub use smsg_calendar_raid_lockout_updated::*;
 pub(crate) mod smsg_calendar_send_calendar;
 pub use smsg_calendar_send_calendar::*;
 pub(crate) mod smsg_calendar_send_event;

@@ -7637,6 +7637,7 @@ use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::world::wrath::SMSG_TRIGGER_MOVIE;
 use crate::world::wrath::SMSG_ACHIEVEMENT_EARNED;
 use crate::world::wrath::SMSG_QUESTUPDATE_ADD_PVP_KILL;
+use crate::world::wrath::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 use crate::world::wrath::MSG_MOVE_GRAVITY_CHNG_Server;
 use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
@@ -8087,6 +8088,7 @@ pub enum ServerOpcodeMessage {
     SMSG_TRIGGER_MOVIE(SMSG_TRIGGER_MOVIE),
     SMSG_ACHIEVEMENT_EARNED(SMSG_ACHIEVEMENT_EARNED),
     SMSG_QUESTUPDATE_ADD_PVP_KILL(SMSG_QUESTUPDATE_ADD_PVP_KILL),
+    SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(SMSG_CALENDAR_RAID_LOCKOUT_UPDATED),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
     MSG_MOVE_GRAVITY_CHNG(MSG_MOVE_GRAVITY_CHNG_Server),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
@@ -8539,6 +8541,7 @@ impl ServerOpcodeMessage {
             0x0464 => Ok(Self::SMSG_TRIGGER_MOVIE(<SMSG_TRIGGER_MOVIE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0464, size: body_size, io, } } else { a } })?)),
             0x0468 => Ok(Self::SMSG_ACHIEVEMENT_EARNED(<SMSG_ACHIEVEMENT_EARNED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0468, size: body_size, io, } } else { a } })?)),
             0x046F => Ok(Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(<SMSG_QUESTUPDATE_ADD_PVP_KILL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x046F, size: body_size, io, } } else { a } })?)),
+            0x0471 => Ok(Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(<SMSG_CALENDAR_RAID_LOCKOUT_UPDATED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0471, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
             0x04D2 => Ok(Self::MSG_MOVE_GRAVITY_CHNG(<MSG_MOVE_GRAVITY_CHNG_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04D2, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
@@ -9140,6 +9143,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRIGGER_MOVIE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
@@ -9593,6 +9597,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRIGGER_MOVIE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
@@ -10046,6 +10051,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRIGGER_MOVIE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10499,6 +10505,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRIGGER_MOVIE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10952,6 +10959,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRIGGER_MOVIE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11405,6 +11413,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_TRIGGER_MOVIE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
@@ -11868,6 +11877,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_TRIGGER_MOVIE(_) => "SMSG_TRIGGER_MOVIE",
             ServerOpcodeMessage::SMSG_ACHIEVEMENT_EARNED(_) => "SMSG_ACHIEVEMENT_EARNED",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_PVP_KILL(_) => "SMSG_QUESTUPDATE_ADD_PVP_KILL",
+            ServerOpcodeMessage::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(_) => "SMSG_CALENDAR_RAID_LOCKOUT_UPDATED",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
             ServerOpcodeMessage::MSG_MOVE_GRAVITY_CHNG(_) => "MSG_MOVE_GRAVITY_CHNG_Server",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
@@ -14531,6 +14541,12 @@ impl From<SMSG_ACHIEVEMENT_EARNED> for ServerOpcodeMessage {
 impl From<SMSG_QUESTUPDATE_ADD_PVP_KILL> for ServerOpcodeMessage {
     fn from(c: SMSG_QUESTUPDATE_ADD_PVP_KILL) -> Self {
         Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c)
+    }
+}
+
+impl From<SMSG_CALENDAR_RAID_LOCKOUT_UPDATED> for ServerOpcodeMessage {
+    fn from(c: SMSG_CALENDAR_RAID_LOCKOUT_UPDATED) -> Self {
+        Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c)
     }
 }
 

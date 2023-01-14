@@ -1,0 +1,9 @@
+smsg SMSG_CALENDAR_RAID_LOCKOUT_UPDATED = 0x0471 {
+    DateTime current_time;
+    Map map;
+    u32 difficulty;
+    u32 old_time_to_update_in_seconds;
+    u32 new_time_to_update_in_seconds;
+} {
+    versions = "3.3.5";
+}
