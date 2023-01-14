@@ -636,6 +636,7 @@ Used in:
 * [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_CALENDAR_RAID_LOCKOUT_ADDED](smsg_calendar_raid_lockout_added.md)
+* [SMSG_CALENDAR_RAID_LOCKOUT_REMOVED](smsg_calendar_raid_lockout_removed.md)
 * [SMSG_DEATH_RELEASE_LOC](smsg_death_release_loc.md)
 * [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
 * [SMSG_INSTANCE_RESET](smsg_instance_reset.md)

@@ -1,0 +1,8 @@
+smsg SMSG_CALENDAR_RAID_LOCKOUT_REMOVED = 0x043F {
+    Map map;
+    u32 difficulty;
+    u32 remaining_time;
+    Guid instance_id;
+} {
+    versions = "3.3.5";
+}
