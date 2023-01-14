@@ -1,0 +1,5 @@
+smsg SMSG_ACHIEVEMENT_DELETED = 0x049F {
+    u32 achievement;
+} {
+    versions = "3.3.5";
+}
