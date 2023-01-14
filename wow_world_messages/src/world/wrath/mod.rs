@@ -1903,6 +1903,8 @@ pub(crate) mod smsg_learned_spell;
 pub use smsg_learned_spell::*;
 pub(crate) mod smsg_levelup_info;
 pub use smsg_levelup_info::*;
+pub(crate) mod smsg_lfg_boot_proposal_update;
+pub use smsg_lfg_boot_proposal_update::*;
 pub(crate) mod smsg_lfg_join_result;
 pub use smsg_lfg_join_result::*;
 pub(crate) mod smsg_lfg_offer_continue;

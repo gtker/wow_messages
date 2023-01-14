@@ -1,0 +1,13 @@
+smsg SMSG_LFG_BOOT_PROPOSAL_UPDATE = 0x036D {
+    Bool vote_in_progress;
+    Bool did_vote;
+    Bool agreed_with_kick;
+    Guid victim;
+    u32 total_votes;
+    u32 votes_agree;
+    u32 seconds_left;
+    u32 votes_needed;
+    CString reason;
+} {
+    versions = "3.3.5";
+}

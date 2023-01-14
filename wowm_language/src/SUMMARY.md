@@ -993,6 +993,7 @@
 - [SMSG_ITEM_TIME_UPDATE](docs/smsg_item_time_update.md)
 - [SMSG_LEARNED_SPELL](docs/smsg_learned_spell.md)
 - [SMSG_LEVELUP_INFO](docs/smsg_levelup_info.md)
+- [SMSG_LFG_BOOT_PROPOSAL_UPDATE](docs/smsg_lfg_boot_proposal_update.md)
 - [SMSG_LFG_DISABLED](docs/smsg_lfg_disabled.md)
 - [SMSG_LFG_JOIN_RESULT](docs/smsg_lfg_join_result.md)
 - [SMSG_LFG_OFFER_CONTINUE](docs/smsg_lfg_offer_continue.md)

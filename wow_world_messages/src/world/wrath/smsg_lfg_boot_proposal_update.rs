@@ -1,0 +1,135 @@
+use std::convert::{TryFrom, TryInto};
+use crate::Guid;
+use std::io::{Write, Read};
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_lfg_boot_proposal_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_lfg_boot_proposal_update.wowm#L1):
+/// ```text
+/// smsg SMSG_LFG_BOOT_PROPOSAL_UPDATE = 0x036D {
+///     Bool vote_in_progress;
+///     Bool did_vote;
+///     Bool agreed_with_kick;
+///     Guid victim;
+///     u32 total_votes;
+///     u32 votes_agree;
+///     u32 seconds_left;
+///     u32 votes_needed;
+///     CString reason;
+/// }
+/// ```
+pub struct SMSG_LFG_BOOT_PROPOSAL_UPDATE {
+    pub vote_in_progress: bool,
+    pub did_vote: bool,
+    pub agreed_with_kick: bool,
+    pub victim: Guid,
+    pub total_votes: u32,
+    pub votes_agree: u32,
+    pub seconds_left: u32,
+    pub votes_needed: u32,
+    pub reason: String,
+}
+
+impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
+    const OPCODE: u32 = 0x036d;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        let size_assert_header_size = w.len();
+        // vote_in_progress: Bool
+        w.write_all(u8::from(self.vote_in_progress).to_le_bytes().as_slice())?;
+
+        // did_vote: Bool
+        w.write_all(u8::from(self.did_vote).to_le_bytes().as_slice())?;
+
+        // agreed_with_kick: Bool
+        w.write_all(u8::from(self.agreed_with_kick).to_le_bytes().as_slice())?;
+
+        // victim: Guid
+        w.write_all(&self.victim.guid().to_le_bytes())?;
+
+        // total_votes: u32
+        w.write_all(&self.total_votes.to_le_bytes())?;
+
+        // votes_agree: u32
+        w.write_all(&self.votes_agree.to_le_bytes())?;
+
+        // seconds_left: u32
+        w.write_all(&self.seconds_left.to_le_bytes())?;
+
+        // votes_needed: u32
+        w.write_all(&self.votes_needed.to_le_bytes())?;
+
+        // reason: CString
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.reason.as_bytes().iter().rev().next(), Some(&0_u8), "String `reason` must not be null-terminated.");
+        w.write_all(self.reason.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
+        Ok(())
+    }
+    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+        if !(28..=283).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036D, size: body_size as u32 });
+        }
+
+        // vote_in_progress: Bool
+        let vote_in_progress = crate::util::read_u8_le(r)? != 0;
+        // did_vote: Bool
+        let did_vote = crate::util::read_u8_le(r)? != 0;
+        // agreed_with_kick: Bool
+        let agreed_with_kick = crate::util::read_u8_le(r)? != 0;
+        // victim: Guid
+        let victim = Guid::read(r)?;
+
+        // total_votes: u32
+        let total_votes = crate::util::read_u32_le(r)?;
+
+        // votes_agree: u32
+        let votes_agree = crate::util::read_u32_le(r)?;
+
+        // seconds_left: u32
+        let seconds_left = crate::util::read_u32_le(r)?;
+
+        // votes_needed: u32
+        let votes_needed = crate::util::read_u32_le(r)?;
+
+        // reason: CString
+        let reason = crate::util::read_c_string_to_vec(r)?;
+        let reason = String::from_utf8(reason)?;
+
+        Ok(Self {
+            vote_in_progress,
+            did_vote,
+            agreed_with_kick,
+            victim,
+            total_votes,
+            votes_agree,
+            seconds_left,
+            votes_needed,
+            reason,
+        })
+    }
+
+}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_LFG_BOOT_PROPOSAL_UPDATE {}
+
+impl SMSG_LFG_BOOT_PROPOSAL_UPDATE {
+    pub(crate) fn size(&self) -> usize {
+        1 // vote_in_progress: Bool
+        + 1 // did_vote: Bool
+        + 1 // agreed_with_kick: Bool
+        + 8 // victim: Guid
+        + 4 // total_votes: u32
+        + 4 // votes_agree: u32
+        + 4 // seconds_left: u32
+        + 4 // votes_needed: u32
+        + self.reason.len() + 1 // reason: CString
+    }
+}
+
