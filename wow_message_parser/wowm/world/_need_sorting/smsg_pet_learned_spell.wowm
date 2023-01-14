@@ -1,0 +1,5 @@
+smsg SMSG_PET_LEARNED_SPELL = 0x0499 {
+    Spell spell;
+} {
+    versions = "3.3.5";
+}

@@ -1131,6 +1131,7 @@
 - [SMSG_PET_BROKEN](docs/smsg_pet_broken.md)
 - [SMSG_PET_CAST_FAILED](docs/smsg_pet_cast_failed.md)
 - [SMSG_PET_DISMISS_SOUND](docs/smsg_pet_dismiss_sound.md)
+- [SMSG_PET_LEARNED_SPELL](docs/smsg_pet_learned_spell.md)
 - [SMSG_PET_MODE](docs/smsg_pet_mode.md)
 - [SMSG_PET_NAME_INVALID](docs/smsg_pet_name_invalid.md)
 - [SMSG_PET_NAME_QUERY_RESPONSE](docs/smsg_pet_name_query_response.md)
