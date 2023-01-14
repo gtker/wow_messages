@@ -1,0 +1,24 @@
+struct PendingAuctionSale {
+    CString string1 {
+        comment = "mangostwo: string '%d:%d:%d:%d:%d' -> itemId, ItemRandomPropertyId, 2, auctionId, unk1 (stack size?, unused)";
+    }
+    CString string2 {
+        comment = "mangostwo: string '%16I64X:%d:%d:%d:%d' -> bidderGuid, bid, buyout, deposit, auctionCut";
+    }
+    u32 unknown1 {
+        comment = "mangostwo sets to 97250.";
+    }
+    u32 unknown2 {
+        comment = "mangostwo sets to 68.";
+    }
+    f32 time_left;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_AUCTION_LIST_PENDING_SALES = 0x0490 {
+    u32 amount_of_pending_sales;
+    PendingAuctionSale[amount_of_pending_sales] pending_sales;
+} {
+    versions = "3.3.5";
+}
