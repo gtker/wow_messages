@@ -7642,6 +7642,7 @@ use crate::world::wrath::SMSG_CHAR_CUSTOMIZE;
 use crate::world::wrath::SMSG_SET_PHASE_SHIFT;
 use crate::world::wrath::SMSG_POWER_UPDATE;
 use crate::world::wrath::SMSG_HIGHEST_THREAT_UPDATE;
+use crate::world::wrath::SMSG_THREAT_UPDATE;
 use crate::world::wrath::SMSG_CLIENTCACHE_VERSION;
 use crate::world::wrath::MSG_MOVE_GRAVITY_CHNG_Server;
 use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
@@ -8097,6 +8098,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SET_PHASE_SHIFT(SMSG_SET_PHASE_SHIFT),
     SMSG_POWER_UPDATE(SMSG_POWER_UPDATE),
     SMSG_HIGHEST_THREAT_UPDATE(SMSG_HIGHEST_THREAT_UPDATE),
+    SMSG_THREAT_UPDATE(SMSG_THREAT_UPDATE),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
     MSG_MOVE_GRAVITY_CHNG(MSG_MOVE_GRAVITY_CHNG_Server),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
@@ -8554,6 +8556,7 @@ impl ServerOpcodeMessage {
             0x047C => Ok(Self::SMSG_SET_PHASE_SHIFT(<SMSG_SET_PHASE_SHIFT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x047C, size: body_size, io, } } else { a } })?)),
             0x0480 => Ok(Self::SMSG_POWER_UPDATE(<SMSG_POWER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0480, size: body_size, io, } } else { a } })?)),
             0x0482 => Ok(Self::SMSG_HIGHEST_THREAT_UPDATE(<SMSG_HIGHEST_THREAT_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0482, size: body_size, io, } } else { a } })?)),
+            0x0483 => Ok(Self::SMSG_THREAT_UPDATE(<SMSG_THREAT_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0483, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
             0x04D2 => Ok(Self::MSG_MOVE_GRAVITY_CHNG(<MSG_MOVE_GRAVITY_CHNG_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04D2, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
@@ -9160,6 +9163,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_PHASE_SHIFT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_POWER_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_HIGHEST_THREAT_UPDATE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_THREAT_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
@@ -9618,6 +9622,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_PHASE_SHIFT(c) => c.write_unencrypted_server(w),
             Self::SMSG_POWER_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_HIGHEST_THREAT_UPDATE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_THREAT_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
@@ -10076,6 +10081,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_PHASE_SHIFT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_POWER_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_HIGHEST_THREAT_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_THREAT_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10534,6 +10540,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_PHASE_SHIFT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_POWER_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_HIGHEST_THREAT_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_THREAT_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10992,6 +10999,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_PHASE_SHIFT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_POWER_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_HIGHEST_THREAT_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_THREAT_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11450,6 +11458,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SET_PHASE_SHIFT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_POWER_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_HIGHEST_THREAT_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_THREAT_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
@@ -11918,6 +11927,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SET_PHASE_SHIFT(_) => "SMSG_SET_PHASE_SHIFT",
             ServerOpcodeMessage::SMSG_POWER_UPDATE(_) => "SMSG_POWER_UPDATE",
             ServerOpcodeMessage::SMSG_HIGHEST_THREAT_UPDATE(_) => "SMSG_HIGHEST_THREAT_UPDATE",
+            ServerOpcodeMessage::SMSG_THREAT_UPDATE(_) => "SMSG_THREAT_UPDATE",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
             ServerOpcodeMessage::MSG_MOVE_GRAVITY_CHNG(_) => "MSG_MOVE_GRAVITY_CHNG_Server",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
@@ -14611,6 +14621,12 @@ impl From<SMSG_POWER_UPDATE> for ServerOpcodeMessage {
 impl From<SMSG_HIGHEST_THREAT_UPDATE> for ServerOpcodeMessage {
     fn from(c: SMSG_HIGHEST_THREAT_UPDATE) -> Self {
         Self::SMSG_HIGHEST_THREAT_UPDATE(c)
+    }
+}
+
+impl From<SMSG_THREAT_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_THREAT_UPDATE) -> Self {
+        Self::SMSG_THREAT_UPDATE(c)
     }
 }
 

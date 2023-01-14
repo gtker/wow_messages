@@ -1,0 +1,7 @@
+smsg SMSG_THREAT_UPDATE = 0x0483 {
+    PackedGuid unit;
+    u32 amount_of_units;
+    ThreatUpdateUnit[amount_of_units] units;
+} {
+    versions = "3.3.5";
+}

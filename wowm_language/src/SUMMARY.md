@@ -1237,6 +1237,7 @@
 - [SMSG_SUPERCEDED_SPELL](docs/smsg_superceded_spell.md)
 - [SMSG_TAXINODE_STATUS](docs/smsg_taxinode_status.md)
 - [SMSG_TEXT_EMOTE](docs/smsg_text_emote.md)
+- [SMSG_THREAT_UPDATE](docs/smsg_threat_update.md)
 - [SMSG_TIME_SYNC_REQ](docs/smsg_time_sync_req.md)
 - [SMSG_TITLE_EARNED](docs/smsg_title_earned.md)
 - [SMSG_TOTEM_CREATED](docs/smsg_totem_created.md)
