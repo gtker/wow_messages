@@ -1,0 +1,14 @@
+struct LfgPartyInfo {
+    Guid player;
+    u32 amount_of_dungeons;
+    LfgJoinLockedDungeon[amount_of_dungeons] dungeons;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_LFG_PARTY_INFO = 0x0372 {
+    u8 amount_of_infos;
+    LfgPartyInfo[amount_of_infos] infos;
+} {
+    versions = "3.3.5";
+}
