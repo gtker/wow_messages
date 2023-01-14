@@ -1883,6 +1883,8 @@ pub(crate) mod smsg_destroy_object;
 pub use smsg_destroy_object::*;
 pub(crate) mod smsg_emote;
 pub use smsg_emote::*;
+pub(crate) mod smsg_enable_barber_shop;
+pub use smsg_enable_barber_shop::*;
 pub(crate) mod smsg_enchantmentlog;
 pub use smsg_enchantmentlog::*;
 pub(crate) mod smsg_exploration_experience;

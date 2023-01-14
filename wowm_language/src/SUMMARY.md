@@ -938,6 +938,7 @@
 - [SMSG_DUEL_WINNER](docs/smsg_duel_winner.md)
 - [SMSG_DURABILITY_DAMAGE_DEATH](docs/smsg_durability_damage_death.md)
 - [SMSG_EMOTE](docs/smsg_emote.md)
+- [SMSG_ENABLE_BARBER_SHOP](docs/smsg_enable_barber_shop.md)
 - [SMSG_ENCHANTMENTLOG](docs/smsg_enchantmentlog.md)
 - [SMSG_ENVIRONMENTAL_DAMAGE_LOG](docs/smsg_environmental_damage_log.md)
 - [SMSG_EXPECTED_SPAM_RECORDS](docs/smsg_expected_spam_records.md)
