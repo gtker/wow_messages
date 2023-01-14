@@ -1911,6 +1911,8 @@ pub(crate) mod smsg_channel_member_count;
 pub use smsg_channel_member_count::*;
 pub(crate) mod smsg_char_create;
 pub use smsg_char_create::*;
+pub(crate) mod smsg_char_customize;
+pub use smsg_char_customize::*;
 pub(crate) mod smsg_char_delete;
 pub use smsg_char_delete::*;
 pub(crate) mod smsg_char_enum;

@@ -929,6 +929,7 @@
 - [SMSG_CHANNEL_NOTIFY](docs/smsg_channel_notify.md)
 - [SMSG_CHARACTER_LOGIN_FAILED](docs/smsg_character_login_failed.md)
 - [SMSG_CHAR_CREATE](docs/smsg_char_create.md)
+- [SMSG_CHAR_CUSTOMIZE](docs/smsg_char_customize.md)
 - [SMSG_CHAR_DELETE](docs/smsg_char_delete.md)
 - [SMSG_CHAR_ENUM](docs/smsg_char_enum.md)
 - [SMSG_CHAR_RENAME](docs/smsg_char_rename.md)
