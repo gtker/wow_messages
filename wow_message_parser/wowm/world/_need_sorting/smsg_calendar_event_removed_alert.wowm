@@ -1,0 +1,7 @@
+smsg SMSG_CALENDAR_EVENT_REMOVED_ALERT = 0x0443 {
+    Bool show_alert;
+    Guid event_id;
+    DateTime event_time;
+} {
+    versions = "3.3.5";
+}
