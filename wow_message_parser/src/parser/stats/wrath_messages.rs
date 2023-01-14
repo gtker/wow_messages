@@ -860,7 +860,7 @@ pub(crate) const DATA: &[Data] = &[
         0x47D,
         "Requires custom dual array that splits on -1.",
     ),
-    Data::new("SMSG_HEALTH_UPDATE", 0x47F),
+    Data::nyi("SMSG_HEALTH_UPDATE", 0x47F),
     Data::new("SMSG_POWER_UPDATE", 0x480),
     Data::new("CMSG_GAMEOBJ_REPORT_USE", 0x481),
     Data::new("SMSG_HIGHEST_THREAT_UPDATE", 0x482),
