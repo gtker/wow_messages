@@ -973,6 +973,7 @@
 - [SMSG_FORCE_FLIGHT_SPEED_CHANGE](docs/smsg_force_flight_speed_change.md)
 - [SMSG_FORCE_MOVE_ROOT](docs/smsg_force_move_root.md)
 - [SMSG_FORCE_MOVE_UNROOT](docs/smsg_force_move_unroot.md)
+- [SMSG_FORCE_PITCH_RATE_CHANGE](docs/smsg_force_pitch_rate_change.md)
 - [SMSG_FORCE_RUN_BACK_SPEED_CHANGE](docs/smsg_force_run_back_speed_change.md)
 - [SMSG_FORCE_RUN_SPEED_CHANGE](docs/smsg_force_run_speed_change.md)
 - [SMSG_FORCE_SWIM_BACK_SPEED_CHANGE](docs/smsg_force_swim_back_speed_change.md)

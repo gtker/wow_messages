@@ -1,0 +1,10 @@
+smsg SMSG_FORCE_PITCH_RATE_CHANGE = 0x045C {
+    PackedGuid guid;
+    u32 move_event {
+        comment = "cmangos/mangoszero/vmangos: set to 0";
+        comment = "cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39";
+    }
+    f32 speed;
+} {
+    versions = "3.3.5";
+}

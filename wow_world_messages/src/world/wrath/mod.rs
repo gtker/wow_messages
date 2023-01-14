@@ -1947,6 +1947,8 @@ pub(crate) mod smsg_force_move_root;
 pub use smsg_force_move_root::*;
 pub(crate) mod smsg_force_move_unroot;
 pub use smsg_force_move_unroot::*;
+pub(crate) mod smsg_force_pitch_rate_change;
+pub use smsg_force_pitch_rate_change::*;
 pub(crate) mod smsg_friend_status;
 pub use smsg_friend_status::*;
 pub(crate) mod smsg_gameobject_query_response;
