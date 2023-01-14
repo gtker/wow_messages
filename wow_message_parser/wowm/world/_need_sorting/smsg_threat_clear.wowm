@@ -1,0 +1,5 @@
+smsg SMSG_THREAT_CLEAR = 0x0485 {
+    PackedGuid unit;
+} {
+    versions = "3.3.5";
+}
