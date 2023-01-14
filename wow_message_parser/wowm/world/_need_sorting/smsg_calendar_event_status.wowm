@@ -1,0 +1,11 @@
+smsg SMSG_CALENDAR_EVENT_STATUS = 0x043C {
+    PackedGuid invitee;
+    Guid event_id;
+    DateTime event_time;
+    u32 flags;
+    u8 status;
+    u8 rank;
+    DateTime status_time;
+} {
+    versions = "3.3.5";
+}
