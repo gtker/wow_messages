@@ -1,0 +1,6 @@
+smsg SMSG_MOVE_GRAVITY_ENABLE = 0x04D0 {
+    PackedGuid unit;
+    u32 movement_counter;
+} {
+    versions = "3.3.5";
+}

@@ -1114,6 +1114,8 @@
 - [SMSG_MOUNTRESULT](docs/smsg_mountresult.md)
 - [SMSG_MOUNTSPECIAL_ANIM](docs/smsg_mountspecial_anim.md)
 - [SMSG_MOVE_FEATHER_FALL](docs/smsg_move_feather_fall.md)
+- [SMSG_MOVE_GRAVITY_DISABLE](docs/smsg_move_gravity_disable.md)
+- [SMSG_MOVE_GRAVITY_ENABLE](docs/smsg_move_gravity_enable.md)
 - [SMSG_MOVE_KNOCK_BACK](docs/smsg_move_knock_back.md)
 - [SMSG_MOVE_LAND_WALK](docs/smsg_move_land_walk.md)
 - [SMSG_MOVE_NORMAL_FALL](docs/smsg_move_normal_fall.md)
