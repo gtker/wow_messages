@@ -953,7 +953,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_QUERY_QUESTS_COMPLETED", 0x500),
     Data::new("SMSG_QUERY_QUESTS_COMPLETED_RESPONSE", 0x501),
     Data::new("CMSG_GM_REPORT_LAG", 0x502),
-    Data::new("SMSG_AFK_MONITOR_INFO_RESPONSE", 0x504),
+    Data::nyi("SMSG_AFK_MONITOR_INFO_RESPONSE", 0x504),
     Data::new("SMSG_CORPSE_NOT_IN_INSTANCE", 0x506),
     Data::new("SMSG_CAMERA_SHAKE", 0x50A),
     Data::new("SMSG_SOCKET_GEMS_RESULT", 0x50B),
