@@ -1,0 +1,17 @@
+smsg SMSG_TOTEM_CREATED = 0x0412 {
+    u8 slot;
+    Guid totem;
+    u32 duration;
+    Spell spell;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_TOTEM_CREATED = 0x0413 {
+    u8 slot;
+    Guid totem;
+    u32 duration;
+    Spell spell;
+} {
+    versions = "3.3.5";
+}

@@ -2075,6 +2075,8 @@ pub(crate) mod smsg_superceded_spell;
 pub use smsg_superceded_spell::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
+pub(crate) mod smsg_totem_created;
+pub use smsg_totem_created::*;
 pub(crate) mod smsg_trade_status;
 pub use smsg_trade_status::*;
 pub(crate) mod smsg_trainer_list;
