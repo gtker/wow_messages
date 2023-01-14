@@ -1983,6 +1983,8 @@ pub(crate) mod smsg_loot_start_roll;
 pub use smsg_loot_start_roll::*;
 pub(crate) mod smsg_messagechat;
 pub use smsg_messagechat::*;
+pub(crate) mod smsg_mirrorimage_data;
+pub use smsg_mirrorimage_data::*;
 pub(crate) mod smsg_name_query_response;
 pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_world;

@@ -1755,6 +1755,8 @@ pub(crate) mod smsg_meetingstone_setqueue;
 pub use smsg_meetingstone_setqueue::*;
 pub(crate) mod smsg_messagechat;
 pub use smsg_messagechat::*;
+pub(crate) mod smsg_mirrorimage_data;
+pub use smsg_mirrorimage_data::*;
 pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_npc_text_update;

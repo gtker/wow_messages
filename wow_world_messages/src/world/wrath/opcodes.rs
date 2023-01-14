@@ -7600,6 +7600,7 @@ use crate::world::wrath::SMSG_INSPECT_TALENT;
 use crate::world::wrath::SMSG_LOOT_LIST;
 use crate::world::wrath::MSG_GUILD_PERMISSIONS_Server;
 use crate::world::wrath::MSG_GUILD_EVENT_LOG_QUERY_Server;
+use crate::world::wrath::SMSG_MIRRORIMAGE_DATA;
 use crate::world::wrath::MSG_QUERY_GUILD_BANK_TEXT_Server;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
 use crate::world::wrath::MSG_MOVE_SET_PITCH_RATE_Server;
@@ -8017,6 +8018,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOOT_LIST(SMSG_LOOT_LIST),
     MSG_GUILD_PERMISSIONS(MSG_GUILD_PERMISSIONS_Server),
     MSG_GUILD_EVENT_LOG_QUERY(MSG_GUILD_EVENT_LOG_QUERY_Server),
+    SMSG_MIRRORIMAGE_DATA(SMSG_MIRRORIMAGE_DATA),
     MSG_QUERY_GUILD_BANK_TEXT(MSG_QUERY_GUILD_BANK_TEXT_Server),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
     MSG_MOVE_SET_PITCH_RATE(MSG_MOVE_SET_PITCH_RATE_Server),
@@ -8436,6 +8438,7 @@ impl ServerOpcodeMessage {
             0x03F9 => Ok(Self::SMSG_LOOT_LIST(<SMSG_LOOT_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F9, size: body_size, io, } } else { a } })?)),
             0x03FD => Ok(Self::MSG_GUILD_PERMISSIONS(<MSG_GUILD_PERMISSIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FD, size: body_size, io, } } else { a } })?)),
             0x03FF => Ok(Self::MSG_GUILD_EVENT_LOG_QUERY(<MSG_GUILD_EVENT_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FF, size: body_size, io, } } else { a } })?)),
+            0x0402 => Ok(Self::SMSG_MIRRORIMAGE_DATA(<SMSG_MIRRORIMAGE_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0402, size: body_size, io, } } else { a } })?)),
             0x040A => Ok(Self::MSG_QUERY_GUILD_BANK_TEXT(<MSG_QUERY_GUILD_BANK_TEXT_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040A, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
             0x045B => Ok(Self::MSG_MOVE_SET_PITCH_RATE(<MSG_MOVE_SET_PITCH_RATE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x045B, size: body_size, io, } } else { a } })?)),
@@ -9004,6 +9007,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.write_encrypted_server(w, e),
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_encrypted_server(w, e),
@@ -9424,6 +9428,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.write_unencrypted_server(w),
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_unencrypted_server(w),
@@ -9844,6 +9849,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10264,6 +10270,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10684,6 +10691,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11104,6 +11112,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11534,6 +11543,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOOT_LIST(_) => "SMSG_LOOT_LIST",
             ServerOpcodeMessage::MSG_GUILD_PERMISSIONS(_) => "MSG_GUILD_PERMISSIONS_Server",
             ServerOpcodeMessage::MSG_GUILD_EVENT_LOG_QUERY(_) => "MSG_GUILD_EVENT_LOG_QUERY_Server",
+            ServerOpcodeMessage::SMSG_MIRRORIMAGE_DATA(_) => "SMSG_MIRRORIMAGE_DATA",
             ServerOpcodeMessage::MSG_QUERY_GUILD_BANK_TEXT(_) => "MSG_QUERY_GUILD_BANK_TEXT_Server",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH_RATE(_) => "MSG_MOVE_SET_PITCH_RATE_Server",
@@ -13979,6 +13989,12 @@ impl From<MSG_GUILD_PERMISSIONS_Server> for ServerOpcodeMessage {
 impl From<MSG_GUILD_EVENT_LOG_QUERY_Server> for ServerOpcodeMessage {
     fn from(c: MSG_GUILD_EVENT_LOG_QUERY_Server) -> Self {
         Self::MSG_GUILD_EVENT_LOG_QUERY(c)
+    }
+}
+
+impl From<SMSG_MIRRORIMAGE_DATA> for ServerOpcodeMessage {
+    fn from(c: SMSG_MIRRORIMAGE_DATA) -> Self {
+        Self::SMSG_MIRRORIMAGE_DATA(c)
     }
 }
 

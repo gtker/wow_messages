@@ -1052,6 +1052,7 @@
 - [SMSG_MEETINGSTONE_MEMBER_ADDED](docs/smsg_meetingstone_member_added.md)
 - [SMSG_MEETINGSTONE_SETQUEUE](docs/smsg_meetingstone_setqueue.md)
 - [SMSG_MESSAGECHAT](docs/smsg_messagechat.md)
+- [SMSG_MIRRORIMAGE_DATA](docs/smsg_mirrorimage_data.md)
 - [SMSG_MONSTER_MOVE](docs/smsg_monster_move.md)
 - [SMSG_MONSTER_MOVE_TRANSPORT](docs/smsg_monster_move_transport.md)
 - [SMSG_MOTD](docs/smsg_motd.md)

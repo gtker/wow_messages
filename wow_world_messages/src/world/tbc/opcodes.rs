@@ -6370,6 +6370,7 @@ use crate::world::tbc::SMSG_USERLIST_UPDATE;
 use crate::world::tbc::SMSG_LOOT_LIST;
 use crate::world::tbc::MSG_GUILD_PERMISSIONS_Server;
 use crate::world::tbc::MSG_GUILD_EVENT_LOG_QUERY_Server;
+use crate::world::tbc::SMSG_MIRRORIMAGE_DATA;
 use crate::world::tbc::MSG_QUERY_GUILD_BANK_TEXT_Server;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -6747,6 +6748,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LOOT_LIST(SMSG_LOOT_LIST),
     MSG_GUILD_PERMISSIONS(MSG_GUILD_PERMISSIONS_Server),
     MSG_GUILD_EVENT_LOG_QUERY(MSG_GUILD_EVENT_LOG_QUERY_Server),
+    SMSG_MIRRORIMAGE_DATA(SMSG_MIRRORIMAGE_DATA),
     MSG_QUERY_GUILD_BANK_TEXT(MSG_QUERY_GUILD_BANK_TEXT_Server),
 }
 
@@ -7126,6 +7128,7 @@ impl ServerOpcodeMessage {
             0x03F8 => Ok(Self::SMSG_LOOT_LIST(<SMSG_LOOT_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F8, size: body_size, io, } } else { a } })?)),
             0x03FC => Ok(Self::MSG_GUILD_PERMISSIONS(<MSG_GUILD_PERMISSIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FC, size: body_size, io, } } else { a } })?)),
             0x03FE => Ok(Self::MSG_GUILD_EVENT_LOG_QUERY(<MSG_GUILD_EVENT_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FE, size: body_size, io, } } else { a } })?)),
+            0x0401 => Ok(Self::SMSG_MIRRORIMAGE_DATA(<SMSG_MIRRORIMAGE_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0401, size: body_size, io, } } else { a } })?)),
             0x0409 => Ok(Self::MSG_QUERY_GUILD_BANK_TEXT(<MSG_QUERY_GUILD_BANK_TEXT_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0409, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
@@ -7573,6 +7576,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.write_encrypted_server(w, e),
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_encrypted_server(w, e),
         }
     }
@@ -7953,6 +7957,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.write_unencrypted_server(w),
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_unencrypted_server(w),
         }
     }
@@ -8333,6 +8338,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
@@ -8713,6 +8719,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
@@ -9093,6 +9100,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
@@ -9473,6 +9481,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MIRRORIMAGE_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
@@ -9855,6 +9864,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOOT_LIST(_) => "SMSG_LOOT_LIST",
             ServerOpcodeMessage::MSG_GUILD_PERMISSIONS(_) => "MSG_GUILD_PERMISSIONS_Server",
             ServerOpcodeMessage::MSG_GUILD_EVENT_LOG_QUERY(_) => "MSG_GUILD_EVENT_LOG_QUERY_Server",
+            ServerOpcodeMessage::SMSG_MIRRORIMAGE_DATA(_) => "SMSG_MIRRORIMAGE_DATA",
             ServerOpcodeMessage::MSG_QUERY_GUILD_BANK_TEXT(_) => "MSG_QUERY_GUILD_BANK_TEXT_Server",
         })
     }
@@ -12095,6 +12105,12 @@ impl From<MSG_GUILD_PERMISSIONS_Server> for ServerOpcodeMessage {
 impl From<MSG_GUILD_EVENT_LOG_QUERY_Server> for ServerOpcodeMessage {
     fn from(c: MSG_GUILD_EVENT_LOG_QUERY_Server) -> Self {
         Self::MSG_GUILD_EVENT_LOG_QUERY(c)
+    }
+}
+
+impl From<SMSG_MIRRORIMAGE_DATA> for ServerOpcodeMessage {
+    fn from(c: SMSG_MIRRORIMAGE_DATA) -> Self {
+        Self::SMSG_MIRRORIMAGE_DATA(c)
     }
 }
 
