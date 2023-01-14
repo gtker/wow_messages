@@ -872,7 +872,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_ADD_RUNE_POWER", 0x488),
     Data::new("CMSG_REMOVE_GLYPH", 0x48A),
     Data::new("CMSG_DISMISS_CRITTER", 0x48D),
-    Data::new("SMSG_NOTIFY_DEST_LOC_SPELL_CAST", 0x48E),
+    Data::nyi("SMSG_NOTIFY_DEST_LOC_SPELL_CAST", 0x48E),
     Data::new("CMSG_AUCTION_LIST_PENDING_SALES", 0x48F),
     Data::new("SMSG_AUCTION_LIST_PENDING_SALES", 0x490),
     Data::new("SMSG_MODIFY_COOLDOWN", 0x491),
