@@ -1,0 +1,40 @@
+flag AuraFlag : u8 {
+    EMPTY			= 0x0;
+    EFFECT_1		= 0x1;
+    EFFECT_2		= 0x2;
+    EFFECT_3		= 0x4;
+    NOT_CASTER	= 0x8;
+    SET			= 0x9;
+    CANCELLABLE	= 0x10;
+    DURATION		= 0x20;
+    HIDE			= 0x40 {
+        comment = "Seems to hide the aura and tell client the aura was removed";
+    }
+    NEGATIVE		= 0x80;
+} {
+     versions = "3.3.5";
+}
+
+struct AuraUpdate {
+    u8 visual_slot;
+    Spell spell;
+    AuraFlag flags;
+    u8 level;
+    u8 aura_stack_count;
+    if (flags & NOT_CASTER) {
+        PackedGuid caster;
+    }
+    if (flags & DURATION) {
+        u32 duration;
+        u32 time_left;
+    }
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_AURA_UPDATE_ALL = 0x0495 {
+    PackedGuid unit;
+    AuraUpdate[-] aura_updates;
+} {
+    versions = "3.3.5";
+}
