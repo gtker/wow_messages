@@ -7607,6 +7607,7 @@ use crate::world::wrath::SMSG_TOTEM_CREATED;
 use crate::world::wrath::SMSG_QUESTGIVER_STATUS_MULTIPLE;
 use crate::world::wrath::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT;
 use crate::world::wrath::SMSG_SEND_UNLEARN_SPELLS;
+use crate::world::wrath::SMSG_PROPOSE_LEVEL_GRANT;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
 use crate::world::wrath::MSG_MOVE_SET_PITCH_RATE_Server;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
@@ -8030,6 +8031,7 @@ pub enum ServerOpcodeMessage {
     SMSG_QUESTGIVER_STATUS_MULTIPLE(SMSG_QUESTGIVER_STATUS_MULTIPLE),
     SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(SMSG_SET_PLAYER_DECLINED_NAMES_RESULT),
     SMSG_SEND_UNLEARN_SPELLS(SMSG_SEND_UNLEARN_SPELLS),
+    SMSG_PROPOSE_LEVEL_GRANT(SMSG_PROPOSE_LEVEL_GRANT),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
     MSG_MOVE_SET_PITCH_RATE(MSG_MOVE_SET_PITCH_RATE_Server),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
@@ -8455,6 +8457,7 @@ impl ServerOpcodeMessage {
             0x0418 => Ok(Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(<SMSG_QUESTGIVER_STATUS_MULTIPLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0418, size: body_size, io, } } else { a } })?)),
             0x041A => Ok(Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(<SMSG_SET_PLAYER_DECLINED_NAMES_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x041A, size: body_size, io, } } else { a } })?)),
             0x041E => Ok(Self::SMSG_SEND_UNLEARN_SPELLS(<SMSG_SEND_UNLEARN_SPELLS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x041E, size: body_size, io, } } else { a } })?)),
+            0x041F => Ok(Self::SMSG_PROPOSE_LEVEL_GRANT(<SMSG_PROPOSE_LEVEL_GRANT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x041F, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
             0x045B => Ok(Self::MSG_MOVE_SET_PITCH_RATE(<MSG_MOVE_SET_PITCH_RATE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x045B, size: body_size, io, } } else { a } })?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
@@ -9029,6 +9032,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
@@ -9455,6 +9459,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
@@ -9881,6 +9886,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10307,6 +10313,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10733,6 +10740,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11159,6 +11167,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_STATUS_MULTIPLE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SEND_UNLEARN_SPELLS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11595,6 +11604,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_QUESTGIVER_STATUS_MULTIPLE(_) => "SMSG_QUESTGIVER_STATUS_MULTIPLE",
             ServerOpcodeMessage::SMSG_SET_PLAYER_DECLINED_NAMES_RESULT(_) => "SMSG_SET_PLAYER_DECLINED_NAMES_RESULT",
             ServerOpcodeMessage::SMSG_SEND_UNLEARN_SPELLS(_) => "SMSG_SEND_UNLEARN_SPELLS",
+            ServerOpcodeMessage::SMSG_PROPOSE_LEVEL_GRANT(_) => "SMSG_PROPOSE_LEVEL_GRANT",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH_RATE(_) => "MSG_MOVE_SET_PITCH_RATE_Server",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
@@ -14081,6 +14091,12 @@ impl From<SMSG_SET_PLAYER_DECLINED_NAMES_RESULT> for ServerOpcodeMessage {
 impl From<SMSG_SEND_UNLEARN_SPELLS> for ServerOpcodeMessage {
     fn from(c: SMSG_SEND_UNLEARN_SPELLS) -> Self {
         Self::SMSG_SEND_UNLEARN_SPELLS(c)
+    }
+}
+
+impl From<SMSG_PROPOSE_LEVEL_GRANT> for ServerOpcodeMessage {
+    fn from(c: SMSG_PROPOSE_LEVEL_GRANT) -> Self {
+        Self::SMSG_PROPOSE_LEVEL_GRANT(c)
     }
 }
 

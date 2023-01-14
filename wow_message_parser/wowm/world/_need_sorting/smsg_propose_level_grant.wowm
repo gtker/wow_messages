@@ -1,0 +1,11 @@
+smsg SMSG_PROPOSE_LEVEL_GRANT = 0x041E {
+    PackedGuid player;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_PROPOSE_LEVEL_GRANT = 0x041F {
+    PackedGuid player;
+} {
+    versions = "3.3.5";
+}

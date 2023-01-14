@@ -1775,6 +1775,8 @@ pub(crate) mod smsg_petition_query_response;
 pub use smsg_petition_query_response::*;
 pub(crate) mod smsg_playerbound;
 pub use smsg_playerbound::*;
+pub(crate) mod smsg_propose_level_grant;
+pub use smsg_propose_level_grant::*;
 pub(crate) mod smsg_quest_query_response;
 pub use smsg_quest_query_response::*;
 pub(crate) mod smsg_questgiver_offer_reward;
