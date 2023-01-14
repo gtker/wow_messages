@@ -1,0 +1,64 @@
+enum GuildBankContentResult : u8 {
+    NOT_PRESENT = 0;
+    PRESENT = 1;
+} {
+    versions = "3.3.5";
+}
+
+enum GuildBankTabResult : u8 {
+    NOT_PRESENT = 0;
+    PRESENT = 1;
+} {
+    versions = "3.3.5";
+}
+
+struct GuildBankTab {
+    CString tab_name;
+    CString tab_icon;
+} {
+     versions = "3.3.5";
+}
+
+struct GuildBankEnchant {
+    u8 enchant_index;
+    u32 enchant;
+} {
+     versions = "3.3.5";
+ }
+
+struct GuildBankSlot {
+    u8 slot;
+    Item item;
+    u32 unknown1 {
+        comment = "3.3.0 (0x8000, 0x8020)";
+    }
+    u32 item_random_property_id;
+    /* if (item_random_property_id != 0) {
+        u32 item_suffix_factor;
+    } */
+    u32 amount_of_items;
+    u32 unknown2;
+    u8 unknown3;
+    u8 amount_of_enchants;
+    GuildBankEnchant[amount_of_enchants] enchants;
+} {
+     versions = "3.3.5";
+ }
+
+smsg SMSG_GUILD_BANK_LIST = 0x03E8 {
+    u64 bank_balance;
+    u8 tab_id;
+    u32 amount_of_allowed_item_withdraws;
+    GuildBankTabResult tab_result;
+    if (tab_result == PRESENT) {
+        u8 amount_of_bank_tabs;
+        GuildBankTab[amount_of_bank_tabs] tabs;
+    }
+    GuildBankContentResult content_result;
+    if (content_result == PRESENT) {
+        u8 amount_of_slot_updates;
+        GuildBankSlot[amount_of_slot_updates] slot_updates;
+    }
+} {
+    versions = "3.3.5";
+}
