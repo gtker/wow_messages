@@ -1,0 +1,40 @@
+enum LfgUpdateType : u8 {
+    DEFAULT              = 0;
+    LEADER_LEAVE         = 1;
+    ROLECHECK_ABORTED    = 4;
+    JOIN                 = 5;
+    ROLECHECK_FAILED     = 6;
+    LEAVE                = 7;
+    PROPOSAL_FAILED      = 8;
+    PROPOSAL_DECLINED    = 9;
+    GROUP_FOUND          = 10;
+    ADDED_TO_QUEUE       = 12;
+    PROPOSAL_BEGIN       = 13;
+    STATUS               = 14;
+    GROUP_MEMBER_OFFLINE = 15;
+    GROUP_DISBAND        = 16;
+} {
+     versions = "3.3.5";
+}
+
+enum LfgJoinStatus : u8 {
+    NOT_JOINED = 0;
+    JOINED = 1;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_LFG_UPDATE_PLAYER = 0x0367 {
+    LfgUpdateType update_type;
+    LfgJoinStatus join_status;
+    if (join_status == JOINED) {
+        u8 queued;
+        u8 no_partial_clear;
+        u8 achievements;
+        u8 amount_of_dungeons;
+        u32[amount_of_dungeons] dungeons;
+        CString comment;
+    }
+} {
+    versions = "3.3.5";
+}
