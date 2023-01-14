@@ -1024,6 +1024,7 @@
 - [SMSG_GAMEOBJECT_QUERY_RESPONSE](docs/smsg_gameobject_query_response.md)
 - [SMSG_GAMEOBJECT_RESET_STATE](docs/smsg_gameobject_reset_state.md)
 - [SMSG_GAMEOBJECT_SPAWN_ANIM](docs/smsg_gameobject_spawn_anim.md)
+- [SMSG_GMRESPONSE_DB_ERROR](docs/smsg_gmresponse_db_error.md)
 - [SMSG_GMTICKET_CREATE](docs/smsg_gmticket_create.md)
 - [SMSG_GMTICKET_DELETETICKET](docs/smsg_gmticket_deleteticket.md)
 - [SMSG_GMTICKET_GETTICKET](docs/smsg_gmticket_getticket.md)

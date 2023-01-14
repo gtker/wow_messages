@@ -1,0 +1,4 @@
+smsg SMSG_GMRESPONSE_DB_ERROR = 0x04EE {} {
+    comment = "Only exists as comment in azerothcore/trinitycore.";
+    versions = "3.3.5";
+}

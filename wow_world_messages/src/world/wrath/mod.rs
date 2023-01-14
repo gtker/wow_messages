@@ -2025,6 +2025,8 @@ pub(crate) mod smsg_gameobject_query_response;
 pub use smsg_gameobject_query_response::*;
 pub(crate) mod smsg_gm_messagechat;
 pub use smsg_gm_messagechat::*;
+pub(crate) mod smsg_gmresponse_db_error;
+pub use smsg_gmresponse_db_error::*;
 pub(crate) mod smsg_gmticket_getticket;
 pub use smsg_gmticket_getticket::*;
 pub(crate) mod smsg_gossip_message;
