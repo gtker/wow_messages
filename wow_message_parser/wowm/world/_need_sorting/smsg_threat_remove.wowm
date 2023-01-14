@@ -1,0 +1,6 @@
+smsg SMSG_THREAT_REMOVE = 0x0484 {
+    PackedGuid unit;
+    PackedGuid victim;
+} {
+    versions = "3.3.5";
+}

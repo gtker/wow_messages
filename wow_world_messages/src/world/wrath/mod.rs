@@ -2165,6 +2165,8 @@ pub(crate) mod smsg_superceded_spell;
 pub use smsg_superceded_spell::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
+pub(crate) mod smsg_threat_remove;
+pub use smsg_threat_remove::*;
 pub(crate) mod smsg_threat_update;
 pub use smsg_threat_update::*;
 pub(crate) mod smsg_totem_created;
