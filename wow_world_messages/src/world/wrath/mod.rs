@@ -2265,6 +2265,8 @@ pub(crate) mod smsg_superceded_spell;
 pub use smsg_superceded_spell::*;
 pub(crate) mod smsg_talents_info;
 pub use smsg_talents_info::*;
+pub(crate) mod smsg_talents_involuntarily_reset;
+pub use smsg_talents_involuntarily_reset::*;
 pub(crate) mod smsg_text_emote;
 pub use smsg_text_emote::*;
 pub(crate) mod smsg_threat_clear;

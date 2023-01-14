@@ -1,0 +1,6 @@
+smsg SMSG_TALENTS_INVOLUNTARILY_RESET = 0x04FA {
+    u8 unknown;
+} {
+    comment = "Only exists as comment in azerothcore/trinitycore.";
+    versions = "3.3.5";
+}

@@ -1287,6 +1287,7 @@
 - [SMSG_SUMMON_REQUEST](docs/smsg_summon_request.md)
 - [SMSG_SUPERCEDED_SPELL](docs/smsg_superceded_spell.md)
 - [SMSG_TALENTS_INFO](docs/smsg_talents_info.md)
+- [SMSG_TALENTS_INVOLUNTARILY_RESET](docs/smsg_talents_involuntarily_reset.md)
 - [SMSG_TAXINODE_STATUS](docs/smsg_taxinode_status.md)
 - [SMSG_TEXT_EMOTE](docs/smsg_text_emote.md)
 - [SMSG_THREAT_CLEAR](docs/smsg_threat_clear.md)
