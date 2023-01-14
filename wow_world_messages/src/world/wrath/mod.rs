@@ -1867,6 +1867,8 @@ pub(crate) mod smsg_calendar_arena_team;
 pub use smsg_calendar_arena_team::*;
 pub(crate) mod smsg_calendar_event_invite;
 pub use smsg_calendar_event_invite::*;
+pub(crate) mod smsg_calendar_event_invite_removed;
+pub use smsg_calendar_event_invite_removed::*;
 pub(crate) mod smsg_calendar_filter_guild;
 pub use smsg_calendar_filter_guild::*;
 pub(crate) mod smsg_calendar_send_calendar;

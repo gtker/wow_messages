@@ -902,6 +902,7 @@
 - [SMSG_BUY_ITEM](docs/smsg_buy_item.md)
 - [SMSG_CALENDAR_ARENA_TEAM](docs/smsg_calendar_arena_team.md)
 - [SMSG_CALENDAR_EVENT_INVITE](docs/smsg_calendar_event_invite.md)
+- [SMSG_CALENDAR_EVENT_INVITE_REMOVED](docs/smsg_calendar_event_invite_removed.md)
 - [SMSG_CALENDAR_FILTER_GUILD](docs/smsg_calendar_filter_guild.md)
 - [SMSG_CALENDAR_SEND_CALENDAR](docs/smsg_calendar_send_calendar.md)
 - [SMSG_CALENDAR_SEND_EVENT](docs/smsg_calendar_send_event.md)
