@@ -2099,6 +2099,8 @@ pub(crate) mod smsg_periodicauralog;
 pub use smsg_periodicauralog::*;
 pub(crate) mod smsg_pet_cast_failed;
 pub use smsg_pet_cast_failed::*;
+pub(crate) mod smsg_pet_guids;
+pub use smsg_pet_guids::*;
 pub(crate) mod smsg_pet_learned_spell;
 pub use smsg_pet_learned_spell::*;
 pub(crate) mod smsg_pet_spells;

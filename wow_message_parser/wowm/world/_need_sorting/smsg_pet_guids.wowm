@@ -1,0 +1,6 @@
+smsg SMSG_PET_GUIDS = 0x04AA {
+    u32 amount_of_guids;
+    Guid[amount_of_guids] guids;
+} {
+    versions = "3.3.5";
+}
