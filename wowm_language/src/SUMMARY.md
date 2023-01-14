@@ -891,6 +891,7 @@
 - [SMSG_CAST_FAILED](docs/smsg_cast_failed.md)
 - [SMSG_CAST_RESULT](docs/smsg_cast_result.md)
 - [SMSG_CHANNEL_LIST](docs/smsg_channel_list.md)
+- [SMSG_CHANNEL_MEMBER_COUNT](docs/smsg_channel_member_count.md)
 - [SMSG_CHANNEL_NOTIFY](docs/smsg_channel_notify.md)
 - [SMSG_CHARACTER_LOGIN_FAILED](docs/smsg_character_login_failed.md)
 - [SMSG_CHAR_CREATE](docs/smsg_char_create.md)

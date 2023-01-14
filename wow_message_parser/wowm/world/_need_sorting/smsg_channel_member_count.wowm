@@ -1,0 +1,15 @@
+smsg SMSG_CHANNEL_MEMBER_COUNT = 0x03D4 {
+    CString channel;
+    u8 flags;
+    u32 amount_of_members;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_CHANNEL_MEMBER_COUNT = 0x03D5 {
+    CString channel;
+    u8 flags;
+    u32 amount_of_members;
+} {
+    versions = "3.3.5";
+}

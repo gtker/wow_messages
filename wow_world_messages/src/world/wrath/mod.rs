@@ -1829,6 +1829,8 @@ pub(crate) mod smsg_cancel_auto_repeat;
 pub use smsg_cancel_auto_repeat::*;
 pub(crate) mod smsg_cast_failed;
 pub use smsg_cast_failed::*;
+pub(crate) mod smsg_channel_member_count;
+pub use smsg_channel_member_count::*;
 pub(crate) mod smsg_char_create;
 pub use smsg_char_create::*;
 pub(crate) mod smsg_char_delete;
