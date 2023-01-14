@@ -1,0 +1,8 @@
+smsg SMSG_BATTLEFIELD_MGR_EJECTED = 0x04E6 {
+    u32 battle_id;
+    u8 reason;
+    u8 battle_status;
+    u8 relocated;
+} {
+    versions = "3.3.5";
+}
