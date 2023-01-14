@@ -1,0 +1,5 @@
+smsg SMSG_SET_PHASE_SHIFT = 0x047C {
+    u32 new_phase;
+} {
+    versions = "3.3.5";
+}

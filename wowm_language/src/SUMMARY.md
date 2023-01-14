@@ -1180,6 +1180,7 @@
 - [SMSG_SET_FLAT_SPELL_MODIFIER](docs/smsg_set_flat_spell_modifier.md)
 - [SMSG_SET_FORCED_REACTIONS](docs/smsg_set_forced_reactions.md)
 - [SMSG_SET_PCT_SPELL_MODIFIER](docs/smsg_set_pct_spell_modifier.md)
+- [SMSG_SET_PHASE_SHIFT](docs/smsg_set_phase_shift.md)
 - [SMSG_SET_PLAYER_DECLINED_NAMES_RESULT](docs/smsg_set_player_declined_names_result.md)
 - [SMSG_SET_PROFICIENCY](docs/smsg_set_proficiency.md)
 - [SMSG_SET_REST_START](docs/smsg_set_rest_start.md)
