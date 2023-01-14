@@ -1,0 +1,7 @@
+smsg SMSG_MODIFY_COOLDOWN = 0x0491 {
+    Spell spell;
+    Guid player;
+    i32 cooldown_in_milliseconds;
+} {
+    versions = "3.3.5";
+}
