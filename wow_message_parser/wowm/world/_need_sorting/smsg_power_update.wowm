@@ -1,0 +1,7 @@
+smsg SMSG_POWER_UPDATE = 0x0480 {
+    PackedGuid unit;
+    Power power;
+    u32 amount;
+} {
+    versions = "3.3.5";
+}

@@ -2077,6 +2077,8 @@ pub(crate) mod smsg_played_time;
 pub use smsg_played_time::*;
 pub(crate) mod smsg_playerbound;
 pub use smsg_playerbound::*;
+pub(crate) mod smsg_power_update;
+pub use smsg_power_update::*;
 pub(crate) mod smsg_propose_level_grant;
 pub use smsg_propose_level_grant::*;
 pub(crate) mod smsg_query_time_response;

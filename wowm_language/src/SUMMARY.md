@@ -1134,6 +1134,7 @@
 - [SMSG_PLAY_SPELL_IMPACT](docs/smsg_play_spell_impact.md)
 - [SMSG_PLAY_SPELL_VISUAL](docs/smsg_play_spell_visual.md)
 - [SMSG_PONG](docs/smsg_pong.md)
+- [SMSG_POWER_UPDATE](docs/smsg_power_update.md)
 - [SMSG_PROCRESIST](docs/smsg_procresist.md)
 - [SMSG_PROPOSE_LEVEL_GRANT](docs/smsg_propose_level_grant.md)
 - [SMSG_PVP_CREDIT](docs/smsg_pvp_credit.md)
