@@ -1113,6 +1113,7 @@
 - [SMSG_NEW_WORLD](docs/smsg_new_world.md)
 - [SMSG_NOTIFICATION](docs/smsg_notification.md)
 - [SMSG_NPC_TEXT_UPDATE](docs/smsg_npc_text_update.md)
+- [SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA](docs/smsg_on_cancel_expected_ride_vehicle_aura.md)
 - [SMSG_OPEN_CONTAINER](docs/smsg_open_container.md)
 - [SMSG_OVERRIDE_LIGHT](docs/smsg_override_light.md)
 - [SMSG_PAGE_TEXT_QUERY_RESPONSE](docs/smsg_page_text_query_response.md)

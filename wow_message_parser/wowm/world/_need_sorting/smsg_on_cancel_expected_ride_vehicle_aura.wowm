@@ -1,0 +1,3 @@
+smsg SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA = 0x049D {} {
+    versions = "3.3.5";
+}
