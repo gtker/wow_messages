@@ -761,7 +761,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::nyi("SMSG_ECHO_PARTY_SQUELCH", 0x3F6),
     Data::new("CMSG_SPELLCLICK", 0x3F8),
     Data::new("SMSG_LOOT_LIST", 0x3F9),
-    Data::new("SMSG_VOICESESSION_FULL", 0x3FC),
+    Data::nyi("SMSG_VOICESESSION_FULL", 0x3FC),
     Data::new("MSG_GUILD_PERMISSIONS", 0x3FD),
     Data::new("MSG_GUILD_BANK_MONEY_WITHDRAWN", 0x3FE),
     Data::new("MSG_GUILD_EVENT_LOG_QUERY", 0x3FF),
