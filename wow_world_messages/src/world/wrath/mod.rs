@@ -1861,6 +1861,8 @@ pub(crate) mod smsg_auction_owner_list_result;
 pub use smsg_auction_owner_list_result::*;
 pub(crate) mod smsg_auction_owner_notification;
 pub use smsg_auction_owner_notification::*;
+pub(crate) mod smsg_aura_update;
+pub use smsg_aura_update::*;
 pub(crate) mod smsg_aura_update_all;
 pub use smsg_aura_update_all::*;
 pub(crate) mod smsg_auth_challenge;

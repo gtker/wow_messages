@@ -1,0 +1,6 @@
+smsg SMSG_AURA_UPDATE = 0x0496 {
+    PackedGuid unit;
+    AuraUpdate aura_update;
+} {
+    versions = "3.3.5";
+}

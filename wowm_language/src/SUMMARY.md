@@ -894,6 +894,7 @@
 - [SMSG_AUCTION_OWNER_LIST_RESULT](docs/smsg_auction_owner_list_result.md)
 - [SMSG_AUCTION_OWNER_NOTIFICATION](docs/smsg_auction_owner_notification.md)
 - [SMSG_AUCTION_REMOVED_NOTIFICATION](docs/smsg_auction_removed_notification.md)
+- [SMSG_AURA_UPDATE](docs/smsg_aura_update.md)
 - [SMSG_AURA_UPDATE_ALL](docs/smsg_aura_update_all.md)
 - [SMSG_AUTH_CHALLENGE](docs/smsg_auth_challenge.md)
 - [SMSG_AUTH_RESPONSE](docs/smsg_auth_response.md)
