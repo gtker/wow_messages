@@ -2163,6 +2163,8 @@ pub(crate) mod smsg_transfer_pending;
 pub use smsg_transfer_pending::*;
 pub(crate) mod smsg_trigger_cinematic;
 pub use smsg_trigger_cinematic::*;
+pub(crate) mod smsg_trigger_movie;
+pub use smsg_trigger_movie::*;
 pub(crate) mod smsg_update_account_data;
 pub use smsg_update_account_data::*;
 pub(crate) mod smsg_update_account_data_complete;

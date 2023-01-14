@@ -1,0 +1,5 @@
+smsg SMSG_TRIGGER_MOVIE = 0x0464 {
+    u32 movie_id;
+} {
+    versions = "3.3.5";
+}

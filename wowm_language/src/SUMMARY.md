@@ -1241,6 +1241,7 @@
 - [SMSG_TRANSFER_ABORTED](docs/smsg_transfer_aborted.md)
 - [SMSG_TRANSFER_PENDING](docs/smsg_transfer_pending.md)
 - [SMSG_TRIGGER_CINEMATIC](docs/smsg_trigger_cinematic.md)
+- [SMSG_TRIGGER_MOVIE](docs/smsg_trigger_movie.md)
 - [SMSG_TURN_IN_PETITION_RESULTS](docs/smsg_turn_in_petition_results.md)
 - [SMSG_TUTORIAL_FLAGS](docs/smsg_tutorial_flags.md)
 - [SMSG_UPDATE_ACCOUNT_DATA](docs/smsg_update_account_data.md)
