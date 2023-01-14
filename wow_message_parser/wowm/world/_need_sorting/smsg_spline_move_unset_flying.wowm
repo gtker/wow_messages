@@ -1,0 +1,11 @@
+smsg SMSG_SPLINE_MOVE_UNSET_FLYING = 0x0422 {
+    PackedGuid guid;
+} {
+    versions = "2.4.3";
+}
+
+smsg SMSG_SPLINE_MOVE_UNSET_FLYING = 0x0423 {
+    PackedGuid guid;
+} {
+    versions = "3.3.5";
+}

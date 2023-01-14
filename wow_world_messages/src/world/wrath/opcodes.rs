@@ -7610,6 +7610,7 @@ use crate::world::wrath::SMSG_SEND_UNLEARN_SPELLS;
 use crate::world::wrath::SMSG_PROPOSE_LEVEL_GRANT;
 use crate::world::wrath::SMSG_REFER_A_FRIEND_FAILURE;
 use crate::world::wrath::SMSG_SPLINE_MOVE_SET_FLYING;
+use crate::world::wrath::SMSG_SPLINE_MOVE_UNSET_FLYING;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
 use crate::world::wrath::MSG_MOVE_SET_PITCH_RATE_Server;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
@@ -8036,6 +8037,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PROPOSE_LEVEL_GRANT(SMSG_PROPOSE_LEVEL_GRANT),
     SMSG_REFER_A_FRIEND_FAILURE(SMSG_REFER_A_FRIEND_FAILURE),
     SMSG_SPLINE_MOVE_SET_FLYING(SMSG_SPLINE_MOVE_SET_FLYING),
+    SMSG_SPLINE_MOVE_UNSET_FLYING(SMSG_SPLINE_MOVE_UNSET_FLYING),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
     MSG_MOVE_SET_PITCH_RATE(MSG_MOVE_SET_PITCH_RATE_Server),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
@@ -8464,6 +8466,7 @@ impl ServerOpcodeMessage {
             0x041F => Ok(Self::SMSG_PROPOSE_LEVEL_GRANT(<SMSG_PROPOSE_LEVEL_GRANT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x041F, size: body_size, io, } } else { a } })?)),
             0x0421 => Ok(Self::SMSG_REFER_A_FRIEND_FAILURE(<SMSG_REFER_A_FRIEND_FAILURE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0421, size: body_size, io, } } else { a } })?)),
             0x0422 => Ok(Self::SMSG_SPLINE_MOVE_SET_FLYING(<SMSG_SPLINE_MOVE_SET_FLYING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0422, size: body_size, io, } } else { a } })?)),
+            0x0423 => Ok(Self::SMSG_SPLINE_MOVE_UNSET_FLYING(<SMSG_SPLINE_MOVE_UNSET_FLYING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0423, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
             0x045B => Ok(Self::MSG_MOVE_SET_PITCH_RATE(<MSG_MOVE_SET_PITCH_RATE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x045B, size: body_size, io, } } else { a } })?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
@@ -9041,6 +9044,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
@@ -9470,6 +9474,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.write_unencrypted_server(w),
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
@@ -9899,6 +9904,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10328,6 +10334,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10757,6 +10764,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11186,6 +11194,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PROPOSE_LEVEL_GRANT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11625,6 +11634,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PROPOSE_LEVEL_GRANT(_) => "SMSG_PROPOSE_LEVEL_GRANT",
             ServerOpcodeMessage::SMSG_REFER_A_FRIEND_FAILURE(_) => "SMSG_REFER_A_FRIEND_FAILURE",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_FLYING(_) => "SMSG_SPLINE_MOVE_SET_FLYING",
+            ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNSET_FLYING(_) => "SMSG_SPLINE_MOVE_UNSET_FLYING",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH_RATE(_) => "MSG_MOVE_SET_PITCH_RATE_Server",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
@@ -14129,6 +14139,12 @@ impl From<SMSG_REFER_A_FRIEND_FAILURE> for ServerOpcodeMessage {
 impl From<SMSG_SPLINE_MOVE_SET_FLYING> for ServerOpcodeMessage {
     fn from(c: SMSG_SPLINE_MOVE_SET_FLYING) -> Self {
         Self::SMSG_SPLINE_MOVE_SET_FLYING(c)
+    }
+}
+
+impl From<SMSG_SPLINE_MOVE_UNSET_FLYING> for ServerOpcodeMessage {
+    fn from(c: SMSG_SPLINE_MOVE_UNSET_FLYING) -> Self {
+        Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c)
     }
 }
 

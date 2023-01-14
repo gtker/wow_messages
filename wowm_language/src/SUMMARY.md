@@ -1187,6 +1187,7 @@
 - [SMSG_SPLINE_MOVE_START_SWIM](docs/smsg_spline_move_start_swim.md)
 - [SMSG_SPLINE_MOVE_STOP_SWIM](docs/smsg_spline_move_stop_swim.md)
 - [SMSG_SPLINE_MOVE_UNROOT](docs/smsg_spline_move_unroot.md)
+- [SMSG_SPLINE_MOVE_UNSET_FLYING](docs/smsg_spline_move_unset_flying.md)
 - [SMSG_SPLINE_MOVE_UNSET_HOVER](docs/smsg_spline_move_unset_hover.md)
 - [SMSG_SPLINE_MOVE_WATER_WALK](docs/smsg_spline_move_water_walk.md)
 - [SMSG_SPLINE_SET_FLIGHT_BACK_SPEED](docs/smsg_spline_set_flight_back_speed.md)

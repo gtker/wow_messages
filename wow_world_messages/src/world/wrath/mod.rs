@@ -2083,6 +2083,8 @@ pub(crate) mod smsg_spellnonmeleedamagelog;
 pub use smsg_spellnonmeleedamagelog::*;
 pub(crate) mod smsg_spline_move_set_flying;
 pub use smsg_spline_move_set_flying::*;
+pub(crate) mod smsg_spline_move_unset_flying;
+pub use smsg_spline_move_unset_flying::*;
 pub(crate) mod smsg_stable_result;
 pub use smsg_stable_result::*;
 pub(crate) mod smsg_summon_request;
