@@ -1,0 +1,21 @@
+enum CalendarStatusTime : u8 {
+    NOT_PRESENT = 0;
+    PRESENT = 1;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_CALENDAR_EVENT_INVITE = 0x043A {
+    PackedGuid invitee;
+    Guid event_id;
+    Guid invite_id;
+    u8 level;
+    u8 invite_status;
+    CalendarStatusTime time;
+    if (time == PRESENT) {
+        DateTime status_time;
+    }
+    Bool is_sign_up;
+} {
+    versions = "3.3.5";
+}
