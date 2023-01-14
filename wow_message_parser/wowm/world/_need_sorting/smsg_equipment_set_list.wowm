@@ -1,0 +1,15 @@
+struct EquipmentSetListItem {
+    Guid guid;
+    CString name;
+    CString icon_name;
+    Guid[19] equipment;
+} {
+     versions = "3.3.5";
+}
+
+smsg SMSG_EQUIPMENT_SET_LIST = 0x04BC {
+    u32 amount_of_equipment_sets;
+    EquipmentSetListItem[amount_of_equipment_sets] equipment_sets;
+} {
+    versions = "3.3.5";
+}
