@@ -910,6 +910,7 @@
 - [SMSG_BATTLEFIELD_LIST](docs/smsg_battlefield_list.md)
 - [SMSG_BATTLEFIELD_MGR_ENTERED](docs/smsg_battlefield_mgr_entered.md)
 - [SMSG_BATTLEFIELD_MGR_ENTRY_INVITE](docs/smsg_battlefield_mgr_entry_invite.md)
+- [SMSG_BATTLEFIELD_MGR_QUEUE_INVITE](docs/smsg_battlefield_mgr_queue_invite.md)
 - [SMSG_BATTLEFIELD_STATUS](docs/smsg_battlefield_status.md)
 - [SMSG_BATTLEGROUND_INFO_THROTTLED](docs/smsg_battleground_info_throttled.md)
 - [SMSG_BATTLEGROUND_PLAYER_JOINED](docs/smsg_battleground_player_joined.md)

@@ -1,0 +1,8 @@
+smsg SMSG_BATTLEFIELD_MGR_QUEUE_INVITE = 0x04E1 {
+    u32 battle_id;
+    u8 warmup {
+        comment = "Possibly not used.";
+    }
+} {
+    versions = "3.3.5";
+}

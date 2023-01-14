@@ -1891,6 +1891,8 @@ pub(crate) mod smsg_battlefield_mgr_entered;
 pub use smsg_battlefield_mgr_entered::*;
 pub(crate) mod smsg_battlefield_mgr_entry_invite;
 pub use smsg_battlefield_mgr_entry_invite::*;
+pub(crate) mod smsg_battlefield_mgr_queue_invite;
+pub use smsg_battlefield_mgr_queue_invite::*;
 pub(crate) mod smsg_battlefield_status;
 pub use smsg_battlefield_status::*;
 pub(crate) mod smsg_battleground_info_throttled;
