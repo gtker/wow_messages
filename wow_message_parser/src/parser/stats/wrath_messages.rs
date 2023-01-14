@@ -848,7 +848,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_CALENDAR_RAID_LOCKOUT_UPDATED", 0x471),
     Data::new("CMSG_CHAR_CUSTOMIZE", 0x473),
     Data::new("SMSG_CHAR_CUSTOMIZE", 0x474),
-    Data::new("SMSG_PET_RENAMEABLE", 0x475),
+    Data::nyi("SMSG_PET_RENAMEABLE", 0x475),
     Data::new("CMSG_REQUEST_VEHICLE_EXIT", 0x476),
     Data::new("CMSG_REQUEST_VEHICLE_PREV_SEAT", 0x477),
     Data::new("CMSG_REQUEST_VEHICLE_NEXT_SEAT", 0x478),
