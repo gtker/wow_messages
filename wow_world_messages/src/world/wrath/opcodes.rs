@@ -7697,6 +7697,7 @@ use crate::world::wrath::SMSG_TALENTS_INVOLUNTARILY_RESET;
 use crate::world::wrath::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE;
 use crate::world::wrath::SMSG_CORPSE_NOT_IN_INSTANCE;
 use crate::world::wrath::SMSG_CAMERA_SHAKE;
+use crate::world::wrath::SMSG_SOCKET_GEMS_RESULT;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -8203,6 +8204,7 @@ pub enum ServerOpcodeMessage {
     SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(SMSG_QUERY_QUESTS_COMPLETED_RESPONSE),
     SMSG_CORPSE_NOT_IN_INSTANCE(SMSG_CORPSE_NOT_IN_INSTANCE),
     SMSG_CAMERA_SHAKE(SMSG_CAMERA_SHAKE),
+    SMSG_SOCKET_GEMS_RESULT(SMSG_SOCKET_GEMS_RESULT),
 }
 
 impl ServerOpcodeMessage {
@@ -8711,6 +8713,7 @@ impl ServerOpcodeMessage {
             0x0501 => Ok(Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(<SMSG_QUERY_QUESTS_COMPLETED_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0501, size: body_size, io, } } else { a } })?)),
             0x0506 => Ok(Self::SMSG_CORPSE_NOT_IN_INSTANCE(<SMSG_CORPSE_NOT_IN_INSTANCE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0506, size: body_size, io, } } else { a } })?)),
             0x050A => Ok(Self::SMSG_CAMERA_SHAKE(<SMSG_CAMERA_SHAKE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x050A, size: body_size, io, } } else { a } })?)),
+            0x050B => Ok(Self::SMSG_SOCKET_GEMS_RESULT(<SMSG_SOCKET_GEMS_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x050B, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
     }
@@ -9368,6 +9371,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CAMERA_SHAKE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SOCKET_GEMS_RESULT(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -9877,6 +9881,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CAMERA_SHAKE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SOCKET_GEMS_RESULT(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -10386,6 +10391,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CAMERA_SHAKE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SOCKET_GEMS_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -10895,6 +10901,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CAMERA_SHAKE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SOCKET_GEMS_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -11404,6 +11411,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CAMERA_SHAKE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SOCKET_GEMS_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -11913,6 +11921,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CAMERA_SHAKE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SOCKET_GEMS_RESULT(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -12432,6 +12441,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(_) => "SMSG_QUERY_QUESTS_COMPLETED_RESPONSE",
             ServerOpcodeMessage::SMSG_CORPSE_NOT_IN_INSTANCE(_) => "SMSG_CORPSE_NOT_IN_INSTANCE",
             ServerOpcodeMessage::SMSG_CAMERA_SHAKE(_) => "SMSG_CAMERA_SHAKE",
+            ServerOpcodeMessage::SMSG_SOCKET_GEMS_RESULT(_) => "SMSG_SOCKET_GEMS_RESULT",
         })
     }
 }
@@ -15451,6 +15461,12 @@ impl From<SMSG_CORPSE_NOT_IN_INSTANCE> for ServerOpcodeMessage {
 impl From<SMSG_CAMERA_SHAKE> for ServerOpcodeMessage {
     fn from(c: SMSG_CAMERA_SHAKE) -> Self {
         Self::SMSG_CAMERA_SHAKE(c)
+    }
+}
+
+impl From<SMSG_SOCKET_GEMS_RESULT> for ServerOpcodeMessage {
+    fn from(c: SMSG_SOCKET_GEMS_RESULT) -> Self {
+        Self::SMSG_SOCKET_GEMS_RESULT(c)
     }
 }
 

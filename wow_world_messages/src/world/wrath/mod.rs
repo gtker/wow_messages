@@ -2239,6 +2239,8 @@ pub(crate) mod smsg_set_projectile_position;
 pub use smsg_set_projectile_position::*;
 pub(crate) mod smsg_show_mailbox;
 pub use smsg_show_mailbox::*;
+pub(crate) mod smsg_socket_gems_result;
+pub use smsg_socket_gems_result::*;
 pub(crate) mod smsg_spell_failure;
 pub use smsg_spell_failure::*;
 pub(crate) mod smsg_spell_go;

@@ -1241,6 +1241,7 @@
 - [SMSG_SHOWTAXINODES](docs/smsg_showtaxinodes.md)
 - [SMSG_SHOW_BANK](docs/smsg_show_bank.md)
 - [SMSG_SHOW_MAILBOX](docs/smsg_show_mailbox.md)
+- [SMSG_SOCKET_GEMS_RESULT](docs/smsg_socket_gems_result.md)
 - [SMSG_SPELLDAMAGESHIELD](docs/smsg_spelldamageshield.md)
 - [SMSG_SPELLDISPELLOG](docs/smsg_spelldispellog.md)
 - [SMSG_SPELLENERGIZELOG](docs/smsg_spellenergizelog.md)

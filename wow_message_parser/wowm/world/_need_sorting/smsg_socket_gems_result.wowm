@@ -1,0 +1,6 @@
+smsg SMSG_SOCKET_GEMS_RESULT = 0x050B {
+    Guid item;
+    u32[3] sockets;
+} {
+    versions = "3.3.5";
+}
