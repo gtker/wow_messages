@@ -7686,6 +7686,7 @@ use crate::world::wrath::SMSG_BATTLEFIELD_MGR_QUEUE_INVITE;
 use crate::world::wrath::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE;
 use crate::world::wrath::SMSG_BATTLEFIELD_MGR_EJECT_PENDING;
 use crate::world::wrath::SMSG_BATTLEFIELD_MGR_EJECTED;
+use crate::world::wrath::SMSG_BATTLEFIELD_MGR_STATE_CHANGE;
 use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
 use crate::world::wrath::SMSG_WORLD_STATE_UI_TIMER_UPDATE;
 
@@ -8183,6 +8184,7 @@ pub enum ServerOpcodeMessage {
     SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE),
     SMSG_BATTLEFIELD_MGR_EJECT_PENDING(SMSG_BATTLEFIELD_MGR_EJECT_PENDING),
     SMSG_BATTLEFIELD_MGR_EJECTED(SMSG_BATTLEFIELD_MGR_EJECTED),
+    SMSG_BATTLEFIELD_MGR_STATE_CHANGE(SMSG_BATTLEFIELD_MGR_STATE_CHANGE),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
     SMSG_WORLD_STATE_UI_TIMER_UPDATE(SMSG_WORLD_STATE_UI_TIMER_UPDATE),
 }
@@ -8682,6 +8684,7 @@ impl ServerOpcodeMessage {
             0x04E4 => Ok(Self::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(<SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04E4, size: body_size, io, } } else { a } })?)),
             0x04E5 => Ok(Self::SMSG_BATTLEFIELD_MGR_EJECT_PENDING(<SMSG_BATTLEFIELD_MGR_EJECT_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04E5, size: body_size, io, } } else { a } })?)),
             0x04E6 => Ok(Self::SMSG_BATTLEFIELD_MGR_EJECTED(<SMSG_BATTLEFIELD_MGR_EJECTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04E6, size: body_size, io, } } else { a } })?)),
+            0x04E8 => Ok(Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(<SMSG_BATTLEFIELD_MGR_STATE_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04E8, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
             0x04F7 => Ok(Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(<SMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F7, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
@@ -9330,6 +9333,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEFIELD_MGR_EJECT_PENDING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_server(w, e),
         }
@@ -9830,6 +9834,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEFIELD_MGR_EJECT_PENDING(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_server(w),
         }
@@ -10330,6 +10335,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_MGR_EJECT_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
         }
@@ -10830,6 +10836,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_MGR_EJECT_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
         }
@@ -11330,6 +11337,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_MGR_EJECT_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
         }
@@ -11830,6 +11838,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_MGR_EJECT_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
         }
@@ -12340,6 +12349,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE(_) => "SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE",
             ServerOpcodeMessage::SMSG_BATTLEFIELD_MGR_EJECT_PENDING(_) => "SMSG_BATTLEFIELD_MGR_EJECT_PENDING",
             ServerOpcodeMessage::SMSG_BATTLEFIELD_MGR_EJECTED(_) => "SMSG_BATTLEFIELD_MGR_EJECTED",
+            ServerOpcodeMessage::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(_) => "SMSG_BATTLEFIELD_MGR_STATE_CHANGE",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
             ServerOpcodeMessage::SMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "SMSG_WORLD_STATE_UI_TIMER_UPDATE",
         })
@@ -15295,6 +15305,12 @@ impl From<SMSG_BATTLEFIELD_MGR_EJECT_PENDING> for ServerOpcodeMessage {
 impl From<SMSG_BATTLEFIELD_MGR_EJECTED> for ServerOpcodeMessage {
     fn from(c: SMSG_BATTLEFIELD_MGR_EJECTED) -> Self {
         Self::SMSG_BATTLEFIELD_MGR_EJECTED(c)
+    }
+}
+
+impl From<SMSG_BATTLEFIELD_MGR_STATE_CHANGE> for ServerOpcodeMessage {
+    fn from(c: SMSG_BATTLEFIELD_MGR_STATE_CHANGE) -> Self {
+        Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c)
     }
 }
 

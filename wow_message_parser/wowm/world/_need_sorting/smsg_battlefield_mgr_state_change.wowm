@@ -1,0 +1,7 @@
+smsg SMSG_BATTLEFIELD_MGR_STATE_CHANGE = 0x04E8 {
+    u32 unknown1;
+    u32 unknown2;
+} {
+    comment = "Only exists as comment in azerothcore/trinitycore.";
+    versions = "3.3.5";
+}
