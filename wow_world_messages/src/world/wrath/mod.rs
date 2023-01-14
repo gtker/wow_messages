@@ -1871,6 +1871,8 @@ pub(crate) mod smsg_calendar_event_invite;
 pub use smsg_calendar_event_invite::*;
 pub(crate) mod smsg_calendar_event_invite_alert;
 pub use smsg_calendar_event_invite_alert::*;
+pub(crate) mod smsg_calendar_event_invite_notes;
+pub use smsg_calendar_event_invite_notes::*;
 pub(crate) mod smsg_calendar_event_invite_removed;
 pub use smsg_calendar_event_invite_removed::*;
 pub(crate) mod smsg_calendar_event_invite_removed_alert;
