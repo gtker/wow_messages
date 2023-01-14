@@ -1,0 +1,32 @@
+struct CalendarSendInvitee {
+    PackedGuid invitee;
+    u8 level;
+    u8 status;
+    u8 rank;
+    u8 guild_member;
+    Guid invite_id;
+    DateTime status_time;
+    CString text;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_CALENDAR_SEND_EVENT = 0x0437 {
+    u8 send_type;
+    PackedGuid creator;
+    Guid event_id;
+    CString title;
+    CString description;
+    u8 event_type;
+    u8 repeatable;
+    u32 max_invitees;
+    u32 dungeon_id;
+    u32 flags;
+    DateTime event_time;
+    DateTime time_zone_time;
+    u32 guild_id;
+    u32 amount_of_invitees;
+    CalendarSendInvitee[amount_of_invitees] invitees;
+} {
+    versions = "3.3.5";
+}
