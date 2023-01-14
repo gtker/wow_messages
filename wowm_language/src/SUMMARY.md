@@ -878,6 +878,7 @@
 - [SMSG_AREA_SPIRIT_HEALER_TIME](docs/smsg_area_spirit_healer_time.md)
 - [SMSG_AREA_TRIGGER_MESSAGE](docs/smsg_area_trigger_message.md)
 - [SMSG_ARENA_ERROR](docs/smsg_arena_error.md)
+- [SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED](docs/smsg_arena_team_change_failed_queued.md)
 - [SMSG_ARENA_TEAM_COMMAND_RESULT](docs/smsg_arena_team_command_result.md)
 - [SMSG_ARENA_TEAM_EVENT](docs/smsg_arena_team_event.md)
 - [SMSG_ARENA_TEAM_INVITE](docs/smsg_arena_team_invite.md)

@@ -1,0 +1,6 @@
+smsg SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED = 0x04C8 {
+    u32 unknown;
+} {
+    comment = "This message only exists as a comment in azerothcore/trinitycore.";
+    versions = "3.3.5";
+}

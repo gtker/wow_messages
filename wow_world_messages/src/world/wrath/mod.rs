@@ -1855,6 +1855,8 @@ pub(crate) mod smsg_add_rune_power;
 pub use smsg_add_rune_power::*;
 pub(crate) mod smsg_addon_info;
 pub use smsg_addon_info::*;
+pub(crate) mod smsg_arena_team_change_failed_queued;
+pub use smsg_arena_team_change_failed_queued::*;
 pub(crate) mod smsg_arena_team_roster;
 pub use smsg_arena_team_roster::*;
 pub(crate) mod smsg_arena_unit_destroyed;
