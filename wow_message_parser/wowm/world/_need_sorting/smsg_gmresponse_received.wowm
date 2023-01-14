@@ -1,0 +1,12 @@
+smsg SMSG_GMRESPONSE_RECEIVED = 0x04EF {
+    u32 response_id;
+    u32 ticket_id;
+    CString message {
+        max_length = "2000";
+    }
+    CString[4] response {
+        max_length = "4000";
+    }
+} {
+    versions = "3.3.5";
+}
