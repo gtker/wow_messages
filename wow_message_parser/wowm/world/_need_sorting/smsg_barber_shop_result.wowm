@@ -1,0 +1,14 @@
+enum BarberShopResult : u8 {
+    OK = 0;
+    NOT_ENOUGH_MONEY = 1;
+    MUST_BE_SEATED_IN_BARBER_CHAIR = 2;
+    NOT_ENOUGH_MONEY2 = 3;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_BARBER_SHOP_RESULT = 0x0428 {
+    (u32)BarberShopResult result;
+} {
+    versions = "3.3.5";
+}
