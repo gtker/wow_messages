@@ -10162,6 +10162,7 @@ Used in:
 * [LfgListPlayer](lfglistplayer.md)
 * [QuestPoi](questpoi.md)
 * [Relation](relation.md)
+* [SMSG_BATTLEFIELD_MGR_ENTRY_INVITE](smsg_battlefield_mgr_entry_invite.md)
 * [SMSG_BINDER_CONFIRM](smsg_binder_confirm.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_CAST_FAILED](smsg_cast_failed.md)
