@@ -712,7 +712,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x03ad => "MSG_MOVE_UPDATE_CAN_FLY",
         0x03ae => "MSG_RAID_READY_CHECK_CONFIRM",
         0x03af => "CMSG_VOICE_SESSION_ENABLE",
-        0x03b0 => "SMSG_VOICE_SESSION_ENABLE",
         0x03b1 => "SMSG_VOICE_PARENTAL_CONTROLS",
         0x03b3 => "SMSG_GM_MESSAGECHAT",
         0x03b5 => "CMSG_COMMENTATOR_ENABLE",
