@@ -1,0 +1,9 @@
+smsg SMSG_CALENDAR_RAID_LOCKOUT_ADDED = 0x043E {
+    DateTime time;
+    Map map;
+    u32 difficulty;
+    u32 remaining_time;
+    Guid instance_id;
+} {
+    versions = "3.3.5";
+}

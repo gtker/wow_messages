@@ -7621,6 +7621,7 @@ use crate::world::wrath::SMSG_CALENDAR_EVENT_INVITE;
 use crate::world::wrath::SMSG_CALENDAR_EVENT_INVITE_REMOVED;
 use crate::world::wrath::SMSG_CALENDAR_EVENT_STATUS;
 use crate::world::wrath::SMSG_CALENDAR_COMMAND_RESULT;
+use crate::world::wrath::SMSG_CALENDAR_RAID_LOCKOUT_ADDED;
 use crate::world::wrath::SMSG_CALENDAR_SEND_NUM_PENDING;
 use crate::world::wrath::MSG_MOVE_SET_PITCH_RATE_Server;
 use crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
@@ -8058,6 +8059,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CALENDAR_EVENT_INVITE_REMOVED(SMSG_CALENDAR_EVENT_INVITE_REMOVED),
     SMSG_CALENDAR_EVENT_STATUS(SMSG_CALENDAR_EVENT_STATUS),
     SMSG_CALENDAR_COMMAND_RESULT(SMSG_CALENDAR_COMMAND_RESULT),
+    SMSG_CALENDAR_RAID_LOCKOUT_ADDED(SMSG_CALENDAR_RAID_LOCKOUT_ADDED),
     SMSG_CALENDAR_SEND_NUM_PENDING(SMSG_CALENDAR_SEND_NUM_PENDING),
     MSG_MOVE_SET_PITCH_RATE(MSG_MOVE_SET_PITCH_RATE_Server),
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
@@ -8497,6 +8499,7 @@ impl ServerOpcodeMessage {
             0x043B => Ok(Self::SMSG_CALENDAR_EVENT_INVITE_REMOVED(<SMSG_CALENDAR_EVENT_INVITE_REMOVED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x043B, size: body_size, io, } } else { a } })?)),
             0x043C => Ok(Self::SMSG_CALENDAR_EVENT_STATUS(<SMSG_CALENDAR_EVENT_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x043C, size: body_size, io, } } else { a } })?)),
             0x043D => Ok(Self::SMSG_CALENDAR_COMMAND_RESULT(<SMSG_CALENDAR_COMMAND_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x043D, size: body_size, io, } } else { a } })?)),
+            0x043E => Ok(Self::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(<SMSG_CALENDAR_RAID_LOCKOUT_ADDED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x043E, size: body_size, io, } } else { a } })?)),
             0x0448 => Ok(Self::SMSG_CALENDAR_SEND_NUM_PENDING(<SMSG_CALENDAR_SEND_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0448, size: body_size, io, } } else { a } })?)),
             0x045B => Ok(Self::MSG_MOVE_SET_PITCH_RATE(<MSG_MOVE_SET_PITCH_RATE_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x045B, size: body_size, io, } } else { a } })?)),
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
@@ -9085,6 +9088,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CALENDAR_EVENT_INVITE_REMOVED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_EVENT_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_COMMAND_RESULT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
@@ -9525,6 +9529,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CALENDAR_EVENT_INVITE_REMOVED(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_EVENT_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_COMMAND_RESULT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
@@ -9965,6 +9970,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CALENDAR_EVENT_INVITE_REMOVED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_EVENT_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_COMMAND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10405,6 +10411,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CALENDAR_EVENT_INVITE_REMOVED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_EVENT_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_COMMAND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10845,6 +10852,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CALENDAR_EVENT_INVITE_REMOVED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_EVENT_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_COMMAND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11285,6 +11293,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CALENDAR_EVENT_INVITE_REMOVED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_EVENT_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_COMMAND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH_RATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11735,6 +11744,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CALENDAR_EVENT_INVITE_REMOVED(_) => "SMSG_CALENDAR_EVENT_INVITE_REMOVED",
             ServerOpcodeMessage::SMSG_CALENDAR_EVENT_STATUS(_) => "SMSG_CALENDAR_EVENT_STATUS",
             ServerOpcodeMessage::SMSG_CALENDAR_COMMAND_RESULT(_) => "SMSG_CALENDAR_COMMAND_RESULT",
+            ServerOpcodeMessage::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(_) => "SMSG_CALENDAR_RAID_LOCKOUT_ADDED",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_NUM_PENDING(_) => "SMSG_CALENDAR_SEND_NUM_PENDING",
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH_RATE(_) => "MSG_MOVE_SET_PITCH_RATE_Server",
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
@@ -14305,6 +14315,12 @@ impl From<SMSG_CALENDAR_EVENT_STATUS> for ServerOpcodeMessage {
 impl From<SMSG_CALENDAR_COMMAND_RESULT> for ServerOpcodeMessage {
     fn from(c: SMSG_CALENDAR_COMMAND_RESULT) -> Self {
         Self::SMSG_CALENDAR_COMMAND_RESULT(c)
+    }
+}
+
+impl From<SMSG_CALENDAR_RAID_LOCKOUT_ADDED> for ServerOpcodeMessage {
+    fn from(c: SMSG_CALENDAR_RAID_LOCKOUT_ADDED) -> Self {
+        Self::SMSG_CALENDAR_RAID_LOCKOUT_ADDED(c)
     }
 }
 
