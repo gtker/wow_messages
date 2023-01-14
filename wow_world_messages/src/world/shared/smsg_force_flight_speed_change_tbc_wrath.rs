@@ -8,7 +8,6 @@ use std::io::{Write, Read};
 /// smsg SMSG_FORCE_FLIGHT_SPEED_CHANGE = 0x0381 {
 ///     PackedGuid guid;
 ///     u32 move_event;
-///     u8 unknown;
 ///     f32 speed;
 /// }
 /// ```
@@ -18,10 +17,6 @@ pub struct SMSG_FORCE_FLIGHT_SPEED_CHANGE {
     /// cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39
     ///
     pub move_event: u32,
-    /// mangosone sets to 0
-    /// mangosone: new 2.1.0
-    ///
-    pub unknown: u8,
     pub speed: f32,
 }
 
@@ -40,9 +35,6 @@ impl crate::Message for SMSG_FORCE_FLIGHT_SPEED_CHANGE {
         // move_event: u32
         w.write_all(&self.move_event.to_le_bytes())?;
 
-        // unknown: u8
-        w.write_all(&self.unknown.to_le_bytes())?;
-
         // speed: f32
         w.write_all(&self.speed.to_le_bytes())?;
 
@@ -50,7 +42,7 @@ impl crate::Message for SMSG_FORCE_FLIGHT_SPEED_CHANGE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(11..=18).contains(&body_size) {
+        if !(10..=17).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0381, size: body_size as u32 });
         }
 
@@ -60,15 +52,11 @@ impl crate::Message for SMSG_FORCE_FLIGHT_SPEED_CHANGE {
         // move_event: u32
         let move_event = crate::util::read_u32_le(r)?;
 
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(r)?;
-
         // speed: f32
         let speed = crate::util::read_f32_le(r)?;
         Ok(Self {
             guid,
             move_event,
-            unknown,
             speed,
         })
     }
@@ -84,7 +72,6 @@ impl SMSG_FORCE_FLIGHT_SPEED_CHANGE {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: Guid
         + 4 // move_event: u32
-        + 1 // unknown: u8
         + 4 // speed: f32
     }
 }

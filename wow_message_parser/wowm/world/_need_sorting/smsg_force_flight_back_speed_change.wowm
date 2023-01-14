@@ -4,10 +4,6 @@ smsg SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE = 0x0383 {
         comment = "cmangos/mangoszero/vmangos: set to 0";
         comment = "cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39";
     }
-    u8 unknown {
-        comment = "mangosone sets to 0";
-        comment = "mangosone: new 2.1.0";
-    }
     f32 speed;
 } {
     versions = "2.4.3 3";
