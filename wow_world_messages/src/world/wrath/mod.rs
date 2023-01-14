@@ -1857,6 +1857,8 @@ pub(crate) mod smsg_addon_info;
 pub use smsg_addon_info::*;
 pub(crate) mod smsg_arena_team_roster;
 pub use smsg_arena_team_roster::*;
+pub(crate) mod smsg_arena_unit_destroyed;
+pub use smsg_arena_unit_destroyed::*;
 pub(crate) mod smsg_attackerstateupdate;
 pub use smsg_attackerstateupdate::*;
 pub(crate) mod smsg_auction_bidder_list_result;

@@ -1,0 +1,5 @@
+smsg SMSG_ARENA_UNIT_DESTROYED = 0x04C7 {
+    Guid unit;
+} {
+    versions = "3.3.5";
+}

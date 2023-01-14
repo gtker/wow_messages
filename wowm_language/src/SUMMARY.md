@@ -884,6 +884,7 @@
 - [SMSG_ARENA_TEAM_QUERY_RESPONSE](docs/smsg_arena_team_query_response.md)
 - [SMSG_ARENA_TEAM_ROSTER](docs/smsg_arena_team_roster.md)
 - [SMSG_ARENA_TEAM_STATS](docs/smsg_arena_team_stats.md)
+- [SMSG_ARENA_UNIT_DESTROYED](docs/smsg_arena_unit_destroyed.md)
 - [SMSG_ATTACKERSTATEUPDATE](docs/smsg_attackerstateupdate.md)
 - [SMSG_ATTACKSTART](docs/smsg_attackstart.md)
 - [SMSG_ATTACKSTOP](docs/smsg_attackstop.md)

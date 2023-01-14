@@ -7671,6 +7671,7 @@ use crate::world::wrath::SMSG_CALENDAR_CLEAR_PENDING_ACTION;
 use crate::world::wrath::SMSG_EQUIPMENT_SET_LIST;
 use crate::world::wrath::SMSG_SET_PROJECTILE_POSITION;
 use crate::world::wrath::SMSG_TALENTS_INFO;
+use crate::world::wrath::SMSG_ARENA_UNIT_DESTROYED;
 use crate::world::wrath::MSG_MOVE_GRAVITY_CHNG_Server;
 use crate::world::wrath::MSG_SET_RAID_DIFFICULTY_Server;
 use crate::world::wrath::SMSG_WORLD_STATE_UI_TIMER_UPDATE;
@@ -8154,6 +8155,7 @@ pub enum ServerOpcodeMessage {
     SMSG_EQUIPMENT_SET_LIST(SMSG_EQUIPMENT_SET_LIST),
     SMSG_SET_PROJECTILE_POSITION(SMSG_SET_PROJECTILE_POSITION),
     SMSG_TALENTS_INFO(SMSG_TALENTS_INFO),
+    SMSG_ARENA_UNIT_DESTROYED(SMSG_ARENA_UNIT_DESTROYED),
     MSG_MOVE_GRAVITY_CHNG(MSG_MOVE_GRAVITY_CHNG_Server),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
     SMSG_WORLD_STATE_UI_TIMER_UPDATE(SMSG_WORLD_STATE_UI_TIMER_UPDATE),
@@ -8639,6 +8641,7 @@ impl ServerOpcodeMessage {
             0x04BC => Ok(Self::SMSG_EQUIPMENT_SET_LIST(<SMSG_EQUIPMENT_SET_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BC, size: body_size, io, } } else { a } })?)),
             0x04BF => Ok(Self::SMSG_SET_PROJECTILE_POSITION(<SMSG_SET_PROJECTILE_POSITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BF, size: body_size, io, } } else { a } })?)),
             0x04C0 => Ok(Self::SMSG_TALENTS_INFO(<SMSG_TALENTS_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04C0, size: body_size, io, } } else { a } })?)),
+            0x04C7 => Ok(Self::SMSG_ARENA_UNIT_DESTROYED(<SMSG_ARENA_UNIT_DESTROYED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04C7, size: body_size, io, } } else { a } })?)),
             0x04D2 => Ok(Self::MSG_MOVE_GRAVITY_CHNG(<MSG_MOVE_GRAVITY_CHNG_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04D2, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
             0x04F7 => Ok(Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(<SMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F7, size: body_size, io, } } else { a } })?)),
@@ -9273,6 +9276,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TALENTS_INFO(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ARENA_UNIT_DESTROYED(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_server(w, e),
@@ -9759,6 +9763,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.write_unencrypted_server(w),
             Self::SMSG_TALENTS_INFO(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ARENA_UNIT_DESTROYED(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_server(w),
@@ -10245,6 +10250,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TALENTS_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ARENA_UNIT_DESTROYED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10731,6 +10737,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TALENTS_INFO(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ARENA_UNIT_DESTROYED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11217,6 +11224,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TALENTS_INFO(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ARENA_UNIT_DESTROYED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11703,6 +11711,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TALENTS_INFO(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ARENA_UNIT_DESTROYED(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_GRAVITY_CHNG(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
@@ -12199,6 +12208,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_EQUIPMENT_SET_LIST(_) => "SMSG_EQUIPMENT_SET_LIST",
             ServerOpcodeMessage::SMSG_SET_PROJECTILE_POSITION(_) => "SMSG_SET_PROJECTILE_POSITION",
             ServerOpcodeMessage::SMSG_TALENTS_INFO(_) => "SMSG_TALENTS_INFO",
+            ServerOpcodeMessage::SMSG_ARENA_UNIT_DESTROYED(_) => "SMSG_ARENA_UNIT_DESTROYED",
             ServerOpcodeMessage::MSG_MOVE_GRAVITY_CHNG(_) => "MSG_MOVE_GRAVITY_CHNG_Server",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
             ServerOpcodeMessage::SMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "SMSG_WORLD_STATE_UI_TIMER_UPDATE",
@@ -15065,6 +15075,12 @@ impl From<SMSG_SET_PROJECTILE_POSITION> for ServerOpcodeMessage {
 impl From<SMSG_TALENTS_INFO> for ServerOpcodeMessage {
     fn from(c: SMSG_TALENTS_INFO) -> Self {
         Self::SMSG_TALENTS_INFO(c)
+    }
+}
+
+impl From<SMSG_ARENA_UNIT_DESTROYED> for ServerOpcodeMessage {
+    fn from(c: SMSG_ARENA_UNIT_DESTROYED) -> Self {
+        Self::SMSG_ARENA_UNIT_DESTROYED(c)
     }
 }
 
