@@ -1,0 +1,19 @@
+enum ItemRefundResult : u8 {
+    SUCCESS = 0;
+    FAILURE = 10;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_ITEM_REFUND_RESULT = 0x04B5 {
+    Guid item;
+    ItemRefundResult result;
+    if (result == SUCCESS) {
+        u32 money_cost;
+        u32 honor_point_cost;
+        u32 arena_point_cost;
+        ItemRefundExtra[5] extra_items;
+    }
+} {
+    versions = "3.3.5";
+}
