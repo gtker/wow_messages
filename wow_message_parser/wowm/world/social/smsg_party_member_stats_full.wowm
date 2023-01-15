@@ -40,6 +40,9 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
             comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
         }
     }
+    if (mask & PET_GUID) {
+        Guid pet;
+    }
     if (mask & PET_NAME) {
         CString pet_name;
     }

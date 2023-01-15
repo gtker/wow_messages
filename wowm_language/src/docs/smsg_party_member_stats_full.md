@@ -40,6 +40,9 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
     if (mask & AURAS) {
         AuraMask auras;
     }
+    if (mask & PET_GUID) {
+        Guid pet;
+    }
     if (mask & PET_NAME) {
         CString pet_name;
     }
@@ -144,6 +147,12 @@ If mask contains `AURAS`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
+
+If mask contains `PET_GUID`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
 
 If mask contains `PET_NAME`:
 
