@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_inspect_talent.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_inspect_talent.wowm#L15):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_inspect_talent.wowm:23`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_inspect_talent.wowm#L23):
 /// ```text
 /// struct InspectTalentGear {
 ///     u32 item;

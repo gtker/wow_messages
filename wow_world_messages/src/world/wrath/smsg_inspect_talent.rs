@@ -4,7 +4,7 @@ use crate::world::wrath::InspectTalentSpec;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_inspect_talent.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_inspect_talent.wowm#L30):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_inspect_talent.wowm:38`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_inspect_talent.wowm#L38):
 /// ```text
 /// smsg SMSG_INSPECT_TALENT = 0x03F4 {
 ///     PackedGuid player;

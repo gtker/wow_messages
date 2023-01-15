@@ -6616,6 +6616,7 @@ use crate::world::tbc::MSG_GUILD_BANK_LOG_QUERY_Server;
 use crate::world::tbc::SMSG_USERLIST_ADD;
 use crate::world::tbc::SMSG_USERLIST_REMOVE;
 use crate::world::tbc::SMSG_USERLIST_UPDATE;
+use crate::world::tbc::SMSG_INSPECT_TALENT;
 use crate::world::tbc::SMSG_LOOT_LIST;
 use crate::world::tbc::MSG_GUILD_PERMISSIONS_Server;
 use crate::world::tbc::MSG_GUILD_EVENT_LOG_QUERY_Server;
@@ -7028,6 +7029,7 @@ pub enum ServerOpcodeMessage {
     SMSG_USERLIST_ADD(SMSG_USERLIST_ADD),
     SMSG_USERLIST_REMOVE(SMSG_USERLIST_REMOVE),
     SMSG_USERLIST_UPDATE(SMSG_USERLIST_UPDATE),
+    SMSG_INSPECT_TALENT(SMSG_INSPECT_TALENT),
     SMSG_LOOT_LIST(SMSG_LOOT_LIST),
     MSG_GUILD_PERMISSIONS(MSG_GUILD_PERMISSIONS_Server),
     MSG_GUILD_EVENT_LOG_QUERY(MSG_GUILD_EVENT_LOG_QUERY_Server),
@@ -7442,6 +7444,7 @@ impl ServerOpcodeMessage {
             0x03EF => Ok(Self::SMSG_USERLIST_ADD(<SMSG_USERLIST_ADD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EF, size: body_size, io, } } else { a } })?)),
             0x03F0 => Ok(Self::SMSG_USERLIST_REMOVE(<SMSG_USERLIST_REMOVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F0, size: body_size, io, } } else { a } })?)),
             0x03F1 => Ok(Self::SMSG_USERLIST_UPDATE(<SMSG_USERLIST_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F1, size: body_size, io, } } else { a } })?)),
+            0x03F3 => Ok(Self::SMSG_INSPECT_TALENT(<SMSG_INSPECT_TALENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F3, size: body_size, io, } } else { a } })?)),
             0x03F8 => Ok(Self::SMSG_LOOT_LIST(<SMSG_LOOT_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F8, size: body_size, io, } } else { a } })?)),
             0x03FC => Ok(Self::MSG_GUILD_PERMISSIONS(<MSG_GUILD_PERMISSIONS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FC, size: body_size, io, } } else { a } })?)),
             0x03FE => Ok(Self::MSG_GUILD_EVENT_LOG_QUERY(<MSG_GUILD_EVENT_LOG_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FE, size: body_size, io, } } else { a } })?)),
@@ -7924,6 +7927,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_USERLIST_ADD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_USERLIST_REMOVE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_USERLIST_UPDATE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_INSPECT_TALENT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_LIST(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_encrypted_server(w, e),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_encrypted_server(w, e),
@@ -8339,6 +8343,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_USERLIST_ADD(c) => c.write_unencrypted_server(w),
             Self::SMSG_USERLIST_REMOVE(c) => c.write_unencrypted_server(w),
             Self::SMSG_USERLIST_UPDATE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_INSPECT_TALENT(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_LIST(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_PERMISSIONS(c) => c.write_unencrypted_server(w),
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_unencrypted_server(w),
@@ -8754,6 +8759,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_USERLIST_ADD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_USERLIST_REMOVE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_USERLIST_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_INSPECT_TALENT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9169,6 +9175,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_USERLIST_ADD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_USERLIST_REMOVE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_USERLIST_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_INSPECT_TALENT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -9584,6 +9591,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_USERLIST_ADD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_USERLIST_REMOVE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_USERLIST_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_INSPECT_TALENT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9999,6 +10007,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_USERLIST_ADD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_USERLIST_REMOVE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_USERLIST_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_INSPECT_TALENT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_unencrypted_server(w).await,
@@ -10416,6 +10425,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_USERLIST_ADD(_) => "SMSG_USERLIST_ADD",
             ServerOpcodeMessage::SMSG_USERLIST_REMOVE(_) => "SMSG_USERLIST_REMOVE",
             ServerOpcodeMessage::SMSG_USERLIST_UPDATE(_) => "SMSG_USERLIST_UPDATE",
+            ServerOpcodeMessage::SMSG_INSPECT_TALENT(_) => "SMSG_INSPECT_TALENT",
             ServerOpcodeMessage::SMSG_LOOT_LIST(_) => "SMSG_LOOT_LIST",
             ServerOpcodeMessage::MSG_GUILD_PERMISSIONS(_) => "MSG_GUILD_PERMISSIONS_Server",
             ServerOpcodeMessage::MSG_GUILD_EVENT_LOG_QUERY(_) => "MSG_GUILD_EVENT_LOG_QUERY_Server",
@@ -12801,6 +12811,12 @@ impl From<SMSG_USERLIST_REMOVE> for ServerOpcodeMessage {
 impl From<SMSG_USERLIST_UPDATE> for ServerOpcodeMessage {
     fn from(c: SMSG_USERLIST_UPDATE) -> Self {
         Self::SMSG_USERLIST_UPDATE(c)
+    }
+}
+
+impl From<SMSG_INSPECT_TALENT> for ServerOpcodeMessage {
+    fn from(c: SMSG_INSPECT_TALENT) -> Self {
+        Self::SMSG_INSPECT_TALENT(c)
     }
 }
 
