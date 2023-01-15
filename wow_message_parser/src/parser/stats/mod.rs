@@ -225,7 +225,7 @@ fn get_messages_to_print(wrath: &[Data], tbc: &[Data]) -> (Vec<Data>, &'static s
     }
 
     (
-        if !wrath.is_empty() {
+        if wrath.iter().any(|a| !a.definition && a.reason.is_none()) {
             wrath.to_vec()
         } else {
             tbc.to_vec()
@@ -367,7 +367,7 @@ fn stats_for(version: MajorWorldVersion, data: &[Data], description: &str) {
         definition_sum,
         data.len(),
         (definition_sum as f32 / data.len() as f32) * 100.0_f32,
-        data.len() - definition_sum,
+        data.len() - (definition_sum + reason_sum),
         reason_sum,
     );
     println!(
