@@ -337,6 +337,7 @@ use crate::world::tbc::MSG_MOVE_START_ASCEND_Client;
 use crate::world::tbc::MSG_MOVE_STOP_ASCEND_Client;
 use crate::world::tbc::CMSG_LFG_SET_AUTOJOIN;
 use crate::world::tbc::CMSG_LFG_CLEAR_AUTOJOIN;
+use crate::world::tbc::CMSG_LFM_SET_AUTOFILL;
 use crate::world::tbc::CMSG_SET_LFG_COMMENT;
 use crate::world::tbc::CMSG_SET_TITLE;
 use crate::world::tbc::CMSG_CANCEL_MOUNT_AURA;
@@ -713,6 +714,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND_Client),
     CMSG_LFG_SET_AUTOJOIN(CMSG_LFG_SET_AUTOJOIN),
     CMSG_LFG_CLEAR_AUTOJOIN(CMSG_LFG_CLEAR_AUTOJOIN),
+    CMSG_LFM_SET_AUTOFILL(CMSG_LFM_SET_AUTOFILL),
     CMSG_SET_LFG_COMMENT(CMSG_SET_LFG_COMMENT),
     CMSG_SET_TITLE(CMSG_SET_TITLE),
     CMSG_CANCEL_MOUNT_AURA(CMSG_CANCEL_MOUNT_AURA),
@@ -1091,6 +1093,7 @@ impl ClientOpcodeMessage {
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
             0x035C => Ok(Self::CMSG_LFG_SET_AUTOJOIN(<CMSG_LFG_SET_AUTOJOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035C, size: body_size, io, } } else { a } })?)),
             0x035D => Ok(Self::CMSG_LFG_CLEAR_AUTOJOIN(<CMSG_LFG_CLEAR_AUTOJOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035D, size: body_size, io, } } else { a } })?)),
+            0x035E => Ok(Self::CMSG_LFM_SET_AUTOFILL(<CMSG_LFM_SET_AUTOFILL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035E, size: body_size, io, } } else { a } })?)),
             0x0366 => Ok(Self::CMSG_SET_LFG_COMMENT(<CMSG_SET_LFG_COMMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0366, size: body_size, io, } } else { a } })?)),
             0x0374 => Ok(Self::CMSG_SET_TITLE(<CMSG_SET_TITLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0374, size: body_size, io, } } else { a } })?)),
             0x0375 => Ok(Self::CMSG_CANCEL_MOUNT_AURA(<CMSG_CANCEL_MOUNT_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0375, size: body_size, io, } } else { a } })?)),
@@ -1537,6 +1540,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_SET_AUTOJOIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_CLEAR_AUTOJOIN(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LFM_SET_AUTOFILL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_TITLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_encrypted_client(w, e),
@@ -1916,6 +1920,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_SET_AUTOJOIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_CLEAR_AUTOJOIN(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LFM_SET_AUTOFILL(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_TITLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_unencrypted_client(w),
@@ -2295,6 +2300,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_SET_AUTOJOIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_CLEAR_AUTOJOIN(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LFM_SET_AUTOFILL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2674,6 +2680,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_SET_AUTOJOIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_CLEAR_AUTOJOIN(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LFM_SET_AUTOFILL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3053,6 +3060,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_SET_AUTOJOIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_CLEAR_AUTOJOIN(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LFM_SET_AUTOFILL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3432,6 +3440,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_SET_AUTOJOIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_CLEAR_AUTOJOIN(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LFM_SET_AUTOFILL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_unencrypted_client(w).await,
@@ -3846,6 +3855,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND_Client",
             ClientOpcodeMessage::CMSG_LFG_SET_AUTOJOIN(_) => "CMSG_LFG_SET_AUTOJOIN",
             ClientOpcodeMessage::CMSG_LFG_CLEAR_AUTOJOIN(_) => "CMSG_LFG_CLEAR_AUTOJOIN",
+            ClientOpcodeMessage::CMSG_LFM_SET_AUTOFILL(_) => "CMSG_LFM_SET_AUTOFILL",
             ClientOpcodeMessage::CMSG_SET_LFG_COMMENT(_) => "CMSG_SET_LFG_COMMENT",
             ClientOpcodeMessage::CMSG_SET_TITLE(_) => "CMSG_SET_TITLE",
             ClientOpcodeMessage::CMSG_CANCEL_MOUNT_AURA(_) => "CMSG_CANCEL_MOUNT_AURA",
@@ -5860,6 +5870,12 @@ impl From<CMSG_LFG_SET_AUTOJOIN> for ClientOpcodeMessage {
 impl From<CMSG_LFG_CLEAR_AUTOJOIN> for ClientOpcodeMessage {
     fn from(c: CMSG_LFG_CLEAR_AUTOJOIN) -> Self {
         Self::CMSG_LFG_CLEAR_AUTOJOIN(c)
+    }
+}
+
+impl From<CMSG_LFM_SET_AUTOFILL> for ClientOpcodeMessage {
+    fn from(c: CMSG_LFM_SET_AUTOFILL) -> Self {
+        Self::CMSG_LFM_SET_AUTOFILL(c)
     }
 }
 

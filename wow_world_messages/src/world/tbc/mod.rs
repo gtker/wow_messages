@@ -98,6 +98,8 @@ pub(crate) mod cmsg_lfg_clear_autojoin;
 pub use cmsg_lfg_clear_autojoin::*;
 pub(crate) mod cmsg_lfg_set_autojoin;
 pub use cmsg_lfg_set_autojoin::*;
+pub(crate) mod cmsg_lfm_set_autofill;
+pub use cmsg_lfm_set_autofill::*;
 pub(crate) mod cmsg_loot_method;
 pub use cmsg_loot_method::*;
 pub(crate) mod cmsg_messagechat;
