@@ -234,8 +234,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x013c => "SMSG_AI_REACTION",
         0x013d => "CMSG_SET_SELECTION",
         0x013e => "CMSG_SET_TARGET_OBSOLETE",
-        0x013f => "CMSG_UNUSED",
-        0x0140 => "CMSG_UNUSED2",
         0x0141 => "CMSG_ATTACKSWING",
         0x0142 => "CMSG_ATTACKSTOP",
         0x0143 => "SMSG_ATTACKSTART",
