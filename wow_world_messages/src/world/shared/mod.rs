@@ -1121,6 +1121,8 @@ pub mod smsg_play_sound_vanilla_tbc_wrath;
 pub mod smsg_play_spell_impact_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_play_spell_visual_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_played_time_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_player_skinned_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

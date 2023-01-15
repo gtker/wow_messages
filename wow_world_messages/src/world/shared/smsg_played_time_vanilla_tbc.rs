@@ -51,3 +51,6 @@ impl crate::Message for SMSG_PLAYED_TIME {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_PLAYED_TIME {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PLAYED_TIME {}
+

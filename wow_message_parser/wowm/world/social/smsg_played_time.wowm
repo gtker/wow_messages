@@ -3,7 +3,7 @@ smsg SMSG_PLAYED_TIME = 0x01CD {
     u32 total_played_time;
     u32 level_played_time;
 } {
-    versions = "1.12";
+    versions = "1.12 2";
 }
 
 smsg SMSG_PLAYED_TIME = 0x01CD {

@@ -1441,6 +1441,8 @@ pub use crate::shared::smsg_play_spell_impact_vanilla_tbc_wrath::SMSG_PLAY_SPELL
 
 pub use crate::shared::smsg_play_spell_visual_vanilla_tbc_wrath::SMSG_PLAY_SPELL_VISUAL;
 
+pub use crate::shared::smsg_played_time_vanilla_tbc::SMSG_PLAYED_TIME;
+
 pub use crate::shared::smsg_player_skinned_vanilla_tbc_wrath::SMSG_PLAYER_SKINNED;
 
 pub use crate::shared::smsg_pong_vanilla_tbc_wrath::SMSG_PONG;
