@@ -80,7 +80,7 @@ struct Addon
         comment = "Other emus hardcode this to 0";
     }
 } {
-    versions = "3.3.5";
+    versions = "2.4.3 3";
 }
 
 smsg SMSG_ADDON_INFO = 0x2EF {
@@ -91,7 +91,7 @@ smsg SMSG_ADDON_INFO = 0x2EF {
     u32 number_of_banned_addons = 0;
     /* TODO: Figure out the structure of banned addons and remove hardcoded 0 */
 } {
-    versions = "3.3.5";
+    paste_versions = "2.4.3 3.3.5";
     comment = "Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid";
 }
 

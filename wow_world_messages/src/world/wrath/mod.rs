@@ -4,8 +4,6 @@ pub(crate) mod action_bar_behavior;
 pub use action_bar_behavior::*;
 pub(crate) mod action_button;
 pub use action_button::*;
-pub(crate) mod addon;
-pub use addon::*;
 pub(crate) mod allowed_class;
 pub use allowed_class::*;
 pub(crate) mod allowed_race;
@@ -614,6 +612,8 @@ pub use power::*;
 pub use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
 
 pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
+
+pub use crate::shared::addon_tbc_wrath::Addon;
 
 pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 

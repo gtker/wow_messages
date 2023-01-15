@@ -341,6 +341,8 @@ pub use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
 
 pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 
+pub use crate::shared::addon_tbc_wrath::Addon;
+
 pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 
 pub use crate::shared::arena_faction_tbc_wrath::ArenaFaction;
@@ -1711,6 +1713,8 @@ pub(crate) mod skill;
 pub use skill::*;
 pub(crate) mod smsg_action_buttons;
 pub use smsg_action_buttons::*;
+pub(crate) mod smsg_addon_info;
+pub use smsg_addon_info::*;
 pub(crate) mod smsg_arena_team_roster;
 pub use smsg_arena_team_roster::*;
 pub(crate) mod smsg_attackerstateupdate;

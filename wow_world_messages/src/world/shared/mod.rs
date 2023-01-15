@@ -2,6 +2,8 @@
 pub mod activate_taxi_reply_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod addon_info_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod addon_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod ai_reaction_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
