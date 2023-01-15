@@ -769,7 +769,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("MSG_GUILD_PERMISSIONS", 0x3FC),
     Data::new("MSG_GUILD_BANK_MONEY_WITHDRAWN", 0x3FD),
     Data::new("MSG_GUILD_EVENT_LOG_QUERY", 0x3FE),
-    Data::new("CMSG_MAELSTROM_RENAME_GUILD", 0x3FF),
+    Data::nyi("CMSG_MAELSTROM_RENAME_GUILD", 0x3FF),
     Data::new("CMSG_GET_MIRRORIMAGE_DATA", 0x400),
     Data::new("SMSG_MIRRORIMAGE_DATA", 0x401),
     Data::nyi("SMSG_FORCE_DISPLAY_UPDATE", 0x402),
