@@ -1,0 +1,18 @@
+enum LfgUpdateLookingForMore : u8 {
+    NOT_LOOKING_FOR_MORE = 0;
+    LOOKING_FOR_MORE = 1;
+} {
+     versions = "2.4.3";
+}
+
+smsg SMSG_LFG_UPDATE = 0x036C {
+    Bool queued;
+    Bool is_looking_for_group;
+    LfgUpdateLookingForMore looking_for_more;
+    if (looking_for_more == LOOKING_FOR_MORE) {
+        u16 entry;
+        (u16)LfgType lfg_type;
+    }
+} {
+    versions = "2.4.3";
+}
