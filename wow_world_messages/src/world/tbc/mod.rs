@@ -1829,6 +1829,8 @@ pub(crate) mod smsg_lfg_update_lfg;
 pub use smsg_lfg_update_lfg::*;
 pub(crate) mod smsg_lfg_update_lfm;
 pub use smsg_lfg_update_lfm::*;
+pub(crate) mod smsg_lfg_update_queued;
+pub use smsg_lfg_update_queued::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
 pub(crate) mod smsg_loot_list;

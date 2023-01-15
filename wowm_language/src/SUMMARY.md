@@ -1114,6 +1114,7 @@
 - [SMSG_LFG_UPDATE_LFM](docs/smsg_lfg_update_lfm.md)
 - [SMSG_LFG_UPDATE_PARTY](docs/smsg_lfg_update_party.md)
 - [SMSG_LFG_UPDATE_PLAYER](docs/smsg_lfg_update_player.md)
+- [SMSG_LFG_UPDATE_QUEUED](docs/smsg_lfg_update_queued.md)
 - [SMSG_LFG_UPDATE_SEARCH](docs/smsg_lfg_update_search.md)
 - [SMSG_LIST_INVENTORY](docs/smsg_list_inventory.md)
 - [SMSG_LOGIN_SETTIMESPEED](docs/smsg_login_settimespeed.md)

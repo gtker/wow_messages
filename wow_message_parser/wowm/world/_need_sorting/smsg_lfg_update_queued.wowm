@@ -1,0 +1,5 @@
+smsg SMSG_LFG_UPDATE_QUEUED = 0x036F {
+    Bool queued;
+} {
+    versions = "2.4.3";
+}

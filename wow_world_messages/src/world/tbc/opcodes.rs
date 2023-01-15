@@ -6564,6 +6564,7 @@ use crate::world::tbc::SMSG_LFG_LEADER_IS_LFM;
 use crate::world::tbc::SMSG_LFG_UPDATE;
 use crate::world::tbc::SMSG_LFG_UPDATE_LFM;
 use crate::world::tbc::SMSG_LFG_UPDATE_LFG;
+use crate::world::tbc::SMSG_LFG_UPDATE_QUEUED;
 use crate::world::tbc::SMSG_TITLE_EARNED;
 use crate::world::tbc::SMSG_ARENA_ERROR;
 use crate::world::tbc::MSG_INSPECT_ARENA_TEAMS_Server;
@@ -6968,6 +6969,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LFG_UPDATE(SMSG_LFG_UPDATE),
     SMSG_LFG_UPDATE_LFM(SMSG_LFG_UPDATE_LFM),
     SMSG_LFG_UPDATE_LFG(SMSG_LFG_UPDATE_LFG),
+    SMSG_LFG_UPDATE_QUEUED(SMSG_LFG_UPDATE_QUEUED),
     SMSG_TITLE_EARNED(SMSG_TITLE_EARNED),
     SMSG_ARENA_ERROR(SMSG_ARENA_ERROR),
     MSG_INSPECT_ARENA_TEAMS(MSG_INSPECT_ARENA_TEAMS_Server),
@@ -7374,6 +7376,7 @@ impl ServerOpcodeMessage {
             0x036C => Ok(Self::SMSG_LFG_UPDATE(<SMSG_LFG_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036C, size: body_size, io, } } else { a } })?)),
             0x036D => Ok(Self::SMSG_LFG_UPDATE_LFM(<SMSG_LFG_UPDATE_LFM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036D, size: body_size, io, } } else { a } })?)),
             0x036E => Ok(Self::SMSG_LFG_UPDATE_LFG(<SMSG_LFG_UPDATE_LFG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036E, size: body_size, io, } } else { a } })?)),
+            0x036F => Ok(Self::SMSG_LFG_UPDATE_QUEUED(<SMSG_LFG_UPDATE_QUEUED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036F, size: body_size, io, } } else { a } })?)),
             0x0373 => Ok(Self::SMSG_TITLE_EARNED(<SMSG_TITLE_EARNED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0373, size: body_size, io, } } else { a } })?)),
             0x0376 => Ok(Self::SMSG_ARENA_ERROR(<SMSG_ARENA_ERROR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0376, size: body_size, io, } } else { a } })?)),
             0x0377 => Ok(Self::MSG_INSPECT_ARENA_TEAMS(<MSG_INSPECT_ARENA_TEAMS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0377, size: body_size, io, } } else { a } })?)),
@@ -7848,6 +7851,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LFG_UPDATE_LFM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LFG_UPDATE_LFG(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LFG_UPDATE_QUEUED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TITLE_EARNED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ARENA_ERROR(c) => c.write_encrypted_server(w, e),
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_encrypted_server(w, e),
@@ -8255,6 +8259,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LFG_UPDATE_LFM(c) => c.write_unencrypted_server(w),
             Self::SMSG_LFG_UPDATE_LFG(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LFG_UPDATE_QUEUED(c) => c.write_unencrypted_server(w),
             Self::SMSG_TITLE_EARNED(c) => c.write_unencrypted_server(w),
             Self::SMSG_ARENA_ERROR(c) => c.write_unencrypted_server(w),
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_unencrypted_server(w),
@@ -8662,6 +8667,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_UPDATE_LFM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_UPDATE_LFG(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LFG_UPDATE_QUEUED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TITLE_EARNED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ARENA_ERROR(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9069,6 +9075,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LFG_UPDATE_LFM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LFG_UPDATE_LFG(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LFG_UPDATE_QUEUED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TITLE_EARNED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ARENA_ERROR(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_unencrypted_server(w).await,
@@ -9476,6 +9483,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_UPDATE_LFM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_UPDATE_LFG(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LFG_UPDATE_QUEUED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TITLE_EARNED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ARENA_ERROR(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9883,6 +9891,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LFG_UPDATE_LFM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LFG_UPDATE_LFG(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LFG_UPDATE_QUEUED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TITLE_EARNED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ARENA_ERROR(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_unencrypted_server(w).await,
@@ -10292,6 +10301,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LFG_UPDATE(_) => "SMSG_LFG_UPDATE",
             ServerOpcodeMessage::SMSG_LFG_UPDATE_LFM(_) => "SMSG_LFG_UPDATE_LFM",
             ServerOpcodeMessage::SMSG_LFG_UPDATE_LFG(_) => "SMSG_LFG_UPDATE_LFG",
+            ServerOpcodeMessage::SMSG_LFG_UPDATE_QUEUED(_) => "SMSG_LFG_UPDATE_QUEUED",
             ServerOpcodeMessage::SMSG_TITLE_EARNED(_) => "SMSG_TITLE_EARNED",
             ServerOpcodeMessage::SMSG_ARENA_ERROR(_) => "SMSG_ARENA_ERROR",
             ServerOpcodeMessage::MSG_INSPECT_ARENA_TEAMS(_) => "MSG_INSPECT_ARENA_TEAMS_Server",
@@ -12489,6 +12499,12 @@ impl From<SMSG_LFG_UPDATE_LFM> for ServerOpcodeMessage {
 impl From<SMSG_LFG_UPDATE_LFG> for ServerOpcodeMessage {
     fn from(c: SMSG_LFG_UPDATE_LFG) -> Self {
         Self::SMSG_LFG_UPDATE_LFG(c)
+    }
+}
+
+impl From<SMSG_LFG_UPDATE_QUEUED> for ServerOpcodeMessage {
+    fn from(c: SMSG_LFG_UPDATE_QUEUED) -> Self {
+        Self::SMSG_LFG_UPDATE_QUEUED(c)
     }
 }
 
