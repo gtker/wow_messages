@@ -6582,6 +6582,7 @@ use crate::world::tbc::SMSG_RESET_FAILED_NOTIFY;
 use crate::world::tbc::SMSG_LFG_DISABLED;
 use crate::world::tbc::SMSG_UPDATE_COMBO_POINTS;
 use crate::world::tbc::SMSG_SET_EXTRA_AURA_INFO;
+use crate::world::tbc::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE;
 use crate::world::tbc::MSG_MOVE_START_DESCEND_Server;
 use crate::world::tbc::SMSG_DISMOUNT;
 use crate::world::tbc::MSG_MOVE_UPDATE_CAN_FLY_Server;
@@ -6988,6 +6989,7 @@ pub enum ServerOpcodeMessage {
     SMSG_LFG_DISABLED(SMSG_LFG_DISABLED),
     SMSG_UPDATE_COMBO_POINTS(SMSG_UPDATE_COMBO_POINTS),
     SMSG_SET_EXTRA_AURA_INFO(SMSG_SET_EXTRA_AURA_INFO),
+    SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND_Server),
     SMSG_DISMOUNT(SMSG_DISMOUNT),
     MSG_MOVE_UPDATE_CAN_FLY(MSG_MOVE_UPDATE_CAN_FLY_Server),
@@ -7396,6 +7398,7 @@ impl ServerOpcodeMessage {
             0x0398 => Ok(Self::SMSG_LFG_DISABLED(<SMSG_LFG_DISABLED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0398, size: body_size, io, } } else { a } })?)),
             0x039D => Ok(Self::SMSG_UPDATE_COMBO_POINTS(<SMSG_UPDATE_COMBO_POINTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x039D, size: body_size, io, } } else { a } })?)),
             0x03A4 => Ok(Self::SMSG_SET_EXTRA_AURA_INFO(<SMSG_SET_EXTRA_AURA_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A4, size: body_size, io, } } else { a } })?)),
+            0x03A5 => Ok(Self::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(<SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A5, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
             0x03AC => Ok(Self::SMSG_DISMOUNT(<SMSG_DISMOUNT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AC, size: body_size, io, } } else { a } })?)),
             0x03AD => Ok(Self::MSG_MOVE_UPDATE_CAN_FLY(<MSG_MOVE_UPDATE_CAN_FLY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AD, size: body_size, io, } } else { a } })?)),
@@ -7872,6 +7875,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_DISABLED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_EXTRA_AURA_INFO(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DISMOUNT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_encrypted_server(w, e),
@@ -8281,6 +8285,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_DISABLED(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_EXTRA_AURA_INFO(c) => c.write_unencrypted_server(w),
+            Self::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
             Self::SMSG_DISMOUNT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_unencrypted_server(w),
@@ -8690,6 +8695,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_DISABLED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_EXTRA_AURA_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DISMOUNT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9099,6 +9105,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_DISABLED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_EXTRA_AURA_INFO(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DISMOUNT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -9508,6 +9515,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_DISABLED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_EXTRA_AURA_INFO(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DISMOUNT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9917,6 +9925,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_LFG_DISABLED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_EXTRA_AURA_INFO(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DISMOUNT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
@@ -10328,6 +10337,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LFG_DISABLED(_) => "SMSG_LFG_DISABLED",
             ServerOpcodeMessage::SMSG_UPDATE_COMBO_POINTS(_) => "SMSG_UPDATE_COMBO_POINTS",
             ServerOpcodeMessage::SMSG_SET_EXTRA_AURA_INFO(_) => "SMSG_SET_EXTRA_AURA_INFO",
+            ServerOpcodeMessage::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(_) => "SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND_Server",
             ServerOpcodeMessage::SMSG_DISMOUNT(_) => "SMSG_DISMOUNT",
             ServerOpcodeMessage::MSG_MOVE_UPDATE_CAN_FLY(_) => "MSG_MOVE_UPDATE_CAN_FLY_Server",
@@ -12617,6 +12627,12 @@ impl From<SMSG_UPDATE_COMBO_POINTS> for ServerOpcodeMessage {
 impl From<SMSG_SET_EXTRA_AURA_INFO> for ServerOpcodeMessage {
     fn from(c: SMSG_SET_EXTRA_AURA_INFO) -> Self {
         Self::SMSG_SET_EXTRA_AURA_INFO(c)
+    }
+}
+
+impl From<SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE) -> Self {
+        Self::SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE(c)
     }
 }
 

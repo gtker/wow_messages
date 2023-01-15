@@ -1,0 +1,9 @@
+smsg SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE = 0x03A5 {
+    PackedGuid unit;
+    u8 slot;
+    Spell spell;
+    u32 max_duration;
+    u32 remaining_duration;
+} {
+    versions = "2.4.3";
+}

@@ -10,7 +10,7 @@ smsg SMSG_SET_EXTRA_AURA_INFO = 0x03A4 {
     PackedGuid unit;
     optional aura {
         u8 slot;
-        u32 aura_id;
+        u32 spell;
         u32 max_duration;
         u32 remaining_duration;
     }
@@ -38,7 +38,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 1 / - | u8 | slot |  |  |
-| - | 4 / Little | u32 | aura_id |  |  |
+| - | 4 / Little | u32 | spell |  |  |
 | - | 4 / Little | u32 | max_duration |  |  |
 | - | 4 / Little | u32 | remaining_duration |  |  |
 

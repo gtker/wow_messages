@@ -2,7 +2,7 @@ smsg SMSG_SET_EXTRA_AURA_INFO = 0x03A4 {
     PackedGuid unit;
     optional aura {
         u8 slot;
-        u32 aura_id;
+        Spell spell;
         u32 max_duration;
         u32 remaining_duration;
     }

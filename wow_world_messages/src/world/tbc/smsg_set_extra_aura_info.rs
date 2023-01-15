@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 ///     PackedGuid unit;
 ///     optional aura {
 ///         u8 slot;
-///         u32 aura_id;
+///         u32 spell;
 ///         u32 max_duration;
 ///         u32 remaining_duration;
 ///     }
@@ -37,8 +37,8 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
             // slot: u8
             w.write_all(&v.slot.to_le_bytes())?;
 
-            // aura_id: u32
-            w.write_all(&v.aura_id.to_le_bytes())?;
+            // spell: u32
+            w.write_all(&v.spell.to_le_bytes())?;
 
             // max_duration: u32
             w.write_all(&v.max_duration.to_le_bytes())?;
@@ -67,8 +67,8 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
             // slot: u8
             let slot = crate::util::read_u8_le(r)?;
 
-            // aura_id: u32
-            let aura_id = crate::util::read_u32_le(r)?;
+            // spell: u32
+            let spell = crate::util::read_u32_le(r)?;
 
             // max_duration: u32
             let max_duration = crate::util::read_u32_le(r)?;
@@ -78,7 +78,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
 
             Some(SMSG_SET_EXTRA_AURA_INFO_aura {
                 slot,
-                aura_id,
+                spell,
                 max_duration,
                 remaining_duration,
             })
@@ -101,7 +101,7 @@ impl SMSG_SET_EXTRA_AURA_INFO {
         self.unit.size() // unit: Guid
         + if let Some(aura) = &self.aura {
             1 // slot: u8
-            + 4 // aura_id: u32
+            + 4 // spell: u32
             + 4 // max_duration: u32
             + 4 // remaining_duration: u32
         } else {
@@ -113,7 +113,7 @@ impl SMSG_SET_EXTRA_AURA_INFO {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct SMSG_SET_EXTRA_AURA_INFO_aura {
     pub slot: u8,
-    pub aura_id: u32,
+    pub spell: u32,
     pub max_duration: u32,
     pub remaining_duration: u32,
 }
@@ -121,7 +121,7 @@ pub struct SMSG_SET_EXTRA_AURA_INFO_aura {
 impl SMSG_SET_EXTRA_AURA_INFO_aura {
     pub(crate) fn size(&self) -> usize {
         1 // slot: u8
-        + 4 // aura_id: u32
+        + 4 // spell: u32
         + 4 // max_duration: u32
         + 4 // remaining_duration: u32
     }
