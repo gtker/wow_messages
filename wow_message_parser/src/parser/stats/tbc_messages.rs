@@ -672,7 +672,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_CLEAR_LOOKING_FOR_MORE", 0x364),
     Data::new("CMSG_SET_LOOKING_FOR_MORE", 0x365),
     Data::new("CMSG_SET_LFG_COMMENT", 0x366),
-    Data::new("SMSG_LFG_TIMEDOUT", 0x367),
+    Data::nyi("SMSG_LFG_TIMEDOUT", 0x367),
     Data::new("SMSG_LFG_OTHER_TIMEDOUT", 0x368),
     Data::new("SMSG_LFG_AUTOJOIN_FAILED", 0x369),
     Data::new("SMSG_LFG_AUTOJOIN_FAILED_NO_PLAYER", 0x36A),
