@@ -958,24 +958,24 @@ impl MovementBlock_SplineFlag {
         self
     }
 
-    pub const fn new_UNKNOWN12() -> Self {
+    pub const fn new_PARABOLIC() -> Self {
         Self {
-            inner: SplineFlag::UNKNOWN12,
+            inner: SplineFlag::PARABOLIC,
             final_angle: None,
         }
     }
 
-    pub fn set_UNKNOWN12(mut self) -> Self {
-        self.inner |= SplineFlag::UNKNOWN12;
+    pub fn set_PARABOLIC(mut self) -> Self {
+        self.inner |= SplineFlag::PARABOLIC;
         self
     }
 
-    pub const fn get_UNKNOWN12(&self) -> bool {
-        (self.inner & SplineFlag::UNKNOWN12) != 0
+    pub const fn get_PARABOLIC(&self) -> bool {
+        (self.inner & SplineFlag::PARABOLIC) != 0
     }
 
-    pub fn clear_UNKNOWN12(mut self) -> Self {
-        self.inner &= SplineFlag::UNKNOWN12.reverse_bits();
+    pub fn clear_PARABOLIC(mut self) -> Self {
+        self.inner &= SplineFlag::PARABOLIC.reverse_bits();
         self
     }
 

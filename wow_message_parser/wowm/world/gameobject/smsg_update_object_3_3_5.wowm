@@ -40,7 +40,7 @@ flag SplineFlag : u32 {
         comment = "vmangos: Smooth movement(Catmullrom interpolation mode), flying animation";
     }
     NO_SPLINE = 0x00000400;
-    UNKNOWN12 = 0x00000800;
+    PARABOLIC = 0x00000800;
     UNKNOWN13 = 0x00001000;
     UNKNOWN14 = 0x00002000;
     UNKNOWN15 = 0x00004000;

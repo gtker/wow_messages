@@ -680,6 +680,8 @@ pub mod meeting_stone_status_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod money_log_item_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod monster_move_type_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod mount_result_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod msg_auction_hello_client_vanilla_tbc_wrath;
@@ -1069,6 +1071,10 @@ pub mod smsg_loot_roll_tbc_wrath;
 pub mod smsg_loot_roll_won_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_loot_start_roll_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_monster_move_transport_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_monster_move_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_motd_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -1319,6 +1325,8 @@ pub mod spell_miss_info_vanilla_vanilla_tbc_wrath;
 pub mod spell_steal_action_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod spell_steal_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod spline_flag_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod stable_result_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

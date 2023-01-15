@@ -36,7 +36,7 @@ flag SplineFlag : u32 {
     UNKNOWN6 = 0x00000020;
     UNKNOWN7 = 0x00000040;
     UNKNOWN8 = 0x00000080;
-    RUNMODE = 0x00000100;
+    RUN_MODE = 0x00000100;
     FLYING = 0x00000200 {
         comment = "vmangos: Smooth movement(Catmullrom interpolation mode), flying animation";
     }
@@ -72,6 +72,8 @@ flag SplineFlag : u32 {
     UNKNOWN29 = 0x20000000;
     UNKNOWN30 = 0x40000000;
     UNKNOWN31 = 0x80000000;
+} {
+    versions = "2";
 }
 
 enum ObjectType : u8 {

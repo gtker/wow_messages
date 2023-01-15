@@ -204,8 +204,6 @@ pub(crate) mod map;
 pub use map::*;
 pub(crate) mod meeting_stone_failure;
 pub use meeting_stone_failure::*;
-pub(crate) mod monster_move_type;
-pub use monster_move_type::*;
 pub(crate) mod movement_block;
 pub use movement_block::*;
 pub(crate) mod movement_flags;
@@ -849,6 +847,8 @@ pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 
 pub use crate::shared::meeting_stone_status_vanilla_tbc::MeetingStoneStatus;
 
+pub use crate::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
+
 pub use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
 
 pub use crate::shared::msg_auction_hello_client_vanilla_tbc_wrath::MSG_AUCTION_HELLO_Client;
@@ -1149,6 +1149,10 @@ pub use crate::shared::smsg_loot_response_vanilla_tbc_wrath::SMSG_LOOT_RESPONSE;
 
 pub use crate::shared::smsg_loot_start_roll_vanilla_tbc::SMSG_LOOT_START_ROLL;
 
+pub use crate::shared::smsg_monster_move_transport_vanilla_tbc::SMSG_MONSTER_MOVE_TRANSPORT;
+
+pub use crate::shared::smsg_monster_move_vanilla_tbc::SMSG_MONSTER_MOVE;
+
 pub use crate::shared::smsg_mountresult_vanilla_tbc_wrath::SMSG_MOUNTRESULT;
 
 pub use crate::shared::smsg_mountspecial_anim_vanilla_tbc_wrath::SMSG_MOUNTSPECIAL_ANIM;
@@ -1349,6 +1353,8 @@ pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 
 pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 
+pub use crate::shared::spline_flag_vanilla_tbc::SplineFlag;
+
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
@@ -1535,10 +1541,6 @@ pub(crate) mod smsg_meetingstone_setqueue;
 pub use smsg_meetingstone_setqueue::*;
 pub(crate) mod smsg_messagechat;
 pub use smsg_messagechat::*;
-pub(crate) mod smsg_monster_move;
-pub use smsg_monster_move::*;
-pub(crate) mod smsg_monster_move_transport;
-pub use smsg_monster_move_transport::*;
 pub(crate) mod smsg_name_query_response;
 pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_world;
@@ -1657,8 +1659,6 @@ pub(crate) mod spell_miss;
 pub use spell_miss::*;
 pub(crate) mod spell_trigger_type;
 pub use spell_trigger_type::*;
-pub(crate) mod spline_flag;
-pub use spline_flag::*;
 pub(crate) mod trade_slot;
 pub use trade_slot::*;
 pub(crate) mod trainer_spell;

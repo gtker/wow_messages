@@ -400,6 +400,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_amount_of_splines,
+            { "Amount Of Splines", "woww.amount.of.splines",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_amount_of_states,
             { "Amount Of States", "woww.amount.of.states",
                 FT_UINT16, BASE_HEX_DEC, NULL, 0,

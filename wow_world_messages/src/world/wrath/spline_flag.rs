@@ -13,7 +13,7 @@
 ///     RUNMODE = 0x00000100;
 ///     FLYING = 0x00000200;
 ///     NO_SPLINE = 0x00000400;
-///     UNKNOWN12 = 0x00000800;
+///     PARABOLIC = 0x00000800;
 ///     UNKNOWN13 = 0x00001000;
 ///     UNKNOWN14 = 0x00002000;
 ///     UNKNOWN15 = 0x00004000;
@@ -58,7 +58,7 @@ impl SplineFlag {
     pub(crate) const RUNMODE: u32 = 0x100;
     pub(crate) const FLYING: u32 = 0x200;
     pub(crate) const NO_SPLINE: u32 = 0x400;
-    pub(crate) const UNKNOWN12: u32 = 0x800;
+    pub(crate) const PARABOLIC: u32 = 0x800;
     pub(crate) const UNKNOWN13: u32 = 0x1000;
     pub(crate) const UNKNOWN14: u32 = 0x2000;
     pub(crate) const UNKNOWN15: u32 = 0x4000;
@@ -102,7 +102,7 @@ impl SplineFlag {
                 | Self::RUNMODE
                 | Self::FLYING
                 | Self::NO_SPLINE
-                | Self::UNKNOWN12
+                | Self::PARABOLIC
                 | Self::UNKNOWN13
                 | Self::UNKNOWN14
                 | Self::UNKNOWN15
@@ -328,21 +328,21 @@ impl SplineFlag {
         *self
     }
 
-    pub const fn is_UNKNOWN12(&self) -> bool {
-        (self.inner & Self::UNKNOWN12) != 0
+    pub const fn is_PARABOLIC(&self) -> bool {
+        (self.inner & Self::PARABOLIC) != 0
     }
 
-    pub const fn new_UNKNOWN12() -> Self {
-        Self { inner: Self::UNKNOWN12 }
+    pub const fn new_PARABOLIC() -> Self {
+        Self { inner: Self::PARABOLIC }
     }
 
-    pub fn set_UNKNOWN12(&mut self) -> Self {
-        self.inner |= Self::UNKNOWN12;
+    pub fn set_PARABOLIC(&mut self) -> Self {
+        self.inner |= Self::PARABOLIC;
         *self
     }
 
-    pub fn clear_UNKNOWN12(&mut self) -> Self {
-        self.inner &= Self::UNKNOWN12.reverse_bits();
+    pub fn clear_PARABOLIC(&mut self) -> Self {
+        self.inner &= Self::PARABOLIC.reverse_bits();
         *self
     }
 

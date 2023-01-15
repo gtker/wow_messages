@@ -7276,6 +7276,7 @@ use crate::world::wrath::SMSG_ITEM_COOLDOWN;
 use crate::world::wrath::SMSG_GAMEOBJECT_CUSTOM_ANIM;
 use crate::world::wrath::MSG_MOVE_TELEPORT_CHEAT_Server;
 use crate::world::wrath::MSG_MOVE_TELEPORT_ACK_Server;
+use crate::world::wrath::SMSG_MONSTER_MOVE;
 use crate::world::wrath::SMSG_MOVE_WATER_WALK;
 use crate::world::wrath::SMSG_MOVE_LAND_WALK;
 use crate::world::wrath::SMSG_FORCE_RUN_SPEED_CHANGE;
@@ -7477,6 +7478,7 @@ use crate::world::wrath::SMSG_SPELL_FAILED_OTHER;
 use crate::world::wrath::SMSG_CHAT_PLAYER_NOT_FOUND;
 use crate::world::wrath::MSG_TALENT_WIPE_CONFIRM_Server;
 use crate::world::wrath::SMSG_SUMMON_REQUEST;
+use crate::world::wrath::SMSG_MONSTER_MOVE_TRANSPORT;
 use crate::world::wrath::SMSG_PET_BROKEN;
 use crate::world::wrath::MSG_MOVE_FEATHER_FALL_Server;
 use crate::world::wrath::SMSG_FEIGN_DEATH_RESISTED;
@@ -7786,6 +7788,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GAMEOBJECT_CUSTOM_ANIM(SMSG_GAMEOBJECT_CUSTOM_ANIM),
     MSG_MOVE_TELEPORT_CHEAT(MSG_MOVE_TELEPORT_CHEAT_Server),
     MSG_MOVE_TELEPORT_ACK(MSG_MOVE_TELEPORT_ACK_Server),
+    SMSG_MONSTER_MOVE(SMSG_MONSTER_MOVE),
     SMSG_MOVE_WATER_WALK(SMSG_MOVE_WATER_WALK),
     SMSG_MOVE_LAND_WALK(SMSG_MOVE_LAND_WALK),
     SMSG_FORCE_RUN_SPEED_CHANGE(SMSG_FORCE_RUN_SPEED_CHANGE),
@@ -7987,6 +7990,7 @@ pub enum ServerOpcodeMessage {
     SMSG_CHAT_PLAYER_NOT_FOUND(SMSG_CHAT_PLAYER_NOT_FOUND),
     MSG_TALENT_WIPE_CONFIRM(MSG_TALENT_WIPE_CONFIRM_Server),
     SMSG_SUMMON_REQUEST(SMSG_SUMMON_REQUEST),
+    SMSG_MONSTER_MOVE_TRANSPORT(SMSG_MONSTER_MOVE_TRANSPORT),
     SMSG_PET_BROKEN(SMSG_PET_BROKEN),
     MSG_MOVE_FEATHER_FALL(MSG_MOVE_FEATHER_FALL_Server),
     SMSG_FEIGN_DEATH_RESISTED(SMSG_FEIGN_DEATH_RESISTED),
@@ -8298,6 +8302,7 @@ impl ServerOpcodeMessage {
             0x00B3 => Ok(Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(<SMSG_GAMEOBJECT_CUSTOM_ANIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B3, size: body_size, io, } } else { a } })?)),
             0x00C6 => Ok(Self::MSG_MOVE_TELEPORT_CHEAT(<MSG_MOVE_TELEPORT_CHEAT_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C6, size: body_size, io, } } else { a } })?)),
             0x00C7 => Ok(Self::MSG_MOVE_TELEPORT_ACK(<MSG_MOVE_TELEPORT_ACK_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00C7, size: body_size, io, } } else { a } })?)),
+            0x00DD => Ok(Self::SMSG_MONSTER_MOVE(<SMSG_MONSTER_MOVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DD, size: body_size, io, } } else { a } })?)),
             0x00DE => Ok(Self::SMSG_MOVE_WATER_WALK(<SMSG_MOVE_WATER_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DE, size: body_size, io, } } else { a } })?)),
             0x00DF => Ok(Self::SMSG_MOVE_LAND_WALK(<SMSG_MOVE_LAND_WALK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DF, size: body_size, io, } } else { a } })?)),
             0x00E2 => Ok(Self::SMSG_FORCE_RUN_SPEED_CHANGE(<SMSG_FORCE_RUN_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00E2, size: body_size, io, } } else { a } })?)),
@@ -8499,6 +8504,7 @@ impl ServerOpcodeMessage {
             0x02A9 => Ok(Self::SMSG_CHAT_PLAYER_NOT_FOUND(<SMSG_CHAT_PLAYER_NOT_FOUND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A9, size: body_size, io, } } else { a } })?)),
             0x02AA => Ok(Self::MSG_TALENT_WIPE_CONFIRM(<MSG_TALENT_WIPE_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AA, size: body_size, io, } } else { a } })?)),
             0x02AB => Ok(Self::SMSG_SUMMON_REQUEST(<SMSG_SUMMON_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AB, size: body_size, io, } } else { a } })?)),
+            0x02AE => Ok(Self::SMSG_MONSTER_MOVE_TRANSPORT(<SMSG_MONSTER_MOVE_TRANSPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AE, size: body_size, io, } } else { a } })?)),
             0x02AF => Ok(Self::SMSG_PET_BROKEN(<SMSG_PET_BROKEN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AF, size: body_size, io, } } else { a } })?)),
             0x02B0 => Ok(Self::MSG_MOVE_FEATHER_FALL(<MSG_MOVE_FEATHER_FALL_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B0, size: body_size, io, } } else { a } })?)),
             0x02B4 => Ok(Self::SMSG_FEIGN_DEATH_RESISTED(<SMSG_FEIGN_DEATH_RESISTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B4, size: body_size, io, } } else { a } })?)),
@@ -8959,6 +8965,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MONSTER_MOVE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOVE_WATER_WALK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOVE_LAND_WALK(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
@@ -9160,6 +9167,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_encrypted_server(w, e),
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SUMMON_REQUEST(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_BROKEN(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_FEATHER_FALL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.write_encrypted_server(w, e),
@@ -9472,6 +9480,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MONSTER_MOVE(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOVE_WATER_WALK(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOVE_LAND_WALK(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
@@ -9673,6 +9682,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.write_unencrypted_server(w),
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_SUMMON_REQUEST(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_BROKEN(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_FEATHER_FALL(c) => c.write_unencrypted_server(w),
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.write_unencrypted_server(w),
@@ -9985,6 +9995,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MONSTER_MOVE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_WATER_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_LAND_WALK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10186,6 +10197,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_BROKEN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FEATHER_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10498,6 +10510,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MONSTER_MOVE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_WATER_WALK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_LAND_WALK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10699,6 +10712,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_BROKEN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FEATHER_FALL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11011,6 +11025,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MONSTER_MOVE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_WATER_WALK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_LAND_WALK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11212,6 +11227,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_BROKEN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FEATHER_FALL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11524,6 +11540,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_CUSTOM_ANIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_TELEPORT_CHEAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_TELEPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MONSTER_MOVE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_WATER_WALK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_LAND_WALK(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_RUN_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11725,6 +11742,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHAT_PLAYER_NOT_FOUND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_BROKEN(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FEATHER_FALL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.astd_write_unencrypted_server(w).await,
@@ -12047,6 +12065,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GAMEOBJECT_CUSTOM_ANIM(_) => "SMSG_GAMEOBJECT_CUSTOM_ANIM",
             ServerOpcodeMessage::MSG_MOVE_TELEPORT_CHEAT(_) => "MSG_MOVE_TELEPORT_CHEAT_Server",
             ServerOpcodeMessage::MSG_MOVE_TELEPORT_ACK(_) => "MSG_MOVE_TELEPORT_ACK_Server",
+            ServerOpcodeMessage::SMSG_MONSTER_MOVE(_) => "SMSG_MONSTER_MOVE",
             ServerOpcodeMessage::SMSG_MOVE_WATER_WALK(_) => "SMSG_MOVE_WATER_WALK",
             ServerOpcodeMessage::SMSG_MOVE_LAND_WALK(_) => "SMSG_MOVE_LAND_WALK",
             ServerOpcodeMessage::SMSG_FORCE_RUN_SPEED_CHANGE(_) => "SMSG_FORCE_RUN_SPEED_CHANGE",
@@ -12248,6 +12267,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHAT_PLAYER_NOT_FOUND(_) => "SMSG_CHAT_PLAYER_NOT_FOUND",
             ServerOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => "MSG_TALENT_WIPE_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_SUMMON_REQUEST(_) => "SMSG_SUMMON_REQUEST",
+            ServerOpcodeMessage::SMSG_MONSTER_MOVE_TRANSPORT(_) => "SMSG_MONSTER_MOVE_TRANSPORT",
             ServerOpcodeMessage::SMSG_PET_BROKEN(_) => "SMSG_PET_BROKEN",
             ServerOpcodeMessage::MSG_MOVE_FEATHER_FALL(_) => "MSG_MOVE_FEATHER_FALL_Server",
             ServerOpcodeMessage::SMSG_FEIGN_DEATH_RESISTED(_) => "SMSG_FEIGN_DEATH_RESISTED",
@@ -12955,6 +12975,12 @@ impl From<MSG_MOVE_TELEPORT_CHEAT_Server> for ServerOpcodeMessage {
 impl From<MSG_MOVE_TELEPORT_ACK_Server> for ServerOpcodeMessage {
     fn from(c: MSG_MOVE_TELEPORT_ACK_Server) -> Self {
         Self::MSG_MOVE_TELEPORT_ACK(c)
+    }
+}
+
+impl From<SMSG_MONSTER_MOVE> for ServerOpcodeMessage {
+    fn from(c: SMSG_MONSTER_MOVE) -> Self {
+        Self::SMSG_MONSTER_MOVE(c)
     }
 }
 
@@ -14161,6 +14187,12 @@ impl From<MSG_TALENT_WIPE_CONFIRM_Server> for ServerOpcodeMessage {
 impl From<SMSG_SUMMON_REQUEST> for ServerOpcodeMessage {
     fn from(c: SMSG_SUMMON_REQUEST) -> Self {
         Self::SMSG_SUMMON_REQUEST(c)
+    }
+}
+
+impl From<SMSG_MONSTER_MOVE_TRANSPORT> for ServerOpcodeMessage {
+    fn from(c: SMSG_MONSTER_MOVE_TRANSPORT) -> Self {
+        Self::SMSG_MONSTER_MOVE_TRANSPORT(c)
     }
 }
 

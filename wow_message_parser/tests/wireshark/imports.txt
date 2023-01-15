@@ -65,6 +65,7 @@ static int hf_woww_amount_of_required_items = -1;
 static int hf_woww_amount_of_rights = -1;
 static int hf_woww_amount_of_signatures = -1;
 static int hf_woww_amount_of_spells = -1;
+static int hf_woww_amount_of_splines = -1;
 static int hf_woww_amount_of_states = -1;
 static int hf_woww_amount_of_strings = -1;
 static int hf_woww_amount_of_targets = -1;

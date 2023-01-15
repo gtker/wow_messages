@@ -1039,6 +1039,8 @@ pub use crate::shared::meeting_stone_status_vanilla_tbc::MeetingStoneStatus;
 
 pub use crate::shared::money_log_item_tbc_wrath::MoneyLogItem;
 
+pub use crate::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
+
 pub use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
 
 pub use crate::shared::msg_auction_hello_client_vanilla_tbc_wrath::MSG_AUCTION_HELLO_Client;
@@ -1429,6 +1431,10 @@ pub use crate::shared::smsg_loot_roll_won_tbc_wrath::SMSG_LOOT_ROLL_WON;
 
 pub use crate::shared::smsg_loot_start_roll_vanilla_tbc::SMSG_LOOT_START_ROLL;
 
+pub use crate::shared::smsg_monster_move_transport_vanilla_tbc::SMSG_MONSTER_MOVE_TRANSPORT;
+
+pub use crate::shared::smsg_monster_move_vanilla_tbc::SMSG_MONSTER_MOVE;
+
 pub use crate::shared::smsg_motd_tbc_wrath::SMSG_MOTD;
 
 pub use crate::shared::smsg_mountresult_vanilla_tbc_wrath::SMSG_MOUNTRESULT;
@@ -1678,6 +1684,8 @@ pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 pub use crate::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 
 pub use crate::shared::spell_steal_tbc_wrath::SpellSteal;
+
+pub use crate::shared::spline_flag_vanilla_tbc::SplineFlag;
 
 pub use crate::shared::stable_result_vanilla_tbc::StableResult;
 
@@ -1989,8 +1997,6 @@ pub(crate) mod spell_log;
 pub use spell_log::*;
 pub(crate) mod spell_miss;
 pub use spell_miss::*;
-pub(crate) mod spline_flag;
-pub use spline_flag::*;
 pub(crate) mod trainer_spell;
 pub use trainer_spell::*;
 pub(crate) mod transfer_abort_reason;

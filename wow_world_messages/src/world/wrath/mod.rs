@@ -1219,6 +1219,8 @@ pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 
 pub use crate::shared::money_log_item_tbc_wrath::MoneyLogItem;
 
+pub use crate::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
+
 pub use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
 
 pub use crate::shared::msg_auction_hello_client_vanilla_tbc_wrath::MSG_AUCTION_HELLO_Client;
@@ -2143,6 +2145,10 @@ pub(crate) mod smsg_mirrorimage_data;
 pub use smsg_mirrorimage_data::*;
 pub(crate) mod smsg_modify_cooldown;
 pub use smsg_modify_cooldown::*;
+pub(crate) mod smsg_monster_move;
+pub use smsg_monster_move::*;
+pub(crate) mod smsg_monster_move_transport;
+pub use smsg_monster_move_transport::*;
 pub(crate) mod smsg_move_gravity_disable;
 pub use smsg_move_gravity_disable::*;
 pub(crate) mod smsg_move_gravity_enable;

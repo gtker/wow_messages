@@ -8,7 +8,7 @@ use crate::world::vanilla::UpdateFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:88`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L88):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:90`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L90):
 /// ```text
 /// struct MovementBlock {
 ///     UpdateFlag update_flag;
@@ -767,24 +767,24 @@ impl MovementBlock_SplineFlag {
         self
     }
 
-    pub const fn new_RUNMODE() -> Self {
+    pub const fn new_RUN_MODE() -> Self {
         Self {
-            inner: SplineFlag::RUNMODE,
+            inner: SplineFlag::RUN_MODE,
             final_angle: None,
         }
     }
 
-    pub fn set_RUNMODE(mut self) -> Self {
-        self.inner |= SplineFlag::RUNMODE;
+    pub fn set_RUN_MODE(mut self) -> Self {
+        self.inner |= SplineFlag::RUN_MODE;
         self
     }
 
-    pub const fn get_RUNMODE(&self) -> bool {
-        (self.inner & SplineFlag::RUNMODE) != 0
+    pub const fn get_RUN_MODE(&self) -> bool {
+        (self.inner & SplineFlag::RUN_MODE) != 0
     }
 
-    pub fn clear_RUNMODE(mut self) -> Self {
-        self.inner &= SplineFlag::RUNMODE.reverse_bits();
+    pub fn clear_RUN_MODE(mut self) -> Self {
+        self.inner &= SplineFlag::RUN_MODE.reverse_bits();
         self
     }
 
