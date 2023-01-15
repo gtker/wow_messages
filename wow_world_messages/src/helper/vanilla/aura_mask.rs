@@ -1,7 +1,7 @@
 use std::io;
 use std::io::Read;
 
-#[derive(Debug, Hash, Default, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Debug, Hash, Default, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub struct AuraMask {
     auras: [Option<u16>; Self::MAX_CAPACITY],
 }
