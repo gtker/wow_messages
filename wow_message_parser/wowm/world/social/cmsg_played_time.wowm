@@ -1,6 +1,6 @@
 cmsg CMSG_PLAYED_TIME = 0x01CC {
 } {
-    versions = "1.12";
+    versions = "1.12 2";
 }
 
 cmsg CMSG_PLAYED_TIME = 0x01CC {

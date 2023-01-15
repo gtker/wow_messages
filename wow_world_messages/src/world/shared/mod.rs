@@ -396,6 +396,8 @@ pub mod cmsg_petition_showlist_vanilla_tbc_wrath;
 pub mod cmsg_petition_sign_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_ping_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cmsg_played_time_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_player_login_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
