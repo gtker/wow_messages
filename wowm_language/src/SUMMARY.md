@@ -1254,6 +1254,7 @@
 - [SMSG_SEND_UNLEARN_SPELLS](docs/smsg_send_unlearn_spells.md)
 - [SMSG_SERVER_FIRST_ACHIEVEMENT](docs/smsg_server_first_achievement.md)
 - [SMSG_SERVER_MESSAGE](docs/smsg_server_message.md)
+- [SMSG_SET_EXTRA_AURA_INFO](docs/smsg_set_extra_aura_info.md)
 - [SMSG_SET_FACTION_STANDING](docs/smsg_set_faction_standing.md)
 - [SMSG_SET_FACTION_VISIBLE](docs/smsg_set_faction_visible.md)
 - [SMSG_SET_FLAT_SPELL_MODIFIER](docs/smsg_set_flat_spell_modifier.md)
