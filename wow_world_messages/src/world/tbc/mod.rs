@@ -917,6 +917,8 @@ pub use crate::shared::commentator_enable_option_tbc_wrath::CommentatorEnableOpt
 
 pub use crate::shared::complain_result_window_tbc_wrath::ComplainResultWindow;
 
+pub use crate::shared::complaint_status_tbc_wrath::ComplaintStatus;
+
 pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
@@ -1793,6 +1795,8 @@ pub(crate) mod smsg_emote;
 pub use smsg_emote::*;
 pub(crate) mod smsg_exploration_experience;
 pub use smsg_exploration_experience::*;
+pub(crate) mod smsg_feature_system_status;
+pub use smsg_feature_system_status::*;
 pub(crate) mod smsg_flight_spline_sync;
 pub use smsg_flight_spline_sync::*;
 pub(crate) mod smsg_force_move_root;

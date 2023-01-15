@@ -366,8 +366,6 @@ pub(crate) mod cmsg_world_teleport;
 pub use cmsg_world_teleport::*;
 pub(crate) mod cmsg_zoneupdate;
 pub use cmsg_zoneupdate::*;
-pub(crate) mod complaint_status;
-pub use complaint_status::*;
 pub use crate::helper::wrath::*;
 pub use crate::manual::wrath::*;
 pub(crate) mod creature_family;
@@ -1126,6 +1124,8 @@ pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 pub use crate::shared::commentator_enable_option_tbc_wrath::CommentatorEnableOption;
 
 pub use crate::shared::complain_result_window_tbc_wrath::ComplainResultWindow;
+
+pub use crate::shared::complaint_status_tbc_wrath::ComplaintStatus;
 
 pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 
