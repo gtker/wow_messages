@@ -4,7 +4,7 @@ smsg SMSG_INIT_WORLD_STATES = 0x02C2 {
     u16 amount_of_states;
     WorldState[amount_of_states] states;
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3";
 }
 
 smsg SMSG_INIT_WORLD_STATES = 0x02C2 {

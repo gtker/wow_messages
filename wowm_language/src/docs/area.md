@@ -5515,6 +5515,7 @@ Used in:
 * [SMSG_CAST_FAILED](smsg_cast_failed.md)
 * [SMSG_DEFENSE_MESSAGE](smsg_defense_message.md)
 * [SMSG_EXPLORATION_EXPERIENCE](smsg_exploration_experience.md)
+* [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_MEETINGSTONE_SETQUEUE](smsg_meetingstone_setqueue.md)
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)

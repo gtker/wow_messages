@@ -324,6 +324,7 @@ Used in:
 * [RaidInfo](raidinfo.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_DEATH_RELEASE_LOC](smsg_death_release_loc.md)
+* [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
 * [SMSG_INSTANCE_RESET](smsg_instance_reset.md)
 * [SMSG_INSTANCE_RESET_FAILED](smsg_instance_reset_failed.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
