@@ -94,6 +94,8 @@ pub(crate) mod cmsg_keep_alive;
 pub use cmsg_keep_alive::*;
 pub(crate) mod cmsg_leave_battlefield;
 pub use cmsg_leave_battlefield::*;
+pub(crate) mod cmsg_lfg_clear_autojoin;
+pub use cmsg_lfg_clear_autojoin::*;
 pub(crate) mod cmsg_lfg_set_autojoin;
 pub use cmsg_lfg_set_autojoin::*;
 pub(crate) mod cmsg_loot_method;
