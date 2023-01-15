@@ -741,6 +741,10 @@ pub mod msg_random_roll_client_vanilla_tbc_wrath;
 pub mod msg_random_roll_server_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod msg_save_guild_emblem_client_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod msg_set_dungeon_difficulty_client_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod msg_set_dungeon_difficulty_server_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod msg_tabardvendor_activate_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

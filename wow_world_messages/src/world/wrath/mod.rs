@@ -584,8 +584,6 @@ pub(crate) mod msg_raid_ready_check_finished_client;
 pub use msg_raid_ready_check_finished_client::*;
 pub(crate) mod msg_save_guild_emblem_server;
 pub use msg_save_guild_emblem_server::*;
-pub(crate) mod msg_set_dungeon_difficulty;
-pub use msg_set_dungeon_difficulty::*;
 pub(crate) mod msg_set_raid_difficulty_client;
 pub use msg_set_raid_difficulty_client::*;
 pub(crate) mod msg_set_raid_difficulty_server;
@@ -1286,6 +1284,10 @@ pub use crate::shared::msg_random_roll_client_vanilla_tbc_wrath::MSG_RANDOM_ROLL
 pub use crate::shared::msg_random_roll_server_vanilla_tbc_wrath::MSG_RANDOM_ROLL_Server;
 
 pub use crate::shared::msg_save_guild_emblem_client_vanilla_tbc_wrath::MSG_SAVE_GUILD_EMBLEM_Client;
+
+pub use crate::shared::msg_set_dungeon_difficulty_client_tbc_wrath::MSG_SET_DUNGEON_DIFFICULTY_Client;
+
+pub use crate::shared::msg_set_dungeon_difficulty_server_tbc_wrath::MSG_SET_DUNGEON_DIFFICULTY_Server;
 
 pub use crate::shared::msg_tabardvendor_activate_vanilla_tbc_wrath::MSG_TABARDVENDOR_ACTIVATE;
 
