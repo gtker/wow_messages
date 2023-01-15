@@ -71,6 +71,9 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
     }
 
 }
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_UPDATE_ACCOUNT_DATA {}
+
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ServerMessage for SMSG_UPDATE_ACCOUNT_DATA {}
 

@@ -4,6 +4,6 @@ smsg SMSG_UPDATE_ACCOUNT_DATA = 0x20C {
     u8[-] compressed_data;
 } {
     comment = "Sent as response to [CMSG_REQUEST_ACCOUNT_DATA]";
-    versions = "3.3.5";
+    versions = "2.4.3 3";
 }
 

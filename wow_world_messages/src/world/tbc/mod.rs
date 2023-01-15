@@ -1609,6 +1609,8 @@ pub use crate::shared::smsg_turn_in_petition_results_tbc_wrath::SMSG_TURN_IN_PET
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
+pub use crate::shared::smsg_update_account_data_tbc_wrath::SMSG_UPDATE_ACCOUNT_DATA;
+
 pub use crate::shared::smsg_update_aura_duration_vanilla_tbc::SMSG_UPDATE_AURA_DURATION;
 
 pub use crate::shared::smsg_update_combo_points_tbc_wrath::SMSG_UPDATE_COMBO_POINTS;

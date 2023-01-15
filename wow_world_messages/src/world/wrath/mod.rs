@@ -1741,6 +1741,8 @@ pub use crate::shared::smsg_turn_in_petition_results_tbc_wrath::SMSG_TURN_IN_PET
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
+pub use crate::shared::smsg_update_account_data_tbc_wrath::SMSG_UPDATE_ACCOUNT_DATA;
+
 pub use crate::shared::smsg_update_combo_points_tbc_wrath::SMSG_UPDATE_COMBO_POINTS;
 
 pub use crate::shared::smsg_update_instance_ownership_vanilla_tbc_wrath::SMSG_UPDATE_INSTANCE_OWNERSHIP;
@@ -2309,8 +2311,6 @@ pub(crate) mod smsg_trigger_cinematic;
 pub use smsg_trigger_cinematic::*;
 pub(crate) mod smsg_trigger_movie;
 pub use smsg_trigger_movie::*;
-pub(crate) mod smsg_update_account_data;
-pub use smsg_update_account_data::*;
 pub(crate) mod smsg_update_account_data_complete;
 pub use smsg_update_account_data_complete::*;
 pub(crate) mod smsg_update_instance_encounter_unit;

@@ -1273,6 +1273,8 @@ pub mod smsg_trainer_buy_succeeded_vanilla_tbc_wrath;
 pub mod smsg_turn_in_petition_results_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_tutorial_flags_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod smsg_update_account_data_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_update_aura_duration_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
