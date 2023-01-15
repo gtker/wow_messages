@@ -1012,6 +1012,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_compressed_data,
+            { "Compressed Data", "woww.compressed.data",
+                FT_BYTES, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_container_slots,
             { "Container Slots", "woww.container.slots",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -1248,6 +1254,12 @@
         },
         { &hf_woww_decompressed_addon_info_size,
             { "Decompressed Addon Info Size", "woww.decompressed.addon.info.size",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_decompressed_size,
+            { "Decompressed Size", "woww.decompressed.size",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -4489,12 +4501,6 @@
         { &hf_woww_unit_target,
             { "Unit Target", "woww.unit.target",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_unknown_bytes,
-            { "Unknown Bytes", "woww.unknown.bytes",
-                FT_BYTES, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },

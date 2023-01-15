@@ -2,13 +2,12 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
     u32 data_type {
         comment = "Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder.";
     }
-    u32 unknown1 {
-        comment = "Seems to be equal to size of unknown2 for smaller messages. Perhaps uncompressed size?";
-    }
-    u8[-] unknown2;
+    /* TODO: Compression */
+    u32 decompressed_size;
+    u8[-] compressed_data;
 } {
     comment = "This is sent by the client after receiving [SMSG_ACCOUNT_DATA_TIMES]. Client can also request a block through [CMSG_REQUEST_ACCOUNT_DATA].";
-    versions = "1.12";
+    versions = "1.12 2";
 }
 
 cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
@@ -31,21 +30,21 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 
 test CMSG_UPDATE_ACCOUNT_DATA {
     data_type = 6;
-    unknown1 = 0;
-    unknown2 = [];
+    decompressed_size = 0;
+    compressed_data = [];
 } [
   0x00, 0x0c, /* size */
   0x0B, 0x02, 0x00, 0x00, /* opcode */
   0x06, 0x00, 0x00, 0x00, /* block */
-  0x00, 0x00, 0x00, 0x00 /* unknown1 */
+  0x00, 0x00, 0x00, 0x00 /* decompressed_size */
 ] {
     versions = "1.12";
 }
 
 test CMSG_UPDATE_ACCOUNT_DATA {
     data_type = 7;
-    unknown1 = 0x1418;
-    unknown2 = [
+    decompressed_size = 0x1418;
+    compressed_data = [
         0x78, 0x01,
         0xbd, 0x57, 0xdb, 0x96, 0xab, 0x28, 0x10, 0x7d,
         0xe7, 0x2b, 0xfc, 0x04, 0xb5, 0x93, 0xb6, 0xf3,
@@ -199,7 +198,7 @@ test CMSG_UPDATE_ACCOUNT_DATA {
   0x04, 0xA0, /* size */
   0x0b, 0x02, 0x00, 0x00, /* opcode */
   0x07, 0x00, 0x00, 0x00, /* block */
-  0x18, 0x14, 0x00, 0x00, /* unknown1 */
+  0x18, 0x14, 0x00, 0x00, /* decompressed_size */
   0x78, 0x01,
   0xbd, 0x57, 0xdb, 0x96, 0xab, 0x28, 0x10, 0x7d,
   0xe7, 0x2b, 0xfc, 0x04, 0xb5, 0x93, 0xb6, 0xf3,

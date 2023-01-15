@@ -140,8 +140,6 @@ pub(crate) mod cmsg_text_emote;
 pub use cmsg_text_emote::*;
 pub(crate) mod cmsg_unlearn_skill;
 pub use cmsg_unlearn_skill::*;
-pub(crate) mod cmsg_update_account_data;
-pub use cmsg_update_account_data::*;
 pub(crate) mod cmsg_use_item;
 pub use cmsg_use_item::*;
 pub(crate) mod cmsg_world_teleport;
@@ -770,6 +768,8 @@ pub use crate::shared::cmsg_tutorial_reset_vanilla_tbc_wrath::CMSG_TUTORIAL_RESE
 pub use crate::shared::cmsg_unaccept_trade_vanilla_tbc_wrath::CMSG_UNACCEPT_TRADE;
 
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
+
+pub use crate::shared::cmsg_update_account_data_vanilla_tbc::CMSG_UPDATE_ACCOUNT_DATA;
 
 pub use crate::shared::cmsg_warden_data_vanilla_tbc_wrath::CMSG_WARDEN_DATA;
 
