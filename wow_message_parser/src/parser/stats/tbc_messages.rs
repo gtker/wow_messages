@@ -665,7 +665,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_LFG_CLEAR_AUTOJOIN", 0x35D),
     Data::new("CMSG_LFM_SET_AUTOFILL", 0x35E),
     Data::new("CMSG_LFM_CLEAR_AUTOFILL", 0x35F),
-    Data::new("CMSG_ACCEPT_LFG_MATCH", 0x360),
+    Data::nyi("CMSG_ACCEPT_LFG_MATCH", 0x360),
     Data::new("CMSG_DECLINE_LFG_MATCH", 0x361),
     Data::new("CMSG_CANCEL_PENDING_LFG", 0x362),
     Data::new("CMSG_CLEAR_LOOKING_FOR_GROUP", 0x363),
