@@ -607,6 +607,7 @@
 - [CMSG_SET_FACTION_INACTIVE](docs/cmsg_set_faction_inactive.md)
 - [CMSG_SET_GUILD_BANK_TEXT](docs/cmsg_set_guild_bank_text.md)
 - [CMSG_SET_LFG_COMMENT](docs/cmsg_set_lfg_comment.md)
+- [CMSG_SET_LOOKING_FOR_GROUP](docs/cmsg_set_looking_for_group.md)
 - [CMSG_SET_PLAYER_DECLINED_NAMES](docs/cmsg_set_player_declined_names.md)
 - [CMSG_SET_SAVED_INSTANCE_EXTEND](docs/cmsg_set_saved_instance_extend.md)
 - [CMSG_SET_SELECTION](docs/cmsg_set_selection.md)
