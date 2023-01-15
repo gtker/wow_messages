@@ -184,6 +184,10 @@ pub(crate) fn print_message_stats(o: &Objects) {
         for (data, version) in [&vanilla, &tbc, &wrath] {
             print_missing_definitions(data, *version);
         }
+
+        for (data, version) in [&vanilla, &tbc, &wrath] {
+            stats_for(*version, data);
+        }
     }
 }
 
@@ -245,8 +249,6 @@ fn print_missing_definitions(data: &[Data], version: MajorWorldVersion) {
     }
 
     println!();
-
-    stats_for(version, data);
 }
 
 fn stats_for(version: MajorWorldVersion, data: &[Data]) {
@@ -279,7 +281,6 @@ fn stats_for(version: MajorWorldVersion, data: &[Data]) {
         data.len(),
         (test_sum as f32 / data.len() as f32) * 100.0_f32
     );
-    println!();
 }
 
 fn get_real_name(s: &str) -> String {
