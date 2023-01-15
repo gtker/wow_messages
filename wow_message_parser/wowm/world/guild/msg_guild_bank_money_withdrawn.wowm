@@ -1,3 +1,20 @@
-#tag_all versions "3.3.5";
+cmsg MSG_GUILD_BANK_MONEY_WITHDRAWN_Client = 0x03FD {} {
+    versions = "2.4.3";
+}
 
-msg MSG_GUILD_BANK_MONEY_WITHDRAWN = 0x03FE {}
+cmsg MSG_GUILD_BANK_MONEY_WITHDRAWN_Client = 0x03FE {} {
+    versions = "3.3.5";
+}
+
+smsg MSG_GUILD_BANK_MONEY_WITHDRAWN_Server = 0x03FD {
+    u32 remaining_withdraw_amount;
+} {
+    versions = "2.4.3";
+}
+
+smsg MSG_GUILD_BANK_MONEY_WITHDRAWN_Server = 0x03FE {
+    u32 remaining_withdraw_amount;
+} {
+    versions = "3.3.5";
+}
+
