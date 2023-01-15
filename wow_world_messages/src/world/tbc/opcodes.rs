@@ -6202,6 +6202,7 @@ use crate::world::tbc::SMSG_FISH_NOT_HOOKED;
 use crate::world::tbc::SMSG_FISH_ESCAPED;
 use crate::world::tbc::SMSG_NOTIFICATION;
 use crate::world::tbc::SMSG_PLAYED_TIME;
+use crate::world::tbc::SMSG_QUERY_TIME_RESPONSE;
 use crate::world::tbc::SMSG_LOG_XPGAIN;
 use crate::world::tbc::SMSG_LEVELUP_INFO;
 use crate::world::tbc::MSG_MINIMAP_PING_Server;
@@ -6594,6 +6595,7 @@ pub enum ServerOpcodeMessage {
     SMSG_FISH_ESCAPED(SMSG_FISH_ESCAPED),
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
     SMSG_PLAYED_TIME(SMSG_PLAYED_TIME),
+    SMSG_QUERY_TIME_RESPONSE(SMSG_QUERY_TIME_RESPONSE),
     SMSG_LOG_XPGAIN(SMSG_LOG_XPGAIN),
     SMSG_LEVELUP_INFO(SMSG_LEVELUP_INFO),
     MSG_MINIMAP_PING(MSG_MINIMAP_PING_Server),
@@ -6988,6 +6990,7 @@ impl ServerOpcodeMessage {
             0x01C9 => Ok(Self::SMSG_FISH_ESCAPED(<SMSG_FISH_ESCAPED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C9, size: body_size, io, } } else { a } })?)),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CB, size: body_size, io, } } else { a } })?)),
             0x01CD => Ok(Self::SMSG_PLAYED_TIME(<SMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CD, size: body_size, io, } } else { a } })?)),
+            0x01CF => Ok(Self::SMSG_QUERY_TIME_RESPONSE(<SMSG_QUERY_TIME_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CF, size: body_size, io, } } else { a } })?)),
             0x01D0 => Ok(Self::SMSG_LOG_XPGAIN(<SMSG_LOG_XPGAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D0, size: body_size, io, } } else { a } })?)),
             0x01D4 => Ok(Self::SMSG_LEVELUP_INFO(<SMSG_LEVELUP_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D4, size: body_size, io, } } else { a } })?)),
             0x01D5 => Ok(Self::MSG_MINIMAP_PING(<MSG_MINIMAP_PING_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D5, size: body_size, io, } } else { a } })?)),
@@ -7450,6 +7453,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FISH_ESCAPED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAYED_TIME(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOG_XPGAIN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LEVELUP_INFO(c) => c.write_encrypted_server(w, e),
             Self::MSG_MINIMAP_PING(c) => c.write_encrypted_server(w, e),
@@ -7845,6 +7849,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FISH_ESCAPED(c) => c.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAYED_TIME(c) => c.write_unencrypted_server(w),
+            Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOG_XPGAIN(c) => c.write_unencrypted_server(w),
             Self::SMSG_LEVELUP_INFO(c) => c.write_unencrypted_server(w),
             Self::MSG_MINIMAP_PING(c) => c.write_unencrypted_server(w),
@@ -8240,6 +8245,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FISH_ESCAPED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOG_XPGAIN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MINIMAP_PING(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8635,6 +8641,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FISH_ESCAPED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOG_XPGAIN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LEVELUP_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MINIMAP_PING(c) => c.tokio_write_unencrypted_server(w).await,
@@ -9030,6 +9037,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FISH_ESCAPED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOG_XPGAIN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MINIMAP_PING(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9425,6 +9433,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_FISH_ESCAPED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOG_XPGAIN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LEVELUP_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MINIMAP_PING(c) => c.astd_write_unencrypted_server(w).await,
@@ -9822,6 +9831,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FISH_ESCAPED(_) => "SMSG_FISH_ESCAPED",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
             ServerOpcodeMessage::SMSG_PLAYED_TIME(_) => "SMSG_PLAYED_TIME",
+            ServerOpcodeMessage::SMSG_QUERY_TIME_RESPONSE(_) => "SMSG_QUERY_TIME_RESPONSE",
             ServerOpcodeMessage::SMSG_LOG_XPGAIN(_) => "SMSG_LOG_XPGAIN",
             ServerOpcodeMessage::SMSG_LEVELUP_INFO(_) => "SMSG_LEVELUP_INFO",
             ServerOpcodeMessage::MSG_MINIMAP_PING(_) => "MSG_MINIMAP_PING_Server",
@@ -11157,6 +11167,12 @@ impl From<SMSG_NOTIFICATION> for ServerOpcodeMessage {
 impl From<SMSG_PLAYED_TIME> for ServerOpcodeMessage {
     fn from(c: SMSG_PLAYED_TIME) -> Self {
         Self::SMSG_PLAYED_TIME(c)
+    }
+}
+
+impl From<SMSG_QUERY_TIME_RESPONSE> for ServerOpcodeMessage {
+    fn from(c: SMSG_QUERY_TIME_RESPONSE) -> Self {
+        Self::SMSG_QUERY_TIME_RESPONSE(c)
     }
 }
 

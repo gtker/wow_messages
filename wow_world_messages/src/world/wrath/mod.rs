@@ -1617,6 +1617,8 @@ pub use crate::shared::smsg_procresist_vanilla_tbc_wrath::SMSG_PROCRESIST;
 
 pub use crate::shared::smsg_pvp_credit_vanilla_tbc_wrath::SMSG_PVP_CREDIT;
 
+pub use crate::shared::smsg_query_time_response_tbc_wrath::SMSG_QUERY_TIME_RESPONSE;
+
 pub use crate::shared::smsg_quest_confirm_accept_vanilla_tbc_wrath::SMSG_QUEST_CONFIRM_ACCEPT;
 
 pub use crate::shared::smsg_questlog_full_vanilla_tbc_wrath::SMSG_QUESTLOG_FULL;
@@ -2187,8 +2189,6 @@ pub(crate) mod smsg_propose_level_grant;
 pub use smsg_propose_level_grant::*;
 pub(crate) mod smsg_query_quests_completed_response;
 pub use smsg_query_quests_completed_response::*;
-pub(crate) mod smsg_query_time_response;
-pub use smsg_query_time_response::*;
 pub(crate) mod smsg_quest_force_remove;
 pub use smsg_quest_force_remove::*;
 pub(crate) mod smsg_quest_poi_query_response;

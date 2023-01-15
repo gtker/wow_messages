@@ -55,6 +55,9 @@ impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
     }
 
 }
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
+
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
 

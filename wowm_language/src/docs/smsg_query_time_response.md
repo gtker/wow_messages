@@ -44,7 +44,7 @@ SMSG have a header of 4 bytes.
 ```
 # SMSG_QUERY_TIME_RESPONSE
 
-## Client Version 3
+## Client Version 2.4.3, Client Version 3
 
 ### Comment
 

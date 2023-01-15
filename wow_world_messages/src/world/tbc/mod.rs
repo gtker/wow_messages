@@ -1451,6 +1451,8 @@ pub use crate::shared::smsg_procresist_vanilla_tbc_wrath::SMSG_PROCRESIST;
 
 pub use crate::shared::smsg_pvp_credit_vanilla_tbc_wrath::SMSG_PVP_CREDIT;
 
+pub use crate::shared::smsg_query_time_response_tbc_wrath::SMSG_QUERY_TIME_RESPONSE;
+
 pub use crate::shared::smsg_quest_confirm_accept_vanilla_tbc_wrath::SMSG_QUEST_CONFIRM_ACCEPT;
 
 pub use crate::shared::smsg_questgiver_quest_list_vanilla_tbc::SMSG_QUESTGIVER_QUEST_LIST;

@@ -28,7 +28,7 @@ smsg SMSG_QUERY_TIME_RESPONSE = 0x01CF {
 } {
     comment = "Reply to [CMSG_QUERY_TIME].";
     comment = "[CMSG_QUERY_TIME] and this reply does not actually appear to set the time. Instead [SMSG_LOGIN_SETTIMESPEED] seems to correctly set the time. Running the client with `-console` will print the date when [SMSG_LOGIN_SETTIMESPEED] is received, but not when this message is received.";
-    versions = "3";
+    versions = "2.4.3 3";
 }
 
 

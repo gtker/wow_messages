@@ -1131,6 +1131,8 @@ pub mod smsg_pong_vanilla_tbc_wrath;
 pub mod smsg_procresist_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_pvp_credit_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod smsg_query_time_response_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_quest_confirm_accept_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
