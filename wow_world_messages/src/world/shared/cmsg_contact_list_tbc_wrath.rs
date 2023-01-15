@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_CONTACT_LIST {
-    /// Sent back in [`SMSG_CONTACT_LIST`](crate::world::wrath::SMSG_CONTACT_LIST).
+    /// Sent back in [`SMSG_CONTACT_LIST`](crate::world::tbc::SMSG_CONTACT_LIST).
     ///
     pub flags: u32,
 }

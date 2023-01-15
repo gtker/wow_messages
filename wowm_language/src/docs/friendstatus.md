@@ -31,7 +31,7 @@ Used in:
 
 # FriendStatus
 
-## Client Version 3.3.5
+## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation
 
@@ -58,5 +58,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `DND` | 4 (0x04) |  |  |
 
 Used in:
+* [Relation](relation.md)
 * [Relation](relation.md)
 

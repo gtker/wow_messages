@@ -43,6 +43,7 @@ Used in:
 * [Friend](friend.md)
 * [GuildMember](guildmember.md)
 * [GuildMember](guildmember.md)
+* [Relation](relation.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [WhoPlayer](whoplayer.md)

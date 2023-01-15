@@ -396,8 +396,6 @@ pub(crate) mod faction_initializer;
 pub use faction_initializer::*;
 pub(crate) mod friend_result;
 pub use friend_result::*;
-pub(crate) mod friend_status;
-pub use friend_status::*;
 pub(crate) mod gameobject_cast_flags;
 pub use gameobject_cast_flags::*;
 pub(crate) mod group_list_member;
@@ -1157,6 +1155,8 @@ pub use crate::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
 
 pub use crate::shared::forced_reaction_vanilla_tbc_wrath::ForcedReaction;
 
+pub use crate::shared::friend_status_tbc_wrath::FriendStatus;
+
 pub use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 
 pub use crate::shared::gm_ticket_escalation_status_vanilla_tbc_wrath::GmTicketEscalationStatus;
@@ -1350,6 +1350,8 @@ pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 pub use crate::shared::received_mail_tbc_wrath::ReceivedMail;
 
 pub use crate::shared::refer_a_friend_error_tbc_wrath::ReferAFriendError;
+
+pub use crate::shared::relation_type_tbc_wrath::RelationType;
 
 pub use crate::shared::roll_vote_tbc_wrath::RollVote;
 
@@ -1825,8 +1827,6 @@ pub(crate) mod random_bg;
 pub use random_bg::*;
 pub(crate) mod relation;
 pub use relation::*;
-pub(crate) mod relation_type;
-pub use relation_type::*;
 pub(crate) mod resync_rune;
 pub use resync_rune::*;
 pub(crate) mod roll_flags;

@@ -909,6 +909,8 @@ pub use crate::shared::forced_reaction_vanilla_tbc_wrath::ForcedReaction;
 
 pub use crate::shared::friend_result_vanilla_tbc::FriendResult;
 
+pub use crate::shared::friend_status_tbc_wrath::FriendStatus;
+
 pub use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 
 pub use crate::shared::gm_ticket_escalation_status_vanilla_tbc_wrath::GmTicketEscalationStatus;
@@ -1126,6 +1128,8 @@ pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 pub use crate::shared::received_mail_tbc_wrath::ReceivedMail;
 
 pub use crate::shared::refer_a_friend_error_tbc_wrath::ReferAFriendError;
+
+pub use crate::shared::relation_type_tbc_wrath::RelationType;
 
 pub use crate::shared::roll_vote_tbc_wrath::RollVote;
 
@@ -1671,6 +1675,8 @@ pub(crate) mod race;
 pub use race::*;
 pub(crate) mod raid_info;
 pub use raid_info::*;
+pub(crate) mod relation;
+pub use relation::*;
 pub(crate) mod skill;
 pub use skill::*;
 pub(crate) mod smsg_action_buttons;
@@ -1709,6 +1715,8 @@ pub(crate) mod smsg_chat_restricted;
 pub use smsg_chat_restricted::*;
 pub(crate) mod smsg_complain_result;
 pub use smsg_complain_result::*;
+pub(crate) mod smsg_contact_list;
+pub use smsg_contact_list::*;
 pub(crate) mod smsg_creature_query_response;
 pub use smsg_creature_query_response::*;
 pub(crate) mod smsg_death_release_loc;

@@ -1,11 +1,11 @@
-#tag_all versions "3.3.5";
-
 flag RelationType : u32 {
     NONE = 0x00;
     FRIEND = 0x01;
     IGNORED = 0x02;
     MUTED = 0x04;
     RECRUITAFRIEND = 0x08;
+} {
+    versions = "2.4.3 3";
 }
 
 enum FriendStatus : u8 {
@@ -14,7 +14,9 @@ enum FriendStatus : u8 {
     AFK = 2;
     UNKNOWN3 = 3;
     DND = 4;
-}
+} {
+     versions = "2.4.3 3";
+ }
 
 struct Relation {
     Guid guid;
@@ -29,6 +31,8 @@ struct Relation {
             (u32)Class class;
         }
     }
+} {
+      paste_versions = "2.4.3 3.3.5";
 }
 
 smsg SMSG_CONTACT_LIST = 0x0067 {
@@ -37,4 +41,6 @@ smsg SMSG_CONTACT_LIST = 0x0067 {
     }
     u32 amount_of_relations;
     Relation[amount_of_relations] relations;
+} {
+     paste_versions = "2.4.3 3.3.5";
 }

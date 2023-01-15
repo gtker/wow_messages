@@ -585,6 +585,8 @@ pub mod far_sight_operation_vanilla_tbc_wrath;
 pub mod forced_reaction_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod friend_result_vanilla_tbc;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod friend_status_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod gm_survey_question_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -805,6 +807,8 @@ pub mod realm_split_state_tbc_wrath;
 pub mod received_mail_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod refer_a_friend_error_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod relation_type_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod roll_vote_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
