@@ -3,9 +3,9 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_crossed_inebriation_threshold.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_crossed_inebriation_threshold.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_crossed_inebriation_threshold.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_crossed_inebriation_threshold.wowm#L1):
 /// ```text
-/// smsg SMSG_CROSSED_INEBRIATION_THRESHOLD = 0x03C1 {
+/// smsg SMSG_CROSSED_INEBRIATION_THRESHOLD = 0x03C0 {
 ///     Guid player;
 ///     u32 state;
 ///     u32 item;
@@ -18,7 +18,7 @@ pub struct SMSG_CROSSED_INEBRIATION_THRESHOLD {
 }
 
 impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
-    const OPCODE: u32 = 0x03c1;
+    const OPCODE: u32 = 0x03c0;
 
     fn size_without_header(&self) -> u32 {
         16
@@ -38,7 +38,7 @@ impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C1, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C0, size: body_size as u32 });
         }
 
         // player: Guid
@@ -58,6 +58,6 @@ impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
     }
 
 }
-#[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CROSSED_INEBRIATION_THRESHOLD {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_CROSSED_INEBRIATION_THRESHOLD {}
 

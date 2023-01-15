@@ -6606,6 +6606,7 @@ use crate::world::tbc::MSG_MOVE_UPDATE_CAN_FLY_Server;
 use crate::world::tbc::MSG_RAID_READY_CHECK_CONFIRM_Server;
 use crate::world::tbc::SMSG_GM_MESSAGECHAT;
 use crate::world::tbc::SMSG_CLEAR_TARGET;
+use crate::world::tbc::SMSG_CROSSED_INEBRIATION_THRESHOLD;
 use crate::world::tbc::SMSG_KICK_REASON;
 use crate::world::tbc::SMSG_COMPLAIN_RESULT;
 use crate::world::tbc::SMSG_CHANNEL_MEMBER_COUNT;
@@ -7015,6 +7016,7 @@ pub enum ServerOpcodeMessage {
     MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Server),
     SMSG_GM_MESSAGECHAT(SMSG_GM_MESSAGECHAT),
     SMSG_CLEAR_TARGET(SMSG_CLEAR_TARGET),
+    SMSG_CROSSED_INEBRIATION_THRESHOLD(SMSG_CROSSED_INEBRIATION_THRESHOLD),
     SMSG_KICK_REASON(SMSG_KICK_REASON),
     SMSG_COMPLAIN_RESULT(SMSG_COMPLAIN_RESULT),
     SMSG_CHANNEL_MEMBER_COUNT(SMSG_CHANNEL_MEMBER_COUNT),
@@ -7426,6 +7428,7 @@ impl ServerOpcodeMessage {
             0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
             0x03B2 => Ok(Self::SMSG_GM_MESSAGECHAT(<SMSG_GM_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B2, size: body_size, io, } } else { a } })?)),
             0x03BE => Ok(Self::SMSG_CLEAR_TARGET(<SMSG_CLEAR_TARGET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03BE, size: body_size, io, } } else { a } })?)),
+            0x03C0 => Ok(Self::SMSG_CROSSED_INEBRIATION_THRESHOLD(<SMSG_CROSSED_INEBRIATION_THRESHOLD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C0, size: body_size, io, } } else { a } })?)),
             0x03C4 => Ok(Self::SMSG_KICK_REASON(<SMSG_KICK_REASON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C4, size: body_size, io, } } else { a } })?)),
             0x03C7 => Ok(Self::SMSG_COMPLAIN_RESULT(<SMSG_COMPLAIN_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C7, size: body_size, io, } } else { a } })?)),
             0x03D4 => Ok(Self::SMSG_CHANNEL_MEMBER_COUNT(<SMSG_CHANNEL_MEMBER_COUNT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D4, size: body_size, io, } } else { a } })?)),
@@ -7905,6 +7908,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLEAR_TARGET(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CROSSED_INEBRIATION_THRESHOLD(c) => c.write_encrypted_server(w, e),
             Self::SMSG_KICK_REASON(c) => c.write_encrypted_server(w, e),
             Self::SMSG_COMPLAIN_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.write_encrypted_server(w, e),
@@ -8317,6 +8321,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_GM_MESSAGECHAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLEAR_TARGET(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CROSSED_INEBRIATION_THRESHOLD(c) => c.write_unencrypted_server(w),
             Self::SMSG_KICK_REASON(c) => c.write_unencrypted_server(w),
             Self::SMSG_COMPLAIN_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.write_unencrypted_server(w),
@@ -8729,6 +8734,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLEAR_TARGET(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CROSSED_INEBRIATION_THRESHOLD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_KICK_REASON(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_COMPLAIN_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9141,6 +9147,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLEAR_TARGET(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CROSSED_INEBRIATION_THRESHOLD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_KICK_REASON(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_COMPLAIN_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -9553,6 +9560,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLEAR_TARGET(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CROSSED_INEBRIATION_THRESHOLD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_KICK_REASON(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_COMPLAIN_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9965,6 +9973,7 @@ impl ServerOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GM_MESSAGECHAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLEAR_TARGET(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CROSSED_INEBRIATION_THRESHOLD(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_KICK_REASON(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_COMPLAIN_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHANNEL_MEMBER_COUNT(c) => c.astd_write_unencrypted_server(w).await,
@@ -10379,6 +10388,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_GM_MESSAGECHAT(_) => "SMSG_GM_MESSAGECHAT",
             ServerOpcodeMessage::SMSG_CLEAR_TARGET(_) => "SMSG_CLEAR_TARGET",
+            ServerOpcodeMessage::SMSG_CROSSED_INEBRIATION_THRESHOLD(_) => "SMSG_CROSSED_INEBRIATION_THRESHOLD",
             ServerOpcodeMessage::SMSG_KICK_REASON(_) => "SMSG_KICK_REASON",
             ServerOpcodeMessage::SMSG_COMPLAIN_RESULT(_) => "SMSG_COMPLAIN_RESULT",
             ServerOpcodeMessage::SMSG_CHANNEL_MEMBER_COUNT(_) => "SMSG_CHANNEL_MEMBER_COUNT",
@@ -12711,6 +12721,12 @@ impl From<SMSG_GM_MESSAGECHAT> for ServerOpcodeMessage {
 impl From<SMSG_CLEAR_TARGET> for ServerOpcodeMessage {
     fn from(c: SMSG_CLEAR_TARGET) -> Self {
         Self::SMSG_CLEAR_TARGET(c)
+    }
+}
+
+impl From<SMSG_CROSSED_INEBRIATION_THRESHOLD> for ServerOpcodeMessage {
+    fn from(c: SMSG_CROSSED_INEBRIATION_THRESHOLD) -> Self {
+        Self::SMSG_CROSSED_INEBRIATION_THRESHOLD(c)
     }
 }
 
