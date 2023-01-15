@@ -1,0 +1,3 @@
+smsg SMSG_LFG_LEADER_IS_LFM = 0x036B {} {
+    versions = "2.4.3";
+}

@@ -1817,6 +1817,8 @@ pub(crate) mod smsg_kick_reason;
 pub use smsg_kick_reason::*;
 pub(crate) mod smsg_learned_spell;
 pub use smsg_learned_spell::*;
+pub(crate) mod smsg_lfg_leader_is_lfm;
+pub use smsg_lfg_leader_is_lfm::*;
 pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
 pub(crate) mod smsg_loot_list;

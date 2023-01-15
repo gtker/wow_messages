@@ -1097,6 +1097,7 @@
 - [SMSG_LFG_BOOT_PROPOSAL_UPDATE](docs/smsg_lfg_boot_proposal_update.md)
 - [SMSG_LFG_DISABLED](docs/smsg_lfg_disabled.md)
 - [SMSG_LFG_JOIN_RESULT](docs/smsg_lfg_join_result.md)
+- [SMSG_LFG_LEADER_IS_LFM](docs/smsg_lfg_leader_is_lfm.md)
 - [SMSG_LFG_OFFER_CONTINUE](docs/smsg_lfg_offer_continue.md)
 - [SMSG_LFG_PARTY_INFO](docs/smsg_lfg_party_info.md)
 - [SMSG_LFG_PLAYER_INFO](docs/smsg_lfg_player_info.md)
