@@ -501,7 +501,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_SERVER_MESSAGE", 0x291),
     Data::nyi("CMSG_MEETINGSTONE_JOIN", 0x292),
     Data::nyi("CMSG_MEETINGSTONE_LEAVE", 0x293),
-    Data::new("CMSG_MEETINGSTONE_CHEAT", 0x294),
+    Data::nyi("CMSG_MEETINGSTONE_CHEAT", 0x294),
     Data::new("SMSG_MEETINGSTONE_SETQUEUE", 0x295),
     Data::new("CMSG_MEETINGSTONE_INFO", 0x296),
     Data::nyi("SMSG_MEETINGSTONE_COMPLETE", 0x297),
