@@ -1327,6 +1327,8 @@ pub use crate::shared::smsg_trainer_buy_succeeded_vanilla_tbc_wrath::SMSG_TRAINE
 
 pub use crate::shared::smsg_tutorial_flags_vanilla_tbc_wrath::SMSG_TUTORIAL_FLAGS;
 
+pub use crate::shared::smsg_update_aura_duration_vanilla_tbc::SMSG_UPDATE_AURA_DURATION;
+
 pub use crate::shared::smsg_update_instance_ownership_vanilla_tbc_wrath::SMSG_UPDATE_INSTANCE_OWNERSHIP;
 
 pub use crate::shared::smsg_update_world_state_vanilla_tbc_wrath::SMSG_UPDATE_WORLD_STATE;
@@ -1635,8 +1637,6 @@ pub(crate) mod smsg_trigger_cinematic;
 pub use smsg_trigger_cinematic::*;
 pub(crate) mod smsg_turn_in_petition_results;
 pub use smsg_turn_in_petition_results::*;
-pub(crate) mod smsg_update_aura_duration;
-pub use smsg_update_aura_duration::*;
 pub(crate) mod smsg_update_last_instance;
 pub use smsg_update_last_instance::*;
 pub(crate) mod smsg_update_object;

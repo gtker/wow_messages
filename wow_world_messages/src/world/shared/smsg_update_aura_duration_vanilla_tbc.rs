@@ -51,3 +51,6 @@ impl crate::Message for SMSG_UPDATE_AURA_DURATION {
 #[cfg(feature = "vanilla")]
 impl crate::world::vanilla::ServerMessage for SMSG_UPDATE_AURA_DURATION {}
 
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_UPDATE_AURA_DURATION {}
+
