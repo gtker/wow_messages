@@ -5509,6 +5509,7 @@ Used in:
 * [CMSG_ZONEUPDATE](cmsg_zoneupdate.md)
 * [Character](character.md)
 * [GuildMember](guildmember.md)
+* [LfgPlayer](lfgplayer.md)
 * [Relation](relation.md)
 * [SMSG_BINDPOINTUPDATE](smsg_bindpointupdate.md)
 * [SMSG_CAST_FAILED](smsg_cast_failed.md)
