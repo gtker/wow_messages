@@ -1,0 +1,6 @@
+smsg SMSG_CLEAR_EXTRA_AURA_INFO = 0x03A6 {
+    PackedGuid unit;
+    Spell spell;
+} {
+    versions = "2.4.3";
+}

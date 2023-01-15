@@ -1771,6 +1771,8 @@ pub(crate) mod smsg_character_login_failed;
 pub use smsg_character_login_failed::*;
 pub(crate) mod smsg_chat_restricted;
 pub use smsg_chat_restricted::*;
+pub(crate) mod smsg_clear_extra_aura_info;
+pub use smsg_clear_extra_aura_info::*;
 pub(crate) mod smsg_complain_result;
 pub use smsg_complain_result::*;
 pub(crate) mod smsg_contact_list;
