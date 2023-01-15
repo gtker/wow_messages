@@ -1,3 +1,9 @@
+smsg SMSG_CLEAR_TARGET = 0x03BE {
+    Guid target;
+} {
+    versions = "2.4.3";
+}
+
 smsg SMSG_CLEAR_TARGET = 0x03BF {
     Guid target;
 } {
