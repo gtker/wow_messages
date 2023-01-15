@@ -1,0 +1,5 @@
+smsg SMSG_LFG_UPDATE_LFG = 0x036E {
+    LfgData[3] data;
+} {
+    versions = "2.4.3";
+}

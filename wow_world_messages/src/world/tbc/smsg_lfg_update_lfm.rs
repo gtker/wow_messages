@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::LfgType;
+use crate::world::tbc::LfgData;
 use crate::world::tbc::LfgUpdateLookingForMore;
 use std::io::{Write, Read};
 
@@ -9,8 +9,7 @@ use std::io::{Write, Read};
 /// smsg SMSG_LFG_UPDATE_LFM = 0x036D {
 ///     LfgUpdateLookingForMore looking_for_more;
 ///     if (looking_for_more == LOOKING_FOR_MORE) {
-///         u16 entry;
-///         (u16)LfgType lfg_type;
+///         LfgData data;
 ///     }
 /// }
 /// ```
@@ -33,14 +32,10 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
         match &self.looking_for_more {
             SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::NotLookingForMore => {}
             SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
-                entry,
-                lfg_type,
+                data,
             } => {
-                // entry: u16
-                w.write_all(&entry.to_le_bytes())?;
-
-                // lfg_type: LfgType
-                w.write_all(&(lfg_type.as_int() as u16).to_le_bytes())?;
+                // data: LfgData
+                data.write_into_vec(w)?;
 
             }
         }
@@ -59,15 +54,11 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
         let looking_for_more_if = match looking_for_more {
             LfgUpdateLookingForMore::NotLookingForMore => SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::NotLookingForMore,
             LfgUpdateLookingForMore::LookingForMore => {
-                // entry: u16
-                let entry = crate::util::read_u16_le(r)?;
-
-                // lfg_type: LfgType
-                let lfg_type: LfgType = (crate::util::read_u16_le(r)? as u8).try_into()?;
+                // data: LfgData
+                let data = LfgData::read(r)?;
 
                 SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
-                    entry,
-                    lfg_type,
+                    data,
                 }
             }
         };
@@ -91,8 +82,7 @@ impl SMSG_LFG_UPDATE_LFM {
 pub enum SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
     NotLookingForMore,
     LookingForMore {
-        entry: u16,
-        lfg_type: LfgType,
+        data: LfgData,
     },
 }
 
@@ -120,12 +110,10 @@ impl SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
                 1
             }
             Self::LookingForMore {
-                entry,
-                lfg_type,
+                data,
             } => {
                 1
-                + 2 // entry: u16
-                + 2 // lfg_type: LfgType
+                + 4 // data: LfgData
             }
         }
     }

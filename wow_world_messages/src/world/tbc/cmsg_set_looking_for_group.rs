@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::LfgType;
+use crate::world::tbc::LfgData;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
@@ -7,14 +7,12 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_SET_LOOKING_FOR_GROUP = 0x0200 {
 ///     u32 slot;
-///     u16 entry;
-///     (u16)LfgType lfg_type;
+///     LfgData data;
 /// }
 /// ```
 pub struct CMSG_SET_LOOKING_FOR_GROUP {
     pub slot: u32,
-    pub entry: u16,
-    pub lfg_type: LfgType,
+    pub data: LfgData,
 }
 
 impl crate::Message for CMSG_SET_LOOKING_FOR_GROUP {
@@ -28,11 +26,8 @@ impl crate::Message for CMSG_SET_LOOKING_FOR_GROUP {
         // slot: u32
         w.write_all(&self.slot.to_le_bytes())?;
 
-        // entry: u16
-        w.write_all(&self.entry.to_le_bytes())?;
-
-        // lfg_type: LfgType
-        w.write_all(&(self.lfg_type.as_int() as u16).to_le_bytes())?;
+        // data: LfgData
+        self.data.write_into_vec(w)?;
 
         Ok(())
     }
@@ -44,16 +39,12 @@ impl crate::Message for CMSG_SET_LOOKING_FOR_GROUP {
         // slot: u32
         let slot = crate::util::read_u32_le(r)?;
 
-        // entry: u16
-        let entry = crate::util::read_u16_le(r)?;
-
-        // lfg_type: LfgType
-        let lfg_type: LfgType = (crate::util::read_u16_le(r)? as u8).try_into()?;
+        // data: LfgData
+        let data = LfgData::read(r)?;
 
         Ok(Self {
             slot,
-            entry,
-            lfg_type,
+            data,
         })
     }
 

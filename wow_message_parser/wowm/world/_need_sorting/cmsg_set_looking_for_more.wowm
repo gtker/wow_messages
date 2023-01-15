@@ -1,6 +1,5 @@
 cmsg CMSG_SET_LOOKING_FOR_MORE = 0x0365 {
-    u16 entry;
-    (u16)LfgType lfg_type;
+    LfgData data;
 } {
     versions = "2.4.3";
 }

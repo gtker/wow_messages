@@ -29,12 +29,9 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `HEROIC_DUNGEON` | 5 (0x05) |  |  |
 
 Used in:
-* [CMSG_SET_LOOKING_FOR_GROUP](cmsg_set_looking_for_group.md)
-* [CMSG_SET_LOOKING_FOR_MORE](cmsg_set_looking_for_more.md)
+* [LfgData](lfgdata.md)
 * [MSG_LOOKING_FOR_GROUP_Client](msg_looking_for_group_client.md)
 * [MSG_LOOKING_FOR_GROUP_Server](msg_looking_for_group_server.md)
-* [SMSG_LFG_UPDATE](smsg_lfg_update.md)
-* [SMSG_LFG_UPDATE_LFM](smsg_lfg_update_lfm.md)
 
 # LfgType
 
