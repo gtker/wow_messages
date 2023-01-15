@@ -162,8 +162,6 @@ pub(crate) mod guild_command_result;
 pub use guild_command_result::*;
 pub(crate) mod guild_member;
 pub use guild_member::*;
-pub(crate) mod hit_info;
-pub use hit_info::*;
 pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class_and_sub_class;
@@ -881,6 +879,8 @@ pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
+pub use crate::shared::damage_info_vanilla_tbc::DamageInfo;
+
 pub use crate::shared::declined_names_tbc_wrath::DeclinedNames;
 
 pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
@@ -942,6 +942,8 @@ pub use crate::shared::guild_log_event_tbc_wrath::GuildLogEvent;
 pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
 
 pub use crate::shared::guild_rights_tbc_wrath::GuildRights;
+
+pub use crate::shared::hit_info_vanilla_tbc::HitInfo;
 
 pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
@@ -1685,6 +1687,8 @@ pub(crate) mod smsg_action_buttons;
 pub use smsg_action_buttons::*;
 pub(crate) mod smsg_arena_team_roster;
 pub use smsg_arena_team_roster::*;
+pub(crate) mod smsg_attackerstateupdate;
+pub use smsg_attackerstateupdate::*;
 pub(crate) mod smsg_auction_bidder_list_result;
 pub use smsg_auction_bidder_list_result::*;
 pub(crate) mod smsg_auction_list_result;

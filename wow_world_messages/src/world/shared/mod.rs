@@ -557,6 +557,8 @@ pub mod cooldown_spell_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod corpse_query_result_vanilla_tbc_wrath;
 pub use crate::manual::shared::*;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod damage_info_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod declined_names_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -619,6 +621,8 @@ pub mod guild_log_event_tbc_wrath;
 pub mod guild_member_status_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod guild_rights_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod hit_info_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod initial_spell_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

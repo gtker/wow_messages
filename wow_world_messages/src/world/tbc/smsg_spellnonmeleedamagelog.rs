@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::SpellSchool;
 use crate::world::tbc::HitInfo;
+use crate::world::tbc::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
@@ -126,7 +126,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         let blocked = crate::util::read_u32_le(r)?;
 
         // hit_info: HitInfo
-        let hit_info = HitInfo::new(crate::util::read_u32_le(r)?);
+        let hit_info: HitInfo = crate::util::read_u32_le(r)?.try_into()?;
 
         // extend_flag: u8
         let extend_flag = crate::util::read_u8_le(r)?;

@@ -154,8 +154,6 @@ pub use crate::helper::vanilla::*;
 pub use crate::manual::vanilla::*;
 pub(crate) mod creature_family;
 pub use creature_family::*;
-pub(crate) mod damage_info;
-pub use damage_info::*;
 pub(crate) mod dismount_result;
 pub use dismount_result::*;
 pub(crate) mod emote;
@@ -182,8 +180,6 @@ pub(crate) mod guild_event;
 pub use guild_event::*;
 pub(crate) mod guild_member;
 pub use guild_member::*;
-pub(crate) mod hit_info;
-pub use hit_info::*;
 pub(crate) mod info_block;
 pub use info_block::*;
 pub(crate) mod inventory_result;
@@ -787,6 +783,8 @@ pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
+pub use crate::shared::damage_info_vanilla_tbc::DamageInfo;
+
 pub use crate::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
 
 pub use crate::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
@@ -824,6 +822,8 @@ pub use crate::shared::group_type_vanilla_tbc::GroupType;
 pub use crate::shared::guild_command_vanilla_tbc::GuildCommand;
 
 pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
+
+pub use crate::shared::hit_info_vanilla_tbc::HitInfo;
 
 pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 

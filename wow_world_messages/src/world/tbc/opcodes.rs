@@ -6121,6 +6121,7 @@ use crate::world::tbc::SMSG_ATTACKSWING_BADFACING;
 use crate::world::tbc::SMSG_ATTACKSWING_NOTSTANDING;
 use crate::world::tbc::SMSG_ATTACKSWING_DEADTARGET;
 use crate::world::tbc::SMSG_ATTACKSWING_CANT_ATTACK;
+use crate::world::tbc::SMSG_ATTACKERSTATEUPDATE;
 use crate::world::tbc::SMSG_CANCEL_COMBAT;
 use crate::world::tbc::SMSG_SPELLHEALLOG;
 use crate::world::tbc::SMSG_SPELLENERGIZELOG;
@@ -6511,6 +6512,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ATTACKSWING_NOTSTANDING(SMSG_ATTACKSWING_NOTSTANDING),
     SMSG_ATTACKSWING_DEADTARGET(SMSG_ATTACKSWING_DEADTARGET),
     SMSG_ATTACKSWING_CANT_ATTACK(SMSG_ATTACKSWING_CANT_ATTACK),
+    SMSG_ATTACKERSTATEUPDATE(SMSG_ATTACKERSTATEUPDATE),
     SMSG_CANCEL_COMBAT(SMSG_CANCEL_COMBAT),
     SMSG_SPELLHEALLOG(SMSG_SPELLHEALLOG),
     SMSG_SPELLENERGIZELOG(SMSG_SPELLENERGIZELOG),
@@ -6903,6 +6905,7 @@ impl ServerOpcodeMessage {
             0x0147 => Ok(Self::SMSG_ATTACKSWING_NOTSTANDING(<SMSG_ATTACKSWING_NOTSTANDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0147, size: body_size, io, } } else { a } })?)),
             0x0148 => Ok(Self::SMSG_ATTACKSWING_DEADTARGET(<SMSG_ATTACKSWING_DEADTARGET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0148, size: body_size, io, } } else { a } })?)),
             0x0149 => Ok(Self::SMSG_ATTACKSWING_CANT_ATTACK(<SMSG_ATTACKSWING_CANT_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0149, size: body_size, io, } } else { a } })?)),
+            0x014A => Ok(Self::SMSG_ATTACKERSTATEUPDATE(<SMSG_ATTACKERSTATEUPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x014A, size: body_size, io, } } else { a } })?)),
             0x014E => Ok(Self::SMSG_CANCEL_COMBAT(<SMSG_CANCEL_COMBAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x014E, size: body_size, io, } } else { a } })?)),
             0x0150 => Ok(Self::SMSG_SPELLHEALLOG(<SMSG_SPELLHEALLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0150, size: body_size, io, } } else { a } })?)),
             0x0151 => Ok(Self::SMSG_SPELLENERGIZELOG(<SMSG_SPELLENERGIZELOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0151, size: body_size, io, } } else { a } })?)),
@@ -7363,6 +7366,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_NOTSTANDING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ATTACKERSTATEUPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CANCEL_COMBAT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELLHEALLOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELLENERGIZELOG(c) => c.write_encrypted_server(w, e),
@@ -7756,6 +7760,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_NOTSTANDING(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ATTACKERSTATEUPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CANCEL_COMBAT(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELLHEALLOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELLENERGIZELOG(c) => c.write_unencrypted_server(w),
@@ -8149,6 +8154,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_NOTSTANDING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKERSTATEUPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLHEALLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLENERGIZELOG(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8542,6 +8548,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_NOTSTANDING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKERSTATEUPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLHEALLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLENERGIZELOG(c) => c.tokio_write_unencrypted_server(w).await,
@@ -8935,6 +8942,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_NOTSTANDING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKERSTATEUPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLHEALLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLENERGIZELOG(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9328,6 +9336,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ATTACKSWING_NOTSTANDING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKERSTATEUPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CANCEL_COMBAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLHEALLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLENERGIZELOG(c) => c.astd_write_unencrypted_server(w).await,
@@ -9723,6 +9732,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ATTACKSWING_NOTSTANDING(_) => "SMSG_ATTACKSWING_NOTSTANDING",
             ServerOpcodeMessage::SMSG_ATTACKSWING_DEADTARGET(_) => "SMSG_ATTACKSWING_DEADTARGET",
             ServerOpcodeMessage::SMSG_ATTACKSWING_CANT_ATTACK(_) => "SMSG_ATTACKSWING_CANT_ATTACK",
+            ServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(_) => "SMSG_ATTACKERSTATEUPDATE",
             ServerOpcodeMessage::SMSG_CANCEL_COMBAT(_) => "SMSG_CANCEL_COMBAT",
             ServerOpcodeMessage::SMSG_SPELLHEALLOG(_) => "SMSG_SPELLHEALLOG",
             ServerOpcodeMessage::SMSG_SPELLENERGIZELOG(_) => "SMSG_SPELLENERGIZELOG",
@@ -10731,6 +10741,12 @@ impl From<SMSG_ATTACKSWING_DEADTARGET> for ServerOpcodeMessage {
 impl From<SMSG_ATTACKSWING_CANT_ATTACK> for ServerOpcodeMessage {
     fn from(c: SMSG_ATTACKSWING_CANT_ATTACK) -> Self {
         Self::SMSG_ATTACKSWING_CANT_ATTACK(c)
+    }
+}
+
+impl From<SMSG_ATTACKERSTATEUPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_ATTACKERSTATEUPDATE) -> Self {
+        Self::SMSG_ATTACKERSTATEUPDATE(c)
     }
 }
 
