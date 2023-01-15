@@ -491,6 +491,7 @@
 - [CMSG_LFG_SET_BOOT_VOTE](docs/cmsg_lfg_set_boot_vote.md)
 - [CMSG_LFG_SET_ROLES](docs/cmsg_lfg_set_roles.md)
 - [CMSG_LFG_TELEPORT](docs/cmsg_lfg_teleport.md)
+- [CMSG_LFM_CLEAR_AUTOFILL](docs/cmsg_lfm_clear_autofill.md)
 - [CMSG_LFM_SET_AUTOFILL](docs/cmsg_lfm_set_autofill.md)
 - [CMSG_LIST_INVENTORY](docs/cmsg_list_inventory.md)
 - [CMSG_LOGOUT_CANCEL](docs/cmsg_logout_cancel.md)
