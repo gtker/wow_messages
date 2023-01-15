@@ -903,6 +903,8 @@ pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
 
 pub use crate::shared::cmsg_update_account_data_vanilla_tbc::CMSG_UPDATE_ACCOUNT_DATA;
 
+pub use crate::shared::cmsg_voice_session_enable_tbc_wrath::CMSG_VOICE_SESSION_ENABLE;
+
 pub use crate::shared::cmsg_warden_data_vanilla_tbc_wrath::CMSG_WARDEN_DATA;
 
 pub use crate::shared::cmsg_who_vanilla_tbc_wrath::CMSG_WHO;

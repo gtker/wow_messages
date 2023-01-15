@@ -546,6 +546,8 @@ pub mod cmsg_unlearn_talents_tbc_wrath;
 pub mod cmsg_unstable_pet_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod cmsg_update_account_data_vanilla_tbc;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod cmsg_voice_session_enable_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_warden_data_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

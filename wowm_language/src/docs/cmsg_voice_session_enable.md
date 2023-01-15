@@ -1,6 +1,6 @@
 # CMSG_VOICE_SESSION_ENABLE
 
-## Client Version 3.3.5
+## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation
 

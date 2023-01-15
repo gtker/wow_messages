@@ -360,8 +360,6 @@ pub(crate) mod cmsg_update_projectile_position;
 pub use cmsg_update_projectile_position::*;
 pub(crate) mod cmsg_use_item;
 pub use cmsg_use_item::*;
-pub(crate) mod cmsg_voice_session_enable;
-pub use cmsg_voice_session_enable::*;
 pub(crate) mod cmsg_world_state_ui_timer_update;
 pub use cmsg_world_state_ui_timer_update::*;
 pub(crate) mod cmsg_world_teleport;
@@ -1114,6 +1112,8 @@ pub use crate::shared::cmsg_unaccept_trade_vanilla_tbc_wrath::CMSG_UNACCEPT_TRAD
 pub use crate::shared::cmsg_unlearn_talents_tbc_wrath::CMSG_UNLEARN_TALENTS;
 
 pub use crate::shared::cmsg_unstable_pet_vanilla_tbc_wrath::CMSG_UNSTABLE_PET;
+
+pub use crate::shared::cmsg_voice_session_enable_tbc_wrath::CMSG_VOICE_SESSION_ENABLE;
 
 pub use crate::shared::cmsg_warden_data_vanilla_tbc_wrath::CMSG_WARDEN_DATA;
 

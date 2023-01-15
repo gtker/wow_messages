@@ -46,6 +46,9 @@ impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
     }
 
 }
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ClientMessage for CMSG_VOICE_SESSION_ENABLE {}
+
 #[cfg(feature = "wrath")]
 impl crate::world::wrath::ClientMessage for CMSG_VOICE_SESSION_ENABLE {}
 
