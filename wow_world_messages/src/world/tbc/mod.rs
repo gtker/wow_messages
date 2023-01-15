@@ -42,6 +42,8 @@ pub(crate) mod cmsg_char_create;
 pub use cmsg_char_create::*;
 pub(crate) mod cmsg_clear_channel_watch;
 pub use cmsg_clear_channel_watch::*;
+pub(crate) mod cmsg_clear_looking_for_group;
+pub use cmsg_clear_looking_for_group::*;
 pub(crate) mod cmsg_commentator_enable;
 pub use cmsg_commentator_enable::*;
 pub(crate) mod cmsg_complain;
