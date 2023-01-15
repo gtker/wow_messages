@@ -526,7 +526,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("MSG_TALENT_WIPE_CONFIRM", 0x2AA),
     Data::new("SMSG_SUMMON_REQUEST", 0x2AB),
     Data::new("CMSG_SUMMON_RESPONSE", 0x2AC),
-    Data::new("MSG_MOVE_TOGGLE_GRAVITY_CHEAT", 0x2AD),
     Data::complex("SMSG_MONSTER_MOVE_TRANSPORT", 0x2AE),
     Data::new("SMSG_PET_BROKEN", 0x2AF),
     Data::new("MSG_MOVE_FEATHER_FALL", 0x2B0),

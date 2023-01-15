@@ -525,7 +525,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x02aa => "MSG_TALENT_WIPE_CONFIRM",
         0x02ab => "SMSG_SUMMON_REQUEST",
         0x02ac => "CMSG_SUMMON_RESPONSE",
-        0x02ad => "MSG_MOVE_TOGGLE_GRAVITY_CHEAT",
         0x02ae => "SMSG_MONSTER_MOVE_TRANSPORT",
         0x02af => "SMSG_PET_BROKEN",
         0x02b0 => "MSG_MOVE_FEATHER_FALL",
