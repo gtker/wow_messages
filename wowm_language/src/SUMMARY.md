@@ -486,6 +486,7 @@
 - [CMSG_LFG_JOIN](docs/cmsg_lfg_join.md)
 - [CMSG_LFG_LEAVE](docs/cmsg_lfg_leave.md)
 - [CMSG_LFG_PROPOSAL_RESULT](docs/cmsg_lfg_proposal_result.md)
+- [CMSG_LFG_SET_AUTOJOIN](docs/cmsg_lfg_set_autojoin.md)
 - [CMSG_LFG_SET_BOOT_VOTE](docs/cmsg_lfg_set_boot_vote.md)
 - [CMSG_LFG_SET_ROLES](docs/cmsg_lfg_set_roles.md)
 - [CMSG_LFG_TELEPORT](docs/cmsg_lfg_teleport.md)

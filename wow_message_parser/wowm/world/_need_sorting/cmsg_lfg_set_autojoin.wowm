@@ -1,0 +1,3 @@
+cmsg CMSG_LFG_SET_AUTOJOIN = 0x035C {} {
+    versions = "2.4.3";
+}
