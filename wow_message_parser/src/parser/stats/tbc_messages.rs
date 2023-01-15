@@ -3,7 +3,6 @@ use crate::parser::stats::Data;
 pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_BOOTME", 0x001),
     Data::new("CMSG_DBLOOKUP", 0x002),
-    Data::nyi("SMSG_DBLOOKUP", 0x003),
     Data::new("CMSG_WORLD_TELEPORT", 0x008),
     Data::new("CMSG_TELEPORT_TO_UNIT", 0x009),
     Data::new("CMSG_CHAR_CREATE", 0x036),
