@@ -1145,6 +1145,7 @@
 - [SMSG_MOVE_SET_FLIGHT](docs/smsg_move_set_flight.md)
 - [SMSG_MOVE_SET_HOVER](docs/smsg_move_set_hover.md)
 - [SMSG_MOVE_UNSET_CAN_FLY](docs/smsg_move_unset_can_fly.md)
+- [SMSG_MOVE_UNSET_FLIGHT](docs/smsg_move_unset_flight.md)
 - [SMSG_MOVE_UNSET_HOVER](docs/smsg_move_unset_hover.md)
 - [SMSG_MOVE_WATER_WALK](docs/smsg_move_water_walk.md)
 - [SMSG_MULTIPLE_MOVES](docs/smsg_multiple_moves.md)
