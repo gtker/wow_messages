@@ -8,7 +8,6 @@ use crate::error_printer::{
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::MajorWorldVersion;
-use crate::UNIMPLEMENTED;
 
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
 pub enum MessageType {
@@ -146,92 +145,9 @@ impl Data {
         Self::direct(name, opcode, Reason::SelfSizeStruct)
     }
 
-    pub(crate) fn message_ty(&self) -> MessageType {
-        let i = self.name.find('_').unwrap();
-        let prefix = &self.name[..i];
-
-        match prefix {
-            "SMSG" => MessageType::Smsg,
-            "CMSG" => MessageType::Cmsg,
-            "MSG" => MessageType::Msg,
-            _ => unreachable!("{} in {}", prefix, self.name),
-        }
+    pub(crate) fn needs_work(&self) -> bool {
+        !self.definition
     }
-}
-
-fn get_messages_to_print(wrath: &[Data], tbc: &[Data]) -> (Vec<Data>, &'static str) {
-    type ComparisonFunction = dyn Fn(&Data, &Data) -> bool;
-    struct Option {
-        f: Box<ComparisonFunction>,
-        s: &'static str,
-    }
-
-    fn cmsg_that_are_also_in_tbc(a: &Data, v: &Data) -> bool {
-        a.name == v.name && a.opcode == v.opcode && v.name.starts_with("CMSG")
-    }
-    let cmsg_that_are_also_in_tbc = Option {
-        f: Box::new(cmsg_that_are_also_in_tbc),
-        s: "CMSG that are also in TBC",
-    };
-
-    fn msg_that_are_also_in_tbc(a: &Data, v: &Data) -> bool {
-        a.name == v.name && a.opcode == v.opcode && v.name.starts_with("MSG")
-    }
-    let msg_that_are_also_in_tbc = Option {
-        f: Box::new(msg_that_are_also_in_tbc),
-        s: "MSG that are also in TBC",
-    };
-
-    fn messages_that_are_also_in_tbc(a: &Data, v: &Data) -> bool {
-        a.name == v.name && a.opcode == v.opcode
-    }
-    let messages_that_are_also_in_tbc = Option {
-        f: Box::new(messages_that_are_also_in_tbc),
-        s: "Messages that are also in TBC",
-    };
-
-    fn cmsg_for_wrath(a: &Data, _v: &Data) -> bool {
-        a.message_ty() == MessageType::Cmsg
-    }
-    let cmsg_for_wrath = Option {
-        f: Box::new(cmsg_for_wrath),
-        s: "Client messages",
-    };
-
-    fn msg_for_wrath(a: &Data, _v: &Data) -> bool {
-        a.message_ty() == MessageType::Msg
-    }
-    let msg_for_wrath = Option {
-        f: Box::new(msg_for_wrath),
-        s: "Client messages",
-    };
-
-    for condition in [
-        cmsg_that_are_also_in_tbc,
-        msg_that_are_also_in_tbc,
-        messages_that_are_also_in_tbc,
-        cmsg_for_wrath,
-        msg_for_wrath,
-    ] {
-        let data = wrath
-            .iter()
-            .filter(|a| tbc.iter().any(|v| (condition.f)(a, v)))
-            .cloned()
-            .collect::<Vec<_>>();
-
-        if data.iter().any(|a| !a.definition && a.reason.is_none()) {
-            return (data, condition.s);
-        }
-    }
-
-    (
-        if wrath.iter().any(|a| !a.definition && a.reason.is_none()) {
-            wrath.to_vec()
-        } else {
-            tbc.to_vec()
-        },
-        "Messages",
-    )
 }
 
 pub(crate) fn print_message_stats(o: &Objects) {
@@ -248,23 +164,25 @@ pub(crate) fn print_message_stats(o: &Objects) {
         (get_data_for(version, wrath_messages::DATA, o), version)
     };
 
-    let (data, description) = get_messages_to_print(&wrath.0, &tbc.0);
-
     if std::env::var("WOWM_ONLY_PRINT_NAME_OF_SINGLE_MESSAGE").is_ok() {
-        let message = data
-            .iter()
-            .find(|a| !a.definition && a.reason.is_none())
-            .unwrap();
-        print!("{} {:#06X}", message.name, message.opcode);
+        let message = if let Some(m) = vanilla.0.iter().find(|a| a.needs_work()) {
+            (m, MajorWorldVersion::Vanilla)
+        } else if let Some(m) = tbc.0.iter().find(|a| a.needs_work()) {
+            (m, MajorWorldVersion::BurningCrusade)
+        } else if let Some(m) = wrath.0.iter().find(|a| a.needs_work()) {
+            (m, MajorWorldVersion::Wrath)
+        } else {
+            panic!("No messages that need work found")
+        };
+        print!(
+            "{} {:#06X} {}",
+            message.0.name,
+            message.0.opcode,
+            message.1.as_version_string()
+        );
     } else {
-        print_missing_definitions(&data, wrath.1, description);
-
-        stats_for(wrath.1, &data, description);
-
-        let messages_description = "Messages";
-
         for (data, version) in [&vanilla, &tbc, &wrath] {
-            stats_for(*version, data, messages_description);
+            print_missing_definitions(data, *version);
         }
     }
 }
@@ -314,38 +232,24 @@ fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<D
     data
 }
 
-fn print_missing_definitions(data: &[Data], version: MajorWorldVersion, description: &str) {
+fn print_missing_definitions(data: &[Data], version: MajorWorldVersion) {
     println!(
-        "{} {} without definition:",
+        "{} Messages without definition:",
         version.as_version_string(),
-        description,
     );
 
-    let print_missing_as_wowm = version != MajorWorldVersion::Vanilla;
-
     for d in data {
-        if !d.definition {
-            if print_missing_as_wowm {
-                if d.reason.is_none() {
-                    let ty = d.message_ty().wowm_str();
-                    println!(
-                        "{ty} {name} = {opcode:#06X} {{ {unimplemented} }} {{ versions = \"{version}\"; }}",
-                        name = &d.name,
-                        opcode = d.opcode,
-                        unimplemented = UNIMPLEMENTED,
-                        version = version.as_version_string(),
-                    );
-                }
-            } else {
-                println!("    {}: {}", d.name, d.reason().unwrap());
-            }
+        if d.needs_work() {
+            println!("    {}: {}", d.name, d.reason().unwrap());
         }
     }
 
     println!();
+
+    stats_for(version, data);
 }
 
-fn stats_for(version: MajorWorldVersion, data: &[Data], description: &str) {
+fn stats_for(version: MajorWorldVersion, data: &[Data]) {
     let mut definition_sum = 0;
     let mut reason_sum = 0;
     let mut test_sum = 0;
@@ -361,9 +265,8 @@ fn stats_for(version: MajorWorldVersion, data: &[Data], description: &str) {
     }
 
     println!(
-        "{} {} with definition: {} / {} ({}%) ({} left, {} without implementation excluded with reason)",
+        "{} Messages with definition: {} / {} ({}%) ({} left, {} without implementation excluded with reason)",
         version.as_version_string(),
-        description,
         definition_sum,
         data.len(),
         (definition_sum as f32 / data.len() as f32) * 100.0_f32,
@@ -376,6 +279,7 @@ fn stats_for(version: MajorWorldVersion, data: &[Data], description: &str) {
         data.len(),
         (test_sum as f32 / data.len() as f32) * 100.0_f32
     );
+    println!();
 }
 
 fn get_real_name(s: &str) -> String {
