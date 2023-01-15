@@ -1897,6 +1897,8 @@ pub(crate) mod smsg_party_command_result;
 pub use smsg_party_command_result::*;
 pub(crate) mod smsg_party_member_stats;
 pub use smsg_party_member_stats::*;
+pub(crate) mod smsg_party_member_stats_full;
+pub use smsg_party_member_stats_full::*;
 pub(crate) mod smsg_periodicauralog;
 pub use smsg_periodicauralog::*;
 pub(crate) mod smsg_pet_cast_failed;

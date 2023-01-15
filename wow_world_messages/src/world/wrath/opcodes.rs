@@ -7510,6 +7510,7 @@ use crate::world::wrath::SMSG_BATTLEGROUND_PLAYER_JOINED;
 use crate::world::wrath::SMSG_BATTLEGROUND_PLAYER_LEFT;
 use crate::world::wrath::SMSG_ADDON_INFO;
 use crate::world::wrath::SMSG_PET_UNLEARN_CONFIRM;
+use crate::world::wrath::SMSG_PARTY_MEMBER_STATS_FULL;
 use crate::world::wrath::SMSG_WEATHER;
 use crate::world::wrath::SMSG_RAID_INSTANCE_MESSAGE;
 use crate::world::wrath::SMSG_CHAT_RESTRICTED;
@@ -8023,6 +8024,7 @@ pub enum ServerOpcodeMessage {
     SMSG_BATTLEGROUND_PLAYER_LEFT(SMSG_BATTLEGROUND_PLAYER_LEFT),
     SMSG_ADDON_INFO(SMSG_ADDON_INFO),
     SMSG_PET_UNLEARN_CONFIRM(SMSG_PET_UNLEARN_CONFIRM),
+    SMSG_PARTY_MEMBER_STATS_FULL(SMSG_PARTY_MEMBER_STATS_FULL),
     SMSG_WEATHER(SMSG_WEATHER),
     SMSG_RAID_INSTANCE_MESSAGE(SMSG_RAID_INSTANCE_MESSAGE),
     SMSG_CHAT_RESTRICTED(SMSG_CHAT_RESTRICTED),
@@ -8538,6 +8540,7 @@ impl ServerOpcodeMessage {
             0x02ED => Ok(Self::SMSG_BATTLEGROUND_PLAYER_LEFT(<SMSG_BATTLEGROUND_PLAYER_LEFT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02ED, size: body_size, io, } } else { a } })?)),
             0x02EF => Ok(Self::SMSG_ADDON_INFO(<SMSG_ADDON_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EF, size: body_size, io, } } else { a } })?)),
             0x02F1 => Ok(Self::SMSG_PET_UNLEARN_CONFIRM(<SMSG_PET_UNLEARN_CONFIRM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F1, size: body_size, io, } } else { a } })?)),
+            0x02F2 => Ok(Self::SMSG_PARTY_MEMBER_STATS_FULL(<SMSG_PARTY_MEMBER_STATS_FULL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F2, size: body_size, io, } } else { a } })?)),
             0x02F4 => Ok(Self::SMSG_WEATHER(<SMSG_WEATHER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F4, size: body_size, io, } } else { a } })?)),
             0x02FA => Ok(Self::SMSG_RAID_INSTANCE_MESSAGE(<SMSG_RAID_INSTANCE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FA, size: body_size, io, } } else { a } })?)),
             0x02FD => Ok(Self::SMSG_CHAT_RESTRICTED(<SMSG_CHAT_RESTRICTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FD, size: body_size, io, } } else { a } })?)),
@@ -9202,6 +9205,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ADDON_INFO(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WEATHER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_encrypted_server(w, e),
@@ -9718,6 +9722,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.write_unencrypted_server(w),
             Self::SMSG_ADDON_INFO(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.write_unencrypted_server(w),
             Self::SMSG_WEATHER(c) => c.write_unencrypted_server(w),
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_unencrypted_server(w),
@@ -10234,6 +10239,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ADDON_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WEATHER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10750,6 +10756,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ADDON_INFO(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WEATHER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11266,6 +11273,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ADDON_INFO(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WEATHER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11782,6 +11790,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEGROUND_PLAYER_LEFT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ADDON_INFO(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_UNLEARN_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WEATHER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_unencrypted_server(w).await,
@@ -12308,6 +12317,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_BATTLEGROUND_PLAYER_LEFT(_) => "SMSG_BATTLEGROUND_PLAYER_LEFT",
             ServerOpcodeMessage::SMSG_ADDON_INFO(_) => "SMSG_ADDON_INFO",
             ServerOpcodeMessage::SMSG_PET_UNLEARN_CONFIRM(_) => "SMSG_PET_UNLEARN_CONFIRM",
+            ServerOpcodeMessage::SMSG_PARTY_MEMBER_STATS_FULL(_) => "SMSG_PARTY_MEMBER_STATS_FULL",
             ServerOpcodeMessage::SMSG_WEATHER(_) => "SMSG_WEATHER",
             ServerOpcodeMessage::SMSG_RAID_INSTANCE_MESSAGE(_) => "SMSG_RAID_INSTANCE_MESSAGE",
             ServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => "SMSG_CHAT_RESTRICTED",
@@ -14389,6 +14399,12 @@ impl From<SMSG_ADDON_INFO> for ServerOpcodeMessage {
 impl From<SMSG_PET_UNLEARN_CONFIRM> for ServerOpcodeMessage {
     fn from(c: SMSG_PET_UNLEARN_CONFIRM) -> Self {
         Self::SMSG_PET_UNLEARN_CONFIRM(c)
+    }
+}
+
+impl From<SMSG_PARTY_MEMBER_STATS_FULL> for ServerOpcodeMessage {
+    fn from(c: SMSG_PARTY_MEMBER_STATS_FULL) -> Self {
+        Self::SMSG_PARTY_MEMBER_STATS_FULL(c)
     }
 }
 

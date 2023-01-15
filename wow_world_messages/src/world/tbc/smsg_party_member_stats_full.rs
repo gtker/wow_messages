@@ -1,17 +1,17 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::AuraMask;
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Power;
-use crate::world::vanilla::GroupMemberOnlineStatus;
-use crate::world::vanilla::GroupUpdateFlags;
+use crate::world::tbc::AuraMask;
+use crate::world::tbc::Area;
+use crate::world::tbc::Power;
+use crate::world::tbc::GroupMemberOnlineStatus;
+use crate::world::tbc::GroupUpdateFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm:72`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm#L72):
 /// ```text
 /// smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
-///     PackedGuid player;
+///     PackedGuid guid;
 ///     GroupUpdateFlags mask;
 ///     if (mask & STATUS) {
 ///         GroupMemberOnlineStatus status;
@@ -74,7 +74,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_PARTY_MEMBER_STATS_FULL {
-    pub player: Guid,
+    pub guid: Guid,
     pub mask: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags,
 }
 
@@ -87,8 +87,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w);
+        // guid: PackedGuid
+        self.guid.write_packed_guid_into_vec(w);
 
         // mask: GroupUpdateFlags
         w.write_all(&(self.mask.as_int() as u32).to_le_bytes())?;
@@ -222,8 +222,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F2, size: body_size as u32 });
         }
 
-        // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        // guid: PackedGuid
+        let guid = Guid::read_packed(r)?;
 
         // mask: GroupUpdateFlags
         let mask = GroupUpdateFlags::new(crate::util::read_u32_le(r)?);
@@ -485,18 +485,18 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         };
 
         Ok(Self {
-            player,
+            guid,
             mask,
         })
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
+#[cfg(feature = "tbc")]
+impl crate::world::tbc::ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
 
 impl SMSG_PARTY_MEMBER_STATS_FULL {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.guid.size() // guid: Guid
         + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags
     }
 }
@@ -1009,45 +1009,6 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_AURAS_2() -> Self {
-        Self {
-            inner: GroupUpdateFlags::AURAS_2,
-            status: None,
-            cur_hp: None,
-            max_hp: None,
-            power_type: None,
-            cur_power: None,
-            max_power: None,
-            level: None,
-            zone: None,
-            position: None,
-            auras: None,
-            pet_guid: None,
-            pet_name: None,
-            pet_model_id: None,
-            pet_cur_hp: None,
-            pet_max_hp: None,
-            pet_power_type: None,
-            pet_cur_power: None,
-            pet_max_power: None,
-            pet_auras: None,
-        }
-    }
-
-    pub fn set_AURAS_2(mut self) -> Self {
-        self.inner |= GroupUpdateFlags::AURAS_2;
-        self
-    }
-
-    pub const fn get_AURAS_2(&self) -> bool {
-        (self.inner & GroupUpdateFlags::AURAS_2) != 0
-    }
-
-    pub fn clear_AURAS_2(mut self) -> Self {
-        self.inner &= GroupUpdateFlags::AURAS_2.reverse_bits();
-        self
-    }
-
     pub const fn new_PET_GUID(pet_guid: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_GUID,
@@ -1414,84 +1375,6 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
     pub fn clear_PET_AURAS(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_AURAS.reverse_bits();
         self.pet_auras = None;
-        self
-    }
-
-    pub const fn new_PET_AURAS_2() -> Self {
-        Self {
-            inner: GroupUpdateFlags::PET_AURAS_2,
-            status: None,
-            cur_hp: None,
-            max_hp: None,
-            power_type: None,
-            cur_power: None,
-            max_power: None,
-            level: None,
-            zone: None,
-            position: None,
-            auras: None,
-            pet_guid: None,
-            pet_name: None,
-            pet_model_id: None,
-            pet_cur_hp: None,
-            pet_max_hp: None,
-            pet_power_type: None,
-            pet_cur_power: None,
-            pet_max_power: None,
-            pet_auras: None,
-        }
-    }
-
-    pub fn set_PET_AURAS_2(mut self) -> Self {
-        self.inner |= GroupUpdateFlags::PET_AURAS_2;
-        self
-    }
-
-    pub const fn get_PET_AURAS_2(&self) -> bool {
-        (self.inner & GroupUpdateFlags::PET_AURAS_2) != 0
-    }
-
-    pub fn clear_PET_AURAS_2(mut self) -> Self {
-        self.inner &= GroupUpdateFlags::PET_AURAS_2.reverse_bits();
-        self
-    }
-
-    pub const fn new_MODE_OFFLINE() -> Self {
-        Self {
-            inner: GroupUpdateFlags::MODE_OFFLINE,
-            status: None,
-            cur_hp: None,
-            max_hp: None,
-            power_type: None,
-            cur_power: None,
-            max_power: None,
-            level: None,
-            zone: None,
-            position: None,
-            auras: None,
-            pet_guid: None,
-            pet_name: None,
-            pet_model_id: None,
-            pet_cur_hp: None,
-            pet_max_hp: None,
-            pet_power_type: None,
-            pet_cur_power: None,
-            pet_max_power: None,
-            pet_auras: None,
-        }
-    }
-
-    pub fn set_MODE_OFFLINE(mut self) -> Self {
-        self.inner |= GroupUpdateFlags::MODE_OFFLINE;
-        self
-    }
-
-    pub const fn get_MODE_OFFLINE(&self) -> bool {
-        (self.inner & GroupUpdateFlags::MODE_OFFLINE) != 0
-    }
-
-    pub fn clear_MODE_OFFLINE(mut self) -> Self {
-        self.inner &= GroupUpdateFlags::MODE_OFFLINE.reverse_bits();
         self
     }
 

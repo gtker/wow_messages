@@ -1,26 +1,26 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::AuraMask;
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Power;
-use crate::world::vanilla::GroupMemberOnlineStatus;
-use crate::world::vanilla::GroupUpdateFlags;
+use crate::world::wrath::AuraMask;
+use crate::world::wrath::Area;
+use crate::world::wrath::Power;
+use crate::world::wrath::GroupMemberOnlineStatus;
+use crate::world::wrath::GroupUpdateFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm:143`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_member_stats_full.wowm#L143):
 /// ```text
 /// smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
-///     PackedGuid player;
+///     PackedGuid guid;
 ///     GroupUpdateFlags mask;
 ///     if (mask & STATUS) {
 ///         GroupMemberOnlineStatus status;
 ///     }
 ///     if (mask & CUR_HP) {
-///         u16 current_health;
+///         u32 current_health;
 ///     }
 ///     if (mask & MAX_HP) {
-///         u16 max_health;
+///         u32 max_health;
 ///     }
 ///     if (mask & POWER_TYPE) {
 ///         Power power;
@@ -54,10 +54,10 @@ use std::io::{Write, Read};
 ///         u16 pet_display_id;
 ///     }
 ///     if (mask & PET_CUR_HP) {
-///         u16 pet_current_health;
+///         u32 pet_current_health;
 ///     }
 ///     if (mask & PET_MAX_HP) {
-///         u16 pet_max_health;
+///         u32 pet_max_health;
 ///     }
 ///     if (mask & PET_POWER_TYPE) {
 ///         Power pet_power_type;
@@ -71,10 +71,13 @@ use std::io::{Write, Read};
 ///     if (mask & PET_AURAS) {
 ///         AuraMask pet_auras;
 ///     }
+///     if (mask & VEHICLE_SEAT) {
+///         u32 transport;
+///     }
 /// }
 /// ```
 pub struct SMSG_PARTY_MEMBER_STATS_FULL {
-    pub player: Guid,
+    pub guid: Guid,
     pub mask: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags,
 }
 
@@ -87,8 +90,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w);
+        // guid: PackedGuid
+        self.guid.write_packed_guid_into_vec(w);
 
         // mask: GroupUpdateFlags
         w.write_all(&(self.mask.as_int() as u32).to_le_bytes())?;
@@ -100,13 +103,13 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         }
 
         if let Some(if_statement) = &self.mask.cur_hp {
-            // current_health: u16
+            // current_health: u32
             w.write_all(&if_statement.current_health.to_le_bytes())?;
 
         }
 
         if let Some(if_statement) = &self.mask.max_hp {
-            // max_health: u16
+            // max_health: u32
             w.write_all(&if_statement.max_health.to_le_bytes())?;
 
         }
@@ -179,13 +182,13 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         }
 
         if let Some(if_statement) = &self.mask.pet_cur_hp {
-            // pet_current_health: u16
+            // pet_current_health: u32
             w.write_all(&if_statement.pet_current_health.to_le_bytes())?;
 
         }
 
         if let Some(if_statement) = &self.mask.pet_max_hp {
-            // pet_max_health: u16
+            // pet_max_health: u32
             w.write_all(&if_statement.pet_max_health.to_le_bytes())?;
 
         }
@@ -214,16 +217,22 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
 
         }
 
+        if let Some(if_statement) = &self.mask.vehicle_seat {
+            // transport: u32
+            w.write_all(&if_statement.transport.to_le_bytes())?;
+
+        }
+
         assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(6..=572).contains(&body_size) {
+        if !(6..=584).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F2, size: body_size as u32 });
         }
 
-        // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        // guid: PackedGuid
+        let guid = Guid::read_packed(r)?;
 
         // mask: GroupUpdateFlags
         let mask = GroupUpdateFlags::new(crate::util::read_u32_le(r)?);
@@ -241,8 +250,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         };
 
         let mask_CUR_HP = if mask.is_CUR_HP() {
-            // current_health: u16
-            let current_health = crate::util::read_u16_le(r)?;
+            // current_health: u32
+            let current_health = crate::util::read_u32_le(r)?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
                 current_health,
@@ -253,8 +262,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         };
 
         let mask_MAX_HP = if mask.is_MAX_HP() {
-            // max_health: u16
-            let max_health = crate::util::read_u16_le(r)?;
+            // max_health: u32
+            let max_health = crate::util::read_u32_le(r)?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
                 max_health,
@@ -390,8 +399,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         };
 
         let mask_PET_CUR_HP = if mask.is_PET_CUR_HP() {
-            // pet_current_health: u16
-            let pet_current_health = crate::util::read_u16_le(r)?;
+            // pet_current_health: u32
+            let pet_current_health = crate::util::read_u32_le(r)?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
                 pet_current_health,
@@ -402,8 +411,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         };
 
         let mask_PET_MAX_HP = if mask.is_PET_MAX_HP() {
-            // pet_max_health: u16
-            let pet_max_health = crate::util::read_u16_le(r)?;
+            // pet_max_health: u32
+            let pet_max_health = crate::util::read_u32_le(r)?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
                 pet_max_health,
@@ -461,6 +470,18 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
             None
         };
 
+        let mask_VEHICLE_SEAT = if mask.is_VEHICLE_SEAT() {
+            // transport: u32
+            let transport = crate::util::read_u32_le(r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat {
+                transport,
+            })
+        }
+        else {
+            None
+        };
+
         let mask = SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             inner: mask.as_int(),
             status: mask_STATUS,
@@ -482,21 +503,22 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
             pet_cur_power: mask_PET_CUR_POWER,
             pet_max_power: mask_PET_MAX_POWER,
             pet_auras: mask_PET_AURAS,
+            vehicle_seat: mask_VEHICLE_SEAT,
         };
 
         Ok(Self {
-            player,
+            guid,
             mask,
         })
     }
 
 }
-#[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
+#[cfg(feature = "wrath")]
+impl crate::world::wrath::ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
 
 impl SMSG_PARTY_MEMBER_STATS_FULL {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.guid.size() // guid: Guid
         + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags
     }
 }
@@ -523,10 +545,11 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
     pet_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower>,
     pet_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower>,
     pet_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras>,
+    vehicle_seat: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat>,
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
-    pub const fn new(inner: u32, status: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status>,cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp>,max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp>,power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PowerType>,cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurPower>,max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxPower>,level: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Level>,zone: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Zone>,position: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position>,auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Auras>,pet_guid: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid>,pet_name: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetName>,pet_model_id: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId>,pet_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp>,pet_max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp>,pet_power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetPowerType>,pet_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower>,pet_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower>,pet_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras>,) -> Self {
+    pub const fn new(inner: u32, status: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status>,cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp>,max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp>,power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PowerType>,cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurPower>,max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxPower>,level: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Level>,zone: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Zone>,position: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position>,auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Auras>,pet_guid: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid>,pet_name: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetName>,pet_model_id: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId>,pet_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp>,pet_max_hp: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp>,pet_power_type: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetPowerType>,pet_cur_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower>,pet_max_power: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower>,pet_auras: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras>,vehicle_seat: Option<SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat>,) -> Self {
         Self {
             inner,
             status, 
@@ -548,6 +571,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power, 
             pet_max_power, 
             pet_auras, 
+            vehicle_seat, 
         }
     }
 
@@ -573,6 +597,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -597,6 +622,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         && self.pet_cur_power.is_none()
         && self.pet_max_power.is_none()
         && self.pet_auras.is_none()
+        && self.vehicle_seat.is_none()
     }
 
     pub const fn new_STATUS(status: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status) -> Self {
@@ -621,6 +647,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -662,6 +689,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -703,6 +731,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -744,6 +773,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -785,6 +815,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -826,6 +857,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -867,6 +899,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -908,6 +941,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -949,6 +983,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -990,6 +1025,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1006,45 +1042,6 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
     pub fn clear_AURAS(mut self) -> Self {
         self.inner &= GroupUpdateFlags::AURAS.reverse_bits();
         self.auras = None;
-        self
-    }
-
-    pub const fn new_AURAS_2() -> Self {
-        Self {
-            inner: GroupUpdateFlags::AURAS_2,
-            status: None,
-            cur_hp: None,
-            max_hp: None,
-            power_type: None,
-            cur_power: None,
-            max_power: None,
-            level: None,
-            zone: None,
-            position: None,
-            auras: None,
-            pet_guid: None,
-            pet_name: None,
-            pet_model_id: None,
-            pet_cur_hp: None,
-            pet_max_hp: None,
-            pet_power_type: None,
-            pet_cur_power: None,
-            pet_max_power: None,
-            pet_auras: None,
-        }
-    }
-
-    pub fn set_AURAS_2(mut self) -> Self {
-        self.inner |= GroupUpdateFlags::AURAS_2;
-        self
-    }
-
-    pub const fn get_AURAS_2(&self) -> bool {
-        (self.inner & GroupUpdateFlags::AURAS_2) != 0
-    }
-
-    pub fn clear_AURAS_2(mut self) -> Self {
-        self.inner &= GroupUpdateFlags::AURAS_2.reverse_bits();
         self
     }
 
@@ -1070,6 +1067,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1111,6 +1109,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1152,6 +1151,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1193,6 +1193,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1234,6 +1235,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1275,6 +1277,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1316,6 +1319,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: Some(pet_cur_power),
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1357,6 +1361,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: Some(pet_max_power),
             pet_auras: None,
+            vehicle_seat: None,
         }
     }
 
@@ -1398,6 +1403,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: Some(pet_auras),
+            vehicle_seat: None,
         }
     }
 
@@ -1417,9 +1423,9 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_PET_AURAS_2() -> Self {
+    pub const fn new_VEHICLE_SEAT(vehicle_seat: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat) -> Self {
         Self {
-            inner: GroupUpdateFlags::PET_AURAS_2,
+            inner: GroupUpdateFlags::VEHICLE_SEAT,
             status: None,
             cur_hp: None,
             max_hp: None,
@@ -1439,59 +1445,23 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
             pet_cur_power: None,
             pet_max_power: None,
             pet_auras: None,
+            vehicle_seat: Some(vehicle_seat),
         }
     }
 
-    pub fn set_PET_AURAS_2(mut self) -> Self {
-        self.inner |= GroupUpdateFlags::PET_AURAS_2;
+    pub fn set_VEHICLE_SEAT(mut self, vehicle_seat: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat) -> Self {
+        self.inner |= GroupUpdateFlags::VEHICLE_SEAT;
+        self.vehicle_seat = Some(vehicle_seat);
         self
     }
 
-    pub const fn get_PET_AURAS_2(&self) -> bool {
-        (self.inner & GroupUpdateFlags::PET_AURAS_2) != 0
+    pub const fn get_VEHICLE_SEAT(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat> {
+        self.vehicle_seat.as_ref()
     }
 
-    pub fn clear_PET_AURAS_2(mut self) -> Self {
-        self.inner &= GroupUpdateFlags::PET_AURAS_2.reverse_bits();
-        self
-    }
-
-    pub const fn new_MODE_OFFLINE() -> Self {
-        Self {
-            inner: GroupUpdateFlags::MODE_OFFLINE,
-            status: None,
-            cur_hp: None,
-            max_hp: None,
-            power_type: None,
-            cur_power: None,
-            max_power: None,
-            level: None,
-            zone: None,
-            position: None,
-            auras: None,
-            pet_guid: None,
-            pet_name: None,
-            pet_model_id: None,
-            pet_cur_hp: None,
-            pet_max_hp: None,
-            pet_power_type: None,
-            pet_cur_power: None,
-            pet_max_power: None,
-            pet_auras: None,
-        }
-    }
-
-    pub fn set_MODE_OFFLINE(mut self) -> Self {
-        self.inner |= GroupUpdateFlags::MODE_OFFLINE;
-        self
-    }
-
-    pub const fn get_MODE_OFFLINE(&self) -> bool {
-        (self.inner & GroupUpdateFlags::MODE_OFFLINE) != 0
-    }
-
-    pub fn clear_MODE_OFFLINE(mut self) -> Self {
-        self.inner &= GroupUpdateFlags::MODE_OFFLINE.reverse_bits();
+    pub fn clear_VEHICLE_SEAT(mut self) -> Self {
+        self.inner &= GroupUpdateFlags::VEHICLE_SEAT.reverse_bits();
+        self.vehicle_seat = None;
         self
     }
 
@@ -1636,6 +1606,13 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
                 0
             }
         }
+        + {
+            if let Some(s) = &self.vehicle_seat {
+                s.size()
+            } else {
+                0
+            }
+        }
     }
 }
 
@@ -1652,23 +1629,23 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
-    pub current_health: u16,
+    pub current_health: u32,
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
     pub(crate) fn size(&self) -> usize {
-        2 // current_health: u16
+        4 // current_health: u32
     }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
-    pub max_health: u16,
+    pub max_health: u32,
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
     pub(crate) fn size(&self) -> usize {
-        2 // max_health: u16
+        4 // max_health: u32
     }
 }
 
@@ -1786,23 +1763,23 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
-    pub pet_current_health: u16,
+    pub pet_current_health: u32,
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
     pub(crate) fn size(&self) -> usize {
-        2 // pet_current_health: u16
+        4 // pet_current_health: u32
     }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
-    pub pet_max_health: u16,
+    pub pet_max_health: u32,
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
     pub(crate) fn size(&self) -> usize {
-        2 // pet_max_health: u16
+        4 // pet_max_health: u32
     }
 }
 
@@ -1847,6 +1824,17 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras {
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras {
     pub(crate) fn size(&self) -> usize {
         self.pet_auras.size() // pet_auras: AuraMask
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat {
+    pub transport: u32,
+}
+
+impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat {
+    pub(crate) fn size(&self) -> usize {
+        4 // transport: u32
     }
 }
 

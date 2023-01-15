@@ -32,6 +32,7 @@ Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
 * [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
+* [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
 * [SMSG_SPELLENERGIZELOG](smsg_spellenergizelog.md)
 * [SpellLog](spelllog.md)
 * [SpellLog](spelllog.md)
@@ -72,6 +73,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
+* [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)
 * [SMSG_POWER_UPDATE](smsg_power_update.md)
 * [SMSG_SPELLENERGIZELOG](smsg_spellenergizelog.md)
 * [SMSG_SPELL_GO](smsg_spell_go.md)

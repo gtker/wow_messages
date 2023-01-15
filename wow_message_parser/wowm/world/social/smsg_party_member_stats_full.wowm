@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
     PackedGuid player;
     GroupUpdateFlags mask;
@@ -67,5 +65,151 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
     if (mask & PET_AURAS) {
         AuraMask pet_auras;
     }
+} {
+    versions = "1.12";
 }
 
+smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
+    PackedGuid guid;
+    GroupUpdateFlags mask;
+    if (mask & STATUS) {
+        GroupMemberOnlineStatus status;       
+    }
+    if (mask & CUR_HP) {
+        u16 current_health;
+    }
+    if (mask & MAX_HP) {
+        u16 max_health;
+    }
+    if (mask & POWER_TYPE) {
+        Power power; 
+    }
+    if (mask & CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & LEVEL) {
+        u16 level;
+    }
+    if (mask & ZONE) {
+        Area area;
+    }
+    if (mask & POSITION) {
+        u16 position_x {
+            comment = "cmangos: float cast to u16";
+        }
+        u16 position_y {
+            comment = "cmangos: float cast to u16";
+        }
+    }
+    if (mask & AURAS) {
+        AuraMask auras {
+            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
+        }
+    }
+    if (mask & PET_GUID) {
+        Guid pet;
+    }
+    if (mask & PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & PET_CUR_HP) {
+        u16 pet_current_health;
+    }
+    if (mask & PET_MAX_HP) {
+        u16 pet_max_health;
+    }
+    if (mask & PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & PET_AURAS) {
+        AuraMask pet_auras;
+    }
+} {
+    paste_versions = "2.4.3";
+}
+
+smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
+    PackedGuid guid;
+    GroupUpdateFlags mask;
+    if (mask & STATUS) {
+        GroupMemberOnlineStatus status;       
+    }
+    if (mask & CUR_HP) {
+        u32 current_health;
+    }
+    if (mask & MAX_HP) {
+        u32 max_health;
+    }
+    if (mask & POWER_TYPE) {
+        Power power; 
+    }
+    if (mask & CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & LEVEL) {
+        u16 level;
+    }
+    if (mask & ZONE) {
+        Area area;
+    }
+    if (mask & POSITION) {
+        u16 position_x {
+            comment = "cmangos: float cast to u16";
+        }
+        u16 position_y {
+            comment = "cmangos: float cast to u16";
+        }
+    }
+    if (mask & AURAS) {
+        AuraMask auras {
+            comment = "cmangos: In all checked pre-2.x data of packets included only positive auras";
+        }
+    }
+    if (mask & PET_GUID) {
+        Guid pet;
+    }
+    if (mask & PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & PET_CUR_HP) {
+        u32 pet_current_health;
+    }
+    if (mask & PET_MAX_HP) {
+        u32 pet_max_health;
+    }
+    if (mask & PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & PET_AURAS) {
+        AuraMask pet_auras;
+    }
+    if (mask & VEHICLE_SEAT) {
+        u32 transport;
+    }
+} {
+    paste_versions = "3.3.5";
+}
