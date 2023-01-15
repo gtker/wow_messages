@@ -1,0 +1,6 @@
+smsg SMSG_MOVE_SET_FLIGHT = 0x033E {
+    Guid guid;
+    u32 counter;
+} {
+    versions = "2.4.3";
+}

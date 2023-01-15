@@ -1142,6 +1142,7 @@
 - [SMSG_MOVE_NORMAL_FALL](docs/smsg_move_normal_fall.md)
 - [SMSG_MOVE_SET_CAN_FLY](docs/smsg_move_set_can_fly.md)
 - [SMSG_MOVE_SET_COLLISION_HGT](docs/smsg_move_set_collision_hgt.md)
+- [SMSG_MOVE_SET_FLIGHT](docs/smsg_move_set_flight.md)
 - [SMSG_MOVE_SET_HOVER](docs/smsg_move_set_hover.md)
 - [SMSG_MOVE_UNSET_CAN_FLY](docs/smsg_move_unset_can_fly.md)
 - [SMSG_MOVE_UNSET_HOVER](docs/smsg_move_unset_hover.md)

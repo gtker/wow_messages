@@ -6436,6 +6436,7 @@ use crate::world::tbc::SMSG_SPELLSTEALLOG;
 use crate::world::tbc::SMSG_DEFENSE_MESSAGE;
 use crate::world::tbc::SMSG_INSTANCE_DIFFICULTY;
 use crate::world::tbc::SMSG_MOTD;
+use crate::world::tbc::SMSG_MOVE_SET_FLIGHT;
 use crate::world::tbc::SMSG_MOVE_SET_CAN_FLY;
 use crate::world::tbc::SMSG_MOVE_UNSET_CAN_FLY;
 use crate::world::tbc::SMSG_ARENA_TEAM_COMMAND_RESULT;
@@ -6834,6 +6835,7 @@ pub enum ServerOpcodeMessage {
     SMSG_DEFENSE_MESSAGE(SMSG_DEFENSE_MESSAGE),
     SMSG_INSTANCE_DIFFICULTY(SMSG_INSTANCE_DIFFICULTY),
     SMSG_MOTD(SMSG_MOTD),
+    SMSG_MOVE_SET_FLIGHT(SMSG_MOVE_SET_FLIGHT),
     SMSG_MOVE_SET_CAN_FLY(SMSG_MOVE_SET_CAN_FLY),
     SMSG_MOVE_UNSET_CAN_FLY(SMSG_MOVE_UNSET_CAN_FLY),
     SMSG_ARENA_TEAM_COMMAND_RESULT(SMSG_ARENA_TEAM_COMMAND_RESULT),
@@ -7234,6 +7236,7 @@ impl ServerOpcodeMessage {
             0x033A => Ok(Self::SMSG_DEFENSE_MESSAGE(<SMSG_DEFENSE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033A, size: body_size, io, } } else { a } })?)),
             0x033B => Ok(Self::SMSG_INSTANCE_DIFFICULTY(<SMSG_INSTANCE_DIFFICULTY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033B, size: body_size, io, } } else { a } })?)),
             0x033D => Ok(Self::SMSG_MOTD(<SMSG_MOTD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033D, size: body_size, io, } } else { a } })?)),
+            0x033E => Ok(Self::SMSG_MOVE_SET_FLIGHT(<SMSG_MOVE_SET_FLIGHT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x033E, size: body_size, io, } } else { a } })?)),
             0x0343 => Ok(Self::SMSG_MOVE_SET_CAN_FLY(<SMSG_MOVE_SET_CAN_FLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0343, size: body_size, io, } } else { a } })?)),
             0x0344 => Ok(Self::SMSG_MOVE_UNSET_CAN_FLY(<SMSG_MOVE_UNSET_CAN_FLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0344, size: body_size, io, } } else { a } })?)),
             0x0349 => Ok(Self::SMSG_ARENA_TEAM_COMMAND_RESULT(<SMSG_ARENA_TEAM_COMMAND_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0349, size: body_size, io, } } else { a } })?)),
@@ -7702,6 +7705,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_INSTANCE_DIFFICULTY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOTD(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MOVE_SET_FLIGHT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOVE_SET_CAN_FLY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOVE_UNSET_CAN_FLY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ARENA_TEAM_COMMAND_RESULT(c) => c.write_encrypted_server(w, e),
@@ -8103,6 +8107,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_INSTANCE_DIFFICULTY(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOTD(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MOVE_SET_FLIGHT(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOVE_SET_CAN_FLY(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOVE_UNSET_CAN_FLY(c) => c.write_unencrypted_server(w),
             Self::SMSG_ARENA_TEAM_COMMAND_RESULT(c) => c.write_unencrypted_server(w),
@@ -8504,6 +8509,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOTD(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MOVE_SET_FLIGHT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_SET_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_UNSET_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ARENA_TEAM_COMMAND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -8905,6 +8911,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOTD(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MOVE_SET_FLIGHT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_SET_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_UNSET_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ARENA_TEAM_COMMAND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -9306,6 +9313,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOTD(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MOVE_SET_FLIGHT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_SET_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_UNSET_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ARENA_TEAM_COMMAND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -9707,6 +9715,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_DEFENSE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOTD(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MOVE_SET_FLIGHT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_SET_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_UNSET_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ARENA_TEAM_COMMAND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
@@ -10110,6 +10119,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_DEFENSE_MESSAGE(_) => "SMSG_DEFENSE_MESSAGE",
             ServerOpcodeMessage::SMSG_INSTANCE_DIFFICULTY(_) => "SMSG_INSTANCE_DIFFICULTY",
             ServerOpcodeMessage::SMSG_MOTD(_) => "SMSG_MOTD",
+            ServerOpcodeMessage::SMSG_MOVE_SET_FLIGHT(_) => "SMSG_MOVE_SET_FLIGHT",
             ServerOpcodeMessage::SMSG_MOVE_SET_CAN_FLY(_) => "SMSG_MOVE_SET_CAN_FLY",
             ServerOpcodeMessage::SMSG_MOVE_UNSET_CAN_FLY(_) => "SMSG_MOVE_UNSET_CAN_FLY",
             ServerOpcodeMessage::SMSG_ARENA_TEAM_COMMAND_RESULT(_) => "SMSG_ARENA_TEAM_COMMAND_RESULT",
@@ -12221,6 +12231,12 @@ impl From<SMSG_INSTANCE_DIFFICULTY> for ServerOpcodeMessage {
 impl From<SMSG_MOTD> for ServerOpcodeMessage {
     fn from(c: SMSG_MOTD) -> Self {
         Self::SMSG_MOTD(c)
+    }
+}
+
+impl From<SMSG_MOVE_SET_FLIGHT> for ServerOpcodeMessage {
+    fn from(c: SMSG_MOVE_SET_FLIGHT) -> Self {
+        Self::SMSG_MOVE_SET_FLIGHT(c)
     }
 }
 
