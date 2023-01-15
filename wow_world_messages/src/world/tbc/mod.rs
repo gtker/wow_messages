@@ -176,6 +176,8 @@ pub(crate) mod gm_ticket_type;
 pub use gm_ticket_type::*;
 pub(crate) mod group_list_member;
 pub use group_list_member::*;
+pub(crate) mod guild_bank_slot;
+pub use guild_bank_slot::*;
 pub(crate) mod guild_command_result;
 pub use guild_command_result::*;
 pub(crate) mod guild_member;
@@ -974,6 +976,12 @@ pub use crate::shared::group_loot_setting_vanilla_tbc_wrath::GroupLootSetting;
 pub use crate::shared::group_type_vanilla_tbc::GroupType;
 
 pub use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
+
+pub use crate::shared::guild_bank_socket_tbc_wrath::GuildBankSocket;
+
+pub use crate::shared::guild_bank_tab_result_tbc_wrath::GuildBankTabResult;
+
+pub use crate::shared::guild_bank_tab_tbc_wrath::GuildBankTab;
 
 pub use crate::shared::guild_command_vanilla_tbc::GuildCommand;
 
@@ -1815,6 +1823,8 @@ pub(crate) mod smsg_group_joined_battleground;
 pub use smsg_group_joined_battleground::*;
 pub(crate) mod smsg_group_list;
 pub use smsg_group_list::*;
+pub(crate) mod smsg_guild_bank_list;
+pub use smsg_guild_bank_list::*;
 pub(crate) mod smsg_guild_command_result;
 pub use smsg_guild_command_result::*;
 pub(crate) mod smsg_guild_roster;

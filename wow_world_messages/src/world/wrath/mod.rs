@@ -396,14 +396,8 @@ pub(crate) mod group_list_member;
 pub use group_list_member::*;
 pub(crate) mod guild_bank_content_result;
 pub use guild_bank_content_result::*;
-pub(crate) mod guild_bank_enchant;
-pub use guild_bank_enchant::*;
 pub(crate) mod guild_bank_slot;
 pub use guild_bank_slot::*;
-pub(crate) mod guild_bank_tab;
-pub use guild_bank_tab::*;
-pub(crate) mod guild_bank_tab_result;
-pub use guild_bank_tab_result::*;
 pub(crate) mod guild_command;
 pub use guild_command::*;
 pub(crate) mod guild_command_result;
@@ -1172,6 +1166,12 @@ pub use crate::shared::gossip_item_tbc_wrath::GossipItem;
 pub use crate::shared::group_loot_setting_vanilla_tbc_wrath::GroupLootSetting;
 
 pub use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
+
+pub use crate::shared::guild_bank_socket_tbc_wrath::GuildBankSocket;
+
+pub use crate::shared::guild_bank_tab_result_tbc_wrath::GuildBankTabResult;
+
+pub use crate::shared::guild_bank_tab_tbc_wrath::GuildBankTab;
 
 pub use crate::shared::guild_emblem_result_tbc_wrath::GuildEmblemResult;
 

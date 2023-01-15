@@ -9,22 +9,53 @@ enum GuildBankTabResult : u8 {
     NOT_PRESENT = 0;
     PRESENT = 1;
 } {
-    versions = "3.3.5";
+    versions = "2.4.3 3";
 }
 
 struct GuildBankTab {
     CString tab_name;
     CString tab_icon;
 } {
-     versions = "3.3.5";
+     versions = "2.4.3 3";
 }
 
-struct GuildBankEnchant {
-    u8 enchant_index;
-    u32 enchant;
+struct GuildBankSocket {
+    u8 socket_index;
+    u32 gem;
 } {
-     versions = "3.3.5";
- }
+     versions = "2.4.3 3";
+}
+
+struct GuildBankSlot {
+    u8 slot;
+    Item item;
+    u32 item_random_property_id;
+    /* if (item_random_property_id != 0) {
+        u32 item_suffix_factor;
+    } TODO: INT_NEQ_ZERO */
+    u8 amount_of_items;
+    u32 enchant;
+    u8 charges;
+    u8 amount_of_sockets;
+    GuildBankSocket[amount_of_sockets] sockets;
+} {
+     versions = "2.4.3";
+}
+
+smsg SMSG_GUILD_BANK_LIST = 0x03E7 {
+    u64 bank_balance;
+    u8 tab_id;
+    u32 amount_of_allowed_item_withdraws;
+    GuildBankTabResult tab_result;
+    if (tab_result == PRESENT) {
+        u8 amount_of_bank_tabs;
+        GuildBankTab[amount_of_bank_tabs] tabs;
+    }
+    u8 amount_of_slot_updates;
+    GuildBankSlot[amount_of_slot_updates] slot_updates;
+} {
+    versions = "2.4.3";
+}
 
 struct GuildBankSlot {
     u8 slot;
@@ -35,15 +66,15 @@ struct GuildBankSlot {
     u32 item_random_property_id;
     /* if (item_random_property_id != 0) {
         u32 item_suffix_factor;
-    } */
+    } TODO: INT_NEQ_ZERO */
     u32 amount_of_items;
     u32 unknown2;
     u8 unknown3;
-    u8 amount_of_enchants;
-    GuildBankEnchant[amount_of_enchants] enchants;
+    u8 amount_of_sockets;
+    GuildBankSocket[amount_of_sockets] sockets;
 } {
      versions = "3.3.5";
- }
+}
 
 smsg SMSG_GUILD_BANK_LIST = 0x03E8 {
     u64 bank_balance;
@@ -62,3 +93,4 @@ smsg SMSG_GUILD_BANK_LIST = 0x03E8 {
 } {
     versions = "3.3.5";
 }
+

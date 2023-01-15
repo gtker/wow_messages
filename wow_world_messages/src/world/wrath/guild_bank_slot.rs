@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::GuildBankEnchant;
+use crate::world::wrath::GuildBankSocket;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_guild_bank_list.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_guild_bank_list.wowm#L29):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_guild_bank_list.wowm:60`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_guild_bank_list.wowm#L60):
 /// ```text
 /// struct GuildBankSlot {
 ///     u8 slot;
@@ -13,8 +13,8 @@ use std::io::{Write, Read};
 ///     u32 amount_of_items;
 ///     u32 unknown2;
 ///     u8 unknown3;
-///     u8 amount_of_enchants;
-///     GuildBankEnchant[amount_of_enchants] enchants;
+///     u8 amount_of_sockets;
+///     GuildBankSocket[amount_of_sockets] sockets;
 /// }
 /// ```
 pub struct GuildBankSlot {
@@ -27,7 +27,7 @@ pub struct GuildBankSlot {
     pub amount_of_items: u32,
     pub unknown2: u32,
     pub unknown3: u8,
-    pub enchants: Vec<GuildBankEnchant>,
+    pub sockets: Vec<GuildBankSocket>,
 }
 
 impl GuildBankSlot {
@@ -53,11 +53,11 @@ impl GuildBankSlot {
         // unknown3: u8
         w.write_all(&self.unknown3.to_le_bytes())?;
 
-        // amount_of_enchants: u8
-        w.write_all(&(self.enchants.len() as u8).to_le_bytes())?;
+        // amount_of_sockets: u8
+        w.write_all(&(self.sockets.len() as u8).to_le_bytes())?;
 
-        // enchants: GuildBankEnchant[amount_of_enchants]
-        for i in self.enchants.iter() {
+        // sockets: GuildBankSocket[amount_of_sockets]
+        for i in self.sockets.iter() {
             i.write_into_vec(w)?;
         }
 
@@ -88,13 +88,13 @@ impl GuildBankSlot {
         // unknown3: u8
         let unknown3 = crate::util::read_u8_le(r)?;
 
-        // amount_of_enchants: u8
-        let amount_of_enchants = crate::util::read_u8_le(r)?;
+        // amount_of_sockets: u8
+        let amount_of_sockets = crate::util::read_u8_le(r)?;
 
-        // enchants: GuildBankEnchant[amount_of_enchants]
-        let mut enchants = Vec::with_capacity(amount_of_enchants as usize);
-        for i in 0..amount_of_enchants {
-            enchants.push(GuildBankEnchant::read(r)?);
+        // sockets: GuildBankSocket[amount_of_sockets]
+        let mut sockets = Vec::with_capacity(amount_of_sockets as usize);
+        for i in 0..amount_of_sockets {
+            sockets.push(GuildBankSocket::read(r)?);
         }
 
         Ok(Self {
@@ -105,7 +105,7 @@ impl GuildBankSlot {
             amount_of_items,
             unknown2,
             unknown3,
-            enchants,
+            sockets,
         })
     }
 
@@ -120,8 +120,8 @@ impl GuildBankSlot {
         + 4 // amount_of_items: u32
         + 4 // unknown2: u32
         + 1 // unknown3: u8
-        + 1 // amount_of_enchants: u8
-        + self.enchants.len() * 5 // enchants: GuildBankEnchant[amount_of_enchants]
+        + 1 // amount_of_sockets: u8
+        + self.sockets.len() * 5 // sockets: GuildBankSocket[amount_of_sockets]
     }
 }
 

@@ -619,6 +619,12 @@ pub mod group_loot_setting_vanilla_tbc_wrath;
 pub mod group_type_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod guild_bank_rights_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod guild_bank_socket_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod guild_bank_tab_result_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod guild_bank_tab_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod guild_command_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
