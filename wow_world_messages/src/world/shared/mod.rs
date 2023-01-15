@@ -615,6 +615,8 @@ pub mod gm_ticket_status_vanilla_tbc_wrath;
 pub mod gossip_item_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod group_loot_setting_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod group_member_online_status_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod group_type_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]

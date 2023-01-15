@@ -40,6 +40,219 @@ smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
     if (mask & AURAS) {
         AuraMask auras;
     }
+    if (mask & AURAS_2) {
+        AuraMask negative_auras;
+    }
+    if (mask & PET_GUID) {
+        Guid pet;
+    }
+    if (mask & PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & PET_CUR_HP) {
+        u16 pet_current_health;
+    }
+    if (mask & PET_MAX_HP) {
+        u16 pet_max_health;
+    }
+    if (mask & PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & PET_AURAS) {
+        AuraMask pet_auras;
+    }
+}
+```
+### Header
+
+SMSG have a header of 4 bytes.
+
+#### SMSG Header
+
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
+| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
+### Body
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | 4 / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |  |
+
+If mask contains `STATUS`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 1 / - | [GroupMemberOnlineStatus](groupmemberonlinestatus.md) | status |  |  |
+
+If mask contains `CUR_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | current_health |  |  |
+
+If mask contains `MAX_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | max_health |  |  |
+
+If mask contains `POWER_TYPE`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 1 / - | [Power](power.md) | power |  |  |
+
+If mask contains `CUR_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | current_power |  |  |
+
+If mask contains `MAX_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | max_power |  |  |
+
+If mask contains `LEVEL`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | level |  |  |
+
+If mask contains `ZONE`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / - | [Area](area.md) | area |  |  |
+
+If mask contains `POSITION`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | position_x |  | cmangos: float cast to u16 |
+| - | 2 / Little | u16 | position_y |  | cmangos: float cast to u16 |
+
+If mask contains `AURAS`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
+
+If mask contains `AURAS_2`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | negative_auras |  |  |
+
+If mask contains `PET_GUID`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+
+If mask contains `PET_NAME`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | CString | pet_name |  |  |
+
+If mask contains `PET_MODEL_ID`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_display_id |  |  |
+
+If mask contains `PET_CUR_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_current_health |  |  |
+
+If mask contains `PET_MAX_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_max_health |  |  |
+
+If mask contains `PET_POWER_TYPE`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 1 / - | [Power](power.md) | pet_power_type |  |  |
+
+If mask contains `PET_CUR_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_current_power |  |  |
+
+If mask contains `PET_MAX_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_max_power |  |  |
+
+If mask contains `PET_AURAS`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |
+
+# SMSG_PARTY_MEMBER_STATS
+
+## Client Version 2.4.3
+
+### Wowm Representation
+
+Autogenerated from `wowm` file at [`wow_message_parser/wowm/world/social/smsg_party_member_stats.wowm:75`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_member_stats.wowm#L75).
+```rust,ignore
+smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
+    PackedGuid guid;
+    GroupUpdateFlags mask;
+    if (mask & STATUS) {
+        GroupMemberOnlineStatus status;
+    }
+    if (mask & CUR_HP) {
+        u16 current_health;
+    }
+    if (mask & MAX_HP) {
+        u16 max_health;
+    }
+    if (mask & POWER_TYPE) {
+        Power power;
+    }
+    if (mask & CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & LEVEL) {
+        u16 level;
+    }
+    if (mask & ZONE) {
+        Area area;
+    }
+    if (mask & POSITION) {
+        u16 position_x;
+        u16 position_y;
+    }
+    if (mask & AURAS) {
+        AuraMask auras;
+    }
     if (mask & PET_GUID) {
         Guid pet;
     }
@@ -201,4 +414,217 @@ If mask contains `PET_AURAS`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |
+
+# SMSG_PARTY_MEMBER_STATS
+
+## Client Version 3.3.5
+
+### Wowm Representation
+
+Autogenerated from `wowm` file at [`wow_message_parser/wowm/world/social/smsg_party_member_stats.wowm:146`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_member_stats.wowm#L146).
+```rust,ignore
+smsg SMSG_PARTY_MEMBER_STATS = 0x007E {
+    PackedGuid guid;
+    GroupUpdateFlags mask;
+    if (mask & STATUS) {
+        GroupMemberOnlineStatus status;
+    }
+    if (mask & CUR_HP) {
+        u32 current_health;
+    }
+    if (mask & MAX_HP) {
+        u32 max_health;
+    }
+    if (mask & POWER_TYPE) {
+        Power power;
+    }
+    if (mask & CUR_POWER) {
+        u16 current_power;
+    }
+    if (mask & MAX_POWER) {
+        u16 max_power;
+    }
+    if (mask & LEVEL) {
+        u16 level;
+    }
+    if (mask & ZONE) {
+        Area area;
+    }
+    if (mask & POSITION) {
+        u16 position_x;
+        u16 position_y;
+    }
+    if (mask & AURAS) {
+        AuraMask auras;
+    }
+    if (mask & PET_GUID) {
+        Guid pet;
+    }
+    if (mask & PET_NAME) {
+        CString pet_name;
+    }
+    if (mask & PET_MODEL_ID) {
+        u16 pet_display_id;
+    }
+    if (mask & PET_CUR_HP) {
+        u32 pet_current_health;
+    }
+    if (mask & PET_MAX_HP) {
+        u32 pet_max_health;
+    }
+    if (mask & PET_POWER_TYPE) {
+        Power pet_power_type;
+    }
+    if (mask & PET_CUR_POWER) {
+        u16 pet_current_power;
+    }
+    if (mask & PET_MAX_POWER) {
+        u16 pet_max_power;
+    }
+    if (mask & PET_AURAS) {
+        AuraMask pet_auras;
+    }
+    if (mask & VEHICLE_SEAT) {
+        u32 transport;
+    }
+}
+```
+### Header
+
+SMSG have a header of 4 bytes.
+
+#### SMSG Header
+
+| Offset | Size / Endianness | Type   | Name   | Description |
+| ------ | ----------------- | ------ | ------ | ----------- |
+| 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
+| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+
+### Body
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
+| - | 4 / - | [GroupUpdateFlags](groupupdateflags.md) | mask |  |  |
+
+If mask contains `STATUS`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 1 / - | [GroupMemberOnlineStatus](groupmemberonlinestatus.md) | status |  |  |
+
+If mask contains `CUR_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | current_health |  |  |
+
+If mask contains `MAX_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | max_health |  |  |
+
+If mask contains `POWER_TYPE`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 1 / - | [Power](power.md) | power |  |  |
+
+If mask contains `CUR_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | current_power |  |  |
+
+If mask contains `MAX_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | max_power |  |  |
+
+If mask contains `LEVEL`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | level |  |  |
+
+If mask contains `ZONE`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / - | [Area](area.md) | area |  |  |
+
+If mask contains `POSITION`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | position_x |  | cmangos: float cast to u16 |
+| - | 2 / Little | u16 | position_y |  | cmangos: float cast to u16 |
+
+If mask contains `AURAS`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | auras |  | cmangos: In all checked pre-2.x data of packets included only positive auras |
+
+If mask contains `PET_GUID`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+
+If mask contains `PET_NAME`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | CString | pet_name |  |  |
+
+If mask contains `PET_MODEL_ID`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_display_id |  |  |
+
+If mask contains `PET_CUR_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | pet_current_health |  |  |
+
+If mask contains `PET_MAX_HP`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | pet_max_health |  |  |
+
+If mask contains `PET_POWER_TYPE`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 1 / - | [Power](power.md) | pet_power_type |  |  |
+
+If mask contains `PET_CUR_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_current_power |  |  |
+
+If mask contains `PET_MAX_POWER`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 2 / Little | u16 | pet_max_power |  |  |
+
+If mask contains `PET_AURAS`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |
+
+If mask contains `VEHICLE_SEAT`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | u32 | transport |  |  |
 

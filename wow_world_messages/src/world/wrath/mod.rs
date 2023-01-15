@@ -394,6 +394,8 @@ pub(crate) mod gameobject_cast_flags;
 pub use gameobject_cast_flags::*;
 pub(crate) mod group_list_member;
 pub use group_list_member::*;
+pub(crate) mod group_update_flags;
+pub use group_update_flags::*;
 pub(crate) mod guild_bank_content_result;
 pub use guild_bank_content_result::*;
 pub(crate) mod guild_bank_slot;
@@ -1166,6 +1168,8 @@ pub use crate::shared::gm_ticket_status_vanilla_tbc_wrath::GmTicketStatus;
 pub use crate::shared::gossip_item_tbc_wrath::GossipItem;
 
 pub use crate::shared::group_loot_setting_vanilla_tbc_wrath::GroupLootSetting;
+
+pub use crate::shared::group_member_online_status_vanilla_tbc_wrath::GroupMemberOnlineStatus;
 
 pub use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 
@@ -2169,6 +2173,8 @@ pub(crate) mod smsg_override_light;
 pub use smsg_override_light::*;
 pub(crate) mod smsg_party_command_result;
 pub use smsg_party_command_result::*;
+pub(crate) mod smsg_party_member_stats;
+pub use smsg_party_member_stats::*;
 pub(crate) mod smsg_periodicauralog;
 pub use smsg_periodicauralog::*;
 pub(crate) mod smsg_pet_cast_failed;

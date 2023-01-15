@@ -4781,6 +4781,9 @@
             if (mask & GROUP_UPDATE_FLAGS_AURAS) {
                 add_aura_mask(ptv);
             }
+            if (mask & GROUP_UPDATE_FLAGS_AURAS_2) {
+                add_aura_mask(ptv);
+            }
             if (mask & GROUP_UPDATE_FLAGS_PET_GUID) {
                 ptvcursor_add(ptv, hf_woww_pet, 8, ENC_LITTLE_ENDIAN);
             }

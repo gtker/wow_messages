@@ -1,6 +1,6 @@
 # GroupMemberOnlineStatus
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -35,5 +35,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `DND` | 128 (0x80) |  | `Lua_UnitIsDND` |
 
 Used in:
+* [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
+* [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
 * [SMSG_PARTY_MEMBER_STATS](smsg_party_member_stats.md)
 * [SMSG_PARTY_MEMBER_STATS_FULL](smsg_party_member_stats_full.md)

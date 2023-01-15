@@ -44,6 +44,9 @@ use std::io::{Write, Read};
 ///     if (mask & AURAS) {
 ///         AuraMask auras;
 ///     }
+///     if (mask & AURAS_2) {
+///         AuraMask negative_auras;
+///     }
 ///     if (mask & PET_GUID) {
 ///         Guid pet;
 ///     }
@@ -156,6 +159,12 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
         }
 
+        if let Some(if_statement) = &self.mask.auras_2 {
+            // negative_auras: AuraMask
+            if_statement.negative_auras.write_into_vec(w)?;
+
+        }
+
         if let Some(if_statement) = &self.mask.pet_guid {
             // pet: Guid
             w.write_all(&if_statement.pet.guid().to_le_bytes())?;
@@ -218,7 +227,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(6..=572).contains(&body_size) {
+        if !(6..=704).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007E, size: body_size as u32 });
         }
 
@@ -352,6 +361,18 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
+        let mask_AURAS_2 = if mask.is_AURAS_2() {
+            // negative_auras: AuraMask
+            let negative_auras = AuraMask::read(r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras2 {
+                negative_auras,
+            })
+        }
+        else {
+            None
+        };
+
         let mask_PET_GUID = if mask.is_PET_GUID() {
             // pet: Guid
             let pet = Guid::read(r)?;
@@ -473,6 +494,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             zone: mask_ZONE,
             position: mask_POSITION,
             auras: mask_AURAS,
+            auras_2: mask_AURAS_2,
             pet_guid: mask_PET_GUID,
             pet_name: mask_PET_NAME,
             pet_model_id: mask_PET_MODEL_ID,
@@ -514,6 +536,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     zone: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone>,
     position: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position>,
     auras: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras>,
+    auras_2: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras2>,
     pet_guid: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid>,
     pet_name: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName>,
     pet_model_id: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId>,
@@ -526,7 +549,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
-    pub const fn new(inner: u32, status: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Status>,cur_hp: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurHp>,max_hp: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxHp>,power_type: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType>,cur_power: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurPower>,max_power: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower>,level: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level>,zone: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone>,position: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position>,auras: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras>,pet_guid: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid>,pet_name: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName>,pet_model_id: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId>,pet_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurHp>,pet_max_hp: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxHp>,pet_power_type: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType>,pet_cur_power: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurPower>,pet_max_power: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxPower>,pet_auras: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetAuras>,) -> Self {
+    pub const fn new(inner: u32, status: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Status>,cur_hp: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurHp>,max_hp: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxHp>,power_type: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType>,cur_power: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurPower>,max_power: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower>,level: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level>,zone: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone>,position: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position>,auras: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras>,auras_2: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras2>,pet_guid: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid>,pet_name: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName>,pet_model_id: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId>,pet_cur_hp: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurHp>,pet_max_hp: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxHp>,pet_power_type: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType>,pet_cur_power: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurPower>,pet_max_power: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxPower>,pet_auras: Option<SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetAuras>,) -> Self {
         Self {
             inner,
             status, 
@@ -539,6 +562,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone, 
             position, 
             auras, 
+            auras_2, 
             pet_guid, 
             pet_name, 
             pet_model_id, 
@@ -564,6 +588,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -588,6 +613,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
         && self.zone.is_none()
         && self.position.is_none()
         && self.auras.is_none()
+        && self.auras_2.is_none()
         && self.pet_guid.is_none()
         && self.pet_name.is_none()
         && self.pet_model_id.is_none()
@@ -612,6 +638,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -653,6 +680,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -694,6 +722,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -735,6 +764,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -776,6 +806,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -817,6 +848,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -858,6 +890,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -899,6 +932,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: Some(zone),
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -940,6 +974,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: Some(position),
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -981,6 +1016,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: Some(auras),
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1009,7 +1045,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
         self
     }
 
-    pub const fn new_AURAS_2() -> Self {
+    pub const fn new_AURAS_2(auras_2: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras2) -> Self {
         Self {
             inner: GroupUpdateFlags::AURAS_2,
             status: None,
@@ -1022,6 +1058,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: Some(auras_2),
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1034,17 +1071,19 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
         }
     }
 
-    pub fn set_AURAS_2(mut self) -> Self {
+    pub fn set_AURAS_2(mut self, auras_2: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras2) -> Self {
         self.inner |= GroupUpdateFlags::AURAS_2;
+        self.auras_2 = Some(auras_2);
         self
     }
 
-    pub const fn get_AURAS_2(&self) -> bool {
-        (self.inner & GroupUpdateFlags::AURAS_2) != 0
+    pub const fn get_AURAS_2(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras2> {
+        self.auras_2.as_ref()
     }
 
     pub fn clear_AURAS_2(mut self) -> Self {
         self.inner &= GroupUpdateFlags::AURAS_2.reverse_bits();
+        self.auras_2 = None;
         self
     }
 
@@ -1061,6 +1100,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: Some(pet_guid),
             pet_name: None,
             pet_model_id: None,
@@ -1102,6 +1142,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: Some(pet_name),
             pet_model_id: None,
@@ -1143,6 +1184,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: Some(pet_model_id),
@@ -1184,6 +1226,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1225,6 +1268,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1266,6 +1310,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1307,6 +1352,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1348,6 +1394,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1389,6 +1436,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1430,6 +1478,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1469,6 +1518,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             zone: None,
             position: None,
             auras: None,
+            auras_2: None,
             pet_guid: None,
             pet_name: None,
             pet_model_id: None,
@@ -1568,6 +1618,13 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
         }
         + {
             if let Some(s) = &self.auras {
+                s.size()
+            } else {
+                0
+            }
+        }
+        + {
+            if let Some(s) = &self.auras_2 {
                 s.size()
             } else {
                 0
@@ -1748,6 +1805,17 @@ pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras {
 impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras {
     pub(crate) fn size(&self) -> usize {
         self.auras.size() // auras: AuraMask
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras2 {
+    pub negative_auras: AuraMask,
+}
+
+impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras2 {
+    pub(crate) fn size(&self) -> usize {
+        self.negative_auras.size() // negative_auras: AuraMask
     }
 }
 

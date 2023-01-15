@@ -299,6 +299,8 @@ flag GroupMemberOnlineStatus : u8 {
     DND = 0x0080 {
         comment = "`Lua_UnitIsDND`";
     }
+} {
+    versions = "2 3";
 }
 
 enum UnitStandState : u8 {
