@@ -7700,6 +7700,7 @@ use crate::world::wrath::SMSG_CAMERA_SHAKE;
 use crate::world::wrath::SMSG_SOCKET_GEMS_RESULT;
 use crate::world::wrath::SMSG_REDIRECT_CLIENT;
 use crate::world::wrath::SMSG_MOVE_SET_COLLISION_HGT;
+use crate::world::wrath::SMSG_MULTIPLE_MOVES;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
@@ -8209,6 +8210,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SOCKET_GEMS_RESULT(SMSG_SOCKET_GEMS_RESULT),
     SMSG_REDIRECT_CLIENT(SMSG_REDIRECT_CLIENT),
     SMSG_MOVE_SET_COLLISION_HGT(SMSG_MOVE_SET_COLLISION_HGT),
+    SMSG_MULTIPLE_MOVES(SMSG_MULTIPLE_MOVES),
 }
 
 impl ServerOpcodeMessage {
@@ -8720,6 +8722,7 @@ impl ServerOpcodeMessage {
             0x050B => Ok(Self::SMSG_SOCKET_GEMS_RESULT(<SMSG_SOCKET_GEMS_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x050B, size: body_size, io, } } else { a } })?)),
             0x050D => Ok(Self::SMSG_REDIRECT_CLIENT(<SMSG_REDIRECT_CLIENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x050D, size: body_size, io, } } else { a } })?)),
             0x0516 => Ok(Self::SMSG_MOVE_SET_COLLISION_HGT(<SMSG_MOVE_SET_COLLISION_HGT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0516, size: body_size, io, } } else { a } })?)),
+            0x051E => Ok(Self::SMSG_MULTIPLE_MOVES(<SMSG_MULTIPLE_MOVES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x051E, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode: opcode.into(), name: opcode_to_name(opcode.into()), size: body_size }),
         }
     }
@@ -9380,6 +9383,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REDIRECT_CLIENT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOVE_SET_COLLISION_HGT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_MULTIPLE_MOVES(c) => c.write_encrypted_server(w, e),
         }
     }
 
@@ -9892,6 +9896,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_REDIRECT_CLIENT(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOVE_SET_COLLISION_HGT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_MULTIPLE_MOVES(c) => c.write_unencrypted_server(w),
         }
     }
 
@@ -10404,6 +10409,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REDIRECT_CLIENT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_SET_COLLISION_HGT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_MULTIPLE_MOVES(c) => c.tokio_write_encrypted_server(w, e).await,
         }
     }
 
@@ -10916,6 +10922,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REDIRECT_CLIENT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_SET_COLLISION_HGT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_MULTIPLE_MOVES(c) => c.tokio_write_unencrypted_server(w).await,
         }
     }
 
@@ -11428,6 +11435,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REDIRECT_CLIENT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOVE_SET_COLLISION_HGT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_MULTIPLE_MOVES(c) => c.astd_write_encrypted_server(w, e).await,
         }
     }
 
@@ -11940,6 +11948,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REDIRECT_CLIENT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOVE_SET_COLLISION_HGT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_MULTIPLE_MOVES(c) => c.astd_write_unencrypted_server(w).await,
         }
     }
 
@@ -12462,6 +12471,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SOCKET_GEMS_RESULT(_) => "SMSG_SOCKET_GEMS_RESULT",
             ServerOpcodeMessage::SMSG_REDIRECT_CLIENT(_) => "SMSG_REDIRECT_CLIENT",
             ServerOpcodeMessage::SMSG_MOVE_SET_COLLISION_HGT(_) => "SMSG_MOVE_SET_COLLISION_HGT",
+            ServerOpcodeMessage::SMSG_MULTIPLE_MOVES(_) => "SMSG_MULTIPLE_MOVES",
         })
     }
 }
@@ -15499,6 +15509,12 @@ impl From<SMSG_REDIRECT_CLIENT> for ServerOpcodeMessage {
 impl From<SMSG_MOVE_SET_COLLISION_HGT> for ServerOpcodeMessage {
     fn from(c: SMSG_MOVE_SET_COLLISION_HGT) -> Self {
         Self::SMSG_MOVE_SET_COLLISION_HGT(c)
+    }
+}
+
+impl From<SMSG_MULTIPLE_MOVES> for ServerOpcodeMessage {
+    fn from(c: SMSG_MULTIPLE_MOVES) -> Self {
+        Self::SMSG_MULTIPLE_MOVES(c)
     }
 }
 

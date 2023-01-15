@@ -1,0 +1,26 @@
+enum MiniMoveOpcode : u16 {
+    /* TODO: Is this all? */
+    SMSG_FORCE_MOVE_ROOT = 0xE8;
+    SMSG_MOVE_FEATHER_FALL = 0xF2;
+    SMSG_MOVE_WATER_WALK = 0xDE;
+    SMSG_MOVE_SET_HOVER = 0xF4;
+} {
+    versions = "3.3.5";
+}
+
+struct MiniMoveMessage {
+    /* TODO: Must manually set correct size */
+    u8 size;
+    MiniMoveOpcode opcode;
+    PackedGuid guid;
+    u32 movement_counter;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_MULTIPLE_MOVES = 0x051E {
+    u32 amount_of_moves;
+    MiniMoveMessage[amount_of_moves] moves;
+} {
+    versions = "3.3.5";
+}
