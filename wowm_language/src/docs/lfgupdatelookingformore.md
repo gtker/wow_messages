@@ -22,4 +22,5 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_LFG_UPDATE](smsg_lfg_update.md)
+* [SMSG_LFG_UPDATE_LFM](smsg_lfg_update_lfm.md)
 

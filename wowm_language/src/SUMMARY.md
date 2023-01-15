@@ -1109,6 +1109,7 @@
 - [SMSG_LFG_ROLE_CHOSEN](docs/smsg_lfg_role_chosen.md)
 - [SMSG_LFG_TELEPORT_DENIED](docs/smsg_lfg_teleport_denied.md)
 - [SMSG_LFG_UPDATE](docs/smsg_lfg_update.md)
+- [SMSG_LFG_UPDATE_LFM](docs/smsg_lfg_update_lfm.md)
 - [SMSG_LFG_UPDATE_PARTY](docs/smsg_lfg_update_party.md)
 - [SMSG_LFG_UPDATE_PLAYER](docs/smsg_lfg_update_player.md)
 - [SMSG_LFG_UPDATE_SEARCH](docs/smsg_lfg_update_search.md)

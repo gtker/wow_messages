@@ -34,6 +34,7 @@ Used in:
 * [MSG_LOOKING_FOR_GROUP_Client](msg_looking_for_group_client.md)
 * [MSG_LOOKING_FOR_GROUP_Server](msg_looking_for_group_server.md)
 * [SMSG_LFG_UPDATE](smsg_lfg_update.md)
+* [SMSG_LFG_UPDATE_LFM](smsg_lfg_update_lfm.md)
 
 # LfgType
 
