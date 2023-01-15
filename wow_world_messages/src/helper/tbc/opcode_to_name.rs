@@ -772,8 +772,6 @@ pub const fn opcode_to_name(opcode: u32) -> Option<&'static str> {
         0x0400 => "CMSG_GET_MIRRORIMAGE_DATA",
         0x0401 => "SMSG_MIRRORIMAGE_DATA",
         0x0402 => "SMSG_FORCE_DISPLAY_UPDATE",
-        0x0404 => "CMSG_IGNORE_DIMINISHING_RETURNS_CHEAT",
-        0x0405 => "SMSG_IGNORE_DIMINISHING_RETURNS_CHEAT",
         0x0406 => "CMSG_KEEP_ALIVE",
         0x0407 => "SMSG_RAID_READY_CHECK_ERROR",
         0x0408 => "CMSG_OPT_OUT_OF_LOOT",

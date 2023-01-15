@@ -773,8 +773,6 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_GET_MIRRORIMAGE_DATA", 0x400),
     Data::new("SMSG_MIRRORIMAGE_DATA", 0x401),
     Data::nyi("SMSG_FORCE_DISPLAY_UPDATE", 0x402),
-    Data::new("CMSG_IGNORE_DIMINISHING_RETURNS_CHEAT", 0x404),
-    Data::new("SMSG_IGNORE_DIMINISHING_RETURNS_CHEAT", 0x405),
     Data::new("CMSG_KEEP_ALIVE", 0x406),
     Data::nyi("SMSG_RAID_READY_CHECK_ERROR", 0x407),
     Data::new("CMSG_OPT_OUT_OF_LOOT", 0x408),
