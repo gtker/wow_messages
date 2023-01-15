@@ -881,6 +881,8 @@ pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
 
+pub use crate::shared::declined_names_tbc_wrath::DeclinedNames;
+
 pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
 
 pub use crate::shared::dispel_method_tbc_wrath::DispelMethod;
@@ -1761,6 +1763,8 @@ pub(crate) mod smsg_messagechat;
 pub use smsg_messagechat::*;
 pub(crate) mod smsg_mirrorimage_data;
 pub use smsg_mirrorimage_data::*;
+pub(crate) mod smsg_name_query_response;
+pub use smsg_name_query_response::*;
 pub(crate) mod smsg_new_world;
 pub use smsg_new_world::*;
 pub(crate) mod smsg_npc_text_update;

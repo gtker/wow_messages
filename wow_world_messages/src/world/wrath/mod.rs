@@ -378,8 +378,6 @@ pub(crate) mod creature_family;
 pub use creature_family::*;
 pub(crate) mod damage_info;
 pub use damage_info::*;
-pub(crate) mod declined_names;
-pub use declined_names::*;
 pub(crate) mod emote;
 pub use emote::*;
 pub(crate) mod encounter_frame;
@@ -1136,6 +1134,8 @@ pub use crate::shared::complain_result_window_tbc_wrath::ComplainResultWindow;
 pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 
 pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
+
+pub use crate::shared::declined_names_tbc_wrath::DeclinedNames;
 
 pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
 

@@ -558,6 +558,8 @@ pub mod cooldown_spell_vanilla_tbc_wrath;
 pub mod corpse_query_result_vanilla_tbc_wrath;
 pub use crate::manual::shared::*;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod declined_names_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod declined_pet_name_included_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod dispel_method_tbc_wrath;

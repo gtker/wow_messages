@@ -16,7 +16,25 @@ enum DeclinedNames : u8 {
     NO = 0;
     YES = 1;
 } {
-    versions = "3.3.5";
+    versions = "2.4.3 3";
+}
+
+smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
+    PackedGuid guid;
+    CString character_name;
+    CString realm_name {
+        description = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
+    }
+    (u32)Race race;
+    (u32)Gender gender;
+    (u32)Class class;
+    DeclinedNames has_declined_names;
+    if (has_declined_names == YES) {
+        CString[5] declined_names;
+    }
+} {
+    description = "Response to [CMSG_NAME_QUERY].";
+    versions = "2.4.3";
 }
 
 smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
@@ -38,7 +56,6 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     }
 } {
     description = "Response to [CMSG_NAME_QUERY].";
-    /* Specifically not 3 but 3.3.5 since early_terminate was added in 3.1 */
     versions = "3.3.5";
 }
 
