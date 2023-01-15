@@ -15,7 +15,7 @@ cmsg CMSG_GMTICKET_CREATE = 0x0205 {
         }
     }
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3";
 }
 
 cmsg CMSG_GMTICKET_CREATE = 0x0205 {

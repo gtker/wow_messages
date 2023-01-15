@@ -138,5 +138,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `UI_ISSUE` | 36 (0x24) |  |  |
 
 Used in:
+* [CMSG_GMTICKET_CREATE](cmsg_gmticket_create.md)
 * [SMSG_GMTICKET_GETTICKET](smsg_gmticket_getticket.md)
 
