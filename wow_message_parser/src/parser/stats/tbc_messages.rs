@@ -711,7 +711,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("SMSG_RESET_FAILED_NOTIFY", 0x396),
     Data::new("SMSG_LFG_DISABLED", 0x398),
     Data::new("SMSG_UPDATE_COMBO_POINTS", 0x39D),
-    Data::new("SMSG_INIT_EXTRA_AURA_INFO", 0x3A3),
+    Data::nyi("SMSG_INIT_EXTRA_AURA_INFO", 0x3A3),
     Data::new("SMSG_SET_EXTRA_AURA_INFO", 0x3A4),
     Data::new("SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE", 0x3A5),
     Data::new("SMSG_CLEAR_EXTRA_AURA_INFO", 0x3A6),
