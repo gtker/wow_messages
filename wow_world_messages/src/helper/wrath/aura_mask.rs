@@ -44,7 +44,7 @@ impl AuraMask {
         std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice())?;
 
         for &i in self.auras() {
-            if let Some(Aura {aura, unknown}) = i {
+            if let Some(Aura { aura, unknown }) = i {
                 std::io::Write::write_all(&mut v, aura.to_le_bytes().as_slice())?;
                 std::io::Write::write_all(&mut v, unknown.to_le_bytes().as_slice())?;
             }

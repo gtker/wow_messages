@@ -550,12 +550,11 @@ fn print_container_field(
                     }
                 },
                 Type::AchievementDoneArray => {
-                    format!("[AchievementDoneArray](../spec/achievement-done-array.md)",)
+                    "[AchievementDoneArray](../spec/achievement-done-array.md)".to_string()
                 }
                 Type::AchievementInProgressArray => {
-                    format!(
-                        "[AchievementInProgressArray](../spec/achievement-in-progress-array.md)",
-                    )
+                    "[AchievementInProgressArray](../spec/achievement-in-progress-array.md)"
+                        .to_string()
                 }
                 Type::SizedCString
                 | Type::Bool(_)
