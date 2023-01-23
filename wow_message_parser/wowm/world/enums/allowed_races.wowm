@@ -13,6 +13,7 @@ flag AllowedRace : u32 {
     GOBLIN = 256;
 } {
     versions = "1.12";
+    zero_is_always_valid = "true";
 }
 
 flag AllowedRace : u32 {
@@ -37,6 +38,7 @@ flag AllowedRace : u32 {
     FOREST_TROLL = 131072;
 } {
     versions = "2.4.3";
+    zero_is_always_valid = "true";
 }
 
 flag AllowedRace : u32 {
@@ -64,6 +66,7 @@ flag AllowedRace : u32 {
     ICE_TROLL = 1048576;
 } {
     versions = "3.3.5";
+    zero_is_always_valid = "true";
 }
 
 flag AllowedClass : u32 {
@@ -79,6 +82,7 @@ flag AllowedClass : u32 {
     DRUID = 1024;
 } {
     versions = "1 2";
+    zero_is_always_valid = "true";
 }
 
 flag AllowedClass : u32 {
@@ -95,4 +99,5 @@ flag AllowedClass : u32 {
     DRUID = 1024;
 } {
     versions = "3";
+    zero_is_always_valid = "true";
 }

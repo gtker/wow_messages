@@ -18,6 +18,7 @@ pub(crate) struct ObjectTags {
     skip: bool,
     unimplemented: bool,
     rust_base_ty: bool,
+    zero_is_always_valid: bool,
 }
 
 impl ObjectTags {
@@ -30,6 +31,7 @@ impl ObjectTags {
         skip: bool,
         unimplemented: bool,
         rust_base_ty: bool,
+        zero_is_always_valid: bool,
     ) -> Self {
         Self {
             all_versions,
@@ -40,6 +42,7 @@ impl ObjectTags {
             skip,
             unimplemented,
             rust_base_ty,
+            zero_is_always_valid,
         }
     }
 
@@ -66,6 +69,7 @@ impl ObjectTags {
             skip: false,
             unimplemented: false,
             rust_base_ty: false,
+            zero_is_always_valid: false,
         }
     }
 
@@ -193,6 +197,9 @@ impl ObjectTags {
 
     pub(crate) fn test(&self) -> bool {
         self.is_test
+    }
+    pub(crate) fn zero_is_always_valid(&self) -> bool {
+        self.zero_is_always_valid
     }
 }
 

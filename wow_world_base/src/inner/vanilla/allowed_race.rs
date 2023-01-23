@@ -59,7 +59,7 @@ impl AllowedRace {
     }
 
     pub const fn is_HUMAN(&self) -> bool {
-        (self.inner & Self::HUMAN) != 0
+        ((self.inner & Self::HUMAN) != 0) || self.inner == 0
     }
 
     pub const fn new_HUMAN() -> Self {
@@ -77,7 +77,7 @@ impl AllowedRace {
     }
 
     pub const fn is_ORC(&self) -> bool {
-        (self.inner & Self::ORC) != 0
+        ((self.inner & Self::ORC) != 0) || self.inner == 0
     }
 
     pub const fn new_ORC() -> Self {
@@ -95,7 +95,7 @@ impl AllowedRace {
     }
 
     pub const fn is_DWARF(&self) -> bool {
-        (self.inner & Self::DWARF) != 0
+        ((self.inner & Self::DWARF) != 0) || self.inner == 0
     }
 
     pub const fn new_DWARF() -> Self {
@@ -113,7 +113,7 @@ impl AllowedRace {
     }
 
     pub const fn is_NIGHT_ELF(&self) -> bool {
-        (self.inner & Self::NIGHT_ELF) != 0
+        ((self.inner & Self::NIGHT_ELF) != 0) || self.inner == 0
     }
 
     pub const fn new_NIGHT_ELF() -> Self {
@@ -131,7 +131,7 @@ impl AllowedRace {
     }
 
     pub const fn is_UNDEAD(&self) -> bool {
-        (self.inner & Self::UNDEAD) != 0
+        ((self.inner & Self::UNDEAD) != 0) || self.inner == 0
     }
 
     pub const fn new_UNDEAD() -> Self {
@@ -149,7 +149,7 @@ impl AllowedRace {
     }
 
     pub const fn is_TAUREN(&self) -> bool {
-        (self.inner & Self::TAUREN) != 0
+        ((self.inner & Self::TAUREN) != 0) || self.inner == 0
     }
 
     pub const fn new_TAUREN() -> Self {
@@ -167,7 +167,7 @@ impl AllowedRace {
     }
 
     pub const fn is_GNOME(&self) -> bool {
-        (self.inner & Self::GNOME) != 0
+        ((self.inner & Self::GNOME) != 0) || self.inner == 0
     }
 
     pub const fn new_GNOME() -> Self {
@@ -185,7 +185,7 @@ impl AllowedRace {
     }
 
     pub const fn is_TROLL(&self) -> bool {
-        (self.inner & Self::TROLL) != 0
+        ((self.inner & Self::TROLL) != 0) || self.inner == 0
     }
 
     pub const fn new_TROLL() -> Self {
@@ -203,7 +203,7 @@ impl AllowedRace {
     }
 
     pub const fn is_GOBLIN(&self) -> bool {
-        (self.inner & Self::GOBLIN) != 0
+        ((self.inner & Self::GOBLIN) != 0) || self.inner == 0
     }
 
     pub const fn new_GOBLIN() -> Self {

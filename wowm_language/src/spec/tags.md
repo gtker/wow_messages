@@ -262,6 +262,12 @@ smsg SMSG_TEST = 0x00 {
 }
 ```
 
+### `zero_is_always_valid`
+
+Used on `flag`s when a zero value implicitly also means that any specific enumerator is valid.
+
+For example on `AllowedRace`, a 0 value means that all races are allowed, but a 0xFFFFFFFF value also means that all races are allowed.
+
 ## For Definer Enumerators
 
 ### `display`

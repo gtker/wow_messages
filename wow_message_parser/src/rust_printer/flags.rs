@@ -104,7 +104,14 @@ fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
     for f in e.fields() {
         if f.value().int() != 0 {
             s.funcn_pub_const(format!("is_{name}(&self)", name = f.name()), "bool", |s| {
-                s.wln(format!("(self.inner & Self::{name}) != 0", name = f.name()));
+                if e.tags().zero_is_always_valid() {
+                    s.wln(format!(
+                        "((self.inner & Self::{name}) != 0) || self.inner == 0",
+                        name = f.name()
+                    ));
+                } else {
+                    s.wln(format!("(self.inner & Self::{name}) != 0", name = f.name()));
+                }
             });
 
             print_member_docc_description_and_comment(s, f.tags(), o, e.tags());

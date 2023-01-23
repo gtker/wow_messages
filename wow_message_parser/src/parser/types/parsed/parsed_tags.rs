@@ -7,6 +7,7 @@ use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
     ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
     RUST_BASE_TYPE, SKIP_SERIALIZE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
+    ZERO_IS_ALWAYS_VALID,
 };
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
@@ -24,6 +25,7 @@ pub(crate) struct ParsedTags {
     skip: Option<bool>,
     unimplemented: Option<bool>,
     rust_base_ty: Option<bool>,
+    zero_is_always_valid: Option<bool>,
 }
 
 impl ParsedTags {
@@ -69,6 +71,9 @@ impl ParsedTags {
         if let Some(v) = t.rust_base_ty {
             self.rust_base_ty = Some(v)
         }
+        if let Some(v) = t.zero_is_always_valid {
+            self.zero_is_always_valid = Some(v);
+        }
     }
 
     pub(crate) fn into_tags(self, ty_name: &str, file_info: &FileInfo) -> ObjectTags {
@@ -99,6 +104,7 @@ impl ParsedTags {
             self.skip.unwrap_or(false),
             self.unimplemented.unwrap_or(false),
             self.rust_base_ty.unwrap_or(false),
+            self.zero_is_always_valid.unwrap_or(false),
         )
     }
 
@@ -212,6 +218,8 @@ impl ParsedTags {
             self.unimplemented = Some(value.eq("true"));
         } else if key == RUST_BASE_TYPE {
             self.rust_base_ty = Some(value.eq("true"));
+        } else if key == ZERO_IS_ALWAYS_VALID {
+            self.zero_is_always_valid = Some(value.eq("true"));
         }
     }
 }

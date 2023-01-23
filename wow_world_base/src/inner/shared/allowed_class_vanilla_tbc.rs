@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/allowed_races.wowm:69`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/allowed_races.wowm#L69):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/allowed_races.wowm:72`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/allowed_races.wowm#L72):
 /// ```text
 /// flag AllowedClass : u32 {
 ///     ALL = 0;
@@ -59,7 +59,7 @@ impl AllowedClass {
     }
 
     pub const fn is_WARRIOR(&self) -> bool {
-        (self.inner & Self::WARRIOR) != 0
+        ((self.inner & Self::WARRIOR) != 0) || self.inner == 0
     }
 
     pub const fn new_WARRIOR() -> Self {
@@ -77,7 +77,7 @@ impl AllowedClass {
     }
 
     pub const fn is_PALADIN(&self) -> bool {
-        (self.inner & Self::PALADIN) != 0
+        ((self.inner & Self::PALADIN) != 0) || self.inner == 0
     }
 
     pub const fn new_PALADIN() -> Self {
@@ -95,7 +95,7 @@ impl AllowedClass {
     }
 
     pub const fn is_HUNTER(&self) -> bool {
-        (self.inner & Self::HUNTER) != 0
+        ((self.inner & Self::HUNTER) != 0) || self.inner == 0
     }
 
     pub const fn new_HUNTER() -> Self {
@@ -113,7 +113,7 @@ impl AllowedClass {
     }
 
     pub const fn is_ROGUE(&self) -> bool {
-        (self.inner & Self::ROGUE) != 0
+        ((self.inner & Self::ROGUE) != 0) || self.inner == 0
     }
 
     pub const fn new_ROGUE() -> Self {
@@ -131,7 +131,7 @@ impl AllowedClass {
     }
 
     pub const fn is_PRIEST(&self) -> bool {
-        (self.inner & Self::PRIEST) != 0
+        ((self.inner & Self::PRIEST) != 0) || self.inner == 0
     }
 
     pub const fn new_PRIEST() -> Self {
@@ -149,7 +149,7 @@ impl AllowedClass {
     }
 
     pub const fn is_SHAMAN(&self) -> bool {
-        (self.inner & Self::SHAMAN) != 0
+        ((self.inner & Self::SHAMAN) != 0) || self.inner == 0
     }
 
     pub const fn new_SHAMAN() -> Self {
@@ -167,7 +167,7 @@ impl AllowedClass {
     }
 
     pub const fn is_MAGE(&self) -> bool {
-        (self.inner & Self::MAGE) != 0
+        ((self.inner & Self::MAGE) != 0) || self.inner == 0
     }
 
     pub const fn new_MAGE() -> Self {
@@ -185,7 +185,7 @@ impl AllowedClass {
     }
 
     pub const fn is_WARLOCK(&self) -> bool {
-        (self.inner & Self::WARLOCK) != 0
+        ((self.inner & Self::WARLOCK) != 0) || self.inner == 0
     }
 
     pub const fn new_WARLOCK() -> Self {
@@ -203,7 +203,7 @@ impl AllowedClass {
     }
 
     pub const fn is_DRUID(&self) -> bool {
-        (self.inner & Self::DRUID) != 0
+        ((self.inner & Self::DRUID) != 0) || self.inner == 0
     }
 
     pub const fn new_DRUID() -> Self {

@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/allowed_races.wowm:42`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/allowed_races.wowm#L42):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/allowed_races.wowm:44`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/allowed_races.wowm#L44):
 /// ```text
 /// flag AllowedRace : u32 {
 ///     ALL = 0;
@@ -95,7 +95,7 @@ impl AllowedRace {
     }
 
     pub const fn is_HUMAN(&self) -> bool {
-        (self.inner & Self::HUMAN) != 0
+        ((self.inner & Self::HUMAN) != 0) || self.inner == 0
     }
 
     pub const fn new_HUMAN() -> Self {
@@ -113,7 +113,7 @@ impl AllowedRace {
     }
 
     pub const fn is_ORC(&self) -> bool {
-        (self.inner & Self::ORC) != 0
+        ((self.inner & Self::ORC) != 0) || self.inner == 0
     }
 
     pub const fn new_ORC() -> Self {
@@ -131,7 +131,7 @@ impl AllowedRace {
     }
 
     pub const fn is_DWARF(&self) -> bool {
-        (self.inner & Self::DWARF) != 0
+        ((self.inner & Self::DWARF) != 0) || self.inner == 0
     }
 
     pub const fn new_DWARF() -> Self {
@@ -149,7 +149,7 @@ impl AllowedRace {
     }
 
     pub const fn is_NIGHT_ELF(&self) -> bool {
-        (self.inner & Self::NIGHT_ELF) != 0
+        ((self.inner & Self::NIGHT_ELF) != 0) || self.inner == 0
     }
 
     pub const fn new_NIGHT_ELF() -> Self {
@@ -167,7 +167,7 @@ impl AllowedRace {
     }
 
     pub const fn is_UNDEAD(&self) -> bool {
-        (self.inner & Self::UNDEAD) != 0
+        ((self.inner & Self::UNDEAD) != 0) || self.inner == 0
     }
 
     pub const fn new_UNDEAD() -> Self {
@@ -185,7 +185,7 @@ impl AllowedRace {
     }
 
     pub const fn is_TAUREN(&self) -> bool {
-        (self.inner & Self::TAUREN) != 0
+        ((self.inner & Self::TAUREN) != 0) || self.inner == 0
     }
 
     pub const fn new_TAUREN() -> Self {
@@ -203,7 +203,7 @@ impl AllowedRace {
     }
 
     pub const fn is_GNOME(&self) -> bool {
-        (self.inner & Self::GNOME) != 0
+        ((self.inner & Self::GNOME) != 0) || self.inner == 0
     }
 
     pub const fn new_GNOME() -> Self {
@@ -221,7 +221,7 @@ impl AllowedRace {
     }
 
     pub const fn is_TROLL(&self) -> bool {
-        (self.inner & Self::TROLL) != 0
+        ((self.inner & Self::TROLL) != 0) || self.inner == 0
     }
 
     pub const fn new_TROLL() -> Self {
@@ -239,7 +239,7 @@ impl AllowedRace {
     }
 
     pub const fn is_GOBLIN(&self) -> bool {
-        (self.inner & Self::GOBLIN) != 0
+        ((self.inner & Self::GOBLIN) != 0) || self.inner == 0
     }
 
     pub const fn new_GOBLIN() -> Self {
@@ -257,7 +257,7 @@ impl AllowedRace {
     }
 
     pub const fn is_BLOODELF(&self) -> bool {
-        (self.inner & Self::BLOODELF) != 0
+        ((self.inner & Self::BLOODELF) != 0) || self.inner == 0
     }
 
     pub const fn new_BLOODELF() -> Self {
@@ -275,7 +275,7 @@ impl AllowedRace {
     }
 
     pub const fn is_DRAENEI(&self) -> bool {
-        (self.inner & Self::DRAENEI) != 0
+        ((self.inner & Self::DRAENEI) != 0) || self.inner == 0
     }
 
     pub const fn new_DRAENEI() -> Self {
@@ -293,7 +293,7 @@ impl AllowedRace {
     }
 
     pub const fn is_FEL_ORC(&self) -> bool {
-        (self.inner & Self::FEL_ORC) != 0
+        ((self.inner & Self::FEL_ORC) != 0) || self.inner == 0
     }
 
     pub const fn new_FEL_ORC() -> Self {
@@ -311,7 +311,7 @@ impl AllowedRace {
     }
 
     pub const fn is_NAGA(&self) -> bool {
-        (self.inner & Self::NAGA) != 0
+        ((self.inner & Self::NAGA) != 0) || self.inner == 0
     }
 
     pub const fn new_NAGA() -> Self {
@@ -329,7 +329,7 @@ impl AllowedRace {
     }
 
     pub const fn is_BROKEN(&self) -> bool {
-        (self.inner & Self::BROKEN) != 0
+        ((self.inner & Self::BROKEN) != 0) || self.inner == 0
     }
 
     pub const fn new_BROKEN() -> Self {
@@ -347,7 +347,7 @@ impl AllowedRace {
     }
 
     pub const fn is_SKELETON(&self) -> bool {
-        (self.inner & Self::SKELETON) != 0
+        ((self.inner & Self::SKELETON) != 0) || self.inner == 0
     }
 
     pub const fn new_SKELETON() -> Self {
@@ -365,7 +365,7 @@ impl AllowedRace {
     }
 
     pub const fn is_VRYKUL(&self) -> bool {
-        (self.inner & Self::VRYKUL) != 0
+        ((self.inner & Self::VRYKUL) != 0) || self.inner == 0
     }
 
     pub const fn new_VRYKUL() -> Self {
@@ -383,7 +383,7 @@ impl AllowedRace {
     }
 
     pub const fn is_TUSKARR(&self) -> bool {
-        (self.inner & Self::TUSKARR) != 0
+        ((self.inner & Self::TUSKARR) != 0) || self.inner == 0
     }
 
     pub const fn new_TUSKARR() -> Self {
@@ -401,7 +401,7 @@ impl AllowedRace {
     }
 
     pub const fn is_FOREST_TROLL(&self) -> bool {
-        (self.inner & Self::FOREST_TROLL) != 0
+        ((self.inner & Self::FOREST_TROLL) != 0) || self.inner == 0
     }
 
     pub const fn new_FOREST_TROLL() -> Self {
@@ -419,7 +419,7 @@ impl AllowedRace {
     }
 
     pub const fn is_TAUNKA(&self) -> bool {
-        (self.inner & Self::TAUNKA) != 0
+        ((self.inner & Self::TAUNKA) != 0) || self.inner == 0
     }
 
     pub const fn new_TAUNKA() -> Self {
@@ -437,7 +437,7 @@ impl AllowedRace {
     }
 
     pub const fn is_NORTHREND_SKELETON(&self) -> bool {
-        (self.inner & Self::NORTHREND_SKELETON) != 0
+        ((self.inner & Self::NORTHREND_SKELETON) != 0) || self.inner == 0
     }
 
     pub const fn new_NORTHREND_SKELETON() -> Self {
@@ -455,7 +455,7 @@ impl AllowedRace {
     }
 
     pub const fn is_ICE_TROLL(&self) -> bool {
-        (self.inner & Self::ICE_TROLL) != 0
+        ((self.inner & Self::ICE_TROLL) != 0) || self.inner == 0
     }
 
     pub const fn new_ICE_TROLL() -> Self {
