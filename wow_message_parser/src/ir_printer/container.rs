@@ -261,6 +261,10 @@ pub(crate) enum IrType {
     UpdateMask,
     #[serde(rename = "aura_mask")]
     AuraMask,
+    #[serde(rename = "achievement_done_array")]
+    AchievementDoneArray,
+    #[serde(rename = "achievement_in_progress_array")]
+    AchievementInProgressArray,
 }
 
 impl From<&Type> for IrType {
@@ -289,6 +293,8 @@ impl From<&Type> for IrType {
             Type::SizedCString => Self::SizedCString,
             Type::Bool(i) => Self::Bool(i.into()),
             Type::DateTime => Self::DateTime,
+            Type::AchievementDoneArray => Self::AchievementDoneArray,
+            Type::AchievementInProgressArray => Self::AchievementInProgressArray,
         }
     }
 }

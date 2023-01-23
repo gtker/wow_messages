@@ -356,7 +356,9 @@ impl Container {
                                 CONTAINER_SELF_SIZE_FIELD
                             ),
                         ),
-                        Type::Array(_) => invalid_self_size_position(
+                        Type::AchievementDoneArray
+                        | Type::AchievementInProgressArray
+                        | Type::Array(_) => invalid_self_size_position(
                             self.name(),
                             self.file_info(),
                             format!(
@@ -473,6 +475,17 @@ impl Container {
     pub(crate) fn contains_update_mask(&self) -> bool {
         for d in self.all_definitions() {
             if d.ty() == &Type::UpdateMask {
+                return true;
+            }
+        }
+
+        false
+    }
+
+    pub(crate) fn contains_achievement_array(&self) -> bool {
+        for d in self.all_definitions() {
+            if d.ty() == &Type::AchievementDoneArray || d.ty() == &Type::AchievementInProgressArray
+            {
                 return true;
             }
         }

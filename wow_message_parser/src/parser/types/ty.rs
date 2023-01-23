@@ -38,6 +38,8 @@ pub(crate) enum Type {
     },
     UpdateMask,
     AuraMask,
+    AchievementDoneArray,
+    AchievementInProgressArray,
 }
 
 impl Type {
@@ -57,6 +59,8 @@ impl Type {
             Type::SizedCString => "SizedCString".to_string(),
             Type::Bool(i) => bool_ty_to_string(i),
             Type::DateTime => "DateTime".to_string(),
+            Type::AchievementDoneArray => "AchievementDoneArray".to_string(),
+            Type::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
         }
     }
 
@@ -73,6 +77,8 @@ impl Type {
             Type::AuraMask => "AuraMask".to_string(),
             Type::Bool(_) => "bool".to_string(),
             Type::DateTime => "DateTime".to_string(),
+            Type::AchievementDoneArray => "AchievementDoneArray".to_string(),
+            Type::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
         };
 
         s
@@ -156,6 +162,9 @@ impl Type {
                     }
                 }
             }
+            Type::AchievementDoneArray | Type::AchievementInProgressArray => {
+                sizes.inc(0, usize::MAX);
+            }
         }
 
         sizes
@@ -184,7 +193,9 @@ impl Type {
                 }
             }
             Type::Array(_) => "?".to_string(),
-            Type::String
+            Type::AchievementDoneArray
+            | Type::AchievementInProgressArray
+            | Type::String
             | Type::SizedCString
             | Type::CString
             | Type::UpdateMask
@@ -201,6 +212,8 @@ impl Type {
             Type::DateTime | Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
             Type::SizedCString
+            | Type::AchievementDoneArray
+            | Type::AchievementInProgressArray
             | Type::String { .. }
             | Type::Array(_)
             | Type::Enum { .. }

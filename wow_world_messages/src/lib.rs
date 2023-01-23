@@ -22,6 +22,8 @@
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+extern crate core;
+
 pub mod errors;
 pub mod helper;
 mod manual;

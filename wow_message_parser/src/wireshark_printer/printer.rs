@@ -398,6 +398,9 @@ fn print_definition(
             true
         }
         Type::String { .. } => unreachable!("Strings are only in login messages"),
+        Type::AchievementInProgressArray | Type::AchievementDoneArray => {
+            unreachable!("achievement arrays are only in 3.3.5")
+        }
     }
 }
 

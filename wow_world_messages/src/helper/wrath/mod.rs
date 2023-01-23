@@ -10,6 +10,15 @@ pub use aura_mask::*;
 pub(crate) mod update_mask;
 
 pub(crate) mod opcode_to_name;
+
+mod achievement_done_array;
+pub use achievement_done_array::*;
+
+mod achievement_in_progress_array;
+pub use achievement_in_progress_array::*;
+
 pub use opcode_to_name::*;
 
 pub use update_mask::*;
+
+pub(crate) const ACHIEVEMENT_SENTINEL_VALUE: u32 = u32::from_le_bytes((-1_i32).to_le_bytes());

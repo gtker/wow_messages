@@ -255,6 +255,8 @@
 - [Version](docs/version.md)
 
 # Login Containers
+- [AchievementDone](docs/achievementdone.md)
+- [AchievementInProgress](docs/achievementinprogress.md)
 - [ActionButton](docs/actionbutton.md)
 - [Addon](docs/addon.md)
 - [AddonInfo](docs/addoninfo.md)
@@ -892,6 +894,7 @@
 - [SMSG_ADDON_INFO](docs/smsg_addon_info.md)
 - [SMSG_ADD_RUNE_POWER](docs/smsg_add_rune_power.md)
 - [SMSG_AI_REACTION](docs/smsg_ai_reaction.md)
+- [SMSG_ALL_ACHIEVEMENT_DATA](docs/smsg_all_achievement_data.md)
 - [SMSG_AREA_SPIRIT_HEALER_TIME](docs/smsg_area_spirit_healer_time.md)
 - [SMSG_AREA_TRIGGER_MESSAGE](docs/smsg_area_trigger_message.md)
 - [SMSG_ARENA_ERROR](docs/smsg_arena_error.md)
@@ -1248,6 +1251,7 @@
 - [SMSG_REMOVED_SPELL](docs/smsg_removed_spell.md)
 - [SMSG_RESET_FAILED_NOTIFY](docs/smsg_reset_failed_notify.md)
 - [SMSG_RESISTLOG](docs/smsg_resistlog.md)
+- [SMSG_RESPOND_INSPECT_ACHIEVEMENTS](docs/smsg_respond_inspect_achievements.md)
 - [SMSG_RESURRECT_FAILED](docs/smsg_resurrect_failed.md)
 - [SMSG_RESURRECT_REQUEST](docs/smsg_resurrect_request.md)
 - [SMSG_RESYNC_RUNES](docs/smsg_resync_runes.md)

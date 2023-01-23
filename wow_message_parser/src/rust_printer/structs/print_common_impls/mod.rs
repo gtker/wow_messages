@@ -218,7 +218,11 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                 format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
             }
         }
-        RustType::PackedGuid | RustType::UpdateMask | RustType::AuraMask => {
+        RustType::AchievementDoneArray
+        | RustType::AchievementInProgressArray
+        | RustType::PackedGuid
+        | RustType::UpdateMask
+        | RustType::AuraMask => {
             format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
         }
         RustType::Enum {

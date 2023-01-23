@@ -557,6 +557,24 @@ fn print_read_definition(
             ));
             s.newline();
         }
+        Type::AchievementDoneArray => {
+            s.wln(format!(
+                "let {name} = AchievementDoneArray::{prefix}read(r){postfix}?;",
+                name = d.name(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+            s.newline();
+        }
+        Type::AchievementInProgressArray => {
+            s.wln(format!(
+                "let {name} = AchievementInProgressArray::{prefix}read(r){postfix}?;",
+                name = d.name(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+            s.newline();
+        }
     }
 }
 

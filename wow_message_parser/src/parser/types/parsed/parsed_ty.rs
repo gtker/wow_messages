@@ -33,6 +33,8 @@ pub(crate) enum ParsedType {
     },
     UpdateMask,
     AuraMask,
+    AchievementDoneArray,
+    AchievementInProgressArray,
 }
 
 impl ParsedType {
@@ -51,6 +53,8 @@ impl ParsedType {
             ParsedType::SizedCString => "SizedCString".to_string(),
             ParsedType::Bool(i) => bool_ty_to_string(i),
             ParsedType::DateTime => "DateTime".to_string(),
+            ParsedType::AchievementDoneArray => "AchievementDoneArray".to_string(),
+            ParsedType::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
         }
     }
 
@@ -159,6 +163,9 @@ impl ParsedType {
                     }
                 }
             }
+            ParsedType::AchievementDoneArray | ParsedType::AchievementInProgressArray => {
+                sizes.inc(0, usize::MAX);
+            }
         }
 
         sizes
@@ -223,6 +230,8 @@ impl ParsedType {
             "SizedCString" => Self::SizedCString,
             "DateTime" => Self::DateTime,
             "String" => Self::String,
+            "AchievementDoneArray" => Self::AchievementDoneArray,
+            "AchievementInProgressArray" => Self::AchievementInProgressArray,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,
@@ -256,7 +265,9 @@ impl ParsedType {
                         ParsedType::CString => {
                             Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
                         }
-                        ParsedType::SizedCString
+                        ParsedType::AchievementDoneArray
+                        | ParsedType::AchievementInProgressArray
+                        | ParsedType::SizedCString
                         | ParsedType::String { .. }
                         | ParsedType::Array(_)
                         | ParsedType::FloatingPoint(_)

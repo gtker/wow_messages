@@ -256,6 +256,9 @@ fn print_container_example_definition(
             }
             s.w(format!("{}, ", b));
         }
+        Type::AchievementDoneArray | Type::AchievementInProgressArray => {
+            unimplemented!("-1 delimited achievement arrays")
+        }
     }
     s.wln(comment);
 }
@@ -546,6 +549,14 @@ fn print_container_field(
                         )
                     }
                 },
+                Type::AchievementDoneArray => {
+                    format!("[AchievementDoneArray](../spec/achievement-done-array.md)",)
+                }
+                Type::AchievementInProgressArray => {
+                    format!(
+                        "[AchievementInProgressArray](../spec/achievement-in-progress-array.md)",
+                    )
+                }
                 Type::SizedCString
                 | Type::Bool(_)
                 | Type::DateTime
@@ -622,7 +633,9 @@ fn print_container_field(
                             ArraySize::Variable(_) | ArraySize::Endless => None,
                         }
                     }
-                    Type::CString
+                    Type::AchievementDoneArray
+                    | Type::AchievementInProgressArray
+                    | Type::CString
                     | Type::SizedCString
                     | Type::String { .. }
                     | Type::PackedGuid

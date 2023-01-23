@@ -392,6 +392,8 @@ pub(crate) enum RustType {
         sizes: Sizes,
         object: RustObject,
     },
+    AchievementDoneArray,
+    AchievementInProgressArray,
 }
 
 impl RustType {
@@ -410,6 +412,8 @@ impl RustType {
             RustType::SizedCString => "SizedCString".to_string(),
             RustType::Bool(i) => bool_ty_to_string(i),
             RustType::DateTime => "DateTime".to_string(),
+            RustType::AchievementDoneArray => "AchievementDoneArray".to_string(),
+            RustType::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
         }
     }
 
@@ -432,6 +436,8 @@ impl Display for RustType {
             RustType::PackedGuid | RustType::Guid => f.write_str("Guid"),
             RustType::Bool(_) => f.write_str("bool"),
             RustType::DateTime => f.write_str("DateTime"),
+            RustType::AchievementDoneArray => f.write_str("AchievementDoneArray"),
+            RustType::AchievementInProgressArray => f.write_str("AchievementInProgressArray"),
         }
     }
 }
@@ -1219,6 +1225,8 @@ pub(crate) fn create_struct_member(
                 Type::UpdateMask => RustType::UpdateMask,
                 Type::AuraMask => RustType::AuraMask,
                 Type::SizedCString => RustType::SizedCString,
+                Type::AchievementDoneArray => RustType::AchievementDoneArray,
+                Type::AchievementInProgressArray => RustType::AchievementInProgressArray,
             };
 
             let name = d.name().to_string();

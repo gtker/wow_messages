@@ -29,6 +29,9 @@ pub(crate) enum Feature {
     UpdateMaskTypes,
     AuraMaskTypes,
 
+    AchievementDoneArrayType,
+    AchievementInProgressType,
+
     EmptyContainer,
 
     SimpleArrays,
@@ -238,6 +241,8 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         Type::Struct { .. } => {
             f.add(Feature::SubObjects);
         }
+        Type::AchievementDoneArray => f.add(Feature::AchievementDoneArrayType),
+        Type::AchievementInProgressArray => f.add(Feature::AchievementInProgressType),
     }
 }
 

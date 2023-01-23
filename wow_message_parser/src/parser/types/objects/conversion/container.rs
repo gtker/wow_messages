@@ -87,6 +87,8 @@ fn parsed_type_to_type(
         }
         ParsedType::UpdateMask => Type::UpdateMask,
         ParsedType::AuraMask => Type::AuraMask,
+        ParsedType::AchievementDoneArray => Type::AchievementDoneArray,
+        ParsedType::AchievementInProgressArray => Type::AchievementInProgressArray,
     }
 }
 
@@ -535,7 +537,10 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
-        ParsedType::UpdateMask | ParsedType::AuraMask => {
+        ParsedType::AchievementDoneArray
+        | ParsedType::AchievementInProgressArray
+        | ParsedType::UpdateMask
+        | ParsedType::AuraMask => {
             unimplemented!()
         }
     };

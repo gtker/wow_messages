@@ -1,0 +1,35 @@
+smsg SMSG_RESPOND_INSPECT_ACHIEVEMENTS = 0x046C {
+    PackedGuid player;
+    AchievementDoneArray done;   
+    AchievementInProgressArray in_progress;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_ALL_ACHIEVEMENT_DATA = 0x047D {
+    AchievementDoneArray done;   
+    AchievementInProgressArray in_progress;
+} {
+    versions = "3.3.5";
+}
+
+struct AchievementDone {
+    u32 achievement;
+    DateTime time;
+} {
+    comment = "Used in the `AchievementDoneArray` built-in type.";
+    versions = "3.3.5";
+}
+
+struct AchievementInProgress {
+    u32 achievement;
+    PackedGuid counter;
+    PackedGuid player;
+    Bool32 timed_criteria_failed;
+    DateTime progress_date;
+    u32 time_since_progress;
+    u32 time_since_progress2;
+} {
+    comment = "Used in the `AchievementInProgressArray` built-in type.";
+    versions = "3.3.5";
+}

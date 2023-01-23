@@ -57,6 +57,13 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         s.wln(format!("use {}::UpdateMask;", import_path));
     }
 
+    if e.contains_achievement_array() {
+        s.wln(format!(
+            "use {}::{{AchievementDoneArray, AchievementInProgressArray}};",
+            import_path
+        ));
+    }
+
     for c in e.get_objects_needing_import() {
         let version = if !version.is_world() {
             // Login messages need to use the real object and not the reexports
@@ -190,7 +197,9 @@ fn can_derive_default(members: &[RustMember]) -> bool {
 fn can_derive_copy(members: &[RustMember]) -> bool {
     for m in members {
         match m.ty() {
-            RustType::UpdateMask
+            RustType::AchievementInProgressArray
+            | RustType::AchievementDoneArray
+            | RustType::UpdateMask
             | RustType::AuraMask
             | RustType::PackedGuid
             | RustType::String

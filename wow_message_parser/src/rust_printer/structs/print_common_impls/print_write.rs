@@ -334,7 +334,10 @@ pub(crate) fn print_write_definition(
                 name = d.name()
             ));
         }
-        Type::UpdateMask | Type::AuraMask => {
+        Type::AchievementDoneArray
+        | Type::AchievementInProgressArray
+        | Type::UpdateMask
+        | Type::AuraMask => {
             s.wln(format!(
                 "{variable_prefix}{name}.write_into_vec(w){postfix}?;",
                 variable_prefix = variable_prefix,
