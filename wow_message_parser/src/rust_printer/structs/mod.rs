@@ -105,15 +105,7 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
 }
 
 fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {
-    print_derives(
-        s,
-        &e.rust_object()
-            .all_members()
-            .into_iter()
-            .cloned()
-            .collect::<Vec<_>>(),
-        false,
-    );
+    print_derives(s, &e.rust_object().all_members(), false);
     print_serde_derive(s, e.tags().is_in_base());
 
     print_docc_description_and_comment(s, e.tags(), o, e.tags());
@@ -151,7 +143,7 @@ fn print_struct_wowm_definition(s: &mut Writer, e: &Container) {
     );
 }
 
-pub(crate) fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type: bool) {
+pub(crate) fn print_derives(s: &mut Writer, members: &[&RustMember], is_enum_type: bool) {
     s.w("#[derive(Debug, Clone");
 
     if can_derive_copy(members) {
@@ -170,7 +162,7 @@ pub(crate) fn print_derives(s: &mut Writer, members: &[RustMember], is_enum_type
     s.wln_no_indent(")]");
 }
 
-fn can_derive_eq(members: &[RustMember]) -> bool {
+fn can_derive_eq(members: &[&RustMember]) -> bool {
     for m in members {
         if matches!(m.ty(), RustType::Floating(_)) {
             return false;
@@ -180,7 +172,7 @@ fn can_derive_eq(members: &[RustMember]) -> bool {
     true
 }
 
-fn can_derive_default(members: &[RustMember]) -> bool {
+fn can_derive_default(members: &[&RustMember]) -> bool {
     for m in members {
         if let RustType::Array { array, .. } = m.ty() {
             if let (ArrayType::Integer(_), ArraySize::Fixed(size)) = (array.ty(), array.size()) {
@@ -194,7 +186,7 @@ fn can_derive_default(members: &[RustMember]) -> bool {
     true
 }
 
-fn can_derive_copy(members: &[RustMember]) -> bool {
+fn can_derive_copy(members: &[&RustMember]) -> bool {
     for m in members {
         match m.ty() {
             RustType::AchievementInProgressArray

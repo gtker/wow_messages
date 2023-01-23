@@ -43,11 +43,7 @@ fn print_flag_as_int(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_new_flag_declaration(s: &mut Writer, rd: &RustDefiner) {
-    print_derives(
-        s,
-        &rd.all_members().into_iter().cloned().collect::<Vec<_>>(),
-        false,
-    );
+    print_derives(s, &rd.all_members(), false);
     s.new_flag(rd.ty_name(), rd.int_ty().rust_str(), |s| {
         for enumerator in rd.enumerators() {
             if !enumerator.should_not_be_in_flag_types() {
@@ -307,15 +303,7 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         }
 
         let new_type_name = get_new_flag_type_name(rd.ty_name(), enumerator.rust_name());
-        print_derives(
-            s,
-            &enumerator
-                .all_members()
-                .into_iter()
-                .cloned()
-                .collect::<Vec<_>>(),
-            false,
-        );
+        print_derives(s, &enumerator.all_members(), false);
         s.new_struct(&new_type_name, |s| {
             for m in enumerator.members_in_struct() {
                 s.wln(format!(
@@ -333,11 +321,7 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_new_enum_declaration(s: &mut Writer, rd: &RustDefiner) {
-    print_derives(
-        s,
-        &rd.all_members().into_iter().cloned().collect::<Vec<_>>(),
-        true,
-    );
+    print_derives(s, &rd.all_members(), true);
     s.new_enum("pub", rd.ty_name(), |s| {
         for enumerator in rd.enumerators() {
             s.w(enumerator.rust_name());
