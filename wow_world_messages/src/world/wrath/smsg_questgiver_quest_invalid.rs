@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::wrath::QuestFailedReason;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_invalid.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_invalid.wowm#L3):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_INVALID = 0x018F {

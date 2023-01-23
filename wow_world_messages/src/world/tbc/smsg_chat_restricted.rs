@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::tbc::ChatRestrictionType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_chat_restricted.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_chat_restricted.wowm#L22):
 /// ```text
 /// smsg SMSG_CHAT_RESTRICTED = 0x02FD {

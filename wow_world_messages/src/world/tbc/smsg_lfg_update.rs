@@ -3,7 +3,7 @@ use crate::world::tbc::LfgData;
 use crate::world::tbc::LfgUpdateLookingForMore;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_lfg_update.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_lfg_update.wowm#L15):
 /// ```text
 /// smsg SMSG_LFG_UPDATE = 0x036C {
@@ -96,7 +96,7 @@ impl SMSG_LFG_UPDATE {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_LFG_UPDATE_LfgUpdateLookingForMore {
     NotLookingForMore,
     LookingForMore {

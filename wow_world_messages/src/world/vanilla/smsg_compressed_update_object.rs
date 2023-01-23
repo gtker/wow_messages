@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Object;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::world::vanilla::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm#L3):

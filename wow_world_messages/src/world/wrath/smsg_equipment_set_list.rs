@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::wrath::EquipmentSetListItem;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_equipment_set_list.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_equipment_set_list.wowm#L10):
 /// ```text
 /// smsg SMSG_EQUIPMENT_SET_LIST = 0x04BC {

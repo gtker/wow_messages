@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_environmentaldamagelog.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_environmentaldamagelog.wowm#L12):
 /// ```text
 /// smsg SMSG_ENVIRONMENTAL_DAMAGE_LOG = 0x01FC {

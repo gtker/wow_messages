@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_start_descend.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_start_descend.wowm#L14):
 /// ```text
 /// smsg MSG_MOVE_START_DESCEND_Server = 0x03A7 {

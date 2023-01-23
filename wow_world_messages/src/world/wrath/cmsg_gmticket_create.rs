@@ -3,7 +3,7 @@ use crate::world::wrath::Vector3d;
 use crate::world::wrath::Map;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm#L21):
 /// ```text
 /// cmsg CMSG_GMTICKET_CREATE = 0x0205 {

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_flight_spline_sync.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_flight_spline_sync.wowm#L1):
 /// ```text
 /// smsg SMSG_FLIGHT_SPLINE_SYNC = 0x0388 {

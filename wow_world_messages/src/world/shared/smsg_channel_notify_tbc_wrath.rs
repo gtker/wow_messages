@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::shared::chat_notify_tbc_wrath::ChatNotify;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm:218`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm#L218):
 /// ```text
 /// smsg SMSG_CHANNEL_NOTIFY = 0x0099 {
@@ -111,7 +111,7 @@ impl SMSG_CHANNEL_NOTIFY {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_CHANNEL_NOTIFY_unknown1 {
     pub unknown2: u32,
     pub unkwown3: u32,

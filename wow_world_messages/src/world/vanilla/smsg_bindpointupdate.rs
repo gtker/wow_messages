@@ -4,7 +4,7 @@ use crate::world::vanilla::Area;
 use crate::world::vanilla::Map;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Inform the client of a their hearthstone location.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_bindpointupdate.wowm#L1):

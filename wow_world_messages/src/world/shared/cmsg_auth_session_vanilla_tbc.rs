@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::world::vanilla::SMSG_AUTH_CHALLENGE).
 ///
 /// This message is never encrypted.

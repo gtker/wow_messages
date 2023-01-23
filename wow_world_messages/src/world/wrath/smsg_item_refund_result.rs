@@ -4,7 +4,7 @@ use crate::world::wrath::ItemRefundExtra;
 use crate::world::wrath::ItemRefundResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_item_refund_result.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_item_refund_result.wowm#L8):
 /// ```text
 /// smsg SMSG_ITEM_REFUND_RESULT = 0x04B5 {
@@ -121,7 +121,7 @@ impl SMSG_ITEM_REFUND_RESULT {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
     Success {
         arena_point_cost: u32,

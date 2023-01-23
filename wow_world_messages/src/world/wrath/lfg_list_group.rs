@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::wrath::LfgUpdateFlag;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_update_lfg_list.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_update_lfg_list.wowm#L33):
 /// ```text
 /// struct LfgListGroup {
@@ -127,7 +127,7 @@ impl LfgListGroup {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListGroup_LfgUpdateFlag {
     inner: u32,
     comment: Option<LfgListGroup_LfgUpdateFlag_Comment>,
@@ -362,7 +362,7 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListGroup_LfgUpdateFlag_Comment {
     pub comment: String,
 }
@@ -373,7 +373,7 @@ impl LfgListGroup_LfgUpdateFlag_Comment {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListGroup_LfgUpdateFlag_Roles {
     pub roles: [u8; 3],
 }

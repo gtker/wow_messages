@@ -3,7 +3,7 @@ use crate::world::tbc::Vector3d;
 use crate::world::tbc::Map;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Sent when using the `worldport` console command.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm#L1):

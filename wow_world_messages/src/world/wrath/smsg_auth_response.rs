@@ -4,7 +4,7 @@ use crate::world::wrath::WorldResult;
 use crate::world::wrath::BillingPlanFlags;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm:105`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm#L105):
 /// ```text
 /// smsg SMSG_AUTH_RESPONSE = 0x01EE {
@@ -334,7 +334,7 @@ impl SMSG_AUTH_RESPONSE {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_AUTH_RESPONSE_WorldResult {
     ResponseSuccess,
     ResponseFailure,

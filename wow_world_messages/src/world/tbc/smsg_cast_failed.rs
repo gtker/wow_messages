@@ -3,7 +3,7 @@ use crate::world::tbc::Area;
 use crate::world::tbc::SpellCastResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_cast_failed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_cast_failed.wowm#L1):
 /// ```text
 /// smsg SMSG_CAST_FAILED = 0x0130 {
@@ -523,7 +523,7 @@ impl SMSG_CAST_FAILED {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_CAST_FAILED_SpellCastResult {
     AffectingCombat,
     AlreadyAtFullHealth,

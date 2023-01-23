@@ -5,7 +5,7 @@ use crate::world::wrath::MonsterMoveType;
 use crate::world::wrath::SplineFlag;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_monster_move_transport.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_monster_move_transport.wowm#L22):
 /// ```text
 /// smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
@@ -275,7 +275,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub enum SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType {
     Normal,
     Stop,
@@ -341,7 +341,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag {
     inner: u32,
     parabolic: Option<SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_Parabolic>,
@@ -1104,7 +1104,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_Parabolic {
     pub effect_start_time: u32,
     pub vertical_acceleration: f32,
@@ -1117,7 +1117,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_Parabolic {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_EnterCycle {
     pub animation_id: u32,
     pub animation_start_time: u32,

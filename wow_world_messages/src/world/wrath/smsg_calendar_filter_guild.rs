@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::wrath::CalendarMember;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_calendar_filter_guild.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_calendar_filter_guild.wowm#L8):
 /// ```text
 /// smsg SMSG_CALENDAR_FILTER_GUILD = 0x0438 {

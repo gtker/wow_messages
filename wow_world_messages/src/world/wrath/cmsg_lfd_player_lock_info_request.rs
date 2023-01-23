@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/cmsg_lfg_player_lock_info_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/cmsg_lfg_player_lock_info_request.wowm#L3):
 /// ```text
 /// cmsg CMSG_LFD_PLAYER_LOCK_INFO_REQUEST = 0x036E {

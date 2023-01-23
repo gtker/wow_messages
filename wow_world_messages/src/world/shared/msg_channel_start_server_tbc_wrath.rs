@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_channel_start.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_channel_start.wowm#L8):
 /// ```text
 /// smsg MSG_CHANNEL_START_Server = 0x0139 {

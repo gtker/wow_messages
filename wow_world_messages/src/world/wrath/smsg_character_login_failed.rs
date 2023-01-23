@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::wrath::WorldResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response if [`CMSG_PLAYER_LOGIN`](crate::world::vanilla::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [`SMSG_LOGIN_VERIFY_WORLD`](crate::world::wrath::SMSG_LOGIN_VERIFY_WORLD).
 ///
 /// Client seems to always send a [`CMSG_CANCEL_TRADE`](crate::world::vanilla::CMSG_CANCEL_TRADE) after receiving this message, for unknown reasons.

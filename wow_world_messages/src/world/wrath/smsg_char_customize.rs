@@ -4,7 +4,7 @@ use crate::world::wrath::Gender;
 use crate::world::wrath::WorldResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_char_customize.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_char_customize.wowm#L1):
 /// ```text
 /// smsg SMSG_CHAR_CUSTOMIZE = 0x0474 {
@@ -351,7 +351,7 @@ impl SMSG_CHAR_CUSTOMIZE {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_CHAR_CUSTOMIZE_WorldResult {
     ResponseSuccess {
         face: u8,

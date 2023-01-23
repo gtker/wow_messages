@@ -3,7 +3,7 @@ use crate::world::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
 use crate::world::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_list.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_list.wowm#L29):
 /// ```text
 /// smsg SMSG_CHANNEL_LIST = 0x009B {

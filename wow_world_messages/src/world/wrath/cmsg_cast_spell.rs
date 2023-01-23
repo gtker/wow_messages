@@ -6,7 +6,7 @@ use crate::world::wrath::ClientCastFlags;
 use crate::world::wrath::ClientMovementData;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_cast_spell.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_cast_spell.wowm#L8):
 /// ```text
 /// cmsg CMSG_CAST_SPELL = 0x012E {
@@ -171,7 +171,7 @@ impl CMSG_CAST_SPELL {
     }
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub enum CMSG_CAST_SPELL_ClientMovementData {
     NotPresent,
     Present {
@@ -218,7 +218,7 @@ impl CMSG_CAST_SPELL_ClientMovementData {
     }
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub enum CMSG_CAST_SPELL_ClientCastFlags {
     None,
     Extra {

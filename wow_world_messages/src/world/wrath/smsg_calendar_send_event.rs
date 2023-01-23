@@ -4,7 +4,7 @@ use crate::DateTime;
 use crate::world::wrath::CalendarSendInvitee;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_calendar_send_event.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_calendar_send_event.wowm#L14):
 /// ```text
 /// smsg SMSG_CALENDAR_SEND_EVENT = 0x0437 {

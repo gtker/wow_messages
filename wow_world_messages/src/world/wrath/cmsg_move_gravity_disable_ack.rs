@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::wrath::MovementInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_move_gravity_disable_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_move_gravity_disable_ack.wowm#L1):
 /// ```text
 /// cmsg CMSG_MOVE_GRAVITY_DISABLE_ACK = 0x04CF {

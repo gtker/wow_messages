@@ -5,7 +5,7 @@ use crate::world::wrath::GuildBankContentResult;
 use crate::world::wrath::GuildBankTabResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_guild_bank_list.wowm:79`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_guild_bank_list.wowm#L79):
 /// ```text
 /// smsg SMSG_GUILD_BANK_LIST = 0x03E8 {
@@ -170,7 +170,7 @@ impl SMSG_GUILD_BANK_LIST {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_GUILD_BANK_LIST_GuildBankTabResult {
     NotPresent,
     Present {
@@ -212,7 +212,7 @@ impl SMSG_GUILD_BANK_LIST_GuildBankTabResult {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_GUILD_BANK_LIST_GuildBankContentResult {
     NotPresent,
     Present {

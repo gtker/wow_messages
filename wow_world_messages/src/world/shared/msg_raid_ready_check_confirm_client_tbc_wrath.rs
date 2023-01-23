@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_raid_ready_check_confirm.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_raid_ready_check_confirm.wowm#L1):
 /// ```text
 /// cmsg MSG_RAID_READY_CHECK_CONFIRM_Client = 0x03AE {
@@ -75,7 +75,7 @@ impl MSG_RAID_READY_CHECK_CONFIRM_Client {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MSG_RAID_READY_CHECK_CONFIRM_Client_set {
     pub state: u8,
 }

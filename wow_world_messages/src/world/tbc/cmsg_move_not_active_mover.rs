@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_not_active_mover.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_not_active_mover.wowm#L3):
 /// ```text
 /// cmsg CMSG_MOVE_NOT_ACTIVE_MOVER = 0x02D1 {

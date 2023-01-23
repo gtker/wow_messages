@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_set_run_mode.wowm#L53):
 /// ```text
 /// smsg MSG_MOVE_SET_RUN_MODE_Server = 0x00C2 {

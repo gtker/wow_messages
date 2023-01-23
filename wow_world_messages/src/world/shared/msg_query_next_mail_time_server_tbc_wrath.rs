@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::shared::received_mail_tbc_wrath::ReceivedMail;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm:42`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm#L42):
 /// ```text
 /// smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {

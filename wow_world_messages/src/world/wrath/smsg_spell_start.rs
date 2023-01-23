@@ -5,7 +5,7 @@ use crate::world::wrath::Power;
 use crate::world::wrath::CastFlags;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_start.wowm:36`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_start.wowm#L36):
 /// ```text
 /// smsg SMSG_SPELL_START = 0x0131 {
@@ -202,7 +202,7 @@ impl SMSG_SPELL_START {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_START_CastFlags {
     inner: u32,
     ammo: Option<SMSG_SPELL_START_CastFlags_Ammo>,
@@ -1010,7 +1010,7 @@ impl SMSG_SPELL_START_CastFlags {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_START_CastFlags_Ammo {
     pub ammo_display_id: u32,
     pub ammo_inventory_type: u32,
@@ -1023,7 +1023,7 @@ impl SMSG_SPELL_START_CastFlags_Ammo {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_START_CastFlags_PowerLeftSelf {
     pub power: Power,
 }
@@ -1034,7 +1034,7 @@ impl SMSG_SPELL_START_CastFlags_PowerLeftSelf {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_START_CastFlags_Unknown23 {
     pub unknown1: u32,
     pub unknown2: u32,

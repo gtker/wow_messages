@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::wrath::QuestItemReward;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_complete.wowm#L32):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {

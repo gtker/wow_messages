@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Can be response to [`CMSG_TELEPORT_TO_UNIT`](crate::world::vanilla::CMSG_TELEPORT_TO_UNIT).
 /// Can also be a response to [`MSG_MOVE_TELEPORT_ACK_Client`](crate::world::vanilla::MSG_MOVE_TELEPORT_ACK_Client) after being sent.
 ///

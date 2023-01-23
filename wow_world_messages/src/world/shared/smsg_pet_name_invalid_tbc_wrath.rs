@@ -3,7 +3,7 @@ use crate::world::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameI
 use crate::world::shared::pet_name_invalid_reason_tbc_wrath::PetNameInvalidReason;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Some emulators have this with fields, but it has been verified to be empty on 1.12 through reverse engineering.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_name_invalid.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_name_invalid.wowm#L31):
@@ -116,7 +116,7 @@ impl SMSG_PET_NAME_INVALID {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded {
     NotIncluded,
     Included {

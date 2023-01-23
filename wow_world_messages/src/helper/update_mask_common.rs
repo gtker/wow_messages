@@ -108,7 +108,7 @@ pub(crate) fn read_inner(
 #[allow(unused)]
 macro_rules! update_item {
     ($name:ident, $builder_name:ident, $type_value:expr) => {
-        #[derive(Debug, Hash, Clone, Default, PartialEq, Eq)]
+        #[derive(Debug, Hash, Clone, Default, PartialEq, Eq, PartialOrd)]
         pub struct $builder_name {
             header: Vec<u32>,
             values: BTreeMap<u16, u32>,
@@ -140,7 +140,7 @@ macro_rules! update_item {
             }
         }
 
-        #[derive(Debug, Hash, Clone, Default, PartialEq, Eq)]
+        #[derive(Debug, Hash, Clone, Default, PartialEq, Eq, PartialOrd)]
         pub struct $name {
             header: Vec<u32>,
             dirty_mask: Vec<u32>,
@@ -202,7 +202,7 @@ macro_rules! update_item {
 #[allow(unused)]
 macro_rules! update_mask {
     () => {
-        #[derive(Debug, Hash, Clone, PartialEq, Eq)]
+        #[derive(Debug, Hash, Clone, PartialEq, Eq, PartialOrd)]
         pub enum UpdateMask {
             Item(UpdateItem),
             Container(UpdateContainer),

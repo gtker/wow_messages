@@ -5,7 +5,7 @@ use crate::world::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
 use crate::world::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_mode.wowm#L8):
 /// ```text
 /// smsg SMSG_PET_MODE = 0x017A {

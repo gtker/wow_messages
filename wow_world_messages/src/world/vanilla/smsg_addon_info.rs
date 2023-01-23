@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::Addon;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm:60`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm#L60):
 /// ```text
 /// smsg SMSG_ADDON_INFO = 0x02EF {

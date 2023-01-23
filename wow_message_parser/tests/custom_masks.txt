@@ -3,7 +3,7 @@ use crate::world::vanilla::AuraMask;
 use crate::world::vanilla::UpdateMask;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:222`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L222):
 /// ```text
 /// struct CustomMasks {

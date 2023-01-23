@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::ClientMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/survey_result.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/survey_result.wowm#L3):
 /// ```text
 /// clogin CMD_SURVEY_RESULT = 0x04 {

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L53):
 /// ```text
 /// struct ItemDamageType {

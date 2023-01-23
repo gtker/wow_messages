@@ -5,7 +5,7 @@ use crate::world::vanilla::KeyVersion;
 use crate::world::vanilla::UrlInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm:42`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm#L42):
 /// ```text
 /// struct Addon {
@@ -302,7 +302,7 @@ impl Addon {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum Addon_KeyVersion {
     Zero,
     One {
@@ -423,7 +423,7 @@ impl Addon_KeyVersion {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum Addon_InfoBlock {
     Unavailable,
     Available {
@@ -467,7 +467,7 @@ impl Addon_InfoBlock {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum Addon_UrlInfo {
     Unavailable,
     Available {

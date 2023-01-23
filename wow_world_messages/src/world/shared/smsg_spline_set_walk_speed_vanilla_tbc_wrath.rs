@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_walk_speed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_walk_speed.wowm#L3):
 /// ```text
 /// smsg SMSG_SPLINE_SET_WALK_SPEED = 0x0301 {

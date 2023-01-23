@@ -4,7 +4,7 @@ use crate::world::tbc::BankSwapSource;
 use crate::world::tbc::BankSwapStoreMode;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_guild_bank_swap_items.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_guild_bank_swap_items.wowm#L15):
 /// ```text
 /// cmsg CMSG_GUILD_BANK_SWAP_ITEMS = 0x03E8 {
@@ -303,7 +303,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
     Manual {
         bank_to_character_transfer: bool,
@@ -369,7 +369,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
     Inventory {
         bank_slot: u8,

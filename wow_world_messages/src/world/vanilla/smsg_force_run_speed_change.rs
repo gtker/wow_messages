@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Tells the client that the running speed has changed.
 /// Client replies with [`CMSG_FORCE_RUN_SPEED_CHANGE_ACK`](crate::world::vanilla::CMSG_FORCE_RUN_SPEED_CHANGE_ACK).
 /// vmangos sends this message to the client being changed and [`SMSG_SPLINE_SET_RUN_SPEED`](crate::world::vanilla::SMSG_SPLINE_SET_RUN_SPEED) to others.

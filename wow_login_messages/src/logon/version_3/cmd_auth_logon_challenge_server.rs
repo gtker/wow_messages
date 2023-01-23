@@ -4,7 +4,7 @@ use crate::logon::version_3::SecurityFlag;
 use crate::ServerMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply to [`CMD_AUTH_LOGON_CHALLENGE_Client`](crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm:78`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm#L78):
@@ -497,7 +497,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     None,
     Pin {
@@ -541,7 +541,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     Success {
         crc_salt: [u8; 16],

@@ -4,7 +4,7 @@ use crate::world::tbc::Map;
 use crate::world::tbc::TransferAbortReason;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm#L45):
 /// ```text
 /// smsg SMSG_TRANSFER_ABORTED = 0x0040 {
@@ -123,7 +123,7 @@ impl SMSG_TRANSFER_ABORTED {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_TRANSFER_ABORTED_TransferAbortReason {
     None,
     IsFull,

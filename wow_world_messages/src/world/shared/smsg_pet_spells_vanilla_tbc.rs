@@ -6,7 +6,7 @@ use crate::world::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
 use crate::world::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm#L12):
 /// ```text
 /// smsg SMSG_PET_SPELLS = 0x0179 {
@@ -184,7 +184,7 @@ impl SMSG_PET_SPELLS {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PET_SPELLS_action_bars {
     pub duration: u32,
     pub react: PetReactState,

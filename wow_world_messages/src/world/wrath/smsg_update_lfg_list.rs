@@ -6,7 +6,7 @@ use crate::world::wrath::LfgListUpdateType;
 use crate::world::wrath::LfgType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_update_lfg_list.wowm:111`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_update_lfg_list.wowm#L111):
 /// ```text
 /// smsg SMSG_UPDATE_LFG_LIST = 0x0360 {
@@ -183,7 +183,7 @@ impl SMSG_UPDATE_LFG_LIST {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_UPDATE_LFG_LIST_LfgListUpdateType {
     Partial {
         deleted_guids: Vec<Guid>,

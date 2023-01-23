@@ -4,7 +4,7 @@ use crate::logon::version_8::SecurityFlag;
 use crate::ServerMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm:224`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm#L224):
 /// ```text
 /// slogin CMD_AUTH_LOGON_CHALLENGE_Server = 0x00 {
@@ -668,7 +668,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     inner: u8,
     pin: Option<CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin>,
@@ -809,7 +809,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
     pub pin_grid_seed: u32,
     pub pin_salt: [u8; 16],
@@ -822,7 +822,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
     pub challenge_count: u8,
     pub digit_count: u8,
@@ -841,7 +841,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
     pub required: u8,
 }
@@ -852,7 +852,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     Success {
         crc_salt: [u8; 16],

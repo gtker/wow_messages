@@ -4,7 +4,7 @@ use crate::world::wrath::Gender;
 use crate::world::wrath::Race;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_char_race_change.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_char_race_change.wowm#L1):
 /// ```text
 /// cmsg CMSG_CHAR_RACE_CHANGE = 0x04F8 {

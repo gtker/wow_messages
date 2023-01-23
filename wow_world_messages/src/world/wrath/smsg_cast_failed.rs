@@ -4,7 +4,7 @@ use crate::world::wrath::Skill;
 use crate::world::wrath::SpellCastResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_cast_failed.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_cast_failed.wowm#L26):
 /// ```text
 /// smsg SMSG_CAST_FAILED = 0x0130 {
@@ -753,7 +753,7 @@ impl SMSG_CAST_FAILED {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_CAST_FAILED_SpellCastResult {
     Success,
     AffectingCombat,

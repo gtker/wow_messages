@@ -4,7 +4,7 @@ use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 use crate::world::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:126`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L126):
 /// ```text
 /// struct SpellCastTargets {
@@ -205,7 +205,7 @@ impl SpellCastTargets {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags {
     inner: u16,
     unit: Option<SpellCastTargets_SpellCastTargetFlags_Unit>,
@@ -761,7 +761,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_Unit {
     pub unit_target: Guid,
 }
@@ -772,7 +772,7 @@ impl SpellCastTargets_SpellCastTargetFlags_Unit {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_Item {
     pub item_target: Guid,
 }
@@ -783,7 +783,7 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_SourceLocation {
     pub source: Vector3d,
 }
@@ -794,7 +794,7 @@ impl SpellCastTargets_SpellCastTargetFlags_SourceLocation {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_DestLocation {
     pub destination: Vector3d,
 }
@@ -805,7 +805,7 @@ impl SpellCastTargets_SpellCastTargetFlags_DestLocation {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_Gameobject {
     pub object_target: Guid,
 }
@@ -816,7 +816,7 @@ impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_String {
     pub target_string: String,
 }
@@ -827,7 +827,7 @@ impl SpellCastTargets_SpellCastTargetFlags_String {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
     pub corpse_target_ally: Guid,
 }

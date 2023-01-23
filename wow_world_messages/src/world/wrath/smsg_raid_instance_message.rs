@@ -4,7 +4,7 @@ use crate::world::wrath::RaidDifficulty;
 use crate::world::wrath::RaidInstanceMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm#L45):
 /// ```text
 /// smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {

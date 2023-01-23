@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::tbc::LfgType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_looking_for_group.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_looking_for_group.wowm#L13):
 /// ```text
 /// cmsg MSG_LOOKING_FOR_GROUP_Client = 0x01FF {

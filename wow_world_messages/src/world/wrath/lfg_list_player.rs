@@ -6,7 +6,7 @@ use crate::world::wrath::Race;
 use crate::world::wrath::LfgUpdateFlag;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_update_lfg_list.wowm:50`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_update_lfg_list.wowm#L50):
 /// ```text
 /// struct LfgListPlayer {
@@ -433,7 +433,7 @@ impl LfgListPlayer {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag {
     inner: u32,
     character_info: Option<LfgListPlayer_LfgUpdateFlag_CharacterInfo>,
@@ -773,7 +773,7 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_CharacterInfo {
     pub agility: u32,
     pub armor: u32,
@@ -834,7 +834,7 @@ impl LfgListPlayer_LfgUpdateFlag_CharacterInfo {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_Comment {
     pub comment: String,
 }
@@ -845,7 +845,7 @@ impl LfgListPlayer_LfgUpdateFlag_Comment {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_GroupLeader {
     pub is_looking_for_more: bool,
 }
@@ -856,7 +856,7 @@ impl LfgListPlayer_LfgUpdateFlag_GroupLeader {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_GroupGuid {
     pub group: Guid,
 }
@@ -867,7 +867,7 @@ impl LfgListPlayer_LfgUpdateFlag_GroupGuid {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_Roles {
     pub roles: u8,
 }
@@ -878,7 +878,7 @@ impl LfgListPlayer_LfgUpdateFlag_Roles {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_Area {
     pub area: Area,
 }
@@ -889,7 +889,7 @@ impl LfgListPlayer_LfgUpdateFlag_Area {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct LfgListPlayer_LfgUpdateFlag_Status {
     pub unknown1: u8,
 }

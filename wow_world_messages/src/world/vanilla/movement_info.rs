@@ -4,7 +4,7 @@ use crate::world::vanilla::Vector3d;
 use crate::world::vanilla::MovementFlags;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement.wowm#L40):
 /// ```text
 /// struct MovementInfo {
@@ -190,7 +190,7 @@ impl MovementInfo {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementInfo_MovementFlags {
     inner: u32,
     on_transport: Option<MovementInfo_MovementFlags_OnTransport>,
@@ -851,7 +851,7 @@ impl MovementInfo_MovementFlags {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementInfo_MovementFlags_OnTransport {
     pub transport: TransportInfo,
 }
@@ -862,7 +862,7 @@ impl MovementInfo_MovementFlags_OnTransport {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementInfo_MovementFlags_Jumping {
     pub cos_angle: f32,
     pub sin_angle: f32,
@@ -879,7 +879,7 @@ impl MovementInfo_MovementFlags_Jumping {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementInfo_MovementFlags_Swimming {
     pub pitch: f32,
 }
@@ -890,7 +890,7 @@ impl MovementInfo_MovementFlags_Swimming {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementInfo_MovementFlags_SplineElevation {
     pub spline_elevation: f32,
 }

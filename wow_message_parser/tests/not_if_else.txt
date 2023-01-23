@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::SimpleEnum;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:137`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L137):
 /// ```text
 /// struct SimpleIfNotEnumElse {
@@ -97,7 +97,7 @@ impl SimpleIfNotEnumElse {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SimpleIfNotEnumElse_SimpleEnum {
     Zero {
         zero: u16,

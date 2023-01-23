@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::shared::faction_flag_vanilla_tbc::FactionFlag;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm#L28):
 /// ```text
 /// cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {

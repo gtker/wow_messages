@@ -5,7 +5,7 @@ use crate::world::wrath::QuestObjective;
 use crate::world::wrath::Vector2d;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm:110`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm#L110):
 /// ```text
 /// smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {

@@ -3,7 +3,7 @@ use crate::world::vanilla::Map;
 use crate::world::vanilla::RaidInstanceMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_raid_instance_message.wowm#L18):
 /// ```text
 /// smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {

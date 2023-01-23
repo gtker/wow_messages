@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::StructWithAllBuiltInTypes;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:68`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L68):
 /// ```text
 /// struct Arrays {

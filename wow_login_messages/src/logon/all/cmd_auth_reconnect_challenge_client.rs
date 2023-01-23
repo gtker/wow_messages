@@ -6,7 +6,7 @@ use crate::logon::all::Platform;
 use crate::ClientMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// First message sent by the client when attempting to reconnect. The server will respond with [`CMD_AUTH_RECONNECT_CHALLENGE_Server`](crate::logon::version_2::CMD_AUTH_RECONNECT_CHALLENGE_Server).
 ///
 /// Has the exact same layout as [`CMD_AUTH_LOGON_CHALLENGE_Client`](crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client).

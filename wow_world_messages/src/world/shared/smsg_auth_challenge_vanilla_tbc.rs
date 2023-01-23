@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Seed used by the client to prove in [`CMSG_AUTH_SESSION`](crate::world::vanilla::CMSG_AUTH_SESSION) that it has authenticated with the auth server.
 ///
 /// First thing sent when a client connects to the world server.

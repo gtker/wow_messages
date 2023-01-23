@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::tbc::SpamType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_complain.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_complain.wowm#L26):
 /// ```text
 /// cmsg CMSG_COMPLAIN = 0x03C6 {
@@ -163,7 +163,7 @@ impl CMSG_COMPLAIN {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMSG_COMPLAIN_SpamType {
     Mail {
         mail_id: u32,

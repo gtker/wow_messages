@@ -5,7 +5,7 @@ use crate::world::vanilla::SpellMiss;
 use crate::world::vanilla::CastFlags;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_go.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_go.wowm#L1):
 /// ```text
 /// smsg SMSG_SPELL_GO = 0x0132 {
@@ -176,7 +176,7 @@ impl SMSG_SPELL_GO {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_CastFlags {
     inner: u16,
     ammo: Option<SMSG_SPELL_GO_CastFlags_Ammo>,
@@ -411,7 +411,7 @@ impl SMSG_SPELL_GO_CastFlags {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_CastFlags_Ammo {
     pub ammo_display_id: u32,
     pub ammo_inventory_type: u32,

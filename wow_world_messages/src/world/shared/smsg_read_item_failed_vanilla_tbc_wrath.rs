@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// vmangos has extra u8 with comment `0..2, read failure reason? if == 1, use next command`.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_read_item_failed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_read_item_failed.wowm#L3):

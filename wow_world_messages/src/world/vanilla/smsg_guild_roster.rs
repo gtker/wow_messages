@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::vanilla::GuildMember;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm:24`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm#L24):
 /// ```text
 /// smsg SMSG_GUILD_ROSTER = 0x008A {

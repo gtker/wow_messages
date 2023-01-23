@@ -6,7 +6,7 @@ use crate::world::wrath::Gender;
 use crate::world::wrath::Race;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_NAME_QUERY`](crate::world::vanilla::CMSG_NAME_QUERY).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm#L40):
@@ -186,7 +186,7 @@ impl SMSG_NAME_QUERY_RESPONSE {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_NAME_QUERY_RESPONSE_DeclinedNames {
     No,
     Yes {

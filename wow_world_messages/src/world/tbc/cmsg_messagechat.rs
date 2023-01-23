@@ -3,7 +3,7 @@ use crate::world::tbc::ChatType;
 use crate::world::tbc::Language;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm#L30):
 /// ```text
 /// cmsg CMSG_MESSAGECHAT = 0x0095 {
@@ -219,7 +219,7 @@ impl CMSG_MESSAGECHAT {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMSG_MESSAGECHAT_ChatType {
     System,
     Say,

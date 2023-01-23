@@ -4,7 +4,7 @@ use crate::world::tbc::GmTicketType;
 use crate::world::tbc::Map;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm#L1):
 /// ```text
 /// cmsg CMSG_GMTICKET_CREATE = 0x0205 {
@@ -234,7 +234,7 @@ impl CMSG_GMTICKET_CREATE {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMSG_GMTICKET_CREATE_GmTicketType {
     NotSet,
     Stuck,

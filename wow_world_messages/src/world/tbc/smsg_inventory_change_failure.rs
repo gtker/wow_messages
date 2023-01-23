@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::tbc::InventoryResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_inventory_change_failure.wowm#L18):
 /// ```text
 /// smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
@@ -2545,7 +2545,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
     Ok,
     CantEquipLevelI {

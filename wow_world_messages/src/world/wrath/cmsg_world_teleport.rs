@@ -3,7 +3,7 @@ use crate::world::wrath::Vector3d;
 use crate::world::wrath::Map;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Sent when using the `worldport` console command.
 ///
 /// The 3.3.5 client includes some extra padding.

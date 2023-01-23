@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// The purpose of this message is unknown, but it is required in order to prevent the chat box from being a white rectangle that is unable to show text.
 /// Sending this causes the client to send [`CMSG_UPDATE_ACCOUNT_DATA`](crate::world::vanilla::CMSG_UPDATE_ACCOUNT_DATA) messages.
 /// [`CMSG_UPDATE_ACCOUNT_DATA`](crate::world::vanilla::CMSG_UPDATE_ACCOUNT_DATA) and [`CMSG_REQUEST_ACCOUNT_DATA`](crate::world::vanilla::CMSG_REQUEST_ACCOUNT_DATA) act on blocks numbered 0 to 7. The 32 u32s in this message could possibly actually be 8 sets of u8`16` but it could also be a variable sized message.

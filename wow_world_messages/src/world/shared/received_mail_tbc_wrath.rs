@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm#L29):
 /// ```text
 /// struct ReceivedMail {

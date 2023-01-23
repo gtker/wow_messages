@@ -6,7 +6,7 @@ use crate::world::tbc::FriendStatus;
 use crate::world::tbc::RelationType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_contact_list.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_contact_list.wowm#L21):
 /// ```text
 /// struct Relation {
@@ -145,7 +145,7 @@ impl Relation {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum Relation_FriendStatus {
     Offline,
     Online {
@@ -207,7 +207,7 @@ impl Relation_FriendStatus {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct Relation_RelationType {
     inner: u32,
     friend: Option<Relation_RelationType_Friend>,
@@ -337,7 +337,7 @@ impl Relation_RelationType {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct Relation_RelationType_Friend {
     pub status: Relation_FriendStatus,
 }

@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::tbc::ReferAFriendError;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_refer_a_friend_failure.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_refer_a_friend_failure.wowm#L21):
 /// ```text
 /// smsg SMSG_REFER_A_FRIEND_FAILURE = 0x0420 {
@@ -106,7 +106,7 @@ impl SMSG_REFER_A_FRIEND_FAILURE {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
     None,
     NotReferredBy,

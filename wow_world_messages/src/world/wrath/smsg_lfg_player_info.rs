@@ -3,7 +3,7 @@ use crate::world::wrath::LfgAvailableDungeon;
 use crate::world::wrath::LfgJoinLockedDungeon;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_lfg_player_info.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_lfg_player_info.wowm#L22):
 /// ```text
 /// smsg SMSG_LFG_PLAYER_INFO = 0x036F {

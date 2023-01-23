@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::world::tbc::MovementInfo;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_spline_done.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_spline_done.wowm#L9):
 /// ```text
 /// cmsg CMSG_MOVE_SPLINE_DONE = 0x02C9 {

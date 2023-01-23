@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::shared::quest_item_vanilla_tbc::QuestItem;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_list.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_list.wowm#L1):
 /// ```text
 /// smsg SMSG_QUESTGIVER_QUEST_LIST = 0x0185 {

@@ -5,7 +5,7 @@ use crate::world::wrath::Language;
 use crate::world::wrath::PlayerChatTag;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_messagechat.wowm:126`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_messagechat.wowm#L126):
 /// ```text
 /// smsg SMSG_MESSAGECHAT = 0x0096 {
@@ -1048,7 +1048,7 @@ impl SMSG_MESSAGECHAT {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_MESSAGECHAT_ChatType {
     System {
         target6: Guid,

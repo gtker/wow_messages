@@ -6,7 +6,7 @@ use crate::world::vanilla::GroupType;
 use crate::world::vanilla::ItemQuality;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_list.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_list.wowm#L19):
 /// ```text
 /// smsg SMSG_GROUP_LIST = 0x007D {
@@ -154,7 +154,7 @@ impl SMSG_GROUP_LIST {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_GROUP_LIST_group_not_empty {
     pub loot_setting: GroupLootSetting,
     pub master_loot: Guid,

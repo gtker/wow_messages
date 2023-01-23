@@ -3,7 +3,7 @@ use crate::world::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
 use crate::world::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply to [`CMSG_LOGOUT_REQUEST`](crate::world::vanilla::CMSG_LOGOUT_REQUEST).
 ///
 /// The client expects to get an [`SMSG_LOGOUT_COMPLETE`](crate::world::vanilla::SMSG_LOGOUT_COMPLETE) when logout is complete.

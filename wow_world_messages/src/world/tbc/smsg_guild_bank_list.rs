@@ -4,7 +4,7 @@ use crate::world::tbc::GuildBankTab;
 use crate::world::tbc::GuildBankTabResult;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_guild_bank_list.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_guild_bank_list.wowm#L45):
 /// ```text
 /// smsg SMSG_GUILD_BANK_LIST = 0x03E7 {
@@ -144,7 +144,7 @@ impl SMSG_GUILD_BANK_LIST {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_GUILD_BANK_LIST_GuildBankTabResult {
     NotPresent,
     Present {

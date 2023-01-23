@@ -5,7 +5,7 @@ use crate::world::wrath::Power;
 use crate::world::wrath::GameobjectCastFlags;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_go.wowm:49`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_go.wowm#L49):
 /// ```text
 /// smsg SMSG_SPELL_GO = 0x0132 {
@@ -294,7 +294,7 @@ impl SMSG_SPELL_GO {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags {
     inner: u32,
     ammo: Option<SMSG_SPELL_GO_GameobjectCastFlags_Ammo>,
@@ -899,7 +899,7 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
     pub ammo_display_id: u32,
     pub ammo_inventory_type: u32,
@@ -912,7 +912,7 @@ impl SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
     pub unknown3: u8,
 }
@@ -923,7 +923,7 @@ impl SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
     pub power: Power,
 }
@@ -934,7 +934,7 @@ impl SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
     pub delay_trajectory: u32,
     pub elevation: f32,
@@ -947,7 +947,7 @@ impl SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
     pub unknown1: u32,
     pub unknown2: u32,
@@ -960,7 +960,7 @@ impl SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
     pub rune_cooldowns: [u8; 6],
     pub rune_mask_after_cast: u8,

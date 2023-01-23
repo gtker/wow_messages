@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent in 3.3.5 by using the `bootme` console command. Command not available in 1.12. Available in 0.5.3.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_bootme.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_bootme.wowm#L1):

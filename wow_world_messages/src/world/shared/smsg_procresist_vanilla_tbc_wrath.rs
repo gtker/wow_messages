@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::shared::log_format_vanilla_tbc_wrath::LogFormat;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// According to cmangos/azerothcore/trinitycore/mangostwo. Not present in vmangos.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_procresist.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_procresist.wowm#L8):

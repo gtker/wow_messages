@@ -4,7 +4,7 @@ use crate::DateTime;
 use std::convert::TryFrom;
 use std::io;
 
-#[derive(Debug, Hash, Default, Clone, Eq, PartialEq)]
+#[derive(Debug, Hash, Default, Clone, Eq, PartialEq, PartialOrd, Ord)]
 pub struct AchievementDoneArray {
     pub done: Vec<AchievementDone>,
 }

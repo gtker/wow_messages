@@ -5,7 +5,7 @@ use crate::world::wrath::HitInfo;
 use crate::world::wrath::VictimState;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm:76`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm#L76):
 /// ```text
 /// smsg SMSG_ATTACKERSTATEUPDATE = 0x014A {
@@ -341,7 +341,7 @@ impl SMSG_ATTACKERSTATEUPDATE {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo {
     inner: u32,
     unk1: Option<SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1>,
@@ -1114,7 +1114,7 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
     pub unknown10: f32,
     pub unknown11: f32,
@@ -1147,7 +1147,7 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
     pub absorb: u32,
 }
@@ -1158,7 +1158,7 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
     pub resist: u32,
 }
@@ -1169,7 +1169,7 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
     pub blocked_amount: u32,
 }
@@ -1180,7 +1180,7 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19 {
     pub unknown3: u32,
 }

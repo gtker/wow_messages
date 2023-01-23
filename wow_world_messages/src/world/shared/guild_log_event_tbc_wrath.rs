@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::shared::guild_event_tbc_wrath::GuildEvent;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_guild_event_log_query.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_guild_event_log_query.wowm#L9):
 /// ```text
 /// struct GuildLogEvent {
@@ -141,7 +141,7 @@ impl GuildLogEvent {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum GuildLogEvent_GuildEvent {
     Promotion,
     Demotion,

@@ -155,11 +155,22 @@ pub(crate) fn print_derives(s: &mut Writer, members: &[&RustMember], is_enum_typ
         s.w_no_indent(", Eq, Hash");
     }
 
+    s.w_no_indent(", PartialOrd");
+    if can_derive_ord(members) {
+        s.w_no_indent(", Ord");
+    }
+
     if !is_enum_type && can_derive_default(members) {
         s.w_no_indent(", Default");
     }
 
     s.wln_no_indent(")]");
+}
+
+fn can_derive_ord(members: &[&RustMember]) -> bool {
+    members.iter().all(|a| {
+        !matches!(a.ty(), RustType::Floating(_)) && can_derive_ord(&a.all_members_without_self())
+    })
 }
 
 fn can_derive_eq(members: &[&RustMember]) -> bool {

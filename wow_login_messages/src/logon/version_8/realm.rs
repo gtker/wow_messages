@@ -6,7 +6,7 @@ use crate::logon::version_2::RealmType;
 use crate::logon::version_8::RealmFlag;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:138`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L138):
 /// ```text
 /// struct Realm {
@@ -284,7 +284,7 @@ impl Realm {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct Realm_RealmFlag {
     inner: u8,
     specify_build: Option<Realm_RealmFlag_SpecifyBuild>,
@@ -456,7 +456,7 @@ impl Realm_RealmFlag {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct Realm_RealmFlag_SpecifyBuild {
     pub version: Version,
 }

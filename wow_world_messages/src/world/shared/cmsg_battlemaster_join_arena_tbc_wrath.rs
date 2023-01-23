@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::shared::join_arena_type_tbc_wrath::JoinArenaType;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_battlemaster_join_arena.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_battlemaster_join_arena.wowm#L9):
 /// ```text
 /// cmsg CMSG_BATTLEMASTER_JOIN_ARENA = 0x0358 {

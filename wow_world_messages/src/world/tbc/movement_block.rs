@@ -7,7 +7,7 @@ use crate::world::tbc::SplineFlag;
 use crate::world::tbc::UpdateFlag;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L14):
 /// ```text
 /// struct MovementBlock {
@@ -580,7 +580,7 @@ impl MovementBlock {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub enum MovementBlock_MovementFlags_Swimming {
     Swimming {
         pitch1: f32,
@@ -619,7 +619,7 @@ impl MovementBlock_MovementFlags_Swimming {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub enum MovementBlock_SplineFlag_FinalAngle {
     FinalAngle {
         angle: f32,
@@ -668,7 +668,7 @@ impl MovementBlock_SplineFlag_FinalAngle {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_SplineFlag {
     inner: u32,
     final_angle: Option<MovementBlock_SplineFlag_FinalAngle>,
@@ -1344,7 +1344,7 @@ impl MovementBlock_SplineFlag {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_MovementFlags {
     inner: u32,
     on_transport: Option<MovementBlock_MovementFlags_OnTransport>,
@@ -2042,7 +2042,7 @@ impl MovementBlock_MovementFlags {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_MovementFlags_OnTransport {
     pub transport: TransportInfo,
 }
@@ -2053,7 +2053,7 @@ impl MovementBlock_MovementFlags_OnTransport {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_MovementFlags_Jumping {
     pub cos_angle: f32,
     pub sin_angle: f32,
@@ -2070,7 +2070,7 @@ impl MovementBlock_MovementFlags_Jumping {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_MovementFlags_SplineElevation {
     pub spline_elevation: f32,
 }
@@ -2081,7 +2081,7 @@ impl MovementBlock_MovementFlags_SplineElevation {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_MovementFlags_SplineEnabled {
     pub duration: u32,
     pub final_node: Vector3d,
@@ -2103,7 +2103,7 @@ impl MovementBlock_MovementFlags_SplineEnabled {
     }
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub enum MovementBlock_UpdateFlag_Living {
     Living {
         backwards_flying_speed: f32,
@@ -2184,7 +2184,7 @@ impl MovementBlock_UpdateFlag_Living {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_UpdateFlag {
     inner: u8,
     transport: Option<MovementBlock_UpdateFlag_Transport>,
@@ -2432,7 +2432,7 @@ impl MovementBlock_UpdateFlag {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MovementBlock_UpdateFlag_Transport {
     pub transport_progress_in_ms: u32,
 }
@@ -2443,7 +2443,7 @@ impl MovementBlock_UpdateFlag_Transport {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MovementBlock_UpdateFlag_MeleeAttacking {
     pub guid: Guid,
 }
@@ -2454,7 +2454,7 @@ impl MovementBlock_UpdateFlag_MeleeAttacking {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MovementBlock_UpdateFlag_HighGuid {
     pub unknown0: u32,
     pub unknown1: u32,
@@ -2467,7 +2467,7 @@ impl MovementBlock_UpdateFlag_HighGuid {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MovementBlock_UpdateFlag_All {
     pub unknown2: u32,
 }

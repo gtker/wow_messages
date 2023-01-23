@@ -4,7 +4,7 @@ use crate::world::shared::loot_item_vanilla_tbc_wrath::LootItem;
 use crate::world::shared::loot_method_vanilla_tbc_wrath::LootMethod;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:50`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L50):
 /// ```text
 /// smsg SMSG_LOOT_RESPONSE = 0x0160 {

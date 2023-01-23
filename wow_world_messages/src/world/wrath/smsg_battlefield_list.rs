@@ -4,7 +4,7 @@ use crate::world::wrath::BattlegroundType;
 use crate::world::wrath::RandomBg;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_list.wowm:83`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_list.wowm#L83):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_LIST = 0x023D {
@@ -209,7 +209,7 @@ impl SMSG_BATTLEFIELD_LIST {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_BATTLEFIELD_LIST_RandomBg {
     NotRandom,
     Random {

@@ -4,7 +4,7 @@ use crate::world::tbc::GroupLootSetting;
 use crate::world::tbc::ItemQuality;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_loot_method.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_loot_method.wowm#L9):
 /// ```text
 /// cmsg CMSG_LOOT_METHOD = 0x007A {

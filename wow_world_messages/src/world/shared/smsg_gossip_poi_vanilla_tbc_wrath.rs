@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use wow_world_base::shared::vector2d_vanilla_tbc_wrath::Vector2d;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Default)]
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_gossip_poi.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_gossip_poi.wowm#L3):
 /// ```text
 /// smsg SMSG_GOSSIP_POI = 0x0224 {

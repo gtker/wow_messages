@@ -4,7 +4,7 @@ use crate::world::vanilla::Map;
 use crate::world::vanilla::StatusId;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/smsg_battlefield_status.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/smsg_battlefield_status.wowm#L21):
 /// ```text
 /// smsg SMSG_BATTLEFIELD_STATUS = 0x02D4 {
@@ -4475,7 +4475,7 @@ impl SMSG_BATTLEFIELD_STATUS {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_BATTLEFIELD_STATUS_StatusId {
     None,
     WaitQueue {
@@ -4547,7 +4547,7 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_BATTLEFIELD_STATUS_Map {
     EasternKingdoms,
     Kalimdor {

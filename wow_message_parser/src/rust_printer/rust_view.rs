@@ -43,9 +43,14 @@ impl RustMember {
     }
 
     pub(crate) fn all_members(&self) -> Vec<&RustMember> {
+        let mut v = self.all_members_without_self();
+        v.push(self);
+        v
+    }
+
+    pub(crate) fn all_members_without_self(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
-        v.push(self);
         match self.ty() {
             RustType::Enum { enumerators, .. } | RustType::Flag { enumerators, .. } => {
                 for enumerator in enumerators {
@@ -786,6 +791,8 @@ pub(crate) struct RustDefiner {
 impl RustDefiner {
     pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
+
+        v.push(&self.inner);
 
         for enumerator in self.enumerators() {
             v.append(&mut enumerator.all_members());

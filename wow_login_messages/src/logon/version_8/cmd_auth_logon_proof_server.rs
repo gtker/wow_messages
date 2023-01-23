@@ -4,7 +4,7 @@ use crate::logon::version_8::AccountFlag;
 use crate::ServerMessage;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm:36`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/proof_server.wowm#L36):
 /// ```text
 /// slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
@@ -401,7 +401,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     Success {
         account_flag: AccountFlag,

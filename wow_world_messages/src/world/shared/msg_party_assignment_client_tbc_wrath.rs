@@ -3,7 +3,7 @@ use crate::Guid;
 use crate::world::shared::party_role_tbc_wrath::PartyRole;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_party_assignment.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_party_assignment.wowm#L8):
 /// ```text
 /// cmsg MSG_PARTY_ASSIGNMENT_Client = 0x038E {

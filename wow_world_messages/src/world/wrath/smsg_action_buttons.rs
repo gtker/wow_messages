@@ -3,7 +3,7 @@ use crate::world::wrath::ActionButton;
 use crate::world::wrath::ActionBarBehavior;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_action_buttons.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_action_buttons.wowm#L29):
 /// ```text
 /// smsg SMSG_ACTION_BUTTONS = 0x0129 {
@@ -103,7 +103,7 @@ impl SMSG_ACTION_BUTTONS {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SMSG_ACTION_BUTTONS_ActionBarBehavior {
     Initial {
         data: [ActionButton; 144],

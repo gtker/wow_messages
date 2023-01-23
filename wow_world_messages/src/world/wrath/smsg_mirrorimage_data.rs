@@ -5,7 +5,7 @@ use crate::world::wrath::Gender;
 use crate::world::wrath::Race;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_mirrorimage_data.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_mirrorimage_data.wowm#L18):
 /// ```text
 /// smsg SMSG_MIRRORIMAGE_DATA = 0x0402 {
