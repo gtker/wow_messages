@@ -4,7 +4,7 @@ use crate::world::wrath::AuraUpdate;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_aura_update_all.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_aura_update_all.wowm#L35):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm#L35):
 /// ```text
 /// smsg SMSG_AURA_UPDATE_ALL = 0x0495 {
 ///     PackedGuid unit;

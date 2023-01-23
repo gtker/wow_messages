@@ -3,7 +3,7 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_force_flight_speed_change.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_force_flight_speed_change.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_flight_speed_change.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_flight_speed_change.wowm#L1):
 /// ```text
 /// smsg SMSG_FORCE_FLIGHT_SPEED_CHANGE = 0x0381 {
 ///     PackedGuid guid;

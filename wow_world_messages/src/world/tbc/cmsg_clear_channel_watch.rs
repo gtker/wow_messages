@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_clear_channel_watch.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_clear_channel_watch.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_clear_channel_watch.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_clear_channel_watch.wowm#L1):
 /// ```text
 /// cmsg CMSG_CLEAR_CHANNEL_WATCH = 0x03F2 {
 ///     CString channel;

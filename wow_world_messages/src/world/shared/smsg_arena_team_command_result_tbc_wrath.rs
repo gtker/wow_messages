@@ -4,7 +4,7 @@ use crate::world::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandEr
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_arena_team_command_result.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_arena_team_command_result.wowm#L32):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_command_result.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_command_result.wowm#L32):
 /// ```text
 /// smsg SMSG_ARENA_TEAM_COMMAND_RESULT = 0x0349 {
 ///     ArenaTeamCommand command;

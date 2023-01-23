@@ -4,7 +4,7 @@ use crate::world::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_gm_report_lag.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_gm_report_lag.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gm_report_lag.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gm_report_lag.wowm#L1):
 /// ```text
 /// cmsg CMSG_GM_REPORT_LAG = 0x0502 {
 ///     u32 lag_type;

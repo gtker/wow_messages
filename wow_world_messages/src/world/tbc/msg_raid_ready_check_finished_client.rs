@@ -4,7 +4,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This MSG does not appear to have an SMSG version.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_raid_ready_check_finished.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_raid_ready_check_finished.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_raid_ready_check_finished.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_raid_ready_check_finished.wowm#L1):
 /// ```text
 /// cmsg MSG_RAID_READY_CHECK_FINISHED_Client = 0x03C5 {
 /// }

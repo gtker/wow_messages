@@ -4,7 +4,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// All that exists of this is an implementation in cmangos-tbc.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_kick_reason.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_kick_reason.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_kick_reason.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_kick_reason.wowm#L9):
 /// ```text
 /// smsg SMSG_KICK_REASON = 0x03C5 {
 ///     u8 reason;

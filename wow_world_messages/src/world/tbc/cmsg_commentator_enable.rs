@@ -3,7 +3,7 @@ use crate::world::tbc::CommentatorEnableOption;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_commentator_enable.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_commentator_enable.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_commentator_enable.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_commentator_enable.wowm#L9):
 /// ```text
 /// cmsg CMSG_COMMENTATOR_ENABLE = 0x03B4 {
 ///     CommentatorEnableOption option;

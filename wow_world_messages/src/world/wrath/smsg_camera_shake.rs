@@ -4,7 +4,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Only exists as a comment in trinitycore/azerothcore.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_camera_shake.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_camera_shake.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/cinematic/smsg_camera_shake.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/cinematic/smsg_camera_shake.wowm#L1):
 /// ```text
 /// smsg SMSG_CAMERA_SHAKE = 0x050A {
 ///     u32 camera_shake_id;

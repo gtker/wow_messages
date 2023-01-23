@@ -4,7 +4,7 @@ use crate::world::wrath::EncounterFrame;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_update_instance_encounter_unit.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_update_instance_encounter_unit.wowm#L16):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_update_instance_encounter_unit.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_update_instance_encounter_unit.wowm#L16):
 /// ```text
 /// smsg SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT = 0x0214 {
 ///     EncounterFrame frame;

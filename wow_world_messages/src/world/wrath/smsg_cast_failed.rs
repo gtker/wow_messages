@@ -5,7 +5,7 @@ use crate::world::wrath::SpellCastResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_cast_failed.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_cast_failed.wowm#L26):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_cast_failed.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_cast_failed.wowm#L26):
 /// ```text
 /// smsg SMSG_CAST_FAILED = 0x0130 {
 ///     u8 cast_count;

@@ -3,7 +3,7 @@ use crate::world::shared::arena_type_tbc_wrath::ArenaType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_arena_team_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_arena_team_query_response.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_arena_team_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_arena_team_query_response.wowm#L1):
 /// ```text
 /// smsg SMSG_ARENA_TEAM_QUERY_RESPONSE = 0x034C {
 ///     u32 arena_team;

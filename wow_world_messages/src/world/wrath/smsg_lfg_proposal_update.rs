@@ -3,7 +3,7 @@ use crate::world::wrath::LfgProposal;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_lfg_proposal_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_lfg_proposal_update.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_proposal_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_proposal_update.wowm#L1):
 /// ```text
 /// smsg SMSG_LFG_PROPOSAL_UPDATE = 0x0361 {
 ///     u32 dungeon_id;

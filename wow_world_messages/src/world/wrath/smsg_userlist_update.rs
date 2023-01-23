@@ -3,7 +3,7 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_userlist_update.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_userlist_update.wowm#L11):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_userlist_update.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_userlist_update.wowm#L11):
 /// ```text
 /// smsg SMSG_USERLIST_UPDATE = 0x03F2 {
 ///     Guid player;

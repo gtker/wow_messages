@@ -3,7 +3,7 @@ use crate::world::wrath::RaidDifficulty;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_set_raid_difficulty.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_set_raid_difficulty.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_set_raid_difficulty.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_set_raid_difficulty.wowm#L1):
 /// ```text
 /// cmsg MSG_SET_RAID_DIFFICULTY_Client = 0x04EB {
 ///     (u32)RaidDifficulty difficulty;

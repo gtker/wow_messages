@@ -3,7 +3,7 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_totem_created.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_totem_created.wowm#L10):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_totem_created.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_totem_created.wowm#L10):
 /// ```text
 /// smsg SMSG_TOTEM_CREATED = 0x0413 {
 ///     u8 slot;

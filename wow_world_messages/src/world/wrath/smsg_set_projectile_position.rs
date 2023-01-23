@@ -4,7 +4,7 @@ use crate::world::wrath::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_set_projectile_position.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_set_projectile_position.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_set_projectile_position.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_set_projectile_position.wowm#L1):
 /// ```text
 /// smsg SMSG_SET_PROJECTILE_POSITION = 0x04BF {
 ///     Guid caster;

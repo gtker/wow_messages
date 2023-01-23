@@ -3,7 +3,7 @@ use crate::world::wrath::ReferAFriendError;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_refer_a_friend_failure.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_refer_a_friend_failure.wowm#L30):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_refer_a_friend_failure.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_refer_a_friend_failure.wowm#L30):
 /// ```text
 /// smsg SMSG_REFER_A_FRIEND_FAILURE = 0x0421 {
 ///     (u32)ReferAFriendError error;

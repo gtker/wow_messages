@@ -5,7 +5,7 @@ use crate::world::wrath::TalentInfoType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_talents_info.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_talents_info.wowm#L17):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_talents_info.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_talents_info.wowm#L17):
 /// ```text
 /// smsg SMSG_TALENTS_INFO = 0x04C0 {
 ///     TalentInfoType talent_type;

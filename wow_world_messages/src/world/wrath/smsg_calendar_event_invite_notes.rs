@@ -5,7 +5,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This message only exists as a coment in trinitycore.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_calendar_event_invite_notes.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_calendar_event_invite_notes.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite_notes.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_event_invite_notes.wowm#L1):
 /// ```text
 /// smsg SMSG_CALENDAR_EVENT_INVITE_NOTES = 0x0460 {
 ///     PackedGuid invitee;

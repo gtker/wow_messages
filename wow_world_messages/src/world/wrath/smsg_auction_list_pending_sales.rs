@@ -3,7 +3,7 @@ use crate::world::wrath::PendingAuctionSale;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_auction_list_pending_sales.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_auction_list_pending_sales.wowm#L19):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_list_pending_sales.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_list_pending_sales.wowm#L19):
 /// ```text
 /// smsg SMSG_AUCTION_LIST_PENDING_SALES = 0x0490 {
 ///     u32 amount_of_pending_sales;

@@ -3,7 +3,7 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_spellclick.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_spellclick.wowm#L7):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_spellclick.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_spellclick.wowm#L7):
 /// ```text
 /// cmsg CMSG_SPELLCLICK = 0x03F8 {
 ///     Guid target;

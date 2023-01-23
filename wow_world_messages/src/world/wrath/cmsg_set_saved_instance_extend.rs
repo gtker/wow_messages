@@ -4,7 +4,7 @@ use crate::world::wrath::RaidDifficulty;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_set_saved_instance_extend.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_set_saved_instance_extend.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/cmsg_set_saved_instance_extend.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/cmsg_set_saved_instance_extend.wowm#L1):
 /// ```text
 /// cmsg CMSG_SET_SAVED_INSTANCE_EXTEND = 0x0292 {
 ///     Map map;

@@ -6,7 +6,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// There does not appear to be a client version of this MSG.
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/msg_move_teleport.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/msg_move_teleport.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_teleport.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_teleport.wowm#L1):
 /// ```text
 /// cmsg MSG_MOVE_TELEPORT_Server = 0x00C5 {
 ///     PackedGuid player;

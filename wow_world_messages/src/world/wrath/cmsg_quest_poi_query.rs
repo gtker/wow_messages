@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/cmsg_quest_poi_query.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/cmsg_quest_poi_query.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/cmsg_quest_poi_query.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/cmsg_quest_poi_query.wowm#L1):
 /// ```text
 /// cmsg CMSG_QUEST_POI_QUERY = 0x01E3 {
 ///     u32 amount_of_pois;

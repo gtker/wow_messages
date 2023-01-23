@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/_need_sorting/smsg_set_phase_shift.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/_need_sorting/smsg_set_phase_shift.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_set_phase_shift.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_set_phase_shift.wowm#L1):
 /// ```text
 /// smsg SMSG_SET_PHASE_SHIFT = 0x047C {
 ///     u32 new_phase;
