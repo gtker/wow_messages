@@ -7411,6 +7411,7 @@ use crate::world::wrath::SMSG_AUTH_RESPONSE;
 use crate::world::wrath::MSG_SAVE_GUILD_EMBLEM_Server;
 use crate::world::wrath::SMSG_PLAY_SPELL_VISUAL;
 use crate::world::wrath::SMSG_PARTYKILLLOG;
+use crate::world::wrath::SMSG_COMPRESSED_UPDATE_OBJECT;
 use crate::world::wrath::SMSG_PLAY_SPELL_IMPACT;
 use crate::world::wrath::SMSG_EXPLORATION_EXPERIENCE;
 use crate::world::wrath::MSG_RANDOM_ROLL_Server;
@@ -7927,6 +7928,7 @@ pub enum ServerOpcodeMessage {
     MSG_SAVE_GUILD_EMBLEM(MSG_SAVE_GUILD_EMBLEM_Server),
     SMSG_PLAY_SPELL_VISUAL(SMSG_PLAY_SPELL_VISUAL),
     SMSG_PARTYKILLLOG(SMSG_PARTYKILLLOG),
+    SMSG_COMPRESSED_UPDATE_OBJECT(SMSG_COMPRESSED_UPDATE_OBJECT),
     SMSG_PLAY_SPELL_IMPACT(SMSG_PLAY_SPELL_IMPACT),
     SMSG_EXPLORATION_EXPERIENCE(SMSG_EXPLORATION_EXPERIENCE),
     MSG_RANDOM_ROLL(MSG_RANDOM_ROLL_Server),
@@ -8445,6 +8447,7 @@ impl ServerOpcodeMessage {
             0x01F1 => Ok(Self::MSG_SAVE_GUILD_EMBLEM(<MSG_SAVE_GUILD_EMBLEM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F1, size: body_size, io, } } else { a } })?)),
             0x01F3 => Ok(Self::SMSG_PLAY_SPELL_VISUAL(<SMSG_PLAY_SPELL_VISUAL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F3, size: body_size, io, } } else { a } })?)),
             0x01F5 => Ok(Self::SMSG_PARTYKILLLOG(<SMSG_PARTYKILLLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F5, size: body_size, io, } } else { a } })?)),
+            0x01F6 => Ok(Self::SMSG_COMPRESSED_UPDATE_OBJECT(<SMSG_COMPRESSED_UPDATE_OBJECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F6, size: body_size, io, } } else { a } })?)),
             0x01F7 => Ok(Self::SMSG_PLAY_SPELL_IMPACT(<SMSG_PLAY_SPELL_IMPACT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F7, size: body_size, io, } } else { a } })?)),
             0x01F8 => Ok(Self::SMSG_EXPLORATION_EXPERIENCE(<SMSG_EXPLORATION_EXPERIENCE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01F8, size: body_size, io, } } else { a } })?)),
             0x01FB => Ok(Self::MSG_RANDOM_ROLL(<MSG_RANDOM_ROLL_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01FB, size: body_size, io, } } else { a } })?)),
@@ -9112,6 +9115,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PARTYKILLLOG(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_encrypted_server(w, e),
             Self::MSG_RANDOM_ROLL(c) => c.write_encrypted_server(w, e),
@@ -9631,6 +9635,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.write_unencrypted_server(w),
             Self::SMSG_PARTYKILLLOG(c) => c.write_unencrypted_server(w),
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.write_unencrypted_server(w),
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.write_unencrypted_server(w),
             Self::MSG_RANDOM_ROLL(c) => c.write_unencrypted_server(w),
@@ -10150,6 +10155,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PARTYKILLLOG(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10669,6 +10675,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PARTYKILLLOG(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11188,6 +11195,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PARTYKILLLOG(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11707,6 +11715,7 @@ impl ServerOpcodeMessage {
             Self::MSG_SAVE_GUILD_EMBLEM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_SPELL_VISUAL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PARTYKILLLOG(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_COMPRESSED_UPDATE_OBJECT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAY_SPELL_IMPACT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_EXPLORATION_EXPERIENCE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_RANDOM_ROLL(c) => c.astd_write_unencrypted_server(w).await,
@@ -12236,6 +12245,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_SAVE_GUILD_EMBLEM(_) => "MSG_SAVE_GUILD_EMBLEM_Server",
             ServerOpcodeMessage::SMSG_PLAY_SPELL_VISUAL(_) => "SMSG_PLAY_SPELL_VISUAL",
             ServerOpcodeMessage::SMSG_PARTYKILLLOG(_) => "SMSG_PARTYKILLLOG",
+            ServerOpcodeMessage::SMSG_COMPRESSED_UPDATE_OBJECT(_) => "SMSG_COMPRESSED_UPDATE_OBJECT",
             ServerOpcodeMessage::SMSG_PLAY_SPELL_IMPACT(_) => "SMSG_PLAY_SPELL_IMPACT",
             ServerOpcodeMessage::SMSG_EXPLORATION_EXPERIENCE(_) => "SMSG_EXPLORATION_EXPERIENCE",
             ServerOpcodeMessage::MSG_RANDOM_ROLL(_) => "MSG_RANDOM_ROLL_Server",
@@ -13825,6 +13835,12 @@ impl From<SMSG_PLAY_SPELL_VISUAL> for ServerOpcodeMessage {
 impl From<SMSG_PARTYKILLLOG> for ServerOpcodeMessage {
     fn from(c: SMSG_PARTYKILLLOG) -> Self {
         Self::SMSG_PARTYKILLLOG(c)
+    }
+}
+
+impl From<SMSG_COMPRESSED_UPDATE_OBJECT> for ServerOpcodeMessage {
+    fn from(c: SMSG_COMPRESSED_UPDATE_OBJECT) -> Self {
+        Self::SMSG_COMPRESSED_UPDATE_OBJECT(c)
     }
 }
 

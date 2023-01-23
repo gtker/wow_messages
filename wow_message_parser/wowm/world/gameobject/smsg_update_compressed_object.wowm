@@ -1,11 +1,18 @@
-#tag_all versions "1.12";
-
 smsg SMSG_COMPRESSED_UPDATE_OBJECT = 0x1F6 {
     u32 amount_of_objects;
     u8 has_transport;
     Object[amount_of_objects] objects;
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3";
+    compressed = "true";
+    comment = "Compressed version of [SMSG_UPDATE_OBJECT]. Has the same fields when uncompressed";
+}
+
+smsg SMSG_COMPRESSED_UPDATE_OBJECT = 0x1F6 {
+    u32 amount_of_objects;
+    Object[amount_of_objects] objects;
+} {
+    versions = "3.3.5";
     compressed = "true";
     comment = "Compressed version of [SMSG_UPDATE_OBJECT]. Has the same fields when uncompressed";
 }
@@ -151,4 +158,5 @@ test SMSG_COMPRESSED_UPDATE_OBJECT {
   0x4c, 0x30, 0x21
 ] {
     description = "Most minimal package required to load into the world. Also requires a valid [SMSG_TUTORIAL_FLAGS] and [SMSG_LOGIN_VERIFY_WORLD].";
+    versions = "1.12";
 }

@@ -2005,6 +2005,8 @@ pub(crate) mod smsg_clientcache_version;
 pub use smsg_clientcache_version::*;
 pub(crate) mod smsg_complain_result;
 pub use smsg_complain_result::*;
+pub(crate) mod smsg_compressed_update_object;
+pub use smsg_compressed_update_object::*;
 pub(crate) mod smsg_contact_list;
 pub use smsg_contact_list::*;
 pub(crate) mod smsg_convert_rune;
