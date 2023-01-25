@@ -1,7 +1,7 @@
 //! Implementation of the network protocol used between World of Warcraft
 //! [authentication/login](https://wowdev.wiki/Login_Packet) servers
 //! and clients for game versions 1.0.0 (Vanilla) to 3.3.5 (Wrath of the Lich King).
-//! See the [WoWDev Login page](https://wowdev.wiki/Login) for details.
+//! See the [`WoWDev` Login page](https://wowdev.wiki/Login) for details.
 //!
 //! Clients will send the
 //! [protocol version](all::CMD_AUTH_LOGON_CHALLENGE_Client::protocol_version)
@@ -14,7 +14,7 @@
 //!
 //! Notice that the same game version _may_ use different protocol versions for login/reconnecting.
 //! See the
-//! [table on the WoWDev wiki](https://wowdev.wiki/CMD_AUTH_LOGON_CHALLENGE_Client#Protocol_Versions)
+//! [table on the `WoWDev` wiki](https://wowdev.wiki/CMD_AUTH_LOGON_CHALLENGE_Client#Protocol_Versions)
 //! or the table below for further information.
 //!
 //! | Game Version | Login | Reconnect |
@@ -67,8 +67,8 @@
 //!
 //! ## Other Work
 //!
-//! * [vMaNGOS (C++)](https://github.com/vmangos/core/blob/ce164f3eb32c75b244482070fbaf3ada1110e6be/src/realmd/AuthSocket.cpp#L65)
-//! and MaNGOS derivatives in general have a relatively complete list of messages for popular versions,
+//! * [`vMaNGOS` (C++)](https://github.com/vmangos/core/blob/ce164f3eb32c75b244482070fbaf3ada1110e6be/src/realmd/AuthSocket.cpp#L65)
+//! and `MaNGOS` derivatives in general have a relatively complete list of messages for popular versions,
 //! but they are not available as a library.
 //! * [Ember (C++)](https://github.com/EmberEmu/Ember/blob/418aaac1d32a65384cfb399c97640c1f25afa69c/src/login/grunt/client/LoginChallenge.h#L37)
 //! has all messages for 1.12, although some work will probably be required in order to use it as a standalone library.
