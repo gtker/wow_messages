@@ -7,21 +7,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-### Added
+<!-- next-header -->
+## [Unreleased] - ReleaseDate
 
 ### Changed
 
 * BREAKING: Enums will now default to the first enumerator without any fields. If all enumerators have fields the first one will be used.
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [0.2.0] - 2022-10-31
 
@@ -58,5 +49,7 @@ This functionality exposes a difference between the opcode and the body in a way
 
 * Initial release. This is very WIP and things are not guaranteed to be documented or actually work correctly.
 
+<!-- next-url -->
+[Unreleased]: https://github.com/gtker/wow_messages/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/gtker/wow_messages/releases/tag/v0.2.0
 [0.1.0]: https://github.com/gtker/wow_messages/tree/505efadbe332dee2bdd5d321242b7e5d2565d841

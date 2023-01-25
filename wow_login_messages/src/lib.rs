@@ -78,7 +78,6 @@
 //! seems to have most messages in a library format.
 //!
 
-#![doc(html_root_url = "https://docs.rs/wow_login_messages/0.2.0")]
 #![forbid(unsafe_code)]
 #![deny(
     clippy::complexity,
