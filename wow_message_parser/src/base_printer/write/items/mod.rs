@@ -16,10 +16,11 @@ pub(crate) struct Stats {
 use crate::base_printer::data::Data;
 use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use crate::base_printer::writer::Writer;
+use crate::base_printer::Expansion;
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
 use std::path::Path;
 
-pub(crate) fn write_items(directory: &Path, data: &Data) {
+pub(crate) fn write_items(path: &Path, data: &Data) {
     let mut s = Writer::new();
 
     match &data.items {
@@ -28,7 +29,6 @@ pub(crate) fn write_items(directory: &Path, data: &Data) {
         Items::Wrath(v) => wrath(&mut s, v),
     }
 
-    let path = directory.join("item").join("data.rs");
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
@@ -94,7 +94,33 @@ fn string_format(v: &str) -> String {
     format!("\"{}\",", v.replace('"', "\\\""))
 }
 
+fn includes(s: &mut Writer, expansion: Expansion) {
+    s.wln(format!(
+        "use wow_world_base::{}::{{",
+        expansion.as_module_string()
+    ));
+    s.inc_indent();
+    for ty in [
+        "AllowedClass",
+        "AllowedRace",
+        "Bonding",
+        "InventoryType",
+        "Item",
+        "ItemClassAndSubClass",
+        "ItemQuality",
+        "SpellSchool",
+        "SpellTriggerType",
+    ] {
+        s.wln(format!("{},", ty));
+    }
+
+    s.dec_indent();
+    s.wln("};");
+}
+
 fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
+    includes(s, Expansion::Vanilla);
+
     s.wln("pub const ITEMS: &[Item] = &[");
     s.inc_indent();
 
@@ -323,6 +349,8 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
 }
 
 fn tbc(s: &mut Writer, items: &[TbcItem]) {
+    includes(s, Expansion::BurningCrusade);
+
     s.wln("pub const ITEMS: &[Item] = &[");
     s.inc_indent();
 
@@ -527,6 +555,8 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
 }
 
 fn wrath(s: &mut Writer, items: &[WrathItem]) {
+    includes(s, Expansion::WrathOfTheLichKing);
+
     s.wln("pub const ITEMS: &[Item] = &[");
     s.inc_indent();
 

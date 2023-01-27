@@ -34,6 +34,14 @@ impl Expansion {
             }
         })
     }
+
+    pub fn as_module_string(&self) -> &'static str {
+        match self {
+            Expansion::Vanilla => "vanilla",
+            Expansion::BurningCrusade => "tbc",
+            Expansion::WrathOfTheLichKing => "wrath",
+        }
+    }
 }
 
 pub(crate) fn print_base() {
