@@ -31,6 +31,7 @@ mod traits;
 pub(crate) mod util;
 #[allow(unused, clippy::complexity, clippy::bool_to_int_with_if)]
 #[allow(clippy::large_enum_variant)]
+#[allow(clippy::enum_variant_names)]
 mod world;
 
 pub use traits::*;
