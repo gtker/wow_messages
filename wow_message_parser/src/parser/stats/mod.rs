@@ -24,7 +24,6 @@ pub enum Reason {
     ElseIfForDifferentVariable,
     NotImplementedInAnyEmulator,
     SelfSizeStruct,
-    RequiresAuraMask,
     RequiresNotEqualGuid,
     ComplexImplementation,
     Custom(&'static str),
@@ -111,7 +110,6 @@ impl Data {
             Reason::RequiresNestedIf => "Requires nested if",
             Reason::ElseIfForDifferentVariable => "Requires else if for different variable",
             Reason::SelfSizeStruct => "Requires self.size for struct",
-            Reason::RequiresAuraMask => "Requires AuraMask",
             Reason::RequiresNotEqualGuid => "Requires != 0 for Guid type",
             Reason::ComplexImplementation => "Complex implementation",
         })
@@ -127,10 +125,6 @@ impl Data {
 
     pub(crate) const fn nyi(name: &'static str, opcode: usize) -> Self {
         Self::direct(name, opcode, Reason::NotImplementedInAnyEmulator)
-    }
-
-    pub(crate) const fn aura_mask(name: &'static str, opcode: usize) -> Self {
-        Self::direct(name, opcode, Reason::RequiresAuraMask)
     }
 
     pub(crate) const fn complex(name: &'static str, opcode: usize) -> Self {
