@@ -38,27 +38,27 @@ impl DateTime {
         self.inner
     }
 
-    fn minutes(&self) -> u8 {
+    pub const fn minutes(&self) -> u8 {
         minutes(self.inner) as u8
     }
 
-    fn hours(&self) -> u8 {
+    pub const fn hours(&self) -> u8 {
         hours(self.inner) as u8
     }
 
-    fn weekday(&self) -> Weekday {
+    pub fn weekday(&self) -> Weekday {
         Weekday::try_from(weekday(self.inner)).unwrap()
     }
 
-    fn month_day(&self) -> u8 {
+    pub const fn month_day(&self) -> u8 {
         month_day(self.inner) as u8
     }
 
-    fn month(&self) -> Month {
+    pub fn month(&self) -> Month {
         Month::try_from(month(self.inner)).unwrap()
     }
 
-    fn years_after_2000(&self) -> u8 {
+    pub const fn years_after_2000(&self) -> u8 {
         years_after_2000(self.inner) as u8
     }
 }
@@ -92,27 +92,27 @@ impl TryFrom<u32> for DateTime {
     }
 }
 
-fn minutes(v: u32) -> u32 {
+const fn minutes(v: u32) -> u32 {
     v & 0b111111
 }
 
-fn hours(v: u32) -> u32 {
+const fn hours(v: u32) -> u32 {
     (v >> 6) & 0b11111
 }
 
-fn weekday(v: u32) -> u32 {
+const fn weekday(v: u32) -> u32 {
     (v >> 11) & 0b111
 }
 
-fn month_day(v: u32) -> u32 {
+const fn month_day(v: u32) -> u32 {
     (v >> 14) & 0b111111
 }
 
-fn month(v: u32) -> u32 {
+const fn month(v: u32) -> u32 {
     (v >> 20) & 0b1111
 }
 
-fn years_after_2000(v: u32) -> u32 {
+const fn years_after_2000(v: u32) -> u32 {
     (v >> 24) & 0b11111111
 }
 

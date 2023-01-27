@@ -1,4 +1,3 @@
-#![allow(dead_code)]
 #![forbid(unsafe_code)]
 #![deny(
     clippy::complexity,
@@ -28,8 +27,9 @@ pub mod errors;
 pub mod helper;
 mod manual;
 mod traits;
+#[allow(dead_code)]
 pub(crate) mod util;
-#[allow(unused, clippy::complexity, clippy::bool_to_int_with_if)]
+#[allow(unused, clippy::complexity, clippy::bool_to_int_with_if, dead_code)]
 #[allow(clippy::large_enum_variant)]
 #[allow(clippy::enum_variant_names)]
 mod world;

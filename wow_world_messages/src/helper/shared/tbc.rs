@@ -6,10 +6,8 @@ use std::pin::Pin;
 #[cfg(feature = "encryption")]
 use wow_srp::tbc_header::EncrypterHalf;
 
-const SERVER_OPCODE_LENGTH: u16 = 2;
 const SIZE_LENGTH: u16 = 2;
 const SERVER_HEADER_LENGTH: u16 = 4;
-const CLIENT_OPCODE_LENGTH: u16 = 4;
 const CLIENT_HEADER_LENGTH: u16 = 6;
 
 fn get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {

@@ -24,14 +24,6 @@ pub fn item_to_name_query_response(item: &Item) -> SMSG_ITEM_NAME_QUERY_RESPONSE
 
 impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     fn from(v: &Item) -> Self {
-        const ITEM_MOD_MANA: u32 = 0;
-        const ITEM_MOD_HEALTH: u32 = 1;
-        const ITEM_MOD_AGILITY: u32 = 3;
-        const ITEM_MOD_STRENGTH: u32 = 4;
-        const ITEM_MOD_INTELLECT: u32 = 5;
-        const ITEM_MOD_SPIRIT: u32 = 6;
-        const ITEM_MOD_STAMINA: u32 = 7;
-
         Self {
             item: v.entry,
             found: Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {

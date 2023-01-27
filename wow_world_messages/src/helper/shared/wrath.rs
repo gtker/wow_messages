@@ -6,12 +6,10 @@ use std::pin::Pin;
 #[cfg(feature = "encryption")]
 use wow_srp::wrath_header::{ClientEncrypterHalf, ServerEncrypterHalf};
 
-const SERVER_OPCODE_LENGTH: u16 = 2;
 const MINIMUM_SIZE_LENGTH: u32 = 2;
 const MAXIMUM_SIZE_LENGTH: u32 = 2;
 const MINIMUM_SERVER_HEADER_LENGTH: u16 = 4;
 const MAXIMUM_SERVER_HEADER_LENGTH: u16 = 5;
-const CLIENT_OPCODE_LENGTH: u16 = 4;
 const CLIENT_HEADER_LENGTH: u16 = 6;
 
 const LARGE_MESSAGE_THRESHOLD: u32 = 0x7FFF;
