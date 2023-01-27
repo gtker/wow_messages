@@ -1,23 +1,21 @@
-mod conversions;
+pub(crate) mod conversions;
 
 use crate::base_printer::data::items::Items;
-use wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 
 pub(crate) struct Stats {
-    strength: i32,
-    agility: i32,
-    stamina: i32,
-    intellect: i32,
-    spirit: i32,
-    health: i32,
-    mana: i32,
+    pub strength: i32,
+    pub agility: i32,
+    pub stamina: i32,
+    pub intellect: i32,
+    pub spirit: i32,
+    pub health: i32,
+    pub mana: i32,
 }
 
 use crate::base_printer::data::items::tbc::TbcItem;
 use crate::base_printer::data::items::vanilla::VanillaItem;
 use crate::base_printer::data::items::wrath::WrathItem;
 use crate::base_printer::data::Data;
-use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use crate::base_printer::writer::Writer;
 use crate::base_printer::Expansion;
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
@@ -134,51 +132,24 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         s.w("Item::new(");
 
         s.w_no_indent(format!("{},", item.entry,));
-        const CLASS_CONSUMABLE: i32 = 0;
-        const CLASS_TRADE_GOODS: i32 = 7;
-        const CLASS_JUNK: i32 = 15;
-
-        let sub_class =
-            // The game does not recognize consumables other than class 0 and subclass 0,
-            // but the cmangos database uses these for some reason
-            if item.class == CLASS_CONSUMABLE
-                // The game does not recognize trade goods for greater than 3 (Devices)
-                // but the cmangos database uses these for some reason
-                || item.class == CLASS_TRADE_GOODS && item.sub_class > 3
-                // The game does not recognize junk subclasses other than class 15 and subclass 0,
-                // but the cmangos database uses these for some reason
-                || item.class == CLASS_JUNK
-            {
-                0
-            } else {
-                item.sub_class
-            };
 
         s.w_no_indent(format!(
             "ItemClassAndSubClass::{},",
-            match wow_world_base::vanilla::ItemClassAndSubClass::try_from(
-                (sub_class as u64) << 32 | item.class as u64,
-            ) {
-                Ok(e) => e,
-                Err(e) => panic!("{:#X}", e.value),
-            }
+            item.class_and_sub_class
         ));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid,));
-        s.w_no_indent(format!(
-            "ItemQuality::{},",
-            wow_world_base::vanilla::ItemQuality::try_from(item.quality as u8).unwrap()
-        ));
+        s.w_no_indent(format!("ItemQuality::{},", item.quality));
         s.w_no_indent(format!("{},", item.flags,));
         s.w_no_indent(format!("{},", item.buy_count,));
         s.w_no_indent(format!("{},", item.buy_price,));
         s.w_no_indent(format!("{},", item.sell_price,));
+        s.w_no_indent(format!("InventoryType::{},", item.inventory_type));
         s.w_no_indent(format!(
-            "InventoryType::{},",
-            wow_world_base::vanilla::InventoryType::try_from(item.inventory_type as u8).unwrap()
+            "AllowedClass::new({}),",
+            item.allowed_class.as_int(),
         ));
-        s.w_no_indent(format!("AllowedClass::new({}),", item.allowed_class,));
-        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race,));
+        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race.as_int(),));
         s.w_no_indent(format!("{},", item.item_level,));
         s.w_no_indent(format!("{},", item.required_level,));
         s.w_no_indent(format!("{},", item.required_skill,));
@@ -192,66 +163,29 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         s.w_no_indent(format!("{},", item.stackable,));
         s.w_no_indent(format!("{},", item.container_slots,));
 
-        let stats = vanilla_stat_types_to_stats(
-            item.stat_type1,
-            item.stat_value1,
-            item.stat_type2,
-            item.stat_value2,
-            item.stat_type3,
-            item.stat_value3,
-            item.stat_type4,
-            item.stat_value4,
-            item.stat_type5,
-            item.stat_value5,
-            item.stat_type6,
-            item.stat_value6,
-            item.stat_type7,
-            item.stat_value7,
-            item.stat_type8,
-            item.stat_value8,
-            item.stat_type9,
-            item.stat_value9,
-            item.stat_type10,
-            item.stat_value10,
-        );
-        s.w_no_indent(format!("{},", stats.mana));
-        s.w_no_indent(format!("{},", stats.health));
-        s.w_no_indent(format!("{},", stats.agility));
-        s.w_no_indent(format!("{},", stats.strength));
-        s.w_no_indent(format!("{},", stats.stamina));
-        s.w_no_indent(format!("{},", stats.intellect));
-        s.w_no_indent(format!("{},", stats.spirit));
+        s.w_no_indent(format!("{},", item.mana));
+        s.w_no_indent(format!("{},", item.health));
+        s.w_no_indent(format!("{},", item.agility));
+        s.w_no_indent(format!("{},", item.strength));
+        s.w_no_indent(format!("{},", item.stamina));
+        s.w_no_indent(format!("{},", item.intellect));
+        s.w_no_indent(format!("{},", item.spirit));
 
         s.w_no_indent(float_format(item.dmg_min1));
         s.w_no_indent(float_format(item.dmg_max1));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type1 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type1));
         s.w_no_indent(float_format(item.dmg_min2));
         s.w_no_indent(float_format(item.dmg_max2));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type2 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type2));
         s.w_no_indent(float_format(item.dmg_min3));
         s.w_no_indent(float_format(item.dmg_max3));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type3 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type3));
         s.w_no_indent(float_format(item.dmg_min4));
         s.w_no_indent(float_format(item.dmg_max4));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type4 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type4));
         s.w_no_indent(float_format(item.dmg_min5));
         s.w_no_indent(float_format(item.dmg_max5));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type5 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type5));
         s.w_no_indent(format!("{},", item.armor,));
         s.w_no_indent(format!("{},", item.holy_res,));
         s.w_no_indent(format!("{},", item.fire_res,));
@@ -263,64 +197,41 @@ fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
         s.w_no_indent(format!("{},", item.ammo_type,));
         s.w_no_indent(float_format(item.ranged_mod_range));
         s.w_no_indent(format!("{},", item.spell_id_1,));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_1 as u8)
-                .unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_1));
         s.w_no_indent(format!("{},", item.spell_charges_1,));
         s.w_no_indent(float_format(item.spell_ppm_rate_1));
         s.w_no_indent(format!("{},", item.spell_cooldown_1,));
         s.w_no_indent(format!("{},", item.spell_category_1,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_1,));
         s.w_no_indent(format!("{},", item.spell_id_2,));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_2 as u8)
-                .unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_2));
         s.w_no_indent(format!("{},", item.spell_charges_2,));
         s.w_no_indent(float_format(item.spell_ppm_rate_2));
         s.w_no_indent(format!("{},", item.spell_cooldown_2,));
         s.w_no_indent(format!("{},", item.spell_category_2,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_2,));
         s.w_no_indent(format!("{},", item.spell_id_3,));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_3 as u8)
-                .unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_3));
         s.w_no_indent(format!("{},", item.spell_charges_3,));
         s.w_no_indent(float_format(item.spell_ppm_rate_3));
         s.w_no_indent(format!("{},", item.spell_cooldown_3,));
         s.w_no_indent(format!("{},", item.spell_category_3,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_3,));
         s.w_no_indent(format!("{},", item.spell_id_4,));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_4 as u8)
-                .unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_4));
         s.w_no_indent(format!("{},", item.spell_charges_4,));
         s.w_no_indent(float_format(item.spell_ppm_rate_4));
         s.w_no_indent(format!("{},", item.spell_cooldown_4,));
         s.w_no_indent(format!("{},", item.spell_category_4,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_4,));
         s.w_no_indent(format!("{},", item.spell_id_5,));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::vanilla::SpellTriggerType::try_from(item.spell_trigger_5 as u8)
-                .unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_5));
         s.w_no_indent(format!("{},", item.spell_charges_5,));
         s.w_no_indent(float_format(item.spell_ppm_rate_5));
         s.w_no_indent(format!("{},", item.spell_cooldown_5,));
         s.w_no_indent(format!("{},", item.spell_category_5,));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_5,));
-        s.w_no_indent(format!(
-            "Bonding::{:?},",
-            wow_world_base::vanilla::Bonding::try_from(item.bonding as u8).unwrap()
-        ));
+        s.w_no_indent(format!("Bonding::{:?},", item.bonding));
         s.w_no_indent(string_format(&item.description));
         s.w_no_indent(format!("{},", item.page_text,));
         s.w_no_indent(format!("{},", item.language_id,));
@@ -365,28 +276,22 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.entry));
         s.w_no_indent(format!(
             "ItemClassAndSubClass::{},",
-            wow_world_base::tbc::ItemClassAndSubClass::try_from(
-                (item.subclass as u64) << 32 | item.class as u64,
-            )
-            .unwrap()
+            item.class_and_sub_class,
         ));
         s.w_no_indent(format!("{},", item.unk0));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid));
-        s.w_no_indent(format!(
-            "ItemQuality::{},",
-            wow_world_base::tbc::ItemQuality::try_from(item.quality as u8).unwrap()
-        ));
+        s.w_no_indent(format!("ItemQuality::{},", item.quality));
         s.w_no_indent(format!("{},", item.flags));
         s.w_no_indent(format!("{},", item.buy_count));
         s.w_no_indent(format!("{},", item.buy_price));
         s.w_no_indent(format!("{},", item.sell_price));
+        s.w_no_indent(format!("InventoryType::{},", item.inventory_type));
         s.w_no_indent(format!(
-            "InventoryType::{},",
-            wow_world_base::tbc::InventoryType::try_from(item.inventory_type as u8).unwrap()
+            "AllowedClass::new({}),",
+            item.allowed_class.as_int()
         ));
-        s.w_no_indent(format!("AllowedClass::new({}),", item.allowed_class));
-        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race));
+        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race.as_int()));
         s.w_no_indent(format!("{},", item.item_level));
         s.w_no_indent(format!("{},", item.required_level));
         s.w_no_indent(format!("{},", item.required_skill));
@@ -423,34 +328,19 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
 
         s.w_no_indent(float_format(item.dmg_min1));
         s.w_no_indent(float_format(item.dmg_max1));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type1 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type1));
         s.w_no_indent(float_format(item.dmg_min2));
         s.w_no_indent(float_format(item.dmg_max2));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type2 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type2));
         s.w_no_indent(float_format(item.dmg_min3));
         s.w_no_indent(float_format(item.dmg_max3));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type3 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type3));
         s.w_no_indent(float_format(item.dmg_min4));
         s.w_no_indent(float_format(item.dmg_max4));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type4 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type4));
         s.w_no_indent(float_format(item.dmg_min5));
         s.w_no_indent(float_format(item.dmg_max5));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type5 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type5));
         s.w_no_indent(format!("{},", item.armor));
         s.w_no_indent(format!("{},", item.holy_res));
         s.w_no_indent(format!("{},", item.fire_res));
@@ -462,59 +352,41 @@ fn tbc(s: &mut Writer, items: &[TbcItem]) {
         s.w_no_indent(format!("{},", item.ammo_type));
         s.w_no_indent(float_format(item.ranged_mod_range));
         s.w_no_indent(format!("{},", item.spell_id_1));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_1 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_1));
         s.w_no_indent(format!("{},", item.spell_charges_1));
         s.w_no_indent(float_format(item.spell_ppm_rate_1));
         s.w_no_indent(format!("{},", item.spell_cooldown_1));
         s.w_no_indent(format!("{},", item.spell_category_1));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_1));
         s.w_no_indent(format!("{},", item.spell_id_2));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_2 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_2));
         s.w_no_indent(format!("{},", item.spell_charges_2));
         s.w_no_indent(float_format(item.spell_ppm_rate_2));
         s.w_no_indent(format!("{},", item.spell_cooldown_2));
         s.w_no_indent(format!("{},", item.spell_category_2));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_2));
         s.w_no_indent(format!("{},", item.spell_id_3));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_3 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_3));
         s.w_no_indent(format!("{},", item.spell_charges_3));
         s.w_no_indent(float_format(item.spell_ppm_rate_3));
         s.w_no_indent(format!("{},", item.spell_cooldown_3));
         s.w_no_indent(format!("{},", item.spell_category_3));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_3));
         s.w_no_indent(format!("{},", item.spell_id_4));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_4 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_4));
         s.w_no_indent(format!("{},", item.spell_charges_4));
         s.w_no_indent(float_format(item.spell_ppm_rate_4));
         s.w_no_indent(format!("{},", item.spell_cooldown_4));
         s.w_no_indent(format!("{},", item.spell_category_4));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_4));
         s.w_no_indent(format!("{},", item.spell_id_5));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::tbc::SpellTriggerType::try_from(item.spell_trigger_5 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_5));
         s.w_no_indent(format!("{},", item.spell_charges_5));
         s.w_no_indent(float_format(item.spell_ppm_rate_5));
         s.w_no_indent(format!("{},", item.spell_cooldown_5));
         s.w_no_indent(format!("{},", item.spell_category_5));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_5));
-        s.w_no_indent(format!(
-            "Bonding::{:?},",
-            wow_world_base::tbc::Bonding::try_from(item.bonding as u8).unwrap()
-        ));
+        s.w_no_indent(format!("Bonding::{:?},", item.bonding));
         s.w_no_indent(string_format(&item.description));
         s.w_no_indent(format!("{},", item.page_text));
         s.w_no_indent(format!("{},", item.language_id));
@@ -572,29 +444,23 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.entry));
         s.w_no_indent(format!(
             "ItemClassAndSubClass::{},",
-            wow_world_base::wrath::ItemClassAndSubClass::try_from(
-                (item.subclass as u64) << 32 | item.class as u64,
-            )
-            .unwrap()
+            item.class_and_subclass,
         ));
         s.w_no_indent(format!("{},", item.unk0));
         s.w_no_indent(string_format(&item.name));
         s.w_no_indent(format!("{},", item.displayid));
-        s.w_no_indent(format!(
-            "ItemQuality::{},",
-            wow_world_base::wrath::ItemQuality::try_from(item.quality as u8).unwrap()
-        ));
+        s.w_no_indent(format!("ItemQuality::{},", item.quality));
         s.w_no_indent(format!("{},", item.flags));
         s.w_no_indent(format!("{},", item.flags2));
         s.w_no_indent(format!("{},", item.buy_count));
         s.w_no_indent(format!("{},", item.buy_price));
         s.w_no_indent(format!("{},", item.sell_price));
+        s.w_no_indent(format!("InventoryType::{},", item.inventory_type));
         s.w_no_indent(format!(
-            "InventoryType::{},",
-            wow_world_base::wrath::InventoryType::try_from(item.inventory_type as u8).unwrap()
+            "AllowedClass::new({}),",
+            item.allowed_class.as_int()
         ));
-        s.w_no_indent(format!("AllowedClass::new({}),", item.allowed_class));
-        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race));
+        s.w_no_indent(format!("AllowedRace::new({}),", item.allowed_race.as_int()));
         s.w_no_indent(format!("{},", item.item_level));
         s.w_no_indent(format!("{},", item.required_level));
         s.w_no_indent(format!("{},", item.required_skill));
@@ -634,16 +500,10 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.scaling_stat_value));
         s.w_no_indent(float_format(item.dmg_min1));
         s.w_no_indent(float_format(item.dmg_max1));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type1 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type1));
         s.w_no_indent(float_format(item.dmg_min2));
         s.w_no_indent(float_format(item.dmg_max2));
-        s.w_no_indent(format!(
-            "SpellSchool::{},",
-            SpellSchool::try_from(item.dmg_type2 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellSchool::{},", item.dmg_type2));
         s.w_no_indent(format!("{},", item.armor));
         s.w_no_indent(format!("{},", item.holy_res));
         s.w_no_indent(format!("{},", item.fire_res));
@@ -655,59 +515,41 @@ fn wrath(s: &mut Writer, items: &[WrathItem]) {
         s.w_no_indent(format!("{},", item.ammo_type));
         s.w_no_indent(float_format(item.ranged_mod_range));
         s.w_no_indent(format!("{},", item.spell_id_1));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_1 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_1));
         s.w_no_indent(format!("{},", item.spell_charges_1));
         s.w_no_indent(float_format(item.spell_ppm_rate_1));
         s.w_no_indent(format!("{},", item.spell_cooldown_1));
         s.w_no_indent(format!("{},", item.spell_category_1));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_1));
         s.w_no_indent(format!("{},", item.spell_id_2));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_2 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_2));
         s.w_no_indent(format!("{},", item.spell_charges_2));
         s.w_no_indent(float_format(item.spell_ppm_rate_2));
         s.w_no_indent(format!("{},", item.spell_cooldown_2));
         s.w_no_indent(format!("{},", item.spell_category_2));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_2));
         s.w_no_indent(format!("{},", item.spell_id_3));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_3 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_3));
         s.w_no_indent(format!("{},", item.spell_charges_3));
         s.w_no_indent(float_format(item.spell_ppm_rate_3));
         s.w_no_indent(format!("{},", item.spell_cooldown_3));
         s.w_no_indent(format!("{},", item.spell_category_3));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_3));
         s.w_no_indent(format!("{},", item.spell_id_4));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_4 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_4));
         s.w_no_indent(format!("{},", item.spell_charges_4));
         s.w_no_indent(float_format(item.spell_ppm_rate_4));
         s.w_no_indent(format!("{},", item.spell_cooldown_4));
         s.w_no_indent(format!("{},", item.spell_category_4));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_4));
         s.w_no_indent(format!("{},", item.spell_id_5));
-        s.w_no_indent(format!(
-            "SpellTriggerType::{},",
-            wow_world_base::wrath::SpellTriggerType::try_from(item.spell_trigger_5 as u8).unwrap()
-        ));
+        s.w_no_indent(format!("SpellTriggerType::{},", item.spell_trigger_5));
         s.w_no_indent(format!("{},", item.spell_charges_5));
         s.w_no_indent(float_format(item.spell_ppm_rate_5));
         s.w_no_indent(format!("{},", item.spell_cooldown_5));
         s.w_no_indent(format!("{},", item.spell_category_5));
         s.w_no_indent(format!("{},", item.spell_category_cooldown_5));
-        s.w_no_indent(format!(
-            "Bonding::{:?},",
-            wow_world_base::wrath::Bonding::try_from(item.bonding as u8).unwrap()
-        ));
+        s.w_no_indent(format!("Bonding::{:?},", item.bonding));
         s.w_no_indent(string_format(&item.description));
         s.w_no_indent(format!("{},", item.page_text));
         s.w_no_indent(format!("{},", item.language_id));
