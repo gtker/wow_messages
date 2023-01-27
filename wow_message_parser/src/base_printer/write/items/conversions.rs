@@ -53,10 +53,7 @@ pub(crate) fn vanilla_stat_types_to_stats(
     const ITEM_MOD_SPIRIT: i32 = 6;
     const ITEM_MOD_STAMINA: i32 = 7;
 
-    for stat in stats {
-        let ty = stat.0;
-        let value = stat.1;
-
+    for (ty, value) in stats {
         match ty {
             ITEM_MOD_MANA => b.mana += value,
             ITEM_MOD_HEALTH => b.health += value,
