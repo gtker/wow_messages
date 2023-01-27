@@ -70,7 +70,7 @@ impl Display for ExpectedOpcodeError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Opcode(opcode) => {
-                f.write_str(&format!("unexpected opcode found: '{:#06X}'", opcode))
+                f.write_str(&format!("unexpected opcode found: '{opcode:#06X}'"))
             }
             Self::Parse(i) => i.fmt(f),
         }

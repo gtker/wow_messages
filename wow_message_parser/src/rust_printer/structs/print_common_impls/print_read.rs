@@ -49,7 +49,7 @@ fn print_read_array_fixed(
     if inner_is_constant_sized {
         s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
     } else {
-        s.open_curly(format!("for i in 0..{size}", size = size));
+        s.open_curly(format!("for i in 0..{size}"));
     }
 
     match array.ty() {
@@ -96,8 +96,6 @@ fn print_read_array_fixed(
         ArrayType::CString => {
             s.wln(format!(
                 "let s = crate::util::{prefix}read_c_string_to_vec(r){postfix}?;",
-                prefix = prefix,
-                postfix = postfix,
             ));
             match array.size() {
                 ArraySize::Fixed(_) => s.wln(format!(
@@ -111,8 +109,6 @@ fn print_read_array_fixed(
         ArrayType::Guid => {
             s.wln(format!(
                 "*i = Guid::{prefix}read(r){postfix}?;",
-                prefix = prefix,
-                postfix = postfix,
             ));
         }
         ArrayType::PackedGuid => {
@@ -191,8 +187,7 @@ fn print_read_array(
             };
             let loop_condition = if let Some(decompressed_size_field) = d.tags().compressed() {
                 format!(
-                    "while decoder.total_out() < ({} as u64)",
-                    decompressed_size_field
+                    "while decoder.total_out() < ({decompressed_size_field} as u64)"
                 )
             } else {
                 "while current_size < (body_size as usize)".to_string()
@@ -245,8 +240,6 @@ fn print_array_ty(
         ArrayType::CString => {
             s.wln(format!(
                 "let s = crate::util::{prefix}read_c_string_to_vec(r){postfix}?;",
-                prefix = prefix,
-                postfix = postfix,
             ));
             s.wln(format!(
                 "{name}.push(String::from_utf8(s)?);",

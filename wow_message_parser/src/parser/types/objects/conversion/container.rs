@@ -410,7 +410,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                         "GAMEOBJECT" => UpdateMaskType::GameObject,
                         "DYNAMICOBJECT" => UpdateMaskType::DynamicObject,
                         "CORPSE" => UpdateMaskType::Corpse,
-                        _ => panic!("invalid update mask type: '{}'", ty),
+                        _ => panic!("invalid update mask type: '{ty}'"),
                     };
 
                     let value = match &m_inner.value {
@@ -485,7 +485,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
         } else if value == "FALSE" {
             false
         } else {
-            panic!("incorrect boolean value: '{}'", value)
+            panic!("incorrect boolean value: '{value}'")
         }),
         ParsedType::Array(array) => {
             assert!(value.contains('['));

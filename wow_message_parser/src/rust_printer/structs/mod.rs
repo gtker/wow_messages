@@ -50,17 +50,16 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
     let import_path = get_import_path(version);
 
     if e.contains_aura_mask() {
-        s.wln(format!("use {}::AuraMask;", import_path));
+        s.wln(format!("use {import_path}::AuraMask;"));
     }
 
     if e.contains_update_mask() {
-        s.wln(format!("use {}::UpdateMask;", import_path));
+        s.wln(format!("use {import_path}::UpdateMask;"));
     }
 
     if e.contains_achievement_array() {
         s.wln(format!(
-            "use {}::{{AchievementDoneArray, AchievementInProgressArray}};",
-            import_path
+            "use {import_path}::{{AchievementDoneArray, AchievementInProgressArray}};"
         ));
     }
 
@@ -91,10 +90,10 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
 
     match e.container_type() {
         ContainerType::CLogin(_) => {
-            s.wln(format!("use crate::{};", CLIENT_MESSAGE_TRAIT_NAME));
+            s.wln(format!("use crate::{CLIENT_MESSAGE_TRAIT_NAME};"));
         }
         ContainerType::SLogin(_) => {
-            s.wln(format!("use crate::{};", SERVER_MESSAGE_TRAIT_NAME));
+            s.wln(format!("use crate::{SERVER_MESSAGE_TRAIT_NAME};"));
         }
         _ => {}
     }

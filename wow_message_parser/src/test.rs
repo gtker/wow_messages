@@ -56,13 +56,13 @@ fn tcheck(s: &Writer, name: &str) {
 }
 
 fn check(s: &Writer, name: &str) {
-    let expected = read_to_string(Path::new(&format!("tests/{}.txt", name))).unwrap();
+    let expected = read_to_string(Path::new(&format!("tests/{name}.txt"))).unwrap();
 
     assert_eq!(s.proper_as_str(), expected);
 }
 
 fn overwrite(s: &Writer, name: &str) {
-    write_string_to_file(s.proper_as_str(), Path::new(&format!("tests/{}.txt", name)));
+    write_string_to_file(s.proper_as_str(), Path::new(&format!("tests/{name}.txt")));
 }
 
 const VERSION: Version = Version::World(MajorWorldVersion::Vanilla);

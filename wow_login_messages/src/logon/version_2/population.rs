@@ -41,7 +41,7 @@ impl std::fmt::Display for Population {
             Self::GreenRecommended => f.write_str("GreenRecommended"),
             Self::RedFull => f.write_str("RedFull"),
             Self::BlueRecommended => f.write_str("BlueRecommended"),
-            Self::Other(v) => f.write_fmt(format_args!("Other({})", v)),
+            Self::Other(v) => f.write_fmt(format_args!("Other({v})")),
         }
     }
 }

@@ -162,7 +162,7 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
             Type::PackedGuid | Type::Guid => {
                 name += "_guid";
             }
-            _ => panic!("unknown got type '{:#?}'", ty),
+            _ => panic!("unknown got type '{ty:#?}'"),
         }
     } else if name == "emote" {
         match ty {
@@ -178,5 +178,5 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
         name += "_int";
     }
 
-    format!("hf_woww_{}", name)
+    format!("hf_woww_{name}")
 }

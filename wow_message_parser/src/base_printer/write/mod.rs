@@ -105,7 +105,7 @@ pub(crate) fn write_skills(directory: &Path, data: &Data, expansion: Expansion) 
                 ),
             };
 
-            s.wln(format!("Skill::{}, // {}", skill, comment));
+            s.wln(format!("Skill::{skill}, // {comment}"));
         }
 
         s.dec_indent();
@@ -339,7 +339,7 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
                     s.wln("Trigger::Inn,");
                 }
                 Trigger::Quest { quest, .. } => {
-                    s.wln(format!("Trigger::Quest {{ quest_id: {} }},", quest))
+                    s.wln(format!("Trigger::Quest {{ quest_id: {quest} }},"))
                 }
                 Trigger::Teleport {
                     map,
@@ -367,7 +367,7 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
                         use std::fmt::Write;
                         let mut s = "Some(&[".to_string();
                         for key in heroic_keys {
-                            write!(s, "{}, ", key).unwrap();
+                            write!(s, "{key}, ").unwrap();
                         }
                         write!(s, "])").unwrap();
                         s

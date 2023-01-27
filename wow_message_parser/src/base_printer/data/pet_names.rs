@@ -20,7 +20,7 @@ impl Pet {
             1863 => Pet::Succubus,
             17252 => Pet::Felguard,
             26125 => Pet::RisenGhoul,
-            v => panic!("Invalid warlock pet '{}'", v),
+            v => panic!("Invalid warlock pet '{v}'"),
         }
     }
 }

@@ -68,29 +68,29 @@ fn print_container_example_array(
                 let bytes = bytes.take(t.size() as usize);
 
                 for b in bytes {
-                    s.w_break_at(format!("{}, ", b));
+                    s.w_break_at(format!("{b}, "));
                 }
             }
             ArrayType::CString => {
                 let mut b = bytes.next().unwrap();
                 while *b != 0 {
-                    s.w_break_at(format!("{}, ", b));
+                    s.w_break_at(format!("{b}, "));
                     b = bytes.next().unwrap();
                 }
-                s.w_break_at(format!("{}, ", b));
+                s.w_break_at(format!("{b}, "));
             }
             ArrayType::Guid => {
                 let bytes = bytes.take(core::mem::size_of::<u64>());
 
                 for b in bytes {
-                    s.w_break_at(format!("{}, ", b));
+                    s.w_break_at(format!("{b}, "));
                 }
             }
             ArrayType::PackedGuid => {
                 let mask = bytes.next().unwrap();
                 let bytes = bytes.take(mask.count_ones() as _);
                 for b in bytes {
-                    s.w_break_at(format!("{}, ", b));
+                    s.w_break_at(format!("{b}, "));
                 }
             }
             ArrayType::Struct(c) => {
@@ -127,7 +127,7 @@ fn print_container_example_definition(
             values.insert(d.name().to_string(), value);
 
             for b in bytes {
-                s.w(format!("{}, ", b));
+                s.w(format!("{b}, "));
             }
         }
         Type::DateTime => {
@@ -144,17 +144,17 @@ fn print_container_example_definition(
         }
         Type::PackedGuid => {
             let mask = bytes.next().unwrap();
-            s.w(format!("{}, ", mask));
+            s.w(format!("{mask}, "));
             let bytes = bytes.take(mask.count_ones() as _);
             s.bytes(bytes.into_iter());
         }
         Type::CString => {
             let mut b = bytes.next().unwrap();
             while *b != 0 {
-                s.w(format!("{}, ", b));
+                s.w(format!("{b}, "));
                 b = bytes.next().unwrap();
             }
-            s.w(format!("{}, ", b));
+            s.w(format!("{b}, "));
         }
         Type::String => {
             let length = *(bytes.take(1).collect::<Vec<_>>()[0]) as usize;
@@ -171,7 +171,7 @@ fn print_container_example_definition(
             let value = get_integer_value(ty, bytes.as_slice());
             values.insert(d.name().to_string(), value);
             for b in bytes {
-                s.w(format!("{}, ", b));
+                s.w(format!("{b}, "));
             }
 
             let c = match e.definer_ty() {
@@ -179,7 +179,7 @@ fn print_container_example_definition(
                     if let Some(value) = e.get_field_with_value(value) {
                         let name = value.name();
                         let value = value.value().original();
-                        format!("{} {} ({})", comment, name, value)
+                        format!("{comment} {name} ({value})")
                     } else {
                         panic!(
                             "unable to find field with value '{}' for variable: '{}'",
@@ -202,7 +202,7 @@ fn print_container_example_definition(
                         t.push_str(v.name());
                     }
 
-                    write!(t, " ({})", value).unwrap();
+                    write!(t, " ({value})").unwrap();
                     t
                 }
             };
@@ -220,7 +220,7 @@ fn print_container_example_definition(
         Type::UpdateMask => {
             s.wln("// UpdateMask");
             let amount_of_blocks = bytes.next().unwrap();
-            s.wln(format!("{}, // amount_of_blocks", amount_of_blocks));
+            s.wln(format!("{amount_of_blocks}, // amount_of_blocks"));
 
             let blocks: Vec<&u8> = bytes.take(4 * *amount_of_blocks as usize).collect();
             let blocks = blocks.chunks(4);
@@ -245,16 +245,16 @@ fn print_container_example_definition(
             let b = bytes.take(4).cloned().collect::<Vec<u8>>();
 
             for b in b {
-                s.w(format!("{}, ", b));
+                s.w(format!("{b}, "));
             }
             s.w(" // SizedCString.length");
 
             let mut b = bytes.next().unwrap();
             while *b != 0 {
-                s.w(format!("{}, ", b));
+                s.w(format!("{b}, "));
                 b = bytes.next().unwrap();
             }
-            s.w(format!("{}, ", b));
+            s.w(format!("{b}, "));
         }
         Type::AchievementDoneArray | Type::AchievementInProgressArray => {
             unimplemented!("-1 delimited achievement arrays")
@@ -375,7 +375,7 @@ fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut 
         ContainerType::CLogin(o) | ContainerType::SLogin(o) => {
             let bytes = bytes.take(core::mem::size_of::<u8>());
             s.bytes(bytes.into_iter());
-            s.wln(format!("// opcode ({})", o));
+            s.wln(format!("// opcode ({o})"));
             return;
         }
         ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
@@ -393,7 +393,7 @@ fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut 
         _ => unimplemented!("msg in container examples"),
     };
     s.bytes(opcode.into_iter());
-    s.wln(format!("// opcode ({})", o));
+    s.wln(format!("// opcode ({o})"));
 }
 
 fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
@@ -442,7 +442,7 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
 
             // The rest of the message is ZLib compressed.
             for b in bytes.skip(4) {
-                s.w_break_at(format!("{}, ", b));
+                s.w_break_at(format!("{b}, "));
             }
             s.w("// compressed data");
             s.newline();
@@ -469,9 +469,9 @@ fn print_container_if_statement(
             s.wln(" **or** ");
         }
         s.w(&(match e {
-            Equation::Equals { value } => format!("is equal to `{}`", value),
-            Equation::NotEquals { value } => format!("is not equal to `{}`", value),
-            Equation::BitwiseAnd { value } => format!("contains `{}`", value),
+            Equation::Equals { value } => format!("is equal to `{value}`"),
+            Equation::NotEquals { value } => format!("is not equal to `{value}`"),
+            Equation::BitwiseAnd { value } => format!("contains `{value}`"),
         }))
     }
     s.wln(":");
@@ -579,7 +579,7 @@ fn print_container_field(
             s.wln(format!(
                 "| {offset} | {size} / {endian} | {ty} | {name} | {description} | {comment} |",
                 offset = if let Some(offset) = offset {
-                    format!("0x{:02X}", offset)
+                    format!("0x{offset:02X}")
                 } else {
                     "-".to_string()
                 },

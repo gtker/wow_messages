@@ -166,7 +166,7 @@ impl Writer {
         variable_sized: impl Fn(&mut Self),
     ) {
         self.open_curly(format!("impl {}", name.as_ref()));
-        self.open_curly(format!("pub(crate) fn {}(&self) -> usize", function_name));
+        self.open_curly(format!("pub(crate) fn {function_name}(&self) -> usize"));
 
         variable_sized(self);
 
@@ -183,7 +183,7 @@ impl Writer {
         sizes: Option<Sizes>,
     ) {
         self.open_curly(format!("impl crate::Message for {}", type_name.as_ref()));
-        self.wln(format!("const OPCODE: u32 = {:#06x};", opcode));
+        self.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
         self.newline();
 
         self.open_curly("fn size_without_header(&self) -> u32");
@@ -198,8 +198,7 @@ impl Writer {
         self.write_into_vec_trait(&write_function);
 
         self.open_curly(format!(
-            "fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {}>",
-            PARSE_ERROR,
+            "fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {PARSE_ERROR}>",
         ));
 
         read_function(self, ImplType::Std);
@@ -302,8 +301,7 @@ impl Writer {
 
         self.inc_indent();
         self.wln(format!(
-            "dyn core::future::Future<Output = std::result::Result<Self, {}>>",
-            PARSE_ERROR,
+            "dyn core::future::Future<Output = std::result::Result<Self, {PARSE_ERROR}>>",
         ));
         self.inc_indent();
 
@@ -330,7 +328,7 @@ impl Writer {
             "self.size() + 1".to_string()
         };
 
-        self.wln(format!("let mut v = Vec::with_capacity({});", size));
+        self.wln(format!("let mut v = Vec::with_capacity({size});"));
         self.wln("self.write_into_vec(&mut v)?;");
         self.wln(format!("w.write_all(&v){postfix}", postfix = it.postfix()));
     }
@@ -457,7 +455,7 @@ impl Writer {
             trait_to_impl.as_ref(),
             type_name.as_ref(),
         ));
-        self.wln(format!("const OPCODE: u8 = {:#04x};", opcode));
+        self.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
         self.newline();
 
         for it in ImplType::types() {

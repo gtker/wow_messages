@@ -236,7 +236,7 @@ impl Container {
             _ => unimplemented!(),
         };
 
-        format!("{}::opcodes::{}", import_path, enum_name,)
+        format!("{import_path}::opcodes::{enum_name}",)
     }
 
     pub(crate) fn any_fields_have_constant_value(&self) -> bool {
@@ -273,8 +273,7 @@ impl Container {
                 self.name(),
                 self.file_info(),
                 format!(
-                    "Only login messages can contain '{}'",
-                    CONTAINER_SELF_SIZE_FIELD
+                    "Only login messages can contain '{CONTAINER_SELF_SIZE_FIELD}'"
                 ),
             ),
         };
@@ -311,8 +310,7 @@ impl Container {
                             self.name(),
                             self.file_info(),
                             format!(
-                                "'{}' can not come after a PackedGuid variable",
-                                CONTAINER_SELF_SIZE_FIELD
+                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a PackedGuid variable"
                             ),
                         ),
                         Type::Guid => sum += 8_u64,
@@ -320,40 +318,35 @@ impl Container {
                             self.name(),
                             self.file_info(),
                             format!(
-                                "'{}' can not come after an UpdateMask variable",
-                                CONTAINER_SELF_SIZE_FIELD
+                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an UpdateMask variable"
                             ),
                         ),
                         Type::AuraMask => invalid_self_size_position(
                             self.name(),
                             self.file_info(),
                             format!(
-                                "'{}' can not come after an AuraMask variable",
-                                CONTAINER_SELF_SIZE_FIELD
+                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an AuraMask variable"
                             ),
                         ),
                         Type::SizedCString => invalid_self_size_position(
                             self.name(),
                             self.file_info(),
                             format!(
-                                "'{}' can not come after a SizedCString variable",
-                                CONTAINER_SELF_SIZE_FIELD
+                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a SizedCString variable"
                             ),
                         ),
                         Type::CString => invalid_self_size_position(
                             self.name(),
                             self.file_info(),
                             format!(
-                                "'{}' can not come after a CString variable",
-                                CONTAINER_SELF_SIZE_FIELD
+                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a CString variable"
                             ),
                         ),
                         Type::String { .. } => invalid_self_size_position(
                             self.name(),
                             self.file_info(),
                             format!(
-                                "'{}' can not come after a String variable",
-                                CONTAINER_SELF_SIZE_FIELD
+                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a String variable"
                             ),
                         ),
                         Type::AchievementDoneArray
@@ -362,8 +355,7 @@ impl Container {
                             self.name(),
                             self.file_info(),
                             format!(
-                                "'{}' can not come after an array variable",
-                                CONTAINER_SELF_SIZE_FIELD
+                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an array variable"
                             ),
                         ),
                     }
@@ -377,16 +369,14 @@ impl Container {
                     self.name(),
                     self.file_info(),
                     format!(
-                        "'{}' can not come after an if statement",
-                        CONTAINER_SELF_SIZE_FIELD
+                        "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an if statement"
                     ),
                 ),
                 StructMember::OptionalStatement(_) => invalid_self_size_position(
                     self.name(),
                     self.file_info(),
                     format!(
-                        "'{}' can not come after an optional statement",
-                        CONTAINER_SELF_SIZE_FIELD
+                        "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an optional statement"
                     ),
                 ),
             }
@@ -596,7 +586,7 @@ impl Container {
             }
         }
 
-        panic!("unable to find variable name {}", variable_name)
+        panic!("unable to find variable name {variable_name}")
     }
 
     pub(crate) fn tests(&self, o: &Objects) -> Vec<TestCase> {

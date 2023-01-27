@@ -57,31 +57,31 @@ impl ModFiles {
             for (i, location) in &m.submodules {
                 match location {
                     SubmoduleLocation::PubUseInternal => {
-                        writeln!(s, "pub(crate) mod {};", i).unwrap();
-                        writeln!(s, "pub use {}::*;", i).unwrap();
+                        writeln!(s, "pub(crate) mod {i};").unwrap();
+                        writeln!(s, "pub use {i}::*;").unwrap();
                     }
                     SubmoduleLocation::PubMod => {
                         if ["vanilla", "wrath", "tbc"].contains(&i.as_str()) {
-                            writeln!(s, "#[cfg(feature = \"{}\")]", i).unwrap();
+                            writeln!(s, "#[cfg(feature = \"{i}\")]").unwrap();
                         }
-                        writeln!(s, "pub mod {};", i).unwrap();
+                        writeln!(s, "pub mod {i};").unwrap();
                     }
                     SubmoduleLocation::PubUseOnly => {
-                        writeln!(s, "pub use {}::*;", i).unwrap();
+                        writeln!(s, "pub use {i}::*;").unwrap();
                     }
                     SubmoduleLocation::PubUseAndCfg(cfg) => {
                         writeln!(s, "#[cfg(feature = \"{cfg}\")]").unwrap();
-                        writeln!(s, "pub use {}::*;", i).unwrap();
+                        writeln!(s, "pub use {i}::*;").unwrap();
                     }
                     SubmoduleLocation::PubCrateMod => {
-                        writeln!(s, "pub(crate) mod {};", i).unwrap();
+                        writeln!(s, "pub(crate) mod {i};").unwrap();
                     }
                     SubmoduleLocation::SpecificLine => {
-                        write!(s, "{}", i).unwrap();
+                        write!(s, "{i}").unwrap();
                     }
                     SubmoduleLocation::PubModAndCfg(cfg) => {
-                        writeln!(s, "#[cfg({})]", cfg).unwrap();
-                        writeln!(s, "pub mod {};", i).unwrap();
+                        writeln!(s, "#[cfg({cfg})]").unwrap();
+                        writeln!(s, "pub mod {i};").unwrap();
                     }
                 }
             }

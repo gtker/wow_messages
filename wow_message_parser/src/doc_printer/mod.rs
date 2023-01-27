@@ -67,7 +67,7 @@ impl DocWriter {
 
     pub(crate) fn bytes<'a>(&mut self, bytes: impl Iterator<Item = &'a u8>) {
         for b in bytes {
-            let text = format!("{}, ", b);
+            let text = format!("{b}, ");
             self.w(&text);
             self.column += text.len();
         }
@@ -225,14 +225,14 @@ fn print_versions(
         if i != 0 {
             s.w(", ");
         }
-        s.w(format!("Protocol Version {}", l));
+        s.w(format!("Protocol Version {l}"));
     }
 
     for (i, l) in world_versions.enumerate() {
         if i != 0 {
             s.w(", ");
         }
-        s.w(format!("Client Version {}", l));
+        s.w(format!("Client Version {l}"));
     }
 
     s.newline();

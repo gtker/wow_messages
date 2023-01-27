@@ -24,12 +24,10 @@ impl Display for ParseError {
             ParseError::Enum(i) => i.fmt(f),
             ParseError::String(i) => i.fmt(f),
             ParseError::InvalidSize { opcode, size } => f.write_fmt(format_args!(
-                "message '{:#06X}' has invalid size: '{size}'",
-                opcode
+                "message '{opcode:#06X}' has invalid size: '{size}'"
             )),
             ParseError::BufferSizeTooSmall { opcode, size, io } => f.write_fmt(format_args!(
-                "opcode '{}' has received too small size '{}' with io error: '{}'",
-                opcode, size, io
+                "opcode '{opcode}' has received too small size '{size}' with io error: '{io}'"
             )),
         }
     }
@@ -72,14 +70,12 @@ impl Display for ExpectedOpcodeError {
                 if let Some(name) = name {
                     write!(
                         f,
-                        "unexpected message '{}' found: opcode '{:#06X}' and size '{}'",
-                        name, opcode, size
+                        "unexpected message '{name}' found: opcode '{opcode:#06X}' and size '{size}'"
                     )
                 } else {
                     write!(
                         f,
-                        "unexpected opcode without name found: '{:#06X}' and size '{}'",
-                        opcode, size
+                        "unexpected opcode without name found: '{opcode:#06X}' and size '{size}'"
                     )
                 }
             }

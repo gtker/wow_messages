@@ -37,7 +37,7 @@ impl std::fmt::Display for Platform {
         match self {
             Self::X86 => f.write_str("X86"),
             Self::PowerPc => f.write_str("PowerPc"),
-            Self::Other(v) => f.write_fmt(format_args!("Other({})", v)),
+            Self::Other(v) => f.write_fmt(format_args!("Other({v})")),
         }
     }
 }

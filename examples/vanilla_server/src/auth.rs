@@ -30,10 +30,10 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
         Err(e) => {
             match e {
                 ExpectedOpcodeError::Opcode(o) => {
-                    println!("invalid opcode {}", o)
+                    println!("invalid opcode {o}")
                 }
                 ExpectedOpcodeError::Parse(e) => {
-                    println!("parse error {:#?}", e)
+                    println!("parse error {e:#?}")
                 }
             }
             return;

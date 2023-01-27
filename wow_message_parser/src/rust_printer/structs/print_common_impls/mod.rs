@@ -154,15 +154,14 @@ pub(crate) fn print_constant_member(
     value: u64,
 ) {
     s.docc(format!(
-        "The field `{name}` is constantly specified to be:",
-        name = name
+        "The field `{name}` is constantly specified to be:"
     ));
     s.docc_newline();
     s.docc("| Format | Value |");
     s.docc("| ------ | ----- |");
-    s.docc(format!("| Decimal | `{value}` |", value = value));
-    s.docc(format!("| Hex | `{value:#04x}` |", value = value));
-    s.docc(format!("| Original | `{value}` |", value = original_value));
+    s.docc(format!("| Decimal | `{value}` |"));
+    s.docc(format!("| Hex | `{value:#04x}` |"));
+    s.docc(format!("| Original | `{original_value}` |"));
     s.docc_newline();
     s.docc("**This field is not in the Rust struct, but is written as this constant value.**");
 
@@ -213,7 +212,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
         }
         RustType::Struct { sizes, .. } => {
             if let Some(size) = sizes.is_constant() {
-                format!("{}", size)
+                format!("{size}")
             } else {
                 format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
             }

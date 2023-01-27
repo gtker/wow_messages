@@ -241,7 +241,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 
             s.funcn_pub_const(
                 format!("get_{}(&self)", enumerator.name()),
-                format!("Option<&{new_ty}>", new_ty = new_ty),
+                format!("Option<&{new_ty}>"),
                 |s| {
                     s.wln(format!(
                         "self.{}.as_ref()",

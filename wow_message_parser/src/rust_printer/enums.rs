@@ -148,7 +148,7 @@ fn print_display(s: &mut Writer, e: &Definer) {
                         None => {}
                         Some(self_value) => {
                             s.wln(format!(
-                                r#"Self::{name}(v) => f.write_fmt(format_args!("{name}({{}})", v)),"#,
+                                r#"Self::{name}(v) => f.write_fmt(format_args!("{name}({{v}})")),"#,
                                 name = self_value.rust_name(),
                             ));
                         }

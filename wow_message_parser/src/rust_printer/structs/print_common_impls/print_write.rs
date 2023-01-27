@@ -15,8 +15,7 @@ pub(crate) fn print_unencrypted_write_header(s: &mut Writer, e: &Container, post
         ContainerType::SLogin(_) | ContainerType::CLogin(_) => {
             s.wln("// opcode: u8");
             s.wln(format!(
-                "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;",
-                postfix = postfix
+                "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;"
             ));
             s.newline();
         }
@@ -64,19 +63,18 @@ pub(crate) fn print_write_field_array(
                 s.wln("let mut vec = Vec::new();");
                 s.wln("i.write_into_vec(&mut vec)?;");
                 s.wln(format!(
-                    "{writer}.write_all(vec.as_slice());",
-                    writer = writer
+                    "{writer}.write_all(vec.as_slice());"
                 ));
             } else {
                 s.wln("i.write_into_vec(w)?;");
             }
         }
         ArrayType::CString => {
-            s.wln(format!("w.write_all(i.as_bytes()){}?;", postfix));
-            s.wln(format!("w.write_all(&[0]){}?;", postfix));
+            s.wln(format!("w.write_all(i.as_bytes()){postfix}?;"));
+            s.wln(format!("w.write_all(&[0]){postfix}?;"));
         }
         ArrayType::Guid => {
-            s.wln(format!("w.write_all(&i.guid().to_le_bytes()){}?;", postfix));
+            s.wln(format!("w.write_all(&i.guid().to_le_bytes()){postfix}?;"));
         }
         ArrayType::PackedGuid => s.wln("i.write_packed_guid_into_vec(w);"),
     }
@@ -136,9 +134,7 @@ pub(crate) fn print_write_field_identifier(
     variable_prefix: &str,
 ) {
     s.wln(format!(
-        "{variable_prefix}{name}.write_into_vec(w)?;",
-        name = variable_name,
-        variable_prefix = variable_prefix,
+        "{variable_prefix}{variable_name}.write_into_vec(w)?;",
     ));
 }
 
@@ -256,7 +252,7 @@ pub(crate) fn print_write_definition(
                 postfix = postfix,
             ));
             s.wln("// Null terminator");
-            s.wln(format!("w.write_all(&[0]){postfix}?;", postfix = postfix,));
+            s.wln(format!("w.write_all(&[0]){postfix}?;",));
         }
         //TODO: types that prevent null bytes in strings
         Type::CString => {
@@ -273,7 +269,7 @@ pub(crate) fn print_write_definition(
                 postfix = postfix,
             ));
             s.wln("// Null terminator");
-            s.wln(format!("w.write_all(&[0]){postfix}?;", postfix = postfix));
+            s.wln(format!("w.write_all(&[0]){postfix}?;"));
         }
         Type::String { .. } => {
             s.wln(format!(

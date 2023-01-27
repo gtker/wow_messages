@@ -100,9 +100,9 @@ pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String 
         opcode = match e.container_type() {
             ContainerType::Struct => "".to_string(),
             ContainerType::CLogin(o) | ContainerType::SLogin(o) =>
-                format!(" = 0x{opcode:0>2X}", opcode = o),
+                format!(" = 0x{o:0>2X}"),
             ContainerType::Msg(o) | ContainerType::CMsg(o) | ContainerType::SMsg(o) =>
-                format!(" = 0x{opcode:0>4X}", opcode = o),
+                format!(" = 0x{o:0>4X}"),
         }
     ));
 
@@ -207,19 +207,12 @@ fn print_wowm_if_statement(s: &mut WowmWriter, statement: &IfStatement, conditio
 
         if i == 0 {
             s.w(format!(
-                "{condition} ({name} {op} {cond}",
-                condition = condition,
-                name = name,
-                op = op,
-                cond = cond
+                "{condition} ({name} {op} {cond}"
             ));
             s.inc();
         } else {
             s.w(format!(
-                "|| {name} {op} {cond}",
-                name = name,
-                op = op,
-                cond = cond
+                "|| {name} {op} {cond}"
             ));
         }
 

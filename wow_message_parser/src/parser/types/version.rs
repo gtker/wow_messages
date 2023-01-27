@@ -194,10 +194,10 @@ impl WorldVersion {
 impl Display for WorldVersion {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            WorldVersion::Major(m) => f.write_fmt(format_args!("{}", m)),
-            WorldVersion::Minor(m, i) => f.write_fmt(format_args!("{}.{}", m, i)),
-            WorldVersion::Patch(m, i, p) => f.write_fmt(format_args!("{}.{}.{}", m, i, p)),
-            WorldVersion::Exact(m, i, p, b) => f.write_fmt(format_args!("{}.{}.{}.{}", m, i, p, b)),
+            WorldVersion::Major(m) => f.write_fmt(format_args!("{m}")),
+            WorldVersion::Minor(m, i) => f.write_fmt(format_args!("{m}.{i}")),
+            WorldVersion::Patch(m, i, p) => f.write_fmt(format_args!("{m}.{i}.{p}")),
+            WorldVersion::Exact(m, i, p, b) => f.write_fmt(format_args!("{m}.{i}.{p}.{b}")),
             WorldVersion::All => f.write_str("*"),
         }
     }
@@ -212,7 +212,7 @@ pub enum LoginVersion {
 impl Display for LoginVersion {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            LoginVersion::Specific(v) => f.write_fmt(format_args!("{}", v)),
+            LoginVersion::Specific(v) => f.write_fmt(format_args!("{v}")),
             LoginVersion::All => f.write_str("*"),
         }
     }
@@ -221,7 +221,7 @@ impl Display for LoginVersion {
 impl LoginVersion {
     pub(crate) fn as_module_case(&self) -> String {
         match self {
-            LoginVersion::Specific(v) => format!("version_{}", v),
+            LoginVersion::Specific(v) => format!("version_{v}"),
             LoginVersion::All => "all".to_string(),
         }
     }

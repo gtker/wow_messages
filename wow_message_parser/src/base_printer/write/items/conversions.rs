@@ -65,7 +65,7 @@ pub(crate) fn vanilla_stat_types_to_stats(
             ITEM_MOD_INTELLECT => b.intellect += value,
             ITEM_MOD_SPIRIT => b.spirit += value,
             ITEM_MOD_STAMINA => b.stamina += value,
-            v => panic!("unknown item mod for vanilla: '{}'", v),
+            v => panic!("unknown item mod for vanilla: '{v}'"),
         }
     }
 

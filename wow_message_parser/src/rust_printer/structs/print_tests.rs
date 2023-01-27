@@ -22,7 +22,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     for version in e.tags().main_versions() {
         if version.is_world() && e.tags().shared() {
             let version = major_version_to_string(&version.as_major_world());
-            s.wln(format!("#[cfg(all(feature = \"{}\", test))]", version));
+            s.wln(format!("#[cfg(all(feature = \"{version}\", test))]"));
         } else {
             s.wln("#[cfg(test)]");
         }
@@ -39,7 +39,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             s.inc_indent();
 
             for i in t.raw_bytes() {
-                s.w_break_at(format!(" {:#04X},", i), 80);
+                s.w_break_at(format!(" {i:#04X},"), 80);
             }
 
             s.dec_indent();
@@ -108,8 +108,7 @@ fn print_includes(e: &Container, version: Version, s: &mut Writer) {
             }
 
             s.wln(format!(
-                "use {import_path}::{{{}, {}}};",
-                CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
+                "use {import_path}::{{{CLIENT_MESSAGE_TRAIT_NAME}, {SERVER_MESSAGE_TRAIT_NAME}}};",
             ));
         }
         _ => {}
@@ -212,8 +211,7 @@ fn print_test_case(
     match e.is_constant_sized() {
         false => {
             s.wln(format!(
-                "assert_eq!(t.size() + header_size, RAW{i}.len());",
-                i = i
+                "assert_eq!(t.size() + header_size, RAW{i}.len());"
             ));
         }
         true => {
@@ -224,17 +222,14 @@ fn print_test_case(
             };
 
             s.wln(format!(
-                "assert_eq!({}header_size, RAW{i}.len());",
-                size,
-                i = i,
+                "assert_eq!({size}header_size, RAW{i}.len());",
             ));
         }
     }
     s.newline();
 
     s.wln(format!(
-        "let mut dest = Vec::with_capacity(RAW{i}.len());",
-        i = i
+        "let mut dest = Vec::with_capacity(RAW{i}.len());"
     ));
     s.wln(format!(
         "expected.{write_text}(&mut {cursor}Cursor::new(&mut dest)){postfix}.unwrap();",
@@ -247,7 +242,7 @@ fn print_test_case(
     ));
     s.newline();
 
-    s.wln(format!("assert_eq!(dest, RAW{i});", i = i))
+    s.wln(format!("assert_eq!(dest, RAW{i});"))
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
@@ -316,13 +311,13 @@ fn print_value(
             s.wln_no_indent(format!("DateTime::try_from({:#X}).unwrap(),", i.value()));
         }
         TestValue::Bool(b) => {
-            s.wln_no_indent(format!("{}, ", b));
+            s.wln_no_indent(format!("{b}, "));
         }
         TestValue::Guid(i) => {
             s.wln_no_indent(format!("Guid::new({:#X}),", i.value()));
         }
         TestValue::FloatingNumber { value, .. } => {
-            s.wln_no_indent(format!("{}_f32,", value));
+            s.wln_no_indent(format!("{value}_f32,"));
         }
         TestValue::Array { values, size } => {
             match size {
@@ -332,7 +327,7 @@ fn print_value(
             s.inc_indent();
 
             for value in values {
-                s.w_break_at(format!(" {:#04X},", value), 80);
+                s.w_break_at(format!(" {value:#04X},"), 80);
             }
 
             s.dec_indent();
@@ -362,7 +357,7 @@ fn print_value(
             s.wln("],");
         }
         TestValue::String(value) => {
-            s.wln_no_indent(format!(r#"String::from("{}"),"#, value,));
+            s.wln_no_indent(format!(r#"String::from("{value}"),"#,));
         }
         TestValue::Flag(flags) => {
             let rd = e.rust_object().get_rust_definer(&m.ty().str());
@@ -539,7 +534,7 @@ fn print_value(
                         let get_try = |value: u8, byte_ty: ByteType| -> String {
                             match byte_ty.ty {
                                 ByteInnerTy::Byte => value.to_string(),
-                                ByteInnerTy::Ty(_) => format!("{value}.try_into()", value = value),
+                                ByteInnerTy::Ty(_) => format!("{value}.try_into()"),
                             }
                         };
 

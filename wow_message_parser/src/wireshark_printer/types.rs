@@ -18,7 +18,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                         WiresharkType::Integer(i) => {
                             let v = match new_ty {
                                 WiresharkType::Integer(v) => v,
-                                _ => panic!("variable: '{}' is int and {:#?}", name, new_ty),
+                                _ => panic!("variable: '{name}' is int and {new_ty:#?}"),
                             };
 
                             if v > i {
@@ -28,7 +28,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                         WiresharkType::Float(i) => {
                             let v = match new_ty {
                                 WiresharkType::Float(v) => v,
-                                _ => panic!("variable: '{}' is float and {:#?}", name, new_ty),
+                                _ => panic!("variable: '{name}' is float and {new_ty:#?}"),
                             };
 
                             if *v < *i {

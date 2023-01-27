@@ -140,7 +140,7 @@ impl ParsedTags {
                     self.login_versions.clear();
                     self.login_versions.insert(LoginVersion::All);
                 } else {
-                    panic!("invalid value passed as login_logon_versions: '{}'", w);
+                    panic!("invalid value passed as login_logon_versions: '{w}'");
                 }
             }
         } else if key == VERSIONS {
@@ -175,8 +175,7 @@ impl ParsedTags {
                     continue;
                 } else if w == "*" {
                     panic!(
-                        "Got all version for paste_versions, this is not valid, {:#?}",
-                        self
+                        "Got all version for paste_versions, this is not valid, {self:#?}"
                     );
                 }
 

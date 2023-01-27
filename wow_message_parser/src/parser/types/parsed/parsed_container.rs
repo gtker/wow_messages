@@ -133,7 +133,7 @@ impl ParsedContainer {
             }
         }
 
-        panic!("unable to find field: '{}'", field_name)
+        panic!("unable to find field: '{field_name}'")
     }
 
     pub(crate) fn get_field_ty(&self, field_name: &str) -> &ParsedType {
@@ -143,7 +143,7 @@ impl ParsedContainer {
             }
         }
 
-        panic!("unable to find field: '{}'", field_name)
+        panic!("unable to find field: '{field_name}'")
     }
 
     pub(crate) fn name(&self) -> &str {

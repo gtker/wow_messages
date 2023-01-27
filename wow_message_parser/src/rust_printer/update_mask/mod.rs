@@ -24,7 +24,7 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
     ];
 
     for (name, u) in update_types {
-        writeln!(s, "Fields that all {}s have:\n", name).unwrap();
+        writeln!(s, "Fields that all {name}s have:\n").unwrap();
 
         s.push_str("| Name | Offset | Size | Type |\n");
         s.push_str("|------|--------|------|------|\n");
@@ -155,7 +155,7 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     s.newline();
 
     for (ty, types) in &update_types {
-        s.bodyn(format!("impl {}Builder", ty), |s| {
+        s.bodyn(format!("impl {ty}Builder"), |s| {
             for m in fields.iter().filter(|a| types.contains(&a.object_ty)) {
                 print_builder_setter(s, m);
             }
@@ -163,7 +163,7 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     }
 
     for (ty, types) in &update_types {
-        s.bodyn(format!("impl {}", ty), |s| {
+        s.bodyn(format!("impl {ty}"), |s| {
             for m in fields.iter().filter(|a| types.contains(&a.object_ty)) {
                 print_setter(s, m);
                 print_getter(s, m);
@@ -346,7 +346,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
                     let c = f(&c);
                     let d = f(&d);
 
-                    s.wln(format!("Some(({}, {}, {}, {}))", a, b, c, d));
+                    s.wln(format!("Some(({a}, {b}, {c}, {d}))"));
                 },
                 |s| {
                     s.wln("None");
@@ -422,11 +422,7 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
                     let d = get_name(d);
 
                     format!(
-                        "u32::from_le_bytes([{a}, {b}, {c}, {d}])",
-                        a = a,
-                        b = b,
-                        c = c,
-                        d = d
+                        "u32::from_le_bytes([{a}, {b}, {c}, {d}])"
                     )
                 }
                 UfType::Custom { .. } => {
@@ -572,7 +568,7 @@ impl UfType {
             UfType::Guid => GUID_TYPE.to_string(),
             UfType::Int => INT_TYPE.to_string(),
             UfType::Float => FLOAT_TYPE.to_string(),
-            UfType::TwoShort => format!("({}, {})", TWO_SHORT_TYPE, TWO_SHORT_TYPE),
+            UfType::TwoShort => format!("({TWO_SHORT_TYPE}, {TWO_SHORT_TYPE})"),
             UfType::Bytes => "(u8, u8, u8, u8)".to_string(),
             UfType::BytesWith(a, b, c, d) => format!(
                 "({}, {}, {}, {})",
@@ -596,7 +592,7 @@ impl UfType {
                 UfType::Guid => GUID_TYPE,
                 UfType::Int => INT_TYPE,
                 UfType::Float => FLOAT_TYPE,
-                UfType::TwoShort => return format!("a: {}, b: {}", TWO_SHORT_TYPE, TWO_SHORT_TYPE),
+                UfType::TwoShort => return format!("a: {TWO_SHORT_TYPE}, b: {TWO_SHORT_TYPE}"),
                 UfType::Bytes => {
                     return "a: u8, b: u8, c: u8, d: u8".to_string();
                 }

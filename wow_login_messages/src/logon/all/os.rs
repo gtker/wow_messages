@@ -37,7 +37,7 @@ impl std::fmt::Display for Os {
         match self {
             Self::Windows => f.write_str("Windows"),
             Self::MacOsX => f.write_str("MacOsX"),
-            Self::Other(v) => f.write_fmt(format_args!("Other({})", v)),
+            Self::Other(v) => f.write_fmt(format_args!("Other({v})")),
         }
     }
 }

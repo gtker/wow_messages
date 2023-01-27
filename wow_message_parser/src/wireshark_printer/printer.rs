@@ -70,7 +70,7 @@ fn print_variables(mut v: Vec<String>) -> Writer {
     v.dedup();
 
     for name in v {
-        s.wln(format!("    guint32 {} = 0;", name));
+        s.wln(format!("    guint32 {name} = 0;"));
     }
 
     s
@@ -150,10 +150,7 @@ fn print_if_statement(
         }
 
         s.w_no_indent(format!(
-            "{name} {op} {enumerator}",
-            name = name,
-            op = op,
-            enumerator = enumerator
+            "{name} {op} {enumerator}"
         ));
     }
 
@@ -183,10 +180,7 @@ fn print_if_statement(
             }
 
             s.w_no_indent(format!(
-                "{name} {op} {enumerator}",
-                name = name,
-                op = op,
-                enumerator = enumerator
+                "{name} {op} {enumerator}"
             ));
         }
 
@@ -243,10 +237,7 @@ fn print_definition(
                 ));
             } else {
                 s.wln(format!(
-                    "ptvcursor_add(ptv, {hf}, {len}, {enc});",
-                    hf = name,
-                    len = len,
-                    enc = enc,
+                    "ptvcursor_add(ptv, {name}, {len}, {enc});",
                 ));
             }
             true
@@ -254,8 +245,7 @@ fn print_definition(
         Type::Guid => {
             let name = w.unwrap().name();
             s.wln(format!(
-                "ptvcursor_add(ptv, {hf}, 8, ENC_LITTLE_ENDIAN);",
-                hf = name,
+                "ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",
             ));
             true
         }
@@ -278,8 +268,7 @@ fn print_definition(
         Type::DateTime => {
             let name = w.unwrap().name();
             s.wln(format!(
-                "ptvcursor_add(ptv, {hf}, 4, ENC_LITTLE_ENDIAN);",
-                hf = name,
+                "ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",
             ));
             true
         }
@@ -289,10 +278,7 @@ fn print_definition(
             let enc = i.wireshark_endian_str();
 
             s.wln(format!(
-                "ptvcursor_add(ptv, {hf}, {len}, {enc});",
-                hf = name,
-                len = len,
-                enc = enc,
+                "ptvcursor_add(ptv, {name}, {len}, {enc});",
             ));
             true
         }
@@ -303,7 +289,7 @@ fn print_definition(
         Type::SizedCString => {
             let name = w.unwrap().name();
 
-            s.wln(format!("add_sized_cstring(ptv, &{hf});", hf = name));
+            s.wln(format!("add_sized_cstring(ptv, &{name});"));
             true
         }
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
@@ -354,17 +340,13 @@ fn print_definition(
                     let enc = i.wireshark_endian_str();
 
                     s.wln(format!(
-                        "ptvcursor_add(ptv, {hf}, {len}, {enc});",
-                        hf = name,
-                        len = len,
-                        enc = enc,
+                        "ptvcursor_add(ptv, {name}, {len}, {enc});",
                     ));
                 }
                 ArrayType::Guid => {
                     let name = w.unwrap().name();
                     s.wln(format!(
-                        "ptvcursor_add(ptv, {hf}, 8, ENC_LITTLE_ENDIAN);",
-                        hf = name,
+                        "ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",
                     ));
                 }
                 ArrayType::Struct(c) => {
@@ -407,7 +389,7 @@ fn print_definition(
 fn print_cstring(s: &mut Writer, w: Option<&WiresharkMember>) {
     let name = w.unwrap().name();
 
-    s.wln(format!("add_cstring(ptv, &{hf});", hf = name));
+    s.wln(format!("add_cstring(ptv, &{name});"));
 }
 
 fn print_container(
@@ -450,18 +432,11 @@ fn print_definer(
     if e.used_in_if_in_object(container_name) {
         variables.push(variable_name.to_string());
         s.wln(format!(
-            "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{var_name});",
-            name = name,
-            len = len,
-            enc = enc,
-            var_name = variable_name,
+            "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{variable_name});",
         ));
     } else {
         s.wln(format!(
-            "ptvcursor_add(ptv, {hf}, {len}, {enc});",
-            hf = name,
-            len = len,
-            enc = enc,
+            "ptvcursor_add(ptv, {name}, {len}, {enc});",
         ));
     }
 }

@@ -85,7 +85,7 @@ impl std::fmt::Display for Locale {
             Self::ZhTw => f.write_str("ZhTw"),
             Self::EnTw => f.write_str("EnTw"),
             Self::EnCn => f.write_str("EnCn"),
-            Self::Other(v) => f.write_fmt(format_args!("Other({})", v)),
+            Self::Other(v) => f.write_fmt(format_args!("Other({v})")),
         }
     }
 }

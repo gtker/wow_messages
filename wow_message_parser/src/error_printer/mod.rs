@@ -52,7 +52,7 @@ fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &ObjectTags) {
         s.wln("    Login:");
 
         for t in tags.logon_versions() {
-            s.wln(format!("        {}", t));
+            s.wln(format!("        {t}"));
         }
     }
 
@@ -60,7 +60,7 @@ fn print_version_cover(s: &mut ErrorWriter, msg: &str, tags: &ObjectTags) {
         s.wln("    World:");
 
         for t in tags.versions() {
-            s.wln(format!("        {}", t));
+            s.wln(format!("        {t}"));
         }
     }
 }
@@ -76,7 +76,7 @@ pub(crate) fn complex_not_found(
 
     s.fileinfo(
         struct_fileinfo,
-        format!("Type '{}' needs type '{}'", struct_name, ty_name),
+        format!("Type '{struct_name}' needs type '{ty_name}'"),
     );
 
     print_version_cover(&mut s, &format!("'{ty_name}' needs to cover:"), struct_tags);
@@ -103,8 +103,7 @@ pub(crate) fn variable_in_if_not_found(
     s.fileinfo(
         fileinfo,
         format!(
-            "Unable to find enumerator with name '{}' in variable '{}' with type '{}'",
-            name, variable_name, ty_name
+            "Unable to find enumerator with name '{name}' in variable '{variable_name}' with type '{ty_name}'"
         ),
     );
 
@@ -114,7 +113,7 @@ pub(crate) fn variable_in_if_not_found(
 pub(crate) fn recursive_type(name: &str, file_info: &FileInfo) -> ! {
     let mut s = ErrorWriter::new("Type contains itself which leads to infinite recursion.");
 
-    s.fileinfo(file_info, format!("{} contains itself.", name));
+    s.fileinfo(file_info, format!("{name} contains itself."));
 
     wowm_exit(s, RECURSIVE_TYPE);
 }
@@ -176,11 +175,10 @@ pub(crate) fn multiple_self_value(
     second_name: &str,
 ) -> ! {
     let mut s = ErrorWriter::new(format!(
-        "Multiple '{self_value}' defined for enum.",
-        self_value = ENUM_SELF_VALUE_FIELD,
+        "Multiple '{ENUM_SELF_VALUE_FIELD}' defined for enum.",
     ));
 
-    s.fileinfo(file_info, format!("Type '{ty_name} has multiple enumerators with '{self_value}', first field is '{first_name}', second name is '{second_name}'", self_value = ENUM_SELF_VALUE_FIELD));
+    s.fileinfo(file_info, format!("Type '{ty_name} has multiple enumerators with '{ENUM_SELF_VALUE_FIELD}', first field is '{first_name}', second name is '{second_name}'"));
 
     wowm_exit(s, MULTIPLE_SELF_VALUE);
 }
@@ -190,7 +188,7 @@ pub(crate) fn invalid_self_size_position(
     file_info: &FileInfo,
     msg: impl AsRef<str>,
 ) -> ! {
-    let mut s = ErrorWriter::new(format!("Invalid usage of '{}'.", CONTAINER_SELF_SIZE_FIELD));
+    let mut s = ErrorWriter::new(format!("Invalid usage of '{CONTAINER_SELF_SIZE_FIELD}'."));
 
     s.fileinfo(
         file_info,
@@ -287,7 +285,7 @@ fn print_version_overlap(
         s.wln("    Login:");
 
         for t in tags.logon_versions() {
-            s.w(format!("        {}", t));
+            s.w(format!("        {t}"));
 
             let mut has_overlapped = false;
             for other_t in other_tags.logon_versions() {
@@ -309,7 +307,7 @@ fn print_version_overlap(
         s.wln("    World:");
 
         for t in tags.versions() {
-            s.w(format!("        {}", t));
+            s.w(format!("        {t}"));
 
             let mut has_overlapped = false;
             for other_t in other_tags.versions() {

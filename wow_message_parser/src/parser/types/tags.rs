@@ -155,9 +155,9 @@ impl ObjectTags {
         let (main, versions) = self.first_and_main_versions();
         let main = major_version_to_string(&main.as_major_world());
         if versions.is_empty() {
-            format!("feature = \"{}\"", main)
+            format!("feature = \"{main}\"")
         } else {
-            let mut s = format!("any(feature = \"{}\"", main);
+            let mut s = format!("any(feature = \"{main}\"");
             for version in versions {
                 write!(
                     s,
@@ -291,7 +291,7 @@ impl TagString {
                         let version = tags.import_version();
                         write!(current, "[`{}`]({}::{})", s, get_import_path(version), s).unwrap()
                     } else {
-                        write!(current, "`{}`", s).unwrap()
+                        write!(current, "`{s}`").unwrap()
                     }
                 }
                 TagStringSymbol::Newline => {
@@ -328,7 +328,7 @@ impl TagString {
         for i in &self.inner {
             match i {
                 TagStringSymbol::Text(t) => s.push_str(t),
-                TagStringSymbol::Link(l) => write!(s, "[{}]", l).unwrap(),
+                TagStringSymbol::Link(l) => write!(s, "[{l}]").unwrap(),
                 TagStringSymbol::Newline => s.push('\n'),
             }
         }

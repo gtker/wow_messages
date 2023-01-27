@@ -69,8 +69,7 @@ pub(crate) fn includes(
     match container_type {
         ContainerType::SLogin(_) => {
             s.wln(format!(
-                "use crate::{{{}, {}}};",
-                SERVER_MESSAGE_TRAIT_NAME, CLIENT_MESSAGE_TRAIT_NAME
+                "use crate::{{{SERVER_MESSAGE_TRAIT_NAME}, {CLIENT_MESSAGE_TRAIT_NAME}}};"
             ));
 
             s.wln(CFG_ASYNC_TOKIO);
@@ -91,12 +90,11 @@ pub(crate) fn includes(
             match version.as_major_world() {
                 MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
                     s.wln(format!(
-                        "use {}::{{DecrypterHalf, EncrypterHalf}};",
-                        import_path
+                        "use {import_path}::{{DecrypterHalf, EncrypterHalf}};"
                     ));
                 }
                 MajorWorldVersion::Wrath => {
-                    s.wln(format!("use {}::{{ClientEncrypterHalf, ClientDecrypterHalf, ServerEncrypterHalf, ServerDecrypterHalf}};", import_path));
+                    s.wln(format!("use {import_path}::{{ClientEncrypterHalf, ClientDecrypterHalf, ServerEncrypterHalf, ServerDecrypterHalf}};"));
                 }
             }
 
@@ -114,7 +112,7 @@ pub(crate) fn includes(
                 ));
             }
 
-            s.wln(format!("use {};", PARSE_ERROR));
+            s.wln(format!("use {PARSE_ERROR};"));
 
             s.wln(format!(
                 "use crate::{}::opcode_to_name;",
@@ -160,7 +158,7 @@ pub(crate) fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Ve
         }
     }
 
-    s.new_enum("pub", format!("{t}OpcodeMessage", t = ty), |s| {
+    s.new_enum("pub", format!("{ty}OpcodeMessage"), |s| {
         for &e in v {
             s.wln(format!(
                 "{enum_name}({name}),",
@@ -329,13 +327,11 @@ fn world_common_impls_read_write(
             postfix = it.postfix()
         ));
         s.wln(format!(
-            "let header = d.decrypt_{cd}_header(header);",
-            cd = cd
+            "let header = d.decrypt_{cd}_header(header);"
         ));
         s.wln("let opcode = header.opcode;");
         s.wln(format!(
-            "let body_size = (header.size.saturating_sub({opcode_size})) as u32;",
-            opcode_size = opcode_size
+            "let body_size = (header.size.saturating_sub({opcode_size})) as u32;"
         ));
     }
     s.newline();
@@ -381,7 +377,7 @@ pub(crate) fn common_impls_world(
         ),
         _ => unreachable!("not a world type: '{:#?}'", container_type),
     };
-    s.bodyn(format!("impl {t}OpcodeMessage", t = ty), |s| {
+    s.bodyn(format!("impl {ty}OpcodeMessage"), |s| {
         world_common_impls_read_opcodes(s, v, size, EXPECTED_OPCODE_ERROR);
 
         for it in ImplType::types() {
@@ -412,7 +408,7 @@ pub(crate) fn common_impls_world(
     for &e in v {
         s.impl_for(
             format!("From<{}>", e.name()),
-            format!("{t}OpcodeMessage", t = ty),
+            format!("{ty}OpcodeMessage"),
             |s| {
                 s.body(format!("fn from(c: {}) -> Self", e.name()), |s| {
                     s.wln(format!("Self::{}(c)", get_enumerator_name(e.name())));
@@ -424,7 +420,7 @@ pub(crate) fn common_impls_world(
 
 fn impl_display(s: &mut Writer, v: &[&Container], ty: &str) {
     s.bodyn(
-        format!("impl std::fmt::Display for {}OpcodeMessage", ty),
+        format!("impl std::fmt::Display for {ty}OpcodeMessage"),
         |s| {
             s.body(
                 "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
@@ -512,7 +508,7 @@ fn world_movement_info(s: &mut Writer, v: &[&Container]) {
 
 pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
     s.impl_read_write_opcode(
-        format!("{t}OpcodeMessage", t = ty),
+        format!("{ty}OpcodeMessage"),
         EXPECTED_OPCODE_ERROR,
         |s, it| {
             s.wln(format!("let opcode = crate::util::{prefix}read_u8_le(r){postfix}?;", prefix = it.prefix(), postfix = it.postfix()));
@@ -535,7 +531,7 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                     ));
                 }
 
-                s.wln(format!("opcode => Err({}::Opcode(opcode as u32)),", EXPECTED_OPCODE_ERROR));
+                s.wln(format!("opcode => Err({EXPECTED_OPCODE_ERROR}::Opcode(opcode as u32)),"));
             });
         },
         |s, _it| {
@@ -556,7 +552,7 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
     for &e in v {
         s.impl_for(
             format!("From<{}>", e.name()),
-            format!("{t}OpcodeMessage", t = ty),
+            format!("{ty}OpcodeMessage"),
             |s| {
                 s.body(format!("fn from(c: {}) -> Self", e.name()), |s| {
                     s.wln(format!("Self::{}(c)", get_enumerator_name(e.name())));

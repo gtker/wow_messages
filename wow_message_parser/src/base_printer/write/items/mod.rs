@@ -33,11 +33,11 @@ pub(crate) fn write_items(directory: &Path, data: &Data) {
 }
 
 fn float_format(v: f32) -> String {
-    let s = format!("{}", v);
+    let s = format!("{v}");
     if s.contains('.') {
-        format!("{},", s)
+        format!("{s},")
     } else {
-        format!("{}.0,", s)
+        format!("{s}.0,")
     }
 }
 
