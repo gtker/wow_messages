@@ -1,6 +1,6 @@
 mod conversions;
 
-use crate::base_printer::data::items::{Items, TbcItem, VanillaItem, WrathItem};
+use crate::base_printer::data::items::Items;
 use wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 
 pub(crate) struct Stats {
@@ -13,6 +13,9 @@ pub(crate) struct Stats {
     mana: i32,
 }
 
+use crate::base_printer::data::items::tbc::TbcItem;
+use crate::base_printer::data::items::vanilla::VanillaItem;
+use crate::base_printer::data::items::wrath::WrathItem;
 use crate::base_printer::data::Data;
 use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use crate::base_printer::writer::Writer;
