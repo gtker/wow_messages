@@ -46,16 +46,39 @@ impl DateTime {
         hours(self.inner) as u8
     }
 
-    pub fn weekday(&self) -> Weekday {
-        Weekday::try_from(weekday(self.inner)).unwrap()
+    pub const fn weekday(&self) -> Weekday {
+        match weekday(self.inner) {
+            0 => Weekday::Sunday,
+            1 => Weekday::Monday,
+            2 => Weekday::Tuesday,
+            3 => Weekday::Wednesday,
+            4 => Weekday::Thursday,
+            5 => Weekday::Friday,
+            6 => Weekday::Saturday,
+            _ => unreachable!(),
+        }
     }
 
     pub const fn month_day(&self) -> u8 {
         month_day(self.inner) as u8
     }
 
-    pub fn month(&self) -> Month {
-        Month::try_from(month(self.inner)).unwrap()
+    pub const fn month(&self) -> Month {
+        match month(self.inner) {
+            0 => Month::January,
+            1 => Month::February,
+            2 => Month::March,
+            3 => Month::April,
+            4 => Month::May,
+            5 => Month::June,
+            6 => Month::July,
+            7 => Month::August,
+            8 => Month::September,
+            9 => Month::October,
+            10 => Month::November,
+            11 => Month::December,
+            _ => unreachable!(),
+        }
     }
 
     pub const fn years_after_2000(&self) -> u8 {
