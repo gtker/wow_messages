@@ -20,6 +20,7 @@ smsg SMSG_MONSTER_MOVE = 0x00DD {
     } else if (move_type == FACING_SPOT) {
         Vector3d position;
     }
+    /* TODO: vmangos has STOP that does not include these for SMSG_COMPRESSED_MOVES */
     SplineFlag spline_flags;
     u32 duration;
     u32 amount_of_splines;
@@ -43,6 +44,7 @@ smsg SMSG_MONSTER_MOVE = 0x00DD {
     } else if (move_type == FACING_SPOT) {
         Vector3d position;
     }
+    /* TODO: vmangos has STOP that does not include these for SMSG_COMPRESSED_MOVES */
     SplineFlag spline_flags;
     if (spline_flags & ENTER_CYCLE) {
         u32 animation_id;

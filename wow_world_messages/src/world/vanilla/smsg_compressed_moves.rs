@@ -1,15 +1,16 @@
 use std::convert::{TryFrom, TryInto};
+use crate::world::vanilla::CompressedMove;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/unimplemented/vanilla/smsg_compressed_moves.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/unimplemented/vanilla/smsg_compressed_moves.wowm#L1):
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm:47`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm#L47):
 /// ```text
 /// smsg SMSG_COMPRESSED_MOVES = 0x02FB {
-///     unimplemented
+///     CompressedMove[-] moves;
 /// }
 /// ```
 pub struct SMSG_COMPRESSED_MOVES {
-    pub unimplemented: Vec<u8>,
+    pub moves: Vec<CompressedMove>,
 }
 
 impl crate::Message for SMSG_COMPRESSED_MOVES {
@@ -20,13 +21,17 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        let size_assert_header_size = w.len();
-        // unimplemented: u8[-]
-        for i in self.unimplemented.iter() {
-            w.write_all(&i.to_le_bytes())?;
+        w.write_all(&(self.size_uncompressed() as u32).to_le_bytes())?;
+
+        let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());
+
+        // moves: CompressedMove[-]
+        for i in self.moves.iter() {
+            let mut vec = Vec::new();
+            i.write_into_vec(&mut vec)?;
+            w.write_all(vec.as_slice());
         }
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
@@ -34,18 +39,22 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FB, size: body_size as u32 });
         }
 
-        // unimplemented: u8[-]
+        let decompressed_size = crate::util::read_u32_le(r)?;;
+        let decompressed_buffer = vec![0; decompressed_size as usize];
+        let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
+
+        // moves: CompressedMove[-]
         let mut current_size = {
             0
         };
-        let mut unimplemented = Vec::with_capacity(body_size as usize - current_size);
+        let mut moves = Vec::with_capacity(body_size as usize - current_size);
         while current_size < (body_size as usize) {
-            unimplemented.push(crate::util::read_u8_le(r)?);
+            moves.push(CompressedMove::read(r)?);
             current_size += 1;
         }
 
         Ok(Self {
-            unimplemented,
+            moves,
         })
     }
 
@@ -55,7 +64,17 @@ impl crate::world::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {}
 
 impl SMSG_COMPRESSED_MOVES {
     pub(crate) fn size(&self) -> usize {
-        self.unimplemented.len() * core::mem::size_of::<u8>() // unimplemented: u8[-]
+        use crate::traits::Message;
+
+        let mut v = Vec::new();
+        self.write_into_vec(&mut v);
+        v.len()
+    }
+}
+
+impl SMSG_COMPRESSED_MOVES {
+    pub(crate) fn size_uncompressed(&self) -> usize {
+        self.moves.iter().fold(0, |acc, x| acc + x.size()) // moves: CompressedMove[-]
     }
 }
 

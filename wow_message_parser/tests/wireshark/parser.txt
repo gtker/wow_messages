@@ -3872,10 +3872,6 @@
             add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_allow_movement, 1, ENC_NA);
             break;
-        case SMSG_COMPRESSED_MOVES:
-            len = offset_packet_end - ptvcursor_current_offset(ptv);
-            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
-            break;
         case SMSG_COOLDOWN_EVENT:
             ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);

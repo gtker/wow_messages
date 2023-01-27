@@ -1,5 +1,0 @@
-smsg SMSG_COMPRESSED_MOVES = 0x2FB {
-    unimplemented
-} {
-    versions = "1.12";
-}

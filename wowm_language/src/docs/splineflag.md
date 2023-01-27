@@ -83,6 +83,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `UNKNOWN31` | 2147483648 (0x80000000) |  |  |
 
 Used in:
+* [MonsterMove](monstermove.md)
 * [MovementBlock](movementblock.md)
 * [MovementBlock](movementblock.md)
 * [SMSG_MONSTER_MOVE](smsg_monster_move.md)

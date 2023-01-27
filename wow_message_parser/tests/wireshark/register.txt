@@ -1024,6 +1024,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_compressed_move_opcode,
+            { "Compressed Move Opcode", "woww.compressed.move.opcode",
+                FT_UINT16, BASE_HEX_DEC, VALS(e_compressed_move_opcode_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_container_slots,
             { "Container Slots", "woww.container.slots",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -3769,6 +3775,12 @@
         { &hf_woww_sin_angle,
             { "Sin Angle", "woww.sin.angle",
                 FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_size,
+            { "Size", "woww.size",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

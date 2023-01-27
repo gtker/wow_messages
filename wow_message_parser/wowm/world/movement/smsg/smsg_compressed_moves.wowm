@@ -1,0 +1,52 @@
+enum CompressedMoveOpcode : u16 {
+    SMSG_MONSTER_MOVE = 0x00DD;
+    SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE;
+    SMSG_SPLINE_SET_RUN_SPEED = 0x02FE;
+    SMSG_SPLINE_MOVE_UNROOT = 0x0304;
+    SMSG_SPLINE_MOVE_SET_RUN_MODE = 0x030D;
+    SMSG_SPLINE_MOVE_SET_WALK_MODE = 0x030E;
+} {
+     versions = "1.12";
+}
+
+struct MonsterMove {
+    Vector3d spline_point;
+    u32 spline_id;
+    MonsterMoveType move_type;
+    if (move_type == FACING_TARGET) {
+        Guid target;
+    } else if (move_type == FACING_ANGLE) {
+        f32 angle;
+    } else if (move_type == FACING_SPOT) {
+        Vector3d position;
+    }
+    SplineFlag spline_flags;
+    u32 duration;
+    u32 amount_of_splines;
+    Vector3d[amount_of_splines] splines;
+} {
+    versions = "1.12";
+}
+
+struct CompressedMove {
+    u8 size;
+    CompressedMoveOpcode opcode;
+    PackedGuid guid;
+    if (opcode == SMSG_SPLINE_SET_RUN_SPEED) {
+        f32 speed;
+    } else if (opcode == SMSG_MONSTER_MOVE) {
+        MonsterMove monster_move;
+    } else if (opcode == SMSG_MONSTER_MOVE_TRANSPORT) {
+        PackedGuid transport;
+        MonsterMove monster_move_transport;
+    }
+} {
+    versions = "1.12";
+}
+
+smsg SMSG_COMPRESSED_MOVES = 0x02FB {
+    CompressedMove[-] moves;
+} {
+    compressed = "true";
+    versions = "1.12";
+}
