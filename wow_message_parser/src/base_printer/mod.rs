@@ -6,7 +6,8 @@ mod writer;
 
 use crate::base_printer::write::items::write_items;
 use crate::path_utils::{
-    tbc_base_extended_dir, vanilla_base_extended_dir, wrath_base_extended_dir,
+    tbc_base_extended_dir, tbc_item_path, vanilla_base_extended_dir, vanilla_item_path,
+    wrath_base_extended_dir, wrath_item_path,
 };
 use data::{get_data_from_sqlite_file, Data};
 use std::path::{Path, PathBuf};
@@ -75,29 +76,32 @@ pub(crate) fn print_base() {
 
     write_to_files(
         &vanilla_base_extended_dir(),
+        &vanilla_item_path(),
         &vanilla_data,
         Expansion::Vanilla,
     );
     write_to_files(
         &tbc_base_extended_dir(),
+        &tbc_item_path(),
         &tbc_data,
         Expansion::BurningCrusade,
     );
     write_to_files(
         &wrath_base_extended_dir(),
+        &wrath_item_path(),
         &wrath_data,
         Expansion::WrathOfTheLichKing,
     );
 }
 
-fn write_to_files(directory: &Path, data: &Data, expansion: Expansion) {
-    write::write_exp(directory, data);
-    write::write_stats(directory, data);
-    write::write_skills(directory, data, expansion);
-    write::write_spells(directory, data);
-    write::write_positions(directory, data, expansion);
-    write::write_actions(directory, data);
-    write::write_area_triggers(directory, data, expansion);
-    write::write_pet_names(directory, data, expansion);
-    write_items(directory, data);
+fn write_to_files(base_directory: &Path, item_path: &Path, data: &Data, expansion: Expansion) {
+    write::write_exp(base_directory, data);
+    write::write_stats(base_directory, data);
+    write::write_skills(base_directory, data, expansion);
+    write::write_spells(base_directory, data);
+    write::write_positions(base_directory, data, expansion);
+    write::write_actions(base_directory, data);
+    write::write_area_triggers(base_directory, data, expansion);
+    write::write_pet_names(base_directory, data, expansion);
+    write_items(item_path, data);
 }

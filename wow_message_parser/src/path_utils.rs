@@ -25,6 +25,30 @@ pub(crate) fn tbc_base_extended_dir() -> PathBuf {
         .join("tbc")
 }
 
+pub(crate) fn vanilla_item_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_items")
+        .join("src")
+        .join("vanilla")
+        .join("data.rs")
+}
+
+pub(crate) fn tbc_item_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_items")
+        .join("src")
+        .join("tbc")
+        .join("data.rs")
+}
+
+pub(crate) fn wrath_item_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_items")
+        .join("src")
+        .join("wrath")
+        .join("data.rs")
+}
+
 pub(crate) fn wrath_base_extended_dir() -> PathBuf {
     workspace_directory()
         .join("wow_world_base")

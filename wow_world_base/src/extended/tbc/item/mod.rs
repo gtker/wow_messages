@@ -1,17 +1,5 @@
-mod data;
-
-pub use data::*;
-
 use crate::shared::player_race_tbc_wrath::PlayerRace;
 use crate::tbc::{Class, InventoryType, Item, ItemClassAndSubClass, RaceClass};
-
-pub fn lookup_item(id: u32) -> Option<&'static Item> {
-    ITEMS.iter().find(|a| a.entry == id)
-}
-
-pub const fn all_items() -> &'static [Item] {
-    ITEMS
-}
 
 impl Item {
     /// Returns true if the item is usable by the [`RaceClass`].

@@ -1,17 +1,6 @@
-mod data;
-
 use crate::manual::vanilla::Item;
 use crate::vanilla::{Class, InventoryType, ItemClassAndSubClass};
 use crate::vanilla::{PlayerRace, RaceClass};
-pub use data::*;
-
-pub fn lookup_item(id: u32) -> Option<&'static Item> {
-    ITEMS.iter().find(|a| a.entry == id)
-}
-
-pub const fn all_items() -> &'static [Item] {
-    ITEMS
-}
 
 impl Item {
     /// Returns true if the item is usable by the [`RaceClass`].
