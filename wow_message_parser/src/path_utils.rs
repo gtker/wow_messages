@@ -25,7 +25,7 @@ pub(crate) fn tbc_base_extended_dir() -> PathBuf {
         .join("tbc")
 }
 
-pub(crate) fn vanilla_item_path() -> PathBuf {
+pub(crate) fn vanilla_item_data_path() -> PathBuf {
     workspace_directory()
         .join("wow_items")
         .join("src")
@@ -33,7 +33,7 @@ pub(crate) fn vanilla_item_path() -> PathBuf {
         .join("data.rs")
 }
 
-pub(crate) fn tbc_item_path() -> PathBuf {
+pub(crate) fn tbc_item_data_path() -> PathBuf {
     workspace_directory()
         .join("wow_items")
         .join("src")
@@ -41,7 +41,7 @@ pub(crate) fn tbc_item_path() -> PathBuf {
         .join("data.rs")
 }
 
-pub(crate) fn wrath_item_path() -> PathBuf {
+pub(crate) fn wrath_item_data_path() -> PathBuf {
     workspace_directory()
         .join("wow_items")
         .join("src")
@@ -55,6 +55,33 @@ pub(crate) fn wrath_base_extended_dir() -> PathBuf {
         .join("src")
         .join("extended")
         .join("wrath")
+}
+
+pub(crate) fn vanilla_item_definition_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_base")
+        .join("src")
+        .join("manual")
+        .join("vanilla")
+        .join("item.rs")
+}
+
+pub(crate) fn tbc_item_definition_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_base")
+        .join("src")
+        .join("manual")
+        .join("tbc")
+        .join("item.rs")
+}
+
+pub(crate) fn wrath_item_definition_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_world_base")
+        .join("src")
+        .join("manual")
+        .join("wrath")
+        .join("item.rs")
 }
 
 pub(crate) fn parser_test_directory() -> PathBuf {

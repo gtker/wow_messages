@@ -52,6 +52,33 @@ impl Writer {
         self.newline();
     }
 
+    pub fn open_curly(&mut self, s: impl AsRef<str>) {
+        self.wln(format!("{} {{", s.as_ref()));
+        self.inc_indent();
+    }
+
+    pub fn closing_curly(&mut self) {
+        self.dec_indent();
+        self.wln("}");
+    }
+
+    pub fn pub_const_fn_new(&mut self, args: impl Fn(&mut Self), self_body: impl Fn(&mut Self)) {
+        self.wln("pub const fn new(");
+        self.inc_indent();
+
+        args(self);
+
+        self.dec_indent();
+        self.wln(") -> Self {");
+        self.inc_indent();
+
+        self.open_curly("Self");
+        self_body(self);
+        self.closing_curly(); // Self
+
+        self.closing_curly(); // fn body
+    }
+
     pub fn wln_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
         self.newline();
