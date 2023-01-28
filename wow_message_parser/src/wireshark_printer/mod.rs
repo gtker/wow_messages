@@ -172,6 +172,8 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
             Type::Enum { .. } => name += "_enum",
             _ => panic!("Types with the same name but different types in wireshark printer"),
         }
+    } else if name == "size" {
+        name += "_struct";
     } else if name.starts_with("position")
         && matches!(ty, Type::Integer(IntegerType::U16(Endianness::Little)))
     {

@@ -3778,8 +3778,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_size,
-            { "Size", "woww.size",
+        { &hf_woww_size_struct,
+            { "Size Struct", "woww.size.struct",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
