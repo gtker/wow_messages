@@ -341,7 +341,7 @@ heroic_keys: None,heroic_required_quest: 0 },
 (606, (
     AreaTrigger::Circle { position: Position::new(Map::ScarletMonastery, 1608.7, -309.0, 20.8, 0.0), radius: 8.0 }, 
     &[
-        Trigger::Teleport { location: Position::new(Map::EasternKingdoms, 2886.0, -835.8, 160.3, 0.3),required_level: 20,required_item: 0,required_quest: 0,failed_text: None,
+        Trigger::Teleport { location: Position::new(Map::EasternKingdoms, 2886.0, -835.8, 160.3, 0.3),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 },
     ]
 )),
@@ -853,7 +853,7 @@ heroic_keys: None,heroic_required_quest: 0 },
 (2890, (
     AreaTrigger::Circle { position: Position::new(Map::MoltenCore, 1115.2, -463.0, -95.0, 0.0), radius: 20.0 }, 
     &[
-        Trigger::Teleport { location: Position::new(Map::BlackrockDepths, 1115.3, -457.4, -102.7, 0.5),required_level: 50,required_item: 0,required_quest: 0,failed_text: None,
+        Trigger::Teleport { location: Position::new(Map::BlackrockDepths, 1115.3, -457.4, -102.7, 0.5),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 },
     ]
 )),
@@ -997,7 +997,7 @@ heroic_keys: None,heroic_required_quest: 0 },
 (3528, (
     AreaTrigger::Square { position: Position::new(Map::EasternKingdoms, -7510.9, -1035.9, 183.0, 0.0), length: 3.8, width: 0.4, height: 2.1, yaw: 0.7 },
     &[
-        Trigger::Teleport { location: Position::new(Map::MoltenCore, 1096.0, -467.0, -104.6, 3.6),required_level: 50,required_item: 0,required_quest: 0,failed_text: None,
+        Trigger::Teleport { location: Position::new(Map::MoltenCore, 1096.0, -467.0, -104.6, 3.6),required_level: 50,required_item: 0,required_quest: 7848,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 },
     ]
 )),
@@ -2530,6 +2530,13 @@ heroic_keys: None,heroic_required_quest: 0 },
 heroic_keys: None,heroic_required_quest: 0 },
     ]
 )),
+(5233, (
+    AreaTrigger::Square { position: Position::new(Map::Gundrak, 1913.8, 644.7, 144.0, 0.0), length: 4.0, width: 20.0, height: 20.0, yaw: 3.1 },
+    &[
+        Trigger::Teleport { location: Position::new(Map::Northrend, 6970.0, -4402.1, 441.6, 3.8),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 },
+    ]
+)),
 (5235, (
     AreaTrigger::Square { position: Position::new(Map::AhnKahetTheOldKingdom, 523.2, -300.3, 71.4, 0.0), length: 11.2, width: 1.5, height: 8.0, yaw: 0.0 },
     &[
@@ -2576,6 +2583,13 @@ heroic_keys: None,heroic_required_quest: 0 },
     AreaTrigger::Circle { position: Position::new(Map::Northrend, 5886.3, 651.4, 640.0, 0.0), radius: 6.0 }, 
     &[
         Trigger::Teleport { location: Position::new(Map::Northrend, 5791.4, 560.1, 633.8, 0.8),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
+heroic_keys: None,heroic_required_quest: 0 },
+    ]
+)),
+(5276, (
+    AreaTrigger::Square { position: Position::new(Map::Gundrak, 1981.1, 841.8, 144.0, 0.0), length: 4.0, width: 20.0, height: 20.0, yaw: 3.1 },
+    &[
+        Trigger::Teleport { location: Position::new(Map::Northrend, 6702.5, -4660.5, 441.6, 0.8),required_level: 0,required_item: 0,required_quest: 0,failed_text: None,
 heroic_keys: None,heroic_required_quest: 0 },
     ]
 )),
