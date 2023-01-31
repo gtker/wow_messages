@@ -1,7 +1,7 @@
 pub(crate) mod conversions;
 pub(crate) mod definition;
 
-use crate::base_printer::data::items::Items;
+use crate::base_printer::data::items::{Field, Items};
 
 pub(crate) struct Stats {
     pub strength: i32,
@@ -13,9 +13,6 @@ pub(crate) struct Stats {
     pub mana: i32,
 }
 
-use crate::base_printer::data::items::tbc::TbcItem;
-use crate::base_printer::data::items::vanilla::VanillaItem;
-use crate::base_printer::data::items::wrath::WrathItem;
 use crate::base_printer::data::Data;
 use crate::base_printer::write::items::definition::{definition, includes};
 use crate::base_printer::writer::Writer;
@@ -35,28 +32,55 @@ pub(crate) fn write_definition(path: &Path, data: &Data) {
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
+struct GenericItem {
+    entry: u32,
+    extra_flags: i32,
+    name: String,
+    fields: Vec<Field>,
+}
+
 pub(crate) fn write_items(path: &Path, data: &Data) {
     let mut s = Writer::new();
 
-    match &data.items {
-        Items::Vanilla(v) => vanilla(&mut s, v),
-        Items::BurningCrusade(v) => tbc(&mut s, v),
-        Items::Wrath(v) => wrath(&mut s, v),
-    }
+    let (items, expansion): (Vec<GenericItem>, Expansion) = match &data.items {
+        Items::Vanilla(v) => (
+            v.iter()
+                .map(|a| GenericItem {
+                    entry: a.entry,
+                    extra_flags: a.extra_flags,
+                    name: a.name.clone(),
+                    fields: a.values(),
+                })
+                .collect(),
+            Expansion::Vanilla,
+        ),
+        Items::BurningCrusade(v) => (
+            v.iter()
+                .map(|a| GenericItem {
+                    entry: a.entry,
+                    extra_flags: a.extra_flags,
+                    name: a.name.clone(),
+                    fields: a.values(),
+                })
+                .collect(),
+            Expansion::BurningCrusade,
+        ),
+        Items::Wrath(v) => (
+            v.iter()
+                .map(|a| GenericItem {
+                    entry: a.entry,
+                    extra_flags: a.extra_flags,
+                    name: a.name.clone(),
+                    fields: a.values(),
+                })
+                .collect(),
+            Expansion::WrathOfTheLichKing,
+        ),
+    };
+
+    all_items(&mut s, &items, expansion);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
-}
-
-fn vanilla_unobtainable(item: &VanillaItem) -> bool {
-    unobtainable(item.entry, item.extra_flags, &item.name)
-}
-
-fn tbc_unobtainable(item: &TbcItem) -> bool {
-    unobtainable(item.entry, item.extra_flags, &item.name)
-}
-
-fn wrath_unobtainable(item: &WrathItem) -> bool {
-    unobtainable(item.entry, item.extra_flags, &item.name)
 }
 
 fn unobtainable(entry: u32, extra_flags: i32, name: &str) -> bool {
@@ -96,75 +120,19 @@ fn print_unobtainable_cfg(s: &mut Writer) {
     s.wln("#[cfg(feature = \"unobtainable-items\")]");
 }
 
-fn vanilla(s: &mut Writer, items: &[VanillaItem]) {
-    includes(s, &items[0].values(), Expansion::Vanilla, ImportFrom::Items);
+fn all_items(s: &mut Writer, items: &[GenericItem], expansion: Expansion) {
+    includes(s, &items[0].fields, expansion, ImportFrom::Items);
 
     s.wln("pub const ITEMS: &[Item] = &[");
     s.inc_indent();
 
     for item in items {
-        if vanilla_unobtainable(item) {
+        if unobtainable(item.entry, item.extra_flags, &item.name) {
             print_unobtainable_cfg(s);
         }
         s.w("Item::new(");
 
-        for value in item.values() {
-            s.w_no_indent(format!("{},", value.value.to_string()));
-        }
-
-        s.wln_no_indent("),");
-    }
-
-    s.dec_indent();
-    s.wln("];");
-}
-
-fn tbc(s: &mut Writer, items: &[TbcItem]) {
-    includes(
-        s,
-        &items[0].values(),
-        Expansion::BurningCrusade,
-        ImportFrom::Items,
-    );
-
-    s.wln("pub const ITEMS: &[Item] = &[");
-    s.inc_indent();
-
-    for item in items {
-        if tbc_unobtainable(item) {
-            print_unobtainable_cfg(s);
-        }
-        s.w("Item::new(");
-
-        for value in item.values() {
-            s.w_no_indent(format!("{},", value.value.to_string()));
-        }
-
-        s.wln_no_indent("),");
-    }
-
-    s.dec_indent();
-    s.wln("];");
-}
-
-fn wrath(s: &mut Writer, items: &[WrathItem]) {
-    includes(
-        s,
-        &items[0].values(),
-        Expansion::WrathOfTheLichKing,
-        ImportFrom::Items,
-    );
-
-    s.wln("pub const ITEMS: &[Item] = &[");
-    s.inc_indent();
-
-    for item in items {
-        if wrath_unobtainable(item) {
-            print_unobtainable_cfg(s);
-        }
-        s.w("Item::new(");
-
-        for value in item.values() {
+        for value in &item.fields {
             s.w_no_indent(format!("{},", value.value.to_string()));
         }
 
