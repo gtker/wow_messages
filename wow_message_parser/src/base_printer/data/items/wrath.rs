@@ -9,7 +9,7 @@ use wow_world_base::wrath::{
 pub struct WrathItem {
     pub entry: u32,
     pub class_and_subclass: ItemClassAndSubClass,
-    pub unk0: i32,
+    pub sound_override_sub_class: i32,
     pub name: String,
     pub displayid: i32,
     pub quality: ItemQuality,
@@ -154,7 +154,10 @@ impl WrathItem {
                 "class_and_sub_class",
                 Value::WrathItemClassAndSubClass(self.class_and_subclass),
             ),
-            Field::new("sound_override_sub_class", Value::Int(self.unk0)),
+            Field::new(
+                "sound_override_sub_class",
+                Value::Int(self.sound_override_sub_class),
+            ),
             Field::new("name", Value::String(self.name.clone())),
             Field::new("displayid", Value::Int(self.displayid)),
             Field::new("quality", Value::WrathItemQuality(self.quality)),
@@ -502,7 +505,7 @@ ORDER BY
                     subclass << 32 | class,
                 )
                 .unwrap(),
-                unk0: row.get(3).unwrap(),
+                sound_override_sub_class: row.get(3).unwrap(),
                 name: row.get(4).unwrap(),
                 displayid: row.get(5).unwrap(),
                 quality: ItemQuality::try_from(row.get::<usize, u8>(6).unwrap()).unwrap(),
