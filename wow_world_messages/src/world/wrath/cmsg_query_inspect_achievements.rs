@@ -43,7 +43,7 @@ impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_QUERY_INSPECT_ACHIEVEMENTS {}
+impl crate::wrath::ClientMessage for CMSG_QUERY_INSPECT_ACHIEVEMENTS {}
 
 impl CMSG_QUERY_INSPECT_ACHIEVEMENTS {
     pub(crate) fn size(&self) -> usize {

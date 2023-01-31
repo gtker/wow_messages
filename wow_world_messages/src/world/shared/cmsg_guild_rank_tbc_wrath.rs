@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
+use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -89,10 +89,10 @@ impl crate::Message for CMSG_GUILD_RANK {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_RANK {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_RANK {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_RANK {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_RANK {}
 
 impl CMSG_GUILD_RANK {
     pub(crate) fn size(&self) -> usize {

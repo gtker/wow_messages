@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::WeatherChangeType;
-use crate::world::wrath::WeatherType;
+use crate::wrath::WeatherChangeType;
+use crate::wrath::WeatherType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -59,5 +59,5 @@ impl crate::Message for SMSG_WEATHER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_WEATHER {}
+impl crate::wrath::ServerMessage for SMSG_WEATHER {}
 

@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::ChatType;
-use crate::world::wrath::Language;
-use crate::world::wrath::PlayerChatTag;
+use crate::wrath::ChatType;
+use crate::wrath::Language;
+use crate::wrath::PlayerChatTag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -1035,7 +1035,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MESSAGECHAT {}
+impl crate::wrath::ServerMessage for SMSG_MESSAGECHAT {}
 
 impl SMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {

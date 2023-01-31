@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::GroupLootSetting;
-use crate::world::tbc::ItemQuality;
+use crate::tbc::GroupLootSetting;
+use crate::tbc::ItemQuality;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -61,5 +61,5 @@ impl crate::Message for CMSG_LOOT_METHOD {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_LOOT_METHOD {}
+impl crate::tbc::ClientMessage for CMSG_LOOT_METHOD {}
 

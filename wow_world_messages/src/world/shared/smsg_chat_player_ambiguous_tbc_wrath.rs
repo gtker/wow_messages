@@ -49,10 +49,10 @@ impl crate::Message for SMSG_CHAT_PLAYER_AMBIGUOUS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CHAT_PLAYER_AMBIGUOUS {}
+impl crate::tbc::ServerMessage for SMSG_CHAT_PLAYER_AMBIGUOUS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CHAT_PLAYER_AMBIGUOUS {}
+impl crate::wrath::ServerMessage for SMSG_CHAT_PLAYER_AMBIGUOUS {}
 
 impl SMSG_CHAT_PLAYER_AMBIGUOUS {
     pub(crate) fn size(&self) -> usize {

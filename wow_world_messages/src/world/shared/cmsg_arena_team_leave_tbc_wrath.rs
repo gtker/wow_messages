@@ -40,8 +40,8 @@ impl crate::Message for CMSG_ARENA_TEAM_LEAVE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ARENA_TEAM_LEAVE {}
+impl crate::tbc::ClientMessage for CMSG_ARENA_TEAM_LEAVE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ARENA_TEAM_LEAVE {}
+impl crate::wrath::ClientMessage for CMSG_ARENA_TEAM_LEAVE {}
 

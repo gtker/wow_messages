@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::GroupListMember;
-use crate::world::tbc::DungeonDifficulty;
-use crate::world::tbc::GroupLootSetting;
-use crate::world::tbc::GroupType;
-use crate::world::tbc::ItemQuality;
+use crate::tbc::GroupListMember;
+use crate::tbc::DungeonDifficulty;
+use crate::tbc::GroupLootSetting;
+use crate::tbc::GroupType;
+use crate::tbc::ItemQuality;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -173,7 +173,7 @@ impl crate::Message for SMSG_GROUP_LIST {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GROUP_LIST {}
+impl crate::tbc::ServerMessage for SMSG_GROUP_LIST {}
 
 impl SMSG_GROUP_LIST {
     pub(crate) fn size(&self) -> usize {

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Area;
-use crate::world::vanilla::CastFailureReason;
-use crate::world::vanilla::SimpleSpellCastResult;
+use crate::vanilla::Area;
+use crate::vanilla::CastFailureReason;
+use crate::vanilla::SimpleSpellCastResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -444,7 +444,7 @@ impl crate::Message for SMSG_CAST_RESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CAST_RESULT {}
+impl crate::vanilla::ServerMessage for SMSG_CAST_RESULT {}
 
 impl SMSG_CAST_RESULT {
     pub(crate) fn size(&self) -> usize {

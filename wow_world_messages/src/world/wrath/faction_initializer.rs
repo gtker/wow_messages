@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::FactionFlag;
+use crate::wrath::FactionFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -28,7 +28,7 @@ impl FactionInitializer {
 }
 
 impl FactionInitializer {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flag: FactionFlag
         let flag = FactionFlag::new(crate::util::read_u8_le(r)?);
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
+use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -85,13 +85,13 @@ impl crate::Message for SMSG_SPELLLOGMISS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPELLLOGMISS {}
+impl crate::vanilla::ServerMessage for SMSG_SPELLLOGMISS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELLLOGMISS {}
+impl crate::tbc::ServerMessage for SMSG_SPELLLOGMISS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELLLOGMISS {}
+impl crate::wrath::ServerMessage for SMSG_SPELLLOGMISS {}
 
 impl SMSG_SPELLLOGMISS {
     pub(crate) fn size(&self) -> usize {

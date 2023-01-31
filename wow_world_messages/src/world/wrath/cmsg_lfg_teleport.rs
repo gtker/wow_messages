@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::LfgTeleportLocation;
+use crate::wrath::LfgTeleportLocation;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for CMSG_LFG_TELEPORT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LFG_TELEPORT {}
+impl crate::wrath::ClientMessage for CMSG_LFG_TELEPORT {}
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::friend_result_vanilla_tbc::FriendResult;
+use crate::shared::friend_result_vanilla_tbc::FriendResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,8 +51,8 @@ impl crate::Message for SMSG_FRIEND_STATUS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_FRIEND_STATUS {}
+impl crate::vanilla::ServerMessage for SMSG_FRIEND_STATUS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_FRIEND_STATUS {}
+impl crate::tbc::ServerMessage for SMSG_FRIEND_STATUS {}
 

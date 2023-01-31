@@ -67,11 +67,11 @@ impl crate::Message for CMSG_SET_ACTION_BUTTON {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SET_ACTION_BUTTON {}
+impl crate::vanilla::ClientMessage for CMSG_SET_ACTION_BUTTON {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_ACTION_BUTTON {}
+impl crate::tbc::ClientMessage for CMSG_SET_ACTION_BUTTON {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_ACTION_BUTTON {}
+impl crate::wrath::ClientMessage for CMSG_SET_ACTION_BUTTON {}
 

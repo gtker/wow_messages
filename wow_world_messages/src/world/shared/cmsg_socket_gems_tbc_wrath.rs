@@ -55,8 +55,8 @@ impl crate::Message for CMSG_SOCKET_GEMS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SOCKET_GEMS {}
+impl crate::tbc::ClientMessage for CMSG_SOCKET_GEMS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SOCKET_GEMS {}
+impl crate::wrath::ClientMessage for CMSG_SOCKET_GEMS {}
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::battleground_player_position_vanilla_tbc_wrath::BattlegroundPlayerPosition;
+use crate::shared::battleground_player_position_vanilla_tbc_wrath::BattlegroundPlayerPosition;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -76,13 +76,13 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
+impl crate::vanilla::ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
+impl crate::tbc::ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
+impl crate::wrath::ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 
 impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub(crate) fn size(&self) -> usize {

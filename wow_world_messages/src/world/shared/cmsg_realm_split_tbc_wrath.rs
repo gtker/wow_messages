@@ -10,7 +10,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct CMSG_REALM_SPLIT {
     /// Realm ID that was sent earlier by the Auth Server
-    /// ArcEmu/TriniyCore/mangosthree send back in [`SMSG_REALM_SPLIT`](crate::world::tbc::SMSG_REALM_SPLIT).
+    /// ArcEmu/TriniyCore/mangosthree send back in [`SMSG_REALM_SPLIT`](crate::tbc::SMSG_REALM_SPLIT).
     ///
     pub realm_id: u32,
 }
@@ -43,8 +43,8 @@ impl crate::Message for CMSG_REALM_SPLIT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_REALM_SPLIT {}
+impl crate::tbc::ClientMessage for CMSG_REALM_SPLIT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REALM_SPLIT {}
+impl crate::wrath::ClientMessage for CMSG_REALM_SPLIT {}
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Area;
+use crate::wrath::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -56,7 +56,7 @@ impl crate::Message for SMSG_DEFENSE_MESSAGE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_DEFENSE_MESSAGE {}
+impl crate::wrath::ServerMessage for SMSG_DEFENSE_MESSAGE {}
 
 impl SMSG_DEFENSE_MESSAGE {
     pub(crate) fn size(&self) -> usize {

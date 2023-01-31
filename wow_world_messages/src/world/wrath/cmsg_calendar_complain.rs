@@ -59,5 +59,5 @@ impl crate::Message for CMSG_CALENDAR_COMPLAIN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_COMPLAIN {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_COMPLAIN {}
 

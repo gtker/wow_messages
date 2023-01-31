@@ -67,5 +67,5 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_EJECTED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_EJECTED {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_EJECTED {}
 

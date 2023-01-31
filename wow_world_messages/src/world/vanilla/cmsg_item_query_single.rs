@@ -50,5 +50,5 @@ impl crate::Message for CMSG_ITEM_QUERY_SINGLE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_ITEM_QUERY_SINGLE {}
+impl crate::vanilla::ClientMessage for CMSG_ITEM_QUERY_SINGLE {}
 

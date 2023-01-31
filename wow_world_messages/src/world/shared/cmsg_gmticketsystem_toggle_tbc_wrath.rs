@@ -31,8 +31,8 @@ impl crate::Message for CMSG_GMTICKETSYSTEM_TOGGLE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GMTICKETSYSTEM_TOGGLE {}
+impl crate::tbc::ClientMessage for CMSG_GMTICKETSYSTEM_TOGGLE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GMTICKETSYSTEM_TOGGLE {}
+impl crate::wrath::ClientMessage for CMSG_GMTICKETSYSTEM_TOGGLE {}
 

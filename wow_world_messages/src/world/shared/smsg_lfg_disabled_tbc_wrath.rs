@@ -31,8 +31,8 @@ impl crate::Message for SMSG_LFG_DISABLED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LFG_DISABLED {}
+impl crate::tbc::ServerMessage for SMSG_LFG_DISABLED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_DISABLED {}
+impl crate::wrath::ServerMessage for SMSG_LFG_DISABLED {}
 

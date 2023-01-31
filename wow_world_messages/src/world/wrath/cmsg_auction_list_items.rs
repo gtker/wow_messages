@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::AuctionSort;
-use crate::world::wrath::ItemQuality;
+use crate::wrath::AuctionSort;
+use crate::wrath::ItemQuality;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -161,7 +161,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_AUCTION_LIST_ITEMS {}
+impl crate::wrath::ClientMessage for CMSG_AUCTION_LIST_ITEMS {}
 
 impl CMSG_AUCTION_LIST_ITEMS {
     pub(crate) fn size(&self) -> usize {

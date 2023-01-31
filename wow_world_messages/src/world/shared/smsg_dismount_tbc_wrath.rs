@@ -43,10 +43,10 @@ impl crate::Message for SMSG_DISMOUNT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_DISMOUNT {}
+impl crate::tbc::ServerMessage for SMSG_DISMOUNT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_DISMOUNT {}
+impl crate::wrath::ServerMessage for SMSG_DISMOUNT {}
 
 impl SMSG_DISMOUNT {
     pub(crate) fn size(&self) -> usize {

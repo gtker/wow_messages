@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
+use crate::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,8 +41,8 @@ impl crate::Message for SMSG_PET_TAME_FAILURE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PET_TAME_FAILURE {}
+impl crate::vanilla::ServerMessage for SMSG_PET_TAME_FAILURE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PET_TAME_FAILURE {}
+impl crate::tbc::ServerMessage for SMSG_PET_TAME_FAILURE {}
 

@@ -41,11 +41,11 @@ impl crate::Message for CMSG_REQUEST_PARTY_MEMBER_STATS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_REQUEST_PARTY_MEMBER_STATS {}
+impl crate::vanilla::ClientMessage for CMSG_REQUEST_PARTY_MEMBER_STATS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_REQUEST_PARTY_MEMBER_STATS {}
+impl crate::tbc::ClientMessage for CMSG_REQUEST_PARTY_MEMBER_STATS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REQUEST_PARTY_MEMBER_STATS {}
+impl crate::wrath::ClientMessage for CMSG_REQUEST_PARTY_MEMBER_STATS {}
 

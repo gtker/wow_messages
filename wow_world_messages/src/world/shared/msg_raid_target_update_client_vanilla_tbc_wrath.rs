@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
+use crate::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -190,13 +190,13 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
+impl crate::vanilla::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
+impl crate::tbc::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
+impl crate::wrath::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 
 impl MSG_RAID_TARGET_UPDATE_Client {
     pub(crate) fn size(&self) -> usize {

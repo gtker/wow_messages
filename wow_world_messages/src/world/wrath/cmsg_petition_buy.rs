@@ -225,7 +225,7 @@ impl crate::Message for CMSG_PETITION_BUY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PETITION_BUY {}
+impl crate::wrath::ClientMessage for CMSG_PETITION_BUY {}
 
 impl CMSG_PETITION_BUY {
     pub(crate) fn size(&self) -> usize {

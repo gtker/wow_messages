@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::CompressedMove;
+use crate::vanilla::CompressedMove;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -60,7 +60,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {}
+impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {}
 
 impl SMSG_COMPRESSED_MOVES {
     pub(crate) fn size(&self) -> usize {

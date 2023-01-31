@@ -52,7 +52,7 @@ impl crate::Message for SMSG_FORCE_MOVE_UNROOT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_FORCE_MOVE_UNROOT {}
+impl crate::wrath::ServerMessage for SMSG_FORCE_MOVE_UNROOT {}
 
 impl SMSG_FORCE_MOVE_UNROOT {
     pub(crate) fn size(&self) -> usize {

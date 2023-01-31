@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::realm_split_state_tbc_wrath::RealmSplitState;
+use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -12,7 +12,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct SMSG_REALM_SPLIT {
-    /// ArcEmu/TrinityCore/mangosthree send realm_id from [`CMSG_REALM_SPLIT`](crate::world::tbc::CMSG_REALM_SPLIT) back.
+    /// ArcEmu/TrinityCore/mangosthree send realm_id from [`CMSG_REALM_SPLIT`](crate::tbc::CMSG_REALM_SPLIT) back.
     ///
     pub realm_id: u32,
     pub state: RealmSplitState,
@@ -70,10 +70,10 @@ impl crate::Message for SMSG_REALM_SPLIT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_REALM_SPLIT {}
+impl crate::tbc::ServerMessage for SMSG_REALM_SPLIT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_REALM_SPLIT {}
+impl crate::wrath::ServerMessage for SMSG_REALM_SPLIT {}
 
 impl SMSG_REALM_SPLIT {
     pub(crate) fn size(&self) -> usize {

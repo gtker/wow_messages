@@ -59,11 +59,11 @@ impl crate::Message for CMSG_LOOT_MASTER_GIVE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_LOOT_MASTER_GIVE {}
+impl crate::vanilla::ClientMessage for CMSG_LOOT_MASTER_GIVE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_LOOT_MASTER_GIVE {}
+impl crate::tbc::ClientMessage for CMSG_LOOT_MASTER_GIVE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LOOT_MASTER_GIVE {}
+impl crate::wrath::ClientMessage for CMSG_LOOT_MASTER_GIVE {}
 

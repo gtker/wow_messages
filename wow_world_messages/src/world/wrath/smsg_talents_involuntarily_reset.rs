@@ -42,5 +42,5 @@ impl crate::Message for SMSG_TALENTS_INVOLUNTARILY_RESET {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TALENTS_INVOLUNTARILY_RESET {}
+impl crate::wrath::ServerMessage for SMSG_TALENTS_INVOLUNTARILY_RESET {}
 

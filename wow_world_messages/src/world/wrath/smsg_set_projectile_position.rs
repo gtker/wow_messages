@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Vector3d;
+use crate::wrath::Vector3d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -60,5 +60,5 @@ impl crate::Message for SMSG_SET_PROJECTILE_POSITION {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SET_PROJECTILE_POSITION {}
+impl crate::wrath::ServerMessage for SMSG_SET_PROJECTILE_POSITION {}
 

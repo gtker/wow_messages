@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
-use crate::world::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
+use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
+use crate::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -79,13 +79,13 @@ impl crate::Message for SMSG_CHANNEL_LIST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHANNEL_LIST {}
+impl crate::vanilla::ServerMessage for SMSG_CHANNEL_LIST {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CHANNEL_LIST {}
+impl crate::tbc::ServerMessage for SMSG_CHANNEL_LIST {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CHANNEL_LIST {}
+impl crate::wrath::ServerMessage for SMSG_CHANNEL_LIST {}
 
 impl SMSG_CHANNEL_LIST {
     pub(crate) fn size(&self) -> usize {

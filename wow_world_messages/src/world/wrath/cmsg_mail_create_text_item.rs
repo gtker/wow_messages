@@ -50,5 +50,5 @@ impl crate::Message for CMSG_MAIL_CREATE_TEXT_ITEM {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MAIL_CREATE_TEXT_ITEM {}
+impl crate::wrath::ClientMessage for CMSG_MAIL_CREATE_TEXT_ITEM {}
 

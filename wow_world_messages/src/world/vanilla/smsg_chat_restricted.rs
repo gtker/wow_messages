@@ -31,5 +31,5 @@ impl crate::Message for SMSG_CHAT_RESTRICTED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHAT_RESTRICTED {}
+impl crate::vanilla::ServerMessage for SMSG_CHAT_RESTRICTED {}
 

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Vector3d;
-use crate::world::tbc::GmTicketType;
-use crate::world::tbc::Map;
+use crate::tbc::Vector3d;
+use crate::tbc::GmTicketType;
+use crate::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -222,7 +222,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GMTICKET_CREATE {}
+impl crate::tbc::ClientMessage for CMSG_GMTICKET_CREATE {}
 
 impl CMSG_GMTICKET_CREATE {
     pub(crate) fn size(&self) -> usize {

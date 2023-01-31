@@ -41,5 +41,5 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SUMMON_RESPONSE {}
+impl crate::vanilla::ClientMessage for CMSG_SUMMON_RESPONSE {}
 

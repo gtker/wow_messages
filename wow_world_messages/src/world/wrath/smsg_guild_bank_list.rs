@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::GuildBankSlot;
-use crate::world::wrath::GuildBankTab;
-use crate::world::wrath::GuildBankContentResult;
-use crate::world::wrath::GuildBankTabResult;
+use crate::wrath::GuildBankSlot;
+use crate::wrath::GuildBankTab;
+use crate::wrath::GuildBankContentResult;
+use crate::wrath::GuildBankTabResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -158,7 +158,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GUILD_BANK_LIST {}
+impl crate::wrath::ServerMessage for SMSG_GUILD_BANK_LIST {}
 
 impl SMSG_GUILD_BANK_LIST {
     pub(crate) fn size(&self) -> usize {

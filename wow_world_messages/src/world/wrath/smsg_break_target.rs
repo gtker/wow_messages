@@ -43,7 +43,7 @@ impl crate::Message for SMSG_BREAK_TARGET {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BREAK_TARGET {}
+impl crate::wrath::ServerMessage for SMSG_BREAK_TARGET {}
 
 impl SMSG_BREAK_TARGET {
     pub(crate) fn size(&self) -> usize {

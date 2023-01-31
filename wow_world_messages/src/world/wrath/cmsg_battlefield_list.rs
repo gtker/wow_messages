@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::BattlefieldListLocation;
-use crate::world::wrath::BattlegroundType;
+use crate::wrath::BattlefieldListLocation;
+use crate::wrath::BattlegroundType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -61,5 +61,5 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BATTLEFIELD_LIST {}
+impl crate::wrath::ClientMessage for CMSG_BATTLEFIELD_LIST {}
 

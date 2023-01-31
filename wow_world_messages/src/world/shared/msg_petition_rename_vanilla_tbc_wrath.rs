@@ -57,22 +57,22 @@ impl crate::Message for MSG_PETITION_RENAME {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_PETITION_RENAME {}
+impl crate::vanilla::ClientMessage for MSG_PETITION_RENAME {}
 
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_PETITION_RENAME {}
+impl crate::vanilla::ServerMessage for MSG_PETITION_RENAME {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_PETITION_RENAME {}
+impl crate::tbc::ClientMessage for MSG_PETITION_RENAME {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_PETITION_RENAME {}
+impl crate::tbc::ServerMessage for MSG_PETITION_RENAME {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_PETITION_RENAME {}
+impl crate::wrath::ClientMessage for MSG_PETITION_RENAME {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_PETITION_RENAME {}
+impl crate::wrath::ServerMessage for MSG_PETITION_RENAME {}
 
 impl MSG_PETITION_RENAME {
     pub(crate) fn size(&self) -> usize {

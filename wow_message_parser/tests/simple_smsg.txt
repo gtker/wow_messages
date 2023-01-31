@@ -40,5 +40,5 @@ impl crate::Message for SimpleSmsg {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SimpleSmsg {}
+impl crate::vanilla::ServerMessage for SimpleSmsg {}
 

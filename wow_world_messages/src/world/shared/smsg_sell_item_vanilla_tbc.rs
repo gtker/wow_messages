@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::sell_item_result_vanilla_tbc::SellItemResult;
+use crate::shared::sell_item_result_vanilla_tbc::SellItemResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -60,8 +60,8 @@ impl crate::Message for SMSG_SELL_ITEM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SELL_ITEM {}
+impl crate::vanilla::ServerMessage for SMSG_SELL_ITEM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SELL_ITEM {}
+impl crate::tbc::ServerMessage for SMSG_SELL_ITEM {}
 

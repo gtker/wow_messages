@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::DateTime;
-use crate::world::wrath::SendCalendarEvent;
-use crate::world::wrath::SendCalendarInstance;
-use crate::world::wrath::SendCalendarInvite;
-use crate::world::wrath::SendCalendarResetTime;
+use crate::wrath::SendCalendarEvent;
+use crate::wrath::SendCalendarInstance;
+use crate::wrath::SendCalendarInvite;
+use crate::wrath::SendCalendarResetTime;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -157,7 +157,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_SEND_CALENDAR {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_SEND_CALENDAR {}
 
 impl SMSG_CALENDAR_SEND_CALENDAR {
     pub(crate) fn size(&self) -> usize {

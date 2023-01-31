@@ -31,8 +31,8 @@ impl crate::Message for SMSG_ATTACKSWING_NOTSTANDING {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ATTACKSWING_NOTSTANDING {}
+impl crate::vanilla::ServerMessage for SMSG_ATTACKSWING_NOTSTANDING {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ATTACKSWING_NOTSTANDING {}
+impl crate::tbc::ServerMessage for SMSG_ATTACKSWING_NOTSTANDING {}
 

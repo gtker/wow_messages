@@ -4,7 +4,7 @@ use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Signals that client has right clicked an opponent and is in the attack stance.
-/// Server should reply with [`SMSG_ATTACKSTART`](crate::world::vanilla::SMSG_ATTACKSTART).
+/// Server should reply with [`SMSG_ATTACKSTART`](crate::vanilla::SMSG_ATTACKSTART).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/cmsg_attackswing.wowm#L3):
 /// ```text
@@ -44,22 +44,22 @@ impl crate::Message for CMSG_ATTACKSWING {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_ATTACKSWING {}
+impl crate::vanilla::ClientMessage for CMSG_ATTACKSWING {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ATTACKSWING {}
+impl crate::tbc::ClientMessage for CMSG_ATTACKSWING {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ATTACKSWING {}
+impl crate::wrath::ClientMessage for CMSG_ATTACKSWING {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::CMSG_ATTACKSWING;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x41, 0x01, 0x00, 0x00, 0x64, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
@@ -146,9 +146,9 @@ mod test_tbc {
     use super::CMSG_ATTACKSWING;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x41, 0x01, 0x00, 0x00, 0x64, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
@@ -235,9 +235,9 @@ mod test_wrath {
     use super::CMSG_ATTACKSWING;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x41, 0x01, 0x00, 0x00, 0x64, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];

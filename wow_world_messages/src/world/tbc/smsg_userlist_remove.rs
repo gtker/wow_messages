@@ -75,7 +75,7 @@ impl crate::Message for SMSG_USERLIST_REMOVE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_USERLIST_REMOVE {}
+impl crate::tbc::ServerMessage for SMSG_USERLIST_REMOVE {}
 
 impl SMSG_USERLIST_REMOVE {
     pub(crate) fn size(&self) -> usize {

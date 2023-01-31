@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::GroupLootSetting;
-use crate::world::vanilla::ItemQuality;
+use crate::vanilla::GroupLootSetting;
+use crate::vanilla::ItemQuality;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -61,5 +61,5 @@ impl crate::Message for CMSG_LOOT_METHOD {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_LOOT_METHOD {}
+impl crate::vanilla::ClientMessage for CMSG_LOOT_METHOD {}
 

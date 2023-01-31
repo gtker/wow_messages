@@ -1,13 +1,13 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::Class;
-use crate::world::tbc::DeclinedNames;
-use crate::world::tbc::Gender;
-use crate::world::tbc::Race;
+use crate::tbc::Class;
+use crate::tbc::DeclinedNames;
+use crate::tbc::Gender;
+use crate::tbc::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Response to [`CMSG_NAME_QUERY`](crate::world::vanilla::CMSG_NAME_QUERY).
+/// Response to [`CMSG_NAME_QUERY`](crate::vanilla::CMSG_NAME_QUERY).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm#L22):
 /// ```text
@@ -149,7 +149,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
 
 impl SMSG_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

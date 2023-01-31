@@ -42,5 +42,5 @@ impl crate::Message for SMSG_WORLD_STATE_UI_TIMER_UPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_WORLD_STATE_UI_TIMER_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_WORLD_STATE_UI_TIMER_UPDATE {}
 

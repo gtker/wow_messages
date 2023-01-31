@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Relation;
-use crate::world::tbc::RelationType;
+use crate::tbc::Relation;
+use crate::tbc::RelationType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CONTACT_LIST {}
+impl crate::tbc::ServerMessage for SMSG_CONTACT_LIST {}
 
 impl SMSG_CONTACT_LIST {
     pub(crate) fn size(&self) -> usize {

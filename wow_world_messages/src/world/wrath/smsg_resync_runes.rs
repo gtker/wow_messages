@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ResyncRune;
+use crate::wrath::ResyncRune;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_RESYNC_RUNES {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_RESYNC_RUNES {}
+impl crate::wrath::ServerMessage for SMSG_RESYNC_RUNES {}
 
 impl SMSG_RESYNC_RUNES {
     pub(crate) fn size(&self) -> usize {

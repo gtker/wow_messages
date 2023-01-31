@@ -41,20 +41,20 @@ impl crate::Message for MSG_TABARDVENDOR_ACTIVATE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
+impl crate::vanilla::ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
 
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
+impl crate::vanilla::ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
+impl crate::tbc::ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
+impl crate::tbc::ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
+impl crate::wrath::ClientMessage for MSG_TABARDVENDOR_ACTIVATE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
+impl crate::wrath::ServerMessage for MSG_TABARDVENDOR_ACTIVATE {}
 

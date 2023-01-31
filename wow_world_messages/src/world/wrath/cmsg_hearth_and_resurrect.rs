@@ -31,5 +31,5 @@ impl crate::Message for CMSG_HEARTH_AND_RESURRECT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_HEARTH_AND_RESURRECT {}
+impl crate::wrath::ClientMessage for CMSG_HEARTH_AND_RESURRECT {}
 

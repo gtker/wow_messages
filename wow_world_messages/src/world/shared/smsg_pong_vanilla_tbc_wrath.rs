@@ -40,21 +40,21 @@ impl crate::Message for SMSG_PONG {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PONG {}
+impl crate::vanilla::ServerMessage for SMSG_PONG {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PONG {}
+impl crate::tbc::ServerMessage for SMSG_PONG {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PONG {}
+impl crate::wrath::ServerMessage for SMSG_PONG {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::SMSG_PONG;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xDD, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
 
@@ -140,8 +140,8 @@ mod test_tbc {
     use super::SMSG_PONG;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xDD, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
 
@@ -227,8 +227,8 @@ mod test_wrath {
     use super::SMSG_PONG;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ServerOpcodeMessage;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::opcodes::ServerOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xDD, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
 

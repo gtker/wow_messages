@@ -157,5 +157,5 @@ impl crate::Message for SMSG_LEVELUP_INFO {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LEVELUP_INFO {}
+impl crate::wrath::ServerMessage for SMSG_LEVELUP_INFO {}
 

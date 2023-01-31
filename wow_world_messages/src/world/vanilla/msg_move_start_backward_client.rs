@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -43,7 +43,7 @@ impl crate::Message for MSG_MOVE_START_BACKWARD_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_MOVE_START_BACKWARD_Client {}
+impl crate::vanilla::ClientMessage for MSG_MOVE_START_BACKWARD_Client {}
 
 impl MSG_MOVE_START_BACKWARD_Client {
     pub(crate) fn size(&self) -> usize {
@@ -56,9 +56,9 @@ mod test {
     use super::MSG_MOVE_START_BACKWARD_Client;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 34] = [ 0x00, 0x20, 0xB6, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00,
          0x00, 0x10, 0x57, 0x5B, 0x02, 0x75, 0xA5, 0x0B, 0xC6, 0x6F, 0xF4, 0xF4,

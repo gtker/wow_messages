@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Vector3d;
-use crate::world::vanilla::GmTicketType;
-use crate::world::vanilla::Map;
+use crate::vanilla::Vector3d;
+use crate::vanilla::GmTicketType;
+use crate::vanilla::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -168,7 +168,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GMTICKET_CREATE {}
+impl crate::vanilla::ClientMessage for CMSG_GMTICKET_CREATE {}
 
 impl CMSG_GMTICKET_CREATE {
     pub(crate) fn size(&self) -> usize {

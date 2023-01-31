@@ -39,5 +39,5 @@ impl crate::Message for SMSG_LFG_UPDATE_SEARCH {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_UPDATE_SEARCH {}
+impl crate::wrath::ServerMessage for SMSG_LFG_UPDATE_SEARCH {}
 

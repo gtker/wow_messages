@@ -41,11 +41,11 @@ impl crate::Message for SMSG_READ_ITEM_OK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_READ_ITEM_OK {}
+impl crate::vanilla::ServerMessage for SMSG_READ_ITEM_OK {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_READ_ITEM_OK {}
+impl crate::tbc::ServerMessage for SMSG_READ_ITEM_OK {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_READ_ITEM_OK {}
+impl crate::wrath::ServerMessage for SMSG_READ_ITEM_OK {}
 

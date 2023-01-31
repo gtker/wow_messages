@@ -5,8 +5,8 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Tells the client what the datetime is and how fast time passes.
 ///
-/// The client also asks for the datetime with [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME) and gets a reply from [`SMSG_QUERY_TIME_RESPONSE`](crate::world::vanilla::SMSG_QUERY_TIME_RESPONSE), but this does not appear to change anything in the client.
-/// Despite sending this as the very first message after the client logs in it will still send a [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME).
+/// The client also asks for the datetime with [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME) and gets a reply from [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE), but this does not appear to change anything in the client.
+/// Despite sending this as the very first message after the client logs in it will still send a [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L1):
 /// ```text
@@ -18,7 +18,7 @@ use std::io::{Write, Read};
 pub struct SMSG_LOGIN_SETTIMESPEED {
     /// Current server datetime.
     ///
-    /// Running the client with `-console` verifies that this message in this format sets the correct datetime. [`SMSG_QUERY_TIME_RESPONSE`](crate::world::vanilla::SMSG_QUERY_TIME_RESPONSE) will not set this.
+    /// Running the client with `-console` verifies that this message in this format sets the correct datetime. [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE) will not set this.
     ///
     pub datetime: DateTime,
     /// How many minutes should pass by every second.
@@ -61,18 +61,18 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOGIN_SETTIMESPEED {}
+impl crate::vanilla::ServerMessage for SMSG_LOGIN_SETTIMESPEED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOGIN_SETTIMESPEED {}
+impl crate::tbc::ServerMessage for SMSG_LOGIN_SETTIMESPEED {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::SMSG_LOGIN_SETTIMESPEED;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x42, 0x00, 0x0A, 0x1A, 0x73, 0x16, 0x89,
          0x88, 0x88, 0x3C, ];
@@ -165,8 +165,8 @@ mod test_tbc {
     use super::SMSG_LOGIN_SETTIMESPEED;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 12] = [ 0x00, 0x0A, 0x42, 0x00, 0x0A, 0x1A, 0x73, 0x16, 0x89,
          0x88, 0x88, 0x3C, ];

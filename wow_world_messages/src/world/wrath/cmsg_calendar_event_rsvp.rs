@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::CalendarStatus;
+use crate::wrath::CalendarStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -60,5 +60,5 @@ impl crate::Message for CMSG_CALENDAR_EVENT_RSVP {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_EVENT_RSVP {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_EVENT_RSVP {}
 

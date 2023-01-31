@@ -64,13 +64,13 @@ impl crate::Message for SMSG_RESURRECT_REQUEST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_RESURRECT_REQUEST {}
+impl crate::vanilla::ServerMessage for SMSG_RESURRECT_REQUEST {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_RESURRECT_REQUEST {}
+impl crate::tbc::ServerMessage for SMSG_RESURRECT_REQUEST {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_RESURRECT_REQUEST {}
+impl crate::wrath::ServerMessage for SMSG_RESURRECT_REQUEST {}
 
 impl SMSG_RESURRECT_REQUEST {
     pub(crate) fn size(&self) -> usize {

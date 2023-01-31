@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Respond with [`SMSG_UPDATE_ACCOUNT_DATA`](crate::world::tbc::SMSG_UPDATE_ACCOUNT_DATA)
+/// Respond with [`SMSG_UPDATE_ACCOUNT_DATA`](crate::tbc::SMSG_UPDATE_ACCOUNT_DATA)
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm#L1):
 /// ```text
@@ -11,7 +11,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_REQUEST_ACCOUNT_DATA {
-    /// The type of account data being requested. You can check this against the [`CacheMask`](crate::world::wrath::CacheMask) to know if this is character-specific data or account-wide data.
+    /// The type of account data being requested. You can check this against the [`CacheMask`](crate::wrath::CacheMask) to know if this is character-specific data or account-wide data.
     ///
     pub data_type: u32,
 }
@@ -44,21 +44,21 @@ impl crate::Message for CMSG_REQUEST_ACCOUNT_DATA {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
+impl crate::vanilla::ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
+impl crate::tbc::ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
+impl crate::wrath::ClientMessage for CMSG_REQUEST_ACCOUNT_DATA {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::CMSG_REQUEST_ACCOUNT_DATA;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0x0A, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, ];
@@ -145,8 +145,8 @@ mod test_tbc {
     use super::CMSG_REQUEST_ACCOUNT_DATA;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0x0A, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, ];
@@ -233,8 +233,8 @@ mod test_wrath {
     use super::CMSG_REQUEST_ACCOUNT_DATA;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ClientOpcodeMessage;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0x0A, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, ];

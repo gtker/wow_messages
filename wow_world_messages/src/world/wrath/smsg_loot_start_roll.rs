@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Map;
-use crate::world::wrath::RollFlags;
+use crate::wrath::Map;
+use crate::wrath::RollFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -108,5 +108,5 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_START_ROLL {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_START_ROLL {}
 

@@ -41,11 +41,11 @@ impl crate::Message for CMSG_PETITION_SHOW_SIGNATURES {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {}
+impl crate::vanilla::ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {}
+impl crate::tbc::ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {}
+impl crate::wrath::ClientMessage for CMSG_PETITION_SHOW_SIGNATURES {}
 

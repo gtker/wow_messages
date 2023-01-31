@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::BankSwapSource;
-use crate::world::tbc::BankSwapStoreMode;
+use crate::tbc::BankSwapSource;
+use crate::tbc::BankSwapStoreMode;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -293,7 +293,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_BANK_SWAP_ITEMS {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_BANK_SWAP_ITEMS {}
 
 impl CMSG_GUILD_BANK_SWAP_ITEMS {
     pub(crate) fn size(&self) -> usize {

@@ -31,11 +31,11 @@ impl crate::Message for SMSG_FISH_ESCAPED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_FISH_ESCAPED {}
+impl crate::vanilla::ServerMessage for SMSG_FISH_ESCAPED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_FISH_ESCAPED {}
+impl crate::tbc::ServerMessage for SMSG_FISH_ESCAPED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_FISH_ESCAPED {}
+impl crate::wrath::ServerMessage for SMSG_FISH_ESCAPED {}
 

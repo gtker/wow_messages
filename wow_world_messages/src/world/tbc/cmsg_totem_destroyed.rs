@@ -40,5 +40,5 @@ impl crate::Message for CMSG_TOTEM_DESTROYED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_TOTEM_DESTROYED {}
+impl crate::tbc::ClientMessage for CMSG_TOTEM_DESTROYED {}
 

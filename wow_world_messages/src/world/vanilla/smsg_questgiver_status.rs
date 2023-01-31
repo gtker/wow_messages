@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::QuestGiverStatus;
+use crate::vanilla::QuestGiverStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,5 +51,5 @@ impl crate::Message for SMSG_QUESTGIVER_STATUS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUESTGIVER_STATUS {}
+impl crate::vanilla::ServerMessage for SMSG_QUESTGIVER_STATUS {}
 

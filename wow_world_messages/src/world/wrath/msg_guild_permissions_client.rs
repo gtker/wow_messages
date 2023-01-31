@@ -31,5 +31,5 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Client {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_GUILD_PERMISSIONS_Client {}
+impl crate::wrath::ClientMessage for MSG_GUILD_PERMISSIONS_Client {}
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Power;
+use crate::wrath::Power;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -80,7 +80,7 @@ impl crate::Message for SMSG_SPELLENERGIZELOG {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELLENERGIZELOG {}
+impl crate::wrath::ServerMessage for SMSG_SPELLENERGIZELOG {}
 
 impl SMSG_SPELLENERGIZELOG {
     pub(crate) fn size(&self) -> usize {

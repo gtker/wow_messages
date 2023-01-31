@@ -49,5 +49,5 @@ impl crate::Message for SMSG_SUPERCEDED_SPELL {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SUPERCEDED_SPELL {}
+impl crate::wrath::ServerMessage for SMSG_SUPERCEDED_SPELL {}
 

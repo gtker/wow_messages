@@ -84,7 +84,7 @@ impl crate::Message for SMSG_USERLIST_ADD {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_USERLIST_ADD {}
+impl crate::tbc::ServerMessage for SMSG_USERLIST_ADD {}
 
 impl SMSG_USERLIST_ADD {
     pub(crate) fn size(&self) -> usize {

@@ -41,5 +41,5 @@ impl crate::Message for CMSG_GET_MIRRORIMAGE_DATA {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GET_MIRRORIMAGE_DATA {}
+impl crate::wrath::ClientMessage for CMSG_GET_MIRRORIMAGE_DATA {}
 

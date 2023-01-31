@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::ItemTextQuery;
+use crate::wrath::ItemTextQuery;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -84,7 +84,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
 
 impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

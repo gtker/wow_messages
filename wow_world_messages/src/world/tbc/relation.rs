@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::Area;
-use crate::world::tbc::Class;
-use crate::world::tbc::FriendStatus;
-use crate::world::tbc::RelationType;
+use crate::tbc::Area;
+use crate::tbc::Class;
+use crate::tbc::FriendStatus;
+use crate::tbc::RelationType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

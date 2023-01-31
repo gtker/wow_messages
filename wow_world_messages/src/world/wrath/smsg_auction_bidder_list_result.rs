@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::AuctionListItem;
+use crate::wrath::AuctionListItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -73,7 +73,7 @@ impl crate::Message for SMSG_AUCTION_BIDDER_LIST_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_AUCTION_BIDDER_LIST_RESULT {}
 
 impl SMSG_AUCTION_BIDDER_LIST_RESULT {
     pub(crate) fn size(&self) -> usize {

@@ -155,7 +155,7 @@ impl FactionFlag {
         (self.inner & Self::INACTIVE) != 0
     }
 
-    /// player controlled, state stored in characters.data ( [`CMSG_SET_FACTION_INACTIVE`](crate::world::vanilla::CMSG_SET_FACTION_INACTIVE) )
+    /// player controlled, state stored in characters.data ( [`CMSG_SET_FACTION_INACTIVE`](crate::vanilla::CMSG_SET_FACTION_INACTIVE) )
     ///
     pub const fn new_INACTIVE() -> Self {
         Self { inner: Self::INACTIVE }

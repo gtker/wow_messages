@@ -52,7 +52,7 @@ impl crate::Message for SMSG_PLAYER_VEHICLE_DATA {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PLAYER_VEHICLE_DATA {}
+impl crate::wrath::ServerMessage for SMSG_PLAYER_VEHICLE_DATA {}
 
 impl SMSG_PLAYER_VEHICLE_DATA {
     pub(crate) fn size(&self) -> usize {

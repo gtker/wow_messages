@@ -61,13 +61,13 @@ impl crate::Message for CMSG_CHANNEL_BAN {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHANNEL_BAN {}
+impl crate::vanilla::ClientMessage for CMSG_CHANNEL_BAN {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHANNEL_BAN {}
+impl crate::tbc::ClientMessage for CMSG_CHANNEL_BAN {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHANNEL_BAN {}
+impl crate::wrath::ClientMessage for CMSG_CHANNEL_BAN {}
 
 impl CMSG_CHANNEL_BAN {
     pub(crate) fn size(&self) -> usize {

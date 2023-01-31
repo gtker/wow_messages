@@ -61,13 +61,13 @@ impl crate::Message for SMSG_GUILD_INVITE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GUILD_INVITE {}
+impl crate::vanilla::ServerMessage for SMSG_GUILD_INVITE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GUILD_INVITE {}
+impl crate::tbc::ServerMessage for SMSG_GUILD_INVITE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GUILD_INVITE {}
+impl crate::wrath::ServerMessage for SMSG_GUILD_INVITE {}
 
 impl SMSG_GUILD_INVITE {
     pub(crate) fn size(&self) -> usize {

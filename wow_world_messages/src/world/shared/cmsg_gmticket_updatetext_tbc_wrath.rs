@@ -49,10 +49,10 @@ impl crate::Message for CMSG_GMTICKET_UPDATETEXT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GMTICKET_UPDATETEXT {}
+impl crate::tbc::ClientMessage for CMSG_GMTICKET_UPDATETEXT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GMTICKET_UPDATETEXT {}
+impl crate::wrath::ClientMessage for CMSG_GMTICKET_UPDATETEXT {}
 
 impl CMSG_GMTICKET_UPDATETEXT {
     pub(crate) fn size(&self) -> usize {

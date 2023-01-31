@@ -1,11 +1,11 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Class;
-use crate::world::tbc::Gender;
-use crate::world::tbc::Race;
+use crate::tbc::Class;
+use crate::tbc::Gender;
+use crate::tbc::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::world::tbc::SMSG_CHAR_CREATE).
+/// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::tbc::SMSG_CHAR_CREATE).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L1):
 /// ```text
@@ -146,7 +146,7 @@ impl crate::Message for CMSG_CHAR_CREATE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHAR_CREATE {}
+impl crate::tbc::ClientMessage for CMSG_CHAR_CREATE {}
 
 impl CMSG_CHAR_CREATE {
     pub(crate) fn size(&self) -> usize {

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::GuildBankSlot;
-use crate::world::tbc::GuildBankTab;
-use crate::world::tbc::GuildBankTabResult;
+use crate::tbc::GuildBankSlot;
+use crate::tbc::GuildBankTab;
+use crate::tbc::GuildBankTabResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -131,7 +131,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GUILD_BANK_LIST {}
+impl crate::tbc::ServerMessage for SMSG_GUILD_BANK_LIST {}
 
 impl SMSG_GUILD_BANK_LIST {
     pub(crate) fn size(&self) -> usize {

@@ -52,13 +52,13 @@ impl crate::Message for SMSG_MOVE_NORMAL_FALL {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_MOVE_NORMAL_FALL {}
+impl crate::vanilla::ServerMessage for SMSG_MOVE_NORMAL_FALL {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_MOVE_NORMAL_FALL {}
+impl crate::tbc::ServerMessage for SMSG_MOVE_NORMAL_FALL {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MOVE_NORMAL_FALL {}
+impl crate::wrath::ServerMessage for SMSG_MOVE_NORMAL_FALL {}
 
 impl SMSG_MOVE_NORMAL_FALL {
     pub(crate) fn size(&self) -> usize {

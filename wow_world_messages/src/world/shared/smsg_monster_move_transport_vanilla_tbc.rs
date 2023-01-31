@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
-use crate::world::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
-use crate::world::shared::spline_flag_vanilla_tbc::SplineFlag;
+use crate::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
+use crate::shared::spline_flag_vanilla_tbc::SplineFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -184,10 +184,10 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {}
+impl crate::vanilla::ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {}
+impl crate::tbc::ServerMessage for SMSG_MONSTER_MOVE_TRANSPORT {}
 
 impl SMSG_MONSTER_MOVE_TRANSPORT {
     pub(crate) fn size(&self) -> usize {

@@ -50,19 +50,19 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_AUCTION_HELLO_Server {}
+impl crate::vanilla::ServerMessage for MSG_AUCTION_HELLO_Server {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_AUCTION_HELLO_Server {}
+impl crate::tbc::ServerMessage for MSG_AUCTION_HELLO_Server {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::MSG_AUCTION_HELLO_Server;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
@@ -155,9 +155,9 @@ mod test_tbc {
     use super::MSG_AUCTION_HELLO_Server;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];

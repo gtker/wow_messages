@@ -51,8 +51,8 @@ impl crate::Message for MSG_MOVE_TELEPORT_CHEAT_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_MOVE_TELEPORT_CHEAT_Server {}
+impl crate::tbc::ServerMessage for MSG_MOVE_TELEPORT_CHEAT_Server {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_MOVE_TELEPORT_CHEAT_Server {}
+impl crate::wrath::ServerMessage for MSG_MOVE_TELEPORT_CHEAT_Server {}
 

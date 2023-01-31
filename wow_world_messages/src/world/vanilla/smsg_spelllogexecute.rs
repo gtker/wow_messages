@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::SpellLog;
+use crate::vanilla::SpellLog;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -74,7 +74,7 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPELLLOGEXECUTE {}
+impl crate::vanilla::ServerMessage for SMSG_SPELLLOGEXECUTE {}
 
 impl SMSG_SPELLLOGEXECUTE {
     pub(crate) fn size(&self) -> usize {

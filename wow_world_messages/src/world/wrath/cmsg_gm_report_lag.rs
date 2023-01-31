@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Vector3d;
-use crate::world::wrath::Map;
+use crate::wrath::Vector3d;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -60,5 +60,5 @@ impl crate::Message for CMSG_GM_REPORT_LAG {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GM_REPORT_LAG {}
+impl crate::wrath::ClientMessage for CMSG_GM_REPORT_LAG {}
 

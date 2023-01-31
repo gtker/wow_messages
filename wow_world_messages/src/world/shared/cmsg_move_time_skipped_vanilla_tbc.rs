@@ -50,8 +50,8 @@ impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
+impl crate::vanilla::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
+impl crate::tbc::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
 

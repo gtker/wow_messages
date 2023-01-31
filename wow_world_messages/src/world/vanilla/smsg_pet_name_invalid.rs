@@ -33,5 +33,5 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PET_NAME_INVALID {}
+impl crate::vanilla::ServerMessage for SMSG_PET_NAME_INVALID {}
 

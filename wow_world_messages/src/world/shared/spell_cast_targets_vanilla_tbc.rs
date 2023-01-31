@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
-use crate::world::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags;
+use crate::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

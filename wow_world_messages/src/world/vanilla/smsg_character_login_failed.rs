@@ -1,11 +1,11 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::WorldResult;
+use crate::vanilla::WorldResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Response if [`CMSG_PLAYER_LOGIN`](crate::world::vanilla::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [`SMSG_LOGIN_VERIFY_WORLD`](crate::world::vanilla::SMSG_LOGIN_VERIFY_WORLD).
+/// Response if [`CMSG_PLAYER_LOGIN`](crate::vanilla::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [`SMSG_LOGIN_VERIFY_WORLD`](crate::vanilla::SMSG_LOGIN_VERIFY_WORLD).
 ///
-/// Client seems to always send a [`CMSG_CANCEL_TRADE`](crate::world::vanilla::CMSG_CANCEL_TRADE) after receiving this message, for unknown reasons.
+/// Client seems to always send a [`CMSG_CANCEL_TRADE`](crate::vanilla::CMSG_CANCEL_TRADE) after receiving this message, for unknown reasons.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm#L1):
 /// ```text
@@ -45,15 +45,15 @@ impl crate::Message for SMSG_CHARACTER_LOGIN_FAILED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {}
+impl crate::vanilla::ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {}
 
 #[cfg(test)]
 mod test {
     use super::SMSG_CHARACTER_LOGIN_FAILED;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x41, 0x00, 0x41, ];
 

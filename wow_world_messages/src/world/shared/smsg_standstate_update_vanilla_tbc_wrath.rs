@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
+use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,11 +41,11 @@ impl crate::Message for SMSG_STANDSTATE_UPDATE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_STANDSTATE_UPDATE {}
+impl crate::vanilla::ServerMessage for SMSG_STANDSTATE_UPDATE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_STANDSTATE_UPDATE {}
+impl crate::tbc::ServerMessage for SMSG_STANDSTATE_UPDATE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_STANDSTATE_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_STANDSTATE_UPDATE {}
 

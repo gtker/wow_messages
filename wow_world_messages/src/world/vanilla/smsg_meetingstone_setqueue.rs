@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Area;
-use crate::world::vanilla::MeetingStoneStatus;
+use crate::vanilla::Area;
+use crate::vanilla::MeetingStoneStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,5 +51,5 @@ impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {}
+impl crate::vanilla::ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {}
 

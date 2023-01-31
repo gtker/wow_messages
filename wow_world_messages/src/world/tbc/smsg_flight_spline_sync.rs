@@ -49,5 +49,5 @@ impl crate::Message for SMSG_FLIGHT_SPLINE_SYNC {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_FLIGHT_SPLINE_SYNC {}
+impl crate::tbc::ServerMessage for SMSG_FLIGHT_SPLINE_SYNC {}
 

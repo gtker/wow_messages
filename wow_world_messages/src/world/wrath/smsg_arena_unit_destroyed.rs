@@ -41,5 +41,5 @@ impl crate::Message for SMSG_ARENA_UNIT_DESTROYED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ARENA_UNIT_DESTROYED {}
+impl crate::wrath::ServerMessage for SMSG_ARENA_UNIT_DESTROYED {}
 

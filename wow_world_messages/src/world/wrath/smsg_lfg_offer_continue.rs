@@ -40,5 +40,5 @@ impl crate::Message for SMSG_LFG_OFFER_CONTINUE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_OFFER_CONTINUE {}
+impl crate::wrath::ServerMessage for SMSG_LFG_OFFER_CONTINUE {}
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::RaidDifficulty;
+use crate::wrath::RaidDifficulty;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for MSG_SET_RAID_DIFFICULTY_Client {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_SET_RAID_DIFFICULTY_Client {}
+impl crate::wrath::ClientMessage for MSG_SET_RAID_DIFFICULTY_Client {}
 

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::GmTicketEscalationStatus;
-use crate::world::tbc::GmTicketStatus;
-use crate::world::tbc::GmTicketType;
+use crate::tbc::GmTicketEscalationStatus;
+use crate::tbc::GmTicketStatus;
+use crate::tbc::GmTicketType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -128,7 +128,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GMTICKET_GETTICKET {}
+impl crate::tbc::ServerMessage for SMSG_GMTICKET_GETTICKET {}
 
 impl SMSG_GMTICKET_GETTICKET {
     pub(crate) fn size(&self) -> usize {

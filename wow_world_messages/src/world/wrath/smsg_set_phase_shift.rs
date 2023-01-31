@@ -40,5 +40,5 @@ impl crate::Message for SMSG_SET_PHASE_SHIFT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SET_PHASE_SHIFT {}
+impl crate::wrath::ServerMessage for SMSG_SET_PHASE_SHIFT {}
 

@@ -73,13 +73,13 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
+impl crate::vanilla::ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
+impl crate::tbc::ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
+impl crate::wrath::ServerMessage for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
 
 impl SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub(crate) fn size(&self) -> usize {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::MovementInfo;
+use crate::wrath::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -43,7 +43,7 @@ impl crate::Message for CMSG_MOVE_SET_FLY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MOVE_SET_FLY {}
+impl crate::wrath::ClientMessage for CMSG_MOVE_SET_FLY {}
 
 impl CMSG_MOVE_SET_FLY {
     pub(crate) fn size(&self) -> usize {

@@ -1,11 +1,11 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::WorldResult;
+use crate::vanilla::WorldResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Response to [`CMSG_CHAR_DELETE`](crate::world::vanilla::CMSG_CHAR_DELETE).
+/// Response to [`CMSG_CHAR_DELETE`](crate::vanilla::CMSG_CHAR_DELETE).
 ///
-/// The result of this message will update the client character screen without them sending another [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
+/// The result of this message will update the client character screen without them sending another [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_delete.wowm#L1):
 /// ```text
@@ -45,15 +45,15 @@ impl crate::Message for SMSG_CHAR_DELETE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHAR_DELETE {}
+impl crate::vanilla::ServerMessage for SMSG_CHAR_DELETE {}
 
 #[cfg(test)]
 mod test {
     use super::SMSG_CHAR_DELETE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x3C, 0x00, 0x39, ];
 

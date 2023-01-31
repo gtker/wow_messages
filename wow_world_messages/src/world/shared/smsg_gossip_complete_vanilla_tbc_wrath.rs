@@ -31,11 +31,11 @@ impl crate::Message for SMSG_GOSSIP_COMPLETE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GOSSIP_COMPLETE {}
+impl crate::vanilla::ServerMessage for SMSG_GOSSIP_COMPLETE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GOSSIP_COMPLETE {}
+impl crate::tbc::ServerMessage for SMSG_GOSSIP_COMPLETE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GOSSIP_COMPLETE {}
+impl crate::wrath::ServerMessage for SMSG_GOSSIP_COMPLETE {}
 

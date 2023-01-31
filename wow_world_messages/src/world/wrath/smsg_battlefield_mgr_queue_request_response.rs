@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Area;
+use crate::wrath::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -74,5 +74,5 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {}
 

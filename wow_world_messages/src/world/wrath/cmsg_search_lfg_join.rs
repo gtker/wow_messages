@@ -40,5 +40,5 @@ impl crate::Message for CMSG_SEARCH_LFG_JOIN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SEARCH_LFG_JOIN {}
+impl crate::wrath::ClientMessage for CMSG_SEARCH_LFG_JOIN {}
 

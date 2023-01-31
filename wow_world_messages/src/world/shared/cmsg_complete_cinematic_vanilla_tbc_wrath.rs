@@ -31,11 +31,11 @@ impl crate::Message for CMSG_COMPLETE_CINEMATIC {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_COMPLETE_CINEMATIC {}
+impl crate::vanilla::ClientMessage for CMSG_COMPLETE_CINEMATIC {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_COMPLETE_CINEMATIC {}
+impl crate::tbc::ClientMessage for CMSG_COMPLETE_CINEMATIC {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_COMPLETE_CINEMATIC {}
+impl crate::wrath::ClientMessage for CMSG_COMPLETE_CINEMATIC {}
 

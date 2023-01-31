@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Sent to acknowledge the new speed. Reply to [`SMSG_FORCE_RUN_SPEED_CHANGE`](crate::world::vanilla::SMSG_FORCE_RUN_SPEED_CHANGE).
+/// Sent to acknowledge the new speed. Reply to [`SMSG_FORCE_RUN_SPEED_CHANGE`](crate::vanilla::SMSG_FORCE_RUN_SPEED_CHANGE).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm#L1):
 /// ```text
@@ -72,7 +72,7 @@ impl crate::Message for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {}
+impl crate::vanilla::ClientMessage for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {}
 
 impl CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
     pub(crate) fn size(&self) -> usize {
@@ -88,9 +88,9 @@ mod test {
     use super::CMSG_FORCE_RUN_SPEED_CHANGE_ACK;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 50] = [ 0x00, 0x30, 0xE3, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

@@ -50,5 +50,5 @@ impl crate::Message for SMSG_MOVE_UNSET_FLIGHT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_MOVE_UNSET_FLIGHT {}
+impl crate::tbc::ServerMessage for SMSG_MOVE_UNSET_FLIGHT {}
 

@@ -52,7 +52,7 @@ impl crate::Message for SMSG_FORCE_MOVE_UNROOT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_FORCE_MOVE_UNROOT {}
+impl crate::tbc::ServerMessage for SMSG_FORCE_MOVE_UNROOT {}
 
 impl SMSG_FORCE_MOVE_UNROOT {
     pub(crate) fn size(&self) -> usize {

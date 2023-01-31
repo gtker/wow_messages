@@ -43,7 +43,7 @@ impl crate::Message for SMSG_SPLINE_MOVE_GRAVITY_ENABLE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPLINE_MOVE_GRAVITY_ENABLE {}
+impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_GRAVITY_ENABLE {}
 
 impl SMSG_SPLINE_MOVE_GRAVITY_ENABLE {
     pub(crate) fn size(&self) -> usize {

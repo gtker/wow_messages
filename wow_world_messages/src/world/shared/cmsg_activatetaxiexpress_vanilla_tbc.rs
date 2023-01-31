@@ -75,10 +75,10 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_ACTIVATETAXIEXPRESS {}
+impl crate::vanilla::ClientMessage for CMSG_ACTIVATETAXIEXPRESS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ACTIVATETAXIEXPRESS {}
+impl crate::tbc::ClientMessage for CMSG_ACTIVATETAXIEXPRESS {}
 
 impl CMSG_ACTIVATETAXIEXPRESS {
     pub(crate) fn size(&self) -> usize {

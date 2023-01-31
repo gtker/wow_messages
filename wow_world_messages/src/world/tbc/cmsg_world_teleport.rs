@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Vector3d;
-use crate::world::tbc::Map;
+use crate::tbc::Vector3d;
+use crate::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -70,5 +70,5 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_WORLD_TELEPORT {}
+impl crate::tbc::ClientMessage for CMSG_WORLD_TELEPORT {}
 

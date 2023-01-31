@@ -76,7 +76,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_NOTES {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_EVENT_INVITE_NOTES {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_INVITE_NOTES {}
 
 impl SMSG_CALENDAR_EVENT_INVITE_NOTES {
     pub(crate) fn size(&self) -> usize {

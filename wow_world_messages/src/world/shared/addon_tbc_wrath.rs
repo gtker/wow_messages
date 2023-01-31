@@ -50,7 +50,7 @@ impl Addon {
 }
 
 impl Addon {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // addon_type: u8
         let addon_type = crate::util::read_u8_le(r)?;
 

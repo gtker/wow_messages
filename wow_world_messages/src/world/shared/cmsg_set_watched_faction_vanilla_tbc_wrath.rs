@@ -40,11 +40,11 @@ impl crate::Message for CMSG_SET_WATCHED_FACTION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SET_WATCHED_FACTION {}
+impl crate::vanilla::ClientMessage for CMSG_SET_WATCHED_FACTION {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_WATCHED_FACTION {}
+impl crate::tbc::ClientMessage for CMSG_SET_WATCHED_FACTION {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_WATCHED_FACTION {}
+impl crate::wrath::ClientMessage for CMSG_SET_WATCHED_FACTION {}
 

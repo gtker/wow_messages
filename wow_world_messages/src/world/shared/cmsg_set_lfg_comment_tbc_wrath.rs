@@ -47,10 +47,10 @@ impl crate::Message for CMSG_SET_LFG_COMMENT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_LFG_COMMENT {}
+impl crate::tbc::ClientMessage for CMSG_SET_LFG_COMMENT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_LFG_COMMENT {}
+impl crate::wrath::ClientMessage for CMSG_SET_LFG_COMMENT {}
 
 impl CMSG_SET_LFG_COMMENT {
     pub(crate) fn size(&self) -> usize {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::guild_event_tbc_wrath::GuildEvent;
+use crate::shared::guild_event_tbc_wrath::GuildEvent;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -66,10 +66,10 @@ impl crate::Message for SMSG_GUILD_EVENT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GUILD_EVENT {}
+impl crate::tbc::ServerMessage for SMSG_GUILD_EVENT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GUILD_EVENT {}
+impl crate::wrath::ServerMessage for SMSG_GUILD_EVENT {}
 
 impl SMSG_GUILD_EVENT {
     pub(crate) fn size(&self) -> usize {

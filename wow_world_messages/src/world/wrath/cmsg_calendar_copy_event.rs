@@ -59,5 +59,5 @@ impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_COPY_EVENT {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_COPY_EVENT {}
 

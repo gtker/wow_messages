@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::DungeonDifficulty;
-use crate::world::tbc::Map;
-use crate::world::tbc::TransferAbortReason;
+use crate::tbc::DungeonDifficulty;
+use crate::tbc::Map;
+use crate::tbc::TransferAbortReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -114,7 +114,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TRANSFER_ABORTED {}
+impl crate::tbc::ServerMessage for SMSG_TRANSFER_ABORTED {}
 
 impl SMSG_TRANSFER_ABORTED {
     pub(crate) fn size(&self) -> usize {

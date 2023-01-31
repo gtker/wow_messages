@@ -41,11 +41,11 @@ impl crate::Message for CMSG_PET_STOP_ATTACK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PET_STOP_ATTACK {}
+impl crate::vanilla::ClientMessage for CMSG_PET_STOP_ATTACK {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PET_STOP_ATTACK {}
+impl crate::tbc::ClientMessage for CMSG_PET_STOP_ATTACK {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PET_STOP_ATTACK {}
+impl crate::wrath::ClientMessage for CMSG_PET_STOP_ATTACK {}
 

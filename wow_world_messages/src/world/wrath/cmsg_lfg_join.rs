@@ -114,7 +114,7 @@ impl crate::Message for CMSG_LFG_JOIN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LFG_JOIN {}
+impl crate::wrath::ClientMessage for CMSG_LFG_JOIN {}
 
 impl CMSG_LFG_JOIN {
     pub(crate) fn size(&self) -> usize {

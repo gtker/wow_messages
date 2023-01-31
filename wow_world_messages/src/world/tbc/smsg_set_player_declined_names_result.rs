@@ -50,5 +50,5 @@ impl crate::Message for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {}
+impl crate::tbc::ServerMessage for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {}
 

@@ -39,5 +39,5 @@ impl crate::Message for CMSG_OPT_OUT_OF_LOOT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_OPT_OUT_OF_LOOT {}
+impl crate::tbc::ClientMessage for CMSG_OPT_OUT_OF_LOOT {}
 

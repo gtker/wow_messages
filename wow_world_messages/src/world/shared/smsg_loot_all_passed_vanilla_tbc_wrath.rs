@@ -79,11 +79,11 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOOT_ALL_PASSED {}
+impl crate::vanilla::ServerMessage for SMSG_LOOT_ALL_PASSED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOOT_ALL_PASSED {}
+impl crate::tbc::ServerMessage for SMSG_LOOT_ALL_PASSED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_ALL_PASSED {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_ALL_PASSED {}
 

@@ -40,5 +40,5 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {}
+impl crate::wrath::ServerMessage for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {}
 

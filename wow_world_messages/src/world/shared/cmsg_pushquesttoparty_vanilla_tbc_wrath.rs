@@ -40,11 +40,11 @@ impl crate::Message for CMSG_PUSHQUESTTOPARTY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PUSHQUESTTOPARTY {}
+impl crate::vanilla::ClientMessage for CMSG_PUSHQUESTTOPARTY {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PUSHQUESTTOPARTY {}
+impl crate::tbc::ClientMessage for CMSG_PUSHQUESTTOPARTY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PUSHQUESTTOPARTY {}
+impl crate::wrath::ClientMessage for CMSG_PUSHQUESTTOPARTY {}
 

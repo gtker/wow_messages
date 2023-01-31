@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::MovementInfo;
+use crate::wrath::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -53,10 +53,10 @@ impl crate::Message for MSG_MOVE_START_STRAFE_LEFT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_MOVE_START_STRAFE_LEFT {}
+impl crate::wrath::ClientMessage for MSG_MOVE_START_STRAFE_LEFT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_MOVE_START_STRAFE_LEFT {}
+impl crate::wrath::ServerMessage for MSG_MOVE_START_STRAFE_LEFT {}
 
 impl MSG_MOVE_START_STRAFE_LEFT {
     pub(crate) fn size(&self) -> usize {

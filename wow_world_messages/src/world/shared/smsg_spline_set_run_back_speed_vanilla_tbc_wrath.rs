@@ -51,13 +51,13 @@ impl crate::Message for SMSG_SPLINE_SET_RUN_BACK_SPEED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_SET_RUN_BACK_SPEED {}
+impl crate::vanilla::ServerMessage for SMSG_SPLINE_SET_RUN_BACK_SPEED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPLINE_SET_RUN_BACK_SPEED {}
+impl crate::tbc::ServerMessage for SMSG_SPLINE_SET_RUN_BACK_SPEED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPLINE_SET_RUN_BACK_SPEED {}
+impl crate::wrath::ServerMessage for SMSG_SPLINE_SET_RUN_BACK_SPEED {}
 
 impl SMSG_SPLINE_SET_RUN_BACK_SPEED {
     pub(crate) fn size(&self) -> usize {

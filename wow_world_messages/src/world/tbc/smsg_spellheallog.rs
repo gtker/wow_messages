@@ -89,7 +89,7 @@ impl crate::Message for SMSG_SPELLHEALLOG {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELLHEALLOG {}
+impl crate::tbc::ServerMessage for SMSG_SPELLHEALLOG {}
 
 impl SMSG_SPELLHEALLOG {
     pub(crate) fn size(&self) -> usize {

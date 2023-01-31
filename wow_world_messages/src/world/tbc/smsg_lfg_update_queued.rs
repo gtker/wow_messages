@@ -39,5 +39,5 @@ impl crate::Message for SMSG_LFG_UPDATE_QUEUED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LFG_UPDATE_QUEUED {}
+impl crate::tbc::ServerMessage for SMSG_LFG_UPDATE_QUEUED {}
 

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::BattlegroundBracket;
-use crate::world::vanilla::Map;
+use crate::vanilla::BattlegroundBracket;
+use crate::vanilla::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -84,7 +84,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_BATTLEFIELD_LIST {}
+impl crate::vanilla::ServerMessage for SMSG_BATTLEFIELD_LIST {}
 
 impl SMSG_BATTLEFIELD_LIST {
     pub(crate) fn size(&self) -> usize {

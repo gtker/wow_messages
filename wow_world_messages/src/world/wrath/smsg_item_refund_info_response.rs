@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::ItemRefundExtra;
+use crate::wrath::ItemRefundExtra;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -103,5 +103,5 @@ impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ITEM_REFUND_INFO_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_ITEM_REFUND_INFO_RESPONSE {}
 

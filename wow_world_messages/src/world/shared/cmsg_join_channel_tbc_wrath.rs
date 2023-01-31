@@ -88,10 +88,10 @@ impl crate::Message for CMSG_JOIN_CHANNEL {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_JOIN_CHANNEL {}
+impl crate::tbc::ClientMessage for CMSG_JOIN_CHANNEL {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_JOIN_CHANNEL {}
+impl crate::wrath::ClientMessage for CMSG_JOIN_CHANNEL {}
 
 impl CMSG_JOIN_CHANNEL {
     pub(crate) fn size(&self) -> usize {

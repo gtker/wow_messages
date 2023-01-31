@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Map;
-use crate::world::vanilla::TransferAbortReason;
+use crate::vanilla::Map;
+use crate::vanilla::TransferAbortReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -62,5 +62,5 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_TRANSFER_ABORTED {}
+impl crate::vanilla::ServerMessage for SMSG_TRANSFER_ABORTED {}
 

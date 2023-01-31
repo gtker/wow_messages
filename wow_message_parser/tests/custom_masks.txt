@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::AuraMask;
-use crate::world::vanilla::UpdateMask;
+use crate::vanilla::AuraMask;
+use crate::vanilla::UpdateMask;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -29,7 +29,7 @@ impl CustomMasks {
 }
 
 impl CustomMasks {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_mask: UpdateMask
         let update_mask = UpdateMask::read(r)?;
 

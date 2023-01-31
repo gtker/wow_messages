@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::MovementInfo;
+use crate::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -43,7 +43,7 @@ impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_MOVE_CHNG_TRANSPORT {}
+impl crate::tbc::ClientMessage for CMSG_MOVE_CHNG_TRANSPORT {}
 
 impl CMSG_MOVE_CHNG_TRANSPORT {
     pub(crate) fn size(&self) -> usize {

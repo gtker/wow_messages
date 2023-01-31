@@ -59,8 +59,8 @@ impl crate::Message for SMSG_SPELLINSTAKILLLOG {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELLINSTAKILLLOG {}
+impl crate::tbc::ServerMessage for SMSG_SPELLINSTAKILLLOG {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELLINSTAKILLLOG {}
+impl crate::wrath::ServerMessage for SMSG_SPELLINSTAKILLLOG {}
 

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Class;
-use crate::world::vanilla::Race;
+use crate::vanilla::Area;
+use crate::vanilla::Class;
+use crate::vanilla::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

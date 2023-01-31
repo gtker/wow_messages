@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
-use crate::world::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
+use crate::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
+use crate::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Reply to [`CMSG_LOGOUT_REQUEST`](crate::world::vanilla::CMSG_LOGOUT_REQUEST).
+/// Reply to [`CMSG_LOGOUT_REQUEST`](crate::vanilla::CMSG_LOGOUT_REQUEST).
 ///
-/// The client expects to get an [`SMSG_LOGOUT_COMPLETE`](crate::world::vanilla::SMSG_LOGOUT_COMPLETE) when logout is complete.
+/// The client expects to get an [`SMSG_LOGOUT_COMPLETE`](crate::vanilla::SMSG_LOGOUT_COMPLETE) when logout is complete.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_response.wowm#L17):
 /// ```text
@@ -55,21 +55,21 @@ impl crate::Message for SMSG_LOGOUT_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOGOUT_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_LOGOUT_RESPONSE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOGOUT_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_LOGOUT_RESPONSE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOGOUT_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_LOGOUT_RESPONSE {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::SMSG_LOGOUT_RESPONSE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 9] = [ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, ];
 
@@ -161,8 +161,8 @@ mod test_tbc {
     use super::SMSG_LOGOUT_RESPONSE;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 9] = [ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, ];
 
@@ -254,8 +254,8 @@ mod test_wrath {
     use super::SMSG_LOGOUT_RESPONSE;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ServerOpcodeMessage;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::opcodes::ServerOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 9] = [ 0x00, 0x07, 0x4C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, ];
 

@@ -60,10 +60,10 @@ impl crate::Message for MSG_RAID_READY_CHECK_CONFIRM_Client {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_RAID_READY_CHECK_CONFIRM_Client {}
+impl crate::tbc::ClientMessage for MSG_RAID_READY_CHECK_CONFIRM_Client {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_RAID_READY_CHECK_CONFIRM_Client {}
+impl crate::wrath::ClientMessage for MSG_RAID_READY_CHECK_CONFIRM_Client {}
 
 impl MSG_RAID_READY_CHECK_CONFIRM_Client {
     pub(crate) fn size(&self) -> usize {

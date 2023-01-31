@@ -41,5 +41,5 @@ impl crate::Message for CMSG_REPORT_PVP_AFK {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_REPORT_PVP_AFK {}
+impl crate::tbc::ClientMessage for CMSG_REPORT_PVP_AFK {}
 

@@ -41,8 +41,8 @@ impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GROUP_UNINVITE_GUID {}
+impl crate::vanilla::ClientMessage for CMSG_GROUP_UNINVITE_GUID {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GROUP_UNINVITE_GUID {}
+impl crate::tbc::ClientMessage for CMSG_GROUP_UNINVITE_GUID {}
 

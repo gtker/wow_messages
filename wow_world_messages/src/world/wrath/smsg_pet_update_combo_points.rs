@@ -61,7 +61,7 @@ impl crate::Message for SMSG_PET_UPDATE_COMBO_POINTS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PET_UPDATE_COMBO_POINTS {}
+impl crate::wrath::ServerMessage for SMSG_PET_UPDATE_COMBO_POINTS {}
 
 impl SMSG_PET_UPDATE_COMBO_POINTS {
     pub(crate) fn size(&self) -> usize {

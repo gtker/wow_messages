@@ -31,5 +31,5 @@ impl crate::Message for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {}
+impl crate::wrath::ClientMessage for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {}
 

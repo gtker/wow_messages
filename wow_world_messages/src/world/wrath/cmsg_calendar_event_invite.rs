@@ -82,7 +82,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_INVITE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_EVENT_INVITE {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_EVENT_INVITE {}
 
 impl CMSG_CALENDAR_EVENT_INVITE {
     pub(crate) fn size(&self) -> usize {

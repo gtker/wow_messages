@@ -53,11 +53,11 @@ impl crate::Message for MSG_TALENT_WIPE_CONFIRM_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {}
+impl crate::vanilla::ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {}
+impl crate::tbc::ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {}
+impl crate::wrath::ServerMessage for MSG_TALENT_WIPE_CONFIRM_Server {}
 

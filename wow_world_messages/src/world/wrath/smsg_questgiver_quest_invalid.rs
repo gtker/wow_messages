@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::QuestFailedReason;
+use crate::wrath::QuestFailedReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_INVALID {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUESTGIVER_QUEST_INVALID {}
+impl crate::wrath::ServerMessage for SMSG_QUESTGIVER_QUEST_INVALID {}
 

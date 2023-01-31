@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::faction_flag_vanilla_tbc::FactionFlag;
+use crate::shared::faction_flag_vanilla_tbc::FactionFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -50,8 +50,8 @@ impl crate::Message for CMSG_SET_FACTION_ATWAR {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SET_FACTION_ATWAR {}
+impl crate::vanilla::ClientMessage for CMSG_SET_FACTION_ATWAR {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_FACTION_ATWAR {}
+impl crate::tbc::ClientMessage for CMSG_SET_FACTION_ATWAR {}
 

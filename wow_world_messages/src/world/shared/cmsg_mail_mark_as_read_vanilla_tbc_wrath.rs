@@ -50,11 +50,11 @@ impl crate::Message for CMSG_MAIL_MARK_AS_READ {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MAIL_MARK_AS_READ {}
+impl crate::vanilla::ClientMessage for CMSG_MAIL_MARK_AS_READ {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_MAIL_MARK_AS_READ {}
+impl crate::tbc::ClientMessage for CMSG_MAIL_MARK_AS_READ {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MAIL_MARK_AS_READ {}
+impl crate::wrath::ClientMessage for CMSG_MAIL_MARK_AS_READ {}
 

@@ -31,11 +31,11 @@ impl crate::Message for CMSG_LOOT_MONEY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_LOOT_MONEY {}
+impl crate::vanilla::ClientMessage for CMSG_LOOT_MONEY {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_LOOT_MONEY {}
+impl crate::tbc::ClientMessage for CMSG_LOOT_MONEY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LOOT_MONEY {}
+impl crate::wrath::ClientMessage for CMSG_LOOT_MONEY {}
 

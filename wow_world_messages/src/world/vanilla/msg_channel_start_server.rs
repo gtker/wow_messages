@@ -49,5 +49,5 @@ impl crate::Message for MSG_CHANNEL_START_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_CHANNEL_START_Server {}
+impl crate::vanilla::ServerMessage for MSG_CHANNEL_START_Server {}
 

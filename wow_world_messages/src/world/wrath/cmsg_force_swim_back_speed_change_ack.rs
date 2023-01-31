@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::MovementInfo;
+use crate::wrath::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -70,7 +70,7 @@ impl crate::Message for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {}
+impl crate::wrath::ClientMessage for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {}
 
 impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
     pub(crate) fn size(&self) -> usize {

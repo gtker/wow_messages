@@ -57,7 +57,7 @@ impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GROUP_UNINVITE_GUID {}
+impl crate::wrath::ClientMessage for CMSG_GROUP_UNINVITE_GUID {}
 
 impl CMSG_GROUP_UNINVITE_GUID {
     pub(crate) fn size(&self) -> usize {

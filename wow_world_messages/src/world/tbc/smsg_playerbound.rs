@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::Area;
+use crate::tbc::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,5 +51,5 @@ impl crate::Message for SMSG_PLAYERBOUND {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PLAYERBOUND {}
+impl crate::tbc::ServerMessage for SMSG_PLAYERBOUND {}
 

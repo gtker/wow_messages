@@ -84,7 +84,7 @@ impl crate::Message for CMSG_TEST_OPTIONAL {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_TEST_OPTIONAL {}
+impl crate::vanilla::ClientMessage for CMSG_TEST_OPTIONAL {}
 
 impl CMSG_TEST_OPTIONAL {
     pub(crate) fn size(&self) -> usize {

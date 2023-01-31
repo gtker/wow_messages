@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::stable_result_vanilla_tbc::StableResult;
+use crate::shared::stable_result_vanilla_tbc::StableResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,8 +41,8 @@ impl crate::Message for SMSG_STABLE_RESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_STABLE_RESULT {}
+impl crate::vanilla::ServerMessage for SMSG_STABLE_RESULT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_STABLE_RESULT {}
+impl crate::tbc::ServerMessage for SMSG_STABLE_RESULT {}
 

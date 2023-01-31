@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::Power;
-use crate::world::tbc::SpellEffect;
+use crate::tbc::Power;
+use crate::tbc::SpellEffect;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

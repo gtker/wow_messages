@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Faction;
+use crate::tbc::Faction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -65,7 +65,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SET_FACTION_STANDING {}
+impl crate::tbc::ServerMessage for SMSG_SET_FACTION_STANDING {}
 
 impl SMSG_SET_FACTION_STANDING {
     pub(crate) fn size(&self) -> usize {

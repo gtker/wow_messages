@@ -41,11 +41,11 @@ impl crate::Message for CMSG_GET_MAIL_LIST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GET_MAIL_LIST {}
+impl crate::vanilla::ClientMessage for CMSG_GET_MAIL_LIST {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GET_MAIL_LIST {}
+impl crate::tbc::ClientMessage for CMSG_GET_MAIL_LIST {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GET_MAIL_LIST {}
+impl crate::wrath::ClientMessage for CMSG_GET_MAIL_LIST {}
 

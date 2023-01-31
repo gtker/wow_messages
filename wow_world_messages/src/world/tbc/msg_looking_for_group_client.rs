@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::LfgType;
+use crate::tbc::LfgType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -61,5 +61,5 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_LOOKING_FOR_GROUP_Client {}
+impl crate::tbc::ClientMessage for MSG_LOOKING_FOR_GROUP_Client {}
 

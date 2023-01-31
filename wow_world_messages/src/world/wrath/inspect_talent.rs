@@ -27,7 +27,7 @@ impl InspectTalent {
 }
 
 impl InspectTalent {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // talent_id: u32
         let talent_id = crate::util::read_u32_le(r)?;
 

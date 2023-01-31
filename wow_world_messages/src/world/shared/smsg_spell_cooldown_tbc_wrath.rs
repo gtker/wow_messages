@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
+use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -72,10 +72,10 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELL_COOLDOWN {}
+impl crate::tbc::ServerMessage for SMSG_SPELL_COOLDOWN {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELL_COOLDOWN {}
+impl crate::wrath::ServerMessage for SMSG_SPELL_COOLDOWN {}
 
 impl SMSG_SPELL_COOLDOWN {
     pub(crate) fn size(&self) -> usize {

@@ -41,11 +41,11 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_LIST_STABLED_PETS_Client {}
+impl crate::vanilla::ClientMessage for MSG_LIST_STABLED_PETS_Client {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_LIST_STABLED_PETS_Client {}
+impl crate::tbc::ClientMessage for MSG_LIST_STABLED_PETS_Client {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_LIST_STABLED_PETS_Client {}
+impl crate::wrath::ClientMessage for MSG_LIST_STABLED_PETS_Client {}
 

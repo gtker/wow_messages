@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::NpcTextUpdateEmote;
-use crate::world::wrath::QuestItemRequirement;
+use crate::wrath::NpcTextUpdateEmote;
+use crate::wrath::QuestItemRequirement;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -320,7 +320,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUESTGIVER_OFFER_REWARD {}
+impl crate::wrath::ServerMessage for SMSG_QUESTGIVER_OFFER_REWARD {}
 
 impl SMSG_QUESTGIVER_OFFER_REWARD {
     pub(crate) fn size(&self) -> usize {

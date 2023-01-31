@@ -31,11 +31,11 @@ impl crate::Message for SMSG_DUEL_OUTOFBOUNDS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_DUEL_OUTOFBOUNDS {}
+impl crate::vanilla::ServerMessage for SMSG_DUEL_OUTOFBOUNDS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_DUEL_OUTOFBOUNDS {}
+impl crate::tbc::ServerMessage for SMSG_DUEL_OUTOFBOUNDS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_DUEL_OUTOFBOUNDS {}
+impl crate::wrath::ServerMessage for SMSG_DUEL_OUTOFBOUNDS {}
 

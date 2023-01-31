@@ -63,13 +63,13 @@ impl crate::Message for CMSG_GUILD_SET_OFFICER_NOTE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {}
+impl crate::vanilla::ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_SET_OFFICER_NOTE {}
 
 impl CMSG_GUILD_SET_OFFICER_NOTE {
     pub(crate) fn size(&self) -> usize {

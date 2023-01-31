@@ -61,13 +61,13 @@ impl crate::Message for CMSG_CHANNEL_PASSWORD {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHANNEL_PASSWORD {}
+impl crate::vanilla::ClientMessage for CMSG_CHANNEL_PASSWORD {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHANNEL_PASSWORD {}
+impl crate::tbc::ClientMessage for CMSG_CHANNEL_PASSWORD {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHANNEL_PASSWORD {}
+impl crate::wrath::ClientMessage for CMSG_CHANNEL_PASSWORD {}
 
 impl CMSG_CHANNEL_PASSWORD {
     pub(crate) fn size(&self) -> usize {

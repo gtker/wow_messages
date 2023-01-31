@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::MovementInfo;
+use crate::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -43,7 +43,7 @@ impl crate::Message for MSG_MOVE_STOP_PITCH_Client {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_MOVE_STOP_PITCH_Client {}
+impl crate::tbc::ClientMessage for MSG_MOVE_STOP_PITCH_Client {}
 
 impl MSG_MOVE_STOP_PITCH_Client {
     pub(crate) fn size(&self) -> usize {

@@ -31,5 +31,5 @@ impl crate::Message for CMSG_CHANNEL_VOICE_ON {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHANNEL_VOICE_ON {}
+impl crate::wrath::ClientMessage for CMSG_CHANNEL_VOICE_ON {}
 

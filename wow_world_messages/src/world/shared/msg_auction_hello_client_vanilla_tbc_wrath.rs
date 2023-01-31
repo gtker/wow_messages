@@ -41,22 +41,22 @@ impl crate::Message for MSG_AUCTION_HELLO_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_AUCTION_HELLO_Client {}
+impl crate::vanilla::ClientMessage for MSG_AUCTION_HELLO_Client {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_AUCTION_HELLO_Client {}
+impl crate::tbc::ClientMessage for MSG_AUCTION_HELLO_Client {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_AUCTION_HELLO_Client {}
+impl crate::wrath::ClientMessage for MSG_AUCTION_HELLO_Client {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::MSG_AUCTION_HELLO_Client;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, ];
@@ -143,9 +143,9 @@ mod test_tbc {
     use super::MSG_AUCTION_HELLO_Client;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, ];
@@ -232,9 +232,9 @@ mod test_wrath {
     use super::MSG_AUCTION_HELLO_Client;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x55, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, ];

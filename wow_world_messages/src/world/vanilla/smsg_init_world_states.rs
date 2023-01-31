@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::WorldState;
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Map;
+use crate::vanilla::WorldState;
+use crate::vanilla::Area;
+use crate::vanilla::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -75,7 +75,7 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_INIT_WORLD_STATES {}
+impl crate::vanilla::ServerMessage for SMSG_INIT_WORLD_STATES {}
 
 impl SMSG_INIT_WORLD_STATES {
     pub(crate) fn size(&self) -> usize {

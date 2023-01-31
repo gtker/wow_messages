@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::FactionInitializer;
+use crate::wrath::FactionInitializer;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_INITIALIZE_FACTIONS {}
+impl crate::wrath::ServerMessage for SMSG_INITIALIZE_FACTIONS {}
 
 impl SMSG_INITIALIZE_FACTIONS {
     pub(crate) fn size(&self) -> usize {

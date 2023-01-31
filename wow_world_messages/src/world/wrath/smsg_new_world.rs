@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Vector3d;
-use crate::world::wrath::Map;
+use crate::wrath::Vector3d;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -59,5 +59,5 @@ impl crate::Message for SMSG_NEW_WORLD {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_NEW_WORLD {}
+impl crate::wrath::ServerMessage for SMSG_NEW_WORLD {}
 

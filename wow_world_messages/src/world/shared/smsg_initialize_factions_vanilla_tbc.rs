@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::faction_initializer_vanilla_tbc::FactionInitializer;
+use crate::shared::faction_initializer_vanilla_tbc::FactionInitializer;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,10 +55,10 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_INITIALIZE_FACTIONS {}
+impl crate::vanilla::ServerMessage for SMSG_INITIALIZE_FACTIONS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_INITIALIZE_FACTIONS {}
+impl crate::tbc::ServerMessage for SMSG_INITIALIZE_FACTIONS {}
 
 impl SMSG_INITIALIZE_FACTIONS {
     pub(crate) fn size(&self) -> usize {

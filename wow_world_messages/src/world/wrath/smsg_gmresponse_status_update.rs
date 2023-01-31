@@ -39,5 +39,5 @@ impl crate::Message for SMSG_GMRESPONSE_STATUS_UPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GMRESPONSE_STATUS_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_GMRESPONSE_STATUS_UPDATE {}
 

@@ -31,5 +31,5 @@ impl crate::Message for CMSG_LFG_GET_STATUS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LFG_GET_STATUS {}
+impl crate::wrath::ClientMessage for CMSG_LFG_GET_STATUS {}
 

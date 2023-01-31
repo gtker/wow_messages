@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::SpamType;
+use crate::wrath::SpamType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -154,7 +154,7 @@ impl crate::Message for CMSG_COMPLAIN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_COMPLAIN {}
+impl crate::wrath::ClientMessage for CMSG_COMPLAIN {}
 
 impl CMSG_COMPLAIN {
     pub(crate) fn size(&self) -> usize {

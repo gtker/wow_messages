@@ -40,11 +40,11 @@ impl crate::Message for CMSG_AREATRIGGER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_AREATRIGGER {}
+impl crate::vanilla::ClientMessage for CMSG_AREATRIGGER {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_AREATRIGGER {}
+impl crate::tbc::ClientMessage for CMSG_AREATRIGGER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_AREATRIGGER {}
+impl crate::wrath::ClientMessage for CMSG_AREATRIGGER {}
 

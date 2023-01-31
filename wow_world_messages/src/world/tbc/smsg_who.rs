@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::WhoPlayer;
+use crate::tbc::WhoPlayer;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -64,7 +64,7 @@ impl crate::Message for SMSG_WHO {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_WHO {}
+impl crate::tbc::ServerMessage for SMSG_WHO {}
 
 impl SMSG_WHO {
     pub(crate) fn size(&self) -> usize {

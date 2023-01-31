@@ -31,5 +31,5 @@ impl crate::Message for CMSG_REQUEST_VEHICLE_EXIT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REQUEST_VEHICLE_EXIT {}
+impl crate::wrath::ClientMessage for CMSG_REQUEST_VEHICLE_EXIT {}
 

@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::Class;
-use crate::world::vanilla::Gender;
-use crate::world::vanilla::Race;
+use crate::vanilla::Class;
+use crate::vanilla::Gender;
+use crate::vanilla::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Response to [`CMSG_NAME_QUERY`](crate::world::vanilla::CMSG_NAME_QUERY).
+/// Response to [`CMSG_NAME_QUERY`](crate::vanilla::CMSG_NAME_QUERY).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm#L1):
 /// ```text
@@ -105,7 +105,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
 
 impl SMSG_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
@@ -123,9 +123,9 @@ mod test {
     use super::SMSG_NAME_QUERY_RESPONSE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 30] = [ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE, 0x00,
          0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00, 0x00,

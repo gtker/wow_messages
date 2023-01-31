@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::Emote;
+use crate::vanilla::Emote;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -75,7 +75,7 @@ impl crate::Message for SMSG_TEXT_EMOTE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_TEXT_EMOTE {}
+impl crate::vanilla::ServerMessage for SMSG_TEXT_EMOTE {}
 
 impl SMSG_TEXT_EMOTE {
     pub(crate) fn size(&self) -> usize {

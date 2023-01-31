@@ -49,5 +49,5 @@ impl crate::Message for CMSG_GUILD_BANKER_ACTIVATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_BANKER_ACTIVATE {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_BANKER_ACTIVATE {}
 

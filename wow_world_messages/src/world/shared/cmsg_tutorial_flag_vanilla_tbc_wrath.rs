@@ -42,11 +42,11 @@ impl crate::Message for CMSG_TUTORIAL_FLAG {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_TUTORIAL_FLAG {}
+impl crate::vanilla::ClientMessage for CMSG_TUTORIAL_FLAG {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_TUTORIAL_FLAG {}
+impl crate::tbc::ClientMessage for CMSG_TUTORIAL_FLAG {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_TUTORIAL_FLAG {}
+impl crate::wrath::ClientMessage for CMSG_TUTORIAL_FLAG {}
 

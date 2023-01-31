@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Gender;
-use crate::world::wrath::Race;
-use crate::world::wrath::WorldResult;
+use crate::wrath::Gender;
+use crate::wrath::Race;
+use crate::wrath::WorldResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -353,7 +353,7 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CHAR_FACTION_CHANGE {}
+impl crate::wrath::ServerMessage for SMSG_CHAR_FACTION_CHANGE {}
 
 impl SMSG_CHAR_FACTION_CHANGE {
     pub(crate) fn size(&self) -> usize {

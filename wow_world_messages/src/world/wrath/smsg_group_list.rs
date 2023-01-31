@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::GroupListMember;
-use crate::world::wrath::DungeonDifficulty;
-use crate::world::wrath::GroupLootSetting;
-use crate::world::wrath::ItemQuality;
-use crate::world::wrath::RaidDifficulty;
+use crate::wrath::GroupListMember;
+use crate::wrath::DungeonDifficulty;
+use crate::wrath::GroupLootSetting;
+use crate::wrath::ItemQuality;
+use crate::wrath::RaidDifficulty;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -201,7 +201,7 @@ impl crate::Message for SMSG_GROUP_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GROUP_LIST {}
+impl crate::wrath::ServerMessage for SMSG_GROUP_LIST {}
 
 impl SMSG_GROUP_LIST {
     pub(crate) fn size(&self) -> usize {

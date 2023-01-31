@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::QuestItemReward;
-use crate::world::vanilla::QuestObjective;
-use crate::world::vanilla::Vector2d;
+use crate::vanilla::QuestItemReward;
+use crate::vanilla::QuestObjective;
+use crate::vanilla::Vector2d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -327,7 +327,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUEST_QUERY_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_QUEST_QUERY_RESPONSE {}
 
 impl SMSG_QUEST_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

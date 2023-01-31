@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::SpellCastTargets;
-use crate::world::tbc::SpellMiss;
-use crate::world::tbc::CastFlags;
+use crate::tbc::SpellCastTargets;
+use crate::tbc::SpellMiss;
+use crate::tbc::CastFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -169,7 +169,7 @@ impl crate::Message for SMSG_SPELL_GO {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELL_GO {}
+impl crate::tbc::ServerMessage for SMSG_SPELL_GO {}
 
 impl SMSG_SPELL_GO {
     pub(crate) fn size(&self) -> usize {

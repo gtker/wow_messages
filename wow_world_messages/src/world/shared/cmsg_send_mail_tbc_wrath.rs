@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::mail_item_tbc_wrath::MailItem;
+use crate::shared::mail_item_tbc_wrath::MailItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -169,10 +169,10 @@ impl crate::Message for CMSG_SEND_MAIL {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SEND_MAIL {}
+impl crate::tbc::ClientMessage for CMSG_SEND_MAIL {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SEND_MAIL {}
+impl crate::wrath::ClientMessage for CMSG_SEND_MAIL {}
 
 impl CMSG_SEND_MAIL {
     pub(crate) fn size(&self) -> usize {

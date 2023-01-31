@@ -63,13 +63,13 @@ impl crate::Message for SMSG_ATTACKSTOP {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ATTACKSTOP {}
+impl crate::vanilla::ServerMessage for SMSG_ATTACKSTOP {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ATTACKSTOP {}
+impl crate::tbc::ServerMessage for SMSG_ATTACKSTOP {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ATTACKSTOP {}
+impl crate::wrath::ServerMessage for SMSG_ATTACKSTOP {}
 
 impl SMSG_ATTACKSTOP {
     pub(crate) fn size(&self) -> usize {

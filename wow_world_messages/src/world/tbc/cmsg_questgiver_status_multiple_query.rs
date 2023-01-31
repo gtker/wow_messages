@@ -31,5 +31,5 @@ impl crate::Message for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {}
+impl crate::tbc::ClientMessage for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {}
 

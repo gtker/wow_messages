@@ -48,5 +48,5 @@ impl crate::Message for CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE {}
+impl crate::wrath::ClientMessage for CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE {}
 

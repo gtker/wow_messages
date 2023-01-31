@@ -68,5 +68,5 @@ impl crate::Message for SMSG_TOTEM_CREATED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TOTEM_CREATED {}
+impl crate::tbc::ServerMessage for SMSG_TOTEM_CREATED {}
 

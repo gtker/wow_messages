@@ -31,5 +31,5 @@ impl crate::Message for CMSG_KEEP_ALIVE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_KEEP_ALIVE {}
+impl crate::tbc::ClientMessage for CMSG_KEEP_ALIVE {}
 

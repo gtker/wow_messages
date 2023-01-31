@@ -47,13 +47,13 @@ impl crate::Message for CMSG_GUILD_DEMOTE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GUILD_DEMOTE {}
+impl crate::vanilla::ClientMessage for CMSG_GUILD_DEMOTE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_DEMOTE {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_DEMOTE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_DEMOTE {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_DEMOTE {}
 
 impl CMSG_GUILD_DEMOTE {
     pub(crate) fn size(&self) -> usize {

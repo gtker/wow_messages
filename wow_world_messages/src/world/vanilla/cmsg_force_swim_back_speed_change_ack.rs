@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -70,7 +70,7 @@ impl crate::Message for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {}
+impl crate::vanilla::ClientMessage for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {}
 
 impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
     pub(crate) fn size(&self) -> usize {

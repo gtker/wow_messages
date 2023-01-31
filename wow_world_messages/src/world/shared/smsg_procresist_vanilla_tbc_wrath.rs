@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::log_format_vanilla_tbc_wrath::LogFormat;
+use crate::shared::log_format_vanilla_tbc_wrath::LogFormat;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -71,11 +71,11 @@ impl crate::Message for SMSG_PROCRESIST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PROCRESIST {}
+impl crate::vanilla::ServerMessage for SMSG_PROCRESIST {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PROCRESIST {}
+impl crate::tbc::ServerMessage for SMSG_PROCRESIST {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PROCRESIST {}
+impl crate::wrath::ServerMessage for SMSG_PROCRESIST {}
 

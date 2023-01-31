@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::dispel_method_tbc_wrath::DispelMethod;
+use crate::shared::dispel_method_tbc_wrath::DispelMethod;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

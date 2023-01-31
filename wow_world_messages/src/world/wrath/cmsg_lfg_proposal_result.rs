@@ -48,5 +48,5 @@ impl crate::Message for CMSG_LFG_PROPOSAL_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LFG_PROPOSAL_RESULT {}
+impl crate::wrath::ClientMessage for CMSG_LFG_PROPOSAL_RESULT {}
 

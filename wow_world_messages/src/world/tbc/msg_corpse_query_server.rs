@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Vector3d;
-use crate::world::tbc::CorpseQueryResult;
-use crate::world::tbc::Map;
+use crate::tbc::Vector3d;
+use crate::tbc::CorpseQueryResult;
+use crate::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -89,7 +89,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_CORPSE_QUERY_Server {}
+impl crate::tbc::ServerMessage for MSG_CORPSE_QUERY_Server {}
 
 impl MSG_CORPSE_QUERY_Server {
     pub(crate) fn size(&self) -> usize {

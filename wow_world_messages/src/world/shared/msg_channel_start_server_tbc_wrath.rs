@@ -61,10 +61,10 @@ impl crate::Message for MSG_CHANNEL_START_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_CHANNEL_START_Server {}
+impl crate::tbc::ServerMessage for MSG_CHANNEL_START_Server {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_CHANNEL_START_Server {}
+impl crate::wrath::ServerMessage for MSG_CHANNEL_START_Server {}
 
 impl MSG_CHANNEL_START_Server {
     pub(crate) fn size(&self) -> usize {

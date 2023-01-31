@@ -54,5 +54,5 @@ impl crate::Message for SMSG_DESTROY_OBJECT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_DESTROY_OBJECT {}
+impl crate::wrath::ServerMessage for SMSG_DESTROY_OBJECT {}
 

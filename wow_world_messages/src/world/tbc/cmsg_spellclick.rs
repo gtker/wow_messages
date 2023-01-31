@@ -41,5 +41,5 @@ impl crate::Message for CMSG_SPELLCLICK {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SPELLCLICK {}
+impl crate::tbc::ClientMessage for CMSG_SPELLCLICK {}
 

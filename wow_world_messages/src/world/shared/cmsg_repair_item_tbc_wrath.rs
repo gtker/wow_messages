@@ -58,8 +58,8 @@ impl crate::Message for CMSG_REPAIR_ITEM {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_REPAIR_ITEM {}
+impl crate::tbc::ClientMessage for CMSG_REPAIR_ITEM {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REPAIR_ITEM {}
+impl crate::wrath::ClientMessage for CMSG_REPAIR_ITEM {}
 

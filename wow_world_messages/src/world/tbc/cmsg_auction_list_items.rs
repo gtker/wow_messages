@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::AuctionSort;
-use crate::world::tbc::ItemQuality;
+use crate::tbc::AuctionSort;
+use crate::tbc::ItemQuality;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -161,7 +161,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_AUCTION_LIST_ITEMS {}
+impl crate::tbc::ClientMessage for CMSG_AUCTION_LIST_ITEMS {}
 
 impl CMSG_AUCTION_LIST_ITEMS {
     pub(crate) fn size(&self) -> usize {

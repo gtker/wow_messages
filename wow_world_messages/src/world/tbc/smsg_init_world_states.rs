@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::WorldState;
-use crate::world::tbc::Area;
-use crate::world::tbc::Map;
+use crate::tbc::WorldState;
+use crate::tbc::Area;
+use crate::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -75,7 +75,7 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_INIT_WORLD_STATES {}
+impl crate::tbc::ServerMessage for SMSG_INIT_WORLD_STATES {}
 
 impl SMSG_INIT_WORLD_STATES {
     pub(crate) fn size(&self) -> usize {

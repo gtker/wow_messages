@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::CinematicSequenceId;
+use crate::tbc::CinematicSequenceId;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_TRIGGER_CINEMATIC {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TRIGGER_CINEMATIC {}
+impl crate::tbc::ServerMessage for SMSG_TRIGGER_CINEMATIC {}
 

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::InventoryResult;
-use crate::world::tbc::TradeStatus;
+use crate::tbc::InventoryResult;
+use crate::tbc::TradeStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -178,7 +178,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TRADE_STATUS {}
+impl crate::tbc::ServerMessage for SMSG_TRADE_STATUS {}
 
 impl SMSG_TRADE_STATUS {
     pub(crate) fn size(&self) -> usize {

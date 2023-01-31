@@ -3244,6 +3244,7 @@ enum Area : u32 {
         display = "Ravenholdt Manor";
     }
 } {
+    rust_base_type = "true";
     versions = "1.12";
 }
 
@@ -8179,6 +8180,7 @@ enum Area : u32 {
         display = "The Dead Scar";
     }
 } {
+    rust_base_type = "true";
     versions = "2.4.3";
 }
 
@@ -15106,6 +15108,7 @@ enum Area : u32 {
         display = "The Ruby Sanctum";
     }
 } {
+    rust_base_type = "true";
     versions = "3.3.5";
 }
 

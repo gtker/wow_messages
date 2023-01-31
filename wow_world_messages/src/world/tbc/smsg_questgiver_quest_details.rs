@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::QuestDetailsEmote;
-use crate::world::tbc::QuestItemReward;
+use crate::tbc::QuestDetailsEmote;
+use crate::tbc::QuestItemReward;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -225,7 +225,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {}
+impl crate::tbc::ServerMessage for SMSG_QUESTGIVER_QUEST_DETAILS {}
 
 impl SMSG_QUESTGIVER_QUEST_DETAILS {
     pub(crate) fn size(&self) -> usize {

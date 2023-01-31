@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::LfgPlayerMember;
-use crate::world::tbc::Area;
-use crate::world::tbc::LfgMode;
+use crate::tbc::LfgPlayerMember;
+use crate::tbc::Area;
+use crate::tbc::LfgMode;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -45,5 +45,5 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ACTION_BUTTONS {}
+impl crate::tbc::ServerMessage for SMSG_ACTION_BUTTONS {}
 

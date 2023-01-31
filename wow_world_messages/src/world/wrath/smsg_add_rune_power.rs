@@ -43,5 +43,5 @@ impl crate::Message for SMSG_ADD_RUNE_POWER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ADD_RUNE_POWER {}
+impl crate::wrath::ServerMessage for SMSG_ADD_RUNE_POWER {}
 

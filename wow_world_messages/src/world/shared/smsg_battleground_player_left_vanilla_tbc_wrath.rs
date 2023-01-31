@@ -41,11 +41,11 @@ impl crate::Message for SMSG_BATTLEGROUND_PLAYER_LEFT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {}
+impl crate::vanilla::ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {}
+impl crate::tbc::ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEGROUND_PLAYER_LEFT {}
 

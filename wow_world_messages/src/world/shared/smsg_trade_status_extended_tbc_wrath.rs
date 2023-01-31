@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::trade_slot_tbc_wrath::TradeSlot;
+use crate::shared::trade_slot_tbc_wrath::TradeSlot;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -111,8 +111,8 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TRADE_STATUS_EXTENDED {}
+impl crate::tbc::ServerMessage for SMSG_TRADE_STATUS_EXTENDED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TRADE_STATUS_EXTENDED {}
+impl crate::wrath::ServerMessage for SMSG_TRADE_STATUS_EXTENDED {}
 

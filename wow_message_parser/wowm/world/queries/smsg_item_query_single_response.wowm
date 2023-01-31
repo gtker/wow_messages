@@ -17,6 +17,7 @@ struct ItemSpells {
     u32 spell_category;
     i32 spell_category_cooldown;
 } {
+    rust_base_type = "true";
     versions = "1";
 }
 
@@ -47,6 +48,7 @@ struct ItemSpells {
     u32 spell_category;
     i32 spell_category_cooldown;
 } {
+    rust_base_type = "true";
     versions = "2 3";
 }
 
@@ -55,6 +57,7 @@ struct ItemDamageType {
     f32 damage_maximum;
     (u32)SpellSchool school;
 } {
+    rust_base_type = "true";
     versions = "1 2 3";
 }
 
@@ -67,6 +70,7 @@ enum ItemStatType : u8 {
     SPIRIT = 6;
     STAMINA = 7;
 } {
+    rust_base_type = "true";
     versions = "1";
 }
 
@@ -74,6 +78,7 @@ struct ItemStat {
     (u32)ItemStatType stat_type;
     i32 value;
 } {
+    rust_base_type = "true";
     versions = "1";
 }
 
@@ -81,6 +86,7 @@ struct ItemStat {
     u32 stat_type;
     i32 value;
 } {
+    rust_base_type = "true";
     versions = "2 3";
 }
 
@@ -166,6 +172,7 @@ struct ItemSocket {
     u32 color;
     u32 content;
 } {
+    rust_base_type = "true";
     versions = "2.4.3 3";
 }
 

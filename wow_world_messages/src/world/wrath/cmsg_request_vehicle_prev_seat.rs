@@ -31,5 +31,5 @@ impl crate::Message for CMSG_REQUEST_VEHICLE_PREV_SEAT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REQUEST_VEHICLE_PREV_SEAT {}
+impl crate::wrath::ClientMessage for CMSG_REQUEST_VEHICLE_PREV_SEAT {}
 

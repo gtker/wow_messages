@@ -51,13 +51,13 @@ impl crate::Message for SMSG_SPLINE_SET_TURN_RATE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
+impl crate::vanilla::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
+impl crate::tbc::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
+impl crate::wrath::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
 
 impl SMSG_SPLINE_SET_TURN_RATE {
     pub(crate) fn size(&self) -> usize {

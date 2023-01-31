@@ -104,5 +104,5 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_AUCTION_BIDDER_NOTIFICATION {}
+impl crate::wrath::ServerMessage for SMSG_AUCTION_BIDDER_NOTIFICATION {}
 

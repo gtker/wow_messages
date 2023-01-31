@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::GossipItem;
-use crate::world::wrath::QuestItem;
+use crate::wrath::GossipItem;
+use crate::wrath::QuestItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -107,7 +107,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GOSSIP_MESSAGE {}
+impl crate::wrath::ServerMessage for SMSG_GOSSIP_MESSAGE {}
 
 impl SMSG_GOSSIP_MESSAGE {
     pub(crate) fn size(&self) -> usize {

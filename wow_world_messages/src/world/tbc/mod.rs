@@ -1009,14 +1009,6 @@ pub use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 
 pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceResetFailedReason;
 
-pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
-
-pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
-
-pub use crate::shared::item_spells_tbc_wrath::ItemSpells;
-
-pub use crate::shared::item_stat_tbc_wrath::ItemStat;
-
 pub use crate::shared::join_arena_type_tbc_wrath::JoinArenaType;
 
 pub use crate::shared::language_tbc_wrath::Language;
@@ -1733,7 +1725,15 @@ pub use wow_world_base::tbc::InventoryType;
 
 pub use wow_world_base::tbc::ItemClass;
 
+pub use wow_world_base::tbc::ItemDamageType;
+
 pub use wow_world_base::tbc::ItemQuality;
+
+pub use wow_world_base::tbc::ItemSocket;
+
+pub use wow_world_base::tbc::ItemSpells;
+
+pub use wow_world_base::tbc::ItemStat;
 
 pub use wow_world_base::tbc::Power;
 

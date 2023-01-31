@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::TradeSlot;
+use crate::vanilla::TradeSlot;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -100,5 +100,5 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_TRADE_STATUS_EXTENDED {}
+impl crate::vanilla::ServerMessage for SMSG_TRADE_STATUS_EXTENDED {}
 

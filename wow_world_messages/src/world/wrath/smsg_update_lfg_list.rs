@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::LfgListGroup;
-use crate::world::wrath::LfgListPlayer;
-use crate::world::wrath::LfgListUpdateType;
-use crate::world::wrath::LfgType;
+use crate::wrath::LfgListGroup;
+use crate::wrath::LfgListPlayer;
+use crate::wrath::LfgListUpdateType;
+use crate::wrath::LfgType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -167,7 +167,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_UPDATE_LFG_LIST {}
+impl crate::wrath::ServerMessage for SMSG_UPDATE_LFG_LIST {}
 
 impl SMSG_UPDATE_LFG_LIST {
     pub(crate) fn size(&self) -> usize {

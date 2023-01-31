@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Sent after a successful [`CMSG_AUTH_SESSION`](crate::world::vanilla::CMSG_AUTH_SESSION) and [`SMSG_AUTH_RESPONSE`](crate::world::vanilla::SMSG_AUTH_RESPONSE), or after failing to login with [`SMSG_CHARACTER_LOGIN_FAILED`](crate::world::vanilla::SMSG_CHARACTER_LOGIN_FAILED).
+/// Sent after a successful [`CMSG_AUTH_SESSION`](crate::vanilla::CMSG_AUTH_SESSION) and [`SMSG_AUTH_RESPONSE`](crate::vanilla::SMSG_AUTH_RESPONSE), or after failing to login with [`SMSG_CHARACTER_LOGIN_FAILED`](crate::vanilla::SMSG_CHARACTER_LOGIN_FAILED).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm#L1):
 /// ```text
@@ -33,21 +33,21 @@ impl crate::Message for CMSG_CHAR_ENUM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHAR_ENUM {}
+impl crate::vanilla::ClientMessage for CMSG_CHAR_ENUM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHAR_ENUM {}
+impl crate::tbc::ClientMessage for CMSG_CHAR_ENUM {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHAR_ENUM {}
+impl crate::wrath::ClientMessage for CMSG_CHAR_ENUM {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::CMSG_CHAR_ENUM;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x37, 0x00, 0x00, 0x00, ];
 
@@ -127,8 +127,8 @@ mod test_tbc {
     use super::CMSG_CHAR_ENUM;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x37, 0x00, 0x00, 0x00, ];
 
@@ -208,8 +208,8 @@ mod test_wrath {
     use super::CMSG_CHAR_ENUM;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ClientOpcodeMessage;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x37, 0x00, 0x00, 0x00, ];
 

@@ -39,7 +39,7 @@ impl PetSpellCooldown {
 }
 
 impl PetSpellCooldown {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // spell: u16
         let spell = crate::util::read_u16_le(r)?;
 

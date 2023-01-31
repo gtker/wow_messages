@@ -43,7 +43,7 @@ impl TelemetryKey {
 }
 
 impl TelemetryKey {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // unknown1: u16
         let unknown1 = crate::util::read_u16_le(r)?;
 
@@ -67,7 +67,7 @@ impl TelemetryKey {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // unknown1: u16
         let unknown1 = crate::util::tokio_read_u16_le(r).await?;
 
@@ -91,7 +91,7 @@ impl TelemetryKey {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // unknown1: u16
         let unknown1 = crate::util::astd_read_u16_le(r).await?;
 

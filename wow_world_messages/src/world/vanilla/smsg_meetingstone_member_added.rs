@@ -41,5 +41,5 @@ impl crate::Message for SMSG_MEETINGSTONE_MEMBER_ADDED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_MEETINGSTONE_MEMBER_ADDED {}
+impl crate::vanilla::ServerMessage for SMSG_MEETINGSTONE_MEMBER_ADDED {}
 

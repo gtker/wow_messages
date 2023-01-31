@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
+use crate::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -96,10 +96,10 @@ impl crate::Message for SMSG_LOG_XPGAIN {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOG_XPGAIN {}
+impl crate::vanilla::ServerMessage for SMSG_LOG_XPGAIN {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOG_XPGAIN {}
+impl crate::tbc::ServerMessage for SMSG_LOG_XPGAIN {}
 
 impl SMSG_LOG_XPGAIN {
     pub(crate) fn size(&self) -> usize {

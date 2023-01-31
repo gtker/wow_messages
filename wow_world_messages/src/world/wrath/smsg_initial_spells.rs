@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::CooldownSpell;
-use crate::world::wrath::InitialSpell;
+use crate::wrath::CooldownSpell;
+use crate::wrath::InitialSpell;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -88,7 +88,7 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_INITIAL_SPELLS {}
+impl crate::wrath::ServerMessage for SMSG_INITIAL_SPELLS {}
 
 impl SMSG_INITIAL_SPELLS {
     pub(crate) fn size(&self) -> usize {

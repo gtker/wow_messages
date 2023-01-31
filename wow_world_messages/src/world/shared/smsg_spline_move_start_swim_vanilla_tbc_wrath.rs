@@ -43,13 +43,13 @@ impl crate::Message for SMSG_SPLINE_MOVE_START_SWIM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
+impl crate::vanilla::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
+impl crate::tbc::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
+impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
 
 impl SMSG_SPLINE_MOVE_START_SWIM {
     pub(crate) fn size(&self) -> usize {

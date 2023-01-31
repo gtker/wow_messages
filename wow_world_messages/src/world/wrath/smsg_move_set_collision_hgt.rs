@@ -60,7 +60,7 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MOVE_SET_COLLISION_HGT {}
+impl crate::wrath::ServerMessage for SMSG_MOVE_SET_COLLISION_HGT {}
 
 impl SMSG_MOVE_SET_COLLISION_HGT {
     pub(crate) fn size(&self) -> usize {

@@ -411,7 +411,7 @@ pub(crate) fn major_version_to_string(v: &MajorWorldVersion) -> &'static str {
 }
 
 pub(crate) fn get_world_version_path(version: &MajorWorldVersion) -> String {
-    format!("crate::world::{}", major_version_to_string(version))
+    format!("crate::{}", major_version_to_string(version))
 }
 
 pub(crate) fn get_login_logon_version_path(version: &LoginVersion) -> String {
@@ -419,7 +419,11 @@ pub(crate) fn get_login_logon_version_path(version: &LoginVersion) -> String {
 }
 
 pub(crate) fn get_world_shared_path(ty_name: &str, tags: &ObjectTags) -> String {
-    format!("crate::world::shared::{}", tags.shared_module_name(ty_name))
+    format!("crate::shared::{}", tags.shared_module_name(ty_name))
+}
+
+pub(crate) fn get_base_internal_shared_path(ty_name: &str, tags: &ObjectTags) -> String {
+    format!("crate::shared::{}", tags.shared_module_name(ty_name))
 }
 
 pub(crate) fn get_base_shared_path(ty_name: &str, tags: &ObjectTags) -> String {

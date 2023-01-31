@@ -40,5 +40,5 @@ impl crate::Message for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {}
+impl crate::wrath::ClientMessage for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {}
 

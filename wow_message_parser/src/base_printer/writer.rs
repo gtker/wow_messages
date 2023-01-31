@@ -79,6 +79,28 @@ impl Writer {
         self.closing_curly(); // fn body
     }
 
+    pub fn constructor(
+        &mut self,
+        name: impl AsRef<str>,
+        args: impl Fn(&mut Self),
+        self_body: impl Fn(&mut Self),
+    ) {
+        self.wln(format!("pub const fn {}(", name.as_ref()));
+        self.inc_indent();
+
+        args(self);
+
+        self.dec_indent();
+        self.wln(") -> Item {");
+        self.inc_indent();
+
+        self.open_curly("Item");
+        self_body(self);
+        self.closing_curly(); // Self
+
+        self.closing_curly(); // fn body
+    }
+
     pub fn wln_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
         self.newline();

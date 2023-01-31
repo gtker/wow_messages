@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::AuraType;
-use crate::world::wrath::SpellSchool;
+use crate::wrath::AuraType;
+use crate::wrath::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

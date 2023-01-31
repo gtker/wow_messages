@@ -50,5 +50,5 @@ impl crate::Message for CMSG_OFFER_PETITION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_OFFER_PETITION {}
+impl crate::vanilla::ClientMessage for CMSG_OFFER_PETITION {}
 

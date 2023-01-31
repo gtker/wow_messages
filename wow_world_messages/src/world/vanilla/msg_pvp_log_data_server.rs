@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::BattlegroundPlayer;
-use crate::world::vanilla::BattlegroundEndStatus;
-use crate::world::vanilla::BattlegroundWinner;
+use crate::vanilla::BattlegroundPlayer;
+use crate::vanilla::BattlegroundEndStatus;
+use crate::vanilla::BattlegroundWinner;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -92,7 +92,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_PVP_LOG_DATA_Server {}
+impl crate::vanilla::ServerMessage for MSG_PVP_LOG_DATA_Server {}
 
 impl MSG_PVP_LOG_DATA_Server {
     pub(crate) fn size(&self) -> usize {

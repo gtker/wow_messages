@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::MovementInfo;
+use crate::wrath::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -53,7 +53,7 @@ impl crate::Message for MSG_MOVE_FEATHER_FALL_Server {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_MOVE_FEATHER_FALL_Server {}
+impl crate::wrath::ServerMessage for MSG_MOVE_FEATHER_FALL_Server {}
 
 impl MSG_MOVE_FEATHER_FALL_Server {
     pub(crate) fn size(&self) -> usize {

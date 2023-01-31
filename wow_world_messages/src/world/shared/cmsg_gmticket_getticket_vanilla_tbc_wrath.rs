@@ -31,11 +31,11 @@ impl crate::Message for CMSG_GMTICKET_GETTICKET {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GMTICKET_GETTICKET {}
+impl crate::vanilla::ClientMessage for CMSG_GMTICKET_GETTICKET {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GMTICKET_GETTICKET {}
+impl crate::tbc::ClientMessage for CMSG_GMTICKET_GETTICKET {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GMTICKET_GETTICKET {}
+impl crate::wrath::ClientMessage for CMSG_GMTICKET_GETTICKET {}
 

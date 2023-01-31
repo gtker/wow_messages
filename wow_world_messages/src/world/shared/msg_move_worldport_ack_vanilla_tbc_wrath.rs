@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Acknowledge from the client that it has received an [`SMSG_NEW_WORLD`](crate::world::vanilla::SMSG_NEW_WORLD) and has loaded the new map.
+/// Acknowledge from the client that it has received an [`SMSG_NEW_WORLD`](crate::vanilla::SMSG_NEW_WORLD) and has loaded the new map.
 ///
 /// Despite the name this seems to only be sent by the client.
 /// The server should reply with what it normally does to log players into the world.
@@ -36,20 +36,20 @@ impl crate::Message for MSG_MOVE_WORLDPORT_ACK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
+impl crate::vanilla::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
 
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
+impl crate::vanilla::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
+impl crate::tbc::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
+impl crate::tbc::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
+impl crate::wrath::ClientMessage for MSG_MOVE_WORLDPORT_ACK {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
+impl crate::wrath::ServerMessage for MSG_MOVE_WORLDPORT_ACK {}
 

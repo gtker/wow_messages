@@ -45,5 +45,5 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {}
+impl crate::vanilla::ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {}
 

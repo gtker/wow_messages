@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::Area;
-use crate::world::tbc::Class;
-use crate::world::tbc::GuildMemberStatus;
+use crate::tbc::Area;
+use crate::tbc::Class;
+use crate::tbc::GuildMemberStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

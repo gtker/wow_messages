@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::DungeonDifficulty;
-use crate::world::wrath::Map;
-use crate::world::wrath::TransferAbortReason;
+use crate::wrath::DungeonDifficulty;
+use crate::wrath::Map;
+use crate::wrath::TransferAbortReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -136,7 +136,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TRANSFER_ABORTED {}
+impl crate::wrath::ServerMessage for SMSG_TRANSFER_ABORTED {}
 
 impl SMSG_TRANSFER_ABORTED {
     pub(crate) fn size(&self) -> usize {

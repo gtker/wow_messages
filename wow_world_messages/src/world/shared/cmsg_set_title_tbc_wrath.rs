@@ -40,8 +40,8 @@ impl crate::Message for CMSG_SET_TITLE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_TITLE {}
+impl crate::tbc::ClientMessage for CMSG_SET_TITLE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_TITLE {}
+impl crate::wrath::ClientMessage for CMSG_SET_TITLE {}
 

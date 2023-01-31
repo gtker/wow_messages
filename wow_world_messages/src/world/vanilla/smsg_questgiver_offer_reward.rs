@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::NpcTextUpdateEmote;
-use crate::world::vanilla::QuestItemRequirement;
+use crate::vanilla::NpcTextUpdateEmote;
+use crate::vanilla::QuestItemRequirement;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -182,7 +182,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUESTGIVER_OFFER_REWARD {}
+impl crate::vanilla::ServerMessage for SMSG_QUESTGIVER_OFFER_REWARD {}
 
 impl SMSG_QUESTGIVER_OFFER_REWARD {
     pub(crate) fn size(&self) -> usize {

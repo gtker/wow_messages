@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::InventoryResult;
+use crate::vanilla::InventoryResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -2103,7 +2103,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {}
+impl crate::vanilla::ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {}
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
     pub(crate) fn size(&self) -> usize {

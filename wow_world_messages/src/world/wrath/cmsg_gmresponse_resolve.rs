@@ -31,5 +31,5 @@ impl crate::Message for CMSG_GMRESPONSE_RESOLVE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GMRESPONSE_RESOLVE {}
+impl crate::wrath::ClientMessage for CMSG_GMRESPONSE_RESOLVE {}
 

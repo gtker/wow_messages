@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -62,7 +62,7 @@ impl crate::Message for CMSG_FORCE_MOVE_ROOT_ACK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_FORCE_MOVE_ROOT_ACK {}
+impl crate::vanilla::ClientMessage for CMSG_FORCE_MOVE_ROOT_ACK {}
 
 impl CMSG_FORCE_MOVE_ROOT_ACK {
     pub(crate) fn size(&self) -> usize {

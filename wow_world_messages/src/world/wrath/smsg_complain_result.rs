@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ComplainResultWindow;
+use crate::wrath::ComplainResultWindow;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -52,5 +52,5 @@ impl crate::Message for SMSG_COMPLAIN_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_COMPLAIN_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_COMPLAIN_RESULT {}
 

@@ -31,5 +31,5 @@ impl crate::Message for SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {}
+impl crate::wrath::ServerMessage for SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {}
 

@@ -41,5 +41,5 @@ impl crate::Message for CMSG_CHAT_IGNORED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHAT_IGNORED {}
+impl crate::vanilla::ClientMessage for CMSG_CHAT_IGNORED {}
 

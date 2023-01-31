@@ -40,5 +40,5 @@ impl crate::Message for SMSG_CRITERIA_DELETED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CRITERIA_DELETED {}
+impl crate::wrath::ServerMessage for SMSG_CRITERIA_DELETED {}
 

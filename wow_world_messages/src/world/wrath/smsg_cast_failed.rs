@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Area;
-use crate::world::wrath::Skill;
-use crate::world::wrath::SpellCastResult;
+use crate::wrath::Area;
+use crate::wrath::Skill;
+use crate::wrath::SpellCastResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -742,7 +742,7 @@ impl crate::Message for SMSG_CAST_FAILED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CAST_FAILED {}
+impl crate::wrath::ServerMessage for SMSG_CAST_FAILED {}
 
 impl SMSG_CAST_FAILED {
     pub(crate) fn size(&self) -> usize {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::GuildEmblemResult;
+use crate::vanilla::GuildEmblemResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
+impl crate::vanilla::ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
 

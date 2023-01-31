@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::ChatRestrictionType;
+use crate::tbc::ChatRestrictionType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_CHAT_RESTRICTED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CHAT_RESTRICTED {}
+impl crate::tbc::ServerMessage for SMSG_CHAT_RESTRICTED {}
 

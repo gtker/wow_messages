@@ -59,5 +59,5 @@ impl crate::Message for CMSG_PET_LEARN_TALENT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PET_LEARN_TALENT {}
+impl crate::wrath::ClientMessage for CMSG_PET_LEARN_TALENT {}
 

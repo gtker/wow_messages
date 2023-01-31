@@ -41,8 +41,8 @@ impl crate::Message for SMSG_BINDER_CONFIRM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_BINDER_CONFIRM {}
+impl crate::vanilla::ServerMessage for SMSG_BINDER_CONFIRM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_BINDER_CONFIRM {}
+impl crate::tbc::ServerMessage for SMSG_BINDER_CONFIRM {}
 

@@ -4,7 +4,7 @@ use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Informs the client that the run speed of a unit has changed.
-/// Mangos sends this to third parties that aren't having their speed changed and [`SMSG_FORCE_RUN_SPEED_CHANGE`](crate::world::vanilla::SMSG_FORCE_RUN_SPEED_CHANGE) to the client that has their run speed changed.
+/// Mangos sends this to third parties that aren't having their speed changed and [`SMSG_FORCE_RUN_SPEED_CHANGE`](crate::vanilla::SMSG_FORCE_RUN_SPEED_CHANGE) to the client that has their run speed changed.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_run_speed.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_run_speed.wowm#L3):
 /// ```text
@@ -54,13 +54,13 @@ impl crate::Message for SMSG_SPLINE_SET_RUN_SPEED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {}
+impl crate::vanilla::ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {}
+impl crate::tbc::ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {}
+impl crate::wrath::ServerMessage for SMSG_SPLINE_SET_RUN_SPEED {}
 
 impl SMSG_SPLINE_SET_RUN_SPEED {
     pub(crate) fn size(&self) -> usize {
@@ -74,9 +74,9 @@ mod test_vanilla {
     use super::SMSG_SPLINE_SET_RUN_SPEED;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];
@@ -169,9 +169,9 @@ mod test_tbc {
     use super::SMSG_SPLINE_SET_RUN_SPEED;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];
@@ -264,9 +264,9 @@ mod test_wrath {
     use super::SMSG_SPLINE_SET_RUN_SPEED;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ServerOpcodeMessage;
+    use crate::wrath::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];

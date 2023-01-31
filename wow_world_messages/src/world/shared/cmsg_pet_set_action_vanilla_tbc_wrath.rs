@@ -98,13 +98,13 @@ impl crate::Message for CMSG_PET_SET_ACTION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PET_SET_ACTION {}
+impl crate::vanilla::ClientMessage for CMSG_PET_SET_ACTION {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PET_SET_ACTION {}
+impl crate::tbc::ClientMessage for CMSG_PET_SET_ACTION {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PET_SET_ACTION {}
+impl crate::wrath::ClientMessage for CMSG_PET_SET_ACTION {}
 
 impl CMSG_PET_SET_ACTION {
     pub(crate) fn size(&self) -> usize {

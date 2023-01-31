@@ -31,11 +31,11 @@ impl crate::Message for CMSG_TUTORIAL_RESET {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_TUTORIAL_RESET {}
+impl crate::vanilla::ClientMessage for CMSG_TUTORIAL_RESET {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_TUTORIAL_RESET {}
+impl crate::tbc::ClientMessage for CMSG_TUTORIAL_RESET {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_TUTORIAL_RESET {}
+impl crate::wrath::ClientMessage for CMSG_TUTORIAL_RESET {}
 

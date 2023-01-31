@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::UpdateMask;
-use crate::world::wrath::MovementBlock;
-use crate::world::wrath::ObjectType;
-use crate::world::wrath::UpdateType;
+use crate::wrath::UpdateMask;
+use crate::wrath::MovementBlock;
+use crate::wrath::ObjectType;
+use crate::wrath::UpdateType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

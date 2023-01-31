@@ -50,5 +50,5 @@ impl crate::Message for SMSG_LOOT_MONEY_NOTIFY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_MONEY_NOTIFY {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_MONEY_NOTIFY {}
 

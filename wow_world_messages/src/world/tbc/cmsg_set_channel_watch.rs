@@ -47,7 +47,7 @@ impl crate::Message for CMSG_SET_CHANNEL_WATCH {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_CHANNEL_WATCH {}
+impl crate::tbc::ClientMessage for CMSG_SET_CHANNEL_WATCH {}
 
 impl CMSG_SET_CHANNEL_WATCH {
     pub(crate) fn size(&self) -> usize {

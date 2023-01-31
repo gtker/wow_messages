@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::SpellLog;
+use crate::tbc::SpellLog;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -74,7 +74,7 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELLLOGEXECUTE {}
+impl crate::tbc::ServerMessage for SMSG_SPELLLOGEXECUTE {}
 
 impl SMSG_SPELLLOGEXECUTE {
     pub(crate) fn size(&self) -> usize {

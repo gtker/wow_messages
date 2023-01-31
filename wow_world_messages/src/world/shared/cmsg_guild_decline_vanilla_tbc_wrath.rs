@@ -31,11 +31,11 @@ impl crate::Message for CMSG_GUILD_DECLINE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GUILD_DECLINE {}
+impl crate::vanilla::ClientMessage for CMSG_GUILD_DECLINE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_DECLINE {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_DECLINE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_DECLINE {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_DECLINE {}
 

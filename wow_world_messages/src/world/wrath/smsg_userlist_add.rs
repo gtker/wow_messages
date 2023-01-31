@@ -84,7 +84,7 @@ impl crate::Message for SMSG_USERLIST_ADD {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_USERLIST_ADD {}
+impl crate::wrath::ServerMessage for SMSG_USERLIST_ADD {}
 
 impl SMSG_USERLIST_ADD {
     pub(crate) fn size(&self) -> usize {

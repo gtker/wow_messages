@@ -43,7 +43,7 @@ impl crate::Message for CMSG_DELETEEQUIPMENT_SET {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_DELETEEQUIPMENT_SET {}
+impl crate::wrath::ClientMessage for CMSG_DELETEEQUIPMENT_SET {}
 
 impl CMSG_DELETEEQUIPMENT_SET {
     pub(crate) fn size(&self) -> usize {

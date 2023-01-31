@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Seed used by the client to prove in [`CMSG_AUTH_SESSION`](crate::world::vanilla::CMSG_AUTH_SESSION) that it has authenticated with the auth server.
+/// Seed used by the client to prove in [`CMSG_AUTH_SESSION`](crate::vanilla::CMSG_AUTH_SESSION) that it has authenticated with the auth server.
 ///
 /// First thing sent when a client connects to the world server.
 /// This message is always unencrypted.
@@ -45,18 +45,18 @@ impl crate::Message for SMSG_AUTH_CHALLENGE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_AUTH_CHALLENGE {}
+impl crate::vanilla::ServerMessage for SMSG_AUTH_CHALLENGE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_AUTH_CHALLENGE {}
+impl crate::tbc::ServerMessage for SMSG_AUTH_CHALLENGE {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::SMSG_AUTH_CHALLENGE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xEC, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
 
@@ -142,8 +142,8 @@ mod test_tbc {
     use super::SMSG_AUTH_CHALLENGE;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xEC, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, ];
 

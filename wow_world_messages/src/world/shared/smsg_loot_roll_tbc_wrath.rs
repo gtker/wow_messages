@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::roll_vote_tbc_wrath::RollVote;
+use crate::shared::roll_vote_tbc_wrath::RollVote;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -123,8 +123,8 @@ impl crate::Message for SMSG_LOOT_ROLL {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOOT_ROLL {}
+impl crate::tbc::ServerMessage for SMSG_LOOT_ROLL {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_ROLL {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_ROLL {}
 

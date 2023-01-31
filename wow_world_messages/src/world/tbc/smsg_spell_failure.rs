@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::SpellCastResult;
+use crate::tbc::SpellCastResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -60,5 +60,5 @@ impl crate::Message for SMSG_SPELL_FAILURE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELL_FAILURE {}
+impl crate::tbc::ServerMessage for SMSG_SPELL_FAILURE {}
 

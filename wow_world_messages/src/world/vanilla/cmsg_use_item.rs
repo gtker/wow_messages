@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::SpellCastTargets;
+use crate::vanilla::SpellCastTargets;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -70,7 +70,7 @@ impl crate::Message for CMSG_USE_ITEM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_USE_ITEM {}
+impl crate::vanilla::ClientMessage for CMSG_USE_ITEM {}
 
 impl CMSG_USE_ITEM {
     pub(crate) fn size(&self) -> usize {

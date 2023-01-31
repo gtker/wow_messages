@@ -156,7 +156,7 @@ impl crate::Message for CMSG_SEND_MAIL {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SEND_MAIL {}
+impl crate::vanilla::ClientMessage for CMSG_SEND_MAIL {}
 
 impl CMSG_SEND_MAIL {
     pub(crate) fn size(&self) -> usize {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Map;
-use crate::world::vanilla::RaidInstanceMessage;
+use crate::vanilla::Map;
+use crate::vanilla::RaidInstanceMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -60,5 +60,5 @@ impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {}
+impl crate::vanilla::ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {}
 

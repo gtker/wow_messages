@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::buy_result_vanilla_tbc_wrath::BuyResult;
+use crate::shared::buy_result_vanilla_tbc_wrath::BuyResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -62,11 +62,11 @@ impl crate::Message for SMSG_BUY_FAILED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_BUY_FAILED {}
+impl crate::vanilla::ServerMessage for SMSG_BUY_FAILED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_BUY_FAILED {}
+impl crate::tbc::ServerMessage for SMSG_BUY_FAILED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BUY_FAILED {}
+impl crate::wrath::ServerMessage for SMSG_BUY_FAILED {}
 

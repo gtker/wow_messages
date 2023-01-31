@@ -40,11 +40,11 @@ impl crate::Message for CMSG_CANCEL_CHANNELLING {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CANCEL_CHANNELLING {}
+impl crate::vanilla::ClientMessage for CMSG_CANCEL_CHANNELLING {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CANCEL_CHANNELLING {}
+impl crate::tbc::ClientMessage for CMSG_CANCEL_CHANNELLING {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CANCEL_CHANNELLING {}
+impl crate::wrath::ClientMessage for CMSG_CANCEL_CHANNELLING {}
 

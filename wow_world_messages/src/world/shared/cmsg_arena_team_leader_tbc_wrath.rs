@@ -56,10 +56,10 @@ impl crate::Message for CMSG_ARENA_TEAM_LEADER {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ARENA_TEAM_LEADER {}
+impl crate::tbc::ClientMessage for CMSG_ARENA_TEAM_LEADER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ARENA_TEAM_LEADER {}
+impl crate::wrath::ClientMessage for CMSG_ARENA_TEAM_LEADER {}
 
 impl CMSG_ARENA_TEAM_LEADER {
     pub(crate) fn size(&self) -> usize {

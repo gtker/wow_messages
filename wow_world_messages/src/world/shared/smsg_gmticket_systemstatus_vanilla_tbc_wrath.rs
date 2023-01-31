@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::gm_ticket_queue_status_vanilla_tbc_wrath::GmTicketQueueStatus;
+use crate::shared::gm_ticket_queue_status_vanilla_tbc_wrath::GmTicketQueueStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -43,11 +43,11 @@ impl crate::Message for SMSG_GMTICKET_SYSTEMSTATUS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GMTICKET_SYSTEMSTATUS {}
+impl crate::vanilla::ServerMessage for SMSG_GMTICKET_SYSTEMSTATUS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GMTICKET_SYSTEMSTATUS {}
+impl crate::tbc::ServerMessage for SMSG_GMTICKET_SYSTEMSTATUS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GMTICKET_SYSTEMSTATUS {}
+impl crate::wrath::ServerMessage for SMSG_GMTICKET_SYSTEMSTATUS {}
 

@@ -74,7 +74,7 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_PLAYER_DECLINED_NAMES {}
+impl crate::wrath::ClientMessage for CMSG_SET_PLAYER_DECLINED_NAMES {}
 
 impl CMSG_SET_PLAYER_DECLINED_NAMES {
     pub(crate) fn size(&self) -> usize {

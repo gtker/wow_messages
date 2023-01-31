@@ -56,10 +56,10 @@ impl crate::Message for CMSG_ARENA_TEAM_REMOVE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ARENA_TEAM_REMOVE {}
+impl crate::tbc::ClientMessage for CMSG_ARENA_TEAM_REMOVE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ARENA_TEAM_REMOVE {}
+impl crate::wrath::ClientMessage for CMSG_ARENA_TEAM_REMOVE {}
 
 impl CMSG_ARENA_TEAM_REMOVE {
     pub(crate) fn size(&self) -> usize {

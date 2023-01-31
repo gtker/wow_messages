@@ -33,5 +33,5 @@ impl crate::Message for MSG_RAID_READY_CHECK_FINISHED_Client {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_RAID_READY_CHECK_FINISHED_Client {}
+impl crate::wrath::ClientMessage for MSG_RAID_READY_CHECK_FINISHED_Client {}
 

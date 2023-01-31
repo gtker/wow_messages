@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::arena_team_command_tbc_wrath::ArenaTeamCommand;
-use crate::world::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandError;
+use crate::shared::arena_team_command_tbc_wrath::ArenaTeamCommand;
+use crate::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandError;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -81,10 +81,10 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ARENA_TEAM_COMMAND_RESULT {}
+impl crate::tbc::ServerMessage for SMSG_ARENA_TEAM_COMMAND_RESULT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ARENA_TEAM_COMMAND_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_ARENA_TEAM_COMMAND_RESULT {}
 
 impl SMSG_ARENA_TEAM_COMMAND_RESULT {
     pub(crate) fn size(&self) -> usize {

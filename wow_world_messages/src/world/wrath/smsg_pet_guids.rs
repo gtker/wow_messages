@@ -55,7 +55,7 @@ impl crate::Message for SMSG_PET_GUIDS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PET_GUIDS {}
+impl crate::wrath::ServerMessage for SMSG_PET_GUIDS {}
 
 impl SMSG_PET_GUIDS {
     pub(crate) fn size(&self) -> usize {

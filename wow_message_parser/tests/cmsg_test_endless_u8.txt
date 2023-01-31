@@ -75,7 +75,7 @@ impl crate::Message for CMSG_TEST_ENDLESS_U8 {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_TEST_ENDLESS_U8 {}
+impl crate::vanilla::ClientMessage for CMSG_TEST_ENDLESS_U8 {}
 
 impl CMSG_TEST_ENDLESS_U8 {
     pub(crate) fn size(&self) -> usize {

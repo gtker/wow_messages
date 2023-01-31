@@ -31,11 +31,11 @@ impl crate::Message for SMSG_CANCEL_COMBAT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CANCEL_COMBAT {}
+impl crate::vanilla::ServerMessage for SMSG_CANCEL_COMBAT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CANCEL_COMBAT {}
+impl crate::tbc::ServerMessage for SMSG_CANCEL_COMBAT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CANCEL_COMBAT {}
+impl crate::wrath::ServerMessage for SMSG_CANCEL_COMBAT {}
 

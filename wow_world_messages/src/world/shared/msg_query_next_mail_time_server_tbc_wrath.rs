@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::received_mail_tbc_wrath::ReceivedMail;
+use crate::shared::received_mail_tbc_wrath::ReceivedMail;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -64,10 +64,10 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {}
+impl crate::tbc::ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {}
+impl crate::wrath::ServerMessage for MSG_QUERY_NEXT_MAIL_TIME_Server {}
 
 impl MSG_QUERY_NEXT_MAIL_TIME_Server {
     pub(crate) fn size(&self) -> usize {

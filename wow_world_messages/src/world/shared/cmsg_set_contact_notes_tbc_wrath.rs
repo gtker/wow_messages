@@ -57,10 +57,10 @@ impl crate::Message for CMSG_SET_CONTACT_NOTES {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_CONTACT_NOTES {}
+impl crate::tbc::ClientMessage for CMSG_SET_CONTACT_NOTES {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_CONTACT_NOTES {}
+impl crate::wrath::ClientMessage for CMSG_SET_CONTACT_NOTES {}
 
 impl CMSG_SET_CONTACT_NOTES {
     pub(crate) fn size(&self) -> usize {

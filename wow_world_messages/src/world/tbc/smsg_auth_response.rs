@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Expansion;
-use crate::world::tbc::WorldResult;
-use crate::world::tbc::BillingPlanFlags;
+use crate::tbc::Expansion;
+use crate::tbc::WorldResult;
+use crate::tbc::BillingPlanFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -292,7 +292,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_AUTH_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_AUTH_RESPONSE {}
 
 impl SMSG_AUTH_RESPONSE {
     pub(crate) fn size(&self) -> usize {

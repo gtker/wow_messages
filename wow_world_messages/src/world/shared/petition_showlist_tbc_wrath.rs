@@ -56,7 +56,7 @@ impl PetitionShowlist {
 }
 
 impl PetitionShowlist {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // index: u32
         let index = crate::util::read_u32_le(r)?;
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::QuestGiverStatusReport;
+use crate::tbc::QuestGiverStatusReport;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_QUESTGIVER_STATUS_MULTIPLE {}
+impl crate::tbc::ServerMessage for SMSG_QUESTGIVER_STATUS_MULTIPLE {}
 
 impl SMSG_QUESTGIVER_STATUS_MULTIPLE {
     pub(crate) fn size(&self) -> usize {

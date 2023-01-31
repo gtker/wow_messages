@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Map;
+use crate::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -78,7 +78,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TRANSFER_PENDING {}
+impl crate::tbc::ServerMessage for SMSG_TRANSFER_PENDING {}
 
 impl SMSG_TRANSFER_PENDING {
     pub(crate) fn size(&self) -> usize {

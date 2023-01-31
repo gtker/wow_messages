@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// This is sent by the client after receiving [`SMSG_ACCOUNT_DATA_TIMES`](crate::world::vanilla::SMSG_ACCOUNT_DATA_TIMES). Client can also request a block through [`CMSG_REQUEST_ACCOUNT_DATA`](crate::world::vanilla::CMSG_REQUEST_ACCOUNT_DATA).
+/// This is sent by the client after receiving [`SMSG_ACCOUNT_DATA_TIMES`](crate::vanilla::SMSG_ACCOUNT_DATA_TIMES). Client can also request a block through [`CMSG_REQUEST_ACCOUNT_DATA`](crate::vanilla::CMSG_REQUEST_ACCOUNT_DATA).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L1):
 /// ```text
@@ -74,10 +74,10 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
+impl crate::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
+impl crate::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
 
 impl CMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {
@@ -92,8 +92,8 @@ mod test_vanilla {
     use super::CMSG_UPDATE_ACCOUNT_DATA;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x0B, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
@@ -698,8 +698,8 @@ mod test_tbc {
     use super::CMSG_UPDATE_ACCOUNT_DATA;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x0B, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];

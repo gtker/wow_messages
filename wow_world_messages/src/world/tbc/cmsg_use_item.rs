@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::SpellCastTargets;
+use crate::tbc::SpellCastTargets;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -91,7 +91,7 @@ impl crate::Message for CMSG_USE_ITEM {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_USE_ITEM {}
+impl crate::tbc::ClientMessage for CMSG_USE_ITEM {}
 
 impl CMSG_USE_ITEM {
     pub(crate) fn size(&self) -> usize {

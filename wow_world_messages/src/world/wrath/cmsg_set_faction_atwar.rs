@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::FactionFlag;
+use crate::wrath::FactionFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -50,5 +50,5 @@ impl crate::Message for CMSG_SET_FACTION_ATWAR {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_FACTION_ATWAR {}
+impl crate::wrath::ClientMessage for CMSG_SET_FACTION_ATWAR {}
 

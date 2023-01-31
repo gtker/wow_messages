@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Area;
+use crate::wrath::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_ZONE_UNDER_ATTACK {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ZONE_UNDER_ATTACK {}
+impl crate::wrath::ServerMessage for SMSG_ZONE_UNDER_ATTACK {}
 

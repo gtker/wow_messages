@@ -31,11 +31,11 @@ impl crate::Message for SMSG_LOOT_CLEAR_MONEY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOOT_CLEAR_MONEY {}
+impl crate::vanilla::ServerMessage for SMSG_LOOT_CLEAR_MONEY {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOOT_CLEAR_MONEY {}
+impl crate::tbc::ServerMessage for SMSG_LOOT_CLEAR_MONEY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_CLEAR_MONEY {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_CLEAR_MONEY {}
 

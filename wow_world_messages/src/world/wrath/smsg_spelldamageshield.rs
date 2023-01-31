@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::SpellSchool;
+use crate::wrath::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -87,5 +87,5 @@ impl crate::Message for SMSG_SPELLDAMAGESHIELD {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELLDAMAGESHIELD {}
+impl crate::wrath::ServerMessage for SMSG_SPELLDAMAGESHIELD {}
 

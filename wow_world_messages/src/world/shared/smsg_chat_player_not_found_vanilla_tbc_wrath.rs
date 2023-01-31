@@ -47,13 +47,13 @@ impl crate::Message for SMSG_CHAT_PLAYER_NOT_FOUND {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {}
+impl crate::vanilla::ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {}
+impl crate::tbc::ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {}
+impl crate::wrath::ServerMessage for SMSG_CHAT_PLAYER_NOT_FOUND {}
 
 impl SMSG_CHAT_PLAYER_NOT_FOUND {
     pub(crate) fn size(&self) -> usize {

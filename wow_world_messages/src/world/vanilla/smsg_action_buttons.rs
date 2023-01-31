@@ -45,5 +45,5 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ACTION_BUTTONS {}
+impl crate::vanilla::ServerMessage for SMSG_ACTION_BUTTONS {}
 

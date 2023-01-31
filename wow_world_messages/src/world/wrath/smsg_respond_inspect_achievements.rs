@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::{AchievementDoneArray, AchievementInProgressArray};
+use crate::wrath::{AchievementDoneArray, AchievementInProgressArray};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -62,7 +62,7 @@ impl crate::Message for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {}
+impl crate::wrath::ServerMessage for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {}
 
 impl SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
     pub(crate) fn size(&self) -> usize {

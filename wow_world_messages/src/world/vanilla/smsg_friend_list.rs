@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Friend;
+use crate::vanilla::Friend;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_FRIEND_LIST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_FRIEND_LIST {}
+impl crate::vanilla::ServerMessage for SMSG_FRIEND_LIST {}
 
 impl SMSG_FRIEND_LIST {
     pub(crate) fn size(&self) -> usize {

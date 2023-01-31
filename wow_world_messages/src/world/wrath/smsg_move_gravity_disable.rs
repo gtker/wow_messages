@@ -52,7 +52,7 @@ impl crate::Message for SMSG_MOVE_GRAVITY_DISABLE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MOVE_GRAVITY_DISABLE {}
+impl crate::wrath::ServerMessage for SMSG_MOVE_GRAVITY_DISABLE {}
 
 impl SMSG_MOVE_GRAVITY_DISABLE {
     pub(crate) fn size(&self) -> usize {

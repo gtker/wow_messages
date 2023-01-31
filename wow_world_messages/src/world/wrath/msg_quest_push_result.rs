@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::QuestPartyMessage;
+use crate::wrath::QuestPartyMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,8 +51,8 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_QUEST_PUSH_RESULT {}
+impl crate::wrath::ClientMessage for MSG_QUEST_PUSH_RESULT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_QUEST_PUSH_RESULT {}
+impl crate::wrath::ServerMessage for MSG_QUEST_PUSH_RESULT {}
 

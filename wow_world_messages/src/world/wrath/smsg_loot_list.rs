@@ -61,7 +61,7 @@ impl crate::Message for SMSG_LOOT_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_LIST {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_LIST {}
 
 impl SMSG_LOOT_LIST {
     pub(crate) fn size(&self) -> usize {

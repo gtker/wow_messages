@@ -92,10 +92,10 @@ impl crate::Message for SMSG_GUILD_INFO {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GUILD_INFO {}
+impl crate::vanilla::ServerMessage for SMSG_GUILD_INFO {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GUILD_INFO {}
+impl crate::tbc::ServerMessage for SMSG_GUILD_INFO {}
 
 impl SMSG_GUILD_INFO {
     pub(crate) fn size(&self) -> usize {

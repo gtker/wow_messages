@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::BattlegroundType;
-use crate::world::wrath::RandomBg;
+use crate::wrath::BattlegroundType;
+use crate::wrath::RandomBg;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -191,7 +191,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEFIELD_LIST {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEFIELD_LIST {}
 
 impl SMSG_BATTLEFIELD_LIST {
     pub(crate) fn size(&self) -> usize {

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::Gender;
-use crate::world::tbc::Race;
+use crate::tbc::Gender;
+use crate::tbc::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -140,5 +140,5 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_MIRRORIMAGE_DATA {}
+impl crate::tbc::ServerMessage for SMSG_MIRRORIMAGE_DATA {}
 

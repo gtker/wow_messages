@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::PetSpellCooldown;
-use crate::world::wrath::CreatureFamily;
-use crate::world::wrath::PetCommandState;
-use crate::world::wrath::PetEnabled;
-use crate::world::wrath::PetReactState;
+use crate::wrath::PetSpellCooldown;
+use crate::wrath::CreatureFamily;
+use crate::wrath::PetCommandState;
+use crate::wrath::PetEnabled;
+use crate::wrath::PetReactState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -168,7 +168,7 @@ impl crate::Message for SMSG_PET_SPELLS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PET_SPELLS {}
+impl crate::wrath::ServerMessage for SMSG_PET_SPELLS {}
 
 impl SMSG_PET_SPELLS {
     pub(crate) fn size(&self) -> usize {

@@ -203,7 +203,7 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
 
 impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Vector3d;
-use crate::world::wrath::SpellCastTargetFlags;
+use crate::wrath::Vector3d;
+use crate::wrath::SpellCastTargetFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

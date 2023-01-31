@@ -56,7 +56,7 @@ impl crate::Message for CMSG_GROUP_INVITE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GROUP_INVITE {}
+impl crate::wrath::ClientMessage for CMSG_GROUP_INVITE {}
 
 impl CMSG_GROUP_INVITE {
     pub(crate) fn size(&self) -> usize {

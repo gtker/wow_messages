@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Object;
+use crate::wrath::Object;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::world::wrath::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
+/// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::wrath::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm#L11):
 /// ```text
@@ -65,7 +65,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {}
+impl crate::wrath::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {}
 
 impl SMSG_COMPRESSED_UPDATE_OBJECT {
     pub(crate) fn size(&self) -> usize {

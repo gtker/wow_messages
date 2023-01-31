@@ -49,6 +49,30 @@ pub(crate) fn wrath_item_data_path() -> PathBuf {
         .join("data.rs")
 }
 
+pub(crate) fn vanilla_item_constructor_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_items")
+        .join("src")
+        .join("vanilla")
+        .join("constructors.rs")
+}
+
+pub(crate) fn tbc_item_constructor_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_items")
+        .join("src")
+        .join("tbc")
+        .join("constructors.rs")
+}
+
+pub(crate) fn wrath_item_constructor_path() -> PathBuf {
+    workspace_directory()
+        .join("wow_items")
+        .join("src")
+        .join("wrath")
+        .join("constructors.rs")
+}
+
 pub(crate) fn wrath_base_extended_dir() -> PathBuf {
     workspace_directory()
         .join("wow_world_base")

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::InventoryResult;
+use crate::wrath::InventoryResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -2754,7 +2754,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {}
+impl crate::wrath::ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {}
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
     pub(crate) fn size(&self) -> usize {

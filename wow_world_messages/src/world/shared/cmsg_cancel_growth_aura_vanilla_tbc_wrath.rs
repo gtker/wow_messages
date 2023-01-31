@@ -31,11 +31,11 @@ impl crate::Message for CMSG_CANCEL_GROWTH_AURA {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
+impl crate::vanilla::ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
+impl crate::tbc::ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
+impl crate::wrath::ClientMessage for CMSG_CANCEL_GROWTH_AURA {}
 

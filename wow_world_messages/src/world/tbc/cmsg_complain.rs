@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::SpamType;
+use crate::tbc::SpamType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -154,7 +154,7 @@ impl crate::Message for CMSG_COMPLAIN {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_COMPLAIN {}
+impl crate::tbc::ClientMessage for CMSG_COMPLAIN {}
 
 impl CMSG_COMPLAIN {
     pub(crate) fn size(&self) -> usize {

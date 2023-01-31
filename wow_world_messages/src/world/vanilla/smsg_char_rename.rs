@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::WorldResult;
+use crate::vanilla::WorldResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Response to [`CMSG_CHAR_RENAME`](crate::world::vanilla::CMSG_CHAR_RENAME).
+/// Response to [`CMSG_CHAR_RENAME`](crate::vanilla::CMSG_CHAR_RENAME).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm#L1):
 /// ```text
@@ -246,7 +246,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHAR_RENAME {}
+impl crate::vanilla::ServerMessage for SMSG_CHAR_RENAME {}
 
 impl SMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {
@@ -703,9 +703,9 @@ mod test {
     use super::SMSG_CHAR_RENAME;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0xC8, 0x02, 0x47, ];
 

@@ -56,7 +56,7 @@ impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_QUERY_GUILD_BANK_TEXT_Server {}
+impl crate::tbc::ServerMessage for MSG_QUERY_GUILD_BANK_TEXT_Server {}
 
 impl MSG_QUERY_GUILD_BANK_TEXT_Server {
     pub(crate) fn size(&self) -> usize {

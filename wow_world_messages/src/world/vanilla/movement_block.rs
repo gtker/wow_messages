@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::TransportInfo;
-use crate::world::vanilla::Vector3d;
-use crate::world::vanilla::MovementFlags;
-use crate::world::vanilla::SplineFlag;
-use crate::world::vanilla::UpdateFlag;
+use crate::vanilla::TransportInfo;
+use crate::vanilla::Vector3d;
+use crate::vanilla::MovementFlags;
+use crate::vanilla::SplineFlag;
+use crate::vanilla::UpdateFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -262,7 +262,7 @@ impl MovementBlock {
 }
 
 impl MovementBlock {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::read_u8_le(r)?);
 

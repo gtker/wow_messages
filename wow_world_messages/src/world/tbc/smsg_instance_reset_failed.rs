@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::InstanceResetFailedReason;
-use crate::world::tbc::Map;
+use crate::tbc::InstanceResetFailedReason;
+use crate::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,5 +51,5 @@ impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_INSTANCE_RESET_FAILED {}
+impl crate::tbc::ServerMessage for SMSG_INSTANCE_RESET_FAILED {}
 

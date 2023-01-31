@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::MovementInfo;
-use crate::world::wrath::SpellCastTargets;
-use crate::world::wrath::ClientCastFlags;
-use crate::world::wrath::ClientMovementData;
+use crate::wrath::MovementInfo;
+use crate::wrath::SpellCastTargets;
+use crate::wrath::ClientCastFlags;
+use crate::wrath::ClientMovementData;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -207,7 +207,7 @@ impl crate::Message for CMSG_USE_ITEM {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_USE_ITEM {}
+impl crate::wrath::ClientMessage for CMSG_USE_ITEM {}
 
 impl CMSG_USE_ITEM {
     pub(crate) fn size(&self) -> usize {

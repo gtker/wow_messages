@@ -41,5 +41,5 @@ impl crate::Message for SMSG_CLEAR_TARGET {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CLEAR_TARGET {}
+impl crate::tbc::ServerMessage for SMSG_CLEAR_TARGET {}
 

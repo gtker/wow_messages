@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::PvpRank;
+use crate::vanilla::PvpRank;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -183,5 +183,5 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_INSPECT_HONOR_STATS_Server {}
+impl crate::vanilla::ServerMessage for MSG_INSPECT_HONOR_STATS_Server {}
 

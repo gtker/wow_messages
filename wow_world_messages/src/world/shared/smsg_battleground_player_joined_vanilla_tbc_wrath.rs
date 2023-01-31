@@ -41,11 +41,11 @@ impl crate::Message for SMSG_BATTLEGROUND_PLAYER_JOINED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
+impl crate::vanilla::ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
+impl crate::tbc::ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEGROUND_PLAYER_JOINED {}
 

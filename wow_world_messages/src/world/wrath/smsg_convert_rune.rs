@@ -49,5 +49,5 @@ impl crate::Message for SMSG_CONVERT_RUNE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CONVERT_RUNE {}
+impl crate::wrath::ServerMessage for SMSG_CONVERT_RUNE {}
 

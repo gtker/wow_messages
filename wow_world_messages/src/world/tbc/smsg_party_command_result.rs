@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::PartyOperation;
-use crate::world::tbc::PartyResult;
+use crate::tbc::PartyOperation;
+use crate::tbc::PartyResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PARTY_COMMAND_RESULT {}
+impl crate::tbc::ServerMessage for SMSG_PARTY_COMMAND_RESULT {}
 
 impl SMSG_PARTY_COMMAND_RESULT {
     pub(crate) fn size(&self) -> usize {

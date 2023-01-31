@@ -19,10 +19,16 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         ContainerType::Struct => {
             let create_async_reads = e.tags().has_login_version();
 
-            let (error_name, visibility) = if e.tags().is_in_base() && e.only_has_io_errors() {
-                ("std::io::Error", "pub")
+            let visibility = if e.tags().is_in_base() {
+                "pub"
             } else {
-                (PARSE_ERROR, "pub(crate)")
+                "pub(crate)"
+            };
+
+            let error_name = if e.only_has_io_errors() {
+                "std::io::Error"
+            } else {
+                PARSE_ERROR
             };
 
             s.impl_read_write_struct(
@@ -153,9 +159,7 @@ pub(crate) fn print_constant_member(
     original_value: &str,
     value: u64,
 ) {
-    s.docc(format!(
-        "The field `{name}` is constantly specified to be:"
-    ));
+    s.docc(format!("The field `{name}` is constantly specified to be:"));
     s.docc_newline();
     s.docc("| Format | Value |");
     s.docc("| ------ | ----- |");

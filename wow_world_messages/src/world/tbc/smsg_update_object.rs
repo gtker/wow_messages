@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Object;
+use crate::tbc::Object;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -64,7 +64,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_UPDATE_OBJECT {}
+impl crate::tbc::ServerMessage for SMSG_UPDATE_OBJECT {}
 
 impl SMSG_UPDATE_OBJECT {
     pub(crate) fn size(&self) -> usize {

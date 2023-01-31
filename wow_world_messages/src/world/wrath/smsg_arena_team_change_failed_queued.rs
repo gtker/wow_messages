@@ -42,5 +42,5 @@ impl crate::Message for SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED {}
+impl crate::wrath::ServerMessage for SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED {}
 

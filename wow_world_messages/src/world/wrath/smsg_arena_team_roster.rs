@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ArenaTeamMember;
-use crate::world::wrath::ArenaType;
+use crate::wrath::ArenaTeamMember;
+use crate::wrath::ArenaType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -86,7 +86,7 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ARENA_TEAM_ROSTER {}
+impl crate::wrath::ServerMessage for SMSG_ARENA_TEAM_ROSTER {}
 
 impl SMSG_ARENA_TEAM_ROSTER {
     pub(crate) fn size(&self) -> usize {

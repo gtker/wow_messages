@@ -57,7 +57,7 @@ impl crate::Message for CMSG_PET_RENAME {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PET_RENAME {}
+impl crate::vanilla::ClientMessage for CMSG_PET_RENAME {}
 
 impl CMSG_PET_RENAME {
     pub(crate) fn size(&self) -> usize {

@@ -40,5 +40,5 @@ impl crate::Message for CMSG_CALENDAR_ARENA_TEAM {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_ARENA_TEAM {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_ARENA_TEAM {}
 

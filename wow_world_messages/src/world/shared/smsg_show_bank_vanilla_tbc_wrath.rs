@@ -41,11 +41,11 @@ impl crate::Message for SMSG_SHOW_BANK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SHOW_BANK {}
+impl crate::vanilla::ServerMessage for SMSG_SHOW_BANK {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SHOW_BANK {}
+impl crate::tbc::ServerMessage for SMSG_SHOW_BANK {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SHOW_BANK {}
+impl crate::wrath::ServerMessage for SMSG_SHOW_BANK {}
 

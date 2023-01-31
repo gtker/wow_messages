@@ -27,7 +27,7 @@ impl NpcTextUpdateEmote {
 }
 
 impl NpcTextUpdateEmote {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // delay: u32
         let delay = crate::util::read_u32_le(r)?;
 

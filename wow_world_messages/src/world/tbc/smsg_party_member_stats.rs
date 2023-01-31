@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::AuraMask;
-use crate::world::tbc::Area;
-use crate::world::tbc::Power;
-use crate::world::tbc::GroupMemberOnlineStatus;
-use crate::world::tbc::GroupUpdateFlags;
+use crate::tbc::AuraMask;
+use crate::tbc::Area;
+use crate::tbc::Power;
+use crate::tbc::GroupMemberOnlineStatus;
+use crate::tbc::GroupUpdateFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -492,7 +492,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PARTY_MEMBER_STATS {}
+impl crate::tbc::ServerMessage for SMSG_PARTY_MEMBER_STATS {}
 
 impl SMSG_PARTY_MEMBER_STATS {
     pub(crate) fn size(&self) -> usize {

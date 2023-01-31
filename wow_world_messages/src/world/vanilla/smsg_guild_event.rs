@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::GuildEvent;
+use crate::vanilla::GuildEvent;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -66,7 +66,7 @@ impl crate::Message for SMSG_GUILD_EVENT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GUILD_EVENT {}
+impl crate::vanilla::ServerMessage for SMSG_GUILD_EVENT {}
 
 impl SMSG_GUILD_EVENT {
     pub(crate) fn size(&self) -> usize {

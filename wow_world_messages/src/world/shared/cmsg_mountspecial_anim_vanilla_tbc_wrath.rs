@@ -31,11 +31,11 @@ impl crate::Message for CMSG_MOUNTSPECIAL_ANIM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MOUNTSPECIAL_ANIM {}
+impl crate::vanilla::ClientMessage for CMSG_MOUNTSPECIAL_ANIM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_MOUNTSPECIAL_ANIM {}
+impl crate::tbc::ClientMessage for CMSG_MOUNTSPECIAL_ANIM {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MOUNTSPECIAL_ANIM {}
+impl crate::wrath::ClientMessage for CMSG_MOUNTSPECIAL_ANIM {}
 

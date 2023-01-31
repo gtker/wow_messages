@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::ArenaType;
-use crate::world::tbc::BattlegroundType;
-use crate::world::tbc::StatusId;
+use crate::tbc::ArenaType;
+use crate::tbc::BattlegroundType;
+use crate::tbc::StatusId;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -197,7 +197,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_BATTLEFIELD_STATUS {}
+impl crate::tbc::ServerMessage for SMSG_BATTLEFIELD_STATUS {}
 
 impl SMSG_BATTLEFIELD_STATUS {
     pub(crate) fn size(&self) -> usize {

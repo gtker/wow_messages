@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::LfgProposal;
+use crate::wrath::LfgProposal;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -100,7 +100,7 @@ impl crate::Message for SMSG_LFG_PROPOSAL_UPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_PROPOSAL_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_LFG_PROPOSAL_UPDATE {}
 
 impl SMSG_LFG_PROPOSAL_UPDATE {
     pub(crate) fn size(&self) -> usize {

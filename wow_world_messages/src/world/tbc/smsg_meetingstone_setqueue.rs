@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Area;
-use crate::world::tbc::MeetingStoneStatus;
+use crate::tbc::Area;
+use crate::tbc::MeetingStoneStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,5 +51,5 @@ impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {}
+impl crate::tbc::ServerMessage for SMSG_MEETINGSTONE_SETQUEUE {}
 

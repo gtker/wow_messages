@@ -40,5 +40,5 @@ impl crate::Message for CMSG_CORPSE_MAP_POSITION_QUERY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CORPSE_MAP_POSITION_QUERY {}
+impl crate::wrath::ClientMessage for CMSG_CORPSE_MAP_POSITION_QUERY {}
 

@@ -41,5 +41,5 @@ impl crate::Message for CMSG_AUCTION_LIST_PENDING_SALES {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_AUCTION_LIST_PENDING_SALES {}
+impl crate::wrath::ClientMessage for CMSG_AUCTION_LIST_PENDING_SALES {}
 

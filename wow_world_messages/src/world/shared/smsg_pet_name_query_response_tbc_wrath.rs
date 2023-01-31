@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::pet_query_disabled_names_tbc_wrath::PetQueryDisabledNames;
+use crate::shared::pet_query_disabled_names_tbc_wrath::PetQueryDisabledNames;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -109,10 +109,10 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {}
 
 impl SMSG_PET_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

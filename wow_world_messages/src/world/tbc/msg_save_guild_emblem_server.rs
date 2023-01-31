@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::GuildEmblemResult;
+use crate::tbc::GuildEmblemResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
+impl crate::tbc::ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
 

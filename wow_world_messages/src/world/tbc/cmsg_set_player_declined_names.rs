@@ -74,7 +74,7 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_PLAYER_DECLINED_NAMES {}
+impl crate::tbc::ClientMessage for CMSG_SET_PLAYER_DECLINED_NAMES {}
 
 impl CMSG_SET_PLAYER_DECLINED_NAMES {
     pub(crate) fn size(&self) -> usize {

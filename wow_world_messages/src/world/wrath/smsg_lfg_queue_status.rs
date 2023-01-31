@@ -121,5 +121,5 @@ impl crate::Message for SMSG_LFG_QUEUE_STATUS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_QUEUE_STATUS {}
+impl crate::wrath::ServerMessage for SMSG_LFG_QUEUE_STATUS {}
 

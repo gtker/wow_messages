@@ -51,7 +51,7 @@ impl crate::Message for SMSG_FLIGHT_SPLINE_SYNC {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_FLIGHT_SPLINE_SYNC {}
+impl crate::wrath::ServerMessage for SMSG_FLIGHT_SPLINE_SYNC {}
 
 impl SMSG_FLIGHT_SPLINE_SYNC {
     pub(crate) fn size(&self) -> usize {

@@ -54,7 +54,7 @@ impl crate::Message for SMSG_SEND_UNLEARN_SPELLS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SEND_UNLEARN_SPELLS {}
+impl crate::wrath::ServerMessage for SMSG_SEND_UNLEARN_SPELLS {}
 
 impl SMSG_SEND_UNLEARN_SPELLS {
     pub(crate) fn size(&self) -> usize {

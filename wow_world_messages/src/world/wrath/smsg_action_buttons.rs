@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ActionButton;
-use crate::world::wrath::ActionBarBehavior;
+use crate::wrath::ActionButton;
+use crate::wrath::ActionBarBehavior;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -95,7 +95,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ACTION_BUTTONS {}
+impl crate::wrath::ServerMessage for SMSG_ACTION_BUTTONS {}
 
 impl SMSG_ACTION_BUTTONS {
     pub(crate) fn size(&self) -> usize {

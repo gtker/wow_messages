@@ -72,7 +72,7 @@ impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ACHIEVEMENT_EARNED {}
+impl crate::wrath::ServerMessage for SMSG_ACHIEVEMENT_EARNED {}
 
 impl SMSG_ACHIEVEMENT_EARNED {
     pub(crate) fn size(&self) -> usize {

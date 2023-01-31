@@ -73,7 +73,7 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPELLDISPELLOG {}
+impl crate::vanilla::ServerMessage for SMSG_SPELLDISPELLOG {}
 
 impl SMSG_SPELLDISPELLOG {
     pub(crate) fn size(&self) -> usize {

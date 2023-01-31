@@ -2,11 +2,11 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Immediately logs out the client of the world and makes it send [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
-/// Normally the client will send [`CMSG_LOGOUT_REQUEST`](crate::world::vanilla::CMSG_LOGOUT_REQUEST) and the server will reply with an [`SMSG_LOGOUT_RESPONSE`](crate::world::vanilla::SMSG_LOGOUT_RESPONSE) before this message, but sending it unprompted will also immediately send the client to the character screen.
+/// Immediately logs out the client of the world and makes it send [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
+/// Normally the client will send [`CMSG_LOGOUT_REQUEST`](crate::vanilla::CMSG_LOGOUT_REQUEST) and the server will reply with an [`SMSG_LOGOUT_RESPONSE`](crate::vanilla::SMSG_LOGOUT_RESPONSE) before this message, but sending it unprompted will also immediately send the client to the character screen.
 ///
-/// The client always seems to send 2 [`CMSG_CANCEL_TRADE`](crate::world::vanilla::CMSG_CANCEL_TRADE) immediately after receiving this mesage, but before sending [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
-/// Even if 'Exit Game' is selected the client will still send a [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM) immediately before closing the connection, despite it not needing to see the character list.
+/// The client always seems to send 2 [`CMSG_CANCEL_TRADE`](crate::vanilla::CMSG_CANCEL_TRADE) immediately after receiving this mesage, but before sending [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
+/// Even if 'Exit Game' is selected the client will still send a [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM) immediately before closing the connection, despite it not needing to see the character list.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm#L3):
 /// ```text
@@ -37,21 +37,21 @@ impl crate::Message for SMSG_LOGOUT_COMPLETE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOGOUT_COMPLETE {}
+impl crate::vanilla::ServerMessage for SMSG_LOGOUT_COMPLETE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOGOUT_COMPLETE {}
+impl crate::tbc::ServerMessage for SMSG_LOGOUT_COMPLETE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOGOUT_COMPLETE {}
+impl crate::wrath::ServerMessage for SMSG_LOGOUT_COMPLETE {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::SMSG_LOGOUT_COMPLETE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 4] = [ 0x00, 0x02, 0x4D, 0x00, ];
 
@@ -131,8 +131,8 @@ mod test_tbc {
     use super::SMSG_LOGOUT_COMPLETE;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 4] = [ 0x00, 0x02, 0x4D, 0x00, ];
 
@@ -212,8 +212,8 @@ mod test_wrath {
     use super::SMSG_LOGOUT_COMPLETE;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ServerOpcodeMessage;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::opcodes::ServerOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 4] = [ 0x00, 0x02, 0x4D, 0x00, ];
 

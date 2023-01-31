@@ -48,11 +48,11 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
+impl crate::vanilla::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
+impl crate::tbc::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
+impl crate::wrath::ClientMessage for CMSG_SET_FACTION_INACTIVE {}
 

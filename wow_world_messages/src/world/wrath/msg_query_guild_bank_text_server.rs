@@ -56,7 +56,7 @@ impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Server {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_QUERY_GUILD_BANK_TEXT_Server {}
+impl crate::wrath::ServerMessage for MSG_QUERY_GUILD_BANK_TEXT_Server {}
 
 impl MSG_QUERY_GUILD_BANK_TEXT_Server {
     pub(crate) fn size(&self) -> usize {

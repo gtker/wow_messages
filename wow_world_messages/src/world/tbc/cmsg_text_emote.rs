@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::Emote;
+use crate::tbc::Emote;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -60,5 +60,5 @@ impl crate::Message for CMSG_TEXT_EMOTE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_TEXT_EMOTE {}
+impl crate::tbc::ClientMessage for CMSG_TEXT_EMOTE {}
 

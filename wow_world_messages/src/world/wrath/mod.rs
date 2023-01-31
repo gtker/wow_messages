@@ -1195,14 +1195,6 @@ pub use crate::shared::guild_rights_tbc_wrath::GuildRights;
 
 pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceResetFailedReason;
 
-pub use crate::shared::item_damage_type_vanilla_tbc_wrath::ItemDamageType;
-
-pub use crate::shared::item_socket_tbc_wrath::ItemSocket;
-
-pub use crate::shared::item_spells_tbc_wrath::ItemSpells;
-
-pub use crate::shared::item_stat_tbc_wrath::ItemStat;
-
 pub use crate::shared::join_arena_type_tbc_wrath::JoinArenaType;
 
 pub use crate::shared::language_tbc_wrath::Language;
@@ -1806,6 +1798,14 @@ pub use wow_world_base::wrath::Bonding;
 pub use wow_world_base::wrath::Gender;
 
 pub use wow_world_base::wrath::InventoryType;
+
+pub use wow_world_base::wrath::ItemDamageType;
+
+pub use wow_world_base::wrath::ItemSocket;
+
+pub use wow_world_base::wrath::ItemSpells;
+
+pub use wow_world_base::wrath::ItemStat;
 
 pub use wow_world_base::wrath::PvpRank;
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
+use crate::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -85,8 +85,8 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_BATTLEFIELD_PORT {}
+impl crate::tbc::ClientMessage for CMSG_BATTLEFIELD_PORT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BATTLEFIELD_PORT {}
+impl crate::wrath::ClientMessage for CMSG_BATTLEFIELD_PORT {}
 

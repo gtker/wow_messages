@@ -50,11 +50,11 @@ impl crate::Message for CMSG_MAIL_RETURN_TO_SENDER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MAIL_RETURN_TO_SENDER {}
+impl crate::vanilla::ClientMessage for CMSG_MAIL_RETURN_TO_SENDER {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_MAIL_RETURN_TO_SENDER {}
+impl crate::tbc::ClientMessage for CMSG_MAIL_RETURN_TO_SENDER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MAIL_RETURN_TO_SENDER {}
+impl crate::wrath::ClientMessage for CMSG_MAIL_RETURN_TO_SENDER {}
 

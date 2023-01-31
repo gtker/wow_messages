@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Skill;
-use crate::world::tbc::TrainerSpellState;
+use crate::tbc::Skill;
+use crate::tbc::TrainerSpellState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

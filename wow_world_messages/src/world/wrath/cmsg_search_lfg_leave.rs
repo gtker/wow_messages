@@ -40,5 +40,5 @@ impl crate::Message for CMSG_SEARCH_LFG_LEAVE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SEARCH_LFG_LEAVE {}
+impl crate::wrath::ClientMessage for CMSG_SEARCH_LFG_LEAVE {}
 

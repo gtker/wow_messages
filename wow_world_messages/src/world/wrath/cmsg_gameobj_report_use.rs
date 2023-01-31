@@ -41,5 +41,5 @@ impl crate::Message for CMSG_GAMEOBJ_REPORT_USE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GAMEOBJ_REPORT_USE {}
+impl crate::wrath::ClientMessage for CMSG_GAMEOBJ_REPORT_USE {}
 

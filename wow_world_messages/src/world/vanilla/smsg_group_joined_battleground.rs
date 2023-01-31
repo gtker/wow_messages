@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::BgTypeId;
+use crate::vanilla::BgTypeId;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_GROUP_JOINED_BATTLEGROUND {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GROUP_JOINED_BATTLEGROUND {}
+impl crate::vanilla::ServerMessage for SMSG_GROUP_JOINED_BATTLEGROUND {}
 

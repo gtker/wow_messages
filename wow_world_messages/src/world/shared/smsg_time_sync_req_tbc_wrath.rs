@@ -40,8 +40,8 @@ impl crate::Message for SMSG_TIME_SYNC_REQ {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TIME_SYNC_REQ {}
+impl crate::tbc::ServerMessage for SMSG_TIME_SYNC_REQ {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TIME_SYNC_REQ {}
+impl crate::wrath::ServerMessage for SMSG_TIME_SYNC_REQ {}
 

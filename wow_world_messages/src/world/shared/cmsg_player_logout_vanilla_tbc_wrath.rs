@@ -31,21 +31,21 @@ impl crate::Message for CMSG_PLAYER_LOGOUT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PLAYER_LOGOUT {}
+impl crate::vanilla::ClientMessage for CMSG_PLAYER_LOGOUT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PLAYER_LOGOUT {}
+impl crate::tbc::ClientMessage for CMSG_PLAYER_LOGOUT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PLAYER_LOGOUT {}
+impl crate::wrath::ClientMessage for CMSG_PLAYER_LOGOUT {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::CMSG_PLAYER_LOGOUT;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x4A, 0x00, 0x00, 0x00, ];
 
@@ -125,8 +125,8 @@ mod test_tbc {
     use super::CMSG_PLAYER_LOGOUT;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x4A, 0x00, 0x00, 0x00, ];
 
@@ -206,8 +206,8 @@ mod test_wrath {
     use super::CMSG_PLAYER_LOGOUT;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ClientOpcodeMessage;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x4A, 0x00, 0x00, 0x00, ];
 

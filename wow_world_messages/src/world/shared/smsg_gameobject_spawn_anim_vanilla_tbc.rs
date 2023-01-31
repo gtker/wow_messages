@@ -41,8 +41,8 @@ impl crate::Message for SMSG_GAMEOBJECT_SPAWN_ANIM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GAMEOBJECT_SPAWN_ANIM {}
+impl crate::vanilla::ServerMessage for SMSG_GAMEOBJECT_SPAWN_ANIM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GAMEOBJECT_SPAWN_ANIM {}
+impl crate::tbc::ServerMessage for SMSG_GAMEOBJECT_SPAWN_ANIM {}
 

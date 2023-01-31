@@ -39,5 +39,5 @@ impl crate::Message for CMSG_OPT_OUT_OF_LOOT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_OPT_OUT_OF_LOOT {}
+impl crate::wrath::ClientMessage for CMSG_OPT_OUT_OF_LOOT {}
 

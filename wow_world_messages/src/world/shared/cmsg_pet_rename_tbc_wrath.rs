@@ -65,10 +65,10 @@ impl crate::Message for CMSG_PET_RENAME {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PET_RENAME {}
+impl crate::tbc::ClientMessage for CMSG_PET_RENAME {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PET_RENAME {}
+impl crate::wrath::ClientMessage for CMSG_PET_RENAME {}
 
 impl CMSG_PET_RENAME {
     pub(crate) fn size(&self) -> usize {

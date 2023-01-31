@@ -39,5 +39,5 @@ impl crate::Message for CMSG_LFG_SET_BOOT_VOTE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LFG_SET_BOOT_VOTE {}
+impl crate::wrath::ClientMessage for CMSG_LFG_SET_BOOT_VOTE {}
 

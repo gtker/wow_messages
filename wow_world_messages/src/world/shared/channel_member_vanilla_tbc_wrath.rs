@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
+use crate::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -29,7 +29,7 @@ impl ChannelMember {
 }
 
 impl ChannelMember {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // guid: Guid
         let guid = Guid::read(r)?;
 

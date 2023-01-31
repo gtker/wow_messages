@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::GmTicketEscalationStatus;
-use crate::world::wrath::GmTicketStatus;
+use crate::wrath::GmTicketEscalationStatus;
+use crate::wrath::GmTicketStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -135,7 +135,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GMTICKET_GETTICKET {}
+impl crate::wrath::ServerMessage for SMSG_GMTICKET_GETTICKET {}
 
 impl SMSG_GMTICKET_GETTICKET {
     pub(crate) fn size(&self) -> usize {

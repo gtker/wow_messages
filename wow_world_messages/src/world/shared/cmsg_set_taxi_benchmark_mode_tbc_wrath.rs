@@ -42,8 +42,8 @@ impl crate::Message for CMSG_SET_TAXI_BENCHMARK_MODE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_TAXI_BENCHMARK_MODE {}
+impl crate::tbc::ClientMessage for CMSG_SET_TAXI_BENCHMARK_MODE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_TAXI_BENCHMARK_MODE {}
+impl crate::wrath::ClientMessage for CMSG_SET_TAXI_BENCHMARK_MODE {}
 

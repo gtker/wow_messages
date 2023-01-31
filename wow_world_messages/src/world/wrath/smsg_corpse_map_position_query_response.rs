@@ -65,5 +65,5 @@ impl crate::Message for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {}
 

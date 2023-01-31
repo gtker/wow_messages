@@ -31,5 +31,5 @@ impl crate::Message for CMSG_CHANNEL_VOICE_ON {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHANNEL_VOICE_ON {}
+impl crate::tbc::ClientMessage for CMSG_CHANNEL_VOICE_ON {}
 

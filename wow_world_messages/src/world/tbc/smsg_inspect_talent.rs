@@ -61,7 +61,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_INSPECT_TALENT {}
+impl crate::tbc::ServerMessage for SMSG_INSPECT_TALENT {}
 
 impl SMSG_INSPECT_TALENT {
     pub(crate) fn size(&self) -> usize {

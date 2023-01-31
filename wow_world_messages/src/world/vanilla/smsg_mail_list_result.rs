@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Mail;
+use crate::vanilla::Mail;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_MAIL_LIST_RESULT {}
+impl crate::vanilla::ServerMessage for SMSG_MAIL_LIST_RESULT {}
 
 impl SMSG_MAIL_LIST_RESULT {
     pub(crate) fn size(&self) -> usize {

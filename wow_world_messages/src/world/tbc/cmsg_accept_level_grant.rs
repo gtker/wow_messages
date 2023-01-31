@@ -43,7 +43,7 @@ impl crate::Message for CMSG_ACCEPT_LEVEL_GRANT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ACCEPT_LEVEL_GRANT {}
+impl crate::tbc::ClientMessage for CMSG_ACCEPT_LEVEL_GRANT {}
 
 impl CMSG_ACCEPT_LEVEL_GRANT {
     pub(crate) fn size(&self) -> usize {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::dungeon_difficulty_tbc_wrath::DungeonDifficulty;
+use crate::shared::dungeon_difficulty_tbc_wrath::DungeonDifficulty;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -60,8 +60,8 @@ impl crate::Message for MSG_SET_DUNGEON_DIFFICULTY_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_SET_DUNGEON_DIFFICULTY_Server {}
+impl crate::tbc::ServerMessage for MSG_SET_DUNGEON_DIFFICULTY_Server {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_SET_DUNGEON_DIFFICULTY_Server {}
+impl crate::wrath::ServerMessage for MSG_SET_DUNGEON_DIFFICULTY_Server {}
 

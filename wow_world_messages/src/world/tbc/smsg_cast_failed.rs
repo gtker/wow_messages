@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Area;
-use crate::world::tbc::SpellCastResult;
+use crate::tbc::Area;
+use crate::tbc::SpellCastResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -513,7 +513,7 @@ impl crate::Message for SMSG_CAST_FAILED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CAST_FAILED {}
+impl crate::tbc::ServerMessage for SMSG_CAST_FAILED {}
 
 impl SMSG_CAST_FAILED {
     pub(crate) fn size(&self) -> usize {

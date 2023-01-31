@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::PetTameFailureReason;
+use crate::wrath::PetTameFailureReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_PET_TAME_FAILURE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PET_TAME_FAILURE {}
+impl crate::wrath::ServerMessage for SMSG_PET_TAME_FAILURE {}
 

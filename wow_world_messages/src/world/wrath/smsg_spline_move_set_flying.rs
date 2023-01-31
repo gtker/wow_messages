@@ -43,7 +43,7 @@ impl crate::Message for SMSG_SPLINE_MOVE_SET_FLYING {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPLINE_MOVE_SET_FLYING {}
+impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_SET_FLYING {}
 
 impl SMSG_SPLINE_MOVE_SET_FLYING {
     pub(crate) fn size(&self) -> usize {

@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::WorldResult;
+use crate::wrath::WorldResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Response to [`CMSG_CHAR_RENAME`](crate::world::vanilla::CMSG_CHAR_RENAME).
+/// Response to [`CMSG_CHAR_RENAME`](crate::vanilla::CMSG_CHAR_RENAME).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_rename.wowm#L1):
 /// ```text
@@ -290,7 +290,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CHAR_RENAME {}
+impl crate::wrath::ServerMessage for SMSG_CHAR_RENAME {}
 
 impl SMSG_CHAR_RENAME {
     pub(crate) fn size(&self) -> usize {

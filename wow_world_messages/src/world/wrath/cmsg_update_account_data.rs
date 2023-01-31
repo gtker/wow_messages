@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Respond with [`SMSG_UPDATE_ACCOUNT_DATA_COMPLETE`](crate::world::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE)
+/// Respond with [`SMSG_UPDATE_ACCOUNT_DATA_COMPLETE`](crate::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE)
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L13):
 /// ```text
@@ -14,7 +14,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_UPDATE_ACCOUNT_DATA {
-    /// You can check this against the [`CacheMask`](crate::world::wrath::CacheMask) to find out if this is character-specific data or account-wide data
+    /// You can check this against the [`CacheMask`](crate::wrath::CacheMask) to find out if this is character-specific data or account-wide data
     ///
     pub data_type: u32,
     /// Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES
@@ -90,7 +90,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
+impl crate::wrath::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {}
 
 impl CMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {

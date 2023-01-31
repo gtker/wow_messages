@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::arena_type_tbc_wrath::ArenaType;
+use crate::shared::arena_type_tbc_wrath::ArenaType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -50,8 +50,8 @@ impl crate::Message for SMSG_ARENA_ERROR {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ARENA_ERROR {}
+impl crate::tbc::ServerMessage for SMSG_ARENA_ERROR {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ARENA_ERROR {}
+impl crate::wrath::ServerMessage for SMSG_ARENA_ERROR {}
 

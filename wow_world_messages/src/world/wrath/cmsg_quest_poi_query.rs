@@ -54,7 +54,7 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_QUEST_POI_QUERY {}
+impl crate::wrath::ClientMessage for CMSG_QUEST_POI_QUERY {}
 
 impl CMSG_QUEST_POI_QUERY {
     pub(crate) fn size(&self) -> usize {

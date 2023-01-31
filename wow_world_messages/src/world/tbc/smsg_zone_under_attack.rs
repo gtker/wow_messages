@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Area;
+use crate::tbc::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_ZONE_UNDER_ATTACK {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ZONE_UNDER_ATTACK {}
+impl crate::tbc::ServerMessage for SMSG_ZONE_UNDER_ATTACK {}
 

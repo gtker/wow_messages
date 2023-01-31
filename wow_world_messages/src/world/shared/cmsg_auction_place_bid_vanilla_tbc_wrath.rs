@@ -59,11 +59,11 @@ impl crate::Message for CMSG_AUCTION_PLACE_BID {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_AUCTION_PLACE_BID {}
+impl crate::vanilla::ClientMessage for CMSG_AUCTION_PLACE_BID {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_AUCTION_PLACE_BID {}
+impl crate::tbc::ClientMessage for CMSG_AUCTION_PLACE_BID {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_AUCTION_PLACE_BID {}
+impl crate::wrath::ClientMessage for CMSG_AUCTION_PLACE_BID {}
 

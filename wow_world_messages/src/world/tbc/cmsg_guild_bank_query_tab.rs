@@ -58,5 +58,5 @@ impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_BANK_QUERY_TAB {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_BANK_QUERY_TAB {}
 

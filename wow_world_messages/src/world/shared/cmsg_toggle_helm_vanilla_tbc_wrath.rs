@@ -31,11 +31,11 @@ impl crate::Message for CMSG_TOGGLE_HELM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_TOGGLE_HELM {}
+impl crate::vanilla::ClientMessage for CMSG_TOGGLE_HELM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_TOGGLE_HELM {}
+impl crate::tbc::ClientMessage for CMSG_TOGGLE_HELM {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_TOGGLE_HELM {}
+impl crate::wrath::ClientMessage for CMSG_TOGGLE_HELM {}
 

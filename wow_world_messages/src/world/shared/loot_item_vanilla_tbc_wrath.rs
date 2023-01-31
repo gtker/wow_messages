@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
+use crate::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

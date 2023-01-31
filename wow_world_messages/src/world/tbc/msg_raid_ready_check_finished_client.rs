@@ -33,5 +33,5 @@ impl crate::Message for MSG_RAID_READY_CHECK_FINISHED_Client {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_RAID_READY_CHECK_FINISHED_Client {}
+impl crate::tbc::ClientMessage for MSG_RAID_READY_CHECK_FINISHED_Client {}
 

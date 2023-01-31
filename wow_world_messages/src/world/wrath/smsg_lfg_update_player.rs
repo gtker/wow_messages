@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::LfgJoinStatus;
-use crate::world::wrath::LfgUpdateType;
+use crate::wrath::LfgJoinStatus;
+use crate::wrath::LfgUpdateType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -132,7 +132,7 @@ impl crate::Message for SMSG_LFG_UPDATE_PLAYER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_UPDATE_PLAYER {}
+impl crate::wrath::ServerMessage for SMSG_LFG_UPDATE_PLAYER {}
 
 impl SMSG_LFG_UPDATE_PLAYER {
     pub(crate) fn size(&self) -> usize {

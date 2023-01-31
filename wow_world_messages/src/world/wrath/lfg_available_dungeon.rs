@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::LfgQuestReward;
+use crate::wrath::LfgQuestReward;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -59,7 +59,7 @@ impl LfgAvailableDungeon {
 }
 
 impl LfgAvailableDungeon {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // dungeon_entry: u32
         let dungeon_entry = crate::util::read_u32_le(r)?;
 

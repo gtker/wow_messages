@@ -43,7 +43,7 @@ impl crate::Message for SMSG_PRE_RESURRECT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PRE_RESURRECT {}
+impl crate::wrath::ServerMessage for SMSG_PRE_RESURRECT {}
 
 impl SMSG_PRE_RESURRECT {
     pub(crate) fn size(&self) -> usize {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::TrainerSpell;
+use crate::wrath::TrainerSpell;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -88,7 +88,7 @@ impl crate::Message for SMSG_TRAINER_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TRAINER_LIST {}
+impl crate::wrath::ServerMessage for SMSG_TRAINER_LIST {}
 
 impl SMSG_TRAINER_LIST {
     pub(crate) fn size(&self) -> usize {

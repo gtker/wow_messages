@@ -68,5 +68,5 @@ impl crate::Message for SMSG_TOTEM_CREATED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TOTEM_CREATED {}
+impl crate::wrath::ServerMessage for SMSG_TOTEM_CREATED {}
 

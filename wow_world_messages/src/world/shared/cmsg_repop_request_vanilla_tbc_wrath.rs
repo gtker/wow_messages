@@ -31,11 +31,11 @@ impl crate::Message for CMSG_REPOP_REQUEST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_REPOP_REQUEST {}
+impl crate::vanilla::ClientMessage for CMSG_REPOP_REQUEST {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_REPOP_REQUEST {}
+impl crate::tbc::ClientMessage for CMSG_REPOP_REQUEST {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REPOP_REQUEST {}
+impl crate::wrath::ClientMessage for CMSG_REPOP_REQUEST {}
 

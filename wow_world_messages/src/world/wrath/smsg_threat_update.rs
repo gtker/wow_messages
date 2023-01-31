@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::ThreatUpdateUnit;
+use crate::wrath::ThreatUpdateUnit;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -65,7 +65,7 @@ impl crate::Message for SMSG_THREAT_UPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_THREAT_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_THREAT_UPDATE {}
 
 impl SMSG_THREAT_UPDATE {
     pub(crate) fn size(&self) -> usize {

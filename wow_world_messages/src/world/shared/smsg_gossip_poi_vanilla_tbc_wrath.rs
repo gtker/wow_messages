@@ -84,13 +84,13 @@ impl crate::Message for SMSG_GOSSIP_POI {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GOSSIP_POI {}
+impl crate::vanilla::ServerMessage for SMSG_GOSSIP_POI {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GOSSIP_POI {}
+impl crate::tbc::ServerMessage for SMSG_GOSSIP_POI {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GOSSIP_POI {}
+impl crate::wrath::ServerMessage for SMSG_GOSSIP_POI {}
 
 impl SMSG_GOSSIP_POI {
     pub(crate) fn size(&self) -> usize {

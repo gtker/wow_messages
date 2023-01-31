@@ -61,13 +61,13 @@ impl crate::Message for CMSG_CHANNEL_MODERATOR {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHANNEL_MODERATOR {}
+impl crate::vanilla::ClientMessage for CMSG_CHANNEL_MODERATOR {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHANNEL_MODERATOR {}
+impl crate::tbc::ClientMessage for CMSG_CHANNEL_MODERATOR {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHANNEL_MODERATOR {}
+impl crate::wrath::ClientMessage for CMSG_CHANNEL_MODERATOR {}
 
 impl CMSG_CHANNEL_MODERATOR {
     pub(crate) fn size(&self) -> usize {

@@ -4,8 +4,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Tells the client that the running speed has changed.
-/// Client replies with [`CMSG_FORCE_RUN_SPEED_CHANGE_ACK`](crate::world::vanilla::CMSG_FORCE_RUN_SPEED_CHANGE_ACK).
-/// vmangos sends this message to the client being changed and [`SMSG_SPLINE_SET_RUN_SPEED`](crate::world::vanilla::SMSG_SPLINE_SET_RUN_SPEED) to others.
+/// Client replies with [`CMSG_FORCE_RUN_SPEED_CHANGE_ACK`](crate::vanilla::CMSG_FORCE_RUN_SPEED_CHANGE_ACK).
+/// vmangos sends this message to the client being changed and [`SMSG_SPLINE_SET_RUN_SPEED`](crate::vanilla::SMSG_SPLINE_SET_RUN_SPEED) to others.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm#L1):
 /// ```text
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
+impl crate::vanilla::ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
 
 impl SMSG_FORCE_RUN_SPEED_CHANGE {
     pub(crate) fn size(&self) -> usize {
@@ -82,9 +82,9 @@ mod test {
     use super::SMSG_FORCE_RUN_SPEED_CHANGE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xE2, 0x00, 0x01, 0x06, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0xE0, 0x40, ];

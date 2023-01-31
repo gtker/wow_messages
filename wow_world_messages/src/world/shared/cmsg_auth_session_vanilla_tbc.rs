@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
+use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::world::vanilla::SMSG_AUTH_CHALLENGE).
+/// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::vanilla::SMSG_AUTH_CHALLENGE).
 ///
 /// This message is never encrypted.
 ///
@@ -128,10 +128,10 @@ impl crate::Message for CMSG_AUTH_SESSION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_AUTH_SESSION {}
+impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_AUTH_SESSION {}
+impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {}
 
 impl CMSG_AUTH_SESSION {
     pub(crate) fn size(&self) -> usize {
@@ -150,8 +150,8 @@ mod test_vanilla {
     use super::CMSG_AUTH_SESSION;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
@@ -509,8 +509,8 @@ mod test_tbc {
     use super::CMSG_AUTH_SESSION;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,

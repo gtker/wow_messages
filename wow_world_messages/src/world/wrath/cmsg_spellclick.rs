@@ -41,5 +41,5 @@ impl crate::Message for CMSG_SPELLCLICK {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SPELLCLICK {}
+impl crate::wrath::ClientMessage for CMSG_SPELLCLICK {}
 

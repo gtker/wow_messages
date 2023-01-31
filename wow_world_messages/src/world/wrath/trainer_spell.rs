@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Skill;
-use crate::world::wrath::TrainerSpellState;
+use crate::wrath::Skill;
+use crate::wrath::TrainerSpellState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

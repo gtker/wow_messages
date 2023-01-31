@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::MovementInfo;
+use crate::wrath::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -43,7 +43,7 @@ impl crate::Message for CMSG_MOVE_FALL_RESET {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MOVE_FALL_RESET {}
+impl crate::wrath::ClientMessage for CMSG_MOVE_FALL_RESET {}
 
 impl CMSG_MOVE_FALL_RESET {
     pub(crate) fn size(&self) -> usize {

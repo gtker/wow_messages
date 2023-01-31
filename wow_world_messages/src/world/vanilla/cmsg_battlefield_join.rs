@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Map;
+use crate::vanilla::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for CMSG_BATTLEFIELD_JOIN {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_BATTLEFIELD_JOIN {}
+impl crate::vanilla::ClientMessage for CMSG_BATTLEFIELD_JOIN {}
 

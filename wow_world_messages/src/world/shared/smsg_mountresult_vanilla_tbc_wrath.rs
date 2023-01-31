@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::mount_result_vanilla_tbc_wrath::MountResult;
+use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -43,11 +43,11 @@ impl crate::Message for SMSG_MOUNTRESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_MOUNTRESULT {}
+impl crate::vanilla::ServerMessage for SMSG_MOUNTRESULT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_MOUNTRESULT {}
+impl crate::tbc::ServerMessage for SMSG_MOUNTRESULT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MOUNTRESULT {}
+impl crate::wrath::ServerMessage for SMSG_MOUNTRESULT {}
 

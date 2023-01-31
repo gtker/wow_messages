@@ -41,5 +41,5 @@ impl crate::Message for CMSG_REPORT_PVP_AFK {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REPORT_PVP_AFK {}
+impl crate::wrath::ClientMessage for CMSG_REPORT_PVP_AFK {}
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::MovementInfo;
+use crate::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -62,7 +62,7 @@ impl crate::Message for CMSG_FORCE_MOVE_ROOT_ACK {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_FORCE_MOVE_ROOT_ACK {}
+impl crate::tbc::ClientMessage for CMSG_FORCE_MOVE_ROOT_ACK {}
 
 impl CMSG_FORCE_MOVE_ROOT_ACK {
     pub(crate) fn size(&self) -> usize {

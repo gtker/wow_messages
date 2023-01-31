@@ -4,10 +4,11 @@ mod types;
 mod write;
 mod writer;
 
-use crate::base_printer::write::items::{write_definition, write_items};
+use crate::base_printer::write::items::{write_constructors, write_definition, write_items};
 use crate::path_utils::{
-    tbc_base_extended_dir, tbc_item_data_path, tbc_item_definition_path, vanilla_base_extended_dir,
-    vanilla_item_data_path, vanilla_item_definition_path, wrath_base_extended_dir,
+    tbc_base_extended_dir, tbc_item_constructor_path, tbc_item_data_path, tbc_item_definition_path,
+    vanilla_base_extended_dir, vanilla_item_constructor_path, vanilla_item_data_path,
+    vanilla_item_definition_path, wrath_base_extended_dir, wrath_item_constructor_path,
     wrath_item_data_path, wrath_item_definition_path,
 };
 use data::{get_data_from_sqlite_file, Data};
@@ -15,6 +16,7 @@ use std::path::PathBuf;
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub enum ImportFrom {
+    ItemsConstructors,
     Items,
     Base,
 }
@@ -73,6 +75,14 @@ impl Expansion {
             Expansion::WrathOfTheLichKing => wrath_item_definition_path(),
         }
     }
+
+    pub fn item_constructor_path(&self) -> PathBuf {
+        match self {
+            Expansion::Vanilla => vanilla_item_constructor_path(),
+            Expansion::BurningCrusade => tbc_item_constructor_path(),
+            Expansion::WrathOfTheLichKing => wrath_item_constructor_path(),
+        }
+    }
 }
 
 pub(crate) fn print_base() {
@@ -129,4 +139,5 @@ fn write_to_files(data: &Data, expansion: Expansion) {
     write::write_pet_names(&expansion.base_extended_path(), data, expansion);
     write_items(&expansion.item_data_path(), data);
     write_definition(&expansion.item_definition_path(), data);
+    write_constructors(&expansion.item_constructor_path(), data);
 }

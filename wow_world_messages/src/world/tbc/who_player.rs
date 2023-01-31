@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Area;
-use crate::world::tbc::Class;
-use crate::world::tbc::Gender;
-use crate::world::tbc::Race;
+use crate::tbc::Area;
+use crate::tbc::Class;
+use crate::tbc::Gender;
+use crate::tbc::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

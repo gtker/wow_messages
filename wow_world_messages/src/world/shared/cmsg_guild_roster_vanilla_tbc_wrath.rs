@@ -31,11 +31,11 @@ impl crate::Message for CMSG_GUILD_ROSTER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GUILD_ROSTER {}
+impl crate::vanilla::ClientMessage for CMSG_GUILD_ROSTER {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_ROSTER {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_ROSTER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_ROSTER {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_ROSTER {}
 

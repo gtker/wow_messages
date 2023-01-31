@@ -58,5 +58,5 @@ impl crate::Message for SMSG_LFG_ROLE_CHOSEN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_ROLE_CHOSEN {}
+impl crate::wrath::ServerMessage for SMSG_LFG_ROLE_CHOSEN {}
 

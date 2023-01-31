@@ -64,7 +64,7 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ACTIVATETAXIEXPRESS {}
+impl crate::wrath::ClientMessage for CMSG_ACTIVATETAXIEXPRESS {}
 
 impl CMSG_ACTIVATETAXIEXPRESS {
     pub(crate) fn size(&self) -> usize {

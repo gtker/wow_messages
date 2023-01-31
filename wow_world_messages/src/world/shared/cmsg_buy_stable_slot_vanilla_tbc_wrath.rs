@@ -41,11 +41,11 @@ impl crate::Message for CMSG_BUY_STABLE_SLOT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_BUY_STABLE_SLOT {}
+impl crate::vanilla::ClientMessage for CMSG_BUY_STABLE_SLOT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_BUY_STABLE_SLOT {}
+impl crate::tbc::ClientMessage for CMSG_BUY_STABLE_SLOT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BUY_STABLE_SLOT {}
+impl crate::wrath::ClientMessage for CMSG_BUY_STABLE_SLOT {}
 

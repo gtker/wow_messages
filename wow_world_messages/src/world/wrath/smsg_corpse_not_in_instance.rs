@@ -31,5 +31,5 @@ impl crate::Message for SMSG_CORPSE_NOT_IN_INSTANCE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CORPSE_NOT_IN_INSTANCE {}
+impl crate::wrath::ServerMessage for SMSG_CORPSE_NOT_IN_INSTANCE {}
 

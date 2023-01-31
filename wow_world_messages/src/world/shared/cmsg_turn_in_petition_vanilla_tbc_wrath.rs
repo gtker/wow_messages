@@ -41,11 +41,11 @@ impl crate::Message for CMSG_TURN_IN_PETITION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_TURN_IN_PETITION {}
+impl crate::vanilla::ClientMessage for CMSG_TURN_IN_PETITION {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_TURN_IN_PETITION {}
+impl crate::tbc::ClientMessage for CMSG_TURN_IN_PETITION {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_TURN_IN_PETITION {}
+impl crate::wrath::ClientMessage for CMSG_TURN_IN_PETITION {}
 

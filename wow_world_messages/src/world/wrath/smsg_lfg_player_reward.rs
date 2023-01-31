@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::QuestGiverReward;
+use crate::wrath::QuestGiverReward;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -132,7 +132,7 @@ impl crate::Message for SMSG_LFG_PLAYER_REWARD {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_PLAYER_REWARD {}
+impl crate::wrath::ServerMessage for SMSG_LFG_PLAYER_REWARD {}
 
 impl SMSG_LFG_PLAYER_REWARD {
     pub(crate) fn size(&self) -> usize {

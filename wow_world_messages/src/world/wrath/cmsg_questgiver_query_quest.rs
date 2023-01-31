@@ -59,5 +59,5 @@ impl crate::Message for CMSG_QUESTGIVER_QUERY_QUEST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_QUESTGIVER_QUERY_QUEST {}
+impl crate::wrath::ClientMessage for CMSG_QUESTGIVER_QUERY_QUEST {}
 

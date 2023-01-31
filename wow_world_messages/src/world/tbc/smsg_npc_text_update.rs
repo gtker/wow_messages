@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::NpcTextUpdate;
+use crate::tbc::NpcTextUpdate;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -58,7 +58,7 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_NPC_TEXT_UPDATE {}
+impl crate::tbc::ServerMessage for SMSG_NPC_TEXT_UPDATE {}
 
 impl SMSG_NPC_TEXT_UPDATE {
     pub(crate) fn size(&self) -> usize {

@@ -63,7 +63,7 @@ impl crate::Message for SMSG_FORCE_PITCH_RATE_CHANGE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_FORCE_PITCH_RATE_CHANGE {}
+impl crate::wrath::ServerMessage for SMSG_FORCE_PITCH_RATE_CHANGE {}
 
 impl SMSG_FORCE_PITCH_RATE_CHANGE {
     pub(crate) fn size(&self) -> usize {

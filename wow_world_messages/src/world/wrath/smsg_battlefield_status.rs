@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ArenaFaction;
-use crate::world::wrath::ArenaType;
-use crate::world::wrath::BattlegroundType;
-use crate::world::wrath::Map;
-use crate::world::wrath::StatusId;
+use crate::wrath::ArenaFaction;
+use crate::wrath::ArenaType;
+use crate::wrath::BattlegroundType;
+use crate::wrath::Map;
+use crate::wrath::StatusId;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -262,7 +262,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEFIELD_STATUS {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEFIELD_STATUS {}
 
 impl SMSG_BATTLEFIELD_STATUS {
     pub(crate) fn size(&self) -> usize {

@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::AddonType;
-use crate::world::vanilla::InfoBlock;
-use crate::world::vanilla::KeyVersion;
-use crate::world::vanilla::UrlInfo;
+use crate::vanilla::AddonType;
+use crate::vanilla::InfoBlock;
+use crate::vanilla::KeyVersion;
+use crate::vanilla::UrlInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]

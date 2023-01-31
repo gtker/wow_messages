@@ -56,7 +56,7 @@ impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_ACTIVE_VOICE_CHANNEL {}
+impl crate::tbc::ClientMessage for CMSG_SET_ACTIVE_VOICE_CHANNEL {}
 
 impl CMSG_SET_ACTIVE_VOICE_CHANNEL {
     pub(crate) fn size(&self) -> usize {

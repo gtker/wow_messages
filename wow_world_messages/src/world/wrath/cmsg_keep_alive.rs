@@ -31,5 +31,5 @@ impl crate::Message for CMSG_KEEP_ALIVE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_KEEP_ALIVE {}
+impl crate::wrath::ClientMessage for CMSG_KEEP_ALIVE {}
 

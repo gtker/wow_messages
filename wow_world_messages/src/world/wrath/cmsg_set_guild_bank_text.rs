@@ -56,7 +56,7 @@ impl crate::Message for CMSG_SET_GUILD_BANK_TEXT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_GUILD_BANK_TEXT {}
+impl crate::wrath::ClientMessage for CMSG_SET_GUILD_BANK_TEXT {}
 
 impl CMSG_SET_GUILD_BANK_TEXT {
     pub(crate) fn size(&self) -> usize {

@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Area;
-use crate::world::wrath::Class;
-use crate::world::wrath::Gender;
-use crate::world::wrath::Race;
+use crate::wrath::Area;
+use crate::wrath::Class;
+use crate::wrath::Gender;
+use crate::wrath::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

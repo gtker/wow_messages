@@ -107,7 +107,7 @@ impl crate::Message for SMSG_SPELLHEALLOG {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELLHEALLOG {}
+impl crate::wrath::ServerMessage for SMSG_SPELLHEALLOG {}
 
 impl SMSG_SPELLHEALLOG {
     pub(crate) fn size(&self) -> usize {

@@ -139,8 +139,8 @@ impl crate::Message for SMSG_LEVELUP_INFO {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LEVELUP_INFO {}
+impl crate::vanilla::ServerMessage for SMSG_LEVELUP_INFO {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LEVELUP_INFO {}
+impl crate::tbc::ServerMessage for SMSG_LEVELUP_INFO {}
 

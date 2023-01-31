@@ -49,5 +49,5 @@ impl crate::Message for CMSG_CALENDAR_EVENT_SIGNUP {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_EVENT_SIGNUP {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_EVENT_SIGNUP {}
 

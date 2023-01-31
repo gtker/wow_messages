@@ -1,12 +1,12 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Vector3d;
-use crate::world::tbc::Map;
+use crate::tbc::Vector3d;
+use crate::tbc::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
 ///
-/// The positions and orientations do not matter since they can be overwritten in the [`SMSG_UPDATE_OBJECT`](crate::world::tbc::SMSG_UPDATE_OBJECT), but the map determines which map the client loads and this is not changeable in [`SMSG_UPDATE_OBJECT`](crate::world::tbc::SMSG_UPDATE_OBJECT).
+/// The positions and orientations do not matter since they can be overwritten in the [`SMSG_UPDATE_OBJECT`](crate::tbc::SMSG_UPDATE_OBJECT), but the map determines which map the client loads and this is not changeable in [`SMSG_UPDATE_OBJECT`](crate::tbc::SMSG_UPDATE_OBJECT).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm#L2):
 /// ```text
@@ -63,5 +63,5 @@ impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOGIN_VERIFY_WORLD {}
+impl crate::tbc::ServerMessage for SMSG_LOGIN_VERIFY_WORLD {}
 

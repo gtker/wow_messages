@@ -31,11 +31,11 @@ impl crate::Message for CMSG_IGNORE_TRADE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_IGNORE_TRADE {}
+impl crate::vanilla::ClientMessage for CMSG_IGNORE_TRADE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_IGNORE_TRADE {}
+impl crate::tbc::ClientMessage for CMSG_IGNORE_TRADE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_IGNORE_TRADE {}
+impl crate::wrath::ClientMessage for CMSG_IGNORE_TRADE {}
 

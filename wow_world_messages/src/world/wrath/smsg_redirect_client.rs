@@ -74,5 +74,5 @@ impl crate::Message for SMSG_REDIRECT_CLIENT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_REDIRECT_CLIENT {}
+impl crate::wrath::ServerMessage for SMSG_REDIRECT_CLIENT {}
 

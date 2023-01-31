@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::QuestPoiList;
+use crate::wrath::QuestPoiList;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_QUEST_POI_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUEST_POI_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_QUEST_POI_QUERY_RESPONSE {}
 
 impl SMSG_QUEST_POI_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

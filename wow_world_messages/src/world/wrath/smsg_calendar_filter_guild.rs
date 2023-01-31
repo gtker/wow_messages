@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::CalendarMember;
+use crate::wrath::CalendarMember;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_CALENDAR_FILTER_GUILD {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_FILTER_GUILD {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_FILTER_GUILD {}
 
 impl SMSG_CALENDAR_FILTER_GUILD {
     pub(crate) fn size(&self) -> usize {

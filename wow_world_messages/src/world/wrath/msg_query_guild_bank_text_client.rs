@@ -40,5 +40,5 @@ impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Client {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_QUERY_GUILD_BANK_TEXT_Client {}
+impl crate::wrath::ClientMessage for MSG_QUERY_GUILD_BANK_TEXT_Client {}
 

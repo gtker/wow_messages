@@ -50,8 +50,8 @@ impl crate::Message for MSG_RAID_READY_CHECK_CONFIRM_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_RAID_READY_CHECK_CONFIRM_Server {}
+impl crate::tbc::ServerMessage for MSG_RAID_READY_CHECK_CONFIRM_Server {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_RAID_READY_CHECK_CONFIRM_Server {}
+impl crate::wrath::ServerMessage for MSG_RAID_READY_CHECK_CONFIRM_Server {}
 

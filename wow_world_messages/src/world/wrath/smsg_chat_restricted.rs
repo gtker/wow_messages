@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ChatRestrictionType;
+use crate::wrath::ChatRestrictionType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_CHAT_RESTRICTED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CHAT_RESTRICTED {}
+impl crate::wrath::ServerMessage for SMSG_CHAT_RESTRICTED {}
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Talent;
+use crate::wrath::Talent;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -65,7 +65,7 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LEARN_PREVIEW_TALENTS_PET {}
+impl crate::wrath::ClientMessage for CMSG_LEARN_PREVIEW_TALENTS_PET {}
 
 impl CMSG_LEARN_PREVIEW_TALENTS_PET {
     pub(crate) fn size(&self) -> usize {

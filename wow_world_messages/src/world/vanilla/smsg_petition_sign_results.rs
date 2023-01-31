@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::PetitionResult;
+use crate::vanilla::PetitionResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -60,5 +60,5 @@ impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PETITION_SIGN_RESULTS {}
+impl crate::vanilla::ServerMessage for SMSG_PETITION_SIGN_RESULTS {}
 

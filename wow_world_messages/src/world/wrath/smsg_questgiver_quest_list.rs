@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::QuestItem;
+use crate::wrath::QuestItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -101,7 +101,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {}
+impl crate::wrath::ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {}
 
 impl SMSG_QUESTGIVER_QUEST_LIST {
     pub(crate) fn size(&self) -> usize {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::CreatureFamily;
+use crate::tbc::CreatureFamily;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -225,7 +225,7 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {}
 
 impl SMSG_CREATURE_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

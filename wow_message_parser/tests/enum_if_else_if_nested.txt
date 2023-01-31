@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::NestedEnum;
-use crate::world::vanilla::SimpleEnum;
+use crate::vanilla::NestedEnum;
+use crate::vanilla::SimpleEnum;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

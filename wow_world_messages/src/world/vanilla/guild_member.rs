@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Class;
-use crate::world::vanilla::GuildMemberStatus;
+use crate::vanilla::Area;
+use crate::vanilla::Class;
+use crate::vanilla::GuildMemberStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

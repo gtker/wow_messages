@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
-use wow_world_base::shared::spell_trigger_type_tbc_wrath::SpellTriggerType;
+use crate::vanilla::SpellTriggerType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L40):
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L10):
 /// ```text
 /// struct ItemSpells {
 ///     u32 spell;
@@ -26,7 +27,7 @@ pub struct ItemSpells {
 }
 
 impl ItemSpells {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 
@@ -50,7 +51,7 @@ impl ItemSpells {
 }
 
 impl ItemSpells {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // spell: u32
         let spell = crate::util::read_u32_le(r)?;
 

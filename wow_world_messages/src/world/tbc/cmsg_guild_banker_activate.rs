@@ -49,5 +49,5 @@ impl crate::Message for CMSG_GUILD_BANKER_ACTIVATE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_BANKER_ACTIVATE {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_BANKER_ACTIVATE {}
 

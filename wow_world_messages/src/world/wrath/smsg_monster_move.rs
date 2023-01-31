@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Vector3d;
-use crate::world::wrath::MonsterMoveType;
-use crate::world::wrath::SplineFlag;
+use crate::wrath::Vector3d;
+use crate::wrath::MonsterMoveType;
+use crate::wrath::SplineFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -249,7 +249,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MONSTER_MOVE {}
+impl crate::wrath::ServerMessage for SMSG_MONSTER_MOVE {}
 
 impl SMSG_MONSTER_MOVE {
     pub(crate) fn size(&self) -> usize {

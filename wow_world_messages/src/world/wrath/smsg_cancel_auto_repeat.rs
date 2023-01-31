@@ -43,7 +43,7 @@ impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CANCEL_AUTO_REPEAT {}
+impl crate::wrath::ServerMessage for SMSG_CANCEL_AUTO_REPEAT {}
 
 impl SMSG_CANCEL_AUTO_REPEAT {
     pub(crate) fn size(&self) -> usize {

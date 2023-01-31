@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::LfgData;
-use crate::world::tbc::LfgUpdateLookingForMore;
+use crate::tbc::LfgData;
+use crate::tbc::LfgUpdateLookingForMore;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -86,7 +86,7 @@ impl crate::Message for SMSG_LFG_UPDATE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LFG_UPDATE {}
+impl crate::tbc::ServerMessage for SMSG_LFG_UPDATE {}
 
 impl SMSG_LFG_UPDATE {
     pub(crate) fn size(&self) -> usize {

@@ -88,5 +88,5 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BUY_ITEM_IN_SLOT {}
+impl crate::wrath::ClientMessage for CMSG_BUY_ITEM_IN_SLOT {}
 

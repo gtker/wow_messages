@@ -52,7 +52,7 @@ impl crate::Message for SMSG_FORCE_MOVE_ROOT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_FORCE_MOVE_ROOT {}
+impl crate::tbc::ServerMessage for SMSG_FORCE_MOVE_ROOT {}
 
 impl SMSG_FORCE_MOVE_ROOT {
     pub(crate) fn size(&self) -> usize {

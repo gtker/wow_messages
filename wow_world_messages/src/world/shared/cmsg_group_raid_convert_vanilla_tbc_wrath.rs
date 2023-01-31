@@ -31,11 +31,11 @@ impl crate::Message for CMSG_GROUP_RAID_CONVERT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GROUP_RAID_CONVERT {}
+impl crate::vanilla::ClientMessage for CMSG_GROUP_RAID_CONVERT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GROUP_RAID_CONVERT {}
+impl crate::tbc::ClientMessage for CMSG_GROUP_RAID_CONVERT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GROUP_RAID_CONVERT {}
+impl crate::wrath::ClientMessage for CMSG_GROUP_RAID_CONVERT {}
 

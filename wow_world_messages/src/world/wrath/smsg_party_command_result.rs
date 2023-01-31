@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::PartyOperation;
-use crate::world::wrath::PartyResult;
+use crate::wrath::PartyOperation;
+use crate::wrath::PartyResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PARTY_COMMAND_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_PARTY_COMMAND_RESULT {}
 
 impl SMSG_PARTY_COMMAND_RESULT {
     pub(crate) fn size(&self) -> usize {

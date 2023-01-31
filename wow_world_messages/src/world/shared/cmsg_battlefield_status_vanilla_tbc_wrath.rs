@@ -31,11 +31,11 @@ impl crate::Message for CMSG_BATTLEFIELD_STATUS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_BATTLEFIELD_STATUS {}
+impl crate::vanilla::ClientMessage for CMSG_BATTLEFIELD_STATUS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_BATTLEFIELD_STATUS {}
+impl crate::tbc::ClientMessage for CMSG_BATTLEFIELD_STATUS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BATTLEFIELD_STATUS {}
+impl crate::wrath::ClientMessage for CMSG_BATTLEFIELD_STATUS {}
 

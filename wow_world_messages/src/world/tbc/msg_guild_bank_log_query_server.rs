@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::MoneyLogItem;
+use crate::tbc::MoneyLogItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -73,7 +73,7 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_GUILD_BANK_LOG_QUERY_Server {}
+impl crate::tbc::ServerMessage for MSG_GUILD_BANK_LOG_QUERY_Server {}
 
 impl MSG_GUILD_BANK_LOG_QUERY_Server {
     pub(crate) fn size(&self) -> usize {

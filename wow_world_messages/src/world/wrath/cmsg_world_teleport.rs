@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Vector3d;
-use crate::world::wrath::Map;
+use crate::wrath::Vector3d;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -81,15 +81,15 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_WORLD_TELEPORT {}
+impl crate::wrath::ClientMessage for CMSG_WORLD_TELEPORT {}
 
 #[cfg(test)]
 mod test {
     use super::CMSG_WORLD_TELEPORT;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ClientOpcodeMessage;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 38] = [ 0x00, 0x24, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

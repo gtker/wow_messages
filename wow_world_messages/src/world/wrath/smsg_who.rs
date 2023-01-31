@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::WhoPlayer;
+use crate::wrath::WhoPlayer;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -64,7 +64,7 @@ impl crate::Message for SMSG_WHO {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_WHO {}
+impl crate::wrath::ServerMessage for SMSG_WHO {}
 
 impl SMSG_WHO {
     pub(crate) fn size(&self) -> usize {

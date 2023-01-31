@@ -58,5 +58,5 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_AUCTION_HELLO_Server {}
+impl crate::wrath::ServerMessage for MSG_AUCTION_HELLO_Server {}
 

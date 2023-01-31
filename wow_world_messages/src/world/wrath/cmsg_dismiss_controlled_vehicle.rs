@@ -31,5 +31,5 @@ impl crate::Message for CMSG_DISMISS_CONTROLLED_VEHICLE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_DISMISS_CONTROLLED_VEHICLE {}
+impl crate::wrath::ClientMessage for CMSG_DISMISS_CONTROLLED_VEHICLE {}
 

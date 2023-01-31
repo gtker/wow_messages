@@ -50,5 +50,5 @@ impl crate::Message for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {}
+impl crate::wrath::ClientMessage for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {}
 

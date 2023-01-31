@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::AuctionListItem;
+use crate::tbc::AuctionListItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -73,7 +73,7 @@ impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_AUCTION_OWNER_LIST_RESULT {}
+impl crate::tbc::ServerMessage for SMSG_AUCTION_OWNER_LIST_RESULT {}
 
 impl SMSG_AUCTION_OWNER_LIST_RESULT {
     pub(crate) fn size(&self) -> usize {

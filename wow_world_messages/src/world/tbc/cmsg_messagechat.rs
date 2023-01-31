@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::ChatType;
-use crate::world::tbc::Language;
+use crate::tbc::ChatType;
+use crate::tbc::Language;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -209,7 +209,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_MESSAGECHAT {}
+impl crate::tbc::ClientMessage for CMSG_MESSAGECHAT {}
 
 impl CMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {

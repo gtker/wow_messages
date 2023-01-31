@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::PlayerInviteStatus;
+use crate::wrath::PlayerInviteStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -101,7 +101,7 @@ impl crate::Message for SMSG_GROUP_INVITE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GROUP_INVITE {}
+impl crate::wrath::ServerMessage for SMSG_GROUP_INVITE {}
 
 impl SMSG_GROUP_INVITE {
     pub(crate) fn size(&self) -> usize {

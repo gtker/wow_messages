@@ -94,7 +94,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SET_EXTRA_AURA_INFO {}
+impl crate::tbc::ServerMessage for SMSG_SET_EXTRA_AURA_INFO {}
 
 impl SMSG_SET_EXTRA_AURA_INFO {
     pub(crate) fn size(&self) -> usize {

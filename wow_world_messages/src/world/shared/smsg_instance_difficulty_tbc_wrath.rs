@@ -48,8 +48,8 @@ impl crate::Message for SMSG_INSTANCE_DIFFICULTY {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_INSTANCE_DIFFICULTY {}
+impl crate::tbc::ServerMessage for SMSG_INSTANCE_DIFFICULTY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_INSTANCE_DIFFICULTY {}
+impl crate::wrath::ServerMessage for SMSG_INSTANCE_DIFFICULTY {}
 

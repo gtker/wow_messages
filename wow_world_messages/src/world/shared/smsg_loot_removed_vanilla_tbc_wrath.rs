@@ -42,11 +42,11 @@ impl crate::Message for SMSG_LOOT_REMOVED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOOT_REMOVED {}
+impl crate::vanilla::ServerMessage for SMSG_LOOT_REMOVED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOOT_REMOVED {}
+impl crate::tbc::ServerMessage for SMSG_LOOT_REMOVED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_REMOVED {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_REMOVED {}
 

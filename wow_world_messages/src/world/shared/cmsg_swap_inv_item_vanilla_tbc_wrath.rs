@@ -49,11 +49,11 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SWAP_INV_ITEM {}
+impl crate::vanilla::ClientMessage for CMSG_SWAP_INV_ITEM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SWAP_INV_ITEM {}
+impl crate::tbc::ClientMessage for CMSG_SWAP_INV_ITEM {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SWAP_INV_ITEM {}
+impl crate::wrath::ClientMessage for CMSG_SWAP_INV_ITEM {}
 

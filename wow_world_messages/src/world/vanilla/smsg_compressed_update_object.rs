@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Object;
+use crate::vanilla::Object;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::world::vanilla::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
+/// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::vanilla::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm#L1):
 /// ```text
@@ -74,7 +74,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {}
+impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {}
 
 impl SMSG_COMPRESSED_UPDATE_OBJECT {
     pub(crate) fn size(&self) -> usize {
@@ -99,10 +99,10 @@ mod test {
     use super::SMSG_COMPRESSED_UPDATE_OBJECT;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 139] = [ 0x00, 0x89, 0xF6, 0x01, 0x3C, 0x01, 0x00, 0x00, 0x78,
          0x01, 0x63, 0x61, 0x60, 0x60, 0x60, 0x64, 0x3A, 0xEC, 0x11, 0x78, 0x40,

@@ -65,7 +65,7 @@ impl crate::Message for SMSG_CHANNEL_MEMBER_COUNT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CHANNEL_MEMBER_COUNT {}
+impl crate::wrath::ServerMessage for SMSG_CHANNEL_MEMBER_COUNT {}
 
 impl SMSG_CHANNEL_MEMBER_COUNT {
     pub(crate) fn size(&self) -> usize {

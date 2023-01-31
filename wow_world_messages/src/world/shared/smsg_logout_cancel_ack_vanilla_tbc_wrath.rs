@@ -31,11 +31,11 @@ impl crate::Message for SMSG_LOGOUT_CANCEL_ACK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOGOUT_CANCEL_ACK {}
+impl crate::vanilla::ServerMessage for SMSG_LOGOUT_CANCEL_ACK {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOGOUT_CANCEL_ACK {}
+impl crate::tbc::ServerMessage for SMSG_LOGOUT_CANCEL_ACK {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOGOUT_CANCEL_ACK {}
+impl crate::wrath::ServerMessage for SMSG_LOGOUT_CANCEL_ACK {}
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::party_role_tbc_wrath::PartyRole;
+use crate::shared::party_role_tbc_wrath::PartyRole;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -59,8 +59,8 @@ impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_PARTY_ASSIGNMENT_Client {}
+impl crate::tbc::ClientMessage for MSG_PARTY_ASSIGNMENT_Client {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_PARTY_ASSIGNMENT_Client {}
+impl crate::wrath::ClientMessage for MSG_PARTY_ASSIGNMENT_Client {}
 

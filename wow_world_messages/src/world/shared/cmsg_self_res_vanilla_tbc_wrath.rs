@@ -31,11 +31,11 @@ impl crate::Message for CMSG_SELF_RES {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SELF_RES {}
+impl crate::vanilla::ClientMessage for CMSG_SELF_RES {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SELF_RES {}
+impl crate::tbc::ClientMessage for CMSG_SELF_RES {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SELF_RES {}
+impl crate::wrath::ClientMessage for CMSG_SELF_RES {}
 

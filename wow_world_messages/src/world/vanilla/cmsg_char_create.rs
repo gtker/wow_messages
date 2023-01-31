@@ -1,11 +1,11 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Class;
-use crate::world::vanilla::Gender;
-use crate::world::vanilla::Race;
+use crate::vanilla::Class;
+use crate::vanilla::Gender;
+use crate::vanilla::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::world::vanilla::SMSG_CHAR_CREATE).
+/// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::vanilla::SMSG_CHAR_CREATE).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L1):
 /// ```text
@@ -146,7 +146,7 @@ impl crate::Message for CMSG_CHAR_CREATE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHAR_CREATE {}
+impl crate::vanilla::ClientMessage for CMSG_CHAR_CREATE {}
 
 impl CMSG_CHAR_CREATE {
     pub(crate) fn size(&self) -> usize {
@@ -168,8 +168,8 @@ mod test {
     use super::CMSG_CHAR_CREATE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 24] = [ 0x00, 0x16, 0x36, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61,
          0x64, 0x62, 0x65, 0x65, 0x66, 0x00, 0x01, 0x01, 0x01, 0x08, 0x00, 0x0E,

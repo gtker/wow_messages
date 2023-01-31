@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Addon;
+use crate::vanilla::Addon;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
@@ -52,7 +52,7 @@ impl crate::Message for SMSG_ADDON_INFO {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ADDON_INFO {}
+impl crate::vanilla::ServerMessage for SMSG_ADDON_INFO {}
 
 impl SMSG_ADDON_INFO {
     pub(crate) fn size(&self) -> usize {

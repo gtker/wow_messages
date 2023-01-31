@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::LfgJoinPlayer;
+use crate::wrath::LfgJoinPlayer;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -71,7 +71,7 @@ impl crate::Message for SMSG_LFG_JOIN_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_JOIN_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_LFG_JOIN_RESULT {}
 
 impl SMSG_LFG_JOIN_RESULT {
     pub(crate) fn size(&self) -> usize {

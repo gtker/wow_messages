@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
+use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,11 +51,11 @@ impl crate::Message for SMSG_AI_REACTION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_AI_REACTION {}
+impl crate::vanilla::ServerMessage for SMSG_AI_REACTION {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_AI_REACTION {}
+impl crate::tbc::ServerMessage for SMSG_AI_REACTION {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_AI_REACTION {}
+impl crate::wrath::ServerMessage for SMSG_AI_REACTION {}
 

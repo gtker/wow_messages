@@ -285,6 +285,10 @@ impl ParsedContainer {
             return false;
         }
 
+        if self.contains_datetime() {
+            return false;
+        }
+
         for t in self.get_types_needing_import() {
             if let Some(d) = get_definer(definers, t.as_str(), self.tags()) {
                 if d.definer_ty() == DefinerType::Enum {
@@ -301,6 +305,17 @@ impl ParsedContainer {
         }
 
         true
+    }
+
+    pub(crate) fn contains_datetime(&self) -> bool {
+        for d in self.all_definitions() {
+            match d.ty() {
+                ParsedType::DateTime => return true,
+                _ => {}
+            }
+        }
+
+        false
     }
 
     pub(crate) fn contains_string_or_cstring(&self) -> bool {

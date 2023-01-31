@@ -95,10 +95,10 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
+impl crate::tbc::ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
+impl crate::wrath::ClientMessage for CMSG_GOSSIP_SELECT_OPTION {}
 
 impl CMSG_GOSSIP_SELECT_OPTION {
     pub(crate) fn size(&self) -> usize {

@@ -82,8 +82,8 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ENCHANTMENTLOG {}
+impl crate::vanilla::ServerMessage for SMSG_ENCHANTMENTLOG {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ENCHANTMENTLOG {}
+impl crate::tbc::ServerMessage for SMSG_ENCHANTMENTLOG {}
 

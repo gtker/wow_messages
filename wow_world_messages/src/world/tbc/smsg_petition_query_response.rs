@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::CharterType;
+use crate::tbc::CharterType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -206,7 +206,7 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PETITION_QUERY_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_PETITION_QUERY_RESPONSE {}
 
 impl SMSG_PETITION_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

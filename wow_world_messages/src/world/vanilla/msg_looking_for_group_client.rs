@@ -31,5 +31,5 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_LOOKING_FOR_GROUP_Client {}
+impl crate::vanilla::ClientMessage for MSG_LOOKING_FOR_GROUP_Client {}
 

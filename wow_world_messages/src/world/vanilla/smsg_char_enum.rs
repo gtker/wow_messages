@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Character;
+use crate::vanilla::Character;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Response to [`CMSG_CHAR_ENUM`](crate::world::vanilla::CMSG_CHAR_ENUM).
+/// Response to [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L43):
 /// ```text
@@ -57,7 +57,7 @@ impl crate::Message for SMSG_CHAR_ENUM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHAR_ENUM {}
+impl crate::vanilla::ServerMessage for SMSG_CHAR_ENUM {}
 
 impl SMSG_CHAR_ENUM {
     pub(crate) fn size(&self) -> usize {
@@ -71,9 +71,9 @@ mod test {
     use super::SMSG_CHAR_ENUM;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x3B, 0x00, 0x00, ];
 

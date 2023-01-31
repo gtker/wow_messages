@@ -41,11 +41,11 @@ impl crate::Message for CMSG_RECLAIM_CORPSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_RECLAIM_CORPSE {}
+impl crate::vanilla::ClientMessage for CMSG_RECLAIM_CORPSE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_RECLAIM_CORPSE {}
+impl crate::tbc::ClientMessage for CMSG_RECLAIM_CORPSE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_RECLAIM_CORPSE {}
+impl crate::wrath::ClientMessage for CMSG_RECLAIM_CORPSE {}
 

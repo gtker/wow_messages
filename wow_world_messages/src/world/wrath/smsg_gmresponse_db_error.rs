@@ -33,5 +33,5 @@ impl crate::Message for SMSG_GMRESPONSE_DB_ERROR {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GMRESPONSE_DB_ERROR {}
+impl crate::wrath::ServerMessage for SMSG_GMRESPONSE_DB_ERROR {}
 

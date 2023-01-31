@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::GuildMember;
-use crate::world::wrath::GuildRights;
+use crate::wrath::GuildMember;
+use crate::wrath::GuildRights;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -105,7 +105,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GUILD_ROSTER {}
+impl crate::wrath::ServerMessage for SMSG_GUILD_ROSTER {}
 
 impl SMSG_GUILD_ROSTER {
     pub(crate) fn size(&self) -> usize {

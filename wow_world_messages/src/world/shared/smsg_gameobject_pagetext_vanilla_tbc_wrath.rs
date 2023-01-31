@@ -41,11 +41,11 @@ impl crate::Message for SMSG_GAMEOBJECT_PAGETEXT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GAMEOBJECT_PAGETEXT {}
+impl crate::vanilla::ServerMessage for SMSG_GAMEOBJECT_PAGETEXT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GAMEOBJECT_PAGETEXT {}
+impl crate::tbc::ServerMessage for SMSG_GAMEOBJECT_PAGETEXT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GAMEOBJECT_PAGETEXT {}
+impl crate::wrath::ServerMessage for SMSG_GAMEOBJECT_PAGETEXT {}
 

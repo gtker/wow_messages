@@ -58,5 +58,5 @@ impl crate::Message for CMSG_ALTER_APPEARANCE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ALTER_APPEARANCE {}
+impl crate::wrath::ClientMessage for CMSG_ALTER_APPEARANCE {}
 

@@ -2,8 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Reply to [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME).
-/// [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME) and this reply does not actually appear to set the time. Instead [`SMSG_LOGIN_SETTIMESPEED`](crate::world::vanilla::SMSG_LOGIN_SETTIMESPEED) seems to correctly set the time. Running the client with `-console` will print the date when [`SMSG_LOGIN_SETTIMESPEED`](crate::world::vanilla::SMSG_LOGIN_SETTIMESPEED) is received, but not when this message is received.
+/// Reply to [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME).
+/// [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME) and this reply does not actually appear to set the time. Instead [`SMSG_LOGIN_SETTIMESPEED`](crate::vanilla::SMSG_LOGIN_SETTIMESPEED) seems to correctly set the time. Running the client with `-console` will print the date when [`SMSG_LOGIN_SETTIMESPEED`](crate::vanilla::SMSG_LOGIN_SETTIMESPEED) is received, but not when this message is received.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm#L1):
 /// ```text
@@ -45,15 +45,15 @@ impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
 
 #[cfg(test)]
 mod test {
     use super::SMSG_QUERY_TIME_RESPONSE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xCF, 0x01, 0x94, 0x98, 0x50, 0x61, ];
 

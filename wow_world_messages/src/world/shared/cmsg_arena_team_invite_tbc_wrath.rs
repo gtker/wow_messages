@@ -56,10 +56,10 @@ impl crate::Message for CMSG_ARENA_TEAM_INVITE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ARENA_TEAM_INVITE {}
+impl crate::tbc::ClientMessage for CMSG_ARENA_TEAM_INVITE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ARENA_TEAM_INVITE {}
+impl crate::wrath::ClientMessage for CMSG_ARENA_TEAM_INVITE {}
 
 impl CMSG_ARENA_TEAM_INVITE {
     pub(crate) fn size(&self) -> usize {

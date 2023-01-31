@@ -41,5 +41,5 @@ impl crate::Message for CMSG_ITEM_REFUND_INFO {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ITEM_REFUND_INFO {}
+impl crate::wrath::ClientMessage for CMSG_ITEM_REFUND_INFO {}
 

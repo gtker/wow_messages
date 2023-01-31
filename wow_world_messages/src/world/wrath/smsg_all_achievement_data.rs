@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::{AchievementDoneArray, AchievementInProgressArray};
+use crate::wrath::{AchievementDoneArray, AchievementInProgressArray};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -52,7 +52,7 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ALL_ACHIEVEMENT_DATA {}
+impl crate::wrath::ServerMessage for SMSG_ALL_ACHIEVEMENT_DATA {}
 
 impl SMSG_ALL_ACHIEVEMENT_DATA {
     pub(crate) fn size(&self) -> usize {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::MiniMoveMessage;
+use crate::wrath::MiniMoveMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_MULTIPLE_MOVES {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MULTIPLE_MOVES {}
+impl crate::wrath::ServerMessage for SMSG_MULTIPLE_MOVES {}
 
 impl SMSG_MULTIPLE_MOVES {
     pub(crate) fn size(&self) -> usize {

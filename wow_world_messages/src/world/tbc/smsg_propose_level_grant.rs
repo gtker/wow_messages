@@ -43,7 +43,7 @@ impl crate::Message for SMSG_PROPOSE_LEVEL_GRANT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PROPOSE_LEVEL_GRANT {}
+impl crate::tbc::ServerMessage for SMSG_PROPOSE_LEVEL_GRANT {}
 
 impl SMSG_PROPOSE_LEVEL_GRANT {
     pub(crate) fn size(&self) -> usize {

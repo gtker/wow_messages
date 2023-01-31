@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::server_message_type_vanilla_tbc::ServerMessageType;
+use crate::shared::server_message_type_vanilla_tbc::ServerMessageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -57,10 +57,10 @@ impl crate::Message for SMSG_SERVER_MESSAGE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SERVER_MESSAGE {}
+impl crate::vanilla::ServerMessage for SMSG_SERVER_MESSAGE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SERVER_MESSAGE {}
+impl crate::tbc::ServerMessage for SMSG_SERVER_MESSAGE {}
 
 impl SMSG_SERVER_MESSAGE {
     pub(crate) fn size(&self) -> usize {

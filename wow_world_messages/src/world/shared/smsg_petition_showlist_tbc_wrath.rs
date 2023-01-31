@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::petition_showlist_tbc_wrath::PetitionShowlist;
+use crate::shared::petition_showlist_tbc_wrath::PetitionShowlist;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -65,10 +65,10 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PETITION_SHOWLIST {}
+impl crate::tbc::ServerMessage for SMSG_PETITION_SHOWLIST {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PETITION_SHOWLIST {}
+impl crate::wrath::ServerMessage for SMSG_PETITION_SHOWLIST {}
 
 impl SMSG_PETITION_SHOWLIST {
     pub(crate) fn size(&self) -> usize {

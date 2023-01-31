@@ -63,13 +63,13 @@ impl crate::Message for SMSG_FORCE_WALK_SPEED_CHANGE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_FORCE_WALK_SPEED_CHANGE {}
+impl crate::vanilla::ServerMessage for SMSG_FORCE_WALK_SPEED_CHANGE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_FORCE_WALK_SPEED_CHANGE {}
+impl crate::tbc::ServerMessage for SMSG_FORCE_WALK_SPEED_CHANGE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_FORCE_WALK_SPEED_CHANGE {}
+impl crate::wrath::ServerMessage for SMSG_FORCE_WALK_SPEED_CHANGE {}
 
 impl SMSG_FORCE_WALK_SPEED_CHANGE {
     pub(crate) fn size(&self) -> usize {

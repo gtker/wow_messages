@@ -40,5 +40,5 @@ impl crate::Message for SMSG_ACHIEVEMENT_DELETED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ACHIEVEMENT_DELETED {}
+impl crate::wrath::ServerMessage for SMSG_ACHIEVEMENT_DELETED {}
 

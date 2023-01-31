@@ -58,5 +58,5 @@ impl crate::Message for SMSG_OVERRIDE_LIGHT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_OVERRIDE_LIGHT {}
+impl crate::tbc::ServerMessage for SMSG_OVERRIDE_LIGHT {}
 

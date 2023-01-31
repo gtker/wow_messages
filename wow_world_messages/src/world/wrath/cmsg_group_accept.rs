@@ -31,5 +31,5 @@ impl crate::Message for CMSG_GROUP_ACCEPT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GROUP_ACCEPT {}
+impl crate::wrath::ClientMessage for CMSG_GROUP_ACCEPT {}
 

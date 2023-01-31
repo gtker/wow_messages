@@ -40,5 +40,5 @@ impl crate::Message for SMSG_LEARNED_SPELL {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LEARNED_SPELL {}
+impl crate::tbc::ServerMessage for SMSG_LEARNED_SPELL {}
 

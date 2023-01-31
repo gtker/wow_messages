@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Vector2dUnsigned;
-use crate::world::wrath::Area;
-use crate::world::wrath::Map;
+use crate::wrath::Vector2dUnsigned;
+use crate::wrath::Area;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

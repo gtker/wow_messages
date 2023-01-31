@@ -60,11 +60,11 @@ impl crate::Message for SMSG_PVP_CREDIT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PVP_CREDIT {}
+impl crate::vanilla::ServerMessage for SMSG_PVP_CREDIT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PVP_CREDIT {}
+impl crate::tbc::ServerMessage for SMSG_PVP_CREDIT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PVP_CREDIT {}
+impl crate::wrath::ServerMessage for SMSG_PVP_CREDIT {}
 

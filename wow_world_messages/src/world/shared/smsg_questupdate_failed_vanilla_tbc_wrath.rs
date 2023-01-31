@@ -40,11 +40,11 @@ impl crate::Message for SMSG_QUESTUPDATE_FAILED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUESTUPDATE_FAILED {}
+impl crate::vanilla::ServerMessage for SMSG_QUESTUPDATE_FAILED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_QUESTUPDATE_FAILED {}
+impl crate::tbc::ServerMessage for SMSG_QUESTUPDATE_FAILED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUESTUPDATE_FAILED {}
+impl crate::wrath::ServerMessage for SMSG_QUESTUPDATE_FAILED {}
 

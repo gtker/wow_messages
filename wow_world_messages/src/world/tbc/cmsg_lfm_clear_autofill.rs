@@ -31,5 +31,5 @@ impl crate::Message for CMSG_LFM_CLEAR_AUTOFILL {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_LFM_CLEAR_AUTOFILL {}
+impl crate::tbc::ClientMessage for CMSG_LFM_CLEAR_AUTOFILL {}
 

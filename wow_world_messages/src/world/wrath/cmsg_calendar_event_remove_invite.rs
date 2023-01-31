@@ -59,5 +59,5 @@ impl crate::Message for CMSG_CALENDAR_EVENT_REMOVE_INVITE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_EVENT_REMOVE_INVITE {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_EVENT_REMOVE_INVITE {}
 

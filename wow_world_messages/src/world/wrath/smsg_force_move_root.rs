@@ -52,7 +52,7 @@ impl crate::Message for SMSG_FORCE_MOVE_ROOT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_FORCE_MOVE_ROOT {}
+impl crate::wrath::ServerMessage for SMSG_FORCE_MOVE_ROOT {}
 
 impl SMSG_FORCE_MOVE_ROOT {
     pub(crate) fn size(&self) -> usize {

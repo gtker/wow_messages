@@ -51,5 +51,5 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {}
+impl crate::wrath::ServerMessage for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {}
 

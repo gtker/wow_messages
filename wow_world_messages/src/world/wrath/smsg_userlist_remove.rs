@@ -75,7 +75,7 @@ impl crate::Message for SMSG_USERLIST_REMOVE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_USERLIST_REMOVE {}
+impl crate::wrath::ServerMessage for SMSG_USERLIST_REMOVE {}
 
 impl SMSG_USERLIST_REMOVE {
     pub(crate) fn size(&self) -> usize {

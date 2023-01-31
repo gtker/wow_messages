@@ -94,8 +94,8 @@ impl crate::Message for SMSG_ARENA_TEAM_STATS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ARENA_TEAM_STATS {}
+impl crate::tbc::ServerMessage for SMSG_ARENA_TEAM_STATS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ARENA_TEAM_STATS {}
+impl crate::wrath::ServerMessage for SMSG_ARENA_TEAM_STATS {}
 

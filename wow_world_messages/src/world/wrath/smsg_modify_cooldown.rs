@@ -59,5 +59,5 @@ impl crate::Message for SMSG_MODIFY_COOLDOWN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MODIFY_COOLDOWN {}
+impl crate::wrath::ServerMessage for SMSG_MODIFY_COOLDOWN {}
 

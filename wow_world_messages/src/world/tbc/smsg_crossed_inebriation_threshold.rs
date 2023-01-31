@@ -59,5 +59,5 @@ impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CROSSED_INEBRIATION_THRESHOLD {}
+impl crate::tbc::ServerMessage for SMSG_CROSSED_INEBRIATION_THRESHOLD {}
 

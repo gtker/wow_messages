@@ -1,20 +1,20 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ItemDamageType;
-use crate::world::vanilla::ItemSpells;
-use crate::world::vanilla::ItemStat;
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Bonding;
-use crate::world::vanilla::InventoryType;
-use crate::world::vanilla::ItemClassAndSubClass;
-use crate::world::vanilla::ItemQuality;
-use crate::world::vanilla::Map;
-use crate::world::vanilla::Skill;
-use crate::world::vanilla::AllowedClass;
-use crate::world::vanilla::AllowedRace;
+use crate::vanilla::ItemDamageType;
+use crate::vanilla::ItemSpells;
+use crate::vanilla::ItemStat;
+use crate::vanilla::Area;
+use crate::vanilla::Bonding;
+use crate::vanilla::InventoryType;
+use crate::vanilla::ItemClassAndSubClass;
+use crate::vanilla::ItemQuality;
+use crate::vanilla::Map;
+use crate::vanilla::Skill;
+use crate::vanilla::AllowedClass;
+use crate::vanilla::AllowedRace;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:87`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L87):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:93`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L93):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -544,7 +544,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub(crate) fn size(&self) -> usize {

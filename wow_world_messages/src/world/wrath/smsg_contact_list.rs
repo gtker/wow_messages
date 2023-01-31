@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Relation;
-use crate::world::wrath::RelationType;
+use crate::wrath::Relation;
+use crate::wrath::RelationType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CONTACT_LIST {}
+impl crate::wrath::ServerMessage for SMSG_CONTACT_LIST {}
 
 impl SMSG_CONTACT_LIST {
     pub(crate) fn size(&self) -> usize {

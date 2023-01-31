@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -43,7 +43,7 @@ impl crate::Message for MSG_MOVE_STOP_PITCH_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_MOVE_STOP_PITCH_Client {}
+impl crate::vanilla::ClientMessage for MSG_MOVE_STOP_PITCH_Client {}
 
 impl MSG_MOVE_STOP_PITCH_Client {
     pub(crate) fn size(&self) -> usize {

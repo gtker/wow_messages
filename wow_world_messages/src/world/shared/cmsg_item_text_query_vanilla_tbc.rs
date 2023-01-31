@@ -62,8 +62,8 @@ impl crate::Message for CMSG_ITEM_TEXT_QUERY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_ITEM_TEXT_QUERY {}
+impl crate::vanilla::ClientMessage for CMSG_ITEM_TEXT_QUERY {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ITEM_TEXT_QUERY {}
+impl crate::tbc::ClientMessage for CMSG_ITEM_TEXT_QUERY {}
 

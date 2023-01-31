@@ -50,11 +50,11 @@ impl crate::Message for SMSG_TRAINER_BUY_SUCCEEDED {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_TRAINER_BUY_SUCCEEDED {}
+impl crate::vanilla::ServerMessage for SMSG_TRAINER_BUY_SUCCEEDED {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TRAINER_BUY_SUCCEEDED {}
+impl crate::tbc::ServerMessage for SMSG_TRAINER_BUY_SUCCEEDED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TRAINER_BUY_SUCCEEDED {}
+impl crate::wrath::ServerMessage for SMSG_TRAINER_BUY_SUCCEEDED {}
 

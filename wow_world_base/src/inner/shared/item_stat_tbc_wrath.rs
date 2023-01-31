@@ -2,7 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:80`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L80):
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:85`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L85):
 /// ```text
 /// struct ItemStat {
 ///     u32 stat_type;
@@ -15,7 +16,7 @@ pub struct ItemStat {
 }
 
 impl ItemStat {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // stat_type: u32
         w.write_all(&self.stat_type.to_le_bytes())?;
 
@@ -27,7 +28,7 @@ impl ItemStat {
 }
 
 impl ItemStat {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // stat_type: u32
         let stat_type = crate::util::read_u32_le(r)?;
 

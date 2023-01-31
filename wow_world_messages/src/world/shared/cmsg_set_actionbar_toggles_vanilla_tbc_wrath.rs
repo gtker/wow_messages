@@ -42,11 +42,11 @@ impl crate::Message for CMSG_SET_ACTIONBAR_TOGGLES {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SET_ACTIONBAR_TOGGLES {}
+impl crate::vanilla::ClientMessage for CMSG_SET_ACTIONBAR_TOGGLES {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_ACTIONBAR_TOGGLES {}
+impl crate::tbc::ClientMessage for CMSG_SET_ACTIONBAR_TOGGLES {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_ACTIONBAR_TOGGLES {}
+impl crate::wrath::ClientMessage for CMSG_SET_ACTIONBAR_TOGGLES {}
 

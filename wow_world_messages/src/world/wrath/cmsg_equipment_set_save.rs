@@ -94,7 +94,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_EQUIPMENT_SET_SAVE {}
+impl crate::wrath::ClientMessage for CMSG_EQUIPMENT_SET_SAVE {}
 
 impl CMSG_EQUIPMENT_SET_SAVE {
     pub(crate) fn size(&self) -> usize {

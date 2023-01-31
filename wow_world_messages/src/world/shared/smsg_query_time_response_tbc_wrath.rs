@@ -2,8 +2,8 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Reply to [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME).
-/// [`CMSG_QUERY_TIME`](crate::world::vanilla::CMSG_QUERY_TIME) and this reply does not actually appear to set the time. Instead [`SMSG_LOGIN_SETTIMESPEED`](crate::world::vanilla::SMSG_LOGIN_SETTIMESPEED) seems to correctly set the time. Running the client with `-console` will print the date when [`SMSG_LOGIN_SETTIMESPEED`](crate::world::vanilla::SMSG_LOGIN_SETTIMESPEED) is received, but not when this message is received.
+/// Reply to [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME).
+/// [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME) and this reply does not actually appear to set the time. Instead [`SMSG_LOGIN_SETTIMESPEED`](crate::vanilla::SMSG_LOGIN_SETTIMESPEED) seems to correctly set the time. Running the client with `-console` will print the date when [`SMSG_LOGIN_SETTIMESPEED`](crate::vanilla::SMSG_LOGIN_SETTIMESPEED) is received, but not when this message is received.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm#L21):
 /// ```text
@@ -56,8 +56,8 @@ impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
 

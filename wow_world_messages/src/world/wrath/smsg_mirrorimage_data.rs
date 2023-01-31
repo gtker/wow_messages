@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Class;
-use crate::world::wrath::Gender;
-use crate::world::wrath::Race;
+use crate::wrath::Class;
+use crate::wrath::Gender;
+use crate::wrath::Race;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -150,5 +150,5 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MIRRORIMAGE_DATA {}
+impl crate::wrath::ServerMessage for SMSG_MIRRORIMAGE_DATA {}
 

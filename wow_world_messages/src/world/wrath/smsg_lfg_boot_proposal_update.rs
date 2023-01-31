@@ -117,7 +117,7 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_BOOT_PROPOSAL_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_LFG_BOOT_PROPOSAL_UPDATE {}
 
 impl SMSG_LFG_BOOT_PROPOSAL_UPDATE {
     pub(crate) fn size(&self) -> usize {

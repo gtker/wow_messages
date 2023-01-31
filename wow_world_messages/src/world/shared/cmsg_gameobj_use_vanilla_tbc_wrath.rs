@@ -41,11 +41,11 @@ impl crate::Message for CMSG_GAMEOBJ_USE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GAMEOBJ_USE {}
+impl crate::vanilla::ClientMessage for CMSG_GAMEOBJ_USE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GAMEOBJ_USE {}
+impl crate::tbc::ClientMessage for CMSG_GAMEOBJ_USE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GAMEOBJ_USE {}
+impl crate::wrath::ClientMessage for CMSG_GAMEOBJ_USE {}
 

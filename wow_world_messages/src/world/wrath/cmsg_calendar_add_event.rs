@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::DateTime;
-use crate::world::wrath::CalendarInvitee;
+use crate::wrath::CalendarInvitee;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -144,7 +144,7 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_ADD_EVENT {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_ADD_EVENT {}
 
 impl CMSG_CALENDAR_ADD_EVENT {
     pub(crate) fn size(&self) -> usize {

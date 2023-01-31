@@ -59,8 +59,8 @@ impl crate::Message for CMSG_OFFER_PETITION {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_OFFER_PETITION {}
+impl crate::tbc::ClientMessage for CMSG_OFFER_PETITION {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_OFFER_PETITION {}
+impl crate::wrath::ClientMessage for CMSG_OFFER_PETITION {}
 

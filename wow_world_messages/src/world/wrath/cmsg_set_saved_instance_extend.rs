@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Map;
-use crate::world::wrath::RaidDifficulty;
+use crate::wrath::Map;
+use crate::wrath::RaidDifficulty;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -59,5 +59,5 @@ impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_SAVED_INSTANCE_EXTEND {}
+impl crate::wrath::ClientMessage for CMSG_SET_SAVED_INSTANCE_EXTEND {}
 

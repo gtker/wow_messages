@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::WorldResult;
+use crate::vanilla::WorldResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Response to [`CMSG_AUTH_SESSION`](crate::world::vanilla::CMSG_AUTH_SESSION).
+/// Response to [`CMSG_AUTH_SESSION`](crate::vanilla::CMSG_AUTH_SESSION).
 ///
 /// vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.
 ///
@@ -267,7 +267,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_AUTH_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_AUTH_RESPONSE {}
 
 impl SMSG_AUTH_RESPONSE {
     pub(crate) fn size(&self) -> usize {
@@ -732,8 +732,8 @@ mod test {
     use super::SMSG_AUTH_RESPONSE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0xEE, 0x01, 0x0D, ];
 

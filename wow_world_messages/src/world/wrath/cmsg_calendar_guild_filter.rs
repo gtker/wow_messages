@@ -58,5 +58,5 @@ impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_GUILD_FILTER {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_GUILD_FILTER {}
 

@@ -33,5 +33,5 @@ impl crate::Message for SMSG_BATTLEGROUND_INFO_THROTTLED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEGROUND_INFO_THROTTLED {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEGROUND_INFO_THROTTLED {}
 

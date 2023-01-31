@@ -61,10 +61,10 @@ impl crate::Message for CMSG_ADD_FRIEND {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ADD_FRIEND {}
+impl crate::tbc::ClientMessage for CMSG_ADD_FRIEND {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ADD_FRIEND {}
+impl crate::wrath::ClientMessage for CMSG_ADD_FRIEND {}
 
 impl CMSG_ADD_FRIEND {
     pub(crate) fn size(&self) -> usize {

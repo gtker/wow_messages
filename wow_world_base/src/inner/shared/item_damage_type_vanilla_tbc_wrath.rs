@@ -1,9 +1,10 @@
 use std::convert::{TryFrom, TryInto};
-use wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
+use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:53`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L53):
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:55`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L55):
 /// ```text
 /// struct ItemDamageType {
 ///     f32 damage_minimum;
@@ -18,7 +19,7 @@ pub struct ItemDamageType {
 }
 
 impl ItemDamageType {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // damage_minimum: f32
         w.write_all(&self.damage_minimum.to_le_bytes())?;
 
@@ -33,7 +34,7 @@ impl ItemDamageType {
 }
 
 impl ItemDamageType {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // damage_minimum: f32
         let damage_minimum = crate::util::read_f32_le(r)?;
         // damage_maximum: f32

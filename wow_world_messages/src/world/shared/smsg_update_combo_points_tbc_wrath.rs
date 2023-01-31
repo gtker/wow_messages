@@ -52,10 +52,10 @@ impl crate::Message for SMSG_UPDATE_COMBO_POINTS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_UPDATE_COMBO_POINTS {}
+impl crate::tbc::ServerMessage for SMSG_UPDATE_COMBO_POINTS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_UPDATE_COMBO_POINTS {}
+impl crate::wrath::ServerMessage for SMSG_UPDATE_COMBO_POINTS {}
 
 impl SMSG_UPDATE_COMBO_POINTS {
     pub(crate) fn size(&self) -> usize {

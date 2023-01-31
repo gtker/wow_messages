@@ -50,11 +50,11 @@ impl crate::Message for SMSG_ITEM_COOLDOWN {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ITEM_COOLDOWN {}
+impl crate::vanilla::ServerMessage for SMSG_ITEM_COOLDOWN {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ITEM_COOLDOWN {}
+impl crate::tbc::ServerMessage for SMSG_ITEM_COOLDOWN {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ITEM_COOLDOWN {}
+impl crate::wrath::ServerMessage for SMSG_ITEM_COOLDOWN {}
 

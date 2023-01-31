@@ -51,13 +51,13 @@ impl crate::Message for SMSG_WARDEN_DATA {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_WARDEN_DATA {}
+impl crate::vanilla::ServerMessage for SMSG_WARDEN_DATA {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_WARDEN_DATA {}
+impl crate::tbc::ServerMessage for SMSG_WARDEN_DATA {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_WARDEN_DATA {}
+impl crate::wrath::ServerMessage for SMSG_WARDEN_DATA {}
 
 impl SMSG_WARDEN_DATA {
     pub(crate) fn size(&self) -> usize {

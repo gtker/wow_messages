@@ -31,5 +31,5 @@ impl crate::Message for CMSG_CALENDAR_GET_CALENDAR {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CALENDAR_GET_CALENDAR {}
+impl crate::wrath::ClientMessage for CMSG_CALENDAR_GET_CALENDAR {}
 

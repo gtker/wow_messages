@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::GuildCommand;
-use crate::world::vanilla::GuildCommandResult;
+use crate::vanilla::GuildCommand;
+use crate::vanilla::GuildCommandResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_GUILD_COMMAND_RESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GUILD_COMMAND_RESULT {}
+impl crate::vanilla::ServerMessage for SMSG_GUILD_COMMAND_RESULT {}
 
 impl SMSG_GUILD_COMMAND_RESULT {
     pub(crate) fn size(&self) -> usize {

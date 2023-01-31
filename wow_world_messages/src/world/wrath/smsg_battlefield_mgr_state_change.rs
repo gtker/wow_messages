@@ -51,5 +51,5 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_STATE_CHANGE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_STATE_CHANGE {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_STATE_CHANGE {}
 

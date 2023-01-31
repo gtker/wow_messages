@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::EncounterFrame;
+use crate::wrath::EncounterFrame;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -204,7 +204,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {}
+impl crate::wrath::ServerMessage for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {}
 
 impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
     pub(crate) fn size(&self) -> usize {

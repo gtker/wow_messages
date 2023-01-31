@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::pet_spell_cooldown_vanilla_tbc::PetSpellCooldown;
-use crate::world::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
-use crate::world::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
-use crate::world::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
+use crate::shared::pet_spell_cooldown_vanilla_tbc::PetSpellCooldown;
+use crate::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
+use crate::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
+use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -159,10 +159,10 @@ impl crate::Message for SMSG_PET_SPELLS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PET_SPELLS {}
+impl crate::vanilla::ServerMessage for SMSG_PET_SPELLS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PET_SPELLS {}
+impl crate::tbc::ServerMessage for SMSG_PET_SPELLS {}
 
 impl SMSG_PET_SPELLS {
     pub(crate) fn size(&self) -> usize {

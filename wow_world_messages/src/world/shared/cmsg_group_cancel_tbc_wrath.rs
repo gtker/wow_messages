@@ -31,8 +31,8 @@ impl crate::Message for CMSG_GROUP_CANCEL {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GROUP_CANCEL {}
+impl crate::tbc::ClientMessage for CMSG_GROUP_CANCEL {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GROUP_CANCEL {}
+impl crate::wrath::ClientMessage for CMSG_GROUP_CANCEL {}
 

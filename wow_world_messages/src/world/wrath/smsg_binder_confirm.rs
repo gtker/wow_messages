@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Area;
+use crate::wrath::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -53,5 +53,5 @@ impl crate::Message for SMSG_BINDER_CONFIRM {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BINDER_CONFIRM {}
+impl crate::wrath::ServerMessage for SMSG_BINDER_CONFIRM {}
 

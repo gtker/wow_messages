@@ -31,5 +31,5 @@ impl crate::Message for CMSG_FRIEND_LIST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_FRIEND_LIST {}
+impl crate::vanilla::ClientMessage for CMSG_FRIEND_LIST {}
 

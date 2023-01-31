@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -53,10 +53,10 @@ impl crate::Message for MSG_MOVE_WATER_WALK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_MOVE_WATER_WALK {}
+impl crate::vanilla::ClientMessage for MSG_MOVE_WATER_WALK {}
 
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_MOVE_WATER_WALK {}
+impl crate::vanilla::ServerMessage for MSG_MOVE_WATER_WALK {}
 
 impl MSG_MOVE_WATER_WALK {
     pub(crate) fn size(&self) -> usize {

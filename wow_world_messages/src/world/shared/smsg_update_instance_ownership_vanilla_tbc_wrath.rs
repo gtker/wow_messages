@@ -39,11 +39,11 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
+impl crate::vanilla::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
+impl crate::tbc::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
+impl crate::wrath::ServerMessage for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 

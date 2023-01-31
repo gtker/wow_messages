@@ -51,7 +51,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SEND_MAIL_RESULT {}
+impl crate::vanilla::ServerMessage for SMSG_SEND_MAIL_RESULT {}
 
 impl SMSG_SEND_MAIL_RESULT {
     pub(crate) fn size(&self) -> usize {

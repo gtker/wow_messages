@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::NpcTextUpdateEmote;
-use crate::world::tbc::Language;
+use crate::tbc::NpcTextUpdateEmote;
+use crate::tbc::Language;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

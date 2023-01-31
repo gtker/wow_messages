@@ -41,11 +41,11 @@ impl crate::Message for CMSG_QUESTGIVER_HELLO {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_QUESTGIVER_HELLO {}
+impl crate::vanilla::ClientMessage for CMSG_QUESTGIVER_HELLO {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_QUESTGIVER_HELLO {}
+impl crate::tbc::ClientMessage for CMSG_QUESTGIVER_HELLO {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_QUESTGIVER_HELLO {}
+impl crate::wrath::ClientMessage for CMSG_QUESTGIVER_HELLO {}
 

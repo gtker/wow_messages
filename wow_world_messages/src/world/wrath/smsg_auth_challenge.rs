@@ -66,5 +66,5 @@ impl crate::Message for SMSG_AUTH_CHALLENGE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_AUTH_CHALLENGE {}
+impl crate::wrath::ServerMessage for SMSG_AUTH_CHALLENGE {}
 

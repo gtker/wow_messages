@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -53,7 +53,7 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {}
+impl crate::vanilla::ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {}
 
 impl CMSG_MOVE_NOT_ACTIVE_MOVER {
     pub(crate) fn size(&self) -> usize {

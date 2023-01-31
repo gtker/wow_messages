@@ -33,5 +33,5 @@ impl crate::Message for SMSG_TOGGLE_XP_GAIN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TOGGLE_XP_GAIN {}
+impl crate::wrath::ServerMessage for SMSG_TOGGLE_XP_GAIN {}
 

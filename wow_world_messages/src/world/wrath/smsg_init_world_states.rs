@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::WorldState;
-use crate::world::wrath::Area;
-use crate::world::wrath::Map;
+use crate::wrath::WorldState;
+use crate::wrath::Area;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -84,7 +84,7 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_INIT_WORLD_STATES {}
+impl crate::wrath::ServerMessage for SMSG_INIT_WORLD_STATES {}
 
 impl SMSG_INIT_WORLD_STATES {
     pub(crate) fn size(&self) -> usize {

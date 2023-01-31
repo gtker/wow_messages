@@ -65,7 +65,7 @@ impl crate::Message for CMSG_GUILD_RANK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GUILD_RANK {}
+impl crate::vanilla::ClientMessage for CMSG_GUILD_RANK {}
 
 impl CMSG_GUILD_RANK {
     pub(crate) fn size(&self) -> usize {

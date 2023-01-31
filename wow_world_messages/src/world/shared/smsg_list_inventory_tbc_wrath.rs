@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
+use crate::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -67,10 +67,10 @@ impl crate::Message for SMSG_LIST_INVENTORY {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LIST_INVENTORY {}
+impl crate::tbc::ServerMessage for SMSG_LIST_INVENTORY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LIST_INVENTORY {}
+impl crate::wrath::ServerMessage for SMSG_LIST_INVENTORY {}
 
 impl SMSG_LIST_INVENTORY {
     pub(crate) fn size(&self) -> usize {

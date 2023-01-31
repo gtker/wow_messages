@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::petition_result_tbc_wrath::PetitionResult;
+use crate::shared::petition_result_tbc_wrath::PetitionResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,8 +41,8 @@ impl crate::Message for SMSG_TURN_IN_PETITION_RESULTS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TURN_IN_PETITION_RESULTS {}
+impl crate::tbc::ServerMessage for SMSG_TURN_IN_PETITION_RESULTS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TURN_IN_PETITION_RESULTS {}
+impl crate::wrath::ServerMessage for SMSG_TURN_IN_PETITION_RESULTS {}
 

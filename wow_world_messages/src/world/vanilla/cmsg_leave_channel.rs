@@ -47,7 +47,7 @@ impl crate::Message for CMSG_LEAVE_CHANNEL {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_LEAVE_CHANNEL {}
+impl crate::vanilla::ClientMessage for CMSG_LEAVE_CHANNEL {}
 
 impl CMSG_LEAVE_CHANNEL {
     pub(crate) fn size(&self) -> usize {

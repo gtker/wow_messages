@@ -43,13 +43,13 @@ impl crate::Message for SMSG_SPLINE_MOVE_SET_HOVER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPLINE_MOVE_SET_HOVER {}
+impl crate::vanilla::ServerMessage for SMSG_SPLINE_MOVE_SET_HOVER {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPLINE_MOVE_SET_HOVER {}
+impl crate::tbc::ServerMessage for SMSG_SPLINE_MOVE_SET_HOVER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPLINE_MOVE_SET_HOVER {}
+impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_SET_HOVER {}
 
 impl SMSG_SPLINE_MOVE_SET_HOVER {
     pub(crate) fn size(&self) -> usize {

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Area;
+use crate::tbc::Area;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -45,5 +45,5 @@ impl crate::Message for CMSG_ZONEUPDATE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ZONEUPDATE {}
+impl crate::tbc::ClientMessage for CMSG_ZONEUPDATE {}
 

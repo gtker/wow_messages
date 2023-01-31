@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ChatType;
-use crate::world::vanilla::Language;
+use crate::vanilla::ChatType;
+use crate::vanilla::Language;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -185,7 +185,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MESSAGECHAT {}
+impl crate::vanilla::ClientMessage for CMSG_MESSAGECHAT {}
 
 impl CMSG_MESSAGECHAT {
     pub(crate) fn size(&self) -> usize {
@@ -411,8 +411,8 @@ mod test {
     use super::CMSG_MESSAGECHAT;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 37] = [ 0x00, 0x23, 0x95, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x07, 0x00, 0x00, 0x00, 0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73,

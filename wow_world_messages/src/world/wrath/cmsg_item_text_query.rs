@@ -41,5 +41,5 @@ impl crate::Message for CMSG_ITEM_TEXT_QUERY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ITEM_TEXT_QUERY {}
+impl crate::wrath::ClientMessage for CMSG_ITEM_TEXT_QUERY {}
 

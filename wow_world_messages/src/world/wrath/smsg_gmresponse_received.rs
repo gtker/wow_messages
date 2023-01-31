@@ -82,7 +82,7 @@ impl crate::Message for SMSG_GMRESPONSE_RECEIVED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GMRESPONSE_RECEIVED {}
+impl crate::wrath::ServerMessage for SMSG_GMRESPONSE_RECEIVED {}
 
 impl SMSG_GMRESPONSE_RECEIVED {
     pub(crate) fn size(&self) -> usize {

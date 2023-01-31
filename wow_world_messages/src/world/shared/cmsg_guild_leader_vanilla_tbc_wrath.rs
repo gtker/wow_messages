@@ -47,13 +47,13 @@ impl crate::Message for CMSG_GUILD_LEADER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GUILD_LEADER {}
+impl crate::vanilla::ClientMessage for CMSG_GUILD_LEADER {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_LEADER {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_LEADER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_LEADER {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_LEADER {}
 
 impl CMSG_GUILD_LEADER {
     pub(crate) fn size(&self) -> usize {

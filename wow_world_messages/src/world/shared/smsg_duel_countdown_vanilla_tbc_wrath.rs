@@ -40,11 +40,11 @@ impl crate::Message for SMSG_DUEL_COUNTDOWN {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_DUEL_COUNTDOWN {}
+impl crate::vanilla::ServerMessage for SMSG_DUEL_COUNTDOWN {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_DUEL_COUNTDOWN {}
+impl crate::tbc::ServerMessage for SMSG_DUEL_COUNTDOWN {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_DUEL_COUNTDOWN {}
+impl crate::wrath::ServerMessage for SMSG_DUEL_COUNTDOWN {}
 

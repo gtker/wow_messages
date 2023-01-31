@@ -47,10 +47,10 @@ impl crate::Message for SMSG_GUILD_DECLINE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GUILD_DECLINE {}
+impl crate::tbc::ServerMessage for SMSG_GUILD_DECLINE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GUILD_DECLINE {}
+impl crate::wrath::ServerMessage for SMSG_GUILD_DECLINE {}
 
 impl SMSG_GUILD_DECLINE {
     pub(crate) fn size(&self) -> usize {

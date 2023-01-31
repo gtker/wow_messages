@@ -31,5 +31,5 @@ impl crate::Message for CMSG_LFG_SET_AUTOJOIN {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_LFG_SET_AUTOJOIN {}
+impl crate::tbc::ClientMessage for CMSG_LFG_SET_AUTOJOIN {}
 

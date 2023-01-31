@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Area;
-use crate::world::wrath::Class;
-use crate::world::wrath::Race;
-use crate::world::wrath::LfgUpdateFlag;
+use crate::wrath::Area;
+use crate::wrath::Class;
+use crate::wrath::Race;
+use crate::wrath::LfgUpdateFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

@@ -31,5 +31,5 @@ impl crate::Message for SMSG_CALENDAR_CLEAR_PENDING_ACTION {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_CLEAR_PENDING_ACTION {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_CLEAR_PENDING_ACTION {}
 

@@ -3,7 +3,7 @@ use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent by client after pressing 'Logout' or 'Exit Game'.
-/// Server should reply with [`SMSG_LOGOUT_RESPONSE`](crate::world::vanilla::SMSG_LOGOUT_RESPONSE).
+/// Server should reply with [`SMSG_LOGOUT_RESPONSE`](crate::vanilla::SMSG_LOGOUT_RESPONSE).
 ///
 /// Spamming the 'Logout' and 'Exit Game' buttons does not send multiple messages.
 ///
@@ -36,21 +36,21 @@ impl crate::Message for CMSG_LOGOUT_REQUEST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_LOGOUT_REQUEST {}
+impl crate::vanilla::ClientMessage for CMSG_LOGOUT_REQUEST {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_LOGOUT_REQUEST {}
+impl crate::tbc::ClientMessage for CMSG_LOGOUT_REQUEST {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LOGOUT_REQUEST {}
+impl crate::wrath::ClientMessage for CMSG_LOGOUT_REQUEST {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::CMSG_LOGOUT_REQUEST;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x4B, 0x00, 0x00, 0x00, ];
 
@@ -130,8 +130,8 @@ mod test_tbc {
     use super::CMSG_LOGOUT_REQUEST;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x4B, 0x00, 0x00, 0x00, ];
 
@@ -211,8 +211,8 @@ mod test_wrath {
     use super::CMSG_LOGOUT_REQUEST;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ClientOpcodeMessage;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x4B, 0x00, 0x00, 0x00, ];
 

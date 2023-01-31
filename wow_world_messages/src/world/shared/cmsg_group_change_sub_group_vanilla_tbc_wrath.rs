@@ -56,13 +56,13 @@ impl crate::Message for CMSG_GROUP_CHANGE_SUB_GROUP {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {}
+impl crate::vanilla::ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {}
+impl crate::tbc::ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {}
+impl crate::wrath::ClientMessage for CMSG_GROUP_CHANGE_SUB_GROUP {}
 
 impl CMSG_GROUP_CHANGE_SUB_GROUP {
     pub(crate) fn size(&self) -> usize {

@@ -47,13 +47,13 @@ impl crate::Message for CMSG_GUILD_REMOVE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GUILD_REMOVE {}
+impl crate::vanilla::ClientMessage for CMSG_GUILD_REMOVE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_REMOVE {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_REMOVE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_REMOVE {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_REMOVE {}
 
 impl CMSG_GUILD_REMOVE {
     pub(crate) fn size(&self) -> usize {

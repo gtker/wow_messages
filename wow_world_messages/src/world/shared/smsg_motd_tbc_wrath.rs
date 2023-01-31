@@ -46,10 +46,10 @@ impl crate::Message for SMSG_MOTD {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_MOTD {}
+impl crate::tbc::ServerMessage for SMSG_MOTD {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MOTD {}
+impl crate::wrath::ServerMessage for SMSG_MOTD {}
 
 impl SMSG_MOTD {
     pub(crate) fn size(&self) -> usize {

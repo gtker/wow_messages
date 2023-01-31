@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::LfgData;
+use crate::tbc::LfgData;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for CMSG_SET_LOOKING_FOR_MORE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_LOOKING_FOR_MORE {}
+impl crate::tbc::ClientMessage for CMSG_SET_LOOKING_FOR_MORE {}
 

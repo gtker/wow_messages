@@ -40,5 +40,5 @@ impl crate::Message for SMSG_CLIENTCACHE_VERSION {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CLIENTCACHE_VERSION {}
+impl crate::wrath::ServerMessage for SMSG_CLIENTCACHE_VERSION {}
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::buyback_slot_vanilla_tbc_wrath::BuybackSlot;
+use crate::shared::buyback_slot_vanilla_tbc_wrath::BuybackSlot;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,11 +51,11 @@ impl crate::Message for CMSG_BUYBACK_ITEM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_BUYBACK_ITEM {}
+impl crate::vanilla::ClientMessage for CMSG_BUYBACK_ITEM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_BUYBACK_ITEM {}
+impl crate::tbc::ClientMessage for CMSG_BUYBACK_ITEM {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BUYBACK_ITEM {}
+impl crate::wrath::ClientMessage for CMSG_BUYBACK_ITEM {}
 

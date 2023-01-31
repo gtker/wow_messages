@@ -74,7 +74,7 @@ impl crate::Message for SMSG_GUILD_INFO {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GUILD_INFO {}
+impl crate::wrath::ServerMessage for SMSG_GUILD_INFO {}
 
 impl SMSG_GUILD_INFO {
     pub(crate) fn size(&self) -> usize {

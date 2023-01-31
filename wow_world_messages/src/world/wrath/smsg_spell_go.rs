@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::SpellCastTargets;
-use crate::world::wrath::Power;
-use crate::world::wrath::GameobjectCastFlags;
+use crate::wrath::SpellCastTargets;
+use crate::wrath::Power;
+use crate::wrath::GameobjectCastFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -280,7 +280,7 @@ impl crate::Message for SMSG_SPELL_GO {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELL_GO {}
+impl crate::wrath::ServerMessage for SMSG_SPELL_GO {}
 
 impl SMSG_SPELL_GO {
     pub(crate) fn size(&self) -> usize {

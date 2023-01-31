@@ -41,5 +41,5 @@ impl crate::Message for CMSG_CONTROLLER_EJECT_PASSENGER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CONTROLLER_EJECT_PASSENGER {}
+impl crate::wrath::ClientMessage for CMSG_CONTROLLER_EJECT_PASSENGER {}
 

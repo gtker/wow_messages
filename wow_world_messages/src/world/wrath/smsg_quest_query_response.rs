@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::QuestItemRequirement;
-use crate::world::wrath::QuestItemReward;
-use crate::world::wrath::QuestObjective;
-use crate::world::wrath::Vector2d;
+use crate::wrath::QuestItemRequirement;
+use crate::wrath::QuestItemReward;
+use crate::wrath::QuestObjective;
+use crate::wrath::Vector2d;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -496,7 +496,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUEST_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_QUEST_QUERY_RESPONSE {}
 
 impl SMSG_QUEST_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

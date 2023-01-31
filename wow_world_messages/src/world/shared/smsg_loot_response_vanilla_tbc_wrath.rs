@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::loot_item_vanilla_tbc_wrath::LootItem;
-use crate::world::shared::loot_method_vanilla_tbc_wrath::LootMethod;
+use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
+use crate::shared::loot_method_vanilla_tbc_wrath::LootMethod;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -84,13 +84,13 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOOT_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_LOOT_RESPONSE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOOT_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_LOOT_RESPONSE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_RESPONSE {}
 
 impl SMSG_LOOT_RESPONSE {
     pub(crate) fn size(&self) -> usize {

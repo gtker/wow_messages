@@ -41,5 +41,5 @@ impl crate::Message for CMSG_DISMISS_CRITTER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_DISMISS_CRITTER {}
+impl crate::wrath::ClientMessage for CMSG_DISMISS_CRITTER {}
 

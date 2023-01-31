@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::AuraType;
-use crate::world::tbc::SpellSchool;
+use crate::tbc::AuraType;
+use crate::tbc::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

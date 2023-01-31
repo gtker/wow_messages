@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::SpellSchool;
-use crate::world::wrath::HitInfo;
+use crate::wrath::SpellSchool;
+use crate::wrath::HitInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -158,7 +158,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {}
+impl crate::wrath::ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {}
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
     pub(crate) fn size(&self) -> usize {

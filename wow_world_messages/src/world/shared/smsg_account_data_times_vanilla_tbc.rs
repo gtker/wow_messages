@@ -3,8 +3,8 @@ use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// The purpose of this message is unknown, but it is required in order to prevent the chat box from being a white rectangle that is unable to show text.
-/// Sending this causes the client to send [`CMSG_UPDATE_ACCOUNT_DATA`](crate::world::vanilla::CMSG_UPDATE_ACCOUNT_DATA) messages.
-/// [`CMSG_UPDATE_ACCOUNT_DATA`](crate::world::vanilla::CMSG_UPDATE_ACCOUNT_DATA) and [`CMSG_REQUEST_ACCOUNT_DATA`](crate::world::vanilla::CMSG_REQUEST_ACCOUNT_DATA) act on blocks numbered 0 to 7. The 32 u32s in this message could possibly actually be 8 sets of u8`16` but it could also be a variable sized message.
+/// Sending this causes the client to send [`CMSG_UPDATE_ACCOUNT_DATA`](crate::vanilla::CMSG_UPDATE_ACCOUNT_DATA) messages.
+/// [`CMSG_UPDATE_ACCOUNT_DATA`](crate::vanilla::CMSG_UPDATE_ACCOUNT_DATA) and [`CMSG_REQUEST_ACCOUNT_DATA`](crate::vanilla::CMSG_REQUEST_ACCOUNT_DATA) act on blocks numbered 0 to 7. The 32 u32s in this message could possibly actually be 8 sets of u8`16` but it could also be a variable sized message.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm#L1):
 /// ```text
@@ -51,18 +51,18 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
+impl crate::vanilla::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
+impl crate::tbc::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::SMSG_ACCOUNT_DATA_TIMES;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 132] = [ 0x00, 0x82, 0x09, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -165,8 +165,8 @@ mod test_tbc {
     use super::SMSG_ACCOUNT_DATA_TIMES;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 132] = [ 0x00, 0x82, 0x09, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

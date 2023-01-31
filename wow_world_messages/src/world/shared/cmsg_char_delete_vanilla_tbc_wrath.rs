@@ -3,7 +3,7 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Command to delete a character from the clients account. Can be sent after the client has received [`SMSG_CHAR_ENUM`](crate::world::vanilla::SMSG_CHAR_ENUM).
+/// Command to delete a character from the clients account. Can be sent after the client has received [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM).
 ///
 /// Sent after the client has confirmed the character deletion.
 ///
@@ -45,22 +45,22 @@ impl crate::Message for CMSG_CHAR_DELETE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHAR_DELETE {}
+impl crate::vanilla::ClientMessage for CMSG_CHAR_DELETE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHAR_DELETE {}
+impl crate::tbc::ClientMessage for CMSG_CHAR_DELETE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHAR_DELETE {}
+impl crate::wrath::ClientMessage for CMSG_CHAR_DELETE {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::CMSG_CHAR_DELETE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x38, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, ];
@@ -147,9 +147,9 @@ mod test_tbc {
     use super::CMSG_CHAR_DELETE;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ClientOpcodeMessage;
+    use crate::tbc::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x38, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, ];
@@ -236,9 +236,9 @@ mod test_wrath {
     use super::CMSG_CHAR_DELETE;
     use super::*;
     use super::super::*;
-    use crate::world::wrath::opcodes::ClientOpcodeMessage;
+    use crate::wrath::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::wrath::{ClientMessage, ServerMessage};
+    use crate::wrath::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x38, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, ];

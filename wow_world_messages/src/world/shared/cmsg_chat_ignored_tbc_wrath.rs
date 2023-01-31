@@ -52,8 +52,8 @@ impl crate::Message for CMSG_CHAT_IGNORED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHAT_IGNORED {}
+impl crate::tbc::ClientMessage for CMSG_CHAT_IGNORED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHAT_IGNORED {}
+impl crate::wrath::ClientMessage for CMSG_CHAT_IGNORED {}
 

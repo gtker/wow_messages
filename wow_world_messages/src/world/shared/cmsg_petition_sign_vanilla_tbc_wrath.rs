@@ -50,11 +50,11 @@ impl crate::Message for CMSG_PETITION_SIGN {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PETITION_SIGN {}
+impl crate::vanilla::ClientMessage for CMSG_PETITION_SIGN {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PETITION_SIGN {}
+impl crate::tbc::ClientMessage for CMSG_PETITION_SIGN {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PETITION_SIGN {}
+impl crate::wrath::ClientMessage for CMSG_PETITION_SIGN {}
 

@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::AuraMask;
-use crate::world::wrath::Area;
-use crate::world::wrath::Power;
-use crate::world::wrath::GroupMemberOnlineStatus;
-use crate::world::wrath::GroupUpdateFlags;
+use crate::wrath::AuraMask;
+use crate::wrath::Area;
+use crate::wrath::Power;
+use crate::wrath::GroupMemberOnlineStatus;
+use crate::wrath::GroupUpdateFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -514,7 +514,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PARTY_MEMBER_STATS {}
+impl crate::wrath::ServerMessage for SMSG_PARTY_MEMBER_STATS {}
 
 impl SMSG_PARTY_MEMBER_STATS {
     pub(crate) fn size(&self) -> usize {

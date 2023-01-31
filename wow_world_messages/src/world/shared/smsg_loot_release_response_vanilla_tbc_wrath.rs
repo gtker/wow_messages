@@ -52,11 +52,11 @@ impl crate::Message for SMSG_LOOT_RELEASE_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOOT_RELEASE_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_LOOT_RELEASE_RESPONSE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOOT_RELEASE_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_LOOT_RELEASE_RESPONSE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOOT_RELEASE_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_LOOT_RELEASE_RESPONSE {}
 

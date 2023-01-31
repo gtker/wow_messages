@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::LfgPlayer;
-use crate::world::tbc::LfgType;
+use crate::tbc::LfgPlayer;
+use crate::tbc::LfgType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -85,7 +85,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_LOOKING_FOR_GROUP_Server {}
+impl crate::tbc::ServerMessage for MSG_LOOKING_FOR_GROUP_Server {}
 
 impl MSG_LOOKING_FOR_GROUP_Server {
     pub(crate) fn size(&self) -> usize {

@@ -61,7 +61,7 @@ impl crate::Message for CMSG_JOIN_CHANNEL {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_JOIN_CHANNEL {}
+impl crate::vanilla::ClientMessage for CMSG_JOIN_CHANNEL {}
 
 impl CMSG_JOIN_CHANNEL {
     pub(crate) fn size(&self) -> usize {

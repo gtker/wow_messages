@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -53,7 +53,7 @@ impl crate::Message for MSG_MOVE_START_PITCH_UP_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_MOVE_START_PITCH_UP_Server {}
+impl crate::vanilla::ServerMessage for MSG_MOVE_START_PITCH_UP_Server {}
 
 impl MSG_MOVE_START_PITCH_UP_Server {
     pub(crate) fn size(&self) -> usize {

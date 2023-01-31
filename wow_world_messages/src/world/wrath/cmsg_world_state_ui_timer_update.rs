@@ -31,5 +31,5 @@ impl crate::Message for CMSG_WORLD_STATE_UI_TIMER_UPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_WORLD_STATE_UI_TIMER_UPDATE {}
+impl crate::wrath::ClientMessage for CMSG_WORLD_STATE_UI_TIMER_UPDATE {}
 

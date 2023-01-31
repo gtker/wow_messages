@@ -52,10 +52,10 @@ impl crate::Message for SMSG_MOVE_SET_CAN_FLY {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_MOVE_SET_CAN_FLY {}
+impl crate::tbc::ServerMessage for SMSG_MOVE_SET_CAN_FLY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_MOVE_SET_CAN_FLY {}
+impl crate::wrath::ServerMessage for SMSG_MOVE_SET_CAN_FLY {}
 
 impl SMSG_MOVE_SET_CAN_FLY {
     pub(crate) fn size(&self) -> usize {

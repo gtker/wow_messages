@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::NewItemChatAlert;
-use crate::world::vanilla::NewItemCreationType;
-use crate::world::vanilla::NewItemSource;
+use crate::vanilla::NewItemChatAlert;
+use crate::vanilla::NewItemCreationType;
+use crate::vanilla::NewItemSource;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -131,5 +131,5 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
+impl crate::vanilla::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 

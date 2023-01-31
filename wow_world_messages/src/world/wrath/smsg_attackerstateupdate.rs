@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::DamageInfo;
-use crate::world::wrath::HitInfo;
-use crate::world::wrath::VictimState;
+use crate::wrath::DamageInfo;
+use crate::wrath::HitInfo;
+use crate::wrath::VictimState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -324,7 +324,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
+impl crate::wrath::ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
 
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn size(&self) -> usize {

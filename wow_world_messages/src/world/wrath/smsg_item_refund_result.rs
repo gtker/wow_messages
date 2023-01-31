@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::ItemRefundExtra;
-use crate::world::wrath::ItemRefundResult;
+use crate::wrath::ItemRefundExtra;
+use crate::wrath::ItemRefundResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -112,7 +112,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ITEM_REFUND_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_ITEM_REFUND_RESULT {}
 
 impl SMSG_ITEM_REFUND_RESULT {
     pub(crate) fn size(&self) -> usize {

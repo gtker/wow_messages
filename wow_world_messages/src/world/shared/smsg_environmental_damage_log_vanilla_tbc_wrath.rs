@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
+use crate::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -78,11 +78,11 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ENVIRONMENTAL_DAMAGE_LOG {}
+impl crate::vanilla::ServerMessage for SMSG_ENVIRONMENTAL_DAMAGE_LOG {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ENVIRONMENTAL_DAMAGE_LOG {}
+impl crate::tbc::ServerMessage for SMSG_ENVIRONMENTAL_DAMAGE_LOG {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ENVIRONMENTAL_DAMAGE_LOG {}
+impl crate::wrath::ServerMessage for SMSG_ENVIRONMENTAL_DAMAGE_LOG {}
 

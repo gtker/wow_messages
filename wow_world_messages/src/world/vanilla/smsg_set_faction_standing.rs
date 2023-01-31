@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Faction;
+use crate::vanilla::Faction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SET_FACTION_STANDING {}
+impl crate::vanilla::ServerMessage for SMSG_SET_FACTION_STANDING {}
 
 impl SMSG_SET_FACTION_STANDING {
     pub(crate) fn size(&self) -> usize {

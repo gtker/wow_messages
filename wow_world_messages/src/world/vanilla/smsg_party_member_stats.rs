@@ -1,10 +1,10 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::AuraMask;
-use crate::world::vanilla::Area;
-use crate::world::vanilla::Power;
-use crate::world::vanilla::GroupMemberOnlineStatus;
-use crate::world::vanilla::GroupUpdateFlags;
+use crate::vanilla::AuraMask;
+use crate::vanilla::Area;
+use crate::vanilla::Power;
+use crate::vanilla::GroupMemberOnlineStatus;
+use crate::vanilla::GroupUpdateFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -514,7 +514,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PARTY_MEMBER_STATS {}
+impl crate::vanilla::ServerMessage for SMSG_PARTY_MEMBER_STATS {}
 
 impl SMSG_PARTY_MEMBER_STATS {
     pub(crate) fn size(&self) -> usize {

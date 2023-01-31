@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::BarberShopResult;
+use crate::wrath::BarberShopResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for SMSG_BARBER_SHOP_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BARBER_SHOP_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_BARBER_SHOP_RESULT {}
 

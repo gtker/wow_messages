@@ -31,5 +31,5 @@ impl crate::Message for SMSG_LFG_LEADER_IS_LFM {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LFG_LEADER_IS_LFM {}
+impl crate::tbc::ServerMessage for SMSG_LFG_LEADER_IS_LFM {}
 

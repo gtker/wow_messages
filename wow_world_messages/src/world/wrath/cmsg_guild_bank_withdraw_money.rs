@@ -50,5 +50,5 @@ impl crate::Message for CMSG_GUILD_BANK_WITHDRAW_MONEY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_BANK_WITHDRAW_MONEY {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_BANK_WITHDRAW_MONEY {}
 

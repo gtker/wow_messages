@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Map;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -72,5 +72,5 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BATTLEMASTER_JOIN {}
+impl crate::wrath::ClientMessage for CMSG_BATTLEMASTER_JOIN {}
 

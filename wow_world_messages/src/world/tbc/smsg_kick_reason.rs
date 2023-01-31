@@ -58,7 +58,7 @@ impl crate::Message for SMSG_KICK_REASON {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_KICK_REASON {}
+impl crate::tbc::ServerMessage for SMSG_KICK_REASON {}
 
 impl SMSG_KICK_REASON {
     pub(crate) fn size(&self) -> usize {

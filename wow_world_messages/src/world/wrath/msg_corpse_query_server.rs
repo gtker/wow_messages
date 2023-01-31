@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Vector3d;
-use crate::world::wrath::CorpseQueryResult;
-use crate::world::wrath::Map;
+use crate::wrath::Vector3d;
+use crate::wrath::CorpseQueryResult;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -98,7 +98,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_CORPSE_QUERY_Server {}
+impl crate::wrath::ServerMessage for MSG_CORPSE_QUERY_Server {}
 
 impl MSG_CORPSE_QUERY_Server {
     pub(crate) fn size(&self) -> usize {

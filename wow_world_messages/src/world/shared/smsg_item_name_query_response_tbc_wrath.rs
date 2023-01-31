@@ -66,10 +66,10 @@ impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ITEM_NAME_QUERY_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_ITEM_NAME_QUERY_RESPONSE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ITEM_NAME_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_ITEM_NAME_QUERY_RESPONSE {}
 
 impl SMSG_ITEM_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

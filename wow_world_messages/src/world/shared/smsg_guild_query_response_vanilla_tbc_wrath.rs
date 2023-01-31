@@ -118,13 +118,13 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_GUILD_QUERY_RESPONSE {}
 
 impl SMSG_GUILD_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

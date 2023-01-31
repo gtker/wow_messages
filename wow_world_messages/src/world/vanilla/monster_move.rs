@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::Vector3d;
-use crate::world::vanilla::MonsterMoveType;
-use crate::world::vanilla::SplineFlag;
+use crate::vanilla::Vector3d;
+use crate::vanilla::MonsterMoveType;
+use crate::vanilla::SplineFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::world_state_vanilla_tbc_wrath::WorldState;
+use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,11 +41,11 @@ impl crate::Message for SMSG_UPDATE_WORLD_STATE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
+impl crate::vanilla::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
+impl crate::tbc::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
+impl crate::wrath::ServerMessage for SMSG_UPDATE_WORLD_STATE {}
 

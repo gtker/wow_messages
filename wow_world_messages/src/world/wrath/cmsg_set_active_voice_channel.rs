@@ -56,7 +56,7 @@ impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SET_ACTIVE_VOICE_CHANNEL {}
+impl crate::wrath::ClientMessage for CMSG_SET_ACTIVE_VOICE_CHANNEL {}
 
 impl CMSG_SET_ACTIVE_VOICE_CHANNEL {
     pub(crate) fn size(&self) -> usize {

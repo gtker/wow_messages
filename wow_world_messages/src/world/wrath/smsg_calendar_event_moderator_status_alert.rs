@@ -69,7 +69,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {}
 
 impl SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
     pub(crate) fn size(&self) -> usize {

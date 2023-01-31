@@ -31,5 +31,5 @@ impl crate::Message for CMSG_CLEAR_LOOKING_FOR_GROUP {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CLEAR_LOOKING_FOR_GROUP {}
+impl crate::tbc::ClientMessage for CMSG_CLEAR_LOOKING_FOR_GROUP {}
 

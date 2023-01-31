@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
+use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,14 +51,14 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_QUEST_PUSH_RESULT {}
+impl crate::vanilla::ClientMessage for MSG_QUEST_PUSH_RESULT {}
 
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_QUEST_PUSH_RESULT {}
+impl crate::vanilla::ServerMessage for MSG_QUEST_PUSH_RESULT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_QUEST_PUSH_RESULT {}
+impl crate::tbc::ClientMessage for MSG_QUEST_PUSH_RESULT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_QUEST_PUSH_RESULT {}
+impl crate::tbc::ServerMessage for MSG_QUEST_PUSH_RESULT {}
 

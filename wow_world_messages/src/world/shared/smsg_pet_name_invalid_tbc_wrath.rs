@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
-use crate::world::shared::pet_name_invalid_reason_tbc_wrath::PetNameInvalidReason;
+use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
+use crate::shared::pet_name_invalid_reason_tbc_wrath::PetNameInvalidReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -103,10 +103,10 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PET_NAME_INVALID {}
+impl crate::tbc::ServerMessage for SMSG_PET_NAME_INVALID {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PET_NAME_INVALID {}
+impl crate::wrath::ServerMessage for SMSG_PET_NAME_INVALID {}
 
 impl SMSG_PET_NAME_INVALID {
     pub(crate) fn size(&self) -> usize {

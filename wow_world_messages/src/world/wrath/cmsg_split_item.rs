@@ -76,5 +76,5 @@ impl crate::Message for CMSG_SPLIT_ITEM {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_SPLIT_ITEM {}
+impl crate::wrath::ClientMessage for CMSG_SPLIT_ITEM {}
 

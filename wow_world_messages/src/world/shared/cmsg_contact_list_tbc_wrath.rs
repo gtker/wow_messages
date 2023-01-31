@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_CONTACT_LIST {
-    /// Sent back in [`SMSG_CONTACT_LIST`](crate::world::tbc::SMSG_CONTACT_LIST).
+    /// Sent back in [`SMSG_CONTACT_LIST`](crate::tbc::SMSG_CONTACT_LIST).
     ///
     pub flags: u32,
 }
@@ -42,8 +42,8 @@ impl crate::Message for CMSG_CONTACT_LIST {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CONTACT_LIST {}
+impl crate::tbc::ClientMessage for CMSG_CONTACT_LIST {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CONTACT_LIST {}
+impl crate::wrath::ClientMessage for CMSG_CONTACT_LIST {}
 

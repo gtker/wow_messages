@@ -1,4 +1,6 @@
-use crate::file_utils::{get_base_shared_path, get_import_path, get_world_shared_path};
+use crate::file_utils::{
+    get_base_internal_shared_path, get_base_shared_path, get_import_path, get_world_shared_path,
+};
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
@@ -72,7 +74,9 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         };
 
         let module_name = if e.tags().has_world_version() && e.tags().shared() {
-            if c.tags().is_in_base() {
+            if c.tags().is_in_base() && e.tags().is_in_base() {
+                get_base_internal_shared_path(c.name(), c.tags())
+            } else if c.tags().is_in_base() {
                 get_base_shared_path(c.name(), c.tags())
             } else {
                 get_world_shared_path(c.name(), c.tags())

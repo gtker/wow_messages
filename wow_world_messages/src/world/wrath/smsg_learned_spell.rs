@@ -51,5 +51,5 @@ impl crate::Message for SMSG_LEARNED_SPELL {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LEARNED_SPELL {}
+impl crate::wrath::ServerMessage for SMSG_LEARNED_SPELL {}
 

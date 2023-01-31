@@ -47,13 +47,13 @@ impl crate::Message for CMSG_GROUP_UNINVITE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GROUP_UNINVITE {}
+impl crate::vanilla::ClientMessage for CMSG_GROUP_UNINVITE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GROUP_UNINVITE {}
+impl crate::tbc::ClientMessage for CMSG_GROUP_UNINVITE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GROUP_UNINVITE {}
+impl crate::wrath::ClientMessage for CMSG_GROUP_UNINVITE {}
 
 impl CMSG_GROUP_UNINVITE {
     pub(crate) fn size(&self) -> usize {

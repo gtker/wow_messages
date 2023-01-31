@@ -80,7 +80,7 @@ impl crate::Message for CMSG_GUILD_BANK_UPDATE_TAB {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_BANK_UPDATE_TAB {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_BANK_UPDATE_TAB {}
 
 impl CMSG_GUILD_BANK_UPDATE_TAB {
     pub(crate) fn size(&self) -> usize {

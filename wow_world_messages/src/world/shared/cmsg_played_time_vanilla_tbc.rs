@@ -31,8 +31,8 @@ impl crate::Message for CMSG_PLAYED_TIME {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PLAYED_TIME {}
+impl crate::vanilla::ClientMessage for CMSG_PLAYED_TIME {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PLAYED_TIME {}
+impl crate::tbc::ClientMessage for CMSG_PLAYED_TIME {}
 

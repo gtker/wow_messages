@@ -11,7 +11,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct CMSG_TIME_SYNC_RESP {
     /// Can be used to check if the client is still properly in sync
-    /// This should be the same as the counter sent in [`SMSG_TIME_SYNC_REQ`](crate::world::tbc::SMSG_TIME_SYNC_REQ).
+    /// This should be the same as the counter sent in [`SMSG_TIME_SYNC_REQ`](crate::tbc::SMSG_TIME_SYNC_REQ).
     ///
     pub time_sync: u32,
     /// You can check this against expected values to estimate client latency
@@ -54,8 +54,8 @@ impl crate::Message for CMSG_TIME_SYNC_RESP {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_TIME_SYNC_RESP {}
+impl crate::tbc::ClientMessage for CMSG_TIME_SYNC_RESP {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_TIME_SYNC_RESP {}
+impl crate::wrath::ClientMessage for CMSG_TIME_SYNC_RESP {}
 

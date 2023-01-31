@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::NpcTextUpdateEmote;
-use crate::world::wrath::Language;
+use crate::wrath::NpcTextUpdateEmote;
+use crate::wrath::Language;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

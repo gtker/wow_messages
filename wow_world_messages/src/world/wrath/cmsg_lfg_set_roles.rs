@@ -40,5 +40,5 @@ impl crate::Message for CMSG_LFG_SET_ROLES {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LFG_SET_ROLES {}
+impl crate::wrath::ClientMessage for CMSG_LFG_SET_ROLES {}
 

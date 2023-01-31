@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::AchievementNameLinkType;
+use crate::wrath::AchievementNameLinkType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -76,7 +76,7 @@ impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SERVER_FIRST_ACHIEVEMENT {}
+impl crate::wrath::ServerMessage for SMSG_SERVER_FIRST_ACHIEVEMENT {}
 
 impl SMSG_SERVER_FIRST_ACHIEVEMENT {
     pub(crate) fn size(&self) -> usize {

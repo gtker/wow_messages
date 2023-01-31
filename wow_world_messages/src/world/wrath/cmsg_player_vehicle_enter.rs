@@ -41,5 +41,5 @@ impl crate::Message for CMSG_PLAYER_VEHICLE_ENTER {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PLAYER_VEHICLE_ENTER {}
+impl crate::wrath::ClientMessage for CMSG_PLAYER_VEHICLE_ENTER {}
 

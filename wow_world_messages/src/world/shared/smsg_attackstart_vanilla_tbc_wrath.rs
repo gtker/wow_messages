@@ -50,11 +50,11 @@ impl crate::Message for SMSG_ATTACKSTART {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ATTACKSTART {}
+impl crate::vanilla::ServerMessage for SMSG_ATTACKSTART {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ATTACKSTART {}
+impl crate::tbc::ServerMessage for SMSG_ATTACKSTART {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ATTACKSTART {}
+impl crate::wrath::ServerMessage for SMSG_ATTACKSTART {}
 

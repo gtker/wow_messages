@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::ExperienceAwardType;
+use crate::wrath::ExperienceAwardType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -104,7 +104,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LOG_XPGAIN {}
+impl crate::wrath::ServerMessage for SMSG_LOG_XPGAIN {}
 
 impl SMSG_LOG_XPGAIN {
     pub(crate) fn size(&self) -> usize {

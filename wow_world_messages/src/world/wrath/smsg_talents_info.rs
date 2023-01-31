@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::InspectTalent;
-use crate::world::wrath::TalentInfoSpec;
-use crate::world::wrath::TalentInfoType;
+use crate::wrath::InspectTalent;
+use crate::wrath::TalentInfoSpec;
+use crate::wrath::TalentInfoType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -129,7 +129,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TALENTS_INFO {}
+impl crate::wrath::ServerMessage for SMSG_TALENTS_INFO {}
 
 impl SMSG_TALENTS_INFO {
     pub(crate) fn size(&self) -> usize {

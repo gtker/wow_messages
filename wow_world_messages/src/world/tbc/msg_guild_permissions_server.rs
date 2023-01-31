@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::BankTab;
+use crate::tbc::BankTab;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -82,5 +82,5 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_GUILD_PERMISSIONS_Server {}
+impl crate::tbc::ServerMessage for MSG_GUILD_PERMISSIONS_Server {}
 

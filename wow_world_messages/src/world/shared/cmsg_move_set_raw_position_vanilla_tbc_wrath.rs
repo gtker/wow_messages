@@ -51,11 +51,11 @@ impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
+impl crate::vanilla::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
+impl crate::tbc::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
+impl crate::wrath::ClientMessage for CMSG_MOVE_SET_RAW_POSITION {}
 

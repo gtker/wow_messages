@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::InventoryResult;
-use crate::world::wrath::TradeStatus;
+use crate::wrath::InventoryResult;
+use crate::wrath::TradeStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -178,7 +178,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TRADE_STATUS {}
+impl crate::wrath::ServerMessage for SMSG_TRADE_STATUS {}
 
 impl SMSG_TRADE_STATUS {
     pub(crate) fn size(&self) -> usize {

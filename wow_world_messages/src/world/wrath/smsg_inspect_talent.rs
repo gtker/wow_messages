@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::InspectTalentSpec;
+use crate::wrath::InspectTalentSpec;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -104,7 +104,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_INSPECT_TALENT {}
+impl crate::wrath::ServerMessage for SMSG_INSPECT_TALENT {}
 
 impl SMSG_INSPECT_TALENT {
     pub(crate) fn size(&self) -> usize {

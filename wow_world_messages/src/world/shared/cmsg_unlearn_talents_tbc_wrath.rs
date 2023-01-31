@@ -31,8 +31,8 @@ impl crate::Message for CMSG_UNLEARN_TALENTS {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_UNLEARN_TALENTS {}
+impl crate::tbc::ClientMessage for CMSG_UNLEARN_TALENTS {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_UNLEARN_TALENTS {}
+impl crate::wrath::ClientMessage for CMSG_UNLEARN_TALENTS {}
 

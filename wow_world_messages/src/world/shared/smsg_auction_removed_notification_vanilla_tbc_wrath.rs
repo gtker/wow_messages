@@ -58,11 +58,11 @@ impl crate::Message for SMSG_AUCTION_REMOVED_NOTIFICATION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {}
+impl crate::vanilla::ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {}
+impl crate::tbc::ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {}
+impl crate::wrath::ServerMessage for SMSG_AUCTION_REMOVED_NOTIFICATION {}
 

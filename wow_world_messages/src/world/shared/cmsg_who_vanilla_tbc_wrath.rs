@@ -141,13 +141,13 @@ impl crate::Message for CMSG_WHO {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_WHO {}
+impl crate::vanilla::ClientMessage for CMSG_WHO {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_WHO {}
+impl crate::tbc::ClientMessage for CMSG_WHO {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_WHO {}
+impl crate::wrath::ClientMessage for CMSG_WHO {}
 
 impl CMSG_WHO {
     pub(crate) fn size(&self) -> usize {

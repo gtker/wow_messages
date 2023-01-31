@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::buy_bank_slot_result_vanilla_tbc_wrath::BuyBankSlotResult;
+use crate::shared::buy_bank_slot_result_vanilla_tbc_wrath::BuyBankSlotResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,11 +41,11 @@ impl crate::Message for SMSG_BUY_BANK_SLOT_RESULT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {}
+impl crate::vanilla::ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {}
+impl crate::tbc::ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_BUY_BANK_SLOT_RESULT {}
 

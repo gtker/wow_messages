@@ -54,7 +54,7 @@ impl crate::Message for SMSG_IGNORE_LIST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_IGNORE_LIST {}
+impl crate::vanilla::ServerMessage for SMSG_IGNORE_LIST {}
 
 impl SMSG_IGNORE_LIST {
     pub(crate) fn size(&self) -> usize {
@@ -68,8 +68,8 @@ mod test {
     use super::SMSG_IGNORE_LIST;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD, 0xDE,
          0xFE, 0x0F, 0xDC, 0xBA, ];

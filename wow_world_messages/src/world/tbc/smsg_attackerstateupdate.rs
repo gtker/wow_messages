@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::DamageInfo;
-use crate::world::tbc::HitInfo;
+use crate::tbc::DamageInfo;
+use crate::tbc::HitInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -131,7 +131,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
+impl crate::tbc::ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
 
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn size(&self) -> usize {

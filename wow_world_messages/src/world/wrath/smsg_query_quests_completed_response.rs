@@ -54,7 +54,7 @@ impl crate::Message for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {}
 
 impl SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
     pub(crate) fn size(&self) -> usize {

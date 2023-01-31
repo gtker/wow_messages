@@ -40,5 +40,5 @@ impl crate::Message for SMSG_TRIGGER_MOVIE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TRIGGER_MOVIE {}
+impl crate::wrath::ServerMessage for SMSG_TRIGGER_MOVIE {}
 

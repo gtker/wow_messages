@@ -46,13 +46,13 @@ impl crate::Message for SMSG_AREA_TRIGGER_MESSAGE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
+impl crate::vanilla::ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
+impl crate::tbc::ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
+impl crate::wrath::ServerMessage for SMSG_AREA_TRIGGER_MESSAGE {}
 
 impl SMSG_AREA_TRIGGER_MESSAGE {
     pub(crate) fn size(&self) -> usize {

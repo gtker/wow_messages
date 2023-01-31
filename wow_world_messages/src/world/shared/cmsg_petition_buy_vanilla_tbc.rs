@@ -205,10 +205,10 @@ impl crate::Message for CMSG_PETITION_BUY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PETITION_BUY {}
+impl crate::vanilla::ClientMessage for CMSG_PETITION_BUY {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PETITION_BUY {}
+impl crate::tbc::ClientMessage for CMSG_PETITION_BUY {}
 
 impl CMSG_PETITION_BUY {
     pub(crate) fn size(&self) -> usize {

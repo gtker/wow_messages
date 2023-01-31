@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::GuildMember;
-use crate::world::tbc::GuildRights;
+use crate::tbc::GuildMember;
+use crate::tbc::GuildRights;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -105,7 +105,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_GUILD_ROSTER {}
+impl crate::tbc::ServerMessage for SMSG_GUILD_ROSTER {}
 
 impl SMSG_GUILD_ROSTER {
     pub(crate) fn size(&self) -> usize {

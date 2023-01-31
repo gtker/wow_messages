@@ -9,7 +9,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_PLAYED_TIME {
-    /// Whether the clients wants it shown on the UI. Just ping it back in [`SMSG_PLAYED_TIME`](crate::world::wrath::SMSG_PLAYED_TIME)
+    /// Whether the clients wants it shown on the UI. Just ping it back in [`SMSG_PLAYED_TIME`](crate::wrath::SMSG_PLAYED_TIME)
     ///
     pub show_on_ui: bool,
 }
@@ -41,5 +41,5 @@ impl crate::Message for CMSG_PLAYED_TIME {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PLAYED_TIME {}
+impl crate::wrath::ClientMessage for CMSG_PLAYED_TIME {}
 

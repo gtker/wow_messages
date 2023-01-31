@@ -33,8 +33,8 @@ impl crate::Message for SMSG_FORCED_DEATH_UPDATE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_FORCED_DEATH_UPDATE {}
+impl crate::tbc::ServerMessage for SMSG_FORCED_DEATH_UPDATE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_FORCED_DEATH_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_FORCED_DEATH_UPDATE {}
 

@@ -58,7 +58,7 @@ impl crate::Message for SMSG_KICK_REASON {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_KICK_REASON {}
+impl crate::wrath::ServerMessage for SMSG_KICK_REASON {}
 
 impl SMSG_KICK_REASON {
     pub(crate) fn size(&self) -> usize {

@@ -41,11 +41,11 @@ impl crate::Message for CMSG_LIST_INVENTORY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_LIST_INVENTORY {}
+impl crate::vanilla::ClientMessage for CMSG_LIST_INVENTORY {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_LIST_INVENTORY {}
+impl crate::tbc::ClientMessage for CMSG_LIST_INVENTORY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LIST_INVENTORY {}
+impl crate::wrath::ClientMessage for CMSG_LIST_INVENTORY {}
 

@@ -1,21 +1,21 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::ItemDamageType;
-use crate::world::tbc::ItemSocket;
-use crate::world::tbc::ItemSpells;
-use crate::world::tbc::ItemStat;
-use crate::world::tbc::Area;
-use crate::world::tbc::Bonding;
-use crate::world::tbc::InventoryType;
-use crate::world::tbc::ItemClassAndSubClass;
-use crate::world::tbc::ItemQuality;
-use crate::world::tbc::Map;
-use crate::world::tbc::Skill;
-use crate::world::tbc::AllowedClass;
-use crate::world::tbc::AllowedRace;
+use crate::tbc::ItemDamageType;
+use crate::tbc::ItemSocket;
+use crate::tbc::ItemSpells;
+use crate::tbc::ItemStat;
+use crate::tbc::Area;
+use crate::tbc::Bonding;
+use crate::tbc::InventoryType;
+use crate::tbc::ItemClassAndSubClass;
+use crate::tbc::ItemQuality;
+use crate::tbc::Map;
+use crate::tbc::Skill;
+use crate::tbc::AllowedClass;
+use crate::tbc::AllowedRace;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:172`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L172):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:179`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L179):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -613,7 +613,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
+impl crate::tbc::ServerMessage for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub(crate) fn size(&self) -> usize {

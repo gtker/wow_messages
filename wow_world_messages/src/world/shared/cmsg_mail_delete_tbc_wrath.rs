@@ -59,8 +59,8 @@ impl crate::Message for CMSG_MAIL_DELETE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_MAIL_DELETE {}
+impl crate::tbc::ClientMessage for CMSG_MAIL_DELETE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MAIL_DELETE {}
+impl crate::wrath::ClientMessage for CMSG_MAIL_DELETE {}
 

@@ -50,8 +50,8 @@ impl crate::Message for CMSG_PAGE_TEXT_QUERY {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_PAGE_TEXT_QUERY {}
+impl crate::tbc::ClientMessage for CMSG_PAGE_TEXT_QUERY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_PAGE_TEXT_QUERY {}
+impl crate::wrath::ClientMessage for CMSG_PAGE_TEXT_QUERY {}
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
+use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -77,13 +77,13 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
+impl crate::vanilla::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
+impl crate::tbc::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
+impl crate::wrath::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
 
 impl CMSG_GMSURVEY_SUBMIT {
     pub(crate) fn size(&self) -> usize {

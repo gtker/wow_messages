@@ -40,5 +40,5 @@ impl crate::Message for SMSG_REMOVED_SPELL {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_REMOVED_SPELL {}
+impl crate::wrath::ServerMessage for SMSG_REMOVED_SPELL {}
 

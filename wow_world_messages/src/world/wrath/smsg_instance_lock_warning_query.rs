@@ -58,5 +58,5 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_INSTANCE_LOCK_WARNING_QUERY {}
+impl crate::wrath::ServerMessage for SMSG_INSTANCE_LOCK_WARNING_QUERY {}
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ServerMessageType;
+use crate::wrath::ServerMessageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -57,7 +57,7 @@ impl crate::Message for SMSG_SERVER_MESSAGE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SERVER_MESSAGE {}
+impl crate::wrath::ServerMessage for SMSG_SERVER_MESSAGE {}
 
 impl SMSG_SERVER_MESSAGE {
     pub(crate) fn size(&self) -> usize {

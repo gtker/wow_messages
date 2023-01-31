@@ -78,7 +78,7 @@ impl crate::Message for SMSG_CALENDAR_COMMAND_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_COMMAND_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_COMMAND_RESULT {}
 
 impl SMSG_CALENDAR_COMMAND_RESULT {
     pub(crate) fn size(&self) -> usize {

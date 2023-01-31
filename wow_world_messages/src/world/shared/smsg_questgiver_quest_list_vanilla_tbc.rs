@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::quest_item_vanilla_tbc::QuestItem;
+use crate::shared::quest_item_vanilla_tbc::QuestItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -101,10 +101,10 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {}
+impl crate::vanilla::ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {}
+impl crate::tbc::ServerMessage for SMSG_QUESTGIVER_QUEST_LIST {}
 
 impl SMSG_QUESTGIVER_QUEST_LIST {
     pub(crate) fn size(&self) -> usize {

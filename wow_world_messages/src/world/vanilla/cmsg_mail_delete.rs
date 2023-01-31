@@ -50,5 +50,5 @@ impl crate::Message for CMSG_MAIL_DELETE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MAIL_DELETE {}
+impl crate::vanilla::ClientMessage for CMSG_MAIL_DELETE {}
 

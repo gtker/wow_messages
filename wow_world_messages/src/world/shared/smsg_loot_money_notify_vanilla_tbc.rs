@@ -40,8 +40,8 @@ impl crate::Message for SMSG_LOOT_MONEY_NOTIFY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_LOOT_MONEY_NOTIFY {}
+impl crate::vanilla::ServerMessage for SMSG_LOOT_MONEY_NOTIFY {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_LOOT_MONEY_NOTIFY {}
+impl crate::tbc::ServerMessage for SMSG_LOOT_MONEY_NOTIFY {}
 

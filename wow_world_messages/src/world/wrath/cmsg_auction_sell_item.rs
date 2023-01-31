@@ -95,5 +95,5 @@ impl crate::Message for CMSG_AUCTION_SELL_ITEM {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_AUCTION_SELL_ITEM {}
+impl crate::wrath::ClientMessage for CMSG_AUCTION_SELL_ITEM {}
 

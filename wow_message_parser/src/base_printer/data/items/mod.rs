@@ -14,6 +14,115 @@ pub enum Items {
     Wrath(Vec<WrathItem>),
 }
 
+impl Items {
+    pub fn to_generic(&self) -> (Vec<GenericItem>, Expansion) {
+        match self {
+            Items::Vanilla(v) => (
+                v.iter()
+                    .map(|a| {
+                        let (fields, arrays) = a.values();
+                        GenericItem {
+                            entry: a.entry,
+                            extra_flags: a.extra_flags,
+                            name: a.name.clone(),
+                            fields,
+                            arrays,
+                        }
+                    })
+                    .collect(),
+                Expansion::Vanilla,
+            ),
+            Items::BurningCrusade(v) => (
+                v.iter()
+                    .map(|a| {
+                        let (fields, arrays) = a.values();
+                        GenericItem {
+                            entry: a.entry,
+                            extra_flags: a.extra_flags,
+                            name: a.name.clone(),
+                            fields,
+                            arrays,
+                        }
+                    })
+                    .collect(),
+                Expansion::BurningCrusade,
+            ),
+            Items::Wrath(v) => (
+                v.iter()
+                    .map(|a| {
+                        let (fields, arrays) = a.values();
+                        GenericItem {
+                            entry: a.entry,
+                            extra_flags: a.extra_flags,
+                            name: a.name.clone(),
+                            fields,
+                            arrays,
+                        }
+                    })
+                    .collect(),
+                Expansion::WrathOfTheLichKing,
+            ),
+        }
+    }
+}
+
+pub struct GenericItem {
+    pub entry: u32,
+    pub extra_flags: i32,
+    pub name: String,
+    pub fields: Vec<Field>,
+    pub arrays: Vec<Array>,
+}
+
+impl GenericItem {
+    pub fn all_arrays_are_default(&self) -> bool {
+        self.arrays.iter().all(|a| {
+            a.instances
+                .iter()
+                .all(|a| a.iter().all(|a| a.value.is_default()))
+        })
+    }
+}
+
+pub struct Array {
+    pub variable_name: &'static str,
+    pub type_name: &'static str,
+    pub instances: Vec<Vec<ArrayField>>,
+    pub import_only: bool,
+}
+
+impl Array {
+    pub const fn new(
+        variable_name: &'static str,
+        type_name: &'static str,
+        import_only: bool,
+        instances: Vec<Vec<ArrayField>>,
+    ) -> Self {
+        Self {
+            variable_name,
+            type_name,
+            instances,
+            import_only,
+        }
+    }
+}
+
+pub struct ArrayField {
+    pub name: &'static str,
+    pub variable_name: &'static str,
+    pub value: Value,
+}
+
+impl ArrayField {
+    pub const fn new(name: &'static str, variable_name: &'static str, value: Value) -> Self {
+        Self {
+            name,
+            variable_name,
+            value,
+        }
+    }
+}
+
 pub struct Field {
     pub name: &'static str,
     pub value: Value,
@@ -25,6 +134,7 @@ impl Field {
     }
 }
 
+#[derive(Debug, Clone, PartialOrd, PartialEq)]
 pub enum Value {
     String(String),
     Int(i32),
@@ -55,6 +165,18 @@ pub enum Value {
     ),
 
     Bonding(wow_world_base::shared::bonding_vanilla_tbc_wrath::Bonding),
+
+    VanillaSkill(wow_world_base::vanilla::Skill),
+    TbcSkill(wow_world_base::tbc::Skill),
+    WrathSkill(wow_world_base::wrath::Skill),
+
+    VanillaMap(wow_world_base::vanilla::Map),
+    TbcMap(wow_world_base::tbc::Map),
+    WrathMap(wow_world_base::wrath::Map),
+
+    VanillaArea(wow_world_base::vanilla::Area),
+    TbcArea(wow_world_base::tbc::Area),
+    WrathArea(wow_world_base::wrath::Area),
 }
 
 impl Value {
@@ -62,21 +184,7 @@ impl Value {
         match self {
             Value::String(_) | Value::Uint(_) | Value::Int(_) | Value::Float(_) => false,
 
-            Value::VanillaItemClassAndSubClass(_)
-            | Value::TbcItemClassAndSubClass(_)
-            | Value::WrathItemClassAndSubClass(_)
-            | Value::VanillaTbcItemQuality(_)
-            | Value::WrathItemQuality(_)
-            | Value::InventoryType(_)
-            | Value::VanillaTbcAllowedClass(_)
-            | Value::WrathAllowedClass(_)
-            | Value::VanillaAllowedRace(_)
-            | Value::TbcAllowedRace(_)
-            | Value::WrathAllowedRace(_)
-            | Value::SpellSchool(_)
-            | Value::VanillaSpellTriggerType(_)
-            | Value::TbcWrathSpellTriggerType(_)
-            | Value::Bonding(_) => true,
+            _ => true,
         }
     }
 
@@ -100,7 +208,22 @@ impl Value {
                 "SpellTriggerType"
             }
             Value::Bonding(_) => "Bonding",
+            Value::VanillaSkill(_) | Value::TbcSkill(_) | Value::WrathSkill(_) => "Skill",
+            Value::VanillaMap(_) | Value::TbcMap(_) | Value::WrathMap(_) => "Map",
+            Value::VanillaArea(_) | Value::TbcArea(_) | Value::WrathArea(_) => "Area",
         }
+    }
+
+    pub const fn import_name(&self) -> Option<&'static str> {
+        if self.should_import() {
+            Some(self.type_name())
+        } else {
+            None
+        }
+    }
+
+    pub fn is_default(&self) -> bool {
+        &self.default_value() == self
     }
 
     pub fn to_string(&self) -> String {
@@ -118,21 +241,131 @@ impl Value {
             Value::Int(v) => (*v).to_string(),
             Value::Uint(v) => (*v).to_string(),
             Value::Float(v) => float_format(*v),
-            Value::VanillaItemClassAndSubClass(v) => format!("ItemClassAndSubClass::{:?}", v),
-            Value::TbcItemClassAndSubClass(v) => format!("ItemClassAndSubClass::{:?}", v),
+            Value::VanillaItemClassAndSubClass(v) => {
+                format!("ItemClassAndSubClass::{:?}", v)
+            }
+            Value::TbcItemClassAndSubClass(v) => {
+                format!("ItemClassAndSubClass::{:?}", v)
+            }
             Value::WrathItemClassAndSubClass(v) => format!("ItemClassAndSubClass::{:?}", v),
-            Value::VanillaTbcItemQuality(v) => format!("ItemQuality::{:?}", v),
-            Value::WrathItemQuality(v) => format!("ItemQuality::{:?}", v),
+            Value::VanillaTbcItemQuality(v) => {
+                format!("ItemQuality::{:?}", v)
+            }
+            Value::WrathItemQuality(v) => {
+                format!("ItemQuality::{:?}", v)
+            }
             Value::InventoryType(v) => format!("InventoryType::{:?}", v),
-            Value::VanillaTbcAllowedClass(v) => format!("AllowedClass::new({})", v.as_int()),
-            Value::WrathAllowedClass(v) => format!("AllowedClass::new({})", v.as_int()),
-            Value::VanillaAllowedRace(v) => format!("AllowedRace::new({})", v.as_int()),
-            Value::TbcAllowedRace(v) => format!("AllowedRace::new({})", v.as_int()),
+            Value::VanillaTbcAllowedClass(v) => {
+                format!("AllowedClass::new({})", v.as_int())
+            }
+            Value::WrathAllowedClass(v) => {
+                format!("AllowedClass::new({})", v.as_int())
+            }
+            Value::VanillaAllowedRace(v) => {
+                format!("AllowedRace::new({})", v.as_int())
+            }
+            Value::TbcAllowedRace(v) => {
+                format!("AllowedRace::new({})", v.as_int())
+            }
             Value::WrathAllowedRace(v) => format!("AllowedRace::new({})", v.as_int()),
             Value::SpellSchool(v) => format!("SpellSchool::{:?}", v),
-            Value::VanillaSpellTriggerType(v) => format!("SpellTriggerType::{:?}", v),
-            Value::TbcWrathSpellTriggerType(v) => format!("SpellTriggerType::{:?}", v),
+            Value::VanillaSpellTriggerType(v) => {
+                format!("SpellTriggerType::{:?}", v)
+            }
+            Value::TbcWrathSpellTriggerType(v) => {
+                format!("SpellTriggerType::{:?}", v)
+            }
             Value::Bonding(v) => format!("Bonding::{:?}", v),
+            Value::VanillaSkill(v) => {
+                format!("Skill::{:?}", v)
+            }
+            Value::TbcSkill(v) => {
+                format!("Skill::{:?}", v)
+            }
+            Value::WrathSkill(v) => {
+                format!("Skill::{:?}", v)
+            }
+            Value::VanillaMap(v) => {
+                format!("Map::{:?}", v)
+            }
+            Value::TbcMap(v) => {
+                format!("Map::{:?}", v)
+            }
+            Value::WrathMap(v) => format!("Map::{:?}", v),
+            Value::VanillaArea(v) => {
+                format!("Area::{:?}", v)
+            }
+            Value::TbcArea(v) => {
+                format!("Area::{:?}", v)
+            }
+            Value::WrathArea(v) => {
+                format!("Area::{:?}", v)
+            }
+        }
+    }
+
+    pub fn default_value(&self) -> Self {
+        match self {
+            Value::String(_) => Value::String("".to_string()),
+            Value::Int(_) => Value::Int(0),
+            Value::Uint(_) => Value::Uint(0),
+            Value::Float(_) => Value::Float(0.0),
+            Value::VanillaAllowedRace(_) => {
+                Value::VanillaAllowedRace(wow_world_base::vanilla::AllowedRace::empty())
+            }
+            Value::VanillaArea(_) => Value::VanillaArea(wow_world_base::vanilla::Area::None),
+            Value::VanillaItemClassAndSubClass(_) => Value::VanillaItemClassAndSubClass(
+                wow_world_base::vanilla::ItemClassAndSubClass::Consumable,
+            ),
+            Value::VanillaMap(_) => {
+                Value::VanillaMap(wow_world_base::vanilla::Map::EasternKingdoms)
+            }
+            Value::VanillaSkill(_) => Value::VanillaSkill(wow_world_base::vanilla::Skill::None),
+            Value::VanillaSpellTriggerType(_) => {
+                Value::VanillaSpellTriggerType(wow_world_base::vanilla::SpellTriggerType::OnUse)
+            }
+            Value::VanillaTbcAllowedClass(_) => Value::VanillaTbcAllowedClass(
+                wow_world_base::shared::allowed_class_vanilla_tbc::AllowedClass::empty(),
+            ),
+            Value::VanillaTbcItemQuality(_) => Value::VanillaTbcItemQuality(
+                wow_world_base::shared::item_quality_vanilla_tbc::ItemQuality::Poor,
+            ),
+            Value::TbcItemClassAndSubClass(_) => Value::TbcItemClassAndSubClass(
+                wow_world_base::tbc::ItemClassAndSubClass::Consumable,
+            ),
+            Value::WrathItemClassAndSubClass(_) => Value::WrathItemClassAndSubClass(
+                wow_world_base::wrath::ItemClassAndSubClass::Consumable,
+            ),
+            Value::WrathItemQuality(_) => {
+                Value::WrathItemQuality(wow_world_base::wrath::ItemQuality::Poor)
+            }
+            Value::InventoryType(_) => Value::InventoryType(
+                wow_world_base::shared::inventory_type_vanilla_tbc_wrath::InventoryType::NonEquip,
+            ),
+            Value::WrathAllowedClass(_) => {
+                Value::WrathAllowedClass(wow_world_base::wrath::AllowedClass::empty())
+            }
+            Value::TbcAllowedRace(_) => {
+                Value::TbcAllowedRace(wow_world_base::tbc::AllowedRace::empty())
+            }
+            Value::WrathAllowedRace(_) => {
+                Value::WrathAllowedRace(wow_world_base::wrath::AllowedRace::empty())
+            }
+            Value::SpellSchool(_) => Value::SpellSchool(
+                wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool::Normal,
+            ),
+            Value::TbcWrathSpellTriggerType(_) => Value::TbcWrathSpellTriggerType(
+                wow_world_base::shared::spell_trigger_type_tbc_wrath::SpellTriggerType::OnUse,
+            ),
+            Value::Bonding(_) => {
+                Value::Bonding(wow_world_base::shared::bonding_vanilla_tbc_wrath::Bonding::NoBind)
+            }
+            Value::TbcSkill(_) => Value::TbcSkill(wow_world_base::tbc::Skill::None),
+            Value::WrathSkill(_) => Value::WrathSkill(wow_world_base::wrath::Skill::None),
+            Value::TbcMap(_) => Value::TbcMap(wow_world_base::tbc::Map::EasternKingdoms),
+            Value::WrathMap(_) => Value::WrathMap(wow_world_base::wrath::Map::EasternKingdoms),
+            Value::TbcArea(_) => Value::TbcArea(wow_world_base::tbc::Area::None),
+            Value::WrathArea(_) => Value::WrathArea(wow_world_base::wrath::Area::None),
         }
     }
 }

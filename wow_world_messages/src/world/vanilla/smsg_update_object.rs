@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Object;
+use crate::vanilla::Object;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -64,7 +64,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_UPDATE_OBJECT {}
+impl crate::vanilla::ServerMessage for SMSG_UPDATE_OBJECT {}
 
 impl SMSG_UPDATE_OBJECT {
     pub(crate) fn size(&self) -> usize {
@@ -79,10 +79,10 @@ mod test {
     use super::SMSG_UPDATE_OBJECT;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 99] = [ 0x00, 0x61, 0xA9, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
          0x03, 0x01, 0x04, 0x04, 0x31, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::InstanceResetFailedReason;
-use crate::world::wrath::Map;
+use crate::wrath::InstanceResetFailedReason;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,5 +51,5 @@ impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_INSTANCE_RESET_FAILED {}
+impl crate::wrath::ServerMessage for SMSG_INSTANCE_RESET_FAILED {}
 

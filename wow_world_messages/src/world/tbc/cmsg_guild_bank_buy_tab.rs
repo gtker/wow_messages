@@ -50,5 +50,5 @@ impl crate::Message for CMSG_GUILD_BANK_BUY_TAB {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GUILD_BANK_BUY_TAB {}
+impl crate::tbc::ClientMessage for CMSG_GUILD_BANK_BUY_TAB {}
 

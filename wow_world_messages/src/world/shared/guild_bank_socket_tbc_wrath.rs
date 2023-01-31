@@ -27,7 +27,7 @@ impl GuildBankSocket {
 }
 
 impl GuildBankSocket {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // socket_index: u8
         let socket_index = crate::util::read_u8_le(r)?;
 

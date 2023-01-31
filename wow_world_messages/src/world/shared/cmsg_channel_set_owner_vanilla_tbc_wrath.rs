@@ -61,13 +61,13 @@ impl crate::Message for CMSG_CHANNEL_SET_OWNER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CHANNEL_SET_OWNER {}
+impl crate::vanilla::ClientMessage for CMSG_CHANNEL_SET_OWNER {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CHANNEL_SET_OWNER {}
+impl crate::tbc::ClientMessage for CMSG_CHANNEL_SET_OWNER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHANNEL_SET_OWNER {}
+impl crate::wrath::ClientMessage for CMSG_CHANNEL_SET_OWNER {}
 
 impl CMSG_CHANNEL_SET_OWNER {
     pub(crate) fn size(&self) -> usize {

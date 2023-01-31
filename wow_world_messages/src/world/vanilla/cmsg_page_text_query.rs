@@ -40,5 +40,5 @@ impl crate::Message for CMSG_PAGE_TEXT_QUERY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_PAGE_TEXT_QUERY {}
+impl crate::vanilla::ClientMessage for CMSG_PAGE_TEXT_QUERY {}
 

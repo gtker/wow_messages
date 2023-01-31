@@ -40,5 +40,5 @@ impl crate::Message for CMSG_REMOVE_GLYPH {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_REMOVE_GLYPH {}
+impl crate::wrath::ClientMessage for CMSG_REMOVE_GLYPH {}
 

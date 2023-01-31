@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::TrainerSpell;
+use crate::tbc::TrainerSpell;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -88,7 +88,7 @@ impl crate::Message for SMSG_TRAINER_LIST {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TRAINER_LIST {}
+impl crate::tbc::ServerMessage for SMSG_TRAINER_LIST {}
 
 impl SMSG_TRAINER_LIST {
     pub(crate) fn size(&self) -> usize {

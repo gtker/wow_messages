@@ -52,11 +52,11 @@ impl crate::Message for SMSG_PET_DISMISS_SOUND {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PET_DISMISS_SOUND {}
+impl crate::vanilla::ServerMessage for SMSG_PET_DISMISS_SOUND {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PET_DISMISS_SOUND {}
+impl crate::tbc::ServerMessage for SMSG_PET_DISMISS_SOUND {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PET_DISMISS_SOUND {}
+impl crate::wrath::ServerMessage for SMSG_PET_DISMISS_SOUND {}
 

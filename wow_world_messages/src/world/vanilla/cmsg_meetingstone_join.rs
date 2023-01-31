@@ -41,5 +41,5 @@ impl crate::Message for CMSG_MEETINGSTONE_JOIN {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MEETINGSTONE_JOIN {}
+impl crate::vanilla::ClientMessage for CMSG_MEETINGSTONE_JOIN {}
 

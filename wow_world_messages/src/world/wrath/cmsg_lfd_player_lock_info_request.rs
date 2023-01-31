@@ -31,5 +31,5 @@ impl crate::Message for CMSG_LFD_PLAYER_LOCK_INFO_REQUEST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_LFD_PLAYER_LOCK_INFO_REQUEST {}
+impl crate::wrath::ClientMessage for CMSG_LFD_PLAYER_LOCK_INFO_REQUEST {}
 

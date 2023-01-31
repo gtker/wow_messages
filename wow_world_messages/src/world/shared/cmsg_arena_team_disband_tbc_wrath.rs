@@ -40,8 +40,8 @@ impl crate::Message for CMSG_ARENA_TEAM_DISBAND {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ARENA_TEAM_DISBAND {}
+impl crate::tbc::ClientMessage for CMSG_ARENA_TEAM_DISBAND {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ARENA_TEAM_DISBAND {}
+impl crate::wrath::ClientMessage for CMSG_ARENA_TEAM_DISBAND {}
 

@@ -40,8 +40,8 @@ impl crate::Message for CMSG_CANCEL_TEMP_ENCHANTMENT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CANCEL_TEMP_ENCHANTMENT {}
+impl crate::tbc::ClientMessage for CMSG_CANCEL_TEMP_ENCHANTMENT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CANCEL_TEMP_ENCHANTMENT {}
+impl crate::wrath::ClientMessage for CMSG_CANCEL_TEMP_ENCHANTMENT {}
 

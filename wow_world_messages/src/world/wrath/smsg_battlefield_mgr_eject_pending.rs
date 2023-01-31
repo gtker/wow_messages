@@ -42,5 +42,5 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_EJECT_PENDING {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_EJECT_PENDING {}
+impl crate::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_EJECT_PENDING {}
 

@@ -41,5 +41,5 @@ impl crate::Message for CMSG_GET_MIRRORIMAGE_DATA {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GET_MIRRORIMAGE_DATA {}
+impl crate::tbc::ClientMessage for CMSG_GET_MIRRORIMAGE_DATA {}
 

@@ -40,5 +40,5 @@ impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Client {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_QUERY_GUILD_BANK_TEXT_Client {}
+impl crate::tbc::ClientMessage for MSG_QUERY_GUILD_BANK_TEXT_Client {}
 

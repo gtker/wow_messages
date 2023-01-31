@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::title_earn_status_tbc_wrath::TitleEarnStatus;
+use crate::shared::title_earn_status_tbc_wrath::TitleEarnStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -50,8 +50,8 @@ impl crate::Message for SMSG_TITLE_EARNED {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_TITLE_EARNED {}
+impl crate::tbc::ServerMessage for SMSG_TITLE_EARNED {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_TITLE_EARNED {}
+impl crate::wrath::ServerMessage for SMSG_TITLE_EARNED {}
 

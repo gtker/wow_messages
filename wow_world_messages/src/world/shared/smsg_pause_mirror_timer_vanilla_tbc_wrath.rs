@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
+use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -51,11 +51,11 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
+impl crate::vanilla::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
+impl crate::tbc::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
+impl crate::wrath::ServerMessage for SMSG_PAUSE_MIRROR_TIMER {}
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::EquipmentSetListItem;
+use crate::wrath::EquipmentSetListItem;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_EQUIPMENT_SET_LIST {}
+impl crate::wrath::ServerMessage for SMSG_EQUIPMENT_SET_LIST {}
 
 impl SMSG_EQUIPMENT_SET_LIST {
     pub(crate) fn size(&self) -> usize {

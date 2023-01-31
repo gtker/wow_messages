@@ -40,5 +40,5 @@ impl crate::Message for SMSG_EQUIPMENT_SET_USE_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_EQUIPMENT_SET_USE_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_EQUIPMENT_SET_USE_RESULT {}
 

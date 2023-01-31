@@ -3,7 +3,7 @@ use crate::Guid;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Response to [`MSG_MOVE_TELEPORT_ACK_Server`](crate::world::vanilla::MSG_MOVE_TELEPORT_ACK_Server), at which point [`MSG_MOVE_TELEPORT_ACK_Server`](crate::world::vanilla::MSG_MOVE_TELEPORT_ACK_Server) should be sent to observing players.
+/// Response to [`MSG_MOVE_TELEPORT_ACK_Server`](crate::vanilla::MSG_MOVE_TELEPORT_ACK_Server), at which point [`MSG_MOVE_TELEPORT_ACK_Server`](crate::vanilla::MSG_MOVE_TELEPORT_ACK_Server) should be sent to observing players.
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_teleport_ack.wowm#L1):
 /// ```text
@@ -63,13 +63,13 @@ impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_MOVE_TELEPORT_ACK_Client {}
+impl crate::vanilla::ClientMessage for MSG_MOVE_TELEPORT_ACK_Client {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_MOVE_TELEPORT_ACK_Client {}
+impl crate::tbc::ClientMessage for MSG_MOVE_TELEPORT_ACK_Client {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_MOVE_TELEPORT_ACK_Client {}
+impl crate::wrath::ClientMessage for MSG_MOVE_TELEPORT_ACK_Client {}
 
 impl MSG_MOVE_TELEPORT_ACK_Client {
     pub(crate) fn size(&self) -> usize {

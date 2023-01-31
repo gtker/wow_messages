@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::InspectTalent;
+use crate::wrath::InspectTalent;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -29,7 +29,7 @@ impl InspectTalentSpec {
 }
 
 impl InspectTalentSpec {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // amount_of_talents: u8
         let amount_of_talents = crate::util::read_u8_le(r)?;
 

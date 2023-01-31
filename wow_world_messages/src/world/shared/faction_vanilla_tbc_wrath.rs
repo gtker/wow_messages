@@ -27,7 +27,7 @@ impl Faction {
 }
 
 impl Faction {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // reputation_list_id: u32
         let reputation_list_id = crate::util::read_u32_le(r)?;
 

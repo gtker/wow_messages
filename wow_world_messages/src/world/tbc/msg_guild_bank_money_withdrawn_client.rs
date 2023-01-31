@@ -31,5 +31,5 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {}
+impl crate::tbc::ClientMessage for MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {}
 

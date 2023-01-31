@@ -59,5 +59,5 @@ impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CROSSED_INEBRIATION_THRESHOLD {}
+impl crate::wrath::ServerMessage for SMSG_CROSSED_INEBRIATION_THRESHOLD {}
 

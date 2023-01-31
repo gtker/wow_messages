@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -53,7 +53,7 @@ impl crate::Message for MSG_MOVE_JUMP_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_MOVE_JUMP_Server {}
+impl crate::vanilla::ServerMessage for MSG_MOVE_JUMP_Server {}
 
 impl MSG_MOVE_JUMP_Server {
     pub(crate) fn size(&self) -> usize {
@@ -67,9 +67,9 @@ mod test {
     use super::MSG_MOVE_JUMP_Server;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 50] = [ 0x00, 0x30, 0xBB, 0x00, 0x01, 0x05, 0x01, 0x20, 0x00,
          0x00, 0x20, 0xD6, 0x79, 0x01, 0x1B, 0xAD, 0x0B, 0xC6, 0x9D, 0x4C, 0x05,

@@ -39,5 +39,5 @@ impl crate::Message for CMSG_INSTANCE_LOCK_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_INSTANCE_LOCK_RESPONSE {}
+impl crate::wrath::ClientMessage for CMSG_INSTANCE_LOCK_RESPONSE {}
 

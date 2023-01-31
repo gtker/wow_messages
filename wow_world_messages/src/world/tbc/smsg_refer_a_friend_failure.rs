@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::ReferAFriendError;
+use crate::tbc::ReferAFriendError;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -98,7 +98,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_REFER_A_FRIEND_FAILURE {}
+impl crate::tbc::ServerMessage for SMSG_REFER_A_FRIEND_FAILURE {}
 
 impl SMSG_REFER_A_FRIEND_FAILURE {
     pub(crate) fn size(&self) -> usize {

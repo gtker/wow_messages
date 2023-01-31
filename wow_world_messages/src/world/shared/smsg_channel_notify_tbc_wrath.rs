@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::chat_notify_tbc_wrath::ChatNotify;
+use crate::shared::chat_notify_tbc_wrath::ChatNotify;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -93,10 +93,10 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CHANNEL_NOTIFY {}
+impl crate::tbc::ServerMessage for SMSG_CHANNEL_NOTIFY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CHANNEL_NOTIFY {}
+impl crate::wrath::ServerMessage for SMSG_CHANNEL_NOTIFY {}
 
 impl SMSG_CHANNEL_NOTIFY {
     pub(crate) fn size(&self) -> usize {

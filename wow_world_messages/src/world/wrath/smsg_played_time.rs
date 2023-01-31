@@ -18,7 +18,7 @@ pub struct SMSG_PLAYED_TIME {
     ///
     pub level_played_time: u32,
     /// Whether this is a silent query or the client should show it on the UI (chat box).
-    /// Send back the value received in [`CMSG_PLAYED_TIME`](crate::world::wrath::CMSG_PLAYED_TIME)
+    /// Send back the value received in [`CMSG_PLAYED_TIME`](crate::wrath::CMSG_PLAYED_TIME)
     ///
     pub show_on_ui: bool,
 }
@@ -64,5 +64,5 @@ impl crate::Message for SMSG_PLAYED_TIME {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PLAYED_TIME {}
+impl crate::wrath::ServerMessage for SMSG_PLAYED_TIME {}
 

@@ -47,13 +47,13 @@ impl crate::Message for CMSG_ADD_IGNORE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_ADD_IGNORE {}
+impl crate::vanilla::ClientMessage for CMSG_ADD_IGNORE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ADD_IGNORE {}
+impl crate::tbc::ClientMessage for CMSG_ADD_IGNORE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ADD_IGNORE {}
+impl crate::wrath::ClientMessage for CMSG_ADD_IGNORE {}
 
 impl CMSG_ADD_IGNORE {
     pub(crate) fn size(&self) -> usize {

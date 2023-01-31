@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::LfgRole;
+use crate::wrath::LfgRole;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -96,7 +96,7 @@ impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_ROLE_CHECK_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_LFG_ROLE_CHECK_UPDATE {}
 
 impl SMSG_LFG_ROLE_CHECK_UPDATE {
     pub(crate) fn size(&self) -> usize {

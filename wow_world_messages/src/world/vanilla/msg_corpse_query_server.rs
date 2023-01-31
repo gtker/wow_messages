@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::Vector3d;
-use crate::world::vanilla::CorpseQueryResult;
-use crate::world::vanilla::Map;
+use crate::vanilla::Vector3d;
+use crate::vanilla::CorpseQueryResult;
+use crate::vanilla::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -89,7 +89,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_CORPSE_QUERY_Server {}
+impl crate::vanilla::ServerMessage for MSG_CORPSE_QUERY_Server {}
 
 impl MSG_CORPSE_QUERY_Server {
     pub(crate) fn size(&self) -> usize {

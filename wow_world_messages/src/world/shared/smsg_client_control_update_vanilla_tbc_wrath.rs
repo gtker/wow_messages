@@ -51,13 +51,13 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
+impl crate::vanilla::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
+impl crate::tbc::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
 
 impl SMSG_CLIENT_CONTROL_UPDATE {
     pub(crate) fn size(&self) -> usize {

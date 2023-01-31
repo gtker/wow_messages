@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
-use crate::world::shared::initial_spell_vanilla_tbc::InitialSpell;
+use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
+use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -88,10 +88,10 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_INITIAL_SPELLS {}
+impl crate::vanilla::ServerMessage for SMSG_INITIAL_SPELLS {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_INITIAL_SPELLS {}
+impl crate::tbc::ServerMessage for SMSG_INITIAL_SPELLS {}
 
 impl SMSG_INITIAL_SPELLS {
     pub(crate) fn size(&self) -> usize {

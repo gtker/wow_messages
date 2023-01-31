@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
+use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

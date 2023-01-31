@@ -47,7 +47,7 @@ impl crate::Message for CMSG_CHANNEL_DISPLAY_LIST {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CHANNEL_DISPLAY_LIST {}
+impl crate::wrath::ClientMessage for CMSG_CHANNEL_DISPLAY_LIST {}
 
 impl CMSG_CHANNEL_DISPLAY_LIST {
     pub(crate) fn size(&self) -> usize {

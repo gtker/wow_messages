@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Vector3d;
-use crate::world::wrath::Map;
+use crate::wrath::Vector3d;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -139,7 +139,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GMTICKET_CREATE {}
+impl crate::wrath::ClientMessage for CMSG_GMTICKET_CREATE {}
 
 impl CMSG_GMTICKET_CREATE {
     pub(crate) fn size(&self) -> usize {

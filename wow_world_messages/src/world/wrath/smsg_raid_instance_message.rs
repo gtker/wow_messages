@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Map;
-use crate::world::wrath::RaidDifficulty;
-use crate::world::wrath::RaidInstanceMessage;
+use crate::wrath::Map;
+use crate::wrath::RaidDifficulty;
+use crate::wrath::RaidInstanceMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -70,5 +70,5 @@ impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {}
+impl crate::wrath::ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {}
 

@@ -41,5 +41,5 @@ impl crate::Message for SMSG_SHOW_MAILBOX {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SHOW_MAILBOX {}
+impl crate::wrath::ServerMessage for SMSG_SHOW_MAILBOX {}
 

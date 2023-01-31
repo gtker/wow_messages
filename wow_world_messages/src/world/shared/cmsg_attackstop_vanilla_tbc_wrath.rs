@@ -31,11 +31,11 @@ impl crate::Message for CMSG_ATTACKSTOP {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_ATTACKSTOP {}
+impl crate::vanilla::ClientMessage for CMSG_ATTACKSTOP {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ATTACKSTOP {}
+impl crate::tbc::ClientMessage for CMSG_ATTACKSTOP {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ATTACKSTOP {}
+impl crate::wrath::ClientMessage for CMSG_ATTACKSTOP {}
 

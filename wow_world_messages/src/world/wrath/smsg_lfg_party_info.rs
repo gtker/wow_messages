@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::LfgPartyInfo;
+use crate::wrath::LfgPartyInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_LFG_PARTY_INFO {}
+impl crate::wrath::ServerMessage for SMSG_LFG_PARTY_INFO {}
 
 impl SMSG_LFG_PARTY_INFO {
     pub(crate) fn size(&self) -> usize {

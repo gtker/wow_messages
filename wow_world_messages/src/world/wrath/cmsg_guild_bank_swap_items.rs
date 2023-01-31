@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::BankSwapSource;
-use crate::world::wrath::BankSwapStoreMode;
+use crate::wrath::BankSwapSource;
+use crate::wrath::BankSwapStoreMode;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -293,7 +293,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GUILD_BANK_SWAP_ITEMS {}
+impl crate::wrath::ClientMessage for CMSG_GUILD_BANK_SWAP_ITEMS {}
 
 impl CMSG_GUILD_BANK_SWAP_ITEMS {
     pub(crate) fn size(&self) -> usize {

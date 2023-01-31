@@ -1,9 +1,9 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::UpdateMask;
-use crate::world::vanilla::MovementBlock;
-use crate::world::vanilla::ObjectType;
-use crate::world::vanilla::UpdateType;
+use crate::vanilla::UpdateMask;
+use crate::vanilla::MovementBlock;
+use crate::vanilla::ObjectType;
+use crate::vanilla::UpdateType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

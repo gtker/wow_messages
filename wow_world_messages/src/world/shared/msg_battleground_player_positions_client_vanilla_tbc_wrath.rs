@@ -31,11 +31,11 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {}
+impl crate::vanilla::ClientMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {}
+impl crate::tbc::ClientMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {}
+impl crate::wrath::ClientMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Client {}
 

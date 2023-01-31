@@ -69,7 +69,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_REMOVED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_EVENT_INVITE_REMOVED {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_INVITE_REMOVED {}
 
 impl SMSG_CALENDAR_EVENT_INVITE_REMOVED {
     pub(crate) fn size(&self) -> usize {

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::spell_steal_tbc_wrath::SpellSteal;
+use crate::shared::spell_steal_tbc_wrath::SpellSteal;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -92,10 +92,10 @@ impl crate::Message for SMSG_SPELLSTEALLOG {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELLSTEALLOG {}
+impl crate::tbc::ServerMessage for SMSG_SPELLSTEALLOG {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELLSTEALLOG {}
+impl crate::wrath::ServerMessage for SMSG_SPELLSTEALLOG {}
 
 impl SMSG_SPELLSTEALLOG {
     pub(crate) fn size(&self) -> usize {

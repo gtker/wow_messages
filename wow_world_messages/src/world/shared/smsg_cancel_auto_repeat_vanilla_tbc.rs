@@ -31,8 +31,8 @@ impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CANCEL_AUTO_REPEAT {}
+impl crate::vanilla::ServerMessage for SMSG_CANCEL_AUTO_REPEAT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_CANCEL_AUTO_REPEAT {}
+impl crate::tbc::ServerMessage for SMSG_CANCEL_AUTO_REPEAT {}
 

@@ -71,11 +71,11 @@ impl crate::Message for SMSG_BUY_ITEM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_BUY_ITEM {}
+impl crate::vanilla::ServerMessage for SMSG_BUY_ITEM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_BUY_ITEM {}
+impl crate::tbc::ServerMessage for SMSG_BUY_ITEM {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_BUY_ITEM {}
+impl crate::wrath::ServerMessage for SMSG_BUY_ITEM {}
 

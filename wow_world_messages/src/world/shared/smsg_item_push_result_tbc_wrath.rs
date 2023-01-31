@@ -1,8 +1,8 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::new_item_chat_alert_vanilla_tbc_wrath::NewItemChatAlert;
-use crate::world::shared::new_item_creation_type_vanilla_tbc_wrath::NewItemCreationType;
-use crate::world::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
+use crate::shared::new_item_chat_alert_vanilla_tbc_wrath::NewItemChatAlert;
+use crate::shared::new_item_creation_type_vanilla_tbc_wrath::NewItemCreationType;
+use crate::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -140,8 +140,8 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
+impl crate::tbc::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 

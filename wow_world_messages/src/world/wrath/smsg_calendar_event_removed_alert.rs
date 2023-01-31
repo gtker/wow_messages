@@ -58,5 +58,5 @@ impl crate::Message for SMSG_CALENDAR_EVENT_REMOVED_ALERT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_EVENT_REMOVED_ALERT {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_REMOVED_ALERT {}
 

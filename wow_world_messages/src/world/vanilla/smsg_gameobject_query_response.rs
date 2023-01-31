@@ -157,7 +157,7 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
 
 impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

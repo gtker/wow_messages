@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
+use crate::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,11 +41,11 @@ impl crate::Message for CMSG_FAR_SIGHT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_FAR_SIGHT {}
+impl crate::vanilla::ClientMessage for CMSG_FAR_SIGHT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_FAR_SIGHT {}
+impl crate::tbc::ClientMessage for CMSG_FAR_SIGHT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_FAR_SIGHT {}
+impl crate::wrath::ClientMessage for CMSG_FAR_SIGHT {}
 

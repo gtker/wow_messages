@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::wrath::Map;
+use crate::wrath::Map;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -69,5 +69,5 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_REMOVED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CALENDAR_RAID_LOCKOUT_REMOVED {}
+impl crate::wrath::ServerMessage for SMSG_CALENDAR_RAID_LOCKOUT_REMOVED {}
 

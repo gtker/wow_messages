@@ -31,5 +31,5 @@ impl crate::Message for CMSG_MEETINGSTONE_LEAVE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_MEETINGSTONE_LEAVE {}
+impl crate::vanilla::ClientMessage for CMSG_MEETINGSTONE_LEAVE {}
 

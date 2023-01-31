@@ -79,11 +79,11 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
+impl crate::vanilla::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
+impl crate::tbc::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
+impl crate::wrath::ServerMessage for SMSG_QUESTUPDATE_ADD_KILL {}
 

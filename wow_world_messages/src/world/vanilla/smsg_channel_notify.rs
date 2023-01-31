@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::ChatNotify;
+use crate::vanilla::ChatNotify;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -57,7 +57,7 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_CHANNEL_NOTIFY {}
+impl crate::vanilla::ServerMessage for SMSG_CHANNEL_NOTIFY {}
 
 impl SMSG_CHANNEL_NOTIFY {
     pub(crate) fn size(&self) -> usize {

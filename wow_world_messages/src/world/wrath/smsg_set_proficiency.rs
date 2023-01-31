@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::ItemClass;
+use crate::wrath::ItemClass;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -50,5 +50,5 @@ impl crate::Message for SMSG_SET_PROFICIENCY {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SET_PROFICIENCY {}
+impl crate::wrath::ServerMessage for SMSG_SET_PROFICIENCY {}
 

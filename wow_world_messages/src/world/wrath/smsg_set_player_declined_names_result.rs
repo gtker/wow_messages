@@ -50,5 +50,5 @@ impl crate::Message for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {}
 

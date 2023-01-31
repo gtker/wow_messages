@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::CommentatorEnableOption;
+use crate::wrath::CommentatorEnableOption;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for CMSG_COMMENTATOR_ENABLE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_COMMENTATOR_ENABLE {}
+impl crate::wrath::ClientMessage for CMSG_COMMENTATOR_ENABLE {}
 

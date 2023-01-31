@@ -58,11 +58,11 @@ impl crate::Message for SMSG_SET_PCT_SPELL_MODIFIER {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SET_PCT_SPELL_MODIFIER {}
+impl crate::vanilla::ServerMessage for SMSG_SET_PCT_SPELL_MODIFIER {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SET_PCT_SPELL_MODIFIER {}
+impl crate::tbc::ServerMessage for SMSG_SET_PCT_SPELL_MODIFIER {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SET_PCT_SPELL_MODIFIER {}
+impl crate::wrath::ServerMessage for SMSG_SET_PCT_SPELL_MODIFIER {}
 

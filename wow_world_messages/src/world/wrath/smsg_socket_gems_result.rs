@@ -55,5 +55,5 @@ impl crate::Message for SMSG_SOCKET_GEMS_RESULT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SOCKET_GEMS_RESULT {}
+impl crate::wrath::ServerMessage for SMSG_SOCKET_GEMS_RESULT {}
 

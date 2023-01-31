@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::CreatureFamily;
+use crate::wrath::CreatureFamily;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -246,7 +246,7 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {}
 
 impl SMSG_CREATURE_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {

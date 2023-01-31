@@ -2,7 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::world::wrath::SMSG_AUTH_CHALLENGE).
+/// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::wrath::SMSG_AUTH_CHALLENGE).
 ///
 /// This message is never encrypted.
 ///
@@ -176,7 +176,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_AUTH_SESSION {}
+impl crate::wrath::ClientMessage for CMSG_AUTH_SESSION {}
 
 impl CMSG_AUTH_SESSION {
     pub(crate) fn size(&self) -> usize {

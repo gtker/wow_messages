@@ -53,5 +53,5 @@ impl crate::Message for SMSG_CAMERA_SHAKE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_CAMERA_SHAKE {}
+impl crate::wrath::ServerMessage for SMSG_CAMERA_SHAKE {}
 

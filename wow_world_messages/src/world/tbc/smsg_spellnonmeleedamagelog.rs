@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::HitInfo;
-use crate::world::tbc::SpellSchool;
+use crate::tbc::HitInfo;
+use crate::tbc::SpellSchool;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -149,7 +149,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {}
+impl crate::tbc::ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {}
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
     pub(crate) fn size(&self) -> usize {

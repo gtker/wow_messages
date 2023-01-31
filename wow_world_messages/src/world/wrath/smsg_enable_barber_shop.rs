@@ -31,5 +31,5 @@ impl crate::Message for SMSG_ENABLE_BARBER_SHOP {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ENABLE_BARBER_SHOP {}
+impl crate::wrath::ServerMessage for SMSG_ENABLE_BARBER_SHOP {}
 

@@ -45,19 +45,19 @@ impl crate::Message for SMSG_DESTROY_OBJECT {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_DESTROY_OBJECT {}
+impl crate::vanilla::ServerMessage for SMSG_DESTROY_OBJECT {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_DESTROY_OBJECT {}
+impl crate::tbc::ServerMessage for SMSG_DESTROY_OBJECT {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
     use super::SMSG_DESTROY_OBJECT;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 12] = [ 0x00, 0x0A, 0xAA, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, ];
@@ -144,9 +144,9 @@ mod test_tbc {
     use super::SMSG_DESTROY_OBJECT;
     use super::*;
     use super::super::*;
-    use crate::world::tbc::opcodes::ServerOpcodeMessage;
+    use crate::tbc::opcodes::ServerOpcodeMessage;
     use crate::Guid;
-    use crate::world::tbc::{ClientMessage, ServerMessage};
+    use crate::tbc::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 12] = [ 0x00, 0x0A, 0xAA, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, ];

@@ -31,11 +31,11 @@ impl crate::Message for SMSG_ATTACKSWING_NOTINRANGE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ATTACKSWING_NOTINRANGE {}
+impl crate::vanilla::ServerMessage for SMSG_ATTACKSWING_NOTINRANGE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ATTACKSWING_NOTINRANGE {}
+impl crate::tbc::ServerMessage for SMSG_ATTACKSWING_NOTINRANGE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ATTACKSWING_NOTINRANGE {}
+impl crate::wrath::ServerMessage for SMSG_ATTACKSWING_NOTINRANGE {}
 

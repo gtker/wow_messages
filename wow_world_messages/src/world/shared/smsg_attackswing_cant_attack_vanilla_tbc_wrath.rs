@@ -31,11 +31,11 @@ impl crate::Message for SMSG_ATTACKSWING_CANT_ATTACK {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_ATTACKSWING_CANT_ATTACK {}
+impl crate::vanilla::ServerMessage for SMSG_ATTACKSWING_CANT_ATTACK {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_ATTACKSWING_CANT_ATTACK {}
+impl crate::tbc::ServerMessage for SMSG_ATTACKSWING_CANT_ATTACK {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ATTACKSWING_CANT_ATTACK {}
+impl crate::wrath::ServerMessage for SMSG_ATTACKSWING_CANT_ATTACK {}
 

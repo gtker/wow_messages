@@ -65,7 +65,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {}
+impl crate::vanilla::ServerMessage for SMSG_PET_NAME_QUERY_RESPONSE {}
 
 impl SMSG_PET_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
@@ -80,8 +80,8 @@ mod test {
     use super::SMSG_PET_NAME_QUERY_RESPONSE;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 19] = [ 0x00, 0x11, 0x53, 0x00, 0xEF, 0xBE, 0xAD, 0xDE, 0x41,
          0x42, 0x43, 0x44, 0x45, 0x46, 0x00, 0xDE, 0xCA, 0xFA, 0x00, ];

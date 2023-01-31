@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::join_arena_type_tbc_wrath::JoinArenaType;
+use crate::shared::join_arena_type_tbc_wrath::JoinArenaType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -67,8 +67,8 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN_ARENA {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_BATTLEMASTER_JOIN_ARENA {}
+impl crate::tbc::ClientMessage for CMSG_BATTLEMASTER_JOIN_ARENA {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_BATTLEMASTER_JOIN_ARENA {}
+impl crate::wrath::ClientMessage for CMSG_BATTLEMASTER_JOIN_ARENA {}
 

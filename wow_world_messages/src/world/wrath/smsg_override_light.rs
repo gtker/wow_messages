@@ -58,5 +58,5 @@ impl crate::Message for SMSG_OVERRIDE_LIGHT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_OVERRIDE_LIGHT {}
+impl crate::wrath::ServerMessage for SMSG_OVERRIDE_LIGHT {}
 

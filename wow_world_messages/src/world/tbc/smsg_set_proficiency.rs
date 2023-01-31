@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::ItemClass;
+use crate::tbc::ItemClass;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -50,5 +50,5 @@ impl crate::Message for SMSG_SET_PROFICIENCY {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SET_PROFICIENCY {}
+impl crate::tbc::ServerMessage for SMSG_SET_PROFICIENCY {}
 

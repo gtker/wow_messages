@@ -31,8 +31,8 @@ impl crate::Message for CMSG_ARENA_TEAM_ACCEPT {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ARENA_TEAM_ACCEPT {}
+impl crate::tbc::ClientMessage for CMSG_ARENA_TEAM_ACCEPT {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ARENA_TEAM_ACCEPT {}
+impl crate::wrath::ClientMessage for CMSG_ARENA_TEAM_ACCEPT {}
 

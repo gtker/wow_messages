@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::MovementInfo;
+use crate::vanilla::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -43,7 +43,7 @@ impl crate::Message for MSG_MOVE_SET_RUN_MODE_Client {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for MSG_MOVE_SET_RUN_MODE_Client {}
+impl crate::vanilla::ClientMessage for MSG_MOVE_SET_RUN_MODE_Client {}
 
 impl MSG_MOVE_SET_RUN_MODE_Client {
     pub(crate) fn size(&self) -> usize {
@@ -56,9 +56,9 @@ mod test {
     use super::MSG_MOVE_SET_RUN_MODE_Client;
     use super::*;
     use super::super::*;
-    use crate::world::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::Guid;
-    use crate::world::vanilla::{ClientMessage, ServerMessage};
+    use crate::vanilla::{ClientMessage, ServerMessage};
 
     const RAW0: [u8; 34] = [ 0x00, 0x20, 0xC2, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
          0x00, 0x41, 0x1B, 0x5B, 0x02, 0x55, 0xB9, 0x0B, 0xC6, 0xF8, 0x84, 0x01,

@@ -31,5 +31,5 @@ impl crate::Message for CMSG_QUERY_QUESTS_COMPLETED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_QUERY_QUESTS_COMPLETED {}
+impl crate::wrath::ClientMessage for CMSG_QUERY_QUESTS_COMPLETED {}
 

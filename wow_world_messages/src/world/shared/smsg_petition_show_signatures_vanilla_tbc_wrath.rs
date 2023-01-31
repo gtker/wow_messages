@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
+use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -83,13 +83,13 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {}
+impl crate::vanilla::ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {}
+impl crate::tbc::ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {}
+impl crate::wrath::ServerMessage for SMSG_PETITION_SHOW_SIGNATURES {}
 
 impl SMSG_PETITION_SHOW_SIGNATURES {
     pub(crate) fn size(&self) -> usize {

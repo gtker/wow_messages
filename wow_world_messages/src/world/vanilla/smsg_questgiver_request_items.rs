@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::vanilla::QuestItemRequirement;
-use crate::world::vanilla::QuestCompletable;
+use crate::vanilla::QuestItemRequirement;
+use crate::vanilla::QuestCompletable;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -182,7 +182,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {}
+impl crate::vanilla::ServerMessage for SMSG_QUESTGIVER_REQUEST_ITEMS {}
 
 impl SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub(crate) fn size(&self) -> usize {

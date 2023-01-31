@@ -52,7 +52,7 @@ impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
+impl crate::wrath::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
 
 impl CMSG_MOVE_TIME_SKIPPED {
     pub(crate) fn size(&self) -> usize {

@@ -58,5 +58,5 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_PVP_KILL {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_QUESTUPDATE_ADD_PVP_KILL {}
+impl crate::wrath::ServerMessage for SMSG_QUESTUPDATE_ADD_PVP_KILL {}
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
 use crate::Guid;
-use crate::world::tbc::MovementInfo;
+use crate::tbc::MovementInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -53,7 +53,7 @@ impl crate::Message for MSG_MOVE_UNROOT_Server {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for MSG_MOVE_UNROOT_Server {}
+impl crate::tbc::ServerMessage for MSG_MOVE_UNROOT_Server {}
 
 impl MSG_MOVE_UNROOT_Server {
     pub(crate) fn size(&self) -> usize {

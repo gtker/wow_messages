@@ -31,11 +31,11 @@ impl crate::Message for CMSG_GROUP_DISBAND {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_GROUP_DISBAND {}
+impl crate::vanilla::ClientMessage for CMSG_GROUP_DISBAND {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_GROUP_DISBAND {}
+impl crate::tbc::ClientMessage for CMSG_GROUP_DISBAND {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_GROUP_DISBAND {}
+impl crate::wrath::ClientMessage for CMSG_GROUP_DISBAND {}
 

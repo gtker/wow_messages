@@ -41,8 +41,8 @@ impl crate::Message for CMSG_SET_TARGET_OBSOLETE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_SET_TARGET_OBSOLETE {}
+impl crate::vanilla::ClientMessage for CMSG_SET_TARGET_OBSOLETE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_SET_TARGET_OBSOLETE {}
+impl crate::tbc::ClientMessage for CMSG_SET_TARGET_OBSOLETE {}
 

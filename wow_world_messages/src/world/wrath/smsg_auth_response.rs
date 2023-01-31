@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Expansion;
-use crate::world::wrath::WorldResult;
-use crate::world::wrath::BillingPlanFlags;
+use crate::wrath::Expansion;
+use crate::wrath::WorldResult;
+use crate::wrath::BillingPlanFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -326,7 +326,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_AUTH_RESPONSE {}
+impl crate::wrath::ServerMessage for SMSG_AUTH_RESPONSE {}
 
 impl SMSG_AUTH_RESPONSE {
     pub(crate) fn size(&self) -> usize {

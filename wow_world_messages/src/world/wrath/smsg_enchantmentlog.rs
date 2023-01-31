@@ -84,7 +84,7 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ENCHANTMENTLOG {}
+impl crate::wrath::ServerMessage for SMSG_ENCHANTMENTLOG {}
 
 impl SMSG_ENCHANTMENTLOG {
     pub(crate) fn size(&self) -> usize {

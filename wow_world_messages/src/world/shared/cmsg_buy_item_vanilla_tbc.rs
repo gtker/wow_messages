@@ -70,8 +70,8 @@ impl crate::Message for CMSG_BUY_ITEM {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_BUY_ITEM {}
+impl crate::vanilla::ClientMessage for CMSG_BUY_ITEM {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_BUY_ITEM {}
+impl crate::tbc::ClientMessage for CMSG_BUY_ITEM {}
 

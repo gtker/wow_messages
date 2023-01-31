@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::GuildEmblemResult;
+use crate::wrath::GuildEmblemResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -41,5 +41,5 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Server {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
+impl crate::wrath::ServerMessage for MSG_SAVE_GUILD_EMBLEM_Server {}
 

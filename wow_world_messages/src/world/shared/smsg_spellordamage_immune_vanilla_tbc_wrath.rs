@@ -67,11 +67,11 @@ impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
+impl crate::vanilla::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
+impl crate::tbc::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
+impl crate::wrath::ServerMessage for SMSG_SPELLORDAMAGE_IMMUNE {}
 

@@ -1,6 +1,6 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::tbc::Map;
-use crate::world::tbc::RaidInstanceMessage;
+use crate::tbc::Map;
+use crate::tbc::RaidInstanceMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -60,5 +60,5 @@ impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {}
+impl crate::tbc::ServerMessage for SMSG_RAID_INSTANCE_MESSAGE {}
 

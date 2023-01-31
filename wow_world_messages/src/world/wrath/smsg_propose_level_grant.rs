@@ -43,7 +43,7 @@ impl crate::Message for SMSG_PROPOSE_LEVEL_GRANT {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_PROPOSE_LEVEL_GRANT {}
+impl crate::wrath::ServerMessage for SMSG_PROPOSE_LEVEL_GRANT {}
 
 impl SMSG_PROPOSE_LEVEL_GRANT {
     pub(crate) fn size(&self) -> usize {

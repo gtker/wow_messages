@@ -40,8 +40,8 @@ impl crate::Message for CMSG_ITEM_QUERY_SINGLE {
 
 }
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_ITEM_QUERY_SINGLE {}
+impl crate::tbc::ClientMessage for CMSG_ITEM_QUERY_SINGLE {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_ITEM_QUERY_SINGLE {}
+impl crate::wrath::ClientMessage for CMSG_ITEM_QUERY_SINGLE {}
 

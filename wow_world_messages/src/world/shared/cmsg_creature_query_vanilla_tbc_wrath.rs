@@ -50,11 +50,11 @@ impl crate::Message for CMSG_CREATURE_QUERY {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ClientMessage for CMSG_CREATURE_QUERY {}
+impl crate::vanilla::ClientMessage for CMSG_CREATURE_QUERY {}
 
 #[cfg(feature = "tbc")]
-impl crate::world::tbc::ClientMessage for CMSG_CREATURE_QUERY {}
+impl crate::tbc::ClientMessage for CMSG_CREATURE_QUERY {}
 
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ClientMessage for CMSG_CREATURE_QUERY {}
+impl crate::wrath::ClientMessage for CMSG_CREATURE_QUERY {}
 

@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::NpcTextUpdate;
+use crate::wrath::NpcTextUpdate;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -58,7 +58,7 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_NPC_TEXT_UPDATE {}
+impl crate::wrath::ServerMessage for SMSG_NPC_TEXT_UPDATE {}
 
 impl SMSG_NPC_TEXT_UPDATE {
     pub(crate) fn size(&self) -> usize {

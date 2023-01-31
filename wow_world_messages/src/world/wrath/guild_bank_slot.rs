@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::GuildBankSocket;
+use crate::wrath::GuildBankSocket;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -66,7 +66,7 @@ impl GuildBankSlot {
 }
 
 impl GuildBankSlot {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // slot: u8
         let slot = crate::util::read_u8_le(r)?;
 

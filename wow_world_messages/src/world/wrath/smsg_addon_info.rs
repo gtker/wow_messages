@@ -1,5 +1,5 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::wrath::Addon;
+use crate::wrath::Addon;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -63,7 +63,7 @@ impl crate::Message for SMSG_ADDON_INFO {
 
 }
 #[cfg(feature = "wrath")]
-impl crate::world::wrath::ServerMessage for SMSG_ADDON_INFO {}
+impl crate::wrath::ServerMessage for SMSG_ADDON_INFO {}
 
 impl SMSG_ADDON_INFO {
     pub(crate) fn size(&self) -> usize {

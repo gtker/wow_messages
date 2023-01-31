@@ -42,5 +42,5 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::world::vanilla::ServerMessage for MSG_LOOKING_FOR_GROUP_Server {}
+impl crate::vanilla::ServerMessage for MSG_LOOKING_FOR_GROUP_Server {}
 

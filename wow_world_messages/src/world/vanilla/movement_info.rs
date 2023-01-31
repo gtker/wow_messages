@@ -1,7 +1,7 @@
 use std::convert::{TryFrom, TryInto};
-use crate::world::vanilla::TransportInfo;
-use crate::world::vanilla::Vector3d;
-use crate::world::vanilla::MovementFlags;
+use crate::vanilla::TransportInfo;
+use crate::vanilla::Vector3d;
+use crate::vanilla::MovementFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -93,7 +93,7 @@ impl MovementInfo {
 }
 
 impl MovementInfo {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
         // flags: MovementFlags
         let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
 
