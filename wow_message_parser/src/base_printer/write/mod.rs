@@ -116,11 +116,11 @@ pub(crate) fn write_skills(directory: &Path, data: &Data, expansion: Expansion) 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-pub(crate) fn write_spells(directory: &Path, data: &Data) {
+pub(crate) fn write_initial_spells(directory: &Path, data: &Data) {
     let mut s = Writer::new();
 
     for combination in &data.combinations {
-        let spells = data.spells.get(combination).unwrap();
+        let spells = data.initial_spells.get(combination).unwrap();
 
         s.wln(format!(
             "const {race}_{class}: &[u32] = &[",

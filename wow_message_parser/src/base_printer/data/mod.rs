@@ -16,7 +16,7 @@ pub(crate) struct Data {
     pub exploration_exp_per_level: Vec<XpPerLevel>,
     pub base_stats: HashMap<Combination, BTreeMap<u8, BaseStats>>,
     pub skills: HashMap<Combination, BTreeSet<(u32, String)>>,
-    pub spells: HashMap<Combination, BTreeSet<(u32, String)>>,
+    pub initial_spells: HashMap<Combination, BTreeSet<(u32, String)>>,
     pub combinations: Vec<Combination>,
     positions: Vec<RawPosition>,
     pub actions: HashMap<Combination, BTreeSet<Action>>,
@@ -48,7 +48,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion
     let exploration_exp_per_level = get_exploration_exp_data(&conn);
     let base_stats = get_stat_data(&conn);
     let skills = get_skill_data(&conn);
-    let spells = get_spell_data(&conn);
+    let initial_spells = get_initial_spell_data(&conn);
     let actions = get_action_data(&conn);
     let positions = positions();
     let triggers = get_triggers(&conn, expansion);
@@ -60,7 +60,7 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion
         exploration_exp_per_level,
         base_stats,
         skills,
-        spells,
+        initial_spells,
         combinations,
         positions,
         actions,
@@ -240,7 +240,7 @@ struct Spell {
     note: String,
 }
 
-fn get_spell_data(conn: &Connection) -> HashMap<Combination, BTreeSet<(u32, String)>> {
+fn get_initial_spell_data(conn: &Connection) -> HashMap<Combination, BTreeSet<(u32, String)>> {
     let mut s = conn
         .prepare("SELECT race, class, Spell, Note FROM playercreateinfo_spell;")
         .unwrap();

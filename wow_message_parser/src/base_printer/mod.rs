@@ -132,7 +132,7 @@ fn write_to_files(data: &Data, expansion: Expansion) {
     write::write_exp(&expansion.base_extended_path(), data);
     write::write_stats(&expansion.base_extended_path(), data);
     write::write_skills(&expansion.base_extended_path(), data, expansion);
-    write::write_spells(&expansion.base_extended_path(), data);
+    write::write_initial_spells(&expansion.base_extended_path(), data);
     write::write_positions(&expansion.base_extended_path(), data, expansion);
     write::write_actions(&expansion.base_extended_path(), data);
     write::write_area_triggers(&expansion.base_extended_path(), data, expansion);
