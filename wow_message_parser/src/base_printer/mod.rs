@@ -18,7 +18,7 @@ use std::path::PathBuf;
 pub enum ImportFrom {
     ItemsConstructors,
     Items,
-    Base,
+    Definition,
 }
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]

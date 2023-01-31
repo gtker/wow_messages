@@ -4,7 +4,7 @@ use crate::base_printer::{Expansion, ImportFrom};
 use std::collections::BTreeSet;
 
 pub(crate) fn definition(s: &mut Writer, fields: &[Field], arrays: &[Array], expansion: Expansion) {
-    includes(s, &fields, &arrays, expansion, ImportFrom::Base);
+    includes(s, &fields, &arrays, expansion, ImportFrom::Definition);
 
     struct_definition(s, &fields, &arrays);
     impl_block(s, &fields, &arrays);
@@ -25,7 +25,7 @@ pub(crate) fn includes(
         ImportFrom::ItemsConstructors | ImportFrom::Items => {
             set.insert("Item");
         }
-        ImportFrom::Base => {}
+        ImportFrom::Definition => {}
     }
 
     if import_location == ImportFrom::Items {
@@ -34,7 +34,7 @@ pub(crate) fn includes(
 
     let location = match import_location {
         ImportFrom::ItemsConstructors | ImportFrom::Items => "wow_world_base",
-        ImportFrom::Base => "crate",
+        ImportFrom::Definition => "crate",
     };
     s.wln(format!(
         "use {location}::{}::{{",
@@ -49,8 +49,16 @@ pub(crate) fn includes(
     }
 
     for array in arrays {
-        if import_location != ImportFrom::Base || array.import_only {
-            set.insert(array.type_name);
+        match import_location {
+            ImportFrom::ItemsConstructors => {
+                set.insert(array.type_name);
+            }
+            ImportFrom::Items => {}
+            ImportFrom::Definition => {
+                if array.import_only {
+                    set.insert(array.type_name);
+                }
+            }
         }
 
         for e in &array.instances[0] {

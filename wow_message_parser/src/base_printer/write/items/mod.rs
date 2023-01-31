@@ -35,7 +35,7 @@ pub(crate) fn write_constructors(path: &Path, data: &Data) {
     let mut s = Writer::new();
 
     let (values, expansion) = data.items.to_generic();
-    constructor(&mut s, &values[0].fields, &values[0].arrays, expansion);
+    constructor(&mut s, &values, expansion);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }

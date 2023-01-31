@@ -1,18 +1,13 @@
-use crate::base_printer::data::items::{Array, Field};
+use crate::base_printer::data::items::GenericItem;
 use crate::base_printer::write::items::definition::includes;
 use crate::base_printer::writer::Writer;
 use crate::base_printer::{Expansion, ImportFrom};
 
-pub(crate) fn constructor(
-    s: &mut Writer,
-    fields: &[Field],
-    arrays: &[Array],
-    expansion: Expansion,
-) {
+pub(crate) fn constructor(s: &mut Writer, items: &[GenericItem], expansion: Expansion) {
     includes(
         s,
-        &fields,
-        &arrays,
+        &items[0].fields,
+        &items[0].arrays,
         expansion,
         ImportFrom::ItemsConstructors,
     );
@@ -20,11 +15,11 @@ pub(crate) fn constructor(
     s.constructor(
         "n",
         |s| {
-            for e in fields {
+            for e in &items[0].fields {
                 s.wln(format!("{}: {},", e.name, e.value.type_name()));
             }
 
-            for array in arrays {
+            for array in &items[0].arrays {
                 for instance in &array.instances {
                     for field in instance {
                         s.wln(format!(
@@ -37,11 +32,11 @@ pub(crate) fn constructor(
             }
         },
         |s| {
-            for e in fields {
+            for e in &items[0].fields {
                 s.wln(format!("{},", e.name));
             }
 
-            for array in arrays {
+            for array in &items[0].arrays {
                 s.wln(format!("{}: [", array.variable_name));
 
                 for instance in &array.instances {
