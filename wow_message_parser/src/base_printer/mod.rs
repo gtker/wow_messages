@@ -137,7 +137,8 @@ fn write_to_files(data: &Data, expansion: Expansion) {
     write::write_actions(&expansion.base_extended_path(), data);
     write::write_area_triggers(&expansion.base_extended_path(), data, expansion);
     write::write_pet_names(&expansion.base_extended_path(), data, expansion);
-    write_items(&expansion.item_data_path(), data);
-    write_definition(&expansion.item_definition_path(), data);
-    write_constructors(&expansion.item_constructor_path(), data);
+
+    write_items(&expansion.item_data_path(), data, expansion);
+    write_definition(&expansion.item_definition_path(), data, expansion);
+    write_constructors(&expansion.item_constructor_path(), data, expansion);
 }

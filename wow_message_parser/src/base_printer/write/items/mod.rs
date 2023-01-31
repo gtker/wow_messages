@@ -22,28 +22,28 @@ use crate::base_printer::{Expansion, ImportFrom};
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
 use std::path::Path;
 
-pub(crate) fn write_definition(path: &Path, data: &Data) {
+pub(crate) fn write_definition(path: &Path, data: &Data, expansion: Expansion) {
     let mut s = Writer::new();
 
-    let (values, expansion) = data.items.to_generic();
+    let values = &data.items;
     definition(&mut s, &values[0].fields, &values[0].arrays, expansion);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-pub(crate) fn write_constructors(path: &Path, data: &Data) {
+pub(crate) fn write_constructors(path: &Path, data: &Data, expansion: Expansion) {
     let mut s = Writer::new();
 
-    let (values, expansion) = data.items.to_generic();
+    let values = &data.items;
     constructor(&mut s, &values, expansion);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-pub(crate) fn write_items(path: &Path, data: &Data) {
+pub(crate) fn write_items(path: &Path, data: &Data, expansion: Expansion) {
     let mut s = Writer::new();
 
-    let (items, expansion): (Vec<GenericItem>, Expansion) = data.items.to_generic();
+    let items = &data.items;
 
     all_items(&mut s, &items, expansion);
 

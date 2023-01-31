@@ -1,71 +1,10 @@
 use crate::base_printer::Expansion;
 use rusqlite::Connection;
 use std::collections::BTreeSet;
-use tbc::TbcItem;
-use vanilla::VanillaItem;
-use wrath::WrathItem;
 
 pub mod tbc;
 pub mod vanilla;
 pub mod wrath;
-
-pub enum Items {
-    Vanilla(Vec<VanillaItem>),
-    BurningCrusade(Vec<TbcItem>),
-    Wrath(Vec<WrathItem>),
-}
-
-impl Items {
-    pub fn to_generic(&self) -> (Vec<GenericItem>, Expansion) {
-        match self {
-            Items::Vanilla(v) => (
-                v.iter()
-                    .map(|a| {
-                        let (fields, arrays) = a.values();
-                        GenericItem {
-                            entry: a.entry,
-                            extra_flags: a.extra_flags,
-                            name: a.name.clone(),
-                            fields,
-                            arrays,
-                        }
-                    })
-                    .collect(),
-                Expansion::Vanilla,
-            ),
-            Items::BurningCrusade(v) => (
-                v.iter()
-                    .map(|a| {
-                        let (fields, arrays) = a.values();
-                        GenericItem {
-                            entry: a.entry,
-                            extra_flags: a.extra_flags,
-                            name: a.name.clone(),
-                            fields,
-                            arrays,
-                        }
-                    })
-                    .collect(),
-                Expansion::BurningCrusade,
-            ),
-            Items::Wrath(v) => (
-                v.iter()
-                    .map(|a| {
-                        let (fields, arrays) = a.values();
-                        GenericItem {
-                            entry: a.entry,
-                            extra_flags: a.extra_flags,
-                            name: a.name.clone(),
-                            fields,
-                            arrays,
-                        }
-                    })
-                    .collect(),
-                Expansion::WrathOfTheLichKing,
-            ),
-        }
-    }
-}
 
 pub struct GenericItem {
     pub entry: u32,
@@ -423,10 +362,10 @@ fn i32_to_u32(v: i32) -> u32 {
     u32::from_le_bytes(v.to_le_bytes())
 }
 
-pub(crate) fn get_items(conn: &Connection, expansion: Expansion) -> Items {
+pub(crate) fn get_items(conn: &Connection, expansion: Expansion) -> Vec<GenericItem> {
     match expansion {
-        Expansion::Vanilla => Items::Vanilla(vanilla::vanilla(conn)),
-        Expansion::BurningCrusade => Items::BurningCrusade(tbc::tbc(conn)),
-        Expansion::WrathOfTheLichKing => Items::Wrath(wrath::wrath(conn)),
+        Expansion::Vanilla => vanilla::vanilla(conn),
+        Expansion::BurningCrusade => tbc::tbc(conn),
+        Expansion::WrathOfTheLichKing => wrath::wrath(conn),
     }
 }
