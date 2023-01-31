@@ -18,8 +18,8 @@ jobs:
           override: true
       - uses: actions-rs/cargo@v1
         with:
-          command: check
-          args: --all-features
+          command: check # "wow_items" bloats compile time significantly
+          args: --all-features --workspace --exclude 'wow_items'
       - uses: actions-rs/cargo@v1
         with:
           command: clippy # "wow_items" bloats compile time significantly
