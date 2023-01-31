@@ -1,5 +1,6 @@
 use crate::base_printer::Expansion;
 use rusqlite::Connection;
+use std::collections::BTreeSet;
 use tbc::TbcItem;
 use vanilla::VanillaItem;
 use wrath::WrathItem;
@@ -75,12 +76,37 @@ pub struct GenericItem {
 }
 
 impl GenericItem {
-    pub fn all_arrays_are_default(&self) -> bool {
-        self.arrays.iter().all(|a| {
-            a.instances
-                .iter()
-                .all(|a| a.iter().all(|a| a.value.is_default()))
-        })
+    pub fn types_that_are_defaulted(&self) -> BTreeSet<&'static str> {
+        let mut types_that_are_defaulted = BTreeSet::new();
+
+        for array in &self.arrays {
+            if array.is_default() {
+                types_that_are_defaulted.insert(array.type_name);
+            }
+        }
+
+        types_that_are_defaulted
+    }
+
+    fn ty_to_short(n: &str) -> &'static str {
+        match n {
+            "ItemDamageType" => "a",
+            "Spells" => "b",
+            "ItemSocket" => "c",
+            "ItemStat" => "d",
+            v => unimplemented!("Unhandled array type {}", v),
+        }
+    }
+
+    pub fn constructor_name(&self) -> String {
+        let mut s = "n".to_string();
+
+        for n in self.types_that_are_defaulted() {
+            let n = Self::ty_to_short(n);
+            s.push_str(&format!("{n}"));
+        }
+
+        s
     }
 }
 
@@ -105,6 +131,12 @@ impl Array {
             import_only,
         }
     }
+
+    pub fn is_default(&self) -> bool {
+        self.instances
+            .iter()
+            .all(|a| a.iter().all(|a| a.is_default()))
+    }
 }
 
 pub struct ArrayField {
@@ -120,6 +152,10 @@ impl ArrayField {
             variable_name,
             value,
         }
+    }
+
+    pub fn is_default(&self) -> bool {
+        self.value.is_default()
     }
 }
 

@@ -102,13 +102,17 @@ fn all_items(s: &mut Writer, items: &[GenericItem], expansion: Expansion) {
         if unobtainable(item.entry, item.extra_flags, &item.name) {
             print_unobtainable_cfg(s);
         }
-        s.w("n(");
+        s.w(format!("{}(", item.constructor_name()));
 
         for value in &item.fields {
             s.w_no_indent(format!("{},", value.value.to_string()));
         }
 
         for array in &item.arrays {
+            if array.is_default() {
+                continue;
+            }
+
             for instance in &array.instances {
                 for field in instance {
                     s.w_no_indent(format!("{},", field.value.to_string()));
