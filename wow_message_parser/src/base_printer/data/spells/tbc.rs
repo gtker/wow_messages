@@ -1,3 +1,5 @@
+use crate::base_printer::data::items::{Field, Value};
+use crate::base_printer::data::spells::GenericSpell;
 use rusqlite::Connection;
 
 pub(crate) struct TbcSpell {
@@ -183,7 +185,409 @@ pub(crate) struct TbcSpell {
     attributes_serverside: i32,
 }
 
-pub(crate) fn tbc(conn: &Connection) -> Vec<TbcSpell> {
+impl TbcSpell {
+    pub(crate) fn into_generic_spell(self) -> GenericSpell {
+        let fields = vec![
+            Field::new("id", Value::Int(self.id)),
+            Field::new("category", Value::Int(self.category)),
+            Field::new("cast_ui", Value::Int(self.cast_ui)),
+            Field::new("dispel", Value::Int(self.dispel)),
+            Field::new("mechanic", Value::Int(self.mechanic)),
+            Field::new("attributes", Value::Uint(self.attributes)),
+            Field::new("attributes_ex", Value::Uint(self.attributes_ex)),
+            Field::new("attributes_ex2", Value::Uint(self.attributes_ex2)),
+            Field::new("attributes_ex3", Value::Uint(self.attributes_ex3)),
+            Field::new("attributes_ex4", Value::Uint(self.attributes_ex4)),
+            Field::new("attributes_ex5", Value::Uint(self.attributes_ex5)),
+            Field::new("attributes_ex6", Value::Uint(self.attributes_ex6)),
+            Field::new("stances", Value::Uint(self.stances)),
+            Field::new("stances_not", Value::Uint(self.stances_not)),
+            Field::new("targets", Value::Int(self.targets)),
+            Field::new(
+                "target_creature_type",
+                Value::Int(self.target_creature_type),
+            ),
+            Field::new(
+                "requires_spell_focus",
+                Value::Int(self.requires_spell_focus),
+            ),
+            Field::new("facing_caster_flags", Value::Int(self.facing_caster_flags)),
+            Field::new("caster_aura_state", Value::Int(self.caster_aura_state)),
+            Field::new("target_aura_state", Value::Int(self.target_aura_state)),
+            Field::new(
+                "caster_aura_state_not",
+                Value::Int(self.caster_aura_state_not),
+            ),
+            Field::new(
+                "target_aura_state_not",
+                Value::Int(self.target_aura_state_not),
+            ),
+            Field::new("casting_time_index", Value::Int(self.casting_time_index)),
+            Field::new("recovery_time", Value::Int(self.recovery_time)),
+            Field::new(
+                "category_recovery_time",
+                Value::Int(self.category_recovery_time),
+            ),
+            Field::new("interrupt_flags", Value::Int(self.interrupt_flags)),
+            Field::new(
+                "aura_interrupt_flags",
+                Value::Int(self.aura_interrupt_flags),
+            ),
+            Field::new(
+                "channel_interrupt_flags",
+                Value::Int(self.channel_interrupt_flags),
+            ),
+            Field::new("proc_flags", Value::Int(self.proc_flags)),
+            Field::new("proc_chance", Value::Int(self.proc_chance)),
+            Field::new("proc_charges", Value::Int(self.proc_charges)),
+            Field::new("max_level", Value::Int(self.max_level)),
+            Field::new("base_level", Value::Int(self.base_level)),
+            Field::new("spell_level", Value::Int(self.spell_level)),
+            Field::new("duration_index", Value::Int(self.duration_index)),
+            Field::new("power_type", Value::Uint(self.power_type)),
+            Field::new("mana_cost", Value::Int(self.mana_cost)),
+            Field::new("mana_cost_perlevel", Value::Int(self.mana_cost_perlevel)),
+            Field::new("mana_per_second", Value::Int(self.mana_per_second)),
+            Field::new(
+                "mana_per_second_per_level",
+                Value::Int(self.mana_per_second_per_level),
+            ),
+            Field::new("range_index", Value::Int(self.range_index)),
+            Field::new("speed", Value::Float(self.speed)),
+            Field::new("modal_next_spell", Value::Int(self.modal_next_spell)),
+            Field::new("stack_amount", Value::Int(self.stack_amount)),
+            Field::new("totem1", Value::Int(self.totem1)),
+            Field::new("totem2", Value::Int(self.totem2)),
+            Field::new("reagent1", Value::Int(self.reagent1)),
+            Field::new("reagent2", Value::Int(self.reagent2)),
+            Field::new("reagent3", Value::Int(self.reagent3)),
+            Field::new("reagent4", Value::Int(self.reagent4)),
+            Field::new("reagent5", Value::Int(self.reagent5)),
+            Field::new("reagent6", Value::Int(self.reagent6)),
+            Field::new("reagent7", Value::Int(self.reagent7)),
+            Field::new("reagent8", Value::Int(self.reagent8)),
+            Field::new("reagent_count1", Value::Uint(self.reagent_count1)),
+            Field::new("reagent_count2", Value::Uint(self.reagent_count2)),
+            Field::new("reagent_count3", Value::Uint(self.reagent_count3)),
+            Field::new("reagent_count4", Value::Uint(self.reagent_count4)),
+            Field::new("reagent_count5", Value::Uint(self.reagent_count5)),
+            Field::new("reagent_count6", Value::Uint(self.reagent_count6)),
+            Field::new("reagent_count7", Value::Uint(self.reagent_count7)),
+            Field::new("reagent_count8", Value::Uint(self.reagent_count8)),
+            Field::new("equipped_item_class", Value::Int(self.equipped_item_class)),
+            Field::new(
+                "equipped_item_sub_class_mask",
+                Value::Int(self.equipped_item_sub_class_mask),
+            ),
+            Field::new(
+                "equipped_item_inventory_type_mask",
+                Value::Int(self.equipped_item_inventory_type_mask),
+            ),
+            Field::new("effect1", Value::Int(self.effect1)),
+            Field::new("effect2", Value::Int(self.effect2)),
+            Field::new("effect3", Value::Int(self.effect3)),
+            Field::new("effect_die_sides1", Value::Int(self.effect_die_sides1)),
+            Field::new("effect_die_sides2", Value::Int(self.effect_die_sides2)),
+            Field::new("effect_die_sides3", Value::Int(self.effect_die_sides3)),
+            Field::new("effect_base_dice1", Value::Int(self.effect_base_dice1)),
+            Field::new("effect_base_dice2", Value::Int(self.effect_base_dice2)),
+            Field::new("effect_base_dice3", Value::Int(self.effect_base_dice3)),
+            Field::new(
+                "effect_dice_per_level1",
+                Value::Float(self.effect_dice_per_level1),
+            ),
+            Field::new(
+                "effect_dice_per_level2",
+                Value::Float(self.effect_dice_per_level2),
+            ),
+            Field::new(
+                "effect_dice_per_level3",
+                Value::Float(self.effect_dice_per_level3),
+            ),
+            Field::new(
+                "effect_real_points_per_level1",
+                Value::Float(self.effect_real_points_per_level1),
+            ),
+            Field::new(
+                "effect_real_points_per_level2",
+                Value::Float(self.effect_real_points_per_level2),
+            ),
+            Field::new(
+                "effect_real_points_per_level3",
+                Value::Float(self.effect_real_points_per_level3),
+            ),
+            Field::new("effect_base_points1", Value::Int(self.effect_base_points1)),
+            Field::new("effect_base_points2", Value::Int(self.effect_base_points2)),
+            Field::new("effect_base_points3", Value::Int(self.effect_base_points3)),
+            Field::new("effect_mechanic1", Value::Int(self.effect_mechanic1)),
+            Field::new("effect_mechanic2", Value::Int(self.effect_mechanic2)),
+            Field::new("effect_mechanic3", Value::Int(self.effect_mechanic3)),
+            Field::new(
+                "effect_implicit_target_a1",
+                Value::Int(self.effect_implicit_target_a1),
+            ),
+            Field::new(
+                "effect_implicit_target_a2",
+                Value::Int(self.effect_implicit_target_a2),
+            ),
+            Field::new(
+                "effect_implicit_target_a3",
+                Value::Int(self.effect_implicit_target_a3),
+            ),
+            Field::new(
+                "effect_implicit_target_b1",
+                Value::Int(self.effect_implicit_target_b1),
+            ),
+            Field::new(
+                "effect_implicit_target_b2",
+                Value::Int(self.effect_implicit_target_b2),
+            ),
+            Field::new(
+                "effect_implicit_target_b3",
+                Value::Int(self.effect_implicit_target_b3),
+            ),
+            Field::new(
+                "effect_radius_index1",
+                Value::Int(self.effect_radius_index1),
+            ),
+            Field::new(
+                "effect_radius_index2",
+                Value::Int(self.effect_radius_index2),
+            ),
+            Field::new(
+                "effect_radius_index3",
+                Value::Int(self.effect_radius_index3),
+            ),
+            Field::new(
+                "effect_apply_aura_name1",
+                Value::Int(self.effect_apply_aura_name1),
+            ),
+            Field::new(
+                "effect_apply_aura_name2",
+                Value::Int(self.effect_apply_aura_name2),
+            ),
+            Field::new(
+                "effect_apply_aura_name3",
+                Value::Int(self.effect_apply_aura_name3),
+            ),
+            Field::new("effect_amplitude1", Value::Int(self.effect_amplitude1)),
+            Field::new("effect_amplitude2", Value::Int(self.effect_amplitude2)),
+            Field::new("effect_amplitude3", Value::Int(self.effect_amplitude3)),
+            Field::new(
+                "effect_multiple_value1",
+                Value::Float(self.effect_multiple_value1),
+            ),
+            Field::new(
+                "effect_multiple_value2",
+                Value::Float(self.effect_multiple_value2),
+            ),
+            Field::new(
+                "effect_multiple_value3",
+                Value::Float(self.effect_multiple_value3),
+            ),
+            Field::new(
+                "effect_chain_target1",
+                Value::Int(self.effect_chain_target1),
+            ),
+            Field::new(
+                "effect_chain_target2",
+                Value::Int(self.effect_chain_target2),
+            ),
+            Field::new(
+                "effect_chain_target3",
+                Value::Int(self.effect_chain_target3),
+            ),
+            Field::new("effect_item_type1", Value::Uint(self.effect_item_type1)),
+            Field::new("effect_item_type2", Value::Uint(self.effect_item_type2)),
+            Field::new("effect_item_type3", Value::Uint(self.effect_item_type3)),
+            Field::new("effect_misc_value1", Value::Int(self.effect_misc_value1)),
+            Field::new("effect_misc_value2", Value::Int(self.effect_misc_value2)),
+            Field::new("effect_misc_value3", Value::Int(self.effect_misc_value3)),
+            Field::new(
+                "effect_misc_value_b1",
+                Value::Int(self.effect_misc_value_b1),
+            ),
+            Field::new(
+                "effect_misc_value_b2",
+                Value::Int(self.effect_misc_value_b2),
+            ),
+            Field::new(
+                "effect_misc_value_b3",
+                Value::Int(self.effect_misc_value_b3),
+            ),
+            Field::new(
+                "effect_trigger_spell1",
+                Value::Int(self.effect_trigger_spell1),
+            ),
+            Field::new(
+                "effect_trigger_spell2",
+                Value::Int(self.effect_trigger_spell2),
+            ),
+            Field::new(
+                "effect_trigger_spell3",
+                Value::Int(self.effect_trigger_spell3),
+            ),
+            Field::new(
+                "effect_points_per_combo_point1",
+                Value::Float(self.effect_points_per_combo_point1),
+            ),
+            Field::new(
+                "effect_points_per_combo_point2",
+                Value::Float(self.effect_points_per_combo_point2),
+            ),
+            Field::new(
+                "effect_points_per_combo_point3",
+                Value::Float(self.effect_points_per_combo_point3),
+            ),
+            Field::new("spell_visual", Value::Int(self.spell_visual)),
+            Field::new("spell_icon_id", Value::Int(self.spell_icon_id)),
+            Field::new("active_icon_id", Value::Int(self.active_icon_id)),
+            Field::new("spell_priority", Value::Int(self.spell_priority)),
+            Field::new("spell_name", Value::String(self.spell_name.clone())),
+            Field::new(
+                "spell_name2",
+                Value::String(self.spell_name2.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name3",
+                Value::String(self.spell_name3.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name4",
+                Value::String(self.spell_name4.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name5",
+                Value::String(self.spell_name5.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name6",
+                Value::String(self.spell_name6.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name7",
+                Value::String(self.spell_name7.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name8",
+                Value::String(self.spell_name8.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name9",
+                Value::String(self.spell_name9.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name10",
+                Value::String(self.spell_name10.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name11",
+                Value::String(self.spell_name11.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name12",
+                Value::String(self.spell_name12.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name13",
+                Value::String(self.spell_name13.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name14",
+                Value::String(self.spell_name14.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name15",
+                Value::String(self.spell_name15.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "spell_name16",
+                Value::String(self.spell_name16.unwrap_or(String::new())),
+            ),
+            Field::new("rank1", Value::String(self.rank1.unwrap_or(String::new()))),
+            Field::new("rank2", Value::String(self.rank2.unwrap_or(String::new()))),
+            Field::new("rank3", Value::String(self.rank3.unwrap_or(String::new()))),
+            Field::new("rank4", Value::String(self.rank4.unwrap_or(String::new()))),
+            Field::new("rank5", Value::String(self.rank5.unwrap_or(String::new()))),
+            Field::new("rank6", Value::String(self.rank6.unwrap_or(String::new()))),
+            Field::new("rank7", Value::String(self.rank7.unwrap_or(String::new()))),
+            Field::new("rank8", Value::String(self.rank8.unwrap_or(String::new()))),
+            Field::new("rank9", Value::String(self.rank9.unwrap_or(String::new()))),
+            Field::new(
+                "rank10",
+                Value::String(self.rank10.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "rank11",
+                Value::String(self.rank11.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "rank12",
+                Value::String(self.rank12.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "rank13",
+                Value::String(self.rank13.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "rank14",
+                Value::String(self.rank14.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "rank15",
+                Value::String(self.rank15.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "rank16",
+                Value::String(self.rank16.unwrap_or(String::new())),
+            ),
+            Field::new(
+                "mana_cost_percentage",
+                Value::Int(self.mana_cost_percentage),
+            ),
+            Field::new(
+                "start_recovery_category",
+                Value::Int(self.start_recovery_category),
+            ),
+            Field::new("start_recovery_time", Value::Int(self.start_recovery_time)),
+            Field::new("max_target_level", Value::Int(self.max_target_level)),
+            Field::new("spell_family_name", Value::Int(self.spell_family_name)),
+            Field::new("spell_family_flags", Value::Int64(self.spell_family_flags)),
+            Field::new(
+                "max_affected_targets",
+                Value::Int(self.max_affected_targets),
+            ),
+            Field::new("dmg_class", Value::Int(self.dmg_class)),
+            Field::new("prevention_type", Value::Int(self.prevention_type)),
+            Field::new("stance_bar_order", Value::Int(self.stance_bar_order)),
+            Field::new("dmg_multiplier1", Value::Float(self.dmg_multiplier1)),
+            Field::new("dmg_multiplier2", Value::Float(self.dmg_multiplier2)),
+            Field::new("dmg_multiplier3", Value::Float(self.dmg_multiplier3)),
+            Field::new("min_faction_id", Value::Int(self.min_faction_id)),
+            Field::new("min_reputation", Value::Int(self.min_reputation)),
+            Field::new(
+                "required_aura_vision",
+                Value::Int(self.required_aura_vision),
+            ),
+            Field::new("totem_category1", Value::Int(self.totem_category1)),
+            Field::new("totem_category2", Value::Int(self.totem_category2)),
+            Field::new("area_id", Value::Int(self.area_id)),
+            Field::new("school_mask", Value::Int(self.school_mask)),
+            Field::new("is_server_side", Value::Int(self.is_server_side)),
+            Field::new(
+                "attributes_serverside",
+                Value::Int(self.attributes_serverside),
+            ),
+        ];
+
+        GenericSpell {
+            entry: self.id,
+            fields,
+        }
+    }
+}
+
+pub(crate) fn tbc(conn: &Connection) -> Vec<GenericSpell> {
     let mut s = conn
         .prepare(
             "SELECT
@@ -558,5 +962,5 @@ pub(crate) fn tbc(conn: &Connection) -> Vec<TbcSpell> {
         })
         .unwrap();
 
-    r.map(|a| a.unwrap()).collect()
+    r.map(|a| a.unwrap().into_generic_spell()).collect()
 }

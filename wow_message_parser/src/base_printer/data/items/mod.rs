@@ -174,7 +174,9 @@ impl Field {
 pub enum Value {
     String(String),
     Int(i32),
+    Int64(i64),
     Uint(u32),
+    Uint64(u64),
     Float(f32),
 
     VanillaItemClassAndSubClass(wow_world_base::vanilla::ItemClassAndSubClass),
@@ -218,7 +220,12 @@ pub enum Value {
 impl Value {
     pub const fn should_import(&self) -> bool {
         match self {
-            Value::String(_) | Value::Uint(_) | Value::Int(_) | Value::Float(_) => false,
+            Value::String(_)
+            | Value::Uint(_)
+            | Value::Int(_)
+            | Value::Int64(_)
+            | Value::Uint64(_)
+            | Value::Float(_) => false,
 
             _ => true,
         }
@@ -228,7 +235,9 @@ impl Value {
         match self {
             Value::String(_) => "&'static str",
             Value::Int(_) => "i32",
+            Value::Int64(_) => "i64",
             Value::Uint(_) => "u32",
+            Value::Uint64(_) => "u64",
             Value::Float(_) => "f32",
             Value::VanillaItemClassAndSubClass(_)
             | Value::TbcItemClassAndSubClass(_)
@@ -275,7 +284,9 @@ impl Value {
         match self {
             Value::String(v) => format!("\"{}\"", v.replace('"', "\\\"")),
             Value::Int(v) => (*v).to_string(),
+            Value::Int64(v) => (*v).to_string(),
             Value::Uint(v) => (*v).to_string(),
+            Value::Uint64(v) => (*v).to_string(),
             Value::Float(v) => float_format(*v),
             Value::VanillaItemClassAndSubClass(v) => {
                 format!("ItemClassAndSubClass::{:?}", v)
@@ -344,7 +355,9 @@ impl Value {
         match self {
             Value::String(_) => Value::String("".to_string()),
             Value::Int(_) => Value::Int(0),
+            Value::Int64(_) => Value::Int64(0),
             Value::Uint(_) => Value::Uint(0),
+            Value::Uint64(_) => Value::Uint64(0),
             Value::Float(_) => Value::Float(0.0),
             Value::VanillaAllowedRace(_) => {
                 Value::VanillaAllowedRace(wow_world_base::vanilla::AllowedRace::empty())
