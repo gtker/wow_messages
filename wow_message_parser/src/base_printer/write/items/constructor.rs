@@ -1,10 +1,10 @@
-use crate::base_printer::data::items::GenericItem;
 use crate::base_printer::write::items::definition::includes;
+use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::writer::Writer;
 use crate::base_printer::{Expansion, ImportFrom};
 use std::collections::BTreeSet;
 
-pub(crate) fn constructor(s: &mut Writer, items: &[GenericItem], expansion: Expansion) {
+pub(crate) fn constructor(s: &mut Writer, items: &[GenericThing], expansion: Expansion) {
     includes(
         s,
         &items[0].fields,
@@ -17,11 +17,11 @@ pub(crate) fn constructor(s: &mut Writer, items: &[GenericItem], expansion: Expa
         s.constructor(
             ctor.name(),
             |s| {
-                for e in &items[0].fields {
+                for e in items[0].fields {
                     s.wln(format!("{}: {},", e.name, e.value.type_name()));
                 }
 
-                for array in &items[0].arrays {
+                for array in items[0].arrays {
                     if !ctor.type_is_defaulted(array.type_name) {
                         for instance in &array.instances {
                             for field in instance {
@@ -36,11 +36,11 @@ pub(crate) fn constructor(s: &mut Writer, items: &[GenericItem], expansion: Expa
                 }
             },
             |s| {
-                for e in &items[0].fields {
+                for e in items[0].fields {
                     s.wln(format!("{},", e.name));
                 }
 
-                for array in &items[0].arrays {
+                for array in items[0].arrays {
                     s.wln(format!("{}: [", array.variable_name));
 
                     for instance in &array.instances {
@@ -97,7 +97,7 @@ impl Constructor {
     }
 }
 
-fn get_constructors(items: &[GenericItem]) -> BTreeSet<Constructor> {
+fn get_constructors(items: &[GenericThing]) -> BTreeSet<Constructor> {
     let mut v = BTreeSet::new();
 
     for item in items {

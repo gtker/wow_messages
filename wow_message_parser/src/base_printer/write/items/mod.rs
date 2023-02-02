@@ -2,7 +2,8 @@ mod constructor;
 pub(crate) mod conversions;
 pub(crate) mod definition;
 
-use crate::base_printer::data::items::GenericItem;
+use crate::base_printer::data::items::{Array, Field};
+use std::collections::BTreeSet;
 
 pub(crate) struct Stats {
     pub strength: i32,
@@ -14,7 +15,6 @@ pub(crate) struct Stats {
     pub mana: i32,
 }
 
-use crate::base_printer::data::Data;
 use crate::base_printer::write::items::constructor::constructor;
 use crate::base_printer::write::items::definition::{definition, includes};
 use crate::base_printer::writer::Writer;
@@ -22,30 +22,76 @@ use crate::base_printer::{Expansion, ImportFrom};
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
 use std::path::Path;
 
-pub(crate) fn write_definition(path: &Path, data: &Data, expansion: Expansion) {
+pub struct GenericThing<'a> {
+    pub entry: u32,
+    pub extra_flags: i32,
+    pub name: &'a str,
+    pub fields: &'a [Field],
+    pub arrays: &'a [Array],
+}
+
+impl GenericThing<'_> {
+    pub fn types_that_are_defaulted(&self) -> BTreeSet<&'static str> {
+        let mut types_that_are_defaulted = BTreeSet::new();
+
+        for array in self.arrays {
+            if array.is_default() {
+                types_that_are_defaulted.insert(array.type_name);
+            }
+        }
+
+        types_that_are_defaulted
+    }
+
+    fn ty_to_short(n: &str) -> &'static str {
+        match n {
+            "ItemDamageType" => "a",
+            "Spells" => "b",
+            "ItemSocket" => "c",
+            "ItemStat" => "d",
+            v => unimplemented!("Unhandled array type {}", v),
+        }
+    }
+
+    pub fn constructor_name(&self) -> String {
+        let mut s = "n".to_string();
+
+        for n in self.types_that_are_defaulted() {
+            let n = Self::ty_to_short(n);
+            s.push_str(&format!("{n}"));
+        }
+
+        s
+    }
+}
+
+pub(crate) fn write_definition(
+    path: &Path,
+    fields: &[Field],
+    arrays: &[Array],
+    expansion: Expansion,
+) {
     let mut s = Writer::new();
 
-    let values = &data.items;
-    definition(&mut s, &values[0].fields, &values[0].arrays, expansion);
+    definition(&mut s, fields, arrays, expansion);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-pub(crate) fn write_constructors(path: &Path, data: &Data, expansion: Expansion) {
+pub(crate) fn write_constructors(path: &Path, things: &[GenericThing], expansion: Expansion) {
     let mut s = Writer::new();
 
-    let values = &data.items;
-    constructor(&mut s, &values, expansion);
+    constructor(&mut s, things, expansion);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-pub(crate) fn write_items(path: &Path, data: &Data, expansion: Expansion) {
+pub(crate) fn write_things(path: &Path, things: &[GenericThing], expansion: Expansion) {
     let mut s = Writer::new();
 
-    let items = &data.items;
-
-    all_items(&mut s, &items, expansion);
+    all_items(&mut s, things, expansion, |i| {
+        unobtainable(i.entry, i.extra_flags, &i.name)
+    });
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
@@ -87,7 +133,12 @@ fn print_unobtainable_cfg(s: &mut Writer) {
     s.wln("#[cfg(feature = \"unobtainable-items\")]");
 }
 
-fn all_items(s: &mut Writer, items: &[GenericItem], expansion: Expansion) {
+fn all_items(
+    s: &mut Writer,
+    items: &[GenericThing],
+    expansion: Expansion,
+    unobtainable: impl Fn(&GenericThing) -> bool,
+) {
     includes(
         s,
         &items[0].fields,
@@ -99,16 +150,16 @@ fn all_items(s: &mut Writer, items: &[GenericItem], expansion: Expansion) {
     s.wln("pub const ITEMS: &[Item] = &[");
 
     for item in items {
-        if unobtainable(item.entry, item.extra_flags, &item.name) {
+        if unobtainable(item) {
             print_unobtainable_cfg(s);
         }
         s.w(format!("{}(", item.constructor_name()));
 
-        for value in &item.fields {
+        for value in item.fields {
             s.w_no_indent(format!("{},", value.value.to_string()));
         }
 
-        for array in &item.arrays {
+        for array in item.arrays {
             if array.is_default() {
                 continue;
             }

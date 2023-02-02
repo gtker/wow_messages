@@ -4,13 +4,10 @@ mod types;
 mod write;
 mod writer;
 
-use crate::base_printer::write::items::{write_constructors, write_definition, write_items};
-use crate::path_utils::{
-    tbc_base_extended_dir, tbc_item_constructor_path, tbc_item_data_path, tbc_item_definition_path,
-    vanilla_base_extended_dir, vanilla_item_constructor_path, vanilla_item_data_path,
-    vanilla_item_definition_path, wrath_base_extended_dir, wrath_item_constructor_path,
-    wrath_item_data_path, wrath_item_definition_path,
+use crate::base_printer::write::items::{
+    write_constructors, write_definition, write_things, GenericThing,
 };
+use crate::path_utils::workspace_directory;
 use data::{get_data_from_sqlite_file, Data};
 use std::path::PathBuf;
 
@@ -53,35 +50,61 @@ impl Expansion {
     }
 
     pub fn item_data_path(&self) -> PathBuf {
-        match self {
-            Expansion::Vanilla => vanilla_item_data_path(),
-            Expansion::BurningCrusade => tbc_item_data_path(),
-            Expansion::WrathOfTheLichKing => wrath_item_data_path(),
-        }
+        workspace_directory()
+            .join("wow_items")
+            .join("src")
+            .join(self.as_module_string())
+            .join("data.rs")
     }
 
     pub fn base_extended_path(&self) -> PathBuf {
-        match self {
-            Expansion::Vanilla => vanilla_base_extended_dir(),
-            Expansion::BurningCrusade => tbc_base_extended_dir(),
-            Expansion::WrathOfTheLichKing => wrath_base_extended_dir(),
-        }
+        workspace_directory()
+            .join("wow_world_base")
+            .join("src")
+            .join("extended")
+            .join(self.as_module_string())
     }
 
     pub fn item_definition_path(&self) -> PathBuf {
-        match self {
-            Expansion::Vanilla => vanilla_item_definition_path(),
-            Expansion::BurningCrusade => tbc_item_definition_path(),
-            Expansion::WrathOfTheLichKing => wrath_item_definition_path(),
-        }
+        workspace_directory()
+            .join("wow_world_base")
+            .join("src")
+            .join("manual")
+            .join(self.as_module_string())
+            .join("item.rs")
     }
 
     pub fn item_constructor_path(&self) -> PathBuf {
-        match self {
-            Expansion::Vanilla => vanilla_item_constructor_path(),
-            Expansion::BurningCrusade => tbc_item_constructor_path(),
-            Expansion::WrathOfTheLichKing => wrath_item_constructor_path(),
-        }
+        workspace_directory()
+            .join("wow_items")
+            .join("src")
+            .join(self.as_module_string())
+            .join("constructors.rs")
+    }
+
+    pub fn spell_data_path(&self) -> PathBuf {
+        workspace_directory()
+            .join("wow_spells")
+            .join("src")
+            .join(self.as_module_string())
+            .join("data.rs")
+    }
+
+    pub fn spell_definition_path(&self) -> PathBuf {
+        workspace_directory()
+            .join("wow_world_base")
+            .join("src")
+            .join("manual")
+            .join(self.as_module_string())
+            .join("spell.rs")
+    }
+
+    pub fn spell_constructor_path(&self) -> PathBuf {
+        workspace_directory()
+            .join("wow_spells")
+            .join("src")
+            .join(self.as_module_string())
+            .join("constructors.rs")
     }
 }
 
@@ -138,7 +161,23 @@ fn write_to_files(data: &Data, expansion: Expansion) {
     write::write_area_triggers(&expansion.base_extended_path(), data, expansion);
     write::write_pet_names(&expansion.base_extended_path(), data, expansion);
 
-    write_items(&expansion.item_data_path(), data, expansion);
-    write_definition(&expansion.item_definition_path(), data, expansion);
-    write_constructors(&expansion.item_constructor_path(), data, expansion);
+    let items = data
+        .items
+        .iter()
+        .map(|a| GenericThing {
+            entry: a.entry,
+            extra_flags: a.extra_flags,
+            name: &a.name,
+            fields: &a.fields,
+            arrays: &a.arrays,
+        })
+        .collect::<Vec<_>>();
+    write_things(&expansion.item_data_path(), &items, expansion);
+    write_definition(
+        &expansion.item_definition_path(),
+        items[0].fields,
+        items[0].arrays,
+        expansion,
+    );
+    write_constructors(&expansion.item_constructor_path(), &items, expansion);
 }

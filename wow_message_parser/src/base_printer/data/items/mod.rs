@@ -1,6 +1,5 @@
 use crate::base_printer::Expansion;
 use rusqlite::Connection;
-use std::collections::BTreeSet;
 
 pub mod tbc;
 pub mod vanilla;
@@ -12,41 +11,6 @@ pub struct GenericItem {
     pub name: String,
     pub fields: Vec<Field>,
     pub arrays: Vec<Array>,
-}
-
-impl GenericItem {
-    pub fn types_that_are_defaulted(&self) -> BTreeSet<&'static str> {
-        let mut types_that_are_defaulted = BTreeSet::new();
-
-        for array in &self.arrays {
-            if array.is_default() {
-                types_that_are_defaulted.insert(array.type_name);
-            }
-        }
-
-        types_that_are_defaulted
-    }
-
-    fn ty_to_short(n: &str) -> &'static str {
-        match n {
-            "ItemDamageType" => "a",
-            "Spells" => "b",
-            "ItemSocket" => "c",
-            "ItemStat" => "d",
-            v => unimplemented!("Unhandled array type {}", v),
-        }
-    }
-
-    pub fn constructor_name(&self) -> String {
-        let mut s = "n".to_string();
-
-        for n in self.types_that_are_defaulted() {
-            let n = Self::ty_to_short(n);
-            s.push_str(&format!("{n}"));
-        }
-
-        s
-    }
 }
 
 pub struct Array {
