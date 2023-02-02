@@ -1,0 +1,14 @@
+[package]
+name = "wow_spells"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wow_world_base = { path = "../wow_world_base" }
+
+[features]
+default = []
+vanilla = ["wow_world_base/vanilla"]
+tbc = ["wow_world_base/tbc"]
+wrath = ["wow_world_base/wrath"]
+unobtainable-items = []

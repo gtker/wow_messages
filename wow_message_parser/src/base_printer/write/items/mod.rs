@@ -49,6 +49,10 @@ impl GenericThing<'_> {
             "Spells" => "b",
             "ItemSocket" => "c",
             "ItemStat" => "d",
+            "Reagent" => "e",
+            "SpellEffect" => "f",
+            "Totem" => "g",
+            "TotemCategory" => "h",
             v => unimplemented!("Unhandled array type {}", v),
         }
     }
@@ -70,33 +74,64 @@ pub(crate) fn write_definition(
     fields: &[Field],
     arrays: &[Array],
     expansion: Expansion,
+    ty_name: &str,
 ) {
     let mut s = Writer::new();
 
-    definition(&mut s, fields, arrays, expansion);
+    definition(&mut s, fields, arrays, expansion, ty_name);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-pub(crate) fn write_constructors(path: &Path, things: &[GenericThing], expansion: Expansion) {
+pub(crate) fn write_pub_use(
+    path: &Path,
+    things: &[GenericThing],
+    expansion: Expansion,
+    ty_name: &str,
+) {
+    let mut s = Writer::new();
+    s.w("pub ");
+
+    includes(
+        &mut s,
+        things[0].fields,
+        things[0].arrays,
+        expansion,
+        ImportFrom::ItemPubUse,
+        ty_name,
+    );
+
+    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+}
+
+pub(crate) fn write_constructors(
+    path: &Path,
+    things: &[GenericThing],
+    expansion: Expansion,
+    ty_name: &str,
+) {
     let mut s = Writer::new();
 
-    constructor(&mut s, things, expansion);
+    constructor(&mut s, things, expansion, ty_name);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-pub(crate) fn write_things(path: &Path, things: &[GenericThing], expansion: Expansion) {
+pub(crate) fn write_things(
+    path: &Path,
+    things: &[GenericThing],
+    expansion: Expansion,
+    ty_name: &str,
+    unobtainable: impl Fn(&GenericThing) -> bool,
+) {
     let mut s = Writer::new();
 
-    all_items(&mut s, things, expansion, |i| {
-        unobtainable(i.entry, i.extra_flags, &i.name)
-    });
+    all_items(&mut s, things, expansion, unobtainable, ty_name);
 
     overwrite_autogenerate_if_not_the_same(&path, s.inner());
 }
 
-fn unobtainable(entry: u32, extra_flags: i32, name: &str) -> bool {
+pub(crate) fn unobtainable_item(entry: u32, extra_flags: i32, name: &str) -> bool {
     const UNOBTAINABLE_FLAG: i32 = 0x04;
     let unobtainable_flag_is_set = extra_flags & UNOBTAINABLE_FLAG != 0;
 
@@ -138,6 +173,7 @@ fn all_items(
     items: &[GenericThing],
     expansion: Expansion,
     unobtainable: impl Fn(&GenericThing) -> bool,
+    ty_name: &str,
 ) {
     includes(
         s,
@@ -145,9 +181,10 @@ fn all_items(
         &items[0].arrays,
         expansion,
         ImportFrom::Items,
+        ty_name,
     );
 
-    s.wln("pub const ITEMS: &[Item] = &[");
+    s.wln(format!("pub const DATA: &[{ty_name}] = &["));
 
     for item in items {
         if unobtainable(item) {

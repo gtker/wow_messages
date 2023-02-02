@@ -3,11 +3,24 @@ use crate::base_printer::writer::Writer;
 use crate::base_printer::{Expansion, ImportFrom};
 use std::collections::BTreeSet;
 
-pub(crate) fn definition(s: &mut Writer, fields: &[Field], arrays: &[Array], expansion: Expansion) {
-    includes(s, &fields, &arrays, expansion, ImportFrom::Definition);
+pub(crate) fn definition(
+    s: &mut Writer,
+    fields: &[Field],
+    arrays: &[Array],
+    expansion: Expansion,
+    ty_name: &str,
+) {
+    includes(
+        s,
+        &fields,
+        &arrays,
+        expansion,
+        ImportFrom::Definition,
+        ty_name,
+    );
 
-    struct_definition(s, &fields, &arrays);
-    impl_block(s, &fields, &arrays);
+    struct_definition(s, &fields, &arrays, ty_name);
+    impl_block(s, &fields, &arrays, ty_name);
 
     array_definitions(s, &arrays);
 }
@@ -18,12 +31,13 @@ pub(crate) fn includes(
     arrays: &[Array],
     expansion: Expansion,
     import_location: ImportFrom,
+    ty_name: &str,
 ) {
     let mut set = BTreeSet::new();
 
     match import_location {
-        ImportFrom::ItemsConstructors | ImportFrom::Items => {
-            set.insert("Item");
+        ImportFrom::ItemPubUse | ImportFrom::ItemsConstructors | ImportFrom::Items => {
+            set.insert(ty_name);
         }
         ImportFrom::Definition => {}
     }
@@ -33,7 +47,9 @@ pub(crate) fn includes(
     }
 
     let location = match import_location {
-        ImportFrom::ItemsConstructors | ImportFrom::Items => "wow_world_base",
+        ImportFrom::ItemPubUse | ImportFrom::ItemsConstructors | ImportFrom::Items => {
+            "wow_world_base"
+        }
         ImportFrom::Definition => "crate",
     };
     s.wln(format!(
@@ -50,7 +66,7 @@ pub(crate) fn includes(
 
     for array in arrays {
         match import_location {
-            ImportFrom::ItemsConstructors => {
+            ImportFrom::ItemPubUse | ImportFrom::ItemsConstructors => {
                 set.insert(array.type_name);
             }
             ImportFrom::Items => {}
@@ -77,9 +93,9 @@ pub(crate) fn includes(
     s.newline();
 }
 
-fn struct_definition(s: &mut Writer, fields: &[Field], arrays: &[Array]) {
+fn struct_definition(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str) {
     s.wln("#[derive(Debug, Copy, Clone)]");
-    s.open_curly("pub struct Item");
+    s.open_curly(format!("pub struct {ty_name}"));
 
     for e in fields {
         s.wln(format!("pub {}: {},", e.name, e.value.type_name()));
@@ -133,8 +149,8 @@ fn array_definitions(s: &mut Writer, arrays: &[Array]) {
     }
 }
 
-fn impl_block(s: &mut Writer, fields: &[Field], arrays: &[Array]) {
-    s.open_curly("impl Item");
+fn impl_block(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str) {
+    s.open_curly(format!("impl {ty_name}"));
     s.wln("#[allow(clippy::complexity)]");
 
     s.pub_const_fn_new(

@@ -82,6 +82,7 @@ impl Writer {
     pub fn constructor(
         &mut self,
         name: impl AsRef<str>,
+        ty_name: impl AsRef<str>,
         args: impl Fn(&mut Self),
         self_body: impl Fn(&mut Self),
     ) {
@@ -91,10 +92,10 @@ impl Writer {
         args(self);
 
         self.dec_indent();
-        self.wln(") -> Item {");
+        self.wln(format!(") -> {} {{", ty_name.as_ref()));
         self.inc_indent();
 
-        self.open_curly("Item");
+        self.open_curly(ty_name);
         self_body(self);
         self.closing_curly(); // Self
 

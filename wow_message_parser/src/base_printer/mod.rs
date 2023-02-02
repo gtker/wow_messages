@@ -5,7 +5,8 @@ mod write;
 mod writer;
 
 use crate::base_printer::write::items::{
-    write_constructors, write_definition, write_things, GenericThing,
+    unobtainable_item, write_constructors, write_definition, write_pub_use, write_things,
+    GenericThing,
 };
 use crate::path_utils::workspace_directory;
 use data::{get_data_from_sqlite_file, Data};
@@ -16,6 +17,7 @@ pub enum ImportFrom {
     ItemsConstructors,
     Items,
     Definition,
+    ItemPubUse,
 }
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
@@ -82,6 +84,14 @@ impl Expansion {
             .join("constructors.rs")
     }
 
+    pub fn item_pub_use_path(&self) -> PathBuf {
+        workspace_directory()
+            .join("wow_items")
+            .join("src")
+            .join(self.as_module_string())
+            .join("mod.rs")
+    }
+
     pub fn spell_data_path(&self) -> PathBuf {
         workspace_directory()
             .join("wow_spells")
@@ -105,6 +115,14 @@ impl Expansion {
             .join("src")
             .join(self.as_module_string())
             .join("constructors.rs")
+    }
+
+    pub fn spell_pub_use_path(&self) -> PathBuf {
+        workspace_directory()
+            .join("wow_spells")
+            .join("src")
+            .join(self.as_module_string())
+            .join("mod.rs")
     }
 }
 
@@ -161,6 +179,13 @@ fn write_to_files(data: &Data, expansion: Expansion) {
     write::write_area_triggers(&expansion.base_extended_path(), data, expansion);
     write::write_pet_names(&expansion.base_extended_path(), data, expansion);
 
+    write_items(data, expansion);
+    write_spells(data, expansion);
+}
+
+fn write_items(data: &Data, expansion: Expansion) {
+    const TY_NAME: &str = "Item";
+
     let items = data
         .items
         .iter()
@@ -172,12 +197,64 @@ fn write_to_files(data: &Data, expansion: Expansion) {
             arrays: &a.arrays,
         })
         .collect::<Vec<_>>();
-    write_things(&expansion.item_data_path(), &items, expansion);
+
+    write_things(
+        &expansion.item_data_path(),
+        &items,
+        expansion,
+        TY_NAME,
+        |i| unobtainable_item(i.entry, i.extra_flags, &i.name),
+    );
     write_definition(
         &expansion.item_definition_path(),
         items[0].fields,
         items[0].arrays,
         expansion,
+        TY_NAME,
     );
-    write_constructors(&expansion.item_constructor_path(), &items, expansion);
+    write_constructors(
+        &expansion.item_constructor_path(),
+        &items,
+        expansion,
+        TY_NAME,
+    );
+    write_pub_use(&expansion.item_pub_use_path(), &items, expansion, TY_NAME);
+}
+
+fn write_spells(data: &Data, expansion: Expansion) {
+    const TY_NAME: &str = "Spell";
+
+    let spells = data
+        .spells
+        .iter()
+        .map(|a| GenericThing {
+            entry: a.entry as u32,
+            extra_flags: 0,
+            name: "",
+            fields: &a.fields,
+            arrays: &a.arrays,
+        })
+        .collect::<Vec<_>>();
+
+    write_things(
+        &expansion.spell_data_path(),
+        &spells,
+        expansion,
+        TY_NAME,
+        |_| false,
+    );
+    write_definition(
+        &expansion.spell_definition_path(),
+        spells[0].fields,
+        spells[0].arrays,
+        expansion,
+        TY_NAME,
+    );
+    write_constructors(
+        &expansion.spell_constructor_path(),
+        &spells,
+        expansion,
+        TY_NAME,
+    );
+    write_pub_use(&expansion.spell_pub_use_path(), &spells, expansion, TY_NAME);
 }

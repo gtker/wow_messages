@@ -1,4 +1,5 @@
 mod item;
+mod spell;
 mod race_class;
 
 use crate::tbc::Race;
@@ -11,3 +12,4 @@ pub use crate::manual::shared::skill_category_vanilla_tbc_wrath::SkillCategory;
 pub use race_class::*;
 
 pub use item::*;
+pub use spell::*;

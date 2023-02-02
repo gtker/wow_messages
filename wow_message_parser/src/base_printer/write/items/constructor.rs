@@ -4,18 +4,25 @@ use crate::base_printer::writer::Writer;
 use crate::base_printer::{Expansion, ImportFrom};
 use std::collections::BTreeSet;
 
-pub(crate) fn constructor(s: &mut Writer, items: &[GenericThing], expansion: Expansion) {
+pub(crate) fn constructor(
+    s: &mut Writer,
+    items: &[GenericThing],
+    expansion: Expansion,
+    ty_name: &str,
+) {
     includes(
         s,
         &items[0].fields,
         &items[0].arrays,
         expansion,
         ImportFrom::ItemsConstructors,
+        ty_name,
     );
 
     for ctor in get_constructors(&items) {
         s.constructor(
             ctor.name(),
+            ty_name,
             |s| {
                 for e in items[0].fields {
                     s.wln(format!("{}: {},", e.name, e.value.type_name()));
