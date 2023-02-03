@@ -62,7 +62,7 @@ impl GenericThing<'_> {
 
         for n in self.types_that_are_defaulted() {
             let n = Self::ty_to_short(n);
-            s.push_str(&format!("{n}"));
+            s.push_str(n);
         }
 
         s
@@ -80,7 +80,7 @@ pub(crate) fn write_definition(
 
     definition(&mut s, fields, arrays, expansion, ty_name);
 
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
 
 pub(crate) fn write_pub_use(
@@ -101,7 +101,7 @@ pub(crate) fn write_pub_use(
         ty_name,
     );
 
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
 
 pub(crate) fn write_constructors(
@@ -114,7 +114,7 @@ pub(crate) fn write_constructors(
 
     constructor(&mut s, things, expansion, ty_name);
 
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
 
 pub(crate) fn write_things(
@@ -128,7 +128,7 @@ pub(crate) fn write_things(
 
     all_items(&mut s, things, expansion, unobtainable, ty_name);
 
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
 
 pub(crate) fn unobtainable_item(entry: u32, extra_flags: i32, name: &str) -> bool {
@@ -177,8 +177,8 @@ fn all_items(
 ) {
     includes(
         s,
-        &items[0].fields,
-        &items[0].arrays,
+        items[0].fields,
+        items[0].arrays,
         expansion,
         ImportFrom::Items,
         ty_name,
@@ -193,7 +193,7 @@ fn all_items(
         s.w(format!("{}(", item.constructor_name()));
 
         for value in item.fields {
-            s.w_no_indent(format!("{},", value.value.to_string()));
+            s.w_no_indent(format!("{},", value.value.to_string_value()));
         }
 
         for array in item.arrays {
@@ -203,7 +203,7 @@ fn all_items(
 
             for instance in &array.instances {
                 for field in instance {
-                    s.w_no_indent(format!("{},", field.value.to_string()));
+                    s.w_no_indent(format!("{},", field.value.to_string_value()));
                 }
             }
         }

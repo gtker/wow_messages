@@ -309,9 +309,8 @@ impl ParsedContainer {
 
     pub(crate) fn contains_datetime(&self) -> bool {
         for d in self.all_definitions() {
-            match d.ty() {
-                ParsedType::DateTime => return true,
-                _ => {}
+            if d.ty() == &ParsedType::DateTime {
+                return true;
             }
         }
 

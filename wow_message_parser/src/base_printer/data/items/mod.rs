@@ -122,16 +122,15 @@ pub enum Value {
 
 impl Value {
     pub const fn should_import(&self) -> bool {
-        match self {
+        !matches!(
+            self,
             Value::String(_)
-            | Value::Uint(_)
-            | Value::Int(_)
-            | Value::Int64(_)
-            | Value::Uint64(_)
-            | Value::Float(_) => false,
-
-            _ => true,
-        }
+                | Value::Uint(_)
+                | Value::Int(_)
+                | Value::Int64(_)
+                | Value::Uint64(_)
+                | Value::Float(_)
+        )
     }
 
     pub const fn type_name(&self) -> &'static str {
@@ -174,7 +173,7 @@ impl Value {
         &self.default_value() == self
     }
 
-    pub fn to_string(&self) -> String {
+    pub fn to_string_value(&self) -> String {
         fn float_format(v: f32) -> String {
             let s = format!("{v}");
             if s.contains('.') {

@@ -203,7 +203,7 @@ fn write_items(data: &Data, expansion: Expansion) {
         &items,
         expansion,
         TY_NAME,
-        |i| unobtainable_item(i.entry, i.extra_flags, &i.name),
+        |i| unobtainable_item(i.entry, i.extra_flags, i.name),
     );
     write_definition(
         &expansion.item_definition_path(),
@@ -228,7 +228,7 @@ fn write_spells(data: &Data, expansion: Expansion) {
         .spells
         .iter()
         .map(|a| GenericThing {
-            entry: a.entry as u32,
+            entry: a.entry,
             extra_flags: 0,
             name: "",
             fields: &a.fields,

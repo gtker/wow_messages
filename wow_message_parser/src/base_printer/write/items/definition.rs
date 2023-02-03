@@ -10,19 +10,20 @@ pub(crate) fn definition(
     expansion: Expansion,
     ty_name: &str,
 ) {
+    s.wln("#![allow(clippy::too_many_arguments)]");
     includes(
         s,
-        &fields,
-        &arrays,
+        fields,
+        arrays,
         expansion,
         ImportFrom::Definition,
         ty_name,
     );
 
-    struct_definition(s, &fields, &arrays, ty_name);
-    impl_block(s, &fields, &arrays, ty_name);
+    struct_definition(s, fields, arrays, ty_name);
+    impl_block(s, fields, arrays, ty_name);
 
-    array_definitions(s, &arrays);
+    array_definitions(s, arrays);
 }
 
 pub(crate) fn includes(
@@ -151,7 +152,6 @@ fn array_definitions(s: &mut Writer, arrays: &[Array]) {
 
 fn impl_block(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str) {
     s.open_curly(format!("impl {ty_name}"));
-    s.wln("#[allow(clippy::complexity)]");
 
     s.pub_const_fn_new(
         |s| {
@@ -181,7 +181,7 @@ fn impl_block(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str)
 
                 for instance in &array.instances {
                     if array.import_only {
-                        s.open_curly(format!("{}", array.type_name));
+                        s.open_curly(array.type_name);
 
                         for field in instance {
                             s.wln(format!("{}: {},", field.name, field.variable_name,));

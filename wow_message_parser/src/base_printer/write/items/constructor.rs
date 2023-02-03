@@ -12,14 +12,14 @@ pub(crate) fn constructor(
 ) {
     includes(
         s,
-        &items[0].fields,
-        &items[0].arrays,
+        items[0].fields,
+        items[0].arrays,
         expansion,
         ImportFrom::ItemsConstructors,
         ty_name,
     );
 
-    for ctor in get_constructors(&items) {
+    for ctor in get_constructors(items) {
         s.constructor(
             ctor.name(),
             ty_name,
@@ -52,14 +52,14 @@ pub(crate) fn constructor(
 
                     for instance in &array.instances {
                         if array.import_only {
-                            s.open_curly(format!("{}", array.type_name));
+                            s.open_curly(array.type_name);
 
                             for field in instance {
                                 if ctor.type_is_defaulted(array.type_name) {
                                     s.wln(format!(
                                         "{}: {},",
                                         field.name,
-                                        field.value.default_value().to_string(),
+                                        field.value.default_value().to_string_value(),
                                     ));
                                 } else {
                                     s.wln(format!("{}: {},", field.name, field.variable_name,));
@@ -72,7 +72,10 @@ pub(crate) fn constructor(
                             s.wln(format!("{}::new(", array.type_name));
                             for field in instance {
                                 if ctor.type_is_defaulted(array.type_name) {
-                                    s.wln(format!("{},", field.value.default_value().to_string(),));
+                                    s.wln(format!(
+                                        "{},",
+                                        field.value.default_value().to_string_value(),
+                                    ));
                                 } else {
                                     s.wln(format!("{},", field.variable_name,));
                                 }
