@@ -64,37 +64,7 @@ pub struct Spell {
     pub active_icon_id: i32,
     pub spell_priority: i32,
     pub spell_name: &'static str,
-    pub spell_name2: &'static str,
-    pub spell_name3: &'static str,
-    pub spell_name4: &'static str,
-    pub spell_name5: &'static str,
-    pub spell_name6: &'static str,
-    pub spell_name7: &'static str,
-    pub spell_name8: &'static str,
-    pub spell_name9: &'static str,
-    pub spell_name10: &'static str,
-    pub spell_name11: &'static str,
-    pub spell_name12: &'static str,
-    pub spell_name13: &'static str,
-    pub spell_name14: &'static str,
-    pub spell_name15: &'static str,
-    pub spell_name16: &'static str,
-    pub rank1: &'static str,
-    pub rank2: &'static str,
-    pub rank3: &'static str,
-    pub rank4: &'static str,
-    pub rank5: &'static str,
-    pub rank6: &'static str,
-    pub rank7: &'static str,
-    pub rank8: &'static str,
-    pub rank9: &'static str,
-    pub rank10: &'static str,
-    pub rank11: &'static str,
-    pub rank12: &'static str,
-    pub rank13: &'static str,
-    pub rank14: &'static str,
-    pub rank15: &'static str,
-    pub rank16: &'static str,
+    pub rank_text: &'static str,
     pub mana_cost_percentage: i32,
     pub start_recovery_category: i32,
     pub start_recovery_time: i32,
@@ -185,37 +155,7 @@ impl Spell {
         active_icon_id: i32,
         spell_priority: i32,
         spell_name: &'static str,
-        spell_name2: &'static str,
-        spell_name3: &'static str,
-        spell_name4: &'static str,
-        spell_name5: &'static str,
-        spell_name6: &'static str,
-        spell_name7: &'static str,
-        spell_name8: &'static str,
-        spell_name9: &'static str,
-        spell_name10: &'static str,
-        spell_name11: &'static str,
-        spell_name12: &'static str,
-        spell_name13: &'static str,
-        spell_name14: &'static str,
-        spell_name15: &'static str,
-        spell_name16: &'static str,
-        rank1: &'static str,
-        rank2: &'static str,
-        rank3: &'static str,
-        rank4: &'static str,
-        rank5: &'static str,
-        rank6: &'static str,
-        rank7: &'static str,
-        rank8: &'static str,
-        rank9: &'static str,
-        rank10: &'static str,
-        rank11: &'static str,
-        rank12: &'static str,
-        rank13: &'static str,
-        rank14: &'static str,
-        rank15: &'static str,
-        rank16: &'static str,
+        rank_text: &'static str,
         mana_cost_percentage: i32,
         start_recovery_category: i32,
         start_recovery_time: i32,
@@ -386,37 +326,7 @@ impl Spell {
             active_icon_id,
             spell_priority,
             spell_name,
-            spell_name2,
-            spell_name3,
-            spell_name4,
-            spell_name5,
-            spell_name6,
-            spell_name7,
-            spell_name8,
-            spell_name9,
-            spell_name10,
-            spell_name11,
-            spell_name12,
-            spell_name13,
-            spell_name14,
-            spell_name15,
-            spell_name16,
-            rank1,
-            rank2,
-            rank3,
-            rank4,
-            rank5,
-            rank6,
-            rank7,
-            rank8,
-            rank9,
-            rank10,
-            rank11,
-            rank12,
-            rank13,
-            rank14,
-            rank15,
-            rank16,
+            rank_text,
             mana_cost_percentage,
             start_recovery_category,
             start_recovery_time,
@@ -566,6 +476,354 @@ impl Spell {
             ],
         }
     }
+    pub const fn entry(&self) -> u32 {
+        self.entry
+    }
+
+    pub const fn category(&self) -> i32 {
+        self.category
+    }
+
+    pub const fn dispel(&self) -> i32 {
+        self.dispel
+    }
+
+    pub const fn mechanic(&self) -> i32 {
+        self.mechanic
+    }
+
+    pub const fn attributes(&self) -> u32 {
+        self.attributes
+    }
+
+    pub const fn attributes_ex(&self) -> u32 {
+        self.attributes_ex
+    }
+
+    pub const fn attributes_ex2(&self) -> u32 {
+        self.attributes_ex2
+    }
+
+    pub const fn attributes_ex3(&self) -> u32 {
+        self.attributes_ex3
+    }
+
+    pub const fn attributes_ex4(&self) -> u32 {
+        self.attributes_ex4
+    }
+
+    pub const fn attributes_ex5(&self) -> u32 {
+        self.attributes_ex5
+    }
+
+    pub const fn attributes_ex6(&self) -> u32 {
+        self.attributes_ex6
+    }
+
+    pub const fn attributes_ex7(&self) -> u32 {
+        self.attributes_ex7
+    }
+
+    pub const fn stances(&self) -> u32 {
+        self.stances
+    }
+
+    pub const fn stances2(&self) -> u32 {
+        self.stances2
+    }
+
+    pub const fn stances_not(&self) -> u32 {
+        self.stances_not
+    }
+
+    pub const fn stances_not2(&self) -> u32 {
+        self.stances_not2
+    }
+
+    pub const fn targets(&self) -> i32 {
+        self.targets
+    }
+
+    pub const fn target_creature_type(&self) -> i32 {
+        self.target_creature_type
+    }
+
+    pub const fn requires_spell_focus(&self) -> i32 {
+        self.requires_spell_focus
+    }
+
+    pub const fn facing_caster_flags(&self) -> i32 {
+        self.facing_caster_flags
+    }
+
+    pub const fn caster_aura_state(&self) -> i32 {
+        self.caster_aura_state
+    }
+
+    pub const fn target_aura_state(&self) -> i32 {
+        self.target_aura_state
+    }
+
+    pub const fn caster_aura_state_not(&self) -> i32 {
+        self.caster_aura_state_not
+    }
+
+    pub const fn target_aura_state_not(&self) -> i32 {
+        self.target_aura_state_not
+    }
+
+    pub const fn caster_aura_spell(&self) -> i32 {
+        self.caster_aura_spell
+    }
+
+    pub const fn target_aura_spell(&self) -> i32 {
+        self.target_aura_spell
+    }
+
+    pub const fn exclude_caster_aura_spell(&self) -> i32 {
+        self.exclude_caster_aura_spell
+    }
+
+    pub const fn exclude_target_aura_spell(&self) -> i32 {
+        self.exclude_target_aura_spell
+    }
+
+    pub const fn casting_time_index(&self) -> i32 {
+        self.casting_time_index
+    }
+
+    pub const fn recovery_time(&self) -> i32 {
+        self.recovery_time
+    }
+
+    pub const fn category_recovery_time(&self) -> i32 {
+        self.category_recovery_time
+    }
+
+    pub const fn interrupt_flags(&self) -> i32 {
+        self.interrupt_flags
+    }
+
+    pub const fn aura_interrupt_flags(&self) -> u32 {
+        self.aura_interrupt_flags
+    }
+
+    pub const fn channel_interrupt_flags(&self) -> u32 {
+        self.channel_interrupt_flags
+    }
+
+    pub const fn proc_flags(&self) -> i32 {
+        self.proc_flags
+    }
+
+    pub const fn proc_chance(&self) -> i32 {
+        self.proc_chance
+    }
+
+    pub const fn proc_charges(&self) -> i32 {
+        self.proc_charges
+    }
+
+    pub const fn max_level(&self) -> i32 {
+        self.max_level
+    }
+
+    pub const fn base_level(&self) -> i32 {
+        self.base_level
+    }
+
+    pub const fn spell_level(&self) -> i32 {
+        self.spell_level
+    }
+
+    pub const fn duration_index(&self) -> i32 {
+        self.duration_index
+    }
+
+    pub const fn power_type(&self) -> u32 {
+        self.power_type
+    }
+
+    pub const fn mana_cost(&self) -> i32 {
+        self.mana_cost
+    }
+
+    pub const fn mana_cost_per_level(&self) -> i32 {
+        self.mana_cost_per_level
+    }
+
+    pub const fn mana_per_second(&self) -> i32 {
+        self.mana_per_second
+    }
+
+    pub const fn mana_per_second_per_level(&self) -> i32 {
+        self.mana_per_second_per_level
+    }
+
+    pub const fn range_index(&self) -> i32 {
+        self.range_index
+    }
+
+    pub const fn speed(&self) -> f32 {
+        self.speed
+    }
+
+    pub const fn modal_next_spell(&self) -> i32 {
+        self.modal_next_spell
+    }
+
+    pub const fn stack_amount(&self) -> i32 {
+        self.stack_amount
+    }
+
+    pub const fn equipped_item_class(&self) -> i32 {
+        self.equipped_item_class
+    }
+
+    pub const fn equipped_item_sub_class_mask(&self) -> i32 {
+        self.equipped_item_sub_class_mask
+    }
+
+    pub const fn equipped_item_inventory_type_mask(&self) -> i32 {
+        self.equipped_item_inventory_type_mask
+    }
+
+    pub const fn spell_visual(&self) -> i32 {
+        self.spell_visual
+    }
+
+    pub const fn spell_visual2(&self) -> i32 {
+        self.spell_visual2
+    }
+
+    pub const fn spell_icon_id(&self) -> i32 {
+        self.spell_icon_id
+    }
+
+    pub const fn active_icon_id(&self) -> i32 {
+        self.active_icon_id
+    }
+
+    pub const fn spell_priority(&self) -> i32 {
+        self.spell_priority
+    }
+
+    pub const fn spell_name(&self) -> &'static str {
+        self.spell_name
+    }
+
+    pub const fn rank_text(&self) -> &'static str {
+        self.rank_text
+    }
+
+    pub const fn mana_cost_percentage(&self) -> i32 {
+        self.mana_cost_percentage
+    }
+
+    pub const fn start_recovery_category(&self) -> i32 {
+        self.start_recovery_category
+    }
+
+    pub const fn start_recovery_time(&self) -> i32 {
+        self.start_recovery_time
+    }
+
+    pub const fn max_target_level(&self) -> i32 {
+        self.max_target_level
+    }
+
+    pub const fn spell_family_name(&self) -> i32 {
+        self.spell_family_name
+    }
+
+    pub const fn spell_family_flags(&self) -> u64 {
+        self.spell_family_flags
+    }
+
+    pub const fn spell_family_flags2(&self) -> u32 {
+        self.spell_family_flags2
+    }
+
+    pub const fn max_affected_targets(&self) -> i32 {
+        self.max_affected_targets
+    }
+
+    pub const fn dmg_class(&self) -> i32 {
+        self.dmg_class
+    }
+
+    pub const fn prevention_type(&self) -> i32 {
+        self.prevention_type
+    }
+
+    pub const fn stance_bar_order(&self) -> i32 {
+        self.stance_bar_order
+    }
+
+    pub const fn min_faction_id(&self) -> i32 {
+        self.min_faction_id
+    }
+
+    pub const fn min_reputation(&self) -> i32 {
+        self.min_reputation
+    }
+
+    pub const fn required_aura_vision(&self) -> i32 {
+        self.required_aura_vision
+    }
+
+    pub const fn area_id(&self) -> u32 {
+        self.area_id
+    }
+
+    pub const fn school_mask(&self) -> i32 {
+        self.school_mask
+    }
+
+    pub const fn rune_cost_id(&self) -> u32 {
+        self.rune_cost_id
+    }
+
+    pub const fn spell_missile_id(&self) -> u32 {
+        self.spell_missile_id
+    }
+
+    pub const fn power_display_id(&self) -> u32 {
+        self.power_display_id
+    }
+
+    pub const fn spell_description_variable_id(&self) -> u32 {
+        self.spell_description_variable_id
+    }
+
+    pub const fn spell_difficulty_id(&self) -> u32 {
+        self.spell_difficulty_id
+    }
+
+    pub const fn is_server_side(&self) -> u32 {
+        self.is_server_side
+    }
+
+    pub const fn attributes_serverside(&self) -> i32 {
+        self.attributes_serverside
+    }
+
+    pub const fn reagents(&self) -> &[Reagent; 8] {
+        &self.reagents
+    }
+
+    pub const fn effects(&self) -> &[SpellEffect; 3] {
+        &self.effects
+    }
+
+    pub const fn totems(&self) -> &[Totem; 2] {
+        &self.totems
+    }
+
+    pub const fn totem_categories(&self) -> &[TotemCategory; 2] {
+        &self.totem_categories
+    }
+
 }
 #[derive(Debug, Copy, Clone)]
 pub struct Reagent {

@@ -60,6 +60,10 @@ pub(crate) fn includes(
     s.inc_indent();
 
     for e in fields {
+        if import_location == ImportFrom::Items && e.value.definition_has_extra().is_some() {
+            continue;
+        }
+
         if let Some(name) = e.value.import_name() {
             set.insert(name);
         }
@@ -203,5 +207,27 @@ fn impl_block(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str)
         },
     );
 
+    getters_and_setters(s, fields, arrays);
+
     s.closing_curly();
+}
+
+fn getters_and_setters(s: &mut Writer, fields: &[Field], arrays: &[Array]) {
+    for field in fields {
+        s.pub_const_fn(field.name, field.value.type_name(), |s| {
+            s.wln(format!("self.{}", field.name));
+        });
+        s.newline();
+    }
+
+    for array in arrays {
+        s.pub_const_fn(
+            array.variable_name,
+            format!("&[{}; {}]", array.type_name, array.instances.len()),
+            |s| {
+                s.wln(format!("&self.{}", array.variable_name));
+            },
+        );
+        s.newline();
+    }
 }

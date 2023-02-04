@@ -2,8 +2,8 @@ mod constructor;
 pub(crate) mod conversions;
 pub(crate) mod definition;
 
-use crate::base_printer::data::items::{Array, Field};
-use std::collections::BTreeSet;
+use crate::base_printer::data::items::{Array, Field, Value};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 pub(crate) struct Stats {
     pub strength: i32,
@@ -126,9 +126,79 @@ pub(crate) fn write_things(
 ) {
     let mut s = Writer::new();
 
-    all_items(&mut s, things, expansion, unobtainable, ty_name);
+    let default_values = get_default_values(things);
+    const_default_values(&mut s, &default_values);
+
+    all_items(
+        &mut s,
+        things,
+        expansion,
+        unobtainable,
+        ty_name,
+        &default_values,
+    );
 
     overwrite_autogenerate_if_not_the_same(path, s.inner());
+}
+
+fn get_default_values(things: &[GenericThing]) -> BTreeSet<Value> {
+    let mut map: HashMap<&'static str, BTreeMap<Value, usize>> = HashMap::new();
+
+    for thing in things {
+        for field in thing.fields {
+            insert_value(&mut map, &field.value)
+        }
+
+        for array in thing.arrays {
+            for instance in &array.instances {
+                for field in instance {
+                    insert_value(&mut map, &field.value)
+                }
+            }
+        }
+    }
+
+    let mut set = BTreeSet::new();
+
+    for (_, values) in map {
+        let mut v = values.iter().next().unwrap();
+        for value in &values {
+            if value.1 > v.1 {
+                v = value;
+            }
+        }
+
+        set.insert(v.0.clone());
+    }
+
+    set
+}
+
+fn insert_value(map: &mut HashMap<&str, BTreeMap<Value, usize>>, value: &Value) {
+    if let Some(set) = map.get_mut(value.const_name()) {
+        if let Some(v) = set.get_mut(value) {
+            *v += 1;
+        } else {
+            set.insert(value.clone(), 1);
+        }
+    } else {
+        let mut set = BTreeMap::new();
+
+        set.insert(value.clone(), 1);
+
+        map.insert(value.const_name(), set);
+    }
+}
+
+fn const_default_values(s: &mut Writer, default_values: &BTreeSet<Value>) {
+    for value in default_values {
+        s.wln(format!(
+            "const {}: {} = {};",
+            value.const_name(),
+            value.constructor_type_name(),
+            value.default_value().to_string_value(),
+        ));
+    }
 }
 
 pub(crate) fn unobtainable_item(entry: u32, extra_flags: i32, name: &str) -> bool {
@@ -174,6 +244,7 @@ fn all_items(
     expansion: Expansion,
     unobtainable: impl Fn(&GenericThing) -> bool,
     ty_name: &str,
+    default_values: &BTreeSet<Value>,
 ) {
     includes(
         s,
@@ -193,7 +264,11 @@ fn all_items(
         s.w(format!("{}(", item.constructor_name()));
 
         for value in item.fields {
-            s.w_no_indent(format!("{},", value.value.to_string_value()));
+            if default_values.contains(&value.value) {
+                s.w_no_indent(format!("{},", value.value.const_name()));
+            } else {
+                s.w_no_indent(format!("{},", value.value.to_string_value()));
+            }
         }
 
         for array in item.arrays {
@@ -203,7 +278,11 @@ fn all_items(
 
             for instance in &array.instances {
                 for field in instance {
-                    s.w_no_indent(format!("{},", field.value.to_string_value()));
+                    if default_values.contains(&field.value) {
+                        s.w_no_indent(format!("{},", field.value.const_name()));
+                    } else {
+                        s.w_no_indent(format!("{},", field.value.to_string_value()));
+                    }
                 }
             }
         }

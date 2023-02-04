@@ -25,7 +25,7 @@ pub(crate) fn constructor(
             ty_name,
             |s| {
                 for e in items[0].fields {
-                    s.wln(format!("{}: {},", e.name, e.value.type_name()));
+                    s.wln(format!("{}: {},", e.name, e.value.constructor_type_name()));
                 }
 
                 for array in items[0].arrays {
@@ -44,7 +44,11 @@ pub(crate) fn constructor(
             },
             |s| {
                 for e in items[0].fields {
-                    s.wln(format!("{},", e.name));
+                    if let Some(prefix) = e.value.definition_has_extra() {
+                        s.wln(format!("{}: {prefix}({}),", e.name, e.name));
+                    } else {
+                        s.wln(format!("{},", e.name));
+                    }
                 }
 
                 for array in items[0].arrays {

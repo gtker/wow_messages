@@ -40,7 +40,7 @@ pub(crate) struct TbcSpell {
     duration_index: i32,
     power_type: u32,
     mana_cost: i32,
-    mana_cost_perlevel: i32,
+    mana_cost_per_level: i32,
     mana_per_second: i32,
     mana_per_second_per_level: i32,
     range_index: i32,
@@ -129,38 +129,71 @@ pub(crate) struct TbcSpell {
     spell_icon_id: i32,
     active_icon_id: i32,
     spell_priority: i32,
+
     spell_name: String,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name2: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name3: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name4: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name5: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name6: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name7: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name8: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name9: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name10: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name11: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name12: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name13: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name14: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name15: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name16: Option<String>,
+
     rank1: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank2: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank3: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank4: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank5: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank6: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank7: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank8: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank9: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank10: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank11: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank12: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank13: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank14: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank15: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank16: Option<String>,
+
     mana_cost_percentage: i32,
     start_recovery_category: i32,
     start_recovery_time: i32,
@@ -246,7 +279,7 @@ impl TbcSpell {
             Field::new("duration_index", Value::Int(self.duration_index)),
             Field::new("power_type", Value::Uint(self.power_type)),
             Field::new("mana_cost", Value::Int(self.mana_cost)),
-            Field::new("mana_cost_perlevel", Value::Int(self.mana_cost_perlevel)),
+            Field::new("mana_cost_per_level", Value::Int(self.mana_cost_per_level)),
             Field::new("mana_per_second", Value::Int(self.mana_per_second)),
             Field::new(
                 "mana_per_second_per_level",
@@ -270,103 +303,7 @@ impl TbcSpell {
             Field::new("active_icon_id", Value::Int(self.active_icon_id)),
             Field::new("spell_priority", Value::Int(self.spell_priority)),
             Field::new("spell_name", Value::String(self.spell_name.clone())),
-            Field::new(
-                "spell_name2",
-                Value::String(self.spell_name2.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name3",
-                Value::String(self.spell_name3.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name4",
-                Value::String(self.spell_name4.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name5",
-                Value::String(self.spell_name5.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name6",
-                Value::String(self.spell_name6.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name7",
-                Value::String(self.spell_name7.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name8",
-                Value::String(self.spell_name8.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name9",
-                Value::String(self.spell_name9.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name10",
-                Value::String(self.spell_name10.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name11",
-                Value::String(self.spell_name11.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name12",
-                Value::String(self.spell_name12.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name13",
-                Value::String(self.spell_name13.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name14",
-                Value::String(self.spell_name14.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name15",
-                Value::String(self.spell_name15.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name16",
-                Value::String(self.spell_name16.unwrap_or_default()),
-            ),
-            Field::new("rank1", Value::String(self.rank1.unwrap_or_default())),
-            Field::new("rank2", Value::String(self.rank2.unwrap_or_default())),
-            Field::new("rank3", Value::String(self.rank3.unwrap_or_default())),
-            Field::new("rank4", Value::String(self.rank4.unwrap_or_default())),
-            Field::new("rank5", Value::String(self.rank5.unwrap_or_default())),
-            Field::new("rank6", Value::String(self.rank6.unwrap_or_default())),
-            Field::new("rank7", Value::String(self.rank7.unwrap_or_default())),
-            Field::new("rank8", Value::String(self.rank8.unwrap_or_default())),
-            Field::new("rank9", Value::String(self.rank9.unwrap_or_default())),
-            Field::new(
-                "rank10",
-                Value::String(self.rank10.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank11",
-                Value::String(self.rank11.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank12",
-                Value::String(self.rank12.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank13",
-                Value::String(self.rank13.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank14",
-                Value::String(self.rank14.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank15",
-                Value::String(self.rank15.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank16",
-                Value::String(self.rank16.unwrap_or_default()),
-            ),
+            Field::new("rank_text", Value::String(self.rank1.unwrap_or_default())),
             Field::new(
                 "mana_cost_percentage",
                 Value::Int(self.mana_cost_percentage),
@@ -810,7 +747,50 @@ impl TbcSpell {
     }
 }
 
+pub(crate) fn assertions(conn: &Connection) {
+    let mut s = conn
+        .prepare(
+            "SELECT Id, SpellName FROM spell_template WHERE
+    (SpellName2 not null and SpellName2 != '') or
+    (Rank2 not null and Rank2 != '') or
+    (SpellName3 not null and SpellName3 != '') or
+    (Rank3 not null and Rank3 != '') or
+    (SpellName4 not null and SpellName4 != '') or
+    (Rank4 not null and Rank4 != '') or
+    (SpellName5 not null and SpellName5 != '') or
+    (Rank5 not null and Rank5 != '') or
+    (SpellName6 not null and SpellName6 != '') or
+    (Rank6 not null and Rank6 != '') or
+    (SpellName7 not null and SpellName7 != '') or
+    (Rank7 not null and Rank7 != '') or
+    (SpellName8 not null and SpellName8 != '') or
+    (Rank8 not null and Rank8 != '');
+    (SpellName9 not null and SpellName9 != '') or
+    (Rank9 not null and Rank9 != '');
+    (SpellName10 not null and SpellName10 != '') or
+    (Rank10 not null and Rank10 != '');
+    (SpellName11 not null and SpellName11 != '') or
+    (Rank11 not null and Rank11 != '');
+    (SpellName12 not null and SpellName12 != '') or
+    (Rank12 not null and Rank12 != '');
+    (SpellName13 not null and SpellName13 != '') or
+    (Rank13 not null and Rank13 != '');
+    (SpellName14 not null and SpellName14 != '') or
+    (Rank14 not null and Rank14 != '');
+    (SpellName15 not null and SpellName15 != '') or
+    (Rank15 not null and Rank15 != '');
+    (SpellName16 not null and SpellName16 != '') or
+    (Rank16 not null and Rank16 != '');
+    ",
+        )
+        .unwrap();
+
+    assert!(!s.exists([]).unwrap(), "The SpellName* and Rank* are assumed to be either an empty string or null. These fields are not included at all.");
+}
+
 pub(crate) fn tbc(conn: &Connection) -> Vec<GenericSpell> {
+    assertions(conn);
+
     let mut s = conn
         .prepare(
             "SELECT
@@ -1038,7 +1018,7 @@ pub(crate) fn tbc(conn: &Connection) -> Vec<GenericSpell> {
                 duration_index: row.get(34).unwrap(),
                 power_type: row.get(35).unwrap(),
                 mana_cost: row.get(36).unwrap(),
-                mana_cost_perlevel: row.get(37).unwrap(),
+                mana_cost_per_level: row.get(37).unwrap(),
                 mana_per_second: row.get(38).unwrap(),
                 mana_per_second_per_level: row.get(39).unwrap(),
                 range_index: row.get(40).unwrap(),

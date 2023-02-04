@@ -1,6 +1,9 @@
 use crate::base_printer::data::items::{Array, ArrayField, Field, Value};
 use crate::base_printer::data::spells::GenericSpell;
 use rusqlite::Connection;
+use wow_world_base::vanilla::{
+    Attributes, AttributesEx1, AttributesEx2, AttributesEx3, AttributesEx4,
+};
 
 pub struct VanillaSpell {
     id: u32,
@@ -9,11 +12,11 @@ pub struct VanillaSpell {
     cast_ui: i32,
     dispel: i32,
     mechanic: i32,
-    attributes: u32,
-    attributes_ex: u32,
-    attributes_ex2: u32,
-    attributes_ex3: u32,
-    attributes_ex4: u32,
+    attributes: Attributes,
+    attributes_ex: AttributesEx1,
+    attributes_ex2: AttributesEx2,
+    attributes_ex3: AttributesEx3,
+    attributes_ex4: AttributesEx4,
     stances: u32,
     stances_not: u32,
     targets: i32,
@@ -122,22 +125,39 @@ pub struct VanillaSpell {
     spell_icon_id: i32,
     active_icon_id: i32,
     spell_priority: i32,
+
     spell_name: String,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name2: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name3: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name4: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name5: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name6: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name7: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name8: Option<String>,
+
     rank1: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank2: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank3: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank4: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank5: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank6: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank7: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank8: Option<String>,
+
     mana_cost_percentage: i32,
     start_recovery_category: i32,
     start_recovery_time: i32,
@@ -167,11 +187,23 @@ impl VanillaSpell {
             Field::new("cast_ui", Value::Int(self.cast_ui)),
             Field::new("dispel", Value::Int(self.dispel)),
             Field::new("mechanic", Value::Int(self.mechanic)),
-            Field::new("attributes", Value::Uint(self.attributes)),
-            Field::new("attributes_ex", Value::Uint(self.attributes_ex)),
-            Field::new("attributes_ex2", Value::Uint(self.attributes_ex2)),
-            Field::new("attributes_ex3", Value::Uint(self.attributes_ex3)),
-            Field::new("attributes_ex4", Value::Uint(self.attributes_ex4)),
+            Field::new("attributes", Value::VanillaAttributes(self.attributes)),
+            Field::new(
+                "attributes_ex",
+                Value::VanillaAttributesEx1(self.attributes_ex),
+            ),
+            Field::new(
+                "attributes_ex2",
+                Value::VanillaAttributesEx2(self.attributes_ex2),
+            ),
+            Field::new(
+                "attributes_ex3",
+                Value::VanillaAttributesEx3(self.attributes_ex3),
+            ),
+            Field::new(
+                "attributes_ex4",
+                Value::VanillaAttributesEx4(self.attributes_ex4),
+            ),
             Field::new("stances", Value::Uint(self.stances)),
             Field::new("stances_not", Value::Uint(self.stances_not)),
             Field::new("targets", Value::Int(self.targets)),
@@ -233,42 +265,7 @@ impl VanillaSpell {
             Field::new("active_icon_id", Value::Int(self.active_icon_id)),
             Field::new("spell_priority", Value::Int(self.spell_priority)),
             Field::new("spell_name", Value::String(self.spell_name.clone())),
-            Field::new(
-                "spell_name2",
-                Value::String(self.spell_name2.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name3",
-                Value::String(self.spell_name3.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name4",
-                Value::String(self.spell_name4.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name5",
-                Value::String(self.spell_name5.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name6",
-                Value::String(self.spell_name6.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name7",
-                Value::String(self.spell_name7.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name8",
-                Value::String(self.spell_name8.unwrap_or_default()),
-            ),
-            Field::new("rank1", Value::String(self.rank1.unwrap_or_default())),
-            Field::new("rank2", Value::String(self.rank2.unwrap_or_default())),
-            Field::new("rank3", Value::String(self.rank3.unwrap_or_default())),
-            Field::new("rank4", Value::String(self.rank4.unwrap_or_default())),
-            Field::new("rank5", Value::String(self.rank5.unwrap_or_default())),
-            Field::new("rank6", Value::String(self.rank6.unwrap_or_default())),
-            Field::new("rank7", Value::String(self.rank7.unwrap_or_default())),
-            Field::new("rank8", Value::String(self.rank8.unwrap_or_default())),
+            Field::new("rank_text", Value::String(self.rank1.unwrap_or_default())),
             Field::new(
                 "mana_cost_percentage",
                 Value::Int(self.mana_cost_percentage),
@@ -678,7 +675,34 @@ impl VanillaSpell {
     }
 }
 
+fn assertions(conn: &Connection) {
+    let mut s = conn
+        .prepare(
+            "SELECT Id, SpellName FROM spell_template WHERE
+    (SpellName2 not null and SpellName2 != '') or
+    (Rank2 not null and Rank2 != '') or
+    (SpellName3 not null and SpellName3 != '') or
+    (Rank3 not null and Rank3 != '') or
+    (SpellName4 not null and SpellName4 != '') or
+    (Rank4 not null and Rank4 != '') or
+    (SpellName5 not null and SpellName5 != '') or
+    (Rank5 not null and Rank5 != '') or
+    (SpellName6 not null and SpellName6 != '') or
+    (Rank6 not null and Rank6 != '') or
+    (SpellName7 not null and SpellName7 != '') or
+    (Rank7 not null and Rank7 != '') or
+    (SpellName8 not null and SpellName8 != '') or
+    (Rank8 not null and Rank8 != '');
+    ",
+        )
+        .unwrap();
+
+    assert!(!s.exists([]).unwrap(), "The SpellName* and Rank* are assumed to be either an empty string or null. These fields are not included at all.");
+}
+
 pub(crate) fn vanilla(conn: &Connection) -> Vec<GenericSpell> {
+    assertions(conn);
+
     let mut s = conn
         .prepare(
             "SELECT
@@ -848,11 +872,11 @@ pub(crate) fn vanilla(conn: &Connection) -> Vec<GenericSpell> {
                 cast_ui: row.get(3).unwrap(),
                 dispel: row.get(4).unwrap(),
                 mechanic: row.get(5).unwrap(),
-                attributes: row.get(6).unwrap(),
-                attributes_ex: row.get(7).unwrap(),
-                attributes_ex2: row.get(8).unwrap(),
-                attributes_ex3: row.get(9).unwrap(),
-                attributes_ex4: row.get(10).unwrap(),
+                attributes: Attributes::new(row.get::<usize, u32>(6).unwrap()),
+                attributes_ex: AttributesEx1::new(row.get::<usize, u32>(7).unwrap()),
+                attributes_ex2: AttributesEx2::new(row.get::<usize, u32>(8).unwrap()),
+                attributes_ex3: AttributesEx3::new(row.get::<usize, u32>(9).unwrap()),
+                attributes_ex4: AttributesEx4::new(row.get::<usize, u32>(10).unwrap()),
                 stances: row.get(11).unwrap(),
                 stances_not: row.get(12).unwrap(),
                 targets: row.get(13).unwrap(),

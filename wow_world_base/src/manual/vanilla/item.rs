@@ -343,6 +343,270 @@ impl Item {
             ],
         }
     }
+    pub const fn entry(&self) -> u32 {
+        self.entry
+    }
+
+    pub const fn class_and_sub_class(&self) -> ItemClassAndSubClass {
+        self.class_and_sub_class
+    }
+
+    pub const fn name(&self) -> &'static str {
+        self.name
+    }
+
+    pub const fn displayid(&self) -> i32 {
+        self.displayid
+    }
+
+    pub const fn quality(&self) -> ItemQuality {
+        self.quality
+    }
+
+    pub const fn flags(&self) -> i32 {
+        self.flags
+    }
+
+    pub const fn buy_count(&self) -> i32 {
+        self.buy_count
+    }
+
+    pub const fn buy_price(&self) -> i32 {
+        self.buy_price
+    }
+
+    pub const fn sell_price(&self) -> i32 {
+        self.sell_price
+    }
+
+    pub const fn inventory_type(&self) -> InventoryType {
+        self.inventory_type
+    }
+
+    pub const fn allowed_class(&self) -> AllowedClass {
+        self.allowed_class
+    }
+
+    pub const fn allowed_race(&self) -> AllowedRace {
+        self.allowed_race
+    }
+
+    pub const fn item_level(&self) -> i32 {
+        self.item_level
+    }
+
+    pub const fn required_level(&self) -> i32 {
+        self.required_level
+    }
+
+    pub const fn required_skill(&self) -> Skill {
+        self.required_skill
+    }
+
+    pub const fn required_skill_rank(&self) -> i32 {
+        self.required_skill_rank
+    }
+
+    pub const fn required_spell(&self) -> i32 {
+        self.required_spell
+    }
+
+    pub const fn required_honor_rank(&self) -> i32 {
+        self.required_honor_rank
+    }
+
+    pub const fn required_city_rank(&self) -> i32 {
+        self.required_city_rank
+    }
+
+    pub const fn required_reputation_faction(&self) -> i32 {
+        self.required_reputation_faction
+    }
+
+    pub const fn required_reputation_rank(&self) -> i32 {
+        self.required_reputation_rank
+    }
+
+    pub const fn max_count(&self) -> i32 {
+        self.max_count
+    }
+
+    pub const fn stackable(&self) -> i32 {
+        self.stackable
+    }
+
+    pub const fn container_slots(&self) -> i32 {
+        self.container_slots
+    }
+
+    pub const fn mana(&self) -> i32 {
+        self.mana
+    }
+
+    pub const fn health(&self) -> i32 {
+        self.health
+    }
+
+    pub const fn agility(&self) -> i32 {
+        self.agility
+    }
+
+    pub const fn strength(&self) -> i32 {
+        self.strength
+    }
+
+    pub const fn stamina(&self) -> i32 {
+        self.stamina
+    }
+
+    pub const fn intellect(&self) -> i32 {
+        self.intellect
+    }
+
+    pub const fn spirit(&self) -> i32 {
+        self.spirit
+    }
+
+    pub const fn armor(&self) -> i32 {
+        self.armor
+    }
+
+    pub const fn holy_res(&self) -> i32 {
+        self.holy_res
+    }
+
+    pub const fn fire_res(&self) -> i32 {
+        self.fire_res
+    }
+
+    pub const fn nature_res(&self) -> i32 {
+        self.nature_res
+    }
+
+    pub const fn frost_res(&self) -> i32 {
+        self.frost_res
+    }
+
+    pub const fn shadow_res(&self) -> i32 {
+        self.shadow_res
+    }
+
+    pub const fn arcane_res(&self) -> i32 {
+        self.arcane_res
+    }
+
+    pub const fn delay(&self) -> i32 {
+        self.delay
+    }
+
+    pub const fn ammo_type(&self) -> i32 {
+        self.ammo_type
+    }
+
+    pub const fn ranged_mod_range(&self) -> f32 {
+        self.ranged_mod_range
+    }
+
+    pub const fn bonding(&self) -> Bonding {
+        self.bonding
+    }
+
+    pub const fn description(&self) -> &'static str {
+        self.description
+    }
+
+    pub const fn page_text(&self) -> i32 {
+        self.page_text
+    }
+
+    pub const fn language_id(&self) -> i32 {
+        self.language_id
+    }
+
+    pub const fn page_material(&self) -> i32 {
+        self.page_material
+    }
+
+    pub const fn start_quest(&self) -> i32 {
+        self.start_quest
+    }
+
+    pub const fn lock_id(&self) -> i32 {
+        self.lock_id
+    }
+
+    pub const fn material(&self) -> i32 {
+        self.material
+    }
+
+    pub const fn sheath(&self) -> i32 {
+        self.sheath
+    }
+
+    pub const fn random_property(&self) -> i32 {
+        self.random_property
+    }
+
+    pub const fn block(&self) -> i32 {
+        self.block
+    }
+
+    pub const fn itemset(&self) -> i32 {
+        self.itemset
+    }
+
+    pub const fn max_durability(&self) -> i32 {
+        self.max_durability
+    }
+
+    pub const fn area(&self) -> Area {
+        self.area
+    }
+
+    pub const fn map(&self) -> Map {
+        self.map
+    }
+
+    pub const fn bag_family(&self) -> i32 {
+        self.bag_family
+    }
+
+    pub const fn script_name(&self) -> &'static str {
+        self.script_name
+    }
+
+    pub const fn disenchant_id(&self) -> i32 {
+        self.disenchant_id
+    }
+
+    pub const fn food_type(&self) -> i32 {
+        self.food_type
+    }
+
+    pub const fn min_money_loot(&self) -> i32 {
+        self.min_money_loot
+    }
+
+    pub const fn max_money_loot(&self) -> i32 {
+        self.max_money_loot
+    }
+
+    pub const fn duration(&self) -> i32 {
+        self.duration
+    }
+
+    pub const fn extra_flags(&self) -> i32 {
+        self.extra_flags
+    }
+
+    pub const fn damages(&self) -> &[ItemDamageType; 5] {
+        &self.damages
+    }
+
+    pub const fn spells(&self) -> &[Spells; 5] {
+        &self.spells
+    }
+
 }
 #[derive(Debug, Copy, Clone)]
 pub struct Spells {

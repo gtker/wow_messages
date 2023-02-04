@@ -1,9 +1,15 @@
 use crate::base_printer::Expansion;
 use rusqlite::Connection;
+use std::cmp::Ordering;
 
 pub mod tbc;
 pub mod vanilla;
 pub mod wrath;
+
+use wow_world_base::shared as shared_base;
+use wow_world_base::tbc as tbc_base;
+use wow_world_base::vanilla as vanilla_base;
+use wow_world_base::wrath as wrath_base;
 
 pub struct GenericItem {
     pub entry: u32,
@@ -82,42 +88,55 @@ pub enum Value {
     Uint64(u64),
     Float(f32),
 
-    VanillaItemClassAndSubClass(wow_world_base::vanilla::ItemClassAndSubClass),
-    TbcItemClassAndSubClass(wow_world_base::tbc::ItemClassAndSubClass),
-    WrathItemClassAndSubClass(wow_world_base::wrath::ItemClassAndSubClass),
+    VanillaItemClassAndSubClass(vanilla_base::ItemClassAndSubClass),
+    TbcItemClassAndSubClass(tbc_base::ItemClassAndSubClass),
+    WrathItemClassAndSubClass(wrath_base::ItemClassAndSubClass),
 
-    VanillaTbcItemQuality(wow_world_base::shared::item_quality_vanilla_tbc::ItemQuality),
-    WrathItemQuality(wow_world_base::wrath::ItemQuality),
+    VanillaTbcItemQuality(shared_base::item_quality_vanilla_tbc::ItemQuality),
+    WrathItemQuality(wrath_base::ItemQuality),
 
-    InventoryType(wow_world_base::shared::inventory_type_vanilla_tbc_wrath::InventoryType),
+    InventoryType(shared_base::inventory_type_vanilla_tbc_wrath::InventoryType),
 
-    VanillaTbcAllowedClass(wow_world_base::shared::allowed_class_vanilla_tbc::AllowedClass),
-    WrathAllowedClass(wow_world_base::wrath::AllowedClass),
+    VanillaTbcAllowedClass(shared_base::allowed_class_vanilla_tbc::AllowedClass),
+    WrathAllowedClass(wrath_base::AllowedClass),
 
-    VanillaAllowedRace(wow_world_base::vanilla::AllowedRace),
-    TbcAllowedRace(wow_world_base::tbc::AllowedRace),
-    WrathAllowedRace(wow_world_base::wrath::AllowedRace),
+    VanillaAllowedRace(vanilla_base::AllowedRace),
+    TbcAllowedRace(tbc_base::AllowedRace),
+    WrathAllowedRace(wrath_base::AllowedRace),
 
-    SpellSchool(wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool),
+    SpellSchool(shared_base::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool),
 
-    VanillaSpellTriggerType(wow_world_base::vanilla::SpellTriggerType),
-    TbcWrathSpellTriggerType(
-        wow_world_base::shared::spell_trigger_type_tbc_wrath::SpellTriggerType,
-    ),
+    VanillaSpellTriggerType(vanilla_base::SpellTriggerType),
+    TbcWrathSpellTriggerType(shared_base::spell_trigger_type_tbc_wrath::SpellTriggerType),
 
-    Bonding(wow_world_base::shared::bonding_vanilla_tbc_wrath::Bonding),
+    Bonding(shared_base::bonding_vanilla_tbc_wrath::Bonding),
 
-    VanillaSkill(wow_world_base::vanilla::Skill),
-    TbcSkill(wow_world_base::tbc::Skill),
-    WrathSkill(wow_world_base::wrath::Skill),
+    VanillaSkill(vanilla_base::Skill),
+    TbcSkill(tbc_base::Skill),
+    WrathSkill(wrath_base::Skill),
 
-    VanillaMap(wow_world_base::vanilla::Map),
-    TbcMap(wow_world_base::tbc::Map),
-    WrathMap(wow_world_base::wrath::Map),
+    VanillaMap(vanilla_base::Map),
+    TbcMap(tbc_base::Map),
+    WrathMap(wrath_base::Map),
 
-    VanillaArea(wow_world_base::vanilla::Area),
-    TbcArea(wow_world_base::tbc::Area),
-    WrathArea(wow_world_base::wrath::Area),
+    VanillaArea(vanilla_base::Area),
+    TbcArea(tbc_base::Area),
+    WrathArea(wrath_base::Area),
+
+    VanillaAttributes(vanilla_base::Attributes),
+    VanillaAttributesEx1(vanilla_base::AttributesEx1),
+    VanillaAttributesEx2(vanilla_base::AttributesEx2),
+    VanillaAttributesEx3(vanilla_base::AttributesEx3),
+    VanillaAttributesEx4(vanilla_base::AttributesEx4),
+}
+
+impl Eq for Value {}
+
+#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
+impl Ord for Value {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.partial_cmp(other).unwrap()
+    }
 }
 
 impl Value {
@@ -131,6 +150,22 @@ impl Value {
                 | Value::Uint64(_)
                 | Value::Float(_)
         )
+    }
+
+    pub const fn constructor_type_name(&self) -> &'static str {
+        match self {
+            Value::VanillaTbcAllowedClass(_)
+            | Value::WrathAllowedClass(_)
+            | Value::VanillaAllowedRace(_)
+            | Value::TbcAllowedRace(_)
+            | Value::WrathAllowedRace(_)
+            | Value::VanillaAttributes(_)
+            | Value::VanillaAttributesEx1(_)
+            | Value::VanillaAttributesEx2(_)
+            | Value::VanillaAttributesEx3(_)
+            | Value::VanillaAttributesEx4(_) => "u32",
+            _ => self.type_name(),
+        }
     }
 
     pub const fn type_name(&self) -> &'static str {
@@ -158,6 +193,11 @@ impl Value {
             Value::VanillaSkill(_) | Value::TbcSkill(_) | Value::WrathSkill(_) => "Skill",
             Value::VanillaMap(_) | Value::TbcMap(_) | Value::WrathMap(_) => "Map",
             Value::VanillaArea(_) | Value::TbcArea(_) | Value::WrathArea(_) => "Area",
+            Value::VanillaAttributes(_) => "Attributes",
+            Value::VanillaAttributesEx1(_) => "AttributesEx1",
+            Value::VanillaAttributesEx2(_) => "AttributesEx2",
+            Value::VanillaAttributesEx3(_) => "AttributesEx3",
+            Value::VanillaAttributesEx4(_) => "AttributesEx4",
         }
     }
 
@@ -166,6 +206,57 @@ impl Value {
             Some(self.type_name())
         } else {
             None
+        }
+    }
+
+    pub fn const_name(&self) -> &'static str {
+        match self {
+            Value::String(_) => "A",
+            Value::Int(_) => "B",
+            Value::Int64(_) => "C",
+            Value::Uint(_) => "D",
+            Value::Uint64(_) => "E",
+            Value::Float(_) => "F",
+
+            Value::VanillaItemClassAndSubClass(_) => "G",
+            Value::TbcItemClassAndSubClass(_) => "G",
+            Value::WrathItemClassAndSubClass(_) => "G",
+
+            Value::VanillaTbcItemQuality(_) => "H",
+            Value::WrathItemQuality(_) => "H",
+            Value::InventoryType(_) => "I",
+
+            Value::VanillaTbcAllowedClass(_) => "J",
+            Value::WrathAllowedClass(_) => "J",
+
+            Value::VanillaAllowedRace(_) => "K",
+            Value::TbcAllowedRace(_) => "K",
+            Value::WrathAllowedRace(_) => "K",
+
+            Value::SpellSchool(_) => "L",
+
+            Value::VanillaSpellTriggerType(_) => "M",
+            Value::TbcWrathSpellTriggerType(_) => "M",
+
+            Value::Bonding(_) => "N",
+
+            Value::VanillaSkill(_) => "O",
+            Value::TbcSkill(_) => "O",
+            Value::WrathSkill(_) => "O",
+
+            Value::VanillaMap(_) => "P",
+            Value::TbcMap(_) => "P",
+            Value::WrathMap(_) => "P",
+
+            Value::VanillaArea(_) => "Q",
+            Value::TbcArea(_) => "Q",
+            Value::WrathArea(_) => "Q",
+
+            Value::VanillaAttributes(_) => "R",
+            Value::VanillaAttributesEx1(_) => "S",
+            Value::VanillaAttributesEx2(_) => "T",
+            Value::VanillaAttributesEx3(_) => "U",
+            Value::VanillaAttributesEx4(_) => "V",
         }
     }
 
@@ -204,19 +295,11 @@ impl Value {
                 format!("ItemQuality::{:?}", v)
             }
             Value::InventoryType(v) => format!("InventoryType::{:?}", v),
-            Value::VanillaTbcAllowedClass(v) => {
-                format!("AllowedClass::new({})", v.as_int())
-            }
-            Value::WrathAllowedClass(v) => {
-                format!("AllowedClass::new({})", v.as_int())
-            }
-            Value::VanillaAllowedRace(v) => {
-                format!("AllowedRace::new({})", v.as_int())
-            }
-            Value::TbcAllowedRace(v) => {
-                format!("AllowedRace::new({})", v.as_int())
-            }
-            Value::WrathAllowedRace(v) => format!("AllowedRace::new({})", v.as_int()),
+            Value::VanillaTbcAllowedClass(v) => v.as_int().to_string(),
+            Value::WrathAllowedClass(v) => v.as_int().to_string(),
+            Value::VanillaAllowedRace(v) => v.as_int().to_string(),
+            Value::TbcAllowedRace(v) => v.as_int().to_string(),
+            Value::WrathAllowedRace(v) => v.as_int().to_string(),
             Value::SpellSchool(v) => format!("SpellSchool::{:?}", v),
             Value::VanillaSpellTriggerType(v) => {
                 format!("SpellTriggerType::{:?}", v)
@@ -250,6 +333,27 @@ impl Value {
             Value::WrathArea(v) => {
                 format!("Area::{:?}", v)
             }
+            Value::VanillaAttributes(v) => v.as_int().to_string(),
+            Value::VanillaAttributesEx1(v) => v.as_int().to_string(),
+            Value::VanillaAttributesEx2(v) => v.as_int().to_string(),
+            Value::VanillaAttributesEx3(v) => v.as_int().to_string(),
+            Value::VanillaAttributesEx4(v) => v.as_int().to_string(),
+        }
+    }
+
+    pub fn definition_has_extra(&self) -> Option<String> {
+        match self {
+            Value::VanillaTbcAllowedClass(_)
+            | Value::WrathAllowedClass(_)
+            | Value::VanillaAllowedRace(_)
+            | Value::TbcAllowedRace(_)
+            | Value::WrathAllowedRace(_)
+            | Value::VanillaAttributes(_)
+            | Value::VanillaAttributesEx1(_)
+            | Value::VanillaAttributesEx2(_)
+            | Value::VanillaAttributesEx3(_)
+            | Value::VanillaAttributesEx4(_) => Some(format!("{}::new", self.type_name())),
+            _ => None,
         }
     }
 
@@ -262,61 +366,68 @@ impl Value {
             Value::Uint64(_) => Value::Uint64(0),
             Value::Float(_) => Value::Float(0.0),
             Value::VanillaAllowedRace(_) => {
-                Value::VanillaAllowedRace(wow_world_base::vanilla::AllowedRace::empty())
+                Value::VanillaAllowedRace(vanilla_base::AllowedRace::empty())
             }
-            Value::VanillaArea(_) => Value::VanillaArea(wow_world_base::vanilla::Area::None),
-            Value::VanillaItemClassAndSubClass(_) => Value::VanillaItemClassAndSubClass(
-                wow_world_base::vanilla::ItemClassAndSubClass::Consumable,
-            ),
-            Value::VanillaMap(_) => {
-                Value::VanillaMap(wow_world_base::vanilla::Map::EasternKingdoms)
+            Value::VanillaArea(_) => Value::VanillaArea(vanilla_base::Area::None),
+            Value::VanillaItemClassAndSubClass(_) => {
+                Value::VanillaItemClassAndSubClass(vanilla_base::ItemClassAndSubClass::Consumable)
             }
-            Value::VanillaSkill(_) => Value::VanillaSkill(wow_world_base::vanilla::Skill::None),
+            Value::VanillaMap(_) => Value::VanillaMap(vanilla_base::Map::EasternKingdoms),
+            Value::VanillaSkill(_) => Value::VanillaSkill(vanilla_base::Skill::None),
             Value::VanillaSpellTriggerType(_) => {
-                Value::VanillaSpellTriggerType(wow_world_base::vanilla::SpellTriggerType::OnUse)
+                Value::VanillaSpellTriggerType(vanilla_base::SpellTriggerType::OnUse)
             }
             Value::VanillaTbcAllowedClass(_) => Value::VanillaTbcAllowedClass(
-                wow_world_base::shared::allowed_class_vanilla_tbc::AllowedClass::empty(),
+                shared_base::allowed_class_vanilla_tbc::AllowedClass::empty(),
             ),
             Value::VanillaTbcItemQuality(_) => Value::VanillaTbcItemQuality(
-                wow_world_base::shared::item_quality_vanilla_tbc::ItemQuality::Poor,
+                shared_base::item_quality_vanilla_tbc::ItemQuality::Poor,
             ),
-            Value::TbcItemClassAndSubClass(_) => Value::TbcItemClassAndSubClass(
-                wow_world_base::tbc::ItemClassAndSubClass::Consumable,
-            ),
-            Value::WrathItemClassAndSubClass(_) => Value::WrathItemClassAndSubClass(
-                wow_world_base::wrath::ItemClassAndSubClass::Consumable,
-            ),
-            Value::WrathItemQuality(_) => {
-                Value::WrathItemQuality(wow_world_base::wrath::ItemQuality::Poor)
+            Value::TbcItemClassAndSubClass(_) => {
+                Value::TbcItemClassAndSubClass(tbc_base::ItemClassAndSubClass::Consumable)
             }
+            Value::WrathItemClassAndSubClass(_) => {
+                Value::WrathItemClassAndSubClass(wrath_base::ItemClassAndSubClass::Consumable)
+            }
+            Value::WrathItemQuality(_) => Value::WrathItemQuality(wrath_base::ItemQuality::Poor),
             Value::InventoryType(_) => Value::InventoryType(
-                wow_world_base::shared::inventory_type_vanilla_tbc_wrath::InventoryType::NonEquip,
+                shared_base::inventory_type_vanilla_tbc_wrath::InventoryType::NonEquip,
             ),
             Value::WrathAllowedClass(_) => {
-                Value::WrathAllowedClass(wow_world_base::wrath::AllowedClass::empty())
+                Value::WrathAllowedClass(wrath_base::AllowedClass::empty())
             }
-            Value::TbcAllowedRace(_) => {
-                Value::TbcAllowedRace(wow_world_base::tbc::AllowedRace::empty())
-            }
-            Value::WrathAllowedRace(_) => {
-                Value::WrathAllowedRace(wow_world_base::wrath::AllowedRace::empty())
-            }
+            Value::TbcAllowedRace(_) => Value::TbcAllowedRace(tbc_base::AllowedRace::empty()),
+            Value::WrathAllowedRace(_) => Value::WrathAllowedRace(wrath_base::AllowedRace::empty()),
             Value::SpellSchool(_) => Value::SpellSchool(
-                wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool::Normal,
+                shared_base::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool::Normal,
             ),
             Value::TbcWrathSpellTriggerType(_) => Value::TbcWrathSpellTriggerType(
-                wow_world_base::shared::spell_trigger_type_tbc_wrath::SpellTriggerType::OnUse,
+                shared_base::spell_trigger_type_tbc_wrath::SpellTriggerType::OnUse,
             ),
             Value::Bonding(_) => {
-                Value::Bonding(wow_world_base::shared::bonding_vanilla_tbc_wrath::Bonding::NoBind)
+                Value::Bonding(shared_base::bonding_vanilla_tbc_wrath::Bonding::NoBind)
             }
-            Value::TbcSkill(_) => Value::TbcSkill(wow_world_base::tbc::Skill::None),
-            Value::WrathSkill(_) => Value::WrathSkill(wow_world_base::wrath::Skill::None),
-            Value::TbcMap(_) => Value::TbcMap(wow_world_base::tbc::Map::EasternKingdoms),
-            Value::WrathMap(_) => Value::WrathMap(wow_world_base::wrath::Map::EasternKingdoms),
-            Value::TbcArea(_) => Value::TbcArea(wow_world_base::tbc::Area::None),
-            Value::WrathArea(_) => Value::WrathArea(wow_world_base::wrath::Area::None),
+            Value::TbcSkill(_) => Value::TbcSkill(tbc_base::Skill::None),
+            Value::WrathSkill(_) => Value::WrathSkill(wrath_base::Skill::None),
+            Value::TbcMap(_) => Value::TbcMap(tbc_base::Map::EasternKingdoms),
+            Value::WrathMap(_) => Value::WrathMap(wrath_base::Map::EasternKingdoms),
+            Value::TbcArea(_) => Value::TbcArea(tbc_base::Area::None),
+            Value::WrathArea(_) => Value::WrathArea(wrath_base::Area::None),
+            Value::VanillaAttributes(_) => {
+                Value::VanillaAttributes(vanilla_base::Attributes::empty())
+            }
+            Value::VanillaAttributesEx1(_) => {
+                Value::VanillaAttributesEx1(vanilla_base::AttributesEx1::empty())
+            }
+            Value::VanillaAttributesEx2(_) => {
+                Value::VanillaAttributesEx2(vanilla_base::AttributesEx2::empty())
+            }
+            Value::VanillaAttributesEx3(_) => {
+                Value::VanillaAttributesEx3(vanilla_base::AttributesEx3::empty())
+            }
+            Value::VanillaAttributesEx4(_) => {
+                Value::VanillaAttributesEx4(vanilla_base::AttributesEx4::empty())
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 use crate::base_printer::data::items::{Array, ArrayField, Field, Value};
+use crate::base_printer::data::spells::tbc::assertions;
 use crate::base_printer::data::spells::GenericSpell;
 use rusqlite::Connection;
 
@@ -139,38 +140,71 @@ pub(crate) struct WrathSpell {
     spell_icon_id: i32,
     active_icon_id: i32,
     spell_priority: i32,
+
     spell_name: String,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name2: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name3: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name4: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name5: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name6: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name7: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name8: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name9: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name10: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name11: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name12: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name13: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name14: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name15: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     spell_name16: Option<String>,
+
     rank1: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank2: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank3: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank4: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank5: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank6: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank7: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank8: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank9: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank10: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank11: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank12: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank13: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank14: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank15: Option<String>,
+    #[allow(unused)] // Data is always either null or empty string
     rank16: Option<String>,
+
     mana_cost_percentage: i32,
     start_recovery_category: i32,
     start_recovery_time: i32,
@@ -302,103 +336,7 @@ impl WrathSpell {
             Field::new("active_icon_id", Value::Int(self.active_icon_id)),
             Field::new("spell_priority", Value::Int(self.spell_priority)),
             Field::new("spell_name", Value::String(self.spell_name.clone())),
-            Field::new(
-                "spell_name2",
-                Value::String(self.spell_name2.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name3",
-                Value::String(self.spell_name3.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name4",
-                Value::String(self.spell_name4.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name5",
-                Value::String(self.spell_name5.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name6",
-                Value::String(self.spell_name6.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name7",
-                Value::String(self.spell_name7.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name8",
-                Value::String(self.spell_name8.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name9",
-                Value::String(self.spell_name9.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name10",
-                Value::String(self.spell_name10.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name11",
-                Value::String(self.spell_name11.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name12",
-                Value::String(self.spell_name12.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name13",
-                Value::String(self.spell_name13.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name14",
-                Value::String(self.spell_name14.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name15",
-                Value::String(self.spell_name15.unwrap_or_default()),
-            ),
-            Field::new(
-                "spell_name16",
-                Value::String(self.spell_name16.unwrap_or_default()),
-            ),
-            Field::new("rank1", Value::String(self.rank1.unwrap_or_default())),
-            Field::new("rank2", Value::String(self.rank2.unwrap_or_default())),
-            Field::new("rank3", Value::String(self.rank3.unwrap_or_default())),
-            Field::new("rank4", Value::String(self.rank4.unwrap_or_default())),
-            Field::new("rank5", Value::String(self.rank5.unwrap_or_default())),
-            Field::new("rank6", Value::String(self.rank6.unwrap_or_default())),
-            Field::new("rank7", Value::String(self.rank7.unwrap_or_default())),
-            Field::new("rank8", Value::String(self.rank8.unwrap_or_default())),
-            Field::new("rank9", Value::String(self.rank9.unwrap_or_default())),
-            Field::new(
-                "rank10",
-                Value::String(self.rank10.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank11",
-                Value::String(self.rank11.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank12",
-                Value::String(self.rank12.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank13",
-                Value::String(self.rank13.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank14",
-                Value::String(self.rank14.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank15",
-                Value::String(self.rank15.unwrap_or_default()),
-            ),
-            Field::new(
-                "rank16",
-                Value::String(self.rank16.unwrap_or_default()),
-            ),
+            Field::new("rank_text", Value::String(self.rank1.unwrap_or_default())),
             Field::new(
                 "mana_cost_percentage",
                 Value::Int(self.mana_cost_percentage),
@@ -882,6 +820,8 @@ impl WrathSpell {
 }
 
 pub(crate) fn wrath(conn: &Connection) -> Vec<GenericSpell> {
+    assertions(conn);
+
     let mut s = conn
         .prepare(
             "SELECT

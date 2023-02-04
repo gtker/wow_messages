@@ -62,6 +62,23 @@ impl Writer {
         self.wln("}");
     }
 
+    pub fn pub_const_fn(
+        &mut self,
+        name: impl AsRef<str>,
+        return_ty: impl AsRef<str>,
+        f: impl Fn(&mut Self),
+    ) {
+        self.open_curly(format!(
+            "pub const fn {}(&self) -> {}",
+            name.as_ref(),
+            return_ty.as_ref()
+        ));
+
+        f(self);
+
+        self.closing_curly(); // fn body
+    }
+
     pub fn pub_const_fn_new(&mut self, args: impl Fn(&mut Self), self_body: impl Fn(&mut Self)) {
         self.wln("pub const fn new(");
         self.inc_indent();
