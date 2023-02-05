@@ -1717,6 +1717,8 @@ pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
 pub use wow_world_base::tbc::AllowedClass;
 
+pub use wow_world_base::tbc::BagFamily;
+
 pub use wow_world_base::tbc::Bonding;
 
 pub use wow_world_base::tbc::Class;

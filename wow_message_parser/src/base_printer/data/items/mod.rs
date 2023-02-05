@@ -137,6 +137,9 @@ pub enum Value {
     PvpRank(shared_base::pvp_rank_vanilla_tbc_wrath::PvpRank),
 
     SheatheType(shared_base::sheathe_type_vanilla_tbc_wrath::SheatheType),
+
+    VanillaBagFamily(vanilla_base::BagFamily),
+    TbcWrathBagFamily(shared_base::bag_family_tbc_wrath::BagFamily),
 }
 
 impl Eq for Value {}
@@ -176,7 +179,8 @@ impl Value {
             | Value::VanillaItemFlag(_)
             | Value::TbcItemFlag(_)
             | Value::WrathItemFlag(_)
-            | Value::WrathItemFlag2(_) => "u32",
+            | Value::WrathItemFlag2(_)
+            | Value::TbcWrathBagFamily(_) => "u32",
             _ => self.type_name(),
         }
     }
@@ -217,6 +221,7 @@ impl Value {
             Value::WrathItemFlag2(_) => "ItemFlag2",
             Value::PvpRank(_) => "PvpRank",
             Value::SheatheType(_) => "SheatheType",
+            Value::VanillaBagFamily(_) | Value::TbcWrathBagFamily(_) => "BagFamily",
         }
     }
 
@@ -285,6 +290,7 @@ impl Value {
             Value::PvpRank(_) => "Z",
 
             Value::SheatheType(_) => "AA",
+            Value::VanillaBagFamily(_) | Value::TbcWrathBagFamily(_) => "AB",
         }
     }
 
@@ -372,6 +378,8 @@ impl Value {
             Value::WrathItemFlag2(v) => v.as_int().to_string(),
             Value::PvpRank(v) => format!("PvpRank::{v:?}"),
             Value::SheatheType(v) => format!("SheatheType::{v:?}"),
+            Value::VanillaBagFamily(v) => format!("BagFamily::{v:?}"),
+            Value::TbcWrathBagFamily(v) => v.as_int().to_string(),
         }
     }
 
@@ -390,7 +398,8 @@ impl Value {
             | Value::VanillaItemFlag(_)
             | Value::TbcItemFlag(_)
             | Value::WrathItemFlag(_)
-            | Value::WrathItemFlag2(_) => Some(format!("{}::new", self.type_name())),
+            | Value::WrathItemFlag2(_)
+            | Value::TbcWrathBagFamily(_) => Some(format!("{}::new", self.type_name())),
             _ => None,
         }
     }
@@ -475,6 +484,10 @@ impl Value {
             }
             Value::SheatheType(_) => {
                 Value::SheatheType(shared_base::sheathe_type_vanilla_tbc_wrath::SheatheType::None)
+            }
+            Value::VanillaBagFamily(_) => Value::VanillaBagFamily(vanilla_base::BagFamily::None),
+            Value::TbcWrathBagFamily(_) => {
+                Value::TbcWrathBagFamily(shared_base::bag_family_tbc_wrath::BagFamily::empty())
             }
         }
     }

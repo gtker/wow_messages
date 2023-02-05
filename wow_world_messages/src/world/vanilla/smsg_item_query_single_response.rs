@@ -3,6 +3,7 @@ use crate::vanilla::ItemDamageType;
 use crate::vanilla::ItemSpells;
 use crate::vanilla::ItemStat;
 use crate::vanilla::Area;
+use crate::vanilla::BagFamily;
 use crate::vanilla::Bonding;
 use crate::vanilla::InventoryType;
 use crate::vanilla::ItemClassAndSubClass;
@@ -16,7 +17,7 @@ use crate::vanilla::ItemFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:142`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L142):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:158`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L158):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -74,7 +75,7 @@ use std::io::{Write, Read};
 ///         u32 max_durability;
 ///         Area area;
 ///         Map map;
-///         u32 bag_family;
+///         (u32)BagFamily bag_family;
 ///     }
 /// }
 /// ```
@@ -282,8 +283,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // map: Map
             w.write_all(&(v.map.as_int() as u32).to_le_bytes())?;
 
-            // bag_family: u32
-            w.write_all(&v.bag_family.to_le_bytes())?;
+            // bag_family: BagFamily
+            w.write_all(&(v.bag_family.as_int() as u32).to_le_bytes())?;
 
         }
 
@@ -475,8 +476,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // map: Map
             let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-            // bag_family: u32
-            let bag_family = crate::util::read_u32_le(r)?;
+            // bag_family: BagFamily
+            let bag_family: BagFamily = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
                 class_and_sub_class,
@@ -605,7 +606,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // max_durability: u32
             + 4 // area: Area
             + 4 // map: Map
-            + 4 // bag_family: u32
+            + 4 // bag_family: BagFamily
         } else {
             0
         }
@@ -667,7 +668,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub max_durability: u32,
     pub area: Area,
     pub map: Map,
-    pub bag_family: u32,
+    pub bag_family: BagFamily,
 }
 
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
@@ -725,7 +726,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // max_durability: u32
         + 4 // area: Area
         + 4 // map: Map
-        + 4 // bag_family: u32
+        + 4 // bag_family: BagFamily
     }
 
 }

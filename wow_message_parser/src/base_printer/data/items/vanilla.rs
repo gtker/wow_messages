@@ -3,8 +3,8 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use rusqlite::Connection;
 use wow_world_base::vanilla::{
-    AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemFlag,
-    ItemQuality, Map, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
+    AllowedClass, AllowedRace, Area, BagFamily, Bonding, InventoryType, ItemClassAndSubClass,
+    ItemFlag, ItemQuality, Map, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct VanillaItem {
@@ -114,7 +114,7 @@ pub struct VanillaItem {
     pub max_durability: i32,
     pub area: Area,
     pub map: Map,
-    pub bag_family: i32,
+    pub bag_family: BagFamily,
     pub script_name: String,
     pub disenchant_id: i32,
     pub food_type: i32,
@@ -198,7 +198,7 @@ impl VanillaItem {
             Field::new("max_durability", Value::Int(self.max_durability)),
             Field::new("area", Value::VanillaArea(self.area)),
             Field::new("map", Value::VanillaMap(self.map)),
-            Field::new("bag_family", Value::Int(self.bag_family)),
+            Field::new("bag_family", Value::VanillaBagFamily(self.bag_family)),
             Field::new("script_name", Value::String(self.script_name)),
             Field::new("disenchant_id", Value::Int(self.disenchant_id)),
             Field::new("food_type", Value::Int(self.food_type)),
@@ -724,7 +724,7 @@ FROM item_template ORDER BY entry;",
                 max_durability: row.get(117).unwrap(),
                 area: Area::try_from(row.get::<usize, u32>(118).unwrap()).unwrap(),
                 map: Map::try_from(row.get::<usize, u32>(119).unwrap()).unwrap(),
-                bag_family: row.get(120).unwrap(),
+                bag_family: BagFamily::try_from(row.get::<usize, u8>(120).unwrap()).unwrap(),
                 script_name: row.get(121).unwrap(),
                 disenchant_id: row.get(122).unwrap(),
                 food_type: row.get(123).unwrap(),

@@ -4,6 +4,7 @@ use crate::vanilla::{
     AllowedClass,
     AllowedRace,
     Area,
+    BagFamily,
     Bonding,
     InventoryType,
     ItemClassAndSubClass,
@@ -76,7 +77,7 @@ pub struct Item {
     pub max_durability: i32,
     pub area: Area,
     pub map: Map,
-    pub bag_family: i32,
+    pub bag_family: BagFamily,
     pub script_name: &'static str,
     pub disenchant_id: i32,
     pub food_type: i32,
@@ -146,7 +147,7 @@ impl Item {
         max_durability: i32,
         area: Area,
         map: Map,
-        bag_family: i32,
+        bag_family: BagFamily,
         script_name: &'static str,
         disenchant_id: i32,
         food_type: i32,
@@ -570,7 +571,7 @@ impl Item {
         self.map
     }
 
-    pub const fn bag_family(&self) -> i32 {
+    pub const fn bag_family(&self) -> BagFamily {
         self.bag_family
     }
 

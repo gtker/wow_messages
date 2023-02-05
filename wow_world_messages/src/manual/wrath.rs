@@ -124,7 +124,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 max_durability: v.max_durability as u32,
                 area: v.area,
                 map: v.map,
-                bag_family: v.bag_family as u32,
+                bag_family: v.bag_family,
                 totem_category: v.totem_category as u32,
                 sockets: v.sockets,
                 socket_bonus: v.socket_bonus as u32,

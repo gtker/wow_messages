@@ -612,7 +612,7 @@
         },
         { &hf_woww_bag_family,
             { "Bag Family", "woww.bag.family",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_bag_family_strings), 0,
                 NULL, HFILL
             }
         },

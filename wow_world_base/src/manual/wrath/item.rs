@@ -4,6 +4,7 @@ use crate::wrath::{
     AllowedClass,
     AllowedRace,
     Area,
+    BagFamily,
     Bonding,
     InventoryType,
     ItemClassAndSubClass,
@@ -78,7 +79,7 @@ pub struct Item {
     pub max_durability: i32,
     pub area: Area,
     pub map: Map,
-    pub bag_family: i32,
+    pub bag_family: BagFamily,
     pub totem_category: i32,
     pub socket_bonus: i32,
     pub gem_properties: i32,
@@ -156,7 +157,7 @@ impl Item {
         max_durability: i32,
         area: Area,
         map: Map,
-        bag_family: i32,
+        bag_family: BagFamily,
         totem_category: i32,
         socket_bonus: i32,
         gem_properties: i32,
@@ -647,7 +648,7 @@ impl Item {
         self.map
     }
 
-    pub const fn bag_family(&self) -> i32 {
+    pub const fn bag_family(&self) -> BagFamily {
         self.bag_family
     }
 

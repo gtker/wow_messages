@@ -1,5 +1,7 @@
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod allowed_class_vanilla_tbc;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod bag_family_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod bonding_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]

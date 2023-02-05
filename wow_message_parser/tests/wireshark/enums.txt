@@ -5675,6 +5675,32 @@ static const value_string e_sheathe_type_strings[] =  {
 };
 
 typedef enum {
+    BAG_FAMILY_NONE = 0x0,
+    BAG_FAMILY_ARROWS = 0x1,
+    BAG_FAMILY_BULLETS = 0x2,
+    BAG_FAMILY_SOUL_SHARDS = 0x3,
+    BAG_FAMILY_UNKNOWN4 = 0x4,
+    BAG_FAMILY_UNKNOWN5 = 0x5,
+    BAG_FAMILY_HERBS = 0x6,
+    BAG_FAMILY_ENCHANTING_SUPPLIES = 0x7,
+    BAG_FAMILY_ENGINEERING_SUPPLIES = 0x8,
+    BAG_FAMILY_KEYS = 0x9,
+} e_bag_family;
+static const value_string e_bag_family_strings[] =  {
+    { BAG_FAMILY_NONE, "None" },
+    { BAG_FAMILY_ARROWS, "Arrows" },
+    { BAG_FAMILY_BULLETS, "Bullets" },
+    { BAG_FAMILY_SOUL_SHARDS, "Soul Shards" },
+    { BAG_FAMILY_UNKNOWN4, "Unknown4" },
+    { BAG_FAMILY_UNKNOWN5, "Unknown5" },
+    { BAG_FAMILY_HERBS, "Herbs" },
+    { BAG_FAMILY_ENCHANTING_SUPPLIES, "Enchanting Supplies" },
+    { BAG_FAMILY_ENGINEERING_SUPPLIES, "Engineering Supplies" },
+    { BAG_FAMILY_KEYS, "Keys" },
+    { 0, NULL }
+};
+
+typedef enum {
     LOGOUT_RESULT_SUCCESS = 0x0,
     LOGOUT_RESULT_FAILURE_IN_COMBAT = 0x1,
     LOGOUT_RESULT_FAILURE_FROZEN_BY_GM = 0x2,

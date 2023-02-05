@@ -14,6 +14,8 @@ pub(crate) mod attributes_ex3;
 pub use attributes_ex3::*;
 pub(crate) mod attributes_ex4;
 pub use attributes_ex4::*;
+pub(crate) mod bag_family;
+pub use bag_family::*;
 pub(crate) mod bonding;
 pub use bonding::*;
 pub(crate) mod class;

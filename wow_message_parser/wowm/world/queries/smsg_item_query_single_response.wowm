@@ -12,6 +12,22 @@ enum SheatheType : u8 {
     versions = "1 2 3";
 }
 
+enum BagFamily : u8 {
+    NONE = 0;
+    ARROWS = 1;
+    BULLETS = 2;
+    SOUL_SHARDS = 3;
+    UNKNOWN4 = 4;
+    UNKNOWN5 = 5;
+    HERBS = 6;
+    ENCHANTING_SUPPLIES = 7;
+    ENGINEERING_SUPPLIES = 8;
+    KEYS = 9;
+} {
+    versions = "1.12";
+    rust_base_type = "true";
+}
+
 enum SpellTriggerType : u8 {
     ON_USE = 0;
     ON_EQUIP = 1;
@@ -209,7 +225,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 max_durability;
         Area area;
         Map map;
-        u32 bag_family;
+        (u32)BagFamily bag_family;
     } {
         comment = "mangos doesn't send this if item doesn't exist";
     }
@@ -231,6 +247,28 @@ struct ItemSocket {
 } {
     rust_base_type = "true";
     versions = "2.4.3 3";
+}
+
+flag BagFamily : u32 {
+    NONE = 0x00000000;
+    ARROWS = 0x00000001;
+    BULLETS = 0x00000002;
+    SOUL_SHARDS = 0x00000004;
+    LEATHERWORKING_SUPPLIES = 0x00000008;
+    INSCRIPTION_SUPPLIES = 0x00000010;
+    HERBS = 0x00000020;
+    ENCHANTING_SUPPLIES = 0x00000040;
+    ENGINEERING_SUPPLIES = 0x00000080;
+    KEYS = 0x00000100;
+    GEMS = 0x00000200;
+    MINING_SUPPLIES = 0x00000400;
+    SOULBOUND_EQUIPMENT = 0x00000800;
+    VANITY_PETS = 0x00001000;
+    CURRENCY_TOKENS = 0x00002000;
+    QUEST_ITEMS = 0x00004000;
+} {
+    versions = "2.4.3 3";
+    rust_base_type = "true";
 }
 
 flag ItemFlag : u32 {
@@ -370,7 +408,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 max_durability;
         Area area;
         Map map;
-        u32 bag_family;
+        BagFamily bag_family;
         u32 totem_category {
             comment = "mangosone: id from TotemCategory.dbc";
         }
@@ -591,7 +629,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 max_durability;
         Area area;
         Map map;
-        u32 bag_family;
+        BagFamily bag_family;
         u32 totem_category {
             comment = "mangosone: id from TotemCategory.dbc";
         }

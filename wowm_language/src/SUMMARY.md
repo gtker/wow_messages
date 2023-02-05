@@ -59,6 +59,7 @@
 - [AuctionCommandResult](docs/auctioncommandresult.md)
 - [AuraFlag](docs/auraflag.md)
 - [AuraType](docs/auratype.md)
+- [BagFamily](docs/bagfamily.md)
 - [BankSwapSource](docs/bankswapsource.md)
 - [BankSwapStoreMode](docs/bankswapstoremode.md)
 - [BarberShopResult](docs/barbershopresult.md)

@@ -1797,6 +1797,8 @@ pub use crate::shared::weather_change_type_vanilla_tbc_wrath::WeatherChangeType;
 
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
+pub use wow_world_base::wrath::BagFamily;
+
 pub use wow_world_base::wrath::Bonding;
 
 pub use wow_world_base::wrath::Gender;

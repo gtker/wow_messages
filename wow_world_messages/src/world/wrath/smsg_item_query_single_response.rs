@@ -13,12 +13,13 @@ use crate::wrath::SheatheType;
 use crate::wrath::Skill;
 use crate::wrath::AllowedClass;
 use crate::wrath::AllowedRace;
+use crate::wrath::BagFamily;
 use crate::wrath::ItemFlag;
 use crate::wrath::ItemFlag2;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:514`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L514):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:552`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L552):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -82,7 +83,7 @@ use std::io::{Write, Read};
 ///         u32 max_durability;
 ///         Area area;
 ///         Map map;
-///         u32 bag_family;
+///         BagFamily bag_family;
 ///         u32 totem_category;
 ///         ItemSocket[3] sockets;
 ///         u32 socket_bonus;
@@ -317,8 +318,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // map: Map
             w.write_all(&(v.map.as_int() as u32).to_le_bytes())?;
 
-            // bag_family: u32
-            w.write_all(&v.bag_family.to_le_bytes())?;
+            // bag_family: BagFamily
+            w.write_all(&(v.bag_family.as_int() as u32).to_le_bytes())?;
 
             // totem_category: u32
             w.write_all(&v.totem_category.to_le_bytes())?;
@@ -557,8 +558,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // map: Map
             let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 
-            // bag_family: u32
-            let bag_family = crate::util::read_u32_le(r)?;
+            // bag_family: BagFamily
+            let bag_family = BagFamily::new(crate::util::read_u32_le(r)?);
 
             // totem_category: u32
             let totem_category = crate::util::read_u32_le(r)?;
@@ -736,7 +737,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // max_durability: u32
             + 4 // area: Area
             + 4 // map: Map
-            + 4 // bag_family: u32
+            + 4 // bag_family: BagFamily
             + 4 // totem_category: u32
             + 3 * 8 // sockets: ItemSocket[3]
             + 4 // socket_bonus: u32
@@ -812,7 +813,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub max_durability: u32,
     pub area: Area,
     pub map: Map,
-    pub bag_family: u32,
+    pub bag_family: BagFamily,
     pub totem_category: u32,
     pub sockets: [ItemSocket; 3],
     pub socket_bonus: u32,
@@ -885,7 +886,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // max_durability: u32
         + 4 // area: Area
         + 4 // map: Map
-        + 4 // bag_family: u32
+        + 4 // bag_family: BagFamily
         + 4 // totem_category: u32
         + 3 * 8 // sockets: ItemSocket[3]
         + 4 // socket_bonus: u32

@@ -7,6 +7,7 @@ pub use wow_world_base::tbc::{
     AllowedClass,
     AllowedRace,
     Area,
+    BagFamily,
     Bonding,
     InventoryType,
     Item,

@@ -2,8 +2,8 @@ use crate::base_printer::data::items;
 use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Value};
 use rusqlite::Connection;
 use wow_world_base::tbc::{
-    AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemFlag,
-    ItemQuality, Map, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
+    AllowedClass, AllowedRace, Area, BagFamily, Bonding, InventoryType, ItemClassAndSubClass,
+    ItemFlag, ItemQuality, Map, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct TbcItem {
@@ -128,7 +128,7 @@ pub struct TbcItem {
     pub max_durability: i32,
     pub area: Area,
     pub map: Map,
-    pub bag_family: i32,
+    pub bag_family: BagFamily,
     pub totem_category: i32,
     pub socket_color_1: u32,
     pub socket_content_1: u32,
@@ -221,7 +221,7 @@ impl TbcItem {
             Field::new("max_durability", Value::Int(self.max_durability)),
             Field::new("area", Value::TbcArea(self.area)),
             Field::new("map", Value::TbcMap(self.map)),
-            Field::new("bag_family", Value::Int(self.bag_family)),
+            Field::new("bag_family", Value::TbcWrathBagFamily(self.bag_family)),
             Field::new("totem_category", Value::Int(self.totem_category)),
             Field::new("socket_bonus", Value::Int(self.socket_bonus)),
             Field::new("gem_properties", Value::Int(self.gem_properties)),
@@ -837,7 +837,7 @@ ORDER BY
                 max_durability: row.get(119).unwrap(),
                 area: Area::try_from(row.get::<usize, u32>(120).unwrap()).unwrap(),
                 map: Map::try_from(row.get::<usize, u32>(121).unwrap()).unwrap(),
-                bag_family: row.get(122).unwrap(),
+                bag_family: BagFamily::new(row.get::<usize, u32>(122).unwrap()),
                 totem_category: row.get(123).unwrap(),
                 socket_color_1: row.get(124).unwrap(),
                 socket_content_1: row.get(125).unwrap(),

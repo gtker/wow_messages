@@ -26,6 +26,8 @@ pub(crate) mod aura_log;
 pub use aura_log::*;
 pub(crate) mod aura_type;
 pub use aura_type::*;
+pub(crate) mod bag_family;
+pub use bag_family::*;
 pub(crate) mod battleground_bracket;
 pub use battleground_bracket::*;
 pub(crate) mod battleground_end_status;

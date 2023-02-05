@@ -4,6 +4,8 @@ pub(crate) mod allowed_race;
 pub use allowed_race::*;
 pub(crate) mod area;
 pub use area::*;
+pub(crate) mod bag_family;
+pub use bag_family::*;
 pub(crate) mod bonding;
 pub use bonding::*;
 pub(crate) mod class;
