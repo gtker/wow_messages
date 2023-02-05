@@ -39,6 +39,8 @@ pub(crate) mod item_flag;
 pub use item_flag::*;
 pub(crate) mod item_quality;
 pub use item_quality::*;
+pub(crate) mod item_set;
+pub use item_set::*;
 pub(crate) mod item_spells;
 pub use item_spells::*;
 pub(crate) mod item_stat;

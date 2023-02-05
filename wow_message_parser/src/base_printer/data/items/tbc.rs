@@ -3,7 +3,7 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use rusqlite::Connection;
 use wow_world_base::tbc::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, InventoryType, ItemClassAndSubClass,
-    ItemFlag, ItemQuality, Language, Map, PageTextMaterial, PvpRank, SheatheType, Skill,
+    ItemFlag, ItemQuality, ItemSet, Language, Map, PageTextMaterial, PvpRank, SheatheType, Skill,
     SpellSchool, SpellTriggerType,
 };
 
@@ -125,7 +125,7 @@ pub struct TbcItem {
     pub random_property: i32,
     pub random_suffix: i32,
     pub block: i32,
-    pub itemset: i32,
+    pub item_set: ItemSet,
     pub max_durability: i32,
     pub area: Area,
     pub map: Map,
@@ -221,7 +221,7 @@ impl TbcItem {
             Field::new("random_property", Value::Int(self.random_property)),
             Field::new("random_suffix", Value::Int(self.random_suffix)),
             Field::new("block", Value::Int(self.block)),
-            Field::new("itemset", Value::Int(self.itemset)),
+            Field::new("item_set", Value::TbcItemSet(self.item_set)),
             Field::new("max_durability", Value::Int(self.max_durability)),
             Field::new("area", Value::TbcArea(self.area)),
             Field::new("map", Value::TbcMap(self.map)),
@@ -838,7 +838,7 @@ ORDER BY
                 random_property: row.get(115).unwrap(),
                 random_suffix: row.get(116).unwrap(),
                 block: row.get(117).unwrap(),
-                itemset: row.get(118).unwrap(),
+                item_set: ItemSet::try_from(row.get::<usize, u16>(118).unwrap()).unwrap(),
                 max_durability: row.get(119).unwrap(),
                 area: Area::try_from(row.get::<usize, u32>(120).unwrap()).unwrap(),
                 map: Map::try_from(row.get::<usize, u32>(121).unwrap()).unwrap(),

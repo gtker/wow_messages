@@ -1,0 +1,2130 @@
+enum ItemSet : u16 {
+    NONE = 0;
+    THE_GLADIATOR = 1;
+    DAL_RENDS_ARMS = 41 {
+        display = "Dal'Rend's Arms";
+    }
+    SPIDERS_KISS = 65 {
+        display = "Spider's Kiss";
+    }
+    THE_POSTMASTER = 81;
+    CADAVEROUS_GARB = 121;
+    NECROPILE_RAIMENT = 122;
+    BLOODMAIL_REGALIA = 123;
+    DEATHBONE_GUARDIAN = 124;
+    VOLCANIC_ARMOR = 141;
+    STORMSHROUD_ARMOR = 142;
+    DEVILSAUR_ARMOR = 143;
+    IRONFEATHER_ARMOR = 144;
+    DEFIAS_LEATHER = 161;
+    EMBRACE_OF_THE_VIPER = 162;
+    CHAIN_OF_THE_SCARLET_CRUSADE = 163;
+    MAGISTERS_REGALIA = 181 {
+        display = "Magister's Regalia";
+    }
+    VESTMENTS_OF_THE_DEVOUT = 182;
+    DREADMIST_RAIMENT = 183;
+    SHADOWCRAFT_ARMOR = 184;
+    WILDHEART_RAIMENT = 185;
+    BEASTSTALKER_ARMOR = 186;
+    THE_ELEMENTS = 187;
+    LIGHTFORGE_ARMOR = 188;
+    BATTLEGEAR_OF_VALOR = 189;
+    ARCANIST_REGALIA = 201;
+    VESTMENTS_OF_PROPHECY = 202;
+    FELHEART_RAIMENT = 203;
+    NIGHTSLAYER_ARMOR = 204;
+    CENARION_RAIMENT = 205;
+    GIANTSTALKER_ARMOR = 206;
+    THE_EARTHFURY = 207;
+    LAWBRINGER_ARMOR = 208;
+    BATTLEGEAR_OF_MIGHT = 209;
+    NETHERWIND_REGALIA = 210;
+    VESTMENTS_OF_TRANSCENDENCE = 211;
+    NEMESIS_RAIMENT = 212;
+    BLOODFANG_ARMOR = 213;
+    STORMRAGE_RAIMENT = 214;
+    DRAGONSTALKER_ARMOR = 215;
+    THE_TEN_STORMS = 216;
+    JUDGEMENT_ARMOR = 217;
+    BATTLEGEAR_OF_WRATH = 218;
+    GARB_OF_THERO_SHAN = 221 {
+        display = "Garb of Thero-shan";
+    }
+    SHARD_OF_THE_GODS = 241;
+    SPIRIT_OF_ESKHANDAR = 261;
+    CHAMPIONS_BATTLEGEAR = 281 {
+        display = "Champion's Battlegear";
+    }
+    LIEUTENANT_COMMANDERS_BATTLEGEAR = 282 {
+        display = "Lieutenant Commander's Battlegear";
+    }
+    CHAMPIONS_EARTHSHAKER = 301 {
+        display = "Champion's Earthshaker";
+    }
+    IMPERIAL_PLATE = 321;
+    CHAMPIONS_REGALIA = 341 {
+        display = "Champion's Regalia";
+    }
+    CHAMPIONS_RAIMENT = 342 {
+        display = "Champion's Raiment";
+    }
+    LIEUTENANT_COMMANDERS_REGALIA = 343 {
+        display = "Lieutenant Commander's Regalia";
+    }
+    LIEUTENANT_COMMANDERS_RAIMENT = 344 {
+        display = "Lieutenant Commander's Raiment";
+    }
+    CHAMPIONS_THREADS = 345 {
+        display = "Champion's Threads";
+    }
+    LIEUTENANT_COMMANDERS_THREADS = 346 {
+        display = "Lieutenant Commander's Threads";
+    }
+    CHAMPIONS_VESTMENTS = 347 {
+        display = "Champion's Vestments";
+    }
+    LIEUTENANT_COMMANDERS_VESTMENTS = 348 {
+        display = "Lieutenant Commander's Vestments";
+    }
+    CHAMPIONS_PURSUIT = 361 {
+        display = "Champion's Pursuit";
+    }
+    LIEUTENANT_COMMANDERS_PURSUIT = 362 {
+        display = "Lieutenant Commander's Pursuit";
+    }
+    LIEUTENANT_COMMANDERS_SANCTUARY = 381 {
+        display = "Lieutenant Commander's Sanctuary";
+    }
+    CHAMPIONS_SANCTUARY = 382 {
+        display = "Champion's Sanctuary";
+    }
+    WARLORDS_BATTLEGEAR = 383 {
+        display = "Warlord's Battlegear";
+    }
+    FIELD_MARSHALS_BATTLEGEAR = 384 {
+        display = "Field Marshal's Battlegear";
+    }
+    WARLORDS_EARTHSHAKER = 386 {
+        display = "Warlord's Earthshaker";
+    }
+    WARLORDS_REGALIA = 387 {
+        display = "Warlord's Regalia";
+    }
+    FIELD_MARSHALS_REGALIA = 388 {
+        display = "Field Marshal's Regalia";
+    }
+    FIELD_MARSHALS_RAIMENT = 389 {
+        display = "Field Marshal's Raiment";
+    }
+    WARLORDS_RAIMENT = 390 {
+        display = "Warlord's Raiment";
+    }
+    WARLORDS_THREADS = 391 {
+        display = "Warlord's Threads";
+    }
+    FIELD_MARSHALS_THREADS = 392 {
+        display = "Field Marshal's Threads";
+    }
+    WARLORDS_VESTMENTS = 393 {
+        display = "Warlord's Vestments";
+    }
+    FIELD_MARSHALS_VESTMENTS = 394 {
+        display = "Field Marshal's Vestments";
+    }
+    FIELD_MARSHALS_PURSUIT = 395 {
+        display = "Field Marshal's Pursuit";
+    }
+    WARLORDS_PURSUIT = 396 {
+        display = "Warlord's Pursuit";
+    }
+    FIELD_MARSHALS_SANCTUARY = 397 {
+        display = "Field Marshal's Sanctuary";
+    }
+    WARLORDS_SANCTUARY = 398 {
+        display = "Warlord's Sanctuary";
+    }
+    LIEUTENANT_COMMANDERS_AEGIS = 401 {
+        display = "Lieutenant Commander's Aegis";
+    }
+    FIELD_MARSHALS_AEGIS = 402 {
+        display = "Field Marshal's Aegis";
+    }
+    BLOODVINE_GARB = 421;
+    PRIMAL_BATSKIN = 441;
+    BLOOD_TIGER_HARNESS = 442;
+    BLOODSOUL_EMBRACE = 443;
+    THE_DARKSOUL = 444;
+    THE_TWIN_BLADES_OF_HAKKARI = 461;
+    ZANZILS_CONCENTRATION = 462 {
+        display = "Zanzil's Concentration";
+    }
+    PRIMAL_BLESSING = 463;
+    OVERLORDS_RESOLUTION = 464 {
+        display = "Overlord's Resolution";
+    }
+    PRAYER_OF_THE_PRIMAL = 465;
+    MAJOR_MOJO_INFUSION = 466;
+    THE_HIGHLANDERS_RESOLUTION = 467 {
+        display = "The Highlander's Resolution";
+    }
+    THE_HIGHLANDERS_RESOLVE = 468 {
+        display = "The Highlander's Resolve";
+    }
+    THE_HIGHLANDERS_DETERMINATION = 469 {
+        display = "The Highlander's Determination";
+    }
+    THE_HIGHLANDERS_FORTITUDE = 470 {
+        display = "The Highlander's Fortitude";
+    }
+    THE_HIGHLANDERS_PURPOSE = 471 {
+        display = "The Highlander's Purpose";
+    }
+    THE_HIGHLANDERS_WILL = 472 {
+        display = "The Highlander's Will";
+    }
+    THE_HIGHLANDERS_INTENT = 473 {
+        display = "The Highlander's Intent";
+    }
+    VINDICATORS_BATTLEGEAR = 474 {
+        display = "Vindicator's Battlegear";
+    }
+    FREETHINKERS_ARMOR = 475 {
+        display = "Freethinker's Armor";
+    }
+    AUGURS_REGALIA = 476 {
+        display = "Augur's Regalia";
+    }
+    PREDATORS_ARMOR = 477 {
+        display = "Predator's Armor";
+    }
+    MADCAPS_OUTFIT = 478 {
+        display = "Madcap's Outfit";
+    }
+    HARUSPEXS_GARB = 479 {
+        display = "Haruspex's Garb";
+    }
+    CONFESSORS_RAIMENT = 480 {
+        display = "Confessor's Raiment";
+    }
+    DEMONIACS_THREADS = 481 {
+        display = "Demoniac's Threads";
+    }
+    ILLUSIONISTS_ATTIRE = 482 {
+        display = "Illusionist's Attire";
+    }
+    THE_DEFILERS_DETERMINATION = 483 {
+        display = "The Defiler's Determination";
+    }
+    THE_DEFILERS_FORTITUDE = 484 {
+        display = "The Defiler's Fortitude";
+    }
+    THE_DEFILERS_INTENT = 485 {
+        display = "The Defiler's Intent";
+    }
+    THE_DEFILERS_PURPOSE = 486 {
+        display = "The Defiler's Purpose";
+    }
+    THE_DEFILERS_RESOLUTION = 487 {
+        display = "The Defiler's Resolution";
+    }
+    THE_DEFILERS_WILL = 488 {
+        display = "The Defiler's Will";
+    }
+    BLACK_DRAGON_MAIL = 489;
+    GREEN_DRAGON_MAIL = 490;
+    BLUE_DRAGON_MAIL = 491;
+    TWILIGHT_TRAPPINGS = 492;
+    GENESIS_RAIMENT = 493;
+    SYMBOLS_OF_UNENDING_LIFE = 494;
+    BATTLEGEAR_OF_UNYIELDING_STRENGTH = 495;
+    CONQUERORS_BATTLEGEAR = 496 {
+        display = "Conqueror's Battlegear";
+    }
+    DEATHDEALERS_EMBRACE = 497 {
+        display = "Deathdealer's Embrace";
+    }
+    EMBLEMS_OF_VEILED_SHADOWS = 498;
+    DOOMCALLERS_ATTIRE = 499 {
+        display = "Doomcaller's Attire";
+    }
+    IMPLEMENTS_OF_UNSPOKEN_NAMES = 500;
+    STORMCALLERS_GARB = 501 {
+        display = "Stormcaller's Garb";
+    }
+    GIFT_OF_THE_GATHERING_STORM = 502;
+    ENIGMA_VESTMENTS = 503;
+    TRAPPINGS_OF_VAULTED_SECRETS = 504;
+    AVENGERS_BATTLEGEAR = 505 {
+        display = "Avenger's Battlegear";
+    }
+    BATTLEGEAR_OF_ETERNAL_JUSTICE = 506;
+    GARMENTS_OF_THE_ORACLE = 507;
+    FINERY_OF_INFINITE_WISDOM = 508;
+    STRIKERS_GARB = 509 {
+        display = "Striker's Garb";
+    }
+    TRAPPINGS_OF_THE_UNSEEN_PATH = 510;
+    BATTLEGEAR_OF_HEROISM = 511;
+    DARKMANTLE_ARMOR = 512;
+    FERALHEART_RAIMENT = 513;
+    VESTMENTS_OF_THE_VIRTUOUS = 514;
+    BEASTMASTER_ARMOR = 515;
+    SOULFORGE_ARMOR = 516;
+    SORCERERS_REGALIA = 517 {
+        display = "Sorcerer's Regalia";
+    }
+    DEATHMIST_RAIMENT = 518;
+    THE_FIVE_THUNDERS = 519;
+    IRONWEAVE_BATTLESUIT = 520;
+    DREAMWALKER_RAIMENT = 521;
+    CHAMPIONS_GUARD = 522 {
+        display = "Champion's Guard";
+    }
+    DREADNAUGHTS_BATTLEGEAR = 523 {
+        display = "Dreadnaught's Battlegear";
+    }
+    BONESCYTHE_ARMOR = 524;
+    VESTMENTS_OF_FAITH = 525;
+    FROSTFIRE_REGALIA = 526;
+    THE_EARTHSHATTERER = 527;
+    REDEMPTION_ARMOR = 528;
+    PLAGUEHEART_RAIMENT = 529;
+    CRYPTSTALKER_ARMOR = 530;
+    BATTLEGEAR_OF_UNDEAD_SLAYING = 533;
+    UNDEAD_SLAYERS_ARMOR = 534 {
+        display = "Undead Slayer's Armor";
+    }
+    GARB_OF_THE_UNDEAD_SLAYER = 535;
+    REGALIA_OF_UNDEAD_CLEANSING = 536;
+    CHAMPIONS_BATTLEARMOR = 537 {
+        display = "Champion's Battlearmor";
+    }
+    CHAMPIONS_STORMCALLER = 538 {
+        display = "Champion's Stormcaller";
+    }
+    CHAMPIONS_REFUGE = 539 {
+        display = "Champion's Refuge";
+    }
+    CHAMPIONS_INVESTITURE = 540 {
+        display = "Champion's Investiture";
+    }
+    CHAMPIONS_DREADGEAR = 541 {
+        display = "Champion's Dreadgear";
+    }
+    CHAMPIONS_ARCANUM = 542 {
+        display = "Champion's Arcanum";
+    }
+    CHAMPIONS_PURSUANCE = 543 {
+        display = "Champion's Pursuance";
+    }
+    LIEUTENANT_COMMANDERS_REDOUBT = 544 {
+        display = "Lieutenant Commander's Redoubt";
+    }
+    LIEUTENANT_COMMANDERS_BATTLEARMOR = 545 {
+        display = "Lieutenant Commander's Battlearmor";
+    }
+    LIEUTENANT_COMMANDERS_ARCANUM = 546 {
+        display = "Lieutenant Commander's Arcanum";
+    }
+    LIEUTENANT_COMMANDERS_DREADGEAR = 547 {
+        display = "Lieutenant Commander's Dreadgear";
+    }
+    LIEUTENANT_COMMANDERS_GUARD = 548 {
+        display = "Lieutenant Commander's Guard";
+    }
+    LIEUTENANT_COMMANDERS_INVESTITURE = 549 {
+        display = "Lieutenant Commander's Investiture";
+    }
+    LIEUTENANT_COMMANDERS_PURSUANCE = 550 {
+        display = "Lieutenant Commander's Pursuance";
+    }
+    LIEUTENANT_COMMANDERS_REFUGE = 551 {
+        display = "Lieutenant Commander's Refuge";
+    }
+} {
+    rust_base_type = "true";
+    versions = "1.12";
+}
+
+enum ItemSet : u16 {
+    NONE = 0;
+    THE_GLADIATOR = 1;
+    DAL_RENDS_ARMS = 41 {
+        display = "Dal'Rend's Arms";
+    }
+    SPIDERS_KISS = 65 {
+        display = "Spider's Kiss";
+    }
+    THE_POSTMASTER = 81;
+    CADAVEROUS_GARB = 121;
+    NECROPILE_RAIMENT = 122;
+    BLOODMAIL_REGALIA = 123;
+    DEATHBONE_GUARDIAN = 124;
+    VOLCANIC_ARMOR = 141;
+    STORMSHROUD_ARMOR = 142;
+    DEVILSAUR_ARMOR = 143;
+    IRONFEATHER_ARMOR = 144;
+    DEFIAS_LEATHER = 161;
+    EMBRACE_OF_THE_VIPER = 162;
+    CHAIN_OF_THE_SCARLET_CRUSADE = 163;
+    MAGISTERS_REGALIA = 181 {
+        display = "Magister's Regalia";
+    }
+    VESTMENTS_OF_THE_DEVOUT = 182;
+    DREADMIST_RAIMENT = 183;
+    SHADOWCRAFT_ARMOR = 184;
+    WILDHEART_RAIMENT = 185;
+    BEASTSTALKER_ARMOR = 186;
+    THE_ELEMENTS = 187;
+    LIGHTFORGE_ARMOR = 188;
+    BATTLEGEAR_OF_VALOR = 189;
+    ARCANIST_REGALIA = 201;
+    VESTMENTS_OF_PROPHECY = 202;
+    FELHEART_RAIMENT = 203;
+    NIGHTSLAYER_ARMOR = 204;
+    CENARION_RAIMENT = 205;
+    GIANTSTALKER_ARMOR = 206;
+    THE_EARTHFURY = 207;
+    LAWBRINGER_ARMOR = 208;
+    BATTLEGEAR_OF_MIGHT = 209;
+    NETHERWIND_REGALIA = 210;
+    VESTMENTS_OF_TRANSCENDENCE = 211;
+    NEMESIS_RAIMENT = 212;
+    BLOODFANG_ARMOR = 213;
+    STORMRAGE_RAIMENT = 214;
+    DRAGONSTALKER_ARMOR = 215;
+    THE_TEN_STORMS = 216;
+    JUDGEMENT_ARMOR = 217;
+    BATTLEGEAR_OF_WRATH = 218;
+    GARB_OF_THERO_SHAN = 221 {
+        display = "Garb of Thero-shan";
+    }
+    SHARD_OF_THE_GODS = 241;
+    SPIRIT_OF_ESKHANDAR = 261;
+    CHAMPIONS_BATTLEGEAR = 281 {
+        display = "Champion's Battlegear";
+    }
+    LIEUTENANT_COMMANDERS_BATTLEGEAR = 282 {
+        display = "Lieutenant Commander's Battlegear";
+    }
+    CHAMPIONS_EARTHSHAKER = 301 {
+        display = "Champion's Earthshaker";
+    }
+    IMPERIAL_PLATE = 321;
+    CHAMPIONS_REGALIA = 341 {
+        display = "Champion's Regalia";
+    }
+    CHAMPIONS_RAIMENT = 342 {
+        display = "Champion's Raiment";
+    }
+    LIEUTENANT_COMMANDERS_REGALIA = 343 {
+        display = "Lieutenant Commander's Regalia";
+    }
+    LIEUTENANT_COMMANDERS_RAIMENT = 344 {
+        display = "Lieutenant Commander's Raiment";
+    }
+    CHAMPIONS_THREADS = 345 {
+        display = "Champion's Threads";
+    }
+    LIEUTENANT_COMMANDERS_THREADS = 346 {
+        display = "Lieutenant Commander's Threads";
+    }
+    CHAMPIONS_VESTMENTS = 347 {
+        display = "Champion's Vestments";
+    }
+    LIEUTENANT_COMMANDERS_VESTMENTS = 348 {
+        display = "Lieutenant Commander's Vestments";
+    }
+    CHAMPIONS_PURSUIT = 361 {
+        display = "Champion's Pursuit";
+    }
+    LIEUTENANT_COMMANDERS_PURSUIT = 362 {
+        display = "Lieutenant Commander's Pursuit";
+    }
+    LIEUTENANT_COMMANDERS_SANCTUARY = 381 {
+        display = "Lieutenant Commander's Sanctuary";
+    }
+    CHAMPIONS_SANCTUARY = 382 {
+        display = "Champion's Sanctuary";
+    }
+    WARLORDS_BATTLEGEAR = 383 {
+        display = "Warlord's Battlegear";
+    }
+    FIELD_MARSHALS_BATTLEGEAR = 384 {
+        display = "Field Marshal's Battlegear";
+    }
+    WARLORDS_EARTHSHAKER = 386 {
+        display = "Warlord's Earthshaker";
+    }
+    WARLORDS_REGALIA = 387 {
+        display = "Warlord's Regalia";
+    }
+    FIELD_MARSHALS_REGALIA = 388 {
+        display = "Field Marshal's Regalia";
+    }
+    FIELD_MARSHALS_RAIMENT = 389 {
+        display = "Field Marshal's Raiment";
+    }
+    WARLORDS_RAIMENT = 390 {
+        display = "Warlord's Raiment";
+    }
+    WARLORDS_THREADS = 391 {
+        display = "Warlord's Threads";
+    }
+    FIELD_MARSHALS_THREADS = 392 {
+        display = "Field Marshal's Threads";
+    }
+    WARLORDS_VESTMENTS = 393 {
+        display = "Warlord's Vestments";
+    }
+    FIELD_MARSHALS_VESTMENTS = 394 {
+        display = "Field Marshal's Vestments";
+    }
+    FIELD_MARSHALS_PURSUIT = 395 {
+        display = "Field Marshal's Pursuit";
+    }
+    WARLORDS_PURSUIT = 396 {
+        display = "Warlord's Pursuit";
+    }
+    FIELD_MARSHALS_SANCTUARY = 397 {
+        display = "Field Marshal's Sanctuary";
+    }
+    WARLORDS_SANCTUARY = 398 {
+        display = "Warlord's Sanctuary";
+    }
+    LIEUTENANT_COMMANDERS_AEGIS = 401 {
+        display = "Lieutenant Commander's Aegis";
+    }
+    FIELD_MARSHALS_AEGIS = 402 {
+        display = "Field Marshal's Aegis";
+    }
+    BLOODVINE_GARB = 421;
+    PRIMAL_BATSKIN = 441;
+    BLOOD_TIGER_HARNESS = 442;
+    BLOODSOUL_EMBRACE = 443;
+    THE_DARKSOUL = 444;
+    THE_TWIN_BLADES_OF_HAKKARI = 461;
+    ZANZILS_CONCENTRATION = 462 {
+        display = "Zanzil's Concentration";
+    }
+    PRIMAL_BLESSING = 463;
+    OVERLORDS_RESOLUTION = 464 {
+        display = "Overlord's Resolution";
+    }
+    PRAYER_OF_THE_PRIMAL = 465;
+    MAJOR_MOJO_INFUSION = 466;
+    THE_HIGHLANDERS_RESOLUTION = 467 {
+        display = "The Highlander's Resolution";
+    }
+    THE_HIGHLANDERS_RESOLVE = 468 {
+        display = "The Highlander's Resolve";
+    }
+    THE_HIGHLANDERS_DETERMINATION = 469 {
+        display = "The Highlander's Determination";
+    }
+    THE_HIGHLANDERS_FORTITUDE = 470 {
+        display = "The Highlander's Fortitude";
+    }
+    THE_HIGHLANDERS_PURPOSE = 471 {
+        display = "The Highlander's Purpose";
+    }
+    THE_HIGHLANDERS_WILL = 472 {
+        display = "The Highlander's Will";
+    }
+    THE_HIGHLANDERS_INTENT = 473 {
+        display = "The Highlander's Intent";
+    }
+    VINDICATORS_BATTLEGEAR = 474 {
+        display = "Vindicator's Battlegear";
+    }
+    FREETHINKERS_ARMOR = 475 {
+        display = "Freethinker's Armor";
+    }
+    AUGURS_REGALIA = 476 {
+        display = "Augur's Regalia";
+    }
+    PREDATORS_ARMOR = 477 {
+        display = "Predator's Armor";
+    }
+    MADCAPS_OUTFIT = 478 {
+        display = "Madcap's Outfit";
+    }
+    HARUSPEXS_GARB = 479 {
+        display = "Haruspex's Garb";
+    }
+    CONFESSORS_RAIMENT = 480 {
+        display = "Confessor's Raiment";
+    }
+    DEMONIACS_THREADS = 481 {
+        display = "Demoniac's Threads";
+    }
+    ILLUSIONISTS_ATTIRE = 482 {
+        display = "Illusionist's Attire";
+    }
+    THE_DEFILERS_DETERMINATION = 483 {
+        display = "The Defiler's Determination";
+    }
+    THE_DEFILERS_FORTITUDE = 484 {
+        display = "The Defiler's Fortitude";
+    }
+    THE_DEFILERS_INTENT = 485 {
+        display = "The Defiler's Intent";
+    }
+    THE_DEFILERS_PURPOSE = 486 {
+        display = "The Defiler's Purpose";
+    }
+    THE_DEFILERS_RESOLUTION = 487 {
+        display = "The Defiler's Resolution";
+    }
+    THE_DEFILERS_WILL = 488 {
+        display = "The Defiler's Will";
+    }
+    BLACK_DRAGON_MAIL = 489;
+    GREEN_DRAGON_MAIL = 490;
+    BLUE_DRAGON_MAIL = 491;
+    TWILIGHT_TRAPPINGS = 492;
+    GENESIS_RAIMENT = 493;
+    SYMBOLS_OF_UNENDING_LIFE = 494;
+    BATTLEGEAR_OF_UNYIELDING_STRENGTH = 495;
+    CONQUERORS_BATTLEGEAR = 496 {
+        display = "Conqueror's Battlegear";
+    }
+    DEATHDEALERS_EMBRACE = 497 {
+        display = "Deathdealer's Embrace";
+    }
+    EMBLEMS_OF_VEILED_SHADOWS = 498;
+    DOOMCALLERS_ATTIRE = 499 {
+        display = "Doomcaller's Attire";
+    }
+    IMPLEMENTS_OF_UNSPOKEN_NAMES = 500;
+    STORMCALLERS_GARB = 501 {
+        display = "Stormcaller's Garb";
+    }
+    GIFT_OF_THE_GATHERING_STORM = 502;
+    ENIGMA_VESTMENTS = 503;
+    TRAPPINGS_OF_VAULTED_SECRETS = 504;
+    AVENGERS_BATTLEGEAR = 505 {
+        display = "Avenger's Battlegear";
+    }
+    BATTLEGEAR_OF_ETERNAL_JUSTICE = 506;
+    GARMENTS_OF_THE_ORACLE = 507;
+    FINERY_OF_INFINITE_WISDOM = 508;
+    STRIKERS_GARB = 509 {
+        display = "Striker's Garb";
+    }
+    TRAPPINGS_OF_THE_UNSEEN_PATH = 510;
+    BATTLEGEAR_OF_HEROISM = 511;
+    DARKMANTLE_ARMOR = 512;
+    FERALHEART_RAIMENT = 513;
+    VESTMENTS_OF_THE_VIRTUOUS = 514;
+    BEASTMASTER_ARMOR = 515;
+    SOULFORGE_ARMOR = 516;
+    SORCERERS_REGALIA = 517 {
+        display = "Sorcerer's Regalia";
+    }
+    DEATHMIST_RAIMENT = 518;
+    THE_FIVE_THUNDERS = 519;
+    IRONWEAVE_BATTLESUIT = 520;
+    DREAMWALKER_RAIMENT = 521;
+    CHAMPIONS_GUARD = 522 {
+        display = "Champion's Guard";
+    }
+    DREADNAUGHTS_BATTLEGEAR = 523 {
+        display = "Dreadnaught's Battlegear";
+    }
+    BONESCYTHE_ARMOR = 524;
+    VESTMENTS_OF_FAITH = 525;
+    FROSTFIRE_REGALIA = 526;
+    THE_EARTHSHATTERER = 527;
+    REDEMPTION_ARMOR = 528;
+    PLAGUEHEART_RAIMENT = 529;
+    CRYPTSTALKER_ARMOR = 530;
+    BATTLEGEAR_OF_UNDEAD_SLAYING = 533;
+    UNDEAD_SLAYERS_ARMOR = 534 {
+        display = "Undead Slayer's Armor";
+    }
+    GARB_OF_THE_UNDEAD_SLAYER = 535;
+    REGALIA_OF_UNDEAD_CLEANSING = 536;
+    CHAMPIONS_BATTLEARMOR = 537 {
+        display = "Champion's Battlearmor";
+    }
+    CHAMPIONS_STORMCALLER = 538 {
+        display = "Champion's Stormcaller";
+    }
+    CHAMPIONS_REFUGE = 539 {
+        display = "Champion's Refuge";
+    }
+    CHAMPIONS_INVESTITURE = 540 {
+        display = "Champion's Investiture";
+    }
+    CHAMPIONS_DREADGEAR = 541 {
+        display = "Champion's Dreadgear";
+    }
+    CHAMPIONS_ARCANUM = 542 {
+        display = "Champion's Arcanum";
+    }
+    CHAMPIONS_PURSUANCE = 543 {
+        display = "Champion's Pursuance";
+    }
+    LIEUTENANT_COMMANDERS_REDOUBT = 544 {
+        display = "Lieutenant Commander's Redoubt";
+    }
+    LIEUTENANT_COMMANDERS_BATTLEARMOR = 545 {
+        display = "Lieutenant Commander's Battlearmor";
+    }
+    LIEUTENANT_COMMANDERS_ARCANUM = 546 {
+        display = "Lieutenant Commander's Arcanum";
+    }
+    LIEUTENANT_COMMANDERS_DREADGEAR = 547 {
+        display = "Lieutenant Commander's Dreadgear";
+    }
+    LIEUTENANT_COMMANDERS_GUARD = 548 {
+        display = "Lieutenant Commander's Guard";
+    }
+    LIEUTENANT_COMMANDERS_INVESTITURE = 549 {
+        display = "Lieutenant Commander's Investiture";
+    }
+    LIEUTENANT_COMMANDERS_PURSUANCE = 550 {
+        display = "Lieutenant Commander's Pursuance";
+    }
+    LIEUTENANT_COMMANDERS_REFUGE = 551 {
+        display = "Lieutenant Commander's Refuge";
+    }
+    WRATH_OF_SPELLFIRE = 552;
+    SHADOWS_EMBRACE = 553 {
+        display = "Shadow's Embrace";
+    }
+    PRIMAL_MOONCLOTH = 554;
+    NETHERWEAVE_VESTMENTS = 555;
+    IMBUED_NETHERWEAVE = 556;
+    SOULCLOTH_EMBRACE = 557;
+    ARCANOWEAVE_VESTMENTS = 558;
+    SPELLSTRIKE_INFUSION = 559;
+    FEL_IRON_PLATE = 560;
+    FEL_IRON_CHAIN = 561;
+    ADAMANTITE_BATTLEGEAR = 562;
+    ENCHANTED_ADAMANTITE_ARMOR = 563;
+    FLAME_GUARD = 564;
+    KHORIUM_WARD = 565;
+    BURNING_RAGE = 566;
+    GLADIATORS_BATTLEGEAR = 567 {
+        display = "Gladiator's Battlegear";
+    }
+    GLADIATORS_DREADGEAR = 568 {
+        display = "Gladiator's Dreadgear";
+    }
+    FAITH_IN_FELSTEEL = 569;
+    THE_UNYIELDING = 570;
+    WHITEMEND_WISDOM = 571;
+    BATTLECAST_GARB = 572;
+    FEL_SKIN = 573;
+    STRENGTH_OF_THE_CLEFTHOOF = 574;
+    FELSTALKER_ARMOR = 575;
+    FURY_OF_THE_NETHER = 576;
+    GLADIATORS_VESTMENTS = 577 {
+        display = "Gladiator's Vestments";
+    }
+    GLADIATORS_EARTHSHAKER = 578 {
+        display = "Gladiator's Earthshaker";
+    }
+    GLADIATORS_REGALIA = 579 {
+        display = "Gladiator's Regalia";
+    }
+    GLADIATORS_THUNDERFIST = 580 {
+        display = "Gladiator's Thunderfist";
+    }
+    GLADIATORS_RAIMENT = 581 {
+        display = "Gladiator's Raiment";
+    }
+    GLADIATORS_AEGIS = 582 {
+        display = "Gladiator's Aegis";
+    }
+    GLADIATORS_VINDICATION = 583 {
+        display = "Gladiator's Vindication";
+    }
+    GLADIATORS_SANCTUARY = 584 {
+        display = "Gladiator's Sanctuary";
+    }
+    GLADIATORS_WILDHIDE = 585 {
+        display = "Gladiator's Wildhide";
+    }
+    GLADIATORS_PURSUIT = 586 {
+        display = "Gladiator's Pursuit";
+    }
+    HIGH_WARLORDS_AEGIS = 587 {
+        display = "High Warlord's Aegis";
+    }
+    HIGH_WARLORDS_BATTLEGEAR = 588 {
+        display = "High Warlord's Battlegear";
+    }
+    GRAND_MARSHALS_AEGIS = 589 {
+        display = "Grand Marshal's Aegis";
+    }
+    GRAND_MARSHALS_BATTLEGEAR = 590 {
+        display = "Grand Marshal's Battlegear";
+    }
+    GRAND_MARSHALS_DREADGEAR = 591 {
+        display = "Grand Marshal's Dreadgear";
+    }
+    HIGH_WARLORDS_DREADGEAR = 592 {
+        display = "High Warlord's Dreadgear";
+    }
+    GRAND_MARSHALS_EARTHSHAKER = 593 {
+        display = "Grand Marshal's Earthshaker";
+    }
+    HIGH_WARLORDS_EARTHSHAKER = 594 {
+        display = "High Warlord's Earthshaker";
+    }
+    GRAND_MARSHALS_PURSUIT = 595 {
+        display = "Grand Marshal's Pursuit";
+    }
+    HIGH_WARLORDS_PURSUIT = 596 {
+        display = "High Warlord's Pursuit";
+    }
+    GRAND_MARSHALS_RAIMENT = 597 {
+        display = "Grand Marshal's Raiment";
+    }
+    HIGH_WARLORDS_RAIMENT = 598 {
+        display = "High Warlord's Raiment";
+    }
+    GRAND_MARSHALS_REGALIA = 599 {
+        display = "Grand Marshal's Regalia";
+    }
+    HIGH_WARLORDS_REGALIA = 600 {
+        display = "High Warlord's Regalia";
+    }
+    GRAND_MARSHALS_SANCTUARY = 601 {
+        display = "Grand Marshal's Sanctuary";
+    }
+    HIGH_WARLORDS_SANCTUARY = 602 {
+        display = "High Warlord's Sanctuary";
+    }
+    GRAND_MARSHALS_THUNDERFIST = 603 {
+        display = "Grand Marshal's Thunderfist";
+    }
+    HIGH_WARLORDS_THUNDERFIST = 604 {
+        display = "High Warlord's Thunderfist";
+    }
+    GRAND_MARSHALS_VESTMENTS = 605 {
+        display = "Grand Marshal's Vestments";
+    }
+    HIGH_WARLORDS_VESTMENTS = 606 {
+        display = "High Warlord's Vestments";
+    }
+    GRAND_MARSHALS_VINDICATION = 607 {
+        display = "Grand Marshal's Vindication";
+    }
+    HIGH_WARLORDS_VINDICATION = 608 {
+        display = "High Warlord's Vindication";
+    }
+    GRAND_MARSHALS_WILDHIDE = 609 {
+        display = "Grand Marshal's Wildhide";
+    }
+    HIGH_WARLORDS_WILDHIDE = 610 {
+        display = "High Warlord's Wildhide";
+    }
+    FELSCALE_ARMOR = 611;
+    SCALED_DRAENIC_ARMOR = 612;
+    THICK_DRAENIC_ARMOR = 613;
+    WILD_DRAENISH_ARMOR = 614;
+    GLADIATORS_FELSHROUD = 615 {
+        display = "Gladiator's Felshroud";
+    }
+    NETHERSCALE_ARMOR = 616;
+    NETHERSTRIKE_ARMOR = 617;
+    WINDHAWK_ARMOR = 618;
+    PRIMAL_INTENT = 619;
+    ASSASSINATION_ARMOR = 620;
+    NETHERBLADE = 621;
+    DEATHMANTLE = 622;
+    RIGHTEOUS_ARMOR = 623;
+    JUSTICAR_RAIMENT = 624;
+    JUSTICAR_ARMOR = 625;
+    JUSTICAR_BATTLEGEAR = 626;
+    CRYSTALFORGE_RAIMENT = 627;
+    CRYSTALFORGE_ARMOR = 628;
+    CRYSTALFORGE_BATTLEGEAR = 629;
+    TIDEFURY_RAIMENT = 630;
+    CYCLONE_RAIMENT = 631;
+    CYCLONE_REGALIA = 632;
+    CYCLONE_HARNESS = 633;
+    CATACLYSM_RAIMENT = 634;
+    CATACLYSM_REGALIA = 635;
+    CATACLYSM_HARNESS = 636;
+    MOONGLADE_RAIMENT = 637;
+    MALORNE_RAIMENT = 638;
+    MALORNE_REGALIA = 639;
+    MALORNE_HARNESS = 640;
+    NORDRASSIL_HARNESS = 641;
+    NORDRASSIL_RAIMENT = 642;
+    NORDRASSIL_REGALIA = 643;
+    OBLIVION_RAIMENT = 644;
+    VOIDHEART_RAIMENT = 645;
+    CORRUPTOR_RAIMENT = 646;
+    INCANTERS_REGALIA = 647 {
+        display = "Incanter's Regalia";
+    }
+    ALDOR_REGALIA = 648;
+    TIRISFAL_REGALIA = 649;
+    BEAST_LORD_ARMOR = 650;
+    DEMON_STALKER_ARMOR = 651;
+    RIFT_STALKER_ARMOR = 652;
+    BOLD_ARMOR = 653;
+    WARBRINGER_ARMOR = 654;
+    WARBRINGER_BATTLEGEAR = 655;
+    DESTROYER_ARMOR = 656;
+    DESTROYER_BATTLEGEAR = 657;
+    MANA_ETCHED_REGALIA = 658 {
+        display = "Mana-Etched Regalia";
+    }
+    WASTEWALKER_ARMOR = 659;
+    DESOLATION_BATTLEGEAR = 660;
+    DOOMPLATE_BATTLEGEAR = 661;
+    HALLOWED_RAIMENT = 662;
+    INCARNATE_RAIMENT = 663;
+    INCARNATE_REGALIA = 664;
+    AVATAR_RAIMENT = 665;
+    AVATAR_REGALIA = 666;
+    THE_TWIN_STARS = 667;
+    SLAYERS_ARMOR = 668 {
+        display = "Slayer's Armor";
+    }
+    GRONNSTALKERS_ARMOR = 669 {
+        display = "Gronnstalker's Armor";
+    }
+    MALEFIC_RAIMENT = 670;
+    TEMPEST_REGALIA = 671;
+    ONSLAUGHT_BATTLEGEAR = 672;
+    ONSLAUGHT_ARMOR = 673;
+    ABSOLUTION_REGALIA = 674;
+    VESTMENTS_OF_ABSOLUTION = 675;
+    THUNDERHEART_HARNESS = 676;
+    THUNDERHEART_REGALIA = 677;
+    THUNDERHEART_RAIMENT = 678;
+    LIGHTBRINGER_ARMOR = 679;
+    LIGHTBRINGER_BATTLEGEAR = 680;
+    LIGHTBRINGER_RAIMENT = 681;
+    SKYSHATTER_HARNESS = 682;
+    SKYSHATTER_RAIMENT = 683;
+    SKYSHATTER_REGALIA = 684;
+    GLADIATORS_REFUGE = 685 {
+        display = "Gladiator's Refuge";
+    }
+    GLADIATORS_WARTIDE = 686 {
+        display = "Gladiator's Wartide";
+    }
+    GLADIATORS_INVESTITURE = 687 {
+        display = "Gladiator's Investiture";
+    }
+    GRAND_MARSHALS_REFUGE = 688 {
+        display = "Grand Marshal's Refuge";
+    }
+    HIGH_WARLORDS_REFUGE = 689 {
+        display = "High Warlord's Refuge";
+    }
+    GLADIATORS_REDEMPTION = 690 {
+        display = "Gladiator's Redemption";
+    }
+    GRAND_MARSHALS_INVESTITURE = 691 {
+        display = "Grand Marshal's Investiture";
+    }
+    HIGH_WARLORDS_INVESTITURE = 692 {
+        display = "High Warlord's Investiture";
+    }
+    GRAND_MARSHALS_REDEMPTION = 693 {
+        display = "Grand Marshal's Redemption";
+    }
+    HIGH_WARLORDS_REDEMPTION = 694 {
+        display = "High Warlord's Redemption";
+    }
+    GRAND_MARSHALS_WARTIDE = 695 {
+        display = "Grand Marshal's Wartide";
+    }
+    HIGH_WARLORDS_WARTIDE = 696 {
+        display = "High Warlord's Wartide";
+    }
+    CHAMPIONS_REDOUBT = 697 {
+        display = "Champion's Redoubt";
+    }
+    WARLORDS_AEGIS = 698 {
+        display = "Warlord's Aegis";
+    }
+    THE_TWIN_BLADES_OF_AZZINOTH = 699;
+    MERCILESS_GLADIATORS_AEGIS = 700 {
+        display = "Merciless Gladiator's Aegis";
+    }
+    MERCILESS_GLADIATORS_BATTLEGEAR = 701 {
+        display = "Merciless Gladiator's Battlegear";
+    }
+    MERCILESS_GLADIATORS_DREADGEAR = 702 {
+        display = "Merciless Gladiator's Dreadgear";
+    }
+    MERCILESS_GLADIATORS_EARTHSHAKER = 703 {
+        display = "Merciless Gladiator's Earthshaker";
+    }
+    MERCILESS_GLADIATORS_FELSHROUD = 704 {
+        display = "Merciless Gladiator's Felshroud";
+    }
+    MERCILESS_GLADIATORS_INVESTITURE = 705 {
+        display = "Merciless Gladiator's Investiture";
+    }
+    MERCILESS_GLADIATORS_PURSUIT = 706 {
+        display = "Merciless Gladiator's Pursuit";
+    }
+    MERCILESS_GLADIATORS_RAIMENT = 707 {
+        display = "Merciless Gladiator's Raiment";
+    }
+    MERCILESS_GLADIATORS_REDEMPTION = 708 {
+        display = "Merciless Gladiator's Redemption";
+    }
+    MERCILESS_GLADIATORS_REFUGE = 709 {
+        display = "Merciless Gladiator's Refuge";
+    }
+    MERCILESS_GLADIATORS_REGALIA = 710 {
+        display = "Merciless Gladiator's Regalia";
+    }
+    MERCILESS_GLADIATORS_SANCTUARY = 711 {
+        display = "Merciless Gladiator's Sanctuary";
+    }
+    MERCILESS_GLADIATORS_THUNDERFIST = 712 {
+        display = "Merciless Gladiator's Thunderfist";
+    }
+    MERCILESS_GLADIATORS_VESTMENTS = 713 {
+        display = "Merciless Gladiator's Vestments";
+    }
+    MERCILESS_GLADIATORS_VINDICATION = 714 {
+        display = "Merciless Gladiator's Vindication";
+    }
+    MERCILESS_GLADIATORS_WARTIDE = 715 {
+        display = "Merciless Gladiator's Wartide";
+    }
+    MERCILESS_GLADIATORS_WILDHIDE = 716 {
+        display = "Merciless Gladiator's Wildhide";
+    }
+    FIELD_MARSHALS_EARTHSHAKER = 717 {
+        display = "Field Marshal's Earthshaker";
+    }
+    LIEUTENANT_COMMANDERS_EARTHSHAKER = 718 {
+        display = "Lieutenant Commander's Earthshaker";
+    }
+    THE_FISTS_OF_FURY = 719;
+    VENGEFUL_GLADIATORS_REFUGE = 720 {
+        display = "Vengeful Gladiator's Refuge";
+    }
+    VENGEFUL_GLADIATORS_SANCTUARY = 721 {
+        display = "Vengeful Gladiator's Sanctuary";
+    }
+    VENGEFUL_GLADIATORS_WILDHIDE = 722 {
+        display = "Vengeful Gladiator's Wildhide";
+    }
+    VENGEFUL_GLADIATORS_PURSUIT = 723 {
+        display = "Vengeful Gladiator's Pursuit";
+    }
+    VENGEFUL_GLADIATORS_REGALIA = 724 {
+        display = "Vengeful Gladiator's Regalia";
+    }
+    VENGEFUL_GLADIATORS_REDEMPTION = 725 {
+        display = "Vengeful Gladiator's Redemption";
+    }
+    VENGEFUL_GLADIATORS_VINDICATION = 726 {
+        display = "Vengeful Gladiator's Vindication";
+    }
+    VENGEFUL_GLADIATORS_AEGIS = 727 {
+        display = "Vengeful Gladiator's Aegis";
+    }
+    VENGEFUL_GLADIATORS_INVESTITURE = 728 {
+        display = "Vengeful Gladiator's Investiture";
+    }
+    VENGEFUL_GLADIATORS_RAIMENT = 729 {
+        display = "Vengeful Gladiator's Raiment";
+    }
+    VENGEFUL_GLADIATORS_VESTMENTS = 730 {
+        display = "Vengeful Gladiator's Vestments";
+    }
+    VENGEFUL_GLADIATORS_WARTIDE = 731 {
+        display = "Vengeful Gladiator's Wartide";
+    }
+    VENGEFUL_GLADIATORS_EARTHSHAKER = 732 {
+        display = "Vengeful Gladiator's Earthshaker";
+    }
+    VENGEFUL_GLADIATORS_THUNDERFIST = 733 {
+        display = "Vengeful Gladiator's Thunderfist";
+    }
+    VENGEFUL_GLADIATORS_DREADGEAR = 734 {
+        display = "Vengeful Gladiator's Dreadgear";
+    }
+    VENGEFUL_GLADIATORS_FELSHROUD = 735 {
+        display = "Vengeful Gladiator's Felshroud";
+    }
+    VENGEFUL_GLADIATORS_BATTLEGEAR = 736 {
+        display = "Vengeful Gladiator's Battlegear";
+    }
+    LATROS_FLURRY = 737 {
+        display = "Latro's Flurry";
+    }
+    DREADWEAVE_BATTLEGEAR = 738;
+    MOONCLOTH_BATTLEGEAR = 739;
+    SATIN_BATTLEGEAR = 740;
+    EVOKERS_SILK_BATTLEGEAR = 741 {
+        display = "Evoker's Silk Battlegear";
+    }
+    DRAGONHIDE_BATTLEGEAR = 742;
+    WYRMHIDE_BATTLEGEAR = 743;
+    KODOHIDE_BATTLEGEAR = 744;
+    OPPORTUNISTS_BATTLEGEAR = 745 {
+        display = "Opportunist's Battlegear";
+    }
+    SEERS_MAIL_BATTLEGEAR = 746 {
+        display = "Seer's Mail Battlegear";
+    }
+    SEERS_RINGMAIL_BATTLEGEAR = 747 {
+        display = "Seer's Ringmail Battlegear";
+    }
+    SEERS_LINKED_BATTLEGEAR = 748 {
+        display = "Seer's Linked Battlegear";
+    }
+    STALKERS_CHAIN_BATTLEGEAR = 749 {
+        display = "Stalker's Chain Battlegear";
+    }
+    SAVAGE_PLATE_BATTLEGEAR = 750;
+    CRUSADERS_ORNAMENTED_BATTLEGEAR = 751 {
+        display = "Crusader's Ornamented Battlegear";
+    }
+    CRUSADERS_SCALED_BATTLEGEAR = 752 {
+        display = "Crusader's Scaled Battlegear";
+    }
+} {
+    rust_base_type = "true";
+    versions = "2.4.3";
+}
+
+enum ItemSet : u16 {
+    NONE = 0;
+    THE_GLADIATOR = 1;
+    DAL_RENDS_ARMS = 41 {
+        display = "Dal'Rend's Arms";
+    }
+    SPIDERS_KISS = 65 {
+        display = "Spider's Kiss";
+    }
+    THE_POSTMASTER = 81;
+    CADAVEROUS_GARB = 121;
+    NECROPILE_RAIMENT = 122;
+    BLOODMAIL_REGALIA = 123;
+    DEATHBONE_GUARDIAN = 124;
+    VOLCANIC_ARMOR = 141;
+    STORMSHROUD_ARMOR = 142;
+    DEVILSAUR_ARMOR = 143;
+    IRONFEATHER_ARMOR = 144;
+    DEFIAS_LEATHER = 161;
+    EMBRACE_OF_THE_VIPER = 162;
+    CHAIN_OF_THE_SCARLET_CRUSADE = 163;
+    MAGISTERS_REGALIA = 181 {
+        display = "Magister's Regalia";
+    }
+    VESTMENTS_OF_THE_DEVOUT = 182;
+    DREADMIST_RAIMENT = 183;
+    SHADOWCRAFT_ARMOR = 184;
+    WILDHEART_RAIMENT = 185;
+    BEASTSTALKER_ARMOR = 186;
+    THE_ELEMENTS = 187;
+    LIGHTFORGE_ARMOR = 188;
+    BATTLEGEAR_OF_VALOR = 189;
+    ARCANIST_REGALIA = 201;
+    VESTMENTS_OF_PROPHECY = 202;
+    FELHEART_RAIMENT = 203;
+    NIGHTSLAYER_ARMOR = 204;
+    CENARION_RAIMENT = 205;
+    GIANTSTALKER_ARMOR = 206;
+    THE_EARTHFURY = 207;
+    LAWBRINGER_ARMOR = 208;
+    BATTLEGEAR_OF_MIGHT = 209;
+    NETHERWIND_REGALIA = 210;
+    VESTMENTS_OF_TRANSCENDENCE = 211;
+    NEMESIS_RAIMENT = 212;
+    BLOODFANG_ARMOR = 213;
+    STORMRAGE_RAIMENT = 214;
+    DRAGONSTALKER_ARMOR = 215;
+    THE_TEN_STORMS = 216;
+    JUDGEMENT_ARMOR = 217;
+    BATTLEGEAR_OF_WRATH = 218;
+    GARB_OF_THERO_SHAN = 221 {
+        display = "Garb of Thero-shan";
+    }
+    SHARD_OF_THE_GODS = 241;
+    SPIRIT_OF_ESKHANDAR = 261;
+    CHAMPIONS_BATTLEGEAR = 281 {
+        display = "Champion's Battlegear";
+    }
+    LIEUTENANT_COMMANDERS_BATTLEGEAR = 282 {
+        display = "Lieutenant Commander's Battlegear";
+    }
+    CHAMPIONS_EARTHSHAKER = 301 {
+        display = "Champion's Earthshaker";
+    }
+    IMPERIAL_PLATE = 321;
+    CHAMPIONS_REGALIA = 341 {
+        display = "Champion's Regalia";
+    }
+    CHAMPIONS_RAIMENT = 342 {
+        display = "Champion's Raiment";
+    }
+    LIEUTENANT_COMMANDERS_REGALIA = 343 {
+        display = "Lieutenant Commander's Regalia";
+    }
+    LIEUTENANT_COMMANDERS_RAIMENT = 344 {
+        display = "Lieutenant Commander's Raiment";
+    }
+    CHAMPIONS_THREADS = 345 {
+        display = "Champion's Threads";
+    }
+    LIEUTENANT_COMMANDERS_THREADS = 346 {
+        display = "Lieutenant Commander's Threads";
+    }
+    CHAMPIONS_VESTMENTS = 347 {
+        display = "Champion's Vestments";
+    }
+    LIEUTENANT_COMMANDERS_VESTMENTS = 348 {
+        display = "Lieutenant Commander's Vestments";
+    }
+    CHAMPIONS_PURSUIT = 361 {
+        display = "Champion's Pursuit";
+    }
+    LIEUTENANT_COMMANDERS_PURSUIT = 362 {
+        display = "Lieutenant Commander's Pursuit";
+    }
+    LIEUTENANT_COMMANDERS_SANCTUARY = 381 {
+        display = "Lieutenant Commander's Sanctuary";
+    }
+    CHAMPIONS_SANCTUARY = 382 {
+        display = "Champion's Sanctuary";
+    }
+    WARLORDS_BATTLEGEAR = 383 {
+        display = "Warlord's Battlegear";
+    }
+    FIELD_MARSHALS_BATTLEGEAR = 384 {
+        display = "Field Marshal's Battlegear";
+    }
+    WARLORDS_EARTHSHAKER = 386 {
+        display = "Warlord's Earthshaker";
+    }
+    WARLORDS_REGALIA = 387 {
+        display = "Warlord's Regalia";
+    }
+    FIELD_MARSHALS_REGALIA = 388 {
+        display = "Field Marshal's Regalia";
+    }
+    FIELD_MARSHALS_RAIMENT = 389 {
+        display = "Field Marshal's Raiment";
+    }
+    WARLORDS_RAIMENT = 390 {
+        display = "Warlord's Raiment";
+    }
+    WARLORDS_THREADS = 391 {
+        display = "Warlord's Threads";
+    }
+    FIELD_MARSHALS_THREADS = 392 {
+        display = "Field Marshal's Threads";
+    }
+    WARLORDS_VESTMENTS = 393 {
+        display = "Warlord's Vestments";
+    }
+    FIELD_MARSHALS_VESTMENTS = 394 {
+        display = "Field Marshal's Vestments";
+    }
+    FIELD_MARSHALS_PURSUIT = 395 {
+        display = "Field Marshal's Pursuit";
+    }
+    WARLORDS_PURSUIT = 396 {
+        display = "Warlord's Pursuit";
+    }
+    FIELD_MARSHALS_SANCTUARY = 397 {
+        display = "Field Marshal's Sanctuary";
+    }
+    WARLORDS_SANCTUARY = 398 {
+        display = "Warlord's Sanctuary";
+    }
+    LIEUTENANT_COMMANDERS_AEGIS = 401 {
+        display = "Lieutenant Commander's Aegis";
+    }
+    FIELD_MARSHALS_AEGIS = 402 {
+        display = "Field Marshal's Aegis";
+    }
+    BLOODVINE_GARB = 421;
+    PRIMAL_BATSKIN = 441;
+    BLOOD_TIGER_HARNESS = 442;
+    BLOODSOUL_EMBRACE = 443;
+    THE_DARKSOUL = 444;
+    THE_TWIN_BLADES_OF_HAKKARI = 461;
+    ZANZILS_CONCENTRATION = 462 {
+        display = "Zanzil's Concentration";
+    }
+    PRIMAL_BLESSING = 463;
+    OVERLORDS_RESOLUTION = 464 {
+        display = "Overlord's Resolution";
+    }
+    PRAYER_OF_THE_PRIMAL = 465;
+    MAJOR_MOJO_INFUSION = 466;
+    THE_HIGHLANDERS_RESOLUTION = 467 {
+        display = "The Highlander's Resolution";
+    }
+    THE_HIGHLANDERS_RESOLVE = 468 {
+        display = "The Highlander's Resolve";
+    }
+    THE_HIGHLANDERS_DETERMINATION = 469 {
+        display = "The Highlander's Determination";
+    }
+    THE_HIGHLANDERS_FORTITUDE = 470 {
+        display = "The Highlander's Fortitude";
+    }
+    THE_HIGHLANDERS_PURPOSE = 471 {
+        display = "The Highlander's Purpose";
+    }
+    THE_HIGHLANDERS_WILL = 472 {
+        display = "The Highlander's Will";
+    }
+    THE_HIGHLANDERS_INTENT = 473 {
+        display = "The Highlander's Intent";
+    }
+    VINDICATORS_BATTLEGEAR = 474 {
+        display = "Vindicator's Battlegear";
+    }
+    FREETHINKERS_ARMOR = 475 {
+        display = "Freethinker's Armor";
+    }
+    AUGURS_REGALIA = 476 {
+        display = "Augur's Regalia";
+    }
+    PREDATORS_ARMOR = 477 {
+        display = "Predator's Armor";
+    }
+    MADCAPS_OUTFIT = 478 {
+        display = "Madcap's Outfit";
+    }
+    HARUSPEXS_GARB = 479 {
+        display = "Haruspex's Garb";
+    }
+    CONFESSORS_RAIMENT = 480 {
+        display = "Confessor's Raiment";
+    }
+    DEMONIACS_THREADS = 481 {
+        display = "Demoniac's Threads";
+    }
+    ILLUSIONISTS_ATTIRE = 482 {
+        display = "Illusionist's Attire";
+    }
+    THE_DEFILERS_DETERMINATION = 483 {
+        display = "The Defiler's Determination";
+    }
+    THE_DEFILERS_FORTITUDE = 484 {
+        display = "The Defiler's Fortitude";
+    }
+    THE_DEFILERS_INTENT = 485 {
+        display = "The Defiler's Intent";
+    }
+    THE_DEFILERS_PURPOSE = 486 {
+        display = "The Defiler's Purpose";
+    }
+    THE_DEFILERS_RESOLUTION = 487 {
+        display = "The Defiler's Resolution";
+    }
+    THE_DEFILERS_WILL = 488 {
+        display = "The Defiler's Will";
+    }
+    BLACK_DRAGON_MAIL = 489;
+    GREEN_DRAGON_MAIL = 490;
+    BLUE_DRAGON_MAIL = 491;
+    TWILIGHT_TRAPPINGS = 492;
+    GENESIS_RAIMENT = 493;
+    SYMBOLS_OF_UNENDING_LIFE = 494;
+    BATTLEGEAR_OF_UNYIELDING_STRENGTH = 495;
+    CONQUERORS_BATTLEGEAR = 496 {
+        display = "Conqueror's Battlegear";
+    }
+    DEATHDEALERS_EMBRACE = 497 {
+        display = "Deathdealer's Embrace";
+    }
+    EMBLEMS_OF_VEILED_SHADOWS = 498;
+    DOOMCALLERS_ATTIRE = 499 {
+        display = "Doomcaller's Attire";
+    }
+    IMPLEMENTS_OF_UNSPOKEN_NAMES = 500;
+    STORMCALLERS_GARB = 501 {
+        display = "Stormcaller's Garb";
+    }
+    GIFT_OF_THE_GATHERING_STORM = 502;
+    ENIGMA_VESTMENTS = 503;
+    TRAPPINGS_OF_VAULTED_SECRETS = 504;
+    AVENGERS_BATTLEGEAR = 505 {
+        display = "Avenger's Battlegear";
+    }
+    BATTLEGEAR_OF_ETERNAL_JUSTICE = 506;
+    GARMENTS_OF_THE_ORACLE = 507;
+    FINERY_OF_INFINITE_WISDOM = 508;
+    STRIKERS_GARB = 509 {
+        display = "Striker's Garb";
+    }
+    TRAPPINGS_OF_THE_UNSEEN_PATH = 510;
+    BATTLEGEAR_OF_HEROISM = 511;
+    DARKMANTLE_ARMOR = 512;
+    FERALHEART_RAIMENT = 513;
+    VESTMENTS_OF_THE_VIRTUOUS = 514;
+    BEASTMASTER_ARMOR = 515;
+    SOULFORGE_ARMOR = 516;
+    SORCERERS_REGALIA = 517 {
+        display = "Sorcerer's Regalia";
+    }
+    DEATHMIST_RAIMENT = 518;
+    THE_FIVE_THUNDERS = 519;
+    IRONWEAVE_BATTLESUIT = 520;
+    DREAMWALKER_RAIMENT = 521;
+    CHAMPIONS_GUARD = 522 {
+        display = "Champion's Guard";
+    }
+    DREADNAUGHTS_BATTLEGEAR = 523 {
+        display = "Dreadnaught's Battlegear";
+    }
+    BONESCYTHE_ARMOR = 524;
+    VESTMENTS_OF_FAITH = 525;
+    FROSTFIRE_REGALIA = 526;
+    THE_EARTHSHATTERER = 527;
+    REDEMPTION_ARMOR = 528;
+    PLAGUEHEART_RAIMENT = 529;
+    CRYPTSTALKER_ARMOR = 530;
+    BATTLEGEAR_OF_UNDEAD_SLAYING = 533;
+    UNDEAD_SLAYERS_ARMOR = 534 {
+        display = "Undead Slayer's Armor";
+    }
+    GARB_OF_THE_UNDEAD_SLAYER = 535;
+    REGALIA_OF_UNDEAD_CLEANSING = 536;
+    CHAMPIONS_BATTLEARMOR = 537 {
+        display = "Champion's Battlearmor";
+    }
+    CHAMPIONS_STORMCALLER = 538 {
+        display = "Champion's Stormcaller";
+    }
+    CHAMPIONS_REFUGE = 539 {
+        display = "Champion's Refuge";
+    }
+    CHAMPIONS_INVESTITURE = 540 {
+        display = "Champion's Investiture";
+    }
+    CHAMPIONS_DREADGEAR = 541 {
+        display = "Champion's Dreadgear";
+    }
+    CHAMPIONS_ARCANUM = 542 {
+        display = "Champion's Arcanum";
+    }
+    CHAMPIONS_PURSUANCE = 543 {
+        display = "Champion's Pursuance";
+    }
+    LIEUTENANT_COMMANDERS_REDOUBT = 544 {
+        display = "Lieutenant Commander's Redoubt";
+    }
+    LIEUTENANT_COMMANDERS_BATTLEARMOR = 545 {
+        display = "Lieutenant Commander's Battlearmor";
+    }
+    LIEUTENANT_COMMANDERS_ARCANUM = 546 {
+        display = "Lieutenant Commander's Arcanum";
+    }
+    LIEUTENANT_COMMANDERS_DREADGEAR = 547 {
+        display = "Lieutenant Commander's Dreadgear";
+    }
+    LIEUTENANT_COMMANDERS_GUARD = 548 {
+        display = "Lieutenant Commander's Guard";
+    }
+    LIEUTENANT_COMMANDERS_INVESTITURE = 549 {
+        display = "Lieutenant Commander's Investiture";
+    }
+    LIEUTENANT_COMMANDERS_PURSUANCE = 550 {
+        display = "Lieutenant Commander's Pursuance";
+    }
+    LIEUTENANT_COMMANDERS_REFUGE = 551 {
+        display = "Lieutenant Commander's Refuge";
+    }
+    WRATH_OF_SPELLFIRE = 552;
+    SHADOWS_EMBRACE = 553 {
+        display = "Shadow's Embrace";
+    }
+    PRIMAL_MOONCLOTH = 554;
+    NETHERWEAVE_VESTMENTS = 555;
+    IMBUED_NETHERWEAVE = 556;
+    SOULCLOTH_EMBRACE = 557;
+    ARCANOWEAVE_VESTMENTS = 558;
+    SPELLSTRIKE_INFUSION = 559;
+    FEL_IRON_PLATE = 560;
+    FEL_IRON_CHAIN = 561;
+    ADAMANTITE_BATTLEGEAR = 562;
+    ENCHANTED_ADAMANTITE_ARMOR = 563;
+    FLAME_GUARD = 564;
+    KHORIUM_WARD = 565;
+    BURNING_RAGE = 566;
+    GLADIATORS_BATTLEGEAR = 567 {
+        display = "Gladiator's Battlegear";
+    }
+    GLADIATORS_DREADGEAR = 568 {
+        display = "Gladiator's Dreadgear";
+    }
+    FAITH_IN_FELSTEEL = 569;
+    THE_UNYIELDING = 570;
+    WHITEMEND_WISDOM = 571;
+    BATTLECAST_GARB = 572;
+    FEL_SKIN = 573;
+    STRENGTH_OF_THE_CLEFTHOOF = 574;
+    FELSTALKER_ARMOR = 575;
+    FURY_OF_THE_NETHER = 576;
+    GLADIATORS_VESTMENTS = 577 {
+        display = "Gladiator's Vestments";
+    }
+    GLADIATORS_EARTHSHAKER = 578 {
+        display = "Gladiator's Earthshaker";
+    }
+    GLADIATORS_REGALIA = 579 {
+        display = "Gladiator's Regalia";
+    }
+    GLADIATORS_THUNDERFIST = 580 {
+        display = "Gladiator's Thunderfist";
+    }
+    GLADIATORS_RAIMENT = 581 {
+        display = "Gladiator's Raiment";
+    }
+    GLADIATORS_AEGIS = 582 {
+        display = "Gladiator's Aegis";
+    }
+    GLADIATORS_VINDICATION = 583 {
+        display = "Gladiator's Vindication";
+    }
+    GLADIATORS_SANCTUARY = 584 {
+        display = "Gladiator's Sanctuary";
+    }
+    GLADIATORS_WILDHIDE = 585 {
+        display = "Gladiator's Wildhide";
+    }
+    GLADIATORS_PURSUIT = 586 {
+        display = "Gladiator's Pursuit";
+    }
+    HIGH_WARLORDS_AEGIS = 587 {
+        display = "High Warlord's Aegis";
+    }
+    HIGH_WARLORDS_BATTLEGEAR = 588 {
+        display = "High Warlord's Battlegear";
+    }
+    GRAND_MARSHALS_AEGIS = 589 {
+        display = "Grand Marshal's Aegis";
+    }
+    GRAND_MARSHALS_BATTLEGEAR = 590 {
+        display = "Grand Marshal's Battlegear";
+    }
+    GRAND_MARSHALS_DREADGEAR = 591 {
+        display = "Grand Marshal's Dreadgear";
+    }
+    HIGH_WARLORDS_DREADGEAR = 592 {
+        display = "High Warlord's Dreadgear";
+    }
+    GRAND_MARSHALS_EARTHSHAKER = 593 {
+        display = "Grand Marshal's Earthshaker";
+    }
+    HIGH_WARLORDS_EARTHSHAKER = 594 {
+        display = "High Warlord's Earthshaker";
+    }
+    GRAND_MARSHALS_PURSUIT = 595 {
+        display = "Grand Marshal's Pursuit";
+    }
+    HIGH_WARLORDS_PURSUIT = 596 {
+        display = "High Warlord's Pursuit";
+    }
+    GRAND_MARSHALS_RAIMENT = 597 {
+        display = "Grand Marshal's Raiment";
+    }
+    HIGH_WARLORDS_RAIMENT = 598 {
+        display = "High Warlord's Raiment";
+    }
+    GRAND_MARSHALS_REGALIA = 599 {
+        display = "Grand Marshal's Regalia";
+    }
+    HIGH_WARLORDS_REGALIA = 600 {
+        display = "High Warlord's Regalia";
+    }
+    GRAND_MARSHALS_SANCTUARY = 601 {
+        display = "Grand Marshal's Sanctuary";
+    }
+    HIGH_WARLORDS_SANCTUARY = 602 {
+        display = "High Warlord's Sanctuary";
+    }
+    GRAND_MARSHALS_THUNDERFIST = 603 {
+        display = "Grand Marshal's Thunderfist";
+    }
+    HIGH_WARLORDS_THUNDERFIST = 604 {
+        display = "High Warlord's Thunderfist";
+    }
+    GRAND_MARSHALS_VESTMENTS = 605 {
+        display = "Grand Marshal's Vestments";
+    }
+    HIGH_WARLORDS_VESTMENTS = 606 {
+        display = "High Warlord's Vestments";
+    }
+    GRAND_MARSHALS_VINDICATION = 607 {
+        display = "Grand Marshal's Vindication";
+    }
+    HIGH_WARLORDS_VINDICATION = 608 {
+        display = "High Warlord's Vindication";
+    }
+    GRAND_MARSHALS_WILDHIDE = 609 {
+        display = "Grand Marshal's Wildhide";
+    }
+    HIGH_WARLORDS_WILDHIDE = 610 {
+        display = "High Warlord's Wildhide";
+    }
+    FELSCALE_ARMOR = 611;
+    SCALED_DRAENIC_ARMOR = 612;
+    THICK_DRAENIC_ARMOR = 613;
+    WILD_DRAENISH_ARMOR = 614;
+    GLADIATORS_FELSHROUD = 615 {
+        display = "Gladiator's Felshroud";
+    }
+    NETHERSCALE_ARMOR = 616;
+    NETHERSTRIKE_ARMOR = 617;
+    WINDHAWK_ARMOR = 618;
+    PRIMAL_INTENT = 619;
+    ASSASSINATION_ARMOR = 620;
+    NETHERBLADE = 621;
+    DEATHMANTLE = 622;
+    RIGHTEOUS_ARMOR = 623;
+    JUSTICAR_RAIMENT = 624;
+    JUSTICAR_ARMOR = 625;
+    JUSTICAR_BATTLEGEAR = 626;
+    CRYSTALFORGE_RAIMENT = 627;
+    CRYSTALFORGE_ARMOR = 628;
+    CRYSTALFORGE_BATTLEGEAR = 629;
+    TIDEFURY_RAIMENT = 630;
+    CYCLONE_RAIMENT = 631;
+    CYCLONE_REGALIA = 632;
+    CYCLONE_HARNESS = 633;
+    CATACLYSM_RAIMENT = 634;
+    CATACLYSM_REGALIA = 635;
+    CATACLYSM_HARNESS = 636;
+    MOONGLADE_RAIMENT = 637;
+    MALORNE_RAIMENT = 638;
+    MALORNE_REGALIA = 639;
+    MALORNE_HARNESS = 640;
+    NORDRASSIL_HARNESS = 641;
+    NORDRASSIL_RAIMENT = 642;
+    NORDRASSIL_REGALIA = 643;
+    OBLIVION_RAIMENT = 644;
+    VOIDHEART_RAIMENT = 645;
+    CORRUPTOR_RAIMENT = 646;
+    INCANTERS_REGALIA = 647 {
+        display = "Incanter's Regalia";
+    }
+    ALDOR_REGALIA = 648;
+    TIRISFAL_REGALIA = 649;
+    BEAST_LORD_ARMOR = 650;
+    DEMON_STALKER_ARMOR = 651;
+    RIFT_STALKER_ARMOR = 652;
+    BOLD_ARMOR = 653;
+    WARBRINGER_ARMOR = 654;
+    WARBRINGER_BATTLEGEAR = 655;
+    DESTROYER_ARMOR = 656;
+    DESTROYER_BATTLEGEAR = 657;
+    MANA_ETCHED_REGALIA = 658 {
+        display = "Mana-Etched Regalia";
+    }
+    WASTEWALKER_ARMOR = 659;
+    DESOLATION_BATTLEGEAR = 660;
+    DOOMPLATE_BATTLEGEAR = 661;
+    HALLOWED_RAIMENT = 662;
+    INCARNATE_RAIMENT = 663;
+    INCARNATE_REGALIA = 664;
+    AVATAR_RAIMENT = 665;
+    AVATAR_REGALIA = 666;
+    THE_TWIN_STARS = 667;
+    SLAYERS_ARMOR = 668 {
+        display = "Slayer's Armor";
+    }
+    GRONNSTALKERS_ARMOR = 669 {
+        display = "Gronnstalker's Armor";
+    }
+    MALEFIC_RAIMENT = 670;
+    TEMPEST_REGALIA = 671;
+    ONSLAUGHT_BATTLEGEAR = 672;
+    ONSLAUGHT_ARMOR = 673;
+    ABSOLUTION_REGALIA = 674;
+    VESTMENTS_OF_ABSOLUTION = 675;
+    THUNDERHEART_HARNESS = 676;
+    THUNDERHEART_REGALIA = 677;
+    THUNDERHEART_RAIMENT = 678;
+    LIGHTBRINGER_ARMOR = 679;
+    LIGHTBRINGER_BATTLEGEAR = 680;
+    LIGHTBRINGER_RAIMENT = 681;
+    SKYSHATTER_HARNESS = 682;
+    SKYSHATTER_RAIMENT = 683;
+    SKYSHATTER_REGALIA = 684;
+    GLADIATORS_REFUGE = 685 {
+        display = "Gladiator's Refuge";
+    }
+    GLADIATORS_WARTIDE = 686 {
+        display = "Gladiator's Wartide";
+    }
+    GLADIATORS_INVESTITURE = 687 {
+        display = "Gladiator's Investiture";
+    }
+    GRAND_MARSHALS_REFUGE = 688 {
+        display = "Grand Marshal's Refuge";
+    }
+    HIGH_WARLORDS_REFUGE = 689 {
+        display = "High Warlord's Refuge";
+    }
+    GLADIATORS_REDEMPTION = 690 {
+        display = "Gladiator's Redemption";
+    }
+    GRAND_MARSHALS_INVESTITURE = 691 {
+        display = "Grand Marshal's Investiture";
+    }
+    HIGH_WARLORDS_INVESTITURE = 692 {
+        display = "High Warlord's Investiture";
+    }
+    GRAND_MARSHALS_REDEMPTION = 693 {
+        display = "Grand Marshal's Redemption";
+    }
+    HIGH_WARLORDS_REDEMPTION = 694 {
+        display = "High Warlord's Redemption";
+    }
+    GRAND_MARSHALS_WARTIDE = 695 {
+        display = "Grand Marshal's Wartide";
+    }
+    HIGH_WARLORDS_WARTIDE = 696 {
+        display = "High Warlord's Wartide";
+    }
+    CHAMPIONS_REDOUBT = 697 {
+        display = "Champion's Redoubt";
+    }
+    WARLORDS_AEGIS = 698 {
+        display = "Warlord's Aegis";
+    }
+    THE_TWIN_BLADES_OF_AZZINOTH = 699;
+    MERCILESS_GLADIATORS_AEGIS = 700 {
+        display = "Merciless Gladiator's Aegis";
+    }
+    MERCILESS_GLADIATORS_BATTLEGEAR = 701 {
+        display = "Merciless Gladiator's Battlegear";
+    }
+    MERCILESS_GLADIATORS_DREADGEAR = 702 {
+        display = "Merciless Gladiator's Dreadgear";
+    }
+    MERCILESS_GLADIATORS_EARTHSHAKER = 703 {
+        display = "Merciless Gladiator's Earthshaker";
+    }
+    MERCILESS_GLADIATORS_FELSHROUD = 704 {
+        display = "Merciless Gladiator's Felshroud";
+    }
+    MERCILESS_GLADIATORS_INVESTITURE = 705 {
+        display = "Merciless Gladiator's Investiture";
+    }
+    MERCILESS_GLADIATORS_PURSUIT = 706 {
+        display = "Merciless Gladiator's Pursuit";
+    }
+    MERCILESS_GLADIATORS_RAIMENT = 707 {
+        display = "Merciless Gladiator's Raiment";
+    }
+    MERCILESS_GLADIATORS_REDEMPTION = 708 {
+        display = "Merciless Gladiator's Redemption";
+    }
+    MERCILESS_GLADIATORS_REFUGE = 709 {
+        display = "Merciless Gladiator's Refuge";
+    }
+    MERCILESS_GLADIATORS_REGALIA = 710 {
+        display = "Merciless Gladiator's Regalia";
+    }
+    MERCILESS_GLADIATORS_SANCTUARY = 711 {
+        display = "Merciless Gladiator's Sanctuary";
+    }
+    MERCILESS_GLADIATORS_THUNDERFIST = 712 {
+        display = "Merciless Gladiator's Thunderfist";
+    }
+    MERCILESS_GLADIATORS_VESTMENTS = 713 {
+        display = "Merciless Gladiator's Vestments";
+    }
+    MERCILESS_GLADIATORS_VINDICATION = 714 {
+        display = "Merciless Gladiator's Vindication";
+    }
+    MERCILESS_GLADIATORS_WARTIDE = 715 {
+        display = "Merciless Gladiator's Wartide";
+    }
+    MERCILESS_GLADIATORS_WILDHIDE = 716 {
+        display = "Merciless Gladiator's Wildhide";
+    }
+    FIELD_MARSHALS_EARTHSHAKER = 717 {
+        display = "Field Marshal's Earthshaker";
+    }
+    LIEUTENANT_COMMANDERS_EARTHSHAKER = 718 {
+        display = "Lieutenant Commander's Earthshaker";
+    }
+    THE_FISTS_OF_FURY = 719;
+    VENGEFUL_GLADIATORS_REFUGE = 720 {
+        display = "Vengeful Gladiator's Refuge";
+    }
+    VENGEFUL_GLADIATORS_SANCTUARY = 721 {
+        display = "Vengeful Gladiator's Sanctuary";
+    }
+    VENGEFUL_GLADIATORS_WILDHIDE = 722 {
+        display = "Vengeful Gladiator's Wildhide";
+    }
+    VENGEFUL_GLADIATORS_PURSUIT = 723 {
+        display = "Vengeful Gladiator's Pursuit";
+    }
+    VENGEFUL_GLADIATORS_REGALIA = 724 {
+        display = "Vengeful Gladiator's Regalia";
+    }
+    VENGEFUL_GLADIATORS_REDEMPTION = 725 {
+        display = "Vengeful Gladiator's Redemption";
+    }
+    VENGEFUL_GLADIATORS_VINDICATION = 726 {
+        display = "Vengeful Gladiator's Vindication";
+    }
+    VENGEFUL_GLADIATORS_AEGIS = 727 {
+        display = "Vengeful Gladiator's Aegis";
+    }
+    VENGEFUL_GLADIATORS_INVESTITURE = 728 {
+        display = "Vengeful Gladiator's Investiture";
+    }
+    VENGEFUL_GLADIATORS_RAIMENT = 729 {
+        display = "Vengeful Gladiator's Raiment";
+    }
+    VENGEFUL_GLADIATORS_VESTMENTS = 730 {
+        display = "Vengeful Gladiator's Vestments";
+    }
+    VENGEFUL_GLADIATORS_WARTIDE = 731 {
+        display = "Vengeful Gladiator's Wartide";
+    }
+    VENGEFUL_GLADIATORS_EARTHSHAKER = 732 {
+        display = "Vengeful Gladiator's Earthshaker";
+    }
+    VENGEFUL_GLADIATORS_THUNDERFIST = 733 {
+        display = "Vengeful Gladiator's Thunderfist";
+    }
+    VENGEFUL_GLADIATORS_DREADGEAR = 734 {
+        display = "Vengeful Gladiator's Dreadgear";
+    }
+    VENGEFUL_GLADIATORS_FELSHROUD = 735 {
+        display = "Vengeful Gladiator's Felshroud";
+    }
+    VENGEFUL_GLADIATORS_BATTLEGEAR = 736 {
+        display = "Vengeful Gladiator's Battlegear";
+    }
+    LATROS_FLURRY = 737 {
+        display = "Latro's Flurry";
+    }
+    DREADWEAVE_BATTLEGEAR = 738;
+    MOONCLOTH_BATTLEGEAR = 739;
+    SATIN_BATTLEGEAR = 740;
+    EVOKERS_SILK_BATTLEGEAR = 741 {
+        display = "Evoker's Silk Battlegear";
+    }
+    DRAGONHIDE_BATTLEGEAR = 742;
+    WYRMHIDE_BATTLEGEAR = 743;
+    KODOHIDE_BATTLEGEAR = 744;
+    OPPORTUNISTS_BATTLEGEAR = 745 {
+        display = "Opportunist's Battlegear";
+    }
+    SEERS_MAIL_BATTLEGEAR = 746 {
+        display = "Seer's Mail Battlegear";
+    }
+    SEERS_RINGMAIL_BATTLEGEAR = 747 {
+        display = "Seer's Ringmail Battlegear";
+    }
+    SEERS_LINKED_BATTLEGEAR = 748 {
+        display = "Seer's Linked Battlegear";
+    }
+    STALKERS_CHAIN_BATTLEGEAR = 749 {
+        display = "Stalker's Chain Battlegear";
+    }
+    SAVAGE_PLATE_BATTLEGEAR = 750;
+    CRUSADERS_ORNAMENTED_BATTLEGEAR = 751 {
+        display = "Crusader's Ornamented Battlegear";
+    }
+    CRUSADERS_SCALED_BATTLEGEAR = 752 {
+        display = "Crusader's Scaled Battlegear";
+    }
+    BOREAN_EMBRACE = 754;
+    NERUBIAN_HIVE = 755;
+    FROSTSCALE_BINDING = 756;
+    ICEBORNE_EMBRACE = 757;
+    RAINES_REVENGE = 759 {
+        display = "Raine's Revenge";
+    }
+    GLADIATORS_DREADPLATE = 760 {
+        display = "Gladiator's Dreadplate";
+    }
+    WINTER_GARB = 761;
+    BREWFEST_GARB = 762;
+    FROSTWOVEN_POWER = 763;
+    DUSKWEAVER = 764;
+    GLADIATORS_BATTLEGEAR2 = 765 {
+        display = "Gladiator's Battlegear";
+    }
+    GLADIATORS_VINDICATION2 = 766 {
+        display = "Gladiator's Vindication";
+    }
+    GLADIATORS_REDEMPTION2 = 767 {
+        display = "Gladiator's Redemption";
+    }
+    GLADIATORS_DESECRATION = 768 {
+        display = "Gladiator's Desecration";
+    }
+    GLADIATORS_THUNDERFIST2 = 769 {
+        display = "Gladiator's Thunderfist";
+    }
+    GLADIATORS_EARTHSHAKER2 = 770 {
+        display = "Gladiator's Earthshaker";
+    }
+    GLADIATORS_WARTIDE2 = 771 {
+        display = "Gladiator's Wartide";
+    }
+    GLADIATORS_PURSUIT2 = 772 {
+        display = "Gladiator's Pursuit";
+    }
+    GLADIATORS_REFUGE2 = 773 {
+        display = "Gladiator's Refuge";
+    }
+    GLADIATORS_WILDHIDE2 = 774 {
+        display = "Gladiator's Wildhide";
+    }
+    GLADIATORS_SANCTUARY2 = 775 {
+        display = "Gladiator's Sanctuary";
+    }
+    GLADIATORS_VESTMENTS2 = 776 {
+        display = "Gladiator's Vestments";
+    }
+    GLADIATORS_INVESTITURE2 = 777 {
+        display = "Gladiator's Investiture";
+    }
+    GLADIATORS_RAIMENT2 = 778 {
+        display = "Gladiator's Raiment";
+    }
+    GLADIATORS_REGALIA2 = 779 {
+        display = "Gladiator's Regalia";
+    }
+    GLADIATORS_FELSHROUD2 = 780 {
+        display = "Gladiator's Felshroud";
+    }
+    BLESSED_REGALIA_OF_UNDEAD_CLEANSING = 781;
+    UNDEAD_SLAYERS_BLESSED_ARMOR = 782 {
+        display = "Undead Slayer's Blessed Armor";
+    }
+    BLESSED_GARB_OF_THE_UNDEAD_SLAYER = 783;
+    BLESSED_BATTLEGEAR_OF_UNDEAD_SLAYING = 784;
+    MIDSUMMER_REVELER = 785;
+    DREADNAUGHT_PLATE = 787;
+    DREADNAUGHT_BATTLEGEAR = 788;
+    REDEMPTION_BATTLEGEAR = 789;
+    REDEMPTION_REGALIA = 790;
+    REDEMPTION_PLATE = 791;
+    SCOURGEBORNE_BATTLEGEAR = 792;
+    SCOURGEBORNE_PLATE = 793;
+    CRYPTSTALKER_BATTLEGEAR = 794;
+    EARTHSHATTER_BATTLEGEAR = 795;
+    EARTHSHATTER_GARB = 796;
+    EARTHSHATTER_REGALIA = 797;
+    DREAMWALKER_BATTLEGEAR = 798;
+    DREAMWALKER_REGALIA = 799;
+    DREAMWALKER_GARB = 800;
+    BONESCYTHE_BATTLEGEAR = 801;
+    PLAGUEHEART_GARB = 802;
+    FROSTFIRE_GARB = 803;
+    REGALIA_OF_FAITH = 804;
+    GARB_OF_FAITH = 805;
+    SPRING_TUXEDO = 812;
+    EVISCERATORS_BATTLEGEAR = 813 {
+        display = "Eviscerator's Battlegear";
+    }
+    ORNATE_SARONITE_BATTLEGEAR = 814;
+    OVERCASTER_BATTLEGEAR = 815;
+    SAVAGE_SARONITE_BATTLEGEAR = 816;
+    STORMHIDE_BATTLEGEAR = 817;
+    SWIFTARROW_BATTLEGEAR = 818;
+    FROSTSAVAGE_BATTLEGEAR = 819;
+    AEGIS_BATTLEGEAR = 820;
+    AEGIS_PLATE = 821;
+    AEGIS_REGALIA = 822;
+    WORLDBREAKER_BATTLEGEAR = 823;
+    WORLDBREAKER_GARB = 824;
+    WORLDBREAKER_REGALIA = 825;
+    TERRORBLADE_BATTLEGEAR = 826;
+    NIGHTSONG_BATTLEGEAR = 827;
+    NIGHTSONG_GARB = 828;
+    NIGHTSONG_REGALIA = 829;
+    SIEGEBREAKER_BATTLEGEAR = 830;
+    SIEGEBREAKER_PLATE = 831;
+    SANCTIFICATION_GARB = 832;
+    SANCTIFICATION_REGALIA = 833;
+    DARKRUNED_BATTLEGEAR = 834;
+    DARKRUNED_PLATE = 835;
+    KIRIN_TOR_GARB = 836;
+    DEATHBRINGER_GARB = 837;
+    SCOURGESTALKER_BATTLEGEAR = 838;
+    KHADGARS_REGALIA = 843 {
+        display = "Khadgar's Regalia";
+    }
+    SUNSTRIDERS_REGALIA = 844 {
+        display = "Sunstrider's Regalia";
+    }
+    GUL_DANS_REGALIA = 845 {
+        display = "Gul'dan's Regalia";
+    }
+    KEL_THUZADS_REGALIA = 846 {
+        display = "Kel'Thuzad's Regalia";
+    }
+    VELENS_RAIMENT = 847 {
+        display = "Velen's Raiment";
+    }
+    ZABRAS_RAIMENT = 848 {
+        display = "Zabra's Raiment";
+    }
+    VELENS_REGALIA = 849 {
+        display = "Velen's Regalia";
+    }
+    ZABRAS_REGALIA = 850 {
+        display = "Zabra's Regalia";
+    }
+    MALFURIONS_GARB = 851 {
+        display = "Malfurion's Garb";
+    }
+    RUNETOTEMS_GARB = 852 {
+        display = "Runetotem's Garb";
+    }
+    MALFURIONS_REGALIA = 853 {
+        display = "Malfurion's Regalia";
+    }
+    RUNETOTEMS_REGALIA = 854 {
+        display = "Runetotem's Regalia";
+    }
+    MALFURIONS_BATTLEGEAR = 855 {
+        display = "Malfurion's Battlegear";
+    }
+    RUNETOTEMS_BATTLEGEAR = 856 {
+        display = "Runetotem's Battlegear";
+    }
+    VANCLEEFS_BATTLEGEAR = 857 {
+        display = "VanCleef's Battlegear";
+    }
+    GARONAS_BATTLEGEAR = 858 {
+        display = "Garona's Battlegear";
+    }
+    WINDRUNNERS_BATTLEGEAR = 859 {
+        display = "Windrunner's Battlegear";
+    }
+    WINDRUNNERS_PURSUIT = 860 {
+        display = "Windrunner's Pursuit";
+    }
+    NOBUNDOS_GARB = 861 {
+        display = "Nobundo's Garb";
+    }
+    THRALLS_GARB = 862 {
+        display = "Thrall's Garb";
+    }
+    THRALLS_REGALIA = 863 {
+        display = "Thrall's Regalia";
+    }
+    NOBUNDOS_REGALIA = 864 {
+        display = "Nobundo's Regalia";
+    }
+    NOBUNDOS_BATTLEGEAR = 865 {
+        display = "Nobundo's Battlegear";
+    }
+    THRALLS_BATTLEGEAR = 866 {
+        display = "Thrall's Battlegear";
+    }
+    WRYNNS_BATTLEGEAR = 867 {
+        display = "Wrynn's Battlegear";
+    }
+    HELLSCREAMS_BATTLEGEAR = 868 {
+        display = "Hellscream's Battlegear";
+    }
+    WRYNNS_PLATE = 869 {
+        display = "Wrynn's Plate";
+    }
+    HELLSCREAMS_PLATE = 870 {
+        display = "Hellscream's Plate";
+    }
+    THASSARIANS_BATTLEGEAR = 871 {
+        display = "Thassarian's Battlegear";
+    }
+    KOLTIRAS_BATTLEGEAR = 872 {
+        display = "Koltira's Battlegear";
+    }
+    THASSARIANS_PLATE = 873 {
+        display = "Thassarian's Plate";
+    }
+    KOLTIRAS_PLATE = 874 {
+        display = "Koltira's Plate";
+    }
+    TURALYONS_GARB = 875 {
+        display = "Turalyon's Garb";
+    }
+    LIADRINS_GARB = 876 {
+        display = "Liadrin's Garb";
+    }
+    TURALYONS_BATTLEGEAR = 877 {
+        display = "Turalyon's Battlegear";
+    }
+    LIADRINS_BATTLEGEAR = 878 {
+        display = "Liadrin's Battlegear";
+    }
+    TURALYONS_PLATE = 879 {
+        display = "Turalyon's Plate";
+    }
+    LIADRINS_PLATE = 880 {
+        display = "Liadrin's Plate";
+    }
+    PURIFIED_SHARD_OF_THE_GODS = 881;
+    SHINY_SHARD_OF_THE_GODS = 882;
+    BLOODMAGES_REGALIA = 883 {
+        display = "Bloodmage's Regalia";
+    }
+    DARK_COVENS_REGALIA = 884 {
+        display = "Dark Coven's Regalia";
+    }
+    CRIMSON_ACOLYTES_RAIMENT = 885 {
+        display = "Crimson Acolyte's Raiment";
+    }
+    CRIMSON_ACOLYTES_REGALIA = 886 {
+        display = "Crimson Acolyte's Regalia";
+    }
+    LASHERWEAVE_GARB = 887;
+    LASHERWEAVE_REGALIA = 888;
+    LASHERWEAVE_BATTLEGEAR = 889;
+    SHADOWBLADES_BATTLEGEAR = 890 {
+        display = "Shadowblade's Battlegear";
+    }
+    AHN_KAHAR_BLOOD_HUNTERS_BATTLEGEAR = 891 {
+        display = "Ahn'Kahar Blood Hunter's Battlegear";
+    }
+    FROST_WITCHS_GARB = 892 {
+        display = "Frost Witch's Garb";
+    }
+    FROST_WITCHS_REGALIA = 893 {
+        display = "Frost Witch's Regalia";
+    }
+    FROST_WITCHS_BATTLEGEAR = 894 {
+        display = "Frost Witch's Battlegear";
+    }
+    YMIRJAR_LORDS_BATTLEGEAR = 895 {
+        display = "Ymirjar Lord's Battlegear";
+    }
+    YMIRJAR_LORDS_PLATE = 896 {
+        display = "Ymirjar Lord's Plate";
+    }
+    SCOURGELORDS_BATTLEGEAR = 897 {
+        display = "Scourgelord's Battlegear";
+    }
+    SCOURGELORDS_PLATE = 898 {
+        display = "Scourgelord's Plate";
+    }
+    LIGHTSWORN_GARB = 899;
+    LIGHTSWORN_BATTLEGEAR = 900;
+    LIGHTSWORN_PLATE = 901;
+} {
+    rust_base_type = "true";
+    versions = "3.3.5";
+}

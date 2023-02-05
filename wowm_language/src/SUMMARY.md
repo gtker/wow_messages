@@ -144,6 +144,7 @@
 - [ItemFlag2](docs/itemflag2.md)
 - [ItemQuality](docs/itemquality.md)
 - [ItemRefundResult](docs/itemrefundresult.md)
+- [ItemSet](docs/itemset.md)
 - [ItemStatType](docs/itemstattype.md)
 - [ItemTextQuery](docs/itemtextquery.md)
 - [JoinArenaType](docs/joinarenatype.md)

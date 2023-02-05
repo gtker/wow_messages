@@ -2208,7 +2208,7 @@
         },
         { &hf_woww_item_set,
             { "Item Set", "woww.item.set",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_item_set_strings), 0,
                 NULL, HFILL
             }
         },

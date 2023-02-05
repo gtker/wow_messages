@@ -146,6 +146,10 @@ pub enum Value {
 
     VanillaLanguage(vanilla_base::Language),
     TbcWrathLanguage(shared_base::language_tbc_wrath::Language),
+
+    VanillaItemSet(vanilla_base::ItemSet),
+    TbcItemSet(tbc_base::ItemSet),
+    WrathItemSet(wrath_base::ItemSet),
 }
 
 impl Eq for Value {}
@@ -232,6 +236,8 @@ impl Value {
                 "PageTextMaterial"
             }
             Value::VanillaLanguage(_) | Value::TbcWrathLanguage(_) => "Language",
+
+            Value::VanillaItemSet(_) | Value::TbcItemSet(_) | Value::WrathItemSet(_) => "ItemSet",
         }
     }
 
@@ -306,6 +312,8 @@ impl Value {
             Value::VanillaPageTextMaterial(_) | Value::TbcWrathPageTextMaterial(_) => "AC",
 
             Value::VanillaLanguage(_) | Value::TbcWrathLanguage(_) => "AD",
+
+            Value::VanillaItemSet(_) | Value::TbcItemSet(_) | Value::WrathItemSet(_) => "AE",
         }
     }
 
@@ -403,6 +411,9 @@ impl Value {
             }
             Value::VanillaLanguage(v) => format!("Language::{v:?}"),
             Value::TbcWrathLanguage(v) => format!("Language::{v:?}"),
+            Value::VanillaItemSet(v) => format!("ItemSet::{v:?}"),
+            Value::TbcItemSet(v) => format!("ItemSet::{v:?}"),
+            Value::WrathItemSet(v) => format!("ItemSet::{v:?}"),
         }
     }
 
@@ -522,6 +533,9 @@ impl Value {
             Value::TbcWrathLanguage(_) => {
                 Value::TbcWrathLanguage(shared_base::language_tbc_wrath::Language::Universal)
             }
+            Value::VanillaItemSet(_) => Value::VanillaItemSet(Default::default()),
+            Value::TbcItemSet(_) => Value::TbcItemSet(Default::default()),
+            Value::WrathItemSet(_) => Value::WrathItemSet(Default::default()),
         }
     }
 }

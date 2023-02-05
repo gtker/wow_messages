@@ -436,6 +436,8 @@ pub(crate) mod item_refund_extra;
 pub use item_refund_extra::*;
 pub(crate) mod item_refund_result;
 pub use item_refund_result::*;
+pub(crate) mod item_set;
+pub use item_set::*;
 pub(crate) mod item_text_query;
 pub use item_text_query::*;
 pub(crate) mod lfg_available_dungeon;

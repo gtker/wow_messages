@@ -246,9 +246,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
             comment = "cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc";
         }
         u32 block;
-        u32 item_set {
-            comment = "cmangos/vmangos/mangoszero: id from ItemSet.dbc";
-        }
+        (u32)ItemSet item_set;
         u32 max_durability;
         Area area;
         Map map;
@@ -429,9 +427,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
             comment = "cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc";
         }
         u32 block;
-        u32 item_set {
-            comment = "cmangos/vmangos/mangoszero: id from ItemSet.dbc";
-        }
+        (u32)ItemSet item_set;
         u32 max_durability;
         Area area;
         Map map;
@@ -650,9 +646,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         }
         u32 random_suffix;
         u32 block;
-        u32 item_set {
-            comment = "cmangos/vmangos/mangoszero: id from ItemSet.dbc";
-        }
+        (u32)ItemSet item_set;
         u32 max_durability;
         Area area;
         Map map;

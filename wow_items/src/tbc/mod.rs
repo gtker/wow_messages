@@ -15,6 +15,7 @@ pub use wow_world_base::tbc::{
     ItemDamageType,
     ItemFlag,
     ItemQuality,
+    ItemSet,
     ItemSocket,
     ItemStat,
     Language,

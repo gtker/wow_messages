@@ -11,6 +11,7 @@ use crate::vanilla::{
     ItemDamageType,
     ItemFlag,
     ItemQuality,
+    ItemSet,
     Language,
     Map,
     PageTextMaterial,
@@ -75,7 +76,7 @@ pub struct Item {
     pub sheathe_type: SheatheType,
     pub random_property: i32,
     pub block: i32,
-    pub itemset: i32,
+    pub item_set: ItemSet,
     pub max_durability: i32,
     pub area: Area,
     pub map: Map,
@@ -145,7 +146,7 @@ impl Item {
         sheathe_type: SheatheType,
         random_property: i32,
         block: i32,
-        itemset: i32,
+        item_set: ItemSet,
         max_durability: i32,
         area: Area,
         map: Map,
@@ -261,7 +262,7 @@ impl Item {
             sheathe_type,
             random_property,
             block,
-            itemset,
+            item_set,
             max_durability,
             area,
             map,
@@ -557,8 +558,8 @@ impl Item {
         self.block
     }
 
-    pub const fn itemset(&self) -> i32 {
-        self.itemset
+    pub const fn item_set(&self) -> ItemSet {
+        self.item_set
     }
 
     pub const fn max_durability(&self) -> i32 {

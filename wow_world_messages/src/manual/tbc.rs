@@ -116,7 +116,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 sheathe_type: v.sheathe_type,
                 random_property: v.random_property as u32,
                 block: v.block as u32,
-                item_set: v.itemset as u32,
+                item_set: v.item_set,
                 max_durability: v.max_durability as u32,
                 area: v.area,
                 map: v.map,

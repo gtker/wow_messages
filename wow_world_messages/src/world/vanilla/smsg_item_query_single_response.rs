@@ -8,6 +8,7 @@ use crate::vanilla::Bonding;
 use crate::vanilla::InventoryType;
 use crate::vanilla::ItemClassAndSubClass;
 use crate::vanilla::ItemQuality;
+use crate::vanilla::ItemSet;
 use crate::vanilla::Language;
 use crate::vanilla::Map;
 use crate::vanilla::PageTextMaterial;
@@ -73,7 +74,7 @@ use std::io::{Write, Read};
 ///         (u32)SheatheType sheathe_type;
 ///         u32 random_property;
 ///         u32 block;
-///         u32 item_set;
+///         (u32)ItemSet item_set;
 ///         u32 max_durability;
 ///         Area area;
 ///         Map map;
@@ -273,8 +274,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // block: u32
             w.write_all(&v.block.to_le_bytes())?;
 
-            // item_set: u32
-            w.write_all(&v.item_set.to_le_bytes())?;
+            // item_set: ItemSet
+            w.write_all(&(v.item_set.as_int() as u32).to_le_bytes())?;
 
             // max_durability: u32
             w.write_all(&v.max_durability.to_le_bytes())?;
@@ -466,8 +467,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // block: u32
             let block = crate::util::read_u32_le(r)?;
 
-            // item_set: u32
-            let item_set = crate::util::read_u32_le(r)?;
+            // item_set: ItemSet
+            let item_set: ItemSet = (crate::util::read_u32_le(r)? as u16).try_into()?;
 
             // max_durability: u32
             let max_durability = crate::util::read_u32_le(r)?;
@@ -604,7 +605,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // sheathe_type: SheatheType
             + 4 // random_property: u32
             + 4 // block: u32
-            + 4 // item_set: u32
+            + 4 // item_set: ItemSet
             + 4 // max_durability: u32
             + 4 // area: Area
             + 4 // map: Map
@@ -666,7 +667,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub sheathe_type: SheatheType,
     pub random_property: u32,
     pub block: u32,
-    pub item_set: u32,
+    pub item_set: ItemSet,
     pub max_durability: u32,
     pub area: Area,
     pub map: Map,
@@ -724,7 +725,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // sheathe_type: SheatheType
         + 4 // random_property: u32
         + 4 // block: u32
-        + 4 // item_set: u32
+        + 4 // item_set: ItemSet
         + 4 // max_durability: u32
         + 4 // area: Area
         + 4 // map: Map

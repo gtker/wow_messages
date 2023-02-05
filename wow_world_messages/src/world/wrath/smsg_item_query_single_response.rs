@@ -8,6 +8,7 @@ use crate::wrath::Bonding;
 use crate::wrath::InventoryType;
 use crate::wrath::ItemClassAndSubClass;
 use crate::wrath::ItemQuality;
+use crate::wrath::ItemSet;
 use crate::wrath::Language;
 use crate::wrath::Map;
 use crate::wrath::PageTextMaterial;
@@ -21,7 +22,7 @@ use crate::wrath::ItemFlag2;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:579`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L579):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:575`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L575):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -81,7 +82,7 @@ use std::io::{Write, Read};
 ///         u32 random_property;
 ///         u32 random_suffix;
 ///         u32 block;
-///         u32 item_set;
+///         (u32)ItemSet item_set;
 ///         u32 max_durability;
 ///         Area area;
 ///         Map map;
@@ -308,8 +309,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // block: u32
             w.write_all(&v.block.to_le_bytes())?;
 
-            // item_set: u32
-            w.write_all(&v.item_set.to_le_bytes())?;
+            // item_set: ItemSet
+            w.write_all(&(v.item_set.as_int() as u32).to_le_bytes())?;
 
             // max_durability: u32
             w.write_all(&v.max_durability.to_le_bytes())?;
@@ -548,8 +549,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // block: u32
             let block = crate::util::read_u32_le(r)?;
 
-            // item_set: u32
-            let item_set = crate::util::read_u32_le(r)?;
+            // item_set: ItemSet
+            let item_set: ItemSet = (crate::util::read_u32_le(r)? as u16).try_into()?;
 
             // max_durability: u32
             let max_durability = crate::util::read_u32_le(r)?;
@@ -735,7 +736,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // random_property: u32
             + 4 // random_suffix: u32
             + 4 // block: u32
-            + 4 // item_set: u32
+            + 4 // item_set: ItemSet
             + 4 // max_durability: u32
             + 4 // area: Area
             + 4 // map: Map
@@ -811,7 +812,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub random_property: u32,
     pub random_suffix: u32,
     pub block: u32,
-    pub item_set: u32,
+    pub item_set: ItemSet,
     pub max_durability: u32,
     pub area: Area,
     pub map: Map,
@@ -884,7 +885,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // random_property: u32
         + 4 // random_suffix: u32
         + 4 // block: u32
-        + 4 // item_set: u32
+        + 4 // item_set: ItemSet
         + 4 // max_durability: u32
         + 4 // area: Area
         + 4 // map: Map

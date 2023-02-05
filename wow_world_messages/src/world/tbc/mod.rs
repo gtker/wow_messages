@@ -190,6 +190,8 @@ pub(crate) mod item_class_and_sub_class;
 pub use item_class_and_sub_class::*;
 pub(crate) mod item_flag;
 pub use item_flag::*;
+pub(crate) mod item_set;
+pub use item_set::*;
 pub(crate) mod lfg_data;
 pub use lfg_data::*;
 pub(crate) mod lfg_mode;

@@ -3,8 +3,8 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use rusqlite::Connection;
 use wow_world_base::wrath::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, InventoryType, ItemClassAndSubClass,
-    ItemFlag, ItemFlag2, ItemQuality, Language, Map, PageTextMaterial, PvpRank, SheatheType, Skill,
-    SpellSchool, SpellTriggerType,
+    ItemFlag, ItemFlag2, ItemQuality, ItemSet, Language, Map, PageTextMaterial, PvpRank,
+    SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct WrathItem {
@@ -120,7 +120,7 @@ pub struct WrathItem {
     pub random_property: i32,
     pub random_suffix: i32,
     pub block: i32,
-    pub itemset: i32,
+    pub item_set: ItemSet,
     pub max_durability: i32,
     pub area: Area,
     pub map: Map,
@@ -225,7 +225,7 @@ impl WrathItem {
             Field::new("random_property", Value::Int(self.random_property)),
             Field::new("random_suffix", Value::Int(self.random_suffix)),
             Field::new("block", Value::Int(self.block)),
-            Field::new("itemset", Value::Int(self.itemset)),
+            Field::new("item_set", Value::WrathItemSet(self.item_set)),
             Field::new("max_durability", Value::Int(self.max_durability)),
             Field::new("area", Value::WrathArea(self.area)),
             Field::new("map", Value::WrathMap(self.map)),
@@ -821,7 +821,7 @@ ORDER BY
                 random_property: row.get(110).unwrap(),
                 random_suffix: row.get(111).unwrap(),
                 block: row.get(112).unwrap(),
-                itemset: row.get(113).unwrap(),
+                item_set: ItemSet::try_from(row.get::<usize, u16>(113).unwrap()).unwrap(),
                 max_durability: row.get(114).unwrap(),
                 area: Area::try_from(row.get::<usize, u32>(115).unwrap()).unwrap(),
                 map: Map::try_from(row.get::<usize, u32>(116).unwrap()).unwrap(),

@@ -16,6 +16,7 @@ pub use wow_world_base::wrath::{
     ItemFlag,
     ItemFlag2,
     ItemQuality,
+    ItemSet,
     ItemSocket,
     ItemStat,
     Language,
