@@ -12,6 +12,7 @@ pub use wow_world_base::vanilla::{
     Item,
     ItemClassAndSubClass,
     ItemDamageType,
+    ItemFlag,
     ItemQuality,
     Map,
     Skill,

@@ -12,10 +12,12 @@ use crate::wrath::Map;
 use crate::wrath::Skill;
 use crate::wrath::AllowedClass;
 use crate::wrath::AllowedRace;
+use crate::wrath::ItemFlag;
+use crate::wrath::ItemFlag2;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:274`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L274):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:500`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L500):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -28,8 +30,8 @@ use std::io::{Write, Read};
 ///         CString name4;
 ///         u32 item_display_info;
 ///         (u32)ItemQuality quality;
-///         u32 flags;
-///         u32 flags2;
+///         ItemFlag flags;
+///         ItemFlag2 flags2;
 ///         u32 buy_price;
 ///         u32 sell_price;
 ///         (u32)InventoryType inventory_type;
@@ -151,11 +153,11 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // quality: ItemQuality
             w.write_all(&(v.quality.as_int() as u32).to_le_bytes())?;
 
-            // flags: u32
-            w.write_all(&v.flags.to_le_bytes())?;
+            // flags: ItemFlag
+            w.write_all(&(v.flags.as_int() as u32).to_le_bytes())?;
 
-            // flags2: u32
-            w.write_all(&v.flags2.to_le_bytes())?;
+            // flags2: ItemFlag2
+            w.write_all(&(v.flags2.as_int() as u32).to_le_bytes())?;
 
             // buy_price: u32
             w.write_all(&v.buy_price.to_le_bytes())?;
@@ -392,11 +394,11 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // quality: ItemQuality
             let quality: ItemQuality = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
-            // flags: u32
-            let flags = crate::util::read_u32_le(r)?;
+            // flags: ItemFlag
+            let flags = ItemFlag::new(crate::util::read_u32_le(r)?);
 
-            // flags2: u32
-            let flags2 = crate::util::read_u32_le(r)?;
+            // flags2: ItemFlag2
+            let flags2 = ItemFlag2::new(crate::util::read_u32_le(r)?);
 
             // buy_price: u32
             let buy_price = crate::util::read_u32_le(r)?;
@@ -682,8 +684,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + found.name4.len() + 1 // name4: CString
             + 4 // item_display_info: u32
             + 4 // quality: ItemQuality
-            + 4 // flags: u32
-            + 4 // flags2: u32
+            + 4 // flags: ItemFlag
+            + 4 // flags2: ItemFlag2
             + 4 // buy_price: u32
             + 4 // sell_price: u32
             + 4 // inventory_type: InventoryType
@@ -759,8 +761,8 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub name4: String,
     pub item_display_info: u32,
     pub quality: ItemQuality,
-    pub flags: u32,
-    pub flags2: u32,
+    pub flags: ItemFlag,
+    pub flags2: ItemFlag2,
     pub buy_price: u32,
     pub sell_price: u32,
     pub inventory_type: InventoryType,
@@ -831,8 +833,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + self.name4.len() + 1 // name4: CString
         + 4 // item_display_info: u32
         + 4 // quality: ItemQuality
-        + 4 // flags: u32
-        + 4 // flags2: u32
+        + 4 // flags: ItemFlag
+        + 4 // flags2: ItemFlag2
         + 4 // buy_price: u32
         + 4 // sell_price: u32
         + 4 // inventory_type: InventoryType

@@ -8,6 +8,8 @@ use crate::wrath::{
     InventoryType,
     ItemClassAndSubClass,
     ItemDamageType,
+    ItemFlag,
+    ItemFlag2,
     ItemQuality,
     ItemSocket,
     ItemStat,
@@ -25,8 +27,8 @@ pub struct Item {
     pub name: &'static str,
     pub displayid: i32,
     pub quality: ItemQuality,
-    pub flags: i32,
-    pub flags2: i32,
+    pub flags: ItemFlag,
+    pub flags2: ItemFlag2,
     pub buy_count: i32,
     pub buy_price: i32,
     pub sell_price: i32,
@@ -103,8 +105,8 @@ impl Item {
         name: &'static str,
         displayid: i32,
         quality: ItemQuality,
-        flags: i32,
-        flags2: i32,
+        flags: ItemFlag,
+        flags2: ItemFlag2,
         buy_count: i32,
         buy_price: i32,
         sell_price: i32,
@@ -447,11 +449,11 @@ impl Item {
         self.quality
     }
 
-    pub const fn flags(&self) -> i32 {
+    pub const fn flags(&self) -> ItemFlag {
         self.flags
     }
 
-    pub const fn flags2(&self) -> i32 {
+    pub const fn flags2(&self) -> ItemFlag2 {
         self.flags2
     }
 

@@ -128,6 +128,11 @@ pub enum Value {
     VanillaAttributesEx2(vanilla_base::AttributesEx2),
     VanillaAttributesEx3(vanilla_base::AttributesEx3),
     VanillaAttributesEx4(vanilla_base::AttributesEx4),
+
+    VanillaItemFlag(vanilla_base::ItemFlag),
+    TbcItemFlag(tbc_base::ItemFlag),
+    WrathItemFlag(wrath_base::ItemFlag),
+    WrathItemFlag2(wrath_base::ItemFlag2),
 }
 
 impl Eq for Value {}
@@ -163,7 +168,11 @@ impl Value {
             | Value::VanillaAttributesEx1(_)
             | Value::VanillaAttributesEx2(_)
             | Value::VanillaAttributesEx3(_)
-            | Value::VanillaAttributesEx4(_) => "u32",
+            | Value::VanillaAttributesEx4(_)
+            | Value::VanillaItemFlag(_)
+            | Value::TbcItemFlag(_)
+            | Value::WrathItemFlag(_)
+            | Value::WrathItemFlag2(_) => "u32",
             _ => self.type_name(),
         }
     }
@@ -198,6 +207,10 @@ impl Value {
             Value::VanillaAttributesEx2(_) => "AttributesEx2",
             Value::VanillaAttributesEx3(_) => "AttributesEx3",
             Value::VanillaAttributesEx4(_) => "AttributesEx4",
+            Value::VanillaItemFlag(_) | Value::TbcItemFlag(_) | Value::WrathItemFlag(_) => {
+                "ItemFlag"
+            }
+            Value::WrathItemFlag2(_) => "ItemFlag2",
         }
     }
 
@@ -257,6 +270,10 @@ impl Value {
             Value::VanillaAttributesEx2(_) => "T",
             Value::VanillaAttributesEx3(_) => "U",
             Value::VanillaAttributesEx4(_) => "V",
+
+            Value::VanillaItemFlag(_) | Value::TbcItemFlag(_) | Value::WrathItemFlag(_) => "X",
+
+            Value::WrathItemFlag2(_) => "Y",
         }
     }
 
@@ -338,6 +355,10 @@ impl Value {
             Value::VanillaAttributesEx2(v) => v.as_int().to_string(),
             Value::VanillaAttributesEx3(v) => v.as_int().to_string(),
             Value::VanillaAttributesEx4(v) => v.as_int().to_string(),
+            Value::VanillaItemFlag(v) => v.as_int().to_string(),
+            Value::TbcItemFlag(v) => v.as_int().to_string(),
+            Value::WrathItemFlag(v) => v.as_int().to_string(),
+            Value::WrathItemFlag2(v) => v.as_int().to_string(),
         }
     }
 
@@ -352,7 +373,11 @@ impl Value {
             | Value::VanillaAttributesEx1(_)
             | Value::VanillaAttributesEx2(_)
             | Value::VanillaAttributesEx3(_)
-            | Value::VanillaAttributesEx4(_) => Some(format!("{}::new", self.type_name())),
+            | Value::VanillaAttributesEx4(_)
+            | Value::VanillaItemFlag(_)
+            | Value::TbcItemFlag(_)
+            | Value::WrathItemFlag(_)
+            | Value::WrathItemFlag2(_) => Some(format!("{}::new", self.type_name())),
             _ => None,
         }
     }
@@ -428,6 +453,10 @@ impl Value {
             Value::VanillaAttributesEx4(_) => {
                 Value::VanillaAttributesEx4(vanilla_base::AttributesEx4::empty())
             }
+            Value::VanillaItemFlag(_) => Value::VanillaItemFlag(vanilla_base::ItemFlag::empty()),
+            Value::TbcItemFlag(_) => Value::TbcItemFlag(tbc_base::ItemFlag::empty()),
+            Value::WrathItemFlag(_) => Value::WrathItemFlag(wrath_base::ItemFlag::empty()),
+            Value::WrathItemFlag2(_) => Value::WrathItemFlag2(wrath_base::ItemFlag2::empty()),
         }
     }
 }

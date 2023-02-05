@@ -139,6 +139,8 @@
 - [InventoryType](docs/inventorytype.md)
 - [ItemClass](docs/itemclass.md)
 - [ItemClassAndSubClass](docs/itemclassandsubclass.md)
+- [ItemFlag](docs/itemflag.md)
+- [ItemFlag2](docs/itemflag2.md)
 - [ItemQuality](docs/itemquality.md)
 - [ItemRefundResult](docs/itemrefundresult.md)
 - [ItemStatType](docs/itemstattype.md)

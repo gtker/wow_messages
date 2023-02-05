@@ -32,7 +32,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 name4: "".to_string(),
                 item_display_info: v.displayid as u32,
                 quality: v.quality,
-                flags: v.flags as u32,
+                flags: v.flags,
                 buy_price: v.buy_price as u32,
                 sell_price: v.sell_price as u32,
                 inventory_type: v.inventory_type,

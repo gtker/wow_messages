@@ -12,6 +12,8 @@ pub use wow_world_base::wrath::{
     Item,
     ItemClassAndSubClass,
     ItemDamageType,
+    ItemFlag,
+    ItemFlag2,
     ItemQuality,
     ItemSocket,
     ItemStat,

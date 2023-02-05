@@ -33,6 +33,8 @@ pub(crate) mod item_class_and_sub_class;
 pub use item_class_and_sub_class::*;
 pub(crate) mod item_damage_type;
 pub use item_damage_type::*;
+pub(crate) mod item_flag;
+pub use item_flag::*;
 pub(crate) mod item_quality;
 pub use item_quality::*;
 pub(crate) mod item_spells;

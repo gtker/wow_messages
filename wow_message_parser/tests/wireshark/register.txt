@@ -2134,6 +2134,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_item_flag,
+            { "Item Flag", "woww.item.flag",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_item_icon,
             { "Item Icon", "woww.item.icon",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,

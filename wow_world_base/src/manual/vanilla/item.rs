@@ -8,6 +8,7 @@ use crate::vanilla::{
     InventoryType,
     ItemClassAndSubClass,
     ItemDamageType,
+    ItemFlag,
     ItemQuality,
     Map,
     Skill,
@@ -22,7 +23,7 @@ pub struct Item {
     pub name: &'static str,
     pub displayid: i32,
     pub quality: ItemQuality,
-    pub flags: i32,
+    pub flags: ItemFlag,
     pub buy_count: i32,
     pub buy_price: i32,
     pub sell_price: i32,
@@ -92,7 +93,7 @@ impl Item {
         name: &'static str,
         displayid: i32,
         quality: ItemQuality,
-        flags: i32,
+        flags: ItemFlag,
         buy_count: i32,
         buy_price: i32,
         sell_price: i32,
@@ -363,7 +364,7 @@ impl Item {
         self.quality
     }
 
-    pub const fn flags(&self) -> i32 {
+    pub const fn flags(&self) -> ItemFlag {
         self.flags
     }
 

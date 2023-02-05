@@ -194,6 +194,8 @@ pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class_and_sub_class;
 pub use item_class_and_sub_class::*;
+pub(crate) mod item_flag;
+pub use item_flag::*;
 pub(crate) mod item_spells;
 pub use item_spells::*;
 pub(crate) mod item_stat;

@@ -2,8 +2,8 @@ use crate::base_printer::data::items;
 use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Value};
 use rusqlite::Connection;
 use wow_world_base::wrath::{
-    AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemQuality,
-    Map, Skill, SpellSchool, SpellTriggerType,
+    AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemFlag,
+    ItemFlag2, ItemQuality, Map, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct WrathItem {
@@ -13,8 +13,8 @@ pub struct WrathItem {
     pub name: String,
     pub displayid: i32,
     pub quality: ItemQuality,
-    pub flags: i32,
-    pub flags2: i32,
+    pub flags: ItemFlag,
+    pub flags2: ItemFlag2,
     pub buy_count: i32,
     pub buy_price: i32,
     pub sell_price: i32,
@@ -161,8 +161,8 @@ impl WrathItem {
             Field::new("name", Value::String(self.name.clone())),
             Field::new("displayid", Value::Int(self.displayid)),
             Field::new("quality", Value::WrathItemQuality(self.quality)),
-            Field::new("flags", Value::Int(self.flags)),
-            Field::new("flags2", Value::Int(self.flags2)),
+            Field::new("flags", Value::WrathItemFlag(self.flags)),
+            Field::new("flags2", Value::WrathItemFlag2(self.flags2)),
             Field::new("buy_count", Value::Int(self.buy_count)),
             Field::new("buy_price", Value::Int(self.buy_price)),
             Field::new("sell_price", Value::Int(self.sell_price)),
@@ -702,8 +702,8 @@ ORDER BY
                 name: row.get(4).unwrap(),
                 displayid: row.get(5).unwrap(),
                 quality: ItemQuality::try_from(row.get::<usize, u8>(6).unwrap()).unwrap(),
-                flags: row.get(7).unwrap(),
-                flags2: row.get(8).unwrap(),
+                flags: ItemFlag::new(row.get(7).unwrap()),
+                flags2: ItemFlag2::new(row.get(8).unwrap()),
                 buy_count: row.get(9).unwrap(),
                 buy_price: row.get(10).unwrap(),
                 sell_price: row.get(11).unwrap(),

@@ -4306,7 +4306,7 @@
                 add_cstring(ptv, &hf_woww_name);
                 ptvcursor_add(ptv, hf_woww_item_display_info, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_quality, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_flags, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_item_flag, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_buy_price, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_sell_price, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_inventory_type, 4, ENC_LITTLE_ENDIAN);

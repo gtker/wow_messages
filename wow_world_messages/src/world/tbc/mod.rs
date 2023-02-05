@@ -188,6 +188,8 @@ pub(crate) mod inventory_result;
 pub use inventory_result::*;
 pub(crate) mod item_class_and_sub_class;
 pub use item_class_and_sub_class::*;
+pub(crate) mod item_flag;
+pub use item_flag::*;
 pub(crate) mod lfg_data;
 pub use lfg_data::*;
 pub(crate) mod lfg_mode;

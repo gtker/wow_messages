@@ -3,8 +3,8 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use rusqlite::Connection;
 use wow_world_base::vanilla::{
-    AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemQuality,
-    Map, Skill, SpellSchool, SpellTriggerType,
+    AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemFlag,
+    ItemQuality, Map, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct VanillaItem {
@@ -13,7 +13,7 @@ pub struct VanillaItem {
     pub name: String,
     pub displayid: i32,
     pub quality: ItemQuality,
-    pub flags: i32,
+    pub flags: ItemFlag,
     pub buy_count: i32,
     pub buy_price: i32,
     pub sell_price: i32,
@@ -135,7 +135,7 @@ impl VanillaItem {
             Field::new("name", Value::String(self.name.clone())),
             Field::new("displayid", Value::Int(self.displayid)),
             Field::new("quality", Value::VanillaTbcItemQuality(self.quality)),
-            Field::new("flags", Value::Int(self.flags)),
+            Field::new("flags", Value::VanillaItemFlag(self.flags)),
             Field::new("buy_count", Value::Int(self.buy_count)),
             Field::new("buy_price", Value::Int(self.buy_price)),
             Field::new("sell_price", Value::Int(self.sell_price)),
@@ -615,7 +615,7 @@ FROM item_template ORDER BY entry;",
                 name: row.get(3).unwrap(),
                 displayid: row.get(4).unwrap(),
                 quality: ItemQuality::try_from(row.get::<usize, u8>(5).unwrap()).unwrap(),
-                flags: row.get(6).unwrap(),
+                flags: ItemFlag::new(row.get(6).unwrap()),
                 buy_count: row.get(7).unwrap(),
                 buy_price: row.get(8).unwrap(),
                 sell_price: row.get(9).unwrap(),
