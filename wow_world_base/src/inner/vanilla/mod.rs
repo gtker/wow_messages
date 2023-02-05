@@ -47,6 +47,8 @@ pub(crate) mod item_stat_type;
 pub use item_stat_type::*;
 pub(crate) mod map;
 pub use map::*;
+pub(crate) mod page_text_material;
+pub use page_text_material::*;
 pub(crate) mod power;
 pub use power::*;
 pub(crate) mod pvp_rank;

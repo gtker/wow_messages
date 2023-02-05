@@ -4,7 +4,8 @@ use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use rusqlite::Connection;
 use wow_world_base::vanilla::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, InventoryType, ItemClassAndSubClass,
-    ItemFlag, ItemQuality, Map, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
+    ItemFlag, ItemQuality, Map, PageTextMaterial, PvpRank, SheatheType, Skill, SpellSchool,
+    SpellTriggerType,
 };
 
 pub struct VanillaItem {
@@ -103,7 +104,7 @@ pub struct VanillaItem {
     pub description: String,
     pub page_text: i32,
     pub language_id: i32,
-    pub page_material: i32,
+    pub page_text_material: PageTextMaterial,
     pub start_quest: i32,
     pub lock_id: i32,
     pub material: i32,
@@ -187,7 +188,10 @@ impl VanillaItem {
             Field::new("description", Value::String(self.description)),
             Field::new("page_text", Value::Int(self.page_text)),
             Field::new("language_id", Value::Int(self.language_id)),
-            Field::new("page_material", Value::Int(self.page_material)),
+            Field::new(
+                "page_text_material",
+                Value::VanillaPageTextMaterial(self.page_text_material),
+            ),
             Field::new("start_quest", Value::Int(self.start_quest)),
             Field::new("lock_id", Value::Int(self.lock_id)),
             Field::new("material", Value::Int(self.material)),
@@ -713,7 +717,8 @@ FROM item_template ORDER BY entry;",
                 description: row.get(106).unwrap(),
                 page_text: row.get(107).unwrap(),
                 language_id: row.get(108).unwrap(),
-                page_material: row.get(109).unwrap(),
+                page_text_material: PageTextMaterial::try_from(row.get::<usize, u8>(109).unwrap())
+                    .unwrap(),
                 start_quest: row.get(110).unwrap(),
                 lock_id: row.get(111).unwrap(),
                 material: row.get(112).unwrap(),

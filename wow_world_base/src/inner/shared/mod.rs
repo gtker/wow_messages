@@ -23,6 +23,8 @@ pub mod item_socket_tbc_wrath;
 pub mod item_spells_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod item_stat_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod page_text_material_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod power_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

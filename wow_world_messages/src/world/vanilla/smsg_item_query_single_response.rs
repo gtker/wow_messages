@@ -9,6 +9,7 @@ use crate::vanilla::InventoryType;
 use crate::vanilla::ItemClassAndSubClass;
 use crate::vanilla::ItemQuality;
 use crate::vanilla::Map;
+use crate::vanilla::PageTextMaterial;
 use crate::vanilla::SheatheType;
 use crate::vanilla::Skill;
 use crate::vanilla::AllowedClass;
@@ -17,7 +18,7 @@ use crate::vanilla::ItemFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:158`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L158):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:185`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L185):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -64,7 +65,7 @@ use std::io::{Write, Read};
 ///         CString description;
 ///         u32 page_text;
 ///         u32 language_id;
-///         u32 page_material;
+///         (u32)PageTextMaterial page_text_material;
 ///         u32 start_quest;
 ///         u32 lock_id;
 ///         u32 material;
@@ -250,8 +251,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // language_id: u32
             w.write_all(&v.language_id.to_le_bytes())?;
 
-            // page_material: u32
-            w.write_all(&v.page_material.to_le_bytes())?;
+            // page_text_material: PageTextMaterial
+            w.write_all(&(v.page_text_material.as_int() as u32).to_le_bytes())?;
 
             // start_quest: u32
             w.write_all(&v.start_quest.to_le_bytes())?;
@@ -443,8 +444,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // language_id: u32
             let language_id = crate::util::read_u32_le(r)?;
 
-            // page_material: u32
-            let page_material = crate::util::read_u32_le(r)?;
+            // page_text_material: PageTextMaterial
+            let page_text_material: PageTextMaterial = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // start_quest: u32
             let start_quest = crate::util::read_u32_le(r)?;
@@ -522,7 +523,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 description,
                 page_text,
                 language_id,
-                page_material,
+                page_text_material,
                 start_quest,
                 lock_id,
                 material,
@@ -595,7 +596,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + found.description.len() + 1 // description: CString
             + 4 // page_text: u32
             + 4 // language_id: u32
-            + 4 // page_material: u32
+            + 4 // page_text_material: PageTextMaterial
             + 4 // start_quest: u32
             + 4 // lock_id: u32
             + 4 // material: u32
@@ -657,7 +658,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub description: String,
     pub page_text: u32,
     pub language_id: u32,
-    pub page_material: u32,
+    pub page_text_material: PageTextMaterial,
     pub start_quest: u32,
     pub lock_id: u32,
     pub material: u32,
@@ -715,7 +716,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + self.description.len() + 1 // description: CString
         + 4 // page_text: u32
         + 4 // language_id: u32
-        + 4 // page_material: u32
+        + 4 // page_text_material: PageTextMaterial
         + 4 // start_quest: u32
         + 4 // lock_id: u32
         + 4 // material: u32

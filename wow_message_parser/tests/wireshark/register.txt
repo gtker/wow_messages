@@ -2956,15 +2956,15 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_page_material,
-            { "Page Material", "woww.page.material",
+        { &hf_woww_page_text,
+            { "Page Text", "woww.page.text",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
-        { &hf_woww_page_text,
-            { "Page Text", "woww.page.text",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+        { &hf_woww_page_text_material,
+            { "Page Text Material", "woww.page.text.material",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_page_text_material_strings), 0,
                 NULL, HFILL
             }
         },

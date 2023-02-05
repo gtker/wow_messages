@@ -5653,6 +5653,26 @@ static const value_string e_bonding_strings[] =  {
 };
 
 typedef enum {
+    PAGE_TEXT_MATERIAL_NONE = 0x0,
+    PAGE_TEXT_MATERIAL_PARCHMENT = 0x1,
+    PAGE_TEXT_MATERIAL_STONE = 0x2,
+    PAGE_TEXT_MATERIAL_MARBLE = 0x3,
+    PAGE_TEXT_MATERIAL_SILVER = 0x4,
+    PAGE_TEXT_MATERIAL_BRONZE = 0x5,
+    PAGE_TEXT_MATERIAL_VALENTINE = 0x6,
+} e_page_text_material;
+static const value_string e_page_text_material_strings[] =  {
+    { PAGE_TEXT_MATERIAL_NONE, "None" },
+    { PAGE_TEXT_MATERIAL_PARCHMENT, "Parchment" },
+    { PAGE_TEXT_MATERIAL_STONE, "Stone" },
+    { PAGE_TEXT_MATERIAL_MARBLE, "Marble" },
+    { PAGE_TEXT_MATERIAL_SILVER, "Silver" },
+    { PAGE_TEXT_MATERIAL_BRONZE, "Bronze" },
+    { PAGE_TEXT_MATERIAL_VALENTINE, "Valentine" },
+    { 0, NULL }
+};
+
+typedef enum {
     SHEATHE_TYPE_NONE = 0x0,
     SHEATHE_TYPE_MAIN_HAND = 0x1,
     SHEATHE_TYPE_OFF_HAND = 0x2,

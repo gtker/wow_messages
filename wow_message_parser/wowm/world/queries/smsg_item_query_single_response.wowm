@@ -155,6 +155,33 @@ flag ItemFlag : u32 {
     versions = "1.12";
 }
 
+enum PageTextMaterial : u8 {
+    NONE = 0;
+    PARCHMENT = 1;
+    STONE = 2;
+    MARBLE = 3;
+    SILVER = 4;
+    BRONZE = 5;
+    VALENTINE = 6;
+} {
+    rust_base_type = "true";
+    versions = "1.12";
+}
+
+enum PageTextMaterial : u8 {
+    NONE = 0;
+    PARCHMENT = 1;
+    STONE = 2;
+    MARBLE = 3;
+    SILVER = 4;
+    BRONZE = 5;
+    VALENTINE = 6;
+    ILLIDAN = 7;
+} {
+    rust_base_type = "true";
+    versions = "2.4.3 3";
+}
+
 smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
     Item item;
     optional found {
@@ -206,7 +233,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString description;
         u32 page_text;
         u32 language_id;
-        u32 page_material;
+        (u32)PageTextMaterial page_text_material;
         u32 start_quest {
             comment = "cmangos/vmangos/mangoszero: id from QuestCache.wdb";
         }
@@ -389,7 +416,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString description;
         u32 page_text;
         u32 language_id;
-        u32 page_material;
+        (u32)PageTextMaterial page_text_material;
         u32 start_quest {
             comment = "cmangos/vmangos/mangoszero: id from QuestCache.wdb";
         }
@@ -609,7 +636,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString description;
         u32 page_text;
         u32 language_id;
-        u32 page_material;
+        (u32)PageTextMaterial page_text_material;
         u32 start_quest {
             comment = "cmangos/vmangos/mangoszero: id from QuestCache.wdb";
         }

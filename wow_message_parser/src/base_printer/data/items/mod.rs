@@ -140,6 +140,9 @@ pub enum Value {
 
     VanillaBagFamily(vanilla_base::BagFamily),
     TbcWrathBagFamily(shared_base::bag_family_tbc_wrath::BagFamily),
+
+    VanillaPageTextMaterial(vanilla_base::PageTextMaterial),
+    TbcWrathPageTextMaterial(shared_base::page_text_material_tbc_wrath::PageTextMaterial),
 }
 
 impl Eq for Value {}
@@ -222,6 +225,9 @@ impl Value {
             Value::PvpRank(_) => "PvpRank",
             Value::SheatheType(_) => "SheatheType",
             Value::VanillaBagFamily(_) | Value::TbcWrathBagFamily(_) => "BagFamily",
+            Value::VanillaPageTextMaterial(_) | Value::TbcWrathPageTextMaterial(_) => {
+                "PageTextMaterial"
+            }
         }
     }
 
@@ -291,6 +297,7 @@ impl Value {
 
             Value::SheatheType(_) => "AA",
             Value::VanillaBagFamily(_) | Value::TbcWrathBagFamily(_) => "AB",
+            Value::VanillaPageTextMaterial(_) | Value::TbcWrathPageTextMaterial(_) => "AC",
         }
     }
 
@@ -380,6 +387,12 @@ impl Value {
             Value::SheatheType(v) => format!("SheatheType::{v:?}"),
             Value::VanillaBagFamily(v) => format!("BagFamily::{v:?}"),
             Value::TbcWrathBagFamily(v) => v.as_int().to_string(),
+            Value::VanillaPageTextMaterial(v) => {
+                format!("PageTextMaterial::{v:?}")
+            }
+            Value::TbcWrathPageTextMaterial(v) => {
+                format!("PageTextMaterial::{v:?}")
+            }
         }
     }
 
@@ -489,6 +502,12 @@ impl Value {
             Value::TbcWrathBagFamily(_) => {
                 Value::TbcWrathBagFamily(shared_base::bag_family_tbc_wrath::BagFamily::empty())
             }
+            Value::VanillaPageTextMaterial(_) => {
+                Value::VanillaPageTextMaterial(vanilla_base::PageTextMaterial::None)
+            }
+            Value::TbcWrathPageTextMaterial(_) => Value::TbcWrathPageTextMaterial(
+                shared_base::page_text_material_tbc_wrath::PageTextMaterial::None,
+            ),
         }
     }
 }

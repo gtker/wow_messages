@@ -1813,6 +1813,8 @@ pub use wow_world_base::wrath::ItemSpells;
 
 pub use wow_world_base::wrath::ItemStat;
 
+pub use wow_world_base::wrath::PageTextMaterial;
+
 pub use wow_world_base::wrath::PvpRank;
 
 pub use wow_world_base::wrath::SheatheType;

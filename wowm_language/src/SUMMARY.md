@@ -178,6 +178,7 @@
 - [NewItemCreationType](docs/newitemcreationtype.md)
 - [NewItemSource](docs/newitemsource.md)
 - [ObjectType](docs/objecttype.md)
+- [PageTextMaterial](docs/pagetextmaterial.md)
 - [PartyOperation](docs/partyoperation.md)
 - [PartyResult](docs/partyresult.md)
 - [PartyRole](docs/partyrole.md)

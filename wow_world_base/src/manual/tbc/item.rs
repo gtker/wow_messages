@@ -14,6 +14,7 @@ use crate::tbc::{
     ItemSocket,
     ItemStat,
     Map,
+    PageTextMaterial,
     PvpRank,
     SheatheType,
     Skill,
@@ -62,7 +63,7 @@ pub struct Item {
     pub description: &'static str,
     pub page_text: i32,
     pub language_id: i32,
-    pub page_material: i32,
+    pub page_text_material: PageTextMaterial,
     pub start_quest: i32,
     pub lock_id: i32,
     pub material: i32,
@@ -134,7 +135,7 @@ impl Item {
         description: &'static str,
         page_text: i32,
         language_id: i32,
-        page_material: i32,
+        page_text_material: PageTextMaterial,
         start_quest: i32,
         lock_id: i32,
         material: i32,
@@ -276,7 +277,7 @@ impl Item {
             description,
             page_text,
             language_id,
-            page_material,
+            page_text_material,
             start_quest,
             lock_id,
             material,
@@ -589,8 +590,8 @@ impl Item {
         self.language_id
     }
 
-    pub const fn page_material(&self) -> i32 {
-        self.page_material
+    pub const fn page_text_material(&self) -> PageTextMaterial {
+        self.page_text_material
     }
 
     pub const fn start_quest(&self) -> i32 {

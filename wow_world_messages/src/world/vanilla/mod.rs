@@ -343,6 +343,8 @@ pub use object::*;
 pub(crate) mod object_type;
 pub use object_type::*;
 pub mod opcodes;
+pub(crate) mod page_text_material;
+pub use page_text_material::*;
 pub(crate) mod party_result;
 pub use party_result::*;
 pub(crate) mod petition_result;

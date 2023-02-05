@@ -1739,6 +1739,8 @@ pub use wow_world_base::tbc::ItemSpells;
 
 pub use wow_world_base::tbc::ItemStat;
 
+pub use wow_world_base::tbc::PageTextMaterial;
+
 pub use wow_world_base::tbc::Power;
 
 pub use wow_world_base::tbc::PvpRank;

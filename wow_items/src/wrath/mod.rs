@@ -19,6 +19,7 @@ pub use wow_world_base::wrath::{
     ItemSocket,
     ItemStat,
     Map,
+    PageTextMaterial,
     PvpRank,
     SheatheType,
     Skill,
