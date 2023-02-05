@@ -3,7 +3,7 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use rusqlite::Connection;
 use wow_world_base::wrath::{
     AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemFlag,
-    ItemFlag2, ItemQuality, Map, Skill, SpellSchool, SpellTriggerType,
+    ItemFlag2, ItemQuality, Map, PvpRank, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct WrathItem {
@@ -26,7 +26,7 @@ pub struct WrathItem {
     pub required_skill: Skill,
     pub required_skill_rank: i32,
     pub required_spell: i32,
-    pub required_honor_rank: i32,
+    pub required_honor_rank: PvpRank,
     pub required_city_rank: i32,
     pub required_reputation_faction: i32,
     pub required_reputation_rank: i32,
@@ -177,7 +177,10 @@ impl WrathItem {
             Field::new("required_skill", Value::WrathSkill(self.required_skill)),
             Field::new("required_skill_rank", Value::Int(self.required_skill_rank)),
             Field::new("required_spell", Value::Int(self.required_spell)),
-            Field::new("required_honor_rank", Value::Int(self.required_honor_rank)),
+            Field::new(
+                "required_honor_rank",
+                Value::PvpRank(self.required_honor_rank),
+            ),
             Field::new("required_city_rank", Value::Int(self.required_city_rank)),
             Field::new(
                 "required_reputation_faction",
@@ -715,7 +718,7 @@ ORDER BY
                 required_skill: Skill::try_from(row.get::<usize, u16>(17).unwrap()).unwrap(),
                 required_skill_rank: row.get(18).unwrap(),
                 required_spell: row.get(19).unwrap(),
-                required_honor_rank: row.get(20).unwrap(),
+                required_honor_rank: PvpRank::try_from(row.get::<usize, u8>(20).unwrap()).unwrap(),
                 required_city_rank: row.get(21).unwrap(),
                 required_reputation_faction: row.get(22).unwrap(),
                 required_reputation_rank: row.get(23).unwrap(),

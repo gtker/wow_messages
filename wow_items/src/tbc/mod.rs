@@ -17,6 +17,7 @@ pub use wow_world_base::tbc::{
     ItemSocket,
     ItemStat,
     Map,
+    PvpRank,
     Skill,
     SpellSchool,
     SpellTriggerType,

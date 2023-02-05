@@ -3,7 +3,7 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use rusqlite::Connection;
 use wow_world_base::tbc::{
     AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemFlag,
-    ItemQuality, Map, Skill, SpellSchool, SpellTriggerType,
+    ItemQuality, Map, PvpRank, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct TbcItem {
@@ -25,7 +25,7 @@ pub struct TbcItem {
     pub required_skill: Skill,
     pub required_skill_rank: i32,
     pub required_spell: i32,
-    pub required_honor_rank: i32,
+    pub required_honor_rank: PvpRank,
     pub required_city_rank: i32,
     pub required_reputation_faction: i32,
     pub required_reputation_rank: i32,
@@ -179,7 +179,10 @@ impl TbcItem {
             Field::new("required_skill", Value::TbcSkill(self.required_skill)),
             Field::new("required_skill_rank", Value::Int(self.required_skill_rank)),
             Field::new("required_spell", Value::Int(self.required_spell)),
-            Field::new("required_honor_rank", Value::Int(self.required_honor_rank)),
+            Field::new(
+                "required_honor_rank",
+                Value::PvpRank(self.required_honor_rank),
+            ),
             Field::new("required_city_rank", Value::Int(self.required_city_rank)),
             Field::new(
                 "required_reputation_faction",
@@ -726,7 +729,7 @@ ORDER BY
                 required_skill: Skill::try_from(row.get::<usize, u16>(16).unwrap()).unwrap(),
                 required_skill_rank: row.get(17).unwrap(),
                 required_spell: row.get(18).unwrap(),
-                required_honor_rank: row.get(19).unwrap(),
+                required_honor_rank: PvpRank::try_from(row.get::<usize, u8>(19).unwrap()).unwrap(),
                 required_city_rank: row.get(20).unwrap(),
                 required_reputation_faction: row.get(21).unwrap(),
                 required_reputation_rank: row.get(22).unwrap(),

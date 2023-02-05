@@ -15,6 +15,7 @@ pub use wow_world_base::vanilla::{
     ItemFlag,
     ItemQuality,
     Map,
+    PvpRank,
     Skill,
     SpellSchool,
     SpellTriggerType,

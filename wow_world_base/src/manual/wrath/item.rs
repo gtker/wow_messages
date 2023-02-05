@@ -14,6 +14,7 @@ use crate::wrath::{
     ItemSocket,
     ItemStat,
     Map,
+    PvpRank,
     Skill,
     SpellSchool,
     SpellTriggerType,
@@ -40,7 +41,7 @@ pub struct Item {
     pub required_skill: Skill,
     pub required_skill_rank: i32,
     pub required_spell: i32,
-    pub required_honor_rank: i32,
+    pub required_honor_rank: PvpRank,
     pub required_city_rank: i32,
     pub required_reputation_faction: i32,
     pub required_reputation_rank: i32,
@@ -118,7 +119,7 @@ impl Item {
         required_skill: Skill,
         required_skill_rank: i32,
         required_spell: i32,
-        required_honor_rank: i32,
+        required_honor_rank: PvpRank,
         required_city_rank: i32,
         required_reputation_faction: i32,
         required_reputation_rank: i32,
@@ -501,7 +502,7 @@ impl Item {
         self.required_spell
     }
 
-    pub const fn required_honor_rank(&self) -> i32 {
+    pub const fn required_honor_rank(&self) -> PvpRank {
         self.required_honor_rank
     }
 

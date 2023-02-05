@@ -18,6 +18,7 @@ pub use wow_world_base::wrath::{
     ItemSocket,
     ItemStat,
     Map,
+    PvpRank,
     Skill,
     SpellSchool,
     SpellTriggerType,

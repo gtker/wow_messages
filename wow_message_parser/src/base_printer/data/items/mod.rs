@@ -133,6 +133,8 @@ pub enum Value {
     TbcItemFlag(tbc_base::ItemFlag),
     WrathItemFlag(wrath_base::ItemFlag),
     WrathItemFlag2(wrath_base::ItemFlag2),
+
+    PvpRank(shared_base::pvp_rank_vanilla_tbc_wrath::PvpRank),
 }
 
 impl Eq for Value {}
@@ -211,6 +213,7 @@ impl Value {
                 "ItemFlag"
             }
             Value::WrathItemFlag2(_) => "ItemFlag2",
+            Value::PvpRank(_) => "PvpRank",
         }
     }
 
@@ -237,6 +240,7 @@ impl Value {
 
             Value::VanillaTbcItemQuality(_) => "H",
             Value::WrathItemQuality(_) => "H",
+
             Value::InventoryType(_) => "I",
 
             Value::VanillaTbcAllowedClass(_) => "J",
@@ -274,6 +278,8 @@ impl Value {
             Value::VanillaItemFlag(_) | Value::TbcItemFlag(_) | Value::WrathItemFlag(_) => "X",
 
             Value::WrathItemFlag2(_) => "Y",
+
+            Value::PvpRank(_) => "Z",
         }
     }
 
@@ -359,6 +365,7 @@ impl Value {
             Value::TbcItemFlag(v) => v.as_int().to_string(),
             Value::WrathItemFlag(v) => v.as_int().to_string(),
             Value::WrathItemFlag2(v) => v.as_int().to_string(),
+            Value::PvpRank(v) => format!("PvpRank::{v:?}"),
         }
     }
 
@@ -457,6 +464,9 @@ impl Value {
             Value::TbcItemFlag(_) => Value::TbcItemFlag(tbc_base::ItemFlag::empty()),
             Value::WrathItemFlag(_) => Value::WrathItemFlag(wrath_base::ItemFlag::empty()),
             Value::WrathItemFlag2(_) => Value::WrathItemFlag2(wrath_base::ItemFlag2::empty()),
+            Value::PvpRank(_) => {
+                Value::PvpRank(shared_base::pvp_rank_vanilla_tbc_wrath::PvpRank::NoRank)
+            }
         }
     }
 }
