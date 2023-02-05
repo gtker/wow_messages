@@ -41,6 +41,8 @@ pub(crate) mod pvp_rank;
 pub use pvp_rank::*;
 pub(crate) mod race;
 pub use race::*;
+pub(crate) mod sheathe_type;
+pub use sheathe_type::*;
 pub(crate) mod skill;
 pub use skill::*;
 pub(crate) mod spell_school;

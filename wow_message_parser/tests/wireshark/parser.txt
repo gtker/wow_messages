@@ -4365,7 +4365,7 @@
                 ptvcursor_add(ptv, hf_woww_start_quest, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_lock_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_material, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_sheath, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_sheathe_type, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_random_property, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_block, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_set, 4, ENC_LITTLE_ENDIAN);

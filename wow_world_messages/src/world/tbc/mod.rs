@@ -1741,6 +1741,8 @@ pub use wow_world_base::tbc::Power;
 
 pub use wow_world_base::tbc::PvpRank;
 
+pub use wow_world_base::tbc::SheatheType;
+
 pub use wow_world_base::tbc::SpellSchool;
 
 pub use wow_world_base::tbc::SpellTriggerType;

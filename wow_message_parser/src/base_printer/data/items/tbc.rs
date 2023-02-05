@@ -3,7 +3,7 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use rusqlite::Connection;
 use wow_world_base::tbc::{
     AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemFlag,
-    ItemQuality, Map, PvpRank, Skill, SpellSchool, SpellTriggerType,
+    ItemQuality, Map, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct TbcItem {
@@ -120,7 +120,7 @@ pub struct TbcItem {
     pub start_quest: i32,
     pub lock_id: i32,
     pub material: i32,
-    pub sheath: i32,
+    pub sheathe_type: SheatheType,
     pub random_property: i32,
     pub random_suffix: i32,
     pub block: i32,
@@ -213,7 +213,7 @@ impl TbcItem {
             Field::new("start_quest", Value::Int(self.start_quest)),
             Field::new("lock_id", Value::Int(self.lock_id)),
             Field::new("material", Value::Int(self.material)),
-            Field::new("sheath", Value::Int(self.sheath)),
+            Field::new("sheathe_type", Value::SheatheType(self.sheathe_type)),
             Field::new("random_property", Value::Int(self.random_property)),
             Field::new("random_suffix", Value::Int(self.random_suffix)),
             Field::new("block", Value::Int(self.block)),
@@ -829,7 +829,7 @@ ORDER BY
                 start_quest: row.get(111).unwrap(),
                 lock_id: row.get(112).unwrap(),
                 material: row.get(113).unwrap(),
-                sheath: row.get(114).unwrap(),
+                sheathe_type: SheatheType::try_from(row.get::<usize, u8>(114).unwrap()).unwrap(),
                 random_property: row.get(115).unwrap(),
                 random_suffix: row.get(116).unwrap(),
                 block: row.get(117).unwrap(),

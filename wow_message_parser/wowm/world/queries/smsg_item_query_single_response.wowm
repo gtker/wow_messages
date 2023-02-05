@@ -1,3 +1,17 @@
+enum SheatheType : u8 {
+    NONE = 0;
+    MAIN_HAND = 1;
+    OFF_HAND = 2;
+    LARGE_WEAPON_LEFT = 3;
+    LARGE_WEAPON_RIGHT = 4;
+    HIP_WEAPON_LEFT = 5;
+    HIP_WEAPON_RIGHT = 6;
+    SHIELD = 7;
+} {
+    rust_base_type = "true";
+    versions = "1 2 3";
+}
+
 enum SpellTriggerType : u8 {
     ON_USE = 0;
     ON_EQUIP = 1;
@@ -184,7 +198,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 material {
             comment = "cmangos/vmangos/mangoszero: id from Material.dbc";
         }
-        u32 sheath;
+        (u32)SheatheType sheathe_type;
         u32 random_property {
             comment = "cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc";
         }
@@ -345,7 +359,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 material {
             comment = "cmangos/vmangos/mangoszero: id from Material.dbc";
         }
-        u32 sheath;
+        (u32)SheatheType sheathe_type;
         u32 random_property {
             comment = "cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc";
         }
@@ -565,7 +579,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 material {
             comment = "cmangos/vmangos/mangoszero: id from Material.dbc";
         }
-        u32 sheath;
+        (u32)SheatheType sheathe_type;
         u32 random_property {
             comment = "cmangos/vmangos/mangoszero: id from ItemRandomProperties.dbc";
         }

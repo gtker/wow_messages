@@ -212,6 +212,7 @@
 - [SellItemResult](docs/sellitemresult.md)
 - [ServerMessageType](docs/servermessagetype.md)
 - [SheathState](docs/sheathstate.md)
+- [SheatheType](docs/sheathetype.md)
 - [SimpleSpellCastResult](docs/simplespellcastresult.md)
 - [Skill](docs/skill.md)
 - [SpamType](docs/spamtype.md)

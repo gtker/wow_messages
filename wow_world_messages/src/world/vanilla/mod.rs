@@ -1417,6 +1417,8 @@ pub use wow_world_base::vanilla::Power;
 
 pub use wow_world_base::vanilla::PvpRank;
 
+pub use wow_world_base::vanilla::SheatheType;
+
 pub use wow_world_base::vanilla::SpellSchool;
 
 pub use wow_world_base::vanilla::Vector2d;

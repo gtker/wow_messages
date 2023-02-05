@@ -14,6 +14,7 @@ use crate::tbc::{
     ItemStat,
     Map,
     PvpRank,
+    SheatheType,
     Skill,
     SpellSchool,
     SpellTriggerType,
@@ -64,7 +65,7 @@ pub struct Item {
     pub start_quest: i32,
     pub lock_id: i32,
     pub material: i32,
-    pub sheath: i32,
+    pub sheathe_type: SheatheType,
     pub random_property: i32,
     pub random_suffix: i32,
     pub block: i32,
@@ -136,7 +137,7 @@ impl Item {
         start_quest: i32,
         lock_id: i32,
         material: i32,
-        sheath: i32,
+        sheathe_type: SheatheType,
         random_property: i32,
         random_suffix: i32,
         block: i32,
@@ -278,7 +279,7 @@ impl Item {
             start_quest,
             lock_id,
             material,
-            sheath,
+            sheathe_type,
             random_property,
             random_suffix,
             block,
@@ -603,8 +604,8 @@ impl Item {
         self.material
     }
 
-    pub const fn sheath(&self) -> i32 {
-        self.sheath
+    pub const fn sheathe_type(&self) -> SheatheType {
+        self.sheathe_type
     }
 
     pub const fn random_property(&self) -> i32 {

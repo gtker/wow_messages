@@ -3748,15 +3748,15 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_sheath,
-            { "Sheath", "woww.sheath",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_sheath_state,
             { "Sheath State", "woww.sheath.state",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_sheath_state_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_sheathe_type,
+            { "Sheathe Type", "woww.sheathe.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_sheathe_type_strings), 0,
                 NULL, HFILL
             }
         },

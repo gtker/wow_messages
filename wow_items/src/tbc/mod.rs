@@ -18,6 +18,7 @@ pub use wow_world_base::tbc::{
     ItemStat,
     Map,
     PvpRank,
+    SheatheType,
     Skill,
     SpellSchool,
     SpellTriggerType,

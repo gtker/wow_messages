@@ -9,6 +9,7 @@ use crate::wrath::InventoryType;
 use crate::wrath::ItemClassAndSubClass;
 use crate::wrath::ItemQuality;
 use crate::wrath::Map;
+use crate::wrath::SheatheType;
 use crate::wrath::Skill;
 use crate::wrath::AllowedClass;
 use crate::wrath::AllowedRace;
@@ -17,7 +18,7 @@ use crate::wrath::ItemFlag2;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:500`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L500):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:514`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L514):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -73,7 +74,7 @@ use std::io::{Write, Read};
 ///         u32 start_quest;
 ///         u32 lock_id;
 ///         u32 material;
-///         u32 sheath;
+///         (u32)SheatheType sheathe_type;
 ///         u32 random_property;
 ///         u32 random_suffix;
 ///         u32 block;
@@ -292,8 +293,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // material: u32
             w.write_all(&v.material.to_le_bytes())?;
 
-            // sheath: u32
-            w.write_all(&v.sheath.to_le_bytes())?;
+            // sheathe_type: SheatheType
+            w.write_all(&(v.sheathe_type.as_int() as u32).to_le_bytes())?;
 
             // random_property: u32
             w.write_all(&v.random_property.to_le_bytes())?;
@@ -532,8 +533,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // material: u32
             let material = crate::util::read_u32_le(r)?;
 
-            // sheath: u32
-            let sheath = crate::util::read_u32_le(r)?;
+            // sheathe_type: SheatheType
+            let sheathe_type: SheatheType = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // random_property: u32
             let random_property = crate::util::read_u32_le(r)?;
@@ -639,7 +640,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 start_quest,
                 lock_id,
                 material,
-                sheath,
+                sheathe_type,
                 random_property,
                 random_suffix,
                 block,
@@ -727,7 +728,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // start_quest: u32
             + 4 // lock_id: u32
             + 4 // material: u32
-            + 4 // sheath: u32
+            + 4 // sheathe_type: SheatheType
             + 4 // random_property: u32
             + 4 // random_suffix: u32
             + 4 // block: u32
@@ -803,7 +804,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub start_quest: u32,
     pub lock_id: u32,
     pub material: u32,
-    pub sheath: u32,
+    pub sheathe_type: SheatheType,
     pub random_property: u32,
     pub random_suffix: u32,
     pub block: u32,
@@ -876,7 +877,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // start_quest: u32
         + 4 // lock_id: u32
         + 4 // material: u32
-        + 4 // sheath: u32
+        + 4 // sheathe_type: SheatheType
         + 4 // random_property: u32
         + 4 // random_suffix: u32
         + 4 // block: u32

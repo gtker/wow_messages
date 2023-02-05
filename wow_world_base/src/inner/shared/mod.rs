@@ -25,6 +25,8 @@ pub mod item_stat_tbc_wrath;
 pub mod power_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod pvp_rank_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod sheathe_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod spell_school_vanilla_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]

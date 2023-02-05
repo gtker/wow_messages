@@ -19,6 +19,7 @@ pub use wow_world_base::wrath::{
     ItemStat,
     Map,
     PvpRank,
+    SheatheType,
     Skill,
     SpellSchool,
     SpellTriggerType,

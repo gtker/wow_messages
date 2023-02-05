@@ -5653,6 +5653,28 @@ static const value_string e_bonding_strings[] =  {
 };
 
 typedef enum {
+    SHEATHE_TYPE_NONE = 0x0,
+    SHEATHE_TYPE_MAIN_HAND = 0x1,
+    SHEATHE_TYPE_OFF_HAND = 0x2,
+    SHEATHE_TYPE_LARGE_WEAPON_LEFT = 0x3,
+    SHEATHE_TYPE_LARGE_WEAPON_RIGHT = 0x4,
+    SHEATHE_TYPE_HIP_WEAPON_LEFT = 0x5,
+    SHEATHE_TYPE_HIP_WEAPON_RIGHT = 0x6,
+    SHEATHE_TYPE_SHIELD = 0x7,
+} e_sheathe_type;
+static const value_string e_sheathe_type_strings[] =  {
+    { SHEATHE_TYPE_NONE, "None" },
+    { SHEATHE_TYPE_MAIN_HAND, "Main Hand" },
+    { SHEATHE_TYPE_OFF_HAND, "Off Hand" },
+    { SHEATHE_TYPE_LARGE_WEAPON_LEFT, "Large Weapon Left" },
+    { SHEATHE_TYPE_LARGE_WEAPON_RIGHT, "Large Weapon Right" },
+    { SHEATHE_TYPE_HIP_WEAPON_LEFT, "Hip Weapon Left" },
+    { SHEATHE_TYPE_HIP_WEAPON_RIGHT, "Hip Weapon Right" },
+    { SHEATHE_TYPE_SHIELD, "Shield" },
+    { 0, NULL }
+};
+
+typedef enum {
     LOGOUT_RESULT_SUCCESS = 0x0,
     LOGOUT_RESULT_FAILURE_IN_COMBAT = 0x1,
     LOGOUT_RESULT_FAILURE_FROZEN_BY_GM = 0x2,

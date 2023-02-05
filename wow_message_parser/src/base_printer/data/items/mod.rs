@@ -135,6 +135,8 @@ pub enum Value {
     WrathItemFlag2(wrath_base::ItemFlag2),
 
     PvpRank(shared_base::pvp_rank_vanilla_tbc_wrath::PvpRank),
+
+    SheatheType(shared_base::sheathe_type_vanilla_tbc_wrath::SheatheType),
 }
 
 impl Eq for Value {}
@@ -214,6 +216,7 @@ impl Value {
             }
             Value::WrathItemFlag2(_) => "ItemFlag2",
             Value::PvpRank(_) => "PvpRank",
+            Value::SheatheType(_) => "SheatheType",
         }
     }
 
@@ -280,6 +283,8 @@ impl Value {
             Value::WrathItemFlag2(_) => "Y",
 
             Value::PvpRank(_) => "Z",
+
+            Value::SheatheType(_) => "AA",
         }
     }
 
@@ -366,6 +371,7 @@ impl Value {
             Value::WrathItemFlag(v) => v.as_int().to_string(),
             Value::WrathItemFlag2(v) => v.as_int().to_string(),
             Value::PvpRank(v) => format!("PvpRank::{v:?}"),
+            Value::SheatheType(v) => format!("SheatheType::{v:?}"),
         }
     }
 
@@ -466,6 +472,9 @@ impl Value {
             Value::WrathItemFlag2(_) => Value::WrathItemFlag2(wrath_base::ItemFlag2::empty()),
             Value::PvpRank(_) => {
                 Value::PvpRank(shared_base::pvp_rank_vanilla_tbc_wrath::PvpRank::NoRank)
+            }
+            Value::SheatheType(_) => {
+                Value::SheatheType(shared_base::sheathe_type_vanilla_tbc_wrath::SheatheType::None)
             }
         }
     }

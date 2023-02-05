@@ -4,7 +4,7 @@ use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use rusqlite::Connection;
 use wow_world_base::vanilla::{
     AllowedClass, AllowedRace, Area, Bonding, InventoryType, ItemClassAndSubClass, ItemFlag,
-    ItemQuality, Map, PvpRank, Skill, SpellSchool, SpellTriggerType,
+    ItemQuality, Map, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct VanillaItem {
@@ -107,7 +107,7 @@ pub struct VanillaItem {
     pub start_quest: i32,
     pub lock_id: i32,
     pub material: i32,
-    pub sheath: i32,
+    pub sheathe_type: SheatheType,
     pub random_property: i32,
     pub block: i32,
     pub itemset: i32,
@@ -191,7 +191,7 @@ impl VanillaItem {
             Field::new("start_quest", Value::Int(self.start_quest)),
             Field::new("lock_id", Value::Int(self.lock_id)),
             Field::new("material", Value::Int(self.material)),
-            Field::new("sheath", Value::Int(self.sheath)),
+            Field::new("sheathe_type", Value::SheatheType(self.sheathe_type)),
             Field::new("random_property", Value::Int(self.random_property)),
             Field::new("block", Value::Int(self.block)),
             Field::new("itemset", Value::Int(self.itemset)),
@@ -717,7 +717,7 @@ FROM item_template ORDER BY entry;",
                 start_quest: row.get(110).unwrap(),
                 lock_id: row.get(111).unwrap(),
                 material: row.get(112).unwrap(),
-                sheath: row.get(113).unwrap(),
+                sheathe_type: SheatheType::try_from(row.get::<usize, u8>(113).unwrap()).unwrap(),
                 random_property: row.get(114).unwrap(),
                 block: row.get(115).unwrap(),
                 itemset: row.get(116).unwrap(),

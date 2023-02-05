@@ -113,7 +113,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 start_quest: v.start_quest as u32,
                 lock_id: v.lock_id as u32,
                 material: v.material as u32,
-                sheath: v.sheath as u32,
+                sheathe_type: v.sheathe_type,
                 random_property: v.random_property as u32,
                 block: v.block as u32,
                 item_set: v.itemset as u32,
