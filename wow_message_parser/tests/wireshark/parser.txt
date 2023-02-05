@@ -4360,7 +4360,7 @@
                 ptvcursor_add(ptv, hf_woww_bonding, 4, ENC_LITTLE_ENDIAN);
                 add_cstring(ptv, &hf_woww_description);
                 ptvcursor_add(ptv, hf_woww_page_text, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_language_id, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_language, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_page_text_material, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_start_quest, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_lock_id, 4, ENC_LITTLE_ENDIAN);

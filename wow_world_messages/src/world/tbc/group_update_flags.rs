@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common_2_4_3.wowm:196`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common_2_4_3.wowm#L196):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common_2_4_3.wowm:197`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common_2_4_3.wowm#L197):
 /// ```text
 /// flag GroupUpdateFlags : u32 {
 ///     NONE = 0x00000000;

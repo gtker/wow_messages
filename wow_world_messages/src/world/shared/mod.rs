@@ -648,10 +648,6 @@ pub mod instance_reset_failed_reason_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod join_arena_type_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod language_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "vanilla"))]
-pub mod language_vanilla_vanilla;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod list_inventory_item_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod log_format_vanilla_tbc_wrath;

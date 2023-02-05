@@ -190,6 +190,7 @@ enum Language : u8 {
     GNOMISH_BINARY = 37;
     GOBLIN_BINARY  = 38;
 } {
+    rust_base_type = "true";
     versions = "3";
 }
 

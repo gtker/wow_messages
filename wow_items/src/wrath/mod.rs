@@ -18,6 +18,7 @@ pub use wow_world_base::wrath::{
     ItemQuality,
     ItemSocket,
     ItemStat,
+    Language,
     Map,
     PageTextMaterial,
     PvpRank,

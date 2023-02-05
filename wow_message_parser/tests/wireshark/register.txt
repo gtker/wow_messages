@@ -2320,12 +2320,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_language_id,
-            { "Language Id", "woww.language.id",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_last_week_honor,
             { "Last Week Honor", "woww.last.week.honor",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,

@@ -50,7 +50,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)Bonding bonding;
         CString description;
         u32 page_text;
-        u32 language_id;
+        (u32)Language language;
         (u32)PageTextMaterial page_text_material;
         u32 start_quest;
         u32 lock_id;
@@ -128,7 +128,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
-| - | 4 / Little | u32 | language_id |  |  |
+| - | 4 / - | [Language](language.md) | language |  |  |
 | - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |  |
 | - | 4 / Little | u32 | start_quest |  | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
 | - | 4 / Little | u32 | lock_id |  |  |
@@ -195,7 +195,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)Bonding bonding;
         CString description;
         u32 page_text;
-        u32 language_id;
+        (u32)Language language;
         (u32)PageTextMaterial page_text_material;
         u32 start_quest;
         u32 lock_id;
@@ -281,7 +281,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
-| - | 4 / Little | u32 | language_id |  |  |
+| - | 4 / - | [Language](language.md) | language |  |  |
 | - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |  |
 | - | 4 / Little | u32 | start_quest |  | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
 | - | 4 / Little | u32 | lock_id |  |  |
@@ -359,7 +359,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)Bonding bonding;
         CString description;
         u32 page_text;
-        u32 language_id;
+        (u32)Language language;
         (u32)PageTextMaterial page_text_material;
         u32 start_quest;
         u32 lock_id;
@@ -452,7 +452,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
-| - | 4 / Little | u32 | language_id |  |  |
+| - | 4 / - | [Language](language.md) | language |  |  |
 | - | 4 / - | [PageTextMaterial](pagetextmaterial.md) | page_text_material |  |  |
 | - | 4 / Little | u32 | start_quest |  | cmangos/vmangos/mangoszero: id from QuestCache.wdb |
 | - | 4 / Little | u32 | lock_id |  |  |

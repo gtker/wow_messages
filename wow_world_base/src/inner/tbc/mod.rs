@@ -35,6 +35,8 @@ pub(crate) mod item_spells;
 pub use item_spells::*;
 pub(crate) mod item_stat;
 pub use item_stat::*;
+pub(crate) mod language;
+pub use language::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod page_text_material;

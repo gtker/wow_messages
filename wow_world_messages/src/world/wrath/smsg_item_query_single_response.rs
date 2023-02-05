@@ -8,6 +8,7 @@ use crate::wrath::Bonding;
 use crate::wrath::InventoryType;
 use crate::wrath::ItemClassAndSubClass;
 use crate::wrath::ItemQuality;
+use crate::wrath::Language;
 use crate::wrath::Map;
 use crate::wrath::PageTextMaterial;
 use crate::wrath::SheatheType;
@@ -71,7 +72,7 @@ use std::io::{Write, Read};
 ///         (u32)Bonding bonding;
 ///         CString description;
 ///         u32 page_text;
-///         u32 language_id;
+///         (u32)Language language;
 ///         (u32)PageTextMaterial page_text_material;
 ///         u32 start_quest;
 ///         u32 lock_id;
@@ -280,8 +281,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // page_text: u32
             w.write_all(&v.page_text.to_le_bytes())?;
 
-            // language_id: u32
-            w.write_all(&v.language_id.to_le_bytes())?;
+            // language: Language
+            w.write_all(&(v.language.as_int() as u32).to_le_bytes())?;
 
             // page_text_material: PageTextMaterial
             w.write_all(&(v.page_text_material.as_int() as u32).to_le_bytes())?;
@@ -520,8 +521,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // page_text: u32
             let page_text = crate::util::read_u32_le(r)?;
 
-            // language_id: u32
-            let language_id = crate::util::read_u32_le(r)?;
+            // language: Language
+            let language: Language = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // page_text_material: PageTextMaterial
             let page_text_material: PageTextMaterial = (crate::util::read_u32_le(r)? as u8).try_into()?;
@@ -637,7 +638,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 bonding,
                 description,
                 page_text,
-                language_id,
+                language,
                 page_text_material,
                 start_quest,
                 lock_id,
@@ -725,7 +726,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // bonding: Bonding
             + found.description.len() + 1 // description: CString
             + 4 // page_text: u32
-            + 4 // language_id: u32
+            + 4 // language: Language
             + 4 // page_text_material: PageTextMaterial
             + 4 // start_quest: u32
             + 4 // lock_id: u32
@@ -801,7 +802,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub bonding: Bonding,
     pub description: String,
     pub page_text: u32,
-    pub language_id: u32,
+    pub language: Language,
     pub page_text_material: PageTextMaterial,
     pub start_quest: u32,
     pub lock_id: u32,
@@ -874,7 +875,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // bonding: Bonding
         + self.description.len() + 1 // description: CString
         + 4 // page_text: u32
-        + 4 // language_id: u32
+        + 4 // language: Language
         + 4 // page_text_material: PageTextMaterial
         + 4 // start_quest: u32
         + 4 // lock_id: u32

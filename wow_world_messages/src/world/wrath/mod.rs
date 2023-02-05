@@ -1201,8 +1201,6 @@ pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceR
 
 pub use crate::shared::join_arena_type_tbc_wrath::JoinArenaType;
 
-pub use crate::shared::language_tbc_wrath::Language;
-
 pub use crate::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
 
 pub use crate::shared::log_format_vanilla_tbc_wrath::LogFormat;
@@ -1812,6 +1810,8 @@ pub use wow_world_base::wrath::ItemSocket;
 pub use wow_world_base::wrath::ItemSpells;
 
 pub use wow_world_base::wrath::ItemStat;
+
+pub use wow_world_base::wrath::Language;
 
 pub use wow_world_base::wrath::PageTextMaterial;
 

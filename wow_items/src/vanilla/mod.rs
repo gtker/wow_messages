@@ -15,6 +15,7 @@ pub use wow_world_base::vanilla::{
     ItemDamageType,
     ItemFlag,
     ItemQuality,
+    Language,
     Map,
     PageTextMaterial,
     PvpRank,

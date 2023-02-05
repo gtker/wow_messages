@@ -3,7 +3,7 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use rusqlite::Connection;
 use wow_world_base::wrath::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, InventoryType, ItemClassAndSubClass,
-    ItemFlag, ItemFlag2, ItemQuality, Map, PageTextMaterial, PvpRank, SheatheType, Skill,
+    ItemFlag, ItemFlag2, ItemQuality, Language, Map, PageTextMaterial, PvpRank, SheatheType, Skill,
     SpellSchool, SpellTriggerType,
 };
 
@@ -111,7 +111,7 @@ pub struct WrathItem {
     pub bonding: Bonding,
     pub description: String,
     pub page_text: i32,
-    pub language_id: i32,
+    pub language: Language,
     pub page_text_material: PageTextMaterial,
     pub start_quest: i32,
     pub lock_id: i32,
@@ -213,7 +213,7 @@ impl WrathItem {
             Field::new("bonding", Value::Bonding(self.bonding)),
             Field::new("description", Value::String(self.description)),
             Field::new("page_text", Value::Int(self.page_text)),
-            Field::new("language_id", Value::Int(self.language_id)),
+            Field::new("language", Value::TbcWrathLanguage(self.language)),
             Field::new(
                 "page_text_material",
                 Value::TbcWrathPageTextMaterial(self.page_text_material),
@@ -811,7 +811,7 @@ ORDER BY
                 bonding: Bonding::try_from(row.get::<usize, u8>(101).unwrap()).unwrap(),
                 description: row.get(102).unwrap(),
                 page_text: row.get(103).unwrap(),
-                language_id: row.get(104).unwrap(),
+                language: Language::try_from(row.get::<usize, u8>(104).unwrap()).unwrap(),
                 page_text_material: PageTextMaterial::try_from(row.get::<usize, u8>(105).unwrap())
                     .unwrap(),
                 start_quest: row.get(106).unwrap(),

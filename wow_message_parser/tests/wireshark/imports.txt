@@ -385,7 +385,6 @@ static int hf_woww_kill_count = -1;
 static int hf_woww_killing_blows = -1;
 static int hf_woww_lag = -1;
 static int hf_woww_language = -1;
-static int hf_woww_language_id = -1;
 static int hf_woww_last_week_honor = -1;
 static int hf_woww_last_week_honorable = -1;
 static int hf_woww_leader = -1;

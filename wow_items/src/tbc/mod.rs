@@ -17,6 +17,7 @@ pub use wow_world_base::tbc::{
     ItemQuality,
     ItemSocket,
     ItemStat,
+    Language,
     Map,
     PageTextMaterial,
     PvpRank,

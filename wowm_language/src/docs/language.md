@@ -49,6 +49,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
 * [NpcTextUpdate](npctextupdate.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 
 # Language
@@ -112,6 +113,8 @@ Used in:
 * [NpcTextUpdate](npctextupdate.md)
 * [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
 * [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 

@@ -24,6 +24,10 @@ pub mod item_spells_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod item_stat_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod language_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "vanilla"))]
+pub mod language_vanilla_vanilla;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod page_text_material_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod power_vanilla_tbc;

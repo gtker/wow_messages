@@ -148,7 +148,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 bonding: v.bonding,
                 description: v.description.to_string(),
                 page_text: v.page_text as u32,
-                language_id: v.language_id as u32,
+                language: v.language,
                 page_text_material: v.page_text_material,
                 start_quest: v.start_quest as u32,
                 lock_id: v.lock_id as u32,

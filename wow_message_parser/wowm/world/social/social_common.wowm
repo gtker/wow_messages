@@ -80,6 +80,7 @@ enum Language : u32 {
     GUTTERSPEAK    = 33;
     ADDON          = 0xFFFFFFFF;
 } {
+    rust_base_type = "true";
     versions = "1";
 }
 

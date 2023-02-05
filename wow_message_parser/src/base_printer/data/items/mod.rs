@@ -143,6 +143,9 @@ pub enum Value {
 
     VanillaPageTextMaterial(vanilla_base::PageTextMaterial),
     TbcWrathPageTextMaterial(shared_base::page_text_material_tbc_wrath::PageTextMaterial),
+
+    VanillaLanguage(vanilla_base::Language),
+    TbcWrathLanguage(shared_base::language_tbc_wrath::Language),
 }
 
 impl Eq for Value {}
@@ -228,6 +231,7 @@ impl Value {
             Value::VanillaPageTextMaterial(_) | Value::TbcWrathPageTextMaterial(_) => {
                 "PageTextMaterial"
             }
+            Value::VanillaLanguage(_) | Value::TbcWrathLanguage(_) => "Language",
         }
     }
 
@@ -296,8 +300,12 @@ impl Value {
             Value::PvpRank(_) => "Z",
 
             Value::SheatheType(_) => "AA",
+
             Value::VanillaBagFamily(_) | Value::TbcWrathBagFamily(_) => "AB",
+
             Value::VanillaPageTextMaterial(_) | Value::TbcWrathPageTextMaterial(_) => "AC",
+
+            Value::VanillaLanguage(_) | Value::TbcWrathLanguage(_) => "AD",
         }
     }
 
@@ -393,6 +401,8 @@ impl Value {
             Value::TbcWrathPageTextMaterial(v) => {
                 format!("PageTextMaterial::{v:?}")
             }
+            Value::VanillaLanguage(v) => format!("Language::{v:?}"),
+            Value::TbcWrathLanguage(v) => format!("Language::{v:?}"),
         }
     }
 
@@ -508,6 +518,10 @@ impl Value {
             Value::TbcWrathPageTextMaterial(_) => Value::TbcWrathPageTextMaterial(
                 shared_base::page_text_material_tbc_wrath::PageTextMaterial::None,
             ),
+            Value::VanillaLanguage(_) => Value::VanillaLanguage(vanilla_base::Language::Universal),
+            Value::TbcWrathLanguage(_) => {
+                Value::TbcWrathLanguage(shared_base::language_tbc_wrath::Language::Universal)
+            }
         }
     }
 }
