@@ -282,56 +282,56 @@ impl Value {
             Value::Uint64(v) => (*v).to_string(),
             Value::Float(v) => float_format(*v),
             Value::VanillaItemClassAndSubClass(v) => {
-                format!("ItemClassAndSubClass::{:?}", v)
+                format!("ItemClassAndSubClass::{v:?}")
             }
             Value::TbcItemClassAndSubClass(v) => {
-                format!("ItemClassAndSubClass::{:?}", v)
+                format!("ItemClassAndSubClass::{v:?}")
             }
-            Value::WrathItemClassAndSubClass(v) => format!("ItemClassAndSubClass::{:?}", v),
+            Value::WrathItemClassAndSubClass(v) => format!("ItemClassAndSubClass::{v:?}"),
             Value::VanillaTbcItemQuality(v) => {
-                format!("ItemQuality::{:?}", v)
+                format!("ItemQuality::{v:?}")
             }
             Value::WrathItemQuality(v) => {
-                format!("ItemQuality::{:?}", v)
+                format!("ItemQuality::{v:?}")
             }
-            Value::InventoryType(v) => format!("InventoryType::{:?}", v),
+            Value::InventoryType(v) => format!("InventoryType::{v:?}"),
             Value::VanillaTbcAllowedClass(v) => v.as_int().to_string(),
             Value::WrathAllowedClass(v) => v.as_int().to_string(),
             Value::VanillaAllowedRace(v) => v.as_int().to_string(),
             Value::TbcAllowedRace(v) => v.as_int().to_string(),
             Value::WrathAllowedRace(v) => v.as_int().to_string(),
-            Value::SpellSchool(v) => format!("SpellSchool::{:?}", v),
+            Value::SpellSchool(v) => format!("SpellSchool::{v:?}"),
             Value::VanillaSpellTriggerType(v) => {
-                format!("SpellTriggerType::{:?}", v)
+                format!("SpellTriggerType::{v:?}")
             }
             Value::TbcWrathSpellTriggerType(v) => {
-                format!("SpellTriggerType::{:?}", v)
+                format!("SpellTriggerType::{v:?}")
             }
-            Value::Bonding(v) => format!("Bonding::{:?}", v),
+            Value::Bonding(v) => format!("Bonding::{v:?}"),
             Value::VanillaSkill(v) => {
-                format!("Skill::{:?}", v)
+                format!("Skill::{v:?}")
             }
             Value::TbcSkill(v) => {
-                format!("Skill::{:?}", v)
+                format!("Skill::{v:?}")
             }
             Value::WrathSkill(v) => {
-                format!("Skill::{:?}", v)
+                format!("Skill::{v:?}")
             }
             Value::VanillaMap(v) => {
-                format!("Map::{:?}", v)
+                format!("Map::{v:?}")
             }
             Value::TbcMap(v) => {
-                format!("Map::{:?}", v)
+                format!("Map::{v:?}")
             }
-            Value::WrathMap(v) => format!("Map::{:?}", v),
+            Value::WrathMap(v) => format!("Map::{v:?}"),
             Value::VanillaArea(v) => {
-                format!("Area::{:?}", v)
+                format!("Area::{v:?}")
             }
             Value::TbcArea(v) => {
-                format!("Area::{:?}", v)
+                format!("Area::{v:?}")
             }
             Value::WrathArea(v) => {
-                format!("Area::{:?}", v)
+                format!("Area::{v:?}")
             }
             Value::VanillaAttributes(v) => v.as_int().to_string(),
             Value::VanillaAttributesEx1(v) => v.as_int().to_string(),

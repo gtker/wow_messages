@@ -90,7 +90,7 @@ pub(crate) fn includes(
     }
 
     for e in set {
-        s.wln(format!("{},", e));
+        s.wln(format!("{e},"));
     }
 
     s.dec_indent();
