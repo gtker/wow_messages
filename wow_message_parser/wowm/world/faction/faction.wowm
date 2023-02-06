@@ -1,0 +1,1604 @@
+enum Faction : u16 {
+    NONE = 0;
+    PLAYER_HUMAN = 1 {
+        display = "PLAYER, Human";
+    }
+    PLAYER_ORC = 2 {
+        display = "PLAYER, Orc";
+    }
+    PLAYER_DWARF = 3 {
+        display = "PLAYER, Dwarf";
+    }
+    PLAYER_NIGHT_ELF = 4 {
+        display = "PLAYER, Night Elf";
+    }
+    PLAYER_UNDEAD = 5 {
+        display = "PLAYER, Undead";
+    }
+    PLAYER_TAUREN = 6 {
+        display = "PLAYER, Tauren";
+    }
+    CREATURE = 7;
+    PLAYER_GNOME = 8 {
+        display = "PLAYER, Gnome";
+    }
+    PLAYER_TROLL = 9 {
+        display = "PLAYER, Troll";
+    }
+    MONSTER = 14;
+    DEFIAS_BROTHERHOOD = 15;
+    GNOLL_RIVERPAW = 16 {
+        display = "Gnoll - Riverpaw";
+    }
+    GNOLL_REDRIDGE = 17 {
+        display = "Gnoll - Redridge";
+    }
+    GNOLL_SHADOWHIDE = 18 {
+        display = "Gnoll - Shadowhide";
+    }
+    MURLOC = 19;
+    UNDEAD_SCOURGE = 20 {
+        display = "Undead, Scourge";
+    }
+    BOOTY_BAY = 21;
+    BEAST_SPIDER = 22 {
+        display = "Beast - Spider";
+    }
+    BEAST_BOAR = 23 {
+        display = "Beast - Boar";
+    }
+    WORGEN = 24;
+    KOBOLD = 25;
+    TROLL_BLOODSCALP = 26 {
+        display = "Troll, Bloodscalp";
+    }
+    TROLL_SKULLSPLITTER = 27 {
+        display = "Troll, Skullsplitter";
+    }
+    PREY = 28;
+    BEAST_WOLF = 29 {
+        display = "Beast - Wolf";
+    }
+    DEFIAS_BROTHERHOOD_TRAITOR = 30;
+    FRIENDLY = 31;
+    TROGG = 32;
+    TROLL_FROSTMANE = 33 {
+        display = "Troll, Frostmane";
+    }
+    ORC_BLACKROCK = 34 {
+        display = "Orc, Blackrock";
+    }
+    VILLIAN = 35;
+    VICTIM = 36;
+    BEAST_BEAR = 37 {
+        display = "Beast - Bear";
+    }
+    OGRE = 38;
+    KURZENS_MERCENARIES = 39 {
+        display = "Kurzen's Mercenaries";
+    }
+    ESCORTEE = 40;
+    VENTURE_COMPANY = 41;
+    BEAST_RAPTOR = 42 {
+        display = "Beast - Raptor";
+    }
+    BASILISK = 43;
+    DRAGONFLIGHT_GREEN = 44 {
+        display = "Dragonflight, Green";
+    }
+    LOST_ONES = 45;
+    BLACKSMITHING_ARMORSMITHING = 46 {
+        display = "Blacksmithing - Armorsmithing";
+    }
+    IRONFORGE = 47;
+    DARK_IRON_DWARVES = 48;
+    HUMAN_NIGHT_WATCH = 49 {
+        display = "Human, Night Watch";
+    }
+    DRAGONFLIGHT_RED = 50 {
+        display = "Dragonflight, Red";
+    }
+    GNOLL_MOSSHIDE = 51 {
+        display = "Gnoll - Mosshide";
+    }
+    ORC_DRAGONMAW = 52 {
+        display = "Orc, Dragonmaw";
+    }
+    GNOME_LEPER = 53 {
+        display = "Gnome - Leper";
+    }
+    GNOMEREGAN_EXILES = 54;
+    LEOPARD = 55;
+    SCARLET_CRUSADE = 56;
+    GNOLL_ROTHIDE = 57 {
+        display = "Gnoll - Rothide";
+    }
+    BEAST_GORILLA = 58 {
+        display = "Beast - Gorilla";
+    }
+    THORIUM_BROTHERHOOD = 59;
+    NAGA = 60;
+    DALARAN = 61;
+    FORLORN_SPIRIT = 62;
+    DARKHOWL = 63;
+    GRELL = 64;
+    FURBOLG = 65;
+    HORDE_GENERIC = 66;
+    HORDE = 67;
+    UNDERCITY = 68;
+    DARNASSUS = 69;
+    SYNDICATE = 70;
+    HILLSBRAD_MILITIA = 71;
+    STORMWIND = 72;
+    DEMON = 73;
+    ELEMENTAL = 74;
+    SPIRIT = 75;
+    ORGRIMMAR = 76;
+    TREASURE = 77;
+    GNOLL_MUDSNOUT = 78 {
+        display = "Gnoll - Mudsnout";
+    }
+    HILLSBRAD_SOUTHSHORE_MAYOR = 79 {
+        display = "HIllsbrad, Southshore Mayor";
+    }
+    DRAGONFLIGHT_BLACK = 80 {
+        display = "Dragonflight, Black";
+    }
+    THUNDER_BLUFF = 81;
+    TROLL_WITHERBARK = 82 {
+        display = "Troll, Witherbark";
+    }
+    LEATHERWORKING_ELEMENTAL = 83 {
+        display = "Leatherworking - Elemental";
+    }
+    QUILBOAR_RAZORMANE = 84 {
+        display = "Quilboar, Razormane";
+    }
+    QUILBOAR_BRISTLEBACK = 85 {
+        display = "Quilboar, Bristleback";
+    }
+    LEATHERWORKING_DRAGONSCALE = 86 {
+        display = "Leatherworking - Dragonscale";
+    }
+    BLOODSAIL_BUCCANEERS = 87;
+    BLACKFATHOM = 88;
+    MAKRURA = 89;
+    CENTAUR_KOLKAR = 90 {
+        display = "Centaur, Kolkar";
+    }
+    CENTAUR_GALAK = 91 {
+        display = "Centaur, Galak";
+    }
+    GELKIS_CLAN_CENTAUR = 92;
+    MAGRAM_CLAN_CENTAUR = 93;
+    MARAUDINE = 94;
+    THERAMORE = 108;
+    QUILBOAR_RAZORFEN = 109 {
+        display = "Quilboar, Razorfen";
+    }
+    QUILBOAR_RAZORMANE_2 = 110 {
+        display = "Quilboar, Razormane 2";
+    }
+    QUILBOAR_DEATHSHEAD = 111 {
+        display = "Quilboar, Deathshead";
+    }
+    ENEMY = 128;
+    AMBIENT = 148;
+    NETHERGARDE_CARAVAN = 168;
+    STEAMWHEEDLE_CARTEL = 169;
+    ALLIANCE_GENERIC = 189;
+    NETHERGARDE = 209;
+    WAILING_CAVERNS = 229;
+    SILITHID = 249;
+    SILVERMOON_REMNANT = 269;
+    ZANDALAR_TRIBE = 270;
+    BLACKSMITHING_WEAPONSMITHING = 289 {
+        display = "Blacksmithing - Weaponsmithing";
+    }
+    SCORPID = 309;
+    BEAST_BAT = 310 {
+        display = "Beast - Bat";
+    }
+    TITAN = 311;
+    TASKMASTER_FIZZULE = 329;
+    RAVENHOLDT = 349;
+    GADGETZAN = 369;
+    GNOMEREGAN_BUG = 389;
+    HARPY = 409;
+    BURNING_BLADE = 429;
+    SHADOWSILK_POACHER = 449;
+    SEARING_SPIDER = 450;
+    ALLIANCE = 469;
+    RATCHET = 470;
+    WILDHAMMER_CLAN = 471;
+    GOBLIN_DARK_IRON_BAR_PATRON = 489 {
+        display = "Goblin, Dark Iron Bar Patron";
+    }
+    THE_LEAGUE_OF_ARATHOR = 509;
+    THE_DEFILERS = 510;
+    GIANT = 511;
+    ARGENT_DAWN = 529;
+    DARKSPEAR_TROLLS = 530;
+    DRAGONFLIGHT_BRONZE = 531 {
+        display = "Dragonflight, Bronze";
+    }
+    DRAGONFLIGHT_BLUE = 532 {
+        display = "Dragonflight, Blue";
+    }
+    LEATHERWORKING_TRIBAL = 549 {
+        display = "Leatherworking - Tribal";
+    }
+    ENGINEERING_GOBLIN = 550 {
+        display = "Engineering - Goblin";
+    }
+    ENGINEERING_GNOME = 551 {
+        display = "Engineering - Gnome";
+    }
+    BLACKSMITHING_HAMMERSMITHING = 569 {
+        display = "Blacksmithing - Hammersmithing";
+    }
+    BLACKSMITHING_AXESMITHING = 570 {
+        display = "Blacksmithing - Axesmithing";
+    }
+    BLACKSMITHING_SWORDSMITHING = 571 {
+        display = "Blacksmithing - Swordsmithing";
+    }
+    TROLL_VILEBRANCH = 572 {
+        display = "Troll, Vilebranch";
+    }
+    SOUTHSEA_FREEBOOTERS = 573;
+    CAER_DARROW = 574;
+    FURBOLG_UNCORRUPTED = 575 {
+        display = "Furbolg, Uncorrupted";
+    }
+    TIMBERMAW_HOLD = 576;
+    EVERLOOK = 577;
+    WINTERSABER_TRAINERS = 589;
+    CENARION_CIRCLE = 609;
+    SHATTERSPEAR_TROLLS = 629;
+    RAVASAUR_TRAINERS = 630;
+    MAJORDOMO_EXECUTUS = 649;
+    BEAST_CARRION_BIRD = 669 {
+        display = "Beast - Carrion Bird";
+    }
+    BEAST_CAT = 670 {
+        display = "Beast - Cat";
+    }
+    BEAST_CRAB = 671 {
+        display = "Beast - Crab";
+    }
+    BEAST_CROCILISK = 672 {
+        display = "Beast - Crocilisk";
+    }
+    BEAST_HYENA = 673 {
+        display = "Beast - Hyena";
+    }
+    BEAST_OWL = 674 {
+        display = "Beast - Owl";
+    }
+    BEAST_SCORPID = 675 {
+        display = "Beast - Scorpid";
+    }
+    BEAST_TALLSTRIDER = 676 {
+        display = "Beast - Tallstrider";
+    }
+    BEAST_TURTLE = 677 {
+        display = "Beast - Turtle";
+    }
+    BEAST_WIND_SERPENT = 678 {
+        display = "Beast - Wind Serpent";
+    }
+    TRAINING_DUMMY = 679;
+    DRAGONFLIGHT_BLACK_BAIT = 689 {
+        display = "Dragonflight, Black - Bait";
+    }
+    BATTLEGROUND_NEUTRAL = 709;
+    FROSTWOLF_CLAN = 729;
+    STORMPIKE_GUARD = 730;
+    HYDRAXIAN_WATERLORDS = 749;
+    SULFURON_FIRELORDS = 750;
+    GIZLOCKS_DUMMY = 769 {
+        display = "Gizlock's Dummy";
+    }
+    GIZLOCKS_CHARM = 770 {
+        display = "Gizlock's Charm";
+    }
+    GIZLOCK = 771;
+    MORO_GAI = 789 {
+        display = "Moro'gai";
+    }
+    SPIRIT_GUIDE_ALLIANCE = 790 {
+        display = "Spirit Guide - Alliance";
+    }
+    SHEN_DRALAR = 809 {
+        display = "Shen'dralar";
+    }
+    OGRE_CAPTAIN_KROMCRUSH = 829 {
+        display = "Ogre (Captain Kromcrush)";
+    }
+    SPIRIT_GUIDE_HORDE = 849 {
+        display = "Spirit Guide - Horde";
+    }
+    JAEDENAR = 869;
+    WARSONG_OUTRIDERS = 889;
+    SILVERWING_SENTINELS = 890;
+    ALLIANCE_FORCES = 891;
+    HORDE_FORCES = 892;
+    REVANTUSK_TROLLS = 893;
+    DARKMOON_FAIRE = 909;
+    BROOD_OF_NOZDORMU = 910;
+    MIGHT_OF_KALIMDOR = 912;
+    ARMIES_OF_C_THUN = 915 {
+        display = "Armies of C'Thun";
+    }
+    SILITHID_ATTACKERS = 916;
+    THE_IRONFORGE_BRIGADE = 917;
+    RC_ENEMIES = 918;
+    RC_OBJECTS = 919;
+    RED = 920;
+    BLUE = 921;
+    SCOURGE_INVADERS = 928;
+    TEST_FACTION_NOT_A_REAL_FACTION = 931 {
+        display = "Test Faction (not a real faction)";
+    }
+    TOWOW_FLAG = 950 {
+        display = "ToWoW - Flag";
+    }
+    TOWOW_FLAG_TRIGGER_ALLIANCE_DND = 951 {
+        display = "ToWoW - Flag Trigger Alliance (DND)";
+    }
+    TOWOW_FLAG_TRIGGER_HORDE_DND = 954 {
+        display = "ToWoW - Flag Trigger Horde (DND)";
+    }
+} {
+    rust_base_type = "true";
+    versions = "1.12";
+}
+
+enum Faction : u16 {
+    NONE = 0;
+    PLAYER_HUMAN = 1 {
+        display = "PLAYER, Human";
+    }
+    PLAYER_ORC = 2 {
+        display = "PLAYER, Orc";
+    }
+    PLAYER_DWARF = 3 {
+        display = "PLAYER, Dwarf";
+    }
+    PLAYER_NIGHT_ELF = 4 {
+        display = "PLAYER, Night Elf";
+    }
+    PLAYER_UNDEAD = 5 {
+        display = "PLAYER, Undead";
+    }
+    PLAYER_TAUREN = 6 {
+        display = "PLAYER, Tauren";
+    }
+    CREATURE = 7;
+    PLAYER_GNOME = 8 {
+        display = "PLAYER, Gnome";
+    }
+    PLAYER_TROLL = 9 {
+        display = "PLAYER, Troll";
+    }
+    MONSTER = 14;
+    DEFIAS_BROTHERHOOD = 15;
+    GNOLL_RIVERPAW = 16 {
+        display = "Gnoll - Riverpaw";
+    }
+    GNOLL_REDRIDGE = 17 {
+        display = "Gnoll - Redridge";
+    }
+    GNOLL_SHADOWHIDE = 18 {
+        display = "Gnoll - Shadowhide";
+    }
+    MURLOC = 19;
+    UNDEAD_SCOURGE = 20 {
+        display = "Undead, Scourge";
+    }
+    BOOTY_BAY = 21;
+    BEAST_SPIDER = 22 {
+        display = "Beast - Spider";
+    }
+    BEAST_BOAR = 23 {
+        display = "Beast - Boar";
+    }
+    WORGEN = 24;
+    KOBOLD = 25;
+    TROLL_BLOODSCALP = 26 {
+        display = "Troll, Bloodscalp";
+    }
+    TROLL_SKULLSPLITTER = 27 {
+        display = "Troll, Skullsplitter";
+    }
+    PREY = 28;
+    BEAST_WOLF = 29 {
+        display = "Beast - Wolf";
+    }
+    DEFIAS_BROTHERHOOD_TRAITOR = 30;
+    FRIENDLY = 31;
+    TROGG = 32;
+    TROLL_FROSTMANE = 33 {
+        display = "Troll, Frostmane";
+    }
+    ORC_BLACKROCK = 34 {
+        display = "Orc, Blackrock";
+    }
+    VILLIAN = 35;
+    VICTIM = 36;
+    BEAST_BEAR = 37 {
+        display = "Beast - Bear";
+    }
+    OGRE = 38;
+    KURZENS_MERCENARIES = 39 {
+        display = "Kurzen's Mercenaries";
+    }
+    ESCORTEE = 40;
+    VENTURE_COMPANY = 41;
+    BEAST_RAPTOR = 42 {
+        display = "Beast - Raptor";
+    }
+    BASILISK = 43;
+    DRAGONFLIGHT_GREEN = 44 {
+        display = "Dragonflight, Green";
+    }
+    LOST_ONES = 45;
+    BLACKSMITHING_ARMORSMITHING = 46 {
+        display = "Blacksmithing - Armorsmithing";
+    }
+    IRONFORGE = 47;
+    DARK_IRON_DWARVES = 48;
+    HUMAN_NIGHT_WATCH = 49 {
+        display = "Human, Night Watch";
+    }
+    DRAGONFLIGHT_RED = 50 {
+        display = "Dragonflight, Red";
+    }
+    GNOLL_MOSSHIDE = 51 {
+        display = "Gnoll - Mosshide";
+    }
+    ORC_DRAGONMAW = 52 {
+        display = "Orc, Dragonmaw";
+    }
+    GNOME_LEPER = 53 {
+        display = "Gnome - Leper";
+    }
+    GNOMEREGAN_EXILES = 54;
+    LEOPARD = 55;
+    SCARLET_CRUSADE = 56;
+    GNOLL_ROTHIDE = 57 {
+        display = "Gnoll - Rothide";
+    }
+    BEAST_GORILLA = 58 {
+        display = "Beast - Gorilla";
+    }
+    THORIUM_BROTHERHOOD = 59;
+    NAGA = 60;
+    DALARAN = 61;
+    FORLORN_SPIRIT = 62;
+    DARKHOWL = 63;
+    GRELL = 64;
+    FURBOLG = 65;
+    HORDE_GENERIC = 66;
+    HORDE = 67;
+    UNDERCITY = 68;
+    DARNASSUS = 69;
+    SYNDICATE = 70;
+    HILLSBRAD_MILITIA = 71;
+    STORMWIND = 72;
+    DEMON = 73;
+    ELEMENTAL = 74;
+    SPIRIT = 75;
+    ORGRIMMAR = 76;
+    TREASURE = 77;
+    GNOLL_MUDSNOUT = 78 {
+        display = "Gnoll - Mudsnout";
+    }
+    HILLSBRAD_SOUTHSHORE_MAYOR = 79 {
+        display = "HIllsbrad, Southshore Mayor";
+    }
+    DRAGONFLIGHT_BLACK = 80 {
+        display = "Dragonflight, Black";
+    }
+    THUNDER_BLUFF = 81;
+    TROLL_WITHERBARK = 82 {
+        display = "Troll, Witherbark";
+    }
+    LEATHERWORKING_ELEMENTAL = 83 {
+        display = "Leatherworking - Elemental";
+    }
+    QUILBOAR_RAZORMANE = 84 {
+        display = "Quilboar, Razormane";
+    }
+    QUILBOAR_BRISTLEBACK = 85 {
+        display = "Quilboar, Bristleback";
+    }
+    LEATHERWORKING_DRAGONSCALE = 86 {
+        display = "Leatherworking - Dragonscale";
+    }
+    BLOODSAIL_BUCCANEERS = 87;
+    BLACKFATHOM = 88;
+    MAKRURA = 89;
+    CENTAUR_KOLKAR = 90 {
+        display = "Centaur, Kolkar";
+    }
+    CENTAUR_GALAK = 91 {
+        display = "Centaur, Galak";
+    }
+    GELKIS_CLAN_CENTAUR = 92;
+    MAGRAM_CLAN_CENTAUR = 93;
+    MARAUDINE = 94;
+    THERAMORE = 108;
+    QUILBOAR_RAZORFEN = 109 {
+        display = "Quilboar, Razorfen";
+    }
+    QUILBOAR_RAZORMANE_2 = 110 {
+        display = "Quilboar, Razormane 2";
+    }
+    QUILBOAR_DEATHSHEAD = 111 {
+        display = "Quilboar, Deathshead";
+    }
+    ENEMY = 128;
+    AMBIENT = 148;
+    NETHERGARDE_CARAVAN = 168;
+    STEAMWHEEDLE_CARTEL = 169;
+    ALLIANCE_GENERIC = 189;
+    NETHERGARDE = 209;
+    WAILING_CAVERNS = 229;
+    SILITHID = 249;
+    SILVERMOON_REMNANT = 269;
+    ZANDALAR_TRIBE = 270;
+    BLACKSMITHING_WEAPONSMITHING = 289 {
+        display = "Blacksmithing - Weaponsmithing";
+    }
+    SCORPID = 309;
+    BEAST_BAT = 310 {
+        display = "Beast - Bat";
+    }
+    TITAN = 311;
+    TASKMASTER_FIZZULE = 329;
+    RAVENHOLDT = 349;
+    GADGETZAN = 369;
+    GNOMEREGAN_BUG = 389;
+    HARPY = 409;
+    BURNING_BLADE = 429;
+    SHADOWSILK_POACHER = 449;
+    SEARING_SPIDER = 450;
+    ALLIANCE = 469;
+    RATCHET = 470;
+    WILDHAMMER_CLAN = 471;
+    GOBLIN_DARK_IRON_BAR_PATRON = 489 {
+        display = "Goblin, Dark Iron Bar Patron";
+    }
+    THE_LEAGUE_OF_ARATHOR = 509;
+    THE_DEFILERS = 510;
+    GIANT = 511;
+    ARGENT_DAWN = 529;
+    DARKSPEAR_TROLLS = 530;
+    DRAGONFLIGHT_BRONZE = 531 {
+        display = "Dragonflight, Bronze";
+    }
+    DRAGONFLIGHT_BLUE = 532 {
+        display = "Dragonflight, Blue";
+    }
+    LEATHERWORKING_TRIBAL = 549 {
+        display = "Leatherworking - Tribal";
+    }
+    ENGINEERING_GOBLIN = 550 {
+        display = "Engineering - Goblin";
+    }
+    ENGINEERING_GNOME = 551 {
+        display = "Engineering - Gnome";
+    }
+    BLACKSMITHING_HAMMERSMITHING = 569 {
+        display = "Blacksmithing - Hammersmithing";
+    }
+    BLACKSMITHING_AXESMITHING = 570 {
+        display = "Blacksmithing - Axesmithing";
+    }
+    BLACKSMITHING_SWORDSMITHING = 571 {
+        display = "Blacksmithing - Swordsmithing";
+    }
+    TROLL_VILEBRANCH = 572 {
+        display = "Troll, Vilebranch";
+    }
+    SOUTHSEA_FREEBOOTERS = 573;
+    CAER_DARROW = 574;
+    FURBOLG_UNCORRUPTED = 575 {
+        display = "Furbolg, Uncorrupted";
+    }
+    TIMBERMAW_HOLD = 576;
+    EVERLOOK = 577;
+    WINTERSABER_TRAINERS = 589;
+    CENARION_CIRCLE = 609;
+    SHATTERSPEAR_TROLLS = 629;
+    RAVASAUR_TRAINERS = 630;
+    MAJORDOMO_EXECUTUS = 649;
+    BEAST_CARRION_BIRD = 669 {
+        display = "Beast - Carrion Bird";
+    }
+    BEAST_CAT = 670 {
+        display = "Beast - Cat";
+    }
+    BEAST_CRAB = 671 {
+        display = "Beast - Crab";
+    }
+    BEAST_CROCILISK = 672 {
+        display = "Beast - Crocilisk";
+    }
+    BEAST_HYENA = 673 {
+        display = "Beast - Hyena";
+    }
+    BEAST_OWL = 674 {
+        display = "Beast - Owl";
+    }
+    BEAST_SCORPID = 675 {
+        display = "Beast - Scorpid";
+    }
+    BEAST_TALLSTRIDER = 676 {
+        display = "Beast - Tallstrider";
+    }
+    BEAST_TURTLE = 677 {
+        display = "Beast - Turtle";
+    }
+    BEAST_WIND_SERPENT = 678 {
+        display = "Beast - Wind Serpent";
+    }
+    TRAINING_DUMMY = 679;
+    DRAGONFLIGHT_BLACK_BAIT = 689 {
+        display = "Dragonflight, Black - Bait";
+    }
+    BATTLEGROUND_NEUTRAL = 709;
+    FROSTWOLF_CLAN = 729;
+    STORMPIKE_GUARD = 730;
+    HYDRAXIAN_WATERLORDS = 749;
+    SULFURON_FIRELORDS = 750;
+    GIZLOCKS_DUMMY = 769 {
+        display = "Gizlock's Dummy";
+    }
+    GIZLOCKS_CHARM = 770 {
+        display = "Gizlock's Charm";
+    }
+    GIZLOCK = 771;
+    MORO_GAI = 789 {
+        display = "Moro'gai";
+    }
+    SPIRIT_GUIDE_ALLIANCE = 790 {
+        display = "Spirit Guide - Alliance";
+    }
+    SHEN_DRALAR = 809 {
+        display = "Shen'dralar";
+    }
+    OGRE_CAPTAIN_KROMCRUSH = 829 {
+        display = "Ogre (Captain Kromcrush)";
+    }
+    SPIRIT_GUIDE_HORDE = 849 {
+        display = "Spirit Guide - Horde";
+    }
+    JAEDENAR = 869;
+    WARSONG_OUTRIDERS = 889;
+    SILVERWING_SENTINELS = 890;
+    ALLIANCE_FORCES = 891;
+    HORDE_FORCES = 892;
+    REVANTUSK_TROLLS = 893;
+    DARKMOON_FAIRE = 909;
+    BROOD_OF_NOZDORMU = 910;
+    SILVERMOON_CITY = 911;
+    MIGHT_OF_KALIMDOR = 912;
+    PLAYER_BLOOD_ELF = 914 {
+        display = "PLAYER, Blood Elf";
+    }
+    ARMIES_OF_C_THUN = 915 {
+        display = "Armies of C'Thun";
+    }
+    SILITHID_ATTACKERS = 916;
+    THE_IRONFORGE_BRIGADE = 917;
+    RC_ENEMIES = 918;
+    RC_OBJECTS = 919;
+    RED = 920;
+    BLUE = 921;
+    TRANQUILLIEN = 922;
+    FARSTRIDERS = 923;
+    DEPRECATED = 924;
+    SUNSTRIDERS = 925;
+    MAGISTERS_GUILD = 926 {
+        display = "Magister's Guild";
+    }
+    PLAYER_DRAENEI = 927 {
+        display = "PLAYER, Draenei";
+    }
+    SCOURGE_INVADERS = 928;
+    BLOODMAUL_CLAN = 929;
+    EXODAR = 930;
+    TEST_FACTION_NOT_A_REAL_FACTION = 931 {
+        display = "Test Faction (not a real faction)";
+    }
+    THE_ALDOR = 932;
+    THE_CONSORTIUM = 933;
+    THE_SCRYERS = 934;
+    THE_SHA_TAR = 935 {
+        display = "The Sha'tar";
+    }
+    SHATTRATH_CITY = 936;
+    TROLL_FOREST = 937 {
+        display = "Troll, Forest";
+    }
+    THE_OMENAI = 938;
+    DEPRECATED1 = 939;
+    THE_SONS_OF_LOTHAR = 940;
+    THE_MAG_HAR = 941 {
+        display = "The Mag'har";
+    }
+    CENARION_EXPEDITION = 942;
+    FEL_ORC = 943;
+    FEL_ORC_GHOST = 944;
+    SONS_OF_LOTHAR_GHOSTS = 945;
+    HONOR_HOLD = 946;
+    THRALLMAR = 947;
+    TEST_FACTION_2 = 948;
+    TEST_FACTION_1 = 949;
+    TOWOW_FLAG = 950 {
+        display = "ToWoW - Flag";
+    }
+    TOWOW_FLAG_TRIGGER_ALLIANCE_DND = 951 {
+        display = "ToWoW - Flag Trigger Alliance (DND)";
+    }
+    TEST_FACTION_3 = 952;
+    TEST_FACTION_4 = 953;
+    TOWOW_FLAG_TRIGGER_HORDE_DND = 954 {
+        display = "ToWoW - Flag Trigger Horde (DND)";
+    }
+    BROKEN = 955;
+    ETHEREUM = 956;
+    EARTH_ELEMENTAL = 957;
+    FIGHTING_ROBOTS = 958;
+    ACTOR_GOOD = 959;
+    ACTOR_EVIL = 960;
+    STILLPINE_FURBOLG = 961;
+    CRAZED_OWLKIN = 962;
+    CHESS_ALLIANCE = 963;
+    CHESS_HORDE = 964;
+    MONSTER_SPAR = 965;
+    MONSTER_SPAR_BUDDY = 966;
+    THE_VIOLET_EYE = 967;
+    SUNHAWKS = 968;
+    HAND_OF_ARGUS = 969;
+    SPOREGGAR = 970;
+    FUNGAL_GIANT = 971;
+    SPORE_BAT = 972;
+    MONSTER_PREDATOR = 973 {
+        display = "Monster, Predator";
+    }
+    MONSTER_PREY = 974 {
+        display = "Monster, Prey";
+    }
+    VOID_ANOMALY = 975;
+    HYJAL_DEFENDERS = 976;
+    HYJAL_INVADERS = 977;
+    KURENAI = 978;
+    EARTHEN_RING = 979;
+    OUTLAND = 980;
+    ARAKKOA = 981;
+    ZANGARMARSH_BANNER_ALLIANCE = 982 {
+        display = "Zangarmarsh Banner (Alliance)";
+    }
+    ZANGARMARSH_BANNER_HORDE = 983 {
+        display = "Zangarmarsh Banner (Horde)";
+    }
+    ZANGARMARSH_BANNER_NEUTRAL = 984 {
+        display = "Zangarmarsh Banner (Neutral)";
+    }
+    CAVERNS_OF_TIME_THRALL = 985 {
+        display = "Caverns of Time - Thrall";
+    }
+    CAVERNS_OF_TIME_DURNHOLDE = 986 {
+        display = "Caverns of Time - Durnholde";
+    }
+    CAVERNS_OF_TIME_SOUTHSHORE_GUARDS = 987 {
+        display = "Caverns of Time - Southshore Guards";
+    }
+    SHADOW_COUNCIL_COVERT = 988;
+    KEEPERS_OF_TIME = 989;
+    THE_SCALE_OF_THE_SANDS = 990;
+    DARK_PORTAL_DEFENDER_ALLIANCE = 991 {
+        display = "Dark Portal Defender, Alliance";
+    }
+    DARK_PORTAL_DEFENDER_HORDE = 992 {
+        display = "Dark Portal Defender, Horde";
+    }
+    DARK_PORTAL_ATTACKER_LEGION = 993 {
+        display = "Dark Portal Attacker, Legion";
+    }
+    INCITER_TRIGGER = 994;
+    INCITER_TRIGGER_2 = 995;
+    INCITER_TRIGGER_3 = 996;
+    INCITER_TRIGGER_4 = 997;
+    INCITER_TRIGGER_5 = 998;
+    MANA_CREATURE = 999;
+    KHADGARS_SERVANT = 1000 {
+        display = "Khadgar's Servant";
+    }
+    BLADESPIRE_CLAN = 1001;
+    ETHEREUM_SPARBUDDY = 1002;
+    PROTECTORATE = 1003;
+    ARCANE_ANNIHILATOR_DNR = 1004 {
+        display = "Arcane Annihilator (DNR)";
+    }
+    FRIENDLY_HIDDEN = 1005 {
+        display = "Friendly, Hidden";
+    }
+    KIRIN_VAR_DATHRIC = 1006 {
+        display = "Kirin'Var - Dathric";
+    }
+    KIRIN_VAR_BELMARA = 1007 {
+        display = "Kirin'Var - Belmara";
+    }
+    KIRIN_VAR_LUMINRATH = 1008 {
+        display = "Kirin'Var - Luminrath";
+    }
+    KIRIN_VAR_COHLIEN = 1009 {
+        display = "Kirin'Var - Cohlien";
+    }
+    SERVANT_OF_ILLIDAN = 1010;
+    LOWER_CITY = 1011;
+    ASHTONGUE_DEATHSWORN = 1012;
+    SPIRITS_OF_SHADOWMOON_1 = 1013;
+    SPIRITS_OF_SHADOWMOON_2 = 1014;
+    NETHERWING = 1015;
+    WYRMCULT = 1016;
+    TREANT = 1017;
+    LEOTHERAS_DEMON_I = 1018;
+    LEOTHERAS_DEMON_II = 1019;
+    LEOTHERAS_DEMON_III = 1020;
+    LEOTHERAS_DEMON_IV = 1021;
+    LEOTHERAS_DEMON_V = 1022;
+    AZALOTH = 1023;
+    ROCK_FLAYER = 1024;
+    FLAYER_HUNTER = 1025;
+    SHADOWMOON_SHADE = 1026;
+    LEGION_COMMUNICATOR = 1027;
+    RAVENSWOOD_ANCIENTS = 1028;
+    CHESS_FRIENDLY_TO_ALL_CHESS = 1029 {
+        display = "Chess, Friendly to All Chess";
+    }
+    BLACK_TEMPLE_GATES_ILLIDARI = 1030 {
+        display = "Black Temple Gates - Illidari";
+    }
+    SHA_TARI_SKYGUARD = 1031 {
+        display = "Sha'tari Skyguard";
+    }
+    AREA_52 = 1032;
+    MAIEV = 1033;
+    SKETTIS_SHADOWY_ARAKKOA = 1034;
+    SKETTIS_ARAKKOA = 1035;
+    DRAGONMAW_ENEMY = 1036;
+    REUSE = 1037;
+    OGRI_LA = 1038 {
+        display = "Ogri'la";
+    }
+    RAVAGER = 1039;
+    REUSE1 = 1040;
+    FRENZY = 1041;
+    SKYGUARD_ENEMY = 1042;
+    SKUNK_PETUNIA = 1043 {
+        display = "Skunk, Petunia";
+    }
+    THERAMORE_DESERTER = 1044;
+    TROLL_AMANI = 1049 {
+        display = "Troll, Amani";
+    }
+    CTF_FLAGS = 1059 {
+        display = "CTF - Flags";
+    }
+    RAM_RACING_POWERUP_DND = 1069;
+    RAM_RACING_TRAP_DND = 1070;
+    CRAIGS_SQUIRRELS = 1071 {
+        display = "Craig's Squirrels";
+    }
+    HOLIDAY_WATER_BARREL = 1074 {
+        display = "Holiday - Water Barrel";
+    }
+    HOLIDAY_GENERIC = 1075 {
+        display = "Holiday - Generic";
+    }
+    SHATTERED_SUN_OFFENSIVE = 1077;
+    FIGHTING_VANITY_PET = 1078;
+    MONSTER_FORCE_REACTION = 1080 {
+        display = "Monster, Force Reaction";
+    }
+    OBJECT_FORCE_REACTION = 1081 {
+        display = "Object, Force Reaction";
+    }
+    HOLIDAY_MONSTER = 1087;
+} {
+    rust_base_type = "true";
+    versions = "2.4.3";
+}
+
+enum Faction : u16 {
+    NONE = 0;
+    PLAYER_HUMAN = 1 {
+        display = "PLAYER, Human";
+    }
+    PLAYER_ORC = 2 {
+        display = "PLAYER, Orc";
+    }
+    PLAYER_DWARF = 3 {
+        display = "PLAYER, Dwarf";
+    }
+    PLAYER_NIGHT_ELF = 4 {
+        display = "PLAYER, Night Elf";
+    }
+    PLAYER_UNDEAD = 5 {
+        display = "PLAYER, Undead";
+    }
+    PLAYER_TAUREN = 6 {
+        display = "PLAYER, Tauren";
+    }
+    CREATURE = 7;
+    PLAYER_GNOME = 8 {
+        display = "PLAYER, Gnome";
+    }
+    PLAYER_TROLL = 9 {
+        display = "PLAYER, Troll";
+    }
+    MONSTER = 14;
+    DEFIAS_BROTHERHOOD = 15;
+    GNOLL_RIVERPAW = 16 {
+        display = "Gnoll - Riverpaw";
+    }
+    GNOLL_REDRIDGE = 17 {
+        display = "Gnoll - Redridge";
+    }
+    GNOLL_SHADOWHIDE = 18 {
+        display = "Gnoll - Shadowhide";
+    }
+    MURLOC = 19;
+    UNDEAD_SCOURGE = 20 {
+        display = "Undead, Scourge";
+    }
+    BOOTY_BAY = 21;
+    BEAST_SPIDER = 22 {
+        display = "Beast - Spider";
+    }
+    BEAST_BOAR = 23 {
+        display = "Beast - Boar";
+    }
+    WORGEN = 24;
+    KOBOLD = 25;
+    TROLL_BLOODSCALP = 26 {
+        display = "Troll, Bloodscalp";
+    }
+    TROLL_SKULLSPLITTER = 27 {
+        display = "Troll, Skullsplitter";
+    }
+    PREY = 28;
+    BEAST_WOLF = 29 {
+        display = "Beast - Wolf";
+    }
+    DEFIAS_BROTHERHOOD_TRAITOR = 30;
+    FRIENDLY = 31;
+    TROGG = 32;
+    TROLL_FROSTMANE = 33 {
+        display = "Troll, Frostmane";
+    }
+    ORC_BLACKROCK = 34 {
+        display = "Orc, Blackrock";
+    }
+    VILLIAN = 35;
+    VICTIM = 36;
+    BEAST_BEAR = 37 {
+        display = "Beast - Bear";
+    }
+    OGRE = 38;
+    KURZENS_MERCENARIES = 39 {
+        display = "Kurzen's Mercenaries";
+    }
+    ESCORTEE = 40;
+    VENTURE_COMPANY = 41;
+    BEAST_RAPTOR = 42 {
+        display = "Beast - Raptor";
+    }
+    BASILISK = 43;
+    DRAGONFLIGHT_GREEN = 44 {
+        display = "Dragonflight, Green";
+    }
+    LOST_ONES = 45;
+    BLACKSMITHING_ARMORSMITHING = 46 {
+        display = "Blacksmithing - Armorsmithing";
+    }
+    IRONFORGE = 47;
+    DARK_IRON_DWARVES = 48;
+    HUMAN_NIGHT_WATCH = 49 {
+        display = "Human, Night Watch";
+    }
+    DRAGONFLIGHT_RED = 50 {
+        display = "Dragonflight, Red";
+    }
+    GNOLL_MOSSHIDE = 51 {
+        display = "Gnoll - Mosshide";
+    }
+    ORC_DRAGONMAW = 52 {
+        display = "Orc, Dragonmaw";
+    }
+    GNOME_LEPER = 53 {
+        display = "Gnome - Leper";
+    }
+    GNOMEREGAN_EXILES = 54;
+    LEOPARD = 55;
+    SCARLET_CRUSADE = 56;
+    GNOLL_ROTHIDE = 57 {
+        display = "Gnoll - Rothide";
+    }
+    BEAST_GORILLA = 58 {
+        display = "Beast - Gorilla";
+    }
+    THORIUM_BROTHERHOOD = 59;
+    NAGA = 60;
+    DALARAN = 61;
+    FORLORN_SPIRIT = 62;
+    DARKHOWL = 63;
+    GRELL = 64;
+    FURBOLG = 65;
+    HORDE_GENERIC = 66;
+    HORDE = 67;
+    UNDERCITY = 68;
+    DARNASSUS = 69;
+    SYNDICATE = 70;
+    HILLSBRAD_MILITIA = 71;
+    STORMWIND = 72;
+    DEMON = 73;
+    ELEMENTAL = 74;
+    SPIRIT = 75;
+    ORGRIMMAR = 76;
+    TREASURE = 77;
+    GNOLL_MUDSNOUT = 78 {
+        display = "Gnoll - Mudsnout";
+    }
+    HILLSBRAD_SOUTHSHORE_MAYOR = 79 {
+        display = "HIllsbrad, Southshore Mayor";
+    }
+    DRAGONFLIGHT_BLACK = 80 {
+        display = "Dragonflight, Black";
+    }
+    THUNDER_BLUFF = 81;
+    TROLL_WITHERBARK = 82 {
+        display = "Troll, Witherbark";
+    }
+    LEATHERWORKING_ELEMENTAL = 83 {
+        display = "Leatherworking - Elemental";
+    }
+    QUILBOAR_RAZORMANE = 84 {
+        display = "Quilboar, Razormane";
+    }
+    QUILBOAR_BRISTLEBACK = 85 {
+        display = "Quilboar, Bristleback";
+    }
+    LEATHERWORKING_DRAGONSCALE = 86 {
+        display = "Leatherworking - Dragonscale";
+    }
+    BLOODSAIL_BUCCANEERS = 87;
+    BLACKFATHOM = 88;
+    MAKRURA = 89;
+    CENTAUR_KOLKAR = 90 {
+        display = "Centaur, Kolkar";
+    }
+    CENTAUR_GALAK = 91 {
+        display = "Centaur, Galak";
+    }
+    GELKIS_CLAN_CENTAUR = 92;
+    MAGRAM_CLAN_CENTAUR = 93;
+    MARAUDINE = 94;
+    THERAMORE = 108;
+    QUILBOAR_RAZORFEN = 109 {
+        display = "Quilboar, Razorfen";
+    }
+    QUILBOAR_RAZORMANE_2 = 110 {
+        display = "Quilboar, Razormane 2";
+    }
+    QUILBOAR_DEATHSHEAD = 111 {
+        display = "Quilboar, Deathshead";
+    }
+    ENEMY = 128;
+    AMBIENT = 148;
+    NETHERGARDE_CARAVAN = 168;
+    STEAMWHEEDLE_CARTEL = 169;
+    ALLIANCE_GENERIC = 189;
+    NETHERGARDE = 209;
+    WAILING_CAVERNS = 229;
+    SILITHID = 249;
+    SILVERMOON_REMNANT = 269;
+    ZANDALAR_TRIBE = 270;
+    BLACKSMITHING_WEAPONSMITHING = 289 {
+        display = "Blacksmithing - Weaponsmithing";
+    }
+    SCORPID = 309;
+    BEAST_BAT = 310 {
+        display = "Beast - Bat";
+    }
+    TITAN = 311;
+    TASKMASTER_FIZZULE = 329;
+    RAVENHOLDT = 349;
+    GADGETZAN = 369;
+    GNOMEREGAN_BUG = 389;
+    HARPY = 409;
+    BURNING_BLADE = 429;
+    SHADOWSILK_POACHER = 449;
+    SEARING_SPIDER = 450;
+    ALLIANCE = 469;
+    RATCHET = 470;
+    WILDHAMMER_CLAN = 471;
+    GOBLIN_DARK_IRON_BAR_PATRON = 489 {
+        display = "Goblin, Dark Iron Bar Patron";
+    }
+    THE_LEAGUE_OF_ARATHOR = 509;
+    THE_DEFILERS = 510;
+    GIANT = 511;
+    ARGENT_DAWN = 529;
+    DARKSPEAR_TROLLS = 530;
+    DRAGONFLIGHT_BRONZE = 531 {
+        display = "Dragonflight, Bronze";
+    }
+    DRAGONFLIGHT_BLUE = 532 {
+        display = "Dragonflight, Blue";
+    }
+    LEATHERWORKING_TRIBAL = 549 {
+        display = "Leatherworking - Tribal";
+    }
+    ENGINEERING_GOBLIN = 550 {
+        display = "Engineering - Goblin";
+    }
+    ENGINEERING_GNOME = 551 {
+        display = "Engineering - Gnome";
+    }
+    BLACKSMITHING_HAMMERSMITHING = 569 {
+        display = "Blacksmithing - Hammersmithing";
+    }
+    BLACKSMITHING_AXESMITHING = 570 {
+        display = "Blacksmithing - Axesmithing";
+    }
+    BLACKSMITHING_SWORDSMITHING = 571 {
+        display = "Blacksmithing - Swordsmithing";
+    }
+    TROLL_VILEBRANCH = 572 {
+        display = "Troll, Vilebranch";
+    }
+    SOUTHSEA_FREEBOOTERS = 573;
+    CAER_DARROW = 574;
+    FURBOLG_UNCORRUPTED = 575 {
+        display = "Furbolg, Uncorrupted";
+    }
+    TIMBERMAW_HOLD = 576;
+    EVERLOOK = 577;
+    WINTERSABER_TRAINERS = 589;
+    CENARION_CIRCLE = 609;
+    SHATTERSPEAR_TROLLS = 629;
+    RAVASAUR_TRAINERS = 630;
+    MAJORDOMO_EXECUTUS = 649;
+    BEAST_CARRION_BIRD = 669 {
+        display = "Beast - Carrion Bird";
+    }
+    BEAST_CAT = 670 {
+        display = "Beast - Cat";
+    }
+    BEAST_CRAB = 671 {
+        display = "Beast - Crab";
+    }
+    BEAST_CROCILISK = 672 {
+        display = "Beast - Crocilisk";
+    }
+    BEAST_HYENA = 673 {
+        display = "Beast - Hyena";
+    }
+    BEAST_OWL = 674 {
+        display = "Beast - Owl";
+    }
+    BEAST_SCORPID = 675 {
+        display = "Beast - Scorpid";
+    }
+    BEAST_TALLSTRIDER = 676 {
+        display = "Beast - Tallstrider";
+    }
+    BEAST_TURTLE = 677 {
+        display = "Beast - Turtle";
+    }
+    BEAST_WIND_SERPENT = 678 {
+        display = "Beast - Wind Serpent";
+    }
+    TRAINING_DUMMY = 679;
+    DRAGONFLIGHT_BLACK_BAIT = 689 {
+        display = "Dragonflight, Black - Bait";
+    }
+    BATTLEGROUND_NEUTRAL = 709;
+    FROSTWOLF_CLAN = 729;
+    STORMPIKE_GUARD = 730;
+    HYDRAXIAN_WATERLORDS = 749;
+    SULFURON_FIRELORDS = 750;
+    GIZLOCKS_DUMMY = 769 {
+        display = "Gizlock's Dummy";
+    }
+    GIZLOCKS_CHARM = 770 {
+        display = "Gizlock's Charm";
+    }
+    GIZLOCK = 771;
+    MORO_GAI = 789 {
+        display = "Moro'gai";
+    }
+    SPIRIT_GUIDE_ALLIANCE = 790 {
+        display = "Spirit Guide - Alliance";
+    }
+    SHEN_DRALAR = 809 {
+        display = "Shen'dralar";
+    }
+    OGRE_CAPTAIN_KROMCRUSH = 829 {
+        display = "Ogre (Captain Kromcrush)";
+    }
+    SPIRIT_GUIDE_HORDE = 849 {
+        display = "Spirit Guide - Horde";
+    }
+    JAEDENAR = 869;
+    WARSONG_OUTRIDERS = 889;
+    SILVERWING_SENTINELS = 890;
+    ALLIANCE_FORCES = 891;
+    HORDE_FORCES = 892;
+    REVANTUSK_TROLLS = 893;
+    DARKMOON_FAIRE = 909;
+    BROOD_OF_NOZDORMU = 910;
+    SILVERMOON_CITY = 911;
+    MIGHT_OF_KALIMDOR = 912;
+    PLAYER_BLOOD_ELF = 914 {
+        display = "PLAYER, Blood Elf";
+    }
+    ARMIES_OF_C_THUN = 915 {
+        display = "Armies of C'Thun";
+    }
+    SILITHID_ATTACKERS = 916;
+    THE_IRONFORGE_BRIGADE = 917;
+    RC_ENEMIES = 918;
+    RC_OBJECTS = 919;
+    RED = 920;
+    BLUE = 921;
+    TRANQUILLIEN = 922;
+    FARSTRIDERS = 923;
+    DEPRECATED = 924;
+    SUNSTRIDERS = 925;
+    MAGISTERS_GUILD = 926 {
+        display = "Magister's Guild";
+    }
+    PLAYER_DRAENEI = 927 {
+        display = "PLAYER, Draenei";
+    }
+    SCOURGE_INVADERS = 928;
+    BLOODMAUL_CLAN = 929;
+    EXODAR = 930;
+    TEST_FACTION_NOT_A_REAL_FACTION = 931 {
+        display = "Test Faction (not a real faction)";
+    }
+    THE_ALDOR = 932;
+    THE_CONSORTIUM = 933;
+    THE_SCRYERS = 934;
+    THE_SHA_TAR = 935 {
+        display = "The Sha'tar";
+    }
+    SHATTRATH_CITY = 936;
+    TROLL_FOREST = 937 {
+        display = "Troll, Forest";
+    }
+    THE_OMENAI = 938;
+    DEPRECATED1 = 939;
+    THE_SONS_OF_LOTHAR = 940;
+    THE_MAG_HAR = 941 {
+        display = "The Mag'har";
+    }
+    CENARION_EXPEDITION = 942;
+    FEL_ORC = 943;
+    FEL_ORC_GHOST = 944;
+    SONS_OF_LOTHAR_GHOSTS = 945;
+    HONOR_HOLD = 946;
+    THRALLMAR = 947;
+    TEST_FACTION_2 = 948;
+    TEST_FACTION_1 = 949;
+    TOWOW_FLAG = 950 {
+        display = "ToWoW - Flag";
+    }
+    TOWOW_FLAG_TRIGGER_ALLIANCE_DND = 951 {
+        display = "ToWoW - Flag Trigger Alliance (DND)";
+    }
+    TEST_FACTION_3 = 952;
+    TEST_FACTION_4 = 953;
+    TOWOW_FLAG_TRIGGER_HORDE_DND = 954 {
+        display = "ToWoW - Flag Trigger Horde (DND)";
+    }
+    BROKEN = 955;
+    ETHEREUM = 956;
+    EARTH_ELEMENTAL = 957;
+    FIGHTING_ROBOTS = 958;
+    ACTOR_GOOD = 959;
+    ACTOR_EVIL = 960;
+    STILLPINE_FURBOLG = 961;
+    CRAZED_OWLKIN = 962;
+    CHESS_ALLIANCE = 963;
+    CHESS_HORDE = 964;
+    MONSTER_SPAR = 965;
+    MONSTER_SPAR_BUDDY = 966;
+    THE_VIOLET_EYE = 967;
+    SUNHAWKS = 968;
+    HAND_OF_ARGUS = 969;
+    SPOREGGAR = 970;
+    FUNGAL_GIANT = 971;
+    SPORE_BAT = 972;
+    MONSTER_PREDATOR = 973 {
+        display = "Monster, Predator";
+    }
+    MONSTER_PREY = 974 {
+        display = "Monster, Prey";
+    }
+    VOID_ANOMALY = 975;
+    HYJAL_DEFENDERS = 976;
+    HYJAL_INVADERS = 977;
+    KURENAI = 978;
+    EARTHEN_RING = 979;
+    THE_BURNING_CRUSADE = 980;
+    ARAKKOA = 981;
+    ZANGARMARSH_BANNER_ALLIANCE = 982 {
+        display = "Zangarmarsh Banner (Alliance)";
+    }
+    ZANGARMARSH_BANNER_HORDE = 983 {
+        display = "Zangarmarsh Banner (Horde)";
+    }
+    ZANGARMARSH_BANNER_NEUTRAL = 984 {
+        display = "Zangarmarsh Banner (Neutral)";
+    }
+    CAVERNS_OF_TIME_THRALL = 985 {
+        display = "Caverns of Time - Thrall";
+    }
+    CAVERNS_OF_TIME_DURNHOLDE = 986 {
+        display = "Caverns of Time - Durnholde";
+    }
+    CAVERNS_OF_TIME_SOUTHSHORE_GUARDS = 987 {
+        display = "Caverns of Time - Southshore Guards";
+    }
+    SHADOW_COUNCIL_COVERT = 988;
+    KEEPERS_OF_TIME = 989;
+    THE_SCALE_OF_THE_SANDS = 990;
+    DARK_PORTAL_DEFENDER_ALLIANCE = 991 {
+        display = "Dark Portal Defender, Alliance";
+    }
+    DARK_PORTAL_DEFENDER_HORDE = 992 {
+        display = "Dark Portal Defender, Horde";
+    }
+    DARK_PORTAL_ATTACKER_LEGION = 993 {
+        display = "Dark Portal Attacker, Legion";
+    }
+    INCITER_TRIGGER = 994;
+    INCITER_TRIGGER_2 = 995;
+    INCITER_TRIGGER_3 = 996;
+    INCITER_TRIGGER_4 = 997;
+    INCITER_TRIGGER_5 = 998;
+    MANA_CREATURE = 999;
+    KHADGARS_SERVANT = 1000 {
+        display = "Khadgar's Servant";
+    }
+    BLADESPIRE_CLAN = 1001;
+    ETHEREUM_SPARBUDDY = 1002;
+    PROTECTORATE = 1003;
+    ARCANE_ANNIHILATOR_DNR = 1004 {
+        display = "Arcane Annihilator (DNR)";
+    }
+    FRIENDLY_HIDDEN = 1005 {
+        display = "Friendly, Hidden";
+    }
+    KIRIN_VAR_DATHRIC = 1006 {
+        display = "Kirin'Var - Dathric";
+    }
+    KIRIN_VAR_BELMARA = 1007 {
+        display = "Kirin'Var - Belmara";
+    }
+    KIRIN_VAR_LUMINRATH = 1008 {
+        display = "Kirin'Var - Luminrath";
+    }
+    KIRIN_VAR_COHLIEN = 1009 {
+        display = "Kirin'Var - Cohlien";
+    }
+    SERVANT_OF_ILLIDAN = 1010;
+    LOWER_CITY = 1011;
+    ASHTONGUE_DEATHSWORN = 1012;
+    SPIRITS_OF_SHADOWMOON_1 = 1013;
+    SPIRITS_OF_SHADOWMOON_2 = 1014;
+    NETHERWING = 1015;
+    WYRMCULT = 1016;
+    TREANT = 1017;
+    LEOTHERAS_DEMON_I = 1018;
+    LEOTHERAS_DEMON_II = 1019;
+    LEOTHERAS_DEMON_III = 1020;
+    LEOTHERAS_DEMON_IV = 1021;
+    LEOTHERAS_DEMON_V = 1022;
+    AZALOTH = 1023;
+    ROCK_FLAYER = 1024;
+    FLAYER_HUNTER = 1025;
+    SHADOWMOON_SHADE = 1026;
+    LEGION_COMMUNICATOR = 1027;
+    RAVENSWOOD_ANCIENTS = 1028;
+    CHESS_FRIENDLY_TO_ALL_CHESS = 1029 {
+        display = "Chess, Friendly to All Chess";
+    }
+    BLACK_TEMPLE_GATES_ILLIDARI = 1030 {
+        display = "Black Temple Gates - Illidari";
+    }
+    SHA_TARI_SKYGUARD = 1031 {
+        display = "Sha'tari Skyguard";
+    }
+    AREA_52 = 1032;
+    MAIEV = 1033;
+    SKETTIS_SHADOWY_ARAKKOA = 1034;
+    SKETTIS_ARAKKOA = 1035;
+    DRAGONMAW_ENEMY = 1036;
+    ALLIANCE_VANGUARD = 1037;
+    OGRI_LA = 1038 {
+        display = "Ogri'la";
+    }
+    RAVAGER = 1039;
+    REUSE = 1040;
+    FRENZY = 1041;
+    SKYGUARD_ENEMY = 1042;
+    SKUNK_PETUNIA = 1043 {
+        display = "Skunk, Petunia";
+    }
+    THERAMORE_DESERTER = 1044;
+    VRYKUL = 1045;
+    NORTHSEA_PIRATES = 1046;
+    TUSKARR = 1047;
+    UNUSED = 1048;
+    TROLL_AMANI = 1049 {
+        display = "Troll, Amani";
+    }
+    VALIANCE_EXPEDITION = 1050;
+    UNUSED1 = 1051;
+    HORDE_EXPEDITION = 1052;
+    WESTGUARD = 1053;
+    SPOTTED_GRYPHON = 1054;
+    TAMED_PLAGUEHOUND = 1055;
+    VRYKUL_ANCIENT_SPIRIT_1 = 1056 {
+        display = "Vrykul (Ancient Spirit 1)";
+    }
+    VRYKUL_ANCIENT_SIPRIT_2 = 1057 {
+        display = "Vrykul (Ancient Siprit 2)";
+    }
+    VRYKUL_ANCIENT_SIPRIT_3 = 1058 {
+        display = "Vrykul (Ancient Siprit 3)";
+    }
+    CTF_FLAG_ALLIANCE = 1059 {
+        display = "CTF - Flag - Alliance";
+    }
+    TEST = 1060;
+    VRYKUL1 = 1061;
+    VRYKUL_GLADIATOR = 1062;
+    VALGARDE_COMBATANT = 1063;
+    THE_TAUNKA = 1064;
+    MONSTER_ZONE_FORCE_REACTION_1 = 1065 {
+        display = "Monster, Zone Force Reaction 1";
+    }
+    MONSTER_ZONE_FORCE_REACTION_2 = 1066 {
+        display = "Monster, Zone Force Reaction 2";
+    }
+    THE_HAND_OF_VENGEANCE = 1067;
+    EXPLORERS__LEAGUE = 1068 {
+        display = "Explorers' League";
+    }
+    RAM_RACING_POWERUP_DND = 1069;
+    RAM_RACING_TRAP_DND = 1070;
+    CRAIGS_SQUIRRELS = 1071 {
+        display = "Craig's Squirrels";
+    }
+    REUSE1 = 1072;
+    THE_KALU_AK = 1073 {
+        display = "The Kalu'ak";
+    }
+    HOLIDAY_WATER_BARREL = 1074 {
+        display = "Holiday - Water Barrel";
+    }
+    HOLIDAY_GENERIC = 1075 {
+        display = "Holiday - Generic";
+    }
+    IRON_DWARVES = 1076;
+    SHATTERED_SUN_OFFENSIVE = 1077;
+    FIGHTING_VANITY_PET = 1078;
+    MURLOC_WINTERFIN = 1079 {
+        display = "Murloc, Winterfin";
+    }
+    FRIENDLY_FORCE_REACTION = 1080 {
+        display = "Friendly, Force Reaction";
+    }
+    OBJECT_FORCE_REACTION = 1081 {
+        display = "Object, Force Reaction";
+    }
+    REUSE2 = 1082;
+    REUSE4 = 1083;
+    VRYKUL_SEA = 1084 {
+        display = "Vrykul, Sea";
+    }
+    WARSONG_OFFENSIVE = 1085;
+    POACHER = 1086;
+    HOLIDAY_MONSTER = 1087;
+    FURBOLG_REDFANG = 1088 {
+        display = "Furbolg, Redfang";
+    }
+    FURBOLG_FROSTPAW = 1089 {
+        display = "Furbolg, Frostpaw";
+    }
+    KIRIN_TOR = 1090;
+    THE_WYRMREST_ACCORD = 1091;
+    AZJOL_NERUB = 1092 {
+        display = "Azjol-Nerub";
+    }
+    REUSE8 = 1093;
+    THE_SILVER_COVENANT = 1094;
+    GRIZZLY_HILLS_TRAPPER = 1095;
+    REUSE16 = 1096;
+    WRATH_OF_THE_LICH_KING = 1097;
+    KNIGHTS_OF_THE_EBON_BLADE = 1098;
+    WRATHGATE_SCOURGE = 1099;
+    WRATHGATE_ALLIANCE = 1100;
+    WRATHGATE_HORDE = 1101;
+    CTF_FLAG_HORDE = 1102 {
+        display = "CTF - Flag - Horde";
+    }
+    CTF_FLAG_NEUTRAL = 1103 {
+        display = "CTF - Flag - Neutral";
+    }
+    FRENZYHEART_TRIBE = 1104;
+    THE_ORACLES = 1105;
+    ARGENT_CRUSADE = 1106;
+    TROLL_DRAKKARI = 1107 {
+        display = "Troll, Drakkari";
+    }
+    COT_ARTHAS = 1108;
+    COT_STRATHOLME_CITIZEN = 1109;
+    COT_SCOURGE = 1110;
+    FREYA = 1111;
+    MOUNT_TAXI_ALLIANCE = 1112 {
+        display = "Mount - Taxi - Alliance";
+    }
+    MOUNT_TAXI_HORDE = 1113 {
+        display = "Mount - Taxi - Horde";
+    }
+    MOUNT_TAXI_NEUTRAL = 1114 {
+        display = "Mount - Taxi - Neutral";
+    }
+    ELEMENTAL_WATER = 1115 {
+        display = "Elemental, Water";
+    }
+    ELEMENTAL_AIR = 1116 {
+        display = "Elemental, Air";
+    }
+    SHOLAZAR_BASIN = 1117;
+    CLASSIC = 1118;
+    THE_SONS_OF_HODIR = 1119;
+    IRON_GIANTS = 1120;
+    FROST_VRYKUL = 1121;
+    EARTHEN = 1122;
+    MONSTER_REFEREE = 1123;
+    THE_SUNREAVERS = 1124;
+    HYLDSMEET = 1125;
+    THE_FROSTBORN = 1126;
+    ORGRIMMAR_ALEX_TEST = 1127 {
+        display = "Orgrimmar (Alex Test)";
+    }
+    TRANQUILLIEN_CONVERSION = 1136;
+    WINTERSABER_CONVERSION = 1137;
+    HATES_EVERYTHING = 1145;
+    SILVER_COVENANT_CONVERSION = 1154;
+    SUNREAVERS_CONVERSION = 1155;
+    THE_ASHEN_VERDICT = 1156;
+    CTF_FLAG_ALLIANCE_2 = 1159 {
+        display = "CTF - Flag - Alliance 2";
+    }
+    CTF_FLAG_HORDE_2 = 1160 {
+        display = "CTF - Flag - Horde 2";
+    }
+} {
+    rust_base_type = "true";
+    versions = "3.3.5";
+}
+

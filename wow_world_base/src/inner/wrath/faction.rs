@@ -1,0 +1,2052 @@
+use std::convert::{TryFrom, TryInto};
+
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/faction.wowm:919`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/faction.wowm#L919):
+/// ```text
+/// enum Faction : u16 {
+///     NONE = 0;
+///     PLAYER_HUMAN = 1;
+///     PLAYER_ORC = 2;
+///     PLAYER_DWARF = 3;
+///     PLAYER_NIGHT_ELF = 4;
+///     PLAYER_UNDEAD = 5;
+///     PLAYER_TAUREN = 6;
+///     CREATURE = 7;
+///     PLAYER_GNOME = 8;
+///     PLAYER_TROLL = 9;
+///     MONSTER = 14;
+///     DEFIAS_BROTHERHOOD = 15;
+///     GNOLL_RIVERPAW = 16;
+///     GNOLL_REDRIDGE = 17;
+///     GNOLL_SHADOWHIDE = 18;
+///     MURLOC = 19;
+///     UNDEAD_SCOURGE = 20;
+///     BOOTY_BAY = 21;
+///     BEAST_SPIDER = 22;
+///     BEAST_BOAR = 23;
+///     WORGEN = 24;
+///     KOBOLD = 25;
+///     TROLL_BLOODSCALP = 26;
+///     TROLL_SKULLSPLITTER = 27;
+///     PREY = 28;
+///     BEAST_WOLF = 29;
+///     DEFIAS_BROTHERHOOD_TRAITOR = 30;
+///     FRIENDLY = 31;
+///     TROGG = 32;
+///     TROLL_FROSTMANE = 33;
+///     ORC_BLACKROCK = 34;
+///     VILLIAN = 35;
+///     VICTIM = 36;
+///     BEAST_BEAR = 37;
+///     OGRE = 38;
+///     KURZENS_MERCENARIES = 39;
+///     ESCORTEE = 40;
+///     VENTURE_COMPANY = 41;
+///     BEAST_RAPTOR = 42;
+///     BASILISK = 43;
+///     DRAGONFLIGHT_GREEN = 44;
+///     LOST_ONES = 45;
+///     BLACKSMITHING_ARMORSMITHING = 46;
+///     IRONFORGE = 47;
+///     DARK_IRON_DWARVES = 48;
+///     HUMAN_NIGHT_WATCH = 49;
+///     DRAGONFLIGHT_RED = 50;
+///     GNOLL_MOSSHIDE = 51;
+///     ORC_DRAGONMAW = 52;
+///     GNOME_LEPER = 53;
+///     GNOMEREGAN_EXILES = 54;
+///     LEOPARD = 55;
+///     SCARLET_CRUSADE = 56;
+///     GNOLL_ROTHIDE = 57;
+///     BEAST_GORILLA = 58;
+///     THORIUM_BROTHERHOOD = 59;
+///     NAGA = 60;
+///     DALARAN = 61;
+///     FORLORN_SPIRIT = 62;
+///     DARKHOWL = 63;
+///     GRELL = 64;
+///     FURBOLG = 65;
+///     HORDE_GENERIC = 66;
+///     HORDE = 67;
+///     UNDERCITY = 68;
+///     DARNASSUS = 69;
+///     SYNDICATE = 70;
+///     HILLSBRAD_MILITIA = 71;
+///     STORMWIND = 72;
+///     DEMON = 73;
+///     ELEMENTAL = 74;
+///     SPIRIT = 75;
+///     ORGRIMMAR = 76;
+///     TREASURE = 77;
+///     GNOLL_MUDSNOUT = 78;
+///     HILLSBRAD_SOUTHSHORE_MAYOR = 79;
+///     DRAGONFLIGHT_BLACK = 80;
+///     THUNDER_BLUFF = 81;
+///     TROLL_WITHERBARK = 82;
+///     LEATHERWORKING_ELEMENTAL = 83;
+///     QUILBOAR_RAZORMANE = 84;
+///     QUILBOAR_BRISTLEBACK = 85;
+///     LEATHERWORKING_DRAGONSCALE = 86;
+///     BLOODSAIL_BUCCANEERS = 87;
+///     BLACKFATHOM = 88;
+///     MAKRURA = 89;
+///     CENTAUR_KOLKAR = 90;
+///     CENTAUR_GALAK = 91;
+///     GELKIS_CLAN_CENTAUR = 92;
+///     MAGRAM_CLAN_CENTAUR = 93;
+///     MARAUDINE = 94;
+///     THERAMORE = 108;
+///     QUILBOAR_RAZORFEN = 109;
+///     QUILBOAR_RAZORMANE_2 = 110;
+///     QUILBOAR_DEATHSHEAD = 111;
+///     ENEMY = 128;
+///     AMBIENT = 148;
+///     NETHERGARDE_CARAVAN = 168;
+///     STEAMWHEEDLE_CARTEL = 169;
+///     ALLIANCE_GENERIC = 189;
+///     NETHERGARDE = 209;
+///     WAILING_CAVERNS = 229;
+///     SILITHID = 249;
+///     SILVERMOON_REMNANT = 269;
+///     ZANDALAR_TRIBE = 270;
+///     BLACKSMITHING_WEAPONSMITHING = 289;
+///     SCORPID = 309;
+///     BEAST_BAT = 310;
+///     TITAN = 311;
+///     TASKMASTER_FIZZULE = 329;
+///     RAVENHOLDT = 349;
+///     GADGETZAN = 369;
+///     GNOMEREGAN_BUG = 389;
+///     HARPY = 409;
+///     BURNING_BLADE = 429;
+///     SHADOWSILK_POACHER = 449;
+///     SEARING_SPIDER = 450;
+///     ALLIANCE = 469;
+///     RATCHET = 470;
+///     WILDHAMMER_CLAN = 471;
+///     GOBLIN_DARK_IRON_BAR_PATRON = 489;
+///     THE_LEAGUE_OF_ARATHOR = 509;
+///     THE_DEFILERS = 510;
+///     GIANT = 511;
+///     ARGENT_DAWN = 529;
+///     DARKSPEAR_TROLLS = 530;
+///     DRAGONFLIGHT_BRONZE = 531;
+///     DRAGONFLIGHT_BLUE = 532;
+///     LEATHERWORKING_TRIBAL = 549;
+///     ENGINEERING_GOBLIN = 550;
+///     ENGINEERING_GNOME = 551;
+///     BLACKSMITHING_HAMMERSMITHING = 569;
+///     BLACKSMITHING_AXESMITHING = 570;
+///     BLACKSMITHING_SWORDSMITHING = 571;
+///     TROLL_VILEBRANCH = 572;
+///     SOUTHSEA_FREEBOOTERS = 573;
+///     CAER_DARROW = 574;
+///     FURBOLG_UNCORRUPTED = 575;
+///     TIMBERMAW_HOLD = 576;
+///     EVERLOOK = 577;
+///     WINTERSABER_TRAINERS = 589;
+///     CENARION_CIRCLE = 609;
+///     SHATTERSPEAR_TROLLS = 629;
+///     RAVASAUR_TRAINERS = 630;
+///     MAJORDOMO_EXECUTUS = 649;
+///     BEAST_CARRION_BIRD = 669;
+///     BEAST_CAT = 670;
+///     BEAST_CRAB = 671;
+///     BEAST_CROCILISK = 672;
+///     BEAST_HYENA = 673;
+///     BEAST_OWL = 674;
+///     BEAST_SCORPID = 675;
+///     BEAST_TALLSTRIDER = 676;
+///     BEAST_TURTLE = 677;
+///     BEAST_WIND_SERPENT = 678;
+///     TRAINING_DUMMY = 679;
+///     DRAGONFLIGHT_BLACK_BAIT = 689;
+///     BATTLEGROUND_NEUTRAL = 709;
+///     FROSTWOLF_CLAN = 729;
+///     STORMPIKE_GUARD = 730;
+///     HYDRAXIAN_WATERLORDS = 749;
+///     SULFURON_FIRELORDS = 750;
+///     GIZLOCKS_DUMMY = 769;
+///     GIZLOCKS_CHARM = 770;
+///     GIZLOCK = 771;
+///     MORO_GAI = 789;
+///     SPIRIT_GUIDE_ALLIANCE = 790;
+///     SHEN_DRALAR = 809;
+///     OGRE_CAPTAIN_KROMCRUSH = 829;
+///     SPIRIT_GUIDE_HORDE = 849;
+///     JAEDENAR = 869;
+///     WARSONG_OUTRIDERS = 889;
+///     SILVERWING_SENTINELS = 890;
+///     ALLIANCE_FORCES = 891;
+///     HORDE_FORCES = 892;
+///     REVANTUSK_TROLLS = 893;
+///     DARKMOON_FAIRE = 909;
+///     BROOD_OF_NOZDORMU = 910;
+///     SILVERMOON_CITY = 911;
+///     MIGHT_OF_KALIMDOR = 912;
+///     PLAYER_BLOOD_ELF = 914;
+///     ARMIES_OF_C_THUN = 915;
+///     SILITHID_ATTACKERS = 916;
+///     THE_IRONFORGE_BRIGADE = 917;
+///     RC_ENEMIES = 918;
+///     RC_OBJECTS = 919;
+///     RED = 920;
+///     BLUE = 921;
+///     TRANQUILLIEN = 922;
+///     FARSTRIDERS = 923;
+///     DEPRECATED = 924;
+///     SUNSTRIDERS = 925;
+///     MAGISTERS_GUILD = 926;
+///     PLAYER_DRAENEI = 927;
+///     SCOURGE_INVADERS = 928;
+///     BLOODMAUL_CLAN = 929;
+///     EXODAR = 930;
+///     TEST_FACTION_NOT_A_REAL_FACTION = 931;
+///     THE_ALDOR = 932;
+///     THE_CONSORTIUM = 933;
+///     THE_SCRYERS = 934;
+///     THE_SHA_TAR = 935;
+///     SHATTRATH_CITY = 936;
+///     TROLL_FOREST = 937;
+///     THE_OMENAI = 938;
+///     DEPRECATED1 = 939;
+///     THE_SONS_OF_LOTHAR = 940;
+///     THE_MAG_HAR = 941;
+///     CENARION_EXPEDITION = 942;
+///     FEL_ORC = 943;
+///     FEL_ORC_GHOST = 944;
+///     SONS_OF_LOTHAR_GHOSTS = 945;
+///     HONOR_HOLD = 946;
+///     THRALLMAR = 947;
+///     TEST_FACTION_2 = 948;
+///     TEST_FACTION_1 = 949;
+///     TOWOW_FLAG = 950;
+///     TOWOW_FLAG_TRIGGER_ALLIANCE_DND = 951;
+///     TEST_FACTION_3 = 952;
+///     TEST_FACTION_4 = 953;
+///     TOWOW_FLAG_TRIGGER_HORDE_DND = 954;
+///     BROKEN = 955;
+///     ETHEREUM = 956;
+///     EARTH_ELEMENTAL = 957;
+///     FIGHTING_ROBOTS = 958;
+///     ACTOR_GOOD = 959;
+///     ACTOR_EVIL = 960;
+///     STILLPINE_FURBOLG = 961;
+///     CRAZED_OWLKIN = 962;
+///     CHESS_ALLIANCE = 963;
+///     CHESS_HORDE = 964;
+///     MONSTER_SPAR = 965;
+///     MONSTER_SPAR_BUDDY = 966;
+///     THE_VIOLET_EYE = 967;
+///     SUNHAWKS = 968;
+///     HAND_OF_ARGUS = 969;
+///     SPOREGGAR = 970;
+///     FUNGAL_GIANT = 971;
+///     SPORE_BAT = 972;
+///     MONSTER_PREDATOR = 973;
+///     MONSTER_PREY = 974;
+///     VOID_ANOMALY = 975;
+///     HYJAL_DEFENDERS = 976;
+///     HYJAL_INVADERS = 977;
+///     KURENAI = 978;
+///     EARTHEN_RING = 979;
+///     THE_BURNING_CRUSADE = 980;
+///     ARAKKOA = 981;
+///     ZANGARMARSH_BANNER_ALLIANCE = 982;
+///     ZANGARMARSH_BANNER_HORDE = 983;
+///     ZANGARMARSH_BANNER_NEUTRAL = 984;
+///     CAVERNS_OF_TIME_THRALL = 985;
+///     CAVERNS_OF_TIME_DURNHOLDE = 986;
+///     CAVERNS_OF_TIME_SOUTHSHORE_GUARDS = 987;
+///     SHADOW_COUNCIL_COVERT = 988;
+///     KEEPERS_OF_TIME = 989;
+///     THE_SCALE_OF_THE_SANDS = 990;
+///     DARK_PORTAL_DEFENDER_ALLIANCE = 991;
+///     DARK_PORTAL_DEFENDER_HORDE = 992;
+///     DARK_PORTAL_ATTACKER_LEGION = 993;
+///     INCITER_TRIGGER = 994;
+///     INCITER_TRIGGER_2 = 995;
+///     INCITER_TRIGGER_3 = 996;
+///     INCITER_TRIGGER_4 = 997;
+///     INCITER_TRIGGER_5 = 998;
+///     MANA_CREATURE = 999;
+///     KHADGARS_SERVANT = 1000;
+///     BLADESPIRE_CLAN = 1001;
+///     ETHEREUM_SPARBUDDY = 1002;
+///     PROTECTORATE = 1003;
+///     ARCANE_ANNIHILATOR_DNR = 1004;
+///     FRIENDLY_HIDDEN = 1005;
+///     KIRIN_VAR_DATHRIC = 1006;
+///     KIRIN_VAR_BELMARA = 1007;
+///     KIRIN_VAR_LUMINRATH = 1008;
+///     KIRIN_VAR_COHLIEN = 1009;
+///     SERVANT_OF_ILLIDAN = 1010;
+///     LOWER_CITY = 1011;
+///     ASHTONGUE_DEATHSWORN = 1012;
+///     SPIRITS_OF_SHADOWMOON_1 = 1013;
+///     SPIRITS_OF_SHADOWMOON_2 = 1014;
+///     NETHERWING = 1015;
+///     WYRMCULT = 1016;
+///     TREANT = 1017;
+///     LEOTHERAS_DEMON_I = 1018;
+///     LEOTHERAS_DEMON_II = 1019;
+///     LEOTHERAS_DEMON_III = 1020;
+///     LEOTHERAS_DEMON_IV = 1021;
+///     LEOTHERAS_DEMON_V = 1022;
+///     AZALOTH = 1023;
+///     ROCK_FLAYER = 1024;
+///     FLAYER_HUNTER = 1025;
+///     SHADOWMOON_SHADE = 1026;
+///     LEGION_COMMUNICATOR = 1027;
+///     RAVENSWOOD_ANCIENTS = 1028;
+///     CHESS_FRIENDLY_TO_ALL_CHESS = 1029;
+///     BLACK_TEMPLE_GATES_ILLIDARI = 1030;
+///     SHA_TARI_SKYGUARD = 1031;
+///     AREA_52 = 1032;
+///     MAIEV = 1033;
+///     SKETTIS_SHADOWY_ARAKKOA = 1034;
+///     SKETTIS_ARAKKOA = 1035;
+///     DRAGONMAW_ENEMY = 1036;
+///     ALLIANCE_VANGUARD = 1037;
+///     OGRI_LA = 1038;
+///     RAVAGER = 1039;
+///     REUSE = 1040;
+///     FRENZY = 1041;
+///     SKYGUARD_ENEMY = 1042;
+///     SKUNK_PETUNIA = 1043;
+///     THERAMORE_DESERTER = 1044;
+///     VRYKUL = 1045;
+///     NORTHSEA_PIRATES = 1046;
+///     TUSKARR = 1047;
+///     UNUSED = 1048;
+///     TROLL_AMANI = 1049;
+///     VALIANCE_EXPEDITION = 1050;
+///     UNUSED1 = 1051;
+///     HORDE_EXPEDITION = 1052;
+///     WESTGUARD = 1053;
+///     SPOTTED_GRYPHON = 1054;
+///     TAMED_PLAGUEHOUND = 1055;
+///     VRYKUL_ANCIENT_SPIRIT_1 = 1056;
+///     VRYKUL_ANCIENT_SIPRIT_2 = 1057;
+///     VRYKUL_ANCIENT_SIPRIT_3 = 1058;
+///     CTF_FLAG_ALLIANCE = 1059;
+///     TEST = 1060;
+///     VRYKUL1 = 1061;
+///     VRYKUL_GLADIATOR = 1062;
+///     VALGARDE_COMBATANT = 1063;
+///     THE_TAUNKA = 1064;
+///     MONSTER_ZONE_FORCE_REACTION_1 = 1065;
+///     MONSTER_ZONE_FORCE_REACTION_2 = 1066;
+///     THE_HAND_OF_VENGEANCE = 1067;
+///     EXPLORERS__LEAGUE = 1068;
+///     RAM_RACING_POWERUP_DND = 1069;
+///     RAM_RACING_TRAP_DND = 1070;
+///     CRAIGS_SQUIRRELS = 1071;
+///     REUSE1 = 1072;
+///     THE_KALU_AK = 1073;
+///     HOLIDAY_WATER_BARREL = 1074;
+///     HOLIDAY_GENERIC = 1075;
+///     IRON_DWARVES = 1076;
+///     SHATTERED_SUN_OFFENSIVE = 1077;
+///     FIGHTING_VANITY_PET = 1078;
+///     MURLOC_WINTERFIN = 1079;
+///     FRIENDLY_FORCE_REACTION = 1080;
+///     OBJECT_FORCE_REACTION = 1081;
+///     REUSE2 = 1082;
+///     REUSE4 = 1083;
+///     VRYKUL_SEA = 1084;
+///     WARSONG_OFFENSIVE = 1085;
+///     POACHER = 1086;
+///     HOLIDAY_MONSTER = 1087;
+///     FURBOLG_REDFANG = 1088;
+///     FURBOLG_FROSTPAW = 1089;
+///     KIRIN_TOR = 1090;
+///     THE_WYRMREST_ACCORD = 1091;
+///     AZJOL_NERUB = 1092;
+///     REUSE8 = 1093;
+///     THE_SILVER_COVENANT = 1094;
+///     GRIZZLY_HILLS_TRAPPER = 1095;
+///     REUSE16 = 1096;
+///     WRATH_OF_THE_LICH_KING = 1097;
+///     KNIGHTS_OF_THE_EBON_BLADE = 1098;
+///     WRATHGATE_SCOURGE = 1099;
+///     WRATHGATE_ALLIANCE = 1100;
+///     WRATHGATE_HORDE = 1101;
+///     CTF_FLAG_HORDE = 1102;
+///     CTF_FLAG_NEUTRAL = 1103;
+///     FRENZYHEART_TRIBE = 1104;
+///     THE_ORACLES = 1105;
+///     ARGENT_CRUSADE = 1106;
+///     TROLL_DRAKKARI = 1107;
+///     COT_ARTHAS = 1108;
+///     COT_STRATHOLME_CITIZEN = 1109;
+///     COT_SCOURGE = 1110;
+///     FREYA = 1111;
+///     MOUNT_TAXI_ALLIANCE = 1112;
+///     MOUNT_TAXI_HORDE = 1113;
+///     MOUNT_TAXI_NEUTRAL = 1114;
+///     ELEMENTAL_WATER = 1115;
+///     ELEMENTAL_AIR = 1116;
+///     SHOLAZAR_BASIN = 1117;
+///     CLASSIC = 1118;
+///     THE_SONS_OF_HODIR = 1119;
+///     IRON_GIANTS = 1120;
+///     FROST_VRYKUL = 1121;
+///     EARTHEN = 1122;
+///     MONSTER_REFEREE = 1123;
+///     THE_SUNREAVERS = 1124;
+///     HYLDSMEET = 1125;
+///     THE_FROSTBORN = 1126;
+///     ORGRIMMAR_ALEX_TEST = 1127;
+///     TRANQUILLIEN_CONVERSION = 1136;
+///     WINTERSABER_CONVERSION = 1137;
+///     HATES_EVERYTHING = 1145;
+///     SILVER_COVENANT_CONVERSION = 1154;
+///     SUNREAVERS_CONVERSION = 1155;
+///     THE_ASHEN_VERDICT = 1156;
+///     CTF_FLAG_ALLIANCE_2 = 1159;
+///     CTF_FLAG_HORDE_2 = 1160;
+/// }
+/// ```
+#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+pub enum Faction {
+    None,
+    PlayerHuman,
+    PlayerOrc,
+    PlayerDwarf,
+    PlayerNightElf,
+    PlayerUndead,
+    PlayerTauren,
+    Creature,
+    PlayerGnome,
+    PlayerTroll,
+    Monster,
+    DefiasBrotherhood,
+    GnollRiverpaw,
+    GnollRedridge,
+    GnollShadowhide,
+    Murloc,
+    UndeadScourge,
+    BootyBay,
+    BeastSpider,
+    BeastBoar,
+    Worgen,
+    Kobold,
+    TrollBloodscalp,
+    TrollSkullsplitter,
+    Prey,
+    BeastWolf,
+    DefiasBrotherhoodTraitor,
+    Friendly,
+    Trogg,
+    TrollFrostmane,
+    OrcBlackrock,
+    Villian,
+    Victim,
+    BeastBear,
+    Ogre,
+    KurzensMercenaries,
+    Escortee,
+    VentureCompany,
+    BeastRaptor,
+    Basilisk,
+    DragonflightGreen,
+    LostOnes,
+    BlacksmithingArmorsmithing,
+    Ironforge,
+    DarkIronDwarves,
+    HumanNightWatch,
+    DragonflightRed,
+    GnollMosshide,
+    OrcDragonmaw,
+    GnomeLeper,
+    GnomereganExiles,
+    Leopard,
+    ScarletCrusade,
+    GnollRothide,
+    BeastGorilla,
+    ThoriumBrotherhood,
+    Naga,
+    Dalaran,
+    ForlornSpirit,
+    Darkhowl,
+    Grell,
+    Furbolg,
+    HordeGeneric,
+    Horde,
+    Undercity,
+    Darnassus,
+    Syndicate,
+    HillsbradMilitia,
+    Stormwind,
+    Demon,
+    Elemental,
+    Spirit,
+    Orgrimmar,
+    Treasure,
+    GnollMudsnout,
+    HillsbradSouthshoreMayor,
+    DragonflightBlack,
+    ThunderBluff,
+    TrollWitherbark,
+    LeatherworkingElemental,
+    QuilboarRazormane,
+    QuilboarBristleback,
+    LeatherworkingDragonscale,
+    BloodsailBuccaneers,
+    Blackfathom,
+    Makrura,
+    CentaurKolkar,
+    CentaurGalak,
+    GelkisClanCentaur,
+    MagramClanCentaur,
+    Maraudine,
+    Theramore,
+    QuilboarRazorfen,
+    QuilboarRazormane2,
+    QuilboarDeathshead,
+    Enemy,
+    Ambient,
+    NethergardeCaravan,
+    SteamwheedleCartel,
+    AllianceGeneric,
+    Nethergarde,
+    WailingCaverns,
+    Silithid,
+    SilvermoonRemnant,
+    ZandalarTribe,
+    BlacksmithingWeaponsmithing,
+    Scorpid,
+    BeastBat,
+    Titan,
+    TaskmasterFizzule,
+    Ravenholdt,
+    Gadgetzan,
+    GnomereganBug,
+    Harpy,
+    BurningBlade,
+    ShadowsilkPoacher,
+    SearingSpider,
+    Alliance,
+    Ratchet,
+    WildhammerClan,
+    GoblinDarkIronBarPatron,
+    TheLeagueOfArathor,
+    TheDefilers,
+    Giant,
+    ArgentDawn,
+    DarkspearTrolls,
+    DragonflightBronze,
+    DragonflightBlue,
+    LeatherworkingTribal,
+    EngineeringGoblin,
+    EngineeringGnome,
+    BlacksmithingHammersmithing,
+    BlacksmithingAxesmithing,
+    BlacksmithingSwordsmithing,
+    TrollVilebranch,
+    SouthseaFreebooters,
+    CaerDarrow,
+    FurbolgUncorrupted,
+    TimbermawHold,
+    Everlook,
+    WintersaberTrainers,
+    CenarionCircle,
+    ShatterspearTrolls,
+    RavasaurTrainers,
+    MajordomoExecutus,
+    BeastCarrionBird,
+    BeastCat,
+    BeastCrab,
+    BeastCrocilisk,
+    BeastHyena,
+    BeastOwl,
+    BeastScorpid,
+    BeastTallstrider,
+    BeastTurtle,
+    BeastWindSerpent,
+    TrainingDummy,
+    DragonflightBlackBait,
+    BattlegroundNeutral,
+    FrostwolfClan,
+    StormpikeGuard,
+    HydraxianWaterlords,
+    SulfuronFirelords,
+    GizlocksDummy,
+    GizlocksCharm,
+    Gizlock,
+    MoroGai,
+    SpiritGuideAlliance,
+    ShenDralar,
+    OgreCaptainKromcrush,
+    SpiritGuideHorde,
+    Jaedenar,
+    WarsongOutriders,
+    SilverwingSentinels,
+    AllianceForces,
+    HordeForces,
+    RevantuskTrolls,
+    DarkmoonFaire,
+    BroodOfNozdormu,
+    SilvermoonCity,
+    MightOfKalimdor,
+    PlayerBloodElf,
+    ArmiesOfCThun,
+    SilithidAttackers,
+    TheIronforgeBrigade,
+    RcEnemies,
+    RcObjects,
+    Red,
+    Blue,
+    Tranquillien,
+    Farstriders,
+    Deprecated,
+    Sunstriders,
+    MagistersGuild,
+    PlayerDraenei,
+    ScourgeInvaders,
+    BloodmaulClan,
+    Exodar,
+    TestFactionNotARealFaction,
+    TheAldor,
+    TheConsortium,
+    TheScryers,
+    TheShaTar,
+    ShattrathCity,
+    TrollForest,
+    TheOmenai,
+    Deprecated1,
+    TheSonsOfLothar,
+    TheMagHar,
+    CenarionExpedition,
+    FelOrc,
+    FelOrcGhost,
+    SonsOfLotharGhosts,
+    HonorHold,
+    Thrallmar,
+    TestFaction2,
+    TestFaction1,
+    TowowFlag,
+    TowowFlagTriggerAllianceDnd,
+    TestFaction3,
+    TestFaction4,
+    TowowFlagTriggerHordeDnd,
+    Broken,
+    Ethereum,
+    EarthElemental,
+    FightingRobots,
+    ActorGood,
+    ActorEvil,
+    StillpineFurbolg,
+    CrazedOwlkin,
+    ChessAlliance,
+    ChessHorde,
+    MonsterSpar,
+    MonsterSparBuddy,
+    TheVioletEye,
+    Sunhawks,
+    HandOfArgus,
+    Sporeggar,
+    FungalGiant,
+    SporeBat,
+    MonsterPredator,
+    MonsterPrey,
+    VoidAnomaly,
+    HyjalDefenders,
+    HyjalInvaders,
+    Kurenai,
+    EarthenRing,
+    TheBurningCrusade,
+    Arakkoa,
+    ZangarmarshBannerAlliance,
+    ZangarmarshBannerHorde,
+    ZangarmarshBannerNeutral,
+    CavernsOfTimeThrall,
+    CavernsOfTimeDurnholde,
+    CavernsOfTimeSouthshoreGuards,
+    ShadowCouncilCovert,
+    KeepersOfTime,
+    TheScaleOfTheSands,
+    DarkPortalDefenderAlliance,
+    DarkPortalDefenderHorde,
+    DarkPortalAttackerLegion,
+    InciterTrigger,
+    InciterTrigger2,
+    InciterTrigger3,
+    InciterTrigger4,
+    InciterTrigger5,
+    ManaCreature,
+    KhadgarsServant,
+    BladespireClan,
+    EthereumSparbuddy,
+    Protectorate,
+    ArcaneAnnihilatorDnr,
+    FriendlyHidden,
+    KirinVarDathric,
+    KirinVarBelmara,
+    KirinVarLuminrath,
+    KirinVarCohlien,
+    ServantOfIllidan,
+    LowerCity,
+    AshtongueDeathsworn,
+    SpiritsOfShadowmoon1,
+    SpiritsOfShadowmoon2,
+    Netherwing,
+    Wyrmcult,
+    Treant,
+    LeotherasDemonI,
+    LeotherasDemonIi,
+    LeotherasDemonIii,
+    LeotherasDemonIv,
+    LeotherasDemonV,
+    Azaloth,
+    RockFlayer,
+    FlayerHunter,
+    ShadowmoonShade,
+    LegionCommunicator,
+    RavenswoodAncients,
+    ChessFriendlyToAllChess,
+    BlackTempleGatesIllidari,
+    ShaTariSkyguard,
+    Area52,
+    Maiev,
+    SkettisShadowyArakkoa,
+    SkettisArakkoa,
+    DragonmawEnemy,
+    AllianceVanguard,
+    OgriLa,
+    Ravager,
+    Reuse,
+    Frenzy,
+    SkyguardEnemy,
+    SkunkPetunia,
+    TheramoreDeserter,
+    Vrykul,
+    NorthseaPirates,
+    Tuskarr,
+    Unused,
+    TrollAmani,
+    ValianceExpedition,
+    Unused1,
+    HordeExpedition,
+    Westguard,
+    SpottedGryphon,
+    TamedPlaguehound,
+    VrykulAncientSpirit1,
+    VrykulAncientSiprit2,
+    VrykulAncientSiprit3,
+    CtfFlagAlliance,
+    Test,
+    Vrykul1,
+    VrykulGladiator,
+    ValgardeCombatant,
+    TheTaunka,
+    MonsterZoneForceReaction1,
+    MonsterZoneForceReaction2,
+    TheHandOfVengeance,
+    ExplorersLeague,
+    RamRacingPowerupDnd,
+    RamRacingTrapDnd,
+    CraigsSquirrels,
+    Reuse1,
+    TheKaluAk,
+    HolidayWaterBarrel,
+    HolidayGeneric,
+    IronDwarves,
+    ShatteredSunOffensive,
+    FightingVanityPet,
+    MurlocWinterfin,
+    FriendlyForceReaction,
+    ObjectForceReaction,
+    Reuse2,
+    Reuse4,
+    VrykulSea,
+    WarsongOffensive,
+    Poacher,
+    HolidayMonster,
+    FurbolgRedfang,
+    FurbolgFrostpaw,
+    KirinTor,
+    TheWyrmrestAccord,
+    AzjolNerub,
+    Reuse8,
+    TheSilverCovenant,
+    GrizzlyHillsTrapper,
+    Reuse16,
+    WrathOfTheLichKing,
+    KnightsOfTheEbonBlade,
+    WrathgateScourge,
+    WrathgateAlliance,
+    WrathgateHorde,
+    CtfFlagHorde,
+    CtfFlagNeutral,
+    FrenzyheartTribe,
+    TheOracles,
+    ArgentCrusade,
+    TrollDrakkari,
+    CotArthas,
+    CotStratholmeCitizen,
+    CotScourge,
+    Freya,
+    MountTaxiAlliance,
+    MountTaxiHorde,
+    MountTaxiNeutral,
+    ElementalWater,
+    ElementalAir,
+    SholazarBasin,
+    Classic,
+    TheSonsOfHodir,
+    IronGiants,
+    FrostVrykul,
+    Earthen,
+    MonsterReferee,
+    TheSunreavers,
+    Hyldsmeet,
+    TheFrostborn,
+    OrgrimmarAlexTest,
+    TranquillienConversion,
+    WintersaberConversion,
+    HatesEverything,
+    SilverCovenantConversion,
+    SunreaversConversion,
+    TheAshenVerdict,
+    CtfFlagAlliance2,
+    CtfFlagHorde2,
+}
+
+impl Faction {
+    pub const fn as_int(&self) -> u16 {
+        match self {
+            Self::None => 0x0,
+            Self::PlayerHuman => 0x1,
+            Self::PlayerOrc => 0x2,
+            Self::PlayerDwarf => 0x3,
+            Self::PlayerNightElf => 0x4,
+            Self::PlayerUndead => 0x5,
+            Self::PlayerTauren => 0x6,
+            Self::Creature => 0x7,
+            Self::PlayerGnome => 0x8,
+            Self::PlayerTroll => 0x9,
+            Self::Monster => 0xe,
+            Self::DefiasBrotherhood => 0xf,
+            Self::GnollRiverpaw => 0x10,
+            Self::GnollRedridge => 0x11,
+            Self::GnollShadowhide => 0x12,
+            Self::Murloc => 0x13,
+            Self::UndeadScourge => 0x14,
+            Self::BootyBay => 0x15,
+            Self::BeastSpider => 0x16,
+            Self::BeastBoar => 0x17,
+            Self::Worgen => 0x18,
+            Self::Kobold => 0x19,
+            Self::TrollBloodscalp => 0x1a,
+            Self::TrollSkullsplitter => 0x1b,
+            Self::Prey => 0x1c,
+            Self::BeastWolf => 0x1d,
+            Self::DefiasBrotherhoodTraitor => 0x1e,
+            Self::Friendly => 0x1f,
+            Self::Trogg => 0x20,
+            Self::TrollFrostmane => 0x21,
+            Self::OrcBlackrock => 0x22,
+            Self::Villian => 0x23,
+            Self::Victim => 0x24,
+            Self::BeastBear => 0x25,
+            Self::Ogre => 0x26,
+            Self::KurzensMercenaries => 0x27,
+            Self::Escortee => 0x28,
+            Self::VentureCompany => 0x29,
+            Self::BeastRaptor => 0x2a,
+            Self::Basilisk => 0x2b,
+            Self::DragonflightGreen => 0x2c,
+            Self::LostOnes => 0x2d,
+            Self::BlacksmithingArmorsmithing => 0x2e,
+            Self::Ironforge => 0x2f,
+            Self::DarkIronDwarves => 0x30,
+            Self::HumanNightWatch => 0x31,
+            Self::DragonflightRed => 0x32,
+            Self::GnollMosshide => 0x33,
+            Self::OrcDragonmaw => 0x34,
+            Self::GnomeLeper => 0x35,
+            Self::GnomereganExiles => 0x36,
+            Self::Leopard => 0x37,
+            Self::ScarletCrusade => 0x38,
+            Self::GnollRothide => 0x39,
+            Self::BeastGorilla => 0x3a,
+            Self::ThoriumBrotherhood => 0x3b,
+            Self::Naga => 0x3c,
+            Self::Dalaran => 0x3d,
+            Self::ForlornSpirit => 0x3e,
+            Self::Darkhowl => 0x3f,
+            Self::Grell => 0x40,
+            Self::Furbolg => 0x41,
+            Self::HordeGeneric => 0x42,
+            Self::Horde => 0x43,
+            Self::Undercity => 0x44,
+            Self::Darnassus => 0x45,
+            Self::Syndicate => 0x46,
+            Self::HillsbradMilitia => 0x47,
+            Self::Stormwind => 0x48,
+            Self::Demon => 0x49,
+            Self::Elemental => 0x4a,
+            Self::Spirit => 0x4b,
+            Self::Orgrimmar => 0x4c,
+            Self::Treasure => 0x4d,
+            Self::GnollMudsnout => 0x4e,
+            Self::HillsbradSouthshoreMayor => 0x4f,
+            Self::DragonflightBlack => 0x50,
+            Self::ThunderBluff => 0x51,
+            Self::TrollWitherbark => 0x52,
+            Self::LeatherworkingElemental => 0x53,
+            Self::QuilboarRazormane => 0x54,
+            Self::QuilboarBristleback => 0x55,
+            Self::LeatherworkingDragonscale => 0x56,
+            Self::BloodsailBuccaneers => 0x57,
+            Self::Blackfathom => 0x58,
+            Self::Makrura => 0x59,
+            Self::CentaurKolkar => 0x5a,
+            Self::CentaurGalak => 0x5b,
+            Self::GelkisClanCentaur => 0x5c,
+            Self::MagramClanCentaur => 0x5d,
+            Self::Maraudine => 0x5e,
+            Self::Theramore => 0x6c,
+            Self::QuilboarRazorfen => 0x6d,
+            Self::QuilboarRazormane2 => 0x6e,
+            Self::QuilboarDeathshead => 0x6f,
+            Self::Enemy => 0x80,
+            Self::Ambient => 0x94,
+            Self::NethergardeCaravan => 0xa8,
+            Self::SteamwheedleCartel => 0xa9,
+            Self::AllianceGeneric => 0xbd,
+            Self::Nethergarde => 0xd1,
+            Self::WailingCaverns => 0xe5,
+            Self::Silithid => 0xf9,
+            Self::SilvermoonRemnant => 0x10d,
+            Self::ZandalarTribe => 0x10e,
+            Self::BlacksmithingWeaponsmithing => 0x121,
+            Self::Scorpid => 0x135,
+            Self::BeastBat => 0x136,
+            Self::Titan => 0x137,
+            Self::TaskmasterFizzule => 0x149,
+            Self::Ravenholdt => 0x15d,
+            Self::Gadgetzan => 0x171,
+            Self::GnomereganBug => 0x185,
+            Self::Harpy => 0x199,
+            Self::BurningBlade => 0x1ad,
+            Self::ShadowsilkPoacher => 0x1c1,
+            Self::SearingSpider => 0x1c2,
+            Self::Alliance => 0x1d5,
+            Self::Ratchet => 0x1d6,
+            Self::WildhammerClan => 0x1d7,
+            Self::GoblinDarkIronBarPatron => 0x1e9,
+            Self::TheLeagueOfArathor => 0x1fd,
+            Self::TheDefilers => 0x1fe,
+            Self::Giant => 0x1ff,
+            Self::ArgentDawn => 0x211,
+            Self::DarkspearTrolls => 0x212,
+            Self::DragonflightBronze => 0x213,
+            Self::DragonflightBlue => 0x214,
+            Self::LeatherworkingTribal => 0x225,
+            Self::EngineeringGoblin => 0x226,
+            Self::EngineeringGnome => 0x227,
+            Self::BlacksmithingHammersmithing => 0x239,
+            Self::BlacksmithingAxesmithing => 0x23a,
+            Self::BlacksmithingSwordsmithing => 0x23b,
+            Self::TrollVilebranch => 0x23c,
+            Self::SouthseaFreebooters => 0x23d,
+            Self::CaerDarrow => 0x23e,
+            Self::FurbolgUncorrupted => 0x23f,
+            Self::TimbermawHold => 0x240,
+            Self::Everlook => 0x241,
+            Self::WintersaberTrainers => 0x24d,
+            Self::CenarionCircle => 0x261,
+            Self::ShatterspearTrolls => 0x275,
+            Self::RavasaurTrainers => 0x276,
+            Self::MajordomoExecutus => 0x289,
+            Self::BeastCarrionBird => 0x29d,
+            Self::BeastCat => 0x29e,
+            Self::BeastCrab => 0x29f,
+            Self::BeastCrocilisk => 0x2a0,
+            Self::BeastHyena => 0x2a1,
+            Self::BeastOwl => 0x2a2,
+            Self::BeastScorpid => 0x2a3,
+            Self::BeastTallstrider => 0x2a4,
+            Self::BeastTurtle => 0x2a5,
+            Self::BeastWindSerpent => 0x2a6,
+            Self::TrainingDummy => 0x2a7,
+            Self::DragonflightBlackBait => 0x2b1,
+            Self::BattlegroundNeutral => 0x2c5,
+            Self::FrostwolfClan => 0x2d9,
+            Self::StormpikeGuard => 0x2da,
+            Self::HydraxianWaterlords => 0x2ed,
+            Self::SulfuronFirelords => 0x2ee,
+            Self::GizlocksDummy => 0x301,
+            Self::GizlocksCharm => 0x302,
+            Self::Gizlock => 0x303,
+            Self::MoroGai => 0x315,
+            Self::SpiritGuideAlliance => 0x316,
+            Self::ShenDralar => 0x329,
+            Self::OgreCaptainKromcrush => 0x33d,
+            Self::SpiritGuideHorde => 0x351,
+            Self::Jaedenar => 0x365,
+            Self::WarsongOutriders => 0x379,
+            Self::SilverwingSentinels => 0x37a,
+            Self::AllianceForces => 0x37b,
+            Self::HordeForces => 0x37c,
+            Self::RevantuskTrolls => 0x37d,
+            Self::DarkmoonFaire => 0x38d,
+            Self::BroodOfNozdormu => 0x38e,
+            Self::SilvermoonCity => 0x38f,
+            Self::MightOfKalimdor => 0x390,
+            Self::PlayerBloodElf => 0x392,
+            Self::ArmiesOfCThun => 0x393,
+            Self::SilithidAttackers => 0x394,
+            Self::TheIronforgeBrigade => 0x395,
+            Self::RcEnemies => 0x396,
+            Self::RcObjects => 0x397,
+            Self::Red => 0x398,
+            Self::Blue => 0x399,
+            Self::Tranquillien => 0x39a,
+            Self::Farstriders => 0x39b,
+            Self::Deprecated => 0x39c,
+            Self::Sunstriders => 0x39d,
+            Self::MagistersGuild => 0x39e,
+            Self::PlayerDraenei => 0x39f,
+            Self::ScourgeInvaders => 0x3a0,
+            Self::BloodmaulClan => 0x3a1,
+            Self::Exodar => 0x3a2,
+            Self::TestFactionNotARealFaction => 0x3a3,
+            Self::TheAldor => 0x3a4,
+            Self::TheConsortium => 0x3a5,
+            Self::TheScryers => 0x3a6,
+            Self::TheShaTar => 0x3a7,
+            Self::ShattrathCity => 0x3a8,
+            Self::TrollForest => 0x3a9,
+            Self::TheOmenai => 0x3aa,
+            Self::Deprecated1 => 0x3ab,
+            Self::TheSonsOfLothar => 0x3ac,
+            Self::TheMagHar => 0x3ad,
+            Self::CenarionExpedition => 0x3ae,
+            Self::FelOrc => 0x3af,
+            Self::FelOrcGhost => 0x3b0,
+            Self::SonsOfLotharGhosts => 0x3b1,
+            Self::HonorHold => 0x3b2,
+            Self::Thrallmar => 0x3b3,
+            Self::TestFaction2 => 0x3b4,
+            Self::TestFaction1 => 0x3b5,
+            Self::TowowFlag => 0x3b6,
+            Self::TowowFlagTriggerAllianceDnd => 0x3b7,
+            Self::TestFaction3 => 0x3b8,
+            Self::TestFaction4 => 0x3b9,
+            Self::TowowFlagTriggerHordeDnd => 0x3ba,
+            Self::Broken => 0x3bb,
+            Self::Ethereum => 0x3bc,
+            Self::EarthElemental => 0x3bd,
+            Self::FightingRobots => 0x3be,
+            Self::ActorGood => 0x3bf,
+            Self::ActorEvil => 0x3c0,
+            Self::StillpineFurbolg => 0x3c1,
+            Self::CrazedOwlkin => 0x3c2,
+            Self::ChessAlliance => 0x3c3,
+            Self::ChessHorde => 0x3c4,
+            Self::MonsterSpar => 0x3c5,
+            Self::MonsterSparBuddy => 0x3c6,
+            Self::TheVioletEye => 0x3c7,
+            Self::Sunhawks => 0x3c8,
+            Self::HandOfArgus => 0x3c9,
+            Self::Sporeggar => 0x3ca,
+            Self::FungalGiant => 0x3cb,
+            Self::SporeBat => 0x3cc,
+            Self::MonsterPredator => 0x3cd,
+            Self::MonsterPrey => 0x3ce,
+            Self::VoidAnomaly => 0x3cf,
+            Self::HyjalDefenders => 0x3d0,
+            Self::HyjalInvaders => 0x3d1,
+            Self::Kurenai => 0x3d2,
+            Self::EarthenRing => 0x3d3,
+            Self::TheBurningCrusade => 0x3d4,
+            Self::Arakkoa => 0x3d5,
+            Self::ZangarmarshBannerAlliance => 0x3d6,
+            Self::ZangarmarshBannerHorde => 0x3d7,
+            Self::ZangarmarshBannerNeutral => 0x3d8,
+            Self::CavernsOfTimeThrall => 0x3d9,
+            Self::CavernsOfTimeDurnholde => 0x3da,
+            Self::CavernsOfTimeSouthshoreGuards => 0x3db,
+            Self::ShadowCouncilCovert => 0x3dc,
+            Self::KeepersOfTime => 0x3dd,
+            Self::TheScaleOfTheSands => 0x3de,
+            Self::DarkPortalDefenderAlliance => 0x3df,
+            Self::DarkPortalDefenderHorde => 0x3e0,
+            Self::DarkPortalAttackerLegion => 0x3e1,
+            Self::InciterTrigger => 0x3e2,
+            Self::InciterTrigger2 => 0x3e3,
+            Self::InciterTrigger3 => 0x3e4,
+            Self::InciterTrigger4 => 0x3e5,
+            Self::InciterTrigger5 => 0x3e6,
+            Self::ManaCreature => 0x3e7,
+            Self::KhadgarsServant => 0x3e8,
+            Self::BladespireClan => 0x3e9,
+            Self::EthereumSparbuddy => 0x3ea,
+            Self::Protectorate => 0x3eb,
+            Self::ArcaneAnnihilatorDnr => 0x3ec,
+            Self::FriendlyHidden => 0x3ed,
+            Self::KirinVarDathric => 0x3ee,
+            Self::KirinVarBelmara => 0x3ef,
+            Self::KirinVarLuminrath => 0x3f0,
+            Self::KirinVarCohlien => 0x3f1,
+            Self::ServantOfIllidan => 0x3f2,
+            Self::LowerCity => 0x3f3,
+            Self::AshtongueDeathsworn => 0x3f4,
+            Self::SpiritsOfShadowmoon1 => 0x3f5,
+            Self::SpiritsOfShadowmoon2 => 0x3f6,
+            Self::Netherwing => 0x3f7,
+            Self::Wyrmcult => 0x3f8,
+            Self::Treant => 0x3f9,
+            Self::LeotherasDemonI => 0x3fa,
+            Self::LeotherasDemonIi => 0x3fb,
+            Self::LeotherasDemonIii => 0x3fc,
+            Self::LeotherasDemonIv => 0x3fd,
+            Self::LeotherasDemonV => 0x3fe,
+            Self::Azaloth => 0x3ff,
+            Self::RockFlayer => 0x400,
+            Self::FlayerHunter => 0x401,
+            Self::ShadowmoonShade => 0x402,
+            Self::LegionCommunicator => 0x403,
+            Self::RavenswoodAncients => 0x404,
+            Self::ChessFriendlyToAllChess => 0x405,
+            Self::BlackTempleGatesIllidari => 0x406,
+            Self::ShaTariSkyguard => 0x407,
+            Self::Area52 => 0x408,
+            Self::Maiev => 0x409,
+            Self::SkettisShadowyArakkoa => 0x40a,
+            Self::SkettisArakkoa => 0x40b,
+            Self::DragonmawEnemy => 0x40c,
+            Self::AllianceVanguard => 0x40d,
+            Self::OgriLa => 0x40e,
+            Self::Ravager => 0x40f,
+            Self::Reuse => 0x410,
+            Self::Frenzy => 0x411,
+            Self::SkyguardEnemy => 0x412,
+            Self::SkunkPetunia => 0x413,
+            Self::TheramoreDeserter => 0x414,
+            Self::Vrykul => 0x415,
+            Self::NorthseaPirates => 0x416,
+            Self::Tuskarr => 0x417,
+            Self::Unused => 0x418,
+            Self::TrollAmani => 0x419,
+            Self::ValianceExpedition => 0x41a,
+            Self::Unused1 => 0x41b,
+            Self::HordeExpedition => 0x41c,
+            Self::Westguard => 0x41d,
+            Self::SpottedGryphon => 0x41e,
+            Self::TamedPlaguehound => 0x41f,
+            Self::VrykulAncientSpirit1 => 0x420,
+            Self::VrykulAncientSiprit2 => 0x421,
+            Self::VrykulAncientSiprit3 => 0x422,
+            Self::CtfFlagAlliance => 0x423,
+            Self::Test => 0x424,
+            Self::Vrykul1 => 0x425,
+            Self::VrykulGladiator => 0x426,
+            Self::ValgardeCombatant => 0x427,
+            Self::TheTaunka => 0x428,
+            Self::MonsterZoneForceReaction1 => 0x429,
+            Self::MonsterZoneForceReaction2 => 0x42a,
+            Self::TheHandOfVengeance => 0x42b,
+            Self::ExplorersLeague => 0x42c,
+            Self::RamRacingPowerupDnd => 0x42d,
+            Self::RamRacingTrapDnd => 0x42e,
+            Self::CraigsSquirrels => 0x42f,
+            Self::Reuse1 => 0x430,
+            Self::TheKaluAk => 0x431,
+            Self::HolidayWaterBarrel => 0x432,
+            Self::HolidayGeneric => 0x433,
+            Self::IronDwarves => 0x434,
+            Self::ShatteredSunOffensive => 0x435,
+            Self::FightingVanityPet => 0x436,
+            Self::MurlocWinterfin => 0x437,
+            Self::FriendlyForceReaction => 0x438,
+            Self::ObjectForceReaction => 0x439,
+            Self::Reuse2 => 0x43a,
+            Self::Reuse4 => 0x43b,
+            Self::VrykulSea => 0x43c,
+            Self::WarsongOffensive => 0x43d,
+            Self::Poacher => 0x43e,
+            Self::HolidayMonster => 0x43f,
+            Self::FurbolgRedfang => 0x440,
+            Self::FurbolgFrostpaw => 0x441,
+            Self::KirinTor => 0x442,
+            Self::TheWyrmrestAccord => 0x443,
+            Self::AzjolNerub => 0x444,
+            Self::Reuse8 => 0x445,
+            Self::TheSilverCovenant => 0x446,
+            Self::GrizzlyHillsTrapper => 0x447,
+            Self::Reuse16 => 0x448,
+            Self::WrathOfTheLichKing => 0x449,
+            Self::KnightsOfTheEbonBlade => 0x44a,
+            Self::WrathgateScourge => 0x44b,
+            Self::WrathgateAlliance => 0x44c,
+            Self::WrathgateHorde => 0x44d,
+            Self::CtfFlagHorde => 0x44e,
+            Self::CtfFlagNeutral => 0x44f,
+            Self::FrenzyheartTribe => 0x450,
+            Self::TheOracles => 0x451,
+            Self::ArgentCrusade => 0x452,
+            Self::TrollDrakkari => 0x453,
+            Self::CotArthas => 0x454,
+            Self::CotStratholmeCitizen => 0x455,
+            Self::CotScourge => 0x456,
+            Self::Freya => 0x457,
+            Self::MountTaxiAlliance => 0x458,
+            Self::MountTaxiHorde => 0x459,
+            Self::MountTaxiNeutral => 0x45a,
+            Self::ElementalWater => 0x45b,
+            Self::ElementalAir => 0x45c,
+            Self::SholazarBasin => 0x45d,
+            Self::Classic => 0x45e,
+            Self::TheSonsOfHodir => 0x45f,
+            Self::IronGiants => 0x460,
+            Self::FrostVrykul => 0x461,
+            Self::Earthen => 0x462,
+            Self::MonsterReferee => 0x463,
+            Self::TheSunreavers => 0x464,
+            Self::Hyldsmeet => 0x465,
+            Self::TheFrostborn => 0x466,
+            Self::OrgrimmarAlexTest => 0x467,
+            Self::TranquillienConversion => 0x470,
+            Self::WintersaberConversion => 0x471,
+            Self::HatesEverything => 0x479,
+            Self::SilverCovenantConversion => 0x482,
+            Self::SunreaversConversion => 0x483,
+            Self::TheAshenVerdict => 0x484,
+            Self::CtfFlagAlliance2 => 0x487,
+            Self::CtfFlagHorde2 => 0x488,
+        }
+    }
+
+}
+
+impl Default for Faction {
+    fn default() -> Self {
+        Self::None
+    }
+}
+
+impl std::fmt::Display for Faction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::None => f.write_str("None"),
+            Self::PlayerHuman => f.write_str("PLAYER, Human"),
+            Self::PlayerOrc => f.write_str("PLAYER, Orc"),
+            Self::PlayerDwarf => f.write_str("PLAYER, Dwarf"),
+            Self::PlayerNightElf => f.write_str("PLAYER, Night Elf"),
+            Self::PlayerUndead => f.write_str("PLAYER, Undead"),
+            Self::PlayerTauren => f.write_str("PLAYER, Tauren"),
+            Self::Creature => f.write_str("Creature"),
+            Self::PlayerGnome => f.write_str("PLAYER, Gnome"),
+            Self::PlayerTroll => f.write_str("PLAYER, Troll"),
+            Self::Monster => f.write_str("Monster"),
+            Self::DefiasBrotherhood => f.write_str("DefiasBrotherhood"),
+            Self::GnollRiverpaw => f.write_str("Gnoll - Riverpaw"),
+            Self::GnollRedridge => f.write_str("Gnoll - Redridge"),
+            Self::GnollShadowhide => f.write_str("Gnoll - Shadowhide"),
+            Self::Murloc => f.write_str("Murloc"),
+            Self::UndeadScourge => f.write_str("Undead, Scourge"),
+            Self::BootyBay => f.write_str("BootyBay"),
+            Self::BeastSpider => f.write_str("Beast - Spider"),
+            Self::BeastBoar => f.write_str("Beast - Boar"),
+            Self::Worgen => f.write_str("Worgen"),
+            Self::Kobold => f.write_str("Kobold"),
+            Self::TrollBloodscalp => f.write_str("Troll, Bloodscalp"),
+            Self::TrollSkullsplitter => f.write_str("Troll, Skullsplitter"),
+            Self::Prey => f.write_str("Prey"),
+            Self::BeastWolf => f.write_str("Beast - Wolf"),
+            Self::DefiasBrotherhoodTraitor => f.write_str("DefiasBrotherhoodTraitor"),
+            Self::Friendly => f.write_str("Friendly"),
+            Self::Trogg => f.write_str("Trogg"),
+            Self::TrollFrostmane => f.write_str("Troll, Frostmane"),
+            Self::OrcBlackrock => f.write_str("Orc, Blackrock"),
+            Self::Villian => f.write_str("Villian"),
+            Self::Victim => f.write_str("Victim"),
+            Self::BeastBear => f.write_str("Beast - Bear"),
+            Self::Ogre => f.write_str("Ogre"),
+            Self::KurzensMercenaries => f.write_str("Kurzen's Mercenaries"),
+            Self::Escortee => f.write_str("Escortee"),
+            Self::VentureCompany => f.write_str("VentureCompany"),
+            Self::BeastRaptor => f.write_str("Beast - Raptor"),
+            Self::Basilisk => f.write_str("Basilisk"),
+            Self::DragonflightGreen => f.write_str("Dragonflight, Green"),
+            Self::LostOnes => f.write_str("LostOnes"),
+            Self::BlacksmithingArmorsmithing => f.write_str("Blacksmithing - Armorsmithing"),
+            Self::Ironforge => f.write_str("Ironforge"),
+            Self::DarkIronDwarves => f.write_str("DarkIronDwarves"),
+            Self::HumanNightWatch => f.write_str("Human, Night Watch"),
+            Self::DragonflightRed => f.write_str("Dragonflight, Red"),
+            Self::GnollMosshide => f.write_str("Gnoll - Mosshide"),
+            Self::OrcDragonmaw => f.write_str("Orc, Dragonmaw"),
+            Self::GnomeLeper => f.write_str("Gnome - Leper"),
+            Self::GnomereganExiles => f.write_str("GnomereganExiles"),
+            Self::Leopard => f.write_str("Leopard"),
+            Self::ScarletCrusade => f.write_str("ScarletCrusade"),
+            Self::GnollRothide => f.write_str("Gnoll - Rothide"),
+            Self::BeastGorilla => f.write_str("Beast - Gorilla"),
+            Self::ThoriumBrotherhood => f.write_str("ThoriumBrotherhood"),
+            Self::Naga => f.write_str("Naga"),
+            Self::Dalaran => f.write_str("Dalaran"),
+            Self::ForlornSpirit => f.write_str("ForlornSpirit"),
+            Self::Darkhowl => f.write_str("Darkhowl"),
+            Self::Grell => f.write_str("Grell"),
+            Self::Furbolg => f.write_str("Furbolg"),
+            Self::HordeGeneric => f.write_str("HordeGeneric"),
+            Self::Horde => f.write_str("Horde"),
+            Self::Undercity => f.write_str("Undercity"),
+            Self::Darnassus => f.write_str("Darnassus"),
+            Self::Syndicate => f.write_str("Syndicate"),
+            Self::HillsbradMilitia => f.write_str("HillsbradMilitia"),
+            Self::Stormwind => f.write_str("Stormwind"),
+            Self::Demon => f.write_str("Demon"),
+            Self::Elemental => f.write_str("Elemental"),
+            Self::Spirit => f.write_str("Spirit"),
+            Self::Orgrimmar => f.write_str("Orgrimmar"),
+            Self::Treasure => f.write_str("Treasure"),
+            Self::GnollMudsnout => f.write_str("Gnoll - Mudsnout"),
+            Self::HillsbradSouthshoreMayor => f.write_str("HIllsbrad, Southshore Mayor"),
+            Self::DragonflightBlack => f.write_str("Dragonflight, Black"),
+            Self::ThunderBluff => f.write_str("ThunderBluff"),
+            Self::TrollWitherbark => f.write_str("Troll, Witherbark"),
+            Self::LeatherworkingElemental => f.write_str("Leatherworking - Elemental"),
+            Self::QuilboarRazormane => f.write_str("Quilboar, Razormane"),
+            Self::QuilboarBristleback => f.write_str("Quilboar, Bristleback"),
+            Self::LeatherworkingDragonscale => f.write_str("Leatherworking - Dragonscale"),
+            Self::BloodsailBuccaneers => f.write_str("BloodsailBuccaneers"),
+            Self::Blackfathom => f.write_str("Blackfathom"),
+            Self::Makrura => f.write_str("Makrura"),
+            Self::CentaurKolkar => f.write_str("Centaur, Kolkar"),
+            Self::CentaurGalak => f.write_str("Centaur, Galak"),
+            Self::GelkisClanCentaur => f.write_str("GelkisClanCentaur"),
+            Self::MagramClanCentaur => f.write_str("MagramClanCentaur"),
+            Self::Maraudine => f.write_str("Maraudine"),
+            Self::Theramore => f.write_str("Theramore"),
+            Self::QuilboarRazorfen => f.write_str("Quilboar, Razorfen"),
+            Self::QuilboarRazormane2 => f.write_str("Quilboar, Razormane 2"),
+            Self::QuilboarDeathshead => f.write_str("Quilboar, Deathshead"),
+            Self::Enemy => f.write_str("Enemy"),
+            Self::Ambient => f.write_str("Ambient"),
+            Self::NethergardeCaravan => f.write_str("NethergardeCaravan"),
+            Self::SteamwheedleCartel => f.write_str("SteamwheedleCartel"),
+            Self::AllianceGeneric => f.write_str("AllianceGeneric"),
+            Self::Nethergarde => f.write_str("Nethergarde"),
+            Self::WailingCaverns => f.write_str("WailingCaverns"),
+            Self::Silithid => f.write_str("Silithid"),
+            Self::SilvermoonRemnant => f.write_str("SilvermoonRemnant"),
+            Self::ZandalarTribe => f.write_str("ZandalarTribe"),
+            Self::BlacksmithingWeaponsmithing => f.write_str("Blacksmithing - Weaponsmithing"),
+            Self::Scorpid => f.write_str("Scorpid"),
+            Self::BeastBat => f.write_str("Beast - Bat"),
+            Self::Titan => f.write_str("Titan"),
+            Self::TaskmasterFizzule => f.write_str("TaskmasterFizzule"),
+            Self::Ravenholdt => f.write_str("Ravenholdt"),
+            Self::Gadgetzan => f.write_str("Gadgetzan"),
+            Self::GnomereganBug => f.write_str("GnomereganBug"),
+            Self::Harpy => f.write_str("Harpy"),
+            Self::BurningBlade => f.write_str("BurningBlade"),
+            Self::ShadowsilkPoacher => f.write_str("ShadowsilkPoacher"),
+            Self::SearingSpider => f.write_str("SearingSpider"),
+            Self::Alliance => f.write_str("Alliance"),
+            Self::Ratchet => f.write_str("Ratchet"),
+            Self::WildhammerClan => f.write_str("WildhammerClan"),
+            Self::GoblinDarkIronBarPatron => f.write_str("Goblin, Dark Iron Bar Patron"),
+            Self::TheLeagueOfArathor => f.write_str("TheLeagueOfArathor"),
+            Self::TheDefilers => f.write_str("TheDefilers"),
+            Self::Giant => f.write_str("Giant"),
+            Self::ArgentDawn => f.write_str("ArgentDawn"),
+            Self::DarkspearTrolls => f.write_str("DarkspearTrolls"),
+            Self::DragonflightBronze => f.write_str("Dragonflight, Bronze"),
+            Self::DragonflightBlue => f.write_str("Dragonflight, Blue"),
+            Self::LeatherworkingTribal => f.write_str("Leatherworking - Tribal"),
+            Self::EngineeringGoblin => f.write_str("Engineering - Goblin"),
+            Self::EngineeringGnome => f.write_str("Engineering - Gnome"),
+            Self::BlacksmithingHammersmithing => f.write_str("Blacksmithing - Hammersmithing"),
+            Self::BlacksmithingAxesmithing => f.write_str("Blacksmithing - Axesmithing"),
+            Self::BlacksmithingSwordsmithing => f.write_str("Blacksmithing - Swordsmithing"),
+            Self::TrollVilebranch => f.write_str("Troll, Vilebranch"),
+            Self::SouthseaFreebooters => f.write_str("SouthseaFreebooters"),
+            Self::CaerDarrow => f.write_str("CaerDarrow"),
+            Self::FurbolgUncorrupted => f.write_str("Furbolg, Uncorrupted"),
+            Self::TimbermawHold => f.write_str("TimbermawHold"),
+            Self::Everlook => f.write_str("Everlook"),
+            Self::WintersaberTrainers => f.write_str("WintersaberTrainers"),
+            Self::CenarionCircle => f.write_str("CenarionCircle"),
+            Self::ShatterspearTrolls => f.write_str("ShatterspearTrolls"),
+            Self::RavasaurTrainers => f.write_str("RavasaurTrainers"),
+            Self::MajordomoExecutus => f.write_str("MajordomoExecutus"),
+            Self::BeastCarrionBird => f.write_str("Beast - Carrion Bird"),
+            Self::BeastCat => f.write_str("Beast - Cat"),
+            Self::BeastCrab => f.write_str("Beast - Crab"),
+            Self::BeastCrocilisk => f.write_str("Beast - Crocilisk"),
+            Self::BeastHyena => f.write_str("Beast - Hyena"),
+            Self::BeastOwl => f.write_str("Beast - Owl"),
+            Self::BeastScorpid => f.write_str("Beast - Scorpid"),
+            Self::BeastTallstrider => f.write_str("Beast - Tallstrider"),
+            Self::BeastTurtle => f.write_str("Beast - Turtle"),
+            Self::BeastWindSerpent => f.write_str("Beast - Wind Serpent"),
+            Self::TrainingDummy => f.write_str("TrainingDummy"),
+            Self::DragonflightBlackBait => f.write_str("Dragonflight, Black - Bait"),
+            Self::BattlegroundNeutral => f.write_str("BattlegroundNeutral"),
+            Self::FrostwolfClan => f.write_str("FrostwolfClan"),
+            Self::StormpikeGuard => f.write_str("StormpikeGuard"),
+            Self::HydraxianWaterlords => f.write_str("HydraxianWaterlords"),
+            Self::SulfuronFirelords => f.write_str("SulfuronFirelords"),
+            Self::GizlocksDummy => f.write_str("Gizlock's Dummy"),
+            Self::GizlocksCharm => f.write_str("Gizlock's Charm"),
+            Self::Gizlock => f.write_str("Gizlock"),
+            Self::MoroGai => f.write_str("Moro'gai"),
+            Self::SpiritGuideAlliance => f.write_str("Spirit Guide - Alliance"),
+            Self::ShenDralar => f.write_str("Shen'dralar"),
+            Self::OgreCaptainKromcrush => f.write_str("Ogre (Captain Kromcrush)"),
+            Self::SpiritGuideHorde => f.write_str("Spirit Guide - Horde"),
+            Self::Jaedenar => f.write_str("Jaedenar"),
+            Self::WarsongOutriders => f.write_str("WarsongOutriders"),
+            Self::SilverwingSentinels => f.write_str("SilverwingSentinels"),
+            Self::AllianceForces => f.write_str("AllianceForces"),
+            Self::HordeForces => f.write_str("HordeForces"),
+            Self::RevantuskTrolls => f.write_str("RevantuskTrolls"),
+            Self::DarkmoonFaire => f.write_str("DarkmoonFaire"),
+            Self::BroodOfNozdormu => f.write_str("BroodOfNozdormu"),
+            Self::SilvermoonCity => f.write_str("SilvermoonCity"),
+            Self::MightOfKalimdor => f.write_str("MightOfKalimdor"),
+            Self::PlayerBloodElf => f.write_str("PLAYER, Blood Elf"),
+            Self::ArmiesOfCThun => f.write_str("Armies of C'Thun"),
+            Self::SilithidAttackers => f.write_str("SilithidAttackers"),
+            Self::TheIronforgeBrigade => f.write_str("TheIronforgeBrigade"),
+            Self::RcEnemies => f.write_str("RcEnemies"),
+            Self::RcObjects => f.write_str("RcObjects"),
+            Self::Red => f.write_str("Red"),
+            Self::Blue => f.write_str("Blue"),
+            Self::Tranquillien => f.write_str("Tranquillien"),
+            Self::Farstriders => f.write_str("Farstriders"),
+            Self::Deprecated => f.write_str("Deprecated"),
+            Self::Sunstriders => f.write_str("Sunstriders"),
+            Self::MagistersGuild => f.write_str("Magister's Guild"),
+            Self::PlayerDraenei => f.write_str("PLAYER, Draenei"),
+            Self::ScourgeInvaders => f.write_str("ScourgeInvaders"),
+            Self::BloodmaulClan => f.write_str("BloodmaulClan"),
+            Self::Exodar => f.write_str("Exodar"),
+            Self::TestFactionNotARealFaction => f.write_str("Test Faction (not a real faction)"),
+            Self::TheAldor => f.write_str("TheAldor"),
+            Self::TheConsortium => f.write_str("TheConsortium"),
+            Self::TheScryers => f.write_str("TheScryers"),
+            Self::TheShaTar => f.write_str("The Sha'tar"),
+            Self::ShattrathCity => f.write_str("ShattrathCity"),
+            Self::TrollForest => f.write_str("Troll, Forest"),
+            Self::TheOmenai => f.write_str("TheOmenai"),
+            Self::Deprecated1 => f.write_str("Deprecated1"),
+            Self::TheSonsOfLothar => f.write_str("TheSonsOfLothar"),
+            Self::TheMagHar => f.write_str("The Mag'har"),
+            Self::CenarionExpedition => f.write_str("CenarionExpedition"),
+            Self::FelOrc => f.write_str("FelOrc"),
+            Self::FelOrcGhost => f.write_str("FelOrcGhost"),
+            Self::SonsOfLotharGhosts => f.write_str("SonsOfLotharGhosts"),
+            Self::HonorHold => f.write_str("HonorHold"),
+            Self::Thrallmar => f.write_str("Thrallmar"),
+            Self::TestFaction2 => f.write_str("TestFaction2"),
+            Self::TestFaction1 => f.write_str("TestFaction1"),
+            Self::TowowFlag => f.write_str("ToWoW - Flag"),
+            Self::TowowFlagTriggerAllianceDnd => f.write_str("ToWoW - Flag Trigger Alliance (DND)"),
+            Self::TestFaction3 => f.write_str("TestFaction3"),
+            Self::TestFaction4 => f.write_str("TestFaction4"),
+            Self::TowowFlagTriggerHordeDnd => f.write_str("ToWoW - Flag Trigger Horde (DND)"),
+            Self::Broken => f.write_str("Broken"),
+            Self::Ethereum => f.write_str("Ethereum"),
+            Self::EarthElemental => f.write_str("EarthElemental"),
+            Self::FightingRobots => f.write_str("FightingRobots"),
+            Self::ActorGood => f.write_str("ActorGood"),
+            Self::ActorEvil => f.write_str("ActorEvil"),
+            Self::StillpineFurbolg => f.write_str("StillpineFurbolg"),
+            Self::CrazedOwlkin => f.write_str("CrazedOwlkin"),
+            Self::ChessAlliance => f.write_str("ChessAlliance"),
+            Self::ChessHorde => f.write_str("ChessHorde"),
+            Self::MonsterSpar => f.write_str("MonsterSpar"),
+            Self::MonsterSparBuddy => f.write_str("MonsterSparBuddy"),
+            Self::TheVioletEye => f.write_str("TheVioletEye"),
+            Self::Sunhawks => f.write_str("Sunhawks"),
+            Self::HandOfArgus => f.write_str("HandOfArgus"),
+            Self::Sporeggar => f.write_str("Sporeggar"),
+            Self::FungalGiant => f.write_str("FungalGiant"),
+            Self::SporeBat => f.write_str("SporeBat"),
+            Self::MonsterPredator => f.write_str("Monster, Predator"),
+            Self::MonsterPrey => f.write_str("Monster, Prey"),
+            Self::VoidAnomaly => f.write_str("VoidAnomaly"),
+            Self::HyjalDefenders => f.write_str("HyjalDefenders"),
+            Self::HyjalInvaders => f.write_str("HyjalInvaders"),
+            Self::Kurenai => f.write_str("Kurenai"),
+            Self::EarthenRing => f.write_str("EarthenRing"),
+            Self::TheBurningCrusade => f.write_str("TheBurningCrusade"),
+            Self::Arakkoa => f.write_str("Arakkoa"),
+            Self::ZangarmarshBannerAlliance => f.write_str("Zangarmarsh Banner (Alliance)"),
+            Self::ZangarmarshBannerHorde => f.write_str("Zangarmarsh Banner (Horde)"),
+            Self::ZangarmarshBannerNeutral => f.write_str("Zangarmarsh Banner (Neutral)"),
+            Self::CavernsOfTimeThrall => f.write_str("Caverns of Time - Thrall"),
+            Self::CavernsOfTimeDurnholde => f.write_str("Caverns of Time - Durnholde"),
+            Self::CavernsOfTimeSouthshoreGuards => f.write_str("Caverns of Time - Southshore Guards"),
+            Self::ShadowCouncilCovert => f.write_str("ShadowCouncilCovert"),
+            Self::KeepersOfTime => f.write_str("KeepersOfTime"),
+            Self::TheScaleOfTheSands => f.write_str("TheScaleOfTheSands"),
+            Self::DarkPortalDefenderAlliance => f.write_str("Dark Portal Defender, Alliance"),
+            Self::DarkPortalDefenderHorde => f.write_str("Dark Portal Defender, Horde"),
+            Self::DarkPortalAttackerLegion => f.write_str("Dark Portal Attacker, Legion"),
+            Self::InciterTrigger => f.write_str("InciterTrigger"),
+            Self::InciterTrigger2 => f.write_str("InciterTrigger2"),
+            Self::InciterTrigger3 => f.write_str("InciterTrigger3"),
+            Self::InciterTrigger4 => f.write_str("InciterTrigger4"),
+            Self::InciterTrigger5 => f.write_str("InciterTrigger5"),
+            Self::ManaCreature => f.write_str("ManaCreature"),
+            Self::KhadgarsServant => f.write_str("Khadgar's Servant"),
+            Self::BladespireClan => f.write_str("BladespireClan"),
+            Self::EthereumSparbuddy => f.write_str("EthereumSparbuddy"),
+            Self::Protectorate => f.write_str("Protectorate"),
+            Self::ArcaneAnnihilatorDnr => f.write_str("Arcane Annihilator (DNR)"),
+            Self::FriendlyHidden => f.write_str("Friendly, Hidden"),
+            Self::KirinVarDathric => f.write_str("Kirin'Var - Dathric"),
+            Self::KirinVarBelmara => f.write_str("Kirin'Var - Belmara"),
+            Self::KirinVarLuminrath => f.write_str("Kirin'Var - Luminrath"),
+            Self::KirinVarCohlien => f.write_str("Kirin'Var - Cohlien"),
+            Self::ServantOfIllidan => f.write_str("ServantOfIllidan"),
+            Self::LowerCity => f.write_str("LowerCity"),
+            Self::AshtongueDeathsworn => f.write_str("AshtongueDeathsworn"),
+            Self::SpiritsOfShadowmoon1 => f.write_str("SpiritsOfShadowmoon1"),
+            Self::SpiritsOfShadowmoon2 => f.write_str("SpiritsOfShadowmoon2"),
+            Self::Netherwing => f.write_str("Netherwing"),
+            Self::Wyrmcult => f.write_str("Wyrmcult"),
+            Self::Treant => f.write_str("Treant"),
+            Self::LeotherasDemonI => f.write_str("LeotherasDemonI"),
+            Self::LeotherasDemonIi => f.write_str("LeotherasDemonIi"),
+            Self::LeotherasDemonIii => f.write_str("LeotherasDemonIii"),
+            Self::LeotherasDemonIv => f.write_str("LeotherasDemonIv"),
+            Self::LeotherasDemonV => f.write_str("LeotherasDemonV"),
+            Self::Azaloth => f.write_str("Azaloth"),
+            Self::RockFlayer => f.write_str("RockFlayer"),
+            Self::FlayerHunter => f.write_str("FlayerHunter"),
+            Self::ShadowmoonShade => f.write_str("ShadowmoonShade"),
+            Self::LegionCommunicator => f.write_str("LegionCommunicator"),
+            Self::RavenswoodAncients => f.write_str("RavenswoodAncients"),
+            Self::ChessFriendlyToAllChess => f.write_str("Chess, Friendly to All Chess"),
+            Self::BlackTempleGatesIllidari => f.write_str("Black Temple Gates - Illidari"),
+            Self::ShaTariSkyguard => f.write_str("Sha'tari Skyguard"),
+            Self::Area52 => f.write_str("Area52"),
+            Self::Maiev => f.write_str("Maiev"),
+            Self::SkettisShadowyArakkoa => f.write_str("SkettisShadowyArakkoa"),
+            Self::SkettisArakkoa => f.write_str("SkettisArakkoa"),
+            Self::DragonmawEnemy => f.write_str("DragonmawEnemy"),
+            Self::AllianceVanguard => f.write_str("AllianceVanguard"),
+            Self::OgriLa => f.write_str("Ogri'la"),
+            Self::Ravager => f.write_str("Ravager"),
+            Self::Reuse => f.write_str("Reuse"),
+            Self::Frenzy => f.write_str("Frenzy"),
+            Self::SkyguardEnemy => f.write_str("SkyguardEnemy"),
+            Self::SkunkPetunia => f.write_str("Skunk, Petunia"),
+            Self::TheramoreDeserter => f.write_str("TheramoreDeserter"),
+            Self::Vrykul => f.write_str("Vrykul"),
+            Self::NorthseaPirates => f.write_str("NorthseaPirates"),
+            Self::Tuskarr => f.write_str("Tuskarr"),
+            Self::Unused => f.write_str("Unused"),
+            Self::TrollAmani => f.write_str("Troll, Amani"),
+            Self::ValianceExpedition => f.write_str("ValianceExpedition"),
+            Self::Unused1 => f.write_str("Unused1"),
+            Self::HordeExpedition => f.write_str("HordeExpedition"),
+            Self::Westguard => f.write_str("Westguard"),
+            Self::SpottedGryphon => f.write_str("SpottedGryphon"),
+            Self::TamedPlaguehound => f.write_str("TamedPlaguehound"),
+            Self::VrykulAncientSpirit1 => f.write_str("Vrykul (Ancient Spirit 1)"),
+            Self::VrykulAncientSiprit2 => f.write_str("Vrykul (Ancient Siprit 2)"),
+            Self::VrykulAncientSiprit3 => f.write_str("Vrykul (Ancient Siprit 3)"),
+            Self::CtfFlagAlliance => f.write_str("CTF - Flag - Alliance"),
+            Self::Test => f.write_str("Test"),
+            Self::Vrykul1 => f.write_str("Vrykul1"),
+            Self::VrykulGladiator => f.write_str("VrykulGladiator"),
+            Self::ValgardeCombatant => f.write_str("ValgardeCombatant"),
+            Self::TheTaunka => f.write_str("TheTaunka"),
+            Self::MonsterZoneForceReaction1 => f.write_str("Monster, Zone Force Reaction 1"),
+            Self::MonsterZoneForceReaction2 => f.write_str("Monster, Zone Force Reaction 2"),
+            Self::TheHandOfVengeance => f.write_str("TheHandOfVengeance"),
+            Self::ExplorersLeague => f.write_str("Explorers' League"),
+            Self::RamRacingPowerupDnd => f.write_str("RamRacingPowerupDnd"),
+            Self::RamRacingTrapDnd => f.write_str("RamRacingTrapDnd"),
+            Self::CraigsSquirrels => f.write_str("Craig's Squirrels"),
+            Self::Reuse1 => f.write_str("Reuse1"),
+            Self::TheKaluAk => f.write_str("The Kalu'ak"),
+            Self::HolidayWaterBarrel => f.write_str("Holiday - Water Barrel"),
+            Self::HolidayGeneric => f.write_str("Holiday - Generic"),
+            Self::IronDwarves => f.write_str("IronDwarves"),
+            Self::ShatteredSunOffensive => f.write_str("ShatteredSunOffensive"),
+            Self::FightingVanityPet => f.write_str("FightingVanityPet"),
+            Self::MurlocWinterfin => f.write_str("Murloc, Winterfin"),
+            Self::FriendlyForceReaction => f.write_str("Friendly, Force Reaction"),
+            Self::ObjectForceReaction => f.write_str("Object, Force Reaction"),
+            Self::Reuse2 => f.write_str("Reuse2"),
+            Self::Reuse4 => f.write_str("Reuse4"),
+            Self::VrykulSea => f.write_str("Vrykul, Sea"),
+            Self::WarsongOffensive => f.write_str("WarsongOffensive"),
+            Self::Poacher => f.write_str("Poacher"),
+            Self::HolidayMonster => f.write_str("HolidayMonster"),
+            Self::FurbolgRedfang => f.write_str("Furbolg, Redfang"),
+            Self::FurbolgFrostpaw => f.write_str("Furbolg, Frostpaw"),
+            Self::KirinTor => f.write_str("KirinTor"),
+            Self::TheWyrmrestAccord => f.write_str("TheWyrmrestAccord"),
+            Self::AzjolNerub => f.write_str("Azjol-Nerub"),
+            Self::Reuse8 => f.write_str("Reuse8"),
+            Self::TheSilverCovenant => f.write_str("TheSilverCovenant"),
+            Self::GrizzlyHillsTrapper => f.write_str("GrizzlyHillsTrapper"),
+            Self::Reuse16 => f.write_str("Reuse16"),
+            Self::WrathOfTheLichKing => f.write_str("WrathOfTheLichKing"),
+            Self::KnightsOfTheEbonBlade => f.write_str("KnightsOfTheEbonBlade"),
+            Self::WrathgateScourge => f.write_str("WrathgateScourge"),
+            Self::WrathgateAlliance => f.write_str("WrathgateAlliance"),
+            Self::WrathgateHorde => f.write_str("WrathgateHorde"),
+            Self::CtfFlagHorde => f.write_str("CTF - Flag - Horde"),
+            Self::CtfFlagNeutral => f.write_str("CTF - Flag - Neutral"),
+            Self::FrenzyheartTribe => f.write_str("FrenzyheartTribe"),
+            Self::TheOracles => f.write_str("TheOracles"),
+            Self::ArgentCrusade => f.write_str("ArgentCrusade"),
+            Self::TrollDrakkari => f.write_str("Troll, Drakkari"),
+            Self::CotArthas => f.write_str("CotArthas"),
+            Self::CotStratholmeCitizen => f.write_str("CotStratholmeCitizen"),
+            Self::CotScourge => f.write_str("CotScourge"),
+            Self::Freya => f.write_str("Freya"),
+            Self::MountTaxiAlliance => f.write_str("Mount - Taxi - Alliance"),
+            Self::MountTaxiHorde => f.write_str("Mount - Taxi - Horde"),
+            Self::MountTaxiNeutral => f.write_str("Mount - Taxi - Neutral"),
+            Self::ElementalWater => f.write_str("Elemental, Water"),
+            Self::ElementalAir => f.write_str("Elemental, Air"),
+            Self::SholazarBasin => f.write_str("SholazarBasin"),
+            Self::Classic => f.write_str("Classic"),
+            Self::TheSonsOfHodir => f.write_str("TheSonsOfHodir"),
+            Self::IronGiants => f.write_str("IronGiants"),
+            Self::FrostVrykul => f.write_str("FrostVrykul"),
+            Self::Earthen => f.write_str("Earthen"),
+            Self::MonsterReferee => f.write_str("MonsterReferee"),
+            Self::TheSunreavers => f.write_str("TheSunreavers"),
+            Self::Hyldsmeet => f.write_str("Hyldsmeet"),
+            Self::TheFrostborn => f.write_str("TheFrostborn"),
+            Self::OrgrimmarAlexTest => f.write_str("Orgrimmar (Alex Test)"),
+            Self::TranquillienConversion => f.write_str("TranquillienConversion"),
+            Self::WintersaberConversion => f.write_str("WintersaberConversion"),
+            Self::HatesEverything => f.write_str("HatesEverything"),
+            Self::SilverCovenantConversion => f.write_str("SilverCovenantConversion"),
+            Self::SunreaversConversion => f.write_str("SunreaversConversion"),
+            Self::TheAshenVerdict => f.write_str("TheAshenVerdict"),
+            Self::CtfFlagAlliance2 => f.write_str("CTF - Flag - Alliance 2"),
+            Self::CtfFlagHorde2 => f.write_str("CTF - Flag - Horde 2"),
+        }
+    }
+}
+
+impl TryFrom<u16> for Faction {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u16) -> std::result::Result<Self, Self::Error> {
+        match value {
+            0 => Ok(Self::None),
+            1 => Ok(Self::PlayerHuman),
+            2 => Ok(Self::PlayerOrc),
+            3 => Ok(Self::PlayerDwarf),
+            4 => Ok(Self::PlayerNightElf),
+            5 => Ok(Self::PlayerUndead),
+            6 => Ok(Self::PlayerTauren),
+            7 => Ok(Self::Creature),
+            8 => Ok(Self::PlayerGnome),
+            9 => Ok(Self::PlayerTroll),
+            14 => Ok(Self::Monster),
+            15 => Ok(Self::DefiasBrotherhood),
+            16 => Ok(Self::GnollRiverpaw),
+            17 => Ok(Self::GnollRedridge),
+            18 => Ok(Self::GnollShadowhide),
+            19 => Ok(Self::Murloc),
+            20 => Ok(Self::UndeadScourge),
+            21 => Ok(Self::BootyBay),
+            22 => Ok(Self::BeastSpider),
+            23 => Ok(Self::BeastBoar),
+            24 => Ok(Self::Worgen),
+            25 => Ok(Self::Kobold),
+            26 => Ok(Self::TrollBloodscalp),
+            27 => Ok(Self::TrollSkullsplitter),
+            28 => Ok(Self::Prey),
+            29 => Ok(Self::BeastWolf),
+            30 => Ok(Self::DefiasBrotherhoodTraitor),
+            31 => Ok(Self::Friendly),
+            32 => Ok(Self::Trogg),
+            33 => Ok(Self::TrollFrostmane),
+            34 => Ok(Self::OrcBlackrock),
+            35 => Ok(Self::Villian),
+            36 => Ok(Self::Victim),
+            37 => Ok(Self::BeastBear),
+            38 => Ok(Self::Ogre),
+            39 => Ok(Self::KurzensMercenaries),
+            40 => Ok(Self::Escortee),
+            41 => Ok(Self::VentureCompany),
+            42 => Ok(Self::BeastRaptor),
+            43 => Ok(Self::Basilisk),
+            44 => Ok(Self::DragonflightGreen),
+            45 => Ok(Self::LostOnes),
+            46 => Ok(Self::BlacksmithingArmorsmithing),
+            47 => Ok(Self::Ironforge),
+            48 => Ok(Self::DarkIronDwarves),
+            49 => Ok(Self::HumanNightWatch),
+            50 => Ok(Self::DragonflightRed),
+            51 => Ok(Self::GnollMosshide),
+            52 => Ok(Self::OrcDragonmaw),
+            53 => Ok(Self::GnomeLeper),
+            54 => Ok(Self::GnomereganExiles),
+            55 => Ok(Self::Leopard),
+            56 => Ok(Self::ScarletCrusade),
+            57 => Ok(Self::GnollRothide),
+            58 => Ok(Self::BeastGorilla),
+            59 => Ok(Self::ThoriumBrotherhood),
+            60 => Ok(Self::Naga),
+            61 => Ok(Self::Dalaran),
+            62 => Ok(Self::ForlornSpirit),
+            63 => Ok(Self::Darkhowl),
+            64 => Ok(Self::Grell),
+            65 => Ok(Self::Furbolg),
+            66 => Ok(Self::HordeGeneric),
+            67 => Ok(Self::Horde),
+            68 => Ok(Self::Undercity),
+            69 => Ok(Self::Darnassus),
+            70 => Ok(Self::Syndicate),
+            71 => Ok(Self::HillsbradMilitia),
+            72 => Ok(Self::Stormwind),
+            73 => Ok(Self::Demon),
+            74 => Ok(Self::Elemental),
+            75 => Ok(Self::Spirit),
+            76 => Ok(Self::Orgrimmar),
+            77 => Ok(Self::Treasure),
+            78 => Ok(Self::GnollMudsnout),
+            79 => Ok(Self::HillsbradSouthshoreMayor),
+            80 => Ok(Self::DragonflightBlack),
+            81 => Ok(Self::ThunderBluff),
+            82 => Ok(Self::TrollWitherbark),
+            83 => Ok(Self::LeatherworkingElemental),
+            84 => Ok(Self::QuilboarRazormane),
+            85 => Ok(Self::QuilboarBristleback),
+            86 => Ok(Self::LeatherworkingDragonscale),
+            87 => Ok(Self::BloodsailBuccaneers),
+            88 => Ok(Self::Blackfathom),
+            89 => Ok(Self::Makrura),
+            90 => Ok(Self::CentaurKolkar),
+            91 => Ok(Self::CentaurGalak),
+            92 => Ok(Self::GelkisClanCentaur),
+            93 => Ok(Self::MagramClanCentaur),
+            94 => Ok(Self::Maraudine),
+            108 => Ok(Self::Theramore),
+            109 => Ok(Self::QuilboarRazorfen),
+            110 => Ok(Self::QuilboarRazormane2),
+            111 => Ok(Self::QuilboarDeathshead),
+            128 => Ok(Self::Enemy),
+            148 => Ok(Self::Ambient),
+            168 => Ok(Self::NethergardeCaravan),
+            169 => Ok(Self::SteamwheedleCartel),
+            189 => Ok(Self::AllianceGeneric),
+            209 => Ok(Self::Nethergarde),
+            229 => Ok(Self::WailingCaverns),
+            249 => Ok(Self::Silithid),
+            269 => Ok(Self::SilvermoonRemnant),
+            270 => Ok(Self::ZandalarTribe),
+            289 => Ok(Self::BlacksmithingWeaponsmithing),
+            309 => Ok(Self::Scorpid),
+            310 => Ok(Self::BeastBat),
+            311 => Ok(Self::Titan),
+            329 => Ok(Self::TaskmasterFizzule),
+            349 => Ok(Self::Ravenholdt),
+            369 => Ok(Self::Gadgetzan),
+            389 => Ok(Self::GnomereganBug),
+            409 => Ok(Self::Harpy),
+            429 => Ok(Self::BurningBlade),
+            449 => Ok(Self::ShadowsilkPoacher),
+            450 => Ok(Self::SearingSpider),
+            469 => Ok(Self::Alliance),
+            470 => Ok(Self::Ratchet),
+            471 => Ok(Self::WildhammerClan),
+            489 => Ok(Self::GoblinDarkIronBarPatron),
+            509 => Ok(Self::TheLeagueOfArathor),
+            510 => Ok(Self::TheDefilers),
+            511 => Ok(Self::Giant),
+            529 => Ok(Self::ArgentDawn),
+            530 => Ok(Self::DarkspearTrolls),
+            531 => Ok(Self::DragonflightBronze),
+            532 => Ok(Self::DragonflightBlue),
+            549 => Ok(Self::LeatherworkingTribal),
+            550 => Ok(Self::EngineeringGoblin),
+            551 => Ok(Self::EngineeringGnome),
+            569 => Ok(Self::BlacksmithingHammersmithing),
+            570 => Ok(Self::BlacksmithingAxesmithing),
+            571 => Ok(Self::BlacksmithingSwordsmithing),
+            572 => Ok(Self::TrollVilebranch),
+            573 => Ok(Self::SouthseaFreebooters),
+            574 => Ok(Self::CaerDarrow),
+            575 => Ok(Self::FurbolgUncorrupted),
+            576 => Ok(Self::TimbermawHold),
+            577 => Ok(Self::Everlook),
+            589 => Ok(Self::WintersaberTrainers),
+            609 => Ok(Self::CenarionCircle),
+            629 => Ok(Self::ShatterspearTrolls),
+            630 => Ok(Self::RavasaurTrainers),
+            649 => Ok(Self::MajordomoExecutus),
+            669 => Ok(Self::BeastCarrionBird),
+            670 => Ok(Self::BeastCat),
+            671 => Ok(Self::BeastCrab),
+            672 => Ok(Self::BeastCrocilisk),
+            673 => Ok(Self::BeastHyena),
+            674 => Ok(Self::BeastOwl),
+            675 => Ok(Self::BeastScorpid),
+            676 => Ok(Self::BeastTallstrider),
+            677 => Ok(Self::BeastTurtle),
+            678 => Ok(Self::BeastWindSerpent),
+            679 => Ok(Self::TrainingDummy),
+            689 => Ok(Self::DragonflightBlackBait),
+            709 => Ok(Self::BattlegroundNeutral),
+            729 => Ok(Self::FrostwolfClan),
+            730 => Ok(Self::StormpikeGuard),
+            749 => Ok(Self::HydraxianWaterlords),
+            750 => Ok(Self::SulfuronFirelords),
+            769 => Ok(Self::GizlocksDummy),
+            770 => Ok(Self::GizlocksCharm),
+            771 => Ok(Self::Gizlock),
+            789 => Ok(Self::MoroGai),
+            790 => Ok(Self::SpiritGuideAlliance),
+            809 => Ok(Self::ShenDralar),
+            829 => Ok(Self::OgreCaptainKromcrush),
+            849 => Ok(Self::SpiritGuideHorde),
+            869 => Ok(Self::Jaedenar),
+            889 => Ok(Self::WarsongOutriders),
+            890 => Ok(Self::SilverwingSentinels),
+            891 => Ok(Self::AllianceForces),
+            892 => Ok(Self::HordeForces),
+            893 => Ok(Self::RevantuskTrolls),
+            909 => Ok(Self::DarkmoonFaire),
+            910 => Ok(Self::BroodOfNozdormu),
+            911 => Ok(Self::SilvermoonCity),
+            912 => Ok(Self::MightOfKalimdor),
+            914 => Ok(Self::PlayerBloodElf),
+            915 => Ok(Self::ArmiesOfCThun),
+            916 => Ok(Self::SilithidAttackers),
+            917 => Ok(Self::TheIronforgeBrigade),
+            918 => Ok(Self::RcEnemies),
+            919 => Ok(Self::RcObjects),
+            920 => Ok(Self::Red),
+            921 => Ok(Self::Blue),
+            922 => Ok(Self::Tranquillien),
+            923 => Ok(Self::Farstriders),
+            924 => Ok(Self::Deprecated),
+            925 => Ok(Self::Sunstriders),
+            926 => Ok(Self::MagistersGuild),
+            927 => Ok(Self::PlayerDraenei),
+            928 => Ok(Self::ScourgeInvaders),
+            929 => Ok(Self::BloodmaulClan),
+            930 => Ok(Self::Exodar),
+            931 => Ok(Self::TestFactionNotARealFaction),
+            932 => Ok(Self::TheAldor),
+            933 => Ok(Self::TheConsortium),
+            934 => Ok(Self::TheScryers),
+            935 => Ok(Self::TheShaTar),
+            936 => Ok(Self::ShattrathCity),
+            937 => Ok(Self::TrollForest),
+            938 => Ok(Self::TheOmenai),
+            939 => Ok(Self::Deprecated1),
+            940 => Ok(Self::TheSonsOfLothar),
+            941 => Ok(Self::TheMagHar),
+            942 => Ok(Self::CenarionExpedition),
+            943 => Ok(Self::FelOrc),
+            944 => Ok(Self::FelOrcGhost),
+            945 => Ok(Self::SonsOfLotharGhosts),
+            946 => Ok(Self::HonorHold),
+            947 => Ok(Self::Thrallmar),
+            948 => Ok(Self::TestFaction2),
+            949 => Ok(Self::TestFaction1),
+            950 => Ok(Self::TowowFlag),
+            951 => Ok(Self::TowowFlagTriggerAllianceDnd),
+            952 => Ok(Self::TestFaction3),
+            953 => Ok(Self::TestFaction4),
+            954 => Ok(Self::TowowFlagTriggerHordeDnd),
+            955 => Ok(Self::Broken),
+            956 => Ok(Self::Ethereum),
+            957 => Ok(Self::EarthElemental),
+            958 => Ok(Self::FightingRobots),
+            959 => Ok(Self::ActorGood),
+            960 => Ok(Self::ActorEvil),
+            961 => Ok(Self::StillpineFurbolg),
+            962 => Ok(Self::CrazedOwlkin),
+            963 => Ok(Self::ChessAlliance),
+            964 => Ok(Self::ChessHorde),
+            965 => Ok(Self::MonsterSpar),
+            966 => Ok(Self::MonsterSparBuddy),
+            967 => Ok(Self::TheVioletEye),
+            968 => Ok(Self::Sunhawks),
+            969 => Ok(Self::HandOfArgus),
+            970 => Ok(Self::Sporeggar),
+            971 => Ok(Self::FungalGiant),
+            972 => Ok(Self::SporeBat),
+            973 => Ok(Self::MonsterPredator),
+            974 => Ok(Self::MonsterPrey),
+            975 => Ok(Self::VoidAnomaly),
+            976 => Ok(Self::HyjalDefenders),
+            977 => Ok(Self::HyjalInvaders),
+            978 => Ok(Self::Kurenai),
+            979 => Ok(Self::EarthenRing),
+            980 => Ok(Self::TheBurningCrusade),
+            981 => Ok(Self::Arakkoa),
+            982 => Ok(Self::ZangarmarshBannerAlliance),
+            983 => Ok(Self::ZangarmarshBannerHorde),
+            984 => Ok(Self::ZangarmarshBannerNeutral),
+            985 => Ok(Self::CavernsOfTimeThrall),
+            986 => Ok(Self::CavernsOfTimeDurnholde),
+            987 => Ok(Self::CavernsOfTimeSouthshoreGuards),
+            988 => Ok(Self::ShadowCouncilCovert),
+            989 => Ok(Self::KeepersOfTime),
+            990 => Ok(Self::TheScaleOfTheSands),
+            991 => Ok(Self::DarkPortalDefenderAlliance),
+            992 => Ok(Self::DarkPortalDefenderHorde),
+            993 => Ok(Self::DarkPortalAttackerLegion),
+            994 => Ok(Self::InciterTrigger),
+            995 => Ok(Self::InciterTrigger2),
+            996 => Ok(Self::InciterTrigger3),
+            997 => Ok(Self::InciterTrigger4),
+            998 => Ok(Self::InciterTrigger5),
+            999 => Ok(Self::ManaCreature),
+            1000 => Ok(Self::KhadgarsServant),
+            1001 => Ok(Self::BladespireClan),
+            1002 => Ok(Self::EthereumSparbuddy),
+            1003 => Ok(Self::Protectorate),
+            1004 => Ok(Self::ArcaneAnnihilatorDnr),
+            1005 => Ok(Self::FriendlyHidden),
+            1006 => Ok(Self::KirinVarDathric),
+            1007 => Ok(Self::KirinVarBelmara),
+            1008 => Ok(Self::KirinVarLuminrath),
+            1009 => Ok(Self::KirinVarCohlien),
+            1010 => Ok(Self::ServantOfIllidan),
+            1011 => Ok(Self::LowerCity),
+            1012 => Ok(Self::AshtongueDeathsworn),
+            1013 => Ok(Self::SpiritsOfShadowmoon1),
+            1014 => Ok(Self::SpiritsOfShadowmoon2),
+            1015 => Ok(Self::Netherwing),
+            1016 => Ok(Self::Wyrmcult),
+            1017 => Ok(Self::Treant),
+            1018 => Ok(Self::LeotherasDemonI),
+            1019 => Ok(Self::LeotherasDemonIi),
+            1020 => Ok(Self::LeotherasDemonIii),
+            1021 => Ok(Self::LeotherasDemonIv),
+            1022 => Ok(Self::LeotherasDemonV),
+            1023 => Ok(Self::Azaloth),
+            1024 => Ok(Self::RockFlayer),
+            1025 => Ok(Self::FlayerHunter),
+            1026 => Ok(Self::ShadowmoonShade),
+            1027 => Ok(Self::LegionCommunicator),
+            1028 => Ok(Self::RavenswoodAncients),
+            1029 => Ok(Self::ChessFriendlyToAllChess),
+            1030 => Ok(Self::BlackTempleGatesIllidari),
+            1031 => Ok(Self::ShaTariSkyguard),
+            1032 => Ok(Self::Area52),
+            1033 => Ok(Self::Maiev),
+            1034 => Ok(Self::SkettisShadowyArakkoa),
+            1035 => Ok(Self::SkettisArakkoa),
+            1036 => Ok(Self::DragonmawEnemy),
+            1037 => Ok(Self::AllianceVanguard),
+            1038 => Ok(Self::OgriLa),
+            1039 => Ok(Self::Ravager),
+            1040 => Ok(Self::Reuse),
+            1041 => Ok(Self::Frenzy),
+            1042 => Ok(Self::SkyguardEnemy),
+            1043 => Ok(Self::SkunkPetunia),
+            1044 => Ok(Self::TheramoreDeserter),
+            1045 => Ok(Self::Vrykul),
+            1046 => Ok(Self::NorthseaPirates),
+            1047 => Ok(Self::Tuskarr),
+            1048 => Ok(Self::Unused),
+            1049 => Ok(Self::TrollAmani),
+            1050 => Ok(Self::ValianceExpedition),
+            1051 => Ok(Self::Unused1),
+            1052 => Ok(Self::HordeExpedition),
+            1053 => Ok(Self::Westguard),
+            1054 => Ok(Self::SpottedGryphon),
+            1055 => Ok(Self::TamedPlaguehound),
+            1056 => Ok(Self::VrykulAncientSpirit1),
+            1057 => Ok(Self::VrykulAncientSiprit2),
+            1058 => Ok(Self::VrykulAncientSiprit3),
+            1059 => Ok(Self::CtfFlagAlliance),
+            1060 => Ok(Self::Test),
+            1061 => Ok(Self::Vrykul1),
+            1062 => Ok(Self::VrykulGladiator),
+            1063 => Ok(Self::ValgardeCombatant),
+            1064 => Ok(Self::TheTaunka),
+            1065 => Ok(Self::MonsterZoneForceReaction1),
+            1066 => Ok(Self::MonsterZoneForceReaction2),
+            1067 => Ok(Self::TheHandOfVengeance),
+            1068 => Ok(Self::ExplorersLeague),
+            1069 => Ok(Self::RamRacingPowerupDnd),
+            1070 => Ok(Self::RamRacingTrapDnd),
+            1071 => Ok(Self::CraigsSquirrels),
+            1072 => Ok(Self::Reuse1),
+            1073 => Ok(Self::TheKaluAk),
+            1074 => Ok(Self::HolidayWaterBarrel),
+            1075 => Ok(Self::HolidayGeneric),
+            1076 => Ok(Self::IronDwarves),
+            1077 => Ok(Self::ShatteredSunOffensive),
+            1078 => Ok(Self::FightingVanityPet),
+            1079 => Ok(Self::MurlocWinterfin),
+            1080 => Ok(Self::FriendlyForceReaction),
+            1081 => Ok(Self::ObjectForceReaction),
+            1082 => Ok(Self::Reuse2),
+            1083 => Ok(Self::Reuse4),
+            1084 => Ok(Self::VrykulSea),
+            1085 => Ok(Self::WarsongOffensive),
+            1086 => Ok(Self::Poacher),
+            1087 => Ok(Self::HolidayMonster),
+            1088 => Ok(Self::FurbolgRedfang),
+            1089 => Ok(Self::FurbolgFrostpaw),
+            1090 => Ok(Self::KirinTor),
+            1091 => Ok(Self::TheWyrmrestAccord),
+            1092 => Ok(Self::AzjolNerub),
+            1093 => Ok(Self::Reuse8),
+            1094 => Ok(Self::TheSilverCovenant),
+            1095 => Ok(Self::GrizzlyHillsTrapper),
+            1096 => Ok(Self::Reuse16),
+            1097 => Ok(Self::WrathOfTheLichKing),
+            1098 => Ok(Self::KnightsOfTheEbonBlade),
+            1099 => Ok(Self::WrathgateScourge),
+            1100 => Ok(Self::WrathgateAlliance),
+            1101 => Ok(Self::WrathgateHorde),
+            1102 => Ok(Self::CtfFlagHorde),
+            1103 => Ok(Self::CtfFlagNeutral),
+            1104 => Ok(Self::FrenzyheartTribe),
+            1105 => Ok(Self::TheOracles),
+            1106 => Ok(Self::ArgentCrusade),
+            1107 => Ok(Self::TrollDrakkari),
+            1108 => Ok(Self::CotArthas),
+            1109 => Ok(Self::CotStratholmeCitizen),
+            1110 => Ok(Self::CotScourge),
+            1111 => Ok(Self::Freya),
+            1112 => Ok(Self::MountTaxiAlliance),
+            1113 => Ok(Self::MountTaxiHorde),
+            1114 => Ok(Self::MountTaxiNeutral),
+            1115 => Ok(Self::ElementalWater),
+            1116 => Ok(Self::ElementalAir),
+            1117 => Ok(Self::SholazarBasin),
+            1118 => Ok(Self::Classic),
+            1119 => Ok(Self::TheSonsOfHodir),
+            1120 => Ok(Self::IronGiants),
+            1121 => Ok(Self::FrostVrykul),
+            1122 => Ok(Self::Earthen),
+            1123 => Ok(Self::MonsterReferee),
+            1124 => Ok(Self::TheSunreavers),
+            1125 => Ok(Self::Hyldsmeet),
+            1126 => Ok(Self::TheFrostborn),
+            1127 => Ok(Self::OrgrimmarAlexTest),
+            1136 => Ok(Self::TranquillienConversion),
+            1137 => Ok(Self::WintersaberConversion),
+            1145 => Ok(Self::HatesEverything),
+            1154 => Ok(Self::SilverCovenantConversion),
+            1155 => Ok(Self::SunreaversConversion),
+            1156 => Ok(Self::TheAshenVerdict),
+            1159 => Ok(Self::CtfFlagAlliance2),
+            1160 => Ok(Self::CtfFlagHorde2),
+            v => Err(crate::errors::EnumError::new("Faction", v as u64),)
+        }
+    }
+}
+

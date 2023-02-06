@@ -1,8 +1,6 @@
-#tag_all versions "1 2 3";
-
 cmsg CMSG_SET_FACTION_INACTIVE = 0x0317 {
-    /* TODO rep id */
-    u32 reputation_list_id;
+    Faction faction;
     Bool inactive;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
-

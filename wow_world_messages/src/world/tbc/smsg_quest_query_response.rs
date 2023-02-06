@@ -2,6 +2,7 @@ use std::convert::{TryFrom, TryInto};
 use crate::tbc::QuestItemReward;
 use crate::tbc::QuestObjective;
 use crate::tbc::Vector2d;
+use crate::tbc::Faction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -14,9 +15,9 @@ use std::io::{Write, Read};
 ///     u32 zone_or_sort;
 ///     u32 quest_type;
 ///     u32 suggest_player_amount;
-///     u32 reputation_objective_faction;
+///     Faction reputation_objective_faction;
 ///     u32 reputation_objective_value;
-///     u32 required_opposite_faction;
+///     Faction required_opposite_faction;
 ///     u32 required_opposite_reputation_value;
 ///     u32 next_quest_in_chain;
 ///     u32 money_reward;
@@ -51,13 +52,13 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     pub suggest_player_amount: u32,
     /// cmangos: shown in quest log as part of quest objective
     ///
-    pub reputation_objective_faction: u32,
+    pub reputation_objective_faction: Faction,
     /// cmangos: shown in quest log as part of quest objective
     ///
     pub reputation_objective_value: u32,
     /// cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0
     ///
-    pub required_opposite_faction: u32,
+    pub required_opposite_faction: Faction,
     /// cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0
     ///
     pub required_opposite_reputation_value: u32,
@@ -118,14 +119,14 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // suggest_player_amount: u32
         w.write_all(&self.suggest_player_amount.to_le_bytes())?;
 
-        // reputation_objective_faction: u32
-        w.write_all(&self.reputation_objective_faction.to_le_bytes())?;
+        // reputation_objective_faction: Faction
+        w.write_all(&(self.reputation_objective_faction.as_int() as u16).to_le_bytes())?;
 
         // reputation_objective_value: u32
         w.write_all(&self.reputation_objective_value.to_le_bytes())?;
 
-        // required_opposite_faction: u32
-        w.write_all(&self.required_opposite_faction.to_le_bytes())?;
+        // required_opposite_faction: Faction
+        w.write_all(&(self.required_opposite_faction.as_int() as u16).to_le_bytes())?;
 
         // required_opposite_reputation_value: u32
         w.write_all(&self.required_opposite_reputation_value.to_le_bytes())?;
@@ -219,7 +220,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(244..=2284).contains(&body_size) {
+        if !(240..=2280).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005D, size: body_size as u32 });
         }
 
@@ -241,14 +242,14 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // suggest_player_amount: u32
         let suggest_player_amount = crate::util::read_u32_le(r)?;
 
-        // reputation_objective_faction: u32
-        let reputation_objective_faction = crate::util::read_u32_le(r)?;
+        // reputation_objective_faction: Faction
+        let reputation_objective_faction: Faction = crate::util::read_u16_le(r)?.try_into()?;
 
         // reputation_objective_value: u32
         let reputation_objective_value = crate::util::read_u32_le(r)?;
 
-        // required_opposite_faction: u32
-        let required_opposite_faction = crate::util::read_u32_le(r)?;
+        // required_opposite_faction: Faction
+        let required_opposite_faction: Faction = crate::util::read_u16_le(r)?.try_into()?;
 
         // required_opposite_reputation_value: u32
         let required_opposite_reputation_value = crate::util::read_u32_le(r)?;
@@ -377,9 +378,9 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + 4 // zone_or_sort: u32
         + 4 // quest_type: u32
         + 4 // suggest_player_amount: u32
-        + 4 // reputation_objective_faction: u32
+        + 2 // reputation_objective_faction: Faction
         + 4 // reputation_objective_value: u32
-        + 4 // required_opposite_faction: u32
+        + 2 // required_opposite_faction: Faction
         + 4 // required_opposite_reputation_value: u32
         + 4 // next_quest_in_chain: u32
         + 4 // money_reward: u32

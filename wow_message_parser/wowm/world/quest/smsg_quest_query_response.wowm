@@ -17,13 +17,13 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 quest_level;
     u32 zone_or_sort;
     u32 quest_type;
-    u32 reputation_objective_faction {
+    Faction reputation_objective_faction {
         comment = "cmangos: shown in quest log as part of quest objective";
     }
     u32 reputation_objective_value {
         comment = "cmangos: shown in quest log as part of quest objective";
     }
-    u32 required_opposite_faction {
+    Faction required_opposite_faction {
         comment = "cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0";
     }
     u32 required_opposite_reputation_value {
@@ -63,13 +63,13 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 zone_or_sort;
     u32 quest_type;
     u32 suggest_player_amount;
-    u32 reputation_objective_faction {
+    Faction reputation_objective_faction {
         comment = "cmangos: shown in quest log as part of quest objective";
     }
     u32 reputation_objective_value {
         comment = "cmangos: shown in quest log as part of quest objective";
     }
-    u32 required_opposite_faction {
+    Faction required_opposite_faction {
         comment = "cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0";
     }
     u32 required_opposite_reputation_value {
@@ -120,13 +120,13 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     u32 zone_or_sort;
     u32 quest_type;
     u32 suggest_player_amount;
-    u32 reputation_objective_faction {
+    Faction reputation_objective_faction {
         comment = "cmangos: shown in quest log as part of quest objective";
     }
     u32 reputation_objective_value {
         comment = "cmangos: shown in quest log as part of quest objective";
     }
-    u32 required_opposite_faction {
+    Faction required_opposite_faction {
         comment = "cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0";
     }
     u32 required_opposite_reputation_value {

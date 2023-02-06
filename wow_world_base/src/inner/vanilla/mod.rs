@@ -25,6 +25,8 @@ pub use crate::extended::vanilla::*;
 pub use crate::manual::vanilla::*;
 pub(crate) mod creature_family;
 pub use creature_family::*;
+pub(crate) mod faction;
+pub use faction::*;
 pub(crate) mod gender;
 pub use gender::*;
 pub(crate) mod inventory_type;

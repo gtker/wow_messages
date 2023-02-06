@@ -1,7 +1,13 @@
-#tag_all versions "1.10 1.11 1.12 2 3";
+cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
+    u32 reputation_id;
+} {
+    versions = "1.10 1.11";
+}
 
 cmsg CMSG_SET_WATCHED_FACTION = 0x0318 {
-    /* TODO rep id */
-    u32 reputation_id;
+    Faction faction;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
+
 

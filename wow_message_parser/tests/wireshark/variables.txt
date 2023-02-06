@@ -9,6 +9,7 @@
     guint32 amount_of_entries = 0;
     guint32 amount_of_events = 0;
     guint32 amount_of_extra_fields = 0;
+    guint32 amount_of_faction_standings = 0;
     guint32 amount_of_factions = 0;
     guint32 amount_of_friends = 0;
     guint32 amount_of_gossip_items = 0;

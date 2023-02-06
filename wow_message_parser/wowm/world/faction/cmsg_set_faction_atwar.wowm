@@ -26,11 +26,10 @@ flag FactionFlag : u8 {
 }
 
 cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {
-    /* TODO: Reputation list id */
-    u32 reputation_list_id;
+    Faction faction;
     FactionFlag flags;
 } {
-    versions = "1 2";
+    paste_versions = "1.12 2.4.3";
 }
 
 flag FactionFlag : u8 {
@@ -64,9 +63,8 @@ flag FactionFlag : u8 {
 }
 
 cmsg CMSG_SET_FACTION_ATWAR = 0x0125 {
-    /* TODO: Reputation list id */
-    u32 reputation_list_id;
+    Faction faction;
     FactionFlag flags;
 } {
-    versions = "3";
+    versions = "3.3.5";
 }

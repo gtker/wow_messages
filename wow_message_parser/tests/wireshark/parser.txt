@@ -1366,11 +1366,11 @@
             ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_SET_FACTION_ATWAR:
-            ptvcursor_add(ptv, hf_woww_reputation_list_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_faction_flag, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_SET_FACTION_INACTIVE:
-            ptvcursor_add(ptv, hf_woww_reputation_list_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_inactive, 1, ENC_NA);
             break;
         case CMSG_SET_SELECTION:
@@ -1388,7 +1388,7 @@
             ptvcursor_add(ptv, hf_woww_slot, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_SET_WATCHED_FACTION:
-            ptvcursor_add(ptv, hf_woww_reputation_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_SPIRIT_HEALER_ACTIVATE:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
@@ -5223,9 +5223,9 @@
             ptvcursor_add(ptv, hf_woww_quest_level, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_zone_or_sort, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_quest_type, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_reputation_objective_faction, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_reputation_objective_value, 4, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_required_opposite_faction, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_required_opposite_reputation_value, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_next_quest_in_chain, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_money_reward, 4, ENC_LITTLE_ENDIAN);
@@ -5326,16 +5326,16 @@
             add_cstring(ptv, &hf_woww_message);
             break;
         case SMSG_SET_FACTION_STANDING:
-            ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_factions, 4, ENC_LITTLE_ENDIAN, &amount_of_factions);
-            for (i = 0; i < amount_of_factions; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Faction");
-                ptvcursor_add(ptv, hf_woww_reputation_list_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_faction_standings, 4, ENC_LITTLE_ENDIAN, &amount_of_faction_standings);
+            for (i = 0; i < amount_of_faction_standings; ++i) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "FactionStanding");
+                ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_standing, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
             break;
         case SMSG_SET_FACTION_VISIBLE:
-            ptvcursor_add(ptv, hf_woww_reputation_list_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SET_FLAT_SPELL_MODIFIER:
             ptvcursor_add(ptv, hf_woww_eff, 1, ENC_LITTLE_ENDIAN);
@@ -5346,7 +5346,7 @@
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_reactions, 4, ENC_LITTLE_ENDIAN, &amount_of_reactions);
             for (i = 0; i < amount_of_reactions; ++i) {
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ForcedReaction");
-                ptvcursor_add(ptv, hf_woww_faction_id, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_reputation_rank, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }

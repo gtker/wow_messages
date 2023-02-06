@@ -146,6 +146,12 @@ pub(crate) mod cmsg_repair_item;
 pub use cmsg_repair_item::*;
 pub(crate) mod cmsg_send_mail;
 pub use cmsg_send_mail::*;
+pub(crate) mod cmsg_set_faction_atwar;
+pub use cmsg_set_faction_atwar::*;
+pub(crate) mod cmsg_set_faction_inactive;
+pub use cmsg_set_faction_inactive::*;
+pub(crate) mod cmsg_set_watched_faction;
+pub use cmsg_set_watched_faction::*;
 pub(crate) mod cmsg_summon_response;
 pub use cmsg_summon_response::*;
 pub(crate) mod cmsg_text_emote;
@@ -170,6 +176,12 @@ pub(crate) mod dismount_result;
 pub use dismount_result::*;
 pub(crate) mod emote;
 pub use emote::*;
+pub(crate) mod faction;
+pub use faction::*;
+pub(crate) mod faction_standing;
+pub use faction_standing::*;
+pub(crate) mod forced_reaction;
+pub use forced_reaction::*;
 pub(crate) mod friend;
 pub use friend::*;
 pub(crate) mod friend_status;
@@ -731,10 +743,6 @@ pub use crate::shared::cmsg_set_active_mover_vanilla_tbc_wrath::CMSG_SET_ACTIVE_
 
 pub use crate::shared::cmsg_set_ammo_vanilla_tbc_wrath::CMSG_SET_AMMO;
 
-pub use crate::shared::cmsg_set_faction_atwar_vanilla_tbc::CMSG_SET_FACTION_ATWAR;
-
-pub use crate::shared::cmsg_set_faction_inactive_vanilla_tbc_wrath::CMSG_SET_FACTION_INACTIVE;
-
 pub use crate::shared::cmsg_set_selection_vanilla_tbc_wrath::CMSG_SET_SELECTION;
 
 pub use crate::shared::cmsg_set_target_obsolete_vanilla_tbc::CMSG_SET_TARGET_OBSOLETE;
@@ -742,8 +750,6 @@ pub use crate::shared::cmsg_set_target_obsolete_vanilla_tbc::CMSG_SET_TARGET_OBS
 pub use crate::shared::cmsg_set_trade_gold_vanilla_tbc_wrath::CMSG_SET_TRADE_GOLD;
 
 pub use crate::shared::cmsg_set_trade_item_vanilla_tbc_wrath::CMSG_SET_TRADE_ITEM;
-
-pub use crate::shared::cmsg_set_watched_faction_vanilla_tbc_wrath::CMSG_SET_WATCHED_FACTION;
 
 pub use crate::shared::cmsg_setsheathed_vanilla_tbc_wrath::CMSG_SETSHEATHED;
 
@@ -815,11 +821,7 @@ pub use crate::shared::faction_flag_vanilla_tbc::FactionFlag;
 
 pub use crate::shared::faction_initializer_vanilla_tbc::FactionInitializer;
 
-pub use crate::shared::faction_vanilla_tbc_wrath::Faction;
-
 pub use crate::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
-
-pub use crate::shared::forced_reaction_vanilla_tbc_wrath::ForcedReaction;
 
 pub use crate::shared::friend_result_vanilla_tbc::FriendResult;
 
@@ -1271,11 +1273,7 @@ pub use crate::shared::smsg_sell_item_vanilla_tbc::SMSG_SELL_ITEM;
 
 pub use crate::shared::smsg_server_message_vanilla_tbc::SMSG_SERVER_MESSAGE;
 
-pub use crate::shared::smsg_set_faction_visible_vanilla_tbc_wrath::SMSG_SET_FACTION_VISIBLE;
-
 pub use crate::shared::smsg_set_flat_spell_modifier_vanilla_tbc_wrath::SMSG_SET_FLAT_SPELL_MODIFIER;
-
-pub use crate::shared::smsg_set_forced_reactions_vanilla_tbc_wrath::SMSG_SET_FORCED_REACTIONS;
 
 pub use crate::shared::smsg_set_pct_spell_modifier_vanilla_tbc_wrath::SMSG_SET_PCT_SPELL_MODIFIER;
 
@@ -1625,6 +1623,10 @@ pub(crate) mod smsg_send_mail_result;
 pub use smsg_send_mail_result::*;
 pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
+pub(crate) mod smsg_set_faction_visible;
+pub use smsg_set_faction_visible::*;
+pub(crate) mod smsg_set_forced_reactions;
+pub use smsg_set_forced_reactions::*;
 pub(crate) mod smsg_set_proficiency;
 pub use smsg_set_proficiency::*;
 pub(crate) mod smsg_spell_cooldown;

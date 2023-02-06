@@ -250,6 +250,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_amount_of_faction_standings,
+            { "Amount Of Faction Standings", "woww.amount.of.faction.standings",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_amount_of_factions,
             { "Amount Of Factions", "woww.amount.of.factions",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -1564,15 +1570,15 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_faction_flag,
-            { "Faction Flag", "woww.faction.flag",
-                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+        { &hf_woww_faction,
+            { "Faction", "woww.faction",
+                FT_UINT16, BASE_HEX_DEC, VALS(e_faction_strings), 0,
                 NULL, HFILL
             }
         },
-        { &hf_woww_faction_id,
-            { "Faction Id", "woww.faction.id",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+        { &hf_woww_faction_flag,
+            { "Faction Flag", "woww.faction.flag",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -3442,24 +3448,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_reputation_id,
-            { "Reputation Id", "woww.reputation.id",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_reputation_list_id,
-            { "Reputation List Id", "woww.reputation.list.id",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_reputation_objective_faction,
-            { "Reputation Objective Faction", "woww.reputation.objective.faction",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_reputation_objective_value,
             { "Reputation Objective Value", "woww.reputation.objective.value",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -3522,12 +3510,6 @@
         },
         { &hf_woww_required_money,
             { "Required Money", "woww.required.money",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_required_opposite_faction,
-            { "Required Opposite Faction", "woww.required.opposite.faction",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

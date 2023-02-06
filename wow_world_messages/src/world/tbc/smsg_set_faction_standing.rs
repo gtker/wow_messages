@@ -1,21 +1,21 @@
 use std::convert::{TryFrom, TryInto};
-use crate::tbc::Faction;
+use crate::tbc::FactionStanding;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm#L17):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm:16`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm#L16):
 /// ```text
 /// smsg SMSG_SET_FACTION_STANDING = 0x0124 {
 ///     f32 refer_a_friend_bonus;
-///     u32 amount_of_factions;
-///     Faction[amount_of_factions] factions;
+///     u32 amount_of_faction_standings;
+///     FactionStanding[amount_of_faction_standings] faction_standings;
 /// }
 /// ```
 pub struct SMSG_SET_FACTION_STANDING {
     /// All emus set to 0.
     ///
     pub refer_a_friend_bonus: f32,
-    pub factions: Vec<Faction>,
+    pub faction_standings: Vec<FactionStanding>,
 }
 
 impl crate::Message for SMSG_SET_FACTION_STANDING {
@@ -30,11 +30,11 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
         // refer_a_friend_bonus: f32
         w.write_all(&self.refer_a_friend_bonus.to_le_bytes())?;
 
-        // amount_of_factions: u32
-        w.write_all(&(self.factions.len() as u32).to_le_bytes())?;
+        // amount_of_faction_standings: u32
+        w.write_all(&(self.faction_standings.len() as u32).to_le_bytes())?;
 
-        // factions: Faction[amount_of_factions]
-        for i in self.factions.iter() {
+        // faction_standings: FactionStanding[amount_of_faction_standings]
+        for i in self.faction_standings.iter() {
             i.write_into_vec(w)?;
         }
 
@@ -48,18 +48,18 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
 
         // refer_a_friend_bonus: f32
         let refer_a_friend_bonus = crate::util::read_f32_le(r)?;
-        // amount_of_factions: u32
-        let amount_of_factions = crate::util::read_u32_le(r)?;
+        // amount_of_faction_standings: u32
+        let amount_of_faction_standings = crate::util::read_u32_le(r)?;
 
-        // factions: Faction[amount_of_factions]
-        let mut factions = Vec::with_capacity(amount_of_factions as usize);
-        for i in 0..amount_of_factions {
-            factions.push(Faction::read(r)?);
+        // faction_standings: FactionStanding[amount_of_faction_standings]
+        let mut faction_standings = Vec::with_capacity(amount_of_faction_standings as usize);
+        for i in 0..amount_of_faction_standings {
+            faction_standings.push(FactionStanding::read(r)?);
         }
 
         Ok(Self {
             refer_a_friend_bonus,
-            factions,
+            faction_standings,
         })
     }
 
@@ -70,8 +70,8 @@ impl crate::tbc::ServerMessage for SMSG_SET_FACTION_STANDING {}
 impl SMSG_SET_FACTION_STANDING {
     pub(crate) fn size(&self) -> usize {
         4 // refer_a_friend_bonus: f32
-        + 4 // amount_of_factions: u32
-        + self.factions.len() * 8 // factions: Faction[amount_of_factions]
+        + 4 // amount_of_faction_standings: u32
+        + self.faction_standings.len() * 6 // faction_standings: FactionStanding[amount_of_faction_standings]
     }
 }
 

@@ -15,6 +15,8 @@ pub use crate::extended::tbc::*;
 pub use crate::manual::tbc::*;
 pub(crate) mod creature_family;
 pub use creature_family::*;
+pub(crate) mod faction;
+pub use faction::*;
 pub(crate) mod gender;
 pub use gender::*;
 pub(crate) mod inventory_type;

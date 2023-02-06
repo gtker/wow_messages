@@ -472,10 +472,6 @@ pub mod cmsg_set_active_mover_vanilla_tbc_wrath;
 pub mod cmsg_set_ammo_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_set_contact_notes_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod cmsg_set_faction_atwar_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_set_faction_inactive_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_set_lfg_comment_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -490,8 +486,6 @@ pub mod cmsg_set_title_tbc_wrath;
 pub mod cmsg_set_trade_gold_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_set_trade_item_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_set_watched_faction_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_setsheathed_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -590,11 +584,7 @@ pub mod faction_flag_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod faction_initializer_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod faction_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod far_sight_operation_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod forced_reaction_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod friend_result_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -1184,11 +1174,7 @@ pub mod smsg_sell_item_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_server_message_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_set_faction_visible_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_set_flat_spell_modifier_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_set_forced_reactions_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_set_pct_spell_modifier_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]

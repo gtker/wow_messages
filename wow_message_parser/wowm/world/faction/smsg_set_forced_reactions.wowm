@@ -1,16 +1,13 @@
-#tag_all versions "1 2 3";
-
 struct ForcedReaction {
-    u32 faction_id {
-        comment = "vmangos: faction_id (Faction.dbc)";
-    }
-    u32 reputation_rank {
-        comment = "vmangos: reputation rank";
-    }
+    Faction faction;
+    u32 reputation_rank;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
 
 smsg SMSG_SET_FORCED_REACTIONS = 0x02A5 {
     u32 amount_of_reactions;
     ForcedReaction[amount_of_reactions] reactions;
-}
-
+} {
+     paste_versions = "1.12 2.4.3 3.3.5";
+ }

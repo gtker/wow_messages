@@ -1,28 +1,26 @@
-struct Faction {
-    u32 reputation_list_id;
+struct FactionStanding {
+    Faction faction;
     /* TODO Units? */
     u32 standing;
 } {
-    versions = "1 2 3";
+    paste_versions = "1.12 2.4.3 3.3.5";
 }
 
 smsg SMSG_SET_FACTION_STANDING = 0x0124 {
-    /* TODO How many factions in FactionList? */
-    u32 amount_of_factions;
-    Faction[amount_of_factions] factions;
+    u32 amount_of_faction_standings;
+    FactionStanding[amount_of_faction_standings] faction_standings;
 } {
-    versions = "1";
+    versions = "1.12";
 }
 
 smsg SMSG_SET_FACTION_STANDING = 0x0124 {
     f32 refer_a_friend_bonus {
         comment = "All emus set to 0.";
     }
-    /* TODO How many factions in FactionList? */
-    u32 amount_of_factions;
-    Faction[amount_of_factions] factions;
+    u32 amount_of_faction_standings;
+    FactionStanding[amount_of_faction_standings] faction_standings;
 } {
-    versions = "2.4";
+    versions = "2.4.3";
 }
 
 smsg SMSG_SET_FACTION_STANDING = 0x0124 {
@@ -32,9 +30,8 @@ smsg SMSG_SET_FACTION_STANDING = 0x0124 {
     Bool any_rank_increased {
         comment = "mangostwo: display visual effect";
     }
-    /* TODO How many factions in FactionList? */
-    u32 amount_of_factions;
-    Faction[amount_of_factions] factions;
+    u32 amount_of_faction_standings;
+    FactionStanding[amount_of_faction_standings] faction_standings;
 } {
     versions = "3.3.5";
 }

@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm:36`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm#L36):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm#L35):
 /// ```text
 /// flag FactionFlag : u8 {
 ///     VISIBLE = 0x01;
@@ -155,7 +155,7 @@ impl FactionFlag {
         (self.inner & Self::INACTIVE) != 0
     }
 
-    /// player controlled, state stored in characters.data ( [`CMSG_SET_FACTION_INACTIVE`](crate::vanilla::CMSG_SET_FACTION_INACTIVE) )
+    /// player controlled, state stored in characters.data ( [`CMSG_SET_FACTION_INACTIVE`](crate::wrath::CMSG_SET_FACTION_INACTIVE) )
     ///
     pub const fn new_INACTIVE() -> Self {
         Self { inner: Self::INACTIVE }
