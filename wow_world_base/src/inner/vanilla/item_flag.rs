@@ -121,7 +121,7 @@ impl ItemFlag {
         (self.inner & Self::LOOTABLE) != 0
     }
 
-    /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also ITEM_DYNFLAG_UNLOCKED
+    /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`
     ///
     pub const fn new_LOOTABLE() -> Self {
         Self { inner: Self::LOOTABLE }

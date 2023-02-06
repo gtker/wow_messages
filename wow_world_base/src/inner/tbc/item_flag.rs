@@ -118,7 +118,7 @@ impl ItemFlag {
         (self.inner & Self::CONJURED) != 0
     }
 
-    /// items created by spells with SPELL_EFFECT_CREATE_ITEM
+    /// items created by spells with `SPELL_EFFECT_CREATE_ITEM`
     ///
     pub const fn new_CONJURED() -> Self {
         Self { inner: Self::CONJURED }
@@ -138,7 +138,7 @@ impl ItemFlag {
         (self.inner & Self::LOOTABLE) != 0
     }
 
-    /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also ITEM_DYNFLAG_UNLOCKED
+    /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`
     ///
     pub const fn new_LOOTABLE() -> Self {
         Self { inner: Self::LOOTABLE }

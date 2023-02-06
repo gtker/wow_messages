@@ -119,7 +119,7 @@ flag ItemFlag : u32 {
     }
     CONJURED = 0x00000002;
     LOOTABLE = 0x00000004 {
-        comment = "affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also ITEM_DYNFLAG_UNLOCKED";
+        comment = "affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`";
     }
     DEPRECATED = 0x00000010 {
         comment = "can't repeat old note: appears red icon (like when item durability==0)";
@@ -299,10 +299,10 @@ flag ItemFlag : u32 {
         comment = "not used";
     }
     CONJURED = 0x00000002 {
-        comment = "items created by spells with SPELL_EFFECT_CREATE_ITEM";
+        comment = "items created by spells with `SPELL_EFFECT_CREATE_ITEM`";
     }
     LOOTABLE = 0x00000004 {
-        comment = "affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also ITEM_DYNFLAG_UNLOCKED";
+        comment = "affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`";
     }
     DEPRECATED = 0x00000010 {
         comment = "can't repeat old note: appears red icon (like when item durability==0)";

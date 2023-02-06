@@ -35,7 +35,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `NONE` | 0 (0x00) |  |  |
 | `NO_PICKUP` | 1 (0x01) |  | not used |
 | `CONJURED` | 2 (0x02) |  |  |
-| `LOOTABLE` | 4 (0x04) |  | affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also ITEM_DYNFLAG_UNLOCKED |
+| `LOOTABLE` | 4 (0x04) |  | affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED` |
 | `DEPRECATED` | 16 (0x10) |  | can't repeat old note: appears red icon (like when item durability==0) |
 | `INDESTRUCTIBLE` | 32 (0x20) |  | used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed) |
 | `PLAYER_CAST` | 64 (0x40) |  | ? old note: usable |
@@ -92,8 +92,8 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |
 | `NO_PICKUP` | 1 (0x01) |  | not used |
-| `CONJURED` | 2 (0x02) |  | items created by spells with SPELL_EFFECT_CREATE_ITEM |
-| `LOOTABLE` | 4 (0x04) |  | affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also ITEM_DYNFLAG_UNLOCKED |
+| `CONJURED` | 2 (0x02) |  | items created by spells with `SPELL_EFFECT_CREATE_ITEM` |
+| `LOOTABLE` | 4 (0x04) |  | affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED` |
 | `DEPRECATED` | 16 (0x10) |  | can't repeat old note: appears red icon (like when item durability==0) |
 | `INDESTRUCTIBLE` | 32 (0x20) |  | used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed) |
 | `PLAYER_CAST` | 64 (0x40) |  | ? old note: usable |
