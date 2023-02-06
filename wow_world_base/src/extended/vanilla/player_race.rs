@@ -1,5 +1,5 @@
 use crate::shared::player_gender_vanilla_tbc_wrath::PlayerGender;
-use crate::vanilla::{PlayerRace, RaceClass};
+use crate::vanilla::{Faction, PlayerRace, RaceClass};
 
 impl PlayerRace {
     pub const fn display_id(&self, gender: PlayerGender) -> i32 {
@@ -22,16 +22,16 @@ impl PlayerRace {
         race + gender
     }
 
-    pub const fn faction_id(&self) -> i32 {
+    pub const fn faction_id(&self) -> Faction {
         match self {
-            PlayerRace::Human => 1,
-            PlayerRace::Orc => 2,
-            PlayerRace::Dwarf => 3,
-            PlayerRace::NightElf => 4,
-            PlayerRace::Undead => 5,
-            PlayerRace::Tauren => 6,
-            PlayerRace::Gnome => 115,
-            PlayerRace::Troll => 116,
+            PlayerRace::Human => Faction::PlayerHuman,
+            PlayerRace::Orc => Faction::PlayerOrc,
+            PlayerRace::Dwarf => Faction::PlayerDwarf,
+            PlayerRace::NightElf => Faction::PlayerNightElf,
+            PlayerRace::Undead => Faction::PlayerUndead,
+            PlayerRace::Tauren => Faction::PlayerTauren,
+            PlayerRace::Gnome => Faction::PlayerGnome,
+            PlayerRace::Troll => Faction::PlayerTroll,
         }
     }
 
@@ -49,7 +49,7 @@ impl RaceClass {
         self.to_race_class().0.display_id(gender)
     }
 
-    pub const fn faction_id(&self) -> i32 {
+    pub const fn faction_id(&self) -> Faction {
         self.to_race_class().0.faction_id()
     }
 

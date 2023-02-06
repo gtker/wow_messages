@@ -1,4 +1,5 @@
 use crate::shared::player_gender_vanilla_tbc_wrath::PlayerGender;
+use crate::wrath::Faction;
 
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 impl crate::shared::player_race_tbc_wrath::PlayerRace {
@@ -28,18 +29,35 @@ impl crate::shared::player_race_tbc_wrath::PlayerRace {
         race + gender
     }
 
-    pub const fn faction_id(&self) -> i32 {
+    #[cfg(feature = "tbc")]
+    pub const fn faction_id_tbc(&self) -> crate::tbc::Faction {
         match self {
-            Self::Human => 1,
-            Self::Orc => 2,
-            Self::Dwarf => 3,
-            Self::NightElf => 4,
-            Self::Undead => 5,
-            Self::Tauren => 6,
-            Self::Gnome => 115,
-            Self::Troll => 116,
-            Self::BloodElf => 1610,
-            Self::Draenei => 1629,
+            Self::Human => crate::tbc::Faction::PlayerHuman,
+            Self::Orc => crate::tbc::Faction::PlayerOrc,
+            Self::Dwarf => crate::tbc::Faction::PlayerDwarf,
+            Self::NightElf => crate::tbc::Faction::PlayerNightElf,
+            Self::Undead => crate::tbc::Faction::PlayerUndead,
+            Self::Tauren => crate::tbc::Faction::PlayerTauren,
+            Self::Gnome => crate::tbc::Faction::PlayerGnome,
+            Self::Troll => crate::tbc::Faction::PlayerTroll,
+            Self::BloodElf => crate::tbc::Faction::PlayerBloodElf,
+            Self::Draenei => crate::tbc::Faction::PlayerDraenei,
+        }
+    }
+
+    #[cfg(feature = "wrath")]
+    pub const fn faction_id_wrath(&self) -> crate::wrath::Faction {
+        match self {
+            Self::Human => crate::wrath::Faction::PlayerHuman,
+            Self::Orc => crate::wrath::Faction::PlayerOrc,
+            Self::Dwarf => crate::wrath::Faction::PlayerDwarf,
+            Self::NightElf => crate::wrath::Faction::PlayerNightElf,
+            Self::Undead => crate::wrath::Faction::PlayerUndead,
+            Self::Tauren => crate::wrath::Faction::PlayerTauren,
+            Self::Gnome => crate::wrath::Faction::PlayerGnome,
+            Self::Troll => crate::wrath::Faction::PlayerTroll,
+            Self::BloodElf => crate::wrath::Faction::PlayerBloodElf,
+            Self::Draenei => crate::wrath::Faction::PlayerDraenei,
         }
     }
 
@@ -58,8 +76,8 @@ impl crate::tbc::RaceClass {
         self.race().display_id(gender)
     }
 
-    pub const fn faction_id(&self) -> i32 {
-        self.race().faction_id()
+    pub const fn faction_id_tbc(&self) -> crate::tbc::Faction {
+        self.race().faction_id_tbc()
     }
 
     pub const fn race_scale(&self, gender: PlayerGender) -> f32 {
@@ -73,8 +91,8 @@ impl crate::wrath::RaceClass {
         self.race().display_id(gender)
     }
 
-    pub const fn faction_id(&self) -> i32 {
-        self.race().faction_id()
+    pub const fn faction_id_wrath(&self) -> crate::wrath::Faction {
+        self.race().faction_id_wrath()
     }
 
     pub const fn race_scale(&self, gender: PlayerGender) -> f32 {
