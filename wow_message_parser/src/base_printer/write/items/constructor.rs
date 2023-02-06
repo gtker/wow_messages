@@ -45,50 +45,25 @@ pub(crate) fn constructor(
             |s| {
                 for e in items[0].fields {
                     if let Some(prefix) = e.value.definition_has_extra() {
-                        s.wln(format!("{}: {prefix}({}),", e.name, e.name));
+                        s.wln(format!("{prefix}({}),", e.name));
                     } else {
                         s.wln(format!("{},", e.name));
                     }
                 }
 
                 for array in items[0].arrays {
-                    s.wln(format!("{}: [", array.variable_name));
-
                     for instance in &array.instances {
-                        if array.import_only {
-                            s.open_curly(array.type_name);
-
-                            for field in instance {
-                                if ctor.type_is_defaulted(array.type_name) {
-                                    s.wln(format!(
-                                        "{}: {},",
-                                        field.name,
-                                        field.value.default_value().to_string_value(),
-                                    ));
-                                } else {
-                                    s.wln(format!("{}: {},", field.name, field.variable_name,));
-                                }
+                        for field in instance {
+                            if ctor.type_is_defaulted(array.type_name) {
+                                s.wln(format!(
+                                    "{},",
+                                    field.value.default_value().to_string_value(),
+                                ));
+                            } else {
+                                s.wln(format!("{},", field.variable_name,));
                             }
-
-                            s.dec_indent();
-                            s.wln("},");
-                        } else {
-                            s.wln(format!("{}::new(", array.type_name));
-                            for field in instance {
-                                if ctor.type_is_defaulted(array.type_name) {
-                                    s.wln(format!(
-                                        "{},",
-                                        field.value.default_value().to_string_value(),
-                                    ));
-                                } else {
-                                    s.wln(format!("{},", field.variable_name,));
-                                }
-                            }
-                            s.wln("),");
                         }
                     }
-
-                    s.wln("],");
                 }
             },
         );

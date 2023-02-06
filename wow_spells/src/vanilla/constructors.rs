@@ -5,10 +5,7 @@ use wow_world_base::vanilla::{
     AttributesEx2,
     AttributesEx3,
     AttributesEx4,
-    Reagent,
     Spell,
-    SpellEffect,
-    Totem,
 };
 
 pub const fn n(
@@ -152,18 +149,18 @@ pub const fn n(
     totem1: i32,
     totem2: i32,
 ) -> Spell {
-    Spell {
+    Spell::new(
         entry,
         school,
         category,
         cast_ui,
         dispel,
         mechanic,
-        attributes: Attributes::new(attributes),
-        attributes_ex: AttributesEx1::new(attributes_ex),
-        attributes_ex2: AttributesEx2::new(attributes_ex2),
-        attributes_ex3: AttributesEx3::new(attributes_ex3),
-        attributes_ex4: AttributesEx4::new(attributes_ex4),
+        Attributes::new(attributes),
+        AttributesEx1::new(attributes_ex),
+        AttributesEx2::new(attributes_ex2),
+        AttributesEx3::new(attributes_ex3),
+        AttributesEx4::new(attributes_ex4),
         stances,
         stances_not,
         targets,
@@ -217,42 +214,22 @@ pub const fn n(
         required_aura_vision,
         is_server_side,
         attributes_serverside,
-        reagents: [
-        Reagent::new(
         reagent1,
         reagent_count1,
-        ),
-        Reagent::new(
         reagent2,
         reagent_count2,
-        ),
-        Reagent::new(
         reagent3,
         reagent_count3,
-        ),
-        Reagent::new(
         reagent4,
         reagent_count4,
-        ),
-        Reagent::new(
         reagent5,
         reagent_count5,
-        ),
-        Reagent::new(
         reagent6,
         reagent_count6,
-        ),
-        Reagent::new(
         reagent7,
         reagent_count7,
-        ),
-        Reagent::new(
         reagent8,
         reagent_count8,
-        ),
-        ],
-        effects: [
-        SpellEffect::new(
         effect1,
         effect_die_sides1,
         effect_base_dice1,
@@ -272,8 +249,6 @@ pub const fn n(
         effect_trigger_spell1,
         effect_points_per_combo_point1,
         dmg_multiplier1,
-        ),
-        SpellEffect::new(
         effect2,
         effect_die_sides2,
         effect_base_dice2,
@@ -293,8 +268,6 @@ pub const fn n(
         effect_trigger_spell2,
         effect_points_per_combo_point2,
         dmg_multiplier2,
-        ),
-        SpellEffect::new(
         effect3,
         effect_die_sides3,
         effect_base_dice3,
@@ -314,17 +287,9 @@ pub const fn n(
         effect_trigger_spell3,
         effect_points_per_combo_point3,
         dmg_multiplier3,
-        ),
-        ],
-        totems: [
-        Totem::new(
         totem1,
-        ),
-        Totem::new(
         totem2,
-        ),
-        ],
-    }
+    )
 }
 pub const fn ne(
     entry: u32,
@@ -451,18 +416,18 @@ pub const fn ne(
     totem1: i32,
     totem2: i32,
 ) -> Spell {
-    Spell {
+    Spell::new(
         entry,
         school,
         category,
         cast_ui,
         dispel,
         mechanic,
-        attributes: Attributes::new(attributes),
-        attributes_ex: AttributesEx1::new(attributes_ex),
-        attributes_ex2: AttributesEx2::new(attributes_ex2),
-        attributes_ex3: AttributesEx3::new(attributes_ex3),
-        attributes_ex4: AttributesEx4::new(attributes_ex4),
+        Attributes::new(attributes),
+        AttributesEx1::new(attributes_ex),
+        AttributesEx2::new(attributes_ex2),
+        AttributesEx3::new(attributes_ex3),
+        AttributesEx4::new(attributes_ex4),
         stances,
         stances_not,
         targets,
@@ -516,42 +481,22 @@ pub const fn ne(
         required_aura_vision,
         is_server_side,
         attributes_serverside,
-        reagents: [
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        ],
-        effects: [
-        SpellEffect::new(
         effect1,
         effect_die_sides1,
         effect_base_dice1,
@@ -571,8 +516,6 @@ pub const fn ne(
         effect_trigger_spell1,
         effect_points_per_combo_point1,
         dmg_multiplier1,
-        ),
-        SpellEffect::new(
         effect2,
         effect_die_sides2,
         effect_base_dice2,
@@ -592,8 +535,6 @@ pub const fn ne(
         effect_trigger_spell2,
         effect_points_per_combo_point2,
         dmg_multiplier2,
-        ),
-        SpellEffect::new(
         effect3,
         effect_die_sides3,
         effect_base_dice3,
@@ -613,17 +554,9 @@ pub const fn ne(
         effect_trigger_spell3,
         effect_points_per_combo_point3,
         dmg_multiplier3,
-        ),
-        ],
-        totems: [
-        Totem::new(
         totem1,
-        ),
-        Totem::new(
         totem2,
-        ),
-        ],
-    }
+    )
 }
 pub const fn neg(
     entry: u32,
@@ -748,18 +681,18 @@ pub const fn neg(
     effect_points_per_combo_point3: f32,
     dmg_multiplier3: f32,
 ) -> Spell {
-    Spell {
+    Spell::new(
         entry,
         school,
         category,
         cast_ui,
         dispel,
         mechanic,
-        attributes: Attributes::new(attributes),
-        attributes_ex: AttributesEx1::new(attributes_ex),
-        attributes_ex2: AttributesEx2::new(attributes_ex2),
-        attributes_ex3: AttributesEx3::new(attributes_ex3),
-        attributes_ex4: AttributesEx4::new(attributes_ex4),
+        Attributes::new(attributes),
+        AttributesEx1::new(attributes_ex),
+        AttributesEx2::new(attributes_ex2),
+        AttributesEx3::new(attributes_ex3),
+        AttributesEx4::new(attributes_ex4),
         stances,
         stances_not,
         targets,
@@ -813,42 +746,22 @@ pub const fn neg(
         required_aura_vision,
         is_server_side,
         attributes_serverside,
-        reagents: [
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        Reagent::new(
         0,
         0,
-        ),
-        ],
-        effects: [
-        SpellEffect::new(
         effect1,
         effect_die_sides1,
         effect_base_dice1,
@@ -868,8 +781,6 @@ pub const fn neg(
         effect_trigger_spell1,
         effect_points_per_combo_point1,
         dmg_multiplier1,
-        ),
-        SpellEffect::new(
         effect2,
         effect_die_sides2,
         effect_base_dice2,
@@ -889,8 +800,6 @@ pub const fn neg(
         effect_trigger_spell2,
         effect_points_per_combo_point2,
         dmg_multiplier2,
-        ),
-        SpellEffect::new(
         effect3,
         effect_die_sides3,
         effect_base_dice3,
@@ -910,17 +819,9 @@ pub const fn neg(
         effect_trigger_spell3,
         effect_points_per_combo_point3,
         dmg_multiplier3,
-        ),
-        ],
-        totems: [
-        Totem::new(
         0,
-        ),
-        Totem::new(
         0,
-        ),
-        ],
-    }
+    )
 }
 pub const fn ng(
     entry: u32,
@@ -1061,18 +962,18 @@ pub const fn ng(
     effect_points_per_combo_point3: f32,
     dmg_multiplier3: f32,
 ) -> Spell {
-    Spell {
+    Spell::new(
         entry,
         school,
         category,
         cast_ui,
         dispel,
         mechanic,
-        attributes: Attributes::new(attributes),
-        attributes_ex: AttributesEx1::new(attributes_ex),
-        attributes_ex2: AttributesEx2::new(attributes_ex2),
-        attributes_ex3: AttributesEx3::new(attributes_ex3),
-        attributes_ex4: AttributesEx4::new(attributes_ex4),
+        Attributes::new(attributes),
+        AttributesEx1::new(attributes_ex),
+        AttributesEx2::new(attributes_ex2),
+        AttributesEx3::new(attributes_ex3),
+        AttributesEx4::new(attributes_ex4),
         stances,
         stances_not,
         targets,
@@ -1126,42 +1027,22 @@ pub const fn ng(
         required_aura_vision,
         is_server_side,
         attributes_serverside,
-        reagents: [
-        Reagent::new(
         reagent1,
         reagent_count1,
-        ),
-        Reagent::new(
         reagent2,
         reagent_count2,
-        ),
-        Reagent::new(
         reagent3,
         reagent_count3,
-        ),
-        Reagent::new(
         reagent4,
         reagent_count4,
-        ),
-        Reagent::new(
         reagent5,
         reagent_count5,
-        ),
-        Reagent::new(
         reagent6,
         reagent_count6,
-        ),
-        Reagent::new(
         reagent7,
         reagent_count7,
-        ),
-        Reagent::new(
         reagent8,
         reagent_count8,
-        ),
-        ],
-        effects: [
-        SpellEffect::new(
         effect1,
         effect_die_sides1,
         effect_base_dice1,
@@ -1181,8 +1062,6 @@ pub const fn ng(
         effect_trigger_spell1,
         effect_points_per_combo_point1,
         dmg_multiplier1,
-        ),
-        SpellEffect::new(
         effect2,
         effect_die_sides2,
         effect_base_dice2,
@@ -1202,8 +1081,6 @@ pub const fn ng(
         effect_trigger_spell2,
         effect_points_per_combo_point2,
         dmg_multiplier2,
-        ),
-        SpellEffect::new(
         effect3,
         effect_die_sides3,
         effect_base_dice3,
@@ -1223,16 +1100,8 @@ pub const fn ng(
         effect_trigger_spell3,
         effect_points_per_combo_point3,
         dmg_multiplier3,
-        ),
-        ],
-        totems: [
-        Totem::new(
         0,
-        ),
-        Totem::new(
         0,
-        ),
-        ],
-    }
+    )
 }
 // AUTOGENERATED_END

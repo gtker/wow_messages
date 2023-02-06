@@ -9,7 +9,7 @@ pub mod wrath;
 macro_rules! find_and_data {
     ($data:expr) => {
         pub fn lookup_item(id: u32) -> Option<&'static Item> {
-            all_items().iter().find(|a| a.entry == id)
+            all_items().iter().find(|a| a.entry() == id)
         }
 
         pub const fn all_items() -> &'static [Item] {

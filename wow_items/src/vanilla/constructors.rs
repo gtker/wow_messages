@@ -9,7 +9,6 @@ use wow_world_base::vanilla::{
     InventoryType,
     Item,
     ItemClassAndSubClass,
-    ItemDamageType,
     ItemFlag,
     ItemQuality,
     ItemSet,
@@ -21,7 +20,6 @@ use wow_world_base::vanilla::{
     Skill,
     SpellSchool,
     SpellTriggerType,
-    Spells,
 };
 
 pub const fn n(
@@ -139,19 +137,19 @@ pub const fn n(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
+        ItemFlag::new(flags),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -203,35 +201,21 @@ pub const fn n(
         max_money_loot,
         duration,
         extra_flags,
-        damages: [
-        ItemDamageType {
-            damage_minimum: dmg_min1,
-            damage_maximum: dmg_max1,
-            school: dmg_type1,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min2,
-            damage_maximum: dmg_max2,
-            school: dmg_type2,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min3,
-            damage_maximum: dmg_max3,
-            school: dmg_type3,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min4,
-            damage_maximum: dmg_max4,
-            school: dmg_type4,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min5,
-            damage_maximum: dmg_max5,
-            school: dmg_type5,
-        },
-        ],
-        spells: [
-        Spells::new(
+        dmg_min1,
+        dmg_max1,
+        dmg_type1,
+        dmg_min2,
+        dmg_max2,
+        dmg_type2,
+        dmg_min3,
+        dmg_max3,
+        dmg_type3,
+        dmg_min4,
+        dmg_max4,
+        dmg_type4,
+        dmg_min5,
+        dmg_max5,
+        dmg_type5,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -239,8 +223,6 @@ pub const fn n(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -248,8 +230,6 @@ pub const fn n(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -257,8 +237,6 @@ pub const fn n(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -266,8 +244,6 @@ pub const fn n(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -275,9 +251,7 @@ pub const fn n(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn na(
     entry: u32,
@@ -379,19 +353,19 @@ pub const fn na(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
+        ItemFlag::new(flags),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -443,35 +417,21 @@ pub const fn na(
         max_money_loot,
         duration,
         extra_flags,
-        damages: [
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -479,8 +439,6 @@ pub const fn na(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -488,8 +446,6 @@ pub const fn na(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -497,8 +453,6 @@ pub const fn na(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -506,8 +460,6 @@ pub const fn na(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -515,9 +467,7 @@ pub const fn na(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nab(
     entry: u32,
@@ -584,19 +534,19 @@ pub const fn nab(
     duration: i32,
     extra_flags: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
+        ItemFlag::new(flags),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -648,35 +598,21 @@ pub const fn nab(
         max_money_loot,
         duration,
         extra_flags,
-        damages: [
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
         0,
         SpellTriggerType::OnUse,
         0,
@@ -684,8 +620,6 @@ pub const fn nab(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -693,8 +627,6 @@ pub const fn nab(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -702,8 +634,6 @@ pub const fn nab(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -711,8 +641,6 @@ pub const fn nab(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -720,9 +648,7 @@ pub const fn nab(
         0,
         0,
         0,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nb(
     entry: u32,
@@ -804,19 +730,19 @@ pub const fn nb(
     dmg_max5: f32,
     dmg_type5: SpellSchool,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
+        ItemFlag::new(flags),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -868,35 +794,21 @@ pub const fn nb(
         max_money_loot,
         duration,
         extra_flags,
-        damages: [
-        ItemDamageType {
-            damage_minimum: dmg_min1,
-            damage_maximum: dmg_max1,
-            school: dmg_type1,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min2,
-            damage_maximum: dmg_max2,
-            school: dmg_type2,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min3,
-            damage_maximum: dmg_max3,
-            school: dmg_type3,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min4,
-            damage_maximum: dmg_max4,
-            school: dmg_type4,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min5,
-            damage_maximum: dmg_max5,
-            school: dmg_type5,
-        },
-        ],
-        spells: [
-        Spells::new(
+        dmg_min1,
+        dmg_max1,
+        dmg_type1,
+        dmg_min2,
+        dmg_max2,
+        dmg_type2,
+        dmg_min3,
+        dmg_max3,
+        dmg_type3,
+        dmg_min4,
+        dmg_max4,
+        dmg_type4,
+        dmg_min5,
+        dmg_max5,
+        dmg_type5,
         0,
         SpellTriggerType::OnUse,
         0,
@@ -904,8 +816,6 @@ pub const fn nb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -913,8 +823,6 @@ pub const fn nb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -922,8 +830,6 @@ pub const fn nb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -931,8 +837,6 @@ pub const fn nb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -940,8 +844,6 @@ pub const fn nb(
         0,
         0,
         0,
-        ),
-        ],
-    }
+    )
 }
 // AUTOGENERATED_END

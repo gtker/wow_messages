@@ -9,7 +9,7 @@ pub mod wrath;
 macro_rules! find_and_data {
     ($data:expr) => {
         pub fn lookup_spell(id: u32) -> Option<&'static Spell> {
-            all_spells().iter().find(|a| a.entry == id)
+            all_spells().iter().find(|a| a.entry() == id)
         }
 
         pub const fn all_spells() -> &'static [Spell] {

@@ -71,10 +71,10 @@ pub(crate) fn includes(
 
     for array in arrays {
         match import_location {
-            ImportFrom::ItemPubUse | ImportFrom::ItemsConstructors => {
+            ImportFrom::ItemPubUse => {
                 set.insert(array.type_name);
             }
-            ImportFrom::Items => {}
+            ImportFrom::Items | ImportFrom::ItemsConstructors => {}
             ImportFrom::Definition => {
                 if array.import_only {
                     set.insert(array.type_name);
@@ -103,12 +103,12 @@ fn struct_definition(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name
     s.open_curly(format!("pub struct {ty_name}"));
 
     for e in fields {
-        s.wln(format!("pub {}: {},", e.name, e.value.type_name()));
+        s.wln(format!("{}: {},", e.name, e.value.type_name()));
     }
 
     for array in arrays {
         s.wln(format!(
-            "pub {}: [{}; {}],",
+            "{}: [{}; {}],",
             array.variable_name,
             array.type_name,
             array.instances.len()

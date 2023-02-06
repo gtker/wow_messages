@@ -9,13 +9,10 @@ use wow_world_base::wrath::{
     InventoryType,
     Item,
     ItemClassAndSubClass,
-    ItemDamageType,
     ItemFlag,
     ItemFlag2,
     ItemQuality,
     ItemSet,
-    ItemSocket,
-    ItemStat,
     Language,
     Map,
     PageTextMaterial,
@@ -24,7 +21,6 @@ use wow_world_base::wrath::{
     Skill,
     SpellSchool,
     SpellTriggerType,
-    Spells,
 };
 
 pub const fn n(
@@ -165,21 +161,21 @@ pub const fn n(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -221,7 +217,7 @@ pub const fn n(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -235,76 +231,38 @@ pub const fn n(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: socket_color_1,
-            content: socket_content_1,
-        },
-        ItemSocket {
-            color: socket_color_2,
-            content: socket_content_2,
-        },
-        ItemSocket {
-            color: socket_color_3,
-            content: socket_content_3,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: dmg_min1,
-            damage_maximum: dmg_max1,
-            school: dmg_type1,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min2,
-            damage_maximum: dmg_max2,
-            school: dmg_type2,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: stat_type1,
-            value: stat_value1,
-        },
-        ItemStat {
-            stat_type: stat_type2,
-            value: stat_value2,
-        },
-        ItemStat {
-            stat_type: stat_type3,
-            value: stat_value3,
-        },
-        ItemStat {
-            stat_type: stat_type4,
-            value: stat_value4,
-        },
-        ItemStat {
-            stat_type: stat_type5,
-            value: stat_value5,
-        },
-        ItemStat {
-            stat_type: stat_type6,
-            value: stat_value6,
-        },
-        ItemStat {
-            stat_type: stat_type7,
-            value: stat_value7,
-        },
-        ItemStat {
-            stat_type: stat_type8,
-            value: stat_value8,
-        },
-        ItemStat {
-            stat_type: stat_type9,
-            value: stat_value9,
-        },
-        ItemStat {
-            stat_type: stat_type10,
-            value: stat_value10,
-        },
-        ],
-        spells: [
-        Spells::new(
+        socket_color_1,
+        socket_content_1,
+        socket_color_2,
+        socket_content_2,
+        socket_color_3,
+        socket_content_3,
+        dmg_min1,
+        dmg_max1,
+        dmg_type1,
+        dmg_min2,
+        dmg_max2,
+        dmg_type2,
+        stat_type1,
+        stat_value1,
+        stat_type2,
+        stat_value2,
+        stat_type3,
+        stat_value3,
+        stat_type4,
+        stat_value4,
+        stat_type5,
+        stat_value5,
+        stat_type6,
+        stat_value6,
+        stat_type7,
+        stat_value7,
+        stat_type8,
+        stat_value8,
+        stat_type9,
+        stat_value9,
+        stat_type10,
+        stat_value10,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -312,8 +270,6 @@ pub const fn n(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -321,8 +277,6 @@ pub const fn n(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -330,8 +284,6 @@ pub const fn n(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -339,8 +291,6 @@ pub const fn n(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -348,9 +298,7 @@ pub const fn n(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn na(
     entry: u32,
@@ -484,21 +432,21 @@ pub const fn na(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -540,7 +488,7 @@ pub const fn na(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -554,76 +502,38 @@ pub const fn na(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: socket_color_1,
-            content: socket_content_1,
-        },
-        ItemSocket {
-            color: socket_color_2,
-            content: socket_content_2,
-        },
-        ItemSocket {
-            color: socket_color_3,
-            content: socket_content_3,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: stat_type1,
-            value: stat_value1,
-        },
-        ItemStat {
-            stat_type: stat_type2,
-            value: stat_value2,
-        },
-        ItemStat {
-            stat_type: stat_type3,
-            value: stat_value3,
-        },
-        ItemStat {
-            stat_type: stat_type4,
-            value: stat_value4,
-        },
-        ItemStat {
-            stat_type: stat_type5,
-            value: stat_value5,
-        },
-        ItemStat {
-            stat_type: stat_type6,
-            value: stat_value6,
-        },
-        ItemStat {
-            stat_type: stat_type7,
-            value: stat_value7,
-        },
-        ItemStat {
-            stat_type: stat_type8,
-            value: stat_value8,
-        },
-        ItemStat {
-            stat_type: stat_type9,
-            value: stat_value9,
-        },
-        ItemStat {
-            stat_type: stat_type10,
-            value: stat_value10,
-        },
-        ],
-        spells: [
-        Spells::new(
+        socket_color_1,
+        socket_content_1,
+        socket_color_2,
+        socket_content_2,
+        socket_color_3,
+        socket_content_3,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        stat_type1,
+        stat_value1,
+        stat_type2,
+        stat_value2,
+        stat_type3,
+        stat_value3,
+        stat_type4,
+        stat_value4,
+        stat_type5,
+        stat_value5,
+        stat_type6,
+        stat_value6,
+        stat_type7,
+        stat_value7,
+        stat_type8,
+        stat_value8,
+        stat_type9,
+        stat_value9,
+        stat_type10,
+        stat_value10,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -631,8 +541,6 @@ pub const fn na(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -640,8 +548,6 @@ pub const fn na(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -649,8 +555,6 @@ pub const fn na(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -658,8 +562,6 @@ pub const fn na(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -667,9 +569,7 @@ pub const fn na(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nac(
     entry: u32,
@@ -797,21 +697,21 @@ pub const fn nac(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -853,7 +753,7 @@ pub const fn nac(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -867,76 +767,38 @@ pub const fn nac(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: stat_type1,
-            value: stat_value1,
-        },
-        ItemStat {
-            stat_type: stat_type2,
-            value: stat_value2,
-        },
-        ItemStat {
-            stat_type: stat_type3,
-            value: stat_value3,
-        },
-        ItemStat {
-            stat_type: stat_type4,
-            value: stat_value4,
-        },
-        ItemStat {
-            stat_type: stat_type5,
-            value: stat_value5,
-        },
-        ItemStat {
-            stat_type: stat_type6,
-            value: stat_value6,
-        },
-        ItemStat {
-            stat_type: stat_type7,
-            value: stat_value7,
-        },
-        ItemStat {
-            stat_type: stat_type8,
-            value: stat_value8,
-        },
-        ItemStat {
-            stat_type: stat_type9,
-            value: stat_value9,
-        },
-        ItemStat {
-            stat_type: stat_type10,
-            value: stat_value10,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        stat_type1,
+        stat_value1,
+        stat_type2,
+        stat_value2,
+        stat_type3,
+        stat_value3,
+        stat_type4,
+        stat_value4,
+        stat_type5,
+        stat_value5,
+        stat_type6,
+        stat_value6,
+        stat_type7,
+        stat_value7,
+        stat_type8,
+        stat_value8,
+        stat_type9,
+        stat_value9,
+        stat_type10,
+        stat_value10,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -944,8 +806,6 @@ pub const fn nac(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -953,8 +813,6 @@ pub const fn nac(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -962,8 +820,6 @@ pub const fn nac(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -971,8 +827,6 @@ pub const fn nac(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -980,9 +834,7 @@ pub const fn nac(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nacb(
     entry: u32,
@@ -1075,21 +927,21 @@ pub const fn nacb(
     stat_type10: u32,
     stat_value10: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -1131,7 +983,7 @@ pub const fn nacb(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -1145,76 +997,38 @@ pub const fn nacb(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: stat_type1,
-            value: stat_value1,
-        },
-        ItemStat {
-            stat_type: stat_type2,
-            value: stat_value2,
-        },
-        ItemStat {
-            stat_type: stat_type3,
-            value: stat_value3,
-        },
-        ItemStat {
-            stat_type: stat_type4,
-            value: stat_value4,
-        },
-        ItemStat {
-            stat_type: stat_type5,
-            value: stat_value5,
-        },
-        ItemStat {
-            stat_type: stat_type6,
-            value: stat_value6,
-        },
-        ItemStat {
-            stat_type: stat_type7,
-            value: stat_value7,
-        },
-        ItemStat {
-            stat_type: stat_type8,
-            value: stat_value8,
-        },
-        ItemStat {
-            stat_type: stat_type9,
-            value: stat_value9,
-        },
-        ItemStat {
-            stat_type: stat_type10,
-            value: stat_value10,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        stat_type1,
+        stat_value1,
+        stat_type2,
+        stat_value2,
+        stat_type3,
+        stat_value3,
+        stat_type4,
+        stat_value4,
+        stat_type5,
+        stat_value5,
+        stat_type6,
+        stat_value6,
+        stat_type7,
+        stat_value7,
+        stat_type8,
+        stat_value8,
+        stat_type9,
+        stat_value9,
+        stat_type10,
+        stat_value10,
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1222,8 +1036,6 @@ pub const fn nacb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1231,8 +1043,6 @@ pub const fn nacb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1240,8 +1050,6 @@ pub const fn nacb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1249,8 +1057,6 @@ pub const fn nacb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1258,9 +1064,7 @@ pub const fn nacb(
         0,
         0,
         0,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nacd(
     entry: u32,
@@ -1368,21 +1172,21 @@ pub const fn nacd(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -1424,7 +1228,7 @@ pub const fn nacd(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -1438,76 +1242,38 @@ pub const fn nacd(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -1515,8 +1281,6 @@ pub const fn nacd(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -1524,8 +1288,6 @@ pub const fn nacd(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -1533,8 +1295,6 @@ pub const fn nacd(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -1542,8 +1302,6 @@ pub const fn nacd(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -1551,9 +1309,7 @@ pub const fn nacd(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nacdb(
     entry: u32,
@@ -1626,21 +1382,21 @@ pub const fn nacdb(
     max_money_loot: i32,
     extra_flags: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -1682,7 +1438,7 @@ pub const fn nacdb(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -1696,76 +1452,38 @@ pub const fn nacdb(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1773,8 +1491,6 @@ pub const fn nacdb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1782,8 +1498,6 @@ pub const fn nacdb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1791,8 +1505,6 @@ pub const fn nacdb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1800,8 +1512,6 @@ pub const fn nacdb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -1809,9 +1519,7 @@ pub const fn nacdb(
         0,
         0,
         0,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nad(
     entry: u32,
@@ -1925,21 +1633,21 @@ pub const fn nad(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -1981,7 +1689,7 @@ pub const fn nad(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -1995,76 +1703,38 @@ pub const fn nad(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: socket_color_1,
-            content: socket_content_1,
-        },
-        ItemSocket {
-            color: socket_color_2,
-            content: socket_content_2,
-        },
-        ItemSocket {
-            color: socket_color_3,
-            content: socket_content_3,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ItemDamageType {
-            damage_minimum: 0.0,
-            damage_maximum: 0.0,
-            school: SpellSchool::Normal,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ],
-        spells: [
-        Spells::new(
+        socket_color_1,
+        socket_content_1,
+        socket_color_2,
+        socket_content_2,
+        socket_color_3,
+        socket_content_3,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0.0,
+        0.0,
+        SpellSchool::Normal,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -2072,8 +1742,6 @@ pub const fn nad(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -2081,8 +1749,6 @@ pub const fn nad(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -2090,8 +1756,6 @@ pub const fn nad(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -2099,8 +1763,6 @@ pub const fn nad(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -2108,9 +1770,7 @@ pub const fn nad(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nc(
     entry: u32,
@@ -2244,21 +1904,21 @@ pub const fn nc(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -2300,7 +1960,7 @@ pub const fn nc(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -2314,76 +1974,38 @@ pub const fn nc(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: dmg_min1,
-            damage_maximum: dmg_max1,
-            school: dmg_type1,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min2,
-            damage_maximum: dmg_max2,
-            school: dmg_type2,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: stat_type1,
-            value: stat_value1,
-        },
-        ItemStat {
-            stat_type: stat_type2,
-            value: stat_value2,
-        },
-        ItemStat {
-            stat_type: stat_type3,
-            value: stat_value3,
-        },
-        ItemStat {
-            stat_type: stat_type4,
-            value: stat_value4,
-        },
-        ItemStat {
-            stat_type: stat_type5,
-            value: stat_value5,
-        },
-        ItemStat {
-            stat_type: stat_type6,
-            value: stat_value6,
-        },
-        ItemStat {
-            stat_type: stat_type7,
-            value: stat_value7,
-        },
-        ItemStat {
-            stat_type: stat_type8,
-            value: stat_value8,
-        },
-        ItemStat {
-            stat_type: stat_type9,
-            value: stat_value9,
-        },
-        ItemStat {
-            stat_type: stat_type10,
-            value: stat_value10,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        dmg_min1,
+        dmg_max1,
+        dmg_type1,
+        dmg_min2,
+        dmg_max2,
+        dmg_type2,
+        stat_type1,
+        stat_value1,
+        stat_type2,
+        stat_value2,
+        stat_type3,
+        stat_value3,
+        stat_type4,
+        stat_value4,
+        stat_type5,
+        stat_value5,
+        stat_type6,
+        stat_value6,
+        stat_type7,
+        stat_value7,
+        stat_type8,
+        stat_value8,
+        stat_type9,
+        stat_value9,
+        stat_type10,
+        stat_value10,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -2391,8 +2013,6 @@ pub const fn nc(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -2400,8 +2020,6 @@ pub const fn nc(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -2409,8 +2027,6 @@ pub const fn nc(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -2418,8 +2034,6 @@ pub const fn nc(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -2427,9 +2041,7 @@ pub const fn nc(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn ncb(
     entry: u32,
@@ -2528,21 +2140,21 @@ pub const fn ncb(
     stat_type10: u32,
     stat_value10: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -2584,7 +2196,7 @@ pub const fn ncb(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -2598,76 +2210,38 @@ pub const fn ncb(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: dmg_min1,
-            damage_maximum: dmg_max1,
-            school: dmg_type1,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min2,
-            damage_maximum: dmg_max2,
-            school: dmg_type2,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: stat_type1,
-            value: stat_value1,
-        },
-        ItemStat {
-            stat_type: stat_type2,
-            value: stat_value2,
-        },
-        ItemStat {
-            stat_type: stat_type3,
-            value: stat_value3,
-        },
-        ItemStat {
-            stat_type: stat_type4,
-            value: stat_value4,
-        },
-        ItemStat {
-            stat_type: stat_type5,
-            value: stat_value5,
-        },
-        ItemStat {
-            stat_type: stat_type6,
-            value: stat_value6,
-        },
-        ItemStat {
-            stat_type: stat_type7,
-            value: stat_value7,
-        },
-        ItemStat {
-            stat_type: stat_type8,
-            value: stat_value8,
-        },
-        ItemStat {
-            stat_type: stat_type9,
-            value: stat_value9,
-        },
-        ItemStat {
-            stat_type: stat_type10,
-            value: stat_value10,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        dmg_min1,
+        dmg_max1,
+        dmg_type1,
+        dmg_min2,
+        dmg_max2,
+        dmg_type2,
+        stat_type1,
+        stat_value1,
+        stat_type2,
+        stat_value2,
+        stat_type3,
+        stat_value3,
+        stat_type4,
+        stat_value4,
+        stat_type5,
+        stat_value5,
+        stat_type6,
+        stat_value6,
+        stat_type7,
+        stat_value7,
+        stat_type8,
+        stat_value8,
+        stat_type9,
+        stat_value9,
+        stat_type10,
+        stat_value10,
         0,
         SpellTriggerType::OnUse,
         0,
@@ -2675,8 +2249,6 @@ pub const fn ncb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -2684,8 +2256,6 @@ pub const fn ncb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -2693,8 +2263,6 @@ pub const fn ncb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -2702,8 +2270,6 @@ pub const fn ncb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -2711,9 +2277,7 @@ pub const fn ncb(
         0,
         0,
         0,
-        ),
-        ],
-    }
+    )
 }
 pub const fn ncd(
     entry: u32,
@@ -2827,21 +2391,21 @@ pub const fn ncd(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -2883,7 +2447,7 @@ pub const fn ncd(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -2897,76 +2461,38 @@ pub const fn ncd(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: dmg_min1,
-            damage_maximum: dmg_max1,
-            school: dmg_type1,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min2,
-            damage_maximum: dmg_max2,
-            school: dmg_type2,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        dmg_min1,
+        dmg_max1,
+        dmg_type1,
+        dmg_min2,
+        dmg_max2,
+        dmg_type2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -2974,8 +2500,6 @@ pub const fn ncd(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -2983,8 +2507,6 @@ pub const fn ncd(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -2992,8 +2514,6 @@ pub const fn ncd(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -3001,8 +2521,6 @@ pub const fn ncd(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -3010,9 +2528,7 @@ pub const fn ncd(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 pub const fn ncdb(
     entry: u32,
@@ -3091,21 +2607,21 @@ pub const fn ncdb(
     dmg_max2: f32,
     dmg_type2: SpellSchool,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -3147,7 +2663,7 @@ pub const fn ncdb(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -3161,76 +2677,38 @@ pub const fn ncdb(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ItemSocket {
-            color: 0,
-            content: 0,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: dmg_min1,
-            damage_maximum: dmg_max1,
-            school: dmg_type1,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min2,
-            damage_maximum: dmg_max2,
-            school: dmg_type2,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ],
-        spells: [
-        Spells::new(
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        dmg_min1,
+        dmg_max1,
+        dmg_type1,
+        dmg_min2,
+        dmg_max2,
+        dmg_type2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         SpellTriggerType::OnUse,
         0,
@@ -3238,8 +2716,6 @@ pub const fn ncdb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -3247,8 +2723,6 @@ pub const fn ncdb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -3256,8 +2730,6 @@ pub const fn ncdb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -3265,8 +2737,6 @@ pub const fn ncdb(
         0,
         0,
         0,
-        ),
-        Spells::new(
         0,
         SpellTriggerType::OnUse,
         0,
@@ -3274,9 +2744,7 @@ pub const fn ncdb(
         0,
         0,
         0,
-        ),
-        ],
-    }
+    )
 }
 pub const fn nd(
     entry: u32,
@@ -3396,21 +2864,21 @@ pub const fn nd(
     spell_category_5: i32,
     spell_category_cooldown_5: i32,
 ) -> Item {
-    Item {
+    Item::new(
         entry,
         class_and_sub_class,
         sound_override_sub_class,
         name,
         display_id,
         quality,
-        flags: ItemFlag::new(flags),
-        flags2: ItemFlag2::new(flags2),
+        ItemFlag::new(flags),
+        ItemFlag2::new(flags2),
         buy_count,
         buy_price,
         sell_price,
         inventory_type,
-        allowed_class: AllowedClass::new(allowed_class),
-        allowed_race: AllowedRace::new(allowed_race),
+        AllowedClass::new(allowed_class),
+        AllowedRace::new(allowed_race),
         item_level,
         required_level,
         required_skill,
@@ -3452,7 +2920,7 @@ pub const fn nd(
         max_durability,
         area,
         map,
-        bag_family: BagFamily::new(bag_family),
+        BagFamily::new(bag_family),
         totem_category,
         socket_bonus,
         gem_properties,
@@ -3466,76 +2934,38 @@ pub const fn nd(
         min_money_loot,
         max_money_loot,
         extra_flags,
-        sockets: [
-        ItemSocket {
-            color: socket_color_1,
-            content: socket_content_1,
-        },
-        ItemSocket {
-            color: socket_color_2,
-            content: socket_content_2,
-        },
-        ItemSocket {
-            color: socket_color_3,
-            content: socket_content_3,
-        },
-        ],
-        damages: [
-        ItemDamageType {
-            damage_minimum: dmg_min1,
-            damage_maximum: dmg_max1,
-            school: dmg_type1,
-        },
-        ItemDamageType {
-            damage_minimum: dmg_min2,
-            damage_maximum: dmg_max2,
-            school: dmg_type2,
-        },
-        ],
-        stats: [
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ItemStat {
-            stat_type: 0,
-            value: 0,
-        },
-        ],
-        spells: [
-        Spells::new(
+        socket_color_1,
+        socket_content_1,
+        socket_color_2,
+        socket_content_2,
+        socket_color_3,
+        socket_content_3,
+        dmg_min1,
+        dmg_max1,
+        dmg_type1,
+        dmg_min2,
+        dmg_max2,
+        dmg_type2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
         spell_id_1,
         spell_trigger_1,
         spell_charges_1,
@@ -3543,8 +2973,6 @@ pub const fn nd(
         spell_cooldown_1,
         spell_category_1,
         spell_category_cooldown_1,
-        ),
-        Spells::new(
         spell_id_2,
         spell_trigger_2,
         spell_charges_2,
@@ -3552,8 +2980,6 @@ pub const fn nd(
         spell_cooldown_2,
         spell_category_2,
         spell_category_cooldown_2,
-        ),
-        Spells::new(
         spell_id_3,
         spell_trigger_3,
         spell_charges_3,
@@ -3561,8 +2987,6 @@ pub const fn nd(
         spell_cooldown_3,
         spell_category_3,
         spell_category_cooldown_3,
-        ),
-        Spells::new(
         spell_id_4,
         spell_trigger_4,
         spell_charges_4,
@@ -3570,8 +2994,6 @@ pub const fn nd(
         spell_cooldown_4,
         spell_category_4,
         spell_category_cooldown_4,
-        ),
-        Spells::new(
         spell_id_5,
         spell_trigger_5,
         spell_charges_5,
@@ -3579,8 +3001,6 @@ pub const fn nd(
         spell_cooldown_5,
         spell_category_5,
         spell_category_cooldown_5,
-        ),
-        ],
-    }
+    )
 }
 // AUTOGENERATED_END

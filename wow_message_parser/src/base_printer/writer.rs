@@ -101,20 +101,26 @@ impl Writer {
         name: impl AsRef<str>,
         ty_name: impl AsRef<str>,
         args: impl Fn(&mut Self),
-        self_body: impl Fn(&mut Self),
+        body: impl Fn(&mut Self),
     ) {
+        let ty_name = ty_name.as_ref();
+
         self.wln(format!("pub const fn {}(", name.as_ref()));
         self.inc_indent();
 
         args(self);
 
         self.dec_indent();
-        self.wln(format!(") -> {} {{", ty_name.as_ref()));
+        self.wln(format!(") -> {ty_name} {{"));
         self.inc_indent();
 
-        self.open_curly(ty_name);
-        self_body(self);
-        self.closing_curly(); // Self
+        self.wln(format!("{ty_name}::new("));
+        self.inc_indent();
+
+        body(self);
+
+        self.dec_indent();
+        self.wln(")");
 
         self.closing_curly(); // fn body
     }
