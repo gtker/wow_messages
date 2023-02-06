@@ -19,6 +19,24 @@ pub struct GenericItem {
     pub arrays: Vec<Array>,
 }
 
+impl GenericItem {
+    pub fn new(
+        entry: u32,
+        extra_flags: i32,
+        name: String,
+        fields: Vec<Field>,
+        arrays: Vec<Array>,
+    ) -> Self {
+        Self {
+            entry,
+            extra_flags,
+            name,
+            fields,
+            arrays,
+        }
+    }
+}
+
 pub struct Array {
     pub variable_name: &'static str,
     pub type_name: &'static str,

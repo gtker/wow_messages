@@ -536,13 +536,7 @@ impl WrathItem {
             ),
         ];
 
-        GenericItem {
-            entry: self.entry,
-            extra_flags: self.extra_flags,
-            name: self.name,
-            fields,
-            arrays,
-        }
+        GenericItem::new(self.entry, self.extra_flags, self.name, fields, arrays)
     }
 }
 
