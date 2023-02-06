@@ -19,6 +19,7 @@ pub(crate) fn definition(
         expansion,
         ImportFrom::Definition,
         ty_name,
+        optimizations,
     );
 
     struct_definition(s, fields, arrays, ty_name, optimizations);
@@ -34,6 +35,7 @@ pub(crate) fn includes(
     expansion: Expansion,
     import_location: ImportFrom,
     ty_name: &str,
+    optimizations: &Optimizations,
 ) {
     let mut set = BTreeSet::new();
 
@@ -61,6 +63,14 @@ pub(crate) fn includes(
     s.inc_indent();
 
     for e in fields {
+        if matches!(
+            import_location,
+            ImportFrom::ItemsConstructors | ImportFrom::Items
+        ) && optimizations.optimization(e.name).skip_field()
+        {
+            continue;
+        }
+
         if import_location == ImportFrom::Items && e.value.definition_has_extra().is_some() {
             continue;
         }
@@ -110,10 +120,10 @@ fn struct_definition(
     s.open_curly(format!("pub struct {ty_name}"));
 
     for e in fields {
-        match optimizations.optimization(&e.name) {
-            FieldOptimization::None => {}
-            FieldOptimization::ConstantValue(_) => continue,
+        if optimizations.optimization(&e.name).skip_field() {
+            continue;
         }
+
         s.wln(format!("{}: {},", e.name, e.value.type_name()));
     }
 
@@ -177,9 +187,8 @@ fn impl_block(
     s.pub_const_fn_new(
         |s| {
             for e in fields {
-                match optimizations.optimization(e.name) {
-                    FieldOptimization::None => {}
-                    FieldOptimization::ConstantValue(_) => continue,
+                if optimizations.optimization(e.name).skip_field() {
+                    continue;
                 }
 
                 s.wln(format!("{}: {},", e.name, e.value.type_name()));
@@ -199,9 +208,8 @@ fn impl_block(
         },
         |s| {
             for e in fields {
-                match optimizations.optimization(e.name) {
-                    FieldOptimization::None => {}
-                    FieldOptimization::ConstantValue(_) => continue,
+                if optimizations.optimization(e.name).skip_field() {
+                    continue;
                 }
 
                 s.wln(format!("{},", e.name));

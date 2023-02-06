@@ -1,4 +1,4 @@
-use crate::base_printer::data::items::{FieldOptimization, Optimizations};
+use crate::base_printer::data::items::Optimizations;
 use crate::base_printer::write::items::definition::includes;
 use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::writer::Writer;
@@ -19,6 +19,7 @@ pub(crate) fn constructor(
         expansion,
         ImportFrom::ItemsConstructors,
         ty_name,
+        optimizations,
     );
 
     for ctor in get_constructors(items) {
@@ -27,9 +28,8 @@ pub(crate) fn constructor(
             ty_name,
             |s| {
                 for e in &items[0].fields {
-                    match optimizations.optimization(e.name) {
-                        FieldOptimization::None => {}
-                        FieldOptimization::ConstantValue(_) => continue,
+                    if optimizations.optimization(e.name).skip_field() {
+                        continue;
                     }
 
                     s.wln(format!("{}: {},", e.name, e.value.constructor_type_name()));
@@ -51,9 +51,8 @@ pub(crate) fn constructor(
             },
             |s| {
                 for e in &items[0].fields {
-                    match optimizations.optimization(e.name) {
-                        FieldOptimization::None => {}
-                        FieldOptimization::ConstantValue(_) => continue,
+                    if optimizations.optimization(e.name).skip_field() {
+                        continue;
                     }
 
                     if let Some(prefix) = e.value.definition_has_extra() {

@@ -15,7 +15,6 @@ use wow_world_base::tbc::{
     Language,
     Map,
     PageTextMaterial,
-    PvpRank,
     SheatheType,
     Skill,
     SpellSchool,

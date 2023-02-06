@@ -2,7 +2,7 @@ mod constructor;
 pub(crate) mod conversions;
 pub(crate) mod definition;
 
-use crate::base_printer::data::items::{Array, Field, FieldOptimization, Optimizations, Value};
+use crate::base_printer::data::items::{Array, Field, Optimizations, Value};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 pub(crate) struct Stats {
@@ -105,6 +105,7 @@ pub(crate) fn write_pub_use(
     things: &[GenericThing],
     expansion: Expansion,
     ty_name: &str,
+    optimizations: &Optimizations,
 ) {
     let mut s = Writer::new();
     s.w("pub ");
@@ -116,6 +117,7 @@ pub(crate) fn write_pub_use(
         expansion,
         ImportFrom::ItemPubUse,
         ty_name,
+        optimizations,
     );
 
     overwrite_autogenerate_if_not_the_same(path, s.inner());
@@ -145,7 +147,7 @@ pub(crate) fn write_things(
 ) {
     let mut s = Writer::new();
 
-    let default_values = get_default_values(things);
+    let default_values = get_default_values(things, optimizations);
     const_default_values(&mut s, &default_values);
 
     all_items(
@@ -161,11 +163,15 @@ pub(crate) fn write_things(
     overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
 
-fn get_default_values(things: &[GenericThing]) -> BTreeSet<Value> {
+fn get_default_values(things: &[GenericThing], optimizations: &Optimizations) -> BTreeSet<Value> {
     let mut map: HashMap<&'static str, BTreeMap<Value, usize>> = HashMap::new();
 
     for thing in things {
         for field in &thing.fields {
+            if optimizations.optimization(field.name).skip_field() {
+                continue;
+            }
+
             insert_value(&mut map, &field.value)
         }
 
@@ -274,6 +280,7 @@ fn all_items(
         expansion,
         ImportFrom::Items,
         ty_name,
+        optimizations,
     );
 
     s.wln(format!("pub const DATA: &[{ty_name}] = &["));
@@ -285,9 +292,8 @@ fn all_items(
         s.w(format!("{}(", item.constructor_name()));
 
         for value in &item.fields {
-            match optimizations.optimization(value.name) {
-                FieldOptimization::None => {}
-                FieldOptimization::ConstantValue(_) => continue,
+            if optimizations.optimization(value.name).skip_field() {
+                continue;
             }
 
             if default_values.contains(&value.value) {

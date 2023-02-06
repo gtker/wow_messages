@@ -16,7 +16,6 @@ use wow_world_base::wrath::{
     Language,
     Map,
     PageTextMaterial,
-    PvpRank,
     SheatheType,
     Skill,
     SpellSchool,

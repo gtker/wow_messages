@@ -212,7 +212,13 @@ fn write_items(data: &Data, expansion: Expansion) {
         TY_NAME,
         optimizations,
     );
-    write_pub_use(&expansion.item_pub_use_path(), &items, expansion, TY_NAME);
+    write_pub_use(
+        &expansion.item_pub_use_path(),
+        &items,
+        expansion,
+        TY_NAME,
+        optimizations,
+    );
 }
 
 fn write_spells(data: &Data, expansion: Expansion) {
@@ -245,5 +251,11 @@ fn write_spells(data: &Data, expansion: Expansion) {
         TY_NAME,
         optimizations,
     );
-    write_pub_use(&expansion.spell_pub_use_path(), &spells, expansion, TY_NAME);
+    write_pub_use(
+        &expansion.spell_pub_use_path(),
+        &spells,
+        expansion,
+        TY_NAME,
+        optimizations,
+    );
 }
