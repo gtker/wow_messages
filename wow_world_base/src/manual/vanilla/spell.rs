@@ -26,8 +26,6 @@ pub struct Spell {
     targets: i32,
     target_creature_type: i32,
     requires_spell_focus: i32,
-    caster_aura_state: i32,
-    target_aura_state: i32,
     casting_time_index: i32,
     recovery_time: i32,
     category_recovery_time: i32,
@@ -44,7 +42,6 @@ pub struct Spell {
     power_type: u32,
     mana_cost: i32,
     mana_cost_per_level: i32,
-    mana_per_second: i32,
     range_index: i32,
     speed: f32,
     modal_next_spell: i32,
@@ -61,17 +58,12 @@ pub struct Spell {
     mana_cost_percentage: i32,
     start_recovery_category: i32,
     start_recovery_time: i32,
-    max_target_level: i32,
     spell_family_name: i32,
     spell_family_flags: i64,
     max_affected_targets: i32,
     dmg_class: i32,
     prevention_type: i32,
     stance_bar_order: i32,
-    min_faction_id: i32,
-    min_reputation: i32,
-    required_aura_vision: i32,
-    attributes_serverside: i32,
     reagents: [Reagent; 8],
     effects: [SpellEffect; 3],
     totems: [Totem; 2],
@@ -95,8 +87,6 @@ impl Spell {
         targets: i32,
         target_creature_type: i32,
         requires_spell_focus: i32,
-        caster_aura_state: i32,
-        target_aura_state: i32,
         casting_time_index: i32,
         recovery_time: i32,
         category_recovery_time: i32,
@@ -113,7 +103,6 @@ impl Spell {
         power_type: u32,
         mana_cost: i32,
         mana_cost_per_level: i32,
-        mana_per_second: i32,
         range_index: i32,
         speed: f32,
         modal_next_spell: i32,
@@ -130,17 +119,12 @@ impl Spell {
         mana_cost_percentage: i32,
         start_recovery_category: i32,
         start_recovery_time: i32,
-        max_target_level: i32,
         spell_family_name: i32,
         spell_family_flags: i64,
         max_affected_targets: i32,
         dmg_class: i32,
         prevention_type: i32,
         stance_bar_order: i32,
-        min_faction_id: i32,
-        min_reputation: i32,
-        required_aura_vision: i32,
-        attributes_serverside: i32,
         reagent1: i32,
         reagent_count1: i32,
         reagent2: i32,
@@ -234,8 +218,6 @@ impl Spell {
             targets,
             target_creature_type,
             requires_spell_focus,
-            caster_aura_state,
-            target_aura_state,
             casting_time_index,
             recovery_time,
             category_recovery_time,
@@ -252,7 +234,6 @@ impl Spell {
             power_type,
             mana_cost,
             mana_cost_per_level,
-            mana_per_second,
             range_index,
             speed,
             modal_next_spell,
@@ -269,17 +250,12 @@ impl Spell {
             mana_cost_percentage,
             start_recovery_category,
             start_recovery_time,
-            max_target_level,
             spell_family_name,
             spell_family_flags,
             max_affected_targets,
             dmg_class,
             prevention_type,
             stance_bar_order,
-            min_faction_id,
-            min_reputation,
-            required_aura_vision,
-            attributes_serverside,
             reagents: [
             Reagent::new(
             reagent1,
@@ -454,11 +430,21 @@ impl Spell {
     }
 
     pub const fn caster_aura_state(&self) -> i32 {
-        self.caster_aura_state
+        match self.entry {
+            76 | 1495 | 6186 | 6568 | 6572 | 6574 | 7379 | 10374 | 11600 | 11601 | 12170 | 14251 | 14269 | 14270 | 14271 | 19130 | 25288 => 1,
+            17170 => 2,
+            26635 => 3,
+            20271 | 27731 => 5,
+            19306 | 20909 | 20910 => 7,
+            _ => 0,
+        }
     }
 
     pub const fn target_aura_state(&self) -> i32 {
-        self.target_aura_state
+        match self.entry {
+            5308 | 6174 | 6175 | 7160 | 7938 | 16495 | 20539 | 20647 | 20658 | 20660 | 20661 | 20662 | 24239 | 24274 | 24275 | 31255 => 2,
+            _ => 0,
+        }
     }
 
     pub const fn casting_time_index(&self) -> i32 {
@@ -526,7 +512,20 @@ impl Spell {
     }
 
     pub const fn mana_per_second(&self) -> i32 {
-        self.mana_per_second
+        match self.entry {
+            424 | 963 => 2,
+            1116 | 3486 => 4,
+            755 => 5,
+            461 | 3698 => 10,
+            3699 => 17,
+            3700 => 24,
+            10260 => 25,
+            11693 => 33,
+            11694 => 42,
+            11695 => 52,
+            16569 => 75,
+            _ => 0,
+        }
     }
 
     pub const fn mana_per_second_per_level(&self) -> i32 {
@@ -598,7 +597,19 @@ impl Spell {
     }
 
     pub const fn max_target_level(&self) -> i32 {
-        self.max_target_level
+        match self.entry {
+            26259 => 20,
+            26258 => 30,
+            453 | 2908 | 26195 => 40,
+            10267 | 26197 => 50,
+            8192 | 8955 => 55,
+            9439 | 9976 | 9991 | 9999 | 10723 | 12332 | 17085 | 21544 | 21565 => 60,
+            9901 | 10953 | 26198 => 70,
+            10268 => 80,
+            9736 => 100,
+            9773 | 9779 => 255,
+            _ => 0,
+        }
     }
 
     pub const fn spell_family_name(&self) -> i32 {
@@ -626,15 +637,24 @@ impl Spell {
     }
 
     pub const fn min_faction_id(&self) -> i32 {
-        self.min_faction_id
+        match self.entry {
+            6994 => 369,
+            _ => 0,
+        }
     }
 
     pub const fn min_reputation(&self) -> i32 {
-        self.min_reputation
+        match self.entry {
+            6994 => 4,
+            _ => 0,
+        }
     }
 
     pub const fn required_aura_vision(&self) -> i32 {
-        self.required_aura_vision
+        match self.entry {
+            26869 => 1,
+            _ => 0,
+        }
     }
 
     pub const fn is_server_side(&self) -> i32 {
@@ -642,7 +662,10 @@ impl Spell {
     }
 
     pub const fn attributes_serverside(&self) -> i32 {
-        self.attributes_serverside
+        match self.entry {
+            4044 | 4133 | 11816 | 18115 | 21789 | 27791 | 28330 => 4,
+            _ => 0,
+        }
     }
 
     pub const fn reagents(&self) -> &[Reagent; 8] {

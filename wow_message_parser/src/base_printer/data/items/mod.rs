@@ -1,7 +1,7 @@
 use crate::base_printer::Expansion;
 use rusqlite::Connection;
 use std::cmp::Ordering;
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 
 pub mod tbc;
 pub mod vanilla;
@@ -17,7 +17,9 @@ use wow_world_base::wrath as wrath_base;
 pub enum FieldOptimization {
     None,
     ConstantValue(Value),
+    Baseline(Value, Vec<(Vec<u32>, Value)>),
 }
+const OPTIMIZATION_BASELINE_DEVIATIONS: usize = 50;
 
 impl FieldOptimization {
     pub const fn skip_field(&self) -> bool {
@@ -53,17 +55,56 @@ impl Optimizations {
                 .find(|field| field.name == field_name)
                 .unwrap()
                 .value;
-            let mut fields = items.iter().map(|item| {
-                item.fields
-                    .iter()
-                    .find(|field| field.name == field_name)
-                    .unwrap()
+            let fields = items.iter().map(|item| {
+                (
+                    item.entry,
+                    &item
+                        .fields
+                        .iter()
+                        .find(|field| field.name == field_name)
+                        .unwrap()
+                        .value,
+                )
             });
 
-            let optimization = if fields.all(|field| &field.value == value) {
+            let mut set: BTreeMap<Value, Vec<u32>> = BTreeMap::new();
+            for field in fields {
+                if let Some(v) = set.get_mut(field.1) {
+                    v.push(field.0);
+                } else {
+                    let v = vec![field.0];
+                    set.insert(field.1.clone(), v);
+                }
+            }
+
+            let optimization = if set.len() == 1 {
                 FieldOptimization::ConstantValue(value.clone())
             } else {
-                FieldOptimization::None
+                let mut baseline = set.iter().next().unwrap();
+                for s in &set {
+                    if s.1.len() > baseline.1.len() {
+                        baseline = s;
+                    }
+                }
+
+                let total = set.iter().fold(0_usize, |a, b| a + b.1.len());
+                let deviations = total - baseline.1.len();
+
+                if deviations <= OPTIMIZATION_BASELINE_DEVIATIONS {
+                    let mut v = Vec::new();
+
+                    for s in &set {
+                        if s == baseline {
+                            continue;
+                        }
+
+                        v.push((s.1.clone(), s.0.clone()));
+                    }
+
+                    FieldOptimization::Baseline(baseline.0.clone(), v)
+                } else {
+                    FieldOptimization::None
+                }
             };
 
             field_optimizations.insert(field_name.to_string(), optimization);

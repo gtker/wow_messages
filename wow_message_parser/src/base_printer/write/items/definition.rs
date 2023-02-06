@@ -263,6 +263,31 @@ fn getters_and_setters(
             FieldOptimization::ConstantValue(v) => {
                 s.wln(v.to_string_value());
             }
+            FieldOptimization::Baseline(mainline, outliers) => {
+                s.open_curly(format!("match self.entry"));
+
+                for outlier in outliers {
+                    if outlier.0.len() == 1 {
+                        s.wln(format!(
+                            "{} => {},",
+                            outlier.0[0],
+                            outlier.1.to_string_value()
+                        ));
+                    } else {
+                        for (i, entry) in outlier.0.iter().enumerate() {
+                            if i == 0 {
+                                s.w(format!("{entry}"))
+                            } else {
+                                s.w_no_indent(format!(" | {entry}"))
+                            }
+                        }
+                        s.wln_no_indent(format!(" => {},", outlier.1.to_string_value()))
+                    }
+                }
+                s.wln(format!("_ => {},", mainline.to_string_value()));
+
+                s.closing_curly();
+            }
         });
         s.newline();
     }

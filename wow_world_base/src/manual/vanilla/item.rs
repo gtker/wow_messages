@@ -68,22 +68,16 @@ pub struct Item {
     language: Language,
     page_text_material: PageTextMaterial,
     start_quest: i32,
-    lock_id: i32,
     material: i32,
     sheathe_type: SheatheType,
     random_property: i32,
     block: i32,
     item_set: ItemSet,
     max_durability: i32,
-    area: Area,
-    map: Map,
     bag_family: BagFamily,
     disenchant_id: i32,
     food_type: i32,
-    min_money_loot: i32,
-    max_money_loot: i32,
     duration: i32,
-    extra_flags: i32,
     damages: [ItemDamageType; 5],
     spells: [Spells; 5],
 }
@@ -133,22 +127,16 @@ impl Item {
         language: Language,
         page_text_material: PageTextMaterial,
         start_quest: i32,
-        lock_id: i32,
         material: i32,
         sheathe_type: SheatheType,
         random_property: i32,
         block: i32,
         item_set: ItemSet,
         max_durability: i32,
-        area: Area,
-        map: Map,
         bag_family: BagFamily,
         disenchant_id: i32,
         food_type: i32,
-        min_money_loot: i32,
-        max_money_loot: i32,
         duration: i32,
-        extra_flags: i32,
         dmg_min1: f32,
         dmg_max1: f32,
         dmg_type1: SpellSchool,
@@ -244,22 +232,16 @@ impl Item {
             language,
             page_text_material,
             start_quest,
-            lock_id,
             material,
             sheathe_type,
             random_property,
             block,
             item_set,
             max_durability,
-            area,
-            map,
             bag_family,
             disenchant_id,
             food_type,
-            min_money_loot,
-            max_money_loot,
             duration,
-            extra_flags,
             damages: [
             ItemDamageType {
                 damage_minimum: dmg_min1,
@@ -525,7 +507,18 @@ impl Item {
     }
 
     pub const fn lock_id(&self) -> i32 {
-        self.lock_id
+        match self.entry {
+            4632 | 6354 | 6712 | 16882 => 5,
+            4633 => 23,
+            4634 | 6355 | 16883 => 24,
+            4636 => 60,
+            4637 | 13875 | 16884 => 61,
+            4638 | 5758 | 5759 | 5760 => 62,
+            7209 => 319,
+            13918 | 16885 => 599,
+            12033 => 600,
+            _ => 0,
+        }
     }
 
     pub const fn material(&self) -> i32 {
@@ -553,11 +546,18 @@ impl Item {
     }
 
     pub const fn area(&self) -> Area {
-        self.area
+        match self.entry {
+            18266 | 18268 => Area::DireMaul0,
+            17306 | 17323 | 17324 | 17325 | 17326 | 17327 | 17328 | 17353 | 17422 | 17423 | 17442 | 17502 | 17503 | 17504 | 17505 | 17506 | 17507 | 17522 | 17542 | 17626 | 17642 | 17643 | 17689 | 21038 => Area::AlteracValley0,
+            _ => Area::None,
+        }
     }
 
     pub const fn map(&self) -> Map {
-        self.map
+        match self.entry {
+            18266 | 18268 => Map::DireMaul,
+            _ => Map::EasternKingdoms,
+        }
     }
 
     pub const fn bag_family(&self) -> BagFamily {
@@ -573,11 +573,38 @@ impl Item {
     }
 
     pub const fn min_money_loot(&self) -> i32 {
-        self.min_money_loot
+        match self.entry {
+            20708 => 50,
+            20766 | 21113 | 21150 | 21228 => 100,
+            6827 => 200,
+            11966 => 425,
+            20767 => 500,
+            5335 => 750,
+            20768 => 1000,
+            10456 => 2037,
+            11937 => 6235,
+            23022 => 50000,
+            20602 => 600000,
+            _ => 0,
+        }
     }
 
     pub const fn max_money_loot(&self) -> i32 {
-        self.max_money_loot
+        match self.entry {
+            20708 => 100,
+            21113 | 21150 | 21228 => 200,
+            6827 => 300,
+            20766 => 1000,
+            11966 => 1275,
+            20767 => 1500,
+            5335 => 2250,
+            20768 => 2500,
+            10456 => 6110,
+            11937 => 18704,
+            23022 => 50000,
+            20602 => 1000000,
+            _ => 0,
+        }
     }
 
     pub const fn duration(&self) -> i32 {
@@ -585,7 +612,11 @@ impl Item {
     }
 
     pub const fn extra_flags(&self) -> i32 {
-        self.extra_flags
+        match self.entry {
+            5810 | 9365 | 9437 | 9438 | 9439 | 9440 | 9441 | 9442 | 10338 | 10684 | 10790 | 10791 | 11885 | 12586 | 19807 | 20391 | 20392 | 20557 | 20561 | 20562 | 20563 | 20564 | 20565 | 20566 | 20567 | 20568 | 20569 | 20570 | 20571 | 20572 | 20573 | 20574 | 21038 | 21171 | 21174 | 21212 | 21328 | 22736 | 23247 | 23379 => 1,
+            18706 => 2,
+            _ => 0,
+        }
     }
 
     pub const fn damages(&self) -> &[ItemDamageType; 5] {

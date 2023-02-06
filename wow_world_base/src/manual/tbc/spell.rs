@@ -23,10 +23,7 @@ pub struct Spell {
     target_creature_type: i32,
     requires_spell_focus: i32,
     facing_caster_flags: i32,
-    caster_aura_state: i32,
-    target_aura_state: i32,
     caster_aura_state_not: i32,
-    target_aura_state_not: i32,
     casting_time_index: i32,
     recovery_time: i32,
     category_recovery_time: i32,
@@ -43,7 +40,6 @@ pub struct Spell {
     power_type: u32,
     mana_cost: i32,
     mana_cost_per_level: i32,
-    mana_per_second: i32,
     range_index: i32,
     speed: f32,
     modal_next_spell: i32,
@@ -60,14 +56,12 @@ pub struct Spell {
     mana_cost_percentage: i32,
     start_recovery_category: i32,
     start_recovery_time: i32,
-    max_target_level: i32,
     spell_family_name: i32,
     spell_family_flags: i64,
     max_affected_targets: i32,
     dmg_class: i32,
     prevention_type: i32,
     stance_bar_order: i32,
-    required_aura_vision: i32,
     area_id: i32,
     school_mask: i32,
     is_server_side: i32,
@@ -98,10 +92,7 @@ impl Spell {
         target_creature_type: i32,
         requires_spell_focus: i32,
         facing_caster_flags: i32,
-        caster_aura_state: i32,
-        target_aura_state: i32,
         caster_aura_state_not: i32,
-        target_aura_state_not: i32,
         casting_time_index: i32,
         recovery_time: i32,
         category_recovery_time: i32,
@@ -118,7 +109,6 @@ impl Spell {
         power_type: u32,
         mana_cost: i32,
         mana_cost_per_level: i32,
-        mana_per_second: i32,
         range_index: i32,
         speed: f32,
         modal_next_spell: i32,
@@ -135,14 +125,12 @@ impl Spell {
         mana_cost_percentage: i32,
         start_recovery_category: i32,
         start_recovery_time: i32,
-        max_target_level: i32,
         spell_family_name: i32,
         spell_family_flags: i64,
         max_affected_targets: i32,
         dmg_class: i32,
         prevention_type: i32,
         stance_bar_order: i32,
-        required_aura_vision: i32,
         area_id: i32,
         school_mask: i32,
         is_server_side: i32,
@@ -247,10 +235,7 @@ impl Spell {
             target_creature_type,
             requires_spell_focus,
             facing_caster_flags,
-            caster_aura_state,
-            target_aura_state,
             caster_aura_state_not,
-            target_aura_state_not,
             casting_time_index,
             recovery_time,
             category_recovery_time,
@@ -267,7 +252,6 @@ impl Spell {
             power_type,
             mana_cost,
             mana_cost_per_level,
-            mana_per_second,
             range_index,
             speed,
             modal_next_spell,
@@ -284,14 +268,12 @@ impl Spell {
             mana_cost_percentage,
             start_recovery_category,
             start_recovery_time,
-            max_target_level,
             spell_family_name,
             spell_family_flags,
             max_affected_targets,
             dmg_class,
             prevention_type,
             stance_bar_order,
-            required_aura_vision,
             area_id,
             school_mask,
             is_server_side,
@@ -489,11 +471,29 @@ impl Spell {
     }
 
     pub const fn caster_aura_state(&self) -> i32 {
-        self.caster_aura_state
+        match self.entry {
+            1495 | 6572 | 6574 | 7379 | 11600 | 11601 | 12170 | 14251 | 14269 | 14270 | 14271 | 19130 | 25269 | 25288 | 30357 | 34097 | 36916 | 40019 | 40392 | 46873 => 1,
+            17170 => 2,
+            26635 => 3,
+            20271 | 41467 => 5,
+            19306 | 20909 | 20910 | 27067 | 31819 | 34243 => 7,
+            34026 | 34428 => 10,
+            29801 | 30030 | 30033 => 11,
+            31850 | 31851 | 31852 | 31853 | 31854 => 13,
+            _ => 0,
+        }
     }
 
     pub const fn target_aura_state(&self) -> i32 {
-        self.target_aura_state
+        match self.entry {
+            5308 | 7160 | 7938 | 16495 | 20539 | 20647 | 20658 | 20660 | 20661 | 20662 | 24239 | 24274 | 24275 | 25234 | 25236 | 27180 | 29364 | 29909 | 31255 | 32772 | 34104 | 35771 | 36734 | 36779 | 37251 | 37255 | 37259 | 38895 | 38959 | 42325 => 2,
+            40019 | 46873 => 3,
+            14083 => 13,
+            17962 | 18930 | 18931 | 18932 | 27266 | 30912 => 14,
+            18562 => 15,
+            32645 | 32684 => 16,
+            _ => 0,
+        }
     }
 
     pub const fn caster_aura_state_not(&self) -> i32 {
@@ -501,7 +501,13 @@ impl Spell {
     }
 
     pub const fn target_aura_state_not(&self) -> i32 {
-        self.target_aura_state_not
+        match self.entry {
+            40019 | 46873 => 4,
+            23452 => 12,
+            1022 | 5599 | 10278 => 17,
+            17 | 592 | 600 | 3747 | 6065 | 6066 | 10898 | 10899 | 10900 | 10901 | 25217 | 25218 => 18,
+            _ => 0,
+        }
     }
 
     pub const fn casting_time_index(&self) -> i32 {
@@ -569,7 +575,21 @@ impl Spell {
     }
 
     pub const fn mana_per_second(&self) -> i32 {
-        self.mana_per_second
+        match self.entry {
+            755 => 5,
+            461 | 3698 => 10,
+            3699 => 17,
+            3700 => 24,
+            10260 => 25,
+            11693 => 33,
+            11694 => 42,
+            11695 => 52,
+            27259 => 65,
+            16569 | 40884 => 75,
+            40671 => 1000,
+            46467 => 4500,
+            _ => 0,
+        }
     }
 
     pub const fn mana_per_second_per_level(&self) -> i32 {
@@ -641,7 +661,23 @@ impl Spell {
     }
 
     pub const fn max_target_level(&self) -> i32 {
-        self.max_target_level
+        match self.entry {
+            26259 => 20,
+            26258 => 30,
+            453 | 2908 | 26195 => 40,
+            10267 | 26197 => 50,
+            8192 | 8955 => 55,
+            9439 | 9976 | 9991 | 9999 | 10723 | 12332 | 21544 | 21565 | 34943 | 35037 => 60,
+            15366 | 22888 => 63,
+            9901 | 10953 | 26198 => 70,
+            42630 | 43594 => 73,
+            10268 => 80,
+            25596 | 26995 => 85,
+            9736 | 32926 | 33639 | 41233 => 100,
+            39560 | 39758 => 200,
+            9773 | 9779 => 255,
+            _ => 0,
+        }
     }
 
     pub const fn spell_family_name(&self) -> i32 {
@@ -677,7 +713,11 @@ impl Spell {
     }
 
     pub const fn required_aura_vision(&self) -> i32 {
-        self.required_aura_vision
+        match self.entry {
+            26869 | 44068 | 45723 | 46901 => 1,
+            44067 => 2,
+            _ => 0,
+        }
     }
 
     pub const fn area_id(&self) -> i32 {

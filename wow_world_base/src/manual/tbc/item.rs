@@ -65,7 +65,6 @@ pub struct Item {
     language: Language,
     page_text_material: PageTextMaterial,
     start_quest: i32,
-    lock_id: i32,
     material: i32,
     sheathe_type: SheatheType,
     random_property: i32,
@@ -73,18 +72,13 @@ pub struct Item {
     block: i32,
     item_set: ItemSet,
     max_durability: i32,
-    area: Area,
-    map: Map,
     bag_family: BagFamily,
-    totem_category: i32,
     socket_bonus: i32,
     gem_properties: i32,
     required_disenchant_skill: i32,
     armor_damage_modifier: f32,
     disenchant_id: i32,
     food_type: i32,
-    min_money_loot: i32,
-    max_money_loot: i32,
     duration: i32,
     extra_flags: i32,
     sockets: [ItemSocket; 3],
@@ -133,7 +127,6 @@ impl Item {
         language: Language,
         page_text_material: PageTextMaterial,
         start_quest: i32,
-        lock_id: i32,
         material: i32,
         sheathe_type: SheatheType,
         random_property: i32,
@@ -141,18 +134,13 @@ impl Item {
         block: i32,
         item_set: ItemSet,
         max_durability: i32,
-        area: Area,
-        map: Map,
         bag_family: BagFamily,
-        totem_category: i32,
         socket_bonus: i32,
         gem_properties: i32,
         required_disenchant_skill: i32,
         armor_damage_modifier: f32,
         disenchant_id: i32,
         food_type: i32,
-        min_money_loot: i32,
-        max_money_loot: i32,
         duration: i32,
         extra_flags: i32,
         socket_color_1: u32,
@@ -271,7 +259,6 @@ impl Item {
             language,
             page_text_material,
             start_quest,
-            lock_id,
             material,
             sheathe_type,
             random_property,
@@ -279,18 +266,13 @@ impl Item {
             block,
             item_set,
             max_durability,
-            area,
-            map,
             bag_family,
-            totem_category,
             socket_bonus,
             gem_properties,
             required_disenchant_skill,
             armor_damage_modifier,
             disenchant_id,
             food_type,
-            min_money_loot,
-            max_money_loot,
             duration,
             extra_flags,
             sockets: [
@@ -590,7 +572,21 @@ impl Item {
     }
 
     pub const fn lock_id(&self) -> i32 {
-        self.lock_id
+        match self.entry {
+            2503 => 2,
+            4632 | 6354 | 6712 | 16882 => 5,
+            4633 => 23,
+            4634 | 6355 | 16883 => 24,
+            4636 => 60,
+            4637 | 13875 | 16884 => 61,
+            4638 | 5758 | 5759 | 5760 => 62,
+            7209 => 319,
+            13918 | 16885 => 599,
+            12033 => 600,
+            29569 => 1665,
+            31952 => 1666,
+            _ => 0,
+        }
     }
 
     pub const fn material(&self) -> i32 {
@@ -622,11 +618,30 @@ impl Item {
     }
 
     pub const fn area(&self) -> Area {
-        self.area
+        match self.entry {
+            36748 => Area::BlackrockDepths,
+            22736 => Area::Stratholme,
+            24289 => Area::TheBlackMorass,
+            18266 | 18268 => Area::DireMaul,
+            17306 | 17323 | 17324 | 17325 | 17326 | 17327 | 17328 | 17353 | 17422 | 17423 | 17442 | 17502 | 17503 | 17504 | 17505 | 17506 | 17507 | 17522 | 17542 | 17626 | 17642 | 17643 | 17689 | 21038 => Area::AlteracValley,
+            31279 => Area::ShadowmoonValley,
+            31366 => Area::BladesEdgeMountains,
+            _ => Area::None,
+        }
     }
 
     pub const fn map(&self) -> Map {
-        self.map
+        match self.entry {
+            18266 | 18268 => Map::DireMaul,
+            23857 | 23862 | 23864 | 23865 => Map::Karazhan,
+            24494 => Map::TheBattleForMountHyjal,
+            31088 => Map::CoilfangSerpentshrineCavern,
+            30311 | 30312 | 30313 | 30314 | 30316 | 30317 | 30318 | 30319 | 30320 => Map::TempestKeep,
+            25853 => Map::TheEscapeFromDurnholde,
+            32408 => Map::BlackTemple,
+            33865 | 33930 | 33931 | 33932 | 33933 => Map::ZulAman,
+            _ => Map::EasternKingdoms,
+        }
     }
 
     pub const fn bag_family(&self) -> BagFamily {
@@ -634,7 +649,27 @@ impl Item {
     }
 
     pub const fn totem_category(&self) -> i32 {
-        self.totem_category
+        match self.entry {
+            7005 | 12709 | 19901 => 1,
+            5175 => 2,
+            5178 => 3,
+            5176 | 30845 => 4,
+            5177 => 5,
+            6218 => 6,
+            6339 => 7,
+            11130 => 8,
+            11145 => 9,
+            16207 => 10,
+            756 | 778 | 1819 | 1893 | 1959 | 2901 | 9465 | 20723 | 30855 => 11,
+            9149 | 13503 | 31080 | 35748 | 35749 | 35750 | 35751 => 12,
+            5956 => 13,
+            6219 => 14,
+            10498 => 15,
+            22461 => 41,
+            22462 => 62,
+            22463 => 63,
+            _ => 0,
+        }
     }
 
     pub const fn socket_bonus(&self) -> i32 {
@@ -662,11 +697,51 @@ impl Item {
     }
 
     pub const fn min_money_loot(&self) -> i32 {
-        self.min_money_loot
+        match self.entry {
+            20708 => 50,
+            20766 | 21113 | 21150 | 21228 => 100,
+            29569 => 150,
+            6827 => 200,
+            11966 => 425,
+            20767 => 500,
+            5335 => 750,
+            20768 => 1000,
+            23921 => 1930,
+            10456 => 2037,
+            11937 => 6235,
+            34583 | 34584 => 20000,
+            34585 | 34587 => 30000,
+            23022 | 34592 | 34593 => 50000,
+            34863 | 35348 => 60000,
+            34594 | 34595 => 90000,
+            20602 => 600000,
+            _ => 0,
+        }
     }
 
     pub const fn max_money_loot(&self) -> i32 {
-        self.max_money_loot
+        match self.entry {
+            20708 => 100,
+            21113 | 21150 | 21228 => 200,
+            6827 => 300,
+            29569 => 600,
+            20766 => 1000,
+            11966 => 1275,
+            20767 => 1500,
+            5335 => 2250,
+            20768 => 2500,
+            23921 => 5790,
+            10456 => 6110,
+            11937 => 18704,
+            34583 | 34584 => 30000,
+            34585 | 34587 => 40000,
+            23022 => 50000,
+            34592 | 34593 => 70000,
+            34863 | 35348 => 80000,
+            34594 | 34595 => 110000,
+            20602 => 1000000,
+            _ => 0,
+        }
     }
 
     pub const fn duration(&self) -> i32 {

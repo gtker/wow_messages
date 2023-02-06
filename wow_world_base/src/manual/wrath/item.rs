@@ -53,8 +53,6 @@ pub struct Item {
     stackable: i32,
     container_slots: i32,
     stats_count: i32,
-    scaling_stat_distribution: i32,
-    scaling_stat_value: i32,
     armor: i32,
     fire_res: i32,
     nature_res: i32,
@@ -70,7 +68,6 @@ pub struct Item {
     language: Language,
     page_text_material: PageTextMaterial,
     start_quest: i32,
-    lock_id: i32,
     material: i32,
     sheathe_type: SheatheType,
     random_property: i32,
@@ -79,7 +76,6 @@ pub struct Item {
     item_set: ItemSet,
     max_durability: i32,
     area: Area,
-    map: Map,
     bag_family: BagFamily,
     totem_category: i32,
     socket_bonus: i32,
@@ -91,9 +87,6 @@ pub struct Item {
     holiday_id: i32,
     disenchant_id: i32,
     food_type: i32,
-    min_money_loot: i32,
-    max_money_loot: i32,
-    extra_flags: i32,
     sockets: [ItemSocket; 3],
     damages: [ItemDamageType; 2],
     stats: [ItemStat; 10],
@@ -127,8 +120,6 @@ impl Item {
         stackable: i32,
         container_slots: i32,
         stats_count: i32,
-        scaling_stat_distribution: i32,
-        scaling_stat_value: i32,
         armor: i32,
         fire_res: i32,
         nature_res: i32,
@@ -144,7 +135,6 @@ impl Item {
         language: Language,
         page_text_material: PageTextMaterial,
         start_quest: i32,
-        lock_id: i32,
         material: i32,
         sheathe_type: SheatheType,
         random_property: i32,
@@ -153,7 +143,6 @@ impl Item {
         item_set: ItemSet,
         max_durability: i32,
         area: Area,
-        map: Map,
         bag_family: BagFamily,
         totem_category: i32,
         socket_bonus: i32,
@@ -165,9 +154,6 @@ impl Item {
         holiday_id: i32,
         disenchant_id: i32,
         food_type: i32,
-        min_money_loot: i32,
-        max_money_loot: i32,
-        extra_flags: i32,
         socket_color_1: u32,
         socket_content_1: u32,
         socket_color_2: u32,
@@ -262,8 +248,6 @@ impl Item {
             stackable,
             container_slots,
             stats_count,
-            scaling_stat_distribution,
-            scaling_stat_value,
             armor,
             fire_res,
             nature_res,
@@ -279,7 +263,6 @@ impl Item {
             language,
             page_text_material,
             start_quest,
-            lock_id,
             material,
             sheathe_type,
             random_property,
@@ -288,7 +271,6 @@ impl Item {
             item_set,
             max_durability,
             area,
-            map,
             bag_family,
             totem_category,
             socket_bonus,
@@ -300,9 +282,6 @@ impl Item {
             holiday_id,
             disenchant_id,
             food_type,
-            min_money_loot,
-            max_money_loot,
-            extra_flags,
             sockets: [
             ItemSocket {
                 color: socket_color_1,
@@ -529,11 +508,68 @@ impl Item {
     }
 
     pub const fn scaling_stat_distribution(&self) -> i32 {
-        self.scaling_stat_distribution
+        match self.entry {
+            42943 => 1,
+            42944 => 2,
+            42945 => 3,
+            42946 => 4,
+            42947 => 5,
+            42948 => 6,
+            42949 => 7,
+            42950 => 8,
+            42951 => 9,
+            42952 => 10,
+            42984 => 11,
+            42985 => 16,
+            42991 => 251,
+            42992 => 271,
+            44091 => 292,
+            44092 => 293,
+            44093 => 294,
+            44094 => 295,
+            44095 => 296,
+            44096 => 297,
+            44097 => 298,
+            44098 => 299,
+            44099 => 300,
+            44100 => 301,
+            44101 => 302,
+            44102 => 303,
+            44103 => 304,
+            44105 => 305,
+            44107 => 306,
+            48677 => 331,
+            48683 => 332,
+            48685 => 333,
+            48687 => 334,
+            48689 => 335,
+            48691 => 336,
+            48716 => 351,
+            48718 => 352,
+            50255 => 371,
+            _ => 0,
+        }
     }
 
     pub const fn scaling_stat_value(&self) -> i32 {
-        self.scaling_stat_value
+        match self.entry {
+            42991 | 42992 | 44097 | 44098 => 2,
+            42985 | 44107 => 33,
+            42952 | 42984 | 44103 | 44105 => 65,
+            42950 | 42951 | 44101 | 44102 => 129,
+            42949 | 44099 | 44100 => 257,
+            42944 | 42945 | 44091 | 44096 | 48716 => 516,
+            42943 | 44092 | 48718 => 1032,
+            42946 | 44093 => 8208,
+            42948 | 44094 => 34820,
+            42947 | 44095 => 36872,
+            50255 => 262144,
+            48691 => 1048584,
+            48687 | 48689 => 2097160,
+            48677 | 48683 => 4194312,
+            48685 => 8388616,
+            _ => 0,
+        }
     }
 
     pub const fn armor(&self) -> i32 {
@@ -601,7 +637,24 @@ impl Item {
     }
 
     pub const fn lock_id(&self) -> i32 {
-        self.lock_id
+        match self.entry {
+            2503 => 2,
+            4632 | 6354 | 6712 | 16882 => 5,
+            4633 => 23,
+            4634 | 6355 | 16883 => 24,
+            4636 => 60,
+            4637 | 13875 | 16884 => 61,
+            4638 | 5758 | 5759 | 5760 => 62,
+            7209 => 319,
+            13918 | 16885 => 599,
+            12033 => 600,
+            29569 => 1665,
+            31952 => 1666,
+            43575 => 1667,
+            43622 => 1812,
+            43624 | 45986 => 1813,
+            _ => 0,
+        }
     }
 
     pub const fn material(&self) -> i32 {
@@ -637,7 +690,24 @@ impl Item {
     }
 
     pub const fn map(&self) -> Map {
-        self.map
+        match self.entry {
+            18266 | 18268 => Map::DireMaul,
+            23857 | 23862 | 23864 | 23865 => Map::Karazhan,
+            24494 => Map::TheBattleForMountHyjal,
+            31088 => Map::CoilfangSerpentshrineCavern,
+            30311 | 30312 | 30313 | 30314 | 30316 | 30317 | 30318 | 30319 | 30320 => Map::TempestKeep,
+            25853 => Map::TheEscapeFromDurnholde,
+            32408 => Map::BlackTemple,
+            33865 | 33930 | 33931 | 33932 | 33933 => Map::ZulAman,
+            37372 => Map::UtgardePinnacle,
+            37815 | 37859 | 37860 => Map::TheOculus,
+            37888 => Map::TheCullingOfStratholme,
+            38555 => Map::DrakTharonKeep,
+            43494 => Map::AhnKahetTheOldKingdom,
+            46847 | 47030 => Map::IsleOfConquest,
+            50307 => Map::IcecrownCitadel,
+            _ => Map::EasternKingdoms,
+        }
     }
 
     pub const fn bag_family(&self) -> BagFamily {
@@ -685,15 +755,67 @@ impl Item {
     }
 
     pub const fn min_money_loot(&self) -> i32 {
-        self.min_money_loot
+        match self.entry {
+            20708 => 50,
+            20766 | 21113 | 21150 | 21228 => 100,
+            29569 => 150,
+            6827 => 200,
+            11966 => 425,
+            20767 => 500,
+            5335 => 750,
+            20768 => 1000,
+            23921 => 1930,
+            10456 => 2037,
+            11937 => 6235,
+            34583 | 34584 => 20000,
+            34585 | 34587 => 30000,
+            23022 | 34592 | 34593 => 50000,
+            34863 | 35348 => 60000,
+            34594 | 34595 => 90000,
+            45724 => 100000,
+            44663 => 150000,
+            43347 => 300000,
+            43346 => 500000,
+            20602 => 600000,
+            _ => 0,
+        }
     }
 
     pub const fn max_money_loot(&self) -> i32 {
-        self.max_money_loot
+        match self.entry {
+            20708 => 100,
+            21113 | 21150 | 21228 => 200,
+            6827 => 300,
+            29569 => 600,
+            20766 => 1000,
+            11966 => 1275,
+            20767 => 1500,
+            5335 => 2250,
+            20768 => 2500,
+            23921 => 5790,
+            10456 => 6110,
+            11937 => 18704,
+            34583 | 34584 => 30000,
+            34585 | 34587 => 40000,
+            23022 => 50000,
+            34592 | 34593 => 70000,
+            34863 | 35348 => 80000,
+            45724 => 100000,
+            34594 | 34595 => 110000,
+            44663 => 250000,
+            43347 => 500000,
+            43346 => 750000,
+            20602 => 1000000,
+            _ => 0,
+        }
     }
 
     pub const fn extra_flags(&self) -> i32 {
-        self.extra_flags
+        match self.entry {
+            5810 | 9437 | 9438 | 9439 | 9440 | 9441 | 9442 | 10338 | 10684 | 10790 | 10791 | 11885 | 12586 | 19807 | 21171 | 21174 | 22736 | 23247 | 23379 | 30320 | 30850 | 33096 | 33176 | 33182 | 33183 | 33184 | 35313 | 39878 | 44717 => 1,
+            7666 => 2,
+            _ => 0,
+        }
     }
 
     pub const fn sockets(&self) -> &[ItemSocket; 3] {
