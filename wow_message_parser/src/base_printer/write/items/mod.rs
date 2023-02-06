@@ -3,7 +3,7 @@ pub(crate) mod conversions;
 pub(crate) mod definition;
 
 use crate::base_printer::data::items::{Array, Field, IntegerSize, Optimizations, Value};
-use std::collections::{BTreeMap, BTreeSet, HashMap};
+use std::collections::{BTreeMap, BTreeSet};
 
 pub(crate) struct Stats {
     pub strength: i32,
@@ -163,12 +163,51 @@ pub(crate) fn write_things(
     overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
 
+struct ConstNamer {
+    current: String,
+    alphabet_index: usize,
+}
+
+impl ConstNamer {
+    const ALPHABET: [char; 36] = [
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_',
+    ];
+    const MAX_LETTER_INDEX: usize = 25; // Only letters can start identifier
+
+    pub fn new() -> Self {
+        Self {
+            current: "".to_string(),
+            alphabet_index: 0,
+        }
+    }
+
+    fn increment_index(&mut self) {
+        self.alphabet_index += 1;
+
+        if (self.current.is_empty() && self.alphabet_index >= Self::MAX_LETTER_INDEX)
+            || self.alphabet_index >= Self::ALPHABET.len()
+        {
+            self.alphabet_index = 0;
+            self.current.push(Self::ALPHABET[self.alphabet_index]);
+        }
+    }
+
+    pub fn next(&mut self) -> String {
+        let mut string = self.current.clone();
+        string.push(Self::ALPHABET[self.alphabet_index]);
+
+        self.increment_index();
+
+        string
+    }
+}
+
 fn get_default_values(
     things: &[GenericThing],
     optimizations: &Optimizations,
 ) -> BTreeMap<(Value, Option<IntegerSize>), String> {
-    let mut map: HashMap<&'static str, BTreeMap<(Value, Option<IntegerSize>), usize>> =
-        HashMap::new();
+    let mut map: BTreeMap<(Value, Option<IntegerSize>), usize> = BTreeMap::new();
 
     for thing in things {
         for field in &thing.fields {
@@ -188,39 +227,26 @@ fn get_default_values(
         }
     }
 
+    let mut namer = ConstNamer::new();
     let mut set = BTreeMap::new();
-
-    for (_, values) in map {
-        let mut v = values.iter().next().unwrap();
-        for value in &values {
-            if value.1 > v.1 {
-                v = value;
-            }
+    for (value, amount) in map {
+        if amount > 500 {
+            set.insert(value, namer.next());
         }
-
-        set.insert(v.0.clone(), v.0 .0.const_name().to_string());
     }
 
     set
 }
 
 fn insert_value(
-    map: &mut HashMap<&str, BTreeMap<(Value, Option<IntegerSize>), usize>>,
+    map: &mut BTreeMap<(Value, Option<IntegerSize>), usize>,
     value: &Value,
     integer_size: Option<IntegerSize>,
 ) {
-    if let Some(set) = map.get_mut(value.const_name()) {
-        if let Some(v) = set.get_mut(&(value.clone(), integer_size)) {
-            *v += 1;
-        } else {
-            set.insert((value.clone(), integer_size), 1);
-        }
+    if let Some(g) = map.get_mut(&(value.clone(), integer_size)) {
+        *g += 1;
     } else {
-        let mut set = BTreeMap::new();
-
-        set.insert((value.clone(), integer_size), 1);
-
-        map.insert(value.const_name(), set);
+        map.insert((value.clone(), integer_size), 1);
     }
 }
 
