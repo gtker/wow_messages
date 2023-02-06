@@ -120,7 +120,7 @@ fn struct_definition(
     s.open_curly(format!("pub struct {ty_name}"));
 
     for e in fields {
-        if optimizations.optimization(&e.name).skip_field() {
+        if optimizations.optimization(e.name).skip_field() {
             continue;
         }
 
@@ -255,7 +255,7 @@ fn getters_and_setters(
 ) {
     for field in fields {
         s.pub_const_fn(field.name, field.value.type_name(), |s| match optimizations
-            .optimization(&field.name)
+            .optimization(field.name)
         {
             FieldOptimization::None => {
                 s.wln(format!("self.{}", field.name));

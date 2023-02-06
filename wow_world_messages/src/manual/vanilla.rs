@@ -92,7 +92,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                         value: 0,
                     },
                 ],
-                damages: v.damages().clone(),
+                damages: *v.damages(),
                 armor: v.armor(),
                 holy_resistance: v.holy_res(),
                 fire_resistance: v.fire_res(),

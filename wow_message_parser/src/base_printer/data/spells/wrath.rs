@@ -814,7 +814,7 @@ impl WrathSpell {
         GenericThing {
             entry: self.id,
             extra_flags: 0,
-            name: self.spell_name.to_string(),
+            name: self.spell_name,
             fields,
             arrays,
         }

@@ -191,7 +191,7 @@ fn write_items(data: &Data, expansion: Expansion) {
 
     write_things(
         &expansion.item_data_path(),
-        &items,
+        items,
         expansion,
         TY_NAME,
         |i| unobtainable_item(i.entry, i.extra_flags, &i.name),
@@ -207,14 +207,14 @@ fn write_items(data: &Data, expansion: Expansion) {
     );
     write_constructors(
         &expansion.item_constructor_path(),
-        &items,
+        items,
         expansion,
         TY_NAME,
         optimizations,
     );
     write_pub_use(
         &expansion.item_pub_use_path(),
-        &items,
+        items,
         expansion,
         TY_NAME,
         optimizations,
@@ -230,7 +230,7 @@ fn write_spells(data: &Data, expansion: Expansion) {
 
     write_things(
         &expansion.spell_data_path(),
-        &spells,
+        spells,
         expansion,
         TY_NAME,
         |_| false,
@@ -246,14 +246,14 @@ fn write_spells(data: &Data, expansion: Expansion) {
     );
     write_constructors(
         &expansion.spell_constructor_path(),
-        &spells,
+        spells,
         expansion,
         TY_NAME,
         optimizations,
     );
     write_pub_use(
         &expansion.spell_pub_use_path(),
-        &spells,
+        spells,
         expansion,
         TY_NAME,
         optimizations,
