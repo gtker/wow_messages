@@ -169,9 +169,11 @@ struct ConstNamer {
 }
 
 impl ConstNamer {
-    const ALPHABET: [char; 36] = [
+    const ALPHABET: [char; 62] = [
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
         'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+        's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
     ];
     const MAX_LETTER_INDEX: usize = 25; // Only letters can start identifier
 
@@ -194,12 +196,15 @@ impl ConstNamer {
     }
 
     pub fn next(&mut self) -> String {
-        let mut string = self.current.clone();
-        string.push(Self::ALPHABET[self.alphabet_index]);
-
+        let s = self.try_next();
         self.increment_index();
+        s
+    }
 
-        string
+    pub fn try_next(&self) -> String {
+        let mut s = self.current.clone();
+        s.push(Self::ALPHABET[self.alphabet_index]);
+        s
     }
 }
 
@@ -215,22 +220,45 @@ fn get_default_values(
                 continue;
             }
 
-            insert_value(&mut map, &field.value, optimizations.integer_size(field))
+            insert_value(
+                &mut map,
+                &field.value.const_value(),
+                optimizations.integer_size(field),
+            )
         }
 
         for array in &thing.arrays {
+            if array.is_default() {
+                continue;
+            }
+
             for instance in &array.instances {
                 for field in instance {
-                    insert_value(&mut map, &field.value, field.integer_size())
+                    insert_value(&mut map, &field.value.const_value(), field.integer_size())
                 }
             }
         }
     }
 
+    // Ensure that most used consts have the shortest name
+    let mut map = map.into_iter().collect::<Vec<_>>();
+    map.sort_by(|a, b| b.1.cmp(&a.1));
+
     let mut namer = ConstNamer::new();
     let mut set = BTreeMap::new();
     for (value, amount) in map {
-        if amount > 500 {
+        let ty_name = if let Some(t) = value.1 {
+            t.string_value()
+        } else {
+            value.0.constructor_type_name()
+        };
+        let try_name = namer.try_next();
+        let definition = get_const_definition(&try_name, ty_name, &value.0.to_string_value());
+
+        let definition_characters = definition.len() + amount * try_name.len();
+        let no_definition_characters = amount * value.0.to_string_value().len();
+
+        if definition_characters <= no_definition_characters {
             set.insert(value, namer.next());
         }
     }
@@ -261,11 +289,18 @@ fn const_default_values(
             value.constructor_type_name()
         };
 
-        s.wln(format!(
-            "const {const_name}: {ty_name} = {};",
-            value.to_string_value(),
+        s.wln(get_const_definition(
+            const_name,
+            ty_name,
+            &value.to_string_value(),
         ));
     }
+
+    s.newline();
+}
+
+fn get_const_definition(const_name: &str, ty_name: &str, value: &str) -> String {
+    format!("const {const_name}:{ty_name}={value};")
 }
 
 pub(crate) fn unobtainable_item(entry: u32, extra_flags: i32, name: &str) -> bool {
@@ -302,7 +337,7 @@ pub(crate) fn unobtainable_item(entry: u32, extra_flags: i32, name: &str) -> boo
 }
 
 fn print_unobtainable_cfg(s: &mut Writer) {
-    s.wln("#[cfg(feature = \"unobtainable-items\")]");
+    s.wln("#[cfg(feature = \"unobtainable\")]");
 }
 
 fn all_items(
@@ -338,7 +373,7 @@ fn all_items(
             }
 
             if let Some(const_name) =
-                default_values.get(&(value.value.clone(), optimizations.integer_size(value)))
+                default_values.get(&(value.value.const_value(), optimizations.integer_size(value)))
             {
                 s.w_no_indent(format!("{const_name},"));
             } else {

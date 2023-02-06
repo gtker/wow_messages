@@ -1,4 +1,5 @@
 pub(crate) mod constructors;
+#[allow(non_upper_case_globals)]
 mod data;
 
 use crate::find_and_data;

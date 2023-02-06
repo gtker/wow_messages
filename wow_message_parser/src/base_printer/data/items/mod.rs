@@ -415,25 +415,29 @@ impl Value {
         }
     }
 
-    pub const fn constructor_type_name(&self) -> &'static str {
+    pub fn const_value(&self) -> Self {
         match self {
-            Value::VanillaTbcAllowedClass(_)
-            | Value::WrathAllowedClass(_)
-            | Value::VanillaAllowedRace(_)
-            | Value::TbcAllowedRace(_)
-            | Value::WrathAllowedRace(_)
-            | Value::VanillaAttributes(_)
-            | Value::VanillaAttributesEx1(_)
-            | Value::VanillaAttributesEx2(_)
-            | Value::VanillaAttributesEx3(_)
-            | Value::VanillaAttributesEx4(_)
-            | Value::VanillaItemFlag(_)
-            | Value::TbcItemFlag(_)
-            | Value::WrathItemFlag(_)
-            | Value::WrathItemFlag2(_)
-            | Value::TbcWrathBagFamily(_) => "u32",
-            _ => self.type_name(),
+            Value::VanillaTbcAllowedClass(v) => Self::Uint(v.as_int()),
+            Value::WrathAllowedClass(v) => Self::Uint(v.as_int()),
+            Value::VanillaAllowedRace(v) => Self::Uint(v.as_int()),
+            Value::TbcAllowedRace(v) => Self::Uint(v.as_int()),
+            Value::WrathAllowedRace(v) => Self::Uint(v.as_int()),
+            Value::VanillaAttributes(v) => Self::Uint(v.as_int()),
+            Value::VanillaAttributesEx1(v) => Self::Uint(v.as_int()),
+            Value::VanillaAttributesEx2(v) => Self::Uint(v.as_int()),
+            Value::VanillaAttributesEx3(v) => Self::Uint(v.as_int()),
+            Value::VanillaAttributesEx4(v) => Self::Uint(v.as_int()),
+            Value::VanillaItemFlag(v) => Self::Uint(v.as_int()),
+            Value::TbcItemFlag(v) => Self::Uint(v.as_int()),
+            Value::WrathItemFlag(v) => Self::Uint(v.as_int()),
+            Value::WrathItemFlag2(v) => Self::Uint(v.as_int()),
+            Value::TbcWrathBagFamily(v) => Self::Uint(v.as_int()),
+            _ => self.clone(),
         }
+    }
+
+    pub fn constructor_type_name(&self) -> &'static str {
+        self.const_value().type_name()
     }
 
     pub const fn type_name(&self) -> &'static str {
