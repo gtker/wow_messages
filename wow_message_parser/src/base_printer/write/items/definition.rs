@@ -272,7 +272,7 @@ fn getters_and_setters(
                 s.wln(v.to_string_value());
             }
             FieldOptimization::Baseline(mainline, outliers) => {
-                s.open_curly(format!("match self.entry"));
+                s.open_curly("match self.entry");
 
                 for outlier in outliers {
                     if outlier.0.len() == 1 {

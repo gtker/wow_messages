@@ -378,15 +378,17 @@ pub enum Value {
     WrathFaction(wrath_base::Faction),
 }
 
+#[allow(clippy::derive_hash_xor_eq)] // We can't derive hash because Float has an f32
 impl std::hash::Hash for Value {
     fn hash<H: Hasher>(&self, state: &mut H) {
         match self {
+            Value::Float(v) => u32::from_le_bytes(v.to_le_bytes()).hash(state),
+
             Value::String(v) => v.hash(state),
             Value::Int(v) => v.hash(state),
             Value::Int64(v) => v.hash(state),
             Value::Uint(v) => v.hash(state),
             Value::Uint64(v) => v.hash(state),
-            Value::Float(v) => u32::from_le_bytes(v.to_le_bytes()).hash(state),
             Value::VanillaItemClassAndSubClass(v) => v.hash(state),
             Value::TbcItemClassAndSubClass(v) => v.hash(state),
             Value::WrathItemClassAndSubClass(v) => v.hash(state),
