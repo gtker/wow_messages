@@ -166,7 +166,7 @@ pub(crate) fn write_things(
 fn get_default_values(
     things: &[GenericThing],
     optimizations: &Optimizations,
-) -> BTreeSet<(Value, Option<IntegerSize>)> {
+) -> BTreeMap<(Value, Option<IntegerSize>), String> {
     let mut map: HashMap<&'static str, BTreeMap<(Value, Option<IntegerSize>), usize>> =
         HashMap::new();
 
@@ -188,7 +188,7 @@ fn get_default_values(
         }
     }
 
-    let mut set = BTreeSet::new();
+    let mut set = BTreeMap::new();
 
     for (_, values) in map {
         let mut v = values.iter().next().unwrap();
@@ -198,7 +198,7 @@ fn get_default_values(
             }
         }
 
-        set.insert(v.0.clone());
+        set.insert(v.0.clone(), v.0 .0.const_name().to_string());
     }
 
     set
@@ -224,8 +224,11 @@ fn insert_value(
     }
 }
 
-fn const_default_values(s: &mut Writer, default_values: &BTreeSet<(Value, Option<IntegerSize>)>) {
-    for (value, integer_size) in default_values {
+fn const_default_values(
+    s: &mut Writer,
+    default_values: &BTreeMap<(Value, Option<IntegerSize>), String>,
+) {
+    for ((value, integer_size), const_name) in default_values {
         let ty_name = if let Some(t) = integer_size {
             t.string_value()
         } else {
@@ -233,8 +236,7 @@ fn const_default_values(s: &mut Writer, default_values: &BTreeSet<(Value, Option
         };
 
         s.wln(format!(
-            "const {}: {ty_name} = {};",
-            value.const_name(),
+            "const {const_name}: {ty_name} = {};",
             value.to_string_value(),
         ));
     }
@@ -283,7 +285,7 @@ fn all_items(
     expansion: Expansion,
     unobtainable: impl Fn(&GenericThing) -> bool,
     ty_name: &str,
-    default_values: &BTreeSet<(Value, Option<IntegerSize>)>,
+    default_values: &BTreeMap<(Value, Option<IntegerSize>), String>,
     optimizations: &Optimizations,
 ) {
     includes(
@@ -309,8 +311,10 @@ fn all_items(
                 continue;
             }
 
-            if default_values.contains(&(value.value.clone(), optimizations.integer_size(value))) {
-                s.w_no_indent(format!("{},", value.value.const_name()));
+            if let Some(const_name) =
+                default_values.get(&(value.value.clone(), optimizations.integer_size(value)))
+            {
+                s.w_no_indent(format!("{const_name},"));
             } else {
                 s.w_no_indent(format!("{},", value.value.to_string_value()));
             }
@@ -323,8 +327,10 @@ fn all_items(
 
             for instance in &array.instances {
                 for field in instance {
-                    if default_values.contains(&(field.value.clone(), field.integer_size())) {
-                        s.w_no_indent(format!("{},", field.value.const_name()));
+                    if let Some(const_name) =
+                        default_values.get(&(field.value.clone(), field.integer_size()))
+                    {
+                        s.w_no_indent(format!("{const_name},"));
                     } else {
                         s.w_no_indent(format!("{},", field.value.to_string_value()));
                     }
