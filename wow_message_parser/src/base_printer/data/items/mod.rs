@@ -28,7 +28,8 @@ impl FieldOptimization {
     }
 }
 
-enum IntegerSize {
+#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
+pub enum IntegerSize {
     U64,
     U32,
     U16,
@@ -94,11 +95,15 @@ impl Optimizations {
     }
 
     pub fn is_non_native_type(&self, field: &Field) -> bool {
-        self.type_optimizations.get(field.name).is_some()
+        self.integer_size(field).is_some()
+    }
+
+    pub fn integer_size(&self, field: &Field) -> Option<IntegerSize> {
+        self.type_optimizations.get(field.name).cloned()
     }
 
     pub fn native_integer_type_cast(&self, field: &Field) -> Option<&'static str> {
-        if let Some(g) = self.type_optimizations.get(field.name) {
+        if let Some(g) = self.integer_size(field) {
             Some(match g {
                 IntegerSize::U16 | IntegerSize::U8 => "u32",
                 IntegerSize::I16 | IntegerSize::I8 => "i32",
@@ -110,7 +115,7 @@ impl Optimizations {
     }
 
     pub fn type_name(&self, field: &Field) -> &'static str {
-        if let Some(t) = self.type_optimizations.get(field.name) {
+        if let Some(t) = self.integer_size(field) {
             t.string_value()
         } else {
             field.value.type_name()
@@ -267,6 +272,16 @@ impl ArrayField {
             variable_name,
             value,
         }
+    }
+
+    pub fn integer_size(&self) -> Option<IntegerSize> {
+        Some(match self.value {
+            Value::Int(_) => IntegerSize::I32,
+            Value::Int64(_) => IntegerSize::I64,
+            Value::Uint(_) => IntegerSize::U32,
+            Value::Uint64(_) => IntegerSize::U64,
+            _ => return None,
+        })
     }
 
     pub fn is_default(&self) -> bool {

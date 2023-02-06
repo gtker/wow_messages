@@ -2,7 +2,7 @@ mod constructor;
 pub(crate) mod conversions;
 pub(crate) mod definition;
 
-use crate::base_printer::data::items::{Array, Field, Optimizations, Value};
+use crate::base_printer::data::items::{Array, Field, IntegerSize, Optimizations, Value};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 pub(crate) struct Stats {
@@ -163,8 +163,12 @@ pub(crate) fn write_things(
     overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
 
-fn get_default_values(things: &[GenericThing], optimizations: &Optimizations) -> BTreeSet<Value> {
-    let mut map: HashMap<&'static str, BTreeMap<Value, usize>> = HashMap::new();
+fn get_default_values(
+    things: &[GenericThing],
+    optimizations: &Optimizations,
+) -> BTreeSet<(Value, Option<IntegerSize>)> {
+    let mut map: HashMap<&'static str, BTreeMap<(Value, Option<IntegerSize>), usize>> =
+        HashMap::new();
 
     for thing in things {
         for field in &thing.fields {
@@ -172,13 +176,13 @@ fn get_default_values(things: &[GenericThing], optimizations: &Optimizations) ->
                 continue;
             }
 
-            insert_value(&mut map, &field.value)
+            insert_value(&mut map, &field.value, optimizations.integer_size(field))
         }
 
         for array in &thing.arrays {
             for instance in &array.instances {
                 for field in instance {
-                    insert_value(&mut map, &field.value)
+                    insert_value(&mut map, &field.value, field.integer_size())
                 }
             }
         }
@@ -200,28 +204,37 @@ fn get_default_values(things: &[GenericThing], optimizations: &Optimizations) ->
     set
 }
 
-fn insert_value(map: &mut HashMap<&str, BTreeMap<Value, usize>>, value: &Value) {
+fn insert_value(
+    map: &mut HashMap<&str, BTreeMap<(Value, Option<IntegerSize>), usize>>,
+    value: &Value,
+    integer_size: Option<IntegerSize>,
+) {
     if let Some(set) = map.get_mut(value.const_name()) {
-        if let Some(v) = set.get_mut(value) {
+        if let Some(v) = set.get_mut(&(value.clone(), integer_size)) {
             *v += 1;
         } else {
-            set.insert(value.clone(), 1);
+            set.insert((value.clone(), integer_size), 1);
         }
     } else {
         let mut set = BTreeMap::new();
 
-        set.insert(value.clone(), 1);
+        set.insert((value.clone(), integer_size), 1);
 
         map.insert(value.const_name(), set);
     }
 }
 
-fn const_default_values(s: &mut Writer, default_values: &BTreeSet<Value>) {
-    for value in default_values {
+fn const_default_values(s: &mut Writer, default_values: &BTreeSet<(Value, Option<IntegerSize>)>) {
+    for (value, integer_size) in default_values {
+        let ty_name = if let Some(t) = integer_size {
+            t.string_value()
+        } else {
+            value.constructor_type_name()
+        };
+
         s.wln(format!(
-            "const {}: {} = {};",
+            "const {}: {ty_name} = {};",
             value.const_name(),
-            value.constructor_type_name(),
             value.to_string_value(),
         ));
     }
@@ -270,7 +283,7 @@ fn all_items(
     expansion: Expansion,
     unobtainable: impl Fn(&GenericThing) -> bool,
     ty_name: &str,
-    default_values: &BTreeSet<Value>,
+    default_values: &BTreeSet<(Value, Option<IntegerSize>)>,
     optimizations: &Optimizations,
 ) {
     includes(
@@ -296,7 +309,7 @@ fn all_items(
                 continue;
             }
 
-            if default_values.contains(&value.value) && !optimizations.is_non_native_type(value) {
+            if default_values.contains(&(value.value.clone(), optimizations.integer_size(value))) {
                 s.w_no_indent(format!("{},", value.value.const_name()));
             } else {
                 s.w_no_indent(format!("{},", value.value.to_string_value()));
@@ -310,7 +323,7 @@ fn all_items(
 
             for instance in &array.instances {
                 for field in instance {
-                    if default_values.contains(&field.value) {
+                    if default_values.contains(&(field.value.clone(), field.integer_size())) {
                         s.w_no_indent(format!("{},", field.value.const_name()));
                     } else {
                         s.w_no_indent(format!("{},", field.value.to_string_value()));
