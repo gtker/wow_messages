@@ -296,7 +296,7 @@ fn all_items(
                 continue;
             }
 
-            if default_values.contains(&value.value) {
+            if default_values.contains(&value.value) && !optimizations.is_non_native_type(value) {
                 s.w_no_indent(format!("{},", value.value.const_name()));
             } else {
                 s.w_no_indent(format!("{},", value.value.to_string_value()));

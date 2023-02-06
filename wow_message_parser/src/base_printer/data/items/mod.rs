@@ -19,6 +19,7 @@ pub enum FieldOptimization {
     ConstantValue(Value),
     Baseline(Value, Vec<(Vec<u32>, Value)>),
 }
+
 const OPTIMIZATION_BASELINE_DEVIATIONS: usize = 50;
 
 impl FieldOptimization {
@@ -27,8 +28,59 @@ impl FieldOptimization {
     }
 }
 
+enum IntegerSize {
+    U64,
+    U32,
+    U16,
+    U8,
+    I64,
+    I32,
+    I16,
+    I8,
+}
+
+impl IntegerSize {
+    pub fn string_value(&self) -> &'static str {
+        match self {
+            IntegerSize::U64 => "u64",
+            IntegerSize::U32 => "u32",
+            IntegerSize::U16 => "u16",
+            IntegerSize::U8 => "u8",
+            IntegerSize::I64 => "i64",
+            IntegerSize::I32 => "i32",
+            IntegerSize::I16 => "i16",
+            IntegerSize::I8 => "i8",
+        }
+    }
+
+    pub fn from_unsigned(upper: u64) -> Self {
+        if upper <= u8::MAX.into() {
+            Self::U8
+        } else if upper <= u16::MAX.into() {
+            Self::U16
+        } else if upper <= u32::MAX.into() {
+            Self::U32
+        } else {
+            Self::U64
+        }
+    }
+
+    pub fn from_signed(lower: i64, upper: i64) -> Self {
+        if lower >= i8::MIN.into() && upper <= i8::MAX.into() {
+            Self::I8
+        } else if lower >= i16::MIN.into() && upper <= i16::MAX.into() {
+            Self::I16
+        } else if lower >= i32::MIN.into() && upper <= i32::MAX.into() {
+            Self::I32
+        } else {
+            Self::I64
+        }
+    }
+}
+
 pub struct Optimizations {
     field_optimizations: HashMap<String, FieldOptimization>,
+    type_optimizations: HashMap<String, IntegerSize>,
 }
 
 impl Optimizations {
@@ -40,11 +92,36 @@ impl Optimizations {
             .1
             .clone()
     }
+
+    pub fn is_non_native_type(&self, field: &Field) -> bool {
+        self.type_optimizations.get(field.name).is_some()
+    }
+
+    pub fn native_integer_type_cast(&self, field: &Field) -> Option<&'static str> {
+        if let Some(g) = self.type_optimizations.get(field.name) {
+            Some(match g {
+                IntegerSize::U16 | IntegerSize::U8 => "u32",
+                IntegerSize::I16 | IntegerSize::I8 => "i32",
+                _ => return None,
+            })
+        } else {
+            None
+        }
+    }
+
+    pub fn type_name(&self, field: &Field) -> &'static str {
+        if let Some(t) = self.type_optimizations.get(field.name) {
+            t.string_value()
+        } else {
+            field.value.type_name()
+        }
+    }
 }
 
 impl Optimizations {
     pub fn new(items: &[GenericThing]) -> Self {
         let mut field_optimizations = HashMap::new();
+        let mut type_optimizations = HashMap::new();
 
         let field_names = items[0].fields.iter().map(|field| field.name);
 
@@ -67,33 +144,64 @@ impl Optimizations {
                 )
             });
 
-            let mut set: BTreeMap<Value, Vec<u32>> = BTreeMap::new();
+            let mut unsigned_max = 0;
+            let mut signed_min = 0;
+            let mut signed_max = 0;
+
+            let mut different_values: BTreeMap<Value, Vec<u32>> = BTreeMap::new();
             for field in fields {
-                if let Some(v) = set.get_mut(field.1) {
+                if let Some(v) = field.1.i64_value() {
+                    if v > signed_max {
+                        signed_max = v;
+                    }
+                    if v < signed_min {
+                        signed_min = v;
+                    }
+                }
+
+                if let Some(v) = field.1.u64_value() {
+                    if v > unsigned_max {
+                        unsigned_max = v;
+                    }
+                }
+
+                if let Some(v) = different_values.get_mut(field.1) {
                     v.push(field.0);
                 } else {
                     let v = vec![field.0];
-                    set.insert(field.1.clone(), v);
+                    different_values.insert(field.1.clone(), v);
                 }
             }
 
-            let optimization = if set.len() == 1 {
+            if value.i64_value().is_some() {
+                type_optimizations.insert(
+                    field_name.to_string(),
+                    IntegerSize::from_signed(signed_min, signed_max),
+                );
+            } else if value.u64_value().is_some() {
+                type_optimizations.insert(
+                    field_name.to_string(),
+                    IntegerSize::from_unsigned(unsigned_max),
+                );
+            }
+
+            let optimization = if different_values.len() == 1 {
                 FieldOptimization::ConstantValue(value.clone())
             } else {
-                let mut baseline = set.iter().next().unwrap();
-                for s in &set {
+                let mut baseline = different_values.iter().next().unwrap();
+                for s in &different_values {
                     if s.1.len() > baseline.1.len() {
                         baseline = s;
                     }
                 }
 
-                let total = set.iter().fold(0_usize, |a, b| a + b.1.len());
+                let total = different_values.iter().fold(0_usize, |a, b| a + b.1.len());
                 let deviations = total - baseline.1.len();
 
                 if deviations <= OPTIMIZATION_BASELINE_DEVIATIONS {
                     let mut v = Vec::new();
 
-                    for s in &set {
+                    for s in &different_values {
                         if s == baseline {
                             continue;
                         }
@@ -112,6 +220,7 @@ impl Optimizations {
 
         Self {
             field_optimizations,
+            type_optimizations,
         }
     }
 }
@@ -273,6 +382,22 @@ impl Value {
                 | Value::Uint64(_)
                 | Value::Float(_)
         )
+    }
+
+    pub fn u64_value(&self) -> Option<u64> {
+        match self {
+            Value::Uint(v) => Some((*v).into()),
+            Value::Uint64(v) => Some(*v),
+            _ => None,
+        }
+    }
+
+    pub fn i64_value(&self) -> Option<i64> {
+        match self {
+            Value::Int(v) => Some((*v).into()),
+            Value::Int64(v) => Some(*v),
+            _ => None,
+        }
     }
 
     pub const fn constructor_type_name(&self) -> &'static str {

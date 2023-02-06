@@ -25,58 +25,58 @@ use crate::vanilla::{
 
 #[derive(Debug, Copy, Clone)]
 pub struct Item {
-    entry: u32,
+    entry: u16,
     class_and_sub_class: ItemClassAndSubClass,
     name: &'static str,
-    display_id: u32,
+    display_id: u16,
     quality: ItemQuality,
     flags: ItemFlag,
-    buy_count: i32,
+    buy_count: i16,
     buy_price: i32,
     sell_price: i32,
     inventory_type: InventoryType,
     allowed_class: AllowedClass,
     allowed_race: AllowedRace,
-    item_level: i32,
-    required_level: i32,
+    item_level: i8,
+    required_level: i8,
     required_skill: Skill,
-    required_skill_rank: i32,
-    required_spell: i32,
+    required_skill_rank: i16,
+    required_spell: i16,
     required_honor_rank: PvpRank,
     required_faction: Faction,
-    required_reputation_rank: i32,
-    max_count: i32,
-    stackable: i32,
-    container_slots: i32,
-    agility: i32,
-    strength: i32,
-    stamina: i32,
-    intellect: i32,
-    spirit: i32,
-    armor: i32,
-    fire_res: i32,
-    nature_res: i32,
-    frost_res: i32,
-    shadow_res: i32,
-    arcane_res: i32,
-    delay: i32,
-    ammo_type: i32,
+    required_reputation_rank: i8,
+    max_count: i8,
+    stackable: i16,
+    container_slots: i8,
+    agility: i8,
+    strength: i8,
+    stamina: i8,
+    intellect: i16,
+    spirit: i8,
+    armor: i16,
+    fire_res: i8,
+    nature_res: i8,
+    frost_res: i8,
+    shadow_res: i8,
+    arcane_res: i8,
+    delay: i16,
+    ammo_type: i8,
     ranged_mod_range: f32,
     bonding: Bonding,
     description: &'static str,
-    page_text: i32,
+    page_text: i16,
     language: Language,
     page_text_material: PageTextMaterial,
-    start_quest: i32,
-    material: i32,
+    start_quest: i16,
+    material: i8,
     sheathe_type: SheatheType,
-    random_property: i32,
-    block: i32,
+    random_property: i16,
+    block: i8,
     item_set: ItemSet,
-    max_durability: i32,
+    max_durability: i16,
     bag_family: BagFamily,
-    disenchant_id: i32,
-    food_type: i32,
+    disenchant_id: i8,
+    food_type: i8,
     duration: i32,
     damages: [ItemDamageType; 5],
     spells: [Spells; 5],
@@ -84,58 +84,58 @@ pub struct Item {
 
 impl Item {
     pub const fn new(
-        entry: u32,
+        entry: u16,
         class_and_sub_class: ItemClassAndSubClass,
         name: &'static str,
-        display_id: u32,
+        display_id: u16,
         quality: ItemQuality,
         flags: ItemFlag,
-        buy_count: i32,
+        buy_count: i16,
         buy_price: i32,
         sell_price: i32,
         inventory_type: InventoryType,
         allowed_class: AllowedClass,
         allowed_race: AllowedRace,
-        item_level: i32,
-        required_level: i32,
+        item_level: i8,
+        required_level: i8,
         required_skill: Skill,
-        required_skill_rank: i32,
-        required_spell: i32,
+        required_skill_rank: i16,
+        required_spell: i16,
         required_honor_rank: PvpRank,
         required_faction: Faction,
-        required_reputation_rank: i32,
-        max_count: i32,
-        stackable: i32,
-        container_slots: i32,
-        agility: i32,
-        strength: i32,
-        stamina: i32,
-        intellect: i32,
-        spirit: i32,
-        armor: i32,
-        fire_res: i32,
-        nature_res: i32,
-        frost_res: i32,
-        shadow_res: i32,
-        arcane_res: i32,
-        delay: i32,
-        ammo_type: i32,
+        required_reputation_rank: i8,
+        max_count: i8,
+        stackable: i16,
+        container_slots: i8,
+        agility: i8,
+        strength: i8,
+        stamina: i8,
+        intellect: i16,
+        spirit: i8,
+        armor: i16,
+        fire_res: i8,
+        nature_res: i8,
+        frost_res: i8,
+        shadow_res: i8,
+        arcane_res: i8,
+        delay: i16,
+        ammo_type: i8,
         ranged_mod_range: f32,
         bonding: Bonding,
         description: &'static str,
-        page_text: i32,
+        page_text: i16,
         language: Language,
         page_text_material: PageTextMaterial,
-        start_quest: i32,
-        material: i32,
+        start_quest: i16,
+        material: i8,
         sheathe_type: SheatheType,
-        random_property: i32,
-        block: i32,
+        random_property: i16,
+        block: i8,
         item_set: ItemSet,
-        max_durability: i32,
+        max_durability: i16,
         bag_family: BagFamily,
-        disenchant_id: i32,
-        food_type: i32,
+        disenchant_id: i8,
+        food_type: i8,
         duration: i32,
         dmg_min1: f32,
         dmg_max1: f32,
@@ -319,7 +319,7 @@ impl Item {
         }
     }
     pub const fn entry(&self) -> u32 {
-        self.entry
+        self.entry as u32
     }
 
     pub const fn class_and_sub_class(&self) -> ItemClassAndSubClass {
@@ -331,7 +331,7 @@ impl Item {
     }
 
     pub const fn display_id(&self) -> u32 {
-        self.display_id
+        self.display_id as u32
     }
 
     pub const fn quality(&self) -> ItemQuality {
@@ -343,7 +343,7 @@ impl Item {
     }
 
     pub const fn buy_count(&self) -> i32 {
-        self.buy_count
+        self.buy_count as i32
     }
 
     pub const fn buy_price(&self) -> i32 {
@@ -367,11 +367,11 @@ impl Item {
     }
 
     pub const fn item_level(&self) -> i32 {
-        self.item_level
+        self.item_level as i32
     }
 
     pub const fn required_level(&self) -> i32 {
-        self.required_level
+        self.required_level as i32
     }
 
     pub const fn required_skill(&self) -> Skill {
@@ -379,11 +379,11 @@ impl Item {
     }
 
     pub const fn required_skill_rank(&self) -> i32 {
-        self.required_skill_rank
+        self.required_skill_rank as i32
     }
 
     pub const fn required_spell(&self) -> i32 {
-        self.required_spell
+        self.required_spell as i32
     }
 
     pub const fn required_honor_rank(&self) -> PvpRank {
@@ -399,19 +399,19 @@ impl Item {
     }
 
     pub const fn required_reputation_rank(&self) -> i32 {
-        self.required_reputation_rank
+        self.required_reputation_rank as i32
     }
 
     pub const fn max_count(&self) -> i32 {
-        self.max_count
+        self.max_count as i32
     }
 
     pub const fn stackable(&self) -> i32 {
-        self.stackable
+        self.stackable as i32
     }
 
     pub const fn container_slots(&self) -> i32 {
-        self.container_slots
+        self.container_slots as i32
     }
 
     pub const fn mana(&self) -> i32 {
@@ -423,27 +423,27 @@ impl Item {
     }
 
     pub const fn agility(&self) -> i32 {
-        self.agility
+        self.agility as i32
     }
 
     pub const fn strength(&self) -> i32 {
-        self.strength
+        self.strength as i32
     }
 
     pub const fn stamina(&self) -> i32 {
-        self.stamina
+        self.stamina as i32
     }
 
     pub const fn intellect(&self) -> i32 {
-        self.intellect
+        self.intellect as i32
     }
 
     pub const fn spirit(&self) -> i32 {
-        self.spirit
+        self.spirit as i32
     }
 
     pub const fn armor(&self) -> i32 {
-        self.armor
+        self.armor as i32
     }
 
     pub const fn holy_res(&self) -> i32 {
@@ -451,31 +451,31 @@ impl Item {
     }
 
     pub const fn fire_res(&self) -> i32 {
-        self.fire_res
+        self.fire_res as i32
     }
 
     pub const fn nature_res(&self) -> i32 {
-        self.nature_res
+        self.nature_res as i32
     }
 
     pub const fn frost_res(&self) -> i32 {
-        self.frost_res
+        self.frost_res as i32
     }
 
     pub const fn shadow_res(&self) -> i32 {
-        self.shadow_res
+        self.shadow_res as i32
     }
 
     pub const fn arcane_res(&self) -> i32 {
-        self.arcane_res
+        self.arcane_res as i32
     }
 
     pub const fn delay(&self) -> i32 {
-        self.delay
+        self.delay as i32
     }
 
     pub const fn ammo_type(&self) -> i32 {
-        self.ammo_type
+        self.ammo_type as i32
     }
 
     pub const fn ranged_mod_range(&self) -> f32 {
@@ -491,7 +491,7 @@ impl Item {
     }
 
     pub const fn page_text(&self) -> i32 {
-        self.page_text
+        self.page_text as i32
     }
 
     pub const fn language(&self) -> Language {
@@ -503,7 +503,7 @@ impl Item {
     }
 
     pub const fn start_quest(&self) -> i32 {
-        self.start_quest
+        self.start_quest as i32
     }
 
     pub const fn lock_id(&self) -> i32 {
@@ -522,7 +522,7 @@ impl Item {
     }
 
     pub const fn material(&self) -> i32 {
-        self.material
+        self.material as i32
     }
 
     pub const fn sheathe_type(&self) -> SheatheType {
@@ -530,11 +530,11 @@ impl Item {
     }
 
     pub const fn random_property(&self) -> i32 {
-        self.random_property
+        self.random_property as i32
     }
 
     pub const fn block(&self) -> i32 {
-        self.block
+        self.block as i32
     }
 
     pub const fn item_set(&self) -> ItemSet {
@@ -542,7 +542,7 @@ impl Item {
     }
 
     pub const fn max_durability(&self) -> i32 {
-        self.max_durability
+        self.max_durability as i32
     }
 
     pub const fn area(&self) -> Area {
@@ -565,11 +565,11 @@ impl Item {
     }
 
     pub const fn disenchant_id(&self) -> i32 {
-        self.disenchant_id
+        self.disenchant_id as i32
     }
 
     pub const fn food_type(&self) -> i32 {
-        self.food_type
+        self.food_type as i32
     }
 
     pub const fn min_money_loot(&self) -> i32 {

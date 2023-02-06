@@ -32,7 +32,13 @@ pub(crate) fn constructor(
                         continue;
                     }
 
-                    s.wln(format!("{}: {},", e.name, e.value.constructor_type_name()));
+                    let ty_name = if optimizations.is_non_native_type(e) {
+                        optimizations.type_name(e)
+                    } else {
+                        e.value.constructor_type_name()
+                    };
+
+                    s.wln(format!("{}: {ty_name},", e.name));
                 }
 
                 for array in &items[0].arrays {

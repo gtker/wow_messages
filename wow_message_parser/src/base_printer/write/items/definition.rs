@@ -124,7 +124,7 @@ fn struct_definition(
             continue;
         }
 
-        s.wln(format!("{}: {},", e.name, e.value.type_name()));
+        s.wln(format!("{}: {},", e.name, optimizations.type_name(e)));
     }
 
     for array in arrays {
@@ -191,7 +191,7 @@ fn impl_block(
                     continue;
                 }
 
-                s.wln(format!("{}: {},", e.name, e.value.type_name()));
+                s.wln(format!("{}: {},", e.name, optimizations.type_name(e)));
             }
 
             for array in arrays {
@@ -258,7 +258,15 @@ fn getters_and_setters(
             .optimization(field.name)
         {
             FieldOptimization::None => {
-                s.wln(format!("self.{}", field.name));
+                s.wln(format!(
+                    "self.{name}{extra}",
+                    name = field.name,
+                    extra = if let Some(v) = optimizations.native_integer_type_cast(field) {
+                        format!(" as {v}")
+                    } else {
+                        "".to_string()
+                    }
+                ));
             }
             FieldOptimization::ConstantValue(v) => {
                 s.wln(v.to_string_value());

@@ -10,12 +10,12 @@ use crate::vanilla::{
 
 #[derive(Debug, Copy, Clone)]
 pub struct Spell {
-    entry: u32,
-    school: i32,
-    category: i32,
-    cast_ui: i32,
-    dispel: i32,
-    mechanic: i32,
+    entry: u16,
+    school: i8,
+    category: i16,
+    cast_ui: i8,
+    dispel: i8,
+    mechanic: i8,
     attributes: Attributes,
     attributes_ex: AttributesEx1,
     attributes_ex2: AttributesEx2,
@@ -24,46 +24,46 @@ pub struct Spell {
     stances: u32,
     stances_not: u32,
     targets: i32,
-    target_creature_type: i32,
-    requires_spell_focus: i32,
-    casting_time_index: i32,
+    target_creature_type: i16,
+    requires_spell_focus: i16,
+    casting_time_index: i16,
     recovery_time: i32,
     category_recovery_time: i32,
-    interrupt_flags: i32,
+    interrupt_flags: i8,
     aura_interrupt_flags: i32,
     channel_interrupt_flags: i32,
     proc_flags: i32,
-    proc_chance: i32,
-    proc_charges: i32,
-    max_level: i32,
-    base_level: i32,
-    spell_level: i32,
-    duration_index: i32,
+    proc_chance: i8,
+    proc_charges: i8,
+    max_level: i16,
+    base_level: i8,
+    spell_level: i8,
+    duration_index: i16,
     power_type: u32,
     mana_cost: i32,
-    mana_cost_per_level: i32,
-    range_index: i32,
+    mana_cost_per_level: i8,
+    range_index: i16,
     speed: f32,
-    modal_next_spell: i32,
-    stack_amount: i32,
-    equipped_item_class: i32,
+    modal_next_spell: i16,
+    stack_amount: i16,
+    equipped_item_class: i8,
     equipped_item_sub_class_mask: i32,
     equipped_item_inventory_type_mask: i32,
-    spell_visual: i32,
-    spell_icon_id: i32,
-    active_icon_id: i32,
-    spell_priority: i32,
+    spell_visual: i16,
+    spell_icon_id: i16,
+    active_icon_id: i16,
+    spell_priority: i8,
     spell_name: &'static str,
     rank_text: &'static str,
-    mana_cost_percentage: i32,
-    start_recovery_category: i32,
-    start_recovery_time: i32,
-    spell_family_name: i32,
+    mana_cost_percentage: i16,
+    start_recovery_category: i16,
+    start_recovery_time: i16,
+    spell_family_name: i8,
     spell_family_flags: i64,
-    max_affected_targets: i32,
-    dmg_class: i32,
-    prevention_type: i32,
-    stance_bar_order: i32,
+    max_affected_targets: i8,
+    dmg_class: i8,
+    prevention_type: i8,
+    stance_bar_order: i8,
     reagents: [Reagent; 8],
     effects: [SpellEffect; 3],
     totems: [Totem; 2],
@@ -71,12 +71,12 @@ pub struct Spell {
 
 impl Spell {
     pub const fn new(
-        entry: u32,
-        school: i32,
-        category: i32,
-        cast_ui: i32,
-        dispel: i32,
-        mechanic: i32,
+        entry: u16,
+        school: i8,
+        category: i16,
+        cast_ui: i8,
+        dispel: i8,
+        mechanic: i8,
         attributes: Attributes,
         attributes_ex: AttributesEx1,
         attributes_ex2: AttributesEx2,
@@ -85,46 +85,46 @@ impl Spell {
         stances: u32,
         stances_not: u32,
         targets: i32,
-        target_creature_type: i32,
-        requires_spell_focus: i32,
-        casting_time_index: i32,
+        target_creature_type: i16,
+        requires_spell_focus: i16,
+        casting_time_index: i16,
         recovery_time: i32,
         category_recovery_time: i32,
-        interrupt_flags: i32,
+        interrupt_flags: i8,
         aura_interrupt_flags: i32,
         channel_interrupt_flags: i32,
         proc_flags: i32,
-        proc_chance: i32,
-        proc_charges: i32,
-        max_level: i32,
-        base_level: i32,
-        spell_level: i32,
-        duration_index: i32,
+        proc_chance: i8,
+        proc_charges: i8,
+        max_level: i16,
+        base_level: i8,
+        spell_level: i8,
+        duration_index: i16,
         power_type: u32,
         mana_cost: i32,
-        mana_cost_per_level: i32,
-        range_index: i32,
+        mana_cost_per_level: i8,
+        range_index: i16,
         speed: f32,
-        modal_next_spell: i32,
-        stack_amount: i32,
-        equipped_item_class: i32,
+        modal_next_spell: i16,
+        stack_amount: i16,
+        equipped_item_class: i8,
         equipped_item_sub_class_mask: i32,
         equipped_item_inventory_type_mask: i32,
-        spell_visual: i32,
-        spell_icon_id: i32,
-        active_icon_id: i32,
-        spell_priority: i32,
+        spell_visual: i16,
+        spell_icon_id: i16,
+        active_icon_id: i16,
+        spell_priority: i8,
         spell_name: &'static str,
         rank_text: &'static str,
-        mana_cost_percentage: i32,
-        start_recovery_category: i32,
-        start_recovery_time: i32,
-        spell_family_name: i32,
+        mana_cost_percentage: i16,
+        start_recovery_category: i16,
+        start_recovery_time: i16,
+        spell_family_name: i8,
         spell_family_flags: i64,
-        max_affected_targets: i32,
-        dmg_class: i32,
-        prevention_type: i32,
-        stance_bar_order: i32,
+        max_affected_targets: i8,
+        dmg_class: i8,
+        prevention_type: i8,
+        stance_bar_order: i8,
         reagent1: i32,
         reagent_count1: i32,
         reagent2: i32,
@@ -366,27 +366,27 @@ impl Spell {
         }
     }
     pub const fn entry(&self) -> u32 {
-        self.entry
+        self.entry as u32
     }
 
     pub const fn school(&self) -> i32 {
-        self.school
+        self.school as i32
     }
 
     pub const fn category(&self) -> i32 {
-        self.category
+        self.category as i32
     }
 
     pub const fn cast_ui(&self) -> i32 {
-        self.cast_ui
+        self.cast_ui as i32
     }
 
     pub const fn dispel(&self) -> i32 {
-        self.dispel
+        self.dispel as i32
     }
 
     pub const fn mechanic(&self) -> i32 {
-        self.mechanic
+        self.mechanic as i32
     }
 
     pub const fn attributes(&self) -> Attributes {
@@ -422,11 +422,11 @@ impl Spell {
     }
 
     pub const fn target_creature_type(&self) -> i32 {
-        self.target_creature_type
+        self.target_creature_type as i32
     }
 
     pub const fn requires_spell_focus(&self) -> i32 {
-        self.requires_spell_focus
+        self.requires_spell_focus as i32
     }
 
     pub const fn caster_aura_state(&self) -> i32 {
@@ -448,7 +448,7 @@ impl Spell {
     }
 
     pub const fn casting_time_index(&self) -> i32 {
-        self.casting_time_index
+        self.casting_time_index as i32
     }
 
     pub const fn recovery_time(&self) -> i32 {
@@ -460,7 +460,7 @@ impl Spell {
     }
 
     pub const fn interrupt_flags(&self) -> i32 {
-        self.interrupt_flags
+        self.interrupt_flags as i32
     }
 
     pub const fn aura_interrupt_flags(&self) -> i32 {
@@ -476,27 +476,27 @@ impl Spell {
     }
 
     pub const fn proc_chance(&self) -> i32 {
-        self.proc_chance
+        self.proc_chance as i32
     }
 
     pub const fn proc_charges(&self) -> i32 {
-        self.proc_charges
+        self.proc_charges as i32
     }
 
     pub const fn max_level(&self) -> i32 {
-        self.max_level
+        self.max_level as i32
     }
 
     pub const fn base_level(&self) -> i32 {
-        self.base_level
+        self.base_level as i32
     }
 
     pub const fn spell_level(&self) -> i32 {
-        self.spell_level
+        self.spell_level as i32
     }
 
     pub const fn duration_index(&self) -> i32 {
-        self.duration_index
+        self.duration_index as i32
     }
 
     pub const fn power_type(&self) -> u32 {
@@ -508,7 +508,7 @@ impl Spell {
     }
 
     pub const fn mana_cost_per_level(&self) -> i32 {
-        self.mana_cost_per_level
+        self.mana_cost_per_level as i32
     }
 
     pub const fn mana_per_second(&self) -> i32 {
@@ -533,7 +533,7 @@ impl Spell {
     }
 
     pub const fn range_index(&self) -> i32 {
-        self.range_index
+        self.range_index as i32
     }
 
     pub const fn speed(&self) -> f32 {
@@ -541,15 +541,15 @@ impl Spell {
     }
 
     pub const fn modal_next_spell(&self) -> i32 {
-        self.modal_next_spell
+        self.modal_next_spell as i32
     }
 
     pub const fn stack_amount(&self) -> i32 {
-        self.stack_amount
+        self.stack_amount as i32
     }
 
     pub const fn equipped_item_class(&self) -> i32 {
-        self.equipped_item_class
+        self.equipped_item_class as i32
     }
 
     pub const fn equipped_item_sub_class_mask(&self) -> i32 {
@@ -561,19 +561,19 @@ impl Spell {
     }
 
     pub const fn spell_visual(&self) -> i32 {
-        self.spell_visual
+        self.spell_visual as i32
     }
 
     pub const fn spell_icon_id(&self) -> i32 {
-        self.spell_icon_id
+        self.spell_icon_id as i32
     }
 
     pub const fn active_icon_id(&self) -> i32 {
-        self.active_icon_id
+        self.active_icon_id as i32
     }
 
     pub const fn spell_priority(&self) -> i32 {
-        self.spell_priority
+        self.spell_priority as i32
     }
 
     pub const fn spell_name(&self) -> &'static str {
@@ -585,15 +585,15 @@ impl Spell {
     }
 
     pub const fn mana_cost_percentage(&self) -> i32 {
-        self.mana_cost_percentage
+        self.mana_cost_percentage as i32
     }
 
     pub const fn start_recovery_category(&self) -> i32 {
-        self.start_recovery_category
+        self.start_recovery_category as i32
     }
 
     pub const fn start_recovery_time(&self) -> i32 {
-        self.start_recovery_time
+        self.start_recovery_time as i32
     }
 
     pub const fn max_target_level(&self) -> i32 {
@@ -613,7 +613,7 @@ impl Spell {
     }
 
     pub const fn spell_family_name(&self) -> i32 {
-        self.spell_family_name
+        self.spell_family_name as i32
     }
 
     pub const fn spell_family_flags(&self) -> i64 {
@@ -621,19 +621,19 @@ impl Spell {
     }
 
     pub const fn max_affected_targets(&self) -> i32 {
-        self.max_affected_targets
+        self.max_affected_targets as i32
     }
 
     pub const fn dmg_class(&self) -> i32 {
-        self.dmg_class
+        self.dmg_class as i32
     }
 
     pub const fn prevention_type(&self) -> i32 {
-        self.prevention_type
+        self.prevention_type as i32
     }
 
     pub const fn stance_bar_order(&self) -> i32 {
-        self.stance_bar_order
+        self.stance_bar_order as i32
     }
 
     pub const fn min_faction_id(&self) -> i32 {
