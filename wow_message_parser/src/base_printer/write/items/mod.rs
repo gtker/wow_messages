@@ -196,7 +196,7 @@ fn const_default_values(s: &mut Writer, default_values: &BTreeSet<Value>) {
             "const {}: {} = {};",
             value.const_name(),
             value.constructor_type_name(),
-            value.default_value().to_string_value(),
+            value.to_string_value(),
         ));
     }
 }
