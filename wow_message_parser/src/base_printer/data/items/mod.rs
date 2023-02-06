@@ -2,7 +2,6 @@ use crate::base_printer::Expansion;
 use rusqlite::Connection;
 use std::cmp::Ordering;
 use std::collections::{BTreeMap, HashMap};
-use std::hash::Hasher;
 
 pub mod tbc;
 pub mod vanilla;
@@ -376,68 +375,6 @@ pub enum Value {
     VanillaFaction(vanilla_base::Faction),
     TbcFaction(tbc_base::Faction),
     WrathFaction(wrath_base::Faction),
-}
-
-#[allow(clippy::derive_hash_xor_eq)] // We can't derive hash because Float has an f32
-impl std::hash::Hash for Value {
-    fn hash<H: Hasher>(&self, state: &mut H) {
-        match self {
-            Value::Float(v) => u32::from_le_bytes(v.to_le_bytes()).hash(state),
-
-            Value::String(v) => v.hash(state),
-            Value::Int(v) => v.hash(state),
-            Value::Int64(v) => v.hash(state),
-            Value::Uint(v) => v.hash(state),
-            Value::Uint64(v) => v.hash(state),
-            Value::VanillaItemClassAndSubClass(v) => v.hash(state),
-            Value::TbcItemClassAndSubClass(v) => v.hash(state),
-            Value::WrathItemClassAndSubClass(v) => v.hash(state),
-            Value::VanillaTbcItemQuality(v) => v.hash(state),
-            Value::WrathItemQuality(v) => v.hash(state),
-            Value::InventoryType(v) => v.hash(state),
-            Value::VanillaTbcAllowedClass(v) => v.hash(state),
-            Value::WrathAllowedClass(v) => v.hash(state),
-            Value::VanillaAllowedRace(v) => v.hash(state),
-            Value::TbcAllowedRace(v) => v.hash(state),
-            Value::WrathAllowedRace(v) => v.hash(state),
-            Value::SpellSchool(v) => v.hash(state),
-            Value::VanillaSpellTriggerType(v) => v.hash(state),
-            Value::TbcWrathSpellTriggerType(v) => v.hash(state),
-            Value::Bonding(v) => v.hash(state),
-            Value::VanillaSkill(v) => v.hash(state),
-            Value::TbcSkill(v) => v.hash(state),
-            Value::WrathSkill(v) => v.hash(state),
-            Value::VanillaMap(v) => v.hash(state),
-            Value::TbcMap(v) => v.hash(state),
-            Value::WrathMap(v) => v.hash(state),
-            Value::VanillaArea(v) => v.hash(state),
-            Value::TbcArea(v) => v.hash(state),
-            Value::WrathArea(v) => v.hash(state),
-            Value::VanillaAttributes(v) => v.hash(state),
-            Value::VanillaAttributesEx1(v) => v.hash(state),
-            Value::VanillaAttributesEx2(v) => v.hash(state),
-            Value::VanillaAttributesEx3(v) => v.hash(state),
-            Value::VanillaAttributesEx4(v) => v.hash(state),
-            Value::VanillaItemFlag(v) => v.hash(state),
-            Value::TbcItemFlag(v) => v.hash(state),
-            Value::WrathItemFlag(v) => v.hash(state),
-            Value::WrathItemFlag2(v) => v.hash(state),
-            Value::PvpRank(v) => v.hash(state),
-            Value::SheatheType(v) => v.hash(state),
-            Value::VanillaBagFamily(v) => v.hash(state),
-            Value::TbcWrathBagFamily(v) => v.hash(state),
-            Value::VanillaPageTextMaterial(v) => v.hash(state),
-            Value::TbcWrathPageTextMaterial(v) => v.hash(state),
-            Value::VanillaLanguage(v) => v.hash(state),
-            Value::TbcWrathLanguage(v) => v.hash(state),
-            Value::VanillaItemSet(v) => v.hash(state),
-            Value::TbcItemSet(v) => v.hash(state),
-            Value::WrathItemSet(v) => v.hash(state),
-            Value::VanillaFaction(v) => v.hash(state),
-            Value::TbcFaction(v) => v.hash(state),
-            Value::WrathFaction(v) => v.hash(state),
-        }
-    }
 }
 
 impl Eq for Value {}
