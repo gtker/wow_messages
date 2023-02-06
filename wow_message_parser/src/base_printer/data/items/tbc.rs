@@ -2,9 +2,9 @@ use crate::base_printer::data::items;
 use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Value};
 use rusqlite::Connection;
 use wow_world_base::tbc::{
-    AllowedClass, AllowedRace, Area, BagFamily, Bonding, InventoryType, ItemClassAndSubClass,
-    ItemFlag, ItemQuality, ItemSet, Language, Map, PageTextMaterial, PvpRank, SheatheType, Skill,
-    SpellSchool, SpellTriggerType,
+    AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, InventoryType,
+    ItemClassAndSubClass, ItemFlag, ItemQuality, ItemSet, Language, Map, PageTextMaterial, PvpRank,
+    SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct TbcItem {
@@ -28,7 +28,7 @@ pub struct TbcItem {
     pub required_spell: i32,
     pub required_honor_rank: PvpRank,
     pub required_city_rank: i32,
-    pub required_reputation_faction: i32,
+    pub required_faction: Faction,
     pub required_reputation_rank: i32,
     pub max_count: i32,
     pub stackable: i32,
@@ -188,10 +188,7 @@ impl TbcItem {
                 Value::PvpRank(self.required_honor_rank),
             ),
             Field::new("required_city_rank", Value::Int(self.required_city_rank)),
-            Field::new(
-                "required_reputation_faction",
-                Value::Int(self.required_reputation_faction),
-            ),
+            Field::new("required_faction", Value::TbcFaction(self.required_faction)),
             Field::new(
                 "required_reputation_rank",
                 Value::Int(self.required_reputation_rank),
@@ -737,7 +734,7 @@ ORDER BY
                 required_spell: row.get(18).unwrap(),
                 required_honor_rank: PvpRank::try_from(row.get::<usize, u8>(19).unwrap()).unwrap(),
                 required_city_rank: row.get(20).unwrap(),
-                required_reputation_faction: row.get(21).unwrap(),
+                required_faction: Faction::try_from(row.get::<usize, u16>(21).unwrap()).unwrap(),
                 required_reputation_rank: row.get(22).unwrap(),
                 max_count: row.get(23).unwrap(),
                 stackable: row.get(24).unwrap(),

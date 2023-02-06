@@ -5,6 +5,7 @@ use crate::tbc::ItemSpells;
 use crate::tbc::ItemStat;
 use crate::tbc::Area;
 use crate::tbc::Bonding;
+use crate::tbc::Faction;
 use crate::tbc::InventoryType;
 use crate::tbc::ItemClassAndSubClass;
 use crate::tbc::ItemQuality;
@@ -21,7 +22,7 @@ use crate::tbc::ItemFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:361`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L361):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:359`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L359):
 /// ```text
 /// smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
 ///     u32 item;
@@ -47,8 +48,8 @@ use std::io::{Write, Read};
 ///         u32 required_spell;
 ///         u32 required_honor_rank;
 ///         u32 required_city_rank;
-///         u32 required_reputation_faction;
-///         u32 required_reputation_rank;
+///         Faction required_faction;
+///         u32 required_faction_rank;
 ///         u32 max_count;
 ///         u32 stackable;
 ///         u32 container_slots;
@@ -189,11 +190,11 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // required_city_rank: u32
             w.write_all(&v.required_city_rank.to_le_bytes())?;
 
-            // required_reputation_faction: u32
-            w.write_all(&v.required_reputation_faction.to_le_bytes())?;
+            // required_faction: Faction
+            w.write_all(&(v.required_faction.as_int() as u16).to_le_bytes())?;
 
-            // required_reputation_rank: u32
-            w.write_all(&v.required_reputation_rank.to_le_bytes())?;
+            // required_faction_rank: u32
+            w.write_all(&v.required_faction_rank.to_le_bytes())?;
 
             // max_count: u32
             w.write_all(&v.max_count.to_le_bytes())?;
@@ -330,7 +331,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(4..=1784).contains(&body_size) {
+        if !(4..=1782).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0058, size: body_size as u32 });
         }
 
@@ -409,11 +410,11 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // required_city_rank: u32
             let required_city_rank = crate::util::read_u32_le(r)?;
 
-            // required_reputation_faction: u32
-            let required_reputation_faction = crate::util::read_u32_le(r)?;
+            // required_faction: Faction
+            let required_faction: Faction = crate::util::read_u16_le(r)?.try_into()?;
 
-            // required_reputation_rank: u32
-            let required_reputation_rank = crate::util::read_u32_le(r)?;
+            // required_faction_rank: u32
+            let required_faction_rank = crate::util::read_u32_le(r)?;
 
             // max_count: u32
             let max_count = crate::util::read_u32_le(r)?;
@@ -565,8 +566,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 required_spell,
                 required_honor_rank,
                 required_city_rank,
-                required_reputation_faction,
-                required_reputation_rank,
+                required_faction,
+                required_faction_rank,
                 max_count,
                 stackable,
                 container_slots,
@@ -646,8 +647,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // required_spell: u32
             + 4 // required_honor_rank: u32
             + 4 // required_city_rank: u32
-            + 4 // required_reputation_faction: u32
-            + 4 // required_reputation_rank: u32
+            + 2 // required_faction: Faction
+            + 4 // required_faction_rank: u32
             + 4 // max_count: u32
             + 4 // stackable: u32
             + 4 // container_slots: u32
@@ -716,8 +717,8 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub required_spell: u32,
     pub required_honor_rank: u32,
     pub required_city_rank: u32,
-    pub required_reputation_faction: u32,
-    pub required_reputation_rank: u32,
+    pub required_faction: Faction,
+    pub required_faction_rank: u32,
     pub max_count: u32,
     pub stackable: u32,
     pub container_slots: u32,
@@ -782,8 +783,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // required_spell: u32
         + 4 // required_honor_rank: u32
         + 4 // required_city_rank: u32
-        + 4 // required_reputation_faction: u32
-        + 4 // required_reputation_rank: u32
+        + 2 // required_faction: Faction
+        + 4 // required_faction_rank: u32
         + 4 // max_count: u32
         + 4 // stackable: u32
         + 4 // container_slots: u32

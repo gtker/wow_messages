@@ -3,9 +3,9 @@ use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Va
 use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use rusqlite::Connection;
 use wow_world_base::vanilla::{
-    AllowedClass, AllowedRace, Area, BagFamily, Bonding, InventoryType, ItemClassAndSubClass,
-    ItemFlag, ItemQuality, ItemSet, Language, Map, PageTextMaterial, PvpRank, SheatheType, Skill,
-    SpellSchool, SpellTriggerType,
+    AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, InventoryType,
+    ItemClassAndSubClass, ItemFlag, ItemQuality, ItemSet, Language, Map, PageTextMaterial, PvpRank,
+    SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
 
 pub struct VanillaItem {
@@ -28,7 +28,7 @@ pub struct VanillaItem {
     pub required_spell: i32,
     pub required_honor_rank: PvpRank,
     pub required_city_rank: i32,
-    pub required_reputation_faction: i32,
+    pub required_faction: Faction,
     pub required_reputation_rank: i32,
     pub max_count: i32,
     pub stackable: i32,
@@ -160,8 +160,8 @@ impl VanillaItem {
             ),
             Field::new("required_city_rank", Value::Int(self.required_city_rank)),
             Field::new(
-                "required_reputation_faction",
-                Value::Int(self.required_reputation_faction),
+                "required_faction",
+                Value::VanillaFaction(self.required_faction),
             ),
             Field::new(
                 "required_reputation_rank",
@@ -638,7 +638,7 @@ FROM item_template ORDER BY entry;",
                 required_spell: row.get(17).unwrap(),
                 required_honor_rank: PvpRank::try_from(row.get::<usize, u8>(18).unwrap()).unwrap(),
                 required_city_rank: row.get(19).unwrap(),
-                required_reputation_faction: row.get(20).unwrap(),
+                required_faction: Faction::try_from(row.get::<usize, u16>(20).unwrap()).unwrap(),
                 required_reputation_rank: row.get(21).unwrap(),
                 max_count: row.get(22).unwrap(),
                 stackable: row.get(23).unwrap(),

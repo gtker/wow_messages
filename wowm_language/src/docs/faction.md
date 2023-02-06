@@ -404,6 +404,7 @@ Used in:
 * [CMSG_SET_WATCHED_FACTION](cmsg_set_watched_faction.md)
 * [FactionStanding](factionstanding.md)
 * [ForcedReaction](forcedreaction.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
 * [SMSG_SET_FACTION_VISIBLE](smsg_set_faction_visible.md)
 
@@ -1077,6 +1078,7 @@ Used in:
 * [CMSG_SET_WATCHED_FACTION](cmsg_set_watched_faction.md)
 * [FactionStanding](factionstanding.md)
 * [ForcedReaction](forcedreaction.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
 * [SMSG_SET_FACTION_VISIBLE](smsg_set_faction_visible.md)
 
@@ -1908,6 +1910,7 @@ Used in:
 * [CMSG_SET_WATCHED_FACTION](cmsg_set_watched_faction.md)
 * [FactionStanding](factionstanding.md)
 * [ForcedReaction](forcedreaction.md)
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
 * [SMSG_SET_FACTION_VISIBLE](smsg_set_faction_visible.md)
 

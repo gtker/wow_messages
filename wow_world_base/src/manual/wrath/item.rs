@@ -6,6 +6,7 @@ use crate::wrath::{
     Area,
     BagFamily,
     Bonding,
+    Faction,
     InventoryType,
     ItemClassAndSubClass,
     ItemDamageType,
@@ -48,7 +49,7 @@ pub struct Item {
     pub required_spell: i32,
     pub required_honor_rank: PvpRank,
     pub required_city_rank: i32,
-    pub required_reputation_faction: i32,
+    pub required_faction: Faction,
     pub required_reputation_rank: i32,
     pub max_count: i32,
     pub stackable: i32,
@@ -125,7 +126,7 @@ impl Item {
         required_spell: i32,
         required_honor_rank: PvpRank,
         required_city_rank: i32,
-        required_reputation_faction: i32,
+        required_faction: Faction,
         required_reputation_rank: i32,
         max_count: i32,
         stackable: i32,
@@ -263,7 +264,7 @@ impl Item {
             required_spell,
             required_honor_rank,
             required_city_rank,
-            required_reputation_faction,
+            required_faction,
             required_reputation_rank,
             max_count,
             stackable,
@@ -512,8 +513,8 @@ impl Item {
         self.required_city_rank
     }
 
-    pub const fn required_reputation_faction(&self) -> i32 {
-        self.required_reputation_faction
+    pub const fn required_faction(&self) -> Faction {
+        self.required_faction
     }
 
     pub const fn required_reputation_rank(&self) -> i32 {

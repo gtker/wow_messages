@@ -3478,6 +3478,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_required_faction_rank,
+            { "Required Faction Rank", "woww.required.faction.rank",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_required_honor_rank,
             { "Required Honor Rank", "woww.required.honor.rank",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -3516,18 +3522,6 @@
         },
         { &hf_woww_required_opposite_reputation_value,
             { "Required Opposite Reputation Value", "woww.required.opposite.reputation.value",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_required_reputation_faction,
-            { "Required Reputation Faction", "woww.required.reputation.faction",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_required_reputation_rank,
-            { "Required Reputation Rank", "woww.required.reputation.rank",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

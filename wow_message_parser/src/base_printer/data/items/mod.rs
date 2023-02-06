@@ -150,6 +150,10 @@ pub enum Value {
     VanillaItemSet(vanilla_base::ItemSet),
     TbcItemSet(tbc_base::ItemSet),
     WrathItemSet(wrath_base::ItemSet),
+
+    VanillaFaction(vanilla_base::Faction),
+    TbcFaction(tbc_base::Faction),
+    WrathFaction(wrath_base::Faction),
 }
 
 impl Eq for Value {}
@@ -238,6 +242,7 @@ impl Value {
             Value::VanillaLanguage(_) | Value::TbcWrathLanguage(_) => "Language",
 
             Value::VanillaItemSet(_) | Value::TbcItemSet(_) | Value::WrathItemSet(_) => "ItemSet",
+            Value::VanillaFaction(_) | Value::TbcFaction(_) | Value::WrathFaction(_) => "Faction",
         }
     }
 
@@ -314,6 +319,8 @@ impl Value {
             Value::VanillaLanguage(_) | Value::TbcWrathLanguage(_) => "AD",
 
             Value::VanillaItemSet(_) | Value::TbcItemSet(_) | Value::WrathItemSet(_) => "AE",
+
+            Value::VanillaFaction(_) | Value::TbcFaction(_) | Value::WrathFaction(_) => "AF",
         }
     }
 
@@ -414,6 +421,10 @@ impl Value {
             Value::VanillaItemSet(v) => format!("ItemSet::{v:?}"),
             Value::TbcItemSet(v) => format!("ItemSet::{v:?}"),
             Value::WrathItemSet(v) => format!("ItemSet::{v:?}"),
+
+            Value::VanillaFaction(v) => format!("Faction::{v:?}"),
+            Value::TbcFaction(v) => format!("Faction::{v:?}"),
+            Value::WrathFaction(v) => format!("Faction::{v:?}"),
         }
     }
 
@@ -536,6 +547,10 @@ impl Value {
             Value::VanillaItemSet(_) => Value::VanillaItemSet(Default::default()),
             Value::TbcItemSet(_) => Value::TbcItemSet(Default::default()),
             Value::WrathItemSet(_) => Value::WrathItemSet(Default::default()),
+
+            Value::VanillaFaction(_) => Value::VanillaFaction(Default::default()),
+            Value::TbcFaction(_) => Value::TbcFaction(Default::default()),
+            Value::WrathFaction(_) => Value::WrathFaction(Default::default()),
         }
     }
 }

@@ -9,6 +9,7 @@ pub use wow_world_base::tbc::{
     Area,
     BagFamily,
     Bonding,
+    Faction,
     InventoryType,
     Item,
     ItemClassAndSubClass,
