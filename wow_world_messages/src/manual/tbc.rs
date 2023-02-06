@@ -31,7 +31,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 name2: "".to_string(),
                 name3: "".to_string(),
                 name4: "".to_string(),
-                item_display_info: v.displayid as u32,
+                display_id: v.display_id,
                 quality: v.quality,
                 flags: v.flags,
                 buy_price: v.buy_price as u32,

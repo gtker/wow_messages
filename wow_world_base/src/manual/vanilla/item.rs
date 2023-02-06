@@ -28,7 +28,7 @@ pub struct Item {
     pub entry: u32,
     pub class_and_sub_class: ItemClassAndSubClass,
     pub name: &'static str,
-    pub displayid: i32,
+    pub display_id: u32,
     pub quality: ItemQuality,
     pub flags: ItemFlag,
     pub buy_count: i32,
@@ -97,7 +97,7 @@ impl Item {
         entry: u32,
         class_and_sub_class: ItemClassAndSubClass,
         name: &'static str,
-        displayid: i32,
+        display_id: u32,
         quality: ItemQuality,
         flags: ItemFlag,
         buy_count: i32,
@@ -212,7 +212,7 @@ impl Item {
             entry,
             class_and_sub_class,
             name,
-            displayid,
+            display_id,
             quality,
             flags,
             buy_count,
@@ -360,8 +360,8 @@ impl Item {
         self.name
     }
 
-    pub const fn displayid(&self) -> i32 {
-        self.displayid
+    pub const fn display_id(&self) -> u32 {
+        self.display_id
     }
 
     pub const fn quality(&self) -> ItemQuality {

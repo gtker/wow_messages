@@ -14,7 +14,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString name2;
         CString name3;
         CString name4;
-        u32 item_display_info;
+        u32 display_id;
         (u32)ItemQuality quality;
         ItemFlag flags;
         u32 buy_price;
@@ -92,7 +92,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | - / - | CString | name2 |  |  |
 | - | - / - | CString | name3 |  |  |
 | - | - / - | CString | name4 |  |  |
-| - | 4 / Little | u32 | item_display_info |  | mangoszero/vmangos/cmangos: id from ItemDisplayInfo.dbc |
+| - | 4 / Little | u32 | display_id |  | id from ItemDisplayInfo.dbc |
 | - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
 | - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
 | - | 4 / Little | u32 | buy_price |  |  |
@@ -159,7 +159,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString name2;
         CString name3;
         CString name4;
-        u32 item_display_info;
+        u32 display_id;
         (u32)ItemQuality quality;
         ItemFlag flags;
         u32 buy_price;
@@ -245,7 +245,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | - / - | CString | name2 |  |  |
 | - | - / - | CString | name3 |  |  |
 | - | - / - | CString | name4 |  |  |
-| - | 4 / Little | u32 | item_display_info |  | mangoszero/vmangos/cmangos: id from ItemDisplayInfo.dbc |
+| - | 4 / Little | u32 | display_id |  | id from ItemDisplayInfo.dbc |
 | - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
 | - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
 | - | 4 / Little | u32 | buy_price |  |  |
@@ -319,7 +319,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString name2;
         CString name3;
         CString name4;
-        u32 item_display_info;
+        u32 display_id;
         (u32)ItemQuality quality;
         ItemFlag flags;
         ItemFlag2 flags2;
@@ -412,7 +412,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | - / - | CString | name2 |  |  |
 | - | - / - | CString | name3 |  |  |
 | - | - / - | CString | name4 |  |  |
-| - | 4 / Little | u32 | item_display_info |  | mangoszero/vmangos/cmangos: id from ItemDisplayInfo.dbc |
+| - | 4 / Little | u32 | display_id |  | id from ItemDisplayInfo.dbc |
 | - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
 | - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
 | - | 4 / - | [ItemFlag2](itemflag2.md) | flags2 |  |  |

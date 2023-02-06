@@ -34,7 +34,7 @@ use std::io::{Write, Read};
 ///         CString name2;
 ///         CString name3;
 ///         CString name4;
-///         u32 item_display_info;
+///         u32 display_id;
 ///         (u32)ItemQuality quality;
 ///         ItemFlag flags;
 ///         ItemFlag2 flags2;
@@ -153,8 +153,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // Null terminator
             w.write_all(&[0])?;
 
-            // item_display_info: u32
-            w.write_all(&v.item_display_info.to_le_bytes())?;
+            // display_id: u32
+            w.write_all(&v.display_id.to_le_bytes())?;
 
             // quality: ItemQuality
             w.write_all(&(v.quality.as_int() as u32).to_le_bytes())?;
@@ -394,8 +394,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let name4 = crate::util::read_c_string_to_vec(r)?;
             let name4 = String::from_utf8(name4)?;
 
-            // item_display_info: u32
-            let item_display_info = crate::util::read_u32_le(r)?;
+            // display_id: u32
+            let display_id = crate::util::read_u32_le(r)?;
 
             // quality: ItemQuality
             let quality: ItemQuality = (crate::util::read_u32_le(r)? as u8).try_into()?;
@@ -601,7 +601,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 name2,
                 name3,
                 name4,
-                item_display_info,
+                display_id,
                 quality,
                 flags,
                 flags2,
@@ -688,7 +688,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + found.name2.len() + 1 // name2: CString
             + found.name3.len() + 1 // name3: CString
             + found.name4.len() + 1 // name4: CString
-            + 4 // item_display_info: u32
+            + 4 // display_id: u32
             + 4 // quality: ItemQuality
             + 4 // flags: ItemFlag
             + 4 // flags2: ItemFlag2
@@ -765,7 +765,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub name2: String,
     pub name3: String,
     pub name4: String,
-    pub item_display_info: u32,
+    pub display_id: u32,
     pub quality: ItemQuality,
     pub flags: ItemFlag,
     pub flags2: ItemFlag2,
@@ -837,7 +837,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + self.name2.len() + 1 // name2: CString
         + self.name3.len() + 1 // name3: CString
         + self.name4.len() + 1 // name4: CString
-        + 4 // item_display_info: u32
+        + 4 // display_id: u32
         + 4 // quality: ItemQuality
         + 4 // flags: ItemFlag
         + 4 // flags2: ItemFlag2

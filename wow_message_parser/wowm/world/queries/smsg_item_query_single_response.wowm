@@ -190,8 +190,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString name2;
         CString name3;
         CString name4;
-        u32 item_display_info {
-            comment = "mangoszero/vmangos/cmangos: id from ItemDisplayInfo.dbc";
+        u32 display_id {
+            comment = "id from ItemDisplayInfo.dbc";
         }
         (u32)ItemQuality quality;
         ItemFlag flags;
@@ -369,8 +369,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString name2;
         CString name3;
         CString name4;
-        u32 item_display_info {
-            comment = "mangoszero/vmangos/cmangos: id from ItemDisplayInfo.dbc";
+        u32 display_id {
+            comment = "id from ItemDisplayInfo.dbc";
         }
         (u32)ItemQuality quality;
         ItemFlag flags;
@@ -581,8 +581,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         CString name2;
         CString name3;
         CString name4;
-        u32 item_display_info {
-            comment = "mangoszero/vmangos/cmangos: id from ItemDisplayInfo.dbc";
+        u32 display_id {
+            comment = "id from ItemDisplayInfo.dbc";
         }
         (u32)ItemQuality quality;
         ItemFlag flags;

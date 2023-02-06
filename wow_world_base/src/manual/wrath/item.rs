@@ -32,7 +32,7 @@ pub struct Item {
     pub class_and_sub_class: ItemClassAndSubClass,
     pub sound_override_sub_class: i32,
     pub name: &'static str,
-    pub displayid: i32,
+    pub display_id: u32,
     pub quality: ItemQuality,
     pub flags: ItemFlag,
     pub flags2: ItemFlag2,
@@ -109,7 +109,7 @@ impl Item {
         class_and_sub_class: ItemClassAndSubClass,
         sound_override_sub_class: i32,
         name: &'static str,
-        displayid: i32,
+        display_id: u32,
         quality: ItemQuality,
         flags: ItemFlag,
         flags2: ItemFlag2,
@@ -247,7 +247,7 @@ impl Item {
             class_and_sub_class,
             sound_override_sub_class,
             name,
-            displayid,
+            display_id,
             quality,
             flags,
             flags2,
@@ -445,8 +445,8 @@ impl Item {
         self.name
     }
 
-    pub const fn displayid(&self) -> i32 {
-        self.displayid
+    pub const fn display_id(&self) -> u32 {
+        self.display_id
     }
 
     pub const fn quality(&self) -> ItemQuality {
