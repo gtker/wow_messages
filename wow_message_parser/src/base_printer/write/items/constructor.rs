@@ -1,3 +1,4 @@
+use crate::base_printer::data::items::{FieldOptimization, Optimizations};
 use crate::base_printer::write::items::definition::includes;
 use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::writer::Writer;
@@ -9,11 +10,12 @@ pub(crate) fn constructor(
     items: &[GenericThing],
     expansion: Expansion,
     ty_name: &str,
+    optimizations: &Optimizations,
 ) {
     includes(
         s,
-        items[0].fields,
-        items[0].arrays,
+        &items[0].fields,
+        &items[0].arrays,
         expansion,
         ImportFrom::ItemsConstructors,
         ty_name,
@@ -24,11 +26,16 @@ pub(crate) fn constructor(
             ctor.name(),
             ty_name,
             |s| {
-                for e in items[0].fields {
+                for e in &items[0].fields {
+                    match optimizations.optimization(e.name) {
+                        FieldOptimization::None => {}
+                        FieldOptimization::ConstantValue(_) => continue,
+                    }
+
                     s.wln(format!("{}: {},", e.name, e.value.constructor_type_name()));
                 }
 
-                for array in items[0].arrays {
+                for array in &items[0].arrays {
                     if !ctor.type_is_defaulted(array.type_name) {
                         for instance in &array.instances {
                             for field in instance {
@@ -43,7 +50,12 @@ pub(crate) fn constructor(
                 }
             },
             |s| {
-                for e in items[0].fields {
+                for e in &items[0].fields {
+                    match optimizations.optimization(e.name) {
+                        FieldOptimization::None => {}
+                        FieldOptimization::ConstantValue(_) => continue,
+                    }
+
                     if let Some(prefix) = e.value.definition_has_extra() {
                         s.wln(format!("{prefix}({}),", e.name));
                     } else {
@@ -51,7 +63,7 @@ pub(crate) fn constructor(
                     }
                 }
 
-                for array in items[0].arrays {
+                for array in &items[0].arrays {
                     for instance in &array.instances {
                         for field in instance {
                             if ctor.type_is_defaulted(array.type_name) {

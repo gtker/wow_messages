@@ -1,5 +1,6 @@
 use crate::base_printer::data::items;
-use crate::base_printer::data::items::{Array, ArrayField, Field, GenericItem, Value};
+use crate::base_printer::data::items::{Array, ArrayField, Field, Optimizations, Value};
+use crate::base_printer::write::items::GenericThing;
 use rusqlite::Connection;
 use wow_world_base::wrath::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, InventoryType,
@@ -151,7 +152,7 @@ pub struct WrathItem {
 }
 
 impl WrathItem {
-    pub fn into_generic_item(self) -> GenericItem {
+    pub fn into_generic_item(self) -> GenericThing {
         let fields = vec![
             Field::new("entry", Value::Uint(self.entry)),
             Field::new(
@@ -536,11 +537,11 @@ impl WrathItem {
             ),
         ];
 
-        GenericItem::new(self.entry, self.extra_flags, self.name, fields, arrays)
+        GenericThing::new(self.entry, self.extra_flags, self.name, fields, arrays)
     }
 }
 
-pub fn wrath(conn: &Connection) -> Vec<GenericItem> {
+pub fn wrath(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
     let mut s = conn
         .prepare(
             "SELECT
@@ -846,5 +847,7 @@ ORDER BY
         })
         .unwrap();
 
-    r.map(|a| a.unwrap().into_generic_item()).collect()
+    let items: Vec<_> = r.map(|a| a.unwrap().into_generic_item()).collect();
+    let opt = Optimizations::new(&items);
+    (items, opt)
 }

@@ -1,38 +1,76 @@
 use crate::base_printer::Expansion;
 use rusqlite::Connection;
 use std::cmp::Ordering;
+use std::collections::HashMap;
 
 pub mod tbc;
 pub mod vanilla;
 pub mod wrath;
 
+use crate::base_printer::write::items::GenericThing;
 use wow_world_base::shared as shared_base;
 use wow_world_base::tbc as tbc_base;
 use wow_world_base::vanilla as vanilla_base;
 use wow_world_base::wrath as wrath_base;
 
-pub struct GenericItem {
-    pub entry: u32,
-    pub extra_flags: i32,
-    pub name: String,
-    pub fields: Vec<Field>,
-    pub arrays: Vec<Array>,
+#[derive(Debug, Clone)]
+pub enum FieldOptimization {
+    None,
+    ConstantValue(Value),
 }
 
-impl GenericItem {
-    pub fn new(
-        entry: u32,
-        extra_flags: i32,
-        name: String,
-        fields: Vec<Field>,
-        arrays: Vec<Array>,
-    ) -> Self {
+impl FieldOptimization {
+    pub const fn skip_field(&self) -> bool {
+        !matches!(self, Self::None)
+    }
+}
+
+pub struct Optimizations {
+    field_optimizations: HashMap<String, FieldOptimization>,
+}
+
+impl Optimizations {
+    pub fn optimization(&self, field_name: &str) -> FieldOptimization {
+        self.field_optimizations
+            .iter()
+            .find(|(field, _)| field.as_str() == field_name)
+            .unwrap()
+            .1
+            .clone()
+    }
+}
+
+impl Optimizations {
+    pub fn new(items: &[GenericThing]) -> Self {
+        let mut field_optimizations = HashMap::new();
+
+        let field_names = items[0].fields.iter().map(|field| field.name);
+
+        for field_name in field_names {
+            let value = &items[0]
+                .fields
+                .iter()
+                .find(|field| field.name == field_name)
+                .unwrap()
+                .value;
+            let mut fields = items.iter().map(|item| {
+                item.fields
+                    .iter()
+                    .find(|field| field.name == field_name)
+                    .unwrap()
+            });
+
+            let optimization = if fields.all(|field| &field.value == value) {
+                FieldOptimization::ConstantValue(value.clone())
+            } else {
+                FieldOptimization::None
+            };
+
+            field_optimizations.insert(field_name.to_string(), optimization);
+        }
+
         Self {
-            entry,
-            extra_flags,
-            name,
-            fields,
-            arrays,
+            field_optimizations,
         }
     }
 }
@@ -577,7 +615,10 @@ fn i32_to_u32(v: i32) -> u32 {
     u32::from_le_bytes(v.to_le_bytes())
 }
 
-pub(crate) fn get_items(conn: &Connection, expansion: Expansion) -> Vec<GenericItem> {
+pub(crate) fn get_items(
+    conn: &Connection,
+    expansion: Expansion,
+) -> (Vec<GenericThing>, Optimizations) {
     match expansion {
         Expansion::Vanilla => vanilla::vanilla(conn),
         Expansion::BurningCrusade => tbc::tbc(conn),

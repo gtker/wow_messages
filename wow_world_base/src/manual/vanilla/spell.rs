@@ -45,7 +45,6 @@ pub struct Spell {
     mana_cost: i32,
     mana_cost_per_level: i32,
     mana_per_second: i32,
-    mana_per_second_per_level: i32,
     range_index: i32,
     speed: f32,
     modal_next_spell: i32,
@@ -72,7 +71,6 @@ pub struct Spell {
     min_faction_id: i32,
     min_reputation: i32,
     required_aura_vision: i32,
-    is_server_side: i32,
     attributes_serverside: i32,
     reagents: [Reagent; 8],
     effects: [SpellEffect; 3],
@@ -116,7 +114,6 @@ impl Spell {
         mana_cost: i32,
         mana_cost_per_level: i32,
         mana_per_second: i32,
-        mana_per_second_per_level: i32,
         range_index: i32,
         speed: f32,
         modal_next_spell: i32,
@@ -143,7 +140,6 @@ impl Spell {
         min_faction_id: i32,
         min_reputation: i32,
         required_aura_vision: i32,
-        is_server_side: i32,
         attributes_serverside: i32,
         reagent1: i32,
         reagent_count1: i32,
@@ -257,7 +253,6 @@ impl Spell {
             mana_cost,
             mana_cost_per_level,
             mana_per_second,
-            mana_per_second_per_level,
             range_index,
             speed,
             modal_next_spell,
@@ -284,7 +279,6 @@ impl Spell {
             min_faction_id,
             min_reputation,
             required_aura_vision,
-            is_server_side,
             attributes_serverside,
             reagents: [
             Reagent::new(
@@ -536,7 +530,7 @@ impl Spell {
     }
 
     pub const fn mana_per_second_per_level(&self) -> i32 {
-        self.mana_per_second_per_level
+        0
     }
 
     pub const fn range_index(&self) -> i32 {
@@ -644,7 +638,7 @@ impl Spell {
     }
 
     pub const fn is_server_side(&self) -> i32 {
-        self.is_server_side
+        0
     }
 
     pub const fn attributes_serverside(&self) -> i32 {

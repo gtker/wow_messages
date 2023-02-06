@@ -1,4 +1,4 @@
-use crate::base_printer::data::items::{Array, Field};
+use crate::base_printer::data::items::{Array, Field, FieldOptimization, Optimizations};
 use crate::base_printer::writer::Writer;
 use crate::base_printer::{Expansion, ImportFrom};
 use std::collections::BTreeSet;
@@ -9,6 +9,7 @@ pub(crate) fn definition(
     arrays: &[Array],
     expansion: Expansion,
     ty_name: &str,
+    optimizations: &Optimizations,
 ) {
     s.wln("#![allow(clippy::too_many_arguments)]");
     includes(
@@ -20,8 +21,8 @@ pub(crate) fn definition(
         ty_name,
     );
 
-    struct_definition(s, fields, arrays, ty_name);
-    impl_block(s, fields, arrays, ty_name);
+    struct_definition(s, fields, arrays, ty_name, optimizations);
+    impl_block(s, fields, arrays, ty_name, optimizations);
 
     array_definitions(s, arrays);
 }
@@ -98,11 +99,21 @@ pub(crate) fn includes(
     s.newline();
 }
 
-fn struct_definition(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str) {
+fn struct_definition(
+    s: &mut Writer,
+    fields: &[Field],
+    arrays: &[Array],
+    ty_name: &str,
+    optimizations: &Optimizations,
+) {
     s.wln("#[derive(Debug, Copy, Clone)]");
     s.open_curly(format!("pub struct {ty_name}"));
 
     for e in fields {
+        match optimizations.optimization(&e.name) {
+            FieldOptimization::None => {}
+            FieldOptimization::ConstantValue(_) => continue,
+        }
         s.wln(format!("{}: {},", e.name, e.value.type_name()));
     }
 
@@ -154,12 +165,23 @@ fn array_definitions(s: &mut Writer, arrays: &[Array]) {
     }
 }
 
-fn impl_block(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str) {
+fn impl_block(
+    s: &mut Writer,
+    fields: &[Field],
+    arrays: &[Array],
+    ty_name: &str,
+    optimizations: &Optimizations,
+) {
     s.open_curly(format!("impl {ty_name}"));
 
     s.pub_const_fn_new(
         |s| {
             for e in fields {
+                match optimizations.optimization(e.name) {
+                    FieldOptimization::None => {}
+                    FieldOptimization::ConstantValue(_) => continue,
+                }
+
                 s.wln(format!("{}: {},", e.name, e.value.type_name()));
             }
 
@@ -177,6 +199,11 @@ fn impl_block(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str)
         },
         |s| {
             for e in fields {
+                match optimizations.optimization(e.name) {
+                    FieldOptimization::None => {}
+                    FieldOptimization::ConstantValue(_) => continue,
+                }
+
                 s.wln(format!("{},", e.name));
             }
 
@@ -207,15 +234,27 @@ fn impl_block(s: &mut Writer, fields: &[Field], arrays: &[Array], ty_name: &str)
         },
     );
 
-    getters_and_setters(s, fields, arrays);
+    getters_and_setters(s, fields, arrays, optimizations);
 
     s.closing_curly();
 }
 
-fn getters_and_setters(s: &mut Writer, fields: &[Field], arrays: &[Array]) {
+fn getters_and_setters(
+    s: &mut Writer,
+    fields: &[Field],
+    arrays: &[Array],
+    optimizations: &Optimizations,
+) {
     for field in fields {
-        s.pub_const_fn(field.name, field.value.type_name(), |s| {
-            s.wln(format!("self.{}", field.name));
+        s.pub_const_fn(field.name, field.value.type_name(), |s| match optimizations
+            .optimization(&field.name)
+        {
+            FieldOptimization::None => {
+                s.wln(format!("self.{}", field.name));
+            }
+            FieldOptimization::ConstantValue(v) => {
+                s.wln(v.to_string_value());
+            }
         });
         s.newline();
     }

@@ -6,7 +6,6 @@ mod writer;
 
 use crate::base_printer::write::items::{
     unobtainable_item, write_constructors, write_definition, write_pub_use, write_things,
-    GenericThing,
 };
 use crate::path_utils::workspace_directory;
 use data::{get_data_from_sqlite_file, Data};
@@ -186,37 +185,32 @@ fn write_to_files(data: &Data, expansion: Expansion) {
 fn write_items(data: &Data, expansion: Expansion) {
     const TY_NAME: &str = "Item";
 
-    let items = data
-        .items
-        .iter()
-        .map(|a| GenericThing {
-            entry: a.entry,
-            extra_flags: a.extra_flags,
-            name: &a.name,
-            fields: &a.fields,
-            arrays: &a.arrays,
-        })
-        .collect::<Vec<_>>();
+    let items = &data.items.0;
+
+    let optimizations = &data.items.1;
 
     write_things(
         &expansion.item_data_path(),
         &items,
         expansion,
         TY_NAME,
-        |i| unobtainable_item(i.entry, i.extra_flags, i.name),
+        |i| unobtainable_item(i.entry, i.extra_flags, &i.name),
+        optimizations,
     );
     write_definition(
         &expansion.item_definition_path(),
-        items[0].fields,
-        items[0].arrays,
+        &items[0].fields,
+        &items[0].arrays,
         expansion,
         TY_NAME,
+        optimizations,
     );
     write_constructors(
         &expansion.item_constructor_path(),
         &items,
         expansion,
         TY_NAME,
+        optimizations,
     );
     write_pub_use(&expansion.item_pub_use_path(), &items, expansion, TY_NAME);
 }
@@ -224,17 +218,9 @@ fn write_items(data: &Data, expansion: Expansion) {
 fn write_spells(data: &Data, expansion: Expansion) {
     const TY_NAME: &str = "Spell";
 
-    let spells = data
-        .spells
-        .iter()
-        .map(|a| GenericThing {
-            entry: a.entry,
-            extra_flags: 0,
-            name: "",
-            fields: &a.fields,
-            arrays: &a.arrays,
-        })
-        .collect::<Vec<_>>();
+    let spells = &data.spells.0;
+
+    let optimizations = &data.spells.1;
 
     write_things(
         &expansion.spell_data_path(),
@@ -242,19 +228,22 @@ fn write_spells(data: &Data, expansion: Expansion) {
         expansion,
         TY_NAME,
         |_| false,
+        optimizations,
     );
     write_definition(
         &expansion.spell_definition_path(),
-        spells[0].fields,
-        spells[0].arrays,
+        &spells[0].fields,
+        &spells[0].arrays,
         expansion,
         TY_NAME,
+        optimizations,
     );
     write_constructors(
         &expansion.spell_constructor_path(),
         &spells,
         expansion,
         TY_NAME,
+        optimizations,
     );
     write_pub_use(&expansion.spell_pub_use_path(), &spells, expansion, TY_NAME);
 }

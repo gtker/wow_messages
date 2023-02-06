@@ -18,9 +18,7 @@ pub struct Spell {
     attributes_ex6: u32,
     attributes_ex7: u32,
     stances: u32,
-    stances2: u32,
     stances_not: u32,
-    stances_not2: u32,
     targets: i32,
     target_creature_type: i32,
     requires_spell_focus: i32,
@@ -50,7 +48,6 @@ pub struct Spell {
     mana_cost: i32,
     mana_cost_per_level: i32,
     mana_per_second: i32,
-    mana_per_second_per_level: i32,
     range_index: i32,
     speed: f32,
     modal_next_spell: i32,
@@ -109,9 +106,7 @@ impl Spell {
         attributes_ex6: u32,
         attributes_ex7: u32,
         stances: u32,
-        stances2: u32,
         stances_not: u32,
-        stances_not2: u32,
         targets: i32,
         target_creature_type: i32,
         requires_spell_focus: i32,
@@ -141,7 +136,6 @@ impl Spell {
         mana_cost: i32,
         mana_cost_per_level: i32,
         mana_per_second: i32,
-        mana_per_second_per_level: i32,
         range_index: i32,
         speed: f32,
         modal_next_spell: i32,
@@ -280,9 +274,7 @@ impl Spell {
             attributes_ex6,
             attributes_ex7,
             stances,
-            stances2,
             stances_not,
-            stances_not2,
             targets,
             target_creature_type,
             requires_spell_focus,
@@ -312,7 +304,6 @@ impl Spell {
             mana_cost,
             mana_cost_per_level,
             mana_per_second,
-            mana_per_second_per_level,
             range_index,
             speed,
             modal_next_spell,
@@ -529,7 +520,7 @@ impl Spell {
     }
 
     pub const fn stances2(&self) -> u32 {
-        self.stances2
+        0
     }
 
     pub const fn stances_not(&self) -> u32 {
@@ -537,7 +528,7 @@ impl Spell {
     }
 
     pub const fn stances_not2(&self) -> u32 {
-        self.stances_not2
+        0
     }
 
     pub const fn targets(&self) -> i32 {
@@ -657,7 +648,7 @@ impl Spell {
     }
 
     pub const fn mana_per_second_per_level(&self) -> i32 {
-        self.mana_per_second_per_level
+        0
     }
 
     pub const fn range_index(&self) -> i32 {

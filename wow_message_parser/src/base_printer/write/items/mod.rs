@@ -2,7 +2,7 @@ mod constructor;
 pub(crate) mod conversions;
 pub(crate) mod definition;
 
-use crate::base_printer::data::items::{Array, Field, Value};
+use crate::base_printer::data::items::{Array, Field, FieldOptimization, Optimizations, Value};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 pub(crate) struct Stats {
@@ -22,19 +22,19 @@ use crate::base_printer::{Expansion, ImportFrom};
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
 use std::path::Path;
 
-pub struct GenericThing<'a> {
+pub struct GenericThing {
     pub entry: u32,
     pub extra_flags: i32,
-    pub name: &'a str,
-    pub fields: &'a [Field],
-    pub arrays: &'a [Array],
+    pub name: String,
+    pub fields: Vec<Field>,
+    pub arrays: Vec<Array>,
 }
 
-impl GenericThing<'_> {
+impl GenericThing {
     pub fn types_that_are_defaulted(&self) -> BTreeSet<&'static str> {
         let mut types_that_are_defaulted = BTreeSet::new();
 
-        for array in self.arrays {
+        for array in &self.arrays {
             if array.is_default() {
                 types_that_are_defaulted.insert(array.type_name);
             }
@@ -67,6 +67,22 @@ impl GenericThing<'_> {
 
         s
     }
+
+    pub fn new(
+        entry: u32,
+        extra_flags: i32,
+        name: String,
+        fields: Vec<Field>,
+        arrays: Vec<Array>,
+    ) -> Self {
+        Self {
+            entry,
+            extra_flags,
+            name,
+            fields,
+            arrays,
+        }
+    }
 }
 
 pub(crate) fn write_definition(
@@ -75,10 +91,11 @@ pub(crate) fn write_definition(
     arrays: &[Array],
     expansion: Expansion,
     ty_name: &str,
+    optimizations: &Optimizations,
 ) {
     let mut s = Writer::new();
 
-    definition(&mut s, fields, arrays, expansion, ty_name);
+    definition(&mut s, fields, arrays, expansion, ty_name, optimizations);
 
     overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
@@ -94,8 +111,8 @@ pub(crate) fn write_pub_use(
 
     includes(
         &mut s,
-        things[0].fields,
-        things[0].arrays,
+        &things[0].fields,
+        &things[0].arrays,
         expansion,
         ImportFrom::ItemPubUse,
         ty_name,
@@ -109,10 +126,11 @@ pub(crate) fn write_constructors(
     things: &[GenericThing],
     expansion: Expansion,
     ty_name: &str,
+    optimizations: &Optimizations,
 ) {
     let mut s = Writer::new();
 
-    constructor(&mut s, things, expansion, ty_name);
+    constructor(&mut s, things, expansion, ty_name, optimizations);
 
     overwrite_autogenerate_if_not_the_same(path, s.inner());
 }
@@ -123,6 +141,7 @@ pub(crate) fn write_things(
     expansion: Expansion,
     ty_name: &str,
     unobtainable: impl Fn(&GenericThing) -> bool,
+    optimizations: &Optimizations,
 ) {
     let mut s = Writer::new();
 
@@ -136,6 +155,7 @@ pub(crate) fn write_things(
         unobtainable,
         ty_name,
         &default_values,
+        optimizations,
     );
 
     overwrite_autogenerate_if_not_the_same(path, s.inner());
@@ -145,11 +165,11 @@ fn get_default_values(things: &[GenericThing]) -> BTreeSet<Value> {
     let mut map: HashMap<&'static str, BTreeMap<Value, usize>> = HashMap::new();
 
     for thing in things {
-        for field in thing.fields {
+        for field in &thing.fields {
             insert_value(&mut map, &field.value)
         }
 
-        for array in thing.arrays {
+        for array in &thing.arrays {
             for instance in &array.instances {
                 for field in instance {
                     insert_value(&mut map, &field.value)
@@ -245,11 +265,12 @@ fn all_items(
     unobtainable: impl Fn(&GenericThing) -> bool,
     ty_name: &str,
     default_values: &BTreeSet<Value>,
+    optimizations: &Optimizations,
 ) {
     includes(
         s,
-        items[0].fields,
-        items[0].arrays,
+        &items[0].fields,
+        &items[0].arrays,
         expansion,
         ImportFrom::Items,
         ty_name,
@@ -263,7 +284,12 @@ fn all_items(
         }
         s.w(format!("{}(", item.constructor_name()));
 
-        for value in item.fields {
+        for value in &item.fields {
+            match optimizations.optimization(value.name) {
+                FieldOptimization::None => {}
+                FieldOptimization::ConstantValue(_) => continue,
+            }
+
             if default_values.contains(&value.value) {
                 s.w_no_indent(format!("{},", value.value.const_name()));
             } else {
@@ -271,7 +297,7 @@ fn all_items(
             }
         }
 
-        for array in item.arrays {
+        for array in &item.arrays {
             if array.is_default() {
                 continue;
             }

@@ -44,7 +44,6 @@ pub struct Spell {
     mana_cost: i32,
     mana_cost_per_level: i32,
     mana_per_second: i32,
-    mana_per_second_per_level: i32,
     range_index: i32,
     speed: f32,
     modal_next_spell: i32,
@@ -68,8 +67,6 @@ pub struct Spell {
     dmg_class: i32,
     prevention_type: i32,
     stance_bar_order: i32,
-    min_faction_id: i32,
-    min_reputation: i32,
     required_aura_vision: i32,
     area_id: i32,
     school_mask: i32,
@@ -122,7 +119,6 @@ impl Spell {
         mana_cost: i32,
         mana_cost_per_level: i32,
         mana_per_second: i32,
-        mana_per_second_per_level: i32,
         range_index: i32,
         speed: f32,
         modal_next_spell: i32,
@@ -146,8 +142,6 @@ impl Spell {
         dmg_class: i32,
         prevention_type: i32,
         stance_bar_order: i32,
-        min_faction_id: i32,
-        min_reputation: i32,
         required_aura_vision: i32,
         area_id: i32,
         school_mask: i32,
@@ -274,7 +268,6 @@ impl Spell {
             mana_cost,
             mana_cost_per_level,
             mana_per_second,
-            mana_per_second_per_level,
             range_index,
             speed,
             modal_next_spell,
@@ -298,8 +291,6 @@ impl Spell {
             dmg_class,
             prevention_type,
             stance_bar_order,
-            min_faction_id,
-            min_reputation,
             required_aura_vision,
             area_id,
             school_mask,
@@ -582,7 +573,7 @@ impl Spell {
     }
 
     pub const fn mana_per_second_per_level(&self) -> i32 {
-        self.mana_per_second_per_level
+        0
     }
 
     pub const fn range_index(&self) -> i32 {
@@ -678,11 +669,11 @@ impl Spell {
     }
 
     pub const fn min_faction_id(&self) -> i32 {
-        self.min_faction_id
+        0
     }
 
     pub const fn min_reputation(&self) -> i32 {
-        self.min_reputation
+        0
     }
 
     pub const fn required_aura_vision(&self) -> i32 {

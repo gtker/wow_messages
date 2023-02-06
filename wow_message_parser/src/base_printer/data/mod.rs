@@ -6,9 +6,10 @@ pub(crate) mod spells;
 use super::position::{positions, RawPosition};
 use super::types::{Class, Race};
 use super::Expansion;
-use crate::base_printer::data::items::{get_items, GenericItem};
+use crate::base_printer::data::items::{get_items, Optimizations};
 use crate::base_printer::data::pet_names::{get_pet_name_data, Pet, PetNames};
-use crate::base_printer::data::spells::{get_spells, GenericSpell};
+use crate::base_printer::data::spells::get_spells;
+use crate::base_printer::write::items::GenericThing;
 use rusqlite::Connection;
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::path::Path;
@@ -24,8 +25,8 @@ pub(crate) struct Data {
     pub actions: HashMap<Combination, BTreeSet<Action>>,
     pub triggers: Vec<Trigger>,
     pub pet_names: BTreeMap<Pet, PetNames>,
-    pub items: Vec<GenericItem>,
-    pub spells: Vec<GenericSpell>,
+    pub items: (Vec<GenericThing>, Optimizations),
+    pub spells: (Vec<GenericThing>, Optimizations),
 }
 
 impl Data {

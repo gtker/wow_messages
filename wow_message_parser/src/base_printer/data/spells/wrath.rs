@@ -1,6 +1,6 @@
-use crate::base_printer::data::items::{Array, ArrayField, Field, Value};
+use crate::base_printer::data::items::{Array, ArrayField, Field, Optimizations, Value};
 use crate::base_printer::data::spells::tbc::assertions;
-use crate::base_printer::data::spells::GenericSpell;
+use crate::base_printer::write::items::GenericThing;
 use rusqlite::Connection;
 
 pub(crate) struct WrathSpell {
@@ -239,7 +239,7 @@ pub(crate) struct WrathSpell {
 }
 
 impl WrathSpell {
-    pub(crate) fn into_generic_spell(self) -> GenericSpell {
+    pub(crate) fn into_generic_spell(self) -> GenericThing {
         let fields = vec![
             Field::new("entry", Value::Uint(self.id)),
             Field::new("category", Value::Int(self.category)),
@@ -811,15 +811,17 @@ impl WrathSpell {
             ),
         ];
 
-        GenericSpell {
+        GenericThing {
             entry: self.id,
+            extra_flags: 0,
+            name: self.spell_name.to_string(),
             fields,
             arrays,
         }
     }
 }
 
-pub(crate) fn wrath(conn: &Connection) -> Vec<GenericSpell> {
+pub(crate) fn wrath(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
     assertions(conn);
 
     let mut s = conn
@@ -1243,5 +1245,7 @@ pub(crate) fn wrath(conn: &Connection) -> Vec<GenericSpell> {
         })
         .unwrap();
 
-    r.map(|a| a.unwrap().into_generic_spell()).collect()
+    let spells: Vec<_> = r.map(|a| a.unwrap().into_generic_spell()).collect();
+    let optimizations = Optimizations::new(&spells);
+    (spells, optimizations)
 }

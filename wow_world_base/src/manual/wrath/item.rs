@@ -47,8 +47,6 @@ pub struct Item {
     required_skill: Skill,
     required_skill_rank: i32,
     required_spell: i32,
-    required_honor_rank: PvpRank,
-    required_city_rank: i32,
     required_faction: Faction,
     required_reputation_rank: i32,
     max_count: i32,
@@ -58,7 +56,6 @@ pub struct Item {
     scaling_stat_distribution: i32,
     scaling_stat_value: i32,
     armor: i32,
-    holy_res: i32,
     fire_res: i32,
     nature_res: i32,
     frost_res: i32,
@@ -124,8 +121,6 @@ impl Item {
         required_skill: Skill,
         required_skill_rank: i32,
         required_spell: i32,
-        required_honor_rank: PvpRank,
-        required_city_rank: i32,
         required_faction: Faction,
         required_reputation_rank: i32,
         max_count: i32,
@@ -135,7 +130,6 @@ impl Item {
         scaling_stat_distribution: i32,
         scaling_stat_value: i32,
         armor: i32,
-        holy_res: i32,
         fire_res: i32,
         nature_res: i32,
         frost_res: i32,
@@ -262,8 +256,6 @@ impl Item {
             required_skill,
             required_skill_rank,
             required_spell,
-            required_honor_rank,
-            required_city_rank,
             required_faction,
             required_reputation_rank,
             max_count,
@@ -273,7 +265,6 @@ impl Item {
             scaling_stat_distribution,
             scaling_stat_value,
             armor,
-            holy_res,
             fire_res,
             nature_res,
             frost_res,
@@ -506,11 +497,11 @@ impl Item {
     }
 
     pub const fn required_honor_rank(&self) -> PvpRank {
-        self.required_honor_rank
+        PvpRank::NoRank
     }
 
     pub const fn required_city_rank(&self) -> i32 {
-        self.required_city_rank
+        0
     }
 
     pub const fn required_faction(&self) -> Faction {
@@ -550,7 +541,7 @@ impl Item {
     }
 
     pub const fn holy_res(&self) -> i32 {
-        self.holy_res
+        0
     }
 
     pub const fn fire_res(&self) -> i32 {
