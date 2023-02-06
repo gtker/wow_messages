@@ -139,7 +139,10 @@ pub struct WrathItem {
     pub duration: i32,
     pub item_limit_category: i32,
     pub holiday_id: i32,
+
+    #[allow(unused)] // This is used internally in cmangos, but has no utility outside of it
     pub script_name: String,
+
     pub disenchant_id: i32,
     pub food_type: i32,
     pub min_money_loot: i32,
@@ -244,7 +247,6 @@ impl WrathItem {
             Field::new("duration", Value::Int(self.duration)),
             Field::new("item_limit_category", Value::Int(self.item_limit_category)),
             Field::new("holiday_id", Value::Int(self.holiday_id)),
-            Field::new("script_name", Value::String(self.script_name)),
             Field::new("disenchant_id", Value::Int(self.disenchant_id)),
             Field::new("food_type", Value::Int(self.food_type)),
             Field::new("min_money_loot", Value::Int(self.min_money_loot)),

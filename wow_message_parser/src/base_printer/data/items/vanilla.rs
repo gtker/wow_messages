@@ -116,7 +116,10 @@ pub struct VanillaItem {
     pub area: Area,
     pub map: Map,
     pub bag_family: BagFamily,
+
+    #[allow(unused)] // This is used internally in cmangos, but has no utility outside of it
     pub script_name: String,
+
     pub disenchant_id: i32,
     pub food_type: i32,
     pub min_money_loot: i32,
@@ -203,7 +206,6 @@ impl VanillaItem {
             Field::new("area", Value::VanillaArea(self.area)),
             Field::new("map", Value::VanillaMap(self.map)),
             Field::new("bag_family", Value::VanillaBagFamily(self.bag_family)),
-            Field::new("script_name", Value::String(self.script_name)),
             Field::new("disenchant_id", Value::Int(self.disenchant_id)),
             Field::new("food_type", Value::Int(self.food_type)),
             Field::new("min_money_loot", Value::Int(self.min_money_loot)),

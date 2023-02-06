@@ -91,7 +91,6 @@ pub struct Item {
     pub duration: i32,
     pub item_limit_category: i32,
     pub holiday_id: i32,
-    pub script_name: &'static str,
     pub disenchant_id: i32,
     pub food_type: i32,
     pub min_money_loot: i32,
@@ -169,7 +168,6 @@ impl Item {
         duration: i32,
         item_limit_category: i32,
         holiday_id: i32,
-        script_name: &'static str,
         disenchant_id: i32,
         food_type: i32,
         min_money_loot: i32,
@@ -308,7 +306,6 @@ impl Item {
             duration,
             item_limit_category,
             holiday_id,
-            script_name,
             disenchant_id,
             food_type,
             min_money_loot,
@@ -685,10 +682,6 @@ impl Item {
 
     pub const fn holiday_id(&self) -> i32 {
         self.holiday_id
-    }
-
-    pub const fn script_name(&self) -> &'static str {
-        self.script_name
     }
 
     pub const fn disenchant_id(&self) -> i32 {

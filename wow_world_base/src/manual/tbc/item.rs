@@ -83,7 +83,6 @@ pub struct Item {
     pub gem_properties: i32,
     pub required_disenchant_skill: i32,
     pub armor_damage_modifier: f32,
-    pub script_name: &'static str,
     pub disenchant_id: i32,
     pub food_type: i32,
     pub min_money_loot: i32,
@@ -155,7 +154,6 @@ impl Item {
         gem_properties: i32,
         required_disenchant_skill: i32,
         armor_damage_modifier: f32,
-        script_name: &'static str,
         disenchant_id: i32,
         food_type: i32,
         min_money_loot: i32,
@@ -297,7 +295,6 @@ impl Item {
             gem_properties,
             required_disenchant_skill,
             armor_damage_modifier,
-            script_name,
             disenchant_id,
             food_type,
             min_money_loot,
@@ -662,10 +659,6 @@ impl Item {
 
     pub const fn armor_damage_modifier(&self) -> f32 {
         self.armor_damage_modifier
-    }
-
-    pub const fn script_name(&self) -> &'static str {
-        self.script_name
     }
 
     pub const fn disenchant_id(&self) -> i32 {

@@ -141,7 +141,10 @@ pub struct TbcItem {
     pub gem_properties: i32,
     pub required_disenchant_skill: i32,
     pub armor_damage_modifier: f32,
+
+    #[allow(unused)] // This is used internally in cmangos, but has no utility outside of it
     pub script_name: String,
+
     pub disenchant_id: i32,
     pub food_type: i32,
     pub min_money_loot: i32,
@@ -237,7 +240,6 @@ impl TbcItem {
                 "armor_damage_modifier",
                 Value::Float(self.armor_damage_modifier),
             ),
-            Field::new("script_name", Value::String(self.script_name)),
             Field::new("disenchant_id", Value::Int(self.disenchant_id)),
             Field::new("food_type", Value::Int(self.food_type)),
             Field::new("min_money_loot", Value::Int(self.min_money_loot)),

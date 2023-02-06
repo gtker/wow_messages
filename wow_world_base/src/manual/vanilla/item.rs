@@ -81,7 +81,6 @@ pub struct Item {
     pub area: Area,
     pub map: Map,
     pub bag_family: BagFamily,
-    pub script_name: &'static str,
     pub disenchant_id: i32,
     pub food_type: i32,
     pub min_money_loot: i32,
@@ -151,7 +150,6 @@ impl Item {
         area: Area,
         map: Map,
         bag_family: BagFamily,
-        script_name: &'static str,
         disenchant_id: i32,
         food_type: i32,
         min_money_loot: i32,
@@ -267,7 +265,6 @@ impl Item {
             area,
             map,
             bag_family,
-            script_name,
             disenchant_id,
             food_type,
             min_money_loot,
@@ -576,10 +573,6 @@ impl Item {
 
     pub const fn bag_family(&self) -> BagFamily {
         self.bag_family
-    }
-
-    pub const fn script_name(&self) -> &'static str {
-        self.script_name
     }
 
     pub const fn disenchant_id(&self) -> i32 {
