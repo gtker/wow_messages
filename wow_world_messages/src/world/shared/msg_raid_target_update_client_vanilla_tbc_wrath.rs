@@ -7,14 +7,14 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L35):
 /// ```text
 /// cmsg MSG_RAID_TARGET_UPDATE_Client = 0x0321 {
-///     RaidTargetIndex index;
-///     if (index != REQUEST_ICONS) {
+///     RaidTargetIndex target_index;
+///     if (target_index != REQUEST_ICONS) {
 ///         Guid target;
 ///     }
 /// }
 /// ```
 pub struct MSG_RAID_TARGET_UPDATE_Client {
-    pub index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex,
+    pub target_index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex,
 }
 
 impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
@@ -26,10 +26,10 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         let size_assert_header_size = w.len();
-        // index: RaidTargetIndex
-        w.write_all(&(self.index.as_int() as u8).to_le_bytes())?;
+        // target_index: RaidTargetIndex
+        w.write_all(&(self.target_index.as_int() as u8).to_le_bytes())?;
 
-        match &self.index {
+        match &self.target_index {
             MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
                 target,
             } => {
@@ -104,10 +104,10 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0321, size: body_size as u32 });
         }
 
-        // index: RaidTargetIndex
-        let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
+        // target_index: RaidTargetIndex
+        let target_index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
 
-        let index_if = match index {
+        let target_index_if = match target_index {
             RaidTargetIndex::Unknown0 => {
                 // target: Guid
                 let target = Guid::read(r)?;
@@ -184,7 +184,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
         };
 
         Ok(Self {
-            index: index_if,
+            target_index: target_index_if,
         })
     }
 
@@ -200,7 +200,7 @@ impl crate::wrath::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 
 impl MSG_RAID_TARGET_UPDATE_Client {
     pub(crate) fn size(&self) -> usize {
-        self.index.size() // index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex
+        self.target_index.size() // target_index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex
     }
 }
 

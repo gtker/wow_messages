@@ -3491,8 +3491,8 @@
                 }
             }
             else {
-                ptvcursor_add_ret_uint(ptv, hf_woww_raid_target_index, 1, ENC_LITTLE_ENDIAN, &index);
-                if (index != RAID_TARGET_INDEX_REQUEST_ICONS) {
+                ptvcursor_add_ret_uint(ptv, hf_woww_raid_target_index, 1, ENC_LITTLE_ENDIAN, &target_index);
+                if (target_index != RAID_TARGET_INDEX_REQUEST_ICONS) {
                     ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
                 }
             }
