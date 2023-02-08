@@ -5,7 +5,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::Writer;
-use crate::wireshark_printer::types::{WiresharkMember, WiresharkObject};
+use crate::wireshark_printer::types::{WiresharkMember, WiresharkObject, WiresharkType};
 use crate::wireshark_printer::{
     clean_opcode_name, enum_name, enum_strings, enumerator_name, is_client_name, is_server_name,
     name_to_hf, pretty_name, server_to_client_name, ui_name,
@@ -149,9 +149,7 @@ fn print_if_statement(
             s.w_no_indent(" || ");
         }
 
-        s.w_no_indent(format!(
-            "{name} {op} {enumerator}"
-        ));
+        s.w_no_indent(format!("{name} {op} {enumerator}"));
     }
 
     s.wln_no_indent(") {");
@@ -179,9 +177,7 @@ fn print_if_statement(
                 s.w(" || ");
             }
 
-            s.w_no_indent(format!(
-                "{name} {op} {enumerator}"
-            ));
+            s.w_no_indent(format!("{name} {op} {enumerator}"));
         }
 
         s.wln_no_indent(") {");
@@ -236,17 +232,13 @@ fn print_definition(
                     var_name = d.name(),
                 ));
             } else {
-                s.wln(format!(
-                    "ptvcursor_add(ptv, {name}, {len}, {enc});",
-                ));
+                s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
             }
             true
         }
         Type::Guid => {
             let name = w.unwrap().name();
-            s.wln(format!(
-                "ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",
-            ));
+            s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));
             true
         }
         Type::Bool(i) => {
@@ -267,9 +259,7 @@ fn print_definition(
         }
         Type::DateTime => {
             let name = w.unwrap().name();
-            s.wln(format!(
-                "ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",
-            ));
+            s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
             true
         }
         Type::FloatingPoint(i) => {
@@ -277,9 +267,7 @@ fn print_definition(
             let len = i.size();
             let enc = i.wireshark_endian_str();
 
-            s.wln(format!(
-                "ptvcursor_add(ptv, {name}, {len}, {enc});",
-            ));
+            s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
             true
         }
         Type::CString => {
@@ -339,15 +327,11 @@ fn print_definition(
                     let len = i.size();
                     let enc = i.wireshark_endian_str();
 
-                    s.wln(format!(
-                        "ptvcursor_add(ptv, {name}, {len}, {enc});",
-                    ));
+                    s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
                 }
                 ArrayType::Guid => {
                     let name = w.unwrap().name();
-                    s.wln(format!(
-                        "ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",
-                    ));
+                    s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));
                 }
                 ArrayType::Struct(c) => {
                     if !print_container(s, o, wo, variables, c) {
@@ -435,9 +419,7 @@ fn print_definer(
             "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{variable_name});",
         ));
     } else {
-        s.wln(format!(
-            "ptvcursor_add(ptv, {name}, {len}, {enc});",
-        ));
+        s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
     }
 }
 
@@ -458,7 +440,16 @@ pub(crate) fn print_register_info(w: &WiresharkObject) -> Writer {
         s.inc_indent();
 
         let enum_strings = if let Some(e) = m.has_enum_strings() {
-            format!("VALS({})", enum_strings(e.name()))
+            let vals = if matches!(
+                m.ty(),
+                WiresharkType::Enum(_, IntegerType::U64(_))
+                    | WiresharkType::Enum(_, IntegerType::I64(_))
+            ) {
+                "VALS64"
+            } else {
+                "VALS"
+            };
+            format!("{vals}({})", enum_strings(e.name()))
         } else {
             "NULL".to_string()
         };
@@ -548,8 +539,17 @@ fn print_typedef(s: &mut Writer, e: &Definer) {
 fn print_enum(s: &mut Writer, e: &Definer) {
     print_typedef(s, e);
 
+    let value_string = if matches!(e.ty(), &IntegerType::U64(_) | &IntegerType::I64(_)) {
+        "val64_string"
+    } else {
+        "value_string"
+    };
+
     s.body_closing_with(
-        format!("static const value_string {}[] = ", enum_strings(e.name())),
+        format!(
+            "static const {value_string} {}[] = ",
+            enum_strings(e.name())
+        ),
         |s| {
             for enumerator in e.fields() {
                 s.wln(format!(

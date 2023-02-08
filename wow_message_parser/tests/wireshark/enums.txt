@@ -2955,24 +2955,6 @@ static const value_string e_inventory_type_strings[] =  {
 };
 
 typedef enum {
-    COMPRESSED_MOVE_OPCODE_SMSG_MONSTER_MOVE = 0x0DD,
-    COMPRESSED_MOVE_OPCODE_SMSG_MONSTER_MOVE_TRANSPORT = 0x2AE,
-    COMPRESSED_MOVE_OPCODE_SMSG_SPLINE_SET_RUN_SPEED = 0x2FE,
-    COMPRESSED_MOVE_OPCODE_SMSG_SPLINE_MOVE_UNROOT = 0x304,
-    COMPRESSED_MOVE_OPCODE_SMSG_SPLINE_MOVE_SET_RUN_MODE = 0x30D,
-    COMPRESSED_MOVE_OPCODE_SMSG_SPLINE_MOVE_SET_WALK_MODE = 0x30E,
-} e_compressed_move_opcode;
-static const value_string e_compressed_move_opcode_strings[] =  {
-    { COMPRESSED_MOVE_OPCODE_SMSG_MONSTER_MOVE, "Smsg Monster Move" },
-    { COMPRESSED_MOVE_OPCODE_SMSG_MONSTER_MOVE_TRANSPORT, "Smsg Monster Move Transport" },
-    { COMPRESSED_MOVE_OPCODE_SMSG_SPLINE_SET_RUN_SPEED, "Smsg Spline Set Run Speed" },
-    { COMPRESSED_MOVE_OPCODE_SMSG_SPLINE_MOVE_UNROOT, "Smsg Spline Move Unroot" },
-    { COMPRESSED_MOVE_OPCODE_SMSG_SPLINE_MOVE_SET_RUN_MODE, "Smsg Spline Move Set Run Mode" },
-    { COMPRESSED_MOVE_OPCODE_SMSG_SPLINE_MOVE_SET_WALK_MODE, "Smsg Spline Move Set Walk Mode" },
-    { 0, NULL }
-};
-
-typedef enum {
     FACTION_NONE = 0x000,
     FACTION_PLAYER_HUMAN = 0x001,
     FACTION_PLAYER_ORC = 0x002,
@@ -5947,7 +5929,7 @@ typedef enum {
     ITEM_CLASS_AND_SUB_CLASS_PERMANENT = 0x000000000E,
     ITEM_CLASS_AND_SUB_CLASS_JUNK = 0x000000000F,
 } e_item_class_and_sub_class;
-static const value_string e_item_class_and_sub_class_strings[] =  {
+static const val64_string e_item_class_and_sub_class_strings[] =  {
     { ITEM_CLASS_AND_SUB_CLASS_CONSUMABLE, "Consumable" },
     { ITEM_CLASS_AND_SUB_CLASS_CHEESE_OR_BREAD_OBSOLETE, "Cheese Or Bread Obsolete" },
     { ITEM_CLASS_AND_SUB_CLASS_LIQUID_OBSOLETE, "Liquid Obsolete" },

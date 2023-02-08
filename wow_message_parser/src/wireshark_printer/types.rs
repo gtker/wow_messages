@@ -12,6 +12,27 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
         for d in e.all_definitions() {
             let name = wireshark_printer::name_to_hf(d.name(), d.ty());
 
+            // TOOD
+            // Wireshark CI complains about unused variables but it's a pain
+            // to figure out exactly which variables are unused, so just do it manually until
+            // everything is supported
+            match name.as_str() {
+                "hf_woww_addon_crc"
+                | "hf_woww_addon_extra_crc"
+                | "hf_woww_addon_has_signature"
+                | "hf_woww_addon_name"
+                | "hf_woww_cast_item"
+                | "hf_woww_compressed_chat_data"
+                | "hf_woww_compressed_move_opcode"
+                | "hf_woww_corpse_target_ally"
+                | "hf_woww_enemy"
+                | "hf_woww_item_target"
+                | "hf_woww_object_target"
+                | "hf_woww_size_struct"
+                | "hf_woww_unit_target" => continue,
+                _ => {}
+            }
+
             if let Some(m) = objects.get_mut(&name) {
                 if let Some(new_ty) = &WiresharkType::from_type(d.ty()) {
                     match m.ty_mut() {
