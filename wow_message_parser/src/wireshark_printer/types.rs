@@ -250,6 +250,9 @@ impl WiresharkType {
                 _ => "BASE_HEX_DEC",
             }
             .to_string(),
+            WiresharkType::Enum(_, IntegerType::U64(_) | IntegerType::I64(_)) => {
+                "BASE_HEX_DEC | BASE_VAL64_STRING".to_string()
+            }
             WiresharkType::Enum(_, _) | WiresharkType::Flag(_) => "BASE_HEX_DEC".to_string(),
         }
     }
