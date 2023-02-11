@@ -1,3 +1,4 @@
+#[allow(clippy::too_many_arguments)]
 pub(crate) mod constructors;
 #[allow(non_upper_case_globals)]
 mod data;
