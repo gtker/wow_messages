@@ -7,7 +7,7 @@ repository.workspace = true
 license.workspace = true
 
 [dependencies]
-wow_world_base = { path = "../wow_world_base" }
+wow_world_base.workspace = true
 
 [features]
 default = []
