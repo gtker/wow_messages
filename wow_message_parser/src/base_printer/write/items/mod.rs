@@ -250,7 +250,7 @@ fn get_default_values(
         let ty_name = if let Some(t) = value.1 {
             t.string_value()
         } else {
-            value.0.constructor_type_name()
+            value.0.const_variable_type_name()
         };
         let try_name = namer.try_next();
         let definition = get_const_definition(&try_name, ty_name, &value.0.to_string_value());
@@ -286,7 +286,7 @@ fn const_default_values(
         let ty_name = if let Some(t) = integer_size {
             t.string_value()
         } else {
-            value.constructor_type_name()
+            value.const_variable_type_name()
         };
 
         s.wln(get_const_definition(
