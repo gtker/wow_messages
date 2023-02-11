@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::tbc::LfgPlayer;
 use crate::tbc::LfgType;
 use std::io::{Write, Read};

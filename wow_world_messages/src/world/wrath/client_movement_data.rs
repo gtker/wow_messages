@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_use_item.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_use_item.wowm#L30):
 /// ```text
 /// enum ClientMovementData : u8 {

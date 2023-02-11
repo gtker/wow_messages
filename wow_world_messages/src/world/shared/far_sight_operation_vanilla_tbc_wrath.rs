@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_far_sight.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_far_sight.wowm#L3):
 /// ```text
 /// enum FarSightOperation : u8 {

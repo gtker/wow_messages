@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::tbc::ReferAFriendError;
 use std::io::{Write, Read};
 

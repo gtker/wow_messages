@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
 use crate::shared::loot_method_vanilla_tbc_wrath::LootMethod;

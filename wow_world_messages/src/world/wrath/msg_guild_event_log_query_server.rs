@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::wrath::GuildLogEvent;
 use std::io::{Write, Read};
 

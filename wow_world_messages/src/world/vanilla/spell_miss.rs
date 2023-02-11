@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::vanilla::SpellMissInfo;
 use std::io::{Write, Read};

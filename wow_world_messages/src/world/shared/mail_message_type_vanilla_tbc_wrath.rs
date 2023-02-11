@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_query_next_mail_time_server.wowm#L13):
 /// ```text
 /// enum MailMessageType : u32 {

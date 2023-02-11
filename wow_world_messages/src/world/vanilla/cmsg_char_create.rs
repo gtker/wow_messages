@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::Class;
 use crate::vanilla::Gender;
 use crate::vanilla::Race;

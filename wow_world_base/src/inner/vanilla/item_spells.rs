@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::SpellTriggerType;
 use std::io::{Write, Read};
 

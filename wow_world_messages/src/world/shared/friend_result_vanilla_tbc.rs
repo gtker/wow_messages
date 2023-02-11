@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_status.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_status.wowm#L1):
 /// ```text
 /// enum FriendResult : u8 {

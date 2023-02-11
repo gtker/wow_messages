@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlemaster_join_arena.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlemaster_join_arena.wowm#L1):
 /// ```text
 /// enum JoinArenaType : u8 {

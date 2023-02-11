@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
 use crate::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
 use std::io::{Write, Read};

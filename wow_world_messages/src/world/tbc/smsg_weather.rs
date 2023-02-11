@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::tbc::WeatherChangeType;
 use crate::tbc::WeatherType;
 use std::io::{Write, Read};

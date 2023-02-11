@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::tbc::GuildMember;
 use crate::tbc::GuildRights;
 use std::io::{Write, Read};

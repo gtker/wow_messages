@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
 use crate::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 use std::io::{Write, Read};

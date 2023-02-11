@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::wrath::GuildMember;
 use crate::wrath::GuildRights;
 use std::io::{Write, Read};

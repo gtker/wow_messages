@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::shared::petition_showlist_tbc_wrath::PetitionShowlist;
 use std::io::{Write, Read};

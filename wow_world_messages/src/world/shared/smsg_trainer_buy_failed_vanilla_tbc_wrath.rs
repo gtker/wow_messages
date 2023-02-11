@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
 use std::io::{Write, Read};

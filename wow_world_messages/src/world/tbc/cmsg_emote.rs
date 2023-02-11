@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::tbc::Emote;
 use std::io::{Write, Read};
 

@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::tbc::Area;
 use crate::tbc::Class;
 use crate::tbc::Gender;

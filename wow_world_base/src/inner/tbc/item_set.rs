@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/item_sets.wowm:350`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/item_sets.wowm#L350):
 /// ```text
 /// enum ItemSet : u16 {

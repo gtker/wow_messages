@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::PartyOperation;
 use crate::vanilla::PartyResult;
 use std::io::{Write, Read};

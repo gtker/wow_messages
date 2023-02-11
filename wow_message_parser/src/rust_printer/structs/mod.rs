@@ -39,8 +39,6 @@ pub(crate) fn print_struct(e: &Container, o: &Objects, version: Version) -> Writ
 }
 
 fn print_includes(s: &mut Writer, e: &Container, version: Version) {
-    s.wln("use std::convert::{TryFrom, TryInto};");
-
     if e.contains_guid_or_packed_guid() {
         s.wln("use crate::Guid;");
     }

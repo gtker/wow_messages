@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::wrath::ArenaTeamMember;
 use crate::wrath::ArenaType;
 use std::io::{Write, Read};

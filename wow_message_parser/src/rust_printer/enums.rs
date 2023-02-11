@@ -25,8 +25,6 @@ fn print_enum_inner(
 ) -> Writer {
     let mut s = Writer::new(&get_import_path(version));
 
-    includes(&mut s);
-
     declaration(&mut s, e, o, visibility_override);
 
     common_impls(&mut s, e, visibility_override);
@@ -38,12 +36,6 @@ fn print_enum_inner(
     print_from_or_try_from(&mut s, e);
 
     s
-}
-
-fn includes(s: &mut Writer) {
-    s.wln("use std::convert::{TryFrom, TryInto};");
-
-    s.newline();
 }
 
 fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_override: bool) {

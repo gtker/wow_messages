@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::vanilla::MonsterMove;
 use crate::vanilla::CompressedMoveOpcode;

@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::shared::friend_result_vanilla_tbc::FriendResult;
 use std::io::{Write, Read};

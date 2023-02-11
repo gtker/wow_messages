@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
 use std::io::{Write, Read};
 

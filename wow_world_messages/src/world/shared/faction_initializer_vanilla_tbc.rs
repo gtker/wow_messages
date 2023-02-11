@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::shared::faction_flag_vanilla_tbc::FactionFlag;
 use std::io::{Write, Read};
 

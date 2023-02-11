@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::wrath::Vector2dUnsigned;
 use crate::wrath::Area;
 use crate::wrath::Map;

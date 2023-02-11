@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
 use std::io::{Write, Read};

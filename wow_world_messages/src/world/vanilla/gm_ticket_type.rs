@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// vmangos: From GMTicketCategory.dbc
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/gamemaster_common.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/gamemaster_common.wowm#L14):

@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::tbc::ArenaTeamMember;
 use crate::tbc::ArenaType;
 use std::io::{Write, Read};

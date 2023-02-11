@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::ChatType;
 use crate::vanilla::Language;
 use std::io::{Write, Read};

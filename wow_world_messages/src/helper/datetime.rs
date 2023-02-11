@@ -145,7 +145,6 @@ impl<T: chrono::prelude::TimeZone> TryFrom<chrono::prelude::DateTime<T>> for Dat
 
     fn try_from(dt: chrono::prelude::DateTime<T>) -> Result<Self, Self::Error> {
         use chrono::prelude::*;
-        use std::convert::TryInto;
         let date_time = Self::new(
             (dt.year() - 2000)
                 .try_into()

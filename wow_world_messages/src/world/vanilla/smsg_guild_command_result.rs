@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::GuildCommand;
 use crate::vanilla::GuildCommandResult;
 use std::io::{Write, Read};

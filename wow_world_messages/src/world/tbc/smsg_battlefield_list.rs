@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::tbc::BattlegroundType;
 use std::io::{Write, Read};

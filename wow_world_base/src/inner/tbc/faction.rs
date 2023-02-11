@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/faction.wowm:358`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/faction.wowm#L358):
 /// ```text
 /// enum Faction : u16 {

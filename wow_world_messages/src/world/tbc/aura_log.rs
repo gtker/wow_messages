@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::tbc::AuraType;
 use crate::tbc::SpellSchool;
 use std::io::{Write, Read};

@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::Guid;
 use crate::shared::log_format_vanilla_tbc_wrath::LogFormat;
 use std::io::{Write, Read};

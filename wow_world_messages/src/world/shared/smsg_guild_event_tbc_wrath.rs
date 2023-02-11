@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::shared::guild_event_tbc_wrath::GuildEvent;
 use std::io::{Write, Read};
 

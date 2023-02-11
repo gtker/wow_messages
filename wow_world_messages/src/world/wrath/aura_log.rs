@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::wrath::AuraType;
 use crate::wrath::SpellSchool;
 use std::io::{Write, Read};

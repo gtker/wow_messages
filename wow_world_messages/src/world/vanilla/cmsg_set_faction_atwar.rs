@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::Faction;
 use crate::vanilla::FactionFlag;
 use std::io::{Write, Read};

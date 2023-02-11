@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::GuildEmblemResult;
 use std::io::{Write, Read};
 

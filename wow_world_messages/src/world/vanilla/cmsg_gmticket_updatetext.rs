@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::GmTicketType;
 use std::io::{Write, Read};
 

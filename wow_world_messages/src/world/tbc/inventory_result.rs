@@ -1,5 +1,3 @@
-use std::convert::{TryFrom, TryInto};
-
 /// mangos-tbc/mangosone: probably exist more
 ///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status.wowm#L1):

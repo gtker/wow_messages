@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::wrath::Emote;
 use std::io::{Write, Read};
 

@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::wrath::Area;
 use crate::wrath::Class;
 use crate::wrath::Gender;

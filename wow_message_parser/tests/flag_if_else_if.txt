@@ -1,4 +1,3 @@
-use std::convert::{TryFrom, TryInto};
 use crate::vanilla::SimpleFlag;
 use crate::vanilla::UpdateFlag;
 use std::io::{Write, Read};
