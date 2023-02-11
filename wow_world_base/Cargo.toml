@@ -1,7 +1,10 @@
 [package]
 name = "wow_world_base"
 version = "0.1.0"
-edition = "2018"
+edition.workspace = true
+authors.workspace = true
+repository.workspace = true
+license.workspace = true
 
 [features]
 extended = []
