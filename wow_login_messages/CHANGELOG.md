@@ -50,6 +50,6 @@ This functionality exposes a difference between the opcode and the body in a way
 * Initial release. This is very WIP and things are not guaranteed to be documented or actually work correctly.
 
 <!-- next-url -->
-[Unreleased]: https://github.com/gtker/wow_messages/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/gtker/wow_messages/releases/tag/v0.2.0
+[Unreleased]: https://github.com/gtker/wow_messages/compare/wow_login_messages-v0.2.0...HEAD
+[0.2.0]: https://github.com/gtker/wow_messages/releases/tag/wow_login_messages-v0.2.0
 [0.1.0]: https://github.com/gtker/wow_messages/tree/505efadbe332dee2bdd5d321242b7e5d2565d841
