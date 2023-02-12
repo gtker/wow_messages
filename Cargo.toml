@@ -17,4 +17,4 @@ repository = "https://www.github.com/gtker/wow_messages"
 authors = ["Gtker <github@gtker.com"]
 
 [workspace.dependencies]
-wow_world_base = { path = "wow_world_base" }
+wow_world_base = { path = "wow_world_base", default-features = false }
