@@ -50,7 +50,7 @@ impl GenericThing {
             "ItemSocket" => "c",
             "ItemStat" => "d",
             "Reagent" => "e",
-            "SpellEffect" => "f",
+            "SpellEffects" => "f",
             "Totem" => "g",
             "TotemCategory" => "h",
             v => unimplemented!("Unhandled array type {}", v),

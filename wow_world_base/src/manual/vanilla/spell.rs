@@ -65,7 +65,7 @@ pub struct Spell {
     prevention_type: i8,
     stance_bar_order: i8,
     reagents: [Reagent; 8],
-    effects: [SpellEffect; 3],
+    effects: [SpellEffects; 3],
     totems: [Totem; 2],
 }
 
@@ -291,7 +291,7 @@ impl Spell {
             ),
             ],
             effects: [
-            SpellEffect::new(
+            SpellEffects::new(
             effect1,
             effect_die_sides1,
             effect_base_dice1,
@@ -312,7 +312,7 @@ impl Spell {
             effect_points_per_combo_point1,
             dmg_multiplier1,
             ),
-            SpellEffect::new(
+            SpellEffects::new(
             effect2,
             effect_die_sides2,
             effect_base_dice2,
@@ -333,7 +333,7 @@ impl Spell {
             effect_points_per_combo_point2,
             dmg_multiplier2,
             ),
-            SpellEffect::new(
+            SpellEffects::new(
             effect3,
             effect_die_sides3,
             effect_base_dice3,
@@ -672,7 +672,7 @@ impl Spell {
         &self.reagents
     }
 
-    pub const fn effects(&self) -> &[SpellEffect; 3] {
+    pub const fn effects(&self) -> &[SpellEffects; 3] {
         &self.effects
     }
 
@@ -699,7 +699,7 @@ impl Reagent {
     }
 }
 #[derive(Debug, Copy, Clone)]
-pub struct SpellEffect {
+pub struct SpellEffects {
     pub effect: i32,
     pub die_sides: i32,
     pub base_dice: i32,
@@ -721,7 +721,7 @@ pub struct SpellEffect {
     pub damage_multiplier: f32,
 }
 
-impl SpellEffect {
+impl SpellEffects {
     pub const fn new(
         effect: i32,
         die_sides: i32,

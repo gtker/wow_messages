@@ -412,7 +412,7 @@ impl TbcSpell {
             ),
             Array::new(
                 "effects",
-                "SpellEffect",
+                "SpellEffects",
                 false,
                 vec![
                     vec![

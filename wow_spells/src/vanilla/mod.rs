@@ -13,7 +13,7 @@ pub use wow_world_base::vanilla::{
     AttributesEx4,
     Reagent,
     Spell,
-    SpellEffect,
+    SpellEffects,
     Totem,
 };
 

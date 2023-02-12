@@ -454,7 +454,7 @@ impl WrathSpell {
             ),
             Array::new(
                 "effects",
-                "SpellEffect",
+                "SpellEffects",
                 false,
                 vec![
                     vec![

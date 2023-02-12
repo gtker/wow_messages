@@ -8,7 +8,7 @@ use crate::find_and_data;
 pub use wow_world_base::wrath::{
     Reagent,
     Spell,
-    SpellEffect,
+    SpellEffects,
     Totem,
     TotemCategory,
 };

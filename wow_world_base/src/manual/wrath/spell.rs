@@ -77,7 +77,7 @@ pub struct Spell {
     is_server_side: u32,
     attributes_serverside: i8,
     reagents: [Reagent; 8],
-    effects: [SpellEffect; 3],
+    effects: [SpellEffects; 3],
     totems: [Totem; 2],
     totem_categories: [TotemCategory; 2],
 }
@@ -349,7 +349,7 @@ impl Spell {
             ),
             ],
             effects: [
-            SpellEffect::new(
+            SpellEffects::new(
             effect1,
             effect_die_sides1,
             effect_real_points_per_level1,
@@ -373,7 +373,7 @@ impl Spell {
             dmg_multiplier1,
             effect_bonus_coefficient1,
             ),
-            SpellEffect::new(
+            SpellEffects::new(
             effect2,
             effect_die_sides2,
             effect_real_points_per_level2,
@@ -397,7 +397,7 @@ impl Spell {
             dmg_multiplier2,
             effect_bonus_coefficient2,
             ),
-            SpellEffect::new(
+            SpellEffects::new(
             effect3,
             effect_die_sides3,
             effect_real_points_per_level3,
@@ -900,7 +900,7 @@ impl Spell {
         &self.reagents
     }
 
-    pub const fn effects(&self) -> &[SpellEffect; 3] {
+    pub const fn effects(&self) -> &[SpellEffects; 3] {
         &self.effects
     }
 
@@ -931,7 +931,7 @@ impl Reagent {
     }
 }
 #[derive(Debug, Copy, Clone)]
-pub struct SpellEffect {
+pub struct SpellEffects {
     pub effect: i32,
     pub die_sides: i32,
     pub real_points_per_level: f32,
@@ -956,7 +956,7 @@ pub struct SpellEffect {
     pub bonus_coefficient: f32,
 }
 
-impl SpellEffect {
+impl SpellEffects {
     pub const fn new(
         effect: i32,
         die_sides: i32,

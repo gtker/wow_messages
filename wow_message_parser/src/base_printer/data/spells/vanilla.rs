@@ -372,7 +372,7 @@ impl VanillaSpell {
             ),
             Array::new(
                 "effects",
-                "SpellEffect",
+                "SpellEffects",
                 false,
                 vec![
                     vec![
