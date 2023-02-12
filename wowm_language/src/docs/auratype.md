@@ -232,7 +232,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `MOD_RESISTANCE` | 22 (0x16) |  | vmangos: Handled by Aura::HandleAuraModResistance, changes the resistance for a unit the field Modifier::m_miscvalue decides which kind of resistance that should be changed, for possible values see SpellSchools.  \see SpellSchools |
 | `PERIODIC_TRIGGER_SPELL` | 23 (0x17) |  | vmangos: Currently just sets Aura::m_isPeriodic to apply and has a special case for Curse of the Plaguebringer. |
 | `PERIODIC_ENERGIZE` | 24 (0x18) |  | vmangos: Just sets Aura::m_isPeriodic to apply |
-| `MOD_PACIFY` | 25 (0x19) |  | vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: http://classic.wowhead.com/spell=6462 |
+| `MOD_PACIFY` | 25 (0x19) |  | vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: `http://classic.wowhead.com/spell=6462` |
 | `MOD_ROOT` | 26 (0x1A) |  | vmangos: Roots or unroots the target |
 | `MOD_SILENCE` | 27 (0x1B) |  | vmangos: Silences the target and stops and spell casts that should be stopped, they have the flag SpellPreventionType::SPELL_PREVENTION_TYPE_SILENCE |
 | `REFLECT_SPELLS` | 28 (0x1C) |  |  |

@@ -73,7 +73,7 @@ enum AuraType : u32 {
         comment = "vmangos: Just sets Aura::m_isPeriodic to apply";
     }
     MOD_PACIFY = 25 {
-        comment = "vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: http://classic.wowhead.com/spell=6462";
+        comment = "vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: `http://classic.wowhead.com/spell=6462`";
     }
     MOD_ROOT = 26 {
         comment = "vmangos: Roots or unroots the target";

@@ -261,7 +261,7 @@ pub enum AuraType {
     /// vmangos: Just sets Aura::m_isPeriodic to apply
     ///
     PeriodicEnergize,
-    /// vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: http://classic.wowhead.com/spell=6462
+    /// vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: `http://classic.wowhead.com/spell=6462`
     ///
     ModPacify,
     /// vmangos: Roots or unroots the target
