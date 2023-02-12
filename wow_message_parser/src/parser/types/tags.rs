@@ -349,7 +349,7 @@ pub(crate) struct MemberTags {
     comment: Option<TagString>,
     display: Option<String>,
 
-    skip_serialize: Option<bool>,
+    skip_serialize: bool,
 }
 
 impl MemberTags {
@@ -358,7 +358,7 @@ impl MemberTags {
         compressed: Option<String>,
         comment: Option<TagString>,
         display: Option<String>,
-        skip_serialize: Option<bool>,
+        skip_serialize: bool,
     ) -> Self {
         Self {
             description,
@@ -386,7 +386,7 @@ impl MemberTags {
     }
 
     pub(crate) fn skip_serialize(&self) -> bool {
-        self.skip_serialize.unwrap_or(false)
+        self.skip_serialize
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {

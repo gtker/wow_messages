@@ -20,17 +20,17 @@ pub(crate) struct ParsedTags {
     display: Option<String>,
     paste_versions: BTreeSet<WorldVersion>,
 
-    skip_serialize: Option<bool>,
-    is_test: Option<bool>,
-    skip: Option<bool>,
-    unimplemented: Option<bool>,
-    rust_base_ty: Option<bool>,
-    zero_is_always_valid: Option<bool>,
+    skip_serialize: BoolTag,
+    is_test: BoolTag,
+    skip: BoolTag,
+    unimplemented: BoolTag,
+    rust_base_ty: BoolTag,
+    zero_is_always_valid: BoolTag,
 }
 
 impl ParsedTags {
     pub(crate) fn new() -> Self {
-        Self::default()
+        Default::default()
     }
 
     pub(crate) fn append(&mut self, mut t: ParsedTags) {
@@ -56,24 +56,12 @@ impl ParsedTags {
 
         self.paste_versions.append(&mut t.paste_versions);
 
-        if let Some(v) = t.skip_serialize {
-            self.skip_serialize = Some(v)
-        }
-        if let Some(v) = t.is_test {
-            self.is_test = Some(v)
-        }
-        if let Some(v) = t.skip {
-            self.skip = Some(v)
-        }
-        if let Some(v) = t.unimplemented {
-            self.unimplemented = Some(v)
-        }
-        if let Some(v) = t.rust_base_ty {
-            self.rust_base_ty = Some(v)
-        }
-        if let Some(v) = t.zero_is_always_valid {
-            self.zero_is_always_valid = Some(v);
-        }
+        self.skip_serialize.append(t.skip_serialize);
+        self.is_test.append(t.is_test);
+        self.skip.append(t.skip);
+        self.unimplemented.append(t.unimplemented);
+        self.rust_base_ty.append(t.rust_base_ty);
+        self.zero_is_always_valid.append(t.zero_is_always_valid);
     }
 
     pub(crate) fn into_tags(
@@ -108,11 +96,12 @@ impl ParsedTags {
             } else {
                 false
             },
-            self.is_test.unwrap_or(false),
-            self.skip.unwrap_or(false),
-            self.unimplemented.unwrap_or(false),
-            self.rust_base_ty.unwrap_or(rust_base_type_default),
-            self.zero_is_always_valid.unwrap_or(false),
+            self.is_test.into_bool(),
+            self.skip.into_bool(),
+            self.unimplemented.into_bool(),
+            self.rust_base_ty
+                .into_bool_with_default(rust_base_type_default),
+            self.zero_is_always_valid.into_bool(),
         )
     }
 
@@ -122,7 +111,7 @@ impl ParsedTags {
             self.compressed,
             self.comment,
             self.display,
-            self.skip_serialize,
+            self.skip_serialize.into_bool(),
         )
     }
 
@@ -204,7 +193,7 @@ impl ParsedTags {
         } else if key == COMPRESSED {
             self.compressed = Some(value.to_owned());
         } else if key == SKIP_SERIALIZE {
-            self.skip_serialize = Some(value.eq("true"))
+            self.skip_serialize.insert(value);
         } else if key == COMMENT {
             if let Some(comment) = &mut self.comment {
                 comment.add(value);
@@ -216,15 +205,74 @@ impl ParsedTags {
         } else if key == DISPLAY {
             self.display = Some(value.to_string());
         } else if key == TEST_STR {
-            self.is_test = Some(value.eq("true"));
+            self.is_test.insert(value);
         } else if key == SKIP_STR {
-            self.skip = Some(value.eq("true"));
+            self.skip.insert(value);
         } else if key == UNIMPLEMENTED {
-            self.unimplemented = Some(value.eq("true"));
+            self.unimplemented.insert(value);
         } else if key == RUST_BASE_TYPE {
-            self.rust_base_ty = Some(value.eq("true"));
+            self.rust_base_ty.insert(value);
         } else if key == ZERO_IS_ALWAYS_VALID {
-            self.zero_is_always_valid = Some(value.eq("true"));
+            self.zero_is_always_valid.insert(value);
+        }
+    }
+}
+
+#[derive(Debug, Eq, PartialEq, Clone, Default)]
+pub(crate) struct BoolTag {
+    inner: Option<bool>,
+}
+
+impl BoolTag {
+    pub fn insert(&mut self, s: &str) {
+        let value = if s == "true" {
+            true
+        } else if s == "false" {
+            false
+        } else {
+            panic!("invalid value for tag: '{}'", s);
+        };
+
+        if let Some(v) = self.inner {
+            assert_eq!(
+                v, value,
+                "invalid overwrite for BoolTag, overwriting '{}' with '{}'",
+                v, value
+            );
+        } else {
+            self.inner = Some(value);
+        }
+    }
+
+    pub fn append(&mut self, other: Self) {
+        if let Some(v) = self.inner {
+            if let Some(value) = other.inner {
+                assert_eq!(
+                    v, value,
+                    "invalid overwrite for BoolTag, overwriting '{}' with '{}'",
+                    v, value
+                );
+            }
+        } else {
+            if let Some(value) = other.inner {
+                self.inner = Some(value);
+            }
+        }
+    }
+
+    pub fn into_bool(self) -> bool {
+        if let Some(v) = self.inner {
+            v
+        } else {
+            false
+        }
+    }
+
+    pub fn into_bool_with_default(self, default: bool) -> bool {
+        if let Some(v) = self.inner {
+            v
+        } else {
+            default
         }
     }
 }
