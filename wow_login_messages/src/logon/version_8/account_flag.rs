@@ -18,9 +18,9 @@ impl AccountFlag {
         Self { inner }
     }
 
-    pub(crate) const GM: u32 = 0x01;
-    pub(crate) const TRIAL: u32 = 0x08;
-    pub(crate) const PROPASS: u32 = 0x800000;
+    pub const GM: u32 = 0x01;
+    pub const TRIAL: u32 = 0x08;
+    pub const PROPASS: u32 = 0x800000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

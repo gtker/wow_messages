@@ -23,16 +23,16 @@ impl AuraFlag {
         Self { inner }
     }
 
-    pub(crate) const EMPTY: u8 = 0x00;
-    pub(crate) const EFFECT_1: u8 = 0x01;
-    pub(crate) const EFFECT_2: u8 = 0x02;
-    pub(crate) const EFFECT_3: u8 = 0x04;
-    pub(crate) const NOT_CASTER: u8 = 0x08;
-    pub(crate) const SET: u8 = 0x09;
-    pub(crate) const CANCELLABLE: u8 = 0x10;
-    pub(crate) const DURATION: u8 = 0x20;
-    pub(crate) const HIDE: u8 = 0x40;
-    pub(crate) const NEGATIVE: u8 = 0x80;
+    pub const EMPTY: u8 = 0x00;
+    pub const EFFECT_1: u8 = 0x01;
+    pub const EFFECT_2: u8 = 0x02;
+    pub const EFFECT_3: u8 = 0x04;
+    pub const NOT_CASTER: u8 = 0x08;
+    pub const SET: u8 = 0x09;
+    pub const CANCELLABLE: u8 = 0x10;
+    pub const DURATION: u8 = 0x20;
+    pub const HIDE: u8 = 0x40;
+    pub const NEGATIVE: u8 = 0x80;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

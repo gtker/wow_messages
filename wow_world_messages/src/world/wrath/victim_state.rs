@@ -22,15 +22,15 @@ impl VictimState {
         Self { inner }
     }
 
-    pub(crate) const INTACT: u8 = 0x00;
-    pub(crate) const HIT: u8 = 0x01;
-    pub(crate) const DODGE: u8 = 0x02;
-    pub(crate) const PARRY: u8 = 0x03;
-    pub(crate) const INTERRUPT: u8 = 0x04;
-    pub(crate) const BLOCKS: u8 = 0x05;
-    pub(crate) const EVADES: u8 = 0x06;
-    pub(crate) const IS_IMMUNE: u8 = 0x07;
-    pub(crate) const DEFLECTS: u8 = 0x08;
+    pub const INTACT: u8 = 0x00;
+    pub const HIT: u8 = 0x01;
+    pub const DODGE: u8 = 0x02;
+    pub const PARRY: u8 = 0x03;
+    pub const INTERRUPT: u8 = 0x04;
+    pub const BLOCKS: u8 = 0x05;
+    pub const EVADES: u8 = 0x06;
+    pub const IS_IMMUNE: u8 = 0x07;
+    pub const DEFLECTS: u8 = 0x08;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

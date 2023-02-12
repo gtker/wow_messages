@@ -30,22 +30,22 @@ impl BagFamily {
         Self { inner }
     }
 
-    pub(crate) const NONE: u32 = 0x00;
-    pub(crate) const ARROWS: u32 = 0x01;
-    pub(crate) const BULLETS: u32 = 0x02;
-    pub(crate) const SOUL_SHARDS: u32 = 0x04;
-    pub(crate) const LEATHERWORKING_SUPPLIES: u32 = 0x08;
-    pub(crate) const INSCRIPTION_SUPPLIES: u32 = 0x10;
-    pub(crate) const HERBS: u32 = 0x20;
-    pub(crate) const ENCHANTING_SUPPLIES: u32 = 0x40;
-    pub(crate) const ENGINEERING_SUPPLIES: u32 = 0x80;
-    pub(crate) const KEYS: u32 = 0x100;
-    pub(crate) const GEMS: u32 = 0x200;
-    pub(crate) const MINING_SUPPLIES: u32 = 0x400;
-    pub(crate) const SOULBOUND_EQUIPMENT: u32 = 0x800;
-    pub(crate) const VANITY_PETS: u32 = 0x1000;
-    pub(crate) const CURRENCY_TOKENS: u32 = 0x2000;
-    pub(crate) const QUEST_ITEMS: u32 = 0x4000;
+    pub const NONE: u32 = 0x00;
+    pub const ARROWS: u32 = 0x01;
+    pub const BULLETS: u32 = 0x02;
+    pub const SOUL_SHARDS: u32 = 0x04;
+    pub const LEATHERWORKING_SUPPLIES: u32 = 0x08;
+    pub const INSCRIPTION_SUPPLIES: u32 = 0x10;
+    pub const HERBS: u32 = 0x20;
+    pub const ENCHANTING_SUPPLIES: u32 = 0x40;
+    pub const ENGINEERING_SUPPLIES: u32 = 0x80;
+    pub const KEYS: u32 = 0x100;
+    pub const GEMS: u32 = 0x200;
+    pub const MINING_SUPPLIES: u32 = 0x400;
+    pub const SOULBOUND_EQUIPMENT: u32 = 0x800;
+    pub const VANITY_PETS: u32 = 0x1000;
+    pub const CURRENCY_TOKENS: u32 = 0x2000;
+    pub const QUEST_ITEMS: u32 = 0x4000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

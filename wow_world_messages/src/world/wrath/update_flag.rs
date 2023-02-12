@@ -24,17 +24,17 @@ impl UpdateFlag {
         Self { inner }
     }
 
-    pub(crate) const NONE: u16 = 0x00;
-    pub(crate) const SELF: u16 = 0x01;
-    pub(crate) const TRANSPORT: u16 = 0x02;
-    pub(crate) const HAS_ATTACKING_TARGET: u16 = 0x04;
-    pub(crate) const LOW_GUID: u16 = 0x08;
-    pub(crate) const HIGH_GUID: u16 = 0x10;
-    pub(crate) const LIVING: u16 = 0x20;
-    pub(crate) const HAS_POSITION: u16 = 0x40;
-    pub(crate) const VEHICLE: u16 = 0x80;
-    pub(crate) const POSITION: u16 = 0x100;
-    pub(crate) const ROTATION: u16 = 0x200;
+    pub const NONE: u16 = 0x00;
+    pub const SELF: u16 = 0x01;
+    pub const TRANSPORT: u16 = 0x02;
+    pub const HAS_ATTACKING_TARGET: u16 = 0x04;
+    pub const LOW_GUID: u16 = 0x08;
+    pub const HIGH_GUID: u16 = 0x10;
+    pub const LIVING: u16 = 0x20;
+    pub const HAS_POSITION: u16 = 0x40;
+    pub const VEHICLE: u16 = 0x80;
+    pub const POSITION: u16 = 0x100;
+    pub const ROTATION: u16 = 0x200;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

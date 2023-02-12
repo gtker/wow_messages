@@ -38,31 +38,31 @@ impl MovementFlags {
         Self { inner }
     }
 
-    pub(crate) const NONE: u32 = 0x00;
-    pub(crate) const FORWARD: u32 = 0x01;
-    pub(crate) const BACKWARD: u32 = 0x02;
-    pub(crate) const STRAFE_LEFT: u32 = 0x04;
-    pub(crate) const STRAFE_RIGHT: u32 = 0x08;
-    pub(crate) const TURN_LEFT: u32 = 0x10;
-    pub(crate) const TURN_RIGHT: u32 = 0x20;
-    pub(crate) const PITCH_UP: u32 = 0x40;
-    pub(crate) const PITCH_DOWN: u32 = 0x80;
-    pub(crate) const WALK_MODE: u32 = 0x100;
-    pub(crate) const ON_TRANSPORT: u32 = 0x200;
-    pub(crate) const LEVITATING: u32 = 0x400;
-    pub(crate) const FIXED_Z: u32 = 0x800;
-    pub(crate) const ROOT: u32 = 0x1000;
-    pub(crate) const JUMPING: u32 = 0x2000;
-    pub(crate) const FALLINGFAR: u32 = 0x4000;
-    pub(crate) const SWIMMING: u32 = 0x200000;
-    pub(crate) const SPLINE_ENABLED: u32 = 0x400000;
-    pub(crate) const CAN_FLY: u32 = 0x800000;
-    pub(crate) const FLYING: u32 = 0x1000000;
-    pub(crate) const ONTRANSPORT: u32 = 0x2000000;
-    pub(crate) const SPLINE_ELEVATION: u32 = 0x4000000;
-    pub(crate) const WATERWALKING: u32 = 0x10000000;
-    pub(crate) const SAFE_FALL: u32 = 0x20000000;
-    pub(crate) const HOVER: u32 = 0x40000000;
+    pub const NONE: u32 = 0x00;
+    pub const FORWARD: u32 = 0x01;
+    pub const BACKWARD: u32 = 0x02;
+    pub const STRAFE_LEFT: u32 = 0x04;
+    pub const STRAFE_RIGHT: u32 = 0x08;
+    pub const TURN_LEFT: u32 = 0x10;
+    pub const TURN_RIGHT: u32 = 0x20;
+    pub const PITCH_UP: u32 = 0x40;
+    pub const PITCH_DOWN: u32 = 0x80;
+    pub const WALK_MODE: u32 = 0x100;
+    pub const ON_TRANSPORT: u32 = 0x200;
+    pub const LEVITATING: u32 = 0x400;
+    pub const FIXED_Z: u32 = 0x800;
+    pub const ROOT: u32 = 0x1000;
+    pub const JUMPING: u32 = 0x2000;
+    pub const FALLINGFAR: u32 = 0x4000;
+    pub const SWIMMING: u32 = 0x200000;
+    pub const SPLINE_ENABLED: u32 = 0x400000;
+    pub const CAN_FLY: u32 = 0x800000;
+    pub const FLYING: u32 = 0x1000000;
+    pub const ONTRANSPORT: u32 = 0x2000000;
+    pub const SPLINE_ELEVATION: u32 = 0x4000000;
+    pub const WATERWALKING: u32 = 0x10000000;
+    pub const SAFE_FALL: u32 = 0x20000000;
+    pub const HOVER: u32 = 0x40000000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

@@ -30,23 +30,23 @@ impl ExtraMovementFlags {
         Self { inner }
     }
 
-    pub(crate) const NONE: u16 = 0x00;
-    pub(crate) const NO_STRAFE: u16 = 0x01;
-    pub(crate) const NO_JUMPING: u16 = 0x02;
-    pub(crate) const UNK3: u16 = 0x04;
-    pub(crate) const FULL_SPEED_TURNING: u16 = 0x08;
-    pub(crate) const FULL_SPEED_PITCHING: u16 = 0x10;
-    pub(crate) const ALWAYS_ALLOW_PITCHING: u16 = 0x20;
-    pub(crate) const UNK7: u16 = 0x40;
-    pub(crate) const UNK8: u16 = 0x80;
-    pub(crate) const UNK9: u16 = 0x100;
-    pub(crate) const UNK10: u16 = 0x200;
-    pub(crate) const INTERPOLATED_MOVEMENT: u16 = 0x400;
-    pub(crate) const INTERPOLATED_TURNING: u16 = 0x800;
-    pub(crate) const INTERPOLATED_PITCHING: u16 = 0x1000;
-    pub(crate) const UNK14: u16 = 0x2000;
-    pub(crate) const UNK15: u16 = 0x4000;
-    pub(crate) const UNK16: u16 = 0x8000;
+    pub const NONE: u16 = 0x00;
+    pub const NO_STRAFE: u16 = 0x01;
+    pub const NO_JUMPING: u16 = 0x02;
+    pub const UNK3: u16 = 0x04;
+    pub const FULL_SPEED_TURNING: u16 = 0x08;
+    pub const FULL_SPEED_PITCHING: u16 = 0x10;
+    pub const ALWAYS_ALLOW_PITCHING: u16 = 0x20;
+    pub const UNK7: u16 = 0x40;
+    pub const UNK8: u16 = 0x80;
+    pub const UNK9: u16 = 0x100;
+    pub const UNK10: u16 = 0x200;
+    pub const INTERPOLATED_MOVEMENT: u16 = 0x400;
+    pub const INTERPOLATED_TURNING: u16 = 0x800;
+    pub const INTERPOLATED_PITCHING: u16 = 0x1000;
+    pub const UNK14: u16 = 0x2000;
+    pub const UNK15: u16 = 0x4000;
+    pub const UNK16: u16 = 0x8000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

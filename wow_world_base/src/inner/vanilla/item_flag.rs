@@ -31,23 +31,23 @@ impl ItemFlag {
         Self { inner }
     }
 
-    pub(crate) const NONE: u32 = 0x00;
-    pub(crate) const NO_PICKUP: u32 = 0x01;
-    pub(crate) const CONJURED: u32 = 0x02;
-    pub(crate) const LOOTABLE: u32 = 0x04;
-    pub(crate) const DEPRECATED: u32 = 0x10;
-    pub(crate) const INDESTRUCTIBLE: u32 = 0x20;
-    pub(crate) const PLAYER_CAST: u32 = 0x40;
-    pub(crate) const NO_EQUIP_COOLDOWN: u32 = 0x80;
-    pub(crate) const INT_BONUS_INSTEAD: u32 = 0x100;
-    pub(crate) const WRAPPER: u32 = 0x200;
-    pub(crate) const IGNORE_BAG_SPACE: u32 = 0x400;
-    pub(crate) const PARTY_LOOT: u32 = 0x800;
-    pub(crate) const CHARTER: u32 = 0x2000;
-    pub(crate) const HAS_TEXT: u32 = 0x4000;
-    pub(crate) const NO_DISENCHANT: u32 = 0x8000;
-    pub(crate) const REAL_DURATION: u32 = 0x10000;
-    pub(crate) const NO_CREATOR: u32 = 0x20000;
+    pub const NONE: u32 = 0x00;
+    pub const NO_PICKUP: u32 = 0x01;
+    pub const CONJURED: u32 = 0x02;
+    pub const LOOTABLE: u32 = 0x04;
+    pub const DEPRECATED: u32 = 0x10;
+    pub const INDESTRUCTIBLE: u32 = 0x20;
+    pub const PLAYER_CAST: u32 = 0x40;
+    pub const NO_EQUIP_COOLDOWN: u32 = 0x80;
+    pub const INT_BONUS_INSTEAD: u32 = 0x100;
+    pub const WRAPPER: u32 = 0x200;
+    pub const IGNORE_BAG_SPACE: u32 = 0x400;
+    pub const PARTY_LOOT: u32 = 0x800;
+    pub const CHARTER: u32 = 0x2000;
+    pub const HAS_TEXT: u32 = 0x4000;
+    pub const NO_DISENCHANT: u32 = 0x8000;
+    pub const REAL_DURATION: u32 = 0x10000;
+    pub const NO_CREATOR: u32 = 0x20000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

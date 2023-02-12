@@ -22,15 +22,15 @@ impl BillingPlanFlags {
         Self { inner }
     }
 
-    pub(crate) const NONE: u8 = 0x00;
-    pub(crate) const UNUSED: u8 = 0x01;
-    pub(crate) const RECURRING_BILL: u8 = 0x02;
-    pub(crate) const FREE_TRIAL: u8 = 0x04;
-    pub(crate) const IGR: u8 = 0x08;
-    pub(crate) const USAGE: u8 = 0x10;
-    pub(crate) const TIME_MIXTURE: u8 = 0x20;
-    pub(crate) const RESTRICTED: u8 = 0x40;
-    pub(crate) const ENABLE_CAIS: u8 = 0x80;
+    pub const NONE: u8 = 0x00;
+    pub const UNUSED: u8 = 0x01;
+    pub const RECURRING_BILL: u8 = 0x02;
+    pub const FREE_TRIAL: u8 = 0x04;
+    pub const IGR: u8 = 0x08;
+    pub const USAGE: u8 = 0x10;
+    pub const TIME_MIXTURE: u8 = 0x20;
+    pub const RESTRICTED: u8 = 0x40;
+    pub const ENABLE_CAIS: u8 = 0x80;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

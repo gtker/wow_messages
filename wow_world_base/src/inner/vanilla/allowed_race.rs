@@ -24,16 +24,16 @@ impl AllowedRace {
         Self { inner }
     }
 
-    pub(crate) const ALL: u32 = 0x00;
-    pub(crate) const HUMAN: u32 = 0x01;
-    pub(crate) const ORC: u32 = 0x02;
-    pub(crate) const DWARF: u32 = 0x04;
-    pub(crate) const NIGHT_ELF: u32 = 0x08;
-    pub(crate) const UNDEAD: u32 = 0x10;
-    pub(crate) const TAUREN: u32 = 0x20;
-    pub(crate) const GNOME: u32 = 0x40;
-    pub(crate) const TROLL: u32 = 0x80;
-    pub(crate) const GOBLIN: u32 = 0x100;
+    pub const ALL: u32 = 0x00;
+    pub const HUMAN: u32 = 0x01;
+    pub const ORC: u32 = 0x02;
+    pub const DWARF: u32 = 0x04;
+    pub const NIGHT_ELF: u32 = 0x08;
+    pub const UNDEAD: u32 = 0x10;
+    pub const TAUREN: u32 = 0x20;
+    pub const GNOME: u32 = 0x40;
+    pub const TROLL: u32 = 0x80;
+    pub const GOBLIN: u32 = 0x100;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

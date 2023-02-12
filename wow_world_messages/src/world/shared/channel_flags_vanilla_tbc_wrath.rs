@@ -21,14 +21,14 @@ impl ChannelFlags {
         Self { inner }
     }
 
-    pub(crate) const NONE: u8 = 0x00;
-    pub(crate) const CUSTOM: u8 = 0x01;
-    pub(crate) const TRADE: u8 = 0x04;
-    pub(crate) const NOT_LFG: u8 = 0x08;
-    pub(crate) const GENERAL: u8 = 0x10;
-    pub(crate) const CITY: u8 = 0x20;
-    pub(crate) const LFG: u8 = 0x40;
-    pub(crate) const VOICE: u8 = 0x80;
+    pub const NONE: u8 = 0x00;
+    pub const CUSTOM: u8 = 0x01;
+    pub const TRADE: u8 = 0x04;
+    pub const NOT_LFG: u8 = 0x08;
+    pub const GENERAL: u8 = 0x10;
+    pub const CITY: u8 = 0x20;
+    pub const LFG: u8 = 0x40;
+    pub const VOICE: u8 = 0x80;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

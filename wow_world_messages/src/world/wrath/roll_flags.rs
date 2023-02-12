@@ -17,10 +17,10 @@ impl RollFlags {
         Self { inner }
     }
 
-    pub(crate) const PASS: u8 = 0x01;
-    pub(crate) const NEED: u8 = 0x02;
-    pub(crate) const GREED: u8 = 0x04;
-    pub(crate) const DISENCHANT: u8 = 0x08;
+    pub const PASS: u8 = 0x01;
+    pub const NEED: u8 = 0x02;
+    pub const GREED: u8 = 0x04;
+    pub const DISENCHANT: u8 = 0x08;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

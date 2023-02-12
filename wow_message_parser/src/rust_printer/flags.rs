@@ -71,7 +71,7 @@ fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
 fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
     for f in e.fields() {
         s.wln(format!(
-            "pub(crate) const {name}: {ty} = {value:#04x};",
+            "pub const {name}: {ty} = {value:#04x};",
             name = f.name(),
             ty = e.ty().rust_str(),
             value = f.value().int(),

@@ -22,15 +22,15 @@ impl LfgUpdateFlag {
         Self { inner }
     }
 
-    pub(crate) const NONE: u32 = 0x00;
-    pub(crate) const CHARACTER_INFO: u32 = 0x01;
-    pub(crate) const COMMENT: u32 = 0x02;
-    pub(crate) const GROUP_LEADER: u32 = 0x04;
-    pub(crate) const GROUP_GUID: u32 = 0x08;
-    pub(crate) const ROLES: u32 = 0x10;
-    pub(crate) const AREA: u32 = 0x20;
-    pub(crate) const STATUS: u32 = 0x40;
-    pub(crate) const BOUND: u32 = 0x80;
+    pub const NONE: u32 = 0x00;
+    pub const CHARACTER_INFO: u32 = 0x01;
+    pub const COMMENT: u32 = 0x02;
+    pub const GROUP_LEADER: u32 = 0x04;
+    pub const GROUP_GUID: u32 = 0x08;
+    pub const ROLES: u32 = 0x10;
+    pub const AREA: u32 = 0x20;
+    pub const STATUS: u32 = 0x40;
+    pub const BOUND: u32 = 0x80;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

@@ -19,12 +19,12 @@ impl RealmFlag {
         Self { inner }
     }
 
-    pub(crate) const NONE: u8 = 0x00;
-    pub(crate) const INVALID: u8 = 0x01;
-    pub(crate) const OFFLINE: u8 = 0x02;
-    pub(crate) const FORCE_BLUE_RECOMMENDED: u8 = 0x20;
-    pub(crate) const FORCE_GREEN_RECOMMENDED: u8 = 0x40;
-    pub(crate) const FORCE_RED_FULL: u8 = 0x80;
+    pub const NONE: u8 = 0x00;
+    pub const INVALID: u8 = 0x01;
+    pub const OFFLINE: u8 = 0x02;
+    pub const FORCE_BLUE_RECOMMENDED: u8 = 0x20;
+    pub const FORCE_GREEN_RECOMMENDED: u8 = 0x40;
+    pub const FORCE_RED_FULL: u8 = 0x80;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

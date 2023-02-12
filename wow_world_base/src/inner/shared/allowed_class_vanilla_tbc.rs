@@ -24,16 +24,16 @@ impl AllowedClass {
         Self { inner }
     }
 
-    pub(crate) const ALL: u32 = 0x00;
-    pub(crate) const WARRIOR: u32 = 0x01;
-    pub(crate) const PALADIN: u32 = 0x02;
-    pub(crate) const HUNTER: u32 = 0x04;
-    pub(crate) const ROGUE: u32 = 0x08;
-    pub(crate) const PRIEST: u32 = 0x10;
-    pub(crate) const SHAMAN: u32 = 0x40;
-    pub(crate) const MAGE: u32 = 0x80;
-    pub(crate) const WARLOCK: u32 = 0x100;
-    pub(crate) const DRUID: u32 = 0x400;
+    pub const ALL: u32 = 0x00;
+    pub const WARRIOR: u32 = 0x01;
+    pub const PALADIN: u32 = 0x02;
+    pub const HUNTER: u32 = 0x04;
+    pub const ROGUE: u32 = 0x08;
+    pub const PRIEST: u32 = 0x10;
+    pub const SHAMAN: u32 = 0x40;
+    pub const MAGE: u32 = 0x80;
+    pub const WARLOCK: u32 = 0x100;
+    pub const DRUID: u32 = 0x400;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

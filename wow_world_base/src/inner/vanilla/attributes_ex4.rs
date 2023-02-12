@@ -27,19 +27,19 @@ impl AttributesEx4 {
         Self { inner }
     }
 
-    pub(crate) const NONE: u32 = 0x00;
-    pub(crate) const NO_CAST_LOG: u32 = 0x01;
-    pub(crate) const CLASS_TRIGGER_ONLY_ON_TARGET: u32 = 0x02;
-    pub(crate) const AURA_EXPIRES_OFFLINE: u32 = 0x04;
-    pub(crate) const NO_HELPFUL_THREAT: u32 = 0x08;
-    pub(crate) const NO_HARMFUL_THREAT: u32 = 0x10;
-    pub(crate) const ALLOW_CLIENT_TARGETING: u32 = 0x20;
-    pub(crate) const CANNOT_BE_STOLEN: u32 = 0x40;
-    pub(crate) const ALLOW_CAST_WHILE_CASTING: u32 = 0x80;
-    pub(crate) const IGNORE_DAMAGE_TAKEN_MODIFIERS: u32 = 0x100;
-    pub(crate) const COMBAT_FEEDBACK_WHEN_USABLE: u32 = 0x200;
-    pub(crate) const WEAPON_SPEED_COST_SCALING: u32 = 0x400;
-    pub(crate) const NO_PARTIAL_IMMUNITY: u32 = 0x800;
+    pub const NONE: u32 = 0x00;
+    pub const NO_CAST_LOG: u32 = 0x01;
+    pub const CLASS_TRIGGER_ONLY_ON_TARGET: u32 = 0x02;
+    pub const AURA_EXPIRES_OFFLINE: u32 = 0x04;
+    pub const NO_HELPFUL_THREAT: u32 = 0x08;
+    pub const NO_HARMFUL_THREAT: u32 = 0x10;
+    pub const ALLOW_CLIENT_TARGETING: u32 = 0x20;
+    pub const CANNOT_BE_STOLEN: u32 = 0x40;
+    pub const ALLOW_CAST_WHILE_CASTING: u32 = 0x80;
+    pub const IGNORE_DAMAGE_TAKEN_MODIFIERS: u32 = 0x100;
+    pub const COMBAT_FEEDBACK_WHEN_USABLE: u32 = 0x200;
+    pub const WEAPON_SPEED_COST_SCALING: u32 = 0x400;
+    pub const NO_PARTIAL_IMMUNITY: u32 = 0x800;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

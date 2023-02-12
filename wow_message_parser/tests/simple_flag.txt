@@ -16,9 +16,9 @@ impl SimpleFlag {
         Self { inner }
     }
 
-    pub(crate) const ZERO: u8 = 0x00;
-    pub(crate) const ONE: u8 = 0x01;
-    pub(crate) const TWO: u8 = 0x02;
+    pub const ZERO: u8 = 0x00;
+    pub const ONE: u8 = 0x01;
+    pub const TWO: u8 = 0x02;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

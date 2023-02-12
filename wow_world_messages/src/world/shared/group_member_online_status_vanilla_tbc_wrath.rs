@@ -22,15 +22,15 @@ impl GroupMemberOnlineStatus {
         Self { inner }
     }
 
-    pub(crate) const OFFLINE: u8 = 0x00;
-    pub(crate) const ONLINE: u8 = 0x01;
-    pub(crate) const PVP: u8 = 0x02;
-    pub(crate) const DEAD: u8 = 0x04;
-    pub(crate) const GHOST: u8 = 0x08;
-    pub(crate) const PVP_FFA: u8 = 0x10;
-    pub(crate) const ZONE_OUT: u8 = 0x20;
-    pub(crate) const AFK: u8 = 0x40;
-    pub(crate) const DND: u8 = 0x80;
+    pub const OFFLINE: u8 = 0x00;
+    pub const ONLINE: u8 = 0x01;
+    pub const PVP: u8 = 0x02;
+    pub const DEAD: u8 = 0x04;
+    pub const GHOST: u8 = 0x08;
+    pub const PVP_FFA: u8 = 0x10;
+    pub const ZONE_OUT: u8 = 0x20;
+    pub const AFK: u8 = 0x40;
+    pub const DND: u8 = 0x80;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

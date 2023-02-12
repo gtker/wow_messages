@@ -20,13 +20,13 @@ impl ChannelMemberFlags {
         Self { inner }
     }
 
-    pub(crate) const NONE: u8 = 0x00;
-    pub(crate) const OWNER: u8 = 0x01;
-    pub(crate) const MODERATOR: u8 = 0x04;
-    pub(crate) const VOICED: u8 = 0x08;
-    pub(crate) const MUTED: u8 = 0x10;
-    pub(crate) const CUSTOM: u8 = 0x20;
-    pub(crate) const MICROPHONE_MUTE: u8 = 0x40;
+    pub const NONE: u8 = 0x00;
+    pub const OWNER: u8 = 0x01;
+    pub const MODERATOR: u8 = 0x04;
+    pub const VOICED: u8 = 0x08;
+    pub const MUTED: u8 = 0x10;
+    pub const CUSTOM: u8 = 0x20;
+    pub const MICROPHONE_MUTE: u8 = 0x40;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

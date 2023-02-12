@@ -18,11 +18,11 @@ impl RelationType {
         Self { inner }
     }
 
-    pub(crate) const NONE: u32 = 0x00;
-    pub(crate) const FRIEND: u32 = 0x01;
-    pub(crate) const IGNORED: u32 = 0x02;
-    pub(crate) const MUTED: u32 = 0x04;
-    pub(crate) const RECRUITAFRIEND: u32 = 0x08;
+    pub const NONE: u32 = 0x00;
+    pub const FRIEND: u32 = 0x01;
+    pub const IGNORED: u32 = 0x02;
+    pub const MUTED: u32 = 0x04;
+    pub const RECRUITAFRIEND: u32 = 0x08;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

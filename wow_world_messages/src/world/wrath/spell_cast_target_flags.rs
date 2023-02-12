@@ -35,28 +35,28 @@ impl SpellCastTargetFlags {
         Self { inner }
     }
 
-    pub(crate) const SELF: u32 = 0x00;
-    pub(crate) const UNUSED1: u32 = 0x01;
-    pub(crate) const UNIT: u32 = 0x02;
-    pub(crate) const UNIT_RAID: u32 = 0x04;
-    pub(crate) const UNIT_PARTY: u32 = 0x08;
-    pub(crate) const ITEM: u32 = 0x10;
-    pub(crate) const SOURCE_LOCATION: u32 = 0x20;
-    pub(crate) const DEST_LOCATION: u32 = 0x40;
-    pub(crate) const UNIT_ENEMY: u32 = 0x80;
-    pub(crate) const UNIT_ALLY: u32 = 0x100;
-    pub(crate) const CORPSE_ENEMY: u32 = 0x200;
-    pub(crate) const UNIT_DEAD: u32 = 0x400;
-    pub(crate) const GAMEOBJECT: u32 = 0x800;
-    pub(crate) const TRADE_ITEM: u32 = 0x1000;
-    pub(crate) const STRING: u32 = 0x2000;
-    pub(crate) const LOCKED: u32 = 0x4000;
-    pub(crate) const CORPSE_ALLY: u32 = 0x8000;
-    pub(crate) const UNIT_MINIPET: u32 = 0x10000;
-    pub(crate) const GLYPH_SLOT: u32 = 0x20000;
-    pub(crate) const DEST_TARGET: u32 = 0x40000;
-    pub(crate) const UNUSED20: u32 = 0x80000;
-    pub(crate) const UNIT_PASSENGER: u32 = 0x100000;
+    pub const SELF: u32 = 0x00;
+    pub const UNUSED1: u32 = 0x01;
+    pub const UNIT: u32 = 0x02;
+    pub const UNIT_RAID: u32 = 0x04;
+    pub const UNIT_PARTY: u32 = 0x08;
+    pub const ITEM: u32 = 0x10;
+    pub const SOURCE_LOCATION: u32 = 0x20;
+    pub const DEST_LOCATION: u32 = 0x40;
+    pub const UNIT_ENEMY: u32 = 0x80;
+    pub const UNIT_ALLY: u32 = 0x100;
+    pub const CORPSE_ENEMY: u32 = 0x200;
+    pub const UNIT_DEAD: u32 = 0x400;
+    pub const GAMEOBJECT: u32 = 0x800;
+    pub const TRADE_ITEM: u32 = 0x1000;
+    pub const STRING: u32 = 0x2000;
+    pub const LOCKED: u32 = 0x4000;
+    pub const CORPSE_ALLY: u32 = 0x8000;
+    pub const UNIT_MINIPET: u32 = 0x10000;
+    pub const GLYPH_SLOT: u32 = 0x20000;
+    pub const DEST_TARGET: u32 = 0x40000;
+    pub const UNUSED20: u32 = 0x80000;
+    pub const UNIT_PASSENGER: u32 = 0x100000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

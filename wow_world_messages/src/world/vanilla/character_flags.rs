@@ -19,12 +19,12 @@ impl CharacterFlags {
         Self { inner }
     }
 
-    pub(crate) const NONE: u32 = 0x00;
-    pub(crate) const LOCKED_FOR_TRANSFER: u32 = 0x04;
-    pub(crate) const HIDE_HELM: u32 = 0x400;
-    pub(crate) const HIDE_CLOAK: u32 = 0x800;
-    pub(crate) const GHOST: u32 = 0x2000;
-    pub(crate) const RENAME: u32 = 0x4000;
+    pub const NONE: u32 = 0x00;
+    pub const LOCKED_FOR_TRANSFER: u32 = 0x04;
+    pub const HIDE_HELM: u32 = 0x400;
+    pub const HIDE_CLOAK: u32 = 0x800;
+    pub const GHOST: u32 = 0x2000;
+    pub const RENAME: u32 = 0x4000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

@@ -32,25 +32,25 @@ impl GameobjectCastFlags {
         Self { inner }
     }
 
-    pub(crate) const LOCK_PLAYER_CAST_ANIM: u32 = 0x01;
-    pub(crate) const UNKNOWN2: u32 = 0x02;
-    pub(crate) const UNKNOWN4: u32 = 0x04;
-    pub(crate) const UNKNOWN8: u32 = 0x08;
-    pub(crate) const UNKNOWN16: u32 = 0x10;
-    pub(crate) const AMMO: u32 = 0x20;
-    pub(crate) const DEST_LOCATION: u32 = 0x40;
-    pub(crate) const ITEM_CASTER: u32 = 0x100;
-    pub(crate) const UNK200: u32 = 0x200;
-    pub(crate) const EXTRA_MESSAGE: u32 = 0x400;
-    pub(crate) const POWER_UPDATE: u32 = 0x800;
-    pub(crate) const UNK2000: u32 = 0x2000;
-    pub(crate) const UNK1000: u32 = 0x1000;
-    pub(crate) const UNK8000: u32 = 0x8000;
-    pub(crate) const ADJUST_MISSILE: u32 = 0x20000;
-    pub(crate) const UNK40000: u32 = 0x40000;
-    pub(crate) const VISUAL_CHAIN: u32 = 0x80000;
-    pub(crate) const RUNE_UPDATE: u32 = 0x200000;
-    pub(crate) const UNK400000: u32 = 0x400000;
+    pub const LOCK_PLAYER_CAST_ANIM: u32 = 0x01;
+    pub const UNKNOWN2: u32 = 0x02;
+    pub const UNKNOWN4: u32 = 0x04;
+    pub const UNKNOWN8: u32 = 0x08;
+    pub const UNKNOWN16: u32 = 0x10;
+    pub const AMMO: u32 = 0x20;
+    pub const DEST_LOCATION: u32 = 0x40;
+    pub const ITEM_CASTER: u32 = 0x100;
+    pub const UNK200: u32 = 0x200;
+    pub const EXTRA_MESSAGE: u32 = 0x400;
+    pub const POWER_UPDATE: u32 = 0x800;
+    pub const UNK2000: u32 = 0x2000;
+    pub const UNK1000: u32 = 0x1000;
+    pub const UNK8000: u32 = 0x8000;
+    pub const ADJUST_MISSILE: u32 = 0x20000;
+    pub const UNK40000: u32 = 0x40000;
+    pub const VISUAL_CHAIN: u32 = 0x80000;
+    pub const RUNE_UPDATE: u32 = 0x200000;
+    pub const UNK400000: u32 = 0x400000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }

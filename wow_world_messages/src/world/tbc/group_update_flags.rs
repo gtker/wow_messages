@@ -33,26 +33,26 @@ impl GroupUpdateFlags {
         Self { inner }
     }
 
-    pub(crate) const NONE: u32 = 0x00;
-    pub(crate) const STATUS: u32 = 0x01;
-    pub(crate) const CUR_HP: u32 = 0x02;
-    pub(crate) const MAX_HP: u32 = 0x04;
-    pub(crate) const POWER_TYPE: u32 = 0x08;
-    pub(crate) const CUR_POWER: u32 = 0x10;
-    pub(crate) const MAX_POWER: u32 = 0x20;
-    pub(crate) const LEVEL: u32 = 0x40;
-    pub(crate) const ZONE: u32 = 0x80;
-    pub(crate) const POSITION: u32 = 0x100;
-    pub(crate) const AURAS: u32 = 0x200;
-    pub(crate) const PET_GUID: u32 = 0x400;
-    pub(crate) const PET_NAME: u32 = 0x800;
-    pub(crate) const PET_MODEL_ID: u32 = 0x1000;
-    pub(crate) const PET_CUR_HP: u32 = 0x2000;
-    pub(crate) const PET_MAX_HP: u32 = 0x4000;
-    pub(crate) const PET_POWER_TYPE: u32 = 0x8000;
-    pub(crate) const PET_CUR_POWER: u32 = 0x10000;
-    pub(crate) const PET_MAX_POWER: u32 = 0x20000;
-    pub(crate) const PET_AURAS: u32 = 0x40000;
+    pub const NONE: u32 = 0x00;
+    pub const STATUS: u32 = 0x01;
+    pub const CUR_HP: u32 = 0x02;
+    pub const MAX_HP: u32 = 0x04;
+    pub const POWER_TYPE: u32 = 0x08;
+    pub const CUR_POWER: u32 = 0x10;
+    pub const MAX_POWER: u32 = 0x20;
+    pub const LEVEL: u32 = 0x40;
+    pub const ZONE: u32 = 0x80;
+    pub const POSITION: u32 = 0x100;
+    pub const AURAS: u32 = 0x200;
+    pub const PET_GUID: u32 = 0x400;
+    pub const PET_NAME: u32 = 0x800;
+    pub const PET_MODEL_ID: u32 = 0x1000;
+    pub const PET_CUR_HP: u32 = 0x2000;
+    pub const PET_MAX_HP: u32 = 0x4000;
+    pub const PET_POWER_TYPE: u32 = 0x8000;
+    pub const PET_CUR_POWER: u32 = 0x10000;
+    pub const PET_MAX_POWER: u32 = 0x20000;
+    pub const PET_AURAS: u32 = 0x40000;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
