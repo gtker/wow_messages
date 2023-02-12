@@ -10,7 +10,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_REQUEST_ACCOUNT_DATA {
-    /// The type of account data being requested. You can check this against the [`CacheMask`](crate::wrath::CacheMask) to know if this is character-specific data or account-wide data.
+    /// The type of account data being requested. You can check this against the `CacheMask` to know if this is character-specific data or account-wide data.
     ///
     pub data_type: u32,
 }

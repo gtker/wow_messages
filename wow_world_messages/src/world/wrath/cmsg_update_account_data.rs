@@ -13,7 +13,7 @@ use std::io::{Write, Read};
 /// }
 /// ```
 pub struct CMSG_UPDATE_ACCOUNT_DATA {
-    /// You can check this against the [`CacheMask`](crate::wrath::CacheMask) to find out if this is character-specific data or account-wide data
+    /// You can check this against the `CacheMask` to find out if this is character-specific data or account-wide data
     ///
     pub data_type: u32,
     /// Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES
