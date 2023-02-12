@@ -1,7 +1,7 @@
 use crate::Guid;
-use crate::shared::new_item_chat_alert_vanilla_tbc_wrath::NewItemChatAlert;
-use crate::shared::new_item_creation_type_vanilla_tbc_wrath::NewItemCreationType;
-use crate::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
+use wow_world_base::shared::new_item_chat_alert_vanilla_tbc_wrath::NewItemChatAlert;
+use wow_world_base::shared::new_item_creation_type_vanilla_tbc_wrath::NewItemCreationType;
+use wow_world_base::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

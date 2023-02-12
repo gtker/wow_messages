@@ -1,4 +1,4 @@
-use crate::shared::dispel_method_tbc_wrath::DispelMethod;
+use wow_world_base::shared::dispel_method_tbc_wrath::DispelMethod;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

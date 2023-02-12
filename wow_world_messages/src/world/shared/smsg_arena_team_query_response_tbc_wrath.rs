@@ -1,4 +1,4 @@
-use crate::shared::arena_type_tbc_wrath::ArenaType;
+use wow_world_base::shared::arena_type_tbc_wrath::ArenaType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

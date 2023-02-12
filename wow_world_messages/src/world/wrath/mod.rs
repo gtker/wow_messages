@@ -621,57 +621,19 @@ pub(crate) mod player_invite_status;
 pub use player_invite_status::*;
 pub(crate) mod power;
 pub use power::*;
-pub use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
-
 pub use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 
 pub use crate::shared::addon_tbc_wrath::Addon;
-
-pub use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
-
-pub use crate::shared::arena_faction_tbc_wrath::ArenaFaction;
-
-pub use crate::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandError;
-
-pub use crate::shared::arena_team_command_tbc_wrath::ArenaTeamCommand;
-
-pub use crate::shared::arena_team_event_tbc_wrath::ArenaTeamEvent;
-
-pub use crate::shared::arena_team_role_tbc_wrath::ArenaTeamRole;
-
-pub use crate::shared::arena_type_tbc_wrath::ArenaType;
 
 pub use crate::shared::auction_enchantment_tbc_wrath::AuctionEnchantment;
 
 pub use crate::shared::auction_sort_tbc_wrath::AuctionSort;
 
-pub use crate::shared::bank_swap_source_tbc_wrath::BankSwapSource;
-
-pub use crate::shared::bank_swap_store_mode_tbc_wrath::BankSwapStoreMode;
-
 pub use crate::shared::bank_tab_tbc_wrath::BankTab;
-
-pub use crate::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
 
 pub use crate::shared::battleground_player_position_vanilla_tbc_wrath::BattlegroundPlayerPosition;
 
-pub use crate::shared::billing_plan_flags_tbc_wrath::BillingPlanFlags;
-
-pub use crate::shared::buy_bank_slot_result_vanilla_tbc_wrath::BuyBankSlotResult;
-
-pub use crate::shared::buy_result_vanilla_tbc_wrath::BuyResult;
-
-pub use crate::shared::buyback_slot_vanilla_tbc_wrath::BuybackSlot;
-
-pub use crate::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
-
-pub use crate::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
-
 pub use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
-
-pub use crate::shared::charter_type_tbc_wrath::CharterType;
-
-pub use crate::shared::chat_notify_tbc_wrath::ChatNotify;
 
 pub use crate::shared::cmsg_accept_trade_vanilla_tbc_wrath::CMSG_ACCEPT_TRADE;
 
@@ -1135,99 +1097,31 @@ pub use crate::shared::cmsg_whois_vanilla_tbc_wrath::CMSG_WHOIS;
 
 pub use crate::shared::cmsg_wrap_item_vanilla_tbc_wrath::CMSG_WRAP_ITEM;
 
-pub use crate::shared::commentator_enable_option_tbc_wrath::CommentatorEnableOption;
-
-pub use crate::shared::complain_result_window_tbc_wrath::ComplainResultWindow;
-
-pub use crate::shared::complaint_status_tbc_wrath::ComplaintStatus;
-
 pub use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
-
-pub use crate::shared::corpse_query_result_vanilla_tbc_wrath::CorpseQueryResult;
-
-pub use crate::shared::declined_names_tbc_wrath::DeclinedNames;
-
-pub use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
-
-pub use crate::shared::dispel_method_tbc_wrath::DispelMethod;
 
 pub use crate::shared::dispelled_spell_tbc_wrath::DispelledSpell;
 
-pub use crate::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
-
-pub use crate::shared::dungeon_difficulty_tbc_wrath::DungeonDifficulty;
-
-pub use crate::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
-
-pub use crate::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
-
-pub use crate::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
-
-pub use crate::shared::friend_status_tbc_wrath::FriendStatus;
-
 pub use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 
-pub use crate::shared::gm_ticket_escalation_status_vanilla_tbc_wrath::GmTicketEscalationStatus;
-
-pub use crate::shared::gm_ticket_queue_status_vanilla_tbc_wrath::GmTicketQueueStatus;
-
-pub use crate::shared::gm_ticket_response_vanilla_tbc_wrath::GmTicketResponse;
-
-pub use crate::shared::gm_ticket_status_response_vanilla_tbc_wrath::GmTicketStatusResponse;
-
-pub use crate::shared::gm_ticket_status_vanilla_tbc_wrath::GmTicketStatus;
-
 pub use crate::shared::gossip_item_tbc_wrath::GossipItem;
-
-pub use crate::shared::group_loot_setting_vanilla_tbc_wrath::GroupLootSetting;
-
-pub use crate::shared::group_member_online_status_vanilla_tbc_wrath::GroupMemberOnlineStatus;
 
 pub use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 
 pub use crate::shared::guild_bank_socket_tbc_wrath::GuildBankSocket;
 
-pub use crate::shared::guild_bank_tab_result_tbc_wrath::GuildBankTabResult;
-
 pub use crate::shared::guild_bank_tab_tbc_wrath::GuildBankTab;
-
-pub use crate::shared::guild_emblem_result_tbc_wrath::GuildEmblemResult;
-
-pub use crate::shared::guild_event_tbc_wrath::GuildEvent;
 
 pub use crate::shared::guild_log_event_tbc_wrath::GuildLogEvent;
 
-pub use crate::shared::guild_member_status_vanilla_tbc_wrath::GuildMemberStatus;
-
 pub use crate::shared::guild_rights_tbc_wrath::GuildRights;
-
-pub use crate::shared::instance_reset_failed_reason_vanilla_tbc_wrath::InstanceResetFailedReason;
-
-pub use crate::shared::join_arena_type_tbc_wrath::JoinArenaType;
 
 pub use crate::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
 
-pub use crate::shared::log_format_vanilla_tbc_wrath::LogFormat;
-
-pub use crate::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
-
-pub use crate::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
-
 pub use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
-
-pub use crate::shared::loot_method_vanilla_tbc_wrath::LootMethod;
-
-pub use crate::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
 
 pub use crate::shared::mail_item_tbc_wrath::MailItem;
 
-pub use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
-
 pub use crate::shared::money_log_item_tbc_wrath::MoneyLogItem;
-
-pub use crate::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
-
-pub use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
 
 pub use crate::shared::msg_auction_hello_client_vanilla_tbc_wrath::MSG_AUCTION_HELLO_Client;
 
@@ -1305,41 +1199,11 @@ pub use crate::shared::msg_talent_wipe_confirm_client_vanilla_tbc_wrath::MSG_TAL
 
 pub use crate::shared::msg_talent_wipe_confirm_server_vanilla_tbc_wrath::MSG_TALENT_WIPE_CONFIRM_Server;
 
-pub use crate::shared::new_item_chat_alert_vanilla_tbc_wrath::NewItemChatAlert;
-
-pub use crate::shared::new_item_creation_type_vanilla_tbc_wrath::NewItemCreationType;
-
-pub use crate::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
-
 pub use crate::shared::npc_text_update_emote_vanilla_tbc_wrath::NpcTextUpdateEmote;
-
-pub use crate::shared::party_operation_vanilla_tbc_wrath::PartyOperation;
-
-pub use crate::shared::party_result_tbc_wrath::PartyResult;
-
-pub use crate::shared::party_role_tbc_wrath::PartyRole;
-
-pub use crate::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
-
-pub use crate::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
-
-pub use crate::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
-
-pub use crate::shared::pet_name_invalid_reason_tbc_wrath::PetNameInvalidReason;
-
-pub use crate::shared::pet_query_disabled_names_tbc_wrath::PetQueryDisabledNames;
-
-pub use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
-
-pub use crate::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
-
-pub use crate::shared::petition_result_tbc_wrath::PetitionResult;
 
 pub use crate::shared::petition_showlist_tbc_wrath::PetitionShowlist;
 
 pub use crate::shared::petition_signature_vanilla_tbc_wrath::PetitionSignature;
-
-pub use crate::shared::quest_completable_vanilla_tbc_wrath::QuestCompletable;
 
 pub use crate::shared::quest_details_emote_vanilla_tbc_wrath::QuestDetailsEmote;
 
@@ -1349,25 +1213,9 @@ pub use crate::shared::quest_item_reward_vanilla_tbc_wrath::QuestItemReward;
 
 pub use crate::shared::quest_objective_vanilla_tbc_wrath::QuestObjective;
 
-pub use crate::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
-
-pub use crate::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
-
-pub use crate::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
-
 pub use crate::shared::raid_target_update_vanilla_tbc_wrath::RaidTargetUpdate;
 
-pub use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
-
 pub use crate::shared::received_mail_tbc_wrath::ReceivedMail;
-
-pub use crate::shared::refer_a_friend_error_tbc_wrath::ReferAFriendError;
-
-pub use crate::shared::relation_type_tbc_wrath::RelationType;
-
-pub use crate::shared::roll_vote_tbc_wrath::RollVote;
-
-pub use crate::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 
 pub use crate::shared::smsg_activatetaxireply_vanilla_tbc_wrath::SMSG_ACTIVATETAXIREPLY;
 
@@ -1761,45 +1609,111 @@ pub use crate::shared::smsg_warden_data_vanilla_tbc_wrath::SMSG_WARDEN_DATA;
 
 pub use crate::shared::smsg_whois_vanilla_tbc_wrath::SMSG_WHOIS;
 
-pub use crate::shared::spam_type_tbc_wrath::SpamType;
-
 pub use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
 
 pub use crate::shared::spell_log_miss_vanilla_tbc_wrath::SpellLogMiss;
-
-pub use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
-
-pub use crate::shared::spell_steal_action_tbc_wrath::SpellStealAction;
 
 pub use crate::shared::spell_steal_tbc_wrath::SpellSteal;
 
 pub use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
-pub use crate::shared::status_id_vanilla_tbc_wrath::StatusId;
-
-pub use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
-
-pub use crate::shared::title_earn_status_tbc_wrath::TitleEarnStatus;
-
 pub use crate::shared::trade_slot_tbc_wrath::TradeSlot;
-
-pub use crate::shared::trade_status_vanilla_tbc_wrath::TradeStatus;
-
-pub use crate::shared::trainer_spell_state_vanilla_tbc_wrath::TrainerSpellState;
-
-pub use crate::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
-
-pub use crate::shared::unit_stand_state_vanilla_tbc_wrath::UnitStandState;
-
-pub use crate::shared::weather_change_type_vanilla_tbc_wrath::WeatherChangeType;
 
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
+pub use wow_world_base::wrath::ActivateTaxiReply;
+
+pub use wow_world_base::wrath::AiReaction;
+
+pub use wow_world_base::wrath::ArenaFaction;
+
+pub use wow_world_base::wrath::ArenaTeamCommand;
+
+pub use wow_world_base::wrath::ArenaTeamCommandError;
+
+pub use wow_world_base::wrath::ArenaTeamEvent;
+
+pub use wow_world_base::wrath::ArenaTeamRole;
+
+pub use wow_world_base::wrath::ArenaType;
+
 pub use wow_world_base::wrath::BagFamily;
+
+pub use wow_world_base::wrath::BankSwapSource;
+
+pub use wow_world_base::wrath::BankSwapStoreMode;
+
+pub use wow_world_base::wrath::BattlefieldPortAction;
+
+pub use wow_world_base::wrath::BillingPlanFlags;
 
 pub use wow_world_base::wrath::Bonding;
 
+pub use wow_world_base::wrath::BuyBankSlotResult;
+
+pub use wow_world_base::wrath::BuyResult;
+
+pub use wow_world_base::wrath::BuybackSlot;
+
+pub use wow_world_base::wrath::ChannelFlags;
+
+pub use wow_world_base::wrath::ChannelMemberFlags;
+
+pub use wow_world_base::wrath::CharterType;
+
+pub use wow_world_base::wrath::ChatNotify;
+
+pub use wow_world_base::wrath::CommentatorEnableOption;
+
+pub use wow_world_base::wrath::ComplainResultWindow;
+
+pub use wow_world_base::wrath::ComplaintStatus;
+
+pub use wow_world_base::wrath::CorpseQueryResult;
+
+pub use wow_world_base::wrath::DeclinedNames;
+
+pub use wow_world_base::wrath::DeclinedPetNameIncluded;
+
+pub use wow_world_base::wrath::DispelMethod;
+
+pub use wow_world_base::wrath::DuelWinnerReason;
+
+pub use wow_world_base::wrath::DungeonDifficulty;
+
+pub use wow_world_base::wrath::EnvironmentalDamageType;
+
+pub use wow_world_base::wrath::ExperienceAwardType;
+
+pub use wow_world_base::wrath::FarSightOperation;
+
+pub use wow_world_base::wrath::FriendStatus;
+
 pub use wow_world_base::wrath::Gender;
+
+pub use wow_world_base::wrath::GmTicketEscalationStatus;
+
+pub use wow_world_base::wrath::GmTicketQueueStatus;
+
+pub use wow_world_base::wrath::GmTicketResponse;
+
+pub use wow_world_base::wrath::GmTicketStatus;
+
+pub use wow_world_base::wrath::GmTicketStatusResponse;
+
+pub use wow_world_base::wrath::GroupLootSetting;
+
+pub use wow_world_base::wrath::GroupMemberOnlineStatus;
+
+pub use wow_world_base::wrath::GuildBankTabResult;
+
+pub use wow_world_base::wrath::GuildEmblemResult;
+
+pub use wow_world_base::wrath::GuildEvent;
+
+pub use wow_world_base::wrath::GuildMemberStatus;
+
+pub use wow_world_base::wrath::InstanceResetFailedReason;
 
 pub use wow_world_base::wrath::InventoryType;
 
@@ -1811,21 +1725,107 @@ pub use wow_world_base::wrath::ItemSpells;
 
 pub use wow_world_base::wrath::ItemStat;
 
+pub use wow_world_base::wrath::JoinArenaType;
+
 pub use wow_world_base::wrath::Language;
+
+pub use wow_world_base::wrath::LogFormat;
+
+pub use wow_world_base::wrath::LogoutResult;
+
+pub use wow_world_base::wrath::LogoutSpeed;
+
+pub use wow_world_base::wrath::LootMethod;
+
+pub use wow_world_base::wrath::LootSlotType;
+
+pub use wow_world_base::wrath::MailMessageType;
+
+pub use wow_world_base::wrath::MonsterMoveType;
+
+pub use wow_world_base::wrath::MountResult;
+
+pub use wow_world_base::wrath::NewItemChatAlert;
+
+pub use wow_world_base::wrath::NewItemCreationType;
+
+pub use wow_world_base::wrath::NewItemSource;
 
 pub use wow_world_base::wrath::PageTextMaterial;
 
+pub use wow_world_base::wrath::PartyOperation;
+
+pub use wow_world_base::wrath::PartyResult;
+
+pub use wow_world_base::wrath::PartyRole;
+
+pub use wow_world_base::wrath::PetCommandState;
+
+pub use wow_world_base::wrath::PetEnabled;
+
+pub use wow_world_base::wrath::PetFeedback;
+
+pub use wow_world_base::wrath::PetNameInvalidReason;
+
+pub use wow_world_base::wrath::PetQueryDisabledNames;
+
+pub use wow_world_base::wrath::PetReactState;
+
+pub use wow_world_base::wrath::PetTalkReason;
+
+pub use wow_world_base::wrath::PetitionResult;
+
 pub use wow_world_base::wrath::PvpRank;
+
+pub use wow_world_base::wrath::QuestCompletable;
+
+pub use wow_world_base::wrath::RaidGroupError;
+
+pub use wow_world_base::wrath::RaidTargetIndex;
+
+pub use wow_world_base::wrath::RaidTargetUpdateType;
+
+pub use wow_world_base::wrath::RealmSplitState;
+
+pub use wow_world_base::wrath::ReferAFriendError;
+
+pub use wow_world_base::wrath::RelationType;
+
+pub use wow_world_base::wrath::RollVote;
+
+pub use wow_world_base::wrath::SheathState;
 
 pub use wow_world_base::wrath::SheatheType;
 
+pub use wow_world_base::wrath::SpamType;
+
+pub use wow_world_base::wrath::SpellMissInfo;
+
 pub use wow_world_base::wrath::SpellSchool;
 
+pub use wow_world_base::wrath::SpellStealAction;
+
 pub use wow_world_base::wrath::SpellTriggerType;
+
+pub use wow_world_base::wrath::StatusId;
+
+pub use wow_world_base::wrath::TimerType;
+
+pub use wow_world_base::wrath::TitleEarnStatus;
+
+pub use wow_world_base::wrath::TradeStatus;
+
+pub use wow_world_base::wrath::TrainerSpellState;
+
+pub use wow_world_base::wrath::TrainingFailureReason;
+
+pub use wow_world_base::wrath::UnitStandState;
 
 pub use wow_world_base::wrath::Vector2d;
 
 pub use wow_world_base::wrath::Vector3d;
+
+pub use wow_world_base::wrath::WeatherChangeType;
 
 pub(crate) mod quest_failed_reason;
 pub use quest_failed_reason::*;

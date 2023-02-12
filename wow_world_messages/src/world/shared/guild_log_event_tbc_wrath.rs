@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::guild_event_tbc_wrath::GuildEvent;
+use wow_world_base::shared::guild_event_tbc_wrath::GuildEvent;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

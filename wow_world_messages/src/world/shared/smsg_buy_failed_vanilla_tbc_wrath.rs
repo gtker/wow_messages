@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::buy_result_vanilla_tbc_wrath::BuyResult;
+use wow_world_base::shared::buy_result_vanilla_tbc_wrath::BuyResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

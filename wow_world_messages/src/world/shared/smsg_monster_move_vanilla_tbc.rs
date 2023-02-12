@@ -1,7 +1,7 @@
 use crate::Guid;
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
-use crate::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
-use crate::shared::spline_flag_vanilla_tbc::SplineFlag;
+use wow_world_base::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
+use wow_world_base::shared::spline_flag_vanilla_tbc::SplineFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

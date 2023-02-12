@@ -1,4 +1,4 @@
-use crate::shared::petition_result_tbc_wrath::PetitionResult;
+use wow_world_base::shared::petition_result_tbc_wrath::PetitionResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

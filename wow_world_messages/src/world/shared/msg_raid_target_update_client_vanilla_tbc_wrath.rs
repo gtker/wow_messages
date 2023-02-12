@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
+use wow_world_base::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

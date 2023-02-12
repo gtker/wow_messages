@@ -1,4 +1,4 @@
-use crate::shared::gm_ticket_status_response_vanilla_tbc_wrath::GmTicketStatusResponse;
+use wow_world_base::shared::gm_ticket_status_response_vanilla_tbc_wrath::GmTicketStatusResponse;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

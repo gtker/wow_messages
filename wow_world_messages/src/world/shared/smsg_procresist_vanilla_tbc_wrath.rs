@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::log_format_vanilla_tbc_wrath::LogFormat;
+use wow_world_base::shared::log_format_vanilla_tbc_wrath::LogFormat;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

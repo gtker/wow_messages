@@ -1,4 +1,4 @@
-use crate::shared::stable_result_vanilla_tbc::StableResult;
+use wow_world_base::shared::stable_result_vanilla_tbc::StableResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

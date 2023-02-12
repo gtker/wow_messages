@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
+use wow_world_base::shared::experience_award_type_vanilla_tbc_wrath::ExperienceAwardType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

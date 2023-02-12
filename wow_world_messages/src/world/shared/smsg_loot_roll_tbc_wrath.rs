@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::roll_vote_tbc_wrath::RollVote;
+use wow_world_base::shared::roll_vote_tbc_wrath::RollVote;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

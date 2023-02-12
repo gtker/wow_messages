@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
+use wow_world_base::shared::pet_talk_reason_vanilla_tbc_wrath::PetTalkReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
+use wow_world_base::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

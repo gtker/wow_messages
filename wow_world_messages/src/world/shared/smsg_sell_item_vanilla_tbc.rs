@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::sell_item_result_vanilla_tbc::SellItemResult;
+use wow_world_base::shared::sell_item_result_vanilla_tbc::SellItemResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

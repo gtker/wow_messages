@@ -1,5 +1,5 @@
 use crate::shared::raid_target_update_vanilla_tbc_wrath::RaidTargetUpdate;
-use crate::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
+use wow_world_base::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

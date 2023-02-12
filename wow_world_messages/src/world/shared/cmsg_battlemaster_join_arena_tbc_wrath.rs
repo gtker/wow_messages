@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::join_arena_type_tbc_wrath::JoinArenaType;
+use wow_world_base::shared::join_arena_type_tbc_wrath::JoinArenaType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

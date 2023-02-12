@@ -233,7 +233,7 @@ fn parse_test(t: &mut Pairs<Rule>, tags: &ParsedTags, file_info: FileInfo) -> Pa
         name,
         test_members,
         raw_bytes,
-        kvs.into_tags(name, &file_info),
+        kvs.into_tags(name, &file_info, false),
         file_info,
     )
 }
@@ -310,7 +310,7 @@ fn apply_tags(
         objects.push(ParsedContainer::new(
             identifier,
             members,
-            tags.into_tags(identifier, &file_info),
+            tags.into_tags(identifier, &file_info, false),
             container_type,
             file_info,
         ));
@@ -322,7 +322,7 @@ fn apply_tags(
             objects.push(ParsedContainer::new(
                 identifier,
                 members.clone(),
-                tags.into_tags(identifier, &file_info),
+                tags.into_tags(identifier, &file_info, false),
                 container_type,
                 file_info.clone(),
             ));
@@ -589,7 +589,7 @@ pub(crate) fn parse_enum(
         fields,
         IntegerType::from_str(basic_type.as_str(), ident.as_str(), &file_info),
         self_value,
-        extras.into_tags(ident.as_str(), &file_info),
+        extras.into_tags(ident.as_str(), &file_info, true),
         file_info,
     )
 }

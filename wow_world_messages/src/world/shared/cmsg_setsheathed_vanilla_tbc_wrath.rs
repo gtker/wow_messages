@@ -1,4 +1,4 @@
-use crate::shared::sheath_state_vanilla_tbc_wrath::SheathState;
+use wow_world_base::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

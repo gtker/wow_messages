@@ -1,6 +1,6 @@
 use crate::Guid;
 use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
-use crate::shared::loot_method_vanilla_tbc_wrath::LootMethod;
+use wow_world_base::shared::loot_method_vanilla_tbc_wrath::LootMethod;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

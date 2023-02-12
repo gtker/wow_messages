@@ -1,4 +1,4 @@
-use crate::shared::title_earn_status_tbc_wrath::TitleEarnStatus;
+use wow_world_base::shared::title_earn_status_tbc_wrath::TitleEarnStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,4 +1,4 @@
-use crate::shared::buy_bank_slot_result_vanilla_tbc_wrath::BuyBankSlotResult;
+use wow_world_base::shared::buy_bank_slot_result_vanilla_tbc_wrath::BuyBankSlotResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

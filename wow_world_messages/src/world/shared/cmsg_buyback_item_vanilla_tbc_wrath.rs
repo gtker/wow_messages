@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::buyback_slot_vanilla_tbc_wrath::BuybackSlot;
+use wow_world_base::shared::buyback_slot_vanilla_tbc_wrath::BuybackSlot;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

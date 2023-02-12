@@ -1,4 +1,4 @@
-use crate::shared::mount_result_vanilla_tbc_wrath::MountResult;
+use wow_world_base::shared::mount_result_vanilla_tbc_wrath::MountResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

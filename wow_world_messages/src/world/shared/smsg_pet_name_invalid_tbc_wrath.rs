@@ -1,5 +1,5 @@
-use crate::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
-use crate::shared::pet_name_invalid_reason_tbc_wrath::PetNameInvalidReason;
+use wow_world_base::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
+use wow_world_base::shared::pet_name_invalid_reason_tbc_wrath::PetNameInvalidReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

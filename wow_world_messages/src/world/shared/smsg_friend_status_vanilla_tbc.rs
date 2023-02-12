@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::friend_result_vanilla_tbc::FriendResult;
+use wow_world_base::shared::friend_result_vanilla_tbc::FriendResult;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

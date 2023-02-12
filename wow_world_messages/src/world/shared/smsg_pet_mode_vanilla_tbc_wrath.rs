@@ -1,7 +1,7 @@
 use crate::Guid;
-use crate::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
-use crate::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
-use crate::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
+use wow_world_base::shared::pet_command_state_vanilla_tbc_wrath::PetCommandState;
+use wow_world_base::shared::pet_enabled_vanilla_tbc_wrath::PetEnabled;
+use wow_world_base::shared::pet_react_state_vanilla_tbc_wrath::PetReactState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

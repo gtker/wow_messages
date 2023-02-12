@@ -1,4 +1,4 @@
-use crate::shared::chat_notify_tbc_wrath::ChatNotify;
+use wow_world_base::shared::chat_notify_tbc_wrath::ChatNotify;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

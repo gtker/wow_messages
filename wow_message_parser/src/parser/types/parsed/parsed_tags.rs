@@ -76,7 +76,12 @@ impl ParsedTags {
         }
     }
 
-    pub(crate) fn into_tags(self, ty_name: &str, file_info: &FileInfo) -> ObjectTags {
+    pub(crate) fn into_tags(
+        self,
+        ty_name: &str,
+        file_info: &FileInfo,
+        rust_base_type_default: bool,
+    ) -> ObjectTags {
         let all_versions = if !self.world_versions.is_empty() {
             if !self.login_versions.is_empty() {
                 object_has_both_versions(ty_name, file_info);
@@ -91,6 +96,9 @@ impl ParsedTags {
             object_has_no_versions(ty_name, file_info)
         };
 
+        let rust_base_type_default =
+            rust_base_type_default && matches!(all_versions, AllVersions::World(_));
+
         ObjectTags::from_parsed(
             all_versions,
             self.description,
@@ -103,7 +111,7 @@ impl ParsedTags {
             self.is_test.unwrap_or(false),
             self.skip.unwrap_or(false),
             self.unimplemented.unwrap_or(false),
-            self.rust_base_ty.unwrap_or(false),
+            self.rust_base_ty.unwrap_or(rust_base_type_default),
             self.zero_is_always_valid.unwrap_or(false),
         )
     }
@@ -174,9 +182,7 @@ impl ParsedTags {
                     self.paste_versions.insert(WorldVersion::Major(v));
                     continue;
                 } else if w == "*" {
-                    panic!(
-                        "Got all version for paste_versions, this is not valid, {self:#?}"
-                    );
+                    panic!("Got all version for paste_versions, this is not valid, {self:#?}");
                 }
 
                 let d: Vec<u8> = w.split('.').map(|a| a.parse::<u8>().unwrap()).collect();

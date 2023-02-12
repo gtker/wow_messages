@@ -1,4 +1,4 @@
-use crate::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
+use wow_world_base::shared::far_sight_operation_vanilla_tbc_wrath::FarSightOperation;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

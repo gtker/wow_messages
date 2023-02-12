@@ -1,4 +1,4 @@
-use crate::shared::faction_flag_vanilla_tbc::FactionFlag;
+use wow_world_base::shared::faction_flag_vanilla_tbc::FactionFlag;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

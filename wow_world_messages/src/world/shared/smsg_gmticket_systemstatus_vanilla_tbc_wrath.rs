@@ -1,4 +1,4 @@
-use crate::shared::gm_ticket_queue_status_vanilla_tbc_wrath::GmTicketQueueStatus;
+use wow_world_base::shared::gm_ticket_queue_status_vanilla_tbc_wrath::GmTicketQueueStatus;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,4 +1,4 @@
-use crate::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
+use wow_world_base::shared::pet_feedback_vanilla_tbc_wrath::PetFeedback;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

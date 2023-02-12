@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
+use wow_world_base::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

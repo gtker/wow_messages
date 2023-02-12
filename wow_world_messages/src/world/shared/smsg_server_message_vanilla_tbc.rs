@@ -1,4 +1,4 @@
-use crate::shared::server_message_type_vanilla_tbc::ServerMessageType;
+use wow_world_base::shared::server_message_type_vanilla_tbc::ServerMessageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

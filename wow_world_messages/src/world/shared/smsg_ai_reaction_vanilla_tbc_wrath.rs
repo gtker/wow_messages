@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
+use wow_world_base::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

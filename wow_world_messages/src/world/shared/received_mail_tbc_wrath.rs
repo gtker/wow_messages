@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
+use wow_world_base::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

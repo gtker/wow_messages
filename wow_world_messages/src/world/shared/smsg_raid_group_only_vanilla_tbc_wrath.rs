@@ -1,4 +1,4 @@
-use crate::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
+use wow_world_base::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

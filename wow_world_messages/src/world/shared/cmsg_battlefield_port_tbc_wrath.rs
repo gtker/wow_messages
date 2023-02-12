@@ -1,4 +1,4 @@
-use crate::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
+use wow_world_base::shared::battlefield_port_action_vanilla_tbc_wrath::BattlefieldPortAction;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

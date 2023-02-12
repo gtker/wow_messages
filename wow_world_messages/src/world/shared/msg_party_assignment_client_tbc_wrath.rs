@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::party_role_tbc_wrath::PartyRole;
+use wow_world_base::shared::party_role_tbc_wrath::PartyRole;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
+use wow_world_base::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

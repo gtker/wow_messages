@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
+use wow_world_base::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

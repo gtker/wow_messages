@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
+use wow_world_base::shared::environmental_damage_type_vanilla_tbc_wrath::EnvironmentalDamageType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,4 +1,4 @@
-use crate::shared::realm_split_state_tbc_wrath::RealmSplitState;
+use wow_world_base::shared::realm_split_state_tbc_wrath::RealmSplitState;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

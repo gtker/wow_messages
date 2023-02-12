@@ -1,4 +1,4 @@
-use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
+use wow_world_base::shared::timer_type_vanilla_vanilla_tbc_wrath::TimerType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

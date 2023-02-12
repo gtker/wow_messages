@@ -1,4 +1,4 @@
-use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
+use wow_world_base::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

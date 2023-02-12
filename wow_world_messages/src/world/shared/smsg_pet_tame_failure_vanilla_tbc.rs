@@ -1,4 +1,4 @@
-use crate::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
+use wow_world_base::shared::pet_tame_failure_reason_vanilla_tbc::PetTameFailureReason;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

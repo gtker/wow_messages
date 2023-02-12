@@ -1,5 +1,5 @@
 use crate::Guid;
-use crate::shared::arena_team_event_tbc_wrath::ArenaTeamEvent;
+use wow_world_base::shared::arena_team_event_tbc_wrath::ArenaTeamEvent;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
