@@ -64,8 +64,11 @@ pub struct Spell {
     dmg_class: i8,
     prevention_type: i8,
     stance_bar_order: i8,
+    reagents_length: u8,
     reagents: [Reagent; 8],
+    effects_length: u8,
     effects: [SpellEffects; 3],
+    totems_length: u8,
     totems: [Totem; 2],
 }
 
@@ -125,6 +128,7 @@ impl Spell {
         dmg_class: i8,
         prevention_type: i8,
         stance_bar_order: i8,
+        reagents_length: u8,
         reagent1: i32,
         reagent_count1: i32,
         reagent2: i32,
@@ -141,6 +145,7 @@ impl Spell {
         reagent_count7: i32,
         reagent8: i32,
         reagent_count8: i32,
+        effects_length: u8,
         effect1: i32,
         effect_die_sides1: i32,
         effect_base_dice1: i32,
@@ -198,6 +203,7 @@ impl Spell {
         effect_trigger_spell3: i32,
         effect_points_per_combo_point3: f32,
         dmg_multiplier3: f32,
+        totems_length: u8,
         totem1: i32,
         totem2: i32,
     ) -> Self {
@@ -256,6 +262,7 @@ impl Spell {
             dmg_class,
             prevention_type,
             stance_bar_order,
+            reagents_length,
             reagents: [
             Reagent::new(
             reagent1,
@@ -290,6 +297,7 @@ impl Spell {
             reagent_count8,
             ),
             ],
+            effects_length,
             effects: [
             SpellEffects::new(
             effect1,
@@ -355,6 +363,7 @@ impl Spell {
             dmg_multiplier3,
             ),
             ],
+            totems_length,
             totems: [
             Totem::new(
             totem1,
@@ -429,6 +438,7 @@ impl Spell {
         self.requires_spell_focus as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn caster_aura_state(&self) -> i32 {
         match self.entry {
             76 | 1495 | 6186 | 6568 | 6572 | 6574 | 7379 | 10374 | 11600 | 11601 | 12170 | 14251 | 14269 | 14270 | 14271 | 19130 | 25288 => 1,
@@ -440,6 +450,7 @@ impl Spell {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn target_aura_state(&self) -> i32 {
         match self.entry {
             5308 | 6174 | 6175 | 7160 | 7938 | 16495 | 20539 | 20647 | 20658 | 20660 | 20661 | 20662 | 24239 | 24274 | 24275 | 31255 => 2,
@@ -511,6 +522,7 @@ impl Spell {
         self.mana_cost_per_level as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn mana_per_second(&self) -> i32 {
         match self.entry {
             424 | 963 => 2,
@@ -528,6 +540,7 @@ impl Spell {
         }
     }
 
+    /// Always returns `0`.
     pub const fn mana_per_second_per_level(&self) -> i32 {
         0
     }
@@ -596,6 +609,7 @@ impl Spell {
         self.start_recovery_time as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn max_target_level(&self) -> i32 {
         match self.entry {
             26259 => 20,
@@ -636,6 +650,7 @@ impl Spell {
         self.stance_bar_order as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn min_faction_id(&self) -> i32 {
         match self.entry {
             6994 => 369,
@@ -643,6 +658,7 @@ impl Spell {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn min_reputation(&self) -> i32 {
         match self.entry {
             6994 => 4,
@@ -650,6 +666,7 @@ impl Spell {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn required_aura_vision(&self) -> i32 {
         match self.entry {
             26869 => 1,
@@ -657,10 +674,12 @@ impl Spell {
         }
     }
 
+    /// Always returns `0`.
     pub const fn is_server_side(&self) -> i32 {
         0
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn attributes_serverside(&self) -> i32 {
         match self.entry {
             4044 | 4133 | 11816 | 18115 | 21789 | 27791 | 28330 => 4,
@@ -668,16 +687,58 @@ impl Spell {
         }
     }
 
-    pub const fn reagents(&self) -> &[Reagent; 8] {
+    pub const fn reagents_array(&self) -> &[Reagent; 8] {
         &self.reagents
     }
 
-    pub const fn effects(&self) -> &[SpellEffects; 3] {
+    pub const fn reagents(&self) -> &[Reagent] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.reagents.as_slice();
+        loop {
+            if s.len() == (self.reagents_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
+    }
+
+    pub const fn effects_array(&self) -> &[SpellEffects; 3] {
         &self.effects
     }
 
-    pub const fn totems(&self) -> &[Totem; 2] {
+    pub const fn effects(&self) -> &[SpellEffects] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.effects.as_slice();
+        loop {
+            if s.len() == (self.effects_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
+    }
+
+    pub const fn totems_array(&self) -> &[Totem; 2] {
         &self.totems
+    }
+
+    pub const fn totems(&self) -> &[Totem] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.totems.as_slice();
+        loop {
+            if s.len() == (self.totems_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
     }
 
 }

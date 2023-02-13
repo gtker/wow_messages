@@ -232,8 +232,8 @@ fn get_default_values(
                 continue;
             }
 
-            for instance in &array.instances {
-                for field in instance {
+            for instance in array.instances.instances() {
+                for field in instance.fields() {
                     insert_value(&mut map, &field.value.const_value(), field.integer_size())
                 }
             }
@@ -386,8 +386,10 @@ fn all_items(
                 continue;
             }
 
-            for instance in &array.instances {
-                for field in instance {
+            s.w_no_indent(format!("{},", array.instances.max_valid_instance()));
+
+            for instance in array.instances.instances() {
+                for field in instance.fields() {
                     if let Some(const_name) =
                         default_values.get(&(field.value.clone(), field.integer_size()))
                     {

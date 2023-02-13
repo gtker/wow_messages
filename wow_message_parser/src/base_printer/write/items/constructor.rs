@@ -43,8 +43,10 @@ pub(crate) fn constructor(
 
                 for array in &items[0].arrays {
                     if !ctor.type_is_defaulted(array.type_name) {
-                        for instance in &array.instances {
-                            for field in instance {
+                        s.wln(format!("{}_length: u8,", array.variable_name));
+
+                        for instance in array.instances.instances() {
+                            for field in instance.fields() {
                                 s.wln(format!(
                                     "{}: {},",
                                     field.variable_name,
@@ -69,8 +71,14 @@ pub(crate) fn constructor(
                 }
 
                 for array in &items[0].arrays {
-                    for instance in &array.instances {
-                        for field in instance {
+                    if ctor.type_is_defaulted(array.type_name) {
+                        s.wln("0,");
+                    } else {
+                        s.wln(format!("{}_length,", array.variable_name));
+                    }
+
+                    for instance in array.instances.instances() {
+                        for field in instance.fields() {
                             if ctor.type_is_defaulted(array.type_name) {
                                 s.wln(format!(
                                     "{},",

@@ -1,5 +1,7 @@
 use crate::base_printer::data::items;
-use crate::base_printer::data::items::{Array, ArrayField, Field, Optimizations, Value};
+use crate::base_printer::data::items::{
+    Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations, Value,
+};
 use crate::base_printer::write::items::conversions::vanilla_stat_types_to_stats;
 use crate::base_printer::write::items::GenericThing;
 use rusqlite::Connection;
@@ -220,205 +222,295 @@ impl VanillaItem {
                 "damages",
                 "ItemDamageType",
                 true,
-                vec![
-                    vec![
-                        ArrayField::new("damage_minimum", "dmg_min1", Value::Float(self.dmg_min1)),
-                        ArrayField::new("damage_maximum", "dmg_max1", Value::Float(self.dmg_max1)),
-                        ArrayField::new("school", "dmg_type1", Value::SpellSchool(self.dmg_type1)),
-                    ],
-                    vec![
-                        ArrayField::new("damage_minimum", "dmg_min2", Value::Float(self.dmg_min2)),
-                        ArrayField::new("damage_maximum", "dmg_max2", Value::Float(self.dmg_max2)),
-                        ArrayField::new("school", "dmg_type2", Value::SpellSchool(self.dmg_type2)),
-                    ],
-                    vec![
-                        ArrayField::new("damage_minimum", "dmg_min3", Value::Float(self.dmg_min3)),
-                        ArrayField::new("damage_maximum", "dmg_max3", Value::Float(self.dmg_max3)),
-                        ArrayField::new("school", "dmg_type3", Value::SpellSchool(self.dmg_type3)),
-                    ],
-                    vec![
-                        ArrayField::new("damage_minimum", "dmg_min4", Value::Float(self.dmg_min4)),
-                        ArrayField::new("damage_maximum", "dmg_max4", Value::Float(self.dmg_max4)),
-                        ArrayField::new("school", "dmg_type4", Value::SpellSchool(self.dmg_type4)),
-                    ],
-                    vec![
-                        ArrayField::new("damage_minimum", "dmg_min5", Value::Float(self.dmg_min5)),
-                        ArrayField::new("damage_maximum", "dmg_max5", Value::Float(self.dmg_max5)),
-                        ArrayField::new("school", "dmg_type5", Value::SpellSchool(self.dmg_type5)),
-                    ],
-                ],
+                ArrayInstances::new(vec![
+                    ArrayInstance::new(
+                        self.dmg_min1 == 0.0 && self.dmg_max1 == 0.0,
+                        vec![
+                            ArrayField::new(
+                                "damage_minimum",
+                                "dmg_min1",
+                                Value::Float(self.dmg_min1),
+                            ),
+                            ArrayField::new(
+                                "damage_maximum",
+                                "dmg_max1",
+                                Value::Float(self.dmg_max1),
+                            ),
+                            ArrayField::new(
+                                "school",
+                                "dmg_type1",
+                                Value::SpellSchool(self.dmg_type1),
+                            ),
+                        ],
+                    ),
+                    ArrayInstance::new(
+                        self.dmg_min2 == 0.0 && self.dmg_max2 == 0.0,
+                        vec![
+                            ArrayField::new(
+                                "damage_minimum",
+                                "dmg_min2",
+                                Value::Float(self.dmg_min2),
+                            ),
+                            ArrayField::new(
+                                "damage_maximum",
+                                "dmg_max2",
+                                Value::Float(self.dmg_max2),
+                            ),
+                            ArrayField::new(
+                                "school",
+                                "dmg_type2",
+                                Value::SpellSchool(self.dmg_type2),
+                            ),
+                        ],
+                    ),
+                    ArrayInstance::new(
+                        self.dmg_min3 == 0.0 && self.dmg_max3 == 0.0,
+                        vec![
+                            ArrayField::new(
+                                "damage_minimum",
+                                "dmg_min3",
+                                Value::Float(self.dmg_min3),
+                            ),
+                            ArrayField::new(
+                                "damage_maximum",
+                                "dmg_max3",
+                                Value::Float(self.dmg_max3),
+                            ),
+                            ArrayField::new(
+                                "school",
+                                "dmg_type3",
+                                Value::SpellSchool(self.dmg_type3),
+                            ),
+                        ],
+                    ),
+                    ArrayInstance::new(
+                        self.dmg_min4 == 0.0 && self.dmg_max4 == 0.0,
+                        vec![
+                            ArrayField::new(
+                                "damage_minimum",
+                                "dmg_min4",
+                                Value::Float(self.dmg_min4),
+                            ),
+                            ArrayField::new(
+                                "damage_maximum",
+                                "dmg_max4",
+                                Value::Float(self.dmg_max4),
+                            ),
+                            ArrayField::new(
+                                "school",
+                                "dmg_type4",
+                                Value::SpellSchool(self.dmg_type4),
+                            ),
+                        ],
+                    ),
+                    ArrayInstance::new(
+                        self.dmg_min5 == 0.0 && self.dmg_max5 == 0.0,
+                        vec![
+                            ArrayField::new(
+                                "damage_minimum",
+                                "dmg_min5",
+                                Value::Float(self.dmg_min5),
+                            ),
+                            ArrayField::new(
+                                "damage_maximum",
+                                "dmg_max5",
+                                Value::Float(self.dmg_max5),
+                            ),
+                            ArrayField::new(
+                                "school",
+                                "dmg_type5",
+                                Value::SpellSchool(self.dmg_type5),
+                            ),
+                        ],
+                    ),
+                ]),
             ),
             Array::new(
                 "spells",
                 "Spells",
                 false,
-                vec![
-                    vec![
-                        ArrayField::new("spell", "spell_id_1", Value::Int(self.spell_id_1)),
-                        ArrayField::new(
-                            "spell_trigger",
-                            "spell_trigger_1",
-                            Value::VanillaSpellTriggerType(self.spell_trigger_1),
-                        ),
-                        ArrayField::new(
-                            "spell_charges",
-                            "spell_charges_1",
-                            Value::Int(self.spell_charges_1),
-                        ),
-                        ArrayField::new(
-                            "spell_ppm_rate",
-                            "spell_ppm_rate_1",
-                            Value::Float(self.spell_ppm_rate_1),
-                        ),
-                        ArrayField::new(
-                            "spell_cooldown",
-                            "spell_cooldown_1",
-                            Value::Int(self.spell_cooldown_1),
-                        ),
-                        ArrayField::new(
-                            "spell_category",
-                            "spell_category_1",
-                            Value::Int(self.spell_category_1),
-                        ),
-                        ArrayField::new(
-                            "spell_category_cooldown",
-                            "spell_category_cooldown_1",
-                            Value::Int(self.spell_category_cooldown_1),
-                        ),
-                    ],
-                    vec![
-                        ArrayField::new("spell", "spell_id_2", Value::Int(self.spell_id_2)),
-                        ArrayField::new(
-                            "spell_trigger",
-                            "spell_trigger_2",
-                            Value::VanillaSpellTriggerType(self.spell_trigger_2),
-                        ),
-                        ArrayField::new(
-                            "spell_charges",
-                            "spell_charges_2",
-                            Value::Int(self.spell_charges_2),
-                        ),
-                        ArrayField::new(
-                            "spell_ppm_rate",
-                            "spell_ppm_rate_2",
-                            Value::Float(self.spell_ppm_rate_2),
-                        ),
-                        ArrayField::new(
-                            "spell_cooldown",
-                            "spell_cooldown_2",
-                            Value::Int(self.spell_cooldown_2),
-                        ),
-                        ArrayField::new(
-                            "spell_category",
-                            "spell_category_2",
-                            Value::Int(self.spell_category_2),
-                        ),
-                        ArrayField::new(
-                            "spell_category_cooldown",
-                            "spell_category_cooldown_2",
-                            Value::Int(self.spell_category_cooldown_2),
-                        ),
-                    ],
-                    vec![
-                        ArrayField::new("spell", "spell_id_3", Value::Int(self.spell_id_3)),
-                        ArrayField::new(
-                            "spell_trigger",
-                            "spell_trigger_3",
-                            Value::VanillaSpellTriggerType(self.spell_trigger_3),
-                        ),
-                        ArrayField::new(
-                            "spell_charges",
-                            "spell_charges_3",
-                            Value::Int(self.spell_charges_3),
-                        ),
-                        ArrayField::new(
-                            "spell_ppm_rate",
-                            "spell_ppm_rate_3",
-                            Value::Float(self.spell_ppm_rate_3),
-                        ),
-                        ArrayField::new(
-                            "spell_cooldown",
-                            "spell_cooldown_3",
-                            Value::Int(self.spell_cooldown_3),
-                        ),
-                        ArrayField::new(
-                            "spell_category",
-                            "spell_category_3",
-                            Value::Int(self.spell_category_3),
-                        ),
-                        ArrayField::new(
-                            "spell_category_cooldown",
-                            "spell_category_cooldown_3",
-                            Value::Int(self.spell_category_cooldown_3),
-                        ),
-                    ],
-                    vec![
-                        ArrayField::new("spell", "spell_id_4", Value::Int(self.spell_id_4)),
-                        ArrayField::new(
-                            "spell_trigger",
-                            "spell_trigger_4",
-                            Value::VanillaSpellTriggerType(self.spell_trigger_4),
-                        ),
-                        ArrayField::new(
-                            "spell_charges",
-                            "spell_charges_4",
-                            Value::Int(self.spell_charges_4),
-                        ),
-                        ArrayField::new(
-                            "spell_ppm_rate",
-                            "spell_ppm_rate_4",
-                            Value::Float(self.spell_ppm_rate_4),
-                        ),
-                        ArrayField::new(
-                            "spell_cooldown",
-                            "spell_cooldown_4",
-                            Value::Int(self.spell_cooldown_4),
-                        ),
-                        ArrayField::new(
-                            "spell_category",
-                            "spell_category_4",
-                            Value::Int(self.spell_category_4),
-                        ),
-                        ArrayField::new(
-                            "spell_category_cooldown",
-                            "spell_category_cooldown_4",
-                            Value::Int(self.spell_category_cooldown_4),
-                        ),
-                    ],
-                    vec![
-                        ArrayField::new("spell", "spell_id_5", Value::Int(self.spell_id_5)),
-                        ArrayField::new(
-                            "spell_trigger",
-                            "spell_trigger_5",
-                            Value::VanillaSpellTriggerType(self.spell_trigger_5),
-                        ),
-                        ArrayField::new(
-                            "spell_charges",
-                            "spell_charges_5",
-                            Value::Int(self.spell_charges_5),
-                        ),
-                        ArrayField::new(
-                            "spell_ppm_rate",
-                            "spell_ppm_rate_5",
-                            Value::Float(self.spell_ppm_rate_5),
-                        ),
-                        ArrayField::new(
-                            "spell_cooldown",
-                            "spell_cooldown_5",
-                            Value::Int(self.spell_cooldown_5),
-                        ),
-                        ArrayField::new(
-                            "spell_category",
-                            "spell_category_5",
-                            Value::Int(self.spell_category_5),
-                        ),
-                        ArrayField::new(
-                            "spell_category_cooldown",
-                            "spell_category_cooldown_5",
-                            Value::Int(self.spell_category_cooldown_5),
-                        ),
-                    ],
-                ],
+                ArrayInstances::new(vec![
+                    ArrayInstance::new(
+                        self.spell_id_1 == 0,
+                        vec![
+                            ArrayField::new("spell", "spell_id_1", Value::Int(self.spell_id_1)),
+                            ArrayField::new(
+                                "spell_trigger",
+                                "spell_trigger_1",
+                                Value::VanillaSpellTriggerType(self.spell_trigger_1),
+                            ),
+                            ArrayField::new(
+                                "spell_charges",
+                                "spell_charges_1",
+                                Value::Int(self.spell_charges_1),
+                            ),
+                            ArrayField::new(
+                                "spell_ppm_rate",
+                                "spell_ppm_rate_1",
+                                Value::Float(self.spell_ppm_rate_1),
+                            ),
+                            ArrayField::new(
+                                "spell_cooldown",
+                                "spell_cooldown_1",
+                                Value::Int(self.spell_cooldown_1),
+                            ),
+                            ArrayField::new(
+                                "spell_category",
+                                "spell_category_1",
+                                Value::Int(self.spell_category_1),
+                            ),
+                            ArrayField::new(
+                                "spell_category_cooldown",
+                                "spell_category_cooldown_1",
+                                Value::Int(self.spell_category_cooldown_1),
+                            ),
+                        ],
+                    ),
+                    ArrayInstance::new(
+                        self.spell_id_2 == 0,
+                        vec![
+                            ArrayField::new("spell", "spell_id_2", Value::Int(self.spell_id_2)),
+                            ArrayField::new(
+                                "spell_trigger",
+                                "spell_trigger_2",
+                                Value::VanillaSpellTriggerType(self.spell_trigger_2),
+                            ),
+                            ArrayField::new(
+                                "spell_charges",
+                                "spell_charges_2",
+                                Value::Int(self.spell_charges_2),
+                            ),
+                            ArrayField::new(
+                                "spell_ppm_rate",
+                                "spell_ppm_rate_2",
+                                Value::Float(self.spell_ppm_rate_2),
+                            ),
+                            ArrayField::new(
+                                "spell_cooldown",
+                                "spell_cooldown_2",
+                                Value::Int(self.spell_cooldown_2),
+                            ),
+                            ArrayField::new(
+                                "spell_category",
+                                "spell_category_2",
+                                Value::Int(self.spell_category_2),
+                            ),
+                            ArrayField::new(
+                                "spell_category_cooldown",
+                                "spell_category_cooldown_2",
+                                Value::Int(self.spell_category_cooldown_2),
+                            ),
+                        ],
+                    ),
+                    ArrayInstance::new(
+                        self.spell_id_3 == 0,
+                        vec![
+                            ArrayField::new("spell", "spell_id_3", Value::Int(self.spell_id_3)),
+                            ArrayField::new(
+                                "spell_trigger",
+                                "spell_trigger_3",
+                                Value::VanillaSpellTriggerType(self.spell_trigger_3),
+                            ),
+                            ArrayField::new(
+                                "spell_charges",
+                                "spell_charges_3",
+                                Value::Int(self.spell_charges_3),
+                            ),
+                            ArrayField::new(
+                                "spell_ppm_rate",
+                                "spell_ppm_rate_3",
+                                Value::Float(self.spell_ppm_rate_3),
+                            ),
+                            ArrayField::new(
+                                "spell_cooldown",
+                                "spell_cooldown_3",
+                                Value::Int(self.spell_cooldown_3),
+                            ),
+                            ArrayField::new(
+                                "spell_category",
+                                "spell_category_3",
+                                Value::Int(self.spell_category_3),
+                            ),
+                            ArrayField::new(
+                                "spell_category_cooldown",
+                                "spell_category_cooldown_3",
+                                Value::Int(self.spell_category_cooldown_3),
+                            ),
+                        ],
+                    ),
+                    ArrayInstance::new(
+                        self.spell_id_4 == 0,
+                        vec![
+                            ArrayField::new("spell", "spell_id_4", Value::Int(self.spell_id_4)),
+                            ArrayField::new(
+                                "spell_trigger",
+                                "spell_trigger_4",
+                                Value::VanillaSpellTriggerType(self.spell_trigger_4),
+                            ),
+                            ArrayField::new(
+                                "spell_charges",
+                                "spell_charges_4",
+                                Value::Int(self.spell_charges_4),
+                            ),
+                            ArrayField::new(
+                                "spell_ppm_rate",
+                                "spell_ppm_rate_4",
+                                Value::Float(self.spell_ppm_rate_4),
+                            ),
+                            ArrayField::new(
+                                "spell_cooldown",
+                                "spell_cooldown_4",
+                                Value::Int(self.spell_cooldown_4),
+                            ),
+                            ArrayField::new(
+                                "spell_category",
+                                "spell_category_4",
+                                Value::Int(self.spell_category_4),
+                            ),
+                            ArrayField::new(
+                                "spell_category_cooldown",
+                                "spell_category_cooldown_4",
+                                Value::Int(self.spell_category_cooldown_4),
+                            ),
+                        ],
+                    ),
+                    ArrayInstance::new(
+                        self.spell_id_5 == 0,
+                        vec![
+                            ArrayField::new("spell", "spell_id_5", Value::Int(self.spell_id_5)),
+                            ArrayField::new(
+                                "spell_trigger",
+                                "spell_trigger_5",
+                                Value::VanillaSpellTriggerType(self.spell_trigger_5),
+                            ),
+                            ArrayField::new(
+                                "spell_charges",
+                                "spell_charges_5",
+                                Value::Int(self.spell_charges_5),
+                            ),
+                            ArrayField::new(
+                                "spell_ppm_rate",
+                                "spell_ppm_rate_5",
+                                Value::Float(self.spell_ppm_rate_5),
+                            ),
+                            ArrayField::new(
+                                "spell_cooldown",
+                                "spell_cooldown_5",
+                                Value::Int(self.spell_cooldown_5),
+                            ),
+                            ArrayField::new(
+                                "spell_category",
+                                "spell_category_5",
+                                Value::Int(self.spell_category_5),
+                            ),
+                            ArrayField::new(
+                                "spell_category_cooldown",
+                                "spell_category_cooldown_5",
+                                Value::Int(self.spell_category_cooldown_5),
+                            ),
+                        ],
+                    ),
+                ]),
             ),
         ];
 

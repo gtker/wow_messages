@@ -87,9 +87,13 @@ pub struct Item {
     holiday_id: i16,
     disenchant_id: i8,
     food_type: i8,
+    sockets_length: u8,
     sockets: [ItemSocket; 3],
+    damages_length: u8,
     damages: [ItemDamageType; 2],
+    stats_length: u8,
     stats: [ItemStat; 10],
+    spells_length: u8,
     spells: [Spells; 5],
 }
 
@@ -154,18 +158,21 @@ impl Item {
         holiday_id: i16,
         disenchant_id: i8,
         food_type: i8,
+        sockets_length: u8,
         socket_color_1: u32,
         socket_content_1: u32,
         socket_color_2: u32,
         socket_content_2: u32,
         socket_color_3: u32,
         socket_content_3: u32,
+        damages_length: u8,
         dmg_min1: f32,
         dmg_max1: f32,
         dmg_type1: SpellSchool,
         dmg_min2: f32,
         dmg_max2: f32,
         dmg_type2: SpellSchool,
+        stats_length: u8,
         stat_type1: u32,
         stat_value1: i32,
         stat_type2: u32,
@@ -186,6 +193,7 @@ impl Item {
         stat_value9: i32,
         stat_type10: u32,
         stat_value10: i32,
+        spells_length: u8,
         spell_id_1: i32,
         spell_trigger_1: SpellTriggerType,
         spell_charges_1: i32,
@@ -282,6 +290,7 @@ impl Item {
             holiday_id,
             disenchant_id,
             food_type,
+            sockets_length,
             sockets: [
             ItemSocket {
                 color: socket_color_1,
@@ -296,6 +305,7 @@ impl Item {
                 content: socket_content_3,
             },
             ],
+            damages_length,
             damages: [
             ItemDamageType {
                 damage_minimum: dmg_min1,
@@ -308,6 +318,7 @@ impl Item {
                 school: dmg_type2,
             },
             ],
+            stats_length,
             stats: [
             ItemStat {
                 stat_type: stat_type1,
@@ -350,6 +361,7 @@ impl Item {
                 value: stat_value10,
             },
             ],
+            spells_length,
             spells: [
             Spells::new(
             spell_id_1,
@@ -475,10 +487,12 @@ impl Item {
         self.required_spell
     }
 
+    /// Always returns `PvpRank::NoRank`.
     pub const fn required_honor_rank(&self) -> PvpRank {
         PvpRank::NoRank
     }
 
+    /// Always returns `0`.
     pub const fn required_city_rank(&self) -> i32 {
         0
     }
@@ -507,6 +521,7 @@ impl Item {
         self.stats_count as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn scaling_stat_distribution(&self) -> i32 {
         match self.entry {
             42943 => 1,
@@ -551,6 +566,7 @@ impl Item {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn scaling_stat_value(&self) -> i32 {
         match self.entry {
             42991 | 42992 | 44097 | 44098 => 2,
@@ -576,6 +592,7 @@ impl Item {
         self.armor as i32
     }
 
+    /// Always returns `0`.
     pub const fn holy_res(&self) -> i32 {
         0
     }
@@ -636,6 +653,7 @@ impl Item {
         self.start_quest as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn lock_id(&self) -> i32 {
         match self.entry {
             2503 => 2,
@@ -689,6 +707,7 @@ impl Item {
         self.area
     }
 
+    /// Returns `Map::EasternKingdoms` except for specific item entries.
     pub const fn map(&self) -> Map {
         match self.entry {
             18266 | 18268 => Map::DireMaul,
@@ -754,6 +773,7 @@ impl Item {
         self.food_type as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn min_money_loot(&self) -> i32 {
         match self.entry {
             20708 => 50,
@@ -781,6 +801,7 @@ impl Item {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn max_money_loot(&self) -> i32 {
         match self.entry {
             20708 => 100,
@@ -810,6 +831,7 @@ impl Item {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn extra_flags(&self) -> i32 {
         match self.entry {
             5810 | 9437 | 9438 | 9439 | 9440 | 9441 | 9442 | 10338 | 10684 | 10790 | 10791 | 11885 | 12586 | 19807 | 21171 | 21174 | 22736 | 23247 | 23379 | 30320 | 30850 | 33096 | 33176 | 33182 | 33183 | 33184 | 35313 | 39878 | 44717 => 1,
@@ -818,20 +840,76 @@ impl Item {
         }
     }
 
-    pub const fn sockets(&self) -> &[ItemSocket; 3] {
+    pub const fn sockets_array(&self) -> &[ItemSocket; 3] {
         &self.sockets
     }
 
-    pub const fn damages(&self) -> &[ItemDamageType; 2] {
+    pub const fn sockets(&self) -> &[ItemSocket] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.sockets.as_slice();
+        loop {
+            if s.len() == (self.sockets_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
+    }
+
+    pub const fn damages_array(&self) -> &[ItemDamageType; 2] {
         &self.damages
     }
 
-    pub const fn stats(&self) -> &[ItemStat; 10] {
+    pub const fn damages(&self) -> &[ItemDamageType] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.damages.as_slice();
+        loop {
+            if s.len() == (self.damages_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
+    }
+
+    pub const fn stats_array(&self) -> &[ItemStat; 10] {
         &self.stats
     }
 
-    pub const fn spells(&self) -> &[Spells; 5] {
+    pub const fn stats(&self) -> &[ItemStat] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.stats.as_slice();
+        loop {
+            if s.len() == (self.stats_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
+    }
+
+    pub const fn spells_array(&self) -> &[Spells; 5] {
         &self.spells
+    }
+
+    pub const fn spells(&self) -> &[Spells] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.spells.as_slice();
+        loop {
+            if s.len() == (self.spells_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
     }
 
 }

@@ -233,7 +233,7 @@ impl Optimizations {
 pub struct Array {
     pub variable_name: &'static str,
     pub type_name: &'static str,
-    pub instances: Vec<Vec<ArrayField>>,
+    pub instances: ArrayInstances,
     pub import_only: bool,
 }
 
@@ -242,7 +242,7 @@ impl Array {
         variable_name: &'static str,
         type_name: &'static str,
         import_only: bool,
-        instances: Vec<Vec<ArrayField>>,
+        instances: ArrayInstances,
     ) -> Self {
         Self {
             variable_name,
@@ -253,9 +253,64 @@ impl Array {
     }
 
     pub fn is_default(&self) -> bool {
-        self.instances
-            .iter()
-            .all(|a| a.iter().all(|a| a.is_default()))
+        self.instances.instances().iter().all(|a| a.is_default())
+    }
+}
+
+pub struct ArrayInstances {
+    instances: Vec<ArrayInstance>,
+}
+
+impl ArrayInstances {
+    pub fn new(mut instances: Vec<ArrayInstance>) -> Self {
+        for i in 0..(instances.len() - 1) {
+            let next = i + 1;
+
+            if instances[i].is_default() && !instances[next].is_default() {
+                let instance = instances.remove(i);
+                instances.insert(next, instance);
+            }
+        }
+
+        Self { instances }
+    }
+
+    pub fn instances(&self) -> &[ArrayInstance] {
+        &self.instances
+    }
+
+    pub fn max_valid_instance(&self) -> u8 {
+        for (i, instance) in self.instances().iter().enumerate() {
+            if instance.is_default() {
+                return i.try_into().unwrap();
+            }
+        }
+
+        self.instances().len().try_into().unwrap()
+    }
+}
+
+pub struct ArrayInstance {
+    is_default: bool,
+    fields: Vec<ArrayField>,
+}
+
+impl ArrayInstance {
+    pub fn new(is_default: bool, fields: Vec<ArrayField>) -> Self {
+        Self { is_default, fields }
+    }
+
+    pub fn default_values(fields: Vec<ArrayField>) -> Self {
+        let is_default = fields.iter().all(|a| a.is_default());
+        Self { is_default, fields }
+    }
+
+    pub fn fields(&self) -> &[ArrayField] {
+        &self.fields
+    }
+
+    pub fn is_default(&self) -> bool {
+        self.is_default
     }
 }
 

@@ -81,9 +81,13 @@ pub struct Item {
     food_type: i8,
     duration: i32,
     extra_flags: i8,
+    sockets_length: u8,
     sockets: [ItemSocket; 3],
+    damages_length: u8,
     damages: [ItemDamageType; 5],
+    stats_length: u8,
     stats: [ItemStat; 10],
+    spells_length: u8,
     spells: [Spells; 5],
 }
 
@@ -143,12 +147,14 @@ impl Item {
         food_type: i8,
         duration: i32,
         extra_flags: i8,
+        sockets_length: u8,
         socket_color_1: u32,
         socket_content_1: u32,
         socket_color_2: u32,
         socket_content_2: u32,
         socket_color_3: u32,
         socket_content_3: u32,
+        damages_length: u8,
         dmg_min1: f32,
         dmg_max1: f32,
         dmg_type1: SpellSchool,
@@ -164,6 +170,7 @@ impl Item {
         dmg_min5: f32,
         dmg_max5: f32,
         dmg_type5: SpellSchool,
+        stats_length: u8,
         stat_type1: u32,
         stat_value1: i32,
         stat_type2: u32,
@@ -184,6 +191,7 @@ impl Item {
         stat_value9: i32,
         stat_type10: u32,
         stat_value10: i32,
+        spells_length: u8,
         spell_id_1: i32,
         spell_trigger_1: SpellTriggerType,
         spell_charges_1: i32,
@@ -275,6 +283,7 @@ impl Item {
             food_type,
             duration,
             extra_flags,
+            sockets_length,
             sockets: [
             ItemSocket {
                 color: socket_color_1,
@@ -289,6 +298,7 @@ impl Item {
                 content: socket_content_3,
             },
             ],
+            damages_length,
             damages: [
             ItemDamageType {
                 damage_minimum: dmg_min1,
@@ -316,6 +326,7 @@ impl Item {
                 school: dmg_type5,
             },
             ],
+            stats_length,
             stats: [
             ItemStat {
                 stat_type: stat_type1,
@@ -358,6 +369,7 @@ impl Item {
                 value: stat_value10,
             },
             ],
+            spells_length,
             spells: [
             Spells::new(
             spell_id_1,
@@ -479,10 +491,12 @@ impl Item {
         self.required_spell as i32
     }
 
+    /// Always returns `PvpRank::NoRank`.
     pub const fn required_honor_rank(&self) -> PvpRank {
         PvpRank::NoRank
     }
 
+    /// Always returns `0`.
     pub const fn required_city_rank(&self) -> i32 {
         0
     }
@@ -511,6 +525,7 @@ impl Item {
         self.armor as i32
     }
 
+    /// Always returns `0`.
     pub const fn holy_res(&self) -> i32 {
         0
     }
@@ -571,6 +586,7 @@ impl Item {
         self.start_quest as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn lock_id(&self) -> i32 {
         match self.entry {
             2503 => 2,
@@ -617,6 +633,7 @@ impl Item {
         self.max_durability as i32
     }
 
+    /// Returns `Area::None` except for specific item entries.
     pub const fn area(&self) -> Area {
         match self.entry {
             36748 => Area::BlackrockDepths,
@@ -630,6 +647,7 @@ impl Item {
         }
     }
 
+    /// Returns `Map::EasternKingdoms` except for specific item entries.
     pub const fn map(&self) -> Map {
         match self.entry {
             18266 | 18268 => Map::DireMaul,
@@ -648,6 +666,7 @@ impl Item {
         self.bag_family
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn totem_category(&self) -> i32 {
         match self.entry {
             7005 | 12709 | 19901 => 1,
@@ -696,6 +715,7 @@ impl Item {
         self.food_type as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn min_money_loot(&self) -> i32 {
         match self.entry {
             20708 => 50,
@@ -719,6 +739,7 @@ impl Item {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn max_money_loot(&self) -> i32 {
         match self.entry {
             20708 => 100,
@@ -752,20 +773,76 @@ impl Item {
         self.extra_flags as i32
     }
 
-    pub const fn sockets(&self) -> &[ItemSocket; 3] {
+    pub const fn sockets_array(&self) -> &[ItemSocket; 3] {
         &self.sockets
     }
 
-    pub const fn damages(&self) -> &[ItemDamageType; 5] {
+    pub const fn sockets(&self) -> &[ItemSocket] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.sockets.as_slice();
+        loop {
+            if s.len() == (self.sockets_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
+    }
+
+    pub const fn damages_array(&self) -> &[ItemDamageType; 5] {
         &self.damages
     }
 
-    pub const fn stats(&self) -> &[ItemStat; 10] {
+    pub const fn damages(&self) -> &[ItemDamageType] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.damages.as_slice();
+        loop {
+            if s.len() == (self.damages_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
+    }
+
+    pub const fn stats_array(&self) -> &[ItemStat; 10] {
         &self.stats
     }
 
-    pub const fn spells(&self) -> &[Spells; 5] {
+    pub const fn stats(&self) -> &[ItemStat] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.stats.as_slice();
+        loop {
+            if s.len() == (self.stats_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
+    }
+
+    pub const fn spells_array(&self) -> &[Spells; 5] {
         &self.spells
+    }
+
+    pub const fn spells(&self) -> &[Spells] {
+        // Can't slice like a[..5] in const fn
+        let mut s = self.spells.as_slice();
+        loop {
+            if s.len() == (self.spells_length as usize) {
+                return s;
+            }
+            s = match s {
+                [r @ .., _last] => r,
+                _ => unreachable!(),
+            };
+        }
     }
 
 }
