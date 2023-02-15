@@ -230,6 +230,7 @@ impl Optimizations {
     }
 }
 
+#[derive(Debug, Clone, PartialOrd, PartialEq)]
 pub struct Array {
     pub variable_name: &'static str,
     pub type_name: &'static str,
@@ -257,6 +258,16 @@ impl Array {
     }
 }
 
+impl Eq for Array {}
+
+#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
+impl Ord for Array {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.partial_cmp(other).unwrap()
+    }
+}
+
+#[derive(Debug, Clone, PartialOrd, PartialEq)]
 pub struct ArrayInstances {
     instances: Vec<ArrayInstance>,
 }
@@ -290,6 +301,16 @@ impl ArrayInstances {
     }
 }
 
+impl Eq for ArrayInstances {}
+
+#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
+impl Ord for ArrayInstances {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.partial_cmp(other).unwrap()
+    }
+}
+
+#[derive(Debug, Clone, PartialOrd, PartialEq)]
 pub struct ArrayInstance {
     is_default: bool,
     fields: Vec<ArrayField>,
@@ -314,6 +335,16 @@ impl ArrayInstance {
     }
 }
 
+impl Eq for ArrayInstance {}
+
+#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
+impl Ord for ArrayInstance {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.partial_cmp(other).unwrap()
+    }
+}
+
+#[derive(Debug, Clone, PartialOrd, PartialEq)]
 pub struct ArrayField {
     pub name: &'static str,
     pub variable_name: &'static str,
@@ -341,6 +372,15 @@ impl ArrayField {
 
     pub fn is_default(&self) -> bool {
         self.value.is_default()
+    }
+}
+
+impl Eq for ArrayField {}
+
+#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
+impl Ord for ArrayField {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.partial_cmp(other).unwrap()
     }
 }
 
