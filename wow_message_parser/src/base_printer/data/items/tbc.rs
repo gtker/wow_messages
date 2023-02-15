@@ -1,7 +1,7 @@
-use crate::base_printer::data::items;
 use crate::base_printer::data::items::{
     Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations, Value,
 };
+use crate::base_printer::data::{get_fields, items};
 use crate::base_printer::write::items::GenericThing;
 use rusqlite::Connection;
 use wow_world_base::tbc::{
@@ -1022,6 +1022,6 @@ ORDER BY
         .unwrap();
 
     let items: Vec<_> = r.map(|a| a.unwrap().into_generic_item()).collect();
-    let opt = Optimizations::new(&items);
+    let opt = Optimizations::new(&items, get_fields(&items));
     (items, opt)
 }

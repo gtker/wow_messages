@@ -82,10 +82,9 @@ pub(crate) fn includes(
 
     for array in arrays {
         match import_location {
-            ImportFrom::ItemPubUse => {
+            ImportFrom::Items | ImportFrom::ItemPubUse | ImportFrom::ItemsConstructors => {
                 set.insert(array.type_name);
             }
-            ImportFrom::Items | ImportFrom::ItemsConstructors => {}
             ImportFrom::Definition => {
                 if array.import_only {
                     set.insert(array.type_name);
@@ -93,9 +92,14 @@ pub(crate) fn includes(
             }
         }
 
-        for e in array.instances.instances()[0].fields() {
-            if let Some(name) = e.value.import_name() {
-                set.insert(name);
+        for e in array.field_info().fields() {
+            match import_location {
+                ImportFrom::ItemPubUse | ImportFrom::Items | ImportFrom::Definition => {
+                    if let Some(name) = e.value.import_name() {
+                        set.insert(name);
+                    }
+                }
+                ImportFrom::ItemsConstructors => {}
             }
         }
     }
@@ -128,13 +132,9 @@ fn struct_definition(
     }
 
     for array in arrays {
-        s.wln(format!("{}_length: u8,", array.variable_name));
-
         s.wln(format!(
-            "{}: [{}; {}],",
-            array.variable_name,
-            array.type_name,
-            array.instances.instances().len()
+            "{}: &'static [{}],",
+            array.variable_name, array.type_name,
         ));
     }
 
@@ -151,7 +151,7 @@ fn array_definitions(s: &mut Writer, arrays: &[Array]) {
         s.wln("#[derive(Debug, Copy, Clone)]");
         s.open_curly(format!("pub struct {}", array.type_name));
 
-        for e in array.instances.instances()[0].fields() {
+        for e in array.field_info().fields() {
             s.wln(format!("pub {}: {},", e.name, e.value.type_name()));
         }
 
@@ -162,12 +162,12 @@ fn array_definitions(s: &mut Writer, arrays: &[Array]) {
 
         s.pub_const_fn_new(
             |s| {
-                for e in array.instances.instances()[0].fields() {
+                for e in array.field_info().fields() {
                     s.wln(format!("{}: {},", e.name, e.value.type_name()));
                 }
             },
             |s| {
-                for e in array.instances.instances()[0].fields() {
+                for e in array.field_info().fields() {
                     s.wln(format!("{},", e.name));
                 }
             },
@@ -197,17 +197,10 @@ fn impl_block(
             }
 
             for array in arrays {
-                s.wln(format!("{}_length: u8,", array.variable_name));
-
-                for instance in array.instances.instances() {
-                    for field in instance.fields() {
-                        s.wln(format!(
-                            "{}: {},",
-                            field.variable_name,
-                            field.value.type_name()
-                        ));
-                    }
-                }
+                s.wln(format!(
+                    "{}: &'static [{}],",
+                    array.variable_name, array.type_name,
+                ));
             }
         },
         |s| {
@@ -220,30 +213,7 @@ fn impl_block(
             }
 
             for array in arrays {
-                s.wln(format!("{}_length,", array.variable_name));
-
-                s.wln(format!("{}: [", array.variable_name));
-
-                for instance in array.instances.instances() {
-                    if array.import_only {
-                        s.open_curly(array.type_name);
-
-                        for field in instance.fields() {
-                            s.wln(format!("{}: {},", field.name, field.variable_name,));
-                        }
-
-                        s.dec_indent();
-                        s.wln("},");
-                    } else {
-                        s.wln(format!("{}::new(", array.type_name));
-                        for field in instance.fields() {
-                            s.wln(format!("{},", field.variable_name,));
-                        }
-                        s.wln("),");
-                    }
-                }
-
-                s.wln("],");
+                s.wln(format!("{},", array.variable_name,));
             }
         },
     );
@@ -322,13 +292,9 @@ fn getters_and_setters(
     for array in arrays {
         s.pub_const_fn(
             format!("{}_array", array.variable_name),
-            format!(
-                "&[{}; {}]",
-                array.type_name,
-                array.instances.instances().len()
-            ),
+            format!("&[{}; {}]", array.type_name, array.array_length()),
             |s| {
-                s.wln(format!("&self.{}", array.variable_name));
+                s.wln("unimplemented!()");
             },
         );
         s.newline();
@@ -337,31 +303,7 @@ fn getters_and_setters(
             array.variable_name,
             format!("&[{}]", array.type_name,),
             |s| {
-                s.wln("// Can't slice like a[..5] in const fn");
-                s.wln(format!(
-                    "let mut s = self.{}.as_slice();",
-                    array.variable_name
-                ));
-
-                s.body("loop", |s| {
-                    s.body(
-                        format!(
-                            "if s.len() == (self.{}_length as usize)",
-                            array.variable_name
-                        ),
-                        |s| {
-                            s.wln("return s;");
-                        },
-                    );
-
-                    s.open_curly("s = match s");
-
-                    s.wln("[r @ .., _last] => r,");
-                    s.wln("_ => unreachable!(),");
-
-                    s.dec_indent();
-                    s.wln("};");
-                });
+                s.wln(format!("self.{}", array.variable_name));
             },
         );
         s.newline();

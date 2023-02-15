@@ -87,14 +87,10 @@ pub struct Item {
     holiday_id: i16,
     disenchant_id: i8,
     food_type: i8,
-    sockets_length: u8,
-    sockets: [ItemSocket; 3],
-    damages_length: u8,
-    damages: [ItemDamageType; 2],
-    stats_length: u8,
-    stats: [ItemStat; 10],
-    spells_length: u8,
-    spells: [Spells; 5],
+    sockets: &'static [ItemSocket],
+    damages: &'static [ItemDamageType],
+    stats: &'static [ItemStat],
+    spells: &'static [Spells],
 }
 
 impl Item {
@@ -158,77 +154,10 @@ impl Item {
         holiday_id: i16,
         disenchant_id: i8,
         food_type: i8,
-        sockets_length: u8,
-        socket_color_1: u32,
-        socket_content_1: u32,
-        socket_color_2: u32,
-        socket_content_2: u32,
-        socket_color_3: u32,
-        socket_content_3: u32,
-        damages_length: u8,
-        dmg_min1: f32,
-        dmg_max1: f32,
-        dmg_type1: SpellSchool,
-        dmg_min2: f32,
-        dmg_max2: f32,
-        dmg_type2: SpellSchool,
-        stats_length: u8,
-        stat_type1: u32,
-        stat_value1: i32,
-        stat_type2: u32,
-        stat_value2: i32,
-        stat_type3: u32,
-        stat_value3: i32,
-        stat_type4: u32,
-        stat_value4: i32,
-        stat_type5: u32,
-        stat_value5: i32,
-        stat_type6: u32,
-        stat_value6: i32,
-        stat_type7: u32,
-        stat_value7: i32,
-        stat_type8: u32,
-        stat_value8: i32,
-        stat_type9: u32,
-        stat_value9: i32,
-        stat_type10: u32,
-        stat_value10: i32,
-        spells_length: u8,
-        spell_id_1: i32,
-        spell_trigger_1: SpellTriggerType,
-        spell_charges_1: i32,
-        spell_ppm_rate_1: f32,
-        spell_cooldown_1: i32,
-        spell_category_1: i32,
-        spell_category_cooldown_1: i32,
-        spell_id_2: i32,
-        spell_trigger_2: SpellTriggerType,
-        spell_charges_2: i32,
-        spell_ppm_rate_2: f32,
-        spell_cooldown_2: i32,
-        spell_category_2: i32,
-        spell_category_cooldown_2: i32,
-        spell_id_3: i32,
-        spell_trigger_3: SpellTriggerType,
-        spell_charges_3: i32,
-        spell_ppm_rate_3: f32,
-        spell_cooldown_3: i32,
-        spell_category_3: i32,
-        spell_category_cooldown_3: i32,
-        spell_id_4: i32,
-        spell_trigger_4: SpellTriggerType,
-        spell_charges_4: i32,
-        spell_ppm_rate_4: f32,
-        spell_cooldown_4: i32,
-        spell_category_4: i32,
-        spell_category_cooldown_4: i32,
-        spell_id_5: i32,
-        spell_trigger_5: SpellTriggerType,
-        spell_charges_5: i32,
-        spell_ppm_rate_5: f32,
-        spell_cooldown_5: i32,
-        spell_category_5: i32,
-        spell_category_cooldown_5: i32,
+        sockets: &'static [ItemSocket],
+        damages: &'static [ItemDamageType],
+        stats: &'static [ItemStat],
+        spells: &'static [Spells],
     ) -> Self {
         Self {
             entry,
@@ -290,125 +219,10 @@ impl Item {
             holiday_id,
             disenchant_id,
             food_type,
-            sockets_length,
-            sockets: [
-            ItemSocket {
-                color: socket_color_1,
-                content: socket_content_1,
-            },
-            ItemSocket {
-                color: socket_color_2,
-                content: socket_content_2,
-            },
-            ItemSocket {
-                color: socket_color_3,
-                content: socket_content_3,
-            },
-            ],
-            damages_length,
-            damages: [
-            ItemDamageType {
-                damage_minimum: dmg_min1,
-                damage_maximum: dmg_max1,
-                school: dmg_type1,
-            },
-            ItemDamageType {
-                damage_minimum: dmg_min2,
-                damage_maximum: dmg_max2,
-                school: dmg_type2,
-            },
-            ],
-            stats_length,
-            stats: [
-            ItemStat {
-                stat_type: stat_type1,
-                value: stat_value1,
-            },
-            ItemStat {
-                stat_type: stat_type2,
-                value: stat_value2,
-            },
-            ItemStat {
-                stat_type: stat_type3,
-                value: stat_value3,
-            },
-            ItemStat {
-                stat_type: stat_type4,
-                value: stat_value4,
-            },
-            ItemStat {
-                stat_type: stat_type5,
-                value: stat_value5,
-            },
-            ItemStat {
-                stat_type: stat_type6,
-                value: stat_value6,
-            },
-            ItemStat {
-                stat_type: stat_type7,
-                value: stat_value7,
-            },
-            ItemStat {
-                stat_type: stat_type8,
-                value: stat_value8,
-            },
-            ItemStat {
-                stat_type: stat_type9,
-                value: stat_value9,
-            },
-            ItemStat {
-                stat_type: stat_type10,
-                value: stat_value10,
-            },
-            ],
-            spells_length,
-            spells: [
-            Spells::new(
-            spell_id_1,
-            spell_trigger_1,
-            spell_charges_1,
-            spell_ppm_rate_1,
-            spell_cooldown_1,
-            spell_category_1,
-            spell_category_cooldown_1,
-            ),
-            Spells::new(
-            spell_id_2,
-            spell_trigger_2,
-            spell_charges_2,
-            spell_ppm_rate_2,
-            spell_cooldown_2,
-            spell_category_2,
-            spell_category_cooldown_2,
-            ),
-            Spells::new(
-            spell_id_3,
-            spell_trigger_3,
-            spell_charges_3,
-            spell_ppm_rate_3,
-            spell_cooldown_3,
-            spell_category_3,
-            spell_category_cooldown_3,
-            ),
-            Spells::new(
-            spell_id_4,
-            spell_trigger_4,
-            spell_charges_4,
-            spell_ppm_rate_4,
-            spell_cooldown_4,
-            spell_category_4,
-            spell_category_cooldown_4,
-            ),
-            Spells::new(
-            spell_id_5,
-            spell_trigger_5,
-            spell_charges_5,
-            spell_ppm_rate_5,
-            spell_cooldown_5,
-            spell_category_5,
-            spell_category_cooldown_5,
-            ),
-            ],
+            sockets,
+            damages,
+            stats,
+            spells,
         }
     }
     pub const fn entry(&self) -> u32 {
@@ -841,75 +655,35 @@ impl Item {
     }
 
     pub const fn sockets_array(&self) -> &[ItemSocket; 3] {
-        &self.sockets
+        unimplemented!()
     }
 
     pub const fn sockets(&self) -> &[ItemSocket] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.sockets.as_slice();
-        loop {
-            if s.len() == (self.sockets_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.sockets
     }
 
     pub const fn damages_array(&self) -> &[ItemDamageType; 2] {
-        &self.damages
+        unimplemented!()
     }
 
     pub const fn damages(&self) -> &[ItemDamageType] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.damages.as_slice();
-        loop {
-            if s.len() == (self.damages_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.damages
     }
 
     pub const fn stats_array(&self) -> &[ItemStat; 10] {
-        &self.stats
+        unimplemented!()
     }
 
     pub const fn stats(&self) -> &[ItemStat] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.stats.as_slice();
-        loop {
-            if s.len() == (self.stats_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.stats
     }
 
     pub const fn spells_array(&self) -> &[Spells; 5] {
-        &self.spells
+        unimplemented!()
     }
 
     pub const fn spells(&self) -> &[Spells] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.spells.as_slice();
-        loop {
-            if s.len() == (self.spells_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.spells
     }
 
 }

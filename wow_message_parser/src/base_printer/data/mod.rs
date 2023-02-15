@@ -6,7 +6,7 @@ pub(crate) mod spells;
 use super::position::{positions, RawPosition};
 use super::types::{Class, Race};
 use super::Expansion;
-use crate::base_printer::data::items::{get_items, Optimizations};
+use crate::base_printer::data::items::{get_items, Field, Optimizations};
 use crate::base_printer::data::pet_names::{get_pet_name_data, Pet, PetNames};
 use crate::base_printer::data::spells::get_spells;
 use crate::base_printer::write::items::GenericThing;
@@ -37,6 +37,10 @@ impl Data {
             Expansion::WrathOfTheLichKing => a.valid_versions.wrath(),
         })
     }
+}
+
+pub(crate) fn get_fields(things: &[GenericThing]) -> &[Field] {
+    &things[0].fields
 }
 
 pub(crate) struct XpPerLevel {

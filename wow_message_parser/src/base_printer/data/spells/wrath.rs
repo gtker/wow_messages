@@ -1,3 +1,4 @@
+use crate::base_printer::data::get_fields;
 use crate::base_printer::data::items::{
     Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations, Value,
 };
@@ -1289,6 +1290,6 @@ pub(crate) fn wrath(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
         .unwrap();
 
     let spells: Vec<_> = r.map(|a| a.unwrap().into_generic_spell()).collect();
-    let optimizations = Optimizations::new(&spells);
+    let optimizations = Optimizations::new(&spells, get_fields(&spells));
     (spells, optimizations)
 }

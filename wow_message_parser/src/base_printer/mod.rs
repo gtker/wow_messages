@@ -4,8 +4,10 @@ mod types;
 mod write;
 mod writer;
 
+use crate::base_printer::data::get_fields;
+use crate::base_printer::write::items::all_items::unobtainable_item;
 use crate::base_printer::write::items::{
-    unobtainable_item, write_constructors, write_definition, write_pub_use, write_things,
+    write_constructors, write_definition, write_pub_use, write_things,
 };
 use crate::path_utils::workspace_directory;
 use data::{get_data_from_sqlite_file, Data};
@@ -199,7 +201,7 @@ fn write_items(data: &Data, expansion: Expansion) {
     );
     write_definition(
         &expansion.item_definition_path(),
-        &items[0].fields,
+        get_fields(&items),
         &items[0].arrays,
         expansion,
         TY_NAME,

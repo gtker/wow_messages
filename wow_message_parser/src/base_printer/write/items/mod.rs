@@ -1,8 +1,11 @@
-mod constructor;
+pub(crate) mod all_items;
+pub(crate) mod constructor;
 pub(crate) mod conversions;
 pub(crate) mod definition;
 
-use crate::base_printer::data::items::{Array, Field, IntegerSize, Optimizations, Value};
+use crate::base_printer::data::items::{
+    Array, ArrayInstances, Field, IntegerSize, Optimizations, Value,
+};
 use std::collections::{BTreeMap, BTreeSet};
 
 pub(crate) struct Stats {
@@ -15,6 +18,7 @@ pub(crate) struct Stats {
     pub mana: i32,
 }
 
+use crate::base_printer::write::items::all_items::all_items;
 use crate::base_printer::write::items::constructor::constructor;
 use crate::base_printer::write::items::definition::{definition, includes};
 use crate::base_printer::writer::Writer;
@@ -147,8 +151,9 @@ pub(crate) fn write_things(
 ) {
     let mut s = Writer::new();
 
-    let default_values = get_default_values(things, optimizations);
+    let (default_values, arrays) = get_default_values(things, optimizations);
     const_default_values(&mut s, &default_values);
+    print_arrays(&mut s, &arrays);
 
     all_items(
         &mut s,
@@ -157,6 +162,7 @@ pub(crate) fn write_things(
         unobtainable,
         ty_name,
         &default_values,
+        &arrays,
         optimizations,
     );
 
@@ -211,9 +217,11 @@ impl ConstNamer {
 fn get_default_values(
     things: &[GenericThing],
     optimizations: &Optimizations,
-) -> BTreeMap<(Value, Option<IntegerSize>), String> {
-    let mut map: BTreeMap<(Value, Option<IntegerSize>), usize> = BTreeMap::new();
-
+) -> (
+    BTreeMap<(Value, Option<IntegerSize>), String>,
+    BTreeMap<(ArrayInstances, &'static str), String>,
+) {
+    let mut values: BTreeMap<(Value, Option<IntegerSize>), usize> = BTreeMap::new();
     for thing in things {
         for field in &thing.fields {
             if optimizations.optimization(field.name).skip_field() {
@@ -221,49 +229,78 @@ fn get_default_values(
             }
 
             insert_value(
-                &mut map,
+                &mut values,
                 &field.value.const_value(),
                 optimizations.integer_size(field),
             )
         }
+    }
 
+    let mut arrays = BTreeMap::new();
+    for thing in things {
         for array in &thing.arrays {
             if array.is_default() {
                 continue;
             }
 
-            for instance in array.instances.instances() {
-                for field in instance.fields() {
-                    insert_value(&mut map, &field.value.const_value(), field.integer_size())
-                }
+            if let Some(amount) = arrays.get_mut(&(array.instances.clone(), array.type_name)) {
+                *amount += 1;
+            } else {
+                arrays.insert((array.instances.clone(), array.type_name), 1);
             }
         }
     }
 
+    enum ValuesWrapper {
+        Values(((Value, Option<IntegerSize>), usize)),
+        Arrays(((ArrayInstances, &'static str), usize)),
+    }
+
     // Ensure that most used consts have the shortest name
-    let mut map = map.into_iter().collect::<Vec<_>>();
-    map.sort_by(|a, b| b.1.cmp(&a.1));
+    let values = values.into_iter().map(|a| ValuesWrapper::Values(a));
+    let arrays = arrays.into_iter().map(|a| ValuesWrapper::Arrays(a));
+
+    let mut values: Vec<_> = values.chain(arrays).collect();
+    values.sort_by(|a, b| match a {
+        ValuesWrapper::Values((_, amount)) => match b {
+            ValuesWrapper::Values((_, amount2)) => amount2.cmp(amount),
+            ValuesWrapper::Arrays((_, amount2)) => amount2.cmp(amount),
+        },
+        ValuesWrapper::Arrays((_, amount)) => match b {
+            ValuesWrapper::Values((_, amount2)) => amount2.cmp(amount),
+            ValuesWrapper::Arrays((_, amount2)) => amount2.cmp(amount),
+        },
+    });
 
     let mut namer = ConstNamer::new();
-    let mut set = BTreeMap::new();
-    for (value, amount) in map {
-        let ty_name = if let Some(t) = value.1 {
-            t.string_value()
-        } else {
-            value.0.const_variable_type_name()
-        };
-        let try_name = namer.try_next();
-        let definition = get_const_definition(&try_name, ty_name, &value.0.to_string_value());
+    let mut values_output = BTreeMap::new();
+    let mut arrays_output = BTreeMap::new();
+    for value in values {
+        match value {
+            ValuesWrapper::Values((value, amount)) => {
+                let ty_name = if let Some(t) = value.1 {
+                    t.string_value()
+                } else {
+                    value.0.const_variable_type_name()
+                };
+                let try_name = namer.try_next();
+                let definition =
+                    get_const_definition(&try_name, ty_name, &value.0.to_string_value());
 
-        let definition_characters = definition.len() + amount * try_name.len();
-        let no_definition_characters = amount * value.0.to_string_value().len();
+                let definition_characters = definition.len() + amount * try_name.len();
+                let no_definition_characters = amount * value.0.to_string_value().len();
 
-        if definition_characters <= no_definition_characters {
-            set.insert(value, namer.next());
+                if definition_characters <= no_definition_characters {
+                    values_output.insert(value, namer.next());
+                }
+            }
+            ValuesWrapper::Arrays((array, _)) => {
+                arrays_output.insert(array, namer.next());
+            }
         }
     }
 
-    set
+    (values_output, arrays_output)
 }
 
 fn insert_value(
@@ -275,6 +312,28 @@ fn insert_value(
         *g += 1;
     } else {
         map.insert((value.clone(), integer_size), 1);
+    }
+}
+
+fn print_arrays(s: &mut Writer, arrays: &BTreeMap<(ArrayInstances, &'static str), String>) {
+    for ((array, ty_name), const_name) in arrays {
+        s.w(format!("const {const_name}:&[{ty_name}]=&["));
+
+        for instance in array.instances() {
+            s.w_no_indent(format!("{ty_name}{{"));
+
+            for field in instance.fields() {
+                s.w_no_indent(format!(
+                    "{}: {},",
+                    field.name,
+                    field.value.to_string_value()
+                ))
+            }
+
+            s.w_no_indent("},");
+        }
+
+        s.wln_no_indent("];");
     }
 }
 
@@ -301,108 +360,4 @@ fn const_default_values(
 
 fn get_const_definition(const_name: &str, ty_name: &str, value: &str) -> String {
     format!("const {const_name}:{ty_name}={value};")
-}
-
-pub(crate) fn unobtainable_item(entry: u32, extra_flags: i32, name: &str) -> bool {
-    const UNOBTAINABLE_FLAG: i32 = 0x04;
-    let unobtainable_flag_is_set = extra_flags & UNOBTAINABLE_FLAG != 0;
-
-    let name_ends_with_deprecated = name.ends_with("DEPRECATED") || name.ends_with("DEP");
-    let name_ends_with_test = name.ends_with(" Test") || name.ends_with("(Test)");
-
-    let name_starts_with_old = name.starts_with("OLD") || name.starts_with("(OLD)");
-    let name_starts_with_monster = name.starts_with("Monster - ");
-    let name_starts_with_test = name.starts_with("TEST ");
-    let name_starts_with_deprecated = name.starts_with("Deprecated");
-
-    let name_contains_ph = name.contains("[PH]");
-
-    let martin_thunder_or_martin_fury = entry == 17 || entry == 192;
-
-    let glaive_of_the_defender = entry == 23051;
-
-    let warglaives_of_azzinoth = entry == 18582 || entry == 18583 || entry == 18584;
-
-    unobtainable_flag_is_set
-        || name_ends_with_deprecated
-        || name_starts_with_old
-        || name_ends_with_test
-        || name_starts_with_monster
-        || name_starts_with_test
-        || name_starts_with_deprecated
-        || name_contains_ph
-        || martin_thunder_or_martin_fury
-        || glaive_of_the_defender
-        || warglaives_of_azzinoth
-}
-
-fn print_unobtainable_cfg(s: &mut Writer) {
-    s.wln("#[cfg(feature = \"unobtainable\")]");
-}
-
-fn all_items(
-    s: &mut Writer,
-    items: &[GenericThing],
-    expansion: Expansion,
-    unobtainable: impl Fn(&GenericThing) -> bool,
-    ty_name: &str,
-    default_values: &BTreeMap<(Value, Option<IntegerSize>), String>,
-    optimizations: &Optimizations,
-) {
-    includes(
-        s,
-        &items[0].fields,
-        &items[0].arrays,
-        expansion,
-        ImportFrom::Items,
-        ty_name,
-        optimizations,
-    );
-
-    s.wln(format!("pub const DATA: &[{ty_name}] = &["));
-
-    for item in items {
-        if unobtainable(item) {
-            print_unobtainable_cfg(s);
-        }
-        s.w(format!("{}(", item.constructor_name()));
-
-        for value in &item.fields {
-            if optimizations.optimization(value.name).skip_field() {
-                continue;
-            }
-
-            if let Some(const_name) =
-                default_values.get(&(value.value.const_value(), optimizations.integer_size(value)))
-            {
-                s.w_no_indent(format!("{const_name},"));
-            } else {
-                s.w_no_indent(format!("{},", value.value.to_string_value()));
-            }
-        }
-
-        for array in &item.arrays {
-            if array.is_default() {
-                continue;
-            }
-
-            s.w_no_indent(format!("{},", array.instances.max_valid_instance()));
-
-            for instance in array.instances.instances() {
-                for field in instance.fields() {
-                    if let Some(const_name) =
-                        default_values.get(&(field.value.clone(), field.integer_size()))
-                    {
-                        s.w_no_indent(format!("{const_name},"));
-                    } else {
-                        s.w_no_indent(format!("{},", field.value.to_string_value()));
-                    }
-                }
-            }
-        }
-
-        s.wln_no_indent("),");
-    }
-
-    s.wln("];");
 }

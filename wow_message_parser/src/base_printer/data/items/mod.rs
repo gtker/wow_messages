@@ -124,11 +124,11 @@ impl Optimizations {
 }
 
 impl Optimizations {
-    pub fn new(items: &[GenericThing]) -> Self {
+    pub fn new(items: &[GenericThing], fields: &[Field]) -> Self {
         let mut field_optimizations = HashMap::new();
         let mut type_optimizations = HashMap::new();
 
-        let field_names = items[0].fields.iter().map(|field| field.name);
+        let field_names = fields.iter().map(|field| field.name);
 
         for field_name in field_names {
             let value = &items[0]
@@ -253,6 +253,14 @@ impl Array {
         }
     }
 
+    pub fn field_info(&self) -> &ArrayFieldInfo {
+        &self.instances.field_info
+    }
+
+    pub fn array_length(&self) -> usize {
+        self.instances.array_length
+    }
+
     pub fn is_default(&self) -> bool {
         self.instances.instances().iter().all(|a| a.is_default())
     }
@@ -268,36 +276,43 @@ impl Ord for Array {
 }
 
 #[derive(Debug, Clone, PartialOrd, PartialEq)]
+pub struct ArrayFieldInfo {
+    fields: Vec<ArrayField>,
+}
+
+impl ArrayFieldInfo {
+    pub fn new(fields: Vec<ArrayField>) -> Self {
+        Self { fields }
+    }
+
+    pub fn fields(&self) -> &[ArrayField] {
+        &self.fields
+    }
+}
+
+#[derive(Debug, Clone, PartialOrd, PartialEq)]
 pub struct ArrayInstances {
     instances: Vec<ArrayInstance>,
+    field_info: ArrayFieldInfo,
+    array_length: usize,
 }
 
 impl ArrayInstances {
-    pub fn new(mut instances: Vec<ArrayInstance>) -> Self {
-        for i in 0..(instances.len() - 1) {
-            let next = i + 1;
+    pub fn new(instances: Vec<ArrayInstance>) -> Self {
+        let field_info = ArrayFieldInfo::new(instances[0].fields.to_vec());
+        let array_length = instances.len();
 
-            if instances[i].is_default() && !instances[next].is_default() {
-                let instance = instances.remove(i);
-                instances.insert(next, instance);
-            }
+        let instances = instances.into_iter().filter(|a| !a.is_default()).collect();
+
+        Self {
+            instances,
+            field_info,
+            array_length,
         }
-
-        Self { instances }
     }
 
     pub fn instances(&self) -> &[ArrayInstance] {
         &self.instances
-    }
-
-    pub fn max_valid_instance(&self) -> u8 {
-        for (i, instance) in self.instances().iter().enumerate() {
-            if instance.is_default() {
-                return i.try_into().unwrap();
-            }
-        }
-
-        self.instances().len().try_into().unwrap()
     }
 }
 
@@ -358,16 +373,6 @@ impl ArrayField {
             variable_name,
             value,
         }
-    }
-
-    pub fn integer_size(&self) -> Option<IntegerSize> {
-        Some(match self.value {
-            Value::Int(_) => IntegerSize::I32,
-            Value::Int64(_) => IntegerSize::I64,
-            Value::Uint(_) => IntegerSize::U32,
-            Value::Uint64(_) => IntegerSize::U64,
-            _ => return None,
-        })
     }
 
     pub fn is_default(&self) -> bool {

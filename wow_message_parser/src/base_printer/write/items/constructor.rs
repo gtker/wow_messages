@@ -1,4 +1,5 @@
-use crate::base_printer::data::items::Optimizations;
+use crate::base_printer::data::get_fields;
+use crate::base_printer::data::items::{Array, Optimizations};
 use crate::base_printer::write::items::definition::includes;
 use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::writer::Writer;
@@ -12,9 +13,10 @@ pub(crate) fn constructor(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
+    let fields = get_fields(items);
     includes(
         s,
-        &items[0].fields,
+        fields,
         &items[0].arrays,
         expansion,
         ImportFrom::ItemsConstructors,
@@ -22,12 +24,14 @@ pub(crate) fn constructor(
         optimizations,
     );
 
+    print_empty_arrays(s, &items[0].arrays);
+
     for ctor in get_constructors(items) {
         s.constructor(
             ctor.name(),
             ty_name,
             |s| {
-                for e in &items[0].fields {
+                for e in fields {
                     if optimizations.optimization(e.name).skip_field() {
                         continue;
                     }
@@ -43,22 +47,15 @@ pub(crate) fn constructor(
 
                 for array in &items[0].arrays {
                     if !ctor.type_is_defaulted(array.type_name) {
-                        s.wln(format!("{}_length: u8,", array.variable_name));
-
-                        for instance in array.instances.instances() {
-                            for field in instance.fields() {
-                                s.wln(format!(
-                                    "{}: {},",
-                                    field.variable_name,
-                                    field.value.type_name()
-                                ));
-                            }
-                        }
+                        s.wln(format!(
+                            "{}: &'static [{}],",
+                            array.variable_name, array.type_name
+                        ));
                     }
                 }
             },
             |s| {
-                for e in &items[0].fields {
+                for e in fields {
                     if optimizations.optimization(e.name).skip_field() {
                         continue;
                     }
@@ -72,27 +69,28 @@ pub(crate) fn constructor(
 
                 for array in &items[0].arrays {
                     if ctor.type_is_defaulted(array.type_name) {
-                        s.wln("0,");
+                        s.wln(format!("{},", empty_array_name(array.type_name)));
                     } else {
-                        s.wln(format!("{}_length,", array.variable_name));
-                    }
-
-                    for instance in array.instances.instances() {
-                        for field in instance.fields() {
-                            if ctor.type_is_defaulted(array.type_name) {
-                                s.wln(format!(
-                                    "{},",
-                                    field.value.default_value().to_string_value(),
-                                ));
-                            } else {
-                                s.wln(format!("{},", field.variable_name,));
-                            }
-                        }
+                        s.wln(format!("{},", array.variable_name));
                     }
                 }
             },
         );
     }
+}
+
+fn print_empty_arrays(s: &mut Writer, arrays: &[Array]) {
+    for array in arrays {
+        let ty_name = array.type_name;
+        s.wln(format!(
+            "const {}:&[{ty_name}]=&[];",
+            empty_array_name(array.type_name)
+        ));
+    }
+}
+
+fn empty_array_name(s: &str) -> String {
+    format!("EMPTY_{}", s.to_uppercase())
 }
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]

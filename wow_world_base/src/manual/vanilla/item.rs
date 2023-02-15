@@ -78,10 +78,8 @@ pub struct Item {
     disenchant_id: i8,
     food_type: i8,
     duration: i32,
-    damages_length: u8,
-    damages: [ItemDamageType; 5],
-    spells_length: u8,
-    spells: [Spells; 5],
+    damages: &'static [ItemDamageType],
+    spells: &'static [Spells],
 }
 
 impl Item {
@@ -139,58 +137,8 @@ impl Item {
         disenchant_id: i8,
         food_type: i8,
         duration: i32,
-        damages_length: u8,
-        dmg_min1: f32,
-        dmg_max1: f32,
-        dmg_type1: SpellSchool,
-        dmg_min2: f32,
-        dmg_max2: f32,
-        dmg_type2: SpellSchool,
-        dmg_min3: f32,
-        dmg_max3: f32,
-        dmg_type3: SpellSchool,
-        dmg_min4: f32,
-        dmg_max4: f32,
-        dmg_type4: SpellSchool,
-        dmg_min5: f32,
-        dmg_max5: f32,
-        dmg_type5: SpellSchool,
-        spells_length: u8,
-        spell_id_1: i32,
-        spell_trigger_1: SpellTriggerType,
-        spell_charges_1: i32,
-        spell_ppm_rate_1: f32,
-        spell_cooldown_1: i32,
-        spell_category_1: i32,
-        spell_category_cooldown_1: i32,
-        spell_id_2: i32,
-        spell_trigger_2: SpellTriggerType,
-        spell_charges_2: i32,
-        spell_ppm_rate_2: f32,
-        spell_cooldown_2: i32,
-        spell_category_2: i32,
-        spell_category_cooldown_2: i32,
-        spell_id_3: i32,
-        spell_trigger_3: SpellTriggerType,
-        spell_charges_3: i32,
-        spell_ppm_rate_3: f32,
-        spell_cooldown_3: i32,
-        spell_category_3: i32,
-        spell_category_cooldown_3: i32,
-        spell_id_4: i32,
-        spell_trigger_4: SpellTriggerType,
-        spell_charges_4: i32,
-        spell_ppm_rate_4: f32,
-        spell_cooldown_4: i32,
-        spell_category_4: i32,
-        spell_category_cooldown_4: i32,
-        spell_id_5: i32,
-        spell_trigger_5: SpellTriggerType,
-        spell_charges_5: i32,
-        spell_ppm_rate_5: f32,
-        spell_cooldown_5: i32,
-        spell_category_5: i32,
-        spell_category_cooldown_5: i32,
+        damages: &'static [ItemDamageType],
+        spells: &'static [Spells],
     ) -> Self {
         Self {
             entry,
@@ -246,82 +194,8 @@ impl Item {
             disenchant_id,
             food_type,
             duration,
-            damages_length,
-            damages: [
-            ItemDamageType {
-                damage_minimum: dmg_min1,
-                damage_maximum: dmg_max1,
-                school: dmg_type1,
-            },
-            ItemDamageType {
-                damage_minimum: dmg_min2,
-                damage_maximum: dmg_max2,
-                school: dmg_type2,
-            },
-            ItemDamageType {
-                damage_minimum: dmg_min3,
-                damage_maximum: dmg_max3,
-                school: dmg_type3,
-            },
-            ItemDamageType {
-                damage_minimum: dmg_min4,
-                damage_maximum: dmg_max4,
-                school: dmg_type4,
-            },
-            ItemDamageType {
-                damage_minimum: dmg_min5,
-                damage_maximum: dmg_max5,
-                school: dmg_type5,
-            },
-            ],
-            spells_length,
-            spells: [
-            Spells::new(
-            spell_id_1,
-            spell_trigger_1,
-            spell_charges_1,
-            spell_ppm_rate_1,
-            spell_cooldown_1,
-            spell_category_1,
-            spell_category_cooldown_1,
-            ),
-            Spells::new(
-            spell_id_2,
-            spell_trigger_2,
-            spell_charges_2,
-            spell_ppm_rate_2,
-            spell_cooldown_2,
-            spell_category_2,
-            spell_category_cooldown_2,
-            ),
-            Spells::new(
-            spell_id_3,
-            spell_trigger_3,
-            spell_charges_3,
-            spell_ppm_rate_3,
-            spell_cooldown_3,
-            spell_category_3,
-            spell_category_cooldown_3,
-            ),
-            Spells::new(
-            spell_id_4,
-            spell_trigger_4,
-            spell_charges_4,
-            spell_ppm_rate_4,
-            spell_cooldown_4,
-            spell_category_4,
-            spell_category_cooldown_4,
-            ),
-            Spells::new(
-            spell_id_5,
-            spell_trigger_5,
-            spell_charges_5,
-            spell_ppm_rate_5,
-            spell_cooldown_5,
-            spell_category_5,
-            spell_category_cooldown_5,
-            ),
-            ],
+            damages,
+            spells,
         }
     }
     pub const fn entry(&self) -> u32 {
@@ -636,39 +510,19 @@ impl Item {
     }
 
     pub const fn damages_array(&self) -> &[ItemDamageType; 5] {
-        &self.damages
+        unimplemented!()
     }
 
     pub const fn damages(&self) -> &[ItemDamageType] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.damages.as_slice();
-        loop {
-            if s.len() == (self.damages_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.damages
     }
 
     pub const fn spells_array(&self) -> &[Spells; 5] {
-        &self.spells
+        unimplemented!()
     }
 
     pub const fn spells(&self) -> &[Spells] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.spells.as_slice();
-        loop {
-            if s.len() == (self.spells_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.spells
     }
 
 }

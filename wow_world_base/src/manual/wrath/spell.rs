@@ -76,14 +76,10 @@ pub struct Spell {
     spell_difficulty_id: u16,
     is_server_side: u32,
     attributes_serverside: i8,
-    reagents_length: u8,
-    reagents: [Reagent; 8],
-    effects_length: u8,
-    effects: [SpellEffects; 3],
-    totems_length: u8,
-    totems: [Totem; 2],
-    totem_categories_length: u8,
-    totem_categories: [TotemCategory; 2],
+    reagents: &'static [Reagent],
+    effects: &'static [SpellEffects],
+    totems: &'static [Totem],
+    totem_categories: &'static [TotemCategory],
 }
 
 impl Spell {
@@ -159,96 +155,10 @@ impl Spell {
         spell_difficulty_id: u16,
         is_server_side: u32,
         attributes_serverside: i8,
-        reagents_length: u8,
-        reagent1: i32,
-        reagent_count1: u32,
-        reagent2: i32,
-        reagent_count2: u32,
-        reagent3: i32,
-        reagent_count3: u32,
-        reagent4: i32,
-        reagent_count4: u32,
-        reagent5: i32,
-        reagent_count5: u32,
-        reagent6: i32,
-        reagent_count6: u32,
-        reagent7: i32,
-        reagent_count7: u32,
-        reagent8: i32,
-        reagent_count8: u32,
-        effects_length: u8,
-        effect1: i32,
-        effect_die_sides1: i32,
-        effect_real_points_per_level1: f32,
-        effect_base_points1: i32,
-        effect_mechanic1: i32,
-        effect_implicit_target_a1: i32,
-        effect_implicit_target_b1: i32,
-        effect_radius_index1: i32,
-        effect_apply_aura_name1: i32,
-        effect_amplitude1: i32,
-        effect_multiple_value1: f32,
-        effect_chain_target1: i32,
-        effect_item_type1: u32,
-        effect_misc_value1: i32,
-        effect_misc_value_b1: i32,
-        effect_trigger_spell1: u32,
-        effect_points_per_combo_point1: f32,
-        effect_spell_class_mask1_1: u32,
-        effect_spell_class_mask1_2: u32,
-        effect_spell_class_mask1_3: u32,
-        dmg_multiplier1: f32,
-        effect_bonus_coefficient1: f32,
-        effect2: i32,
-        effect_die_sides2: i32,
-        effect_real_points_per_level2: f32,
-        effect_base_points2: i32,
-        effect_mechanic2: i32,
-        effect_implicit_target_a2: i32,
-        effect_implicit_target_b2: i32,
-        effect_radius_index2: i32,
-        effect_apply_aura_name2: i32,
-        effect_amplitude2: i32,
-        effect_multiple_value2: f32,
-        effect_chain_target2: i32,
-        effect_item_type2: u32,
-        effect_misc_value2: i32,
-        effect_misc_value_b2: i32,
-        effect_trigger_spell2: u32,
-        effect_points_per_combo_point2: f32,
-        effect_spell_class_mask2_1: u32,
-        effect_spell_class_mask2_2: u32,
-        effect_spell_class_mask2_3: u32,
-        dmg_multiplier2: f32,
-        effect_bonus_coefficient2: f32,
-        effect3: i32,
-        effect_die_sides3: i32,
-        effect_real_points_per_level3: f32,
-        effect_base_points3: i32,
-        effect_mechanic3: i32,
-        effect_implicit_target_a3: i32,
-        effect_implicit_target_b3: i32,
-        effect_radius_index3: i32,
-        effect_apply_aura_name3: i32,
-        effect_amplitude3: i32,
-        effect_multiple_value3: f32,
-        effect_chain_target3: i32,
-        effect_item_type3: u32,
-        effect_misc_value3: i32,
-        effect_misc_value_b3: i32,
-        effect_trigger_spell3: u32,
-        effect_points_per_combo_point3: f32,
-        effect_spell_class_mask3_1: u32,
-        effect_spell_class_mask3_2: u32,
-        effect_spell_class_mask3_3: u32,
-        dmg_multiplier3: f32,
-        effect_bonus_coefficient3: f32,
-        totems_length: u8,
-        totem1: i32,
-        totem2: i32,
-        totem_categories_length: u8,
-        totem_category1: i32,
-        totem_category2: i32,
+        reagents: &'static [Reagent],
+        effects: &'static [SpellEffects],
+        totems: &'static [Totem],
+        totem_categories: &'static [TotemCategory],
     ) -> Self {
         Self {
             entry,
@@ -322,134 +232,10 @@ impl Spell {
             spell_difficulty_id,
             is_server_side,
             attributes_serverside,
-            reagents_length,
-            reagents: [
-            Reagent::new(
-            reagent1,
-            reagent_count1,
-            ),
-            Reagent::new(
-            reagent2,
-            reagent_count2,
-            ),
-            Reagent::new(
-            reagent3,
-            reagent_count3,
-            ),
-            Reagent::new(
-            reagent4,
-            reagent_count4,
-            ),
-            Reagent::new(
-            reagent5,
-            reagent_count5,
-            ),
-            Reagent::new(
-            reagent6,
-            reagent_count6,
-            ),
-            Reagent::new(
-            reagent7,
-            reagent_count7,
-            ),
-            Reagent::new(
-            reagent8,
-            reagent_count8,
-            ),
-            ],
-            effects_length,
-            effects: [
-            SpellEffects::new(
-            effect1,
-            effect_die_sides1,
-            effect_real_points_per_level1,
-            effect_base_points1,
-            effect_mechanic1,
-            effect_implicit_target_a1,
-            effect_implicit_target_b1,
-            effect_radius_index1,
-            effect_apply_aura_name1,
-            effect_amplitude1,
-            effect_multiple_value1,
-            effect_chain_target1,
-            effect_item_type1,
-            effect_misc_value1,
-            effect_misc_value_b1,
-            effect_trigger_spell1,
-            effect_points_per_combo_point1,
-            effect_spell_class_mask1_1,
-            effect_spell_class_mask1_2,
-            effect_spell_class_mask1_3,
-            dmg_multiplier1,
-            effect_bonus_coefficient1,
-            ),
-            SpellEffects::new(
-            effect2,
-            effect_die_sides2,
-            effect_real_points_per_level2,
-            effect_base_points2,
-            effect_mechanic2,
-            effect_implicit_target_a2,
-            effect_implicit_target_b2,
-            effect_radius_index2,
-            effect_apply_aura_name2,
-            effect_amplitude2,
-            effect_multiple_value2,
-            effect_chain_target2,
-            effect_item_type2,
-            effect_misc_value2,
-            effect_misc_value_b2,
-            effect_trigger_spell2,
-            effect_points_per_combo_point2,
-            effect_spell_class_mask2_1,
-            effect_spell_class_mask2_2,
-            effect_spell_class_mask2_3,
-            dmg_multiplier2,
-            effect_bonus_coefficient2,
-            ),
-            SpellEffects::new(
-            effect3,
-            effect_die_sides3,
-            effect_real_points_per_level3,
-            effect_base_points3,
-            effect_mechanic3,
-            effect_implicit_target_a3,
-            effect_implicit_target_b3,
-            effect_radius_index3,
-            effect_apply_aura_name3,
-            effect_amplitude3,
-            effect_multiple_value3,
-            effect_chain_target3,
-            effect_item_type3,
-            effect_misc_value3,
-            effect_misc_value_b3,
-            effect_trigger_spell3,
-            effect_points_per_combo_point3,
-            effect_spell_class_mask3_1,
-            effect_spell_class_mask3_2,
-            effect_spell_class_mask3_3,
-            dmg_multiplier3,
-            effect_bonus_coefficient3,
-            ),
-            ],
-            totems_length,
-            totems: [
-            Totem::new(
-            totem1,
-            ),
-            Totem::new(
-            totem2,
-            ),
-            ],
-            totem_categories_length,
-            totem_categories: [
-            TotemCategory::new(
-            totem_category1,
-            ),
-            TotemCategory::new(
-            totem_category2,
-            ),
-            ],
+            reagents,
+            effects,
+            totems,
+            totem_categories,
         }
     }
     pub const fn entry(&self) -> u32 {
@@ -921,75 +707,35 @@ impl Spell {
     }
 
     pub const fn reagents_array(&self) -> &[Reagent; 8] {
-        &self.reagents
+        unimplemented!()
     }
 
     pub const fn reagents(&self) -> &[Reagent] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.reagents.as_slice();
-        loop {
-            if s.len() == (self.reagents_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.reagents
     }
 
     pub const fn effects_array(&self) -> &[SpellEffects; 3] {
-        &self.effects
+        unimplemented!()
     }
 
     pub const fn effects(&self) -> &[SpellEffects] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.effects.as_slice();
-        loop {
-            if s.len() == (self.effects_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.effects
     }
 
     pub const fn totems_array(&self) -> &[Totem; 2] {
-        &self.totems
+        unimplemented!()
     }
 
     pub const fn totems(&self) -> &[Totem] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.totems.as_slice();
-        loop {
-            if s.len() == (self.totems_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.totems
     }
 
     pub const fn totem_categories_array(&self) -> &[TotemCategory; 2] {
-        &self.totem_categories
+        unimplemented!()
     }
 
     pub const fn totem_categories(&self) -> &[TotemCategory] {
-        // Can't slice like a[..5] in const fn
-        let mut s = self.totem_categories.as_slice();
-        loop {
-            if s.len() == (self.totem_categories_length as usize) {
-                return s;
-            }
-            s = match s {
-                [r @ .., _last] => r,
-                _ => unreachable!(),
-            };
-        }
+        self.totem_categories
     }
 
 }
