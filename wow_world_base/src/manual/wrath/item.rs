@@ -58,14 +58,12 @@ pub struct Item {
     nature_res: i8,
     frost_res: i8,
     shadow_res: i8,
-    arcane_res: i8,
     delay: i16,
     ammo_type: i8,
     ranged_mod_range: f32,
     bonding: Bonding,
     description: &'static str,
     page_text: i16,
-    language: Language,
     page_text_material: PageTextMaterial,
     start_quest: i16,
     material: i8,
@@ -75,7 +73,6 @@ pub struct Item {
     block: i16,
     item_set: ItemSet,
     max_durability: i16,
-    area: Area,
     bag_family: BagFamily,
     totem_category: i16,
     socket_bonus: i16,
@@ -84,7 +81,6 @@ pub struct Item {
     armor_damage_modifier: f32,
     duration: i32,
     item_limit_category: i8,
-    holiday_id: i16,
     disenchant_id: i8,
     food_type: i8,
     sockets: &'static [ItemSocket],
@@ -125,14 +121,12 @@ impl Item {
         nature_res: i8,
         frost_res: i8,
         shadow_res: i8,
-        arcane_res: i8,
         delay: i16,
         ammo_type: i8,
         ranged_mod_range: f32,
         bonding: Bonding,
         description: &'static str,
         page_text: i16,
-        language: Language,
         page_text_material: PageTextMaterial,
         start_quest: i16,
         material: i8,
@@ -142,7 +136,6 @@ impl Item {
         block: i16,
         item_set: ItemSet,
         max_durability: i16,
-        area: Area,
         bag_family: BagFamily,
         totem_category: i16,
         socket_bonus: i16,
@@ -151,7 +144,6 @@ impl Item {
         armor_damage_modifier: f32,
         duration: i32,
         item_limit_category: i8,
-        holiday_id: i16,
         disenchant_id: i8,
         food_type: i8,
         sockets: &'static [ItemSocket],
@@ -190,14 +182,12 @@ impl Item {
             nature_res,
             frost_res,
             shadow_res,
-            arcane_res,
             delay,
             ammo_type,
             ranged_mod_range,
             bonding,
             description,
             page_text,
-            language,
             page_text_material,
             start_quest,
             material,
@@ -207,7 +197,6 @@ impl Item {
             block,
             item_set,
             max_durability,
-            area,
             bag_family,
             totem_category,
             socket_bonus,
@@ -216,7 +205,6 @@ impl Item {
             armor_damage_modifier,
             duration,
             item_limit_category,
-            holiday_id,
             disenchant_id,
             food_type,
             sockets,
@@ -427,8 +415,36 @@ impl Item {
         self.shadow_res as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn arcane_res(&self) -> i32 {
-        self.arcane_res as i32
+        match self.entry {
+            21792 => 3,
+            20615 => 4,
+            9434 | 9455 | 9461 | 9508 | 12903 | 12945 | 17107 | 17113 | 21467 => 5,
+            12252 | 13030 | 17078 | 17110 | 49307 | 49491 => 6,
+            1604 => 7,
+            12065 => 8,
+            13065 => 9,
+            11785 | 13009 | 13961 | 13966 | 15857 | 16901 | 16909 | 16915 | 16922 | 16930 | 16938 | 16946 | 16954 | 16962 | 18545 | 18813 | 21128 | 27895 => 10,
+            15074 => 11,
+            15073 | 28301 => 12,
+            13535 | 13539 | 23042 => 13,
+            14543 | 15815 => 15,
+            14132 | 15072 | 15075 => 16,
+            14128 => 17,
+            14130 | 31929 | 31938 => 18,
+            12609 | 13538 | 27449 => 20,
+            21866 | 49309 => 25,
+            21864 | 23510 | 23511 | 24098 | 29490 | 29491 | 29496 | 29497 | 30825 | 49489 => 30,
+            30831 => 32,
+            21863 | 21867 => 35,
+            23509 | 23512 | 29489 | 29495 => 40,
+            21865 | 31113 => 45,
+            18584 | 21868 => 50,
+            18583 => 60,
+            18582 => 100,
+            _ => 0,
+        }
     }
 
     pub const fn delay(&self) -> i32 {
@@ -455,8 +471,18 @@ impl Item {
         self.page_text as i32
     }
 
+    /// Returns `Language::Universal` except for specific item entries.
     pub const fn language(&self) -> Language {
-        self.language
+        match self.entry {
+            25 | 4992 | 4995 | 5917 | 6167 | 20010 | 21783 | 23798 => Language::Orcish,
+            5839 | 9331 => Language::Darnassian,
+            5594 => Language::Taurahe,
+            745 | 957 | 1208 | 1252 | 1283 | 1284 | 1307 | 1319 | 1637 | 1656 | 1971 | 1972 | 2161 | 2223 | 2548 | 2560 | 2637 | 2666 | 2696 | 2720 | 2722 | 2724 | 2760 | 2794 | 2795 | 3085 | 3086 | 3087 | 3248 | 3250 | 3518 | 4130 | 4429 | 4432 | 4514 | 5351 | 5354 | 5455 | 5520 | 5622 | 5790 | 5882 | 5947 | 5998 | 6280 | 6332 | 6678 | 6743 | 6843 | 9244 | 9245 | 9250 | 9329 | 9330 | 9370 | 11108 | 11125 | 12771 | 12813 | 12820 | 12985 | 20009 | 20828 | 22979 | 23777 | 23780 | 23797 | 28303 | 30420 | 30973 | 35122 => Language::Common,
+            5383 => Language::Demonic,
+            20949 => Language::Draconic,
+            24237 => Language::Draenei,
+            _ => Language::Universal,
+        }
     }
 
     pub const fn page_text_material(&self) -> PageTextMaterial {
@@ -517,8 +543,23 @@ impl Item {
         self.max_durability as i32
     }
 
+    /// Returns `Area::None` except for specific item entries.
     pub const fn area(&self) -> Area {
-        self.area
+        match self.entry {
+            38335 | 38336 | 38337 | 38338 | 38339 | 38340 | 38341 | 38342 | 38343 | 38344 | 38345 | 38346 | 38369 | 38370 | 38379 | 38381 | 38384 | 38386 | 38393 | 38396 | 38397 | 38398 | 39668 | 39669 | 39670 => Area::ZulDrak,
+            37664 => Area::GrizzlyHills,
+            36748 => Area::BlackrockDepths,
+            22736 => Area::Stratholme,
+            24289 => Area::TheBlackMorass,
+            18266 | 18268 => Area::DireMaul,
+            17306 | 17323 | 17324 | 17325 | 17326 | 17327 | 17328 | 17353 | 17422 | 17423 | 17442 | 17502 | 17503 | 17504 | 17505 | 17506 | 17507 | 17522 | 17542 | 17626 | 17642 | 17643 | 17689 | 21038 => Area::AlteracValley,
+            31279 => Area::ShadowmoonValley,
+            31366 => Area::BladesEdgeMountains,
+            39737 => Area::SholazarBasin,
+            42986 => Area::Wintergrasp,
+            39213 => Area::StrandOfTheAncients,
+            _ => Area::None,
+        }
     }
 
     /// Returns `Map::EasternKingdoms` except for specific item entries.
@@ -575,8 +616,18 @@ impl Item {
         self.item_limit_category as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn holiday_id(&self) -> i32 {
-        self.holiday_id as i32
+        match self.entry {
+            21212 => 141,
+            44791 | 44802 | 44806 | 44818 | 45072 => 181,
+            37011 | 54516 => 324,
+            33023 | 33024 | 33025 | 33026 | 33028 | 33029 | 33030 | 33031 | 33032 | 33033 | 33034 | 33035 | 33036 | 33043 | 34017 | 34018 | 34019 | 34020 | 34021 | 34022 | 34063 | 34064 | 34065 | 37750 | 37829 | 39476 | 39477 | 46399 | 46400 | 46401 | 46402 | 46403 | 46735 => 372,
+            46793 | 46796 => 404,
+            46690 | 46691 | 46711 | 46718 | 46831 | 46860 => 409,
+            21816 | 21819 | 21822 | 22236 | 49351 | 49352 | 49631 | 49669 | 49670 | 49867 | 49909 | 49915 | 49937 | 49939 | 49941 | 54537 => 423,
+            _ => 0,
+        }
     }
 
     pub const fn disenchant_id(&self) -> i32 {

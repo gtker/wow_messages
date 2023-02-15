@@ -44,7 +44,6 @@ pub struct Item {
     required_level: i8,
     required_skill: Skill,
     required_skill_rank: i16,
-    required_spell: i16,
     required_faction: Faction,
     required_reputation_rank: i8,
     max_count: i32,
@@ -55,14 +54,12 @@ pub struct Item {
     nature_res: i8,
     frost_res: i8,
     shadow_res: i8,
-    arcane_res: i8,
     delay: i16,
     ammo_type: i8,
     ranged_mod_range: f32,
     bonding: Bonding,
     description: &'static str,
     page_text: i16,
-    language: Language,
     page_text_material: PageTextMaterial,
     start_quest: i16,
     material: i8,
@@ -80,7 +77,6 @@ pub struct Item {
     disenchant_id: i8,
     food_type: i8,
     duration: i32,
-    extra_flags: i8,
     sockets: &'static [ItemSocket],
     damages: &'static [ItemDamageType],
     stats: &'static [ItemStat],
@@ -106,7 +102,6 @@ impl Item {
         required_level: i8,
         required_skill: Skill,
         required_skill_rank: i16,
-        required_spell: i16,
         required_faction: Faction,
         required_reputation_rank: i8,
         max_count: i32,
@@ -117,14 +112,12 @@ impl Item {
         nature_res: i8,
         frost_res: i8,
         shadow_res: i8,
-        arcane_res: i8,
         delay: i16,
         ammo_type: i8,
         ranged_mod_range: f32,
         bonding: Bonding,
         description: &'static str,
         page_text: i16,
-        language: Language,
         page_text_material: PageTextMaterial,
         start_quest: i16,
         material: i8,
@@ -142,7 +135,6 @@ impl Item {
         disenchant_id: i8,
         food_type: i8,
         duration: i32,
-        extra_flags: i8,
         sockets: &'static [ItemSocket],
         damages: &'static [ItemDamageType],
         stats: &'static [ItemStat],
@@ -166,7 +158,6 @@ impl Item {
             required_level,
             required_skill,
             required_skill_rank,
-            required_spell,
             required_faction,
             required_reputation_rank,
             max_count,
@@ -177,14 +168,12 @@ impl Item {
             nature_res,
             frost_res,
             shadow_res,
-            arcane_res,
             delay,
             ammo_type,
             ranged_mod_range,
             bonding,
             description,
             page_text,
-            language,
             page_text_material,
             start_quest,
             material,
@@ -202,7 +191,6 @@ impl Item {
             disenchant_id,
             food_type,
             duration,
-            extra_flags,
             sockets,
             damages,
             stats,
@@ -277,8 +265,24 @@ impl Item {
         self.required_skill_rank as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn required_spell(&self) -> i32 {
-        self.required_spell as i32
+        match self.entry {
+            30071 | 30072 | 30073 => 9787,
+            23563 | 23564 | 23565 | 28483 | 28484 | 28485 | 30069 | 30070 | 30074 | 30076 => 9788,
+            29515 | 29516 | 29517 | 29519 | 29520 | 29521 | 29971 | 29975 => 10656,
+            29525 | 29526 | 29527 | 29964 | 29973 => 10658,
+            29522 | 29523 | 29524 | 29970 | 29974 => 10660,
+            28425 | 28426 | 28427 | 28428 | 28429 | 28430 | 30077 | 30086 => 17039,
+            28437 | 28438 | 28439 | 28440 | 28441 | 28442 | 30089 | 30093 => 17040,
+            28431 | 28432 | 28433 | 28434 | 28435 | 28436 | 30087 | 30088 => 17041,
+            18654 | 18660 | 18661 | 18986 | 23828 | 23829 | 23835 | 30544 => 20219,
+            18653 | 18984 | 23836 | 23838 | 23839 | 30542 => 20222,
+            21846 | 21847 | 21848 | 21908 | 21909 | 21910 => 26797,
+            21873 | 21874 | 21875 | 21916 | 21917 | 21918 => 26798,
+            21869 | 21870 | 21871 | 21912 | 21913 | 21914 => 26801,
+            _ => 0,
+        }
     }
 
     /// Always returns `PvpRank::NoRank`.
@@ -336,8 +340,36 @@ impl Item {
         self.shadow_res as i32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn arcane_res(&self) -> i32 {
-        self.arcane_res as i32
+        match self.entry {
+            21792 => 3,
+            20615 => 4,
+            9434 | 9455 | 9461 | 9508 | 12408 | 12903 | 12945 | 17107 | 17113 | 21467 => 5,
+            12252 | 12406 | 13030 | 15049 | 17078 | 17110 => 6,
+            1604 | 12409 => 7,
+            12065 | 12405 | 15048 => 8,
+            13065 => 9,
+            11785 | 12410 | 12414 | 13009 | 13961 | 13966 | 15857 | 16901 | 16909 | 16915 | 16922 | 16930 | 16938 | 16946 | 16954 | 16962 | 18545 | 18813 | 21128 | 27895 => 10,
+            15074 => 11,
+            15073 | 20295 | 28301 => 12,
+            13535 | 13539 | 23042 => 13,
+            14543 | 15815 => 15,
+            14132 | 15072 | 15075 => 16,
+            14128 => 17,
+            14130 | 31929 | 31938 => 18,
+            12609 | 13538 | 27449 => 20,
+            21866 => 25,
+            21864 | 23510 | 23511 | 24098 | 29490 | 29491 | 29496 | 29497 | 30825 => 30,
+            30831 => 32,
+            21863 | 21867 => 35,
+            23509 | 23512 | 29489 | 29495 => 40,
+            21865 | 31113 => 45,
+            18584 | 21868 => 50,
+            18583 => 60,
+            18582 => 100,
+            _ => 0,
+        }
     }
 
     pub const fn delay(&self) -> i32 {
@@ -364,8 +396,18 @@ impl Item {
         self.page_text as i32
     }
 
+    /// Returns `Language::Universal` except for specific item entries.
     pub const fn language(&self) -> Language {
-        self.language
+        match self.entry {
+            25 | 4992 | 4995 | 5917 | 6167 | 20010 | 21783 | 23798 => Language::Orcish,
+            5839 | 9331 => Language::Darnassian,
+            5594 => Language::Taurahe,
+            745 | 957 | 1208 | 1252 | 1283 | 1284 | 1307 | 1319 | 1637 | 1656 | 1971 | 1972 | 2161 | 2223 | 2548 | 2560 | 2637 | 2666 | 2696 | 2720 | 2722 | 2724 | 2760 | 2794 | 2795 | 3085 | 3086 | 3087 | 3248 | 3250 | 3518 | 4130 | 4429 | 4432 | 4514 | 5351 | 5354 | 5455 | 5520 | 5622 | 5790 | 5882 | 5947 | 5998 | 6280 | 6332 | 6678 | 6743 | 6843 | 9244 | 9245 | 9250 | 9329 | 9330 | 9370 | 11108 | 11125 | 12771 | 12813 | 12820 | 12985 | 20009 | 20828 | 22979 | 23777 | 23780 | 23797 | 28303 | 30420 | 30973 => Language::Common,
+            5383 => Language::Demonic,
+            20949 => Language::Draconic,
+            24237 => Language::Draenei,
+            _ => Language::Universal,
+        }
     }
 
     pub const fn page_text_material(&self) -> PageTextMaterial {
@@ -559,8 +601,13 @@ impl Item {
         self.duration
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn extra_flags(&self) -> i32 {
-        self.extra_flags as i32
+        match self.entry {
+            5810 | 9365 | 9437 | 9438 | 9439 | 9440 | 9441 | 9442 | 10338 | 10684 | 10790 | 10791 | 11885 | 12586 | 19807 | 20391 | 20392 | 20557 | 20561 | 20562 | 20563 | 20564 | 20565 | 20566 | 20567 | 20568 | 20569 | 20570 | 20571 | 20572 | 20573 | 20574 | 21038 | 21171 | 21174 | 21212 | 21328 | 22736 | 23247 | 23379 | 30311 | 30312 | 30313 | 30314 | 30316 | 30317 | 30318 | 30320 | 30850 | 33096 | 33176 | 33182 | 33183 | 33184 | 33189 | 33226 | 34191 | 35313 | 37582 | 37583 | 37584 | 37585 => 1,
+            7666 | 18706 => 2,
+            _ => 0,
+        }
     }
 
     pub const fn sockets_array(&self) -> &[ItemSocket; 3] {

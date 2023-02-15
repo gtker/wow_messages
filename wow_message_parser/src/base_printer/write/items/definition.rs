@@ -261,7 +261,12 @@ fn getters_and_setters(
                 s.wln(v.to_string_value());
             }
             FieldOptimization::Baseline(mainline, outliers) => {
-                s.open_curly("match self.entry");
+                if let Some(extra) = mainline.definition_has_extra() {
+                    s.wln(format!("{extra}(match self.entry {{"));
+                    s.inc_indent();
+                } else {
+                    s.open_curly("match self.entry");
+                }
 
                 for outlier in outliers {
                     if outlier.0.len() == 1 {
@@ -283,7 +288,12 @@ fn getters_and_setters(
                 }
                 s.wln(format!("_ => {},", mainline.to_string_value()));
 
-                s.closing_curly();
+                if mainline.definition_has_extra().is_some() {
+                    s.wln("})");
+                    s.inc_indent();
+                } else {
+                    s.closing_curly();
+                }
             }
         });
         s.newline();

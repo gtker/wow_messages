@@ -24,7 +24,6 @@ pub struct Spell {
     target_creature_type: i16,
     requires_spell_focus: i16,
     facing_caster_flags: i8,
-    caster_aura_state_not: i8,
     casting_time_index: i16,
     recovery_time: i32,
     category_recovery_time: i32,
@@ -43,7 +42,6 @@ pub struct Spell {
     mana_cost_per_level: i8,
     range_index: i16,
     speed: f32,
-    modal_next_spell: i16,
     stack_amount: i32,
     equipped_item_class: i8,
     equipped_item_sub_class_mask: i32,
@@ -93,7 +91,6 @@ impl Spell {
         target_creature_type: i16,
         requires_spell_focus: i16,
         facing_caster_flags: i8,
-        caster_aura_state_not: i8,
         casting_time_index: i16,
         recovery_time: i32,
         category_recovery_time: i32,
@@ -112,7 +109,6 @@ impl Spell {
         mana_cost_per_level: i8,
         range_index: i16,
         speed: f32,
-        modal_next_spell: i16,
         stack_amount: i32,
         equipped_item_class: i8,
         equipped_item_sub_class_mask: i32,
@@ -160,7 +156,6 @@ impl Spell {
             target_creature_type,
             requires_spell_focus,
             facing_caster_flags,
-            caster_aura_state_not,
             casting_time_index,
             recovery_time,
             category_recovery_time,
@@ -179,7 +174,6 @@ impl Spell {
             mana_cost_per_level,
             range_index,
             speed,
-            modal_next_spell,
             stack_amount,
             equipped_item_class,
             equipped_item_sub_class_mask,
@@ -309,8 +303,17 @@ impl Spell {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn caster_aura_state_not(&self) -> i32 {
-        self.caster_aura_state_not as i32
+        match self.entry {
+            40019 | 46873 => 2,
+            22911 | 35062 | 35570 | 35754 | 36038 | 36058 | 37511 | 41272 | 50874 | 50876 => 4,
+            36414 | 36458 | 38985 => 7,
+            66 | 1784 | 1785 | 1786 | 1787 | 1856 | 1857 | 2425 | 3680 | 4079 | 4986 | 5215 | 5543 | 5858 | 5916 | 6408 | 6538 | 6634 | 6783 | 6920 | 7870 | 8149 | 8152 | 8218 | 9093 | 9587 | 9738 | 9913 | 11327 | 11329 | 11392 | 12845 | 16122 | 16380 | 20540 | 20580 | 20672 | 22766 | 24235 | 24450 | 24452 | 24453 | 26888 | 26889 | 28500 | 29627 | 29921 | 30628 | 30831 | 30991 | 32199 | 32612 | 32615 | 32648 | 32811 | 32943 | 34189 | 34840 | 34858 | 35205 | 36535 | 36544 | 37821 | 39596 | 41253 | 42347 | 42969 | 44035 | 44036 | 44505 | 46808 => 12,
+            498 | 642 | 1020 | 5573 | 31884 => 17,
+            45438 => 19,
+            _ => 0,
+        }
     }
 
     /// Returns `0` except for specific item entries.
@@ -420,8 +423,14 @@ impl Spell {
         self.speed
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn modal_next_spell(&self) -> i32 {
-        self.modal_next_spell as i32
+        match self.entry {
+            59 | 60 | 61 => 59,
+            1978 | 2643 | 3034 | 3043 | 3044 | 3674 | 5116 | 13549 | 13550 | 13551 | 13552 | 13553 | 13554 | 13555 | 14274 | 14279 | 14280 | 14281 | 14282 | 14283 | 14284 | 14285 | 14286 | 14287 | 14288 | 14289 | 14290 | 14296 | 15629 | 15630 | 15631 | 15632 | 17171 | 17174 | 18545 | 18649 | 19434 | 20736 | 20900 | 20901 | 20902 | 20903 | 20904 | 22914 | 25294 | 25295 | 27016 | 27018 | 27019 | 27020 | 27021 | 27065 | 27632 | 27634 | 30614 | 31407 | 31975 | 34104 | 34120 | 34490 | 34829 | 35401 | 35511 | 36609 | 36623 | 36984 | 37551 | 38370 | 38807 | 38859 | 38861 | 38914 | 39182 | 39413 | 40411 | 41084 | 44271 => 75,
+            23675 | 23676 => 23675,
+            _ => 0,
+        }
     }
 
     pub const fn stack_amount(&self) -> i32 {

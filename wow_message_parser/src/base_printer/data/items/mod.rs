@@ -20,7 +20,7 @@ pub enum FieldOptimization {
     Baseline(Value, Vec<(Vec<u32>, Value)>),
 }
 
-const OPTIMIZATION_BASELINE_DEVIATIONS: usize = 50;
+const OPTIMIZATION_BASELINE_DEVIATIONS: usize = 100;
 
 impl FieldOptimization {
     pub const fn skip_field(&self) -> bool {

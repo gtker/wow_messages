@@ -24,9 +24,7 @@ pub struct Spell {
     target_creature_type: i16,
     requires_spell_focus: i16,
     facing_caster_flags: i8,
-    target_aura_state: i8,
     caster_aura_state_not: i8,
-    exclude_caster_aura_spell: i32,
     exclude_target_aura_spell: i32,
     casting_time_index: i16,
     recovery_time: i32,
@@ -72,7 +70,6 @@ pub struct Spell {
     school_mask: i8,
     rune_cost_id: u16,
     spell_missile_id: u16,
-    power_display_id: u32,
     spell_description_variable_id: u32,
     spell_difficulty_id: u16,
     is_server_side: u32,
@@ -103,9 +100,7 @@ impl Spell {
         target_creature_type: i16,
         requires_spell_focus: i16,
         facing_caster_flags: i8,
-        target_aura_state: i8,
         caster_aura_state_not: i8,
-        exclude_caster_aura_spell: i32,
         exclude_target_aura_spell: i32,
         casting_time_index: i16,
         recovery_time: i32,
@@ -151,7 +146,6 @@ impl Spell {
         school_mask: i8,
         rune_cost_id: u16,
         spell_missile_id: u16,
-        power_display_id: u32,
         spell_description_variable_id: u32,
         spell_difficulty_id: u16,
         is_server_side: u32,
@@ -180,9 +174,7 @@ impl Spell {
             target_creature_type,
             requires_spell_focus,
             facing_caster_flags,
-            target_aura_state,
             caster_aura_state_not,
-            exclude_caster_aura_spell,
             exclude_target_aura_spell,
             casting_time_index,
             recovery_time,
@@ -228,7 +220,6 @@ impl Spell {
             school_mask,
             rune_cost_id,
             spell_missile_id,
-            power_display_id,
             spell_description_variable_id,
             spell_difficulty_id,
             is_server_side,
@@ -338,8 +329,19 @@ impl Spell {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn target_aura_state(&self) -> i32 {
-        self.target_aura_state as i32
+        match self.entry {
+            5308 | 7160 | 7938 | 16495 | 20539 | 20647 | 20658 | 20660 | 20661 | 20662 | 24239 | 24274 | 24275 | 25234 | 25236 | 27180 | 29364 | 29909 | 31255 | 32772 | 35771 | 36734 | 36779 | 37251 | 37255 | 37259 | 38895 | 38959 | 42325 | 44875 | 47470 | 47471 | 48805 | 48806 | 53351 | 56426 | 56893 | 61005 | 61006 | 61140 | 62125 | 72424 | 72465 => 2,
+            40019 | 72556 => 3,
+            42636 | 44572 | 45384 | 45433 | 72559 | 72560 | 72561 => 4,
+            14083 | 47679 | 47702 | 47722 | 49024 | 49538 | 50251 | 52862 | 52864 => 13,
+            17962 => 14,
+            18562 => 15,
+            32645 | 32684 | 57992 | 57993 => 16,
+            51662 => 18,
+            _ => 0,
+        }
     }
 
     pub const fn caster_aura_state_not(&self) -> i32 {
@@ -422,8 +424,41 @@ impl Spell {
         }
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn exclude_caster_aura_spell(&self) -> i32 {
-        self.exclude_caster_aura_spell
+        match self.entry {
+            12043 => 12042,
+            12042 => 12043,
+            45438 | 65802 => 41425,
+            44029 | 44083 => 44021,
+            5217 | 6793 | 9845 | 9846 | 50212 | 50213 => 50334,
+            883 | 62757 => 61431,
+            59196 => 61497,
+            59193 => 61498,
+            59194 => 61499,
+            76069 | 76071 | 76096 | 76098 | 76114 | 76116 => 61551,
+            31884 | 66011 => 61987,
+            498 | 642 | 66010 | 71550 => 61988,
+            62306 | 62490 => 62340,
+            62412 | 62416 | 62419 | 62425 | 62426 | 62427 | 64414 => 62433,
+            62719 => 62665,
+            62673 => 62719,
+            63018 | 63024 | 64234 | 65121 | 65598 => 62776,
+            62846 | 64454 => 62798,
+            63003 => 62799,
+            63031 => 62978,
+            64104 => 64100,
+            65403 => 65400,
+            68470 | 68471 => 68472,
+            69057 | 69138 | 70826 | 71580 | 73142 | 73143 => 69076,
+            69471 => 69487,
+            69871 => 69871,
+            69900 | 73046 => 69876,
+            70498 | 72762 => 72679,
+            73536 => 73535,
+            74203 | 74204 | 74205 => 75572,
+            _ => 0,
+        }
     }
 
     pub const fn exclude_target_aura_spell(&self) -> i32 {
@@ -687,8 +722,19 @@ impl Spell {
         self.spell_missile_id as u32
     }
 
+    /// Returns `0` except for specific item entries.
     pub const fn power_display_id(&self) -> u32 {
-        self.power_display_id
+        match self.entry {
+            40152 => 1,
+            62471 | 62490 => 41,
+            51678 | 54109 | 57609 | 62345 | 62346 | 62358 | 62359 | 62522 | 64677 | 64872 | 64979 | 66183 | 66186 | 66203 | 66223 | 66224 | 66518 | 66529 | 67461 | 67462 | 67796 | 67797 | 67816 | 68825 | 68831 | 68832 | 69495 | 69502 | 69505 => 61,
+            69399 | 69401 | 69402 | 69470 | 69471 | 69487 | 69488 | 70172 | 70174 | 70175 | 70385 => 101,
+            70539 | 71516 | 72457 | 72875 | 72876 => 121,
+            72195 | 72242 | 72254 | 72260 | 72278 | 72279 | 72280 | 72293 | 72370 | 72371 | 72378 | 72380 | 72385 | 72409 | 72410 | 72438 | 72439 | 72440 | 72441 | 72442 | 72443 | 72447 | 72448 | 72449 | 73058 => 141,
+            52358 | 53032 => 142,
+            66227 | 66251 | 72202 | 72255 | 72256 | 72379 | 72444 | 72445 | 72446 => 4294967295,
+            _ => 0,
+        }
     }
 
     pub const fn spell_description_variable_id(&self) -> u32 {
