@@ -253,10 +253,8 @@ impl BoolTag {
                     v, value
                 );
             }
-        } else {
-            if let Some(value) = other.inner {
-                self.inner = Some(value);
-            }
+        } else if let Some(value) = other.inner {
+            self.inner = Some(value);
         }
     }
 
