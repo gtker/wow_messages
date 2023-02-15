@@ -22,6 +22,8 @@ pub(crate) mod aura_flag;
 pub use aura_flag::*;
 pub(crate) mod aura_log;
 pub use aura_log::*;
+pub(crate) mod aura_mod;
+pub use aura_mod::*;
 pub(crate) mod aura_type;
 pub use aura_type::*;
 pub(crate) mod aura_update;

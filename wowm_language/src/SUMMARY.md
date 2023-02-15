@@ -58,6 +58,7 @@
 - [AuctionCommandAction](docs/auctioncommandaction.md)
 - [AuctionCommandResult](docs/auctioncommandresult.md)
 - [AuraFlag](docs/auraflag.md)
+- [AuraMod](docs/auramod.md)
 - [AuraType](docs/auratype.md)
 - [BagFamily](docs/bagfamily.md)
 - [BankSwapSource](docs/bankswapsource.md)

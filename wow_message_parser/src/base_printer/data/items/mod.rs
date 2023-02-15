@@ -475,6 +475,10 @@ pub enum Value {
     VanillaFaction(vanilla_base::Faction),
     TbcFaction(tbc_base::Faction),
     WrathFaction(wrath_base::Faction),
+
+    VanillaAuraMod(vanilla_base::AuraMod),
+    TbcAuraMod(tbc_base::AuraMod),
+    WrathAuraMod(wrath_base::AuraMod),
 }
 
 impl Eq for Value {}
@@ -591,6 +595,7 @@ impl Value {
 
             Value::VanillaItemSet(_) | Value::TbcItemSet(_) | Value::WrathItemSet(_) => "ItemSet",
             Value::VanillaFaction(_) | Value::TbcFaction(_) | Value::WrathFaction(_) => "Faction",
+            Value::VanillaAuraMod(_) | Value::TbcAuraMod(_) | Value::WrathAuraMod(_) => "AuraMod",
         }
     }
 
@@ -703,6 +708,9 @@ impl Value {
             Value::VanillaFaction(v) => format!("Faction::{v:?}"),
             Value::TbcFaction(v) => format!("Faction::{v:?}"),
             Value::WrathFaction(v) => format!("Faction::{v:?}"),
+            Value::VanillaAuraMod(v) => format!("AuraMod::{v:?}"),
+            Value::TbcAuraMod(v) => format!("AuraMod::{v:?}"),
+            Value::WrathAuraMod(v) => format!("AuraMod::{v:?}"),
         }
     }
 
@@ -829,6 +837,9 @@ impl Value {
             Value::VanillaFaction(_) => Value::VanillaFaction(Default::default()),
             Value::TbcFaction(_) => Value::TbcFaction(Default::default()),
             Value::WrathFaction(_) => Value::WrathFaction(Default::default()),
+            Value::VanillaAuraMod(_) => Value::VanillaAuraMod(Default::default()),
+            Value::TbcAuraMod(_) => Value::TbcAuraMod(Default::default()),
+            Value::WrathAuraMod(_) => Value::WrathAuraMod(Default::default()),
         }
     }
 }

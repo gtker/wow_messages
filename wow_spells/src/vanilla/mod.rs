@@ -11,6 +11,7 @@ pub use wow_world_base::vanilla::{
     AttributesEx2,
     AttributesEx3,
     AttributesEx4,
+    AuraMod,
     Reagent,
     Spell,
     SpellEffects,

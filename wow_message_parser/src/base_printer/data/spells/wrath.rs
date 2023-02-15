@@ -5,6 +5,7 @@ use crate::base_printer::data::items::{
 use crate::base_printer::data::spells::tbc::assertions;
 use crate::base_printer::write::items::GenericThing;
 use rusqlite::Connection;
+use wow_world_base::wrath::AuraMod;
 
 pub(crate) struct WrathSpell {
     id: u32,
@@ -102,9 +103,9 @@ pub(crate) struct WrathSpell {
     effect_radius_index1: i32,
     effect_radius_index2: i32,
     effect_radius_index3: i32,
-    effect_apply_aura_name1: i32,
-    effect_apply_aura_name2: i32,
-    effect_apply_aura_name3: i32,
+    effect_apply_aura_name1: AuraMod,
+    effect_apply_aura_name2: AuraMod,
+    effect_apply_aura_name3: AuraMod,
     effect_amplitude1: i32,
     effect_amplitude2: i32,
     effect_amplitude3: i32,
@@ -526,7 +527,7 @@ impl WrathSpell {
                             ArrayField::new(
                                 "apply_aura_name",
                                 "effect_apply_aura_name1",
-                                Value::Int(self.effect_apply_aura_name1),
+                                Value::WrathAuraMod(self.effect_apply_aura_name1),
                             ),
                             ArrayField::new(
                                 "amplitude",
@@ -637,7 +638,7 @@ impl WrathSpell {
                             ArrayField::new(
                                 "apply_aura_name",
                                 "effect_apply_aura_name2",
-                                Value::Int(self.effect_apply_aura_name2),
+                                Value::WrathAuraMod(self.effect_apply_aura_name2),
                             ),
                             ArrayField::new(
                                 "amplitude",
@@ -748,7 +749,7 @@ impl WrathSpell {
                             ArrayField::new(
                                 "apply_aura_name",
                                 "effect_apply_aura_name3",
-                                Value::Int(self.effect_apply_aura_name3),
+                                Value::WrathAuraMod(self.effect_apply_aura_name3),
                             ),
                             ArrayField::new(
                                 "amplitude",
@@ -1172,9 +1173,12 @@ pub(crate) fn wrath(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
                 effect_radius_index1: row.get(92).unwrap(),
                 effect_radius_index2: row.get(93).unwrap(),
                 effect_radius_index3: row.get(94).unwrap(),
-                effect_apply_aura_name1: row.get(95).unwrap(),
-                effect_apply_aura_name2: row.get(96).unwrap(),
-                effect_apply_aura_name3: row.get(97).unwrap(),
+                effect_apply_aura_name1: AuraMod::try_from(row.get::<usize, u32>(95).unwrap())
+                    .unwrap(),
+                effect_apply_aura_name2: AuraMod::try_from(row.get::<usize, u32>(96).unwrap())
+                    .unwrap(),
+                effect_apply_aura_name3: AuraMod::try_from(row.get::<usize, u32>(97).unwrap())
+                    .unwrap(),
                 effect_amplitude1: row.get(98).unwrap(),
                 effect_amplitude2: row.get(99).unwrap(),
                 effect_amplitude3: row.get(100).unwrap(),

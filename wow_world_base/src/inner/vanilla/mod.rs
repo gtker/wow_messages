@@ -24,6 +24,8 @@ pub(crate) mod auction_command_action;
 pub use auction_command_action::*;
 pub(crate) mod auction_command_result;
 pub use auction_command_result::*;
+pub(crate) mod aura_mod;
+pub use aura_mod::*;
 pub(crate) mod aura_type;
 pub use aura_type::*;
 pub(crate) mod bag_family;

@@ -8,6 +8,8 @@ pub(crate) mod auction_list_item;
 pub use auction_list_item::*;
 pub(crate) mod aura_log;
 pub use aura_log::*;
+pub(crate) mod aura_mod;
+pub use aura_mod::*;
 pub(crate) mod aura_type;
 pub use aura_type::*;
 pub(crate) mod battleground_type;

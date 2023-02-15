@@ -20,6 +20,8 @@ pub(crate) mod arena_team_role;
 pub use arena_team_role::*;
 pub(crate) mod arena_type;
 pub use arena_type::*;
+pub(crate) mod aura_mod;
+pub use aura_mod::*;
 pub(crate) mod aura_type;
 pub use aura_type::*;
 pub(crate) mod bag_family;

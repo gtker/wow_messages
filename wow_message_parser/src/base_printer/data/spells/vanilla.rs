@@ -5,7 +5,7 @@ use crate::base_printer::data::items::{
 use crate::base_printer::write::items::GenericThing;
 use rusqlite::Connection;
 use wow_world_base::vanilla::{
-    Attributes, AttributesEx1, AttributesEx2, AttributesEx3, AttributesEx4,
+    Attributes, AttributesEx1, AttributesEx2, AttributesEx3, AttributesEx4, AuraMod,
 };
 
 pub struct VanillaSpell {
@@ -100,9 +100,9 @@ pub struct VanillaSpell {
     effect_radius_index1: i32,
     effect_radius_index2: i32,
     effect_radius_index3: i32,
-    effect_apply_aura_name1: i32,
-    effect_apply_aura_name2: i32,
-    effect_apply_aura_name3: i32,
+    effect_apply_aura_name1: AuraMod,
+    effect_apply_aura_name2: AuraMod,
+    effect_apply_aura_name3: AuraMod,
     effect_amplitude1: i32,
     effect_amplitude2: i32,
     effect_amplitude3: i32,
@@ -454,7 +454,7 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "apply_aura_name",
                                 "effect_apply_aura_name1",
-                                Value::Int(self.effect_apply_aura_name1),
+                                Value::VanillaAuraMod(self.effect_apply_aura_name1),
                             ),
                             ArrayField::new(
                                 "amplitude",
@@ -550,7 +550,7 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "apply_aura_name",
                                 "effect_apply_aura_name2",
-                                Value::Int(self.effect_apply_aura_name2),
+                                Value::VanillaAuraMod(self.effect_apply_aura_name2),
                             ),
                             ArrayField::new(
                                 "amplitude",
@@ -646,7 +646,7 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "apply_aura_name",
                                 "effect_apply_aura_name3",
-                                Value::Int(self.effect_apply_aura_name3),
+                                Value::VanillaAuraMod(self.effect_apply_aura_name3),
                             ),
                             ArrayField::new(
                                 "amplitude",
@@ -1003,9 +1003,12 @@ pub(crate) fn vanilla(conn: &Connection) -> (Vec<GenericThing>, Optimizations) {
                 effect_radius_index1: row.get(88).unwrap(),
                 effect_radius_index2: row.get(89).unwrap(),
                 effect_radius_index3: row.get(90).unwrap(),
-                effect_apply_aura_name1: row.get(91).unwrap(),
-                effect_apply_aura_name2: row.get(92).unwrap(),
-                effect_apply_aura_name3: row.get(93).unwrap(),
+                effect_apply_aura_name1: AuraMod::try_from(row.get::<usize, u32>(91).unwrap())
+                    .unwrap(),
+                effect_apply_aura_name2: AuraMod::try_from(row.get::<usize, u32>(92).unwrap())
+                    .unwrap(),
+                effect_apply_aura_name3: AuraMod::try_from(row.get::<usize, u32>(93).unwrap())
+                    .unwrap(),
                 effect_amplitude1: row.get(94).unwrap(),
                 effect_amplitude2: row.get(95).unwrap(),
                 effect_amplitude3: row.get(96).unwrap(),

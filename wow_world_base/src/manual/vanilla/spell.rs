@@ -6,6 +6,7 @@ use crate::vanilla::{
     AttributesEx2,
     AttributesEx3,
     AttributesEx4,
+    AuraMod,
 };
 
 #[derive(Debug, Copy, Clone)]
@@ -556,7 +557,7 @@ pub struct SpellEffects {
     pub implicit_target_a: i32,
     pub implicit_target_b: i32,
     pub radius_index: i32,
-    pub apply_aura_name: i32,
+    pub apply_aura_name: AuraMod,
     pub amplitude: i32,
     pub multiple_value: f32,
     pub chain_target: i32,
@@ -579,7 +580,7 @@ impl SpellEffects {
         implicit_target_a: i32,
         implicit_target_b: i32,
         radius_index: i32,
-        apply_aura_name: i32,
+        apply_aura_name: AuraMod,
         amplitude: i32,
         multiple_value: f32,
         chain_target: i32,
