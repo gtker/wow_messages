@@ -1,6 +1,7 @@
 use crate::vanilla::{ItemSet, Skill};
 
 impl ItemSet {
+    /// Item ids that are part of the set.
     pub const fn items(&self) -> &'static [u32] {
         match self {
             Self::None => &[],
@@ -201,6 +202,10 @@ impl ItemSet {
         }
     }
 
+    /// Skill and level required to get set [`bonuses`](Self::bonuses).
+    ///
+    /// Item sets with this requirement can be equipped without
+    /// having the required skill but the set bonus will not be applied.
     pub const fn required_skill(&self) -> Option<(Skill, u32)> {
         Some(match self {
             ItemSet::BloodvineGarb => (Skill::Tailoring, 300),
