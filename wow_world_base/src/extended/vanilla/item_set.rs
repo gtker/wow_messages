@@ -1,4 +1,4 @@
-use crate::vanilla::ItemSet;
+use crate::vanilla::{ItemSet, Skill};
 
 impl ItemSet {
     pub const fn items(&self) -> &'static [u32] {
@@ -199,5 +199,15 @@ impl ItemSet {
             Self::LieutenantCommandersPursuance => &[23278, 23279, 23292, 23293, 23306, 23307],
             Self::LieutenantCommandersRefuge => &[23280, 23281, 23294, 23295, 23308, 23309],
         }
+    }
+
+    pub const fn required_skill(&self) -> Option<(Skill, u32)> {
+        Some(match self {
+            ItemSet::BloodvineGarb => (Skill::Tailoring, 300),
+            ItemSet::PrimalBatskin => (Skill::Leatherworking, 300),
+            ItemSet::BloodTigerHarness => (Skill::Leatherworking, 300),
+            ItemSet::TheDarksoul => (Skill::Blacksmithing, 300),
+            _ => return None,
+        })
     }
 }

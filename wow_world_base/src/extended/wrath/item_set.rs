@@ -1,4 +1,4 @@
-use crate::wrath::ItemSet;
+use crate::wrath::{ItemSet, Skill};
 
 impl ItemSet {
     pub const fn items(&self) -> &'static [u32] {
@@ -548,5 +548,25 @@ impl ItemSet {
             Self::LightswornBattlegear => &[51717, 51718, 51719, 51720, 51721],
             Self::LightswornPlate => &[51727, 51728, 51729, 51730, 51731],
         }
+    }
+
+    pub const fn required_skill(&self) -> Option<(Skill, u32)> {
+        Some(match self {
+            Self::BloodvineGarb => (Skill::Tailoring, 300),
+            Self::PrimalBatskin => (Skill::Leatherworking, 300),
+            Self::BloodTigerHarness => (Skill::Leatherworking, 300),
+            Self::TheDarksoul => (Skill::Blacksmithing, 300),
+            Self::SpellstrikeInfusion => (Skill::Tailoring, 350),
+            Self::KhoriumWard => (Skill::Blacksmithing, 350),
+            Self::BurningRage => (Skill::Blacksmithing, 350),
+            Self::FaithInFelsteel => (Skill::Blacksmithing, 350),
+            Self::WhitemendWisdom => (Skill::Tailoring, 350),
+            Self::BattlecastGarb => (Skill::Tailoring, 375),
+            Self::FelSkin => (Skill::Leatherworking, 350),
+            Self::StrengthOfTheClefthoof => (Skill::Leatherworking, 350),
+            Self::FelstalkerArmor => (Skill::Leatherworking, 350),
+            Self::FuryOfTheNether => (Skill::Leatherworking, 350),
+            _ => return None,
+        })
     }
 }
