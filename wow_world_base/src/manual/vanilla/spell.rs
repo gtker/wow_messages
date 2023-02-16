@@ -535,24 +535,71 @@ impl Spell {
                 }
             }
 
-            pub const fn reagents_array(&self) -> &[Reagent; 8] {
-                unimplemented!()
+            pub const fn reagents_array(&self) -> [Reagent; 8] {
+                const D: Reagent=Reagent{
+                    reagent:0,
+                    amount:0,
+                };
+                let l = self.reagents.len();
+                [
+                    if l >= 1 { self.reagents()[0] } else { D },
+                    if l >= 2 { self.reagents()[1] } else { D },
+                    if l >= 3 { self.reagents()[2] } else { D },
+                    if l >= 4 { self.reagents()[3] } else { D },
+                    if l >= 5 { self.reagents()[4] } else { D },
+                    if l >= 6 { self.reagents()[5] } else { D },
+                    if l >= 7 { self.reagents()[6] } else { D },
+                    if l >= 8 { self.reagents()[7] } else { D },
+                ]
             }
 
             pub const fn reagents(&self) -> &[Reagent] {
                 self.reagents
             }
 
-            pub const fn effects_array(&self) -> &[SpellEffects; 3] {
-                unimplemented!()
+            pub const fn effects_array(&self) -> [SpellEffects; 3] {
+                const D: SpellEffects=SpellEffects{
+                    effect:0,
+                    die_sides:0,
+                    base_dice:0,
+                    dice_per_level:0.0,
+                    real_points_per_level:0.0,
+                    base_points:0,
+                    mechanic:0,
+                    implicit_target_a:0,
+                    implicit_target_b:0,
+                    radius_index:0,
+                    apply_aura_name:AuraMod::None,
+                    amplitude:0,
+                    multiple_value:0.0,
+                    chain_target:0,
+                    item_type:0,
+                    misc_value:0,
+                    trigger_spell:0,
+                    effect_points_per_combo_point:0.0,
+                    damage_multiplier:0.0,
+                };
+                let l = self.effects.len();
+                [
+                    if l >= 1 { self.effects()[0] } else { D },
+                    if l >= 2 { self.effects()[1] } else { D },
+                    if l >= 3 { self.effects()[2] } else { D },
+                ]
             }
 
             pub const fn effects(&self) -> &[SpellEffects] {
                 self.effects
             }
 
-            pub const fn totems_array(&self) -> &[Totem; 2] {
-                unimplemented!()
+            pub const fn totems_array(&self) -> [Totem; 2] {
+                const D: Totem=Totem{
+                    totem:0,
+                };
+                let l = self.totems.len();
+                [
+                    if l >= 1 { self.totems()[0] } else { D },
+                    if l >= 2 { self.totems()[1] } else { D },
+                ]
             }
 
             pub const fn totems(&self) -> &[Totem] {

@@ -302,9 +302,40 @@ fn getters_and_setters(
     for array in arrays {
         s.pub_const_fn(
             format!("{}_array", array.variable_name),
-            format!("&[{}; {}]", array.type_name, array.array_length()),
+            format!("[{}; {}]", array.type_name, array.array_length()),
             |s| {
-                s.wln("unimplemented!()");
+                s.wln(format!(
+                    "const D: {ty_name}={ty_name}{{",
+                    ty_name = array.type_name
+                ));
+                s.inc_indent();
+
+                for field in array.field_info().fields() {
+                    s.wln(format!(
+                        "{}:{},",
+                        field.name,
+                        field.value.default_value().to_string_value()
+                    ));
+                }
+
+                s.dec_indent();
+                s.wln("};");
+
+                s.wln(format!("let l = self.{}.len();", array.variable_name));
+
+                s.wln("[");
+                s.inc_indent();
+
+                for i in 0..array.array_length() {
+                    s.wln(format!(
+                        "if l >= {} {{ self.{}()[{i}] }} else {{ D }},",
+                        i + 1,
+                        array.variable_name
+                    ));
+                }
+
+                s.dec_indent();
+                s.wln("]");
             },
         );
         s.newline();

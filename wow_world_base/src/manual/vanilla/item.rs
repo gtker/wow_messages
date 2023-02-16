@@ -565,16 +565,44 @@ impl Item {
         }
     }
 
-    pub const fn damages_array(&self) -> &[ItemDamageType; 5] {
-        unimplemented!()
+    pub const fn damages_array(&self) -> [ItemDamageType; 5] {
+        const D: ItemDamageType=ItemDamageType{
+            damage_minimum:0.0,
+            damage_maximum:0.0,
+            school:SpellSchool::Normal,
+        };
+        let l = self.damages.len();
+        [
+            if l >= 1 { self.damages()[0] } else { D },
+            if l >= 2 { self.damages()[1] } else { D },
+            if l >= 3 { self.damages()[2] } else { D },
+            if l >= 4 { self.damages()[3] } else { D },
+            if l >= 5 { self.damages()[4] } else { D },
+        ]
     }
 
     pub const fn damages(&self) -> &[ItemDamageType] {
         self.damages
     }
 
-    pub const fn spells_array(&self) -> &[Spells; 5] {
-        unimplemented!()
+    pub const fn spells_array(&self) -> [Spells; 5] {
+        const D: Spells=Spells{
+            spell:0,
+            spell_trigger:SpellTriggerType::OnUse,
+            spell_charges:0,
+            spell_ppm_rate:0.0,
+            spell_cooldown:0,
+            spell_category:0,
+            spell_category_cooldown:0,
+        };
+        let l = self.spells.len();
+        [
+            if l >= 1 { self.spells()[0] } else { D },
+            if l >= 2 { self.spells()[1] } else { D },
+            if l >= 3 { self.spells()[2] } else { D },
+            if l >= 4 { self.spells()[3] } else { D },
+            if l >= 5 { self.spells()[4] } else { D },
+        ]
     }
 
     pub const fn spells(&self) -> &[Spells] {

@@ -705,32 +705,82 @@ impl Item {
         }
     }
 
-    pub const fn sockets_array(&self) -> &[ItemSocket; 3] {
-        unimplemented!()
+    pub const fn sockets_array(&self) -> [ItemSocket; 3] {
+        const D: ItemSocket=ItemSocket{
+            color:0,
+            content:0,
+        };
+        let l = self.sockets.len();
+        [
+            if l >= 1 { self.sockets()[0] } else { D },
+            if l >= 2 { self.sockets()[1] } else { D },
+            if l >= 3 { self.sockets()[2] } else { D },
+        ]
     }
 
     pub const fn sockets(&self) -> &[ItemSocket] {
         self.sockets
     }
 
-    pub const fn damages_array(&self) -> &[ItemDamageType; 2] {
-        unimplemented!()
+    pub const fn damages_array(&self) -> [ItemDamageType; 2] {
+        const D: ItemDamageType=ItemDamageType{
+            damage_minimum:0.0,
+            damage_maximum:0.0,
+            school:SpellSchool::Normal,
+        };
+        let l = self.damages.len();
+        [
+            if l >= 1 { self.damages()[0] } else { D },
+            if l >= 2 { self.damages()[1] } else { D },
+        ]
     }
 
     pub const fn damages(&self) -> &[ItemDamageType] {
         self.damages
     }
 
-    pub const fn stats_array(&self) -> &[ItemStat; 10] {
-        unimplemented!()
+    pub const fn stats_array(&self) -> [ItemStat; 10] {
+        const D: ItemStat=ItemStat{
+            stat_type:0,
+            value:0,
+        };
+        let l = self.stats.len();
+        [
+            if l >= 1 { self.stats()[0] } else { D },
+            if l >= 2 { self.stats()[1] } else { D },
+            if l >= 3 { self.stats()[2] } else { D },
+            if l >= 4 { self.stats()[3] } else { D },
+            if l >= 5 { self.stats()[4] } else { D },
+            if l >= 6 { self.stats()[5] } else { D },
+            if l >= 7 { self.stats()[6] } else { D },
+            if l >= 8 { self.stats()[7] } else { D },
+            if l >= 9 { self.stats()[8] } else { D },
+            if l >= 10 { self.stats()[9] } else { D },
+        ]
     }
 
     pub const fn stats(&self) -> &[ItemStat] {
         self.stats
     }
 
-    pub const fn spells_array(&self) -> &[Spells; 5] {
-        unimplemented!()
+    pub const fn spells_array(&self) -> [Spells; 5] {
+        const D: Spells=Spells{
+            spell:0,
+            spell_trigger:SpellTriggerType::OnUse,
+            spell_charges:0,
+            spell_ppm_rate:0.0,
+            spell_cooldown:0,
+            spell_category:0,
+            spell_category_cooldown:0,
+        };
+        let l = self.spells.len();
+        [
+            if l >= 1 { self.spells()[0] } else { D },
+            if l >= 2 { self.spells()[1] } else { D },
+            if l >= 3 { self.spells()[2] } else { D },
+            if l >= 4 { self.spells()[3] } else { D },
+            if l >= 5 { self.spells()[4] } else { D },
+        ]
     }
 
     pub const fn spells(&self) -> &[Spells] {
