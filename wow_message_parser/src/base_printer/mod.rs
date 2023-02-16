@@ -201,7 +201,7 @@ fn write_items(data: &Data, expansion: Expansion) {
     );
     write_definition(
         &expansion.item_definition_path(),
-        get_fields(&items),
+        get_fields(items),
         &items[0].arrays,
         expansion,
         TY_NAME,

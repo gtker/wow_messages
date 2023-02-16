@@ -214,13 +214,10 @@ impl ConstNamer {
     }
 }
 
-fn get_default_values(
-    things: &[GenericThing],
-    optimizations: &Optimizations,
-) -> (
-    BTreeMap<(Value, Option<IntegerSize>), String>,
-    BTreeMap<(ArrayInstances, &'static str), String>,
-) {
+type Values = BTreeMap<(Value, Option<IntegerSize>), String>;
+type Arrays = BTreeMap<(ArrayInstances, &'static str), String>;
+
+fn get_default_values(things: &[GenericThing], optimizations: &Optimizations) -> (Values, Arrays) {
     let mut values: BTreeMap<(Value, Option<IntegerSize>), usize> = BTreeMap::new();
     for thing in things {
         for field in &thing.fields {
@@ -257,8 +254,8 @@ fn get_default_values(
     }
 
     // Ensure that most used consts have the shortest name
-    let values = values.into_iter().map(|a| ValuesWrapper::Values(a));
-    let arrays = arrays.into_iter().map(|a| ValuesWrapper::Arrays(a));
+    let values = values.into_iter().map(ValuesWrapper::Values);
+    let arrays = arrays.into_iter().map(ValuesWrapper::Arrays);
 
     let mut values: Vec<_> = values.chain(arrays).collect();
     values.sort_by(|a, b| match a {
@@ -315,7 +312,7 @@ fn insert_value(
     }
 }
 
-fn print_arrays(s: &mut Writer, arrays: &BTreeMap<(ArrayInstances, &'static str), String>) {
+fn print_arrays(s: &mut Writer, arrays: &Arrays) {
     for ((array, ty_name), const_name) in arrays {
         s.w(format!("const {const_name}:&[{ty_name}]=&["));
 
@@ -337,10 +334,7 @@ fn print_arrays(s: &mut Writer, arrays: &BTreeMap<(ArrayInstances, &'static str)
     }
 }
 
-fn const_default_values(
-    s: &mut Writer,
-    default_values: &BTreeMap<(Value, Option<IntegerSize>), String>,
-) {
+fn const_default_values(s: &mut Writer, default_values: &Values) {
     for ((value, integer_size), const_name) in default_values {
         let ty_name = if let Some(t) = integer_size {
             t.string_value()
