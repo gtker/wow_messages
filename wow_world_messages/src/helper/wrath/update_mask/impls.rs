@@ -2370,7 +2370,7 @@ impl UpdatePlayerBuilder {
         self
     }
 
-    pub fn set_player_BYTES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
+    pub fn set_player_FEATURES(mut self, a: u8, b: u8, c: u8, d: u8) -> Self {
         self.header_set(1197, u32::from_le_bytes([a, b, c, d]));
         self
     }
@@ -7068,11 +7068,11 @@ impl UpdatePlayer {
         self.values.get(&1196).map(|v| *v as i32)
     }
 
-    pub fn set_player_BYTES(&mut self, a: u8, b: u8, c: u8, d: u8) {
+    pub fn set_player_FEATURES(&mut self, a: u8, b: u8, c: u8, d: u8) {
         self.header_set(1197, u32::from_le_bytes([a, b, c, d]));
     }
 
-    pub fn player_BYTES(&self) -> Option<(u8, u8, u8, u8)> {
+    pub fn player_FEATURES(&self) -> Option<(u8, u8, u8, u8)> {
         if let Some(v) = self.values.get(&1197) {
             let v = v.to_le_bytes();
             let (a, b, c, d) = (v[0], v[1], v[2], v[3]);

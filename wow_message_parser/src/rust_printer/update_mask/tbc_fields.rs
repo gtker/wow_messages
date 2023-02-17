@@ -1730,7 +1730,7 @@ pub(crate) const FIELDS: [MemberType; 366] = [
         1,
         UfType::Int,
     ),
-    MemberType::new(UpdateMaskType::Player, "BYTES", 0x05CE, 1, UfType::Bytes),
+    MemberType::new(UpdateMaskType::Player, "FEATURES", 0x05CE, 1, UfType::Bytes),
     MemberType::new(UpdateMaskType::Player, "AMMO_ID", 0x05CF, 1, UfType::Int),
     MemberType::new(
         UpdateMaskType::Player,
