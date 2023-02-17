@@ -360,7 +360,7 @@ fn print_definition(
             true
         }
         Type::UpdateMask => {
-            s.wln("add_update_mask(ptv);");
+            s.wln("add_update_mask(ptv, pinfo);");
             true
         }
         Type::String { .. } => unreachable!("Strings are only in login messages"),
