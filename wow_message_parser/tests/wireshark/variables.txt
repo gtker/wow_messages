@@ -58,6 +58,7 @@
     guint32 move_type = 0;
     guint32 node_count = 0;
     guint32 number_of_battlegrounds = 0;
+    guint32 opcode = 0;
     guint32 reason = 0;
     guint32 result = 0;
     guint32 spell_count = 0;

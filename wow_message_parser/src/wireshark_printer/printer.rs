@@ -19,14 +19,24 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
 
     let mut variables = Vec::new();
 
-    s.open_curly("switch (opcode)");
+    s.open_curly("switch (header_opcode)");
     for e in o.wireshark_messages() {
-        if e.empty_body() || is_client_name(e.name()) || e.tags().compressed() {
+        if e.empty_body() || is_client_name(e.name()) {
             continue;
         }
 
         s.wln(format!("case {}:", clean_opcode_name(e.name())));
         s.inc_indent();
+
+        if e.tags().compressed() {
+            s.wln("ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);");
+            s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
+            s.open_curly("if (compressed_tvb != NULL)");
+
+            s.wln("ptvcursor_t* old_ptv = ptv;");
+            s.wln("ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);");
+        }
+
         if is_server_name(e.name()) {
             s.open_curly("if (WOWW_SERVER_TO_CLIENT)");
 
@@ -47,6 +57,13 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
             }
         } else {
             print_message(&mut s, e, w, o, &mut variables);
+        }
+
+        if e.tags().compressed() {
+            s.wln("ptvcursor_free(ptv);");
+            s.wln("ptv = old_ptv;");
+            s.wln("compressed_tvb = NULL;");
+            s.closing_curly(); // if (compressed_tvb != NULL)
         }
 
         s.wln("break;");
