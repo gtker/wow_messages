@@ -1,0 +1,209 @@
+use crate::vanilla::SimpleEnum;
+use std::io::{Write, Read};
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:370`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L370):
+/// ```text
+/// struct BugSeparateIfDoubleWrite {
+///     SimpleEnum b;
+///     if (b == ZERO
+///         || b == ONE) {
+///         u8 zero_one;
+///     }
+///     u8 middle;
+///     if (b == TWO) {
+///         u8 two;
+///     }
+/// }
+/// ```
+pub struct BugSeparateIfDoubleWrite {
+    pub b: BugSeparateIfDoubleWrite_SimpleEnum,
+    pub middle: u8,
+}
+
+impl BugSeparateIfDoubleWrite {
+    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+        // b: SimpleEnum
+        w.write_all(&(self.b.as_int() as u8).to_le_bytes())?;
+
+        match &self.b {
+            BugSeparateIfDoubleWrite_SimpleEnum::Zero {
+                zero_one,
+            } => {
+                // zero_one: u8
+                w.write_all(&zero_one.to_le_bytes())?;
+
+            }
+            BugSeparateIfDoubleWrite_SimpleEnum::One {
+                zero_one,
+            } => {
+                // zero_one: u8
+                w.write_all(&zero_one.to_le_bytes())?;
+
+            }
+            BugSeparateIfDoubleWrite_SimpleEnum::Two {
+                two,
+            } => {
+            }
+        }
+
+        // middle: u8
+        w.write_all(&self.middle.to_le_bytes())?;
+
+        match &self.b {
+            BugSeparateIfDoubleWrite_SimpleEnum::Zero {
+                zero_one,
+            } => {
+            }
+            BugSeparateIfDoubleWrite_SimpleEnum::One {
+                zero_one,
+            } => {
+            }
+            BugSeparateIfDoubleWrite_SimpleEnum::Two {
+                two,
+            } => {
+                // two: u8
+                w.write_all(&two.to_le_bytes())?;
+
+            }
+        }
+
+        Ok(())
+    }
+}
+
+impl BugSeparateIfDoubleWrite {
+    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+        // b: SimpleEnum
+        let b: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
+
+        let b_if = match b {
+            SimpleEnum::Zero => {
+                // zero_one: u8
+                let zero_one = crate::util::read_u8_le(r)?;
+
+                BugSeparateIfDoubleWrite_SimpleEnum::Zero {
+                    zero_one,
+                }
+            }
+            SimpleEnum::One => {
+                // zero_one: u8
+                let zero_one = crate::util::read_u8_le(r)?;
+
+                BugSeparateIfDoubleWrite_SimpleEnum::One {
+                    zero_one,
+                }
+            }
+            SimpleEnum::Two => {
+                // two: u8
+                let two = crate::util::read_u8_le(r)?;
+
+                BugSeparateIfDoubleWrite_SimpleEnum::Two {
+                    two,
+                }
+            }
+        };
+
+        // middle: u8
+        let middle = crate::util::read_u8_le(r)?;
+
+        let b_if = match b {
+            SimpleEnum::Zero => {
+                // zero_one: u8
+                let zero_one = crate::util::read_u8_le(r)?;
+
+                BugSeparateIfDoubleWrite_SimpleEnum::Zero {
+                    zero_one,
+                }
+            }
+            SimpleEnum::One => {
+                // zero_one: u8
+                let zero_one = crate::util::read_u8_le(r)?;
+
+                BugSeparateIfDoubleWrite_SimpleEnum::One {
+                    zero_one,
+                }
+            }
+            SimpleEnum::Two => {
+                // two: u8
+                let two = crate::util::read_u8_le(r)?;
+
+                BugSeparateIfDoubleWrite_SimpleEnum::Two {
+                    two,
+                }
+            }
+        };
+
+        Ok(Self {
+            b: b_if,
+            middle,
+        })
+    }
+
+}
+
+impl BugSeparateIfDoubleWrite {
+    pub(crate) fn size(&self) -> usize {
+        self.b.size() // b: BugSeparateIfDoubleWrite_SimpleEnum
+        + 1 // middle: u8
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum BugSeparateIfDoubleWrite_SimpleEnum {
+    Zero {
+        zero_one: u8,
+    },
+    One {
+        zero_one: u8,
+    },
+    Two {
+        two: u8,
+    },
+}
+
+impl Default for BugSeparateIfDoubleWrite_SimpleEnum {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::Zero {
+            zero_one: Default::default(),
+        }
+    }
+}
+
+impl BugSeparateIfDoubleWrite_SimpleEnum {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::Zero { .. } => 0,
+            Self::One { .. } => 1,
+            Self::Two { .. } => 2,
+        }
+    }
+
+}
+
+impl BugSeparateIfDoubleWrite_SimpleEnum {
+    pub(crate) fn size(&self) -> usize {
+        match self {
+            Self::Zero {
+                zero_one,
+            } => {
+                1
+                + 1 // zero_one: u8
+            }
+            Self::One {
+                zero_one,
+            } => {
+                1
+                + 1 // zero_one: u8
+            }
+            Self::Two {
+                two,
+            } => {
+                1
+                + 1 // two: u8
+            }
+        }
+    }
+}
+

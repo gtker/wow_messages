@@ -366,3 +366,14 @@ struct EnumNotIfIfNested {
 struct SizedCString {
     SizedCString s;
 }
+
+struct BugSeparateIfDoubleWrite {
+	SimpleEnum b;
+	if (b == ZERO || b == ONE) {
+		u8 zero_one;
+	}
+	u8 middle;
+	if (b == TWO) {
+		u8 two;
+	}
+}

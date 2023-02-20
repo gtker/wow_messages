@@ -420,6 +420,19 @@ fn sized_cstring() {
 }
 
 #[test]
+fn bug_separate_if_double_write() {
+    let o = get_all_impl_items();
+
+    let d = o
+        .all_containers()
+        .find(|a| a.name() == "BugSeparateIfDoubleWrite")
+        .unwrap();
+    let s = print_struct(d, &o, VERSION);
+
+    tcheck(&s, "bug_separate_if_double_write");
+}
+
+#[test]
 fn missing_ty_errors() {
     should_panic(|| must_err_load("missing_type.wowm"), COMPLEX_NOT_FOUND);
 }

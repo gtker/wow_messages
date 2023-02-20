@@ -488,7 +488,9 @@ fn print_write_if_enum_statement(
         s.inc_indent();
 
         for m in enumerator.original_fields() {
-            print_write_field(s, e, o, m, "", prefix, postfix);
+            if statement.contains(m) {
+                print_write_field(s, e, o, m, "", prefix, postfix);
+            }
         }
 
         s.closing_curly(); // enum::enumerator
