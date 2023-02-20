@@ -12,6 +12,9 @@ use std::io::{Write, Read};
 ///         Guid item2;
 ///         u8 bag_type_subclass;
 ///     }
+///     if (result == CANT_EQUIP_LEVEL_I) {
+///         u32 required_level;
+///     }
 /// }
 /// ```
 pub struct SMSG_INVENTORY_CHANGE_FAILURE {
@@ -36,6 +39,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 bag_type_subclass,
                 item1,
                 item2,
+                required_level,
             } => {
                 // item1: Guid
                 w.write_all(&item1.guid().to_le_bytes())?;
@@ -1339,1409 +1343,2307 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
         }
 
+        match &self.result {
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok => {}
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+                bag_type_subclass,
+                item1,
+                item2,
+                required_level,
+            } => {
+                // required_level: u32
+                w.write_all(&required_level.to_le_bytes())?;
+
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
+                bag_type_subclass,
+                item1,
+                item2,
+            } => {
+            }
+        }
+
         assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(1..=18).contains(&body_size) {
+        if !(1..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0112, size: body_size as u32 });
         }
+
+        let mut result_if_item1 = Default::default();
+        let mut result_if_item2 = Default::default();
+        let mut result_if_bag_type_subclass = Default::default();
+        let mut result_if_required_level = Default::default();
 
         // result: InventoryResult
         let result: InventoryResult = crate::util::read_u8_le(r)?.try_into()?;
 
-        let result_if = match result {
-            InventoryResult::Ok => SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok,
+        match result {
+            InventoryResult::Ok => {}
             InventoryResult::CantEquipLevelI => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantEquipSkill => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemDoesntGoToSlot => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::BagFull => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NonemptyBagOverOtherBag => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantTradeEquipBags => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::OnlyAmmoCanGoHere => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NoRequiredProficiency => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NoEquipmentSlotAvailable => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::YouCanNeverUseThatItem => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::YouCanNeverUseThatItem2 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NoEquipmentSlotAvailable2 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantEquipWithTwohanded => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantDualWield => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemDoesntGoIntoBag => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemDoesntGoIntoBag2 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantCarryMoreOfThis => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NoEquipmentSlotAvailable3 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemCantStack => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemCantBeEquipped => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemsCantBeSwapped => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::SlotIsEmpty => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemNotFound => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantDropSoulbound => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::OutOfRange => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::TriedToSplitMoreThanCount => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CouldntSplitItems => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::MissingReagent => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NotEnoughMoney => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NotABag => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CanOnlyDoWithEmptyBags => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::DontOwnThatItem => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CanEquipOnly1Quiver => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::MustPurchaseThatBagSlot => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::TooFarAwayFromBank => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemLocked => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::YouAreStunned => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::YouAreDead => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantDoRightNow => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::IntBagError => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CanEquipOnly1Bolt => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CanEquipOnly1Ammopouch => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::StackableCantBeWrapped => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::EquippedCantBeWrapped => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::WrappedCantBeWrapped => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::BoundCantBeWrapped => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::UniqueCantBeWrapped => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::BagsCantBeWrapped => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::AlreadyLooted => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::InventoryFull => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::BankFull => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemIsCurrentlySoldOut => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::BagFull3 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemNotFound2 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemCantStack2 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::BagFull4 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemSoldOut => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ObjectIsBusy => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::None => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NotInCombat => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NotWhileDisarmed => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::BagFull6 => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantEquipRank => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantEquipReputation => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::TooManySpecialBags => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::LootCantLootThatNow => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemUniqueEquipable => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::VendorMissingTurnins => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NotEnoughHonorPoints => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NotEnoughArenaPoints => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemMaxCountSocketed => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::MailBoundItem => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NoSplitWhileProspecting => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemMaxCountEquippedSocketed => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemUniqueEquippableSocketed => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::TooMuchGold => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::NotDuringArenaMatch => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CannotTradeThat => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::PersonalArenaRatingTooLow => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::EventAutoequipBindConfirm => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ArtefactsOnlyForOwnCharacters => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemMaxLimitCategoryCountExceeded => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemMaxLimitCategorySocketedExceeded => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ScalingStatItemLevelExceeded => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::PurchaseLevelTooLow => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::CantEquipNeedTalent => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
-                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
-                    bag_type_subclass,
-                    item1,
-                    item2,
-                }
             }
             InventoryResult::ItemMaxLimitCategoryEquippedExceeded => {
                 // item1: Guid
-                let item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(r)?;
 
                 // item2: Guid
-                let item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(r)?;
 
                 // bag_type_subclass: u8
-                let bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
 
+            }
+        };
+
+        match result {
+            InventoryResult::Ok => {}
+            InventoryResult::CantEquipLevelI => {
+                // required_level: u32
+                result_if_required_level = crate::util::read_u32_le(r)?;
+
+            }
+            InventoryResult::CantEquipSkill => {
+            }
+            InventoryResult::ItemDoesntGoToSlot => {
+            }
+            InventoryResult::BagFull => {
+            }
+            InventoryResult::NonemptyBagOverOtherBag => {
+            }
+            InventoryResult::CantTradeEquipBags => {
+            }
+            InventoryResult::OnlyAmmoCanGoHere => {
+            }
+            InventoryResult::NoRequiredProficiency => {
+            }
+            InventoryResult::NoEquipmentSlotAvailable => {
+            }
+            InventoryResult::YouCanNeverUseThatItem => {
+            }
+            InventoryResult::YouCanNeverUseThatItem2 => {
+            }
+            InventoryResult::NoEquipmentSlotAvailable2 => {
+            }
+            InventoryResult::CantEquipWithTwohanded => {
+            }
+            InventoryResult::CantDualWield => {
+            }
+            InventoryResult::ItemDoesntGoIntoBag => {
+            }
+            InventoryResult::ItemDoesntGoIntoBag2 => {
+            }
+            InventoryResult::CantCarryMoreOfThis => {
+            }
+            InventoryResult::NoEquipmentSlotAvailable3 => {
+            }
+            InventoryResult::ItemCantStack => {
+            }
+            InventoryResult::ItemCantBeEquipped => {
+            }
+            InventoryResult::ItemsCantBeSwapped => {
+            }
+            InventoryResult::SlotIsEmpty => {
+            }
+            InventoryResult::ItemNotFound => {
+            }
+            InventoryResult::CantDropSoulbound => {
+            }
+            InventoryResult::OutOfRange => {
+            }
+            InventoryResult::TriedToSplitMoreThanCount => {
+            }
+            InventoryResult::CouldntSplitItems => {
+            }
+            InventoryResult::MissingReagent => {
+            }
+            InventoryResult::NotEnoughMoney => {
+            }
+            InventoryResult::NotABag => {
+            }
+            InventoryResult::CanOnlyDoWithEmptyBags => {
+            }
+            InventoryResult::DontOwnThatItem => {
+            }
+            InventoryResult::CanEquipOnly1Quiver => {
+            }
+            InventoryResult::MustPurchaseThatBagSlot => {
+            }
+            InventoryResult::TooFarAwayFromBank => {
+            }
+            InventoryResult::ItemLocked => {
+            }
+            InventoryResult::YouAreStunned => {
+            }
+            InventoryResult::YouAreDead => {
+            }
+            InventoryResult::CantDoRightNow => {
+            }
+            InventoryResult::IntBagError => {
+            }
+            InventoryResult::CanEquipOnly1Bolt => {
+            }
+            InventoryResult::CanEquipOnly1Ammopouch => {
+            }
+            InventoryResult::StackableCantBeWrapped => {
+            }
+            InventoryResult::EquippedCantBeWrapped => {
+            }
+            InventoryResult::WrappedCantBeWrapped => {
+            }
+            InventoryResult::BoundCantBeWrapped => {
+            }
+            InventoryResult::UniqueCantBeWrapped => {
+            }
+            InventoryResult::BagsCantBeWrapped => {
+            }
+            InventoryResult::AlreadyLooted => {
+            }
+            InventoryResult::InventoryFull => {
+            }
+            InventoryResult::BankFull => {
+            }
+            InventoryResult::ItemIsCurrentlySoldOut => {
+            }
+            InventoryResult::BagFull3 => {
+            }
+            InventoryResult::ItemNotFound2 => {
+            }
+            InventoryResult::ItemCantStack2 => {
+            }
+            InventoryResult::BagFull4 => {
+            }
+            InventoryResult::ItemSoldOut => {
+            }
+            InventoryResult::ObjectIsBusy => {
+            }
+            InventoryResult::None => {
+            }
+            InventoryResult::NotInCombat => {
+            }
+            InventoryResult::NotWhileDisarmed => {
+            }
+            InventoryResult::BagFull6 => {
+            }
+            InventoryResult::CantEquipRank => {
+            }
+            InventoryResult::CantEquipReputation => {
+            }
+            InventoryResult::TooManySpecialBags => {
+            }
+            InventoryResult::LootCantLootThatNow => {
+            }
+            InventoryResult::ItemUniqueEquipable => {
+            }
+            InventoryResult::VendorMissingTurnins => {
+            }
+            InventoryResult::NotEnoughHonorPoints => {
+            }
+            InventoryResult::NotEnoughArenaPoints => {
+            }
+            InventoryResult::ItemMaxCountSocketed => {
+            }
+            InventoryResult::MailBoundItem => {
+            }
+            InventoryResult::NoSplitWhileProspecting => {
+            }
+            InventoryResult::ItemMaxCountEquippedSocketed => {
+            }
+            InventoryResult::ItemUniqueEquippableSocketed => {
+            }
+            InventoryResult::TooMuchGold => {
+            }
+            InventoryResult::NotDuringArenaMatch => {
+            }
+            InventoryResult::CannotTradeThat => {
+            }
+            InventoryResult::PersonalArenaRatingTooLow => {
+            }
+            InventoryResult::EventAutoequipBindConfirm => {
+            }
+            InventoryResult::ArtefactsOnlyForOwnCharacters => {
+            }
+            InventoryResult::ItemMaxLimitCategoryCountExceeded => {
+            }
+            InventoryResult::ItemMaxLimitCategorySocketedExceeded => {
+            }
+            InventoryResult::ScalingStatItemLevelExceeded => {
+            }
+            InventoryResult::PurchaseLevelTooLow => {
+            }
+            InventoryResult::CantEquipNeedTalent => {
+            }
+            InventoryResult::ItemMaxLimitCategoryEquippedExceeded => {
+            }
+        };
+
+        let result_if = match result {
+            InventoryResult::Ok => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok {
+                }
+            }
+            InventoryResult::CantEquipLevelI => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                    required_level: result_if_required_level,
+                }
+            }
+            InventoryResult::CantEquipSkill => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemDoesntGoToSlot => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoToSlot {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::BagFull => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NonemptyBagOverOtherBag => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NonemptyBagOverOtherBag {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantTradeEquipBags => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantTradeEquipBags {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::OnlyAmmoCanGoHere => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OnlyAmmoCanGoHere {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NoRequiredProficiency => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoRequiredProficiency {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NoEquipmentSlotAvailable => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::YouCanNeverUseThatItem => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::YouCanNeverUseThatItem2 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouCanNeverUseThatItem2 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NoEquipmentSlotAvailable2 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable2 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantEquipWithTwohanded => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipWithTwohanded {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantDualWield => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDualWield {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemDoesntGoIntoBag => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemDoesntGoIntoBag2 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemDoesntGoIntoBag2 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantCarryMoreOfThis => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantCarryMoreOfThis {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NoEquipmentSlotAvailable3 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoEquipmentSlotAvailable3 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemCantStack => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemCantBeEquipped => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantBeEquipped {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemsCantBeSwapped => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemsCantBeSwapped {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::SlotIsEmpty => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::SlotIsEmpty {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemNotFound => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantDropSoulbound => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDropSoulbound {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::OutOfRange => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::OutOfRange {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::TriedToSplitMoreThanCount => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TriedToSplitMoreThanCount {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CouldntSplitItems => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CouldntSplitItems {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::MissingReagent => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MissingReagent {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NotEnoughMoney => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughMoney {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NotABag => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotABag {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CanOnlyDoWithEmptyBags => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanOnlyDoWithEmptyBags {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::DontOwnThatItem => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::DontOwnThatItem {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CanEquipOnly1Quiver => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Quiver {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::MustPurchaseThatBagSlot => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MustPurchaseThatBagSlot {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::TooFarAwayFromBank => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooFarAwayFromBank {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemLocked => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemLocked {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::YouAreStunned => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreStunned {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::YouAreDead => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::YouAreDead {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantDoRightNow => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantDoRightNow {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::IntBagError => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::IntBagError {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CanEquipOnly1Bolt => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Bolt {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CanEquipOnly1Ammopouch => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CanEquipOnly1Ammopouch {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::StackableCantBeWrapped => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::StackableCantBeWrapped {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::EquippedCantBeWrapped => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EquippedCantBeWrapped {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::WrappedCantBeWrapped => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::WrappedCantBeWrapped {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::BoundCantBeWrapped => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BoundCantBeWrapped {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::UniqueCantBeWrapped => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::UniqueCantBeWrapped {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::BagsCantBeWrapped => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagsCantBeWrapped {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::AlreadyLooted => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::AlreadyLooted {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::InventoryFull => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::InventoryFull {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::BankFull => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BankFull {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemIsCurrentlySoldOut => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemIsCurrentlySoldOut {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::BagFull3 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull3 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemNotFound2 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemNotFound2 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemCantStack2 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemCantStack2 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::BagFull4 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull4 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemSoldOut => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemSoldOut {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ObjectIsBusy => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ObjectIsBusy {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::None => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::None {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NotInCombat => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotInCombat {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NotWhileDisarmed => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotWhileDisarmed {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::BagFull6 => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::BagFull6 {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantEquipRank => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipRank {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantEquipReputation => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipReputation {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::TooManySpecialBags => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooManySpecialBags {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::LootCantLootThatNow => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::LootCantLootThatNow {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemUniqueEquipable => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquipable {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::VendorMissingTurnins => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::VendorMissingTurnins {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NotEnoughHonorPoints => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughHonorPoints {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NotEnoughArenaPoints => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotEnoughArenaPoints {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemMaxCountSocketed => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountSocketed {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::MailBoundItem => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::MailBoundItem {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NoSplitWhileProspecting => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NoSplitWhileProspecting {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemMaxCountEquippedSocketed => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxCountEquippedSocketed {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemUniqueEquippableSocketed => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemUniqueEquippableSocketed {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::TooMuchGold => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::TooMuchGold {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::NotDuringArenaMatch => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::NotDuringArenaMatch {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CannotTradeThat => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CannotTradeThat {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::PersonalArenaRatingTooLow => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PersonalArenaRatingTooLow {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::EventAutoequipBindConfirm => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::EventAutoequipBindConfirm {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ArtefactsOnlyForOwnCharacters => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ArtefactsOnlyForOwnCharacters {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemMaxLimitCategoryCountExceeded => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryCountExceeded {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemMaxLimitCategorySocketedExceeded => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategorySocketedExceeded {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ScalingStatItemLevelExceeded => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ScalingStatItemLevelExceeded {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::PurchaseLevelTooLow => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::PurchaseLevelTooLow {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::CantEquipNeedTalent => {
+                SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipNeedTalent {
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
+                }
+            }
+            InventoryResult::ItemMaxLimitCategoryEquippedExceeded => {
                 SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::ItemMaxLimitCategoryEquippedExceeded {
-                    bag_type_subclass,
-                    item1,
-                    item2,
+                    bag_type_subclass: result_if_bag_type_subclass,
+                    item1: result_if_item1,
+                    item2: result_if_item2,
                 }
             }
         };
@@ -2768,6 +3670,7 @@ pub enum SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
         bag_type_subclass: u8,
         item1: Guid,
         item2: Guid,
+        required_level: u32,
     },
     CantEquipSkill {
         bag_type_subclass: u8,
@@ -3314,11 +4217,13 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 bag_type_subclass,
                 item1,
                 item2,
+                required_level,
             } => {
                 1
                 + 1 // bag_type_subclass: u8
                 + 8 // item1: Guid
                 + 8 // item2: Guid
+                + 4 // required_level: u32
             }
             Self::CantEquipSkill {
                 bag_type_subclass,

@@ -173,11 +173,11 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
     }
     SizedCString message;
     PlayerChatTag tag;
-    /* TODO BUG_SEPARATE_IF_DOUBLE_WRITE if (chat_type == ACHIEVEMENT
+    if (chat_type == ACHIEVEMENT
      || chat_type == GUILD_ACHIEVEMENT)
     {
         u32 achievement_id;
-    } */
+    }
 } {
     versions = "3.3.5";
 }
