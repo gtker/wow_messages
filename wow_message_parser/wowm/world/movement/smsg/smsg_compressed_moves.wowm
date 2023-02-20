@@ -28,8 +28,7 @@ struct MonsterMove {
 }
 
 struct CompressedMove {
-    /* TODO STRUCT_SELF_SIZE */
-    u8 size;
+    u8 size = self.size;
     CompressedMoveOpcode opcode;
     PackedGuid guid;
     if (opcode == SMSG_SPLINE_SET_RUN_SPEED) {

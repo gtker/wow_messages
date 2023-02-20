@@ -6,14 +6,13 @@ use std::io::{Write, Read};
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_multiple_moves.wowm#L11):
 /// ```text
 /// struct MiniMoveMessage {
-///     u8 size;
+///     u8 size = self.size;
 ///     MiniMoveOpcode opcode;
 ///     PackedGuid guid;
 ///     u32 movement_counter;
 /// }
 /// ```
 pub struct MiniMoveMessage {
-    pub size: u8,
     pub opcode: MiniMoveOpcode,
     pub guid: Guid,
     pub movement_counter: u32,
@@ -22,7 +21,7 @@ pub struct MiniMoveMessage {
 impl MiniMoveMessage {
     pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
         // size: u8
-        w.write_all(&self.size.to_le_bytes())?;
+        w.write_all(&((self.size() - 1) as u8).to_le_bytes())?;
 
         // opcode: MiniMoveOpcode
         w.write_all(&(self.opcode.as_int() as u16).to_le_bytes())?;
@@ -40,7 +39,8 @@ impl MiniMoveMessage {
 impl MiniMoveMessage {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // size: u8
-        let size = crate::util::read_u8_le(r)?;
+        let _size = crate::util::read_u8_le(r)?;
+        // size is expected to always be self.size (0)
 
         // opcode: MiniMoveOpcode
         let opcode: MiniMoveOpcode = crate::util::read_u16_le(r)?.try_into()?;
@@ -52,7 +52,6 @@ impl MiniMoveMessage {
         let movement_counter = crate::util::read_u32_le(r)?;
 
         Ok(Self {
-            size,
             opcode,
             guid,
             movement_counter,

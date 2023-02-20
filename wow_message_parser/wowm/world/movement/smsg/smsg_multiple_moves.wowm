@@ -9,8 +9,7 @@ enum MiniMoveOpcode : u16 {
 }
 
 struct MiniMoveMessage {
-    /* TODO STRUCT_SELF_SIZE Must manually set correct size */
-    u8 size;
+    u8 size = self.size;
     MiniMoveOpcode opcode;
     PackedGuid guid;
     u32 movement_counter;
