@@ -15,6 +15,7 @@ use crate::file_utils::{create_and_overwrite_if_not_same_contents, ModFiles};
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
+use crate::parser::types::sizes::PACKED_GUID_MAX_SIZE;
 use crate::path_utils::{get_filepath, get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
     get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
@@ -70,6 +71,13 @@ const STRING_LARGEST_POSSIBLE: usize = 257;
 
 const MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED: usize = 4;
 const MONSTER_MOVE_SPLINE_LARGEST_ALLOWED: usize = 4 + 3 + u32::MAX as usize;
+
+const ENCHANT_MASK_SMALLEST_ALLOWED: usize = 2;
+const ENCHANT_MASK_LARGEST_ALLOWED: usize = 2 + 16 * 2;
+
+const INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED: usize = 4;
+const INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED: usize =
+    4 + 32 * (ENCHANT_MASK_LARGEST_ALLOWED + 4 + 2 + PACKED_GUID_MAX_SIZE as usize + 4);
 
 // Also used in auth.pest
 const ENUM_SELF_VALUE_FIELD: &str = "self.value";

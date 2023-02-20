@@ -1,4 +1,22 @@
-# AuraMask
+# Masks
+
+Masks consist of an integer pattern mask and a member for every set bit in the pattern mask.
+
+# Vanilla
+
+AuraMask has a pattern of 32 bits, with 16 bit members.
+
+# TBC
+
+AuraMask has a pattern of 64 bits with 24 bit members.
+
+# Wrath
+
+AuraMask has a pattern of 64 bits with 40 bit members.
+
+EnchantMask has a pattern of 16 bits with 16 bit members.
+
+InspectTalentGearMask has a pattern of 32 bits with members the size of their individual [InspectTalentGear](../docs/inspecttalentgear.md).
 
 ```rust,ignore
 pub struct AuraMask {

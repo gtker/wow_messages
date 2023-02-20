@@ -416,6 +416,12 @@ fn print_definition(
         Type::AchievementInProgressArray | Type::AchievementDoneArray => {
             unreachable!("achievement arrays are only in 3.3.5")
         }
+        Type::EnchantMask => {
+            unreachable!("enchant masks are only in 3.3.5")
+        }
+        Type::InspectTalentGearMask => {
+            unreachable!("inspect talent gear masks are only in 3.3.5")
+        }
     }
 
     if d.tags().compressed().is_some() {

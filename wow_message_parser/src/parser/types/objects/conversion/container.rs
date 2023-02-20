@@ -90,6 +90,8 @@ fn parsed_type_to_type(
         ParsedType::AchievementDoneArray => Type::AchievementDoneArray,
         ParsedType::AchievementInProgressArray => Type::AchievementInProgressArray,
         ParsedType::MonsterMoveSplines => Type::MonsterMoveSpline,
+        ParsedType::EnchantMask => Type::EnchantMask,
+        ParsedType::InspectTalentGearMask => Type::InspectTalentGearMask,
     }
 }
 
@@ -544,7 +546,9 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
-        ParsedType::MonsterMoveSplines
+        ParsedType::EnchantMask
+        | ParsedType::InspectTalentGearMask
+        | ParsedType::MonsterMoveSplines
         | ParsedType::AchievementDoneArray
         | ParsedType::AchievementInProgressArray
         | ParsedType::UpdateMask

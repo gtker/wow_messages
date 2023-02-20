@@ -593,6 +593,24 @@ fn print_read_definition(
             ));
             s.newline();
         }
+        Type::EnchantMask => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = EnchantMask::{prefix}read(r){postfix}?;",
+                name = d.name(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+            s.newline();
+        }
+        Type::InspectTalentGearMask => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = InspectTalentGearMask::{prefix}read(r){postfix}?;",
+                name = d.name(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+            s.newline();
+        }
     }
 }
 

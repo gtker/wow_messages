@@ -22,15 +22,10 @@ struct InspectTalent {
 
 struct InspectTalentGear {
     Item item;
-    /* TODO ARRAY_MASK
-    u16 enchant_mask {
-        container_mask = "true";
-    }
-    u16[enchant_mask] enchants;
+    EnchantMask enchant_mask;
     u16 unknown1;
     PackedGuid creator;
     u32 unknown2;
-    */
 } {
      versions = "3.3.5";
 }
@@ -43,12 +38,7 @@ smsg SMSG_INSPECT_TALENT = 0x03F4 {
     InspectTalentSpec[amount_of_specs] specs;
     u8 amount_of_glyphs;
     u16[amount_of_glyphs] glyphs;
-    /* TODO ARRAY_MASK
-    u32 slot_mask;
-    InspectTalentGear[slot_mask] slots {
-        container_mask = "true";
-    }
-    */
+    InspectTalentGearMask talent_gear_mask;
 } {
     versions = "3.3.5";
 }

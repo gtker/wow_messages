@@ -267,6 +267,10 @@ pub(crate) enum IrType {
     AchievementDoneArray,
     #[serde(rename = "achievement_in_progress_array")]
     AchievementInProgressArray,
+    #[serde(rename = "enchant_mask")]
+    EnchantMask,
+    #[serde(rename = "inspect_talent_gear_mask")]
+    InspectTalentGearMask,
 }
 
 impl From<&Type> for IrType {
@@ -298,6 +302,8 @@ impl From<&Type> for IrType {
             Type::AchievementDoneArray => Self::AchievementDoneArray,
             Type::AchievementInProgressArray => Self::AchievementInProgressArray,
             Type::MonsterMoveSpline => Self::MonsterMoveSpline,
+            Type::EnchantMask => Self::EnchantMask,
+            Type::InspectTalentGearMask => Self::InspectTalentGearMask,
         }
     }
 }

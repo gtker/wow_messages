@@ -329,7 +329,9 @@ pub(crate) fn print_write_definition(
                 name = d.name()
             ));
         }
-        Type::MonsterMoveSpline
+        Type::EnchantMask
+        | Type::InspectTalentGearMask
+        | Type::MonsterMoveSpline
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray
         | Type::UpdateMask

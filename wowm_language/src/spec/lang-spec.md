@@ -46,7 +46,9 @@ The `SizedCString` is the same as a `u32` followed by a `CString`, but they are 
 | `String[len]`                | UTF-8 string type of exactly length `len`.                                                                                    | -                                           |
 | `PackedGuid`                 | GUID sent in the "packed" format. See [PackedGuid](packed-guid.md).                                                           | -                                           |
 | `UpdateMask`                 | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md).                                          | -                                           |
-| `AuraMask`                   | Update values sent in a relatively complex format. See [AuraMask](aura-mask.md).                                              | -                                           |
+| `AuraMask`                   | Aura values sent using a mask. See [Masks](aura-mask.md).                                                                     | -                                           |
+| `EnchantMask`                | Enchant values sent using a mask. See [Masks](aura-mask.md).                                                                  | -                                           |
+| `InspectTalentGearMask`      | [InspectTalentGear](../docs/inspecttalentgear.md) values sent using a mask. See [Masks](aura-mask.md).                        | -                                           |
 | `Bool`                       | `u8` where `0` is false and any other value is `true`. Can be substituted by a `u8`.                                          | -                                           |
 | `DateTime`                   | `u32` that represents a custom bitmask for date and time. See [the DateTime section](#datetime)                               | -                                           |
 | `AchievementDoneArray`       | Array that terminates on a sentinel value. See [AchievementDoneArray](achievement-done-array.md)                              | -                                           |

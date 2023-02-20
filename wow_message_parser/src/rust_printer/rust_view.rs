@@ -401,6 +401,8 @@ pub(crate) enum RustType {
     MonsterMoveSpline,
     AchievementDoneArray,
     AchievementInProgressArray,
+    EnchantMask,
+    InspectTalentGearMask,
 }
 
 impl RustType {
@@ -422,6 +424,8 @@ impl RustType {
             RustType::AchievementDoneArray => "AchievementDoneArray".to_string(),
             RustType::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
             RustType::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
+            RustType::EnchantMask => "EnchantMask".to_string(),
+            RustType::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
         }
     }
 
@@ -447,6 +451,8 @@ impl Display for RustType {
             RustType::AchievementDoneArray => f.write_str("AchievementDoneArray"),
             RustType::AchievementInProgressArray => f.write_str("AchievementInProgressArray"),
             RustType::MonsterMoveSpline => f.write_str("MonsterMoveSpline"),
+            RustType::EnchantMask => f.write_str("EnchantMask"),
+            RustType::InspectTalentGearMask => f.write_str("InspectTalentGearMask"),
         }
     }
 }
@@ -1258,6 +1264,8 @@ pub(crate) fn create_struct_member(
                 Type::AchievementDoneArray => RustType::AchievementDoneArray,
                 Type::AchievementInProgressArray => RustType::AchievementInProgressArray,
                 Type::MonsterMoveSpline => RustType::MonsterMoveSpline,
+                Type::EnchantMask => RustType::EnchantMask,
+                Type::InspectTalentGearMask => RustType::InspectTalentGearMask,
             };
 
             let name = d.name().to_string();

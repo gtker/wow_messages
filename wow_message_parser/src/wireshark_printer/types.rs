@@ -199,6 +199,12 @@ impl WiresharkType {
             Type::AchievementDoneArray | Type::AchievementInProgressArray => {
                 unreachable!("achievement arrays are only in 3.3.5")
             }
+            Type::EnchantMask => {
+                unreachable!("enchant mask is only in 3.3.5")
+            }
+            Type::InspectTalentGearMask => {
+                unreachable!("inspect talent gear mask is only in 3.3.5")
+            }
         })
     }
 

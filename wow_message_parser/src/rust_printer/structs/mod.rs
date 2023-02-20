@@ -67,6 +67,14 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         ));
     }
 
+    if e.contains_inspect_talent_gear_mask() {
+        s.wln(format!("use {import_path}::InspectTalentGearMask;"));
+    }
+
+    if e.contains_enchant_mask() {
+        s.wln(format!("use {import_path}::EnchantMask;"));
+    }
+
     for c in e.get_objects_needing_import() {
         let version = if !version.is_world() {
             // Login messages need to use the real object and not the reexports

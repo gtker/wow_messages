@@ -10,7 +10,9 @@ use crate::parser::types::sizes::{
 };
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
 use crate::{
-    CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
+    CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED,
+    ENCHANT_MASK_SMALLEST_ALLOWED, INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
+    INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED, MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
     MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
     SIZED_CSTRING_SMALLEST_ALLOWED, STRING_LARGEST_POSSIBLE, STRING_SMALLEST_POSSIBLE,
 };
@@ -37,6 +39,8 @@ pub(crate) enum ParsedType {
     MonsterMoveSplines,
     AchievementDoneArray,
     AchievementInProgressArray,
+    EnchantMask,
+    InspectTalentGearMask,
 }
 
 impl ParsedType {
@@ -58,6 +62,8 @@ impl ParsedType {
             ParsedType::AchievementDoneArray => "AchievementDoneArray".to_string(),
             ParsedType::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
             ParsedType::MonsterMoveSplines => "MonsterMoveSplines".to_string(),
+            ParsedType::EnchantMask => "EnchantMask".to_string(),
+            ParsedType::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
         }
     }
 
@@ -175,6 +181,13 @@ impl ParsedType {
                     MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
                 );
             }
+            ParsedType::EnchantMask => {
+                sizes.inc(ENCHANT_MASK_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED);
+            }
+            ParsedType::InspectTalentGearMask => sizes.inc(
+                INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
+                INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
+            ),
         }
 
         sizes
@@ -242,6 +255,8 @@ impl ParsedType {
             "MonsterMoveSplines" => Self::MonsterMoveSplines,
             "AchievementDoneArray" => Self::AchievementDoneArray,
             "AchievementInProgressArray" => Self::AchievementInProgressArray,
+            "EnchantMask" => Self::EnchantMask,
+            "InspectTalentGearMask" => Self::InspectTalentGearMask,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,
@@ -275,7 +290,9 @@ impl ParsedType {
                         ParsedType::CString => {
                             Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
                         }
-                        ParsedType::AchievementDoneArray
+                        ParsedType::EnchantMask
+                        | ParsedType::InspectTalentGearMask
+                        | ParsedType::AchievementDoneArray
                         | ParsedType::AchievementInProgressArray
                         | ParsedType::MonsterMoveSplines
                         | ParsedType::SizedCString

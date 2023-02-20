@@ -262,6 +262,12 @@ fn print_container_example_definition(
         Type::AchievementDoneArray | Type::AchievementInProgressArray => {
             unimplemented!("-1 delimited achievement arrays")
         }
+        Type::EnchantMask => {
+            unimplemented!("enchant mask example")
+        }
+        Type::InspectTalentGearMask => {
+            unimplemented!("inspect talent gear mask example")
+        }
     }
     s.wln(comment);
 }
@@ -526,7 +532,7 @@ fn print_container_field(
                 Type::UpdateMask => {
                     format!("[{}](../spec/update-mask.md)", d.ty().str())
                 }
-                Type::AuraMask => {
+                Type::EnchantMask | Type::InspectTalentGearMask | Type::AuraMask => {
                     format!("[{}](../spec/aura-mask.md)", d.ty().str())
                 }
                 Type::Array(array) => match array.ty() {
@@ -638,7 +644,9 @@ fn print_container_field(
                             ArraySize::Variable(_) | ArraySize::Endless => None,
                         }
                     }
-                    Type::AchievementDoneArray
+                    Type::EnchantMask
+                    | Type::InspectTalentGearMask
+                    | Type::AchievementDoneArray
                     | Type::AchievementInProgressArray
                     | Type::MonsterMoveSpline
                     | Type::CString

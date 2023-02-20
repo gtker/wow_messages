@@ -387,7 +387,23 @@ impl Container {
                                 self.name(),
                                 self.file_info(),
                                 format!(
-                                    "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an monster move spline"
+                                    "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a monster move spline"
+                                ))
+                        }
+                        Type::EnchantMask => {
+                            invalid_self_size_position(
+                                self.name(),
+                                self.file_info(),
+                                format!(
+                                    "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a enchant mask"
+                                ))
+                        }
+                        Type::InspectTalentGearMask => {
+                            invalid_self_size_position(
+                                self.name(),
+                                self.file_info(),
+                                format!(
+                                    "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an inspect talent gear mask"
                                 ))
                         }
                     }
@@ -543,6 +559,26 @@ impl Container {
         for d in self.all_definitions() {
             if d.ty() == &Type::AchievementDoneArray || d.ty() == &Type::AchievementInProgressArray
             {
+                return true;
+            }
+        }
+
+        false
+    }
+
+    pub(crate) fn contains_enchant_mask(&self) -> bool {
+        for d in self.all_definitions() {
+            if d.ty() == &Type::EnchantMask {
+                return true;
+            }
+        }
+
+        false
+    }
+
+    pub(crate) fn contains_inspect_talent_gear_mask(&self) -> bool {
+        for d in self.all_definitions() {
+            if d.ty() == &Type::InspectTalentGearMask {
                 return true;
             }
         }

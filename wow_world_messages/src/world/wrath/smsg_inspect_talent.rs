@@ -1,9 +1,10 @@
 use crate::Guid;
+use crate::wrath::InspectTalentGearMask;
 use crate::wrath::InspectTalentSpec;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm:38`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm#L38):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm:33`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_inspect_talent.wowm#L33):
 /// ```text
 /// smsg SMSG_INSPECT_TALENT = 0x03F4 {
 ///     PackedGuid player;
@@ -13,6 +14,7 @@ use std::io::{Write, Read};
 ///     InspectTalentSpec[amount_of_specs] specs;
 ///     u8 amount_of_glyphs;
 ///     u16[amount_of_glyphs] glyphs;
+///     InspectTalentGearMask talent_gear_mask;
 /// }
 /// ```
 pub struct SMSG_INSPECT_TALENT {
@@ -21,6 +23,7 @@ pub struct SMSG_INSPECT_TALENT {
     pub active_spec: u8,
     pub specs: Vec<InspectTalentSpec>,
     pub glyphs: Vec<u16>,
+    pub talent_gear_mask: InspectTalentGearMask,
 }
 
 impl crate::Message for SMSG_INSPECT_TALENT {
@@ -57,11 +60,14 @@ impl crate::Message for SMSG_INSPECT_TALENT {
             w.write_all(&i.to_le_bytes())?;
         }
 
+        // talent_gear_mask: InspectTalentGearMask
+        self.talent_gear_mask.write_into_vec(w)?;
+
         assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(9..=328464).contains(&body_size) {
+        if !(13..=330164).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F4, size: body_size as u32 });
         }
 
@@ -96,12 +102,16 @@ impl crate::Message for SMSG_INSPECT_TALENT {
             }
             glyphs
         };
+        // talent_gear_mask: InspectTalentGearMask
+        let talent_gear_mask = InspectTalentGearMask::read(r)?;
+
         Ok(Self {
             player,
             unspent_talent_points,
             active_spec,
             specs,
             glyphs,
+            talent_gear_mask,
         })
     }
 
@@ -118,6 +128,7 @@ impl SMSG_INSPECT_TALENT {
         + self.specs.iter().fold(0, |acc, x| acc + x.size()) // specs: InspectTalentSpec[amount_of_specs]
         + 1 // amount_of_glyphs: u8
         + self.glyphs.len() * core::mem::size_of::<u16>() // glyphs: u16[amount_of_glyphs]
+        + self.talent_gear_mask.size() // talent_gear_mask: InspectTalentGearMask
     }
 }
 
