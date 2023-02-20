@@ -1261,6 +1261,8 @@ pub use crate::shared::transport_info_vanilla_tbc::TransportInfo;
 
 pub use crate::shared::world_state_vanilla_tbc_wrath::WorldState;
 
+pub use wow_world_base::vanilla::AccountDataType;
+
 pub use wow_world_base::vanilla::ActivateTaxiReply;
 
 pub use wow_world_base::vanilla::AiReaction;

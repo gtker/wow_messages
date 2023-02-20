@@ -1,3 +1,5 @@
+pub(crate) mod account_data_type;
+pub use account_data_type::*;
 pub(crate) mod activate_taxi_reply;
 pub use activate_taxi_reply::*;
 pub(crate) mod ai_reaction;

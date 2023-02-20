@@ -1,5 +1,19 @@
+enum AccountDataType : u8 {
+    GLOBAL_CONFIG_CACHE             = 0;
+    PER_CHARACTER_CONFIG_CACHE      = 1;
+    GLOBAL_BINDINGS_CACHE           = 2;
+    PER_CHARACTER_BINDINGS_CACHE    = 3;
+    GLOBAL_MACROS_CACHE             = 4;
+    PER_CHARACTER_MACROS_CACHE      = 5;
+    PER_CHARACTER_LAYOUT_CACHE      = 6;
+    PER_CHARACTER_CHAT_CACHE        = 7;
+    NUM_ACCOUNT_DATA_TYPES          = 8;
+} {
+    versions = "1.12 2";
+}
+
 cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
-    u32 data_type {
+    (u32)AccountDataType data_type {
         comment = "Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder.";
     }
     /* TODO Compression */
@@ -29,7 +43,7 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 }
 
 test CMSG_UPDATE_ACCOUNT_DATA {
-    data_type = 6;
+    data_type = PER_CHARACTER_LAYOUT_CACHE;
     decompressed_size = 0;
     compressed_data = [];
 } [
@@ -42,7 +56,7 @@ test CMSG_UPDATE_ACCOUNT_DATA {
 }
 
 test CMSG_UPDATE_ACCOUNT_DATA {
-    data_type = 7;
+    data_type = PER_CHARACTER_CHAT_CACHE;
     decompressed_size = 0x1418;
     compressed_data = [
         0x78, 0x01,

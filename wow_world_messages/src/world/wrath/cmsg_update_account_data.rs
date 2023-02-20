@@ -3,7 +3,7 @@ use std::io::{Write, Read};
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Respond with [`SMSG_UPDATE_ACCOUNT_DATA_COMPLETE`](crate::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE)
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L13):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L27):
 /// ```text
 /// cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 ///     u32 data_type;

@@ -1491,7 +1491,7 @@
             ptvcursor_add(ptv, hf_woww_pet_number, 4, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_UPDATE_ACCOUNT_DATA:
-            ptvcursor_add(ptv, hf_woww_data_type, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_account_data_type, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);
             len = offset_packet_end - ptvcursor_current_offset(ptv);
             ptvcursor_add(ptv, hf_woww_compressed_data, len, ENC_NA);

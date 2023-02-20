@@ -4625,6 +4625,30 @@ static const value_string e_unit_stand_state_strings[] =  {
 };
 
 typedef enum {
+    ACCOUNT_DATA_TYPE_GLOBAL_CONFIG_CACHE = 0x0,
+    ACCOUNT_DATA_TYPE_PER_CHARACTER_CONFIG_CACHE = 0x1,
+    ACCOUNT_DATA_TYPE_GLOBAL_BINDINGS_CACHE = 0x2,
+    ACCOUNT_DATA_TYPE_PER_CHARACTER_BINDINGS_CACHE = 0x3,
+    ACCOUNT_DATA_TYPE_GLOBAL_MACROS_CACHE = 0x4,
+    ACCOUNT_DATA_TYPE_PER_CHARACTER_MACROS_CACHE = 0x5,
+    ACCOUNT_DATA_TYPE_PER_CHARACTER_LAYOUT_CACHE = 0x6,
+    ACCOUNT_DATA_TYPE_PER_CHARACTER_CHAT_CACHE = 0x7,
+    ACCOUNT_DATA_TYPE_NUM_ACCOUNT_DATA_TYPES = 0x8,
+} e_account_data_type;
+static const value_string e_account_data_type_strings[] =  {
+    { ACCOUNT_DATA_TYPE_GLOBAL_CONFIG_CACHE, "Global Config Cache" },
+    { ACCOUNT_DATA_TYPE_PER_CHARACTER_CONFIG_CACHE, "Per Character Config Cache" },
+    { ACCOUNT_DATA_TYPE_GLOBAL_BINDINGS_CACHE, "Global Bindings Cache" },
+    { ACCOUNT_DATA_TYPE_PER_CHARACTER_BINDINGS_CACHE, "Per Character Bindings Cache" },
+    { ACCOUNT_DATA_TYPE_GLOBAL_MACROS_CACHE, "Global Macros Cache" },
+    { ACCOUNT_DATA_TYPE_PER_CHARACTER_MACROS_CACHE, "Per Character Macros Cache" },
+    { ACCOUNT_DATA_TYPE_PER_CHARACTER_LAYOUT_CACHE, "Per Character Layout Cache" },
+    { ACCOUNT_DATA_TYPE_PER_CHARACTER_CHAT_CACHE, "Per Character Chat Cache" },
+    { ACCOUNT_DATA_TYPE_NUM_ACCOUNT_DATA_TYPES, "Num Account Data Types" },
+    { 0, NULL }
+};
+
+typedef enum {
     CORPSE_QUERY_RESULT_NOT_FOUND = 0x0,
     CORPSE_QUERY_RESULT_FOUND = 0x1,
 } e_corpse_query_result;

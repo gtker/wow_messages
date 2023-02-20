@@ -16,6 +16,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_account_data_type,
+            { "Account Data Type", "woww.account.data.type",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_account_data_type_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_action,
             { "Action", "woww.action",
                 FT_UINT16, BASE_HEX_DEC, NULL, 0,

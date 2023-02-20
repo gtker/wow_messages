@@ -1,3 +1,5 @@
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod account_data_type_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod activate_taxi_reply_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

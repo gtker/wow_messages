@@ -39,6 +39,7 @@
 - [SecurityFlag](docs/securityflag.md)
 
 # World Definers
+- [AccountDataType](docs/accountdatatype.md)
 - [AchievementNameLinkType](docs/achievementnamelinktype.md)
 - [ActionBarBehavior](docs/actionbarbehavior.md)
 - [ActivateTaxiReply](docs/activatetaxireply.md)
