@@ -265,8 +265,10 @@ impl Container {
 
     pub(crate) fn any_fields_have_constant_value(&self) -> bool {
         for d in self.all_definitions() {
-            if d.value().is_some() {
-                return true;
+            if let Some(v) = d.value() {
+                if v.original_string() != CONTAINER_SELF_SIZE_FIELD {
+                    return true;
+                }
             }
         }
 
