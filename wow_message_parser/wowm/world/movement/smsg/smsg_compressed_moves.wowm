@@ -28,6 +28,7 @@ struct MonsterMove {
 }
 
 struct CompressedMove {
+    /* TODO STRUCT_SELF_SIZE */
     u8 size;
     CompressedMoveOpcode opcode;
     PackedGuid guid;
