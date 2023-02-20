@@ -10,7 +10,8 @@ use crate::parser::types::sizes::{
 };
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
 use crate::{
-    CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
+    CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
+    MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
     SIZED_CSTRING_SMALLEST_ALLOWED, STRING_LARGEST_POSSIBLE, STRING_SMALLEST_POSSIBLE,
 };
 use std::convert::TryInto;
@@ -33,6 +34,7 @@ pub(crate) enum ParsedType {
     },
     UpdateMask,
     AuraMask,
+    MonsterMoveSplines,
     AchievementDoneArray,
     AchievementInProgressArray,
 }
@@ -55,6 +57,7 @@ impl ParsedType {
             ParsedType::DateTime => "DateTime".to_string(),
             ParsedType::AchievementDoneArray => "AchievementDoneArray".to_string(),
             ParsedType::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
+            ParsedType::MonsterMoveSplines => "MonsterMoveSplines".to_string(),
         }
     }
 
@@ -166,6 +169,12 @@ impl ParsedType {
             ParsedType::AchievementDoneArray | ParsedType::AchievementInProgressArray => {
                 sizes.inc(0, usize::MAX);
             }
+            ParsedType::MonsterMoveSplines => {
+                sizes.inc(
+                    MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
+                    MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
+                );
+            }
         }
 
         sizes
@@ -230,6 +239,7 @@ impl ParsedType {
             "SizedCString" => Self::SizedCString,
             "DateTime" => Self::DateTime,
             "String" => Self::String,
+            "MonsterMoveSplines" => Self::MonsterMoveSplines,
             "AchievementDoneArray" => Self::AchievementDoneArray,
             "AchievementInProgressArray" => Self::AchievementInProgressArray,
             _ => Self::Identifier {
@@ -267,6 +277,7 @@ impl ParsedType {
                         }
                         ParsedType::AchievementDoneArray
                         | ParsedType::AchievementInProgressArray
+                        | ParsedType::MonsterMoveSplines
                         | ParsedType::SizedCString
                         | ParsedType::String { .. }
                         | ParsedType::Array(_)

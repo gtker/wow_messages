@@ -62,9 +62,7 @@ pub(crate) fn print_write_field_array(
             if e.tags().compressed() || d.tags().is_compressed() {
                 s.wln("let mut vec = Vec::new();");
                 s.wln("i.write_into_vec(&mut vec)?;");
-                s.wln(format!(
-                    "{writer}.write_all(vec.as_slice());"
-                ));
+                s.wln(format!("{writer}.write_all(vec.as_slice());"));
             } else {
                 s.wln("i.write_into_vec(w)?;");
             }
@@ -330,7 +328,8 @@ pub(crate) fn print_write_definition(
                 name = d.name()
             ));
         }
-        Type::AchievementDoneArray
+        Type::MonsterMoveSpline
+        | Type::AchievementDoneArray
         | Type::AchievementInProgressArray
         | Type::UpdateMask
         | Type::AuraMask => {

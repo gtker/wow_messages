@@ -15,6 +15,7 @@ mod achievement_done_array;
 pub use achievement_done_array::*;
 
 mod achievement_in_progress_array;
+pub use crate::helper::shared::monster_move_spline_vanilla_tbc_wrath::*;
 pub use achievement_in_progress_array::*;
 
 pub use opcode_to_name::*;

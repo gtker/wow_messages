@@ -6,6 +6,9 @@
 
 # Wowm Language
 - [Specification](./spec/lang-spec.md)
+    - [AchievementDoneArray](./spec/achievement-done-array.md)
+    - [AchievementInProgressArray](./spec/achievement-in-progress-array.md)
+    - [MonsterMoveSpline](./spec/monster-move-spline.md)
     - [PackedGuid](./spec/packed-guid.md)
     - [UpdateMask](./spec/update-mask.md)
     - [AuraMask](./spec/aura-mask.md)

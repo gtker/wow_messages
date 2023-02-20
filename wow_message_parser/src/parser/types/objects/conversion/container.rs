@@ -89,6 +89,7 @@ fn parsed_type_to_type(
         ParsedType::AuraMask => Type::AuraMask,
         ParsedType::AchievementDoneArray => Type::AchievementDoneArray,
         ParsedType::AchievementInProgressArray => Type::AchievementInProgressArray,
+        ParsedType::MonsterMoveSplines => Type::MonsterMoveSpline,
     }
 }
 
@@ -537,7 +538,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
-        ParsedType::AchievementDoneArray
+        ParsedType::MonsterMoveSplines
+        | ParsedType::AchievementDoneArray
         | ParsedType::AchievementInProgressArray
         | ParsedType::UpdateMask
         | ParsedType::AuraMask => {

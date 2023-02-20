@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::vanilla::MonsterMoveSpline;
 use crate::vanilla::Vector3d;
 use crate::vanilla::MonsterMoveType;
 use crate::vanilla::SplineFlag;
@@ -22,8 +23,7 @@ use std::io::{Write, Read};
 ///     }
 ///     SplineFlag spline_flags;
 ///     u32 duration;
-///     u32 amount_of_splines;
-///     Vector3d[amount_of_splines] splines;
+///     MonsterMoveSpline splines;
 /// }
 /// ```
 pub struct MonsterMove {
@@ -32,7 +32,7 @@ pub struct MonsterMove {
     pub move_type: MonsterMove_MonsterMoveType,
     pub spline_flags: SplineFlag,
     pub duration: u32,
-    pub splines: Vec<Vector3d>,
+    pub splines: MonsterMoveSpline,
 }
 
 impl MonsterMove {
@@ -78,13 +78,8 @@ impl MonsterMove {
         // duration: u32
         w.write_all(&self.duration.to_le_bytes())?;
 
-        // amount_of_splines: u32
-        w.write_all(&(self.splines.len() as u32).to_le_bytes())?;
-
-        // splines: Vector3d[amount_of_splines]
-        for i in self.splines.iter() {
-            i.write_into_vec(w)?;
-        }
+        // splines: MonsterMoveSpline
+        self.splines.write_into_vec(w)?;
 
         Ok(())
     }
@@ -135,14 +130,8 @@ impl MonsterMove {
         // duration: u32
         let duration = crate::util::read_u32_le(r)?;
 
-        // amount_of_splines: u32
-        let amount_of_splines = crate::util::read_u32_le(r)?;
-
-        // splines: Vector3d[amount_of_splines]
-        let mut splines = Vec::with_capacity(amount_of_splines as usize);
-        for i in 0..amount_of_splines {
-            splines.push(Vector3d::read(r)?);
-        }
+        // splines: MonsterMoveSpline
+        let splines = MonsterMoveSpline::read(r)?;
 
         Ok(Self {
             spline_point,
@@ -163,8 +152,7 @@ impl MonsterMove {
         + self.move_type.size() // move_type: MonsterMove_MonsterMoveType
         + 4 // spline_flags: SplineFlag
         + 4 // duration: u32
-        + 4 // amount_of_splines: u32
-        + self.splines.len() * 12 // splines: Vector3d[amount_of_splines]
+        + self.splines.size() // splines: MonsterMoveSpline
     }
 }
 

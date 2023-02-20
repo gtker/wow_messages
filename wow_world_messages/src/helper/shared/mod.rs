@@ -1,3 +1,5 @@
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub(crate) mod monster_move_spline_vanilla_tbc_wrath;
 #[cfg(feature = "tbc")]
 pub(crate) mod tbc;
 #[cfg(feature = "vanilla")]

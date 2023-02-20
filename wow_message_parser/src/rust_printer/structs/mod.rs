@@ -57,6 +57,10 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         s.wln(format!("use {import_path}::UpdateMask;"));
     }
 
+    if e.contains_monster_move_spline() {
+        s.wln(format!("use {import_path}::MonsterMoveSpline;"));
+    }
+
     if e.contains_achievement_array() {
         s.wln(format!(
             "use {import_path}::{{AchievementDoneArray, AchievementInProgressArray}};"
@@ -170,13 +174,14 @@ pub(crate) fn print_derives(s: &mut Writer, members: &[&RustMember], is_enum_typ
 
 fn can_derive_ord(members: &[&RustMember]) -> bool {
     members.iter().all(|a| {
-        !matches!(a.ty(), RustType::Floating(_)) && can_derive_ord(&a.all_members_without_self())
+        !matches!(a.ty(), RustType::Floating(_) | RustType::MonsterMoveSpline)
+            && can_derive_ord(&a.all_members_without_self())
     })
 }
 
 fn can_derive_eq(members: &[&RustMember]) -> bool {
     for m in members {
-        if matches!(m.ty(), RustType::Floating(_)) {
+        if matches!(m.ty(), RustType::Floating(_) | RustType::MonsterMoveSpline) {
             return false;
         }
     }
@@ -203,6 +208,7 @@ fn can_derive_copy(members: &[&RustMember]) -> bool {
         match m.ty() {
             RustType::AchievementInProgressArray
             | RustType::AchievementDoneArray
+            | RustType::MonsterMoveSpline
             | RustType::UpdateMask
             | RustType::AuraMask
             | RustType::PackedGuid

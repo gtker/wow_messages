@@ -261,6 +261,8 @@ pub(crate) enum IrType {
     UpdateMask,
     #[serde(rename = "aura_mask")]
     AuraMask,
+    #[serde(rename = "monster_move_spline")]
+    MonsterMoveSpline,
     #[serde(rename = "achievement_done_array")]
     AchievementDoneArray,
     #[serde(rename = "achievement_in_progress_array")]
@@ -295,6 +297,7 @@ impl From<&Type> for IrType {
             Type::DateTime => Self::DateTime,
             Type::AchievementDoneArray => Self::AchievementDoneArray,
             Type::AchievementInProgressArray => Self::AchievementInProgressArray,
+            Type::MonsterMoveSpline => Self::MonsterMoveSpline,
         }
     }
 }

@@ -272,9 +272,7 @@ impl Container {
             _ => invalid_self_size_position(
                 self.name(),
                 self.file_info(),
-                format!(
-                    "Only login messages can contain '{CONTAINER_SELF_SIZE_FIELD}'"
-                ),
+                format!("Only login messages can contain '{CONTAINER_SELF_SIZE_FIELD}'"),
             ),
         };
         for field in self.members() {
@@ -358,6 +356,14 @@ impl Container {
                                 "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an array variable"
                             ),
                         ),
+                        Type::MonsterMoveSpline => {
+                            invalid_self_size_position(
+                                self.name(),
+                                self.file_info(),
+                                format!(
+                                    "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an monster move spline"
+                                ))
+                        }
                     }
                     if let Some(v) = d.value() {
                         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
@@ -368,9 +374,7 @@ impl Container {
                 StructMember::IfStatement(_) => invalid_self_size_position(
                     self.name(),
                     self.file_info(),
-                    format!(
-                        "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an if statement"
-                    ),
+                    format!("'{CONTAINER_SELF_SIZE_FIELD}' can not come after an if statement"),
                 ),
                 StructMember::OptionalStatement(_) => invalid_self_size_position(
                     self.name(),
@@ -460,6 +464,16 @@ impl Container {
         }
 
         v
+    }
+
+    pub(crate) fn contains_monster_move_spline(&self) -> bool {
+        for d in self.all_definitions() {
+            if d.ty() == &Type::MonsterMoveSpline {
+                return true;
+            }
+        }
+
+        false
     }
 
     pub(crate) fn contains_update_mask(&self) -> bool {

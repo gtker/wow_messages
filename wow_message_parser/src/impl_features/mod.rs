@@ -32,6 +32,8 @@ pub(crate) enum Feature {
     AchievementDoneArrayType,
     AchievementInProgressType,
 
+    MonsterMoveSpline,
+
     EmptyContainer,
 
     SimpleArrays,
@@ -243,6 +245,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         }
         Type::AchievementDoneArray => f.add(Feature::AchievementDoneArrayType),
         Type::AchievementInProgressArray => f.add(Feature::AchievementInProgressType),
+        Type::MonsterMoveSpline => f.add(Feature::MonsterMoveSpline),
     }
 }
 

@@ -8,8 +8,10 @@ use crate::parser::types::sizes::{
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::{
-    Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
-    SIZED_CSTRING_SMALLEST_ALLOWED, STRING_LARGEST_POSSIBLE, STRING_SMALLEST_POSSIBLE,
+    Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED,
+    MONSTER_MOVE_SPLINE_LARGEST_ALLOWED, MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
+    SIZED_CSTRING_LARGEST_ALLOWED, SIZED_CSTRING_SMALLEST_ALLOWED, STRING_LARGEST_POSSIBLE,
+    STRING_SMALLEST_POSSIBLE,
 };
 use std::convert::TryInto;
 
@@ -37,6 +39,7 @@ pub(crate) enum Type {
         e: Container,
     },
     UpdateMask,
+    MonsterMoveSpline,
     AuraMask,
     AchievementDoneArray,
     AchievementInProgressArray,
@@ -61,6 +64,7 @@ impl Type {
             Type::DateTime => "DateTime".to_string(),
             Type::AchievementDoneArray => "AchievementDoneArray".to_string(),
             Type::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
+            Type::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
         }
     }
 
@@ -79,6 +83,7 @@ impl Type {
             Type::DateTime => "DateTime".to_string(),
             Type::AchievementDoneArray => "AchievementDoneArray".to_string(),
             Type::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
+            Type::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
         };
 
         s
@@ -165,6 +170,12 @@ impl Type {
             Type::AchievementDoneArray | Type::AchievementInProgressArray => {
                 sizes.inc(0, usize::MAX);
             }
+            Type::MonsterMoveSpline => {
+                sizes.inc(
+                    MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
+                    MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
+                );
+            }
         }
 
         sizes
@@ -193,7 +204,8 @@ impl Type {
                 }
             }
             Type::Array(_) => "?".to_string(),
-            Type::AchievementDoneArray
+            Type::MonsterMoveSpline
+            | Type::AchievementDoneArray
             | Type::AchievementInProgressArray
             | Type::String
             | Type::SizedCString
@@ -211,7 +223,8 @@ impl Type {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
             Type::DateTime | Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
-            Type::SizedCString
+            Type::MonsterMoveSpline
+            | Type::SizedCString
             | Type::AchievementDoneArray
             | Type::AchievementInProgressArray
             | Type::String { .. }

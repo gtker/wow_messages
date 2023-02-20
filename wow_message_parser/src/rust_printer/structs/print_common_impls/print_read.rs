@@ -107,9 +107,7 @@ fn print_read_array_fixed(
             }
         }
         ArrayType::Guid => {
-            s.wln(format!(
-                "*i = Guid::{prefix}read(r){postfix}?;",
-            ));
+            s.wln(format!("*i = Guid::{prefix}read(r){postfix}?;",));
         }
         ArrayType::PackedGuid => {
             s.wln(format!(
@@ -186,9 +184,7 @@ fn print_read_array(
                 "r"
             };
             let loop_condition = if let Some(decompressed_size_field) = d.tags().compressed() {
-                format!(
-                    "while decoder.total_out() < ({decompressed_size_field} as u64)"
-                )
+                format!("while decoder.total_out() < ({decompressed_size_field} as u64)")
             } else {
                 "while current_size < (body_size as usize)".to_string()
             };
@@ -562,6 +558,15 @@ fn print_read_definition(
         Type::AchievementInProgressArray => {
             s.wln(format!(
                 "let {name} = AchievementInProgressArray::{prefix}read(r){postfix}?;",
+                name = d.name(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+            s.newline();
+        }
+        Type::MonsterMoveSpline => {
+            s.wln(format!(
+                "let {name} = MonsterMoveSpline::{prefix}read(r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,

@@ -221,7 +221,8 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                 format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
             }
         }
-        RustType::AchievementDoneArray
+        RustType::MonsterMoveSpline
+        | RustType::AchievementDoneArray
         | RustType::AchievementInProgressArray
         | RustType::PackedGuid
         | RustType::UpdateMask

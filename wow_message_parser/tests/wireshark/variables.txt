@@ -34,7 +34,6 @@
     guint32 amount_of_rights = 0;
     guint32 amount_of_signatures = 0;
     guint32 amount_of_spells = 0;
-    guint32 amount_of_splines = 0;
     guint32 amount_of_states = 0;
     guint32 amount_of_strings = 0;
     guint32 amount_of_targets = 0;

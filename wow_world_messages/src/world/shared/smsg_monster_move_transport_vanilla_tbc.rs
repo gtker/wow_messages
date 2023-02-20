@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::vanilla::MonsterMoveSpline;
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 use wow_world_base::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
 use wow_world_base::shared::spline_flag_vanilla_tbc::SplineFlag;
@@ -24,8 +25,7 @@ use std::io::{Write, Read};
 ///     }
 ///     SplineFlag spline_flags;
 ///     u32 duration;
-///     u32 amount_of_splines;
-///     Vector3d[amount_of_splines] splines;
+///     MonsterMoveSpline splines;
 /// }
 /// ```
 pub struct SMSG_MONSTER_MOVE_TRANSPORT {
@@ -36,7 +36,7 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT {
     pub move_type: SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType,
     pub spline_flags: SplineFlag,
     pub duration: u32,
-    pub splines: Vec<Vector3d>,
+    pub splines: MonsterMoveSpline,
 }
 
 impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
@@ -95,13 +95,8 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
         // duration: u32
         w.write_all(&self.duration.to_le_bytes())?;
 
-        // amount_of_splines: u32
-        w.write_all(&(self.splines.len() as u32).to_le_bytes())?;
-
-        // splines: Vector3d[amount_of_splines]
-        for i in self.splines.iter() {
-            i.write_into_vec(w)?;
-        }
+        // splines: MonsterMoveSpline
+        self.splines.write_into_vec(w)?;
 
         assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
@@ -160,14 +155,8 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
         // duration: u32
         let duration = crate::util::read_u32_le(r)?;
 
-        // amount_of_splines: u32
-        let amount_of_splines = crate::util::read_u32_le(r)?;
-
-        // splines: Vector3d[amount_of_splines]
-        let mut splines = Vec::with_capacity(amount_of_splines as usize);
-        for i in 0..amount_of_splines {
-            splines.push(Vector3d::read(r)?);
-        }
+        // splines: MonsterMoveSpline
+        let splines = MonsterMoveSpline::read(r)?;
 
         Ok(Self {
             guid,
@@ -197,8 +186,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT {
         + self.move_type.size() // move_type: SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType
         + 4 // spline_flags: SplineFlag
         + 4 // duration: u32
-        + 4 // amount_of_splines: u32
-        + self.splines.len() * 12 // splines: Vector3d[amount_of_splines]
+        + self.splines.size() // splines: MonsterMoveSpline
     }
 }
 

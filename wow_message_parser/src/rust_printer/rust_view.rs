@@ -397,6 +397,7 @@ pub(crate) enum RustType {
         sizes: Sizes,
         object: RustObject,
     },
+    MonsterMoveSpline,
     AchievementDoneArray,
     AchievementInProgressArray,
 }
@@ -419,6 +420,7 @@ impl RustType {
             RustType::DateTime => "DateTime".to_string(),
             RustType::AchievementDoneArray => "AchievementDoneArray".to_string(),
             RustType::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
+            RustType::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
         }
     }
 
@@ -443,6 +445,7 @@ impl Display for RustType {
             RustType::DateTime => f.write_str("DateTime"),
             RustType::AchievementDoneArray => f.write_str("AchievementDoneArray"),
             RustType::AchievementInProgressArray => f.write_str("AchievementInProgressArray"),
+            RustType::MonsterMoveSpline => f.write_str("MonsterMoveSpline"),
         }
     }
 }
@@ -1234,6 +1237,7 @@ pub(crate) fn create_struct_member(
                 Type::SizedCString => RustType::SizedCString,
                 Type::AchievementDoneArray => RustType::AchievementDoneArray,
                 Type::AchievementInProgressArray => RustType::AchievementInProgressArray,
+                Type::MonsterMoveSpline => RustType::MonsterMoveSpline,
             };
 
             let name = d.name().to_string();

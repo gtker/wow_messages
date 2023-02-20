@@ -21,8 +21,7 @@ struct MonsterMove {
     }
     SplineFlag spline_flags;
     u32 duration;
-    u32 amount_of_splines;
-    Vector3d[amount_of_splines] splines;
+    MonsterMoveSpline splines;
 }
 ```
 ### Body
@@ -52,6 +51,5 @@ Else If move_type is equal to `FACING_SPOT`:
 | 0x1D | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | 0x29 | 4 / - | [SplineFlag](splineflag.md) | spline_flags |  |  |
 | 0x2D | 4 / Little | u32 | duration |  |  |
-| 0x31 | 4 / Little | u32 | amount_of_splines |  |  |
-| 0x35 | ? / - | [Vector3d](vector3d.md)[amount_of_splines] | splines |  |  |
+| 0x31 | - / - | [MonsterMoveSpline](../spec/monster-move-spline.md) | splines |  |  |
 

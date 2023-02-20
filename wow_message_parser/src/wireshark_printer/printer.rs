@@ -409,6 +409,9 @@ fn print_definition(
         Type::UpdateMask => {
             s.wln("add_update_mask(ptv, pinfo);");
         }
+        Type::MonsterMoveSpline => {
+            s.wln("add_monster_move_spline(ptv);");
+        }
         Type::String { .. } => unreachable!("Strings are only in login messages"),
         Type::AchievementInProgressArray | Type::AchievementDoneArray => {
             unreachable!("achievement arrays are only in 3.3.5")

@@ -23,8 +23,7 @@ smsg SMSG_MONSTER_MOVE = 0x00DD {
     /* TODO: vmangos has STOP that does not include these for SMSG_COMPRESSED_MOVES */
     SplineFlag spline_flags;
     u32 duration;
-    u32 amount_of_splines;
-    Vector3d[amount_of_splines] splines;
+    MonsterMoveSplines splines;
 } {
     versions = "1.12 2";
 }
@@ -55,8 +54,7 @@ smsg SMSG_MONSTER_MOVE = 0x00DD {
         f32 vertical_acceleration;
         u32 effect_start_time;
     }
-    u32 amount_of_splines;
-    Vector3d[amount_of_splines] splines;
+    MonsterMoveSplines splines;
 } {
     versions = "3.3.5";
 }

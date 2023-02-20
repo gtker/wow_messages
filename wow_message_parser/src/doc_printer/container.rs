@@ -256,6 +256,9 @@ fn print_container_example_definition(
             }
             s.w(format!("{b}, "));
         }
+        Type::MonsterMoveSpline => {
+            unimplemented!("monster move spline doc printer")
+        }
         Type::AchievementDoneArray | Type::AchievementInProgressArray => {
             unimplemented!("-1 delimited achievement arrays")
         }
@@ -556,6 +559,9 @@ fn print_container_field(
                     "[AchievementInProgressArray](../spec/achievement-in-progress-array.md)"
                         .to_string()
                 }
+                Type::MonsterMoveSpline => {
+                    "[MonsterMoveSpline](../spec/monster-move-spline.md)".to_string()
+                }
                 Type::SizedCString
                 | Type::Bool(_)
                 | Type::DateTime
@@ -634,6 +640,7 @@ fn print_container_field(
                     }
                     Type::AchievementDoneArray
                     | Type::AchievementInProgressArray
+                    | Type::MonsterMoveSpline
                     | Type::CString
                     | Type::SizedCString
                     | Type::String { .. }
