@@ -28,7 +28,9 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
         s.wln(format!("case {}:", clean_opcode_name(e.name())));
         s.inc_indent();
 
-        if e.tags().compressed() {
+        let inside_compressed_message = e.tags().compressed();
+
+        if inside_compressed_message {
             s.wln("ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);");
             s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
             s.open_curly("if (compressed_tvb != NULL)");
@@ -40,7 +42,7 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
         if is_server_name(e.name()) {
             s.open_curly("if (WOWW_SERVER_TO_CLIENT)");
 
-            print_message(&mut s, e, w, o, &mut variables);
+            print_message(&mut s, e, w, o, &mut variables, inside_compressed_message);
 
             s.closing_curly(); // if (WOWW_SERVER_TO_CLIENT)
 
@@ -51,15 +53,15 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
             {
                 s.open_curly("else");
 
-                print_message(&mut s, e, w, o, &mut variables);
+                print_message(&mut s, e, w, o, &mut variables, inside_compressed_message);
 
                 s.closing_curly(); // else
             }
         } else {
-            print_message(&mut s, e, w, o, &mut variables);
+            print_message(&mut s, e, w, o, &mut variables, inside_compressed_message);
         }
 
-        if e.tags().compressed() {
+        if inside_compressed_message {
             s.wln("ptvcursor_free(ptv);");
             s.wln("ptv = old_ptv;");
             s.wln("compressed_tvb = NULL;");
@@ -99,9 +101,19 @@ fn print_message(
     w: &WiresharkObject,
     o: &Objects,
     variables: &mut Vec<String>,
+    inside_compressed_message: bool,
 ) {
     for m in e.members() {
-        if !print_member(s, m, e, w, e.tags(), o, variables) {
+        if !print_member(
+            s,
+            m,
+            e,
+            w,
+            e.tags(),
+            o,
+            variables,
+            inside_compressed_message,
+        ) {
             return;
         }
     }
@@ -115,23 +127,42 @@ fn print_member(
     tags: &ObjectTags,
     o: &Objects,
     variables: &mut Vec<String>,
+    inside_compressed_message: bool,
 ) -> bool {
     match m {
         StructMember::Definition(d) => {
             let w = wo.get(&name_to_hf(d.name(), d.ty()));
-            if !print_definition(s, e.name(), d, w, o, wo, variables) {
+            if !print_definition(
+                s,
+                e.name(),
+                d,
+                w,
+                o,
+                wo,
+                variables,
+                inside_compressed_message,
+            ) {
                 return false;
             }
         }
         StructMember::IfStatement(statement) => {
-            print_if_statement(s, e, wo, tags, o, statement, variables);
+            print_if_statement(
+                s,
+                e,
+                wo,
+                tags,
+                o,
+                statement,
+                variables,
+                inside_compressed_message,
+            );
         }
         StructMember::OptionalStatement(optional) => {
             s.wln("len = offset_packet_end - ptvcursor_current_offset(ptv);");
             s.open_curly("if (len > 0)");
 
             for m in optional.members() {
-                print_member(s, m, e, wo, tags, o, variables);
+                print_member(s, m, e, wo, tags, o, variables, inside_compressed_message);
             }
 
             s.closing_curly(); // if (len > 0)
@@ -149,6 +180,7 @@ fn print_if_statement(
     o: &Objects,
     statement: &IfStatement,
     variables: &mut Vec<String>,
+    inside_compressed_message: bool,
 ) -> bool {
     let name = statement.name();
 
@@ -173,7 +205,7 @@ fn print_if_statement(
     s.inc_indent();
 
     for m in statement.members() {
-        print_member(s, m, e, wo, tags, o, variables);
+        print_member(s, m, e, wo, tags, o, variables, inside_compressed_message);
     }
 
     s.closing_curly();
@@ -201,7 +233,7 @@ fn print_if_statement(
         s.inc_indent();
 
         for m in elseif.members() {
-            print_member(s, m, e, wo, tags, o, variables);
+            print_member(s, m, e, wo, tags, o, variables, inside_compressed_message);
         }
 
         s.closing_curly();
@@ -211,7 +243,7 @@ fn print_if_statement(
         s.open_curly("else");
 
         for m in statement.else_members() {
-            print_member(s, m, e, wo, tags, o, variables);
+            print_member(s, m, e, wo, tags, o, variables, inside_compressed_message);
         }
 
         s.closing_curly(); // else
@@ -228,6 +260,7 @@ fn print_definition(
     o: &Objects,
     wo: &WiresharkObject,
     variables: &mut Vec<String>,
+    inside_compressed_message: bool,
 ) -> bool {
     if d.tags().compressed().is_some() {
         s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
@@ -298,7 +331,7 @@ fn print_definition(
             print_definer(s, w, upcast, container_name, d.name(), variables, e);
         }
         Type::Struct { e } => {
-            if !print_container(s, o, wo, variables, e) {
+            if !print_container(s, o, wo, variables, e, inside_compressed_message) {
                 return false;
             }
         }
@@ -324,7 +357,9 @@ fn print_definition(
                         s.open_curly(format!("for (i = 0; i < {len}; ++i)"));
                     }
                     ArraySize::Endless => {
-                        let packet_end = if d.tags().compressed().is_some() {
+                        let packet_end = if d.tags().compressed().is_some()
+                            || inside_compressed_message
+                        {
                             s.wln("gint compression_end = tvb_reported_length(compressed_tvb);");
                             "compression_end"
                         } else {
@@ -349,7 +384,7 @@ fn print_definition(
                         s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));
                     }
                     ArrayType::Struct(c) => {
-                        if !print_container(s, o, wo, variables, c) {
+                        if !print_container(s, o, wo, variables, c, inside_compressed_message) {
                             s.closing_curly();
                             return false;
                         }
@@ -402,13 +437,23 @@ fn print_container(
     wo: &WiresharkObject,
     variables: &mut Vec<String>,
     e: &Container,
+    inside_compressed_message: bool,
 ) -> bool {
     s.wln(format!(
         "ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, \"{}\");",
         e.name()
     ));
     for m in e.members() {
-        if !print_member(s, m, e, wo, e.tags(), o, variables) {
+        if !print_member(
+            s,
+            m,
+            e,
+            wo,
+            e.tags(),
+            o,
+            variables,
+            inside_compressed_message,
+        ) {
             return false;
         }
     }
