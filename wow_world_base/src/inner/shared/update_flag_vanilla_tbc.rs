@@ -208,3 +208,42 @@ impl std::fmt::Binary for UpdateFlag {
     }
 }
 
+impl std::ops::BitAnd for UpdateFlag {
+    type Output = Self;
+    fn bitand(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitand(rhs.inner), }
+    }
+}
+
+impl std::ops::BitAndAssign for UpdateFlag {
+    fn bitand_assign(&mut self, rhs: Self) {
+        self.inner.bitand_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitOr for UpdateFlag {
+    type Output = Self;
+    fn bitor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitOrAssign for UpdateFlag {
+    fn bitor_assign(&mut self, rhs: Self) {
+        self.inner.bitor_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitXor for UpdateFlag {
+    type Output = Self;
+    fn bitxor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitxor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitXorAssign for UpdateFlag {
+    fn bitxor_assign(&mut self, rhs: Self) {
+        self.inner.bitxor_assign(rhs.inner)
+    }
+}
+

@@ -256,3 +256,42 @@ impl std::fmt::Binary for CastFlags {
     }
 }
 
+impl std::ops::BitAnd for CastFlags {
+    type Output = Self;
+    fn bitand(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitand(rhs.inner), }
+    }
+}
+
+impl std::ops::BitAndAssign for CastFlags {
+    fn bitand_assign(&mut self, rhs: Self) {
+        self.inner.bitand_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitOr for CastFlags {
+    type Output = Self;
+    fn bitor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitOrAssign for CastFlags {
+    fn bitor_assign(&mut self, rhs: Self) {
+        self.inner.bitor_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitXor for CastFlags {
+    type Output = Self;
+    fn bitxor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitxor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitXorAssign for CastFlags {
+    fn bitxor_assign(&mut self, rhs: Self) {
+        self.inner.bitxor_assign(rhs.inner)
+    }
+}
+

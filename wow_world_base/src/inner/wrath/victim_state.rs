@@ -233,3 +233,42 @@ impl std::fmt::Binary for VictimState {
     }
 }
 
+impl std::ops::BitAnd for VictimState {
+    type Output = Self;
+    fn bitand(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitand(rhs.inner), }
+    }
+}
+
+impl std::ops::BitAndAssign for VictimState {
+    fn bitand_assign(&mut self, rhs: Self) {
+        self.inner.bitand_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitOr for VictimState {
+    type Output = Self;
+    fn bitor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitOrAssign for VictimState {
+    fn bitor_assign(&mut self, rhs: Self) {
+        self.inner.bitor_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitXor for VictimState {
+    type Output = Self;
+    fn bitxor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitxor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitXorAssign for VictimState {
+    fn bitxor_assign(&mut self, rhs: Self) {
+        self.inner.bitxor_assign(rhs.inner)
+    }
+}
+

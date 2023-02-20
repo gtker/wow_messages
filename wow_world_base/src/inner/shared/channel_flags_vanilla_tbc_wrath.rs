@@ -208,3 +208,42 @@ impl std::fmt::Binary for ChannelFlags {
     }
 }
 
+impl std::ops::BitAnd for ChannelFlags {
+    type Output = Self;
+    fn bitand(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitand(rhs.inner), }
+    }
+}
+
+impl std::ops::BitAndAssign for ChannelFlags {
+    fn bitand_assign(&mut self, rhs: Self) {
+        self.inner.bitand_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitOr for ChannelFlags {
+    type Output = Self;
+    fn bitor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitOrAssign for ChannelFlags {
+    fn bitor_assign(&mut self, rhs: Self) {
+        self.inner.bitor_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitXor for ChannelFlags {
+    type Output = Self;
+    fn bitxor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitxor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitXorAssign for ChannelFlags {
+    fn bitxor_assign(&mut self, rhs: Self) {
+        self.inner.bitxor_assign(rhs.inner)
+    }
+}
+

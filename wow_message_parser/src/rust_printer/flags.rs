@@ -66,6 +66,36 @@ fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
             );
         });
     }
+
+    for (tr, operator) in [
+        ("BitAnd", "bitand"),
+        ("BitOr", "bitor"),
+        ("BitXor", "bitxor"),
+    ] {
+        s.bodyn(
+            format!("impl std::ops::{tr} for {ty}", ty = e.name()),
+            |s| {
+                s.wln("type Output = Self;");
+                s.body(
+                    format!("fn {operator}(self, rhs: Self) -> Self::Output"),
+                    |s| {
+                        s.wln(format!(
+                            "Self {{ inner: self.inner.{operator}(rhs.inner), }}"
+                        ));
+                    },
+                );
+            },
+        );
+
+        s.bodyn(
+            format!("impl std::ops::{tr}Assign for {ty}", ty = e.name()),
+            |s| {
+                s.body(format!("fn {operator}_assign(&mut self, rhs: Self)"), |s| {
+                    s.wln(format!("self.inner.{operator}_assign(rhs.inner)"));
+                });
+            },
+        );
+    }
 }
 
 fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {

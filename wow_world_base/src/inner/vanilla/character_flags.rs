@@ -166,3 +166,42 @@ impl std::fmt::Binary for CharacterFlags {
     }
 }
 
+impl std::ops::BitAnd for CharacterFlags {
+    type Output = Self;
+    fn bitand(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitand(rhs.inner), }
+    }
+}
+
+impl std::ops::BitAndAssign for CharacterFlags {
+    fn bitand_assign(&mut self, rhs: Self) {
+        self.inner.bitand_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitOr for CharacterFlags {
+    type Output = Self;
+    fn bitor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitOrAssign for CharacterFlags {
+    fn bitor_assign(&mut self, rhs: Self) {
+        self.inner.bitor_assign(rhs.inner)
+    }
+}
+
+impl std::ops::BitXor for CharacterFlags {
+    type Output = Self;
+    fn bitxor(self, rhs: Self) -> Self::Output {
+        Self { inner: self.inner.bitxor(rhs.inner), }
+    }
+}
+
+impl std::ops::BitXorAssign for CharacterFlags {
+    fn bitxor_assign(&mut self, rhs: Self) {
+        self.inner.bitxor_assign(rhs.inner)
+    }
+}
+
