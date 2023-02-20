@@ -62,7 +62,19 @@ impl AuraMask {
     }
 
     pub const fn size(&self) -> usize {
-        std::mem::size_of::<u64>() + 3 * self.auras.len()
+        const MASK_VARIABLE_SIZE: usize = std::mem::size_of::<u64>();
+        const AURA_SIZE: usize = core::mem::size_of::<u16>() + core::mem::size_of::<u8>();
+        let mut auras = 0;
+
+        let mut index = 0;
+        while index < self.auras.len() {
+            if self.auras[index].is_some() {
+                auras += AURA_SIZE;
+            }
+            index += 1;
+        }
+
+        MASK_VARIABLE_SIZE + auras
     }
 }
 
