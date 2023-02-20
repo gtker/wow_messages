@@ -300,7 +300,7 @@ enum Area : u32 {
     MISTY_VALLEY = 116 {
         display = "Misty Valley";
     }
-    GROMGOL_BASE_CAMP = 117 {
+    GROM_GOL_BASE_CAMP = 117 {
         display = "Grom'gol Base Camp";
     }
     WHELGARS_EXCAVATION_SITE = 118 {
@@ -315,16 +315,16 @@ enum Area : u32 {
     ZUULDAIA_RUINS = 122 {
         display = "Zuuldaia Ruins";
     }
-    BALLAL_RUINS = 123 {
+    BAL_LAL_RUINS = 123 {
         display = "Bal'lal Ruins";
     }
-    KALAI_RUINS = 125 {
+    KAL_AI_RUINS = 125 {
         display = "Kal'ai Ruins";
     }
     TKASHI_RUINS = 126 {
         display = "Tkashi Ruins";
     }
-    BALIAMAH_RUINS = 127 {
+    BALIA_MAH_RUINS = 127 {
         display = "Balia'mah Ruins";
     }
     ZIATAJAI_RUINS = 128 {
@@ -369,7 +369,7 @@ enum Area : u32 {
     IRONBANDS_EXCAVATION_SITE = 142 {
         display = "Ironband's Excavation Site";
     }
-    MOGROSH_STRONGHOLD = 143 {
+    MO_GROSH_STRONGHOLD = 143 {
         display = "Mo'grosh Stronghold";
     }
     THELSAMAR = 144 {
@@ -666,7 +666,7 @@ enum Area : u32 {
     GNARLPINE_HOLD = 261 {
         display = "Gnarlpine Hold";
     }
-    BANETHIL_BARROW_DEN = 262 {
+    BAN_ETHIL_BARROW_DEN = 262 {
         display = "Ban'ethil Barrow Den";
     }
     THE_CLEFT = 263 {
@@ -912,7 +912,7 @@ enum Area : u32 {
     SKULK_ROCK = 351 {
         display = "Skulk Rock";
     }
-    ZUNWATHA = 352 {
+    ZUN_WATHA = 352 {
         display = "Zun'watha";
     }
     SHADRA_ALOR = 353 {
@@ -957,7 +957,7 @@ enum Area : u32 {
     KOLKAR_CRAG = 366 {
         display = "Kolkar Crag";
     }
-    SENJIN_VILLAGE = 367 {
+    SEN_JIN_VILLAGE = 367 {
         display = "Sen'jin Village";
     }
     ECHO_ISLES = 368 {
@@ -1059,7 +1059,7 @@ enum Area : u32 {
     SHADY_REST_INN = 403 {
         display = "Shady Rest Inn";
     }
-    BAELDUN_DIGSITE = 404 {
+    BAEL_DUN_DIGSITE = 404 {
         display = "Bael'dun Digsite";
     }
     DESOLACE = 405 {
@@ -1278,7 +1278,7 @@ enum Area : u32 {
     THE_RUSTMAUL_DIG_SITE = 479 {
         display = "The Rustmaul Dig Site";
     }
-    CAMP_ETHOK = 480 {
+    CAMP_E_THOK = 480 {
         display = "Camp E'thok";
     }
     SPLITHOOF_CRAG = 481 {
@@ -1428,7 +1428,7 @@ enum Area : u32 {
     GHOST_WALKER_POST = 597 {
         display = "Ghost Walker Post";
     }
-    SARTHERIS_STRAND = 598 {
+    SAR_THERIS_STRAND = 598 {
         display = "Sar'theris Strand";
     }
     THUNDER_AXE_FORTRESS = 599 {
@@ -1479,7 +1479,7 @@ enum Area : u32 {
     SHRINE_OF_THE_DORMANT_FLAME = 640 {
         display = "Shrine of the Dormant Flame";
     }
-    LAKE_ELUNEARA = 656 {
+    LAKE_ELUNE_ARA = 656 {
         display = "Lake Elune'ara";
     }
     THE_HARBORAGE = 657 {
@@ -1506,7 +1506,7 @@ enum Area : u32 {
     WARRIORS_TERRACE_UNUSED = 701 {
         display = "Warrior's Terrace UNUSED";
     }
-    RUTTHERAN_VILLAGE = 702 {
+    RUT_THERAN_VILLAGE = 702 {
         display = "Rut'theran Village";
     }
     IRONBANDS_COMPOUND = 716 {
@@ -1530,7 +1530,7 @@ enum Area : u32 {
     RAZORFEN_DOWNS0 = 722 {
         display = "Razorfen Downs";
     }
-    BANETHIL_HOLLOW = 736 {
+    BAN_ETHIL_HOLLOW = 736 {
         display = "Ban'ethil Hollow";
     }
     SCARLET_MONASTERY = 796 {
@@ -2097,7 +2097,7 @@ enum Area : u32 {
     RAPTOR_GROUNDS_UNUSED = 1597 {
         display = "Raptor Grounds UNUSED";
     }
-    GROLDOM_FARM_UNUSED = 1598 {
+    GROL_DOM_FARM_UNUSED = 1598 {
         display = "Grol'dom Farm UNUSED";
     }
     MORSHAN_BASE_CAMP = 1599 {
@@ -2112,7 +2112,7 @@ enum Area : u32 {
     BRAMBLESCAR_UNUSED = 1602 {
         display = "Bramblescar UNUSED";
     }
-    AGAMAGOR_UNUSED = 1603 {
+    AGAMA_GOR_UNUSED = 1603 {
         display = "Agama'gor UNUSED";
     }
     VALLEY_OF_HEROES = 1617 {
@@ -2184,7 +2184,7 @@ enum Area : u32 {
     THORN_HILL = 1699 {
         display = "Thorn Hill";
     }
-    AGAMAGOR = 1700 {
+    AGAMA_GOR = 1700 {
         display = "Agama'gor";
     }
     BLACKTHORN_RIDGE = 1701 {
@@ -2196,7 +2196,7 @@ enum Area : u32 {
     THE_MORSHAN_RAMPART = 1703 {
         display = "The Mor'shan Rampart";
     }
-    GROLDOM_FARM = 1704 {
+    GROL_DOM_FARM = 1704 {
         display = "Grol'dom Farm";
     }
     RAZORFEN_KRAUL1 = 1717 {
@@ -2208,7 +2208,7 @@ enum Area : u32 {
     MISTVALE_VALLEY = 1737 {
         display = "Mistvale Valley";
     }
-    NEKMANI_WELLSPRING = 1738 {
+    NEK_MANI_WELLSPRING = 1738 {
         display = "Nek'mani Wellspring";
     }
     BLOODSAIL_COMPOUND = 1739 {
@@ -2274,7 +2274,7 @@ enum Area : u32 {
     SORROWMURK = 1778 {
         display = "Sorrowmurk";
     }
-    DRAENILDUR_VILLAGE = 1779 {
+    DRAENIL_DUR_VILLAGE = 1779 {
         display = "Draenil'dur Village";
     }
     SPLINTERSPEAR_JUNCTION = 1780 {
@@ -2295,7 +2295,7 @@ enum Area : u32 {
     THORADINS_WALL2 = 1857 {
         display = "Thoradin's Wall";
     }
-    BOULDERGOR = 1858 {
+    BOULDER_GOR = 1858 {
         display = "Boulder'gor";
     }
     VALLEY_OF_FANGS = 1877 {
@@ -2319,10 +2319,10 @@ enum Area : u32 {
     VALORWIND_LAKE = 1883 {
         display = "Valorwind Lake";
     }
-    AGOLWATHA = 1884 {
+    AGOL_WATHA = 1884 {
         display = "Agol'watha";
     }
-    HIRIWATHA = 1885 {
+    HIRI_WATHA = 1885 {
         display = "Hiri'watha";
     }
     THE_CREEPING_RUIN = 1886 {
@@ -2337,7 +2337,7 @@ enum Area : u32 {
     DUSTWIND_GULCH = 1898 {
         display = "Dustwind Gulch";
     }
-    SHAOLWATHA = 1917 {
+    SHAOL_WATHA = 1917 {
         display = "Shaol'watha";
     }
     NOONSHADE_RUINS = 1937 {
@@ -2439,7 +2439,7 @@ enum Area : u32 {
     DREADMIST_DEN = 2138 {
         display = "Dreadmist Den";
     }
-    BAELDUN_KEEP = 2157 {
+    BAEL_DUN_KEEP = 2157 {
         display = "Bael'dun Keep";
     }
     EMBERSTRIFES_DEN = 2158 {
@@ -2775,7 +2775,7 @@ enum Area : u32 {
     TERROR_WING_PATH = 2420 {
         display = "Terror Wing Path";
     }
-    DRACODAR = 2421 {
+    DRACO_DAR = 2421 {
         display = "Draco'dar";
     }
     RAGEFIRE_CHASM = 2437 {
@@ -2826,7 +2826,7 @@ enum Area : u32 {
     CAMP_APARAJE = 2538 {
         display = "Camp Aparaje";
     }
-    MALAKAJIN = 2539 {
+    MALAKA_JIN = 2539 {
         display = "Malaka'jin";
     }
     BOULDERSLIDE_RAVINE = 2540 {
@@ -2970,7 +2970,7 @@ enum Area : u32 {
     CHAMPIONS_HALL = 2918 {
         display = "Champions' Hall";
     }
-    GROSHGOK_COMPOUND = 2937 {
+    GROSH_GOK_COMPOUND = 2937 {
         display = "Grosh'gok Compound";
     }
     SLEEPING_GORGE = 2938 {
@@ -3006,7 +3006,7 @@ enum Area : u32 {
     FROSTWOLF_KEEP = 2978 {
         display = "Frostwolf Keep";
     }
-    TORKREN_FARM = 2979 {
+    TOR_KREN_FARM = 2979 {
         display = "Tor'kren Farm";
     }
     FROST_DAGGER_PASS = 3017 {
@@ -3138,10 +3138,10 @@ enum Area : u32 {
     THE_COIL = 3377 {
         display = "The Coil";
     }
-    ALTAR_OF_HIREEK = 3378 {
+    ALTAR_OF_HIR_EEK = 3378 {
         display = "Altar of Hir'eek";
     }
-    SHADRAZAAR = 3379 {
+    SHADRA_ZAAR = 3379 {
         display = "Shadra'zaar";
     }
     HAKKARI_GROUNDS = 3380 {
@@ -4054,7 +4054,7 @@ enum Area : u32 {
     NORTHFOLD_MANOR = 313 {
         display = "Northfold Manor";
     }
-    GOSHEK_FARM = 314 {
+    GO_SHEK_FARM = 314 {
         display = "Go'Shek Farm";
     }
     DABYRIES_FARMSTEAD = 315 {
@@ -5173,8 +5173,8 @@ enum Area : u32 {
     THALASSIAN_BASE_CAMP = 1220 {
         display = "Thalassian Base Camp";
     }
-    RUINS_OF_ELDARATH_ = 1221 {
-        display = "Ruins of Eldarath ";
+    RUINS_OF_ELDARATH = 1221 {
+        display = "Ruins of Eldarath";
     }
     HETAERAS_CLUTCH = 1222 {
         display = "Hetaera's Clutch";
@@ -5626,11 +5626,11 @@ enum Area : u32 {
     MISTY_REED_POST = 1978 {
         display = "Misty Reed Post";
     }
-    BLOODVENOM_POST_ = 1997 {
-        display = "Bloodvenom Post ";
+    BLOODVENOM_POST = 1997 {
+        display = "Bloodvenom Post";
     }
-    TALONBRANCH_GLADE_ = 1998 {
-        display = "Talonbranch Glade ";
+    TALONBRANCH_GLADE = 1998 {
+        display = "Talonbranch Glade";
     }
     STRATHOLME = 2017 {
         display = "Stratholme";
@@ -6697,7 +6697,7 @@ enum Area : u32 {
     TOWER_OF_THE_DAMNED = 3511 {
         display = "Tower of the Damned";
     }
-    ZEBSORA = 3512 {
+    ZEB_SORA = 3512 {
         display = "Zeb'Sora";
     }
     LAKE_ELRENDAR1 = 3513 {
@@ -10562,8 +10562,8 @@ enum Area : u32 {
     MISTY_REED_POST = 1978 {
         display = "Misty Reed Post";
     }
-    BLOODVENOM_POST_ = 1997 {
-        display = "Bloodvenom Post ";
+    BLOODVENOM_POST = 1997 {
+        display = "Bloodvenom Post";
     }
     TALONBRANCH_GLADE_ = 1998 {
         display = "Talonbranch Glade ";
@@ -11633,7 +11633,7 @@ enum Area : u32 {
     TOWER_OF_THE_DAMNED = 3511 {
         display = "Tower of the Damned";
     }
-    ZEBSORA = 3512 {
+    ZEB_SORA = 3512 {
         display = "Zeb'Sora";
     }
     LAKE_ELRENDAR1 = 3513 {

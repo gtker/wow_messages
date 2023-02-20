@@ -109,15 +109,15 @@ enum Area : u32 {
     GOLD_COAST_QUARRY = 113;
     WESTFALL_LIGHTHOUSE = 115;
     MISTY_VALLEY = 116;
-    GROMGOL_BASE_CAMP = 117;
+    GROM_GOL_BASE_CAMP = 117;
     WHELGARS_EXCAVATION_SITE = 118;
     WESTBROOK_GARRISON = 120;
     TRANQUIL_GARDENS_CEMETERY = 121;
     ZUULDAIA_RUINS = 122;
-    BALLAL_RUINS = 123;
-    KALAI_RUINS = 125;
+    BAL_LAL_RUINS = 123;
+    KAL_AI_RUINS = 125;
     TKASHI_RUINS = 126;
-    BALIAMAH_RUINS = 127;
+    BALIA_MAH_RUINS = 127;
     ZIATAJAI_RUINS = 128;
     MIZJAH_RUINS = 129;
     SILVERPINE_FOREST = 130;
@@ -132,7 +132,7 @@ enum Area : u32 {
     EASTERN_PLAGUELANDS = 139;
     TELDRASSIL = 141;
     IRONBANDS_EXCAVATION_SITE = 142;
-    MOGROSH_STRONGHOLD = 143;
+    MO_GROSH_STRONGHOLD = 143;
     THELSAMAR = 144;
     ALGAZ_GATE = 145;
     STONEWROUGHT_DAM = 146;
@@ -231,7 +231,7 @@ enum Area : u32 {
     LAKE_AL_AMETH = 259;
     STARBREEZE_VILLAGE = 260;
     GNARLPINE_HOLD = 261;
-    BANETHIL_BARROW_DEN = 262;
+    BAN_ETHIL_BARROW_DEN = 262;
     THE_CLEFT = 263;
     THE_ORACLE_GLADE = 264;
     WELLSPRING_RIVER = 265;
@@ -313,7 +313,7 @@ enum Area : u32 {
     WILDHAMMER_KEEP = 349;
     QUEL_DANIL_LODGE = 350;
     SKULK_ROCK = 351;
-    ZUNWATHA = 352;
+    ZUN_WATHA = 352;
     SHADRA_ALOR = 353;
     JINTHA_ALOR = 354;
     THE_ALTAR_OF_ZUL = 355;
@@ -328,7 +328,7 @@ enum Area : u32 {
     THE_DEN = 364;
     BURNING_BLADE_COVEN = 365;
     KOLKAR_CRAG = 366;
-    SENJIN_VILLAGE = 367;
+    SEN_JIN_VILLAGE = 367;
     ECHO_ISLES = 368;
     THUNDER_RIDGE = 369;
     DRYGULCH_RAVINE = 370;
@@ -362,7 +362,7 @@ enum Area : u32 {
     THOUSAND_NEEDLES = 400;
     THE_TIDUS_STAIR = 401;
     SHADY_REST_INN = 403;
-    BAELDUN_DIGSITE = 404;
+    BAEL_DUN_DIGSITE = 404;
     DESOLACE = 405;
     STONETALON_MOUNTAINS = 406;
     ORGRIMMAR_UNUSED = 407;
@@ -435,7 +435,7 @@ enum Area : u32 {
     RUINS_OF_JUBUWAL = 477;
     POOLS_OF_ARLITHRIEN = 478;
     THE_RUSTMAUL_DIG_SITE = 479;
-    CAMP_ETHOK = 480;
+    CAMP_E_THOK = 480;
     SPLITHOOF_CRAG = 481;
     HIGHPERCH = 482;
     THE_SCREECHING_CANYON = 483;
@@ -485,7 +485,7 @@ enum Area : u32 {
     BEGGARS_HAUNT = 576;
     KODO_GRAVEYARD = 596;
     GHOST_WALKER_POST = 597;
-    SARTHERIS_STRAND = 598;
+    SAR_THERIS_STRAND = 598;
     THUNDER_AXE_FORTRESS = 599;
     BOLGANS_HOLE = 600;
     MANNOROC_COVEN = 602;
@@ -502,7 +502,7 @@ enum Area : u32 {
     HIDDEN_PATH = 638;
     SPIRIT_ROCK = 639;
     SHRINE_OF_THE_DORMANT_FLAME = 640;
-    LAKE_ELUNEARA = 656;
+    LAKE_ELUNE_ARA = 656;
     THE_HARBORAGE = 657;
     OUTLAND = 676;
     CRAFTSMENS_TERRACE_UNUSED = 696;
@@ -511,7 +511,7 @@ enum Area : u32 {
     TEMPLE_OF_ELUNE_UNUSED = 699;
     CENARION_ENCLAVE_UNUSED = 700;
     WARRIORS_TERRACE_UNUSED = 701;
-    RUTTHERAN_VILLAGE = 702;
+    RUT_THERAN_VILLAGE = 702;
     IRONBANDS_COMPOUND = 716;
     THE_STOCKADE = 717;
     WAILING_CAVERNS = 718;
@@ -519,7 +519,7 @@ enum Area : u32 {
     FRAY_ISLAND = 720;
     GNOMEREGAN1 = 721;
     RAZORFEN_DOWNS0 = 722;
-    BANETHIL_HOLLOW = 736;
+    BAN_ETHIL_HOLLOW = 736;
     SCARLET_MONASTERY = 796;
     JERODS_LANDING = 797;
     RIDGEPOINT_TOWER = 798;
@@ -708,12 +708,12 @@ enum Area : u32 {
     BLACKROCK_SPIRE = 1583;
     BLACKROCK_DEPTHS = 1584;
     RAPTOR_GROUNDS_UNUSED = 1597;
-    GROLDOM_FARM_UNUSED = 1598;
+    GROL_DOM_FARM_UNUSED = 1598;
     MORSHAN_BASE_CAMP = 1599;
     HONORS_STAND_UNUSED = 1600;
     BLACKTHORN_RIDGE_UNUSED = 1601;
     BRAMBLESCAR_UNUSED = 1602;
-    AGAMAGOR_UNUSED = 1603;
+    AGAMA_GOR_UNUSED = 1603;
     VALLEY_OF_HEROES = 1617;
     ORGRIMMAR = 1637;
     THUNDER_BLUFF = 1638;
@@ -737,15 +737,15 @@ enum Area : u32 {
     RAPTOR_GROUNDS = 1697;
     BRAMBLESCAR = 1698;
     THORN_HILL = 1699;
-    AGAMAGOR = 1700;
+    AGAMA_GOR = 1700;
     BLACKTHORN_RIDGE = 1701;
     HONORS_STAND = 1702;
     THE_MORSHAN_RAMPART = 1703;
-    GROLDOM_FARM = 1704;
+    GROL_DOM_FARM = 1704;
     RAZORFEN_KRAUL1 = 1717;
     THE_GREAT_LIFT1 = 1718;
     MISTVALE_VALLEY = 1737;
-    NEKMANI_WELLSPRING = 1738;
+    NEK_MANI_WELLSPRING = 1738;
     BLOODSAIL_COMPOUND = 1739;
     VENTURE_CO_BASE_CAMP = 1740;
     GURUBASHI_ARENA = 1741;
@@ -767,14 +767,14 @@ enum Area : u32 {
     SHRINE_OF_THE_DECEIVER = 1771;
     ITHARIUSS_CAVE = 1777;
     SORROWMURK = 1778;
-    DRAENILDUR_VILLAGE = 1779;
+    DRAENIL_DUR_VILLAGE = 1779;
     SPLINTERSPEAR_JUNCTION = 1780;
     STAGALBOG = 1797;
     THE_SHIFTING_MIRE = 1798;
     STAGALBOG_CAVE = 1817;
     WITHERBARK_CAVERNS = 1837;
     THORADINS_WALL2 = 1857;
-    BOULDERGOR = 1858;
+    BOULDER_GOR = 1858;
     VALLEY_OF_FANGS = 1877;
     THE_DUSTBOWL = 1878;
     MIRAGE_FLATS = 1879;
@@ -782,13 +782,13 @@ enum Area : u32 {
     SHINDIGGERS_CAMP = 1881;
     PLAGUEMIST_RAVINE = 1882;
     VALORWIND_LAKE = 1883;
-    AGOLWATHA = 1884;
-    HIRIWATHA = 1885;
+    AGOL_WATHA = 1884;
+    HIRI_WATHA = 1885;
     THE_CREEPING_RUIN = 1886;
     BOGENS_LEDGE = 1887;
     THE_MAKERS_TERRACE = 1897;
     DUSTWIND_GULCH = 1898;
-    SHAOLWATHA = 1917;
+    SHAOL_WATHA = 1917;
     NOONSHADE_RUINS = 1937;
     BROKEN_PILLAR = 1938;
     ABYSSAL_SANDS = 1939;
@@ -822,7 +822,7 @@ enum Area : u32 {
     GALLOWS_END_TAVERN = 2119;
     THE_POOLS_OF_VISION_UNUSED = 2137;
     DREADMIST_DEN = 2138;
-    BAELDUN_KEEP = 2157;
+    BAEL_DUN_KEEP = 2157;
     EMBERSTRIFES_DEN = 2158;
     ONYXIAS_LAIR = 2159;
     WINDSHEAR_MINE = 2160;
@@ -934,7 +934,7 @@ enum Area : u32 {
     MORGANS_VIGIL = 2418;
     SLITHER_ROCK = 2419;
     TERROR_WING_PATH = 2420;
-    DRACODAR = 2421;
+    DRACO_DAR = 2421;
     RAGEFIRE_CHASM = 2437;
     NIGHTSONG_WOODS = 2457;
     THE_VEILED_SEA6 = 2477;
@@ -951,7 +951,7 @@ enum Area : u32 {
     RUINS_OF_ISILDIEN = 2522;
     GRIMTOTEM_POST = 2537;
     CAMP_APARAJE = 2538;
-    MALAKAJIN = 2539;
+    MALAKA_JIN = 2539;
     BOULDERSLIDE_RAVINE = 2540;
     SISHIR_CANYON = 2541;
     DIRE_MAUL0 = 2557;
@@ -999,7 +999,7 @@ enum Area : u32 {
     ZORAMGAR_OUTPOST = 2897;
     HALL_OF_LEGENDS = 2917;
     CHAMPIONS_HALL = 2918;
-    GROSHGOK_COMPOUND = 2937;
+    GROSH_GOK_COMPOUND = 2937;
     SLEEPING_GORGE = 2938;
     IRONDEEP_MINE = 2957;
     STONEHEARTH_OUTPOST = 2958;
@@ -1011,7 +1011,7 @@ enum Area : u32 {
     WINTERAX_HOLD = 2964;
     ICEBLOOD_GARRISON = 2977;
     FROSTWOLF_KEEP = 2978;
-    TORKREN_FARM = 2979;
+    TOR_KREN_FARM = 2979;
     FROST_DAGGER_PASS = 3017;
     IRONSTONE_CAMP = 3037;
     WEAZELS_CRATER = 3038;
@@ -1055,8 +1055,8 @@ enum Area : u32 {
     YOJAMBA_ISLE = 3357;
     ARATHI_BASIN = 3358;
     THE_COIL = 3377;
-    ALTAR_OF_HIREEK = 3378;
-    SHADRAZAAR = 3379;
+    ALTAR_OF_HIR_EEK = 3378;
+    SHADRA_ZAAR = 3379;
     HAKKARI_GROUNDS = 3380;
     NAZE_OF_SHIRVALLAH = 3381;
     TEMPLE_OF_BETHEKK = 3382;
@@ -1198,15 +1198,15 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `GOLD_COAST_QUARRY` | 113 (0x71) |  |  | Gold Coast Quarry |
 | `WESTFALL_LIGHTHOUSE` | 115 (0x73) |  |  | Westfall Lighthouse |
 | `MISTY_VALLEY` | 116 (0x74) |  |  | Misty Valley |
-| `GROMGOL_BASE_CAMP` | 117 (0x75) |  |  | Grom'gol Base Camp |
+| `GROM_GOL_BASE_CAMP` | 117 (0x75) |  |  | Grom'gol Base Camp |
 | `WHELGARS_EXCAVATION_SITE` | 118 (0x76) |  |  | Whelgar's Excavation Site |
 | `WESTBROOK_GARRISON` | 120 (0x78) |  |  | Westbrook Garrison |
 | `TRANQUIL_GARDENS_CEMETERY` | 121 (0x79) |  |  | Tranquil Gardens Cemetery |
 | `ZUULDAIA_RUINS` | 122 (0x7A) |  |  | Zuuldaia Ruins |
-| `BALLAL_RUINS` | 123 (0x7B) |  |  | Bal'lal Ruins |
-| `KALAI_RUINS` | 125 (0x7D) |  |  | Kal'ai Ruins |
+| `BAL_LAL_RUINS` | 123 (0x7B) |  |  | Bal'lal Ruins |
+| `KAL_AI_RUINS` | 125 (0x7D) |  |  | Kal'ai Ruins |
 | `TKASHI_RUINS` | 126 (0x7E) |  |  | Tkashi Ruins |
-| `BALIAMAH_RUINS` | 127 (0x7F) |  |  | Balia'mah Ruins |
+| `BALIA_MAH_RUINS` | 127 (0x7F) |  |  | Balia'mah Ruins |
 | `ZIATAJAI_RUINS` | 128 (0x80) |  |  | Ziata'jai Ruins |
 | `MIZJAH_RUINS` | 129 (0x81) |  |  | Mizjah Ruins |
 | `SILVERPINE_FOREST` | 130 (0x82) |  |  | Silverpine Forest |
@@ -1221,7 +1221,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `EASTERN_PLAGUELANDS` | 139 (0x8B) |  |  | Eastern Plaguelands |
 | `TELDRASSIL` | 141 (0x8D) |  |  | Teldrassil |
 | `IRONBANDS_EXCAVATION_SITE` | 142 (0x8E) |  |  | Ironband's Excavation Site |
-| `MOGROSH_STRONGHOLD` | 143 (0x8F) |  |  | Mo'grosh Stronghold |
+| `MO_GROSH_STRONGHOLD` | 143 (0x8F) |  |  | Mo'grosh Stronghold |
 | `THELSAMAR` | 144 (0x90) |  |  | Thelsamar |
 | `ALGAZ_GATE` | 145 (0x91) |  |  | Algaz Gate |
 | `STONEWROUGHT_DAM` | 146 (0x92) |  |  | Stonewrought Dam |
@@ -1320,7 +1320,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `LAKE_AL_AMETH` | 259 (0x103) |  |  | Lake Al'Ameth |
 | `STARBREEZE_VILLAGE` | 260 (0x104) |  |  | Starbreeze Village |
 | `GNARLPINE_HOLD` | 261 (0x105) |  |  | Gnarlpine Hold |
-| `BANETHIL_BARROW_DEN` | 262 (0x106) |  |  | Ban'ethil Barrow Den |
+| `BAN_ETHIL_BARROW_DEN` | 262 (0x106) |  |  | Ban'ethil Barrow Den |
 | `THE_CLEFT` | 263 (0x107) |  |  | The Cleft |
 | `THE_ORACLE_GLADE` | 264 (0x108) |  |  | The Oracle Glade |
 | `WELLSPRING_RIVER` | 265 (0x109) |  |  | Wellspring River |
@@ -1402,7 +1402,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `WILDHAMMER_KEEP` | 349 (0x15D) |  |  | Wildhammer Keep |
 | `QUEL_DANIL_LODGE` | 350 (0x15E) |  |  | Quel'Danil Lodge |
 | `SKULK_ROCK` | 351 (0x15F) |  |  | Skulk Rock |
-| `ZUNWATHA` | 352 (0x160) |  |  | Zun'watha |
+| `ZUN_WATHA` | 352 (0x160) |  |  | Zun'watha |
 | `SHADRA_ALOR` | 353 (0x161) |  |  | Shadra'Alor |
 | `JINTHA_ALOR` | 354 (0x162) |  |  | Jintha'Alor |
 | `THE_ALTAR_OF_ZUL` | 355 (0x163) |  |  | The Altar of Zul |
@@ -1417,7 +1417,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `THE_DEN` | 364 (0x16C) |  |  | The Den |
 | `BURNING_BLADE_COVEN` | 365 (0x16D) |  |  | Burning Blade Coven |
 | `KOLKAR_CRAG` | 366 (0x16E) |  |  | Kolkar Crag |
-| `SENJIN_VILLAGE` | 367 (0x16F) |  |  | Sen'jin Village |
+| `SEN_JIN_VILLAGE` | 367 (0x16F) |  |  | Sen'jin Village |
 | `ECHO_ISLES` | 368 (0x170) |  |  | Echo Isles |
 | `THUNDER_RIDGE` | 369 (0x171) |  |  | Thunder Ridge |
 | `DRYGULCH_RAVINE` | 370 (0x172) |  |  | Drygulch Ravine |
@@ -1451,7 +1451,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `THOUSAND_NEEDLES` | 400 (0x190) |  |  | Thousand Needles |
 | `THE_TIDUS_STAIR` | 401 (0x191) |  |  | The Tidus Stair |
 | `SHADY_REST_INN` | 403 (0x193) |  |  | Shady Rest Inn |
-| `BAELDUN_DIGSITE` | 404 (0x194) |  |  | Bael'dun Digsite |
+| `BAEL_DUN_DIGSITE` | 404 (0x194) |  |  | Bael'dun Digsite |
 | `DESOLACE` | 405 (0x195) |  |  | Desolace |
 | `STONETALON_MOUNTAINS` | 406 (0x196) |  |  | Stonetalon Mountains |
 | `ORGRIMMAR_UNUSED` | 407 (0x197) |  |  | Orgrimmar UNUSED |
@@ -1524,7 +1524,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `RUINS_OF_JUBUWAL` | 477 (0x1DD) |  |  | Ruins of Jubuwal |
 | `POOLS_OF_ARLITHRIEN` | 478 (0x1DE) |  |  | Pools of Arlithrien |
 | `THE_RUSTMAUL_DIG_SITE` | 479 (0x1DF) |  |  | The Rustmaul Dig Site |
-| `CAMP_ETHOK` | 480 (0x1E0) |  |  | Camp E'thok |
+| `CAMP_E_THOK` | 480 (0x1E0) |  |  | Camp E'thok |
 | `SPLITHOOF_CRAG` | 481 (0x1E1) |  |  | Splithoof Crag |
 | `HIGHPERCH` | 482 (0x1E2) |  |  | Highperch |
 | `THE_SCREECHING_CANYON` | 483 (0x1E3) |  |  | The Screeching Canyon |
@@ -1574,7 +1574,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `BEGGARS_HAUNT` | 576 (0x240) |  |  | Beggar's Haunt |
 | `KODO_GRAVEYARD` | 596 (0x254) |  |  | Kodo Graveyard |
 | `GHOST_WALKER_POST` | 597 (0x255) |  |  | Ghost Walker Post |
-| `SARTHERIS_STRAND` | 598 (0x256) |  |  | Sar'theris Strand |
+| `SAR_THERIS_STRAND` | 598 (0x256) |  |  | Sar'theris Strand |
 | `THUNDER_AXE_FORTRESS` | 599 (0x257) |  |  | Thunder Axe Fortress |
 | `BOLGANS_HOLE` | 600 (0x258) |  |  | Bolgan's Hole |
 | `MANNOROC_COVEN` | 602 (0x25A) |  |  | Mannoroc Coven |
@@ -1591,7 +1591,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `HIDDEN_PATH` | 638 (0x27E) |  |  | Hidden Path |
 | `SPIRIT_ROCK` | 639 (0x27F) |  |  | Spirit Rock |
 | `SHRINE_OF_THE_DORMANT_FLAME` | 640 (0x280) |  |  | Shrine of the Dormant Flame |
-| `LAKE_ELUNEARA` | 656 (0x290) |  |  | Lake Elune'ara |
+| `LAKE_ELUNE_ARA` | 656 (0x290) |  |  | Lake Elune'ara |
 | `THE_HARBORAGE` | 657 (0x291) |  |  | The Harborage |
 | `OUTLAND` | 676 (0x2A4) |  |  | Outland |
 | `CRAFTSMENS_TERRACE_UNUSED` | 696 (0x2B8) |  |  | Craftsmen's Terrace UNUSED |
@@ -1600,7 +1600,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `TEMPLE_OF_ELUNE_UNUSED` | 699 (0x2BB) |  |  | Temple of Elune UNUSED |
 | `CENARION_ENCLAVE_UNUSED` | 700 (0x2BC) |  |  | Cenarion Enclave UNUSED |
 | `WARRIORS_TERRACE_UNUSED` | 701 (0x2BD) |  |  | Warrior's Terrace UNUSED |
-| `RUTTHERAN_VILLAGE` | 702 (0x2BE) |  |  | Rut'theran Village |
+| `RUT_THERAN_VILLAGE` | 702 (0x2BE) |  |  | Rut'theran Village |
 | `IRONBANDS_COMPOUND` | 716 (0x2CC) |  |  | Ironband's Compound |
 | `THE_STOCKADE` | 717 (0x2CD) |  |  | The Stockade |
 | `WAILING_CAVERNS` | 718 (0x2CE) |  |  | Wailing Caverns |
@@ -1608,7 +1608,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `FRAY_ISLAND` | 720 (0x2D0) |  |  | Fray Island |
 | `GNOMEREGAN1` | 721 (0x2D1) |  |  | Gnomeregan |
 | `RAZORFEN_DOWNS0` | 722 (0x2D2) |  |  | Razorfen Downs |
-| `BANETHIL_HOLLOW` | 736 (0x2E0) |  |  | Ban'ethil Hollow |
+| `BAN_ETHIL_HOLLOW` | 736 (0x2E0) |  |  | Ban'ethil Hollow |
 | `SCARLET_MONASTERY` | 796 (0x31C) |  |  | Scarlet Monastery |
 | `JERODS_LANDING` | 797 (0x31D) |  |  | Jerod's Landing |
 | `RIDGEPOINT_TOWER` | 798 (0x31E) |  |  | Ridgepoint Tower |
@@ -1797,12 +1797,12 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `BLACKROCK_SPIRE` | 1583 (0x62F) |  |  | Blackrock Spire |
 | `BLACKROCK_DEPTHS` | 1584 (0x630) |  |  | Blackrock Depths |
 | `RAPTOR_GROUNDS_UNUSED` | 1597 (0x63D) |  |  | Raptor Grounds UNUSED |
-| `GROLDOM_FARM_UNUSED` | 1598 (0x63E) |  |  | Grol'dom Farm UNUSED |
+| `GROL_DOM_FARM_UNUSED` | 1598 (0x63E) |  |  | Grol'dom Farm UNUSED |
 | `MORSHAN_BASE_CAMP` | 1599 (0x63F) |  |  | Mor'shan Base Camp |
 | `HONORS_STAND_UNUSED` | 1600 (0x640) |  |  | Honor's Stand UNUSED |
 | `BLACKTHORN_RIDGE_UNUSED` | 1601 (0x641) |  |  | Blackthorn Ridge UNUSED |
 | `BRAMBLESCAR_UNUSED` | 1602 (0x642) |  |  | Bramblescar UNUSED |
-| `AGAMAGOR_UNUSED` | 1603 (0x643) |  |  | Agama'gor UNUSED |
+| `AGAMA_GOR_UNUSED` | 1603 (0x643) |  |  | Agama'gor UNUSED |
 | `VALLEY_OF_HEROES` | 1617 (0x651) |  |  | Valley of Heroes |
 | `ORGRIMMAR` | 1637 (0x665) |  |  | Orgrimmar |
 | `THUNDER_BLUFF` | 1638 (0x666) |  |  | Thunder Bluff |
@@ -1826,15 +1826,15 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `RAPTOR_GROUNDS` | 1697 (0x6A1) |  |  | Raptor Grounds |
 | `BRAMBLESCAR` | 1698 (0x6A2) |  |  | Bramblescar |
 | `THORN_HILL` | 1699 (0x6A3) |  |  | Thorn Hill |
-| `AGAMAGOR` | 1700 (0x6A4) |  |  | Agama'gor |
+| `AGAMA_GOR` | 1700 (0x6A4) |  |  | Agama'gor |
 | `BLACKTHORN_RIDGE` | 1701 (0x6A5) |  |  | Blackthorn Ridge |
 | `HONORS_STAND` | 1702 (0x6A6) |  |  | Honor's Stand |
 | `THE_MORSHAN_RAMPART` | 1703 (0x6A7) |  |  | The Mor'shan Rampart |
-| `GROLDOM_FARM` | 1704 (0x6A8) |  |  | Grol'dom Farm |
+| `GROL_DOM_FARM` | 1704 (0x6A8) |  |  | Grol'dom Farm |
 | `RAZORFEN_KRAUL1` | 1717 (0x6B5) |  |  | Razorfen Kraul |
 | `THE_GREAT_LIFT1` | 1718 (0x6B6) |  |  | The Great Lift |
 | `MISTVALE_VALLEY` | 1737 (0x6C9) |  |  | Mistvale Valley |
-| `NEKMANI_WELLSPRING` | 1738 (0x6CA) |  |  | Nek'mani Wellspring |
+| `NEK_MANI_WELLSPRING` | 1738 (0x6CA) |  |  | Nek'mani Wellspring |
 | `BLOODSAIL_COMPOUND` | 1739 (0x6CB) |  |  | Bloodsail Compound |
 | `VENTURE_CO_BASE_CAMP` | 1740 (0x6CC) |  |  | Venture Co. Base Camp |
 | `GURUBASHI_ARENA` | 1741 (0x6CD) |  |  | Gurubashi Arena |
@@ -1856,14 +1856,14 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `SHRINE_OF_THE_DECEIVER` | 1771 (0x6EB) |  |  | Shrine of the Deceiver |
 | `ITHARIUSS_CAVE` | 1777 (0x6F1) |  |  | Itharius's Cave |
 | `SORROWMURK` | 1778 (0x6F2) |  |  | Sorrowmurk |
-| `DRAENILDUR_VILLAGE` | 1779 (0x6F3) |  |  | Draenil'dur Village |
+| `DRAENIL_DUR_VILLAGE` | 1779 (0x6F3) |  |  | Draenil'dur Village |
 | `SPLINTERSPEAR_JUNCTION` | 1780 (0x6F4) |  |  | Splinterspear Junction |
 | `STAGALBOG` | 1797 (0x705) |  |  | Stagalbog |
 | `THE_SHIFTING_MIRE` | 1798 (0x706) |  |  | The Shifting Mire |
 | `STAGALBOG_CAVE` | 1817 (0x719) |  |  | Stagalbog Cave |
 | `WITHERBARK_CAVERNS` | 1837 (0x72D) |  |  | Witherbark Caverns |
 | `THORADINS_WALL2` | 1857 (0x741) |  |  | Thoradin's Wall |
-| `BOULDERGOR` | 1858 (0x742) |  |  | Boulder'gor |
+| `BOULDER_GOR` | 1858 (0x742) |  |  | Boulder'gor |
 | `VALLEY_OF_FANGS` | 1877 (0x755) |  |  | Valley of Fangs |
 | `THE_DUSTBOWL` | 1878 (0x756) |  |  | The Dustbowl |
 | `MIRAGE_FLATS` | 1879 (0x757) |  |  | Mirage Flats |
@@ -1871,13 +1871,13 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `SHINDIGGERS_CAMP` | 1881 (0x759) |  |  | Shindigger's Camp |
 | `PLAGUEMIST_RAVINE` | 1882 (0x75A) |  |  | Plaguemist Ravine |
 | `VALORWIND_LAKE` | 1883 (0x75B) |  |  | Valorwind Lake |
-| `AGOLWATHA` | 1884 (0x75C) |  |  | Agol'watha |
-| `HIRIWATHA` | 1885 (0x75D) |  |  | Hiri'watha |
+| `AGOL_WATHA` | 1884 (0x75C) |  |  | Agol'watha |
+| `HIRI_WATHA` | 1885 (0x75D) |  |  | Hiri'watha |
 | `THE_CREEPING_RUIN` | 1886 (0x75E) |  |  | The Creeping Ruin |
 | `BOGENS_LEDGE` | 1887 (0x75F) |  |  | Bogen's Ledge |
 | `THE_MAKERS_TERRACE` | 1897 (0x769) |  |  | The Maker's Terrace |
 | `DUSTWIND_GULCH` | 1898 (0x76A) |  |  | Dustwind Gulch |
-| `SHAOLWATHA` | 1917 (0x77D) |  |  | Shaol'watha |
+| `SHAOL_WATHA` | 1917 (0x77D) |  |  | Shaol'watha |
 | `NOONSHADE_RUINS` | 1937 (0x791) |  |  | Noonshade Ruins |
 | `BROKEN_PILLAR` | 1938 (0x792) |  |  | Broken Pillar |
 | `ABYSSAL_SANDS` | 1939 (0x793) |  |  | Abyssal Sands |
@@ -1911,7 +1911,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `GALLOWS_END_TAVERN` | 2119 (0x847) |  |  | Gallows' End Tavern |
 | `THE_POOLS_OF_VISION_UNUSED` | 2137 (0x859) |  |  | The Pools of VisionUNUSED |
 | `DREADMIST_DEN` | 2138 (0x85A) |  |  | Dreadmist Den |
-| `BAELDUN_KEEP` | 2157 (0x86D) |  |  | Bael'dun Keep |
+| `BAEL_DUN_KEEP` | 2157 (0x86D) |  |  | Bael'dun Keep |
 | `EMBERSTRIFES_DEN` | 2158 (0x86E) |  |  | Emberstrife's Den |
 | `ONYXIAS_LAIR` | 2159 (0x86F) |  |  | Onyxia's Lair |
 | `WINDSHEAR_MINE` | 2160 (0x870) |  |  | Windshear Mine |
@@ -2023,7 +2023,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `MORGANS_VIGIL` | 2418 (0x972) |  |  | Morgan's Vigil |
 | `SLITHER_ROCK` | 2419 (0x973) |  |  | Slither Rock |
 | `TERROR_WING_PATH` | 2420 (0x974) |  |  | Terror Wing Path |
-| `DRACODAR` | 2421 (0x975) |  |  | Draco'dar |
+| `DRACO_DAR` | 2421 (0x975) |  |  | Draco'dar |
 | `RAGEFIRE_CHASM` | 2437 (0x985) |  |  | Ragefire Chasm |
 | `NIGHTSONG_WOODS` | 2457 (0x999) |  |  | Nightsong Woods |
 | `THE_VEILED_SEA6` | 2477 (0x9AD) |  |  | The Veiled Sea |
@@ -2040,7 +2040,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `RUINS_OF_ISILDIEN` | 2522 (0x9DA) |  |  | Ruins of Isildien |
 | `GRIMTOTEM_POST` | 2537 (0x9E9) |  |  | Grimtotem Post |
 | `CAMP_APARAJE` | 2538 (0x9EA) |  |  | Camp Aparaje |
-| `MALAKAJIN` | 2539 (0x9EB) |  |  | Malaka'jin |
+| `MALAKA_JIN` | 2539 (0x9EB) |  |  | Malaka'jin |
 | `BOULDERSLIDE_RAVINE` | 2540 (0x9EC) |  |  | Boulderslide Ravine |
 | `SISHIR_CANYON` | 2541 (0x9ED) |  |  | Sishir Canyon |
 | `DIRE_MAUL0` | 2557 (0x9FD) |  |  | Dire Maul |
@@ -2088,7 +2088,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `ZORAMGAR_OUTPOST` | 2897 (0xB51) |  |  | Zoram'gar Outpost |
 | `HALL_OF_LEGENDS` | 2917 (0xB65) |  |  | Hall of Legends |
 | `CHAMPIONS_HALL` | 2918 (0xB66) |  |  | Champions' Hall |
-| `GROSHGOK_COMPOUND` | 2937 (0xB79) |  |  | Grosh'gok Compound |
+| `GROSH_GOK_COMPOUND` | 2937 (0xB79) |  |  | Grosh'gok Compound |
 | `SLEEPING_GORGE` | 2938 (0xB7A) |  |  | Sleeping Gorge |
 | `IRONDEEP_MINE` | 2957 (0xB8D) |  |  | Irondeep Mine |
 | `STONEHEARTH_OUTPOST` | 2958 (0xB8E) |  |  | Stonehearth Outpost |
@@ -2100,7 +2100,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `WINTERAX_HOLD` | 2964 (0xB94) |  |  | Winterax Hold |
 | `ICEBLOOD_GARRISON` | 2977 (0xBA1) |  |  | Iceblood Garrison |
 | `FROSTWOLF_KEEP` | 2978 (0xBA2) |  |  | Frostwolf Keep |
-| `TORKREN_FARM` | 2979 (0xBA3) |  |  | Tor'kren Farm |
+| `TOR_KREN_FARM` | 2979 (0xBA3) |  |  | Tor'kren Farm |
 | `FROST_DAGGER_PASS` | 3017 (0xBC9) |  |  | Frost Dagger Pass |
 | `IRONSTONE_CAMP` | 3037 (0xBDD) |  |  | Ironstone Camp |
 | `WEAZELS_CRATER` | 3038 (0xBDE) |  |  | Weazel's Crater |
@@ -2144,8 +2144,8 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `YOJAMBA_ISLE` | 3357 (0xD1D) |  |  | Yojamba Isle |
 | `ARATHI_BASIN` | 3358 (0xD1E) |  |  | Arathi Basin |
 | `THE_COIL` | 3377 (0xD31) |  |  | The Coil |
-| `ALTAR_OF_HIREEK` | 3378 (0xD32) |  |  | Altar of Hir'eek |
-| `SHADRAZAAR` | 3379 (0xD33) |  |  | Shadra'zaar |
+| `ALTAR_OF_HIR_EEK` | 3378 (0xD32) |  |  | Altar of Hir'eek |
+| `SHADRA_ZAAR` | 3379 (0xD33) |  |  | Shadra'zaar |
 | `HAKKARI_GROUNDS` | 3380 (0xD34) |  |  | Hakkari Grounds |
 | `NAZE_OF_SHIRVALLAH` | 3381 (0xD35) |  |  | Naze of Shirvallah |
 | `TEMPLE_OF_BETHEKK` | 3382 (0xD36) |  |  | Temple of Bethekk |
@@ -2478,7 +2478,7 @@ enum Area : u32 {
     RUINS_OF_ABORAZ = 311;
     JANEIROS_POINT = 312;
     NORTHFOLD_MANOR = 313;
-    GOSHEK_FARM = 314;
+    GO_SHEK_FARM = 314;
     DABYRIES_FARMSTEAD = 315;
     BOULDERFIST_HALL = 316;
     WITHERBARK_VILLAGE = 317;
@@ -2851,7 +2851,7 @@ enum Area : u32 {
     TESTAZSHARA = 1218;
     LEGASH_ENCAMPMENT = 1219;
     THALASSIAN_BASE_CAMP = 1220;
-    RUINS_OF_ELDARATH_ = 1221;
+    RUINS_OF_ELDARATH = 1221;
     HETAERAS_CLUTCH = 1222;
     TEMPLE_OF_ZIN_MALOR = 1223;
     BEARS_HEAD = 1224;
@@ -3002,8 +3002,8 @@ enum Area : u32 {
     DUSTFIRE_VALLEY = 1959;
     ZUL_GURUB1 = 1977;
     MISTY_REED_POST = 1978;
-    BLOODVENOM_POST_ = 1997;
-    TALONBRANCH_GLADE_ = 1998;
+    BLOODVENOM_POST = 1997;
+    TALONBRANCH_GLADE = 1998;
     STRATHOLME = 2017;
     QUEL_THALAS = 2037;
     SCHOLOMANCE = 2057;
@@ -3359,7 +3359,7 @@ enum Area : u32 {
     SUNGRAZE_PEAK = 3509;
     AMANI_CATACOMBS = 3510;
     TOWER_OF_THE_DAMNED = 3511;
-    ZEBSORA = 3512;
+    ZEB_SORA = 3512;
     LAKE_ELRENDAR1 = 3513;
     THE_DEAD_SCAR1 = 3514;
     ELRENDAR_RIVER = 3515;
@@ -4129,7 +4129,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `RUINS_OF_ABORAZ` | 311 (0x137) |  |  | Ruins of Aboraz |
 | `JANEIROS_POINT` | 312 (0x138) |  |  | Janeiro's Point |
 | `NORTHFOLD_MANOR` | 313 (0x139) |  |  | Northfold Manor |
-| `GOSHEK_FARM` | 314 (0x13A) |  |  | Go'Shek Farm |
+| `GO_SHEK_FARM` | 314 (0x13A) |  |  | Go'Shek Farm |
 | `DABYRIES_FARMSTEAD` | 315 (0x13B) |  |  | Dabyrie's Farmstead |
 | `BOULDERFIST_HALL` | 316 (0x13C) |  |  | Boulderfist Hall |
 | `WITHERBARK_VILLAGE` | 317 (0x13D) |  |  | Witherbark Village |
@@ -4502,7 +4502,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `TESTAZSHARA` | 1218 (0x4C2) |  |  | TESTAzshara |
 | `LEGASH_ENCAMPMENT` | 1219 (0x4C3) |  |  | Legash Encampment |
 | `THALASSIAN_BASE_CAMP` | 1220 (0x4C4) |  |  | Thalassian Base Camp |
-| `RUINS_OF_ELDARATH_` | 1221 (0x4C5) |  |  | Ruins of Eldarath |
+| `RUINS_OF_ELDARATH` | 1221 (0x4C5) |  |  | Ruins of Eldarath |
 | `HETAERAS_CLUTCH` | 1222 (0x4C6) |  |  | Hetaera's Clutch |
 | `TEMPLE_OF_ZIN_MALOR` | 1223 (0x4C7) |  |  | Temple of Zin-Malor |
 | `BEARS_HEAD` | 1224 (0x4C8) |  |  | Bear's Head |
@@ -4653,8 +4653,8 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `DUSTFIRE_VALLEY` | 1959 (0x7A7) |  |  | Dustfire Valley |
 | `ZUL_GURUB1` | 1977 (0x7B9) |  |  | Zul'Gurub |
 | `MISTY_REED_POST` | 1978 (0x7BA) |  |  | Misty Reed Post |
-| `BLOODVENOM_POST_` | 1997 (0x7CD) |  |  | Bloodvenom Post |
-| `TALONBRANCH_GLADE_` | 1998 (0x7CE) |  |  | Talonbranch Glade |
+| `BLOODVENOM_POST` | 1997 (0x7CD) |  |  | Bloodvenom Post |
+| `TALONBRANCH_GLADE` | 1998 (0x7CE) |  |  | Talonbranch Glade |
 | `STRATHOLME` | 2017 (0x7E1) |  |  | Stratholme |
 | `QUEL_THALAS` | 2037 (0x7F5) |  |  | Quel'thalas |
 | `SCHOLOMANCE` | 2057 (0x809) |  |  | Scholomance |
@@ -5010,7 +5010,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `SUNGRAZE_PEAK` | 3509 (0xDB5) |  |  | Sungraze Peak |
 | `AMANI_CATACOMBS` | 3510 (0xDB6) |  |  | Amani Catacombs |
 | `TOWER_OF_THE_DAMNED` | 3511 (0xDB7) |  |  | Tower of the Damned |
-| `ZEBSORA` | 3512 (0xDB8) |  |  | Zeb'Sora |
+| `ZEB_SORA` | 3512 (0xDB8) |  |  | Zeb'Sora |
 | `LAKE_ELRENDAR1` | 3513 (0xDB9) |  |  | Lake Elrendar |
 | `THE_DEAD_SCAR1` | 3514 (0xDBA) |  |  | The Dead Scar |
 | `ELRENDAR_RIVER` | 3515 (0xDBB) |  |  | Elrendar River |
@@ -6329,7 +6329,7 @@ enum Area : u32 {
     DUSTFIRE_VALLEY = 1959;
     ZUL_GURUB1 = 1977;
     MISTY_REED_POST = 1978;
-    BLOODVENOM_POST_ = 1997;
+    BLOODVENOM_POST = 1997;
     TALONBRANCH_GLADE_ = 1998;
     STRATHOLME = 2017;
     QUEL_THALAS = 2037;
@@ -6686,7 +6686,7 @@ enum Area : u32 {
     SUNGRAZE_PEAK = 3509;
     AMANI_CATACOMBS = 3510;
     TOWER_OF_THE_DAMNED = 3511;
-    ZEBSORA = 3512;
+    ZEB_SORA = 3512;
     LAKE_ELRENDAR1 = 3513;
     THE_DEAD_SCAR1 = 3514;
     ELRENDAR_RIVER = 3515;
@@ -8644,7 +8644,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `DUSTFIRE_VALLEY` | 1959 (0x7A7) |  |  | Dustfire Valley |
 | `ZUL_GURUB1` | 1977 (0x7B9) |  |  | Zul'Gurub |
 | `MISTY_REED_POST` | 1978 (0x7BA) |  |  | Misty Reed Post |
-| `BLOODVENOM_POST_` | 1997 (0x7CD) |  |  | Bloodvenom Post |
+| `BLOODVENOM_POST` | 1997 (0x7CD) |  |  | Bloodvenom Post |
 | `TALONBRANCH_GLADE_` | 1998 (0x7CE) |  |  | Talonbranch Glade |
 | `STRATHOLME` | 2017 (0x7E1) |  |  | Stratholme |
 | `QUEL_THALAS` | 2037 (0x7F5) |  |  | Quel'thalas |
@@ -9001,7 +9001,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `SUNGRAZE_PEAK` | 3509 (0xDB5) |  |  | Sungraze Peak |
 | `AMANI_CATACOMBS` | 3510 (0xDB6) |  |  | Amani Catacombs |
 | `TOWER_OF_THE_DAMNED` | 3511 (0xDB7) |  |  | Tower of the Damned |
-| `ZEBSORA` | 3512 (0xDB8) |  |  | Zeb'Sora |
+| `ZEB_SORA` | 3512 (0xDB8) |  |  | Zeb'Sora |
 | `LAKE_ELRENDAR1` | 3513 (0xDB9) |  |  | Lake Elrendar |
 | `THE_DEAD_SCAR1` | 3514 (0xDBA) |  |  | The Dead Scar |
 | `ELRENDAR_RIVER` | 3515 (0xDBB) |  |  | Elrendar River |

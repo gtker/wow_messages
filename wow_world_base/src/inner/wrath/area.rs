@@ -794,7 +794,7 @@
 ///     DUSTFIRE_VALLEY = 1959;
 ///     ZUL_GURUB1 = 1977;
 ///     MISTY_REED_POST = 1978;
-///     BLOODVENOM_POST_ = 1997;
+///     BLOODVENOM_POST = 1997;
 ///     TALONBRANCH_GLADE_ = 1998;
 ///     STRATHOLME = 2017;
 ///     QUEL_THALAS = 2037;
@@ -1151,7 +1151,7 @@
 ///     SUNGRAZE_PEAK = 3509;
 ///     AMANI_CATACOMBS = 3510;
 ///     TOWER_OF_THE_DAMNED = 3511;
-///     ZEBSORA = 3512;
+///     ZEB_SORA = 3512;
 ///     LAKE_ELRENDAR1 = 3513;
 ///     THE_DEAD_SCAR1 = 3514;
 ///     ELRENDAR_RIVER = 3515;
@@ -3464,7 +3464,7 @@ pub enum Area {
     SungrazePeak,
     AmaniCatacombs,
     TowerOfTheDamned,
-    Zebsora,
+    ZebSora,
     LakeElrendar1,
     TheDeadScar1,
     ElrendarRiver,
@@ -5777,7 +5777,7 @@ impl Area {
             Self::SungrazePeak => 0xdb5,
             Self::AmaniCatacombs => 0xdb6,
             Self::TowerOfTheDamned => 0xdb7,
-            Self::Zebsora => 0xdb8,
+            Self::ZebSora => 0xdb8,
             Self::LakeElrendar1 => 0xdb9,
             Self::TheDeadScar1 => 0xdba,
             Self::ElrendarRiver => 0xdbb,
@@ -8099,7 +8099,7 @@ impl std::fmt::Display for Area {
             Self::SungrazePeak => f.write_str("Sungraze Peak"),
             Self::AmaniCatacombs => f.write_str("Amani Catacombs"),
             Self::TowerOfTheDamned => f.write_str("Tower of the Damned"),
-            Self::Zebsora => f.write_str("Zeb'Sora"),
+            Self::ZebSora => f.write_str("Zeb'Sora"),
             Self::LakeElrendar1 => f.write_str("Lake Elrendar"),
             Self::TheDeadScar1 => f.write_str("The Dead Scar"),
             Self::ElrendarRiver => f.write_str("Elrendar River"),
@@ -10415,7 +10415,7 @@ impl TryFrom<u32> for Area {
             3509 => Ok(Self::SungrazePeak),
             3510 => Ok(Self::AmaniCatacombs),
             3511 => Ok(Self::TowerOfTheDamned),
-            3512 => Ok(Self::Zebsora),
+            3512 => Ok(Self::ZebSora),
             3513 => Ok(Self::LakeElrendar1),
             3514 => Ok(Self::TheDeadScar1),
             3515 => Ok(Self::ElrendarRiver),

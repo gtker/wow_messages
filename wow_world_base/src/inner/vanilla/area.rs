@@ -102,15 +102,15 @@
 ///     GOLD_COAST_QUARRY = 113;
 ///     WESTFALL_LIGHTHOUSE = 115;
 ///     MISTY_VALLEY = 116;
-///     GROMGOL_BASE_CAMP = 117;
+///     GROM_GOL_BASE_CAMP = 117;
 ///     WHELGARS_EXCAVATION_SITE = 118;
 ///     WESTBROOK_GARRISON = 120;
 ///     TRANQUIL_GARDENS_CEMETERY = 121;
 ///     ZUULDAIA_RUINS = 122;
-///     BALLAL_RUINS = 123;
-///     KALAI_RUINS = 125;
+///     BAL_LAL_RUINS = 123;
+///     KAL_AI_RUINS = 125;
 ///     TKASHI_RUINS = 126;
-///     BALIAMAH_RUINS = 127;
+///     BALIA_MAH_RUINS = 127;
 ///     ZIATAJAI_RUINS = 128;
 ///     MIZJAH_RUINS = 129;
 ///     SILVERPINE_FOREST = 130;
@@ -125,7 +125,7 @@
 ///     EASTERN_PLAGUELANDS = 139;
 ///     TELDRASSIL = 141;
 ///     IRONBANDS_EXCAVATION_SITE = 142;
-///     MOGROSH_STRONGHOLD = 143;
+///     MO_GROSH_STRONGHOLD = 143;
 ///     THELSAMAR = 144;
 ///     ALGAZ_GATE = 145;
 ///     STONEWROUGHT_DAM = 146;
@@ -224,7 +224,7 @@
 ///     LAKE_AL_AMETH = 259;
 ///     STARBREEZE_VILLAGE = 260;
 ///     GNARLPINE_HOLD = 261;
-///     BANETHIL_BARROW_DEN = 262;
+///     BAN_ETHIL_BARROW_DEN = 262;
 ///     THE_CLEFT = 263;
 ///     THE_ORACLE_GLADE = 264;
 ///     WELLSPRING_RIVER = 265;
@@ -306,7 +306,7 @@
 ///     WILDHAMMER_KEEP = 349;
 ///     QUEL_DANIL_LODGE = 350;
 ///     SKULK_ROCK = 351;
-///     ZUNWATHA = 352;
+///     ZUN_WATHA = 352;
 ///     SHADRA_ALOR = 353;
 ///     JINTHA_ALOR = 354;
 ///     THE_ALTAR_OF_ZUL = 355;
@@ -321,7 +321,7 @@
 ///     THE_DEN = 364;
 ///     BURNING_BLADE_COVEN = 365;
 ///     KOLKAR_CRAG = 366;
-///     SENJIN_VILLAGE = 367;
+///     SEN_JIN_VILLAGE = 367;
 ///     ECHO_ISLES = 368;
 ///     THUNDER_RIDGE = 369;
 ///     DRYGULCH_RAVINE = 370;
@@ -355,7 +355,7 @@
 ///     THOUSAND_NEEDLES = 400;
 ///     THE_TIDUS_STAIR = 401;
 ///     SHADY_REST_INN = 403;
-///     BAELDUN_DIGSITE = 404;
+///     BAEL_DUN_DIGSITE = 404;
 ///     DESOLACE = 405;
 ///     STONETALON_MOUNTAINS = 406;
 ///     ORGRIMMAR_UNUSED = 407;
@@ -428,7 +428,7 @@
 ///     RUINS_OF_JUBUWAL = 477;
 ///     POOLS_OF_ARLITHRIEN = 478;
 ///     THE_RUSTMAUL_DIG_SITE = 479;
-///     CAMP_ETHOK = 480;
+///     CAMP_E_THOK = 480;
 ///     SPLITHOOF_CRAG = 481;
 ///     HIGHPERCH = 482;
 ///     THE_SCREECHING_CANYON = 483;
@@ -478,7 +478,7 @@
 ///     BEGGARS_HAUNT = 576;
 ///     KODO_GRAVEYARD = 596;
 ///     GHOST_WALKER_POST = 597;
-///     SARTHERIS_STRAND = 598;
+///     SAR_THERIS_STRAND = 598;
 ///     THUNDER_AXE_FORTRESS = 599;
 ///     BOLGANS_HOLE = 600;
 ///     MANNOROC_COVEN = 602;
@@ -495,7 +495,7 @@
 ///     HIDDEN_PATH = 638;
 ///     SPIRIT_ROCK = 639;
 ///     SHRINE_OF_THE_DORMANT_FLAME = 640;
-///     LAKE_ELUNEARA = 656;
+///     LAKE_ELUNE_ARA = 656;
 ///     THE_HARBORAGE = 657;
 ///     OUTLAND = 676;
 ///     CRAFTSMENS_TERRACE_UNUSED = 696;
@@ -504,7 +504,7 @@
 ///     TEMPLE_OF_ELUNE_UNUSED = 699;
 ///     CENARION_ENCLAVE_UNUSED = 700;
 ///     WARRIORS_TERRACE_UNUSED = 701;
-///     RUTTHERAN_VILLAGE = 702;
+///     RUT_THERAN_VILLAGE = 702;
 ///     IRONBANDS_COMPOUND = 716;
 ///     THE_STOCKADE = 717;
 ///     WAILING_CAVERNS = 718;
@@ -512,7 +512,7 @@
 ///     FRAY_ISLAND = 720;
 ///     GNOMEREGAN1 = 721;
 ///     RAZORFEN_DOWNS0 = 722;
-///     BANETHIL_HOLLOW = 736;
+///     BAN_ETHIL_HOLLOW = 736;
 ///     SCARLET_MONASTERY = 796;
 ///     JERODS_LANDING = 797;
 ///     RIDGEPOINT_TOWER = 798;
@@ -701,12 +701,12 @@
 ///     BLACKROCK_SPIRE = 1583;
 ///     BLACKROCK_DEPTHS = 1584;
 ///     RAPTOR_GROUNDS_UNUSED = 1597;
-///     GROLDOM_FARM_UNUSED = 1598;
+///     GROL_DOM_FARM_UNUSED = 1598;
 ///     MORSHAN_BASE_CAMP = 1599;
 ///     HONORS_STAND_UNUSED = 1600;
 ///     BLACKTHORN_RIDGE_UNUSED = 1601;
 ///     BRAMBLESCAR_UNUSED = 1602;
-///     AGAMAGOR_UNUSED = 1603;
+///     AGAMA_GOR_UNUSED = 1603;
 ///     VALLEY_OF_HEROES = 1617;
 ///     ORGRIMMAR = 1637;
 ///     THUNDER_BLUFF = 1638;
@@ -730,15 +730,15 @@
 ///     RAPTOR_GROUNDS = 1697;
 ///     BRAMBLESCAR = 1698;
 ///     THORN_HILL = 1699;
-///     AGAMAGOR = 1700;
+///     AGAMA_GOR = 1700;
 ///     BLACKTHORN_RIDGE = 1701;
 ///     HONORS_STAND = 1702;
 ///     THE_MORSHAN_RAMPART = 1703;
-///     GROLDOM_FARM = 1704;
+///     GROL_DOM_FARM = 1704;
 ///     RAZORFEN_KRAUL1 = 1717;
 ///     THE_GREAT_LIFT1 = 1718;
 ///     MISTVALE_VALLEY = 1737;
-///     NEKMANI_WELLSPRING = 1738;
+///     NEK_MANI_WELLSPRING = 1738;
 ///     BLOODSAIL_COMPOUND = 1739;
 ///     VENTURE_CO_BASE_CAMP = 1740;
 ///     GURUBASHI_ARENA = 1741;
@@ -760,14 +760,14 @@
 ///     SHRINE_OF_THE_DECEIVER = 1771;
 ///     ITHARIUSS_CAVE = 1777;
 ///     SORROWMURK = 1778;
-///     DRAENILDUR_VILLAGE = 1779;
+///     DRAENIL_DUR_VILLAGE = 1779;
 ///     SPLINTERSPEAR_JUNCTION = 1780;
 ///     STAGALBOG = 1797;
 ///     THE_SHIFTING_MIRE = 1798;
 ///     STAGALBOG_CAVE = 1817;
 ///     WITHERBARK_CAVERNS = 1837;
 ///     THORADINS_WALL2 = 1857;
-///     BOULDERGOR = 1858;
+///     BOULDER_GOR = 1858;
 ///     VALLEY_OF_FANGS = 1877;
 ///     THE_DUSTBOWL = 1878;
 ///     MIRAGE_FLATS = 1879;
@@ -775,13 +775,13 @@
 ///     SHINDIGGERS_CAMP = 1881;
 ///     PLAGUEMIST_RAVINE = 1882;
 ///     VALORWIND_LAKE = 1883;
-///     AGOLWATHA = 1884;
-///     HIRIWATHA = 1885;
+///     AGOL_WATHA = 1884;
+///     HIRI_WATHA = 1885;
 ///     THE_CREEPING_RUIN = 1886;
 ///     BOGENS_LEDGE = 1887;
 ///     THE_MAKERS_TERRACE = 1897;
 ///     DUSTWIND_GULCH = 1898;
-///     SHAOLWATHA = 1917;
+///     SHAOL_WATHA = 1917;
 ///     NOONSHADE_RUINS = 1937;
 ///     BROKEN_PILLAR = 1938;
 ///     ABYSSAL_SANDS = 1939;
@@ -815,7 +815,7 @@
 ///     GALLOWS_END_TAVERN = 2119;
 ///     THE_POOLS_OF_VISION_UNUSED = 2137;
 ///     DREADMIST_DEN = 2138;
-///     BAELDUN_KEEP = 2157;
+///     BAEL_DUN_KEEP = 2157;
 ///     EMBERSTRIFES_DEN = 2158;
 ///     ONYXIAS_LAIR = 2159;
 ///     WINDSHEAR_MINE = 2160;
@@ -927,7 +927,7 @@
 ///     MORGANS_VIGIL = 2418;
 ///     SLITHER_ROCK = 2419;
 ///     TERROR_WING_PATH = 2420;
-///     DRACODAR = 2421;
+///     DRACO_DAR = 2421;
 ///     RAGEFIRE_CHASM = 2437;
 ///     NIGHTSONG_WOODS = 2457;
 ///     THE_VEILED_SEA6 = 2477;
@@ -944,7 +944,7 @@
 ///     RUINS_OF_ISILDIEN = 2522;
 ///     GRIMTOTEM_POST = 2537;
 ///     CAMP_APARAJE = 2538;
-///     MALAKAJIN = 2539;
+///     MALAKA_JIN = 2539;
 ///     BOULDERSLIDE_RAVINE = 2540;
 ///     SISHIR_CANYON = 2541;
 ///     DIRE_MAUL0 = 2557;
@@ -992,7 +992,7 @@
 ///     ZORAMGAR_OUTPOST = 2897;
 ///     HALL_OF_LEGENDS = 2917;
 ///     CHAMPIONS_HALL = 2918;
-///     GROSHGOK_COMPOUND = 2937;
+///     GROSH_GOK_COMPOUND = 2937;
 ///     SLEEPING_GORGE = 2938;
 ///     IRONDEEP_MINE = 2957;
 ///     STONEHEARTH_OUTPOST = 2958;
@@ -1004,7 +1004,7 @@
 ///     WINTERAX_HOLD = 2964;
 ///     ICEBLOOD_GARRISON = 2977;
 ///     FROSTWOLF_KEEP = 2978;
-///     TORKREN_FARM = 2979;
+///     TOR_KREN_FARM = 2979;
 ///     FROST_DAGGER_PASS = 3017;
 ///     IRONSTONE_CAMP = 3037;
 ///     WEAZELS_CRATER = 3038;
@@ -1048,8 +1048,8 @@
 ///     YOJAMBA_ISLE = 3357;
 ///     ARATHI_BASIN = 3358;
 ///     THE_COIL = 3377;
-///     ALTAR_OF_HIREEK = 3378;
-///     SHADRAZAAR = 3379;
+///     ALTAR_OF_HIR_EEK = 3378;
+///     SHADRA_ZAAR = 3379;
 ///     HAKKARI_GROUNDS = 3380;
 ///     NAZE_OF_SHIRVALLAH = 3381;
 ///     TEMPLE_OF_BETHEKK = 3382;
@@ -1189,15 +1189,15 @@ pub enum Area {
     GoldCoastQuarry,
     WestfallLighthouse,
     MistyValley,
-    GromgolBaseCamp,
+    GromGolBaseCamp,
     WhelgarsExcavationSite,
     WestbrookGarrison,
     TranquilGardensCemetery,
     ZuuldaiaRuins,
-    BallalRuins,
-    KalaiRuins,
+    BalLalRuins,
+    KalAiRuins,
     TkashiRuins,
-    BaliamahRuins,
+    BaliaMahRuins,
     ZiatajaiRuins,
     MizjahRuins,
     SilverpineForest,
@@ -1212,7 +1212,7 @@ pub enum Area {
     EasternPlaguelands,
     Teldrassil,
     IronbandsExcavationSite,
-    MogroshStronghold,
+    MoGroshStronghold,
     Thelsamar,
     AlgazGate,
     StonewroughtDam,
@@ -1311,7 +1311,7 @@ pub enum Area {
     LakeAlAmeth,
     StarbreezeVillage,
     GnarlpineHold,
-    BanethilBarrowDen,
+    BanEthilBarrowDen,
     TheCleft,
     TheOracleGlade,
     WellspringRiver,
@@ -1393,7 +1393,7 @@ pub enum Area {
     WildhammerKeep,
     QuelDanilLodge,
     SkulkRock,
-    Zunwatha,
+    ZunWatha,
     ShadraAlor,
     JinthaAlor,
     TheAltarOfZul,
@@ -1408,7 +1408,7 @@ pub enum Area {
     TheDen,
     BurningBladeCoven,
     KolkarCrag,
-    SenjinVillage,
+    SenJinVillage,
     EchoIsles,
     ThunderRidge,
     DrygulchRavine,
@@ -1442,7 +1442,7 @@ pub enum Area {
     ThousandNeedles,
     TheTidusStair,
     ShadyRestInn,
-    BaeldunDigsite,
+    BaelDunDigsite,
     Desolace,
     StonetalonMountains,
     OrgrimmarUnused,
@@ -1515,7 +1515,7 @@ pub enum Area {
     RuinsOfJubuwal,
     PoolsOfArlithrien,
     TheRustmaulDigSite,
-    CampEthok,
+    CampEThok,
     SplithoofCrag,
     Highperch,
     TheScreechingCanyon,
@@ -1565,7 +1565,7 @@ pub enum Area {
     BeggarsHaunt,
     KodoGraveyard,
     GhostWalkerPost,
-    SartherisStrand,
+    SarTherisStrand,
     ThunderAxeFortress,
     BolgansHole,
     MannorocCoven,
@@ -1582,7 +1582,7 @@ pub enum Area {
     HiddenPath,
     SpiritRock,
     ShrineOfTheDormantFlame,
-    LakeEluneara,
+    LakeEluneAra,
     TheHarborage,
     Outland,
     CraftsmensTerraceUnused,
@@ -1591,7 +1591,7 @@ pub enum Area {
     TempleOfEluneUnused,
     CenarionEnclaveUnused,
     WarriorsTerraceUnused,
-    RuttheranVillage,
+    RutTheranVillage,
     IronbandsCompound,
     TheStockade,
     WailingCaverns,
@@ -1599,7 +1599,7 @@ pub enum Area {
     FrayIsland,
     Gnomeregan1,
     RazorfenDowns0,
-    BanethilHollow,
+    BanEthilHollow,
     ScarletMonastery,
     JerodsLanding,
     RidgepointTower,
@@ -1788,12 +1788,12 @@ pub enum Area {
     BlackrockSpire,
     BlackrockDepths,
     RaptorGroundsUnused,
-    GroldomFarmUnused,
+    GrolDomFarmUnused,
     MorshanBaseCamp,
     HonorsStandUnused,
     BlackthornRidgeUnused,
     BramblescarUnused,
-    AgamagorUnused,
+    AgamaGorUnused,
     ValleyOfHeroes,
     Orgrimmar,
     ThunderBluff,
@@ -1817,15 +1817,15 @@ pub enum Area {
     RaptorGrounds,
     Bramblescar,
     ThornHill,
-    Agamagor,
+    AgamaGor,
     BlackthornRidge,
     HonorsStand,
     TheMorshanRampart,
-    GroldomFarm,
+    GrolDomFarm,
     RazorfenKraul1,
     TheGreatLift1,
     MistvaleValley,
-    NekmaniWellspring,
+    NekManiWellspring,
     BloodsailCompound,
     VentureCoBaseCamp,
     GurubashiArena,
@@ -1847,14 +1847,14 @@ pub enum Area {
     ShrineOfTheDeceiver,
     IthariussCave,
     Sorrowmurk,
-    DraenildurVillage,
+    DraenilDurVillage,
     SplinterspearJunction,
     Stagalbog,
     TheShiftingMire,
     StagalbogCave,
     WitherbarkCaverns,
     ThoradinsWall2,
-    Bouldergor,
+    BoulderGor,
     ValleyOfFangs,
     TheDustbowl,
     MirageFlats,
@@ -1862,13 +1862,13 @@ pub enum Area {
     ShindiggersCamp,
     PlaguemistRavine,
     ValorwindLake,
-    Agolwatha,
-    Hiriwatha,
+    AgolWatha,
+    HiriWatha,
     TheCreepingRuin,
     BogensLedge,
     TheMakersTerrace,
     DustwindGulch,
-    Shaolwatha,
+    ShaolWatha,
     NoonshadeRuins,
     BrokenPillar,
     AbyssalSands,
@@ -1902,7 +1902,7 @@ pub enum Area {
     GallowsEndTavern,
     ThePoolsOfVisionUnused,
     DreadmistDen,
-    BaeldunKeep,
+    BaelDunKeep,
     EmberstrifesDen,
     OnyxiasLair,
     WindshearMine,
@@ -2014,7 +2014,7 @@ pub enum Area {
     MorgansVigil,
     SlitherRock,
     TerrorWingPath,
-    Dracodar,
+    DracoDar,
     RagefireChasm,
     NightsongWoods,
     TheVeiledSea6,
@@ -2031,7 +2031,7 @@ pub enum Area {
     RuinsOfIsildien,
     GrimtotemPost,
     CampAparaje,
-    Malakajin,
+    MalakaJin,
     BoulderslideRavine,
     SishirCanyon,
     DireMaul0,
@@ -2079,7 +2079,7 @@ pub enum Area {
     ZoramgarOutpost,
     HallOfLegends,
     ChampionsHall,
-    GroshgokCompound,
+    GroshGokCompound,
     SleepingGorge,
     IrondeepMine,
     StonehearthOutpost,
@@ -2091,7 +2091,7 @@ pub enum Area {
     WinteraxHold,
     IcebloodGarrison,
     FrostwolfKeep,
-    TorkrenFarm,
+    TorKrenFarm,
     FrostDaggerPass,
     IronstoneCamp,
     WeazelsCrater,
@@ -2135,8 +2135,8 @@ pub enum Area {
     YojambaIsle,
     ArathiBasin,
     TheCoil,
-    AltarOfHireek,
-    Shadrazaar,
+    AltarOfHirEek,
+    ShadraZaar,
     HakkariGrounds,
     NazeOfShirvallah,
     TempleOfBethekk,
@@ -2276,15 +2276,15 @@ impl Area {
             Self::GoldCoastQuarry => 0x71,
             Self::WestfallLighthouse => 0x73,
             Self::MistyValley => 0x74,
-            Self::GromgolBaseCamp => 0x75,
+            Self::GromGolBaseCamp => 0x75,
             Self::WhelgarsExcavationSite => 0x76,
             Self::WestbrookGarrison => 0x78,
             Self::TranquilGardensCemetery => 0x79,
             Self::ZuuldaiaRuins => 0x7a,
-            Self::BallalRuins => 0x7b,
-            Self::KalaiRuins => 0x7d,
+            Self::BalLalRuins => 0x7b,
+            Self::KalAiRuins => 0x7d,
             Self::TkashiRuins => 0x7e,
-            Self::BaliamahRuins => 0x7f,
+            Self::BaliaMahRuins => 0x7f,
             Self::ZiatajaiRuins => 0x80,
             Self::MizjahRuins => 0x81,
             Self::SilverpineForest => 0x82,
@@ -2299,7 +2299,7 @@ impl Area {
             Self::EasternPlaguelands => 0x8b,
             Self::Teldrassil => 0x8d,
             Self::IronbandsExcavationSite => 0x8e,
-            Self::MogroshStronghold => 0x8f,
+            Self::MoGroshStronghold => 0x8f,
             Self::Thelsamar => 0x90,
             Self::AlgazGate => 0x91,
             Self::StonewroughtDam => 0x92,
@@ -2398,7 +2398,7 @@ impl Area {
             Self::LakeAlAmeth => 0x103,
             Self::StarbreezeVillage => 0x104,
             Self::GnarlpineHold => 0x105,
-            Self::BanethilBarrowDen => 0x106,
+            Self::BanEthilBarrowDen => 0x106,
             Self::TheCleft => 0x107,
             Self::TheOracleGlade => 0x108,
             Self::WellspringRiver => 0x109,
@@ -2480,7 +2480,7 @@ impl Area {
             Self::WildhammerKeep => 0x15d,
             Self::QuelDanilLodge => 0x15e,
             Self::SkulkRock => 0x15f,
-            Self::Zunwatha => 0x160,
+            Self::ZunWatha => 0x160,
             Self::ShadraAlor => 0x161,
             Self::JinthaAlor => 0x162,
             Self::TheAltarOfZul => 0x163,
@@ -2495,7 +2495,7 @@ impl Area {
             Self::TheDen => 0x16c,
             Self::BurningBladeCoven => 0x16d,
             Self::KolkarCrag => 0x16e,
-            Self::SenjinVillage => 0x16f,
+            Self::SenJinVillage => 0x16f,
             Self::EchoIsles => 0x170,
             Self::ThunderRidge => 0x171,
             Self::DrygulchRavine => 0x172,
@@ -2529,7 +2529,7 @@ impl Area {
             Self::ThousandNeedles => 0x190,
             Self::TheTidusStair => 0x191,
             Self::ShadyRestInn => 0x193,
-            Self::BaeldunDigsite => 0x194,
+            Self::BaelDunDigsite => 0x194,
             Self::Desolace => 0x195,
             Self::StonetalonMountains => 0x196,
             Self::OrgrimmarUnused => 0x197,
@@ -2602,7 +2602,7 @@ impl Area {
             Self::RuinsOfJubuwal => 0x1dd,
             Self::PoolsOfArlithrien => 0x1de,
             Self::TheRustmaulDigSite => 0x1df,
-            Self::CampEthok => 0x1e0,
+            Self::CampEThok => 0x1e0,
             Self::SplithoofCrag => 0x1e1,
             Self::Highperch => 0x1e2,
             Self::TheScreechingCanyon => 0x1e3,
@@ -2652,7 +2652,7 @@ impl Area {
             Self::BeggarsHaunt => 0x240,
             Self::KodoGraveyard => 0x254,
             Self::GhostWalkerPost => 0x255,
-            Self::SartherisStrand => 0x256,
+            Self::SarTherisStrand => 0x256,
             Self::ThunderAxeFortress => 0x257,
             Self::BolgansHole => 0x258,
             Self::MannorocCoven => 0x25a,
@@ -2669,7 +2669,7 @@ impl Area {
             Self::HiddenPath => 0x27e,
             Self::SpiritRock => 0x27f,
             Self::ShrineOfTheDormantFlame => 0x280,
-            Self::LakeEluneara => 0x290,
+            Self::LakeEluneAra => 0x290,
             Self::TheHarborage => 0x291,
             Self::Outland => 0x2a4,
             Self::CraftsmensTerraceUnused => 0x2b8,
@@ -2678,7 +2678,7 @@ impl Area {
             Self::TempleOfEluneUnused => 0x2bb,
             Self::CenarionEnclaveUnused => 0x2bc,
             Self::WarriorsTerraceUnused => 0x2bd,
-            Self::RuttheranVillage => 0x2be,
+            Self::RutTheranVillage => 0x2be,
             Self::IronbandsCompound => 0x2cc,
             Self::TheStockade => 0x2cd,
             Self::WailingCaverns => 0x2ce,
@@ -2686,7 +2686,7 @@ impl Area {
             Self::FrayIsland => 0x2d0,
             Self::Gnomeregan1 => 0x2d1,
             Self::RazorfenDowns0 => 0x2d2,
-            Self::BanethilHollow => 0x2e0,
+            Self::BanEthilHollow => 0x2e0,
             Self::ScarletMonastery => 0x31c,
             Self::JerodsLanding => 0x31d,
             Self::RidgepointTower => 0x31e,
@@ -2875,12 +2875,12 @@ impl Area {
             Self::BlackrockSpire => 0x62f,
             Self::BlackrockDepths => 0x630,
             Self::RaptorGroundsUnused => 0x63d,
-            Self::GroldomFarmUnused => 0x63e,
+            Self::GrolDomFarmUnused => 0x63e,
             Self::MorshanBaseCamp => 0x63f,
             Self::HonorsStandUnused => 0x640,
             Self::BlackthornRidgeUnused => 0x641,
             Self::BramblescarUnused => 0x642,
-            Self::AgamagorUnused => 0x643,
+            Self::AgamaGorUnused => 0x643,
             Self::ValleyOfHeroes => 0x651,
             Self::Orgrimmar => 0x665,
             Self::ThunderBluff => 0x666,
@@ -2904,15 +2904,15 @@ impl Area {
             Self::RaptorGrounds => 0x6a1,
             Self::Bramblescar => 0x6a2,
             Self::ThornHill => 0x6a3,
-            Self::Agamagor => 0x6a4,
+            Self::AgamaGor => 0x6a4,
             Self::BlackthornRidge => 0x6a5,
             Self::HonorsStand => 0x6a6,
             Self::TheMorshanRampart => 0x6a7,
-            Self::GroldomFarm => 0x6a8,
+            Self::GrolDomFarm => 0x6a8,
             Self::RazorfenKraul1 => 0x6b5,
             Self::TheGreatLift1 => 0x6b6,
             Self::MistvaleValley => 0x6c9,
-            Self::NekmaniWellspring => 0x6ca,
+            Self::NekManiWellspring => 0x6ca,
             Self::BloodsailCompound => 0x6cb,
             Self::VentureCoBaseCamp => 0x6cc,
             Self::GurubashiArena => 0x6cd,
@@ -2934,14 +2934,14 @@ impl Area {
             Self::ShrineOfTheDeceiver => 0x6eb,
             Self::IthariussCave => 0x6f1,
             Self::Sorrowmurk => 0x6f2,
-            Self::DraenildurVillage => 0x6f3,
+            Self::DraenilDurVillage => 0x6f3,
             Self::SplinterspearJunction => 0x6f4,
             Self::Stagalbog => 0x705,
             Self::TheShiftingMire => 0x706,
             Self::StagalbogCave => 0x719,
             Self::WitherbarkCaverns => 0x72d,
             Self::ThoradinsWall2 => 0x741,
-            Self::Bouldergor => 0x742,
+            Self::BoulderGor => 0x742,
             Self::ValleyOfFangs => 0x755,
             Self::TheDustbowl => 0x756,
             Self::MirageFlats => 0x757,
@@ -2949,13 +2949,13 @@ impl Area {
             Self::ShindiggersCamp => 0x759,
             Self::PlaguemistRavine => 0x75a,
             Self::ValorwindLake => 0x75b,
-            Self::Agolwatha => 0x75c,
-            Self::Hiriwatha => 0x75d,
+            Self::AgolWatha => 0x75c,
+            Self::HiriWatha => 0x75d,
             Self::TheCreepingRuin => 0x75e,
             Self::BogensLedge => 0x75f,
             Self::TheMakersTerrace => 0x769,
             Self::DustwindGulch => 0x76a,
-            Self::Shaolwatha => 0x77d,
+            Self::ShaolWatha => 0x77d,
             Self::NoonshadeRuins => 0x791,
             Self::BrokenPillar => 0x792,
             Self::AbyssalSands => 0x793,
@@ -2989,7 +2989,7 @@ impl Area {
             Self::GallowsEndTavern => 0x847,
             Self::ThePoolsOfVisionUnused => 0x859,
             Self::DreadmistDen => 0x85a,
-            Self::BaeldunKeep => 0x86d,
+            Self::BaelDunKeep => 0x86d,
             Self::EmberstrifesDen => 0x86e,
             Self::OnyxiasLair => 0x86f,
             Self::WindshearMine => 0x870,
@@ -3101,7 +3101,7 @@ impl Area {
             Self::MorgansVigil => 0x972,
             Self::SlitherRock => 0x973,
             Self::TerrorWingPath => 0x974,
-            Self::Dracodar => 0x975,
+            Self::DracoDar => 0x975,
             Self::RagefireChasm => 0x985,
             Self::NightsongWoods => 0x999,
             Self::TheVeiledSea6 => 0x9ad,
@@ -3118,7 +3118,7 @@ impl Area {
             Self::RuinsOfIsildien => 0x9da,
             Self::GrimtotemPost => 0x9e9,
             Self::CampAparaje => 0x9ea,
-            Self::Malakajin => 0x9eb,
+            Self::MalakaJin => 0x9eb,
             Self::BoulderslideRavine => 0x9ec,
             Self::SishirCanyon => 0x9ed,
             Self::DireMaul0 => 0x9fd,
@@ -3166,7 +3166,7 @@ impl Area {
             Self::ZoramgarOutpost => 0xb51,
             Self::HallOfLegends => 0xb65,
             Self::ChampionsHall => 0xb66,
-            Self::GroshgokCompound => 0xb79,
+            Self::GroshGokCompound => 0xb79,
             Self::SleepingGorge => 0xb7a,
             Self::IrondeepMine => 0xb8d,
             Self::StonehearthOutpost => 0xb8e,
@@ -3178,7 +3178,7 @@ impl Area {
             Self::WinteraxHold => 0xb94,
             Self::IcebloodGarrison => 0xba1,
             Self::FrostwolfKeep => 0xba2,
-            Self::TorkrenFarm => 0xba3,
+            Self::TorKrenFarm => 0xba3,
             Self::FrostDaggerPass => 0xbc9,
             Self::IronstoneCamp => 0xbdd,
             Self::WeazelsCrater => 0xbde,
@@ -3222,8 +3222,8 @@ impl Area {
             Self::YojambaIsle => 0xd1d,
             Self::ArathiBasin => 0xd1e,
             Self::TheCoil => 0xd31,
-            Self::AltarOfHireek => 0xd32,
-            Self::Shadrazaar => 0xd33,
+            Self::AltarOfHirEek => 0xd32,
+            Self::ShadraZaar => 0xd33,
             Self::HakkariGrounds => 0xd34,
             Self::NazeOfShirvallah => 0xd35,
             Self::TempleOfBethekk => 0xd36,
@@ -3372,15 +3372,15 @@ impl std::fmt::Display for Area {
             Self::GoldCoastQuarry => f.write_str("Gold Coast Quarry"),
             Self::WestfallLighthouse => f.write_str("Westfall Lighthouse"),
             Self::MistyValley => f.write_str("Misty Valley"),
-            Self::GromgolBaseCamp => f.write_str("Grom'gol Base Camp"),
+            Self::GromGolBaseCamp => f.write_str("Grom'gol Base Camp"),
             Self::WhelgarsExcavationSite => f.write_str("Whelgar's Excavation Site"),
             Self::WestbrookGarrison => f.write_str("Westbrook Garrison"),
             Self::TranquilGardensCemetery => f.write_str("Tranquil Gardens Cemetery"),
             Self::ZuuldaiaRuins => f.write_str("Zuuldaia Ruins"),
-            Self::BallalRuins => f.write_str("Bal'lal Ruins"),
-            Self::KalaiRuins => f.write_str("Kal'ai Ruins"),
+            Self::BalLalRuins => f.write_str("Bal'lal Ruins"),
+            Self::KalAiRuins => f.write_str("Kal'ai Ruins"),
             Self::TkashiRuins => f.write_str("Tkashi Ruins"),
-            Self::BaliamahRuins => f.write_str("Balia'mah Ruins"),
+            Self::BaliaMahRuins => f.write_str("Balia'mah Ruins"),
             Self::ZiatajaiRuins => f.write_str("Ziata'jai Ruins"),
             Self::MizjahRuins => f.write_str("Mizjah Ruins"),
             Self::SilverpineForest => f.write_str("Silverpine Forest"),
@@ -3395,7 +3395,7 @@ impl std::fmt::Display for Area {
             Self::EasternPlaguelands => f.write_str("Eastern Plaguelands"),
             Self::Teldrassil => f.write_str("Teldrassil"),
             Self::IronbandsExcavationSite => f.write_str("Ironband's Excavation Site"),
-            Self::MogroshStronghold => f.write_str("Mo'grosh Stronghold"),
+            Self::MoGroshStronghold => f.write_str("Mo'grosh Stronghold"),
             Self::Thelsamar => f.write_str("Thelsamar"),
             Self::AlgazGate => f.write_str("Algaz Gate"),
             Self::StonewroughtDam => f.write_str("Stonewrought Dam"),
@@ -3494,7 +3494,7 @@ impl std::fmt::Display for Area {
             Self::LakeAlAmeth => f.write_str("Lake Al'Ameth"),
             Self::StarbreezeVillage => f.write_str("Starbreeze Village"),
             Self::GnarlpineHold => f.write_str("Gnarlpine Hold"),
-            Self::BanethilBarrowDen => f.write_str("Ban'ethil Barrow Den"),
+            Self::BanEthilBarrowDen => f.write_str("Ban'ethil Barrow Den"),
             Self::TheCleft => f.write_str("The Cleft"),
             Self::TheOracleGlade => f.write_str("The Oracle Glade"),
             Self::WellspringRiver => f.write_str("Wellspring River"),
@@ -3576,7 +3576,7 @@ impl std::fmt::Display for Area {
             Self::WildhammerKeep => f.write_str("Wildhammer Keep"),
             Self::QuelDanilLodge => f.write_str("Quel'Danil Lodge"),
             Self::SkulkRock => f.write_str("Skulk Rock"),
-            Self::Zunwatha => f.write_str("Zun'watha"),
+            Self::ZunWatha => f.write_str("Zun'watha"),
             Self::ShadraAlor => f.write_str("Shadra'Alor"),
             Self::JinthaAlor => f.write_str("Jintha'Alor"),
             Self::TheAltarOfZul => f.write_str("The Altar of Zul"),
@@ -3591,7 +3591,7 @@ impl std::fmt::Display for Area {
             Self::TheDen => f.write_str("The Den"),
             Self::BurningBladeCoven => f.write_str("Burning Blade Coven"),
             Self::KolkarCrag => f.write_str("Kolkar Crag"),
-            Self::SenjinVillage => f.write_str("Sen'jin Village"),
+            Self::SenJinVillage => f.write_str("Sen'jin Village"),
             Self::EchoIsles => f.write_str("Echo Isles"),
             Self::ThunderRidge => f.write_str("Thunder Ridge"),
             Self::DrygulchRavine => f.write_str("Drygulch Ravine"),
@@ -3625,7 +3625,7 @@ impl std::fmt::Display for Area {
             Self::ThousandNeedles => f.write_str("Thousand Needles"),
             Self::TheTidusStair => f.write_str("The Tidus Stair"),
             Self::ShadyRestInn => f.write_str("Shady Rest Inn"),
-            Self::BaeldunDigsite => f.write_str("Bael'dun Digsite"),
+            Self::BaelDunDigsite => f.write_str("Bael'dun Digsite"),
             Self::Desolace => f.write_str("Desolace"),
             Self::StonetalonMountains => f.write_str("Stonetalon Mountains"),
             Self::OrgrimmarUnused => f.write_str("Orgrimmar UNUSED"),
@@ -3698,7 +3698,7 @@ impl std::fmt::Display for Area {
             Self::RuinsOfJubuwal => f.write_str("Ruins of Jubuwal"),
             Self::PoolsOfArlithrien => f.write_str("Pools of Arlithrien"),
             Self::TheRustmaulDigSite => f.write_str("The Rustmaul Dig Site"),
-            Self::CampEthok => f.write_str("Camp E'thok"),
+            Self::CampEThok => f.write_str("Camp E'thok"),
             Self::SplithoofCrag => f.write_str("Splithoof Crag"),
             Self::Highperch => f.write_str("Highperch"),
             Self::TheScreechingCanyon => f.write_str("The Screeching Canyon"),
@@ -3748,7 +3748,7 @@ impl std::fmt::Display for Area {
             Self::BeggarsHaunt => f.write_str("Beggar's Haunt"),
             Self::KodoGraveyard => f.write_str("Kodo Graveyard"),
             Self::GhostWalkerPost => f.write_str("Ghost Walker Post"),
-            Self::SartherisStrand => f.write_str("Sar'theris Strand"),
+            Self::SarTherisStrand => f.write_str("Sar'theris Strand"),
             Self::ThunderAxeFortress => f.write_str("Thunder Axe Fortress"),
             Self::BolgansHole => f.write_str("Bolgan's Hole"),
             Self::MannorocCoven => f.write_str("Mannoroc Coven"),
@@ -3765,7 +3765,7 @@ impl std::fmt::Display for Area {
             Self::HiddenPath => f.write_str("Hidden Path"),
             Self::SpiritRock => f.write_str("Spirit Rock"),
             Self::ShrineOfTheDormantFlame => f.write_str("Shrine of the Dormant Flame"),
-            Self::LakeEluneara => f.write_str("Lake Elune'ara"),
+            Self::LakeEluneAra => f.write_str("Lake Elune'ara"),
             Self::TheHarborage => f.write_str("The Harborage"),
             Self::Outland => f.write_str("Outland"),
             Self::CraftsmensTerraceUnused => f.write_str("Craftsmen's Terrace UNUSED"),
@@ -3774,7 +3774,7 @@ impl std::fmt::Display for Area {
             Self::TempleOfEluneUnused => f.write_str("Temple of Elune UNUSED"),
             Self::CenarionEnclaveUnused => f.write_str("Cenarion Enclave UNUSED"),
             Self::WarriorsTerraceUnused => f.write_str("Warrior's Terrace UNUSED"),
-            Self::RuttheranVillage => f.write_str("Rut'theran Village"),
+            Self::RutTheranVillage => f.write_str("Rut'theran Village"),
             Self::IronbandsCompound => f.write_str("Ironband's Compound"),
             Self::TheStockade => f.write_str("The Stockade"),
             Self::WailingCaverns => f.write_str("Wailing Caverns"),
@@ -3782,7 +3782,7 @@ impl std::fmt::Display for Area {
             Self::FrayIsland => f.write_str("Fray Island"),
             Self::Gnomeregan1 => f.write_str("Gnomeregan"),
             Self::RazorfenDowns0 => f.write_str("Razorfen Downs"),
-            Self::BanethilHollow => f.write_str("Ban'ethil Hollow"),
+            Self::BanEthilHollow => f.write_str("Ban'ethil Hollow"),
             Self::ScarletMonastery => f.write_str("Scarlet Monastery"),
             Self::JerodsLanding => f.write_str("Jerod's Landing"),
             Self::RidgepointTower => f.write_str("Ridgepoint Tower"),
@@ -3971,12 +3971,12 @@ impl std::fmt::Display for Area {
             Self::BlackrockSpire => f.write_str("Blackrock Spire"),
             Self::BlackrockDepths => f.write_str("Blackrock Depths"),
             Self::RaptorGroundsUnused => f.write_str("Raptor Grounds UNUSED"),
-            Self::GroldomFarmUnused => f.write_str("Grol'dom Farm UNUSED"),
+            Self::GrolDomFarmUnused => f.write_str("Grol'dom Farm UNUSED"),
             Self::MorshanBaseCamp => f.write_str("Mor'shan Base Camp"),
             Self::HonorsStandUnused => f.write_str("Honor's Stand UNUSED"),
             Self::BlackthornRidgeUnused => f.write_str("Blackthorn Ridge UNUSED"),
             Self::BramblescarUnused => f.write_str("Bramblescar UNUSED"),
-            Self::AgamagorUnused => f.write_str("Agama'gor UNUSED"),
+            Self::AgamaGorUnused => f.write_str("Agama'gor UNUSED"),
             Self::ValleyOfHeroes => f.write_str("Valley of Heroes"),
             Self::Orgrimmar => f.write_str("Orgrimmar"),
             Self::ThunderBluff => f.write_str("Thunder Bluff"),
@@ -4000,15 +4000,15 @@ impl std::fmt::Display for Area {
             Self::RaptorGrounds => f.write_str("Raptor Grounds"),
             Self::Bramblescar => f.write_str("Bramblescar"),
             Self::ThornHill => f.write_str("Thorn Hill"),
-            Self::Agamagor => f.write_str("Agama'gor"),
+            Self::AgamaGor => f.write_str("Agama'gor"),
             Self::BlackthornRidge => f.write_str("Blackthorn Ridge"),
             Self::HonorsStand => f.write_str("Honor's Stand"),
             Self::TheMorshanRampart => f.write_str("The Mor'shan Rampart"),
-            Self::GroldomFarm => f.write_str("Grol'dom Farm"),
+            Self::GrolDomFarm => f.write_str("Grol'dom Farm"),
             Self::RazorfenKraul1 => f.write_str("Razorfen Kraul"),
             Self::TheGreatLift1 => f.write_str("The Great Lift"),
             Self::MistvaleValley => f.write_str("Mistvale Valley"),
-            Self::NekmaniWellspring => f.write_str("Nek'mani Wellspring"),
+            Self::NekManiWellspring => f.write_str("Nek'mani Wellspring"),
             Self::BloodsailCompound => f.write_str("Bloodsail Compound"),
             Self::VentureCoBaseCamp => f.write_str("Venture Co. Base Camp"),
             Self::GurubashiArena => f.write_str("Gurubashi Arena"),
@@ -4030,14 +4030,14 @@ impl std::fmt::Display for Area {
             Self::ShrineOfTheDeceiver => f.write_str("Shrine of the Deceiver"),
             Self::IthariussCave => f.write_str("Itharius's Cave"),
             Self::Sorrowmurk => f.write_str("Sorrowmurk"),
-            Self::DraenildurVillage => f.write_str("Draenil'dur Village"),
+            Self::DraenilDurVillage => f.write_str("Draenil'dur Village"),
             Self::SplinterspearJunction => f.write_str("Splinterspear Junction"),
             Self::Stagalbog => f.write_str("Stagalbog"),
             Self::TheShiftingMire => f.write_str("The Shifting Mire"),
             Self::StagalbogCave => f.write_str("Stagalbog Cave"),
             Self::WitherbarkCaverns => f.write_str("Witherbark Caverns"),
             Self::ThoradinsWall2 => f.write_str("Thoradin's Wall"),
-            Self::Bouldergor => f.write_str("Boulder'gor"),
+            Self::BoulderGor => f.write_str("Boulder'gor"),
             Self::ValleyOfFangs => f.write_str("Valley of Fangs"),
             Self::TheDustbowl => f.write_str("The Dustbowl"),
             Self::MirageFlats => f.write_str("Mirage Flats"),
@@ -4045,13 +4045,13 @@ impl std::fmt::Display for Area {
             Self::ShindiggersCamp => f.write_str("Shindigger's Camp"),
             Self::PlaguemistRavine => f.write_str("Plaguemist Ravine"),
             Self::ValorwindLake => f.write_str("Valorwind Lake"),
-            Self::Agolwatha => f.write_str("Agol'watha"),
-            Self::Hiriwatha => f.write_str("Hiri'watha"),
+            Self::AgolWatha => f.write_str("Agol'watha"),
+            Self::HiriWatha => f.write_str("Hiri'watha"),
             Self::TheCreepingRuin => f.write_str("The Creeping Ruin"),
             Self::BogensLedge => f.write_str("Bogen's Ledge"),
             Self::TheMakersTerrace => f.write_str("The Maker's Terrace"),
             Self::DustwindGulch => f.write_str("Dustwind Gulch"),
-            Self::Shaolwatha => f.write_str("Shaol'watha"),
+            Self::ShaolWatha => f.write_str("Shaol'watha"),
             Self::NoonshadeRuins => f.write_str("Noonshade Ruins"),
             Self::BrokenPillar => f.write_str("Broken Pillar"),
             Self::AbyssalSands => f.write_str("Abyssal Sands"),
@@ -4085,7 +4085,7 @@ impl std::fmt::Display for Area {
             Self::GallowsEndTavern => f.write_str("Gallows' End Tavern"),
             Self::ThePoolsOfVisionUnused => f.write_str("The Pools of VisionUNUSED"),
             Self::DreadmistDen => f.write_str("Dreadmist Den"),
-            Self::BaeldunKeep => f.write_str("Bael'dun Keep"),
+            Self::BaelDunKeep => f.write_str("Bael'dun Keep"),
             Self::EmberstrifesDen => f.write_str("Emberstrife's Den"),
             Self::OnyxiasLair => f.write_str("Onyxia's Lair"),
             Self::WindshearMine => f.write_str("Windshear Mine"),
@@ -4197,7 +4197,7 @@ impl std::fmt::Display for Area {
             Self::MorgansVigil => f.write_str("Morgan's Vigil"),
             Self::SlitherRock => f.write_str("Slither Rock"),
             Self::TerrorWingPath => f.write_str("Terror Wing Path"),
-            Self::Dracodar => f.write_str("Draco'dar"),
+            Self::DracoDar => f.write_str("Draco'dar"),
             Self::RagefireChasm => f.write_str("Ragefire Chasm"),
             Self::NightsongWoods => f.write_str("Nightsong Woods"),
             Self::TheVeiledSea6 => f.write_str("The Veiled Sea"),
@@ -4214,7 +4214,7 @@ impl std::fmt::Display for Area {
             Self::RuinsOfIsildien => f.write_str("Ruins of Isildien"),
             Self::GrimtotemPost => f.write_str("Grimtotem Post"),
             Self::CampAparaje => f.write_str("Camp Aparaje"),
-            Self::Malakajin => f.write_str("Malaka'jin"),
+            Self::MalakaJin => f.write_str("Malaka'jin"),
             Self::BoulderslideRavine => f.write_str("Boulderslide Ravine"),
             Self::SishirCanyon => f.write_str("Sishir Canyon"),
             Self::DireMaul0 => f.write_str("Dire Maul"),
@@ -4262,7 +4262,7 @@ impl std::fmt::Display for Area {
             Self::ZoramgarOutpost => f.write_str("Zoram'gar Outpost"),
             Self::HallOfLegends => f.write_str("Hall of Legends"),
             Self::ChampionsHall => f.write_str("Champions' Hall"),
-            Self::GroshgokCompound => f.write_str("Grosh'gok Compound"),
+            Self::GroshGokCompound => f.write_str("Grosh'gok Compound"),
             Self::SleepingGorge => f.write_str("Sleeping Gorge"),
             Self::IrondeepMine => f.write_str("Irondeep Mine"),
             Self::StonehearthOutpost => f.write_str("Stonehearth Outpost"),
@@ -4274,7 +4274,7 @@ impl std::fmt::Display for Area {
             Self::WinteraxHold => f.write_str("Winterax Hold"),
             Self::IcebloodGarrison => f.write_str("Iceblood Garrison"),
             Self::FrostwolfKeep => f.write_str("Frostwolf Keep"),
-            Self::TorkrenFarm => f.write_str("Tor'kren Farm"),
+            Self::TorKrenFarm => f.write_str("Tor'kren Farm"),
             Self::FrostDaggerPass => f.write_str("Frost Dagger Pass"),
             Self::IronstoneCamp => f.write_str("Ironstone Camp"),
             Self::WeazelsCrater => f.write_str("Weazel's Crater"),
@@ -4318,8 +4318,8 @@ impl std::fmt::Display for Area {
             Self::YojambaIsle => f.write_str("Yojamba Isle"),
             Self::ArathiBasin => f.write_str("Arathi Basin"),
             Self::TheCoil => f.write_str("The Coil"),
-            Self::AltarOfHireek => f.write_str("Altar of Hir'eek"),
-            Self::Shadrazaar => f.write_str("Shadra'zaar"),
+            Self::AltarOfHirEek => f.write_str("Altar of Hir'eek"),
+            Self::ShadraZaar => f.write_str("Shadra'zaar"),
             Self::HakkariGrounds => f.write_str("Hakkari Grounds"),
             Self::NazeOfShirvallah => f.write_str("Naze of Shirvallah"),
             Self::TempleOfBethekk => f.write_str("Temple of Bethekk"),
@@ -4462,15 +4462,15 @@ impl TryFrom<u32> for Area {
             113 => Ok(Self::GoldCoastQuarry),
             115 => Ok(Self::WestfallLighthouse),
             116 => Ok(Self::MistyValley),
-            117 => Ok(Self::GromgolBaseCamp),
+            117 => Ok(Self::GromGolBaseCamp),
             118 => Ok(Self::WhelgarsExcavationSite),
             120 => Ok(Self::WestbrookGarrison),
             121 => Ok(Self::TranquilGardensCemetery),
             122 => Ok(Self::ZuuldaiaRuins),
-            123 => Ok(Self::BallalRuins),
-            125 => Ok(Self::KalaiRuins),
+            123 => Ok(Self::BalLalRuins),
+            125 => Ok(Self::KalAiRuins),
             126 => Ok(Self::TkashiRuins),
-            127 => Ok(Self::BaliamahRuins),
+            127 => Ok(Self::BaliaMahRuins),
             128 => Ok(Self::ZiatajaiRuins),
             129 => Ok(Self::MizjahRuins),
             130 => Ok(Self::SilverpineForest),
@@ -4485,7 +4485,7 @@ impl TryFrom<u32> for Area {
             139 => Ok(Self::EasternPlaguelands),
             141 => Ok(Self::Teldrassil),
             142 => Ok(Self::IronbandsExcavationSite),
-            143 => Ok(Self::MogroshStronghold),
+            143 => Ok(Self::MoGroshStronghold),
             144 => Ok(Self::Thelsamar),
             145 => Ok(Self::AlgazGate),
             146 => Ok(Self::StonewroughtDam),
@@ -4584,7 +4584,7 @@ impl TryFrom<u32> for Area {
             259 => Ok(Self::LakeAlAmeth),
             260 => Ok(Self::StarbreezeVillage),
             261 => Ok(Self::GnarlpineHold),
-            262 => Ok(Self::BanethilBarrowDen),
+            262 => Ok(Self::BanEthilBarrowDen),
             263 => Ok(Self::TheCleft),
             264 => Ok(Self::TheOracleGlade),
             265 => Ok(Self::WellspringRiver),
@@ -4666,7 +4666,7 @@ impl TryFrom<u32> for Area {
             349 => Ok(Self::WildhammerKeep),
             350 => Ok(Self::QuelDanilLodge),
             351 => Ok(Self::SkulkRock),
-            352 => Ok(Self::Zunwatha),
+            352 => Ok(Self::ZunWatha),
             353 => Ok(Self::ShadraAlor),
             354 => Ok(Self::JinthaAlor),
             355 => Ok(Self::TheAltarOfZul),
@@ -4681,7 +4681,7 @@ impl TryFrom<u32> for Area {
             364 => Ok(Self::TheDen),
             365 => Ok(Self::BurningBladeCoven),
             366 => Ok(Self::KolkarCrag),
-            367 => Ok(Self::SenjinVillage),
+            367 => Ok(Self::SenJinVillage),
             368 => Ok(Self::EchoIsles),
             369 => Ok(Self::ThunderRidge),
             370 => Ok(Self::DrygulchRavine),
@@ -4715,7 +4715,7 @@ impl TryFrom<u32> for Area {
             400 => Ok(Self::ThousandNeedles),
             401 => Ok(Self::TheTidusStair),
             403 => Ok(Self::ShadyRestInn),
-            404 => Ok(Self::BaeldunDigsite),
+            404 => Ok(Self::BaelDunDigsite),
             405 => Ok(Self::Desolace),
             406 => Ok(Self::StonetalonMountains),
             407 => Ok(Self::OrgrimmarUnused),
@@ -4788,7 +4788,7 @@ impl TryFrom<u32> for Area {
             477 => Ok(Self::RuinsOfJubuwal),
             478 => Ok(Self::PoolsOfArlithrien),
             479 => Ok(Self::TheRustmaulDigSite),
-            480 => Ok(Self::CampEthok),
+            480 => Ok(Self::CampEThok),
             481 => Ok(Self::SplithoofCrag),
             482 => Ok(Self::Highperch),
             483 => Ok(Self::TheScreechingCanyon),
@@ -4838,7 +4838,7 @@ impl TryFrom<u32> for Area {
             576 => Ok(Self::BeggarsHaunt),
             596 => Ok(Self::KodoGraveyard),
             597 => Ok(Self::GhostWalkerPost),
-            598 => Ok(Self::SartherisStrand),
+            598 => Ok(Self::SarTherisStrand),
             599 => Ok(Self::ThunderAxeFortress),
             600 => Ok(Self::BolgansHole),
             602 => Ok(Self::MannorocCoven),
@@ -4855,7 +4855,7 @@ impl TryFrom<u32> for Area {
             638 => Ok(Self::HiddenPath),
             639 => Ok(Self::SpiritRock),
             640 => Ok(Self::ShrineOfTheDormantFlame),
-            656 => Ok(Self::LakeEluneara),
+            656 => Ok(Self::LakeEluneAra),
             657 => Ok(Self::TheHarborage),
             676 => Ok(Self::Outland),
             696 => Ok(Self::CraftsmensTerraceUnused),
@@ -4864,7 +4864,7 @@ impl TryFrom<u32> for Area {
             699 => Ok(Self::TempleOfEluneUnused),
             700 => Ok(Self::CenarionEnclaveUnused),
             701 => Ok(Self::WarriorsTerraceUnused),
-            702 => Ok(Self::RuttheranVillage),
+            702 => Ok(Self::RutTheranVillage),
             716 => Ok(Self::IronbandsCompound),
             717 => Ok(Self::TheStockade),
             718 => Ok(Self::WailingCaverns),
@@ -4872,7 +4872,7 @@ impl TryFrom<u32> for Area {
             720 => Ok(Self::FrayIsland),
             721 => Ok(Self::Gnomeregan1),
             722 => Ok(Self::RazorfenDowns0),
-            736 => Ok(Self::BanethilHollow),
+            736 => Ok(Self::BanEthilHollow),
             796 => Ok(Self::ScarletMonastery),
             797 => Ok(Self::JerodsLanding),
             798 => Ok(Self::RidgepointTower),
@@ -5061,12 +5061,12 @@ impl TryFrom<u32> for Area {
             1583 => Ok(Self::BlackrockSpire),
             1584 => Ok(Self::BlackrockDepths),
             1597 => Ok(Self::RaptorGroundsUnused),
-            1598 => Ok(Self::GroldomFarmUnused),
+            1598 => Ok(Self::GrolDomFarmUnused),
             1599 => Ok(Self::MorshanBaseCamp),
             1600 => Ok(Self::HonorsStandUnused),
             1601 => Ok(Self::BlackthornRidgeUnused),
             1602 => Ok(Self::BramblescarUnused),
-            1603 => Ok(Self::AgamagorUnused),
+            1603 => Ok(Self::AgamaGorUnused),
             1617 => Ok(Self::ValleyOfHeroes),
             1637 => Ok(Self::Orgrimmar),
             1638 => Ok(Self::ThunderBluff),
@@ -5090,15 +5090,15 @@ impl TryFrom<u32> for Area {
             1697 => Ok(Self::RaptorGrounds),
             1698 => Ok(Self::Bramblescar),
             1699 => Ok(Self::ThornHill),
-            1700 => Ok(Self::Agamagor),
+            1700 => Ok(Self::AgamaGor),
             1701 => Ok(Self::BlackthornRidge),
             1702 => Ok(Self::HonorsStand),
             1703 => Ok(Self::TheMorshanRampart),
-            1704 => Ok(Self::GroldomFarm),
+            1704 => Ok(Self::GrolDomFarm),
             1717 => Ok(Self::RazorfenKraul1),
             1718 => Ok(Self::TheGreatLift1),
             1737 => Ok(Self::MistvaleValley),
-            1738 => Ok(Self::NekmaniWellspring),
+            1738 => Ok(Self::NekManiWellspring),
             1739 => Ok(Self::BloodsailCompound),
             1740 => Ok(Self::VentureCoBaseCamp),
             1741 => Ok(Self::GurubashiArena),
@@ -5120,14 +5120,14 @@ impl TryFrom<u32> for Area {
             1771 => Ok(Self::ShrineOfTheDeceiver),
             1777 => Ok(Self::IthariussCave),
             1778 => Ok(Self::Sorrowmurk),
-            1779 => Ok(Self::DraenildurVillage),
+            1779 => Ok(Self::DraenilDurVillage),
             1780 => Ok(Self::SplinterspearJunction),
             1797 => Ok(Self::Stagalbog),
             1798 => Ok(Self::TheShiftingMire),
             1817 => Ok(Self::StagalbogCave),
             1837 => Ok(Self::WitherbarkCaverns),
             1857 => Ok(Self::ThoradinsWall2),
-            1858 => Ok(Self::Bouldergor),
+            1858 => Ok(Self::BoulderGor),
             1877 => Ok(Self::ValleyOfFangs),
             1878 => Ok(Self::TheDustbowl),
             1879 => Ok(Self::MirageFlats),
@@ -5135,13 +5135,13 @@ impl TryFrom<u32> for Area {
             1881 => Ok(Self::ShindiggersCamp),
             1882 => Ok(Self::PlaguemistRavine),
             1883 => Ok(Self::ValorwindLake),
-            1884 => Ok(Self::Agolwatha),
-            1885 => Ok(Self::Hiriwatha),
+            1884 => Ok(Self::AgolWatha),
+            1885 => Ok(Self::HiriWatha),
             1886 => Ok(Self::TheCreepingRuin),
             1887 => Ok(Self::BogensLedge),
             1897 => Ok(Self::TheMakersTerrace),
             1898 => Ok(Self::DustwindGulch),
-            1917 => Ok(Self::Shaolwatha),
+            1917 => Ok(Self::ShaolWatha),
             1937 => Ok(Self::NoonshadeRuins),
             1938 => Ok(Self::BrokenPillar),
             1939 => Ok(Self::AbyssalSands),
@@ -5175,7 +5175,7 @@ impl TryFrom<u32> for Area {
             2119 => Ok(Self::GallowsEndTavern),
             2137 => Ok(Self::ThePoolsOfVisionUnused),
             2138 => Ok(Self::DreadmistDen),
-            2157 => Ok(Self::BaeldunKeep),
+            2157 => Ok(Self::BaelDunKeep),
             2158 => Ok(Self::EmberstrifesDen),
             2159 => Ok(Self::OnyxiasLair),
             2160 => Ok(Self::WindshearMine),
@@ -5287,7 +5287,7 @@ impl TryFrom<u32> for Area {
             2418 => Ok(Self::MorgansVigil),
             2419 => Ok(Self::SlitherRock),
             2420 => Ok(Self::TerrorWingPath),
-            2421 => Ok(Self::Dracodar),
+            2421 => Ok(Self::DracoDar),
             2437 => Ok(Self::RagefireChasm),
             2457 => Ok(Self::NightsongWoods),
             2477 => Ok(Self::TheVeiledSea6),
@@ -5304,7 +5304,7 @@ impl TryFrom<u32> for Area {
             2522 => Ok(Self::RuinsOfIsildien),
             2537 => Ok(Self::GrimtotemPost),
             2538 => Ok(Self::CampAparaje),
-            2539 => Ok(Self::Malakajin),
+            2539 => Ok(Self::MalakaJin),
             2540 => Ok(Self::BoulderslideRavine),
             2541 => Ok(Self::SishirCanyon),
             2557 => Ok(Self::DireMaul0),
@@ -5352,7 +5352,7 @@ impl TryFrom<u32> for Area {
             2897 => Ok(Self::ZoramgarOutpost),
             2917 => Ok(Self::HallOfLegends),
             2918 => Ok(Self::ChampionsHall),
-            2937 => Ok(Self::GroshgokCompound),
+            2937 => Ok(Self::GroshGokCompound),
             2938 => Ok(Self::SleepingGorge),
             2957 => Ok(Self::IrondeepMine),
             2958 => Ok(Self::StonehearthOutpost),
@@ -5364,7 +5364,7 @@ impl TryFrom<u32> for Area {
             2964 => Ok(Self::WinteraxHold),
             2977 => Ok(Self::IcebloodGarrison),
             2978 => Ok(Self::FrostwolfKeep),
-            2979 => Ok(Self::TorkrenFarm),
+            2979 => Ok(Self::TorKrenFarm),
             3017 => Ok(Self::FrostDaggerPass),
             3037 => Ok(Self::IronstoneCamp),
             3038 => Ok(Self::WeazelsCrater),
@@ -5408,8 +5408,8 @@ impl TryFrom<u32> for Area {
             3357 => Ok(Self::YojambaIsle),
             3358 => Ok(Self::ArathiBasin),
             3377 => Ok(Self::TheCoil),
-            3378 => Ok(Self::AltarOfHireek),
-            3379 => Ok(Self::Shadrazaar),
+            3378 => Ok(Self::AltarOfHirEek),
+            3379 => Ok(Self::ShadraZaar),
             3380 => Ok(Self::HakkariGrounds),
             3381 => Ok(Self::NazeOfShirvallah),
             3382 => Ok(Self::TempleOfBethekk),
