@@ -128,12 +128,6 @@ fn print_read_array_fixed(
             name = d.name()
         ));
     }
-
-    s.wln(d.name());
-
-    s.closing_curly_with(";");
-
-    s.newline();
 }
 
 fn print_read_array(
@@ -158,13 +152,19 @@ fn print_read_array(
             ));
             s.wln(d.name());
         });
+
         s.newline();
+
         return;
     }
 
     match array.size() {
         ArraySize::Fixed(size) => {
             print_read_array_fixed(s, array, d, prefix, postfix, size);
+
+            s.wln(d.name());
+            s.closing_curly_with(";");
+            s.newline();
         }
         ArraySize::Variable(m) => {
             s.open_curly(format!("let {name} =", name = d.name()));
@@ -173,11 +173,11 @@ fn print_read_array(
                 name = d.name(),
                 length = m.name()
             ));
-            s.open_curly(format!("for i in 0..{length}", length = m.name()));
 
-            print_array_ty(s, array, d, prefix, "r", postfix);
+            s.body(format!("for i in 0..{length}", length = m.name()), |s| {
+                print_array_ty(s, array, d, prefix, "r", postfix);
+            });
 
-            s.closing_curly();
             s.wln(d.name());
             s.closing_curly_with(";");
         }
@@ -325,13 +325,14 @@ fn print_read_definition(
     d: &StructMemberDefinition,
     prefix: &str,
     postfix: &str,
+    assignment_prefix: &str,
 ) {
     s.wln(format!("// {}: {}", d.name(), d.ty().str()));
 
     match &d.ty() {
         Type::Bool(i) => {
             s.wln(format!(
-                "let {name} = {module_name}::{prefix}read_{ty}_le(r){postfix}? != 0;",
+                "{assignment_prefix}{name} = {module_name}::{prefix}read_{ty}_le(r){postfix}? != 0;",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 prefix = prefix,
@@ -341,7 +342,7 @@ fn print_read_definition(
         }
         Type::DateTime => {
             s.wln(format!(
-                "let {name}: DateTime = {module_name}::{prefix}read_u32_le(r){postfix}?.try_into()?;",
+                "{assignment_prefix}{name}: DateTime = {module_name}::{prefix}read_u32_le(r){postfix}?.try_into()?;",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 prefix = prefix,
@@ -351,7 +352,7 @@ fn print_read_definition(
         Type::Integer(integer) => {
             let value_set = if d.value().is_some() { "_" } else { "" };
             s.wln(format!(
-                "let {value_set}{name} = {module_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
+                "{assignment_prefix}{value_set}{name} = {module_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
                 value_set = value_set,
                 name = d.name(),
                 module_name = UTILITY_PATH,
@@ -372,7 +373,7 @@ fn print_read_definition(
         }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
-                "let {name} = {module_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
+                "{assignment_prefix}{name} = {module_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 ty = floating.rust_str(),
@@ -382,34 +383,40 @@ fn print_read_definition(
             ));
         }
         Type::SizedCString => {
-            s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
-                s.wln(format!(
-                    "let {name} = crate::util::read_u32_le(r)?;",
-                    name = d.name()
-                ));
-                s.wln(format!(
-                    "let {name} = crate::util::read_sized_c_string_to_vec(r, {name})?;",
-                    name = d.name()
-                ));
-                s.wln(format!("String::from_utf8({name})?", name = d.name()));
-            });
+            s.body_closing_with_semicolon(
+                format!("{assignment_prefix}{name} =", name = d.name()),
+                |s| {
+                    s.wln(format!(
+                        "let {name} = crate::util::read_u32_le(r)?;",
+                        name = d.name()
+                    ));
+                    s.wln(format!(
+                        "let {name} = crate::util::read_sized_c_string_to_vec(r, {name})?;",
+                        name = d.name()
+                    ));
+                    s.wln(format!("String::from_utf8({name})?", name = d.name()));
+                },
+            );
         }
         Type::CString => {
-            s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
-                s.wln(format!(
-                    "let {name} = {module}::{prefix}read_c_string_to_vec(r){postfix}?;",
-                    name = d.name(),
-                    module = UTILITY_PATH,
-                    prefix = prefix,
-                    postfix = postfix,
-                ));
-                s.wln(format!("String::from_utf8({name})?", name = d.name()));
-            });
+            s.body_closing_with_semicolon(
+                format!("{assignment_prefix}{name} =", name = d.name()),
+                |s| {
+                    s.wln(format!(
+                        "let {name} = {module}::{prefix}read_c_string_to_vec(r){postfix}?;",
+                        name = d.name(),
+                        module = UTILITY_PATH,
+                        prefix = prefix,
+                        postfix = postfix,
+                    ));
+                    s.wln(format!("String::from_utf8({name})?", name = d.name()));
+                },
+            );
 
             s.newline();
         }
         Type::String => {
-            s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
+            s.body_closing_with_semicolon(format!("{assignment_prefix}{name} =", name = d.name()), |s| {
                 s.wln(format!(
                     "let {name} = crate::util::{prefix}read_u8_le(r){postfix}?;",
                     name = d.name()
@@ -454,7 +461,7 @@ fn print_read_definition(
                         s.newline();
                     } else {
                         s.wln(format!(
-                            "let {name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).try_into()?;",
+                            "{assignment_prefix}{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).try_into()?;",
                             name = d.name(),
                             type_name = d.ty().rust_str(),
                             endian = integer.rust_endian_str(),
@@ -472,7 +479,7 @@ fn print_read_definition(
             match e.definer_ty() {
                 DefinerType::Enum => {
                     s.wln(format!(
-                        "let {value_set}{name}: {type_name} = crate::util::{prefix}read_{ty}_{endian}(r){postfix}?.{into};",
+                        "{assignment_prefix}{value_set}{name}: {type_name} = crate::util::{prefix}read_{ty}_{endian}(r){postfix}?.{into};",
                         name = d.name(),
                         type_name = d.ty().rust_str(),
                         value_set = if d.value().is_some() { "_" } else { "" },
@@ -488,7 +495,7 @@ fn print_read_definition(
                 }
                 DefinerType::Flag => {
                     s.wln(format!(
-                        "let {value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(r){postfix}?);",
+                        "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(r){postfix}?);",
                         name = d.name(),
                         type_name = d.ty().rust_str(),
                         value_set = if d.value().is_some() { "_" } else { "" },
@@ -513,7 +520,7 @@ fn print_read_definition(
         }
         Type::Struct { .. } => {
             s.wln(format!(
-                "let {value_set}{name} = {type_name}::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{value_set}{name} = {type_name}::{prefix}read(r){postfix}?;",
                 name = d.name(),
                 type_name = d.ty().rust_str(),
                 value_set = if d.value().is_some() { "_" } else { "" },
@@ -525,7 +532,7 @@ fn print_read_definition(
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "let {name} = Guid::{prefix}read_packed(r){postfix}?;",
+                "{assignment_prefix}{name} = Guid::{prefix}read_packed(r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
@@ -534,7 +541,7 @@ fn print_read_definition(
         }
         Type::Guid => {
             s.wln(format!(
-                "let {name} = Guid::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{name} = Guid::{prefix}read(r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
@@ -543,7 +550,7 @@ fn print_read_definition(
         }
         Type::UpdateMask => {
             s.wln(format!(
-                "let {name} = UpdateMask::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{name} = UpdateMask::{prefix}read(r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
@@ -552,7 +559,7 @@ fn print_read_definition(
         }
         Type::AuraMask => {
             s.wln(format!(
-                "let {name} = AuraMask::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{name} = AuraMask::{prefix}read(r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
@@ -561,7 +568,7 @@ fn print_read_definition(
         }
         Type::AchievementDoneArray => {
             s.wln(format!(
-                "let {name} = AchievementDoneArray::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{name} = AchievementDoneArray::{prefix}read(r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
@@ -570,7 +577,7 @@ fn print_read_definition(
         }
         Type::AchievementInProgressArray => {
             s.wln(format!(
-                "let {name} = AchievementInProgressArray::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{name} = AchievementInProgressArray::{prefix}read(r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
@@ -579,7 +586,7 @@ fn print_read_definition(
         }
         Type::MonsterMoveSpline => {
             s.wln(format!(
-                "let {name} = MonsterMoveSpline::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{name} = MonsterMoveSpline::{prefix}read(r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
@@ -604,7 +611,7 @@ fn print_read_if_statement_flag(
     ));
 
     for m in statement.members() {
-        print_read_field(s, e, o, m, prefix, postfix);
+        print_read_field(s, e, o, m, prefix, postfix, "let ");
     }
 
     print_read_final_flag(
@@ -649,7 +656,7 @@ fn print_read_if_statement_flag(
         ));
 
         for m in elseif.members() {
-            print_read_field(s, e, o, m, prefix, postfix);
+            print_read_field(s, e, o, m, prefix, postfix, "let ");
         }
 
         print_read_final_flag(
@@ -694,8 +701,14 @@ fn print_read_if_statement_enum(
     prefix: &str,
     postfix: &str,
 ) {
+    let if_statement_variable_name = format!("{}_if", statement.name());
+    let match_prefix = if !statement.part_of_separate_if_statement() {
+        format!("let {} = ", if_statement_variable_name)
+    } else {
+        "".to_string()
+    };
     s.open_curly(format!(
-        "let {name}_if = match {name}",
+        "{match_prefix}match {name}",
         name = statement.name()
     ));
 
@@ -710,10 +723,18 @@ fn print_read_if_statement_enum(
 
     for enumerator in rd.enumerators() {
         if !enumerator.has_members_in_struct() {
+            let result = if !statement.part_of_separate_if_statement() {
+                format!(
+                    "{new_enum}::{enumerator},",
+                    new_enum = rd.ty_name(),
+                    enumerator = enumerator.rust_name()
+                )
+            } else {
+                "{}".to_string()
+            };
             s.wln(format!(
-                "{old_enum}::{enumerator} => {new_enum}::{enumerator},",
+                "{old_enum}::{enumerator} => {result}",
                 old_enum = rd.original_ty_name(),
-                new_enum = rd.ty_name(),
                 enumerator = enumerator.rust_name()
             ));
             continue;
@@ -725,23 +746,32 @@ fn print_read_if_statement_enum(
             enumerator = enumerator.rust_name()
         ));
 
+        let assignment_prefix = if !statement.part_of_separate_if_statement() {
+            "let ".to_string()
+        } else {
+            format!("{}_", if_statement_variable_name)
+        };
         for m in enumerator.original_fields() {
-            print_read_field(s, e, o, m, prefix, postfix);
+            if statement.contains(m) {
+                print_read_field(s, e, o, m, prefix, postfix, &assignment_prefix);
+            }
         }
 
         print_read_final_flag(s, &e.rust_object().rust_definers_in_namespace(rd.ty_name()));
 
-        s.open_curly(format!(
-            "{new_enum}::{enumerator}",
-            new_enum = rd.ty_name(),
-            enumerator = enumerator.rust_name()
-        ));
+        if !statement.part_of_separate_if_statement() {
+            s.open_curly(format!(
+                "{new_enum}::{enumerator}",
+                new_enum = rd.ty_name(),
+                enumerator = enumerator.rust_name()
+            ));
 
-        for m in enumerator.members_in_struct() {
-            s.wln(m.struct_initialization_string());
+            for m in enumerator.members_in_struct() {
+                s.wln(m.struct_initialization_string());
+            }
+            s.closing_curly(); // enum
         }
 
-        s.closing_curly(); // enum
         s.closing_curly(); // =>
     }
 
@@ -756,14 +786,14 @@ fn print_read_field(
     field: &StructMember,
     prefix: &str,
     postfix: &str,
+    assignment_prefix: &str,
 ) {
     match field {
         StructMember::Definition(d) => {
-            print_read_definition(s, e, d, prefix, postfix);
+            print_read_definition(s, e, d, prefix, postfix, assignment_prefix);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {
-                //print_read_if_statement_enum_new(s, e, o, statement.new_enum(), prefix, postfix);
                 print_read_if_statement_enum(s, e, o, statement, prefix, postfix);
             }
             DefinerType::Flag => {
@@ -788,7 +818,7 @@ fn print_read_field(
                 ";",
                 |s| {
                     for field in optional.members() {
-                        print_read_field(s, e, o, field, prefix, postfix);
+                        print_read_field(s, e, o, field, prefix, postfix, assignment_prefix);
                     }
 
                     s.body_closing_with(
@@ -849,6 +879,42 @@ fn print_read_final_flag(s: &mut Writer, rds: &[RustDefiner]) {
     }
 }
 
+fn print_read_final_enums(s: &mut Writer, rds: &[RustDefiner]) {
+    for rd in rds {
+        if !rd.has_separate_if_statements() {
+            continue;
+        }
+
+        match rd.definer_type() {
+            DefinerType::Flag => unreachable!(),
+            DefinerType::Enum => {
+                let variable_name = rd.variable_name();
+                let ty_name = rd.ty_name();
+                s.open_curly(format!("let {variable_name}_if = match {variable_name}"));
+
+                for enumerator in rd.enumerators() {
+                    let enumerator_name = enumerator.rust_name();
+                    let simple_ty_name = rd.original_ty_name();
+                    s.body(format!("{simple_ty_name}::{enumerator_name} =>"), |s| {
+                        s.open_curly(format!("{ty_name}::{enumerator_name}"));
+
+                        for member in enumerator.members_in_struct() {
+                            let member_name = member.name();
+                            s.wln(format!("{member_name}: {variable_name}_if_{member_name},"));
+                        }
+
+                        s.closing_curly(); // NewEnumName::EnumeratorName
+                    });
+                }
+
+                s.closing_curly_with(";"); // let _if = match _
+            }
+        }
+
+        s.newline();
+    }
+}
+
 pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
     if e.all_definitions()
         .iter()
@@ -856,6 +922,14 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
     {
         s.wln("panic!(\"SKIP_SERIALIZE_READ_PANIC This message has a `skip_serialize` tag which makes it impossible to generate a correct read implementation for it.\")");
         return;
+    }
+
+    for variable in e.enum_separate_if_statement_variables() {
+        s.wln(format!("let mut {} = Default::default();", variable));
+    }
+
+    if !e.enum_separate_if_statement_variables().is_empty() {
+        s.newline();
     }
 
     // For fully compressed messages, replace the reader with a ZLibDecoder.
@@ -869,10 +943,12 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
     }
 
     for field in e.members() {
-        print_read_field(s, e, o, field, prefix, postfix);
+        print_read_field(s, e, o, field, prefix, postfix, "let ");
     }
 
-    print_read_final_flag(s, &e.rust_object().rust_definers_in_global_scope());
+    let rust_definers = e.rust_object().rust_definers_in_global_scope();
+    print_read_final_flag(s, &rust_definers);
+    print_read_final_enums(s, &rust_definers);
 
     s.open_curly("Ok(Self");
 

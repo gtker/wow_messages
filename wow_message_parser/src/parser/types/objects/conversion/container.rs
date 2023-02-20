@@ -178,12 +178,15 @@ fn parsed_member_to_member(
                 }
             }
 
+            let separate_if_statement = c.enum_variable_used_in_separate_if_statements(s.name());
+
             StructMember::IfStatement(IfStatement::new(
                 s.conditional,
                 parsed_members_to_members(c, s.members, containers, definers, tags),
                 parsed_if_statement_to_if_statement(c, s.else_ifs, containers, definers, tags),
                 parsed_members_to_members(c, s.else_statement_members, containers, definers, tags),
                 parsed_type_to_type(c, containers, definers, s.original_ty.unwrap(), tags),
+                separate_if_statement,
             ))
         }
         ParsedStructMember::OptionalStatement(o) => {
@@ -221,12 +224,15 @@ fn parsed_if_statement_to_if_statement(
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
+        let separate_if_statement = c.enum_variable_used_in_separate_if_statements(p.name());
+
         v.push(IfStatement::new(
             p.conditional,
             parsed_members_to_members(c, p.members, containers, definers, tags),
             parsed_if_statement_to_if_statement(c, p.else_ifs, containers, definers, tags),
             parsed_members_to_members(c, p.else_statement_members, containers, definers, tags),
             parsed_type_to_type(c, containers, definers, p.original_ty.unwrap(), tags),
+            separate_if_statement,
         ))
     }
 

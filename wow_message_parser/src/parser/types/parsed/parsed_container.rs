@@ -470,4 +470,38 @@ impl ParsedContainer {
             previous_name = e;
         }
     }
+
+    pub(crate) fn enum_type_used_in_separate_if_statements(&self, ty_name: &str) -> bool {
+        let variable_name = self.get_variable_name_of_definer_ty(ty_name).unwrap();
+        self.enum_variable_used_in_separate_if_statements(&variable_name)
+    }
+
+    pub(crate) fn enum_variable_used_in_separate_if_statements(&self, variable_name: &str) -> bool {
+        fn inner(b: &ParsedStructMember, a: &mut i32, variable_name: &str) {
+            match b {
+                ParsedStructMember::Definition(_) => {}
+                ParsedStructMember::IfStatement(statement) => {
+                    if statement.name() == variable_name {
+                        *a += 1;
+                    }
+
+                    for m in statement.all_members() {
+                        inner(m, a, variable_name);
+                    }
+                }
+                ParsedStructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        inner(m, a, variable_name);
+                    }
+                }
+            }
+        }
+
+        let mut a = 0;
+        for member in &self.members {
+            inner(member, &mut a, variable_name);
+        }
+
+        a > 1
+    }
 }

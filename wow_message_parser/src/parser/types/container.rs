@@ -12,8 +12,8 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::version::{LoginVersion, Version};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
-    LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
-    WORLD_SERVER_MESSAGE_ENUM_NAME,
+    DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
+    WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 use crate::{Object, CONTAINER_SELF_SIZE_FIELD};
 use std::cmp::Ordering;
@@ -218,6 +218,30 @@ impl Container {
         self.only_has_io_error
     }
 
+    pub(crate) fn enum_separate_if_statement_variables(&self) -> Vec<String> {
+        let mut v = Vec::new();
+
+        for m in self.all_members() {
+            match m {
+                StructMember::Definition(_) => {}
+                StructMember::IfStatement(statement) => {
+                    if statement.part_of_separate_if_statement()
+                        && statement.definer_type() == DefinerType::Enum
+                    {
+                        for d in statement.all_definitions() {
+                            let variable_name = statement.name();
+                            let definition_name = d.name();
+                            v.push(format!("{variable_name}_if_{definition_name}"));
+                        }
+                    }
+                }
+                StructMember::OptionalStatement(_) => {}
+            }
+        }
+
+        v
+    }
+
     pub(crate) fn get_opcode_import_path(&self, version: Version) -> String {
         // `all` doesn't have an opcodes.rs
         let import_path = match version {
@@ -418,6 +442,33 @@ impl Container {
                         _ => {}
                     }
                 }
+                StructMember::IfStatement(statement) => {
+                    for m in statement.all_members() {
+                        inner(m, v);
+                    }
+                }
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        inner(m, v);
+                    }
+                }
+            }
+        }
+
+        let mut v = Vec::new();
+
+        for m in self.members() {
+            inner(m, &mut v);
+        }
+
+        v
+    }
+
+    pub(crate) fn all_members(&self) -> Vec<&StructMember> {
+        fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMember>) {
+            v.push(m);
+            match m {
+                StructMember::Definition(_) => {}
                 StructMember::IfStatement(statement) => {
                     for m in statement.all_members() {
                         inner(m, v);

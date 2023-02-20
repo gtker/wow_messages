@@ -74,62 +74,56 @@ impl BugSeparateIfDoubleWrite {
 
 impl BugSeparateIfDoubleWrite {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+        let mut b_if_zero_one = Default::default();
+        let mut b_if_two = Default::default();
+
         // b: SimpleEnum
         let b: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
 
-        let b_if = match b {
+        match b {
             SimpleEnum::Zero => {
                 // zero_one: u8
-                let zero_one = crate::util::read_u8_le(r)?;
+                b_if_zero_one = crate::util::read_u8_le(r)?;
 
-                BugSeparateIfDoubleWrite_SimpleEnum::Zero {
-                    zero_one,
-                }
             }
             SimpleEnum::One => {
                 // zero_one: u8
-                let zero_one = crate::util::read_u8_le(r)?;
+                b_if_zero_one = crate::util::read_u8_le(r)?;
 
-                BugSeparateIfDoubleWrite_SimpleEnum::One {
-                    zero_one,
-                }
             }
             SimpleEnum::Two => {
-                // two: u8
-                let two = crate::util::read_u8_le(r)?;
-
-                BugSeparateIfDoubleWrite_SimpleEnum::Two {
-                    two,
-                }
             }
         };
 
         // middle: u8
         let middle = crate::util::read_u8_le(r)?;
 
-        let b_if = match b {
+        match b {
             SimpleEnum::Zero => {
-                // zero_one: u8
-                let zero_one = crate::util::read_u8_le(r)?;
-
-                BugSeparateIfDoubleWrite_SimpleEnum::Zero {
-                    zero_one,
-                }
             }
             SimpleEnum::One => {
-                // zero_one: u8
-                let zero_one = crate::util::read_u8_le(r)?;
-
-                BugSeparateIfDoubleWrite_SimpleEnum::One {
-                    zero_one,
-                }
             }
             SimpleEnum::Two => {
                 // two: u8
-                let two = crate::util::read_u8_le(r)?;
+                b_if_two = crate::util::read_u8_le(r)?;
 
+            }
+        };
+
+        let b_if = match b {
+            SimpleEnum::Zero => {
+                BugSeparateIfDoubleWrite_SimpleEnum::Zero {
+                    zero_one: b_if_zero_one,
+                }
+            }
+            SimpleEnum::One => {
+                BugSeparateIfDoubleWrite_SimpleEnum::One {
+                    zero_one: b_if_zero_one,
+                }
+            }
+            SimpleEnum::Two => {
                 BugSeparateIfDoubleWrite_SimpleEnum::Two {
-                    two,
+                    two: b_if_two,
                 }
             }
         };

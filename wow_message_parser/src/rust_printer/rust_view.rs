@@ -383,6 +383,7 @@ pub(crate) enum RustType {
         int_ty: IntegerType,
         is_simple: bool,
         is_elseif: bool,
+        separate_if_statements: bool,
     },
     Flag {
         ty_name: String,
@@ -526,42 +527,53 @@ impl RustObject {
     }
 
     fn get_rust_definer_from_ty(m: &RustMember) -> Option<RustDefiner> {
-        let (ty_name, original_ty_name, enumerators, int_ty, is_simple, definer_type, is_elseif) =
-            match m.ty().clone() {
-                RustType::Enum {
-                    ty_name,
-                    original_ty_name,
-                    enumerators,
-                    int_ty,
-                    is_simple,
-                    is_elseif,
-                } => (
-                    ty_name,
-                    original_ty_name,
-                    enumerators,
-                    int_ty,
-                    is_simple,
-                    DefinerType::Enum,
-                    is_elseif,
-                ),
-                RustType::Flag {
-                    ty_name,
-                    original_ty_name,
-                    enumerators,
-                    int_ty,
-                    is_simple,
-                    is_elseif,
-                } => (
-                    ty_name,
-                    original_ty_name,
-                    enumerators,
-                    int_ty,
-                    is_simple,
-                    DefinerType::Flag,
-                    is_elseif,
-                ),
-                _ => return None,
-            };
+        let (
+            ty_name,
+            original_ty_name,
+            enumerators,
+            int_ty,
+            is_simple,
+            definer_type,
+            is_elseif,
+            has_separate_if_statements,
+        ) = match m.ty().clone() {
+            RustType::Enum {
+                ty_name,
+                original_ty_name,
+                enumerators,
+                int_ty,
+                is_simple,
+                is_elseif,
+                separate_if_statements,
+            } => (
+                ty_name,
+                original_ty_name,
+                enumerators,
+                int_ty,
+                is_simple,
+                DefinerType::Enum,
+                is_elseif,
+                separate_if_statements,
+            ),
+            RustType::Flag {
+                ty_name,
+                original_ty_name,
+                enumerators,
+                int_ty,
+                is_simple,
+                is_elseif,
+            } => (
+                ty_name,
+                original_ty_name,
+                enumerators,
+                int_ty,
+                is_simple,
+                DefinerType::Flag,
+                is_elseif,
+                false,
+            ),
+            _ => return None,
+        };
 
         Some(RustDefiner {
             inner: m.clone(),
@@ -572,6 +584,7 @@ impl RustObject {
             is_elseif,
             original_ty_name,
             definer_type,
+            has_separate_if_statements,
         })
     }
 
@@ -789,6 +802,7 @@ pub(crate) struct RustDefiner {
     is_simple: bool,
     is_elseif: bool,
     original_ty_name: String,
+    has_separate_if_statements: bool,
 }
 
 impl RustDefiner {
@@ -805,6 +819,9 @@ impl RustDefiner {
     }
     pub(crate) fn variable_name(&self) -> &str {
         self.inner().name()
+    }
+    pub(crate) fn has_separate_if_statements(&self) -> bool {
+        self.has_separate_if_statements
     }
     pub(crate) fn inner(&self) -> &RustMember {
         &self.inner
@@ -933,6 +950,7 @@ fn create_else_if_flag(
             int_ty: flag_int_ty,
             is_simple: false,
             is_elseif: true,
+            separate_if_statements: false,
         },
         original_ty: struct_ty_name.to_string(),
         in_rust_type: true,
@@ -1176,11 +1194,11 @@ pub(crate) fn create_struct_member(
                         inner_object,
                     }
                 }
-                Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
+                Type::Enum { e: definer, upcast } | Type::Flag { e: definer, upcast } => {
                     let add_types = || -> Vec<RustEnumerator> {
                         let mut enumerators = Vec::new();
 
-                        for field in e.fields() {
+                        for field in definer.fields() {
                             enumerators.push(RustEnumerator {
                                 name: field.name().to_string(),
                                 rust_name: field.rust_name().to_string(),
@@ -1196,26 +1214,28 @@ pub(crate) fn create_struct_member(
                     let int_ty = if let Some(upcast) = upcast {
                         *upcast
                     } else {
-                        *e.ty()
+                        *definer.ty()
                     };
 
-                    if e.definer_ty() == DefinerType::Enum {
+                    if definer.definer_ty() == DefinerType::Enum {
                         let enumerators = add_types();
 
                         RustType::Enum {
-                            ty_name: e.name().to_string(),
-                            original_ty_name: e.name().to_string(),
+                            ty_name: definer.name().to_string(),
+                            original_ty_name: definer.name().to_string(),
                             enumerators,
                             int_ty,
                             is_simple: true,
                             is_elseif: false,
+                            separate_if_statements: e
+                                .enum_type_used_in_separate_if_statements(definer.name()),
                         }
                     } else {
                         let enumerators = add_types();
 
                         RustType::Flag {
-                            ty_name: e.name().to_string(),
-                            original_ty_name: e.name().to_string(),
+                            ty_name: definer.name().to_string(),
+                            original_ty_name: definer.name().to_string(),
                             int_ty,
                             enumerators,
                             is_simple: true,

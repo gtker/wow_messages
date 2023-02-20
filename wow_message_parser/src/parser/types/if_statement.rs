@@ -1,6 +1,6 @@
 use crate::error_printer::non_matching_if_statement_variables;
 use crate::file_info::FileInfo;
-use crate::parser::types::struct_member::StructMember;
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::rust_printer::field_name_to_rust_name;
 use crate::DefinerType;
@@ -19,6 +19,7 @@ pub(crate) struct IfStatement {
     else_ifs: Vec<IfStatement>,
     else_statement_members: Vec<StructMember>,
     original_ty: Type,
+    separate_if_statement: bool,
 }
 
 impl Eq for IfStatement {}
@@ -36,13 +37,16 @@ impl IfStatement {
         else_ifs: Vec<IfStatement>,
         else_statement_members: Vec<StructMember>,
         original_ty: Type,
+        separate_if_statement: bool,
     ) -> Self {
+        let is_enum = conditional.definer_type() == DefinerType::Enum;
         Self {
             conditional,
             members,
             else_ifs,
             else_statement_members,
             original_ty,
+            separate_if_statement: separate_if_statement && is_enum,
         }
     }
 
@@ -87,11 +91,7 @@ impl IfStatement {
     }
 
     pub(crate) fn definer_type(&self) -> DefinerType {
-        match self.conditional.equations[0] {
-            Equation::Equals { .. } => DefinerType::Enum,
-            Equation::BitwiseAnd { .. } => DefinerType::Flag,
-            Equation::NotEquals { .. } => DefinerType::Enum,
-        }
+        self.conditional.definer_type()
     }
 
     pub(crate) fn else_ifs(&self) -> &[IfStatement] {
@@ -104,6 +104,30 @@ impl IfStatement {
             .iter()
             .chain(else_ifs)
             .chain(&self.else_statement_members)
+    }
+
+    pub(crate) fn all_definitions(&self) -> Vec<&StructMemberDefinition> {
+        let mut v = Vec::new();
+
+        fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
+            match m {
+                StructMember::Definition(d) => v.push(d),
+                StructMember::IfStatement(statement) => {
+                    v.append(&mut statement.all_definitions());
+                }
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        inner(m, v);
+                    }
+                }
+            }
+        }
+
+        for m in self.all_members() {
+            inner(m, &mut v);
+        }
+
+        v
     }
 
     pub(crate) fn conditional(&self) -> &Conditional {
@@ -120,6 +144,10 @@ impl IfStatement {
         }
 
         false
+    }
+
+    pub(crate) fn part_of_separate_if_statement(&self) -> bool {
+        self.separate_if_statement
     }
 }
 
@@ -154,6 +182,13 @@ impl Conditional {
 
     pub(crate) fn equations(&self) -> &[Equation] {
         &self.equations
+    }
+
+    pub(crate) fn definer_type(&self) -> DefinerType {
+        match self.equations[0] {
+            Equation::Equals { .. } | Equation::NotEquals { .. } => DefinerType::Enum,
+            Equation::BitwiseAnd { .. } => DefinerType::Flag,
+        }
     }
 
     pub(crate) fn new(conditions: &[Condition], ty_name: &str, file_info: &FileInfo) -> Self {
