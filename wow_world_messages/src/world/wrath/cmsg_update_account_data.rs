@@ -35,7 +35,6 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        let size_assert_header_size = w.len();
         // data_type: u32
         w.write_all(&self.data_type.to_le_bytes())?;
 
@@ -46,11 +45,11 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         w.write_all(&self.decompressed_size.to_le_bytes())?;
 
         // compressed_data: u8[-]
+        let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
         for i in self.compressed_data.iter() {
-            w.write_all(&i.to_le_bytes())?;
+            encoder.write_all(&i.to_le_bytes())?;
         }
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
@@ -68,14 +67,16 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         let decompressed_size = crate::util::read_u32_le(r)?;
 
         // compressed_data: u8[-]
+        let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+
         let mut current_size = {
             4 // data_type: u32
             + 4 // unix_time: u32
             + 4 // decompressed_size: u32
         };
         let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            compressed_data.push(crate::util::read_u8_le(r)?);
+        while decoder.total_out() < (decompressed_size as u64) {
+            compressed_data.push(crate::util::read_u8_le(decoder)?);
             current_size += 1;
         }
 
@@ -96,7 +97,7 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
         4 // data_type: u32
         + 4 // unix_time: u32
         + 4 // decompressed_size: u32
-        + self.compressed_data.len() * core::mem::size_of::<u8>() // compressed_data: u8[-]
+        + crate::util::zlib_compressed_size(&self.compressed_data) // compressed_data: u8[-]
     }
 }
 

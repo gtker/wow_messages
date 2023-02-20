@@ -98,7 +98,7 @@ mod test_vanilla {
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x0B, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 45.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 46.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_UPDATE_ACCOUNT_DATA0() {
@@ -127,7 +127,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 45.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 46.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_UPDATE_ACCOUNT_DATA0() {
@@ -156,7 +156,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 45.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 46.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_UPDATE_ACCOUNT_DATA0() {
@@ -286,7 +286,7 @@ mod test_vanilla {
          0x1B, 0x09, 0xC8, 0xCF, 0xFF, 0x1E, 0xBE, 0x7F, 0x01, 0x34, 0x99, 0x02,
          0x24, ];
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 59.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_UPDATE_ACCOUNT_DATA1() {
@@ -421,7 +421,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 59.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_UPDATE_ACCOUNT_DATA1() {
@@ -556,7 +556,7 @@ mod test_vanilla {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 59.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_UPDATE_ACCOUNT_DATA1() {
@@ -704,7 +704,7 @@ mod test_tbc {
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x0B, 0x02, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 45.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 46.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_UPDATE_ACCOUNT_DATA0() {
@@ -733,7 +733,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 45.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 46.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_UPDATE_ACCOUNT_DATA0() {
@@ -762,7 +762,7 @@ mod test_tbc {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 45.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 46.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_UPDATE_ACCOUNT_DATA0() {
@@ -892,7 +892,7 @@ mod test_tbc {
          0x1B, 0x09, 0xC8, 0xCF, 0xFF, 0x1E, 0xBE, 0x7F, 0x01, 0x34, 0x99, 0x02,
          0x24, ];
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 59.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_UPDATE_ACCOUNT_DATA1() {
@@ -1027,7 +1027,7 @@ mod test_tbc {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 59.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_UPDATE_ACCOUNT_DATA1() {
@@ -1162,7 +1162,7 @@ mod test_tbc {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 58.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 59.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_UPDATE_ACCOUNT_DATA1() {

@@ -36,6 +36,7 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
     }
     u8[-] compressed_data {
         comment = "Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage";
+        compressed = "decompressed_size";
     }
 } {
     comment = "Respond with [SMSG_UPDATE_ACCOUNT_DATA_COMPLETE]";
