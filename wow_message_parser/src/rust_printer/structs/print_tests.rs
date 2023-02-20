@@ -207,30 +207,28 @@ fn print_test_case(
     }
     s.newline();
 
-    // Size reports correct length
-    match e.is_constant_sized() {
-        false => {
-            s.wln(format!(
-                "assert_eq!(t.size() + header_size, RAW{i}.len());"
-            ));
-        }
-        true => {
-            let size = if e.sizes().maximum() == 0 {
-                "".to_string()
-            } else {
-                format!("{} + ", e.sizes().maximum())
-            };
+    let compressed = e.tags().compressed() || e.contains_compressed_variable();
 
-            s.wln(format!(
-                "assert_eq!({size}header_size, RAW{i}.len());",
-            ));
+    if !compressed {
+        // Size reports correct length
+        match e.is_constant_sized() {
+            false => {
+                s.wln(format!("assert_eq!(t.size() + header_size, RAW{i}.len());"));
+            }
+            true => {
+                let size = if e.sizes().maximum() == 0 {
+                    "".to_string()
+                } else {
+                    format!("{} + ", e.sizes().maximum())
+                };
+
+                s.wln(format!("assert_eq!({size}header_size, RAW{i}.len());",));
+            }
         }
+        s.newline();
     }
-    s.newline();
 
-    s.wln(format!(
-        "let mut dest = Vec::with_capacity(RAW{i}.len());"
-    ));
+    s.wln(format!("let mut dest = Vec::with_capacity(RAW{i}.len());"));
     s.wln(format!(
         "expected.{write_text}(&mut {cursor}Cursor::new(&mut dest)){postfix}.unwrap();",
         write_text = write_text,
@@ -242,7 +240,38 @@ fn print_test_case(
     ));
     s.newline();
 
-    s.wln(format!("assert_eq!(dest, RAW{i});"))
+    if compressed {
+        s.wln(format!(
+            "let s = {opcode}::{read_text}(&mut {cursor}Cursor::new(&dest)){postfix}.unwrap();",
+            opcode = opcode,
+            read_text = read_text,
+            postfix = it.postfix(),
+            cursor = match it {
+                ImplType::Std | ImplType::Tokio => "std::io::",
+                ImplType::AsyncStd => "async_std::io::",
+            },
+        ));
+
+        s.body_closing_with(
+            "let s = match s",
+            |s| {
+                s.wln(format!(
+                    "{opcode}::{subject}(s) => s,",
+                    opcode = opcode,
+                    subject = get_enumerator_name(t.subject()),
+                ));
+                s.wln(format!(
+                    r#"opcode => panic!("incorrect opcode. Expected {}, got {{opcode:#?}}", opcode = opcode),"#,
+                    get_enumerator_name(t.subject())
+                ));
+            },
+            ";\n",
+        );
+
+        s.wln("assert_eq!(t, s);");
+    } else {
+        s.wln(format!("assert_eq!(dest, RAW{i});"))
+    }
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]

@@ -527,6 +527,16 @@ impl Container {
         false
     }
 
+    pub(crate) fn contains_compressed_variable(&self) -> bool {
+        for d in self.all_definitions() {
+            if d.tags().is_compressed() {
+                return true;
+            }
+        }
+
+        false
+    }
+
     pub(crate) fn contains_datetime(&self) -> bool {
         for d in self.all_definitions() {
             if d.ty() == &Type::DateTime {

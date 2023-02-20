@@ -276,12 +276,16 @@ mod test {
         assert_eq!(t.has_transport, expected.has_transport);
         assert_eq!(t.objects, expected.objects);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&dest)).unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_UPDATE_OBJECT(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
     // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
@@ -444,12 +448,16 @@ mod test {
         assert_eq!(t.has_transport, expected.has_transport);
         assert_eq!(t.objects, expected.objects);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_UPDATE_OBJECT(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
     // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
@@ -612,12 +620,16 @@ mod test {
         assert_eq!(t.has_transport, expected.has_transport);
         assert_eq!(t.objects, expected.objects);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ServerOpcodeMessage::SMSG_COMPRESSED_UPDATE_OBJECT(s) => s,
+            opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
 }

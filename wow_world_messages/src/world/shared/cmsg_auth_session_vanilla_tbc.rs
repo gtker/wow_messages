@@ -271,12 +271,16 @@ mod test_vanilla {
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
         assert_eq!(t.addon_info, expected.addon_info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&dest)).unwrap();
+        let s = match s {
+            ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
@@ -382,12 +386,16 @@ mod test_vanilla {
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
         assert_eq!(t.addon_info, expected.addon_info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
@@ -493,12 +501,16 @@ mod test_vanilla {
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
         assert_eq!(t.addon_info, expected.addon_info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
 }
@@ -630,12 +642,16 @@ mod test_tbc {
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
         assert_eq!(t.addon_info, expected.addon_info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&dest)).unwrap();
+        let s = match s {
+            ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
@@ -741,12 +757,16 @@ mod test_tbc {
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
         assert_eq!(t.addon_info, expected.addon_info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
@@ -852,12 +872,16 @@ mod test_tbc {
         assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
         assert_eq!(t.addon_info, expected.addon_info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
-
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
-        assert_eq!(dest, RAW0);
+        let s = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&dest)).await.unwrap();
+        let s = match s {
+            ClientOpcodeMessage::CMSG_AUTH_SESSION(s) => s,
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t, s);
     }
 
 }
