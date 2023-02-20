@@ -80,6 +80,23 @@
             ptvcursor_add(ptv, hf_woww_client_seed, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_client_proof, 20, ENC_NA);
             ptvcursor_add(ptv, hf_woww_decompressed_addon_info_size, 4, ENC_LITTLE_ENDIAN);
+            compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));
+            if (compressed_tvb != NULL) {
+                ptvcursor_t* old_ptv = ptv;
+                ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);
+                gint compression_end = tvb_reported_length(compressed_tvb);
+                while (ptvcursor_current_offset(ptv) < compression_end) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AddonInfo");
+                    add_cstring(ptv, &hf_woww_addon_name);
+                    ptvcursor_add(ptv, hf_woww_addon_has_signature, 1, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_addon_crc, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_addon_extra_crc, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_pop_subtree(ptv);
+                }
+                ptvcursor_free(ptv);
+                ptv = old_ptv;
+                compressed_tvb = NULL;
+            }
             break;
         case CMSG_AUTOBANK_ITEM:
             ptvcursor_add(ptv, hf_woww_bag_index, 1, ENC_LITTLE_ENDIAN);
@@ -664,6 +681,16 @@
             if (category == GM_TICKET_TYPE_BEHAVIOR_HARASSMENT) {
                 ptvcursor_add(ptv, hf_woww_chat_data_line_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_chat_data_size_uncompressed, 4, ENC_LITTLE_ENDIAN);
+                compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));
+                if (compressed_tvb != NULL) {
+                    ptvcursor_t* old_ptv = ptv;
+                    ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);
+                    len = offset_packet_end - ptvcursor_current_offset(ptv);
+                    ptvcursor_add(ptv, hf_woww_compressed_chat_data, len, ENC_NA);
+                    ptvcursor_free(ptv);
+                    ptv = old_ptv;
+                    compressed_tvb = NULL;
+                }
             }
             break;
         case CMSG_GMTICKET_UPDATETEXT:

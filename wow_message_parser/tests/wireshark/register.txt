@@ -52,6 +52,30 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_addon_crc,
+            { "Addon Crc", "woww.addon.crc",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_addon_extra_crc,
+            { "Addon Extra Crc", "woww.addon.extra.crc",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_addon_has_signature,
+            { "Addon Has Signature", "woww.addon.has.signature",
+                FT_UINT8, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_addon_name,
+            { "Addon Name", "woww.addon.name",
+                FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_addon_type,
             { "Addon Type", "woww.addon.type",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_addon_type_strings), 0,
@@ -985,6 +1009,12 @@
         { &hf_woww_comment,
             { "Comment", "woww.comment",
                 FT_STRINGZ, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_compressed_chat_data,
+            { "Compressed Chat Data", "woww.compressed.chat.data",
+                FT_BYTES, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },

@@ -17,12 +17,7 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
             // to figure out exactly which variables are unused, so just do it manually until
             // everything is supported
             match name.as_str() {
-                "hf_woww_addon_crc"
-                | "hf_woww_addon_extra_crc"
-                | "hf_woww_addon_has_signature"
-                | "hf_woww_addon_name"
-                | "hf_woww_cast_item"
-                | "hf_woww_compressed_chat_data"
+                "hf_woww_cast_item"
                 | "hf_woww_compressed_move_opcode"
                 | "hf_woww_corpse_target_ally"
                 | "hf_woww_enemy"

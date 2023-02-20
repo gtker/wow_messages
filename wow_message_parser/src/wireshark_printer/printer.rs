@@ -213,7 +213,11 @@ fn print_definition(
     variables: &mut Vec<String>,
 ) -> bool {
     if d.tags().compressed().is_some() {
-        return false;
+        s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
+        s.open_curly("if (compressed_tvb != NULL)");
+
+        s.wln("ptvcursor_t* old_ptv = ptv;");
+        s.wln("ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);");
     }
 
     match d.ty() {
@@ -234,12 +238,10 @@ fn print_definition(
             } else {
                 s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
             }
-            true
         }
         Type::Guid => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));
-            true
         }
         Type::Bool(i) => {
             let name = w.unwrap().name();
@@ -255,12 +257,10 @@ fn print_definition(
                 hf = name,
                 len = i.size()
             ));
-            true
         }
         Type::DateTime => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
-            true
         }
         Type::FloatingPoint(i) => {
             let name = w.unwrap().name();
@@ -268,29 +268,22 @@ fn print_definition(
             let enc = i.wireshark_endian_str();
 
             s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
-            true
         }
         Type::CString => {
             print_cstring(s, w);
-            true
         }
         Type::SizedCString => {
             let name = w.unwrap().name();
 
             s.wln(format!("add_sized_cstring(ptv, &{name});"));
-            true
         }
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
             print_definer(s, w, upcast, container_name, d.name(), variables, e);
-
-            true
         }
         Type::Struct { e } => {
             if !print_container(s, o, wo, variables, e) {
                 return false;
             }
-
-            true
         }
         Type::Array(array) => {
             let len = match array.size() {
@@ -308,66 +301,76 @@ fn print_definition(
                     "ptvcursor_add(ptv, {hf}, {len}, ENC_NA);",
                     hf = w.unwrap().name()
                 ));
-
-                return true;
-            }
-
-            match array.size() {
-                ArraySize::Fixed(_) | ArraySize::Variable(_) => {
-                    s.open_curly(format!("for (i = 0; i < {len}; ++i)"));
-                }
-                ArraySize::Endless => {
-                    s.open_curly("while (ptvcursor_current_offset(ptv) < offset_packet_end)")
-                }
-            }
-
-            match array.ty() {
-                ArrayType::Integer(i) => {
-                    let name = w.unwrap().name();
-                    let len = i.size();
-                    let enc = i.wireshark_endian_str();
-
-                    s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
-                }
-                ArrayType::Guid => {
-                    let name = w.unwrap().name();
-                    s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));
-                }
-                ArrayType::Struct(c) => {
-                    if !print_container(s, o, wo, variables, c) {
-                        s.closing_curly();
-                        return false;
+            } else {
+                match array.size() {
+                    ArraySize::Fixed(_) | ArraySize::Variable(_) => {
+                        s.open_curly(format!("for (i = 0; i < {len}; ++i)"));
+                    }
+                    ArraySize::Endless => {
+                        let packet_end = if d.tags().compressed().is_some() {
+                            s.wln("gint compression_end = tvb_reported_length(compressed_tvb);");
+                            "compression_end"
+                        } else {
+                            "offset_packet_end"
+                        };
+                        s.open_curly(format!(
+                            "while (ptvcursor_current_offset(ptv) < {packet_end})"
+                        ));
                     }
                 }
-                ArrayType::CString => {
-                    print_cstring(s, w);
+
+                match array.ty() {
+                    ArrayType::Integer(i) => {
+                        let name = w.unwrap().name();
+                        let len = i.size();
+                        let enc = i.wireshark_endian_str();
+
+                        s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
+                    }
+                    ArrayType::Guid => {
+                        let name = w.unwrap().name();
+                        s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));
+                    }
+                    ArrayType::Struct(c) => {
+                        if !print_container(s, o, wo, variables, c) {
+                            s.closing_curly();
+                            return false;
+                        }
+                    }
+                    ArrayType::CString => {
+                        print_cstring(s, w);
+                    }
+                    ArrayType::PackedGuid => {
+                        s.wln("add_packed_guid(ptv, pinfo);");
+                    }
                 }
-                ArrayType::PackedGuid => {
-                    s.wln("add_packed_guid(ptv, pinfo);");
-                }
+
+                s.closing_curly();
             }
-
-            s.closing_curly();
-
-            true
         }
         Type::PackedGuid => {
             s.wln("add_packed_guid(ptv, pinfo);");
-            true
         }
         Type::AuraMask => {
             s.wln("add_aura_mask(ptv);");
-            true
         }
         Type::UpdateMask => {
             s.wln("add_update_mask(ptv, pinfo);");
-            true
         }
         Type::String { .. } => unreachable!("Strings are only in login messages"),
         Type::AchievementInProgressArray | Type::AchievementDoneArray => {
             unreachable!("achievement arrays are only in 3.3.5")
         }
     }
+
+    if d.tags().compressed().is_some() {
+        s.wln("ptvcursor_free(ptv);");
+        s.wln("ptv = old_ptv;");
+        s.wln("compressed_tvb = NULL;");
+        s.closing_curly(); // if (compressed_tvb != NULL)
+    }
+
+    true
 }
 
 fn print_cstring(s: &mut Writer, w: Option<&WiresharkMember>) {
