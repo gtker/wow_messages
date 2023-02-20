@@ -36,8 +36,10 @@ impl crate::Message for CMSG_GUILD_LEADER {
         }
 
         // new_guild_leader_name: CString
-        let new_guild_leader_name = crate::util::read_c_string_to_vec(r)?;
-        let new_guild_leader_name = String::from_utf8(new_guild_leader_name)?;
+        let new_guild_leader_name = {
+            let new_guild_leader_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(new_guild_leader_name)?
+        };
 
         Ok(Self {
             new_guild_leader_name,

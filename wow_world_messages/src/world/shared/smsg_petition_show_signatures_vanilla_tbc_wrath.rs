@@ -67,11 +67,13 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
         let amount_of_signatures = crate::util::read_u8_le(r)?;
 
         // signatures: PetitionSignature[amount_of_signatures]
-        let mut signatures = Vec::with_capacity(amount_of_signatures as usize);
-        for i in 0..amount_of_signatures {
-            signatures.push(PetitionSignature::read(r)?);
-        }
-
+        let signatures = {
+            let mut signatures = Vec::with_capacity(amount_of_signatures as usize);
+            for i in 0..amount_of_signatures {
+                signatures.push(PetitionSignature::read(r)?);
+            }
+            signatures
+        };
         Ok(Self {
             item,
             owner,

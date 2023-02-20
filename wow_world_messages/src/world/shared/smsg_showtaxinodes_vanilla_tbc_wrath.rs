@@ -61,16 +61,19 @@ impl crate::Message for SMSG_SHOWTAXINODES {
         let nearest_node = crate::util::read_u32_le(r)?;
 
         // nodes: u32[-]
-        let mut current_size = {
-            4 // unknown1: u32
-            + 8 // guid: Guid
-            + 4 // nearest_node: u32
+        let nodes = {
+            let mut current_size = {
+                4 // unknown1: u32
+                + 8 // guid: Guid
+                + 4 // nearest_node: u32
+            };
+            let mut nodes = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                nodes.push(crate::util::read_u32_le(r)?);
+                current_size += 1;
+            }
+            nodes
         };
-        let mut nodes = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            nodes.push(crate::util::read_u32_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             unknown1,

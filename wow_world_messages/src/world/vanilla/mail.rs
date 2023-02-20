@@ -211,8 +211,10 @@ impl Mail {
         };
 
         // subject: CString
-        let subject = crate::util::read_c_string_to_vec(r)?;
-        let subject = String::from_utf8(subject)?;
+        let subject = {
+            let subject = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(subject)?
+        };
 
         // item_text_id: u32
         let item_text_id = crate::util::read_u32_le(r)?;

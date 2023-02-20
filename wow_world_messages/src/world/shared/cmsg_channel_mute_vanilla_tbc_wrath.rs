@@ -45,12 +45,16 @@ impl crate::Message for CMSG_CHANNEL_MUTE {
         }
 
         // channel_name: CString
-        let channel_name = crate::util::read_c_string_to_vec(r)?;
-        let channel_name = String::from_utf8(channel_name)?;
+        let channel_name = {
+            let channel_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(channel_name)?
+        };
 
         // player_name: CString
-        let player_name = crate::util::read_c_string_to_vec(r)?;
-        let player_name = String::from_utf8(player_name)?;
+        let player_name = {
+            let player_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(player_name)?
+        };
 
         Ok(Self {
             channel_name,

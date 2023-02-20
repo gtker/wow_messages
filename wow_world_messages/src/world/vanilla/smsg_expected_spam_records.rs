@@ -44,12 +44,14 @@ impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
         let amount_of_records = crate::util::read_u32_le(r)?;
 
         // records: CString[amount_of_records]
-        let mut records = Vec::with_capacity(amount_of_records as usize);
-        for i in 0..amount_of_records {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            records.push(String::from_utf8(s)?);
-        }
-
+        let records = {
+            let mut records = Vec::with_capacity(amount_of_records as usize);
+            for i in 0..amount_of_records {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                records.push(String::from_utf8(s)?);
+            }
+            records
+        };
         Ok(Self {
             records,
         })

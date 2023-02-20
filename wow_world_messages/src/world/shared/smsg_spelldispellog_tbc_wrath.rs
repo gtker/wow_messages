@@ -77,11 +77,13 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
         let amount_of_spells = crate::util::read_u32_le(r)?;
 
         // spells: DispelledSpell[amount_of_spells]
-        let mut spells = Vec::with_capacity(amount_of_spells as usize);
-        for i in 0..amount_of_spells {
-            spells.push(DispelledSpell::read(r)?);
-        }
-
+        let spells = {
+            let mut spells = Vec::with_capacity(amount_of_spells as usize);
+            for i in 0..amount_of_spells {
+                spells.push(DispelledSpell::read(r)?);
+            }
+            spells
+        };
         Ok(Self {
             victim,
             caster,

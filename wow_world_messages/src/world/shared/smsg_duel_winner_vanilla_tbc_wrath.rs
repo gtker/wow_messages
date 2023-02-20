@@ -54,12 +54,16 @@ impl crate::Message for SMSG_DUEL_WINNER {
         let reason: DuelWinnerReason = crate::util::read_u8_le(r)?.try_into()?;
 
         // opponent_name: CString
-        let opponent_name = crate::util::read_c_string_to_vec(r)?;
-        let opponent_name = String::from_utf8(opponent_name)?;
+        let opponent_name = {
+            let opponent_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(opponent_name)?
+        };
 
         // initiator_name: CString
-        let initiator_name = crate::util::read_c_string_to_vec(r)?;
-        let initiator_name = String::from_utf8(initiator_name)?;
+        let initiator_name = {
+            let initiator_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(initiator_name)?
+        };
 
         Ok(Self {
             reason,

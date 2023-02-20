@@ -51,11 +51,13 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
         let amount_of_talents = crate::util::read_u32_le(r)?;
 
         // talents: Talent[amount_of_talents]
-        let mut talents = Vec::with_capacity(amount_of_talents as usize);
-        for i in 0..amount_of_talents {
-            talents.push(Talent::read(r)?);
-        }
-
+        let talents = {
+            let mut talents = Vec::with_capacity(amount_of_talents as usize);
+            for i in 0..amount_of_talents {
+                talents.push(Talent::read(r)?);
+            }
+            talents
+        };
         Ok(Self {
             pet,
             talents,

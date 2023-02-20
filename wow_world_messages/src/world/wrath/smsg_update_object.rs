@@ -42,11 +42,13 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
         let amount_of_objects = crate::util::read_u32_le(r)?;
 
         // objects: Object[amount_of_objects]
-        let mut objects = Vec::with_capacity(amount_of_objects as usize);
-        for i in 0..amount_of_objects {
-            objects.push(Object::read(r)?);
-        }
-
+        let objects = {
+            let mut objects = Vec::with_capacity(amount_of_objects as usize);
+            for i in 0..amount_of_objects {
+                objects.push(Object::read(r)?);
+            }
+            objects
+        };
         Ok(Self {
             objects,
         })

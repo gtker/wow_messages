@@ -52,8 +52,10 @@ impl crate::Message for CMSG_GUILD_RANK {
         let rights = crate::util::read_u32_le(r)?;
 
         // rank_name: CString
-        let rank_name = crate::util::read_c_string_to_vec(r)?;
-        let rank_name = String::from_utf8(rank_name)?;
+        let rank_name = {
+            let rank_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(rank_name)?
+        };
 
         Ok(Self {
             rank_id,

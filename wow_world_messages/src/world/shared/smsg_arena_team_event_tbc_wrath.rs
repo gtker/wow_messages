@@ -199,12 +199,16 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
         let event_if = match event {
             ArenaTeamEvent::Join => {
                 // joiner_name: CString
-                let joiner_name = crate::util::read_c_string_to_vec(r)?;
-                let joiner_name = String::from_utf8(joiner_name)?;
+                let joiner_name = {
+                    let joiner_name = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(joiner_name)?
+                };
 
                 // arena_team_name1: CString
-                let arena_team_name1 = crate::util::read_c_string_to_vec(r)?;
-                let arena_team_name1 = String::from_utf8(arena_team_name1)?;
+                let arena_team_name1 = {
+                    let arena_team_name1 = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(arena_team_name1)?
+                };
 
                 // joiner: Guid
                 let joiner = Guid::read(r)?;
@@ -217,8 +221,10 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             }
             ArenaTeamEvent::Leave => {
                 // leaver_name: CString
-                let leaver_name = crate::util::read_c_string_to_vec(r)?;
-                let leaver_name = String::from_utf8(leaver_name)?;
+                let leaver_name = {
+                    let leaver_name = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(leaver_name)?
+                };
 
                 // leaver: Guid
                 let leaver = Guid::read(r)?;
@@ -230,16 +236,22 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             }
             ArenaTeamEvent::Remove => {
                 // kicked_player_name: CString
-                let kicked_player_name = crate::util::read_c_string_to_vec(r)?;
-                let kicked_player_name = String::from_utf8(kicked_player_name)?;
+                let kicked_player_name = {
+                    let kicked_player_name = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(kicked_player_name)?
+                };
 
                 // arena_team_name2: CString
-                let arena_team_name2 = crate::util::read_c_string_to_vec(r)?;
-                let arena_team_name2 = String::from_utf8(arena_team_name2)?;
+                let arena_team_name2 = {
+                    let arena_team_name2 = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(arena_team_name2)?
+                };
 
                 // kicker_name: CString
-                let kicker_name = crate::util::read_c_string_to_vec(r)?;
-                let kicker_name = String::from_utf8(kicker_name)?;
+                let kicker_name = {
+                    let kicker_name = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(kicker_name)?
+                };
 
                 SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
                     arena_team_name2,
@@ -249,12 +261,16 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             }
             ArenaTeamEvent::LeaderIs => {
                 // leader_name: CString
-                let leader_name = crate::util::read_c_string_to_vec(r)?;
-                let leader_name = String::from_utf8(leader_name)?;
+                let leader_name = {
+                    let leader_name = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(leader_name)?
+                };
 
                 // arena_team_name3: CString
-                let arena_team_name3 = crate::util::read_c_string_to_vec(r)?;
-                let arena_team_name3 = String::from_utf8(arena_team_name3)?;
+                let arena_team_name3 = {
+                    let arena_team_name3 = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(arena_team_name3)?
+                };
 
                 SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
                     arena_team_name3,
@@ -263,12 +279,16 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             }
             ArenaTeamEvent::LeaderChanged => {
                 // old_leader: CString
-                let old_leader = crate::util::read_c_string_to_vec(r)?;
-                let old_leader = String::from_utf8(old_leader)?;
+                let old_leader = {
+                    let old_leader = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(old_leader)?
+                };
 
                 // new_leader: CString
-                let new_leader = crate::util::read_c_string_to_vec(r)?;
-                let new_leader = String::from_utf8(new_leader)?;
+                let new_leader = {
+                    let new_leader = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(new_leader)?
+                };
 
                 SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
                     new_leader,
@@ -277,12 +297,16 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             }
             ArenaTeamEvent::Disbanded => {
                 // leader_name: CString
-                let leader_name = crate::util::read_c_string_to_vec(r)?;
-                let leader_name = String::from_utf8(leader_name)?;
+                let leader_name = {
+                    let leader_name = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(leader_name)?
+                };
 
                 // arena_team_name3: CString
-                let arena_team_name3 = crate::util::read_c_string_to_vec(r)?;
-                let arena_team_name3 = String::from_utf8(arena_team_name3)?;
+                let arena_team_name3 = {
+                    let arena_team_name3 = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(arena_team_name3)?
+                };
 
                 SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
                     arena_team_name3,
@@ -295,12 +319,14 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
         let amount_of_strings = crate::util::read_u8_le(r)?;
 
         // string: CString[amount_of_strings]
-        let mut string = Vec::with_capacity(amount_of_strings as usize);
-        for i in 0..amount_of_strings {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            string.push(String::from_utf8(s)?);
-        }
-
+        let string = {
+            let mut string = Vec::with_capacity(amount_of_strings as usize);
+            for i in 0..amount_of_strings {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                string.push(String::from_utf8(s)?);
+            }
+            string
+        };
         Ok(Self {
             event: event_if,
             string,

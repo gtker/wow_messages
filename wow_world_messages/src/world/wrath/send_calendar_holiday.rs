@@ -88,26 +88,37 @@ impl SendCalendarHoliday {
         let calendar_filter_type = crate::util::read_u32_le(r)?;
 
         // holiday_days: u32[26]
-        let mut holiday_days = [u32::default(); 26];
-        for i in holiday_days.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let holiday_days = {
+            let mut holiday_days = [u32::default(); 26];
+            for i in holiday_days.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            holiday_days
+        };
 
         // durations: u32[10]
-        let mut durations = [u32::default(); 10];
-        for i in durations.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let durations = {
+            let mut durations = [u32::default(); 10];
+            for i in durations.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            durations
+        };
 
         // flags: u32[10]
-        let mut flags = [u32::default(); 10];
-        for i in flags.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let flags = {
+            let mut flags = [u32::default(); 10];
+            for i in flags.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            flags
+        };
 
         // texture_file_name: CString
-        let texture_file_name = crate::util::read_c_string_to_vec(r)?;
-        let texture_file_name = String::from_utf8(texture_file_name)?;
+        let texture_file_name = {
+            let texture_file_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(texture_file_name)?
+        };
 
         Ok(Self {
             holiday_id,

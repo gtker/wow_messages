@@ -33,10 +33,13 @@ impl crate::Message for CMSG_EQUIPMENT_SET_USE {
         }
 
         // sets: EquipmentSet[19]
-        let mut sets = [EquipmentSet::default(); 19];
-        for i in sets.iter_mut() {
-            *i = EquipmentSet::read(r)?;
-        }
+        let sets = {
+            let mut sets = [EquipmentSet::default(); 19];
+            for i in sets.iter_mut() {
+                *i = EquipmentSet::read(r)?;
+            }
+            sets
+        };
 
         Ok(Self {
             sets,

@@ -98,12 +98,16 @@ impl crate::Message for CMSG_CALENDAR_UPDATE_EVENT {
         let invite_id = Guid::read(r)?;
 
         // title: CString
-        let title = crate::util::read_c_string_to_vec(r)?;
-        let title = String::from_utf8(title)?;
+        let title = {
+            let title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(title)?
+        };
 
         // description: CString
-        let description = crate::util::read_c_string_to_vec(r)?;
-        let description = String::from_utf8(description)?;
+        let description = {
+            let description = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(description)?
+        };
 
         // event_type: u8
         let event_type = crate::util::read_u8_le(r)?;

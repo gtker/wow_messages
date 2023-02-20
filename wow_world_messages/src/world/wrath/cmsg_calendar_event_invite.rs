@@ -63,8 +63,10 @@ impl crate::Message for CMSG_CALENDAR_EVENT_INVITE {
         let invite_id = Guid::read(r)?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // pre_event: Bool
         let pre_event = crate::util::read_u8_le(r)? != 0;

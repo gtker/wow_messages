@@ -438,11 +438,13 @@ impl MovementBlock {
                 let amount_of_nodes = crate::util::read_u32_le(r)?;
 
                 // nodes: Vector3d[amount_of_nodes]
-                let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
-                for i in 0..amount_of_nodes {
-                    nodes.push(Vector3d::read(r)?);
-                }
-
+                let nodes = {
+                    let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
+                    for i in 0..amount_of_nodes {
+                        nodes.push(Vector3d::read(r)?);
+                    }
+                    nodes
+                };
                 // final_node: Vector3d
                 let final_node = Vector3d::read(r)?;
 

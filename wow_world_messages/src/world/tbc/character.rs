@@ -141,8 +141,10 @@ impl Character {
         let guid = Guid::read(r)?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // race: Race
         let race: Race = crate::util::read_u8_le(r)?.try_into()?;
@@ -198,10 +200,13 @@ impl Character {
         let pet_family: CreatureFamily = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // equipment: CharacterGear[20]
-        let mut equipment = [CharacterGear::default(); 20];
-        for i in equipment.iter_mut() {
-            *i = CharacterGear::read(r)?;
-        }
+        let equipment = {
+            let mut equipment = [CharacterGear::default(); 20];
+            for i in equipment.iter_mut() {
+                *i = CharacterGear::read(r)?;
+            }
+            equipment
+        };
 
         Ok(Self {
             guid,

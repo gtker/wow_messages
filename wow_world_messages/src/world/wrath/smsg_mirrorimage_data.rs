@@ -126,10 +126,13 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
         let guild_id = crate::util::read_u32_le(r)?;
 
         // display_ids: u32[11]
-        let mut display_ids = [u32::default(); 11];
-        for i in display_ids.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let display_ids = {
+            let mut display_ids = [u32::default(); 11];
+            for i in display_ids.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            display_ids
+        };
 
         Ok(Self {
             guid,

@@ -61,9 +61,11 @@ impl crate::Message for SMSG_TEXT_EMOTE {
         let emote: Emote = crate::util::read_u32_le(r)?.try_into()?;
 
         // name: SizedCString
-        let name = crate::util::read_u32_le(r)?;
-        let name = crate::util::read_sized_c_string_to_vec(r, name)?;
-        let name = String::from_utf8(name)?;;
+        let name = {
+            let name = crate::util::read_u32_le(r)?;
+            let name = crate::util::read_sized_c_string_to_vec(r, name)?;
+            String::from_utf8(name)?
+        };
         Ok(Self {
             guid,
             text_emote,

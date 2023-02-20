@@ -65,12 +65,16 @@ impl WhoPlayer {
 impl WhoPlayer {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // guild: CString
-        let guild = crate::util::read_c_string_to_vec(r)?;
-        let guild = String::from_utf8(guild)?;
+        let guild = {
+            let guild = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(guild)?
+        };
 
         // level: u32
         let level = crate::util::read_u32_le(r)?;

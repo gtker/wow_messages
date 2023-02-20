@@ -106,16 +106,22 @@ impl crate::Message for CMSG_SEND_MAIL {
         let mailbox = Guid::read(r)?;
 
         // receiver: CString
-        let receiver = crate::util::read_c_string_to_vec(r)?;
-        let receiver = String::from_utf8(receiver)?;
+        let receiver = {
+            let receiver = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(receiver)?
+        };
 
         // subject: CString
-        let subject = crate::util::read_c_string_to_vec(r)?;
-        let subject = String::from_utf8(subject)?;
+        let subject = {
+            let subject = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(subject)?
+        };
 
         // body: CString
-        let body = crate::util::read_c_string_to_vec(r)?;
-        let body = String::from_utf8(body)?;
+        let body = {
+            let body = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(body)?
+        };
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;

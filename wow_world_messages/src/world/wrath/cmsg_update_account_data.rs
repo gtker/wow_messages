@@ -67,18 +67,21 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         let decompressed_size = crate::util::read_u32_le(r)?;
 
         // compressed_data: u8[-]
-        let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+        let compressed_data = {
+            let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
-        let mut current_size = {
-            4 // data_type: u32
-            + 4 // unix_time: u32
-            + 4 // decompressed_size: u32
+            let mut current_size = {
+                4 // data_type: u32
+                + 4 // unix_time: u32
+                + 4 // decompressed_size: u32
+            };
+            let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
+            while decoder.total_out() < (decompressed_size as u64) {
+                compressed_data.push(crate::util::read_u8_le(decoder)?);
+                current_size += 1;
+            }
+            compressed_data
         };
-        let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
-        while decoder.total_out() < (decompressed_size as u64) {
-            compressed_data.push(crate::util::read_u8_le(decoder)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             data_type,

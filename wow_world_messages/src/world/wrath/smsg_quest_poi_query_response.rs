@@ -42,11 +42,13 @@ impl crate::Message for SMSG_QUEST_POI_QUERY_RESPONSE {
         let amount_of_quests = crate::util::read_u32_le(r)?;
 
         // quests: QuestPoiList[amount_of_quests]
-        let mut quests = Vec::with_capacity(amount_of_quests as usize);
-        for i in 0..amount_of_quests {
-            quests.push(QuestPoiList::read(r)?);
-        }
-
+        let quests = {
+            let mut quests = Vec::with_capacity(amount_of_quests as usize);
+            for i in 0..amount_of_quests {
+                quests.push(QuestPoiList::read(r)?);
+            }
+            quests
+        };
         Ok(Self {
             quests,
         })

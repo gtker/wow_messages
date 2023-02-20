@@ -75,8 +75,10 @@ impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
         let arena_team = crate::util::read_u32_le(r)?;
 
         // team_name: CString
-        let team_name = crate::util::read_c_string_to_vec(r)?;
-        let team_name = String::from_utf8(team_name)?;
+        let team_name = {
+            let team_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(team_name)?
+        };
 
         // team_type: ArenaType
         let team_type: ArenaType = crate::util::read_u8_le(r)?.try_into()?;

@@ -60,8 +60,11 @@ impl crate::Message for SMSG_REDIRECT_CLIENT {
         let unknown = crate::util::read_u32_le(r)?;
 
         // hash: u8[20]
-        let mut hash = [0_u8; 20];
-        r.read_exact(&mut hash)?;
+        let hash = {
+            let mut hash = [0_u8; 20];
+            r.read_exact(&mut hash)?;
+            hash
+        };
 
         Ok(Self {
             ip_address,

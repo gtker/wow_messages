@@ -47,11 +47,13 @@ impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
         let count = crate::util::read_u32_le(r)?;
 
         // auctions: AuctionListItem[count]
-        let mut auctions = Vec::with_capacity(count as usize);
-        for i in 0..count {
-            auctions.push(AuctionListItem::read(r)?);
-        }
-
+        let auctions = {
+            let mut auctions = Vec::with_capacity(count as usize);
+            for i in 0..count {
+                auctions.push(AuctionListItem::read(r)?);
+            }
+            auctions
+        };
         // total_amount_of_auctions: u32
         let total_amount_of_auctions = crate::util::read_u32_le(r)?;
 

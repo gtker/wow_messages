@@ -82,10 +82,13 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         let spell_on_lowest_slot = crate::util::read_u32_le(r)?;
 
         // trade_slots: TradeSlot[7]
-        let mut trade_slots = [TradeSlot::default(); 7];
-        for i in trade_slots.iter_mut() {
-            *i = TradeSlot::read(r)?;
-        }
+        let trade_slots = {
+            let mut trade_slots = [TradeSlot::default(); 7];
+            for i in trade_slots.iter_mut() {
+                *i = TradeSlot::read(r)?;
+            }
+            trade_slots
+        };
 
         Ok(Self {
             self_player,

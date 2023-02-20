@@ -42,11 +42,13 @@ impl crate::Message for SMSG_PET_GUIDS {
         let amount_of_guids = crate::util::read_u32_le(r)?;
 
         // guids: Guid[amount_of_guids]
-        let mut guids = Vec::with_capacity(amount_of_guids as usize);
-        for i in 0..amount_of_guids {
-            guids.push(Guid::read(r)?);
-        }
-
+        let guids = {
+            let mut guids = Vec::with_capacity(amount_of_guids as usize);
+            for i in 0..amount_of_guids {
+                guids.push(Guid::read(r)?);
+            }
+            guids
+        };
         Ok(Self {
             guids,
         })

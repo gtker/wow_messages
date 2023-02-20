@@ -44,14 +44,17 @@ impl crate::Message for SMSG_AURA_UPDATE_ALL {
         let unit = Guid::read_packed(r)?;
 
         // aura_updates: AuraUpdate[-]
-        let mut current_size = {
-            unit.size() // unit: Guid
+        let aura_updates = {
+            let mut current_size = {
+                unit.size() // unit: Guid
+            };
+            let mut aura_updates = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                aura_updates.push(AuraUpdate::read(r)?);
+                current_size += 1;
+            }
+            aura_updates
         };
-        let mut aura_updates = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            aura_updates.push(AuraUpdate::read(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             unit,

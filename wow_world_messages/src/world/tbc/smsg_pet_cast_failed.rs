@@ -438,10 +438,13 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             SpellCastResult::TooManyOfItem => SMSG_PET_CAST_FAILED_SpellCastResult::TooManyOfItem,
             SpellCastResult::TotemCategory => {
                 // totem_categories: u32[2]
-                let mut totem_categories = [u32::default(); 2];
-                for i in totem_categories.iter_mut() {
-                    *i = crate::util::read_u32_le(r)?;
-                }
+                let totem_categories = {
+                    let mut totem_categories = [u32::default(); 2];
+                    for i in totem_categories.iter_mut() {
+                        *i = crate::util::read_u32_le(r)?;
+                    }
+                    totem_categories
+                };
 
                 SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
                     totem_categories,
@@ -449,10 +452,13 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             }
             SpellCastResult::Totems => {
                 // totems: u32[2]
-                let mut totems = [u32::default(); 2];
-                for i in totems.iter_mut() {
-                    *i = crate::util::read_u32_le(r)?;
-                }
+                let totems = {
+                    let mut totems = [u32::default(); 2];
+                    for i in totems.iter_mut() {
+                        *i = crate::util::read_u32_le(r)?;
+                    }
+                    totems
+                };
 
                 SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
                     totems,

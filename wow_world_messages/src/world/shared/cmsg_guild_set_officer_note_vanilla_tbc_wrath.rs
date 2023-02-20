@@ -47,12 +47,16 @@ impl crate::Message for CMSG_GUILD_SET_OFFICER_NOTE {
         }
 
         // player_name: CString
-        let player_name = crate::util::read_c_string_to_vec(r)?;
-        let player_name = String::from_utf8(player_name)?;
+        let player_name = {
+            let player_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(player_name)?
+        };
 
         // note: CString
-        let note = crate::util::read_c_string_to_vec(r)?;
-        let note = String::from_utf8(note)?;
+        let note = {
+            let note = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(note)?
+        };
 
         Ok(Self {
             player_name,

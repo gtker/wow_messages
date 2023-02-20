@@ -135,46 +135,66 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             let display_id = crate::util::read_u32_le(r)?;
 
             // name1: CString
-            let name1 = crate::util::read_c_string_to_vec(r)?;
-            let name1 = String::from_utf8(name1)?;
+            let name1 = {
+                let name1 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name1)?
+            };
 
             // name2: CString
-            let name2 = crate::util::read_c_string_to_vec(r)?;
-            let name2 = String::from_utf8(name2)?;
+            let name2 = {
+                let name2 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name2)?
+            };
 
             // name3: CString
-            let name3 = crate::util::read_c_string_to_vec(r)?;
-            let name3 = String::from_utf8(name3)?;
+            let name3 = {
+                let name3 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name3)?
+            };
 
             // name4: CString
-            let name4 = crate::util::read_c_string_to_vec(r)?;
-            let name4 = String::from_utf8(name4)?;
+            let name4 = {
+                let name4 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name4)?
+            };
 
             // icon_name: CString
-            let icon_name = crate::util::read_c_string_to_vec(r)?;
-            let icon_name = String::from_utf8(icon_name)?;
+            let icon_name = {
+                let icon_name = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(icon_name)?
+            };
 
             // cast_bar_caption: CString
-            let cast_bar_caption = crate::util::read_c_string_to_vec(r)?;
-            let cast_bar_caption = String::from_utf8(cast_bar_caption)?;
+            let cast_bar_caption = {
+                let cast_bar_caption = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(cast_bar_caption)?
+            };
 
             // unknown: CString
-            let unknown = crate::util::read_c_string_to_vec(r)?;
-            let unknown = String::from_utf8(unknown)?;
+            let unknown = {
+                let unknown = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(unknown)?
+            };
 
             // raw_data: u32[6]
-            let mut raw_data = [u32::default(); 6];
-            for i in raw_data.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
-            }
+            let raw_data = {
+                let mut raw_data = [u32::default(); 6];
+                for i in raw_data.iter_mut() {
+                    *i = crate::util::read_u32_le(r)?;
+                }
+                raw_data
+            };
 
             // gameobject_size: f32
             let gameobject_size = crate::util::read_f32_le(r)?;
             // gameobject_quest_items: u32[6]
-            let mut gameobject_quest_items = [u32::default(); 6];
-            for i in gameobject_quest_items.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
-            }
+            let gameobject_quest_items = {
+                let mut gameobject_quest_items = [u32::default(); 6];
+                for i in gameobject_quest_items.iter_mut() {
+                    *i = crate::util::read_u32_le(r)?;
+                }
+                gameobject_quest_items
+            };
 
             Some(SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
                 info_type,

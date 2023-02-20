@@ -41,11 +41,13 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
         let amount_of_pois = crate::util::read_u32_le(r)?;
 
         // points_of_interests: u32[amount_of_pois]
-        let mut points_of_interests = Vec::with_capacity(amount_of_pois as usize);
-        for i in 0..amount_of_pois {
-            points_of_interests.push(crate::util::read_u32_le(r)?);
-        }
-
+        let points_of_interests = {
+            let mut points_of_interests = Vec::with_capacity(amount_of_pois as usize);
+            for i in 0..amount_of_pois {
+                points_of_interests.push(crate::util::read_u32_le(r)?);
+            }
+            points_of_interests
+        };
         Ok(Self {
             points_of_interests,
         })

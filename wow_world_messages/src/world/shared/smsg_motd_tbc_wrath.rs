@@ -35,9 +35,11 @@ impl crate::Message for SMSG_MOTD {
         }
 
         // motd: SizedCString
-        let motd = crate::util::read_u32_le(r)?;
-        let motd = crate::util::read_sized_c_string_to_vec(r, motd)?;
-        let motd = String::from_utf8(motd)?;;
+        let motd = {
+            let motd = crate::util::read_u32_le(r)?;
+            let motd = crate::util::read_sized_c_string_to_vec(r, motd)?;
+            String::from_utf8(motd)?
+        };
         Ok(Self {
             motd,
         })

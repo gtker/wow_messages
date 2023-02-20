@@ -62,12 +62,16 @@ impl crate::Message for CMSG_GUILD_BANK_UPDATE_TAB {
         let tab = crate::util::read_u8_le(r)?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // icon: CString
-        let icon = crate::util::read_c_string_to_vec(r)?;
-        let icon = String::from_utf8(icon)?;
+        let icon = {
+            let icon = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(icon)?
+        };
 
         Ok(Self {
             bank,

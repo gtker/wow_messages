@@ -51,8 +51,10 @@ impl crate::Message for SMSG_GUILD_COMMAND_RESULT {
         let command: GuildCommand = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // string: CString
-        let string = crate::util::read_c_string_to_vec(r)?;
-        let string = String::from_utf8(string)?;
+        let string = {
+            let string = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(string)?
+        };
 
         // result: GuildCommandResult
         let result: GuildCommandResult = (crate::util::read_u32_le(r)? as u8).try_into()?;

@@ -207,11 +207,13 @@ impl Object {
                 let count = crate::util::read_u32_le(r)?;
 
                 // guids: PackedGuid[count]
-                let mut guids = Vec::with_capacity(count as usize);
-                for i in 0..count {
-                    guids.push(Guid::read_packed(r)?);
-                }
-
+                let guids = {
+                    let mut guids = Vec::with_capacity(count as usize);
+                    for i in 0..count {
+                        guids.push(Guid::read_packed(r)?);
+                    }
+                    guids
+                };
                 Object_UpdateType::OutOfRangeObjects {
                     guids,
                 }
@@ -221,11 +223,13 @@ impl Object {
                 let count = crate::util::read_u32_le(r)?;
 
                 // guids: PackedGuid[count]
-                let mut guids = Vec::with_capacity(count as usize);
-                for i in 0..count {
-                    guids.push(Guid::read_packed(r)?);
-                }
-
+                let guids = {
+                    let mut guids = Vec::with_capacity(count as usize);
+                    for i in 0..count {
+                        guids.push(Guid::read_packed(r)?);
+                    }
+                    guids
+                };
                 Object_UpdateType::NearObjects {
                     guids,
                 }

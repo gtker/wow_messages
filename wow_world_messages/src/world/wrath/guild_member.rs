@@ -115,8 +115,10 @@ impl GuildMember {
         let status: GuildMemberStatus = crate::util::read_u8_le(r)?.try_into()?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // rank: u32
         let rank = crate::util::read_u32_le(r)?;
@@ -145,12 +147,16 @@ impl GuildMember {
         };
 
         // public_note: CString
-        let public_note = crate::util::read_c_string_to_vec(r)?;
-        let public_note = String::from_utf8(public_note)?;
+        let public_note = {
+            let public_note = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(public_note)?
+        };
 
         // officer_note: CString
-        let officer_note = crate::util::read_c_string_to_vec(r)?;
-        let officer_note = String::from_utf8(officer_note)?;
+        let officer_note = {
+            let officer_note = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(officer_note)?
+        };
 
         Ok(Self {
             guid,

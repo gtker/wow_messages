@@ -70,11 +70,13 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
         let arena_type: ArenaType = crate::util::read_u8_le(r)?.try_into()?;
 
         // members: ArenaTeamMember[amount_of_members]
-        let mut members = Vec::with_capacity(amount_of_members as usize);
-        for i in 0..amount_of_members {
-            members.push(ArenaTeamMember::read(r)?);
-        }
-
+        let members = {
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for i in 0..amount_of_members {
+                members.push(ArenaTeamMember::read(r)?);
+            }
+            members
+        };
         Ok(Self {
             arena_team,
             unknown,

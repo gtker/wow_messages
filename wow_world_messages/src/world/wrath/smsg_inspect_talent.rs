@@ -78,20 +78,24 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         let active_spec = crate::util::read_u8_le(r)?;
 
         // specs: InspectTalentSpec[amount_of_specs]
-        let mut specs = Vec::with_capacity(amount_of_specs as usize);
-        for i in 0..amount_of_specs {
-            specs.push(InspectTalentSpec::read(r)?);
-        }
-
+        let specs = {
+            let mut specs = Vec::with_capacity(amount_of_specs as usize);
+            for i in 0..amount_of_specs {
+                specs.push(InspectTalentSpec::read(r)?);
+            }
+            specs
+        };
         // amount_of_glyphs: u8
         let amount_of_glyphs = crate::util::read_u8_le(r)?;
 
         // glyphs: u16[amount_of_glyphs]
-        let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
-        for i in 0..amount_of_glyphs {
-            glyphs.push(crate::util::read_u16_le(r)?);
-        }
-
+        let glyphs = {
+            let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
+            for i in 0..amount_of_glyphs {
+                glyphs.push(crate::util::read_u16_le(r)?);
+            }
+            glyphs
+        };
         Ok(Self {
             player,
             unspent_talent_points,

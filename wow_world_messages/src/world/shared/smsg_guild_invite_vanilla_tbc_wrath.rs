@@ -45,12 +45,16 @@ impl crate::Message for SMSG_GUILD_INVITE {
         }
 
         // player_name: CString
-        let player_name = crate::util::read_c_string_to_vec(r)?;
-        let player_name = String::from_utf8(player_name)?;
+        let player_name = {
+            let player_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(player_name)?
+        };
 
         // guild_name: CString
-        let guild_name = crate::util::read_c_string_to_vec(r)?;
-        let guild_name = String::from_utf8(guild_name)?;
+        let guild_name = {
+            let guild_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(guild_name)?
+        };
 
         Ok(Self {
             player_name,

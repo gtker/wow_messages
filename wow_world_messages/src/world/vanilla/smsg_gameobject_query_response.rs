@@ -109,30 +109,43 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
             let display_id = crate::util::read_u32_le(r)?;
 
             // name1: CString
-            let name1 = crate::util::read_c_string_to_vec(r)?;
-            let name1 = String::from_utf8(name1)?;
+            let name1 = {
+                let name1 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name1)?
+            };
 
             // name2: CString
-            let name2 = crate::util::read_c_string_to_vec(r)?;
-            let name2 = String::from_utf8(name2)?;
+            let name2 = {
+                let name2 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name2)?
+            };
 
             // name3: CString
-            let name3 = crate::util::read_c_string_to_vec(r)?;
-            let name3 = String::from_utf8(name3)?;
+            let name3 = {
+                let name3 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name3)?
+            };
 
             // name4: CString
-            let name4 = crate::util::read_c_string_to_vec(r)?;
-            let name4 = String::from_utf8(name4)?;
+            let name4 = {
+                let name4 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name4)?
+            };
 
             // name5: CString
-            let name5 = crate::util::read_c_string_to_vec(r)?;
-            let name5 = String::from_utf8(name5)?;
+            let name5 = {
+                let name5 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name5)?
+            };
 
             // raw_data: u32[6]
-            let mut raw_data = [u32::default(); 6];
-            for i in raw_data.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
-            }
+            let raw_data = {
+                let mut raw_data = [u32::default(); 6];
+                for i in raw_data.iter_mut() {
+                    *i = crate::util::read_u32_le(r)?;
+                }
+                raw_data
+            };
 
             Some(SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
                 info_type,

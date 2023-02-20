@@ -41,8 +41,10 @@ impl crate::Message for CMSG_GROUP_INVITE {
         }
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;

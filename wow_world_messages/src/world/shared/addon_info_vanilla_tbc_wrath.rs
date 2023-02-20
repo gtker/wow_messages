@@ -42,8 +42,10 @@ impl AddonInfo {
 impl AddonInfo {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // addon_name: CString
-        let addon_name = crate::util::read_c_string_to_vec(r)?;
-        let addon_name = String::from_utf8(addon_name)?;
+        let addon_name = {
+            let addon_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(addon_name)?
+        };
 
         // addon_has_signature: u8
         let addon_has_signature = crate::util::read_u8_le(r)?;

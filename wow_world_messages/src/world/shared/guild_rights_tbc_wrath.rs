@@ -42,10 +42,13 @@ impl GuildRights {
         let money_per_day = crate::util::read_u32_le(r)?;
 
         // bank_tab_rights: GuildBankRights[6]
-        let mut bank_tab_rights = [GuildBankRights::default(); 6];
-        for i in bank_tab_rights.iter_mut() {
-            *i = GuildBankRights::read(r)?;
-        }
+        let bank_tab_rights = {
+            let mut bank_tab_rights = [GuildBankRights::default(); 6];
+            for i in bank_tab_rights.iter_mut() {
+                *i = GuildBankRights::read(r)?;
+            }
+            bank_tab_rights
+        };
 
         Ok(Self {
             rights,

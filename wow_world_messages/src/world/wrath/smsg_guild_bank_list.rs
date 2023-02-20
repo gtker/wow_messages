@@ -114,11 +114,13 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
                 let amount_of_bank_tabs = crate::util::read_u8_le(r)?;
 
                 // tabs: GuildBankTab[amount_of_bank_tabs]
-                let mut tabs = Vec::with_capacity(amount_of_bank_tabs as usize);
-                for i in 0..amount_of_bank_tabs {
-                    tabs.push(GuildBankTab::read(r)?);
-                }
-
+                let tabs = {
+                    let mut tabs = Vec::with_capacity(amount_of_bank_tabs as usize);
+                    for i in 0..amount_of_bank_tabs {
+                        tabs.push(GuildBankTab::read(r)?);
+                    }
+                    tabs
+                };
                 SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
                     tabs,
                 }
@@ -135,11 +137,13 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
                 let amount_of_slot_updates = crate::util::read_u8_le(r)?;
 
                 // slot_updates: GuildBankSlot[amount_of_slot_updates]
-                let mut slot_updates = Vec::with_capacity(amount_of_slot_updates as usize);
-                for i in 0..amount_of_slot_updates {
-                    slot_updates.push(GuildBankSlot::read(r)?);
-                }
-
+                let slot_updates = {
+                    let mut slot_updates = Vec::with_capacity(amount_of_slot_updates as usize);
+                    for i in 0..amount_of_slot_updates {
+                        slot_updates.push(GuildBankSlot::read(r)?);
+                    }
+                    slot_updates
+                };
                 SMSG_GUILD_BANK_LIST_GuildBankContentResult::Present {
                     slot_updates,
                 }

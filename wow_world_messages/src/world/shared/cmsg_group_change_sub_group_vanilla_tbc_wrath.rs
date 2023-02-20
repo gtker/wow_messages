@@ -41,8 +41,10 @@ impl crate::Message for CMSG_GROUP_CHANGE_SUB_GROUP {
         }
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // group_number: u8
         let group_number = crate::util::read_u8_le(r)?;

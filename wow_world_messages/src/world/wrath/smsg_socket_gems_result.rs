@@ -41,10 +41,13 @@ impl crate::Message for SMSG_SOCKET_GEMS_RESULT {
         let item = Guid::read(r)?;
 
         // sockets: u32[3]
-        let mut sockets = [u32::default(); 3];
-        for i in sockets.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let sockets = {
+            let mut sockets = [u32::default(); 3];
+            for i in sockets.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            sockets
+        };
 
         Ok(Self {
             item,

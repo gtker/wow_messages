@@ -134,9 +134,11 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
         let client_ip_address = crate::util::read_u32_be(r)?;
 
         // account_name: String
-        let account_name = crate::util::read_u8_le(r)?;
-        let account_name = crate::util::read_fixed_string_to_vec(r, account_name as usize)?;
-        let account_name = String::from_utf8(account_name)?;
+        let account_name = {
+            let account_name = crate::util::read_u8_le(r)?;
+            let account_name = crate::util::read_fixed_string_to_vec(r, account_name as usize)?;
+            String::from_utf8(account_name)?
+        };
 
         Ok(Self {
             protocol_version,
@@ -199,9 +201,11 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
             let client_ip_address = crate::util::tokio_read_u32_be(r).await?;
 
             // account_name: String
-            let account_name = crate::util::tokio_read_u8_le(r).await?;
-            let account_name = crate::util::tokio_read_fixed_string_to_vec(r, account_name as usize).await?;
-            let account_name = String::from_utf8(account_name)?;
+            let account_name = {
+                let account_name = crate::util::tokio_read_u8_le(r).await?;
+                let account_name = crate::util::tokio_read_fixed_string_to_vec(r, account_name as usize).await?;
+                String::from_utf8(account_name)?
+            };
 
             Ok(Self {
                 protocol_version,
@@ -278,9 +282,11 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
             let client_ip_address = crate::util::astd_read_u32_be(r).await?;
 
             // account_name: String
-            let account_name = crate::util::astd_read_u8_le(r).await?;
-            let account_name = crate::util::astd_read_fixed_string_to_vec(r, account_name as usize).await?;
-            let account_name = String::from_utf8(account_name)?;
+            let account_name = {
+                let account_name = crate::util::astd_read_u8_le(r).await?;
+                let account_name = crate::util::astd_read_fixed_string_to_vec(r, account_name as usize).await?;
+                String::from_utf8(account_name)?
+            };
 
             Ok(Self {
                 protocol_version,

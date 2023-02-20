@@ -121,29 +121,36 @@ impl crate::Message for SMSG_PET_SPELLS {
             let pet_enabled: PetEnabled = crate::util::read_u8_le(r)?.try_into()?;
 
             // action_bars: u32[10]
-            let mut action_bars = [u32::default(); 10];
-            for i in action_bars.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
-            }
+            let action_bars = {
+                let mut action_bars = [u32::default(); 10];
+                for i in action_bars.iter_mut() {
+                    *i = crate::util::read_u32_le(r)?;
+                }
+                action_bars
+            };
 
             // amount_of_spells: u8
             let amount_of_spells = crate::util::read_u8_le(r)?;
 
             // spells: u32[amount_of_spells]
-            let mut spells = Vec::with_capacity(amount_of_spells as usize);
-            for i in 0..amount_of_spells {
-                spells.push(crate::util::read_u32_le(r)?);
-            }
-
+            let spells = {
+                let mut spells = Vec::with_capacity(amount_of_spells as usize);
+                for i in 0..amount_of_spells {
+                    spells.push(crate::util::read_u32_le(r)?);
+                }
+                spells
+            };
             // amount_of_cooldowns: u8
             let amount_of_cooldowns = crate::util::read_u8_le(r)?;
 
             // cooldowns: PetSpellCooldown[amount_of_cooldowns]
-            let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
-            for i in 0..amount_of_cooldowns {
-                cooldowns.push(PetSpellCooldown::read(r)?);
-            }
-
+            let cooldowns = {
+                let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
+                for i in 0..amount_of_cooldowns {
+                    cooldowns.push(PetSpellCooldown::read(r)?);
+                }
+                cooldowns
+            };
             Some(SMSG_PET_SPELLS_action_bars {
                 family,
                 duration,

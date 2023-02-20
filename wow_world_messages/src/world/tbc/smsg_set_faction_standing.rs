@@ -51,11 +51,13 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
         let amount_of_faction_standings = crate::util::read_u32_le(r)?;
 
         // faction_standings: FactionStanding[amount_of_faction_standings]
-        let mut faction_standings = Vec::with_capacity(amount_of_faction_standings as usize);
-        for i in 0..amount_of_faction_standings {
-            faction_standings.push(FactionStanding::read(r)?);
-        }
-
+        let faction_standings = {
+            let mut faction_standings = Vec::with_capacity(amount_of_faction_standings as usize);
+            for i in 0..amount_of_faction_standings {
+                faction_standings.push(FactionStanding::read(r)?);
+            }
+            faction_standings
+        };
         Ok(Self {
             refer_a_friend_bonus,
             faction_standings,

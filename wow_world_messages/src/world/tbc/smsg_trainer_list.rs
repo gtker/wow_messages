@@ -68,14 +68,18 @@ impl crate::Message for SMSG_TRAINER_LIST {
         let amount_of_spells = crate::util::read_u32_le(r)?;
 
         // spells: TrainerSpell[amount_of_spells]
-        let mut spells = Vec::with_capacity(amount_of_spells as usize);
-        for i in 0..amount_of_spells {
-            spells.push(TrainerSpell::read(r)?);
-        }
-
+        let spells = {
+            let mut spells = Vec::with_capacity(amount_of_spells as usize);
+            for i in 0..amount_of_spells {
+                spells.push(TrainerSpell::read(r)?);
+            }
+            spells
+        };
         // greeting: CString
-        let greeting = crate::util::read_c_string_to_vec(r)?;
-        let greeting = String::from_utf8(greeting)?;
+        let greeting = {
+            let greeting = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(greeting)?
+        };
 
         Ok(Self {
             guid,

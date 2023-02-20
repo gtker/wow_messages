@@ -177,8 +177,11 @@ impl Addon {
                     KeyVersion::Zero => Addon_KeyVersion::Zero,
                     KeyVersion::One => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::One {
                             public_key,
@@ -186,8 +189,11 @@ impl Addon {
                     }
                     KeyVersion::Two => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::Two {
                             public_key,
@@ -195,8 +201,11 @@ impl Addon {
                     }
                     KeyVersion::Three => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::Three {
                             public_key,
@@ -204,8 +213,11 @@ impl Addon {
                     }
                     KeyVersion::Four => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::Four {
                             public_key,
@@ -213,8 +225,11 @@ impl Addon {
                     }
                     KeyVersion::Five => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::Five {
                             public_key,
@@ -222,8 +237,11 @@ impl Addon {
                     }
                     KeyVersion::Six => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::Six {
                             public_key,
@@ -231,8 +249,11 @@ impl Addon {
                     }
                     KeyVersion::Seven => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::Seven {
                             public_key,
@@ -240,8 +261,11 @@ impl Addon {
                     }
                     KeyVersion::Eight => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::Eight {
                             public_key,
@@ -249,8 +273,11 @@ impl Addon {
                     }
                     KeyVersion::Nine => {
                         // public_key: u8[256]
-                        let mut public_key = [0_u8; 256];
-                        r.read_exact(&mut public_key)?;
+                        let public_key = {
+                            let mut public_key = [0_u8; 256];
+                            r.read_exact(&mut public_key)?;
+                            public_key
+                        };
 
                         Addon_KeyVersion::Nine {
                             public_key,
@@ -275,8 +302,10 @@ impl Addon {
             UrlInfo::Unavailable => Addon_UrlInfo::Unavailable,
             UrlInfo::Available => {
                 // url: CString
-                let url = crate::util::read_c_string_to_vec(r)?;
-                let url = String::from_utf8(url)?;
+                let url = {
+                    let url = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(url)?
+                };
 
                 Addon_UrlInfo::Available {
                     url,

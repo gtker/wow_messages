@@ -60,12 +60,16 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
         let command: ArenaTeamCommand = crate::util::read_u32_le(r)?.try_into()?;
 
         // team: CString
-        let team = crate::util::read_c_string_to_vec(r)?;
-        let team = String::from_utf8(team)?;
+        let team = {
+            let team = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(team)?
+        };
 
         // player: CString
-        let player = crate::util::read_c_string_to_vec(r)?;
-        let player = String::from_utf8(player)?;
+        let player = {
+            let player = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(player)?
+        };
 
         // error: ArenaTeamCommandError
         let error: ArenaTeamCommandError = crate::util::read_u32_le(r)?.try_into()?;

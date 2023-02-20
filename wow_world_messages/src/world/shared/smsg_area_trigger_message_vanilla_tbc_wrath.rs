@@ -35,9 +35,11 @@ impl crate::Message for SMSG_AREA_TRIGGER_MESSAGE {
         }
 
         // message: SizedCString
-        let message = crate::util::read_u32_le(r)?;
-        let message = crate::util::read_sized_c_string_to_vec(r, message)?;
-        let message = String::from_utf8(message)?;;
+        let message = {
+            let message = crate::util::read_u32_le(r)?;
+            let message = crate::util::read_sized_c_string_to_vec(r, message)?;
+            String::from_utf8(message)?
+        };
         Ok(Self {
             message,
         })

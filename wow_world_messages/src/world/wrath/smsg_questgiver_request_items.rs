@@ -135,12 +135,16 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         let quest_id = crate::util::read_u32_le(r)?;
 
         // title: CString
-        let title = crate::util::read_c_string_to_vec(r)?;
-        let title = String::from_utf8(title)?;
+        let title = {
+            let title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(title)?
+        };
 
         // request_items_text: CString
-        let request_items_text = crate::util::read_c_string_to_vec(r)?;
-        let request_items_text = String::from_utf8(request_items_text)?;
+        let request_items_text = {
+            let request_items_text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(request_items_text)?
+        };
 
         // emote_delay: u32
         let emote_delay = crate::util::read_u32_le(r)?;
@@ -163,11 +167,13 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         let amount_of_required_items = crate::util::read_u32_le(r)?;
 
         // required_items: QuestItemRequirement[amount_of_required_items]
-        let mut required_items = Vec::with_capacity(amount_of_required_items as usize);
-        for i in 0..amount_of_required_items {
-            required_items.push(QuestItemRequirement::read(r)?);
-        }
-
+        let required_items = {
+            let mut required_items = Vec::with_capacity(amount_of_required_items as usize);
+            for i in 0..amount_of_required_items {
+                required_items.push(QuestItemRequirement::read(r)?);
+            }
+            required_items
+        };
         // completable: QuestCompletable
         let completable: QuestCompletable = crate::util::read_u32_le(r)?.try_into()?;
 

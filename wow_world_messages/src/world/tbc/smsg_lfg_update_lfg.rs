@@ -33,10 +33,13 @@ impl crate::Message for SMSG_LFG_UPDATE_LFG {
         }
 
         // data: LfgData[3]
-        let mut data = [LfgData::default(); 3];
-        for i in data.iter_mut() {
-            *i = LfgData::read(r)?;
-        }
+        let data = {
+            let mut data = [LfgData::default(); 3];
+            for i in data.iter_mut() {
+                *i = LfgData::read(r)?;
+            }
+            data
+        };
 
         Ok(Self {
             data,

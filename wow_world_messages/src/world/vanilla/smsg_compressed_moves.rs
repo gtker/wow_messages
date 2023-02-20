@@ -43,14 +43,17 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
         let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
 
         // moves: CompressedMove[-]
-        let mut current_size = {
-            0
+        let moves = {
+            let mut current_size = {
+                0
+            };
+            let mut moves = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                moves.push(CompressedMove::read(r)?);
+                current_size += 1;
+            }
+            moves
         };
-        let mut moves = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            moves.push(CompressedMove::read(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             moves,

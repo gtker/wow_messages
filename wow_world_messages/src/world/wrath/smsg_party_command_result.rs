@@ -51,8 +51,10 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
         let operation: PartyOperation = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // member: CString
-        let member = crate::util::read_c_string_to_vec(r)?;
-        let member = String::from_utf8(member)?;
+        let member = {
+            let member = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(member)?
+        };
 
         // result: PartyResult
         let result: PartyResult = (crate::util::read_u32_le(r)? as u8).try_into()?;

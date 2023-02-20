@@ -58,11 +58,13 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
         let amount_of_money_logs = crate::util::read_u8_le(r)?;
 
         // money_logs: MoneyLogItem[amount_of_money_logs]
-        let mut money_logs = Vec::with_capacity(amount_of_money_logs as usize);
-        for i in 0..amount_of_money_logs {
-            money_logs.push(MoneyLogItem::read(r)?);
-        }
-
+        let money_logs = {
+            let mut money_logs = Vec::with_capacity(amount_of_money_logs as usize);
+            for i in 0..amount_of_money_logs {
+                money_logs.push(MoneyLogItem::read(r)?);
+            }
+            money_logs
+        };
         Ok(Self {
             unix_time,
             slot,

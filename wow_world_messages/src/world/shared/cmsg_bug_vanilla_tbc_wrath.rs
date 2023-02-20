@@ -53,13 +53,17 @@ impl crate::Message for CMSG_BUG {
         let suggestion = crate::util::read_u32_le(r)?;
 
         // content: SizedCString
-        let content = crate::util::read_u32_le(r)?;
-        let content = crate::util::read_sized_c_string_to_vec(r, content)?;
-        let content = String::from_utf8(content)?;;
+        let content = {
+            let content = crate::util::read_u32_le(r)?;
+            let content = crate::util::read_sized_c_string_to_vec(r, content)?;
+            String::from_utf8(content)?
+        };
         // bug_type: SizedCString
-        let bug_type = crate::util::read_u32_le(r)?;
-        let bug_type = crate::util::read_sized_c_string_to_vec(r, bug_type)?;
-        let bug_type = String::from_utf8(bug_type)?;;
+        let bug_type = {
+            let bug_type = crate::util::read_u32_le(r)?;
+            let bug_type = crate::util::read_sized_c_string_to_vec(r, bug_type)?;
+            String::from_utf8(bug_type)?
+        };
         Ok(Self {
             suggestion,
             content,

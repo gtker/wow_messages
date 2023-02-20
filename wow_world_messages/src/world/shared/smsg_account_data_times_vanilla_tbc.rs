@@ -38,10 +38,13 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         }
 
         // data: u32[32]
-        let mut data = [u32::default(); 32];
-        for i in data.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let data = {
+            let mut data = [u32::default(); 32];
+            for i in data.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            data
+        };
 
         Ok(Self {
             data,

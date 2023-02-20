@@ -60,8 +60,10 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
         let notify_type: ChatNotify = crate::util::read_u8_le(r)?.try_into()?;
 
         // channel_name: CString
-        let channel_name = crate::util::read_c_string_to_vec(r)?;
-        let channel_name = String::from_utf8(channel_name)?;
+        let channel_name = {
+            let channel_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(channel_name)?
+        };
 
         // optional unknown1
         let current_size = {

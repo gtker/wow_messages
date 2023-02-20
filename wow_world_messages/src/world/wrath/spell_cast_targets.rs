@@ -127,8 +127,10 @@ impl SpellCastTargets {
 
         let target_flags_STRING = if target_flags.is_STRING() {
             // target_string: CString
-            let target_string = crate::util::read_c_string_to_vec(r)?;
-            let target_string = String::from_utf8(target_string)?;
+            let target_string = {
+                let target_string = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(target_string)?
+            };
 
             Some(SpellCastTargets_SpellCastTargetFlags_String {
                 target_string,

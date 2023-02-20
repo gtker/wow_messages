@@ -76,11 +76,13 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         let amount_of_item_rewards = crate::util::read_u32_le(r)?;
 
         // item_rewards: QuestItemReward[amount_of_item_rewards]
-        let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
-        for i in 0..amount_of_item_rewards {
-            item_rewards.push(QuestItemReward::read(r)?);
-        }
-
+        let item_rewards = {
+            let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+            for i in 0..amount_of_item_rewards {
+                item_rewards.push(QuestItemReward::read(r)?);
+            }
+            item_rewards
+        };
         Ok(Self {
             quest_id,
             unknown,

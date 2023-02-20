@@ -371,34 +371,49 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         let unknown1 = crate::util::read_u32_le(r)?;
 
         // rewards: QuestItemReward[4]
-        let mut rewards = [QuestItemReward::default(); 4];
-        for i in rewards.iter_mut() {
-            *i = QuestItemReward::read(r)?;
-        }
+        let rewards = {
+            let mut rewards = [QuestItemReward::default(); 4];
+            for i in rewards.iter_mut() {
+                *i = QuestItemReward::read(r)?;
+            }
+            rewards
+        };
 
         // choice_rewards: QuestItemReward[6]
-        let mut choice_rewards = [QuestItemReward::default(); 6];
-        for i in choice_rewards.iter_mut() {
-            *i = QuestItemReward::read(r)?;
-        }
+        let choice_rewards = {
+            let mut choice_rewards = [QuestItemReward::default(); 6];
+            for i in choice_rewards.iter_mut() {
+                *i = QuestItemReward::read(r)?;
+            }
+            choice_rewards
+        };
 
         // reputation_rewards: u32[5]
-        let mut reputation_rewards = [u32::default(); 5];
-        for i in reputation_rewards.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let reputation_rewards = {
+            let mut reputation_rewards = [u32::default(); 5];
+            for i in reputation_rewards.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            reputation_rewards
+        };
 
         // reputation_reward_amounts: u32[5]
-        let mut reputation_reward_amounts = [u32::default(); 5];
-        for i in reputation_reward_amounts.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let reputation_reward_amounts = {
+            let mut reputation_reward_amounts = [u32::default(); 5];
+            for i in reputation_reward_amounts.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            reputation_reward_amounts
+        };
 
         // reputation_reward_overrides: u32[5]
-        let mut reputation_reward_overrides = [u32::default(); 5];
-        for i in reputation_reward_overrides.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let reputation_reward_overrides = {
+            let mut reputation_reward_overrides = [u32::default(); 5];
+            for i in reputation_reward_overrides.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            reputation_reward_overrides
+        };
 
         // point_map_id: u32
         let point_map_id = crate::util::read_u32_le(r)?;
@@ -410,44 +425,63 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         let point_opt = crate::util::read_u32_le(r)?;
 
         // title: CString
-        let title = crate::util::read_c_string_to_vec(r)?;
-        let title = String::from_utf8(title)?;
+        let title = {
+            let title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(title)?
+        };
 
         // objective_text: CString
-        let objective_text = crate::util::read_c_string_to_vec(r)?;
-        let objective_text = String::from_utf8(objective_text)?;
+        let objective_text = {
+            let objective_text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(objective_text)?
+        };
 
         // details: CString
-        let details = crate::util::read_c_string_to_vec(r)?;
-        let details = String::from_utf8(details)?;
+        let details = {
+            let details = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(details)?
+        };
 
         // end_text: CString
-        let end_text = crate::util::read_c_string_to_vec(r)?;
-        let end_text = String::from_utf8(end_text)?;
+        let end_text = {
+            let end_text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(end_text)?
+        };
 
         // completed_text: CString
-        let completed_text = crate::util::read_c_string_to_vec(r)?;
-        let completed_text = String::from_utf8(completed_text)?;
+        let completed_text = {
+            let completed_text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(completed_text)?
+        };
 
         // objectives: QuestObjective[4]
-        let mut objectives = [QuestObjective::default(); 4];
-        for i in objectives.iter_mut() {
-            *i = QuestObjective::read(r)?;
-        }
+        let objectives = {
+            let mut objectives = [QuestObjective::default(); 4];
+            for i in objectives.iter_mut() {
+                *i = QuestObjective::read(r)?;
+            }
+            objectives
+        };
 
         // item_requirements: QuestItemRequirement[6]
-        let mut item_requirements = [QuestItemRequirement::default(); 6];
-        for i in item_requirements.iter_mut() {
-            *i = QuestItemRequirement::read(r)?;
-        }
+        let item_requirements = {
+            let mut item_requirements = [QuestItemRequirement::default(); 6];
+            for i in item_requirements.iter_mut() {
+                *i = QuestItemRequirement::read(r)?;
+            }
+            item_requirements
+        };
 
         // objective_texts: CString[4]
-        let mut objective_texts = Vec::with_capacity(4);
-        for i in 0..4 {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            objective_texts.push(String::from_utf8(s)?);
-        }
-        let objective_texts = objective_texts.try_into().unwrap();
+        let objective_texts = {
+            let mut objective_texts = Vec::with_capacity(4);
+            for i in 0..4 {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                objective_texts.push(String::from_utf8(s)?);
+            }
+            let objective_texts = objective_texts.try_into().unwrap();
+            objective_texts
+        };
 
         Ok(Self {
             quest_id,

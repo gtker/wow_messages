@@ -132,8 +132,10 @@ impl crate::Message for CMSG_COMPLAIN {
                 let time = crate::util::read_u32_le(r)?;
 
                 // description: CString
-                let description = crate::util::read_c_string_to_vec(r)?;
-                let description = String::from_utf8(description)?;
+                let description = {
+                    let description = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(description)?
+                };
 
                 CMSG_COMPLAIN_SpamType::Chat {
                     channel_id,

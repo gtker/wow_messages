@@ -54,20 +54,24 @@ impl crate::Message for SMSG_LFG_PLAYER_INFO {
         let amount_of_available_dungeons = crate::util::read_u8_le(r)?;
 
         // available_dungeons: LfgAvailableDungeon[amount_of_available_dungeons]
-        let mut available_dungeons = Vec::with_capacity(amount_of_available_dungeons as usize);
-        for i in 0..amount_of_available_dungeons {
-            available_dungeons.push(LfgAvailableDungeon::read(r)?);
-        }
-
+        let available_dungeons = {
+            let mut available_dungeons = Vec::with_capacity(amount_of_available_dungeons as usize);
+            for i in 0..amount_of_available_dungeons {
+                available_dungeons.push(LfgAvailableDungeon::read(r)?);
+            }
+            available_dungeons
+        };
         // amount_of_locked_dungeons: u8
         let amount_of_locked_dungeons = crate::util::read_u8_le(r)?;
 
         // locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons]
-        let mut locked_dungeons = Vec::with_capacity(amount_of_locked_dungeons as usize);
-        for i in 0..amount_of_locked_dungeons {
-            locked_dungeons.push(LfgJoinLockedDungeon::read(r)?);
-        }
-
+        let locked_dungeons = {
+            let mut locked_dungeons = Vec::with_capacity(amount_of_locked_dungeons as usize);
+            for i in 0..amount_of_locked_dungeons {
+                locked_dungeons.push(LfgJoinLockedDungeon::read(r)?);
+            }
+            locked_dungeons
+        };
         Ok(Self {
             available_dungeons,
             locked_dungeons,

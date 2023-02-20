@@ -53,20 +53,24 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         let amount_of_teammates = crate::util::read_u32_le(r)?;
 
         // teammates: BattlegroundPlayerPosition[amount_of_teammates]
-        let mut teammates = Vec::with_capacity(amount_of_teammates as usize);
-        for i in 0..amount_of_teammates {
-            teammates.push(BattlegroundPlayerPosition::read(r)?);
-        }
-
+        let teammates = {
+            let mut teammates = Vec::with_capacity(amount_of_teammates as usize);
+            for i in 0..amount_of_teammates {
+                teammates.push(BattlegroundPlayerPosition::read(r)?);
+            }
+            teammates
+        };
         // amount_of_carriers: u8
         let amount_of_carriers = crate::util::read_u8_le(r)?;
 
         // carriers: BattlegroundPlayerPosition[amount_of_carriers]
-        let mut carriers = Vec::with_capacity(amount_of_carriers as usize);
-        for i in 0..amount_of_carriers {
-            carriers.push(BattlegroundPlayerPosition::read(r)?);
-        }
-
+        let carriers = {
+            let mut carriers = Vec::with_capacity(amount_of_carriers as usize);
+            for i in 0..amount_of_carriers {
+                carriers.push(BattlegroundPlayerPosition::read(r)?);
+            }
+            carriers
+        };
         Ok(Self {
             teammates,
             carriers,

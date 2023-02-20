@@ -70,8 +70,10 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         let reason: PetNameInvalidReason = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // included: DeclinedPetNameIncluded
         let included: DeclinedPetNameIncluded = crate::util::read_u8_le(r)?.try_into()?;
@@ -80,12 +82,15 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
             DeclinedPetNameIncluded::NotIncluded => SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::NotIncluded,
             DeclinedPetNameIncluded::Included => {
                 // declined_names: CString[5]
-                let mut declined_names = Vec::with_capacity(5);
-                for i in 0..5 {
-                    let s = crate::util::read_c_string_to_vec(r)?;
-                    declined_names.push(String::from_utf8(s)?);
-                }
-                let declined_names = declined_names.try_into().unwrap();
+                let declined_names = {
+                    let mut declined_names = Vec::with_capacity(5);
+                    for i in 0..5 {
+                        let s = crate::util::read_c_string_to_vec(r)?;
+                        declined_names.push(String::from_utf8(s)?);
+                    }
+                    let declined_names = declined_names.try_into().unwrap();
+                    declined_names
+                };
 
                 SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
                     declined_names,

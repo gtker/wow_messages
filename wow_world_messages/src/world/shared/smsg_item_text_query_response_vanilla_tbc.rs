@@ -46,8 +46,10 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         let item_text_id = crate::util::read_u32_le(r)?;
 
         // text: CString
-        let text = crate::util::read_c_string_to_vec(r)?;
-        let text = String::from_utf8(text)?;
+        let text = {
+            let text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(text)?
+        };
 
         Ok(Self {
             item_text_id,

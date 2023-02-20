@@ -71,8 +71,10 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
         let npc = Guid::read(r)?;
 
         // title: CString
-        let title = crate::util::read_c_string_to_vec(r)?;
-        let title = String::from_utf8(title)?;
+        let title = {
+            let title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(title)?
+        };
 
         // emote_delay: u32
         let emote_delay = crate::util::read_u32_le(r)?;
@@ -84,11 +86,13 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
         let amount_of_entries = crate::util::read_u8_le(r)?;
 
         // quest_items: QuestItem[amount_of_entries]
-        let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
-        for i in 0..amount_of_entries {
-            quest_items.push(QuestItem::read(r)?);
-        }
-
+        let quest_items = {
+            let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
+            for i in 0..amount_of_entries {
+                quest_items.push(QuestItem::read(r)?);
+            }
+            quest_items
+        };
         Ok(Self {
             npc,
             title,

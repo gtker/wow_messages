@@ -64,10 +64,13 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
         let behavior_if = match behavior {
             ActionBarBehavior::Initial => {
                 // data: ActionButton[144]
-                let mut data = [ActionButton::default(); 144];
-                for i in data.iter_mut() {
-                    *i = ActionButton::read(r)?;
-                }
+                let data = {
+                    let mut data = [ActionButton::default(); 144];
+                    for i in data.iter_mut() {
+                        *i = ActionButton::read(r)?;
+                    }
+                    data
+                };
 
                 SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {
                     data,
@@ -75,10 +78,13 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
             }
             ActionBarBehavior::Set => {
                 // data: ActionButton[144]
-                let mut data = [ActionButton::default(); 144];
-                for i in data.iter_mut() {
-                    *i = ActionButton::read(r)?;
-                }
+                let data = {
+                    let mut data = [ActionButton::default(); 144];
+                    for i in data.iter_mut() {
+                        *i = ActionButton::read(r)?;
+                    }
+                    data
+                };
 
                 SMSG_ACTION_BUTTONS_ActionBarBehavior::Set {
                     data,

@@ -99,10 +99,13 @@ impl TrainerSpell {
         let required_skill_value = crate::util::read_u32_le(r)?;
 
         // required_spells: u32[3]
-        let mut required_spells = [u32::default(); 3];
-        for i in required_spells.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let required_spells = {
+            let mut required_spells = [u32::default(); 3];
+            for i in required_spells.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            required_spells
+        };
 
         Ok(Self {
             spell,

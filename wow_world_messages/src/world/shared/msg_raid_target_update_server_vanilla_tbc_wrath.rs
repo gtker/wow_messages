@@ -72,10 +72,13 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
             }
             RaidTargetUpdateType::Full => {
                 // raid_targets: RaidTargetUpdate[8]
-                let mut raid_targets = [RaidTargetUpdate::default(); 8];
-                for i in raid_targets.iter_mut() {
-                    *i = RaidTargetUpdate::read(r)?;
-                }
+                let raid_targets = {
+                    let mut raid_targets = [RaidTargetUpdate::default(); 8];
+                    for i in raid_targets.iter_mut() {
+                        *i = RaidTargetUpdate::read(r)?;
+                    }
+                    raid_targets
+                };
 
                 MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
                     raid_targets,

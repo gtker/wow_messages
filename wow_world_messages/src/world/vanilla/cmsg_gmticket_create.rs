@@ -108,12 +108,16 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         let position = Vector3d::read(r)?;
 
         // message: CString
-        let message = crate::util::read_c_string_to_vec(r)?;
-        let message = String::from_utf8(message)?;
+        let message = {
+            let message = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(message)?
+        };
 
         // reserved_for_future_use: CString
-        let reserved_for_future_use = crate::util::read_c_string_to_vec(r)?;
-        let reserved_for_future_use = String::from_utf8(reserved_for_future_use)?;
+        let reserved_for_future_use = {
+            let reserved_for_future_use = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(reserved_for_future_use)?
+        };
 
         let category_if = match category {
             GmTicketType::Stuck => CMSG_GMTICKET_CREATE_GmTicketType::Stuck,
@@ -125,20 +129,23 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
                 let chat_data_size_uncompressed = crate::util::read_u32_le(r)?;
 
                 // compressed_chat_data: u8[-]
-                let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+                let compressed_chat_data = {
+                    let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
-                let mut current_size = {
-                    1 // category: CMSG_GMTICKET_CREATE_GmTicketType
-                    + 4 // map: Map
-                    + 12 // position: Vector3d
-                    + message.len() + 1 // message: CString
-                    + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
+                    let mut current_size = {
+                        1 // category: CMSG_GMTICKET_CREATE_GmTicketType
+                        + 4 // map: Map
+                        + 12 // position: Vector3d
+                        + message.len() + 1 // message: CString
+                        + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
+                    };
+                    let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
+                    while decoder.total_out() < (chat_data_size_uncompressed as u64) {
+                        compressed_chat_data.push(crate::util::read_u8_le(decoder)?);
+                        current_size += 1;
+                    }
+                    compressed_chat_data
                 };
-                let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
-                while decoder.total_out() < (chat_data_size_uncompressed as u64) {
-                    compressed_chat_data.push(crate::util::read_u8_le(decoder)?);
-                    current_size += 1;
-                }
 
                 CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                     chat_data_line_count,

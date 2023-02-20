@@ -38,8 +38,10 @@ impl crate::Message for CMSG_TELEPORT_TO_UNIT {
         }
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         Ok(Self {
             name,

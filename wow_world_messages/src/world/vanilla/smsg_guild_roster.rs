@@ -71,28 +71,36 @@ impl crate::Message for SMSG_GUILD_ROSTER {
         let amount_of_members = crate::util::read_u32_le(r)?;
 
         // motd: CString
-        let motd = crate::util::read_c_string_to_vec(r)?;
-        let motd = String::from_utf8(motd)?;
+        let motd = {
+            let motd = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(motd)?
+        };
 
         // guild_info: CString
-        let guild_info = crate::util::read_c_string_to_vec(r)?;
-        let guild_info = String::from_utf8(guild_info)?;
+        let guild_info = {
+            let guild_info = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(guild_info)?
+        };
 
         // amount_of_rights: u32
         let amount_of_rights = crate::util::read_u32_le(r)?;
 
         // rights: u32[amount_of_rights]
-        let mut rights = Vec::with_capacity(amount_of_rights as usize);
-        for i in 0..amount_of_rights {
-            rights.push(crate::util::read_u32_le(r)?);
-        }
-
+        let rights = {
+            let mut rights = Vec::with_capacity(amount_of_rights as usize);
+            for i in 0..amount_of_rights {
+                rights.push(crate::util::read_u32_le(r)?);
+            }
+            rights
+        };
         // members: GuildMember[amount_of_members]
-        let mut members = Vec::with_capacity(amount_of_members as usize);
-        for i in 0..amount_of_members {
-            members.push(GuildMember::read(r)?);
-        }
-
+        let members = {
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for i in 0..amount_of_members {
+                members.push(GuildMember::read(r)?);
+            }
+            members
+        };
         Ok(Self {
             motd,
             guild_info,

@@ -69,8 +69,10 @@ impl crate::Message for SMSG_GOSSIP_POI {
         let data = crate::util::read_u32_le(r)?;
 
         // location_name: CString
-        let location_name = crate::util::read_c_string_to_vec(r)?;
-        let location_name = String::from_utf8(location_name)?;
+        let location_name = {
+            let location_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(location_name)?
+        };
 
         Ok(Self {
             flags,

@@ -94,11 +94,13 @@ impl crate::Message for SMSG_TALENTS_INFO {
                 let active_spec = crate::util::read_u8_le(r)?;
 
                 // specs: TalentInfoSpec[amount_of_specs]
-                let mut specs = Vec::with_capacity(amount_of_specs as usize);
-                for i in 0..amount_of_specs {
-                    specs.push(TalentInfoSpec::read(r)?);
-                }
-
+                let specs = {
+                    let mut specs = Vec::with_capacity(amount_of_specs as usize);
+                    for i in 0..amount_of_specs {
+                        specs.push(TalentInfoSpec::read(r)?);
+                    }
+                    specs
+                };
                 SMSG_TALENTS_INFO_TalentInfoType::Player {
                     active_spec,
                     specs,
@@ -109,11 +111,13 @@ impl crate::Message for SMSG_TALENTS_INFO {
                 let amount_of_talents = crate::util::read_u8_le(r)?;
 
                 // talents: InspectTalent[amount_of_talents]
-                let mut talents = Vec::with_capacity(amount_of_talents as usize);
-                for i in 0..amount_of_talents {
-                    talents.push(InspectTalent::read(r)?);
-                }
-
+                let talents = {
+                    let mut talents = Vec::with_capacity(amount_of_talents as usize);
+                    for i in 0..amount_of_talents {
+                        talents.push(InspectTalent::read(r)?);
+                    }
+                    talents
+                };
                 SMSG_TALENTS_INFO_TalentInfoType::Pet {
                     talents,
                 }

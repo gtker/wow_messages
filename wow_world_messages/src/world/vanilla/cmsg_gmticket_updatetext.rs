@@ -47,8 +47,10 @@ impl crate::Message for CMSG_GMTICKET_UPDATETEXT {
         let ticket_type: GmTicketType = crate::util::read_u8_le(r)?.try_into()?;
 
         // message: CString
-        let message = crate::util::read_c_string_to_vec(r)?;
-        let message = String::from_utf8(message)?;
+        let message = {
+            let message = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(message)?
+        };
 
         Ok(Self {
             ticket_type,

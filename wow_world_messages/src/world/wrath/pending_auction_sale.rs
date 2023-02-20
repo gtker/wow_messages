@@ -59,12 +59,16 @@ impl PendingAuctionSale {
 impl PendingAuctionSale {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // string1: CString
-        let string1 = crate::util::read_c_string_to_vec(r)?;
-        let string1 = String::from_utf8(string1)?;
+        let string1 = {
+            let string1 = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(string1)?
+        };
 
         // string2: CString
-        let string2 = crate::util::read_c_string_to_vec(r)?;
-        let string2 = String::from_utf8(string2)?;
+        let string2 = {
+            let string2 = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(string2)?
+        };
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;

@@ -106,8 +106,10 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         let list_start_item = crate::util::read_u32_le(r)?;
 
         // searched_name: CString
-        let searched_name = crate::util::read_c_string_to_vec(r)?;
-        let searched_name = String::from_utf8(searched_name)?;
+        let searched_name = {
+            let searched_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(searched_name)?
+        };
 
         // minimum_level: u8
         let minimum_level = crate::util::read_u8_le(r)?;
@@ -137,11 +139,13 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         let amount_of_sorted_auctions = crate::util::read_u8_le(r)?;
 
         // sorted_auctions: AuctionSort[amount_of_sorted_auctions]
-        let mut sorted_auctions = Vec::with_capacity(amount_of_sorted_auctions as usize);
-        for i in 0..amount_of_sorted_auctions {
-            sorted_auctions.push(AuctionSort::read(r)?);
-        }
-
+        let sorted_auctions = {
+            let mut sorted_auctions = Vec::with_capacity(amount_of_sorted_auctions as usize);
+            for i in 0..amount_of_sorted_auctions {
+                sorted_auctions.push(AuctionSort::read(r)?);
+            }
+            sorted_auctions
+        };
         Ok(Self {
             auctioneer,
             list_start_item,

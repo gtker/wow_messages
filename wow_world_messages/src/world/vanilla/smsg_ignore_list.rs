@@ -41,11 +41,13 @@ impl crate::Message for SMSG_IGNORE_LIST {
         let amount_of_ignored = crate::util::read_u8_le(r)?;
 
         // ignored: u64[amount_of_ignored]
-        let mut ignored = Vec::with_capacity(amount_of_ignored as usize);
-        for i in 0..amount_of_ignored {
-            ignored.push(crate::util::read_u64_le(r)?);
-        }
-
+        let ignored = {
+            let mut ignored = Vec::with_capacity(amount_of_ignored as usize);
+            for i in 0..amount_of_ignored {
+                ignored.push(crate::util::read_u64_le(r)?);
+            }
+            ignored
+        };
         Ok(Self {
             ignored,
         })

@@ -45,12 +45,16 @@ impl crate::Message for CMSG_CHANNEL_SET_OWNER {
         }
 
         // channel_name: CString
-        let channel_name = crate::util::read_c_string_to_vec(r)?;
-        let channel_name = String::from_utf8(channel_name)?;
+        let channel_name = {
+            let channel_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(channel_name)?
+        };
 
         // new_owner: CString
-        let new_owner = crate::util::read_c_string_to_vec(r)?;
-        let new_owner = String::from_utf8(new_owner)?;
+        let new_owner = {
+            let new_owner = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(new_owner)?
+        };
 
         Ok(Self {
             channel_name,

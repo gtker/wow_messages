@@ -181,34 +181,47 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
         let result_if = match result {
             LoginResult::Success => {
                 // server_public_key: u8[32]
-                let mut server_public_key = [0_u8; 32];
-                r.read_exact(&mut server_public_key)?;
+                let server_public_key = {
+                    let mut server_public_key = [0_u8; 32];
+                    r.read_exact(&mut server_public_key)?;
+                    server_public_key
+                };
 
                 // generator_length: u8
                 let generator_length = crate::util::read_u8_le(r)?;
 
                 // generator: u8[generator_length]
-                let mut generator = Vec::with_capacity(generator_length as usize);
-                for i in 0..generator_length {
-                    generator.push(crate::util::read_u8_le(r)?);
-                }
-
+                let generator = {
+                    let mut generator = Vec::with_capacity(generator_length as usize);
+                    for i in 0..generator_length {
+                        generator.push(crate::util::read_u8_le(r)?);
+                    }
+                    generator
+                };
                 // large_safe_prime_length: u8
                 let large_safe_prime_length = crate::util::read_u8_le(r)?;
 
                 // large_safe_prime: u8[large_safe_prime_length]
-                let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                for i in 0..large_safe_prime_length {
-                    large_safe_prime.push(crate::util::read_u8_le(r)?);
-                }
-
+                let large_safe_prime = {
+                    let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                    for i in 0..large_safe_prime_length {
+                        large_safe_prime.push(crate::util::read_u8_le(r)?);
+                    }
+                    large_safe_prime
+                };
                 // salt: u8[32]
-                let mut salt = [0_u8; 32];
-                r.read_exact(&mut salt)?;
+                let salt = {
+                    let mut salt = [0_u8; 32];
+                    r.read_exact(&mut salt)?;
+                    salt
+                };
 
                 // crc_salt: u8[16]
-                let mut crc_salt = [0_u8; 16];
-                r.read_exact(&mut crc_salt)?;
+                let crc_salt = {
+                    let mut crc_salt = [0_u8; 16];
+                    r.read_exact(&mut crc_salt)?;
+                    crc_salt
+                };
 
                 // security_flag: SecurityFlag
                 let security_flag = SecurityFlag::new(crate::util::read_u8_le(r)?);
@@ -218,8 +231,11 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     let pin_grid_seed = crate::util::read_u32_le(r)?;
 
                     // pin_salt: u8[16]
-                    let mut pin_salt = [0_u8; 16];
-                    r.read_exact(&mut pin_salt)?;
+                    let pin_salt = {
+                        let mut pin_salt = [0_u8; 16];
+                        r.read_exact(&mut pin_salt)?;
+                        pin_salt
+                    };
 
                     Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
                         pin_grid_seed,
@@ -338,34 +354,47 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
             let result_if = match result {
                 LoginResult::Success => {
                     // server_public_key: u8[32]
-                    let mut server_public_key = [0_u8; 32];
-                    r.read_exact(&mut server_public_key).await?;
+                    let server_public_key = {
+                        let mut server_public_key = [0_u8; 32];
+                        r.read_exact(&mut server_public_key).await?;
+                        server_public_key
+                    };
 
                     // generator_length: u8
                     let generator_length = crate::util::tokio_read_u8_le(r).await?;
 
                     // generator: u8[generator_length]
-                    let mut generator = Vec::with_capacity(generator_length as usize);
-                    for i in 0..generator_length {
-                        generator.push(crate::util::tokio_read_u8_le(r).await?);
-                    }
-
+                    let generator = {
+                        let mut generator = Vec::with_capacity(generator_length as usize);
+                        for i in 0..generator_length {
+                            generator.push(crate::util::tokio_read_u8_le(r).await?);
+                        }
+                        generator
+                    };
                     // large_safe_prime_length: u8
                     let large_safe_prime_length = crate::util::tokio_read_u8_le(r).await?;
 
                     // large_safe_prime: u8[large_safe_prime_length]
-                    let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                    for i in 0..large_safe_prime_length {
-                        large_safe_prime.push(crate::util::tokio_read_u8_le(r).await?);
-                    }
-
+                    let large_safe_prime = {
+                        let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                        for i in 0..large_safe_prime_length {
+                            large_safe_prime.push(crate::util::tokio_read_u8_le(r).await?);
+                        }
+                        large_safe_prime
+                    };
                     // salt: u8[32]
-                    let mut salt = [0_u8; 32];
-                    r.read_exact(&mut salt).await?;
+                    let salt = {
+                        let mut salt = [0_u8; 32];
+                        r.read_exact(&mut salt).await?;
+                        salt
+                    };
 
                     // crc_salt: u8[16]
-                    let mut crc_salt = [0_u8; 16];
-                    r.read_exact(&mut crc_salt).await?;
+                    let crc_salt = {
+                        let mut crc_salt = [0_u8; 16];
+                        r.read_exact(&mut crc_salt).await?;
+                        crc_salt
+                    };
 
                     // security_flag: SecurityFlag
                     let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(r).await?);
@@ -375,8 +404,11 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         let pin_grid_seed = crate::util::tokio_read_u32_le(r).await?;
 
                         // pin_salt: u8[16]
-                        let mut pin_salt = [0_u8; 16];
-                        r.read_exact(&mut pin_salt).await?;
+                        let pin_salt = {
+                            let mut pin_salt = [0_u8; 16];
+                            r.read_exact(&mut pin_salt).await?;
+                            pin_salt
+                        };
 
                         Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
                             pin_grid_seed,
@@ -509,34 +541,47 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
             let result_if = match result {
                 LoginResult::Success => {
                     // server_public_key: u8[32]
-                    let mut server_public_key = [0_u8; 32];
-                    r.read_exact(&mut server_public_key).await?;
+                    let server_public_key = {
+                        let mut server_public_key = [0_u8; 32];
+                        r.read_exact(&mut server_public_key).await?;
+                        server_public_key
+                    };
 
                     // generator_length: u8
                     let generator_length = crate::util::astd_read_u8_le(r).await?;
 
                     // generator: u8[generator_length]
-                    let mut generator = Vec::with_capacity(generator_length as usize);
-                    for i in 0..generator_length {
-                        generator.push(crate::util::astd_read_u8_le(r).await?);
-                    }
-
+                    let generator = {
+                        let mut generator = Vec::with_capacity(generator_length as usize);
+                        for i in 0..generator_length {
+                            generator.push(crate::util::astd_read_u8_le(r).await?);
+                        }
+                        generator
+                    };
                     // large_safe_prime_length: u8
                     let large_safe_prime_length = crate::util::astd_read_u8_le(r).await?;
 
                     // large_safe_prime: u8[large_safe_prime_length]
-                    let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                    for i in 0..large_safe_prime_length {
-                        large_safe_prime.push(crate::util::astd_read_u8_le(r).await?);
-                    }
-
+                    let large_safe_prime = {
+                        let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                        for i in 0..large_safe_prime_length {
+                            large_safe_prime.push(crate::util::astd_read_u8_le(r).await?);
+                        }
+                        large_safe_prime
+                    };
                     // salt: u8[32]
-                    let mut salt = [0_u8; 32];
-                    r.read_exact(&mut salt).await?;
+                    let salt = {
+                        let mut salt = [0_u8; 32];
+                        r.read_exact(&mut salt).await?;
+                        salt
+                    };
 
                     // crc_salt: u8[16]
-                    let mut crc_salt = [0_u8; 16];
-                    r.read_exact(&mut crc_salt).await?;
+                    let crc_salt = {
+                        let mut crc_salt = [0_u8; 16];
+                        r.read_exact(&mut crc_salt).await?;
+                        crc_salt
+                    };
 
                     // security_flag: SecurityFlag
                     let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(r).await?);
@@ -546,8 +591,11 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         let pin_grid_seed = crate::util::astd_read_u32_le(r).await?;
 
                         // pin_salt: u8[16]
-                        let mut pin_salt = [0_u8; 16];
-                        r.read_exact(&mut pin_salt).await?;
+                        let pin_salt = {
+                            let mut pin_salt = [0_u8; 16];
+                            r.read_exact(&mut pin_salt).await?;
+                            pin_salt
+                        };
 
                         Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
                             pin_grid_seed,

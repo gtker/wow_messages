@@ -75,12 +75,16 @@ impl GossipItem {
         let money_required = crate::util::read_u32_le(r)?;
 
         // message: CString
-        let message = crate::util::read_c_string_to_vec(r)?;
-        let message = String::from_utf8(message)?;
+        let message = {
+            let message = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(message)?
+        };
 
         // accept_text: CString
-        let accept_text = crate::util::read_c_string_to_vec(r)?;
-        let accept_text = String::from_utf8(accept_text)?;
+        let accept_text = {
+            let accept_text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(accept_text)?
+        };
 
         Ok(Self {
             id,

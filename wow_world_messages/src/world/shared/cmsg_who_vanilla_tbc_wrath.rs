@@ -94,12 +94,16 @@ impl crate::Message for CMSG_WHO {
         let maximum_level = crate::util::read_u32_le(r)?;
 
         // player_name: CString
-        let player_name = crate::util::read_c_string_to_vec(r)?;
-        let player_name = String::from_utf8(player_name)?;
+        let player_name = {
+            let player_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(player_name)?
+        };
 
         // guild_name: CString
-        let guild_name = crate::util::read_c_string_to_vec(r)?;
-        let guild_name = String::from_utf8(guild_name)?;
+        let guild_name = {
+            let guild_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(guild_name)?
+        };
 
         // race_mask: u32
         let race_mask = crate::util::read_u32_le(r)?;
@@ -111,21 +115,25 @@ impl crate::Message for CMSG_WHO {
         let amount_of_zones = crate::util::read_u32_le(r)?;
 
         // zones: u32[amount_of_zones]
-        let mut zones = Vec::with_capacity(amount_of_zones as usize);
-        for i in 0..amount_of_zones {
-            zones.push(crate::util::read_u32_le(r)?);
-        }
-
+        let zones = {
+            let mut zones = Vec::with_capacity(amount_of_zones as usize);
+            for i in 0..amount_of_zones {
+                zones.push(crate::util::read_u32_le(r)?);
+            }
+            zones
+        };
         // amount_of_strings: u32
         let amount_of_strings = crate::util::read_u32_le(r)?;
 
         // search_strings: CString[amount_of_strings]
-        let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
-        for i in 0..amount_of_strings {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            search_strings.push(String::from_utf8(s)?);
-        }
-
+        let search_strings = {
+            let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
+            for i in 0..amount_of_strings {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                search_strings.push(String::from_utf8(s)?);
+            }
+            search_strings
+        };
         Ok(Self {
             minimum_level,
             maximum_level,

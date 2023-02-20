@@ -74,8 +74,11 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
         let result_if = match result {
             LoginResult::Success => {
                 // server_proof: u8[20]
-                let mut server_proof = [0_u8; 20];
-                r.read_exact(&mut server_proof)?;
+                let server_proof = {
+                    let mut server_proof = [0_u8; 20];
+                    r.read_exact(&mut server_proof)?;
+                    server_proof
+                };
 
                 // hardware_survey_id: u32
                 let hardware_survey_id = crate::util::read_u32_le(r)?;
@@ -132,8 +135,11 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
             let result_if = match result {
                 LoginResult::Success => {
                     // server_proof: u8[20]
-                    let mut server_proof = [0_u8; 20];
-                    r.read_exact(&mut server_proof).await?;
+                    let server_proof = {
+                        let mut server_proof = [0_u8; 20];
+                        r.read_exact(&mut server_proof).await?;
+                        server_proof
+                    };
 
                     // hardware_survey_id: u32
                     let hardware_survey_id = crate::util::tokio_read_u32_le(r).await?;
@@ -204,8 +210,11 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
             let result_if = match result {
                 LoginResult::Success => {
                     // server_proof: u8[20]
-                    let mut server_proof = [0_u8; 20];
-                    r.read_exact(&mut server_proof).await?;
+                    let server_proof = {
+                        let mut server_proof = [0_u8; 20];
+                        r.read_exact(&mut server_proof).await?;
+                        server_proof
+                    };
 
                     // hardware_survey_id: u32
                     let hardware_survey_id = crate::util::astd_read_u32_le(r).await?;

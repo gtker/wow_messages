@@ -105,10 +105,13 @@ impl AuctionListItem {
         let item = crate::util::read_u32_le(r)?;
 
         // enchantments: AuctionEnchantment[7]
-        let mut enchantments = [AuctionEnchantment::default(); 7];
-        for i in enchantments.iter_mut() {
-            *i = AuctionEnchantment::read(r)?;
-        }
+        let enchantments = {
+            let mut enchantments = [AuctionEnchantment::default(); 7];
+            for i in enchantments.iter_mut() {
+                *i = AuctionEnchantment::read(r)?;
+            }
+            enchantments
+        };
 
         // item_random_property_id: u32
         let item_random_property_id = crate::util::read_u32_le(r)?;

@@ -53,11 +53,13 @@ impl crate::Message for SMSG_CONTACT_LIST {
         let amount_of_relations = crate::util::read_u32_le(r)?;
 
         // relations: Relation[amount_of_relations]
-        let mut relations = Vec::with_capacity(amount_of_relations as usize);
-        for i in 0..amount_of_relations {
-            relations.push(Relation::read(r)?);
-        }
-
+        let relations = {
+            let mut relations = Vec::with_capacity(amount_of_relations as usize);
+            for i in 0..amount_of_relations {
+                relations.push(Relation::read(r)?);
+            }
+            relations
+        };
         Ok(Self {
             list_mask,
             relations,

@@ -98,8 +98,10 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
         let votes_needed = crate::util::read_u32_le(r)?;
 
         // reason: CString
-        let reason = crate::util::read_c_string_to_vec(r)?;
-        let reason = String::from_utf8(reason)?;
+        let reason = {
+            let reason = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(reason)?
+        };
 
         Ok(Self {
             vote_in_progress,

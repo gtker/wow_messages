@@ -36,8 +36,10 @@ impl crate::Message for CMSG_GUILD_INFO_TEXT {
         }
 
         // guild_info: CString
-        let guild_info = crate::util::read_c_string_to_vec(r)?;
-        let guild_info = String::from_utf8(guild_info)?;
+        let guild_info = {
+            let guild_info = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(guild_info)?
+        };
 
         Ok(Self {
             guild_info,

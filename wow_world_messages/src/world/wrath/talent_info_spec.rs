@@ -44,20 +44,24 @@ impl TalentInfoSpec {
         let amount_of_talents = crate::util::read_u8_le(r)?;
 
         // talents: InspectTalent[amount_of_talents]
-        let mut talents = Vec::with_capacity(amount_of_talents as usize);
-        for i in 0..amount_of_talents {
-            talents.push(InspectTalent::read(r)?);
-        }
-
+        let talents = {
+            let mut talents = Vec::with_capacity(amount_of_talents as usize);
+            for i in 0..amount_of_talents {
+                talents.push(InspectTalent::read(r)?);
+            }
+            talents
+        };
         // amount_of_glyphs: u8
         let amount_of_glyphs = crate::util::read_u8_le(r)?;
 
         // glyphs: u16[amount_of_glyphs]
-        let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
-        for i in 0..amount_of_glyphs {
-            glyphs.push(crate::util::read_u16_le(r)?);
-        }
-
+        let glyphs = {
+            let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
+            for i in 0..amount_of_glyphs {
+                glyphs.push(crate::util::read_u16_le(r)?);
+            }
+            glyphs
+        };
         Ok(Self {
             talents,
             glyphs,

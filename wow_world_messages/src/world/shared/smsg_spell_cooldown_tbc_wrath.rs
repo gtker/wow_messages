@@ -52,15 +52,18 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
         let flags = crate::util::read_u8_le(r)?;
 
         // cooldowns: SpellCooldownStatus[-]
-        let mut current_size = {
-            8 // guid: Guid
-            + 1 // flags: u8
+        let cooldowns = {
+            let mut current_size = {
+                8 // guid: Guid
+                + 1 // flags: u8
+            };
+            let mut cooldowns = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                cooldowns.push(SpellCooldownStatus::read(r)?);
+                current_size += 1;
+            }
+            cooldowns
         };
-        let mut cooldowns = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            cooldowns.push(SpellCooldownStatus::read(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             guid,

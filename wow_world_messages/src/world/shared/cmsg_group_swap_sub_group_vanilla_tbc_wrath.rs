@@ -45,12 +45,16 @@ impl crate::Message for CMSG_GROUP_SWAP_SUB_GROUP {
         }
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // swap_with_name: CString
-        let swap_with_name = crate::util::read_c_string_to_vec(r)?;
-        let swap_with_name = String::from_utf8(swap_with_name)?;
+        let swap_with_name = {
+            let swap_with_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(swap_with_name)?
+        };
 
         Ok(Self {
             name,

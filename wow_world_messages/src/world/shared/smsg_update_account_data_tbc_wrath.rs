@@ -52,15 +52,18 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
         let decompressed_size = crate::util::read_u32_le(r)?;
 
         // compressed_data: u8[-]
-        let mut current_size = {
-            4 // data_type: u32
-            + 4 // decompressed_size: u32
+        let compressed_data = {
+            let mut current_size = {
+                4 // data_type: u32
+                + 4 // decompressed_size: u32
+            };
+            let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                compressed_data.push(crate::util::read_u8_le(r)?);
+                current_size += 1;
+            }
+            compressed_data
         };
-        let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            compressed_data.push(crate::util::read_u8_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             data_type,

@@ -51,8 +51,10 @@ impl GmSurveyQuestion {
         let answer = crate::util::read_u8_le(r)?;
 
         // comment: CString
-        let comment = crate::util::read_c_string_to_vec(r)?;
-        let comment = String::from_utf8(comment)?;
+        let comment = {
+            let comment = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(comment)?
+        };
 
         Ok(Self {
             question_id,

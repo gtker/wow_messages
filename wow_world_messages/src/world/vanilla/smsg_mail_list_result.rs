@@ -42,11 +42,13 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
         let amount_of_mails = crate::util::read_u8_le(r)?;
 
         // mails: Mail[amount_of_mails]
-        let mut mails = Vec::with_capacity(amount_of_mails as usize);
-        for i in 0..amount_of_mails {
-            mails.push(Mail::read(r)?);
-        }
-
+        let mails = {
+            let mut mails = Vec::with_capacity(amount_of_mails as usize);
+            for i in 0..amount_of_mails {
+                mails.push(Mail::read(r)?);
+            }
+            mails
+        };
         Ok(Self {
             mails,
         })

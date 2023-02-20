@@ -111,11 +111,13 @@ impl crate::Message for SMSG_LFG_PLAYER_REWARD {
         let amount_of_rewards = crate::util::read_u8_le(r)?;
 
         // rewards: QuestGiverReward[amount_of_rewards]
-        let mut rewards = Vec::with_capacity(amount_of_rewards as usize);
-        for i in 0..amount_of_rewards {
-            rewards.push(QuestGiverReward::read(r)?);
-        }
-
+        let rewards = {
+            let mut rewards = Vec::with_capacity(amount_of_rewards as usize);
+            for i in 0..amount_of_rewards {
+                rewards.push(QuestGiverReward::read(r)?);
+            }
+            rewards
+        };
         Ok(Self {
             random_dungeon_entry,
             dungeon_finished_entry,

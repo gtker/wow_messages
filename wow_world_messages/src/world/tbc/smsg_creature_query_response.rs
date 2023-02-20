@@ -140,28 +140,40 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
         };
         let found = if current_size < body_size as usize {
             // name1: CString
-            let name1 = crate::util::read_c_string_to_vec(r)?;
-            let name1 = String::from_utf8(name1)?;
+            let name1 = {
+                let name1 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name1)?
+            };
 
             // name2: CString
-            let name2 = crate::util::read_c_string_to_vec(r)?;
-            let name2 = String::from_utf8(name2)?;
+            let name2 = {
+                let name2 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name2)?
+            };
 
             // name3: CString
-            let name3 = crate::util::read_c_string_to_vec(r)?;
-            let name3 = String::from_utf8(name3)?;
+            let name3 = {
+                let name3 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name3)?
+            };
 
             // name4: CString
-            let name4 = crate::util::read_c_string_to_vec(r)?;
-            let name4 = String::from_utf8(name4)?;
+            let name4 = {
+                let name4 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name4)?
+            };
 
             // sub_name: CString
-            let sub_name = crate::util::read_c_string_to_vec(r)?;
-            let sub_name = String::from_utf8(sub_name)?;
+            let sub_name = {
+                let sub_name = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(sub_name)?
+            };
 
             // description: CString
-            let description = crate::util::read_c_string_to_vec(r)?;
-            let description = String::from_utf8(description)?;
+            let description = {
+                let description = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(description)?
+            };
 
             // type_flags: u32
             let type_flags = crate::util::read_u32_le(r)?;
@@ -182,10 +194,13 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
             let spell_data_id = crate::util::read_u32_le(r)?;
 
             // display_ids: u32[4]
-            let mut display_ids = [u32::default(); 4];
-            for i in display_ids.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
-            }
+            let display_ids = {
+                let mut display_ids = [u32::default(); 4];
+                for i in display_ids.iter_mut() {
+                    *i = crate::util::read_u32_le(r)?;
+                }
+                display_ids
+            };
 
             // health_multiplier: f32
             let health_multiplier = crate::util::read_f32_le(r)?;

@@ -607,6 +607,18 @@ impl Writer {
         self.closing_curly();
     }
 
+    pub(crate) fn body_closing_with_semicolon(
+        &mut self,
+        s: impl AsRef<str>,
+        f: impl Fn(&mut Self),
+    ) {
+        self.open_curly(s);
+
+        f(self);
+
+        self.closing_curly_with(";");
+    }
+
     pub(crate) fn body_closing_with(
         &mut self,
         s: impl AsRef<str>,

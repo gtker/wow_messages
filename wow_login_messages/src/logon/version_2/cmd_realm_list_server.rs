@@ -86,11 +86,13 @@ impl ServerMessage for CMD_REALM_LIST_Server {
         let number_of_realms = crate::util::read_u8_le(r)?;
 
         // realms: Realm[number_of_realms]
-        let mut realms = Vec::with_capacity(number_of_realms as usize);
-        for i in 0..number_of_realms {
-            realms.push(Realm::read(r)?);
-        }
-
+        let realms = {
+            let mut realms = Vec::with_capacity(number_of_realms as usize);
+            for i in 0..number_of_realms {
+                realms.push(Realm::read(r)?);
+            }
+            realms
+        };
         // footer_padding: u16
         let _footer_padding = crate::util::read_u16_le(r)?;
         // footer_padding is expected to always be 0 (0)
@@ -131,11 +133,13 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             let number_of_realms = crate::util::tokio_read_u8_le(r).await?;
 
             // realms: Realm[number_of_realms]
-            let mut realms = Vec::with_capacity(number_of_realms as usize);
-            for i in 0..number_of_realms {
-                realms.push(Realm::tokio_read(r).await?);
-            }
-
+            let realms = {
+                let mut realms = Vec::with_capacity(number_of_realms as usize);
+                for i in 0..number_of_realms {
+                    realms.push(Realm::tokio_read(r).await?);
+                }
+                realms
+            };
             // footer_padding: u16
             let _footer_padding = crate::util::tokio_read_u16_le(r).await?;
             // footer_padding is expected to always be 0 (0)
@@ -190,11 +194,13 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             let number_of_realms = crate::util::astd_read_u8_le(r).await?;
 
             // realms: Realm[number_of_realms]
-            let mut realms = Vec::with_capacity(number_of_realms as usize);
-            for i in 0..number_of_realms {
-                realms.push(Realm::astd_read(r).await?);
-            }
-
+            let realms = {
+                let mut realms = Vec::with_capacity(number_of_realms as usize);
+                for i in 0..number_of_realms {
+                    realms.push(Realm::astd_read(r).await?);
+                }
+                realms
+            };
             // footer_padding: u16
             let _footer_padding = crate::util::astd_read_u16_le(r).await?;
             // footer_padding is expected to always be 0 (0)

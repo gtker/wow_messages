@@ -40,8 +40,10 @@ impl crate::Message for CMSG_DBLOOKUP {
         }
 
         // query: CString
-        let query = crate::util::read_c_string_to_vec(r)?;
-        let query = String::from_utf8(query)?;
+        let query = {
+            let query = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(query)?
+        };
 
         Ok(Self {
             query,

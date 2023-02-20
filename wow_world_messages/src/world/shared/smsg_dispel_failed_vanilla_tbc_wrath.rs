@@ -51,15 +51,18 @@ impl crate::Message for SMSG_DISPEL_FAILED {
         let target = Guid::read(r)?;
 
         // spells: u32[-]
-        let mut current_size = {
-            8 // caster: Guid
-            + 8 // target: Guid
+        let spells = {
+            let mut current_size = {
+                8 // caster: Guid
+                + 8 // target: Guid
+            };
+            let mut spells = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                spells.push(crate::util::read_u32_le(r)?);
+                current_size += 1;
+            }
+            spells
         };
-        let mut spells = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            spells.push(crate::util::read_u32_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             caster,

@@ -68,11 +68,13 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
         let amount_of_states = crate::util::read_u16_le(r)?;
 
         // states: WorldState[amount_of_states]
-        let mut states = Vec::with_capacity(amount_of_states as usize);
-        for i in 0..amount_of_states {
-            states.push(WorldState::read(r)?);
-        }
-
+        let states = {
+            let mut states = Vec::with_capacity(amount_of_states as usize);
+            for i in 0..amount_of_states {
+                states.push(WorldState::read(r)?);
+            }
+            states
+        };
         Ok(Self {
             map,
             area,

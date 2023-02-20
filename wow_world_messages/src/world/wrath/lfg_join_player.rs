@@ -42,11 +42,13 @@ impl LfgJoinPlayer {
         let amount_of_locked_dungeons = crate::util::read_u32_le(r)?;
 
         // locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons]
-        let mut locked_dungeons = Vec::with_capacity(amount_of_locked_dungeons as usize);
-        for i in 0..amount_of_locked_dungeons {
-            locked_dungeons.push(LfgJoinLockedDungeon::read(r)?);
-        }
-
+        let locked_dungeons = {
+            let mut locked_dungeons = Vec::with_capacity(amount_of_locked_dungeons as usize);
+            for i in 0..amount_of_locked_dungeons {
+                locked_dungeons.push(LfgJoinLockedDungeon::read(r)?);
+            }
+            locked_dungeons
+        };
         Ok(Self {
             player,
             locked_dungeons,

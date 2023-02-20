@@ -223,16 +223,22 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         let quest_id = crate::util::read_u32_le(r)?;
 
         // title: CString
-        let title = crate::util::read_c_string_to_vec(r)?;
-        let title = String::from_utf8(title)?;
+        let title = {
+            let title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(title)?
+        };
 
         // details: CString
-        let details = crate::util::read_c_string_to_vec(r)?;
-        let details = String::from_utf8(details)?;
+        let details = {
+            let details = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(details)?
+        };
 
         // objectives: CString
-        let objectives = crate::util::read_c_string_to_vec(r)?;
-        let objectives = String::from_utf8(objectives)?;
+        let objectives = {
+            let objectives = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(objectives)?
+        };
 
         // auto_finish: Bool
         let auto_finish = crate::util::read_u8_le(r)? != 0;
@@ -249,20 +255,24 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         let amount_of_choice_item_rewards = crate::util::read_u32_le(r)?;
 
         // choice_item_rewards: QuestGiverReward[amount_of_choice_item_rewards]
-        let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
-        for i in 0..amount_of_choice_item_rewards {
-            choice_item_rewards.push(QuestGiverReward::read(r)?);
-        }
-
+        let choice_item_rewards = {
+            let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
+            for i in 0..amount_of_choice_item_rewards {
+                choice_item_rewards.push(QuestGiverReward::read(r)?);
+            }
+            choice_item_rewards
+        };
         // amount_of_item_rewards: u32
         let amount_of_item_rewards = crate::util::read_u32_le(r)?;
 
         // item_rewards: QuestGiverReward[amount_of_item_rewards]
-        let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
-        for i in 0..amount_of_item_rewards {
-            item_rewards.push(QuestGiverReward::read(r)?);
-        }
-
+        let item_rewards = {
+            let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+            for i in 0..amount_of_item_rewards {
+                item_rewards.push(QuestGiverReward::read(r)?);
+            }
+            item_rewards
+        };
         // money_reward: u32
         let money_reward = crate::util::read_u32_le(r)?;
 
@@ -293,32 +303,43 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         let unknown2 = crate::util::read_u32_le(r)?;
 
         // reward_factions: u32[5]
-        let mut reward_factions = [u32::default(); 5];
-        for i in reward_factions.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let reward_factions = {
+            let mut reward_factions = [u32::default(); 5];
+            for i in reward_factions.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            reward_factions
+        };
 
         // reward_reputations: u32[5]
-        let mut reward_reputations = [u32::default(); 5];
-        for i in reward_reputations.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let reward_reputations = {
+            let mut reward_reputations = [u32::default(); 5];
+            for i in reward_reputations.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            reward_reputations
+        };
 
         // reward_reputations_override: u32[5]
-        let mut reward_reputations_override = [u32::default(); 5];
-        for i in reward_reputations_override.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let reward_reputations_override = {
+            let mut reward_reputations_override = [u32::default(); 5];
+            for i in reward_reputations_override.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            reward_reputations_override
+        };
 
         // amount_of_emotes: u32
         let amount_of_emotes = crate::util::read_u32_le(r)?;
 
         // emotes: QuestDetailsEmote[amount_of_emotes]
-        let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
-        for i in 0..amount_of_emotes {
-            emotes.push(QuestDetailsEmote::read(r)?);
-        }
-
+        let emotes = {
+            let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
+            for i in 0..amount_of_emotes {
+                emotes.push(QuestDetailsEmote::read(r)?);
+            }
+            emotes
+        };
         Ok(Self {
             guid,
             guid2,

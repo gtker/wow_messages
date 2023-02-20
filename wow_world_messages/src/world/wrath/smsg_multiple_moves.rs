@@ -42,11 +42,13 @@ impl crate::Message for SMSG_MULTIPLE_MOVES {
         let amount_of_moves = crate::util::read_u32_le(r)?;
 
         // moves: MiniMoveMessage[amount_of_moves]
-        let mut moves = Vec::with_capacity(amount_of_moves as usize);
-        for i in 0..amount_of_moves {
-            moves.push(MiniMoveMessage::read(r)?);
-        }
-
+        let moves = {
+            let mut moves = Vec::with_capacity(amount_of_moves as usize);
+            for i in 0..amount_of_moves {
+                moves.push(MiniMoveMessage::read(r)?);
+            }
+            moves
+        };
         Ok(Self {
             moves,
         })

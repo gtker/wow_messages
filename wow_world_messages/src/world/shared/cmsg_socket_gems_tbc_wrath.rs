@@ -41,10 +41,13 @@ impl crate::Message for CMSG_SOCKET_GEMS {
         let item = Guid::read(r)?;
 
         // gems: Guid[3]
-        let mut gems = [Guid::default(); 3];
-        for i in gems.iter_mut() {
-            *i = Guid::read(r)?;
-        }
+        let gems = {
+            let mut gems = [Guid::default(); 3];
+            for i in gems.iter_mut() {
+                *i = Guid::read(r)?;
+            }
+            gems
+        };
 
         Ok(Self {
             item,

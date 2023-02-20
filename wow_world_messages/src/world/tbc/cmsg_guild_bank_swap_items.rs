@@ -273,15 +273,18 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
         };
 
         // unknown5: u8[-]
-        let mut current_size = {
-            8 // bank: Guid
-            + 1 // source: CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource
+        let unknown5 = {
+            let mut current_size = {
+                8 // bank: Guid
+                + 1 // source: CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource
+            };
+            let mut unknown5 = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                unknown5.push(crate::util::read_u8_le(r)?);
+                current_size += 1;
+            }
+            unknown5
         };
-        let mut unknown5 = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            unknown5.push(crate::util::read_u8_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             bank,

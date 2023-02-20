@@ -36,8 +36,10 @@ impl crate::Message for CMSG_GUILD_MOTD {
         }
 
         // message_of_the_day: CString
-        let message_of_the_day = crate::util::read_c_string_to_vec(r)?;
-        let message_of_the_day = String::from_utf8(message_of_the_day)?;
+        let message_of_the_day = {
+            let message_of_the_day = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(message_of_the_day)?
+        };
 
         Ok(Self {
             message_of_the_day,

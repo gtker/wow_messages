@@ -59,11 +59,13 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Server {
         let stable_slots = crate::util::read_u8_le(r)?;
 
         // pets: StabledPet[amount_of_pets]
-        let mut pets = Vec::with_capacity(amount_of_pets as usize);
-        for i in 0..amount_of_pets {
-            pets.push(StabledPet::read(r)?);
-        }
-
+        let pets = {
+            let mut pets = Vec::with_capacity(amount_of_pets as usize);
+            for i in 0..amount_of_pets {
+                pets.push(StabledPet::read(r)?);
+            }
+            pets
+        };
         Ok(Self {
             npc,
             stable_slots,

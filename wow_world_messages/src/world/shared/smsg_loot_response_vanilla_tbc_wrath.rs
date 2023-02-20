@@ -68,11 +68,13 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         let amount_of_items = crate::util::read_u8_le(r)?;
 
         // items: LootItem[amount_of_items]
-        let mut items = Vec::with_capacity(amount_of_items as usize);
-        for i in 0..amount_of_items {
-            items.push(LootItem::read(r)?);
-        }
-
+        let items = {
+            let mut items = Vec::with_capacity(amount_of_items as usize);
+            for i in 0..amount_of_items {
+                items.push(LootItem::read(r)?);
+            }
+            items
+        };
         Ok(Self {
             guid,
             loot_method,

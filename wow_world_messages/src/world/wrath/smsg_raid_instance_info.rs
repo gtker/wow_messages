@@ -42,11 +42,13 @@ impl crate::Message for SMSG_RAID_INSTANCE_INFO {
         let amount_of_raid_infos = crate::util::read_u32_le(r)?;
 
         // raid_infos: RaidInfo[amount_of_raid_infos]
-        let mut raid_infos = Vec::with_capacity(amount_of_raid_infos as usize);
-        for i in 0..amount_of_raid_infos {
-            raid_infos.push(RaidInfo::read(r)?);
-        }
-
+        let raid_infos = {
+            let mut raid_infos = Vec::with_capacity(amount_of_raid_infos as usize);
+            for i in 0..amount_of_raid_infos {
+                raid_infos.push(RaidInfo::read(r)?);
+            }
+            raid_infos
+        };
         Ok(Self {
             raid_infos,
         })

@@ -84,8 +84,10 @@ impl CalendarSendInvitee {
         // status_time: DateTime
         let status_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
         // text: CString
-        let text = crate::util::read_c_string_to_vec(r)?;
-        let text = String::from_utf8(text)?;
+        let text = {
+            let text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(text)?
+        };
 
         Ok(Self {
             invitee,

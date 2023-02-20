@@ -135,8 +135,10 @@ impl crate::Message for CMSG_PETITION_BUY {
         let unknown2 = Guid::read(r)?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // unknown3: u32
         let unknown3 = crate::util::read_u32_le(r)?;

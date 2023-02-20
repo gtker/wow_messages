@@ -97,8 +97,10 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 let id = crate::util::read_u32_le(r)?;
 
                 // text: CString
-                let text = crate::util::read_c_string_to_vec(r)?;
-                let text = String::from_utf8(text)?;
+                let text = {
+                    let text = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(text)?
+                };
 
                 // need_more_help: Bool
                 let need_more_help = crate::util::read_u8_le(r)? != 0;

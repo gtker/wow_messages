@@ -281,16 +281,22 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         let title_reward = crate::util::read_u32_le(r)?;
 
         // rewards: QuestItemReward[4]
-        let mut rewards = [QuestItemReward::default(); 4];
-        for i in rewards.iter_mut() {
-            *i = QuestItemReward::read(r)?;
-        }
+        let rewards = {
+            let mut rewards = [QuestItemReward::default(); 4];
+            for i in rewards.iter_mut() {
+                *i = QuestItemReward::read(r)?;
+            }
+            rewards
+        };
 
         // choice_rewards: QuestItemReward[6]
-        let mut choice_rewards = [QuestItemReward::default(); 6];
-        for i in choice_rewards.iter_mut() {
-            *i = QuestItemReward::read(r)?;
-        }
+        let choice_rewards = {
+            let mut choice_rewards = [QuestItemReward::default(); 6];
+            for i in choice_rewards.iter_mut() {
+                *i = QuestItemReward::read(r)?;
+            }
+            choice_rewards
+        };
 
         // point_map_id: u32
         let point_map_id = crate::util::read_u32_le(r)?;
@@ -302,34 +308,48 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         let point_opt = crate::util::read_u32_le(r)?;
 
         // title: CString
-        let title = crate::util::read_c_string_to_vec(r)?;
-        let title = String::from_utf8(title)?;
+        let title = {
+            let title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(title)?
+        };
 
         // objective_text: CString
-        let objective_text = crate::util::read_c_string_to_vec(r)?;
-        let objective_text = String::from_utf8(objective_text)?;
+        let objective_text = {
+            let objective_text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(objective_text)?
+        };
 
         // details: CString
-        let details = crate::util::read_c_string_to_vec(r)?;
-        let details = String::from_utf8(details)?;
+        let details = {
+            let details = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(details)?
+        };
 
         // end_text: CString
-        let end_text = crate::util::read_c_string_to_vec(r)?;
-        let end_text = String::from_utf8(end_text)?;
+        let end_text = {
+            let end_text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(end_text)?
+        };
 
         // objectives: QuestObjective[4]
-        let mut objectives = [QuestObjective::default(); 4];
-        for i in objectives.iter_mut() {
-            *i = QuestObjective::read(r)?;
-        }
+        let objectives = {
+            let mut objectives = [QuestObjective::default(); 4];
+            for i in objectives.iter_mut() {
+                *i = QuestObjective::read(r)?;
+            }
+            objectives
+        };
 
         // objective_texts: CString[4]
-        let mut objective_texts = Vec::with_capacity(4);
-        for i in 0..4 {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            objective_texts.push(String::from_utf8(s)?);
-        }
-        let objective_texts = objective_texts.try_into().unwrap();
+        let objective_texts = {
+            let mut objective_texts = Vec::with_capacity(4);
+            for i in 0..4 {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                objective_texts.push(String::from_utf8(s)?);
+            }
+            let objective_texts = objective_texts.try_into().unwrap();
+            objective_texts
+        };
 
         Ok(Self {
             quest_id,

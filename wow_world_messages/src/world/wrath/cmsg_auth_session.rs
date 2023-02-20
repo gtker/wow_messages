@@ -107,8 +107,10 @@ impl crate::Message for CMSG_AUTH_SESSION {
         let login_server_id = crate::util::read_u32_le(r)?;
 
         // username: CString
-        let username = crate::util::read_c_string_to_vec(r)?;
-        let username = String::from_utf8(username)?;
+        let username = {
+            let username = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(username)?
+        };
 
         // login_server_type: u32
         let login_server_type = crate::util::read_u32_le(r)?;
@@ -129,33 +131,39 @@ impl crate::Message for CMSG_AUTH_SESSION {
         let dos_response = crate::util::read_u64_le(r)?;
 
         // client_proof: u8[20]
-        let mut client_proof = [0_u8; 20];
-        r.read_exact(&mut client_proof)?;
+        let client_proof = {
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof)?;
+            client_proof
+        };
 
         // decompressed_addon_info_size: u32
         let decompressed_addon_info_size = crate::util::read_u32_le(r)?;
 
         // addon_info: u8[-]
-        let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+        let addon_info = {
+            let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
-        let mut current_size = {
-            4 // client_build: u32
-            + 4 // login_server_id: u32
-            + username.len() + 1 // username: CString
-            + 4 // login_server_type: u32
-            + 4 // client_seed: u32
-            + 4 // region_id: u32
-            + 4 // battleground_id: u32
-            + 4 // realm_id: u32
-            + 8 // dos_response: u64
-            + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
-            + 4 // decompressed_addon_info_size: u32
+            let mut current_size = {
+                4 // client_build: u32
+                + 4 // login_server_id: u32
+                + username.len() + 1 // username: CString
+                + 4 // login_server_type: u32
+                + 4 // client_seed: u32
+                + 4 // region_id: u32
+                + 4 // battleground_id: u32
+                + 4 // realm_id: u32
+                + 8 // dos_response: u64
+                + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+                + 4 // decompressed_addon_info_size: u32
+            };
+            let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
+            while decoder.total_out() < (decompressed_addon_info_size as u64) {
+                addon_info.push(crate::util::read_u8_le(decoder)?);
+                current_size += 1;
+            }
+            addon_info
         };
-        let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
-        while decoder.total_out() < (decompressed_addon_info_size as u64) {
-            addon_info.push(crate::util::read_u8_le(decoder)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             client_build,

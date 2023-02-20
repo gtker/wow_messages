@@ -46,8 +46,10 @@ impl crate::Message for SMSG_KICK_REASON {
         let reason = crate::util::read_u8_le(r)?;
 
         // text: CString
-        let text = crate::util::read_c_string_to_vec(r)?;
-        let text = String::from_utf8(text)?;
+        let text = {
+            let text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(text)?
+        };
 
         Ok(Self {
             reason,

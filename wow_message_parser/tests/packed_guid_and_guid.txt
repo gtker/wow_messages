@@ -71,17 +71,23 @@ impl PackedGuidAndGuid {
         let guid = Guid::read(r)?;
 
         // static_packed: PackedGuid[10]
-        let mut static_packed = Vec::with_capacity(10);
-        for i in 0..10 {
-            static_packed.push(Guid::read_packed(r)?);
-        }
-        let static_packed = static_packed.try_into().unwrap();
+        let static_packed = {
+            let mut static_packed = Vec::with_capacity(10);
+            for i in 0..10 {
+                static_packed.push(Guid::read_packed(r)?);
+            }
+            let static_packed = static_packed.try_into().unwrap();
+            static_packed
+        };
 
         // static_guid: Guid[10]
-        let mut static_guid = [Guid::default(); 10];
-        for i in static_guid.iter_mut() {
-            *i = Guid::read(r)?;
-        }
+        let static_guid = {
+            let mut static_guid = [Guid::default(); 10];
+            for i in static_guid.iter_mut() {
+                *i = Guid::read(r)?;
+            }
+            static_guid
+        };
 
         // basic1: u8
         let basic1 = crate::util::read_u8_le(r)?;
@@ -90,17 +96,21 @@ impl PackedGuidAndGuid {
         let basic2 = crate::util::read_u8_le(r)?;
 
         // variable_packed: PackedGuid[basic1]
-        let mut variable_packed = Vec::with_capacity(basic1 as usize);
-        for i in 0..basic1 {
-            variable_packed.push(Guid::read_packed(r)?);
-        }
-
+        let variable_packed = {
+            let mut variable_packed = Vec::with_capacity(basic1 as usize);
+            for i in 0..basic1 {
+                variable_packed.push(Guid::read_packed(r)?);
+            }
+            variable_packed
+        };
         // variable_guid: Guid[basic2]
-        let mut variable_guid = Vec::with_capacity(basic2 as usize);
-        for i in 0..basic2 {
-            variable_guid.push(Guid::read(r)?);
-        }
-
+        let variable_guid = {
+            let mut variable_guid = Vec::with_capacity(basic2 as usize);
+            for i in 0..basic2 {
+                variable_guid.push(Guid::read(r)?);
+            }
+            variable_guid
+        };
         Ok(Self {
             packed,
             guid,

@@ -67,16 +67,19 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         let mask: CacheMask = crate::util::read_u32_le(r)?.try_into()?;
 
         // data: u32[-]
-        let mut current_size = {
-            4 // unix_time: u32
-            + 1 // unknown1: u8
-            + 4 // mask: CacheMask
+        let data = {
+            let mut current_size = {
+                4 // unix_time: u32
+                + 1 // unknown1: u8
+                + 4 // mask: CacheMask
+            };
+            let mut data = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                data.push(crate::util::read_u32_le(r)?);
+                current_size += 1;
+            }
+            data
         };
-        let mut data = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            data.push(crate::util::read_u32_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             unix_time,

@@ -59,11 +59,13 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
         let amount_of_units = crate::util::read_u32_le(r)?;
 
         // units: ThreatUpdateUnit[amount_of_units]
-        let mut units = Vec::with_capacity(amount_of_units as usize);
-        for i in 0..amount_of_units {
-            units.push(ThreatUpdateUnit::read(r)?);
-        }
-
+        let units = {
+            let mut units = Vec::with_capacity(amount_of_units as usize);
+            for i in 0..amount_of_units {
+                units.push(ThreatUpdateUnit::read(r)?);
+            }
+            units
+        };
         Ok(Self {
             unit,
             new_victim,

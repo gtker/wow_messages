@@ -62,8 +62,10 @@ impl SendCalendarEvent {
         let event_id = Guid::read(r)?;
 
         // title: CString
-        let title = crate::util::read_c_string_to_vec(r)?;
-        let title = String::from_utf8(title)?;
+        let title = {
+            let title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(title)?
+        };
 
         // event_type: u32
         let event_type = crate::util::read_u32_le(r)?;

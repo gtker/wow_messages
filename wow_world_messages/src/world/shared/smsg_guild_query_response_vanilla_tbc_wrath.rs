@@ -77,16 +77,21 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
         let id = crate::util::read_u32_le(r)?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // rank_names: CString[10]
-        let mut rank_names = Vec::with_capacity(10);
-        for i in 0..10 {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            rank_names.push(String::from_utf8(s)?);
-        }
-        let rank_names = rank_names.try_into().unwrap();
+        let rank_names = {
+            let mut rank_names = Vec::with_capacity(10);
+            for i in 0..10 {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                rank_names.push(String::from_utf8(s)?);
+            }
+            let rank_names = rank_names.try_into().unwrap();
+            rank_names
+        };
 
         // emblem_style: u32
         let emblem_style = crate::util::read_u32_le(r)?;

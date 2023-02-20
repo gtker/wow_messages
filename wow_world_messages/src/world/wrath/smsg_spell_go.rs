@@ -184,8 +184,11 @@ impl crate::Message for SMSG_SPELL_GO {
             let rune_mask_after_cast = crate::util::read_u8_le(r)?;
 
             // rune_cooldowns: u8[6]
-            let mut rune_cooldowns = [0_u8; 6];
-            r.read_exact(&mut rune_cooldowns)?;
+            let rune_cooldowns = {
+                let mut rune_cooldowns = [0_u8; 6];
+                r.read_exact(&mut rune_cooldowns)?;
+                rune_cooldowns
+            };
 
             Some(SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
                 rune_cooldowns,

@@ -84,35 +84,43 @@ impl crate::Message for CMSG_AUTH_SESSION {
         let server_id = crate::util::read_u32_le(r)?;
 
         // username: CString
-        let username = crate::util::read_c_string_to_vec(r)?;
-        let username = String::from_utf8(username)?;
+        let username = {
+            let username = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(username)?
+        };
 
         // client_seed: u32
         let client_seed = crate::util::read_u32_le(r)?;
 
         // client_proof: u8[20]
-        let mut client_proof = [0_u8; 20];
-        r.read_exact(&mut client_proof)?;
+        let client_proof = {
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof)?;
+            client_proof
+        };
 
         // decompressed_addon_info_size: u32
         let decompressed_addon_info_size = crate::util::read_u32_le(r)?;
 
         // addon_info: AddonInfo[-]
-        let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+        let addon_info = {
+            let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
-        let mut current_size = {
-            4 // build: u32
-            + 4 // server_id: u32
-            + username.len() + 1 // username: CString
-            + 4 // client_seed: u32
-            + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
-            + 4 // decompressed_addon_info_size: u32
+            let mut current_size = {
+                4 // build: u32
+                + 4 // server_id: u32
+                + username.len() + 1 // username: CString
+                + 4 // client_seed: u32
+                + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+                + 4 // decompressed_addon_info_size: u32
+            };
+            let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
+            while decoder.total_out() < (decompressed_addon_info_size as u64) {
+                addon_info.push(AddonInfo::read(decoder)?);
+                current_size += 1;
+            }
+            addon_info
         };
-        let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
-        while decoder.total_out() < (decompressed_addon_info_size as u64) {
-            addon_info.push(AddonInfo::read(decoder)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             build,

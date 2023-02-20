@@ -76,8 +76,10 @@ impl crate::Message for CMSG_CHAR_CUSTOMIZE {
         let player = Guid::read(r)?;
 
         // new_name: CString
-        let new_name = crate::util::read_c_string_to_vec(r)?;
-        let new_name = String::from_utf8(new_name)?;
+        let new_name = {
+            let new_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(new_name)?
+        };
 
         // gender: Gender
         let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;

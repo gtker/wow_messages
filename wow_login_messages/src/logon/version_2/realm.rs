@@ -76,12 +76,16 @@ impl Realm {
         let flag = RealmFlag::new(crate::util::read_u8_le(r)?);
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // address: CString
-        let address = crate::util::read_c_string_to_vec(r)?;
-        let address = String::from_utf8(address)?;
+        let address = {
+            let address = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(address)?
+        };
 
         // population: Population
         let population: Population = crate::util::read_u32_le(r)?.into();
@@ -116,12 +120,16 @@ impl Realm {
         let flag = RealmFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
         // name: CString
-        let name = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::tokio_read_c_string_to_vec(r).await?;
+            String::from_utf8(name)?
+        };
 
         // address: CString
-        let address = crate::util::tokio_read_c_string_to_vec(r).await?;
-        let address = String::from_utf8(address)?;
+        let address = {
+            let address = crate::util::tokio_read_c_string_to_vec(r).await?;
+            String::from_utf8(address)?
+        };
 
         // population: Population
         let population: Population = crate::util::tokio_read_u32_le(r).await?.into();
@@ -156,12 +164,16 @@ impl Realm {
         let flag = RealmFlag::new(crate::util::astd_read_u8_le(r).await?);
 
         // name: CString
-        let name = crate::util::astd_read_c_string_to_vec(r).await?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::astd_read_c_string_to_vec(r).await?;
+            String::from_utf8(name)?
+        };
 
         // address: CString
-        let address = crate::util::astd_read_c_string_to_vec(r).await?;
-        let address = String::from_utf8(address)?;
+        let address = {
+            let address = crate::util::astd_read_c_string_to_vec(r).await?;
+            String::from_utf8(address)?
+        };
 
         // population: Population
         let population: Population = crate::util::astd_read_u32_le(r).await?.into();

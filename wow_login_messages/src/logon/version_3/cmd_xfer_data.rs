@@ -40,11 +40,13 @@ impl ServerMessage for CMD_XFER_DATA {
         let size = crate::util::read_u16_le(r)?;
 
         // data: u8[size]
-        let mut data = Vec::with_capacity(size as usize);
-        for i in 0..size {
-            data.push(crate::util::read_u8_le(r)?);
-        }
-
+        let data = {
+            let mut data = Vec::with_capacity(size as usize);
+            for i in 0..size {
+                data.push(crate::util::read_u8_le(r)?);
+            }
+            data
+        };
         Ok(Self {
             data,
         })
@@ -73,11 +75,13 @@ impl ServerMessage for CMD_XFER_DATA {
             let size = crate::util::tokio_read_u16_le(r).await?;
 
             // data: u8[size]
-            let mut data = Vec::with_capacity(size as usize);
-            for i in 0..size {
-                data.push(crate::util::tokio_read_u8_le(r).await?);
-            }
-
+            let data = {
+                let mut data = Vec::with_capacity(size as usize);
+                for i in 0..size {
+                    data.push(crate::util::tokio_read_u8_le(r).await?);
+                }
+                data
+            };
             Ok(Self {
                 data,
             })
@@ -120,11 +124,13 @@ impl ServerMessage for CMD_XFER_DATA {
             let size = crate::util::astd_read_u16_le(r).await?;
 
             // data: u8[size]
-            let mut data = Vec::with_capacity(size as usize);
-            for i in 0..size {
-                data.push(crate::util::astd_read_u8_le(r).await?);
-            }
-
+            let data = {
+                let mut data = Vec::with_capacity(size as usize);
+                for i in 0..size {
+                    data.push(crate::util::astd_read_u8_le(r).await?);
+                }
+                data
+            };
             Ok(Self {
                 data,
             })

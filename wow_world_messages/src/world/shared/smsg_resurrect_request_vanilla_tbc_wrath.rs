@@ -49,9 +49,11 @@ impl crate::Message for SMSG_RESURRECT_REQUEST {
         let guid = Guid::read(r)?;
 
         // name: SizedCString
-        let name = crate::util::read_u32_le(r)?;
-        let name = crate::util::read_sized_c_string_to_vec(r, name)?;
-        let name = String::from_utf8(name)?;;
+        let name = {
+            let name = crate::util::read_u32_le(r)?;
+            let name = crate::util::read_sized_c_string_to_vec(r, name)?;
+            String::from_utf8(name)?
+        };
         // player: Bool
         let player = crate::util::read_u8_le(r)? != 0;
         Ok(Self {

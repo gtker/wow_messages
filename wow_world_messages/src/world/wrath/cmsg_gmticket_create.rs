@@ -86,8 +86,10 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         let position = Vector3d::read(r)?;
 
         // message: CString
-        let message = crate::util::read_c_string_to_vec(r)?;
-        let message = String::from_utf8(message)?;
+        let message = {
+            let message = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(message)?
+        };
 
         // needs_response: Bool
         let needs_response = crate::util::read_u8_le(r)? != 0;
@@ -97,32 +99,37 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         let num_of_times = crate::util::read_u32_le(r)?;
 
         // times: u32[num_of_times]
-        let mut times = Vec::with_capacity(num_of_times as usize);
-        for i in 0..num_of_times {
-            times.push(crate::util::read_u32_le(r)?);
-        }
-
+        let times = {
+            let mut times = Vec::with_capacity(num_of_times as usize);
+            for i in 0..num_of_times {
+                times.push(crate::util::read_u32_le(r)?);
+            }
+            times
+        };
         // decompressed_size: u32
         let decompressed_size = crate::util::read_u32_le(r)?;
 
         // compressed_data: u8[-]
-        let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+        let compressed_data = {
+            let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
-        let mut current_size = {
-            4 // map: Map
-            + 12 // position: Vector3d
-            + message.len() + 1 // message: CString
-            + 1 // needs_response: Bool
-            + 1 // needs_more_help: Bool
-            + 4 // num_of_times: u32
-            + times.len() * core::mem::size_of::<u32>() // times: u32[num_of_times]
-            + 4 // decompressed_size: u32
+            let mut current_size = {
+                4 // map: Map
+                + 12 // position: Vector3d
+                + message.len() + 1 // message: CString
+                + 1 // needs_response: Bool
+                + 1 // needs_more_help: Bool
+                + 4 // num_of_times: u32
+                + times.len() * core::mem::size_of::<u32>() // times: u32[num_of_times]
+                + 4 // decompressed_size: u32
+            };
+            let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
+            while decoder.total_out() < (decompressed_size as u64) {
+                compressed_data.push(crate::util::read_u8_le(decoder)?);
+                current_size += 1;
+            }
+            compressed_data
         };
-        let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
-        while decoder.total_out() < (decompressed_size as u64) {
-            compressed_data.push(crate::util::read_u8_le(decoder)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             map,

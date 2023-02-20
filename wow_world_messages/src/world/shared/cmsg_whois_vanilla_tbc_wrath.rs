@@ -36,8 +36,10 @@ impl crate::Message for CMSG_WHOIS {
         }
 
         // character: CString
-        let character = crate::util::read_c_string_to_vec(r)?;
-        let character = String::from_utf8(character)?;
+        let character = {
+            let character = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(character)?
+        };
 
         Ok(Self {
             character,

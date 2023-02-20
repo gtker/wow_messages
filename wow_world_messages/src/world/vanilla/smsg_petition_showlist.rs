@@ -51,11 +51,13 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
         let amount_of_petitions = crate::util::read_u8_le(r)?;
 
         // petitions: PetitionShowlist[amount_of_petitions]
-        let mut petitions = Vec::with_capacity(amount_of_petitions as usize);
-        for i in 0..amount_of_petitions {
-            petitions.push(PetitionShowlist::read(r)?);
-        }
-
+        let petitions = {
+            let mut petitions = Vec::with_capacity(amount_of_petitions as usize);
+            for i in 0..amount_of_petitions {
+                petitions.push(PetitionShowlist::read(r)?);
+            }
+            petitions
+        };
         Ok(Self {
             npc,
             petitions,

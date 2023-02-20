@@ -49,8 +49,10 @@ impl crate::Message for SMSG_PAGE_TEXT_QUERY_RESPONSE {
         let page_id = crate::util::read_u32_le(r)?;
 
         // text: CString
-        let text = crate::util::read_c_string_to_vec(r)?;
-        let text = String::from_utf8(text)?;
+        let text = {
+            let text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(text)?
+        };
 
         // next_page_id: u32
         let next_page_id = crate::util::read_u32_le(r)?;

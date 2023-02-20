@@ -51,15 +51,18 @@ impl crate::Message for SMSG_LFG_JOIN_RESULT {
         let state = crate::util::read_u32_le(r)?;
 
         // players: LfgJoinPlayer[-]
-        let mut current_size = {
-            4 // result: u32
-            + 4 // state: u32
+        let players = {
+            let mut current_size = {
+                4 // result: u32
+                + 4 // state: u32
+            };
+            let mut players = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                players.push(LfgJoinPlayer::read(r)?);
+                current_size += 1;
+            }
+            players
         };
-        let mut players = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            players.push(LfgJoinPlayer::read(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             result,

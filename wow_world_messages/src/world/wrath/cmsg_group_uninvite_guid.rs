@@ -45,8 +45,10 @@ impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
         let guid = Guid::read(r)?;
 
         // reason: CString
-        let reason = crate::util::read_c_string_to_vec(r)?;
-        let reason = String::from_utf8(reason)?;
+        let reason = {
+            let reason = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(reason)?
+        };
 
         Ok(Self {
             guid,

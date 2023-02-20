@@ -65,16 +65,25 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // proof_data: u8[16]
-        let mut proof_data = [0_u8; 16];
-        r.read_exact(&mut proof_data)?;
+        let proof_data = {
+            let mut proof_data = [0_u8; 16];
+            r.read_exact(&mut proof_data)?;
+            proof_data
+        };
 
         // client_proof: u8[20]
-        let mut client_proof = [0_u8; 20];
-        r.read_exact(&mut client_proof)?;
+        let client_proof = {
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof)?;
+            client_proof
+        };
 
         // client_checksum: u8[20]
-        let mut client_checksum = [0_u8; 20];
-        r.read_exact(&mut client_checksum)?;
+        let client_checksum = {
+            let mut client_checksum = [0_u8; 20];
+            r.read_exact(&mut client_checksum)?;
+            client_checksum
+        };
 
         // key_count: u8
         let _key_count = crate::util::read_u8_le(r)?;
@@ -107,16 +116,25 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
      {
         Box::pin(async move {
             // proof_data: u8[16]
-            let mut proof_data = [0_u8; 16];
-            r.read_exact(&mut proof_data).await?;
+            let proof_data = {
+                let mut proof_data = [0_u8; 16];
+                r.read_exact(&mut proof_data).await?;
+                proof_data
+            };
 
             // client_proof: u8[20]
-            let mut client_proof = [0_u8; 20];
-            r.read_exact(&mut client_proof).await?;
+            let client_proof = {
+                let mut client_proof = [0_u8; 20];
+                r.read_exact(&mut client_proof).await?;
+                client_proof
+            };
 
             // client_checksum: u8[20]
-            let mut client_checksum = [0_u8; 20];
-            r.read_exact(&mut client_checksum).await?;
+            let client_checksum = {
+                let mut client_checksum = [0_u8; 20];
+                r.read_exact(&mut client_checksum).await?;
+                client_checksum
+            };
 
             // key_count: u8
             let _key_count = crate::util::tokio_read_u8_le(r).await?;
@@ -163,16 +181,25 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
      {
         Box::pin(async move {
             // proof_data: u8[16]
-            let mut proof_data = [0_u8; 16];
-            r.read_exact(&mut proof_data).await?;
+            let proof_data = {
+                let mut proof_data = [0_u8; 16];
+                r.read_exact(&mut proof_data).await?;
+                proof_data
+            };
 
             // client_proof: u8[20]
-            let mut client_proof = [0_u8; 20];
-            r.read_exact(&mut client_proof).await?;
+            let client_proof = {
+                let mut client_proof = [0_u8; 20];
+                r.read_exact(&mut client_proof).await?;
+                client_proof
+            };
 
             // client_checksum: u8[20]
-            let mut client_checksum = [0_u8; 20];
-            r.read_exact(&mut client_checksum).await?;
+            let client_checksum = {
+                let mut client_checksum = [0_u8; 20];
+                r.read_exact(&mut client_checksum).await?;
+                client_checksum
+            };
 
             // key_count: u8
             let _key_count = crate::util::astd_read_u8_le(r).await?;

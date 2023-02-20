@@ -26,9 +26,11 @@ impl SizedCString {
 impl SizedCString {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // s: SizedCString
-        let s = crate::util::read_u32_le(r)?;
-        let s = crate::util::read_sized_c_string_to_vec(r, s)?;
-        let s = String::from_utf8(s)?;;
+        let s = {
+            let s = crate::util::read_u32_le(r)?;
+            let s = crate::util::read_sized_c_string_to_vec(r, s)?;
+            String::from_utf8(s)?
+        };
         Ok(Self {
             s,
         })

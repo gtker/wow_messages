@@ -76,12 +76,18 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
         let result_if = match result {
             LoginResult::Success => {
                 // challenge_data: u8[16]
-                let mut challenge_data = [0_u8; 16];
-                r.read_exact(&mut challenge_data)?;
+                let challenge_data = {
+                    let mut challenge_data = [0_u8; 16];
+                    r.read_exact(&mut challenge_data)?;
+                    challenge_data
+                };
 
                 // checksum_salt: u8[16]
-                let mut checksum_salt = [0_u8; 16];
-                r.read_exact(&mut checksum_salt)?;
+                let checksum_salt = {
+                    let mut checksum_salt = [0_u8; 16];
+                    r.read_exact(&mut checksum_salt)?;
+                    checksum_salt
+                };
 
                 CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
                     challenge_data,
@@ -135,12 +141,18 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
             let result_if = match result {
                 LoginResult::Success => {
                     // challenge_data: u8[16]
-                    let mut challenge_data = [0_u8; 16];
-                    r.read_exact(&mut challenge_data).await?;
+                    let challenge_data = {
+                        let mut challenge_data = [0_u8; 16];
+                        r.read_exact(&mut challenge_data).await?;
+                        challenge_data
+                    };
 
                     // checksum_salt: u8[16]
-                    let mut checksum_salt = [0_u8; 16];
-                    r.read_exact(&mut checksum_salt).await?;
+                    let checksum_salt = {
+                        let mut checksum_salt = [0_u8; 16];
+                        r.read_exact(&mut checksum_salt).await?;
+                        checksum_salt
+                    };
 
                     CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
                         challenge_data,
@@ -208,12 +220,18 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
             let result_if = match result {
                 LoginResult::Success => {
                     // challenge_data: u8[16]
-                    let mut challenge_data = [0_u8; 16];
-                    r.read_exact(&mut challenge_data).await?;
+                    let challenge_data = {
+                        let mut challenge_data = [0_u8; 16];
+                        r.read_exact(&mut challenge_data).await?;
+                        challenge_data
+                    };
 
                     // checksum_salt: u8[16]
-                    let mut checksum_salt = [0_u8; 16];
-                    r.read_exact(&mut checksum_salt).await?;
+                    let checksum_salt = {
+                        let mut checksum_salt = [0_u8; 16];
+                        r.read_exact(&mut checksum_salt).await?;
+                        checksum_salt
+                    };
 
                     CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
                         challenge_data,

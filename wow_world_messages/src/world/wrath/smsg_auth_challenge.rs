@@ -53,8 +53,11 @@ impl crate::Message for SMSG_AUTH_CHALLENGE {
         let server_seed = crate::util::read_u32_le(r)?;
 
         // seed: u8[32]
-        let mut seed = [0_u8; 32];
-        r.read_exact(&mut seed)?;
+        let seed = {
+            let mut seed = [0_u8; 32];
+            r.read_exact(&mut seed)?;
+            seed
+        };
 
         Ok(Self {
             unknown1,

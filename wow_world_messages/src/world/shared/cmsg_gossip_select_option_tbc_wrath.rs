@@ -74,8 +74,10 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
         };
         let unknown = if current_size < body_size as usize {
             // code: CString
-            let code = crate::util::read_c_string_to_vec(r)?;
-            let code = String::from_utf8(code)?;
+            let code = {
+                let code = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(code)?
+            };
 
             Some(CMSG_GOSSIP_SELECT_OPTION_unknown {
                 code,

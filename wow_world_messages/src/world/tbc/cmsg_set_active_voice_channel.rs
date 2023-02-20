@@ -44,8 +44,10 @@ impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
         let unknown1 = crate::util::read_u32_le(r)?;
 
         // unknown2: CString
-        let unknown2 = crate::util::read_c_string_to_vec(r)?;
-        let unknown2 = String::from_utf8(unknown2)?;
+        let unknown2 = {
+            let unknown2 = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(unknown2)?
+        };
 
         Ok(Self {
             unknown1,

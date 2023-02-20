@@ -42,11 +42,13 @@ impl crate::Message for SMSG_RESYNC_RUNES {
         let amount_of_runes = crate::util::read_u32_le(r)?;
 
         // runes: ResyncRune[amount_of_runes]
-        let mut runes = Vec::with_capacity(amount_of_runes as usize);
-        for i in 0..amount_of_runes {
-            runes.push(ResyncRune::read(r)?);
-        }
-
+        let runes = {
+            let mut runes = Vec::with_capacity(amount_of_runes as usize);
+            for i in 0..amount_of_runes {
+                runes.push(ResyncRune::read(r)?);
+            }
+            runes
+        };
         Ok(Self {
             runes,
         })

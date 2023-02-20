@@ -65,10 +65,13 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
         let purchased_bank_tabs = crate::util::read_u8_le(r)?;
 
         // bank_tabs: BankTab[6]
-        let mut bank_tabs = [BankTab::default(); 6];
-        for i in bank_tabs.iter_mut() {
-            *i = BankTab::read(r)?;
-        }
+        let bank_tabs = {
+            let mut bank_tabs = [BankTab::default(); 6];
+            for i in bank_tabs.iter_mut() {
+                *i = BankTab::read(r)?;
+            }
+            bank_tabs
+        };
 
         Ok(Self {
             id,

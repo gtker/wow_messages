@@ -50,8 +50,10 @@ impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
         let quest_id = crate::util::read_u32_le(r)?;
 
         // quest_title: CString
-        let quest_title = crate::util::read_c_string_to_vec(r)?;
-        let quest_title = String::from_utf8(quest_title)?;
+        let quest_title = {
+            let quest_title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(quest_title)?
+        };
 
         // guid: Guid
         let guid = Guid::read(r)?;

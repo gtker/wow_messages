@@ -43,11 +43,14 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
         let text_id = crate::util::read_u32_le(r)?;
 
         // texts: NpcTextUpdate[8]
-        let mut texts = Vec::with_capacity(8);
-        for i in 0..8 {
-            texts.push(NpcTextUpdate::read(r)?);
-        }
-        let texts = texts.try_into().unwrap();
+        let texts = {
+            let mut texts = Vec::with_capacity(8);
+            for i in 0..8 {
+                texts.push(NpcTextUpdate::read(r)?);
+            }
+            let texts = texts.try_into().unwrap();
+            texts
+        };
 
         Ok(Self {
             text_id,

@@ -34,14 +34,17 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         }
 
         // unimplemented: u8[-]
-        let mut current_size = {
-            0
+        let unimplemented = {
+            let mut current_size = {
+                0
+            };
+            let mut unimplemented = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                unimplemented.push(crate::util::read_u8_le(r)?);
+                current_size += 1;
+            }
+            unimplemented
         };
-        let mut unimplemented = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            unimplemented.push(crate::util::read_u8_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             unimplemented,

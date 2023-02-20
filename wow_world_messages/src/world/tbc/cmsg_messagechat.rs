@@ -139,8 +139,10 @@ impl crate::Message for CMSG_MESSAGECHAT {
             ChatType::Yell => CMSG_MESSAGECHAT_ChatType::Yell,
             ChatType::Whisper => {
                 // target_player: CString
-                let target_player = crate::util::read_c_string_to_vec(r)?;
-                let target_player = String::from_utf8(target_player)?;
+                let target_player = {
+                    let target_player = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(target_player)?
+                };
 
                 CMSG_MESSAGECHAT_ChatType::Whisper {
                     target_player,
@@ -157,8 +159,10 @@ impl crate::Message for CMSG_MESSAGECHAT {
             ChatType::MonsterEmote => CMSG_MESSAGECHAT_ChatType::MonsterEmote,
             ChatType::Channel => {
                 // channel: CString
-                let channel = crate::util::read_c_string_to_vec(r)?;
-                let channel = String::from_utf8(channel)?;
+                let channel = {
+                    let channel = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(channel)?
+                };
 
                 CMSG_MESSAGECHAT_ChatType::Channel {
                     channel,
@@ -196,8 +200,10 @@ impl crate::Message for CMSG_MESSAGECHAT {
         };
 
         // message: CString
-        let message = crate::util::read_c_string_to_vec(r)?;
-        let message = String::from_utf8(message)?;
+        let message = {
+            let message = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(message)?
+        };
 
         Ok(Self {
             chat_type: chat_type_if,

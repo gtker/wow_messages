@@ -88,10 +88,13 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
                 let arena_point_cost = crate::util::read_u32_le(r)?;
 
                 // extra_items: ItemRefundExtra[5]
-                let mut extra_items = [ItemRefundExtra::default(); 5];
-                for i in extra_items.iter_mut() {
-                    *i = ItemRefundExtra::read(r)?;
-                }
+                let extra_items = {
+                    let mut extra_items = [ItemRefundExtra::default(); 5];
+                    for i in extra_items.iter_mut() {
+                        *i = ItemRefundExtra::read(r)?;
+                    }
+                    extra_items
+                };
 
                 SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Success {
                     arena_point_cost,

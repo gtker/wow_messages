@@ -20,8 +20,9 @@ fn print_read_array_fixed(
     postfix: &str,
     size: i64,
 ) {
-    let inner_is_constant_sized = array.inner_type_is_constant_sized();
+    s.open_curly(format!("let {name} =", name = d.name()));
 
+    let inner_is_constant_sized = array.inner_type_is_constant_sized();
     if inner_is_constant_sized {
         s.wln(format!(
             "let mut {name} = [{type_name}::default(); {size}];",
@@ -128,6 +129,10 @@ fn print_read_array_fixed(
         ));
     }
 
+    s.wln(d.name());
+
+    s.closing_curly_with(";");
+
     s.newline();
 }
 
@@ -140,16 +145,19 @@ fn print_read_array(
     postfix: &str,
 ) {
     if array.is_constant_sized_u8_array() {
-        s.wln(format!(
-            "let mut {name} = [0_u8; {size}];",
-            name = d.name(),
-            size = array.size().str()
-        ));
-        s.wln(format!(
-            "r.read_exact(&mut {name}){postfix}?;",
-            name = d.name(),
-            postfix = postfix
-        ));
+        s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
+            s.wln(format!(
+                "let mut {name} = [0_u8; {size}];",
+                name = d.name(),
+                size = array.size().str()
+            ));
+            s.wln(format!(
+                "r.read_exact(&mut {name}){postfix}?;",
+                name = d.name(),
+                postfix = postfix
+            ));
+            s.wln(d.name());
+        });
         s.newline();
         return;
     }
@@ -159,6 +167,7 @@ fn print_read_array(
             print_read_array_fixed(s, array, d, prefix, postfix, size);
         }
         ArraySize::Variable(m) => {
+            s.open_curly(format!("let {name} =", name = d.name()));
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity({length} as usize);",
                 name = d.name(),
@@ -168,9 +177,13 @@ fn print_read_array(
 
             print_array_ty(s, array, d, prefix, "r", postfix);
 
-            s.closing_curly_newline()
+            s.closing_curly();
+            s.wln(d.name());
+            s.closing_curly_with(";");
         }
         ArraySize::Endless => {
+            s.open_curly(format!("let {name} =", name = d.name()));
+
             if d.tags().is_compressed() {
                 s.wln("let mut decoder = &mut flate2::read::ZlibDecoder::new(r);");
                 s.newline();
@@ -197,6 +210,10 @@ fn print_read_array(
                 print_array_ty(s, array, d, prefix, reader, postfix);
                 s.wln("current_size += 1;")
             });
+
+            s.wln(d.name());
+            s.closing_curly_with(";");
+
             s.newline();
         }
     }
@@ -262,48 +279,44 @@ fn print_array_ty(
 }
 
 fn print_size_before_variable(s: &mut Writer, e: &Container, variable_name: &str) {
-    s.body_closing_with(
-        "let mut current_size =",
-        |s| {
-            if e.rust_object().members().len() == 1 {
-                s.wln("0");
+    s.body_closing_with_semicolon("let mut current_size =", |s| {
+        if e.rust_object().members().len() == 1 {
+            s.wln("0");
+        }
+
+        for (i, m) in e.rust_object().members().iter().enumerate() {
+            if m.name() == variable_name {
+                // Fields after the endless array should not be counted here
+                break;
             }
 
-            for (i, m) in e.rust_object().members().iter().enumerate() {
-                if m.name() == variable_name {
-                    // Fields after the endless array should not be counted here
-                    break;
-                }
-
-                if i != 0 {
-                    s.w("+ ");
-                } else {
-                    s.w("");
-                }
-
-                // Complex enums are not fully formed yet so they do not have a .size()
-                // method and they can't have one because enums can be upcast
-                match m.ty() {
-                    RustType::Enum {
-                        is_simple, int_ty, ..
-                    }
-                    | RustType::Flag {
-                        is_simple, int_ty, ..
-                    } => {
-                        if !is_simple {
-                            s.w_no_indent(int_ty.size().to_string());
-                            s.wln_no_indent(m.size_comment());
-                            continue;
-                        }
-                    }
-                    _ => {}
-                }
-
-                print_size_of_ty_rust_view(s, m, "");
+            if i != 0 {
+                s.w("+ ");
+            } else {
+                s.w("");
             }
-        },
-        ";",
-    );
+
+            // Complex enums are not fully formed yet so they do not have a .size()
+            // method and they can't have one because enums can be upcast
+            match m.ty() {
+                RustType::Enum {
+                    is_simple, int_ty, ..
+                }
+                | RustType::Flag {
+                    is_simple, int_ty, ..
+                } => {
+                    if !is_simple {
+                        s.w_no_indent(int_ty.size().to_string());
+                        s.wln_no_indent(m.size_comment());
+                        continue;
+                    }
+                }
+                _ => {}
+            }
+
+            print_size_of_ty_rust_view(s, m, "");
+        }
+    });
 }
 
 fn print_read_definition(
@@ -369,49 +382,49 @@ fn print_read_definition(
             ));
         }
         Type::SizedCString => {
-            s.wln(format!(
-                "let {name} = crate::util::read_u32_le(r)?;",
-                name = d.name()
-            ));
-            s.wln(format!(
-                "let {name} = crate::util::read_sized_c_string_to_vec(r, {name})?;",
-                name = d.name()
-            ));
-            s.wln(format!(
-                "let {name} = String::from_utf8({name})?;;",
-                name = d.name()
-            ));
+            s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
+                s.wln(format!(
+                    "let {name} = crate::util::read_u32_le(r)?;",
+                    name = d.name()
+                ));
+                s.wln(format!(
+                    "let {name} = crate::util::read_sized_c_string_to_vec(r, {name})?;",
+                    name = d.name()
+                ));
+                s.wln(format!("String::from_utf8({name})?", name = d.name()));
+            });
         }
         Type::CString => {
-            s.wln(format!(
-                "let {name} = {module}::{prefix}read_c_string_to_vec(r){postfix}?;",
-                name = d.name(),
-                module = UTILITY_PATH,
-                prefix = prefix,
-                postfix = postfix,
-            ));
-            s.wln(format!(
-                "let {name} = String::from_utf8({name})?;",
-                name = d.name()
-            ));
+            s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
+                s.wln(format!(
+                    "let {name} = {module}::{prefix}read_c_string_to_vec(r){postfix}?;",
+                    name = d.name(),
+                    module = UTILITY_PATH,
+                    prefix = prefix,
+                    postfix = postfix,
+                ));
+                s.wln(format!("String::from_utf8({name})?", name = d.name()));
+            });
 
             s.newline();
         }
         Type::String => {
-            s.wln(format!(
-                "let {name} = crate::util::{prefix}read_u8_le(r){postfix}?;",
-                name = d.name()
-            ));
-            s.wln(format!(
-                "let {name} = {module}::{prefix}read_fixed_string_to_vec(r, {name} as usize){postfix}?;",
-                name = d.name(),
-                module = UTILITY_PATH,
-                prefix = prefix, postfix = postfix,
-            ));
-            s.wln(format!(
-                "let {name} = String::from_utf8({name})?;",
-                name = d.name()
-            ));
+            s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
+                s.wln(format!(
+                    "let {name} = crate::util::{prefix}read_u8_le(r){postfix}?;",
+                    name = d.name()
+                ));
+                s.wln(format!(
+                    "let {name} = {module}::{prefix}read_fixed_string_to_vec(r, {name} as usize){postfix}?;",
+                    name = d.name(),
+                    module = UTILITY_PATH,
+                    prefix = prefix, postfix = postfix,
+                ));
+                s.wln(format!(
+                    "String::from_utf8({name})?",
+                    name = d.name()
+                ));
+            });
 
             s.newline();
         }
@@ -759,17 +772,13 @@ fn print_read_field(
         },
         StructMember::OptionalStatement(optional) => {
             s.wln(format!("// optional {}", optional.name()));
-            s.body_closing_with(
-                "let current_size =",
-                |s| {
-                    if e.rust_object().members().is_empty() {
-                        s.wln("0");
-                    }
+            s.body_closing_with_semicolon("let current_size =", |s| {
+                if e.rust_object().members().is_empty() {
+                    s.wln("0");
+                }
 
-                    print_rust_members_sizes(s, e.rust_object().members(), None, "");
-                },
-                ";",
-            );
+                print_rust_members_sizes(s, e.rust_object().members(), None, "");
+            });
 
             s.body_else_with_closing(
                 format!(

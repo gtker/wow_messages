@@ -311,20 +311,28 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let class_and_sub_class: ItemClassAndSubClass = crate::util::read_u64_le(r)?.try_into()?;
 
             // name1: CString
-            let name1 = crate::util::read_c_string_to_vec(r)?;
-            let name1 = String::from_utf8(name1)?;
+            let name1 = {
+                let name1 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name1)?
+            };
 
             // name2: CString
-            let name2 = crate::util::read_c_string_to_vec(r)?;
-            let name2 = String::from_utf8(name2)?;
+            let name2 = {
+                let name2 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name2)?
+            };
 
             // name3: CString
-            let name3 = crate::util::read_c_string_to_vec(r)?;
-            let name3 = String::from_utf8(name3)?;
+            let name3 = {
+                let name3 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name3)?
+            };
 
             // name4: CString
-            let name4 = crate::util::read_c_string_to_vec(r)?;
-            let name4 = String::from_utf8(name4)?;
+            let name4 = {
+                let name4 = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(name4)?
+            };
 
             // display_id: u32
             let display_id = crate::util::read_u32_le(r)?;
@@ -387,16 +395,22 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let container_slots = crate::util::read_u32_le(r)?;
 
             // stats: ItemStat[10]
-            let mut stats = [ItemStat::default(); 10];
-            for i in stats.iter_mut() {
-                *i = ItemStat::read(r)?;
-            }
+            let stats = {
+                let mut stats = [ItemStat::default(); 10];
+                for i in stats.iter_mut() {
+                    *i = ItemStat::read(r)?;
+                }
+                stats
+            };
 
             // damages: ItemDamageType[5]
-            let mut damages = [ItemDamageType::default(); 5];
-            for i in damages.iter_mut() {
-                *i = ItemDamageType::read(r)?;
-            }
+            let damages = {
+                let mut damages = [ItemDamageType::default(); 5];
+                for i in damages.iter_mut() {
+                    *i = ItemDamageType::read(r)?;
+                }
+                damages
+            };
 
             // armor: i32
             let armor = crate::util::read_i32_le(r)?;
@@ -428,17 +442,22 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // ranged_range_modification: f32
             let ranged_range_modification = crate::util::read_f32_le(r)?;
             // spells: ItemSpells[5]
-            let mut spells = [ItemSpells::default(); 5];
-            for i in spells.iter_mut() {
-                *i = ItemSpells::read(r)?;
-            }
+            let spells = {
+                let mut spells = [ItemSpells::default(); 5];
+                for i in spells.iter_mut() {
+                    *i = ItemSpells::read(r)?;
+                }
+                spells
+            };
 
             // bonding: Bonding
             let bonding: Bonding = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
             // description: CString
-            let description = crate::util::read_c_string_to_vec(r)?;
-            let description = String::from_utf8(description)?;
+            let description = {
+                let description = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(description)?
+            };
 
             // page_text: u32
             let page_text = crate::util::read_u32_le(r)?;

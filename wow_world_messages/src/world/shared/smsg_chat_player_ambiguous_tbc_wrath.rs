@@ -38,8 +38,10 @@ impl crate::Message for SMSG_CHAT_PLAYER_AMBIGUOUS {
         }
 
         // player: CString
-        let player = crate::util::read_c_string_to_vec(r)?;
-        let player = String::from_utf8(player)?;
+        let player = {
+            let player = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(player)?
+        };
 
         Ok(Self {
             player,

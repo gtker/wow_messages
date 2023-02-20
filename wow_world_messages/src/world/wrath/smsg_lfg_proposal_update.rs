@@ -82,11 +82,13 @@ impl crate::Message for SMSG_LFG_PROPOSAL_UPDATE {
         let amount_of_proposals = crate::util::read_u8_le(r)?;
 
         // proposals: LfgProposal[amount_of_proposals]
-        let mut proposals = Vec::with_capacity(amount_of_proposals as usize);
-        for i in 0..amount_of_proposals {
-            proposals.push(LfgProposal::read(r)?);
-        }
-
+        let proposals = {
+            let mut proposals = Vec::with_capacity(amount_of_proposals as usize);
+            for i in 0..amount_of_proposals {
+                proposals.push(LfgProposal::read(r)?);
+            }
+            proposals
+        };
         Ok(Self {
             dungeon_id,
             proposal_state,

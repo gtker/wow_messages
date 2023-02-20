@@ -99,12 +99,16 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         let guid = Guid::read_packed(r)?;
 
         // character_name: CString
-        let character_name = crate::util::read_c_string_to_vec(r)?;
-        let character_name = String::from_utf8(character_name)?;
+        let character_name = {
+            let character_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(character_name)?
+        };
 
         // realm_name: CString
-        let realm_name = crate::util::read_c_string_to_vec(r)?;
-        let realm_name = String::from_utf8(realm_name)?;
+        let realm_name = {
+            let realm_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(realm_name)?
+        };
 
         // race: Race
         let race: Race = (crate::util::read_u32_le(r)? as u8).try_into()?;
@@ -122,12 +126,15 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
             DeclinedNames::No => SMSG_NAME_QUERY_RESPONSE_DeclinedNames::No,
             DeclinedNames::Yes => {
                 // declined_names: CString[5]
-                let mut declined_names = Vec::with_capacity(5);
-                for i in 0..5 {
-                    let s = crate::util::read_c_string_to_vec(r)?;
-                    declined_names.push(String::from_utf8(s)?);
-                }
-                let declined_names = declined_names.try_into().unwrap();
+                let declined_names = {
+                    let mut declined_names = Vec::with_capacity(5);
+                    for i in 0..5 {
+                        let s = crate::util::read_c_string_to_vec(r)?;
+                        declined_names.push(String::from_utf8(s)?);
+                    }
+                    let declined_names = declined_names.try_into().unwrap();
+                    declined_names
+                };
 
                 SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {
                     declined_names,

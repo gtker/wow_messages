@@ -123,12 +123,16 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
         let event_id = Guid::read(r)?;
 
         // title: CString
-        let title = crate::util::read_c_string_to_vec(r)?;
-        let title = String::from_utf8(title)?;
+        let title = {
+            let title = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(title)?
+        };
 
         // description: CString
-        let description = crate::util::read_c_string_to_vec(r)?;
-        let description = String::from_utf8(description)?;
+        let description = {
+            let description = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(description)?
+        };
 
         // event_type: u8
         let event_type = crate::util::read_u8_le(r)?;
@@ -156,11 +160,13 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
         let amount_of_invitees = crate::util::read_u32_le(r)?;
 
         // invitees: CalendarSendInvitee[amount_of_invitees]
-        let mut invitees = Vec::with_capacity(amount_of_invitees as usize);
-        for i in 0..amount_of_invitees {
-            invitees.push(CalendarSendInvitee::read(r)?);
-        }
-
+        let invitees = {
+            let mut invitees = Vec::with_capacity(amount_of_invitees as usize);
+            for i in 0..amount_of_invitees {
+                invitees.push(CalendarSendInvitee::read(r)?);
+            }
+            invitees
+        };
         Ok(Self {
             send_type,
             creator,

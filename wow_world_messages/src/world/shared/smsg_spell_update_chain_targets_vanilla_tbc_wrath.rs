@@ -58,11 +58,13 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         let amount_of_targets = crate::util::read_u32_le(r)?;
 
         // targets: Guid[amount_of_targets]
-        let mut targets = Vec::with_capacity(amount_of_targets as usize);
-        for i in 0..amount_of_targets {
-            targets.push(Guid::read(r)?);
-        }
-
+        let targets = {
+            let mut targets = Vec::with_capacity(amount_of_targets as usize);
+            for i in 0..amount_of_targets {
+                targets.push(Guid::read(r)?);
+            }
+            targets
+        };
         Ok(Self {
             caster,
             spell,

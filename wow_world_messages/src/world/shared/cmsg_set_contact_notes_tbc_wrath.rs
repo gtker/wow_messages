@@ -45,8 +45,10 @@ impl crate::Message for CMSG_SET_CONTACT_NOTES {
         let player = Guid::read(r)?;
 
         // note: CString
-        let note = crate::util::read_c_string_to_vec(r)?;
-        let note = String::from_utf8(note)?;
+        let note = {
+            let note = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(note)?
+        };
 
         Ok(Self {
             player,

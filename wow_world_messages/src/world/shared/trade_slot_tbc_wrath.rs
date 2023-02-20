@@ -118,10 +118,13 @@ impl TradeSlot {
         let enchantment = crate::util::read_u32_le(r)?;
 
         // enchantments_slots: u32[3]
-        let mut enchantments_slots = [u32::default(); 3];
-        for i in enchantments_slots.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let enchantments_slots = {
+            let mut enchantments_slots = [u32::default(); 3];
+            for i in enchantments_slots.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            enchantments_slots
+        };
 
         // item_creator: Guid
         let item_creator = Guid::read(r)?;

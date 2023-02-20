@@ -45,12 +45,16 @@ impl crate::Message for CMSG_ADD_FRIEND {
         }
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // note: CString
-        let note = crate::util::read_c_string_to_vec(r)?;
-        let note = String::from_utf8(note)?;
+        let note = {
+            let note = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(note)?
+        };
 
         Ok(Self {
             name,

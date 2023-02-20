@@ -56,11 +56,13 @@ impl ClientMessage for CMD_SURVEY_RESULT {
         let compressed_data_length = crate::util::read_u16_le(r)?;
 
         // data: u8[compressed_data_length]
-        let mut data = Vec::with_capacity(compressed_data_length as usize);
-        for i in 0..compressed_data_length {
-            data.push(crate::util::read_u8_le(r)?);
-        }
-
+        let data = {
+            let mut data = Vec::with_capacity(compressed_data_length as usize);
+            for i in 0..compressed_data_length {
+                data.push(crate::util::read_u8_le(r)?);
+            }
+            data
+        };
         Ok(Self {
             survey_id,
             error,
@@ -97,11 +99,13 @@ impl ClientMessage for CMD_SURVEY_RESULT {
             let compressed_data_length = crate::util::tokio_read_u16_le(r).await?;
 
             // data: u8[compressed_data_length]
-            let mut data = Vec::with_capacity(compressed_data_length as usize);
-            for i in 0..compressed_data_length {
-                data.push(crate::util::tokio_read_u8_le(r).await?);
-            }
-
+            let data = {
+                let mut data = Vec::with_capacity(compressed_data_length as usize);
+                for i in 0..compressed_data_length {
+                    data.push(crate::util::tokio_read_u8_le(r).await?);
+                }
+                data
+            };
             Ok(Self {
                 survey_id,
                 error,
@@ -152,11 +156,13 @@ impl ClientMessage for CMD_SURVEY_RESULT {
             let compressed_data_length = crate::util::astd_read_u16_le(r).await?;
 
             // data: u8[compressed_data_length]
-            let mut data = Vec::with_capacity(compressed_data_length as usize);
-            for i in 0..compressed_data_length {
-                data.push(crate::util::astd_read_u8_le(r).await?);
-            }
-
+            let data = {
+                let mut data = Vec::with_capacity(compressed_data_length as usize);
+                for i in 0..compressed_data_length {
+                    data.push(crate::util::astd_read_u8_le(r).await?);
+                }
+                data
+            };
             Ok(Self {
                 survey_id,
                 error,

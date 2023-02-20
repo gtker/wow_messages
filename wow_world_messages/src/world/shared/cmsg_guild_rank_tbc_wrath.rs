@@ -65,17 +65,22 @@ impl crate::Message for CMSG_GUILD_RANK {
         let rights = crate::util::read_u32_le(r)?;
 
         // rank_name: CString
-        let rank_name = crate::util::read_c_string_to_vec(r)?;
-        let rank_name = String::from_utf8(rank_name)?;
+        let rank_name = {
+            let rank_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(rank_name)?
+        };
 
         // money_per_day: u32
         let money_per_day = crate::util::read_u32_le(r)?;
 
         // bank_tab_rights: GuildBankRights[6]
-        let mut bank_tab_rights = [GuildBankRights::default(); 6];
-        for i in bank_tab_rights.iter_mut() {
-            *i = GuildBankRights::read(r)?;
-        }
+        let bank_tab_rights = {
+            let mut bank_tab_rights = [GuildBankRights::default(); 6];
+            for i in bank_tab_rights.iter_mut() {
+                *i = GuildBankRights::read(r)?;
+            }
+            bank_tab_rights
+        };
 
         Ok(Self {
             rank_id,

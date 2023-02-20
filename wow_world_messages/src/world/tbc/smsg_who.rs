@@ -50,11 +50,13 @@ impl crate::Message for SMSG_WHO {
         let online_players = crate::util::read_u32_le(r)?;
 
         // players: WhoPlayer[listed_players]
-        let mut players = Vec::with_capacity(listed_players as usize);
-        for i in 0..listed_players {
-            players.push(WhoPlayer::read(r)?);
-        }
-
+        let players = {
+            let mut players = Vec::with_capacity(listed_players as usize);
+            for i in 0..listed_players {
+                players.push(WhoPlayer::read(r)?);
+            }
+            players
+        };
         Ok(Self {
             online_players,
             players,

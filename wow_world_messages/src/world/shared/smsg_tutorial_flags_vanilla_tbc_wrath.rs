@@ -37,10 +37,13 @@ impl crate::Message for SMSG_TUTORIAL_FLAGS {
         }
 
         // tutorial_data: u32[8]
-        let mut tutorial_data = [u32::default(); 8];
-        for i in tutorial_data.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let tutorial_data = {
+            let mut tutorial_data = [u32::default(); 8];
+            for i in tutorial_data.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            tutorial_data
+        };
 
         Ok(Self {
             tutorial_data,

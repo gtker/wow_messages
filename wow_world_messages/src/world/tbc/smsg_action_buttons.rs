@@ -32,10 +32,13 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
         }
 
         // data: u32[132]
-        let mut data = [u32::default(); 132];
-        for i in data.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let data = {
+            let mut data = [u32::default(); 132];
+            for i in data.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            data
+        };
 
         Ok(Self {
             data,

@@ -80,11 +80,13 @@ impl LfgAvailableDungeon {
         let amount_of_rewards = crate::util::read_u8_le(r)?;
 
         // rewards: LfgQuestReward[amount_of_rewards]
-        let mut rewards = Vec::with_capacity(amount_of_rewards as usize);
-        for i in 0..amount_of_rewards {
-            rewards.push(LfgQuestReward::read(r)?);
-        }
-
+        let rewards = {
+            let mut rewards = Vec::with_capacity(amount_of_rewards as usize);
+            for i in 0..amount_of_rewards {
+                rewards.push(LfgQuestReward::read(r)?);
+            }
+            rewards
+        };
         Ok(Self {
             dungeon_entry,
             done,

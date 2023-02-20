@@ -50,11 +50,13 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
         let amount_of_mails = crate::util::read_u32_le(r)?;
 
         // mails: ReceivedMail[amount_of_mails]
-        let mut mails = Vec::with_capacity(amount_of_mails as usize);
-        for i in 0..amount_of_mails {
-            mails.push(ReceivedMail::read(r)?);
-        }
-
+        let mails = {
+            let mut mails = Vec::with_capacity(amount_of_mails as usize);
+            for i in 0..amount_of_mails {
+                mails.push(ReceivedMail::read(r)?);
+            }
+            mails
+        };
         Ok(Self {
             float,
             mails,

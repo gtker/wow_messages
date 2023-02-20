@@ -81,24 +81,31 @@ impl LfgPlayer {
         let lfg_mode: LfgMode = crate::util::read_u8_le(r)?.try_into()?;
 
         // lfg_slots: u32[3]
-        let mut lfg_slots = [u32::default(); 3];
-        for i in lfg_slots.iter_mut() {
-            *i = crate::util::read_u32_le(r)?;
-        }
+        let lfg_slots = {
+            let mut lfg_slots = [u32::default(); 3];
+            for i in lfg_slots.iter_mut() {
+                *i = crate::util::read_u32_le(r)?;
+            }
+            lfg_slots
+        };
 
         // comment: CString
-        let comment = crate::util::read_c_string_to_vec(r)?;
-        let comment = String::from_utf8(comment)?;
+        let comment = {
+            let comment = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(comment)?
+        };
 
         // amount_of_members: u32
         let amount_of_members = crate::util::read_u32_le(r)?;
 
         // members: LfgPlayerMember[amount_of_members]
-        let mut members = Vec::with_capacity(amount_of_members as usize);
-        for i in 0..amount_of_members {
-            members.push(LfgPlayerMember::read(r)?);
-        }
-
+        let members = {
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for i in 0..amount_of_members {
+                members.push(LfgPlayerMember::read(r)?);
+            }
+            members
+        };
         Ok(Self {
             guid,
             level,

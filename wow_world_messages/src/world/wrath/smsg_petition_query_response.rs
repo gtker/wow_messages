@@ -143,12 +143,16 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         let charter_owner = Guid::read(r)?;
 
         // guild_name: CString
-        let guild_name = crate::util::read_c_string_to_vec(r)?;
-        let guild_name = String::from_utf8(guild_name)?;
+        let guild_name = {
+            let guild_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(guild_name)?
+        };
 
         // body_text: CString
-        let body_text = crate::util::read_c_string_to_vec(r)?;
-        let body_text = String::from_utf8(body_text)?;
+        let body_text = {
+            let body_text = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(body_text)?
+        };
 
         // minimum_signatures: u32
         let minimum_signatures = crate::util::read_u32_le(r)?;
@@ -184,8 +188,11 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         let unknown9 = crate::util::read_u32_le(r)?;
 
         // unknown10: u8[10]
-        let mut unknown10 = [0_u8; 10];
-        r.read_exact(&mut unknown10)?;
+        let unknown10 = {
+            let mut unknown10 = [0_u8; 10];
+            r.read_exact(&mut unknown10)?;
+            unknown10
+        };
 
         // unknown11: u32
         let unknown11 = crate::util::read_u32_le(r)?;

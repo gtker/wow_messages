@@ -84,8 +84,10 @@ impl Relation {
         let relation_mask = RelationType::new(crate::util::read_u32_le(r)?);
 
         // note: CString
-        let note = crate::util::read_c_string_to_vec(r)?;
-        let note = String::from_utf8(note)?;
+        let note = {
+            let note = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(note)?
+        };
 
         let relation_mask_FRIEND = if relation_mask.is_FRIEND() {
             // status: FriendStatus

@@ -116,11 +116,13 @@ impl crate::Message for SMSG_GROUP_LIST {
         let amount_of_members = crate::util::read_u32_le(r)?;
 
         // members: GroupListMember[amount_of_members]
-        let mut members = Vec::with_capacity(amount_of_members as usize);
-        for i in 0..amount_of_members {
-            members.push(GroupListMember::read(r)?);
-        }
-
+        let members = {
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for i in 0..amount_of_members {
+                members.push(GroupListMember::read(r)?);
+            }
+            members
+        };
         // leader: Guid
         let leader = Guid::read(r)?;
 

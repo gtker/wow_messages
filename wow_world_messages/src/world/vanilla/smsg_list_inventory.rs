@@ -53,11 +53,13 @@ impl crate::Message for SMSG_LIST_INVENTORY {
         let amount_of_items = crate::util::read_u8_le(r)?;
 
         // items: ListInventoryItem[amount_of_items]
-        let mut items = Vec::with_capacity(amount_of_items as usize);
-        for i in 0..amount_of_items {
-            items.push(ListInventoryItem::read(r)?);
-        }
-
+        let items = {
+            let mut items = Vec::with_capacity(amount_of_items as usize);
+            for i in 0..amount_of_items {
+                items.push(ListInventoryItem::read(r)?);
+            }
+            items
+        };
         Ok(Self {
             vendor,
             items,

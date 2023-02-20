@@ -51,12 +51,14 @@ impl crate::Message for SMSG_GUILD_EVENT {
         let amount_of_events = crate::util::read_u8_le(r)?;
 
         // event_descriptions: CString[amount_of_events]
-        let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
-        for i in 0..amount_of_events {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            event_descriptions.push(String::from_utf8(s)?);
-        }
-
+        let event_descriptions = {
+            let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
+            for i in 0..amount_of_events {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                event_descriptions.push(String::from_utf8(s)?);
+            }
+            event_descriptions
+        };
         Ok(Self {
             event,
             event_descriptions,

@@ -53,16 +53,21 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
         let player = Guid::read(r)?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // declined_names: CString[5]
-        let mut declined_names = Vec::with_capacity(5);
-        for i in 0..5 {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            declined_names.push(String::from_utf8(s)?);
-        }
-        let declined_names = declined_names.try_into().unwrap();
+        let declined_names = {
+            let mut declined_names = Vec::with_capacity(5);
+            for i in 0..5 {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                declined_names.push(String::from_utf8(s)?);
+            }
+            let declined_names = declined_names.try_into().unwrap();
+            declined_names
+        };
 
         Ok(Self {
             player,

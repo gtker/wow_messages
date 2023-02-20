@@ -204,8 +204,10 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
                 let guid = Guid::read(r)?;
 
                 // name: CString
-                let name = crate::util::read_c_string_to_vec(r)?;
-                let name = String::from_utf8(name)?;
+                let name = {
+                    let name = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(name)?
+                };
 
                 // gender: Gender
                 let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;

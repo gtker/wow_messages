@@ -64,20 +64,24 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
         let spell_count = crate::util::read_u16_le(r)?;
 
         // initial_spells: InitialSpell[spell_count]
-        let mut initial_spells = Vec::with_capacity(spell_count as usize);
-        for i in 0..spell_count {
-            initial_spells.push(InitialSpell::read(r)?);
-        }
-
+        let initial_spells = {
+            let mut initial_spells = Vec::with_capacity(spell_count as usize);
+            for i in 0..spell_count {
+                initial_spells.push(InitialSpell::read(r)?);
+            }
+            initial_spells
+        };
         // cooldown_count: u16
         let cooldown_count = crate::util::read_u16_le(r)?;
 
         // cooldowns: CooldownSpell[cooldown_count]
-        let mut cooldowns = Vec::with_capacity(cooldown_count as usize);
-        for i in 0..cooldown_count {
-            cooldowns.push(CooldownSpell::read(r)?);
-        }
-
+        let cooldowns = {
+            let mut cooldowns = Vec::with_capacity(cooldown_count as usize);
+            for i in 0..cooldown_count {
+                cooldowns.push(CooldownSpell::read(r)?);
+            }
+            cooldowns
+        };
         Ok(Self {
             unknown1,
             initial_spells,

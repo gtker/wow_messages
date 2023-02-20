@@ -90,8 +90,10 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
             GmTicketStatus::DbError => SMSG_GMTICKET_GETTICKET_GmTicketStatus::DbError,
             GmTicketStatus::HasText => {
                 // text: CString
-                let text = crate::util::read_c_string_to_vec(r)?;
-                let text = String::from_utf8(text)?;
+                let text = {
+                    let text = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(text)?
+                };
 
                 // ticket_type: GmTicketType
                 let ticket_type: GmTicketType = crate::util::read_u8_le(r)?.try_into()?;

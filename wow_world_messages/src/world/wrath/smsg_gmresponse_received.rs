@@ -60,16 +60,21 @@ impl crate::Message for SMSG_GMRESPONSE_RECEIVED {
         let ticket_id = crate::util::read_u32_le(r)?;
 
         // message: CString
-        let message = crate::util::read_c_string_to_vec(r)?;
-        let message = String::from_utf8(message)?;
+        let message = {
+            let message = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(message)?
+        };
 
         // response: CString[4]
-        let mut response = Vec::with_capacity(4);
-        for i in 0..4 {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            response.push(String::from_utf8(s)?);
-        }
-        let response = response.try_into().unwrap();
+        let response = {
+            let mut response = Vec::with_capacity(4);
+            for i in 0..4 {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                response.push(String::from_utf8(s)?);
+            }
+            let response = response.try_into().unwrap();
+            response
+        };
 
         Ok(Self {
             response_id,

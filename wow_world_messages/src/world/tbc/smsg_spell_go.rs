@@ -116,20 +116,24 @@ impl crate::Message for SMSG_SPELL_GO {
         let amount_of_hits = crate::util::read_u8_le(r)?;
 
         // hits: Guid[amount_of_hits]
-        let mut hits = Vec::with_capacity(amount_of_hits as usize);
-        for i in 0..amount_of_hits {
-            hits.push(Guid::read(r)?);
-        }
-
+        let hits = {
+            let mut hits = Vec::with_capacity(amount_of_hits as usize);
+            for i in 0..amount_of_hits {
+                hits.push(Guid::read(r)?);
+            }
+            hits
+        };
         // amount_of_misses: u8
         let amount_of_misses = crate::util::read_u8_le(r)?;
 
         // misses: SpellMiss[amount_of_misses]
-        let mut misses = Vec::with_capacity(amount_of_misses as usize);
-        for i in 0..amount_of_misses {
-            misses.push(SpellMiss::read(r)?);
-        }
-
+        let misses = {
+            let mut misses = Vec::with_capacity(amount_of_misses as usize);
+            for i in 0..amount_of_misses {
+                misses.push(SpellMiss::read(r)?);
+            }
+            misses
+        };
         // targets: SpellCastTargets
         let targets = SpellCastTargets::read(r)?;
 

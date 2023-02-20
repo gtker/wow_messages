@@ -50,8 +50,10 @@ impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
         let item = crate::util::read_u32_le(r)?;
 
         // item_name: CString
-        let item_name = crate::util::read_c_string_to_vec(r)?;
-        let item_name = String::from_utf8(item_name)?;
+        let item_name = {
+            let item_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(item_name)?
+        };
 
         // inventory_type: InventoryType
         let inventory_type: InventoryType = crate::util::read_u8_le(r)?.try_into()?;

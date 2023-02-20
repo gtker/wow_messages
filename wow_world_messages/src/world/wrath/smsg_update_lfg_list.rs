@@ -117,11 +117,13 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
                 let amount_of_deleted_guids = crate::util::read_u32_le(r)?;
 
                 // deleted_guids: Guid[amount_of_deleted_guids]
-                let mut deleted_guids = Vec::with_capacity(amount_of_deleted_guids as usize);
-                for i in 0..amount_of_deleted_guids {
-                    deleted_guids.push(Guid::read(r)?);
-                }
-
+                let deleted_guids = {
+                    let mut deleted_guids = Vec::with_capacity(amount_of_deleted_guids as usize);
+                    for i in 0..amount_of_deleted_guids {
+                        deleted_guids.push(Guid::read(r)?);
+                    }
+                    deleted_guids
+                };
                 SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Partial {
                     deleted_guids,
                 }
@@ -136,11 +138,13 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         let unknown1 = crate::util::read_u32_le(r)?;
 
         // groups: LfgListGroup[amount_of_groups]
-        let mut groups = Vec::with_capacity(amount_of_groups as usize);
-        for i in 0..amount_of_groups {
-            groups.push(LfgListGroup::read(r)?);
-        }
-
+        let groups = {
+            let mut groups = Vec::with_capacity(amount_of_groups as usize);
+            for i in 0..amount_of_groups {
+                groups.push(LfgListGroup::read(r)?);
+            }
+            groups
+        };
         // amount_of_players: u32
         let amount_of_players = crate::util::read_u32_le(r)?;
 
@@ -148,11 +152,13 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         let unknown2 = crate::util::read_u32_le(r)?;
 
         // players: LfgListPlayer[amount_of_players]
-        let mut players = Vec::with_capacity(amount_of_players as usize);
-        for i in 0..amount_of_players {
-            players.push(LfgListPlayer::read(r)?);
-        }
-
+        let players = {
+            let mut players = Vec::with_capacity(amount_of_players as usize);
+            for i in 0..amount_of_players {
+                players.push(LfgListPlayer::read(r)?);
+            }
+            players
+        };
         Ok(Self {
             lfg_type,
             dungeon_id,

@@ -145,12 +145,16 @@ impl crate::Message for CMSG_PETITION_BUY {
         let unknown2 = Guid::read(r)?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // unknown3: CString
-        let unknown3 = crate::util::read_c_string_to_vec(r)?;
-        let unknown3 = String::from_utf8(unknown3)?;
+        let unknown3 = {
+            let unknown3 = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(unknown3)?
+        };
 
         // unknown4: u32
         let unknown4 = crate::util::read_u32_le(r)?;
@@ -186,12 +190,15 @@ impl crate::Message for CMSG_PETITION_BUY {
         let unknown14 = crate::util::read_u32_le(r)?;
 
         // unknown15: CString[10]
-        let mut unknown15 = Vec::with_capacity(10);
-        for i in 0..10 {
-            let s = crate::util::read_c_string_to_vec(r)?;
-            unknown15.push(String::from_utf8(s)?);
-        }
-        let unknown15 = unknown15.try_into().unwrap();
+        let unknown15 = {
+            let mut unknown15 = Vec::with_capacity(10);
+            for i in 0..10 {
+                let s = crate::util::read_c_string_to_vec(r)?;
+                unknown15.push(String::from_utf8(s)?);
+            }
+            let unknown15 = unknown15.try_into().unwrap();
+            unknown15
+        };
 
         // index: u32
         let index = crate::util::read_u32_le(r)?;

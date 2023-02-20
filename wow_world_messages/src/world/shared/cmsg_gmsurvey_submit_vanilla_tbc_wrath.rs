@@ -57,15 +57,20 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
         let survey_id = crate::util::read_u32_le(r)?;
 
         // questions: GmSurveyQuestion[10]
-        let mut questions = Vec::with_capacity(10);
-        for i in 0..10 {
-            questions.push(GmSurveyQuestion::read(r)?);
-        }
-        let questions = questions.try_into().unwrap();
+        let questions = {
+            let mut questions = Vec::with_capacity(10);
+            for i in 0..10 {
+                questions.push(GmSurveyQuestion::read(r)?);
+            }
+            let questions = questions.try_into().unwrap();
+            questions
+        };
 
         // answer_comment: CString
-        let answer_comment = crate::util::read_c_string_to_vec(r)?;
-        let answer_comment = String::from_utf8(answer_comment)?;
+        let answer_comment = {
+            let answer_comment = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(answer_comment)?
+        };
 
         Ok(Self {
             survey_id,

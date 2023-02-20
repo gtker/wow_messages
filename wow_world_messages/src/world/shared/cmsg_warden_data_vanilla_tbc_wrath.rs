@@ -34,14 +34,17 @@ impl crate::Message for CMSG_WARDEN_DATA {
         }
 
         // encrypted_data: u8[-]
-        let mut current_size = {
-            0
+        let encrypted_data = {
+            let mut current_size = {
+                0
+            };
+            let mut encrypted_data = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                encrypted_data.push(crate::util::read_u8_le(r)?);
+                current_size += 1;
+            }
+            encrypted_data
         };
-        let mut encrypted_data = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            encrypted_data.push(crate::util::read_u8_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             encrypted_data,

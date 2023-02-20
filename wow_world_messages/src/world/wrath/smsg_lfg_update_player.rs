@@ -104,14 +104,18 @@ impl crate::Message for SMSG_LFG_UPDATE_PLAYER {
                 let amount_of_dungeons = crate::util::read_u8_le(r)?;
 
                 // dungeons: u32[amount_of_dungeons]
-                let mut dungeons = Vec::with_capacity(amount_of_dungeons as usize);
-                for i in 0..amount_of_dungeons {
-                    dungeons.push(crate::util::read_u32_le(r)?);
-                }
-
+                let dungeons = {
+                    let mut dungeons = Vec::with_capacity(amount_of_dungeons as usize);
+                    for i in 0..amount_of_dungeons {
+                        dungeons.push(crate::util::read_u32_le(r)?);
+                    }
+                    dungeons
+                };
                 // comment: CString
-                let comment = crate::util::read_c_string_to_vec(r)?;
-                let comment = String::from_utf8(comment)?;
+                let comment = {
+                    let comment = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(comment)?
+                };
 
                 SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus::Joined {
                     achievements,

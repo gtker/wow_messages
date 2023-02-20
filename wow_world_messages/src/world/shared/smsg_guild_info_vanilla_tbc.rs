@@ -61,8 +61,10 @@ impl crate::Message for SMSG_GUILD_INFO {
         }
 
         // guild_name: CString
-        let guild_name = crate::util::read_c_string_to_vec(r)?;
-        let guild_name = String::from_utf8(guild_name)?;
+        let guild_name = {
+            let guild_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(guild_name)?
+        };
 
         // created_day: u32
         let created_day = crate::util::read_u32_le(r)?;

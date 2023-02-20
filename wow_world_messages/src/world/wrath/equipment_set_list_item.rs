@@ -52,18 +52,25 @@ impl EquipmentSetListItem {
         let guid = Guid::read(r)?;
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // icon_name: CString
-        let icon_name = crate::util::read_c_string_to_vec(r)?;
-        let icon_name = String::from_utf8(icon_name)?;
+        let icon_name = {
+            let icon_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(icon_name)?
+        };
 
         // equipment: Guid[19]
-        let mut equipment = [Guid::default(); 19];
-        for i in equipment.iter_mut() {
-            *i = Guid::read(r)?;
-        }
+        let equipment = {
+            let mut equipment = [Guid::default(); 19];
+            for i in equipment.iter_mut() {
+                *i = Guid::read(r)?;
+            }
+            equipment
+        };
 
         Ok(Self {
             guid,

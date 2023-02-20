@@ -91,11 +91,13 @@ impl QuestPoi {
         let amount_of_points = crate::util::read_u32_le(r)?;
 
         // points: Vector2dUnsigned[amount_of_points]
-        let mut points = Vec::with_capacity(amount_of_points as usize);
-        for i in 0..amount_of_points {
-            points.push(Vector2dUnsigned::read(r)?);
-        }
-
+        let points = {
+            let mut points = Vec::with_capacity(amount_of_points as usize);
+            for i in 0..amount_of_points {
+                points.push(Vector2dUnsigned::read(r)?);
+            }
+            points
+        };
         Ok(Self {
             id,
             objective_id,

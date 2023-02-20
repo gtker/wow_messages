@@ -89,8 +89,10 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         let list_start_item = crate::util::read_u32_le(r)?;
 
         // searched_name: CString
-        let searched_name = crate::util::read_c_string_to_vec(r)?;
-        let searched_name = String::from_utf8(searched_name)?;
+        let searched_name = {
+            let searched_name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(searched_name)?
+        };
 
         // minimum_level: u8
         let minimum_level = crate::util::read_u8_le(r)?;

@@ -83,23 +83,29 @@ impl crate::Message for CMSG_LFG_JOIN {
         let amount_of_slots = crate::util::read_u8_le(r)?;
 
         // slots: u32[amount_of_slots]
-        let mut slots = Vec::with_capacity(amount_of_slots as usize);
-        for i in 0..amount_of_slots {
-            slots.push(crate::util::read_u32_le(r)?);
-        }
-
+        let slots = {
+            let mut slots = Vec::with_capacity(amount_of_slots as usize);
+            for i in 0..amount_of_slots {
+                slots.push(crate::util::read_u32_le(r)?);
+            }
+            slots
+        };
         // amount_of_needs: u8
         let amount_of_needs = crate::util::read_u8_le(r)?;
 
         // needs: u8[amount_of_needs]
-        let mut needs = Vec::with_capacity(amount_of_needs as usize);
-        for i in 0..amount_of_needs {
-            needs.push(crate::util::read_u8_le(r)?);
-        }
-
+        let needs = {
+            let mut needs = Vec::with_capacity(amount_of_needs as usize);
+            for i in 0..amount_of_needs {
+                needs.push(crate::util::read_u8_le(r)?);
+            }
+            needs
+        };
         // comment: CString
-        let comment = crate::util::read_c_string_to_vec(r)?;
-        let comment = String::from_utf8(comment)?;
+        let comment = {
+            let comment = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(comment)?
+        };
 
         Ok(Self {
             roles,

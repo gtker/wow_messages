@@ -42,11 +42,13 @@ impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
         let amount_of_pending_sales = crate::util::read_u32_le(r)?;
 
         // pending_sales: PendingAuctionSale[amount_of_pending_sales]
-        let mut pending_sales = Vec::with_capacity(amount_of_pending_sales as usize);
-        for i in 0..amount_of_pending_sales {
-            pending_sales.push(PendingAuctionSale::read(r)?);
-        }
-
+        let pending_sales = {
+            let mut pending_sales = Vec::with_capacity(amount_of_pending_sales as usize);
+            for i in 0..amount_of_pending_sales {
+                pending_sales.push(PendingAuctionSale::read(r)?);
+            }
+            pending_sales
+        };
         Ok(Self {
             pending_sales,
         })

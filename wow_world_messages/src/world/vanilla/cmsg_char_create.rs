@@ -99,8 +99,10 @@ impl crate::Message for CMSG_CHAR_CREATE {
         }
 
         // name: CString
-        let name = crate::util::read_c_string_to_vec(r)?;
-        let name = String::from_utf8(name)?;
+        let name = {
+            let name = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(name)?
+        };
 
         // race: Race
         let race: Race = crate::util::read_u8_le(r)?.try_into()?;

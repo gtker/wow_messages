@@ -42,11 +42,13 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
         let amount_of_infos = crate::util::read_u8_le(r)?;
 
         // infos: LfgPartyInfo[amount_of_infos]
-        let mut infos = Vec::with_capacity(amount_of_infos as usize);
-        for i in 0..amount_of_infos {
-            infos.push(LfgPartyInfo::read(r)?);
-        }
-
+        let infos = {
+            let mut infos = Vec::with_capacity(amount_of_infos as usize);
+            for i in 0..amount_of_infos {
+                infos.push(LfgPartyInfo::read(r)?);
+            }
+            infos
+        };
         Ok(Self {
             infos,
         })

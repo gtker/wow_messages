@@ -48,22 +48,27 @@ impl crate::Message for CMSG_TEST_ENDLESS_U8 {
         }
 
         // c_string: CString
-        let c_string = crate::util::read_c_string_to_vec(r)?;
-        let c_string = String::from_utf8(c_string)?;
+        let c_string = {
+            let c_string = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(c_string)?
+        };
 
         // b_u8: u8
         let b_u8 = crate::util::read_u8_le(r)?;
 
         // endless: u8[-]
-        let mut current_size = {
-            c_string.len() + 1 // c_string: CString
-            + 1 // b_u8: u8
+        let endless = {
+            let mut current_size = {
+                c_string.len() + 1 // c_string: CString
+                + 1 // b_u8: u8
+            };
+            let mut endless = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                endless.push(crate::util::read_u8_le(r)?);
+                current_size += 1;
+            }
+            endless
         };
-        let mut endless = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            endless.push(crate::util::read_u8_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             c_string,

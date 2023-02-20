@@ -42,11 +42,13 @@ impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
         let amount_of_statuses = crate::util::read_u32_le(r)?;
 
         // statuses: QuestGiverStatusReport[amount_of_statuses]
-        let mut statuses = Vec::with_capacity(amount_of_statuses as usize);
-        for i in 0..amount_of_statuses {
-            statuses.push(QuestGiverStatusReport::read(r)?);
-        }
-
+        let statuses = {
+            let mut statuses = Vec::with_capacity(amount_of_statuses as usize);
+            for i in 0..amount_of_statuses {
+                statuses.push(QuestGiverStatusReport::read(r)?);
+            }
+            statuses
+        };
         Ok(Self {
             statuses,
         })

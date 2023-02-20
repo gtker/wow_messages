@@ -77,8 +77,10 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
             ReferAFriendError::NoTarget => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NoTarget,
             ReferAFriendError::NotInGroup => {
                 // target_name: CString
-                let target_name = crate::util::read_c_string_to_vec(r)?;
-                let target_name = String::from_utf8(target_name)?;
+                let target_name = {
+                    let target_name = crate::util::read_c_string_to_vec(r)?;
+                    String::from_utf8(target_name)?
+                };
 
                 SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
                     target_name,

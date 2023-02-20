@@ -110,37 +110,54 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
     fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // client_public_key: u8[32]
-        let mut client_public_key = [0_u8; 32];
-        r.read_exact(&mut client_public_key)?;
+        let client_public_key = {
+            let mut client_public_key = [0_u8; 32];
+            r.read_exact(&mut client_public_key)?;
+            client_public_key
+        };
 
         // client_proof: u8[20]
-        let mut client_proof = [0_u8; 20];
-        r.read_exact(&mut client_proof)?;
+        let client_proof = {
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof)?;
+            client_proof
+        };
 
         // crc_hash: u8[20]
-        let mut crc_hash = [0_u8; 20];
-        r.read_exact(&mut crc_hash)?;
+        let crc_hash = {
+            let mut crc_hash = [0_u8; 20];
+            r.read_exact(&mut crc_hash)?;
+            crc_hash
+        };
 
         // number_of_telemetry_keys: u8
         let number_of_telemetry_keys = crate::util::read_u8_le(r)?;
 
         // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-        let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
-        for i in 0..number_of_telemetry_keys {
-            telemetry_keys.push(TelemetryKey::read(r)?);
-        }
-
+        let telemetry_keys = {
+            let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
+            for i in 0..number_of_telemetry_keys {
+                telemetry_keys.push(TelemetryKey::read(r)?);
+            }
+            telemetry_keys
+        };
         // security_flag: SecurityFlag
         let security_flag = SecurityFlag::new(crate::util::read_u8_le(r)?);
 
         let security_flag_PIN = if security_flag.is_PIN() {
             // pin_salt: u8[16]
-            let mut pin_salt = [0_u8; 16];
-            r.read_exact(&mut pin_salt)?;
+            let pin_salt = {
+                let mut pin_salt = [0_u8; 16];
+                r.read_exact(&mut pin_salt)?;
+                pin_salt
+            };
 
             // pin_hash: u8[20]
-            let mut pin_hash = [0_u8; 20];
-            r.read_exact(&mut pin_hash)?;
+            let pin_hash = {
+                let mut pin_hash = [0_u8; 20];
+                r.read_exact(&mut pin_hash)?;
+                pin_hash
+            };
 
             Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                 pin_hash,
@@ -153,8 +170,11 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
         let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
             // matrix_card_proof: u8[20]
-            let mut matrix_card_proof = [0_u8; 20];
-            r.read_exact(&mut matrix_card_proof)?;
+            let matrix_card_proof = {
+                let mut matrix_card_proof = [0_u8; 20];
+                r.read_exact(&mut matrix_card_proof)?;
+                matrix_card_proof
+            };
 
             Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
                 matrix_card_proof,
@@ -169,11 +189,13 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             let amount_of_tokens = crate::util::read_u8_le(r)?;
 
             // tokens: u8[amount_of_tokens]
-            let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
-            for i in 0..amount_of_tokens {
-                tokens.push(crate::util::read_u8_le(r)?);
-            }
-
+            let tokens = {
+                let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
+                for i in 0..amount_of_tokens {
+                    tokens.push(crate::util::read_u8_le(r)?);
+                }
+                tokens
+            };
             Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                 tokens,
             })
@@ -218,37 +240,54 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
      {
         Box::pin(async move {
             // client_public_key: u8[32]
-            let mut client_public_key = [0_u8; 32];
-            r.read_exact(&mut client_public_key).await?;
+            let client_public_key = {
+                let mut client_public_key = [0_u8; 32];
+                r.read_exact(&mut client_public_key).await?;
+                client_public_key
+            };
 
             // client_proof: u8[20]
-            let mut client_proof = [0_u8; 20];
-            r.read_exact(&mut client_proof).await?;
+            let client_proof = {
+                let mut client_proof = [0_u8; 20];
+                r.read_exact(&mut client_proof).await?;
+                client_proof
+            };
 
             // crc_hash: u8[20]
-            let mut crc_hash = [0_u8; 20];
-            r.read_exact(&mut crc_hash).await?;
+            let crc_hash = {
+                let mut crc_hash = [0_u8; 20];
+                r.read_exact(&mut crc_hash).await?;
+                crc_hash
+            };
 
             // number_of_telemetry_keys: u8
             let number_of_telemetry_keys = crate::util::tokio_read_u8_le(r).await?;
 
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-            let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
-            for i in 0..number_of_telemetry_keys {
-                telemetry_keys.push(TelemetryKey::tokio_read(r).await?);
-            }
-
+            let telemetry_keys = {
+                let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
+                for i in 0..number_of_telemetry_keys {
+                    telemetry_keys.push(TelemetryKey::tokio_read(r).await?);
+                }
+                telemetry_keys
+            };
             // security_flag: SecurityFlag
             let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(r).await?);
 
             let security_flag_PIN = if security_flag.is_PIN() {
                 // pin_salt: u8[16]
-                let mut pin_salt = [0_u8; 16];
-                r.read_exact(&mut pin_salt).await?;
+                let pin_salt = {
+                    let mut pin_salt = [0_u8; 16];
+                    r.read_exact(&mut pin_salt).await?;
+                    pin_salt
+                };
 
                 // pin_hash: u8[20]
-                let mut pin_hash = [0_u8; 20];
-                r.read_exact(&mut pin_hash).await?;
+                let pin_hash = {
+                    let mut pin_hash = [0_u8; 20];
+                    r.read_exact(&mut pin_hash).await?;
+                    pin_hash
+                };
 
                 Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash,
@@ -261,8 +300,11 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
             let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
                 // matrix_card_proof: u8[20]
-                let mut matrix_card_proof = [0_u8; 20];
-                r.read_exact(&mut matrix_card_proof).await?;
+                let matrix_card_proof = {
+                    let mut matrix_card_proof = [0_u8; 20];
+                    r.read_exact(&mut matrix_card_proof).await?;
+                    matrix_card_proof
+                };
 
                 Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
                     matrix_card_proof,
@@ -277,11 +319,13 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 let amount_of_tokens = crate::util::tokio_read_u8_le(r).await?;
 
                 // tokens: u8[amount_of_tokens]
-                let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
-                for i in 0..amount_of_tokens {
-                    tokens.push(crate::util::tokio_read_u8_le(r).await?);
-                }
-
+                let tokens = {
+                    let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
+                    for i in 0..amount_of_tokens {
+                        tokens.push(crate::util::tokio_read_u8_le(r).await?);
+                    }
+                    tokens
+                };
                 Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                     tokens,
                 })
@@ -340,37 +384,54 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
      {
         Box::pin(async move {
             // client_public_key: u8[32]
-            let mut client_public_key = [0_u8; 32];
-            r.read_exact(&mut client_public_key).await?;
+            let client_public_key = {
+                let mut client_public_key = [0_u8; 32];
+                r.read_exact(&mut client_public_key).await?;
+                client_public_key
+            };
 
             // client_proof: u8[20]
-            let mut client_proof = [0_u8; 20];
-            r.read_exact(&mut client_proof).await?;
+            let client_proof = {
+                let mut client_proof = [0_u8; 20];
+                r.read_exact(&mut client_proof).await?;
+                client_proof
+            };
 
             // crc_hash: u8[20]
-            let mut crc_hash = [0_u8; 20];
-            r.read_exact(&mut crc_hash).await?;
+            let crc_hash = {
+                let mut crc_hash = [0_u8; 20];
+                r.read_exact(&mut crc_hash).await?;
+                crc_hash
+            };
 
             // number_of_telemetry_keys: u8
             let number_of_telemetry_keys = crate::util::astd_read_u8_le(r).await?;
 
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-            let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
-            for i in 0..number_of_telemetry_keys {
-                telemetry_keys.push(TelemetryKey::astd_read(r).await?);
-            }
-
+            let telemetry_keys = {
+                let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
+                for i in 0..number_of_telemetry_keys {
+                    telemetry_keys.push(TelemetryKey::astd_read(r).await?);
+                }
+                telemetry_keys
+            };
             // security_flag: SecurityFlag
             let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(r).await?);
 
             let security_flag_PIN = if security_flag.is_PIN() {
                 // pin_salt: u8[16]
-                let mut pin_salt = [0_u8; 16];
-                r.read_exact(&mut pin_salt).await?;
+                let pin_salt = {
+                    let mut pin_salt = [0_u8; 16];
+                    r.read_exact(&mut pin_salt).await?;
+                    pin_salt
+                };
 
                 // pin_hash: u8[20]
-                let mut pin_hash = [0_u8; 20];
-                r.read_exact(&mut pin_hash).await?;
+                let pin_hash = {
+                    let mut pin_hash = [0_u8; 20];
+                    r.read_exact(&mut pin_hash).await?;
+                    pin_hash
+                };
 
                 Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash,
@@ -383,8 +444,11 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
             let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
                 // matrix_card_proof: u8[20]
-                let mut matrix_card_proof = [0_u8; 20];
-                r.read_exact(&mut matrix_card_proof).await?;
+                let matrix_card_proof = {
+                    let mut matrix_card_proof = [0_u8; 20];
+                    r.read_exact(&mut matrix_card_proof).await?;
+                    matrix_card_proof
+                };
 
                 Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
                     matrix_card_proof,
@@ -399,11 +463,13 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 let amount_of_tokens = crate::util::astd_read_u8_le(r).await?;
 
                 // tokens: u8[amount_of_tokens]
-                let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
-                for i in 0..amount_of_tokens {
-                    tokens.push(crate::util::astd_read_u8_le(r).await?);
-                }
-
+                let tokens = {
+                    let mut tokens = Vec::with_capacity(amount_of_tokens as usize);
+                    for i in 0..amount_of_tokens {
+                        tokens.push(crate::util::astd_read_u8_le(r).await?);
+                    }
+                    tokens
+                };
                 Some(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
                     tokens,
                 })

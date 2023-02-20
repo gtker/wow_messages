@@ -42,11 +42,13 @@ impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
         let amount_of_equipment_sets = crate::util::read_u32_le(r)?;
 
         // equipment_sets: EquipmentSetListItem[amount_of_equipment_sets]
-        let mut equipment_sets = Vec::with_capacity(amount_of_equipment_sets as usize);
-        for i in 0..amount_of_equipment_sets {
-            equipment_sets.push(EquipmentSetListItem::read(r)?);
-        }
-
+        let equipment_sets = {
+            let mut equipment_sets = Vec::with_capacity(amount_of_equipment_sets as usize);
+            for i in 0..amount_of_equipment_sets {
+                equipment_sets.push(EquipmentSetListItem::read(r)?);
+            }
+            equipment_sets
+        };
         Ok(Self {
             equipment_sets,
         })

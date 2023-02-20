@@ -374,8 +374,10 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
         let mask_PET_NAME = if mask.is_PET_NAME() {
             // pet_name: CString
-            let pet_name = crate::util::read_c_string_to_vec(r)?;
-            let pet_name = String::from_utf8(pet_name)?;
+            let pet_name = {
+                let pet_name = crate::util::read_c_string_to_vec(r)?;
+                String::from_utf8(pet_name)?
+            };
 
             Some(SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName {
                 pet_name,

@@ -43,14 +43,17 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         let player = Guid::read_packed(r)?;
 
         // talent_data: u8[-]
-        let mut current_size = {
-            player.size() // player: Guid
+        let talent_data = {
+            let mut current_size = {
+                player.size() // player: Guid
+            };
+            let mut talent_data = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                talent_data.push(crate::util::read_u8_le(r)?);
+                current_size += 1;
+            }
+            talent_data
         };
-        let mut talent_data = Vec::with_capacity(body_size as usize - current_size);
-        while current_size < (body_size as usize) {
-            talent_data.push(crate::util::read_u8_le(r)?);
-            current_size += 1;
-        }
 
         Ok(Self {
             player,

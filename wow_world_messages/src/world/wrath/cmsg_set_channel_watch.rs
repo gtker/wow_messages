@@ -36,8 +36,10 @@ impl crate::Message for CMSG_SET_CHANNEL_WATCH {
         }
 
         // channel: CString
-        let channel = crate::util::read_c_string_to_vec(r)?;
-        let channel = String::from_utf8(channel)?;
+        let channel = {
+            let channel = crate::util::read_c_string_to_vec(r)?;
+            String::from_utf8(channel)?
+        };
 
         Ok(Self {
             channel,
