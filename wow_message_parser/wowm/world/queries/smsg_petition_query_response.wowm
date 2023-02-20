@@ -38,7 +38,7 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     u32 allowed_maximum_level {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
-    /* TODO Figure out if CStrings work? */
+    /* TODO CORRECT_LAYOUT Figure out if CStrings work? */
     u32 todo_amount_of_signers {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
         comment = "vmangos: char m_choicetext[10][64]";

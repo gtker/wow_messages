@@ -845,7 +845,7 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
         .iter()
         .any(|a| a.tags().skip_serialize())
     {
-        s.wln("panic!(\"This message has a `skip_serialize` tag which makes it impossible to generate a correct read implementation for it.\")");
+        s.wln("panic!(\"SKIP_SERIALIZE_READ_PANIC This message has a `skip_serialize` tag which makes it impossible to generate a correct read implementation for it.\")");
         return;
     }
 

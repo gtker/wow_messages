@@ -62,7 +62,7 @@ enum GuildEvent : u8 {
     versions = "2.4.3 3";
 }
 
-/* TODO: Technically correct, but events require a specific amount of strings */
+/* TODO CORRECT_LAYOUT Technically correct, but events require a specific amount of strings */
 smsg SMSG_GUILD_EVENT = 0x0092 {
     GuildEvent event;
     u8 amount_of_events;
@@ -71,7 +71,7 @@ smsg SMSG_GUILD_EVENT = 0x0092 {
     versions = "1";
 }
 
-/* TODO: Technically correct, but events require a specific amount of strings */
+/* TODO CORRECT_LAYOUT Technically correct, but events require a specific amount of strings */
 smsg SMSG_GUILD_EVENT = 0x0092 {
     GuildEvent event;
     u8 amount_of_events;

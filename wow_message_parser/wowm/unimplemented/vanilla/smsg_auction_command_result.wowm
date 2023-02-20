@@ -58,6 +58,7 @@ smsg SMSG_AUCTION_COMMAND_RESULT = 0x025B {
         u32 auction_outbid2;
     }
 
+    /* TODO RUST_IF_SCOPE: has if inside other if*/
     unimplemented
 }
 

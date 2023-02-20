@@ -2,7 +2,7 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
     u32 data_type {
         comment = "Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder.";
     }
-    /* TODO: Compression */
+    /* TODO Compression */
     u32 decompressed_size;
     u8[-] compressed_data;
 } {

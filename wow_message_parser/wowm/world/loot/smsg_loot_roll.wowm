@@ -7,7 +7,7 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
         comment = "vmangos/mangoszero: not used ?";
     }
     u32 item_random_property_id;
-    /* TODO exact meaning? */
+    /* TODO NARROW_TYPE exact meaning? */
     u8 roll_number {
         comment = "vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number";
     }
@@ -25,7 +25,7 @@ smsg SMSG_LOOT_ROLL = 0x02A2 {
         comment = "vmangos/mangoszero: not used ?";
     }
     u32 item_random_property_id;
-    /* TODO exact meaning? */
+    /* TODO NARROW_TYPE exact meaning? */
     u8 roll_number {
         comment = "vmangos/cmangos/mangoszero: 0: Need for: `item_name` > 127: you passed on: `item_name`      Roll number";
     }

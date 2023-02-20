@@ -57,7 +57,7 @@ impl crate::Message for SMSG_ADDON_INFO {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EF, size: body_size as u32 });
         }
 
-        panic!("This message has a `skip_serialize` tag which makes it impossible to generate a correct read implementation for it.")
+        panic!("SKIP_SERIALIZE_READ_PANIC This message has a `skip_serialize` tag which makes it impossible to generate a correct read implementation for it.")
     }
 
 }

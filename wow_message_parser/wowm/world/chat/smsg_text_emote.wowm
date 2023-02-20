@@ -1,6 +1,6 @@
 smsg SMSG_TEXT_EMOTE = 0x0105 {
     Guid guid;
-    /* TODO: text_emote could be an enum */
+    /* TODO NARROW_TYPE: text_emote could be an enum */
     u32 text_emote;
     Emote emote;
     SizedCString name;

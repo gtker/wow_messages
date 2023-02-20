@@ -59,6 +59,7 @@ pub(crate) fn print_write_field_array(
         ArrayType::Struct(_) => {
             // Complex types use "write_into_vec", which means we can't write directly
             // into our ZLibEncoder. Instead, we write to an intermediary Vec first.
+            // RUST_COMPRESSION_WRITE
             if e.tags().compressed() || d.tags().is_compressed() {
                 s.wln("let mut vec = Vec::new();");
                 s.wln("i.write_into_vec(&mut vec)?;");

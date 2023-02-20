@@ -1,5 +1,5 @@
 enum MiniMoveOpcode : u16 {
-    /* TODO: Is this all? */
+    /* TODO UNKNOWN_ENUMERATOR Is this all? */
     SMSG_FORCE_MOVE_ROOT = 0xE8;
     SMSG_MOVE_FEATHER_FALL = 0xF2;
     SMSG_MOVE_WATER_WALK = 0xDE;
@@ -9,7 +9,7 @@ enum MiniMoveOpcode : u16 {
 }
 
 struct MiniMoveMessage {
-    /* TODO: Must manually set correct size */
+    /* TODO STRUCT_SELF_SIZE Must manually set correct size */
     u8 size;
     MiniMoveOpcode opcode;
     PackedGuid guid;

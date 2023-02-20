@@ -1,6 +1,6 @@
 struct FactionInitializer {
     FactionFlag flag;
-    /* TODO Units? */
+    /* TODO NARROW_TYPE Units? */
     u32 standing;
 } {
     versions = "1 2";
@@ -18,7 +18,7 @@ smsg SMSG_INITIALIZE_FACTIONS = 0x0122 {
 
 struct FactionInitializer {
     FactionFlag flag;
-    /* TODO Units? */
+    /* TODO NARROW_TYPE Units? */
     u32 standing;
 } {
     versions = "3";

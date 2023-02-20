@@ -65,7 +65,7 @@ smsg SMSG_ADDON_INFO = 0x2EF {
 
 struct Addon
 {
-    /* TODO: addon_type requires more research and turn into a proper enum */
+    /* TODO NARROW_TYPE addon_type requires more research and turn into a proper enum */
     u8 addon_type {
         comment = "Other emus hardcode this to 2. More research is required";
     }
@@ -89,7 +89,7 @@ smsg SMSG_ADDON_INFO = 0x2EF {
     }
     Addon[number_of_addons] addons;
     u32 number_of_banned_addons = 0;
-    /* TODO: Figure out the structure of banned addons and remove hardcoded 0 */
+    /* TODO CORRECT_LAYOUT Figure out the structure of banned addons and remove hardcoded 0 */
 } {
     paste_versions = "2.4.3 3.3.5";
     comment = "Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid";

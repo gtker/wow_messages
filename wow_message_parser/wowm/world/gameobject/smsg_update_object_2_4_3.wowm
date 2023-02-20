@@ -14,7 +14,7 @@ enum ObjectType : u8 {
 struct MovementBlock {
     UpdateFlag update_flag;
     if (update_flag & LIVING) {
-        /* MovementInfo */
+        /* TODO STRUCT_MEMBER_ACCESS All variables until newline are actually just a MovementInfo, but the if statement later requires access to flags. */
         MovementFlags flags;
         u8 extra_flags;
         u32 timestamp;

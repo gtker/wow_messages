@@ -1,6 +1,6 @@
 smsg SMSG_INSPECT_TALENT = 0x03F3 {
     PackedGuid player;
-    /* TODO: Proper typing */
+    /* TODO CORRECT_LAYOUT Proper typing */
     u8[-] talent_data;
 } {
     versions = "2.4.3";

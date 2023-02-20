@@ -24,12 +24,12 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
         comment = "cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)";
     }
     u32 trade_slot_count1 {
-        /* TODO: Maybe an enum for maximum values? */
+        /* TODO NARROW_TYPE Maybe an enum for maximum values? */
         comment = "cmangos/vmangos/mangoszero: sets to 7";
         comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases";
     }
     u32 trade_slot_count2 {
-        /* TODO: Maybe an enum for maximum values? */
+        /* TODO NARROW_TYPE Maybe an enum for maximum values? */
         comment = "cmangos/vmangos/mangoszero: sets to 7";
         comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
     }
@@ -72,12 +72,12 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
         comment = "added in 2.4.0, this value must be equal to value from TRADE_STATUS_OPEN_WINDOW status packet (different value for different players to block multiple trades?)";
     }
     u32 trade_slot_count1 {
-        /* TODO: Maybe an enum for maximum values? */
+        /* TODO NARROW_TYPE Maybe an enum for maximum values? */
         comment = "cmangos/vmangos/mangoszero: sets to 7";
         comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases";
     }
     u32 trade_slot_count2 {
-        /* TODO: Maybe an enum for maximum values? */
+        /* TODO NARROW_TYPE Maybe an enum for maximum values? */
         comment = "cmangos/vmangos/mangoszero: sets to 7";
         comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
     }

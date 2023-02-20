@@ -23,7 +23,7 @@ smsg SMSG_BATTLEFIELD_STATUS = 0x2D4 {
         comment = "vmangos: players can be in 3 queues at the same time (0..2)";
     }
     Map map;
-    /* TODO: Is this really Map or Area?
+    /* TODO CORRECT_LAYOUT: Is this really Map or Area?
         Might also be something else (BG only maps).
     */
     if (map != EASTERN_KINGDOMS) {

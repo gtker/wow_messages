@@ -33,7 +33,6 @@ struct SpellMiss {
     SpellMissInfo miss_info;
 }
 
-/* TODO: RIGHT ? */
 enum SpellSchool : u8 {
     NORMAL = 0 {
         comment = "Physical, Armor";

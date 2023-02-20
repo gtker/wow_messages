@@ -1,6 +1,6 @@
 struct FactionStanding {
     Faction faction;
-    /* TODO Units? */
+    /* TODO NARROW_TYPE Units? */
     u32 standing;
 } {
     paste_versions = "1.12 2.4.3 3.3.5";

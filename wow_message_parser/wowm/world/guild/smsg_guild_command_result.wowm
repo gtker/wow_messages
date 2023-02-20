@@ -110,7 +110,7 @@ enum GuildCommandResult : u8 {
     versions = "3.3.5";
 }
 
-/* TODO: Seems to be used for a whole host of things, might be able to narrow it down? */
+/* TODO CORRECT_LAYOUT Seems to be used for a whole host of things, might be able to narrow it down? */
 smsg SMSG_GUILD_COMMAND_RESULT = 0x0093 {
     (u32)GuildCommand command;
     CString string;

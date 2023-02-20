@@ -1,5 +1,5 @@
 smsg MSG_QUERY_NEXT_MAIL_TIME_Server = 0x0284 {
-    /* TODO: Figure out if Cmangos is correct in this */
+    /* TODO CORRECT_LAYOUT Figure out if Cmangos is correct in this */
     f32 unread_mails {
         comment = "mangoszero sets 0 if has unread mail, -86400.0f (0xC7A8C000) if not";
         comment = "vmangos sets 0 if has unread mail, -1.0f if not";

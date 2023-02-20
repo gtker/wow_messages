@@ -1,7 +1,7 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_LEARN_TALENT = 0x0251 {
-    /* TODO: TalentId enum? */
+    /* TODO NARROW_TYPE TalentId enum? */
     u32 talent_id;
     u32 requested_rank;
 }

@@ -122,7 +122,7 @@ flag SpellCastTargetFlags : u32 {
     versions = "3.3.5";
 }
 
-/* TODO: Probably not valid since flags need || target_flags & other */
+/* TODO FLAG_OR Probably not valid since flags need || target_flags & other */
 struct SpellCastTargets {
     SpellCastTargetFlags target_flags;
     if (target_flags & UNIT /* FLAG_OR || target_flags & TRADE_ITEM || target_flags & UNIT_ENEMY */) {
@@ -150,7 +150,7 @@ struct SpellCastTargets {
     versions = "1.12 2";
 }
 
-/* TODO: Probably not valid since flags need || target_flags & other */
+/* TODO FLAG_OR Probably not valid since flags need || target_flags & other */
 struct SpellCastTargets {
     SpellCastTargetFlags target_flags;
     if (target_flags & UNIT /* FLAG_OR || target_flags & UNIT_MINIPET || target_flags & GAMEOBJECT || target_flags & CORPSE_ENEMY || target_flags & CORPSE_ALLY*/) {

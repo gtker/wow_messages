@@ -1,9 +1,10 @@
 #tag_all versions "1 2 3";
 
 smsg SMSG_SET_PCT_SPELL_MODIFIER = 0x0267 {
-    /* TODO What does this mean? */
+    /* TODO CORRECT_LAYOUT What does this mean? */
     u8 eff;
     u8 op;
+    /* TODO NARROW_TYPE Possibly AuraMod? */
     u32 value;
 }
 

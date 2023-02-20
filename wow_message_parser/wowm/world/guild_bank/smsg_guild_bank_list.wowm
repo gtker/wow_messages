@@ -32,7 +32,7 @@ struct GuildBankSlot {
     u32 item_random_property_id;
     /* if (item_random_property_id != 0) {
         u32 item_suffix_factor;
-    } TODO: INT_NEQ_ZERO */
+    } TODO INT_NEQ_ZERO */
     u8 amount_of_items;
     u32 enchant;
     u8 charges;
@@ -66,7 +66,7 @@ struct GuildBankSlot {
     u32 item_random_property_id;
     /* if (item_random_property_id != 0) {
         u32 item_suffix_factor;
-    } TODO: INT_NEQ_ZERO */
+    } TODO INT_NEQ_ZERO */
     u32 amount_of_items;
     u32 unknown2;
     u8 unknown3;

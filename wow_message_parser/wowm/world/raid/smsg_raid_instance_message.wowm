@@ -18,7 +18,7 @@ enum RaidInstanceMessage : u32 {
 smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {
     RaidInstanceMessage message_type;
     Map map;
-    /* TODO unit? */
+    /* TODO NARROW_TYPE unit? */
     u32 time_left;
 } {
     paste_versions = "1.12 2.4.3";
@@ -46,7 +46,7 @@ smsg SMSG_RAID_INSTANCE_MESSAGE = 0x02FA {
     RaidInstanceMessage message_type;
     Map map;
     (u32)RaidDifficulty difficulty;
-    /* TODO unit? */
+    /* TODO NARROW_TYPE: unit? */
     u32 time_left;
 } {
     versions = "3.3.5";

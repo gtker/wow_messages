@@ -35,7 +35,7 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
     if (result == ERR_EQUIP_ERROR) {
         u32 equip_error;
     }
-    /* TODO: requires elseif for different thing */
+    /* TODO RUST_IF_SCOPE: requires elseif for different thing */
     else {
         if (action == ITEM_TAKEN) {
             Item item {
