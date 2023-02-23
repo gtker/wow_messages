@@ -2,8 +2,7 @@ use crate::wrath::InspectTalentGear;
 use std::io;
 use std::io::Read;
 
-#[derive(Debug, Hash, Clone, Ord, PartialOrd, Eq, PartialEq)]
-#[derive(Default)]
+#[derive(Debug, Hash, Clone, Ord, PartialOrd, Eq, PartialEq, Default)]
 pub struct InspectTalentGearMask {
     inspect_talent_gears: [Option<InspectTalentGear>; Self::MAX_CAPACITY],
 }
@@ -40,10 +39,8 @@ impl InspectTalentGearMask {
 
         std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice())?;
 
-        for i in self.inspect_talent_gears() {
-            if let Some(m) = i {
-                m.write_into_vec(v)?;
-            }
+        for i in self.inspect_talent_gears().iter().flatten() {
+            i.write_into_vec(v)?;
         }
 
         Ok(())
@@ -72,5 +69,3 @@ impl InspectTalentGearMask {
         MASK_VARIABLE_SIZE + auras
     }
 }
-
-

@@ -6,6 +6,7 @@ use crate::wrath::{
 };
 
 impl MovementInfo {
+    #[allow(clippy::too_many_arguments)]
     pub fn into_movement_block_update_flag_living(
         &self,
         backwards_flight_speed: f32,
@@ -19,11 +20,17 @@ impl MovementInfo {
         walking_speed: f32,
         spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,
     ) -> MovementBlock_UpdateFlag_Living {
-        let on_transport = self.flags.get_ON_TRANSPORT().map(|t| MovementBlock_MovementFlags_OnTransport {
-                transport: t.transport.clone(),
-            });
+        let on_transport =
+            self.flags
+                .get_ON_TRANSPORT()
+                .map(|t| MovementBlock_MovementFlags_OnTransport {
+                    transport: t.transport,
+                });
 
-        let falling = self.flags.get_FALLING().map(|t| MovementBlock_MovementFlags_Falling {
+        let falling = self
+            .flags
+            .get_FALLING()
+            .map(|t| MovementBlock_MovementFlags_Falling {
                 cos_angle: t.cos_angle,
                 sin_angle: t.sin_angle,
                 xy_speed: t.xy_speed,
@@ -40,9 +47,11 @@ impl MovementInfo {
             None
         };
 
-        let spline_elevation = self.flags.get_SPLINE_ELEVATION().map(|t| MovementBlock_MovementFlags_SplineElevation {
+        let spline_elevation = self.flags.get_SPLINE_ELEVATION().map(|t| {
+            MovementBlock_MovementFlags_SplineElevation {
                 spline_elevation: t.spline_elevation,
-            });
+            }
+        });
 
         MovementBlock_UpdateFlag_Living::Living {
             living_orientation: self.orientation,

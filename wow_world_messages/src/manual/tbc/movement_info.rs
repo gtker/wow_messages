@@ -6,6 +6,7 @@ use crate::tbc::{
 };
 
 impl MovementInfo {
+    #[allow(clippy::too_many_arguments)]
     pub fn into_movement_block_update_flag_living(
         &self,
         backwards_flight_speed: f32,
@@ -18,11 +19,17 @@ impl MovementInfo {
         walking_speed: f32,
         spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,
     ) -> MovementBlock_UpdateFlag_Living {
-        let on_transport = self.flags.get_ON_TRANSPORT().map(|t| MovementBlock_MovementFlags_OnTransport {
-                transport: t.transport.clone(),
-            });
+        let on_transport =
+            self.flags
+                .get_ON_TRANSPORT()
+                .map(|t| MovementBlock_MovementFlags_OnTransport {
+                    transport: t.transport,
+                });
 
-        let jumping = self.flags.get_JUMPING().map(|t| MovementBlock_MovementFlags_Jumping {
+        let jumping = self
+            .flags
+            .get_JUMPING()
+            .map(|t| MovementBlock_MovementFlags_Jumping {
                 cos_angle: t.cos_angle,
                 sin_angle: t.sin_angle,
                 xy_speed: t.xy_speed,
@@ -30,17 +37,19 @@ impl MovementInfo {
             });
 
         let swimming = self.flags.get_SWIMMING().map(|t| match *t {
-                MovementInfo_MovementFlags_Swimming::Swimming { pitch1 } => {
-                    MovementBlock_MovementFlags_Swimming::Swimming { pitch1 }
-                }
-                MovementInfo_MovementFlags_Swimming::Ontransport { pitch2 } => {
-                    MovementBlock_MovementFlags_Swimming::Ontransport { pitch2 }
-                }
-            });
+            MovementInfo_MovementFlags_Swimming::Swimming { pitch1 } => {
+                MovementBlock_MovementFlags_Swimming::Swimming { pitch1 }
+            }
+            MovementInfo_MovementFlags_Swimming::Ontransport { pitch2 } => {
+                MovementBlock_MovementFlags_Swimming::Ontransport { pitch2 }
+            }
+        });
 
-        let spline_elevation = self.flags.get_SPLINE_ELEVATION().map(|t| MovementBlock_MovementFlags_SplineElevation {
+        let spline_elevation = self.flags.get_SPLINE_ELEVATION().map(|t| {
+            MovementBlock_MovementFlags_SplineElevation {
                 spline_elevation: t.spline_elevation,
-            });
+            }
+        });
 
         MovementBlock_UpdateFlag_Living::Living {
             living_orientation: self.orientation,
