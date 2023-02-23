@@ -218,8 +218,6 @@ fn can_derive_copy(members: &[&RustMember]) -> bool {
             | RustType::AchievementDoneArray
             | RustType::MonsterMoveSpline
             | RustType::UpdateMask
-            | RustType::AuraMask
-            | RustType::PackedGuid
             | RustType::String
             | RustType::CString
             | RustType::SizedCString => return false,

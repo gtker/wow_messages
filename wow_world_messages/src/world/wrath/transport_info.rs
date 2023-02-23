@@ -2,7 +2,7 @@ use crate::Guid;
 use crate::wrath::Vector3d;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm#L3):
 /// ```text
 /// struct TransportInfo {

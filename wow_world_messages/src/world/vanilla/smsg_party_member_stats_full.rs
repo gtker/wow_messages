@@ -1741,7 +1741,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Auras {
     pub auras: AuraMask,
 }
@@ -1840,7 +1840,7 @@ impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras {
     pub pet_auras: AuraMask,
 }

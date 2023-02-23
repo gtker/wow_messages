@@ -2444,7 +2444,7 @@ impl MovementBlock_UpdateFlag_Transport {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct MovementBlock_UpdateFlag_MeleeAttacking {
     pub guid: Guid,
 }

@@ -762,7 +762,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_Unit {
     pub unit_target: Guid,
 }
@@ -773,7 +773,7 @@ impl SpellCastTargets_SpellCastTargetFlags_Unit {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_Item {
     pub item_target: Guid,
 }
@@ -806,7 +806,7 @@ impl SpellCastTargets_SpellCastTargetFlags_DestLocation {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_Gameobject {
     pub object_target: Guid,
 }
@@ -828,7 +828,7 @@ impl SpellCastTargets_SpellCastTargetFlags_String {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
     pub corpse_target_ally: Guid,
 }

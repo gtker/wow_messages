@@ -2,7 +2,7 @@ use crate::Guid;
 use crate::wrath::AuraFlag;
 use std::io::{Write, Read};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm#L18):
 /// ```text
 /// struct AuraUpdate {
@@ -136,7 +136,7 @@ impl AuraUpdate {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct AuraUpdate_AuraFlag {
     inner: u8,
     not_caster: Option<AuraUpdate_AuraFlag_NotCaster>,
@@ -393,7 +393,7 @@ impl AuraUpdate_AuraFlag {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct AuraUpdate_AuraFlag_NotCaster {
     pub caster: Guid,
 }

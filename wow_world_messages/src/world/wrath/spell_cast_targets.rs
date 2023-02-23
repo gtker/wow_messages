@@ -785,7 +785,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_Unit {
     pub unit_target: Guid,
 }
@@ -796,7 +796,7 @@ impl SpellCastTargets_SpellCastTargetFlags_Unit {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SpellCastTargets_SpellCastTargetFlags_Item {
     pub item_target: Guid,
 }
