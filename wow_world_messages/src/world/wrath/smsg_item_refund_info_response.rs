@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::wrath::Gold;
 use crate::wrath::ItemRefundExtra;
 use std::io::{Write, Read};
 
@@ -7,7 +8,7 @@ use std::io::{Write, Read};
 /// ```text
 /// smsg SMSG_ITEM_REFUND_INFO_RESPONSE = 0x04B2 {
 ///     Guid item;
-///     u32 money_cost;
+///     Gold money_cost;
 ///     u32 honor_point_cost;
 ///     u32 arena_point_cost;
 ///     ItemRefundExtra[5] extra_items;
@@ -17,7 +18,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_ITEM_REFUND_INFO_RESPONSE {
     pub item: Guid,
-    pub money_cost: u32,
+    pub money_cost: Gold,
     pub honor_point_cost: u32,
     pub arena_point_cost: u32,
     pub extra_items: [ItemRefundExtra; 5],
@@ -38,8 +39,8 @@ impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
         // item: Guid
         w.write_all(&self.item.guid().to_le_bytes())?;
 
-        // money_cost: u32
-        w.write_all(&self.money_cost.to_le_bytes())?;
+        // money_cost: Gold
+        w.write_all(u32::from(self.money_cost.as_int()).to_le_bytes().as_slice())?;
 
         // honor_point_cost: u32
         w.write_all(&self.honor_point_cost.to_le_bytes())?;
@@ -68,9 +69,8 @@ impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
         // item: Guid
         let item = Guid::read(r)?;
 
-        // money_cost: u32
-        let money_cost = crate::util::read_u32_le(r)?;
-
+        // money_cost: Gold
+        let money_cost = Gold::new(crate::util::read_u32_le(r)?);
         // honor_point_cost: u32
         let honor_point_cost = crate::util::read_u32_le(r)?;
 

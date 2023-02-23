@@ -18,7 +18,7 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     QuestItemRequirement[amount_of_choice_item_rewards] choice_item_rewards;
     u32 amount_of_item_rewards;
     QuestItemRequirement[amount_of_item_rewards] item_rewards;
-    u32 money_reward;
+    Gold money_reward;
     u32 reward_spell;
     u32 reward_spell_cast;
 }
@@ -49,7 +49,7 @@ SMSG have a header of 4 bytes.
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
 | - | 4 / Little | u32 | amount_of_item_rewards |  |  |
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | u32 | money_reward |  |  |
+| - | 4 / Little | Gold | money_reward |  |  |
 | - | 4 / Little | u32 | reward_spell |  |  |
 | - | 4 / Little | u32 | reward_spell_cast |  | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
 
@@ -74,7 +74,7 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     QuestItemRequirement[amount_of_choice_item_rewards] choice_item_rewards;
     u32 amount_of_item_rewards;
     QuestItemRequirement[amount_of_item_rewards] item_rewards;
-    u32 money_reward;
+    Gold money_reward;
     u32 honor_reward;
     u32 unknown1;
     u32 reward_spell;
@@ -109,7 +109,7 @@ SMSG have a header of 4 bytes.
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
 | - | 4 / Little | u32 | amount_of_item_rewards |  |  |
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | u32 | money_reward |  |  |
+| - | 4 / Little | Gold | money_reward |  |  |
 | - | 4 / Little | u32 | honor_reward |  |  |
 | - | 4 / Little | u32 | unknown1 |  | mangostwo: unused by client?<br/>mangostwo sets to 0x08. |
 | - | 4 / Little | u32 | reward_spell |  |  |
@@ -138,7 +138,7 @@ smsg SMSG_QUESTGIVER_OFFER_REWARD = 0x018D {
     QuestItemRequirement[amount_of_choice_item_rewards] choice_item_rewards;
     u32 amount_of_item_rewards;
     QuestItemRequirement[amount_of_item_rewards] item_rewards;
-    u32 money_reward;
+    Gold money_reward;
     u32 experience_reward;
     u32 honor_reward;
     f32 honor_reward_multiplier;
@@ -182,7 +182,7 @@ SMSG have a header of 4 bytes.
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_choice_item_rewards] | choice_item_rewards |  |  |
 | - | 4 / Little | u32 | amount_of_item_rewards |  |  |
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_item_rewards] | item_rewards |  |  |
-| - | 4 / Little | u32 | money_reward |  |  |
+| - | 4 / Little | Gold | money_reward |  |  |
 | - | 4 / Little | u32 | experience_reward |  |  |
 | - | 4 / Little | u32 | honor_reward |  |  |
 | - | 4 / Little | f32 | honor_reward_multiplier |  |  |

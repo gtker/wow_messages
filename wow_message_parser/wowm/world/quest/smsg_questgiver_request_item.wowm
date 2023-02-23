@@ -21,7 +21,7 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     u32 emote_delay;
     u32 emote;
     Bool32 auto_finish;
-    u32 required_money;
+    Gold required_money;
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
     u32 unknown1 {
@@ -48,7 +48,7 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     u32 emote;
     Bool32 auto_finish;
     u32 suggested_players;
-    u32 required_money;
+    Gold required_money;
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
     QuestCompletable completable;
@@ -78,7 +78,7 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
         comment = "mangostwo: 3.3.3 questFlags";
     }
     u32 suggested_players;
-    u32 required_money;
+    Gold required_money;
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
     QuestCompletable completable;

@@ -98,7 +98,7 @@ smsg SMSG_LOOT_RESPONSE = 0x0160 {
     if (loot_method == ERROR) {
         LootMethodError loot_error;       
     }
-    u32 gold;
+    Gold gold;
     u8 amount_of_items;
     LootItem[amount_of_items] items;
 } {

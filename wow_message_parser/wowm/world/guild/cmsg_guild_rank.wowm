@@ -17,7 +17,7 @@ cmsg CMSG_GUILD_RANK = 0x0231 {
     u32 rank_id;
     u32 rights;
     CString rank_name;
-    u32 money_per_day;
+    Gold money_per_day;
     GuildBankRights[6] bank_tab_rights;
 } {
     versions = "2.4.3 3";

@@ -371,6 +371,15 @@ fn print_read_definition(
 
             s.newline();
         }
+        Type::Gold => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = Gold::new({module_name}::{prefix}read_u32_le(r){postfix}?);",
+                name = d.name(),
+                module_name = UTILITY_PATH,
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
                 "{assignment_prefix}{name} = {module_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",

@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::tbc::Gold;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -6,12 +7,12 @@ use std::io::{Write, Read};
 /// ```text
 /// cmsg CMSG_GUILD_BANK_DEPOSIT_MONEY = 0x03EB {
 ///     Guid bank;
-///     u32 money;
+///     Gold money;
 /// }
 /// ```
 pub struct CMSG_GUILD_BANK_DEPOSIT_MONEY {
     pub bank: Guid,
-    pub money: u32,
+    pub money: Gold,
 }
 
 impl crate::Message for CMSG_GUILD_BANK_DEPOSIT_MONEY {
@@ -25,8 +26,8 @@ impl crate::Message for CMSG_GUILD_BANK_DEPOSIT_MONEY {
         // bank: Guid
         w.write_all(&self.bank.guid().to_le_bytes())?;
 
-        // money: u32
-        w.write_all(&self.money.to_le_bytes())?;
+        // money: Gold
+        w.write_all(u32::from(self.money.as_int()).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -38,9 +39,8 @@ impl crate::Message for CMSG_GUILD_BANK_DEPOSIT_MONEY {
         // bank: Guid
         let bank = Guid::read(r)?;
 
-        // money: u32
-        let money = crate::util::read_u32_le(r)?;
-
+        // money: Gold
+        let money = Gold::new(crate::util::read_u32_le(r)?);
         Ok(Self {
             bank,
             money,

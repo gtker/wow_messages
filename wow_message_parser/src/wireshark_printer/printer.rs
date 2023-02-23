@@ -289,6 +289,10 @@ fn print_definition(
                 s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
             }
         }
+        Type::Gold => {
+            let name = w.unwrap().name();
+            s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
+        }
         Type::Guid => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));

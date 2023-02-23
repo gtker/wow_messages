@@ -10,7 +10,7 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
     Bool self_player;
     u32 trade_slot_count1;
     u32 trade_slot_count2;
-    u32 money_in_trade;
+    Gold money_in_trade;
     u32 spell_on_lowest_slot;
     TradeSlot[7] trade_slots;
 }
@@ -33,7 +33,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | Bool | self_player |  | cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot) |
 | 0x05 | 4 / Little | u32 | trade_slot_count1 |  | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases |
 | 0x09 | 4 / Little | u32 | trade_slot_count2 |  | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases |
-| 0x0D | 4 / Little | u32 | money_in_trade |  |  |
+| 0x0D | 4 / Little | Gold | money_in_trade |  |  |
 | 0x11 | 4 / Little | u32 | spell_on_lowest_slot |  |  |
 | 0x15 | ? / - | [TradeSlot](tradeslot.md)[7] | trade_slots |  | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
 
@@ -50,7 +50,7 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
     u32 trade_id;
     u32 trade_slot_count1;
     u32 trade_slot_count2;
-    u32 money_in_trade;
+    Gold money_in_trade;
     u32 spell_on_lowest_slot;
     TradeSlot[7] trade_slots;
 }
@@ -74,7 +74,7 @@ SMSG have a header of 4 bytes.
 | 0x05 | 4 / Little | u32 | trade_id |  | added in 2.4.0, this value must be equal to value from TRADE_STATUS_OPEN_WINDOW status packet (different value for different players to block multiple trades?) |
 | 0x09 | 4 / Little | u32 | trade_slot_count1 |  | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases |
 | 0x0D | 4 / Little | u32 | trade_slot_count2 |  | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases |
-| 0x11 | 4 / Little | u32 | money_in_trade |  |  |
+| 0x11 | 4 / Little | Gold | money_in_trade |  |  |
 | 0x15 | 4 / Little | u32 | spell_on_lowest_slot |  |  |
 | 0x19 | ? / - | [TradeSlot](tradeslot.md)[7] | trade_slots |  | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
 

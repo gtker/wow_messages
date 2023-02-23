@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::wrath::Gold;
 use crate::wrath::ItemRefundExtra;
 use crate::wrath::ItemRefundResult;
 use std::io::{Write, Read};
@@ -10,7 +11,7 @@ use std::io::{Write, Read};
 ///     Guid item;
 ///     ItemRefundResult result;
 ///     if (result == SUCCESS) {
-///         u32 money_cost;
+///         Gold cost;
 ///         u32 honor_point_cost;
 ///         u32 arena_point_cost;
 ///         ItemRefundExtra[5] extra_items;
@@ -40,12 +41,12 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
         match &self.result {
             SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Success {
                 arena_point_cost,
+                cost,
                 extra_items,
                 honor_point_cost,
-                money_cost,
             } => {
-                // money_cost: u32
-                w.write_all(&money_cost.to_le_bytes())?;
+                // cost: Gold
+                w.write_all(u32::from(cost.as_int()).to_le_bytes().as_slice())?;
 
                 // honor_point_cost: u32
                 w.write_all(&honor_point_cost.to_le_bytes())?;
@@ -78,9 +79,8 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
 
         let result_if = match result {
             ItemRefundResult::Success => {
-                // money_cost: u32
-                let money_cost = crate::util::read_u32_le(r)?;
-
+                // cost: Gold
+                let cost = Gold::new(crate::util::read_u32_le(r)?);
                 // honor_point_cost: u32
                 let honor_point_cost = crate::util::read_u32_le(r)?;
 
@@ -98,9 +98,9 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
 
                 SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Success {
                     arena_point_cost,
+                    cost,
                     extra_items,
                     honor_point_cost,
-                    money_cost,
                 }
             }
             ItemRefundResult::Failure => SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Failure,
@@ -127,9 +127,9 @@ impl SMSG_ITEM_REFUND_RESULT {
 pub enum SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
     Success {
         arena_point_cost: u32,
+        cost: Gold,
         extra_items: [ItemRefundExtra; 5],
         honor_point_cost: u32,
-        money_cost: u32,
     },
     Failure,
 }
@@ -156,15 +156,15 @@ impl SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
         match self {
             Self::Success {
                 arena_point_cost,
+                cost,
                 extra_items,
                 honor_point_cost,
-                money_cost,
             } => {
                 1
                 + 4 // arena_point_cost: u32
+                + 8 // cost: Gold
                 + 5 * 8 // extra_items: ItemRefundExtra[5]
                 + 4 // honor_point_cost: u32
-                + 4 // money_cost: u32
             }
             Self::Failure => {
                 1

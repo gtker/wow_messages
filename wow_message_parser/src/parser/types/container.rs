@@ -308,6 +308,9 @@ impl Container {
                         Type::Integer(int_type) => {
                             sum += int_type.size() as u64;
                         }
+                        Type::Gold => {
+                            sum += 4;
+                        }
                         Type::FloatingPoint(float_ty) => {
                             sum += float_ty.size() as u64;
                         }
@@ -559,6 +562,16 @@ impl Container {
         for d in self.all_definitions() {
             if d.ty() == &Type::AchievementDoneArray || d.ty() == &Type::AchievementInProgressArray
             {
+                return true;
+            }
+        }
+
+        false
+    }
+
+    pub(crate) fn contains_gold(&self) -> bool {
+        for d in self.all_definitions() {
+            if d.ty() == &Type::Gold {
                 return true;
             }
         }

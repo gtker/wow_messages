@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::wrath::Gold;
 use crate::wrath::QuestItemRequirement;
 use crate::wrath::QuestCompletable;
 use std::io::{Write, Read};
@@ -18,7 +19,7 @@ use std::io::{Write, Read};
 ///     Bool32 auto_finish;
 ///     u32 flags1;
 ///     u32 suggested_players;
-///     u32 required_money;
+///     Gold required_money;
 ///     u32 amount_of_required_items;
 ///     QuestItemRequirement[amount_of_required_items] required_items;
 ///     QuestCompletable completable;
@@ -39,7 +40,7 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     ///
     pub flags1: u32,
     pub suggested_players: u32,
-    pub required_money: u32,
+    pub required_money: Gold,
     pub required_items: Vec<QuestItemRequirement>,
     pub completable: QuestCompletable,
     /// mangostwo: set to 0x04
@@ -97,8 +98,8 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         // suggested_players: u32
         w.write_all(&self.suggested_players.to_le_bytes())?;
 
-        // required_money: u32
-        w.write_all(&self.required_money.to_le_bytes())?;
+        // required_money: Gold
+        w.write_all(u32::from(self.required_money.as_int()).to_le_bytes().as_slice())?;
 
         // amount_of_required_items: u32
         w.write_all(&(self.required_items.len() as u32).to_le_bytes())?;
@@ -160,9 +161,8 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         // suggested_players: u32
         let suggested_players = crate::util::read_u32_le(r)?;
 
-        // required_money: u32
-        let required_money = crate::util::read_u32_le(r)?;
-
+        // required_money: Gold
+        let required_money = Gold::new(crate::util::read_u32_le(r)?);
         // amount_of_required_items: u32
         let amount_of_required_items = crate::util::read_u32_le(r)?;
 
@@ -220,7 +220,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
         + 4 // auto_finish: Bool32
         + 4 // flags1: u32
         + 4 // suggested_players: u32
-        + 4 // required_money: u32
+        + 8 // required_money: Gold
         + 4 // amount_of_required_items: u32
         + self.required_items.len() * 12 // required_items: QuestItemRequirement[amount_of_required_items]
         + 4 // completable: QuestCompletable

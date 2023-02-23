@@ -61,6 +61,10 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         s.wln(format!("use {import_path}::MonsterMoveSpline;"));
     }
 
+    if e.contains_gold() {
+        s.wln(format!("use {import_path}::Gold;"));
+    }
+
     if e.contains_achievement_array() {
         s.wln(format!(
             "use {import_path}::{{AchievementDoneArray, AchievementInProgressArray}};"

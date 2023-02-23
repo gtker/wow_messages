@@ -17,8 +17,8 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     Faction required_opposite_faction;
     u32 required_opposite_reputation_value;
     u32 next_quest_in_chain;
-    u32 money_reward;
-    u32 max_level_money_reward;
+    Gold money_reward;
+    Gold max_level_money_reward;
     u32 reward_spell;
     u32 source_item_id;
     u32 quest_flags;
@@ -60,8 +60,8 @@ SMSG have a header of 4 bytes.
 | 0x1E | 2 / - | [Faction](faction.md) | required_opposite_faction |  | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
 | 0x20 | 4 / Little | u32 | required_opposite_reputation_value |  | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
 | 0x24 | 4 / Little | u32 | next_quest_in_chain |  |  |
-| 0x28 | 4 / Little | u32 | money_reward |  |  |
-| 0x2C | 4 / Little | u32 | max_level_money_reward |  | cmangos: used in XP calculation at client |
+| 0x28 | 4 / Little | Gold | money_reward |  |  |
+| 0x2C | 4 / Little | Gold | max_level_money_reward |  | cmangos: used in XP calculation at client |
 | 0x30 | 4 / Little | u32 | reward_spell |  | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
 | 0x34 | 4 / Little | u32 | source_item_id |  |  |
 | 0x38 | 4 / Little | u32 | quest_flags |  |  |
@@ -97,8 +97,8 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     Faction required_opposite_faction;
     u32 required_opposite_reputation_value;
     u32 next_quest_in_chain;
-    u32 money_reward;
-    u32 max_level_money_reward;
+    Gold money_reward;
+    Gold max_level_money_reward;
     u32 reward_spell;
     u32 casted_reward_spell;
     u32 honor_reward;
@@ -144,8 +144,8 @@ SMSG have a header of 4 bytes.
 | 0x22 | 2 / - | [Faction](faction.md) | required_opposite_faction |  | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
 | 0x24 | 4 / Little | u32 | required_opposite_reputation_value |  | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
 | 0x28 | 4 / Little | u32 | next_quest_in_chain |  |  |
-| 0x2C | 4 / Little | u32 | money_reward |  |  |
-| 0x30 | 4 / Little | u32 | max_level_money_reward |  | cmangos: used in XP calculation at client |
+| 0x2C | 4 / Little | Gold | money_reward |  |  |
+| 0x30 | 4 / Little | Gold | max_level_money_reward |  | cmangos: used in XP calculation at client |
 | 0x34 | 4 / Little | u32 | reward_spell |  | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
 | 0x38 | 4 / Little | u32 | casted_reward_spell |  | mangosone: casted spell |
 | 0x3C | 4 / Little | u32 | honor_reward |  |  |
@@ -185,8 +185,8 @@ smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
     Faction required_opposite_faction;
     u32 required_opposite_reputation_value;
     u32 next_quest_in_chain;
-    u32 money_reward;
-    u32 max_level_money_reward;
+    Gold money_reward;
+    Gold max_level_money_reward;
     u32 reward_spell;
     u32 casted_reward_spell;
     u32 honor_reward;
@@ -243,8 +243,8 @@ SMSG have a header of 4 bytes.
 | 0x26 | 2 / - | [Faction](faction.md) | required_opposite_faction |  | cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
 | 0x28 | 4 / Little | u32 | required_opposite_reputation_value |  | cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0 |
 | 0x2C | 4 / Little | u32 | next_quest_in_chain |  |  |
-| 0x30 | 4 / Little | u32 | money_reward |  |  |
-| 0x34 | 4 / Little | u32 | max_level_money_reward |  | cmangos: used in XP calculation at client |
+| 0x30 | 4 / Little | Gold | money_reward |  |  |
+| 0x34 | 4 / Little | Gold | max_level_money_reward |  | cmangos: used in XP calculation at client |
 | 0x38 | 4 / Little | u32 | reward_spell |  | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
 | 0x3C | 4 / Little | u32 | casted_reward_spell |  | mangosone: casted spell |
 | 0x40 | 4 / Little | u32 | honor_reward |  |  |

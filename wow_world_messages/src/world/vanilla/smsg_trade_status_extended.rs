@@ -1,3 +1,4 @@
+use crate::vanilla::Gold;
 use crate::vanilla::TradeSlot;
 use std::io::{Write, Read};
 
@@ -8,7 +9,7 @@ use std::io::{Write, Read};
 ///     Bool self_player;
 ///     u32 trade_slot_count1;
 ///     u32 trade_slot_count2;
-///     u32 money_in_trade;
+///     Gold money_in_trade;
 ///     u32 spell_on_lowest_slot;
 ///     TradeSlot[7] trade_slots;
 /// }
@@ -25,7 +26,7 @@ pub struct SMSG_TRADE_STATUS_EXTENDED {
     /// cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases
     ///
     pub trade_slot_count2: u32,
-    pub money_in_trade: u32,
+    pub money_in_trade: Gold,
     pub spell_on_lowest_slot: u32,
     /// vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.
     ///
@@ -49,8 +50,8 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         // trade_slot_count2: u32
         w.write_all(&self.trade_slot_count2.to_le_bytes())?;
 
-        // money_in_trade: u32
-        w.write_all(&self.money_in_trade.to_le_bytes())?;
+        // money_in_trade: Gold
+        w.write_all(u32::from(self.money_in_trade.as_int()).to_le_bytes().as_slice())?;
 
         // spell_on_lowest_slot: u32
         w.write_all(&self.spell_on_lowest_slot.to_le_bytes())?;
@@ -75,9 +76,8 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         // trade_slot_count2: u32
         let trade_slot_count2 = crate::util::read_u32_le(r)?;
 
-        // money_in_trade: u32
-        let money_in_trade = crate::util::read_u32_le(r)?;
-
+        // money_in_trade: Gold
+        let money_in_trade = Gold::new(crate::util::read_u32_le(r)?);
         // spell_on_lowest_slot: u32
         let spell_on_lowest_slot = crate::util::read_u32_le(r)?;
 

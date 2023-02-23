@@ -1,3 +1,4 @@
+use crate::tbc::Gold;
 use crate::tbc::BankTab;
 use std::io::{Write, Read};
 
@@ -7,7 +8,7 @@ use std::io::{Write, Read};
 /// smsg MSG_GUILD_PERMISSIONS_Server = 0x03FC {
 ///     u32 id;
 ///     u32 rights;
-///     u32 gold_limit_per_day;
+///     Gold gold_limit_per_day;
 ///     u8 purchased_bank_tabs;
 ///     BankTab[6] bank_tabs;
 /// }
@@ -15,7 +16,7 @@ use std::io::{Write, Read};
 pub struct MSG_GUILD_PERMISSIONS_Server {
     pub id: u32,
     pub rights: u32,
-    pub gold_limit_per_day: u32,
+    pub gold_limit_per_day: Gold,
     pub purchased_bank_tabs: u8,
     pub bank_tabs: [BankTab; 6],
 }
@@ -34,8 +35,8 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
         // rights: u32
         w.write_all(&self.rights.to_le_bytes())?;
 
-        // gold_limit_per_day: u32
-        w.write_all(&self.gold_limit_per_day.to_le_bytes())?;
+        // gold_limit_per_day: Gold
+        w.write_all(u32::from(self.gold_limit_per_day.as_int()).to_le_bytes().as_slice())?;
 
         // purchased_bank_tabs: u8
         w.write_all(&self.purchased_bank_tabs.to_le_bytes())?;
@@ -58,9 +59,8 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
         // rights: u32
         let rights = crate::util::read_u32_le(r)?;
 
-        // gold_limit_per_day: u32
-        let gold_limit_per_day = crate::util::read_u32_le(r)?;
-
+        // gold_limit_per_day: Gold
+        let gold_limit_per_day = Gold::new(crate::util::read_u32_le(r)?);
         // purchased_bank_tabs: u8
         let purchased_bank_tabs = crate::util::read_u8_le(r)?;
 

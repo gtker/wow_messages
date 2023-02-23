@@ -136,6 +136,9 @@ fn print_container_example_definition(
         Type::Bool(i) => {
             s.bytes(bytes.take(i.size() as usize).into_iter());
         }
+        Type::Gold => {
+            s.bytes(bytes.take(core::mem::size_of::<u32>()).into_iter());
+        }
         Type::Guid => {
             s.bytes(bytes.take(core::mem::size_of::<u64>()).into_iter());
         }
@@ -568,7 +571,8 @@ fn print_container_field(
                 Type::MonsterMoveSpline => {
                     "[MonsterMoveSpline](../spec/monster-move-spline.md)".to_string()
                 }
-                Type::SizedCString
+                Type::Gold
+                | Type::SizedCString
                 | Type::Bool(_)
                 | Type::DateTime
                 | Type::CString
@@ -607,6 +611,7 @@ fn print_container_field(
                 *offset = match d.ty() {
                     Type::Integer(t) => Some(*off + t.size() as usize),
                     Type::Guid => Some(*off + 8),
+                    Type::Gold => Some(*off + 4),
                     Type::FloatingPoint(f) => Some(*off + f.size() as usize),
                     Type::DateTime => Some(*off + DATETIME_SIZE as usize),
                     Type::Bool(i) => Some(*off + i.size() as usize),

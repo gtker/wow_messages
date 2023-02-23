@@ -41,6 +41,7 @@ pub(crate) enum ParsedType {
     AchievementInProgressArray,
     EnchantMask,
     InspectTalentGearMask,
+    Gold,
 }
 
 impl ParsedType {
@@ -64,6 +65,7 @@ impl ParsedType {
             ParsedType::MonsterMoveSplines => "MonsterMoveSplines".to_string(),
             ParsedType::EnchantMask => "EnchantMask".to_string(),
             ParsedType::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
+            ParsedType::Gold => "Gold".to_string(),
         }
     }
 
@@ -188,6 +190,7 @@ impl ParsedType {
                 INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
                 INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
             ),
+            ParsedType::Gold => sizes.inc_both(core::mem::size_of::<u32>()),
         }
 
         sizes
@@ -226,9 +229,10 @@ impl ParsedType {
             "Bool64" => Self::Bool(IntegerType::U64(Endianness::Little)),
             "Item16" | "Spell16" | "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
-            "Spell" | "Milliseconds" | "Seconds" | "Copper" | "Item" => {
+            "Spell" | "Milliseconds" | "Seconds" | "Item" => {
                 Self::Integer(IntegerType::U32(Endianness::Little))
             }
+            "Gold" => Self::Gold,
             "u64" => Self::Integer(IntegerType::U64(Endianness::Little)),
             "Guid" => Self::Guid,
             "PackedGuid" => Self::PackedGuid,
@@ -290,7 +294,8 @@ impl ParsedType {
                         ParsedType::CString => {
                             Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
                         }
-                        ParsedType::EnchantMask
+                        ParsedType::Gold
+                        | ParsedType::EnchantMask
                         | ParsedType::InspectTalentGearMask
                         | ParsedType::AchievementDoneArray
                         | ParsedType::AchievementInProgressArray

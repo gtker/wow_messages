@@ -10,7 +10,7 @@ smsg SMSG_ITEM_REFUND_RESULT = 0x04B5 {
     Guid item;
     ItemRefundResult result;
     if (result == SUCCESS) {
-        u32 money_cost;
+        Gold cost;
         u32 honor_point_cost;
         u32 arena_point_cost;
         ItemRefundExtra[5] extra_items;
@@ -39,7 +39,7 @@ If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0D | 4 / Little | u32 | money_cost |  |  |
+| 0x0D | 4 / Little | Gold | cost |  |  |
 | 0x11 | 4 / Little | u32 | honor_point_cost |  |  |
 | 0x15 | 4 / Little | u32 | arena_point_cost |  |  |
 | 0x19 | ? / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |  |

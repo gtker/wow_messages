@@ -43,7 +43,7 @@ cmsg CMSG_GUILD_RANK = 0x0231 {
     u32 rank_id;
     u32 rights;
     CString rank_name;
-    u32 money_per_day;
+    Gold money_per_day;
     GuildBankRights[6] bank_tab_rights;
 }
 ```
@@ -65,6 +65,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 4 / Little | u32 | rank_id |  |  |
 | 0x0A | 4 / Little | u32 | rights |  |  |
 | 0x0E | - / - | CString | rank_name |  |  |
-| - | 4 / Little | u32 | money_per_day |  |  |
+| - | 4 / Little | Gold | money_per_day |  |  |
 | - | ? / - | [GuildBankRights](guildbankrights.md)[6] | bank_tab_rights |  |  |
 

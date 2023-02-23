@@ -11,7 +11,7 @@ struct ListInventoryItem {
     u32 item;
     u32 item_display_id;
     u32 max_items;
-    u32 price;
+    Gold price;
     u32 max_durability;
     u32 durability;
 }
@@ -24,7 +24,7 @@ struct ListInventoryItem {
 | 0x04 | 4 / Little | u32 | item |  |  |
 | 0x08 | 4 / Little | u32 | item_display_id |  |  |
 | 0x0C | 4 / Little | u32 | max_items |  | cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case |
-| 0x10 | 4 / Little | u32 | price |  |  |
+| 0x10 | 4 / Little | Gold | price |  |  |
 | 0x14 | 4 / Little | u32 | max_durability |  |  |
 | 0x18 | 4 / Little | u32 | durability |  |  |
 
@@ -41,7 +41,7 @@ struct ListInventoryItem {
     u32 item;
     u32 item_display_id;
     u32 max_items;
-    u32 price;
+    Gold price;
     u32 max_durability;
     u32 durability;
     u32 extended_cost;
@@ -55,7 +55,7 @@ struct ListInventoryItem {
 | 0x04 | 4 / Little | u32 | item |  |  |
 | 0x08 | 4 / Little | u32 | item_display_id |  |  |
 | 0x0C | 4 / Little | u32 | max_items |  | cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case |
-| 0x10 | 4 / Little | u32 | price |  |  |
+| 0x10 | 4 / Little | Gold | price |  |  |
 | 0x14 | 4 / Little | u32 | max_durability |  |  |
 | 0x18 | 4 / Little | u32 | durability |  |  |
 | 0x1C | 4 / Little | u32 | extended_cost |  |  |

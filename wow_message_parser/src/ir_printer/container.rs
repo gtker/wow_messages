@@ -271,6 +271,8 @@ pub(crate) enum IrType {
     EnchantMask,
     #[serde(rename = "inspect_talent_gear_mask")]
     InspectTalentGearMask,
+    #[serde(rename = "gold")]
+    Gold,
 }
 
 impl From<&Type> for IrType {
@@ -304,6 +306,7 @@ impl From<&Type> for IrType {
             Type::MonsterMoveSpline => Self::MonsterMoveSpline,
             Type::EnchantMask => Self::EnchantMask,
             Type::InspectTalentGearMask => Self::InspectTalentGearMask,
+            Type::Gold => Self::Gold,
         }
     }
 }

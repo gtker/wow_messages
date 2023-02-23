@@ -10,7 +10,7 @@ smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
     u32 quest_id;
     u32 unknown;
     u32 experience_reward;
-    u32 money_reward;
+    Gold money_reward;
     u32 amount_of_item_rewards;
     QuestItemReward[amount_of_item_rewards] item_rewards;
 }
@@ -33,7 +33,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | quest_id |  |  |
 | 0x08 | 4 / Little | u32 | unknown |  | cmangos/vmangos/mangoszero: set to 0x03 |
 | 0x0C | 4 / Little | u32 | experience_reward |  |  |
-| 0x10 | 4 / Little | u32 | money_reward |  |  |
+| 0x10 | 4 / Little | Gold | money_reward |  |  |
 | 0x14 | 4 / Little | u32 | amount_of_item_rewards |  |  |
 | 0x18 | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
 
@@ -49,7 +49,7 @@ smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
     u32 quest_id;
     u32 unknown;
     u32 experience_reward;
-    u32 money_reward;
+    Gold money_reward;
     u32 honor_reward;
     u32 amount_of_item_rewards;
     QuestItemReward[amount_of_item_rewards] item_rewards;
@@ -73,7 +73,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | quest_id |  |  |
 | 0x08 | 4 / Little | u32 | unknown |  | cmangos/vmangos/mangoszero: set to 0x03 |
 | 0x0C | 4 / Little | u32 | experience_reward |  |  |
-| 0x10 | 4 / Little | u32 | money_reward |  |  |
+| 0x10 | 4 / Little | Gold | money_reward |  |  |
 | 0x14 | 4 / Little | u32 | honor_reward |  |  |
 | 0x18 | 4 / Little | u32 | amount_of_item_rewards |  |  |
 | 0x1C | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
@@ -90,7 +90,7 @@ smsg SMSG_QUESTGIVER_QUEST_COMPLETE = 0x0191 {
     u32 quest_id;
     u32 unknown;
     u32 experience_reward;
-    u32 money_reward;
+    Gold money_reward;
     u32 honor_reward;
     u32 talent_reward;
     u32 arena_point_reward;
@@ -116,7 +116,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | quest_id |  |  |
 | 0x08 | 4 / Little | u32 | unknown |  | cmangos/vmangos/mangoszero: set to 0x03 |
 | 0x0C | 4 / Little | u32 | experience_reward |  |  |
-| 0x10 | 4 / Little | u32 | money_reward |  |  |
+| 0x10 | 4 / Little | Gold | money_reward |  |  |
 | 0x14 | 4 / Little | u32 | honor_reward |  |  |
 | 0x18 | 4 / Little | u32 | talent_reward |  |  |
 | 0x1C | 4 / Little | u32 | arena_point_reward |  |  |

@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::vanilla::Gold;
 use crate::vanilla::QuestItemRequirement;
 use crate::vanilla::QuestCompletable;
 use std::io::{Write, Read};
@@ -16,7 +17,7 @@ use std::io::{Write, Read};
 ///     u32 emote_delay;
 ///     u32 emote;
 ///     Bool32 auto_finish;
-///     u32 required_money;
+///     Gold required_money;
 ///     u32 amount_of_required_items;
 ///     QuestItemRequirement[amount_of_required_items] required_items;
 ///     u32 unknown1;
@@ -33,7 +34,7 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub emote_delay: u32,
     pub emote: u32,
     pub auto_finish: bool,
-    pub required_money: u32,
+    pub required_money: Gold,
     pub required_items: Vec<QuestItemRequirement>,
     /// cmangos/vmangos/mangoszero: All emulators set to 0x02
     ///
@@ -85,8 +86,8 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         // auto_finish: Bool32
         w.write_all(u32::from(self.auto_finish).to_le_bytes().as_slice())?;
 
-        // required_money: u32
-        w.write_all(&self.required_money.to_le_bytes())?;
+        // required_money: Gold
+        w.write_all(u32::from(self.required_money.as_int()).to_le_bytes().as_slice())?;
 
         // amount_of_required_items: u32
         w.write_all(&(self.required_items.len() as u32).to_le_bytes())?;
@@ -142,9 +143,8 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         // auto_finish: Bool32
         let auto_finish = crate::util::read_u32_le(r)? != 0;
-        // required_money: u32
-        let required_money = crate::util::read_u32_le(r)?;
-
+        // required_money: Gold
+        let required_money = Gold::new(crate::util::read_u32_le(r)?);
         // amount_of_required_items: u32
         let amount_of_required_items = crate::util::read_u32_le(r)?;
 
@@ -198,7 +198,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
         + 4 // emote_delay: u32
         + 4 // emote: u32
         + 4 // auto_finish: Bool32
-        + 4 // required_money: u32
+        + 8 // required_money: Gold
         + 4 // amount_of_required_items: u32
         + self.required_items.len() * 12 // required_items: QuestItemRequirement[amount_of_required_items]
         + 4 // unknown1: u32

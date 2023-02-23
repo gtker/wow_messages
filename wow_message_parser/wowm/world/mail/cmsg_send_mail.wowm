@@ -10,7 +10,7 @@ cmsg CMSG_SEND_MAIL = 0x0238 {
         comment = "cmangos: 0x00000000";
     }
     Guid item;
-    u32 money;
+    Gold money;
     u32 cash_on_delivery_amount;
     u32 unknown3 {
         comment = "cmangos: const 0";
@@ -42,7 +42,7 @@ cmsg CMSG_SEND_MAIL = 0x0238 {
     }
     u8 amount_of_items;
     MailItem[amount_of_items] items;
-    u32 money;
+    Gold money;
     u32 cash_on_delivery_amount;
     u32 unknown3 {
         comment = "mangosone: const 0";

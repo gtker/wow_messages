@@ -1,3 +1,4 @@
+use crate::tbc::Gold;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -7,7 +8,7 @@ use std::io::{Write, Read};
 ///     u32 id;
 ///     u8 item_icon;
 ///     Bool coded;
-///     u32 money_required;
+///     Gold money_required;
 ///     CString message;
 ///     CString accept_text;
 /// }
@@ -22,7 +23,7 @@ pub struct GossipItem {
     pub coded: bool,
     /// mangosone: 2.0.3
     ///
-    pub money_required: u32,
+    pub money_required: Gold,
     pub message: String,
     /// mangosone: related to money pop up box, 2.0.3, max 0x800
     ///
@@ -40,8 +41,8 @@ impl GossipItem {
         // coded: Bool
         w.write_all(u8::from(self.coded).to_le_bytes().as_slice())?;
 
-        // money_required: u32
-        w.write_all(&self.money_required.to_le_bytes())?;
+        // money_required: Gold
+        w.write_all(u32::from(self.money_required.as_int()).to_le_bytes().as_slice())?;
 
         // message: CString
         // TODO: Guard against strings that are already null-terminated
@@ -71,9 +72,8 @@ impl GossipItem {
 
         // coded: Bool
         let coded = crate::util::read_u8_le(r)? != 0;
-        // money_required: u32
-        let money_required = crate::util::read_u32_le(r)?;
-
+        // money_required: Gold
+        let money_required = Gold::new(crate::util::read_u32_le(r)?);
         // message: CString
         let message = {
             let message = crate::util::read_c_string_to_vec(r)?;
@@ -103,7 +103,7 @@ impl GossipItem {
         4 // id: u32
         + 1 // item_icon: u8
         + 1 // coded: Bool
-        + 4 // money_required: u32
+        + 8 // money_required: Gold
         + self.message.len() + 1 // message: CString
         + self.accept_text.len() + 1 // accept_text: CString
     }

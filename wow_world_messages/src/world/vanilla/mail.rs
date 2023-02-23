@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::vanilla::Gold;
 use crate::vanilla::MailType;
 use std::io::{Write, Read};
 
@@ -30,7 +31,7 @@ use std::io::{Write, Read};
 ///     u32 item_spell_charges;
 ///     u32 max_durability;
 ///     u32 durability;
-///     u32 money;
+///     Gold money;
 ///     u32 cash_on_delivery_amount;
 ///     u32 checked_timestamp;
 ///     f32 expiration_time;
@@ -56,7 +57,7 @@ pub struct Mail {
     pub item_spell_charges: u32,
     pub max_durability: u32,
     pub durability: u32,
-    pub money: u32,
+    pub money: Gold,
     pub cash_on_delivery_amount: u32,
     /// cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item.
     ///
@@ -147,8 +148,8 @@ impl Mail {
         // durability: u32
         w.write_all(&self.durability.to_le_bytes())?;
 
-        // money: u32
-        w.write_all(&self.money.to_le_bytes())?;
+        // money: Gold
+        w.write_all(u32::from(self.money.as_int()).to_le_bytes().as_slice())?;
 
         // cash_on_delivery_amount: u32
         w.write_all(&self.cash_on_delivery_amount.to_le_bytes())?;
@@ -249,9 +250,8 @@ impl Mail {
         // durability: u32
         let durability = crate::util::read_u32_le(r)?;
 
-        // money: u32
-        let money = crate::util::read_u32_le(r)?;
-
+        // money: Gold
+        let money = Gold::new(crate::util::read_u32_le(r)?);
         // cash_on_delivery_amount: u32
         let cash_on_delivery_amount = crate::util::read_u32_le(r)?;
 
@@ -304,7 +304,7 @@ impl Mail {
         + 4 // item_spell_charges: u32
         + 4 // max_durability: u32
         + 4 // durability: u32
-        + 4 // money: u32
+        + 8 // money: Gold
         + 4 // cash_on_delivery_amount: u32
         + 4 // checked_timestamp: u32
         + 4 // expiration_time: f32

@@ -31,7 +31,7 @@ struct Mail {
     u32 item_spell_charges;
     u32 max_durability;
     u32 durability;
-    u32 money;
+    Gold money;
     u32 cash_on_delivery_amount;
     u32 checked_timestamp;
     f32 expiration_time;
@@ -75,7 +75,7 @@ Else If message_type is equal to `AUCTION`:
 | - | 4 / Little | u32 | item_spell_charges |  |  |
 | - | 4 / Little | u32 | max_durability |  |  |
 | - | 4 / Little | u32 | durability |  |  |
-| - | 4 / Little | u32 | money |  |  |
+| - | 4 / Little | Gold | money |  |  |
 | - | 4 / Little | u32 | cash_on_delivery_amount |  |  |
 | - | 4 / Little | u32 | checked_timestamp |  | cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item. |
 | - | 4 / Little | f32 | expiration_time |  |  |

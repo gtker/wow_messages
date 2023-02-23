@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::vanilla::Gold;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -12,7 +13,7 @@ use std::io::{Write, Read};
 ///     u32 unknown1;
 ///     u32 unknown2;
 ///     Guid item;
-///     u32 money;
+///     Gold money;
 ///     u32 cash_on_delivery_amount;
 ///     u32 unknown3;
 ///     u32 unknown4;
@@ -30,7 +31,7 @@ pub struct CMSG_SEND_MAIL {
     ///
     pub unknown2: u32,
     pub item: Guid,
-    pub money: u32,
+    pub money: Gold,
     pub cash_on_delivery_amount: u32,
     /// cmangos: const 0
     ///
@@ -82,8 +83,8 @@ impl crate::Message for CMSG_SEND_MAIL {
         // item: Guid
         w.write_all(&self.item.guid().to_le_bytes())?;
 
-        // money: u32
-        w.write_all(&self.money.to_le_bytes())?;
+        // money: Gold
+        w.write_all(u32::from(self.money.as_int()).to_le_bytes().as_slice())?;
 
         // cash_on_delivery_amount: u32
         w.write_all(&self.cash_on_delivery_amount.to_le_bytes())?;
@@ -132,9 +133,8 @@ impl crate::Message for CMSG_SEND_MAIL {
         // item: Guid
         let item = Guid::read(r)?;
 
-        // money: u32
-        let money = crate::util::read_u32_le(r)?;
-
+        // money: Gold
+        let money = Gold::new(crate::util::read_u32_le(r)?);
         // cash_on_delivery_amount: u32
         let cash_on_delivery_amount = crate::util::read_u32_le(r)?;
 
@@ -172,7 +172,7 @@ impl CMSG_SEND_MAIL {
         + 4 // unknown1: u32
         + 4 // unknown2: u32
         + 8 // item: Guid
-        + 4 // money: u32
+        + 8 // money: Gold
         + 4 // cash_on_delivery_amount: u32
         + 4 // unknown3: u32
         + 4 // unknown4: u32

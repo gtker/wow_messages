@@ -46,6 +46,7 @@ pub(crate) enum Type {
     AchievementInProgressArray,
     EnchantMask,
     InspectTalentGearMask,
+    Gold,
 }
 
 impl Type {
@@ -70,6 +71,7 @@ impl Type {
             Type::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
             Type::EnchantMask => "EnchantMask".to_string(),
             Type::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
+            Type::Gold => "Gold".to_string(),
         }
     }
 
@@ -78,19 +80,22 @@ impl Type {
             Type::Integer(i) => i.rust_str().to_string(),
             Type::FloatingPoint(i) => i.rust_str().to_string(),
             Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
-            Type::Struct { e, .. } => e.name().to_string(),
             Type::CString | Type::SizedCString | Type::String { .. } => "String".to_string(),
-            Type::Array(a) => a.rust_str(),
             Type::PackedGuid | Type::Guid => "Guid".to_string(),
-            Type::UpdateMask => "UpdateMask".to_string(),
-            Type::AuraMask => "AuraMask".to_string(),
             Type::Bool(_) => "bool".to_string(),
-            Type::DateTime => "DateTime".to_string(),
-            Type::AchievementDoneArray => "AchievementDoneArray".to_string(),
-            Type::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
-            Type::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
-            Type::EnchantMask => "EnchantMask".to_string(),
-            Type::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
+
+            Type::Array(a) => a.rust_str(),
+
+            Type::Struct { .. }
+            | Type::UpdateMask
+            | Type::AuraMask
+            | Type::DateTime
+            | Type::AchievementDoneArray
+            | Type::AchievementInProgressArray
+            | Type::MonsterMoveSpline
+            | Type::EnchantMask
+            | Type::InspectTalentGearMask
+            | Type::Gold => self.str(),
         };
 
         s
@@ -190,6 +195,7 @@ impl Type {
                 INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
                 INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
             ),
+            Type::Gold => sizes.inc_both(core::mem::size_of::<u32>()),
         }
 
         sizes
@@ -199,6 +205,7 @@ impl Type {
         match self {
             Type::Integer(i) => i.size().to_string(),
             Type::Guid => 8.to_string(),
+            Type::Gold => 4.to_string(),
             Type::FloatingPoint(f) => f.size().to_string(),
             Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                 if let Some(upcast) = upcast {
@@ -237,7 +244,7 @@ impl Type {
     pub(crate) fn doc_endian_str(&self) -> String {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
-            Type::DateTime | Type::Guid => "Little".to_string(),
+            Type::Gold | Type::DateTime | Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
             Type::EnchantMask
             | Type::InspectTalentGearMask

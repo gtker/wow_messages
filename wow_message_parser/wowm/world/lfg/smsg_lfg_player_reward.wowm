@@ -5,7 +5,7 @@ smsg SMSG_LFG_PLAYER_REWARD = 0x01FF {
     u32 unknown1 {
         comment = "emus set to 1.";
     }
-    u32 money_reward;
+    Gold money_reward;
     u32 experience_reward;
     u32 unknown2 {
         comment = "emus set to 0.";

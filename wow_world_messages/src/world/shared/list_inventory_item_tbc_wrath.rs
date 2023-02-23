@@ -1,3 +1,4 @@
+use crate::tbc::Gold;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -8,7 +9,7 @@ use std::io::{Write, Read};
 ///     u32 item;
 ///     u32 item_display_id;
 ///     u32 max_items;
-///     u32 price;
+///     Gold price;
 ///     u32 max_durability;
 ///     u32 durability;
 ///     u32 extended_cost;
@@ -21,7 +22,7 @@ pub struct ListInventoryItem {
     /// cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case
     ///
     pub max_items: u32,
-    pub price: u32,
+    pub price: Gold,
     pub max_durability: u32,
     pub durability: u32,
     pub extended_cost: u32,
@@ -41,8 +42,8 @@ impl ListInventoryItem {
         // max_items: u32
         w.write_all(&self.max_items.to_le_bytes())?;
 
-        // price: u32
-        w.write_all(&self.price.to_le_bytes())?;
+        // price: Gold
+        w.write_all(u32::from(self.price.as_int()).to_le_bytes().as_slice())?;
 
         // max_durability: u32
         w.write_all(&self.max_durability.to_le_bytes())?;
@@ -71,9 +72,8 @@ impl ListInventoryItem {
         // max_items: u32
         let max_items = crate::util::read_u32_le(r)?;
 
-        // price: u32
-        let price = crate::util::read_u32_le(r)?;
-
+        // price: Gold
+        let price = Gold::new(crate::util::read_u32_le(r)?);
         // max_durability: u32
         let max_durability = crate::util::read_u32_le(r)?;
 

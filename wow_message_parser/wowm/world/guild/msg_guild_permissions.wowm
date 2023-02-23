@@ -16,7 +16,7 @@ struct BankTab {
 smsg MSG_GUILD_PERMISSIONS_Server = 0x03FC {
     u32 id;
     u32 rights;
-    u32 gold_limit_per_day;
+    Gold gold_limit_per_day;
     u8 purchased_bank_tabs;
     BankTab[6] bank_tabs;
 } {
@@ -26,7 +26,7 @@ smsg MSG_GUILD_PERMISSIONS_Server = 0x03FC {
 smsg MSG_GUILD_PERMISSIONS_Server = 0x03FD {
     u32 id;
     u32 rights;
-    u32 gold_limit_per_day;
+    Gold gold_limit_per_day;
     u8 purchased_bank_tabs;
     BankTab[6] bank_tabs;
 } {

@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::vanilla::Gold;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -7,13 +8,13 @@ use std::io::{Write, Read};
 /// cmsg CMSG_AUCTION_PLACE_BID = 0x025A {
 ///     Guid auctioneer;
 ///     u32 auction_id;
-///     u32 price;
+///     Gold price;
 /// }
 /// ```
 pub struct CMSG_AUCTION_PLACE_BID {
     pub auctioneer: Guid,
     pub auction_id: u32,
-    pub price: u32,
+    pub price: Gold,
 }
 
 impl crate::Message for CMSG_AUCTION_PLACE_BID {
@@ -30,8 +31,8 @@ impl crate::Message for CMSG_AUCTION_PLACE_BID {
         // auction_id: u32
         w.write_all(&self.auction_id.to_le_bytes())?;
 
-        // price: u32
-        w.write_all(&self.price.to_le_bytes())?;
+        // price: Gold
+        w.write_all(u32::from(self.price.as_int()).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -46,9 +47,8 @@ impl crate::Message for CMSG_AUCTION_PLACE_BID {
         // auction_id: u32
         let auction_id = crate::util::read_u32_le(r)?;
 
-        // price: u32
-        let price = crate::util::read_u32_le(r)?;
-
+        // price: Gold
+        let price = Gold::new(crate::util::read_u32_le(r)?);
         Ok(Self {
             auctioneer,
             auction_id,

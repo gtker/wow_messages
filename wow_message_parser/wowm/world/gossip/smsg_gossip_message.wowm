@@ -34,7 +34,7 @@ struct GossipItem {
     Bool coded {
         comment = "vmangos: makes pop up box password";
     }
-    u32 money_required {
+    Gold money_required {
         comment = "mangosone: 2.0.3";
     }
     CString message;

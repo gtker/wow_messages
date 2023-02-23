@@ -1,3 +1,4 @@
+use crate::tbc::Gold;
 use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 use std::io::{Write, Read};
 
@@ -6,13 +7,13 @@ use std::io::{Write, Read};
 /// ```text
 /// struct GuildRights {
 ///     u32 rights;
-///     u32 money_per_day;
+///     Gold money_per_day;
 ///     GuildBankRights[6] bank_tab_rights;
 /// }
 /// ```
 pub struct GuildRights {
     pub rights: u32,
-    pub money_per_day: u32,
+    pub money_per_day: Gold,
     pub bank_tab_rights: [GuildBankRights; 6],
 }
 
@@ -21,8 +22,8 @@ impl GuildRights {
         // rights: u32
         w.write_all(&self.rights.to_le_bytes())?;
 
-        // money_per_day: u32
-        w.write_all(&self.money_per_day.to_le_bytes())?;
+        // money_per_day: Gold
+        w.write_all(u32::from(self.money_per_day.as_int()).to_le_bytes().as_slice())?;
 
         // bank_tab_rights: GuildBankRights[6]
         for i in self.bank_tab_rights.iter() {
@@ -38,9 +39,8 @@ impl GuildRights {
         // rights: u32
         let rights = crate::util::read_u32_le(r)?;
 
-        // money_per_day: u32
-        let money_per_day = crate::util::read_u32_le(r)?;
-
+        // money_per_day: Gold
+        let money_per_day = Gold::new(crate::util::read_u32_le(r)?);
         // bank_tab_rights: GuildBankRights[6]
         let bank_tab_rights = {
             let mut bank_tab_rights = [GuildBankRights::default(); 6];

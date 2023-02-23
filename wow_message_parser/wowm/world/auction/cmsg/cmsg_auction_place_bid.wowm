@@ -3,6 +3,6 @@
 cmsg CMSG_AUCTION_PLACE_BID = 0x025A {
     Guid auctioneer;
     u32 auction_id;
-    u32 price;
+    Gold price;
 }
 

@@ -5,7 +5,7 @@ struct ListInventoryItem {
     u32 max_items {
         comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";
     }
-    u32 price;
+    Gold price;
     u32 max_durability;
     u32 durability;
 } {
@@ -19,7 +19,7 @@ struct ListInventoryItem {
     u32 max_items {
         comment = "cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case";
     }
-    u32 price;
+    Gold price;
     u32 max_durability;
     u32 durability;
     u32 extended_cost;

@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::wrath::Gold;
 use crate::wrath::QuestDetailsEmote;
 use crate::wrath::QuestGiverReward;
 use std::io::{Write, Read};
@@ -21,7 +22,7 @@ use std::io::{Write, Read};
 ///     QuestGiverReward[amount_of_choice_item_rewards] choice_item_rewards;
 ///     u32 amount_of_item_rewards;
 ///     QuestGiverReward[amount_of_item_rewards] item_rewards;
-///     u32 money_reward;
+///     Gold money_reward;
 ///     u32 experience_reward;
 ///     u32 honor_reward;
 ///     f32 honor_reward_multiplier;
@@ -55,7 +56,7 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub is_finished: u8,
     pub choice_item_rewards: Vec<QuestGiverReward>,
     pub item_rewards: Vec<QuestGiverReward>,
-    pub money_reward: u32,
+    pub money_reward: Gold,
     /// arcemu: New 3.3 - this is the XP you'll see on the quest reward panel too, but I think it is fine not to show it, because it can change if the player levels up before completing the quest.
     ///
     pub experience_reward: u32,
@@ -152,8 +153,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
             i.write_into_vec(w)?;
         }
 
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
+        // money_reward: Gold
+        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // experience_reward: u32
         w.write_all(&self.experience_reward.to_le_bytes())?;
@@ -273,9 +274,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
             }
             item_rewards
         };
-        // money_reward: u32
-        let money_reward = crate::util::read_u32_le(r)?;
-
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(r)?);
         // experience_reward: u32
         let experience_reward = crate::util::read_u32_le(r)?;
 
@@ -390,7 +390,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + self.choice_item_rewards.len() * 12 // choice_item_rewards: QuestGiverReward[amount_of_choice_item_rewards]
         + 4 // amount_of_item_rewards: u32
         + self.item_rewards.len() * 12 // item_rewards: QuestGiverReward[amount_of_item_rewards]
-        + 4 // money_reward: u32
+        + 8 // money_reward: Gold
         + 4 // experience_reward: u32
         + 4 // honor_reward: u32
         + 4 // honor_reward_multiplier: f32

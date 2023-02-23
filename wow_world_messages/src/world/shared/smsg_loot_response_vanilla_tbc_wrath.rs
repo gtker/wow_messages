@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::vanilla::Gold;
 use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
 use wow_world_base::shared::loot_method_vanilla_tbc_wrath::LootMethod;
 use wow_world_base::shared::loot_method_error_vanilla_tbc_wrath::LootMethodError;
@@ -13,7 +14,7 @@ use std::io::{Write, Read};
 ///     if (loot_method == ERROR) {
 ///         LootMethodError loot_error;
 ///     }
-///     u32 gold;
+///     Gold gold;
 ///     u8 amount_of_items;
 ///     LootItem[amount_of_items] items;
 /// }
@@ -21,7 +22,7 @@ use std::io::{Write, Read};
 pub struct SMSG_LOOT_RESPONSE {
     pub guid: Guid,
     pub loot_method: SMSG_LOOT_RESPONSE_LootMethod,
-    pub gold: u32,
+    pub gold: Gold,
     pub items: Vec<LootItem>,
 }
 
@@ -58,8 +59,8 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
             SMSG_LOOT_RESPONSE_LootMethod::Insignia => {}
         }
 
-        // gold: u32
-        w.write_all(&self.gold.to_le_bytes())?;
+        // gold: Gold
+        w.write_all(u32::from(self.gold.as_int()).to_le_bytes().as_slice())?;
 
         // amount_of_items: u8
         w.write_all(&(self.items.len() as u8).to_le_bytes())?;
@@ -102,9 +103,8 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
             LootMethod::Insignia => SMSG_LOOT_RESPONSE_LootMethod::Insignia,
         };
 
-        // gold: u32
-        let gold = crate::util::read_u32_le(r)?;
-
+        // gold: Gold
+        let gold = Gold::new(crate::util::read_u32_le(r)?);
         // amount_of_items: u8
         let amount_of_items = crate::util::read_u8_le(r)?;
 
@@ -138,7 +138,7 @@ impl SMSG_LOOT_RESPONSE {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + self.loot_method.size() // loot_method: SMSG_LOOT_RESPONSE_LootMethod
-        + 4 // gold: u32
+        + 8 // gold: Gold
         + 1 // amount_of_items: u8
         + self.items.len() * 6 // items: LootItem[amount_of_items]
     }

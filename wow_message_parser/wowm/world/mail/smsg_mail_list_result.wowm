@@ -44,7 +44,7 @@ struct Mail {
     u32 item_spell_charges;
     u32 max_durability;
     u32 durability;
-    u32 money;
+    Gold money;
     u32 cash_on_delivery_amount;
     u32 checked_timestamp {
         comment = "cmangos/vmangos/mangoszero: All have a comment with 'flags' but send the timestamp from the item.";

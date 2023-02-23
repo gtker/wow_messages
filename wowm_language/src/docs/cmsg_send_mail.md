@@ -14,7 +14,7 @@ cmsg CMSG_SEND_MAIL = 0x0238 {
     u32 unknown1;
     u32 unknown2;
     Guid item;
-    u32 money;
+    Gold money;
     u32 cash_on_delivery_amount;
     u32 unknown3;
     u32 unknown4;
@@ -42,7 +42,7 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | unknown1 |  | cmangos: stationery? |
 | - | 4 / Little | u32 | unknown2 |  | cmangos: 0x00000000 |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
-| - | 4 / Little | u32 | money |  |  |
+| - | 4 / Little | Gold | money |  |  |
 | - | 4 / Little | u32 | cash_on_delivery_amount |  |  |
 | - | 4 / Little | u32 | unknown3 |  | cmangos: const 0 |
 | - | 4 / Little | u32 | unknown4 |  | cmangos: const 0 |
@@ -64,7 +64,7 @@ cmsg CMSG_SEND_MAIL = 0x0238 {
     u32 unknown2;
     u8 amount_of_items;
     MailItem[amount_of_items] items;
-    u32 money;
+    Gold money;
     u32 cash_on_delivery_amount;
     u32 unknown3;
     u32 unknown4;
@@ -93,7 +93,7 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | unknown2 |  | cmangos: 0x00000000 |
 | - | 1 / - | u8 | amount_of_items |  |  |
 | - | ? / - | [MailItem](mailitem.md)[amount_of_items] | items |  |  |
-| - | 4 / Little | u32 | money |  |  |
+| - | 4 / Little | Gold | money |  |  |
 | - | 4 / Little | u32 | cash_on_delivery_amount |  |  |
 | - | 4 / Little | u32 | unknown3 |  | mangosone: const 0 |
 | - | 4 / Little | u32 | unknown4 |  | mangosone: const 0 |

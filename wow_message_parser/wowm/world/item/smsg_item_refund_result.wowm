@@ -9,7 +9,7 @@ smsg SMSG_ITEM_REFUND_RESULT = 0x04B5 {
     Guid item;
     ItemRefundResult result;
     if (result == SUCCESS) {
-        u32 money_cost;
+        Gold cost;
         u32 honor_point_cost;
         u32 arena_point_cost;
         ItemRefundExtra[5] extra_items;

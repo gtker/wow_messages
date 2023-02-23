@@ -1,3 +1,4 @@
+use crate::wrath::Gold;
 use crate::wrath::QuestItemReward;
 use std::io::{Write, Read};
 
@@ -8,7 +9,7 @@ use std::io::{Write, Read};
 ///     u32 quest_id;
 ///     u32 unknown;
 ///     u32 experience_reward;
-///     u32 money_reward;
+///     Gold money_reward;
 ///     u32 honor_reward;
 ///     u32 talent_reward;
 ///     u32 arena_point_reward;
@@ -22,7 +23,7 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     ///
     pub unknown: u32,
     pub experience_reward: u32,
-    pub money_reward: u32,
+    pub money_reward: Gold,
     pub honor_reward: u32,
     pub talent_reward: u32,
     pub arena_point_reward: u32,
@@ -47,8 +48,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         // experience_reward: u32
         w.write_all(&self.experience_reward.to_le_bytes())?;
 
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
+        // money_reward: Gold
+        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // honor_reward: u32
         w.write_all(&self.honor_reward.to_le_bytes())?;
@@ -84,9 +85,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         // experience_reward: u32
         let experience_reward = crate::util::read_u32_le(r)?;
 
-        // money_reward: u32
-        let money_reward = crate::util::read_u32_le(r)?;
-
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(r)?);
         // honor_reward: u32
         let honor_reward = crate::util::read_u32_le(r)?;
 
@@ -128,7 +128,7 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
         4 // quest_id: u32
         + 4 // unknown: u32
         + 4 // experience_reward: u32
-        + 4 // money_reward: u32
+        + 8 // money_reward: Gold
         + 4 // honor_reward: u32
         + 4 // talent_reward: u32
         + 4 // arena_point_reward: u32

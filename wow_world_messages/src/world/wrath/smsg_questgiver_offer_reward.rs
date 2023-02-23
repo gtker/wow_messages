@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::wrath::Gold;
 use crate::wrath::NpcTextUpdateEmote;
 use crate::wrath::QuestItemRequirement;
 use std::io::{Write, Read};
@@ -20,7 +21,7 @@ use std::io::{Write, Read};
 ///     QuestItemRequirement[amount_of_choice_item_rewards] choice_item_rewards;
 ///     u32 amount_of_item_rewards;
 ///     QuestItemRequirement[amount_of_item_rewards] item_rewards;
-///     u32 money_reward;
+///     Gold money_reward;
 ///     u32 experience_reward;
 ///     u32 honor_reward;
 ///     f32 honor_reward_multiplier;
@@ -47,7 +48,7 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub emotes: Vec<NpcTextUpdateEmote>,
     pub choice_item_rewards: Vec<QuestItemRequirement>,
     pub item_rewards: Vec<QuestItemRequirement>,
-    pub money_reward: u32,
+    pub money_reward: Gold,
     pub experience_reward: u32,
     pub honor_reward: u32,
     pub honor_reward_multiplier: f32,
@@ -134,8 +135,8 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
             i.write_into_vec(w)?;
         }
 
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
+        // money_reward: Gold
+        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // experience_reward: u32
         w.write_all(&self.experience_reward.to_le_bytes())?;
@@ -249,9 +250,8 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
             }
             item_rewards
         };
-        // money_reward: u32
-        let money_reward = crate::util::read_u32_le(r)?;
-
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(r)?);
         // experience_reward: u32
         let experience_reward = crate::util::read_u32_le(r)?;
 
@@ -355,7 +355,7 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         + self.choice_item_rewards.len() * 12 // choice_item_rewards: QuestItemRequirement[amount_of_choice_item_rewards]
         + 4 // amount_of_item_rewards: u32
         + self.item_rewards.len() * 12 // item_rewards: QuestItemRequirement[amount_of_item_rewards]
-        + 4 // money_reward: u32
+        + 8 // money_reward: Gold
         + 4 // experience_reward: u32
         + 4 // honor_reward: u32
         + 4 // honor_reward_multiplier: f32

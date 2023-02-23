@@ -228,6 +228,14 @@ pub(crate) fn print_write_definition(
                 ty = i.rust_str(),
             ));
         }
+        Type::Gold => {
+            s.wln(format!(
+                "w.write_all(u32::from({variable_prefix}{variable_name}.as_int()).to_le_bytes().as_slice()){postfix}?;",
+                variable_prefix = variable_prefix,
+                variable_name = d.name(),
+                postfix = postfix,
+            ));
+        }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
                 "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes()){postfix}?;",

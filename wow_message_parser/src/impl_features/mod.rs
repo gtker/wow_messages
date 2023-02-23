@@ -205,7 +205,7 @@ fn features_for_struct_member(f: &mut ImplFeatures, m: &StructMember) {
 
 fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
     match d.ty() {
-        Type::DateTime | Type::Bool(_) | Type::Integer(_) | Type::FloatingPoint(_) => {
+        Type::Gold | Type::DateTime | Type::Bool(_) | Type::Integer(_) | Type::FloatingPoint(_) => {
             f.add(Feature::SimpleBuiltInTypes);
 
             if let Some(v) = d.value() {

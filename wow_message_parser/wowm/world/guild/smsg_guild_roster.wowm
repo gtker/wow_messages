@@ -76,7 +76,7 @@ struct GuildMember {
 
 struct GuildRights {
     u32 rights;
-    u32 money_per_day;
+    Gold money_per_day;
     GuildBankRights[6] bank_tab_rights;
 } {
     versions = "2.4.3 3";

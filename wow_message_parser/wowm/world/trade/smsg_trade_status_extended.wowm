@@ -33,7 +33,7 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
         comment = "cmangos/vmangos/mangoszero: sets to 7";
         comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
     }
-    u32 money_in_trade;
+    Gold money_in_trade;
     Spell spell_on_lowest_slot;
     TradeSlot[7] trade_slots {
         comment = "vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.";
@@ -81,7 +81,7 @@ smsg SMSG_TRADE_STATUS_EXTENDED = 0x0121 {
         comment = "cmangos/vmangos/mangoszero: sets to 7";
         comment = "cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases";
     }
-    u32 money_in_trade;
+    Gold money_in_trade;
     Spell spell_on_lowest_slot;
     TradeSlot[7] trade_slots {
         comment = "vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.";

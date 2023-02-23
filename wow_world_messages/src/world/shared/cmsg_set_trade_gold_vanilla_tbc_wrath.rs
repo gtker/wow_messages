@@ -1,14 +1,15 @@
+use crate::vanilla::Gold;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/cmsg_set_trade_gold.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/cmsg_set_trade_gold.wowm#L3):
 /// ```text
 /// cmsg CMSG_SET_TRADE_GOLD = 0x011F {
-///     u32 gold;
+///     Gold gold;
 /// }
 /// ```
 pub struct CMSG_SET_TRADE_GOLD {
-    pub gold: u32,
+    pub gold: Gold,
 }
 
 impl crate::Message for CMSG_SET_TRADE_GOLD {
@@ -19,8 +20,8 @@ impl crate::Message for CMSG_SET_TRADE_GOLD {
     }
 
     fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        // gold: u32
-        w.write_all(&self.gold.to_le_bytes())?;
+        // gold: Gold
+        w.write_all(u32::from(self.gold.as_int()).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -29,9 +30,8 @@ impl crate::Message for CMSG_SET_TRADE_GOLD {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x011F, size: body_size as u32 });
         }
 
-        // gold: u32
-        let gold = crate::util::read_u32_le(r)?;
-
+        // gold: Gold
+        let gold = Gold::new(crate::util::read_u32_le(r)?);
         Ok(Self {
             gold,
         })

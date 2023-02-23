@@ -1,3 +1,4 @@
+use crate::tbc::Gold;
 use crate::tbc::QuestItemReward;
 use crate::tbc::QuestObjective;
 use crate::tbc::Vector2d;
@@ -19,8 +20,8 @@ use std::io::{Write, Read};
 ///     Faction required_opposite_faction;
 ///     u32 required_opposite_reputation_value;
 ///     u32 next_quest_in_chain;
-///     u32 money_reward;
-///     u32 max_level_money_reward;
+///     Gold money_reward;
+///     Gold max_level_money_reward;
 ///     u32 reward_spell;
 ///     u32 casted_reward_spell;
 ///     u32 honor_reward;
@@ -62,10 +63,10 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     ///
     pub required_opposite_reputation_value: u32,
     pub next_quest_in_chain: u32,
-    pub money_reward: u32,
+    pub money_reward: Gold,
     /// cmangos: used in XP calculation at client
     ///
-    pub max_level_money_reward: u32,
+    pub max_level_money_reward: Gold,
     /// cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0)
     ///
     pub reward_spell: u32,
@@ -133,11 +134,11 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // next_quest_in_chain: u32
         w.write_all(&self.next_quest_in_chain.to_le_bytes())?;
 
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
+        // money_reward: Gold
+        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
-        // max_level_money_reward: u32
-        w.write_all(&self.max_level_money_reward.to_le_bytes())?;
+        // max_level_money_reward: Gold
+        w.write_all(u32::from(self.max_level_money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // reward_spell: u32
         w.write_all(&self.reward_spell.to_le_bytes())?;
@@ -256,12 +257,10 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // next_quest_in_chain: u32
         let next_quest_in_chain = crate::util::read_u32_le(r)?;
 
-        // money_reward: u32
-        let money_reward = crate::util::read_u32_le(r)?;
-
-        // max_level_money_reward: u32
-        let max_level_money_reward = crate::util::read_u32_le(r)?;
-
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(r)?);
+        // max_level_money_reward: Gold
+        let max_level_money_reward = Gold::new(crate::util::read_u32_le(r)?);
         // reward_spell: u32
         let reward_spell = crate::util::read_u32_le(r)?;
 
@@ -402,8 +401,8 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + 2 // required_opposite_faction: Faction
         + 4 // required_opposite_reputation_value: u32
         + 4 // next_quest_in_chain: u32
-        + 4 // money_reward: u32
-        + 4 // max_level_money_reward: u32
+        + 8 // money_reward: Gold
+        + 8 // max_level_money_reward: Gold
         + 4 // reward_spell: u32
         + 4 // casted_reward_spell: u32
         + 4 // honor_reward: u32

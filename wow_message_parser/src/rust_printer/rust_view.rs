@@ -403,6 +403,7 @@ pub(crate) enum RustType {
     AchievementInProgressArray,
     EnchantMask,
     InspectTalentGearMask,
+    Gold,
 }
 
 impl RustType {
@@ -426,6 +427,7 @@ impl RustType {
             RustType::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
             RustType::EnchantMask => "EnchantMask".to_string(),
             RustType::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
+            RustType::Gold => "Gold".to_string(),
         }
     }
 
@@ -453,6 +455,7 @@ impl Display for RustType {
             RustType::MonsterMoveSpline => f.write_str("MonsterMoveSpline"),
             RustType::EnchantMask => f.write_str("EnchantMask"),
             RustType::InspectTalentGearMask => f.write_str("InspectTalentGearMask"),
+            RustType::Gold => f.write_str("Gold"),
         }
     }
 }
@@ -1266,6 +1269,7 @@ pub(crate) fn create_struct_member(
                 Type::MonsterMoveSpline => RustType::MonsterMoveSpline,
                 Type::EnchantMask => RustType::EnchantMask,
                 Type::InspectTalentGearMask => RustType::InspectTalentGearMask,
+                Type::Gold => RustType::Gold,
             };
 
             let name = d.name().to_string();

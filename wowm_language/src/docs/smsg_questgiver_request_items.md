@@ -18,7 +18,7 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     u32 emote_delay;
     u32 emote;
     Bool32 auto_finish;
-    u32 required_money;
+    Gold required_money;
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
     u32 unknown1;
@@ -49,7 +49,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | emote_delay |  |  |
 | - | 4 / Little | u32 | emote |  |  |
 | - | 4 / Little | Bool32 | auto_finish |  |  |
-| - | 4 / Little | u32 | required_money |  |  |
+| - | 4 / Little | Gold | required_money |  |  |
 | - | 4 / Little | u32 | amount_of_required_items |  |  |
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |  |
 | - | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: All emulators set to 0x02 |
@@ -78,7 +78,7 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     u32 emote;
     Bool32 auto_finish;
     u32 suggested_players;
-    u32 required_money;
+    Gold required_money;
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
     QuestCompletable completable;
@@ -110,7 +110,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | emote |  |  |
 | - | 4 / Little | Bool32 | auto_finish |  |  |
 | - | 4 / Little | u32 | suggested_players |  |  |
-| - | 4 / Little | u32 | required_money |  |  |
+| - | 4 / Little | Gold | required_money |  |  |
 | - | 4 / Little | u32 | amount_of_required_items |  |  |
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |  |
 | - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  |  |
@@ -140,7 +140,7 @@ smsg SMSG_QUESTGIVER_REQUEST_ITEMS = 0x018B {
     Bool32 auto_finish;
     u32 flags1;
     u32 suggested_players;
-    u32 required_money;
+    Gold required_money;
     u32 amount_of_required_items;
     QuestItemRequirement[amount_of_required_items] required_items;
     QuestCompletable completable;
@@ -173,7 +173,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | Bool32 | auto_finish |  |  |
 | - | 4 / Little | u32 | flags1 |  | mangostwo: 3.3.3 questFlags |
 | - | 4 / Little | u32 | suggested_players |  |  |
-| - | 4 / Little | u32 | required_money |  |  |
+| - | 4 / Little | Gold | required_money |  |  |
 | - | 4 / Little | u32 | amount_of_required_items |  |  |
 | - | ? / - | [QuestItemRequirement](questitemrequirement.md)[amount_of_required_items] | required_items |  |  |
 | - | 4 / - | [QuestCompletable](questcompletable.md) | completable |  |  |

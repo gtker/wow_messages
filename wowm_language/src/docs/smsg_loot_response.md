@@ -12,7 +12,7 @@ smsg SMSG_LOOT_RESPONSE = 0x0160 {
     if (loot_method == ERROR) {
         LootMethodError loot_error;
     }
-    u32 gold;
+    Gold gold;
     u8 amount_of_items;
     LootItem[amount_of_items] items;
 }
@@ -40,7 +40,7 @@ If loot_method is equal to `ERROR`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x0D | 1 / - | [LootMethodError](lootmethoderror.md) | loot_error |  |  |
-| 0x0E | 4 / Little | u32 | gold |  |  |
+| 0x0E | 4 / Little | Gold | gold |  |  |
 | 0x12 | 1 / - | u8 | amount_of_items |  |  |
 | 0x13 | ? / - | [LootItem](lootitem.md)[amount_of_items] | items |  |  |
 

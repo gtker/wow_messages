@@ -11,7 +11,7 @@ smsg SMSG_LFG_PLAYER_REWARD = 0x01FF {
     u32 dungeon_finished_entry;
     Bool done;
     u32 unknown1;
-    u32 money_reward;
+    Gold money_reward;
     u32 experience_reward;
     u32 unknown2;
     u32 unknown3;
@@ -38,7 +38,7 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / Little | u32 | dungeon_finished_entry |  |  |
 | 0x0C | 1 / - | Bool | done |  |  |
 | 0x0D | 4 / Little | u32 | unknown1 |  | emus set to 1. |
-| 0x11 | 4 / Little | u32 | money_reward |  |  |
+| 0x11 | 4 / Little | Gold | money_reward |  |  |
 | 0x15 | 4 / Little | u32 | experience_reward |  |  |
 | 0x19 | 4 / Little | u32 | unknown2 |  | emus set to 0. |
 | 0x1D | 4 / Little | u32 | unknown3 |  | emus set to 0. |

@@ -7,7 +7,7 @@ struct ItemRefundExtra {
 
 smsg SMSG_ITEM_REFUND_INFO_RESPONSE = 0x04B2 {
     Guid item;
-    u32 money_cost;
+    Gold money_cost;
     u32 honor_point_cost;
     u32 arena_point_cost;
     ItemRefundExtra[5] extra_items;

@@ -1,4 +1,5 @@
 use crate::Guid;
+use crate::vanilla::Gold;
 use crate::vanilla::QuestDetailsEmote;
 use crate::vanilla::QuestItemReward;
 use std::io::{Write, Read};
@@ -17,7 +18,7 @@ use std::io::{Write, Read};
 ///     QuestItemReward[amount_of_choice_item_rewards] choice_item_rewards;
 ///     u32 amount_of_item_rewards;
 ///     QuestItemReward[amount_of_item_rewards] item_rewards;
-///     u32 money_reward;
+///     Gold money_reward;
 ///     u32 reward_spell;
 ///     u32 amount_of_emotes;
 ///     QuestDetailsEmote[amount_of_emotes] emotes;
@@ -32,7 +33,7 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub auto_finish: bool,
     pub choice_item_rewards: Vec<QuestItemReward>,
     pub item_rewards: Vec<QuestItemReward>,
-    pub money_reward: u32,
+    pub money_reward: Gold,
     pub reward_spell: u32,
     pub emotes: Vec<QuestDetailsEmote>,
 }
@@ -92,8 +93,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
             i.write_into_vec(w)?;
         }
 
-        // money_reward: u32
-        w.write_all(&self.money_reward.to_le_bytes())?;
+        // money_reward: Gold
+        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // reward_spell: u32
         w.write_all(&self.reward_spell.to_le_bytes())?;
@@ -162,9 +163,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
             }
             item_rewards
         };
-        // money_reward: u32
-        let money_reward = crate::util::read_u32_le(r)?;
-
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(r)?);
         // reward_spell: u32
         let reward_spell = crate::util::read_u32_le(r)?;
 
@@ -210,7 +210,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + self.choice_item_rewards.len() * 8 // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         + 4 // amount_of_item_rewards: u32
         + self.item_rewards.len() * 8 // item_rewards: QuestItemReward[amount_of_item_rewards]
-        + 4 // money_reward: u32
+        + 8 // money_reward: Gold
         + 4 // reward_spell: u32
         + 4 // amount_of_emotes: u32
         + self.emotes.len() * 8 // emotes: QuestDetailsEmote[amount_of_emotes]
