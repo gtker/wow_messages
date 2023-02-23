@@ -1,3 +1,4 @@
+use crate::tbc::Gold;
 use crate::tbc::ItemDamageType;
 use crate::tbc::ItemSocket;
 use crate::tbc::ItemSpells;
@@ -35,8 +36,8 @@ use std::io::{Write, Read};
 ///         u32 display_id;
 ///         (u32)ItemQuality quality;
 ///         ItemFlag flags;
-///         u32 buy_price;
-///         u32 sell_price;
+///         Gold buy_price;
+///         Gold sell_price;
 ///         (u32)InventoryType inventory_type;
 ///         AllowedClass allowed_class;
 ///         AllowedRace allowed_race;
@@ -153,11 +154,11 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // flags: ItemFlag
             w.write_all(&(v.flags.as_int() as u32).to_le_bytes())?;
 
-            // buy_price: u32
-            w.write_all(&v.buy_price.to_le_bytes())?;
+            // buy_price: Gold
+            w.write_all(u32::from(v.buy_price.as_int()).to_le_bytes().as_slice())?;
 
-            // sell_price: u32
-            w.write_all(&v.sell_price.to_le_bytes())?;
+            // sell_price: Gold
+            w.write_all(u32::from(v.sell_price.as_int()).to_le_bytes().as_slice())?;
 
             // inventory_type: InventoryType
             w.write_all(&(v.inventory_type.as_int() as u32).to_le_bytes())?;
@@ -381,12 +382,10 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // flags: ItemFlag
             let flags = ItemFlag::new(crate::util::read_u32_le(r)?);
 
-            // buy_price: u32
-            let buy_price = crate::util::read_u32_le(r)?;
-
-            // sell_price: u32
-            let sell_price = crate::util::read_u32_le(r)?;
-
+            // buy_price: Gold
+            let buy_price = Gold::new(crate::util::read_u32_le(r)?);
+            // sell_price: Gold
+            let sell_price = Gold::new(crate::util::read_u32_le(r)?);
             // inventory_type: InventoryType
             let inventory_type: InventoryType = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
@@ -656,8 +655,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // display_id: u32
             + 4 // quality: ItemQuality
             + 4 // flags: ItemFlag
-            + 4 // buy_price: u32
-            + 4 // sell_price: u32
+            + 8 // buy_price: Gold
+            + 8 // sell_price: Gold
             + 4 // inventory_type: InventoryType
             + 4 // allowed_class: AllowedClass
             + 4 // allowed_race: AllowedRace
@@ -726,8 +725,8 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub display_id: u32,
     pub quality: ItemQuality,
     pub flags: ItemFlag,
-    pub buy_price: u32,
-    pub sell_price: u32,
+    pub buy_price: Gold,
+    pub sell_price: Gold,
     pub inventory_type: InventoryType,
     pub allowed_class: AllowedClass,
     pub allowed_race: AllowedRace,
@@ -792,8 +791,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // display_id: u32
         + 4 // quality: ItemQuality
         + 4 // flags: ItemFlag
-        + 4 // buy_price: u32
-        + 4 // sell_price: u32
+        + 8 // buy_price: Gold
+        + 8 // sell_price: Gold
         + 4 // inventory_type: InventoryType
         + 4 // allowed_class: AllowedClass
         + 4 // allowed_race: AllowedRace

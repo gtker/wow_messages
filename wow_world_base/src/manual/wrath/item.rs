@@ -7,6 +7,7 @@ use crate::wrath::{
     BagFamily,
     Bonding,
     Faction,
+    Gold,
     InventoryType,
     ItemClassAndSubClass,
     ItemDamageType,
@@ -37,8 +38,8 @@ pub struct Item {
     flags: ItemFlag,
     flags2: ItemFlag2,
     buy_count: i16,
-    buy_price: i32,
-    sell_price: i32,
+    buy_price: Gold,
+    sell_price: Gold,
     inventory_type: InventoryType,
     allowed_class: AllowedClass,
     allowed_race: AllowedRace,
@@ -100,8 +101,8 @@ impl Item {
         flags: ItemFlag,
         flags2: ItemFlag2,
         buy_count: i16,
-        buy_price: i32,
-        sell_price: i32,
+        buy_price: Gold,
+        sell_price: Gold,
         inventory_type: InventoryType,
         allowed_class: AllowedClass,
         allowed_race: AllowedRace,
@@ -249,11 +250,11 @@ impl Item {
         self.buy_count as i32
     }
 
-    pub const fn buy_price(&self) -> i32 {
+    pub const fn buy_price(&self) -> Gold {
         self.buy_price
     }
 
-    pub const fn sell_price(&self) -> i32 {
+    pub const fn sell_price(&self) -> Gold {
         self.sell_price
     }
 

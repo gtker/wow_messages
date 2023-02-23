@@ -11,6 +11,7 @@ pub use wow_world_base::wrath::{
     BagFamily,
     Bonding,
     Faction,
+    Gold,
     InventoryType,
     Item,
     ItemClassAndSubClass,

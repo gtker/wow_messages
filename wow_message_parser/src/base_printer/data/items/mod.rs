@@ -479,6 +479,8 @@ pub enum Value {
     VanillaAuraMod(vanilla_base::AuraMod),
     TbcAuraMod(tbc_base::AuraMod),
     WrathAuraMod(wrath_base::AuraMod),
+
+    Gold(shared_base::gold_vanilla_tbc_wrath::Gold),
 }
 
 impl Eq for Value {}
@@ -536,6 +538,7 @@ impl Value {
             Value::WrathItemFlag(v) => Self::Uint(v.as_int()),
             Value::WrathItemFlag2(v) => Self::Uint(v.as_int()),
             Value::TbcWrathBagFamily(v) => Self::Uint(v.as_int()),
+            Value::Gold(v) => Self::Uint(v.as_int()),
             _ => self.clone(),
         }
     }
@@ -596,6 +599,7 @@ impl Value {
             Value::VanillaItemSet(_) | Value::TbcItemSet(_) | Value::WrathItemSet(_) => "ItemSet",
             Value::VanillaFaction(_) | Value::TbcFaction(_) | Value::WrathFaction(_) => "Faction",
             Value::VanillaAuraMod(_) | Value::TbcAuraMod(_) | Value::WrathAuraMod(_) => "AuraMod",
+            Value::Gold(_) => "Gold",
         }
     }
 
@@ -689,6 +693,7 @@ impl Value {
             Value::TbcItemFlag(v) => v.as_int().to_string(),
             Value::WrathItemFlag(v) => v.as_int().to_string(),
             Value::WrathItemFlag2(v) => v.as_int().to_string(),
+            Value::Gold(v) => v.as_int().to_string(),
             Value::PvpRank(v) => format!("PvpRank::{v:?}"),
             Value::SheatheType(v) => format!("SheatheType::{v:?}"),
             Value::VanillaBagFamily(v) => format!("BagFamily::{v:?}"),
@@ -730,6 +735,7 @@ impl Value {
             | Value::TbcItemFlag(_)
             | Value::WrathItemFlag(_)
             | Value::WrathItemFlag2(_)
+            | Value::Gold(_)
             | Value::TbcWrathBagFamily(_) => Some(format!("{}::new", self.type_name())),
             _ => None,
         }
@@ -840,6 +846,7 @@ impl Value {
             Value::VanillaAuraMod(_) => Value::VanillaAuraMod(Default::default()),
             Value::TbcAuraMod(_) => Value::TbcAuraMod(Default::default()),
             Value::WrathAuraMod(_) => Value::WrathAuraMod(Default::default()),
+            Value::Gold(_) => Value::Gold(Default::default()),
         }
     }
 }

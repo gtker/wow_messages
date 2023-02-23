@@ -17,8 +17,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 display_id;
         (u32)ItemQuality quality;
         ItemFlag flags;
-        u32 buy_price;
-        u32 sell_price;
+        Gold buy_price;
+        Gold sell_price;
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
@@ -95,8 +95,8 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | display_id |  | id from ItemDisplayInfo.dbc |
 | - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
 | - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
-| - | 4 / Little | u32 | buy_price |  |  |
-| - | 4 / Little | u32 | sell_price |  |  |
+| - | 4 / Little | Gold | buy_price |  |  |
+| - | 4 / Little | Gold | sell_price |  |  |
 | - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |  |
 | - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |  |
@@ -162,8 +162,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 display_id;
         (u32)ItemQuality quality;
         ItemFlag flags;
-        u32 buy_price;
-        u32 sell_price;
+        Gold buy_price;
+        Gold sell_price;
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
@@ -248,8 +248,8 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | display_id |  | id from ItemDisplayInfo.dbc |
 | - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
 | - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
-| - | 4 / Little | u32 | buy_price |  |  |
-| - | 4 / Little | u32 | sell_price |  |  |
+| - | 4 / Little | Gold | buy_price |  |  |
+| - | 4 / Little | Gold | sell_price |  |  |
 | - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |  |
 | - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |  |
@@ -323,8 +323,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)ItemQuality quality;
         ItemFlag flags;
         ItemFlag2 flags2;
-        u32 buy_price;
-        u32 sell_price;
+        Gold buy_price;
+        Gold sell_price;
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
@@ -416,8 +416,8 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [ItemQuality](itemquality.md) | quality |  |  |
 | - | 4 / - | [ItemFlag](itemflag.md) | flags |  |  |
 | - | 4 / - | [ItemFlag2](itemflag2.md) | flags2 |  |  |
-| - | 4 / Little | u32 | buy_price |  |  |
-| - | 4 / Little | u32 | sell_price |  |  |
+| - | 4 / Little | Gold | buy_price |  |  |
+| - | 4 / Little | Gold | sell_price |  |  |
 | - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |  |
 | - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |  |

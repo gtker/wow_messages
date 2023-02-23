@@ -195,8 +195,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         }
         (u32)ItemQuality quality;
         ItemFlag flags;
-        u32 buy_price;
-        u32 sell_price;
+        Gold buy_price;
+        Gold sell_price;
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
@@ -374,8 +374,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         }
         (u32)ItemQuality quality;
         ItemFlag flags;
-        u32 buy_price;
-        u32 sell_price;
+        Gold buy_price;
+        Gold sell_price;
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
@@ -587,8 +587,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)ItemQuality quality;
         ItemFlag flags;
         ItemFlag2 flags2;
-        u32 buy_price;
-        u32 sell_price;
+        Gold buy_price;
+        Gold sell_price;
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;

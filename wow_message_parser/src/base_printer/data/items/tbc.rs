@@ -5,7 +5,7 @@ use crate::base_printer::data::{get_fields, items};
 use crate::base_printer::write::items::GenericThing;
 use rusqlite::Connection;
 use wow_world_base::tbc::{
-    AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, InventoryType,
+    AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, Gold, InventoryType,
     ItemClassAndSubClass, ItemFlag, ItemQuality, ItemSet, Language, Map, PageTextMaterial, PvpRank,
     SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
@@ -19,8 +19,8 @@ pub struct TbcItem {
     pub quality: ItemQuality,
     pub flags: ItemFlag,
     pub buy_count: i32,
-    pub buy_price: i32,
-    pub sell_price: i32,
+    pub buy_price: Gold,
+    pub sell_price: Gold,
     pub inventory_type: InventoryType,
     pub allowed_class: AllowedClass,
     pub allowed_race: AllowedRace,
@@ -173,8 +173,8 @@ impl TbcItem {
             Field::new("quality", Value::VanillaTbcItemQuality(self.quality)),
             Field::new("flags", Value::TbcItemFlag(self.flags)),
             Field::new("buy_count", Value::Int(self.buy_count)),
-            Field::new("buy_price", Value::Int(self.buy_price)),
-            Field::new("sell_price", Value::Int(self.sell_price)),
+            Field::new("buy_price", Value::Gold(self.buy_price)),
+            Field::new("sell_price", Value::Gold(self.sell_price)),
             Field::new("inventory_type", Value::InventoryType(self.inventory_type)),
             Field::new(
                 "allowed_class",
@@ -879,8 +879,8 @@ ORDER BY
                 quality: ItemQuality::try_from(row.get::<usize, u8>(6).unwrap()).unwrap(),
                 flags: ItemFlag::new(row.get(7).unwrap()),
                 buy_count: row.get(8).unwrap(),
-                buy_price: row.get(9).unwrap(),
-                sell_price: row.get(10).unwrap(),
+                buy_price: Gold::new(row.get(9).unwrap()),
+                sell_price: Gold::new(row.get(10).unwrap()),
                 inventory_type: InventoryType::try_from(row.get::<usize, u8>(11).unwrap()).unwrap(),
                 allowed_class: AllowedClass::new(items::i32_to_u32(row.get(12).unwrap())),
                 allowed_race: AllowedRace::new(items::i32_to_u32(row.get(13).unwrap())),
