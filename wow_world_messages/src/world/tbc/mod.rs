@@ -1643,6 +1643,8 @@ pub use wow_world_base::tbc::LogoutSpeed;
 
 pub use wow_world_base::tbc::LootMethod;
 
+pub use wow_world_base::tbc::LootMethodError;
+
 pub use wow_world_base::tbc::LootSlotType;
 
 pub use wow_world_base::tbc::MailMessageType;

@@ -1739,6 +1739,8 @@ pub use wow_world_base::wrath::LogoutSpeed;
 
 pub use wow_world_base::wrath::LootMethod;
 
+pub use wow_world_base::wrath::LootMethodError;
+
 pub use wow_world_base::wrath::LootSlotType;
 
 pub use wow_world_base::wrath::MailMessageType;

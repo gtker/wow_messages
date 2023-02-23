@@ -1,6 +1,7 @@
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L1):
 /// ```text
 /// enum LootMethod : u8 {
+///     ERROR = 0;
 ///     CORPSE = 1;
 ///     PICKPOCKETING = 2;
 ///     FISHING = 3;
@@ -14,6 +15,7 @@
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LootMethod {
+    ErrorX,
     Corpse,
     Pickpocketing,
     Fishing,
@@ -35,6 +37,7 @@ pub enum LootMethod {
 impl LootMethod {
     pub const fn as_int(&self) -> u8 {
         match self {
+            Self::ErrorX => 0x0,
             Self::Corpse => 0x1,
             Self::Pickpocketing => 0x2,
             Self::Fishing => 0x3,
@@ -50,13 +53,14 @@ impl LootMethod {
 
 impl Default for LootMethod {
     fn default() -> Self {
-        Self::Corpse
+        Self::ErrorX
     }
 }
 
 impl std::fmt::Display for LootMethod {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Self::ErrorX => f.write_str("ErrorX"),
             Self::Corpse => f.write_str("Corpse"),
             Self::Pickpocketing => f.write_str("Pickpocketing"),
             Self::Fishing => f.write_str("Fishing"),
@@ -73,6 +77,7 @@ impl TryFrom<u8> for LootMethod {
     type Error = crate::errors::EnumError;
     fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
+            0 => Ok(Self::ErrorX),
             1 => Ok(Self::Corpse),
             2 => Ok(Self::Pickpocketing),
             3 => Ok(Self::Fishing),

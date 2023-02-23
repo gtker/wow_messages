@@ -1,14 +1,18 @@
 use crate::Guid;
 use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
 use wow_world_base::shared::loot_method_vanilla_tbc_wrath::LootMethod;
+use wow_world_base::shared::loot_method_error_vanilla_tbc_wrath::LootMethodError;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:50`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L50):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:95`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L95):
 /// ```text
 /// smsg SMSG_LOOT_RESPONSE = 0x0160 {
 ///     Guid guid;
 ///     LootMethod loot_method;
+///     if (loot_method == ERROR) {
+///         LootMethodError loot_error;
+///     }
 ///     u32 gold;
 ///     u8 amount_of_items;
 ///     LootItem[amount_of_items] items;
@@ -16,7 +20,7 @@ use std::io::{Write, Read};
 /// ```
 pub struct SMSG_LOOT_RESPONSE {
     pub guid: Guid,
-    pub loot_method: LootMethod,
+    pub loot_method: SMSG_LOOT_RESPONSE_LootMethod,
     pub gold: u32,
     pub items: Vec<LootItem>,
 }
@@ -36,6 +40,24 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         // loot_method: LootMethod
         w.write_all(&(self.loot_method.as_int() as u8).to_le_bytes())?;
 
+        match &self.loot_method {
+            SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
+                loot_error,
+            } => {
+                // loot_error: LootMethodError
+                w.write_all(&(loot_error.as_int() as u8).to_le_bytes())?;
+
+            }
+            SMSG_LOOT_RESPONSE_LootMethod::Corpse => {}
+            SMSG_LOOT_RESPONSE_LootMethod::Pickpocketing => {}
+            SMSG_LOOT_RESPONSE_LootMethod::Fishing => {}
+            SMSG_LOOT_RESPONSE_LootMethod::Disenchanting => {}
+            SMSG_LOOT_RESPONSE_LootMethod::Skinning => {}
+            SMSG_LOOT_RESPONSE_LootMethod::Fishinghole => {}
+            SMSG_LOOT_RESPONSE_LootMethod::FishingFail => {}
+            SMSG_LOOT_RESPONSE_LootMethod::Insignia => {}
+        }
+
         // gold: u32
         w.write_all(&self.gold.to_le_bytes())?;
 
@@ -51,7 +73,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(14..=1550).contains(&body_size) {
+        if !(14..=1551).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0160, size: body_size as u32 });
         }
 
@@ -60,6 +82,25 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
 
         // loot_method: LootMethod
         let loot_method: LootMethod = crate::util::read_u8_le(r)?.try_into()?;
+
+        let loot_method_if = match loot_method {
+            LootMethod::ErrorX => {
+                // loot_error: LootMethodError
+                let loot_error: LootMethodError = crate::util::read_u8_le(r)?.try_into()?;
+
+                SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
+                    loot_error,
+                }
+            }
+            LootMethod::Corpse => SMSG_LOOT_RESPONSE_LootMethod::Corpse,
+            LootMethod::Pickpocketing => SMSG_LOOT_RESPONSE_LootMethod::Pickpocketing,
+            LootMethod::Fishing => SMSG_LOOT_RESPONSE_LootMethod::Fishing,
+            LootMethod::Disenchanting => SMSG_LOOT_RESPONSE_LootMethod::Disenchanting,
+            LootMethod::Skinning => SMSG_LOOT_RESPONSE_LootMethod::Skinning,
+            LootMethod::Fishinghole => SMSG_LOOT_RESPONSE_LootMethod::Fishinghole,
+            LootMethod::FishingFail => SMSG_LOOT_RESPONSE_LootMethod::FishingFail,
+            LootMethod::Insignia => SMSG_LOOT_RESPONSE_LootMethod::Insignia,
+        };
 
         // gold: u32
         let gold = crate::util::read_u32_le(r)?;
@@ -77,7 +118,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         };
         Ok(Self {
             guid,
-            loot_method,
+            loot_method: loot_method_if,
             gold,
             items,
         })
@@ -96,10 +137,86 @@ impl crate::wrath::ServerMessage for SMSG_LOOT_RESPONSE {}
 impl SMSG_LOOT_RESPONSE {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
-        + 1 // loot_method: LootMethod
+        + self.loot_method.size() // loot_method: SMSG_LOOT_RESPONSE_LootMethod
         + 4 // gold: u32
         + 1 // amount_of_items: u8
         + self.items.len() * 6 // items: LootItem[amount_of_items]
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SMSG_LOOT_RESPONSE_LootMethod {
+    ErrorX {
+        loot_error: LootMethodError,
+    },
+    Corpse,
+    Pickpocketing,
+    Fishing,
+    Disenchanting,
+    Skinning,
+    Fishinghole,
+    FishingFail,
+    Insignia,
+}
+
+impl Default for SMSG_LOOT_RESPONSE_LootMethod {
+    fn default() -> Self {
+        // First enumerator without any fields
+        Self::Corpse
+    }
+}
+
+impl SMSG_LOOT_RESPONSE_LootMethod {
+    pub(crate) const fn as_int(&self) -> u8 {
+        match self {
+            Self::ErrorX { .. } => 0,
+            Self::Corpse => 1,
+            Self::Pickpocketing => 2,
+            Self::Fishing => 3,
+            Self::Disenchanting => 4,
+            Self::Skinning => 6,
+            Self::Fishinghole => 20,
+            Self::FishingFail => 21,
+            Self::Insignia => 22,
+        }
+    }
+
+}
+
+impl SMSG_LOOT_RESPONSE_LootMethod {
+    pub(crate) fn size(&self) -> usize {
+        match self {
+            Self::ErrorX {
+                loot_error,
+            } => {
+                1
+                + 1 // loot_error: LootMethodError
+            }
+            Self::Corpse => {
+                1
+            }
+            Self::Pickpocketing => {
+                1
+            }
+            Self::Fishing => {
+                1
+            }
+            Self::Disenchanting => {
+                1
+            }
+            Self::Skinning => {
+                1
+            }
+            Self::Fishinghole => {
+                1
+            }
+            Self::FishingFail => {
+                1
+            }
+            Self::Insignia => {
+                1
+            }
+        }
     }
 }
 

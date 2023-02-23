@@ -169,6 +169,7 @@
 - [LogoutResult](docs/logoutresult.md)
 - [LogoutSpeed](docs/logoutspeed.md)
 - [LootMethod](docs/lootmethod.md)
+- [LootMethodError](docs/lootmethoderror.md)
 - [LootSlotType](docs/lootslottype.md)
 - [MailAction](docs/mailaction.md)
 - [MailMessageType](docs/mailmessagetype.md)

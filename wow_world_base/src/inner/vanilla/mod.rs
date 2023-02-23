@@ -169,6 +169,8 @@ pub(crate) mod logout_speed;
 pub use logout_speed::*;
 pub(crate) mod loot_method;
 pub use loot_method::*;
+pub(crate) mod loot_method_error;
+pub use loot_method_error::*;
 pub(crate) mod loot_slot_type;
 pub use loot_slot_type::*;
 pub(crate) mod mail_action;

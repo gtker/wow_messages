@@ -1345,6 +1345,8 @@ pub use wow_world_base::vanilla::LogoutSpeed;
 
 pub use wow_world_base::vanilla::LootMethod;
 
+pub use wow_world_base::vanilla::LootMethodError;
+
 pub use wow_world_base::vanilla::LootSlotType;
 
 pub use wow_world_base::vanilla::MailMessageType;

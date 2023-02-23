@@ -1,4 +1,5 @@
 enum LootMethod : u8 {
+    ERROR = 0;
     CORPSE                 = 1;
     PICKPOCKETING          = 2;
     FISHING                = 3;
@@ -14,6 +15,50 @@ enum LootMethod : u8 {
     }
     INSIGNIA               = 22 {
         comment = "unsupported by client, send LOOT_CORPSE instead";
+    }
+} {
+    versions = "1 2 3";
+}
+
+enum LootMethodError : u8 {
+    DIDNT_KILL               = 0 {
+        comment = "You don't have permission to loot that corpse.";
+    }
+    TOO_FAR                  = 4 {
+        comment = "You are too far away to loot that corpse.";
+    }
+    BAD_FACING               = 5 {
+        comment = "You must be facing the corpse to loot it.";
+    }
+    LOCKED                   = 6 {
+        comment = "Someone is already looting that corpse.";
+    }
+    NOTSTANDING              = 8 {
+        comment = "You need to be standing up to loot something!";
+    }
+    STUNNED                  = 9 {
+        comment = "You can't loot anything while stunned!";
+    }
+    PLAYER_NOT_FOUND         = 10 {
+        comment = "Player not found";
+    }
+    PLAY_TIME_EXCEEDED       = 11 {
+        comment = "Maximum play time exceeded";
+    }
+    MASTER_INV_FULL          = 12 {
+        comment = "That player's inventory is full";
+    }
+    MASTER_UNIQUE_ITEM       = 13 {
+        comment = "Player has too many of that item already";
+    }
+    MASTER_OTHER             = 14 {
+        comment = "Can't assign item to that player";
+    }
+    ALREADY_PICKPOCKETED     = 15 {
+        comment = "Your target has already had its pockets picked";
+    }
+    NOT_WHILE_SHAPESHIFTED   = 16 {
+        comment = "You can't do that while shapeshifted.";
     }
 } {
     versions = "1 2 3";
@@ -50,6 +95,9 @@ struct LootItem {
 smsg SMSG_LOOT_RESPONSE = 0x0160 {
     Guid guid;
     LootMethod loot_method;
+    if (loot_method == ERROR) {
+        LootMethodError loot_error;       
+    }
     u32 gold;
     u8 amount_of_items;
     LootItem[amount_of_items] items;

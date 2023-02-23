@@ -138,6 +138,8 @@ pub mod logout_result_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod logout_speed_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod loot_method_error_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod loot_method_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod loot_slot_type_vanilla_tbc_wrath;

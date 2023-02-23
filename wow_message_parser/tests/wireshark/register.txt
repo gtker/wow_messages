@@ -2434,6 +2434,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_loot_method_error,
+            { "Loot Method Error", "woww.loot.method.error",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_loot_method_error_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_loot_slot,
             { "Loot Slot", "woww.loot.slot",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
