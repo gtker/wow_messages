@@ -135,11 +135,11 @@ impl IfStatement {
     }
 
     pub(crate) fn contains(&self, m: &StructMember) -> bool {
-        if self.members().iter().find(|&a| m == a).is_some() {
+        if self.members().iter().any(|a| m == a) {
             return true;
         } else if self.else_ifs().iter().any(|a| a.contains(m)) {
             return true;
-        } else if self.else_members().iter().find(|&a| m == a).is_some() {
+        } else if self.else_members().iter().any(|a| m == a) {
             return true;
         }
 

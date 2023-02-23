@@ -3,6 +3,7 @@ use std::io;
 use std::io::Read;
 
 #[derive(Debug, Hash, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Default)]
 pub struct InspectTalentGearMask {
     inspect_talent_gears: [Option<InspectTalentGear>; Self::MAX_CAPACITY],
 }
@@ -72,14 +73,4 @@ impl InspectTalentGearMask {
     }
 }
 
-impl Default for InspectTalentGearMask {
-    fn default() -> Self {
-        Self {
-            inspect_talent_gears: [
-                None, None, None, None, None, None, None, None, None, None, None, None, None, None,
-                None, None, None, None, None, None, None, None, None, None, None, None, None, None,
-                None, None, None, None,
-            ],
-        }
-    }
-}
+
