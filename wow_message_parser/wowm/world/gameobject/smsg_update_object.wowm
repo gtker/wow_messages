@@ -90,7 +90,8 @@ enum ObjectType : u8 {
 struct MovementBlock {
     UpdateFlag update_flag;
     if (update_flag & LIVING) {
-        /* TODO STRUCT_MEMBER_ACCESS All variables until newline are actually just a MovementInfo, but the if statement later requires access to flags. */
+        /* All variables until newline are actually just a MovementInfo,
+           but the if statement later requires access to flags. */
         MovementFlags flags;
         u32 timestamp;
         Vector3d living_position;
@@ -111,6 +112,7 @@ struct MovementBlock {
         if (flags & SPLINE_ELEVATION) {
             f32 spline_elevation;
         }
+        /* MovementInfo end */
 
         f32 walking_speed;
         f32 running_speed;

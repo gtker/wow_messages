@@ -6,7 +6,7 @@ use crate::wrath::UpdateType;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm:176`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm#L176):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm:178`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm#L178):
 /// ```text
 /// struct Object {
 ///     UpdateType update_type;
