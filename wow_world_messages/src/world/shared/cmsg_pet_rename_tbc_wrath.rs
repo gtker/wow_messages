@@ -55,6 +55,7 @@ impl crate::Message for CMSG_PET_RENAME {
 
         // declined: Bool
         let declined = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             pet,
             name,

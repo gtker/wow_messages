@@ -40,6 +40,7 @@ impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
 
         // set_assistant: Bool
         let set_assistant = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             guid,
             set_assistant,

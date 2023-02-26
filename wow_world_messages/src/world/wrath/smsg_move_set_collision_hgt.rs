@@ -48,6 +48,7 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
 
         // collision_height: f32
         let collision_height = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             unit,
             packet_counter,

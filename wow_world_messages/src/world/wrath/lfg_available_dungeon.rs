@@ -64,6 +64,7 @@ impl LfgAvailableDungeon {
 
         // done: Bool
         let done = crate::util::read_u8_le(r)? != 0;
+
         // quest_reward: u32
         let quest_reward = crate::util::read_u32_le(r)?;
 
@@ -87,6 +88,7 @@ impl LfgAvailableDungeon {
             }
             rewards
         };
+
         Ok(Self {
             dungeon_entry,
             done,

@@ -47,6 +47,7 @@ impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
             }
             statuses
         };
+
         Ok(Self {
             statuses,
         })

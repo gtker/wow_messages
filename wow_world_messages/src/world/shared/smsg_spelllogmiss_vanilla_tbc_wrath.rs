@@ -74,6 +74,7 @@ impl crate::Message for SMSG_SPELLLOGMISS {
             }
             targets
         };
+
         Ok(Self {
             id,
             caster,

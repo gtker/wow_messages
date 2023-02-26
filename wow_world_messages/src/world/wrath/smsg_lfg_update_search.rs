@@ -31,6 +31,7 @@ impl crate::Message for SMSG_LFG_UPDATE_SEARCH {
 
         // in_lfg_queue: Bool
         let in_lfg_queue = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             in_lfg_queue,
         })

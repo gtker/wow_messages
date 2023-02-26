@@ -96,6 +96,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
 
         // event_time: DateTime
         let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // flags: u32
         let flags = crate::util::read_u32_le(r)?;
 

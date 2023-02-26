@@ -48,6 +48,7 @@ impl crate::Message for CMSG_REPAIR_ITEM {
 
         // from_guild_bank: Bool
         let from_guild_bank = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             npc,
             item,

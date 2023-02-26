@@ -41,6 +41,7 @@ impl crate::Message for SMSG_LOOT_MONEY_NOTIFY {
 
         // alone: Bool
         let alone = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             amount,
             alone,

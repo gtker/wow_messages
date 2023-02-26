@@ -46,6 +46,7 @@ impl NpcTextUpdate {
     pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
         // probability: f32
         let probability = crate::util::read_f32_le(r)?;
+
         // texts: CString[2]
         let texts = {
             let mut texts = Vec::with_capacity(2);

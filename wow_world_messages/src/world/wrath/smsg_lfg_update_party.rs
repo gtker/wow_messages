@@ -117,6 +117,7 @@ impl crate::Message for SMSG_LFG_UPDATE_PARTY {
                     }
                     dungeons
                 };
+
                 // comment: CString
                 let comment = {
                     let comment = crate::util::read_c_string_to_vec(r)?;

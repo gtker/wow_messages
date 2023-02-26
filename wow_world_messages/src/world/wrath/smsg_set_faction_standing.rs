@@ -52,8 +52,10 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
 
         // refer_a_friend_bonus: f32
         let refer_a_friend_bonus = crate::util::read_f32_le(r)?;
+
         // any_rank_increased: Bool
         let any_rank_increased = crate::util::read_u8_le(r)? != 0;
+
         // amount_of_faction_standings: u32
         let amount_of_faction_standings = crate::util::read_u32_le(r)?;
 
@@ -65,6 +67,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
             }
             faction_standings
         };
+
         Ok(Self {
             refer_a_friend_bonus,
             any_rank_increased,

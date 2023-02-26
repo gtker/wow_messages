@@ -31,6 +31,7 @@ impl crate::Message for SMSG_GMRESPONSE_STATUS_UPDATE {
 
         // show_survey: Bool
         let show_survey = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             show_survey,
         })

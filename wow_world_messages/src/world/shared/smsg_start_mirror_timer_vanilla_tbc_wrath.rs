@@ -69,6 +69,7 @@ impl crate::Message for SMSG_START_MIRROR_TIMER {
 
         // is_frozen: Bool
         let is_frozen = crate::util::read_u8_le(r)? != 0;
+
         // id: u32
         let id = crate::util::read_u32_le(r)?;
 

@@ -49,6 +49,7 @@ impl LfgPartyInfo {
             }
             dungeons
         };
+
         Ok(Self {
             player,
             dungeons,

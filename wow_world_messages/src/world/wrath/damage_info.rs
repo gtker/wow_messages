@@ -41,6 +41,7 @@ impl DamageInfo {
 
         // damage_float: f32
         let damage_float = crate::util::read_f32_le(r)?;
+
         // damage_uint: u32
         let damage_uint = crate::util::read_u32_le(r)?;
 

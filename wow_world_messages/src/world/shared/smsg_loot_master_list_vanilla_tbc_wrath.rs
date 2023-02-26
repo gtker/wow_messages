@@ -47,6 +47,7 @@ impl crate::Message for SMSG_LOOT_MASTER_LIST {
             }
             guids
         };
+
         Ok(Self {
             guids,
         })

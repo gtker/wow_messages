@@ -71,6 +71,7 @@ impl crate::Message for CMSG_GUILD_RANK {
 
         // money_per_day: Gold
         let money_per_day = Gold::new(crate::util::read_u32_le(r)?);
+
         // bank_tab_rights: GuildBankRights[6]
         let bank_tab_rights = {
             let mut bank_tab_rights = [GuildBankRights::default(); 6];

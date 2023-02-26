@@ -64,6 +64,7 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
             }
             logs
         };
+
         Ok(Self {
             caster,
             spell,

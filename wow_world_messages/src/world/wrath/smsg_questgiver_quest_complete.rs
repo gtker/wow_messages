@@ -85,6 +85,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
         // money_reward: Gold
         let money_reward = Gold::new(crate::util::read_u32_le(r)?);
+
         // honor_reward: u32
         let honor_reward = crate::util::read_u32_le(r)?;
 
@@ -105,6 +106,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
             }
             item_rewards
         };
+
         Ok(Self {
             quest_id,
             unknown,

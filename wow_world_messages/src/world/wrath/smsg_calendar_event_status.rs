@@ -69,6 +69,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_STATUS {
 
         // event_time: DateTime
         let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // flags: u32
         let flags = crate::util::read_u32_le(r)?;
 
@@ -80,6 +81,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_STATUS {
 
         // status_time: DateTime
         let status_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         Ok(Self {
             invitee,
             event_id,

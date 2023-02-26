@@ -47,6 +47,7 @@ impl crate::Message for SMSG_DEFENSE_MESSAGE {
             let message = crate::util::read_sized_c_string_to_vec(r, message)?;
             String::from_utf8(message)?
         };
+
         Ok(Self {
             area,
             message,

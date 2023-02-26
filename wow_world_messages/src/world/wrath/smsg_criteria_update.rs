@@ -79,6 +79,7 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
 
         // time: DateTime
         let time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // time_elapsed_in_seconds: u32
         let time_elapsed_in_seconds = crate::util::read_u32_le(r)?;
 

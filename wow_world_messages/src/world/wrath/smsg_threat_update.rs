@@ -56,6 +56,7 @@ impl crate::Message for SMSG_THREAT_UPDATE {
             }
             units
         };
+
         Ok(Self {
             unit,
             units,

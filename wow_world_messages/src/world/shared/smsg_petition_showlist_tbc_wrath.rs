@@ -56,6 +56,7 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
             }
             petitions
         };
+
         Ok(Self {
             npc,
             petitions,

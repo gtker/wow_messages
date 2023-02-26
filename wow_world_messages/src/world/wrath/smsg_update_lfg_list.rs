@@ -122,6 +122,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
                     }
                     deleted_guids
                 };
+
                 SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Partial {
                     deleted_guids,
                 }
@@ -143,6 +144,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
             }
             groups
         };
+
         // amount_of_players: u32
         let amount_of_players = crate::util::read_u32_le(r)?;
 
@@ -157,6 +159,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
             }
             players
         };
+
         Ok(Self {
             lfg_type,
             dungeon_id,

@@ -509,6 +509,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target: Guid
                 let target = Guid::read(r)?;
 
@@ -528,6 +529,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target: Guid
                 let target = Guid::read(r)?;
 
@@ -544,6 +546,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
                     String::from_utf8(monster_name)?
                 };
+
                 // monster: Guid
                 let monster = Guid::read(r)?;
 
@@ -658,6 +661,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
                     String::from_utf8(monster_name)?
                 };
+
                 // monster: Guid
                 let monster = Guid::read(r)?;
 
@@ -721,6 +725,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     let monster_name = crate::util::read_sized_c_string_to_vec(r, monster_name)?;
                     String::from_utf8(monster_name)?
                 };
+
                 // monster: Guid
                 let monster = Guid::read(r)?;
 
@@ -753,6 +758,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             let message = crate::util::read_sized_c_string_to_vec(r, message)?;
             String::from_utf8(message)?
         };
+
         // tag: PlayerChatTag
         let tag: PlayerChatTag = crate::util::read_u8_le(r)?.try_into()?;
 

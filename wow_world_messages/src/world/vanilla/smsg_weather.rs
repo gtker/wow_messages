@@ -51,6 +51,7 @@ impl crate::Message for SMSG_WEATHER {
 
         // grade: f32
         let grade = crate::util::read_f32_le(r)?;
+
         // sound_id: u32
         let sound_id = crate::util::read_u32_le(r)?;
 

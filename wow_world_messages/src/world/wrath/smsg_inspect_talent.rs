@@ -89,6 +89,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
             }
             specs
         };
+
         // amount_of_glyphs: u8
         let amount_of_glyphs = crate::util::read_u8_le(r)?;
 
@@ -100,6 +101,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
             }
             glyphs
         };
+
         // talent_gear_mask: InspectTalentGearMask
         let talent_gear_mask = InspectTalentGearMask::read(r)?;
 

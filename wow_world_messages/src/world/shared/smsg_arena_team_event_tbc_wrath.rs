@@ -325,6 +325,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
             }
             string
         };
+
         Ok(Self {
             event: event_if,
             string,

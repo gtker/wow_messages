@@ -98,6 +98,7 @@ impl QuestPoi {
             }
             points
         };
+
         Ok(Self {
             id,
             objective_id,

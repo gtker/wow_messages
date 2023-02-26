@@ -80,6 +80,7 @@ impl crate::Message for SMSG_SPELLSTEALLOG {
             }
             spell_steals
         };
+
         Ok(Self {
             victim,
             caster,

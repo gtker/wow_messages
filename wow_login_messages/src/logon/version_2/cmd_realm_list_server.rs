@@ -91,6 +91,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             }
             realms
         };
+
         // footer_padding: u16
         let _footer_padding = crate::util::read_u16_le(r)?;
         // footer_padding is expected to always be 0 (0)
@@ -138,6 +139,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
                 }
                 realms
             };
+
             // footer_padding: u16
             let _footer_padding = crate::util::tokio_read_u16_le(r).await?;
             // footer_padding is expected to always be 0 (0)
@@ -199,6 +201,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
                 }
                 realms
             };
+
             // footer_padding: u16
             let _footer_padding = crate::util::astd_read_u16_le(r).await?;
             // footer_padding is expected to always be 0 (0)

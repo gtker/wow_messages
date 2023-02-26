@@ -57,6 +57,7 @@ impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
 
         // new_height: f32
         let new_height = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             player,
             movement_counter,

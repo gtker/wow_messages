@@ -47,6 +47,7 @@ impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
             }
             equipment_sets
         };
+
         Ok(Self {
             equipment_sets,
         })

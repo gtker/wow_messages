@@ -64,8 +64,10 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
 
         // elevation: f32
         let elevation = crate::util::read_f32_le(r)?;
+
         // speed: f32
         let speed = crate::util::read_f32_le(r)?;
+
         // position: Vector3d
         let position = Vector3d::read(r)?;
 

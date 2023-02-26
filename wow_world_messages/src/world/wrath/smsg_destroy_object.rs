@@ -45,6 +45,7 @@ impl crate::Message for SMSG_DESTROY_OBJECT {
 
         // target_died: Bool
         let target_died = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             guid,
             target_died,

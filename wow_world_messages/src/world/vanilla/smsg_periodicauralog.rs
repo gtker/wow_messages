@@ -72,6 +72,7 @@ impl crate::Message for SMSG_PERIODICAURALOG {
             }
             auras
         };
+
         Ok(Self {
             target,
             caster,

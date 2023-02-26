@@ -65,6 +65,7 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
             }
             nodes
         };
+
         Ok(Self {
             guid,
             total_cost,

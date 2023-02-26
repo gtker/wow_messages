@@ -70,6 +70,7 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
 
         // self_player: Bool
         let self_player = crate::util::read_u8_le(r)? != 0;
+
         // trade_slot_count1: u32
         let trade_slot_count1 = crate::util::read_u32_le(r)?;
 
@@ -78,6 +79,7 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
 
         // money_in_trade: Gold
         let money_in_trade = Gold::new(crate::util::read_u32_le(r)?);
+
         // spell_on_lowest_slot: u32
         let spell_on_lowest_slot = crate::util::read_u32_le(r)?;
 

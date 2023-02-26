@@ -61,6 +61,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
 
         // join_as_group: Bool
         let join_as_group = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             guid,
             map,

@@ -191,6 +191,7 @@ impl MonsterMove {
             MonsterMoveType::FacingAngle => {
                 // angle: f32
                 move_type_if_angle = crate::util::read_f32_le(r)?;
+
             }
         };
 

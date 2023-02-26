@@ -64,6 +64,7 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
             }
             units
         };
+
         Ok(Self {
             unit,
             new_victim,

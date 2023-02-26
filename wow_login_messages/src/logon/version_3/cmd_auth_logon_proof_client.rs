@@ -119,6 +119,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             }
             telemetry_keys
         };
+
         // security_flag: SecurityFlag
         let security_flag: SecurityFlag = crate::util::read_u8_le(r)?.try_into()?;
 
@@ -206,6 +207,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 }
                 telemetry_keys
             };
+
             // security_flag: SecurityFlag
             let security_flag: SecurityFlag = crate::util::tokio_read_u8_le(r).await?.try_into()?;
 
@@ -307,6 +309,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 }
                 telemetry_keys
             };
+
             // security_flag: SecurityFlag
             let security_flag: SecurityFlag = crate::util::astd_read_u8_le(r).await?.try_into()?;
 

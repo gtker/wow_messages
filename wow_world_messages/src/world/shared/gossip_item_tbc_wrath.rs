@@ -72,8 +72,10 @@ impl GossipItem {
 
         // coded: Bool
         let coded = crate::util::read_u8_le(r)? != 0;
+
         // money_required: Gold
         let money_required = Gold::new(crate::util::read_u32_le(r)?);
+
         // message: CString
         let message = {
             let message = crate::util::read_c_string_to_vec(r)?;

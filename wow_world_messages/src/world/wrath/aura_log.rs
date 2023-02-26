@@ -507,6 +507,7 @@ impl AuraLog {
 
                 // critical1: Bool
                 let critical1 = crate::util::read_u8_le(r)? != 0;
+
                 AuraLog_AuraType::PeriodicDamage {
                     absorb1,
                     critical1,
@@ -532,6 +533,7 @@ impl AuraLog {
 
                 // critical2: Bool
                 let critical2 = crate::util::read_u8_le(r)? != 0;
+
                 AuraLog_AuraType::PeriodicHeal {
                     absorb2,
                     critical2,
@@ -562,6 +564,7 @@ impl AuraLog {
 
                 // critical2: Bool
                 let critical2 = crate::util::read_u8_le(r)? != 0;
+
                 AuraLog_AuraType::ObsModHealth {
                     absorb2,
                     critical2,
@@ -632,6 +635,7 @@ impl AuraLog {
 
                 // gain_multiplier: f32
                 let gain_multiplier = crate::util::read_f32_le(r)?;
+
                 AuraLog_AuraType::PeriodicManaLeech {
                     damage4,
                     gain_multiplier,
@@ -680,6 +684,7 @@ impl AuraLog {
 
                 // critical1: Bool
                 let critical1 = crate::util::read_u8_le(r)? != 0;
+
                 AuraLog_AuraType::PeriodicDamagePercent {
                     absorb1,
                     critical1,

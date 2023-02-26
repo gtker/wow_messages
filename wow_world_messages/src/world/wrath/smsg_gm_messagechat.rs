@@ -1096,6 +1096,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1107,6 +1108,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1118,6 +1120,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1129,6 +1132,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1140,6 +1144,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1151,6 +1156,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1162,6 +1168,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1173,6 +1180,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1184,6 +1192,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender2 = crate::util::read_sized_c_string_to_vec(r, sender2)?;
                     String::from_utf8(sender2)?
                 };
+
                 // target2: Guid
                 chat_type_if_target2 = Guid::read(r)?;
 
@@ -1195,6 +1204,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1206,6 +1216,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1217,6 +1228,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1228,6 +1240,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
                     String::from_utf8(sender1)?
                 };
+
                 // target1: Guid
                 chat_type_if_target1 = Guid::read(r)?;
 
@@ -1239,6 +1252,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
                     String::from_utf8(sender1)?
                 };
+
                 // target1: Guid
                 chat_type_if_target1 = Guid::read(r)?;
 
@@ -1250,6 +1264,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
                     String::from_utf8(sender1)?
                 };
+
                 // target1: Guid
                 chat_type_if_target1 = Guid::read(r)?;
 
@@ -1261,6 +1276,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
                     String::from_utf8(sender1)?
                 };
+
                 // target1: Guid
                 chat_type_if_target1 = Guid::read(r)?;
 
@@ -1272,6 +1288,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
                     String::from_utf8(sender1)?
                 };
+
                 // target1: Guid
                 chat_type_if_target1 = Guid::read(r)?;
 
@@ -1294,6 +1311,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1305,6 +1323,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1316,6 +1335,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1327,6 +1347,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1338,6 +1359,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1349,6 +1371,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1360,6 +1383,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1371,6 +1395,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1382,6 +1407,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1393,6 +1419,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1404,6 +1431,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1415,6 +1443,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1426,6 +1455,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1437,6 +1467,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1448,6 +1479,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1459,6 +1491,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1470,6 +1503,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1481,6 +1515,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1507,6 +1542,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1518,6 +1554,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1529,6 +1566,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
                     String::from_utf8(sender1)?
                 };
+
                 // target1: Guid
                 chat_type_if_target1 = Guid::read(r)?;
 
@@ -1540,6 +1578,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
                     String::from_utf8(sender1)?
                 };
+
                 // target1: Guid
                 chat_type_if_target1 = Guid::read(r)?;
 
@@ -1551,6 +1590,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1562,6 +1602,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1573,6 +1614,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1584,6 +1626,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1595,6 +1638,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
                     String::from_utf8(sender1)?
                 };
+
                 // target1: Guid
                 chat_type_if_target1 = Guid::read(r)?;
 
@@ -1616,6 +1660,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1627,6 +1672,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                     let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
+
                 // target6: Guid
                 chat_type_if_target6 = Guid::read(r)?;
 
@@ -1639,6 +1685,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
             let message = crate::util::read_sized_c_string_to_vec(r, message)?;
             String::from_utf8(message)?
         };
+
         // chat_tag: PlayerChatTag
         let chat_tag: PlayerChatTag = crate::util::read_u8_le(r)?.try_into()?;
 

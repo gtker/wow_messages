@@ -104,6 +104,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
                     }
                     tabs
                 };
+
                 SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
                     tabs,
                 }
@@ -121,6 +122,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
             }
             slot_updates
         };
+
         Ok(Self {
             bank_balance,
             tab_id,

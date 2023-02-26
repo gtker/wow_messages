@@ -132,6 +132,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
 
                 // target_error: Bool
                 let target_error = crate::util::read_u8_le(r)? != 0;
+
                 // item_limit_category_id: u32
                 let item_limit_category_id = crate::util::read_u32_le(r)?;
 

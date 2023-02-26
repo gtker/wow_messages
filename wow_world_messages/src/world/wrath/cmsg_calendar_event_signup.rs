@@ -40,6 +40,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_SIGNUP {
 
         // tentative: Bool
         let tentative = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             event_id,
             tentative,

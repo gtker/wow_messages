@@ -31,6 +31,7 @@ impl crate::Message for SMSG_PLAYER_SKINNED {
 
         // spirit_released: Bool
         let spirit_released = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             spirit_released,
         })

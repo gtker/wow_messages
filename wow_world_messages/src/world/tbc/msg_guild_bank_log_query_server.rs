@@ -63,6 +63,7 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
             }
             money_logs
         };
+
         Ok(Self {
             unix_time,
             slot,

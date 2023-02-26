@@ -36,8 +36,10 @@ impl crate::Message for MSG_MINIMAP_PING_Client {
 
         // position_x: f32
         let position_x = crate::util::read_f32_le(r)?;
+
         // position_y: f32
         let position_y = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             position_x,
             position_y,

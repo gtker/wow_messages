@@ -64,6 +64,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
             }
             battlegrounds
         };
+
         Ok(Self {
             battlemaster,
             battleground_type,

@@ -56,6 +56,7 @@ impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
 
         // debug_log_format: Bool
         let debug_log_format = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             caster,
             target,

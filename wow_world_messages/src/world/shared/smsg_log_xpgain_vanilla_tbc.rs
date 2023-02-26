@@ -77,6 +77,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
 
                 // exp_group_bonus: f32
                 let exp_group_bonus = crate::util::read_f32_le(r)?;
+
                 SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                     exp_group_bonus,
                     experience_without_rested,

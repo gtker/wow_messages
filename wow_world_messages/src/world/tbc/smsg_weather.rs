@@ -46,6 +46,7 @@ impl crate::Message for SMSG_WEATHER {
 
         // grade: f32
         let grade = crate::util::read_f32_le(r)?;
+
         // change: WeatherChangeType
         let change: WeatherChangeType = crate::util::read_u8_le(r)?.try_into()?;
 

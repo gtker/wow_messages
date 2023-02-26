@@ -153,8 +153,6 @@ fn print_read_array(
             s.wln(d.name());
         });
 
-        s.newline();
-
         return;
     }
 
@@ -164,7 +162,6 @@ fn print_read_array(
 
             s.wln(d.name());
             s.closing_curly_with(";");
-            s.newline();
         }
         ArraySize::Variable(m) => {
             s.open_curly(format!("let {name} =", name = d.name()));
@@ -213,8 +210,6 @@ fn print_read_array(
 
             s.wln(d.name());
             s.closing_curly_with(";");
-
-            s.newline();
         }
     }
 }
@@ -368,8 +363,6 @@ fn print_read_definition(
                     value = d.value().as_ref().unwrap(),
                 ))
             }
-
-            s.newline();
         }
         Type::Gold => {
             s.wln(format!(
@@ -421,8 +414,6 @@ fn print_read_definition(
                     s.wln(format!("String::from_utf8({name})?", name = d.name()));
                 },
             );
-
-            s.newline();
         }
         Type::String => {
             s.body_closing_with_semicolon(format!("{assignment_prefix}{name} =", name = d.name()), |s| {
@@ -441,8 +432,6 @@ fn print_read_definition(
                     name = d.name()
                 ));
             });
-
-            s.newline();
         }
         Type::Array(array) => {
             print_read_array(s, array, e, d, prefix, postfix);
@@ -467,7 +456,6 @@ fn print_read_definition(
                             constant_string = value.original_string(),
                             constant_value = value.value(),
                         ));
-                        s.newline();
                     } else {
                         s.wln(format!(
                             "{assignment_prefix}{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).try_into()?;",
@@ -479,8 +467,9 @@ fn print_read_definition(
                             postfix = postfix,
                             original_ty = e.ty().rust_str(),
                         ));
-                        s.newline();
                     }
+
+                    s.newline();
                     return;
                 }
             }
@@ -524,8 +513,6 @@ fn print_read_definition(
                     constant_value = d.value().as_ref().unwrap().value(),
                 ));
             }
-
-            s.newline();
         }
         Type::Struct { .. } => {
             s.wln(format!(
@@ -536,8 +523,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-
-            s.newline();
         }
         Type::PackedGuid => {
             s.wln(format!(
@@ -546,7 +531,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
         Type::Guid => {
             s.wln(format!(
@@ -555,7 +539,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
         Type::UpdateMask => {
             s.wln(format!(
@@ -564,7 +547,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
         Type::AuraMask => {
             s.wln(format!(
@@ -573,7 +555,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
         Type::AchievementDoneArray => {
             s.wln(format!(
@@ -582,7 +563,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
         Type::AchievementInProgressArray => {
             s.wln(format!(
@@ -591,7 +571,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
         Type::MonsterMoveSpline => {
             s.wln(format!(
@@ -600,7 +579,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
         Type::EnchantMask => {
             s.wln(format!(
@@ -609,7 +587,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
         Type::InspectTalentGearMask => {
             s.wln(format!(
@@ -618,9 +595,10 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            s.newline();
         }
     }
+
+    s.newline();
 }
 
 fn print_read_if_statement_flag(

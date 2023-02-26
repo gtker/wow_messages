@@ -58,6 +58,7 @@ impl crate::Message for SMSG_LIST_INVENTORY {
             }
             items
         };
+
         Ok(Self {
             vendor,
             items,

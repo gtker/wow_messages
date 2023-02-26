@@ -56,6 +56,7 @@ impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
 
         // earn_time: DateTime
         let earn_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // unknown: u32
         let unknown = crate::util::read_u32_le(r)?;
 

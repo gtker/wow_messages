@@ -43,6 +43,7 @@ impl LfgRole {
 
         // ready: Bool
         let ready = crate::util::read_u8_le(r)? != 0;
+
         // roles: u32
         let roles = crate::util::read_u32_le(r)?;
 

@@ -86,6 +86,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
             }
             gossips
         };
+
         // amount_of_quests: u32
         let amount_of_quests = crate::util::read_u32_le(r)?;
 
@@ -97,6 +98,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
             }
             quests
         };
+
         Ok(Self {
             guid,
             menu_id,

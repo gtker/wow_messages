@@ -47,6 +47,7 @@ impl crate::Message for SMSG_RAID_INSTANCE_INFO {
             }
             raid_infos
         };
+
         Ok(Self {
             raid_infos,
         })

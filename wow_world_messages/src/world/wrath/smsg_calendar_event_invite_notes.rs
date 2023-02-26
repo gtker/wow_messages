@@ -65,6 +65,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_NOTES {
 
         // unknown: Bool
         let unknown = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             invitee,
             invite_id,

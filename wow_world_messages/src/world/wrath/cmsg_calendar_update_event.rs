@@ -112,6 +112,7 @@ impl crate::Message for CMSG_CALENDAR_UPDATE_EVENT {
 
         // repeatable: Bool
         let repeatable = crate::util::read_u8_le(r)? != 0;
+
         // maximum_invites: u32
         let maximum_invites = crate::util::read_u32_le(r)?;
 
@@ -120,8 +121,10 @@ impl crate::Message for CMSG_CALENDAR_UPDATE_EVENT {
 
         // event_time: DateTime
         let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // time_zone_time: DateTime
         let time_zone_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // flags: u32
         let flags = crate::util::read_u32_le(r)?;
 

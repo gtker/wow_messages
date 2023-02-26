@@ -64,12 +64,16 @@ impl crate::Message for MSG_MOVE_KNOCK_BACK_Server {
 
         // sin_angle: f32
         let sin_angle = crate::util::read_f32_le(r)?;
+
         // cos_angle: f32
         let cos_angle = crate::util::read_f32_le(r)?;
+
         // x_y_speed: f32
         let x_y_speed = crate::util::read_f32_le(r)?;
+
         // velocity: f32
         let velocity = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             player,
             info,

@@ -202,8 +202,10 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
 
             // health_multiplier: f32
             let health_multiplier = crate::util::read_f32_le(r)?;
+
             // mana_multiplier: f32
             let mana_multiplier = crate::util::read_f32_le(r)?;
+
             // racial_leader: u8
             let racial_leader = crate::util::read_u8_le(r)?;
 

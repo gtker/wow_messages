@@ -48,6 +48,7 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
 
         // auction_house_enabled: Bool
         let auction_house_enabled = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             auctioneer,
             auction_house_id,

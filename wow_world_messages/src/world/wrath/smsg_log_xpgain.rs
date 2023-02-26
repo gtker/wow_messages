@@ -82,6 +82,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
 
                 // exp_group_bonus: f32
                 let exp_group_bonus = crate::util::read_f32_le(r)?;
+
                 SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                     exp_group_bonus,
                     experience_without_rested,
@@ -91,6 +92,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
 
         // exp_includes_recruit_a_friend_bonus: Bool
         let exp_includes_recruit_a_friend_bonus = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             target,
             total_exp,

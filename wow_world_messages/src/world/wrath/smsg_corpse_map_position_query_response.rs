@@ -48,12 +48,16 @@ impl crate::Message for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {
 
         // unknown1: f32
         let unknown1 = crate::util::read_f32_le(r)?;
+
         // unknown2: f32
         let unknown2 = crate::util::read_f32_le(r)?;
+
         // unknown3: f32
         let unknown3 = crate::util::read_f32_le(r)?;
+
         // unknown4: f32
         let unknown4 = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             unknown1,
             unknown2,

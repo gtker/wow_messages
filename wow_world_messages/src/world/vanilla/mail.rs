@@ -252,6 +252,7 @@ impl Mail {
 
         // money: Gold
         let money = Gold::new(crate::util::read_u32_le(r)?);
+
         // cash_on_delivery_amount: u32
         let cash_on_delivery_amount = crate::util::read_u32_le(r)?;
 
@@ -260,6 +261,7 @@ impl Mail {
 
         // expiration_time: f32
         let expiration_time = crate::util::read_f32_le(r)?;
+
         // mail_template_id: u32
         let mail_template_id = crate::util::read_u32_le(r)?;
 

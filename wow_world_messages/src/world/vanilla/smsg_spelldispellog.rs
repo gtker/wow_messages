@@ -63,6 +63,7 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
             }
             spells
         };
+
         Ok(Self {
             victim,
             caster,

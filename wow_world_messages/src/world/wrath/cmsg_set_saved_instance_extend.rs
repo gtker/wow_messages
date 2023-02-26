@@ -49,6 +49,7 @@ impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
 
         // toggle_extend: Bool
         let toggle_extend = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             map,
             difficulty,

@@ -94,8 +94,10 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
 
         // needs_response: Bool
         let needs_response = crate::util::read_u8_le(r)? != 0;
+
         // needs_more_help: Bool
         let needs_more_help = crate::util::read_u8_le(r)? != 0;
+
         // num_of_times: u32
         let num_of_times = crate::util::read_u32_le(r)?;
 
@@ -107,6 +109,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
             }
             times
         };
+
         // decompressed_size: u32
         let decompressed_size = crate::util::read_u32_le(r)?;
 

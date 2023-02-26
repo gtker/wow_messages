@@ -149,8 +149,10 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
 
         // event_time: DateTime
         let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // time_zone_time: DateTime
         let time_zone_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // guild_id: u32
         let guild_id = crate::util::read_u32_le(r)?;
 
@@ -165,6 +167,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
             }
             invitees
         };
+
         Ok(Self {
             send_type,
             creator,

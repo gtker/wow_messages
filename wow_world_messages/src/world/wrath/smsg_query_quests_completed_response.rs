@@ -46,6 +46,7 @@ impl crate::Message for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
             }
             reward_quests
         };
+
         Ok(Self {
             reward_quests,
         })

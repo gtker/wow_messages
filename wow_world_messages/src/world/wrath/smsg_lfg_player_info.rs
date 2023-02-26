@@ -59,6 +59,7 @@ impl crate::Message for SMSG_LFG_PLAYER_INFO {
             }
             available_dungeons
         };
+
         // amount_of_locked_dungeons: u8
         let amount_of_locked_dungeons = crate::util::read_u8_le(r)?;
 
@@ -70,6 +71,7 @@ impl crate::Message for SMSG_LFG_PLAYER_INFO {
             }
             locked_dungeons
         };
+
         Ok(Self {
             available_dungeons,
             locked_dungeons,

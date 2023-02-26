@@ -144,6 +144,7 @@ impl Arrays {
             }
             simple_2byte_variable_array
         };
+
         // simple_4byte_be_fixed_array: u32_be[16]
         let simple_4byte_be_fixed_array = {
             let mut simple_4byte_be_fixed_array = [u32::default(); 16];
@@ -161,6 +162,7 @@ impl Arrays {
             }
             simple_4byte_variable_array
         };
+
         // simple_8byte_be_fixed_array: u64_be[16]
         let simple_8byte_be_fixed_array = {
             let mut simple_8byte_be_fixed_array = [u64::default(); 16];
@@ -178,6 +180,7 @@ impl Arrays {
             }
             simple_8byte_variable_array
         };
+
         // complex_fixed_array: StructWithAllBuiltInTypes[10]
         let complex_fixed_array = {
             let mut complex_fixed_array = Vec::with_capacity(10);
@@ -196,6 +199,7 @@ impl Arrays {
             }
             complex_variable_array
         };
+
         // fixed_cstring_array: CString[10]
         let fixed_cstring_array = {
             let mut fixed_cstring_array = Vec::with_capacity(10);
@@ -216,6 +220,7 @@ impl Arrays {
             }
             variable_cstring_array
         };
+
         Ok(Self {
             basic_fixed_array,
             simple_2byte_fixed_array,

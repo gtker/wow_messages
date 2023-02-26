@@ -49,6 +49,7 @@ impl crate::Message for MSG_MOVE_SET_FLIGHT_BACK_SPEED {
 
         // new_speed: f32
         let new_speed = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             player,
             info,

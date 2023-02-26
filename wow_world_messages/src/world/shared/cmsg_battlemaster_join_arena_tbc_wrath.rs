@@ -54,8 +54,10 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN_ARENA {
 
         // as_group: Bool
         let as_group = crate::util::read_u8_le(r)? != 0;
+
         // rated: Bool
         let rated = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             battlemaster,
             arena_type,

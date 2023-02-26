@@ -50,6 +50,7 @@ impl crate::Message for MSG_SET_DUNGEON_DIFFICULTY_Server {
 
         // is_in_group: Bool32
         let is_in_group = crate::util::read_u32_le(r)? != 0;
+
         Ok(Self {
             difficulty,
             unknown1,

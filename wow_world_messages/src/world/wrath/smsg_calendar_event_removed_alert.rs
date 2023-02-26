@@ -43,11 +43,13 @@ impl crate::Message for SMSG_CALENDAR_EVENT_REMOVED_ALERT {
 
         // show_alert: Bool
         let show_alert = crate::util::read_u8_le(r)? != 0;
+
         // event_id: Guid
         let event_id = Guid::read(r)?;
 
         // event_time: DateTime
         let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         Ok(Self {
             show_alert,
             event_id,

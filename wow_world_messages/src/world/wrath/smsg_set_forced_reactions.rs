@@ -47,6 +47,7 @@ impl crate::Message for SMSG_SET_FORCED_REACTIONS {
             }
             reactions
         };
+
         Ok(Self {
             reactions,
         })

@@ -31,6 +31,7 @@ impl crate::Message for SMSG_LFG_UPDATE_QUEUED {
 
         // queued: Bool
         let queued = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             queued,
         })

@@ -47,6 +47,7 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
             }
             infos
         };
+
         Ok(Self {
             infos,
         })

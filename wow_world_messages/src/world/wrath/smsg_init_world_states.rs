@@ -73,6 +73,7 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
             }
             states
         };
+
         Ok(Self {
             map,
             area,

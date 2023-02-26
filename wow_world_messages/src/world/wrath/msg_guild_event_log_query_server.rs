@@ -47,6 +47,7 @@ impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
             }
             events
         };
+
         Ok(Self {
             events,
         })

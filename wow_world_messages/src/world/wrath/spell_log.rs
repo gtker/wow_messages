@@ -436,6 +436,7 @@ impl SpellLog {
 
                 // multiplier: f32
                 let multiplier = crate::util::read_f32_le(r)?;
+
                 SpellLog_SpellEffect::PowerDrain {
                     amount,
                     multiplier,

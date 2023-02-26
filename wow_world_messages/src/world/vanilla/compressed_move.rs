@@ -109,6 +109,7 @@ impl CompressedMove {
             CompressedMoveOpcode::SmsgSplineSetRunSpeed => {
                 // speed: f32
                 let speed = crate::util::read_f32_le(r)?;
+
                 CompressedMove_CompressedMoveOpcode::SmsgSplineSetRunSpeed {
                     speed,
                 }

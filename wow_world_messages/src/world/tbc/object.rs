@@ -214,6 +214,7 @@ impl Object {
                     }
                     guids
                 };
+
                 Object_UpdateType::OutOfRangeObjects {
                     guids,
                 }
@@ -230,6 +231,7 @@ impl Object {
                     }
                     guids
                 };
+
                 Object_UpdateType::NearObjects {
                     guids,
                 }

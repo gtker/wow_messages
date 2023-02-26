@@ -87,6 +87,7 @@ impl crate::Message for SMSG_SPELLHEALLOG {
 
         // critical: Bool
         let critical = crate::util::read_u8_le(r)? != 0;
+
         // unknown: u8
         let unknown = crate::util::read_u8_le(r)?;
 

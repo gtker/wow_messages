@@ -315,6 +315,7 @@ impl MovementBlock {
 
             // living_orientation: f32
             let living_orientation = crate::util::read_f32_le(r)?;
+
             let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
                 // transport: TransportInfo
                 let transport = TransportInfo::read(r)?;
@@ -330,6 +331,7 @@ impl MovementBlock {
             let flags_SWIMMING = if flags.is_SWIMMING() {
                 // pitch1: f32
                 let pitch1 = crate::util::read_f32_le(r)?;
+
                 Some(MovementBlock_MovementFlags_Swimming::Swimming {
                     pitch1,
                 })
@@ -337,6 +339,7 @@ impl MovementBlock {
             else if flags.is_ONTRANSPORT() {
                 // pitch2: f32
                 let pitch2 = crate::util::read_f32_le(r)?;
+
                 Some(MovementBlock_MovementFlags_Swimming::Ontransport {
                     pitch2,
                 })
@@ -347,15 +350,20 @@ impl MovementBlock {
 
             // fall_time: f32
             let fall_time = crate::util::read_f32_le(r)?;
+
             let flags_JUMPING = if flags.is_JUMPING() {
                 // z_speed: f32
                 let z_speed = crate::util::read_f32_le(r)?;
+
                 // cos_angle: f32
                 let cos_angle = crate::util::read_f32_le(r)?;
+
                 // sin_angle: f32
                 let sin_angle = crate::util::read_f32_le(r)?;
+
                 // xy_speed: f32
                 let xy_speed = crate::util::read_f32_le(r)?;
+
                 Some(MovementBlock_MovementFlags_Jumping {
                     cos_angle,
                     sin_angle,
@@ -370,6 +378,7 @@ impl MovementBlock {
             let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
                 // spline_elevation: f32
                 let spline_elevation = crate::util::read_f32_le(r)?;
+
                 Some(MovementBlock_MovementFlags_SplineElevation {
                     spline_elevation,
                 })
@@ -380,20 +389,28 @@ impl MovementBlock {
 
             // walking_speed: f32
             let walking_speed = crate::util::read_f32_le(r)?;
+
             // running_speed: f32
             let running_speed = crate::util::read_f32_le(r)?;
+
             // backwards_running_speed: f32
             let backwards_running_speed = crate::util::read_f32_le(r)?;
+
             // swimming_speed: f32
             let swimming_speed = crate::util::read_f32_le(r)?;
+
             // flying_speed: f32
             let flying_speed = crate::util::read_f32_le(r)?;
+
             // backwards_flying_speed: f32
             let backwards_flying_speed = crate::util::read_f32_le(r)?;
+
             // backwards_swimming_speed: f32
             let backwards_swimming_speed = crate::util::read_f32_le(r)?;
+
             // turn_rate: f32
             let turn_rate = crate::util::read_f32_le(r)?;
+
             let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
                 // spline_flags: SplineFlag
                 let spline_flags = SplineFlag::new(crate::util::read_u32_le(r)?);
@@ -401,6 +418,7 @@ impl MovementBlock {
                 let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
                     // angle: f32
                     let angle = crate::util::read_f32_le(r)?;
+
                     Some(MovementBlock_SplineFlag_FinalAngle::FinalAngle {
                         angle,
                     })
@@ -445,6 +463,7 @@ impl MovementBlock {
                     }
                     nodes
                 };
+
                 // final_node: Vector3d
                 let final_node = Vector3d::read(r)?;
 
@@ -498,6 +517,7 @@ impl MovementBlock {
 
             // orientation: f32
             let orientation = crate::util::read_f32_le(r)?;
+
             Some(MovementBlock_UpdateFlag_Living::HasPosition {
                 orientation,
                 position,

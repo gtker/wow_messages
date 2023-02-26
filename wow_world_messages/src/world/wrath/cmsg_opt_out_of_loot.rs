@@ -31,6 +31,7 @@ impl crate::Message for CMSG_OPT_OUT_OF_LOOT {
 
         // pass_on_loot: Bool32
         let pass_on_loot = crate::util::read_u32_le(r)? != 0;
+
         Ok(Self {
             pass_on_loot,
         })

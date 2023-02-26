@@ -52,6 +52,7 @@ impl TransportInfo {
 
         // orientation: f32
         let orientation = crate::util::read_f32_le(r)?;
+
         // timestamp: u32
         let timestamp = crate::util::read_u32_le(r)?;
 

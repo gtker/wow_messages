@@ -32,6 +32,7 @@ impl crate::Message for CMSG_SET_TRADE_GOLD {
 
         // gold: Gold
         let gold = Gold::new(crate::util::read_u32_le(r)?);
+
         Ok(Self {
             gold,
         })

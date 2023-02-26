@@ -63,6 +63,7 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
             }
             targets
         };
+
         Ok(Self {
             caster,
             spell,

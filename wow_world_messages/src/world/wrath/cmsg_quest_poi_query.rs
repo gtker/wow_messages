@@ -46,6 +46,7 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
             }
             points_of_interests
         };
+
         Ok(Self {
             points_of_interests,
         })

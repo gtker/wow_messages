@@ -58,6 +58,7 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
             }
             teammates
         };
+
         // amount_of_carriers: u8
         let amount_of_carriers = crate::util::read_u8_le(r)?;
 
@@ -69,6 +70,7 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
             }
             carriers
         };
+
         Ok(Self {
             teammates,
             carriers,

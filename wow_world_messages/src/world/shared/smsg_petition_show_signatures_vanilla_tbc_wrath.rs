@@ -72,6 +72,7 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
             }
             signatures
         };
+
         Ok(Self {
             item,
             owner,

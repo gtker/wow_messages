@@ -84,6 +84,7 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
 
         // time_left: f32
         let time_left = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             auction_id,
             bid,

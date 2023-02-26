@@ -254,8 +254,10 @@ impl LfgListPlayer {
 
             // mana_per_5_seconds: f32
             let mana_per_5_seconds = crate::util::read_f32_le(r)?;
+
             // mana_per_5_seconds_combat: f32
             let mana_per_5_seconds_combat = crate::util::read_f32_le(r)?;
+
             // attack_power: u32
             let attack_power = crate::util::read_u32_le(r)?;
 
@@ -270,6 +272,7 @@ impl LfgListPlayer {
 
             // online: Bool32
             let online = crate::util::read_u32_le(r)? != 0;
+
             // average_item_level: u32
             let average_item_level = crate::util::read_u32_le(r)?;
 
@@ -342,6 +345,7 @@ impl LfgListPlayer {
         let flags_GROUP_LEADER = if flags.is_GROUP_LEADER() {
             // is_looking_for_more: Bool
             let is_looking_for_more = crate::util::read_u8_le(r)? != 0;
+
             Some(LfgListPlayer_LfgUpdateFlag_GroupLeader {
                 is_looking_for_more,
             })

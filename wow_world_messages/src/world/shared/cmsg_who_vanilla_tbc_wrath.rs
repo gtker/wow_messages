@@ -120,6 +120,7 @@ impl crate::Message for CMSG_WHO {
             }
             zones
         };
+
         // amount_of_strings: u32
         let amount_of_strings = crate::util::read_u32_le(r)?;
 
@@ -132,6 +133,7 @@ impl crate::Message for CMSG_WHO {
             }
             search_strings
         };
+
         Ok(Self {
             minimum_level,
             maximum_level,

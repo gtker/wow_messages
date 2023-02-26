@@ -47,6 +47,7 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
             }
             factions
         };
+
         Ok(Self {
             factions,
         })

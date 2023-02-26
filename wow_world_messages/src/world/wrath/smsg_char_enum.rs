@@ -47,6 +47,7 @@ impl crate::Message for SMSG_CHAR_ENUM {
             }
             characters
         };
+
         Ok(Self {
             characters,
         })

@@ -47,6 +47,7 @@ impl crate::Message for SMSG_QUEST_POI_QUERY_RESPONSE {
             }
             quests
         };
+
         Ok(Self {
             quests,
         })

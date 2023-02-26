@@ -169,6 +169,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
             MonsterMoveType::FacingAngle => {
                 // angle: f32
                 let angle = crate::util::read_f32_le(r)?;
+
                 SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
                     angle,
                 }
@@ -200,6 +201,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         let spline_flags_PARABOLIC = if spline_flags.is_PARABOLIC() {
             // vertical_acceleration: f32
             let vertical_acceleration = crate::util::read_f32_le(r)?;
+
             // effect_start_time: u32
             let effect_start_time = crate::util::read_u32_le(r)?;
 

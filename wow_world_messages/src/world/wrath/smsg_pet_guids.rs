@@ -47,6 +47,7 @@ impl crate::Message for SMSG_PET_GUIDS {
             }
             guids
         };
+
         Ok(Self {
             guids,
         })

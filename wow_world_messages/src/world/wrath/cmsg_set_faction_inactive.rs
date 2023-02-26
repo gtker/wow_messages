@@ -40,6 +40,7 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
 
         // inactive: Bool
         let inactive = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             faction,
             inactive,

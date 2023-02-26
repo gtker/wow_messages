@@ -50,6 +50,7 @@ impl crate::Message for MSG_SET_RAID_DIFFICULTY_Server {
 
         // in_group: Bool32
         let in_group = crate::util::read_u32_le(r)? != 0;
+
         Ok(Self {
             difficulty,
             unknown1,

@@ -58,6 +58,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
             }
             relations
         };
+
         Ok(Self {
             list_mask,
             relations,

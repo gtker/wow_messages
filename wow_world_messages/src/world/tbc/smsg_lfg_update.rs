@@ -57,8 +57,10 @@ impl crate::Message for SMSG_LFG_UPDATE {
 
         // queued: Bool
         let queued = crate::util::read_u8_le(r)? != 0;
+
         // is_looking_for_group: Bool
         let is_looking_for_group = crate::util::read_u8_le(r)? != 0;
+
         // looking_for_more: LfgUpdateLookingForMore
         let looking_for_more: LfgUpdateLookingForMore = crate::util::read_u8_le(r)?.try_into()?;
 

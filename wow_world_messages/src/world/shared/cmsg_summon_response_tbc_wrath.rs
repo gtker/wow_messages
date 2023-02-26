@@ -40,6 +40,7 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
 
         // agree: Bool
         let agree = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             summoner,
             agree,

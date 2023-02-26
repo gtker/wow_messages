@@ -196,6 +196,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     }
                     generator
                 };
+
                 // large_safe_prime_length: u8
                 let large_safe_prime_length = crate::util::read_u8_le(r)?;
 
@@ -207,6 +208,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     }
                     large_safe_prime
                 };
+
                 // salt: u8[32]
                 let salt = {
                     let mut salt = [0_u8; 32];
@@ -369,6 +371,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         }
                         generator
                     };
+
                     // large_safe_prime_length: u8
                     let large_safe_prime_length = crate::util::tokio_read_u8_le(r).await?;
 
@@ -380,6 +383,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         }
                         large_safe_prime
                     };
+
                     // salt: u8[32]
                     let salt = {
                         let mut salt = [0_u8; 32];
@@ -556,6 +560,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         }
                         generator
                     };
+
                     // large_safe_prime_length: u8
                     let large_safe_prime_length = crate::util::astd_read_u8_le(r).await?;
 
@@ -567,6 +572,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         }
                         large_safe_prime
                     };
+
                     // salt: u8[32]
                     let salt = {
                         let mut salt = [0_u8; 32];

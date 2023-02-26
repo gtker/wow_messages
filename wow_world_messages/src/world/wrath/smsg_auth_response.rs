@@ -233,6 +233,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
 
                 // realm_has_free_character_migration: Bool
                 let realm_has_free_character_migration = crate::util::read_u8_le(r)? != 0;
+
                 SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
                     queue_position,
                     realm_has_free_character_migration,

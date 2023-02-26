@@ -58,6 +58,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
             }
             objects
         };
+
         Ok(Self {
             objects,
         })

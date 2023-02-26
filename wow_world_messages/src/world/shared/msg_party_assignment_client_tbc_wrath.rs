@@ -46,6 +46,7 @@ impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
 
         // apply: Bool
         let apply = crate::util::read_u8_le(r)? != 0;
+
         // player: Guid
         let player = Guid::read(r)?;
 

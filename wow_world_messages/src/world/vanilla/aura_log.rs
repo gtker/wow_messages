@@ -454,6 +454,7 @@ impl AuraLog {
 
                 // gain_multiplier: f32
                 let gain_multiplier = crate::util::read_f32_le(r)?;
+
                 AuraLog_AuraType::PeriodicManaLeech {
                     damage,
                     gain_multiplier,

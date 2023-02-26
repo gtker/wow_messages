@@ -36,8 +36,10 @@ impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
 
         // voice_enabled: Bool
         let voice_enabled = crate::util::read_u8_le(r)? != 0;
+
         // microphone_enabled: Bool
         let microphone_enabled = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             voice_enabled,
             microphone_enabled,

@@ -133,6 +133,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
             MonsterMoveType::FacingAngle => {
                 // angle: f32
                 let angle = crate::util::read_f32_le(r)?;
+
                 SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
                     angle,
                 }

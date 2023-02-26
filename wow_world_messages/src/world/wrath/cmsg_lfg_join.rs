@@ -75,8 +75,10 @@ impl crate::Message for CMSG_LFG_JOIN {
 
         // no_partial_clear: Bool
         let no_partial_clear = crate::util::read_u8_le(r)? != 0;
+
         // achievements: Bool
         let achievements = crate::util::read_u8_le(r)? != 0;
+
         // amount_of_slots: u8
         let amount_of_slots = crate::util::read_u8_le(r)?;
 
@@ -88,6 +90,7 @@ impl crate::Message for CMSG_LFG_JOIN {
             }
             slots
         };
+
         // amount_of_needs: u8
         let amount_of_needs = crate::util::read_u8_le(r)?;
 
@@ -99,6 +102,7 @@ impl crate::Message for CMSG_LFG_JOIN {
             }
             needs
         };
+
         // comment: CString
         let comment = {
             let comment = crate::util::read_c_string_to_vec(r)?;

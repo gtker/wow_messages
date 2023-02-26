@@ -87,6 +87,7 @@ impl crate::Message for SMSG_LFG_PROPOSAL_UPDATE {
             }
             proposals
         };
+
         Ok(Self {
             dungeon_id,
             proposal_state,

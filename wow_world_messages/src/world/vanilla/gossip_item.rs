@@ -53,6 +53,7 @@ impl GossipItem {
 
         // coded: Bool
         let coded = crate::util::read_u8_le(r)? != 0;
+
         // message: CString
         let message = {
             let message = crate::util::read_c_string_to_vec(r)?;

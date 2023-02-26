@@ -69,6 +69,7 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
             }
             initial_spells
         };
+
         // cooldown_count: u16
         let cooldown_count = crate::util::read_u16_le(r)?;
 
@@ -80,6 +81,7 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
             }
             cooldowns
         };
+
         Ok(Self {
             unknown1,
             initial_spells,

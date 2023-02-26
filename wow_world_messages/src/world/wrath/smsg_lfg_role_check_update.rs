@@ -76,6 +76,7 @@ impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
             }
             dungeon_entries
         };
+
         // amount_of_roles: u8
         let amount_of_roles = crate::util::read_u8_le(r)?;
 
@@ -87,6 +88,7 @@ impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
             }
             roles
         };
+
         Ok(Self {
             rolecheck_state,
             rolecheck_initializing,

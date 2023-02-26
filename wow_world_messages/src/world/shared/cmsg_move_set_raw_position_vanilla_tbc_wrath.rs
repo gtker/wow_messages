@@ -42,6 +42,7 @@ impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
 
         // orientation: f32
         let orientation = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             position,
             orientation,

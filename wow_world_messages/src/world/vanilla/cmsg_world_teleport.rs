@@ -59,6 +59,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
 
         // orientation: f32
         let orientation = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             time_in_msec,
             map,

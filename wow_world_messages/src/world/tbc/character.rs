@@ -190,6 +190,7 @@ impl Character {
 
         // first_login: Bool
         let first_login = crate::util::read_u8_le(r)? != 0;
+
         // pet_display_id: u32
         let pet_display_id = crate::util::read_u32_le(r)?;
 

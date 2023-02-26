@@ -96,16 +96,19 @@ impl crate::Message for SMSG_CALENDAR_EVENT_UPDATED_ALERT {
 
         // show_alert: Bool
         let show_alert = crate::util::read_u8_le(r)? != 0;
+
         // event_id: Guid
         let event_id = Guid::read(r)?;
 
         // old_event_time: DateTime
         let old_event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // flags: u32
         let flags = crate::util::read_u32_le(r)?;
 
         // new_event_time: DateTime
         let new_event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // event_type: u8
         let event_type = crate::util::read_u8_le(r)?;
 
@@ -132,6 +135,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_UPDATED_ALERT {
 
         // unknown_time: DateTime
         let unknown_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         Ok(Self {
             show_alert,
             event_id,

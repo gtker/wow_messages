@@ -93,6 +93,7 @@ impl BattlegroundPlayer {
             }
             fields
         };
+
         Ok(Self {
             player,
             rank,

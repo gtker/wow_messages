@@ -73,6 +73,7 @@ impl crate::Message for SMSG_TRAINER_LIST {
             }
             spells
         };
+
         // greeting: CString
         let greeting = {
             let greeting = crate::util::read_c_string_to_vec(r)?;

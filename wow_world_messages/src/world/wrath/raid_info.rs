@@ -62,8 +62,10 @@ impl RaidInfo {
 
         // expired: Bool
         let expired = crate::util::read_u8_le(r)? != 0;
+
         // extended: Bool
         let extended = crate::util::read_u8_le(r)? != 0;
+
         // time_until_reset: u32
         let time_until_reset = crate::util::read_u32_le(r)?;
 

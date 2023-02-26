@@ -64,6 +64,7 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Server {
             }
             pets
         };
+
         Ok(Self {
             npc,
             stable_slots,

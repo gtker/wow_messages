@@ -106,6 +106,7 @@ impl LfgPlayer {
             }
             members
         };
+
         Ok(Self {
             guid,
             level,

@@ -104,6 +104,7 @@ impl TradeSlot {
 
         // wrapped: Bool32
         let wrapped = crate::util::read_u32_le(r)? != 0;
+
         // gift_wrapper: Guid
         let gift_wrapper = Guid::read(r)?;
 

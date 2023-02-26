@@ -76,10 +76,13 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
 
         // vote_in_progress: Bool
         let vote_in_progress = crate::util::read_u8_le(r)? != 0;
+
         // did_vote: Bool
         let did_vote = crate::util::read_u8_le(r)? != 0;
+
         // agreed_with_kick: Bool
         let agreed_with_kick = crate::util::read_u8_le(r)? != 0;
+
         // victim: Guid
         let victim = Guid::read(r)?;
 

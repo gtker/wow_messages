@@ -75,6 +75,7 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
             }
             members
         };
+
         Ok(Self {
             arena_team,
             unknown,

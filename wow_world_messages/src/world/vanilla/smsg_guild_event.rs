@@ -57,6 +57,7 @@ impl crate::Message for SMSG_GUILD_EVENT {
             }
             event_descriptions
         };
+
         Ok(Self {
             event,
             event_descriptions,

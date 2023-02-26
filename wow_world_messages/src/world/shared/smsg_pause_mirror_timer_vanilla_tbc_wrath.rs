@@ -42,6 +42,7 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
 
         // is_frozen: Bool
         let is_frozen = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             timer,
             is_frozen,

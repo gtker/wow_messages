@@ -44,6 +44,7 @@ impl crate::Message for CMSG_TOGGLE_PVP {
         let set = if current_size < body_size as usize {
             // enable_pvp: Bool
             let enable_pvp = crate::util::read_u8_le(r)? != 0;
+
             Some(CMSG_TOGGLE_PVP_set {
                 enable_pvp,
             })

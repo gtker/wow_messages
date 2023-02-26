@@ -47,6 +47,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
             }
             faction_standings
         };
+
         Ok(Self {
             faction_standings,
         })

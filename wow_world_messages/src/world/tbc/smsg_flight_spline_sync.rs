@@ -37,6 +37,7 @@ impl crate::Message for SMSG_FLIGHT_SPLINE_SYNC {
 
         // elapsed_value: f32
         let elapsed_value = crate::util::read_f32_le(r)?;
+
         // guid: Guid
         let guid = Guid::read(r)?;
 

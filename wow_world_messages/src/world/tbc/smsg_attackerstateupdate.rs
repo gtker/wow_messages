@@ -103,6 +103,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             }
             damages
         };
+
         // damage_state: u32
         let damage_state = crate::util::read_u32_le(r)?;
 

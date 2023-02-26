@@ -41,6 +41,7 @@ impl crate::Message for CMSG_GUILD_BANK_DEPOSIT_MONEY {
 
         // money: Gold
         let money = Gold::new(crate::util::read_u32_le(r)?);
+
         Ok(Self {
             bank,
             money,

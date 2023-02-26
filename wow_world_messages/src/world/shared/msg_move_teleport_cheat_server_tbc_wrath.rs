@@ -42,6 +42,7 @@ impl crate::Message for MSG_MOVE_TELEPORT_CHEAT_Server {
 
         // orientation: f32
         let orientation = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             position,
             orientation,

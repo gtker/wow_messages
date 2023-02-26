@@ -46,6 +46,7 @@ impl crate::Message for SMSG_IGNORE_LIST {
             }
             ignored
         };
+
         Ok(Self {
             ignored,
         })

@@ -407,6 +407,7 @@ impl crate::Message for SMSG_CAST_FAILED {
 
         // multiple_casts: Bool
         let multiple_casts = crate::util::read_u8_le(r)? != 0;
+
         let result_if = match result {
             SpellCastResult::Success => SMSG_CAST_FAILED_SpellCastResult::Success,
             SpellCastResult::AffectingCombat => SMSG_CAST_FAILED_SpellCastResult::AffectingCombat,

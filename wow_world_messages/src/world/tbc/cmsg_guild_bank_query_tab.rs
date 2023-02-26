@@ -48,6 +48,7 @@ impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
 
         // full_update: Bool
         let full_update = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             bank,
             tab,

@@ -61,6 +61,7 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
 
         // gold_limit_per_day: Gold
         let gold_limit_per_day = Gold::new(crate::util::read_u32_le(r)?);
+
         // purchased_bank_tabs: u8
         let purchased_bank_tabs = crate::util::read_u8_le(r)?;
 

@@ -333,8 +333,10 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
         // money_reward: Gold
         let money_reward = Gold::new(crate::util::read_u32_le(r)?);
+
         // max_level_money_reward: Gold
         let max_level_money_reward = Gold::new(crate::util::read_u32_le(r)?);
+
         // reward_spell: u32
         let reward_spell = crate::util::read_u32_le(r)?;
 
@@ -346,6 +348,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
         // honor_reward_multiplier: f32
         let honor_reward_multiplier = crate::util::read_f32_le(r)?;
+
         // source_item_id: u32
         let source_item_id = crate::util::read_u32_le(r)?;
 

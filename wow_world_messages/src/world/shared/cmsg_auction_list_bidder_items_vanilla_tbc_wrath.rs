@@ -63,6 +63,7 @@ impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
             }
             outbid_item_ids
         };
+
         Ok(Self {
             auctioneer,
             start_from_page,

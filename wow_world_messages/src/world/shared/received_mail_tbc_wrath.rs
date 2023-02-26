@@ -61,6 +61,7 @@ impl ReceivedMail {
 
         // time: f32
         let time = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             sender,
             auction_house_id,

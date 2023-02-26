@@ -49,6 +49,7 @@ impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
 
         // time: DateTime
         let time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         Ok(Self {
             event,
             invite_id,

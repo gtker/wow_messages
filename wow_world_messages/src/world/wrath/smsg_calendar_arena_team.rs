@@ -47,6 +47,7 @@ impl crate::Message for SMSG_CALENDAR_ARENA_TEAM {
             }
             members
         };
+
         Ok(Self {
             members,
         })

@@ -58,6 +58,7 @@ impl Addon {
 
         // uses_diffent_public_key: Bool
         let uses_diffent_public_key = crate::util::read_u8_le(r)? != 0;
+
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 

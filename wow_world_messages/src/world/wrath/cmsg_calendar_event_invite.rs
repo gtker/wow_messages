@@ -68,8 +68,10 @@ impl crate::Message for CMSG_CALENDAR_EVENT_INVITE {
 
         // pre_event: Bool
         let pre_event = crate::util::read_u8_le(r)? != 0;
+
         // guild_event: Bool
         let guild_event = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             event,
             invite_id,

@@ -40,6 +40,7 @@ impl crate::Message for SMSG_SPLINE_SET_FLIGHT_SPEED {
 
         // speed: f32
         let speed = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             guid,
             speed,

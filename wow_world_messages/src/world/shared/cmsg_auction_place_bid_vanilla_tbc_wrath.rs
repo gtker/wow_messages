@@ -49,6 +49,7 @@ impl crate::Message for CMSG_AUCTION_PLACE_BID {
 
         // price: Gold
         let price = Gold::new(crate::util::read_u32_le(r)?);
+
         Ok(Self {
             auctioneer,
             auction_id,

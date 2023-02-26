@@ -201,6 +201,7 @@ impl crate::Message for SMSG_SPELL_GO {
         let flags_ADJUST_MISSILE = if flags.is_ADJUST_MISSILE() {
             // elevation: f32
             let elevation = crate::util::read_f32_le(r)?;
+
             // delay_trajectory: u32
             let delay_trajectory = crate::util::read_u32_le(r)?;
 

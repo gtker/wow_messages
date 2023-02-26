@@ -91,6 +91,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
             }
             quest_items
         };
+
         Ok(Self {
             npc,
             title,

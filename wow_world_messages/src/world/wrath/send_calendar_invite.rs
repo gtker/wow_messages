@@ -62,6 +62,7 @@ impl SendCalendarInvite {
 
         // is_guild_event: Bool
         let is_guild_event = crate::util::read_u8_le(r)? != 0;
+
         // creator: PackedGuid
         let creator = Guid::read_packed(r)?;
 

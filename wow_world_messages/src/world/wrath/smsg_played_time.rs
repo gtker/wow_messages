@@ -54,6 +54,7 @@ impl crate::Message for SMSG_PLAYED_TIME {
 
         // show_on_ui: Bool
         let show_on_ui = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             total_played_time,
             level_played_time,

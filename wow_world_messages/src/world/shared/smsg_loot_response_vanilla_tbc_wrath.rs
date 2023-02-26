@@ -103,6 +103,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
 
         // gold: Gold
         let gold = Gold::new(crate::util::read_u32_le(r)?);
+
         // amount_of_items: u8
         let amount_of_items = crate::util::read_u8_le(r)?;
 
@@ -114,6 +115,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
             }
             items
         };
+
         Ok(Self {
             guid,
             loot_method: loot_method_if,

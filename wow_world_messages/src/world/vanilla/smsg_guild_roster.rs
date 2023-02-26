@@ -91,6 +91,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
             }
             rights
         };
+
         // members: GuildMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
@@ -99,6 +100,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
             }
             members
         };
+
         Ok(Self {
             motd,
             guild_info,

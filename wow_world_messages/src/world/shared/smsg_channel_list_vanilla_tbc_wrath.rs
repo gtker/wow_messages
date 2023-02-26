@@ -71,6 +71,7 @@ impl crate::Message for SMSG_CHANNEL_LIST {
             }
             members
         };
+
         Ok(Self {
             channel_name,
             channel_flags,

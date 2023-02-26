@@ -47,6 +47,7 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS {
             }
             talents
         };
+
         Ok(Self {
             talents,
         })

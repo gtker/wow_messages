@@ -67,6 +67,7 @@ impl QuestItem {
 
         // repeatable: Bool
         let repeatable = crate::util::read_u8_le(r)? != 0;
+
         // title: CString
         let title = {
             let title = crate::util::read_c_string_to_vec(r)?;

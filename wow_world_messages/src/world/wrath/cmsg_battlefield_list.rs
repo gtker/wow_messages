@@ -51,6 +51,7 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
 
         // can_gain_exp: Bool
         let can_gain_exp = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             battleground_type,
             location,

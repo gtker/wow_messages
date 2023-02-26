@@ -130,6 +130,7 @@ impl crate::Message for SMSG_PET_SPELLS {
                 }
                 spells
             };
+
             // amount_of_cooldowns: u8
             let amount_of_cooldowns = crate::util::read_u8_le(r)?;
 
@@ -141,6 +142,7 @@ impl crate::Message for SMSG_PET_SPELLS {
                 }
                 cooldowns
             };
+
             Some(SMSG_PET_SPELLS_action_bars {
                 duration,
                 react,

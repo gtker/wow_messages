@@ -53,6 +53,7 @@ impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
 
         // orientation: f32
         let orientation = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             map,
             position,

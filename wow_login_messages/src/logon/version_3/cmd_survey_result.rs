@@ -61,6 +61,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
             }
             data
         };
+
         Ok(Self {
             survey_id,
             error,
@@ -104,6 +105,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
                 }
                 data
             };
+
             Ok(Self {
                 survey_id,
                 error,
@@ -161,6 +163,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
                 }
                 data
             };
+
             Ok(Self {
                 survey_id,
                 error,

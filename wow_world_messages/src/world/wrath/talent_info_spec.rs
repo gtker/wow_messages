@@ -51,6 +51,7 @@ impl TalentInfoSpec {
             }
             talents
         };
+
         // amount_of_glyphs: u8
         let amount_of_glyphs = crate::util::read_u8_le(r)?;
 
@@ -62,6 +63,7 @@ impl TalentInfoSpec {
             }
             glyphs
         };
+
         Ok(Self {
             talents,
             glyphs,

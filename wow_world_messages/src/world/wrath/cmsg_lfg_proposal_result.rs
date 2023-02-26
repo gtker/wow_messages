@@ -39,6 +39,7 @@ impl crate::Message for CMSG_LFG_PROPOSAL_RESULT {
 
         // accept_join: Bool
         let accept_join = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             proposal_id,
             accept_join,

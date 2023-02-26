@@ -55,6 +55,7 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
             }
             mails
         };
+
         Ok(Self {
             float,
             mails,

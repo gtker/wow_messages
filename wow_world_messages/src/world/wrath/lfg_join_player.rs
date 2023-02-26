@@ -49,6 +49,7 @@ impl LfgJoinPlayer {
             }
             locked_dungeons
         };
+
         Ok(Self {
             player,
             locked_dungeons,

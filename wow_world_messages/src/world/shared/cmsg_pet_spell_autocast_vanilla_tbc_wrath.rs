@@ -48,6 +48,7 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
 
         // autocast_enabled: Bool
         let autocast_enabled = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             guid,
             id,

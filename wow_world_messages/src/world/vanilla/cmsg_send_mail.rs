@@ -133,6 +133,7 @@ impl crate::Message for CMSG_SEND_MAIL {
 
         // money: Gold
         let money = Gold::new(crate::util::read_u32_le(r)?);
+
         // cash_on_delivery_amount: u32
         let cash_on_delivery_amount = crate::util::read_u32_le(r)?;
 

@@ -104,6 +104,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
             }
             invites
         };
+
         // amount_of_events: u32
         let amount_of_events = crate::util::read_u32_le(r)?;
 
@@ -115,11 +116,13 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
             }
             events
         };
+
         // current_time: u32
         let current_time = crate::util::read_u32_le(r)?;
 
         // zone_time: DateTime
         let zone_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // amount_of_instances: u32
         let amount_of_instances = crate::util::read_u32_le(r)?;
 
@@ -131,6 +134,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
             }
             instances
         };
+
         // relative_time: u32
         let relative_time = crate::util::read_u32_le(r)?;
 
@@ -145,6 +149,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
             }
             reset_times
         };
+
         // amount_of_holidays: u32
         let amount_of_holidays = crate::util::read_u32_le(r)?;
 

@@ -103,6 +103,7 @@ impl PackedGuidAndGuid {
             }
             variable_packed
         };
+
         // variable_guid: Guid[basic2]
         let variable_guid = {
             let mut variable_guid = Vec::with_capacity(basic2 as usize);
@@ -111,6 +112,7 @@ impl PackedGuidAndGuid {
             }
             variable_guid
         };
+
         Ok(Self {
             packed,
             guid,

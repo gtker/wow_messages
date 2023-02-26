@@ -185,6 +185,7 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
             // gameobject_size: f32
             let gameobject_size = crate::util::read_f32_le(r)?;
+
             // gameobject_quest_items: u32[6]
             let gameobject_quest_items = {
                 let mut gameobject_quest_items = [u32::default(); 6];

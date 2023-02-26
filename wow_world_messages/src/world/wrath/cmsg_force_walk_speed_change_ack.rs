@@ -57,6 +57,7 @@ impl crate::Message for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
 
         // new_speed: f32
         let new_speed = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             guid,
             counter,

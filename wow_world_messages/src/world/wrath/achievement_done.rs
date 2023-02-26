@@ -35,6 +35,7 @@ impl AchievementDone {
 
         // time: DateTime
         let time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         Ok(Self {
             achievement,
             time,

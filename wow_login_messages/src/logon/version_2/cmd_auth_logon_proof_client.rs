@@ -90,6 +90,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             }
             telemetry_keys
         };
+
         Ok(Self {
             client_public_key,
             client_proof,
@@ -149,6 +150,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 }
                 telemetry_keys
             };
+
             Ok(Self {
                 client_public_key,
                 client_proof,
@@ -222,6 +224,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 }
                 telemetry_keys
             };
+
             Ok(Self {
                 client_public_key,
                 client_proof,

@@ -98,6 +98,7 @@ impl GuildBankSlot {
             }
             sockets
         };
+
         Ok(Self {
             slot,
             item,

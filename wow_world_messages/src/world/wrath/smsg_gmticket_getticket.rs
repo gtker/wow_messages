@@ -102,17 +102,22 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
 
                 // need_more_help: Bool
                 let need_more_help = crate::util::read_u8_le(r)? != 0;
+
                 // days_since_ticket_creation: f32
                 let days_since_ticket_creation = crate::util::read_f32_le(r)?;
+
                 // days_since_oldest_ticket_creation: f32
                 let days_since_oldest_ticket_creation = crate::util::read_f32_le(r)?;
+
                 // days_since_last_updated: f32
                 let days_since_last_updated = crate::util::read_f32_le(r)?;
+
                 // escalation_status: GmTicketEscalationStatus
                 let escalation_status: GmTicketEscalationStatus = crate::util::read_u8_le(r)?.try_into()?;
 
                 // read_by_gm: Bool
                 let read_by_gm = crate::util::read_u8_le(r)? != 0;
+
                 SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
                     days_since_last_updated,
                     days_since_oldest_ticket_creation,

@@ -55,6 +55,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTERED {
 
         // clear_afk: Bool
         let clear_afk = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             battle_id,
             unknown1,

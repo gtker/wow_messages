@@ -40,6 +40,7 @@ impl InspectTalentSpec {
             }
             talents
         };
+
         Ok(Self {
             talents,
         })

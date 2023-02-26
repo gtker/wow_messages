@@ -37,6 +37,7 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
 
         // unread_mails: f32
         let unread_mails = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             unread_mails,
         })

@@ -344,8 +344,10 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // buy_price: Gold
             let buy_price = Gold::new(crate::util::read_u32_le(r)?);
+
             // sell_price: Gold
             let sell_price = Gold::new(crate::util::read_u32_le(r)?);
+
             // inventory_type: InventoryType
             let inventory_type: InventoryType = (crate::util::read_u32_le(r)? as u8).try_into()?;
 
@@ -438,6 +440,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // ranged_range_modification: f32
             let ranged_range_modification = crate::util::read_f32_le(r)?;
+
             // spells: ItemSpells[5]
             let spells = {
                 let mut spells = [ItemSpells::default(); 5];

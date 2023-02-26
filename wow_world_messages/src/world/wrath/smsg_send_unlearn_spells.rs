@@ -46,6 +46,7 @@ impl crate::Message for SMSG_SEND_UNLEARN_SPELLS {
             }
             spells
         };
+
         Ok(Self {
             spells,
         })

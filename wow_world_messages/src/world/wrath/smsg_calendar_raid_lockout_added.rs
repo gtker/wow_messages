@@ -54,6 +54,7 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
 
         // time: DateTime
         let time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // map: Map
         let map: Map = crate::util::read_u32_le(r)?.try_into()?;
 

@@ -131,6 +131,7 @@ impl GuildMember {
             GuildMemberStatus::Offline => {
                 // time_offline: f32
                 let time_offline = crate::util::read_f32_le(r)?;
+
                 GuildMember_GuildMemberStatus::Offline {
                     time_offline,
                 }

@@ -31,6 +31,7 @@ impl crate::Message for CMSG_INSTANCE_LOCK_RESPONSE {
 
         // accept: Bool
         let accept = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             accept,
         })

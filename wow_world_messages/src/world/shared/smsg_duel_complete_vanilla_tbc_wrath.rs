@@ -31,6 +31,7 @@ impl crate::Message for SMSG_DUEL_COMPLETE {
 
         // ended_without_interruption: Bool
         let ended_without_interruption = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             ended_without_interruption,
         })

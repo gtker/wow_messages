@@ -83,6 +83,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
             }
             players
         };
+
         Ok(Self {
             status: status_if,
             players,

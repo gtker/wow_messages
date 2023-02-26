@@ -47,6 +47,7 @@ impl crate::Message for SMSG_CALENDAR_FILTER_GUILD {
             }
             members
         };
+
         Ok(Self {
             members,
         })

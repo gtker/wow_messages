@@ -70,6 +70,7 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
 
         // show_affiliation: Bool
         let show_affiliation = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             target,
             caster,

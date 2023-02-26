@@ -47,6 +47,7 @@ impl crate::Message for SMSG_RESYNC_RUNES {
             }
             runes
         };
+
         Ok(Self {
             runes,
         })

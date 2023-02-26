@@ -230,8 +230,10 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
         // money_reward: Gold
         let money_reward = Gold::new(crate::util::read_u32_le(r)?);
+
         // max_level_money_reward: Gold
         let max_level_money_reward = Gold::new(crate::util::read_u32_le(r)?);
+
         // reward_spell: u32
         let reward_spell = crate::util::read_u32_le(r)?;
 

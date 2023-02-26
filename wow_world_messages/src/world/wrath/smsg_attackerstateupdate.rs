@@ -196,6 +196,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             }
             damage_infos
         };
+
         let hit_info_ALL_ABSORB = if hit_info.is_ALL_ABSORB() {
             // absorb: u32
             let absorb = crate::util::read_u32_le(r)?;
@@ -259,24 +260,34 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
             // unknown5: f32
             let unknown5 = crate::util::read_f32_le(r)?;
+
             // unknown6: f32
             let unknown6 = crate::util::read_f32_le(r)?;
+
             // unknown7: f32
             let unknown7 = crate::util::read_f32_le(r)?;
+
             // unknown8: f32
             let unknown8 = crate::util::read_f32_le(r)?;
+
             // unknown9: f32
             let unknown9 = crate::util::read_f32_le(r)?;
+
             // unknown10: f32
             let unknown10 = crate::util::read_f32_le(r)?;
+
             // unknown11: f32
             let unknown11 = crate::util::read_f32_le(r)?;
+
             // unknown12: f32
             let unknown12 = crate::util::read_f32_le(r)?;
+
             // unknown13: f32
             let unknown13 = crate::util::read_f32_le(r)?;
+
             // unknown14: f32
             let unknown14 = crate::util::read_f32_le(r)?;
+
             // unknown15: u32
             let unknown15 = crate::util::read_u32_le(r)?;
 

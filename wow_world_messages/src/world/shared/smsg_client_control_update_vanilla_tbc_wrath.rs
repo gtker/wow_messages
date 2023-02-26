@@ -40,6 +40,7 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
 
         // allow_movement: Bool
         let allow_movement = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             guid,
             allow_movement,

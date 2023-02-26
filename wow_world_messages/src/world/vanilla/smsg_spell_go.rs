@@ -113,6 +113,7 @@ impl crate::Message for SMSG_SPELL_GO {
             }
             hits
         };
+
         // amount_of_misses: u8
         let amount_of_misses = crate::util::read_u8_le(r)?;
 
@@ -124,6 +125,7 @@ impl crate::Message for SMSG_SPELL_GO {
             }
             misses
         };
+
         // targets: SpellCastTargets
         let targets = SpellCastTargets::read(r)?;
 

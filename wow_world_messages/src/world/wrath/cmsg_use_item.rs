@@ -153,8 +153,10 @@ impl crate::Message for CMSG_USE_ITEM {
             ClientCastFlags::Extra => {
                 // elevation: f32
                 let elevation = crate::util::read_f32_le(r)?;
+
                 // speed: f32
                 let speed = crate::util::read_f32_le(r)?;
+
                 // movement_data: ClientMovementData
                 let movement_data: ClientMovementData = crate::util::read_u8_le(r)?.try_into()?;
 

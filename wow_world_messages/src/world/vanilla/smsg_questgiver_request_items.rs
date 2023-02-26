@@ -141,8 +141,10 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         // auto_finish: Bool32
         let auto_finish = crate::util::read_u32_le(r)? != 0;
+
         // required_money: Gold
         let required_money = Gold::new(crate::util::read_u32_le(r)?);
+
         // amount_of_required_items: u32
         let amount_of_required_items = crate::util::read_u32_le(r)?;
 
@@ -154,6 +156,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
             }
             required_items
         };
+
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(r)?;
 

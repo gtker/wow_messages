@@ -57,6 +57,7 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
             }
             mails
         };
+
         Ok(Self {
             real_mail_amount,
             mails,

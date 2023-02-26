@@ -179,6 +179,7 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
 
             // gameobject_size: f32
             let gameobject_size = crate::util::read_f32_le(r)?;
+
             Some(SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
                 info_type,
                 display_id,

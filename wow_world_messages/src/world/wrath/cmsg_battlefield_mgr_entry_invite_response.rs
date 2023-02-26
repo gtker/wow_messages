@@ -39,6 +39,7 @@ impl crate::Message for CMSG_BATTLEFIELD_MGR_ENTRY_INVITE_RESPONSE {
 
         // accepted: Bool
         let accepted = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             battle_id,
             accepted,

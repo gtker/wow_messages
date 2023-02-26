@@ -74,6 +74,7 @@ impl ListInventoryItem {
 
         // price: Gold
         let price = Gold::new(crate::util::read_u32_le(r)?);
+
         // max_durability: u32
         let max_durability = crate::util::read_u32_le(r)?;
 

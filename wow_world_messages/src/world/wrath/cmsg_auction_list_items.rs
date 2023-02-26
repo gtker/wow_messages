@@ -144,6 +144,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
             }
             sorted_auctions
         };
+
         Ok(Self {
             auctioneer,
             list_start_item,

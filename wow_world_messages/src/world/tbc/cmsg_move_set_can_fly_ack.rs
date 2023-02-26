@@ -57,6 +57,7 @@ impl crate::Message for CMSG_MOVE_SET_CAN_FLY_ACK {
 
         // applied: Bool32
         let applied = crate::util::read_u32_le(r)? != 0;
+
         Ok(Self {
             player,
             counter,

@@ -64,6 +64,7 @@ impl crate::Message for SMSG_TEXT_EMOTE {
             let name = crate::util::read_sized_c_string_to_vec(r, name)?;
             String::from_utf8(name)?
         };
+
         Ok(Self {
             guid,
             text_emote,

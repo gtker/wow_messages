@@ -47,6 +47,7 @@ impl crate::Message for SMSG_FRIEND_LIST {
             }
             friends
         };
+
         Ok(Self {
             friends,
         })

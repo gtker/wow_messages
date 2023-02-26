@@ -110,12 +110,16 @@ impl StructWithAllBuiltInTypes {
 
         // decimal32: f32
         let decimal32 = crate::util::read_f32_le(r)?;
+
         // decimal32_be: f32_be
         let decimal32_be = crate::util::read_f32_be(r)?;
+
         // decimal64: f64
         let decimal64 = crate::util::read_f64_le(r)?;
+
         // decimal64_be: f64_be
         let decimal64_be = crate::util::read_f64_be(r)?;
+
         // simple_cstring: CString
         let simple_cstring = {
             let simple_cstring = crate::util::read_c_string_to_vec(r)?;

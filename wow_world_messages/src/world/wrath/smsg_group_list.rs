@@ -140,6 +140,7 @@ impl crate::Message for SMSG_GROUP_LIST {
             }
             members
         };
+
         // leader: Guid
         let leader = Guid::read(r)?;
 
@@ -173,6 +174,7 @@ impl crate::Message for SMSG_GROUP_LIST {
 
             // heroic: Bool
             let heroic = crate::util::read_u8_le(r)? != 0;
+
             Some(SMSG_GROUP_LIST_group_not_empty {
                 loot_setting,
                 master_loot,

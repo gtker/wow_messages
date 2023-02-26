@@ -57,6 +57,7 @@ impl crate::Message for SMSG_GUILD_INFO {
 
         // created: DateTime
         let created: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
         // amount_of_characters_in_guild: u32
         let amount_of_characters_in_guild = crate::util::read_u32_le(r)?;
 

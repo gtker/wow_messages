@@ -40,6 +40,7 @@ impl crate::Message for SMSG_TAXINODE_STATUS {
 
         // taxi_mask_node_known: Bool
         let taxi_mask_node_known = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             guid,
             taxi_mask_node_known,

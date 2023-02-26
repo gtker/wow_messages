@@ -280,6 +280,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
 
         // multiple_casts: Bool
         let multiple_casts = crate::util::read_u8_le(r)? != 0;
+
         let result_if = match result {
             SpellCastResult::AffectingCombat => SMSG_PET_CAST_FAILED_SpellCastResult::AffectingCombat,
             SpellCastResult::AlreadyAtFullHealth => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyAtFullHealth,

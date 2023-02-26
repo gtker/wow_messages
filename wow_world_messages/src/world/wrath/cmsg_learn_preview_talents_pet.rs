@@ -56,6 +56,7 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
             }
             talents
         };
+
         Ok(Self {
             pet,
             talents,

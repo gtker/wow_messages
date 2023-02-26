@@ -74,8 +74,10 @@ impl crate::Message for SMSG_RESISTLOG {
 
         // unknown2: f32
         let unknown2 = crate::util::read_f32_le(r)?;
+
         // unknown3: f32
         let unknown3 = crate::util::read_f32_le(r)?;
+
         // unknown4: u32
         let unknown4 = crate::util::read_u32_le(r)?;
 

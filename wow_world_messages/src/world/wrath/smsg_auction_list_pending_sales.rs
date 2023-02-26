@@ -47,6 +47,7 @@ impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
             }
             pending_sales
         };
+
         Ok(Self {
             pending_sales,
         })

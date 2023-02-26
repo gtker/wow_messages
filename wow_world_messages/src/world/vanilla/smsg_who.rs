@@ -55,6 +55,7 @@ impl crate::Message for SMSG_WHO {
             }
             players
         };
+
         Ok(Self {
             online_players,
             players,

@@ -45,6 +45,7 @@ impl ServerMessage for CMD_XFER_DATA {
             }
             data
         };
+
         Ok(Self {
             data,
         })
@@ -80,6 +81,7 @@ impl ServerMessage for CMD_XFER_DATA {
                 }
                 data
             };
+
             Ok(Self {
                 data,
             })
@@ -129,6 +131,7 @@ impl ServerMessage for CMD_XFER_DATA {
                 }
                 data
             };
+
             Ok(Self {
                 data,
             })

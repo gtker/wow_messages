@@ -99,6 +99,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
                     }
                     specs
                 };
+
                 SMSG_TALENTS_INFO_TalentInfoType::Player {
                     active_spec,
                     specs,
@@ -116,6 +117,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
                     }
                     talents
                 };
+
                 SMSG_TALENTS_INFO_TalentInfoType::Pet {
                     talents,
                 }

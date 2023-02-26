@@ -55,6 +55,7 @@ impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
 
         // speed: f32
         let speed = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             guid,
             move_event,

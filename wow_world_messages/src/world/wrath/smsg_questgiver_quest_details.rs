@@ -241,6 +241,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
 
         // auto_finish: Bool
         let auto_finish = crate::util::read_u8_le(r)? != 0;
+
         // quest_flags: u32
         let quest_flags = crate::util::read_u32_le(r)?;
 
@@ -261,6 +262,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
             }
             choice_item_rewards
         };
+
         // amount_of_item_rewards: u32
         let amount_of_item_rewards = crate::util::read_u32_le(r)?;
 
@@ -272,8 +274,10 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
             }
             item_rewards
         };
+
         // money_reward: Gold
         let money_reward = Gold::new(crate::util::read_u32_le(r)?);
+
         // experience_reward: u32
         let experience_reward = crate::util::read_u32_le(r)?;
 
@@ -282,6 +286,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
 
         // honor_reward_multiplier: f32
         let honor_reward_multiplier = crate::util::read_f32_le(r)?;
+
         // reward_spell: u32
         let reward_spell = crate::util::read_u32_le(r)?;
 
@@ -338,6 +343,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
             }
             emotes
         };
+
         Ok(Self {
             guid,
             guid2,

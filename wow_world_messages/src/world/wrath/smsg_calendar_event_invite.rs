@@ -99,6 +99,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
             CalendarStatusTime::Present => {
                 // status_time: DateTime
                 let status_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+
                 SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::Present {
                     status_time,
                 }
@@ -107,6 +108,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
 
         // is_sign_up: Bool
         let is_sign_up = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             invitee,
             event_id,

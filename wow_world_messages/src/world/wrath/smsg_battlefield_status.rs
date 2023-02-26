@@ -183,6 +183,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
         // rated: Bool
         let rated = crate::util::read_u8_le(r)? != 0;
+
         // status_id: StatusId
         let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
 

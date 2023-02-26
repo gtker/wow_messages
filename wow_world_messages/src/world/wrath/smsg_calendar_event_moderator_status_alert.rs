@@ -56,6 +56,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
 
         // show_alert: Bool
         let show_alert = crate::util::read_u8_le(r)? != 0;
+
         Ok(Self {
             invitee,
             event_id,

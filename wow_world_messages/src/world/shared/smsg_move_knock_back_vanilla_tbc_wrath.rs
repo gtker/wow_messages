@@ -74,12 +74,16 @@ impl crate::Message for SMSG_MOVE_KNOCK_BACK {
 
         // v_cos: f32
         let v_cos = crate::util::read_f32_le(r)?;
+
         // v_sin: f32
         let v_sin = crate::util::read_f32_le(r)?;
+
         // horizontal_speed: f32
         let horizontal_speed = crate::util::read_f32_le(r)?;
+
         // vertical_speed: f32
         let vertical_speed = crate::util::read_f32_le(r)?;
+
         Ok(Self {
             guid,
             movement_counter,

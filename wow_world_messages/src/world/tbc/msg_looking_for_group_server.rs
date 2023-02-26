@@ -74,6 +74,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
             }
             players_displayed
         };
+
         Ok(Self {
             lfg_type,
             entry,

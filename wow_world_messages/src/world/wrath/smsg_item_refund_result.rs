@@ -79,6 +79,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
             ItemRefundResult::Success => {
                 // cost: Gold
                 let cost = Gold::new(crate::util::read_u32_le(r)?);
+
                 // honor_point_cost: u32
                 let honor_point_cost = crate::util::read_u32_le(r)?;
 

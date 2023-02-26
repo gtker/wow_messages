@@ -207,6 +207,7 @@ impl Mail {
 
         // cash_on_delivery: Gold
         let cash_on_delivery = Gold::new(crate::util::read_u32_le(r)?);
+
         // unknown: u32
         let unknown = crate::util::read_u32_le(r)?;
 
@@ -215,11 +216,13 @@ impl Mail {
 
         // money: Gold
         let money = Gold::new(crate::util::read_u32_le(r)?);
+
         // flags: u32
         let flags = crate::util::read_u32_le(r)?;
 
         // expiration_time: f32
         let expiration_time = crate::util::read_f32_le(r)?;
+
         // mail_template_id: u32
         let mail_template_id = crate::util::read_u32_le(r)?;
 
@@ -246,6 +249,7 @@ impl Mail {
             }
             items
         };
+
         Ok(Self {
             message_id,
             message_type: message_type_if,

@@ -197,6 +197,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
 
                         // bank_to_character_transfer: Bool
                         let bank_to_character_transfer = crate::util::read_u8_le(r)? != 0;
+
                         // split_amount: u32
                         let split_amount = crate::util::read_u32_le(r)?;
 

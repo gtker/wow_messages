@@ -124,6 +124,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
 
         // periodic_log: Bool
         let periodic_log = crate::util::read_u8_le(r)? != 0;
+
         // unused: u8
         let unused = crate::util::read_u8_le(r)?;
 

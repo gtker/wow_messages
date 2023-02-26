@@ -50,6 +50,7 @@ impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
             }
             records
         };
+
         Ok(Self {
             records,
         })

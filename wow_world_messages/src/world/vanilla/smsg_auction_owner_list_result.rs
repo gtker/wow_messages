@@ -52,6 +52,7 @@ impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
             }
             auctions
         };
+
         // total_amount_of_auctions: u32
         let total_amount_of_auctions = crate::util::read_u32_le(r)?;
 
