@@ -1,5 +1,4 @@
 use crate::Guid;
-use crate::vanilla::TransportInfo;
 use crate::vanilla::Vector3d;
 use crate::vanilla::MovementFlags;
 use crate::vanilla::SplineFlag;
@@ -17,7 +16,9 @@ use std::io::{Write, Read};
 ///         Vector3d living_position;
 ///         f32 living_orientation;
 ///         if (flags & ON_TRANSPORT) {
-///             TransportInfo transport;
+///             PackedGuid transport_guid;
+///             Vector3d transport_position;
+///             f32 transport_orientation;
 ///         }
 ///         if (flags & SWIMMING) {
 ///             f32 pitch;
@@ -112,8 +113,14 @@ impl MovementBlock {
                     w.write_all(&living_orientation.to_le_bytes())?;
 
                     if let Some(if_statement) = &flags.on_transport {
-                        // transport: TransportInfo
-                        if_statement.transport.write_into_vec(w)?;
+                        // transport_guid: PackedGuid
+                        if_statement.transport_guid.write_packed_guid_into_vec(w);
+
+                        // transport_position: Vector3d
+                        if_statement.transport_position.write_into_vec(w)?;
+
+                        // transport_orientation: f32
+                        w.write_all(&if_statement.transport_orientation.to_le_bytes())?;
 
                     }
 
@@ -278,11 +285,18 @@ impl MovementBlock {
             // living_orientation: f32
             let living_orientation = crate::util::read_f32_le(r)?;
             let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
-                // transport: TransportInfo
-                let transport = TransportInfo::read(r)?;
+                // transport_guid: PackedGuid
+                let transport_guid = Guid::read_packed(r)?;
 
+                // transport_position: Vector3d
+                let transport_position = Vector3d::read(r)?;
+
+                // transport_orientation: f32
+                let transport_orientation = crate::util::read_f32_le(r)?;
                 Some(MovementBlock_MovementFlags_OnTransport {
-                    transport,
+                    transport_guid,
+                    transport_orientation,
+                    transport_position,
                 })
             }
             else {
@@ -1948,14 +1962,18 @@ impl MovementBlock_MovementFlags {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_MovementFlags_OnTransport {
-    pub transport: TransportInfo,
+    pub transport_guid: Guid,
+    pub transport_orientation: f32,
+    pub transport_position: Vector3d,
 }
 
 impl MovementBlock_MovementFlags_OnTransport {
     pub(crate) fn size(&self) -> usize {
-        self.transport.size() // transport: TransportInfo
+        self.transport_guid.size() // transport_guid: Guid
+        + 4 // transport_orientation: f32
+        + 12 // transport_position: Vector3d
     }
 }
 

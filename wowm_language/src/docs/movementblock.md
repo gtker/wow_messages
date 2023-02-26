@@ -14,7 +14,9 @@ struct MovementBlock {
         Vector3d living_position;
         f32 living_orientation;
         if (flags & ON_TRANSPORT) {
-            TransportInfo transport;
+            PackedGuid transport_guid;
+            Vector3d transport_position;
+            f32 transport_orientation;
         }
         if (flags & SWIMMING) {
             f32 pitch;
@@ -91,7 +93,9 @@ If flags contains `ON_TRANSPORT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x19 | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
+| 0x19 | - / - | [PackedGuid](../spec/packed-guid.md) | transport_guid |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | transport_position |  |  |
+| - | 4 / Little | f32 | transport_orientation |  |  |
 
 If flags contains `SWIMMING`:
 

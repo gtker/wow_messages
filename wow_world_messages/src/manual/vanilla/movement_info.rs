@@ -21,7 +21,9 @@ impl MovementInfo {
             self.flags
                 .get_ON_TRANSPORT()
                 .map(|t| MovementBlock_MovementFlags_OnTransport {
-                    transport: t.transport,
+                    transport_guid: t.transport.guid,
+                    transport_orientation: t.transport.orientation,
+                    transport_position: t.transport.position,
                 });
 
         let jumping = self

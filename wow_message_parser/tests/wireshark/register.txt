@@ -4492,6 +4492,18 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_transport_guid,
+            { "Transport Guid", "woww.transport.guid",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_transport_orientation,
+            { "Transport Orientation", "woww.transport.orientation",
+                FT_FLOAT, BASE_NONE, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_transport_progress_in_ms,
             { "Transport Progress In Ms", "woww.transport.progress.in.ms",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
