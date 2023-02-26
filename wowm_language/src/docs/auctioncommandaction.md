@@ -1,6 +1,6 @@
 # AuctionCommandAction
 
-## Client Version 1.12, Client Version 2
+## Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation
 
@@ -23,6 +23,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `BID_PLACED` | 2 (0x02) |  | ERR_AUCTION_BID_PLACED |
 
 Used in:
+* [SMSG_AUCTION_COMMAND_RESULT](smsg_auction_command_result.md)
 * [SMSG_AUCTION_COMMAND_RESULT](smsg_auction_command_result.md)
 * [SMSG_AUCTION_COMMAND_RESULT](smsg_auction_command_result.md)
 

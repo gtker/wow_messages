@@ -1647,6 +1647,10 @@ pub use wow_world_base::wrath::ArenaTeamRole;
 
 pub use wow_world_base::wrath::ArenaType;
 
+pub use wow_world_base::wrath::AuctionCommandAction;
+
+pub use wow_world_base::wrath::AuctionCommandResult;
+
 pub use wow_world_base::wrath::BagFamily;
 
 pub use wow_world_base::wrath::BankSwapSource;
@@ -1917,6 +1921,8 @@ pub(crate) mod smsg_auction_bidder_list_result;
 pub use smsg_auction_bidder_list_result::*;
 pub(crate) mod smsg_auction_bidder_notification;
 pub use smsg_auction_bidder_notification::*;
+pub(crate) mod smsg_auction_command_result;
+pub use smsg_auction_command_result::*;
 pub(crate) mod smsg_auction_list_pending_sales;
 pub use smsg_auction_list_pending_sales::*;
 pub(crate) mod smsg_auction_list_result;

@@ -939,6 +939,7 @@
 - [SMSG_ATTACKSWING_NOTSTANDING](docs/smsg_attackswing_notstanding.md)
 - [SMSG_AUCTION_BIDDER_LIST_RESULT](docs/smsg_auction_bidder_list_result.md)
 - [SMSG_AUCTION_BIDDER_NOTIFICATION](docs/smsg_auction_bidder_notification.md)
+- [SMSG_AUCTION_COMMAND_RESULT](docs/smsg_auction_command_result.md)
 - [SMSG_AUCTION_LIST_PENDING_SALES](docs/smsg_auction_list_pending_sales.md)
 - [SMSG_AUCTION_LIST_RESULT](docs/smsg_auction_list_result.md)
 - [SMSG_AUCTION_OWNER_LIST_RESULT](docs/smsg_auction_owner_list_result.md)
