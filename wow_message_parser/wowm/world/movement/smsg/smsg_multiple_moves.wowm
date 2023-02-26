@@ -18,8 +18,16 @@ struct MiniMoveMessage {
 }
 
 smsg SMSG_MULTIPLE_MOVES = 0x051E {
-    u32 amount_of_moves;
-    MiniMoveMessage[amount_of_moves] moves;
+    u32 size = self.size;
+    MiniMoveMessage[-] moves;
 } {
     versions = "3.3.5";
+}
+
+smsg SMSG_COMPRESSED_MOVES = 0x2FB {
+    u32 size = self.size;
+    MiniMoveMessage[-] moves;
+} {
+    versions = "3.3.5";
+    compressed = "true";
 }

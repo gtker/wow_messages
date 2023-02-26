@@ -292,15 +292,7 @@ impl Container {
     }
 
     pub(crate) fn size_of_fields_before_size(&self) -> u64 {
-        let mut sum = match self.object_type {
-            ContainerType::Struct => 0,
-            ContainerType::CLogin(_) | ContainerType::SLogin(_) => 0,
-            _ => invalid_self_size_position(
-                self.name(),
-                self.file_info(),
-                format!("Only login messages can contain '{CONTAINER_SELF_SIZE_FIELD}'"),
-            ),
-        };
+        let mut sum = 0;
         for field in self.members() {
             match field {
                 StructMember::Definition(d) => {

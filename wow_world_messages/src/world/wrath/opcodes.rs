@@ -7515,6 +7515,7 @@ use crate::wrath::SMSG_PET_UNLEARN_CONFIRM;
 use crate::wrath::SMSG_PARTY_MEMBER_STATS_FULL;
 use crate::wrath::SMSG_WEATHER;
 use crate::wrath::SMSG_RAID_INSTANCE_MESSAGE;
+use crate::wrath::SMSG_COMPRESSED_MOVES;
 use crate::wrath::SMSG_CHAT_RESTRICTED;
 use crate::wrath::SMSG_SPLINE_SET_RUN_SPEED;
 use crate::wrath::SMSG_SPLINE_SET_RUN_BACK_SPEED;
@@ -8034,6 +8035,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PARTY_MEMBER_STATS_FULL(SMSG_PARTY_MEMBER_STATS_FULL),
     SMSG_WEATHER(SMSG_WEATHER),
     SMSG_RAID_INSTANCE_MESSAGE(SMSG_RAID_INSTANCE_MESSAGE),
+    SMSG_COMPRESSED_MOVES(SMSG_COMPRESSED_MOVES),
     SMSG_CHAT_RESTRICTED(SMSG_CHAT_RESTRICTED),
     SMSG_SPLINE_SET_RUN_SPEED(SMSG_SPLINE_SET_RUN_SPEED),
     SMSG_SPLINE_SET_RUN_BACK_SPEED(SMSG_SPLINE_SET_RUN_BACK_SPEED),
@@ -8555,6 +8557,7 @@ impl ServerOpcodeMessage {
             0x02F2 => Ok(Self::SMSG_PARTY_MEMBER_STATS_FULL(<SMSG_PARTY_MEMBER_STATS_FULL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F2, size: body_size, io, } } else { a } })?)),
             0x02F4 => Ok(Self::SMSG_WEATHER(<SMSG_WEATHER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F4, size: body_size, io, } } else { a } })?)),
             0x02FA => Ok(Self::SMSG_RAID_INSTANCE_MESSAGE(<SMSG_RAID_INSTANCE_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FA, size: body_size, io, } } else { a } })?)),
+            0x02FB => Ok(Self::SMSG_COMPRESSED_MOVES(<SMSG_COMPRESSED_MOVES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FB, size: body_size, io, } } else { a } })?)),
             0x02FD => Ok(Self::SMSG_CHAT_RESTRICTED(<SMSG_CHAT_RESTRICTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FD, size: body_size, io, } } else { a } })?)),
             0x02FE => Ok(Self::SMSG_SPLINE_SET_RUN_SPEED(<SMSG_SPLINE_SET_RUN_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FE, size: body_size, io, } } else { a } })?)),
             0x02FF => Ok(Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(<SMSG_SPLINE_SET_RUN_BACK_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02FF, size: body_size, io, } } else { a } })?)),
@@ -9225,6 +9228,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WEATHER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_COMPRESSED_MOVES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.write_encrypted_server(w, e),
@@ -9747,6 +9751,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.write_unencrypted_server(w),
             Self::SMSG_WEATHER(c) => c.write_unencrypted_server(w),
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_COMPRESSED_MOVES(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAT_RESTRICTED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.write_unencrypted_server(w),
@@ -10269,6 +10274,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WEATHER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_COMPRESSED_MOVES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10791,6 +10797,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WEATHER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_COMPRESSED_MOVES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11313,6 +11320,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WEATHER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_COMPRESSED_MOVES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11835,6 +11843,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PARTY_MEMBER_STATS_FULL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WEATHER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RAID_INSTANCE_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_COMPRESSED_MOVES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAT_RESTRICTED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_SET_RUN_BACK_SPEED(c) => c.astd_write_unencrypted_server(w).await,
@@ -12367,6 +12376,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PARTY_MEMBER_STATS_FULL(_) => "SMSG_PARTY_MEMBER_STATS_FULL",
             ServerOpcodeMessage::SMSG_WEATHER(_) => "SMSG_WEATHER",
             ServerOpcodeMessage::SMSG_RAID_INSTANCE_MESSAGE(_) => "SMSG_RAID_INSTANCE_MESSAGE",
+            ServerOpcodeMessage::SMSG_COMPRESSED_MOVES(_) => "SMSG_COMPRESSED_MOVES",
             ServerOpcodeMessage::SMSG_CHAT_RESTRICTED(_) => "SMSG_CHAT_RESTRICTED",
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(_) => "SMSG_SPLINE_SET_RUN_SPEED",
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_BACK_SPEED(_) => "SMSG_SPLINE_SET_RUN_BACK_SPEED",
@@ -14479,6 +14489,12 @@ impl From<SMSG_WEATHER> for ServerOpcodeMessage {
 impl From<SMSG_RAID_INSTANCE_MESSAGE> for ServerOpcodeMessage {
     fn from(c: SMSG_RAID_INSTANCE_MESSAGE) -> Self {
         Self::SMSG_RAID_INSTANCE_MESSAGE(c)
+    }
+}
+
+impl From<SMSG_COMPRESSED_MOVES> for ServerOpcodeMessage {
+    fn from(c: SMSG_COMPRESSED_MOVES) -> Self {
+        Self::SMSG_COMPRESSED_MOVES(c)
     }
 }
 
