@@ -105,19 +105,7 @@ pub(crate) const SERVER_HEADER_LENGTH: u16 = 4;
 
 #[cfg(feature = "tbc")]
 pub(crate) fn tbc_get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
-    let mut v = Vec::with_capacity(size as usize);
-
-    let size = (size.saturating_sub(SIZE_LENGTH)).to_be_bytes();
-    let opcode = opcode.to_le_bytes();
-
-    let mut header = [0_u8; SERVER_HEADER_LENGTH as usize];
-    header[0] = size[0];
-    header[1] = size[1];
-    header[2] = opcode[0];
-    header[3] = opcode[1];
-    v.extend_from_slice(&header);
-
-    v
+    vanilla_get_unencrypted_server(opcode, size)
 }
 
 #[cfg(all(feature = "encryption", feature = "tbc"))]
@@ -131,22 +119,7 @@ pub(crate) fn tbc_get_encrypted_server(opcode: u16, size: u16, e: &mut Encrypter
 
 #[cfg(feature = "tbc")]
 pub(crate) fn tbc_get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
-    let mut v = Vec::with_capacity(size as usize);
-
-    let size = (size.saturating_sub(SIZE_LENGTH)).to_be_bytes();
-    let opcode = (opcode as u32).to_le_bytes();
-
-    let mut header = [0_u8; CLIENT_HEADER_LENGTH as usize];
-    header[0] = size[0];
-    header[1] = size[1];
-    header[2] = opcode[0];
-    header[3] = opcode[1];
-    header[4] = opcode[2];
-    header[5] = opcode[3];
-
-    v.extend_from_slice(&header);
-
-    v
+    vanilla_get_unencrypted_client(opcode, size)
 }
 
 #[cfg(all(feature = "encryption", feature = "tbc"))]
