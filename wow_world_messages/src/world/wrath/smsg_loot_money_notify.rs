@@ -22,7 +22,7 @@ impl crate::Message for SMSG_LOOT_MONEY_NOTIFY {
         5
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // amount: u32
         w.write_all(&self.amount.to_le_bytes())?;
 

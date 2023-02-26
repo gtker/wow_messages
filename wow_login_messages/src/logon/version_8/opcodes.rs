@@ -19,7 +19,7 @@ pub enum ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write_into_vec(w)?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.write_into_vec(w)?,
@@ -131,7 +131,7 @@ pub enum ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write_into_vec(w)?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.write_into_vec(w)?,

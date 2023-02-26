@@ -19,7 +19,7 @@ impl crate::Message for CMSG_PETITION_SHOW_SIGNATURES {
         8
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // item: Guid
         w.write_all(&self.item.guid().to_le_bytes())?;
 

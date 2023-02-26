@@ -59,11 +59,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
-        let size_assert_header_size = w.len();
         // protocol_version: u8
         w.write_all(&self.protocol_version.to_le_bytes())?;
 
@@ -95,7 +94,6 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         w.write_all(&(self.account_name.len() as u8).to_le_bytes())?;
         w.write_all(self.account_name.as_bytes())?;
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

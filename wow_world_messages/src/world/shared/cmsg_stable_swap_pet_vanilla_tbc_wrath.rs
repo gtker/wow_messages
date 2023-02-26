@@ -21,7 +21,7 @@ impl crate::Message for CMSG_STABLE_SWAP_PET {
         12
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 

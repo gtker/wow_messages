@@ -30,7 +30,7 @@ impl crate::Message for SMSG_ARENA_TEAM_STATS {
         28
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // arena_team: u32
         w.write_all(&self.arena_team.to_le_bytes())?;
 

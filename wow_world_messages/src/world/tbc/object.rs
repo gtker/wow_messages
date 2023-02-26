@@ -37,7 +37,7 @@ pub struct Object {
 }
 
 impl Object {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // update_type: UpdateType
         w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
 
@@ -47,7 +47,7 @@ impl Object {
                 mask1,
             } => {
                 // guid1: PackedGuid
-                guid1.write_packed_guid_into_vec(w);
+                guid1.write_packed_guid_into_vec(w)?;
 
                 // mask1: UpdateMask
                 mask1.write_into_vec(w)?;
@@ -58,7 +58,7 @@ impl Object {
                 movement1,
             } => {
                 // guid2: PackedGuid
-                guid2.write_packed_guid_into_vec(w);
+                guid2.write_packed_guid_into_vec(w)?;
 
                 // movement1: MovementBlock
                 movement1.write_into_vec(w)?;
@@ -71,7 +71,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.write_packed_guid_into_vec(w);
+                guid3.write_packed_guid_into_vec(w)?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
@@ -90,7 +90,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.write_packed_guid_into_vec(w);
+                guid3.write_packed_guid_into_vec(w)?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
@@ -110,7 +110,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.write_packed_guid_into_vec(w);
+                    i.write_packed_guid_into_vec(w)?;
                 }
 
             }
@@ -122,7 +122,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.write_packed_guid_into_vec(w);
+                    i.write_packed_guid_into_vec(w)?;
                 }
 
             }

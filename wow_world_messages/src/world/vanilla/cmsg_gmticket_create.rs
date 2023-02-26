@@ -38,7 +38,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // category: GmTicketType
         w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
 

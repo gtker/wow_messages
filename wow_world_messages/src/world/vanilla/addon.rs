@@ -30,7 +30,7 @@ pub struct Addon {
 }
 
 impl Addon {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // addon_type: AddonType
         w.write_all(&(self.addon_type.as_int() as u8).to_le_bytes())?;
 

@@ -79,7 +79,7 @@ impl SpellLog {
 }
 
 impl SpellLog {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // effect: SpellEffect
         w.write_all(&(self.effect.as_int() as u32).to_le_bytes())?;
 
@@ -102,7 +102,7 @@ impl SpellLog {
                 target1,
             } => {
                 // target1: PackedGuid
-                target1.write_packed_guid_into_vec(w);
+                target1.write_packed_guid_into_vec(w)?;
 
                 // amount: u32
                 w.write_all(&amount.to_le_bytes())?;
@@ -127,7 +127,7 @@ impl SpellLog {
                 resurrect_guid,
             } => {
                 // resurrect_guid: PackedGuid
-                resurrect_guid.write_packed_guid_into_vec(w);
+                resurrect_guid.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::AddExtraAttacks {
@@ -135,7 +135,7 @@ impl SpellLog {
                 target4,
             } => {
                 // target4: PackedGuid
-                target4.write_packed_guid_into_vec(w);
+                target4.write_packed_guid_into_vec(w)?;
 
                 // extra_attacks: u32
                 w.write_all(&extra_attacks.to_le_bytes())?;
@@ -159,7 +159,7 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::Leap => {}
@@ -170,7 +170,7 @@ impl SpellLog {
                 lock_target,
             } => {
                 // lock_target: PackedGuid
-                lock_target.write_packed_guid_into_vec(w);
+                lock_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::SummonChangeItem => {}
@@ -193,7 +193,7 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::ForceCriticalHit => {}
@@ -205,7 +205,7 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::LearnPetSpell => {}
@@ -224,7 +224,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: PackedGuid
-                target5.write_packed_guid_into_vec(w);
+                target5.write_packed_guid_into_vec(w)?;
 
                 // interrupted_spell: u32
                 w.write_all(&interrupted_spell.to_le_bytes())?;
@@ -241,7 +241,7 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::ScriptEffect => {}
@@ -252,7 +252,7 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::BindSight => {}
@@ -260,7 +260,7 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::Stuck => {}
@@ -284,14 +284,14 @@ impl SpellLog {
                 pet_feed_guid,
             } => {
                 // pet_feed_guid: PackedGuid
-                pet_feed_guid.write_packed_guid_into_vec(w);
+                pet_feed_guid.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::DismissPet {
                 pet_dismiss_guid,
             } => {
                 // pet_dismiss_guid: PackedGuid
-                pet_dismiss_guid.write_packed_guid_into_vec(w);
+                pet_dismiss_guid.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::Reputation => {}
@@ -299,28 +299,28 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::SummonObjectSlot2 {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::SummonObjectSlot3 {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::SummonObjectSlot4 {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(w);
+                summon_target.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::DispelMechanic => {}
@@ -332,7 +332,7 @@ impl SpellLog {
                 unknown5,
             } => {
                 // target6: PackedGuid
-                target6.write_packed_guid_into_vec(w);
+                target6.write_packed_guid_into_vec(w)?;
 
                 // item_to_damage: u32
                 w.write_all(&item_to_damage.to_le_bytes())?;
@@ -346,7 +346,7 @@ impl SpellLog {
                 resurrect_guid,
             } => {
                 // resurrect_guid: PackedGuid
-                resurrect_guid.write_packed_guid_into_vec(w);
+                resurrect_guid.write_packed_guid_into_vec(w)?;
 
             }
             SpellLog_SpellEffect::AttackMe => {}

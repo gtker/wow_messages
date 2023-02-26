@@ -19,7 +19,7 @@ impl crate::Message for SMSG_ACTIVATETAXIREPLY {
         4
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // reply: ActivateTaxiReply
         w.write_all(&(self.reply.as_int() as u32).to_le_bytes())?;
 

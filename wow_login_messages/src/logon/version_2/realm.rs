@@ -30,7 +30,7 @@ pub struct Realm {
 }
 
 impl Realm {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // realm_type: RealmType
         w.write_all(&(self.realm_type.as_int() as u32).to_le_bytes())?;
 

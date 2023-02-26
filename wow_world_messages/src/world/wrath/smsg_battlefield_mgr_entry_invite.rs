@@ -23,7 +23,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
         12
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // battle_id: u32
         w.write_all(&self.battle_id.to_le_bytes())?;
 

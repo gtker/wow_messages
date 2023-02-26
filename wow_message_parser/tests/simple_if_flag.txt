@@ -16,7 +16,7 @@ pub struct SimpleIfFlag {
 }
 
 impl SimpleIfFlag {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // flag: SimpleFlag
         w.write_all(&(self.flag.as_int() as u8).to_le_bytes())?;
 

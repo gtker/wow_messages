@@ -34,7 +34,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 }
 
 impl CMD_AUTH_RECONNECT_PROOF_Client {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 

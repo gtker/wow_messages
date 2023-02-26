@@ -22,8 +22,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        let size_assert_header_size = w.len();
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // error: ReferAFriendError
         w.write_all(&(self.error.as_int() as u32).to_le_bytes())?;
 
@@ -54,7 +53,6 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
             SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonOffline => {}
         }
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

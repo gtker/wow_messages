@@ -98,7 +98,7 @@ pub struct MovementBlock {
 }
 
 impl MovementBlock {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         w.write_all(&(self.update_flag.as_int() as u16).to_le_bytes())?;
 
@@ -259,7 +259,7 @@ impl MovementBlock {
                     transport_guid,
                 } => {
                     // transport_guid: PackedGuid
-                    transport_guid.write_packed_guid_into_vec(w);
+                    transport_guid.write_packed_guid_into_vec(w)?;
 
                     // position1: Vector3d
                     position1.write_into_vec(w)?;
@@ -299,7 +299,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.has_attacking_target {
             // guid: PackedGuid
-            if_statement.guid.write_packed_guid_into_vec(w);
+            if_statement.guid.write_packed_guid_into_vec(w)?;
 
         }
 

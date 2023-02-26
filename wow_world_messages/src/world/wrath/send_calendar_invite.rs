@@ -23,7 +23,7 @@ pub struct SendCalendarInvite {
 }
 
 impl SendCalendarInvite {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // event_id: Guid
         w.write_all(&self.event_id.guid().to_le_bytes())?;
 
@@ -40,7 +40,7 @@ impl SendCalendarInvite {
         w.write_all(u8::from(self.is_guild_event).to_le_bytes().as_slice())?;
 
         // creator: PackedGuid
-        self.creator.write_packed_guid_into_vec(w);
+        self.creator.write_packed_guid_into_vec(w)?;
 
         Ok(())
     }

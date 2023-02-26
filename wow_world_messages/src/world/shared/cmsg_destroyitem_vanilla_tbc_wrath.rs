@@ -28,7 +28,7 @@ impl crate::Message for CMSG_DESTROYITEM {
         6
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // bag: u8
         w.write_all(&self.bag.to_le_bytes())?;
 

@@ -46,11 +46,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
-        let size_assert_header_size = w.len();
         // protocol_version: u8
         w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes())?;
 
@@ -135,7 +134,6 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
             CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailParentalcontrol => {}
         }
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

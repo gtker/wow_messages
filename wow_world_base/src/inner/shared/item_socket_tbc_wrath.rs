@@ -15,7 +15,7 @@ pub struct ItemSocket {
 }
 
 impl ItemSocket {
-    pub fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // color: u32
         w.write_all(&self.color.to_le_bytes())?;
 

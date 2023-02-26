@@ -19,7 +19,7 @@ impl crate::Message for SMSG_TRIGGER_CINEMATIC {
         4
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // cinematic_sequence_id: CinematicSequenceId
         w.write_all(&(self.cinematic_sequence_id.as_int() as u32).to_le_bytes())?;
 

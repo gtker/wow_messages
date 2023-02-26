@@ -44,7 +44,7 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         532
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // self_player: Bool
         w.write_all(u8::from(self.self_player).to_le_bytes().as_slice())?;
 

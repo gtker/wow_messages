@@ -19,7 +19,7 @@ impl crate::Message for CMSG_PET_UNLEARN {
         8
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // pet: Guid
         w.write_all(&self.pet.guid().to_le_bytes())?;
 

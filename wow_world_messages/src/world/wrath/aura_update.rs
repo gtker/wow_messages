@@ -29,7 +29,7 @@ pub struct AuraUpdate {
 }
 
 impl AuraUpdate {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // visual_slot: u8
         w.write_all(&self.visual_slot.to_le_bytes())?;
 
@@ -47,7 +47,7 @@ impl AuraUpdate {
 
         if let Some(if_statement) = &self.flags.not_caster {
             // caster: PackedGuid
-            if_statement.caster.write_packed_guid_into_vec(w);
+            if_statement.caster.write_packed_guid_into_vec(w)?;
 
         }
 

@@ -24,8 +24,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        let size_assert_header_size = w.len();
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // query: ItemTextQuery
         w.write_all(&(self.query.as_int() as u8).to_le_bytes())?;
 
@@ -48,7 +47,6 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
             SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::NoText => {}
         }
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

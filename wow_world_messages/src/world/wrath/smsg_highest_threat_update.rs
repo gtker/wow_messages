@@ -25,13 +25,12 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        let size_assert_header_size = w.len();
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(w);
+        self.unit.write_packed_guid_into_vec(w)?;
 
         // new_victim: PackedGuid
-        self.new_victim.write_packed_guid_into_vec(w);
+        self.new_victim.write_packed_guid_into_vec(w)?;
 
         // amount_of_units: u32
         w.write_all(&(self.units.len() as u32).to_le_bytes())?;
@@ -41,7 +40,6 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
             i.write_into_vec(w)?;
         }
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

@@ -38,7 +38,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // build: u32
         w.write_all(&self.build.to_le_bytes())?;
 
@@ -66,9 +66,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
         // addon_info: AddonInfo[-]
         let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
         for i in self.addon_info.iter() {
-            let mut vec = Vec::new();
-            i.write_into_vec(&mut vec)?;
-            encoder.write_all(vec.as_slice());
+            i.write_into_vec(&mut encoder)?;
         }
 
         Ok(())

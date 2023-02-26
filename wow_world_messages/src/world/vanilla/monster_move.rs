@@ -35,7 +35,7 @@ pub struct MonsterMove {
 }
 
 impl MonsterMove {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // spline_point: Vector3d
         self.spline_point.write_into_vec(w)?;
 

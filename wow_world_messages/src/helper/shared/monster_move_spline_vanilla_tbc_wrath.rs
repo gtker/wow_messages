@@ -29,8 +29,7 @@ impl MonsterMoveSpline {
         Ok(Self { splines })
     }
 
-    pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), io::Error> {
-        use std::io::Write;
+    pub(crate) fn write_into_vec(&self, v: &mut impl std::io::Write) -> Result<(), io::Error> {
         let amount_of_splines: u32 = self.splines.len().try_into().unwrap();
 
         v.write_all(&amount_of_splines.to_le_bytes())?;

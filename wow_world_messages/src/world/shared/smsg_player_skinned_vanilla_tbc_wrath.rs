@@ -18,7 +18,7 @@ impl crate::Message for SMSG_PLAYER_SKINNED {
         1
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // spirit_released: Bool
         w.write_all(u8::from(self.spirit_released).to_le_bytes().as_slice())?;
 

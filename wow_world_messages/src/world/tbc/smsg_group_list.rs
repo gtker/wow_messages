@@ -46,8 +46,7 @@ impl crate::Message for SMSG_GROUP_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        let size_assert_header_size = w.len();
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // group_type: GroupType
         w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
 
@@ -90,7 +89,6 @@ impl crate::Message for SMSG_GROUP_LIST {
 
         }
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

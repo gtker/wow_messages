@@ -23,7 +23,7 @@ impl crate::Message for SMSG_TUTORIAL_FLAGS {
         32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // tutorial_data: u32[8]
         for i in self.tutorial_data.iter() {
             w.write_all(&i.to_le_bytes())?;

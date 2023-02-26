@@ -22,7 +22,7 @@ impl crate::Message for CMSG_SET_TRADE_ITEM {
         3
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // trade_slot: u8
         w.write_all(&self.trade_slot.to_le_bytes())?;
 

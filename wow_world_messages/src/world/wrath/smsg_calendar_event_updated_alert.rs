@@ -42,8 +42,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_UPDATED_ALERT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
-        let size_assert_header_size = w.len();
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // show_alert: Bool
         w.write_all(u8::from(self.show_alert).to_le_bytes().as_slice())?;
 
@@ -88,7 +87,6 @@ impl crate::Message for SMSG_CALENDAR_EVENT_UPDATED_ALERT {
         // unknown_time: DateTime
         w.write_all(&self.unknown_time.as_int().to_le_bytes())?;
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
     fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {

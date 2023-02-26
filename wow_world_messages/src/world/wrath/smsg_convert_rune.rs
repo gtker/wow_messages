@@ -20,7 +20,7 @@ impl crate::Message for SMSG_CONVERT_RUNE {
         2
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // index: u8
         w.write_all(&self.index.to_le_bytes())?;
 

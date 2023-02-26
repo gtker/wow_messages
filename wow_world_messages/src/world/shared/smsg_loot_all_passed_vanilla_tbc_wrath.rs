@@ -29,7 +29,7 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
         24
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // looted_target: Guid
         w.write_all(&self.looted_target.guid().to_le_bytes())?;
 

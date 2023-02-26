@@ -494,7 +494,9 @@ impl Writer {
     }
 
     pub(crate) fn write_into_vec_trait(&mut self, write_function: impl Fn(&mut Self, ImplType)) {
-        self.open_curly("fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>");
+        self.open_curly(
+            "fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error>",
+        );
 
         write_function(self, ImplType::Std);
 
@@ -512,7 +514,7 @@ impl Writer {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
         self.open_curly(format!(
-            "{visibility} fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error>",
+            "{visibility} fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error>",
         ));
 
         write_function(self, ImplType::Std);

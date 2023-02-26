@@ -20,7 +20,7 @@ pub struct NpcTextUpdate {
 }
 
 impl NpcTextUpdate {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // probability: f32
         w.write_all(&self.probability.to_le_bytes())?;
 

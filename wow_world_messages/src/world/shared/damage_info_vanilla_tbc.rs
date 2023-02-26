@@ -24,7 +24,7 @@ pub struct DamageInfo {
 }
 
 impl DamageInfo {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // spell_school_mask: u32
         w.write_all(&self.spell_school_mask.to_le_bytes())?;
 

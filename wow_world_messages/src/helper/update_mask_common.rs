@@ -1,5 +1,5 @@
 use std::collections::BTreeMap;
-use std::io::{Read, Write};
+use std::io::Read;
 
 pub const OBJECT: u32 = 0x0001;
 pub const ITEM: u32 = 0x0002;
@@ -60,7 +60,7 @@ pub(crate) fn has_any_bit_set(array: &[u32]) -> bool {
 }
 
 pub(crate) fn write_into_vec(
-    v: &mut Vec<u8>,
+    v: &mut impl std::io::Write,
     header: &[u32],
     dirty_mask: &[u32],
     values: &BTreeMap<u16, u32>,
@@ -187,7 +187,10 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::has_array_bit_set(&self.dirty_mask, bit)
             }
 
-            pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {
+            pub(crate) fn write_into_vec(
+                &self,
+                v: &mut impl std::io::Write,
+            ) -> Result<(), std::io::Error> {
                 $crate::helper::update_mask_common::write_into_vec(
                     v,
                     &self.header,
@@ -255,7 +258,10 @@ macro_rules! update_mask {
                 })
             }
 
-            pub(crate) fn write_into_vec(&self, v: &mut Vec<u8>) -> Result<(), std::io::Error> {
+            pub(crate) fn write_into_vec(
+                &self,
+                v: &mut impl std::io::Write,
+            ) -> Result<(), std::io::Error> {
                 match self {
                     UpdateMask::Item(i) => i.write_into_vec(v),
                     UpdateMask::Container(i) => i.write_into_vec(v),

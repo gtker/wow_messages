@@ -48,7 +48,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // client_build: u32
         w.write_all(&self.client_build.to_le_bytes())?;
 

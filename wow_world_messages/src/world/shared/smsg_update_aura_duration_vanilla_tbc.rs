@@ -20,7 +20,7 @@ impl crate::Message for SMSG_UPDATE_AURA_DURATION {
         5
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // aura_slot: u8
         w.write_all(&self.aura_slot.to_le_bytes())?;
 

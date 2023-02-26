@@ -28,7 +28,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // data_type: AccountDataType
         w.write_all(&(self.data_type.as_int() as u32).to_le_bytes())?;
 

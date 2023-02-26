@@ -25,7 +25,7 @@ impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
         21
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // caster: Guid
         w.write_all(&self.caster.guid().to_le_bytes())?;
 

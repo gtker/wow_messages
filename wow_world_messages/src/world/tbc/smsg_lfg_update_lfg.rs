@@ -19,7 +19,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFG {
         12
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // data: LfgData[3]
         for i in self.data.iter() {
             i.write_into_vec(w)?;

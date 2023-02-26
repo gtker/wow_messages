@@ -18,7 +18,7 @@ impl crate::Message for SMSG_LFG_UPDATE_QUEUED {
         1
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // queued: Bool
         w.write_all(u8::from(self.queued).to_le_bytes().as_slice())?;
 

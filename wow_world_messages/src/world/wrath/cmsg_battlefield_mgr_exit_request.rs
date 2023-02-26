@@ -18,7 +18,7 @@ impl crate::Message for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
         4
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // battle_id: u32
         w.write_all(&self.battle_id.to_le_bytes())?;
 

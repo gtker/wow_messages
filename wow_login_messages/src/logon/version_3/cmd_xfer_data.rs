@@ -14,11 +14,10 @@ pub struct CMD_XFER_DATA {
 }
 
 impl CMD_XFER_DATA {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
-        let size_assert_header_size = w.len();
         // size: u16
         w.write_all(&(self.data.len() as u16).to_le_bytes())?;
 
@@ -27,7 +26,6 @@ impl CMD_XFER_DATA {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        assert_eq!(self.size() as usize + size_assert_header_size, w.len(), "Mismatch in pre-calculated size and actual written size. This needs investigation as it will cause problems in the game client when sent");
         Ok(())
     }
 }

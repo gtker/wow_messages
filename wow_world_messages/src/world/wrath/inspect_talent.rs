@@ -14,7 +14,7 @@ pub struct InspectTalent {
 }
 
 impl InspectTalent {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // talent_id: u32
         w.write_all(&self.talent_id.to_le_bytes())?;
 

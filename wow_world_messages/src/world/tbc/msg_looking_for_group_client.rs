@@ -25,7 +25,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
         12
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // lfg_type: LfgType
         w.write_all(&(self.lfg_type.as_int() as u32).to_le_bytes())?;
 

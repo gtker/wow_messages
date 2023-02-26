@@ -28,15 +28,15 @@ pub struct AchievementInProgress {
 }
 
 impl AchievementInProgress {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // achievement: u32
         w.write_all(&self.achievement.to_le_bytes())?;
 
         // counter: PackedGuid
-        self.counter.write_packed_guid_into_vec(w);
+        self.counter.write_packed_guid_into_vec(w)?;
 
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w);
+        self.player.write_packed_guid_into_vec(w)?;
 
         // timed_criteria_failed: Bool32
         w.write_all(u32::from(self.timed_criteria_failed).to_le_bytes().as_slice())?;

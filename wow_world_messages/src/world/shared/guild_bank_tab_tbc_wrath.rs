@@ -14,7 +14,7 @@ pub struct GuildBankTab {
 }
 
 impl GuildBankTab {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // tab_name: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.tab_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `tab_name` must not be null-terminated.");

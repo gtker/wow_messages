@@ -28,22 +28,26 @@ impl Guid {
         self.guid
     }
 
-    pub(crate) fn write_packed_guid_into_vec(&self, v: &mut Vec<u8>) {
-        let placeholder_index = v.len();
-        // Placeholder
-        v.push(0);
-
+    pub(crate) fn write_packed_guid_into_vec(
+        &self,
+        v: &mut impl std::io::Write,
+    ) -> Result<(), std::io::Error> {
         let guid = self.guid.to_le_bytes();
-        let mut bit_pattern = 0;
+        let mut bit_pattern: u8 = 0;
 
+        let mut placeholder = [0_u8; 9];
+        let mut index = 1;
         for (i, &b) in guid.iter().enumerate() {
             if b != 0 {
                 bit_pattern |= 1 << i;
-                v.push(b);
+                placeholder[index] = b;
+                index += 1;
             }
         }
 
-        v[placeholder_index] = bit_pattern;
+        placeholder[0] = bit_pattern;
+
+        v.write_all(&placeholder[0..index])
     }
 
     pub(crate) fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
@@ -108,7 +112,7 @@ mod test {
 
         // Make sure that writing into a vec doesn't clobber existing values
         let mut r = vec![1, 2, 3, 4];
-        guid.write_packed_guid_into_vec(&mut r);
+        guid.write_packed_guid_into_vec(&mut r).unwrap();
 
         let mut cursor = Cursor::new(r);
         let mut padding = [0_u8; 4];

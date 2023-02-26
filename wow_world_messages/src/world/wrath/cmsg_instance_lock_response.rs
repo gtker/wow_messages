@@ -18,7 +18,7 @@ impl crate::Message for CMSG_INSTANCE_LOCK_RESPONSE {
         1
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // accept: Bool
         w.write_all(u8::from(self.accept).to_le_bytes().as_slice())?;
 

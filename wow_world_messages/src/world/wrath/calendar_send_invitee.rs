@@ -28,9 +28,9 @@ pub struct CalendarSendInvitee {
 }
 
 impl CalendarSendInvitee {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // invitee: PackedGuid
-        self.invitee.write_packed_guid_into_vec(w);
+        self.invitee.write_packed_guid_into_vec(w)?;
 
         // level: u8
         w.write_all(&self.level.to_le_bytes())?;

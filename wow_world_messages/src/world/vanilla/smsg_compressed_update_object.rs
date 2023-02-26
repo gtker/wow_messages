@@ -25,7 +25,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         w.write_all(&(self.size_uncompressed() as u32).to_le_bytes())?;
 
         let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());
@@ -38,9 +38,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
         // objects: Object[amount_of_objects]
         for i in self.objects.iter() {
-            let mut vec = Vec::new();
-            i.write_into_vec(&mut vec)?;
-            w.write_all(vec.as_slice());
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

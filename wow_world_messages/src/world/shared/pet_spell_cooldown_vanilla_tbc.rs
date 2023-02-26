@@ -20,7 +20,7 @@ pub struct PetSpellCooldown {
 }
 
 impl PetSpellCooldown {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // spell: u16
         w.write_all(&self.spell.to_le_bytes())?;
 

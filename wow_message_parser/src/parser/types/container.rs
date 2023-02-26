@@ -40,10 +40,6 @@ impl ContainerType {
             ContainerType::SMsg(_) => "smsg",
         }
     }
-
-    pub(crate) fn is_top_level(&self) -> bool {
-        self != &ContainerType::Struct
-    }
 }
 
 #[derive(Debug, Clone)]

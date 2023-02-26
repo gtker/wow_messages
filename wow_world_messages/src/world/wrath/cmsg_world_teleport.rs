@@ -32,7 +32,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         32
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // time_in_msec: u32
         w.write_all(&self.time_in_msec.to_le_bytes())?;
 

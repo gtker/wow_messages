@@ -20,9 +20,9 @@ pub struct TransportInfo {
 }
 
 impl TransportInfo {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(w);
+        self.guid.write_packed_guid_into_vec(w)?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;

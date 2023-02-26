@@ -36,7 +36,7 @@ impl crate::Message for SMSG_LFG_QUEUE_STATUS {
         31
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // dungeon: u32
         w.write_all(&self.dungeon.to_le_bytes())?;
 

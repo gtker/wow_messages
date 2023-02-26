@@ -21,8 +21,10 @@ pub trait ServerMessage: Message {
 
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
-        let mut v = tbc_get_unencrypted_server(Self::OPCODE as u16, self.server_size());
+        let size = self.server_size();
+        let mut v = tbc_get_unencrypted_server(Self::OPCODE as u16, size);
         self.write_into_vec(&mut v)?;
+        assert_eq!(size, v.len() as u16);
 
         w.write_all(&v)
     }
@@ -33,9 +35,11 @@ pub trait ServerMessage: Message {
         w: &mut W,
         e: &mut EncrypterHalf,
     ) -> Result<(), std::io::Error> {
-        let mut v = tbc_get_encrypted_server(Self::OPCODE as u16, self.server_size(), e);
+        let size = self.server_size();
+        let mut v = tbc_get_encrypted_server(Self::OPCODE as u16, size, e);
 
         self.write_into_vec(&mut v)?;
+        assert_eq!(size, v.len() as u16);
 
         w.write_all(&v)
     }
@@ -52,8 +56,10 @@ pub trait ServerMessage: Message {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let mut v = tbc_get_unencrypted_server(Self::OPCODE as u16, self.server_size());
+            let size = self.server_size();
+            let mut v = tbc_get_unencrypted_server(Self::OPCODE as u16, size);
             self.write_into_vec(&mut v)?;
+            assert_eq!(size, v.len() as u16);
 
             w.write_all(&v).await
         })
@@ -73,8 +79,10 @@ pub trait ServerMessage: Message {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let mut v = tbc_get_encrypted_server(Self::OPCODE as u16, self.server_size(), e);
+            let size = self.server_size();
+            let mut v = tbc_get_encrypted_server(Self::OPCODE as u16, size, e);
             self.write_into_vec(&mut v)?;
+            assert_eq!(size, v.len() as u16);
 
             w.write_all(&v).await
         })
@@ -92,8 +100,10 @@ pub trait ServerMessage: Message {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let mut v = tbc_get_unencrypted_server(Self::OPCODE as u16, self.server_size());
+            let size = self.server_size();
+            let mut v = tbc_get_unencrypted_server(Self::OPCODE as u16, size);
             self.write_into_vec(&mut v)?;
+            assert_eq!(size, v.len() as u16);
 
             w.write_all(&v).await
         })
@@ -113,8 +123,10 @@ pub trait ServerMessage: Message {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let mut v = tbc_get_encrypted_server(Self::OPCODE as u16, self.server_size(), e);
+            let size = self.server_size();
+            let mut v = tbc_get_encrypted_server(Self::OPCODE as u16, size, e);
             self.write_into_vec(&mut v)?;
+            assert_eq!(size, v.len() as u16);
 
             w.write_all(&v).await
         })
@@ -131,8 +143,10 @@ pub trait ClientMessage: Message {
 
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
-        let mut v = tbc_get_unencrypted_client(Self::OPCODE as u16, self.client_size());
+        let size = self.client_size();
+        let mut v = tbc_get_unencrypted_client(Self::OPCODE as u16, size);
         self.write_into_vec(&mut v)?;
+        assert_eq!(size, v.len() as u16);
 
         w.write_all(&v)
     }
@@ -143,8 +157,10 @@ pub trait ClientMessage: Message {
         w: &mut W,
         e: &mut EncrypterHalf,
     ) -> Result<(), std::io::Error> {
-        let mut v = tbc_get_encrypted_client(Self::OPCODE as u16, self.client_size(), e);
+        let size = self.client_size();
+        let mut v = tbc_get_encrypted_client(Self::OPCODE as u16, size, e);
         self.write_into_vec(&mut v)?;
+        assert_eq!(size, v.len() as u16);
 
         w.write_all(&v)
     }
@@ -161,8 +177,10 @@ pub trait ClientMessage: Message {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let mut v = tbc_get_unencrypted_client(Self::OPCODE as u16, self.client_size());
+            let size = self.client_size();
+            let mut v = tbc_get_unencrypted_client(Self::OPCODE as u16, size);
             self.write_into_vec(&mut v)?;
+            assert_eq!(size, v.len() as u16);
 
             w.write_all(&v).await
         })
@@ -182,8 +200,10 @@ pub trait ClientMessage: Message {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let mut v = tbc_get_encrypted_client(Self::OPCODE as u16, self.client_size(), e);
+            let size = self.client_size();
+            let mut v = tbc_get_encrypted_client(Self::OPCODE as u16, size, e);
             self.write_into_vec(&mut v)?;
+            assert_eq!(size, v.len() as u16);
 
             w.write_all(&v).await
         })
@@ -201,8 +221,10 @@ pub trait ClientMessage: Message {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let mut v = tbc_get_unencrypted_client(Self::OPCODE as u16, self.client_size());
+            let size = self.client_size();
+            let mut v = tbc_get_unencrypted_client(Self::OPCODE as u16, size);
             self.write_into_vec(&mut v)?;
+            assert_eq!(size, v.len() as u16);
 
             w.write_all(&v).await
         })
@@ -222,8 +244,10 @@ pub trait ClientMessage: Message {
         Self: Sync + 'async_trait,
     {
         Box::pin(async move {
-            let mut v = tbc_get_encrypted_client(Self::OPCODE as u16, self.client_size(), e);
+            let size = self.client_size();
+            let mut v = tbc_get_encrypted_client(Self::OPCODE as u16, size, e);
             self.write_into_vec(&mut v)?;
+            assert_eq!(size, v.len() as u16);
 
             w.write_all(&v).await
         })

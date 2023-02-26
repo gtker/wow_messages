@@ -23,7 +23,7 @@ impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
         16
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // position: Vector3d
         self.position.write_into_vec(w)?;
 

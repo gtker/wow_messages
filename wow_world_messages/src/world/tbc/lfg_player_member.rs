@@ -15,9 +15,9 @@ pub struct LfgPlayerMember {
 }
 
 impl LfgPlayerMember {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(w);
+        self.guid.write_packed_guid_into_vec(w)?;
 
         // level: u32
         w.write_all(&self.level.to_le_bytes())?;

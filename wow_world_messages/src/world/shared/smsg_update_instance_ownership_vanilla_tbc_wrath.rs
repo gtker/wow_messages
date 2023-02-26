@@ -18,7 +18,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
         4
     }
 
-    fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // player_is_saved_to_a_raid: Bool32
         w.write_all(u32::from(self.player_is_saved_to_a_raid).to_le_bytes().as_slice())?;
 

@@ -15,7 +15,7 @@ pub struct FactionInitializer {
 }
 
 impl FactionInitializer {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // flag: FactionFlag
         w.write_all(&(self.flag.as_int() as u8).to_le_bytes())?;
 

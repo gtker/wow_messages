@@ -41,7 +41,7 @@ pub struct TradeSlot {
 }
 
 impl TradeSlot {
-    pub(crate) fn write_into_vec(&self, w: &mut Vec<u8>) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // trade_slot_number: u8
         w.write_all(&self.trade_slot_number.to_le_bytes())?;
 
