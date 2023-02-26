@@ -11,7 +11,7 @@ enum MailType : u8 {
         comment = "client send CMSG_ITEM_QUERY on this mailmessagetype";
     }
 } {
-    versions = "1.12";
+    versions = "1.12 2.4.3 3.3.5";
 }
 
 struct Mail {
@@ -57,9 +57,128 @@ struct Mail {
     versions = "1.12";
 }
 
+struct Mail {
+    u16 size = self.size;
+    u32 message_id;
+    MailType message_type;
+    if (message_type == NORMAL) {
+        Guid sender;
+    } else if (message_type == CREATURE
+            || message_type == GAMEOBJECT)
+    {
+        u32 sender_id;
+    }
+    else if (message_type == AUCTION)
+    {
+        u32 auction_id;
+    }
+    else if (message_type == ITEM) {
+        Item item;
+    }
+    Gold cash_on_delivery;
+    u32 item_text_id;
+    u32 unknown;
+    u32 stationery;
+    Gold money;
+    u32 flags;
+    f32 expiration_time;
+    u32 mail_template_id {
+        comment = "cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)";
+    }
+    CString subject;
+    u8 amount_of_items;
+    MailListItem[amount_of_items] items;
+} {
+    versions = "2.4.3";
+}
+
+struct MailListItem {
+    u8 item_index;
+    u32 low_guid;
+    Item item;
+    MailListItemEnchant[6] enchants;
+    u32 item_random_property_id;
+    u32 item_suffix_factor;
+    u8 item_amount;
+    u32 charges;
+    u32 max_durability;
+    u32 durability;
+} {
+    versions = "2.4.3";
+}
+
+struct MailListItemEnchant {
+    u32 charges;
+    u32 duration;
+    u32 enchant_id;
+} {
+    versions = "2.4.3 3";
+}
+
 smsg SMSG_MAIL_LIST_RESULT = 0x023B {
     u8 amount_of_mails;
     Mail[amount_of_mails] mails;
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3";
+}
+
+struct Mail {
+    u16 size = self.size;
+    u32 message_id;
+    MailType message_type;
+    if (message_type == NORMAL) {
+        Guid sender;
+    } else if (message_type == CREATURE
+            || message_type == GAMEOBJECT)
+    {
+        u32 sender_id;
+    }
+    else if (message_type == AUCTION)
+    {
+        u32 auction_id;
+    }
+    else if (message_type == ITEM) {
+        Item item;
+    }
+    Gold cash_on_delivery;
+    u32 unknown;
+    u32 stationery;
+    Gold money;
+    u32 flags;
+    f32 expiration_time;
+    u32 mail_template_id {
+        comment = "cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)";
+    }
+    CString subject;
+    CString message;
+    u8 amount_of_items;
+    MailListItem[amount_of_items] items;
+} {
+    versions = "3.3.5";
+}
+
+struct MailListItem {
+    u8 item_index;
+    u32 low_guid;
+    Item item;
+    MailListItemEnchant[7] enchants;
+    u32 item_random_property_id;
+    u32 item_suffix_factor;
+    u8 item_amount;
+    u32 charges;
+    u32 max_durability;
+    u32 durability;
+    u8 unknown;
+} {
+    versions = "3.3.5";
+}
+
+smsg SMSG_MAIL_LIST_RESULT = 0x023B {
+    u32 real_mail_amount {
+        comment = "azerothcore: this will display warning about undelivered mail to player if realCount > mailsCount";
+    }
+    u8 amount_of_mails;
+    Mail[amount_of_mails] mails;
+} {
+    versions = "3.3.5";
 }

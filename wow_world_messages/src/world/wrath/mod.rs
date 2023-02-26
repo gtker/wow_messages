@@ -484,6 +484,10 @@ pub(crate) mod lfg_update_flag;
 pub use lfg_update_flag::*;
 pub(crate) mod lfg_update_type;
 pub use lfg_update_type::*;
+pub(crate) mod mail;
+pub use mail::*;
+pub(crate) mod mail_list_item;
+pub use mail_list_item::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod mini_move_message;
@@ -1123,6 +1127,8 @@ pub use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
 
 pub use crate::shared::mail_item_tbc_wrath::MailItem;
 
+pub use crate::shared::mail_list_item_enchant_tbc_wrath::MailListItemEnchant;
+
 pub use crate::shared::money_log_item_tbc_wrath::MoneyLogItem;
 
 pub use crate::shared::msg_auction_hello_client_vanilla_tbc_wrath::MSG_AUCTION_HELLO_Client;
@@ -1745,6 +1751,8 @@ pub use wow_world_base::wrath::LootSlotType;
 
 pub use wow_world_base::wrath::MailMessageType;
 
+pub use wow_world_base::wrath::MailType;
+
 pub use wow_world_base::wrath::MonsterMoveType;
 
 pub use wow_world_base::wrath::MountResult;
@@ -2165,6 +2173,8 @@ pub(crate) mod smsg_loot_money_notify;
 pub use smsg_loot_money_notify::*;
 pub(crate) mod smsg_loot_start_roll;
 pub use smsg_loot_start_roll::*;
+pub(crate) mod smsg_mail_list_result;
+pub use smsg_mail_list_result::*;
 pub(crate) mod smsg_messagechat;
 pub use smsg_messagechat::*;
 pub(crate) mod smsg_mirrorimage_data;

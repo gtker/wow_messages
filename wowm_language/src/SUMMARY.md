@@ -881,6 +881,8 @@
 - [MSG_TALENT_WIPE_CONFIRM_Server](docs/msg_talent_wipe_confirm_server.md)
 - [Mail](docs/mail.md)
 - [MailItem](docs/mailitem.md)
+- [MailListItem](docs/maillistitem.md)
+- [MailListItemEnchant](docs/maillistitemenchant.md)
 - [MiniMoveMessage](docs/minimovemessage.md)
 - [MoneyLogItem](docs/moneylogitem.md)
 - [MonsterMove](docs/monstermove.md)

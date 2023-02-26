@@ -230,8 +230,6 @@ pub(crate) mod mail_action;
 pub use mail_action::*;
 pub(crate) mod mail_result;
 pub use mail_result::*;
-pub(crate) mod mail_type;
-pub use mail_type::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod meeting_stone_failure;
@@ -1350,6 +1348,8 @@ pub use wow_world_base::vanilla::LootMethodError;
 pub use wow_world_base::vanilla::LootSlotType;
 
 pub use wow_world_base::vanilla::MailMessageType;
+
+pub use wow_world_base::vanilla::MailType;
 
 pub use wow_world_base::vanilla::MeetingStoneStatus;
 

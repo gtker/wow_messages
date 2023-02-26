@@ -1,6 +1,6 @@
 # MailType
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2.4.3, Client Version 3.3.5
 
 ### Wowm Representation
 
@@ -27,5 +27,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `ITEM` | 5 (0x05) |  | client send CMSG_ITEM_QUERY on this mailmessagetype |
 
 Used in:
+* [Mail](mail.md)
+* [Mail](mail.md)
 * [Mail](mail.md)
 

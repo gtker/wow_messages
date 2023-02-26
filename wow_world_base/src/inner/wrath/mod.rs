@@ -229,6 +229,8 @@ pub(crate) mod loot_slot_type;
 pub use loot_slot_type::*;
 pub(crate) mod mail_message_type;
 pub use mail_message_type::*;
+pub(crate) mod mail_type;
+pub use mail_type::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod mini_move_opcode;

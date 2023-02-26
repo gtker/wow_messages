@@ -542,6 +542,8 @@ pub mod loot_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod mail_item_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod mail_list_item_enchant_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod money_log_item_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod msg_auction_hello_client_vanilla_tbc_wrath;

@@ -218,6 +218,10 @@ pub(crate) mod lfg_type;
 pub use lfg_type::*;
 pub(crate) mod lfg_update_looking_for_more;
 pub use lfg_update_looking_for_more::*;
+pub(crate) mod mail;
+pub use mail::*;
+pub(crate) mod mail_list_item;
+pub use mail_list_item::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod movement_block;
@@ -922,6 +926,8 @@ pub use crate::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
 pub use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
 
 pub use crate::shared::mail_item_tbc_wrath::MailItem;
+
+pub use crate::shared::mail_list_item_enchant_tbc_wrath::MailListItemEnchant;
 
 pub use crate::shared::money_log_item_tbc_wrath::MoneyLogItem;
 
@@ -1649,6 +1655,8 @@ pub use wow_world_base::tbc::LootSlotType;
 
 pub use wow_world_base::tbc::MailMessageType;
 
+pub use wow_world_base::tbc::MailType;
+
 pub use wow_world_base::tbc::MeetingStoneStatus;
 
 pub use wow_world_base::tbc::MonsterMoveType;
@@ -1891,6 +1899,8 @@ pub(crate) mod smsg_login_verify_world;
 pub use smsg_login_verify_world::*;
 pub(crate) mod smsg_loot_list;
 pub use smsg_loot_list::*;
+pub(crate) mod smsg_mail_list_result;
+pub use smsg_mail_list_result::*;
 pub(crate) mod smsg_meetingstone_setqueue;
 pub use smsg_meetingstone_setqueue::*;
 pub(crate) mod smsg_messagechat;
