@@ -5289,7 +5289,6 @@ use crate::vanilla::SMSG_SPELLDAMAGESHIELD;
 use crate::vanilla::SMSG_SPELLNONMELEEDAMAGELOG;
 use crate::vanilla::SMSG_ZONE_UNDER_ATTACK;
 use crate::vanilla::MSG_AUCTION_HELLO_Server;
-use crate::vanilla::SMSG_AUCTION_COMMAND_RESULT;
 use crate::vanilla::SMSG_AUCTION_LIST_RESULT;
 use crate::vanilla::SMSG_AUCTION_OWNER_LIST_RESULT;
 use crate::vanilla::SMSG_AUCTION_BIDDER_NOTIFICATION;
@@ -5641,7 +5640,6 @@ pub enum ServerOpcodeMessage {
     SMSG_SPELLNONMELEEDAMAGELOG(SMSG_SPELLNONMELEEDAMAGELOG),
     SMSG_ZONE_UNDER_ATTACK(SMSG_ZONE_UNDER_ATTACK),
     MSG_AUCTION_HELLO(MSG_AUCTION_HELLO_Server),
-    SMSG_AUCTION_COMMAND_RESULT(SMSG_AUCTION_COMMAND_RESULT),
     SMSG_AUCTION_LIST_RESULT(SMSG_AUCTION_LIST_RESULT),
     SMSG_AUCTION_OWNER_LIST_RESULT(SMSG_AUCTION_OWNER_LIST_RESULT),
     SMSG_AUCTION_BIDDER_NOTIFICATION(SMSG_AUCTION_BIDDER_NOTIFICATION),
@@ -5995,7 +5993,6 @@ impl ServerOpcodeMessage {
             0x0250 => Ok(Self::SMSG_SPELLNONMELEEDAMAGELOG(<SMSG_SPELLNONMELEEDAMAGELOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0250, size: body_size, io, } } else { a } })?)),
             0x0254 => Ok(Self::SMSG_ZONE_UNDER_ATTACK(<SMSG_ZONE_UNDER_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0254, size: body_size, io, } } else { a } })?)),
             0x0255 => Ok(Self::MSG_AUCTION_HELLO(<MSG_AUCTION_HELLO_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0255, size: body_size, io, } } else { a } })?)),
-            0x025B => Ok(Self::SMSG_AUCTION_COMMAND_RESULT(<SMSG_AUCTION_COMMAND_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x025B, size: body_size, io, } } else { a } })?)),
             0x025C => Ok(Self::SMSG_AUCTION_LIST_RESULT(<SMSG_AUCTION_LIST_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x025C, size: body_size, io, } } else { a } })?)),
             0x025D => Ok(Self::SMSG_AUCTION_OWNER_LIST_RESULT(<SMSG_AUCTION_OWNER_LIST_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x025D, size: body_size, io, } } else { a } })?)),
             0x025E => Ok(Self::SMSG_AUCTION_BIDDER_NOTIFICATION(<SMSG_AUCTION_BIDDER_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x025E, size: body_size, io, } } else { a } })?)),
@@ -6417,7 +6414,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_encrypted_server(w, e),
             Self::MSG_AUCTION_HELLO(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.write_encrypted_server(w, e),
@@ -6772,7 +6768,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.write_unencrypted_server(w),
             Self::MSG_AUCTION_HELLO(c) => c.write_unencrypted_server(w),
-            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.write_unencrypted_server(w),
@@ -7127,7 +7122,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -7482,7 +7476,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
@@ -7837,7 +7830,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
@@ -8192,7 +8184,6 @@ impl ServerOpcodeMessage {
             Self::SMSG_SPELLNONMELEEDAMAGELOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ZONE_UNDER_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_AUCTION_HELLO(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_AUCTION_COMMAND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_OWNER_LIST_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AUCTION_BIDDER_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
@@ -8549,7 +8540,6 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SPELLNONMELEEDAMAGELOG(_) => "SMSG_SPELLNONMELEEDAMAGELOG",
             ServerOpcodeMessage::SMSG_ZONE_UNDER_ATTACK(_) => "SMSG_ZONE_UNDER_ATTACK",
             ServerOpcodeMessage::MSG_AUCTION_HELLO(_) => "MSG_AUCTION_HELLO_Server",
-            ServerOpcodeMessage::SMSG_AUCTION_COMMAND_RESULT(_) => "SMSG_AUCTION_COMMAND_RESULT",
             ServerOpcodeMessage::SMSG_AUCTION_LIST_RESULT(_) => "SMSG_AUCTION_LIST_RESULT",
             ServerOpcodeMessage::SMSG_AUCTION_OWNER_LIST_RESULT(_) => "SMSG_AUCTION_OWNER_LIST_RESULT",
             ServerOpcodeMessage::SMSG_AUCTION_BIDDER_NOTIFICATION(_) => "SMSG_AUCTION_BIDDER_NOTIFICATION",
@@ -10094,12 +10084,6 @@ impl From<SMSG_ZONE_UNDER_ATTACK> for ServerOpcodeMessage {
 impl From<MSG_AUCTION_HELLO_Server> for ServerOpcodeMessage {
     fn from(c: MSG_AUCTION_HELLO_Server) -> Self {
         Self::MSG_AUCTION_HELLO(c)
-    }
-}
-
-impl From<SMSG_AUCTION_COMMAND_RESULT> for ServerOpcodeMessage {
-    fn from(c: SMSG_AUCTION_COMMAND_RESULT) -> Self {
-        Self::SMSG_AUCTION_COMMAND_RESULT(c)
     }
 }
 

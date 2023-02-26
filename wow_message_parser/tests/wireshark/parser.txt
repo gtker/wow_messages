@@ -3673,8 +3673,22 @@
             ptvcursor_add(ptv, hf_woww_item_random_property_id, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_AUCTION_COMMAND_RESULT:
-            len = offset_packet_end - ptvcursor_current_offset(ptv);
-            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
+            ptvcursor_add(ptv, hf_woww_auction_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add_ret_uint(ptv, hf_woww_auction_command_action, 4, ENC_LITTLE_ENDIAN, &action);
+            ptvcursor_add_ret_uint(ptv, hf_woww_auction_command_result, 4, ENC_LITTLE_ENDIAN, &result);
+            if (result == AUCTION_COMMAND_RESULT_OK) {
+                if (action == AUCTION_COMMAND_ACTION_BID_PLACED) {
+                    ptvcursor_add(ptv, hf_woww_auction_outbid, 4, ENC_LITTLE_ENDIAN);
+                }
+            }
+            else if (result == AUCTION_COMMAND_RESULT_ERR_INVENTORY) {
+                ptvcursor_add(ptv, hf_woww_inventory_result, 1, ENC_LITTLE_ENDIAN);
+            }
+            else if (result == AUCTION_COMMAND_RESULT_ERR_HIGHER_BID) {
+                ptvcursor_add(ptv, hf_woww_higher_bidder, 8, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_new_bid, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_auction_outbid, 4, ENC_LITTLE_ENDIAN);
+            }
             break;
         case SMSG_AUCTION_LIST_RESULT:
             ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);

@@ -1457,8 +1457,6 @@ pub(crate) mod smsg_attackerstateupdate;
 pub use smsg_attackerstateupdate::*;
 pub(crate) mod smsg_auction_bidder_list_result;
 pub use smsg_auction_bidder_list_result::*;
-pub(crate) mod smsg_auction_command_result;
-pub use smsg_auction_command_result::*;
 pub(crate) mod smsg_auction_list_result;
 pub use smsg_auction_list_result::*;
 pub(crate) mod smsg_auction_owner_list_result;

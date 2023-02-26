@@ -502,6 +502,18 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_auction_command_action,
+            { "Auction Command Action", "woww.auction.command.action",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_auction_command_action_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_command_result,
+            { "Auction Command Result", "woww.auction.command.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_auction_command_result_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_auction_duration_in_minutes,
             { "Auction Duration In Minutes", "woww.auction.duration.in.minutes",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -528,6 +540,12 @@
         },
         { &hf_woww_auction_out_bid,
             { "Auction Out Bid", "woww.auction.out.bid",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_auction_outbid,
+            { "Auction Outbid", "woww.auction.outbid",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -1906,6 +1924,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_higher_bidder,
+            { "Higher Bidder", "woww.higher.bidder",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_highest_bid,
             { "Highest Bid", "woww.highest.bid",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -2748,6 +2772,12 @@
         },
         { &hf_woww_nearest_node,
             { "Nearest Node", "woww.nearest.node",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_new_bid,
+            { "New Bid", "woww.new.bid",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -4495,12 +4525,6 @@
         { &hf_woww_type_flags,
             { "Type Flags", "woww.type.flags",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_unimplemented,
-            { "Unimplemented", "woww.unimplemented",
-                FT_BYTES, BASE_NONE, NULL, 0,
                 NULL, HFILL
             }
         },
