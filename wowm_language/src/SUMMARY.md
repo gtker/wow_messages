@@ -1022,6 +1022,7 @@
 - [SMSG_CORPSE_RECLAIM_DELAY](docs/smsg_corpse_reclaim_delay.md)
 - [SMSG_CREATURE_QUERY_RESPONSE](docs/smsg_creature_query_response.md)
 - [SMSG_CRITERIA_DELETED](docs/smsg_criteria_deleted.md)
+- [SMSG_CRITERIA_UPDATE](docs/smsg_criteria_update.md)
 - [SMSG_CROSSED_INEBRIATION_THRESHOLD](docs/smsg_crossed_inebriation_threshold.md)
 - [SMSG_DEATH_RELEASE_LOC](docs/smsg_death_release_loc.md)
 - [SMSG_DEFENSE_MESSAGE](docs/smsg_defense_message.md)

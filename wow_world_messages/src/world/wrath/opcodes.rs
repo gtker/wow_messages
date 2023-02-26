@@ -7644,6 +7644,7 @@ use crate::wrath::SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT;
 use crate::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE;
 use crate::wrath::SMSG_TRIGGER_MOVIE;
 use crate::wrath::SMSG_ACHIEVEMENT_EARNED;
+use crate::wrath::SMSG_CRITERIA_UPDATE;
 use crate::wrath::SMSG_RESPOND_INSPECT_ACHIEVEMENTS;
 use crate::wrath::SMSG_QUESTUPDATE_ADD_PVP_KILL;
 use crate::wrath::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED;
@@ -8162,6 +8163,7 @@ pub enum ServerOpcodeMessage {
     SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(SMSG_UPDATE_ACCOUNT_DATA_COMPLETE),
     SMSG_TRIGGER_MOVIE(SMSG_TRIGGER_MOVIE),
     SMSG_ACHIEVEMENT_EARNED(SMSG_ACHIEVEMENT_EARNED),
+    SMSG_CRITERIA_UPDATE(SMSG_CRITERIA_UPDATE),
     SMSG_RESPOND_INSPECT_ACHIEVEMENTS(SMSG_RESPOND_INSPECT_ACHIEVEMENTS),
     SMSG_QUESTUPDATE_ADD_PVP_KILL(SMSG_QUESTUPDATE_ADD_PVP_KILL),
     SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(SMSG_CALENDAR_RAID_LOCKOUT_UPDATED),
@@ -8682,6 +8684,7 @@ impl ServerOpcodeMessage {
             0x0463 => Ok(Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(<SMSG_UPDATE_ACCOUNT_DATA_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0463, size: body_size, io, } } else { a } })?)),
             0x0464 => Ok(Self::SMSG_TRIGGER_MOVIE(<SMSG_TRIGGER_MOVIE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0464, size: body_size, io, } } else { a } })?)),
             0x0468 => Ok(Self::SMSG_ACHIEVEMENT_EARNED(<SMSG_ACHIEVEMENT_EARNED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0468, size: body_size, io, } } else { a } })?)),
+            0x046A => Ok(Self::SMSG_CRITERIA_UPDATE(<SMSG_CRITERIA_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x046A, size: body_size, io, } } else { a } })?)),
             0x046C => Ok(Self::SMSG_RESPOND_INSPECT_ACHIEVEMENTS(<SMSG_RESPOND_INSPECT_ACHIEVEMENTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x046C, size: body_size, io, } } else { a } })?)),
             0x046F => Ok(Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(<SMSG_QUESTUPDATE_ADD_PVP_KILL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x046F, size: body_size, io, } } else { a } })?)),
             0x0471 => Ok(Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(<SMSG_CALENDAR_RAID_LOCKOUT_UPDATED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0471, size: body_size, io, } } else { a } })?)),
@@ -9351,6 +9354,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TRIGGER_MOVIE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CRITERIA_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RESPOND_INSPECT_ACHIEVEMENTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.write_encrypted_server(w, e),
@@ -9872,6 +9876,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_TRIGGER_MOVIE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CRITERIA_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_RESPOND_INSPECT_ACHIEVEMENTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.write_unencrypted_server(w),
@@ -10393,6 +10398,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TRIGGER_MOVIE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CRITERIA_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RESPOND_INSPECT_ACHIEVEMENTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10914,6 +10920,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TRIGGER_MOVIE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CRITERIA_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RESPOND_INSPECT_ACHIEVEMENTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11435,6 +11442,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TRIGGER_MOVIE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CRITERIA_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RESPOND_INSPECT_ACHIEVEMENTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11956,6 +11964,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TRIGGER_MOVIE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACHIEVEMENT_EARNED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CRITERIA_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RESPOND_INSPECT_ACHIEVEMENTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_ADD_PVP_KILL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(c) => c.astd_write_unencrypted_server(w).await,
@@ -12487,6 +12496,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE(_) => "SMSG_UPDATE_ACCOUNT_DATA_COMPLETE",
             ServerOpcodeMessage::SMSG_TRIGGER_MOVIE(_) => "SMSG_TRIGGER_MOVIE",
             ServerOpcodeMessage::SMSG_ACHIEVEMENT_EARNED(_) => "SMSG_ACHIEVEMENT_EARNED",
+            ServerOpcodeMessage::SMSG_CRITERIA_UPDATE(_) => "SMSG_CRITERIA_UPDATE",
             ServerOpcodeMessage::SMSG_RESPOND_INSPECT_ACHIEVEMENTS(_) => "SMSG_RESPOND_INSPECT_ACHIEVEMENTS",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_ADD_PVP_KILL(_) => "SMSG_QUESTUPDATE_ADD_PVP_KILL",
             ServerOpcodeMessage::SMSG_CALENDAR_RAID_LOCKOUT_UPDATED(_) => "SMSG_CALENDAR_RAID_LOCKOUT_UPDATED",
@@ -15243,6 +15253,12 @@ impl From<SMSG_TRIGGER_MOVIE> for ServerOpcodeMessage {
 impl From<SMSG_ACHIEVEMENT_EARNED> for ServerOpcodeMessage {
     fn from(c: SMSG_ACHIEVEMENT_EARNED) -> Self {
         Self::SMSG_ACHIEVEMENT_EARNED(c)
+    }
+}
+
+impl From<SMSG_CRITERIA_UPDATE> for ServerOpcodeMessage {
+    fn from(c: SMSG_CRITERIA_UPDATE) -> Self {
+        Self::SMSG_CRITERIA_UPDATE(c)
     }
 }
 
