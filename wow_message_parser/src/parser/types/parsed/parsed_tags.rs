@@ -6,7 +6,7 @@ use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
     ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
-    RUST_BASE_TYPE, SKIP_SERIALIZE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
+    RUST_BASE_TYPE, RUST_SKIP_STR, SKIP_SERIALIZE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
     ZERO_IS_ALWAYS_VALID,
 };
 
@@ -22,6 +22,7 @@ pub(crate) struct ParsedTags {
 
     skip_serialize: BoolTag,
     is_test: BoolTag,
+    rust_skip: BoolTag,
     skip: BoolTag,
     unimplemented: BoolTag,
     rust_base_ty: BoolTag,
@@ -53,6 +54,8 @@ impl ParsedTags {
         if let Some(v) = t.display {
             self.display = Some(v);
         }
+
+        self.rust_skip.append(t.rust_skip);
 
         self.paste_versions.append(&mut t.paste_versions);
 
@@ -98,6 +101,7 @@ impl ParsedTags {
             },
             self.is_test.into_bool(),
             self.skip.into_bool(),
+            self.rust_skip.into_bool(),
             self.unimplemented.into_bool(),
             self.rust_base_ty
                 .into_bool_with_default(rust_base_type_default),
@@ -214,6 +218,8 @@ impl ParsedTags {
             self.rust_base_ty.insert(value);
         } else if key == ZERO_IS_ALWAYS_VALID {
             self.zero_is_always_valid.insert(value);
+        } else if key == RUST_SKIP_STR {
+            self.rust_skip.insert(value);
         }
     }
 }

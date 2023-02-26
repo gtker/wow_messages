@@ -61,6 +61,7 @@ pub(crate) struct Data {
     pub name: &'static str,
     pub opcode: usize,
     pub definition: bool,
+    pub rust_skip: bool,
     pub tests: usize,
     pub reason: Reason,
 }
@@ -71,6 +72,7 @@ impl Data {
             name,
             opcode,
             definition: false,
+            rust_skip: false,
             tests: 0,
             reason: Reason::None,
         }
@@ -86,6 +88,7 @@ impl Data {
             name,
             opcode,
             definition: false,
+            rust_skip: false,
             tests: 0,
             reason: Reason::Custom(reason),
         }
@@ -96,6 +99,7 @@ impl Data {
             name,
             opcode,
             definition: false,
+            rust_skip: false,
             tests: 0,
             reason,
         }
@@ -107,8 +111,10 @@ impl Data {
             Reason::None => return None,
             Reason::Compressed => "Requires compression",
             Reason::NotImplementedInAnyEmulator => "Not implemented in any emulator yet",
-            Reason::RequiresNestedIf => "Requires nested if",
-            Reason::ElseIfForDifferentVariable => "Requires else if for different variable",
+            Reason::RequiresNestedIf => "RUST_IF_SCOPE Requires nested if",
+            Reason::ElseIfForDifferentVariable => {
+                "RUST_IF_SCOPE Requires else if for different variable"
+            }
             Reason::SelfSizeStruct => "Requires self.size for struct",
             Reason::RequiresNotEqualGuid => "Requires != 0 for Guid type",
             Reason::ComplexImplementation => "Complex implementation",
@@ -140,7 +146,7 @@ impl Data {
     }
 
     pub(crate) fn needs_work(&self) -> bool {
-        !self.definition
+        !self.definition || self.rust_skip
     }
 }
 
@@ -206,6 +212,7 @@ fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<D
             }
             assert_eq!(opcode as usize, container.opcode);
 
+            container.rust_skip = s.tags().rust_skip();
             container.definition = !s.tags().unimplemented();
             container.tests = s.tests(o).len();
         } else if let Some(message) = data.iter_mut().find(|a| a.opcode == s.opcode() as usize) {
@@ -238,7 +245,12 @@ fn print_missing_definitions(data: &[Data], version: MajorWorldVersion) {
 
     for d in data {
         if d.needs_work() {
-            println!("    {}: {}", d.name, d.reason().unwrap());
+            let rust_skip = if d.rust_skip {
+                " (Skipped Rust Codegen)"
+            } else {
+                ""
+            };
+            println!("    {}: {}{rust_skip}", d.name, d.reason().unwrap());
         }
     }
 

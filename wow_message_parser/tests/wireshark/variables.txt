@@ -1,3 +1,4 @@
+    guint32 action = 0;
     guint32 amount_of_auras = 0;
     guint32 amount_of_carriers = 0;
     guint32 amount_of_characters = 0;

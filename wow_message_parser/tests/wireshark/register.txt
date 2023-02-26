@@ -1480,6 +1480,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_equip_error,
+            { "Equip Error", "woww.equip.error",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_equipment_display_id,
             { "Equipment Display Id", "woww.equipment.display.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -2464,9 +2470,21 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_mail_action,
+            { "Mail Action", "woww.mail.action",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_mail_action_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_mail_id,
             { "Mail Id", "woww.mail.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mail_result,
+            { "Mail Result", "woww.mail.result",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_mail_result_strings), 0,
                 NULL, HFILL
             }
         },

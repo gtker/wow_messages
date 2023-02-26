@@ -1625,8 +1625,6 @@ pub(crate) mod smsg_raid_instance_message;
 pub use smsg_raid_instance_message::*;
 pub(crate) mod smsg_resistlog;
 pub use smsg_resistlog::*;
-pub(crate) mod smsg_send_mail_result;
-pub use smsg_send_mail_result::*;
 pub(crate) mod smsg_set_faction_standing;
 pub use smsg_set_faction_standing::*;
 pub(crate) mod smsg_set_faction_visible;

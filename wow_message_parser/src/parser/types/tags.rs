@@ -12,6 +12,7 @@ pub(crate) struct ObjectTags {
 
     description: Option<TagString>,
     comment: Option<TagString>,
+    rust_skip: bool,
 
     compressed: bool,
     is_test: bool,
@@ -29,6 +30,7 @@ impl ObjectTags {
         compressed: bool,
         is_test: bool,
         skip: bool,
+        rust_skip: bool,
         unimplemented: bool,
         rust_base_ty: bool,
         zero_is_always_valid: bool,
@@ -43,6 +45,7 @@ impl ObjectTags {
             unimplemented,
             rust_base_ty,
             zero_is_always_valid,
+            rust_skip,
         }
     }
 
@@ -64,6 +67,7 @@ impl ObjectTags {
             all_versions: v.0,
             description: None,
             comment: None,
+            rust_skip: false,
             compressed: false,
             is_test: false,
             skip: false,
@@ -193,6 +197,10 @@ impl ObjectTags {
 
     pub(crate) fn skip(&self) -> bool {
         self.skip
+    }
+
+    pub(crate) fn rust_skip(&self) -> bool {
+        self.rust_skip
     }
 
     pub(crate) fn test(&self) -> bool {

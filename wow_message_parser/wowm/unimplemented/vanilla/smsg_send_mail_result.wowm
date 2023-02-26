@@ -27,7 +27,6 @@ enum MailAction : u32 {
     MADE_PERMANENT = 5;
 }
 
-/* MailAction already in */
 smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
     u32 mail_id;
     MailAction action;
@@ -44,7 +43,7 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
             u32 item_count;
         }
     }
-
-    unimplemented
+} {
+    rust_skip = "true";
 }
 

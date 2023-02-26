@@ -5656,8 +5656,18 @@
             ptvcursor_add(ptv, hf_woww_sell_item_result, 1, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_SEND_MAIL_RESULT:
-            len = offset_packet_end - ptvcursor_current_offset(ptv);
-            ptvcursor_add(ptv, hf_woww_unimplemented, len, ENC_NA);
+            ptvcursor_add(ptv, hf_woww_mail_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add_ret_uint(ptv, hf_woww_mail_action, 4, ENC_LITTLE_ENDIAN, &action);
+            ptvcursor_add_ret_uint(ptv, hf_woww_mail_result, 4, ENC_LITTLE_ENDIAN, &result);
+            if (result == MAIL_RESULT_ERR_EQUIP_ERROR) {
+                ptvcursor_add(ptv, hf_woww_equip_error, 4, ENC_LITTLE_ENDIAN);
+            }
+            else {
+                if (action == MAIL_ACTION_ITEM_TAKEN) {
+                    ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
+                }
+            }
             break;
         case SMSG_SERVER_MESSAGE:
             ptvcursor_add(ptv, hf_woww_server_message_type, 4, ENC_LITTLE_ENDIAN);

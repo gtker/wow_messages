@@ -29,4 +29,5 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `MADE_PERMANENT` | 5 (0x05) |  |  |
 
 Used in:
+* [SMSG_SEND_MAIL_RESULT](smsg_send_mail_result.md)
 

@@ -54,6 +54,7 @@ const DISPLAY: &str = "display";
 const TEST_STR: &str = "test";
 const SKIP_SERIALIZE: &str = "skip_serialize";
 const SKIP_STR: &str = "skip_codegen";
+const RUST_SKIP_STR: &str = "rust_skip";
 const LOGIN_VERSIONS: &str = "login_versions";
 const RUST_BASE_TYPE: &str = "rust_base_type";
 const ZERO_IS_ALWAYS_VALID: &str = "zero_is_always_valid";
@@ -204,7 +205,7 @@ fn write_world_opcodes(o: &Objects) {
                 matches!(
                     a.container_type(),
                     ContainerType::Msg(_) | ContainerType::CMsg(_)
-                )
+                ) && !a.tags().rust_skip()
             })
             .collect();
         if !cmsg.is_empty() {
@@ -218,7 +219,7 @@ fn write_world_opcodes(o: &Objects) {
                 matches!(
                     a.container_type(),
                     ContainerType::SMsg(_) | ContainerType::Msg(_)
-                )
+                ) && !a.tags().rust_skip()
             })
             .collect();
         if !smsg.is_empty() {
@@ -272,5 +273,5 @@ fn load_files(dir: &Path, components: &mut ParsedObjects) {
 }
 
 fn should_not_write_object(t: &ObjectTags) -> bool {
-    t.test() || t.skip() || !t.is_main_version()
+    t.test() || t.skip() || !t.is_main_version() || t.rust_skip()
 }
