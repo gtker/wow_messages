@@ -16,10 +16,6 @@ pub(crate) mod attributes_ex3;
 pub use attributes_ex3::*;
 pub(crate) mod attributes_ex4;
 pub use attributes_ex4::*;
-pub(crate) mod auction_command_action;
-pub use auction_command_action::*;
-pub(crate) mod auction_command_result;
-pub use auction_command_result::*;
 pub(crate) mod auction_list_item;
 pub use auction_list_item::*;
 pub(crate) mod aura_log;
@@ -1262,6 +1258,10 @@ pub use wow_world_base::vanilla::ActivateTaxiReply;
 pub use wow_world_base::vanilla::AiReaction;
 
 pub use wow_world_base::vanilla::AllowedClass;
+
+pub use wow_world_base::vanilla::AuctionCommandAction;
+
+pub use wow_world_base::vanilla::AuctionCommandResult;
 
 pub use wow_world_base::vanilla::BattlefieldPortAction;
 

@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum AuctionCommandAction : u32 {
     STARTED = 0 {
         comment = "ERR_AUCTION_STARTED";
@@ -10,6 +8,8 @@ enum AuctionCommandAction : u32 {
     BID_PLACED = 2 {
         comment = "ERR_AUCTION_BID_PLACED";
     }
+} {
+    versions = "1.12 2";
 }
 
 enum AuctionCommandResult : u32 {
@@ -40,6 +40,8 @@ enum AuctionCommandResult : u32 {
     ERR_RESTRICTED_ACCOUNT = 13 {
         comment = "ERR_RESTRICTED_ACCOUNT";
     }
+} {
+     versions = "1.12 2";
 }
 
 smsg SMSG_AUCTION_COMMAND_RESULT = 0x025B {
@@ -59,5 +61,5 @@ smsg SMSG_AUCTION_COMMAND_RESULT = 0x025B {
     }
 } {
     rust_skip = "true";
+    paste_versions = "1.12 2.4.3";
 }
-

@@ -1,6 +1,6 @@
 # AuctionCommandResult
 
-## Client Version 1.12
+## Client Version 1.12, Client Version 2
 
 ### Wowm Representation
 
@@ -35,5 +35,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `ERR_RESTRICTED_ACCOUNT` | 13 (0x0D) |  | ERR_RESTRICTED_ACCOUNT |
 
 Used in:
+* [SMSG_AUCTION_COMMAND_RESULT](smsg_auction_command_result.md)
 * [SMSG_AUCTION_COMMAND_RESULT](smsg_auction_command_result.md)
 

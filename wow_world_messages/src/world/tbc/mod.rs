@@ -1531,6 +1531,10 @@ pub use wow_world_base::tbc::ArenaTeamRole;
 
 pub use wow_world_base::tbc::ArenaType;
 
+pub use wow_world_base::tbc::AuctionCommandAction;
+
+pub use wow_world_base::tbc::AuctionCommandResult;
+
 pub use wow_world_base::tbc::BagFamily;
 
 pub use wow_world_base::tbc::BankSwapSource;
