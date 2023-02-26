@@ -1653,7 +1653,11 @@ pub use wow_world_base::tbc::LootMethodError;
 
 pub use wow_world_base::tbc::LootSlotType;
 
+pub use wow_world_base::tbc::MailAction;
+
 pub use wow_world_base::tbc::MailMessageType;
+
+pub use wow_world_base::tbc::MailResult;
 
 pub use wow_world_base::tbc::MailType;
 

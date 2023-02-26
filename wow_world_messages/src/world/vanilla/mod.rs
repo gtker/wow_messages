@@ -226,10 +226,6 @@ pub(crate) mod list_inventory_item;
 pub use list_inventory_item::*;
 pub(crate) mod mail;
 pub use mail::*;
-pub(crate) mod mail_action;
-pub use mail_action::*;
-pub(crate) mod mail_result;
-pub use mail_result::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod meeting_stone_failure;
@@ -1347,7 +1343,11 @@ pub use wow_world_base::vanilla::LootMethodError;
 
 pub use wow_world_base::vanilla::LootSlotType;
 
+pub use wow_world_base::vanilla::MailAction;
+
 pub use wow_world_base::vanilla::MailMessageType;
+
+pub use wow_world_base::vanilla::MailResult;
 
 pub use wow_world_base::vanilla::MailType;
 

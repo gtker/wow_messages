@@ -488,6 +488,8 @@ pub(crate) mod mail;
 pub use mail::*;
 pub(crate) mod mail_list_item;
 pub use mail_list_item::*;
+pub(crate) mod mail_result;
+pub use mail_result::*;
 pub(crate) mod map;
 pub use map::*;
 pub(crate) mod mini_move_message;
@@ -1748,6 +1750,8 @@ pub use wow_world_base::wrath::LootMethod;
 pub use wow_world_base::wrath::LootMethodError;
 
 pub use wow_world_base::wrath::LootSlotType;
+
+pub use wow_world_base::wrath::MailAction;
 
 pub use wow_world_base::wrath::MailMessageType;
 

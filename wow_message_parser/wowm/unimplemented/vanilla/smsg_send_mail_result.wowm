@@ -1,5 +1,3 @@
-#tag_all versions "1.12";
-
 enum MailResult : u32 {
     OK = 0;
     ERR_EQUIP_ERROR = 1;
@@ -16,6 +14,27 @@ enum MailResult : u32 {
     ERR_MAIL_ATTACHMENT_INVALID = 19;
 } {
     comment = "mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'";
+    versions = "1.12 2";
+}
+
+enum MailResult : u32 {
+    OK = 0;
+    ERR_EQUIP_ERROR = 1;
+    ERR_CANNOT_SEND_TO_SELF = 2;
+    ERR_NOT_ENOUGH_MONEY = 3;
+    ERR_RECIPIENT_NOT_FOUND = 4;
+    ERR_NOT_YOUR_TEAM = 5;
+    ERR_INTERNAL_ERROR = 6;
+    ERR_DISABLED_FOR_TRIAL_ACC = 14;
+    ERR_RECIPIENT_CAP_REACHED = 15;
+    ERR_CANT_SEND_WRAPPED_COD = 16;
+    ERR_MAIL_AND_CHAT_SUSPENDED = 17;
+    ERR_TOO_MANY_ATTACHMENTS = 18;
+    ERR_MAIL_ATTACHMENT_INVALID = 19;
+    ERR_ITEM_HAS_EXPIRED = 21;
+} {
+    comment = "mangoszero: in [SMSG_SEND_MAIL_RESULT], 7-13 and 16+: 'Mail database error'";
+    versions = "3.3.5";
 }
 
 enum MailAction : u32 {
@@ -25,6 +44,8 @@ enum MailAction : u32 {
     RETURNED_TO_SENDER = 3;
     DELETED = 4;
     MADE_PERMANENT = 5;
+} {
+    versions = "1.12 2 3";
 }
 
 smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
@@ -45,5 +66,6 @@ smsg SMSG_SEND_MAIL_RESULT = 0x0239 {
     }
 } {
     rust_skip = "true";
+    paste_versions = "1.12 2 3.3.5";
 }
 
