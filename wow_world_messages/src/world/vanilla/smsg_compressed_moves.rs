@@ -95,7 +95,7 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         w: &'w mut W,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
         'w: 'async_trait,
         Self: Sync + 'async_trait,
@@ -118,7 +118,7 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         e: &'e mut wow_srp::vanilla_header::EncrypterHalf,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
         'w: 'async_trait,
         'e: 'async_trait,
@@ -142,7 +142,7 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         w: &'w mut W,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
         'w: 'async_trait,
         Self: Sync + 'async_trait,
@@ -165,7 +165,7 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         e: &'e mut wow_srp::vanilla_header::EncrypterHalf,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
         'w: 'async_trait,
         'e: 'async_trait,

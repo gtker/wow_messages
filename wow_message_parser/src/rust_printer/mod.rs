@@ -335,7 +335,7 @@ impl Writer {
 
                 self.inc_indent();
                 let write = async_ty.write();
-                self.wln(format!("W: 'async_trait + {write} + Unpin + Send,"));
+                self.wln(format!("W: 'async_trait + {write},"));
                 self.wln("'s: 'async_trait,");
                 self.wln("'w: 'async_trait,");
                 self.wln("Self: Sync + 'async_trait,");
@@ -364,7 +364,7 @@ impl Writer {
                 self.wln("where");
 
                 self.inc_indent();
-                self.wln(format!("W: 'async_trait + {write} + Unpin + Send,"));
+                self.wln(format!("W: 'async_trait + {write},"));
                 self.wln("'s: 'async_trait,");
                 self.wln("'w: 'async_trait,");
                 self.wln("'e: 'async_trait,");

@@ -209,7 +209,7 @@ impl crate::vanilla::ClientMessage for CMSG_GMTICKET_CREATE {
         w: &'w mut W,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
         'w: 'async_trait,
         Self: Sync + 'async_trait,
@@ -232,7 +232,7 @@ impl crate::vanilla::ClientMessage for CMSG_GMTICKET_CREATE {
         e: &'e mut wow_srp::vanilla_header::EncrypterHalf,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send + Unpin + Send,
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
         'w: 'async_trait,
         'e: 'async_trait,
@@ -256,7 +256,7 @@ impl crate::vanilla::ClientMessage for CMSG_GMTICKET_CREATE {
         w: &'w mut W,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
         'w: 'async_trait,
         Self: Sync + 'async_trait,
@@ -279,7 +279,7 @@ impl crate::vanilla::ClientMessage for CMSG_GMTICKET_CREATE {
         e: &'e mut wow_srp::vanilla_header::EncrypterHalf,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
-        W: 'async_trait + async_std::io::WriteExt + Unpin + Send + Unpin + Send,
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
         'w: 'async_trait,
         'e: 'async_trait,
