@@ -71,7 +71,12 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
             let bind = |s: &mut Writer, container_type, version| {
-                s.impl_world_server_or_client_message(e.name(), container_type, version);
+                s.impl_world_server_or_client_message(
+                    e.name(),
+                    container_type,
+                    version,
+                    e.tags().compressed() || e.contains_compressed_variable(),
+                );
             };
 
             s.impl_world_message(

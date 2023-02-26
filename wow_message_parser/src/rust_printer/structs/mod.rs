@@ -113,7 +113,13 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         ContainerType::SLogin(_) => {
             s.wln(format!("use crate::{SERVER_MESSAGE_TRAIT_NAME};"));
         }
-        _ => {}
+        ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
+            if e.tags().compressed() || e.contains_compressed_variable() {
+                // We manually implement the trait to avoid double compression
+                s.wln("use crate::Message;");
+            }
+        }
+        ContainerType::Struct => {}
     }
 
     s.wln("use std::io::{Write, Read};");

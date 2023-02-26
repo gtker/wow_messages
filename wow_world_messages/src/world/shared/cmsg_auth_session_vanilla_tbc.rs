@@ -1,4 +1,5 @@
 use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
+use crate::Message;
 use std::io::{Write, Read};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -135,10 +136,254 @@ impl crate::Message for CMSG_AUTH_SESSION {
 
 }
 #[cfg(feature = "vanilla")]
-impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {}
+impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
+    #[cfg(feature = "sync")]
+    fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+        self.write_into_vec(&mut v)?;
+        let size = v.len().saturating_sub(2);
+        let s = size.to_le_bytes();
+        v[0] = s[1];
+        v[1] = s[0];
+        w.write_all(&v)
+    }
+
+    #[cfg(all(feature = "sync", feature = "encryption"))]
+    fn write_encrypted_client<W: std::io::Write>(
+        &self,
+        w: &mut W,
+        e: &mut wow_srp::vanilla_header::EncrypterHalf,
+    ) -> Result<(), std::io::Error> {
+        let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+        self.write_into_vec(&mut v)?;
+        let size = v.len().saturating_sub(2) as u16;
+        let header = e.encrypt_client_header(size, Self::OPCODE);
+        for (i, e) in header.iter().enumerate() {
+            v[i] = *e;
+        }
+        w.write_all(&v)
+    }
+
+    #[cfg(feature = "tokio")]
+    fn tokio_write_unencrypted_client<'s, 'w, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send + Unpin + Send,
+        's: 'async_trait,
+        'w: 'async_trait,
+        Self: Sync + 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+            self.write_into_vec(&mut v)?;
+            let size = v.len().saturating_sub(2);
+            let s = size.to_le_bytes();
+            v[0] = s[1];
+            v[1] = s[0];
+            w.write_all(&v).await
+        })
+    }
+
+    #[cfg(all(feature = "tokio", feature = "encryption"))]
+    fn tokio_write_encrypted_client<'s, 'w, 'e, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+        e: &'e mut wow_srp::vanilla_header::EncrypterHalf,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send + Unpin + Send,
+        's: 'async_trait,
+        'w: 'async_trait,
+        'e: 'async_trait,
+        Self: Sync + 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+            self.write_into_vec(&mut v)?;
+            let size = v.len().saturating_sub(2) as u16;
+            let header = e.encrypt_client_header(size, Self::OPCODE);
+            for (i, e) in header.iter().enumerate() {
+                v[i] = *e;
+            }
+            w.write_all(&v).await
+        })
+    }
+
+    #[cfg(feature = "async-std")]
+    fn astd_write_unencrypted_client<'s, 'w, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send + Unpin + Send,
+        's: 'async_trait,
+        'w: 'async_trait,
+        Self: Sync + 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+            self.write_into_vec(&mut v)?;
+            let size = v.len().saturating_sub(2);
+            let s = size.to_le_bytes();
+            v[0] = s[1];
+            v[1] = s[0];
+            w.write_all(&v).await
+        })
+    }
+
+    #[cfg(all(feature = "async-std", feature = "encryption"))]
+    fn astd_write_encrypted_client<'s, 'w, 'e, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+        e: &'e mut wow_srp::vanilla_header::EncrypterHalf,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send + Unpin + Send,
+        's: 'async_trait,
+        'w: 'async_trait,
+        'e: 'async_trait,
+        Self: Sync + 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+            self.write_into_vec(&mut v)?;
+            let size = v.len().saturating_sub(2) as u16;
+            let header = e.encrypt_client_header(size, Self::OPCODE);
+            for (i, e) in header.iter().enumerate() {
+                v[i] = *e;
+            }
+            w.write_all(&v).await
+        })
+    }
+
+}
 
 #[cfg(feature = "tbc")]
-impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {}
+impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
+    #[cfg(feature = "sync")]
+    fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
+        let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+        self.write_into_vec(&mut v)?;
+        let size = v.len().saturating_sub(2);
+        let s = size.to_le_bytes();
+        v[0] = s[1];
+        v[1] = s[0];
+        w.write_all(&v)
+    }
+
+    #[cfg(all(feature = "sync", feature = "encryption"))]
+    fn write_encrypted_client<W: std::io::Write>(
+        &self,
+        w: &mut W,
+        e: &mut wow_srp::tbc_header::EncrypterHalf,
+    ) -> Result<(), std::io::Error> {
+        let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+        self.write_into_vec(&mut v)?;
+        let size = v.len().saturating_sub(2) as u16;
+        let header = e.encrypt_client_header(size, Self::OPCODE);
+        for (i, e) in header.iter().enumerate() {
+            v[i] = *e;
+        }
+        w.write_all(&v)
+    }
+
+    #[cfg(feature = "tokio")]
+    fn tokio_write_unencrypted_client<'s, 'w, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send + Unpin + Send,
+        's: 'async_trait,
+        'w: 'async_trait,
+        Self: Sync + 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+            self.write_into_vec(&mut v)?;
+            let size = v.len().saturating_sub(2);
+            let s = size.to_le_bytes();
+            v[0] = s[1];
+            v[1] = s[0];
+            w.write_all(&v).await
+        })
+    }
+
+    #[cfg(all(feature = "tokio", feature = "encryption"))]
+    fn tokio_write_encrypted_client<'s, 'w, 'e, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+        e: &'e mut wow_srp::tbc_header::EncrypterHalf,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send + Unpin + Send,
+        's: 'async_trait,
+        'w: 'async_trait,
+        'e: 'async_trait,
+        Self: Sync + 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+            self.write_into_vec(&mut v)?;
+            let size = v.len().saturating_sub(2) as u16;
+            let header = e.encrypt_client_header(size, Self::OPCODE);
+            for (i, e) in header.iter().enumerate() {
+                v[i] = *e;
+            }
+            w.write_all(&v).await
+        })
+    }
+
+    #[cfg(feature = "async-std")]
+    fn astd_write_unencrypted_client<'s, 'w, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send + Unpin + Send,
+        's: 'async_trait,
+        'w: 'async_trait,
+        Self: Sync + 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+            self.write_into_vec(&mut v)?;
+            let size = v.len().saturating_sub(2);
+            let s = size.to_le_bytes();
+            v[0] = s[1];
+            v[1] = s[0];
+            w.write_all(&v).await
+        })
+    }
+
+    #[cfg(all(feature = "async-std", feature = "encryption"))]
+    fn astd_write_encrypted_client<'s, 'w, 'e, 'async_trait, W>(
+        &'s self,
+        w: &'w mut W,
+        e: &'e mut wow_srp::tbc_header::EncrypterHalf,
+    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
+    where
+        W: 'async_trait + async_std::io::WriteExt + Unpin + Send + Unpin + Send,
+        's: 'async_trait,
+        'w: 'async_trait,
+        'e: 'async_trait,
+        Self: Sync + 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+            self.write_into_vec(&mut v)?;
+            let size = v.len().saturating_sub(2) as u16;
+            let header = e.encrypt_client_header(size, Self::OPCODE);
+            for (i, e) in header.iter().enumerate() {
+                v[i] = *e;
+            }
+            w.write_all(&v).await
+        })
+    }
+
+}
 
 impl CMSG_AUTH_SESSION {
     pub(crate) fn size(&self) -> usize {

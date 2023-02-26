@@ -1,12 +1,16 @@
+#[cfg(feature = "tbc")]
 use wow_srp::tbc_header::EncrypterHalf;
+#[cfg(feature = "vanilla")]
 use wow_srp::vanilla_header;
+#[cfg(feature = "wrath")]
 use wow_srp::wrath_header::{ClientEncrypterHalf, ServerEncrypterHalf};
 
+#[cfg(feature = "wrath")]
 pub(crate) fn wrath_get_unencrypted_server(opcode: u16, size: u32) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
     if size > LARGE_MESSAGE_THRESHOLD {
-        let size = (size - MAXIMUM_SIZE_LENGTH).to_be_bytes();
+        let size = (size.saturating_sub(MAXIMUM_SIZE_LENGTH)).to_be_bytes();
         let opcode = opcode.to_le_bytes();
 
         let mut header = [0_u8; MAXIMUM_SERVER_HEADER_LENGTH as usize];
@@ -18,7 +22,7 @@ pub(crate) fn wrath_get_unencrypted_server(opcode: u16, size: u32) -> Vec<u8> {
 
         v.extend_from_slice(&header);
     } else {
-        let size = ((size - MINIMUM_SIZE_LENGTH) as u16).to_be_bytes();
+        let size = ((size.saturating_sub(MINIMUM_SIZE_LENGTH)) as u16).to_be_bytes();
         let opcode = opcode.to_le_bytes();
 
         let mut header = [0_u8; MINIMUM_SERVER_HEADER_LENGTH as usize];
@@ -33,7 +37,7 @@ pub(crate) fn wrath_get_unencrypted_server(opcode: u16, size: u32) -> Vec<u8> {
     v
 }
 
-#[cfg(feature = "encryption")]
+#[cfg(all(feature = "encryption", feature = "wrath"))]
 pub(crate) fn wrath_get_encrypted_server(
     opcode: u16,
     size: u32,
@@ -47,7 +51,7 @@ pub(crate) fn wrath_get_encrypted_server(
         MINIMUM_SIZE_LENGTH
     };
 
-    v.extend_from_slice(e.encrypt_server_header(size - size_length, opcode));
+    v.extend_from_slice(e.encrypt_server_header(size.saturating_sub(size_length), opcode));
 
     v
 }
@@ -60,10 +64,11 @@ pub(crate) const CLIENT_HEADER_LENGTH: u16 = 6;
 
 pub(crate) const LARGE_MESSAGE_THRESHOLD: u32 = 0x7FFF;
 
+#[cfg(feature = "wrath")]
 pub(crate) fn wrath_get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    let size = (size - MINIMUM_SIZE_LENGTH as u16).to_be_bytes();
+    let size = (size.saturating_sub(MINIMUM_SIZE_LENGTH as u16)).to_be_bytes();
     let opcode = (opcode as u32).to_le_bytes();
 
     let mut header = [0_u8; CLIENT_HEADER_LENGTH as usize];
@@ -79,7 +84,7 @@ pub(crate) fn wrath_get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     v
 }
 
-#[cfg(feature = "encryption")]
+#[cfg(all(feature = "encryption", feature = "wrath"))]
 pub(crate) fn wrath_get_encrypted_client(
     opcode: u16,
     size: u16,
@@ -87,7 +92,10 @@ pub(crate) fn wrath_get_encrypted_client(
 ) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    v.extend_from_slice(&e.encrypt_client_header(size - MINIMUM_SIZE_LENGTH as u16, opcode as u32));
+    v.extend_from_slice(&e.encrypt_client_header(
+        size.saturating_sub(MINIMUM_SIZE_LENGTH as u16),
+        opcode as u32,
+    ));
 
     v
 }
@@ -95,10 +103,11 @@ pub(crate) fn wrath_get_encrypted_client(
 pub(crate) const SIZE_LENGTH: u16 = 2;
 pub(crate) const SERVER_HEADER_LENGTH: u16 = 4;
 
+#[cfg(feature = "tbc")]
 pub(crate) fn tbc_get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    let size = (size - SIZE_LENGTH).to_be_bytes();
+    let size = (size.saturating_sub(SIZE_LENGTH)).to_be_bytes();
     let opcode = opcode.to_le_bytes();
 
     let mut header = [0_u8; SERVER_HEADER_LENGTH as usize];
@@ -111,19 +120,20 @@ pub(crate) fn tbc_get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
     v
 }
 
-#[cfg(feature = "encryption")]
+#[cfg(all(feature = "encryption", feature = "tbc"))]
 pub(crate) fn tbc_get_encrypted_server(opcode: u16, size: u16, e: &mut EncrypterHalf) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    v.extend_from_slice(&e.encrypt_server_header(size - SIZE_LENGTH, opcode));
+    v.extend_from_slice(&e.encrypt_server_header(size.saturating_sub(SIZE_LENGTH), opcode));
 
     v
 }
 
+#[cfg(feature = "tbc")]
 pub(crate) fn tbc_get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    let size = (size - SIZE_LENGTH).to_be_bytes();
+    let size = (size.saturating_sub(SIZE_LENGTH)).to_be_bytes();
     let opcode = (opcode as u32).to_le_bytes();
 
     let mut header = [0_u8; CLIENT_HEADER_LENGTH as usize];
@@ -139,19 +149,20 @@ pub(crate) fn tbc_get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     v
 }
 
-#[cfg(feature = "encryption")]
+#[cfg(all(feature = "encryption", feature = "tbc"))]
 pub(crate) fn tbc_get_encrypted_client(opcode: u16, size: u16, e: &mut EncrypterHalf) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    v.extend_from_slice(&e.encrypt_client_header(size - SIZE_LENGTH, opcode as u32));
+    v.extend_from_slice(&e.encrypt_client_header(size.saturating_sub(SIZE_LENGTH), opcode as u32));
 
     v
 }
 
+#[cfg(feature = "vanilla")]
 pub(crate) fn vanilla_get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    let size = (size - SIZE_LENGTH).to_be_bytes();
+    let size = (size.saturating_sub(SIZE_LENGTH)).to_be_bytes();
     let opcode = opcode.to_le_bytes();
 
     let mut header = [0_u8; SERVER_HEADER_LENGTH as usize];
@@ -164,7 +175,7 @@ pub(crate) fn vanilla_get_unencrypted_server(opcode: u16, size: u16) -> Vec<u8> 
     v
 }
 
-#[cfg(feature = "encryption")]
+#[cfg(all(feature = "encryption", feature = "vanilla"))]
 pub(crate) fn vanilla_get_encrypted_server(
     opcode: u16,
     size: u16,
@@ -172,15 +183,16 @@ pub(crate) fn vanilla_get_encrypted_server(
 ) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    v.extend_from_slice(&e.encrypt_server_header(size - SIZE_LENGTH, opcode));
+    v.extend_from_slice(&e.encrypt_server_header(size.saturating_sub(SIZE_LENGTH), opcode));
 
     v
 }
 
+#[cfg(feature = "vanilla")]
 pub(crate) fn vanilla_get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    let size = (size - SIZE_LENGTH).to_be_bytes();
+    let size = (size.saturating_sub(SIZE_LENGTH)).to_be_bytes();
     let opcode = (opcode as u32).to_le_bytes();
 
     let mut header = [0_u8; CLIENT_HEADER_LENGTH as usize];
@@ -196,7 +208,7 @@ pub(crate) fn vanilla_get_unencrypted_client(opcode: u16, size: u16) -> Vec<u8> 
     v
 }
 
-#[cfg(feature = "encryption")]
+#[cfg(all(feature = "encryption", feature = "vanilla"))]
 pub(crate) fn vanilla_get_encrypted_client(
     opcode: u16,
     size: u16,
@@ -204,7 +216,7 @@ pub(crate) fn vanilla_get_encrypted_client(
 ) -> Vec<u8> {
     let mut v = Vec::with_capacity(size as usize);
 
-    v.extend_from_slice(&e.encrypt_client_header(size - SIZE_LENGTH, opcode as u32));
+    v.extend_from_slice(&e.encrypt_client_header(size.saturating_sub(SIZE_LENGTH), opcode as u32));
 
     v
 }
