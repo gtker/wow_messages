@@ -437,45 +437,43 @@ fn print_read_definition(
             print_read_array(s, array, e, d, prefix, postfix);
         }
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
-            if e.definer_ty() == DefinerType::Enum {
-                if let Some(integer) = upcast {
-                    if let Some(value) = d.value() {
-                        s.wln(format!(
-                            "let _{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).into();",
-                            name = d.name(),
-                            type_name = d.ty().rust_str(),
-                            endian = integer.rust_endian_str(),
-                            ty = integer.rust_str(),
-                            prefix = prefix,
-                            postfix = postfix,
-                            original_ty = e.ty().rust_str(),
-                        ));
-                        s.wln(format!(
-                            "// {name} is expected to always be {constant_string} ({constant_value})",
-                            name = d.name(),
-                            constant_string = value.original_string(),
-                            constant_value = value.value(),
-                        ));
-                    } else {
-                        s.wln(format!(
-                            "{assignment_prefix}{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).try_into()?;",
-                            name = d.name(),
-                            type_name = d.ty().rust_str(),
-                            endian = integer.rust_endian_str(),
-                            ty = integer.rust_str(),
-                            prefix = prefix,
-                            postfix = postfix,
-                            original_ty = e.ty().rust_str(),
-                        ));
-                    }
-
-                    s.newline();
-                    return;
-                }
-            }
-
             match e.definer_ty() {
                 DefinerType::Enum => {
+                    if let Some(integer) = upcast {
+                        if let Some(value) = d.value() {
+                            s.wln(format!(
+                                "let _{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).into();",
+                                name = d.name(),
+                                type_name = d.ty().rust_str(),
+                                endian = integer.rust_endian_str(),
+                                ty = integer.rust_str(),
+                                prefix = prefix,
+                                postfix = postfix,
+                                original_ty = e.ty().rust_str(),
+                            ));
+                            s.wln(format!(
+                                "// {name} is expected to always be {constant_string} ({constant_value})",
+                                name = d.name(),
+                                constant_string = value.original_string(),
+                                constant_value = value.value(),
+                            ));
+                        } else {
+                            s.wln(format!(
+                                "{assignment_prefix}{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).try_into()?;",
+                                name = d.name(),
+                                type_name = d.ty().rust_str(),
+                                endian = integer.rust_endian_str(),
+                                ty = integer.rust_str(),
+                                prefix = prefix,
+                                postfix = postfix,
+                                original_ty = e.ty().rust_str(),
+                            ));
+                        }
+
+                        s.newline();
+                        return;
+                    }
+
                     s.wln(format!(
                         "{assignment_prefix}{value_set}{name}: {type_name} = crate::util::{prefix}read_{ty}_{endian}(r){postfix}?.{into};",
                         name = d.name(),
