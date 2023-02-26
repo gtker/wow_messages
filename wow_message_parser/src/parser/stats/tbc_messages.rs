@@ -575,7 +575,7 @@ pub(crate) const DATA: &[Data] = &[
     Data::new("CMSG_PET_SPELL_AUTOCAST", 0x2F3),
     Data::new("SMSG_WEATHER", 0x2F4),
     Data::new("SMSG_RAID_INSTANCE_MESSAGE", 0x2FA),
-    Data::compressed("SMSG_COMPRESSED_MOVES", 0x2FB),
+    Data::nyi("SMSG_COMPRESSED_MOVES", 0x2FB),
     Data::new("CMSG_GUILD_INFO_TEXT", 0x2FC),
     Data::new("SMSG_CHAT_RESTRICTED", 0x2FD),
     Data::new("SMSG_SPLINE_SET_RUN_SPEED", 0x2FE),
