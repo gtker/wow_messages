@@ -3,6 +3,9 @@ mod tokio_impl;
 
 #[cfg(feature = "async-std")]
 mod async_std_impl;
+mod trait_helpers;
+
+pub(crate) use trait_helpers::*;
 
 #[cfg(feature = "async-std")]
 pub use async_std_impl::*;
