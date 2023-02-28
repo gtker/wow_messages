@@ -39,41 +39,9 @@ fn print_read_array_fixed(
 
     s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
 
-    match array.ty() {
-        ArrayType::Integer(integer) => {
-            s.wln(format!(
-                "*i = {module}::{prefix}read_{int_type}_{endian}(r){postfix}?;",
-                module = UTILITY_PATH,
-                int_type = integer.rust_str(),
-                endian = integer.rust_endian_str(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        ArrayType::Struct(_) => {
-            s.wln(format!(
-                "*i = {type_name}::{prefix}read(r){postfix}?;",
-                type_name = array.ty().rust_str(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        ArrayType::CString => {
-            s.wln(format!(
-                "let s = crate::util::{prefix}read_c_string_to_vec(r){postfix}?;",
-            ));
-            s.wln("*i = String::from_utf8(s)?;");
-        }
-        ArrayType::Guid => {
-            s.wln(format!("*i = Guid::{prefix}read(r){postfix}?;",));
-        }
-        ArrayType::PackedGuid => {
-            s.wln(format!("*i =Guid::{prefix}read_packed(r){postfix}?;",));
-        }
-    }
+    print_fixed_array_ty(s, array, prefix, "r", postfix);
 
     s.closing_curly();
-
     s.wln(d.name());
 
     s.closing_curly_with(";");
@@ -156,6 +124,43 @@ fn print_read_array(
 
     s.wln(d.name());
     s.closing_curly_with(";");
+}
+
+fn print_fixed_array_ty(s: &mut Writer, array: &Array, prefix: &str, reader: &str, postfix: &str) {
+    match array.ty() {
+        ArrayType::Integer(integer) => {
+            s.wln(format!(
+                "*i = {module}::{prefix}read_{int_type}_{endian}({reader}){postfix}?;",
+                module = UTILITY_PATH,
+                int_type = integer.rust_str(),
+                endian = integer.rust_endian_str(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
+        ArrayType::Struct(_) => {
+            s.wln(format!(
+                "*i = {type_name}::{prefix}read(r){postfix}?;",
+                type_name = array.ty().rust_str(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
+        ArrayType::CString => {
+            s.wln(format!(
+                "let s = crate::util::{prefix}read_c_string_to_vec({reader}){postfix}?;",
+            ));
+            s.wln("*i = String::from_utf8(s)?;");
+        }
+        ArrayType::Guid => {
+            s.wln(format!("*i = Guid::{prefix}read({reader}){postfix}?;",));
+        }
+        ArrayType::PackedGuid => {
+            s.wln(format!(
+                "*i =Guid::{prefix}read_packed({reader}){postfix}?;",
+            ));
+        }
+    }
 }
 
 fn print_array_ty(
