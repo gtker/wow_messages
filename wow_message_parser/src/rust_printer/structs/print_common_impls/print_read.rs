@@ -12,41 +12,6 @@ use crate::rust_printer::{get_new_flag_type_name, get_new_type_name, DefinerType
 use crate::rust_printer::{get_optional_type_name, Writer};
 use crate::UTILITY_PATH;
 
-fn print_read_array_fixed(
-    s: &mut Writer,
-    array: &Array,
-    d: &StructMemberDefinition,
-    prefix: &str,
-    postfix: &str,
-    size: i64,
-) {
-    s.open_curly(format!("let {name} =", name = d.name()));
-
-    let inner_is_constant_sized = array.inner_type_is_constant_sized();
-    if inner_is_constant_sized {
-        s.wln(format!(
-            "let mut {name} = [{type_name}::default(); {size}];",
-            name = d.name(),
-            type_name = array.ty().rust_str(),
-        ));
-    } else {
-        s.wln(format!(
-            "let mut {name} = [(); {size}].map(|_| {ty}::default());",
-            name = d.name(),
-            ty = array.ty().rust_str()
-        ));
-    }
-
-    s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
-
-    print_fixed_array_ty(s, array, prefix, "r", postfix);
-
-    s.closing_curly();
-    s.wln(d.name());
-
-    s.closing_curly_with(";");
-}
-
 fn print_read_array(
     s: &mut Writer,
     array: &Array,
@@ -73,13 +38,32 @@ fn print_read_array(
         return;
     }
 
+    s.open_curly(format!("let {name} =", name = d.name()));
+
     match array.size() {
         ArraySize::Fixed(size) => {
-            print_read_array_fixed(s, array, d, prefix, postfix, size);
-            return;
+            let inner_is_constant_sized = array.inner_type_is_constant_sized();
+            if inner_is_constant_sized {
+                s.wln(format!(
+                    "let mut {name} = [{type_name}::default(); {size}];",
+                    name = d.name(),
+                    type_name = array.ty().rust_str(),
+                ));
+            } else {
+                s.wln(format!(
+                    "let mut {name} = [(); {size}].map(|_| {ty}::default());",
+                    name = d.name(),
+                    ty = array.ty().rust_str()
+                ));
+            }
+
+            s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
+
+            print_fixed_array_ty(s, array, prefix, "r", postfix);
+
+            s.closing_curly();
         }
         ArraySize::Variable(m) => {
-            s.open_curly(format!("let {name} =", name = d.name()));
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity({length} as usize);",
                 name = d.name(),
@@ -91,8 +75,6 @@ fn print_read_array(
             });
         }
         ArraySize::Endless => {
-            s.open_curly(format!("let {name} =", name = d.name()));
-
             if d.tags().is_compressed() {
                 s.wln("let mut decoder = &mut flate2::read::ZlibDecoder::new(r);");
                 s.newline();
