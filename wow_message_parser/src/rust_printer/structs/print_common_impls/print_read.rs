@@ -115,16 +115,12 @@ fn print_fixed_array_ty(s: &mut Writer, array: &Array, prefix: &str, reader: &st
                 module = UTILITY_PATH,
                 int_type = integer.rust_str(),
                 endian = integer.rust_endian_str(),
-                prefix = prefix,
-                postfix = postfix,
             ));
         }
         ArrayType::Struct(_) => {
             s.wln(format!(
                 "*i = {type_name}::{prefix}read(r){postfix}?;",
                 type_name = array.ty().rust_str(),
-                prefix = prefix,
-                postfix = postfix,
             ));
         }
         ArrayType::CString => {
@@ -152,52 +148,35 @@ fn print_array_ty(
     reader: &str,
     postfix: &str,
 ) {
+    let name = d.name();
+
     match array.ty() {
         ArrayType::Integer(integer_type) => {
             s.wln(format!(
                 "{name}.push({module}::{prefix}read_{int_type}_{endian}({reader}){postfix}?);",
-                name = d.name(),
                 module = UTILITY_PATH,
                 int_type = integer_type.rust_str(),
                 endian = integer_type.rust_endian_str(),
-                prefix = prefix,
-                reader = reader,
-                postfix = postfix,
             ));
         }
         ArrayType::Struct(c) => {
             s.wln(format!(
                 "{name}.push({type_name}::{prefix}read({reader}){postfix}?);",
-                name = d.name(),
                 type_name = c.name(),
-                prefix = prefix,
-                reader = reader,
-                postfix = postfix,
             ));
         }
         ArrayType::CString => {
             s.wln(format!(
                 "let s = crate::util::{prefix}read_c_string_to_vec(r){postfix}?;",
             ));
-            s.wln(format!(
-                "{name}.push(String::from_utf8(s)?);",
-                name = d.name()
-            ));
+            s.wln(format!("{name}.push(String::from_utf8(s)?);",));
         }
         ArrayType::Guid => {
-            s.wln(format!(
-                "{name}.push(Guid::{prefix}read(r){postfix}?);",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
+            s.wln(format!("{name}.push(Guid::{prefix}read(r){postfix}?);",));
         }
         ArrayType::PackedGuid => {
             s.wln(format!(
                 "{name}.push(Guid::{prefix}read_packed(r){postfix}?);",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
             ));
         }
     }
