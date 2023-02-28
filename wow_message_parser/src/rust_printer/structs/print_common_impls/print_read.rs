@@ -58,7 +58,7 @@ fn print_read_array(
 
             s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
 
-            print_fixed_array_ty(s, array, prefix, "r", postfix);
+            print_array_ty(s, array, d, prefix, "r", postfix, true);
 
             s.closing_curly();
         }
@@ -70,7 +70,7 @@ fn print_read_array(
             ));
 
             s.body(format!("for i in 0..{length}", length = m.name()), |s| {
-                print_array_ty(s, array, d, prefix, "r", postfix);
+                print_array_ty(s, array, d, prefix, "r", postfix, false);
             });
         }
         ArraySize::Endless => {
@@ -97,7 +97,7 @@ fn print_read_array(
                 name = d.name()
             ));
             s.body(loop_condition.as_str(), |s| {
-                print_array_ty(s, array, d, prefix, reader, postfix);
+                print_array_ty(s, array, d, prefix, reader, postfix, false);
                 s.wln("current_size += 1;")
             });
         }
@@ -107,39 +107,6 @@ fn print_read_array(
     s.closing_curly_with(";");
 }
 
-fn print_fixed_array_ty(s: &mut Writer, array: &Array, prefix: &str, reader: &str, postfix: &str) {
-    match array.ty() {
-        ArrayType::Integer(integer) => {
-            s.wln(format!(
-                "*i = {module}::{prefix}read_{int_type}_{endian}({reader}){postfix}?;",
-                module = UTILITY_PATH,
-                int_type = integer.rust_str(),
-                endian = integer.rust_endian_str(),
-            ));
-        }
-        ArrayType::Struct(_) => {
-            s.wln(format!(
-                "*i = {type_name}::{prefix}read(r){postfix}?;",
-                type_name = array.ty().rust_str(),
-            ));
-        }
-        ArrayType::CString => {
-            s.wln(format!(
-                "let s = crate::util::{prefix}read_c_string_to_vec({reader}){postfix}?;",
-            ));
-            s.wln("*i = String::from_utf8(s)?;");
-        }
-        ArrayType::Guid => {
-            s.wln(format!("*i = Guid::{prefix}read({reader}){postfix}?;",));
-        }
-        ArrayType::PackedGuid => {
-            s.wln(format!(
-                "*i =Guid::{prefix}read_packed({reader}){postfix}?;",
-            ));
-        }
-    }
-}
-
 fn print_array_ty(
     s: &mut Writer,
     array: &Array,
@@ -147,13 +114,17 @@ fn print_array_ty(
     prefix: &str,
     reader: &str,
     postfix: &str,
+    array_is_fixed: bool,
 ) {
-    let name = d.name();
+    let (array_prefix, array_postfix) = match array_is_fixed {
+        true => ("*i = ".to_string(), ";"),
+        false => (format!("{name}.push(", name = d.name()), ");"),
+    };
 
     match array.ty() {
         ArrayType::Integer(integer_type) => {
             s.wln(format!(
-                "{name}.push({module}::{prefix}read_{int_type}_{endian}({reader}){postfix}?);",
+                "{array_prefix}{module}::{prefix}read_{int_type}_{endian}({reader}){postfix}?{array_postfix}",
                 module = UTILITY_PATH,
                 int_type = integer_type.rust_str(),
                 endian = integer_type.rust_endian_str(),
@@ -161,22 +132,26 @@ fn print_array_ty(
         }
         ArrayType::Struct(c) => {
             s.wln(format!(
-                "{name}.push({type_name}::{prefix}read({reader}){postfix}?);",
+                "{array_prefix}{type_name}::{prefix}read({reader}){postfix}?{array_postfix}",
                 type_name = c.name(),
             ));
         }
         ArrayType::CString => {
             s.wln(format!(
-                "let s = crate::util::{prefix}read_c_string_to_vec(r){postfix}?;",
+                "let s = crate::util::{prefix}read_c_string_to_vec({reader}){postfix}?;",
             ));
-            s.wln(format!("{name}.push(String::from_utf8(s)?);",));
+            s.wln(format!(
+                "{array_prefix}String::from_utf8(s)?{array_postfix}",
+            ));
         }
         ArrayType::Guid => {
-            s.wln(format!("{name}.push(Guid::{prefix}read(r){postfix}?);",));
+            s.wln(format!(
+                "{array_prefix}Guid::{prefix}read({reader}){postfix}?{array_postfix}",
+            ));
         }
         ArrayType::PackedGuid => {
             s.wln(format!(
-                "{name}.push(Guid::{prefix}read_packed(r){postfix}?);",
+                "{array_prefix}Guid::{prefix}read_packed({reader}){postfix}?{array_postfix}",
             ));
         }
     }

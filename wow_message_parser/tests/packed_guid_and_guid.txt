@@ -74,7 +74,7 @@ impl PackedGuidAndGuid {
         let static_packed = {
             let mut static_packed = [Guid::default(); 10];
             for i in static_packed.iter_mut() {
-                *i =Guid::read_packed(r)?;
+                *i = Guid::read_packed(r)?;
             }
             static_packed
         };
