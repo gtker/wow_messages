@@ -28,13 +28,11 @@ fn print_read_array_fixed(
             "let mut {name} = [{type_name}::default(); {size}];",
             name = d.name(),
             type_name = array.ty().rust_str(),
-            size = size
         ));
     } else {
         s.wln(format!(
             "let mut {name} = Vec::with_capacity({size});",
             name = d.name(),
-            size = size
         ));
     }
 
