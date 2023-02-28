@@ -130,12 +130,6 @@ fn print_array_ty(
                 endian = integer_type.rust_endian_str(),
             ));
         }
-        ArrayType::Struct(c) => {
-            s.wln(format!(
-                "{array_prefix}{type_name}::{prefix}read({reader}){postfix}?{array_postfix}",
-                type_name = c.name(),
-            ));
-        }
         ArrayType::CString => {
             s.wln(format!(
                 "let s = crate::util::{prefix}read_c_string_to_vec({reader}){postfix}?;",
@@ -144,14 +138,16 @@ fn print_array_ty(
                 "{array_prefix}String::from_utf8(s)?{array_postfix}",
             ));
         }
-        ArrayType::Guid => {
-            s.wln(format!(
-                "{array_prefix}Guid::{prefix}read({reader}){postfix}?{array_postfix}",
-            ));
-        }
         ArrayType::PackedGuid => {
             s.wln(format!(
                 "{array_prefix}Guid::{prefix}read_packed({reader}){postfix}?{array_postfix}",
+            ));
+        }
+
+        ArrayType::Struct(_) | ArrayType::Guid => {
+            s.wln(format!(
+                "{array_prefix}{ty}::{prefix}read({reader}){postfix}?{array_postfix}",
+                ty = array.ty().rust_str(),
             ));
         }
     }
