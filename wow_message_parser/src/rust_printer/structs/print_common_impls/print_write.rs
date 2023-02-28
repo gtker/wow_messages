@@ -19,7 +19,6 @@ pub(crate) fn print_login_write_header(s: &mut Writer, postfix: &str) {
 
 pub(crate) fn print_write_field_array(
     s: &mut Writer,
-    e: &Container,
     d: &StructMemberDefinition,
     variable_prefix: &str,
     array: &Array,
@@ -37,31 +36,22 @@ pub(crate) fn print_write_field_array(
 
     s.body(
         format!("for i in {variable_prefix}{name}.iter()", name = d.name(),),
-        |s| {
-            match array.ty() {
-                ArrayType::Integer(integer_type) => s.wln(format!(
-                    "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
-                    endian = integer_type.rust_endian_str(),
-                )),
-                ArrayType::Struct(_) => {
-                    // Complex types use "write_into_vec", which means we can't write directly
-                    // into our ZLibEncoder because they require a &mut W instead of a W.
-                    // RUST_NON_MUT_READ
-                    if e.tags().compressed() || d.tags().is_compressed() {
-                        s.wln(format!("i.write_into_vec(&mut {writer})?;"));
-                    } else {
-                        s.wln("i.write_into_vec(&mut w)?;");
-                    }
-                }
-                ArrayType::CString => {
-                    s.wln(format!("w.write_all(i.as_bytes()){postfix}?;"));
-                    s.wln(format!("w.write_all(&[0]){postfix}?;"));
-                }
-                ArrayType::Guid => {
-                    s.wln(format!("w.write_all(&i.guid().to_le_bytes()){postfix}?;"));
-                }
-                ArrayType::PackedGuid => s.wln("i.write_packed_guid_into_vec(&mut w)?;"),
+        |s| match array.ty() {
+            ArrayType::Integer(integer_type) => s.wln(format!(
+                "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
+                endian = integer_type.rust_endian_str(),
+            )),
+            ArrayType::Struct(_) => {
+                s.wln(format!("i.write_into_vec(&mut {writer})?;"));
             }
+            ArrayType::CString => {
+                s.wln(format!("w.write_all(i.as_bytes()){postfix}?;"));
+                s.wln(format!("w.write_all(&[0]){postfix}?;"));
+            }
+            ArrayType::Guid => {
+                s.wln(format!("w.write_all(&i.guid().to_le_bytes()){postfix}?;"));
+            }
+            ArrayType::PackedGuid => s.wln("i.write_packed_guid_into_vec(&mut w)?;"),
         },
     );
 }
@@ -206,7 +196,7 @@ pub(crate) fn print_write_definition(
             ));
         }
         Type::Array(array) => {
-            print_write_field_array(s, e, d, variable_prefix, array, postfix);
+            print_write_field_array(s, d, variable_prefix, array, postfix);
         }
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
             let integer = match upcast {
