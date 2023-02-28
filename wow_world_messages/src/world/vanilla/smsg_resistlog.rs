@@ -34,7 +34,7 @@ impl crate::Message for SMSG_RESISTLOG {
         36
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid1: Guid
         w.write_all(&self.guid1.guid().to_le_bytes())?;
 

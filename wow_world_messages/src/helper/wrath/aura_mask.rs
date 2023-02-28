@@ -33,7 +33,7 @@ impl AuraMask {
         Ok(Self { auras })
     }
 
-    pub(crate) fn write_into_vec(&self, mut v: &mut impl std::io::Write) -> Result<(), io::Error> {
+    pub(crate) fn write_into_vec(&self, mut v: impl std::io::Write) -> Result<(), io::Error> {
         let mut bit_pattern: u64 = 0;
         for (i, &b) in self.auras().iter().enumerate() {
             if b.is_some() {

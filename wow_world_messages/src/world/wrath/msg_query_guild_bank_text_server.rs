@@ -20,7 +20,7 @@ impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // tab: u8
         w.write_all(&self.tab.to_le_bytes())?;
 

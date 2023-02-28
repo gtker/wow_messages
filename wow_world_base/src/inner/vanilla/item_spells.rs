@@ -26,7 +26,7 @@ pub struct ItemSpells {
 }
 
 impl ItemSpells {
-    pub fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 

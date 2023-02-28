@@ -24,7 +24,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // refer_a_friend_bonus: f32
         w.write_all(&self.refer_a_friend_bonus.to_le_bytes())?;
 
@@ -33,7 +33,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
 
         // faction_standings: FactionStanding[amount_of_faction_standings]
         for i in self.faction_standings.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

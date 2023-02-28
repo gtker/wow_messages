@@ -29,7 +29,7 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
         24
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // time: DateTime
         w.write_all(&self.time.as_int().to_le_bytes())?;
 

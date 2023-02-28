@@ -35,7 +35,7 @@ pub struct AuraLog {
 }
 
 impl AuraLog {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // aura_type: AuraType
         w.write_all(&u32::from(self.aura_type.as_int()).to_le_bytes())?;
 

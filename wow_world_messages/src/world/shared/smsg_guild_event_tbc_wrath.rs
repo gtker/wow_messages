@@ -22,7 +22,7 @@ impl crate::Message for SMSG_GUILD_EVENT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // event: GuildEvent
         w.write_all(&u8::from(self.event.as_int()).to_le_bytes())?;
 

@@ -19,7 +19,7 @@ impl crate::Message for SMSG_GMTICKET_CREATE {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // response: GmTicketResponse
         w.write_all(&u32::from(self.response.as_int()).to_le_bytes())?;
 

@@ -21,9 +21,9 @@ impl crate::Message for SMSG_UPDATE_COMBO_POINTS {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // target: PackedGuid
-        self.target.write_packed_guid_into_vec(w)?;
+        self.target.write_packed_guid_into_vec(&mut w)?;
 
         // combo_points: u8
         w.write_all(&self.combo_points.to_le_bytes())?;

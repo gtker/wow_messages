@@ -59,7 +59,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -73,7 +73,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         w.write_all(&Self::GAME_NAME_VALUE.to_le_bytes())?;
 
         // version: Version
-        self.version.write_into_vec(w)?;
+        self.version.write_into_vec(&mut w)?;
 
         // platform: Platform
         w.write_all(&u32::from(self.platform.as_int()).to_le_bytes())?;

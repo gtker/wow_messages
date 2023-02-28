@@ -23,7 +23,7 @@ impl crate::Message for CMSG_CHAR_RENAME {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // character: Guid
         w.write_all(&self.character.guid().to_le_bytes())?;
 

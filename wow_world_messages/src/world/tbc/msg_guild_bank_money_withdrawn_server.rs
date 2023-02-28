@@ -18,7 +18,7 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // remaining_withdraw_amount: u32
         w.write_all(&self.remaining_withdraw_amount.to_le_bytes())?;
 

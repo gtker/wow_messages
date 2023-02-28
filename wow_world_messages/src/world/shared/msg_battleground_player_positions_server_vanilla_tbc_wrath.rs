@@ -23,13 +23,13 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // amount_of_teammates: u32
         w.write_all(&(self.teammates.len() as u32).to_le_bytes())?;
 
         // teammates: BattlegroundPlayerPosition[amount_of_teammates]
         for i in self.teammates.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_carriers: u8
@@ -37,7 +37,7 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         // carriers: BattlegroundPlayerPosition[amount_of_carriers]
         for i in self.carriers.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

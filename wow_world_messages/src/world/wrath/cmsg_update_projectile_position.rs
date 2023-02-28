@@ -26,7 +26,7 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
         25
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // caster: Guid
         w.write_all(&self.caster.guid().to_le_bytes())?;
 
@@ -37,7 +37,7 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
         w.write_all(&self.cast_count.to_le_bytes())?;
 
         // position: Vector3d
-        self.position.write_into_vec(w)?;
+        self.position.write_into_vec(&mut w)?;
 
         Ok(())
     }

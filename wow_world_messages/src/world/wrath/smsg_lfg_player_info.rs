@@ -24,13 +24,13 @@ impl crate::Message for SMSG_LFG_PLAYER_INFO {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // amount_of_available_dungeons: u8
         w.write_all(&(self.available_dungeons.len() as u8).to_le_bytes())?;
 
         // available_dungeons: LfgAvailableDungeon[amount_of_available_dungeons]
         for i in self.available_dungeons.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_locked_dungeons: u8
@@ -38,7 +38,7 @@ impl crate::Message for SMSG_LFG_PLAYER_INFO {
 
         // locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons]
         for i in self.locked_dungeons.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

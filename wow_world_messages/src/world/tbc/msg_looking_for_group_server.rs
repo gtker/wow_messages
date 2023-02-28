@@ -29,7 +29,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // lfg_type: LfgType
         w.write_all(&u32::from(self.lfg_type.as_int()).to_le_bytes())?;
 
@@ -44,7 +44,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
 
         // players_displayed: LfgPlayer[amount_of_players_displayed]
         for i in self.players_displayed.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

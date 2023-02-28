@@ -19,7 +19,7 @@ impl crate::Message for CMSG_UNLEARN_SKILL {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // skill: Skill
         w.write_all(&u32::from(self.skill.as_int()).to_le_bytes())?;
 

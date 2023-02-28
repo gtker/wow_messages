@@ -29,7 +29,7 @@ impl AchievementDoneArray {
         Ok(Self { done })
     }
 
-    pub(crate) fn write_into_vec(&self, v: &mut impl std::io::Write) -> Result<(), io::Error> {
+    pub(crate) fn write_into_vec(&self, mut v: impl std::io::Write) -> Result<(), io::Error> {
         for d in &self.done {
             v.write_all(d.achievement.to_le_bytes().as_slice())?;
             v.write_all(d.time.as_int().to_le_bytes().as_slice())?;

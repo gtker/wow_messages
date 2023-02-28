@@ -20,13 +20,13 @@ impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // amount_of_equipment_sets: u32
         w.write_all(&(self.equipment_sets.len() as u32).to_le_bytes())?;
 
         // equipment_sets: EquipmentSetListItem[amount_of_equipment_sets]
         for i in self.equipment_sets.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

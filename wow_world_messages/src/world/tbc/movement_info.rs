@@ -43,7 +43,7 @@ pub struct MovementInfo {
 }
 
 impl MovementInfo {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // flags: MovementFlags
         w.write_all(&u32::from(self.flags.as_int()).to_le_bytes())?;
 
@@ -54,14 +54,14 @@ impl MovementInfo {
         w.write_all(&self.timestamp.to_le_bytes())?;
 
         // position: Vector3d
-        self.position.write_into_vec(w)?;
+        self.position.write_into_vec(&mut w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;
 
         if let Some(if_statement) = &self.flags.on_transport {
             // transport: TransportInfo
-            if_statement.transport.write_into_vec(w)?;
+            if_statement.transport.write_into_vec(&mut w)?;
 
         }
 

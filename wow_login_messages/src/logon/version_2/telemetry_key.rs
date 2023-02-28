@@ -20,7 +20,7 @@ pub struct TelemetryKey {
 }
 
 impl TelemetryKey {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // unknown1: u16
         w.write_all(&self.unknown1.to_le_bytes())?;
 

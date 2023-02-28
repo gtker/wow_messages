@@ -29,14 +29,14 @@ impl MonsterMoveSpline {
         Ok(Self { splines })
     }
 
-    pub(crate) fn write_into_vec(&self, v: &mut impl std::io::Write) -> Result<(), io::Error> {
+    pub(crate) fn write_into_vec(&self, mut v: impl std::io::Write) -> Result<(), io::Error> {
         let amount_of_splines: u32 = self.splines.len().try_into().unwrap();
 
         v.write_all(&amount_of_splines.to_le_bytes())?;
 
         let mut splines = self.splines.iter();
         if let Some(first) = splines.next() {
-            first.write_into_vec(v)?;
+            first.write_into_vec(&mut v)?;
         }
 
         for spline in splines {

@@ -22,7 +22,7 @@ impl crate::Message for SMSG_FRIEND_STATUS {
         9
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // result: FriendResult
         w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 

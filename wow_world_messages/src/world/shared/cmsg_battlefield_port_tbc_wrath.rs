@@ -35,7 +35,7 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
         9
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // arena_type: u8
         w.write_all(&self.arena_type.to_le_bytes())?;
 

@@ -18,7 +18,7 @@ impl crate::Message for CMSG_GUILD_INFO_TEXT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guild_info: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.guild_info.as_bytes().iter().rev().next(), Some(&0_u8), "String `guild_info` must not be null-terminated.");

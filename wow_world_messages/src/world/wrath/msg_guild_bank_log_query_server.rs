@@ -24,7 +24,7 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // unix_time: u32
         w.write_all(&self.unix_time.to_le_bytes())?;
 
@@ -36,7 +36,7 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
 
         // money_logs: MoneyLogItem[amount_of_money_logs]
         for i in self.money_logs.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

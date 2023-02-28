@@ -21,7 +21,7 @@ impl crate::Message for SMSG_SERVER_MESSAGE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // message_type: ServerMessageType
         w.write_all(&u32::from(self.message_type.as_int()).to_le_bytes())?;
 

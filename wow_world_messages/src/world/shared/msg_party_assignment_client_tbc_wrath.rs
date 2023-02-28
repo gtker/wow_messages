@@ -24,7 +24,7 @@ impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
         10
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // role: PartyRole
         w.write_all(&u8::from(self.role.as_int()).to_le_bytes())?;
 

@@ -18,7 +18,7 @@ impl crate::Message for CMSG_GUILD_INVITE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // invited_player: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.invited_player.as_bytes().iter().rev().next(), Some(&0_u8), "String `invited_player` must not be null-terminated.");

@@ -22,7 +22,7 @@ impl crate::Message for MSG_RAID_READY_CHECK_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // optional state_check
         if let Some(v) = &self.state_check {
             // guid: Guid

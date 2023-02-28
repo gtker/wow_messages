@@ -55,7 +55,7 @@ pub struct Mail {
 }
 
 impl Mail {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // size: u16
         w.write_all(&((self.size() - 2) as u16).to_le_bytes())?;
 
@@ -143,7 +143,7 @@ impl Mail {
 
         // items: MailListItem[amount_of_items]
         for i in self.items.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

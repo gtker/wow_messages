@@ -27,7 +27,7 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // item: Guid
         w.write_all(&self.item.guid().to_le_bytes())?;
 
@@ -42,7 +42,7 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
 
         // signatures: PetitionSignature[amount_of_signatures]
         for i in self.signatures.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

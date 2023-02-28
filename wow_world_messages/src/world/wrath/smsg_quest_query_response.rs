@@ -127,7 +127,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
@@ -205,12 +205,12 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
         // rewards: QuestItemReward[4]
         for i in self.rewards.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // choice_rewards: QuestItemReward[6]
         for i in self.choice_rewards.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // reputation_rewards: u32[5]
@@ -232,7 +232,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         w.write_all(&self.point_map_id.to_le_bytes())?;
 
         // position: Vector2d
-        self.position.write_into_vec(w)?;
+        self.position.write_into_vec(&mut w)?;
 
         // point_opt: u32
         w.write_all(&self.point_opt.to_le_bytes())?;
@@ -274,12 +274,12 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
         // objectives: QuestObjective[4]
         for i in self.objectives.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // item_requirements: QuestItemRequirement[6]
         for i in self.item_requirements.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // objective_texts: CString[4]

@@ -25,16 +25,16 @@ pub struct PackedGuidAndGuid {
 }
 
 impl PackedGuidAndGuid {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // packed: PackedGuid
-        self.packed.write_packed_guid_into_vec(w)?;
+        self.packed.write_packed_guid_into_vec(&mut w)?;
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // static_packed: PackedGuid[10]
         for i in self.static_packed.iter() {
-            i.write_packed_guid_into_vec(w)?;
+            i.write_packed_guid_into_vec(&mut w)?;
         }
 
         // static_guid: Guid[10]
@@ -50,7 +50,7 @@ impl PackedGuidAndGuid {
 
         // variable_packed: PackedGuid[basic1]
         for i in self.variable_packed.iter() {
-            i.write_packed_guid_into_vec(w)?;
+            i.write_packed_guid_into_vec(&mut w)?;
         }
 
         // variable_guid: Guid[basic2]

@@ -22,7 +22,7 @@ impl EnchantMask {
         Ok(Self { enchants: auras })
     }
 
-    pub(crate) fn write_into_vec(&self, mut v: &mut impl std::io::Write) -> Result<(), io::Error> {
+    pub(crate) fn write_into_vec(&self, mut v: impl std::io::Write) -> Result<(), io::Error> {
         let mut bit_pattern: u16 = 0;
         for (i, &b) in self.enchants().iter().enumerate() {
             if b.is_some() {

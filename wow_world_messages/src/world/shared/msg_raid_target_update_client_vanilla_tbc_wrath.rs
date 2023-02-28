@@ -23,7 +23,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // target_index: RaidTargetIndex
         w.write_all(&u8::from(self.target_index.as_int()).to_le_bytes())?;
 

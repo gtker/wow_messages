@@ -48,7 +48,7 @@ impl crate::Message for CMSG_SEND_MAIL {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // mailbox: Guid
         w.write_all(&self.mailbox.guid().to_le_bytes())?;
 

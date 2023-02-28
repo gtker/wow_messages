@@ -60,7 +60,7 @@ pub(crate) fn has_any_bit_set(array: &[u32]) -> bool {
 }
 
 pub(crate) fn write_into_vec(
-    v: &mut impl std::io::Write,
+    mut v: impl std::io::Write,
     header: &[u32],
     dirty_mask: &[u32],
     values: &BTreeMap<u16, u32>,
@@ -189,7 +189,7 @@ macro_rules! update_item {
 
             pub(crate) fn write_into_vec(
                 &self,
-                v: &mut impl std::io::Write,
+                v: impl std::io::Write,
             ) -> Result<(), std::io::Error> {
                 $crate::helper::update_mask_common::write_into_vec(
                     v,
@@ -260,7 +260,7 @@ macro_rules! update_mask {
 
             pub(crate) fn write_into_vec(
                 &self,
-                v: &mut impl std::io::Write,
+                v: impl std::io::Write,
             ) -> Result<(), std::io::Error> {
                 match self {
                     UpdateMask::Item(i) => i.write_into_vec(v),

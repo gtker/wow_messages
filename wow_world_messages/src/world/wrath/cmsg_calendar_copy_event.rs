@@ -24,7 +24,7 @@ impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
         20
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // event: Guid
         w.write_all(&self.event.guid().to_le_bytes())?;
 

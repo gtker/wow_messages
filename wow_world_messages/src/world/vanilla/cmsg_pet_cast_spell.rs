@@ -24,7 +24,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -32,7 +32,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         w.write_all(&self.id.to_le_bytes())?;
 
         // targets: SpellCastTargets
-        self.targets.write_into_vec(w)?;
+        self.targets.write_into_vec(&mut w)?;
 
         Ok(())
     }

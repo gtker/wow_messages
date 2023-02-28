@@ -22,12 +22,12 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // old_mover: Guid
         w.write_all(&self.old_mover.guid().to_le_bytes())?;
 
         // info: MovementInfo
-        self.info.write_into_vec(w)?;
+        self.info.write_into_vec(&mut w)?;
 
         Ok(())
     }

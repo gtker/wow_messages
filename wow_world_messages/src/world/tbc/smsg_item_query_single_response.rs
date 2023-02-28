@@ -104,7 +104,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
 
@@ -206,12 +206,12 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // stats: ItemStat[10]
             for i in v.stats.iter() {
-                i.write_into_vec(w)?;
+                i.write_into_vec(&mut w)?;
             }
 
             // damages: ItemDamageType[5]
             for i in v.damages.iter() {
-                i.write_into_vec(w)?;
+                i.write_into_vec(&mut w)?;
             }
 
             // armor: i32
@@ -246,7 +246,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // spells: ItemSpells[5]
             for i in v.spells.iter() {
-                i.write_into_vec(w)?;
+                i.write_into_vec(&mut w)?;
             }
 
             // bonding: Bonding
@@ -306,7 +306,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
             // sockets: ItemSocket[3]
             for i in v.sockets.iter() {
-                i.write_into_vec(w)?;
+                i.write_into_vec(&mut w)?;
             }
 
             // socket_bonus: u32

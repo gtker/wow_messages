@@ -18,7 +18,7 @@ impl crate::Message for CMSG_CHANNEL_DISPLAY_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // channel: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.channel.as_bytes().iter().rev().next(), Some(&0_u8), "String `channel` must not be null-terminated.");

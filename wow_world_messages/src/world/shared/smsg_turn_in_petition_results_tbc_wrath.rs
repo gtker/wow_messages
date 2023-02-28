@@ -19,7 +19,7 @@ impl crate::Message for SMSG_TURN_IN_PETITION_RESULTS {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // result: PetitionResult
         w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
 

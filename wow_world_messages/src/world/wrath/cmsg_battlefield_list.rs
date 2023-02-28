@@ -26,7 +26,7 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
         6
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // battleground_type: BattlegroundType
         w.write_all(&u32::from(self.battleground_type.as_int()).to_le_bytes())?;
 

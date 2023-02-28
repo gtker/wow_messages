@@ -20,7 +20,7 @@ impl crate::Message for CMSG_LEARN_TALENT {
         8
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // talent_id: u32
         w.write_all(&self.talent_id.to_le_bytes())?;
 

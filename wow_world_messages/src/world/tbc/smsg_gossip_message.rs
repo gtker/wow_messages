@@ -33,7 +33,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -48,7 +48,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
 
         // gossips: GossipItem[amount_of_gossip_items]
         for i in self.gossips.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_quests: u32
@@ -56,7 +56,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
 
         // quests: QuestItem[amount_of_quests]
         for i in self.quests.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

@@ -21,13 +21,13 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // text_id: u32
         w.write_all(&self.text_id.to_le_bytes())?;
 
         // texts: NpcTextUpdate[8]
         for i in self.texts.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

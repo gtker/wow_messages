@@ -27,7 +27,7 @@ impl crate::Message for SMSG_GROUP_INVITE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // status: PlayerInviteStatus
         w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
 

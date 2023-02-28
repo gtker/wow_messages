@@ -26,7 +26,7 @@ impl crate::Message for CMSG_MOVE_HOVER_ACK {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -34,7 +34,7 @@ impl crate::Message for CMSG_MOVE_HOVER_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // info: MovementInfo
-        self.info.write_into_vec(w)?;
+        self.info.write_into_vec(&mut w)?;
 
         // is_applied: u32
         w.write_all(&self.is_applied.to_le_bytes())?;

@@ -18,7 +18,7 @@ impl crate::Message for SMSG_WARDEN_DATA {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // encrypted_data: u8[-]
         for i in self.encrypted_data.iter() {
             w.write_all(&i.to_le_bytes())?;

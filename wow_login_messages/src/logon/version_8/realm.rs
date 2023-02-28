@@ -38,7 +38,7 @@ pub struct Realm {
 }
 
 impl Realm {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // realm_type: RealmType
         w.write_all(&u8::from(self.realm_type.as_int()).to_le_bytes())?;
 
@@ -76,7 +76,7 @@ impl Realm {
 
         if let Some(if_statement) = &self.flag.specify_build {
             // version: Version
-            if_statement.version.write_into_vec(w)?;
+            if_statement.version.write_into_vec(&mut w)?;
 
         }
 

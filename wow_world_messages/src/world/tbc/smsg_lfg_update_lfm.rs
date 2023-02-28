@@ -23,7 +23,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // looking_for_more: LfgUpdateLookingForMore
         w.write_all(&u8::from(self.looking_for_more.as_int()).to_le_bytes())?;
 
@@ -33,7 +33,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
                 data,
             } => {
                 // data: LfgData
-                data.write_into_vec(w)?;
+                data.write_into_vec(&mut w)?;
 
             }
         }

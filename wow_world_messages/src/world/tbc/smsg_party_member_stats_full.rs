@@ -84,9 +84,9 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(w)?;
+        self.guid.write_packed_guid_into_vec(&mut w)?;
 
         // mask: GroupUpdateFlags
         w.write_all(&u32::from(self.mask.as_int()).to_le_bytes())?;
@@ -150,7 +150,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.auras {
             // auras: AuraMask
-            if_statement.auras.write_into_vec(w)?;
+            if_statement.auras.write_into_vec(&mut w)?;
 
         }
 
@@ -208,7 +208,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
 
         if let Some(if_statement) = &self.mask.pet_auras {
             // pet_auras: AuraMask
-            if_statement.pet_auras.write_into_vec(w)?;
+            if_statement.pet_auras.write_into_vec(&mut w)?;
 
         }
 

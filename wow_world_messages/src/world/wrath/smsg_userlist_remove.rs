@@ -25,7 +25,7 @@ impl crate::Message for SMSG_USERLIST_REMOVE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: Guid
         w.write_all(&self.player.guid().to_le_bytes())?;
 

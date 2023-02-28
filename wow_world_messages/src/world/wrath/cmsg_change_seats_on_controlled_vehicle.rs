@@ -26,15 +26,15 @@ impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // vehicle: PackedGuid
-        self.vehicle.write_packed_guid_into_vec(w)?;
+        self.vehicle.write_packed_guid_into_vec(&mut w)?;
 
         // info: MovementInfo
-        self.info.write_into_vec(w)?;
+        self.info.write_into_vec(&mut w)?;
 
         // accessory: PackedGuid
-        self.accessory.write_packed_guid_into_vec(w)?;
+        self.accessory.write_packed_guid_into_vec(&mut w)?;
 
         // seat: u8
         w.write_all(&self.seat.to_le_bytes())?;

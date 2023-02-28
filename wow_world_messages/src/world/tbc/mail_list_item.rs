@@ -31,7 +31,7 @@ pub struct MailListItem {
 }
 
 impl MailListItem {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // item_index: u8
         w.write_all(&self.item_index.to_le_bytes())?;
 
@@ -43,7 +43,7 @@ impl MailListItem {
 
         // enchants: MailListItemEnchant[6]
         for i in self.enchants.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // item_random_property_id: u32

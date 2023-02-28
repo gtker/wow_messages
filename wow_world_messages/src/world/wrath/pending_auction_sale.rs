@@ -28,7 +28,7 @@ pub struct PendingAuctionSale {
 }
 
 impl PendingAuctionSale {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // string1: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.string1.as_bytes().iter().rev().next(), Some(&0_u8), "String `string1` must not be null-terminated.");

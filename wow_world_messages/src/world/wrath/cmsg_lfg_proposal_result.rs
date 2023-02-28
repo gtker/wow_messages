@@ -20,7 +20,7 @@ impl crate::Message for CMSG_LFG_PROPOSAL_RESULT {
         5
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // proposal_id: u32
         w.write_all(&self.proposal_id.to_le_bytes())?;
 

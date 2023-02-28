@@ -25,7 +25,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // battlemaster: Guid
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
 

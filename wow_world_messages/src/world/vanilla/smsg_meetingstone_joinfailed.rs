@@ -19,7 +19,7 @@ impl crate::Message for SMSG_MEETINGSTONE_JOINFAILED {
         1
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // reason: MeetingStoneFailure
         w.write_all(&u8::from(self.reason.as_int()).to_le_bytes())?;
 

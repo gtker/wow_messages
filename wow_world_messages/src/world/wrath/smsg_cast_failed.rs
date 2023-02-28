@@ -71,7 +71,7 @@ impl crate::Message for SMSG_CAST_FAILED {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // cast_count: u8
         w.write_all(&self.cast_count.to_le_bytes())?;
 

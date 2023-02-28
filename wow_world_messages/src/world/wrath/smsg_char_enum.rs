@@ -20,13 +20,13 @@ impl crate::Message for SMSG_CHAR_ENUM {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // amount_of_characters: u8
         w.write_all(&(self.characters.len() as u8).to_le_bytes())?;
 
         // characters: Character[amount_of_characters]
         for i in self.characters.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

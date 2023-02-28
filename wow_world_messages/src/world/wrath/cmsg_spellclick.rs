@@ -19,7 +19,7 @@ impl crate::Message for CMSG_SPELLCLICK {
         8
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 

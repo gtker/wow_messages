@@ -24,7 +24,7 @@ impl crate::Message for CMSG_SET_ACTION_BUTTON {
         5
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // button: u8
         w.write_all(&self.button.to_le_bytes())?;
 

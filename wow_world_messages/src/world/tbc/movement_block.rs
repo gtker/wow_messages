@@ -87,7 +87,7 @@ pub struct MovementBlock {
 }
 
 impl MovementBlock {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // update_flag: UpdateFlag
         w.write_all(&u8::from(self.update_flag.as_int()).to_le_bytes())?;
 
@@ -119,14 +119,14 @@ impl MovementBlock {
                     w.write_all(&timestamp.to_le_bytes())?;
 
                     // living_position: Vector3d
-                    living_position.write_into_vec(w)?;
+                    living_position.write_into_vec(&mut w)?;
 
                     // living_orientation: f32
                     w.write_all(&living_orientation.to_le_bytes())?;
 
                     if let Some(if_statement) = &flags.on_transport {
                         // transport: TransportInfo
-                        if_statement.transport.write_into_vec(w)?;
+                        if_statement.transport.write_into_vec(&mut w)?;
 
                     }
 
@@ -221,7 +221,7 @@ impl MovementBlock {
                                     spline_final_point,
                                 } => {
                                     // spline_final_point: Vector3d
-                                    spline_final_point.write_into_vec(w)?;
+                                    spline_final_point.write_into_vec(&mut w)?;
 
                                 }
                             }
@@ -241,11 +241,11 @@ impl MovementBlock {
 
                         // nodes: Vector3d[amount_of_nodes]
                         for i in if_statement.nodes.iter() {
-                            i.write_into_vec(w)?;
+                            i.write_into_vec(&mut w)?;
                         }
 
                         // final_node: Vector3d
-                        if_statement.final_node.write_into_vec(w)?;
+                        if_statement.final_node.write_into_vec(&mut w)?;
 
                     }
 
@@ -255,7 +255,7 @@ impl MovementBlock {
                     position,
                 } => {
                     // position: Vector3d
-                    position.write_into_vec(w)?;
+                    position.write_into_vec(&mut w)?;
 
                     // orientation: f32
                     w.write_all(&orientation.to_le_bytes())?;
@@ -281,7 +281,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.melee_attacking {
             // guid: PackedGuid
-            if_statement.guid.write_packed_guid_into_vec(w)?;
+            if_statement.guid.write_packed_guid_into_vec(&mut w)?;
 
         }
 

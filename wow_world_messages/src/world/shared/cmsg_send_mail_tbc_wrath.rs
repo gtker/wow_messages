@@ -50,7 +50,7 @@ impl crate::Message for CMSG_SEND_MAIL {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // mailbox: Guid
         w.write_all(&self.mailbox.guid().to_le_bytes())?;
 
@@ -86,7 +86,7 @@ impl crate::Message for CMSG_SEND_MAIL {
 
         // items: MailItem[amount_of_items]
         for i in self.items.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // money: Gold

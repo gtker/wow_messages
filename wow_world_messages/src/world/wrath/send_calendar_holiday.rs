@@ -28,7 +28,7 @@ pub struct SendCalendarHoliday {
 }
 
 impl SendCalendarHoliday {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // holiday_id: u32
         w.write_all(&self.holiday_id.to_le_bytes())?;
 

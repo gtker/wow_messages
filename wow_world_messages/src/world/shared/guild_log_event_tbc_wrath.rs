@@ -26,7 +26,7 @@ pub struct GuildLogEvent {
 }
 
 impl GuildLogEvent {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // event: GuildEvent
         w.write_all(&u8::from(self.event.as_int()).to_le_bytes())?;
 

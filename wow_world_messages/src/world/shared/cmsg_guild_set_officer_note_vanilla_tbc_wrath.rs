@@ -22,7 +22,7 @@ impl crate::Message for CMSG_GUILD_SET_OFFICER_NOTE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player_name: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.player_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `player_name` must not be null-terminated.");

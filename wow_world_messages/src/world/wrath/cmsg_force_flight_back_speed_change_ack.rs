@@ -26,7 +26,7 @@ impl crate::Message for CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: Guid
         w.write_all(&self.player.guid().to_le_bytes())?;
 
@@ -34,7 +34,7 @@ impl crate::Message for CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {
         w.write_all(&self.counter.to_le_bytes())?;
 
         // info: MovementInfo
-        self.info.write_into_vec(w)?;
+        self.info.write_into_vec(&mut w)?;
 
         // new_speed: f32
         w.write_all(&self.new_speed.to_le_bytes())?;

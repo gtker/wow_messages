@@ -30,7 +30,7 @@ impl Guid {
 
     pub(crate) fn write_packed_guid_into_vec(
         &self,
-        v: &mut impl std::io::Write,
+        mut v: impl std::io::Write,
     ) -> Result<(), std::io::Error> {
         let guid = self.guid.to_le_bytes();
         let mut bit_pattern: u8 = 0;

@@ -21,9 +21,9 @@ impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(w)?;
+        self.unit.write_packed_guid_into_vec(&mut w)?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;

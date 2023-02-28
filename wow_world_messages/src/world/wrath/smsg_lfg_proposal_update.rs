@@ -30,7 +30,7 @@ impl crate::Message for SMSG_LFG_PROPOSAL_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // dungeon_id: u32
         w.write_all(&self.dungeon_id.to_le_bytes())?;
 
@@ -51,7 +51,7 @@ impl crate::Message for SMSG_LFG_PROPOSAL_UPDATE {
 
         // proposals: LfgProposal[amount_of_proposals]
         for i in self.proposals.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

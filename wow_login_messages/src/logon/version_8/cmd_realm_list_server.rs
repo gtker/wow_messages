@@ -43,7 +43,7 @@ impl CMD_REALM_LIST_Server {
 }
 
 impl CMD_REALM_LIST_Server {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -58,7 +58,7 @@ impl CMD_REALM_LIST_Server {
 
         // realms: Realm[number_of_realms]
         for i in self.realms.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // footer_padding: u16

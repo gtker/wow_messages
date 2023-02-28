@@ -33,7 +33,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // status: TradeStatus
         w.write_all(&u32::from(self.status.as_int()).to_le_bytes())?;
 

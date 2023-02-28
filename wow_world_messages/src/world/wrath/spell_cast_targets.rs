@@ -30,31 +30,31 @@ pub struct SpellCastTargets {
 }
 
 impl SpellCastTargets {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
         w.write_all(&u32::from(self.target_flags.as_int()).to_le_bytes())?;
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target: PackedGuid
-            if_statement.unit_target.write_packed_guid_into_vec(w)?;
+            if_statement.unit_target.write_packed_guid_into_vec(&mut w)?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.item {
             // item_target: PackedGuid
-            if_statement.item_target.write_packed_guid_into_vec(w)?;
+            if_statement.item_target.write_packed_guid_into_vec(&mut w)?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.source_location {
             // source: Vector3d
-            if_statement.source.write_into_vec(w)?;
+            if_statement.source.write_into_vec(&mut w)?;
 
         }
 
         if let Some(if_statement) = &self.target_flags.dest_location {
             // destination: Vector3d
-            if_statement.destination.write_into_vec(w)?;
+            if_statement.destination.write_into_vec(&mut w)?;
 
         }
 

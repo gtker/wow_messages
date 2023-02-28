@@ -32,7 +32,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // talent_type: TalentInfoType
         w.write_all(&u8::from(self.talent_type.as_int()).to_le_bytes())?;
 
@@ -52,7 +52,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
 
                 // specs: TalentInfoSpec[amount_of_specs]
                 for i in specs.iter() {
-                    i.write_into_vec(w)?;
+                    i.write_into_vec(&mut w)?;
                 }
 
             }
@@ -64,7 +64,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
 
                 // talents: InspectTalent[amount_of_talents]
                 for i in talents.iter() {
-                    i.write_into_vec(w)?;
+                    i.write_into_vec(&mut w)?;
                 }
 
             }

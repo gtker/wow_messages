@@ -22,7 +22,7 @@ impl crate::Message for CMSG_TOGGLE_PVP {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // optional set
         if let Some(v) = &self.set {
             // enable_pvp: Bool

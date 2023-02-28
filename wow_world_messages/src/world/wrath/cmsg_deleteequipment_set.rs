@@ -19,9 +19,9 @@ impl crate::Message for CMSG_DELETEEQUIPMENT_SET {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // set: PackedGuid
-        self.set.write_packed_guid_into_vec(w)?;
+        self.set.write_packed_guid_into_vec(&mut w)?;
 
         Ok(())
     }

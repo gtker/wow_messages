@@ -172,7 +172,7 @@ pub(crate) fn impl_world_server_or_client_message(
 
         s.wln("#[cfg(feature = \"sync\")]");
         s.open_curly(format!(
-            "fn write_unencrypted_{ty}<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>"
+            "fn write_unencrypted_{ty}<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error>"
         ));
         let unencrypted = |s: &mut Writer, extra: &str| {
             s.wln(format!("let mut v = crate::util::{feature_name}_get_unencrypted_{ty}(Self::OPCODE as u16, 0);"));
@@ -204,7 +204,7 @@ pub(crate) fn impl_world_server_or_client_message(
 
         s.inc_indent();
         s.wln("&self,");
-        s.wln("w: &mut W,");
+        s.wln("mut w: W,");
         s.wln(format!("e: &mut {encrypter},"));
         s.dec_indent();
 
@@ -233,11 +233,11 @@ pub(crate) fn impl_world_server_or_client_message(
             let prefix = async_ty.prefix();
             s.wln(async_ty.cfg());
             s.wln(format!(
-                "fn {prefix}write_unencrypted_{ty}<'s, 'w, 'async_trait, W>("
+                "fn {prefix}write_unencrypted_{ty}<'s, 'async_trait, W>("
             ));
             s.inc_indent();
             s.wln("&'s self,");
-            s.wln("w: &'w mut W,");
+            s.wln("mut w: W,");
             s.dec_indent();
             s.wln(") -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>");
             s.wln("where");
@@ -246,7 +246,6 @@ pub(crate) fn impl_world_server_or_client_message(
             let write = async_ty.write();
             s.wln(format!("W: 'async_trait + {write},"));
             s.wln("'s: 'async_trait,");
-            s.wln("'w: 'async_trait,");
             s.wln("Self: Sync + 'async_trait,");
             s.dec_indent();
 
@@ -260,12 +259,12 @@ pub(crate) fn impl_world_server_or_client_message(
 
             s.wln(async_ty.cfg_and_encryption());
             s.wln(format!(
-                "fn {prefix}write_encrypted_{ty}<'s, 'w, 'e, 'async_trait, W>("
+                "fn {prefix}write_encrypted_{ty}<'s, 'e, 'async_trait, W>("
             ));
 
             s.inc_indent();
             s.wln("&'s self,");
-            s.wln("w: &'w mut W,");
+            s.wln("mut w: W,");
             s.wln(format!("e: &'e mut {encrypter},"));
             s.dec_indent();
 
@@ -275,7 +274,6 @@ pub(crate) fn impl_world_server_or_client_message(
             s.inc_indent();
             s.wln(format!("W: 'async_trait + {write},"));
             s.wln("'s: 'async_trait,");
-            s.wln("'w: 'async_trait,");
             s.wln("'e: 'async_trait,");
             s.wln("Self: Sync + 'async_trait,");
             s.dec_indent();

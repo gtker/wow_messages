@@ -32,7 +32,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // time_in_msec: u32
         w.write_all(&self.time_in_msec.to_le_bytes())?;
 
@@ -43,7 +43,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         w.write_all(&self.unknown.to_le_bytes())?;
 
         // position: Vector3d
-        self.position.write_into_vec(w)?;
+        self.position.write_into_vec(&mut w)?;
 
         // orientation: f32
         w.write_all(&self.orientation.to_le_bytes())?;

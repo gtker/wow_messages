@@ -21,9 +21,9 @@ impl crate::Message for SMSG_SPLINE_SET_SWIM_SPEED {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(w)?;
+        self.guid.write_packed_guid_into_vec(&mut w)?;
 
         // speed: f32
         w.write_all(&self.speed.to_le_bytes())?;

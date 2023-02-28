@@ -33,9 +33,9 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w)?;
+        self.player.write_packed_guid_into_vec(&mut w)?;
 
         // unspent_talent_points: u32
         w.write_all(&self.unspent_talent_points.to_le_bytes())?;
@@ -48,7 +48,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
 
         // specs: InspectTalentSpec[amount_of_specs]
         for i in self.specs.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_glyphs: u8
@@ -60,7 +60,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         }
 
         // talent_gear_mask: InspectTalentGearMask
-        self.talent_gear_mask.write_into_vec(w)?;
+        self.talent_gear_mask.write_into_vec(&mut w)?;
 
         Ok(())
     }

@@ -44,7 +44,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // auctioneer: Guid
         w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 
@@ -87,7 +87,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
 
         // sorted_auctions: AuctionSort[amount_of_sorted_auctions]
         for i in self.sorted_auctions.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

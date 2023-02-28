@@ -45,7 +45,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // lfg_type: LfgType
         w.write_all(&u32::from(self.lfg_type.as_int()).to_le_bytes())?;
 
@@ -79,7 +79,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
 
         // groups: LfgListGroup[amount_of_groups]
         for i in self.groups.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_players: u32
@@ -90,7 +90,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
 
         // players: LfgListPlayer[amount_of_players]
         for i in self.players.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

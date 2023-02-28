@@ -35,9 +35,9 @@ pub struct MonsterMove {
 }
 
 impl MonsterMove {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // spline_point: Vector3d
-        self.spline_point.write_into_vec(w)?;
+        self.spline_point.write_into_vec(&mut w)?;
 
         // spline_id: u32
         w.write_all(&self.spline_id.to_le_bytes())?;
@@ -60,7 +60,7 @@ impl MonsterMove {
                 splines,
             } => {
                 // position: Vector3d
-                position.write_into_vec(w)?;
+                position.write_into_vec(&mut w)?;
 
             }
             MonsterMove_MonsterMoveType::FacingTarget {
@@ -98,7 +98,7 @@ impl MonsterMove {
                 w.write_all(&duration.to_le_bytes())?;
 
                 // splines: MonsterMoveSpline
-                splines.write_into_vec(w)?;
+                splines.write_into_vec(&mut w)?;
 
             }
             MonsterMove_MonsterMoveType::Stop => {}
@@ -115,7 +115,7 @@ impl MonsterMove {
                 w.write_all(&duration.to_le_bytes())?;
 
                 // splines: MonsterMoveSpline
-                splines.write_into_vec(w)?;
+                splines.write_into_vec(&mut w)?;
 
             }
             MonsterMove_MonsterMoveType::FacingTarget {
@@ -131,7 +131,7 @@ impl MonsterMove {
                 w.write_all(&duration.to_le_bytes())?;
 
                 // splines: MonsterMoveSpline
-                splines.write_into_vec(w)?;
+                splines.write_into_vec(&mut w)?;
 
             }
             MonsterMove_MonsterMoveType::FacingAngle {
@@ -147,7 +147,7 @@ impl MonsterMove {
                 w.write_all(&duration.to_le_bytes())?;
 
                 // splines: MonsterMoveSpline
-                splines.write_into_vec(w)?;
+                splines.write_into_vec(&mut w)?;
 
             }
         }

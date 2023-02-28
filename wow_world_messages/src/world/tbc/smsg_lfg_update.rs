@@ -27,7 +27,7 @@ impl crate::Message for SMSG_LFG_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // queued: Bool
         w.write_all(u8::from(self.queued).to_le_bytes().as_slice())?;
 
@@ -43,7 +43,7 @@ impl crate::Message for SMSG_LFG_UPDATE {
                 data,
             } => {
                 // data: LfgData
-                data.write_into_vec(w)?;
+                data.write_into_vec(&mut w)?;
 
             }
         }

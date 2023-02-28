@@ -37,7 +37,7 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         33
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // creature: Guid
         w.write_all(&self.creature.guid().to_le_bytes())?;
 

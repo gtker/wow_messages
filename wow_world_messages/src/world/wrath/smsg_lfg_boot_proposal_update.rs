@@ -35,7 +35,7 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // vote_in_progress: Bool
         w.write_all(u8::from(self.vote_in_progress).to_le_bytes().as_slice())?;
 

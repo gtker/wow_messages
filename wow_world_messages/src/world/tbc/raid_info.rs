@@ -21,7 +21,7 @@ pub struct RaidInfo {
 }
 
 impl RaidInfo {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 

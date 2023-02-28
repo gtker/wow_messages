@@ -30,7 +30,7 @@ pub struct QuestPoi {
 }
 
 impl QuestPoi {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
 
@@ -57,7 +57,7 @@ impl QuestPoi {
 
         // points: Vector2dUnsigned[amount_of_points]
         for i in self.points.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

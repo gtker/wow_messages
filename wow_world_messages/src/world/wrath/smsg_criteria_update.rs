@@ -36,15 +36,15 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // achievement: u32
         w.write_all(&self.achievement.to_le_bytes())?;
 
         // progress_counter: PackedGuid
-        self.progress_counter.write_packed_guid_into_vec(w)?;
+        self.progress_counter.write_packed_guid_into_vec(&mut w)?;
 
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w)?;
+        self.player.write_packed_guid_into_vec(&mut w)?;
 
         // flags: u32
         w.write_all(&self.flags.to_le_bytes())?;

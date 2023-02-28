@@ -25,7 +25,7 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // arena_team: u32
         w.write_all(&self.arena_team.to_le_bytes())?;
 
@@ -37,7 +37,7 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
 
         // members: ArenaTeamMember[amount_of_members]
         for i in self.members.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

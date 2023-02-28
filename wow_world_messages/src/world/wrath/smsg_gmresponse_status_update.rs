@@ -18,7 +18,7 @@ impl crate::Message for SMSG_GMRESPONSE_STATUS_UPDATE {
         1
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // show_survey: Bool
         w.write_all(u8::from(self.show_survey).to_le_bytes().as_slice())?;
 

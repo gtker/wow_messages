@@ -22,18 +22,18 @@ pub struct InspectTalentGear {
 }
 
 impl InspectTalentGear {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
 
         // enchant_mask: EnchantMask
-        self.enchant_mask.write_into_vec(w)?;
+        self.enchant_mask.write_into_vec(&mut w)?;
 
         // unknown1: u16
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // creator: PackedGuid
-        self.creator.write_packed_guid_into_vec(w)?;
+        self.creator.write_packed_guid_into_vec(&mut w)?;
 
         // unknown2: u32
         w.write_all(&self.unknown2.to_le_bytes())?;

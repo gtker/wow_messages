@@ -33,7 +33,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -66,7 +66,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
 
         // items: LootItem[amount_of_items]
         for i in self.items.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

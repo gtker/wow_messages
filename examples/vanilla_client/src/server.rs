@@ -13,11 +13,11 @@ use wow_world_messages::vanilla::{
 };
 
 pub fn server(
-    stream: &mut TcpStream,
+    mut stream: &mut TcpStream,
     session_key: [u8; SESSION_KEY_LENGTH as usize],
     server_id: u8,
 ) {
-    let s = expect_server_message::<SMSG_AUTH_CHALLENGE, _>(stream).unwrap();
+    let s = expect_server_message::<SMSG_AUTH_CHALLENGE, _>(&mut stream).unwrap();
 
     let seed = ProofSeed::new();
     let seed_value = seed.seed();
@@ -41,30 +41,31 @@ pub fn server(
             addon_has_signature: 0,
         }],
     }
-    .write_unencrypted_client(stream)
+    .write_unencrypted_client(&mut stream)
     .unwrap();
 
-    let s = expect_server_message_encryption::<SMSG_AUTH_RESPONSE, _>(stream, crypto.decrypter())
-        .unwrap();
+    let s =
+        expect_server_message_encryption::<SMSG_AUTH_RESPONSE, _>(&mut stream, crypto.decrypter())
+            .unwrap();
 
     if !matches!(s.result, SMSG_AUTH_RESPONSE_WorldResult::AuthOk { .. }) {
         panic!()
     }
     CMSG_CHAR_ENUM {}
-        .write_encrypted_client(stream, crypto.encrypter())
+        .write_encrypted_client(&mut stream, crypto.encrypter())
         .unwrap();
 
-    let s =
-        expect_server_message_encryption::<SMSG_CHAR_ENUM, _>(stream, crypto.decrypter()).unwrap();
+    let s = expect_server_message_encryption::<SMSG_CHAR_ENUM, _>(&mut stream, crypto.decrypter())
+        .unwrap();
 
     CMSG_PLAYER_LOGIN {
         guid: s.characters[0].guid,
     }
-    .write_encrypted_client(stream, crypto.encrypter())
+    .write_encrypted_client(&mut stream, crypto.encrypter())
     .unwrap();
 
     loop {
-        let opcode = ServerOpcodeMessage::read_encrypted(stream, crypto.decrypter()).unwrap();
+        let opcode = ServerOpcodeMessage::read_encrypted(&mut stream, crypto.decrypter()).unwrap();
 
         dbg!(opcode);
     }

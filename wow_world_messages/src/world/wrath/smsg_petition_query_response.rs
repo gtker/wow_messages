@@ -62,7 +62,7 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // petition_id: u32
         w.write_all(&self.petition_id.to_le_bytes())?;
 

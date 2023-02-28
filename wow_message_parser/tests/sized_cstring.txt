@@ -12,7 +12,7 @@ pub struct SizedCString {
 }
 
 impl SizedCString {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // s: SizedCString
         w.write_all(&((self.s.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.s.as_bytes())?;

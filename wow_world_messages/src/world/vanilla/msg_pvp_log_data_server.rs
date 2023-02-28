@@ -27,7 +27,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // status: BattlegroundEndStatus
         w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
 
@@ -47,7 +47,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
 
         // players: BattlegroundPlayer[amount_of_players]
         for i in self.players.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

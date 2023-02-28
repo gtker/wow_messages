@@ -61,7 +61,7 @@ pub struct Character {
 }
 
 impl Character {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -106,7 +106,7 @@ impl Character {
         w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // position: Vector3d
-        self.position.write_into_vec(w)?;
+        self.position.write_into_vec(&mut w)?;
 
         // guild_id: u32
         w.write_all(&self.guild_id.to_le_bytes())?;
@@ -128,7 +128,7 @@ impl Character {
 
         // equipment: CharacterGear[20]
         for i in self.equipment.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

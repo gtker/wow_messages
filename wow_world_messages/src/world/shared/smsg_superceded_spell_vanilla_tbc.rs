@@ -20,7 +20,7 @@ impl crate::Message for SMSG_SUPERCEDED_SPELL {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // new_spell_id: u16
         w.write_all(&self.new_spell_id.to_le_bytes())?;
 

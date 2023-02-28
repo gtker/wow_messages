@@ -51,7 +51,7 @@ impl crate::Message for CMSG_USE_ITEM {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
 
@@ -103,10 +103,10 @@ impl crate::Message for CMSG_USE_ITEM {
                         w.write_all(&opcode.to_le_bytes())?;
 
                         // guid: PackedGuid
-                        guid.write_packed_guid_into_vec(w)?;
+                        guid.write_packed_guid_into_vec(&mut w)?;
 
                         // info: MovementInfo
-                        info.write_into_vec(w)?;
+                        info.write_into_vec(&mut w)?;
 
                     }
                 }
@@ -115,7 +115,7 @@ impl crate::Message for CMSG_USE_ITEM {
         }
 
         // targets: SpellCastTargets
-        self.targets.write_into_vec(w)?;
+        self.targets.write_into_vec(&mut w)?;
 
         Ok(())
     }

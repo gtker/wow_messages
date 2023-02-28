@@ -19,9 +19,9 @@ impl crate::Message for CMSG_SET_LOOKING_FOR_MORE {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // data: LfgData
-        self.data.write_into_vec(w)?;
+        self.data.write_into_vec(&mut w)?;
 
         Ok(())
     }

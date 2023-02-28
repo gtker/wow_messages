@@ -23,15 +23,15 @@ impl crate::Message for SMSG_LOOT_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // creature: Guid
         w.write_all(&self.creature.guid().to_le_bytes())?;
 
         // master_looter: PackedGuid
-        self.master_looter.write_packed_guid_into_vec(w)?;
+        self.master_looter.write_packed_guid_into_vec(&mut w)?;
 
         // group_looter: PackedGuid
-        self.group_looter.write_packed_guid_into_vec(w)?;
+        self.group_looter.write_packed_guid_into_vec(&mut w)?;
 
         Ok(())
     }

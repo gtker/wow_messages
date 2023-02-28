@@ -23,7 +23,7 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
         5
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // timer: TimerType
         w.write_all(&u32::from(self.timer.as_int()).to_le_bytes())?;
 

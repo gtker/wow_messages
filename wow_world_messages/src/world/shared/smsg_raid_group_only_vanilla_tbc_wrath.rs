@@ -23,7 +23,7 @@ impl crate::Message for SMSG_RAID_GROUP_ONLY {
         8
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // homebind_timer: u32
         w.write_all(&self.homebind_timer.to_le_bytes())?;
 

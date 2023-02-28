@@ -26,7 +26,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // update_type: RaidTargetUpdateType
         w.write_all(&u8::from(self.update_type.as_int()).to_le_bytes())?;
 
@@ -35,7 +35,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
-                raid_target.write_into_vec(w)?;
+                raid_target.write_into_vec(&mut w)?;
 
             }
             MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
@@ -43,7 +43,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
             } => {
                 // raid_targets: RaidTargetUpdate[8]
                 for i in raid_targets.iter() {
-                    i.write_into_vec(w)?;
+                    i.write_into_vec(&mut w)?;
                 }
 
             }

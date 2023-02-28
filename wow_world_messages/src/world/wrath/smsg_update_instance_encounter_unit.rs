@@ -35,7 +35,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // frame: EncounterFrame
         w.write_all(&u32::from(self.frame.as_int()).to_le_bytes())?;
 
@@ -45,7 +45,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
                 parameter1,
             } => {
                 // guid: PackedGuid
-                guid.write_packed_guid_into_vec(w)?;
+                guid.write_packed_guid_into_vec(&mut w)?;
 
                 // parameter1: u8
                 w.write_all(&parameter1.to_le_bytes())?;
@@ -56,7 +56,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
                 parameter1,
             } => {
                 // guid: PackedGuid
-                guid.write_packed_guid_into_vec(w)?;
+                guid.write_packed_guid_into_vec(&mut w)?;
 
                 // parameter1: u8
                 w.write_all(&parameter1.to_le_bytes())?;
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
                 parameter1,
             } => {
                 // guid: PackedGuid
-                guid.write_packed_guid_into_vec(w)?;
+                guid.write_packed_guid_into_vec(&mut w)?;
 
                 // parameter1: u8
                 w.write_all(&parameter1.to_le_bytes())?;

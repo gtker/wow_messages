@@ -24,7 +24,7 @@ impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
         20
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // petition: Guid
         w.write_all(&self.petition.guid().to_le_bytes())?;
 

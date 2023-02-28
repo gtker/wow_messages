@@ -27,12 +27,12 @@ impl crate::Message for SMSG_GOSSIP_POI {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // flags: u32
         w.write_all(&self.flags.to_le_bytes())?;
 
         // position: Vector2d
-        self.position.write_into_vec(w)?;
+        self.position.write_into_vec(&mut w)?;
 
         // icon: u32
         w.write_all(&self.icon.to_le_bytes())?;

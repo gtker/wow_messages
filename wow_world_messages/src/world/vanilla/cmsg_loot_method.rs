@@ -25,7 +25,7 @@ impl crate::Message for CMSG_LOOT_METHOD {
         16
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // loot_setting: GroupLootSetting
         w.write_all(&u32::from(self.loot_setting.as_int()).to_le_bytes())?;
 

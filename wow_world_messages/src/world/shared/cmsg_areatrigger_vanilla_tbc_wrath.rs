@@ -18,7 +18,7 @@ impl crate::Message for CMSG_AREATRIGGER {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // trigger_id: u32
         w.write_all(&self.trigger_id.to_le_bytes())?;
 

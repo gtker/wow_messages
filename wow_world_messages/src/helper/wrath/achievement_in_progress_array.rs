@@ -39,9 +39,9 @@ impl AchievementInProgressArray {
         Ok(Self { in_progress })
     }
 
-    pub(crate) fn write_into_vec(&self, v: &mut impl std::io::Write) -> Result<(), io::Error> {
+    pub(crate) fn write_into_vec(&self, mut v: impl std::io::Write) -> Result<(), io::Error> {
         for d in &self.in_progress {
-            d.write_into_vec(v)?;
+            d.write_into_vec(&mut v)?;
         }
 
         v.write_all(ACHIEVEMENT_SENTINEL_VALUE.to_le_bytes().as_slice())?;

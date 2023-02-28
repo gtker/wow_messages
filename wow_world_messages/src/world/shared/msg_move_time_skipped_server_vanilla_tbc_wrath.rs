@@ -21,9 +21,9 @@ impl crate::Message for MSG_MOVE_TIME_SKIPPED_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w)?;
+        self.player.write_packed_guid_into_vec(&mut w)?;
 
         // time_skipped: u32
         w.write_all(&self.time_skipped.to_le_bytes())?;

@@ -17,13 +17,13 @@ pub struct TalentInfoSpec {
 }
 
 impl TalentInfoSpec {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // amount_of_talents: u8
         w.write_all(&(self.talents.len() as u8).to_le_bytes())?;
 
         // talents: InspectTalent[amount_of_talents]
         for i in self.talents.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_glyphs: u8

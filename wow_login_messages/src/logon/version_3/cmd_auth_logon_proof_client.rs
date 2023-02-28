@@ -30,7 +30,7 @@ pub struct CMD_AUTH_LOGON_PROOF_Client {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -54,7 +54,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 
         // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         for i in self.telemetry_keys.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // security_flag: SecurityFlag

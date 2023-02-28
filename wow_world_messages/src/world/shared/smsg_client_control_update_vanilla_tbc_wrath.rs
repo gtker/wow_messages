@@ -21,9 +21,9 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(w)?;
+        self.guid.write_packed_guid_into_vec(&mut w)?;
 
         // allow_movement: Bool
         w.write_all(u8::from(self.allow_movement).to_le_bytes().as_slice())?;

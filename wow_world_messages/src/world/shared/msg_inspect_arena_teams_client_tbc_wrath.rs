@@ -19,7 +19,7 @@ impl crate::Message for MSG_INSPECT_ARENA_TEAMS_Client {
         8
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: Guid
         w.write_all(&self.player.guid().to_le_bytes())?;
 

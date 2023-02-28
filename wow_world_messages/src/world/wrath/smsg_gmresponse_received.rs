@@ -24,7 +24,7 @@ impl crate::Message for SMSG_GMRESPONSE_RECEIVED {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // response_id: u32
         w.write_all(&self.response_id.to_le_bytes())?;
 

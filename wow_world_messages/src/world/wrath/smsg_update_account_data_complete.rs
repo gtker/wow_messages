@@ -22,7 +22,7 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
         8
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // data_type: u32
         w.write_all(&self.data_type.to_le_bytes())?;
 

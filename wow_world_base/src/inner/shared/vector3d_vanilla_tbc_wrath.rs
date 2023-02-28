@@ -17,7 +17,7 @@ pub struct Vector3d {
 }
 
 impl Vector3d {
-    pub fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // x: f32
         w.write_all(&self.x.to_le_bytes())?;
 

@@ -40,7 +40,7 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         444
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // self_player: Bool
         w.write_all(u8::from(self.self_player).to_le_bytes().as_slice())?;
 
@@ -58,7 +58,7 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
 
         // trade_slots: TradeSlot[7]
         for i in self.trade_slots.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

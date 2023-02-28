@@ -22,7 +22,7 @@ impl crate::Message for SMSG_KICK_REASON {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // reason: u8
         w.write_all(&self.reason.to_le_bytes())?;
 

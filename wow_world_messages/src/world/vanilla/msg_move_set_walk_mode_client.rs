@@ -19,9 +19,9 @@ impl crate::Message for MSG_MOVE_SET_WALK_MODE_Client {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // info: MovementInfo
-        self.info.write_into_vec(w)?;
+        self.info.write_into_vec(&mut w)?;
 
         Ok(())
     }

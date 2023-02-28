@@ -28,7 +28,7 @@ impl crate::Message for CMSG_GUILD_RANK {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // rank_id: u32
         w.write_all(&self.rank_id.to_le_bytes())?;
 
@@ -47,7 +47,7 @@ impl crate::Message for CMSG_GUILD_RANK {
 
         // bank_tab_rights: GuildBankRights[6]
         for i in self.bank_tab_rights.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

@@ -37,7 +37,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 
@@ -64,7 +64,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
 
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         for i in self.item_rewards.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

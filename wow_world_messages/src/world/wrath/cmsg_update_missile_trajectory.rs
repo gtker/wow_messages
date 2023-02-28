@@ -30,7 +30,7 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
         44
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -44,10 +44,10 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
         w.write_all(&self.speed.to_le_bytes())?;
 
         // position: Vector3d
-        self.position.write_into_vec(w)?;
+        self.position.write_into_vec(&mut w)?;
 
         // target: Vector3d
-        self.target.write_into_vec(w)?;
+        self.target.write_into_vec(&mut w)?;
 
         Ok(())
     }

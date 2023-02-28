@@ -17,7 +17,7 @@ pub struct LfgJoinPlayer {
 }
 
 impl LfgJoinPlayer {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: Guid
         w.write_all(&self.player.guid().to_le_bytes())?;
 
@@ -26,7 +26,7 @@ impl LfgJoinPlayer {
 
         // locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons]
         for i in self.locked_dungeons.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

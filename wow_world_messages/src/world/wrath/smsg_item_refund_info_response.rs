@@ -35,7 +35,7 @@ impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
         68
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // item: Guid
         w.write_all(&self.item.guid().to_le_bytes())?;
 
@@ -50,7 +50,7 @@ impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
 
         // extra_items: ItemRefundExtra[5]
         for i in self.extra_items.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // unknown1: u32

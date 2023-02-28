@@ -23,7 +23,7 @@ impl crate::Message for SMSG_DUEL_WINNER {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // reason: DuelWinnerReason
         w.write_all(&u8::from(self.reason.as_int()).to_le_bytes())?;
 

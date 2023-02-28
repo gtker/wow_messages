@@ -25,7 +25,7 @@ impl crate::Message for MSG_SET_RAID_DIFFICULTY_Server {
         12
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // difficulty: RaidDifficulty
         w.write_all(&u32::from(self.difficulty.as_int()).to_le_bytes())?;
 

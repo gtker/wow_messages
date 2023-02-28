@@ -80,7 +80,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // npc: Guid
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
@@ -115,7 +115,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
 
         // emotes: NpcTextUpdateEmote[amount_of_emotes]
         for i in self.emotes.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_choice_item_rewards: u32
@@ -123,7 +123,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
 
         // choice_item_rewards: QuestItemRequirement[amount_of_choice_item_rewards]
         for i in self.choice_item_rewards.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_item_rewards: u32
@@ -131,7 +131,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
 
         // item_rewards: QuestItemRequirement[amount_of_item_rewards]
         for i in self.item_rewards.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // money_reward: Gold

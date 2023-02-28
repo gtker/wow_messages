@@ -25,7 +25,7 @@ impl crate::Message for SMSG_LIST_INVENTORY {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
 
@@ -34,7 +34,7 @@ impl crate::Message for SMSG_LIST_INVENTORY {
 
         // items: ListInventoryItem[amount_of_items]
         for i in self.items.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

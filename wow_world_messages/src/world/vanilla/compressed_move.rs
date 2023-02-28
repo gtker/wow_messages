@@ -28,7 +28,7 @@ pub struct CompressedMove {
 }
 
 impl CompressedMove {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // size: u8
         w.write_all(&((self.size() - 1) as u8).to_le_bytes())?;
 
@@ -36,14 +36,14 @@ impl CompressedMove {
         w.write_all(&u16::from(self.opcode.as_int()).to_le_bytes())?;
 
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(w)?;
+        self.guid.write_packed_guid_into_vec(&mut w)?;
 
         match &self.opcode {
             CompressedMove_CompressedMoveOpcode::SmsgMonsterMove {
                 monster_move,
             } => {
                 // monster_move: MonsterMove
-                monster_move.write_into_vec(w)?;
+                monster_move.write_into_vec(&mut w)?;
 
             }
             CompressedMove_CompressedMoveOpcode::SmsgMonsterMoveTransport {
@@ -51,10 +51,10 @@ impl CompressedMove {
                 transport,
             } => {
                 // transport: PackedGuid
-                transport.write_packed_guid_into_vec(w)?;
+                transport.write_packed_guid_into_vec(&mut w)?;
 
                 // monster_move_transport: MonsterMove
-                monster_move_transport.write_into_vec(w)?;
+                monster_move_transport.write_into_vec(&mut w)?;
 
             }
             CompressedMove_CompressedMoveOpcode::SmsgSplineSetRunSpeed {

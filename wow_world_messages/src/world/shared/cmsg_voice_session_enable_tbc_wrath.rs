@@ -20,7 +20,7 @@ impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
         2
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // voice_enabled: Bool
         w.write_all(u8::from(self.voice_enabled).to_le_bytes().as_slice())?;
 

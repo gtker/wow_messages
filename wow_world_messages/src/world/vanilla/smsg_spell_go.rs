@@ -42,12 +42,12 @@ impl crate::Message for SMSG_SPELL_GO {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // cast_item: PackedGuid
-        self.cast_item.write_packed_guid_into_vec(w)?;
+        self.cast_item.write_packed_guid_into_vec(&mut w)?;
 
         // caster: PackedGuid
-        self.caster.write_packed_guid_into_vec(w)?;
+        self.caster.write_packed_guid_into_vec(&mut w)?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -68,11 +68,11 @@ impl crate::Message for SMSG_SPELL_GO {
 
         // misses: SpellMiss[amount_of_misses]
         for i in self.misses.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // targets: SpellCastTargets
-        self.targets.write_into_vec(w)?;
+        self.targets.write_into_vec(&mut w)?;
 
         if let Some(if_statement) = &self.flags.ammo {
             // ammo_display_id: u32

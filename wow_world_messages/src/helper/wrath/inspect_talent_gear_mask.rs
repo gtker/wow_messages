@@ -29,7 +29,7 @@ impl InspectTalentGearMask {
         })
     }
 
-    pub(crate) fn write_into_vec(&self, mut v: &mut impl std::io::Write) -> Result<(), io::Error> {
+    pub(crate) fn write_into_vec(&self, mut v: impl std::io::Write) -> Result<(), io::Error> {
         let mut bit_pattern: u16 = 0;
         for (i, b) in self.inspect_talent_gears().iter().enumerate() {
             if b.is_some() {
@@ -40,7 +40,7 @@ impl InspectTalentGearMask {
         std::io::Write::write_all(&mut v, bit_pattern.to_le_bytes().as_slice())?;
 
         for i in self.inspect_talent_gears().iter().flatten() {
-            i.write_into_vec(v)?;
+            i.write_into_vec(&mut v)?;
         }
 
         Ok(())

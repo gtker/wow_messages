@@ -40,7 +40,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // event_id: Guid
         w.write_all(&self.event_id.guid().to_le_bytes())?;
 
@@ -73,10 +73,10 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
         w.write_all(&self.rank.to_le_bytes())?;
 
         // event_creator: PackedGuid
-        self.event_creator.write_packed_guid_into_vec(w)?;
+        self.event_creator.write_packed_guid_into_vec(&mut w)?;
 
         // invite_sender: PackedGuid
-        self.invite_sender.write_packed_guid_into_vec(w)?;
+        self.invite_sender.write_packed_guid_into_vec(&mut w)?;
 
         Ok(())
     }

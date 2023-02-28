@@ -33,7 +33,7 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // result: WorldResult
         w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 

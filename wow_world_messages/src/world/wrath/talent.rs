@@ -14,7 +14,7 @@ pub struct Talent {
 }
 
 impl Talent {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // talent: u32
         w.write_all(&self.talent.to_le_bytes())?;
 

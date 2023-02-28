@@ -25,12 +25,12 @@ impl crate::Message for SMSG_ATTACKSTOP {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w)?;
+        self.player.write_packed_guid_into_vec(&mut w)?;
 
         // enemy: PackedGuid
-        self.enemy.write_packed_guid_into_vec(w)?;
+        self.enemy.write_packed_guid_into_vec(&mut w)?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;

@@ -21,7 +21,7 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // notify_type: ChatNotify
         w.write_all(&u8::from(self.notify_type.as_int()).to_le_bytes())?;
 

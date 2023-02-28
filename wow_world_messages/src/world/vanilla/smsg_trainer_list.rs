@@ -27,7 +27,7 @@ impl crate::Message for SMSG_TRAINER_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -39,7 +39,7 @@ impl crate::Message for SMSG_TRAINER_LIST {
 
         // spells: TrainerSpell[amount_of_spells]
         for i in self.spells.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // greeting: CString

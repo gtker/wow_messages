@@ -18,7 +18,7 @@ impl crate::Message for SMSG_TIME_SYNC_REQ {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // time_sync: u32
         w.write_all(&self.time_sync.to_le_bytes())?;
 

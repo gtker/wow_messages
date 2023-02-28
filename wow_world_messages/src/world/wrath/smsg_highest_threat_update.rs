@@ -25,19 +25,19 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(w)?;
+        self.unit.write_packed_guid_into_vec(&mut w)?;
 
         // new_victim: PackedGuid
-        self.new_victim.write_packed_guid_into_vec(w)?;
+        self.new_victim.write_packed_guid_into_vec(&mut w)?;
 
         // amount_of_units: u32
         w.write_all(&(self.units.len() as u32).to_le_bytes())?;
 
         // units: ThreatUpdateUnit[amount_of_units]
         for i in self.units.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

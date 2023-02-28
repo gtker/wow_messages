@@ -67,15 +67,15 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // hit_info: HitInfo
         w.write_all(&u32::from(self.hit_info.as_int()).to_le_bytes())?;
 
         // attacker: PackedGuid
-        self.attacker.write_packed_guid_into_vec(w)?;
+        self.attacker.write_packed_guid_into_vec(&mut w)?;
 
         // target: PackedGuid
-        self.target.write_packed_guid_into_vec(w)?;
+        self.target.write_packed_guid_into_vec(&mut w)?;
 
         // total_damage: u32
         w.write_all(&self.total_damage.to_le_bytes())?;
@@ -88,7 +88,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         // damage_infos: DamageInfo[amount_of_damages]
         for i in self.damage_infos.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         if let Some(if_statement) = &self.hit_info.all_absorb {

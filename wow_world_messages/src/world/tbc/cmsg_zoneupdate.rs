@@ -23,7 +23,7 @@ impl crate::Message for CMSG_ZONEUPDATE {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // area: Area
         w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
 

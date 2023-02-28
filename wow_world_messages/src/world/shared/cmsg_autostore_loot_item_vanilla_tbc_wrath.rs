@@ -18,7 +18,7 @@ impl crate::Message for CMSG_AUTOSTORE_LOOT_ITEM {
         1
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // item_slot: u8
         w.write_all(&self.item_slot.to_le_bytes())?;
 

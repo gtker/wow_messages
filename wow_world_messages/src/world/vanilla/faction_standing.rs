@@ -15,7 +15,7 @@ pub struct FactionStanding {
 }
 
 impl FactionStanding {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // faction: Faction
         w.write_all(&u16::from(self.faction.as_int()).to_le_bytes())?;
 

@@ -20,7 +20,7 @@ impl crate::Message for CMSG_CONTACT_LIST {
         4
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // flags: u32
         w.write_all(&self.flags.to_le_bytes())?;
 

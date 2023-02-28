@@ -19,9 +19,9 @@ impl crate::Message for SMSG_UPDATE_WORLD_STATE {
         8
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // state: WorldState
-        self.state.write_into_vec(w)?;
+        self.state.write_into_vec(&mut w)?;
 
         Ok(())
     }

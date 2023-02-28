@@ -34,7 +34,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // bank_balance: u64
         w.write_all(&self.bank_balance.to_le_bytes())?;
 
@@ -57,7 +57,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
 
                 // tabs: GuildBankTab[amount_of_bank_tabs]
                 for i in tabs.iter() {
-                    i.write_into_vec(w)?;
+                    i.write_into_vec(&mut w)?;
                 }
 
             }
@@ -68,7 +68,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
 
         // slot_updates: GuildBankSlot[amount_of_slot_updates]
         for i in self.slot_updates.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

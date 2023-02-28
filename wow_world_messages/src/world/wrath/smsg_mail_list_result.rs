@@ -24,7 +24,7 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // real_mail_amount: u32
         w.write_all(&self.real_mail_amount.to_le_bytes())?;
 
@@ -33,7 +33,7 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
 
         // mails: Mail[amount_of_mails]
         for i in self.mails.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

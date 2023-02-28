@@ -26,7 +26,7 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
@@ -38,7 +38,7 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
 
         // states: WorldState[amount_of_states]
         for i in self.states.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         Ok(())

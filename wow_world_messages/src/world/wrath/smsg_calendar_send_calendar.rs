@@ -41,13 +41,13 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // amount_of_invites: u32
         w.write_all(&(self.invites.len() as u32).to_le_bytes())?;
 
         // invites: SendCalendarInvite[amount_of_invites]
         for i in self.invites.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_events: u32
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
 
         // events: SendCalendarEvent[amount_of_events]
         for i in self.events.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // current_time: u32
@@ -69,7 +69,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
 
         // instances: SendCalendarInstance[amount_of_instances]
         for i in self.instances.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // relative_time: u32
@@ -80,7 +80,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
 
         // reset_times: SendCalendarResetTime[amount_of_reset_times]
         for i in self.reset_times.iter() {
-            i.write_into_vec(w)?;
+            i.write_into_vec(&mut w)?;
         }
 
         // amount_of_holidays: u32

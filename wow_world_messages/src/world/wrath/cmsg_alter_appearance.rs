@@ -22,7 +22,7 @@ impl crate::Message for CMSG_ALTER_APPEARANCE {
         12
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // hair: u32
         w.write_all(&self.hair.to_le_bytes())?;
 

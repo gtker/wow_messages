@@ -50,7 +50,7 @@ pub(crate) fn print_write_field_array(
                     if e.tags().compressed() || d.tags().is_compressed() {
                         s.wln(format!("i.write_into_vec(&mut {writer})?;"));
                     } else {
-                        s.wln("i.write_into_vec(w)?;");
+                        s.wln("i.write_into_vec(&mut w)?;");
                     }
                 }
                 ArrayType::CString => {
@@ -60,7 +60,7 @@ pub(crate) fn print_write_field_array(
                 ArrayType::Guid => {
                     s.wln(format!("w.write_all(&i.guid().to_le_bytes()){postfix}?;"));
                 }
-                ArrayType::PackedGuid => s.wln("i.write_packed_guid_into_vec(w)?;"),
+                ArrayType::PackedGuid => s.wln("i.write_packed_guid_into_vec(&mut w)?;"),
             }
         },
     );
@@ -222,7 +222,7 @@ pub(crate) fn print_write_definition(
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "{variable_prefix}{name}.write_packed_guid_into_vec(w)?;",
+                "{variable_prefix}{name}.write_packed_guid_into_vec(&mut w)?;",
             ));
         }
         Type::DateTime => {
@@ -244,7 +244,7 @@ pub(crate) fn print_write_definition(
         | Type::UpdateMask
         | Type::AuraMask => {
             s.wln(format!(
-                "{variable_prefix}{name}.write_into_vec(w){postfix}?;",
+                "{variable_prefix}{name}.write_into_vec(&mut w){postfix}?;",
             ));
         }
     }

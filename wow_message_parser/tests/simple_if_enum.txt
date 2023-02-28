@@ -16,7 +16,7 @@ pub struct SimpleIfEnum {
 }
 
 impl SimpleIfEnum {
-    pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // enum: SimpleEnum
         w.write_all(&u8::from(self.enum.as_int()).to_le_bytes())?;
 

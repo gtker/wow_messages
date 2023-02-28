@@ -25,7 +25,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         w.write_all(&(self.size_uncompressed() as u32).to_le_bytes())?;
 
         let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());
@@ -77,7 +77,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {
     #[cfg(feature = "sync")]
-    fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    fn write_unencrypted_server<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = crate::util::tbc_get_unencrypted_server(Self::OPCODE as u16, 0);
         self.write_into_vec(&mut v)?;
         let size = v.len().saturating_sub(2);
@@ -90,7 +90,7 @@ impl crate::tbc::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {
     #[cfg(all(feature = "sync", feature = "encryption"))]
     fn write_encrypted_server<W: std::io::Write>(
         &self,
-        w: &mut W,
+        mut w: W,
         e: &mut wow_srp::tbc_header::EncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let mut v = crate::util::tbc_get_unencrypted_server(Self::OPCODE as u16, 0);
@@ -104,14 +104,13 @@ impl crate::tbc::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_write_unencrypted_server<'s, 'w, 'async_trait, W>(
+    fn tokio_write_unencrypted_server<'s, 'async_trait, W>(
         &'s self,
-        w: &'w mut W,
+        mut w: W,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
-        'w: 'async_trait,
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
@@ -126,15 +125,14 @@ impl crate::tbc::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {
     }
 
     #[cfg(all(feature = "tokio", feature = "encryption"))]
-    fn tokio_write_encrypted_server<'s, 'w, 'e, 'async_trait, W>(
+    fn tokio_write_encrypted_server<'s, 'e, 'async_trait, W>(
         &'s self,
-        w: &'w mut W,
+        mut w: W,
         e: &'e mut wow_srp::tbc_header::EncrypterHalf,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
         's: 'async_trait,
-        'w: 'async_trait,
         'e: 'async_trait,
         Self: Sync + 'async_trait,
      {
@@ -151,14 +149,13 @@ impl crate::tbc::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_write_unencrypted_server<'s, 'w, 'async_trait, W>(
+    fn astd_write_unencrypted_server<'s, 'async_trait, W>(
         &'s self,
-        w: &'w mut W,
+        mut w: W,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
-        'w: 'async_trait,
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
@@ -173,15 +170,14 @@ impl crate::tbc::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {
     }
 
     #[cfg(all(feature = "async-std", feature = "encryption"))]
-    fn astd_write_encrypted_server<'s, 'w, 'e, 'async_trait, W>(
+    fn astd_write_encrypted_server<'s, 'e, 'async_trait, W>(
         &'s self,
-        w: &'w mut W,
+        mut w: W,
         e: &'e mut wow_srp::tbc_header::EncrypterHalf,
     ) -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,
         's: 'async_trait,
-        'w: 'async_trait,
         'e: 'async_trait,
         Self: Sync + 'async_trait,
      {

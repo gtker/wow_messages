@@ -26,15 +26,15 @@ impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w)?;
+        self.player.write_packed_guid_into_vec(&mut w)?;
 
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;
 
         // info: MovementInfo
-        self.info.write_into_vec(w)?;
+        self.info.write_into_vec(&mut w)?;
 
         // new_height: f32
         w.write_all(&self.new_height.to_le_bytes())?;

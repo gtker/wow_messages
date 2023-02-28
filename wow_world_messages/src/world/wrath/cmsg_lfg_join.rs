@@ -30,7 +30,7 @@ impl crate::Message for CMSG_LFG_JOIN {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // roles: u32
         w.write_all(&self.roles.to_le_bytes())?;
 

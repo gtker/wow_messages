@@ -24,15 +24,15 @@ impl crate::Message for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(w)?;
+        self.player.write_packed_guid_into_vec(&mut w)?;
 
         // done: AchievementDoneArray
-        self.done.write_into_vec(w)?;
+        self.done.write_into_vec(&mut w)?;
 
         // in_progress: AchievementInProgressArray
-        self.in_progress.write_into_vec(w)?;
+        self.in_progress.write_into_vec(&mut w)?;
 
         Ok(())
     }
