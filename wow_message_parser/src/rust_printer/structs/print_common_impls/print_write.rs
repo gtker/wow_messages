@@ -76,38 +76,25 @@ pub(crate) fn print_write_field_integer(
     size_of_fields_before_size: u64,
     postfix: &str,
 ) {
+    let endian = int_type.rust_endian_str();
+    let basic_type = int_type.rust_str();
+
     if let Some(value) = verified_value {
         if value.original_string() == CONTAINER_SELF_SIZE_FIELD {
-            s.wln(format!("w.write_all(&((self.size() - {minus_value}) as {basic_type}).to_{endian}_bytes()){postfix}?;",
-                          minus_value = size_of_fields_before_size,
-                          endian = int_type.rust_endian_str(),
-                          basic_type = int_type.rust_str(),
-                          postfix = postfix,
-            ));
+            s.wln(format!("w.write_all(&((self.size() - {size_of_fields_before_size}) as {basic_type}).to_{endian}_bytes()){postfix}?;"));
         } else {
             s.wln(format!(
                 "w.write_all(&Self::{name}_VALUE.to_{endian}_bytes()){postfix}?;",
                 name = variable_name.to_uppercase(),
-                endian = int_type.rust_endian_str(),
-                postfix = postfix,
             ));
         }
-    } else if let Some(v) = used_as_size_in {
+    } else if let Some(array) = used_as_size_in {
         s.wln(format!(
             "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_{endian}_bytes()){postfix}?;",
-            array = v,
-            basic_type = int_type.rust_str(),
-            endian = int_type.rust_endian_str(),
-            variable_prefix = variable_prefix,
-            postfix = postfix,
         ));
     } else {
         s.wln(format!(
-            "w.write_all(&{prefix}{name}.to_{endian}_bytes()){postfix}?;",
-            name = variable_name,
-            endian = int_type.rust_endian_str(),
-            prefix = variable_prefix,
-            postfix = postfix,
+            "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes()){postfix}?;",
         ));
     }
 }
