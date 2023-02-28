@@ -56,11 +56,12 @@ fn print_read_array(
                 ));
             }
 
-            s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
-
-            print_array_ty(s, array, d, prefix, "r", postfix, true);
-
-            s.closing_curly();
+            s.body(
+                format!("for i in {name}.iter_mut()", name = d.name()),
+                |s| {
+                    print_array_ty(s, array, d, prefix, "r", postfix, true);
+                },
+            );
         }
         ArraySize::Variable(m) => {
             s.wln(format!(
