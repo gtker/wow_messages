@@ -503,12 +503,12 @@ fn print_read_definition(
                 }
             }
 
-            if d.value().is_some() {
+            if let Some(value) = d.value() {
                 s.wln(format!(
                     "// {name} is expected to always be {constant_string} ({constant_value})",
                     name = d.name(),
-                    constant_string = d.value().as_ref().unwrap().original_string(),
-                    constant_value = d.value().as_ref().unwrap().value(),
+                    constant_string = value.original_string(),
+                    constant_value = value.value(),
                 ));
             }
         }
