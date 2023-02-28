@@ -429,42 +429,40 @@ fn print_read_definition(
         Type::Array(array) => {
             print_read_array(s, array, e, d, prefix, postfix);
         }
-        Type::Enum { e, upcast } | Type::Flag { e, upcast } => match e.definer_ty() {
-            DefinerType::Enum => {
-                let (parens, integer, cast) = if let Some(integer) = upcast {
-                    ("(", integer, format!(" as {})", e.ty().rust_str()))
-                } else {
-                    ("", e.ty(), "".to_string())
-                };
+        Type::Enum { e, upcast } => {
+            let (parens, integer, cast) = if let Some(integer) = upcast {
+                ("(", integer, format!(" as {})", e.ty().rust_str()))
+            } else {
+                ("", e.ty(), "".to_string())
+            };
 
-                s.wln(format!(
-                        "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(r){postfix}?{cast}.{into};",
-                        name = d.name(),
-                        type_name = d.ty().rust_str(),
-                        value_set = if d.value().is_some() { "_" } else { "" },
-                        endian = integer.rust_endian_str(),
-                        ty = integer.rust_str(),
-                        into = match e.self_value().is_some() {
-                            true => "into()",
-                            false => "try_into()?",
-                        },
-                        prefix = prefix,
-                        postfix = postfix,
-                    ));
-            }
-            DefinerType::Flag => {
-                s.wln(format!(
-                        "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(r){postfix}?);",
-                        name = d.name(),
-                        type_name = d.ty().rust_str(),
-                        value_set = if d.value().is_some() { "_" } else { "" },
-                        endian = e.ty().rust_endian_str(),
-                        ty = e.ty().rust_str(),
-                        prefix = prefix,
-                        postfix = postfix,
-                    ));
-            }
-        },
+            s.wln(format!(
+                "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(r){postfix}?{cast}.{into};",
+                name = d.name(),
+                type_name = d.ty().rust_str(),
+                value_set = if d.value().is_some() { "_" } else { "" },
+                endian = integer.rust_endian_str(),
+                ty = integer.rust_str(),
+                into = match e.self_value().is_some() {
+                    true => "into()",
+                    false => "try_into()?",
+                },
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
+        Type::Flag { e, .. } => {
+            s.wln(format!(
+                "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(r){postfix}?);",
+                name = d.name(),
+                type_name = d.ty().rust_str(),
+                value_set = if d.value().is_some() { "_" } else { "" },
+                endian = e.ty().rust_endian_str(),
+                ty = e.ty().rust_str(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
+        }
         Type::Struct { .. } => {
             s.wln(format!(
                 "{assignment_prefix}{value_set}{name} = {type_name}::{prefix}read(r){postfix}?;",
