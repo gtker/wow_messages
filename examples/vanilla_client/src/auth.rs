@@ -16,7 +16,7 @@ use wow_srp::normalized_string::NormalizedString;
 use wow_srp::{PublicKey, SESSION_KEY_LENGTH};
 
 pub fn auth(
-    auth_server: &mut TcpStream,
+    mut auth_server: &mut TcpStream,
 ) -> ([u8; SESSION_KEY_LENGTH as usize], CMD_REALM_LIST_Server) {
     CMD_AUTH_LOGON_CHALLENGE_Client {
         protocol_version: 3, // We are pretending to be 1.12
@@ -33,10 +33,10 @@ pub fn auth(
         client_ip_address: 0x7F000001,      // 127.0.0.1
         account_name: USERNAME.to_string(), //
     }
-    .write(auth_server)
+    .write(&mut auth_server)
     .unwrap();
 
-    let s = expect_server_message::<CMD_AUTH_LOGON_CHALLENGE_Server, _>(auth_server).unwrap();
+    let s = expect_server_message::<CMD_AUTH_LOGON_CHALLENGE_Server, _>(&mut auth_server).unwrap();
 
     let c = if let CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
         generator,
@@ -66,10 +66,10 @@ pub fn auth(
         telemetry_keys: vec![],
         security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
     }
-    .write(auth_server)
+    .write(&mut auth_server)
     .unwrap();
 
-    let s = expect_server_message::<CMD_AUTH_LOGON_PROOF_Server, _>(auth_server).unwrap();
+    let s = expect_server_message::<CMD_AUTH_LOGON_PROOF_Server, _>(&mut auth_server).unwrap();
     let c = if let CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success { server_proof, .. } = s.result
     {
         c.verify_server_proof(server_proof).unwrap()
@@ -77,9 +77,9 @@ pub fn auth(
         panic!()
     };
 
-    CMD_REALM_LIST_Client {}.write(auth_server).unwrap();
+    CMD_REALM_LIST_Client {}.write(&mut auth_server).unwrap();
 
-    let realms = expect_server_message::<CMD_REALM_LIST_Server, _>(auth_server).unwrap();
+    let realms = expect_server_message::<CMD_REALM_LIST_Server, _>(&mut auth_server).unwrap();
 
     (c.session_key(), realms)
 }

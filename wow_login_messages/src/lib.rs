@@ -141,7 +141,7 @@ pub trait ServerMessage: Sized {
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, crate::errors::ParseError>;
 
     #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+    fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
 
     #[doc(hidden)]
     #[cfg(feature = "async-std")]
@@ -154,14 +154,13 @@ pub trait ServerMessage: Sized {
         Self: 'async_trait;
 
     #[cfg(feature = "async-std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
+    fn astd_write<'life0, 'async_trait, W>(
         &'life0 self,
-        w: &'life1 mut W,
+        w: W,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + WriteExt + Unpin + Send,
         'life0: 'async_trait,
-        'life1: 'async_trait,
         Self: 'async_trait;
 
     #[doc(hidden)]
@@ -175,14 +174,13 @@ pub trait ServerMessage: Sized {
         Self: 'async_trait;
 
     #[cfg(feature = "tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+    fn tokio_write<'life0, 'async_trait, W>(
         &'life0 self,
-        w: &'life1 mut W,
+        w: W,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
-        'life1: 'async_trait,
         Self: 'async_trait;
 }
 
@@ -204,7 +202,7 @@ pub trait ClientMessage: Sized {
     fn read<R: std::io::Read>(r: &mut R) -> Result<Self, crate::errors::ParseError>;
 
     #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>;
+    fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
 
     #[doc(hidden)]
     #[cfg(feature = "async-std")]
@@ -217,14 +215,13 @@ pub trait ClientMessage: Sized {
         Self: 'async_trait;
 
     #[cfg(feature = "async-std")]
-    fn astd_write<'life0, 'life1, 'async_trait, W>(
+    fn astd_write<'life0, 'async_trait, W>(
         &'life0 self,
-        w: &'life1 mut W,
+        w: W,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + WriteExt + Unpin + Send,
         'life0: 'async_trait,
-        'life1: 'async_trait,
         Self: 'async_trait;
 
     #[doc(hidden)]
@@ -238,13 +235,12 @@ pub trait ClientMessage: Sized {
         Self: 'async_trait;
 
     #[cfg(feature = "tokio")]
-    fn tokio_write<'life0, 'life1, 'async_trait, W>(
+    fn tokio_write<'life0, 'async_trait, W>(
         &'life0 self,
-        w: &'life1 mut W,
+        w: W,
     ) -> Pin<Box<dyn Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>
     where
         W: 'async_trait + AsyncWriteExt + Unpin + Send,
         'life0: 'async_trait,
-        'life1: 'async_trait,
         Self: 'async_trait;
 }

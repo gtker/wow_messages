@@ -212,7 +212,7 @@ impl Writer {
         self.wln(it.cfg());
 
         if !it.is_async() {
-            self.open_curly(format!("fn {prefix}write<W: {write}>(&self, w: &mut W) -> std::result::Result<(), std::io::Error>",
+            self.open_curly(format!("fn {prefix}write<W: {write}>(&self, mut w: W) -> std::result::Result<(), std::io::Error>",
                                     prefix = it.prefix(),
                                     write = it.write(),
             ));
@@ -221,13 +221,13 @@ impl Writer {
         }
 
         self.wln(format!(
-            "fn {prefix}write<'life0, 'life1, 'async_trait, W>(",
+            "fn {prefix}write<'life0, 'async_trait, W>(",
             prefix = it.prefix(),
         ));
         self.inc_indent();
 
         self.wln("&'life0 self,");
-        self.wln("w: &'life1 mut W,");
+        self.wln("mut w: W,");
         self.dec_indent();
 
         self.wln(") -> core::pin::Pin<Box<");
@@ -245,7 +245,6 @@ impl Writer {
         self.inc_indent();
         self.wln(format!("W: 'async_trait + {},", it.write()));
         self.wln("'life0: 'async_trait,");
-        self.wln("'life1: 'async_trait,");
         self.wln("Self: 'async_trait,");
         self.dec_indent();
 
