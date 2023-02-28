@@ -185,8 +185,9 @@ pub(crate) fn impl_world_server_or_client_message(
         ));
         let unencrypted = |s: &mut Writer, extra: &str| {
             s.wln("let mut v = Vec::with_capacity(1024);");
-            s.wln(format!("crate::util::{feature_name}_get_unencrypted_{ty}(&mut v, Self::OPCODE as u16, 0)?;"));
-            s.wln("self.write_into_vec(&mut v)?;");
+            s.wln("let mut s = &mut v;");
+            s.wln(format!("crate::util::{feature_name}_get_unencrypted_{ty}(&mut s, Self::OPCODE as u16, 0)?;"));
+            s.wln("self.write_into_vec(&mut s)?;");
 
             s.wln("let size = v.len().saturating_sub(2);");
             s.wln("let s = size.to_le_bytes();");
@@ -220,8 +221,9 @@ pub(crate) fn impl_world_server_or_client_message(
 
         let encrypted = |s: &mut Writer, extra: &str| {
             s.wln("let mut v = Vec::with_capacity(1024);");
-            s.wln(format!("crate::util::{feature_name}_get_unencrypted_{ty}(&mut v, Self::OPCODE as u16, 0)?;"));
-            s.wln("self.write_into_vec(&mut v)?;");
+            s.wln("let mut s = &mut v;");
+            s.wln(format!("crate::util::{feature_name}_get_unencrypted_{ty}(&mut s, Self::OPCODE as u16, 0)?;"));
+            s.wln("self.write_into_vec(&mut s)?;");
             s.wln("let size = v.len().saturating_sub(2) as u16;");
             s.wln(format!(
                 "let header = e.encrypt_{ty}_header(size{size_cast}, Self::OPCODE{opcode_cast});"

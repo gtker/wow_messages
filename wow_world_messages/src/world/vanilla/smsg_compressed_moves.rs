@@ -65,8 +65,9 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1024);
-        crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
-        self.write_into_vec(&mut v)?;
+        let mut s = &mut v;
+        crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
+        self.write_into_vec(&mut s)?;
         let size = v.len().saturating_sub(2);
         let s = size.to_le_bytes();
         v[0] = s[1];
@@ -81,8 +82,9 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         e: &mut wow_srp::vanilla_header::EncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1024);
-        crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
-        self.write_into_vec(&mut v)?;
+        let mut s = &mut v;
+        crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
+        self.write_into_vec(&mut s)?;
         let size = v.len().saturating_sub(2) as u16;
         let header = e.encrypt_server_header(size, Self::OPCODE as u16);
         for (i, e) in header.iter().enumerate() {
@@ -103,8 +105,9 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
             v[0] = s[1];
@@ -127,8 +130,9 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_server_header(size, Self::OPCODE as u16);
             for (i, e) in header.iter().enumerate() {
@@ -150,8 +154,9 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
             v[0] = s[1];
@@ -174,8 +179,9 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_server_header(size, Self::OPCODE as u16);
             for (i, e) in header.iter().enumerate() {

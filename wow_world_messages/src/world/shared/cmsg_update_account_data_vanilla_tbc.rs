@@ -83,8 +83,9 @@ impl crate::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1024);
-        crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-        self.write_into_vec(&mut v)?;
+        let mut s = &mut v;
+        crate::util::vanilla_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+        self.write_into_vec(&mut s)?;
         let size = v.len().saturating_sub(2);
         let s = size.to_le_bytes();
         v[0] = s[1];
@@ -99,8 +100,9 @@ impl crate::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
         e: &mut wow_srp::vanilla_header::EncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1024);
-        crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-        self.write_into_vec(&mut v)?;
+        let mut s = &mut v;
+        crate::util::vanilla_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+        self.write_into_vec(&mut s)?;
         let size = v.len().saturating_sub(2) as u16;
         let header = e.encrypt_client_header(size, Self::OPCODE);
         for (i, e) in header.iter().enumerate() {
@@ -121,8 +123,9 @@ impl crate::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::vanilla_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
             v[0] = s[1];
@@ -145,8 +148,9 @@ impl crate::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::vanilla_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_client_header(size, Self::OPCODE);
             for (i, e) in header.iter().enumerate() {
@@ -168,8 +172,9 @@ impl crate::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::vanilla_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
             v[0] = s[1];
@@ -192,8 +197,9 @@ impl crate::vanilla::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::vanilla_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_client_header(size, Self::OPCODE);
             for (i, e) in header.iter().enumerate() {
@@ -210,8 +216,9 @@ impl crate::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1024);
-        crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-        self.write_into_vec(&mut v)?;
+        let mut s = &mut v;
+        crate::util::tbc_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+        self.write_into_vec(&mut s)?;
         let size = v.len().saturating_sub(2);
         let s = size.to_le_bytes();
         v[0] = s[1];
@@ -226,8 +233,9 @@ impl crate::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
         e: &mut wow_srp::tbc_header::EncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1024);
-        crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-        self.write_into_vec(&mut v)?;
+        let mut s = &mut v;
+        crate::util::tbc_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+        self.write_into_vec(&mut s)?;
         let size = v.len().saturating_sub(2) as u16;
         let header = e.encrypt_client_header(size, Self::OPCODE);
         for (i, e) in header.iter().enumerate() {
@@ -248,8 +256,9 @@ impl crate::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::tbc_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
             v[0] = s[1];
@@ -272,8 +281,9 @@ impl crate::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::tbc_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_client_header(size, Self::OPCODE);
             for (i, e) in header.iter().enumerate() {
@@ -295,8 +305,9 @@ impl crate::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::tbc_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
             v[0] = s[1];
@@ -319,8 +330,9 @@ impl crate::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
      {
         Box::pin(async move {
             let mut v = Vec::with_capacity(1024);
-            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
-            self.write_into_vec(&mut v)?;
+            let mut s = &mut v;
+            crate::util::tbc_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
+            self.write_into_vec(&mut s)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_client_header(size, Self::OPCODE);
             for (i, e) in header.iter().enumerate() {
