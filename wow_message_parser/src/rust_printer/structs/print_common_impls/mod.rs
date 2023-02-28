@@ -183,31 +183,8 @@ pub(crate) fn impl_world_server_or_client_message(
         s.open_curly(format!(
             "fn write_unencrypted_{ty}<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error>"
         ));
-        let unencrypted = |s: &mut Writer, extra: &str| {
-            s.wln("let mut v = Vec::with_capacity(1024);");
-            s.wln("let mut s = &mut v;");
-            s.wln(format!("crate::util::{feature_name}_get_unencrypted_{ty}(&mut s, Self::OPCODE as u16, 0)?;"));
-            s.wln("self.write_into_vec(&mut s)?;");
 
-            s.wln("let size = v.len().saturating_sub(2);");
-            s.wln("let s = size.to_le_bytes();");
-
-            s.wln("v[0] = s[1];");
-            s.wln("v[1] = s[0];");
-
-            match version {
-                MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {}
-                MajorWorldVersion::Wrath => {
-                    s.open_curly("if size > 0x7FFF");
-                    s.wln("v[2] = s[2];");
-                    s.closing_curly();
-                }
-            }
-
-            s.wln(format!("w.write_all(&v){extra}"));
-        };
-
-        unencrypted(s, "");
+        print_unencrypted_body(s, "", feature_name, ty, version);
         s.closing_curly_newline(); // fn write_unencrypted
 
         s.wln("#[cfg(all(feature = \"sync\", feature = \"encryption\"))]");
@@ -219,23 +196,8 @@ pub(crate) fn impl_world_server_or_client_message(
         s.wln(format!("e: &mut {encrypter},"));
         s.dec_indent();
 
-        let encrypted = |s: &mut Writer, extra: &str| {
-            s.wln("let mut v = Vec::with_capacity(1024);");
-            s.wln("let mut s = &mut v;");
-            s.wln(format!("crate::util::{feature_name}_get_unencrypted_{ty}(&mut s, Self::OPCODE as u16, 0)?;"));
-            s.wln("self.write_into_vec(&mut s)?;");
-            s.wln("let size = v.len().saturating_sub(2) as u16;");
-            s.wln(format!(
-                "let header = e.encrypt_{ty}_header(size{size_cast}, Self::OPCODE{opcode_cast});"
-            ));
-            s.open_curly("for (i, e) in header.iter().enumerate()");
-            s.wln("v[i] = *e;");
-            s.closing_curly();
-            s.wln(format!("w.write_all(&v){extra}"));
-        };
-
         s.open_curly(") -> Result<(), std::io::Error>");
-        encrypted(s, "");
+        print_encrypted_body(s, "", feature_name, ty, size_cast, opcode_cast);
         s.closing_curly_newline(); // ) -> Result
 
         for async_ty in ImplType::types() {
@@ -265,7 +227,7 @@ pub(crate) fn impl_world_server_or_client_message(
             s.open_curly(""); // fn body
 
             s.open_curly("Box::pin(async move");
-            unencrypted(s, ".await");
+            print_unencrypted_body(s, ".await", feature_name, ty, version);
             s.closing_curly_with(")");
 
             s.closing_curly_newline(); // fn body
@@ -294,7 +256,7 @@ pub(crate) fn impl_world_server_or_client_message(
             s.open_curly(""); // fn body
 
             s.open_curly("Box::pin(async move");
-            encrypted(s, ".await");
+            print_encrypted_body(s, ".await", feature_name, ty, size_cast, opcode_cast);
             s.closing_curly_with(")");
 
             s.closing_curly_newline(); // fn body
@@ -311,6 +273,62 @@ pub(crate) fn impl_world_server_or_client_message(
         ));
         s.newline();
     }
+}
+
+fn print_encrypted_body(
+    s: &mut Writer,
+    extra: &str,
+    feature_name: &str,
+    ty: &str,
+    size_cast: &str,
+    opcode_cast: &str,
+) {
+    s.wln("let mut v = Vec::with_capacity(1024);");
+    s.wln("let mut s = &mut v;");
+    s.wln(format!(
+        "crate::util::{feature_name}_get_unencrypted_{ty}(&mut s, Self::OPCODE as u16, 0)?;"
+    ));
+    s.wln("self.write_into_vec(&mut s)?;");
+    s.wln("let size = v.len().saturating_sub(2) as u16;");
+    s.wln(format!(
+        "let header = e.encrypt_{ty}_header(size{size_cast}, Self::OPCODE{opcode_cast});"
+    ));
+    s.open_curly("for (i, e) in header.iter().enumerate()");
+    s.wln("v[i] = *e;");
+    s.closing_curly();
+    s.wln(format!("w.write_all(&v){extra}"));
+}
+
+fn print_unencrypted_body(
+    s: &mut Writer,
+    extra: &str,
+    feature_name: &str,
+    ty: &str,
+    version: MajorWorldVersion,
+) {
+    s.wln("let mut v = Vec::with_capacity(1024);");
+    s.wln("let mut s = &mut v;");
+    s.wln(format!(
+        "crate::util::{feature_name}_get_unencrypted_{ty}(&mut s, Self::OPCODE as u16, 0)?;"
+    ));
+    s.wln("self.write_into_vec(&mut s)?;");
+
+    s.wln("let size = v.len().saturating_sub(2);");
+    s.wln("let s = size.to_le_bytes();");
+
+    s.wln("v[0] = s[1];");
+    s.wln("v[1] = s[0];");
+
+    match version {
+        MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {}
+        MajorWorldVersion::Wrath => {
+            s.open_curly("if size > 0x7FFF");
+            s.wln("v[2] = s[2];");
+            s.closing_curly();
+        }
+    }
+
+    s.wln(format!("w.write_all(&v){extra}"));
 }
 
 fn test_for_invalid_size(s: &mut Writer, e: &Container) {
