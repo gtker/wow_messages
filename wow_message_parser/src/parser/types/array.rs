@@ -94,11 +94,12 @@ impl Array {
         }
     }
 
-    pub(crate) fn inner_type_is_constant_sized(&self) -> bool {
+    pub(crate) fn inner_type_is_copy(&self) -> bool {
         match self.ty() {
-            ArrayType::Integer(_) | ArrayType::Guid => true,
-            ArrayType::CString | ArrayType::PackedGuid => false,
+            ArrayType::PackedGuid | ArrayType::Integer(_) | ArrayType::Guid => true,
             ArrayType::Struct(c) => c.is_constant_sized(),
+
+            ArrayType::CString => false,
         }
     }
 }

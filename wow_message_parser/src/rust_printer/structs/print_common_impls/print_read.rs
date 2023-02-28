@@ -42,8 +42,7 @@ fn print_read_array(
 
     match array.size() {
         ArraySize::Fixed(size) => {
-            let inner_is_constant_sized = array.inner_type_is_constant_sized();
-            if inner_is_constant_sized {
+            if array.inner_type_is_copy() {
                 s.wln(format!(
                     "let mut {name} = [{type_name}::default(); {size}];",
                     name = d.name(),
