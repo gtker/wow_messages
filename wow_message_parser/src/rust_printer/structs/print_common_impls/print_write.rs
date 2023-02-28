@@ -25,52 +25,45 @@ pub(crate) fn print_write_field_array(
     array: &Array,
     postfix: &str,
 ) {
-    if d.tags().is_compressed() {
+    let writer = if d.tags().is_compressed() {
         s.wln(
             "let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());",
         );
-    }
 
-    s.open_curly(format!(
-        "for i in {prefix}{name}.iter()",
-        name = d.name(),
-        prefix = variable_prefix
-    ));
-
-    let writer = if d.tags().is_compressed() {
         "encoder"
     } else {
         "w"
     };
 
-    match array.ty() {
-        ArrayType::Integer(integer_type) => s.wln(format!(
-            "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
-            writer = writer,
-            endian = integer_type.rust_endian_str(),
-            postfix = postfix,
-        )),
-        ArrayType::Struct(_) => {
-            // Complex types use "write_into_vec", which means we can't write directly
-            // into our ZLibEncoder because they require a &mut W instead of a W.
-            // RUST_NON_MUT_READ
-            if e.tags().compressed() || d.tags().is_compressed() {
-                s.wln(format!("i.write_into_vec(&mut {writer})?;"));
-            } else {
-                s.wln("i.write_into_vec(w)?;");
+    s.body(
+        format!("for i in {variable_prefix}{name}.iter()", name = d.name(),),
+        |s| {
+            match array.ty() {
+                ArrayType::Integer(integer_type) => s.wln(format!(
+                    "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
+                    endian = integer_type.rust_endian_str(),
+                )),
+                ArrayType::Struct(_) => {
+                    // Complex types use "write_into_vec", which means we can't write directly
+                    // into our ZLibEncoder because they require a &mut W instead of a W.
+                    // RUST_NON_MUT_READ
+                    if e.tags().compressed() || d.tags().is_compressed() {
+                        s.wln(format!("i.write_into_vec(&mut {writer})?;"));
+                    } else {
+                        s.wln("i.write_into_vec(w)?;");
+                    }
+                }
+                ArrayType::CString => {
+                    s.wln(format!("w.write_all(i.as_bytes()){postfix}?;"));
+                    s.wln(format!("w.write_all(&[0]){postfix}?;"));
+                }
+                ArrayType::Guid => {
+                    s.wln(format!("w.write_all(&i.guid().to_le_bytes()){postfix}?;"));
+                }
+                ArrayType::PackedGuid => s.wln("i.write_packed_guid_into_vec(w)?;"),
             }
-        }
-        ArrayType::CString => {
-            s.wln(format!("w.write_all(i.as_bytes()){postfix}?;"));
-            s.wln(format!("w.write_all(&[0]){postfix}?;"));
-        }
-        ArrayType::Guid => {
-            s.wln(format!("w.write_all(&i.guid().to_le_bytes()){postfix}?;"));
-        }
-        ArrayType::PackedGuid => s.wln("i.write_packed_guid_into_vec(w)?;"),
-    }
-
-    s.closing_curly();
+        },
+    );
 }
 
 pub(crate) fn print_write_field_integer(
