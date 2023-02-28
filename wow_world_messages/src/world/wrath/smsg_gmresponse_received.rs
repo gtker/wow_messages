@@ -65,12 +65,12 @@ impl crate::Message for SMSG_GMRESPONSE_RECEIVED {
 
         // response: CString[4]
         let response = {
-            let mut response = Vec::with_capacity(4);
-            for i in 0..4 {
+            let mut response = [(); 4].map(|_| String::default());
+            for i in response.iter_mut() {
                 let s = crate::util::read_c_string_to_vec(r)?;
-                response.push(String::from_utf8(s)?);
+                *i = String::from_utf8(s)?;
             }
-            response.try_into().unwrap()
+            response
         };
 
         Ok(Self {

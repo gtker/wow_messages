@@ -42,11 +42,11 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
 
         // texts: NpcTextUpdate[8]
         let texts = {
-            let mut texts = Vec::with_capacity(8);
-            for i in 0..8 {
-                texts.push(NpcTextUpdate::read(r)?);
+            let mut texts = [(); 8].map(|_| NpcTextUpdate::default());
+            for i in texts.iter_mut() {
+                *i = NpcTextUpdate::read(r)?;
             }
-            texts.try_into().unwrap()
+            texts
         };
 
         Ok(Self {

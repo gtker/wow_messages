@@ -72,11 +72,11 @@ impl PackedGuidAndGuid {
 
         // static_packed: PackedGuid[10]
         let static_packed = {
-            let mut static_packed = Vec::with_capacity(10);
-            for i in 0..10 {
-                static_packed.push(Guid::read_packed(r)?);
+            let mut static_packed = [(); 10].map(|_| Guid::default());
+            for i in static_packed.iter_mut() {
+                *i =Guid::read_packed(r)?;
             }
-            static_packed.try_into().unwrap()
+            static_packed
         };
 
         // static_guid: Guid[10]

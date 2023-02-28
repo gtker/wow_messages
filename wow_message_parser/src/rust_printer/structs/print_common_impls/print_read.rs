@@ -31,91 +31,50 @@ fn print_read_array_fixed(
         ));
     } else {
         s.wln(format!(
-            "let mut {name} = Vec::with_capacity({size});",
+            "let mut {name} = [(); {size}].map(|_| {ty}::default());",
             name = d.name(),
+            ty = array.ty().rust_str()
         ));
     }
 
-    if inner_is_constant_sized {
-        s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
-    } else {
-        s.open_curly(format!("for i in 0..{size}"));
-    }
+    s.open_curly(format!("for i in {name}.iter_mut()", name = d.name()));
 
     match array.ty() {
         ArrayType::Integer(integer) => {
-            if inner_is_constant_sized {
-                s.wln(format!(
-                    "*i = {module}::{prefix}read_{int_type}_{endian}(r){postfix}?;",
-                    module = UTILITY_PATH,
-                    int_type = integer.rust_str(),
-                    endian = integer.rust_endian_str(),
-                    prefix = prefix,
-                    postfix = postfix,
-                ));
-            } else {
-                s.wln(format!(
-                    "{name}.push({module}::{prefix}read_{int_type}_{endian}(r){postfix}?);",
-                    name = d.name(),
-                    module = UTILITY_PATH,
-                    int_type = integer.rust_str(),
-                    endian = integer.rust_endian_str(),
-                    prefix = prefix,
-                    postfix = postfix,
-                ));
-            }
+            s.wln(format!(
+                "*i = {module}::{prefix}read_{int_type}_{endian}(r){postfix}?;",
+                module = UTILITY_PATH,
+                int_type = integer.rust_str(),
+                endian = integer.rust_endian_str(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
         }
         ArrayType::Struct(_) => {
-            if inner_is_constant_sized {
-                s.wln(format!(
-                    "*i = {type_name}::{prefix}read(r){postfix}?;",
-                    type_name = array.ty().rust_str(),
-                    prefix = prefix,
-                    postfix = postfix,
-                ));
-            } else {
-                s.wln(format!(
-                    "{name}.push({type_name}::{prefix}read(r){postfix}?);",
-                    name = d.name(),
-                    type_name = array.ty().rust_str(),
-                    prefix = prefix,
-                    postfix = postfix,
-                ));
-            }
+            s.wln(format!(
+                "*i = {type_name}::{prefix}read(r){postfix}?;",
+                type_name = array.ty().rust_str(),
+                prefix = prefix,
+                postfix = postfix,
+            ));
         }
         ArrayType::CString => {
             s.wln(format!(
                 "let s = crate::util::{prefix}read_c_string_to_vec(r){postfix}?;",
             ));
-            match array.size() {
-                ArraySize::Fixed(_) => s.wln(format!(
-                    "{name}.push(String::from_utf8(s)?);",
-                    name = d.name()
-                )),
-                ArraySize::Variable(_) => unimplemented!(),
-                ArraySize::Endless => unimplemented!(),
-            }
+            s.wln("*i = String::from_utf8(s)?;");
         }
         ArrayType::Guid => {
             s.wln(format!("*i = Guid::{prefix}read(r){postfix}?;",));
         }
         ArrayType::PackedGuid => {
-            s.wln(format!(
-                "{name}.push(Guid::{prefix}read_packed(r){postfix}?);",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
+            s.wln(format!("*i =Guid::{prefix}read_packed(r){postfix}?;",));
         }
     }
 
     s.closing_curly();
 
-    if !inner_is_constant_sized {
-        s.wln(format!("{name}.try_into().unwrap()", name = d.name()));
-    } else {
-        s.wln(d.name());
-    }
+    s.wln(d.name());
 
     s.closing_curly_with(";");
 }

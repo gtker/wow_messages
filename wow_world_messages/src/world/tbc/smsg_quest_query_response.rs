@@ -341,12 +341,12 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
         // objective_texts: CString[4]
         let objective_texts = {
-            let mut objective_texts = Vec::with_capacity(4);
-            for i in 0..4 {
+            let mut objective_texts = [(); 4].map(|_| String::default());
+            for i in objective_texts.iter_mut() {
                 let s = crate::util::read_c_string_to_vec(r)?;
-                objective_texts.push(String::from_utf8(s)?);
+                *i = String::from_utf8(s)?;
             }
-            objective_texts.try_into().unwrap()
+            objective_texts
         };
 
         Ok(Self {

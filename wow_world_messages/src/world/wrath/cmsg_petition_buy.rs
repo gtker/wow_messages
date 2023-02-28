@@ -189,12 +189,12 @@ impl crate::Message for CMSG_PETITION_BUY {
 
         // unknown15: CString[10]
         let unknown15 = {
-            let mut unknown15 = Vec::with_capacity(10);
-            for i in 0..10 {
+            let mut unknown15 = [(); 10].map(|_| String::default());
+            for i in unknown15.iter_mut() {
                 let s = crate::util::read_c_string_to_vec(r)?;
-                unknown15.push(String::from_utf8(s)?);
+                *i = String::from_utf8(s)?;
             }
-            unknown15.try_into().unwrap()
+            unknown15
         };
 
         // index: u32

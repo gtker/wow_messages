@@ -49,12 +49,12 @@ impl NpcTextUpdate {
 
         // texts: CString[2]
         let texts = {
-            let mut texts = Vec::with_capacity(2);
-            for i in 0..2 {
+            let mut texts = [(); 2].map(|_| String::default());
+            for i in texts.iter_mut() {
                 let s = crate::util::read_c_string_to_vec(r)?;
-                texts.push(String::from_utf8(s)?);
+                *i = String::from_utf8(s)?;
             }
-            texts.try_into().unwrap()
+            texts
         };
 
         // language: Language

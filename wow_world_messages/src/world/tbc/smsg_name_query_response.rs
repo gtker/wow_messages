@@ -125,12 +125,12 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
             DeclinedNames::Yes => {
                 // declined_names: CString[5]
                 let declined_names = {
-                    let mut declined_names = Vec::with_capacity(5);
-                    for i in 0..5 {
+                    let mut declined_names = [(); 5].map(|_| String::default());
+                    for i in declined_names.iter_mut() {
                         let s = crate::util::read_c_string_to_vec(r)?;
-                        declined_names.push(String::from_utf8(s)?);
+                        *i = String::from_utf8(s)?;
                     }
-                    declined_names.try_into().unwrap()
+                    declined_names
                 };
 
                 SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {

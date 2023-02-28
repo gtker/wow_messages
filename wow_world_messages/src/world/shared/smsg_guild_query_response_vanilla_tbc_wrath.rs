@@ -82,12 +82,12 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
 
         // rank_names: CString[10]
         let rank_names = {
-            let mut rank_names = Vec::with_capacity(10);
-            for i in 0..10 {
+            let mut rank_names = [(); 10].map(|_| String::default());
+            for i in rank_names.iter_mut() {
                 let s = crate::util::read_c_string_to_vec(r)?;
-                rank_names.push(String::from_utf8(s)?);
+                *i = String::from_utf8(s)?;
             }
-            rank_names.try_into().unwrap()
+            rank_names
         };
 
         // emblem_style: u32

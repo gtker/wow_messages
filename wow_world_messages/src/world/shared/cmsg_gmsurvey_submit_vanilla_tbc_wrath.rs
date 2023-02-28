@@ -56,11 +56,11 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
 
         // questions: GmSurveyQuestion[10]
         let questions = {
-            let mut questions = Vec::with_capacity(10);
-            for i in 0..10 {
-                questions.push(GmSurveyQuestion::read(r)?);
+            let mut questions = [(); 10].map(|_| GmSurveyQuestion::default());
+            for i in questions.iter_mut() {
+                *i = GmSurveyQuestion::read(r)?;
             }
-            questions.try_into().unwrap()
+            questions
         };
 
         // answer_comment: CString
