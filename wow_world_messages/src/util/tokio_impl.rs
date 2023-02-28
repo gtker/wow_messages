@@ -1,5 +1,5 @@
 use crate::util::CSTRING_LARGEST_ALLOWED;
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::io::AsyncReadExt;
 
 pub async fn tokio_read_fixed_string_to_vec<R: AsyncReadExt + Unpin + Unpin>(
     r: &mut R,
@@ -38,14 +38,6 @@ pub async fn tokio_read_u8_le<R: AsyncReadExt + Unpin + Unpin>(
     Ok(u8::from_le_bytes(v))
 }
 
-pub async fn tokio_write_u8_le<W: AsyncWriteExt + Unpin>(
-    w: &mut W,
-    v: u8,
-) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_le_bytes()).await?;
-    Ok(())
-}
-
 // u16
 pub async fn tokio_read_u16_le<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u16, std::io::Error> {
     let mut v = [0_u8; 2];
@@ -59,22 +51,6 @@ pub async fn tokio_read_u16_be<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u16
     Ok(u16::from_be_bytes(v))
 }
 
-pub async fn tokio_write_u16_le<W: AsyncWriteExt + Unpin>(
-    w: &mut W,
-    v: u16,
-) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_le_bytes()).await?;
-    Ok(())
-}
-
-pub async fn tokio_write_u16_be<W: AsyncWriteExt + Unpin>(
-    w: &mut W,
-    v: u16,
-) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_be_bytes()).await?;
-    Ok(())
-}
-
 // u32
 pub async fn tokio_read_u32_le<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u32, std::io::Error> {
     r.read_u32_le().await
@@ -84,22 +60,6 @@ pub async fn tokio_read_u32_be<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u32
     let mut v = [0_u8; 4];
     r.read_exact(&mut v).await?;
     Ok(u32::from_be_bytes(v))
-}
-
-pub async fn tokio_write_u32_le<W: AsyncWriteExt + Unpin>(
-    w: &mut W,
-    v: u32,
-) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_le_bytes()).await?;
-    Ok(())
-}
-
-pub async fn tokio_write_u32_be<W: AsyncWriteExt + Unpin>(
-    w: &mut W,
-    v: u32,
-) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_be_bytes()).await?;
-    Ok(())
 }
 
 // u64
@@ -113,22 +73,6 @@ pub async fn tokio_read_u64_be<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u64
     let mut v = [0_u8; 8];
     r.read_exact(&mut v).await?;
     Ok(u64::from_be_bytes(v))
-}
-
-pub async fn tokio_write_u64_le<W: AsyncWriteExt + Unpin>(
-    w: &mut W,
-    v: u64,
-) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_le_bytes()).await?;
-    Ok(())
-}
-
-pub async fn tokio_write_u64_be<W: AsyncWriteExt + Unpin>(
-    w: &mut W,
-    v: u64,
-) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_be_bytes()).await?;
-    Ok(())
 }
 
 // f32
