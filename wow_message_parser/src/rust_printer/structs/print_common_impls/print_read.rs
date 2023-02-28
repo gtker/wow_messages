@@ -463,16 +463,6 @@ fn print_read_definition(
                 postfix = postfix,
             ));
         }
-        Type::Struct { .. } => {
-            s.wln(format!(
-                "{assignment_prefix}{value_set}{name} = {type_name}::{prefix}read(r){postfix}?;",
-                name = d.name(),
-                type_name = d.ty().rust_str(),
-                value_set = if d.value().is_some() { "_" } else { "" },
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
         Type::PackedGuid => {
             s.wln(format!(
                 "{assignment_prefix}{name} = Guid::{prefix}read_packed(r){postfix}?;",
@@ -481,66 +471,20 @@ fn print_read_definition(
                 postfix = postfix,
             ));
         }
-        Type::Guid => {
+
+        Type::Struct { .. }
+        | Type::Guid
+        | Type::UpdateMask
+        | Type::AuraMask
+        | Type::AchievementDoneArray
+        | Type::AchievementInProgressArray
+        | Type::MonsterMoveSpline
+        | Type::EnchantMask
+        | Type::InspectTalentGearMask => {
             s.wln(format!(
-                "{assignment_prefix}{name} = Guid::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{name} = {ty}::{prefix}read(r){postfix}?;",
                 name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        Type::UpdateMask => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = UpdateMask::{prefix}read(r){postfix}?;",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        Type::AuraMask => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = AuraMask::{prefix}read(r){postfix}?;",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        Type::AchievementDoneArray => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = AchievementDoneArray::{prefix}read(r){postfix}?;",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        Type::AchievementInProgressArray => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = AchievementInProgressArray::{prefix}read(r){postfix}?;",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        Type::MonsterMoveSpline => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = MonsterMoveSpline::{prefix}read(r){postfix}?;",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        Type::EnchantMask => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = EnchantMask::{prefix}read(r){postfix}?;",
-                name = d.name(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
-        Type::InspectTalentGearMask => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = InspectTalentGearMask::{prefix}read(r){postfix}?;",
-                name = d.name(),
+                ty = d.ty().rust_str(),
                 prefix = prefix,
                 postfix = postfix,
             ));
