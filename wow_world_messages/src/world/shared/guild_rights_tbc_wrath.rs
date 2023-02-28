@@ -35,18 +35,18 @@ impl GuildRights {
 }
 
 impl GuildRights {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // rights: u32
-        let rights = crate::util::read_u32_le(r)?;
+        let rights = crate::util::read_u32_le(&mut r)?;
 
         // money_per_day: Gold
-        let money_per_day = Gold::new(crate::util::read_u32_le(r)?);
+        let money_per_day = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // bank_tab_rights: GuildBankRights[6]
         let bank_tab_rights = {
             let mut bank_tab_rights = [GuildBankRights::default(); 6];
             for i in bank_tab_rights.iter_mut() {
-                *i = GuildBankRights::read(r)?;
+                *i = GuildBankRights::read(&mut r)?;
             }
             bank_tab_rights
         };

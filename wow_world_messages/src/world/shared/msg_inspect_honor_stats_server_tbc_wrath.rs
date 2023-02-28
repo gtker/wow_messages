@@ -50,28 +50,28 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 25 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D6, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // amount_of_honor: u8
-        let amount_of_honor = crate::util::read_u8_le(r)?;
+        let amount_of_honor = crate::util::read_u8_le(&mut r)?;
 
         // kills: u32
-        let kills = crate::util::read_u32_le(r)?;
+        let kills = crate::util::read_u32_le(&mut r)?;
 
         // honor_today: u32
-        let honor_today = crate::util::read_u32_le(r)?;
+        let honor_today = crate::util::read_u32_le(&mut r)?;
 
         // honor_yesterday: u32
-        let honor_yesterday = crate::util::read_u32_le(r)?;
+        let honor_yesterday = crate::util::read_u32_le(&mut r)?;
 
         // lifetime_honorable_kills: u32
-        let lifetime_honorable_kills = crate::util::read_u32_le(r)?;
+        let lifetime_honorable_kills = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             guid,

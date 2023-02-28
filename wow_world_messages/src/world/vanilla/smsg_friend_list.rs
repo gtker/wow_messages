@@ -31,19 +31,19 @@ impl crate::Message for SMSG_FRIEND_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=5377).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0067, size: body_size as u32 });
         }
 
         // amount_of_friends: u8
-        let amount_of_friends = crate::util::read_u8_le(r)?;
+        let amount_of_friends = crate::util::read_u8_le(&mut r)?;
 
         // friends: Friend[amount_of_friends]
         let friends = {
             let mut friends = Vec::with_capacity(amount_of_friends as usize);
             for i in 0..amount_of_friends {
-                friends.push(Friend::read(r)?);
+                friends.push(Friend::read(&mut r)?);
             }
             friends
         };

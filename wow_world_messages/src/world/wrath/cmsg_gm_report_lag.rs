@@ -36,19 +36,19 @@ impl crate::Message for CMSG_GM_REPORT_LAG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0502, size: body_size as u32 });
         }
 
         // lag_type: u32
-        let lag_type = crate::util::read_u32_le(r)?;
+        let lag_type = crate::util::read_u32_le(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         Ok(Self {
             lag_type,

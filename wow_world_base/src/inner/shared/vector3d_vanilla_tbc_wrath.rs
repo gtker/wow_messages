@@ -32,15 +32,15 @@ impl Vector3d {
 }
 
 impl Vector3d {
-    pub fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // x: f32
-        let x = crate::util::read_f32_le(r)?;
+        let x = crate::util::read_f32_le(&mut r)?;
 
         // y: f32
-        let y = crate::util::read_f32_le(r)?;
+        let y = crate::util::read_f32_le(&mut r)?;
 
         // z: f32
-        let z = crate::util::read_f32_le(r)?;
+        let z = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             x,

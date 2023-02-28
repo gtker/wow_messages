@@ -106,41 +106,41 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=1806).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0051, size: body_size as u32 });
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // early_terminate: u8
-        let _early_terminate = crate::util::read_u8_le(r)?;
+        let _early_terminate = crate::util::read_u8_le(&mut r)?;
         // early_terminate is expected to always be 0 (0)
 
         // character_name: CString
         let character_name = {
-            let character_name = crate::util::read_c_string_to_vec(r)?;
+            let character_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(character_name)?
         };
 
         // realm_name: CString
         let realm_name = {
-            let realm_name = crate::util::read_c_string_to_vec(r)?;
+            let realm_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(realm_name)?
         };
 
         // race: Race
-        let race: Race = (crate::util::read_u8_le(r)? as u8).try_into()?;
+        let race: Race = (crate::util::read_u8_le(&mut r)? as u8).try_into()?;
 
         // gender: Gender
-        let gender: Gender = (crate::util::read_u8_le(r)? as u8).try_into()?;
+        let gender: Gender = (crate::util::read_u8_le(&mut r)? as u8).try_into()?;
 
         // class: Class
-        let class: Class = (crate::util::read_u8_le(r)? as u8).try_into()?;
+        let class: Class = (crate::util::read_u8_le(&mut r)? as u8).try_into()?;
 
         // has_declined_names: DeclinedNames
-        let has_declined_names: DeclinedNames = crate::util::read_u8_le(r)?.try_into()?;
+        let has_declined_names: DeclinedNames = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let has_declined_names_if = match has_declined_names {
             DeclinedNames::No => SMSG_NAME_QUERY_RESPONSE_DeclinedNames::No,
@@ -149,7 +149,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
                 let declined_names = {
                     let mut declined_names = [(); 5].map(|_| String::default());
                     for i in declined_names.iter_mut() {
-                        let s = crate::util::read_c_string_to_vec(r)?;
+                        let s = crate::util::read_c_string_to_vec(&mut r)?;
                         *i = String::from_utf8(s)?;
                     }
                     declined_names

@@ -24,13 +24,13 @@ impl crate::Message for SMSG_LFG_UPDATE_SEARCH {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0369, size: body_size as u32 });
         }
 
         // in_lfg_queue: Bool
-        let in_lfg_queue = crate::util::read_u8_le(r)? != 0;
+        let in_lfg_queue = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             in_lfg_queue,

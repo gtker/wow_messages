@@ -43,22 +43,22 @@ impl crate::Message for SMSG_BUY_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A4, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // vendor_slot: u32
-        let vendor_slot = crate::util::read_u32_le(r)?;
+        let vendor_slot = crate::util::read_u32_le(&mut r)?;
 
         // amount_for_sale: u32
-        let amount_for_sale = crate::util::read_u32_le(r)?;
+        let amount_for_sale = crate::util::read_u32_le(&mut r)?;
 
         // amount_bought: u32
-        let amount_bought = crate::util::read_u32_le(r)?;
+        let amount_bought = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             guid,

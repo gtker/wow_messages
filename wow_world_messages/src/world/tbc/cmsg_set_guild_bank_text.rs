@@ -33,17 +33,17 @@ impl crate::Message for CMSG_SET_GUILD_BANK_TEXT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=257).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x040A, size: body_size as u32 });
         }
 
         // tab: u8
-        let tab = crate::util::read_u8_le(r)?;
+        let tab = crate::util::read_u8_le(&mut r)?;
 
         // text: CString
         let text = {
-            let text = crate::util::read_c_string_to_vec(r)?;
+            let text = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(text)?
         };
 

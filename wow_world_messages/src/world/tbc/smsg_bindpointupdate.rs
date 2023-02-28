@@ -39,19 +39,19 @@ impl crate::Message for SMSG_BINDPOINTUPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0155, size: body_size as u32 });
         }
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             position,

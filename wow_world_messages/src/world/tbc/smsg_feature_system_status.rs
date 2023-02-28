@@ -30,16 +30,16 @@ impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C8, size: body_size as u32 });
         }
 
         // complaint_status: ComplaintStatus
-        let complaint_status: ComplaintStatus = crate::util::read_u8_le(r)?.try_into()?;
+        let complaint_status: ComplaintStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // voice_chat_enabled: Bool
-        let voice_chat_enabled = crate::util::read_u8_le(r)? != 0;
+        let voice_chat_enabled = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             complaint_status,

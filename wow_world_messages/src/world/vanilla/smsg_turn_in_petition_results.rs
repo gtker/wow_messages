@@ -25,13 +25,13 @@ impl crate::Message for SMSG_TURN_IN_PETITION_RESULTS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C5, size: body_size as u32 });
         }
 
         // result: PetitionResult
-        let result: PetitionResult = crate::util::read_u32_le(r)?.try_into()?;
+        let result: PetitionResult = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             result,

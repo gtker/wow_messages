@@ -36,19 +36,19 @@ impl crate::Message for SMSG_WEATHER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F4, size: body_size as u32 });
         }
 
         // weather_type: WeatherType
-        let weather_type: WeatherType = crate::util::read_u32_le(r)?.try_into()?;
+        let weather_type: WeatherType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // grade: f32
-        let grade = crate::util::read_f32_le(r)?;
+        let grade = crate::util::read_f32_le(&mut r)?;
 
         // change: WeatherChangeType
-        let change: WeatherChangeType = crate::util::read_u8_le(r)?.try_into()?;
+        let change: WeatherChangeType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             weather_type,

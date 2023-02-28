@@ -52,29 +52,29 @@ impl crate::Message for CMSG_JOIN_CHANNEL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=518).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0097, size: body_size as u32 });
         }
 
         // channel_id: u32
-        let channel_id = crate::util::read_u32_le(r)?;
+        let channel_id = crate::util::read_u32_le(&mut r)?;
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(r)?;
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
 
         // channel_name: CString
         let channel_name = {
-            let channel_name = crate::util::read_c_string_to_vec(r)?;
+            let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(channel_name)?
         };
 
         // channel_password: CString
         let channel_password = {
-            let channel_password = crate::util::read_c_string_to_vec(r)?;
+            let channel_password = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(channel_password)?
         };
 

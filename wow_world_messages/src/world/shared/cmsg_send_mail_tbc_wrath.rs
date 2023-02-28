@@ -103,61 +103,61 @@ impl crate::Message for CMSG_SEND_MAIL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(36..=3105).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0238, size: body_size as u32 });
         }
 
         // mailbox: Guid
-        let mailbox = Guid::read(r)?;
+        let mailbox = Guid::read(&mut r)?;
 
         // receiver: CString
         let receiver = {
-            let receiver = crate::util::read_c_string_to_vec(r)?;
+            let receiver = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(receiver)?
         };
 
         // subject: CString
         let subject = {
-            let subject = crate::util::read_c_string_to_vec(r)?;
+            let subject = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(subject)?
         };
 
         // body: CString
         let body = {
-            let body = crate::util::read_c_string_to_vec(r)?;
+            let body = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(body)?
         };
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(r)?;
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_items: u8
-        let amount_of_items = crate::util::read_u8_le(r)?;
+        let amount_of_items = crate::util::read_u8_le(&mut r)?;
 
         // items: MailItem[amount_of_items]
         let items = {
             let mut items = Vec::with_capacity(amount_of_items as usize);
             for i in 0..amount_of_items {
-                items.push(MailItem::read(r)?);
+                items.push(MailItem::read(&mut r)?);
             }
             items
         };
 
         // money: Gold
-        let money = Gold::new(crate::util::read_u32_le(r)?);
+        let money = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // cash_on_delivery_amount: u32
-        let cash_on_delivery_amount = crate::util::read_u32_le(r)?;
+        let cash_on_delivery_amount = crate::util::read_u32_le(&mut r)?;
 
         // unknown3: u32
-        let unknown3 = crate::util::read_u32_le(r)?;
+        let unknown3 = crate::util::read_u32_le(&mut r)?;
 
         // unknown4: u32
-        let unknown4 = crate::util::read_u32_le(r)?;
+        let unknown4 = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             mailbox,

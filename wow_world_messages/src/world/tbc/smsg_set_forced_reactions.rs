@@ -31,19 +31,19 @@ impl crate::Message for SMSG_SET_FORCED_REACTIONS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A5, size: body_size as u32 });
         }
 
         // amount_of_reactions: u32
-        let amount_of_reactions = crate::util::read_u32_le(r)?;
+        let amount_of_reactions = crate::util::read_u32_le(&mut r)?;
 
         // reactions: ForcedReaction[amount_of_reactions]
         let reactions = {
             let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
             for i in 0..amount_of_reactions {
-                reactions.push(ForcedReaction::read(r)?);
+                reactions.push(ForcedReaction::read(&mut r)?);
             }
             reactions
         };

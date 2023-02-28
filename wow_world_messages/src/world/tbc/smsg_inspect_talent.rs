@@ -32,13 +32,13 @@ impl crate::Message for SMSG_INSPECT_TALENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=65544).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F3, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // talent_data: u8[-]
         let talent_data = {
@@ -47,7 +47,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
             };
             let mut talent_data = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                talent_data.push(crate::util::read_u8_le(r)?);
+                talent_data.push(crate::util::read_u8_le(&mut r)?);
                 current_size += 1;
             }
             talent_data

@@ -74,21 +74,21 @@ impl CompressedMove {
 }
 
 impl CompressedMove {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // size: u8
-        let _size = crate::util::read_u8_le(r)?;
+        let _size = crate::util::read_u8_le(&mut r)?;
         // size is expected to always be self.size (0)
 
         // opcode: CompressedMoveOpcode
-        let opcode: CompressedMoveOpcode = crate::util::read_u16_le(r)?.try_into()?;
+        let opcode: CompressedMoveOpcode = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         let opcode_if = match opcode {
             CompressedMoveOpcode::SmsgMonsterMove => {
                 // monster_move: MonsterMove
-                let monster_move = MonsterMove::read(r)?;
+                let monster_move = MonsterMove::read(&mut r)?;
 
                 CompressedMove_CompressedMoveOpcode::SmsgMonsterMove {
                     monster_move,
@@ -96,10 +96,10 @@ impl CompressedMove {
             }
             CompressedMoveOpcode::SmsgMonsterMoveTransport => {
                 // transport: PackedGuid
-                let transport = Guid::read_packed(r)?;
+                let transport = Guid::read_packed(&mut r)?;
 
                 // monster_move_transport: MonsterMove
-                let monster_move_transport = MonsterMove::read(r)?;
+                let monster_move_transport = MonsterMove::read(&mut r)?;
 
                 CompressedMove_CompressedMoveOpcode::SmsgMonsterMoveTransport {
                     monster_move_transport,
@@ -108,7 +108,7 @@ impl CompressedMove {
             }
             CompressedMoveOpcode::SmsgSplineSetRunSpeed => {
                 // speed: f32
-                let speed = crate::util::read_f32_le(r)?;
+                let speed = crate::util::read_f32_le(&mut r)?;
 
                 CompressedMove_CompressedMoveOpcode::SmsgSplineSetRunSpeed {
                     speed,

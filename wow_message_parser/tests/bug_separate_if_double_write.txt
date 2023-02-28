@@ -73,22 +73,22 @@ impl BugSeparateIfDoubleWrite {
 }
 
 impl BugSeparateIfDoubleWrite {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         let mut b_if_zero_one = Default::default();
         let mut b_if_two = Default::default();
 
         // b: SimpleEnum
-        let b: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
+        let b: SimpleEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         match b {
             SimpleEnum::Zero => {
                 // zero_one: u8
-                b_if_zero_one = crate::util::read_u8_le(r)?;
+                b_if_zero_one = crate::util::read_u8_le(&mut r)?;
 
             }
             SimpleEnum::One => {
                 // zero_one: u8
-                b_if_zero_one = crate::util::read_u8_le(r)?;
+                b_if_zero_one = crate::util::read_u8_le(&mut r)?;
 
             }
             SimpleEnum::Two => {
@@ -96,7 +96,7 @@ impl BugSeparateIfDoubleWrite {
         };
 
         // middle: u8
-        let middle = crate::util::read_u8_le(r)?;
+        let middle = crate::util::read_u8_le(&mut r)?;
 
         match b {
             SimpleEnum::Zero => {
@@ -105,7 +105,7 @@ impl BugSeparateIfDoubleWrite {
             }
             SimpleEnum::Two => {
                 // two: u8
-                b_if_two = crate::util::read_u8_le(r)?;
+                b_if_two = crate::util::read_u8_le(&mut r)?;
 
             }
         };

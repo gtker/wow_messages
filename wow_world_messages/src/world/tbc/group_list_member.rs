@@ -48,24 +48,24 @@ impl GroupListMember {
 }
 
 impl GroupListMember {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // is_online: Bool
-        let is_online = crate::util::read_u8_le(r)? != 0;
+        let is_online = crate::util::read_u8_le(&mut r)? != 0;
 
         // group_id: u8
-        let group_id = crate::util::read_u8_le(r)?;
+        let group_id = crate::util::read_u8_le(&mut r)?;
 
         // flags: u8
-        let flags = crate::util::read_u8_le(r)?;
+        let flags = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             name,

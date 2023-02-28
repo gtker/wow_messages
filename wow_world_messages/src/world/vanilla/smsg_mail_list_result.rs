@@ -31,19 +31,19 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=84481).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023B, size: body_size as u32 });
         }
 
         // amount_of_mails: u8
-        let amount_of_mails = crate::util::read_u8_le(r)?;
+        let amount_of_mails = crate::util::read_u8_le(&mut r)?;
 
         // mails: Mail[amount_of_mails]
         let mails = {
             let mut mails = Vec::with_capacity(amount_of_mails as usize);
             for i in 0..amount_of_mails {
-                mails.push(Mail::read(r)?);
+                mails.push(Mail::read(&mut r)?);
             }
             mails
         };

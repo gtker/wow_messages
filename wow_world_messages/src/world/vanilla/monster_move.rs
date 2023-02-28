@@ -157,7 +157,7 @@ impl MonsterMove {
 }
 
 impl MonsterMove {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         let mut move_type_if_target = Default::default();
         let mut move_type_if_angle = Default::default();
         let mut move_type_if_position = Default::default();
@@ -166,13 +166,13 @@ impl MonsterMove {
         let mut move_type_if_splines = Default::default();
 
         // spline_point: Vector3d
-        let spline_point = Vector3d::read(r)?;
+        let spline_point = Vector3d::read(&mut r)?;
 
         // spline_id: u32
-        let spline_id = crate::util::read_u32_le(r)?;
+        let spline_id = crate::util::read_u32_le(&mut r)?;
 
         // move_type: MonsterMoveType
-        let move_type: MonsterMoveType = crate::util::read_u8_le(r)?.try_into()?;
+        let move_type: MonsterMoveType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         match move_type {
             MonsterMoveType::Normal => {
@@ -180,17 +180,17 @@ impl MonsterMove {
             MonsterMoveType::Stop => {}
             MonsterMoveType::FacingSpot => {
                 // position: Vector3d
-                move_type_if_position = Vector3d::read(r)?;
+                move_type_if_position = Vector3d::read(&mut r)?;
 
             }
             MonsterMoveType::FacingTarget => {
                 // target: Guid
-                move_type_if_target = Guid::read(r)?;
+                move_type_if_target = Guid::read(&mut r)?;
 
             }
             MonsterMoveType::FacingAngle => {
                 // angle: f32
-                move_type_if_angle = crate::util::read_f32_le(r)?;
+                move_type_if_angle = crate::util::read_f32_le(&mut r)?;
 
             }
         };
@@ -198,47 +198,47 @@ impl MonsterMove {
         match move_type {
             MonsterMoveType::Normal => {
                 // spline_flags: SplineFlag
-                move_type_if_spline_flags = SplineFlag::new(crate::util::read_u32_le(r)?);
+                move_type_if_spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
                 // duration: u32
-                move_type_if_duration = crate::util::read_u32_le(r)?;
+                move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
                 // splines: MonsterMoveSpline
-                move_type_if_splines = MonsterMoveSpline::read(r)?;
+                move_type_if_splines = MonsterMoveSpline::read(&mut r)?;
 
             }
             MonsterMoveType::Stop => {}
             MonsterMoveType::FacingSpot => {
                 // spline_flags: SplineFlag
-                move_type_if_spline_flags = SplineFlag::new(crate::util::read_u32_le(r)?);
+                move_type_if_spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
                 // duration: u32
-                move_type_if_duration = crate::util::read_u32_le(r)?;
+                move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
                 // splines: MonsterMoveSpline
-                move_type_if_splines = MonsterMoveSpline::read(r)?;
+                move_type_if_splines = MonsterMoveSpline::read(&mut r)?;
 
             }
             MonsterMoveType::FacingTarget => {
                 // spline_flags: SplineFlag
-                move_type_if_spline_flags = SplineFlag::new(crate::util::read_u32_le(r)?);
+                move_type_if_spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
                 // duration: u32
-                move_type_if_duration = crate::util::read_u32_le(r)?;
+                move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
                 // splines: MonsterMoveSpline
-                move_type_if_splines = MonsterMoveSpline::read(r)?;
+                move_type_if_splines = MonsterMoveSpline::read(&mut r)?;
 
             }
             MonsterMoveType::FacingAngle => {
                 // spline_flags: SplineFlag
-                move_type_if_spline_flags = SplineFlag::new(crate::util::read_u32_le(r)?);
+                move_type_if_spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
                 // duration: u32
-                move_type_if_duration = crate::util::read_u32_le(r)?;
+                move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
                 // splines: MonsterMoveSpline
-                move_type_if_splines = MonsterMoveSpline::read(r)?;
+                move_type_if_splines = MonsterMoveSpline::read(&mut r)?;
 
             }
         };

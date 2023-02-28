@@ -99,32 +99,32 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(33..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AE, size: body_size as u32 });
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // transport: PackedGuid
-        let transport = Guid::read_packed(r)?;
+        let transport = Guid::read_packed(&mut r)?;
 
         // spline_point: Vector3d
-        let spline_point = Vector3d::read(r)?;
+        let spline_point = Vector3d::read(&mut r)?;
 
         // spline_id: u32
-        let spline_id = crate::util::read_u32_le(r)?;
+        let spline_id = crate::util::read_u32_le(&mut r)?;
 
         // move_type: MonsterMoveType
-        let move_type: MonsterMoveType = crate::util::read_u8_le(r)?.try_into()?;
+        let move_type: MonsterMoveType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let move_type_if = match move_type {
             MonsterMoveType::Normal => SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::Normal,
             MonsterMoveType::Stop => SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::Stop,
             MonsterMoveType::FacingSpot => {
                 // position: Vector3d
-                let position = Vector3d::read(r)?;
+                let position = Vector3d::read(&mut r)?;
 
                 SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::FacingSpot {
                     position,
@@ -132,7 +132,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
             }
             MonsterMoveType::FacingTarget => {
                 // target: Guid
-                let target = Guid::read(r)?;
+                let target = Guid::read(&mut r)?;
 
                 SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::FacingTarget {
                     target,
@@ -140,7 +140,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
             }
             MonsterMoveType::FacingAngle => {
                 // angle: f32
-                let angle = crate::util::read_f32_le(r)?;
+                let angle = crate::util::read_f32_le(&mut r)?;
 
                 SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::FacingAngle {
                     angle,
@@ -149,13 +149,13 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
         };
 
         // spline_flags: SplineFlag
-        let spline_flags = SplineFlag::new(crate::util::read_u32_le(r)?);
+        let spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
         // duration: u32
-        let duration = crate::util::read_u32_le(r)?;
+        let duration = crate::util::read_u32_le(&mut r)?;
 
         // splines: MonsterMoveSpline
-        let splines = MonsterMoveSpline::read(r)?;
+        let splines = MonsterMoveSpline::read(&mut r)?;
 
         Ok(Self {
             guid,

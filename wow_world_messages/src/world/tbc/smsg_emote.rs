@@ -31,16 +31,16 @@ impl crate::Message for SMSG_EMOTE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0103, size: body_size as u32 });
         }
 
         // emote: Emote
-        let emote: Emote = crate::util::read_u32_le(r)?.try_into()?;
+        let emote: Emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         Ok(Self {
             emote,

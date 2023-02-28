@@ -125,7 +125,7 @@ fn print_array_ty(
     match array.ty() {
         ArrayType::Integer(integer_type) => {
             s.wln(format!(
-                "{array_prefix}{module}::{prefix}read_{int_type}_{endian}({reader}){postfix}?{array_postfix}",
+                "{array_prefix}{module}::{prefix}read_{int_type}_{endian}(&mut {reader}){postfix}?{array_postfix}",
                 module = UTILITY_PATH,
                 int_type = integer_type.rust_str(),
                 endian = integer_type.rust_endian_str(),
@@ -133,7 +133,7 @@ fn print_array_ty(
         }
         ArrayType::CString => {
             s.wln(format!(
-                "let s = crate::util::{prefix}read_c_string_to_vec({reader}){postfix}?;",
+                "let s = crate::util::{prefix}read_c_string_to_vec(&mut {reader}){postfix}?;",
             ));
             s.wln(format!(
                 "{array_prefix}String::from_utf8(s)?{array_postfix}",
@@ -141,13 +141,13 @@ fn print_array_ty(
         }
         ArrayType::PackedGuid => {
             s.wln(format!(
-                "{array_prefix}Guid::{prefix}read_packed({reader}){postfix}?{array_postfix}",
+                "{array_prefix}Guid::{prefix}read_packed(&mut {reader}){postfix}?{array_postfix}",
             ));
         }
 
         ArrayType::Struct(_) | ArrayType::Guid => {
             s.wln(format!(
-                "{array_prefix}{ty}::{prefix}read({reader}){postfix}?{array_postfix}",
+                "{array_prefix}{ty}::{prefix}read(&mut {reader}){postfix}?{array_postfix}",
                 ty = array.ty().rust_str(),
             ));
         }
@@ -208,7 +208,7 @@ fn print_read_definition(
     match &d.ty() {
         Type::Bool(i) => {
             s.wln(format!(
-                "{assignment_prefix}{name} = {module_name}::{prefix}read_{ty}_le(r){postfix}? != 0;",
+                "{assignment_prefix}{name} = {module_name}::{prefix}read_{ty}_le(&mut r){postfix}? != 0;",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 prefix = prefix,
@@ -218,7 +218,7 @@ fn print_read_definition(
         }
         Type::DateTime => {
             s.wln(format!(
-                "{assignment_prefix}{name}: DateTime = {module_name}::{prefix}read_u32_le(r){postfix}?.try_into()?;",
+                "{assignment_prefix}{name}: DateTime = {module_name}::{prefix}read_u32_le(&mut r){postfix}?.try_into()?;",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 prefix = prefix,
@@ -228,7 +228,7 @@ fn print_read_definition(
         Type::Integer(integer) => {
             let value_set = if d.value().is_some() { "_" } else { "" };
             s.wln(format!(
-                "{assignment_prefix}{value_set}{name} = {module_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
+                "{assignment_prefix}{value_set}{name} = {module_name}::{prefix}read_{ty}_{endian}(&mut r){postfix}?;",
                 value_set = value_set,
                 name = d.name(),
                 module_name = UTILITY_PATH,
@@ -240,7 +240,7 @@ fn print_read_definition(
         }
         Type::Gold => {
             s.wln(format!(
-                "{assignment_prefix}{name} = Gold::new({module_name}::{prefix}read_u32_le(r){postfix}?);",
+                "{assignment_prefix}{name} = Gold::new({module_name}::{prefix}read_u32_le(&mut r){postfix}?);",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 prefix = prefix,
@@ -249,7 +249,7 @@ fn print_read_definition(
         }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
-                "{assignment_prefix}{name} = {module_name}::{prefix}read_{ty}_{endian}(r){postfix}?;",
+                "{assignment_prefix}{name} = {module_name}::{prefix}read_{ty}_{endian}(&mut r){postfix}?;",
                 name = d.name(),
                 module_name = UTILITY_PATH,
                 ty = floating.rust_str(),
@@ -263,11 +263,11 @@ fn print_read_definition(
                 format!("{assignment_prefix}{name} =", name = d.name()),
                 |s| {
                     s.wln(format!(
-                        "let {name} = crate::util::read_u32_le(r)?;",
+                        "let {name} = crate::util::read_u32_le(&mut r)?;",
                         name = d.name()
                     ));
                     s.wln(format!(
-                        "let {name} = crate::util::read_sized_c_string_to_vec(r, {name})?;",
+                        "let {name} = crate::util::read_sized_c_string_to_vec(&mut r, {name})?;",
                         name = d.name()
                     ));
                     s.wln(format!("String::from_utf8({name})?", name = d.name()));
@@ -279,7 +279,7 @@ fn print_read_definition(
                 format!("{assignment_prefix}{name} =", name = d.name()),
                 |s| {
                     s.wln(format!(
-                        "let {name} = {module}::{prefix}read_c_string_to_vec(r){postfix}?;",
+                        "let {name} = {module}::{prefix}read_c_string_to_vec(&mut r){postfix}?;",
                         name = d.name(),
                         module = UTILITY_PATH,
                         prefix = prefix,
@@ -292,11 +292,11 @@ fn print_read_definition(
         Type::String => {
             s.body_closing_with_semicolon(format!("{assignment_prefix}{name} =", name = d.name()), |s| {
                 s.wln(format!(
-                    "let {name} = crate::util::{prefix}read_u8_le(r){postfix}?;",
+                    "let {name} = crate::util::{prefix}read_u8_le(&mut r){postfix}?;",
                     name = d.name()
                 ));
                 s.wln(format!(
-                    "let {name} = {module}::{prefix}read_fixed_string_to_vec(r, {name} as usize){postfix}?;",
+                    "let {name} = {module}::{prefix}read_fixed_string_to_vec(&mut r, {name} as usize){postfix}?;",
                     name = d.name(),
                     module = UTILITY_PATH,
                     prefix = prefix, postfix = postfix,
@@ -318,7 +318,7 @@ fn print_read_definition(
             };
 
             s.wln(format!(
-                "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(r){postfix}?{cast}.{into};",
+                "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(&mut r){postfix}?{cast}.{into};",
                 name = d.name(),
                 type_name = d.ty().rust_str(),
                 value_set = if d.value().is_some() { "_" } else { "" },
@@ -334,7 +334,7 @@ fn print_read_definition(
         }
         Type::Flag { e, .. } => {
             s.wln(format!(
-                "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(r){postfix}?);",
+                "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(&mut r){postfix}?);",
                 name = d.name(),
                 type_name = d.ty().rust_str(),
                 value_set = if d.value().is_some() { "_" } else { "" },
@@ -346,7 +346,7 @@ fn print_read_definition(
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "{assignment_prefix}{name} = Guid::{prefix}read_packed(r){postfix}?;",
+                "{assignment_prefix}{name} = Guid::{prefix}read_packed(&mut r){postfix}?;",
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
@@ -363,7 +363,7 @@ fn print_read_definition(
         | Type::EnchantMask
         | Type::InspectTalentGearMask => {
             s.wln(format!(
-                "{assignment_prefix}{name} = {ty}::{prefix}read(r){postfix}?;",
+                "{assignment_prefix}{name} = {ty}::{prefix}read(&mut r){postfix}?;",
                 name = d.name(),
                 ty = d.ty().rust_str(),
                 prefix = prefix,

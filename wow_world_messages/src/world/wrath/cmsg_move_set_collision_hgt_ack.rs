@@ -41,22 +41,22 @@ impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(40..=101).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0517, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(r)?;
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
 
         // info: MovementInfo
-        let info = MovementInfo::read(r)?;
+        let info = MovementInfo::read(&mut r)?;
 
         // new_height: f32
-        let new_height = crate::util::read_f32_le(r)?;
+        let new_height = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             player,

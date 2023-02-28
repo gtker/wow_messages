@@ -47,25 +47,25 @@ impl crate::Message for SMSG_CALENDAR_COMMAND_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=265).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043D, size: body_size as u32 });
         }
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(r)?;
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // result: u32
-        let result = crate::util::read_u32_le(r)?;
+        let result = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             unknown1,

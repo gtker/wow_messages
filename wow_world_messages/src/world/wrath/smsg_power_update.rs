@@ -36,19 +36,19 @@ impl crate::Message for SMSG_POWER_UPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(7..=14).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0480, size: body_size as u32 });
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(r)?;
+        let unit = Guid::read_packed(&mut r)?;
 
         // power: Power
-        let power: Power = crate::util::read_u8_le(r)?.try_into()?;
+        let power: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // amount: u32
-        let amount = crate::util::read_u32_le(r)?;
+        let amount = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             unit,

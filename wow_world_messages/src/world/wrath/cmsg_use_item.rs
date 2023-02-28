@@ -119,58 +119,58 @@ impl crate::Message for CMSG_USE_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(25..=429).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size as u32 });
         }
 
         // bag_index: u8
-        let bag_index = crate::util::read_u8_le(r)?;
+        let bag_index = crate::util::read_u8_le(&mut r)?;
 
         // bag_slot: u8
-        let bag_slot = crate::util::read_u8_le(r)?;
+        let bag_slot = crate::util::read_u8_le(&mut r)?;
 
         // spell_index: u8
-        let spell_index = crate::util::read_u8_le(r)?;
+        let spell_index = crate::util::read_u8_le(&mut r)?;
 
         // cast_count: u8
-        let cast_count = crate::util::read_u8_le(r)?;
+        let cast_count = crate::util::read_u8_le(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(r)?;
+        let item = Guid::read(&mut r)?;
 
         // glyph_index: u32
-        let glyph_index = crate::util::read_u32_le(r)?;
+        let glyph_index = crate::util::read_u32_le(&mut r)?;
 
         // cast_flags: ClientCastFlags
-        let cast_flags: ClientCastFlags = crate::util::read_u8_le(r)?.try_into()?;
+        let cast_flags: ClientCastFlags = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let cast_flags_if = match cast_flags {
             ClientCastFlags::None => CMSG_USE_ITEM_ClientCastFlags::None,
             ClientCastFlags::Extra => {
                 // elevation: f32
-                let elevation = crate::util::read_f32_le(r)?;
+                let elevation = crate::util::read_f32_le(&mut r)?;
 
                 // speed: f32
-                let speed = crate::util::read_f32_le(r)?;
+                let speed = crate::util::read_f32_le(&mut r)?;
 
                 // movement_data: ClientMovementData
-                let movement_data: ClientMovementData = crate::util::read_u8_le(r)?.try_into()?;
+                let movement_data: ClientMovementData = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let movement_data_if = match movement_data {
                     ClientMovementData::NotPresent => CMSG_USE_ITEM_ClientMovementData::NotPresent,
                     ClientMovementData::Present => {
                         // opcode: u32
-                        let opcode = crate::util::read_u32_le(r)?;
+                        let opcode = crate::util::read_u32_le(&mut r)?;
 
                         // guid: PackedGuid
-                        let guid = Guid::read_packed(r)?;
+                        let guid = Guid::read_packed(&mut r)?;
 
                         // info: MovementInfo
-                        let info = MovementInfo::read(r)?;
+                        let info = MovementInfo::read(&mut r)?;
 
                         CMSG_USE_ITEM_ClientMovementData::Present {
                             guid,
@@ -189,7 +189,7 @@ impl crate::Message for CMSG_USE_ITEM {
         };
 
         // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(r)?;
+        let targets = SpellCastTargets::read(&mut r)?;
 
         Ok(Self {
             bag_index,

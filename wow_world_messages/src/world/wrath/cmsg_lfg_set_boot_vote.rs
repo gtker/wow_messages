@@ -24,13 +24,13 @@ impl crate::Message for CMSG_LFG_SET_BOOT_VOTE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size as u32 });
         }
 
         // agree_to_kick_player: Bool
-        let agree_to_kick_player = crate::util::read_u8_le(r)? != 0;
+        let agree_to_kick_player = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             agree_to_kick_player,

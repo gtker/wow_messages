@@ -43,16 +43,16 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=65543).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x020B, size: body_size as u32 });
         }
 
         // data_type: AccountDataType
-        let data_type: AccountDataType = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let data_type: AccountDataType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // decompressed_size: u32
-        let decompressed_size = crate::util::read_u32_le(r)?;
+        let decompressed_size = crate::util::read_u32_le(&mut r)?;
 
         // compressed_data: u8[-]
         let compressed_data = {
@@ -64,7 +64,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
             };
             let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
             while decoder.total_out() < (decompressed_size as u64) {
-                compressed_data.push(crate::util::read_u8_le(decoder)?);
+                compressed_data.push(crate::util::read_u8_le(&mut decoder)?);
                 current_size += 1;
             }
             compressed_data

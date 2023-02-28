@@ -86,50 +86,50 @@ impl StructWithAllBuiltInTypes {
 }
 
 impl StructWithAllBuiltInTypes {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // basic8: u8
-        let basic8 = crate::util::read_u8_le(r)?;
+        let basic8 = crate::util::read_u8_le(&mut r)?;
 
         // basic16: u16
-        let basic16 = crate::util::read_u16_le(r)?;
+        let basic16 = crate::util::read_u16_le(&mut r)?;
 
         // basic32: u32
-        let basic32 = crate::util::read_u32_le(r)?;
+        let basic32 = crate::util::read_u32_le(&mut r)?;
 
         // basic64: u64
-        let basic64 = crate::util::read_u64_le(r)?;
+        let basic64 = crate::util::read_u64_le(&mut r)?;
 
         // basic16_be: u16_be
-        let basic16_be = crate::util::read_u16_be(r)?;
+        let basic16_be = crate::util::read_u16_be(&mut r)?;
 
         // basic32_be: u32_be
-        let basic32_be = crate::util::read_u32_be(r)?;
+        let basic32_be = crate::util::read_u32_be(&mut r)?;
 
         // basic64_be: u64_be
-        let basic64_be = crate::util::read_u64_be(r)?;
+        let basic64_be = crate::util::read_u64_be(&mut r)?;
 
         // decimal32: f32
-        let decimal32 = crate::util::read_f32_le(r)?;
+        let decimal32 = crate::util::read_f32_le(&mut r)?;
 
         // decimal32_be: f32_be
-        let decimal32_be = crate::util::read_f32_be(r)?;
+        let decimal32_be = crate::util::read_f32_be(&mut r)?;
 
         // decimal64: f64
-        let decimal64 = crate::util::read_f64_le(r)?;
+        let decimal64 = crate::util::read_f64_le(&mut r)?;
 
         // decimal64_be: f64_be
-        let decimal64_be = crate::util::read_f64_be(r)?;
+        let decimal64_be = crate::util::read_f64_be(&mut r)?;
 
         // simple_cstring: CString
         let simple_cstring = {
-            let simple_cstring = crate::util::read_c_string_to_vec(r)?;
+            let simple_cstring = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(simple_cstring)?
         };
 
         // simple_string: String
         let simple_string = {
-            let simple_string = crate::util::read_u8_le(r)?;
-            let simple_string = crate::util::read_fixed_string_to_vec(r, simple_string as usize)?;
+            let simple_string = crate::util::read_u8_le(&mut r)?;
+            let simple_string = crate::util::read_fixed_string_to_vec(&mut r, simple_string as usize)?;
             String::from_utf8(simple_string)?
         };
 

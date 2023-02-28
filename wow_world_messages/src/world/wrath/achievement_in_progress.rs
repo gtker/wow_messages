@@ -55,27 +55,27 @@ impl AchievementInProgress {
 }
 
 impl AchievementInProgress {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // achievement: u32
-        let achievement = crate::util::read_u32_le(r)?;
+        let achievement = crate::util::read_u32_le(&mut r)?;
 
         // counter: PackedGuid
-        let counter = Guid::read_packed(r)?;
+        let counter = Guid::read_packed(&mut r)?;
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // timed_criteria_failed: Bool32
-        let timed_criteria_failed = crate::util::read_u32_le(r)? != 0;
+        let timed_criteria_failed = crate::util::read_u32_le(&mut r)? != 0;
 
         // progress_date: DateTime
-        let progress_date: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let progress_date: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // time_since_progress: u32
-        let time_since_progress = crate::util::read_u32_le(r)?;
+        let time_since_progress = crate::util::read_u32_le(&mut r)?;
 
         // time_since_progress2: u32
-        let time_since_progress2 = crate::util::read_u32_le(r)?;
+        let time_since_progress2 = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             achievement,

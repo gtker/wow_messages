@@ -24,13 +24,13 @@ impl crate::Message for SMSG_SET_PHASE_SHIFT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047C, size: body_size as u32 });
         }
 
         // new_phase: u32
-        let new_phase = crate::util::read_u32_le(r)?;
+        let new_phase = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             new_phase,

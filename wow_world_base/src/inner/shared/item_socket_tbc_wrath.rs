@@ -27,12 +27,12 @@ impl ItemSocket {
 }
 
 impl ItemSocket {
-    pub fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // color: u32
-        let color = crate::util::read_u32_le(r)?;
+        let color = crate::util::read_u32_le(&mut r)?;
 
         // content: u32
-        let content = crate::util::read_u32_le(r)?;
+        let content = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             color,

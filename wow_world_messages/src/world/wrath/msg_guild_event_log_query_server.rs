@@ -31,19 +31,19 @@ impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=5377).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FF, size: body_size as u32 });
         }
 
         // amount_of_events: u8
-        let amount_of_events = crate::util::read_u8_le(r)?;
+        let amount_of_events = crate::util::read_u8_le(&mut r)?;
 
         // events: GuildLogEvent[amount_of_events]
         let events = {
             let mut events = Vec::with_capacity(amount_of_events as usize);
             for i in 0..amount_of_events {
-                events.push(GuildLogEvent::read(r)?);
+                events.push(GuildLogEvent::read(&mut r)?);
             }
             events
         };

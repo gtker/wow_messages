@@ -87,48 +87,48 @@ impl AuctionListItem {
 }
 
 impl AuctionListItem {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // item_enchantment: u32
-        let item_enchantment = crate::util::read_u32_le(r)?;
+        let item_enchantment = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::read_u32_le(r)?;
+        let item_suffix_factor = crate::util::read_u32_le(&mut r)?;
 
         // item_count: u32
-        let item_count = crate::util::read_u32_le(r)?;
+        let item_count = crate::util::read_u32_le(&mut r)?;
 
         // item_charges: u32
-        let item_charges = crate::util::read_u32_le(r)?;
+        let item_charges = crate::util::read_u32_le(&mut r)?;
 
         // item_owner: Guid
-        let item_owner = Guid::read(r)?;
+        let item_owner = Guid::read(&mut r)?;
 
         // start_bid: u32
-        let start_bid = crate::util::read_u32_le(r)?;
+        let start_bid = crate::util::read_u32_le(&mut r)?;
 
         // minimum_bid: u32
-        let minimum_bid = crate::util::read_u32_le(r)?;
+        let minimum_bid = crate::util::read_u32_le(&mut r)?;
 
         // buyout_amount: u32
-        let buyout_amount = crate::util::read_u32_le(r)?;
+        let buyout_amount = crate::util::read_u32_le(&mut r)?;
 
         // time_left_in_msecs: u32
-        let time_left_in_msecs = crate::util::read_u32_le(r)?;
+        let time_left_in_msecs = crate::util::read_u32_le(&mut r)?;
 
         // highest_bidder: Guid
-        let highest_bidder = Guid::read(r)?;
+        let highest_bidder = Guid::read(&mut r)?;
 
         // highest_bid: u32
-        let highest_bid = crate::util::read_u32_le(r)?;
+        let highest_bid = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             id,

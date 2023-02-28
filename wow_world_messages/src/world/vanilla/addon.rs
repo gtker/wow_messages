@@ -160,18 +160,18 @@ impl Addon {
 }
 
 impl Addon {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // addon_type: AddonType
-        let addon_type: AddonType = crate::util::read_u8_le(r)?.try_into()?;
+        let addon_type: AddonType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // info_block: InfoBlock
-        let info_block: InfoBlock = crate::util::read_u8_le(r)?.try_into()?;
+        let info_block: InfoBlock = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let info_block_if = match info_block {
             InfoBlock::Unavailable => Addon_InfoBlock::Unavailable,
             InfoBlock::Available => {
                 // key_version: KeyVersion
-                let key_version: KeyVersion = crate::util::read_u8_le(r)?.try_into()?;
+                let key_version: KeyVersion = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let key_version_if = match key_version {
                     KeyVersion::Zero => Addon_KeyVersion::Zero,
@@ -286,7 +286,7 @@ impl Addon {
                 };
 
                 // update_available_flag: u32
-                let update_available_flag = crate::util::read_u32_le(r)?;
+                let update_available_flag = crate::util::read_u32_le(&mut r)?;
 
                 Addon_InfoBlock::Available {
                     key_version: key_version_if,
@@ -296,14 +296,14 @@ impl Addon {
         };
 
         // url_info: UrlInfo
-        let url_info: UrlInfo = crate::util::read_u8_le(r)?.try_into()?;
+        let url_info: UrlInfo = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let url_info_if = match url_info {
             UrlInfo::Unavailable => Addon_UrlInfo::Unavailable,
             UrlInfo::Available => {
                 // url: CString
                 let url = {
-                    let url = crate::util::read_c_string_to_vec(r)?;
+                    let url = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(url)?
                 };
 

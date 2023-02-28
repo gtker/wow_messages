@@ -142,13 +142,13 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=10).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01EE, size: body_size as u32 });
         }
 
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: WorldResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             WorldResult::ResponseSuccess => SMSG_AUTH_RESPONSE_WorldResult::ResponseSuccess,
@@ -165,13 +165,13 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
             WorldResult::CstatusAuthenticating => SMSG_AUTH_RESPONSE_WorldResult::CstatusAuthenticating,
             WorldResult::AuthOk => {
                 // billing_time: u32
-                let billing_time = crate::util::read_u32_le(r)?;
+                let billing_time = crate::util::read_u32_le(&mut r)?;
 
                 // billing_flags: u8
-                let billing_flags = crate::util::read_u8_le(r)?;
+                let billing_flags = crate::util::read_u8_le(&mut r)?;
 
                 // billing_rested: u32
-                let billing_rested = crate::util::read_u32_le(r)?;
+                let billing_rested = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
                     billing_flags,
@@ -195,7 +195,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
             WorldResult::AuthLoginServerNotFound => SMSG_AUTH_RESPONSE_WorldResult::AuthLoginServerNotFound,
             WorldResult::AuthWaitQueue => {
                 // queue_position: u32
-                let queue_position = crate::util::read_u32_le(r)?;
+                let queue_position = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
                     queue_position,

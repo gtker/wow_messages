@@ -46,24 +46,24 @@ impl LfgProposal {
 }
 
 impl LfgProposal {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // role_mask: u32
-        let role_mask = crate::util::read_u32_le(r)?;
+        let role_mask = crate::util::read_u32_le(&mut r)?;
 
         // is_current_player: u8
-        let is_current_player = crate::util::read_u8_le(r)?;
+        let is_current_player = crate::util::read_u8_le(&mut r)?;
 
         // in_dungeon: u8
-        let in_dungeon = crate::util::read_u8_le(r)?;
+        let in_dungeon = crate::util::read_u8_le(&mut r)?;
 
         // in_same_group: u8
-        let in_same_group = crate::util::read_u8_le(r)?;
+        let in_same_group = crate::util::read_u8_le(&mut r)?;
 
         // has_answered: u8
-        let has_answered = crate::util::read_u8_le(r)?;
+        let has_answered = crate::util::read_u8_le(&mut r)?;
 
         // has_accepted: u8
-        let has_accepted = crate::util::read_u8_le(r)?;
+        let has_accepted = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             role_mask,

@@ -32,19 +32,19 @@ impl crate::Message for CMSG_SOCKET_GEMS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0347, size: body_size as u32 });
         }
 
         // item: Guid
-        let item = Guid::read(r)?;
+        let item = Guid::read(&mut r)?;
 
         // gems: Guid[3]
         let gems = {
             let mut gems = [Guid::default(); 3];
             for i in gems.iter_mut() {
-                *i = Guid::read(r)?;
+                *i = Guid::read(&mut r)?;
             }
             gems
         };

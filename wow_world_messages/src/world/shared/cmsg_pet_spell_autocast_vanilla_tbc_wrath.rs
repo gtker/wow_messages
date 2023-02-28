@@ -35,19 +35,19 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F3, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // autocast_enabled: Bool
-        let autocast_enabled = crate::util::read_u8_le(r)? != 0;
+        let autocast_enabled = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             guid,

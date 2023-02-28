@@ -36,19 +36,19 @@ impl crate::Message for CMSG_CALENDAR_EVENT_RSVP {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0432, size: body_size as u32 });
         }
 
         // event: Guid
-        let event = Guid::read(r)?;
+        let event = Guid::read(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(r)?;
+        let invite_id = Guid::read(&mut r)?;
 
         // status: CalendarStatus
-        let status: CalendarStatus = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let status: CalendarStatus = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             event,

@@ -30,16 +30,16 @@ impl crate::Message for CMSG_STABLE_SWAP_PET {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0275, size: body_size as u32 });
         }
 
         // npc: Guid
-        let npc = Guid::read(r)?;
+        let npc = Guid::read(&mut r)?;
 
         // pet_slot: u32
-        let pet_slot = crate::util::read_u32_le(r)?;
+        let pet_slot = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             npc,

@@ -36,19 +36,19 @@ impl crate::Message for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046C, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // done: AchievementDoneArray
-        let done = AchievementDoneArray::read(r)?;
+        let done = AchievementDoneArray::read(&mut r)?;
 
         // in_progress: AchievementInProgressArray
-        let in_progress = AchievementInProgressArray::read(r)?;
+        let in_progress = AchievementInProgressArray::read(&mut r)?;
 
         Ok(Self {
             player,

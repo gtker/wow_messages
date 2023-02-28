@@ -40,19 +40,19 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=5).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036D, size: body_size as u32 });
         }
 
         // looking_for_more: LfgUpdateLookingForMore
-        let looking_for_more: LfgUpdateLookingForMore = crate::util::read_u8_le(r)?.try_into()?;
+        let looking_for_more: LfgUpdateLookingForMore = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let looking_for_more_if = match looking_for_more {
             LfgUpdateLookingForMore::NotLookingForMore => SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::NotLookingForMore,
             LfgUpdateLookingForMore::LookingForMore => {
                 // data: LfgData
-                let data = LfgData::read(r)?;
+                let data = LfgData::read(&mut r)?;
 
                 SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
                     data,

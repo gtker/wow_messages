@@ -45,21 +45,21 @@ impl DamageInfo {
 }
 
 impl DamageInfo {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // spell_school_mask: u32
-        let spell_school_mask = crate::util::read_u32_le(r)?;
+        let spell_school_mask = crate::util::read_u32_le(&mut r)?;
 
         // damage_float: f32
-        let damage_float = crate::util::read_f32_le(r)?;
+        let damage_float = crate::util::read_f32_le(&mut r)?;
 
         // damage_uint: u32
-        let damage_uint = crate::util::read_u32_le(r)?;
+        let damage_uint = crate::util::read_u32_le(&mut r)?;
 
         // absorb: u32
-        let absorb = crate::util::read_u32_le(r)?;
+        let absorb = crate::util::read_u32_le(&mut r)?;
 
         // resist: u32
-        let resist = crate::util::read_u32_le(r)?;
+        let resist = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             spell_school_mask,

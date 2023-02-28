@@ -29,16 +29,16 @@ impl crate::Message for SMSG_UPDATE_AURA_DURATION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0137, size: body_size as u32 });
         }
 
         // aura_slot: u8
-        let aura_slot = crate::util::read_u8_le(r)?;
+        let aura_slot = crate::util::read_u8_le(&mut r)?;
 
         // aura_duration: u32
-        let aura_duration = crate::util::read_u32_le(r)?;
+        let aura_duration = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             aura_slot,

@@ -36,19 +36,19 @@ impl crate::Message for SMSG_SET_PROJECTILE_POSITION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 21 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BF, size: body_size as u32 });
         }
 
         // caster: Guid
-        let caster = Guid::read(r)?;
+        let caster = Guid::read(&mut r)?;
 
         // amount_of_casts: u8
-        let amount_of_casts = crate::util::read_u8_le(r)?;
+        let amount_of_casts = crate::util::read_u8_le(&mut r)?;
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         Ok(Self {
             caster,

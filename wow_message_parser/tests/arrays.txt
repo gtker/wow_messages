@@ -107,9 +107,9 @@ impl Arrays {
 }
 
 impl Arrays {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // index: u8
-        let index = crate::util::read_u8_le(r)?;
+        let index = crate::util::read_u8_le(&mut r)?;
 
         // basic_fixed_array: u8[20]
         let basic_fixed_array = {
@@ -122,7 +122,7 @@ impl Arrays {
         let simple_2byte_fixed_array = {
             let mut simple_2byte_fixed_array = [u16::default(); 16];
             for i in simple_2byte_fixed_array.iter_mut() {
-                *i = crate::util::read_u16_le(r)?;
+                *i = crate::util::read_u16_le(&mut r)?;
             }
             simple_2byte_fixed_array
         };
@@ -131,7 +131,7 @@ impl Arrays {
         let simple_2byte_be_fixed_array = {
             let mut simple_2byte_be_fixed_array = [u16::default(); 16];
             for i in simple_2byte_be_fixed_array.iter_mut() {
-                *i = crate::util::read_u16_be(r)?;
+                *i = crate::util::read_u16_be(&mut r)?;
             }
             simple_2byte_be_fixed_array
         };
@@ -140,7 +140,7 @@ impl Arrays {
         let simple_2byte_variable_array = {
             let mut simple_2byte_variable_array = Vec::with_capacity(index as usize);
             for i in 0..index {
-                simple_2byte_variable_array.push(crate::util::read_u16_le(r)?);
+                simple_2byte_variable_array.push(crate::util::read_u16_le(&mut r)?);
             }
             simple_2byte_variable_array
         };
@@ -149,7 +149,7 @@ impl Arrays {
         let simple_4byte_be_fixed_array = {
             let mut simple_4byte_be_fixed_array = [u32::default(); 16];
             for i in simple_4byte_be_fixed_array.iter_mut() {
-                *i = crate::util::read_u32_be(r)?;
+                *i = crate::util::read_u32_be(&mut r)?;
             }
             simple_4byte_be_fixed_array
         };
@@ -158,7 +158,7 @@ impl Arrays {
         let simple_4byte_variable_array = {
             let mut simple_4byte_variable_array = Vec::with_capacity(index as usize);
             for i in 0..index {
-                simple_4byte_variable_array.push(crate::util::read_u32_le(r)?);
+                simple_4byte_variable_array.push(crate::util::read_u32_le(&mut r)?);
             }
             simple_4byte_variable_array
         };
@@ -167,7 +167,7 @@ impl Arrays {
         let simple_8byte_be_fixed_array = {
             let mut simple_8byte_be_fixed_array = [u64::default(); 16];
             for i in simple_8byte_be_fixed_array.iter_mut() {
-                *i = crate::util::read_u64_be(r)?;
+                *i = crate::util::read_u64_be(&mut r)?;
             }
             simple_8byte_be_fixed_array
         };
@@ -176,7 +176,7 @@ impl Arrays {
         let simple_8byte_variable_array = {
             let mut simple_8byte_variable_array = Vec::with_capacity(index as usize);
             for i in 0..index {
-                simple_8byte_variable_array.push(crate::util::read_u64_le(r)?);
+                simple_8byte_variable_array.push(crate::util::read_u64_le(&mut r)?);
             }
             simple_8byte_variable_array
         };
@@ -185,7 +185,7 @@ impl Arrays {
         let complex_fixed_array = {
             let mut complex_fixed_array = [(); 10].map(|_| StructWithAllBuiltInTypes::default());
             for i in complex_fixed_array.iter_mut() {
-                *i = StructWithAllBuiltInTypes::read(r)?;
+                *i = StructWithAllBuiltInTypes::read(&mut r)?;
             }
             complex_fixed_array
         };
@@ -194,7 +194,7 @@ impl Arrays {
         let complex_variable_array = {
             let mut complex_variable_array = Vec::with_capacity(index as usize);
             for i in 0..index {
-                complex_variable_array.push(StructWithAllBuiltInTypes::read(r)?);
+                complex_variable_array.push(StructWithAllBuiltInTypes::read(&mut r)?);
             }
             complex_variable_array
         };
@@ -203,7 +203,7 @@ impl Arrays {
         let fixed_cstring_array = {
             let mut fixed_cstring_array = [(); 10].map(|_| String::default());
             for i in fixed_cstring_array.iter_mut() {
-                let s = crate::util::read_c_string_to_vec(r)?;
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
                 *i = String::from_utf8(s)?;
             }
             fixed_cstring_array
@@ -213,7 +213,7 @@ impl Arrays {
         let variable_cstring_array = {
             let mut variable_cstring_array = Vec::with_capacity(index as usize);
             for i in 0..index {
-                let s = crate::util::read_c_string_to_vec(r)?;
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
                 variable_cstring_array.push(String::from_utf8(s)?);
             }
             variable_cstring_array

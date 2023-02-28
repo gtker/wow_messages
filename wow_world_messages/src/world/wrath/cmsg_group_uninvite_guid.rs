@@ -34,17 +34,17 @@ impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0076, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // reason: CString
         let reason = {
-            let reason = crate::util::read_c_string_to_vec(r)?;
+            let reason = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(reason)?
         };
 

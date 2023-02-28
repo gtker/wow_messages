@@ -34,19 +34,19 @@ impl crate::Message for CMSG_AUTOSTORE_BAG_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 3 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x010B, size: body_size as u32 });
         }
 
         // source_bag: u8
-        let source_bag = crate::util::read_u8_le(r)?;
+        let source_bag = crate::util::read_u8_le(&mut r)?;
 
         // source_slot: u8
-        let source_slot = crate::util::read_u8_le(r)?;
+        let source_slot = crate::util::read_u8_le(&mut r)?;
 
         // destination_bag: u8
-        let destination_bag = crate::util::read_u8_le(r)?;
+        let destination_bag = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             source_bag,

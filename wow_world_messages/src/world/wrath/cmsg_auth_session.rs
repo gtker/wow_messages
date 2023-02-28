@@ -96,40 +96,40 @@ impl crate::Message for CMSG_AUTH_SESSION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(61..=65851).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01ED, size: body_size as u32 });
         }
 
         // client_build: u32
-        let client_build = crate::util::read_u32_le(r)?;
+        let client_build = crate::util::read_u32_le(&mut r)?;
 
         // login_server_id: u32
-        let login_server_id = crate::util::read_u32_le(r)?;
+        let login_server_id = crate::util::read_u32_le(&mut r)?;
 
         // username: CString
         let username = {
-            let username = crate::util::read_c_string_to_vec(r)?;
+            let username = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(username)?
         };
 
         // login_server_type: u32
-        let login_server_type = crate::util::read_u32_le(r)?;
+        let login_server_type = crate::util::read_u32_le(&mut r)?;
 
         // client_seed: u32
-        let client_seed = crate::util::read_u32_le(r)?;
+        let client_seed = crate::util::read_u32_le(&mut r)?;
 
         // region_id: u32
-        let region_id = crate::util::read_u32_le(r)?;
+        let region_id = crate::util::read_u32_le(&mut r)?;
 
         // battleground_id: u32
-        let battleground_id = crate::util::read_u32_le(r)?;
+        let battleground_id = crate::util::read_u32_le(&mut r)?;
 
         // realm_id: u32
-        let realm_id = crate::util::read_u32_le(r)?;
+        let realm_id = crate::util::read_u32_le(&mut r)?;
 
         // dos_response: u64
-        let dos_response = crate::util::read_u64_le(r)?;
+        let dos_response = crate::util::read_u64_le(&mut r)?;
 
         // client_proof: u8[20]
         let client_proof = {
@@ -139,7 +139,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
         };
 
         // decompressed_addon_info_size: u32
-        let decompressed_addon_info_size = crate::util::read_u32_le(r)?;
+        let decompressed_addon_info_size = crate::util::read_u32_le(&mut r)?;
 
         // addon_info: u8[-]
         let addon_info = {
@@ -160,7 +160,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
             };
             let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
             while decoder.total_out() < (decompressed_addon_info_size as u64) {
-                addon_info.push(crate::util::read_u8_le(decoder)?);
+                addon_info.push(crate::util::read_u8_le(&mut decoder)?);
                 current_size += 1;
             }
             addon_info

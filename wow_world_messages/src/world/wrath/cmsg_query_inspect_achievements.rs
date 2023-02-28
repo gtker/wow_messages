@@ -25,13 +25,13 @@ impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=9).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046B, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         Ok(Self {
             player,

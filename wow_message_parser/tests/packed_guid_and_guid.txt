@@ -63,18 +63,18 @@ impl PackedGuidAndGuid {
 }
 
 impl PackedGuidAndGuid {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // packed: PackedGuid
-        let packed = Guid::read_packed(r)?;
+        let packed = Guid::read_packed(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // static_packed: PackedGuid[10]
         let static_packed = {
             let mut static_packed = [Guid::default(); 10];
             for i in static_packed.iter_mut() {
-                *i = Guid::read_packed(r)?;
+                *i = Guid::read_packed(&mut r)?;
             }
             static_packed
         };
@@ -83,22 +83,22 @@ impl PackedGuidAndGuid {
         let static_guid = {
             let mut static_guid = [Guid::default(); 10];
             for i in static_guid.iter_mut() {
-                *i = Guid::read(r)?;
+                *i = Guid::read(&mut r)?;
             }
             static_guid
         };
 
         // basic1: u8
-        let basic1 = crate::util::read_u8_le(r)?;
+        let basic1 = crate::util::read_u8_le(&mut r)?;
 
         // basic2: u8
-        let basic2 = crate::util::read_u8_le(r)?;
+        let basic2 = crate::util::read_u8_le(&mut r)?;
 
         // variable_packed: PackedGuid[basic1]
         let variable_packed = {
             let mut variable_packed = Vec::with_capacity(basic1 as usize);
             for i in 0..basic1 {
-                variable_packed.push(Guid::read_packed(r)?);
+                variable_packed.push(Guid::read_packed(&mut r)?);
             }
             variable_packed
         };
@@ -107,7 +107,7 @@ impl PackedGuidAndGuid {
         let variable_guid = {
             let mut variable_guid = Vec::with_capacity(basic2 as usize);
             for i in 0..basic2 {
-                variable_guid.push(Guid::read(r)?);
+                variable_guid.push(Guid::read(&mut r)?);
             }
             variable_guid
         };

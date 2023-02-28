@@ -69,38 +69,38 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(28..=283).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036D, size: body_size as u32 });
         }
 
         // vote_in_progress: Bool
-        let vote_in_progress = crate::util::read_u8_le(r)? != 0;
+        let vote_in_progress = crate::util::read_u8_le(&mut r)? != 0;
 
         // did_vote: Bool
-        let did_vote = crate::util::read_u8_le(r)? != 0;
+        let did_vote = crate::util::read_u8_le(&mut r)? != 0;
 
         // agreed_with_kick: Bool
-        let agreed_with_kick = crate::util::read_u8_le(r)? != 0;
+        let agreed_with_kick = crate::util::read_u8_le(&mut r)? != 0;
 
         // victim: Guid
-        let victim = Guid::read(r)?;
+        let victim = Guid::read(&mut r)?;
 
         // total_votes: u32
-        let total_votes = crate::util::read_u32_le(r)?;
+        let total_votes = crate::util::read_u32_le(&mut r)?;
 
         // votes_agree: u32
-        let votes_agree = crate::util::read_u32_le(r)?;
+        let votes_agree = crate::util::read_u32_le(&mut r)?;
 
         // seconds_left: u32
-        let seconds_left = crate::util::read_u32_le(r)?;
+        let seconds_left = crate::util::read_u32_le(&mut r)?;
 
         // votes_needed: u32
-        let votes_needed = crate::util::read_u32_le(r)?;
+        let votes_needed = crate::util::read_u32_le(&mut r)?;
 
         // reason: CString
         let reason = {
-            let reason = crate::util::read_c_string_to_vec(r)?;
+            let reason = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(reason)?
         };
 

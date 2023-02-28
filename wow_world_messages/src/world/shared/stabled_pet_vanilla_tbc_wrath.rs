@@ -52,27 +52,27 @@ impl StabledPet {
 }
 
 impl StabledPet {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // pet_number: u32
-        let pet_number = crate::util::read_u32_le(r)?;
+        let pet_number = crate::util::read_u32_le(&mut r)?;
 
         // entry: u32
-        let entry = crate::util::read_u32_le(r)?;
+        let entry = crate::util::read_u32_le(&mut r)?;
 
         // level: u32
-        let level = crate::util::read_u32_le(r)?;
+        let level = crate::util::read_u32_le(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // loyalty: u32
-        let loyalty = crate::util::read_u32_le(r)?;
+        let loyalty = crate::util::read_u32_le(&mut r)?;
 
         // slot: u8
-        let slot = crate::util::read_u8_le(r)?;
+        let slot = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             pet_number,

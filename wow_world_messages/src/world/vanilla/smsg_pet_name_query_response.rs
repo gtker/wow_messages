@@ -38,22 +38,22 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0053, size: body_size as u32 });
         }
 
         // pet_number: u32
-        let pet_number = crate::util::read_u32_le(r)?;
+        let pet_number = crate::util::read_u32_le(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // pet_name_timestamp: u32
-        let pet_name_timestamp = crate::util::read_u32_le(r)?;
+        let pet_name_timestamp = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             pet_number,

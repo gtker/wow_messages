@@ -34,17 +34,17 @@ impl crate::Message for CMSG_SET_CONTACT_NOTES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006B, size: body_size as u32 });
         }
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // note: CString
         let note = {
-            let note = crate::util::read_c_string_to_vec(r)?;
+            let note = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(note)?
         };
 

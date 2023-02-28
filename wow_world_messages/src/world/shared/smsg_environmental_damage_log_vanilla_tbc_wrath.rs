@@ -46,25 +46,25 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 24 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FC, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // damage_type: EnvironmentalDamageType
-        let damage_type: EnvironmentalDamageType = crate::util::read_u32_le(r)?.try_into()?;
+        let damage_type: EnvironmentalDamageType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // damage: u32
-        let damage = crate::util::read_u32_le(r)?;
+        let damage = crate::util::read_u32_le(&mut r)?;
 
         // absorb: u32
-        let absorb = crate::util::read_u32_le(r)?;
+        let absorb = crate::util::read_u32_le(&mut r)?;
 
         // resist: u32
-        let resist = crate::util::read_u32_le(r)?;
+        let resist = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             guid,

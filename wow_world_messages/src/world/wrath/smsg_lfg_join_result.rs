@@ -37,16 +37,16 @@ impl crate::Message for SMSG_LFG_JOIN_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=65543).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0364, size: body_size as u32 });
         }
 
         // result: u32
-        let result = crate::util::read_u32_le(r)?;
+        let result = crate::util::read_u32_le(&mut r)?;
 
         // state: u32
-        let state = crate::util::read_u32_le(r)?;
+        let state = crate::util::read_u32_le(&mut r)?;
 
         // players: LfgJoinPlayer[-]
         let players = {
@@ -56,7 +56,7 @@ impl crate::Message for SMSG_LFG_JOIN_RESULT {
             };
             let mut players = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                players.push(LfgJoinPlayer::read(r)?);
+                players.push(LfgJoinPlayer::read(&mut r)?);
                 current_size += 1;
             }
             players

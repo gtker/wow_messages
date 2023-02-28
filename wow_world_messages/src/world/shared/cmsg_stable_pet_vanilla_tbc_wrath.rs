@@ -25,13 +25,13 @@ impl crate::Message for CMSG_STABLE_PET {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0270, size: body_size as u32 });
         }
 
         // stable_master: Guid
-        let stable_master = Guid::read(r)?;
+        let stable_master = Guid::read(&mut r)?;
 
         Ok(Self {
             stable_master,

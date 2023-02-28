@@ -89,48 +89,48 @@ impl TradeSlot {
 }
 
 impl TradeSlot {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // trade_slot_number: u8
-        let trade_slot_number = crate::util::read_u8_le(r)?;
+        let trade_slot_number = crate::util::read_u8_le(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // display_id: u32
-        let display_id = crate::util::read_u32_le(r)?;
+        let display_id = crate::util::read_u32_le(&mut r)?;
 
         // stack_count: u32
-        let stack_count = crate::util::read_u32_le(r)?;
+        let stack_count = crate::util::read_u32_le(&mut r)?;
 
         // wrapped: Bool32
-        let wrapped = crate::util::read_u32_le(r)? != 0;
+        let wrapped = crate::util::read_u32_le(&mut r)? != 0;
 
         // gift_wrapper: Guid
-        let gift_wrapper = Guid::read(r)?;
+        let gift_wrapper = Guid::read(&mut r)?;
 
         // enchantment: u32
-        let enchantment = crate::util::read_u32_le(r)?;
+        let enchantment = crate::util::read_u32_le(&mut r)?;
 
         // item_creator: Guid
-        let item_creator = Guid::read(r)?;
+        let item_creator = Guid::read(&mut r)?;
 
         // spell_charges: u32
-        let spell_charges = crate::util::read_u32_le(r)?;
+        let spell_charges = crate::util::read_u32_le(&mut r)?;
 
         // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::read_u32_le(r)?;
+        let item_suffix_factor = crate::util::read_u32_le(&mut r)?;
 
         // item_random_properties_id: u32
-        let item_random_properties_id = crate::util::read_u32_le(r)?;
+        let item_random_properties_id = crate::util::read_u32_le(&mut r)?;
 
         // lock_id: u32
-        let lock_id = crate::util::read_u32_le(r)?;
+        let lock_id = crate::util::read_u32_le(&mut r)?;
 
         // max_durability: u32
-        let max_durability = crate::util::read_u32_le(r)?;
+        let max_durability = crate::util::read_u32_le(&mut r)?;
 
         // durability: u32
-        let durability = crate::util::read_u32_le(r)?;
+        let durability = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             trade_slot_number,

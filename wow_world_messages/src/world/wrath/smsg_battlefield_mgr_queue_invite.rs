@@ -31,16 +31,16 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E1, size: body_size as u32 });
         }
 
         // battle_id: u32
-        let battle_id = crate::util::read_u32_le(r)?;
+        let battle_id = crate::util::read_u32_le(&mut r)?;
 
         // warmup: u8
-        let warmup = crate::util::read_u8_le(r)?;
+        let warmup = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             battle_id,

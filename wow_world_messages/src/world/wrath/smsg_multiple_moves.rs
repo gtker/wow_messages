@@ -31,13 +31,13 @@ impl crate::Message for SMSG_MULTIPLE_MOVES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=65539).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x051E, size: body_size as u32 });
         }
 
         // size: u32
-        let _size = crate::util::read_u32_le(r)?;
+        let _size = crate::util::read_u32_le(&mut r)?;
         // size is expected to always be self.size (0)
 
         // moves: MiniMoveMessage[-]
@@ -47,7 +47,7 @@ impl crate::Message for SMSG_MULTIPLE_MOVES {
             };
             let mut moves = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                moves.push(MiniMoveMessage::read(r)?);
+                moves.push(MiniMoveMessage::read(&mut r)?);
                 current_size += 1;
             }
             moves

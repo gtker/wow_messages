@@ -121,16 +121,16 @@ impl crate::Message for CMSG_MESSAGECHAT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=520).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size as u32 });
         }
 
         // chat_type: ChatType
-        let chat_type: ChatType = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let chat_type: ChatType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // language: Language
-        let language: Language = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let language: Language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         let chat_type_if = match chat_type {
             ChatType::System => CMSG_MESSAGECHAT_ChatType::System,
@@ -143,7 +143,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
             ChatType::Whisper => {
                 // target_player: CString
                 let target_player = {
-                    let target_player = crate::util::read_c_string_to_vec(r)?;
+                    let target_player = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(target_player)?
                 };
 
@@ -163,7 +163,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
             ChatType::Channel => {
                 // channel: CString
                 let channel = {
-                    let channel = crate::util::read_c_string_to_vec(r)?;
+                    let channel = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(channel)?
                 };
 
@@ -209,7 +209,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
 
         // message: CString
         let message = {
-            let message = crate::util::read_c_string_to_vec(r)?;
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(message)?
         };
 

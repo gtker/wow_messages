@@ -31,19 +31,19 @@ impl crate::Message for SMSG_CHAR_ENUM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=126465).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003B, size: body_size as u32 });
         }
 
         // amount_of_characters: u8
-        let amount_of_characters = crate::util::read_u8_le(r)?;
+        let amount_of_characters = crate::util::read_u8_le(&mut r)?;
 
         // characters: Character[amount_of_characters]
         let characters = {
             let mut characters = Vec::with_capacity(amount_of_characters as usize);
             for i in 0..amount_of_characters {
-                characters.push(Character::read(r)?);
+                characters.push(Character::read(&mut r)?);
             }
             characters
         };

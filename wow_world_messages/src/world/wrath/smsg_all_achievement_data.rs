@@ -30,16 +30,16 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size > 4294967294 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047D, size: body_size as u32 });
         }
 
         // done: AchievementDoneArray
-        let done = AchievementDoneArray::read(r)?;
+        let done = AchievementDoneArray::read(&mut r)?;
 
         // in_progress: AchievementInProgressArray
-        let in_progress = AchievementInProgressArray::read(r)?;
+        let in_progress = AchievementInProgressArray::read(&mut r)?;
 
         Ok(Self {
             done,

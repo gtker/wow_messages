@@ -51,28 +51,28 @@ impl crate::Message for MSG_MOVE_KNOCK_BACK_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(48..=109).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00F1, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // info: MovementInfo
-        let info = MovementInfo::read(r)?;
+        let info = MovementInfo::read(&mut r)?;
 
         // sin_angle: f32
-        let sin_angle = crate::util::read_f32_le(r)?;
+        let sin_angle = crate::util::read_f32_le(&mut r)?;
 
         // cos_angle: f32
-        let cos_angle = crate::util::read_f32_le(r)?;
+        let cos_angle = crate::util::read_f32_le(&mut r)?;
 
         // x_y_speed: f32
-        let x_y_speed = crate::util::read_f32_le(r)?;
+        let x_y_speed = crate::util::read_f32_le(&mut r)?;
 
         // velocity: f32
-        let velocity = crate::util::read_f32_le(r)?;
+        let velocity = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             player,

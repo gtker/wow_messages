@@ -49,17 +49,17 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=265).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0099, size: body_size as u32 });
         }
 
         // notify_type: ChatNotify
-        let notify_type: ChatNotify = crate::util::read_u8_le(r)?.try_into()?;
+        let notify_type: ChatNotify = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // channel_name: CString
         let channel_name = {
-            let channel_name = crate::util::read_c_string_to_vec(r)?;
+            let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(channel_name)?
         };
 
@@ -70,10 +70,10 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
         };
         let unknown1 = if current_size < body_size as usize {
             // unknown2: u32
-            let unknown2 = crate::util::read_u32_le(r)?;
+            let unknown2 = crate::util::read_u32_le(&mut r)?;
 
             // unkwown3: u32
-            let unkwown3 = crate::util::read_u32_le(r)?;
+            let unkwown3 = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_CHANNEL_NOTIFY_unknown1 {
                 unknown2,

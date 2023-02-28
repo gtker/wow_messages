@@ -55,24 +55,24 @@ impl PetitionShowlist {
 }
 
 impl PetitionShowlist {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // index: u32
-        let index = crate::util::read_u32_le(r)?;
+        let index = crate::util::read_u32_le(&mut r)?;
 
         // charter_entry: u32
-        let charter_entry = crate::util::read_u32_le(r)?;
+        let charter_entry = crate::util::read_u32_le(&mut r)?;
 
         // charter_display_id: u32
-        let charter_display_id = crate::util::read_u32_le(r)?;
+        let charter_display_id = crate::util::read_u32_le(&mut r)?;
 
         // guild_charter_cost: u32
-        let guild_charter_cost = crate::util::read_u32_le(r)?;
+        let guild_charter_cost = crate::util::read_u32_le(&mut r)?;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // signatures_required: u32
-        let signatures_required = crate::util::read_u32_le(r)?;
+        let signatures_required = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             index,

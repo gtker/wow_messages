@@ -73,36 +73,36 @@ impl TrainerSpell {
 }
 
 impl TrainerSpell {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // state: TrainerSpellState
-        let state: TrainerSpellState = crate::util::read_u8_le(r)?.try_into()?;
+        let state: TrainerSpellState = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // spell_cost: u32
-        let spell_cost = crate::util::read_u32_le(r)?;
+        let spell_cost = crate::util::read_u32_le(&mut r)?;
 
         // talent_point_cost: u32
-        let talent_point_cost = crate::util::read_u32_le(r)?;
+        let talent_point_cost = crate::util::read_u32_le(&mut r)?;
 
         // first_rank: u32
-        let first_rank = crate::util::read_u32_le(r)?;
+        let first_rank = crate::util::read_u32_le(&mut r)?;
 
         // required_level: u8
-        let required_level = crate::util::read_u8_le(r)?;
+        let required_level = crate::util::read_u8_le(&mut r)?;
 
         // required_skill: Skill
-        let required_skill: Skill = (crate::util::read_u32_le(r)? as u16).try_into()?;
+        let required_skill: Skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
         // required_skill_value: u32
-        let required_skill_value = crate::util::read_u32_le(r)?;
+        let required_skill_value = crate::util::read_u32_le(&mut r)?;
 
         // required_spells: u32[3]
         let required_spells = {
             let mut required_spells = [u32::default(); 3];
             for i in required_spells.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
+                *i = crate::util::read_u32_le(&mut r)?;
             }
             required_spells
         };

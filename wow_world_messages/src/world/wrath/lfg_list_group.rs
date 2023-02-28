@@ -62,17 +62,17 @@ impl LfgListGroup {
 }
 
 impl LfgListGroup {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // group: Guid
-        let group = Guid::read(r)?;
+        let group = Guid::read(&mut r)?;
 
         // flags: LfgUpdateFlag
-        let flags = LfgUpdateFlag::new(crate::util::read_u32_le(r)?);
+        let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
 
         let flags_COMMENT = if flags.is_COMMENT() {
             // comment: CString
             let comment = {
-                let comment = crate::util::read_c_string_to_vec(r)?;
+                let comment = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(comment)?
             };
 
@@ -101,10 +101,10 @@ impl LfgListGroup {
         };
 
         // instance: Guid
-        let instance = Guid::read(r)?;
+        let instance = Guid::read(&mut r)?;
 
         // encounter_mask: u32
-        let encounter_mask = crate::util::read_u32_le(r)?;
+        let encounter_mask = crate::util::read_u32_le(&mut r)?;
 
         let flags = LfgListGroup_LfgUpdateFlag {
             inner: flags.as_int(),

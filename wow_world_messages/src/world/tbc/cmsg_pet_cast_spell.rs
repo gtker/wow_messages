@@ -36,19 +36,19 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=330).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F0, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(r)?;
+        let targets = SpellCastTargets::read(&mut r)?;
 
         Ok(Self {
             guid,

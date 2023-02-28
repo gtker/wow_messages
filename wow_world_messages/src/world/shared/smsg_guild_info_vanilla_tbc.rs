@@ -53,31 +53,31 @@ impl crate::Message for SMSG_GUILD_INFO {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(21..=276).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0088, size: body_size as u32 });
         }
 
         // guild_name: CString
         let guild_name = {
-            let guild_name = crate::util::read_c_string_to_vec(r)?;
+            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(guild_name)?
         };
 
         // created_day: u32
-        let created_day = crate::util::read_u32_le(r)?;
+        let created_day = crate::util::read_u32_le(&mut r)?;
 
         // created_month: u32
-        let created_month = crate::util::read_u32_le(r)?;
+        let created_month = crate::util::read_u32_le(&mut r)?;
 
         // created_year: u32
-        let created_year = crate::util::read_u32_le(r)?;
+        let created_year = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_characters_in_guild: u32
-        let amount_of_characters_in_guild = crate::util::read_u32_le(r)?;
+        let amount_of_characters_in_guild = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_accounts_in_guild: u32
-        let amount_of_accounts_in_guild = crate::util::read_u32_le(r)?;
+        let amount_of_accounts_in_guild = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             guild_name,

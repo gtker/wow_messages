@@ -42,31 +42,31 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E9, size: body_size as u32 });
         }
 
         // amount_of_teammates: u32
-        let amount_of_teammates = crate::util::read_u32_le(r)?;
+        let amount_of_teammates = crate::util::read_u32_le(&mut r)?;
 
         // teammates: BattlegroundPlayerPosition[amount_of_teammates]
         let teammates = {
             let mut teammates = Vec::with_capacity(amount_of_teammates as usize);
             for i in 0..amount_of_teammates {
-                teammates.push(BattlegroundPlayerPosition::read(r)?);
+                teammates.push(BattlegroundPlayerPosition::read(&mut r)?);
             }
             teammates
         };
 
         // amount_of_carriers: u8
-        let amount_of_carriers = crate::util::read_u8_le(r)?;
+        let amount_of_carriers = crate::util::read_u8_le(&mut r)?;
 
         // carriers: BattlegroundPlayerPosition[amount_of_carriers]
         let carriers = {
             let mut carriers = Vec::with_capacity(amount_of_carriers as usize);
             for i in 0..amount_of_carriers {
-                carriers.push(BattlegroundPlayerPosition::read(r)?);
+                carriers.push(BattlegroundPlayerPosition::read(&mut r)?);
             }
             carriers
         };

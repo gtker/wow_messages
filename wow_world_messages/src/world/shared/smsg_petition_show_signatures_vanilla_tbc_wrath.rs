@@ -47,28 +47,28 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(21..=3093).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BF, size: body_size as u32 });
         }
 
         // item: Guid
-        let item = Guid::read(r)?;
+        let item = Guid::read(&mut r)?;
 
         // owner: Guid
-        let owner = Guid::read(r)?;
+        let owner = Guid::read(&mut r)?;
 
         // petition: u32
-        let petition = crate::util::read_u32_le(r)?;
+        let petition = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_signatures: u8
-        let amount_of_signatures = crate::util::read_u8_le(r)?;
+        let amount_of_signatures = crate::util::read_u8_le(&mut r)?;
 
         // signatures: PetitionSignature[amount_of_signatures]
         let signatures = {
             let mut signatures = Vec::with_capacity(amount_of_signatures as usize);
             for i in 0..amount_of_signatures {
-                signatures.push(PetitionSignature::read(r)?);
+                signatures.push(PetitionSignature::read(&mut r)?);
             }
             signatures
         };

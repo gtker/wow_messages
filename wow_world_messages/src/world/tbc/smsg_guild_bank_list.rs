@@ -73,34 +73,34 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(15..=462864).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E7, size: body_size as u32 });
         }
 
         // bank_balance: u64
-        let bank_balance = crate::util::read_u64_le(r)?;
+        let bank_balance = crate::util::read_u64_le(&mut r)?;
 
         // tab_id: u8
-        let tab_id = crate::util::read_u8_le(r)?;
+        let tab_id = crate::util::read_u8_le(&mut r)?;
 
         // amount_of_allowed_item_withdraws: u32
-        let amount_of_allowed_item_withdraws = crate::util::read_u32_le(r)?;
+        let amount_of_allowed_item_withdraws = crate::util::read_u32_le(&mut r)?;
 
         // tab_result: GuildBankTabResult
-        let tab_result: GuildBankTabResult = crate::util::read_u8_le(r)?.try_into()?;
+        let tab_result: GuildBankTabResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let tab_result_if = match tab_result {
             GuildBankTabResult::NotPresent => SMSG_GUILD_BANK_LIST_GuildBankTabResult::NotPresent,
             GuildBankTabResult::Present => {
                 // amount_of_bank_tabs: u8
-                let amount_of_bank_tabs = crate::util::read_u8_le(r)?;
+                let amount_of_bank_tabs = crate::util::read_u8_le(&mut r)?;
 
                 // tabs: GuildBankTab[amount_of_bank_tabs]
                 let tabs = {
                     let mut tabs = Vec::with_capacity(amount_of_bank_tabs as usize);
                     for i in 0..amount_of_bank_tabs {
-                        tabs.push(GuildBankTab::read(r)?);
+                        tabs.push(GuildBankTab::read(&mut r)?);
                     }
                     tabs
                 };
@@ -112,13 +112,13 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         };
 
         // amount_of_slot_updates: u8
-        let amount_of_slot_updates = crate::util::read_u8_le(r)?;
+        let amount_of_slot_updates = crate::util::read_u8_le(&mut r)?;
 
         // slot_updates: GuildBankSlot[amount_of_slot_updates]
         let slot_updates = {
             let mut slot_updates = Vec::with_capacity(amount_of_slot_updates as usize);
             for i in 0..amount_of_slot_updates {
-                slot_updates.push(GuildBankSlot::read(r)?);
+                slot_updates.push(GuildBankSlot::read(&mut r)?);
             }
             slot_updates
         };

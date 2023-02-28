@@ -89,52 +89,52 @@ impl crate::Message for SMSG_LEVELUP_INFO {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 56 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D4, size: body_size as u32 });
         }
 
         // new_level: u32
-        let new_level = crate::util::read_u32_le(r)?;
+        let new_level = crate::util::read_u32_le(&mut r)?;
 
         // health: u32
-        let health = crate::util::read_u32_le(r)?;
+        let health = crate::util::read_u32_le(&mut r)?;
 
         // mana: u32
-        let mana = crate::util::read_u32_le(r)?;
+        let mana = crate::util::read_u32_le(&mut r)?;
 
         // rage: u32
-        let rage = crate::util::read_u32_le(r)?;
+        let rage = crate::util::read_u32_le(&mut r)?;
 
         // focus: u32
-        let focus = crate::util::read_u32_le(r)?;
+        let focus = crate::util::read_u32_le(&mut r)?;
 
         // energy: u32
-        let energy = crate::util::read_u32_le(r)?;
+        let energy = crate::util::read_u32_le(&mut r)?;
 
         // happiness: u32
-        let happiness = crate::util::read_u32_le(r)?;
+        let happiness = crate::util::read_u32_le(&mut r)?;
 
         // rune: u32
-        let rune = crate::util::read_u32_le(r)?;
+        let rune = crate::util::read_u32_le(&mut r)?;
 
         // runic_power: u32
-        let runic_power = crate::util::read_u32_le(r)?;
+        let runic_power = crate::util::read_u32_le(&mut r)?;
 
         // strength: u32
-        let strength = crate::util::read_u32_le(r)?;
+        let strength = crate::util::read_u32_le(&mut r)?;
 
         // agility: u32
-        let agility = crate::util::read_u32_le(r)?;
+        let agility = crate::util::read_u32_le(&mut r)?;
 
         // stamina: u32
-        let stamina = crate::util::read_u32_le(r)?;
+        let stamina = crate::util::read_u32_le(&mut r)?;
 
         // intellect: u32
-        let intellect = crate::util::read_u32_le(r)?;
+        let intellect = crate::util::read_u32_le(&mut r)?;
 
         // spirit: u32
-        let spirit = crate::util::read_u32_le(r)?;
+        let spirit = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             new_level,

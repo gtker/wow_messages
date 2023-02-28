@@ -39,18 +39,18 @@ impl RaidInfo {
 }
 
 impl RaidInfo {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // reset_time: u32
-        let reset_time = crate::util::read_u32_le(r)?;
+        let reset_time = crate::util::read_u32_le(&mut r)?;
 
         // instance_id: u32
-        let instance_id = crate::util::read_u32_le(r)?;
+        let instance_id = crate::util::read_u32_le(&mut r)?;
 
         // index: u32
-        let index = crate::util::read_u32_le(r)?;
+        let index = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             map,

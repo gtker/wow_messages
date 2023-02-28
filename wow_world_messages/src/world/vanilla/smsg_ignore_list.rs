@@ -30,19 +30,19 @@ impl crate::Message for SMSG_IGNORE_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=2049).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006B, size: body_size as u32 });
         }
 
         // amount_of_ignored: u8
-        let amount_of_ignored = crate::util::read_u8_le(r)?;
+        let amount_of_ignored = crate::util::read_u8_le(&mut r)?;
 
         // ignored: u64[amount_of_ignored]
         let ignored = {
             let mut ignored = Vec::with_capacity(amount_of_ignored as usize);
             for i in 0..amount_of_ignored {
-                ignored.push(crate::util::read_u64_le(r)?);
+                ignored.push(crate::util::read_u64_le(&mut r)?);
             }
             ignored
         };

@@ -38,22 +38,22 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=7678981).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023B, size: body_size as u32 });
         }
 
         // real_mail_amount: u32
-        let real_mail_amount = crate::util::read_u32_le(r)?;
+        let real_mail_amount = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_mails: u8
-        let amount_of_mails = crate::util::read_u8_le(r)?;
+        let amount_of_mails = crate::util::read_u8_le(&mut r)?;
 
         // mails: Mail[amount_of_mails]
         let mails = {
             let mut mails = Vec::with_capacity(amount_of_mails as usize);
             for i in 0..amount_of_mails {
-                mails.push(Mail::read(r)?);
+                mails.push(Mail::read(&mut r)?);
             }
             mails
         };

@@ -30,16 +30,16 @@ impl crate::Message for SMSG_ITEM_COOLDOWN {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B0, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             guid,

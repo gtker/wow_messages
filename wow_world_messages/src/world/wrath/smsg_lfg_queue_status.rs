@@ -69,40 +69,40 @@ impl crate::Message for SMSG_LFG_QUEUE_STATUS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 31 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0365, size: body_size as u32 });
         }
 
         // dungeon: u32
-        let dungeon = crate::util::read_u32_le(r)?;
+        let dungeon = crate::util::read_u32_le(&mut r)?;
 
         // average_wait_time: i32
-        let average_wait_time = crate::util::read_i32_le(r)?;
+        let average_wait_time = crate::util::read_i32_le(&mut r)?;
 
         // wait_time: i32
-        let wait_time = crate::util::read_i32_le(r)?;
+        let wait_time = crate::util::read_i32_le(&mut r)?;
 
         // wait_time_tank: i32
-        let wait_time_tank = crate::util::read_i32_le(r)?;
+        let wait_time_tank = crate::util::read_i32_le(&mut r)?;
 
         // wait_time_healer: i32
-        let wait_time_healer = crate::util::read_i32_le(r)?;
+        let wait_time_healer = crate::util::read_i32_le(&mut r)?;
 
         // wait_time_dps: i32
-        let wait_time_dps = crate::util::read_i32_le(r)?;
+        let wait_time_dps = crate::util::read_i32_le(&mut r)?;
 
         // tanks_needed: u8
-        let tanks_needed = crate::util::read_u8_le(r)?;
+        let tanks_needed = crate::util::read_u8_le(&mut r)?;
 
         // healers_needed: u8
-        let healers_needed = crate::util::read_u8_le(r)?;
+        let healers_needed = crate::util::read_u8_le(&mut r)?;
 
         // dps_needed: u8
-        let dps_needed = crate::util::read_u8_le(r)?;
+        let dps_needed = crate::util::read_u8_le(&mut r)?;
 
         // queue_time: u32
-        let queue_time = crate::util::read_u32_le(r)?;
+        let queue_time = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             dungeon,

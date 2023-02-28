@@ -47,19 +47,19 @@ impl EquipmentSetListItem {
 }
 
 impl EquipmentSetListItem {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // icon_name: CString
         let icon_name = {
-            let icon_name = crate::util::read_c_string_to_vec(r)?;
+            let icon_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(icon_name)?
         };
 
@@ -67,7 +67,7 @@ impl EquipmentSetListItem {
         let equipment = {
             let mut equipment = [Guid::default(); 19];
             for i in equipment.iter_mut() {
-                *i = Guid::read(r)?;
+                *i = Guid::read(&mut r)?;
             }
             equipment
         };

@@ -30,16 +30,16 @@ impl crate::Message for MSG_MOVE_TIME_SKIPPED_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0319, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // time_skipped: u32
-        let time_skipped = crate::util::read_u32_le(r)?;
+        let time_skipped = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             player,

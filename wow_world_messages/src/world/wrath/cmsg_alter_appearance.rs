@@ -34,19 +34,19 @@ impl crate::Message for CMSG_ALTER_APPEARANCE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0426, size: body_size as u32 });
         }
 
         // hair: u32
-        let hair = crate::util::read_u32_le(r)?;
+        let hair = crate::util::read_u32_le(&mut r)?;
 
         // hair_color: u32
-        let hair_color = crate::util::read_u32_le(r)?;
+        let hair_color = crate::util::read_u32_le(&mut r)?;
 
         // facial_hair: u32
-        let facial_hair = crate::util::read_u32_le(r)?;
+        let facial_hair = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             hair,

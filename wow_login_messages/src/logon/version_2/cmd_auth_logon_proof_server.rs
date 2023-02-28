@@ -65,9 +65,9 @@ impl CMD_AUTH_LOGON_PROOF_Server {
 impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
     const OPCODE: u8 = 0x01;
 
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // result: LoginResult
-        let result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: LoginResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             LoginResult::Success => {
@@ -79,7 +79,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
                 };
 
                 // hardware_survey_id: u32
-                let hardware_survey_id = crate::util::read_u32_le(r)?;
+                let hardware_survey_id = crate::util::read_u32_le(&mut r)?;
 
                 CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
                     hardware_survey_id,
@@ -116,19 +116,18 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn tokio_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // result: LoginResult
-            let result: LoginResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+            let result: LoginResult = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
             let result_if = match result {
                 LoginResult::Success => {
@@ -140,7 +139,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
                     };
 
                     // hardware_survey_id: u32
-                    let hardware_survey_id = crate::util::tokio_read_u32_le(r).await?;
+                    let hardware_survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
 
                     CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
                         hardware_survey_id,
@@ -190,19 +189,18 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn astd_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // result: LoginResult
-            let result: LoginResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
+            let result: LoginResult = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
             let result_if = match result {
                 LoginResult::Success => {
@@ -214,7 +212,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
                     };
 
                     // hardware_survey_id: u32
-                    let hardware_survey_id = crate::util::astd_read_u32_le(r).await?;
+                    let hardware_survey_id = crate::util::astd_read_u32_le(&mut r).await?;
 
                     CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
                         hardware_survey_id,

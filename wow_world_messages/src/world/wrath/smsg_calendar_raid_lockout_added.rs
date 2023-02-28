@@ -47,25 +47,25 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 24 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043E, size: body_size as u32 });
         }
 
         // time: DateTime
-        let time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // difficulty: u32
-        let difficulty = crate::util::read_u32_le(r)?;
+        let difficulty = crate::util::read_u32_le(&mut r)?;
 
         // remaining_time: u32
-        let remaining_time = crate::util::read_u32_le(r)?;
+        let remaining_time = crate::util::read_u32_le(&mut r)?;
 
         // instance_id: Guid
-        let instance_id = Guid::read(r)?;
+        let instance_id = Guid::read(&mut r)?;
 
         Ok(Self {
             time,

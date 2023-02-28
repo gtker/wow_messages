@@ -69,42 +69,42 @@ impl MailListItem {
 }
 
 impl MailListItem {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // item_index: u8
-        let item_index = crate::util::read_u8_le(r)?;
+        let item_index = crate::util::read_u8_le(&mut r)?;
 
         // low_guid: u32
-        let low_guid = crate::util::read_u32_le(r)?;
+        let low_guid = crate::util::read_u32_le(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // enchants: MailListItemEnchant[6]
         let enchants = {
             let mut enchants = [MailListItemEnchant::default(); 6];
             for i in enchants.iter_mut() {
-                *i = MailListItemEnchant::read(r)?;
+                *i = MailListItemEnchant::read(&mut r)?;
             }
             enchants
         };
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::read_u32_le(r)?;
+        let item_suffix_factor = crate::util::read_u32_le(&mut r)?;
 
         // item_amount: u8
-        let item_amount = crate::util::read_u8_le(r)?;
+        let item_amount = crate::util::read_u8_le(&mut r)?;
 
         // charges: u32
-        let charges = crate::util::read_u32_le(r)?;
+        let charges = crate::util::read_u32_le(&mut r)?;
 
         // max_durability: u32
-        let max_durability = crate::util::read_u32_le(r)?;
+        let max_durability = crate::util::read_u32_le(&mut r)?;
 
         // durability: u32
-        let durability = crate::util::read_u32_le(r)?;
+        let durability = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             item_index,

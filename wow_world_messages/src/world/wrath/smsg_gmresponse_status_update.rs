@@ -24,13 +24,13 @@ impl crate::Message for SMSG_GMRESPONSE_STATUS_UPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04F1, size: body_size as u32 });
         }
 
         // show_survey: Bool
-        let show_survey = crate::util::read_u8_le(r)? != 0;
+        let show_survey = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             show_survey,

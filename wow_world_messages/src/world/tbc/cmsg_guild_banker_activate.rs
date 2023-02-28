@@ -30,16 +30,16 @@ impl crate::Message for CMSG_GUILD_BANKER_ACTIVATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E5, size: body_size as u32 });
         }
 
         // bank: Guid
-        let bank = Guid::read(r)?;
+        let bank = Guid::read(&mut r)?;
 
         // full_update: Bool
-        let full_update = crate::util::read_u8_le(r)? != 0;
+        let full_update = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             bank,

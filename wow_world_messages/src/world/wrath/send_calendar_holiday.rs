@@ -71,27 +71,27 @@ impl SendCalendarHoliday {
 }
 
 impl SendCalendarHoliday {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // holiday_id: u32
-        let holiday_id = crate::util::read_u32_le(r)?;
+        let holiday_id = crate::util::read_u32_le(&mut r)?;
 
         // region: u32
-        let region = crate::util::read_u32_le(r)?;
+        let region = crate::util::read_u32_le(&mut r)?;
 
         // looping: u32
-        let looping = crate::util::read_u32_le(r)?;
+        let looping = crate::util::read_u32_le(&mut r)?;
 
         // priority: u32
-        let priority = crate::util::read_u32_le(r)?;
+        let priority = crate::util::read_u32_le(&mut r)?;
 
         // calendar_filter_type: u32
-        let calendar_filter_type = crate::util::read_u32_le(r)?;
+        let calendar_filter_type = crate::util::read_u32_le(&mut r)?;
 
         // holiday_days: u32[26]
         let holiday_days = {
             let mut holiday_days = [u32::default(); 26];
             for i in holiday_days.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
+                *i = crate::util::read_u32_le(&mut r)?;
             }
             holiday_days
         };
@@ -100,7 +100,7 @@ impl SendCalendarHoliday {
         let durations = {
             let mut durations = [u32::default(); 10];
             for i in durations.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
+                *i = crate::util::read_u32_le(&mut r)?;
             }
             durations
         };
@@ -109,14 +109,14 @@ impl SendCalendarHoliday {
         let flags = {
             let mut flags = [u32::default(); 10];
             for i in flags.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
+                *i = crate::util::read_u32_le(&mut r)?;
             }
             flags
         };
 
         // texture_file_name: CString
         let texture_file_name = {
-            let texture_file_name = crate::util::read_c_string_to_vec(r)?;
+            let texture_file_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(texture_file_name)?
         };
 

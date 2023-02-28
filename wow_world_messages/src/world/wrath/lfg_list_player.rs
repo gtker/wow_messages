@@ -208,91 +208,91 @@ impl LfgListPlayer {
 }
 
 impl LfgListPlayer {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // flags: LfgUpdateFlag
-        let flags = LfgUpdateFlag::new(crate::util::read_u32_le(r)?);
+        let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
 
         let flags_CHARACTER_INFO = if flags.is_CHARACTER_INFO() {
             // level: u8
-            let level = crate::util::read_u8_le(r)?;
+            let level = crate::util::read_u8_le(&mut r)?;
 
             // class: Class
-            let class: Class = crate::util::read_u8_le(r)?.try_into()?;
+            let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // race: Race
-            let race: Race = crate::util::read_u8_le(r)?.try_into()?;
+            let race: Race = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // talents0: u8
-            let talents0 = crate::util::read_u8_le(r)?;
+            let talents0 = crate::util::read_u8_le(&mut r)?;
 
             // talents1: u8
-            let talents1 = crate::util::read_u8_le(r)?;
+            let talents1 = crate::util::read_u8_le(&mut r)?;
 
             // talents2: u8
-            let talents2 = crate::util::read_u8_le(r)?;
+            let talents2 = crate::util::read_u8_le(&mut r)?;
 
             // armor: u32
-            let armor = crate::util::read_u32_le(r)?;
+            let armor = crate::util::read_u32_le(&mut r)?;
 
             // spell_damage: u32
-            let spell_damage = crate::util::read_u32_le(r)?;
+            let spell_damage = crate::util::read_u32_le(&mut r)?;
 
             // spell_heal: u32
-            let spell_heal = crate::util::read_u32_le(r)?;
+            let spell_heal = crate::util::read_u32_le(&mut r)?;
 
             // crit_rating_melee: u32
-            let crit_rating_melee = crate::util::read_u32_le(r)?;
+            let crit_rating_melee = crate::util::read_u32_le(&mut r)?;
 
             // crit_rating_ranged: u32
-            let crit_rating_ranged = crate::util::read_u32_le(r)?;
+            let crit_rating_ranged = crate::util::read_u32_le(&mut r)?;
 
             // crit_rating_spell: u32
-            let crit_rating_spell = crate::util::read_u32_le(r)?;
+            let crit_rating_spell = crate::util::read_u32_le(&mut r)?;
 
             // mana_per_5_seconds: f32
-            let mana_per_5_seconds = crate::util::read_f32_le(r)?;
+            let mana_per_5_seconds = crate::util::read_f32_le(&mut r)?;
 
             // mana_per_5_seconds_combat: f32
-            let mana_per_5_seconds_combat = crate::util::read_f32_le(r)?;
+            let mana_per_5_seconds_combat = crate::util::read_f32_le(&mut r)?;
 
             // attack_power: u32
-            let attack_power = crate::util::read_u32_le(r)?;
+            let attack_power = crate::util::read_u32_le(&mut r)?;
 
             // agility: u32
-            let agility = crate::util::read_u32_le(r)?;
+            let agility = crate::util::read_u32_le(&mut r)?;
 
             // health: u32
-            let health = crate::util::read_u32_le(r)?;
+            let health = crate::util::read_u32_le(&mut r)?;
 
             // mana: u32
-            let mana = crate::util::read_u32_le(r)?;
+            let mana = crate::util::read_u32_le(&mut r)?;
 
             // online: Bool32
-            let online = crate::util::read_u32_le(r)? != 0;
+            let online = crate::util::read_u32_le(&mut r)? != 0;
 
             // average_item_level: u32
-            let average_item_level = crate::util::read_u32_le(r)?;
+            let average_item_level = crate::util::read_u32_le(&mut r)?;
 
             // defense_skill: u32
-            let defense_skill = crate::util::read_u32_le(r)?;
+            let defense_skill = crate::util::read_u32_le(&mut r)?;
 
             // dodge_rating: u32
-            let dodge_rating = crate::util::read_u32_le(r)?;
+            let dodge_rating = crate::util::read_u32_le(&mut r)?;
 
             // block_rating: u32
-            let block_rating = crate::util::read_u32_le(r)?;
+            let block_rating = crate::util::read_u32_le(&mut r)?;
 
             // parry_rating: u32
-            let parry_rating = crate::util::read_u32_le(r)?;
+            let parry_rating = crate::util::read_u32_le(&mut r)?;
 
             // haste_rating: u32
-            let haste_rating = crate::util::read_u32_le(r)?;
+            let haste_rating = crate::util::read_u32_le(&mut r)?;
 
             // expertise_rating: u32
-            let expertise_rating = crate::util::read_u32_le(r)?;
+            let expertise_rating = crate::util::read_u32_le(&mut r)?;
 
             Some(LfgListPlayer_LfgUpdateFlag_CharacterInfo {
                 agility,
@@ -330,7 +330,7 @@ impl LfgListPlayer {
         let flags_COMMENT = if flags.is_COMMENT() {
             // comment: CString
             let comment = {
-                let comment = crate::util::read_c_string_to_vec(r)?;
+                let comment = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(comment)?
             };
 
@@ -344,7 +344,7 @@ impl LfgListPlayer {
 
         let flags_GROUP_LEADER = if flags.is_GROUP_LEADER() {
             // is_looking_for_more: Bool
-            let is_looking_for_more = crate::util::read_u8_le(r)? != 0;
+            let is_looking_for_more = crate::util::read_u8_le(&mut r)? != 0;
 
             Some(LfgListPlayer_LfgUpdateFlag_GroupLeader {
                 is_looking_for_more,
@@ -356,7 +356,7 @@ impl LfgListPlayer {
 
         let flags_GROUP_GUID = if flags.is_GROUP_GUID() {
             // group: Guid
-            let group = Guid::read(r)?;
+            let group = Guid::read(&mut r)?;
 
             Some(LfgListPlayer_LfgUpdateFlag_GroupGuid {
                 group,
@@ -368,7 +368,7 @@ impl LfgListPlayer {
 
         let flags_ROLES = if flags.is_ROLES() {
             // roles: u8
-            let roles = crate::util::read_u8_le(r)?;
+            let roles = crate::util::read_u8_le(&mut r)?;
 
             Some(LfgListPlayer_LfgUpdateFlag_Roles {
                 roles,
@@ -380,7 +380,7 @@ impl LfgListPlayer {
 
         let flags_AREA = if flags.is_AREA() {
             // area: Area
-            let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+            let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             Some(LfgListPlayer_LfgUpdateFlag_Area {
                 area,
@@ -392,7 +392,7 @@ impl LfgListPlayer {
 
         let flags_STATUS = if flags.is_STATUS() {
             // unknown1: u8
-            let unknown1 = crate::util::read_u8_le(r)?;
+            let unknown1 = crate::util::read_u8_le(&mut r)?;
 
             Some(LfgListPlayer_LfgUpdateFlag_Status {
                 unknown1,
@@ -403,10 +403,10 @@ impl LfgListPlayer {
         };
 
         // instance: Guid
-        let instance = Guid::read(r)?;
+        let instance = Guid::read(&mut r)?;
 
         // encounter_mask: u32
-        let encounter_mask = crate::util::read_u32_le(r)?;
+        let encounter_mask = crate::util::read_u32_le(&mut r)?;
 
         let flags = LfgListPlayer_LfgUpdateFlag {
             inner: flags.as_int(),

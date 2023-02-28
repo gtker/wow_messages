@@ -39,22 +39,22 @@ impl crate::Message for SMSG_LIST_INVENTORY {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=8201).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019F, size: body_size as u32 });
         }
 
         // vendor: Guid
-        let vendor = Guid::read(r)?;
+        let vendor = Guid::read(&mut r)?;
 
         // amount_of_items: u8
-        let amount_of_items = crate::util::read_u8_le(r)?;
+        let amount_of_items = crate::util::read_u8_le(&mut r)?;
 
         // items: ListInventoryItem[amount_of_items]
         let items = {
             let mut items = Vec::with_capacity(amount_of_items as usize);
             for i in 0..amount_of_items {
-                items.push(ListInventoryItem::read(r)?);
+                items.push(ListInventoryItem::read(&mut r)?);
             }
             items
         };

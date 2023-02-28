@@ -80,46 +80,46 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(39..=308).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0440, size: body_size as u32 });
         }
 
         // event_id: Guid
-        let event_id = Guid::read(r)?;
+        let event_id = Guid::read(&mut r)?;
 
         // title: CString
         let title = {
-            let title = crate::util::read_c_string_to_vec(r)?;
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(title)?
         };
 
         // event_time: DateTime
-        let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         // event_type: u32
-        let event_type = crate::util::read_u32_le(r)?;
+        let event_type = crate::util::read_u32_le(&mut r)?;
 
         // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(r)?;
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(r)?;
+        let invite_id = Guid::read(&mut r)?;
 
         // status: u8
-        let status = crate::util::read_u8_le(r)?;
+        let status = crate::util::read_u8_le(&mut r)?;
 
         // rank: u8
-        let rank = crate::util::read_u8_le(r)?;
+        let rank = crate::util::read_u8_le(&mut r)?;
 
         // event_creator: PackedGuid
-        let event_creator = Guid::read_packed(r)?;
+        let event_creator = Guid::read_packed(&mut r)?;
 
         // invite_sender: PackedGuid
-        let invite_sender = Guid::read_packed(r)?;
+        let invite_sender = Guid::read_packed(&mut r)?;
 
         Ok(Self {
             event_id,

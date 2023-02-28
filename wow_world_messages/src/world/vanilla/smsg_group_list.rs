@@ -71,31 +71,31 @@ impl crate::Message for SMSG_GROUP_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size as u32 });
         }
 
         // group_type: GroupType
-        let group_type: GroupType = crate::util::read_u8_le(r)?.try_into()?;
+        let group_type: GroupType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // flags: u8
-        let flags = crate::util::read_u8_le(r)?;
+        let flags = crate::util::read_u8_le(&mut r)?;
 
         // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(r)?;
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
 
         // members: GroupListMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
             for i in 0..amount_of_members {
-                members.push(GroupListMember::read(r)?);
+                members.push(GroupListMember::read(&mut r)?);
             }
             members
         };
 
         // leader: Guid
-        let leader = Guid::read(r)?;
+        let leader = Guid::read(&mut r)?;
 
         // optional group_not_empty
         let current_size = {
@@ -107,13 +107,13 @@ impl crate::Message for SMSG_GROUP_LIST {
         };
         let group_not_empty = if current_size < body_size as usize {
             // loot_setting: GroupLootSetting
-            let loot_setting: GroupLootSetting = crate::util::read_u8_le(r)?.try_into()?;
+            let loot_setting: GroupLootSetting = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // master_loot: Guid
-            let master_loot = Guid::read(r)?;
+            let master_loot = Guid::read(&mut r)?;
 
             // loot_threshold: ItemQuality
-            let loot_threshold: ItemQuality = crate::util::read_u8_le(r)?.try_into()?;
+            let loot_threshold: ItemQuality = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             Some(SMSG_GROUP_LIST_group_not_empty {
                 loot_setting,

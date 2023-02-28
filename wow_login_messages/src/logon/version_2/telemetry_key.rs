@@ -42,12 +42,12 @@ impl TelemetryKey {
 }
 
 impl TelemetryKey {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // unknown1: u16
-        let unknown1 = crate::util::read_u16_le(r)?;
+        let unknown1 = crate::util::read_u16_le(&mut r)?;
 
         // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(r)?;
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
 
         // unknown3: u8[4]
         let unknown3 = {
@@ -72,12 +72,12 @@ impl TelemetryKey {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // unknown1: u16
-        let unknown1 = crate::util::tokio_read_u16_le(r).await?;
+        let unknown1 = crate::util::tokio_read_u16_le(&mut r).await?;
 
         // unknown2: u32
-        let unknown2 = crate::util::tokio_read_u32_le(r).await?;
+        let unknown2 = crate::util::tokio_read_u32_le(&mut r).await?;
 
         // unknown3: u8[4]
         let unknown3 = {
@@ -102,12 +102,12 @@ impl TelemetryKey {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // unknown1: u16
-        let unknown1 = crate::util::astd_read_u16_le(r).await?;
+        let unknown1 = crate::util::astd_read_u16_le(&mut r).await?;
 
         // unknown2: u32
-        let unknown2 = crate::util::astd_read_u32_le(r).await?;
+        let unknown2 = crate::util::astd_read_u32_le(&mut r).await?;
 
         // unknown3: u8[4]
         let unknown3 = {

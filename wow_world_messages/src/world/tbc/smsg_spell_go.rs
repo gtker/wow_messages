@@ -90,59 +90,59 @@ impl crate::Message for SMSG_SPELL_GO {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(18..=5732).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0132, size: body_size as u32 });
         }
 
         // cast_item: PackedGuid
-        let cast_item = Guid::read_packed(r)?;
+        let cast_item = Guid::read_packed(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // flags: CastFlags
-        let flags = CastFlags::new(crate::util::read_u16_le(r)?);
+        let flags = CastFlags::new(crate::util::read_u16_le(&mut r)?);
 
         // timestamp: u32
-        let timestamp = crate::util::read_u32_le(r)?;
+        let timestamp = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_hits: u8
-        let amount_of_hits = crate::util::read_u8_le(r)?;
+        let amount_of_hits = crate::util::read_u8_le(&mut r)?;
 
         // hits: Guid[amount_of_hits]
         let hits = {
             let mut hits = Vec::with_capacity(amount_of_hits as usize);
             for i in 0..amount_of_hits {
-                hits.push(Guid::read(r)?);
+                hits.push(Guid::read(&mut r)?);
             }
             hits
         };
 
         // amount_of_misses: u8
-        let amount_of_misses = crate::util::read_u8_le(r)?;
+        let amount_of_misses = crate::util::read_u8_le(&mut r)?;
 
         // misses: SpellMiss[amount_of_misses]
         let misses = {
             let mut misses = Vec::with_capacity(amount_of_misses as usize);
             for i in 0..amount_of_misses {
-                misses.push(SpellMiss::read(r)?);
+                misses.push(SpellMiss::read(&mut r)?);
             }
             misses
         };
 
         // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(r)?;
+        let targets = SpellCastTargets::read(&mut r)?;
 
         let flags_AMMO = if flags.is_AMMO() {
             // ammo_display_id: u32
-            let ammo_display_id = crate::util::read_u32_le(r)?;
+            let ammo_display_id = crate::util::read_u32_le(&mut r)?;
 
             // ammo_inventory_type: u32
-            let ammo_inventory_type = crate::util::read_u32_le(r)?;
+            let ammo_inventory_type = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SPELL_GO_CastFlags_Ammo {
                 ammo_display_id,

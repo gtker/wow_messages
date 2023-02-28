@@ -36,17 +36,17 @@ impl crate::Message for CMSG_CHAR_RENAME {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C7, size: body_size as u32 });
         }
 
         // character: Guid
-        let character = Guid::read(r)?;
+        let character = Guid::read(&mut r)?;
 
         // new_name: CString
         let new_name = {
-            let new_name = crate::util::read_c_string_to_vec(r)?;
+            let new_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(new_name)?
         };
 

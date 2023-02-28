@@ -47,25 +47,25 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 24 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0199, size: body_size as u32 });
         }
 
         // quest_id: u32
-        let quest_id = crate::util::read_u32_le(r)?;
+        let quest_id = crate::util::read_u32_le(&mut r)?;
 
         // creature_id: u32
-        let creature_id = crate::util::read_u32_le(r)?;
+        let creature_id = crate::util::read_u32_le(&mut r)?;
 
         // kill_count: u32
-        let kill_count = crate::util::read_u32_le(r)?;
+        let kill_count = crate::util::read_u32_le(&mut r)?;
 
         // required_kill_count: u32
-        let required_kill_count = crate::util::read_u32_le(r)?;
+        let required_kill_count = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         Ok(Self {
             quest_id,

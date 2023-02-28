@@ -34,16 +34,16 @@ impl crate::Message for CMSG_TIME_SYNC_RESP {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0391, size: body_size as u32 });
         }
 
         // time_sync: u32
-        let time_sync = crate::util::read_u32_le(r)?;
+        let time_sync = crate::util::read_u32_le(&mut r)?;
 
         // client_ticks: u32
-        let client_ticks = crate::util::read_u32_le(r)?;
+        let client_ticks = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             time_sync,

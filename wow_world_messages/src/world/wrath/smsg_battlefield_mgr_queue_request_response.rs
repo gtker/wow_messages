@@ -45,25 +45,25 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 11 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E4, size: body_size as u32 });
         }
 
         // battle_id: u32
-        let battle_id = crate::util::read_u32_le(r)?;
+        let battle_id = crate::util::read_u32_le(&mut r)?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // queued: Bool
-        let queued = crate::util::read_u8_le(r)? != 0;
+        let queued = crate::util::read_u8_le(&mut r)? != 0;
 
         // full: Bool
-        let full = crate::util::read_u8_le(r)? != 0;
+        let full = crate::util::read_u8_le(&mut r)? != 0;
 
         // warmup: Bool
-        let warmup = crate::util::read_u8_le(r)? != 0;
+        let warmup = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             battle_id,

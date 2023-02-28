@@ -99,24 +99,24 @@ impl Friend {
 }
 
 impl Friend {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // status: FriendStatus
-        let status: FriendStatus = crate::util::read_u8_le(r)?.try_into()?;
+        let status: FriendStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let status_if = match status {
             FriendStatus::Offline => Friend_FriendStatus::Offline,
             FriendStatus::Online => {
                 // area: Area
-                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+                let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 // level: u32
-                let level = crate::util::read_u32_le(r)?;
+                let level = crate::util::read_u32_le(&mut r)?;
 
                 // class: Class
-                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let class: Class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 Friend_FriendStatus::Online {
                     area,
@@ -126,13 +126,13 @@ impl Friend {
             }
             FriendStatus::Afk => {
                 // area: Area
-                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+                let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 // level: u32
-                let level = crate::util::read_u32_le(r)?;
+                let level = crate::util::read_u32_le(&mut r)?;
 
                 // class: Class
-                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let class: Class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 Friend_FriendStatus::Afk {
                     area,
@@ -142,13 +142,13 @@ impl Friend {
             }
             FriendStatus::Unknown3 => {
                 // area: Area
-                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+                let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 // level: u32
-                let level = crate::util::read_u32_le(r)?;
+                let level = crate::util::read_u32_le(&mut r)?;
 
                 // class: Class
-                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let class: Class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 Friend_FriendStatus::Unknown3 {
                     area,
@@ -158,13 +158,13 @@ impl Friend {
             }
             FriendStatus::Dnd => {
                 // area: Area
-                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+                let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 // level: u32
-                let level = crate::util::read_u32_le(r)?;
+                let level = crate::util::read_u32_le(&mut r)?;
 
                 // class: Class
-                let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let class: Class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 Friend_FriendStatus::Dnd {
                     area,

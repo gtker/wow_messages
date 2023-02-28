@@ -114,13 +114,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
 
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // protocol_version: u8
-        let _protocol_version = crate::util::read_u8_le(r)?;
+        let _protocol_version = crate::util::read_u8_le(&mut r)?;
         // protocol_version is expected to always be 0 (0)
 
         // result: LoginResult
-        let result: LoginResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: LoginResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             LoginResult::Success => {
@@ -132,25 +132,25 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                 };
 
                 // generator_length: u8
-                let generator_length = crate::util::read_u8_le(r)?;
+                let generator_length = crate::util::read_u8_le(&mut r)?;
 
                 // generator: u8[generator_length]
                 let generator = {
                     let mut generator = Vec::with_capacity(generator_length as usize);
                     for i in 0..generator_length {
-                        generator.push(crate::util::read_u8_le(r)?);
+                        generator.push(crate::util::read_u8_le(&mut r)?);
                     }
                     generator
                 };
 
                 // large_safe_prime_length: u8
-                let large_safe_prime_length = crate::util::read_u8_le(r)?;
+                let large_safe_prime_length = crate::util::read_u8_le(&mut r)?;
 
                 // large_safe_prime: u8[large_safe_prime_length]
                 let large_safe_prime = {
                     let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
                     for i in 0..large_safe_prime_length {
-                        large_safe_prime.push(crate::util::read_u8_le(r)?);
+                        large_safe_prime.push(crate::util::read_u8_le(&mut r)?);
                     }
                     large_safe_prime
                 };
@@ -207,23 +207,22 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn tokio_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // protocol_version: u8
-            let _protocol_version = crate::util::tokio_read_u8_le(r).await?;
+            let _protocol_version = crate::util::tokio_read_u8_le(&mut r).await?;
             // protocol_version is expected to always be 0 (0)
 
             // result: LoginResult
-            let result: LoginResult = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+            let result: LoginResult = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
             let result_if = match result {
                 LoginResult::Success => {
@@ -235,25 +234,25 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     // generator_length: u8
-                    let generator_length = crate::util::tokio_read_u8_le(r).await?;
+                    let generator_length = crate::util::tokio_read_u8_le(&mut r).await?;
 
                     // generator: u8[generator_length]
                     let generator = {
                         let mut generator = Vec::with_capacity(generator_length as usize);
                         for i in 0..generator_length {
-                            generator.push(crate::util::tokio_read_u8_le(r).await?);
+                            generator.push(crate::util::tokio_read_u8_le(&mut r).await?);
                         }
                         generator
                     };
 
                     // large_safe_prime_length: u8
-                    let large_safe_prime_length = crate::util::tokio_read_u8_le(r).await?;
+                    let large_safe_prime_length = crate::util::tokio_read_u8_le(&mut r).await?;
 
                     // large_safe_prime: u8[large_safe_prime_length]
                     let large_safe_prime = {
                         let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
                         for i in 0..large_safe_prime_length {
-                            large_safe_prime.push(crate::util::tokio_read_u8_le(r).await?);
+                            large_safe_prime.push(crate::util::tokio_read_u8_le(&mut r).await?);
                         }
                         large_safe_prime
                     };
@@ -323,23 +322,22 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn astd_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // protocol_version: u8
-            let _protocol_version = crate::util::astd_read_u8_le(r).await?;
+            let _protocol_version = crate::util::astd_read_u8_le(&mut r).await?;
             // protocol_version is expected to always be 0 (0)
 
             // result: LoginResult
-            let result: LoginResult = crate::util::astd_read_u8_le(r).await?.try_into()?;
+            let result: LoginResult = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
             let result_if = match result {
                 LoginResult::Success => {
@@ -351,25 +349,25 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     // generator_length: u8
-                    let generator_length = crate::util::astd_read_u8_le(r).await?;
+                    let generator_length = crate::util::astd_read_u8_le(&mut r).await?;
 
                     // generator: u8[generator_length]
                     let generator = {
                         let mut generator = Vec::with_capacity(generator_length as usize);
                         for i in 0..generator_length {
-                            generator.push(crate::util::astd_read_u8_le(r).await?);
+                            generator.push(crate::util::astd_read_u8_le(&mut r).await?);
                         }
                         generator
                     };
 
                     // large_safe_prime_length: u8
-                    let large_safe_prime_length = crate::util::astd_read_u8_le(r).await?;
+                    let large_safe_prime_length = crate::util::astd_read_u8_le(&mut r).await?;
 
                     // large_safe_prime: u8[large_safe_prime_length]
                     let large_safe_prime = {
                         let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
                         for i in 0..large_safe_prime_length {
-                            large_safe_prime.push(crate::util::astd_read_u8_le(r).await?);
+                            large_safe_prime.push(crate::util::astd_read_u8_le(&mut r).await?);
                         }
                         large_safe_prime
                     };

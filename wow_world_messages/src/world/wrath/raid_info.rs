@@ -50,24 +50,24 @@ impl RaidInfo {
 }
 
 impl RaidInfo {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // difficulty: DungeonDifficulty
-        let difficulty: DungeonDifficulty = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let difficulty: DungeonDifficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // instance_id: u64
-        let instance_id = crate::util::read_u64_le(r)?;
+        let instance_id = crate::util::read_u64_le(&mut r)?;
 
         // expired: Bool
-        let expired = crate::util::read_u8_le(r)? != 0;
+        let expired = crate::util::read_u8_le(&mut r)? != 0;
 
         // extended: Bool
-        let extended = crate::util::read_u8_le(r)? != 0;
+        let extended = crate::util::read_u8_le(&mut r)? != 0;
 
         // time_until_reset: u32
-        let time_until_reset = crate::util::read_u32_le(r)?;
+        let time_until_reset = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             map,

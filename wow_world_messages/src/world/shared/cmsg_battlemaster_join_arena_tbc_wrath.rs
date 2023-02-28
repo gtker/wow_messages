@@ -41,22 +41,22 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN_ARENA {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 11 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0358, size: body_size as u32 });
         }
 
         // battlemaster: Guid
-        let battlemaster = Guid::read(r)?;
+        let battlemaster = Guid::read(&mut r)?;
 
         // arena_type: JoinArenaType
-        let arena_type: JoinArenaType = crate::util::read_u8_le(r)?.try_into()?;
+        let arena_type: JoinArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // as_group: Bool
-        let as_group = crate::util::read_u8_le(r)? != 0;
+        let as_group = crate::util::read_u8_le(&mut r)? != 0;
 
         // rated: Bool
-        let rated = crate::util::read_u8_le(r)? != 0;
+        let rated = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             battlemaster,

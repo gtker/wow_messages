@@ -40,13 +40,13 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=12).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003F, size: body_size as u32 });
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // optional has_transport
         let current_size = {
@@ -54,10 +54,10 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
         };
         let has_transport = if current_size < body_size as usize {
             // transport: u32
-            let transport = crate::util::read_u32_le(r)?;
+            let transport = crate::util::read_u32_le(&mut r)?;
 
             // transport_map: Map
-            let transport_map: Map = crate::util::read_u32_le(r)?.try_into()?;
+            let transport_map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             Some(SMSG_TRANSFER_PENDING_has_transport {
                 transport,

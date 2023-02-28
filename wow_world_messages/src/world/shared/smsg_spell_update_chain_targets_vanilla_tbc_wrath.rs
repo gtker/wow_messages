@@ -41,25 +41,25 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0330, size: body_size as u32 });
         }
 
         // caster: Guid
-        let caster = Guid::read(r)?;
+        let caster = Guid::read(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_targets: u32
-        let amount_of_targets = crate::util::read_u32_le(r)?;
+        let amount_of_targets = crate::util::read_u32_le(&mut r)?;
 
         // targets: Guid[amount_of_targets]
         let targets = {
             let mut targets = Vec::with_capacity(amount_of_targets as usize);
             for i in 0..amount_of_targets {
-                targets.push(Guid::read(r)?);
+                targets.push(Guid::read(&mut r)?);
             }
             targets
         };

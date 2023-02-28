@@ -110,21 +110,21 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=14).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0214, size: body_size as u32 });
         }
 
         // frame: EncounterFrame
-        let frame: EncounterFrame = crate::util::read_u32_le(r)?.try_into()?;
+        let frame: EncounterFrame = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let frame_if = match frame {
             EncounterFrame::Engage => {
                 // guid: PackedGuid
-                let guid = Guid::read_packed(r)?;
+                let guid = Guid::read_packed(&mut r)?;
 
                 // parameter1: u8
-                let parameter1 = crate::util::read_u8_le(r)?;
+                let parameter1 = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Engage {
                     guid,
@@ -133,10 +133,10 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
             }
             EncounterFrame::Disengage => {
                 // guid: PackedGuid
-                let guid = Guid::read_packed(r)?;
+                let guid = Guid::read_packed(&mut r)?;
 
                 // parameter1: u8
-                let parameter1 = crate::util::read_u8_le(r)?;
+                let parameter1 = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Disengage {
                     guid,
@@ -145,10 +145,10 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
             }
             EncounterFrame::UpdatePriority => {
                 // guid: PackedGuid
-                let guid = Guid::read_packed(r)?;
+                let guid = Guid::read_packed(&mut r)?;
 
                 // parameter1: u8
-                let parameter1 = crate::util::read_u8_le(r)?;
+                let parameter1 = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdatePriority {
                     guid,
@@ -157,7 +157,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
             }
             EncounterFrame::AddTimer => {
                 // parameter2: u8
-                let parameter2 = crate::util::read_u8_le(r)?;
+                let parameter2 = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::AddTimer {
                     parameter2,
@@ -165,7 +165,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
             }
             EncounterFrame::EnableObjective => {
                 // parameter2: u8
-                let parameter2 = crate::util::read_u8_le(r)?;
+                let parameter2 = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::EnableObjective {
                     parameter2,
@@ -173,10 +173,10 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
             }
             EncounterFrame::UpdateObjective => {
                 // parameter3: u8
-                let parameter3 = crate::util::read_u8_le(r)?;
+                let parameter3 = crate::util::read_u8_le(&mut r)?;
 
                 // parameter4: u8
-                let parameter4 = crate::util::read_u8_le(r)?;
+                let parameter4 = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdateObjective {
                     parameter3,
@@ -185,7 +185,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
             }
             EncounterFrame::DisableObjective => {
                 // parameter2: u8
-                let parameter2 = crate::util::read_u8_le(r)?;
+                let parameter2 = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::DisableObjective {
                     parameter2,

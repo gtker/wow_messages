@@ -60,34 +60,34 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(18..=70161).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0185, size: body_size as u32 });
         }
 
         // npc: Guid
-        let npc = Guid::read(r)?;
+        let npc = Guid::read(&mut r)?;
 
         // title: CString
         let title = {
-            let title = crate::util::read_c_string_to_vec(r)?;
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(title)?
         };
 
         // emote_delay: u32
-        let emote_delay = crate::util::read_u32_le(r)?;
+        let emote_delay = crate::util::read_u32_le(&mut r)?;
 
         // emote: u32
-        let emote = crate::util::read_u32_le(r)?;
+        let emote = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_entries: u8
-        let amount_of_entries = crate::util::read_u8_le(r)?;
+        let amount_of_entries = crate::util::read_u8_le(&mut r)?;
 
         // quest_items: QuestItem[amount_of_entries]
         let quest_items = {
             let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
             for i in 0..amount_of_entries {
-                quest_items.push(QuestItem::read(r)?);
+                quest_items.push(QuestItem::read(&mut r)?);
             }
             quest_items
         };

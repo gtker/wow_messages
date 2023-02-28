@@ -65,34 +65,34 @@ impl crate::Message for SMSG_LOOT_ROLL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 34 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A2, size: body_size as u32 });
         }
 
         // creature: Guid
-        let creature = Guid::read(r)?;
+        let creature = Guid::read(&mut r)?;
 
         // loot_slot: u32
-        let loot_slot = crate::util::read_u32_le(r)?;
+        let loot_slot = crate::util::read_u32_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_suffix: u32
-        let item_random_suffix = crate::util::read_u32_le(r)?;
+        let item_random_suffix = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // roll_number: u8
-        let roll_number = crate::util::read_u8_le(r)?;
+        let roll_number = crate::util::read_u8_le(&mut r)?;
 
         // vote: RollVote
-        let vote: RollVote = crate::util::read_u8_le(r)?.try_into()?;
+        let vote: RollVote = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             creature,

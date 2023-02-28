@@ -41,22 +41,22 @@ impl crate::Message for SMSG_SPELLDAMAGESHIELD {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 24 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024F, size: body_size as u32 });
         }
 
         // victim: Guid
-        let victim = Guid::read(r)?;
+        let victim = Guid::read(&mut r)?;
 
         // caster: Guid
-        let caster = Guid::read(r)?;
+        let caster = Guid::read(&mut r)?;
 
         // damage: u32
-        let damage = crate::util::read_u32_le(r)?;
+        let damage = crate::util::read_u32_le(&mut r)?;
 
         // school: SpellSchool
-        let school: SpellSchool = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let school: SpellSchool = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             victim,

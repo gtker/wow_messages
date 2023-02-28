@@ -42,25 +42,25 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0482, size: body_size as u32 });
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(r)?;
+        let unit = Guid::read_packed(&mut r)?;
 
         // new_victim: PackedGuid
-        let new_victim = Guid::read_packed(r)?;
+        let new_victim = Guid::read_packed(&mut r)?;
 
         // amount_of_units: u32
-        let amount_of_units = crate::util::read_u32_le(r)?;
+        let amount_of_units = crate::util::read_u32_le(&mut r)?;
 
         // units: ThreatUpdateUnit[amount_of_units]
         let units = {
             let mut units = Vec::with_capacity(amount_of_units as usize);
             for i in 0..amount_of_units {
-                units.push(ThreatUpdateUnit::read(r)?);
+                units.push(ThreatUpdateUnit::read(&mut r)?);
             }
             units
         };

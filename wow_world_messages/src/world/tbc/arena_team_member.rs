@@ -72,39 +72,39 @@ impl ArenaTeamMember {
 }
 
 impl ArenaTeamMember {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // online: Bool
-        let online = crate::util::read_u8_le(r)? != 0;
+        let online = crate::util::read_u8_le(&mut r)? != 0;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // level: u8
-        let level = crate::util::read_u8_le(r)?;
+        let level = crate::util::read_u8_le(&mut r)?;
 
         // class: Class
-        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
+        let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // games_played_this_week: u32
-        let games_played_this_week = crate::util::read_u32_le(r)?;
+        let games_played_this_week = crate::util::read_u32_le(&mut r)?;
 
         // wins_this_week: u32
-        let wins_this_week = crate::util::read_u32_le(r)?;
+        let wins_this_week = crate::util::read_u32_le(&mut r)?;
 
         // games_played_this_season: u32
-        let games_played_this_season = crate::util::read_u32_le(r)?;
+        let games_played_this_season = crate::util::read_u32_le(&mut r)?;
 
         // wins_this_season: u32
-        let wins_this_season = crate::util::read_u32_le(r)?;
+        let wins_this_season = crate::util::read_u32_le(&mut r)?;
 
         // personal_rating: u32
-        let personal_rating = crate::util::read_u32_le(r)?;
+        let personal_rating = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             guid,

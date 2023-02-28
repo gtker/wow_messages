@@ -55,13 +55,13 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=260).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0421, size: body_size as u32 });
         }
 
         // error: ReferAFriendError
-        let error: ReferAFriendError = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let error: ReferAFriendError = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         let error_if = match error {
             ReferAFriendError::None => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::None,
@@ -76,7 +76,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
             ReferAFriendError::NotInGroup => {
                 // target_name: CString
                 let target_name = {
-                    let target_name = crate::util::read_c_string_to_vec(r)?;
+                    let target_name = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(target_name)?
                 };
 

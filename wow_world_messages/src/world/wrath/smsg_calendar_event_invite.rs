@@ -71,34 +71,34 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(22..=33).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043A, size: body_size as u32 });
         }
 
         // invitee: PackedGuid
-        let invitee = Guid::read_packed(r)?;
+        let invitee = Guid::read_packed(&mut r)?;
 
         // event_id: Guid
-        let event_id = Guid::read(r)?;
+        let event_id = Guid::read(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(r)?;
+        let invite_id = Guid::read(&mut r)?;
 
         // level: u8
-        let level = crate::util::read_u8_le(r)?;
+        let level = crate::util::read_u8_le(&mut r)?;
 
         // invite_status: u8
-        let invite_status = crate::util::read_u8_le(r)?;
+        let invite_status = crate::util::read_u8_le(&mut r)?;
 
         // time: CalendarStatusTime
-        let time: CalendarStatusTime = crate::util::read_u8_le(r)?.try_into()?;
+        let time: CalendarStatusTime = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let time_if = match time {
             CalendarStatusTime::NotPresent => SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::NotPresent,
             CalendarStatusTime::Present => {
                 // status_time: DateTime
-                let status_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+                let status_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::Present {
                     status_time,
@@ -107,7 +107,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         };
 
         // is_sign_up: Bool
-        let is_sign_up = crate::util::read_u8_le(r)? != 0;
+        let is_sign_up = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             invitee,

@@ -35,16 +35,16 @@ impl crate::Message for SMSG_DESTROY_OBJECT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AA, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // target_died: Bool
-        let target_died = crate::util::read_u8_le(r)? != 0;
+        let target_died = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             guid,

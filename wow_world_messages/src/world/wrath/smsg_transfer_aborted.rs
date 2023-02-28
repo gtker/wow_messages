@@ -74,16 +74,16 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=6).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0040, size: body_size as u32 });
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // reason: TransferAbortReason
-        let reason: TransferAbortReason = crate::util::read_u8_le(r)?.try_into()?;
+        let reason: TransferAbortReason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let reason_if = match reason {
             TransferAbortReason::None => SMSG_TRANSFER_ABORTED_TransferAbortReason::None,
@@ -94,7 +94,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
             TransferAbortReason::ZoneInCombat => SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneInCombat,
             TransferAbortReason::InsufficientExpansionLevel => {
                 // difficulty: DungeonDifficulty
-                let difficulty: DungeonDifficulty = crate::util::read_u8_le(r)?.try_into()?;
+                let difficulty: DungeonDifficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_TRANSFER_ABORTED_TransferAbortReason::InsufficientExpansionLevel {
                     difficulty,
@@ -102,7 +102,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
             }
             TransferAbortReason::DifficultyNotAvailable => {
                 // difficulty: DungeonDifficulty
-                let difficulty: DungeonDifficulty = crate::util::read_u8_le(r)?.try_into()?;
+                let difficulty: DungeonDifficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_TRANSFER_ABORTED_TransferAbortReason::DifficultyNotAvailable {
                     difficulty,
@@ -110,7 +110,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
             }
             TransferAbortReason::UniqueMessage => {
                 // difficulty: DungeonDifficulty
-                let difficulty: DungeonDifficulty = crate::util::read_u8_le(r)?.try_into()?;
+                let difficulty: DungeonDifficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_TRANSFER_ABORTED_TransferAbortReason::UniqueMessage {
                     difficulty,

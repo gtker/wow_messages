@@ -27,12 +27,12 @@ impl CalendarMember {
 }
 
 impl CalendarMember {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // member: PackedGuid
-        let member = Guid::read_packed(r)?;
+        let member = Guid::read_packed(&mut r)?;
 
         // level: u8
-        let level = crate::util::read_u8_le(r)?;
+        let level = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             member,

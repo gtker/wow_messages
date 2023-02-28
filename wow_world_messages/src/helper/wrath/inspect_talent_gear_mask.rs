@@ -10,17 +10,17 @@ pub struct InspectTalentGearMask {
 impl InspectTalentGearMask {
     const MAX_CAPACITY: usize = 32;
 
-    pub fn read(r: &mut impl Read) -> Result<Self, io::Error> {
+    pub fn read(mut r: &mut impl Read) -> Result<Self, io::Error> {
         let mut auras = [
             None, None, None, None, None, None, None, None, None, None, None, None, None, None,
             None, None, None, None, None, None, None, None, None, None, None, None, None, None,
             None, None, None, None,
         ];
-        let bit_pattern: u32 = crate::util::read_u32_le(r)?;
+        let bit_pattern: u32 = crate::util::read_u32_le(&mut r)?;
 
         for (i, aura) in auras.iter_mut().enumerate() {
             if (bit_pattern & (1 << i)) != 0 {
-                *aura = Some(InspectTalentGear::read(r)?);
+                *aura = Some(InspectTalentGear::read(&mut r)?);
             }
         }
 

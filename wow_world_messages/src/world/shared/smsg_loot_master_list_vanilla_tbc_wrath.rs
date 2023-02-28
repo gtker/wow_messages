@@ -31,19 +31,19 @@ impl crate::Message for SMSG_LOOT_MASTER_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=2049).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A4, size: body_size as u32 });
         }
 
         // amount_of_players: u8
-        let amount_of_players = crate::util::read_u8_le(r)?;
+        let amount_of_players = crate::util::read_u8_le(&mut r)?;
 
         // guids: Guid[amount_of_players]
         let guids = {
             let mut guids = Vec::with_capacity(amount_of_players as usize);
             for i in 0..amount_of_players {
-                guids.push(Guid::read(r)?);
+                guids.push(Guid::read(&mut r)?);
             }
             guids
         };

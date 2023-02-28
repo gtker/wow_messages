@@ -82,13 +82,13 @@ impl crate::Message for SMSG_PET_SPELLS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=4154).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0179, size: body_size as u32 });
         }
 
         // pet: Guid
-        let pet = Guid::read(r)?;
+        let pet = Guid::read(&mut r)?;
 
         // optional action_bars
         let current_size = {
@@ -96,49 +96,49 @@ impl crate::Message for SMSG_PET_SPELLS {
         };
         let action_bars = if current_size < body_size as usize {
             // duration: u32
-            let duration = crate::util::read_u32_le(r)?;
+            let duration = crate::util::read_u32_le(&mut r)?;
 
             // react: PetReactState
-            let react: PetReactState = crate::util::read_u8_le(r)?.try_into()?;
+            let react: PetReactState = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // command: PetCommandState
-            let command: PetCommandState = crate::util::read_u8_le(r)?.try_into()?;
+            let command: PetCommandState = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // unknown: u8
-            let unknown = crate::util::read_u8_le(r)?;
+            let unknown = crate::util::read_u8_le(&mut r)?;
 
             // pet_enabled: PetEnabled
-            let pet_enabled: PetEnabled = crate::util::read_u8_le(r)?.try_into()?;
+            let pet_enabled: PetEnabled = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // action_bars: u32[10]
             let action_bars = {
                 let mut action_bars = [u32::default(); 10];
                 for i in action_bars.iter_mut() {
-                    *i = crate::util::read_u32_le(r)?;
+                    *i = crate::util::read_u32_le(&mut r)?;
                 }
                 action_bars
             };
 
             // amount_of_spells: u8
-            let amount_of_spells = crate::util::read_u8_le(r)?;
+            let amount_of_spells = crate::util::read_u8_le(&mut r)?;
 
             // spells: u32[amount_of_spells]
             let spells = {
                 let mut spells = Vec::with_capacity(amount_of_spells as usize);
                 for i in 0..amount_of_spells {
-                    spells.push(crate::util::read_u32_le(r)?);
+                    spells.push(crate::util::read_u32_le(&mut r)?);
                 }
                 spells
             };
 
             // amount_of_cooldowns: u8
-            let amount_of_cooldowns = crate::util::read_u8_le(r)?;
+            let amount_of_cooldowns = crate::util::read_u8_le(&mut r)?;
 
             // cooldowns: PetSpellCooldown[amount_of_cooldowns]
             let cooldowns = {
                 let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
                 for i in 0..amount_of_cooldowns {
-                    cooldowns.push(PetSpellCooldown::read(r)?);
+                    cooldowns.push(PetSpellCooldown::read(&mut r)?);
                 }
                 cooldowns
             };

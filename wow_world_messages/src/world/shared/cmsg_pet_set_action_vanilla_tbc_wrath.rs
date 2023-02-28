@@ -50,19 +50,19 @@ impl crate::Message for CMSG_PET_SET_ACTION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=24).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0174, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // position1: u32
-        let position1 = crate::util::read_u32_le(r)?;
+        let position1 = crate::util::read_u32_le(&mut r)?;
 
         // data1: u32
-        let data1 = crate::util::read_u32_le(r)?;
+        let data1 = crate::util::read_u32_le(&mut r)?;
 
         // optional extra
         let current_size = {
@@ -72,10 +72,10 @@ impl crate::Message for CMSG_PET_SET_ACTION {
         };
         let extra = if current_size < body_size as usize {
             // position2: u32
-            let position2 = crate::util::read_u32_le(r)?;
+            let position2 = crate::util::read_u32_le(&mut r)?;
 
             // data2: u32
-            let data2 = crate::util::read_u32_le(r)?;
+            let data2 = crate::util::read_u32_le(&mut r)?;
 
             Some(CMSG_PET_SET_ACTION_extra {
                 position2,

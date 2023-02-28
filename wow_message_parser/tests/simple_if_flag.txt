@@ -31,13 +31,13 @@ impl SimpleIfFlag {
 }
 
 impl SimpleIfFlag {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // flag: SimpleFlag
-        let flag = SimpleFlag::new(crate::util::read_u8_le(r)?);
+        let flag = SimpleFlag::new(crate::util::read_u8_le(&mut r)?);
 
         let flag_ZERO = if flag.is_ZERO() {
             // basic: u8
-            let basic = crate::util::read_u8_le(r)?;
+            let basic = crate::util::read_u8_le(&mut r)?;
 
             Some(SimpleIfFlag_SimpleFlag_Zero {
                 basic,

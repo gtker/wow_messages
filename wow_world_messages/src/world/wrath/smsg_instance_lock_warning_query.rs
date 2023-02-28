@@ -34,19 +34,19 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0147, size: body_size as u32 });
         }
 
         // time_in_milliseconds: u32
-        let time_in_milliseconds = crate::util::read_u32_le(r)?;
+        let time_in_milliseconds = crate::util::read_u32_le(&mut r)?;
 
         // encounter_mask: u32
-        let encounter_mask = crate::util::read_u32_le(r)?;
+        let encounter_mask = crate::util::read_u32_le(&mut r)?;
 
         // unknown: u8
-        let unknown = crate::util::read_u8_le(r)?;
+        let unknown = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             time_in_milliseconds,

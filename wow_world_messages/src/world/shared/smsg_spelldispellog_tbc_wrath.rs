@@ -54,31 +54,31 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(13..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027B, size: body_size as u32 });
         }
 
         // victim: PackedGuid
-        let victim = Guid::read_packed(r)?;
+        let victim = Guid::read_packed(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // dispell_spell: u32
-        let dispell_spell = crate::util::read_u32_le(r)?;
+        let dispell_spell = crate::util::read_u32_le(&mut r)?;
 
         // unknown: u8
-        let unknown = crate::util::read_u8_le(r)?;
+        let unknown = crate::util::read_u8_le(&mut r)?;
 
         // amount_of_spells: u32
-        let amount_of_spells = crate::util::read_u32_le(r)?;
+        let amount_of_spells = crate::util::read_u32_le(&mut r)?;
 
         // spells: DispelledSpell[amount_of_spells]
         let spells = {
             let mut spells = Vec::with_capacity(amount_of_spells as usize);
             for i in 0..amount_of_spells {
-                spells.push(DispelledSpell::read(r)?);
+                spells.push(DispelledSpell::read(&mut r)?);
             }
             spells
         };

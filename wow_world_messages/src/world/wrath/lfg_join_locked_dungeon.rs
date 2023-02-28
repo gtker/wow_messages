@@ -26,12 +26,12 @@ impl LfgJoinLockedDungeon {
 }
 
 impl LfgJoinLockedDungeon {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // dungeon_entry: u32
-        let dungeon_entry = crate::util::read_u32_le(r)?;
+        let dungeon_entry = crate::util::read_u32_le(&mut r)?;
 
         // reason: u32
-        let reason = crate::util::read_u32_le(r)?;
+        let reason = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             dungeon_entry,

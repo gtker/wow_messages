@@ -38,7 +38,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F6, size: body_size as u32 });
         }
@@ -48,13 +48,13 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
         let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
 
         // amount_of_objects: u32
-        let amount_of_objects = crate::util::read_u32_le(r)?;
+        let amount_of_objects = crate::util::read_u32_le(&mut r)?;
 
         // objects: Object[amount_of_objects]
         let objects = {
             let mut objects = Vec::with_capacity(amount_of_objects as usize);
             for i in 0..amount_of_objects {
-                objects.push(Object::read(r)?);
+                objects.push(Object::read(&mut r)?);
             }
             objects
         };

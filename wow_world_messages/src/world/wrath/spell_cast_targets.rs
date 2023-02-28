@@ -73,13 +73,13 @@ impl SpellCastTargets {
 }
 
 impl SpellCastTargets {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // target_flags: SpellCastTargetFlags
-        let target_flags = SpellCastTargetFlags::new(crate::util::read_u32_le(r)?);
+        let target_flags = SpellCastTargetFlags::new(crate::util::read_u32_le(&mut r)?);
 
         let target_flags_UNIT = if target_flags.is_UNIT() {
             // unit_target: PackedGuid
-            let unit_target = Guid::read_packed(r)?;
+            let unit_target = Guid::read_packed(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Unit {
                 unit_target,
@@ -91,7 +91,7 @@ impl SpellCastTargets {
 
         let target_flags_ITEM = if target_flags.is_ITEM() {
             // item_target: PackedGuid
-            let item_target = Guid::read_packed(r)?;
+            let item_target = Guid::read_packed(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Item {
                 item_target,
@@ -103,7 +103,7 @@ impl SpellCastTargets {
 
         let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
             // source: Vector3d
-            let source = Vector3d::read(r)?;
+            let source = Vector3d::read(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_SourceLocation {
                 source,
@@ -115,7 +115,7 @@ impl SpellCastTargets {
 
         let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
             // destination: Vector3d
-            let destination = Vector3d::read(r)?;
+            let destination = Vector3d::read(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_DestLocation {
                 destination,
@@ -128,7 +128,7 @@ impl SpellCastTargets {
         let target_flags_STRING = if target_flags.is_STRING() {
             // target_string: CString
             let target_string = {
-                let target_string = crate::util::read_c_string_to_vec(r)?;
+                let target_string = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(target_string)?
             };
 

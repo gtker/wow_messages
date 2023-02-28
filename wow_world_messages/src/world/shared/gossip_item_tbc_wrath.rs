@@ -63,28 +63,28 @@ impl GossipItem {
 }
 
 impl GossipItem {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // item_icon: u8
-        let item_icon = crate::util::read_u8_le(r)?;
+        let item_icon = crate::util::read_u8_le(&mut r)?;
 
         // coded: Bool
-        let coded = crate::util::read_u8_le(r)? != 0;
+        let coded = crate::util::read_u8_le(&mut r)? != 0;
 
         // money_required: Gold
-        let money_required = Gold::new(crate::util::read_u32_le(r)?);
+        let money_required = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // message: CString
         let message = {
-            let message = crate::util::read_c_string_to_vec(r)?;
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(message)?
         };
 
         // accept_text: CString
         let accept_text = {
-            let accept_text = crate::util::read_c_string_to_vec(r)?;
+            let accept_text = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(accept_text)?
         };
 

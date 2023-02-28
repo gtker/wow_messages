@@ -33,19 +33,19 @@ impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0332, size: body_size as u32 });
         }
 
         // amount_of_records: u32
-        let amount_of_records = crate::util::read_u32_le(r)?;
+        let amount_of_records = crate::util::read_u32_le(&mut r)?;
 
         // records: CString[amount_of_records]
         let records = {
             let mut records = Vec::with_capacity(amount_of_records as usize);
             for i in 0..amount_of_records {
-                let s = crate::util::read_c_string_to_vec(r)?;
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
                 records.push(String::from_utf8(s)?);
             }
             records

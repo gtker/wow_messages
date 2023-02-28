@@ -25,13 +25,13 @@ impl crate::Message for CMSG_STANDSTATECHANGE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0101, size: body_size as u32 });
         }
 
         // animation_state: UnitStandState
-        let animation_state: UnitStandState = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let animation_state: UnitStandState = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             animation_state,

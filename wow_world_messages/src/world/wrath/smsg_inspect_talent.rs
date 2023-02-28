@@ -64,46 +64,46 @@ impl crate::Message for SMSG_INSPECT_TALENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(13..=330164).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F4, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // unspent_talent_points: u32
-        let unspent_talent_points = crate::util::read_u32_le(r)?;
+        let unspent_talent_points = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_specs: u8
-        let amount_of_specs = crate::util::read_u8_le(r)?;
+        let amount_of_specs = crate::util::read_u8_le(&mut r)?;
 
         // active_spec: u8
-        let active_spec = crate::util::read_u8_le(r)?;
+        let active_spec = crate::util::read_u8_le(&mut r)?;
 
         // specs: InspectTalentSpec[amount_of_specs]
         let specs = {
             let mut specs = Vec::with_capacity(amount_of_specs as usize);
             for i in 0..amount_of_specs {
-                specs.push(InspectTalentSpec::read(r)?);
+                specs.push(InspectTalentSpec::read(&mut r)?);
             }
             specs
         };
 
         // amount_of_glyphs: u8
-        let amount_of_glyphs = crate::util::read_u8_le(r)?;
+        let amount_of_glyphs = crate::util::read_u8_le(&mut r)?;
 
         // glyphs: u16[amount_of_glyphs]
         let glyphs = {
             let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
             for i in 0..amount_of_glyphs {
-                glyphs.push(crate::util::read_u16_le(r)?);
+                glyphs.push(crate::util::read_u16_le(&mut r)?);
             }
             glyphs
         };
 
         // talent_gear_mask: InspectTalentGearMask
-        let talent_gear_mask = InspectTalentGearMask::read(r)?;
+        let talent_gear_mask = InspectTalentGearMask::read(&mut r)?;
 
         Ok(Self {
             player,

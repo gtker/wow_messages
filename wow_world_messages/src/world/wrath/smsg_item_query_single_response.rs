@@ -357,13 +357,13 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0058, size: body_size as u32 });
         }
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // optional found
         let current_size = {
@@ -371,250 +371,250 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         };
         let found = if current_size < body_size as usize {
             // class_and_sub_class: ItemClassAndSubClass
-            let class_and_sub_class: ItemClassAndSubClass = crate::util::read_u64_le(r)?.try_into()?;
+            let class_and_sub_class: ItemClassAndSubClass = crate::util::read_u64_le(&mut r)?.try_into()?;
 
             // sound_override_sub_class: u32
-            let sound_override_sub_class = crate::util::read_u32_le(r)?;
+            let sound_override_sub_class = crate::util::read_u32_le(&mut r)?;
 
             // name1: CString
             let name1 = {
-                let name1 = crate::util::read_c_string_to_vec(r)?;
+                let name1 = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(name1)?
             };
 
             // name2: CString
             let name2 = {
-                let name2 = crate::util::read_c_string_to_vec(r)?;
+                let name2 = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(name2)?
             };
 
             // name3: CString
             let name3 = {
-                let name3 = crate::util::read_c_string_to_vec(r)?;
+                let name3 = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(name3)?
             };
 
             // name4: CString
             let name4 = {
-                let name4 = crate::util::read_c_string_to_vec(r)?;
+                let name4 = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(name4)?
             };
 
             // display_id: u32
-            let display_id = crate::util::read_u32_le(r)?;
+            let display_id = crate::util::read_u32_le(&mut r)?;
 
             // quality: ItemQuality
-            let quality: ItemQuality = (crate::util::read_u32_le(r)? as u8).try_into()?;
+            let quality: ItemQuality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // flags: ItemFlag
-            let flags = ItemFlag::new(crate::util::read_u32_le(r)?);
+            let flags = ItemFlag::new(crate::util::read_u32_le(&mut r)?);
 
             // flags2: ItemFlag2
-            let flags2 = ItemFlag2::new(crate::util::read_u32_le(r)?);
+            let flags2 = ItemFlag2::new(crate::util::read_u32_le(&mut r)?);
 
             // buy_price: Gold
-            let buy_price = Gold::new(crate::util::read_u32_le(r)?);
+            let buy_price = Gold::new(crate::util::read_u32_le(&mut r)?);
 
             // sell_price: Gold
-            let sell_price = Gold::new(crate::util::read_u32_le(r)?);
+            let sell_price = Gold::new(crate::util::read_u32_le(&mut r)?);
 
             // inventory_type: InventoryType
-            let inventory_type: InventoryType = (crate::util::read_u32_le(r)? as u8).try_into()?;
+            let inventory_type: InventoryType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // allowed_class: AllowedClass
-            let allowed_class = AllowedClass::new(crate::util::read_u32_le(r)?);
+            let allowed_class = AllowedClass::new(crate::util::read_u32_le(&mut r)?);
 
             // allowed_race: AllowedRace
-            let allowed_race = AllowedRace::new(crate::util::read_u32_le(r)?);
+            let allowed_race = AllowedRace::new(crate::util::read_u32_le(&mut r)?);
 
             // item_level: u32
-            let item_level = crate::util::read_u32_le(r)?;
+            let item_level = crate::util::read_u32_le(&mut r)?;
 
             // required_level: u32
-            let required_level = crate::util::read_u32_le(r)?;
+            let required_level = crate::util::read_u32_le(&mut r)?;
 
             // required_skill: Skill
-            let required_skill: Skill = (crate::util::read_u32_le(r)? as u16).try_into()?;
+            let required_skill: Skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
             // required_skill_rank: u32
-            let required_skill_rank = crate::util::read_u32_le(r)?;
+            let required_skill_rank = crate::util::read_u32_le(&mut r)?;
 
             // required_spell: u32
-            let required_spell = crate::util::read_u32_le(r)?;
+            let required_spell = crate::util::read_u32_le(&mut r)?;
 
             // required_honor_rank: u32
-            let required_honor_rank = crate::util::read_u32_le(r)?;
+            let required_honor_rank = crate::util::read_u32_le(&mut r)?;
 
             // required_city_rank: u32
-            let required_city_rank = crate::util::read_u32_le(r)?;
+            let required_city_rank = crate::util::read_u32_le(&mut r)?;
 
             // required_faction: Faction
-            let required_faction: Faction = crate::util::read_u16_le(r)?.try_into()?;
+            let required_faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
             // required_faction_rank: u32
-            let required_faction_rank = crate::util::read_u32_le(r)?;
+            let required_faction_rank = crate::util::read_u32_le(&mut r)?;
 
             // max_count: u32
-            let max_count = crate::util::read_u32_le(r)?;
+            let max_count = crate::util::read_u32_le(&mut r)?;
 
             // stackable: u32
-            let stackable = crate::util::read_u32_le(r)?;
+            let stackable = crate::util::read_u32_le(&mut r)?;
 
             // container_slots: u32
-            let container_slots = crate::util::read_u32_le(r)?;
+            let container_slots = crate::util::read_u32_le(&mut r)?;
 
             // amount_of_stats: u32
-            let amount_of_stats = crate::util::read_u32_le(r)?;
+            let amount_of_stats = crate::util::read_u32_le(&mut r)?;
 
             // stats: ItemStat[amount_of_stats]
             let stats = {
                 let mut stats = Vec::with_capacity(amount_of_stats as usize);
                 for i in 0..amount_of_stats {
-                    stats.push(ItemStat::read(r)?);
+                    stats.push(ItemStat::read(&mut r)?);
                 }
                 stats
             };
 
             // scaling_stats_entry: u32
-            let scaling_stats_entry = crate::util::read_u32_le(r)?;
+            let scaling_stats_entry = crate::util::read_u32_le(&mut r)?;
 
             // scaling_stats_flag: u32
-            let scaling_stats_flag = crate::util::read_u32_le(r)?;
+            let scaling_stats_flag = crate::util::read_u32_le(&mut r)?;
 
             // damages: ItemDamageType[2]
             let damages = {
                 let mut damages = [ItemDamageType::default(); 2];
                 for i in damages.iter_mut() {
-                    *i = ItemDamageType::read(r)?;
+                    *i = ItemDamageType::read(&mut r)?;
                 }
                 damages
             };
 
             // armor: i32
-            let armor = crate::util::read_i32_le(r)?;
+            let armor = crate::util::read_i32_le(&mut r)?;
 
             // holy_resistance: i32
-            let holy_resistance = crate::util::read_i32_le(r)?;
+            let holy_resistance = crate::util::read_i32_le(&mut r)?;
 
             // fire_resistance: i32
-            let fire_resistance = crate::util::read_i32_le(r)?;
+            let fire_resistance = crate::util::read_i32_le(&mut r)?;
 
             // nature_resistance: i32
-            let nature_resistance = crate::util::read_i32_le(r)?;
+            let nature_resistance = crate::util::read_i32_le(&mut r)?;
 
             // frost_resistance: i32
-            let frost_resistance = crate::util::read_i32_le(r)?;
+            let frost_resistance = crate::util::read_i32_le(&mut r)?;
 
             // shadow_resistance: i32
-            let shadow_resistance = crate::util::read_i32_le(r)?;
+            let shadow_resistance = crate::util::read_i32_le(&mut r)?;
 
             // arcane_resistance: i32
-            let arcane_resistance = crate::util::read_i32_le(r)?;
+            let arcane_resistance = crate::util::read_i32_le(&mut r)?;
 
             // delay: u32
-            let delay = crate::util::read_u32_le(r)?;
+            let delay = crate::util::read_u32_le(&mut r)?;
 
             // ammo_type: u32
-            let ammo_type = crate::util::read_u32_le(r)?;
+            let ammo_type = crate::util::read_u32_le(&mut r)?;
 
             // ranged_range_modification: f32
-            let ranged_range_modification = crate::util::read_f32_le(r)?;
+            let ranged_range_modification = crate::util::read_f32_le(&mut r)?;
 
             // spells: ItemSpells[5]
             let spells = {
                 let mut spells = [ItemSpells::default(); 5];
                 for i in spells.iter_mut() {
-                    *i = ItemSpells::read(r)?;
+                    *i = ItemSpells::read(&mut r)?;
                 }
                 spells
             };
 
             // bonding: Bonding
-            let bonding: Bonding = (crate::util::read_u32_le(r)? as u8).try_into()?;
+            let bonding: Bonding = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // description: CString
             let description = {
-                let description = crate::util::read_c_string_to_vec(r)?;
+                let description = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(description)?
             };
 
             // page_text: u32
-            let page_text = crate::util::read_u32_le(r)?;
+            let page_text = crate::util::read_u32_le(&mut r)?;
 
             // language: Language
-            let language: Language = (crate::util::read_u32_le(r)? as u8).try_into()?;
+            let language: Language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // page_text_material: PageTextMaterial
-            let page_text_material: PageTextMaterial = (crate::util::read_u32_le(r)? as u8).try_into()?;
+            let page_text_material: PageTextMaterial = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // start_quest: u32
-            let start_quest = crate::util::read_u32_le(r)?;
+            let start_quest = crate::util::read_u32_le(&mut r)?;
 
             // lock_id: u32
-            let lock_id = crate::util::read_u32_le(r)?;
+            let lock_id = crate::util::read_u32_le(&mut r)?;
 
             // material: u32
-            let material = crate::util::read_u32_le(r)?;
+            let material = crate::util::read_u32_le(&mut r)?;
 
             // sheathe_type: SheatheType
-            let sheathe_type: SheatheType = (crate::util::read_u32_le(r)? as u8).try_into()?;
+            let sheathe_type: SheatheType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // random_property: u32
-            let random_property = crate::util::read_u32_le(r)?;
+            let random_property = crate::util::read_u32_le(&mut r)?;
 
             // random_suffix: u32
-            let random_suffix = crate::util::read_u32_le(r)?;
+            let random_suffix = crate::util::read_u32_le(&mut r)?;
 
             // block: u32
-            let block = crate::util::read_u32_le(r)?;
+            let block = crate::util::read_u32_le(&mut r)?;
 
             // item_set: ItemSet
-            let item_set: ItemSet = (crate::util::read_u32_le(r)? as u16).try_into()?;
+            let item_set: ItemSet = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
             // max_durability: u32
-            let max_durability = crate::util::read_u32_le(r)?;
+            let max_durability = crate::util::read_u32_le(&mut r)?;
 
             // area: Area
-            let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+            let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             // map: Map
-            let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+            let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             // bag_family: BagFamily
-            let bag_family = BagFamily::new(crate::util::read_u32_le(r)?);
+            let bag_family = BagFamily::new(crate::util::read_u32_le(&mut r)?);
 
             // totem_category: u32
-            let totem_category = crate::util::read_u32_le(r)?;
+            let totem_category = crate::util::read_u32_le(&mut r)?;
 
             // sockets: ItemSocket[3]
             let sockets = {
                 let mut sockets = [ItemSocket::default(); 3];
                 for i in sockets.iter_mut() {
-                    *i = ItemSocket::read(r)?;
+                    *i = ItemSocket::read(&mut r)?;
                 }
                 sockets
             };
 
             // socket_bonus: u32
-            let socket_bonus = crate::util::read_u32_le(r)?;
+            let socket_bonus = crate::util::read_u32_le(&mut r)?;
 
             // gem_properties: u32
-            let gem_properties = crate::util::read_u32_le(r)?;
+            let gem_properties = crate::util::read_u32_le(&mut r)?;
 
             // required_disenchant_skill: u32
-            let required_disenchant_skill = crate::util::read_u32_le(r)?;
+            let required_disenchant_skill = crate::util::read_u32_le(&mut r)?;
 
             // armor_damage_modifier: f32
-            let armor_damage_modifier = crate::util::read_f32_le(r)?;
+            let armor_damage_modifier = crate::util::read_f32_le(&mut r)?;
 
             // duration_in_seconds: u32
-            let duration_in_seconds = crate::util::read_u32_le(r)?;
+            let duration_in_seconds = crate::util::read_u32_le(&mut r)?;
 
             // item_limit_category: u32
-            let item_limit_category = crate::util::read_u32_le(r)?;
+            let item_limit_category = crate::util::read_u32_le(&mut r)?;
 
             // holiday_id: u32
-            let holiday_id = crate::util::read_u32_le(r)?;
+            let holiday_id = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
                 class_and_sub_class,

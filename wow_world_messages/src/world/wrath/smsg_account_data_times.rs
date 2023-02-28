@@ -50,19 +50,19 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=65544).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0209, size: body_size as u32 });
         }
 
         // unix_time: u32
-        let unix_time = crate::util::read_u32_le(r)?;
+        let unix_time = crate::util::read_u32_le(&mut r)?;
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // mask: CacheMask
-        let mask: CacheMask = crate::util::read_u32_le(r)?.try_into()?;
+        let mask: CacheMask = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // data: u32[-]
         let data = {
@@ -73,7 +73,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
             };
             let mut data = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                data.push(crate::util::read_u32_le(r)?);
+                data.push(crate::util::read_u32_le(&mut r)?);
                 current_size += 1;
             }
             data

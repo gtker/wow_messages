@@ -38,19 +38,19 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023C, size: body_size as u32 });
         }
 
         // battleground_type: BattlegroundType
-        let battleground_type: BattlegroundType = crate::util::read_u32_le(r)?.try_into()?;
+        let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // location: BattlefieldListLocation
-        let location: BattlefieldListLocation = crate::util::read_u8_le(r)?.try_into()?;
+        let location: BattlefieldListLocation = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // can_gain_exp: Bool
-        let can_gain_exp = crate::util::read_u8_le(r)? != 0;
+        let can_gain_exp = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             battleground_type,

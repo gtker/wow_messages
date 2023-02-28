@@ -30,16 +30,16 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(3..=10).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0159, size: body_size as u32 });
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // allow_movement: Bool
-        let allow_movement = crate::util::read_u8_le(r)? != 0;
+        let allow_movement = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             guid,

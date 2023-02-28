@@ -38,23 +38,23 @@ impl crate::Message for SMSG_RESURRECT_REQUEST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=8013).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x015B, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // name: SizedCString
         let name = {
-            let name = crate::util::read_u32_le(r)?;
-            let name = crate::util::read_sized_c_string_to_vec(r, name)?;
+            let name = crate::util::read_u32_le(&mut r)?;
+            let name = crate::util::read_sized_c_string_to_vec(&mut r, name)?;
             String::from_utf8(name)?
         };
 
         // player: Bool
-        let player = crate::util::read_u8_le(r)? != 0;
+        let player = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             guid,

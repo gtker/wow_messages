@@ -27,7 +27,7 @@ impl crate::Message for SMSG_ADDON_INFO {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size > 65535 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EF, size: body_size as u32 });
         }
@@ -39,7 +39,7 @@ impl crate::Message for SMSG_ADDON_INFO {
             };
             let mut addons = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                addons.push(Addon::read(r)?);
+                addons.push(Addon::read(&mut r)?);
                 current_size += 1;
             }
             addons

@@ -45,22 +45,22 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 17 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EE, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // instance_id: u32
-        let instance_id = crate::util::read_u32_le(r)?;
+        let instance_id = crate::util::read_u32_le(&mut r)?;
 
         // join_as_group: Bool
-        let join_as_group = crate::util::read_u8_le(r)? != 0;
+        let join_as_group = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             guid,

@@ -41,25 +41,25 @@ impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0264, size: body_size as u32 });
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(r)?;
+        let auctioneer = Guid::read(&mut r)?;
 
         // start_from_page: u32
-        let start_from_page = crate::util::read_u32_le(r)?;
+        let start_from_page = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_outbid_items: u32
-        let amount_of_outbid_items = crate::util::read_u32_le(r)?;
+        let amount_of_outbid_items = crate::util::read_u32_le(&mut r)?;
 
         // outbid_item_ids: u32[amount_of_outbid_items]
         let outbid_item_ids = {
             let mut outbid_item_ids = Vec::with_capacity(amount_of_outbid_items as usize);
             for i in 0..amount_of_outbid_items {
-                outbid_item_ids.push(crate::util::read_u32_le(r)?);
+                outbid_item_ids.push(crate::util::read_u32_le(&mut r)?);
             }
             outbid_item_ids
         };

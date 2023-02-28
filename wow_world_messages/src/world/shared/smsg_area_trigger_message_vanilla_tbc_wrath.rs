@@ -27,15 +27,15 @@ impl crate::Message for SMSG_AREA_TRIGGER_MESSAGE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=8004).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02B8, size: body_size as u32 });
         }
 
         // message: SizedCString
         let message = {
-            let message = crate::util::read_u32_le(r)?;
-            let message = crate::util::read_sized_c_string_to_vec(r, message)?;
+            let message = crate::util::read_u32_le(&mut r)?;
+            let message = crate::util::read_sized_c_string_to_vec(&mut r, message)?;
             String::from_utf8(message)?
         };
 

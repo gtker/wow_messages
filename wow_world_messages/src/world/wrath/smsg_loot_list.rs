@@ -35,19 +35,19 @@ impl crate::Message for SMSG_LOOT_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=26).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F9, size: body_size as u32 });
         }
 
         // creature: Guid
-        let creature = Guid::read(r)?;
+        let creature = Guid::read(&mut r)?;
 
         // master_looter: PackedGuid
-        let master_looter = Guid::read_packed(r)?;
+        let master_looter = Guid::read_packed(&mut r)?;
 
         // group_looter: PackedGuid
-        let group_looter = Guid::read_packed(r)?;
+        let group_looter = Guid::read_packed(&mut r)?;
 
         Ok(Self {
             creature,

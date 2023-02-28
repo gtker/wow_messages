@@ -28,12 +28,12 @@ impl RaidTargetUpdate {
 }
 
 impl RaidTargetUpdate {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // index: RaidTargetIndex
-        let index: RaidTargetIndex = crate::util::read_u8_le(r)?.try_into()?;
+        let index: RaidTargetIndex = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         Ok(Self {
             index,

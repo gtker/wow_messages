@@ -27,12 +27,12 @@ impl LfgData {
 }
 
 impl LfgData {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // entry: u16
-        let entry = crate::util::read_u16_le(r)?;
+        let entry = crate::util::read_u16_le(&mut r)?;
 
         // lfg_type: LfgType
-        let lfg_type: LfgType = (crate::util::read_u16_le(r)? as u8).try_into()?;
+        let lfg_type: LfgType = (crate::util::read_u16_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             entry,

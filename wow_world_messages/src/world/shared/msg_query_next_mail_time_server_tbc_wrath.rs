@@ -36,22 +36,22 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0284, size: body_size as u32 });
         }
 
         // float: u32
-        let float = crate::util::read_u32_le(r)?;
+        let float = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_mails: u32
-        let amount_of_mails = crate::util::read_u32_le(r)?;
+        let amount_of_mails = crate::util::read_u32_le(&mut r)?;
 
         // mails: ReceivedMail[amount_of_mails]
         let mails = {
             let mut mails = Vec::with_capacity(amount_of_mails as usize);
             for i in 0..amount_of_mails {
-                mails.push(ReceivedMail::read(r)?);
+                mails.push(ReceivedMail::read(&mut r)?);
             }
             mails
         };

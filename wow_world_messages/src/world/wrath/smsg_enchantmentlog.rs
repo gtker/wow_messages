@@ -51,25 +51,25 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(13..=27).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D7, size: body_size as u32 });
         }
 
         // target: PackedGuid
-        let target = Guid::read_packed(r)?;
+        let target = Guid::read_packed(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // show_affiliation: Bool
-        let show_affiliation = crate::util::read_u8_le(r)? != 0;
+        let show_affiliation = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             target,

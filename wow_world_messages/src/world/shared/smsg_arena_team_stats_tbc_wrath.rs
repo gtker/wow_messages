@@ -54,31 +54,31 @@ impl crate::Message for SMSG_ARENA_TEAM_STATS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 28 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035B, size: body_size as u32 });
         }
 
         // arena_team: u32
-        let arena_team = crate::util::read_u32_le(r)?;
+        let arena_team = crate::util::read_u32_le(&mut r)?;
 
         // rating: u32
-        let rating = crate::util::read_u32_le(r)?;
+        let rating = crate::util::read_u32_le(&mut r)?;
 
         // games_played_this_week: u32
-        let games_played_this_week = crate::util::read_u32_le(r)?;
+        let games_played_this_week = crate::util::read_u32_le(&mut r)?;
 
         // games_won_this_week: u32
-        let games_won_this_week = crate::util::read_u32_le(r)?;
+        let games_won_this_week = crate::util::read_u32_le(&mut r)?;
 
         // games_played_this_season: u32
-        let games_played_this_season = crate::util::read_u32_le(r)?;
+        let games_played_this_season = crate::util::read_u32_le(&mut r)?;
 
         // games_won_this_season: u32
-        let games_won_this_season = crate::util::read_u32_le(r)?;
+        let games_won_this_season = crate::util::read_u32_le(&mut r)?;
 
         // ranking: u32
-        let ranking = crate::util::read_u32_le(r)?;
+        let ranking = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             arena_team,

@@ -151,21 +151,21 @@ impl Mail {
 }
 
 impl Mail {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // size: u16
-        let _size = crate::util::read_u16_le(r)?;
+        let _size = crate::util::read_u16_le(&mut r)?;
         // size is expected to always be self.size (0)
 
         // message_id: u32
-        let message_id = crate::util::read_u32_le(r)?;
+        let message_id = crate::util::read_u32_le(&mut r)?;
 
         // message_type: MailType
-        let message_type: MailType = crate::util::read_u8_le(r)?.try_into()?;
+        let message_type: MailType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let message_type_if = match message_type {
             MailType::Normal => {
                 // sender: Guid
-                let sender = Guid::read(r)?;
+                let sender = Guid::read(&mut r)?;
 
                 Mail_MailType::Normal {
                     sender,
@@ -173,7 +173,7 @@ impl Mail {
             }
             MailType::Auction => {
                 // auction_id: u32
-                let auction_id = crate::util::read_u32_le(r)?;
+                let auction_id = crate::util::read_u32_le(&mut r)?;
 
                 Mail_MailType::Auction {
                     auction_id,
@@ -181,7 +181,7 @@ impl Mail {
             }
             MailType::Creature => {
                 // sender_id: u32
-                let sender_id = crate::util::read_u32_le(r)?;
+                let sender_id = crate::util::read_u32_le(&mut r)?;
 
                 Mail_MailType::Creature {
                     sender_id,
@@ -189,7 +189,7 @@ impl Mail {
             }
             MailType::Gameobject => {
                 // sender_id: u32
-                let sender_id = crate::util::read_u32_le(r)?;
+                let sender_id = crate::util::read_u32_le(&mut r)?;
 
                 Mail_MailType::Gameobject {
                     sender_id,
@@ -197,7 +197,7 @@ impl Mail {
             }
             MailType::Item => {
                 // item: u32
-                let item = crate::util::read_u32_le(r)?;
+                let item = crate::util::read_u32_le(&mut r)?;
 
                 Mail_MailType::Item {
                     item,
@@ -206,46 +206,46 @@ impl Mail {
         };
 
         // cash_on_delivery: Gold
-        let cash_on_delivery = Gold::new(crate::util::read_u32_le(r)?);
+        let cash_on_delivery = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // unknown: u32
-        let unknown = crate::util::read_u32_le(r)?;
+        let unknown = crate::util::read_u32_le(&mut r)?;
 
         // stationery: u32
-        let stationery = crate::util::read_u32_le(r)?;
+        let stationery = crate::util::read_u32_le(&mut r)?;
 
         // money: Gold
-        let money = Gold::new(crate::util::read_u32_le(r)?);
+        let money = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         // expiration_time: f32
-        let expiration_time = crate::util::read_f32_le(r)?;
+        let expiration_time = crate::util::read_f32_le(&mut r)?;
 
         // mail_template_id: u32
-        let mail_template_id = crate::util::read_u32_le(r)?;
+        let mail_template_id = crate::util::read_u32_le(&mut r)?;
 
         // subject: CString
         let subject = {
-            let subject = crate::util::read_c_string_to_vec(r)?;
+            let subject = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(subject)?
         };
 
         // message: CString
         let message = {
-            let message = crate::util::read_c_string_to_vec(r)?;
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(message)?
         };
 
         // amount_of_items: u8
-        let amount_of_items = crate::util::read_u8_le(r)?;
+        let amount_of_items = crate::util::read_u8_le(&mut r)?;
 
         // items: MailListItem[amount_of_items]
         let items = {
             let mut items = Vec::with_capacity(amount_of_items as usize);
             for i in 0..amount_of_items {
-                items.push(MailListItem::read(r)?);
+                items.push(MailListItem::read(&mut r)?);
             }
             items
         };

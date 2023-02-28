@@ -30,16 +30,16 @@ impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x028F, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // set_assistant: Bool
-        let set_assistant = crate::util::read_u8_le(r)? != 0;
+        let set_assistant = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             guid,

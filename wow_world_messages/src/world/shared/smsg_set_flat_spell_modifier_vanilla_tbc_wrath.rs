@@ -34,19 +34,19 @@ impl crate::Message for SMSG_SET_FLAT_SPELL_MODIFIER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0266, size: body_size as u32 });
         }
 
         // eff: u8
-        let eff = crate::util::read_u8_le(r)?;
+        let eff = crate::util::read_u8_le(&mut r)?;
 
         // op: u8
-        let op = crate::util::read_u8_le(r)?;
+        let op = crate::util::read_u8_le(&mut r)?;
 
         // value: u32
-        let value = crate::util::read_u32_le(r)?;
+        let value = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             eff,

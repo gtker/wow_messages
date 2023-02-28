@@ -37,19 +37,19 @@ impl crate::Message for CMSG_LOOT_METHOD {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007A, size: body_size as u32 });
         }
 
         // loot_setting: GroupLootSetting
-        let loot_setting: GroupLootSetting = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let loot_setting: GroupLootSetting = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // loot_master: Guid
-        let loot_master = Guid::read(r)?;
+        let loot_master = Guid::read(&mut r)?;
 
         // loot_threshold: ItemQuality
-        let loot_threshold: ItemQuality = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let loot_threshold: ItemQuality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             loot_setting,

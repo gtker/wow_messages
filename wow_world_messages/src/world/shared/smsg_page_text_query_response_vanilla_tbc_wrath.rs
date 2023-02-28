@@ -38,22 +38,22 @@ impl crate::Message for SMSG_PAGE_TEXT_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005B, size: body_size as u32 });
         }
 
         // page_id: u32
-        let page_id = crate::util::read_u32_le(r)?;
+        let page_id = crate::util::read_u32_le(&mut r)?;
 
         // text: CString
         let text = {
-            let text = crate::util::read_c_string_to_vec(r)?;
+            let text = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(text)?
         };
 
         // next_page_id: u32
-        let next_page_id = crate::util::read_u32_le(r)?;
+        let next_page_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             page_id,

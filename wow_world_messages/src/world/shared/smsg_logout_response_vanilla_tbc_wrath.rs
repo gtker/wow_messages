@@ -35,16 +35,16 @@ impl crate::Message for SMSG_LOGOUT_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x004C, size: body_size as u32 });
         }
 
         // result: LogoutResult
-        let result: LogoutResult = crate::util::read_u32_le(r)?.try_into()?;
+        let result: LogoutResult = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // speed: LogoutSpeed
-        let speed: LogoutSpeed = crate::util::read_u8_le(r)?.try_into()?;
+        let speed: LogoutSpeed = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             result,

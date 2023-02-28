@@ -37,19 +37,19 @@ impl crate::Message for SMSG_ATTACKSTOP {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0144, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // enemy: PackedGuid
-        let enemy = Guid::read_packed(r)?;
+        let enemy = Guid::read_packed(&mut r)?;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             player,

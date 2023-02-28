@@ -165,41 +165,41 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(26..=3176).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size as u32 });
         }
 
         // hit_info: HitInfo
-        let hit_info = HitInfo::new(crate::util::read_u32_le(r)?);
+        let hit_info = HitInfo::new(crate::util::read_u32_le(&mut r)?);
 
         // attacker: PackedGuid
-        let attacker = Guid::read_packed(r)?;
+        let attacker = Guid::read_packed(&mut r)?;
 
         // target: PackedGuid
-        let target = Guid::read_packed(r)?;
+        let target = Guid::read_packed(&mut r)?;
 
         // total_damage: u32
-        let total_damage = crate::util::read_u32_le(r)?;
+        let total_damage = crate::util::read_u32_le(&mut r)?;
 
         // overkill: u32
-        let overkill = crate::util::read_u32_le(r)?;
+        let overkill = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_damages: u8
-        let amount_of_damages = crate::util::read_u8_le(r)?;
+        let amount_of_damages = crate::util::read_u8_le(&mut r)?;
 
         // damage_infos: DamageInfo[amount_of_damages]
         let damage_infos = {
             let mut damage_infos = Vec::with_capacity(amount_of_damages as usize);
             for i in 0..amount_of_damages {
-                damage_infos.push(DamageInfo::read(r)?);
+                damage_infos.push(DamageInfo::read(&mut r)?);
             }
             damage_infos
         };
 
         let hit_info_ALL_ABSORB = if hit_info.is_ALL_ABSORB() {
             // absorb: u32
-            let absorb = crate::util::read_u32_le(r)?;
+            let absorb = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
                 absorb,
@@ -211,7 +211,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         let hit_info_ALL_RESIST = if hit_info.is_ALL_RESIST() {
             // resist: u32
-            let resist = crate::util::read_u32_le(r)?;
+            let resist = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
                 resist,
@@ -222,17 +222,17 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         };
 
         // victim_state: VictimState
-        let victim_state = VictimState::new(crate::util::read_u8_le(r)?);
+        let victim_state = VictimState::new(crate::util::read_u8_le(&mut r)?);
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(r)?;
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
 
         let hit_info_BLOCK = if hit_info.is_BLOCK() {
             // blocked_amount: u32
-            let blocked_amount = crate::util::read_u32_le(r)?;
+            let blocked_amount = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
                 blocked_amount,
@@ -244,7 +244,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         let hit_info_UNK19 = if hit_info.is_UNK19() {
             // unknown3: u32
-            let unknown3 = crate::util::read_u32_le(r)?;
+            let unknown3 = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19 {
                 unknown3,
@@ -256,40 +256,40 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         let hit_info_UNK1 = if hit_info.is_UNK1() {
             // unknown4: u32
-            let unknown4 = crate::util::read_u32_le(r)?;
+            let unknown4 = crate::util::read_u32_le(&mut r)?;
 
             // unknown5: f32
-            let unknown5 = crate::util::read_f32_le(r)?;
+            let unknown5 = crate::util::read_f32_le(&mut r)?;
 
             // unknown6: f32
-            let unknown6 = crate::util::read_f32_le(r)?;
+            let unknown6 = crate::util::read_f32_le(&mut r)?;
 
             // unknown7: f32
-            let unknown7 = crate::util::read_f32_le(r)?;
+            let unknown7 = crate::util::read_f32_le(&mut r)?;
 
             // unknown8: f32
-            let unknown8 = crate::util::read_f32_le(r)?;
+            let unknown8 = crate::util::read_f32_le(&mut r)?;
 
             // unknown9: f32
-            let unknown9 = crate::util::read_f32_le(r)?;
+            let unknown9 = crate::util::read_f32_le(&mut r)?;
 
             // unknown10: f32
-            let unknown10 = crate::util::read_f32_le(r)?;
+            let unknown10 = crate::util::read_f32_le(&mut r)?;
 
             // unknown11: f32
-            let unknown11 = crate::util::read_f32_le(r)?;
+            let unknown11 = crate::util::read_f32_le(&mut r)?;
 
             // unknown12: f32
-            let unknown12 = crate::util::read_f32_le(r)?;
+            let unknown12 = crate::util::read_f32_le(&mut r)?;
 
             // unknown13: f32
-            let unknown13 = crate::util::read_f32_le(r)?;
+            let unknown13 = crate::util::read_f32_le(&mut r)?;
 
             // unknown14: f32
-            let unknown14 = crate::util::read_f32_le(r)?;
+            let unknown14 = crate::util::read_f32_le(&mut r)?;
 
             // unknown15: u32
-            let unknown15 = crate::util::read_u32_le(r)?;
+            let unknown15 = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
                 unknown10,

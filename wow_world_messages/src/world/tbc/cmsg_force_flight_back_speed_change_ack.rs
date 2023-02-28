@@ -41,22 +41,22 @@ impl crate::Message for CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(45..=98).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0384, size: body_size as u32 });
         }
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // counter: u32
-        let counter = crate::util::read_u32_le(r)?;
+        let counter = crate::util::read_u32_le(&mut r)?;
 
         // info: MovementInfo
-        let info = MovementInfo::read(r)?;
+        let info = MovementInfo::read(&mut r)?;
 
         // new_speed: f32
-        let new_speed = crate::util::read_f32_le(r)?;
+        let new_speed = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             player,

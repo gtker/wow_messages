@@ -35,19 +35,19 @@ impl crate::Message for SMSG_PET_UPDATE_COMBO_POINTS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=19).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0492, size: body_size as u32 });
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(r)?;
+        let unit = Guid::read_packed(&mut r)?;
 
         // target: PackedGuid
-        let target = Guid::read_packed(r)?;
+        let target = Guid::read_packed(&mut r)?;
 
         // combo_points: u8
-        let combo_points = crate::util::read_u8_le(r)?;
+        let combo_points = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             unit,

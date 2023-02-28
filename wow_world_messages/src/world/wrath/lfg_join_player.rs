@@ -34,18 +34,18 @@ impl LfgJoinPlayer {
 }
 
 impl LfgJoinPlayer {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // amount_of_locked_dungeons: u32
-        let amount_of_locked_dungeons = crate::util::read_u32_le(r)?;
+        let amount_of_locked_dungeons = crate::util::read_u32_le(&mut r)?;
 
         // locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons]
         let locked_dungeons = {
             let mut locked_dungeons = Vec::with_capacity(amount_of_locked_dungeons as usize);
             for i in 0..amount_of_locked_dungeons {
-                locked_dungeons.push(LfgJoinLockedDungeon::read(r)?);
+                locked_dungeons.push(LfgJoinLockedDungeon::read(&mut r)?);
             }
             locked_dungeons
         };

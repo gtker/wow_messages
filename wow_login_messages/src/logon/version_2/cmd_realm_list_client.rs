@@ -40,9 +40,9 @@ impl CMD_REALM_LIST_Client {
 impl ClientMessage for CMD_REALM_LIST_Client {
     const OPCODE: u8 = 0x10;
 
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // padding: u32
-        let _padding = crate::util::read_u32_le(r)?;
+        let _padding = crate::util::read_u32_le(&mut r)?;
         // padding is expected to always be 0 (0)
 
         Ok(Self {
@@ -57,19 +57,18 @@ impl ClientMessage for CMD_REALM_LIST_Client {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn tokio_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // padding: u32
-            let _padding = crate::util::tokio_read_u32_le(r).await?;
+            let _padding = crate::util::tokio_read_u32_le(&mut r).await?;
             // padding is expected to always be 0 (0)
 
             Ok(Self {
@@ -97,19 +96,18 @@ impl ClientMessage for CMD_REALM_LIST_Client {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn astd_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // padding: u32
-            let _padding = crate::util::astd_read_u32_le(r).await?;
+            let _padding = crate::util::astd_read_u32_le(&mut r).await?;
             // padding is expected to always be 0 (0)
 
             Ok(Self {

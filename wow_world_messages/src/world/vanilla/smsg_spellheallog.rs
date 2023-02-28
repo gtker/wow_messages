@@ -45,25 +45,25 @@ impl crate::Message for SMSG_SPELLHEALLOG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(13..=27).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0150, size: body_size as u32 });
         }
 
         // victim: PackedGuid
-        let victim = Guid::read_packed(r)?;
+        let victim = Guid::read_packed(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // damage: u32
-        let damage = crate::util::read_u32_le(r)?;
+        let damage = crate::util::read_u32_le(&mut r)?;
 
         // critical: Bool
-        let critical = crate::util::read_u8_le(r)? != 0;
+        let critical = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             victim,

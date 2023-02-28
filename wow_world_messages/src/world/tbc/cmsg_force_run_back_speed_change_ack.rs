@@ -41,22 +41,22 @@ impl crate::Message for CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(45..=98).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E5, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(r)?;
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
 
         // info: MovementInfo
-        let info = MovementInfo::read(r)?;
+        let info = MovementInfo::read(&mut r)?;
 
         // new_speed: f32
-        let new_speed = crate::util::read_f32_le(r)?;
+        let new_speed = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             guid,

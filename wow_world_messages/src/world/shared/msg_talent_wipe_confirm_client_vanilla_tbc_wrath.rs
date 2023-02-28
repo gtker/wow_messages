@@ -25,13 +25,13 @@ impl crate::Message for MSG_TALENT_WIPE_CONFIRM_Client {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AA, size: body_size as u32 });
         }
 
         // wiping_npc: Guid
-        let wiping_npc = Guid::read(r)?;
+        let wiping_npc = Guid::read(&mut r)?;
 
         Ok(Self {
             wiping_npc,

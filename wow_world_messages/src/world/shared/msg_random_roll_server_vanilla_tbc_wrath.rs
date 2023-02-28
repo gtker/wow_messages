@@ -40,22 +40,22 @@ impl crate::Message for MSG_RANDOM_ROLL_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FB, size: body_size as u32 });
         }
 
         // minimum: u32
-        let minimum = crate::util::read_u32_le(r)?;
+        let minimum = crate::util::read_u32_le(&mut r)?;
 
         // maximum: u32
-        let maximum = crate::util::read_u32_le(r)?;
+        let maximum = crate::util::read_u32_le(&mut r)?;
 
         // actual_roll: u32
-        let actual_roll = crate::util::read_u32_le(r)?;
+        let actual_roll = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         Ok(Self {
             minimum,

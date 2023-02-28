@@ -34,19 +34,19 @@ impl crate::Message for SMSG_OVERRIDE_LIGHT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0412, size: body_size as u32 });
         }
 
         // default_id: u32
-        let default_id = crate::util::read_u32_le(r)?;
+        let default_id = crate::util::read_u32_le(&mut r)?;
 
         // id_override: u32
-        let id_override = crate::util::read_u32_le(r)?;
+        let id_override = crate::util::read_u32_le(&mut r)?;
 
         // fade_in_time_in_seconds: u32
-        let fade_in_time_in_seconds = crate::util::read_u32_le(r)?;
+        let fade_in_time_in_seconds = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             default_id,

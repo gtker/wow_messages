@@ -71,21 +71,21 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=1551).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0160, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // loot_method: LootMethod
-        let loot_method: LootMethod = crate::util::read_u8_le(r)?.try_into()?;
+        let loot_method: LootMethod = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let loot_method_if = match loot_method {
             LootMethod::ErrorX => {
                 // loot_error: LootMethodError
-                let loot_error: LootMethodError = crate::util::read_u8_le(r)?.try_into()?;
+                let loot_error: LootMethodError = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
                     loot_error,
@@ -102,16 +102,16 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         };
 
         // gold: Gold
-        let gold = Gold::new(crate::util::read_u32_le(r)?);
+        let gold = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // amount_of_items: u8
-        let amount_of_items = crate::util::read_u8_le(r)?;
+        let amount_of_items = crate::util::read_u8_le(&mut r)?;
 
         // items: LootItem[amount_of_items]
         let items = {
             let mut items = Vec::with_capacity(amount_of_items as usize);
             for i in 0..amount_of_items {
-                items.push(LootItem::read(r)?);
+                items.push(LootItem::read(&mut r)?);
             }
             items
         };

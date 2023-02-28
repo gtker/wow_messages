@@ -42,25 +42,25 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024C, size: body_size as u32 });
         }
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_effects: u32
-        let amount_of_effects = crate::util::read_u32_le(r)?;
+        let amount_of_effects = crate::util::read_u32_le(&mut r)?;
 
         // logs: SpellLog[amount_of_effects]
         let logs = {
             let mut logs = Vec::with_capacity(amount_of_effects as usize);
             for i in 0..amount_of_effects {
-                logs.push(SpellLog::read(r)?);
+                logs.push(SpellLog::read(&mut r)?);
             }
             logs
         };

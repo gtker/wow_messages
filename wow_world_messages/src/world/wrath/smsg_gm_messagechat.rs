@@ -1059,7 +1059,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(31..=16038).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03B3, size: body_size as u32 });
         }
@@ -1077,617 +1077,617 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
         let mut chat_type_if_achievement_id = Default::default();
 
         // chat_type: ChatType
-        let chat_type: ChatType = crate::util::read_u8_le(r)?.try_into()?;
+        let chat_type: ChatType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // language: Language
-        let language: Language = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let language: Language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // sender: Guid
-        let sender = Guid::read(r)?;
+        let sender = Guid::read(&mut r)?;
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         match chat_type {
             ChatType::System => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Say => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Party => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Raid => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Guild => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Officer => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Yell => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Whisper => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::WhisperForeign => {
                 // sender2: SizedCString
                 chat_type_if_sender2 = {
-                    let sender2 = crate::util::read_u32_le(r)?;
-                    let sender2 = crate::util::read_sized_c_string_to_vec(r, sender2)?;
+                    let sender2 = crate::util::read_u32_le(&mut r)?;
+                    let sender2 = crate::util::read_sized_c_string_to_vec(&mut r, sender2)?;
                     String::from_utf8(sender2)?
                 };
 
                 // target2: Guid
-                chat_type_if_target2 = Guid::read(r)?;
+                chat_type_if_target2 = Guid::read(&mut r)?;
 
             }
             ChatType::WhisperInform => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Emote => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::TextEmote => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::MonsterSay => {
                 // sender1: SizedCString
                 chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
                     String::from_utf8(sender1)?
                 };
 
                 // target1: Guid
-                chat_type_if_target1 = Guid::read(r)?;
+                chat_type_if_target1 = Guid::read(&mut r)?;
 
             }
             ChatType::MonsterParty => {
                 // sender1: SizedCString
                 chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
                     String::from_utf8(sender1)?
                 };
 
                 // target1: Guid
-                chat_type_if_target1 = Guid::read(r)?;
+                chat_type_if_target1 = Guid::read(&mut r)?;
 
             }
             ChatType::MonsterYell => {
                 // sender1: SizedCString
                 chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
                     String::from_utf8(sender1)?
                 };
 
                 // target1: Guid
-                chat_type_if_target1 = Guid::read(r)?;
+                chat_type_if_target1 = Guid::read(&mut r)?;
 
             }
             ChatType::MonsterWhisper => {
                 // sender1: SizedCString
                 chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
                     String::from_utf8(sender1)?
                 };
 
                 // target1: Guid
-                chat_type_if_target1 = Guid::read(r)?;
+                chat_type_if_target1 = Guid::read(&mut r)?;
 
             }
             ChatType::MonsterEmote => {
                 // sender1: SizedCString
                 chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
                     String::from_utf8(sender1)?
                 };
 
                 // target1: Guid
-                chat_type_if_target1 = Guid::read(r)?;
+                chat_type_if_target1 = Guid::read(&mut r)?;
 
             }
             ChatType::Channel => {
                 // channel_name: CString
                 chat_type_if_channel_name = {
-                    let channel_name = crate::util::read_c_string_to_vec(r)?;
+                    let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(channel_name)?
                 };
 
                 // target5: Guid
-                chat_type_if_target5 = Guid::read(r)?;
+                chat_type_if_target5 = Guid::read(&mut r)?;
 
             }
             ChatType::ChannelJoin => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::ChannelLeave => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::ChannelList => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::ChannelNotice => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::ChannelNoticeUser => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Afk => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Dnd => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Ignored => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Skill => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Loot => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Money => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Opening => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Tradeskills => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::PetInfo => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::CombatMiscInfo => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::CombatXpGain => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::CombatHonorGain => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::CombatFactionChange => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::BgSystemNeutral => {
                 // target3: Guid
-                chat_type_if_target3 = Guid::read(r)?;
+                chat_type_if_target3 = Guid::read(&mut r)?;
 
             }
             ChatType::BgSystemAlliance => {
                 // target3: Guid
-                chat_type_if_target3 = Guid::read(r)?;
+                chat_type_if_target3 = Guid::read(&mut r)?;
 
             }
             ChatType::BgSystemHorde => {
                 // target3: Guid
-                chat_type_if_target3 = Guid::read(r)?;
+                chat_type_if_target3 = Guid::read(&mut r)?;
 
             }
             ChatType::RaidLeader => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::RaidWarning => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::RaidBossEmote => {
                 // sender1: SizedCString
                 chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
                     String::from_utf8(sender1)?
                 };
 
                 // target1: Guid
-                chat_type_if_target1 = Guid::read(r)?;
+                chat_type_if_target1 = Guid::read(&mut r)?;
 
             }
             ChatType::RaidBossWhisper => {
                 // sender1: SizedCString
                 chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
                     String::from_utf8(sender1)?
                 };
 
                 // target1: Guid
-                chat_type_if_target1 = Guid::read(r)?;
+                chat_type_if_target1 = Guid::read(&mut r)?;
 
             }
             ChatType::Filtered => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Battleground => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::BattlegroundLeader => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Restricted => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::Battlenet => {
                 // sender1: SizedCString
                 chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(r, sender1)?;
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
                     String::from_utf8(sender1)?
                 };
 
                 // target1: Guid
-                chat_type_if_target1 = Guid::read(r)?;
+                chat_type_if_target1 = Guid::read(&mut r)?;
 
             }
             ChatType::Achievement => {
                 // target4: Guid
-                chat_type_if_target4 = Guid::read(r)?;
+                chat_type_if_target4 = Guid::read(&mut r)?;
 
             }
             ChatType::GuildAchievement => {
                 // target4: Guid
-                chat_type_if_target4 = Guid::read(r)?;
+                chat_type_if_target4 = Guid::read(&mut r)?;
 
             }
             ChatType::ArenaPoints => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
             ChatType::PartyLeader => {
                 // sender_name: SizedCString
                 chat_type_if_sender_name = {
-                    let sender_name = crate::util::read_u32_le(r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(r, sender_name)?;
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
                     String::from_utf8(sender_name)?
                 };
 
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(r)?;
+                chat_type_if_target6 = Guid::read(&mut r)?;
 
             }
         };
 
         // message: SizedCString
         let message = {
-            let message = crate::util::read_u32_le(r)?;
-            let message = crate::util::read_sized_c_string_to_vec(r, message)?;
+            let message = crate::util::read_u32_le(&mut r)?;
+            let message = crate::util::read_sized_c_string_to_vec(&mut r, message)?;
             String::from_utf8(message)?
         };
 
         // chat_tag: PlayerChatTag
-        let chat_tag: PlayerChatTag = crate::util::read_u8_le(r)?.try_into()?;
+        let chat_tag: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         match chat_type {
             ChatType::System => {
@@ -1788,12 +1788,12 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
             }
             ChatType::Achievement => {
                 // achievement_id: u32
-                chat_type_if_achievement_id = crate::util::read_u32_le(r)?;
+                chat_type_if_achievement_id = crate::util::read_u32_le(&mut r)?;
 
             }
             ChatType::GuildAchievement => {
                 // achievement_id: u32
-                chat_type_if_achievement_id = crate::util::read_u32_le(r)?;
+                chat_type_if_achievement_id = crate::util::read_u32_le(&mut r)?;
 
             }
             ChatType::ArenaPoints => {

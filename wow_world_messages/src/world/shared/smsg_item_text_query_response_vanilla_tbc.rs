@@ -35,17 +35,17 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=260).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0244, size: body_size as u32 });
         }
 
         // item_text_id: u32
-        let item_text_id = crate::util::read_u32_le(r)?;
+        let item_text_id = crate::util::read_u32_le(&mut r)?;
 
         // text: CString
         let text = {
-            let text = crate::util::read_c_string_to_vec(r)?;
+            let text = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(text)?
         };
 

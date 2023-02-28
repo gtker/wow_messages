@@ -122,67 +122,67 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(64..=574).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C7, size: body_size as u32 });
         }
 
         // petition_id: u32
-        let petition_id = crate::util::read_u32_le(r)?;
+        let petition_id = crate::util::read_u32_le(&mut r)?;
 
         // charter_owner: Guid
-        let charter_owner = Guid::read(r)?;
+        let charter_owner = Guid::read(&mut r)?;
 
         // guild_name: CString
         let guild_name = {
-            let guild_name = crate::util::read_c_string_to_vec(r)?;
+            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(guild_name)?
         };
 
         // body_text: CString
         let body_text = {
-            let body_text = crate::util::read_c_string_to_vec(r)?;
+            let body_text = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(body_text)?
         };
 
         // minimum_signatures: u32
-        let minimum_signatures = crate::util::read_u32_le(r)?;
+        let minimum_signatures = crate::util::read_u32_le(&mut r)?;
 
         // maximum_signatures: u32
-        let maximum_signatures = crate::util::read_u32_le(r)?;
+        let maximum_signatures = crate::util::read_u32_le(&mut r)?;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(r)?;
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
 
         // unknown3: u32
-        let unknown3 = crate::util::read_u32_le(r)?;
+        let unknown3 = crate::util::read_u32_le(&mut r)?;
 
         // unknown4: u32
-        let unknown4 = crate::util::read_u32_le(r)?;
+        let unknown4 = crate::util::read_u32_le(&mut r)?;
 
         // unknown5: u32
-        let unknown5 = crate::util::read_u32_le(r)?;
+        let unknown5 = crate::util::read_u32_le(&mut r)?;
 
         // unknown6: u16
-        let unknown6 = crate::util::read_u16_le(r)?;
+        let unknown6 = crate::util::read_u16_le(&mut r)?;
 
         // unknown7: u32
-        let unknown7 = crate::util::read_u32_le(r)?;
+        let unknown7 = crate::util::read_u32_le(&mut r)?;
 
         // unknown8: u32
-        let unknown8 = crate::util::read_u32_le(r)?;
+        let unknown8 = crate::util::read_u32_le(&mut r)?;
 
         // unknown9: u32
-        let unknown9 = crate::util::read_u32_le(r)?;
+        let unknown9 = crate::util::read_u32_le(&mut r)?;
 
         // unknown10: u32
-        let unknown10 = crate::util::read_u32_le(r)?;
+        let unknown10 = crate::util::read_u32_le(&mut r)?;
 
         // charter_type: CharterType
-        let charter_type: CharterType = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let charter_type: CharterType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             petition_id,

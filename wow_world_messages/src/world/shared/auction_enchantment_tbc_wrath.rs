@@ -31,15 +31,15 @@ impl AuctionEnchantment {
 }
 
 impl AuctionEnchantment {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // enchant_id: u32
-        let enchant_id = crate::util::read_u32_le(r)?;
+        let enchant_id = crate::util::read_u32_le(&mut r)?;
 
         // enchant_duration: u32
-        let enchant_duration = crate::util::read_u32_le(r)?;
+        let enchant_duration = crate::util::read_u32_le(&mut r)?;
 
         // enchant_charges: u32
-        let enchant_charges = crate::util::read_u32_le(r)?;
+        let enchant_charges = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             enchant_id,

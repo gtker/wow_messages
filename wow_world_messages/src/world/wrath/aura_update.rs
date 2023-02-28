@@ -65,25 +65,25 @@ impl AuraUpdate {
 }
 
 impl AuraUpdate {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // visual_slot: u8
-        let visual_slot = crate::util::read_u8_le(r)?;
+        let visual_slot = crate::util::read_u8_le(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // flags: AuraFlag
-        let flags = AuraFlag::new(crate::util::read_u8_le(r)?);
+        let flags = AuraFlag::new(crate::util::read_u8_le(&mut r)?);
 
         // level: u8
-        let level = crate::util::read_u8_le(r)?;
+        let level = crate::util::read_u8_le(&mut r)?;
 
         // aura_stack_count: u8
-        let aura_stack_count = crate::util::read_u8_le(r)?;
+        let aura_stack_count = crate::util::read_u8_le(&mut r)?;
 
         let flags_NOT_CASTER = if flags.is_NOT_CASTER() {
             // caster: PackedGuid
-            let caster = Guid::read_packed(r)?;
+            let caster = Guid::read_packed(&mut r)?;
 
             Some(AuraUpdate_AuraFlag_NotCaster {
                 caster,
@@ -95,10 +95,10 @@ impl AuraUpdate {
 
         let flags_DURATION = if flags.is_DURATION() {
             // duration: u32
-            let duration = crate::util::read_u32_le(r)?;
+            let duration = crate::util::read_u32_le(&mut r)?;
 
             // time_left: u32
-            let time_left = crate::util::read_u32_le(r)?;
+            let time_left = crate::util::read_u32_le(&mut r)?;
 
             Some(AuraUpdate_AuraFlag_Duration {
                 duration,

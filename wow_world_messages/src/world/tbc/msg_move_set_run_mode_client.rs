@@ -25,13 +25,13 @@ impl crate::Message for MSG_MOVE_SET_RUN_MODE_Client {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(29..=82).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00C2, size: body_size as u32 });
         }
 
         // info: MovementInfo
-        let info = MovementInfo::read(r)?;
+        let info = MovementInfo::read(&mut r)?;
 
         Ok(Self {
             info,

@@ -41,22 +41,22 @@ impl crate::Message for SMSG_SPELL_FAILURE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 14 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0133, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // extra_casts: u8
-        let extra_casts = crate::util::read_u8_le(r)?;
+        let extra_casts = crate::util::read_u8_le(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // result: SpellCastResult
-        let result: SpellCastResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: SpellCastResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

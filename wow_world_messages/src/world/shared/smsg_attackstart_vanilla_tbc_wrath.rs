@@ -30,16 +30,16 @@ impl crate::Message for SMSG_ATTACKSTART {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0143, size: body_size as u32 });
         }
 
         // attacker: Guid
-        let attacker = Guid::read(r)?;
+        let attacker = Guid::read(&mut r)?;
 
         // victim: Guid
-        let victim = Guid::read(r)?;
+        let victim = Guid::read(&mut r)?;
 
         Ok(Self {
             attacker,

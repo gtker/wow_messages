@@ -37,20 +37,20 @@ impl crate::Message for SMSG_ARENA_TEAM_INVITE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=512).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0350, size: body_size as u32 });
         }
 
         // player_name: CString
         let player_name = {
-            let player_name = crate::util::read_c_string_to_vec(r)?;
+            let player_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(player_name)?
         };
 
         // team_name: CString
         let team_name = {
-            let team_name = crate::util::read_c_string_to_vec(r)?;
+            let team_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(team_name)?
         };
 

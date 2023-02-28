@@ -45,25 +45,25 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0124, size: body_size as u32 });
         }
 
         // refer_a_friend_bonus: f32
-        let refer_a_friend_bonus = crate::util::read_f32_le(r)?;
+        let refer_a_friend_bonus = crate::util::read_f32_le(&mut r)?;
 
         // any_rank_increased: Bool
-        let any_rank_increased = crate::util::read_u8_le(r)? != 0;
+        let any_rank_increased = crate::util::read_u8_le(&mut r)? != 0;
 
         // amount_of_faction_standings: u32
-        let amount_of_faction_standings = crate::util::read_u32_le(r)?;
+        let amount_of_faction_standings = crate::util::read_u32_le(&mut r)?;
 
         // faction_standings: FactionStanding[amount_of_faction_standings]
         let faction_standings = {
             let mut faction_standings = Vec::with_capacity(amount_of_faction_standings as usize);
             for i in 0..amount_of_faction_standings {
-                faction_standings.push(FactionStanding::read(r)?);
+                faction_standings.push(FactionStanding::read(&mut r)?);
             }
             faction_standings
         };

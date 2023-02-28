@@ -33,19 +33,19 @@ impl crate::Message for CMSG_GROUP_CHANGE_SUB_GROUP {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=257).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027E, size: body_size as u32 });
         }
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // group_number: u8
-        let group_number = crate::util::read_u8_le(r)?;
+        let group_number = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             name,

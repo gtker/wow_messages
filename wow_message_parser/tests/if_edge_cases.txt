@@ -97,14 +97,14 @@ impl IfEdgeCases {
 }
 
 impl IfEdgeCases {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // t: TEnum
-        let t: TEnum = crate::util::read_u8_le(r)?.try_into()?;
+        let t: TEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let t_if = match t {
             TEnum::Zero => {
                 // basic1: u8
-                let basic1 = crate::util::read_u8_le(r)?;
+                let basic1 = crate::util::read_u8_le(&mut r)?;
 
                 IfEdgeCases_TEnum::Zero {
                     basic1,
@@ -112,7 +112,7 @@ impl IfEdgeCases {
             }
             TEnum::One => {
                 // basic1: u8
-                let basic1 = crate::util::read_u8_le(r)?;
+                let basic1 = crate::util::read_u8_le(&mut r)?;
 
                 IfEdgeCases_TEnum::One {
                     basic1,
@@ -120,7 +120,7 @@ impl IfEdgeCases {
             }
             TEnum::Two => {
                 // basic1: u8
-                let basic1 = crate::util::read_u8_le(r)?;
+                let basic1 = crate::util::read_u8_le(&mut r)?;
 
                 IfEdgeCases_TEnum::Two {
                     basic1,
@@ -128,7 +128,7 @@ impl IfEdgeCases {
             }
             TEnum::Three => {
                 // basic3: u8
-                let basic3 = crate::util::read_u8_le(r)?;
+                let basic3 = crate::util::read_u8_le(&mut r)?;
 
                 IfEdgeCases_TEnum::Three {
                     basic3,
@@ -136,7 +136,7 @@ impl IfEdgeCases {
             }
             TEnum::Four => {
                 // basic3: u8
-                let basic3 = crate::util::read_u8_le(r)?;
+                let basic3 = crate::util::read_u8_le(&mut r)?;
 
                 IfEdgeCases_TEnum::Four {
                     basic3,
@@ -144,7 +144,7 @@ impl IfEdgeCases {
             }
             TEnum::Five => {
                 // basic5: u8
-                let basic5 = crate::util::read_u8_le(r)?;
+                let basic5 = crate::util::read_u8_le(&mut r)?;
 
                 IfEdgeCases_TEnum::Five {
                     basic5,
@@ -152,7 +152,7 @@ impl IfEdgeCases {
             }
             TEnum::Six => {
                 // basic5: u8
-                let basic5 = crate::util::read_u8_le(r)?;
+                let basic5 = crate::util::read_u8_le(&mut r)?;
 
                 IfEdgeCases_TEnum::Six {
                     basic5,
@@ -160,7 +160,7 @@ impl IfEdgeCases {
             }
             TEnum::Rest => {
                 // rest: u8
-                let rest = crate::util::read_u8_le(r)?;
+                let rest = crate::util::read_u8_le(&mut r)?;
 
                 IfEdgeCases_TEnum::Rest {
                     rest,

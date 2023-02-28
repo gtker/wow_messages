@@ -43,15 +43,15 @@ impl SimpleIfEnumNot {
 }
 
 impl SimpleIfEnumNot {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // enum: SimpleEnum
-        let enum: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
+        let enum: SimpleEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let enum_if = match enum {
             SimpleEnum::Zero => SimpleIfEnumNot_SimpleEnum::Zero,
             SimpleEnum::One => {
                 // others: u8
-                let others = crate::util::read_u8_le(r)?;
+                let others = crate::util::read_u8_le(&mut r)?;
 
                 SimpleIfEnumNot_SimpleEnum::One {
                     others,
@@ -59,7 +59,7 @@ impl SimpleIfEnumNot {
             }
             SimpleEnum::Two => {
                 // others: u8
-                let others = crate::util::read_u8_le(r)?;
+                let others = crate::util::read_u8_le(&mut r)?;
 
                 SimpleIfEnumNot_SimpleEnum::Two {
                     others,

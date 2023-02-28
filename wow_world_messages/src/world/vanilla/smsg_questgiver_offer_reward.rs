@@ -106,76 +106,76 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(42..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018D, size: body_size as u32 });
         }
 
         // npc: Guid
-        let npc = Guid::read(r)?;
+        let npc = Guid::read(&mut r)?;
 
         // quest_id: u32
-        let quest_id = crate::util::read_u32_le(r)?;
+        let quest_id = crate::util::read_u32_le(&mut r)?;
 
         // title: CString
         let title = {
-            let title = crate::util::read_c_string_to_vec(r)?;
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(title)?
         };
 
         // offer_reward_text: CString
         let offer_reward_text = {
-            let offer_reward_text = crate::util::read_c_string_to_vec(r)?;
+            let offer_reward_text = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(offer_reward_text)?
         };
 
         // auto_finish: Bool32
-        let auto_finish = crate::util::read_u32_le(r)? != 0;
+        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
 
         // amount_of_emotes: u32
-        let amount_of_emotes = crate::util::read_u32_le(r)?;
+        let amount_of_emotes = crate::util::read_u32_le(&mut r)?;
 
         // emotes: NpcTextUpdateEmote[amount_of_emotes]
         let emotes = {
             let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
             for i in 0..amount_of_emotes {
-                emotes.push(NpcTextUpdateEmote::read(r)?);
+                emotes.push(NpcTextUpdateEmote::read(&mut r)?);
             }
             emotes
         };
 
         // amount_of_choice_item_rewards: u32
-        let amount_of_choice_item_rewards = crate::util::read_u32_le(r)?;
+        let amount_of_choice_item_rewards = crate::util::read_u32_le(&mut r)?;
 
         // choice_item_rewards: QuestItemRequirement[amount_of_choice_item_rewards]
         let choice_item_rewards = {
             let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
             for i in 0..amount_of_choice_item_rewards {
-                choice_item_rewards.push(QuestItemRequirement::read(r)?);
+                choice_item_rewards.push(QuestItemRequirement::read(&mut r)?);
             }
             choice_item_rewards
         };
 
         // amount_of_item_rewards: u32
-        let amount_of_item_rewards = crate::util::read_u32_le(r)?;
+        let amount_of_item_rewards = crate::util::read_u32_le(&mut r)?;
 
         // item_rewards: QuestItemRequirement[amount_of_item_rewards]
         let item_rewards = {
             let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
             for i in 0..amount_of_item_rewards {
-                item_rewards.push(QuestItemRequirement::read(r)?);
+                item_rewards.push(QuestItemRequirement::read(&mut r)?);
             }
             item_rewards
         };
 
         // money_reward: Gold
-        let money_reward = Gold::new(crate::util::read_u32_le(r)?);
+        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // reward_spell: u32
-        let reward_spell = crate::util::read_u32_le(r)?;
+        let reward_spell = crate::util::read_u32_le(&mut r)?;
 
         // reward_spell_cast: u32
-        let reward_spell_cast = crate::util::read_u32_le(r)?;
+        let reward_spell_cast = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             npc,

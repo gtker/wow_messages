@@ -39,22 +39,22 @@ impl crate::Message for CMSG_WRAP_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D3, size: body_size as u32 });
         }
 
         // gift_bag_index: u8
-        let gift_bag_index = crate::util::read_u8_le(r)?;
+        let gift_bag_index = crate::util::read_u8_le(&mut r)?;
 
         // gift_slot: u8
-        let gift_slot = crate::util::read_u8_le(r)?;
+        let gift_slot = crate::util::read_u8_le(&mut r)?;
 
         // item_bag_index: u8
-        let item_bag_index = crate::util::read_u8_le(r)?;
+        let item_bag_index = crate::util::read_u8_le(&mut r)?;
 
         // item_slot: u8
-        let item_slot = crate::util::read_u8_le(r)?;
+        let item_slot = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             gift_bag_index,

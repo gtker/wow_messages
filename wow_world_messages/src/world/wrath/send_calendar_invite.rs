@@ -47,24 +47,24 @@ impl SendCalendarInvite {
 }
 
 impl SendCalendarInvite {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // event_id: Guid
-        let event_id = Guid::read(r)?;
+        let event_id = Guid::read(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(r)?;
+        let invite_id = Guid::read(&mut r)?;
 
         // status: u8
-        let status = crate::util::read_u8_le(r)?;
+        let status = crate::util::read_u8_le(&mut r)?;
 
         // rank: u8
-        let rank = crate::util::read_u8_le(r)?;
+        let rank = crate::util::read_u8_le(&mut r)?;
 
         // is_guild_event: Bool
-        let is_guild_event = crate::util::read_u8_le(r)? != 0;
+        let is_guild_event = crate::util::read_u8_le(&mut r)? != 0;
 
         // creator: PackedGuid
-        let creator = Guid::read_packed(r)?;
+        let creator = Guid::read_packed(&mut r)?;
 
         Ok(Self {
             event_id,

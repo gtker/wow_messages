@@ -33,16 +33,16 @@ impl crate::Message for SMSG_SPLINE_SET_RUN_SPEED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FE, size: body_size as u32 });
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // speed: f32
-        let speed = crate::util::read_f32_le(r)?;
+        let speed = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             guid,

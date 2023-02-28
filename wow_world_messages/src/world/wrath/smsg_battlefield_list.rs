@@ -107,52 +107,52 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(32..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size as u32 });
         }
 
         // battlemaster: Guid
-        let battlemaster = Guid::read(r)?;
+        let battlemaster = Guid::read(&mut r)?;
 
         // battleground_type: BattlegroundType
-        let battleground_type: BattlegroundType = crate::util::read_u32_le(r)?.try_into()?;
+        let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(r)?;
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
 
         // has_win: u8
-        let has_win = crate::util::read_u8_le(r)?;
+        let has_win = crate::util::read_u8_le(&mut r)?;
 
         // win_honor: u32
-        let win_honor = crate::util::read_u32_le(r)?;
+        let win_honor = crate::util::read_u32_le(&mut r)?;
 
         // win_arena: u32
-        let win_arena = crate::util::read_u32_le(r)?;
+        let win_arena = crate::util::read_u32_le(&mut r)?;
 
         // loss_honor: u32
-        let loss_honor = crate::util::read_u32_le(r)?;
+        let loss_honor = crate::util::read_u32_le(&mut r)?;
 
         // random: RandomBg
-        let random: RandomBg = crate::util::read_u8_le(r)?.try_into()?;
+        let random: RandomBg = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let random_if = match random {
             RandomBg::NotRandom => SMSG_BATTLEFIELD_LIST_RandomBg::NotRandom,
             RandomBg::Random => {
                 // win_random: u8
-                let win_random = crate::util::read_u8_le(r)?;
+                let win_random = crate::util::read_u8_le(&mut r)?;
 
                 // reward_honor: u32
-                let reward_honor = crate::util::read_u32_le(r)?;
+                let reward_honor = crate::util::read_u32_le(&mut r)?;
 
                 // reward_arena: u32
-                let reward_arena = crate::util::read_u32_le(r)?;
+                let reward_arena = crate::util::read_u32_le(&mut r)?;
 
                 // honor_lost: u32
-                let honor_lost = crate::util::read_u32_le(r)?;
+                let honor_lost = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_BATTLEFIELD_LIST_RandomBg::Random {
                     honor_lost,
@@ -164,13 +164,13 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         };
 
         // number_of_battlegrounds: u32
-        let number_of_battlegrounds = crate::util::read_u32_le(r)?;
+        let number_of_battlegrounds = crate::util::read_u32_le(&mut r)?;
 
         // battlegrounds: u32[number_of_battlegrounds]
         let battlegrounds = {
             let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
             for i in 0..number_of_battlegrounds {
-                battlegrounds.push(crate::util::read_u32_le(r)?);
+                battlegrounds.push(crate::util::read_u32_le(&mut r)?);
             }
             battlegrounds
         };

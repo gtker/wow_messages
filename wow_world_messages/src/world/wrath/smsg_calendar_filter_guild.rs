@@ -31,19 +31,19 @@ impl crate::Message for SMSG_CALENDAR_FILTER_GUILD {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0438, size: body_size as u32 });
         }
 
         // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(r)?;
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
 
         // members: CalendarMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
             for i in 0..amount_of_members {
-                members.push(CalendarMember::read(r)?);
+                members.push(CalendarMember::read(&mut r)?);
             }
             members
         };

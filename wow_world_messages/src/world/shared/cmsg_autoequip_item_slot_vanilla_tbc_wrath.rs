@@ -30,16 +30,16 @@ impl crate::Message for CMSG_AUTOEQUIP_ITEM_SLOT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x010F, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // destination_slot: u8
-        let destination_slot = crate::util::read_u8_le(r)?;
+        let destination_slot = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             guid,

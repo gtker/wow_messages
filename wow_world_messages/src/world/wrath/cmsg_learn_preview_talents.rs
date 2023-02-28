@@ -31,19 +31,19 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C1, size: body_size as u32 });
         }
 
         // amount_of_talents: u32
-        let amount_of_talents = crate::util::read_u32_le(r)?;
+        let amount_of_talents = crate::util::read_u32_le(&mut r)?;
 
         // talents: Talent[amount_of_talents]
         let talents = {
             let mut talents = Vec::with_capacity(amount_of_talents as usize);
             for i in 0..amount_of_talents {
-                talents.push(Talent::read(r)?);
+                talents.push(Talent::read(&mut r)?);
             }
             talents
         };

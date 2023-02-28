@@ -35,19 +35,19 @@ impl crate::Message for SMSG_MODIFY_COOLDOWN {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0491, size: body_size as u32 });
         }
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // cooldown_in_milliseconds: i32
-        let cooldown_in_milliseconds = crate::util::read_i32_le(r)?;
+        let cooldown_in_milliseconds = crate::util::read_i32_le(&mut r)?;
 
         Ok(Self {
             spell,

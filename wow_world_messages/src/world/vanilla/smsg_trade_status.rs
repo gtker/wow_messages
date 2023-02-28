@@ -98,19 +98,19 @@ impl crate::Message for SMSG_TRADE_STATUS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0120, size: body_size as u32 });
         }
 
         // status: TradeStatus
-        let status: TradeStatus = crate::util::read_u32_le(r)?.try_into()?;
+        let status: TradeStatus = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let status_if = match status {
             TradeStatus::Busy => SMSG_TRADE_STATUS_TradeStatus::Busy,
             TradeStatus::BeginTrade => {
                 // unknown1: Guid
-                let unknown1 = Guid::read(r)?;
+                let unknown1 = Guid::read(&mut r)?;
 
                 SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
                     unknown1,
@@ -128,13 +128,13 @@ impl crate::Message for SMSG_TRADE_STATUS {
             TradeStatus::WrongFaction => SMSG_TRADE_STATUS_TradeStatus::WrongFaction,
             TradeStatus::CloseWindow => {
                 // inventory_result: InventoryResult
-                let inventory_result: InventoryResult = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let inventory_result: InventoryResult = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 // target_error: Bool
-                let target_error = crate::util::read_u8_le(r)? != 0;
+                let target_error = crate::util::read_u8_le(&mut r)? != 0;
 
                 // item_limit_category_id: u32
-                let item_limit_category_id = crate::util::read_u32_le(r)?;
+                let item_limit_category_id = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_TRADE_STATUS_TradeStatus::CloseWindow {
                     inventory_result,
@@ -153,7 +153,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
             TradeStatus::TrialAccount => SMSG_TRADE_STATUS_TradeStatus::TrialAccount,
             TradeStatus::OnlyConjured => {
                 // slot: u8
-                let slot = crate::util::read_u8_le(r)?;
+                let slot = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_TRADE_STATUS_TradeStatus::OnlyConjured {
                     slot,
@@ -161,7 +161,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
             }
             TradeStatus::NotOnTaplist => {
                 // slot: u8
-                let slot = crate::util::read_u8_le(r)?;
+                let slot = crate::util::read_u8_le(&mut r)?;
 
                 SMSG_TRADE_STATUS_TradeStatus::NotOnTaplist {
                     slot,

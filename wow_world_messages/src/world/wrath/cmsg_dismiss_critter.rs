@@ -25,13 +25,13 @@ impl crate::Message for CMSG_DISMISS_CRITTER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x048D, size: body_size as u32 });
         }
 
         // critter: Guid
-        let critter = Guid::read(r)?;
+        let critter = Guid::read(&mut r)?;
 
         Ok(Self {
             critter,

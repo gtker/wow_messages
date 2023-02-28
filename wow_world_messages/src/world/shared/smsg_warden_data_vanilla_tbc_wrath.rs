@@ -26,7 +26,7 @@ impl crate::Message for SMSG_WARDEN_DATA {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size > 65535 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E6, size: body_size as u32 });
         }
@@ -38,7 +38,7 @@ impl crate::Message for SMSG_WARDEN_DATA {
             };
             let mut encrypted_data = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                encrypted_data.push(crate::util::read_u8_le(r)?);
+                encrypted_data.push(crate::util::read_u8_le(&mut r)?);
                 current_size += 1;
             }
             encrypted_data

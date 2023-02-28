@@ -44,12 +44,12 @@ impl EnumOutsideOfIf {
 }
 
 impl EnumOutsideOfIf {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // t: TEnum
-        let t: TEnum = crate::util::read_u8_le(r)?.try_into()?;
+        let t: TEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // n: NestedEnum
-        let n: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
+        let n: NestedEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let t_if = match t {
             TEnum::Zero => EnumOutsideOfIf_TEnum::Zero,

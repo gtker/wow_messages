@@ -267,19 +267,19 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=18).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size as u32 });
         }
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // result: SpellCastResult
-        let result: SpellCastResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: SpellCastResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // multiple_casts: Bool
-        let multiple_casts = crate::util::read_u8_le(r)? != 0;
+        let multiple_casts = crate::util::read_u8_le(&mut r)? != 0;
 
         let result_if = match result {
             SpellCastResult::AffectingCombat => SMSG_PET_CAST_FAILED_SpellCastResult::AffectingCombat,
@@ -311,13 +311,13 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             SpellCastResult::EquippedItem => SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItem,
             SpellCastResult::EquippedItemClass => {
                 // item_class: u32
-                let item_class = crate::util::read_u32_le(r)?;
+                let item_class = crate::util::read_u32_le(&mut r)?;
 
                 // item_sub_class: u32
-                let item_sub_class = crate::util::read_u32_le(r)?;
+                let item_sub_class = crate::util::read_u32_le(&mut r)?;
 
                 // item_inventory_type: u32
-                let item_inventory_type = crate::util::read_u32_le(r)?;
+                let item_inventory_type = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
                     item_class,
@@ -395,7 +395,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             SpellCastResult::Reagents => SMSG_PET_CAST_FAILED_SpellCastResult::Reagents,
             SpellCastResult::RequiresArea => {
                 // area: Area
-                let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+                let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
                     area,
@@ -403,7 +403,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             }
             SpellCastResult::RequiresSpellFocus => {
                 // spell_focus: u32
-                let spell_focus = crate::util::read_u32_le(r)?;
+                let spell_focus = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
                     spell_focus,
@@ -440,7 +440,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
                 let totem_categories = {
                     let mut totem_categories = [u32::default(); 2];
                     for i in totem_categories.iter_mut() {
-                        *i = crate::util::read_u32_le(r)?;
+                        *i = crate::util::read_u32_le(&mut r)?;
                     }
                     totem_categories
                 };
@@ -454,7 +454,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
                 let totems = {
                     let mut totems = [u32::default(); 2];
                     for i in totems.iter_mut() {
-                        *i = crate::util::read_u32_le(r)?;
+                        *i = crate::util::read_u32_le(&mut r)?;
                     }
                     totems
                 };

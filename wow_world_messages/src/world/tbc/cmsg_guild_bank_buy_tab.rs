@@ -30,16 +30,16 @@ impl crate::Message for CMSG_GUILD_BANK_BUY_TAB {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E9, size: body_size as u32 });
         }
 
         // banker: Guid
-        let banker = Guid::read(r)?;
+        let banker = Guid::read(&mut r)?;
 
         // tab: u8
-        let tab = crate::util::read_u8_le(r)?;
+        let tab = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             banker,

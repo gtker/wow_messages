@@ -26,12 +26,12 @@ impl Talent {
 }
 
 impl Talent {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // talent: u32
-        let talent = crate::util::read_u32_le(r)?;
+        let talent = crate::util::read_u32_le(&mut r)?;
 
         // rank: u32
-        let rank = crate::util::read_u32_le(r)?;
+        let rank = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             talent,

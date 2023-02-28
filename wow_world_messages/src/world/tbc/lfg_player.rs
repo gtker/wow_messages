@@ -67,42 +67,42 @@ impl LfgPlayer {
 }
 
 impl LfgPlayer {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // level: u32
-        let level = crate::util::read_u32_le(r)?;
+        let level = crate::util::read_u32_le(&mut r)?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // lfg_mode: LfgMode
-        let lfg_mode: LfgMode = crate::util::read_u8_le(r)?.try_into()?;
+        let lfg_mode: LfgMode = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // lfg_slots: u32[3]
         let lfg_slots = {
             let mut lfg_slots = [u32::default(); 3];
             for i in lfg_slots.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
+                *i = crate::util::read_u32_le(&mut r)?;
             }
             lfg_slots
         };
 
         // comment: CString
         let comment = {
-            let comment = crate::util::read_c_string_to_vec(r)?;
+            let comment = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(comment)?
         };
 
         // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(r)?;
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
 
         // members: LfgPlayerMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
             for i in 0..amount_of_members {
-                members.push(LfgPlayerMember::read(r)?);
+                members.push(LfgPlayerMember::read(&mut r)?);
             }
             members
         };

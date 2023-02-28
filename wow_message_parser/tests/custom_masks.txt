@@ -28,12 +28,12 @@ impl CustomMasks {
 }
 
 impl CustomMasks {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // update_mask: UpdateMask
-        let update_mask = UpdateMask::read(r)?;
+        let update_mask = UpdateMask::read(&mut r)?;
 
         // aura_mask: AuraMask
-        let aura_mask = AuraMask::read(r)?;
+        let aura_mask = AuraMask::read(&mut r)?;
 
         Ok(Self {
             update_mask,

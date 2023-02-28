@@ -45,16 +45,16 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=268).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017C, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // gossip_list_id: u32
-        let gossip_list_id = crate::util::read_u32_le(r)?;
+        let gossip_list_id = crate::util::read_u32_le(&mut r)?;
 
         // optional unknown
         let current_size = {
@@ -64,7 +64,7 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
         let unknown = if current_size < body_size as usize {
             // code: CString
             let code = {
-                let code = crate::util::read_c_string_to_vec(r)?;
+                let code = crate::util::read_c_string_to_vec(&mut r)?;
                 String::from_utf8(code)?
             };
 

@@ -60,28 +60,28 @@ impl crate::Message for SMSG_LOG_XPGAIN {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D0, size: body_size as u32 });
         }
 
         // target: Guid
-        let target = Guid::read(r)?;
+        let target = Guid::read(&mut r)?;
 
         // total_exp: u32
-        let total_exp = crate::util::read_u32_le(r)?;
+        let total_exp = crate::util::read_u32_le(&mut r)?;
 
         // exp_type: ExperienceAwardType
-        let exp_type: ExperienceAwardType = crate::util::read_u8_le(r)?.try_into()?;
+        let exp_type: ExperienceAwardType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let exp_type_if = match exp_type {
             ExperienceAwardType::Kill => SMSG_LOG_XPGAIN_ExperienceAwardType::Kill,
             ExperienceAwardType::NonKill => {
                 // experience_without_rested: u32
-                let experience_without_rested = crate::util::read_u32_le(r)?;
+                let experience_without_rested = crate::util::read_u32_le(&mut r)?;
 
                 // exp_group_bonus: f32
-                let exp_group_bonus = crate::util::read_f32_le(r)?;
+                let exp_group_bonus = crate::util::read_f32_le(&mut r)?;
 
                 SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                     exp_group_bonus,
@@ -91,7 +91,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         };
 
         // exp_includes_recruit_a_friend_bonus: Bool
-        let exp_includes_recruit_a_friend_bonus = crate::util::read_u8_le(r)? != 0;
+        let exp_includes_recruit_a_friend_bonus = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             target,

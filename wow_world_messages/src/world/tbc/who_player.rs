@@ -63,33 +63,33 @@ impl WhoPlayer {
 }
 
 impl WhoPlayer {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // guild: CString
         let guild = {
-            let guild = crate::util::read_c_string_to_vec(r)?;
+            let guild = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(guild)?
         };
 
         // level: u32
-        let level = crate::util::read_u32_le(r)?;
+        let level = crate::util::read_u32_le(&mut r)?;
 
         // class: Class
-        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
+        let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // race: Race
-        let race: Race = crate::util::read_u8_le(r)?.try_into()?;
+        let race: Race = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // gender: Gender
-        let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
+        let gender: Gender = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             name,

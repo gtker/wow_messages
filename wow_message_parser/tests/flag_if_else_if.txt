@@ -76,13 +76,13 @@ impl FlagIfElseIf {
 }
 
 impl FlagIfElseIf {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // flags: UpdateFlag
-        let flags = UpdateFlag::new(crate::util::read_u8_le(r)?);
+        let flags = UpdateFlag::new(crate::util::read_u8_le(&mut r)?);
 
         let flags_ONE_IF = if flags.is_ONE_IF() {
             // b_if: u8
-            let b_if = crate::util::read_u8_le(r)?;
+            let b_if = crate::util::read_u8_le(&mut r)?;
 
             Some(FlagIfElseIf_UpdateFlag_OneIf::OneIf {
                 b_if,
@@ -90,11 +90,11 @@ impl FlagIfElseIf {
         }
         else if flags.is_TWO_ELSEIF() {
             // s: SimpleFlag
-            let s = SimpleFlag::new(crate::util::read_u8_le(r)?);
+            let s = SimpleFlag::new(crate::util::read_u8_le(&mut r)?);
 
             let s_ONE = if s.is_ONE() {
                 // if_one: u8
-                let if_one = crate::util::read_u8_le(r)?;
+                let if_one = crate::util::read_u8_le(&mut r)?;
 
                 Some(FlagIfElseIf_SimpleFlag_One {
                     if_one,
@@ -115,7 +115,7 @@ impl FlagIfElseIf {
         }
         else if flags.is_FOUR_ELSEIF() {
             // elseif2: u8
-            let elseif2 = crate::util::read_u8_le(r)?;
+            let elseif2 = crate::util::read_u8_le(&mut r)?;
 
             Some(FlagIfElseIf_UpdateFlag_OneIf::FourElseif {
                 elseif2,
@@ -127,7 +127,7 @@ impl FlagIfElseIf {
 
         let flags_EIGHT_IF = if flags.is_EIGHT_IF() {
             // last_if: u8
-            let last_if = crate::util::read_u8_le(r)?;
+            let last_if = crate::util::read_u8_le(&mut r)?;
 
             Some(FlagIfElseIf_UpdateFlag_EightIf {
                 last_if,

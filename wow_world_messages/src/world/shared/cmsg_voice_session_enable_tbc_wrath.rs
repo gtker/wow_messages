@@ -29,16 +29,16 @@ impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03AF, size: body_size as u32 });
         }
 
         // voice_enabled: Bool
-        let voice_enabled = crate::util::read_u8_le(r)? != 0;
+        let voice_enabled = crate::util::read_u8_le(&mut r)? != 0;
 
         // microphone_enabled: Bool
-        let microphone_enabled = crate::util::read_u8_le(r)? != 0;
+        let microphone_enabled = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             voice_enabled,

@@ -44,19 +44,19 @@ impl crate::Message for SMSG_SHOWTAXINODES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=65551).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A9, size: body_size as u32 });
         }
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // nearest_node: u32
-        let nearest_node = crate::util::read_u32_le(r)?;
+        let nearest_node = crate::util::read_u32_le(&mut r)?;
 
         // nodes: u32[-]
         let nodes = {
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_SHOWTAXINODES {
             };
             let mut nodes = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                nodes.push(crate::util::read_u32_le(r)?);
+                nodes.push(crate::util::read_u32_le(&mut r)?);
                 current_size += 1;
             }
             nodes

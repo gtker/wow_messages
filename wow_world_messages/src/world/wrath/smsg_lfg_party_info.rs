@@ -31,19 +31,19 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0372, size: body_size as u32 });
         }
 
         // amount_of_infos: u8
-        let amount_of_infos = crate::util::read_u8_le(r)?;
+        let amount_of_infos = crate::util::read_u8_le(&mut r)?;
 
         // infos: LfgPartyInfo[amount_of_infos]
         let infos = {
             let mut infos = Vec::with_capacity(amount_of_infos as usize);
             for i in 0..amount_of_infos {
-                infos.push(LfgPartyInfo::read(r)?);
+                infos.push(LfgPartyInfo::read(&mut r)?);
             }
             infos
         };

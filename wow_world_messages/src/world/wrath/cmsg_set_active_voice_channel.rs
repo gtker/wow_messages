@@ -33,17 +33,17 @@ impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=260).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03D3, size: body_size as u32 });
         }
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: CString
         let unknown2 = {
-            let unknown2 = crate::util::read_c_string_to_vec(r)?;
+            let unknown2 = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(unknown2)?
         };
 

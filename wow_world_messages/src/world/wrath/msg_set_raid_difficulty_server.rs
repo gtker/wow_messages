@@ -37,19 +37,19 @@ impl crate::Message for MSG_SET_RAID_DIFFICULTY_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04EB, size: body_size as u32 });
         }
 
         // difficulty: RaidDifficulty
-        let difficulty: RaidDifficulty = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let difficulty: RaidDifficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // in_group: Bool32
-        let in_group = crate::util::read_u32_le(r)? != 0;
+        let in_group = crate::util::read_u32_le(&mut r)? != 0;
 
         Ok(Self {
             difficulty,

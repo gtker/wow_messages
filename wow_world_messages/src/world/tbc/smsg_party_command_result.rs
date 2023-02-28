@@ -40,22 +40,22 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007F, size: body_size as u32 });
         }
 
         // operation: PartyOperation
-        let operation: PartyOperation = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let operation: PartyOperation = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // member: CString
         let member = {
-            let member = crate::util::read_c_string_to_vec(r)?;
+            let member = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(member)?
         };
 
         // result: PartyResult
-        let result: PartyResult = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let result: PartyResult = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             operation,

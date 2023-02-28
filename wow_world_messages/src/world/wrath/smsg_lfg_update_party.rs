@@ -80,47 +80,47 @@ impl crate::Message for SMSG_LFG_UPDATE_PARTY {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=1287).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0368, size: body_size as u32 });
         }
 
         // update_type: LfgUpdateType
-        let update_type: LfgUpdateType = crate::util::read_u8_le(r)?.try_into()?;
+        let update_type: LfgUpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // join_status: LfgJoinStatus
-        let join_status: LfgJoinStatus = crate::util::read_u8_le(r)?.try_into()?;
+        let join_status: LfgJoinStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let join_status_if = match join_status {
             LfgJoinStatus::NotJoined => SMSG_LFG_UPDATE_PARTY_LfgJoinStatus::NotJoined,
             LfgJoinStatus::Joined => {
                 // joined: u8
-                let joined = crate::util::read_u8_le(r)?;
+                let joined = crate::util::read_u8_le(&mut r)?;
 
                 // queued: u8
-                let queued = crate::util::read_u8_le(r)?;
+                let queued = crate::util::read_u8_le(&mut r)?;
 
                 // no_partial_clear: u8
-                let no_partial_clear = crate::util::read_u8_le(r)?;
+                let no_partial_clear = crate::util::read_u8_le(&mut r)?;
 
                 // achievements: u8
-                let achievements = crate::util::read_u8_le(r)?;
+                let achievements = crate::util::read_u8_le(&mut r)?;
 
                 // amount_of_dungeons: u8
-                let amount_of_dungeons = crate::util::read_u8_le(r)?;
+                let amount_of_dungeons = crate::util::read_u8_le(&mut r)?;
 
                 // dungeons: u32[amount_of_dungeons]
                 let dungeons = {
                     let mut dungeons = Vec::with_capacity(amount_of_dungeons as usize);
                     for i in 0..amount_of_dungeons {
-                        dungeons.push(crate::util::read_u32_le(r)?);
+                        dungeons.push(crate::util::read_u32_le(&mut r)?);
                     }
                     dungeons
                 };
 
                 // comment: CString
                 let comment = {
-                    let comment = crate::util::read_c_string_to_vec(r)?;
+                    let comment = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(comment)?
                 };
 

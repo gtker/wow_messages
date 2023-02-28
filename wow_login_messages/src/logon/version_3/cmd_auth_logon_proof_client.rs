@@ -86,7 +86,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
 impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 0x01;
 
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // client_public_key: u8[32]
         let client_public_key = {
             let mut client_public_key = [0_u8; 32];
@@ -109,19 +109,19 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         };
 
         // number_of_telemetry_keys: u8
-        let number_of_telemetry_keys = crate::util::read_u8_le(r)?;
+        let number_of_telemetry_keys = crate::util::read_u8_le(&mut r)?;
 
         // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         let telemetry_keys = {
             let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
             for i in 0..number_of_telemetry_keys {
-                telemetry_keys.push(TelemetryKey::read(r)?);
+                telemetry_keys.push(TelemetryKey::read(&mut r)?);
             }
             telemetry_keys
         };
 
         // security_flag: SecurityFlag
-        let security_flag: SecurityFlag = crate::util::read_u8_le(r)?.try_into()?;
+        let security_flag: SecurityFlag = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let security_flag_if = match security_flag {
             SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
@@ -164,14 +164,13 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn tokio_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
@@ -197,19 +196,19 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             };
 
             // number_of_telemetry_keys: u8
-            let number_of_telemetry_keys = crate::util::tokio_read_u8_le(r).await?;
+            let number_of_telemetry_keys = crate::util::tokio_read_u8_le(&mut r).await?;
 
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
             let telemetry_keys = {
                 let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
                 for i in 0..number_of_telemetry_keys {
-                    telemetry_keys.push(TelemetryKey::tokio_read(r).await?);
+                    telemetry_keys.push(TelemetryKey::tokio_read(&mut r).await?);
                 }
                 telemetry_keys
             };
 
             // security_flag: SecurityFlag
-            let security_flag: SecurityFlag = crate::util::tokio_read_u8_le(r).await?.try_into()?;
+            let security_flag: SecurityFlag = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
             let security_flag_if = match security_flag {
                 SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
@@ -265,14 +264,13 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn astd_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
@@ -298,19 +296,19 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             };
 
             // number_of_telemetry_keys: u8
-            let number_of_telemetry_keys = crate::util::astd_read_u8_le(r).await?;
+            let number_of_telemetry_keys = crate::util::astd_read_u8_le(&mut r).await?;
 
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
             let telemetry_keys = {
                 let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
                 for i in 0..number_of_telemetry_keys {
-                    telemetry_keys.push(TelemetryKey::astd_read(r).await?);
+                    telemetry_keys.push(TelemetryKey::astd_read(&mut r).await?);
                 }
                 telemetry_keys
             };
 
             // security_flag: SecurityFlag
-            let security_flag: SecurityFlag = crate::util::astd_read_u8_le(r).await?.try_into()?;
+            let security_flag: SecurityFlag = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
             let security_flag_if = match security_flag {
                 SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,

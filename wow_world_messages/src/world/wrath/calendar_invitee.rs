@@ -32,15 +32,15 @@ impl CalendarInvitee {
 }
 
 impl CalendarInvitee {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // status: u8
-        let status = crate::util::read_u8_le(r)?;
+        let status = crate::util::read_u8_le(&mut r)?;
 
         // rank: u8
-        let rank = crate::util::read_u8_le(r)?;
+        let rank = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             guid,

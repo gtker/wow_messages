@@ -43,21 +43,21 @@ impl CMD_SURVEY_RESULT {
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
 
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // survey_id: u32
-        let survey_id = crate::util::read_u32_le(r)?;
+        let survey_id = crate::util::read_u32_le(&mut r)?;
 
         // error: u8
-        let error = crate::util::read_u8_le(r)?;
+        let error = crate::util::read_u8_le(&mut r)?;
 
         // compressed_data_length: u16
-        let compressed_data_length = crate::util::read_u16_le(r)?;
+        let compressed_data_length = crate::util::read_u16_le(&mut r)?;
 
         // data: u8[compressed_data_length]
         let data = {
             let mut data = Vec::with_capacity(compressed_data_length as usize);
             for i in 0..compressed_data_length {
-                data.push(crate::util::read_u8_le(r)?);
+                data.push(crate::util::read_u8_le(&mut r)?);
             }
             data
         };
@@ -77,31 +77,30 @@ impl ClientMessage for CMD_SURVEY_RESULT {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn tokio_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // survey_id: u32
-            let survey_id = crate::util::tokio_read_u32_le(r).await?;
+            let survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
 
             // error: u8
-            let error = crate::util::tokio_read_u8_le(r).await?;
+            let error = crate::util::tokio_read_u8_le(&mut r).await?;
 
             // compressed_data_length: u16
-            let compressed_data_length = crate::util::tokio_read_u16_le(r).await?;
+            let compressed_data_length = crate::util::tokio_read_u16_le(&mut r).await?;
 
             // data: u8[compressed_data_length]
             let data = {
                 let mut data = Vec::with_capacity(compressed_data_length as usize);
                 for i in 0..compressed_data_length {
-                    data.push(crate::util::tokio_read_u8_le(r).await?);
+                    data.push(crate::util::tokio_read_u8_le(&mut r).await?);
                 }
                 data
             };
@@ -134,31 +133,30 @@ impl ClientMessage for CMD_SURVEY_RESULT {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn astd_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // survey_id: u32
-            let survey_id = crate::util::astd_read_u32_le(r).await?;
+            let survey_id = crate::util::astd_read_u32_le(&mut r).await?;
 
             // error: u8
-            let error = crate::util::astd_read_u8_le(r).await?;
+            let error = crate::util::astd_read_u8_le(&mut r).await?;
 
             // compressed_data_length: u16
-            let compressed_data_length = crate::util::astd_read_u16_le(r).await?;
+            let compressed_data_length = crate::util::astd_read_u16_le(&mut r).await?;
 
             // data: u8[compressed_data_length]
             let data = {
                 let mut data = Vec::with_capacity(compressed_data_length as usize);
                 for i in 0..compressed_data_length {
-                    data.push(crate::util::astd_read_u8_le(r).await?);
+                    data.push(crate::util::astd_read_u8_le(&mut r).await?);
                 }
                 data
             };

@@ -31,16 +31,16 @@ impl crate::Message for CMSG_GUILD_BANK_WITHDRAW_MONEY {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EC, size: body_size as u32 });
         }
 
         // bank: Guid
-        let bank = Guid::read(r)?;
+        let bank = Guid::read(&mut r)?;
 
         // money: Gold
-        let money = Gold::new(crate::util::read_u32_le(r)?);
+        let money = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         Ok(Self {
             bank,

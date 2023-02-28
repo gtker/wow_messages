@@ -88,27 +88,27 @@ impl crate::Message for CMSG_COMPLAIN {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=281).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C7, size: body_size as u32 });
         }
 
         // complaint_type: SpamType
-        let complaint_type: SpamType = crate::util::read_u8_le(r)?.try_into()?;
+        let complaint_type: SpamType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // offender: Guid
-        let offender = Guid::read(r)?;
+        let offender = Guid::read(&mut r)?;
 
         let complaint_type_if = match complaint_type {
             SpamType::Mail => {
                 // unknown1: u32
-                let unknown1 = crate::util::read_u32_le(r)?;
+                let unknown1 = crate::util::read_u32_le(&mut r)?;
 
                 // mail_id: u32
-                let mail_id = crate::util::read_u32_le(r)?;
+                let mail_id = crate::util::read_u32_le(&mut r)?;
 
                 // unknown2: u32
-                let unknown2 = crate::util::read_u32_le(r)?;
+                let unknown2 = crate::util::read_u32_le(&mut r)?;
 
                 CMSG_COMPLAIN_SpamType::Mail {
                     mail_id,
@@ -118,20 +118,20 @@ impl crate::Message for CMSG_COMPLAIN {
             }
             SpamType::Chat => {
                 // language: u32
-                let language = crate::util::read_u32_le(r)?;
+                let language = crate::util::read_u32_le(&mut r)?;
 
                 // message_type: u32
-                let message_type = crate::util::read_u32_le(r)?;
+                let message_type = crate::util::read_u32_le(&mut r)?;
 
                 // channel_id: u32
-                let channel_id = crate::util::read_u32_le(r)?;
+                let channel_id = crate::util::read_u32_le(&mut r)?;
 
                 // time: u32
-                let time = crate::util::read_u32_le(r)?;
+                let time = crate::util::read_u32_le(&mut r)?;
 
                 // description: CString
                 let description = {
-                    let description = crate::util::read_c_string_to_vec(r)?;
+                    let description = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(description)?
                 };
 

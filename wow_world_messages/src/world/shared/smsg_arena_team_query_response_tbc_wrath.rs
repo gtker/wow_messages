@@ -64,37 +64,37 @@ impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(26..=281).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x034C, size: body_size as u32 });
         }
 
         // arena_team: u32
-        let arena_team = crate::util::read_u32_le(r)?;
+        let arena_team = crate::util::read_u32_le(&mut r)?;
 
         // team_name: CString
         let team_name = {
-            let team_name = crate::util::read_c_string_to_vec(r)?;
+            let team_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(team_name)?
         };
 
         // team_type: ArenaType
-        let team_type: ArenaType = crate::util::read_u8_le(r)?.try_into()?;
+        let team_type: ArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // background_color: u32
-        let background_color = crate::util::read_u32_le(r)?;
+        let background_color = crate::util::read_u32_le(&mut r)?;
 
         // emblem_style: u32
-        let emblem_style = crate::util::read_u32_le(r)?;
+        let emblem_style = crate::util::read_u32_le(&mut r)?;
 
         // emblem_color: u32
-        let emblem_color = crate::util::read_u32_le(r)?;
+        let emblem_color = crate::util::read_u32_le(&mut r)?;
 
         // border_style: u32
-        let border_style = crate::util::read_u32_le(r)?;
+        let border_style = crate::util::read_u32_le(&mut r)?;
 
         // border_color: u32
-        let border_color = crate::util::read_u32_le(r)?;
+        let border_color = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             arena_team,

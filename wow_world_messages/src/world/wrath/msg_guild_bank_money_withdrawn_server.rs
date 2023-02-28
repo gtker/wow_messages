@@ -24,13 +24,13 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FE, size: body_size as u32 });
         }
 
         // remaining_withdraw_amount: u32
-        let remaining_withdraw_amount = crate::util::read_u32_le(r)?;
+        let remaining_withdraw_amount = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             remaining_withdraw_amount,

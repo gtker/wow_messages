@@ -26,12 +26,12 @@ impl QuestDetailsEmote {
 }
 
 impl QuestDetailsEmote {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // emote: u32
-        let emote = crate::util::read_u32_le(r)?;
+        let emote = crate::util::read_u32_le(&mut r)?;
 
         // emote_delay_in_msecs: u32
-        let emote_delay_in_msecs = crate::util::read_u32_le(r)?;
+        let emote_delay_in_msecs = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             emote,

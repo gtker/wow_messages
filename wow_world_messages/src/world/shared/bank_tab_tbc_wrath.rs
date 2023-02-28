@@ -26,12 +26,12 @@ impl BankTab {
 }
 
 impl BankTab {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         // stacks_per_day: u32
-        let stacks_per_day = crate::util::read_u32_le(r)?;
+        let stacks_per_day = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             flags,

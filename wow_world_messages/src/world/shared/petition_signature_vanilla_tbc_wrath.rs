@@ -27,12 +27,12 @@ impl PetitionSignature {
 }
 
 impl PetitionSignature {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // signer: Guid
-        let signer = Guid::read(r)?;
+        let signer = Guid::read(&mut r)?;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             signer,

@@ -33,13 +33,13 @@ impl crate::Message for SMSG_AURA_UPDATE_ALL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=65544).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0495, size: body_size as u32 });
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(r)?;
+        let unit = Guid::read_packed(&mut r)?;
 
         // aura_updates: AuraUpdate[-]
         let aura_updates = {
@@ -48,7 +48,7 @@ impl crate::Message for SMSG_AURA_UPDATE_ALL {
             };
             let mut aura_updates = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                aura_updates.push(AuraUpdate::read(r)?);
+                aura_updates.push(AuraUpdate::read(&mut r)?);
                 current_size += 1;
             }
             aura_updates

@@ -31,16 +31,16 @@ impl crate::Message for SMSG_AI_REACTION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013C, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // reaction: AiReaction
-        let reaction: AiReaction = crate::util::read_u32_le(r)?.try_into()?;
+        let reaction: AiReaction = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

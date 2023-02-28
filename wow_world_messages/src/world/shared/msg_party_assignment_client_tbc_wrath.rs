@@ -36,19 +36,19 @@ impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 10 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038E, size: body_size as u32 });
         }
 
         // role: PartyRole
-        let role: PartyRole = crate::util::read_u8_le(r)?.try_into()?;
+        let role: PartyRole = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // apply: Bool
-        let apply = crate::util::read_u8_le(r)? != 0;
+        let apply = crate::util::read_u8_le(&mut r)? != 0;
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         Ok(Self {
             role,

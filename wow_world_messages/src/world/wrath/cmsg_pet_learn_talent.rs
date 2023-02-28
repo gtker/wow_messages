@@ -35,19 +35,19 @@ impl crate::Message for CMSG_PET_LEARN_TALENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047A, size: body_size as u32 });
         }
 
         // pet: Guid
-        let pet = Guid::read(r)?;
+        let pet = Guid::read(&mut r)?;
 
         // talent: u32
-        let talent = crate::util::read_u32_le(r)?;
+        let talent = crate::util::read_u32_le(&mut r)?;
 
         // rank: u32
-        let rank = crate::util::read_u32_le(r)?;
+        let rank = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             pet,

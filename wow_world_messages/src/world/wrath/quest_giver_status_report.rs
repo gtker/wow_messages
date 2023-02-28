@@ -28,12 +28,12 @@ impl QuestGiverStatusReport {
 }
 
 impl QuestGiverStatusReport {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // npc: Guid
-        let npc = Guid::read(r)?;
+        let npc = Guid::read(&mut r)?;
 
         // dialog_status: QuestGiverStatus
-        let dialog_status: QuestGiverStatus = crate::util::read_u8_le(r)?.try_into()?;
+        let dialog_status: QuestGiverStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             npc,

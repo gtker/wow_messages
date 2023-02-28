@@ -38,18 +38,18 @@ impl SendCalendarInstance {
 }
 
 impl SendCalendarInstance {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // difficulty: u32
-        let difficulty = crate::util::read_u32_le(r)?;
+        let difficulty = crate::util::read_u32_le(&mut r)?;
 
         // reset_time: u32
-        let reset_time = crate::util::read_u32_le(r)?;
+        let reset_time = crate::util::read_u32_le(&mut r)?;
 
         // instance_id: Guid
-        let instance_id = Guid::read(r)?;
+        let instance_id = Guid::read(&mut r)?;
 
         Ok(Self {
             map,

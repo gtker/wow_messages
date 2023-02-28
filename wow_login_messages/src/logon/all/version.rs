@@ -36,18 +36,18 @@ impl Version {
 }
 
 impl Version {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // major: u8
-        let major = crate::util::read_u8_le(r)?;
+        let major = crate::util::read_u8_le(&mut r)?;
 
         // minor: u8
-        let minor = crate::util::read_u8_le(r)?;
+        let minor = crate::util::read_u8_le(&mut r)?;
 
         // patch: u8
-        let patch = crate::util::read_u8_le(r)?;
+        let patch = crate::util::read_u8_le(&mut r)?;
 
         // build: u16
-        let build = crate::util::read_u16_le(r)?;
+        let build = crate::util::read_u16_le(&mut r)?;
 
         Ok(Self {
             major,
@@ -58,18 +58,18 @@ impl Version {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // major: u8
-        let major = crate::util::tokio_read_u8_le(r).await?;
+        let major = crate::util::tokio_read_u8_le(&mut r).await?;
 
         // minor: u8
-        let minor = crate::util::tokio_read_u8_le(r).await?;
+        let minor = crate::util::tokio_read_u8_le(&mut r).await?;
 
         // patch: u8
-        let patch = crate::util::tokio_read_u8_le(r).await?;
+        let patch = crate::util::tokio_read_u8_le(&mut r).await?;
 
         // build: u16
-        let build = crate::util::tokio_read_u16_le(r).await?;
+        let build = crate::util::tokio_read_u16_le(&mut r).await?;
 
         Ok(Self {
             major,
@@ -80,18 +80,18 @@ impl Version {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // major: u8
-        let major = crate::util::astd_read_u8_le(r).await?;
+        let major = crate::util::astd_read_u8_le(&mut r).await?;
 
         // minor: u8
-        let minor = crate::util::astd_read_u8_le(r).await?;
+        let minor = crate::util::astd_read_u8_le(&mut r).await?;
 
         // patch: u8
-        let patch = crate::util::astd_read_u8_le(r).await?;
+        let patch = crate::util::astd_read_u8_le(&mut r).await?;
 
         // build: u16
-        let build = crate::util::astd_read_u16_le(r).await?;
+        let build = crate::util::astd_read_u16_le(&mut r).await?;
 
         Ok(Self {
             major,

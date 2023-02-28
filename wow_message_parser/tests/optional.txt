@@ -21,9 +21,9 @@ impl Optional {
 }
 
 impl Optional {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // basic: u8
-        let basic = crate::util::read_u8_le(r)?;
+        let basic = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             basic,

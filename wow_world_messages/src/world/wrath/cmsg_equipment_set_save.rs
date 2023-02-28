@@ -55,26 +55,26 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(160..=677).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BD, size: body_size as u32 });
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // index: u32
-        let index = crate::util::read_u32_le(r)?;
+        let index = crate::util::read_u32_le(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // icon_name: CString
         let icon_name = {
-            let icon_name = crate::util::read_c_string_to_vec(r)?;
+            let icon_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(icon_name)?
         };
 
@@ -82,7 +82,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
         let equipment = {
             let mut equipment = [Guid::default(); 19];
             for i in equipment.iter_mut() {
-                *i = Guid::read(r)?;
+                *i = Guid::read(&mut r)?;
             }
             equipment
         };

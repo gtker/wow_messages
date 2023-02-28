@@ -54,37 +54,37 @@ impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(7..=4615).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0363, size: body_size as u32 });
         }
 
         // rolecheck_state: u32
-        let rolecheck_state = crate::util::read_u32_le(r)?;
+        let rolecheck_state = crate::util::read_u32_le(&mut r)?;
 
         // rolecheck_initializing: u8
-        let rolecheck_initializing = crate::util::read_u8_le(r)?;
+        let rolecheck_initializing = crate::util::read_u8_le(&mut r)?;
 
         // amount_of_dungeon_entries: u8
-        let amount_of_dungeon_entries = crate::util::read_u8_le(r)?;
+        let amount_of_dungeon_entries = crate::util::read_u8_le(&mut r)?;
 
         // dungeon_entries: u32[amount_of_dungeon_entries]
         let dungeon_entries = {
             let mut dungeon_entries = Vec::with_capacity(amount_of_dungeon_entries as usize);
             for i in 0..amount_of_dungeon_entries {
-                dungeon_entries.push(crate::util::read_u32_le(r)?);
+                dungeon_entries.push(crate::util::read_u32_le(&mut r)?);
             }
             dungeon_entries
         };
 
         // amount_of_roles: u8
-        let amount_of_roles = crate::util::read_u8_le(r)?;
+        let amount_of_roles = crate::util::read_u8_le(&mut r)?;
 
         // roles: LfgRole[amount_of_roles]
         let roles = {
             let mut roles = Vec::with_capacity(amount_of_roles as usize);
             for i in 0..amount_of_roles {
-                roles.push(LfgRole::read(r)?);
+                roles.push(LfgRole::read(&mut r)?);
             }
             roles
         };

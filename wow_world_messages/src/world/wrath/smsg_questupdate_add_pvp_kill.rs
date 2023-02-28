@@ -34,19 +34,19 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_PVP_KILL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046F, size: body_size as u32 });
         }
 
         // quest_id: u32
-        let quest_id = crate::util::read_u32_le(r)?;
+        let quest_id = crate::util::read_u32_le(&mut r)?;
 
         // count: u32
-        let count = crate::util::read_u32_le(r)?;
+        let count = crate::util::read_u32_le(&mut r)?;
 
         // players_slain: u32
-        let players_slain = crate::util::read_u32_le(r)?;
+        let players_slain = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             quest_id,

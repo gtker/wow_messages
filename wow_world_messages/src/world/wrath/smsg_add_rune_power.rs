@@ -27,13 +27,13 @@ impl crate::Message for SMSG_ADD_RUNE_POWER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0488, size: body_size as u32 });
         }
 
         // rune: u32
-        let rune = crate::util::read_u32_le(r)?;
+        let rune = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             rune,

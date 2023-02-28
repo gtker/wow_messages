@@ -36,19 +36,19 @@ impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FA, size: body_size as u32 });
         }
 
         // message_type: RaidInstanceMessage
-        let message_type: RaidInstanceMessage = crate::util::read_u32_le(r)?.try_into()?;
+        let message_type: RaidInstanceMessage = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // time_left: u32
-        let time_left = crate::util::read_u32_le(r)?;
+        let time_left = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             message_type,

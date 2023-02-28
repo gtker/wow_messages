@@ -45,25 +45,25 @@ impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=269).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0498, size: body_size as u32 });
         }
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // achievement: u32
-        let achievement = crate::util::read_u32_le(r)?;
+        let achievement = crate::util::read_u32_le(&mut r)?;
 
         // link_type: AchievementNameLinkType
-        let link_type: AchievementNameLinkType = crate::util::read_u8_le(r)?.try_into()?;
+        let link_type: AchievementNameLinkType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             name,

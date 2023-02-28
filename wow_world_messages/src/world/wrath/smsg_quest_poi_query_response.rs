@@ -31,19 +31,19 @@ impl crate::Message for SMSG_QUEST_POI_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E4, size: body_size as u32 });
         }
 
         // amount_of_quests: u32
-        let amount_of_quests = crate::util::read_u32_le(r)?;
+        let amount_of_quests = crate::util::read_u32_le(&mut r)?;
 
         // quests: QuestPoiList[amount_of_quests]
         let quests = {
             let mut quests = Vec::with_capacity(amount_of_quests as usize);
             for i in 0..amount_of_quests {
-                quests.push(QuestPoiList::read(r)?);
+                quests.push(QuestPoiList::read(&mut r)?);
             }
             quests
         };

@@ -28,14 +28,14 @@ impl crate::Message for CMSG_GUILD_INFO_TEXT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=256).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FC, size: body_size as u32 });
         }
 
         // guild_info: CString
         let guild_info = {
-            let guild_info = crate::util::read_c_string_to_vec(r)?;
+            let guild_info = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(guild_info)?
         };
 

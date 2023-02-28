@@ -50,25 +50,25 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0008, size: body_size as u32 });
         }
 
         // time_in_msec: u32
-        let time_in_msec = crate::util::read_u32_le(r)?;
+        let time_in_msec = crate::util::read_u32_le(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // unknown: u64
-        let unknown = crate::util::read_u64_le(r)?;
+        let unknown = crate::util::read_u64_le(&mut r)?;
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         // orientation: f32
-        let orientation = crate::util::read_f32_le(r)?;
+        let orientation = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             time_in_msec,

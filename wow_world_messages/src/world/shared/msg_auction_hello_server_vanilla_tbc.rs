@@ -30,16 +30,16 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0255, size: body_size as u32 });
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(r)?;
+        let auctioneer = Guid::read(&mut r)?;
 
         // auction_house_id: u32
-        let auction_house_id = crate::util::read_u32_le(r)?;
+        let auction_house_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             auctioneer,

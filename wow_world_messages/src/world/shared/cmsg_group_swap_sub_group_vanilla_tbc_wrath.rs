@@ -37,20 +37,20 @@ impl crate::Message for CMSG_GROUP_SWAP_SUB_GROUP {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=512).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0280, size: body_size as u32 });
         }
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // swap_with_name: CString
         let swap_with_name = {
-            let swap_with_name = crate::util::read_c_string_to_vec(r)?;
+            let swap_with_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(swap_with_name)?
         };
 

@@ -188,23 +188,23 @@ impl NestedNotIf {
 }
 
 impl NestedNotIf {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // t: TEnum
-        let t: TEnum = crate::util::read_u8_le(r)?.try_into()?;
+        let t: TEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let t_if = match t {
             TEnum::Zero => NestedNotIf_TEnum::Zero,
             TEnum::One => {
                 // not_zero: u8
-                let not_zero = crate::util::read_u8_le(r)?;
+                let not_zero = crate::util::read_u8_le(&mut r)?;
 
                 // e: NestedEnum
-                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
+                let e: NestedEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::Nested => {
                         // one: u8
-                        let one = crate::util::read_u8_le(r)?;
+                        let one = crate::util::read_u8_le(&mut r)?;
 
                         NestedNotIf_NestedEnum::Nested {
                             one,
@@ -220,15 +220,15 @@ impl NestedNotIf {
             }
             TEnum::Two => {
                 // not_zero: u8
-                let not_zero = crate::util::read_u8_le(r)?;
+                let not_zero = crate::util::read_u8_le(&mut r)?;
 
                 // e: NestedEnum
-                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
+                let e: NestedEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::Nested => {
                         // one: u8
-                        let one = crate::util::read_u8_le(r)?;
+                        let one = crate::util::read_u8_le(&mut r)?;
 
                         NestedNotIf_NestedEnum::Nested {
                             one,
@@ -244,15 +244,15 @@ impl NestedNotIf {
             }
             TEnum::Three => {
                 // not_zero: u8
-                let not_zero = crate::util::read_u8_le(r)?;
+                let not_zero = crate::util::read_u8_le(&mut r)?;
 
                 // e: NestedEnum
-                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
+                let e: NestedEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::Nested => {
                         // one: u8
-                        let one = crate::util::read_u8_le(r)?;
+                        let one = crate::util::read_u8_le(&mut r)?;
 
                         NestedNotIf_NestedEnum::Nested {
                             one,
@@ -268,15 +268,15 @@ impl NestedNotIf {
             }
             TEnum::Four => {
                 // not_zero: u8
-                let not_zero = crate::util::read_u8_le(r)?;
+                let not_zero = crate::util::read_u8_le(&mut r)?;
 
                 // e: NestedEnum
-                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
+                let e: NestedEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::Nested => {
                         // one: u8
-                        let one = crate::util::read_u8_le(r)?;
+                        let one = crate::util::read_u8_le(&mut r)?;
 
                         NestedNotIf_NestedEnum::Nested {
                             one,
@@ -292,15 +292,15 @@ impl NestedNotIf {
             }
             TEnum::Five => {
                 // not_zero: u8
-                let not_zero = crate::util::read_u8_le(r)?;
+                let not_zero = crate::util::read_u8_le(&mut r)?;
 
                 // e: NestedEnum
-                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
+                let e: NestedEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::Nested => {
                         // one: u8
-                        let one = crate::util::read_u8_le(r)?;
+                        let one = crate::util::read_u8_le(&mut r)?;
 
                         NestedNotIf_NestedEnum::Nested {
                             one,
@@ -316,15 +316,15 @@ impl NestedNotIf {
             }
             TEnum::Six => {
                 // not_zero: u8
-                let not_zero = crate::util::read_u8_le(r)?;
+                let not_zero = crate::util::read_u8_le(&mut r)?;
 
                 // e: NestedEnum
-                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
+                let e: NestedEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::Nested => {
                         // one: u8
-                        let one = crate::util::read_u8_le(r)?;
+                        let one = crate::util::read_u8_le(&mut r)?;
 
                         NestedNotIf_NestedEnum::Nested {
                             one,
@@ -340,15 +340,15 @@ impl NestedNotIf {
             }
             TEnum::Rest => {
                 // not_zero: u8
-                let not_zero = crate::util::read_u8_le(r)?;
+                let not_zero = crate::util::read_u8_le(&mut r)?;
 
                 // e: NestedEnum
-                let e: NestedEnum = crate::util::read_u8_le(r)?.try_into()?;
+                let e: NestedEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let e_if = match e {
                     NestedEnum::Nested => {
                         // one: u8
-                        let one = crate::util::read_u8_le(r)?;
+                        let one = crate::util::read_u8_le(&mut r)?;
 
                         NestedNotIf_NestedEnum::Nested {
                             one,

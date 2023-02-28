@@ -35,19 +35,19 @@ impl crate::Message for CMSG_OFFER_PETITION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C3, size: body_size as u32 });
         }
 
         // unknown0: u32
-        let unknown0 = crate::util::read_u32_le(r)?;
+        let unknown0 = crate::util::read_u32_le(&mut r)?;
 
         // petition: Guid
-        let petition = Guid::read(r)?;
+        let petition = Guid::read(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(r)?;
+        let target = Guid::read(&mut r)?;
 
         Ok(Self {
             unknown0,

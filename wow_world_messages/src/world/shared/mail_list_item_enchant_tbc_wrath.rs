@@ -31,15 +31,15 @@ impl MailListItemEnchant {
 }
 
 impl MailListItemEnchant {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // charges: u32
-        let charges = crate::util::read_u32_le(r)?;
+        let charges = crate::util::read_u32_le(&mut r)?;
 
         // duration: u32
-        let duration = crate::util::read_u32_le(r)?;
+        let duration = crate::util::read_u32_le(&mut r)?;
 
         // enchant_id: u32
-        let enchant_id = crate::util::read_u32_le(r)?;
+        let enchant_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             charges,

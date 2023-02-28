@@ -46,20 +46,20 @@ impl crate::Message for SMSG_GMRESPONSE_RECEIVED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(13..=1288).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04EF, size: body_size as u32 });
         }
 
         // response_id: u32
-        let response_id = crate::util::read_u32_le(r)?;
+        let response_id = crate::util::read_u32_le(&mut r)?;
 
         // ticket_id: u32
-        let ticket_id = crate::util::read_u32_le(r)?;
+        let ticket_id = crate::util::read_u32_le(&mut r)?;
 
         // message: CString
         let message = {
-            let message = crate::util::read_c_string_to_vec(r)?;
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(message)?
         };
 
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_GMRESPONSE_RECEIVED {
         let response = {
             let mut response = [(); 4].map(|_| String::default());
             for i in response.iter_mut() {
-                let s = crate::util::read_c_string_to_vec(r)?;
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
                 *i = String::from_utf8(s)?;
             }
             response

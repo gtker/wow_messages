@@ -30,16 +30,16 @@ impl crate::Message for SMSG_TITLE_EARNED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0373, size: body_size as u32 });
         }
 
         // title: u32
-        let title = crate::util::read_u32_le(r)?;
+        let title = crate::util::read_u32_le(&mut r)?;
 
         // status: TitleEarnStatus
-        let status: TitleEarnStatus = crate::util::read_u32_le(r)?.try_into()?;
+        let status: TitleEarnStatus = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             title,

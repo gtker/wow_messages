@@ -50,25 +50,25 @@ impl crate::Message for SMSG_PET_MODE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017A, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // react_state: PetReactState
-        let react_state: PetReactState = crate::util::read_u8_le(r)?.try_into()?;
+        let react_state: PetReactState = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // command_state: PetCommandState
-        let command_state: PetCommandState = crate::util::read_u8_le(r)?.try_into()?;
+        let command_state: PetCommandState = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // pet_enabled: PetEnabled
-        let pet_enabled: PetEnabled = crate::util::read_u8_le(r)?.try_into()?;
+        let pet_enabled: PetEnabled = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

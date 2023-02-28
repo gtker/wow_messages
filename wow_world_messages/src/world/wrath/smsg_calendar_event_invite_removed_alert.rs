@@ -41,22 +41,22 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_REMOVED_ALERT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 17 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0441, size: body_size as u32 });
         }
 
         // event_id: Guid
-        let event_id = Guid::read(r)?;
+        let event_id = Guid::read(&mut r)?;
 
         // event_time: DateTime
-        let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         // status: u8
-        let status = crate::util::read_u8_le(r)?;
+        let status = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             event_id,

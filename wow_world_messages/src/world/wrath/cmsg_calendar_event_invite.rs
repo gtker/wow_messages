@@ -49,28 +49,28 @@ impl crate::Message for CMSG_CALENDAR_EVENT_INVITE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(19..=274).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0431, size: body_size as u32 });
         }
 
         // event: Guid
-        let event = Guid::read(r)?;
+        let event = Guid::read(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(r)?;
+        let invite_id = Guid::read(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // pre_event: Bool
-        let pre_event = crate::util::read_u8_le(r)? != 0;
+        let pre_event = crate::util::read_u8_le(&mut r)? != 0;
 
         // guild_event: Bool
-        let guild_event = crate::util::read_u8_le(r)? != 0;
+        let guild_event = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             event,

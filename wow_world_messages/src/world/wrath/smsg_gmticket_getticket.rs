@@ -80,43 +80,43 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=279).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0212, size: body_size as u32 });
         }
 
         // status: GmTicketStatus
-        let status: GmTicketStatus = crate::util::read_u32_le(r)?.try_into()?;
+        let status: GmTicketStatus = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let status_if = match status {
             GmTicketStatus::DbError => SMSG_GMTICKET_GETTICKET_GmTicketStatus::DbError,
             GmTicketStatus::HasText => {
                 // id: u32
-                let id = crate::util::read_u32_le(r)?;
+                let id = crate::util::read_u32_le(&mut r)?;
 
                 // text: CString
                 let text = {
-                    let text = crate::util::read_c_string_to_vec(r)?;
+                    let text = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(text)?
                 };
 
                 // need_more_help: Bool
-                let need_more_help = crate::util::read_u8_le(r)? != 0;
+                let need_more_help = crate::util::read_u8_le(&mut r)? != 0;
 
                 // days_since_ticket_creation: f32
-                let days_since_ticket_creation = crate::util::read_f32_le(r)?;
+                let days_since_ticket_creation = crate::util::read_f32_le(&mut r)?;
 
                 // days_since_oldest_ticket_creation: f32
-                let days_since_oldest_ticket_creation = crate::util::read_f32_le(r)?;
+                let days_since_oldest_ticket_creation = crate::util::read_f32_le(&mut r)?;
 
                 // days_since_last_updated: f32
-                let days_since_last_updated = crate::util::read_f32_le(r)?;
+                let days_since_last_updated = crate::util::read_f32_le(&mut r)?;
 
                 // escalation_status: GmTicketEscalationStatus
-                let escalation_status: GmTicketEscalationStatus = crate::util::read_u8_le(r)?.try_into()?;
+                let escalation_status: GmTicketEscalationStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // read_by_gm: Bool
-                let read_by_gm = crate::util::read_u8_le(r)? != 0;
+                let read_by_gm = crate::util::read_u8_le(&mut r)? != 0;
 
                 SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
                     days_since_last_updated,

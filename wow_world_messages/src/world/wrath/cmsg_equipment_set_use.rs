@@ -27,7 +27,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_USE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 190 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04D5, size: body_size as u32 });
         }
@@ -36,7 +36,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_USE {
         let sets = {
             let mut sets = [EquipmentSet::default(); 19];
             for i in sets.iter_mut() {
-                *i = EquipmentSet::read(r)?;
+                *i = EquipmentSet::read(&mut r)?;
             }
             sets
         };

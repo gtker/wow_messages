@@ -26,12 +26,12 @@ impl GuildBankSocket {
 }
 
 impl GuildBankSocket {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // socket_index: u8
-        let socket_index = crate::util::read_u8_le(r)?;
+        let socket_index = crate::util::read_u8_le(&mut r)?;
 
         // gem: u32
-        let gem = crate::util::read_u32_le(r)?;
+        let gem = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             socket_index,

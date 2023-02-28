@@ -30,16 +30,16 @@ impl crate::Message for CMSG_MAIL_TAKE_MONEY {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0245, size: body_size as u32 });
         }
 
         // mailbox: Guid
-        let mailbox = Guid::read(r)?;
+        let mailbox = Guid::read(&mut r)?;
 
         // mail_id: u32
-        let mail_id = crate::util::read_u32_le(r)?;
+        let mail_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             mailbox,

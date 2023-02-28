@@ -51,18 +51,18 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=73).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0321, size: body_size as u32 });
         }
 
         // update_type: RaidTargetUpdateType
-        let update_type: RaidTargetUpdateType = crate::util::read_u8_le(r)?.try_into()?;
+        let update_type: RaidTargetUpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let update_type_if = match update_type {
             RaidTargetUpdateType::Partial => {
                 // raid_target: RaidTargetUpdate
-                let raid_target = RaidTargetUpdate::read(r)?;
+                let raid_target = RaidTargetUpdate::read(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
                     raid_target,
@@ -73,7 +73,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
                 let raid_targets = {
                     let mut raid_targets = [RaidTargetUpdate::default(); 8];
                     for i in raid_targets.iter_mut() {
-                        *i = RaidTargetUpdate::read(r)?;
+                        *i = RaidTargetUpdate::read(&mut r)?;
                     }
                     raid_targets
                 };

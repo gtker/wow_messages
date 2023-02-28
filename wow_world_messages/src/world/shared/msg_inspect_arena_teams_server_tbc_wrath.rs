@@ -60,34 +60,34 @@ impl crate::Message for MSG_INSPECT_ARENA_TEAMS_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 33 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0377, size: body_size as u32 });
         }
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // slot: u8
-        let slot = crate::util::read_u8_le(r)?;
+        let slot = crate::util::read_u8_le(&mut r)?;
 
         // arena_team: u32
-        let arena_team = crate::util::read_u32_le(r)?;
+        let arena_team = crate::util::read_u32_le(&mut r)?;
 
         // rating: u32
-        let rating = crate::util::read_u32_le(r)?;
+        let rating = crate::util::read_u32_le(&mut r)?;
 
         // games_played_this_season: u32
-        let games_played_this_season = crate::util::read_u32_le(r)?;
+        let games_played_this_season = crate::util::read_u32_le(&mut r)?;
 
         // wins_this_season: u32
-        let wins_this_season = crate::util::read_u32_le(r)?;
+        let wins_this_season = crate::util::read_u32_le(&mut r)?;
 
         // total_games_played: u32
-        let total_games_played = crate::util::read_u32_le(r)?;
+        let total_games_played = crate::util::read_u32_le(&mut r)?;
 
         // personal_rating: u32
-        let personal_rating = crate::util::read_u32_le(r)?;
+        let personal_rating = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             player,

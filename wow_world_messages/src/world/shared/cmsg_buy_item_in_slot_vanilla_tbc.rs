@@ -45,25 +45,25 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 22 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A3, size: body_size as u32 });
         }
 
         // vendor: Guid
-        let vendor = Guid::read(r)?;
+        let vendor = Guid::read(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // bag: Guid
-        let bag = Guid::read(r)?;
+        let bag = Guid::read(&mut r)?;
 
         // bag_slot: u8
-        let bag_slot = crate::util::read_u8_le(r)?;
+        let bag_slot = crate::util::read_u8_le(&mut r)?;
 
         // amount: u8
-        let amount = crate::util::read_u8_le(r)?;
+        let amount = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             vendor,

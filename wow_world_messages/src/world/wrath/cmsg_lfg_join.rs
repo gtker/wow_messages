@@ -65,47 +65,47 @@ impl crate::Message for CMSG_LFG_JOIN {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=1544).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035C, size: body_size as u32 });
         }
 
         // roles: u32
-        let roles = crate::util::read_u32_le(r)?;
+        let roles = crate::util::read_u32_le(&mut r)?;
 
         // no_partial_clear: Bool
-        let no_partial_clear = crate::util::read_u8_le(r)? != 0;
+        let no_partial_clear = crate::util::read_u8_le(&mut r)? != 0;
 
         // achievements: Bool
-        let achievements = crate::util::read_u8_le(r)? != 0;
+        let achievements = crate::util::read_u8_le(&mut r)? != 0;
 
         // amount_of_slots: u8
-        let amount_of_slots = crate::util::read_u8_le(r)?;
+        let amount_of_slots = crate::util::read_u8_le(&mut r)?;
 
         // slots: u32[amount_of_slots]
         let slots = {
             let mut slots = Vec::with_capacity(amount_of_slots as usize);
             for i in 0..amount_of_slots {
-                slots.push(crate::util::read_u32_le(r)?);
+                slots.push(crate::util::read_u32_le(&mut r)?);
             }
             slots
         };
 
         // amount_of_needs: u8
-        let amount_of_needs = crate::util::read_u8_le(r)?;
+        let amount_of_needs = crate::util::read_u8_le(&mut r)?;
 
         // needs: u8[amount_of_needs]
         let needs = {
             let mut needs = Vec::with_capacity(amount_of_needs as usize);
             for i in 0..amount_of_needs {
-                needs.push(crate::util::read_u8_le(r)?);
+                needs.push(crate::util::read_u8_le(&mut r)?);
             }
             needs
         };
 
         // comment: CString
         let comment = {
-            let comment = crate::util::read_c_string_to_vec(r)?;
+            let comment = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(comment)?
         };
 

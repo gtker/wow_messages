@@ -60,34 +60,34 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 36 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025E, size: body_size as u32 });
         }
 
         // auction_house_id: u32
-        let auction_house_id = crate::util::read_u32_le(r)?;
+        let auction_house_id = crate::util::read_u32_le(&mut r)?;
 
         // auction_id: u32
-        let auction_id = crate::util::read_u32_le(r)?;
+        let auction_id = crate::util::read_u32_le(&mut r)?;
 
         // bidder: Guid
-        let bidder = Guid::read(r)?;
+        let bidder = Guid::read(&mut r)?;
 
         // bid_sum: u32
-        let bid_sum = crate::util::read_u32_le(r)?;
+        let bid_sum = crate::util::read_u32_le(&mut r)?;
 
         // new_highest_bid: u32
-        let new_highest_bid = crate::util::read_u32_le(r)?;
+        let new_highest_bid = crate::util::read_u32_le(&mut r)?;
 
         // out_bid_amount: u32
-        let out_bid_amount = crate::util::read_u32_le(r)?;
+        let out_bid_amount = crate::util::read_u32_le(&mut r)?;
 
         // item_template: u32
-        let item_template = crate::util::read_u32_le(r)?;
+        let item_template = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             auction_house_id,

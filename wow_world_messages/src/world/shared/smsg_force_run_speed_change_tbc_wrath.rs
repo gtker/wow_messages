@@ -50,22 +50,22 @@ impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(11..=18).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E2, size: body_size as u32 });
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // move_event: u32
-        let move_event = crate::util::read_u32_le(r)?;
+        let move_event = crate::util::read_u32_le(&mut r)?;
 
         // unknown: u8
-        let unknown = crate::util::read_u8_le(r)?;
+        let unknown = crate::util::read_u8_le(&mut r)?;
 
         // speed: f32
-        let speed = crate::util::read_f32_le(r)?;
+        let speed = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             guid,

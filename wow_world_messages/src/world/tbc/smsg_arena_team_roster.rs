@@ -42,25 +42,25 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x034E, size: body_size as u32 });
         }
 
         // arena_team: u32
-        let arena_team = crate::util::read_u32_le(r)?;
+        let arena_team = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(r)?;
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
 
         // arena_type: ArenaType
-        let arena_type: ArenaType = crate::util::read_u8_le(r)?.try_into()?;
+        let arena_type: ArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // members: ArenaTeamMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
             for i in 0..amount_of_members {
-                members.push(ArenaTeamMember::read(r)?);
+                members.push(ArenaTeamMember::read(&mut r)?);
             }
             members
         };

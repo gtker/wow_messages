@@ -51,28 +51,28 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 44 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0462, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // elevation: f32
-        let elevation = crate::util::read_f32_le(r)?;
+        let elevation = crate::util::read_f32_le(&mut r)?;
 
         // speed: f32
-        let speed = crate::util::read_f32_le(r)?;
+        let speed = crate::util::read_f32_le(&mut r)?;
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         // target: Vector3d
-        let target = Vector3d::read(r)?;
+        let target = Vector3d::read(&mut r)?;
 
         Ok(Self {
             guid,

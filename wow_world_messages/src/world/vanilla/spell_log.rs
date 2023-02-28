@@ -555,19 +555,19 @@ impl SpellLog {
 }
 
 impl SpellLog {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // effect: SpellEffect
-        let effect: SpellEffect = crate::util::read_u32_le(r)?.try_into()?;
+        let effect: SpellEffect = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // amount_of_logs: u32
-        let _amount_of_logs = crate::util::read_u32_le(r)?;
+        let _amount_of_logs = crate::util::read_u32_le(&mut r)?;
         // amount_of_logs is expected to always be 1 (1)
 
         let effect_if = match effect {
             SpellEffect::None => SpellLog_SpellEffect::None,
             SpellEffect::Instakill => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::Instakill {
                     target7,
@@ -581,16 +581,16 @@ impl SpellLog {
             SpellEffect::EnvironmentalDamage => SpellLog_SpellEffect::EnvironmentalDamage,
             SpellEffect::PowerDrain => {
                 // target1: Guid
-                let target1 = Guid::read(r)?;
+                let target1 = Guid::read(&mut r)?;
 
                 // amount: u32
-                let amount = crate::util::read_u32_le(r)?;
+                let amount = crate::util::read_u32_le(&mut r)?;
 
                 // power: Power
-                let power: Power = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 // multiplier: f32
-                let multiplier = crate::util::read_f32_le(r)?;
+                let multiplier = crate::util::read_f32_le(&mut r)?;
 
                 SpellLog_SpellEffect::PowerDrain {
                     amount,
@@ -602,13 +602,13 @@ impl SpellLog {
             SpellEffect::HealthLeech => SpellLog_SpellEffect::HealthLeech,
             SpellEffect::Heal => {
                 // target2: Guid
-                let target2 = Guid::read(r)?;
+                let target2 = Guid::read(&mut r)?;
 
                 // heal_amount: u32
-                let heal_amount = crate::util::read_u32_le(r)?;
+                let heal_amount = crate::util::read_u32_le(&mut r)?;
 
                 // heal_critical: u32
-                let heal_critical = crate::util::read_u32_le(r)?;
+                let heal_critical = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::Heal {
                     heal_amount,
@@ -625,7 +625,7 @@ impl SpellLog {
             SpellEffect::WeaponDamageNoschool => SpellLog_SpellEffect::WeaponDamageNoschool,
             SpellEffect::Resurrect => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::Resurrect {
                     target7,
@@ -633,10 +633,10 @@ impl SpellLog {
             }
             SpellEffect::AddExtraAttacks => {
                 // target4: Guid
-                let target4 = Guid::read(r)?;
+                let target4 = Guid::read(&mut r)?;
 
                 // extra_attacks: u32
-                let extra_attacks = crate::util::read_u32_le(r)?;
+                let extra_attacks = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::AddExtraAttacks {
                     extra_attacks,
@@ -649,7 +649,7 @@ impl SpellLog {
             SpellEffect::Block => SpellLog_SpellEffect::Block,
             SpellEffect::CreateItem => {
                 // item: u32
-                let item = crate::util::read_u32_le(r)?;
+                let item = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::CreateItem {
                     item,
@@ -660,7 +660,7 @@ impl SpellLog {
             SpellEffect::PersistentAreaAura => SpellLog_SpellEffect::PersistentAreaAura,
             SpellEffect::Summon => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::Summon {
                     target7,
@@ -669,13 +669,13 @@ impl SpellLog {
             SpellEffect::Leap => SpellLog_SpellEffect::Leap,
             SpellEffect::Energize => {
                 // target3: Guid
-                let target3 = Guid::read(r)?;
+                let target3 = Guid::read(&mut r)?;
 
                 // energize_amount: u32
-                let energize_amount = crate::util::read_u32_le(r)?;
+                let energize_amount = crate::util::read_u32_le(&mut r)?;
 
                 // energize_power: u32
-                let energize_power = crate::util::read_u32_le(r)?;
+                let energize_power = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::Energize {
                     energize_amount,
@@ -687,7 +687,7 @@ impl SpellLog {
             SpellEffect::TriggerMissile => SpellLog_SpellEffect::TriggerMissile,
             SpellEffect::OpenLock => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::OpenLock {
                     target7,
@@ -699,7 +699,7 @@ impl SpellLog {
             SpellEffect::SpellDefense => SpellLog_SpellEffect::SpellDefense,
             SpellEffect::Dispel => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::Dispel {
                     target7,
@@ -709,7 +709,7 @@ impl SpellLog {
             SpellEffect::DualWield => SpellLog_SpellEffect::DualWield,
             SpellEffect::SummonWild => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonWild {
                     target7,
@@ -717,7 +717,7 @@ impl SpellLog {
             }
             SpellEffect::SummonGuardian => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonGuardian {
                     target7,
@@ -732,7 +732,7 @@ impl SpellLog {
             SpellEffect::Detect => SpellLog_SpellEffect::Detect,
             SpellEffect::TransDoor => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::TransDoor {
                     target7,
@@ -745,7 +745,7 @@ impl SpellLog {
             SpellEffect::Tamecreature => SpellLog_SpellEffect::Tamecreature,
             SpellEffect::SummonPet => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonPet {
                     target7,
@@ -755,7 +755,7 @@ impl SpellLog {
             SpellEffect::WeaponDamage => SpellLog_SpellEffect::WeaponDamage,
             SpellEffect::OpenLockItem => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::OpenLockItem {
                     target7,
@@ -766,7 +766,7 @@ impl SpellLog {
             SpellEffect::PowerBurn => SpellLog_SpellEffect::PowerBurn,
             SpellEffect::Threat => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::Threat {
                     target7,
@@ -777,13 +777,13 @@ impl SpellLog {
             SpellEffect::PowerFunnel => SpellLog_SpellEffect::PowerFunnel,
             SpellEffect::HealMaxHealth => {
                 // target2: Guid
-                let target2 = Guid::read(r)?;
+                let target2 = Guid::read(&mut r)?;
 
                 // heal_amount: u32
-                let heal_amount = crate::util::read_u32_le(r)?;
+                let heal_amount = crate::util::read_u32_le(&mut r)?;
 
                 // heal_critical: u32
-                let heal_critical = crate::util::read_u32_le(r)?;
+                let heal_critical = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::HealMaxHealth {
                     heal_amount,
@@ -793,10 +793,10 @@ impl SpellLog {
             }
             SpellEffect::InterruptCast => {
                 // target5: Guid
-                let target5 = Guid::read(r)?;
+                let target5 = Guid::read(&mut r)?;
 
                 // interrupted_spell: u32
-                let interrupted_spell = crate::util::read_u32_le(r)?;
+                let interrupted_spell = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::InterruptCast {
                     interrupted_spell,
@@ -805,7 +805,7 @@ impl SpellLog {
             }
             SpellEffect::Distract => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::Distract {
                     target7,
@@ -816,7 +816,7 @@ impl SpellLog {
             SpellEffect::AddFarsight => SpellLog_SpellEffect::AddFarsight,
             SpellEffect::SummonPossessed => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonPossessed {
                     target7,
@@ -824,7 +824,7 @@ impl SpellLog {
             }
             SpellEffect::SummonTotem => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonTotem {
                     target7,
@@ -833,7 +833,7 @@ impl SpellLog {
             SpellEffect::HealMechanical => SpellLog_SpellEffect::HealMechanical,
             SpellEffect::SummonObjectWild => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectWild {
                     target7,
@@ -843,7 +843,7 @@ impl SpellLog {
             SpellEffect::Attack => SpellLog_SpellEffect::Attack,
             SpellEffect::Sanctuary => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::Sanctuary {
                     target7,
@@ -858,7 +858,7 @@ impl SpellLog {
             SpellEffect::ActivateObject => SpellLog_SpellEffect::ActivateObject,
             SpellEffect::SummonTotemSlot1 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonTotemSlot1 {
                     target7,
@@ -866,7 +866,7 @@ impl SpellLog {
             }
             SpellEffect::SummonTotemSlot2 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonTotemSlot2 {
                     target7,
@@ -874,7 +874,7 @@ impl SpellLog {
             }
             SpellEffect::SummonTotemSlot3 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonTotemSlot3 {
                     target7,
@@ -882,7 +882,7 @@ impl SpellLog {
             }
             SpellEffect::SummonTotemSlot4 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonTotemSlot4 {
                     target7,
@@ -890,7 +890,7 @@ impl SpellLog {
             }
             SpellEffect::ThreatAll => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::ThreatAll {
                     target7,
@@ -903,7 +903,7 @@ impl SpellLog {
             SpellEffect::Charge => SpellLog_SpellEffect::Charge,
             SpellEffect::SummonCritter => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonCritter {
                     target7,
@@ -914,7 +914,7 @@ impl SpellLog {
             SpellEffect::Inebriate => SpellLog_SpellEffect::Inebriate,
             SpellEffect::FeedPet => {
                 // feed_pet_item: u32
-                let feed_pet_item = crate::util::read_u32_le(r)?;
+                let feed_pet_item = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::FeedPet {
                     feed_pet_item,
@@ -922,7 +922,7 @@ impl SpellLog {
             }
             SpellEffect::DismissPet => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::DismissPet {
                     target7,
@@ -931,7 +931,7 @@ impl SpellLog {
             SpellEffect::Reputation => SpellLog_SpellEffect::Reputation,
             SpellEffect::SummonObjectSlot1 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectSlot1 {
                     target7,
@@ -939,7 +939,7 @@ impl SpellLog {
             }
             SpellEffect::SummonObjectSlot2 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectSlot2 {
                     target7,
@@ -947,7 +947,7 @@ impl SpellLog {
             }
             SpellEffect::SummonObjectSlot3 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectSlot3 {
                     target7,
@@ -955,7 +955,7 @@ impl SpellLog {
             }
             SpellEffect::SummonObjectSlot4 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectSlot4 {
                     target7,
@@ -963,7 +963,7 @@ impl SpellLog {
             }
             SpellEffect::DispelMechanic => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::DispelMechanic {
                     target7,
@@ -973,13 +973,13 @@ impl SpellLog {
             SpellEffect::DestroyAllTotems => SpellLog_SpellEffect::DestroyAllTotems,
             SpellEffect::DurabilityDamage => {
                 // target6: Guid
-                let target6 = Guid::read(r)?;
+                let target6 = Guid::read(&mut r)?;
 
                 // item_to_damage: u32
-                let item_to_damage = crate::util::read_u32_le(r)?;
+                let item_to_damage = crate::util::read_u32_le(&mut r)?;
 
                 // unknown5: u32
-                let unknown5 = crate::util::read_u32_le(r)?;
+                let unknown5 = crate::util::read_u32_le(&mut r)?;
 
                 SpellLog_SpellEffect::DurabilityDamage {
                     item_to_damage,
@@ -989,7 +989,7 @@ impl SpellLog {
             }
             SpellEffect::SummonDemon => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SummonDemon {
                     target7,
@@ -997,7 +997,7 @@ impl SpellLog {
             }
             SpellEffect::ResurrectNew => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::ResurrectNew {
                     target7,
@@ -1005,7 +1005,7 @@ impl SpellLog {
             }
             SpellEffect::AttackMe => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::AttackMe {
                     target7,
@@ -1014,7 +1014,7 @@ impl SpellLog {
             SpellEffect::DurabilityDamagePct => SpellLog_SpellEffect::DurabilityDamagePct,
             SpellEffect::SkinPlayerCorpse => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::SkinPlayerCorpse {
                     target7,
@@ -1030,7 +1030,7 @@ impl SpellLog {
             SpellEffect::PlayerPull => SpellLog_SpellEffect::PlayerPull,
             SpellEffect::ModifyThreatPercent => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::ModifyThreatPercent {
                     target7,
@@ -1038,7 +1038,7 @@ impl SpellLog {
             }
             SpellEffect::Unknown126 => {
                 // target7: Guid
-                let target7 = Guid::read(r)?;
+                let target7 = Guid::read(&mut r)?;
 
                 SpellLog_SpellEffect::Unknown126 {
                     target7,

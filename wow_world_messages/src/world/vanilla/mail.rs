@@ -168,17 +168,17 @@ impl Mail {
 }
 
 impl Mail {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // message_id: u32
-        let message_id = crate::util::read_u32_le(r)?;
+        let message_id = crate::util::read_u32_le(&mut r)?;
 
         // message_type: MailType
-        let message_type: MailType = crate::util::read_u8_le(r)?.try_into()?;
+        let message_type: MailType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let message_type_if = match message_type {
             MailType::Normal => {
                 // sender: Guid
-                let sender = Guid::read(r)?;
+                let sender = Guid::read(&mut r)?;
 
                 Mail_MailType::Normal {
                     sender,
@@ -186,7 +186,7 @@ impl Mail {
             }
             MailType::Auction => {
                 // auction_id: u32
-                let auction_id = crate::util::read_u32_le(r)?;
+                let auction_id = crate::util::read_u32_le(&mut r)?;
 
                 Mail_MailType::Auction {
                     auction_id,
@@ -194,7 +194,7 @@ impl Mail {
             }
             MailType::Creature => {
                 // sender_id: u32
-                let sender_id = crate::util::read_u32_le(r)?;
+                let sender_id = crate::util::read_u32_le(&mut r)?;
 
                 Mail_MailType::Creature {
                     sender_id,
@@ -202,7 +202,7 @@ impl Mail {
             }
             MailType::Gameobject => {
                 // sender_id: u32
-                let sender_id = crate::util::read_u32_le(r)?;
+                let sender_id = crate::util::read_u32_le(&mut r)?;
 
                 Mail_MailType::Gameobject {
                     sender_id,
@@ -213,57 +213,57 @@ impl Mail {
 
         // subject: CString
         let subject = {
-            let subject = crate::util::read_c_string_to_vec(r)?;
+            let subject = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(subject)?
         };
 
         // item_text_id: u32
-        let item_text_id = crate::util::read_u32_le(r)?;
+        let item_text_id = crate::util::read_u32_le(&mut r)?;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // stationery: u32
-        let stationery = crate::util::read_u32_le(r)?;
+        let stationery = crate::util::read_u32_le(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // item_enchant_id: u32
-        let item_enchant_id = crate::util::read_u32_le(r)?;
+        let item_enchant_id = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::read_u32_le(r)?;
+        let item_suffix_factor = crate::util::read_u32_le(&mut r)?;
 
         // item_stack_size: u8
-        let item_stack_size = crate::util::read_u8_le(r)?;
+        let item_stack_size = crate::util::read_u8_le(&mut r)?;
 
         // item_spell_charges: u32
-        let item_spell_charges = crate::util::read_u32_le(r)?;
+        let item_spell_charges = crate::util::read_u32_le(&mut r)?;
 
         // max_durability: u32
-        let max_durability = crate::util::read_u32_le(r)?;
+        let max_durability = crate::util::read_u32_le(&mut r)?;
 
         // durability: u32
-        let durability = crate::util::read_u32_le(r)?;
+        let durability = crate::util::read_u32_le(&mut r)?;
 
         // money: Gold
-        let money = Gold::new(crate::util::read_u32_le(r)?);
+        let money = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // cash_on_delivery_amount: u32
-        let cash_on_delivery_amount = crate::util::read_u32_le(r)?;
+        let cash_on_delivery_amount = crate::util::read_u32_le(&mut r)?;
 
         // checked_timestamp: u32
-        let checked_timestamp = crate::util::read_u32_le(r)?;
+        let checked_timestamp = crate::util::read_u32_le(&mut r)?;
 
         // expiration_time: f32
-        let expiration_time = crate::util::read_f32_le(r)?;
+        let expiration_time = crate::util::read_f32_le(&mut r)?;
 
         // mail_template_id: u32
-        let mail_template_id = crate::util::read_u32_le(r)?;
+        let mail_template_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             message_id,

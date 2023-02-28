@@ -31,15 +31,15 @@ impl QuestItemRequirement {
 }
 
 impl QuestItemRequirement {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // item_count: u32
-        let item_count = crate::util::read_u32_le(r)?;
+        let item_count = crate::util::read_u32_le(&mut r)?;
 
         // item_display_id: u32
-        let item_display_id = crate::util::read_u32_le(r)?;
+        let item_display_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             item,

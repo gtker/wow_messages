@@ -25,13 +25,13 @@ impl crate::Message for CMSG_COMMENTATOR_ENABLE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03B4, size: body_size as u32 });
         }
 
         // option: CommentatorEnableOption
-        let option: CommentatorEnableOption = crate::util::read_u32_le(r)?.try_into()?;
+        let option: CommentatorEnableOption = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             option,

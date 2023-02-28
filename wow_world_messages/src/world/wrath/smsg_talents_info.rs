@@ -72,30 +72,30 @@ impl crate::Message for SMSG_TALENTS_INFO {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=459271).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C0, size: body_size as u32 });
         }
 
         // talent_type: TalentInfoType
-        let talent_type: TalentInfoType = crate::util::read_u8_le(r)?.try_into()?;
+        let talent_type: TalentInfoType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // points_left: u32
-        let points_left = crate::util::read_u32_le(r)?;
+        let points_left = crate::util::read_u32_le(&mut r)?;
 
         let talent_type_if = match talent_type {
             TalentInfoType::Player => {
                 // amount_of_specs: u8
-                let amount_of_specs = crate::util::read_u8_le(r)?;
+                let amount_of_specs = crate::util::read_u8_le(&mut r)?;
 
                 // active_spec: u8
-                let active_spec = crate::util::read_u8_le(r)?;
+                let active_spec = crate::util::read_u8_le(&mut r)?;
 
                 // specs: TalentInfoSpec[amount_of_specs]
                 let specs = {
                     let mut specs = Vec::with_capacity(amount_of_specs as usize);
                     for i in 0..amount_of_specs {
-                        specs.push(TalentInfoSpec::read(r)?);
+                        specs.push(TalentInfoSpec::read(&mut r)?);
                     }
                     specs
                 };
@@ -107,13 +107,13 @@ impl crate::Message for SMSG_TALENTS_INFO {
             }
             TalentInfoType::Pet => {
                 // amount_of_talents: u8
-                let amount_of_talents = crate::util::read_u8_le(r)?;
+                let amount_of_talents = crate::util::read_u8_le(&mut r)?;
 
                 // talents: InspectTalent[amount_of_talents]
                 let talents = {
                     let mut talents = Vec::with_capacity(amount_of_talents as usize);
                     for i in 0..amount_of_talents {
-                        talents.push(InspectTalent::read(r)?);
+                        talents.push(InspectTalent::read(&mut r)?);
                     }
                     talents
                 };

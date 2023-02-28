@@ -57,30 +57,30 @@ impl SendCalendarEvent {
 }
 
 impl SendCalendarEvent {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // event_id: Guid
-        let event_id = Guid::read(r)?;
+        let event_id = Guid::read(&mut r)?;
 
         // title: CString
         let title = {
-            let title = crate::util::read_c_string_to_vec(r)?;
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(title)?
         };
 
         // event_type: u32
-        let event_type = crate::util::read_u32_le(r)?;
+        let event_type = crate::util::read_u32_le(&mut r)?;
 
         // event_time: DateTime
-        let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(r)?;
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
 
         // creator: PackedGuid
-        let creator = Guid::read_packed(r)?;
+        let creator = Guid::read_packed(&mut r)?;
 
         Ok(Self {
             event_id,

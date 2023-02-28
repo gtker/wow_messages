@@ -65,36 +65,36 @@ impl QuestPoi {
 }
 
 impl QuestPoi {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // objective_id: u32
-        let objective_id = crate::util::read_u32_le(r)?;
+        let objective_id = crate::util::read_u32_le(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // floor_id: u32
-        let floor_id = crate::util::read_u32_le(r)?;
+        let floor_id = crate::util::read_u32_le(&mut r)?;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(r)?;
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_points: u32
-        let amount_of_points = crate::util::read_u32_le(r)?;
+        let amount_of_points = crate::util::read_u32_le(&mut r)?;
 
         // points: Vector2dUnsigned[amount_of_points]
         let points = {
             let mut points = Vec::with_capacity(amount_of_points as usize);
             for i in 0..amount_of_points {
-                points.push(Vector2dUnsigned::read(r)?);
+                points.push(Vector2dUnsigned::read(&mut r)?);
             }
             points
         };

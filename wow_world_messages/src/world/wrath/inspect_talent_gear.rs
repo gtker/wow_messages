@@ -43,21 +43,21 @@ impl InspectTalentGear {
 }
 
 impl InspectTalentGear {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // enchant_mask: EnchantMask
-        let enchant_mask = EnchantMask::read(r)?;
+        let enchant_mask = EnchantMask::read(&mut r)?;
 
         // unknown1: u16
-        let unknown1 = crate::util::read_u16_le(r)?;
+        let unknown1 = crate::util::read_u16_le(&mut r)?;
 
         // creator: PackedGuid
-        let creator = Guid::read_packed(r)?;
+        let creator = Guid::read_packed(&mut r)?;
 
         // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(r)?;
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             item,

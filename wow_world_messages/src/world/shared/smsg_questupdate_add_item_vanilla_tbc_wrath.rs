@@ -29,16 +29,16 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019A, size: body_size as u32 });
         }
 
         // required_item_id: u32
-        let required_item_id = crate::util::read_u32_le(r)?;
+        let required_item_id = crate::util::read_u32_le(&mut r)?;
 
         // items_required: u32
-        let items_required = crate::util::read_u32_le(r)?;
+        let items_required = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             required_item_id,

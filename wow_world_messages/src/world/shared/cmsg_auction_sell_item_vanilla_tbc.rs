@@ -45,25 +45,25 @@ impl crate::Message for CMSG_AUCTION_SELL_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 28 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0256, size: body_size as u32 });
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(r)?;
+        let auctioneer = Guid::read(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(r)?;
+        let item = Guid::read(&mut r)?;
 
         // starting_bid: u32
-        let starting_bid = crate::util::read_u32_le(r)?;
+        let starting_bid = crate::util::read_u32_le(&mut r)?;
 
         // buyout: u32
-        let buyout = crate::util::read_u32_le(r)?;
+        let buyout = crate::util::read_u32_le(&mut r)?;
 
         // auction_duration_in_minutes: u32
-        let auction_duration_in_minutes = crate::util::read_u32_le(r)?;
+        let auction_duration_in_minutes = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             auctioneer,

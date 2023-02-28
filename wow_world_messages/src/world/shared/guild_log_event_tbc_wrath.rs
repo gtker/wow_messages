@@ -76,12 +76,12 @@ impl GuildLogEvent {
 }
 
 impl GuildLogEvent {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // event: GuildEvent
-        let event: GuildEvent = crate::util::read_u8_le(r)?.try_into()?;
+        let event: GuildEvent = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // player1: Guid
-        let player1 = Guid::read(r)?;
+        let player1 = Guid::read(&mut r)?;
 
         let event_if = match event {
             GuildEvent::Promotion => GuildLogEvent_GuildEvent::Promotion,
@@ -89,7 +89,7 @@ impl GuildLogEvent {
             GuildEvent::Motd => GuildLogEvent_GuildEvent::Motd,
             GuildEvent::Joined => {
                 // player2: Guid
-                let player2 = Guid::read(r)?;
+                let player2 = Guid::read(&mut r)?;
 
                 GuildLogEvent_GuildEvent::Joined {
                     player2,
@@ -97,7 +97,7 @@ impl GuildLogEvent {
             }
             GuildEvent::Left => {
                 // player2: Guid
-                let player2 = Guid::read(r)?;
+                let player2 = Guid::read(&mut r)?;
 
                 GuildLogEvent_GuildEvent::Left {
                     player2,
@@ -121,7 +121,7 @@ impl GuildLogEvent {
         };
 
         // unix_time: u32
-        let unix_time = crate::util::read_u32_le(r)?;
+        let unix_time = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             event: event_if,

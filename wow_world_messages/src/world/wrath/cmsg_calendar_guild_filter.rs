@@ -34,19 +34,19 @@ impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042B, size: body_size as u32 });
         }
 
         // minimum_level: u32
-        let minimum_level = crate::util::read_u32_le(r)?;
+        let minimum_level = crate::util::read_u32_le(&mut r)?;
 
         // maximum_level: u32
-        let maximum_level = crate::util::read_u32_le(r)?;
+        let maximum_level = crate::util::read_u32_le(&mut r)?;
 
         // minimum_rank: u32
-        let minimum_rank = crate::util::read_u32_le(r)?;
+        let minimum_rank = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             minimum_level,

@@ -31,19 +31,19 @@ impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0490, size: body_size as u32 });
         }
 
         // amount_of_pending_sales: u32
-        let amount_of_pending_sales = crate::util::read_u32_le(r)?;
+        let amount_of_pending_sales = crate::util::read_u32_le(&mut r)?;
 
         // pending_sales: PendingAuctionSale[amount_of_pending_sales]
         let pending_sales = {
             let mut pending_sales = Vec::with_capacity(amount_of_pending_sales as usize);
             for i in 0..amount_of_pending_sales {
-                pending_sales.push(PendingAuctionSale::read(r)?);
+                pending_sales.push(PendingAuctionSale::read(&mut r)?);
             }
             pending_sales
         };

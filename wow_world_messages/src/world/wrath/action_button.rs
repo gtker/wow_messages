@@ -31,15 +31,15 @@ impl ActionButton {
 }
 
 impl ActionButton {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // action: u16
-        let action = crate::util::read_u16_le(r)?;
+        let action = crate::util::read_u16_le(&mut r)?;
 
         // action_type: u8
-        let action_type = crate::util::read_u8_le(r)?;
+        let action_type = crate::util::read_u8_le(&mut r)?;
 
         // misc: u8
-        let misc = crate::util::read_u8_le(r)?;
+        let misc = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             action,

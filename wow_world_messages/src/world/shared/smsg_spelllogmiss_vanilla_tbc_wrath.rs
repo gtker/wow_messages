@@ -49,28 +49,28 @@ impl crate::Message for SMSG_SPELLLOGMISS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(17..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024B, size: body_size as u32 });
         }
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // caster: Guid
-        let caster = Guid::read(r)?;
+        let caster = Guid::read(&mut r)?;
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // amount_of_targets: u32
-        let amount_of_targets = crate::util::read_u32_le(r)?;
+        let amount_of_targets = crate::util::read_u32_le(&mut r)?;
 
         // targets: SpellLogMiss[amount_of_targets]
         let targets = {
             let mut targets = Vec::with_capacity(amount_of_targets as usize);
             for i in 0..amount_of_targets {
-                targets.push(SpellLogMiss::read(r)?);
+                targets.push(SpellLogMiss::read(&mut r)?);
             }
             targets
         };

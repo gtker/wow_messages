@@ -59,22 +59,22 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=1541).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0178, size: body_size as u32 });
         }
 
         // reason: PetNameInvalidReason
-        let reason: PetNameInvalidReason = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let reason: PetNameInvalidReason = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // included: DeclinedPetNameIncluded
-        let included: DeclinedPetNameIncluded = crate::util::read_u8_le(r)?.try_into()?;
+        let included: DeclinedPetNameIncluded = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let included_if = match included {
             DeclinedPetNameIncluded::NotIncluded => SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::NotIncluded,
@@ -83,7 +83,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
                 let declined_names = {
                     let mut declined_names = [(); 5].map(|_| String::default());
                     for i in declined_names.iter_mut() {
-                        let s = crate::util::read_c_string_to_vec(r)?;
+                        let s = crate::util::read_c_string_to_vec(&mut r)?;
                         *i = String::from_utf8(s)?;
                     }
                     declined_names

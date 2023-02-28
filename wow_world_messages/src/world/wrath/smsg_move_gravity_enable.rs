@@ -30,16 +30,16 @@ impl crate::Message for SMSG_MOVE_GRAVITY_ENABLE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04D0, size: body_size as u32 });
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(r)?;
+        let unit = Guid::read_packed(&mut r)?;
 
         // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(r)?;
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             unit,

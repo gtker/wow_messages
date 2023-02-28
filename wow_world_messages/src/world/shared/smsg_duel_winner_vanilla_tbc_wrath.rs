@@ -43,23 +43,23 @@ impl crate::Message for SMSG_DUEL_WINNER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(3..=513).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x016B, size: body_size as u32 });
         }
 
         // reason: DuelWinnerReason
-        let reason: DuelWinnerReason = crate::util::read_u8_le(r)?.try_into()?;
+        let reason: DuelWinnerReason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // opponent_name: CString
         let opponent_name = {
-            let opponent_name = crate::util::read_c_string_to_vec(r)?;
+            let opponent_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(opponent_name)?
         };
 
         // initiator_name: CString
         let initiator_name = {
-            let initiator_name = crate::util::read_c_string_to_vec(r)?;
+            let initiator_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(initiator_name)?
         };
 

@@ -32,19 +32,19 @@ impl crate::Message for SMSG_SOCKET_GEMS_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050B, size: body_size as u32 });
         }
 
         // item: Guid
-        let item = Guid::read(r)?;
+        let item = Guid::read(&mut r)?;
 
         // sockets: u32[3]
         let sockets = {
             let mut sockets = [u32::default(); 3];
             for i in sockets.iter_mut() {
-                *i = crate::util::read_u32_le(r)?;
+                *i = crate::util::read_u32_le(&mut r)?;
             }
             sockets
         };

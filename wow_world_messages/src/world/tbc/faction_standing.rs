@@ -27,12 +27,12 @@ impl FactionStanding {
 }
 
 impl FactionStanding {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // faction: Faction
-        let faction: Faction = crate::util::read_u16_le(r)?.try_into()?;
+        let faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // standing: u32
-        let standing = crate::util::read_u32_le(r)?;
+        let standing = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             faction,

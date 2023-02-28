@@ -30,16 +30,16 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_FAILED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0192, size: body_size as u32 });
         }
 
         // quest_id: u32
-        let quest_id = crate::util::read_u32_le(r)?;
+        let quest_id = crate::util::read_u32_le(&mut r)?;
 
         // reason: QuestFailedReason
-        let reason: QuestFailedReason = crate::util::read_u32_le(r)?.try_into()?;
+        let reason: QuestFailedReason = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             quest_id,

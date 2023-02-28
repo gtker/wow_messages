@@ -52,31 +52,31 @@ impl crate::Message for SMSG_SPELLSTEALLOG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(13..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0333, size: body_size as u32 });
         }
 
         // victim: PackedGuid
-        let victim = Guid::read_packed(r)?;
+        let victim = Guid::read_packed(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // unknown: u8
-        let unknown = crate::util::read_u8_le(r)?;
+        let unknown = crate::util::read_u8_le(&mut r)?;
 
         // amount_of_spell_steals: u32
-        let amount_of_spell_steals = crate::util::read_u32_le(r)?;
+        let amount_of_spell_steals = crate::util::read_u32_le(&mut r)?;
 
         // spell_steals: SpellSteal[amount_of_spell_steals]
         let spell_steals = {
             let mut spell_steals = Vec::with_capacity(amount_of_spell_steals as usize);
             for i in 0..amount_of_spell_steals {
-                spell_steals.push(SpellSteal::read(r)?);
+                spell_steals.push(SpellSteal::read(&mut r)?);
             }
             spell_steals
         };

@@ -45,19 +45,19 @@ impl crate::Message for SMSG_REDIRECT_CLIENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 30 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050D, size: body_size as u32 });
         }
 
         // ip_address: u32
-        let ip_address = crate::util::read_u32_le(r)?;
+        let ip_address = crate::util::read_u32_le(&mut r)?;
 
         // port: u16
-        let port = crate::util::read_u16_le(r)?;
+        let port = crate::util::read_u16_le(&mut r)?;
 
         // unknown: u32
-        let unknown = crate::util::read_u32_le(r)?;
+        let unknown = crate::util::read_u32_le(&mut r)?;
 
         // hash: u8[20]
         let hash = {

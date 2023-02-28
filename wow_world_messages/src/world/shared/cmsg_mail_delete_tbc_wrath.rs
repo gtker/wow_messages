@@ -35,19 +35,19 @@ impl crate::Message for CMSG_MAIL_DELETE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0249, size: body_size as u32 });
         }
 
         // mailbox_id: Guid
-        let mailbox_id = Guid::read(r)?;
+        let mailbox_id = Guid::read(&mut r)?;
 
         // mail_id: u32
-        let mail_id = crate::util::read_u32_le(r)?;
+        let mail_id = crate::util::read_u32_le(&mut r)?;
 
         // mail_template_id: u32
-        let mail_template_id = crate::util::read_u32_le(r)?;
+        let mail_template_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             mailbox_id,

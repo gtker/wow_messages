@@ -38,20 +38,20 @@ impl crate::Message for CMSG_GUILD_RANK {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0231, size: body_size as u32 });
         }
 
         // rank_id: u32
-        let rank_id = crate::util::read_u32_le(r)?;
+        let rank_id = crate::util::read_u32_le(&mut r)?;
 
         // rights: u32
-        let rights = crate::util::read_u32_le(r)?;
+        let rights = crate::util::read_u32_le(&mut r)?;
 
         // rank_name: CString
         let rank_name = {
-            let rank_name = crate::util::read_c_string_to_vec(r)?;
+            let rank_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(rank_name)?
         };
 

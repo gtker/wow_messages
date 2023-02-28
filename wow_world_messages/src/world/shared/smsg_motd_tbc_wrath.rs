@@ -27,15 +27,15 @@ impl crate::Message for SMSG_MOTD {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=8004).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033D, size: body_size as u32 });
         }
 
         // motd: SizedCString
         let motd = {
-            let motd = crate::util::read_u32_le(r)?;
-            let motd = crate::util::read_sized_c_string_to_vec(r, motd)?;
+            let motd = crate::util::read_u32_le(&mut r)?;
+            let motd = crate::util::read_sized_c_string_to_vec(&mut r, motd)?;
             String::from_utf8(motd)?
         };
 

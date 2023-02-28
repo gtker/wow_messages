@@ -43,22 +43,22 @@ impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=21).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0468, size: body_size as u32 });
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(r)?;
+        let player = Guid::read_packed(&mut r)?;
 
         // achievement: u32
-        let achievement = crate::util::read_u32_le(r)?;
+        let achievement = crate::util::read_u32_le(&mut r)?;
 
         // earn_time: DateTime
-        let earn_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let earn_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // unknown: u32
-        let unknown = crate::util::read_u32_le(r)?;
+        let unknown = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             player,

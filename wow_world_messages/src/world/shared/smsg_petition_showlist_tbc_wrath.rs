@@ -37,22 +37,22 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=6153).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BC, size: body_size as u32 });
         }
 
         // npc: Guid
-        let npc = Guid::read(r)?;
+        let npc = Guid::read(&mut r)?;
 
         // amount_of_petitions: u8
-        let amount_of_petitions = crate::util::read_u8_le(r)?;
+        let amount_of_petitions = crate::util::read_u8_le(&mut r)?;
 
         // petitions: PetitionShowlist[amount_of_petitions]
         let petitions = {
             let mut petitions = Vec::with_capacity(amount_of_petitions as usize);
             for i in 0..amount_of_petitions {
-                petitions.push(PetitionShowlist::read(r)?);
+                petitions.push(PetitionShowlist::read(&mut r)?);
             }
             petitions
         };

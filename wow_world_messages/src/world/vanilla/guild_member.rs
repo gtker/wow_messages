@@ -91,35 +91,35 @@ impl GuildMember {
 }
 
 impl GuildMember {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // status: GuildMemberStatus
-        let status: GuildMemberStatus = crate::util::read_u8_le(r)?.try_into()?;
+        let status: GuildMemberStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // rank: u32
-        let rank = crate::util::read_u32_le(r)?;
+        let rank = crate::util::read_u32_le(&mut r)?;
 
         // level: u8
-        let level = crate::util::read_u8_le(r)?;
+        let level = crate::util::read_u8_le(&mut r)?;
 
         // class: Class
-        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
+        let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let status_if = match status {
             GuildMemberStatus::Offline => {
                 // time_offline: f32
-                let time_offline = crate::util::read_f32_le(r)?;
+                let time_offline = crate::util::read_f32_le(&mut r)?;
 
                 GuildMember_GuildMemberStatus::Offline {
                     time_offline,
@@ -130,13 +130,13 @@ impl GuildMember {
 
         // public_note: CString
         let public_note = {
-            let public_note = crate::util::read_c_string_to_vec(r)?;
+            let public_note = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(public_note)?
         };
 
         // officer_note: CString
         let officer_note = {
-            let officer_note = crate::util::read_c_string_to_vec(r)?;
+            let officer_note = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(officer_note)?
         };
 

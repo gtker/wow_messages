@@ -37,18 +37,18 @@ impl LfgRole {
 }
 
 impl LfgRole {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // ready: Bool
-        let ready = crate::util::read_u8_le(r)? != 0;
+        let ready = crate::util::read_u8_le(&mut r)? != 0;
 
         // roles: u32
-        let roles = crate::util::read_u32_le(r)?;
+        let roles = crate::util::read_u32_le(&mut r)?;
 
         // level: u8
-        let level = crate::util::read_u8_le(r)?;
+        let level = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             guid,

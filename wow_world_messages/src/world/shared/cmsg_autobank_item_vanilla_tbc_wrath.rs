@@ -29,16 +29,16 @@ impl crate::Message for CMSG_AUTOBANK_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0283, size: body_size as u32 });
         }
 
         // bag_index: u8
-        let bag_index = crate::util::read_u8_le(r)?;
+        let bag_index = crate::util::read_u8_le(&mut r)?;
 
         // slot_index: u8
-        let slot_index = crate::util::read_u8_le(r)?;
+        let slot_index = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             bag_index,

@@ -50,28 +50,28 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 28 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F1, size: body_size as u32 });
         }
 
         // vendor: Guid
-        let vendor = Guid::read(r)?;
+        let vendor = Guid::read(&mut r)?;
 
         // emblem_style: u32
-        let emblem_style = crate::util::read_u32_le(r)?;
+        let emblem_style = crate::util::read_u32_le(&mut r)?;
 
         // emblem_color: u32
-        let emblem_color = crate::util::read_u32_le(r)?;
+        let emblem_color = crate::util::read_u32_le(&mut r)?;
 
         // border_style: u32
-        let border_style = crate::util::read_u32_le(r)?;
+        let border_style = crate::util::read_u32_le(&mut r)?;
 
         // border_color: u32
-        let border_color = crate::util::read_u32_le(r)?;
+        let border_color = crate::util::read_u32_le(&mut r)?;
 
         // background_color: u32
-        let background_color = crate::util::read_u32_le(r)?;
+        let background_color = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             vendor,

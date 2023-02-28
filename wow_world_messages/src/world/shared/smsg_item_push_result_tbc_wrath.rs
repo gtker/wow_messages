@@ -84,43 +84,43 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 45 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0166, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // source: NewItemSource
-        let source: NewItemSource = crate::util::read_u32_le(r)?.try_into()?;
+        let source: NewItemSource = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // creation_type: NewItemCreationType
-        let creation_type: NewItemCreationType = crate::util::read_u32_le(r)?.try_into()?;
+        let creation_type: NewItemCreationType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // alert_chat: NewItemChatAlert
-        let alert_chat: NewItemChatAlert = crate::util::read_u32_le(r)?.try_into()?;
+        let alert_chat: NewItemChatAlert = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // bag_slot: u8
-        let bag_slot = crate::util::read_u8_le(r)?;
+        let bag_slot = crate::util::read_u8_le(&mut r)?;
 
         // item_slot: u32
-        let item_slot = crate::util::read_u32_le(r)?;
+        let item_slot = crate::util::read_u32_le(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::read_u32_le(r)?;
+        let item_suffix_factor = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // item_count: u32
-        let item_count = crate::util::read_u32_le(r)?;
+        let item_count = crate::util::read_u32_le(&mut r)?;
 
         // item_count_in_inventory: u32
-        let item_count_in_inventory = crate::util::read_u32_le(r)?;
+        let item_count_in_inventory = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             guid,

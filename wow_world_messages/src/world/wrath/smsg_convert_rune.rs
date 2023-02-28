@@ -29,16 +29,16 @@ impl crate::Message for SMSG_CONVERT_RUNE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0486, size: body_size as u32 });
         }
 
         // index: u8
-        let index = crate::util::read_u8_le(r)?;
+        let index = crate::util::read_u8_le(&mut r)?;
 
         // new_type: u8
-        let new_type = crate::util::read_u8_le(r)?;
+        let new_type = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             index,

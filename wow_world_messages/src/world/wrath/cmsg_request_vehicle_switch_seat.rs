@@ -30,16 +30,16 @@ impl crate::Message for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0479, size: body_size as u32 });
         }
 
         // vehicle: Guid
-        let vehicle = Guid::read(r)?;
+        let vehicle = Guid::read(&mut r)?;
 
         // seat: u8
-        let seat = crate::util::read_u8_le(r)?;
+        let seat = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             vehicle,

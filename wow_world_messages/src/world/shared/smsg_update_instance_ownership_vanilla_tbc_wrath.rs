@@ -24,13 +24,13 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032B, size: body_size as u32 });
         }
 
         // player_is_saved_to_a_raid: Bool32
-        let player_is_saved_to_a_raid = crate::util::read_u32_le(r)? != 0;
+        let player_is_saved_to_a_raid = crate::util::read_u32_le(&mut r)? != 0;
 
         Ok(Self {
             player_is_saved_to_a_raid,

@@ -30,19 +30,19 @@ impl crate::Message for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0501, size: body_size as u32 });
         }
 
         // amount_of_reward_quests: u32
-        let amount_of_reward_quests = crate::util::read_u32_le(r)?;
+        let amount_of_reward_quests = crate::util::read_u32_le(&mut r)?;
 
         // reward_quests: u32[amount_of_reward_quests]
         let reward_quests = {
             let mut reward_quests = Vec::with_capacity(amount_of_reward_quests as usize);
             for i in 0..amount_of_reward_quests {
-                reward_quests.push(crate::util::read_u32_le(r)?);
+                reward_quests.push(crate::util::read_u32_le(&mut r)?);
             }
             reward_quests
         };

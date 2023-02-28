@@ -38,19 +38,19 @@ impl crate::Message for SMSG_BUY_FAILED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A5, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // result: BuyResult
-        let result: BuyResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: BuyResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

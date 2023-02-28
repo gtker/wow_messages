@@ -30,16 +30,16 @@ impl crate::Message for SMSG_DUEL_REQUESTED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0167, size: body_size as u32 });
         }
 
         // initiator: Guid
-        let initiator = Guid::read(r)?;
+        let initiator = Guid::read(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(r)?;
+        let target = Guid::read(&mut r)?;
 
         Ok(Self {
             initiator,

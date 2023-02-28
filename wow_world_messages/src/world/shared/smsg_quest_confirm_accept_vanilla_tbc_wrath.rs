@@ -39,22 +39,22 @@ impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(13..=268).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019C, size: body_size as u32 });
         }
 
         // quest_id: u32
-        let quest_id = crate::util::read_u32_le(r)?;
+        let quest_id = crate::util::read_u32_le(&mut r)?;
 
         // quest_title: CString
         let quest_title = {
-            let quest_title = crate::util::read_c_string_to_vec(r)?;
+            let quest_title = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(quest_title)?
         };
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         Ok(Self {
             quest_id,

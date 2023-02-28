@@ -61,28 +61,28 @@ impl crate::Message for SMSG_MOVE_KNOCK_BACK {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(22..=29).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EF, size: body_size as u32 });
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(r)?;
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
 
         // v_cos: f32
-        let v_cos = crate::util::read_f32_le(r)?;
+        let v_cos = crate::util::read_f32_le(&mut r)?;
 
         // v_sin: f32
-        let v_sin = crate::util::read_f32_le(r)?;
+        let v_sin = crate::util::read_f32_le(&mut r)?;
 
         // horizontal_speed: f32
-        let horizontal_speed = crate::util::read_f32_le(r)?;
+        let horizontal_speed = crate::util::read_f32_le(&mut r)?;
 
         // vertical_speed: f32
-        let vertical_speed = crate::util::read_f32_le(r)?;
+        let vertical_speed = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             guid,

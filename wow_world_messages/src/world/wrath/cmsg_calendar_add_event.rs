@@ -85,52 +85,52 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(28..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042D, size: body_size as u32 });
         }
 
         // title: CString
         let title = {
-            let title = crate::util::read_c_string_to_vec(r)?;
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(title)?
         };
 
         // description: CString
         let description = {
-            let description = crate::util::read_c_string_to_vec(r)?;
+            let description = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(description)?
         };
 
         // event_type: u8
-        let event_type = crate::util::read_u8_le(r)?;
+        let event_type = crate::util::read_u8_le(&mut r)?;
 
         // repeatable: Bool
-        let repeatable = crate::util::read_u8_le(r)? != 0;
+        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
 
         // maximum_invites: u32
-        let maximum_invites = crate::util::read_u32_le(r)?;
+        let maximum_invites = crate::util::read_u32_le(&mut r)?;
 
         // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(r)?;
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
 
         // event_time: DateTime
-        let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // time_zone_time: DateTime
-        let time_zone_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let time_zone_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_invitees: u32
-        let amount_of_invitees = crate::util::read_u32_le(r)?;
+        let amount_of_invitees = crate::util::read_u32_le(&mut r)?;
 
         // invitees: CalendarInvitee[amount_of_invitees]
         let invitees = {
             let mut invitees = Vec::with_capacity(amount_of_invitees as usize);
             for i in 0..amount_of_invitees {
-                invitees.push(CalendarInvitee::read(r)?);
+                invitees.push(CalendarInvitee::read(&mut r)?);
             }
             invitees
         };

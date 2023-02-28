@@ -39,22 +39,22 @@ impl crate::Message for CMSG_SET_ACTION_BUTTON {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0128, size: body_size as u32 });
         }
 
         // button: u8
-        let button = crate::util::read_u8_le(r)?;
+        let button = crate::util::read_u8_le(&mut r)?;
 
         // action: u16
-        let action = crate::util::read_u16_le(r)?;
+        let action = crate::util::read_u16_le(&mut r)?;
 
         // misc: u8
-        let misc = crate::util::read_u8_le(r)?;
+        let misc = crate::util::read_u8_le(&mut r)?;
 
         // action_type: u8
-        let action_type = crate::util::read_u8_le(r)?;
+        let action_type = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             button,

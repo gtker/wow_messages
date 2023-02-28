@@ -43,21 +43,21 @@ impl TransportInfo {
 }
 
 impl TransportInfo {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         // orientation: f32
-        let orientation = crate::util::read_f32_le(r)?;
+        let orientation = crate::util::read_f32_le(&mut r)?;
 
         // timestamp: u32
-        let timestamp = crate::util::read_u32_le(r)?;
+        let timestamp = crate::util::read_u32_le(&mut r)?;
 
         // seat: u8
-        let seat = crate::util::read_u8_le(r)?;
+        let seat = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             guid,

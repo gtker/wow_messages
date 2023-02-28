@@ -37,22 +37,22 @@ impl crate::Message for SMSG_GUILD_EVENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=65538).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0092, size: body_size as u32 });
         }
 
         // event: GuildEvent
-        let event: GuildEvent = crate::util::read_u8_le(r)?.try_into()?;
+        let event: GuildEvent = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // amount_of_events: u8
-        let amount_of_events = crate::util::read_u8_le(r)?;
+        let amount_of_events = crate::util::read_u8_le(&mut r)?;
 
         // event_descriptions: CString[amount_of_events]
         let event_descriptions = {
             let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
             for i in 0..amount_of_events {
-                let s = crate::util::read_c_string_to_vec(r)?;
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
                 event_descriptions.push(String::from_utf8(s)?);
             }
             event_descriptions

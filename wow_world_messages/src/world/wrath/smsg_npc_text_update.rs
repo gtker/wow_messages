@@ -32,19 +32,19 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(252..=4332).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0180, size: body_size as u32 });
         }
 
         // text_id: u32
-        let text_id = crate::util::read_u32_le(r)?;
+        let text_id = crate::util::read_u32_le(&mut r)?;
 
         // texts: NpcTextUpdate[8]
         let texts = {
             let mut texts = [(); 8].map(|_| NpcTextUpdate::default());
             for i in texts.iter_mut() {
-                *i = NpcTextUpdate::read(r)?;
+                *i = NpcTextUpdate::read(&mut r)?;
             }
             texts
         };

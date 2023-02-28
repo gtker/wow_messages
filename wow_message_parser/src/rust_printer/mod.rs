@@ -198,7 +198,7 @@ impl Writer {
         self.write_into_vec_trait(&write_function);
 
         self.open_curly(format!(
-            "fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {PARSE_ERROR}>",
+            "fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {PARSE_ERROR}>",
         ));
 
         read_function(self, ImplType::Std);
@@ -255,7 +255,7 @@ impl Writer {
     fn print_read_decl(&mut self, it: ImplType) {
         if !it.is_async() {
             self.open_curly(format!(
-                "fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, {error}>",
+                "fn {prefix}read<R: {read}>(mut r: R) -> std::result::Result<Self, {error}>",
                 prefix = it.prefix(),
                 read = it.read(),
                 error = PARSE_ERROR,
@@ -265,10 +265,10 @@ impl Writer {
         }
 
         self.wln(it.cfg());
-        self.wln(format!("fn {}read<'life0, 'async_trait, R>(", it.prefix()));
+        self.wln(format!("fn {}read<'async_trait, R>(", it.prefix()));
 
         self.inc_indent();
-        self.wln("r: &'life0 mut R,");
+        self.wln("mut r: R,");
         self.dec_indent();
 
         self.wln(") -> core::pin::Pin<Box<");
@@ -287,7 +287,6 @@ impl Writer {
 
         self.inc_indent();
         self.wln(format!("R: 'async_trait + {},", it.read()));
-        self.wln("'life0: 'async_trait,");
         self.wln("Self: 'async_trait,");
         self.dec_indent();
 
@@ -362,7 +361,7 @@ impl Writer {
                 self.wln(it.cfg());
             }
             self.open_curly(format!(
-                "{visibility} {func}fn {prefix}read<R: {read}>(r: &mut R) -> std::result::Result<Self, {error}>",
+                "{visibility} {func}fn {prefix}read<R: {read}>(mut r: R) -> std::result::Result<Self, {error}>",
                 prefix = it.prefix(),
                 read = it.read(),
                 error = error_name.as_ref(),

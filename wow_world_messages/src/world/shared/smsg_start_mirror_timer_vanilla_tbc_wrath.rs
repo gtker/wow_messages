@@ -50,28 +50,28 @@ impl crate::Message for SMSG_START_MIRROR_TIMER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 21 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D9, size: body_size as u32 });
         }
 
         // timer: TimerType
-        let timer: TimerType = crate::util::read_u32_le(r)?.try_into()?;
+        let timer: TimerType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // time_remaining: u32
-        let time_remaining = crate::util::read_u32_le(r)?;
+        let time_remaining = crate::util::read_u32_le(&mut r)?;
 
         // duration: u32
-        let duration = crate::util::read_u32_le(r)?;
+        let duration = crate::util::read_u32_le(&mut r)?;
 
         // scale: u32
-        let scale = crate::util::read_u32_le(r)?;
+        let scale = crate::util::read_u32_le(&mut r)?;
 
         // is_frozen: Bool
-        let is_frozen = crate::util::read_u8_le(r)? != 0;
+        let is_frozen = crate::util::read_u8_le(&mut r)? != 0;
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             timer,

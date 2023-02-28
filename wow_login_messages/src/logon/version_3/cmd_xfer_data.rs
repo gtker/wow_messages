@@ -33,15 +33,15 @@ impl CMD_XFER_DATA {
 impl ServerMessage for CMD_XFER_DATA {
     const OPCODE: u8 = 0x31;
 
-    fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // size: u16
-        let size = crate::util::read_u16_le(r)?;
+        let size = crate::util::read_u16_le(&mut r)?;
 
         // data: u8[size]
         let data = {
             let mut data = Vec::with_capacity(size as usize);
             for i in 0..size {
-                data.push(crate::util::read_u8_le(r)?);
+                data.push(crate::util::read_u8_le(&mut r)?);
             }
             data
         };
@@ -59,25 +59,24 @@ impl ServerMessage for CMD_XFER_DATA {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn tokio_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // size: u16
-            let size = crate::util::tokio_read_u16_le(r).await?;
+            let size = crate::util::tokio_read_u16_le(&mut r).await?;
 
             // data: u8[size]
             let data = {
                 let mut data = Vec::with_capacity(size as usize);
                 for i in 0..size {
-                    data.push(crate::util::tokio_read_u8_le(r).await?);
+                    data.push(crate::util::tokio_read_u8_le(&mut r).await?);
                 }
                 data
             };
@@ -108,25 +107,24 @@ impl ServerMessage for CMD_XFER_DATA {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'life0, 'async_trait, R>(
-        r: &'life0 mut R,
+    fn astd_read<'async_trait, R>(
+        mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        'life0: 'async_trait,
         Self: 'async_trait,
      {
         Box::pin(async move {
             // size: u16
-            let size = crate::util::astd_read_u16_le(r).await?;
+            let size = crate::util::astd_read_u16_le(&mut r).await?;
 
             // data: u8[size]
             let data = {
                 let mut data = Vec::with_capacity(size as usize);
                 for i in 0..size {
-                    data.push(crate::util::astd_read_u8_le(r).await?);
+                    data.push(crate::util::astd_read_u8_le(&mut r).await?);
                 }
                 data
             };

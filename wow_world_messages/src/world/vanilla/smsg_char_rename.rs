@@ -131,22 +131,22 @@ impl crate::Message for SMSG_CHAR_RENAME {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=265).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C8, size: body_size as u32 });
         }
 
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: WorldResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             WorldResult::ResponseSuccess => {
                 // character: Guid
-                let character = Guid::read(r)?;
+                let character = Guid::read(&mut r)?;
 
                 // new_name: CString
                 let new_name = {
-                    let new_name = crate::util::read_c_string_to_vec(r)?;
+                    let new_name = crate::util::read_c_string_to_vec(&mut r)?;
                     String::from_utf8(new_name)?
                 };
 

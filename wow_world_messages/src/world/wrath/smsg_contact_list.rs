@@ -39,22 +39,22 @@ impl crate::Message for SMSG_CONTACT_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0067, size: body_size as u32 });
         }
 
         // list_mask: RelationType
-        let list_mask = RelationType::new(crate::util::read_u32_le(r)?);
+        let list_mask = RelationType::new(crate::util::read_u32_le(&mut r)?);
 
         // amount_of_relations: u32
-        let amount_of_relations = crate::util::read_u32_le(r)?;
+        let amount_of_relations = crate::util::read_u32_le(&mut r)?;
 
         // relations: Relation[amount_of_relations]
         let relations = {
             let mut relations = Vec::with_capacity(amount_of_relations as usize);
             for i in 0..amount_of_relations {
-                relations.push(Relation::read(r)?);
+                relations.push(Relation::read(&mut r)?);
             }
             relations
         };

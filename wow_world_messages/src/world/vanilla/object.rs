@@ -133,17 +133,17 @@ impl Object {
 }
 
 impl Object {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // update_type: UpdateType
-        let update_type: UpdateType = crate::util::read_u8_le(r)?.try_into()?;
+        let update_type: UpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let update_type_if = match update_type {
             UpdateType::Values => {
                 // guid1: PackedGuid
-                let guid1 = Guid::read_packed(r)?;
+                let guid1 = Guid::read_packed(&mut r)?;
 
                 // mask1: UpdateMask
-                let mask1 = UpdateMask::read(r)?;
+                let mask1 = UpdateMask::read(&mut r)?;
 
                 Object_UpdateType::Values {
                     guid1,
@@ -152,10 +152,10 @@ impl Object {
             }
             UpdateType::Movement => {
                 // guid2: PackedGuid
-                let guid2 = Guid::read_packed(r)?;
+                let guid2 = Guid::read_packed(&mut r)?;
 
                 // movement1: MovementBlock
-                let movement1 = MovementBlock::read(r)?;
+                let movement1 = MovementBlock::read(&mut r)?;
 
                 Object_UpdateType::Movement {
                     guid2,
@@ -164,16 +164,16 @@ impl Object {
             }
             UpdateType::CreateObject => {
                 // guid3: PackedGuid
-                let guid3 = Guid::read_packed(r)?;
+                let guid3 = Guid::read_packed(&mut r)?;
 
                 // object_type: ObjectType
-                let object_type: ObjectType = crate::util::read_u8_le(r)?.try_into()?;
+                let object_type: ObjectType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // movement2: MovementBlock
-                let movement2 = MovementBlock::read(r)?;
+                let movement2 = MovementBlock::read(&mut r)?;
 
                 // mask2: UpdateMask
-                let mask2 = UpdateMask::read(r)?;
+                let mask2 = UpdateMask::read(&mut r)?;
 
                 Object_UpdateType::CreateObject {
                     guid3,
@@ -184,16 +184,16 @@ impl Object {
             }
             UpdateType::CreateObject2 => {
                 // guid3: PackedGuid
-                let guid3 = Guid::read_packed(r)?;
+                let guid3 = Guid::read_packed(&mut r)?;
 
                 // object_type: ObjectType
-                let object_type: ObjectType = crate::util::read_u8_le(r)?.try_into()?;
+                let object_type: ObjectType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // movement2: MovementBlock
-                let movement2 = MovementBlock::read(r)?;
+                let movement2 = MovementBlock::read(&mut r)?;
 
                 // mask2: UpdateMask
-                let mask2 = UpdateMask::read(r)?;
+                let mask2 = UpdateMask::read(&mut r)?;
 
                 Object_UpdateType::CreateObject2 {
                     guid3,
@@ -204,13 +204,13 @@ impl Object {
             }
             UpdateType::OutOfRangeObjects => {
                 // count: u32
-                let count = crate::util::read_u32_le(r)?;
+                let count = crate::util::read_u32_le(&mut r)?;
 
                 // guids: PackedGuid[count]
                 let guids = {
                     let mut guids = Vec::with_capacity(count as usize);
                     for i in 0..count {
-                        guids.push(Guid::read_packed(r)?);
+                        guids.push(Guid::read_packed(&mut r)?);
                     }
                     guids
                 };
@@ -221,13 +221,13 @@ impl Object {
             }
             UpdateType::NearObjects => {
                 // count: u32
-                let count = crate::util::read_u32_le(r)?;
+                let count = crate::util::read_u32_le(&mut r)?;
 
                 // guids: PackedGuid[count]
                 let guids = {
                     let mut guids = Vec::with_capacity(count as usize);
                     for i in 0..count {
-                        guids.push(Guid::read_packed(r)?);
+                        guids.push(Guid::read_packed(&mut r)?);
                     }
                     guids
                 };

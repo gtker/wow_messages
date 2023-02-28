@@ -37,19 +37,19 @@ impl crate::Message for MessageWithComplexTypes {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(57..=568).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0003, size: body_size as u32 });
         }
 
         // simple_enum: SimpleEnum
-        let simple_enum: SimpleEnum = crate::util::read_u8_le(r)?.try_into()?;
+        let simple_enum: SimpleEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // simple_flag: SimpleFlag
-        let simple_flag = SimpleFlag::new(crate::util::read_u8_le(r)?);
+        let simple_flag = SimpleFlag::new(crate::util::read_u8_le(&mut r)?);
 
         // simple_struct: StructWithAllBuiltInTypes
-        let simple_struct = StructWithAllBuiltInTypes::read(r)?;
+        let simple_struct = StructWithAllBuiltInTypes::read(&mut r)?;
 
         Ok(Self {
             simple_enum,

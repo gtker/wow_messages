@@ -35,19 +35,19 @@ impl crate::Message for CMSG_CALENDAR_COMPLAIN {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 24 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0446, size: body_size as u32 });
         }
 
         // responsible_player: Guid
-        let responsible_player = Guid::read(r)?;
+        let responsible_player = Guid::read(&mut r)?;
 
         // event: Guid
-        let event = Guid::read(r)?;
+        let event = Guid::read(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(r)?;
+        let invite_id = Guid::read(&mut r)?;
 
         Ok(Self {
             responsible_player,

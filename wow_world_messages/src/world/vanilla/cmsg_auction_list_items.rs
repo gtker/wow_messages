@@ -75,43 +75,43 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(32..=287).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0258, size: body_size as u32 });
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(r)?;
+        let auctioneer = Guid::read(&mut r)?;
 
         // list_start_item: u32
-        let list_start_item = crate::util::read_u32_le(r)?;
+        let list_start_item = crate::util::read_u32_le(&mut r)?;
 
         // searched_name: CString
         let searched_name = {
-            let searched_name = crate::util::read_c_string_to_vec(r)?;
+            let searched_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(searched_name)?
         };
 
         // minimum_level: u8
-        let minimum_level = crate::util::read_u8_le(r)?;
+        let minimum_level = crate::util::read_u8_le(&mut r)?;
 
         // maximum_level: u8
-        let maximum_level = crate::util::read_u8_le(r)?;
+        let maximum_level = crate::util::read_u8_le(&mut r)?;
 
         // auction_slot_id: u32
-        let auction_slot_id = crate::util::read_u32_le(r)?;
+        let auction_slot_id = crate::util::read_u32_le(&mut r)?;
 
         // auction_main_category: u32
-        let auction_main_category = crate::util::read_u32_le(r)?;
+        let auction_main_category = crate::util::read_u32_le(&mut r)?;
 
         // auction_sub_category: u32
-        let auction_sub_category = crate::util::read_u32_le(r)?;
+        let auction_sub_category = crate::util::read_u32_le(&mut r)?;
 
         // auction_quality: ItemQuality
-        let auction_quality: ItemQuality = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let auction_quality: ItemQuality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // usable: u8
-        let usable = crate::util::read_u8_le(r)?;
+        let usable = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             auctioneer,

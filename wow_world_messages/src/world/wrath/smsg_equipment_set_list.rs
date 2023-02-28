@@ -31,19 +31,19 @@ impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BC, size: body_size as u32 });
         }
 
         // amount_of_equipment_sets: u32
-        let amount_of_equipment_sets = crate::util::read_u32_le(r)?;
+        let amount_of_equipment_sets = crate::util::read_u32_le(&mut r)?;
 
         // equipment_sets: EquipmentSetListItem[amount_of_equipment_sets]
         let equipment_sets = {
             let mut equipment_sets = Vec::with_capacity(amount_of_equipment_sets as usize);
             for i in 0..amount_of_equipment_sets {
-                equipment_sets.push(EquipmentSetListItem::read(r)?);
+                equipment_sets.push(EquipmentSetListItem::read(&mut r)?);
             }
             equipment_sets
         };

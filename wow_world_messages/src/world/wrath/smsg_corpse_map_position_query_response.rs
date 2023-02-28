@@ -41,22 +41,22 @@ impl crate::Message for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B7, size: body_size as u32 });
         }
 
         // unknown1: f32
-        let unknown1 = crate::util::read_f32_le(r)?;
+        let unknown1 = crate::util::read_f32_le(&mut r)?;
 
         // unknown2: f32
-        let unknown2 = crate::util::read_f32_le(r)?;
+        let unknown2 = crate::util::read_f32_le(&mut r)?;
 
         // unknown3: f32
-        let unknown3 = crate::util::read_f32_le(r)?;
+        let unknown3 = crate::util::read_f32_le(&mut r)?;
 
         // unknown4: f32
-        let unknown4 = crate::util::read_f32_le(r)?;
+        let unknown4 = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             unknown1,

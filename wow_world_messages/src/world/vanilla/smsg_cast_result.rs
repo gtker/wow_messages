@@ -232,21 +232,21 @@ impl crate::Message for SMSG_CAST_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=18).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0130, size: body_size as u32 });
         }
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // result: SimpleSpellCastResult
-        let result: SimpleSpellCastResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: SimpleSpellCastResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             SimpleSpellCastResult::Success => {
                 // reason: CastFailureReason
-                let reason: CastFailureReason = crate::util::read_u8_le(r)?.try_into()?;
+                let reason: CastFailureReason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let reason_if = match reason {
                     CastFailureReason::AffectingCombat => SMSG_CAST_RESULT_CastFailureReason::AffectingCombat,
@@ -276,13 +276,13 @@ impl crate::Message for SMSG_CAST_RESULT {
                     CastFailureReason::EquippedItem => SMSG_CAST_RESULT_CastFailureReason::EquippedItem,
                     CastFailureReason::EquippedItemClass => {
                         // equipped_item_class: u32
-                        let equipped_item_class = crate::util::read_u32_le(r)?;
+                        let equipped_item_class = crate::util::read_u32_le(&mut r)?;
 
                         // equipped_item_subclass_mask: u32
-                        let equipped_item_subclass_mask = crate::util::read_u32_le(r)?;
+                        let equipped_item_subclass_mask = crate::util::read_u32_le(&mut r)?;
 
                         // equipped_item_inventory_type_mask: u32
-                        let equipped_item_inventory_type_mask = crate::util::read_u32_le(r)?;
+                        let equipped_item_inventory_type_mask = crate::util::read_u32_le(&mut r)?;
 
                         SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
                             equipped_item_class,
@@ -359,7 +359,7 @@ impl crate::Message for SMSG_CAST_RESULT {
                     CastFailureReason::Reagents => SMSG_CAST_RESULT_CastFailureReason::Reagents,
                     CastFailureReason::RequiresArea => {
                         // area: Area
-                        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+                        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                         SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
                             area,
@@ -367,7 +367,7 @@ impl crate::Message for SMSG_CAST_RESULT {
                     }
                     CastFailureReason::RequiresSpellFocus => {
                         // required_spell_focus: u32
-                        let required_spell_focus = crate::util::read_u32_le(r)?;
+                        let required_spell_focus = crate::util::read_u32_le(&mut r)?;
 
                         SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
                             required_spell_focus,

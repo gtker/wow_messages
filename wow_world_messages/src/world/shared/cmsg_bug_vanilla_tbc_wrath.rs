@@ -42,25 +42,25 @@ impl crate::Message for CMSG_BUG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=16012).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CA, size: body_size as u32 });
         }
 
         // suggestion: u32
-        let suggestion = crate::util::read_u32_le(r)?;
+        let suggestion = crate::util::read_u32_le(&mut r)?;
 
         // content: SizedCString
         let content = {
-            let content = crate::util::read_u32_le(r)?;
-            let content = crate::util::read_sized_c_string_to_vec(r, content)?;
+            let content = crate::util::read_u32_le(&mut r)?;
+            let content = crate::util::read_sized_c_string_to_vec(&mut r, content)?;
             String::from_utf8(content)?
         };
 
         // bug_type: SizedCString
         let bug_type = {
-            let bug_type = crate::util::read_u32_le(r)?;
-            let bug_type = crate::util::read_sized_c_string_to_vec(r, bug_type)?;
+            let bug_type = crate::util::read_u32_le(&mut r)?;
+            let bug_type = crate::util::read_sized_c_string_to_vec(&mut r, bug_type)?;
             String::from_utf8(bug_type)?
         };
 

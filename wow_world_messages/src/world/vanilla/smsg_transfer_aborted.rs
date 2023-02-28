@@ -38,19 +38,19 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0040, size: body_size as u32 });
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // reason: TransferAbortReason
-        let reason: TransferAbortReason = crate::util::read_u8_le(r)?.try_into()?;
+        let reason: TransferAbortReason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // argument: u8
-        let argument = crate::util::read_u8_le(r)?;
+        let argument = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             map,

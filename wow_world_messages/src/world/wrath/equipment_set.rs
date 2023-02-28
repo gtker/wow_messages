@@ -32,15 +32,15 @@ impl EquipmentSet {
 }
 
 impl EquipmentSet {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // item: Guid
-        let item = Guid::read(r)?;
+        let item = Guid::read(&mut r)?;
 
         // source_bag: u8
-        let source_bag = crate::util::read_u8_le(r)?;
+        let source_bag = crate::util::read_u8_le(&mut r)?;
 
         // source_slot: u8
-        let source_slot = crate::util::read_u8_le(r)?;
+        let source_slot = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             item,

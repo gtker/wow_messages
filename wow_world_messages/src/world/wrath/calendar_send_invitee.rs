@@ -62,31 +62,31 @@ impl CalendarSendInvitee {
 }
 
 impl CalendarSendInvitee {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // invitee: PackedGuid
-        let invitee = Guid::read_packed(r)?;
+        let invitee = Guid::read_packed(&mut r)?;
 
         // level: u8
-        let level = crate::util::read_u8_le(r)?;
+        let level = crate::util::read_u8_le(&mut r)?;
 
         // status: u8
-        let status = crate::util::read_u8_le(r)?;
+        let status = crate::util::read_u8_le(&mut r)?;
 
         // rank: u8
-        let rank = crate::util::read_u8_le(r)?;
+        let rank = crate::util::read_u8_le(&mut r)?;
 
         // guild_member: u8
-        let guild_member = crate::util::read_u8_le(r)?;
+        let guild_member = crate::util::read_u8_le(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(r)?;
+        let invite_id = Guid::read(&mut r)?;
 
         // status_time: DateTime
-        let status_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let status_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // text: CString
         let text = {
-            let text = crate::util::read_c_string_to_vec(r)?;
+            let text = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(text)?
         };
 

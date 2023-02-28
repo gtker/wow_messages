@@ -114,25 +114,25 @@ impl MovementInfo {
 }
 
 impl MovementInfo {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // flags: MovementFlags
-        let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
+        let flags = MovementFlags::new(crate::util::read_u32_le(&mut r)?);
 
         // extra_flags: ExtraMovementFlags
-        let extra_flags = ExtraMovementFlags::new(crate::util::read_u16_le(r)?);
+        let extra_flags = ExtraMovementFlags::new(crate::util::read_u16_le(&mut r)?);
 
         // timestamp: u32
-        let timestamp = crate::util::read_u32_le(r)?;
+        let timestamp = crate::util::read_u32_le(&mut r)?;
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         // orientation: f32
-        let orientation = crate::util::read_f32_le(r)?;
+        let orientation = crate::util::read_f32_le(&mut r)?;
 
         let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
             // transport: TransportInfo
-            let transport = TransportInfo::read(r)?;
+            let transport = TransportInfo::read(&mut r)?;
 
             Some(MovementInfo_MovementFlags_OnTransport {
                 transport,
@@ -144,7 +144,7 @@ impl MovementInfo {
 
         let flags_SWIMMING = if flags.is_SWIMMING() {
             // pitch1: f32
-            let pitch1 = crate::util::read_f32_le(r)?;
+            let pitch1 = crate::util::read_f32_le(&mut r)?;
 
             Some(MovementInfo_MovementFlags_Swimming::Swimming {
                 pitch1,
@@ -152,7 +152,7 @@ impl MovementInfo {
         }
         else if flags.is_FLYING() {
             // pitch2: f32
-            let pitch2 = crate::util::read_f32_le(r)?;
+            let pitch2 = crate::util::read_f32_le(&mut r)?;
 
             Some(MovementInfo_MovementFlags_Swimming::Flying {
                 pitch2,
@@ -163,20 +163,20 @@ impl MovementInfo {
         };
 
         // fall_time: f32
-        let fall_time = crate::util::read_f32_le(r)?;
+        let fall_time = crate::util::read_f32_le(&mut r)?;
 
         let flags_FALLING = if flags.is_FALLING() {
             // z_speed: f32
-            let z_speed = crate::util::read_f32_le(r)?;
+            let z_speed = crate::util::read_f32_le(&mut r)?;
 
             // cos_angle: f32
-            let cos_angle = crate::util::read_f32_le(r)?;
+            let cos_angle = crate::util::read_f32_le(&mut r)?;
 
             // sin_angle: f32
-            let sin_angle = crate::util::read_f32_le(r)?;
+            let sin_angle = crate::util::read_f32_le(&mut r)?;
 
             // xy_speed: f32
-            let xy_speed = crate::util::read_f32_le(r)?;
+            let xy_speed = crate::util::read_f32_le(&mut r)?;
 
             Some(MovementInfo_MovementFlags_Falling {
                 cos_angle,
@@ -191,7 +191,7 @@ impl MovementInfo {
 
         let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
             // spline_elevation: f32
-            let spline_elevation = crate::util::read_f32_le(r)?;
+            let spline_elevation = crate::util::read_f32_le(&mut r)?;
 
             Some(MovementInfo_MovementFlags_SplineElevation {
                 spline_elevation,

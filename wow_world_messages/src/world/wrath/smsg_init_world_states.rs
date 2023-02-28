@@ -48,28 +48,28 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=524302).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C2, size: body_size as u32 });
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // sub_area: Area
-        let sub_area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let sub_area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // amount_of_states: u16
-        let amount_of_states = crate::util::read_u16_le(r)?;
+        let amount_of_states = crate::util::read_u16_le(&mut r)?;
 
         // states: WorldState[amount_of_states]
         let states = {
             let mut states = Vec::with_capacity(amount_of_states as usize);
             for i in 0..amount_of_states {
-                states.push(WorldState::read(r)?);
+                states.push(WorldState::read(&mut r)?);
             }
             states
         };

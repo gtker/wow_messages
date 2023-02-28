@@ -52,25 +52,25 @@ impl QuestItem {
 }
 
 impl QuestItem {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // quest_id: u32
-        let quest_id = crate::util::read_u32_le(r)?;
+        let quest_id = crate::util::read_u32_le(&mut r)?;
 
         // quest_icon: u32
-        let quest_icon = crate::util::read_u32_le(r)?;
+        let quest_icon = crate::util::read_u32_le(&mut r)?;
 
         // level: u32
-        let level = crate::util::read_u32_le(r)?;
+        let level = crate::util::read_u32_le(&mut r)?;
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         // repeatable: Bool
-        let repeatable = crate::util::read_u8_le(r)? != 0;
+        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
 
         // title: CString
         let title = {
-            let title = crate::util::read_c_string_to_vec(r)?;
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(title)?
         };
 

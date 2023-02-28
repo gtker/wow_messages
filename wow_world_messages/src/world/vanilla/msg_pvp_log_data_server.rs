@@ -52,19 +52,19 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E0, size: body_size as u32 });
         }
 
         // status: BattlegroundEndStatus
-        let status: BattlegroundEndStatus = crate::util::read_u8_le(r)?.try_into()?;
+        let status: BattlegroundEndStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let status_if = match status {
             BattlegroundEndStatus::NotEnded => MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NotEnded,
             BattlegroundEndStatus::Ended => {
                 // winner: BattlegroundWinner
-                let winner: BattlegroundWinner = crate::util::read_u8_le(r)?.try_into()?;
+                let winner: BattlegroundWinner = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
                     winner,
@@ -73,13 +73,13 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
         };
 
         // amount_of_players: u32
-        let amount_of_players = crate::util::read_u32_le(r)?;
+        let amount_of_players = crate::util::read_u32_le(&mut r)?;
 
         // players: BattlegroundPlayer[amount_of_players]
         let players = {
             let mut players = Vec::with_capacity(amount_of_players as usize);
             for i in 0..amount_of_players {
-                players.push(BattlegroundPlayer::read(r)?);
+                players.push(BattlegroundPlayer::read(&mut r)?);
             }
             players
         };

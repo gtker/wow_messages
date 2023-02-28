@@ -35,19 +35,19 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=17).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0516, size: body_size as u32 });
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(r)?;
+        let unit = Guid::read_packed(&mut r)?;
 
         // packet_counter: u32
-        let packet_counter = crate::util::read_u32_le(r)?;
+        let packet_counter = crate::util::read_u32_le(&mut r)?;
 
         // collision_height: f32
-        let collision_height = crate::util::read_f32_le(r)?;
+        let collision_height = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             unit,

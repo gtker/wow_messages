@@ -37,18 +37,18 @@ impl MoneyLogItem {
 }
 
 impl MoneyLogItem {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // action: u8
-        let action = crate::util::read_u8_le(r)?;
+        let action = crate::util::read_u8_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // entry: u32
-        let entry = crate::util::read_u32_le(r)?;
+        let entry = crate::util::read_u32_le(&mut r)?;
 
         // timestamp: u32
-        let timestamp = crate::util::read_u32_le(r)?;
+        let timestamp = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             action,

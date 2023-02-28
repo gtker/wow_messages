@@ -30,16 +30,16 @@ impl crate::Message for SMSG_SPELL_FAILED_OTHER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A6, size: body_size as u32 });
         }
 
         // caster: Guid
-        let caster = Guid::read(r)?;
+        let caster = Guid::read(&mut r)?;
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             caster,

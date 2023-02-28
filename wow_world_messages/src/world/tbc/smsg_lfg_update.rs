@@ -50,25 +50,25 @@ impl crate::Message for SMSG_LFG_UPDATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(3..=7).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size as u32 });
         }
 
         // queued: Bool
-        let queued = crate::util::read_u8_le(r)? != 0;
+        let queued = crate::util::read_u8_le(&mut r)? != 0;
 
         // is_looking_for_group: Bool
-        let is_looking_for_group = crate::util::read_u8_le(r)? != 0;
+        let is_looking_for_group = crate::util::read_u8_le(&mut r)? != 0;
 
         // looking_for_more: LfgUpdateLookingForMore
-        let looking_for_more: LfgUpdateLookingForMore = crate::util::read_u8_le(r)?.try_into()?;
+        let looking_for_more: LfgUpdateLookingForMore = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let looking_for_more_if = match looking_for_more {
             LfgUpdateLookingForMore::NotLookingForMore => SMSG_LFG_UPDATE_LfgUpdateLookingForMore::NotLookingForMore,
             LfgUpdateLookingForMore::LookingForMore => {
                 // data: LfgData
-                let data = LfgData::read(r)?;
+                let data = LfgData::read(&mut r)?;
 
                 SMSG_LFG_UPDATE_LfgUpdateLookingForMore::LookingForMore {
                     data,

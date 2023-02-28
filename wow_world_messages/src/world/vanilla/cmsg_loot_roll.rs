@@ -36,19 +36,19 @@ impl crate::Message for CMSG_LOOT_ROLL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A0, size: body_size as u32 });
         }
 
         // item: Guid
-        let item = Guid::read(r)?;
+        let item = Guid::read(&mut r)?;
 
         // item_slot: u32
-        let item_slot = crate::util::read_u32_le(r)?;
+        let item_slot = crate::util::read_u32_le(&mut r)?;
 
         // vote: RollVote
-        let vote: RollVote = crate::util::read_u8_le(r)?.try_into()?;
+        let vote: RollVote = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             item,

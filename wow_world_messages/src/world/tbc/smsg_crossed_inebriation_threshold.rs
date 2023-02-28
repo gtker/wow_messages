@@ -35,19 +35,19 @@ impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C0, size: body_size as u32 });
         }
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // state: u32
-        let state = crate::util::read_u32_le(r)?;
+        let state = crate::util::read_u32_le(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             player,

@@ -37,16 +37,16 @@ impl crate::Message for SMSG_DISPEL_FAILED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=65551).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0262, size: body_size as u32 });
         }
 
         // caster: Guid
-        let caster = Guid::read(r)?;
+        let caster = Guid::read(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(r)?;
+        let target = Guid::read(&mut r)?;
 
         // spells: u32[-]
         let spells = {
@@ -56,7 +56,7 @@ impl crate::Message for SMSG_DISPEL_FAILED {
             };
             let mut spells = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                spells.push(crate::util::read_u32_le(r)?);
+                spells.push(crate::util::read_u32_le(&mut r)?);
                 current_size += 1;
             }
             spells

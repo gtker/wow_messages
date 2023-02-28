@@ -30,19 +30,19 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E3, size: body_size as u32 });
         }
 
         // amount_of_pois: u32
-        let amount_of_pois = crate::util::read_u32_le(r)?;
+        let amount_of_pois = crate::util::read_u32_le(&mut r)?;
 
         // points_of_interests: u32[amount_of_pois]
         let points_of_interests = {
             let mut points_of_interests = Vec::with_capacity(amount_of_pois as usize);
             for i in 0..amount_of_pois {
-                points_of_interests.push(crate::util::read_u32_le(r)?);
+                points_of_interests.push(crate::util::read_u32_le(&mut r)?);
             }
             points_of_interests
         };

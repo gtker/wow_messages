@@ -43,16 +43,16 @@ impl GmSurveyQuestion {
 }
 
 impl GmSurveyQuestion {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // question_id: u32
-        let question_id = crate::util::read_u32_le(r)?;
+        let question_id = crate::util::read_u32_le(&mut r)?;
 
         // answer: u8
-        let answer = crate::util::read_u8_le(r)?;
+        let answer = crate::util::read_u8_le(&mut r)?;
 
         // comment: CString
         let comment = {
-            let comment = crate::util::read_c_string_to_vec(r)?;
+            let comment = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(comment)?
         };
 

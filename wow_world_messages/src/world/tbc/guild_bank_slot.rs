@@ -58,33 +58,33 @@ impl GuildBankSlot {
 }
 
 impl GuildBankSlot {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // slot: u8
-        let slot = crate::util::read_u8_le(r)?;
+        let slot = crate::util::read_u8_le(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_items: u8
-        let amount_of_items = crate::util::read_u8_le(r)?;
+        let amount_of_items = crate::util::read_u8_le(&mut r)?;
 
         // enchant: u32
-        let enchant = crate::util::read_u32_le(r)?;
+        let enchant = crate::util::read_u32_le(&mut r)?;
 
         // charges: u8
-        let charges = crate::util::read_u8_le(r)?;
+        let charges = crate::util::read_u8_le(&mut r)?;
 
         // amount_of_sockets: u8
-        let amount_of_sockets = crate::util::read_u8_le(r)?;
+        let amount_of_sockets = crate::util::read_u8_le(&mut r)?;
 
         // sockets: GuildBankSocket[amount_of_sockets]
         let sockets = {
             let mut sockets = Vec::with_capacity(amount_of_sockets as usize);
             for i in 0..amount_of_sockets {
-                sockets.push(GuildBankSocket::read(r)?);
+                sockets.push(GuildBankSocket::read(&mut r)?);
             }
             sockets
         };

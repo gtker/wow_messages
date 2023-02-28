@@ -46,26 +46,26 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(65..=2870).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032A, size: body_size as u32 });
         }
 
         // survey_id: u32
-        let survey_id = crate::util::read_u32_le(r)?;
+        let survey_id = crate::util::read_u32_le(&mut r)?;
 
         // questions: GmSurveyQuestion[10]
         let questions = {
             let mut questions = [(); 10].map(|_| GmSurveyQuestion::default());
             for i in questions.iter_mut() {
-                *i = GmSurveyQuestion::read(r)?;
+                *i = GmSurveyQuestion::read(&mut r)?;
             }
             questions
         };
 
         // answer_comment: CString
         let answer_comment = {
-            let answer_comment = crate::util::read_c_string_to_vec(r)?;
+            let answer_comment = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(answer_comment)?
         };
 

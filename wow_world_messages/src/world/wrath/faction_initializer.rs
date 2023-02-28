@@ -27,12 +27,12 @@ impl FactionInitializer {
 }
 
 impl FactionInitializer {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // flag: FactionFlag
-        let flag = FactionFlag::new(crate::util::read_u8_le(r)?);
+        let flag = FactionFlag::new(crate::util::read_u8_le(&mut r)?);
 
         // standing: u32
-        let standing = crate::util::read_u32_le(r)?;
+        let standing = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             flag,

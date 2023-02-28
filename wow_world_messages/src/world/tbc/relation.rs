@@ -76,34 +76,34 @@ impl Relation {
 }
 
 impl Relation {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // relation_mask: RelationType
-        let relation_mask = RelationType::new(crate::util::read_u32_le(r)?);
+        let relation_mask = RelationType::new(crate::util::read_u32_le(&mut r)?);
 
         // note: CString
         let note = {
-            let note = crate::util::read_c_string_to_vec(r)?;
+            let note = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(note)?
         };
 
         let relation_mask_FRIEND = if relation_mask.is_FRIEND() {
             // status: FriendStatus
-            let status: FriendStatus = crate::util::read_u8_le(r)?.try_into()?;
+            let status: FriendStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             let status_if = match status {
                 FriendStatus::Offline => Relation_FriendStatus::Offline,
                 FriendStatus::Online => {
                     // area: Area
-                    let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+                    let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                     // level: u32
-                    let level = crate::util::read_u32_le(r)?;
+                    let level = crate::util::read_u32_le(&mut r)?;
 
                     // class: Class
-                    let class: Class = (crate::util::read_u32_le(r)? as u8).try_into()?;
+                    let class: Class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                     Relation_FriendStatus::Online {
                         area,

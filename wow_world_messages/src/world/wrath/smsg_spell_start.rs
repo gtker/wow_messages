@@ -95,35 +95,35 @@ impl crate::Message for SMSG_SPELL_START {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(21..=353).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0131, size: body_size as u32 });
         }
 
         // cast_item: PackedGuid
-        let cast_item = Guid::read_packed(r)?;
+        let cast_item = Guid::read_packed(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // cast_count: u8
-        let cast_count = crate::util::read_u8_le(r)?;
+        let cast_count = crate::util::read_u8_le(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // flags: CastFlags
-        let flags = CastFlags::new(crate::util::read_u32_le(r)?);
+        let flags = CastFlags::new(crate::util::read_u32_le(&mut r)?);
 
         // timer: u32
-        let timer = crate::util::read_u32_le(r)?;
+        let timer = crate::util::read_u32_le(&mut r)?;
 
         // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(r)?;
+        let targets = SpellCastTargets::read(&mut r)?;
 
         let flags_POWER_LEFT_SELF = if flags.is_POWER_LEFT_SELF() {
             // power: Power
-            let power: Power = (crate::util::read_u32_le(r)? as u8).try_into()?;
+            let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             Some(SMSG_SPELL_START_CastFlags_PowerLeftSelf {
                 power,
@@ -135,10 +135,10 @@ impl crate::Message for SMSG_SPELL_START {
 
         let flags_AMMO = if flags.is_AMMO() {
             // ammo_display_id: u32
-            let ammo_display_id = crate::util::read_u32_le(r)?;
+            let ammo_display_id = crate::util::read_u32_le(&mut r)?;
 
             // ammo_inventory_type: u32
-            let ammo_inventory_type = crate::util::read_u32_le(r)?;
+            let ammo_inventory_type = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SPELL_START_CastFlags_Ammo {
                 ammo_display_id,
@@ -151,10 +151,10 @@ impl crate::Message for SMSG_SPELL_START {
 
         let flags_UNKNOWN_23 = if flags.is_UNKNOWN_23() {
             // unknown1: u32
-            let unknown1 = crate::util::read_u32_le(r)?;
+            let unknown1 = crate::util::read_u32_le(&mut r)?;
 
             // unknown2: u32
-            let unknown2 = crate::util::read_u32_le(r)?;
+            let unknown2 = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SPELL_START_CastFlags_Unknown23 {
                 unknown1,

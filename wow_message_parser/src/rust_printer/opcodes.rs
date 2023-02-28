@@ -210,7 +210,7 @@ fn world_common_impls_read_write(
 ) {
     s.wln(it.cfg());
     s.open_curly(format!(
-        "pub {func}fn {prefix}read_unencrypted<R: {read}>(r: &mut R) -> std::result::Result<Self, {error_ty}>",
+        "pub {func}fn {prefix}read_unencrypted<R: {read}>(mut r: R) -> std::result::Result<Self, {error_ty}>",
         prefix = it.prefix(),
         read = it.read(),
         func = it.func(),
@@ -248,7 +248,7 @@ fn world_common_impls_read_write(
         );
     } else {
         s.wln(format!(
-            "let size = ({path}::{prefix}read_u16_be(r){postfix}?.saturating_sub({opcode_size})) as u32;",
+            "let size = ({path}::{prefix}read_u16_be(&mut r){postfix}?.saturating_sub({opcode_size})) as u32;",
             path = "crate::util",
             opcode_size = opcode_size,
             prefix = it.prefix(),
@@ -256,7 +256,7 @@ fn world_common_impls_read_write(
         ));
 
         s.wln(format!(
-            "let opcode = {path}::{prefix}read_{size}_le(r){postfix}?;",
+            "let opcode = {path}::{prefix}read_{size}_le(&mut r){postfix}?;",
             path = "crate::util",
             size = size,
             prefix = it.prefix(),
@@ -277,7 +277,7 @@ fn world_common_impls_read_write(
 
     s.wln(it.cfg_and_encryption());
     s.open_curly(
-        format!("pub {func}fn {prefix}read_encrypted<R: {read}>(r: &mut R, d: &mut {dec_prefix}DecrypterHalf) -> std::result::Result<Self, {error_ty}>",
+        format!("pub {func}fn {prefix}read_encrypted<R: {read}>(mut r: R, d: &mut {dec_prefix}DecrypterHalf) -> std::result::Result<Self, {error_ty}>",
                 func = it.func(),
                 prefix = it.prefix(),
                 read = it.read(),
@@ -509,7 +509,7 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
         format!("{ty}OpcodeMessage"),
         EXPECTED_OPCODE_ERROR,
         |s, it| {
-            s.wln(format!("let opcode = crate::util::{prefix}read_u8_le(r){postfix}?;", prefix = it.prefix(), postfix = it.postfix()));
+            s.wln(format!("let opcode = crate::util::{prefix}read_u8_le(&mut r){postfix}?;", prefix = it.prefix(), postfix = it.postfix()));
 
             s.body("match opcode", |s| {
                 for e in v {

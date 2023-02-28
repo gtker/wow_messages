@@ -53,25 +53,25 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D5, size: body_size as u32 });
         }
 
         // arena_type: u8
-        let arena_type = crate::util::read_u8_le(r)?;
+        let arena_type = crate::util::read_u8_le(&mut r)?;
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // bg_type_id: u32
-        let bg_type_id = crate::util::read_u32_le(r)?;
+        let bg_type_id = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: u16
-        let unknown2 = crate::util::read_u16_le(r)?;
+        let unknown2 = crate::util::read_u16_le(&mut r)?;
 
         // action: BattlefieldPortAction
-        let action: BattlefieldPortAction = crate::util::read_u8_le(r)?.try_into()?;
+        let action: BattlefieldPortAction = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             arena_type,

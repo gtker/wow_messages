@@ -47,28 +47,28 @@ impl crate::Message for SMSG_PERIODICAURALOG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024E, size: body_size as u32 });
         }
 
         // target: PackedGuid
-        let target = Guid::read_packed(r)?;
+        let target = Guid::read_packed(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_auras: u32
-        let amount_of_auras = crate::util::read_u32_le(r)?;
+        let amount_of_auras = crate::util::read_u32_le(&mut r)?;
 
         // auras: AuraLog[amount_of_auras]
         let auras = {
             let mut auras = Vec::with_capacity(amount_of_auras as usize);
             for i in 0..amount_of_auras {
-                auras.push(AuraLog::read(r)?);
+                auras.push(AuraLog::read(&mut r)?);
             }
             auras
         };

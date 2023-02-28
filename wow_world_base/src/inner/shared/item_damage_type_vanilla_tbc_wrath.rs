@@ -33,15 +33,15 @@ impl ItemDamageType {
 }
 
 impl ItemDamageType {
-    pub fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // damage_minimum: f32
-        let damage_minimum = crate::util::read_f32_le(r)?;
+        let damage_minimum = crate::util::read_f32_le(&mut r)?;
 
         // damage_maximum: f32
-        let damage_maximum = crate::util::read_f32_le(r)?;
+        let damage_maximum = crate::util::read_f32_le(&mut r)?;
 
         // school: SpellSchool
-        let school: SpellSchool = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let school: SpellSchool = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             damage_minimum,

@@ -136,35 +136,35 @@ impl crate::Message for SMSG_SPELL_GO {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(21..=370).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0132, size: body_size as u32 });
         }
 
         // cast_item: PackedGuid
-        let cast_item = Guid::read_packed(r)?;
+        let cast_item = Guid::read_packed(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(r)?;
+        let caster = Guid::read_packed(&mut r)?;
 
         // extra_casts: u8
-        let extra_casts = crate::util::read_u8_le(r)?;
+        let extra_casts = crate::util::read_u8_le(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // flags: GameobjectCastFlags
-        let flags = GameobjectCastFlags::new(crate::util::read_u32_le(r)?);
+        let flags = GameobjectCastFlags::new(crate::util::read_u32_le(&mut r)?);
 
         // timestamp: u32
-        let timestamp = crate::util::read_u32_le(r)?;
+        let timestamp = crate::util::read_u32_le(&mut r)?;
 
         // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(r)?;
+        let targets = SpellCastTargets::read(&mut r)?;
 
         let flags_POWER_UPDATE = if flags.is_POWER_UPDATE() {
             // power: Power
-            let power: Power = (crate::util::read_u32_le(r)? as u8).try_into()?;
+            let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             Some(SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
                 power,
@@ -176,10 +176,10 @@ impl crate::Message for SMSG_SPELL_GO {
 
         let flags_RUNE_UPDATE = if flags.is_RUNE_UPDATE() {
             // rune_mask_initial: u8
-            let rune_mask_initial = crate::util::read_u8_le(r)?;
+            let rune_mask_initial = crate::util::read_u8_le(&mut r)?;
 
             // rune_mask_after_cast: u8
-            let rune_mask_after_cast = crate::util::read_u8_le(r)?;
+            let rune_mask_after_cast = crate::util::read_u8_le(&mut r)?;
 
             // rune_cooldowns: u8[6]
             let rune_cooldowns = {
@@ -200,10 +200,10 @@ impl crate::Message for SMSG_SPELL_GO {
 
         let flags_ADJUST_MISSILE = if flags.is_ADJUST_MISSILE() {
             // elevation: f32
-            let elevation = crate::util::read_f32_le(r)?;
+            let elevation = crate::util::read_f32_le(&mut r)?;
 
             // delay_trajectory: u32
-            let delay_trajectory = crate::util::read_u32_le(r)?;
+            let delay_trajectory = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
                 delay_trajectory,
@@ -216,10 +216,10 @@ impl crate::Message for SMSG_SPELL_GO {
 
         let flags_AMMO = if flags.is_AMMO() {
             // ammo_display_id: u32
-            let ammo_display_id = crate::util::read_u32_le(r)?;
+            let ammo_display_id = crate::util::read_u32_le(&mut r)?;
 
             // ammo_inventory_type: u32
-            let ammo_inventory_type = crate::util::read_u32_le(r)?;
+            let ammo_inventory_type = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
                 ammo_display_id,
@@ -232,10 +232,10 @@ impl crate::Message for SMSG_SPELL_GO {
 
         let flags_VISUAL_CHAIN = if flags.is_VISUAL_CHAIN() {
             // unknown1: u32
-            let unknown1 = crate::util::read_u32_le(r)?;
+            let unknown1 = crate::util::read_u32_le(&mut r)?;
 
             // unknown2: u32
-            let unknown2 = crate::util::read_u32_le(r)?;
+            let unknown2 = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
                 unknown1,
@@ -248,7 +248,7 @@ impl crate::Message for SMSG_SPELL_GO {
 
         let flags_DEST_LOCATION = if flags.is_DEST_LOCATION() {
             // unknown3: u8
-            let unknown3 = crate::util::read_u8_le(r)?;
+            let unknown3 = crate::util::read_u8_le(&mut r)?;
 
             Some(SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
                 unknown3,

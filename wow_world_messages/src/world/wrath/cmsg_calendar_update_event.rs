@@ -84,49 +84,49 @@ impl crate::Message for CMSG_CALENDAR_UPDATE_EVENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(40..=550).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042E, size: body_size as u32 });
         }
 
         // event: Guid
-        let event = Guid::read(r)?;
+        let event = Guid::read(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(r)?;
+        let invite_id = Guid::read(&mut r)?;
 
         // title: CString
         let title = {
-            let title = crate::util::read_c_string_to_vec(r)?;
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(title)?
         };
 
         // description: CString
         let description = {
-            let description = crate::util::read_c_string_to_vec(r)?;
+            let description = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(description)?
         };
 
         // event_type: u8
-        let event_type = crate::util::read_u8_le(r)?;
+        let event_type = crate::util::read_u8_le(&mut r)?;
 
         // repeatable: Bool
-        let repeatable = crate::util::read_u8_le(r)? != 0;
+        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
 
         // maximum_invites: u32
-        let maximum_invites = crate::util::read_u32_le(r)?;
+        let maximum_invites = crate::util::read_u32_le(&mut r)?;
 
         // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(r)?;
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
 
         // event_time: DateTime
-        let event_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // time_zone_time: DateTime
-        let time_zone_time: DateTime = crate::util::read_u32_le(r)?.try_into()?;
+        let time_zone_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             event,

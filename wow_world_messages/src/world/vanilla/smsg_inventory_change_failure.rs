@@ -1433,7 +1433,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0112, size: body_size as u32 });
         }
@@ -1444,13 +1444,13 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
         let mut result_if_bag_type_subclass = Default::default();
 
         // result: InventoryResult
-        let result: InventoryResult = crate::util::read_u8_le(r)?.try_into()?;
+        let result: InventoryResult = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         match result {
             InventoryResult::Ok => {}
             InventoryResult::CantEquipLevelI => {
                 // required_level: u32
-                result_if_required_level = crate::util::read_u32_le(r)?;
+                result_if_required_level = crate::util::read_u32_le(&mut r)?;
 
             }
             InventoryResult::CantEquipSkill => {
@@ -1589,728 +1589,728 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             InventoryResult::Ok => {}
             InventoryResult::CantEquipLevelI => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantEquipSkill => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemDoesntGoToSlot => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::BagFull => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NonemptyBagOverOtherBag => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantTradeEquipBags => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::OnlyAmmoCanGoHere => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NoRequiredProficiency => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NoEquipmentSlotAvailable => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::YouCanNeverUseThatItem => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::YouCanNeverUseThatItem2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NoEquipmentSlotAvailable2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantEquipWithTwohanded => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantDualWield => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemDoesntGoIntoBag => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemDoesntGoIntoBag2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantCarryMoreOfThis => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NoEquipmentSlotAvailable3 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemCantStack => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemCantBeEquipped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemsCantBeSwapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::SlotIsEmpty => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemNotFound => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantDropSoulbound => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::OutOfRange => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::TriedToSplitMoreThanCount => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CouldntSplitItems => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::MissingReagent => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NotEnoughMoney => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NotABag => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CanOnlyDoWithEmptyBags => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::DontOwnThatItem => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CanEquipOnly1Quiver => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::MustPurchaseThatBagSlot => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::TooFarAwayFromBank => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemLocked => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::YouAreStunned => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::YouAreDead => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantDoRightNow => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::IntBagError => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CanEquipOnly1Bolt => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CanEquipOnly1Ammopouch => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::StackableCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::EquippedCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::WrappedCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::BoundCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::UniqueCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::BagsCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::AlreadyLooted => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::InventoryFull => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::BankFull => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemIsCurrentlySoldOut => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::BagFull3 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemNotFound2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemCantStack2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::BagFull4 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ItemSoldOut => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::ObjectIsBusy => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::None => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NotInCombat => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::NotWhileDisarmed => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::BagFull6 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantEquipRank => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::CantEquipReputation => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::TooManySpecialBags => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
             InventoryResult::LootCantLootThatNow => {
                 // item1: Guid
-                result_if_item1 = Guid::read(r)?;
+                result_if_item1 = Guid::read(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(r)?;
+                result_if_item2 = Guid::read(&mut r)?;
 
                 // bag_type_subclass: u8
-                result_if_bag_type_subclass = crate::util::read_u8_le(r)?;
+                result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
 
             }
         };

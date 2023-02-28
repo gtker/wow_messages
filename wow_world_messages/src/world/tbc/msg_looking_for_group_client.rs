@@ -37,19 +37,19 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size as u32 });
         }
 
         // lfg_type: LfgType
-        let lfg_type: LfgType = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let lfg_type: LfgType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // entry: u32
-        let entry = crate::util::read_u32_le(r)?;
+        let entry = crate::util::read_u32_le(&mut r)?;
 
         // unknown: u32
-        let unknown = crate::util::read_u32_le(r)?;
+        let unknown = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             lfg_type,

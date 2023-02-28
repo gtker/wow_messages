@@ -39,22 +39,22 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTERED {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 7 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E0, size: body_size as u32 });
         }
 
         // battle_id: u32
-        let battle_id = crate::util::read_u32_le(r)?;
+        let battle_id = crate::util::read_u32_le(&mut r)?;
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(r)?;
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
 
         // clear_afk: Bool
-        let clear_afk = crate::util::read_u8_le(r)? != 0;
+        let clear_afk = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             battle_id,

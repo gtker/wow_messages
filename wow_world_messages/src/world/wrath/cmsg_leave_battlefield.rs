@@ -40,22 +40,22 @@ impl crate::Message for CMSG_LEAVE_BATTLEFIELD {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E1, size: body_size as u32 });
         }
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(r)?;
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // unknown3: u16
-        let unknown3 = crate::util::read_u16_le(r)?;
+        let unknown3 = crate::util::read_u16_le(&mut r)?;
 
         Ok(Self {
             unknown1,

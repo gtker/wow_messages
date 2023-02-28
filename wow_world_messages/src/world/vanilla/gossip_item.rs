@@ -44,19 +44,19 @@ impl GossipItem {
 }
 
 impl GossipItem {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // item_icon: u8
-        let item_icon = crate::util::read_u8_le(r)?;
+        let item_icon = crate::util::read_u8_le(&mut r)?;
 
         // coded: Bool
-        let coded = crate::util::read_u8_le(r)? != 0;
+        let coded = crate::util::read_u8_le(&mut r)? != 0;
 
         // message: CString
         let message = {
-            let message = crate::util::read_c_string_to_vec(r)?;
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(message)?
         };
 

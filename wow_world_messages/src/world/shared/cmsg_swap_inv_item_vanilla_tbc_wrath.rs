@@ -29,16 +29,16 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x010D, size: body_size as u32 });
         }
 
         // source_slot: u8
-        let source_slot = crate::util::read_u8_le(r)?;
+        let source_slot = crate::util::read_u8_le(&mut r)?;
 
         // destination_slot: u8
-        let destination_slot = crate::util::read_u8_le(r)?;
+        let destination_slot = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             source_slot,

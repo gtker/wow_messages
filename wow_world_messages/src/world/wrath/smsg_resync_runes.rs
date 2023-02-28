@@ -31,19 +31,19 @@ impl crate::Message for SMSG_RESYNC_RUNES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0487, size: body_size as u32 });
         }
 
         // amount_of_runes: u32
-        let amount_of_runes = crate::util::read_u32_le(r)?;
+        let amount_of_runes = crate::util::read_u32_le(&mut r)?;
 
         // runes: ResyncRune[amount_of_runes]
         let runes = {
             let mut runes = Vec::with_capacity(amount_of_runes as usize);
             for i in 0..amount_of_runes {
-                runes.push(ResyncRune::read(r)?);
+                runes.push(ResyncRune::read(&mut r)?);
             }
             runes
         };

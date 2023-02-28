@@ -29,16 +29,16 @@ impl crate::Message for MSG_CHANNEL_START_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0139, size: body_size as u32 });
         }
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // duration: u32
-        let duration = crate::util::read_u32_le(r)?;
+        let duration = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             spell,

@@ -63,33 +63,33 @@ impl BattlegroundPlayer {
 }
 
 impl BattlegroundPlayer {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // rank: PvpRank
-        let rank: PvpRank = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let rank: PvpRank = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // killing_blows: u32
-        let killing_blows = crate::util::read_u32_le(r)?;
+        let killing_blows = crate::util::read_u32_le(&mut r)?;
 
         // honorable_kills: u32
-        let honorable_kills = crate::util::read_u32_le(r)?;
+        let honorable_kills = crate::util::read_u32_le(&mut r)?;
 
         // deaths: u32
-        let deaths = crate::util::read_u32_le(r)?;
+        let deaths = crate::util::read_u32_le(&mut r)?;
 
         // bonus_honor: u32
-        let bonus_honor = crate::util::read_u32_le(r)?;
+        let bonus_honor = crate::util::read_u32_le(&mut r)?;
 
         // amount_of_extra_fields: u32
-        let amount_of_extra_fields = crate::util::read_u32_le(r)?;
+        let amount_of_extra_fields = crate::util::read_u32_le(&mut r)?;
 
         // fields: u32[amount_of_extra_fields]
         let fields = {
             let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
             for i in 0..amount_of_extra_fields {
-                fields.push(crate::util::read_u32_le(r)?);
+                fields.push(crate::util::read_u32_le(&mut r)?);
             }
             fields
         };

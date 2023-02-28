@@ -30,16 +30,16 @@ impl crate::Message for SMSG_PARTYKILLLOG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F5, size: body_size as u32 });
         }
 
         // player_with_killing_blow: Guid
-        let player_with_killing_blow = Guid::read(r)?;
+        let player_with_killing_blow = Guid::read(&mut r)?;
 
         // victim: Guid
-        let victim = Guid::read(r)?;
+        let victim = Guid::read(&mut r)?;
 
         Ok(Self {
             player_with_killing_blow,

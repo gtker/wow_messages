@@ -43,28 +43,28 @@ impl NpcTextUpdate {
 }
 
 impl NpcTextUpdate {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // probability: f32
-        let probability = crate::util::read_f32_le(r)?;
+        let probability = crate::util::read_f32_le(&mut r)?;
 
         // texts: CString[2]
         let texts = {
             let mut texts = [(); 2].map(|_| String::default());
             for i in texts.iter_mut() {
-                let s = crate::util::read_c_string_to_vec(r)?;
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
                 *i = String::from_utf8(s)?;
             }
             texts
         };
 
         // language: Language
-        let language: Language = crate::util::read_u32_le(r)?.try_into()?;
+        let language: Language = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // emotes: NpcTextUpdateEmote[3]
         let emotes = {
             let mut emotes = [NpcTextUpdateEmote::default(); 3];
             for i in emotes.iter_mut() {
-                *i = NpcTextUpdateEmote::read(r)?;
+                *i = NpcTextUpdateEmote::read(&mut r)?;
             }
             emotes
         };

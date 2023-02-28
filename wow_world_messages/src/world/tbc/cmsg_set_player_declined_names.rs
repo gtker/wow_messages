@@ -42,17 +42,17 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=1544).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0418, size: body_size as u32 });
         }
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
@@ -60,7 +60,7 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
         let declined_names = {
             let mut declined_names = [(); 5].map(|_| String::default());
             for i in declined_names.iter_mut() {
-                let s = crate::util::read_c_string_to_vec(r)?;
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
                 *i = String::from_utf8(s)?;
             }
             declined_names

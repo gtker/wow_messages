@@ -41,28 +41,28 @@ impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025D, size: body_size as u32 });
         }
 
         // count: u32
-        let count = crate::util::read_u32_le(r)?;
+        let count = crate::util::read_u32_le(&mut r)?;
 
         // auctions: AuctionListItem[count]
         let auctions = {
             let mut auctions = Vec::with_capacity(count as usize);
             for i in 0..count {
-                auctions.push(AuctionListItem::read(r)?);
+                auctions.push(AuctionListItem::read(&mut r)?);
             }
             auctions
         };
 
         // total_amount_of_auctions: u32
-        let total_amount_of_auctions = crate::util::read_u32_le(r)?;
+        let total_amount_of_auctions = crate::util::read_u32_le(&mut r)?;
 
         // auction_search_delay: u32
-        let auction_search_delay = crate::util::read_u32_le(r)?;
+        let auction_search_delay = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             auctions,

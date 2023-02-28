@@ -115,43 +115,43 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(18..=26).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D4, size: body_size as u32 });
         }
 
         // queue_slot: u32
-        let queue_slot = crate::util::read_u32_le(r)?;
+        let queue_slot = crate::util::read_u32_le(&mut r)?;
 
         // arena_type: ArenaType
-        let arena_type: ArenaType = crate::util::read_u8_le(r)?.try_into()?;
+        let arena_type: ArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(r)?;
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // battleground_type: BattlegroundType
-        let battleground_type: BattlegroundType = crate::util::read_u32_le(r)?.try_into()?;
+        let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // unknown2: u16
-        let unknown2 = crate::util::read_u16_le(r)?;
+        let unknown2 = crate::util::read_u16_le(&mut r)?;
 
         // client_instance_id: u32
-        let client_instance_id = crate::util::read_u32_le(r)?;
+        let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
         // rated: Bool
-        let rated = crate::util::read_u8_le(r)? != 0;
+        let rated = crate::util::read_u8_le(&mut r)? != 0;
 
         // status_id: StatusId
-        let status_id: StatusId = crate::util::read_u8_le(r)?.try_into()?;
+        let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let status_id_if = match status_id {
             StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
             StatusId::WaitQueue => {
                 // average_wait_time_in_ms: u32
-                let average_wait_time_in_ms = crate::util::read_u32_le(r)?;
+                let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
 
                 // time_in_queue_in_ms: u32
-                let time_in_queue_in_ms = crate::util::read_u32_le(r)?;
+                let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                     average_wait_time_in_ms,
@@ -160,7 +160,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             StatusId::WaitJoin => {
                 // time_to_remove_in_queue_in_ms: u32
-                let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(r)?;
+                let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
                     time_to_remove_in_queue_in_ms,
@@ -168,10 +168,10 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             StatusId::InProgress => {
                 // time_to_bg_autoleave_in_ms: u32
-                let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(r)?;
+                let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
 
                 // time_to_bg_start_in_ms: u32
-                let time_to_bg_start_in_ms = crate::util::read_u32_le(r)?;
+                let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
 
                 SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                     time_to_bg_autoleave_in_ms,

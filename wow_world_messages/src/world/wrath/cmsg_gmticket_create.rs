@@ -75,43 +75,43 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(27..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0205, size: body_size as u32 });
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         // message: CString
         let message = {
-            let message = crate::util::read_c_string_to_vec(r)?;
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(message)?
         };
 
         // needs_response: Bool
-        let needs_response = crate::util::read_u8_le(r)? != 0;
+        let needs_response = crate::util::read_u8_le(&mut r)? != 0;
 
         // needs_more_help: Bool
-        let needs_more_help = crate::util::read_u8_le(r)? != 0;
+        let needs_more_help = crate::util::read_u8_le(&mut r)? != 0;
 
         // num_of_times: u32
-        let num_of_times = crate::util::read_u32_le(r)?;
+        let num_of_times = crate::util::read_u32_le(&mut r)?;
 
         // times: u32[num_of_times]
         let times = {
             let mut times = Vec::with_capacity(num_of_times as usize);
             for i in 0..num_of_times {
-                times.push(crate::util::read_u32_le(r)?);
+                times.push(crate::util::read_u32_le(&mut r)?);
             }
             times
         };
 
         // decompressed_size: u32
-        let decompressed_size = crate::util::read_u32_le(r)?;
+        let decompressed_size = crate::util::read_u32_le(&mut r)?;
 
         // compressed_data: u8[-]
         let compressed_data = {
@@ -129,7 +129,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
             };
             let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
             while decoder.total_out() < (decompressed_size as u64) {
-                compressed_data.push(crate::util::read_u8_le(decoder)?);
+                compressed_data.push(crate::util::read_u8_le(&mut decoder)?);
                 current_size += 1;
             }
             compressed_data

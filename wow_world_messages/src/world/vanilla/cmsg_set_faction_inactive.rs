@@ -30,16 +30,16 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 3 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0317, size: body_size as u32 });
         }
 
         // faction: Faction
-        let faction: Faction = crate::util::read_u16_le(r)?.try_into()?;
+        let faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // inactive: Bool
-        let inactive = crate::util::read_u8_le(r)? != 0;
+        let inactive = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             faction,

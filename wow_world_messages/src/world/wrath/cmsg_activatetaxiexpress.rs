@@ -36,22 +36,22 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0312, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // node_count: u32
-        let node_count = crate::util::read_u32_le(r)?;
+        let node_count = crate::util::read_u32_le(&mut r)?;
 
         // nodes: u32[node_count]
         let nodes = {
             let mut nodes = Vec::with_capacity(node_count as usize);
             for i in 0..node_count {
-                nodes.push(crate::util::read_u32_le(r)?);
+                nodes.push(crate::util::read_u32_le(&mut r)?);
             }
             nodes
         };

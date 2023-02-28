@@ -59,31 +59,31 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025F, size: body_size as u32 });
         }
 
         // auction_id: u32
-        let auction_id = crate::util::read_u32_le(r)?;
+        let auction_id = crate::util::read_u32_le(&mut r)?;
 
         // bid: u32
-        let bid = crate::util::read_u32_le(r)?;
+        let bid = crate::util::read_u32_le(&mut r)?;
 
         // auction_out_bid: u32
-        let auction_out_bid = crate::util::read_u32_le(r)?;
+        let auction_out_bid = crate::util::read_u32_le(&mut r)?;
 
         // bidder: Guid
-        let bidder = Guid::read(r)?;
+        let bidder = Guid::read(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // time_left: f32
-        let time_left = crate::util::read_f32_le(r)?;
+        let time_left = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             auction_id,

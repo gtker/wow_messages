@@ -46,21 +46,21 @@ impl ReceivedMail {
 }
 
 impl ReceivedMail {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // sender: Guid
-        let sender = Guid::read(r)?;
+        let sender = Guid::read(&mut r)?;
 
         // auction_house_id: u32
-        let auction_house_id = crate::util::read_u32_le(r)?;
+        let auction_house_id = crate::util::read_u32_le(&mut r)?;
 
         // message_type: MailMessageType
-        let message_type: MailMessageType = crate::util::read_u32_le(r)?.try_into()?;
+        let message_type: MailMessageType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // stationery: u32
-        let stationery = crate::util::read_u32_le(r)?;
+        let stationery = crate::util::read_u32_le(&mut r)?;
 
         // time: f32
-        let time = crate::util::read_f32_le(r)?;
+        let time = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             sender,

@@ -64,34 +64,34 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 33 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A1, size: body_size as u32 });
         }
 
         // creature: Guid
-        let creature = Guid::read(r)?;
+        let creature = Guid::read(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // loot_slot: u32
-        let loot_slot = crate::util::read_u32_le(r)?;
+        let loot_slot = crate::util::read_u32_le(&mut r)?;
 
         // item: u32
-        let item = crate::util::read_u32_le(r)?;
+        let item = crate::util::read_u32_le(&mut r)?;
 
         // item_random_suffix: u32
-        let item_random_suffix = crate::util::read_u32_le(r)?;
+        let item_random_suffix = crate::util::read_u32_le(&mut r)?;
 
         // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(r)?;
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // countdown_time_in_milliseconds: u32
-        let countdown_time_in_milliseconds = crate::util::read_u32_le(r)?;
+        let countdown_time_in_milliseconds = crate::util::read_u32_le(&mut r)?;
 
         // flags: RollFlags
-        let flags = RollFlags::new(crate::util::read_u8_le(r)?);
+        let flags = RollFlags::new(crate::util::read_u8_le(&mut r)?);
 
         Ok(Self {
             creature,

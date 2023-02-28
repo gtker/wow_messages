@@ -296,29 +296,29 @@ impl MovementBlock {
 }
 
 impl MovementBlock {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
-        let update_flag = UpdateFlag::new(crate::util::read_u8_le(r)?);
+        let update_flag = UpdateFlag::new(crate::util::read_u8_le(&mut r)?);
 
         let update_flag_LIVING = if update_flag.is_LIVING() {
             // flags: MovementFlags
-            let flags = MovementFlags::new(crate::util::read_u32_le(r)?);
+            let flags = MovementFlags::new(crate::util::read_u32_le(&mut r)?);
 
             // extra_flags: u8
-            let extra_flags = crate::util::read_u8_le(r)?;
+            let extra_flags = crate::util::read_u8_le(&mut r)?;
 
             // timestamp: u32
-            let timestamp = crate::util::read_u32_le(r)?;
+            let timestamp = crate::util::read_u32_le(&mut r)?;
 
             // living_position: Vector3d
-            let living_position = Vector3d::read(r)?;
+            let living_position = Vector3d::read(&mut r)?;
 
             // living_orientation: f32
-            let living_orientation = crate::util::read_f32_le(r)?;
+            let living_orientation = crate::util::read_f32_le(&mut r)?;
 
             let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
                 // transport: TransportInfo
-                let transport = TransportInfo::read(r)?;
+                let transport = TransportInfo::read(&mut r)?;
 
                 Some(MovementBlock_MovementFlags_OnTransport {
                     transport,
@@ -330,7 +330,7 @@ impl MovementBlock {
 
             let flags_SWIMMING = if flags.is_SWIMMING() {
                 // pitch1: f32
-                let pitch1 = crate::util::read_f32_le(r)?;
+                let pitch1 = crate::util::read_f32_le(&mut r)?;
 
                 Some(MovementBlock_MovementFlags_Swimming::Swimming {
                     pitch1,
@@ -338,7 +338,7 @@ impl MovementBlock {
             }
             else if flags.is_ONTRANSPORT() {
                 // pitch2: f32
-                let pitch2 = crate::util::read_f32_le(r)?;
+                let pitch2 = crate::util::read_f32_le(&mut r)?;
 
                 Some(MovementBlock_MovementFlags_Swimming::Ontransport {
                     pitch2,
@@ -349,20 +349,20 @@ impl MovementBlock {
             };
 
             // fall_time: f32
-            let fall_time = crate::util::read_f32_le(r)?;
+            let fall_time = crate::util::read_f32_le(&mut r)?;
 
             let flags_JUMPING = if flags.is_JUMPING() {
                 // z_speed: f32
-                let z_speed = crate::util::read_f32_le(r)?;
+                let z_speed = crate::util::read_f32_le(&mut r)?;
 
                 // cos_angle: f32
-                let cos_angle = crate::util::read_f32_le(r)?;
+                let cos_angle = crate::util::read_f32_le(&mut r)?;
 
                 // sin_angle: f32
-                let sin_angle = crate::util::read_f32_le(r)?;
+                let sin_angle = crate::util::read_f32_le(&mut r)?;
 
                 // xy_speed: f32
-                let xy_speed = crate::util::read_f32_le(r)?;
+                let xy_speed = crate::util::read_f32_le(&mut r)?;
 
                 Some(MovementBlock_MovementFlags_Jumping {
                     cos_angle,
@@ -377,7 +377,7 @@ impl MovementBlock {
 
             let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
                 // spline_elevation: f32
-                let spline_elevation = crate::util::read_f32_le(r)?;
+                let spline_elevation = crate::util::read_f32_le(&mut r)?;
 
                 Some(MovementBlock_MovementFlags_SplineElevation {
                     spline_elevation,
@@ -388,36 +388,36 @@ impl MovementBlock {
             };
 
             // walking_speed: f32
-            let walking_speed = crate::util::read_f32_le(r)?;
+            let walking_speed = crate::util::read_f32_le(&mut r)?;
 
             // running_speed: f32
-            let running_speed = crate::util::read_f32_le(r)?;
+            let running_speed = crate::util::read_f32_le(&mut r)?;
 
             // backwards_running_speed: f32
-            let backwards_running_speed = crate::util::read_f32_le(r)?;
+            let backwards_running_speed = crate::util::read_f32_le(&mut r)?;
 
             // swimming_speed: f32
-            let swimming_speed = crate::util::read_f32_le(r)?;
+            let swimming_speed = crate::util::read_f32_le(&mut r)?;
 
             // flying_speed: f32
-            let flying_speed = crate::util::read_f32_le(r)?;
+            let flying_speed = crate::util::read_f32_le(&mut r)?;
 
             // backwards_flying_speed: f32
-            let backwards_flying_speed = crate::util::read_f32_le(r)?;
+            let backwards_flying_speed = crate::util::read_f32_le(&mut r)?;
 
             // backwards_swimming_speed: f32
-            let backwards_swimming_speed = crate::util::read_f32_le(r)?;
+            let backwards_swimming_speed = crate::util::read_f32_le(&mut r)?;
 
             // turn_rate: f32
-            let turn_rate = crate::util::read_f32_le(r)?;
+            let turn_rate = crate::util::read_f32_le(&mut r)?;
 
             let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
                 // spline_flags: SplineFlag
-                let spline_flags = SplineFlag::new(crate::util::read_u32_le(r)?);
+                let spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
                 let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
                     // angle: f32
-                    let angle = crate::util::read_f32_le(r)?;
+                    let angle = crate::util::read_f32_le(&mut r)?;
 
                     Some(MovementBlock_SplineFlag_FinalAngle::FinalAngle {
                         angle,
@@ -425,7 +425,7 @@ impl MovementBlock {
                 }
                 else if spline_flags.is_FINAL_TARGET() {
                     // target: Guid
-                    let target = Guid::read(r)?;
+                    let target = Guid::read(&mut r)?;
 
                     Some(MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                         target,
@@ -433,7 +433,7 @@ impl MovementBlock {
                 }
                 else if spline_flags.is_FINAL_POINT() {
                     // spline_final_point: Vector3d
-                    let spline_final_point = Vector3d::read(r)?;
+                    let spline_final_point = Vector3d::read(&mut r)?;
 
                     Some(MovementBlock_SplineFlag_FinalAngle::FinalPoint {
                         spline_final_point,
@@ -444,28 +444,28 @@ impl MovementBlock {
                 };
 
                 // time_passed: u32
-                let time_passed = crate::util::read_u32_le(r)?;
+                let time_passed = crate::util::read_u32_le(&mut r)?;
 
                 // duration: u32
-                let duration = crate::util::read_u32_le(r)?;
+                let duration = crate::util::read_u32_le(&mut r)?;
 
                 // id: u32
-                let id = crate::util::read_u32_le(r)?;
+                let id = crate::util::read_u32_le(&mut r)?;
 
                 // amount_of_nodes: u32
-                let amount_of_nodes = crate::util::read_u32_le(r)?;
+                let amount_of_nodes = crate::util::read_u32_le(&mut r)?;
 
                 // nodes: Vector3d[amount_of_nodes]
                 let nodes = {
                     let mut nodes = Vec::with_capacity(amount_of_nodes as usize);
                     for i in 0..amount_of_nodes {
-                        nodes.push(Vector3d::read(r)?);
+                        nodes.push(Vector3d::read(&mut r)?);
                     }
                     nodes
                 };
 
                 // final_node: Vector3d
-                let final_node = Vector3d::read(r)?;
+                let final_node = Vector3d::read(&mut r)?;
 
                 let spline_flags = MovementBlock_SplineFlag {
                     inner: spline_flags.as_int(),
@@ -513,10 +513,10 @@ impl MovementBlock {
         }
         else if update_flag.is_HAS_POSITION() {
             // position: Vector3d
-            let position = Vector3d::read(r)?;
+            let position = Vector3d::read(&mut r)?;
 
             // orientation: f32
-            let orientation = crate::util::read_f32_le(r)?;
+            let orientation = crate::util::read_f32_le(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_Living::HasPosition {
                 orientation,
@@ -529,10 +529,10 @@ impl MovementBlock {
 
         let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
             // unknown0: u32
-            let unknown0 = crate::util::read_u32_le(r)?;
+            let unknown0 = crate::util::read_u32_le(&mut r)?;
 
             // unknown1: u32
-            let unknown1 = crate::util::read_u32_le(r)?;
+            let unknown1 = crate::util::read_u32_le(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_HighGuid {
                 unknown0,
@@ -545,7 +545,7 @@ impl MovementBlock {
 
         let update_flag_ALL = if update_flag.is_ALL() {
             // unknown2: u32
-            let unknown2 = crate::util::read_u32_le(r)?;
+            let unknown2 = crate::util::read_u32_le(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_All {
                 unknown2,
@@ -557,7 +557,7 @@ impl MovementBlock {
 
         let update_flag_MELEE_ATTACKING = if update_flag.is_MELEE_ATTACKING() {
             // guid: PackedGuid
-            let guid = Guid::read_packed(r)?;
+            let guid = Guid::read_packed(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_MeleeAttacking {
                 guid,
@@ -569,7 +569,7 @@ impl MovementBlock {
 
         let update_flag_TRANSPORT = if update_flag.is_TRANSPORT() {
             // transport_progress_in_ms: u32
-            let transport_progress_in_ms = crate::util::read_u32_le(r)?;
+            let transport_progress_in_ms = crate::util::read_u32_le(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_Transport {
                 transport_progress_in_ms,

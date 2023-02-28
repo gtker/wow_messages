@@ -32,15 +32,15 @@ impl BattlegroundPlayerPosition {
 }
 
 impl BattlegroundPlayerPosition {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         // position_x: f32
-        let position_x = crate::util::read_f32_le(r)?;
+        let position_x = crate::util::read_f32_le(&mut r)?;
 
         // position_y: f32
-        let position_y = crate::util::read_f32_le(r)?;
+        let position_y = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
             player,

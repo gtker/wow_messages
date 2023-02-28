@@ -88,46 +88,46 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(32..=46).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0250, size: body_size as u32 });
         }
 
         // target: PackedGuid
-        let target = Guid::read_packed(r)?;
+        let target = Guid::read_packed(&mut r)?;
 
         // attacker: PackedGuid
-        let attacker = Guid::read_packed(r)?;
+        let attacker = Guid::read_packed(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // damage: u32
-        let damage = crate::util::read_u32_le(r)?;
+        let damage = crate::util::read_u32_le(&mut r)?;
 
         // school: SpellSchool
-        let school: SpellSchool = crate::util::read_u8_le(r)?.try_into()?;
+        let school: SpellSchool = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // absorbed_damage: u32
-        let absorbed_damage = crate::util::read_u32_le(r)?;
+        let absorbed_damage = crate::util::read_u32_le(&mut r)?;
 
         // resisted: u32
-        let resisted = crate::util::read_u32_le(r)?;
+        let resisted = crate::util::read_u32_le(&mut r)?;
 
         // periodic_log: Bool
-        let periodic_log = crate::util::read_u8_le(r)? != 0;
+        let periodic_log = crate::util::read_u8_le(&mut r)? != 0;
 
         // unused: u8
-        let unused = crate::util::read_u8_le(r)?;
+        let unused = crate::util::read_u8_le(&mut r)?;
 
         // blocked: u32
-        let blocked = crate::util::read_u32_le(r)?;
+        let blocked = crate::util::read_u32_le(&mut r)?;
 
         // hit_info: HitInfo
-        let hit_info: HitInfo = crate::util::read_u32_le(r)?.try_into()?;
+        let hit_info: HitInfo = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // extend_flag: u8
-        let extend_flag = crate::util::read_u8_le(r)?;
+        let extend_flag = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             target,

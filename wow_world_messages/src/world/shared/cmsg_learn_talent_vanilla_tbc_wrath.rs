@@ -29,16 +29,16 @@ impl crate::Message for CMSG_LEARN_TALENT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0251, size: body_size as u32 });
         }
 
         // talent_id: u32
-        let talent_id = crate::util::read_u32_le(r)?;
+        let talent_id = crate::util::read_u32_le(&mut r)?;
 
         // requested_rank: u32
-        let requested_rank = crate::util::read_u32_le(r)?;
+        let requested_rank = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             talent_id,

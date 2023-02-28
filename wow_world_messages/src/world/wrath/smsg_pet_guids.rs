@@ -31,19 +31,19 @@ impl crate::Message for SMSG_PET_GUIDS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04AA, size: body_size as u32 });
         }
 
         // amount_of_guids: u32
-        let amount_of_guids = crate::util::read_u32_le(r)?;
+        let amount_of_guids = crate::util::read_u32_le(&mut r)?;
 
         // guids: Guid[amount_of_guids]
         let guids = {
             let mut guids = Vec::with_capacity(amount_of_guids as usize);
             for i in 0..amount_of_guids {
-                guids.push(Guid::read(r)?);
+                guids.push(Guid::read(&mut r)?);
             }
             guids
         };

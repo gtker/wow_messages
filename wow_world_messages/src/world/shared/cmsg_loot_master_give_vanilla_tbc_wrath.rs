@@ -35,19 +35,19 @@ impl crate::Message for CMSG_LOOT_MASTER_GIVE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 17 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A3, size: body_size as u32 });
         }
 
         // loot: Guid
-        let loot = Guid::read(r)?;
+        let loot = Guid::read(&mut r)?;
 
         // slot_id: u8
-        let slot_id = crate::util::read_u8_le(r)?;
+        let slot_id = crate::util::read_u8_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(r)?;
+        let player = Guid::read(&mut r)?;
 
         Ok(Self {
             loot,

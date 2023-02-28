@@ -48,26 +48,26 @@ impl crate::Message for CMSG_GUILD_BANK_UPDATE_TAB {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(11..=521).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EA, size: body_size as u32 });
         }
 
         // bank: Guid
-        let bank = Guid::read(r)?;
+        let bank = Guid::read(&mut r)?;
 
         // tab: u8
-        let tab = crate::util::read_u8_le(r)?;
+        let tab = crate::util::read_u8_le(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // icon: CString
         let icon = {
-            let icon = crate::util::read_c_string_to_vec(r)?;
+            let icon = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(icon)?
         };
 

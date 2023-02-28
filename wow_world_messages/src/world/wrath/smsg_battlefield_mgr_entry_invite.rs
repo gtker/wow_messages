@@ -35,19 +35,19 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04DE, size: body_size as u32 });
         }
 
         // battle_id: u32
-        let battle_id = crate::util::read_u32_le(r)?;
+        let battle_id = crate::util::read_u32_le(&mut r)?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // accept_time_in_seconds: u32
-        let accept_time_in_seconds = crate::util::read_u32_le(r)?;
+        let accept_time_in_seconds = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             battle_id,

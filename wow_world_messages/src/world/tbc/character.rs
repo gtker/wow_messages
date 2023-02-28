@@ -136,75 +136,75 @@ impl Character {
 }
 
 impl Character {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // race: Race
-        let race: Race = crate::util::read_u8_le(r)?.try_into()?;
+        let race: Race = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // class: Class
-        let class: Class = crate::util::read_u8_le(r)?.try_into()?;
+        let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // gender: Gender
-        let gender: Gender = crate::util::read_u8_le(r)?.try_into()?;
+        let gender: Gender = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // skin: u8
-        let skin = crate::util::read_u8_le(r)?;
+        let skin = crate::util::read_u8_le(&mut r)?;
 
         // face: u8
-        let face = crate::util::read_u8_le(r)?;
+        let face = crate::util::read_u8_le(&mut r)?;
 
         // hair_style: u8
-        let hair_style = crate::util::read_u8_le(r)?;
+        let hair_style = crate::util::read_u8_le(&mut r)?;
 
         // hair_color: u8
-        let hair_color = crate::util::read_u8_le(r)?;
+        let hair_color = crate::util::read_u8_le(&mut r)?;
 
         // facial_hair: u8
-        let facial_hair = crate::util::read_u8_le(r)?;
+        let facial_hair = crate::util::read_u8_le(&mut r)?;
 
         // level: u8
-        let level = crate::util::read_u8_le(r)?;
+        let level = crate::util::read_u8_le(&mut r)?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(r)?.try_into()?;
+        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
-        let position = Vector3d::read(r)?;
+        let position = Vector3d::read(&mut r)?;
 
         // guild_id: u32
-        let guild_id = crate::util::read_u32_le(r)?;
+        let guild_id = crate::util::read_u32_le(&mut r)?;
 
         // flags: u32
-        let flags = crate::util::read_u32_le(r)?;
+        let flags = crate::util::read_u32_le(&mut r)?;
 
         // first_login: Bool
-        let first_login = crate::util::read_u8_le(r)? != 0;
+        let first_login = crate::util::read_u8_le(&mut r)? != 0;
 
         // pet_display_id: u32
-        let pet_display_id = crate::util::read_u32_le(r)?;
+        let pet_display_id = crate::util::read_u32_le(&mut r)?;
 
         // pet_level: u32
-        let pet_level = crate::util::read_u32_le(r)?;
+        let pet_level = crate::util::read_u32_le(&mut r)?;
 
         // pet_family: CreatureFamily
-        let pet_family: CreatureFamily = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let pet_family: CreatureFamily = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // equipment: CharacterGear[20]
         let equipment = {
             let mut equipment = [CharacterGear::default(); 20];
             for i in equipment.iter_mut() {
-                *i = CharacterGear::read(r)?;
+                *i = CharacterGear::read(&mut r)?;
             }
             equipment
         };

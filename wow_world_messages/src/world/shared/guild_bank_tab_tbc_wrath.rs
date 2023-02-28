@@ -34,16 +34,16 @@ impl GuildBankTab {
 }
 
 impl GuildBankTab {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // tab_name: CString
         let tab_name = {
-            let tab_name = crate::util::read_c_string_to_vec(r)?;
+            let tab_name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(tab_name)?
         };
 
         // tab_icon: CString
         let tab_icon = {
-            let tab_icon = crate::util::read_c_string_to_vec(r)?;
+            let tab_icon = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(tab_icon)?
         };
 

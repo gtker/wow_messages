@@ -37,19 +37,19 @@ impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=17).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00C7, size: body_size as u32 });
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(r)?;
+        let guid = Guid::read_packed(&mut r)?;
 
         // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(r)?;
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
 
         // time_in_msecs: u32
-        let time_in_msecs = crate::util::read_u32_le(r)?;
+        let time_in_msecs = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             guid,

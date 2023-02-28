@@ -162,44 +162,44 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(23..=65561).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E9, size: body_size as u32 });
         }
 
         // bank: Guid
-        let bank = Guid::read(r)?;
+        let bank = Guid::read(&mut r)?;
 
         // source: BankSwapSource
-        let source: BankSwapSource = crate::util::read_u8_le(r)?.try_into()?;
+        let source: BankSwapSource = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let source_if = match source {
             BankSwapSource::Inventory => {
                 // bank_tab: u8
-                let bank_tab = crate::util::read_u8_le(r)?;
+                let bank_tab = crate::util::read_u8_le(&mut r)?;
 
                 // bank_slot: u8
-                let bank_slot = crate::util::read_u8_le(r)?;
+                let bank_slot = crate::util::read_u8_le(&mut r)?;
 
                 // item2: u32
-                let item2 = crate::util::read_u32_le(r)?;
+                let item2 = crate::util::read_u32_le(&mut r)?;
 
                 // mode: BankSwapStoreMode
-                let mode: BankSwapStoreMode = crate::util::read_u8_le(r)?.try_into()?;
+                let mode: BankSwapStoreMode = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let mode_if = match mode {
                     BankSwapStoreMode::Manual => {
                         // player_bag: u8
-                        let player_bag = crate::util::read_u8_le(r)?;
+                        let player_bag = crate::util::read_u8_le(&mut r)?;
 
                         // player_bag_slot: u8
-                        let player_bag_slot = crate::util::read_u8_le(r)?;
+                        let player_bag_slot = crate::util::read_u8_le(&mut r)?;
 
                         // bank_to_character_transfer: Bool
-                        let bank_to_character_transfer = crate::util::read_u8_le(r)? != 0;
+                        let bank_to_character_transfer = crate::util::read_u8_le(&mut r)? != 0;
 
                         // split_amount: u32
-                        let split_amount = crate::util::read_u32_le(r)?;
+                        let split_amount = crate::util::read_u32_le(&mut r)?;
 
                         CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode::Manual {
                             bank_to_character_transfer,
@@ -210,13 +210,13 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
                     }
                     BankSwapStoreMode::Automatic => {
                         // auto_count: u32
-                        let auto_count = crate::util::read_u32_le(r)?;
+                        let auto_count = crate::util::read_u32_le(&mut r)?;
 
                         // unknown3: u8
-                        let unknown3 = crate::util::read_u8_le(r)?;
+                        let unknown3 = crate::util::read_u8_le(&mut r)?;
 
                         // unknown4: u32
-                        let unknown4 = crate::util::read_u32_le(r)?;
+                        let unknown4 = crate::util::read_u32_le(&mut r)?;
 
                         CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode::Automatic {
                             auto_count,
@@ -235,28 +235,28 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
             }
             BankSwapSource::Bank => {
                 // bank_destination_tab: u8
-                let bank_destination_tab = crate::util::read_u8_le(r)?;
+                let bank_destination_tab = crate::util::read_u8_le(&mut r)?;
 
                 // bank_destination_slot: u8
-                let bank_destination_slot = crate::util::read_u8_le(r)?;
+                let bank_destination_slot = crate::util::read_u8_le(&mut r)?;
 
                 // unknown1: u32
-                let unknown1 = crate::util::read_u32_le(r)?;
+                let unknown1 = crate::util::read_u32_le(&mut r)?;
 
                 // bank_source_tab: u8
-                let bank_source_tab = crate::util::read_u8_le(r)?;
+                let bank_source_tab = crate::util::read_u8_le(&mut r)?;
 
                 // bank_source_slot: u8
-                let bank_source_slot = crate::util::read_u8_le(r)?;
+                let bank_source_slot = crate::util::read_u8_le(&mut r)?;
 
                 // item1: u32
-                let item1 = crate::util::read_u32_le(r)?;
+                let item1 = crate::util::read_u32_le(&mut r)?;
 
                 // unknown2: u8
-                let unknown2 = crate::util::read_u8_le(r)?;
+                let unknown2 = crate::util::read_u8_le(&mut r)?;
 
                 // amount: u32
-                let amount = crate::util::read_u32_le(r)?;
+                let amount = crate::util::read_u32_le(&mut r)?;
 
                 CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource::Bank {
                     amount,
@@ -279,7 +279,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
             };
             let mut unknown5 = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                unknown5.push(crate::util::read_u8_le(r)?);
+                unknown5.push(crate::util::read_u8_le(&mut r)?);
                 current_size += 1;
             }
             unknown5

@@ -95,30 +95,30 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(25..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0360, size: body_size as u32 });
         }
 
         // lfg_type: LfgType
-        let lfg_type: LfgType = (crate::util::read_u32_le(r)? as u8).try_into()?;
+        let lfg_type: LfgType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(r)?;
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
 
         // update_type: LfgListUpdateType
-        let update_type: LfgListUpdateType = crate::util::read_u8_le(r)?.try_into()?;
+        let update_type: LfgListUpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let update_type_if = match update_type {
             LfgListUpdateType::Partial => {
                 // amount_of_deleted_guids: u32
-                let amount_of_deleted_guids = crate::util::read_u32_le(r)?;
+                let amount_of_deleted_guids = crate::util::read_u32_le(&mut r)?;
 
                 // deleted_guids: Guid[amount_of_deleted_guids]
                 let deleted_guids = {
                     let mut deleted_guids = Vec::with_capacity(amount_of_deleted_guids as usize);
                     for i in 0..amount_of_deleted_guids {
-                        deleted_guids.push(Guid::read(r)?);
+                        deleted_guids.push(Guid::read(&mut r)?);
                     }
                     deleted_guids
                 };
@@ -131,31 +131,31 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         };
 
         // amount_of_groups: u32
-        let amount_of_groups = crate::util::read_u32_le(r)?;
+        let amount_of_groups = crate::util::read_u32_le(&mut r)?;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // groups: LfgListGroup[amount_of_groups]
         let groups = {
             let mut groups = Vec::with_capacity(amount_of_groups as usize);
             for i in 0..amount_of_groups {
-                groups.push(LfgListGroup::read(r)?);
+                groups.push(LfgListGroup::read(&mut r)?);
             }
             groups
         };
 
         // amount_of_players: u32
-        let amount_of_players = crate::util::read_u32_le(r)?;
+        let amount_of_players = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(r)?;
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
 
         // players: LfgListPlayer[amount_of_players]
         let players = {
             let mut players = Vec::with_capacity(amount_of_players as usize);
             for i in 0..amount_of_players {
-                players.push(LfgListPlayer::read(r)?);
+                players.push(LfgListPlayer::read(&mut r)?);
             }
             players
         };

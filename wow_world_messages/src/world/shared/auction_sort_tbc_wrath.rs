@@ -26,12 +26,12 @@ impl AuctionSort {
 }
 
 impl AuctionSort {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // column: u8
-        let column = crate::util::read_u8_le(r)?;
+        let column = crate::util::read_u8_le(&mut r)?;
 
         // reversed: u8
-        let reversed = crate::util::read_u8_le(r)?;
+        let reversed = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             column,

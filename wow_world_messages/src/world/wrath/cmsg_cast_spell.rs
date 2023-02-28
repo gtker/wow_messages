@@ -92,46 +92,46 @@ impl crate::Message for CMSG_CAST_SPELL {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=414).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012E, size: body_size as u32 });
         }
 
         // cast_count: u8
-        let cast_count = crate::util::read_u8_le(r)?;
+        let cast_count = crate::util::read_u8_le(&mut r)?;
 
         // spell: u32
-        let spell = crate::util::read_u32_le(r)?;
+        let spell = crate::util::read_u32_le(&mut r)?;
 
         // cast_flags: ClientCastFlags
-        let cast_flags: ClientCastFlags = crate::util::read_u8_le(r)?.try_into()?;
+        let cast_flags: ClientCastFlags = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(r)?;
+        let targets = SpellCastTargets::read(&mut r)?;
 
         let cast_flags_if = match cast_flags {
             ClientCastFlags::None => CMSG_CAST_SPELL_ClientCastFlags::None,
             ClientCastFlags::Extra => {
                 // elevation: f32
-                let elevation = crate::util::read_f32_le(r)?;
+                let elevation = crate::util::read_f32_le(&mut r)?;
 
                 // speed: f32
-                let speed = crate::util::read_f32_le(r)?;
+                let speed = crate::util::read_f32_le(&mut r)?;
 
                 // movement_data: ClientMovementData
-                let movement_data: ClientMovementData = crate::util::read_u8_le(r)?.try_into()?;
+                let movement_data: ClientMovementData = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let movement_data_if = match movement_data {
                     ClientMovementData::NotPresent => CMSG_CAST_SPELL_ClientMovementData::NotPresent,
                     ClientMovementData::Present => {
                         // opcode: u32
-                        let opcode = crate::util::read_u32_le(r)?;
+                        let opcode = crate::util::read_u32_le(&mut r)?;
 
                         // guid: PackedGuid
-                        let guid = Guid::read_packed(r)?;
+                        let guid = Guid::read_packed(&mut r)?;
 
                         // info: MovementInfo
-                        let info = MovementInfo::read(r)?;
+                        let info = MovementInfo::read(&mut r)?;
 
                         CMSG_CAST_SPELL_ClientMovementData::Present {
                             guid,

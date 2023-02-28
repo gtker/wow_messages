@@ -49,21 +49,21 @@ impl Addon {
 }
 
 impl Addon {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // addon_type: u8
-        let addon_type = crate::util::read_u8_le(r)?;
+        let addon_type = crate::util::read_u8_le(&mut r)?;
 
         // uses_crc: u8
-        let uses_crc = crate::util::read_u8_le(r)?;
+        let uses_crc = crate::util::read_u8_le(&mut r)?;
 
         // uses_diffent_public_key: Bool
-        let uses_diffent_public_key = crate::util::read_u8_le(r)? != 0;
+        let uses_diffent_public_key = crate::util::read_u8_le(&mut r)? != 0;
 
         // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(r)?;
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(r)?;
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
             addon_type,

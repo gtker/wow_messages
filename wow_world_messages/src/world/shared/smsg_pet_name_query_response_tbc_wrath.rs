@@ -61,25 +61,25 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=1545).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0053, size: body_size as u32 });
         }
 
         // pet_number: u32
-        let pet_number = crate::util::read_u32_le(r)?;
+        let pet_number = crate::util::read_u32_le(&mut r)?;
 
         // name: CString
         let name = {
-            let name = crate::util::read_c_string_to_vec(r)?;
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(name)?
         };
 
         // pet_name_timestamp: u32
-        let pet_name_timestamp = crate::util::read_u32_le(r)?;
+        let pet_name_timestamp = crate::util::read_u32_le(&mut r)?;
 
         // names: PetQueryDisabledNames
-        let names: PetQueryDisabledNames = crate::util::read_u8_le(r)?.try_into()?;
+        let names: PetQueryDisabledNames = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let names_if = match names {
             PetQueryDisabledNames::Present => {
@@ -87,7 +87,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
                 let declined_names = {
                     let mut declined_names = [(); 5].map(|_| String::default());
                     for i in declined_names.iter_mut() {
-                        let s = crate::util::read_c_string_to_vec(r)?;
+                        let s = crate::util::read_c_string_to_vec(&mut r)?;
                         *i = String::from_utf8(s)?;
                     }
                     declined_names

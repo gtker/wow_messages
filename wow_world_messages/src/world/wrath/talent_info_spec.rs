@@ -39,27 +39,27 @@ impl TalentInfoSpec {
 }
 
 impl TalentInfoSpec {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
         // amount_of_talents: u8
-        let amount_of_talents = crate::util::read_u8_le(r)?;
+        let amount_of_talents = crate::util::read_u8_le(&mut r)?;
 
         // talents: InspectTalent[amount_of_talents]
         let talents = {
             let mut talents = Vec::with_capacity(amount_of_talents as usize);
             for i in 0..amount_of_talents {
-                talents.push(InspectTalent::read(r)?);
+                talents.push(InspectTalent::read(&mut r)?);
             }
             talents
         };
 
         // amount_of_glyphs: u8
-        let amount_of_glyphs = crate::util::read_u8_le(r)?;
+        let amount_of_glyphs = crate::util::read_u8_le(&mut r)?;
 
         // glyphs: u16[amount_of_glyphs]
         let glyphs = {
             let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
             for i in 0..amount_of_glyphs {
-                glyphs.push(crate::util::read_u16_le(r)?);
+                glyphs.push(crate::util::read_u16_le(&mut r)?);
             }
             glyphs
         };

@@ -33,13 +33,13 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=65543).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0134, size: body_size as u32 });
         }
 
         // guid: Guid
-        let guid = Guid::read(r)?;
+        let guid = Guid::read(&mut r)?;
 
         // cooldowns: SpellCooldownStatus[-]
         let cooldowns = {
@@ -48,7 +48,7 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
             };
             let mut cooldowns = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
-                cooldowns.push(SpellCooldownStatus::read(r)?);
+                cooldowns.push(SpellCooldownStatus::read(&mut r)?);
                 current_size += 1;
             }
             cooldowns

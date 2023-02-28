@@ -53,28 +53,28 @@ impl crate::Message for CMSG_USE_ITEM {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=330).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size as u32 });
         }
 
         // bag_index: u8
-        let bag_index = crate::util::read_u8_le(r)?;
+        let bag_index = crate::util::read_u8_le(&mut r)?;
 
         // bag_slot: u8
-        let bag_slot = crate::util::read_u8_le(r)?;
+        let bag_slot = crate::util::read_u8_le(&mut r)?;
 
         // spell_index: u8
-        let spell_index = crate::util::read_u8_le(r)?;
+        let spell_index = crate::util::read_u8_le(&mut r)?;
 
         // cast_count: u8
-        let cast_count = crate::util::read_u8_le(r)?;
+        let cast_count = crate::util::read_u8_le(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(r)?;
+        let item = Guid::read(&mut r)?;
 
         // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(r)?;
+        let targets = SpellCastTargets::read(&mut r)?;
 
         Ok(Self {
             bag_index,

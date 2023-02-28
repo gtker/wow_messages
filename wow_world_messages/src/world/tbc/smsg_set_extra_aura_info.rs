@@ -48,13 +48,13 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03A4, size: body_size as u32 });
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(r)?;
+        let unit = Guid::read_packed(&mut r)?;
 
         // optional aura
         let current_size = {
@@ -62,16 +62,16 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
         };
         let aura = if current_size < body_size as usize {
             // slot: u8
-            let slot = crate::util::read_u8_le(r)?;
+            let slot = crate::util::read_u8_le(&mut r)?;
 
             // spell: u32
-            let spell = crate::util::read_u32_le(r)?;
+            let spell = crate::util::read_u32_le(&mut r)?;
 
             // max_duration: u32
-            let max_duration = crate::util::read_u32_le(r)?;
+            let max_duration = crate::util::read_u32_le(&mut r)?;
 
             // remaining_duration: u32
-            let remaining_duration = crate::util::read_u32_le(r)?;
+            let remaining_duration = crate::util::read_u32_le(&mut r)?;
 
             Some(SMSG_SET_EXTRA_AURA_INFO_aura {
                 slot,

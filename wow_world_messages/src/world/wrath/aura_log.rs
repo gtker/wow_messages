@@ -481,9 +481,9 @@ impl AuraLog {
 }
 
 impl AuraLog {
-    pub(crate) fn read<R: std::io::Read>(r: &mut R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // aura_type: AuraType
-        let aura_type: AuraType = crate::util::read_u32_le(r)?.try_into()?;
+        let aura_type: AuraType = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let aura_type_if = match aura_type {
             AuraType::None => AuraLog_AuraType::None,
@@ -491,22 +491,22 @@ impl AuraLog {
             AuraType::ModPossess => AuraLog_AuraType::ModPossess,
             AuraType::PeriodicDamage => {
                 // damage1: u32
-                let damage1 = crate::util::read_u32_le(r)?;
+                let damage1 = crate::util::read_u32_le(&mut r)?;
 
                 // overkill_damage: u32
-                let overkill_damage = crate::util::read_u32_le(r)?;
+                let overkill_damage = crate::util::read_u32_le(&mut r)?;
 
                 // school: SpellSchool
-                let school: SpellSchool = crate::util::read_u8_le(r)?.try_into()?;
+                let school: SpellSchool = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // absorb1: u32
-                let absorb1 = crate::util::read_u32_le(r)?;
+                let absorb1 = crate::util::read_u32_le(&mut r)?;
 
                 // resisted: u32
-                let resisted = crate::util::read_u32_le(r)?;
+                let resisted = crate::util::read_u32_le(&mut r)?;
 
                 // critical1: Bool
-                let critical1 = crate::util::read_u8_le(r)? != 0;
+                let critical1 = crate::util::read_u8_le(&mut r)? != 0;
 
                 AuraLog_AuraType::PeriodicDamage {
                     absorb1,
@@ -523,16 +523,16 @@ impl AuraLog {
             AuraType::ModFear => AuraLog_AuraType::ModFear,
             AuraType::PeriodicHeal => {
                 // damage2: u32
-                let damage2 = crate::util::read_u32_le(r)?;
+                let damage2 = crate::util::read_u32_le(&mut r)?;
 
                 // over_damage: u32
-                let over_damage = crate::util::read_u32_le(r)?;
+                let over_damage = crate::util::read_u32_le(&mut r)?;
 
                 // absorb2: u32
-                let absorb2 = crate::util::read_u32_le(r)?;
+                let absorb2 = crate::util::read_u32_le(&mut r)?;
 
                 // critical2: Bool
-                let critical2 = crate::util::read_u8_le(r)? != 0;
+                let critical2 = crate::util::read_u8_le(&mut r)? != 0;
 
                 AuraLog_AuraType::PeriodicHeal {
                     absorb2,
@@ -554,16 +554,16 @@ impl AuraLog {
             AuraType::ModInvisibilityDetect => AuraLog_AuraType::ModInvisibilityDetect,
             AuraType::ObsModHealth => {
                 // damage2: u32
-                let damage2 = crate::util::read_u32_le(r)?;
+                let damage2 = crate::util::read_u32_le(&mut r)?;
 
                 // over_damage: u32
-                let over_damage = crate::util::read_u32_le(r)?;
+                let over_damage = crate::util::read_u32_le(&mut r)?;
 
                 // absorb2: u32
-                let absorb2 = crate::util::read_u32_le(r)?;
+                let absorb2 = crate::util::read_u32_le(&mut r)?;
 
                 // critical2: Bool
-                let critical2 = crate::util::read_u8_le(r)? != 0;
+                let critical2 = crate::util::read_u8_le(&mut r)? != 0;
 
                 AuraLog_AuraType::ObsModHealth {
                     absorb2,
@@ -577,10 +577,10 @@ impl AuraLog {
             AuraType::PeriodicTriggerSpell => AuraLog_AuraType::PeriodicTriggerSpell,
             AuraType::PeriodicEnergize => {
                 // misc_value1: u32
-                let misc_value1 = crate::util::read_u32_le(r)?;
+                let misc_value1 = crate::util::read_u32_le(&mut r)?;
 
                 // damage3: u32
-                let damage3 = crate::util::read_u32_le(r)?;
+                let damage3 = crate::util::read_u32_le(&mut r)?;
 
                 AuraLog_AuraType::PeriodicEnergize {
                     damage3,
@@ -628,13 +628,13 @@ impl AuraLog {
             AuraType::Unknown63 => AuraLog_AuraType::Unknown63,
             AuraType::PeriodicManaLeech => {
                 // misc_value2: u32
-                let misc_value2 = crate::util::read_u32_le(r)?;
+                let misc_value2 = crate::util::read_u32_le(&mut r)?;
 
                 // damage4: u32
-                let damage4 = crate::util::read_u32_le(r)?;
+                let damage4 = crate::util::read_u32_le(&mut r)?;
 
                 // gain_multiplier: f32
-                let gain_multiplier = crate::util::read_f32_le(r)?;
+                let gain_multiplier = crate::util::read_f32_le(&mut r)?;
 
                 AuraLog_AuraType::PeriodicManaLeech {
                     damage4,
@@ -668,22 +668,22 @@ impl AuraLog {
             AuraType::ModHealthRegenPercent => AuraLog_AuraType::ModHealthRegenPercent,
             AuraType::PeriodicDamagePercent => {
                 // damage1: u32
-                let damage1 = crate::util::read_u32_le(r)?;
+                let damage1 = crate::util::read_u32_le(&mut r)?;
 
                 // overkill_damage: u32
-                let overkill_damage = crate::util::read_u32_le(r)?;
+                let overkill_damage = crate::util::read_u32_le(&mut r)?;
 
                 // school: SpellSchool
-                let school: SpellSchool = crate::util::read_u8_le(r)?.try_into()?;
+                let school: SpellSchool = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // absorb1: u32
-                let absorb1 = crate::util::read_u32_le(r)?;
+                let absorb1 = crate::util::read_u32_le(&mut r)?;
 
                 // resisted: u32
-                let resisted = crate::util::read_u32_le(r)?;
+                let resisted = crate::util::read_u32_le(&mut r)?;
 
                 // critical1: Bool
-                let critical1 = crate::util::read_u8_le(r)? != 0;
+                let critical1 = crate::util::read_u8_le(&mut r)? != 0;
 
                 AuraLog_AuraType::PeriodicDamagePercent {
                     absorb1,

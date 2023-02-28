@@ -32,16 +32,16 @@ impl crate::Message for SMSG_COMPLAIN_RESULT {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C8, size: body_size as u32 });
         }
 
         // unknown: u8
-        let unknown = crate::util::read_u8_le(r)?;
+        let unknown = crate::util::read_u8_le(&mut r)?;
 
         // window_result: ComplainResultWindow
-        let window_result: ComplainResultWindow = crate::util::read_u8_le(r)?.try_into()?;
+        let window_result: ComplainResultWindow = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             unknown,

@@ -36,19 +36,19 @@ impl crate::Message for SMSG_SUMMON_REQUEST {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AB, size: body_size as u32 });
         }
 
         // summoner: Guid
-        let summoner = Guid::read(r)?;
+        let summoner = Guid::read(&mut r)?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // auto_decline_time_in_msecs: u32
-        let auto_decline_time_in_msecs = crate::util::read_u32_le(r)?;
+        let auto_decline_time_in_msecs = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
             summoner,

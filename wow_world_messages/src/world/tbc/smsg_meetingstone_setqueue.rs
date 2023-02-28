@@ -31,16 +31,16 @@ impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0295, size: body_size as u32 });
         }
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(r)?.try_into()?;
+        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // status: MeetingStoneStatus
-        let status: MeetingStoneStatus = crate::util::read_u8_le(r)?.try_into()?;
+        let status: MeetingStoneStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             area,

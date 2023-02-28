@@ -48,28 +48,28 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 61 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FD, size: body_size as u32 });
         }
 
         // id: u32
-        let id = crate::util::read_u32_le(r)?;
+        let id = crate::util::read_u32_le(&mut r)?;
 
         // rights: u32
-        let rights = crate::util::read_u32_le(r)?;
+        let rights = crate::util::read_u32_le(&mut r)?;
 
         // gold_limit_per_day: Gold
-        let gold_limit_per_day = Gold::new(crate::util::read_u32_le(r)?);
+        let gold_limit_per_day = Gold::new(crate::util::read_u32_le(&mut r)?);
 
         // purchased_bank_tabs: u8
-        let purchased_bank_tabs = crate::util::read_u8_le(r)?;
+        let purchased_bank_tabs = crate::util::read_u8_le(&mut r)?;
 
         // bank_tabs: BankTab[6]
         let bank_tabs = {
             let mut bank_tabs = [BankTab::default(); 6];
             for i in bank_tabs.iter_mut() {
-                *i = BankTab::read(r)?;
+                *i = BankTab::read(&mut r)?;
             }
             bank_tabs
         };

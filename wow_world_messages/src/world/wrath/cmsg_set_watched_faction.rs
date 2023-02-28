@@ -25,13 +25,13 @@ impl crate::Message for CMSG_SET_WATCHED_FACTION {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0318, size: body_size as u32 });
         }
 
         // faction: Faction
-        let faction: Faction = crate::util::read_u16_le(r)?.try_into()?;
+        let faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         Ok(Self {
             faction,

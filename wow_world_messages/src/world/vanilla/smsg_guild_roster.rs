@@ -60,34 +60,34 @@ impl crate::Message for SMSG_GUILD_ROSTER {
 
         Ok(())
     }
-    fn read_body(r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=4294967294).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x008A, size: body_size as u32 });
         }
 
         // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(r)?;
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
 
         // motd: CString
         let motd = {
-            let motd = crate::util::read_c_string_to_vec(r)?;
+            let motd = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(motd)?
         };
 
         // guild_info: CString
         let guild_info = {
-            let guild_info = crate::util::read_c_string_to_vec(r)?;
+            let guild_info = crate::util::read_c_string_to_vec(&mut r)?;
             String::from_utf8(guild_info)?
         };
 
         // amount_of_rights: u32
-        let amount_of_rights = crate::util::read_u32_le(r)?;
+        let amount_of_rights = crate::util::read_u32_le(&mut r)?;
 
         // rights: u32[amount_of_rights]
         let rights = {
             let mut rights = Vec::with_capacity(amount_of_rights as usize);
             for i in 0..amount_of_rights {
-                rights.push(crate::util::read_u32_le(r)?);
+                rights.push(crate::util::read_u32_le(&mut r)?);
             }
             rights
         };
@@ -96,7 +96,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
             for i in 0..amount_of_members {
-                members.push(GuildMember::read(r)?);
+                members.push(GuildMember::read(&mut r)?);
             }
             members
         };

@@ -12,16 +12,16 @@ impl MonsterMoveSpline {
         Self { splines: vec![] }
     }
 
-    pub(crate) fn read(r: &mut impl io::Read) -> Result<Self, crate::errors::ParseError> {
-        let amount_of_splines = read_u32_le(r)?;
+    pub(crate) fn read(mut r: &mut impl io::Read) -> Result<Self, crate::errors::ParseError> {
+        let amount_of_splines = read_u32_le(&mut r)?;
         let mut splines = Vec::with_capacity(amount_of_splines.try_into().unwrap());
 
         for i in 0..amount_of_splines {
             if i == 0 {
-                let vec = Vector3d::read(r)?;
+                let vec = Vector3d::read(&mut r)?;
                 splines.push(vec);
             } else {
-                let packed = read_u32_le(r)?;
+                let packed = read_u32_le(&mut r)?;
                 splines.push(packed_to_vector3d(packed));
             }
         }
