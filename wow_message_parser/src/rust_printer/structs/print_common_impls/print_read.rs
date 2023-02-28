@@ -123,11 +123,12 @@ fn print_read_array_fixed(
     s.closing_curly();
 
     if !inner_is_constant_sized {
-        s.wln(format!(
-            "let {name} = {name}.try_into().unwrap();",
-            name = d.name()
-        ));
+        s.wln(format!("{name}.try_into().unwrap()", name = d.name()));
+    } else {
+        s.wln(d.name());
     }
+
+    s.closing_curly_with(";");
 }
 
 fn print_read_array(
@@ -159,9 +160,7 @@ fn print_read_array(
     match array.size() {
         ArraySize::Fixed(size) => {
             print_read_array_fixed(s, array, d, prefix, postfix, size);
-
-            s.wln(d.name());
-            s.closing_curly_with(";");
+            return;
         }
         ArraySize::Variable(m) => {
             s.open_curly(format!("let {name} =", name = d.name()));
@@ -174,9 +173,6 @@ fn print_read_array(
             s.body(format!("for i in 0..{length}", length = m.name()), |s| {
                 print_array_ty(s, array, d, prefix, "r", postfix);
             });
-
-            s.wln(d.name());
-            s.closing_curly_with(";");
         }
         ArraySize::Endless => {
             s.open_curly(format!("let {name} =", name = d.name()));
@@ -207,11 +203,11 @@ fn print_read_array(
                 print_array_ty(s, array, d, prefix, reader, postfix);
                 s.wln("current_size += 1;")
             });
-
-            s.wln(d.name());
-            s.closing_curly_with(";");
         }
     }
+
+    s.wln(d.name());
+    s.closing_curly_with(";");
 }
 
 fn print_array_ty(

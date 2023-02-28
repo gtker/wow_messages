@@ -152,8 +152,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
                         let s = crate::util::read_c_string_to_vec(r)?;
                         declined_names.push(String::from_utf8(s)?);
                     }
-                    let declined_names = declined_names.try_into().unwrap();
-                    declined_names
+                    declined_names.try_into().unwrap()
                 };
 
                 SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {

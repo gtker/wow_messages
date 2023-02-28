@@ -60,8 +60,7 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
             for i in 0..10 {
                 questions.push(GmSurveyQuestion::read(r)?);
             }
-            let questions = questions.try_into().unwrap();
-            questions
+            questions.try_into().unwrap()
         };
 
         // answer_comment: CString

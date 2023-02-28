@@ -87,8 +87,7 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
                 let s = crate::util::read_c_string_to_vec(r)?;
                 rank_names.push(String::from_utf8(s)?);
             }
-            let rank_names = rank_names.try_into().unwrap();
-            rank_names
+            rank_names.try_into().unwrap()
         };
 
         // emblem_style: u32

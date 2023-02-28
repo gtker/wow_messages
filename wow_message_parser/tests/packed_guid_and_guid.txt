@@ -76,8 +76,7 @@ impl PackedGuidAndGuid {
             for i in 0..10 {
                 static_packed.push(Guid::read_packed(r)?);
             }
-            let static_packed = static_packed.try_into().unwrap();
-            static_packed
+            static_packed.try_into().unwrap()
         };
 
         // static_guid: Guid[10]

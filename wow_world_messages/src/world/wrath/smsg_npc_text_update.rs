@@ -46,8 +46,7 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
             for i in 0..8 {
                 texts.push(NpcTextUpdate::read(r)?);
             }
-            let texts = texts.try_into().unwrap();
-            texts
+            texts.try_into().unwrap()
         };
 
         Ok(Self {

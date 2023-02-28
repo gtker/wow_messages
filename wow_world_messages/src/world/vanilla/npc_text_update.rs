@@ -54,8 +54,7 @@ impl NpcTextUpdate {
                 let s = crate::util::read_c_string_to_vec(r)?;
                 texts.push(String::from_utf8(s)?);
             }
-            let texts = texts.try_into().unwrap();
-            texts
+            texts.try_into().unwrap()
         };
 
         // language: Language

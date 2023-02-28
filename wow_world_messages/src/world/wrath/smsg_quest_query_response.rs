@@ -479,8 +479,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
                 let s = crate::util::read_c_string_to_vec(r)?;
                 objective_texts.push(String::from_utf8(s)?);
             }
-            let objective_texts = objective_texts.try_into().unwrap();
-            objective_texts
+            objective_texts.try_into().unwrap()
         };
 
         Ok(Self {

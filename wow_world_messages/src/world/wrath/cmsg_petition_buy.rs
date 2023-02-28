@@ -194,8 +194,7 @@ impl crate::Message for CMSG_PETITION_BUY {
                 let s = crate::util::read_c_string_to_vec(r)?;
                 unknown15.push(String::from_utf8(s)?);
             }
-            let unknown15 = unknown15.try_into().unwrap();
-            unknown15
+            unknown15.try_into().unwrap()
         };
 
         // index: u32

@@ -63,8 +63,7 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
                 let s = crate::util::read_c_string_to_vec(r)?;
                 declined_names.push(String::from_utf8(s)?);
             }
-            let declined_names = declined_names.try_into().unwrap();
-            declined_names
+            declined_names.try_into().unwrap()
         };
 
         Ok(Self {

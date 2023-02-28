@@ -70,8 +70,7 @@ impl crate::Message for SMSG_GMRESPONSE_RECEIVED {
                 let s = crate::util::read_c_string_to_vec(r)?;
                 response.push(String::from_utf8(s)?);
             }
-            let response = response.try_into().unwrap();
-            response
+            response.try_into().unwrap()
         };
 
         Ok(Self {

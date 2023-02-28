@@ -86,8 +86,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
                         let s = crate::util::read_c_string_to_vec(r)?;
                         declined_names.push(String::from_utf8(s)?);
                     }
-                    let declined_names = declined_names.try_into().unwrap();
-                    declined_names
+                    declined_names.try_into().unwrap()
                 };
 
                 SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
