@@ -65,7 +65,13 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
                 |s, it| {
-                    print_write::print_login_write_header(s, it.postfix());
+                    s.wln("// opcode: u8");
+                    s.wln(format!(
+                        "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;",
+                        postfix = it.postfix(),
+                    ));
+                    s.newline();
+
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
                 sizes,

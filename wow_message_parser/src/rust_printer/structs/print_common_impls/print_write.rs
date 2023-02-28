@@ -9,14 +9,6 @@ use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
-pub(crate) fn print_login_write_header(s: &mut Writer, postfix: &str) {
-    s.wln("// opcode: u8");
-    s.wln(format!(
-        "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;"
-    ));
-    s.newline();
-}
-
 pub(crate) fn print_write_field_array(
     s: &mut Writer,
     d: &StructMemberDefinition,
