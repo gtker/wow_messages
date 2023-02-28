@@ -27,16 +27,7 @@ fn print_read_array_fixed(
         s.wln(format!(
             "let mut {name} = [{type_name}::default(); {size}];",
             name = d.name(),
-            type_name = match array.ty() {
-                ArrayType::Integer(i) => {
-                    i.rust_str()
-                }
-                ArrayType::Struct(c) => {
-                    c.name()
-                }
-                ArrayType::CString => "String",
-                ArrayType::Guid | ArrayType::PackedGuid => "Guid",
-            },
+            type_name = array.ty().rust_str(),
             size = size
         ));
     } else {
