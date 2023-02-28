@@ -1,5 +1,5 @@
 use crate::parser::types::array::{Array, ArrayType};
-use crate::parser::types::container::{Container, ContainerType};
+use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
@@ -9,18 +9,12 @@ use crate::rust_printer::DefinerType;
 use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
-pub(crate) fn print_unencrypted_write_header(s: &mut Writer, e: &Container, postfix: &str) {
-    match e.container_type() {
-        ContainerType::Struct => {}
-        ContainerType::SLogin(_) | ContainerType::CLogin(_) => {
-            s.wln("// opcode: u8");
-            s.wln(format!(
-                "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;"
-            ));
-            s.newline();
-        }
-        _ => unreachable!("Non-login container found in login function"),
-    }
+pub(crate) fn print_login_write_header(s: &mut Writer, postfix: &str) {
+    s.wln("// opcode: u8");
+    s.wln(format!(
+        "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;"
+    ));
+    s.newline();
 }
 
 pub(crate) fn print_write_field_array(
