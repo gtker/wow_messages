@@ -30,7 +30,8 @@ pub trait ServerMessage: Message {
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let size = self.server_size();
-        let mut v = wrath_get_unencrypted_server(Self::OPCODE as u16, size);
+        let mut v = Vec::with_capacity(size as usize);
+        wrath_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
         self.write_into_vec(&mut v)?;
         assert_eq!(size, v.len() as u32);
 
@@ -44,7 +45,8 @@ pub trait ServerMessage: Message {
         e: &mut ServerEncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let size = self.server_size();
-        let mut v = wrath_get_encrypted_server(Self::OPCODE as u16, size, e);
+        let mut v = Vec::with_capacity(size as usize);
+        wrath_get_encrypted_server(&mut v, Self::OPCODE as u16, size, e)?;
 
         self.write_into_vec(&mut v)?;
         assert_eq!(size, v.len() as u32);
@@ -64,7 +66,8 @@ pub trait ServerMessage: Message {
     {
         Box::pin(async move {
             let size = self.server_size();
-            let mut v = wrath_get_unencrypted_server(Self::OPCODE as u16, size);
+            let mut v = Vec::with_capacity(size as usize);
+            wrath_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u32);
 
@@ -86,7 +89,8 @@ pub trait ServerMessage: Message {
     {
         Box::pin(async move {
             let size = self.server_size();
-            let mut v = wrath_get_encrypted_server(Self::OPCODE as u16, size, e);
+            let mut v = Vec::with_capacity(size as usize);
+            wrath_get_encrypted_server(&mut v, Self::OPCODE as u16, size, e)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u32);
 
@@ -106,7 +110,8 @@ pub trait ServerMessage: Message {
     {
         Box::pin(async move {
             let size = self.server_size();
-            let mut v = wrath_get_unencrypted_server(Self::OPCODE as u16, size);
+            let mut v = Vec::with_capacity(size as usize);
+            wrath_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u32);
 
@@ -128,7 +133,8 @@ pub trait ServerMessage: Message {
     {
         Box::pin(async move {
             let size = self.server_size();
-            let mut v = wrath_get_encrypted_server(Self::OPCODE as u16, size, e);
+            let mut v = Vec::with_capacity(size as usize);
+            wrath_get_encrypted_server(&mut v, Self::OPCODE as u16, size, e)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u32);
 
@@ -148,7 +154,8 @@ pub trait ClientMessage: Message {
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let size = self.client_size();
-        let mut v = wrath_get_unencrypted_client(Self::OPCODE as u16, size);
+        let mut v = Vec::with_capacity(size.into());
+        wrath_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
         self.write_into_vec(&mut v)?;
         assert_eq!(size, v.len() as u16);
 
@@ -162,7 +169,8 @@ pub trait ClientMessage: Message {
         e: &mut ClientEncrypterHalf,
     ) -> Result<(), std::io::Error> {
         let size = self.client_size();
-        let mut v = wrath_get_encrypted_client(Self::OPCODE as u16, size, e);
+        let mut v = Vec::with_capacity(size.into());
+        wrath_get_encrypted_client(&mut v, Self::OPCODE as u16, size, e)?;
         self.write_into_vec(&mut v)?;
         assert_eq!(size, v.len() as u16);
 
@@ -181,7 +189,8 @@ pub trait ClientMessage: Message {
     {
         Box::pin(async move {
             let size = self.client_size();
-            let mut v = wrath_get_unencrypted_client(Self::OPCODE as u16, size);
+            let mut v = Vec::with_capacity(size.into());
+            wrath_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u16);
 
@@ -203,7 +212,8 @@ pub trait ClientMessage: Message {
     {
         Box::pin(async move {
             let size = self.client_size();
-            let mut v = wrath_get_encrypted_client(Self::OPCODE as u16, size, e);
+            let mut v = Vec::with_capacity(size.into());
+            wrath_get_encrypted_client(&mut v, Self::OPCODE as u16, size, e)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u16);
 
@@ -223,7 +233,8 @@ pub trait ClientMessage: Message {
     {
         Box::pin(async move {
             let size = self.client_size();
-            let mut v = wrath_get_unencrypted_client(Self::OPCODE as u16, size);
+            let mut v = Vec::with_capacity(size.into());
+            wrath_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u16);
 
@@ -245,7 +256,8 @@ pub trait ClientMessage: Message {
     {
         Box::pin(async move {
             let size = self.client_size();
-            let mut v = wrath_get_encrypted_client(Self::OPCODE as u16, size, e);
+            let mut v = Vec::with_capacity(size.into());
+            wrath_get_encrypted_client(&mut v, Self::OPCODE as u16, size, e)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u16);
 

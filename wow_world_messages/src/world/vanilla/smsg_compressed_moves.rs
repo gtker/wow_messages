@@ -64,7 +64,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
 impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
     #[cfg(feature = "sync")]
     fn write_unencrypted_server<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
-        let mut v = crate::util::vanilla_get_unencrypted_server(Self::OPCODE as u16, 0);
+        let mut v = Vec::with_capacity(1024);
+        crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
         self.write_into_vec(&mut v)?;
         let size = v.len().saturating_sub(2);
         let s = size.to_le_bytes();
@@ -79,7 +80,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         mut w: W,
         e: &mut wow_srp::vanilla_header::EncrypterHalf,
     ) -> Result<(), std::io::Error> {
-        let mut v = crate::util::vanilla_get_unencrypted_server(Self::OPCODE as u16, 0);
+        let mut v = Vec::with_capacity(1024);
+        crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
         self.write_into_vec(&mut v)?;
         let size = v.len().saturating_sub(2) as u16;
         let header = e.encrypt_server_header(size, Self::OPCODE as u16);
@@ -100,7 +102,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::vanilla_get_unencrypted_server(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
@@ -123,7 +126,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::vanilla_get_unencrypted_server(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_server_header(size, Self::OPCODE as u16);
@@ -145,7 +149,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::vanilla_get_unencrypted_server(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
@@ -168,7 +173,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::vanilla_get_unencrypted_server(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::vanilla_get_unencrypted_server(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_server_header(size, Self::OPCODE as u16);

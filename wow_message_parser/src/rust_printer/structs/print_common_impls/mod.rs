@@ -184,7 +184,8 @@ pub(crate) fn impl_world_server_or_client_message(
             "fn write_unencrypted_{ty}<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error>"
         ));
         let unencrypted = |s: &mut Writer, extra: &str| {
-            s.wln(format!("let mut v = crate::util::{feature_name}_get_unencrypted_{ty}(Self::OPCODE as u16, 0);"));
+            s.wln("let mut v = Vec::with_capacity(1024);");
+            s.wln(format!("crate::util::{feature_name}_get_unencrypted_{ty}(&mut v, Self::OPCODE as u16, 0)?;"));
             s.wln("self.write_into_vec(&mut v)?;");
 
             s.wln("let size = v.len().saturating_sub(2);");
@@ -218,7 +219,8 @@ pub(crate) fn impl_world_server_or_client_message(
         s.dec_indent();
 
         let encrypted = |s: &mut Writer, extra: &str| {
-            s.wln(format!("let mut v = crate::util::{feature_name}_get_unencrypted_{ty}(Self::OPCODE as u16, 0);"));
+            s.wln("let mut v = Vec::with_capacity(1024);");
+            s.wln(format!("crate::util::{feature_name}_get_unencrypted_{ty}(&mut v, Self::OPCODE as u16, 0)?;"));
             s.wln("self.write_into_vec(&mut v)?;");
             s.wln("let size = v.len().saturating_sub(2) as u16;");
             s.wln(format!(

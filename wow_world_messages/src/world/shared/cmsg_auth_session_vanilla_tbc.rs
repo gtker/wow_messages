@@ -137,7 +137,8 @@ impl crate::Message for CMSG_AUTH_SESSION {
 impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
-        let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+        let mut v = Vec::with_capacity(1024);
+        crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
         self.write_into_vec(&mut v)?;
         let size = v.len().saturating_sub(2);
         let s = size.to_le_bytes();
@@ -152,7 +153,8 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
         mut w: W,
         e: &mut wow_srp::vanilla_header::EncrypterHalf,
     ) -> Result<(), std::io::Error> {
-        let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+        let mut v = Vec::with_capacity(1024);
+        crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
         self.write_into_vec(&mut v)?;
         let size = v.len().saturating_sub(2) as u16;
         let header = e.encrypt_client_header(size, Self::OPCODE);
@@ -173,7 +175,8 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
@@ -196,7 +199,8 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_client_header(size, Self::OPCODE);
@@ -218,7 +222,8 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
@@ -241,7 +246,8 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::vanilla_get_unencrypted_client(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::vanilla_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_client_header(size, Self::OPCODE);
@@ -258,7 +264,8 @@ impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
 impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
     #[cfg(feature = "sync")]
     fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
-        let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+        let mut v = Vec::with_capacity(1024);
+        crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
         self.write_into_vec(&mut v)?;
         let size = v.len().saturating_sub(2);
         let s = size.to_le_bytes();
@@ -273,7 +280,8 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
         mut w: W,
         e: &mut wow_srp::tbc_header::EncrypterHalf,
     ) -> Result<(), std::io::Error> {
-        let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+        let mut v = Vec::with_capacity(1024);
+        crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
         self.write_into_vec(&mut v)?;
         let size = v.len().saturating_sub(2) as u16;
         let header = e.encrypt_client_header(size, Self::OPCODE);
@@ -294,7 +302,8 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
@@ -317,7 +326,8 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_client_header(size, Self::OPCODE);
@@ -339,7 +349,8 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2);
             let s = size.to_le_bytes();
@@ -362,7 +373,8 @@ impl crate::tbc::ClientMessage for CMSG_AUTH_SESSION {
         Self: Sync + 'async_trait,
      {
         Box::pin(async move {
-            let mut v = crate::util::tbc_get_unencrypted_client(Self::OPCODE as u16, 0);
+            let mut v = Vec::with_capacity(1024);
+            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut v)?;
             let size = v.len().saturating_sub(2) as u16;
             let header = e.encrypt_client_header(size, Self::OPCODE);
