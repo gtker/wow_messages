@@ -13,7 +13,7 @@ use crate::rust_printer::{
 };
 use crate::wowm_printer::get_struct_wowm_definition;
 
-mod print_common_impls;
+pub(crate) mod print_common_impls;
 mod print_new_types;
 mod print_optional;
 mod print_tests;

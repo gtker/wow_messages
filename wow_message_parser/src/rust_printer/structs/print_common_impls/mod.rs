@@ -2,7 +2,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::sizes::{DATETIME_SIZE, GOLD_SIZE, GUID_SIZE};
+use crate::parser::types::sizes::{Sizes, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE};
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
@@ -33,7 +33,8 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 PARSE_ERROR
             };
 
-            s.impl_read_write_struct(
+            impl_read_write_struct(
+                s,
                 e.name(),
                 |s, it| {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
@@ -57,7 +58,8 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 _ => unreachable!("Login branch has non login container"),
             };
 
-            s.impl_read_and_writable_login(
+            impl_read_and_writable_login(
+                s,
                 e.name(),
                 opcode,
                 trait_to_impl,
@@ -88,7 +90,8 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 );
             };
 
-            s.impl_world_message(
+            impl_world_message(
+                s,
                 e.name(),
                 opcode,
                 |s, it| {
@@ -591,4 +594,158 @@ pub(crate) fn print_size_uncompressed_rust_view(
             }
         });
     }
+}
+
+pub(crate) fn impl_world_message(
+    s: &mut Writer,
+    type_name: impl AsRef<str>,
+    opcode: u16,
+    write_function: impl Fn(&mut Writer, ImplType),
+    read_function: impl Fn(&mut Writer, ImplType),
+    sizes: Option<Sizes>,
+) {
+    s.open_curly(format!("impl crate::Message for {}", type_name.as_ref()));
+    s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
+    s.newline();
+
+    s.open_curly("fn size_without_header(&self) -> u32");
+    if sizes.is_some() && sizes.unwrap().is_constant().is_some() {
+        s.wln(format!("{}", sizes.unwrap().maximum()));
+    } else {
+        s.wln("self.size() as u32");
+    }
+    s.closing_curly(); // size_without_header
+    s.newline();
+
+    s.write_into_vec_trait(&write_function);
+
+    s.open_curly(format!(
+        "fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {PARSE_ERROR}>",
+    ));
+
+    read_function(s, ImplType::Std);
+
+    s.closing_curly_newline(); // read_body
+
+    s.closing_curly(); // impl Message
+}
+
+pub(crate) fn impl_read_and_writable_login(
+    s: &mut Writer,
+    type_name: impl AsRef<str>,
+    opcode: u16,
+    trait_to_impl: impl AsRef<str>,
+    read_function: impl Fn(&mut Writer, ImplType),
+    write_function: impl Fn(&mut Writer, ImplType),
+    sizes: Sizes,
+) {
+    s.write_into_vec(&type_name, write_function, "pub(crate)");
+
+    s.open_curly(format!(
+        "impl {} for {}",
+        trait_to_impl.as_ref(),
+        type_name.as_ref(),
+    ));
+    s.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
+    s.newline();
+
+    for it in ImplType::types() {
+        s.print_read_decl(it);
+
+        read_function(s, it);
+        if it.is_async() {
+            s.closing_curly_with(")"); // Box::pin
+        }
+        s.closing_curly_newline();
+
+        s.print_write_decl(it);
+
+        s.call_as_bytes(it, sizes);
+
+        if it.is_async() {
+            s.closing_curly_with(")"); // Box::pin
+        }
+
+        s.closing_curly_newline(); // Write Function
+    }
+
+    s.closing_curly_newline(); // impl
+}
+
+pub(crate) fn impl_read_write_opcode(
+    s: &mut Writer,
+    type_name: impl AsRef<str>,
+    error_name: impl AsRef<str>,
+    read_function: impl Fn(&mut Writer, ImplType),
+    write_function: impl Fn(&mut Writer, ImplType),
+    create_async_reads: bool,
+) {
+    impl_read_write_non_trait(
+        s,
+        type_name,
+        error_name,
+        read_function,
+        write_function,
+        "pub(crate)",
+        "pub",
+        create_async_reads,
+    )
+}
+
+pub(crate) fn impl_read_write_non_trait(
+    s: &mut Writer,
+    type_name: impl AsRef<str>,
+    error_name: impl AsRef<str>,
+    read_function: impl Fn(&mut Writer, ImplType),
+    write_function: impl Fn(&mut Writer, ImplType),
+    read_visibility: impl AsRef<str>,
+    write_visibility: impl AsRef<str>,
+    create_async_reads: bool,
+) {
+    s.write_into_vec(&type_name, write_function, read_visibility.as_ref());
+
+    s.open_curly(format!("impl {}", type_name.as_ref()));
+
+    for it in ImplType::types() {
+        if it.is_async() {
+            if !create_async_reads {
+                continue;
+            }
+
+            s.wln(it.cfg());
+        }
+        s.open_curly(format!(
+            "{visibility} {func}fn {prefix}read<R: {read}>(mut r: R) -> std::result::Result<Self, {error}>",
+            prefix = it.prefix(),
+            read = it.read(),
+            error = error_name.as_ref(),
+            func = it.func(),
+            visibility = write_visibility.as_ref(),
+        ));
+        read_function(s, it);
+        s.closing_curly_newline();
+    }
+
+    s.closing_curly_newline(); // impl
+}
+
+pub(crate) fn impl_read_write_struct(
+    s: &mut Writer,
+    type_name: impl AsRef<str>,
+    read_function: impl Fn(&mut Writer, ImplType),
+    write_function: impl Fn(&mut Writer, ImplType),
+    create_async_reads: bool,
+    error_name: &str,
+    visibility: &str,
+) {
+    impl_read_write_non_trait(
+        s,
+        type_name,
+        error_name,
+        read_function,
+        write_function,
+        visibility,
+        visibility,
+        create_async_reads,
+    )
 }
