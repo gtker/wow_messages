@@ -1,11 +1,13 @@
+use crate::file_utils::get_import_path;
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::{DATETIME_SIZE, GOLD_SIZE, GUID_SIZE};
 use crate::parser::types::ty::Type;
+use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
 use crate::rust_printer::{
-    Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+    ImplType, Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
@@ -71,7 +73,8 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
             let bind = |s: &mut Writer, container_type, version| {
-                s.impl_world_server_or_client_message(
+                impl_world_server_or_client_message(
+                    s,
                     e.name(),
                     container_type,
                     version,
@@ -113,6 +116,189 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     // This is used to calculate the decompressed_size field, a u32 written at the start of every compressed packet.
     if e.tags().compressed() {
         print_size_uncompressed_rust_view(s, e.rust_object(), "self.", "size_uncompressed");
+    }
+}
+
+pub(crate) fn impl_world_server_or_client_message(
+    s: &mut Writer,
+    type_name: impl AsRef<str>,
+    container_type: ContainerType,
+    version: Version,
+    compressed: bool,
+) {
+    let (trait_to_impl, ty) = match container_type {
+        ContainerType::CMsg(_) => (CLIENT_MESSAGE_TRAIT_NAME, "client"),
+        ContainerType::SMsg(_) => (SERVER_MESSAGE_TRAIT_NAME, "server"),
+        _ => unreachable!("login message in world server impl"),
+    };
+
+    s.wln(format!(
+        "#[cfg(feature = \"{}\")]",
+        version.as_major_world().feature_name()
+    ));
+
+    if compressed {
+        s.open_curly(format!(
+            "impl {}::{} for {}",
+            get_import_path(version),
+            trait_to_impl,
+            type_name.as_ref(),
+        ));
+
+        let version = version.as_major_world();
+        let feature_name = version.feature_name();
+
+        let (size_cast, opcode_cast) = match container_type {
+            ContainerType::CMsg(_) => match version {
+                MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => ("", ""),
+                MajorWorldVersion::Wrath => ("", ""),
+            },
+            ContainerType::SMsg(_) => match version {
+                MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => ("", " as u16"),
+                MajorWorldVersion::Wrath => (" as u32", " as u16"),
+            },
+            _ => unreachable!(),
+        };
+
+        let encrypter = match version {
+            MajorWorldVersion::Vanilla => "wow_srp::vanilla_header::EncrypterHalf",
+            MajorWorldVersion::BurningCrusade => "wow_srp::tbc_header::EncrypterHalf",
+            MajorWorldVersion::Wrath => match container_type {
+                ContainerType::CMsg(_) => "wow_srp::wrath_header::ClientEncrypterHalf",
+                ContainerType::SMsg(_) => "wow_srp::wrath_header::ServerEncrypterHalf",
+                _ => unreachable!(),
+            },
+        };
+
+        s.wln("#[cfg(feature = \"sync\")]");
+        s.open_curly(format!(
+            "fn write_unencrypted_{ty}<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error>"
+        ));
+        let unencrypted = |s: &mut Writer, extra: &str| {
+            s.wln(format!("let mut v = crate::util::{feature_name}_get_unencrypted_{ty}(Self::OPCODE as u16, 0);"));
+            s.wln("self.write_into_vec(&mut v)?;");
+
+            s.wln(format!("let size = v.len().saturating_sub(2);"));
+            s.wln("let s = size.to_le_bytes();");
+
+            s.wln("v[0] = s[1];");
+            s.wln("v[1] = s[0];");
+
+            match version {
+                MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {}
+                MajorWorldVersion::Wrath => {
+                    s.open_curly("if size > 0x7FFF");
+                    s.wln("v[2] = s[2];");
+                    s.closing_curly();
+                }
+            }
+
+            s.wln(format!("w.write_all(&v){extra}"));
+        };
+
+        unencrypted(s, "");
+        s.closing_curly_newline(); // fn write_unencrypted
+
+        s.wln("#[cfg(all(feature = \"sync\", feature = \"encryption\"))]");
+        s.wln(format!("fn write_encrypted_{ty}<W: std::io::Write>("));
+
+        s.inc_indent();
+        s.wln("&self,");
+        s.wln("w: &mut W,");
+        s.wln(format!("e: &mut {encrypter},"));
+        s.dec_indent();
+
+        let encrypted = |s: &mut Writer, extra: &str| {
+            s.wln(format!("let mut v = crate::util::{feature_name}_get_unencrypted_{ty}(Self::OPCODE as u16, 0);"));
+            s.wln("self.write_into_vec(&mut v)?;");
+            s.wln("let size = v.len().saturating_sub(2) as u16;");
+            s.wln(format!(
+                "let header = e.encrypt_{ty}_header(size{size_cast}, Self::OPCODE{opcode_cast});"
+            ));
+            s.open_curly("for (i, e) in header.iter().enumerate()");
+            s.wln("v[i] = *e;");
+            s.closing_curly();
+            s.wln(format!("w.write_all(&v){extra}"));
+        };
+
+        s.open_curly(") -> Result<(), std::io::Error>");
+        encrypted(s, "");
+        s.closing_curly_newline(); // ) -> Result
+
+        for async_ty in ImplType::types() {
+            if !async_ty.is_async() {
+                continue;
+            }
+
+            let prefix = async_ty.prefix();
+            s.wln(async_ty.cfg());
+            s.wln(format!(
+                "fn {prefix}write_unencrypted_{ty}<'s, 'w, 'async_trait, W>("
+            ));
+            s.inc_indent();
+            s.wln("&'s self,");
+            s.wln("w: &'w mut W,");
+            s.dec_indent();
+            s.wln(") -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>");
+            s.wln("where");
+
+            s.inc_indent();
+            let write = async_ty.write();
+            s.wln(format!("W: 'async_trait + {write},"));
+            s.wln("'s: 'async_trait,");
+            s.wln("'w: 'async_trait,");
+            s.wln("Self: Sync + 'async_trait,");
+            s.dec_indent();
+
+            s.open_curly(""); // fn body
+
+            s.open_curly("Box::pin(async move");
+            unencrypted(s, ".await");
+            s.closing_curly_with(")");
+
+            s.closing_curly_newline(); // fn body
+
+            s.wln(async_ty.cfg_and_encryption());
+            s.wln(format!(
+                "fn {prefix}write_encrypted_{ty}<'s, 'w, 'e, 'async_trait, W>("
+            ));
+
+            s.inc_indent();
+            s.wln("&'s self,");
+            s.wln("w: &'w mut W,");
+            s.wln(format!("e: &'e mut {encrypter},"));
+            s.dec_indent();
+
+            s.wln(format!(") -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>"));
+            s.wln("where");
+
+            s.inc_indent();
+            s.wln(format!("W: 'async_trait + {write},"));
+            s.wln("'s: 'async_trait,");
+            s.wln("'w: 'async_trait,");
+            s.wln("'e: 'async_trait,");
+            s.wln("Self: Sync + 'async_trait,");
+            s.dec_indent();
+
+            s.open_curly(""); // fn body
+
+            s.open_curly("Box::pin(async move");
+            encrypted(s, ".await");
+            s.closing_curly_with(")");
+
+            s.closing_curly_newline(); // fn body
+        }
+
+        s.closing_curly(); // impl {} for {}
+        s.newline();
+    } else {
+        s.wln(format!(
+            "impl {}::{} for {} {{}}",
+            get_import_path(version),
+            trait_to_impl,
+            type_name.as_ref(),
+        ));
+        s.newline();
     }
 }
 
