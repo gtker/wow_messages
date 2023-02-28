@@ -232,9 +232,6 @@ pub(crate) fn print_write_definition(
                 ty = integer.rust_str(),
                 endian = integer.rust_endian_str()
             ));
-
-            s.newline();
-            return;
         }
         Type::PackedGuid => {
             s.wln(format!(
