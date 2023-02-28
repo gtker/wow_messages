@@ -439,48 +439,19 @@ fn print_read_definition(
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
             match e.definer_ty() {
                 DefinerType::Enum => {
-                    if let Some(integer) = upcast {
-                        if let Some(value) = d.value() {
-                            s.wln(format!(
-                                "let _{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).into();",
-                                name = d.name(),
-                                type_name = d.ty().rust_str(),
-                                endian = integer.rust_endian_str(),
-                                ty = integer.rust_str(),
-                                prefix = prefix,
-                                postfix = postfix,
-                                original_ty = e.ty().rust_str(),
-                            ));
-                            s.wln(format!(
-                                "// {name} is expected to always be {constant_string} ({constant_value})",
-                                name = d.name(),
-                                constant_string = value.original_string(),
-                                constant_value = value.value(),
-                            ));
-                        } else {
-                            s.wln(format!(
-                                "{assignment_prefix}{name}: {type_name} = (crate::util::{prefix}read_{ty}_{endian}(r){postfix}? as {original_ty}).try_into()?;",
-                                name = d.name(),
-                                type_name = d.ty().rust_str(),
-                                endian = integer.rust_endian_str(),
-                                ty = integer.rust_str(),
-                                prefix = prefix,
-                                postfix = postfix,
-                                original_ty = e.ty().rust_str(),
-                            ));
-                        }
-
-                        s.newline();
-                        return;
-                    }
+                    let (parens, integer, cast) = if let Some(integer) = upcast {
+                        ("(", integer, format!(" as {})", e.ty().rust_str()))
+                    } else {
+                        ("", e.ty(), "".to_string())
+                    };
 
                     s.wln(format!(
-                        "{assignment_prefix}{value_set}{name}: {type_name} = crate::util::{prefix}read_{ty}_{endian}(r){postfix}?.{into};",
+                        "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(r){postfix}?{cast}.{into};",
                         name = d.name(),
                         type_name = d.ty().rust_str(),
                         value_set = if d.value().is_some() { "_" } else { "" },
-                        endian = e.ty().rust_endian_str(),
-                        ty = e.ty().rust_str(),
+                        endian = integer.rust_endian_str(),
+                        ty = integer.rust_str(),
                         into = match e.self_value().is_some() {
                             true => "into()",
                             false => "try_into()?",
