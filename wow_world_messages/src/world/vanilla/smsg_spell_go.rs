@@ -53,7 +53,7 @@ impl crate::Message for SMSG_SPELL_GO {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: CastFlags
-        w.write_all(&(self.flags.as_int() as u16).to_le_bytes())?;
+        w.write_all(&u16::from(self.flags.as_int()).to_le_bytes())?;
 
         // amount_of_hits: u8
         w.write_all(&(self.hits.len() as u8).to_le_bytes())?;

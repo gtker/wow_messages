@@ -47,7 +47,7 @@ impl crate::Message for CMSG_CAST_SPELL {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // cast_flags: ClientCastFlags
-        w.write_all(&(self.cast_flags.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.cast_flags.as_int()).to_le_bytes())?;
 
         // targets: SpellCastTargets
         self.targets.write_into_vec(w)?;
@@ -66,7 +66,7 @@ impl crate::Message for CMSG_CAST_SPELL {
                 w.write_all(&speed.to_le_bytes())?;
 
                 // movement_data: ClientMovementData
-                w.write_all(&(movement_data.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(movement_data.as_int()).to_le_bytes())?;
 
                 match &movement_data {
                     CMSG_CAST_SPELL_ClientMovementData::NotPresent => {}

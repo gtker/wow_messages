@@ -43,7 +43,7 @@ impl TrainerSpell {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // state: TrainerSpellState
-        w.write_all(&(self.state.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.state.as_int()).to_le_bytes())?;
 
         // spell_cost: u32
         w.write_all(&self.spell_cost.to_le_bytes())?;
@@ -58,7 +58,7 @@ impl TrainerSpell {
         w.write_all(&self.required_level.to_le_bytes())?;
 
         // required_skill: Skill
-        w.write_all(&(self.required_skill.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.required_skill.as_int()).to_le_bytes())?;
 
         // required_skill_value: u32
         w.write_all(&self.required_skill_value.to_le_bytes())?;

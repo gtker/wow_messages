@@ -21,7 +21,7 @@ impl crate::Message for SMSG_GROUP_JOINED_BATTLEGROUND {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // id: BgTypeId
-        w.write_all(&(self.id.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.id.as_int()).to_le_bytes())?;
 
         Ok(())
     }

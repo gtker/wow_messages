@@ -46,7 +46,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         w.write_all(&self.queue_slot.to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         match &self.map {
             SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms => {}
@@ -56,13 +56,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -105,13 +105,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -154,13 +154,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -203,13 +203,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -252,13 +252,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -301,13 +301,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -350,13 +350,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -399,13 +399,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -448,13 +448,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -497,13 +497,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -546,13 +546,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -595,13 +595,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -644,13 +644,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -693,13 +693,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -742,13 +742,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -791,13 +791,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -840,13 +840,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -889,13 +889,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -938,13 +938,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -987,13 +987,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1036,13 +1036,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1085,13 +1085,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1134,13 +1134,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1183,13 +1183,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1232,13 +1232,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1281,13 +1281,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1330,13 +1330,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1379,13 +1379,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1428,13 +1428,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1477,13 +1477,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1526,13 +1526,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1575,13 +1575,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1624,13 +1624,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1673,13 +1673,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1722,13 +1722,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1771,13 +1771,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1820,13 +1820,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1869,13 +1869,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1918,13 +1918,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -1967,13 +1967,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -2016,13 +2016,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -2065,13 +2065,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -2114,13 +2114,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 status_id,
             } => {
                 // bracket: BattlegroundBracket
-                w.write_all(&(bracket.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(bracket.as_int()).to_le_bytes())?;
 
                 // client_instance_id: u32
                 w.write_all(&client_instance_id.to_le_bytes())?;
 
                 // status_id: StatusId
-                w.write_all(&(status_id.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
                     SMSG_BATTLEFIELD_STATUS_StatusId::None => {}

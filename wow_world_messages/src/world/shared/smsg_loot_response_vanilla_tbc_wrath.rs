@@ -38,14 +38,14 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // loot_method: LootMethod
-        w.write_all(&(self.loot_method.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.loot_method.as_int()).to_le_bytes())?;
 
         match &self.loot_method {
             SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
                 loot_error,
             } => {
                 // loot_error: LootMethodError
-                w.write_all(&(loot_error.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(loot_error.as_int()).to_le_bytes())?;
 
             }
             SMSG_LOOT_RESPONSE_LootMethod::Corpse => {}

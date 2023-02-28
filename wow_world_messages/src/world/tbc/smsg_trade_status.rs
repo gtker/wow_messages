@@ -35,7 +35,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // status: TradeStatus
-        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.status.as_int()).to_le_bytes())?;
 
         match &self.status {
             SMSG_TRADE_STATUS_TradeStatus::Busy => {}
@@ -62,7 +62,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
                 target_error,
             } => {
                 // inventory_result: InventoryResult
-                w.write_all(&(inventory_result.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(inventory_result.as_int()).to_le_bytes())?;
 
                 // target_error: Bool
                 w.write_all(u8::from(*target_error).to_le_bytes().as_slice())?;

@@ -32,7 +32,7 @@ impl crate::Message for SMSG_REALM_SPLIT {
         w.write_all(&self.realm_id.to_le_bytes())?;
 
         // state: RealmSplitState
-        w.write_all(&(self.state.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.state.as_int()).to_le_bytes())?;
 
         // split_date: CString
         // TODO: Guard against strings that are already null-terminated

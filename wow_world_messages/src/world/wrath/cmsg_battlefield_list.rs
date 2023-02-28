@@ -28,10 +28,10 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // battleground_type: BattlegroundType
-        w.write_all(&(self.battleground_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.battleground_type.as_int()).to_le_bytes())?;
 
         // location: BattlefieldListLocation
-        w.write_all(&(self.location.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.location.as_int()).to_le_bytes())?;
 
         // can_gain_exp: Bool
         w.write_all(u8::from(self.can_gain_exp).to_le_bytes().as_slice())?;

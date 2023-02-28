@@ -62,7 +62,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
         w.write_all(&Self::PROTOCOL_VERSION_VALUE.to_le_bytes())?;
 
         // result: LoginResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
             CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
@@ -105,7 +105,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
                 }
 
                 // security_flag: SecurityFlag
-                w.write_all(&(security_flag.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(security_flag.as_int()).to_le_bytes())?;
 
                 if let Some(if_statement) = &security_flag.pin {
                     // pin_grid_seed: u32

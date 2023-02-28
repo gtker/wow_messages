@@ -34,7 +34,7 @@ impl Relation {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // relation_mask: RelationType
-        w.write_all(&(self.relation_mask.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.relation_mask.as_int()).to_le_bytes())?;
 
         // note: CString
         // TODO: Guard against strings that are already null-terminated
@@ -45,7 +45,7 @@ impl Relation {
 
         if let Some(if_statement) = &self.relation_mask.friend {
             // status: FriendStatus
-            w.write_all(&(if_statement.status.as_int() as u8).to_le_bytes())?;
+            w.write_all(&u8::from(if_statement.status.as_int()).to_le_bytes())?;
 
             match &if_statement.status {
                 Relation_FriendStatus::Offline => {}
@@ -55,13 +55,13 @@ impl Relation {
                     level,
                 } => {
                     // area: Area
-                    w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+                    w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
 
                     // level: u32
                     w.write_all(&level.to_le_bytes())?;
 
                     // class: Class
-                    w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                    w.write_all(&u32::from(class.as_int()).to_le_bytes())?;
 
                 }
                 Relation_FriendStatus::Afk => {}

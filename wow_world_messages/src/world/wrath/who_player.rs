@@ -47,16 +47,16 @@ impl WhoPlayer {
         w.write_all(&self.level.to_le_bytes())?;
 
         // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
 
         // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.race.as_int()).to_le_bytes())?;
 
         // gender: Gender
-        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.gender.as_int()).to_le_bytes())?;
 
         // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
 
         Ok(())
     }

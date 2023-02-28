@@ -42,7 +42,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // hit_info: HitInfo
-        w.write_all(&(self.hit_info.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.hit_info.as_int()).to_le_bytes())?;
 
         // attacker: PackedGuid
         self.attacker.write_packed_guid_into_vec(w)?;

@@ -23,7 +23,7 @@ impl crate::Message for SMSG_SET_PROFICIENCY {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // class: ItemClass
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
 
         // item_sub_class_mask: u32
         w.write_all(&self.item_sub_class_mask.to_le_bytes())?;

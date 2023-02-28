@@ -45,7 +45,7 @@ impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
         w.write_all(&[0])?;
 
         // team_type: ArenaType
-        w.write_all(&(self.team_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.team_type.as_int()).to_le_bytes())?;
 
         // background_color: u32
         w.write_all(&self.background_color.to_le_bytes())?;

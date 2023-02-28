@@ -26,7 +26,7 @@ impl crate::Message for SMSG_TITLE_EARNED {
         w.write_all(&self.title.to_le_bytes())?;
 
         // status: TitleEarnStatus
-        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.status.as_int()).to_le_bytes())?;
 
         Ok(())
     }

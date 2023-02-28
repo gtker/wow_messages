@@ -23,7 +23,7 @@ impl crate::Message for SMSG_DEFENSE_MESSAGE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
 
         // message: SizedCString
         w.write_all(&((self.message.len() + 1) as u32).to_le_bytes())?;

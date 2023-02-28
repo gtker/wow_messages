@@ -29,13 +29,13 @@ impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // message_type: RaidInstanceMessage
-        w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.message_type.as_int()).to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // difficulty: RaidDifficulty
-        w.write_all(&(self.difficulty.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.difficulty.as_int()).to_le_bytes())?;
 
         // time_left: u32
         w.write_all(&self.time_left.to_le_bytes())?;

@@ -119,7 +119,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         // optional found
         if let Some(v) = &self.found {
             // class_and_sub_class: ItemClassAndSubClass
-            w.write_all(&(v.class_and_sub_class.as_int() as u64).to_le_bytes())?;
+            w.write_all(&u64::from(v.class_and_sub_class.as_int()).to_le_bytes())?;
 
             // sound_override_sub_class: u32
             w.write_all(&v.sound_override_sub_class.to_le_bytes())?;
@@ -156,13 +156,13 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.display_id.to_le_bytes())?;
 
             // quality: ItemQuality
-            w.write_all(&(v.quality.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.quality.as_int()).to_le_bytes())?;
 
             // flags: ItemFlag
-            w.write_all(&(v.flags.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.flags.as_int()).to_le_bytes())?;
 
             // flags2: ItemFlag2
-            w.write_all(&(v.flags2.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.flags2.as_int()).to_le_bytes())?;
 
             // buy_price: Gold
             w.write_all(u32::from(v.buy_price.as_int()).to_le_bytes().as_slice())?;
@@ -171,13 +171,13 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(u32::from(v.sell_price.as_int()).to_le_bytes().as_slice())?;
 
             // inventory_type: InventoryType
-            w.write_all(&(v.inventory_type.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.inventory_type.as_int()).to_le_bytes())?;
 
             // allowed_class: AllowedClass
-            w.write_all(&(v.allowed_class.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.allowed_class.as_int()).to_le_bytes())?;
 
             // allowed_race: AllowedRace
-            w.write_all(&(v.allowed_race.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.allowed_race.as_int()).to_le_bytes())?;
 
             // item_level: u32
             w.write_all(&v.item_level.to_le_bytes())?;
@@ -186,7 +186,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.required_level.to_le_bytes())?;
 
             // required_skill: Skill
-            w.write_all(&(v.required_skill.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.required_skill.as_int()).to_le_bytes())?;
 
             // required_skill_rank: u32
             w.write_all(&v.required_skill_rank.to_le_bytes())?;
@@ -201,7 +201,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.required_city_rank.to_le_bytes())?;
 
             // required_faction: Faction
-            w.write_all(&(v.required_faction.as_int() as u16).to_le_bytes())?;
+            w.write_all(&u16::from(v.required_faction.as_int()).to_le_bytes())?;
 
             // required_faction_rank: u32
             w.write_all(&v.required_faction_rank.to_le_bytes())?;
@@ -270,7 +270,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             }
 
             // bonding: Bonding
-            w.write_all(&(v.bonding.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.bonding.as_int()).to_le_bytes())?;
 
             // description: CString
             // TODO: Guard against strings that are already null-terminated
@@ -283,10 +283,10 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.page_text.to_le_bytes())?;
 
             // language: Language
-            w.write_all(&(v.language.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.language.as_int()).to_le_bytes())?;
 
             // page_text_material: PageTextMaterial
-            w.write_all(&(v.page_text_material.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.page_text_material.as_int()).to_le_bytes())?;
 
             // start_quest: u32
             w.write_all(&v.start_quest.to_le_bytes())?;
@@ -298,7 +298,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.material.to_le_bytes())?;
 
             // sheathe_type: SheatheType
-            w.write_all(&(v.sheathe_type.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.sheathe_type.as_int()).to_le_bytes())?;
 
             // random_property: u32
             w.write_all(&v.random_property.to_le_bytes())?;
@@ -310,19 +310,19 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.block.to_le_bytes())?;
 
             // item_set: ItemSet
-            w.write_all(&(v.item_set.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.item_set.as_int()).to_le_bytes())?;
 
             // max_durability: u32
             w.write_all(&v.max_durability.to_le_bytes())?;
 
             // area: Area
-            w.write_all(&(v.area.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.area.as_int()).to_le_bytes())?;
 
             // map: Map
-            w.write_all(&(v.map.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.map.as_int()).to_le_bytes())?;
 
             // bag_family: BagFamily
-            w.write_all(&(v.bag_family.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.bag_family.as_int()).to_le_bytes())?;
 
             // totem_category: u32
             w.write_all(&v.totem_category.to_le_bytes())?;

@@ -70,13 +70,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         w.write_all(&self.queue_slot.to_le_bytes())?;
 
         // arena_type: ArenaType
-        w.write_all(&(self.arena_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.arena_type.as_int()).to_le_bytes())?;
 
         // is_arena: u8
         w.write_all(&self.is_arena.to_le_bytes())?;
 
         // battleground_type: BattlegroundType
-        w.write_all(&(self.battleground_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.battleground_type.as_int()).to_le_bytes())?;
 
         // unknown1: u16
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -94,7 +94,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         w.write_all(u8::from(self.rated).to_le_bytes().as_slice())?;
 
         // status_id: StatusId
-        w.write_all(&(self.status_id.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.status_id.as_int()).to_le_bytes())?;
 
         match &self.status_id {
             SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
@@ -115,7 +115,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 unknown2,
             } => {
                 // map1: Map
-                w.write_all(&(map1.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(map1.as_int()).to_le_bytes())?;
 
                 // unknown2: u64
                 w.write_all(&unknown2.to_le_bytes())?;
@@ -132,7 +132,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 unknown3,
             } => {
                 // map2: Map
-                w.write_all(&(map2.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(map2.as_int()).to_le_bytes())?;
 
                 // unknown3: u64
                 w.write_all(&unknown3.to_le_bytes())?;
@@ -144,7 +144,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                 // faction: ArenaFaction
-                w.write_all(&(faction.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(faction.as_int()).to_le_bytes())?;
 
             }
             SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}

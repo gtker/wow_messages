@@ -69,7 +69,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // hit_info: HitInfo
-        w.write_all(&(self.hit_info.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.hit_info.as_int()).to_le_bytes())?;
 
         // attacker: PackedGuid
         self.attacker.write_packed_guid_into_vec(w)?;
@@ -104,7 +104,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         }
 
         // victim_state: VictimState
-        w.write_all(&(self.victim_state.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.victim_state.as_int()).to_le_bytes())?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;

@@ -21,7 +21,7 @@ impl crate::Message for SMSG_CHAT_RESTRICTED {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // restriction: ChatRestrictionType
-        w.write_all(&(self.restriction.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.restriction.as_int()).to_le_bytes())?;
 
         Ok(())
     }

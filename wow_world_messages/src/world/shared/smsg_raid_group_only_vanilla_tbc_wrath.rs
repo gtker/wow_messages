@@ -28,7 +28,7 @@ impl crate::Message for SMSG_RAID_GROUP_ONLY {
         w.write_all(&self.homebind_timer.to_le_bytes())?;
 
         // error: RaidGroupError
-        w.write_all(&(self.error.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.error.as_int()).to_le_bytes())?;
 
         Ok(())
     }

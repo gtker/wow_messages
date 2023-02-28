@@ -18,7 +18,7 @@ pub struct ItemStat {
 impl ItemStat {
     pub fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // stat_type: ItemStatType
-        w.write_all(&(self.stat_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.stat_type.as_int()).to_le_bytes())?;
 
         // value: i32
         w.write_all(&self.value.to_le_bytes())?;

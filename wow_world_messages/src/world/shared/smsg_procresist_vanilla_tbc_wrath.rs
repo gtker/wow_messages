@@ -39,7 +39,7 @@ impl crate::Message for SMSG_PROCRESIST {
         w.write_all(&self.id.to_le_bytes())?;
 
         // log_format: LogFormat
-        w.write_all(&(self.log_format.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.log_format.as_int()).to_le_bytes())?;
 
         Ok(())
     }

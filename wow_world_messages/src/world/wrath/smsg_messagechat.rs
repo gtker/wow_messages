@@ -71,10 +71,10 @@ impl crate::Message for SMSG_MESSAGECHAT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // chat_type: ChatType
-        w.write_all(&(self.chat_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.chat_type.as_int()).to_le_bytes())?;
 
         // language: Language
-        w.write_all(&(self.language.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.language.as_int()).to_le_bytes())?;
 
         // sender: Guid
         w.write_all(&self.sender.guid().to_le_bytes())?;
@@ -529,7 +529,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
         w.write_all(&[0])?;
 
         // tag: PlayerChatTag
-        w.write_all(&(self.tag.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.tag.as_int()).to_le_bytes())?;
 
         match &self.chat_type {
             SMSG_MESSAGECHAT_ChatType::System {

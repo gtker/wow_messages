@@ -30,10 +30,10 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // reason: TransferAbortReason
-        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.reason.as_int()).to_le_bytes())?;
 
         match &self.reason {
             SMSG_TRANSFER_ABORTED_TransferAbortReason::None => {}
@@ -46,21 +46,21 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
                 difficulty,
             } => {
                 // difficulty: DungeonDifficulty
-                w.write_all(&(difficulty.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(difficulty.as_int()).to_le_bytes())?;
 
             }
             SMSG_TRANSFER_ABORTED_TransferAbortReason::DifficultyNotAvailable {
                 difficulty,
             } => {
                 // difficulty: DungeonDifficulty
-                w.write_all(&(difficulty.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(difficulty.as_int()).to_le_bytes())?;
 
             }
             SMSG_TRANSFER_ABORTED_TransferAbortReason::UniqueMessage {
                 difficulty,
             } => {
                 // difficulty: DungeonDifficulty
-                w.write_all(&(difficulty.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(difficulty.as_int()).to_le_bytes())?;
 
             }
             SMSG_TRANSFER_ABORTED_TransferAbortReason::TooManyRealmInstances => {}

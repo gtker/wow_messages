@@ -36,7 +36,7 @@ impl BattlegroundPlayer {
         w.write_all(&self.player.guid().to_le_bytes())?;
 
         // rank: PvpRank
-        w.write_all(&(self.rank.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.rank.as_int()).to_le_bytes())?;
 
         // killing_blows: u32
         w.write_all(&self.killing_blows.to_le_bytes())?;

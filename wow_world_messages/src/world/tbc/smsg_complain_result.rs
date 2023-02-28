@@ -28,7 +28,7 @@ impl crate::Message for SMSG_COMPLAIN_RESULT {
         w.write_all(&self.unknown.to_le_bytes())?;
 
         // window_result: ComplainResultWindow
-        w.write_all(&(self.window_result.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.window_result.as_int()).to_le_bytes())?;
 
         Ok(())
     }

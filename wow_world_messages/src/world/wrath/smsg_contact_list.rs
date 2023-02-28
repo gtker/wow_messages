@@ -27,7 +27,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // list_mask: RelationType
-        w.write_all(&(self.list_mask.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.list_mask.as_int()).to_le_bytes())?;
 
         // amount_of_relations: u32
         w.write_all(&(self.relations.len() as u32).to_le_bytes())?;

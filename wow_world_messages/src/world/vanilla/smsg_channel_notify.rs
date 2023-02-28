@@ -23,7 +23,7 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // notify_type: ChatNotify
-        w.write_all(&(self.notify_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.notify_type.as_int()).to_le_bytes())?;
 
         // channel_name: CString
         // TODO: Guard against strings that are already null-terminated

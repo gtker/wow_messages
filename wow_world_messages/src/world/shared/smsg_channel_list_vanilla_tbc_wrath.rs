@@ -34,7 +34,7 @@ impl crate::Message for SMSG_CHANNEL_LIST {
         w.write_all(&[0])?;
 
         // channel_flags: ChannelFlags
-        w.write_all(&(self.channel_flags.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.channel_flags.as_int()).to_le_bytes())?;
 
         // amount_of_members: u32
         w.write_all(&(self.members.len() as u32).to_le_bytes())?;

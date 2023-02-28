@@ -28,10 +28,10 @@ impl crate::Message for SMSG_LOGOUT_RESPONSE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // result: LogoutResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
 
         // speed: LogoutSpeed
-        w.write_all(&(self.speed.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.speed.as_int()).to_le_bytes())?;
 
         Ok(())
     }

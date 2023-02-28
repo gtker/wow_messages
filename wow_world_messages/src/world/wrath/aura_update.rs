@@ -37,7 +37,7 @@ impl AuraUpdate {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: AuraFlag
-        w.write_all(&(self.flags.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.flags.as_int()).to_le_bytes())?;
 
         // level: u8
         w.write_all(&self.level.to_le_bytes())?;

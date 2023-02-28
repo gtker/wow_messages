@@ -73,7 +73,7 @@ impl crate::Message for SMSG_SPELL_GO {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: GameobjectCastFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.flags.as_int()).to_le_bytes())?;
 
         // timestamp: u32
         w.write_all(&self.timestamp.to_le_bytes())?;
@@ -83,7 +83,7 @@ impl crate::Message for SMSG_SPELL_GO {
 
         if let Some(if_statement) = &self.flags.power_update {
             // power: Power
-            w.write_all(&(if_statement.power.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(if_statement.power.as_int()).to_le_bytes())?;
 
         }
 

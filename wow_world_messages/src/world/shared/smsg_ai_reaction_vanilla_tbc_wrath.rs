@@ -27,7 +27,7 @@ impl crate::Message for SMSG_AI_REACTION {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // reaction: AiReaction
-        w.write_all(&(self.reaction.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.reaction.as_int()).to_le_bytes())?;
 
         Ok(())
     }

@@ -27,7 +27,7 @@ impl crate::Message for CMSG_BUYBACK_ITEM {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // slot: BuybackSlot
-        w.write_all(&(self.slot.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.slot.as_int()).to_le_bytes())?;
 
         Ok(())
     }

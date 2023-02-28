@@ -20,7 +20,7 @@ impl SpellSteal {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // action: SpellStealAction
-        w.write_all(&(self.action.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.action.as_int()).to_le_bytes())?;
 
         Ok(())
     }

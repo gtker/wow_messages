@@ -35,7 +35,7 @@ impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
         w.write_all(&[0])?;
 
         // inventory_type: InventoryType
-        w.write_all(&(self.inventory_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.inventory_type.as_int()).to_le_bytes())?;
 
         Ok(())
     }

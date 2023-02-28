@@ -31,7 +31,7 @@ impl ItemSpells {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // spell_trigger: SpellTriggerType
-        w.write_all(&(self.spell_trigger.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.spell_trigger.as_int()).to_le_bytes())?;
 
         // spell_charges: i32
         w.write_all(&self.spell_charges.to_le_bytes())?;

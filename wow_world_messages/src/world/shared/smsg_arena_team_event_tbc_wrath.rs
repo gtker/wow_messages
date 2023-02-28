@@ -48,7 +48,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // event: ArenaTeamEvent
-        w.write_all(&(self.event.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.event.as_int()).to_le_bytes())?;
 
         match &self.event {
             SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {

@@ -35,7 +35,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
         w.write_all(&self.item.guid().to_le_bytes())?;
 
         // result: ItemRefundResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
             SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Success {

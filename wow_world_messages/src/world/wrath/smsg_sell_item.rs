@@ -32,7 +32,7 @@ impl crate::Message for SMSG_SELL_ITEM {
         w.write_all(&self.item.guid().to_le_bytes())?;
 
         // result: SellItemResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         Ok(())
     }

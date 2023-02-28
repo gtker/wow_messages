@@ -34,7 +34,7 @@ impl crate::Message for SMSG_TRAINER_BUY_FAILED {
         w.write_all(&self.id.to_le_bytes())?;
 
         // error: TrainingFailureReason
-        w.write_all(&(self.error.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.error.as_int()).to_le_bytes())?;
 
         Ok(())
     }

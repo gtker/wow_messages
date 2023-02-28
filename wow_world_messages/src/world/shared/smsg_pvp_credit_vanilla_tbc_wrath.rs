@@ -32,7 +32,7 @@ impl crate::Message for SMSG_PVP_CREDIT {
         w.write_all(&self.victim.guid().to_le_bytes())?;
 
         // rank: PvpRank
-        w.write_all(&(self.rank.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.rank.as_int()).to_le_bytes())?;
 
         Ok(())
     }

@@ -28,7 +28,7 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // command: ArenaTeamCommand
-        w.write_all(&(self.command.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.command.as_int()).to_le_bytes())?;
 
         // team: CString
         // TODO: Guard against strings that are already null-terminated
@@ -45,7 +45,7 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
         w.write_all(&[0])?;
 
         // error: ArenaTeamCommandError
-        w.write_all(&(self.error.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.error.as_int()).to_le_bytes())?;
 
         Ok(())
     }

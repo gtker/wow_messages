@@ -102,7 +102,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         }
 
         // completable: QuestCompletable
-        w.write_all(&(self.completable.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.completable.as_int()).to_le_bytes())?;
 
         // flags1: u32
         w.write_all(&self.flags1.to_le_bytes())?;

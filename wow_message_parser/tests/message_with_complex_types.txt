@@ -27,10 +27,10 @@ impl crate::Message for MessageWithComplexTypes {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // simple_enum: SimpleEnum
-        w.write_all(&(self.simple_enum.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.simple_enum.as_int()).to_le_bytes())?;
 
         // simple_flag: SimpleFlag
-        w.write_all(&(self.simple_flag.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.simple_flag.as_int()).to_le_bytes())?;
 
         // simple_struct: StructWithAllBuiltInTypes
         self.simple_struct.write_into_vec(w)?;

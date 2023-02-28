@@ -23,7 +23,7 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // faction: Faction
-        w.write_all(&(self.faction.as_int() as u16).to_le_bytes())?;
+        w.write_all(&u16::from(self.faction.as_int()).to_le_bytes())?;
 
         // inactive: Bool
         w.write_all(u8::from(self.inactive).to_le_bytes().as_slice())?;

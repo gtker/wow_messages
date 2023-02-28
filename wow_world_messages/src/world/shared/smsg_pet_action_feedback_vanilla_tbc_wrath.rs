@@ -21,7 +21,7 @@ impl crate::Message for SMSG_PET_ACTION_FEEDBACK {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // feedback: PetFeedback
-        w.write_all(&(self.feedback.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.feedback.as_int()).to_le_bytes())?;
 
         Ok(())
     }

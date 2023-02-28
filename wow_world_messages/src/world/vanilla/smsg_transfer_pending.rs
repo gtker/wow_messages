@@ -26,7 +26,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // optional has_transport
         if let Some(v) = &self.has_transport {
@@ -34,7 +34,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
             w.write_all(&v.transport.to_le_bytes())?;
 
             // transport_map: Map
-            w.write_all(&(v.transport_map.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.transport_map.as_int()).to_le_bytes())?;
 
         }
 

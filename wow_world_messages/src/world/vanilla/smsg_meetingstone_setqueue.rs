@@ -24,10 +24,10 @@ impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
 
         // status: MeetingStoneStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
 
         Ok(())
     }

@@ -32,10 +32,10 @@ impl crate::Message for SMSG_LFG_UPDATE_PLAYER {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // update_type: LfgUpdateType
-        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.update_type.as_int()).to_le_bytes())?;
 
         // join_status: LfgJoinStatus
-        w.write_all(&(self.join_status.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.join_status.as_int()).to_le_bytes())?;
 
         match &self.join_status {
             SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus::NotJoined => {}

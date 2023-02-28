@@ -31,7 +31,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // lfg_type: LfgType
-        w.write_all(&(self.lfg_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.lfg_type.as_int()).to_le_bytes())?;
 
         // entry: u32
         w.write_all(&self.entry.to_le_bytes())?;

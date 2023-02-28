@@ -118,7 +118,7 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         w.write_all(&self.unknown10.to_le_bytes())?;
 
         // charter_type: CharterType
-        w.write_all(&(self.charter_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.charter_type.as_int()).to_le_bytes())?;
 
         Ok(())
     }

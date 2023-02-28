@@ -23,7 +23,7 @@ impl crate::Message for SMSG_SERVER_MESSAGE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // message_type: ServerMessageType
-        w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.message_type.as_int()).to_le_bytes())?;
 
         // message: CString
         // TODO: Guard against strings that are already null-terminated

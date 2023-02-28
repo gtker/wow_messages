@@ -31,7 +31,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN_ARENA {
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
 
         // arena_type: JoinArenaType
-        w.write_all(&(self.arena_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.arena_type.as_int()).to_le_bytes())?;
 
         // as_group: Bool
         w.write_all(u8::from(self.as_group).to_le_bytes().as_slice())?;

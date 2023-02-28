@@ -36,7 +36,7 @@ impl crate::Message for CMSG_COMPLAIN {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // complaint_type: SpamType
-        w.write_all(&(self.complaint_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.complaint_type.as_int()).to_le_bytes())?;
 
         // offender: Guid
         w.write_all(&self.offender.guid().to_le_bytes())?;

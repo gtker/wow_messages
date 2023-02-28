@@ -25,7 +25,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // target_index: RaidTargetIndex
-        w.write_all(&(self.target_index.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.target_index.as_int()).to_le_bytes())?;
 
         match &self.target_index {
             MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {

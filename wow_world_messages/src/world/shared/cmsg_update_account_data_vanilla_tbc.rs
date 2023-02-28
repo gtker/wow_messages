@@ -30,7 +30,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // data_type: AccountDataType
-        w.write_all(&(self.data_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.data_type.as_int()).to_le_bytes())?;
 
         // decompressed_size: u32
         w.write_all(&self.decompressed_size.to_le_bytes())?;

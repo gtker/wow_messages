@@ -81,7 +81,7 @@ impl SpellLog {
 impl SpellLog {
     pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // effect: SpellEffect
-        w.write_all(&(self.effect.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.effect.as_int()).to_le_bytes())?;
 
         // amount_of_logs: u32
         w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes())?;
@@ -108,7 +108,7 @@ impl SpellLog {
                 w.write_all(&amount.to_le_bytes())?;
 
                 // power: Power
-                w.write_all(&(power.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(power.as_int()).to_le_bytes())?;
 
                 // multiplier: f32
                 w.write_all(&multiplier.to_le_bytes())?;

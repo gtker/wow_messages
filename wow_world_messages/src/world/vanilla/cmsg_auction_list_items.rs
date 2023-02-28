@@ -68,7 +68,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         w.write_all(&self.auction_sub_category.to_le_bytes())?;
 
         // auction_quality: ItemQuality
-        w.write_all(&(self.auction_quality.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.auction_quality.as_int()).to_le_bytes())?;
 
         // usable: u8
         w.write_all(&self.usable.to_le_bytes())?;

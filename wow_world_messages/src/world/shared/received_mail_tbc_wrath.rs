@@ -33,7 +33,7 @@ impl ReceivedMail {
         w.write_all(&self.auction_house_id.to_le_bytes())?;
 
         // message_type: MailMessageType
-        w.write_all(&(self.message_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.message_type.as_int()).to_le_bytes())?;
 
         // stationery: u32
         w.write_all(&self.stationery.to_le_bytes())?;

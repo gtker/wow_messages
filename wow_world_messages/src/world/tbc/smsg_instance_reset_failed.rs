@@ -24,10 +24,10 @@ impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // reason: InstanceResetFailedReason
-        w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.reason.as_int()).to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         Ok(())
     }

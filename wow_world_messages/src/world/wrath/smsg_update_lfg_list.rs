@@ -47,13 +47,13 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // lfg_type: LfgType
-        w.write_all(&(self.lfg_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.lfg_type.as_int()).to_le_bytes())?;
 
         // dungeon_id: u32
         w.write_all(&self.dungeon_id.to_le_bytes())?;
 
         // update_type: LfgListUpdateType
-        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.update_type.as_int()).to_le_bytes())?;
 
         match &self.update_type {
             SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Partial {

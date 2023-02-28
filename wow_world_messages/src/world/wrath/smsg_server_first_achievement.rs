@@ -41,7 +41,7 @@ impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
         w.write_all(&self.achievement.to_le_bytes())?;
 
         // link_type: AchievementNameLinkType
-        w.write_all(&(self.link_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.link_type.as_int()).to_le_bytes())?;
 
         Ok(())
     }

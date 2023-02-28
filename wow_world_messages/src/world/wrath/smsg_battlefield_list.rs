@@ -51,7 +51,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
 
         // battleground_type: BattlegroundType
-        w.write_all(&(self.battleground_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.battleground_type.as_int()).to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -72,7 +72,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         w.write_all(&self.loss_honor.to_le_bytes())?;
 
         // random: RandomBg
-        w.write_all(&(self.random.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.random.as_int()).to_le_bytes())?;
 
         match &self.random {
             SMSG_BATTLEFIELD_LIST_RandomBg::NotRandom => {}

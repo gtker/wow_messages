@@ -37,7 +37,7 @@ impl crate::Message for SMSG_SPELLDAMAGESHIELD {
         w.write_all(&self.damage.to_le_bytes())?;
 
         // school: SpellSchool
-        w.write_all(&(self.school.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.school.as_int()).to_le_bytes())?;
 
         Ok(())
     }

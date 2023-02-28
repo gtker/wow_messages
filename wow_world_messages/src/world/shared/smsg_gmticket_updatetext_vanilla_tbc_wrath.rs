@@ -21,7 +21,7 @@ impl crate::Message for SMSG_GMTICKET_UPDATETEXT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // response: GmTicketResponse
-        w.write_all(&(self.response.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.response.as_int()).to_le_bytes())?;
 
         Ok(())
     }

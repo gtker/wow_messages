@@ -34,7 +34,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // talent_type: TalentInfoType
-        w.write_all(&(self.talent_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.talent_type.as_int()).to_le_bytes())?;
 
         // points_left: u32
         w.write_all(&self.points_left.to_le_bytes())?;

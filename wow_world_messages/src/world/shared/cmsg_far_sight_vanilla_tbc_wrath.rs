@@ -21,7 +21,7 @@ impl crate::Message for CMSG_FAR_SIGHT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // operation: FarSightOperation
-        w.write_all(&(self.operation.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.operation.as_int()).to_le_bytes())?;
 
         Ok(())
     }

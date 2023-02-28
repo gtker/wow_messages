@@ -97,7 +97,7 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
             w.write_all(&v.creature_type.to_le_bytes())?;
 
             // creature_family: CreatureFamily
-            w.write_all(&(v.creature_family.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(v.creature_family.as_int()).to_le_bytes())?;
 
             // creature_rank: u32
             w.write_all(&v.creature_rank.to_le_bytes())?;

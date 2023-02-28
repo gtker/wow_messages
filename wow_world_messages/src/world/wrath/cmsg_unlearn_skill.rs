@@ -21,7 +21,7 @@ impl crate::Message for CMSG_UNLEARN_SKILL {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // skill: Skill
-        w.write_all(&(self.skill.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.skill.as_int()).to_le_bytes())?;
 
         Ok(())
     }

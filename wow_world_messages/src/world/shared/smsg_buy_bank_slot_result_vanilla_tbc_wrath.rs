@@ -21,7 +21,7 @@ impl crate::Message for SMSG_BUY_BANK_SLOT_RESULT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // result: BuyBankSlotResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
 
         Ok(())
     }

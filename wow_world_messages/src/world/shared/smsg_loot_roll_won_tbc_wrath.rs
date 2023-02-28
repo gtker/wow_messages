@@ -63,7 +63,7 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         w.write_all(&self.winning_roll.to_le_bytes())?;
 
         // vote: RollVote
-        w.write_all(&(self.vote.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.vote.as_int()).to_le_bytes())?;
 
         Ok(())
     }

@@ -29,7 +29,7 @@ impl crate::Message for SMSG_POWER_UPDATE {
         self.unit.write_packed_guid_into_vec(w)?;
 
         // power: Power
-        w.write_all(&(self.power.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.power.as_int()).to_le_bytes())?;
 
         // amount: u32
         w.write_all(&self.amount.to_le_bytes())?;

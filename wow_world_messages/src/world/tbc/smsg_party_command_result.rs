@@ -26,7 +26,7 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // operation: PartyOperation
-        w.write_all(&(self.operation.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.operation.as_int()).to_le_bytes())?;
 
         // member: CString
         // TODO: Guard against strings that are already null-terminated
@@ -36,7 +36,7 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
         w.write_all(&[0])?;
 
         // result: PartyResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
 
         Ok(())
     }

@@ -28,7 +28,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // update_type: RaidTargetUpdateType
-        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.update_type.as_int()).to_le_bytes())?;
 
         match &self.update_type {
             MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {

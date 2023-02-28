@@ -119,13 +119,13 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         w.write_all(&self.suggest_player_amount.to_le_bytes())?;
 
         // reputation_objective_faction: Faction
-        w.write_all(&(self.reputation_objective_faction.as_int() as u16).to_le_bytes())?;
+        w.write_all(&u16::from(self.reputation_objective_faction.as_int()).to_le_bytes())?;
 
         // reputation_objective_value: u32
         w.write_all(&self.reputation_objective_value.to_le_bytes())?;
 
         // required_opposite_faction: Faction
-        w.write_all(&(self.required_opposite_faction.as_int() as u16).to_le_bytes())?;
+        w.write_all(&u16::from(self.required_opposite_faction.as_int()).to_le_bytes())?;
 
         // required_opposite_reputation_value: u32
         w.write_all(&self.required_opposite_reputation_value.to_le_bytes())?;

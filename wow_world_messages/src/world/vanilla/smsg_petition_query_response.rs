@@ -122,10 +122,10 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         w.write_all(&self.allowed_guild_id.to_le_bytes())?;
 
         // allowed_class: AllowedClass
-        w.write_all(&(self.allowed_class.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.allowed_class.as_int()).to_le_bytes())?;
 
         // allowed_race: AllowedRace
-        w.write_all(&(self.allowed_race.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.allowed_race.as_int()).to_le_bytes())?;
 
         // allowed_genders: u16
         w.write_all(&self.allowed_genders.to_le_bytes())?;

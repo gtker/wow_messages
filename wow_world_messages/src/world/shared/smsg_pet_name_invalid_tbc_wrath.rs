@@ -31,7 +31,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // reason: PetNameInvalidReason
-        w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.reason.as_int()).to_le_bytes())?;
 
         // name: CString
         // TODO: Guard against strings that are already null-terminated
@@ -41,7 +41,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         w.write_all(&[0])?;
 
         // included: DeclinedPetNameIncluded
-        w.write_all(&(self.included.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.included.as_int()).to_le_bytes())?;
 
         match &self.included {
             SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::NotIncluded => {}

@@ -27,7 +27,7 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // message: QuestPartyMessage
-        w.write_all(&(self.message.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.message.as_int()).to_le_bytes())?;
 
         Ok(())
     }

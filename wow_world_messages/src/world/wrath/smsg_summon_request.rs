@@ -29,7 +29,7 @@ impl crate::Message for SMSG_SUMMON_REQUEST {
         w.write_all(&self.summoner.guid().to_le_bytes())?;
 
         // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
 
         // auto_decline_time_in_msecs: u32
         w.write_all(&self.auto_decline_time_in_msecs.to_le_bytes())?;

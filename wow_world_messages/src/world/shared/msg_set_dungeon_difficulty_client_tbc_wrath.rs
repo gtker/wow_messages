@@ -21,7 +21,7 @@ impl crate::Message for MSG_SET_DUNGEON_DIFFICULTY_Client {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // difficulty: DungeonDifficulty
-        w.write_all(&(self.difficulty.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.difficulty.as_int()).to_le_bytes())?;
 
         Ok(())
     }

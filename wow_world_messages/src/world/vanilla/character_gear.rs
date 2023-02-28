@@ -20,7 +20,7 @@ impl CharacterGear {
         w.write_all(&self.equipment_display_id.to_le_bytes())?;
 
         // inventory_type: InventoryType
-        w.write_all(&(self.inventory_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.inventory_type.as_int()).to_le_bytes())?;
 
         Ok(())
     }

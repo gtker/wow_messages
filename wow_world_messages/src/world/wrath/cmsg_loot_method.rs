@@ -27,13 +27,13 @@ impl crate::Message for CMSG_LOOT_METHOD {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // loot_setting: GroupLootSetting
-        w.write_all(&(self.loot_setting.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.loot_setting.as_int()).to_le_bytes())?;
 
         // loot_master: Guid
         w.write_all(&self.loot_master.guid().to_le_bytes())?;
 
         // loot_threshold: ItemQuality
-        w.write_all(&(self.loot_threshold.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.loot_threshold.as_int()).to_le_bytes())?;
 
         Ok(())
     }

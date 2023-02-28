@@ -38,7 +38,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         w.write_all(&self.total_exp.to_le_bytes())?;
 
         // exp_type: ExperienceAwardType
-        w.write_all(&(self.exp_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.exp_type.as_int()).to_le_bytes())?;
 
         match &self.exp_type {
             SMSG_LOG_XPGAIN_ExperienceAwardType::Kill => {}

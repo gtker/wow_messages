@@ -61,7 +61,7 @@ impl crate::Message for SMSG_SPELL_START {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: CastFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.flags.as_int()).to_le_bytes())?;
 
         // timer: u32
         w.write_all(&self.timer.to_le_bytes())?;
@@ -71,7 +71,7 @@ impl crate::Message for SMSG_SPELL_START {
 
         if let Some(if_statement) = &self.flags.power_left_self {
             // power: Power
-            w.write_all(&(if_statement.power.as_int() as u32).to_le_bytes())?;
+            w.write_all(&u32::from(if_statement.power.as_int()).to_le_bytes())?;
 
         }
 

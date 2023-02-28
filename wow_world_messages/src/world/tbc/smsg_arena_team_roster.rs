@@ -33,7 +33,7 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
         w.write_all(&(self.members.len() as u32).to_le_bytes())?;
 
         // arena_type: ArenaType
-        w.write_all(&(self.arena_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.arena_type.as_int()).to_le_bytes())?;
 
         // members: ArenaTeamMember[amount_of_members]
         for i in self.members.iter() {

@@ -25,7 +25,7 @@ impl crate::Message for SMSG_DUEL_WINNER {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // reason: DuelWinnerReason
-        w.write_all(&(self.reason.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.reason.as_int()).to_le_bytes())?;
 
         // opponent_name: CString
         // TODO: Guard against strings that are already null-terminated

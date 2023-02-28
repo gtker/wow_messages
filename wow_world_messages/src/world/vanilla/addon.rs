@@ -32,10 +32,10 @@ pub struct Addon {
 impl Addon {
     pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // addon_type: AddonType
-        w.write_all(&(self.addon_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.addon_type.as_int()).to_le_bytes())?;
 
         // info_block: InfoBlock
-        w.write_all(&(self.info_block.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.info_block.as_int()).to_le_bytes())?;
 
         match &self.info_block {
             Addon_InfoBlock::Unavailable => {}
@@ -44,7 +44,7 @@ impl Addon {
                 update_available_flag,
             } => {
                 // key_version: KeyVersion
-                w.write_all(&(key_version.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(key_version.as_int()).to_le_bytes())?;
 
                 match &key_version {
                     Addon_KeyVersion::Zero => {}
@@ -138,7 +138,7 @@ impl Addon {
         }
 
         // url_info: UrlInfo
-        w.write_all(&(self.url_info.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.url_info.as_int()).to_le_bytes())?;
 
         match &self.url_info {
             Addon_UrlInfo::Unavailable => {}

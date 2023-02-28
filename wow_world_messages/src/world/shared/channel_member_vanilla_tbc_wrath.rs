@@ -21,7 +21,7 @@ impl ChannelMember {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // member_flags: ChannelMemberFlags
-        w.write_all(&(self.member_flags.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.member_flags.as_int()).to_le_bytes())?;
 
         Ok(())
     }

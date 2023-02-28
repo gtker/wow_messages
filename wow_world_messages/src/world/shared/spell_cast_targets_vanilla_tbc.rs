@@ -38,7 +38,7 @@ pub struct SpellCastTargets {
 impl SpellCastTargets {
     pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
-        w.write_all(&(self.target_flags.as_int() as u16).to_le_bytes())?;
+        w.write_all(&u16::from(self.target_flags.as_int()).to_le_bytes())?;
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target: PackedGuid

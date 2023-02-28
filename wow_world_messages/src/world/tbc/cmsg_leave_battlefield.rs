@@ -33,7 +33,7 @@ impl crate::Message for CMSG_LEAVE_BATTLEFIELD {
         w.write_all(&self.unknown2.to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // unknown3: u16
         w.write_all(&self.unknown3.to_le_bytes())?;

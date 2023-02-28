@@ -26,13 +26,13 @@ impl crate::Message for SMSG_WEATHER {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // weather_type: WeatherType
-        w.write_all(&(self.weather_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.weather_type.as_int()).to_le_bytes())?;
 
         // grade: f32
         w.write_all(&self.grade.to_le_bytes())?;
 
         // change: WeatherChangeType
-        w.write_all(&(self.change.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.change.as_int()).to_le_bytes())?;
 
         Ok(())
     }

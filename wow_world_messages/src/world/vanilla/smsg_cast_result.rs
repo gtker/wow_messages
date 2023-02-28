@@ -42,14 +42,14 @@ impl crate::Message for SMSG_CAST_RESULT {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // result: SimpleSpellCastResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
             SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
                 reason,
             } => {
                 // reason: CastFailureReason
-                w.write_all(&(reason.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(reason.as_int()).to_le_bytes())?;
 
                 match &reason {
                     SMSG_CAST_RESULT_CastFailureReason::AffectingCombat => {}
@@ -163,7 +163,7 @@ impl crate::Message for SMSG_CAST_RESULT {
                         area,
                     } => {
                         // area: Area
-                        w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+                        w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
 
                     }
                     SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {

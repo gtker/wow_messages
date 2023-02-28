@@ -33,10 +33,10 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // bracket: BattlegroundBracket
-        w.write_all(&(self.bracket.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.bracket.as_int()).to_le_bytes())?;
 
         // number_of_battlegrounds: u32
         w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes())?;

@@ -76,13 +76,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         self.version.write_into_vec(w)?;
 
         // platform: Platform
-        w.write_all(&(self.platform.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.platform.as_int()).to_le_bytes())?;
 
         // os: Os
-        w.write_all(&(self.os.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.os.as_int()).to_le_bytes())?;
 
         // locale: Locale
-        w.write_all(&(self.locale.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.locale.as_int()).to_le_bytes())?;
 
         // utc_timezone_offset: u32
         w.write_all(&self.utc_timezone_offset.to_le_bytes())?;

@@ -35,7 +35,7 @@ impl crate::Message for SMSG_LFG_UPDATE {
         w.write_all(u8::from(self.is_looking_for_group).to_le_bytes().as_slice())?;
 
         // looking_for_more: LfgUpdateLookingForMore
-        w.write_all(&(self.looking_for_more.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.looking_for_more.as_int()).to_le_bytes())?;
 
         match &self.looking_for_more {
             SMSG_LFG_UPDATE_LfgUpdateLookingForMore::NotLookingForMore => {}

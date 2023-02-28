@@ -27,7 +27,7 @@ impl crate::Message for SMSG_PET_ACTION_SOUND {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // reason: PetTalkReason
-        w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.reason.as_int()).to_le_bytes())?;
 
         Ok(())
     }

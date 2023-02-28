@@ -25,7 +25,7 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // timer: TimerType
-        w.write_all(&(self.timer.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.timer.as_int()).to_le_bytes())?;
 
         // is_frozen: Bool
         w.write_all(u8::from(self.is_frozen).to_le_bytes().as_slice())?;

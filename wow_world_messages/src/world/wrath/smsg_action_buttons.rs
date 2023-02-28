@@ -25,7 +25,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // behavior: ActionBarBehavior
-        w.write_all(&(self.behavior.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.behavior.as_int()).to_le_bytes())?;
 
         match &self.behavior {
             SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {

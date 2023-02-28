@@ -40,7 +40,7 @@ impl crate::Message for SMSG_GROUP_LIST {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // group_type: GroupType
-        w.write_all(&(self.group_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.group_type.as_int()).to_le_bytes())?;
 
         // flags: u8
         w.write_all(&self.flags.to_le_bytes())?;
@@ -59,13 +59,13 @@ impl crate::Message for SMSG_GROUP_LIST {
         // optional group_not_empty
         if let Some(v) = &self.group_not_empty {
             // loot_setting: GroupLootSetting
-            w.write_all(&(v.loot_setting.as_int() as u8).to_le_bytes())?;
+            w.write_all(&u8::from(v.loot_setting.as_int()).to_le_bytes())?;
 
             // master_loot: Guid
             w.write_all(&v.master_loot.guid().to_le_bytes())?;
 
             // loot_threshold: ItemQuality
-            w.write_all(&(v.loot_threshold.as_int() as u8).to_le_bytes())?;
+            w.write_all(&u8::from(v.loot_threshold.as_int()).to_le_bytes())?;
 
         }
 

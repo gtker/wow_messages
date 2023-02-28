@@ -41,7 +41,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // mask: CacheMask
-        w.write_all(&(self.mask.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.mask.as_int()).to_le_bytes())?;
 
         // data: u32[-]
         for i in self.data.iter() {

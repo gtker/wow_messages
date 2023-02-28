@@ -26,7 +26,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_FAILED {
         w.write_all(&self.quest_id.to_le_bytes())?;
 
         // reason: QuestFailedReason
-        w.write_all(&(self.reason.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.reason.as_int()).to_le_bytes())?;
 
         Ok(())
     }

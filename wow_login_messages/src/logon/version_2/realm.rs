@@ -32,10 +32,10 @@ pub struct Realm {
 impl Realm {
     pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // realm_type: RealmType
-        w.write_all(&(self.realm_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.realm_type.as_int()).to_le_bytes())?;
 
         // flag: RealmFlag
-        w.write_all(&(self.flag.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.flag.as_int()).to_le_bytes())?;
 
         // name: CString
         // TODO: Guard against strings that are already null-terminated
@@ -52,13 +52,13 @@ impl Realm {
         w.write_all(&[0])?;
 
         // population: Population
-        w.write_all(&(self.population.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.population.as_int()).to_le_bytes())?;
 
         // number_of_characters_on_realm: u8
         w.write_all(&self.number_of_characters_on_realm.to_le_bytes())?;
 
         // category: RealmCategory
-        w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.category.as_int()).to_le_bytes())?;
 
         // realm_id: u8
         w.write_all(&self.realm_id.to_le_bytes())?;

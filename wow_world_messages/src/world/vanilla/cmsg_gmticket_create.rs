@@ -40,10 +40,10 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // category: GmTicketType
-        w.write_all(&(self.category.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.category.as_int()).to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;

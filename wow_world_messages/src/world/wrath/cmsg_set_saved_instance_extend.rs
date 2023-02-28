@@ -26,10 +26,10 @@ impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // difficulty: RaidDifficulty
-        w.write_all(&(self.difficulty.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.difficulty.as_int()).to_le_bytes())?;
 
         // toggle_extend: Bool
         w.write_all(u8::from(self.toggle_extend).to_le_bytes().as_slice())?;

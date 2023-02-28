@@ -21,7 +21,7 @@ impl crate::Message for CMSG_LFG_TELEPORT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // location: LfgTeleportLocation
-        w.write_all(&(self.location.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.location.as_int()).to_le_bytes())?;
 
         Ok(())
     }

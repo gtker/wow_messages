@@ -34,7 +34,7 @@ impl crate::Message for SMSG_TEXT_EMOTE {
         w.write_all(&self.text_emote.to_le_bytes())?;
 
         // emote: Emote
-        w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.emote.as_int()).to_le_bytes())?;
 
         // name: SizedCString
         w.write_all(&((self.name.len() + 1) as u32).to_le_bytes())?;

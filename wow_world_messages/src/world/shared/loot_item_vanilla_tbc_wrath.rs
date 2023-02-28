@@ -25,7 +25,7 @@ impl LootItem {
         w.write_all(&self.item.to_le_bytes())?;
 
         // ty: LootSlotType
-        w.write_all(&(self.ty.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.ty.as_int()).to_le_bytes())?;
 
         Ok(())
     }

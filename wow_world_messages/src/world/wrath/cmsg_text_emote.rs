@@ -29,7 +29,7 @@ impl crate::Message for CMSG_TEXT_EMOTE {
         w.write_all(&self.text_emote.to_le_bytes())?;
 
         // emote: Emote
-        w.write_all(&(self.emote.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.emote.as_int()).to_le_bytes())?;
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;

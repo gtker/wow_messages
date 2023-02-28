@@ -45,7 +45,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         w.write_all(&self.amount_of_allowed_item_withdraws.to_le_bytes())?;
 
         // tab_result: GuildBankTabResult
-        w.write_all(&(self.tab_result.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.tab_result.as_int()).to_le_bytes())?;
 
         match &self.tab_result {
             SMSG_GUILD_BANK_LIST_GuildBankTabResult::NotPresent => {}

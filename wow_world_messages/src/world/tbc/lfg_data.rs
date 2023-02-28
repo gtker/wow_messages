@@ -20,7 +20,7 @@ impl LfgData {
         w.write_all(&self.entry.to_le_bytes())?;
 
         // lfg_type: LfgType
-        w.write_all(&(self.lfg_type.as_int() as u16).to_le_bytes())?;
+        w.write_all(&u16::from(self.lfg_type.as_int()).to_le_bytes())?;
 
         Ok(())
     }

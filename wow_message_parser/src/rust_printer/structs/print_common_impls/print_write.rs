@@ -215,7 +215,7 @@ pub(crate) fn print_write_definition(
             };
 
             s.wln(format!(
-                "w.write_all(&({variable_prefix}{name}.as_int() as {ty}).to_{endian}_bytes()){postfix}?;",
+                "w.write_all(&{ty}::from({variable_prefix}{name}.as_int()).to_{endian}_bytes()){postfix}?;",
                 ty = integer.rust_str(),
                 endian = integer.rust_endian_str()
             ));

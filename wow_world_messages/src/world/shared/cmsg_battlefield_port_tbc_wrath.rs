@@ -49,7 +49,7 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
         w.write_all(&self.unknown2.to_le_bytes())?;
 
         // action: BattlefieldPortAction
-        w.write_all(&(self.action.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.action.as_int()).to_le_bytes())?;
 
         Ok(())
     }

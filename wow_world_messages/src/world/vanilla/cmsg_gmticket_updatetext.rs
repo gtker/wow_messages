@@ -25,7 +25,7 @@ impl crate::Message for CMSG_GMTICKET_UPDATETEXT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // ticket_type: GmTicketType
-        w.write_all(&(self.ticket_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.ticket_type.as_int()).to_le_bytes())?;
 
         // message: CString
         // TODO: Guard against strings that are already null-terminated

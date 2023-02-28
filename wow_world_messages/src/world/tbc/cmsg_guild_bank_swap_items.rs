@@ -59,7 +59,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
         w.write_all(&self.bank.guid().to_le_bytes())?;
 
         // source: BankSwapSource
-        w.write_all(&(self.source.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.source.as_int()).to_le_bytes())?;
 
         match &self.source {
             CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource::Inventory {
@@ -78,7 +78,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
                 w.write_all(&item2.to_le_bytes())?;
 
                 // mode: BankSwapStoreMode
-                w.write_all(&(mode.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(mode.as_int()).to_le_bytes())?;
 
                 match &mode {
                     CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode::Manual {

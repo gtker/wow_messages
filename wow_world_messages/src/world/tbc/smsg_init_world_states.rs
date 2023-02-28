@@ -28,10 +28,10 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
 
         // amount_of_states: u16
         w.write_all(&(self.states.len() as u16).to_le_bytes())?;

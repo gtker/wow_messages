@@ -43,7 +43,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
         w.write_all(&self.pet_name_timestamp.to_le_bytes())?;
 
         // names: PetQueryDisabledNames
-        w.write_all(&(self.names.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.names.as_int()).to_le_bytes())?;
 
         match &self.names {
             SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames::Present {

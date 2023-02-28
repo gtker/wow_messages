@@ -29,7 +29,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // status: BattlegroundEndStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
 
         match &self.status {
             MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NotEnded => {}
@@ -37,7 +37,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
                 winner,
             } => {
                 // winner: BattlegroundWinner
-                w.write_all(&(winner.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(winner.as_int()).to_le_bytes())?;
 
             }
         }

@@ -39,7 +39,7 @@ pub struct Object {
 impl Object {
     pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // update_type: UpdateType
-        w.write_all(&(self.update_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.update_type.as_int()).to_le_bytes())?;
 
         match &self.update_type {
             Object_UpdateType::Values {
@@ -74,7 +74,7 @@ impl Object {
                 guid3.write_packed_guid_into_vec(w)?;
 
                 // object_type: ObjectType
-                w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(object_type.as_int()).to_le_bytes())?;
 
                 // movement2: MovementBlock
                 movement2.write_into_vec(w)?;
@@ -93,7 +93,7 @@ impl Object {
                 guid3.write_packed_guid_into_vec(w)?;
 
                 // object_type: ObjectType
-                w.write_all(&(object_type.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(object_type.as_int()).to_le_bytes())?;
 
                 // movement2: MovementBlock
                 movement2.write_into_vec(w)?;

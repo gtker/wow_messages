@@ -32,7 +32,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_RSVP {
         w.write_all(&self.invite_id.guid().to_le_bytes())?;
 
         // status: CalendarStatus
-        w.write_all(&(self.status.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.status.as_int()).to_le_bytes())?;
 
         Ok(())
     }

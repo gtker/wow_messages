@@ -33,7 +33,7 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // damage_type: EnvironmentalDamageType
-        w.write_all(&(self.damage_type.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.damage_type.as_int()).to_le_bytes())?;
 
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;

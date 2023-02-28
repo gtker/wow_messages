@@ -100,7 +100,7 @@ pub struct MovementBlock {
 impl MovementBlock {
     pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // update_flag: UpdateFlag
-        w.write_all(&(self.update_flag.as_int() as u16).to_le_bytes())?;
+        w.write_all(&u16::from(self.update_flag.as_int()).to_le_bytes())?;
 
         if let Some(if_statement) = &self.update_flag.living {
             match if_statement {
@@ -122,10 +122,10 @@ impl MovementBlock {
                     walking_speed,
                 } => {
                     // flags: MovementFlags
-                    w.write_all(&(flags.as_int() as u32).to_le_bytes())?;
+                    w.write_all(&u32::from(flags.as_int()).to_le_bytes())?;
 
                     // extra_flags: ExtraMovementFlags
-                    w.write_all(&(extra_flags.as_int() as u16).to_le_bytes())?;
+                    w.write_all(&u16::from(extra_flags.as_int()).to_le_bytes())?;
 
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes())?;
@@ -201,7 +201,7 @@ impl MovementBlock {
 
                     if let Some(if_statement) = &flags.spline_enabled {
                         // spline_flags: SplineFlag
-                        w.write_all(&(if_statement.spline_flags.as_int() as u32).to_le_bytes())?;
+                        w.write_all(&u32::from(if_statement.spline_flags.as_int()).to_le_bytes())?;
 
                         if let Some(if_statement) = &if_statement.spline_flags.final_angle {
                             match if_statement {

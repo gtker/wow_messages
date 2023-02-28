@@ -37,7 +37,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // frame: EncounterFrame
-        w.write_all(&(self.frame.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.frame.as_int()).to_le_bytes())?;
 
         match &self.frame {
             SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Engage {

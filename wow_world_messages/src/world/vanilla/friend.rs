@@ -28,7 +28,7 @@ impl Friend {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // status: FriendStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
 
         match &self.status {
             Friend_FriendStatus::Offline => {}
@@ -38,13 +38,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(class.as_int()).to_le_bytes())?;
 
             }
             Friend_FriendStatus::Afk {
@@ -53,13 +53,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(class.as_int()).to_le_bytes())?;
 
             }
             Friend_FriendStatus::Unknown3 {
@@ -68,13 +68,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(class.as_int()).to_le_bytes())?;
 
             }
             Friend_FriendStatus::Dnd {
@@ -83,13 +83,13 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                w.write_all(&(area.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
 
                 // level: u32
                 w.write_all(&level.to_le_bytes())?;
 
                 // class: Class
-                w.write_all(&(class.as_int() as u32).to_le_bytes())?;
+                w.write_all(&u32::from(class.as_int()).to_le_bytes())?;
 
             }
         }

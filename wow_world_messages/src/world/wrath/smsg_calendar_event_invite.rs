@@ -53,7 +53,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         w.write_all(&self.invite_status.to_le_bytes())?;
 
         // time: CalendarStatusTime
-        w.write_all(&(self.time.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.time.as_int()).to_le_bytes())?;
 
         match &self.time {
             SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::NotPresent => {}

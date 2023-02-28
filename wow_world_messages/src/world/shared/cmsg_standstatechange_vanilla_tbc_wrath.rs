@@ -21,7 +21,7 @@ impl crate::Message for CMSG_STANDSTATECHANGE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // animation_state: UnitStandState
-        w.write_all(&(self.animation_state.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.animation_state.as_int()).to_le_bytes())?;
 
         Ok(())
     }

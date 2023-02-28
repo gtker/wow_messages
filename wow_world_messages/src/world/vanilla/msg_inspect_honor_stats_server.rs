@@ -61,7 +61,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // highest_rank: PvpRank
-        w.write_all(&(self.highest_rank.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.highest_rank.as_int()).to_le_bytes())?;
 
         // today_honorable_and_dishonorable: u32
         w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes())?;
@@ -100,7 +100,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         w.write_all(&self.this_week_honor.to_le_bytes())?;
 
         // last_week_standing: PvpRank
-        w.write_all(&(self.last_week_standing.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.last_week_standing.as_int()).to_le_bytes())?;
 
         // rank_progress_bar: u8
         w.write_all(&self.rank_progress_bar.to_le_bytes())?;

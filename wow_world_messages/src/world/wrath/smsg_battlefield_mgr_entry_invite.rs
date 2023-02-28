@@ -28,7 +28,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
         w.write_all(&self.battle_id.to_le_bytes())?;
 
         // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
 
         // accept_time_in_seconds: u32
         w.write_all(&self.accept_time_in_seconds.to_le_bytes())?;

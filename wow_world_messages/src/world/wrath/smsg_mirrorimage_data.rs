@@ -54,13 +54,13 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
         w.write_all(&self.display_id.to_le_bytes())?;
 
         // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.race.as_int()).to_le_bytes())?;
 
         // gender: Gender
-        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.gender.as_int()).to_le_bytes())?;
 
         // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
 
         // skin_color: u8
         w.write_all(&self.skin_color.to_le_bytes())?;

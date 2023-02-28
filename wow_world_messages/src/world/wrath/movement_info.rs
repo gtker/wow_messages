@@ -46,10 +46,10 @@ pub struct MovementInfo {
 impl MovementInfo {
     pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // flags: MovementFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.flags.as_int()).to_le_bytes())?;
 
         // extra_flags: ExtraMovementFlags
-        w.write_all(&(self.extra_flags.as_int() as u16).to_le_bytes())?;
+        w.write_all(&u16::from(self.extra_flags.as_int()).to_le_bytes())?;
 
         // timestamp: u32
         w.write_all(&self.timestamp.to_le_bytes())?;

@@ -35,7 +35,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // instance_id: u32
         w.write_all(&self.instance_id.to_le_bytes())?;

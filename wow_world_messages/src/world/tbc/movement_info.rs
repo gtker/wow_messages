@@ -45,7 +45,7 @@ pub struct MovementInfo {
 impl MovementInfo {
     pub(crate) fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // flags: MovementFlags
-        w.write_all(&(self.flags.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.flags.as_int()).to_le_bytes())?;
 
         // extra_flags: u8
         w.write_all(&self.extra_flags.to_le_bytes())?;

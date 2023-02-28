@@ -25,7 +25,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // looking_for_more: LfgUpdateLookingForMore
-        w.write_all(&(self.looking_for_more.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.looking_for_more.as_int()).to_le_bytes())?;
 
         match &self.looking_for_more {
             SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::NotLookingForMore => {}

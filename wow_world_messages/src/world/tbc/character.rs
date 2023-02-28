@@ -73,13 +73,13 @@ impl Character {
         w.write_all(&[0])?;
 
         // race: Race
-        w.write_all(&(self.race.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.race.as_int()).to_le_bytes())?;
 
         // class: Class
-        w.write_all(&(self.class.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
 
         // gender: Gender
-        w.write_all(&(self.gender.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.gender.as_int()).to_le_bytes())?;
 
         // skin: u8
         w.write_all(&self.skin.to_le_bytes())?;
@@ -100,10 +100,10 @@ impl Character {
         w.write_all(&self.level.to_le_bytes())?;
 
         // area: Area
-        w.write_all(&(self.area.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // position: Vector3d
         self.position.write_into_vec(w)?;
@@ -124,7 +124,7 @@ impl Character {
         w.write_all(&self.pet_level.to_le_bytes())?;
 
         // pet_family: CreatureFamily
-        w.write_all(&(self.pet_family.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.pet_family.as_int()).to_le_bytes())?;
 
         // equipment: CharacterGear[20]
         for i in self.equipment.iter() {

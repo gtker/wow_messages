@@ -63,7 +63,7 @@ impl Mail {
         w.write_all(&self.message_id.to_le_bytes())?;
 
         // message_type: MailType
-        w.write_all(&(self.message_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.message_type.as_int()).to_le_bytes())?;
 
         match &self.message_type {
             Mail_MailType::Normal {

@@ -37,7 +37,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_STATUS {
         w.write_all(&self.sender_invite_id.guid().to_le_bytes())?;
 
         // status: CalendarStatus
-        w.write_all(&(self.status.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
 
         Ok(())
     }

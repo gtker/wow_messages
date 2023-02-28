@@ -20,7 +20,7 @@ impl DispelledSpell {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // method: DispelMethod
-        w.write_all(&(self.method.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.method.as_int()).to_le_bytes())?;
 
         Ok(())
     }

@@ -34,7 +34,7 @@ impl crate::Message for SMSG_BUY_FAILED {
         w.write_all(&self.item.to_le_bytes())?;
 
         // result: BuyResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         Ok(())
     }

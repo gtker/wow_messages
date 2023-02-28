@@ -37,16 +37,16 @@ impl crate::Message for SMSG_PET_MODE {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // react_state: PetReactState
-        w.write_all(&(self.react_state.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.react_state.as_int()).to_le_bytes())?;
 
         // command_state: PetCommandState
-        w.write_all(&(self.command_state.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.command_state.as_int()).to_le_bytes())?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // pet_enabled: PetEnabled
-        w.write_all(&(self.pet_enabled.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.pet_enabled.as_int()).to_le_bytes())?;
 
         Ok(())
     }

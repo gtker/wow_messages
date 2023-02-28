@@ -30,7 +30,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 
     fn write_into_vec(&self, w: &mut impl std::io::Write) -> Result<(), std::io::Error> {
         // result: InventoryResult
-        w.write_all(&(self.result.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok => {}

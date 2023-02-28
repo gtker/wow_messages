@@ -39,7 +39,7 @@ impl crate::Message for SMSG_SPELLENERGIZELOG {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // power: Power
-        w.write_all(&(self.power.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.power.as_int()).to_le_bytes())?;
 
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;

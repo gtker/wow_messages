@@ -68,7 +68,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         w.write_all(&self.overkill.to_le_bytes())?;
 
         // school: SpellSchool
-        w.write_all(&(self.school.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.school.as_int()).to_le_bytes())?;
 
         // absorbed_damage: u32
         w.write_all(&self.absorbed_damage.to_le_bytes())?;
@@ -86,7 +86,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         w.write_all(&self.blocked.to_le_bytes())?;
 
         // hit_info: HitInfo
-        w.write_all(&(self.hit_info.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.hit_info.as_int()).to_le_bytes())?;
 
         // extend_flag: u8
         w.write_all(&self.extend_flag.to_le_bytes())?;

@@ -45,22 +45,22 @@ impl crate::Message for SMSG_PET_SPELLS {
         // optional action_bars
         if let Some(v) = &self.action_bars {
             // family: CreatureFamily
-            w.write_all(&(v.family.as_int() as u16).to_le_bytes())?;
+            w.write_all(&u16::from(v.family.as_int()).to_le_bytes())?;
 
             // duration: u32
             w.write_all(&v.duration.to_le_bytes())?;
 
             // react: PetReactState
-            w.write_all(&(v.react.as_int() as u8).to_le_bytes())?;
+            w.write_all(&u8::from(v.react.as_int()).to_le_bytes())?;
 
             // command: PetCommandState
-            w.write_all(&(v.command.as_int() as u8).to_le_bytes())?;
+            w.write_all(&u8::from(v.command.as_int()).to_le_bytes())?;
 
             // unknown: u8
             w.write_all(&v.unknown.to_le_bytes())?;
 
             // pet_enabled: PetEnabled
-            w.write_all(&(v.pet_enabled.as_int() as u8).to_le_bytes())?;
+            w.write_all(&u8::from(v.pet_enabled.as_int()).to_le_bytes())?;
 
             // action_bars: u32[10]
             for i in v.action_bars.iter() {

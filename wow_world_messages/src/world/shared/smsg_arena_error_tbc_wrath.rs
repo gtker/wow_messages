@@ -26,7 +26,7 @@ impl crate::Message for SMSG_ARENA_ERROR {
         w.write_all(&self.unknown.to_le_bytes())?;
 
         // arena_type: ArenaType
-        w.write_all(&(self.arena_type.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.arena_type.as_int()).to_le_bytes())?;
 
         Ok(())
     }

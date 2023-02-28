@@ -33,10 +33,10 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         w.write_all(&self.auction_id.to_le_bytes())?;
 
         // action: AuctionCommandAction
-        w.write_all(&(self.action.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.action.as_int()).to_le_bytes())?;
 
         // result: AuctionCommandResult
-        w.write_all(&(self.result.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
             SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok => {}
@@ -44,7 +44,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
                 inventory_result,
             } => {
                 // inventory_result: InventoryResult
-                w.write_all(&(inventory_result.as_int() as u8).to_le_bytes())?;
+                w.write_all(&u8::from(inventory_result.as_int()).to_le_bytes())?;
 
             }
             SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrDatabase => {}

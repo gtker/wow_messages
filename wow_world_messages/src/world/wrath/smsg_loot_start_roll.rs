@@ -42,7 +42,7 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         w.write_all(&self.creature.guid().to_le_bytes())?;
 
         // map: Map
-        w.write_all(&(self.map.as_int() as u32).to_le_bytes())?;
+        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -60,7 +60,7 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         w.write_all(&self.countdown_time_in_milliseconds.to_le_bytes())?;
 
         // flags: RollFlags
-        w.write_all(&(self.flags.as_int() as u8).to_le_bytes())?;
+        w.write_all(&u8::from(self.flags.as_int()).to_le_bytes())?;
 
         Ok(())
     }
