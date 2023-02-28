@@ -356,13 +356,6 @@ fn print_read_definition(
                 prefix = prefix,
                 postfix = postfix,
             ));
-            if d.value().is_some() {
-                s.wln(format!(
-                    "// {name} is expected to always be {value}",
-                    name = d.name(),
-                    value = d.value().as_ref().unwrap(),
-                ))
-            }
         }
         Type::Gold => {
             s.wln(format!(
@@ -436,16 +429,15 @@ fn print_read_definition(
         Type::Array(array) => {
             print_read_array(s, array, e, d, prefix, postfix);
         }
-        Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
-            match e.definer_ty() {
-                DefinerType::Enum => {
-                    let (parens, integer, cast) = if let Some(integer) = upcast {
-                        ("(", integer, format!(" as {})", e.ty().rust_str()))
-                    } else {
-                        ("", e.ty(), "".to_string())
-                    };
+        Type::Enum { e, upcast } | Type::Flag { e, upcast } => match e.definer_ty() {
+            DefinerType::Enum => {
+                let (parens, integer, cast) = if let Some(integer) = upcast {
+                    ("(", integer, format!(" as {})", e.ty().rust_str()))
+                } else {
+                    ("", e.ty(), "".to_string())
+                };
 
-                    s.wln(format!(
+                s.wln(format!(
                         "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(r){postfix}?{cast}.{into};",
                         name = d.name(),
                         type_name = d.ty().rust_str(),
@@ -459,9 +451,9 @@ fn print_read_definition(
                         prefix = prefix,
                         postfix = postfix,
                     ));
-                }
-                DefinerType::Flag => {
-                    s.wln(format!(
+            }
+            DefinerType::Flag => {
+                s.wln(format!(
                         "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(r){postfix}?);",
                         name = d.name(),
                         type_name = d.ty().rust_str(),
@@ -471,18 +463,8 @@ fn print_read_definition(
                         prefix = prefix,
                         postfix = postfix,
                     ));
-                }
             }
-
-            if let Some(value) = d.value() {
-                s.wln(format!(
-                    "// {name} is expected to always be {constant_string} ({constant_value})",
-                    name = d.name(),
-                    constant_string = value.original_string(),
-                    constant_value = value.value(),
-                ));
-            }
-        }
+        },
         Type::Struct { .. } => {
             s.wln(format!(
                 "{assignment_prefix}{value_set}{name} = {type_name}::{prefix}read(r){postfix}?;",
@@ -565,6 +547,15 @@ fn print_read_definition(
                 postfix = postfix,
             ));
         }
+    }
+
+    if let Some(value) = d.value() {
+        s.wln(format!(
+            "// {name} is expected to always be {constant_string} ({constant_value})",
+            name = d.name(),
+            constant_string = value.original_string(),
+            constant_value = value.value(),
+        ));
     }
 
     s.newline();
