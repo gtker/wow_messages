@@ -178,7 +178,7 @@ pub(crate) fn impl_world_server_or_client_message(
             s.wln(format!("let mut v = crate::util::{feature_name}_get_unencrypted_{ty}(Self::OPCODE as u16, 0);"));
             s.wln("self.write_into_vec(&mut v)?;");
 
-            s.wln(format!("let size = v.len().saturating_sub(2);"));
+            s.wln("let size = v.len().saturating_sub(2);");
             s.wln("let s = size.to_le_bytes();");
 
             s.wln("v[0] = s[1];");
@@ -269,7 +269,7 @@ pub(crate) fn impl_world_server_or_client_message(
             s.wln(format!("e: &'e mut {encrypter},"));
             s.dec_indent();
 
-            s.wln(format!(") -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>"));
+            s.wln(") -> std::pin::Pin<Box<dyn std::future::Future<Output = Result<(), std::io::Error>> + Send + 'async_trait>>");
             s.wln("where");
 
             s.inc_indent();
