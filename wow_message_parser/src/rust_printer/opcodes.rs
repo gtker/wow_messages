@@ -326,9 +326,7 @@ fn world_common_impls_read_write(
             "r.read_exact(&mut header){postfix}?;",
             postfix = it.postfix()
         ));
-        s.wln(format!(
-            "let header = d.decrypt_{cd}_header(header);"
-        ));
+        s.wln(format!("let header = d.decrypt_{cd}_header(header);"));
         s.wln("let opcode = header.opcode;");
         s.wln(format!(
             "let body_size = (header.size.saturating_sub({opcode_size})) as u32;"
@@ -449,7 +447,7 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType, enc_pre
     s.wln(it.cfg_and_encryption());
     s.bodyn(
         format!(
-            "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}>(&self, w: &mut W, e: &mut {enc_prefix}EncrypterHalf) -> Result<(), std::io::Error>",
+            "pub {func}fn {prefix}write_encrypted_{cd}<W: {write}>(&self, mut w: W, e: &mut {enc_prefix}EncrypterHalf) -> Result<(), std::io::Error>",
             cd = cd,
             enc_prefix = enc_prefix,
             func = it.func(),
@@ -470,7 +468,7 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType, enc_pre
     s.wln(it.cfg());
     s.bodyn(
         format!(
-            "pub {func}fn {prefix}write_unencrypted_{cd}<W: {write}>(&self, w: &mut W) -> Result<(), std::io::Error>",
+            "pub {func}fn {prefix}write_unencrypted_{cd}<W: {write}>(&self, mut w: W) -> Result<(), std::io::Error>",
             cd = cd,
             func = it.func(),
             write = it.write(),

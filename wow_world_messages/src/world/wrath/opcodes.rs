@@ -1417,7 +1417,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    pub fn write_encrypted_client<W: std::io::Write>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
+    pub fn write_encrypted_client<W: std::io::Write>(&self, mut w: W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_encrypted_client(w, e),
@@ -1866,7 +1866,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "sync")]
-    pub fn write_unencrypted_client<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    pub fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_unencrypted_client(w),
@@ -2315,7 +2315,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(all(feature = "tokio", feature = "encryption"))]
-    pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
+    pub async fn tokio_write_encrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, mut w: W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2764,7 +2764,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_write_unencrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    pub async fn tokio_write_unencrypted_client<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, mut w: W) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3213,7 +3213,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(all(feature = "async-std", feature = "encryption"))]
-    pub async fn astd_write_encrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
+    pub async fn astd_write_encrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, mut w: W, e: &mut ClientEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3662,7 +3662,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_write_unencrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    pub async fn astd_write_unencrypted_client<W: async_std::io::WriteExt + Unpin + Send>(&self, mut w: W) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_unencrypted_client(w).await,
@@ -8910,7 +8910,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    pub fn write_encrypted_server<W: std::io::Write>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
+    pub fn write_encrypted_server<W: std::io::Write>(&self, mut w: W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_encrypted_server(w, e),
@@ -9434,7 +9434,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "sync")]
-    pub fn write_unencrypted_server<W: std::io::Write>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    pub fn write_unencrypted_server<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_BACKWARD(c) => c.write_unencrypted_server(w),
@@ -9958,7 +9958,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(all(feature = "tokio", feature = "encryption"))]
-    pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
+    pub async fn tokio_write_encrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, mut w: W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10482,7 +10482,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    pub async fn tokio_write_unencrypted_server<W: tokio::io::AsyncWriteExt + Unpin + Send>(&self, mut w: W) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11006,7 +11006,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(all(feature = "async-std", feature = "encryption"))]
-    pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
+    pub async fn astd_write_encrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, mut w: W, e: &mut ServerEncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11530,7 +11530,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_write_unencrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, w: &mut W) -> Result<(), std::io::Error> {
+    pub async fn astd_write_unencrypted_server<W: async_std::io::WriteExt + Unpin + Send>(&self, mut w: W) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_BACKWARD(c) => c.astd_write_unencrypted_server(w).await,
