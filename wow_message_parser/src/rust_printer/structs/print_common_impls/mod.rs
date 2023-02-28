@@ -285,17 +285,21 @@ fn print_encrypted_body(
 ) {
     s.wln("let mut v = Vec::with_capacity(1024);");
     s.wln("let mut s = &mut v;");
+
     s.wln(format!(
         "crate::util::{feature_name}_get_unencrypted_{ty}(&mut s, Self::OPCODE as u16, 0)?;"
     ));
+
     s.wln("self.write_into_vec(&mut s)?;");
     s.wln("let size = v.len().saturating_sub(2) as u16;");
+
     s.wln(format!(
         "let header = e.encrypt_{ty}_header(size{size_cast}, Self::OPCODE{opcode_cast});"
     ));
-    s.open_curly("for (i, e) in header.iter().enumerate()");
-    s.wln("v[i] = *e;");
-    s.closing_curly();
+
+    s.body("for (i, e) in header.iter().enumerate()", |s| {
+        s.wln("v[i] = *e;");
+    });
     s.wln(format!("w.write_all(&v){extra}"));
 }
 
@@ -322,9 +326,9 @@ fn print_unencrypted_body(
     match version {
         MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {}
         MajorWorldVersion::Wrath => {
-            s.open_curly("if size > 0x7FFF");
-            s.wln("v[2] = s[2];");
-            s.closing_curly();
+            s.body("if size > 0x7FFF", |s| {
+                s.wln("v[2] = s[2];");
+            });
         }
     }
 
