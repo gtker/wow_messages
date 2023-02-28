@@ -184,7 +184,7 @@ pub(crate) fn impl_world_server_or_client_message(
             "fn write_unencrypted_{ty}<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error>"
         ));
 
-        print_unencrypted_body(s, "", feature_name, ty, version);
+        print_unencrypted_body(s, "", feature_name, ty, version, &container_type);
         s.closing_curly_newline(); // fn write_unencrypted
 
         s.wln("#[cfg(all(feature = \"sync\", feature = \"encryption\"))]");
@@ -197,7 +197,16 @@ pub(crate) fn impl_world_server_or_client_message(
         s.dec_indent();
 
         s.open_curly(") -> Result<(), std::io::Error>");
-        print_encrypted_body(s, "", feature_name, ty, size_cast, opcode_cast);
+        print_encrypted_body(
+            s,
+            "",
+            feature_name,
+            ty,
+            size_cast,
+            opcode_cast,
+            version,
+            &container_type,
+        );
         s.closing_curly_newline(); // ) -> Result
 
         for async_ty in ImplType::types() {
@@ -227,7 +236,7 @@ pub(crate) fn impl_world_server_or_client_message(
             s.open_curly(""); // fn body
 
             s.open_curly("Box::pin(async move");
-            print_unencrypted_body(s, ".await", feature_name, ty, version);
+            print_unencrypted_body(s, ".await", feature_name, ty, version, &container_type);
             s.closing_curly_with(")");
 
             s.closing_curly_newline(); // fn body
@@ -256,7 +265,16 @@ pub(crate) fn impl_world_server_or_client_message(
             s.open_curly(""); // fn body
 
             s.open_curly("Box::pin(async move");
-            print_encrypted_body(s, ".await", feature_name, ty, size_cast, opcode_cast);
+            print_encrypted_body(
+                s,
+                ".await",
+                feature_name,
+                ty,
+                size_cast,
+                opcode_cast,
+                version,
+                &container_type,
+            );
             s.closing_curly_with(")");
 
             s.closing_curly_newline(); // fn body
@@ -282,6 +300,8 @@ fn print_encrypted_body(
     ty: &str,
     size_cast: &str,
     opcode_cast: &str,
+    version: MajorWorldVersion,
+    container_type: &ContainerType,
 ) {
     s.wln("let mut v = Vec::with_capacity(1024);");
     s.wln("let mut s = &mut v;");
@@ -291,7 +311,10 @@ fn print_encrypted_body(
     ));
 
     s.wln("self.write_into_vec(&mut s)?;");
-    s.wln("let size = v.len().saturating_sub(2) as u16;");
+
+    print_header_size(s, version, container_type);
+
+    s.wln("let size = v.len().saturating_sub(size_len) as u16;");
 
     s.wln(format!(
         "let header = e.encrypt_{ty}_header(size{size_cast}, Self::OPCODE{opcode_cast});"
@@ -309,15 +332,20 @@ fn print_unencrypted_body(
     feature_name: &str,
     ty: &str,
     version: MajorWorldVersion,
+    container_type: &ContainerType,
 ) {
     s.wln("let mut v = Vec::with_capacity(1024);");
     s.wln("let mut s = &mut v;");
+
     s.wln(format!(
         "crate::util::{feature_name}_get_unencrypted_{ty}(&mut s, Self::OPCODE as u16, 0)?;"
     ));
+
     s.wln("self.write_into_vec(&mut s)?;");
 
-    s.wln("let size = v.len().saturating_sub(2);");
+    print_header_size(s, version, container_type);
+
+    s.wln("let size = v.len().saturating_sub(size_len);");
     s.wln("let s = size.to_le_bytes();");
 
     s.wln("v[0] = s[1];");
@@ -333,6 +361,21 @@ fn print_unencrypted_body(
     }
 
     s.wln(format!("w.write_all(&v){extra}"));
+}
+
+fn print_header_size(s: &mut Writer, version: MajorWorldVersion, container_type: &ContainerType) {
+    match container_type {
+        ContainerType::CMsg(_) => s.wln("let size_len = 2;"),
+        ContainerType::SMsg(_) => match version {
+            MajorWorldVersion::Vanilla | MajorWorldVersion::BurningCrusade => {
+                s.wln("let size_len = 2;");
+            }
+            MajorWorldVersion::Wrath => {
+                s.wln("let size_len = if v.len() > 0x7FFF { 3 } else { 2 };")
+            }
+        },
+        _ => unreachable!(),
+    }
 }
 
 fn test_for_invalid_size(s: &mut Writer, e: &Container) {

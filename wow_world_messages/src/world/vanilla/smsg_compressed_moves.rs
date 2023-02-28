@@ -68,7 +68,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         let mut s = &mut v;
         crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
         self.write_into_vec(&mut s)?;
-        let size = v.len().saturating_sub(2);
+        let size_len = 2;
+        let size = v.len().saturating_sub(size_len);
         let s = size.to_le_bytes();
         v[0] = s[1];
         v[1] = s[0];
@@ -85,7 +86,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
         let mut s = &mut v;
         crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
         self.write_into_vec(&mut s)?;
-        let size = v.len().saturating_sub(2) as u16;
+        let size_len = 2;
+        let size = v.len().saturating_sub(size_len) as u16;
         let header = e.encrypt_server_header(size, Self::OPCODE as u16);
         for (i, e) in header.iter().enumerate() {
             v[i] = *e;
@@ -108,7 +110,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
             let mut s = &mut v;
             crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut s)?;
-            let size = v.len().saturating_sub(2);
+            let size_len = 2;
+            let size = v.len().saturating_sub(size_len);
             let s = size.to_le_bytes();
             v[0] = s[1];
             v[1] = s[0];
@@ -133,7 +136,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
             let mut s = &mut v;
             crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut s)?;
-            let size = v.len().saturating_sub(2) as u16;
+            let size_len = 2;
+            let size = v.len().saturating_sub(size_len) as u16;
             let header = e.encrypt_server_header(size, Self::OPCODE as u16);
             for (i, e) in header.iter().enumerate() {
                 v[i] = *e;
@@ -157,7 +161,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
             let mut s = &mut v;
             crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut s)?;
-            let size = v.len().saturating_sub(2);
+            let size_len = 2;
+            let size = v.len().saturating_sub(size_len);
             let s = size.to_le_bytes();
             v[0] = s[1];
             v[1] = s[0];
@@ -182,7 +187,8 @@ impl crate::vanilla::ServerMessage for SMSG_COMPRESSED_MOVES {
             let mut s = &mut v;
             crate::util::vanilla_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
             self.write_into_vec(&mut s)?;
-            let size = v.len().saturating_sub(2) as u16;
+            let size_len = 2;
+            let size = v.len().saturating_sub(size_len) as u16;
             let header = e.encrypt_server_header(size, Self::OPCODE as u16);
             for (i, e) in header.iter().enumerate() {
                 v[i] = *e;
