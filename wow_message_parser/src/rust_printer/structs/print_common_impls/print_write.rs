@@ -119,16 +119,6 @@ pub(crate) fn print_write_field_integer(
     }
 }
 
-pub(crate) fn print_write_field_identifier(
-    s: &mut Writer,
-    variable_name: &str,
-    variable_prefix: &str,
-) {
-    s.wln(format!(
-        "{variable_prefix}{variable_name}.write_into_vec(w)?;",
-    ));
-}
-
 pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
     // For fully compressed messages, replace the writer with a ZLibDecoder.
     if e.tags().compressed() {
@@ -152,16 +142,13 @@ pub(crate) fn print_write_definition(
     d: &StructMemberDefinition,
     postfix: &str,
 ) {
+    let name = d.name();
+
     if !(d.used_as_size_in().is_some() && d.tags().skip_serialize()) {
-        s.wln(format!(
-            "// {name}: {type_name}",
-            name = d.name(),
-            type_name = d.ty().str()
-        ));
+        s.wln(format!("// {name}: {type_name}", type_name = d.ty().str()));
     } else {
         s.wln(format!(
             "// {name} is included in the struct but explicitly excluded due to its `skip_serialize` tag.",
-            name = d.name(),
         ));
     }
 
@@ -192,43 +179,28 @@ pub(crate) fn print_write_definition(
         }
         Type::Bool(i) => {
             s.wln(format!(
-                "w.write_all({ty}::from({reference}{variable_prefix}{variable_name}).to_le_bytes().as_slice()){postfix}?;",
+                "w.write_all({ty}::from({reference}{variable_prefix}{name}).to_le_bytes().as_slice()){postfix}?;",
                 reference = if variable_prefix.is_empty() { "*" } else { "" }, // non-self variables are &bool
-                variable_prefix = variable_prefix,
-                variable_name = d.name(),
-                postfix = postfix,
                 ty = i.rust_str(),
             ));
         }
         Type::Gold => {
             s.wln(format!(
-                "w.write_all(u32::from({variable_prefix}{variable_name}.as_int()).to_le_bytes().as_slice()){postfix}?;",
-                variable_prefix = variable_prefix,
-                variable_name = d.name(),
-                postfix = postfix,
+                "w.write_all(u32::from({variable_prefix}{name}.as_int()).to_le_bytes().as_slice()){postfix}?;",
             ));
         }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
-                "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes()){postfix}?;",
-                variable_prefix = variable_prefix,
-                variable_name = d.name(),
+                "w.write_all(&{variable_prefix}{name}.to_{endian}_bytes()){postfix}?;",
                 endian = floating.rust_endian_str(),
-                postfix = postfix,
             ));
         }
         Type::SizedCString => {
             s.wln(format!(
-                "w.write_all(&(({prefix}{name}.len() + 1) as u32).to_le_bytes()){postfix}?;",
-                prefix = variable_prefix,
-                name = d.name(),
-                postfix = postfix,
+                "w.write_all(&(({variable_prefix}{name}.len() + 1) as u32).to_le_bytes()){postfix}?;",
             ));
             s.wln(format!(
-                "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
-                prefix = variable_prefix,
-                name = d.name(),
-                postfix = postfix,
+                "w.write_all({variable_prefix}{name}.as_bytes()){postfix}?;",
             ));
             s.wln("// Null terminator");
             s.wln(format!("w.write_all(&[0]){postfix}?;",));
@@ -237,15 +209,10 @@ pub(crate) fn print_write_definition(
         Type::CString => {
             s.wln("// TODO: Guard against strings that are already null-terminated");
             s.wln(format!(
-                "assert_ne!({prefix}{name}.as_bytes().iter().rev().next(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");",
-                name = d.name(),
-                prefix = variable_prefix,
+                "assert_ne!({variable_prefix}{name}.as_bytes().iter().rev().next(), Some(&0_u8), \"String `{name}` must not be null-terminated.\");",
             ));
             s.wln(format!(
-                "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
-                name = d.name(),
-                prefix = variable_prefix,
-                postfix = postfix,
+                "w.write_all({variable_prefix}{name}.as_bytes()){postfix}?;",
             ));
             s.wln("// Null terminator");
             s.wln(format!("w.write_all(&[0]){postfix}?;"));
@@ -253,13 +220,9 @@ pub(crate) fn print_write_definition(
         Type::String { .. } => {
             s.wln(format!(
                 "w.write_all(&({variable_prefix}{name}.len() as u8).to_le_bytes()){postfix}?;",
-                name = d.name(),
             ));
             s.wln(format!(
-                "w.write_all({prefix}{name}.as_bytes()){postfix}?;",
-                name = d.name(),
-                prefix = variable_prefix,
-                postfix = postfix,
+                "w.write_all({variable_prefix}{name}.as_bytes()){postfix}?;",
             ));
         }
         Type::Array(array) => {
@@ -273,9 +236,6 @@ pub(crate) fn print_write_definition(
 
             s.wln(format!(
                 "w.write_all(&({variable_prefix}{name}.as_int() as {ty}).to_{endian}_bytes()){postfix}?;",
-                variable_prefix = variable_prefix,
-                postfix = postfix,
-                name = d.name(),
                 ty = integer.rust_str(),
                 endian = integer.rust_endian_str()
             ));
@@ -283,33 +243,23 @@ pub(crate) fn print_write_definition(
             s.newline();
             return;
         }
-        Type::Struct { .. } => {
-            print_write_field_identifier(s, d.name(), variable_prefix);
-        }
         Type::PackedGuid => {
             s.wln(format!(
                 "{variable_prefix}{name}.write_packed_guid_into_vec(w)?;",
-                variable_prefix = variable_prefix,
-                name = d.name(),
             ));
         }
         Type::DateTime => {
             s.wln(format!(
                 "w.write_all(&{variable_prefix}{name}.as_int().to_le_bytes()){postfix}?;",
-                variable_prefix = variable_prefix,
-                postfix = postfix,
-                name = d.name()
             ));
         }
         Type::Guid => {
             s.wln(format!(
                 "w.write_all(&{variable_prefix}{name}.guid().to_le_bytes()){postfix}?;",
-                variable_prefix = variable_prefix,
-                postfix = postfix,
-                name = d.name()
             ));
         }
-        Type::EnchantMask
+        Type::Struct { .. }
+        | Type::EnchantMask
         | Type::InspectTalentGearMask
         | Type::MonsterMoveSpline
         | Type::AchievementDoneArray
@@ -318,9 +268,6 @@ pub(crate) fn print_write_definition(
         | Type::AuraMask => {
             s.wln(format!(
                 "{variable_prefix}{name}.write_into_vec(w){postfix}?;",
-                variable_prefix = variable_prefix,
-                postfix = postfix,
-                name = d.name()
             ));
         }
     }
