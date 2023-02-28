@@ -57,7 +57,7 @@ pub(crate) fn wrath_get_encrypted_server(
 }
 
 pub(crate) const MINIMUM_SIZE_LENGTH: u32 = 2;
-pub(crate) const MAXIMUM_SIZE_LENGTH: u32 = 2;
+pub(crate) const MAXIMUM_SIZE_LENGTH: u32 = 3;
 pub(crate) const MINIMUM_SERVER_HEADER_LENGTH: u16 = 4;
 pub(crate) const MAXIMUM_SERVER_HEADER_LENGTH: u16 = 5;
 pub(crate) const CLIENT_HEADER_LENGTH: u16 = 6;
