@@ -1,7 +1,6 @@
 use crate::doc_printer::DocWriter;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
-use crate::parser::types::sizes::DATETIME_SIZE;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, IntegerType};
@@ -607,60 +606,12 @@ fn print_container_field(
                 comment = comment,
             ));
 
-            if let Some(off) = offset {
-                *offset = match d.ty() {
-                    Type::Integer(t) => Some(*off + t.size() as usize),
-                    Type::Guid => Some(*off + 8),
-                    Type::Gold => Some(*off + 4),
-                    Type::FloatingPoint(f) => Some(*off + f.size() as usize),
-                    Type::DateTime => Some(*off + DATETIME_SIZE as usize),
-                    Type::Bool(i) => Some(*off + i.size() as usize),
-                    Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
-                        if let Some(upcast) = upcast {
-                            Some(*off + upcast.size() as usize)
-                        } else {
-                            let sizes = e.sizes();
-                            sizes.is_constant().map(|size| *off + size)
-                        }
-                    }
-                    Type::Struct { e } => {
-                        let sizes = e.sizes();
-                        sizes.is_constant().map(|size| *off + size)
-                    }
-                    Type::Array(array) => {
-                        let size = match array.ty() {
-                            ArrayType::Integer(i) => i.size() as usize,
-                            ArrayType::Struct(e) => {
-                                if let Some(s) = e.sizes().is_constant() {
-                                    s
-                                } else {
-                                    *offset = None;
-                                    return;
-                                }
-                            }
-                            ArrayType::PackedGuid | ArrayType::CString => {
-                                *offset = None;
-                                return;
-                            }
-                            ArrayType::Guid => 8,
-                        };
-                        match array.size() {
-                            ArraySize::Fixed(v) => Some(*off + (v as usize * size)),
-                            ArraySize::Variable(_) | ArraySize::Endless => None,
-                        }
-                    }
-                    Type::EnchantMask
-                    | Type::InspectTalentGearMask
-                    | Type::AchievementDoneArray
-                    | Type::AchievementInProgressArray
-                    | Type::MonsterMoveSpline
-                    | Type::CString
-                    | Type::SizedCString
-                    | Type::String { .. }
-                    | Type::PackedGuid
-                    | Type::UpdateMask
-                    | Type::AuraMask => None,
-                };
+            if let Some(size) = d.ty().sizes(tags).is_constant() {
+                if let Some(off) = offset {
+                    *off = *off + size;
+                }
+            } else {
+                *offset = None;
             }
         }
         StructMember::IfStatement(statement) => {

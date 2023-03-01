@@ -1,7 +1,6 @@
 use crate::error_printer::{duplicate_definer_value, invalid_definer_value};
 use crate::file_info::FileInfo;
 use crate::parser::types::if_statement::DefinerUsage;
-use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::{compare_name_and_tags, IntegerType};
 use crate::parser::utility;
@@ -249,12 +248,6 @@ impl Definer {
         }
 
         v
-    }
-
-    pub(crate) fn sizes(&self) -> Sizes {
-        let mut s = Sizes::new();
-        s.inc_both(self.basic_type.size().into());
-        s
     }
 
     fn self_check(&self) {
