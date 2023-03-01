@@ -123,8 +123,28 @@ pub(crate) fn write_pub_use(
         ty_name,
         optimizations,
     );
+    lib_functions(&mut s, ty_name);
 
     overwrite_autogenerate_if_not_the_same(path, s.inner());
+}
+
+fn lib_functions(s: &mut Writer, ty_name: &str) {
+    let ty_lower = ty_name.to_lowercase();
+    s.open_curly(format!(
+        "pub fn lookup_{ty_lower}(id: u32) -> Option<&'static {ty_name}>"
+    ));
+    s.wln(format!(
+        "all_{ty_lower}s().iter().find(|a| a.entry() == id)"
+    ));
+    s.closing_curly();
+    s.newline();
+
+    s.open_curly(format!(
+        "pub const fn all_{ty_lower}s() -> &'static [{ty_name}]"
+    ));
+    s.wln("data::DATA");
+    s.closing_curly();
+    s.newline();
 }
 
 pub(crate) fn write_constructors(
