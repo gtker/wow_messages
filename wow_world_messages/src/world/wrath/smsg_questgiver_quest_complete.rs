@@ -132,7 +132,7 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
         4 // quest_id: u32
         + 4 // unknown: u32
         + 4 // experience_reward: u32
-        + 8 // money_reward: Gold
+        + 4 // money_reward: Gold
         + 4 // honor_reward: u32
         + 4 // talent_reward: u32
         + 4 // arena_point_reward: u32

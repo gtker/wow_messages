@@ -225,7 +225,7 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
         + 4 // auto_finish: Bool32
         + 4 // flags1: u32
         + 4 // suggested_players: u32
-        + 8 // required_money: Gold
+        + 4 // required_money: Gold
         + 4 // amount_of_required_items: u32
         + self.required_items.len() * 12 // required_items: QuestItemRequirement[amount_of_required_items]
         + 4 // completable: QuestCompletable

@@ -195,7 +195,7 @@ impl CMSG_SEND_MAIL {
         + 4 // unknown2: u32
         + 1 // amount_of_items: u8
         + self.items.len() * 9 // items: MailItem[amount_of_items]
-        + 8 // money: Gold
+        + 4 // money: Gold
         + 4 // cash_on_delivery_amount: u32
         + 4 // unknown3: u32
         + 4 // unknown4: u32

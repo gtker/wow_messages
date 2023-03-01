@@ -277,10 +277,10 @@ impl Mail {
         2 // size: u16
         + 4 // message_id: u32
         + self.message_type.size() // message_type: Mail_MailType
-        + 8 // cash_on_delivery: Gold
+        + 4 // cash_on_delivery: Gold
         + 4 // unknown: u32
         + 4 // stationery: u32
-        + 8 // money: Gold
+        + 4 // money: Gold
         + 4 // flags: u32
         + 4 // expiration_time: f32
         + 4 // mail_template_id: u32

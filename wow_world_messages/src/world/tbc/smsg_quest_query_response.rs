@@ -404,8 +404,8 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + 2 // required_opposite_faction: Faction
         + 4 // required_opposite_reputation_value: u32
         + 4 // next_quest_in_chain: u32
-        + 8 // money_reward: Gold
-        + 8 // max_level_money_reward: Gold
+        + 4 // money_reward: Gold
+        + 4 // max_level_money_reward: Gold
         + 4 // reward_spell: u32
         + 4 // casted_reward_spell: u32
         + 4 // honor_reward: u32

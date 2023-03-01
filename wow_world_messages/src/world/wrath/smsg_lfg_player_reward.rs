@@ -146,7 +146,7 @@ impl SMSG_LFG_PLAYER_REWARD {
         + 4 // dungeon_finished_entry: u32
         + 1 // done: Bool
         + 4 // unknown1: u32
-        + 8 // money_reward: Gold
+        + 4 // money_reward: Gold
         + 4 // experience_reward: u32
         + 4 // unknown2: u32
         + 4 // unknown3: u32

@@ -718,8 +718,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // quality: ItemQuality
             + 4 // flags: ItemFlag
             + 4 // flags2: ItemFlag2
-            + 8 // buy_price: Gold
-            + 8 // sell_price: Gold
+            + 4 // buy_price: Gold
+            + 4 // sell_price: Gold
             + 4 // inventory_type: InventoryType
             + 4 // allowed_class: AllowedClass
             + 4 // allowed_race: AllowedRace
@@ -867,8 +867,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // quality: ItemQuality
         + 4 // flags: ItemFlag
         + 4 // flags2: ItemFlag2
-        + 8 // buy_price: Gold
-        + 8 // sell_price: Gold
+        + 4 // buy_price: Gold
+        + 4 // sell_price: Gold
         + 4 // inventory_type: InventoryType
         + 4 // allowed_class: AllowedClass
         + 4 // allowed_race: AllowedRace

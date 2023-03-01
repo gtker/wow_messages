@@ -106,7 +106,7 @@ impl CMSG_GUILD_RANK {
         4 // rank_id: u32
         + 4 // rights: u32
         + self.rank_name.len() + 1 // rank_name: CString
-        + 8 // money_per_day: Gold
+        + 4 // money_per_day: Gold
         + 6 * 8 // bank_tab_rights: GuildBankRights[6]
     }
 }

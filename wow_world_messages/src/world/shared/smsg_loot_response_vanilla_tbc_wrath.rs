@@ -142,7 +142,7 @@ impl SMSG_LOOT_RESPONSE {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + self.loot_method.size() // loot_method: SMSG_LOOT_RESPONSE_LootMethod
-        + 8 // gold: Gold
+        + 4 // gold: Gold
         + 1 // amount_of_items: u8
         + self.items.len() * 6 // items: LootItem[amount_of_items]
     }

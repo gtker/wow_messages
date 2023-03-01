@@ -310,7 +310,7 @@ impl Mail {
         + 4 // item_spell_charges: u32
         + 4 // max_durability: u32
         + 4 // durability: u32
-        + 8 // money: Gold
+        + 4 // money: Gold
         + 4 // cash_on_delivery_amount: u32
         + 4 // checked_timestamp: u32
         + 4 // expiration_time: f32

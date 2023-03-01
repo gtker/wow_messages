@@ -217,7 +217,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + self.choice_item_rewards.len() * 8 // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         + 4 // amount_of_item_rewards: u32
         + self.item_rewards.len() * 8 // item_rewards: QuestItemReward[amount_of_item_rewards]
-        + 8 // money_reward: Gold
+        + 4 // money_reward: Gold
         + 4 // reward_spell: u32
         + 4 // amount_of_emotes: u32
         + self.emotes.len() * 8 // emotes: QuestDetailsEmote[amount_of_emotes]

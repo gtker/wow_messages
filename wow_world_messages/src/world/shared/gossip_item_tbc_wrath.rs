@@ -107,7 +107,7 @@ impl GossipItem {
         4 // id: u32
         + 1 // item_icon: u8
         + 1 // coded: Bool
-        + 8 // money_required: Gold
+        + 4 // money_required: Gold
         + self.message.len() + 1 // message: CString
         + self.accept_text.len() + 1 // accept_text: CString
     }

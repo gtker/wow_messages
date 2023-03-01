@@ -398,7 +398,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + self.choice_item_rewards.len() * 12 // choice_item_rewards: QuestGiverReward[amount_of_choice_item_rewards]
         + 4 // amount_of_item_rewards: u32
         + self.item_rewards.len() * 12 // item_rewards: QuestGiverReward[amount_of_item_rewards]
-        + 8 // money_reward: Gold
+        + 4 // money_reward: Gold
         + 4 // experience_reward: u32
         + 4 // honor_reward: u32
         + 4 // honor_reward_multiplier: f32

@@ -175,7 +175,7 @@ impl CMSG_SEND_MAIL {
         + 4 // unknown1: u32
         + 4 // unknown2: u32
         + 8 // item: Guid
-        + 8 // money: Gold
+        + 4 // money: Gold
         + 4 // cash_on_delivery_amount: u32
         + 4 // unknown3: u32
         + 4 // unknown4: u32

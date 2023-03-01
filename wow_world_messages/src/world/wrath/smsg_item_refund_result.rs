@@ -165,7 +165,7 @@ impl SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
             } => {
                 1
                 + 4 // arena_point_cost: u32
-                + 8 // cost: Gold
+                + 4 // cost: Gold
                 + 5 * 8 // extra_items: ItemRefundExtra[5]
                 + 4 // honor_point_cost: u32
             }
