@@ -21,9 +21,9 @@ pub(crate) struct Stats {
 use crate::base_printer::write::items::all_items::all_items;
 use crate::base_printer::write::items::constructor::constructor;
 use crate::base_printer::write::items::definition::{definition, includes};
-use crate::base_printer::writer::Writer;
 use crate::base_printer::{Expansion, ImportFrom};
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
+use crate::rust_printer::Writer;
 use std::path::Path;
 
 pub struct GenericThing {
@@ -97,7 +97,7 @@ pub(crate) fn write_definition(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
-    let mut s = Writer::new();
+    let mut s = Writer::no_import();
 
     definition(&mut s, fields, arrays, expansion, ty_name, optimizations);
 
@@ -111,7 +111,7 @@ pub(crate) fn write_pub_use(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
-    let mut s = Writer::new();
+    let mut s = Writer::no_import();
     s.w("pub ");
 
     includes(
@@ -154,7 +154,7 @@ pub(crate) fn write_constructors(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
-    let mut s = Writer::new();
+    let mut s = Writer::no_import();
 
     constructor(&mut s, things, expansion, ty_name, optimizations);
 
@@ -169,7 +169,7 @@ pub(crate) fn write_things(
     unobtainable: impl Fn(&GenericThing) -> bool,
     optimizations: &Optimizations,
 ) {
-    let mut s = Writer::new();
+    let mut s = Writer::no_import();
 
     let (default_values, arrays) = get_default_values(things, optimizations);
     const_default_values(&mut s, &default_values);

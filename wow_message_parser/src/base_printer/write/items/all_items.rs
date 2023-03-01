@@ -2,8 +2,8 @@ use crate::base_printer::data::get_fields;
 use crate::base_printer::data::items::{ArrayInstances, IntegerSize, Optimizations, Value};
 use crate::base_printer::write::items::definition::includes;
 use crate::base_printer::write::items::GenericThing;
-use crate::base_printer::writer::Writer;
 use crate::base_printer::{Expansion, ImportFrom};
+use crate::rust_printer::Writer;
 use std::collections::BTreeMap;
 
 pub fn unobtainable_item(entry: u32, extra_flags: i32, name: &str) -> bool {

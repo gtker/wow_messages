@@ -93,6 +93,10 @@ impl Writer {
         }
     }
 
+    pub(crate) fn no_import() -> Self {
+        Self::new("")
+    }
+
     pub(crate) fn inner(&self) -> &str {
         &self.inner
     }
@@ -302,6 +306,69 @@ impl Writer {
 
         self.closing_curly();
         self.closing_curly_newline();
+    }
+
+    pub fn constructor(
+        &mut self,
+        name: impl AsRef<str>,
+        ty_name: impl AsRef<str>,
+        args: impl Fn(&mut Self),
+        body: impl Fn(&mut Self),
+    ) {
+        let ty_name = ty_name.as_ref();
+
+        self.wln(format!("pub const fn {}(", name.as_ref()));
+        self.inc_indent();
+
+        args(self);
+
+        self.dec_indent();
+        self.wln(format!(") -> {ty_name} {{"));
+        self.inc_indent();
+
+        self.wln(format!("{ty_name}::new("));
+        self.inc_indent();
+
+        body(self);
+
+        self.dec_indent();
+        self.wln(")");
+
+        self.closing_curly(); // fn body
+    }
+
+    pub fn pub_const_fn(
+        &mut self,
+        name: impl AsRef<str>,
+        return_ty: impl AsRef<str>,
+        f: impl Fn(&mut Self),
+    ) {
+        self.open_curly(format!(
+            "pub const fn {}(&self) -> {}",
+            name.as_ref(),
+            return_ty.as_ref()
+        ));
+
+        f(self);
+
+        self.closing_curly(); // fn body
+    }
+
+    pub fn pub_const_fn_new(&mut self, args: impl Fn(&mut Self), self_body: impl Fn(&mut Self)) {
+        self.wln("pub const fn new(");
+        self.inc_indent();
+
+        args(self);
+
+        self.dec_indent();
+        self.wln(") -> Self {");
+        self.inc_indent();
+
+        self.open_curly("Self");
+        self_body(self);
+        self.closing_curly(); // Self
+
+        self.closing_curly(); // fn body
     }
 
     pub(crate) fn funcn_const(

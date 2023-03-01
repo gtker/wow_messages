@@ -2,7 +2,6 @@ mod data;
 mod position;
 mod types;
 mod write;
-mod writer;
 
 use crate::base_printer::data::get_fields;
 use crate::base_printer::write::items::all_items::unobtainable_item;
