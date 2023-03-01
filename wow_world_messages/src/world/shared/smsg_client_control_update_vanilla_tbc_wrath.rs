@@ -61,7 +61,7 @@ impl crate::wrath::ServerMessage for SMSG_CLIENT_CONTROL_UPDATE {}
 
 impl SMSG_CLIENT_CONTROL_UPDATE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 1 // allow_movement: Bool
     }
 }

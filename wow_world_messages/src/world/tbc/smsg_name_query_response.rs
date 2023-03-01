@@ -158,7 +158,7 @@ impl crate::tbc::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
 
 impl SMSG_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + self.character_name.len() + 1 // character_name: CString
         + self.realm_name.len() + 1 // realm_name: CString
         + 4 // race: Race

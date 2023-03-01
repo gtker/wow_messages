@@ -72,8 +72,8 @@ impl crate::wrath::ServerMessage for SMSG_ATTACKSTOP {}
 
 impl SMSG_ATTACKSTOP {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
-        + self.enemy.size() // enemy: Guid
+        self.player.size() // player: PackedGuid
+        + self.enemy.size() // enemy: PackedGuid
         + 4 // unknown1: u32
     }
 }

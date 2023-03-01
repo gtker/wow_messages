@@ -65,7 +65,7 @@ impl crate::wrath::ServerMessage for SMSG_POWER_UPDATE {}
 
 impl SMSG_POWER_UPDATE {
     pub(crate) fn size(&self) -> usize {
-        self.unit.size() // unit: Guid
+        self.unit.size() // unit: PackedGuid
         + 1 // power: Power
         + 4 // amount: u32
     }

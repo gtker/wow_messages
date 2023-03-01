@@ -222,7 +222,7 @@ impl CMSG_PET_CAST_SPELL_ClientMovementData {
             } => {
                 1
                 + info.size() // info: MovementInfo
-                + movement.size() // movement: Guid
+                + movement.size() // movement: PackedGuid
                 + 4 // opcode: u32
             }
         }

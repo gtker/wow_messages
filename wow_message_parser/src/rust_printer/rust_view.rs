@@ -3,7 +3,6 @@ use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
-use crate::parser::types::parsed::parsed_ty::bool_ty_to_string;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
@@ -410,56 +409,53 @@ pub(crate) enum RustType {
 impl RustType {
     pub(crate) fn str(&self) -> String {
         match self {
-            RustType::Integer(i) => i.str().to_string(),
-            RustType::Floating(f) => f.str().to_string(),
-            RustType::String => "String".to_string(),
-            RustType::Array { array, .. } => array.str(),
             RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
             RustType::Struct { ty_name, .. } => ty_name.clone(),
-            RustType::CString => "CString".to_string(),
-            RustType::UpdateMask => "UpdateMask".to_string(),
-            RustType::AuraMask => "AuraMask".to_string(),
-            RustType::PackedGuid | RustType::Guid => "Guid".to_string(),
-            RustType::SizedCString => "SizedCString".to_string(),
-            RustType::Bool(i) => bool_ty_to_string(i),
-            RustType::DateTime => "DateTime".to_string(),
-            RustType::AchievementDoneArray => "AchievementDoneArray".to_string(),
-            RustType::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
-            RustType::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
-            RustType::EnchantMask => "EnchantMask".to_string(),
-            RustType::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
-            RustType::Gold => "Gold".to_string(),
-            RustType::Level => "Level".to_string(),
+            _ => self.to_type().str(),
         }
     }
 
     pub(crate) fn rust_str(&self) -> String {
-        self.to_string()
+        match self {
+            RustType::Enum { ty_name, .. } | RustType::Flag { ty_name, .. } => ty_name.clone(),
+            RustType::Struct { ty_name, .. } => ty_name.clone(),
+            _ => self.to_type().rust_str(),
+        }
+        .to_string()
+    }
+
+    pub(crate) fn to_type(&self) -> Type {
+        match self {
+            RustType::Integer(i) => Type::Integer(*i),
+            RustType::Bool(i) => Type::Bool(*i),
+            RustType::DateTime => Type::DateTime,
+            RustType::Floating(i) => Type::FloatingPoint(*i),
+            RustType::UpdateMask => Type::UpdateMask,
+            RustType::AuraMask => Type::AuraMask,
+            RustType::Guid => Type::Guid,
+            RustType::PackedGuid => Type::PackedGuid,
+            RustType::String => Type::String,
+            RustType::CString => Type::CString,
+            RustType::SizedCString => Type::SizedCString,
+            RustType::Array { array, .. } => Type::Array(array.clone()),
+            RustType::MonsterMoveSpline => Type::MonsterMoveSplines,
+            RustType::AchievementDoneArray => Type::AchievementDoneArray,
+            RustType::AchievementInProgressArray => Type::AchievementInProgressArray,
+            RustType::EnchantMask => Type::EnchantMask,
+            RustType::InspectTalentGearMask => Type::InspectTalentGearMask,
+            RustType::Gold => Type::Gold,
+            RustType::Level => Type::Level,
+
+            RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => {
+                panic!("invalid conversion")
+            }
+        }
     }
 }
 
 impl Display for RustType {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        match self {
-            RustType::Integer(i) => f.write_str(i.rust_str()),
-            RustType::Floating(i) => f.write_str(i.rust_str()),
-            RustType::SizedCString | RustType::String | RustType::CString => f.write_str("String"),
-            RustType::Array { array, .. } => f.write_str(&array.rust_str()),
-            RustType::Enum { ty_name, .. } | RustType::Flag { ty_name, .. } => f.write_str(ty_name),
-            RustType::Struct { ty_name, .. } => f.write_str(ty_name),
-            RustType::UpdateMask => f.write_str("UpdateMask"),
-            RustType::AuraMask => f.write_str("AuraMask"),
-            RustType::PackedGuid | RustType::Guid => f.write_str("Guid"),
-            RustType::Bool(_) => f.write_str("bool"),
-            RustType::DateTime => f.write_str("DateTime"),
-            RustType::AchievementDoneArray => f.write_str("AchievementDoneArray"),
-            RustType::AchievementInProgressArray => f.write_str("AchievementInProgressArray"),
-            RustType::MonsterMoveSpline => f.write_str("MonsterMoveSpline"),
-            RustType::EnchantMask => f.write_str("EnchantMask"),
-            RustType::InspectTalentGearMask => f.write_str("InspectTalentGearMask"),
-            RustType::Gold => f.write_str("Gold"),
-            RustType::Level => f.write_str("Level"),
-        }
+        f.write_str(&self.rust_str())
     }
 }
 
@@ -1269,7 +1265,7 @@ pub(crate) fn create_struct_member(
                 Type::SizedCString => RustType::SizedCString,
                 Type::AchievementDoneArray => RustType::AchievementDoneArray,
                 Type::AchievementInProgressArray => RustType::AchievementInProgressArray,
-                Type::MonsterMoveSpline => RustType::MonsterMoveSpline,
+                Type::MonsterMoveSplines => RustType::MonsterMoveSpline,
                 Type::EnchantMask => RustType::EnchantMask,
                 Type::InspectTalentGearMask => RustType::InspectTalentGearMask,
                 Type::Gold => RustType::Gold,

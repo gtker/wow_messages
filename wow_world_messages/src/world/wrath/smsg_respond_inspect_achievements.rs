@@ -68,7 +68,7 @@ impl crate::wrath::ServerMessage for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {}
 
 impl SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
         + self.done.size() // done: AchievementDoneArray
         + self.in_progress.size() // in_progress: AchievementInProgressArray
     }

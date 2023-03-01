@@ -60,7 +60,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
 
         // optional aura
         let current_size = {
-            unit.size() // unit: Guid
+            unit.size() // unit: PackedGuid
         };
         let aura = if current_size < body_size as usize {
             // slot: u8
@@ -97,7 +97,7 @@ impl crate::tbc::ServerMessage for SMSG_SET_EXTRA_AURA_INFO {}
 
 impl SMSG_SET_EXTRA_AURA_INFO {
     pub(crate) fn size(&self) -> usize {
-        self.unit.size() // unit: Guid
+        self.unit.size() // unit: PackedGuid
         + if let Some(aura) = &self.aura {
             1 // slot: u8
             + 4 // spell: u32

@@ -794,7 +794,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_Unit {
 
 impl SpellCastTargets_SpellCastTargetFlags_Unit {
     pub(crate) fn size(&self) -> usize {
-        self.unit_target.size() // unit_target: Guid
+        self.unit_target.size() // unit_target: PackedGuid
     }
 }
 
@@ -805,7 +805,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_Item {
 
 impl SpellCastTargets_SpellCastTargetFlags_Item {
     pub(crate) fn size(&self) -> usize {
-        self.item_target.size() // item_target: Guid
+        self.item_target.size() // item_target: PackedGuid
     }
 }
 

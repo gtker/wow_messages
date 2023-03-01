@@ -52,7 +52,7 @@ impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_SET_RUN_MODE {}
 
 impl SMSG_SPLINE_MOVE_SET_RUN_MODE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
     }
 }
 

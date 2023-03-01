@@ -111,8 +111,8 @@ impl crate::wrath::ServerMessage for SMSG_SPELLHEALLOG {}
 
 impl SMSG_SPELLHEALLOG {
     pub(crate) fn size(&self) -> usize {
-        self.victim.size() // victim: Guid
-        + self.caster.size() // caster: Guid
+        self.victim.size() // victim: PackedGuid
+        + self.caster.size() // caster: PackedGuid
         + 4 // id: u32
         + 4 // damage: u32
         + 4 // overheal: u32

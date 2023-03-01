@@ -3,11 +3,11 @@ use std::io;
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-pub struct MonsterMoveSpline {
+pub struct MonsterMoveSplines {
     pub splines: Vec<Vector3d>,
 }
 
-impl MonsterMoveSpline {
+impl MonsterMoveSplines {
     pub const fn new() -> Self {
         Self { splines: vec![] }
     }

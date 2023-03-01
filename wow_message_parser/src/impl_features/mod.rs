@@ -252,7 +252,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         }
         Type::AchievementDoneArray => f.add(Feature::AchievementDoneArrayType),
         Type::AchievementInProgressArray => f.add(Feature::AchievementInProgressType),
-        Type::MonsterMoveSpline => f.add(Feature::MonsterMoveSpline),
+        Type::MonsterMoveSplines => f.add(Feature::MonsterMoveSpline),
         Type::EnchantMask => f.add(Feature::EnchantMaskTypes),
         Type::InspectTalentGearMask => f.add(Feature::InspectTalentGearMaskTypes),
     }

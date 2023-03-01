@@ -2,7 +2,7 @@ use crate:: {
     Guid,
 };
 use crate::vanilla:: {
-    MonsterMoveSpline,
+    MonsterMoveSplines,
 };
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 use wow_world_base::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
@@ -28,7 +28,7 @@ use std::io::{Read, Write};
 ///     }
 ///     SplineFlag spline_flags;
 ///     u32 duration;
-///     MonsterMoveSpline splines;
+///     MonsterMoveSplines splines;
 /// }
 /// ```
 pub struct SMSG_MONSTER_MOVE {
@@ -38,7 +38,7 @@ pub struct SMSG_MONSTER_MOVE {
     pub move_type: SMSG_MONSTER_MOVE_MonsterMoveType,
     pub spline_flags: SplineFlag,
     pub duration: u32,
-    pub splines: MonsterMoveSpline,
+    pub splines: MonsterMoveSplines,
 }
 
 impl crate::Message for SMSG_MONSTER_MOVE {
@@ -93,7 +93,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         // duration: u32
         w.write_all(&self.duration.to_le_bytes())?;
 
-        // splines: MonsterMoveSpline
+        // splines: MonsterMoveSplines
         self.splines.write_into_vec(&mut w)?;
 
         Ok(())
@@ -150,8 +150,8 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         // duration: u32
         let duration = crate::util::read_u32_le(&mut r)?;
 
-        // splines: MonsterMoveSpline
-        let splines = MonsterMoveSpline::read(&mut r)?;
+        // splines: MonsterMoveSplines
+        let splines = MonsterMoveSplines::read(&mut r)?;
 
         Ok(Self {
             guid,
@@ -173,13 +173,13 @@ impl crate::tbc::ServerMessage for SMSG_MONSTER_MOVE {}
 
 impl SMSG_MONSTER_MOVE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 12 // spline_point: Vector3d
         + 4 // spline_id: u32
         + self.move_type.size() // move_type: SMSG_MONSTER_MOVE_MonsterMoveType
         + 4 // spline_flags: SplineFlag
         + 4 // duration: u32
-        + self.splines.size() // splines: MonsterMoveSpline
+        + self.splines.size() // splines: MonsterMoveSplines
     }
 }
 

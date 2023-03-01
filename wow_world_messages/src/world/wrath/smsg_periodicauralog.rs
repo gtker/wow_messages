@@ -89,8 +89,8 @@ impl crate::wrath::ServerMessage for SMSG_PERIODICAURALOG {}
 
 impl SMSG_PERIODICAURALOG {
     pub(crate) fn size(&self) -> usize {
-        self.target.size() // target: Guid
-        + self.caster.size() // caster: Guid
+        self.target.size() // target: PackedGuid
+        + self.caster.size() // caster: PackedGuid
         + 4 // spell: u32
         + 4 // amount_of_auras: u32
         + self.auras.iter().fold(0, |acc, x| acc + x.size()) // auras: AuraLog[amount_of_auras]

@@ -125,7 +125,7 @@ impl crate::wrath::ServerMessage for SMSG_INSPECT_TALENT {}
 
 impl SMSG_INSPECT_TALENT {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
         + 4 // unspent_talent_points: u32
         + 1 // amount_of_specs: u8
         + 1 // active_spec: u8

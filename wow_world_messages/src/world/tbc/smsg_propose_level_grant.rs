@@ -46,7 +46,7 @@ impl crate::tbc::ServerMessage for SMSG_PROPOSE_LEVEL_GRANT {}
 
 impl SMSG_PROPOSE_LEVEL_GRANT {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
     }
 }
 

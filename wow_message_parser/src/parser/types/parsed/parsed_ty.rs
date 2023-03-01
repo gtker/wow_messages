@@ -8,6 +8,7 @@ use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GUID_SIZE,
     PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
+use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
 use crate::{
     CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED,
@@ -36,7 +37,7 @@ pub(crate) enum ParsedType {
     },
     UpdateMask,
     AuraMask,
-    MonsterMoveSplines,
+    MonsterMoveSpline,
     AchievementDoneArray,
     AchievementInProgressArray,
     EnchantMask,
@@ -49,25 +50,53 @@ impl ParsedType {
     pub(crate) fn str(&self) -> String {
         match self {
             ParsedType::Integer(i) => i.str().to_string(),
-            ParsedType::CString => "CString".to_string(),
-            ParsedType::String => "String".to_string(),
+            ParsedType::CString => Type::C_STRING_NAME.to_string(),
+            ParsedType::String => Type::STRING_NAME.to_string(),
             ParsedType::Array(a) => a.str(),
             ParsedType::Identifier { s, .. } => s.clone(),
             ParsedType::FloatingPoint(i) => i.str().to_string(),
-            ParsedType::PackedGuid => "PackedGuid".to_string(),
-            ParsedType::Guid => "Guid".to_string(),
-            ParsedType::UpdateMask => "UpdateMask".to_string(),
-            ParsedType::AuraMask => "AuraMask".to_string(),
-            ParsedType::SizedCString => "SizedCString".to_string(),
+            ParsedType::PackedGuid => Type::PACKED_GUID_NAME.to_string(),
+            ParsedType::Guid => Type::GUID_NAME.to_string(),
+            ParsedType::UpdateMask => Type::UPDATE_MASK_NAME.to_string(),
+            ParsedType::AuraMask => Type::AURA_MASK_NAME.to_string(),
+            ParsedType::SizedCString => Type::SIZED_C_STRING_NAME.to_string(),
             ParsedType::Bool(i) => bool_ty_to_string(i),
-            ParsedType::DateTime => "DateTime".to_string(),
-            ParsedType::AchievementDoneArray => "AchievementDoneArray".to_string(),
-            ParsedType::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
-            ParsedType::MonsterMoveSplines => "MonsterMoveSplines".to_string(),
-            ParsedType::EnchantMask => "EnchantMask".to_string(),
-            ParsedType::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
-            ParsedType::Gold => "Gold".to_string(),
-            ParsedType::Level => "Level".to_string(),
+            ParsedType::DateTime => Type::DATE_TIME_NAME.to_string(),
+            ParsedType::AchievementDoneArray => Type::ACHIEVEMENT_DONE_ARRAY_NAME.to_string(),
+            ParsedType::AchievementInProgressArray => {
+                Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME.to_string()
+            }
+            ParsedType::MonsterMoveSpline => Type::MONSTER_MOVE_SPLINES_NAME.to_string(),
+            ParsedType::EnchantMask => Type::ENCHANT_MASK_NAME.to_string(),
+            ParsedType::InspectTalentGearMask => Type::INSPECT_TALENT_GEAR_MASK_NAME.to_string(),
+            ParsedType::Gold => Type::GOLD_NAME.to_string(),
+            ParsedType::Level => Type::LEVEL_NAME.to_string(),
+        }
+    }
+
+    pub(crate) fn rust_str(&self) -> String {
+        match self {
+            ParsedType::Integer(i) => i.rust_str().to_string(),
+            ParsedType::SizedCString | ParsedType::CString | ParsedType::String => {
+                Type::STRINGS_RUST_NAME.to_string()
+            }
+            ParsedType::Array(a) => a.rust_str(),
+            ParsedType::Identifier { s, .. } => s.clone(),
+            ParsedType::FloatingPoint(i) => i.rust_str().to_string(),
+            ParsedType::Guid | ParsedType::PackedGuid => Type::GUIDS_RUST_NAME.to_string(),
+            ParsedType::UpdateMask => Type::UPDATE_MASK_NAME.to_string(),
+            ParsedType::AuraMask => Type::AURA_MASK_NAME.to_string(),
+            ParsedType::Bool(_) => Type::BOOLS_RUST_NAME.to_string(),
+            ParsedType::DateTime => Type::DATE_TIME_NAME.to_string(),
+            ParsedType::AchievementDoneArray => Type::ACHIEVEMENT_DONE_ARRAY_NAME.to_string(),
+            ParsedType::AchievementInProgressArray => {
+                Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME.to_string()
+            }
+            ParsedType::MonsterMoveSpline => Type::MONSTER_MOVE_SPLINES_NAME.to_string(),
+            ParsedType::EnchantMask => Type::ENCHANT_MASK_NAME.to_string(),
+            ParsedType::InspectTalentGearMask => Type::INSPECT_TALENT_GEAR_MASK_NAME.to_string(),
+            ParsedType::Gold => Type::GOLD_NAME.to_string(),
+            ParsedType::Level => Type::LEVEL_NAME.to_string(),
         }
     }
 
@@ -179,7 +208,7 @@ impl ParsedType {
             ParsedType::AchievementDoneArray | ParsedType::AchievementInProgressArray => {
                 sizes.inc(0, usize::MAX);
             }
-            ParsedType::MonsterMoveSplines => {
+            ParsedType::MonsterMoveSpline => {
                 sizes.inc(
                     MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
                     MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
@@ -230,20 +259,11 @@ impl ParsedType {
             "Bool16" => Self::Bool(IntegerType::U16(Endianness::Little)),
             "Bool32" => Self::Bool(IntegerType::U32(Endianness::Little)),
             "Bool64" => Self::Bool(IntegerType::U64(Endianness::Little)),
-            "Item16" | "Spell16" | "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
-            "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
-            "Level" => Self::Level,
-            "Spell" | "Milliseconds" | "Seconds" | "Item" => {
-                Self::Integer(IntegerType::U32(Endianness::Little))
-            }
-            "Gold" => Self::Gold,
-            "u64" => Self::Integer(IntegerType::U64(Endianness::Little)),
-            "Guid" => Self::Guid,
-            "PackedGuid" => Self::PackedGuid,
-            "AuraMask" => Self::AuraMask,
-            "UpdateMask" => Self::UpdateMask,
             "u16_be" => Self::Integer(IntegerType::U16(Endianness::Big)),
+            "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             "u32_be" => Self::Integer(IntegerType::U32(Endianness::Big)),
+            "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
+            "u64" => Self::Integer(IntegerType::U64(Endianness::Little)),
             "u64_be" => Self::Integer(IntegerType::U64(Endianness::Big)),
             "i8" => Self::Integer(IntegerType::I8),
             "i16" => Self::Integer(IntegerType::I16(Endianness::Little)),
@@ -256,15 +276,26 @@ impl ParsedType {
             "f32_be" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Big)),
             "f64" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Little)),
             "f64_be" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Big)),
-            "CString" => Self::CString,
-            "SizedCString" => Self::SizedCString,
-            "DateTime" => Self::DateTime,
-            "String" => Self::String,
-            "MonsterMoveSplines" => Self::MonsterMoveSplines,
-            "AchievementDoneArray" => Self::AchievementDoneArray,
-            "AchievementInProgressArray" => Self::AchievementInProgressArray,
-            "EnchantMask" => Self::EnchantMask,
-            "InspectTalentGearMask" => Self::InspectTalentGearMask,
+
+            "Item16" | "Spell16" => Self::Integer(IntegerType::U16(Endianness::Little)),
+            Type::LEVEL_NAME => Self::Level,
+            Type::SPELL_NAME | "Milliseconds" | "Seconds" | "Item" => {
+                Self::Integer(IntegerType::U32(Endianness::Little))
+            }
+            Type::GOLD_NAME => Self::Gold,
+            Type::GUID_NAME => Self::Guid,
+            Type::PACKED_GUID_NAME => Self::PackedGuid,
+            Type::AURA_MASK_NAME => Self::AuraMask,
+            Type::UPDATE_MASK_NAME => Self::UpdateMask,
+            Type::C_STRING_NAME => Self::CString,
+            Type::SIZED_C_STRING_NAME => Self::SizedCString,
+            Type::DATE_TIME_NAME => Self::DateTime,
+            Type::STRING_NAME => Self::String,
+            Type::MONSTER_MOVE_SPLINES_NAME => Self::MonsterMoveSpline,
+            Type::ACHIEVEMENT_DONE_ARRAY_NAME => Self::AchievementDoneArray,
+            Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME => Self::AchievementInProgressArray,
+            Type::ENCHANT_MASK_NAME => Self::EnchantMask,
+            Type::INSPECT_TALENT_GEAR_MASK_NAME => Self::InspectTalentGearMask,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,
@@ -304,7 +335,7 @@ impl ParsedType {
                         | ParsedType::InspectTalentGearMask
                         | ParsedType::AchievementDoneArray
                         | ParsedType::AchievementInProgressArray
-                        | ParsedType::MonsterMoveSplines
+                        | ParsedType::MonsterMoveSpline
                         | ParsedType::SizedCString
                         | ParsedType::String { .. }
                         | ParsedType::Array(_)

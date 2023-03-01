@@ -19,6 +19,15 @@ impl ParsedArrayType {
             ParsedArrayType::PackedGuid => "PackedGuid".to_string(),
         }
     }
+
+    pub(crate) fn rust_str(&self) -> String {
+        match self {
+            ParsedArrayType::Integer(i) => i.rust_str().to_string(),
+            ParsedArrayType::Complex(i) => i.clone(),
+            ParsedArrayType::CString => "String".to_string(),
+            ParsedArrayType::PackedGuid | ParsedArrayType::Guid => "Guid".to_string(),
+        }
+    }
 }
 
 #[derive(Debug, Eq, PartialEq, Clone)]
@@ -66,5 +75,14 @@ impl ParsedArray {
 
     pub(crate) fn str(&self) -> String {
         format!("{}[{}]", self.inner.str(), self.size.str())
+    }
+
+    pub(crate) fn rust_str(&self) -> String {
+        match &self.size {
+            ParsedArraySize::Fixed(i) => format!("[{}; {}]", self.inner.rust_str(), i),
+            ParsedArraySize::Variable(_) | ParsedArraySize::Endless => {
+                format!("Vec<{}>", self.inner.rust_str())
+            }
+        }
     }
 }

@@ -365,7 +365,7 @@ fn print_read_definition(
         | Type::AuraMask
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray
-        | Type::MonsterMoveSpline
+        | Type::MonsterMoveSplines
         | Type::EnchantMask
         | Type::InspectTalentGearMask => {
             s.wln(format!(

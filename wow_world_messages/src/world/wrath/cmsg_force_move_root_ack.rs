@@ -65,7 +65,7 @@ impl crate::wrath::ClientMessage for CMSG_FORCE_MOVE_ROOT_ACK {}
 
 impl CMSG_FORCE_MOVE_ROOT_ACK {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // movement_counter: u32
         + self.info.size() // info: MovementInfo
     }

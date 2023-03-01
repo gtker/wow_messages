@@ -104,7 +104,7 @@ impl crate::wrath::ClientMessage for CMSG_EQUIPMENT_SET_SAVE {}
 
 impl CMSG_EQUIPMENT_SET_SAVE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // index: u32
         + self.name.len() + 1 // name: CString
         + self.icon_name.len() + 1 // icon_name: CString

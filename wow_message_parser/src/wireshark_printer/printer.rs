@@ -417,7 +417,7 @@ fn print_definition(
         Type::UpdateMask => {
             s.wln("add_update_mask(ptv, pinfo);");
         }
-        Type::MonsterMoveSpline => {
+        Type::MonsterMoveSplines => {
             s.wln("add_monster_move_spline(ptv);");
         }
         Type::String { .. } => unreachable!("Strings are only in login messages"),

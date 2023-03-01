@@ -46,7 +46,7 @@ impl crate::tbc::ServerMessage for SMSG_SPLINE_MOVE_UNSET_FLYING {}
 
 impl SMSG_SPLINE_MOVE_UNSET_FLYING {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
     }
 }
 

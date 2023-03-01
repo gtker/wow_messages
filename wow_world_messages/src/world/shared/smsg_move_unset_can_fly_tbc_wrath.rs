@@ -58,7 +58,7 @@ impl crate::wrath::ServerMessage for SMSG_MOVE_UNSET_CAN_FLY {}
 
 impl SMSG_MOVE_UNSET_CAN_FLY {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
         + 4 // counter: u32
     }
 }

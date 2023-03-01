@@ -70,7 +70,7 @@ impl crate::wrath::ServerMessage for SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE {}
 
 impl SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // move_event: u32
         + 4 // speed: f32
     }

@@ -108,7 +108,7 @@ impl crate::wrath::ServerMessage for SMSG_MOVE_KNOCK_BACK {}
 
 impl SMSG_MOVE_KNOCK_BACK {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // movement_counter: u32
         + 4 // v_cos: f32
         + 4 // v_sin: f32

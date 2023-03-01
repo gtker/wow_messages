@@ -55,7 +55,7 @@ impl CalendarInvitee {
 
 impl CalendarInvitee {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 1 // status: u8
         + 1 // rank: u8
     }

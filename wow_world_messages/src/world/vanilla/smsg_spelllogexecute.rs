@@ -80,7 +80,7 @@ impl crate::vanilla::ServerMessage for SMSG_SPELLLOGEXECUTE {}
 
 impl SMSG_SPELLLOGEXECUTE {
     pub(crate) fn size(&self) -> usize {
-        self.caster.size() // caster: Guid
+        self.caster.size() // caster: PackedGuid
         + 4 // spell: u32
         + 4 // amount_of_effects: u32
         + self.logs.iter().fold(0, |acc, x| acc + x.size()) // logs: SpellLog[amount_of_effects]

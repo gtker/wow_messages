@@ -46,7 +46,7 @@ impl crate::wrath::ClientMessage for CMSG_ACCEPT_LEVEL_GRANT {}
 
 impl CMSG_ACCEPT_LEVEL_GRANT {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
     }
 }
 

@@ -197,7 +197,7 @@ impl WiresharkType {
                 ArrayType::CString => Self::String,
                 ArrayType::PackedGuid | ArrayType::Guid => Self::Integer(IntegerType::U64(Little)),
             },
-            Type::MonsterMoveSpline | Type::AuraMask | Type::UpdateMask => return None,
+            Type::MonsterMoveSplines | Type::AuraMask | Type::UpdateMask => return None,
             Type::AchievementDoneArray | Type::AchievementInProgressArray => {
                 unreachable!("achievement arrays are only in 3.3.5")
             }

@@ -106,8 +106,8 @@ impl crate::wrath::ServerMessage for SMSG_CRITERIA_UPDATE {}
 impl SMSG_CRITERIA_UPDATE {
     pub(crate) fn size(&self) -> usize {
         4 // achievement: u32
-        + self.progress_counter.size() // progress_counter: Guid
-        + self.player.size() // player: Guid
+        + self.progress_counter.size() // progress_counter: PackedGuid
+        + self.player.size() // player: PackedGuid
         + 4 // flags: u32
         + 4 // time: DateTime
         + 4 // time_elapsed_in_seconds: u32

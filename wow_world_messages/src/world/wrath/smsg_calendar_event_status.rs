@@ -101,7 +101,7 @@ impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_STATUS {}
 
 impl SMSG_CALENDAR_EVENT_STATUS {
     pub(crate) fn size(&self) -> usize {
-        self.invitee.size() // invitee: Guid
+        self.invitee.size() // invitee: PackedGuid
         + 8 // event_id: Guid
         + 4 // event_time: DateTime
         + 4 // flags: u32

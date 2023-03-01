@@ -22,7 +22,7 @@ struct MonsterMove {
     if (move_type != STOP) {
         SplineFlag spline_flags;
         u32 duration;
-        MonsterMoveSpline splines;
+        MonsterMoveSplines splines;
     }
 }
 ```

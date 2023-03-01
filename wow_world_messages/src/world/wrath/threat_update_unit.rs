@@ -46,7 +46,7 @@ impl ThreatUpdateUnit {
 
 impl ThreatUpdateUnit {
     pub(crate) fn size(&self) -> usize {
-        self.unit.size() // unit: Guid
+        self.unit.size() // unit: PackedGuid
         + 4 // threat: u32
     }
 }

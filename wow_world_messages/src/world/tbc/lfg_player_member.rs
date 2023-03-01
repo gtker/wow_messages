@@ -46,7 +46,7 @@ impl LfgPlayerMember {
 
 impl LfgPlayerMember {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // level: u32
     }
 }

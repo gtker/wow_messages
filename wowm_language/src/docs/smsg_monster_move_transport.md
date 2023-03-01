@@ -23,7 +23,7 @@ smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
     }
     SplineFlag spline_flags;
     u32 duration;
-    MonsterMoveSpline splines;
+    MonsterMoveSplines splines;
 }
 ```
 ### Header
@@ -102,7 +102,7 @@ smsg SMSG_MONSTER_MOVE_TRANSPORT = 0x02AE {
         f32 vertical_acceleration;
         u32 effect_start_time;
     }
-    MonsterMoveSpline splines;
+    MonsterMoveSplines splines;
 }
 ```
 ### Header

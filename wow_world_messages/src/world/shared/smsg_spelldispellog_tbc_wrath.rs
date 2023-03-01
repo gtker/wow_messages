@@ -103,8 +103,8 @@ impl crate::wrath::ServerMessage for SMSG_SPELLDISPELLOG {}
 
 impl SMSG_SPELLDISPELLOG {
     pub(crate) fn size(&self) -> usize {
-        self.victim.size() // victim: Guid
-        + self.caster.size() // caster: Guid
+        self.victim.size() // victim: PackedGuid
+        + self.caster.size() // caster: PackedGuid
         + 4 // dispell_spell: u32
         + 1 // unknown: u8
         + 4 // amount_of_spells: u32

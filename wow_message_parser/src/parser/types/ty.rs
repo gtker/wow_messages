@@ -1,7 +1,7 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::TypeImport;
 use crate::parser::types::definer::Definer;
-use crate::parser::types::parsed::parsed_ty::bool_ty_to_string;
+use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GUID_SIZE,
     PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
@@ -41,7 +41,7 @@ pub(crate) enum Type {
         e: Container,
     },
     UpdateMask,
-    MonsterMoveSpline,
+    MonsterMoveSplines,
     AuraMask,
     AchievementDoneArray,
     AchievementInProgressArray,
@@ -52,57 +52,73 @@ pub(crate) enum Type {
 }
 
 impl Type {
+    pub(crate) const SPELL_NAME: &'static str = "Spell";
+    pub(crate) const LEVEL_NAME: &'static str = "Level";
+    pub(crate) const GOLD_NAME: &'static str = "Gold";
+    pub(crate) const GUID_NAME: &'static str = "Guid";
+    pub(crate) const PACKED_GUID_NAME: &'static str = "PackedGuid";
+    pub(crate) const AURA_MASK_NAME: &'static str = "AuraMask";
+    pub(crate) const UPDATE_MASK_NAME: &'static str = "UpdateMask";
+    pub(crate) const DATE_TIME_NAME: &'static str = "DateTime";
+    pub(crate) const C_STRING_NAME: &'static str = "CString";
+    pub(crate) const SIZED_C_STRING_NAME: &'static str = "SizedCString";
+    pub(crate) const STRING_NAME: &'static str = "String";
+    pub(crate) const MONSTER_MOVE_SPLINES_NAME: &'static str = "MonsterMoveSplines";
+    pub(crate) const ACHIEVEMENT_DONE_ARRAY_NAME: &'static str = "AchievementDoneArray";
+    pub(crate) const ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME: &'static str =
+        "AchievementInProgressArray";
+    pub(crate) const ENCHANT_MASK_NAME: &'static str = "EnchantMask";
+    pub(crate) const INSPECT_TALENT_GEAR_MASK_NAME: &'static str = "InspectTalentGearMask";
+
+    pub(crate) const STRINGS_RUST_NAME: &'static str = "String";
+    pub(crate) const GUIDS_RUST_NAME: &'static str = "Guid";
+    pub(crate) const BOOLS_RUST_NAME: &'static str = "bool";
+
     pub(crate) fn str(&self) -> String {
         match self {
-            Type::Integer(i) => i.str().to_string(),
-            Type::CString => "CString".to_string(),
-            Type::String => "String".to_string(),
-            Type::Array(a) => a.str(),
+            Type::Array(s) => s.str(),
             Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
-            Type::Struct { e, .. } => e.name().to_string(),
-            Type::FloatingPoint(i) => i.str().to_string(),
-            Type::PackedGuid => "PackedGuid".to_string(),
-            Type::Guid => "Guid".to_string(),
-            Type::UpdateMask => "UpdateMask".to_string(),
-            Type::AuraMask => "AuraMask".to_string(),
-            Type::SizedCString => "SizedCString".to_string(),
-            Type::Bool(i) => bool_ty_to_string(i),
-            Type::DateTime => "DateTime".to_string(),
-            Type::AchievementDoneArray => "AchievementDoneArray".to_string(),
-            Type::AchievementInProgressArray => "AchievementInProgressArray".to_string(),
-            Type::MonsterMoveSpline => "MonsterMoveSpline".to_string(),
-            Type::EnchantMask => "EnchantMask".to_string(),
-            Type::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
-            Type::Gold => "Gold".to_string(),
-            Type::Level => "Level".to_string(),
+            Type::Struct { e } => e.name().to_string(),
+
+            _ => self.to_parsed_type().str(),
         }
     }
 
     pub(crate) fn rust_str(&self) -> String {
-        let s = match self {
-            Type::Integer(i) => i.rust_str().to_string(),
-            Type::FloatingPoint(i) => i.rust_str().to_string(),
+        match self {
+            Type::Array(s) => s.rust_str(),
             Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
-            Type::CString | Type::SizedCString | Type::String { .. } => "String".to_string(),
-            Type::PackedGuid | Type::Guid => "Guid".to_string(),
-            Type::Bool(_) => "bool".to_string(),
+            Type::Struct { e } => e.name().to_string(),
 
-            Type::Array(a) => a.rust_str(),
+            _ => self.to_parsed_type().rust_str(),
+        }
+    }
 
-            Type::Level
-            | Type::Struct { .. }
-            | Type::UpdateMask
-            | Type::AuraMask
-            | Type::DateTime
-            | Type::AchievementDoneArray
-            | Type::AchievementInProgressArray
-            | Type::MonsterMoveSpline
-            | Type::EnchantMask
-            | Type::InspectTalentGearMask
-            | Type::Gold => self.str(),
-        };
+    fn to_parsed_type(&self) -> ParsedType {
+        match self {
+            Type::Integer(i) => ParsedType::Integer(*i),
+            Type::Bool(i) => ParsedType::Bool(*i),
+            Type::PackedGuid => ParsedType::PackedGuid,
+            Type::Guid => ParsedType::Guid,
+            Type::DateTime => ParsedType::DateTime,
+            Type::FloatingPoint(i) => ParsedType::FloatingPoint(*i),
+            Type::CString => ParsedType::CString,
+            Type::SizedCString => ParsedType::SizedCString,
+            Type::String => ParsedType::String,
+            Type::UpdateMask => ParsedType::UpdateMask,
+            Type::MonsterMoveSplines => ParsedType::MonsterMoveSpline,
+            Type::AuraMask => ParsedType::AuraMask,
+            Type::AchievementDoneArray => ParsedType::AchievementDoneArray,
+            Type::AchievementInProgressArray => ParsedType::AchievementInProgressArray,
+            Type::EnchantMask => ParsedType::EnchantMask,
+            Type::InspectTalentGearMask => ParsedType::InspectTalentGearMask,
+            Type::Gold => ParsedType::Gold,
+            Type::Level => ParsedType::Level,
 
-        s
+            Type::Array(_) | Type::Enum { .. } | Type::Flag { .. } | Type::Struct { .. } => {
+                panic!("invalid conversion")
+            }
+        }
     }
 
     pub(crate) fn is_importable_type(&self) -> Option<TypeImport> {
@@ -124,7 +140,7 @@ impl Type {
 
             Type::Level
             | Type::Gold
-            | Type::MonsterMoveSpline
+            | Type::MonsterMoveSplines
             | Type::AuraMask
             | Type::AchievementDoneArray
             | Type::AchievementInProgressArray
@@ -215,7 +231,7 @@ impl Type {
             Type::AchievementDoneArray | Type::AchievementInProgressArray => {
                 sizes.inc(0, usize::MAX);
             }
-            Type::MonsterMoveSpline => {
+            Type::MonsterMoveSplines => {
                 sizes.inc(
                     MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
                     MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
@@ -261,7 +277,7 @@ impl Type {
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
             Type::EnchantMask
             | Type::InspectTalentGearMask
-            | Type::MonsterMoveSpline
+            | Type::MonsterMoveSplines
             | Type::SizedCString
             | Type::AchievementDoneArray
             | Type::AchievementInProgressArray

@@ -46,7 +46,7 @@ impl crate::Message for SMSG_AURA_UPDATE_ALL {
         // aura_updates: AuraUpdate[-]
         let aura_updates = {
             let mut current_size = {
-                unit.size() // unit: Guid
+                unit.size() // unit: PackedGuid
             };
             let mut aura_updates = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
@@ -68,7 +68,7 @@ impl crate::wrath::ServerMessage for SMSG_AURA_UPDATE_ALL {}
 
 impl SMSG_AURA_UPDATE_ALL {
     pub(crate) fn size(&self) -> usize {
-        self.unit.size() // unit: Guid
+        self.unit.size() // unit: PackedGuid
         + self.aura_updates.iter().fold(0, |acc, x| acc + x.size()) // aura_updates: AuraUpdate[-]
     }
 }

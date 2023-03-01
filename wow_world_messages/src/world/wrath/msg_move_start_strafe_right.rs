@@ -59,7 +59,7 @@ impl crate::wrath::ServerMessage for MSG_MOVE_START_STRAFE_RIGHT {}
 
 impl MSG_MOVE_START_STRAFE_RIGHT {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }
 }

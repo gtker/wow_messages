@@ -1200,7 +1200,7 @@ impl SpellLog_SpellEffect {
                 + 4 // amount: u32
                 + 4 // multiplier: f32
                 + 4 // power: Power
-                + target1.size() // target1: Guid
+                + target1.size() // target1: PackedGuid
             }
             Self::HealthLeech => {
                 4
@@ -1233,7 +1233,7 @@ impl SpellLog_SpellEffect {
                 resurrect_guid,
             } => {
                 4
-                + resurrect_guid.size() // resurrect_guid: Guid
+                + resurrect_guid.size() // resurrect_guid: PackedGuid
             }
             Self::AddExtraAttacks {
                 extra_attacks,
@@ -1241,7 +1241,7 @@ impl SpellLog_SpellEffect {
             } => {
                 4
                 + 4 // extra_attacks: u32
-                + target4.size() // target4: Guid
+                + target4.size() // target4: PackedGuid
             }
             Self::Dodge => {
                 4
@@ -1274,7 +1274,7 @@ impl SpellLog_SpellEffect {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::Leap => {
                 4
@@ -1292,7 +1292,7 @@ impl SpellLog_SpellEffect {
                 lock_target,
             } => {
                 4
-                + lock_target.size() // lock_target: Guid
+                + lock_target.size() // lock_target: PackedGuid
             }
             Self::SummonChangeItem => {
                 4
@@ -1346,7 +1346,7 @@ impl SpellLog_SpellEffect {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::ForceCriticalHit => {
                 4
@@ -1367,7 +1367,7 @@ impl SpellLog_SpellEffect {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::LearnPetSpell => {
                 4
@@ -1408,7 +1408,7 @@ impl SpellLog_SpellEffect {
             } => {
                 4
                 + 4 // interrupted_spell: u32
-                + target5.size() // target5: Guid
+                + target5.size() // target5: PackedGuid
             }
             Self::Distract => {
                 4
@@ -1435,7 +1435,7 @@ impl SpellLog_SpellEffect {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::ScriptEffect => {
                 4
@@ -1453,7 +1453,7 @@ impl SpellLog_SpellEffect {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::BindSight => {
                 4
@@ -1462,7 +1462,7 @@ impl SpellLog_SpellEffect {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::Stuck => {
                 4
@@ -1519,13 +1519,13 @@ impl SpellLog_SpellEffect {
                 pet_feed_guid,
             } => {
                 4
-                + pet_feed_guid.size() // pet_feed_guid: Guid
+                + pet_feed_guid.size() // pet_feed_guid: PackedGuid
             }
             Self::DismissPet {
                 pet_dismiss_guid,
             } => {
                 4
-                + pet_dismiss_guid.size() // pet_dismiss_guid: Guid
+                + pet_dismiss_guid.size() // pet_dismiss_guid: PackedGuid
             }
             Self::Reputation => {
                 4
@@ -1534,25 +1534,25 @@ impl SpellLog_SpellEffect {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::SummonObjectSlot2 {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::SummonObjectSlot3 {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::SummonObjectSlot4 {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: Guid
+                + summon_target.size() // summon_target: PackedGuid
             }
             Self::DispelMechanic => {
                 4
@@ -1570,7 +1570,7 @@ impl SpellLog_SpellEffect {
             } => {
                 4
                 + 4 // item_to_damage: u32
-                + target6.size() // target6: Guid
+                + target6.size() // target6: PackedGuid
                 + 4 // unknown5: u32
             }
             Self::Unknown112 => {
@@ -1580,7 +1580,7 @@ impl SpellLog_SpellEffect {
                 resurrect_guid,
             } => {
                 4
-                + resurrect_guid.size() // resurrect_guid: Guid
+                + resurrect_guid.size() // resurrect_guid: PackedGuid
             }
             Self::AttackMe => {
                 4

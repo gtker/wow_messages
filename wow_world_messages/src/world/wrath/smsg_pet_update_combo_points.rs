@@ -64,8 +64,8 @@ impl crate::wrath::ServerMessage for SMSG_PET_UPDATE_COMBO_POINTS {}
 
 impl SMSG_PET_UPDATE_COMBO_POINTS {
     pub(crate) fn size(&self) -> usize {
-        self.unit.size() // unit: Guid
-        + self.target.size() // target: Guid
+        self.unit.size() // unit: PackedGuid
+        + self.target.size() // target: PackedGuid
         + 1 // combo_points: u8
     }
 }

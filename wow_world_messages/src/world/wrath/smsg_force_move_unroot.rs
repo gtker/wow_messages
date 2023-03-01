@@ -55,7 +55,7 @@ impl crate::wrath::ServerMessage for SMSG_FORCE_MOVE_UNROOT {}
 
 impl SMSG_FORCE_MOVE_UNROOT {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // counter: u32
     }
 }

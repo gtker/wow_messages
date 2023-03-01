@@ -771,7 +771,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_Unit {
 
 impl SpellCastTargets_SpellCastTargetFlags_Unit {
     pub(crate) fn size(&self) -> usize {
-        self.unit_target.size() // unit_target: Guid
+        self.unit_target.size() // unit_target: PackedGuid
     }
 }
 
@@ -782,7 +782,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_Item {
 
 impl SpellCastTargets_SpellCastTargetFlags_Item {
     pub(crate) fn size(&self) -> usize {
-        self.item_target.size() // item_target: Guid
+        self.item_target.size() // item_target: PackedGuid
     }
 }
 
@@ -815,7 +815,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_Gameobject {
 
 impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
     pub(crate) fn size(&self) -> usize {
-        self.object_target.size() // object_target: Guid
+        self.object_target.size() // object_target: PackedGuid
     }
 }
 
@@ -837,7 +837,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
 
 impl SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
     pub(crate) fn size(&self) -> usize {
-        self.corpse_target_ally.size() // corpse_target_ally: Guid
+        self.corpse_target_ally.size() // corpse_target_ally: PackedGuid
     }
 }
 

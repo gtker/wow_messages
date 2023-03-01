@@ -499,7 +499,7 @@ impl crate::tbc::ServerMessage for SMSG_PARTY_MEMBER_STATS {}
 
 impl SMSG_PARTY_MEMBER_STATS {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags
     }
 }

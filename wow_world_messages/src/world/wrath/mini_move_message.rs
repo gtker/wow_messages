@@ -66,7 +66,7 @@ impl MiniMoveMessage {
     pub(crate) fn size(&self) -> usize {
         1 // size: u8
         + 2 // opcode: MiniMoveOpcode
-        + self.guid.size() // guid: Guid
+        + self.guid.size() // guid: PackedGuid
         + 4 // movement_counter: u32
     }
 }

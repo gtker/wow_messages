@@ -169,8 +169,8 @@ impl crate::vanilla::ServerMessage for SMSG_SPELL_GO {}
 
 impl SMSG_SPELL_GO {
     pub(crate) fn size(&self) -> usize {
-        self.cast_item.size() // cast_item: Guid
-        + self.caster.size() // caster: Guid
+        self.cast_item.size() // cast_item: PackedGuid
+        + self.caster.size() // caster: PackedGuid
         + 4 // spell: u32
         + self.flags.size() // flags: SMSG_SPELL_GO_CastFlags
         + 1 // amount_of_hits: u8

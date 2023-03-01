@@ -1991,7 +1991,7 @@ pub struct MovementBlock_MovementFlags_OnTransport {
 
 impl MovementBlock_MovementFlags_OnTransport {
     pub(crate) fn size(&self) -> usize {
-        self.transport_guid.size() // transport_guid: Guid
+        self.transport_guid.size() // transport_guid: PackedGuid
         + 4 // transport_orientation: f32
         + 12 // transport_position: Vector3d
     }
@@ -2396,7 +2396,7 @@ pub struct MovementBlock_UpdateFlag_MeleeAttacking {
 
 impl MovementBlock_UpdateFlag_MeleeAttacking {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
     }
 }
 

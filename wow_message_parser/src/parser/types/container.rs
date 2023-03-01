@@ -374,7 +374,7 @@ impl Container {
                                 "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an array variable"
                             ),
                         ),
-                        Type::MonsterMoveSpline => {
+                        Type::MonsterMoveSplines => {
                             invalid_self_size_position(
                                 self.name(),
                                 self.file_info(),

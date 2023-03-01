@@ -2473,7 +2473,7 @@ pub struct MovementBlock_UpdateFlag_MeleeAttacking {
 
 impl MovementBlock_UpdateFlag_MeleeAttacking {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
     }
 }
 

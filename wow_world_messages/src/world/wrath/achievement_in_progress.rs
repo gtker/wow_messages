@@ -95,8 +95,8 @@ impl AchievementInProgress {
 impl AchievementInProgress {
     pub(crate) fn size(&self) -> usize {
         4 // achievement: u32
-        + self.counter.size() // counter: Guid
-        + self.player.size() // player: Guid
+        + self.counter.size() // counter: PackedGuid
+        + self.player.size() // player: PackedGuid
         + 4 // timed_criteria_failed: Bool32
         + 4 // progress_date: DateTime
         + 4 // time_since_progress: u32

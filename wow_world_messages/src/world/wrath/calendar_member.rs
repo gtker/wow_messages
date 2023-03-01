@@ -49,7 +49,7 @@ impl CalendarMember {
 
 impl CalendarMember {
     pub(crate) fn size(&self) -> usize {
-        self.member.size() // member: Guid
+        self.member.size() // member: PackedGuid
         + 1 // level: Level
     }
 }

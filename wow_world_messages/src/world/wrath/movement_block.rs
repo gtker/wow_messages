@@ -2437,7 +2437,7 @@ impl MovementBlock_UpdateFlag_Living {
                 4 // corpse_orientation: f32
                 + 4 // orientation1: f32
                 + 12 // position1: Vector3d
-                + transport_guid.size() // transport_guid: Guid
+                + transport_guid.size() // transport_guid: PackedGuid
             }
             Self::HasPosition {
                 orientation2,
@@ -2809,7 +2809,7 @@ pub struct MovementBlock_UpdateFlag_HasAttackingTarget {
 
 impl MovementBlock_UpdateFlag_HasAttackingTarget {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
     }
 }
 

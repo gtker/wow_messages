@@ -55,7 +55,7 @@ impl crate::wrath::ServerMessage for SMSG_MOVE_GRAVITY_ENABLE {}
 
 impl SMSG_MOVE_GRAVITY_ENABLE {
     pub(crate) fn size(&self) -> usize {
-        self.unit.size() // unit: Guid
+        self.unit.size() // unit: PackedGuid
         + 4 // movement_counter: u32
     }
 }

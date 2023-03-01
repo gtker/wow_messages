@@ -195,7 +195,7 @@ impl crate::wrath::ServerMessage for SMSG_CALENDAR_SEND_EVENT {}
 impl SMSG_CALENDAR_SEND_EVENT {
     pub(crate) fn size(&self) -> usize {
         1 // send_type: u8
-        + self.creator.size() // creator: Guid
+        + self.creator.size() // creator: PackedGuid
         + 8 // event_id: Guid
         + self.title.len() + 1 // title: CString
         + self.description.len() + 1 // description: CString

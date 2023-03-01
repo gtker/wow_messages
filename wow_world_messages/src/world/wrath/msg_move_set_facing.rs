@@ -59,7 +59,7 @@ impl crate::wrath::ServerMessage for MSG_MOVE_SET_FACING {}
 
 impl MSG_MOVE_SET_FACING {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }
 }

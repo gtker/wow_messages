@@ -162,8 +162,8 @@ impl crate::wrath::ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {}
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
     pub(crate) fn size(&self) -> usize {
-        self.target.size() // target: Guid
-        + self.attacker.size() // attacker: Guid
+        self.target.size() // target: PackedGuid
+        + self.attacker.size() // attacker: PackedGuid
         + 4 // spell: u32
         + 4 // damage: u32
         + 4 // overkill: u32

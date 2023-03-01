@@ -133,7 +133,7 @@ impl CompressedMove {
     pub(crate) fn size(&self) -> usize {
         1 // size: u8
         + self.opcode.size() // opcode: CompressedMove_CompressedMoveOpcode
-        + self.guid.size() // guid: Guid
+        + self.guid.size() // guid: PackedGuid
     }
 }
 
@@ -190,7 +190,7 @@ impl CompressedMove_CompressedMoveOpcode {
             } => {
                 2
                 + monster_move_transport.size() // monster_move_transport: MonsterMove
-                + transport.size() // transport: Guid
+                + transport.size() // transport: PackedGuid
             }
             Self::SmsgSplineSetRunSpeed {
                 speed,

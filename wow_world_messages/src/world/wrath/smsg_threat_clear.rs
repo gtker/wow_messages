@@ -46,7 +46,7 @@ impl crate::wrath::ServerMessage for SMSG_THREAT_CLEAR {}
 
 impl SMSG_THREAT_CLEAR {
     pub(crate) fn size(&self) -> usize {
-        self.unit.size() // unit: Guid
+        self.unit.size() // unit: PackedGuid
     }
 }
 

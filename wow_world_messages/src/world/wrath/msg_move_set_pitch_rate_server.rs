@@ -65,7 +65,7 @@ impl crate::wrath::ServerMessage for MSG_MOVE_SET_PITCH_RATE_Server {}
 
 impl MSG_MOVE_SET_PITCH_RATE_Server {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
         + self.info.size() // info: MovementInfo
         + 4 // new_speed: f32
     }

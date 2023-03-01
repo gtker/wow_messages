@@ -153,8 +153,8 @@ impl SMSG_CALENDAR_EVENT_INVITE_ALERT {
         + 8 // invite_id: Guid
         + 1 // status: u8
         + 1 // rank: u8
-        + self.event_creator.size() // event_creator: Guid
-        + self.invite_sender.size() // invite_sender: Guid
+        + self.event_creator.size() // event_creator: PackedGuid
+        + self.invite_sender.size() // invite_sender: PackedGuid
     }
 }
 

@@ -317,7 +317,7 @@ impl Object_UpdateType {
                 mask1,
             } => {
                 1
-                + guid1.size() // guid1: Guid
+                + guid1.size() // guid1: PackedGuid
                 + mask1.size() // mask1: UpdateMask
             }
             Self::Movement {
@@ -325,7 +325,7 @@ impl Object_UpdateType {
                 movement1,
             } => {
                 1
-                + guid2.size() // guid2: Guid
+                + guid2.size() // guid2: PackedGuid
                 + movement1.size() // movement1: MovementBlock
             }
             Self::CreateObject {
@@ -335,7 +335,7 @@ impl Object_UpdateType {
                 object_type,
             } => {
                 1
-                + guid3.size() // guid3: Guid
+                + guid3.size() // guid3: PackedGuid
                 + mask2.size() // mask2: UpdateMask
                 + movement2.size() // movement2: MovementBlock
                 + 1 // object_type: ObjectType
@@ -347,7 +347,7 @@ impl Object_UpdateType {
                 object_type,
             } => {
                 1
-                + guid3.size() // guid3: Guid
+                + guid3.size() // guid3: PackedGuid
                 + mask2.size() // mask2: UpdateMask
                 + movement2.size() // movement2: MovementBlock
                 + 1 // object_type: ObjectType

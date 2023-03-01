@@ -52,7 +52,7 @@ impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_NORMAL_FALL {}
 
 impl SMSG_SPLINE_MOVE_NORMAL_FALL {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
     }
 }
 

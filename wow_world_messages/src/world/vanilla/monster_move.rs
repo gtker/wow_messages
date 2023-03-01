@@ -2,7 +2,7 @@ use crate:: {
     Guid,
 };
 use crate::vanilla:: {
-    MonsterMoveSpline,
+    MonsterMoveSplines,
 };
 use crate::vanilla::Vector3d;
 use crate::vanilla::MonsterMoveType;
@@ -28,7 +28,7 @@ use std::io::{Read, Write};
 ///     if (move_type != STOP) {
 ///         SplineFlag spline_flags;
 ///         u32 duration;
-///         MonsterMoveSpline splines;
+///         MonsterMoveSplines splines;
 ///     }
 /// }
 /// ```
@@ -101,7 +101,7 @@ impl MonsterMove {
                 // duration: u32
                 w.write_all(&duration.to_le_bytes())?;
 
-                // splines: MonsterMoveSpline
+                // splines: MonsterMoveSplines
                 splines.write_into_vec(&mut w)?;
 
             }
@@ -118,7 +118,7 @@ impl MonsterMove {
                 // duration: u32
                 w.write_all(&duration.to_le_bytes())?;
 
-                // splines: MonsterMoveSpline
+                // splines: MonsterMoveSplines
                 splines.write_into_vec(&mut w)?;
 
             }
@@ -134,7 +134,7 @@ impl MonsterMove {
                 // duration: u32
                 w.write_all(&duration.to_le_bytes())?;
 
-                // splines: MonsterMoveSpline
+                // splines: MonsterMoveSplines
                 splines.write_into_vec(&mut w)?;
 
             }
@@ -150,7 +150,7 @@ impl MonsterMove {
                 // duration: u32
                 w.write_all(&duration.to_le_bytes())?;
 
-                // splines: MonsterMoveSpline
+                // splines: MonsterMoveSplines
                 splines.write_into_vec(&mut w)?;
 
             }
@@ -207,8 +207,8 @@ impl MonsterMove {
                 // duration: u32
                 move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
-                // splines: MonsterMoveSpline
-                move_type_if_splines = MonsterMoveSpline::read(&mut r)?;
+                // splines: MonsterMoveSplines
+                move_type_if_splines = MonsterMoveSplines::read(&mut r)?;
 
             }
             MonsterMoveType::Stop => {}
@@ -219,8 +219,8 @@ impl MonsterMove {
                 // duration: u32
                 move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
-                // splines: MonsterMoveSpline
-                move_type_if_splines = MonsterMoveSpline::read(&mut r)?;
+                // splines: MonsterMoveSplines
+                move_type_if_splines = MonsterMoveSplines::read(&mut r)?;
 
             }
             MonsterMoveType::FacingTarget => {
@@ -230,8 +230,8 @@ impl MonsterMove {
                 // duration: u32
                 move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
-                // splines: MonsterMoveSpline
-                move_type_if_splines = MonsterMoveSpline::read(&mut r)?;
+                // splines: MonsterMoveSplines
+                move_type_if_splines = MonsterMoveSplines::read(&mut r)?;
 
             }
             MonsterMoveType::FacingAngle => {
@@ -241,8 +241,8 @@ impl MonsterMove {
                 // duration: u32
                 move_type_if_duration = crate::util::read_u32_le(&mut r)?;
 
-                // splines: MonsterMoveSpline
-                move_type_if_splines = MonsterMoveSpline::read(&mut r)?;
+                // splines: MonsterMoveSplines
+                move_type_if_splines = MonsterMoveSplines::read(&mut r)?;
 
             }
         };
@@ -307,26 +307,26 @@ pub enum MonsterMove_MonsterMoveType {
     Normal {
         duration: u32,
         spline_flags: SplineFlag,
-        splines: MonsterMoveSpline,
+        splines: MonsterMoveSplines,
     },
     Stop,
     FacingSpot {
         duration: u32,
         position: Vector3d,
         spline_flags: SplineFlag,
-        splines: MonsterMoveSpline,
+        splines: MonsterMoveSplines,
     },
     FacingTarget {
         duration: u32,
         spline_flags: SplineFlag,
-        splines: MonsterMoveSpline,
+        splines: MonsterMoveSplines,
         target: Guid,
     },
     FacingAngle {
         angle: f32,
         duration: u32,
         spline_flags: SplineFlag,
-        splines: MonsterMoveSpline,
+        splines: MonsterMoveSplines,
     },
 }
 
@@ -361,7 +361,7 @@ impl MonsterMove_MonsterMoveType {
                 1
                 + 4 // duration: u32
                 + 4 // spline_flags: SplineFlag
-                + splines.size() // splines: MonsterMoveSpline
+                + splines.size() // splines: MonsterMoveSplines
             }
             Self::Stop => {
                 1
@@ -376,7 +376,7 @@ impl MonsterMove_MonsterMoveType {
                 + 4 // duration: u32
                 + 12 // position: Vector3d
                 + 4 // spline_flags: SplineFlag
-                + splines.size() // splines: MonsterMoveSpline
+                + splines.size() // splines: MonsterMoveSplines
             }
             Self::FacingTarget {
                 duration,
@@ -387,7 +387,7 @@ impl MonsterMove_MonsterMoveType {
                 1
                 + 4 // duration: u32
                 + 4 // spline_flags: SplineFlag
-                + splines.size() // splines: MonsterMoveSpline
+                + splines.size() // splines: MonsterMoveSplines
                 + 8 // target: Guid
             }
             Self::FacingAngle {
@@ -400,7 +400,7 @@ impl MonsterMove_MonsterMoveType {
                 + 4 // angle: f32
                 + 4 // duration: u32
                 + 4 // spline_flags: SplineFlag
-                + splines.size() // splines: MonsterMoveSpline
+                + splines.size() // splines: MonsterMoveSplines
             }
         }
     }

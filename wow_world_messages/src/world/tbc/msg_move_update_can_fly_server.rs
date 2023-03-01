@@ -56,7 +56,7 @@ impl crate::tbc::ServerMessage for MSG_MOVE_UPDATE_CAN_FLY_Server {}
 
 impl MSG_MOVE_UPDATE_CAN_FLY_Server {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
         + self.info.size() // info: MovementInfo
     }
 }

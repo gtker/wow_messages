@@ -61,7 +61,7 @@ impl crate::wrath::ServerMessage for SMSG_MOVE_FEATHER_FALL {}
 
 impl SMSG_MOVE_FEATHER_FALL {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // counter: u32
     }
 }

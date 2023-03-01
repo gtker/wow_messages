@@ -499,7 +499,7 @@ impl crate::vanilla::ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
 
 impl SMSG_PARTY_MEMBER_STATS_FULL {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
         + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags
     }
 }

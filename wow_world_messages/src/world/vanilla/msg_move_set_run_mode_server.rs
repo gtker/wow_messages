@@ -56,7 +56,7 @@ impl crate::vanilla::ServerMessage for MSG_MOVE_SET_RUN_MODE_Server {}
 
 impl MSG_MOVE_SET_RUN_MODE_Server {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }
 }

@@ -46,7 +46,7 @@ impl crate::wrath::ServerMessage for SMSG_CANCEL_AUTO_REPEAT {}
 
 impl SMSG_CANCEL_AUTO_REPEAT {
     pub(crate) fn size(&self) -> usize {
-        self.target.size() // target: Guid
+        self.target.size() // target: PackedGuid
     }
 }
 

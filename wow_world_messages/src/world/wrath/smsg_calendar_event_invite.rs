@@ -131,7 +131,7 @@ impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_INVITE {}
 
 impl SMSG_CALENDAR_EVENT_INVITE {
     pub(crate) fn size(&self) -> usize {
-        self.invitee.size() // invitee: Guid
+        self.invitee.size() // invitee: PackedGuid
         + 8 // event_id: Guid
         + 8 // invite_id: Guid
         + 1 // level: Level

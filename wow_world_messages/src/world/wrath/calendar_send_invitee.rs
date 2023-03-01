@@ -111,7 +111,7 @@ impl CalendarSendInvitee {
 
 impl CalendarSendInvitee {
     pub(crate) fn size(&self) -> usize {
-        self.invitee.size() // invitee: Guid
+        self.invitee.size() // invitee: PackedGuid
         + 1 // level: Level
         + 1 // status: u8
         + 1 // rank: u8

@@ -46,7 +46,7 @@ impl crate::wrath::ClientMessage for CMSG_DELETEEQUIPMENT_SET {}
 
 impl CMSG_DELETEEQUIPMENT_SET {
     pub(crate) fn size(&self) -> usize {
-        self.set.size() // set: Guid
+        self.set.size() // set: PackedGuid
     }
 }
 

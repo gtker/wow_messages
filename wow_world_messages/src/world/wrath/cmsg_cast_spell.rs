@@ -211,7 +211,7 @@ impl CMSG_CAST_SPELL_ClientMovementData {
                 opcode,
             } => {
                 1
-                + guid.size() // guid: Guid
+                + guid.size() // guid: PackedGuid
                 + info.size() // info: MovementInfo
                 + 4 // opcode: u32
             }

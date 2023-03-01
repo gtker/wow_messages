@@ -49,7 +49,7 @@ impl crate::wrath::ServerMessage for SMSG_DISMOUNT {}
 
 impl SMSG_DISMOUNT {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
     }
 }
 

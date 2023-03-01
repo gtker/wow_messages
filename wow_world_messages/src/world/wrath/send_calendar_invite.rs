@@ -87,7 +87,7 @@ impl SendCalendarInvite {
         + 1 // status: u8
         + 1 // rank: u8
         + 1 // is_guild_event: Bool
-        + self.creator.size() // creator: Guid
+        + self.creator.size() // creator: PackedGuid
     }
 }
 

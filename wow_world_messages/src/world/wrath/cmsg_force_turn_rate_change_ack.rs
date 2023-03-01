@@ -74,7 +74,7 @@ impl crate::wrath::ClientMessage for CMSG_FORCE_TURN_RATE_CHANGE_ACK {}
 
 impl CMSG_FORCE_TURN_RATE_CHANGE_ACK {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // counter: u32
         + self.info.size() // info: MovementInfo
         + 4 // new_speed: f32

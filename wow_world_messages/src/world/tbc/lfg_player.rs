@@ -124,7 +124,7 @@ impl LfgPlayer {
 
 impl LfgPlayer {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // level: u32
         + 4 // area: Area
         + 1 // lfg_mode: LfgMode

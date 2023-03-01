@@ -138,8 +138,8 @@ impl crate::tbc::ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn size(&self) -> usize {
         4 // hit_info: HitInfo
-        + self.attacker.size() // attacker: Guid
-        + self.target.size() // target: Guid
+        + self.attacker.size() // attacker: PackedGuid
+        + self.target.size() // target: PackedGuid
         + 4 // total_damage: u32
         + 1 // amount_of_damages: u8
         + self.damages.len() * 20 // damages: DamageInfo[amount_of_damages]

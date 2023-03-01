@@ -105,7 +105,7 @@ impl SendCalendarEvent {
         + 4 // event_time: DateTime
         + 4 // flags: u32
         + 4 // dungeon_id: u32
-        + self.creator.size() // creator: Guid
+        + self.creator.size() // creator: PackedGuid
     }
 }
 

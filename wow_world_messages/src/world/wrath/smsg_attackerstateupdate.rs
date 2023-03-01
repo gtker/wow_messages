@@ -341,8 +341,8 @@ impl crate::wrath::ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn size(&self) -> usize {
         self.hit_info.size() // hit_info: SMSG_ATTACKERSTATEUPDATE_HitInfo
-        + self.attacker.size() // attacker: Guid
-        + self.target.size() // target: Guid
+        + self.attacker.size() // attacker: PackedGuid
+        + self.target.size() // target: PackedGuid
         + 4 // total_damage: u32
         + 4 // overkill: u32
         + 1 // amount_of_damages: u8

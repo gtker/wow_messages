@@ -225,7 +225,7 @@ pub(crate) fn print_write_definition(
         Type::Struct { .. }
         | Type::EnchantMask
         | Type::InspectTalentGearMask
-        | Type::MonsterMoveSpline
+        | Type::MonsterMoveSplines
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray
         | Type::UpdateMask

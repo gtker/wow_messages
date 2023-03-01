@@ -74,7 +74,7 @@ impl TransportInfo {
 
 impl TransportInfo {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 12 // position: Vector3d
         + 4 // orientation: f32
         + 4 // timestamp: u32

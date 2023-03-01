@@ -261,7 +261,7 @@ fn print_container_example_definition(
             }
             s.w(format!("{b}, "));
         }
-        Type::MonsterMoveSpline => {
+        Type::MonsterMoveSplines => {
             unimplemented!("monster move spline doc printer")
         }
         Type::AchievementDoneArray | Type::AchievementInProgressArray => {
@@ -570,7 +570,7 @@ fn print_container_field(
                     "[AchievementInProgressArray](../spec/achievement-in-progress-array.md)"
                         .to_string()
                 }
-                Type::MonsterMoveSpline => {
+                Type::MonsterMoveSplines => {
                     "[MonsterMoveSpline](../spec/monster-move-spline.md)".to_string()
                 }
                 Type::Level

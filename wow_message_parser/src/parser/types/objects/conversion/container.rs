@@ -89,7 +89,7 @@ fn parsed_type_to_type(
         ParsedType::AuraMask => Type::AuraMask,
         ParsedType::AchievementDoneArray => Type::AchievementDoneArray,
         ParsedType::AchievementInProgressArray => Type::AchievementInProgressArray,
-        ParsedType::MonsterMoveSplines => Type::MonsterMoveSpline,
+        ParsedType::MonsterMoveSpline => Type::MonsterMoveSplines,
         ParsedType::EnchantMask => Type::EnchantMask,
         ParsedType::InspectTalentGearMask => Type::InspectTalentGearMask,
         ParsedType::Gold => Type::Gold,
@@ -552,7 +552,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
         | ParsedType::Gold
         | ParsedType::EnchantMask
         | ParsedType::InspectTalentGearMask
-        | ParsedType::MonsterMoveSplines
+        | ParsedType::MonsterMoveSpline
         | ParsedType::AchievementDoneArray
         | ParsedType::AchievementInProgressArray
         | ParsedType::UpdateMask

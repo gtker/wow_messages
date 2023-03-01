@@ -88,8 +88,8 @@ impl crate::wrath::ServerMessage for SMSG_ENCHANTMENTLOG {}
 
 impl SMSG_ENCHANTMENTLOG {
     pub(crate) fn size(&self) -> usize {
-        self.target.size() // target: Guid
-        + self.caster.size() // caster: Guid
+        self.target.size() // target: PackedGuid
+        + self.caster.size() // caster: PackedGuid
         + 4 // item: u32
         + 4 // spell: u32
         + 1 // show_affiliation: Bool

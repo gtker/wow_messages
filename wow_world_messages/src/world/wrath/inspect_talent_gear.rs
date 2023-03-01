@@ -79,7 +79,7 @@ impl InspectTalentGear {
         4 // item: u32
         + self.enchant_mask.size() // enchant_mask: EnchantMask
         + 2 // unknown1: u16
-        + self.creator.size() // creator: Guid
+        + self.creator.size() // creator: PackedGuid
         + 4 // unknown2: u32
     }
 }

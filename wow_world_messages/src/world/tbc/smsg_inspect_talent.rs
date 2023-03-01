@@ -45,7 +45,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         // talent_data: u8[-]
         let talent_data = {
             let mut current_size = {
-                player.size() // player: Guid
+                player.size() // player: PackedGuid
             };
             let mut talent_data = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
@@ -67,7 +67,7 @@ impl crate::tbc::ServerMessage for SMSG_INSPECT_TALENT {}
 
 impl SMSG_INSPECT_TALENT {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
         + self.talent_data.len() * core::mem::size_of::<u8>() // talent_data: u8[-]
     }
 }

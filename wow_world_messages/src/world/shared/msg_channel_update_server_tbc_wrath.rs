@@ -58,7 +58,7 @@ impl crate::wrath::ServerMessage for MSG_CHANNEL_UPDATE_Server {}
 
 impl MSG_CHANNEL_UPDATE_Server {
     pub(crate) fn size(&self) -> usize {
-        self.caster.size() // caster: Guid
+        self.caster.size() // caster: PackedGuid
         + 4 // time: u32
     }
 }

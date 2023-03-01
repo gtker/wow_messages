@@ -82,7 +82,7 @@ impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_INVITE_NOTES {}
 
 impl SMSG_CALENDAR_EVENT_INVITE_NOTES {
     pub(crate) fn size(&self) -> usize {
-        self.invitee.size() // invitee: Guid
+        self.invitee.size() // invitee: PackedGuid
         + 8 // invite_id: Guid
         + self.text.len() + 1 // text: CString
         + 1 // unknown: Bool

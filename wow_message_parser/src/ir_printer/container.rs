@@ -286,7 +286,7 @@ impl From<&Type> for IrType {
             Type::DateTime => Self::DateTime,
             Type::AchievementDoneArray => Self::AchievementDoneArray,
             Type::AchievementInProgressArray => Self::AchievementInProgressArray,
-            Type::MonsterMoveSpline => Self::MonsterMoveSpline,
+            Type::MonsterMoveSplines => Self::MonsterMoveSpline,
             Type::EnchantMask => Self::EnchantMask,
             Type::InspectTalentGearMask => Self::InspectTalentGearMask,
             Type::Gold => Self::Gold,

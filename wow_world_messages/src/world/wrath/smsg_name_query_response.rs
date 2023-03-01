@@ -180,7 +180,7 @@ impl crate::wrath::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
 
 impl SMSG_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 1 // early_terminate: u8
         + self.character_name.len() + 1 // character_name: CString
         + self.realm_name.len() + 1 // realm_name: CString

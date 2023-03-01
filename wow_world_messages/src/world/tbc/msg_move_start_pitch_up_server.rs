@@ -56,7 +56,7 @@ impl crate::tbc::ServerMessage for MSG_MOVE_START_PITCH_UP_Server {}
 
 impl MSG_MOVE_START_PITCH_UP_Server {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }
 }

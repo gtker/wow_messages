@@ -46,7 +46,7 @@ impl crate::wrath::ServerMessage for SMSG_PRE_RESURRECT {}
 
 impl SMSG_PRE_RESURRECT {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: Guid
+        self.player.size() // player: PackedGuid
     }
 }
 

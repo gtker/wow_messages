@@ -74,7 +74,7 @@ impl crate::wrath::ClientMessage for CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_A
 
 impl CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: Guid
+        self.guid.size() // guid: PackedGuid
         + 4 // unknown1: u32
         + self.info.size() // info: MovementInfo
         + 4 // unknown2: u32

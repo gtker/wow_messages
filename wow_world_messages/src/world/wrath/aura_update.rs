@@ -405,7 +405,7 @@ pub struct AuraUpdate_AuraFlag_NotCaster {
 
 impl AuraUpdate_AuraFlag_NotCaster {
     pub(crate) fn size(&self) -> usize {
-        self.caster.size() // caster: Guid
+        self.caster.size() // caster: PackedGuid
     }
 }
 

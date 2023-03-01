@@ -138,8 +138,8 @@ impl crate::tbc::ServerMessage for SMSG_SPELL_START {}
 
 impl SMSG_SPELL_START {
     pub(crate) fn size(&self) -> usize {
-        self.cast_item.size() // cast_item: Guid
-        + self.caster.size() // caster: Guid
+        self.cast_item.size() // cast_item: PackedGuid
+        + self.caster.size() // caster: PackedGuid
         + 4 // spell: u32
         + 1 // cast_count: u8
         + self.flags.size() // flags: SMSG_SPELL_START_CastFlags
