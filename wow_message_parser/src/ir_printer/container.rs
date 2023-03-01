@@ -222,56 +222,38 @@ impl From<&StructMemberDefinition> for IrStructMemberDefinition {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrType {
-    #[serde(rename = "integer")]
     Integer(IrIntegerType),
-    #[serde(rename = "bool")]
     Bool(IrIntegerType),
-    #[serde(rename = "datetime")]
     DateTime,
-    #[serde(rename = "packed_guid")]
     PackedGuid,
-    #[serde(rename = "guid")]
     Guid,
-    #[serde(rename = "floating_point")]
     FloatingPoint(IrFloatingPointType),
-    #[serde(rename = "cstring")]
     CString,
-    #[serde(rename = "sized_cstring")]
     SizedCString,
-    #[serde(rename = "string")]
     String,
-    #[serde(rename = "array")]
     Array(IrArray),
-    #[serde(rename = "enum")]
     Enum {
         type_name: String,
         #[serde(skip_serializing_if = "Option::is_none")]
         upcast: Option<IrIntegerType>,
     },
-    #[serde(rename = "flag")]
     Flag {
         type_name: String,
         #[serde(skip_serializing_if = "Option::is_none")]
         upcast: Option<IrIntegerType>,
     },
-    #[serde(rename = "struct")]
-    Struct { type_name: String },
-    #[serde(rename = "update_mask")]
+    Struct {
+        type_name: String,
+    },
     UpdateMask,
-    #[serde(rename = "aura_mask")]
     AuraMask,
-    #[serde(rename = "monster_move_spline")]
     MonsterMoveSpline,
-    #[serde(rename = "achievement_done_array")]
     AchievementDoneArray,
-    #[serde(rename = "achievement_in_progress_array")]
     AchievementInProgressArray,
-    #[serde(rename = "enchant_mask")]
     EnchantMask,
-    #[serde(rename = "inspect_talent_gear_mask")]
     InspectTalentGearMask,
-    #[serde(rename = "gold")]
     Gold,
 }
 

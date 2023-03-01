@@ -32,8 +32,8 @@ They contain:
 
 * `name`, the variable name of the definition.
 * `member_type`, the type of the definition, contains:
-    * `type`, either `integer`, `packed_guid`, `guid`, `floating_point`, `cstring`, `sized_cstring`, `string`, `array`
-      , `enum`, `flag`, `struct` `update_mask`, `bool`, `datetime` or `aura_mask`.
+    * `type`, either `integer`, `packed_guid`, `guid`, `floating_point`, `c_string`, `sized_c_string`, `string`, `array`
+      , `enum`, `flag`, `struct` `update_mask`, `bool`, `date_time` or `aura_mask`.
     * `content`, depends on the type.
 * `constant_value`, `null` if the field is not always supposed to have the same value. Otherwise it contains:
     * `value`, the constant value it should always be represented as.
