@@ -19,7 +19,7 @@ struct AuraUpdate {
     u8 visual_slot;
     Spell spell;
     AuraFlag flags;
-    u8 level;
+    Level level;
     u8 aura_stack_count;
     if (flags & NOT_CASTER) {
         PackedGuid caster;

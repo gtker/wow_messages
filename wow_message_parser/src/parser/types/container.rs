@@ -328,6 +328,7 @@ impl Container {
                                 "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a PackedGuid variable"
                             ),
                         ),
+                        Type::Level => sum += 4,
                         Type::Guid => sum += 8_u64,
                         Type::UpdateMask => invalid_self_size_position(
                             self.name(),

@@ -51,7 +51,7 @@ struct LfgListPlayer {
     Guid player;
     LfgUpdateFlag flags;
     if (flags & CHARACTER_INFO) {
-        u8 level;
+        Level level;
         Class class;
         Race race;
         u8 talents0;

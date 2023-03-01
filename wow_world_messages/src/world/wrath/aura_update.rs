@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use crate::wrath::AuraFlag;
 use std::io::{Read, Write};
 
@@ -11,7 +14,7 @@ use std::io::{Read, Write};
 ///     u8 visual_slot;
 ///     u32 spell;
 ///     AuraFlag flags;
-///     u8 level;
+///     Level level;
 ///     u8 aura_stack_count;
 ///     if (flags & NOT_CASTER) {
 ///         PackedGuid caster;
@@ -26,7 +29,7 @@ pub struct AuraUpdate {
     pub visual_slot: u8,
     pub spell: u32,
     pub flags: AuraUpdate_AuraFlag,
-    pub level: u8,
+    pub level: Level,
     pub aura_stack_count: u8,
 }
 
@@ -41,8 +44,8 @@ impl AuraUpdate {
         // flags: AuraFlag
         w.write_all(&u8::from(self.flags.as_int()).to_le_bytes())?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level
+        w.write_all(&self.level.as_int().to_le_bytes())?;
 
         // aura_stack_count: u8
         w.write_all(&self.aura_stack_count.to_le_bytes())?;
@@ -77,8 +80,8 @@ impl AuraUpdate {
         // flags: AuraFlag
         let flags = AuraFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        // level: u8
-        let level = crate::util::read_u8_le(&mut r)?;
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         // aura_stack_count: u8
         let aura_stack_count = crate::util::read_u8_le(&mut r)?;
@@ -133,7 +136,7 @@ impl AuraUpdate {
         1 // visual_slot: u8
         + 4 // spell: u32
         + self.flags.size() // flags: AuraUpdate_AuraFlag
-        + 1 // level: u8
+        + 1 // level: Level
         + 1 // aura_stack_count: u8
     }
 }

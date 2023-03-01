@@ -404,6 +404,7 @@ pub(crate) enum RustType {
     EnchantMask,
     InspectTalentGearMask,
     Gold,
+    Level,
 }
 
 impl RustType {
@@ -428,6 +429,7 @@ impl RustType {
             RustType::EnchantMask => "EnchantMask".to_string(),
             RustType::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
             RustType::Gold => "Gold".to_string(),
+            RustType::Level => "Level".to_string(),
         }
     }
 
@@ -456,6 +458,7 @@ impl Display for RustType {
             RustType::EnchantMask => f.write_str("EnchantMask"),
             RustType::InspectTalentGearMask => f.write_str("InspectTalentGearMask"),
             RustType::Gold => f.write_str("Gold"),
+            RustType::Level => f.write_str("Level"),
         }
     }
 }
@@ -1270,6 +1273,7 @@ pub(crate) fn create_struct_member(
                 Type::EnchantMask => RustType::EnchantMask,
                 Type::InspectTalentGearMask => RustType::InspectTalentGearMask,
                 Type::Gold => RustType::Gold,
+                Type::Level => RustType::Level,
             };
 
             let name = d.name().to_string();

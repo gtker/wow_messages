@@ -2,7 +2,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::sizes::{Sizes, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE};
+use crate::parser::types::sizes::{Sizes, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE, LEVEL_SIZE};
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
@@ -476,6 +476,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
         RustType::Floating(f) => f.size().to_string(),
         RustType::Guid => GUID_SIZE.to_string(),
         RustType::Gold => GOLD_SIZE.to_string(),
+        RustType::Level => LEVEL_SIZE.to_string(),
         RustType::DateTime => DATETIME_SIZE.to_string(),
         RustType::String => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
         RustType::CString => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),

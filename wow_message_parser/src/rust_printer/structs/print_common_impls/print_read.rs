@@ -238,15 +238,6 @@ fn print_read_definition(
                 postfix = postfix,
             ));
         }
-        Type::Gold => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = Gold::new({module_name}::{prefix}read_u32_le(&mut r){postfix}?);",
-                name = d.name(),
-                module_name = UTILITY_PATH,
-                prefix = prefix,
-                postfix = postfix,
-            ));
-        }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
                 "{assignment_prefix}{name} = {module_name}::{prefix}read_{ty}_{endian}(&mut r){postfix}?;",
@@ -350,6 +341,21 @@ fn print_read_definition(
                 name = d.name(),
                 prefix = prefix,
                 postfix = postfix,
+            ));
+        }
+
+        Type::Level => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = Level::new({module_name}::{prefix}read_u8_le(&mut r){postfix}?);",
+                name = d.name(),
+                module_name = UTILITY_PATH,
+            ));
+        }
+        Type::Gold => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = Gold::new({module_name}::{prefix}read_u32_le(&mut r){postfix}?);",
+                name = d.name(),
+                module_name = UTILITY_PATH,
             ));
         }
 

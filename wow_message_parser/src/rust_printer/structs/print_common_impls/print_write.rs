@@ -146,6 +146,11 @@ pub(crate) fn print_write_definition(
                 ty = i.rust_str(),
             ));
         }
+        Type::Level => {
+            s.wln(format!(
+                "w.write_all(&{variable_prefix}{name}.as_int().to_le_bytes()){postfix}?;",
+            ));
+        }
         Type::Gold => {
             s.wln(format!(
                 "w.write_all(u32::from({variable_prefix}{name}.as_int()).to_le_bytes().as_slice()){postfix}?;",

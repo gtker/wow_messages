@@ -10,7 +10,7 @@ struct GuildMember {
     GuildMemberStatus status;
     CString name;
     u32 rank;
-    u8 level;
+    Level level;
     Class class;
     Area area;
     if (status == OFFLINE) {
@@ -37,7 +37,7 @@ struct GuildMember {
     GuildMemberStatus status;
     CString name;
     u32 rank;
-    u8 level;
+    Level level;
     Class class;
     u8 unknown1 {
         comment = "mangosone: new 2.4.0";
@@ -61,7 +61,7 @@ struct GuildMember {
     GuildMemberStatus status;
     CString name;
     u32 rank;
-    u8 level;
+    Level level;
     Class class;
     Gender gender;
     Area area;

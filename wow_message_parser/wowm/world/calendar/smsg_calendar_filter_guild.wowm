@@ -1,6 +1,6 @@
 struct CalendarMember {
     PackedGuid member;
-    u8 level;
+    Level level;
 } {
     versions = "3.3.5";
 }

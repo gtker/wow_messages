@@ -2,6 +2,9 @@ use crate:: {
     DateTime,
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -9,7 +12,7 @@ use std::io::{Read, Write};
 /// ```text
 /// struct CalendarSendInvitee {
 ///     PackedGuid invitee;
-///     u8 level;
+///     Level level;
 ///     u8 status;
 ///     u8 rank;
 ///     u8 guild_member;
@@ -20,7 +23,7 @@ use std::io::{Read, Write};
 /// ```
 pub struct CalendarSendInvitee {
     pub invitee: Guid,
-    pub level: u8,
+    pub level: Level,
     pub status: u8,
     pub rank: u8,
     pub guild_member: u8,
@@ -34,8 +37,8 @@ impl CalendarSendInvitee {
         // invitee: PackedGuid
         self.invitee.write_packed_guid_into_vec(&mut w)?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level
+        w.write_all(&self.level.as_int().to_le_bytes())?;
 
         // status: u8
         w.write_all(&self.status.to_le_bytes())?;
@@ -68,8 +71,8 @@ impl CalendarSendInvitee {
         // invitee: PackedGuid
         let invitee = Guid::read_packed(&mut r)?;
 
-        // level: u8
-        let level = crate::util::read_u8_le(&mut r)?;
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         // status: u8
         let status = crate::util::read_u8_le(&mut r)?;
@@ -109,7 +112,7 @@ impl CalendarSendInvitee {
 impl CalendarSendInvitee {
     pub(crate) fn size(&self) -> usize {
         self.invitee.size() // invitee: Guid
-        + 1 // level: u8
+        + 1 // level: Level
         + 1 // status: u8
         + 1 // rank: u8
         + 1 // guild_member: u8

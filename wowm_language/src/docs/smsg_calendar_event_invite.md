@@ -10,7 +10,7 @@ smsg SMSG_CALENDAR_EVENT_INVITE = 0x043A {
     PackedGuid invitee;
     Guid event_id;
     Guid invite_id;
-    u8 level;
+    Level level;
     u8 invite_status;
     CalendarStatusTime time;
     if (time == PRESENT) {
@@ -37,7 +37,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | invitee |  |  |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | event_id |  |  |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | invite_id |  |  |
-| - | 1 / - | u8 | level |  |  |
+| - | 1 / Little | Level | level |  |  |
 | - | 1 / - | u8 | invite_status |  |  |
 | - | 1 / - | [CalendarStatusTime](calendarstatustime.md) | time |  |  |
 

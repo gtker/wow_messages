@@ -10,7 +10,7 @@ struct LfgListPlayer {
     Guid player;
     LfgUpdateFlag flags;
     if (flags & CHARACTER_INFO) {
-        u8 level;
+        Level level;
         Class class;
         Race race;
         u8 talents0;
@@ -70,7 +70,7 @@ If flags contains `CHARACTER_INFO`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 1 / - | u8 | level |  |  |
+| 0x0C | 1 / Little | Level | level |  |  |
 | 0x0D | 1 / - | [Class](class.md) | class |  |  |
 | 0x0E | 1 / - | [Race](race.md) | race |  |  |
 | 0x0F | 1 / - | u8 | talents0 |  |  |

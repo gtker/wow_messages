@@ -9,7 +9,7 @@ smsg SMSG_CALENDAR_EVENT_INVITE = 0x043A {
     PackedGuid invitee;
     Guid event_id;
     Guid invite_id;
-    u8 level;
+    Level level;
     u8 invite_status;
     CalendarStatusTime time;
     if (time == PRESENT) {

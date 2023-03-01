@@ -93,6 +93,7 @@ fn parsed_type_to_type(
         ParsedType::EnchantMask => Type::EnchantMask,
         ParsedType::InspectTalentGearMask => Type::InspectTalentGearMask,
         ParsedType::Gold => Type::Gold,
+        ParsedType::Level => Type::Level,
     }
 }
 
@@ -547,7 +548,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
-        ParsedType::Gold
+        ParsedType::Level
+        | ParsedType::Gold
         | ParsedType::EnchantMask
         | ParsedType::InspectTalentGearMask
         | ParsedType::MonsterMoveSplines

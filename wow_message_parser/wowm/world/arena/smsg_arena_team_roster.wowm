@@ -18,7 +18,7 @@ struct ArenaTeamMember {
     Guid guid;
     Bool online;
     CString name;
-    u8 level;
+    Level level;
     Class class;
     u32 games_played_this_week;
     u32 wins_this_week;

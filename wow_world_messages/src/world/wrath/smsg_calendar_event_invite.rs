@@ -2,6 +2,9 @@ use crate:: {
     DateTime,
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use crate::wrath::CalendarStatusTime;
 use std::io::{Read, Write};
 
@@ -12,7 +15,7 @@ use std::io::{Read, Write};
 ///     PackedGuid invitee;
 ///     Guid event_id;
 ///     Guid invite_id;
-///     u8 level;
+///     Level level;
 ///     u8 invite_status;
 ///     CalendarStatusTime time;
 ///     if (time == PRESENT) {
@@ -25,7 +28,7 @@ pub struct SMSG_CALENDAR_EVENT_INVITE {
     pub invitee: Guid,
     pub event_id: Guid,
     pub invite_id: Guid,
-    pub level: u8,
+    pub level: Level,
     pub invite_status: u8,
     pub time: SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime,
     pub is_sign_up: bool,
@@ -48,8 +51,8 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         // invite_id: Guid
         w.write_all(&self.invite_id.guid().to_le_bytes())?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level
+        w.write_all(&self.level.as_int().to_le_bytes())?;
 
         // invite_status: u8
         w.write_all(&self.invite_status.to_le_bytes())?;
@@ -87,8 +90,8 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         // invite_id: Guid
         let invite_id = Guid::read(&mut r)?;
 
-        // level: u8
-        let level = crate::util::read_u8_le(&mut r)?;
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         // invite_status: u8
         let invite_status = crate::util::read_u8_le(&mut r)?;
@@ -131,7 +134,7 @@ impl SMSG_CALENDAR_EVENT_INVITE {
         self.invitee.size() // invitee: Guid
         + 8 // event_id: Guid
         + 8 // invite_id: Guid
-        + 1 // level: u8
+        + 1 // level: Level
         + 1 // invite_status: u8
         + self.time.size() // time: SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime
         + 1 // is_sign_up: Bool

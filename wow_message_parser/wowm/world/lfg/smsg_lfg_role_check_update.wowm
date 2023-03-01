@@ -15,7 +15,7 @@ struct LfgRole {
     Guid guid;
     Bool ready;
     u32 roles;
-    u8 level;
+    Level level;
 } {
     versions = "3.3.5";
 }

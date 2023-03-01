@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -8,12 +11,12 @@ use std::io::{Read, Write};
 /// ```text
 /// struct CalendarMember {
 ///     PackedGuid member;
-///     u8 level;
+///     Level level;
 /// }
 /// ```
 pub struct CalendarMember {
     pub member: Guid,
-    pub level: u8,
+    pub level: Level,
 }
 
 impl CalendarMember {
@@ -21,8 +24,8 @@ impl CalendarMember {
         // member: PackedGuid
         self.member.write_packed_guid_into_vec(&mut w)?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level
+        w.write_all(&self.level.as_int().to_le_bytes())?;
 
         Ok(())
     }
@@ -33,8 +36,8 @@ impl CalendarMember {
         // member: PackedGuid
         let member = Guid::read_packed(&mut r)?;
 
-        // level: u8
-        let level = crate::util::read_u8_le(&mut r)?;
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         Ok(Self {
             member,
@@ -47,7 +50,7 @@ impl CalendarMember {
 impl CalendarMember {
     pub(crate) fn size(&self) -> usize {
         self.member.size() // member: Guid
-        + 1 // level: u8
+        + 1 // level: Level
     }
 }
 

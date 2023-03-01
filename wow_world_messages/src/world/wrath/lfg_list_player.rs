@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use crate::wrath::Area;
 use crate::wrath::Class;
 use crate::wrath::Race;
@@ -14,7 +17,7 @@ use std::io::{Read, Write};
 ///     Guid player;
 ///     LfgUpdateFlag flags;
 ///     if (flags & CHARACTER_INFO) {
-///         u8 level;
+///         Level level;
 ///         Class class;
 ///         Race race;
 ///         u8 talents0;
@@ -79,8 +82,8 @@ impl LfgListPlayer {
         w.write_all(&u32::from(self.flags.as_int()).to_le_bytes())?;
 
         if let Some(if_statement) = &self.flags.character_info {
-            // level: u8
-            w.write_all(&if_statement.level.to_le_bytes())?;
+            // level: Level
+            w.write_all(&if_statement.level.as_int().to_le_bytes())?;
 
             // class: Class
             w.write_all(&u8::from(if_statement.class.as_int()).to_le_bytes())?;
@@ -218,8 +221,8 @@ impl LfgListPlayer {
         let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
 
         let flags_CHARACTER_INFO = if flags.is_CHARACTER_INFO() {
-            // level: u8
-            let level = crate::util::read_u8_le(&mut r)?;
+            // level: Level
+            let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
             // class: Class
             let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
@@ -796,7 +799,7 @@ pub struct LfgListPlayer_LfgUpdateFlag_CharacterInfo {
     pub expertise_rating: u32,
     pub haste_rating: u32,
     pub health: u32,
-    pub level: u8,
+    pub level: Level,
     pub mana: u32,
     pub mana_per_5_seconds: f32,
     pub mana_per_5_seconds_combat: f32,
@@ -826,7 +829,7 @@ impl LfgListPlayer_LfgUpdateFlag_CharacterInfo {
         + 4 // expertise_rating: u32
         + 4 // haste_rating: u32
         + 4 // health: u32
-        + 1 // level: u8
+        + 1 // level: Level
         + 4 // mana: u32
         + 4 // mana_per_5_seconds: f32
         + 4 // mana_per_5_seconds_combat: f32

@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -10,14 +13,14 @@ use std::io::{Read, Write};
 ///     Guid guid;
 ///     Bool ready;
 ///     u32 roles;
-///     u8 level;
+///     Level level;
 /// }
 /// ```
 pub struct LfgRole {
     pub guid: Guid,
     pub ready: bool,
     pub roles: u32,
-    pub level: u8,
+    pub level: Level,
 }
 
 impl LfgRole {
@@ -31,8 +34,8 @@ impl LfgRole {
         // roles: u32
         w.write_all(&self.roles.to_le_bytes())?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level
+        w.write_all(&self.level.as_int().to_le_bytes())?;
 
         Ok(())
     }
@@ -49,8 +52,8 @@ impl LfgRole {
         // roles: u32
         let roles = crate::util::read_u32_le(&mut r)?;
 
-        // level: u8
-        let level = crate::util::read_u8_le(&mut r)?;
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         Ok(Self {
             guid,

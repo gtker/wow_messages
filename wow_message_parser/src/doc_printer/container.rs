@@ -135,6 +135,9 @@ fn print_container_example_definition(
         Type::Bool(i) => {
             s.bytes(bytes.take(i.size() as usize).into_iter());
         }
+        Type::Level => {
+            s.bytes(bytes.take(core::mem::size_of::<u8>()).into_iter());
+        }
         Type::Gold => {
             s.bytes(bytes.take(core::mem::size_of::<u32>()).into_iter());
         }
@@ -570,7 +573,8 @@ fn print_container_field(
                 Type::MonsterMoveSpline => {
                     "[MonsterMoveSpline](../spec/monster-move-spline.md)".to_string()
                 }
-                Type::Gold
+                Type::Level
+                | Type::Gold
                 | Type::SizedCString
                 | Type::Bool(_)
                 | Type::DateTime

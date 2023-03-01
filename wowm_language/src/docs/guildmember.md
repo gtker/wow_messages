@@ -11,7 +11,7 @@ struct GuildMember {
     GuildMemberStatus status;
     CString name;
     u32 rank;
-    u8 level;
+    Level level;
     Class class;
     Area area;
     if (status == OFFLINE) {
@@ -29,7 +29,7 @@ struct GuildMember {
 | 0x08 | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
 | 0x09 | - / - | CString | name |  |  |
 | - | 4 / Little | u32 | rank |  |  |
-| - | 1 / - | u8 | level |  |  |
+| - | 1 / Little | Level | level |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
 
@@ -54,7 +54,7 @@ struct GuildMember {
     GuildMemberStatus status;
     CString name;
     u32 rank;
-    u8 level;
+    Level level;
     Class class;
     u8 unknown1;
     Area area;
@@ -73,7 +73,7 @@ struct GuildMember {
 | 0x08 | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
 | 0x09 | - / - | CString | name |  |  |
 | - | 4 / Little | u32 | rank |  |  |
-| - | 1 / - | u8 | level |  |  |
+| - | 1 / Little | Level | level |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |
 | - | 1 / - | u8 | unknown1 |  | mangosone: new 2.4.0<br/>Possibly gender |
 | - | 4 / - | [Area](area.md) | area |  |  |
@@ -100,7 +100,7 @@ struct GuildMember {
     GuildMemberStatus status;
     CString name;
     u32 rank;
-    u8 level;
+    Level level;
     Class class;
     Gender gender;
     Area area;
@@ -120,7 +120,7 @@ struct GuildMember {
 | 0x0C | 1 / - | [GuildMemberStatus](guildmemberstatus.md) | status |  |  |
 | 0x0D | - / - | CString | name |  |  |
 | - | 4 / Little | u32 | rank |  |  |
-| - | 1 / - | u8 | level |  |  |
+| - | 1 / Little | Level | level |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |
 | - | 1 / - | [Gender](gender.md) | gender |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |

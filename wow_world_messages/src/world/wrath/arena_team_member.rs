@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use crate::wrath::Class;
 use std::io::{Read, Write};
 
@@ -11,7 +14,7 @@ use std::io::{Read, Write};
 ///     Guid guid;
 ///     Bool online;
 ///     CString name;
-///     u8 level;
+///     Level level;
 ///     Class class;
 ///     u32 games_played_this_week;
 ///     u32 wins_this_week;
@@ -24,7 +27,7 @@ pub struct ArenaTeamMember {
     pub guid: Guid,
     pub online: bool,
     pub name: String,
-    pub level: u8,
+    pub level: Level,
     pub class: Class,
     pub games_played_this_week: u32,
     pub wins_this_week: u32,
@@ -48,8 +51,8 @@ impl ArenaTeamMember {
         // Null terminator
         w.write_all(&[0])?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level
+        w.write_all(&self.level.as_int().to_le_bytes())?;
 
         // class: Class
         w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
@@ -87,8 +90,8 @@ impl ArenaTeamMember {
             String::from_utf8(name)?
         };
 
-        // level: u8
-        let level = crate::util::read_u8_le(&mut r)?;
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         // class: Class
         let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
@@ -129,7 +132,7 @@ impl ArenaTeamMember {
         8 // guid: Guid
         + 1 // online: Bool
         + self.name.len() + 1 // name: CString
-        + 1 // level: u8
+        + 1 // level: Level
         + 1 // class: Class
         + 4 // games_played_this_week: u32
         + 4 // wins_this_week: u32

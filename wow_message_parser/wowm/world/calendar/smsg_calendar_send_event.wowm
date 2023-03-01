@@ -1,6 +1,6 @@
 struct CalendarSendInvitee {
     PackedGuid invitee;
-    u8 level;
+    Level level;
     u8 status;
     u8 rank;
     u8 guild_member;

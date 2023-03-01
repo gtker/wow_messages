@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use crate::wrath::CharacterGear;
 use crate::wrath::Vector3d;
 use crate::wrath::Area;
@@ -25,7 +28,7 @@ use std::io::{Read, Write};
 ///     u8 hair_style;
 ///     u8 hair_color;
 ///     u8 facial_hair;
-///     u8 level;
+///     Level level;
 ///     Area area;
 ///     Map map;
 ///     Vector3d position;
@@ -50,7 +53,7 @@ pub struct Character {
     pub hair_style: u8,
     pub hair_color: u8,
     pub facial_hair: u8,
-    pub level: u8,
+    pub level: Level,
     pub area: Area,
     pub map: Map,
     pub position: Vector3d,
@@ -100,8 +103,8 @@ impl Character {
         // facial_hair: u8
         w.write_all(&self.facial_hair.to_le_bytes())?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level
+        w.write_all(&self.level.as_int().to_le_bytes())?;
 
         // area: Area
         w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
@@ -177,8 +180,8 @@ impl Character {
         // facial_hair: u8
         let facial_hair = crate::util::read_u8_le(&mut r)?;
 
-        // level: u8
-        let level = crate::util::read_u8_le(&mut r)?;
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         // area: Area
         let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
@@ -259,7 +262,7 @@ impl Character {
         + 1 // hair_style: u8
         + 1 // hair_color: u8
         + 1 // facial_hair: u8
-        + 1 // level: u8
+        + 1 // level: Level
         + 4 // area: Area
         + 4 // map: Map
         + 12 // position: Vector3d

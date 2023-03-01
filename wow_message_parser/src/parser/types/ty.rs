@@ -48,6 +48,7 @@ pub(crate) enum Type {
     EnchantMask,
     InspectTalentGearMask,
     Gold,
+    Level,
 }
 
 impl Type {
@@ -73,6 +74,7 @@ impl Type {
             Type::EnchantMask => "EnchantMask".to_string(),
             Type::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
             Type::Gold => "Gold".to_string(),
+            Type::Level => "Level".to_string(),
         }
     }
 
@@ -87,7 +89,8 @@ impl Type {
 
             Type::Array(a) => a.rust_str(),
 
-            Type::Struct { .. }
+            Type::Level
+            | Type::Struct { .. }
             | Type::UpdateMask
             | Type::AuraMask
             | Type::DateTime
@@ -119,7 +122,8 @@ impl Type {
 
             Type::Guid | Type::PackedGuid | Type::DateTime => Some(TypeImport::Crate(ty)),
 
-            Type::Gold
+            Type::Level
+            | Type::Gold
             | Type::MonsterMoveSpline
             | Type::AuraMask
             | Type::AchievementDoneArray
@@ -225,6 +229,7 @@ impl Type {
                 INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
             ),
             Type::Gold => sizes.inc_both(core::mem::size_of::<u32>()),
+            Type::Level => sizes.inc_both(core::mem::size_of::<u8>()),
         }
 
         sizes
@@ -252,7 +257,7 @@ impl Type {
     pub(crate) fn doc_endian_str(&self) -> String {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
-            Type::Gold | Type::DateTime | Type::Guid => "Little".to_string(),
+            Type::Level | Type::Gold | Type::DateTime | Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
             Type::EnchantMask
             | Type::InspectTalentGearMask

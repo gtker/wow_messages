@@ -95,7 +95,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                         hair_style: 0,
                         hair_color: 0,
                         facial_hair: 0,
-                        level: 0,
+                        level: Level::new_player(),
                         area: Area::NorthshireValley,
                         map: Map::EasternKingdoms,
                         position: Vector3d {

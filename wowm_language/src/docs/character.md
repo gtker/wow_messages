@@ -17,7 +17,7 @@ struct Character {
     u8 hair_style;
     u8 hair_color;
     u8 facial_hair;
-    u8 level;
+    Level level;
     Area area;
     Map map;
     Vector3d position;
@@ -46,7 +46,7 @@ struct Character {
 | - | 1 / - | u8 | hair_style |  |  |
 | - | 1 / - | u8 | hair_color |  |  |
 | - | 1 / - | u8 | facial_hair |  |  |
-| - | 1 / - | u8 | level |  |  |
+| - | 1 / Little | Level | level |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
@@ -79,7 +79,7 @@ struct Character {
     u8 hair_style;
     u8 hair_color;
     u8 facial_hair;
-    u8 level;
+    Level level;
     Area area;
     Map map;
     Vector3d position;
@@ -106,7 +106,7 @@ struct Character {
 | - | 1 / - | u8 | hair_style |  |  |
 | - | 1 / - | u8 | hair_color |  |  |
 | - | 1 / - | u8 | facial_hair |  |  |
-| - | 1 / - | u8 | level |  |  |
+| - | 1 / Little | Level | level |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
@@ -137,7 +137,7 @@ struct Character {
     u8 hair_style;
     u8 hair_color;
     u8 facial_hair;
-    u8 level;
+    Level level;
     Area area;
     Map map;
     Vector3d position;
@@ -165,7 +165,7 @@ struct Character {
 | - | 1 / - | u8 | hair_style |  |  |
 | - | 1 / - | u8 | hair_color |  |  |
 | - | 1 / - | u8 | facial_hair |  |  |
-| - | 1 / - | u8 | level |  |  |
+| - | 1 / Little | Level | level |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |

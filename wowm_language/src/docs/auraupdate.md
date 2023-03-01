@@ -10,7 +10,7 @@ struct AuraUpdate {
     u8 visual_slot;
     u32 spell;
     AuraFlag flags;
-    u8 level;
+    Level level;
     u8 aura_stack_count;
     if (flags & NOT_CASTER) {
         PackedGuid caster;
@@ -28,7 +28,7 @@ struct AuraUpdate {
 | 0x00 | 1 / - | u8 | visual_slot |  |  |
 | 0x01 | 4 / Little | u32 | spell |  |  |
 | 0x05 | 1 / - | [AuraFlag](auraflag.md) | flags |  |  |
-| 0x06 | 1 / - | u8 | level |  |  |
+| 0x06 | 1 / Little | Level | level |  |  |
 | 0x07 | 1 / - | u8 | aura_stack_count |  |  |
 
 If flags contains `NOT_CASTER`:

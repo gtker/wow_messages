@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::vanilla:: {
+    Level,
+};
 use crate::vanilla::Area;
 use crate::vanilla::Class;
 use crate::vanilla::GuildMemberStatus;
@@ -14,7 +17,7 @@ use std::io::{Read, Write};
 ///     GuildMemberStatus status;
 ///     CString name;
 ///     u32 rank;
-///     u8 level;
+///     Level level;
 ///     Class class;
 ///     Area area;
 ///     if (status == OFFLINE) {
@@ -29,7 +32,7 @@ pub struct GuildMember {
     pub status: GuildMember_GuildMemberStatus,
     pub name: String,
     pub rank: u32,
-    pub level: u8,
+    pub level: Level,
     pub class: Class,
     pub area: Area,
     pub public_note: String,
@@ -54,8 +57,8 @@ impl GuildMember {
         // rank: u32
         w.write_all(&self.rank.to_le_bytes())?;
 
-        // level: u8
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level
+        w.write_all(&self.level.as_int().to_le_bytes())?;
 
         // class: Class
         w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
@@ -109,8 +112,8 @@ impl GuildMember {
         // rank: u32
         let rank = crate::util::read_u32_le(&mut r)?;
 
-        // level: u8
-        let level = crate::util::read_u8_le(&mut r)?;
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         // class: Class
         let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
@@ -163,7 +166,7 @@ impl GuildMember {
         + self.status.size() // status: GuildMember_GuildMemberStatus
         + self.name.len() + 1 // name: CString
         + 4 // rank: u32
-        + 1 // level: u8
+        + 1 // level: Level
         + 1 // class: Class
         + 4 // area: Area
         + self.public_note.len() + 1 // public_note: CString

@@ -42,6 +42,7 @@ pub(crate) enum ParsedType {
     EnchantMask,
     InspectTalentGearMask,
     Gold,
+    Level,
 }
 
 impl ParsedType {
@@ -66,6 +67,7 @@ impl ParsedType {
             ParsedType::EnchantMask => "EnchantMask".to_string(),
             ParsedType::InspectTalentGearMask => "InspectTalentGearMask".to_string(),
             ParsedType::Gold => "Gold".to_string(),
+            ParsedType::Level => "Level".to_string(),
         }
     }
 
@@ -191,6 +193,7 @@ impl ParsedType {
                 INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
             ),
             ParsedType::Gold => sizes.inc_both(core::mem::size_of::<u32>()),
+            ParsedType::Level => sizes.inc_both(core::mem::size_of::<u8>()),
         }
 
         sizes
@@ -229,6 +232,7 @@ impl ParsedType {
             "Bool64" => Self::Bool(IntegerType::U64(Endianness::Little)),
             "Item16" | "Spell16" | "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
+            "Level" => Self::Level,
             "Spell" | "Milliseconds" | "Seconds" | "Item" => {
                 Self::Integer(IntegerType::U32(Endianness::Little))
             }
@@ -294,7 +298,8 @@ impl ParsedType {
                         ParsedType::CString => {
                             Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
                         }
-                        ParsedType::Gold
+                        ParsedType::Level
+                        | ParsedType::Gold
                         | ParsedType::EnchantMask
                         | ParsedType::InspectTalentGearMask
                         | ParsedType::AchievementDoneArray

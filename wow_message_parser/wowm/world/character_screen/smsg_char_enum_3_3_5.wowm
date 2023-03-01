@@ -16,7 +16,7 @@ struct Character {
     u8 hair_style;
     u8 hair_color;
     u8 facial_hair;
-    u8 level;
+    Level level;
     Area area;
     Map map;
     Vector3d position;
