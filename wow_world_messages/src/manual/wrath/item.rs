@@ -40,7 +40,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 inventory_type: v.inventory_type(),
                 allowed_class: v.allowed_class(),
                 allowed_race: v.allowed_race(),
-                item_level: Level::new(v.item_level() as u8),
+                item_level: v.item_level() as u32,
                 required_level: Level::new(v.required_level() as u8),
                 required_skill: v.required_skill(),
                 required_skill_rank: v.required_skill_rank() as u32,

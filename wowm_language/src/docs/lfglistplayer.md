@@ -29,7 +29,7 @@ struct LfgListPlayer {
         u32 health;
         u32 mana;
         Bool32 online;
-        Level32 average_item_level;
+        u32 average_item_level;
         u32 defense_skill;
         u32 dodge_rating;
         u32 block_rating;
@@ -89,7 +89,7 @@ If flags contains `CHARACTER_INFO`:
 | 0x3A | 4 / Little | u32 | health |  |  |
 | 0x3E | 4 / Little | u32 | mana |  |  |
 | 0x42 | 4 / Little | Bool32 | online |  | azerothcore: talentpoints, used as online/offline marker :D |
-| 0x46 | 4 / Little | Level32 | average_item_level |  |  |
+| 0x46 | 4 / Little | u32 | average_item_level |  |  |
 | 0x4A | 4 / Little | u32 | defense_skill |  |  |
 | 0x4E | 4 / Little | u32 | dodge_rating |  |  |
 | 0x52 | 4 / Little | u32 | block_rating |  |  |

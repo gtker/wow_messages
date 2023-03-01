@@ -36,7 +36,7 @@ use std::io::{Read, Write};
 ///         u32 health;
 ///         u32 mana;
 ///         Bool32 online;
-///         Level32 average_item_level;
+///         u32 average_item_level;
 ///         u32 defense_skill;
 ///         u32 dodge_rating;
 ///         u32 block_rating;
@@ -139,8 +139,8 @@ impl LfgListPlayer {
             // online: Bool32
             w.write_all(u32::from(if_statement.online).to_le_bytes().as_slice())?;
 
-            // average_item_level: Level32
-            w.write_all(&u32::from(if_statement.average_item_level.as_int()).to_le_bytes())?;
+            // average_item_level: u32
+            w.write_all(&if_statement.average_item_level.to_le_bytes())?;
 
             // defense_skill: u32
             w.write_all(&if_statement.defense_skill.to_le_bytes())?;
@@ -278,8 +278,8 @@ impl LfgListPlayer {
             // online: Bool32
             let online = crate::util::read_u32_le(&mut r)? != 0;
 
-            // average_item_level: Level32
-            let average_item_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+            // average_item_level: u32
+            let average_item_level = crate::util::read_u32_le(&mut r)?;
 
             // defense_skill: u32
             let defense_skill = crate::util::read_u32_le(&mut r)?;
@@ -788,7 +788,7 @@ pub struct LfgListPlayer_LfgUpdateFlag_CharacterInfo {
     pub agility: u32,
     pub armor: u32,
     pub attack_power: u32,
-    pub average_item_level: Level,
+    pub average_item_level: u32,
     pub block_rating: u32,
     pub class: Class,
     pub crit_rating_melee: u32,
@@ -818,7 +818,7 @@ impl LfgListPlayer_LfgUpdateFlag_CharacterInfo {
         4 // agility: u32
         + 4 // armor: u32
         + 4 // attack_power: u32
-        + 4 // average_item_level: Level32
+        + 4 // average_item_level: u32
         + 4 // block_rating: u32
         + 1 // class: Class
         + 4 // crit_rating_melee: u32

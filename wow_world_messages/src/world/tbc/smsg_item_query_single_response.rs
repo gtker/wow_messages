@@ -46,7 +46,7 @@ use std::io::{Read, Write};
 ///         (u32)InventoryType inventory_type;
 ///         AllowedClass allowed_class;
 ///         AllowedRace allowed_race;
-///         Level32 item_level;
+///         u32 item_level;
 ///         Level32 required_level;
 ///         (u32)Skill required_skill;
 ///         u32 required_skill_rank;
@@ -173,8 +173,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // allowed_race: AllowedRace
             w.write_all(&u32::from(v.allowed_race.as_int()).to_le_bytes())?;
 
-            // item_level: Level32
-            w.write_all(&u32::from(v.item_level.as_int()).to_le_bytes())?;
+            // item_level: u32
+            w.write_all(&v.item_level.to_le_bytes())?;
 
             // required_level: Level32
             w.write_all(&u32::from(v.required_level.as_int()).to_le_bytes())?;
@@ -400,8 +400,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // allowed_race: AllowedRace
             let allowed_race = AllowedRace::new(crate::util::read_u32_le(&mut r)?);
 
-            // item_level: Level32
-            let item_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+            // item_level: u32
+            let item_level = crate::util::read_u32_le(&mut r)?;
 
             // required_level: Level32
             let required_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
@@ -667,7 +667,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // inventory_type: InventoryType
             + 4 // allowed_class: AllowedClass
             + 4 // allowed_race: AllowedRace
-            + 4 // item_level: Level32
+            + 4 // item_level: u32
             + 4 // required_level: Level32
             + 4 // required_skill: Skill
             + 4 // required_skill_rank: u32
@@ -737,7 +737,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub inventory_type: InventoryType,
     pub allowed_class: AllowedClass,
     pub allowed_race: AllowedRace,
-    pub item_level: Level,
+    pub item_level: u32,
     pub required_level: Level,
     pub required_skill: Skill,
     pub required_skill_rank: u32,
@@ -803,7 +803,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // inventory_type: InventoryType
         + 4 // allowed_class: AllowedClass
         + 4 // allowed_race: AllowedRace
-        + 4 // item_level: Level32
+        + 4 // item_level: u32
         + 4 // required_level: Level32
         + 4 // required_skill: Skill
         + 4 // required_skill_rank: u32

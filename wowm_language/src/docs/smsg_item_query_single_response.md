@@ -167,7 +167,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
-        Level32 item_level;
+        u32 item_level;
         Level32 required_level;
         (u32)Skill required_skill;
         u32 required_skill_rank;
@@ -253,7 +253,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |  |
 | - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |  |
-| - | 4 / Little | Level32 | item_level |  |  |
+| - | 4 / Little | u32 | item_level |  |  |
 | - | 4 / Little | Level32 | required_level |  |  |
 | - | 4 / - | [Skill](skill.md) | required_skill |  |  |
 | - | 4 / Little | u32 | required_skill_rank |  |  |
@@ -328,7 +328,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
-        Level32 item_level;
+        u32 item_level;
         Level32 required_level;
         (u32)Skill required_skill;
         u32 required_skill_rank;
@@ -421,7 +421,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  |  |
 | - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  |  |
-| - | 4 / Little | Level32 | item_level |  |  |
+| - | 4 / Little | u32 | item_level |  |  |
 | - | 4 / Little | Level32 | required_level |  |  |
 | - | 4 / - | [Skill](skill.md) | required_skill |  |  |
 | - | 4 / Little | u32 | required_skill_rank |  |  |
