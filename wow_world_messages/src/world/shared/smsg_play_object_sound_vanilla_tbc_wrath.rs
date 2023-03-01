@@ -1,5 +1,7 @@
-use crate::Guid;
-use std::io::{Write, Read};
+use crate:: {
+    Guid,
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// vmangos: Nostalrius: ignored by client if unit is not loaded

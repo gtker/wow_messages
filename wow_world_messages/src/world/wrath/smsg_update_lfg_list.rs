@@ -1,9 +1,11 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::wrath::LfgListGroup;
 use crate::wrath::LfgListPlayer;
 use crate::wrath::LfgListUpdateType;
 use crate::wrath::LfgType;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm:111`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm#L111):

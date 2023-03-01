@@ -1,4 +1,5 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
+use crate::parser::types::container::TypeImport;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_ty::bool_ty_to_string;
 use crate::parser::types::sizes::{
@@ -99,6 +100,34 @@ impl Type {
         };
 
         s
+    }
+
+    pub(crate) fn is_importable_type(&self) -> Option<TypeImport> {
+        let ty = self.rust_str();
+        match self {
+            Type::Enum { .. }
+            | Type::Flag { .. }
+            | Type::Struct { .. }
+            | Type::CString
+            | Type::SizedCString
+            | Type::String
+            | Type::FloatingPoint(_)
+            | Type::Integer(_)
+            | Type::Bool(_) => None,
+
+            Type::Array(array) => array.is_importable_type(),
+
+            Type::Guid | Type::PackedGuid | Type::DateTime => Some(TypeImport::Crate(ty)),
+
+            Type::Gold
+            | Type::MonsterMoveSpline
+            | Type::AuraMask
+            | Type::AchievementDoneArray
+            | Type::AchievementInProgressArray
+            | Type::EnchantMask
+            | Type::InspectTalentGearMask
+            | Type::UpdateMask => Some(TypeImport::ImportPath(ty)),
+        }
     }
 
     // NOTE: Definers used in if statements count if statement contents

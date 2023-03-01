@@ -1,4 +1,8 @@
-use crate::tbc::Gold;
+use crate:: {
+};
+use crate::tbc:: {
+    Gold,
+};
 use crate::tbc::ItemDamageType;
 use crate::tbc::ItemSocket;
 use crate::tbc::ItemSpells;
@@ -19,7 +23,7 @@ use crate::tbc::AllowedClass;
 use crate::tbc::AllowedRace;
 use crate::tbc::BagFamily;
 use crate::tbc::ItemFlag;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:359`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L359):

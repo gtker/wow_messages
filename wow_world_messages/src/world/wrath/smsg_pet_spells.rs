@@ -1,10 +1,12 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::wrath::PetSpellCooldown;
 use crate::wrath::CreatureFamily;
 use crate::wrath::PetCommandState;
 use crate::wrath::PetEnabled;
 use crate::wrath::PetReactState;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm#L43):

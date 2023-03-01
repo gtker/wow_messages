@@ -1,8 +1,12 @@
-use crate::Guid;
-use crate::wrath::Gold;
+use crate:: {
+    Guid,
+};
+use crate::wrath:: {
+    Gold,
+};
 use crate::wrath::QuestItemRequirement;
 use crate::wrath::QuestCompletable;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.

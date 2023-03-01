@@ -1,5 +1,7 @@
-use crate::Guid;
-use std::io::{Write, Read};
+use crate:: {
+    Guid,
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Tells the client that the running speed has changed.

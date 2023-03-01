@@ -1,5 +1,7 @@
-use crate::Message;
-use std::io::{Write, Read};
+use crate:: {
+    Message,
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::wrath::SMSG_AUTH_CHALLENGE).

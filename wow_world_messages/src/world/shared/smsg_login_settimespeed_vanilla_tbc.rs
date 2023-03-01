@@ -1,5 +1,7 @@
-use crate::DateTime;
-use std::io::{Write, Read};
+use crate:: {
+    DateTime,
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Tells the client what the datetime is and how fast time passes.

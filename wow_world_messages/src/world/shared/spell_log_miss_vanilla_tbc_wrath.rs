@@ -1,6 +1,8 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use wow_world_base::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::SpellMissInfo;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelllogmiss.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogmiss.wowm#L1):

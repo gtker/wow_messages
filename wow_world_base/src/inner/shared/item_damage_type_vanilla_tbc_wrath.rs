@@ -1,5 +1,5 @@
 use crate::shared::spell_school_vanilla_vanilla_tbc_wrath::SpellSchool;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]

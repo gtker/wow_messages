@@ -1,4 +1,6 @@
-use std::io::{Write, Read};
+use crate:: {
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after a successful [`CMSG_AUTH_SESSION`](crate::vanilla::CMSG_AUTH_SESSION) and [`SMSG_AUTH_RESPONSE`](crate::vanilla::SMSG_AUTH_RESPONSE), or after failing to login with [`SMSG_CHARACTER_LOGIN_FAILED`](crate::vanilla::SMSG_CHARACTER_LOGIN_FAILED).

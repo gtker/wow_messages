@@ -1,8 +1,10 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::wrath::DamageInfo;
 use crate::wrath::HitInfo;
 use crate::wrath::VictimState;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm:76`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_attackerstateupdate_3_3_5.wowm#L76):

@@ -1,6 +1,8 @@
+use crate:: {
+    Message,
+};
 use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
-use crate::Message;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::vanilla::SMSG_AUTH_CHALLENGE).

@@ -1,4 +1,6 @@
-use std::io::{Write, Read};
+use crate:: {
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent in 3.3.5 by using the `bootme` console command. Command not available in 1.12. Available in 0.5.3.

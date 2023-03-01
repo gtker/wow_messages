@@ -1,5 +1,7 @@
-use crate::Guid;
-use std::io::{Write, Read};
+use crate:: {
+    Guid,
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Signals that client has right clicked an opponent and is in the attack stance.

@@ -1,6 +1,8 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use wow_world_base::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/raid_target.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/raid_target.wowm#L35):

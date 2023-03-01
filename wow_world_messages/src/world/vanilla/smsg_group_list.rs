@@ -1,9 +1,11 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::vanilla::GroupListMember;
 use crate::vanilla::GroupLootSetting;
 use crate::vanilla::GroupType;
 use crate::vanilla::ItemQuality;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_list.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_list.wowm#L19):

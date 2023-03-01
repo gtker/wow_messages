@@ -1,6 +1,8 @@
+use crate:: {
+    Message,
+};
 use crate::tbc::Object;
-use crate::Message;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::tbc::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed

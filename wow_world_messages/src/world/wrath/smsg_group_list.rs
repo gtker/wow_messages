@@ -1,10 +1,12 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::wrath::GroupListMember;
 use crate::wrath::DungeonDifficulty;
 use crate::wrath::GroupLootSetting;
 use crate::wrath::ItemQuality;
 use crate::wrath::RaidDifficulty;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_group_list.wowm:95`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_group_list.wowm#L95):

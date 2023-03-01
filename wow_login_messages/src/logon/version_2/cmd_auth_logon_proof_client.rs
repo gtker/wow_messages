@@ -1,6 +1,8 @@
+use crate:: {
+    ClientMessage,
+};
 use crate::logon::version_2::TelemetryKey;
-use crate::ClientMessage;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply after successful [`CMD_AUTH_LOGON_CHALLENGE_Server`](crate::logon::version_2::CMD_AUTH_LOGON_CHALLENGE_Server).

@@ -1,4 +1,6 @@
-use std::io::{Write, Read};
+use crate:: {
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Some emulators have this with fields, but it has been verified to be empty on 1.12 through reverse engineering.

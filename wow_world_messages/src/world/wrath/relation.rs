@@ -1,9 +1,11 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::wrath::Area;
 use crate::wrath::Class;
 use crate::wrath::FriendStatus;
 use crate::wrath::RelationType;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_contact_list.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_contact_list.wowm#L21):

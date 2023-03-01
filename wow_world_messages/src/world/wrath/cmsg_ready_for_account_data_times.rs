@@ -1,4 +1,6 @@
-use std::io::{Write, Read};
+use crate:: {
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Respond with [`SMSG_ACCOUNT_DATA_TIMES`](crate::wrath::SMSG_ACCOUNT_DATA_TIMES)

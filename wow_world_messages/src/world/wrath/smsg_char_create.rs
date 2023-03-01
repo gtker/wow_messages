@@ -1,5 +1,7 @@
+use crate:: {
+};
 use crate::wrath::WorldResult;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_CHAR_CREATE`](crate::wrath::CMSG_CHAR_CREATE).

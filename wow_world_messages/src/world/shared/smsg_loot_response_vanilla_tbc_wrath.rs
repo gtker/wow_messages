@@ -1,9 +1,13 @@
-use crate::Guid;
-use crate::vanilla::Gold;
+use crate:: {
+    Guid,
+};
+use crate::vanilla:: {
+    Gold,
+};
 use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
 use wow_world_base::shared::loot_method_vanilla_tbc_wrath::LootMethod;
 use wow_world_base::shared::loot_method_error_vanilla_tbc_wrath::LootMethodError;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:95`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L95):

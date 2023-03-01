@@ -1,7 +1,9 @@
+use crate:: {
+};
 use crate::wrath::Vector3d;
 use crate::wrath::Area;
 use crate::wrath::Map;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Inform the client of a their hearthstone location.

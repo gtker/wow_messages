@@ -1,8 +1,12 @@
-use crate::Guid;
-use crate::wrath::Gold;
+use crate:: {
+    Guid,
+};
+use crate::wrath:: {
+    Gold,
+};
 use crate::wrath::QuestDetailsEmote;
 use crate::wrath::QuestGiverReward;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm:62`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_questgiver_quest_details.wowm#L62):

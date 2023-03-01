@@ -1,9 +1,11 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::vanilla::Vector3d;
 use crate::vanilla::MovementFlags;
 use crate::vanilla::SplineFlag;
 use crate::vanilla::UpdateFlag;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:90`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L90):

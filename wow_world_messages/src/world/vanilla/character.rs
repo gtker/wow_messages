@@ -1,4 +1,6 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::vanilla::CharacterGear;
 use crate::vanilla::Vector3d;
 use crate::vanilla::Area;
@@ -8,7 +10,7 @@ use crate::vanilla::Gender;
 use crate::vanilla::Map;
 use crate::vanilla::Race;
 use crate::vanilla::CharacterFlags;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L17):

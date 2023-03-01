@@ -1,6 +1,8 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::wrath::MovementInfo;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// There does not appear to be a client version of this MSG.

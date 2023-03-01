@@ -1,4 +1,6 @@
-use std::io::{Write, Read};
+use crate:: {
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Seed used by the client to prove in [`CMSG_AUTH_SESSION`](crate::vanilla::CMSG_AUTH_SESSION) that it has authenticated with the auth server.

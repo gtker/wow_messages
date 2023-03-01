@@ -1,9 +1,13 @@
-use crate::tbc::Gold;
+use crate:: {
+};
+use crate::tbc:: {
+    Gold,
+};
 use crate::tbc::QuestItemReward;
 use crate::tbc::QuestObjective;
 use crate::tbc::Vector2d;
 use crate::tbc::Faction;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm:57`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm#L57):

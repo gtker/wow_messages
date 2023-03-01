@@ -1,6 +1,8 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::vanilla::ListInventoryItem;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.

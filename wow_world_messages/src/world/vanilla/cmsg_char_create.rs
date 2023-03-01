@@ -1,7 +1,9 @@
+use crate:: {
+};
 use crate::vanilla::Class;
 use crate::vanilla::Gender;
 use crate::vanilla::Race;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::vanilla::SMSG_CHAR_CREATE).

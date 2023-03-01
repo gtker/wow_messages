@@ -1,5 +1,7 @@
+use crate:: {
+};
 use crate::wrath::Area;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent by the client whenever it reaches a new area.

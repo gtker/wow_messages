@@ -1,8 +1,10 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::wrath::Gender;
 use crate::wrath::Race;
 use crate::wrath::WorldResult;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_faction_change.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_faction_change.wowm#L1):

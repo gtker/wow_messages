@@ -39,44 +39,40 @@ pub(crate) fn print_struct(e: &Container, o: &Objects, version: Version) -> Writ
 }
 
 fn print_includes(s: &mut Writer, e: &Container, version: Version) {
-    if e.contains_guid_or_packed_guid() {
-        s.wln("use crate::Guid;");
-    }
+    let (crate_types, import_path_types) = e.get_types_needing_import();
 
-    if e.contains_datetime() {
-        s.wln("use crate::DateTime;");
+    if !crate_types.is_empty() || !matches!(e.container_type(), ContainerType::Struct) {
+        s.body_closing_with_semicolon("use crate::", |s| {
+            for ty in &crate_types {
+                s.wln(format!("{ty},"));
+            }
+
+            match e.container_type() {
+                ContainerType::CLogin(_) => {
+                    s.wln(format!("{CLIENT_MESSAGE_TRAIT_NAME},"));
+                }
+                ContainerType::SLogin(_) => {
+                    s.wln(format!("{SERVER_MESSAGE_TRAIT_NAME},"));
+                }
+                ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
+                    if e.tags().compressed() || e.contains_compressed_variable() {
+                        // We manually implement the trait to avoid double compression
+                        s.wln("Message,");
+                    }
+                }
+                ContainerType::Struct => {}
+            }
+        });
     }
 
     let import_path = get_import_path(version);
 
-    if e.contains_aura_mask() {
-        s.wln(format!("use {import_path}::AuraMask;"));
-    }
-
-    if e.contains_update_mask() {
-        s.wln(format!("use {import_path}::UpdateMask;"));
-    }
-
-    if e.contains_monster_move_spline() {
-        s.wln(format!("use {import_path}::MonsterMoveSpline;"));
-    }
-
-    if e.contains_gold() {
-        s.wln(format!("use {import_path}::Gold;"));
-    }
-
-    if e.contains_achievement_array() {
-        s.wln(format!(
-            "use {import_path}::{{AchievementDoneArray, AchievementInProgressArray}};"
-        ));
-    }
-
-    if e.contains_inspect_talent_gear_mask() {
-        s.wln(format!("use {import_path}::InspectTalentGearMask;"));
-    }
-
-    if e.contains_enchant_mask() {
-        s.wln(format!("use {import_path}::EnchantMask;"));
+    if !import_path_types.is_empty() {
+        s.body_closing_with_semicolon(format!("use {import_path}::"), |s| {
+            for ty in &import_path_types {
+                s.wln(format!("{ty},"));
+            }
+        });
     }
 
     for c in e.get_objects_needing_import() {
@@ -106,23 +102,7 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         ));
     }
 
-    match e.container_type() {
-        ContainerType::CLogin(_) => {
-            s.wln(format!("use crate::{CLIENT_MESSAGE_TRAIT_NAME};"));
-        }
-        ContainerType::SLogin(_) => {
-            s.wln(format!("use crate::{SERVER_MESSAGE_TRAIT_NAME};"));
-        }
-        ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
-            if e.tags().compressed() || e.contains_compressed_variable() {
-                // We manually implement the trait to avoid double compression
-                s.wln("use crate::Message;");
-            }
-        }
-        ContainerType::Struct => {}
-    }
-
-    s.wln("use std::io::{Write, Read};");
+    s.wln("use std::io::{Read, Write};");
 
     s.newline();
 }

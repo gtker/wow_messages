@@ -1,3 +1,4 @@
+use crate::parser::types::container::TypeImport;
 use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::IntegerType;
 use crate::Container;
@@ -100,6 +101,15 @@ impl Array {
             ArrayType::Struct(c) => c.is_constant_sized(),
 
             ArrayType::CString => false,
+        }
+    }
+
+    pub(crate) fn is_importable_type(&self) -> Option<TypeImport> {
+        let ty = self.ty().rust_str();
+
+        match self.ty() {
+            ArrayType::Integer(_) | ArrayType::Struct(_) | ArrayType::CString => None,
+            ArrayType::Guid | ArrayType::PackedGuid => Some(TypeImport::Crate(ty)),
         }
     }
 }

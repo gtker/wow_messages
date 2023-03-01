@@ -1,5 +1,7 @@
-use crate::Guid;
-use std::io::{Write, Read};
+use crate:: {
+    Guid,
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Request of new name for character. This is only sent by the client if RENAME is set in the `CharacterFlags` of [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM) and the client tries to login.

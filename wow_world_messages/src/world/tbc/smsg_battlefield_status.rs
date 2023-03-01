@@ -1,7 +1,9 @@
+use crate:: {
+};
 use crate::tbc::ArenaType;
 use crate::tbc::BattlegroundType;
 use crate::tbc::StatusId;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// mangosone treats `arena_type`, `unknown1`, `battleground_type_id`, and `unknown2` as one big u64 and does not send any fields after these if all fields are 0.

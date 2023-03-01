@@ -1,4 +1,6 @@
-use std::io::{Write, Read};
+use crate:: {
+};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Acknowledge from the client that it has received an [`SMSG_NEW_WORLD`](crate::vanilla::SMSG_NEW_WORLD) and has loaded the new map.

@@ -526,80 +526,9 @@ impl Container {
         v
     }
 
-    pub(crate) fn contains_monster_move_spline(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.ty() == &Type::MonsterMoveSpline {
-                return true;
-            }
-        }
-
-        false
-    }
-
-    pub(crate) fn contains_update_mask(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.ty() == &Type::UpdateMask {
-                return true;
-            }
-        }
-
-        false
-    }
-
-    pub(crate) fn contains_achievement_array(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.ty() == &Type::AchievementDoneArray || d.ty() == &Type::AchievementInProgressArray
-            {
-                return true;
-            }
-        }
-
-        false
-    }
-
-    pub(crate) fn contains_gold(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.ty() == &Type::Gold {
-                return true;
-            }
-        }
-
-        false
-    }
-
-    pub(crate) fn contains_enchant_mask(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.ty() == &Type::EnchantMask {
-                return true;
-            }
-        }
-
-        false
-    }
-
-    pub(crate) fn contains_inspect_talent_gear_mask(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.ty() == &Type::InspectTalentGearMask {
-                return true;
-            }
-        }
-
-        false
-    }
-
     pub(crate) fn contains_update_mask_transitively(&self) -> bool {
         for d in self.all_definitions_transitively() {
             if d.ty() == &Type::UpdateMask {
-                return true;
-            }
-        }
-
-        false
-    }
-
-    pub(crate) fn contains_aura_mask(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.ty() == &Type::AuraMask {
                 return true;
             }
         }
@@ -621,31 +550,6 @@ impl Container {
         for d in self.all_definitions() {
             if d.tags().is_compressed() {
                 return true;
-            }
-        }
-
-        false
-    }
-
-    pub(crate) fn contains_datetime(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.ty() == &Type::DateTime {
-                return true;
-            }
-        }
-
-        false
-    }
-
-    pub(crate) fn contains_guid_or_packed_guid(&self) -> bool {
-        for d in self.all_definitions() {
-            match d.ty() {
-                Type::PackedGuid | Type::Guid => return true,
-                Type::Array(array) => match array.ty() {
-                    ArrayType::Guid | ArrayType::PackedGuid => return true,
-                    _ => {}
-                },
-                _ => {}
             }
         }
 
@@ -714,4 +618,29 @@ impl Container {
     pub(crate) fn members(&self) -> &[StructMember] {
         self.members.as_slice()
     }
+
+    pub(crate) fn get_types_needing_import(&self) -> (BTreeSet<String>, BTreeSet<String>) {
+        let mut local_crate = BTreeSet::new();
+        let mut import_path = BTreeSet::new();
+
+        for d in self.all_definitions() {
+            if let Some(s) = d.ty().is_importable_type() {
+                match s {
+                    TypeImport::Crate(s) => {
+                        local_crate.insert(s);
+                    }
+                    TypeImport::ImportPath(s) => {
+                        import_path.insert(s);
+                    }
+                }
+            }
+        }
+
+        (local_crate, import_path)
+    }
+}
+
+pub(crate) enum TypeImport {
+    Crate(String),
+    ImportPath(String),
 }

@@ -1,9 +1,11 @@
-use crate::Guid;
+use crate:: {
+    Guid,
+};
 use crate::tbc::Class;
 use crate::tbc::DeclinedNames;
 use crate::tbc::Gender;
 use crate::tbc::Race;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_NAME_QUERY`](crate::vanilla::CMSG_NAME_QUERY).
