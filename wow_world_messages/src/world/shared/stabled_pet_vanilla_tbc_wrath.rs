@@ -1,3 +1,6 @@
+use crate::vanilla:: {
+    Level,
+};
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -6,7 +9,7 @@ use std::io::{Read, Write};
 /// struct StabledPet {
 ///     u32 pet_number;
 ///     u32 entry;
-///     u32 level;
+///     Level32 level;
 ///     CString name;
 ///     u32 loyalty;
 ///     u8 slot;
@@ -15,7 +18,7 @@ use std::io::{Read, Write};
 pub struct StabledPet {
     pub pet_number: u32,
     pub entry: u32,
-    pub level: u32,
+    pub level: Level,
     pub name: String,
     pub loyalty: u32,
     /// vmangos/mangoszero/cmangos: client slot 1 == current pet (0)
@@ -31,8 +34,8 @@ impl StabledPet {
         // entry: u32
         w.write_all(&self.entry.to_le_bytes())?;
 
-        // level: u32
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level32
+        w.write_all(&u32::from(self.level.as_int()).to_le_bytes())?;
 
         // name: CString
         // TODO: Guard against strings that are already null-terminated
@@ -59,8 +62,8 @@ impl StabledPet {
         // entry: u32
         let entry = crate::util::read_u32_le(&mut r)?;
 
-        // level: u32
-        let level = crate::util::read_u32_le(&mut r)?;
+        // level: Level32
+        let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // name: CString
         let name = {
@@ -90,7 +93,7 @@ impl StabledPet {
     pub(crate) fn size(&self) -> usize {
         4 // pet_number: u32
         + 4 // entry: u32
-        + 4 // level: u32
+        + 4 // level: Level32
         + self.name.len() + 1 // name: CString
         + 4 // loyalty: u32
         + 1 // slot: u8

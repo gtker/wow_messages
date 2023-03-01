@@ -3,8 +3,9 @@ use crate::parser::types::container::TypeImport;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
-    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GUID_SIZE,
-    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
+    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE,
+    GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE,
+    UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::{FloatingPointType, IntegerType};
@@ -49,11 +50,15 @@ pub(crate) enum Type {
     InspectTalentGearMask,
     Gold,
     Level,
+    Level16,
+    Level32,
 }
 
 impl Type {
     pub(crate) const SPELL_NAME: &'static str = "Spell";
     pub(crate) const LEVEL_NAME: &'static str = "Level";
+    pub(crate) const LEVEL_NAME16: &'static str = "Level16";
+    pub(crate) const LEVEL_NAME32: &'static str = "Level32";
     pub(crate) const GOLD_NAME: &'static str = "Gold";
     pub(crate) const GUID_NAME: &'static str = "Guid";
     pub(crate) const PACKED_GUID_NAME: &'static str = "PackedGuid";
@@ -114,6 +119,8 @@ impl Type {
             Type::InspectTalentGearMask => ParsedType::InspectTalentGearMask,
             Type::Gold => ParsedType::Gold,
             Type::Level => ParsedType::Level,
+            Type::Level16 => ParsedType::Level16,
+            Type::Level32 => ParsedType::Level32,
 
             Type::Array(_) | Type::Enum { .. } | Type::Flag { .. } | Type::Struct { .. } => {
                 panic!("invalid conversion")
@@ -138,7 +145,9 @@ impl Type {
 
             Type::Guid | Type::PackedGuid | Type::DateTime => Some(TypeImport::Crate(ty)),
 
-            Type::Level
+            Type::Level16
+            | Type::Level32
+            | Type::Level
             | Type::Gold
             | Type::MonsterMoveSplines
             | Type::AuraMask
@@ -244,8 +253,10 @@ impl Type {
                 INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
                 INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
             ),
-            Type::Gold => sizes.inc_both(core::mem::size_of::<u32>()),
-            Type::Level => sizes.inc_both(core::mem::size_of::<u8>()),
+            Type::Gold => sizes.inc_both(GOLD_SIZE.into()),
+            Type::Level => sizes.inc_both(LEVEL_SIZE.into()),
+            Type::Level16 => sizes.inc_both(LEVEL16_SIZE),
+            Type::Level32 => sizes.inc_both(LEVEL32_SIZE),
         }
 
         sizes
@@ -273,9 +284,14 @@ impl Type {
     pub(crate) fn doc_endian_str(&self) -> String {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
-            Type::Level | Type::Gold | Type::DateTime | Type::Guid => "Little".to_string(),
             Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
-            Type::EnchantMask
+
+            Type::Level16 | Type::Level32 | Type::Gold | Type::DateTime | Type::Guid => {
+                "Little".to_string()
+            }
+
+            Type::Level
+            | Type::EnchantMask
             | Type::InspectTalentGearMask
             | Type::MonsterMoveSplines
             | Type::SizedCString

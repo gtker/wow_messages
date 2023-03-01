@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::vanilla:: {
+    Level,
+};
 use crate::vanilla::InventoryResult;
 use std::io::{Read, Write};
 
@@ -10,7 +13,7 @@ use std::io::{Read, Write};
 /// smsg SMSG_INVENTORY_CHANGE_FAILURE = 0x0112 {
 ///     InventoryResult result;
 ///     if (result == CANT_EQUIP_LEVEL_I) {
-///         u32 required_level;
+///         Level32 required_level;
 ///     }
 ///     if (result != OK) {
 ///         Guid item1;
@@ -42,8 +45,8 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 item2,
                 required_level,
             } => {
-                // required_level: u32
-                w.write_all(&required_level.to_le_bytes())?;
+                // required_level: Level32
+                w.write_all(&u32::from(required_level.as_int()).to_le_bytes())?;
 
             }
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipSkill {
@@ -1451,8 +1454,8 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
         match result {
             InventoryResult::Ok => {}
             InventoryResult::CantEquipLevelI => {
-                // required_level: u32
-                result_if_required_level = crate::util::read_u32_le(&mut r)?;
+                // required_level: Level32
+                result_if_required_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
             }
             InventoryResult::CantEquipSkill => {
@@ -2809,7 +2812,7 @@ pub enum SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
         bag_type_subclass: u8,
         item1: Guid,
         item2: Guid,
-        required_level: u32,
+        required_level: Level,
     },
     CantEquipSkill {
         bag_type_subclass: u8,
@@ -3236,7 +3239,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 1 // bag_type_subclass: u8
                 + 8 // item1: Guid
                 + 8 // item2: Guid
-                + 4 // required_level: u32
+                + 4 // required_level: Level32
             }
             Self::CantEquipSkill {
                 bag_type_subclass,

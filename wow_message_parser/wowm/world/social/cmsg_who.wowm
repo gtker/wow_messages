@@ -1,8 +1,8 @@
 #tag_all versions "1 2 3";
 
 cmsg CMSG_WHO = 0x62 {
-    u32 minimum_level;
-    u32 maximum_level;
+    Level32 minimum_level;
+    Level32 maximum_level;
     CString player_name;
     CString guild_name;
     u32 race_mask;

@@ -404,6 +404,8 @@ pub(crate) enum RustType {
     InspectTalentGearMask,
     Gold,
     Level,
+    Level16,
+    Level32,
 }
 
 impl RustType {
@@ -445,6 +447,8 @@ impl RustType {
             RustType::InspectTalentGearMask => Type::InspectTalentGearMask,
             RustType::Gold => Type::Gold,
             RustType::Level => Type::Level,
+            RustType::Level16 => Type::Level16,
+            RustType::Level32 => Type::Level32,
 
             RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => {
                 panic!("invalid conversion")
@@ -1270,6 +1274,8 @@ pub(crate) fn create_struct_member(
                 Type::InspectTalentGearMask => RustType::InspectTalentGearMask,
                 Type::Gold => RustType::Gold,
                 Type::Level => RustType::Level,
+                Type::Level16 => RustType::Level16,
+                Type::Level32 => RustType::Level32,
             };
 
             let name = d.name().to_string();

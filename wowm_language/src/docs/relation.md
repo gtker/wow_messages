@@ -14,7 +14,7 @@ struct Relation {
         FriendStatus status;
         if (status == ONLINE) {
             Area area;
-            u32 level;
+            Level32 level;
             (u32)Class class;
         }
     }
@@ -39,7 +39,7 @@ If status is equal to `ONLINE`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / - | [Area](area.md) | area |  |  |
-| - | 4 / Little | u32 | level |  |  |
+| - | 4 / Little | Level32 | level |  |  |
 | - | 4 / - | [Class](class.md) | class |  |  |
 
 # Relation
@@ -58,7 +58,7 @@ struct Relation {
         FriendStatus status;
         if (status == ONLINE) {
             Area area;
-            u32 level;
+            Level32 level;
             (u32)Class class;
         }
     }
@@ -83,6 +83,6 @@ If status is equal to `ONLINE`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / - | [Area](area.md) | area |  |  |
-| - | 4 / Little | u32 | level |  |  |
+| - | 4 / Little | Level32 | level |  |  |
 | - | 4 / - | [Class](class.md) | class |  |  |
 

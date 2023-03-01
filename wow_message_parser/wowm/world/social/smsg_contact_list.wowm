@@ -27,7 +27,7 @@ struct Relation {
         if (status == ONLINE)
         {
             Area area;
-            u32 level;
+            Level32 level;
             (u32)Class class;
         }
     }

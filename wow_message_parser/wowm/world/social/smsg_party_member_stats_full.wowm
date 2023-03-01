@@ -20,7 +20,7 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         u16 max_power;
     }
     if (mask & LEVEL) {
-        u16 level;
+        Level16 level;
     }
     if (mask & ZONE) {
         Area area;
@@ -91,7 +91,7 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         u16 max_power;
     }
     if (mask & LEVEL) {
-        u16 level;
+        Level16 level;
     }
     if (mask & ZONE) {
         Area area;
@@ -162,7 +162,7 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         u16 max_power;
     }
     if (mask & LEVEL) {
-        u16 level;
+        Level16 level;
     }
     if (mask & ZONE) {
         Area area;

@@ -289,6 +289,14 @@ fn print_definition(
                 s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
             }
         }
+        Type::Level16 => {
+            let name = w.unwrap().name();
+            s.wln(format!("ptvcursor_add(ptv, {name}, 2, ENC_LITTLE_ENDIAN);",));
+        }
+        Type::Level32 => {
+            let name = w.unwrap().name();
+            s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
+        }
         Type::Level => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 1, ENC_LITTLE_ENDIAN);",));

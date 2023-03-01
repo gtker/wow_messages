@@ -1,3 +1,6 @@
+use crate::vanilla:: {
+    Level,
+};
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -6,14 +9,14 @@ use std::io::{Read, Write};
 /// struct QuestItem {
 ///     u32 quest_id;
 ///     u32 quest_icon;
-///     u32 level;
+///     Level32 level;
 ///     CString title;
 /// }
 /// ```
 pub struct QuestItem {
     pub quest_id: u32,
     pub quest_icon: u32,
-    pub level: u32,
+    pub level: Level,
     /// vmangos/cmangos/mangoszero: max 0x200
     ///
     pub title: String,
@@ -27,8 +30,8 @@ impl QuestItem {
         // quest_icon: u32
         w.write_all(&self.quest_icon.to_le_bytes())?;
 
-        // level: u32
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level32
+        w.write_all(&u32::from(self.level.as_int()).to_le_bytes())?;
 
         // title: CString
         // TODO: Guard against strings that are already null-terminated
@@ -49,8 +52,8 @@ impl QuestItem {
         // quest_icon: u32
         let quest_icon = crate::util::read_u32_le(&mut r)?;
 
-        // level: u32
-        let level = crate::util::read_u32_le(&mut r)?;
+        // level: Level32
+        let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // title: CString
         let title = {
@@ -72,7 +75,7 @@ impl QuestItem {
     pub(crate) fn size(&self) -> usize {
         4 // quest_id: u32
         + 4 // quest_icon: u32
-        + 4 // level: u32
+        + 4 // level: Level32
         + self.title.len() + 1 // title: CString
     }
 }

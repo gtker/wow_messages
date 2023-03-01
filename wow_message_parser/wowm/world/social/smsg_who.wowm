@@ -1,7 +1,7 @@
 struct WhoPlayer {
     CString name;
     CString guild;
-    u32 level;
+    Level32 level;
     Class class;
     Race race;
     Area area;
@@ -13,7 +13,7 @@ struct WhoPlayer {
 struct WhoPlayer {
     CString name;
     CString guild;
-    u32 level;
+    Level32 level;
     Class class;
     Race race;
     Gender gender;

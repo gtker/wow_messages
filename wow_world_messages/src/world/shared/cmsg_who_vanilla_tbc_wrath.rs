@@ -1,13 +1,16 @@
 use crate:: {
 };
+use crate::vanilla:: {
+    Level,
+};
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/cmsg_who.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/cmsg_who.wowm#L3):
 /// ```text
 /// cmsg CMSG_WHO = 0x0062 {
-///     u32 minimum_level;
-///     u32 maximum_level;
+///     Level32 minimum_level;
+///     Level32 maximum_level;
 ///     CString player_name;
 ///     CString guild_name;
 ///     u32 race_mask;
@@ -19,8 +22,8 @@ use std::io::{Read, Write};
 /// }
 /// ```
 pub struct CMSG_WHO {
-    pub minimum_level: u32,
-    pub maximum_level: u32,
+    pub minimum_level: Level,
+    pub maximum_level: Level,
     pub player_name: String,
     pub guild_name: String,
     pub race_mask: u32,
@@ -37,11 +40,11 @@ impl crate::Message for CMSG_WHO {
     }
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
-        // minimum_level: u32
-        w.write_all(&self.minimum_level.to_le_bytes())?;
+        // minimum_level: Level32
+        w.write_all(&u32::from(self.minimum_level.as_int()).to_le_bytes())?;
 
-        // maximum_level: u32
-        w.write_all(&self.maximum_level.to_le_bytes())?;
+        // maximum_level: Level32
+        w.write_all(&u32::from(self.maximum_level.as_int()).to_le_bytes())?;
 
         // player_name: CString
         // TODO: Guard against strings that are already null-terminated
@@ -87,11 +90,11 @@ impl crate::Message for CMSG_WHO {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0062, size: body_size as u32 });
         }
 
-        // minimum_level: u32
-        let minimum_level = crate::util::read_u32_le(&mut r)?;
+        // minimum_level: Level32
+        let minimum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
-        // maximum_level: u32
-        let maximum_level = crate::util::read_u32_le(&mut r)?;
+        // maximum_level: Level32
+        let maximum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // player_name: CString
         let player_name = {
@@ -160,8 +163,8 @@ impl crate::wrath::ClientMessage for CMSG_WHO {}
 
 impl CMSG_WHO {
     pub(crate) fn size(&self) -> usize {
-        4 // minimum_level: u32
-        + 4 // maximum_level: u32
+        4 // minimum_level: Level32
+        + 4 // maximum_level: Level32
         + self.player_name.len() + 1 // player_name: CString
         + self.guild_name.len() + 1 // guild_name: CString
         + 4 // race_mask: u32

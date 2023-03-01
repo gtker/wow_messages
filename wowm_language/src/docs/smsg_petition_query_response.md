@@ -20,8 +20,8 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     AllowedClass allowed_class;
     AllowedRace allowed_race;
     u16 allowed_genders;
-    u32 allowed_minimum_level;
-    u32 allowed_maximum_level;
+    Level32 allowed_minimum_level;
+    Level32 allowed_maximum_level;
     u32 todo_amount_of_signers;
     u32 number_of_choices;
 }
@@ -54,8 +54,8 @@ SMSG have a header of 4 bytes.
 | - | 4 / - | [AllowedClass](allowedclass.md) | allowed_class |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / - | [AllowedRace](allowedrace.md) | allowed_race |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 2 / Little | u16 | allowed_genders |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | allowed_minimum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
-| - | 4 / Little | u32 | allowed_maximum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | Level32 | allowed_minimum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
+| - | 4 / Little | Level32 | allowed_maximum_level |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 | - | 4 / Little | u32 | todo_amount_of_signers |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos<br/>vmangos: char m_choicetext[10](./10.md)[64](./64.md) |
 | - | 4 / Little | u32 | number_of_choices |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 

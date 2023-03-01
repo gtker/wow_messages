@@ -37,7 +37,7 @@ use std::io::{Read, Write};
 ///     u32 recustomization_flags;
 ///     Bool first_login;
 ///     u32 pet_display_id;
-///     u32 pet_level;
+///     Level32 pet_level;
 ///     (u32)CreatureFamily pet_family;
 ///     CharacterGear[23] equipment;
 /// }
@@ -62,7 +62,7 @@ pub struct Character {
     pub recustomization_flags: u32,
     pub first_login: bool,
     pub pet_display_id: u32,
-    pub pet_level: u32,
+    pub pet_level: Level,
     pub pet_family: CreatureFamily,
     pub equipment: [CharacterGear; 23],
 }
@@ -130,8 +130,8 @@ impl Character {
         // pet_display_id: u32
         w.write_all(&self.pet_display_id.to_le_bytes())?;
 
-        // pet_level: u32
-        w.write_all(&self.pet_level.to_le_bytes())?;
+        // pet_level: Level32
+        w.write_all(&u32::from(self.pet_level.as_int()).to_le_bytes())?;
 
         // pet_family: CreatureFamily
         w.write_all(&u32::from(self.pet_family.as_int()).to_le_bytes())?;
@@ -207,8 +207,8 @@ impl Character {
         // pet_display_id: u32
         let pet_display_id = crate::util::read_u32_le(&mut r)?;
 
-        // pet_level: u32
-        let pet_level = crate::util::read_u32_le(&mut r)?;
+        // pet_level: Level32
+        let pet_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // pet_family: CreatureFamily
         let pet_family: CreatureFamily = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
@@ -271,7 +271,7 @@ impl Character {
         + 4 // recustomization_flags: u32
         + 1 // first_login: Bool
         + 4 // pet_display_id: u32
-        + 4 // pet_level: u32
+        + 4 // pet_level: Level32
         + 4 // pet_family: CreatureFamily
         + 23 * 9 // equipment: CharacterGear[23]
     }

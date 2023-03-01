@@ -179,6 +179,8 @@ impl WiresharkType {
             Type::Bool(i) => Self::Integer(*i),
             Type::Guid | Type::PackedGuid => Self::Integer(IntegerType::U64(Endianness::Little)),
             Type::Level => Self::Integer(IntegerType::U8),
+            Type::Level16 => Self::Integer(IntegerType::U16(Endianness::Little)),
+            Type::Level32 => Self::Integer(IntegerType::U32(Endianness::Little)),
             Type::Gold => Self::Integer(IntegerType::U32(Endianness::Little)),
             Type::DateTime => Self::Integer(IntegerType::U32(Endianness::Little)),
             Type::FloatingPoint(v) => Self::Float(*v),

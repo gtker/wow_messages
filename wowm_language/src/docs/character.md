@@ -25,7 +25,7 @@ struct Character {
     CharacterFlags flags;
     Bool first_login;
     u32 pet_display_id;
-    u32 pet_level;
+    Level32 pet_level;
     (u32)CreatureFamily pet_family;
     CharacterGear[19] equipment;
     u32 first_bag_display_id = 0;
@@ -46,7 +46,7 @@ struct Character {
 | - | 1 / - | u8 | hair_style |  |  |
 | - | 1 / - | u8 | hair_color |  |  |
 | - | 1 / - | u8 | facial_hair |  |  |
-| - | 1 / Little | Level | level |  |  |
+| - | 1 / - | Level | level |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
@@ -54,7 +54,7 @@ struct Character {
 | - | 4 / - | [CharacterFlags](characterflags.md) | flags |  |  |
 | - | 1 / - | Bool | first_login |  |  |
 | - | 4 / Little | u32 | pet_display_id |  |  |
-| - | 4 / Little | u32 | pet_level |  |  |
+| - | 4 / Little | Level32 | pet_level |  |  |
 | - | 4 / - | [CreatureFamily](creaturefamily.md) | pet_family |  |  |
 | - | 95 / - | [CharacterGear](charactergear.md)[19] | equipment |  |  |
 | - | 4 / Little | u32 | first_bag_display_id |  |  |
@@ -87,7 +87,7 @@ struct Character {
     u32 flags;
     Bool first_login;
     u32 pet_display_id;
-    u32 pet_level;
+    Level32 pet_level;
     (u32)CreatureFamily pet_family;
     CharacterGear[20] equipment;
 }
@@ -106,7 +106,7 @@ struct Character {
 | - | 1 / - | u8 | hair_style |  |  |
 | - | 1 / - | u8 | hair_color |  |  |
 | - | 1 / - | u8 | facial_hair |  |  |
-| - | 1 / Little | Level | level |  |  |
+| - | 1 / - | Level | level |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
@@ -114,7 +114,7 @@ struct Character {
 | - | 4 / Little | u32 | flags |  |  |
 | - | 1 / - | Bool | first_login |  |  |
 | - | 4 / Little | u32 | pet_display_id |  |  |
-| - | 4 / Little | u32 | pet_level |  |  |
+| - | 4 / Little | Level32 | pet_level |  |  |
 | - | 4 / - | [CreatureFamily](creaturefamily.md) | pet_family |  |  |
 | - | 180 / - | [CharacterGear](charactergear.md)[20] | equipment |  |  |
 
@@ -146,7 +146,7 @@ struct Character {
     u32 recustomization_flags;
     Bool first_login;
     u32 pet_display_id;
-    u32 pet_level;
+    Level32 pet_level;
     (u32)CreatureFamily pet_family;
     CharacterGear[23] equipment;
 }
@@ -165,7 +165,7 @@ struct Character {
 | - | 1 / - | u8 | hair_style |  |  |
 | - | 1 / - | u8 | hair_color |  |  |
 | - | 1 / - | u8 | facial_hair |  |  |
-| - | 1 / Little | Level | level |  |  |
+| - | 1 / - | Level | level |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
@@ -174,7 +174,7 @@ struct Character {
 | - | 4 / Little | u32 | recustomization_flags |  |  |
 | - | 1 / - | Bool | first_login |  |  |
 | - | 4 / Little | u32 | pet_display_id |  |  |
-| - | 4 / Little | u32 | pet_level |  |  |
+| - | 4 / Little | Level32 | pet_level |  |  |
 | - | 4 / - | [CreatureFamily](creaturefamily.md) | pet_family |  |  |
 | - | 207 / - | [CharacterGear](charactergear.md)[23] | equipment |  |  |
 

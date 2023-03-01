@@ -28,7 +28,7 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         u16 max_power;
     }
     if (mask & LEVEL) {
-        u16 level;
+        Level16 level;
     }
     if (mask & ZONE) {
         Area area;
@@ -127,7 +127,7 @@ If mask contains `LEVEL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 2 / Little | u16 | level |  |  |
+| - | 2 / Little | Level16 | level |  |  |
 
 If mask contains `ZONE`:
 
@@ -232,7 +232,7 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         u16 max_power;
     }
     if (mask & LEVEL) {
-        u16 level;
+        Level16 level;
     }
     if (mask & ZONE) {
         Area area;
@@ -331,7 +331,7 @@ If mask contains `LEVEL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 2 / Little | u16 | level |  |  |
+| - | 2 / Little | Level16 | level |  |  |
 
 If mask contains `ZONE`:
 
@@ -436,7 +436,7 @@ smsg SMSG_PARTY_MEMBER_STATS_FULL = 0x02F2 {
         u16 max_power;
     }
     if (mask & LEVEL) {
-        u16 level;
+        Level16 level;
     }
     if (mask & ZONE) {
         Area area;
@@ -538,7 +538,7 @@ If mask contains `LEVEL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 2 / Little | u16 | level |  |  |
+| - | 2 / Little | Level16 | level |  |  |
 
 If mask contains `ZONE`:
 

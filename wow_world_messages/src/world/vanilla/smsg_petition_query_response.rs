@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::vanilla:: {
+    Level,
+};
 use crate::vanilla::AllowedClass;
 use crate::vanilla::AllowedRace;
 use std::io::{Read, Write};
@@ -22,8 +25,8 @@ use std::io::{Read, Write};
 ///     AllowedClass allowed_class;
 ///     AllowedRace allowed_race;
 ///     u16 allowed_genders;
-///     u32 allowed_minimum_level;
-///     u32 allowed_maximum_level;
+///     Level32 allowed_minimum_level;
+///     Level32 allowed_maximum_level;
 ///     u32 todo_amount_of_signers;
 ///     u32 number_of_choices;
 /// }
@@ -64,10 +67,10 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub allowed_genders: u16,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
     ///
-    pub allowed_minimum_level: u32,
+    pub allowed_minimum_level: Level,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
     ///
-    pub allowed_maximum_level: u32,
+    pub allowed_maximum_level: Level,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
     /// vmangos: char m_choicetext`10``64`
     ///
@@ -132,11 +135,11 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         // allowed_genders: u16
         w.write_all(&self.allowed_genders.to_le_bytes())?;
 
-        // allowed_minimum_level: u32
-        w.write_all(&self.allowed_minimum_level.to_le_bytes())?;
+        // allowed_minimum_level: Level32
+        w.write_all(&u32::from(self.allowed_minimum_level.as_int()).to_le_bytes())?;
 
-        // allowed_maximum_level: u32
-        w.write_all(&self.allowed_maximum_level.to_le_bytes())?;
+        // allowed_maximum_level: Level32
+        w.write_all(&u32::from(self.allowed_maximum_level.as_int()).to_le_bytes())?;
 
         // todo_amount_of_signers: u32
         w.write_all(&self.todo_amount_of_signers.to_le_bytes())?;
@@ -196,11 +199,11 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         // allowed_genders: u16
         let allowed_genders = crate::util::read_u16_le(&mut r)?;
 
-        // allowed_minimum_level: u32
-        let allowed_minimum_level = crate::util::read_u32_le(&mut r)?;
+        // allowed_minimum_level: Level32
+        let allowed_minimum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
-        // allowed_maximum_level: u32
-        let allowed_maximum_level = crate::util::read_u32_le(&mut r)?;
+        // allowed_maximum_level: Level32
+        let allowed_maximum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // todo_amount_of_signers: u32
         let todo_amount_of_signers = crate::util::read_u32_le(&mut r)?;
@@ -248,8 +251,8 @@ impl SMSG_PETITION_QUERY_RESPONSE {
         + 4 // allowed_class: AllowedClass
         + 4 // allowed_race: AllowedRace
         + 2 // allowed_genders: u16
-        + 4 // allowed_minimum_level: u32
-        + 4 // allowed_maximum_level: u32
+        + 4 // allowed_minimum_level: Level32
+        + 4 // allowed_maximum_level: Level32
         + 4 // todo_amount_of_signers: u32
         + 4 // number_of_choices: u32
     }

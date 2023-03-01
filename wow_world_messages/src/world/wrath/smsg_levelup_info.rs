@@ -1,12 +1,15 @@
 use crate:: {
 };
+use crate::wrath:: {
+    Level,
+};
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_levelup_info.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_levelup_info.wowm#L18):
 /// ```text
 /// smsg SMSG_LEVELUP_INFO = 0x01D4 {
-///     u32 new_level;
+///     Level32 new_level;
 ///     u32 health;
 ///     u32 mana;
 ///     u32 rage;
@@ -23,7 +26,7 @@ use std::io::{Read, Write};
 /// }
 /// ```
 pub struct SMSG_LEVELUP_INFO {
-    pub new_level: u32,
+    pub new_level: Level,
     pub health: u32,
     pub mana: u32,
     pub rage: u32,
@@ -47,8 +50,8 @@ impl crate::Message for SMSG_LEVELUP_INFO {
     }
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
-        // new_level: u32
-        w.write_all(&self.new_level.to_le_bytes())?;
+        // new_level: Level32
+        w.write_all(&u32::from(self.new_level.as_int()).to_le_bytes())?;
 
         // health: u32
         w.write_all(&self.health.to_le_bytes())?;
@@ -96,8 +99,8 @@ impl crate::Message for SMSG_LEVELUP_INFO {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D4, size: body_size as u32 });
         }
 
-        // new_level: u32
-        let new_level = crate::util::read_u32_le(&mut r)?;
+        // new_level: Level32
+        let new_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // health: u32
         let health = crate::util::read_u32_le(&mut r)?;

@@ -5,8 +5,9 @@ use crate::parser::types::objects::conversion::{get_container, get_definer, get_
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
-    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GUID_SIZE,
-    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
+    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE,
+    GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE,
+    UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
@@ -44,6 +45,8 @@ pub(crate) enum ParsedType {
     InspectTalentGearMask,
     Gold,
     Level,
+    Level16,
+    Level32,
 }
 
 impl ParsedType {
@@ -71,6 +74,8 @@ impl ParsedType {
             ParsedType::InspectTalentGearMask => Type::INSPECT_TALENT_GEAR_MASK_NAME.to_string(),
             ParsedType::Gold => Type::GOLD_NAME.to_string(),
             ParsedType::Level => Type::LEVEL_NAME.to_string(),
+            ParsedType::Level16 => Type::LEVEL_NAME16.to_string(),
+            ParsedType::Level32 => Type::LEVEL_NAME32.to_string(),
         }
     }
 
@@ -96,7 +101,9 @@ impl ParsedType {
             ParsedType::EnchantMask => Type::ENCHANT_MASK_NAME.to_string(),
             ParsedType::InspectTalentGearMask => Type::INSPECT_TALENT_GEAR_MASK_NAME.to_string(),
             ParsedType::Gold => Type::GOLD_NAME.to_string(),
-            ParsedType::Level => Type::LEVEL_NAME.to_string(),
+            ParsedType::Level16 | ParsedType::Level32 | ParsedType::Level => {
+                Type::LEVEL_NAME.to_string()
+            }
         }
     }
 
@@ -221,8 +228,10 @@ impl ParsedType {
                 INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
                 INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
             ),
-            ParsedType::Gold => sizes.inc_both(core::mem::size_of::<u32>()),
-            ParsedType::Level => sizes.inc_both(core::mem::size_of::<u8>()),
+            ParsedType::Gold => sizes.inc_both(GOLD_SIZE.into()),
+            ParsedType::Level => sizes.inc_both(LEVEL_SIZE.into()),
+            ParsedType::Level16 => sizes.inc_both(LEVEL16_SIZE),
+            ParsedType::Level32 => sizes.inc_both(LEVEL32_SIZE),
         }
 
         sizes
@@ -279,6 +288,8 @@ impl ParsedType {
 
             "Item16" | "Spell16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             Type::LEVEL_NAME => Self::Level,
+            Type::LEVEL_NAME16 => Self::Level16,
+            Type::LEVEL_NAME32 => Self::Level32,
             Type::SPELL_NAME | "Milliseconds" | "Seconds" | "Item" => {
                 Self::Integer(IntegerType::U32(Endianness::Little))
             }
@@ -329,7 +340,9 @@ impl ParsedType {
                         ParsedType::CString => {
                             Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
                         }
-                        ParsedType::Level
+                        ParsedType::Level16
+                        | ParsedType::Level32
+                        | ParsedType::Level
                         | ParsedType::Gold
                         | ParsedType::EnchantMask
                         | ParsedType::InspectTalentGearMask

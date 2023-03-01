@@ -3,6 +3,7 @@ use crate:: {
 };
 use crate::wrath:: {
     AuraMask,
+    Level,
 };
 use crate::wrath::Area;
 use crate::wrath::Power;
@@ -35,7 +36,7 @@ use std::io::{Read, Write};
 ///         u16 max_power;
 ///     }
 ///     if (mask & LEVEL) {
-///         u16 level;
+///         Level16 level;
 ///     }
 ///     if (mask & ZONE) {
 ///         Area area;
@@ -135,8 +136,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
         }
 
         if let Some(if_statement) = &self.mask.level {
-            // level: u16
-            w.write_all(&if_statement.level.to_le_bytes())?;
+            // level: Level16
+            w.write_all(&u16::from(if_statement.level.as_int()).to_le_bytes())?;
 
         }
 
@@ -311,8 +312,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
         };
 
         let mask_LEVEL = if mask.is_LEVEL() {
-            // level: u16
-            let level = crate::util::read_u16_le(&mut r)?;
+            // level: Level16
+            let level = Level::new(crate::util::read_u16_le(&mut r)? as u8);
 
             Some(SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level {
                 level,
@@ -1687,12 +1688,12 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 pub struct SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level {
-    pub level: u16,
+    pub level: Level,
 }
 
 impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level {
     pub(crate) fn size(&self) -> usize {
-        2 // level: u16
+        2 // level: Level16
     }
 }
 

@@ -351,6 +351,21 @@ fn print_read_definition(
                 module_name = UTILITY_PATH,
             ));
         }
+        Type::Level16 => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = Level::new({module_name}::{prefix}read_u16_le(&mut r){postfix}? as u8);",
+                name = d.name(),
+                module_name = UTILITY_PATH,
+            ));
+        }
+        Type::Level32 => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = Level::new({module_name}::{prefix}read_u32_le(&mut r){postfix}? as u8);",
+                name = d.name(),
+                module_name = UTILITY_PATH,
+            ));
+        }
+
         Type::Gold => {
             s.wln(format!(
                 "{assignment_prefix}{name} = Gold::new({module_name}::{prefix}read_u32_le(&mut r){postfix}?);",

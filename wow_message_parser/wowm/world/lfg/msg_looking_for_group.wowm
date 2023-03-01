@@ -29,14 +29,14 @@ enum LfgMode : u8 {
 
 struct LfgPlayerMember {
     PackedGuid guid;
-    u32 level;
+    Level32 level;
 } {
     versions = "2.4.3";
 }
 
 struct LfgPlayer {
     PackedGuid guid;
-    u32 level;
+    Level32 level;
     Area area;
     LfgMode lfg_mode;
     u32[3] lfg_slots;

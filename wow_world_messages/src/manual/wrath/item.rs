@@ -2,7 +2,7 @@ use crate::wrath::{
     ItemSpells, SMSG_ITEM_QUERY_SINGLE_RESPONSE_found, SMSG_ITEM_NAME_QUERY_RESPONSE,
     SMSG_ITEM_QUERY_SINGLE_RESPONSE,
 };
-use wow_world_base::wrath::Item;
+use wow_world_base::wrath::{Item, Level};
 
 /// Convert an [`Item`] to a [`SMSG_ITEM_QUERY_SINGLE_RESPONSE`].
 ///
@@ -40,8 +40,8 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 inventory_type: v.inventory_type(),
                 allowed_class: v.allowed_class(),
                 allowed_race: v.allowed_race(),
-                item_level: v.item_level() as u32,
-                required_level: v.required_level() as u32,
+                item_level: Level::new(v.item_level() as u8),
+                required_level: Level::new(v.required_level() as u8),
                 required_skill: v.required_skill(),
                 required_skill_rank: v.required_skill_rank() as u32,
                 required_spell: v.required_spell() as u32,

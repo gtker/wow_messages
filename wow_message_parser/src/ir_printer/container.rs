@@ -256,6 +256,8 @@ pub(crate) enum IrType {
     InspectTalentGearMask,
     Gold,
     Level,
+    Level16,
+    Level32,
 }
 
 impl From<&Type> for IrType {
@@ -291,6 +293,8 @@ impl From<&Type> for IrType {
             Type::InspectTalentGearMask => Self::InspectTalentGearMask,
             Type::Gold => Self::Gold,
             Type::Level => Self::Level,
+            Type::Level16 => Self::Level16,
+            Type::Level32 => Self::Level32,
         }
     }
 }

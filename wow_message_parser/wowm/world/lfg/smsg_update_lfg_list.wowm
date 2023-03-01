@@ -72,7 +72,7 @@ struct LfgListPlayer {
         Bool32 online {
             comment = "azerothcore: talentpoints, used as online/offline marker :D";
         }
-        u32 average_item_level;
+        Level32 average_item_level;
         u32 defense_skill;
         u32 dodge_rating;
         u32 block_rating;

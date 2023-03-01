@@ -293,9 +293,13 @@ impl Container {
             match field {
                 StructMember::Definition(d) => {
                     match d.ty() {
+                        Type::Level16 => {
+                            sum+= 2;
+                        }
                         Type::Integer(int_type) => {
                             sum += int_type.size() as u64;
                         }
+                        Type::Level32 |
                         Type::Gold => {
                             sum += 4;
                         }

@@ -200,8 +200,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
-        u32 item_level;
-        u32 required_level;
+        Level32 item_level;
+        Level32 required_level;
         (u32)Skill required_skill;
         u32 required_skill_rank;
         Spell required_spell;
@@ -379,8 +379,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
-        u32 item_level;
-        u32 required_level;
+        Level32 item_level;
+        Level32 required_level;
         (u32)Skill required_skill;
         u32 required_skill_rank;
         Spell required_spell;
@@ -592,8 +592,8 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)InventoryType inventory_type;
         AllowedClass allowed_class;
         AllowedRace allowed_race;
-        u32 item_level;
-        u32 required_level;
+        Level32 item_level;
+        Level32 required_level;
         (u32)Skill required_skill;
         u32 required_skill_rank;
         Spell required_spell;

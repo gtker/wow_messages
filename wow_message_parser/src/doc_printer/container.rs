@@ -1,6 +1,7 @@
 use crate::doc_printer::DocWriter;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
+use crate::parser::types::sizes::{GOLD_SIZE, GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, IntegerType};
@@ -135,14 +136,20 @@ fn print_container_example_definition(
         Type::Bool(i) => {
             s.bytes(bytes.take(i.size() as usize).into_iter());
         }
+        Type::Level16 => {
+            s.bytes(bytes.take(LEVEL16_SIZE.into()).into_iter());
+        }
+        Type::Level32 => {
+            s.bytes(bytes.take(LEVEL32_SIZE.into()).into_iter());
+        }
         Type::Level => {
-            s.bytes(bytes.take(core::mem::size_of::<u8>()).into_iter());
+            s.bytes(bytes.take(LEVEL_SIZE.into()).into_iter());
         }
         Type::Gold => {
-            s.bytes(bytes.take(core::mem::size_of::<u32>()).into_iter());
+            s.bytes(bytes.take(GOLD_SIZE.into()).into_iter());
         }
         Type::Guid => {
-            s.bytes(bytes.take(core::mem::size_of::<u64>()).into_iter());
+            s.bytes(bytes.take(GUID_SIZE.into()).into_iter());
         }
         Type::FloatingPoint(f) => {
             s.bytes(bytes.take(f.size() as usize).into_iter());
@@ -573,7 +580,9 @@ fn print_container_field(
                 Type::MonsterMoveSplines => {
                     "[MonsterMoveSpline](../spec/monster-move-spline.md)".to_string()
                 }
-                Type::Level
+                Type::Level16
+                | Type::Level32
+                | Type::Level
                 | Type::Gold
                 | Type::SizedCString
                 | Type::Bool(_)

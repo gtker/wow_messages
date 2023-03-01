@@ -21,7 +21,11 @@ impl Level {
     }
 
     pub const fn new_player() -> Self {
-        Self { inner: 1 }
+        Self::new(1)
+    }
+
+    pub const fn zero() -> Self {
+        Self::new(0)
     }
 
     pub const fn new_absolute_max() -> Self {

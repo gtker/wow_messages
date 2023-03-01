@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::tbc:: {
+    Level,
+};
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -8,12 +11,12 @@ use std::io::{Read, Write};
 /// ```text
 /// struct LfgPlayerMember {
 ///     PackedGuid guid;
-///     u32 level;
+///     Level32 level;
 /// }
 /// ```
 pub struct LfgPlayerMember {
     pub guid: Guid,
-    pub level: u32,
+    pub level: Level,
 }
 
 impl LfgPlayerMember {
@@ -21,8 +24,8 @@ impl LfgPlayerMember {
         // guid: PackedGuid
         self.guid.write_packed_guid_into_vec(&mut w)?;
 
-        // level: u32
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level32
+        w.write_all(&u32::from(self.level.as_int()).to_le_bytes())?;
 
         Ok(())
     }
@@ -33,8 +36,8 @@ impl LfgPlayerMember {
         // guid: PackedGuid
         let guid = Guid::read_packed(&mut r)?;
 
-        // level: u32
-        let level = crate::util::read_u32_le(&mut r)?;
+        // level: Level32
+        let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         Ok(Self {
             guid,
@@ -47,7 +50,7 @@ impl LfgPlayerMember {
 impl LfgPlayerMember {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
-        + 4 // level: u32
+        + 4 // level: Level32
     }
 }
 

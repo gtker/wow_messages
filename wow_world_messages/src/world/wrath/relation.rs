@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::wrath:: {
+    Level,
+};
 use crate::wrath::Area;
 use crate::wrath::Class;
 use crate::wrath::FriendStatus;
@@ -18,7 +21,7 @@ use std::io::{Read, Write};
 ///         FriendStatus status;
 ///         if (status == ONLINE) {
 ///             Area area;
-///             u32 level;
+///             Level32 level;
 ///             (u32)Class class;
 ///         }
 ///     }
@@ -59,8 +62,8 @@ impl Relation {
                     // area: Area
                     w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
 
-                    // level: u32
-                    w.write_all(&level.to_le_bytes())?;
+                    // level: Level32
+                    w.write_all(&u32::from(level.as_int()).to_le_bytes())?;
 
                     // class: Class
                     w.write_all(&u32::from(class.as_int()).to_le_bytes())?;
@@ -101,8 +104,8 @@ impl Relation {
                     // area: Area
                     let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-                    // level: u32
-                    let level = crate::util::read_u32_le(&mut r)?;
+                    // level: Level32
+                    let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
                     // class: Class
                     let class: Class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
@@ -154,7 +157,7 @@ pub enum Relation_FriendStatus {
     Online {
         area: Area,
         class: Class,
-        level: u32,
+        level: Level,
     },
     Afk,
     Unknown3,
@@ -195,7 +198,7 @@ impl Relation_FriendStatus {
                 1
                 + 4 // area: Area
                 + 4 // class: Class
-                + 4 // level: u32
+                + 4 // level: Level32
             }
             Self::Afk => {
                 1

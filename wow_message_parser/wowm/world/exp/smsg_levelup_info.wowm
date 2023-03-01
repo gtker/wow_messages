@@ -1,5 +1,5 @@
 smsg SMSG_LEVELUP_INFO = 0x01D4 {
-    u32 new_level;
+    Level32 new_level;
     u32 health;
     u32 mana;
     u32 rage;
@@ -16,7 +16,7 @@ smsg SMSG_LEVELUP_INFO = 0x01D4 {
 }
 
 smsg SMSG_LEVELUP_INFO = 0x01D4 {
-    u32 new_level;
+    Level32 new_level;
     u32 health;
     u32 mana;
     u32 rage;

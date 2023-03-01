@@ -735,7 +735,7 @@ enum SpellCastResult : u8 {
 struct QuestItem {
     u32 quest_id;
     u32 quest_icon;
-    u32 level;
+    Level32 level;
     CString title {
         comment = "vmangos/cmangos/mangoszero: max 0x200";
     }
@@ -746,7 +746,7 @@ struct QuestItem {
 struct QuestItem {
     u32 quest_id;
     u32 quest_icon;
-    u32 level;
+    Level32 level;
     u32 flags;
     Bool repeatable;
     CString title {

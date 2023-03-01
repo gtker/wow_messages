@@ -32,10 +32,10 @@ smsg SMSG_PETITION_QUERY_RESPONSE = 0x01C7 {
     u16 allowed_genders {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
-    u32 allowed_minimum_level {
+    Level32 allowed_minimum_level {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
-    u32 allowed_maximum_level {
+    Level32 allowed_maximum_level {
         comment = "cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos";
     }
     /* TODO CORRECT_LAYOUT Figure out if CStrings work? */

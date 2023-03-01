@@ -26,7 +26,7 @@ struct ArenaTeamMember {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | Bool | online |  |  |
 | 0x09 | - / - | CString | name |  |  |
-| - | 1 / Little | Level | level |  |  |
+| - | 1 / - | Level | level |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |
 | - | 4 / Little | u32 | games_played_this_week |  |  |
 | - | 4 / Little | u32 | wins_this_week |  |  |
@@ -62,7 +62,7 @@ struct ArenaTeamMember {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | Bool | online |  |  |
 | 0x09 | - / - | CString | name |  |  |
-| - | 1 / Little | Level | level |  |  |
+| - | 1 / - | Level | level |  |  |
 | - | 1 / - | [Class](class.md) | class |  |  |
 | - | 4 / Little | u32 | games_played_this_week |  |  |
 | - | 4 / Little | u32 | wins_this_week |  |  |

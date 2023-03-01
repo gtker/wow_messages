@@ -11,7 +11,7 @@ struct Friend {
     FriendStatus status;
     if (status != OFFLINE) {
         Area area;
-        u32 level;
+        Level32 level;
         (u32)Class class;
     }
 }
@@ -28,6 +28,6 @@ If status is not equal to `OFFLINE`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x09 | 4 / - | [Area](area.md) | area |  |  |
-| 0x0D | 4 / Little | u32 | level |  |  |
+| 0x0D | 4 / Little | Level32 | level |  |  |
 | 0x11 | 4 / - | [Class](class.md) | class |  |  |
 

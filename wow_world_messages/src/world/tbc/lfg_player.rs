@@ -1,6 +1,9 @@
 use crate:: {
     Guid,
 };
+use crate::tbc:: {
+    Level,
+};
 use crate::tbc::LfgPlayerMember;
 use crate::tbc::Area;
 use crate::tbc::LfgMode;
@@ -11,7 +14,7 @@ use std::io::{Read, Write};
 /// ```text
 /// struct LfgPlayer {
 ///     PackedGuid guid;
-///     u32 level;
+///     Level32 level;
 ///     Area area;
 ///     LfgMode lfg_mode;
 ///     u32[3] lfg_slots;
@@ -22,7 +25,7 @@ use std::io::{Read, Write};
 /// ```
 pub struct LfgPlayer {
     pub guid: Guid,
-    pub level: u32,
+    pub level: Level,
     pub area: Area,
     pub lfg_mode: LfgMode,
     pub lfg_slots: [u32; 3],
@@ -35,8 +38,8 @@ impl LfgPlayer {
         // guid: PackedGuid
         self.guid.write_packed_guid_into_vec(&mut w)?;
 
-        // level: u32
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level32
+        w.write_all(&u32::from(self.level.as_int()).to_le_bytes())?;
 
         // area: Area
         w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
@@ -73,8 +76,8 @@ impl LfgPlayer {
         // guid: PackedGuid
         let guid = Guid::read_packed(&mut r)?;
 
-        // level: u32
-        let level = crate::util::read_u32_le(&mut r)?;
+        // level: Level32
+        let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // area: Area
         let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
@@ -125,7 +128,7 @@ impl LfgPlayer {
 impl LfgPlayer {
     pub(crate) fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
-        + 4 // level: u32
+        + 4 // level: Level32
         + 4 // area: Area
         + 1 // lfg_mode: LfgMode
         + 3 * core::mem::size_of::<u32>() // lfg_slots: u32[3]

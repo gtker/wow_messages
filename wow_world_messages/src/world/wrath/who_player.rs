@@ -1,3 +1,6 @@
+use crate::wrath:: {
+    Level,
+};
 use crate::wrath::Area;
 use crate::wrath::Class;
 use crate::wrath::Gender;
@@ -10,7 +13,7 @@ use std::io::{Read, Write};
 /// struct WhoPlayer {
 ///     CString name;
 ///     CString guild;
-///     u32 level;
+///     Level32 level;
 ///     Class class;
 ///     Race race;
 ///     Gender gender;
@@ -20,7 +23,7 @@ use std::io::{Read, Write};
 pub struct WhoPlayer {
     pub name: String,
     pub guild: String,
-    pub level: u32,
+    pub level: Level,
     pub class: Class,
     pub race: Race,
     pub gender: Gender,
@@ -43,8 +46,8 @@ impl WhoPlayer {
         // Null terminator
         w.write_all(&[0])?;
 
-        // level: u32
-        w.write_all(&self.level.to_le_bytes())?;
+        // level: Level32
+        w.write_all(&u32::from(self.level.as_int()).to_le_bytes())?;
 
         // class: Class
         w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
@@ -76,8 +79,8 @@ impl WhoPlayer {
             String::from_utf8(guild)?
         };
 
-        // level: u32
-        let level = crate::util::read_u32_le(&mut r)?;
+        // level: Level32
+        let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // class: Class
         let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
@@ -108,7 +111,7 @@ impl WhoPlayer {
     pub(crate) fn size(&self) -> usize {
         self.name.len() + 1 // name: CString
         + self.guild.len() + 1 // guild: CString
-        + 4 // level: u32
+        + 4 // level: Level32
         + 1 // class: Class
         + 1 // race: Race
         + 1 // gender: Gender

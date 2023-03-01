@@ -22,7 +22,7 @@ struct CalendarSendInvitee {
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | invitee |  |  |
-| - | 1 / Little | Level | level |  |  |
+| - | 1 / - | Level | level |  |  |
 | - | 1 / - | u8 | status |  |  |
 | - | 1 / - | u8 | rank |  |  |
 | - | 1 / - | u8 | guild_member |  |  |

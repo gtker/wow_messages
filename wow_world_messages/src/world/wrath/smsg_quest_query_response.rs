@@ -2,6 +2,7 @@ use crate:: {
 };
 use crate::wrath:: {
     Gold,
+    Level,
 };
 use crate::wrath::QuestItemRequirement;
 use crate::wrath::QuestItemReward;
@@ -16,8 +17,8 @@ use std::io::{Read, Write};
 /// smsg SMSG_QUEST_QUERY_RESPONSE = 0x005D {
 ///     u32 quest_id;
 ///     u32 quest_method;
-///     u32 quest_level;
-///     u32 minimum_quest_level;
+///     Level32 quest_level;
+///     Level32 minimum_quest_level;
 ///     u32 zone_or_sort;
 ///     u32 quest_type;
 ///     u32 suggest_player_amount;
@@ -62,11 +63,11 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     /// Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)
     ///
     pub quest_method: u32,
-    pub quest_level: u32,
+    pub quest_level: Level,
     /// min required level to obtain (added for 3.3).
     /// Assumed allowed (database) range is -1 to 255 (still using uint32, since negative value would not be of any known use for client)
     ///
-    pub minimum_quest_level: u32,
+    pub minimum_quest_level: Level,
     pub zone_or_sort: u32,
     pub quest_type: u32,
     pub suggest_player_amount: u32,
@@ -138,11 +139,11 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // quest_method: u32
         w.write_all(&self.quest_method.to_le_bytes())?;
 
-        // quest_level: u32
-        w.write_all(&self.quest_level.to_le_bytes())?;
+        // quest_level: Level32
+        w.write_all(&u32::from(self.quest_level.as_int()).to_le_bytes())?;
 
-        // minimum_quest_level: u32
-        w.write_all(&self.minimum_quest_level.to_le_bytes())?;
+        // minimum_quest_level: Level32
+        w.write_all(&u32::from(self.minimum_quest_level.as_int()).to_le_bytes())?;
 
         // zone_or_sort: u32
         w.write_all(&self.zone_or_sort.to_le_bytes())?;
@@ -305,11 +306,11 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         // quest_method: u32
         let quest_method = crate::util::read_u32_le(&mut r)?;
 
-        // quest_level: u32
-        let quest_level = crate::util::read_u32_le(&mut r)?;
+        // quest_level: Level32
+        let quest_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
-        // minimum_quest_level: u32
-        let minimum_quest_level = crate::util::read_u32_le(&mut r)?;
+        // minimum_quest_level: Level32
+        let minimum_quest_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // zone_or_sort: u32
         let zone_or_sort = crate::util::read_u32_le(&mut r)?;
@@ -539,8 +540,8 @@ impl SMSG_QUEST_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
         4 // quest_id: u32
         + 4 // quest_method: u32
-        + 4 // quest_level: u32
-        + 4 // minimum_quest_level: u32
+        + 4 // quest_level: Level32
+        + 4 // minimum_quest_level: Level32
         + 4 // zone_or_sort: u32
         + 4 // quest_type: u32
         + 4 // suggest_player_amount: u32

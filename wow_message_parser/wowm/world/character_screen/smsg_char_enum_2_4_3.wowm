@@ -24,7 +24,7 @@ struct Character {
     u32 flags;
     Bool first_login;
     u32 pet_display_id;
-    u32 pet_level;
+    Level32 pet_level;
     (u32)CreatureFamily pet_family;
     CharacterGear[20] equipment;
 }
