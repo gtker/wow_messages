@@ -4,7 +4,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::array::ArrayType;
 use crate::parser::types::compare_name_and_tags;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::sizes::{Sizes, DATETIME_SIZE};
+use crate::parser::types::sizes::Sizes;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
@@ -292,117 +292,22 @@ impl Container {
         for field in self.members() {
             match field {
                 StructMember::Definition(d) => {
-                    match d.ty() {
-                        Type::Level16 => {
-                            sum+= 2;
-                        }
-                        Type::Integer(int_type) => {
-                            sum += int_type.size() as u64;
-                        }
-                        Type::Level32 |
-                        Type::Gold => {
-                            sum += 4;
-                        }
-                        Type::FloatingPoint(float_ty) => {
-                            sum += float_ty.size() as u64;
-                        }
-                        Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
-                            let i = if let Some(upcast) = upcast {
-                                upcast.size()
-                            } else {
-                                e.ty().size()
-                            } as u64;
-                            sum += i;
-                        }
-                        Type::Bool(i) => sum += i.size() as u64,
-                        Type::DateTime => sum += DATETIME_SIZE as u64,
-                        Type::Struct { e, .. } => invalid_self_size_position(
+                    if let Some(size) = d.ty().sizes(self.tags()).is_constant() {
+                        let size = size as u64;
+                        sum += size;
+                    } else {
+                        invalid_self_size_position(
                             self.name(),
                             self.file_info(),
                             format!(
-                                "'{}' can not come after Struct variable '{}'",
+                                "'{}' can not come after variable '{}' of type '{}'",
                                 CONTAINER_SELF_SIZE_FIELD,
-                                e.name(),
+                                d.name(),
+                                d.ty().str(),
                             ),
-                        ),
-                        Type::PackedGuid => invalid_self_size_position(
-                            self.name(),
-                            self.file_info(),
-                            format!(
-                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a PackedGuid variable"
-                            ),
-                        ),
-                        Type::Level => sum += 4,
-                        Type::Guid => sum += 8_u64,
-                        Type::UpdateMask => invalid_self_size_position(
-                            self.name(),
-                            self.file_info(),
-                            format!(
-                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an UpdateMask variable"
-                            ),
-                        ),
-                        Type::AuraMask => invalid_self_size_position(
-                            self.name(),
-                            self.file_info(),
-                            format!(
-                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an AuraMask variable"
-                            ),
-                        ),
-                        Type::SizedCString => invalid_self_size_position(
-                            self.name(),
-                            self.file_info(),
-                            format!(
-                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a SizedCString variable"
-                            ),
-                        ),
-                        Type::CString => invalid_self_size_position(
-                            self.name(),
-                            self.file_info(),
-                            format!(
-                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a CString variable"
-                            ),
-                        ),
-                        Type::String { .. } => invalid_self_size_position(
-                            self.name(),
-                            self.file_info(),
-                            format!(
-                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a String variable"
-                            ),
-                        ),
-                        Type::AchievementDoneArray
-                        | Type::AchievementInProgressArray
-                        | Type::Array(_) => invalid_self_size_position(
-                            self.name(),
-                            self.file_info(),
-                            format!(
-                                "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an array variable"
-                            ),
-                        ),
-                        Type::MonsterMoveSplines => {
-                            invalid_self_size_position(
-                                self.name(),
-                                self.file_info(),
-                                format!(
-                                    "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a monster move spline"
-                                ))
-                        }
-                        Type::EnchantMask => {
-                            invalid_self_size_position(
-                                self.name(),
-                                self.file_info(),
-                                format!(
-                                    "'{CONTAINER_SELF_SIZE_FIELD}' can not come after a enchant mask"
-                                ))
-                        }
-                        Type::InspectTalentGearMask => {
-                            invalid_self_size_position(
-                                self.name(),
-                                self.file_info(),
-                                format!(
-                                    "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an inspect talent gear mask"
-                                ))
-                        }
+                        )
                     }
+
                     if let Some(v) = d.value() {
                         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
                             return sum;
