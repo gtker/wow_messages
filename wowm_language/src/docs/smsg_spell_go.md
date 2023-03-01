@@ -188,7 +188,7 @@ If flags contains `RUNE_UPDATE`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 1 / - | u8 | rune_mask_initial |  |  |
 | - | 1 / - | u8 | rune_mask_after_cast |  |  |
-| - | ? / - | u8[6] | rune_cooldowns |  |  |
+| - | 6 / - | u8[6] | rune_cooldowns |  |  |
 
 If flags contains `ADJUST_MISSILE`:
 

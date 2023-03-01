@@ -33,7 +33,7 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / Little | u32 | rights |  |  |
 | 0x0C | 4 / Little | Gold | gold_limit_per_day |  |  |
 | 0x10 | 1 / - | u8 | purchased_bank_tabs |  |  |
-| 0x11 | ? / - | [BankTab](banktab.md)[6] | bank_tabs |  |  |
+| 0x11 | 48 / - | [BankTab](banktab.md)[6] | bank_tabs |  |  |
 
 # MSG_GUILD_PERMISSIONS_Server
 
@@ -70,5 +70,5 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / Little | u32 | rights |  |  |
 | 0x0C | 4 / Little | Gold | gold_limit_per_day |  |  |
 | 0x10 | 1 / - | u8 | purchased_bank_tabs |  |  |
-| 0x11 | ? / - | [BankTab](banktab.md)[6] | bank_tabs |  |  |
+| 0x11 | 48 / - | [BankTab](banktab.md)[6] | bank_tabs |  |  |
 

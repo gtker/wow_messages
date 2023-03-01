@@ -25,5 +25,5 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | [LfgData](lfgdata.md)[3] | data |  |  |
+| 0x04 | 12 / - | [LfgData](lfgdata.md)[3] | data |  |  |
 

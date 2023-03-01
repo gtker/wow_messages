@@ -35,7 +35,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | u32[8] | tutorial_data |  |  |
+| 0x04 | 32 / - | u32[8] | tutorial_data |  |  |
 
 ### Examples
 

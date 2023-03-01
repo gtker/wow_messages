@@ -36,7 +36,7 @@ If flags contains `ROLES`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[3] | roles |  | Emu just sets all to 0. |
+| - | 3 / - | u8[3] | roles |  | Emu just sets all to 0. |
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | instance |  |  |
 | - | 4 / Little | u32 | encounter_mask |  |  |
 

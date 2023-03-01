@@ -25,7 +25,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | u32[120] | data |  |  |
+| 0x04 | 480 / - | u32[120] | data |  |  |
 
 # SMSG_ACTION_BUTTONS
 
@@ -54,7 +54,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | u32[132] | data |  |  |
+| 0x04 | 528 / - | u32[132] | data |  |  |
 
 # SMSG_ACTION_BUTTONS
 
@@ -92,5 +92,5 @@ If behavior is not equal to `CLEAR`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | ? / - | [ActionButton](actionbutton.md)[144] | data |  |  |
+| 0x05 | 576 / - | [ActionButton](actionbutton.md)[144] | data |  |  |
 

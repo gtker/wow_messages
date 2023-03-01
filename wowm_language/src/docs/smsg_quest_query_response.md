@@ -65,8 +65,8 @@ SMSG have a header of 4 bytes.
 | 0x30 | 4 / Little | u32 | reward_spell |  | cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0) |
 | 0x34 | 4 / Little | u32 | source_item_id |  |  |
 | 0x38 | 4 / Little | u32 | quest_flags |  |  |
-| 0x3C | ? / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
-| 0x5C | ? / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
+| 0x3C | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
+| 0x5C | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
 | 0x8C | 4 / Little | u32 | point_map_id |  |  |
 | 0x90 | 8 / - | [Vector2d](vector2d.md) | position |  |  |
 | 0x98 | 4 / Little | u32 | point_opt |  |  |
@@ -74,7 +74,7 @@ SMSG have a header of 4 bytes.
 | - | - / - | CString | objective_text |  |  |
 | - | - / - | CString | details |  |  |
 | - | - / - | CString | end_text |  |  |
-| - | ? / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
+| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
 | - | ? / - | CString[4] | objective_texts |  |  |
 
 # SMSG_QUEST_QUERY_RESPONSE
@@ -152,8 +152,8 @@ SMSG have a header of 4 bytes.
 | 0x40 | 4 / Little | u32 | source_item_id |  |  |
 | 0x44 | 4 / Little | u32 | quest_flags |  |  |
 | 0x48 | 4 / Little | u32 | title_reward |  | CharTitleId, new 2.4.0, player gets this title (id from CharTitles) |
-| 0x4C | ? / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
-| 0x6C | ? / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
+| 0x4C | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
+| 0x6C | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
 | 0x9C | 4 / Little | u32 | point_map_id |  |  |
 | 0xA0 | 8 / - | [Vector2d](vector2d.md) | position |  |  |
 | 0xA8 | 4 / Little | u32 | point_opt |  |  |
@@ -161,7 +161,7 @@ SMSG have a header of 4 bytes.
 | - | - / - | CString | objective_text |  |  |
 | - | - / - | CString | details |  |  |
 | - | - / - | CString | end_text |  |  |
-| - | ? / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
+| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
 | - | ? / - | CString[4] | objective_texts |  |  |
 
 # SMSG_QUEST_QUERY_RESPONSE
@@ -256,11 +256,11 @@ SMSG have a header of 4 bytes.
 | 0x58 | 4 / Little | u32 | bonus_talents |  |  |
 | 0x5C | 4 / Little | u32 | bonus_arena_points |  |  |
 | 0x60 | 4 / Little | u32 | unknown1 |  |  |
-| 0x64 | ? / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
-| 0x84 | ? / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
-| 0xB4 | ? / - | u32[5] | reputation_rewards |  |  |
-| 0xC8 | ? / - | u32[5] | reputation_reward_amounts |  |  |
-| 0xDC | ? / - | u32[5] | reputation_reward_overrides |  |  |
+| 0x64 | 32 / - | [QuestItemReward](questitemreward.md)[4] | rewards |  |  |
+| 0x84 | 48 / - | [QuestItemReward](questitemreward.md)[6] | choice_rewards |  |  |
+| 0xB4 | 20 / - | u32[5] | reputation_rewards |  |  |
+| 0xC8 | 20 / - | u32[5] | reputation_reward_amounts |  |  |
+| 0xDC | 20 / - | u32[5] | reputation_reward_overrides |  |  |
 | 0xF0 | 4 / Little | u32 | point_map_id |  |  |
 | 0xF4 | 8 / - | [Vector2d](vector2d.md) | position |  |  |
 | 0xFC | 4 / Little | u32 | point_opt |  |  |
@@ -269,7 +269,7 @@ SMSG have a header of 4 bytes.
 | - | - / - | CString | details |  |  |
 | - | - / - | CString | end_text |  |  |
 | - | - / - | CString | completed_text |  |  |
-| - | ? / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
-| - | ? / - | [QuestItemRequirement](questitemrequirement.md)[6] | item_requirements |  |  |
+| - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
+| - | 72 / - | [QuestItemRequirement](questitemrequirement.md)[6] | item_requirements |  |  |
 | - | ? / - | CString[4] | objective_texts |  |  |
 

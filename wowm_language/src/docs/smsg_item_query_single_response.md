@@ -112,8 +112,8 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | max_count |  |  |
 | - | 4 / Little | u32 | stackable |  |  |
 | - | 4 / Little | u32 | container_slots |  |  |
-| - | ? / - | [ItemStat](itemstat.md)[10] | stats |  |  |
-| - | ? / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |  |
+| - | 80 / - | [ItemStat](itemstat.md)[10] | stats |  |  |
+| - | 60 / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |  |
 | - | 4 / Little | i32 | armor |  |  |
 | - | 4 / Little | i32 | holy_resistance |  |  |
 | - | 4 / Little | i32 | fire_resistance |  |  |
@@ -124,7 +124,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | delay |  |  |
 | - | 4 / Little | u32 | ammo_type |  |  |
 | - | 4 / Little | f32 | ranged_range_modification |  |  |
-| - | ? / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
+| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
 | - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
@@ -265,8 +265,8 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | max_count |  |  |
 | - | 4 / Little | u32 | stackable |  |  |
 | - | 4 / Little | u32 | container_slots |  |  |
-| - | ? / - | [ItemStat](itemstat.md)[10] | stats |  |  |
-| - | ? / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |  |
+| - | 80 / - | [ItemStat](itemstat.md)[10] | stats |  |  |
+| - | 60 / - | [ItemDamageType](itemdamagetype.md)[5] | damages |  |  |
 | - | 4 / Little | i32 | armor |  |  |
 | - | 4 / Little | i32 | holy_resistance |  |  |
 | - | 4 / Little | i32 | fire_resistance |  |  |
@@ -277,7 +277,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | delay |  |  |
 | - | 4 / Little | u32 | ammo_type |  |  |
 | - | 4 / Little | f32 | ranged_range_modification |  |  |
-| - | ? / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
+| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
 | - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
@@ -295,7 +295,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |  |
 | - | 4 / Little | u32 | totem_category |  | mangosone: id from TotemCategory.dbc |
-| - | ? / - | [ItemSocket](itemsocket.md)[3] | sockets |  |  |
+| - | 24 / - | [ItemSocket](itemsocket.md)[3] | sockets |  |  |
 | - | 4 / Little | u32 | socket_bonus |  |  |
 | - | 4 / Little | u32 | gem_properties |  |  |
 | - | 4 / Little | u32 | required_disenchant_skill |  |  |
@@ -437,7 +437,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | ? / - | [ItemStat](itemstat.md)[amount_of_stats] | stats |  |  |
 | - | 4 / Little | u32 | scaling_stats_entry |  |  |
 | - | 4 / Little | u32 | scaling_stats_flag |  |  |
-| - | ? / - | [ItemDamageType](itemdamagetype.md)[2] | damages |  |  |
+| - | 24 / - | [ItemDamageType](itemdamagetype.md)[2] | damages |  |  |
 | - | 4 / Little | i32 | armor |  |  |
 | - | 4 / Little | i32 | holy_resistance |  |  |
 | - | 4 / Little | i32 | fire_resistance |  |  |
@@ -448,7 +448,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | delay |  |  |
 | - | 4 / Little | u32 | ammo_type |  |  |
 | - | 4 / Little | f32 | ranged_range_modification |  |  |
-| - | ? / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
+| - | 120 / - | [ItemSpells](itemspells.md)[5] | spells |  |  |
 | - | 4 / - | [Bonding](bonding.md) | bonding |  |  |
 | - | - / - | CString | description |  |  |
 | - | 4 / Little | u32 | page_text |  |  |
@@ -467,7 +467,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |  |
 | - | 4 / Little | u32 | totem_category |  | mangosone: id from TotemCategory.dbc |
-| - | ? / - | [ItemSocket](itemsocket.md)[3] | sockets |  |  |
+| - | 24 / - | [ItemSocket](itemsocket.md)[3] | sockets |  |  |
 | - | 4 / Little | u32 | socket_bonus |  |  |
 | - | 4 / Little | u32 | gem_properties |  |  |
 | - | 4 / Little | u32 | required_disenchant_skill |  |  |

@@ -179,7 +179,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | unknown7 |  |  |
 | - | 4 / Little | u32 | unknown8 |  |  |
 | - | 4 / Little | u32 | unknown9 |  |  |
-| - | ? / - | u8[10] | unknown10 |  |  |
+| - | 10 / - | u8[10] | unknown10 |  |  |
 | - | 4 / Little | u32 | unknown11 |  |  |
 | - | 4 / - | [CharterType](chartertype.md) | charter_type |  |  |
 

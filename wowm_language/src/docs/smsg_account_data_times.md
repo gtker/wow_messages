@@ -33,7 +33,7 @@ SMSG have a header of 4 bytes.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | ? / - | u32[32] | data |  | cmangos/vmangos/mangoszero sets to all zeros |
+| 0x04 | 128 / - | u32[32] | data |  | cmangos/vmangos/mangoszero sets to all zeros |
 
 ### Examples
 

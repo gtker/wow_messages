@@ -31,9 +31,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | u8[16] | proof_data |  |  |
-| 0x11 | ? / - | u8[20] | client_proof |  |  |
-| 0x25 | ? / - | u8[20] | client_checksum |  |  |
+| 0x01 | 16 / - | u8[16] | proof_data |  |  |
+| 0x11 | 20 / - | u8[20] | client_proof |  |  |
+| 0x25 | 20 / - | u8[20] | client_checksum |  |  |
 | 0x39 | 1 / - | u8 | key_count |  |  |
 
 ### Examples

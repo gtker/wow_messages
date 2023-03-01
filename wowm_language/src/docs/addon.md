@@ -39,7 +39,7 @@ If key_version is not equal to `ZERO`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x03 | ? / - | u8[256] | public_key |  |  |
+| 0x03 | 256 / - | u8[256] | public_key |  |  |
 | 0x103 | 4 / Little | u32 | update_available_flag |  |  |
 | 0x107 | 1 / - | [UrlInfo](urlinfo.md) | url_info |  |  |
 

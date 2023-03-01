@@ -38,8 +38,8 @@ If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | ? / - | u8[16] | challenge_data |  |  |
-| 0x12 | ? / - | u8[16] | checksum_salt |  |  |
+| 0x02 | 16 / - | u8[16] | challenge_data |  |  |
+| 0x12 | 16 / - | u8[16] | checksum_salt |  |  |
 
 ### Examples
 
@@ -97,8 +97,8 @@ If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | ? / - | u8[16] | challenge_data |  |  |
-| 0x12 | ? / - | u8[16] | checksum_salt |  |  |
+| 0x02 | 16 / - | u8[16] | challenge_data |  |  |
+| 0x12 | 16 / - | u8[16] | checksum_salt |  |  |
 
 ### Examples
 

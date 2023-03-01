@@ -599,7 +599,7 @@ fn print_container_field(
                 } else {
                     "-".to_string()
                 },
-                size = d.ty().doc_size_of(),
+                size = d.ty().doc_size_of(tags),
                 endian = d.ty().doc_endian_str(),
                 ty = ty,
                 name = d.name(),

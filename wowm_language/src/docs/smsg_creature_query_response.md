@@ -125,7 +125,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | creature_rank |  | mangosone: Creature Rank (elite, boss, etc) |
 | - | 4 / Little | u32 | unknown0 |  | mangosone: wdbFeild11 |
 | - | 4 / Little | u32 | spell_data_id |  | mangosone: Id from CreatureSpellData.dbc wdbField12 |
-| - | ? / - | u32[4] | display_ids |  |  |
+| - | 16 / - | u32[4] | display_ids |  |  |
 | - | 4 / Little | f32 | health_multiplier |  |  |
 | - | 4 / Little | f32 | mana_multiplier |  |  |
 | - | 1 / - | u8 | racial_leader |  |  |
@@ -195,10 +195,10 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | creature_rank |  | mangosone: Creature Rank (elite, boss, etc) |
 | - | 4 / Little | u32 | kill_credit1 |  | mangosone: new in 3.1 |
 | - | 4 / Little | u32 | kill_credit2 |  | mangosone: new in 3.1 |
-| - | ? / - | u32[4] | display_ids |  |  |
+| - | 16 / - | u32[4] | display_ids |  |  |
 | - | 4 / Little | f32 | health_multiplier |  |  |
 | - | 4 / Little | f32 | mana_multiplier |  |  |
 | - | 1 / - | u8 | racial_leader |  |  |
-| - | ? / - | u32[6] | quest_items |  |  |
+| - | 24 / - | u32[6] | quest_items |  |  |
 | - | 4 / Little | u32 | movement_id |  | mangosone: CreatureMovementInfo.dbc |
 

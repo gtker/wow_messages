@@ -193,7 +193,7 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | reward_talents |  |  |
 | - | 4 / Little | u32 | reward_arena_points |  |  |
 | - | 4 / Little | u32 | reward_reputation_mask |  |  |
-| - | ? / - | u32[5] | reward_factions |  |  |
-| - | ? / - | u32[5] | reward_reputations |  | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
-| - | ? / - | u32[5] | reward_reputations_override |  | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
+| - | 20 / - | u32[5] | reward_factions |  |  |
+| - | 20 / - | u32[5] | reward_reputations |  | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
+| - | 20 / - | u32[5] | reward_reputations_override |  | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
 

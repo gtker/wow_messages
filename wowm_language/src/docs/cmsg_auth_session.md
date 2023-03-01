@@ -43,7 +43,7 @@ CMSG have a header of 6 bytes.
 | 0x0A | 4 / Little | u32 | server_id | This is sent to the client in [CMD_REALM_LIST_Server](./cmd_realm_list_server.md). |  |
 | 0x0E | - / - | CString | username |  |  |
 | - | 4 / Little | u32 | client_seed |  |  |
-| - | ? / - | u8[20] | client_proof |  |  |
+| - | 20 / - | u8[20] | client_proof |  |  |
 | - | 4 / Little | u32 | decompressed_addon_info_size |  |  |
 | - | ? / - | [AddonInfo](addoninfo.md)[-] | addon_info |  |  |
 
@@ -166,7 +166,7 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | battleground_id |  |  |
 | - | 4 / Little | u32 | realm_id |  |  |
 | - | 8 / Little | u64 | dos_response |  | Purpose and exact meaning of name unknown.<br/>TrinityCore has this name but never uses the variable afterwards. |
-| - | ? / - | u8[20] | client_proof |  |  |
+| - | 20 / - | u8[20] | client_proof |  |  |
 | - | 4 / Little | u32 | decompressed_addon_info_size |  |  |
 | - | ? / - | u8[-] | addon_info |  |  |
 

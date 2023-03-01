@@ -195,9 +195,9 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | talent_reward |  |  |
 | - | 4 / Little | u32 | arena_point_reward |  |  |
 | - | 4 / Little | u32 | unknown2 |  | arcemu: new 3.3.0 |
-| - | ? / - | u32[5] | reward_factions |  |  |
-| - | ? / - | u32[5] | reward_reputations |  | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
-| - | ? / - | u32[5] | reward_reputations_override |  | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
+| - | 20 / - | u32[5] | reward_factions |  |  |
+| - | 20 / - | u32[5] | reward_reputations |  | mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row) |
+| - | 20 / - | u32[5] | reward_reputations_override |  | mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window |
 | - | 4 / Little | u32 | amount_of_emotes |  |  |
 | - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |  |
 

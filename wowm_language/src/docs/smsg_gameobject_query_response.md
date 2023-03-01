@@ -48,7 +48,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | - / - | CString | name3 |  |  |
 | - | - / - | CString | name4 |  |  |
 | - | - / - | CString | name5 |  |  |
-| - | ? / - | u32[6] | raw_data |  |  |
+| - | 24 / - | u32[6] | raw_data |  |  |
 
 # SMSG_GAMEOBJECT_QUERY_RESPONSE
 
@@ -105,7 +105,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | - / - | CString | icon_name |  |  |
 | - | - / - | CString | cast_bar_caption |  |  |
 | - | - / - | CString | unknown |  |  |
-| - | ? / - | u32[6] | raw_data |  |  |
+| - | 24 / - | u32[6] | raw_data |  |  |
 | - | 4 / Little | f32 | gameobject_size |  |  |
 
 # SMSG_GAMEOBJECT_QUERY_RESPONSE
@@ -164,7 +164,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | - / - | CString | icon_name |  |  |
 | - | - / - | CString | cast_bar_caption |  |  |
 | - | - / - | CString | unknown |  |  |
-| - | ? / - | u32[6] | raw_data |  |  |
+| - | 24 / - | u32[6] | raw_data |  |  |
 | - | 4 / Little | f32 | gameobject_size |  |  |
-| - | ? / - | u32[6] | gameobject_quest_items |  |  |
+| - | 24 / - | u32[6] | gameobject_quest_items |  |  |
 

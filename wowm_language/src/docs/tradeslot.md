@@ -79,7 +79,7 @@ struct TradeSlot {
 | 0x0D | 4 / Little | Bool32 | wrapped |  |  |
 | 0x11 | 8 / Little | [Guid](../spec/packed-guid.md) | gift_wrapper |  |  |
 | 0x19 | 4 / Little | u32 | enchantment |  |  |
-| 0x1D | ? / - | u32[3] | enchantments_slots |  |  |
+| 0x1D | 12 / - | u32[3] | enchantments_slots |  |  |
 | 0x29 | 8 / Little | [Guid](../spec/packed-guid.md) | item_creator |  |  |
 | 0x31 | 4 / Little | u32 | spell_charges |  |  |
 | 0x35 | 4 / Little | u32 | item_suffix_factor |  |  |

@@ -27,8 +27,8 @@ struct SendCalendarHoliday {
 | 0x08 | 4 / Little | u32 | looping |  |  |
 | 0x0C | 4 / Little | u32 | priority |  |  |
 | 0x10 | 4 / Little | u32 | calendar_filter_type |  |  |
-| 0x14 | ? / - | u32[26] | holiday_days |  |  |
-| 0x7C | ? / - | u32[10] | durations |  |  |
-| 0xA4 | ? / - | u32[10] | flags |  |  |
+| 0x14 | 104 / - | u32[26] | holiday_days |  |  |
+| 0x7C | 40 / - | u32[10] | durations |  |  |
+| 0xA4 | 40 / - | u32[10] | flags |  |  |
 | 0xCC | - / - | CString | texture_file_name |  |  |
 

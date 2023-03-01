@@ -33,5 +33,5 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | index |  |  |
 | - | - / - | CString | name |  |  |
 | - | - / - | CString | icon_name |  |  |
-| - | ? / - | [Guid](../spec/packed-guid.md)[19] | equipment |  |  |
+| - | 152 / - | [Guid](../spec/packed-guid.md)[19] | equipment |  |  |
 

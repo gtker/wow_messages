@@ -20,7 +20,7 @@ struct NpcTextUpdate {
 | 0x00 | 4 / Little | f32 | probability |  |  |
 | 0x04 | ? / - | CString[2] | texts |  |  |
 | - | 4 / - | [Language](language.md) | language |  |  |
-| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
+| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
 
 # NpcTextUpdate
 
@@ -44,7 +44,7 @@ struct NpcTextUpdate {
 | 0x00 | 4 / Little | f32 | probability |  |  |
 | 0x04 | ? / - | CString[2] | texts |  |  |
 | - | 1 / - | [Language](language.md) | language |  |  |
-| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
+| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
 
 # NpcTextUpdate
 
@@ -68,5 +68,5 @@ struct NpcTextUpdate {
 | 0x00 | 4 / Little | f32 | probability |  |  |
 | 0x04 | ? / - | CString[2] | texts |  |  |
 | - | 1 / - | [Language](language.md) | language |  |  |
-| - | ? / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
+| - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
 

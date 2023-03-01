@@ -37,7 +37,7 @@ If update_type is equal to `FULL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | ? / - | [RaidTargetUpdate](raidtargetupdate.md)[8] | raid_targets |  |  |
+| 0x05 | 72 / - | [RaidTargetUpdate](raidtargetupdate.md)[8] | raid_targets |  |  |
 
 Else If update_type is equal to `PARTIAL`:
 

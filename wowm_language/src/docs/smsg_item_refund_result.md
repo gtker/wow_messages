@@ -42,5 +42,5 @@ If result is equal to `SUCCESS`:
 | 0x0D | 4 / Little | Gold | cost |  |  |
 | 0x11 | 4 / Little | u32 | honor_point_cost |  |  |
 | 0x15 | 4 / Little | u32 | arena_point_cost |  |  |
-| 0x19 | ? / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |  |
+| 0x19 | 40 / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |  |
 

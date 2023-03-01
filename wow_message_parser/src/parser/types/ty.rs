@@ -201,43 +201,22 @@ impl Type {
         sizes
     }
 
-    pub(crate) fn doc_size_of(&self) -> String {
+    pub(crate) fn doc_size_of(&self, tags: &ObjectTags) -> String {
         match self {
-            Type::Integer(i) => i.size().to_string(),
-            Type::Guid => 8.to_string(),
-            Type::Gold => 4.to_string(),
-            Type::FloatingPoint(f) => f.size().to_string(),
-            Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
-                if let Some(upcast) = upcast {
-                    upcast.size().to_string()
-                } else if let Some(size) = e.sizes().is_constant() {
+            Type::Array(_) => {
+                if let Some(size) = self.sizes(tags).is_constant() {
+                    size.to_string()
+                } else {
+                    "?".to_string()
+                }
+            }
+            _ => {
+                if let Some(size) = self.sizes(tags).is_constant() {
                     size.to_string()
                 } else {
                     "-".to_string()
                 }
             }
-            Type::Struct { e } => {
-                let sizes = e.sizes();
-                if let Some(size) = sizes.is_constant() {
-                    size.to_string()
-                } else {
-                    "-".to_string()
-                }
-            }
-            Type::Array(_) => "?".to_string(),
-            Type::EnchantMask
-            | Type::InspectTalentGearMask
-            | Type::MonsterMoveSpline
-            | Type::AchievementDoneArray
-            | Type::AchievementInProgressArray
-            | Type::String
-            | Type::SizedCString
-            | Type::CString
-            | Type::UpdateMask
-            | Type::AuraMask
-            | Type::PackedGuid => "-".to_string(),
-            Type::Bool(i) => i.size().to_string(),
-            Type::DateTime => DATETIME_SIZE.to_string(),
         }
     }
 

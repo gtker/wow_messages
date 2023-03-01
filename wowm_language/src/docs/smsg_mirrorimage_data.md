@@ -45,7 +45,7 @@ SMSG have a header of 4 bytes.
 | 0x15 | 1 / - | u8 | hair_color |  |  |
 | 0x16 | 1 / - | u8 | facial_hair |  |  |
 | 0x17 | 4 / Little | u32 | guild_id |  |  |
-| 0x1B | ? / - | u32[11] | display_ids |  | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
+| 0x1B | 44 / - | u32[11] | display_ids |  | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
 
 # SMSG_MIRRORIMAGE_DATA
 
@@ -96,5 +96,5 @@ SMSG have a header of 4 bytes.
 | 0x16 | 1 / - | u8 | hair_color |  |  |
 | 0x17 | 1 / - | u8 | facial_hair |  |  |
 | 0x18 | 4 / Little | u32 | guild_id |  |  |
-| 0x1C | ? / - | u32[11] | display_ids |  | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
+| 0x1C | 44 / - | u32[11] | display_ids |  | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
 

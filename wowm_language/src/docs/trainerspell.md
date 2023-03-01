@@ -30,7 +30,7 @@ struct TrainerSpell {
 | 0x11 | 1 / - | u8 | required_level |  |  |
 | 0x12 | 4 / - | [Skill](skill.md) | required_skill |  |  |
 | 0x16 | 4 / Little | u32 | required_skill_value |  |  |
-| 0x1A | ? / - | u32[3] | required_spells |  |  |
+| 0x1A | 12 / - | u32[3] | required_spells |  |  |
 
 # TrainerSpell
 
@@ -64,7 +64,7 @@ struct TrainerSpell {
 | 0x11 | 1 / - | u8 | required_level |  |  |
 | 0x12 | 4 / - | [Skill](skill.md) | required_skill |  |  |
 | 0x16 | 4 / Little | u32 | required_skill_value |  |  |
-| 0x1A | ? / - | u32[3] | required_spells |  |  |
+| 0x1A | 12 / - | u32[3] | required_spells |  |  |
 
 # TrainerSpell
 
@@ -98,5 +98,5 @@ struct TrainerSpell {
 | 0x11 | 1 / - | u8 | required_level |  |  |
 | 0x12 | 4 / - | [Skill](skill.md) | required_skill |  |  |
 | 0x16 | 4 / Little | u32 | required_skill_value |  |  |
-| 0x1A | ? / - | u32[3] | required_spells |  |  |
+| 0x1A | 12 / - | u32[3] | required_spells |  |  |
 

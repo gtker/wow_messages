@@ -25,7 +25,7 @@ struct LfgPlayer {
 | - | 4 / Little | u32 | level |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 1 / - | [LfgMode](lfgmode.md) | lfg_mode |  |  |
-| - | ? / - | u32[3] | lfg_slots |  |  |
+| - | 12 / - | u32[3] | lfg_slots |  |  |
 | - | - / - | CString | comment |  |  |
 | - | 4 / Little | u32 | amount_of_members |  |  |
 | - | ? / - | [LfgPlayerMember](lfgplayermember.md)[amount_of_members] | members |  |  |

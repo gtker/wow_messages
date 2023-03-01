@@ -20,5 +20,5 @@ struct EquipmentSetListItem {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x08 | - / - | CString | name |  |  |
 | - | - / - | CString | icon_name |  |  |
-| - | ? / - | [Guid](../spec/packed-guid.md)[19] | equipment |  |  |
+| - | 152 / - | [Guid](../spec/packed-guid.md)[19] | equipment |  |  |
 

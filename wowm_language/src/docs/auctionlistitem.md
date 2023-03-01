@@ -74,7 +74,7 @@ struct AuctionListItem {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | id |  |  |
 | 0x04 | 4 / Little | u32 | item |  |  |
-| 0x08 | ? / - | [AuctionEnchantment](auctionenchantment.md)[6] | enchantments |  |  |
+| 0x08 | 72 / - | [AuctionEnchantment](auctionenchantment.md)[6] | enchantments |  |  |
 | 0x50 | 4 / Little | u32 | item_random_property_id |  |  |
 | 0x54 | 4 / Little | u32 | item_suffix_factor |  |  |
 | 0x58 | 4 / Little | u32 | item_count |  |  |
@@ -120,7 +120,7 @@ struct AuctionListItem {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | id |  |  |
 | 0x04 | 4 / Little | u32 | item |  |  |
-| 0x08 | ? / - | [AuctionEnchantment](auctionenchantment.md)[7] | enchantments |  |  |
+| 0x08 | 84 / - | [AuctionEnchantment](auctionenchantment.md)[7] | enchantments |  |  |
 | 0x5C | 4 / Little | u32 | item_random_property_id |  |  |
 | 0x60 | 4 / Little | u32 | item_suffix_factor |  |  |
 | 0x64 | 4 / Little | u32 | item_count |  |  |

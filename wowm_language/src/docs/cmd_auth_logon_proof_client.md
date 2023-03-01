@@ -32,9 +32,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | u8[32] | client_public_key |  |  |
-| 0x21 | ? / - | u8[20] | client_proof |  |  |
-| 0x35 | ? / - | u8[20] | crc_hash |  |  |
+| 0x01 | 32 / - | u8[32] | client_public_key |  |  |
+| 0x21 | 20 / - | u8[20] | client_proof |  |  |
+| 0x35 | 20 / - | u8[20] | crc_hash |  |  |
 | 0x49 | 1 / - | u8 | number_of_telemetry_keys |  |  |
 | 0x4A | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
 
@@ -130,9 +130,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | u8[32] | client_public_key |  |  |
-| 0x21 | ? / - | u8[20] | client_proof |  |  |
-| 0x35 | ? / - | u8[20] | crc_hash |  |  |
+| 0x01 | 32 / - | u8[32] | client_public_key |  |  |
+| 0x21 | 20 / - | u8[20] | client_proof |  |  |
+| 0x35 | 20 / - | u8[20] | crc_hash |  |  |
 | 0x49 | 1 / - | u8 | number_of_telemetry_keys |  |  |
 | 0x4A | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
 | - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
@@ -141,8 +141,8 @@ If security_flag is equal to `PIN`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[16] | pin_salt |  |  |
-| - | ? / - | u8[20] | pin_hash |  |  |
+| - | 16 / - | u8[16] | pin_salt |  |  |
+| - | 20 / - | u8[20] | pin_hash |  |  |
 
 ### Examples
 
@@ -262,9 +262,9 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x01 | ? / - | u8[32] | client_public_key |  |  |
-| 0x21 | ? / - | u8[20] | client_proof |  |  |
-| 0x35 | ? / - | u8[20] | crc_hash |  |  |
+| 0x01 | 32 / - | u8[32] | client_public_key |  |  |
+| 0x21 | 20 / - | u8[20] | client_proof |  |  |
+| 0x35 | 20 / - | u8[20] | crc_hash |  |  |
 | 0x49 | 1 / - | u8 | number_of_telemetry_keys |  |  |
 | 0x4A | ? / - | [TelemetryKey](telemetrykey.md)[number_of_telemetry_keys] | telemetry_keys |  |  |
 | - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
@@ -273,14 +273,14 @@ If security_flag contains `PIN`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[16] | pin_salt |  |  |
-| - | ? / - | u8[20] | pin_hash |  |  |
+| - | 16 / - | u8[16] | pin_salt |  |  |
+| - | 20 / - | u8[20] | pin_hash |  |  |
 
 If security_flag contains `MATRIX_CARD`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | ? / - | u8[20] | matrix_card_proof |  | Client proof of matrix input.<br/>Implementation details at `https://gist.github.com/barncastle/979c12a9c5e64d810a28ad1728e7e0f9`. |
+| - | 20 / - | u8[20] | matrix_card_proof |  | Client proof of matrix input.<br/>Implementation details at `https://gist.github.com/barncastle/979c12a9c5e64d810a28ad1728e7e0f9`. |
 
 If security_flag contains `AUTHENTICATOR`:
 

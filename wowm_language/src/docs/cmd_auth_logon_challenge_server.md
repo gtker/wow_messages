@@ -45,13 +45,13 @@ If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x03 | ? / - | u8[32] | server_public_key |  |  |
+| 0x03 | 32 / - | u8[32] | server_public_key |  |  |
 | 0x23 | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
 | 0x24 | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
-| - | ? / - | u8[32] | salt |  |  |
-| - | ? / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |  |
+| - | 32 / - | u8[32] | salt |  |  |
+| - | 16 / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |  |
 
 ### Examples
 
@@ -128,13 +128,13 @@ If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x03 | ? / - | u8[32] | server_public_key |  |  |
+| 0x03 | 32 / - | u8[32] | server_public_key |  |  |
 | 0x23 | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
 | 0x24 | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
-| - | ? / - | u8[32] | salt |  |  |
-| - | ? / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |  |
+| - | 32 / - | u8[32] | salt |  |  |
+| - | 16 / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |  |
 | - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
 
 If security_flag is equal to `PIN`:
@@ -142,7 +142,7 @@ If security_flag is equal to `PIN`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | pin_grid_seed |  |  |
-| - | ? / - | u8[16] | pin_salt |  |  |
+| - | 16 / - | u8[16] | pin_salt |  |  |
 
 ### Examples
 
@@ -242,13 +242,13 @@ If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x03 | ? / - | u8[32] | server_public_key |  |  |
+| 0x03 | 32 / - | u8[32] | server_public_key |  |  |
 | 0x23 | 1 / - | u8 | generator_length |  | The only realistic values for the generator are well below 255, so there's no reason for this to anything other than 1. |
 | 0x24 | ? / - | u8[generator_length] | generator |  |  |
 | - | 1 / - | u8 | large_safe_prime_length |  | Client can not handle arrays greater than 32. |
 | - | ? / - | u8[large_safe_prime_length] | large_safe_prime |  |  |
-| - | ? / - | u8[32] | salt |  |  |
-| - | ? / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |  |
+| - | 32 / - | u8[32] | salt |  |  |
+| - | 16 / - | u8[16] | crc_salt | Used for the `crc_hash` in [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md). |  |
 | - | 1 / - | [SecurityFlag](securityflag.md) | security_flag |  |  |
 
 If security_flag contains `PIN`:
@@ -256,7 +256,7 @@ If security_flag contains `PIN`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | pin_grid_seed |  |  |
-| - | ? / - | u8[16] | pin_salt |  |  |
+| - | 16 / - | u8[16] | pin_salt |  |  |
 
 If security_flag contains `MATRIX_CARD`:
 

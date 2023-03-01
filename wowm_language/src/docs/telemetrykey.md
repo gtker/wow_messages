@@ -19,6 +19,6 @@ struct TelemetryKey {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 2 / Little | u16 | unknown1 |  |  |
 | 0x02 | 4 / Little | u32 | unknown2 |  |  |
-| 0x06 | ? / - | u8[4] | unknown3 |  |  |
-| 0x0A | ? / - | u8[20] | cd_key_proof |  | SHA1 hash of the session key, server public key, and an unknown 20 byte value. |
+| 0x06 | 4 / - | u8[4] | unknown3 |  |  |
+| 0x0A | 20 / - | u8[20] | cd_key_proof |  | SHA1 hash of the session key, server public key, and an unknown 20 byte value. |
 

@@ -97,13 +97,13 @@ Else If result is equal to `TOTEMS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x12 | ? / - | u32[2] | totems |  |  |
+| 0x12 | 8 / - | u32[2] | totems |  |  |
 
 Else If result is equal to `TOTEM_CATEGORY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1A | ? / - | u32[2] | totem_categories |  |  |
+| 0x1A | 8 / - | u32[2] | totem_categories |  |  |
 
 Else If result is equal to `EQUIPPED_ITEM_CLASS`:
 
@@ -208,13 +208,13 @@ Else If result is equal to `TOTEMS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x13 | ? / - | u32[2] | totems |  |  |
+| 0x13 | 8 / - | u32[2] | totems |  |  |
 
 Else If result is equal to `TOTEM_CATEGORY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1B | ? / - | u32[2] | totem_categories |  |  |
+| 0x1B | 8 / - | u32[2] | totem_categories |  |  |
 
 Else If result is equal to `EQUIPPED_ITEM_CLASS` **or** 
 is equal to `EQUIPPED_ITEM_CLASS_OFFHAND` **or** 

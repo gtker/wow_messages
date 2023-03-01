@@ -35,7 +35,7 @@ SMSG have a header of 4 bytes.
 | 0x09 | 4 / Little | u32 | trade_slot_count2 |  | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases |
 | 0x0D | 4 / Little | Gold | money_in_trade |  |  |
 | 0x11 | 4 / Little | u32 | spell_on_lowest_slot |  |  |
-| 0x15 | ? / - | [TradeSlot](tradeslot.md)[7] | trade_slots |  | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
+| 0x15 | 427 / - | [TradeSlot](tradeslot.md)[7] | trade_slots |  | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
 
 # SMSG_TRADE_STATUS_EXTENDED
 
@@ -76,5 +76,5 @@ SMSG have a header of 4 bytes.
 | 0x0D | 4 / Little | u32 | trade_slot_count2 |  | cmangos/vmangos/mangoszero: sets to 7<br/>cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases |
 | 0x11 | 4 / Little | Gold | money_in_trade |  |  |
 | 0x15 | 4 / Little | u32 | spell_on_lowest_slot |  |  |
-| 0x19 | ? / - | [TradeSlot](tradeslot.md)[7] | trade_slots |  | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
+| 0x19 | 511 / - | [TradeSlot](tradeslot.md)[7] | trade_slots |  | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
 

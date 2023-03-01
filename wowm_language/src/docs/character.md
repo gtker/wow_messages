@@ -56,7 +56,7 @@ struct Character {
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
 | - | 4 / - | [CreatureFamily](creaturefamily.md) | pet_family |  |  |
-| - | ? / - | [CharacterGear](charactergear.md)[19] | equipment |  |  |
+| - | 95 / - | [CharacterGear](charactergear.md)[19] | equipment |  |  |
 | - | 4 / Little | u32 | first_bag_display_id |  |  |
 | - | 1 / - | u8 | first_bag_inventory_id |  |  |
 
@@ -116,7 +116,7 @@ struct Character {
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
 | - | 4 / - | [CreatureFamily](creaturefamily.md) | pet_family |  |  |
-| - | ? / - | [CharacterGear](charactergear.md)[20] | equipment |  |  |
+| - | 180 / - | [CharacterGear](charactergear.md)[20] | equipment |  |  |
 
 # Character
 
@@ -176,5 +176,5 @@ struct Character {
 | - | 4 / Little | u32 | pet_display_id |  |  |
 | - | 4 / Little | u32 | pet_level |  |  |
 | - | 4 / - | [CreatureFamily](creaturefamily.md) | pet_family |  |  |
-| - | ? / - | [CharacterGear](charactergear.md)[23] | equipment |  |  |
+| - | 207 / - | [CharacterGear](charactergear.md)[23] | equipment |  |  |
 

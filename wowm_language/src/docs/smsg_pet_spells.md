@@ -48,7 +48,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | 0x11 | 1 / - | [PetCommandState](petcommandstate.md) | command |  |  |
 | 0x12 | 1 / - | u8 | unknown |  | mangoszero: set to 0 |
 | 0x13 | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |  |
-| 0x14 | ? / - | u32[10] | action_bars |  |  |
+| 0x14 | 40 / - | u32[10] | action_bars |  |  |
 | 0x3C | 1 / - | u8 | amount_of_spells |  |  |
 | 0x3D | ? / - | u32[amount_of_spells] | spells |  |  |
 | - | 1 / - | u8 | amount_of_cooldowns |  |  |
@@ -106,7 +106,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | 0x13 | 1 / - | [PetCommandState](petcommandstate.md) | command |  |  |
 | 0x14 | 1 / - | u8 | unknown |  | mangoszero: set to 0 |
 | 0x15 | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |  |
-| 0x16 | ? / - | u32[10] | action_bars |  |  |
+| 0x16 | 40 / - | u32[10] | action_bars |  |  |
 | 0x3E | 1 / - | u8 | amount_of_spells |  |  |
 | 0x3F | ? / - | u32[amount_of_spells] | spells |  |  |
 | - | 1 / - | u8 | amount_of_cooldowns |  |  |

@@ -35,5 +35,5 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | ip_address |  |  |
 | 0x08 | 2 / Little | u16 | port |  |  |
 | 0x0A | 4 / Little | u32 | unknown |  |  |
-| 0x0E | ? / - | u8[20] | hash |  | azerothcore: ip + port, seed = sessionkey |
+| 0x0E | 20 / - | u8[20] | hash |  | azerothcore: ip + port, seed = sessionkey |
 

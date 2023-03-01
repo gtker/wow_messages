@@ -66,5 +66,5 @@ CMSG have a header of 6 bytes.
 | 0x0A | 4 / Little | u32 | rights |  |  |
 | 0x0E | - / - | CString | rank_name |  |  |
 | - | 4 / Little | Gold | money_per_day |  |  |
-| - | ? / - | [GuildBankRights](guildbankrights.md)[6] | bank_tab_rights |  |  |
+| - | 48 / - | [GuildBankRights](guildbankrights.md)[6] | bank_tab_rights |  |  |
 
