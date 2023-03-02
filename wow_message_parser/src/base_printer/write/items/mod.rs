@@ -97,7 +97,7 @@ pub(crate) fn write_definition(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     definition(&mut s, fields, arrays, expansion, ty_name, optimizations);
 
@@ -111,7 +111,7 @@ pub(crate) fn write_pub_use(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
     s.w("pub ");
 
     includes(
@@ -154,7 +154,7 @@ pub(crate) fn write_constructors(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     constructor(&mut s, things, expansion, ty_name, optimizations);
 
@@ -169,7 +169,7 @@ pub(crate) fn write_things(
     unobtainable: impl Fn(&GenericThing) -> bool,
     optimizations: &Optimizations,
 ) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     let (default_values, arrays) = get_default_values(things, optimizations);
     const_default_values(&mut s, &default_values);

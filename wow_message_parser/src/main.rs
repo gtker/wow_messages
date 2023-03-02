@@ -131,8 +131,8 @@ fn print_main_types(o: &Objects) {
             let first = e.tags().first_and_main_versions().0;
             let s = match &e {
                 Object::Container(e) => print_struct(e, o, first),
-                Object::Enum(e) => print_enum(e, o, first),
-                Object::Flag(e) => print_flag(e, o, first),
+                Object::Enum(e) => print_enum(e, o),
+                Object::Flag(e) => print_flag(e, o),
             };
 
             let versions = e.tags().main_versions().map(|a| a.as_login());
@@ -143,8 +143,8 @@ fn print_main_types(o: &Objects) {
             if !e.tags().is_in_base() {
                 let s = match &e {
                     Object::Container(e) => print_struct(e, o, first),
-                    Object::Enum(e) => print_enum(e, o, first),
-                    Object::Flag(e) => print_flag(e, o, first),
+                    Object::Enum(e) => print_enum(e, o),
+                    Object::Flag(e) => print_flag(e, o),
                 };
 
                 if versions.is_empty() {
@@ -162,9 +162,9 @@ fn print_main_types(o: &Objects) {
                 }
             } else {
                 let base_s = match &e {
-                    Object::Enum(e) => print_enum_for_base(e, o, first),
+                    Object::Enum(e) => print_enum_for_base(e, o),
                     Object::Container(e) => print_struct(e, o, first),
-                    Object::Flag(e) => print_flag(e, o, first),
+                    Object::Flag(e) => print_flag(e, o),
                 };
                 let world_s = get_import_from_base(e.name(), first);
 

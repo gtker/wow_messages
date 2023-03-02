@@ -17,7 +17,7 @@ pub mod rust_view;
 mod structs;
 mod update_mask;
 
-use crate::file_utils::{get_import_path, major_version_to_string};
+use crate::file_utils::major_version_to_string;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::MemberTags;
 use crate::parser::types::version::Version;
@@ -28,10 +28,8 @@ pub use update_mask::*;
 #[derive(Debug, Clone)]
 pub(crate) struct Writer {
     inner: String,
-    imports: String,
     indentation_level: u8,
     docc_indentation_level: u8,
-    import_path: String,
 }
 
 pub(crate) const EXPECTED_OPCODE_ERROR: &str = "crate::errors::ExpectedOpcodeError";
@@ -67,7 +65,7 @@ pub(crate) fn get_import_from_shared(name: &str, tags: &ObjectTags) -> String {
 }
 
 pub(crate) fn get_import_from_base(name: &str, version: Version) -> String {
-    let mut s = Writer::new(&get_import_path(version));
+    let mut s = Writer::new();
 
     s.wln(format!(
         "pub use wow_world_base::{}::{};",
@@ -83,18 +81,12 @@ impl Writer {
     pub(crate) const INDENTATION: &'static str = "    ";
     const METADATA: bool = true;
 
-    pub(crate) fn new(import_path: &str) -> Self {
+    pub(crate) fn new() -> Self {
         Self {
             inner: String::with_capacity(4000),
-            imports: String::with_capacity(4000),
             indentation_level: 0,
             docc_indentation_level: 0,
-            import_path: import_path.to_string(),
         }
-    }
-
-    pub(crate) fn no_import() -> Self {
-        Self::new("")
     }
 
     pub(crate) fn inner(&self) -> &str {
@@ -108,19 +100,7 @@ impl Writer {
         self.inc_indent();
     }
 
-    fn add_import(&mut self, name: impl AsRef<str>) {
-        self.imports
-            .write_fmt(format_args!(
-                "pub use {import_path}::{name};\n",
-                import_path = self.import_path,
-                name = name.as_ref(),
-            ))
-            .unwrap();
-    }
-
     pub(crate) fn new_struct(&mut self, name: impl AsRef<str>, f: impl Fn(&mut Self)) {
-        self.add_import(&name);
-
         self.open_curly(format!("pub struct {}", name.as_ref()));
 
         f(self);
@@ -134,8 +114,6 @@ impl Writer {
         ty: impl AsRef<str>,
         declarations: impl Fn(&mut Self),
     ) {
-        self.add_import(name.as_ref());
-
         self.open_curly(format!("pub struct {name}", name = name.as_ref()));
 
         self.wln(format!("inner: {ty},", ty = ty.as_ref()));
@@ -150,8 +128,6 @@ impl Writer {
         name: impl AsRef<str>,
         f: impl Fn(&mut Self),
     ) {
-        self.add_import(&name);
-
         self.open_curly(format!(
             "{visibility} enum {name}",
             visibility = visibility.as_ref(),
@@ -635,10 +611,6 @@ impl Writer {
 
     pub(crate) fn proper_as_str(&self) -> &str {
         self.inner.as_str()
-    }
-
-    pub(crate) fn imports(&self) -> &str {
-        self.imports.as_str()
     }
 }
 

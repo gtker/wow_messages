@@ -19,7 +19,7 @@ mod print_optional;
 mod print_tests;
 
 pub(crate) fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
-    let mut s = Writer::new(&get_import_path(version));
+    let mut s = Writer::new();
 
     print_includes(&mut s, e, version);
 

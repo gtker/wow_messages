@@ -12,7 +12,7 @@ use crate::rust_printer::Writer;
 use std::path::Path;
 
 pub(crate) fn write_exp(directory: &Path, data: &Data) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     s.wln("const EXP_REQUIRED_FOR_LEVEL: &[i32] = &[");
     s.inc_indent();
@@ -45,7 +45,7 @@ pub(crate) fn write_exp(directory: &Path, data: &Data) {
 }
 
 pub(crate) fn write_stats(directory: &Path, data: &Data) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     for combination in &data.combinations {
         let levels = data.base_stats.get(combination).unwrap();
@@ -76,7 +76,7 @@ pub(crate) fn write_stats(directory: &Path, data: &Data) {
 }
 
 pub(crate) fn write_skills(directory: &Path, data: &Data, expansion: Expansion) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     for combination in &data.combinations {
         let skills = data.skills.get(combination).unwrap();
@@ -117,7 +117,7 @@ pub(crate) fn write_skills(directory: &Path, data: &Data, expansion: Expansion) 
 }
 
 pub(crate) fn write_initial_spells(directory: &Path, data: &Data) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     for combination in &data.combinations {
         let spells = data.initial_spells.get(combination).unwrap();
@@ -150,7 +150,7 @@ fn get_enum_name(s: &str) -> String {
 }
 
 pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansion) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     s.wln("pub fn position_from_str(name: &str) -> Option<Position> {");
     s.wln("    let i = match name {");
@@ -221,7 +221,7 @@ pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansio
 }
 
 pub(crate) fn write_actions(directory: &Path, data: &Data) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     for combination in &data.combinations {
         let actions = data.actions.get(combination).unwrap();
@@ -249,7 +249,7 @@ pub(crate) fn write_actions(directory: &Path, data: &Data) {
 }
 
 pub(crate) fn write_pet_names(directory: &Path, data: &Data, expansion: Expansion) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     for pet in &data.pet_names {
         let name = match pet.0 {
@@ -286,7 +286,7 @@ pub(crate) fn write_pet_names(directory: &Path, data: &Data, expansion: Expansio
 }
 
 pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expansion) {
-    let mut s = Writer::no_import();
+    let mut s = Writer::new();
 
     let triggers = match expansion {
         Expansion::Vanilla => VANILLA_AREA_TRIGGERS,

@@ -5,7 +5,7 @@ use crate::path_utils::opcode_to_name_location;
 use crate::rust_printer::Writer;
 
 fn print_specific_opcode_to_name(messages: &[Data]) -> Writer {
-    let mut s = Writer::new("");
+    let mut s = Writer::new();
 
     s.funcn_pub_const("opcode_to_name(opcode: u32)", "Option<&'static str>", |s| {
         s.body_closing_with(

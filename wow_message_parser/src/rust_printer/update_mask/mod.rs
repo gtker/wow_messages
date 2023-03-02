@@ -134,7 +134,7 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
         ),
     ];
 
-    let mut s = Writer::new("");
+    let mut s = Writer::new();
     s.wln("use crate::Guid;");
     s.wln("use std::convert::TryInto;");
     s.wln("use super::indices::*;");
@@ -175,7 +175,7 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
 }
 
 fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
-    let mut s = Writer::new("");
+    let mut s = Writer::new();
 
     s.wln("use std::convert::TryFrom;");
 
@@ -421,9 +421,7 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
                     let c = get_name(c);
                     let d = get_name(d);
 
-                    format!(
-                        "u32::from_le_bytes([{a}, {b}, {c}, {d}])"
-                    )
+                    format!("u32::from_le_bytes([{a}, {b}, {c}, {d}])")
                 }
                 UfType::Custom { .. } => {
                     unreachable!("Guid has already been checked for in outer match")

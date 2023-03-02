@@ -14,7 +14,7 @@ use crate::{Container, ObjectTags, Objects};
 use std::fmt::UpperHex;
 
 pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
-    let mut s = Writer::new("");
+    let mut s = Writer::new();
     s.inc_indent();
 
     let mut variables = Vec::new();
@@ -83,7 +83,7 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
 }
 
 fn print_variables(mut v: Vec<String>) -> Writer {
-    let mut s = Writer::new("");
+    let mut s = Writer::new();
 
     v.sort();
     v.dedup();
@@ -514,7 +514,7 @@ fn print_definer(
 }
 
 pub(crate) fn print_register_info(w: &WiresharkObject) -> Writer {
-    let mut s = Writer::new("");
+    let mut s = Writer::new();
     s.inc_indent();
 
     s.inc_indent();
@@ -561,7 +561,7 @@ pub(crate) fn print_register_info(w: &WiresharkObject) -> Writer {
 }
 
 pub(crate) fn print_int_declarations(w: &WiresharkObject) -> Writer {
-    let mut s = Writer::new("");
+    let mut s = Writer::new();
 
     for m in w.members() {
         s.wln(format!("static int {} = -1;", m.name()));
@@ -571,7 +571,7 @@ pub(crate) fn print_int_declarations(w: &WiresharkObject) -> Writer {
 }
 
 pub(crate) fn print_enums(w: &WiresharkObject) -> Writer {
-    let mut s = Writer::new("");
+    let mut s = Writer::new();
 
     for e in w.enums() {
         print_enum(&mut s, e);

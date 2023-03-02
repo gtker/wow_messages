@@ -1,6 +1,4 @@
-use crate::file_utils::get_import_path;
 use crate::parser::types::definer::Definer;
-use crate::parser::types::version::Version;
 use crate::rust_printer::enums::print_wowm_definition;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
@@ -8,8 +6,8 @@ use crate::rust_printer::{
 };
 use crate::Objects;
 
-pub(crate) fn print_flag(e: &Definer, o: &Objects, version: Version) -> Writer {
-    let mut s = Writer::new(&get_import_path(version));
+pub(crate) fn print_flag(e: &Definer, o: &Objects) -> Writer {
+    let mut s = Writer::new();
 
     declaration(&mut s, e, o);
 

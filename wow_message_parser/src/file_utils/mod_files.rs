@@ -98,7 +98,7 @@ impl NewModFiles {
         if let Some(s) = self.login_modules.get_mut(&version) {
             s.wln(text);
         } else {
-            let mut s = Writer::no_import();
+            let mut s = Writer::new();
 
             // All does not have opcodes, they are part of other opcodes
             if version != LoginVersion::All {
@@ -113,7 +113,7 @@ impl NewModFiles {
     }
 
     fn write_login_modules(&mut self) {
-        let mut logon_module = Writer::no_import();
+        let mut logon_module = Writer::new();
 
         for (version, text) in self.login_modules.clone() {
             let path = get_login_version_file_path(&version).join("mod.rs");

@@ -1,6 +1,4 @@
-use crate::file_utils::{
-    get_import_path, get_login_logon_version_path, get_world_version_path, major_version_to_string,
-};
+use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::structs::print_common_impls::impl_read_write_opcode;
@@ -20,7 +18,7 @@ pub(crate) fn print_world_opcodes(
     version: &MajorWorldVersion,
     container_type: ContainerType,
 ) -> Writer {
-    let mut s = Writer::new(&get_world_version_path(version));
+    let mut s = Writer::new();
     let ty = match container_type {
         ContainerType::SMsg(_) => SMSG_NAME,
         ContainerType::CMsg(_) => CMSG_NAME,
@@ -41,7 +39,7 @@ pub(crate) fn print_login_opcodes(
     version: &LoginVersion,
     container_type: ContainerType,
 ) -> Writer {
-    let mut s = Writer::new(&get_login_logon_version_path(version));
+    let mut s = Writer::new();
     let ty = match container_type {
         ContainerType::CLogin(_) => CLOGIN_NAME,
         ContainerType::SLogin(_) => SLOGIN_NAME,

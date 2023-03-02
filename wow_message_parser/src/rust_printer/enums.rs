@@ -1,6 +1,4 @@
-use crate::file_utils::get_import_path;
 use crate::parser::types::definer::Definer;
-use crate::parser::types::version::Version;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
@@ -9,21 +7,16 @@ use crate::rust_printer::{
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::Objects;
 
-pub(crate) fn print_enum_for_base(e: &Definer, o: &Objects, version: Version) -> Writer {
-    print_enum_inner(e, o, version, true)
+pub(crate) fn print_enum_for_base(e: &Definer, o: &Objects) -> Writer {
+    print_enum_inner(e, o, true)
 }
 
-pub(crate) fn print_enum(e: &Definer, o: &Objects, version: Version) -> Writer {
-    print_enum_inner(e, o, version, false)
+pub(crate) fn print_enum(e: &Definer, o: &Objects) -> Writer {
+    print_enum_inner(e, o, false)
 }
 
-fn print_enum_inner(
-    e: &Definer,
-    o: &Objects,
-    version: Version,
-    visibility_override: bool,
-) -> Writer {
-    let mut s = Writer::new(&get_import_path(version));
+fn print_enum_inner(e: &Definer, o: &Objects, visibility_override: bool) -> Writer {
+    let mut s = Writer::new();
 
     declaration(&mut s, e, o, visibility_override);
 
