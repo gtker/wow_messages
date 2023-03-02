@@ -1,17 +1,11 @@
-use std::collections::BTreeMap;
-use std::fmt::Write as wfmt;
-use std::fs::{read_to_string, remove_file};
-use std::io::{Read, Write};
-use std::path::{Path, PathBuf};
-
-use heck::ToSnakeCase;
-use walkdir::WalkDir;
-
 use crate::parser::types::tags::ObjectTags;
-use crate::parser::types::version::LoginVersion;
-use crate::parser::types::version::{MajorWorldVersion, Version};
-use crate::path_utils;
+use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::path_utils::{base_directory, get_filepath, login_directory, world_directory};
+use crate::{file_utils, path_utils};
+use std::collections::BTreeMap;
+use std::fs::remove_file;
+use std::path::{Path, PathBuf};
+use walkdir::WalkDir;
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
 #[allow(clippy::enum_variant_names)]
@@ -53,6 +47,8 @@ impl ModFiles {
         }
 
         for m in &self.v {
+            use std::fmt::Write;
+
             let mut s = String::new();
             for (i, location) in &m.submodules {
                 match location {
@@ -87,7 +83,7 @@ impl ModFiles {
             }
             let filename = m.name.clone().join("mod.rs");
 
-            create_and_overwrite_if_not_same_contents(&s, &filename);
+            file_utils::create_and_overwrite_if_not_same_contents(&s, &filename);
             self.already_existing_files
                 .insert(filename.canonicalize().unwrap(), true);
         }
@@ -167,20 +163,26 @@ impl ModFiles {
             self.add_or_append_file(
                 base_directory(),
                 (
-                    major_version_to_string(version).to_string(),
+                    file_utils::major_version_to_string(version).to_string(),
                     SubmoduleLocation::PubMod,
                 ),
             );
 
             self.add_or_append_file(
-                base_directory().join(major_version_to_string(version)),
-                (get_module_name(name), SubmoduleLocation::PubUseInternal),
+                base_directory().join(file_utils::major_version_to_string(version)),
+                (
+                    file_utils::get_module_name(name),
+                    SubmoduleLocation::PubUseInternal,
+                ),
             );
 
             self.add_or_append_file(
-                base_directory().join(major_version_to_string(version)),
+                base_directory().join(file_utils::major_version_to_string(version)),
                 (
-                    format!("crate::manual::{}", major_version_to_string(version)),
+                    format!(
+                        "crate::manual::{}",
+                        file_utils::major_version_to_string(version)
+                    ),
                     SubmoduleLocation::PubUseOnly,
                 ),
             );
@@ -196,9 +198,12 @@ impl ModFiles {
             }
 
             self.add_or_append_file(
-                base_directory().join(major_version_to_string(version)),
+                base_directory().join(file_utils::major_version_to_string(version)),
                 (
-                    format!("crate::extended::{}", major_version_to_string(version)),
+                    format!(
+                        "crate::extended::{}",
+                        file_utils::major_version_to_string(version)
+                    ),
                     SubmoduleLocation::PubUseAndCfg("extended".to_string()),
                 ),
             );
@@ -207,7 +212,7 @@ impl ModFiles {
         self.add_or_append_file(
             world_directory(),
             (
-                major_version_to_string(version).to_string(),
+                file_utils::major_version_to_string(version).to_string(),
                 SubmoduleLocation::PubMod,
             ),
         );
@@ -218,9 +223,12 @@ impl ModFiles {
         );
 
         self.add_or_append_file(
-            world_directory().join(major_version_to_string(version)),
+            world_directory().join(file_utils::major_version_to_string(version)),
             (
-                format!("crate::manual::{}", major_version_to_string(version)),
+                format!(
+                    "crate::manual::{}",
+                    file_utils::major_version_to_string(version)
+                ),
                 SubmoduleLocation::PubUseOnly,
             ),
         );
@@ -238,7 +246,10 @@ impl ModFiles {
         self.add_or_append_file(
             file_dir,
             (
-                format!("crate::helper::{}", major_version_to_string(version)),
+                format!(
+                    "crate::helper::{}",
+                    file_utils::major_version_to_string(version)
+                ),
                 SubmoduleLocation::PubUseOnly,
             ),
         );
@@ -250,13 +261,16 @@ impl ModFiles {
         version: &MajorWorldVersion,
         tags: &ObjectTags,
     ) {
-        let file_dir = world_directory().join(major_version_to_string(version));
+        let file_dir = world_directory().join(file_utils::major_version_to_string(version));
 
         self.add_everything_but_world_file(name, version, tags, file_dir.clone());
 
         self.add_or_append_file(
             file_dir,
-            (get_module_name(name), SubmoduleLocation::PubUseInternal),
+            (
+                file_utils::get_module_name(name),
+                SubmoduleLocation::PubUseInternal,
+            ),
         );
     }
 
@@ -276,7 +290,10 @@ impl ModFiles {
 
         let module_level_dir = path_utils::get_login_version_file_path(version);
 
-        let e = (get_module_name(name), SubmoduleLocation::PubUseInternal);
+        let e = (
+            file_utils::get_module_name(name),
+            SubmoduleLocation::PubUseInternal,
+        );
 
         if let Some(v) = self.v.iter_mut().find(|a| a.name == module_level_dir) {
             v.submodules.push(e);
@@ -310,7 +327,7 @@ impl ModFiles {
         };
 
         self.add_world_shared_file(shared_module_name, tags);
-        create_and_overwrite_if_not_same_contents(base_s, Path::new(&path));
+        file_utils::create_and_overwrite_if_not_same_contents(base_s, Path::new(&path));
 
         self.already_existing_files
             .insert(path.canonicalize().unwrap(), true);
@@ -328,14 +345,14 @@ impl ModFiles {
         let base_path = path_utils::get_base_filepath(name, version);
         let world_path = path_utils::get_world_filepath(name, version);
 
-        let file_dir = world_directory().join(major_version_to_string(version));
+        let file_dir = world_directory().join(file_utils::major_version_to_string(version));
 
         self.add_everything_but_world_file(name, version, tags, file_dir.clone());
 
         self.write_specific_line_to_file(world_s.to_string(), file_dir);
 
-        create_and_overwrite_if_not_same_contents(world_s, &world_path);
-        create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
+        file_utils::create_and_overwrite_if_not_same_contents(world_s, &world_path);
+        file_utils::create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
 
         self.already_existing_files
             .insert(base_path.canonicalize().unwrap(), true);
@@ -365,8 +382,11 @@ impl ModFiles {
 
                 self.add_world_file(name, version, tags);
 
-                create_and_overwrite_if_not_same_contents(world_s, &world_path);
-                create_and_overwrite_if_not_same_contents(base_s, Path::new(&base_path));
+                file_utils::create_and_overwrite_if_not_same_contents(world_s, &world_path);
+                file_utils::create_and_overwrite_if_not_same_contents(
+                    base_s,
+                    Path::new(&base_path),
+                );
 
                 self.already_existing_files
                     .insert(world_path.canonicalize().unwrap(), true);
@@ -389,7 +409,7 @@ impl ModFiles {
             Version::Login(v) => {
                 self.add_login_file(name, v);
 
-                create_and_overwrite_if_not_same_contents(s, Path::new(&path));
+                file_utils::create_and_overwrite_if_not_same_contents(s, Path::new(&path));
 
                 self.already_existing_files
                     .insert(path.canonicalize().unwrap(), true);
@@ -397,135 +417,11 @@ impl ModFiles {
             Version::World(version) => {
                 self.add_world_file(name, version, tags);
 
-                create_and_overwrite_if_not_same_contents(s, &path);
+                file_utils::create_and_overwrite_if_not_same_contents(s, &path);
 
                 self.already_existing_files
                     .insert(path.canonicalize().unwrap(), true);
             }
         }
     }
-}
-
-pub(crate) fn major_version_to_string(v: &MajorWorldVersion) -> &'static str {
-    v.module_name()
-}
-
-pub(crate) fn get_world_version_path(version: &MajorWorldVersion) -> String {
-    format!("crate::{}", major_version_to_string(version))
-}
-
-pub(crate) fn get_login_logon_version_path(version: &LoginVersion) -> String {
-    format!("crate::logon::{}", version.as_module_case())
-}
-
-pub(crate) fn get_world_shared_path(ty_name: &str, tags: &ObjectTags) -> String {
-    format!("crate::shared::{}", tags.shared_module_name(ty_name))
-}
-
-pub(crate) fn get_base_internal_shared_path(ty_name: &str, tags: &ObjectTags) -> String {
-    format!("crate::shared::{}", tags.shared_module_name(ty_name))
-}
-
-pub(crate) fn get_base_shared_path(ty_name: &str, tags: &ObjectTags) -> String {
-    format!(
-        "wow_world_base::shared::{}",
-        tags.shared_module_name(ty_name)
-    )
-}
-
-pub(crate) fn get_import_path(version: Version) -> String {
-    match &version {
-        Version::Login(f) => get_login_logon_version_path(f),
-        Version::World(f) => get_world_version_path(f),
-    }
-}
-
-pub(crate) fn write_string_to_file(s: &str, filename: &Path) {
-    let f = std::fs::OpenOptions::new()
-        .write(true)
-        .truncate(true)
-        .open(filename);
-    let mut f = match f {
-        Ok(f) => f,
-        Err(_) => {
-            let dir = filename.parent().unwrap();
-            std::fs::create_dir_all(dir).unwrap();
-            std::fs::File::create(filename)
-                .unwrap_or_else(|_| panic!("unable to open file: '{}'", filename.to_str().unwrap()))
-        }
-    };
-
-    f.write_all(s.as_bytes()).unwrap();
-}
-
-pub(crate) fn overwrite_if_not_same_contents(s: &str, filename: &Path) {
-    let f = read_to_string(filename).unwrap();
-    if f != s {
-        write_string_to_file(s, filename);
-    }
-}
-
-pub(crate) fn create_and_overwrite_if_not_same_contents(s: &str, filename: &Path) {
-    let f = std::fs::OpenOptions::new().read(true).open(filename);
-    match f {
-        Ok(mut f) => {
-            let mut contents = String::with_capacity(8000);
-            f.read_to_string(&mut contents).unwrap();
-            if contents != s {
-                write_string_to_file(s, filename);
-            }
-        }
-        Err(e) => {
-            eprintln!("Unable to open file '{}': '{:?}'", filename.display(), e);
-            write_string_to_file(s, filename);
-        }
-    }
-}
-
-pub(crate) fn get_module_name(e: &str) -> String {
-    e.to_snake_case()
-}
-
-pub(crate) fn get_shared_module_name(e: &str, versions: &[MajorWorldVersion]) -> String {
-    let mut s = e.to_snake_case();
-
-    let mut versions = versions.to_vec();
-    versions.sort();
-
-    for v in versions {
-        s += &format!("_{}", v.module_name());
-    }
-
-    s
-}
-
-pub fn insert_between(contents: &str, start: &str, end: &str, replace_with: &str) -> String {
-    let (before, mid) = contents.split_once(start).unwrap();
-    let (_, after) = mid.split_once(end).unwrap();
-
-    let mut s = before.to_string();
-    s += start;
-    s += "\n";
-    s += replace_with;
-    s += end;
-    s += after;
-
-    s
-}
-
-pub(crate) fn overwrite_autogenerate_if_not_the_same(path: &Path, s: &str) {
-    let contents = match read_to_string(path) {
-        Ok(e) => e,
-        Err(e) => {
-            panic!("File error in '{}' '{}'", path.display(), e);
-        }
-    };
-
-    let s = insert_between(
-        &contents,
-        "// AUTOGENERATED_START",
-        "// AUTOGENERATED_END",
-        s,
-    );
-    overwrite_if_not_same_contents(&s, path);
 }

@@ -5,13 +5,14 @@ use std::path::Path;
 
 use doc_printer::container::print_docs_for_container;
 use doc_printer::definer::{print_docs_for_enum, print_docs_for_flag};
+use file_utils::mod_files::ModFiles;
 use walkdir::WalkDir;
 
 use parser::types::objects::Objects;
 use rust_printer::print_struct;
 
 use crate::doc_printer::print_docs_summary_and_objects;
-use crate::file_utils::{create_and_overwrite_if_not_same_contents, ModFiles};
+use crate::file_utils::create_and_overwrite_if_not_same_contents;
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
