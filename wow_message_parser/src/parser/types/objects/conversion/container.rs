@@ -442,7 +442,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
             let inner_c = get_container(containers, ty.str().as_str(), c.tags()).unwrap();
             for m_inner in multiple {
                 members.push(convert_test_case_member_to_test_case(
-                    m_inner, inner_c, containers, enums, flags,
+                    m_inner, inner_c, containers, enums, flags, definers,
                 ));
             }
 
@@ -470,7 +470,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
 
                 for m_inner in multiple {
                     members.push(convert_test_case_member_to_test_case(
-                        m_inner, inner_c, containers, enums, flags,
+                        m_inner, inner_c, containers, enums, flags, definers,
                     ));
                 }
 
@@ -570,9 +570,8 @@ fn convert_test_case_member_to_test_case(
     containers: &[ParsedContainer],
     enums: &[Definer],
     flags: &[Definer],
+    definers: &[Definer],
 ) -> TestCaseMember {
-    let definers = [enums, flags].concat();
-
     let value = convert_parsed_test_case_value_to_test_case_value(
         &member.variable_name,
         member.value,
@@ -580,7 +579,7 @@ fn convert_test_case_member_to_test_case(
         containers,
         enums,
         flags,
-        &definers,
+        definers,
     );
     TestCaseMember::new(member.variable_name, value, member.tags)
 }
@@ -591,12 +590,13 @@ fn convert_parsed_test_case_to_test_case(
     containers: &[ParsedContainer],
     enums: &[Definer],
     flags: &[Definer],
+    definers: &[Definer],
 ) -> TestCase {
     let mut value = Vec::with_capacity(test.members.len());
 
     for m in test.members {
         value.push(convert_test_case_member_to_test_case(
-            m, c, containers, enums, flags,
+            m, c, containers, enums, flags, definers,
         ));
     }
 
@@ -617,11 +617,13 @@ pub(crate) fn parsed_test_case_to_test_case(
 ) -> Vec<TestCase> {
     let mut v = Vec::with_capacity(parsed.len());
 
+    let definers = [enums, flags].concat();
+
     for p in parsed {
         let c = conversion::get_container(containers, p.subject(), p.tags()).unwrap();
 
         v.push(convert_parsed_test_case_to_test_case(
-            p, c, containers, enums, flags,
+            p, c, containers, enums, flags, &definers,
         ));
     }
 

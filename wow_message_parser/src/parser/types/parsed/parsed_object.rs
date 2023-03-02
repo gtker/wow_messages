@@ -60,13 +60,12 @@ impl ParsedObjects {
 }
 
 pub(crate) fn get_definer_objects_used_in(
-    messages: &[ParsedContainer],
-    structs: &[ParsedContainer],
+    containers: &[ParsedContainer],
     e: &ParsedDefiner,
 ) -> Vec<(String, DefinerUsage)> {
     let mut v = Vec::new();
 
-    for c in [messages, structs].concat() {
+    for c in containers {
         if !e.tags().has_version_intersections(c.tags()) {
             continue;
         }

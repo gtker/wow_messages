@@ -23,8 +23,9 @@ pub(crate) fn object_new(
     messages: Vec<ParsedContainer>,
     tests: Vec<ParsedTestCase>,
 ) -> Objects {
-    let enums = parsed_definer_to_definer(enums, &structs, &messages);
-    let flags = parsed_definer_to_definer(flags, &structs, &messages);
+    let containers = [structs.as_slice(), messages.as_slice()].concat();
+    let enums = parsed_definer_to_definer(enums, &containers);
+    let flags = parsed_definer_to_definer(flags, &containers);
 
     let containers = [structs.as_slice(), messages.as_slice()].concat();
     let definers = [enums.as_slice(), flags.as_slice()].concat();
@@ -109,13 +110,12 @@ pub(crate) fn parsed_containers_to_container(
 
 pub(crate) fn parsed_definer_to_definer(
     parsed: Vec<ParsedDefiner>,
-    structs: &[ParsedContainer],
-    messages: &[ParsedContainer],
+    containers: &[ParsedContainer],
 ) -> Vec<Definer> {
     let mut v = Vec::with_capacity(parsed.len());
 
     for p in parsed {
-        let objects_used_in = get_definer_objects_used_in(messages, structs, &p);
+        let objects_used_in = get_definer_objects_used_in(containers, &p);
 
         v.push(Definer::new(
             p.name,
