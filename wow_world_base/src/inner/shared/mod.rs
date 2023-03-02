@@ -1,17 +1,16 @@
+pub use crate::manual::shared::*;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod account_data_type_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod activate_taxi_reply_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod ai_reaction_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod allowed_class_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod arena_faction_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod arena_team_command_error_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod arena_team_command_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod arena_team_command_error_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod arena_team_event_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -23,15 +22,11 @@ pub mod auction_command_action_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod auction_command_result_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod bag_family_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod bank_swap_source_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod bank_swap_store_mode_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod battlefield_port_action_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod billing_plan_flags_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod bonding_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -40,12 +35,6 @@ pub mod buy_bank_slot_result_vanilla_tbc_wrath;
 pub mod buy_result_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod buyback_slot_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod cast_flags_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod channel_flags_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod channel_member_flags_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod charter_type_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -60,7 +49,6 @@ pub mod complain_result_window_tbc_wrath;
 pub mod complaint_status_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod corpse_query_result_vanilla_tbc_wrath;
-pub use crate::manual::shared::*;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod declined_names_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -75,8 +63,6 @@ pub mod dungeon_difficulty_tbc_wrath;
 pub mod environmental_damage_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod experience_award_type_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod faction_flag_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod far_sight_operation_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
@@ -92,13 +78,11 @@ pub mod gm_ticket_queue_status_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod gm_ticket_response_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod gm_ticket_status_response_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod gm_ticket_status_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod group_loot_setting_vanilla_tbc_wrath;
+pub mod gm_ticket_status_response_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod group_member_online_status_vanilla_tbc_wrath;
+pub mod group_loot_setting_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod group_type_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -119,22 +103,14 @@ pub mod instance_reset_failed_reason_vanilla_tbc_wrath;
 pub mod inventory_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod item_class_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod item_damage_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod item_quality_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod item_socket_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod item_spells_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod item_stat_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod join_arena_type_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod language_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "vanilla"))]
 pub mod language_vanilla_vanilla;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod language_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod log_format_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -142,9 +118,9 @@ pub mod logout_result_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod logout_speed_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod loot_method_error_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod loot_method_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod loot_method_error_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod loot_slot_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -216,8 +192,6 @@ pub mod realm_split_state_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod refer_a_friend_error_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod relation_type_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod roll_vote_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod sell_item_result_vanilla_tbc;
@@ -229,8 +203,6 @@ pub mod sheath_state_vanilla_tbc_wrath;
 pub mod sheathe_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod spam_type_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod spell_cast_target_flags_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod spell_miss_info_vanilla_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -239,8 +211,6 @@ pub mod spell_school_vanilla_vanilla_tbc_wrath;
 pub mod spell_steal_action_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod spell_trigger_type_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod spline_flag_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod stable_result_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -258,12 +228,42 @@ pub mod training_failure_reason_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod unit_stand_state_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod update_flag_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod update_type_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod weather_change_type_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod allowed_class_vanilla_tbc;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod bag_family_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod billing_plan_flags_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cast_flags_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod channel_flags_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod channel_member_flags_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod faction_flag_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod group_member_online_status_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod relation_type_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod spell_cast_target_flags_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod spline_flag_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod update_flag_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod item_damage_type_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod item_socket_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod item_spells_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod item_stat_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod vector2d_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod vector3d_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod weather_change_type_vanilla_tbc_wrath;

@@ -57,11 +57,11 @@ fn tcheck(s: &Writer, name: &str) {
 fn check(s: &Writer, name: &str) {
     let expected = read_to_string(Path::new(&format!("tests/{name}.txt"))).unwrap();
 
-    assert_eq!(s.proper_as_str(), expected);
+    assert_eq!(s.inner(), expected);
 }
 
 fn overwrite(s: &Writer, name: &str) {
-    write_string_to_file(s.proper_as_str(), Path::new(&format!("tests/{name}.txt")));
+    write_string_to_file(s.inner(), Path::new(&format!("tests/{name}.txt")));
 }
 
 #[test]

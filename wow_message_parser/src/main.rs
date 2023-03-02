@@ -5,7 +5,6 @@ use std::path::Path;
 
 use doc_printer::container::print_docs_for_container;
 use doc_printer::definer::{print_docs_for_enum, print_docs_for_flag};
-use file_utils::mod_files::ModFiles;
 use walkdir::WalkDir;
 
 use parser::types::objects::Objects;
@@ -13,15 +12,15 @@ use rust_printer::print_struct;
 
 use crate::doc_printer::print_docs_summary_and_objects;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
-use crate::file_utils::mod_files::NewModFiles;
+use crate::file_utils::mod_files::ModFiles;
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
 use crate::parser::types::sizes::PACKED_GUID_MAX_SIZE;
-use crate::path_utils::{get_filepath, get_login_version_file_path, wowm_directory};
+use crate::path_utils::{get_login_version_file_path, wowm_directory};
 use crate::rust_printer::{
-    get_import_from_base, get_import_from_shared, print_enum, print_enum_for_base, print_flag,
-    print_login_opcodes, print_opcode_to_name, print_update_mask, print_world_opcodes, DefinerType,
+    print_enum, print_enum_for_base, print_flag, print_login_opcodes, print_opcode_to_name,
+    print_update_mask, print_world_opcodes, DefinerType,
 };
 use parser::types::container::{Container, ContainerType};
 use parser::types::parsed::parsed_object::ParsedObjects;
@@ -116,8 +115,7 @@ fn main() {
 }
 
 fn print_main_types(o: &Objects) {
-    let mut m = ModFiles::new();
-    let mut n = NewModFiles::new();
+    let mut n = ModFiles::new();
 
     let mut definer_docs = Vec::new();
     let mut object_docs = Vec::new();
@@ -127,7 +125,6 @@ fn print_main_types(o: &Objects) {
             continue;
         }
 
-        let (first, mut versions) = e.tags().first_and_main_versions();
         let s = match &e {
             Object::Container(e) => print_struct(e, o),
             Object::Enum(e) => print_enum(e, o),
@@ -138,48 +135,22 @@ fn print_main_types(o: &Objects) {
             let versions = e.tags().main_versions().map(|a| a.as_login());
             n.add_login_module(e.name(), versions, s.inner())
         } else {
+            let versions = e
+                .tags()
+                .main_versions()
+                .map(|a| a.as_major_world())
+                .collect::<Vec<_>>();
+
+            let s = match &e {
+                Object::Enum(e) => print_enum_for_base(e, o),
+                Object::Container(e) => print_struct(e, o),
+                Object::Flag(e) => print_flag(e, o),
+            };
+
             if e.tags().is_in_base() {
-                let base_s = match &e {
-                    Object::Enum(e) => print_enum_for_base(e, o),
-                    Object::Container(e) => print_struct(e, o),
-                    Object::Flag(e) => print_flag(e, o),
-                };
-                let world_s = get_import_from_base(e.name(), first);
-
-                if versions.is_empty() {
-                    m.write_base_contents_to_file(
-                        e.name(),
-                        e.tags(),
-                        base_s.inner(),
-                        &world_s,
-                        first,
-                    );
-                } else {
-                    versions.push(first);
-
-                    m.write_shared_contents_to_file(e.name(), e.tags(), base_s.inner());
-
-                    for v in versions.clone() {
-                        let base_s = get_import_from_shared(e.name(), e.tags());
-                        let world_s = get_import_from_base(e.name(), v);
-
-                        m.write_shared_import_to_file(e.name(), e.tags(), &world_s, &base_s, &v);
-                    }
-                }
+                n.add_base_module(e.name(), &versions, s.inner());
             } else {
-                if versions.is_empty() {
-                    m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
-                } else {
-                    versions.push(first);
-
-                    m.write_shared_contents_to_file(e.name(), e.tags(), s.inner());
-
-                    for v in versions.clone() {
-                        let s = get_import_from_shared(e.name(), e.tags());
-                        let path = get_filepath(e.name(), &v);
-                        m.write_specific_line_to_file(s, path.parent().unwrap().to_path_buf());
-                    }
-                }
+                n.add_world_module(e.name(), &versions, s.inner());
             }
         }
 
@@ -195,8 +166,6 @@ fn print_main_types(o: &Objects) {
 
     print_docs_summary_and_objects(&definer_docs, &object_docs);
 
-    m.write_mod_files();
-    m.remove_unwritten_files();
     n.write_modules_and_remove_unwritten_files();
 }
 

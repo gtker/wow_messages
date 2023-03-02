@@ -1,7 +1,8 @@
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod addon_info_vanilla_tbc_wrath;
+pub use crate::manual::shared::*;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod addon_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod addon_info_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod auction_enchantment_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -13,6 +14,78 @@ pub mod battleground_player_position_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod channel_member_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cooldown_spell_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod damage_info_vanilla_tbc;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod dispelled_spell_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod faction_initializer_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod gm_survey_question_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod gossip_item_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod guild_bank_rights_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod guild_bank_socket_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod guild_bank_tab_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod guild_log_event_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod guild_rights_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod initial_spell_vanilla_tbc;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod list_inventory_item_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod loot_item_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod mail_item_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod mail_list_item_enchant_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod money_log_item_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod npc_text_update_emote_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod pet_spell_cooldown_vanilla_tbc;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod petition_showlist_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod petition_signature_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod quest_details_emote_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod quest_item_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod quest_item_requirement_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod quest_item_reward_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod quest_objective_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod raid_target_update_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod received_mail_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod spell_cast_targets_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod spell_cooldown_status_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod spell_log_miss_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod spell_steal_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod stabled_pet_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod trade_slot_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod transport_info_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod world_state_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_accept_trade_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_activatetaxi_vanilla_tbc_wrath;
@@ -23,11 +96,11 @@ pub mod cmsg_add_friend_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_add_ignore_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_areatrigger_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_area_spirit_healer_query_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_area_spirit_healer_queue_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_areatrigger_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_arena_team_accept_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -63,9 +136,9 @@ pub mod cmsg_auth_session_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_autobank_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_autoequip_item_slot_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_autoequip_item_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_autoequip_item_slot_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_autostore_bag_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -93,15 +166,15 @@ pub mod cmsg_bug_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_busy_trade_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_buyback_item_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_buy_bank_slot_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod cmsg_buy_item_in_slot_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod cmsg_buy_item_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cmsg_buy_item_in_slot_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_buy_stable_slot_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_buyback_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_cancel_aura_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -177,13 +250,15 @@ pub mod cmsg_duel_cancelled_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_far_sight_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_gameobj_use_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_gameobject_query_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_gameobj_use_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_get_mail_list_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_gmsurvey_submit_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod cmsg_gmticketsystem_toggle_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_gmticket_deleteticket_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -192,8 +267,6 @@ pub mod cmsg_gmticket_getticket_vanilla_tbc_wrath;
 pub mod cmsg_gmticket_systemstatus_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_gmticket_updatetext_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod cmsg_gmticketsystem_toggle_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_gossip_hello_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -218,10 +291,10 @@ pub mod cmsg_group_raid_convert_vanilla_tbc_wrath;
 pub mod cmsg_group_set_leader_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_group_swap_sub_group_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod cmsg_group_uninvite_guid_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_group_uninvite_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cmsg_group_uninvite_guid_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_guild_accept_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -237,9 +310,9 @@ pub mod cmsg_guild_demote_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_guild_disband_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_guild_info_text_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_guild_info_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_guild_info_text_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_guild_invite_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -287,6 +360,8 @@ pub mod cmsg_logout_cancel_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_logout_request_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_loot_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_loot_master_give_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_loot_money_vanilla_tbc_wrath;
@@ -294,8 +369,6 @@ pub mod cmsg_loot_money_vanilla_tbc_wrath;
 pub mod cmsg_loot_release_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_loot_roll_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_loot_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod cmsg_mail_create_text_item_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -328,6 +401,16 @@ pub mod cmsg_offer_petition_tbc_wrath;
 pub mod cmsg_open_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_page_text_query_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod cmsg_petition_buy_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_petition_query_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_petition_showlist_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_petition_show_signatures_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_petition_sign_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_pet_abandon_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -346,16 +429,6 @@ pub mod cmsg_pet_spell_autocast_vanilla_tbc_wrath;
 pub mod cmsg_pet_stop_attack_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_pet_unlearn_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod cmsg_petition_buy_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_petition_query_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_petition_show_signatures_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_petition_showlist_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_petition_sign_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_ping_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
@@ -368,10 +441,6 @@ pub mod cmsg_player_logout_vanilla_tbc_wrath;
 pub mod cmsg_pushquesttoparty_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_query_time_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_quest_confirm_accept_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_quest_query_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_questgiver_accept_quest_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -394,6 +463,10 @@ pub mod cmsg_questgiver_status_query_vanilla_tbc_wrath;
 pub mod cmsg_questlog_remove_quest_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_questlog_swap_quest_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_quest_confirm_accept_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_quest_query_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_read_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
@@ -423,9 +496,11 @@ pub mod cmsg_sell_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_send_mail_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_set_action_button_vanilla_tbc_wrath;
+pub mod cmsg_setsheathed_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_set_actionbar_toggles_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod cmsg_set_action_button_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_set_active_mover_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -446,8 +521,6 @@ pub mod cmsg_set_title_tbc_wrath;
 pub mod cmsg_set_trade_gold_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_set_trade_item_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_setsheathed_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_socket_gems_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -511,41 +584,6 @@ pub mod cmsg_whois_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod cmsg_wrap_item_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cooldown_spell_vanilla_tbc_wrath;
-pub use crate::manual::shared::*;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod damage_info_vanilla_tbc;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod dispelled_spell_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod faction_initializer_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod gm_survey_question_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod gossip_item_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod guild_bank_rights_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod guild_bank_socket_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod guild_bank_tab_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod guild_log_event_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod guild_rights_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod initial_spell_vanilla_tbc;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod list_inventory_item_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod loot_item_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod mail_item_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod mail_list_item_enchant_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod money_log_item_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod msg_auction_hello_client_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod msg_auction_hello_server_vanilla_tbc;
@@ -597,12 +635,12 @@ pub mod msg_query_next_mail_time_client_vanilla_tbc_wrath;
 pub mod msg_query_next_mail_time_server_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod msg_quest_push_result_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod msg_raid_ready_check_client_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod msg_raid_ready_check_confirm_client_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod msg_raid_ready_check_confirm_server_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod msg_raid_ready_check_client_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod msg_raid_ready_check_server_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -625,28 +663,6 @@ pub mod msg_tabardvendor_activate_vanilla_tbc_wrath;
 pub mod msg_talent_wipe_confirm_client_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod msg_talent_wipe_confirm_server_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod npc_text_update_emote_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod pet_spell_cooldown_vanilla_tbc;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod petition_showlist_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod petition_signature_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod quest_details_emote_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod quest_item_requirement_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod quest_item_reward_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod quest_item_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod quest_objective_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod raid_target_update_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod received_mail_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_account_data_times_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -756,6 +772,8 @@ pub mod smsg_fish_escaped_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_fish_not_hooked_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod smsg_forced_death_update_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_force_flight_back_speed_change_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_force_flight_speed_change_tbc_wrath;
@@ -771,8 +789,6 @@ pub mod smsg_force_swim_speed_change_vanilla_tbc_wrath;
 pub mod smsg_force_turn_rate_change_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_force_walk_speed_change_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod smsg_forced_death_update_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_friend_status_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -784,8 +800,6 @@ pub mod smsg_gameobject_pagetext_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_gameobject_spawn_anim_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_gm_ticket_status_update_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_gmticket_create_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_gmticket_deleteticket_vanilla_tbc_wrath;
@@ -793,6 +807,8 @@ pub mod smsg_gmticket_deleteticket_vanilla_tbc_wrath;
 pub mod smsg_gmticket_systemstatus_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_gmticket_updatetext_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod smsg_gm_ticket_status_update_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_gossip_complete_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -818,9 +834,9 @@ pub mod smsg_guild_invite_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_guild_query_response_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod smsg_initial_spells_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_initialize_factions_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_initial_spells_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_instance_difficulty_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -846,8 +862,6 @@ pub mod smsg_lfg_disabled_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_list_inventory_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod smsg_log_xpgain_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_login_settimespeed_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_logout_cancel_ack_vanilla_tbc_wrath;
@@ -855,6 +869,8 @@ pub mod smsg_logout_cancel_ack_vanilla_tbc_wrath;
 pub mod smsg_logout_complete_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_logout_response_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_log_xpgain_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_loot_all_passed_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -876,9 +892,9 @@ pub mod smsg_loot_roll_won_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_loot_start_roll_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod smsg_monster_move_transport_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_monster_move_vanilla_tbc;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_monster_move_transport_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_motd_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -913,6 +929,12 @@ pub mod smsg_page_text_query_response_vanilla_tbc_wrath;
 pub mod smsg_partykilllog_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_pause_mirror_timer_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod smsg_petition_showlist_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod smsg_petition_show_signatures_vanilla_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod smsg_petition_sign_results_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_pet_action_feedback_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -933,12 +955,10 @@ pub mod smsg_pet_spells_vanilla_tbc;
 pub mod smsg_pet_tame_failure_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_pet_unlearn_confirm_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
+pub mod smsg_played_time_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_petition_show_signatures_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod smsg_petition_showlist_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod smsg_petition_sign_results_tbc_wrath;
+pub mod smsg_player_skinned_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_play_music_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -949,10 +969,6 @@ pub mod smsg_play_sound_vanilla_tbc_wrath;
 pub mod smsg_play_spell_impact_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_play_spell_visual_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod smsg_played_time_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_player_skinned_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_pong_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -961,8 +977,6 @@ pub mod smsg_procresist_vanilla_tbc_wrath;
 pub mod smsg_pvp_credit_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_query_time_response_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_quest_confirm_accept_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_questgiver_quest_list_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -977,6 +991,8 @@ pub mod smsg_questupdate_complete_vanilla_tbc_wrath;
 pub mod smsg_questupdate_failed_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_questupdate_failedtimer_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod smsg_quest_confirm_accept_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_raid_group_only_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -1004,17 +1020,9 @@ pub mod smsg_set_pct_spell_modifier_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod smsg_set_rest_start_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_show_bank_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_showtaxinodes_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod smsg_spell_cooldown_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_spell_delayed_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_spell_failed_other_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod smsg_spell_update_chain_targets_vanilla_tbc_wrath;
+pub mod smsg_show_bank_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_spelldispellog_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
@@ -1027,6 +1035,14 @@ pub mod smsg_spelllogmiss_vanilla_tbc_wrath;
 pub mod smsg_spellordamage_immune_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod smsg_spellsteallog_tbc_wrath;
+#[cfg(any(feature = "tbc", feature = "wrath"))]
+pub mod smsg_spell_cooldown_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod smsg_spell_delayed_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod smsg_spell_failed_other_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod smsg_spell_update_chain_targets_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_spirit_healer_confirm_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
@@ -1109,19 +1125,3 @@ pub mod smsg_update_world_state_vanilla_tbc_wrath;
 pub mod smsg_warden_data_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod smsg_whois_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod spell_cast_targets_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod spell_cooldown_status_vanilla_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod spell_log_miss_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod spell_steal_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod stabled_pet_vanilla_tbc_wrath;
-#[cfg(any(feature = "tbc", feature = "wrath"))]
-pub mod trade_slot_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod transport_info_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod world_state_vanilla_tbc_wrath;

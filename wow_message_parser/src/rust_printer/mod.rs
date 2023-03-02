@@ -17,10 +17,8 @@ pub mod rust_view;
 mod structs;
 mod update_mask;
 
-use crate::file_utils::major_version_to_string;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::MemberTags;
-use crate::parser::types::version::Version;
 use crate::{ObjectTags, Objects};
 pub use opcode_to_name::print_opcode_to_name;
 pub use update_mask::*;
@@ -55,27 +53,6 @@ const CFG_ASYNC_ASYNC_STD_AND_ENCRYPTION: &str =
 const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";
-
-pub(crate) fn get_import_from_shared(name: &str, tags: &ObjectTags) -> String {
-    format!(
-        "pub use crate::shared::{}::{};\n\n",
-        tags.shared_module_name(name),
-        name
-    )
-}
-
-pub(crate) fn get_import_from_base(name: &str, version: Version) -> String {
-    let mut s = Writer::new();
-
-    s.wln(format!(
-        "pub use wow_world_base::{}::{};",
-        major_version_to_string(&version.as_major_world()),
-        name
-    ));
-    s.newline();
-
-    s.inner
-}
 
 impl Writer {
     pub(crate) const INDENTATION: &'static str = "    ";
@@ -607,10 +584,6 @@ impl Writer {
 
     fn get_column(&self) -> usize {
         self.inner.len() - self.inner.rfind(|a| a == '\n').unwrap()
-    }
-
-    pub(crate) fn proper_as_str(&self) -> &str {
-        self.inner.as_str()
     }
 }
 

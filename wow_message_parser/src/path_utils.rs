@@ -1,6 +1,6 @@
 use crate::file_utils;
+use crate::parser::types::version::LoginVersion;
 use crate::parser::types::version::MajorWorldVersion;
-use crate::parser::types::version::{LoginVersion, Version};
 use std::path::{Path, PathBuf};
 
 pub(crate) fn workspace_directory() -> PathBuf {
@@ -130,11 +130,4 @@ pub(crate) fn get_world_filepath(object_name: &str, version: &MajorWorldVersion)
 pub(crate) fn get_login_filepath(object_name: &str, version: &LoginVersion) -> PathBuf {
     get_login_version_file_path(version)
         .join(format!("{}.rs", file_utils::get_module_name(object_name)))
-}
-
-pub(crate) fn get_filepath(object_name: &str, version: &Version) -> PathBuf {
-    match version {
-        Version::Login(l) => get_login_filepath(object_name, l),
-        Version::World(l) => get_world_filepath(object_name, l),
-    }
 }
