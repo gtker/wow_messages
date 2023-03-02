@@ -404,6 +404,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
     containers: &[ParsedContainer],
     enums: &[Definer],
     flags: &[Definer],
+    definers: &[Definer],
 ) -> TestValue {
     let ty = c.get_field_ty(variable_name);
 
@@ -445,8 +446,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 ));
             }
 
-            let definers = [flags, enums].concat();
-            let c = parsed_container_to_container(inner_c.clone(), containers, &definers);
+            let c = parsed_container_to_container(inner_c.clone(), containers, definers);
 
             return TestValue::SubObject { c, members };
         }
@@ -478,11 +478,9 @@ fn convert_parsed_test_case_value_to_test_case_value(
             }
 
             let c = if let Some(c) = get_container(containers, ty_name, c.tags()) {
-                let definers = [flags, enums].concat();
-                parsed_container_to_container(c.clone(), containers, &definers)
+                parsed_container_to_container(c.clone(), containers, definers)
             } else {
-                let definers = [flags, enums].concat();
-                let related = get_related(containers, &definers, ty_name);
+                let related = get_related(containers, definers, ty_name);
                 complex_not_found(c.name(), c.tags(), &c.file_info, ty_name, &related);
             };
             return TestValue::ArrayOfSubObject(c, v);
@@ -513,9 +511,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
 
                 v.push(parse_value(value).unwrap() as usize);
             }
-            let definers = [flags, enums].concat();
             let size =
-                parsed_array_to_array(c, array.clone(), containers, &definers, c.tags()).size();
+                parsed_array_to_array(c, array.clone(), containers, definers, c.tags()).size();
             TestValue::Array { values: v, size }
         }
         ParsedType::FloatingPoint(_) => TestValue::FloatingNumber {
@@ -545,8 +542,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 let v = e.get_field_with_name(&value).unwrap().value().int();
                 TestValue::Enum(ContainerValue::new(v, value))
             } else {
-                let definers = [flags, enums].concat();
-                let related = get_related(containers, &definers, s);
+                let related = get_related(containers, definers, s);
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
@@ -575,6 +571,8 @@ fn convert_test_case_member_to_test_case(
     enums: &[Definer],
     flags: &[Definer],
 ) -> TestCaseMember {
+    let definers = [enums, flags].concat();
+
     let value = convert_parsed_test_case_value_to_test_case_value(
         &member.variable_name,
         member.value,
@@ -582,6 +580,7 @@ fn convert_test_case_member_to_test_case(
         containers,
         enums,
         flags,
+        &definers,
     );
     TestCaseMember::new(member.variable_name, value, member.tags)
 }
