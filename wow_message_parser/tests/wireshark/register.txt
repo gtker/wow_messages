@@ -1596,7 +1596,7 @@
         },
         { &hf_woww_faction,
             { "Faction", "woww.faction",
-                FT_UINT16, BASE_HEX_DEC, VALS(e_faction_strings), 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_faction_strings), 0,
                 NULL, HFILL
             }
         },

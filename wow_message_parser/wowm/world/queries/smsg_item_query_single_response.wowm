@@ -207,7 +207,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         Spell required_spell;
         u32 required_honor_rank;
         u32 required_city_rank;
-        Faction required_faction;
+        (u32)Faction required_faction;
         u32 required_faction_rank {
             comment = "cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)";
         }
@@ -386,7 +386,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         Spell required_spell;
         u32 required_honor_rank;
         u32 required_city_rank;
-        Faction required_faction;
+        (u32)Faction required_faction;
         u32 required_faction_rank {
             comment = "cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)";
         }
@@ -599,7 +599,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         Spell required_spell;
         u32 required_honor_rank;
         u32 required_city_rank;
-        Faction required_faction;
+        (u32)Faction required_faction;
         u32 required_faction_rank {
             comment = "cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items)";
         }

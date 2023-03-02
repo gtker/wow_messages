@@ -53,7 +53,7 @@ use std::io::{Read, Write};
 ///         u32 required_spell;
 ///         u32 required_honor_rank;
 ///         u32 required_city_rank;
-///         Faction required_faction;
+///         (u32)Faction required_faction;
 ///         u32 required_faction_rank;
 ///         u32 max_count;
 ///         u32 stackable;
@@ -195,7 +195,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.required_city_rank.to_le_bytes())?;
 
             // required_faction: Faction
-            w.write_all(&u16::from(v.required_faction.as_int()).to_le_bytes())?;
+            w.write_all(&u32::from(v.required_faction.as_int()).to_le_bytes())?;
 
             // required_faction_rank: u32
             w.write_all(&v.required_faction_rank.to_le_bytes())?;
@@ -334,7 +334,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(4..=1782).contains(&body_size) {
+        if !(4..=1784).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0058, size: body_size as u32 });
         }
 
@@ -422,7 +422,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let required_city_rank = crate::util::read_u32_le(&mut r)?;
 
             // required_faction: Faction
-            let required_faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+            let required_faction: Faction = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
             // required_faction_rank: u32
             let required_faction_rank = crate::util::read_u32_le(&mut r)?;
@@ -674,7 +674,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // required_spell: u32
             + 4 // required_honor_rank: u32
             + 4 // required_city_rank: u32
-            + 2 // required_faction: Faction
+            + 4 // required_faction: Faction
             + 4 // required_faction_rank: u32
             + 4 // max_count: u32
             + 4 // stackable: u32
@@ -810,7 +810,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
         + 4 // required_spell: u32
         + 4 // required_honor_rank: u32
         + 4 // required_city_rank: u32
-        + 2 // required_faction: Faction
+        + 4 // required_faction: Faction
         + 4 // required_faction_rank: u32
         + 4 // max_count: u32
         + 4 // stackable: u32

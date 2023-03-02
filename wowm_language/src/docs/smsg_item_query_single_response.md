@@ -29,7 +29,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 required_spell;
         u32 required_honor_rank;
         u32 required_city_rank;
-        Faction required_faction;
+        (u32)Faction required_faction;
         u32 required_faction_rank;
         u32 max_count;
         u32 stackable;
@@ -107,7 +107,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | required_spell |  |  |
 | - | 4 / Little | u32 | required_honor_rank |  |  |
 | - | 4 / Little | u32 | required_city_rank |  |  |
-| - | 2 / - | [Faction](faction.md) | required_faction |  |  |
+| - | 4 / - | [Faction](faction.md) | required_faction |  |  |
 | - | 4 / Little | u32 | required_faction_rank |  | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
 | - | 4 / Little | u32 | max_count |  |  |
 | - | 4 / Little | u32 | stackable |  |  |
@@ -174,7 +174,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 required_spell;
         u32 required_honor_rank;
         u32 required_city_rank;
-        Faction required_faction;
+        (u32)Faction required_faction;
         u32 required_faction_rank;
         u32 max_count;
         u32 stackable;
@@ -260,7 +260,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | required_spell |  |  |
 | - | 4 / Little | u32 | required_honor_rank |  |  |
 | - | 4 / Little | u32 | required_city_rank |  |  |
-| - | 2 / - | [Faction](faction.md) | required_faction |  |  |
+| - | 4 / - | [Faction](faction.md) | required_faction |  |  |
 | - | 4 / Little | u32 | required_faction_rank |  | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
 | - | 4 / Little | u32 | max_count |  |  |
 | - | 4 / Little | u32 | stackable |  |  |
@@ -335,7 +335,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 required_spell;
         u32 required_honor_rank;
         u32 required_city_rank;
-        Faction required_faction;
+        (u32)Faction required_faction;
         u32 required_faction_rank;
         u32 max_count;
         u32 stackable;
@@ -428,7 +428,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | required_spell |  |  |
 | - | 4 / Little | u32 | required_honor_rank |  |  |
 | - | 4 / Little | u32 | required_city_rank |  |  |
-| - | 2 / - | [Faction](faction.md) | required_faction |  |  |
+| - | 4 / - | [Faction](faction.md) | required_faction |  |  |
 | - | 4 / Little | u32 | required_faction_rank |  | cmangos/vmangos/mangoszero: send value only if reputation faction id setted ( needed for some items) |
 | - | 4 / Little | u32 | max_count |  |  |
 | - | 4 / Little | u32 | stackable |  |  |
