@@ -5,7 +5,6 @@ use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::MemberTags;
-use crate::parser::types::version::Version;
 use crate::rust_printer::rust_view::{RustMember, RustType};
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
@@ -18,10 +17,10 @@ mod print_new_types;
 mod print_optional;
 mod print_tests;
 
-pub(crate) fn print_struct(e: &Container, o: &Objects, version: Version) -> Writer {
+pub(crate) fn print_struct(e: &Container, o: &Objects) -> Writer {
     let mut s = Writer::new();
 
-    print_includes(&mut s, e, version);
+    print_includes(&mut s, e);
 
     print_declaration(&mut s, e, o);
 
@@ -38,7 +37,7 @@ pub(crate) fn print_struct(e: &Container, o: &Objects, version: Version) -> Writ
     s
 }
 
-fn print_includes(s: &mut Writer, e: &Container, version: Version) {
+fn print_includes(s: &mut Writer, e: &Container) {
     let (crate_types, import_path_types) = e.get_types_needing_import();
 
     if !crate_types.is_empty() || !matches!(e.container_type(), ContainerType::Struct) {
@@ -65,6 +64,7 @@ fn print_includes(s: &mut Writer, e: &Container, version: Version) {
         });
     }
 
+    let version = e.tags().first_and_main_versions().0;
     let import_path = get_import_path(version);
 
     if !import_path_types.is_empty() {

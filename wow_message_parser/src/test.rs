@@ -8,7 +8,6 @@ use crate::error_printer::{
 use crate::file_utils::write_string_to_file;
 use crate::parser::parse_file;
 use crate::parser::types::objects::Objects;
-use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::path_utils::parser_test_directory;
 use crate::rust_printer::{print_enum, print_flag, print_struct, Writer};
 use crate::{load_files, print_message_stats, ParsedObjects};
@@ -65,8 +64,6 @@ fn overwrite(s: &Writer, name: &str) {
     write_string_to_file(s.proper_as_str(), Path::new(&format!("tests/{name}.txt")));
 }
 
-const VERSION: Version = Version::World(MajorWorldVersion::Vanilla);
-
 #[test]
 fn simple_enum() {
     let o = get_all_impl_items();
@@ -95,7 +92,7 @@ fn struct_with_all_built_in_types() {
         .all_containers()
         .find(|a| a.name() == "StructWithAllBuiltInTypes")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "struct_with_all_built_in_types");
 }
@@ -108,7 +105,7 @@ fn simple_clogin() {
         .all_containers()
         .find(|a| a.name() == "SimpleClogin")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_clogin");
 }
@@ -121,7 +118,7 @@ fn simple_slogin() {
         .all_containers()
         .find(|a| a.name() == "SimpleSlogin")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_slogin");
 }
@@ -134,7 +131,7 @@ fn simple_smsg() {
         .all_containers()
         .find(|a| a.name() == "SimpleSmsg")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_smsg");
 }
@@ -147,7 +144,7 @@ fn simple_cmsg() {
         .all_containers()
         .find(|a| a.name() == "SimpleCmsg")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_cmsg");
 }
@@ -160,7 +157,7 @@ fn simple_msg() {
         .all_containers()
         .find(|a| a.name() == "SimpleMsg")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_msg");
 }
@@ -173,7 +170,7 @@ fn message_with_complex_types() {
         .all_containers()
         .find(|a| a.name() == "MessageWithComplexTypes")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "message_with_complex_types");
 }
@@ -183,7 +180,7 @@ fn arrays() {
     let o = get_all_impl_items();
 
     let d = o.all_containers().find(|a| a.name() == "Arrays").unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "arrays");
 }
@@ -196,7 +193,7 @@ fn simple_if_enum() {
         .all_containers()
         .find(|a| a.name() == "SimpleIfEnum")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_if_enum");
 }
@@ -209,7 +206,7 @@ fn double_variant_enum() {
         .all_containers()
         .find(|a| a.name() == "DoubleVariantEnum")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "double_variant_enum");
 }
@@ -222,7 +219,7 @@ fn simple_if_flag() {
         .all_containers()
         .find(|a| a.name() == "SimpleIfFlag")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_if_flag");
 }
@@ -235,7 +232,7 @@ fn simple_if_enum_else() {
         .all_containers()
         .find(|a| a.name() == "SimpleIfEnumElse")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_if_enum_else");
 }
@@ -248,7 +245,7 @@ fn simple_if_enum_if_else() {
         .all_containers()
         .find(|a| a.name() == "SimpleIfEnumIfElse")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_if_enum_if_else");
 }
@@ -261,7 +258,7 @@ fn packed_guid_and_guid() {
         .all_containers()
         .find(|a| a.name() == "PackedGuidAndGuid")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "packed_guid_and_guid");
 }
@@ -274,7 +271,7 @@ fn custom_masks() {
         .all_containers()
         .find(|a| a.name() == "CustomMasks")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "custom_masks");
 }
@@ -287,7 +284,7 @@ fn if_edge_cases() {
         .all_containers()
         .find(|a| a.name() == "IfEdgeCases")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "if_edge_cases");
 }
@@ -297,7 +294,7 @@ fn optional() {
     let o = get_all_impl_items();
 
     let d = o.all_containers().find(|a| a.name() == "Optional").unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "optional");
 }
@@ -310,7 +307,7 @@ fn simple_not_if() {
         .all_containers()
         .find(|a| a.name() == "SimpleIfEnumNot")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "simple_not_if");
 }
@@ -323,7 +320,7 @@ fn not_if_else() {
         .all_containers()
         .find(|a| a.name() == "SimpleIfNotEnumElse")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "not_if_else");
 }
@@ -336,7 +333,7 @@ fn nested_not_if() {
         .all_containers()
         .find(|a| a.name() == "NestedNotIf")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "nested_not_if");
 }
@@ -349,7 +346,7 @@ fn enum_outside_of_if() {
         .all_containers()
         .find(|a| a.name() == "EnumOutsideOfIf")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "enum_outside_of_if");
 }
@@ -362,7 +359,7 @@ fn cmsg_test_endless_u8() {
         .all_containers()
         .find(|a| a.name() == "CMSG_TEST_ENDLESS_U8")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "cmsg_test_endless_u8");
 }
@@ -375,7 +372,7 @@ fn cmsg_test_optional() {
         .all_containers()
         .find(|a| a.name() == "CMSG_TEST_OPTIONAL")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "cmsg_test_optional");
 }
@@ -388,7 +385,7 @@ fn flag_if_else_if() {
         .all_containers()
         .find(|a| a.name() == "FlagIfElseIf")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "flag_if_else_if");
 }
@@ -401,7 +398,7 @@ fn enum_if_else_if_nested() {
         .all_containers()
         .find(|a| a.name() == "EnumIfElseIfNested")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "enum_if_else_if_nested");
 }
@@ -414,7 +411,7 @@ fn sized_cstring() {
         .all_containers()
         .find(|a| a.name() == "SizedCString")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "sized_cstring");
 }
@@ -427,7 +424,7 @@ fn bug_separate_if_double_write() {
         .all_containers()
         .find(|a| a.name() == "BugSeparateIfDoubleWrite")
         .unwrap();
-    let s = print_struct(d, &o, VERSION);
+    let s = print_struct(d, &o);
 
     tcheck(&s, "bug_separate_if_double_write");
 }
@@ -507,11 +504,7 @@ fn invalid_self_size_errors() {
     should_panic(
         || {
             let o = must_err_load("invalid_self_size.wowm");
-            print_struct(
-                o.all_containers().next().unwrap(),
-                &o,
-                Version::World(MajorWorldVersion::Vanilla),
-            );
+            print_struct(o.all_containers().next().unwrap(), &o);
         },
         INVALID_SELF_SIZE,
     );

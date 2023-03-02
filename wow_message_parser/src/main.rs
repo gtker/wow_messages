@@ -129,7 +129,7 @@ fn print_main_types(o: &Objects) {
 
         let (first, mut versions) = e.tags().first_and_main_versions();
         let s = match &e {
-            Object::Container(e) => print_struct(e, o, first),
+            Object::Container(e) => print_struct(e, o),
             Object::Enum(e) => print_enum(e, o),
             Object::Flag(e) => print_flag(e, o),
         };
@@ -141,7 +141,7 @@ fn print_main_types(o: &Objects) {
             if e.tags().is_in_base() {
                 let base_s = match &e {
                     Object::Enum(e) => print_enum_for_base(e, o),
-                    Object::Container(e) => print_struct(e, o, first),
+                    Object::Container(e) => print_struct(e, o),
                     Object::Flag(e) => print_flag(e, o),
                 };
                 let world_s = get_import_from_base(e.name(), first);
