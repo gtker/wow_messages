@@ -127,40 +127,18 @@ fn print_main_types(o: &Objects) {
             continue;
         }
 
-        if e.tags().has_login_version() {
-            let first = e.tags().first_and_main_versions().0;
-            let s = match &e {
-                Object::Container(e) => print_struct(e, o, first),
-                Object::Enum(e) => print_enum(e, o),
-                Object::Flag(e) => print_flag(e, o),
-            };
+        let (first, mut versions) = e.tags().first_and_main_versions();
+        let s = match &e {
+            Object::Container(e) => print_struct(e, o, first),
+            Object::Enum(e) => print_enum(e, o),
+            Object::Flag(e) => print_flag(e, o),
+        };
 
+        if e.tags().has_login_version() {
             let versions = e.tags().main_versions().map(|a| a.as_login());
             n.add_login_module(e.name(), versions, s.inner())
         } else {
-            let (first, mut versions) = e.tags().first_and_main_versions();
-
-            if !e.tags().is_in_base() {
-                let s = match &e {
-                    Object::Container(e) => print_struct(e, o, first),
-                    Object::Enum(e) => print_enum(e, o),
-                    Object::Flag(e) => print_flag(e, o),
-                };
-
-                if versions.is_empty() {
-                    m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
-                } else {
-                    versions.push(first);
-
-                    m.write_shared_contents_to_file(e.name(), e.tags(), s.inner());
-
-                    for v in versions.clone() {
-                        let s = get_import_from_shared(e.name(), e.tags());
-                        let path = get_filepath(e.name(), &v);
-                        m.write_specific_line_to_file(s, path.parent().unwrap().to_path_buf());
-                    }
-                }
-            } else {
+            if e.tags().is_in_base() {
                 let base_s = match &e {
                     Object::Enum(e) => print_enum_for_base(e, o),
                     Object::Container(e) => print_struct(e, o, first),
@@ -186,6 +164,20 @@ fn print_main_types(o: &Objects) {
                         let world_s = get_import_from_base(e.name(), v);
 
                         m.write_shared_import_to_file(e.name(), e.tags(), &world_s, &base_s, &v);
+                    }
+                }
+            } else {
+                if versions.is_empty() {
+                    m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
+                } else {
+                    versions.push(first);
+
+                    m.write_shared_contents_to_file(e.name(), e.tags(), s.inner());
+
+                    for v in versions.clone() {
+                        let s = get_import_from_shared(e.name(), e.tags());
+                        let path = get_filepath(e.name(), &v);
+                        m.write_specific_line_to_file(s, path.parent().unwrap().to_path_buf());
                     }
                 }
             }
