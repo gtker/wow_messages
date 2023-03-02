@@ -13,6 +13,7 @@ use rust_printer::print_struct;
 
 use crate::doc_printer::print_docs_summary_and_objects;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
+use crate::file_utils::mod_files::NewModFiles;
 use crate::ir_printer::write_intermediate_representation;
 use crate::parser::stats::print_message_stats;
 use crate::parser::types::objects::Object;
@@ -116,6 +117,7 @@ fn main() {
 
 fn print_main_types(o: &Objects) {
     let mut m = ModFiles::new();
+    let mut n = NewModFiles::new();
 
     let mut definer_docs = Vec::new();
     let mut object_docs = Vec::new();
@@ -125,54 +127,66 @@ fn print_main_types(o: &Objects) {
             continue;
         }
 
-        let (first, mut versions) = e.tags().first_and_main_versions();
-
-        if !e.tags().is_in_base() {
+        if e.tags().has_login_version() {
+            let first = e.tags().first_and_main_versions().0;
             let s = match &e {
                 Object::Container(e) => print_struct(e, o, first),
                 Object::Enum(e) => print_enum(e, o, first),
                 Object::Flag(e) => print_flag(e, o, first),
             };
 
-            if versions.is_empty() {
-                m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
-            } else if !first.is_world() {
-                m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
-
-                for v in versions {
-                    m.write_contents_to_file(e.name(), e.tags(), s.imports(), v);
-                }
-            } else {
-                versions.push(first);
-
-                m.write_shared_contents_to_file(e.name(), e.tags(), s.inner());
-
-                for v in versions.clone() {
-                    let s = get_import_from_shared(e.name(), e.tags());
-                    let path = get_filepath(e.name(), &v);
-                    m.write_specific_line_to_file(s, path.parent().unwrap().to_path_buf());
-                }
-            }
+            let versions = e.tags().main_versions().map(|a| a.as_login());
+            n.add_login_module(e.name(), versions, s.inner())
         } else {
-            let base_s = match &e {
-                Object::Enum(e) => print_enum_for_base(e, o, first),
-                Object::Container(e) => print_struct(e, o, first),
-                Object::Flag(e) => print_flag(e, o, first),
-            };
-            let world_s = get_import_from_base(e.name(), first);
+            let (first, mut versions) = e.tags().first_and_main_versions();
 
-            if versions.is_empty() {
-                m.write_base_contents_to_file(e.name(), e.tags(), base_s.inner(), &world_s, first);
+            if !e.tags().is_in_base() {
+                let s = match &e {
+                    Object::Container(e) => print_struct(e, o, first),
+                    Object::Enum(e) => print_enum(e, o, first),
+                    Object::Flag(e) => print_flag(e, o, first),
+                };
+
+                if versions.is_empty() {
+                    m.write_contents_to_file(e.name(), e.tags(), s.proper_as_str(), first);
+                } else {
+                    versions.push(first);
+
+                    m.write_shared_contents_to_file(e.name(), e.tags(), s.inner());
+
+                    for v in versions.clone() {
+                        let s = get_import_from_shared(e.name(), e.tags());
+                        let path = get_filepath(e.name(), &v);
+                        m.write_specific_line_to_file(s, path.parent().unwrap().to_path_buf());
+                    }
+                }
             } else {
-                versions.push(first);
+                let base_s = match &e {
+                    Object::Enum(e) => print_enum_for_base(e, o, first),
+                    Object::Container(e) => print_struct(e, o, first),
+                    Object::Flag(e) => print_flag(e, o, first),
+                };
+                let world_s = get_import_from_base(e.name(), first);
 
-                m.write_shared_contents_to_file(e.name(), e.tags(), base_s.inner());
+                if versions.is_empty() {
+                    m.write_base_contents_to_file(
+                        e.name(),
+                        e.tags(),
+                        base_s.inner(),
+                        &world_s,
+                        first,
+                    );
+                } else {
+                    versions.push(first);
 
-                for v in versions.clone() {
-                    let base_s = get_import_from_shared(e.name(), e.tags());
-                    let world_s = get_import_from_base(e.name(), v);
+                    m.write_shared_contents_to_file(e.name(), e.tags(), base_s.inner());
 
-                    m.write_shared_import_to_file(e.name(), e.tags(), &world_s, &base_s, &v);
+                    for v in versions.clone() {
+                        let base_s = get_import_from_shared(e.name(), e.tags());
+                        let world_s = get_import_from_base(e.name(), v);
+
+                        m.write_shared_import_to_file(e.name(), e.tags(), &world_s, &base_s, &v);
+                    }
                 }
             }
         }
@@ -191,6 +205,7 @@ fn print_main_types(o: &Objects) {
 
     m.write_mod_files();
     m.remove_unwritten_files();
+    n.write_modules_and_remove_unwritten_files();
 }
 
 fn write_world_opcodes(o: &Objects) {

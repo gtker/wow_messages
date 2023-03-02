@@ -1,11 +1,131 @@
+use crate::file_utils::get_login_logon_version_path;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
-use crate::path_utils::{base_directory, get_filepath, login_directory, world_directory};
+use crate::path_utils::{
+    base_directory, get_filepath, get_login_filepath, get_login_version_file_path, login_directory,
+    world_directory,
+};
+use crate::rust_printer::Writer;
 use crate::{file_utils, path_utils};
 use std::collections::BTreeMap;
 use std::fs::remove_file;
 use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
+
+pub(crate) struct NewModFiles {
+    already_existing_files: BTreeMap<PathBuf, bool>,
+    login_modules: BTreeMap<LoginVersion, Writer>,
+}
+
+impl NewModFiles {
+    pub(crate) fn new() -> Self {
+        let mut already_existing_files = BTreeMap::new();
+
+        for dir in [
+            login_directory(), /* world_directory(), base_directory() */
+        ] {
+            for file in WalkDir::new(dir).into_iter().filter_map(|a| a.ok()) {
+                if !file.file_type().is_file() {
+                    continue;
+                }
+
+                let filename = file.path().canonicalize().unwrap();
+
+                let value = if let Some(p) = filename.file_name() {
+                    p.to_string_lossy() == "opcodes.rs"
+                } else {
+                    false
+                };
+                already_existing_files.insert(filename, value);
+            }
+        }
+
+        Self {
+            already_existing_files,
+            login_modules: Default::default(),
+        }
+    }
+
+    fn write_file(&mut self, path: &Path, text: &str) {
+        file_utils::create_and_overwrite_if_not_same_contents(text, &path);
+        self.already_existing_files
+            .insert(path.canonicalize().unwrap(), true);
+    }
+
+    pub(crate) fn write_modules_and_remove_unwritten_files(&mut self) {
+        self.write_login_modules();
+
+        self.remove_unwritten_files();
+    }
+
+    fn remove_unwritten_files(&mut self) {
+        for (filename, written) in &self.already_existing_files {
+            if !written {
+                remove_file(&filename).unwrap();
+            }
+        }
+    }
+}
+
+// Login
+impl NewModFiles {
+    pub(crate) fn add_login_module(
+        &mut self,
+        name: &str,
+        mut versions: impl Iterator<Item = LoginVersion>,
+        text: &str,
+    ) {
+        let module_name = file_utils::get_module_name(name);
+        let first_module_text = format!("pub(crate) mod {module_name};\npub use {module_name}::*;");
+
+        // Login crate does not have feature gates, so we can just reexport the first version
+        let first_version = versions.next().unwrap();
+
+        let path = get_login_filepath(name, &first_version);
+        self.write_file(&path, text);
+
+        self.insert_into_login_module(first_version, &first_module_text);
+
+        for version in versions {
+            let version_path = get_login_logon_version_path(&first_version);
+            let text = format!("pub use {version_path}::{module_name}::*;");
+
+            self.insert_into_login_module(version, &text);
+        }
+    }
+
+    fn insert_into_login_module(&mut self, version: LoginVersion, text: &str) {
+        if let Some(s) = self.login_modules.get_mut(&version) {
+            s.wln(text);
+        } else {
+            let mut s = Writer::no_import();
+
+            // All does not have opcodes, they are part of other opcodes
+            if version != LoginVersion::All {
+                s.wln("pub mod opcodes;");
+                s.newline();
+            }
+
+            s.wln(text);
+
+            self.login_modules.insert(version, s);
+        }
+    }
+
+    fn write_login_modules(&mut self) {
+        let mut logon_module = Writer::no_import();
+
+        for (version, text) in self.login_modules.clone() {
+            let path = get_login_version_file_path(&version).join("mod.rs");
+            self.write_file(&path, text.inner());
+
+            logon_module.wln(format!("pub mod {};", version.as_module_case()));
+        }
+
+        let logon_module_path = login_directory().join("mod.rs");
+        self.write_file(&logon_module_path, logon_module.inner());
+    }
+}
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
 #[allow(clippy::enum_variant_names)]
@@ -32,6 +152,31 @@ pub(crate) struct ModFiles {
 }
 
 impl ModFiles {
+    pub(crate) fn new() -> Self {
+        let mut already_existing_files = BTreeMap::new();
+
+        for dir in [world_directory(), base_directory()] {
+            for file in WalkDir::new(dir).into_iter().filter_map(|a| a.ok()) {
+                if !file.file_type().is_file() {
+                    continue;
+                }
+
+                let filename = file.path().canonicalize().unwrap();
+
+                let value = if let Some(p) = filename.file_name() {
+                    p.to_string_lossy() == "opcodes.rs"
+                } else {
+                    false
+                };
+                already_existing_files.insert(filename, value);
+            }
+        }
+
+        Self {
+            v: vec![],
+            already_existing_files,
+        }
+    }
     pub(crate) fn remove_unwritten_files(&self) {
         for (filename, written) in self.already_existing_files.iter() {
             if !written {
@@ -86,32 +231,6 @@ impl ModFiles {
             file_utils::create_and_overwrite_if_not_same_contents(&s, &filename);
             self.already_existing_files
                 .insert(filename.canonicalize().unwrap(), true);
-        }
-    }
-
-    pub(crate) fn new() -> Self {
-        let mut already_existing_files = BTreeMap::new();
-
-        for dir in [login_directory(), world_directory(), base_directory()] {
-            for file in WalkDir::new(dir).into_iter().filter_map(|a| a.ok()) {
-                if !file.file_type().is_file() {
-                    continue;
-                }
-
-                let filename = file.path().canonicalize().unwrap();
-
-                let value = if let Some(p) = filename.file_name() {
-                    p.to_string_lossy() == "opcodes.rs"
-                } else {
-                    false
-                };
-                already_existing_files.insert(filename, value);
-            }
-        }
-
-        Self {
-            v: vec![],
-            already_existing_files,
         }
     }
 

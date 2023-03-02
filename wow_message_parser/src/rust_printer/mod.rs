@@ -25,7 +25,7 @@ use crate::{ObjectTags, Objects};
 pub use opcode_to_name::print_opcode_to_name;
 pub use update_mask::*;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub(crate) struct Writer {
     inner: String,
     imports: String,

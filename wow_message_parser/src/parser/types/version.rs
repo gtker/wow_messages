@@ -289,6 +289,13 @@ impl Version {
         }
     }
 
+    pub(crate) fn as_login(&self) -> LoginVersion {
+        match self {
+            Version::Login(l) => *l,
+            Version::World(_) => panic!(),
+        }
+    }
+
     pub(crate) fn to_module_case(self) -> String {
         match self {
             Version::Login(l) => l.as_module_case(),
