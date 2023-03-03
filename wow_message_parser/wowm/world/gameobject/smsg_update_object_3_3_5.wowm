@@ -96,9 +96,16 @@ struct MovementBlock {
         f32 living_orientation;
         if (flags & ON_TRANSPORT) {
             TransportInfo transport;
+            /* TODO FLAG_OR FLAG_DIFFERENT_VARIABLE Flag inside flag
+            if (extra_flags & INTERPOLATED_MOVEMENT) {
+                u32 transport_time;
+            } */
         }
-        if (flags & SWIMMING) {
-            f32 pitch;
+        if (flags & SWIMMING /*TODO FLAG_OR FLAG_DIFFERENT_VARIABLE || flags & FLYING || extra_flags & ALWAYS_ALLOW_PITCHING */) {
+            f32 pitch1;
+        /* TODO FLAG_OR Above does not work, this is a workaround */
+        } else if (flags & FLYING) {
+            f32 pitch2;
         }
         f32 fall_time;
         if (flags & FALLING) {

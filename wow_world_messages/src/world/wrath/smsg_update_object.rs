@@ -4,7 +4,7 @@ use crate::wrath::Object;
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm:201`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm#L201):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm:208`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_3_3_5.wowm#L208):
 /// ```text
 /// smsg SMSG_UPDATE_OBJECT = 0x00A9 {
 ///     u32 amount_of_objects;

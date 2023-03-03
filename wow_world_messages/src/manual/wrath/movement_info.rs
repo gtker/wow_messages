@@ -37,15 +37,14 @@ impl MovementInfo {
                 z_speed: t.z_speed,
             });
 
-        let swimming = if let Some(t) = self.flags.get_SWIMMING() {
-            let pitch = match t {
-                MovementInfo_MovementFlags_Swimming::Swimming { pitch1: pitch }
-                | MovementInfo_MovementFlags_Swimming::Flying { pitch2: pitch } => *pitch,
-            };
-            Some(MovementBlock_MovementFlags_Swimming { pitch })
-        } else {
-            None
-        };
+        let swimming = self.flags.get_SWIMMING().map(|t| match t {
+            MovementInfo_MovementFlags_Swimming::Swimming { pitch1 } => {
+                MovementBlock_MovementFlags_Swimming::Swimming { pitch1: *pitch1 }
+            }
+            MovementInfo_MovementFlags_Swimming::Flying { pitch2 } => {
+                MovementBlock_MovementFlags_Swimming::Flying { pitch2: *pitch2 }
+            }
+        });
 
         let spline_elevation = self.flags.get_SPLINE_ELEVATION().map(|t| {
             MovementBlock_MovementFlags_SplineElevation {

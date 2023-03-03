@@ -24,7 +24,10 @@ use std::io::{Read, Write};
 ///             TransportInfo transport;
 ///         }
 ///         if (flags & SWIMMING) {
-///             f32 pitch;
+///             f32 pitch1;
+///         }
+///         else if (flags & FLYING) {
+///             f32 pitch2;
 ///         }
 ///         f32 fall_time;
 ///         if (flags & FALLING) {
@@ -145,9 +148,22 @@ impl MovementBlock {
                     }
 
                     if let Some(if_statement) = &flags.swimming {
-                        // pitch: f32
-                        w.write_all(&if_statement.pitch.to_le_bytes())?;
+                        match if_statement {
+                            MovementBlock_MovementFlags_Swimming::Swimming {
+                                pitch1,
+                            } => {
+                                // pitch1: f32
+                                w.write_all(&pitch1.to_le_bytes())?;
 
+                            }
+                            MovementBlock_MovementFlags_Swimming::Flying {
+                                pitch2,
+                            } => {
+                                // pitch2: f32
+                                w.write_all(&pitch2.to_le_bytes())?;
+
+                            }
+                        }
                     }
 
                     // fall_time: f32
@@ -364,11 +380,19 @@ impl MovementBlock {
             };
 
             let flags_SWIMMING = if flags.is_SWIMMING() {
-                // pitch: f32
-                let pitch = crate::util::read_f32_le(&mut r)?;
+                // pitch1: f32
+                let pitch1 = crate::util::read_f32_le(&mut r)?;
 
-                Some(MovementBlock_MovementFlags_Swimming {
-                    pitch,
+                Some(MovementBlock_MovementFlags_Swimming::Swimming {
+                    pitch1,
+                })
+            }
+            else if flags.is_FLYING() {
+                // pitch2: f32
+                let pitch2 = crate::util::read_f32_le(&mut r)?;
+
+                Some(MovementBlock_MovementFlags_Swimming::Flying {
+                    pitch2,
                 })
             }
             else {
@@ -675,6 +699,45 @@ impl MovementBlock {
 impl MovementBlock {
     pub(crate) fn size(&self) -> usize {
         self.update_flag.size() // update_flag: MovementBlock_UpdateFlag
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
+pub enum MovementBlock_MovementFlags_Swimming {
+    Swimming {
+        pitch1: f32,
+    },
+    Flying {
+        pitch2: f32,
+    },
+}
+
+impl MovementBlock_MovementFlags_Swimming {
+    pub(crate) const fn as_int(&self) -> u32 {
+        match self {
+            Self::Swimming { .. } => 2097152,
+            Self::Flying { .. } => 33554432,
+        }
+    }
+
+}
+
+impl MovementBlock_MovementFlags_Swimming {
+    pub(crate) fn size(&self) -> usize {
+        match self {
+            Self::Swimming {
+                pitch1,
+            } => {
+                // Not an actual enum sent over the wire
+                4 // pitch1: f32
+            }
+            Self::Flying {
+                pitch2,
+            } => {
+                // Not an actual enum sent over the wire
+                4 // pitch2: f32
+            }
+        }
     }
 }
 
@@ -1976,7 +2039,7 @@ impl MovementBlock_MovementFlags {
 
     pub const fn new_SWIMMING(swimming: MovementBlock_MovementFlags_Swimming) -> Self {
         Self {
-            inner: MovementFlags::SWIMMING,
+            inner: swimming.as_int(),
             on_transport: None,
             falling: None,
             swimming: Some(swimming),
@@ -1986,7 +2049,7 @@ impl MovementBlock_MovementFlags {
     }
 
     pub fn set_SWIMMING(mut self, swimming: MovementBlock_MovementFlags_Swimming) -> Self {
-        self.inner |= MovementFlags::SWIMMING;
+        self.inner |= swimming.as_int();
         self.swimming = Some(swimming);
         self
     }
@@ -2073,31 +2136,6 @@ impl MovementBlock_MovementFlags {
 
     pub fn clear_CAN_FLY(mut self) -> Self {
         self.inner &= MovementFlags::CAN_FLY.reverse_bits();
-        self
-    }
-
-    pub const fn new_FLYING() -> Self {
-        Self {
-            inner: MovementFlags::FLYING,
-            on_transport: None,
-            falling: None,
-            swimming: None,
-            spline_elevation: None,
-            spline_enabled: None,
-        }
-    }
-
-    pub fn set_FLYING(mut self) -> Self {
-        self.inner |= MovementFlags::FLYING;
-        self
-    }
-
-    pub const fn get_FLYING(&self) -> bool {
-        (self.inner & MovementFlags::FLYING) != 0
-    }
-
-    pub fn clear_FLYING(mut self) -> Self {
-        self.inner &= MovementFlags::FLYING.reverse_bits();
         self
     }
 
@@ -2301,17 +2339,6 @@ impl MovementBlock_MovementFlags_Falling {
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
         + 4 // z_speed: f32
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
-pub struct MovementBlock_MovementFlags_Swimming {
-    pub pitch: f32,
-}
-
-impl MovementBlock_MovementFlags_Swimming {
-    pub(crate) fn size(&self) -> usize {
-        4 // pitch: f32
     }
 }
 

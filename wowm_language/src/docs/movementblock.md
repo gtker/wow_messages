@@ -407,7 +407,10 @@ struct MovementBlock {
             TransportInfo transport;
         }
         if (flags & SWIMMING) {
-            f32 pitch;
+            f32 pitch1;
+        }
+        else if (flags & FLYING) {
+            f32 pitch2;
         }
         f32 fall_time;
         if (flags & FALLING) {
@@ -504,7 +507,13 @@ If flags contains `SWIMMING`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| - | 4 / Little | f32 | pitch |  |  |
+| - | 4 / Little | f32 | pitch1 |  |  |
+
+Else If flags contains `FLYING`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | pitch2 |  |  |
 | - | 4 / Little | f32 | fall_time |  |  |
 
 If flags contains `FALLING`:
