@@ -134,3 +134,148 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 
+#[cfg(test)]
+mod test {
+    use super::SMSG_ITEM_PUSH_RESULT;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ServerOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const RAW0: [u8; 45] = [ 0x00, 0x2B, 0x66, 0x01, 0x04, 0x00, 0x00, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
+         0x00, 0x00, 0x00, 0xFF, 0x18, 0x00, 0x00, 0x00, 0x60, 0x31, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
+
+    // Generated from `wow_message_parser/wowm/world/item/smsg_item_push_result.wowm` line 43.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_ITEM_PUSH_RESULT0() {
+        let expected = SMSG_ITEM_PUSH_RESULT {
+            guid: Guid::new(0x4),
+            source: NewItemSource::Looted,
+            creation_type: NewItemCreationType::Created,
+            alert_chat: NewItemChatAlert::Show,
+            bag_slot: 0xFF,
+            item_slot: 0x18,
+            item: 0x3160,
+            item_suffix_factor: 0x0,
+            item_random_property_id: 0x0,
+            item_count: 0x1,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ITEM_PUSH_RESULT(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ITEM_PUSH_RESULT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.source, expected.source);
+        assert_eq!(t.creation_type, expected.creation_type);
+        assert_eq!(t.alert_chat, expected.alert_chat);
+        assert_eq!(t.bag_slot, expected.bag_slot);
+        assert_eq!(t.item_slot, expected.item_slot);
+        assert_eq!(t.item, expected.item);
+        assert_eq!(t.item_suffix_factor, expected.item_suffix_factor);
+        assert_eq!(t.item_random_property_id, expected.item_random_property_id);
+        assert_eq!(t.item_count, expected.item_count);
+
+        assert_eq!(41 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/smsg_item_push_result.wowm` line 43.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_SMSG_ITEM_PUSH_RESULT0() {
+        let expected = SMSG_ITEM_PUSH_RESULT {
+            guid: Guid::new(0x4),
+            source: NewItemSource::Looted,
+            creation_type: NewItemCreationType::Created,
+            alert_chat: NewItemChatAlert::Show,
+            bag_slot: 0xFF,
+            item_slot: 0x18,
+            item: 0x3160,
+            item_suffix_factor: 0x0,
+            item_random_property_id: 0x0,
+            item_count: 0x1,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ITEM_PUSH_RESULT(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ITEM_PUSH_RESULT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.source, expected.source);
+        assert_eq!(t.creation_type, expected.creation_type);
+        assert_eq!(t.alert_chat, expected.alert_chat);
+        assert_eq!(t.bag_slot, expected.bag_slot);
+        assert_eq!(t.item_slot, expected.item_slot);
+        assert_eq!(t.item, expected.item);
+        assert_eq!(t.item_suffix_factor, expected.item_suffix_factor);
+        assert_eq!(t.item_random_property_id, expected.item_random_property_id);
+        assert_eq!(t.item_count, expected.item_count);
+
+        assert_eq!(41 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/smsg_item_push_result.wowm` line 43.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_SMSG_ITEM_PUSH_RESULT0() {
+        let expected = SMSG_ITEM_PUSH_RESULT {
+            guid: Guid::new(0x4),
+            source: NewItemSource::Looted,
+            creation_type: NewItemCreationType::Created,
+            alert_chat: NewItemChatAlert::Show,
+            bag_slot: 0xFF,
+            item_slot: 0x18,
+            item: 0x3160,
+            item_suffix_factor: 0x0,
+            item_random_property_id: 0x0,
+            item_count: 0x1,
+        };
+
+        let header_size = 2 + 2;
+        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ServerOpcodeMessage::SMSG_ITEM_PUSH_RESULT(t) => t,
+            opcode => panic!("incorrect opcode. Expected SMSG_ITEM_PUSH_RESULT, got {opcode:#?}", opcode = opcode),
+        };
+
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.source, expected.source);
+        assert_eq!(t.creation_type, expected.creation_type);
+        assert_eq!(t.alert_chat, expected.alert_chat);
+        assert_eq!(t.bag_slot, expected.bag_slot);
+        assert_eq!(t.item_slot, expected.item_slot);
+        assert_eq!(t.item, expected.item);
+        assert_eq!(t.item_suffix_factor, expected.item_suffix_factor);
+        assert_eq!(t.item_random_property_id, expected.item_random_property_id);
+        assert_eq!(t.item_count, expected.item_count);
+
+        assert_eq!(41 + header_size, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+

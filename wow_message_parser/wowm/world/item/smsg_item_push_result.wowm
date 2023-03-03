@@ -40,6 +40,35 @@ smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     versions = "1";
 }
 
+test SMSG_ITEM_PUSH_RESULT {
+    guid = 0x4;
+    source = LOOTED;
+    creation_type = CREATED;
+    alert_chat = SHOW;
+    bag_slot = 0xFF;
+    item_slot = 0x18;
+    item = 12640;
+    item_suffix_factor = 0;
+    item_random_property_id = 0;
+    item_count = 1;
+} [
+    0x00, 0x2b, /* size */
+    0x66, 0x01, /* opcode */
+    0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* guid */
+    0x00, 0x00, 0x00, 0x00, /* source */
+    0x01, 0x00, 0x00, 0x00, /* creation_type */
+    0x01, 0x00, 0x00, 0x00, /* alert_chat */
+    0xff, /* bag_slot */
+    0x18, 0x00, 0x00, 0x00, /* Item slot (top left) */
+    0x60, 0x31, 0x00, 0x00, /* item */
+    0x00, 0x00, 0x00, 0x00, /* item_suffix_factor */
+    0x00, 0x00, 0x00, 0x00, /* item_random_property_id */
+    0x01, 0x00, 0x00, 0x00 /* item_count */
+] {
+    description = "Pushing the creation of a lionheart helm to player with Guid 4.";
+    versions = "1.12";
+}
+
 smsg SMSG_ITEM_PUSH_RESULT = 0x0166 {
     Guid guid;
     NewItemSource source;
