@@ -86,11 +86,7 @@ pub struct Optimizations {
 
 impl Optimizations {
     pub fn optimization(&self, field_name: &str) -> &FieldOptimization {
-        self.field_optimizations
-            .iter()
-            .find(|(field, _)| field.as_str() == field_name)
-            .unwrap()
-            .1
+        self.field_optimizations.get(field_name).unwrap()
     }
 
     pub fn is_non_native_type(&self, field: &Field) -> bool {
