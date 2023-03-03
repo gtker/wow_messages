@@ -194,7 +194,7 @@ impl Optimizations {
                     let mut v = Vec::new();
 
                     for s in &different_values {
-                        if s == baseline {
+                        if s.0 == baseline.0 {
                             continue;
                         }
 
