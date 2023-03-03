@@ -137,10 +137,10 @@ fn print_container_example_definition(
             s.bytes(bytes.take(i.size() as usize).into_iter());
         }
         Type::Level16 => {
-            s.bytes(bytes.take(LEVEL16_SIZE.into()).into_iter());
+            s.bytes(bytes.take(LEVEL16_SIZE).into_iter());
         }
         Type::Level32 => {
-            s.bytes(bytes.take(LEVEL32_SIZE.into()).into_iter());
+            s.bytes(bytes.take(LEVEL32_SIZE).into_iter());
         }
         Type::Level => {
             s.bytes(bytes.take(LEVEL_SIZE.into()).into_iter());
@@ -621,7 +621,7 @@ fn print_container_field(
 
             if let Some(size) = d.ty().sizes(tags).is_constant() {
                 if let Some(off) = offset {
-                    *off = *off + size;
+                    *off += size;
                 }
             } else {
                 *offset = None;

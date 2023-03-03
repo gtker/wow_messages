@@ -79,17 +79,17 @@ pub(crate) fn print_update_mask_docs() {
     s.push_str("### Version 1.12\n\n");
     s.push_str("Taken from [vmangos](https://github.com/vmangos/core/blob/4b2a5173b0ca4917dfe91aa7b87d84232fd7203c/src/game/Objects/UpdateFields_1_12_1.cpp#L5) with some modifications.\n\n");
 
-    print_specific_update_mask_doc(&vanilla_fields::FIELDS, &mut s);
+    print_specific_update_mask_doc(vanilla_fields::FIELDS, &mut s);
 
     s.push_str("### Version 2.4.3\n\n");
     s.push_str("Taken from [mangosone](https://github.com/mangosone/server/blob/f441fc27a6430e79753bceb545f62fef90a79832/src/game/Object/UpdateFields.h#L30) with some modifications.\n\n");
 
-    print_specific_update_mask_doc(&tbc_fields::FIELDS, &mut s);
+    print_specific_update_mask_doc(tbc_fields::FIELDS, &mut s);
 
     s.push_str("### Version 3.3.5\n\n");
     s.push_str("Taken from [ArcEmu](https://github.com/arcemu/arcemu/blob/1cb2b5248d050cb6fe413d7c42dd1817994b6366/src/world/Game/Entities/Update/UpdateFields.h#L26) with some modifications.\n\n");
 
-    print_specific_update_mask_doc(&wrath_fields::FIELDS, &mut s);
+    print_specific_update_mask_doc(wrath_fields::FIELDS, &mut s);
 
     overwrite_if_not_same_contents(&s, Path::new(UPDATE_MASK_FILE));
 }

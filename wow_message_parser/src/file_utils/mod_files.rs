@@ -59,7 +59,7 @@ impl ModFiles {
     }
 
     fn write_file(&mut self, path: &Path, text: &str) {
-        file_utils::create_and_overwrite_if_not_same_contents(text, &path);
+        file_utils::create_and_overwrite_if_not_same_contents(text, path);
         self.already_existing_files
             .insert(path.canonicalize().unwrap(), true);
     }
@@ -75,7 +75,7 @@ impl ModFiles {
     fn remove_unwritten_files(&mut self) {
         for (filename, written) in &self.already_existing_files {
             if !written {
-                remove_file(&filename).unwrap();
+                remove_file(filename).unwrap();
             }
         }
     }
@@ -92,7 +92,7 @@ impl ModFiles {
             [] => panic!(),
             [version] => {
                 let path = get_base_filepath(name, version);
-                self.write_file(&path, &text);
+                self.write_file(&path, text);
 
                 let module_name = get_module_name(name);
                 let module_text =
@@ -130,7 +130,7 @@ impl ModFiles {
             s.wln(format!("pub use crate::manual::{module}::*;"));
             s.wln("#[cfg(feature = \"extended\")]");
             s.wln(format!("pub use crate::extended::{module}::*;"));
-            s.wln(format!("pub use crate::manual::shared::*;"));
+            s.wln("pub use crate::manual::shared::*;");
             s.newline();
 
             s.wln(text);
@@ -189,7 +189,7 @@ impl ModFiles {
             [] => panic!(),
             [version] => {
                 let path = get_world_filepath(name, version);
-                self.write_file(&path, &text);
+                self.write_file(&path, text);
 
                 let module_name = get_module_name(name);
                 let module_text =

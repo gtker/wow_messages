@@ -423,7 +423,7 @@ impl RustType {
             RustType::Struct { ty_name, .. } => ty_name.clone(),
             _ => self.to_type().rust_str(),
         }
-        .to_string()
+        
     }
 
     pub(crate) fn to_type(&self) -> Type {
