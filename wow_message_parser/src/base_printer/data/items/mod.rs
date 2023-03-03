@@ -128,22 +128,14 @@ impl Optimizations {
         let mut field_optimizations = HashMap::new();
         let mut type_optimizations = HashMap::new();
 
-        let field_names = fields.iter().map(|field| field.name);
-
-        for field_name in field_names {
-            let value = &items[0]
-                .fields
-                .iter()
-                .find(|field| field.name == field_name)
-                .unwrap()
-                .value;
+        for field in fields {
             let fields = items.iter().map(|item| {
                 (
                     item.entry,
                     &item
                         .fields
                         .iter()
-                        .find(|field| field.name == field_name)
+                        .find(|a| a.name == field.name)
                         .unwrap()
                         .value,
                 )
@@ -178,20 +170,20 @@ impl Optimizations {
                 }
             }
 
-            if value.i64_value().is_some() {
+            if field.value.i64_value().is_some() {
                 type_optimizations.insert(
-                    field_name.to_string(),
+                    field.name.to_string(),
                     IntegerSize::from_signed(signed_min, signed_max),
                 );
-            } else if value.u64_value().is_some() {
+            } else if field.value.u64_value().is_some() {
                 type_optimizations.insert(
-                    field_name.to_string(),
+                    field.name.to_string(),
                     IntegerSize::from_unsigned(unsigned_max),
                 );
             }
 
             let optimization = if different_values.len() == 1 {
-                FieldOptimization::ConstantValue(value.clone())
+                FieldOptimization::ConstantValue(field.value.clone())
             } else {
                 let mut baseline = different_values.iter().next().unwrap();
                 for s in &different_values {
@@ -220,7 +212,7 @@ impl Optimizations {
                 }
             };
 
-            field_optimizations.insert(field_name.to_string(), optimization);
+            field_optimizations.insert(field.name.to_string(), optimization);
         }
 
         Self {
