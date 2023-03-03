@@ -265,7 +265,7 @@ pub(crate) fn print_update_mask() {
     for version in MajorWorldVersion::versions() {
         let fields = match version {
             MajorWorldVersion::Vanilla => vanilla_fields::FIELDS,
-            MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS.as_slice(),
+            MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS,
             MajorWorldVersion::Wrath => wrath_fields::FIELDS.as_slice(),
         };
 
