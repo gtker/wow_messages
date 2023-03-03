@@ -524,7 +524,7 @@ fn print_value(
                 }
 
                 let fields = match version.as_major_world() {
-                    MajorWorldVersion::Vanilla => FIELDS.as_slice(),
+                    MajorWorldVersion::Vanilla => FIELDS,
                     MajorWorldVersion::BurningCrusade => unimplemented!(),
                     MajorWorldVersion::Wrath => unimplemented!(),
                 };
